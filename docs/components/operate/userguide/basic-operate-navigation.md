@@ -8,7 +8,7 @@ Learn how to navigate Camunda 8 Operate.
 
 ## Before you begin
 
-This section and the next section, [variables and incidents](./resolve-incidents-update-variables.md), assume you’ve deployed a process to Zeebe and created at least one process instance, using the [`order-process.bpmn`](/bpmn/operate/order-process.bpmn) process model. If you’re not sure how to deploy processes or create instances, visit our [guides section](/guides/introduction-to-camunda-8.md) to get started with Camunda.
+This section and the next section, [Resolve incidents and update variables](./resolve-incidents-update-variables.md), assume you’ve deployed a process to Zeebe and created at least one process instance, using the [`order-process.bpmn`](/bpmn/operate/order-process.bpmn) process model. If you’re not sure how to deploy processes or create instances, visit our [guides section](/guides/introduction-to-camunda-8.md) to get started with Camunda.
 
 ## View a deployed process
 
