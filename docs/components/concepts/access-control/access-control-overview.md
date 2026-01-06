@@ -14,25 +14,27 @@ keywords:
   ]
 ---
 
-Use Identity access control to provide secure access for authorized users and systems in Camunda 8.
+Use identity access control to provide secure access for authorized users and systems in Camunda 8.
 
 ## Identity types in Camunda 8
 
-There are two types of Identity in Camunda 8.
+There are two types of identity in Camunda 8.
+
+These identities serve different purposes: one controls access to process execution and runtime APIs, while the other controls access to management and modeling components.
 
 <table className="table-callout">
 <tr>
-    <td width="30%">**Orchestration Cluster Identity**</td>
+    <td width="30%">Orchestration Cluster Identity</td>
     <td><p>Used for authenticating and authorizing users and systems that interact with the Orchestration Cluster (such as Zeebe, Operate, Tasklist, and the Orchestration Cluster REST API).</p><p>Identity governs access to process execution, task management, and related runtime resources.</p></td>
 </tr>
 <tr style={{ backgroundColor: 'var(--ifm-table-background)'}}>
-    <td width="30%">**Management Identity**</td>
-    <td><p>Used for managing the components Web Modeler, Console, and Optimize.</p><p>Management Identity is typically required for platform administrators and developers, and is separate from the Identities used for process orchestration.</p></td>
+    <td width="30%">Management Identity</td>
+    <td><p>Used for managing the components Web Modeler, Console, and Optimize.</p><p>Management Identity is typically required for platform administrators and developers, and is separate from the identities used for process orchestration.</p></td>
 </tr>
 </table>
 
 :::tip
-Understanding which Identity is required for a given action helps you apply the correct access control policies.
+Understanding which identity is required for a given action helps you apply the correct access control policies.
 :::
 
 ## Identity provider (IdP) integration
@@ -51,13 +53,13 @@ Authentication and authorization are the two fundamental concepts for access con
 ### Authentication
 
 Authentication verifies who a user or client is.
-Example: Logging in with a username/password or via SSO.
+For example, you log in with a username and password or through SSO.
 
 ### Authorization
 
 Authorization determines what an authenticated user or client is allowed to access in Camunda 8, and which actions they can perform on those resources.
 
-For example, a user’s authorizations may allow them to access Operate, view running or completed process instances, start new process instances, or claim and complete user tasks in Tasklist and through the Orchestration Cluster REST API.
+For example, a user’s authorizations allow them to access Operate, view running or completed process instances, start new process instances, or claim and complete user tasks in Tasklist and through the Orchestration Cluster REST API.
 
 | Identity type                  | Authorization model              | Description                                                                                                                                                                      | Management interface                   |
 | :----------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
@@ -71,16 +73,16 @@ For example, a user’s authorizations may allow them to access Operate, view ru
 
 A user must be both authenticated and authorized to access protected resources.
 
-:::info
-To learn more about authorization and how to configure permissions, see [Orchestration Cluster authorization](./authorizations.md).
-:::
+## Task authorizations and the task worker role
 
-## Task authorizations and the Task worker role
+Camunda 8 supports two levels of authorization for user tasks:
 
-Camunda 8 provides both process-level and task-level permissions for user tasks.
+- Process-level permissions apply to all user tasks of a process definition.
+- Task-level permissions apply to individual user tasks and can be scoped using task properties such as assignee or candidate groups.
 
-- Process-level permissions use the `PROCESS_DEFINITION` resource type. Permissions such as `READ_USER_TASK` and `UPDATE_USER_TASK` allow a user or group to see and work on all user tasks of a given process definition.
-- Task-level permissions use the `USER_TASK` resource type. Permissions such as `READ`, `UPDATE`, `CLAIM`, and `COMPLETE` control access to individual user tasks based on task properties like assignee, candidate users, and candidate groups.
+Process-level permissions always take precedence. If a user has the required process-level permission, Camunda does not evaluate task-level permissions for the same operation.
+
+For details on permission models, precedence rules, and property-based task authorizations, see [Orchestration Cluster authorization](./authorizations.md).
 
 ### Permission precedence
 
@@ -89,7 +91,7 @@ Process-level permissions always take precedence over task-level permissions:
 - If a user or client holds a relevant `PROCESS_DEFINITION` permission (for example, `READ_USER_TASK` or `UPDATE_USER_TASK`), Camunda grants access without additionally checking `USER_TASK` permissions.
 - Task-level `USER_TASK` checks are evaluated only when no process-level permission applies for the current principal and process definition.
 
-This precedence ensures backward compatibility for existing configurations that rely purely on process-level permissions, while still allowing more restrictive task-level access where needed.
+This precedence ensures backward compatibility with existing configurations that rely only on process-level permissions, while still allowing more restrictive task-level access where needed.
 
 ### Property-based task authorizations
 
@@ -115,9 +117,9 @@ On new installations and upgrades, Camunda Identity automatically creates a Task
   - `candidate groups`
 - Permissions: `READ`, `CLAIM`, and `COMPLETE` for matching tasks.
 
-This default role enables typical task workers to see, claim, and complete only the tasks they are responsible for, while administrators and managers can continue to use process-level permissions for broader oversight.
+This default role lets typical task workers see, claim, and complete only the tasks they are responsible for. Administrators and managers can continue to use process-level permissions for broader oversight.
 
-## Authentication methods overview
+## Authentication methods
 
 Camunda 8 supports multiple authentication methods depending on the environment:
 
@@ -132,34 +134,32 @@ Camunda 8 supports multiple authentication methods depending on the environment:
 - Basic authentication: simple to set up; not recommended for production.
 - OIDC-based authentication: recommended for production Self-Managed and required for SaaS.
 
-:::info
 For API documentation, link to the centralized authentication overview instead of repeating environment defaults.
-:::
 
 :::warning
-The Operate, Tasklist, and Zeebe REST APIs are deprecated. While they continue to function, new development should use the Orchestration Cluster REST API by referencing the [Orchestration Cluster REST API migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
+The Operate, Tasklist, and Zeebe REST APIs are deprecated and should not be used for new development. While they continue to function, new development should use the Orchestration Cluster REST API by referencing the [Orchestration Cluster REST API migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 
-Authentication for all these APIs works the same way; see the [Orchestration Cluster REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) page for details.
+Authentication for all these APIs works the same way. See [Orchestration Cluster REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) for details.
 :::
 
 ### Users and clients
 
 Actions in an orchestration cluster can be executed by two kinds of authenticated entities (also known as principals): users and clients. [Users](/components/identity/user.md) typically interact with the cluster through a browser, while [clients](/components/identity/client.md) interact programmatically through the APIs.
 
-Although either principal type can use both Web UIs and APIs, the distinction matters. Users represent individuals who are granted access to an orchestration cluster, whereas clients represent systems or applications.
+Although both principal types can use web UIs and APIs, the distinction still matters. Users represent individuals who are granted access to an orchestration cluster, whereas clients represent systems or applications.
 
 :::note
 If you're using basic authentication to secure your cluster, both users and clients are treated as users. There is no dedicated client concept in this configuration.
 :::
 
-Distinguishing between users and clients aligns your access management with how identities are modeled in your identity provider. They are usually authenticated differently (for example, username and password for users versus a client certificate for applications), have different authorization requirements (such as administrator access versus deployment permissions), and separating them simplifies auditing and operational clarity.
+Distinguishing between users and clients aligns your access management with how identities are modeled in your identity provider. They are usually authenticated differently (for example, username and password for users versus a client certificate for applications), have different authorization requirements (such as administrator access versus deployment permissions). Separating them simplifies auditing and operational clarity.
 
 ## How to obtain tokens
 
 For environments using OIDC:
 
 1. Generate a JSON Web Token (JWT).
-2. Include it in each API request as: `Authorization: Bearer <TOKEN>`.
+2. Include the token in each API request as: `Authorization: Bearer <TOKEN>`.
 
 - [Generate a token (SaaS)](/components/console/manage-clusters/manage-api-clients.md#create-a-client)
 - [Generate a token (Self-Managed)](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
@@ -177,8 +177,16 @@ Tokens expire according to the `expires_in` field returned by the IdP. After exp
 
 ## Learn more
 
-- [Authentication for Operate API](/apis-tools/operate-api/authentication.md)
-- [Authentication for Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication.md)
+### Orchestration Cluster authentication and authorization
+
 - [Set up OIDC-based authentication](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
 - [Orchestration Cluster authorization](./authorizations.md)
+
+### Legacy API authentication (deprecated)
+
+- [Authentication for Operate API](/apis-tools/operate-api/authentication.md)
+- [Authentication for Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication.md)
+
+### Task access control
+
 - [User task access restrictions](../../../tasklist/user-task-access-restrictions/)
