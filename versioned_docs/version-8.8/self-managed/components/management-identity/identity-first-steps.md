@@ -23,6 +23,7 @@ If you are running the default configuration, you can access the Management Iden
 
 - [Docker-Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md): `http://localhost:8084/`
 - [Helm](/self-managed/deployment/helm/install/quick-install.md): Follow your [`port-forward` or Ingress configuration](/self-managed/deployment/helm/configure/ingress/accessing-components-without-ingress.md)
+- [Manual](docs/self-managed/deployment/manual/install.md): `http://localhost:8080/`
 
 ## Default user
 
