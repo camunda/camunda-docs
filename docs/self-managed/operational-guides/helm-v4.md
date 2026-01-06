@@ -12,7 +12,7 @@ Helm v4 is the latest major release of Helm which comes with a few minor breakin
 
 Learn more about other Helm v4 changes [here](https://helm.sh/docs/overview/#whats-new)
 
-## Camunda Helm Chart Compatibility
+## Camunda Helm chart Compatibility
 
 The Camunda Helm chart is already compatible with Helm v3 and Helm v4, however, if your `values.yaml` supplies extra environment variables that conflict with the default, then may need to apply mitigations outlined below.
 
