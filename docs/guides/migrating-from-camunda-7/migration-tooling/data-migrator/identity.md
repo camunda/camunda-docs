@@ -60,30 +60,30 @@ Because in Camunda 7 `GRANT` authorizations take precedence over `REVOKE` author
 
 #### By Resource Type
 
-| C7 Resource Type                 | Migration supported             | C8 Resource Type equivalent |
-| -------------------------------- | ------------------------------- | --------------------------- |
-| Application                      | Yes                             | Component                   |
-| Authorization                    | [Partial\*](#authorization)     | Authorization               |
-| Batch                            | [Partial\*](#batch)             | Batch                       |
-| Dashboard                        | No                              | -                           |
-| Decision Definition              | Not yet                         | -                           |
-| Decision Requirements Definition | Not yet                         | -                           |
-| Deployment                       | Not yet                         | -                           |
-| Filter                           | No                              | -                           |
-| Group                            | Yes                             | Group                       |
-| Group Membership                 | [Partial\*](#group-membership)  | Group                       |
-| Historic Process Instance        | No                              | -                           |
-| Historic Process Instance        | No                              | -                           |
-| Historic Task                    | No                              | -                           |
-| Process Definition               | Not yet                         | -                           |
-| Process Instance                 | No                              | -                           |
-| Report                           | No                              | -                           |
-| System                           | [Partial\*](#system)            | System                      |
-| Task                             | No                              | -                           |
-| Tenant                           | Yes                             | Tenant                      |
-| Tenant Membership                | [Partial\*](#tenant-membership) | Tenant                      |
-| User                             | Yes                             | User                        |
-| User Operation Log Category      | No                              | -                           |
+| C7 Resource Type                   | Migration supported             | C8 Resource Type equivalent |
+| ---------------------------------- | ------------------------------- | --------------------------- |
+| `Application`                      | Yes                             | `Component`                 |
+| `Authorization`                    | [Partial\*](#authorization)     | `Authorization`             |
+| `Batch`                            | [Partial\*](#batch)             | `Batch`                     |
+| `Dashboard`                        | No                              | -                           |
+| `Decision Definition`              | Not yet                         | -                           |
+| `Decision Requirements Definition` | Not yet                         | -                           |
+| `Deployment`                       | Not yet                         | -                           |
+| `Filter`                           | No                              | -                           |
+| `Group`                            | Yes                             | `Group`                     |
+| `Group Membership`                 | [Partial\*](#group-membership)  | `Group`                     |
+| `Historic Process Instance`        | No                              | -                           |
+| `Historic Process Instance`        | No                              | -                           |
+| `Historic Task`                    | No                              | -                           |
+| `Process Definition`               | Not yet                         | -                           |
+| `Process Instance`                 | No                              | -                           |
+| `Report`                           | No                              | -                           |
+| `System`                           | [Partial\*](#system)            | `System`                    |
+| `Task`                             | No                              | -                           |
+| `Tenant`                           | Yes                             | `Tenant`                    |
+| `Tenant Membership`                | [Partial\*](#tenant-membership) | `Tenant`                    |
+| `User`                             | Yes                             | `User`                      |
+| `User Operation Log Category`      | No                              | -                           |
 
 Details for partial migration can be found below.
 
@@ -97,63 +97,63 @@ In Camunda 7, authorizations for `Authorization` resources can be fine-grained t
 
 Migration support for individual permissions:
 
-| C7 Permission | Migration supported | C8 Permission equivalent     |
-| ------------- | ------------------- | ---------------------------- |
-| READ          | Yes                 | READ                         |
-| UPDATE        | Yes                 | UPDATE                       |
-| CREATE        | Yes                 | CREATE                       |
-| DELETE        | Yes                 | DELETE                       |
-| ALL           | Yes                 | READ, UPDATE, CREATE, DELETE |
+| C7 Permission | Migration supported | C8 Permission equivalent             |
+| ------------- | ------------------- | ------------------------------------ |
+| `READ`        | Yes                 | `READ`                               |
+| `UPDATE`      | Yes                 | `UPDATE`                             |
+| `CREATE`      | Yes                 | `CREATE`                             |
+| `DELETE`      | Yes                 | `DELETE`                             |
+| `ALL`         | Yes                 | `READ`, `UPDATE`, `CREATE`, `DELETE` |
 
 ### `Batch` compatibility
 
 In Camunda 7, authorizations for `Batch` resources can be fine-grained to specific resource IDs (`batchId`). Camunda 8 only supports the wildcard (`*`) resource ID for the `Batch` type. Therefore, only authorizations with the wildcard resource ID are migrated.
 
-| C7 Permission                                    | Migration supported | C8 Permission equivalent                                                                                                                                                                                                                                                                                                                                                                                             |
-| ------------------------------------------------ | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| READ                                             | Yes                 | READ                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| UPDATE                                           | Yes                 | UPDATE                                                                                                                                                                                                                                                                                                                                                                                                               |
-| CREATE                                           | Yes                 | CREATE                                                                                                                                                                                                                                                                                                                                                                                                               |
-| DELETE                                           | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| READ_HISTORY                                     | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| DELETE_HISTORY                                   | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| CREATE_BATCH_MIGRATE \_PROCESS_INSTANCES         | Yes                 | CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE                                                                                                                                                                                                                                                                                                                                                                      |
-| CREATE_BATCH_MODIFY \_PROCESS_INSTANCES          | Yes                 | CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE                                                                                                                                                                                                                                                                                                                                                                       |
-| CREATE_BATCH_RESTART \_PROCESS_INSTANCES         | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| CREATE_BATCH_DELETE \_RUNNING_PROCESS_INSTANCES  | Yes                 | CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE, CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE                                                                                                                                                                                                                                                                                                                       |
-| CREATE_BATCH_DELETE \_FINISHED_PROCESS_INSTANCES | Yes                 | CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE                                                                                                                                                                                                                                                                                                                                                                       |
-| CREATE_BATCH_DELETE \_DECISION_INSTANCES         | Yes                 | CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE                                                                                                                                                                                                                                                                                                                                                                      |
-| CREATE_BATCH_SET \_JOB_RETRIES                   | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| CREATE_BATCH_SET \_REMOVAL_TIME                  | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| CREATE_BATCH_SET \_EXTERNAL_TASK_RETRIES         | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| CREATE_BATCH_UPDATE \_PROCESS_INSTANCES_SUSPEND  | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| CREATE_BATCH_SET_VARIABLES                       | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ALL                                              | Yes                 | CREATE, CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE, CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE, CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE, CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE, CREATE_BATCH_OPERATION_RESOLVE_INCIDENT, CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE, CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION, CREATE_BATCH_OPERATION_DELETE_PROCESS_DEFINITION, READ, UPDATE |
+| C7 Permission                                     | Migration supported | C8 Permission equivalent                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `READ`                                            | Yes                 | `READ`                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `UPDATE`                                          | Yes                 | `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `CREATE`                                          | Yes                 | `CREATE`                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `DELETE`                                          | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `READ_HISTORY`                                    | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `DELETE_HISTORY`                                  | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `CREATE_BATCH_MIGRATE_PROCESS_INSTANCES`          | Yes                 | `CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE`                                                                                                                                                                                                                                                                                                                                                                                           |
+| `CREATE_BATCH_MODIFY _PROCESS_INSTANCES`          | Yes                 | `CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE`                                                                                                                                                                                                                                                                                                                                                                                            |
+| `CREATE_BATCH_RESTART_PROCESS_INSTANCES`          | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `CREATE_BATCH_DELETE_RUNNING_PROCESS _INSTANCES`  | Yes                 | `CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE`                                                                                                                                                                                                                                                                                                                                          |
+| `CREATE_BATCH_DELETE_FINISHED_PROCESS _INSTANCES` | Yes                 | `CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE`                                                                                                                                                                                                                                                                                                                                                                                            |
+| `CREATE_BATCH_DELETE_DECISION_INSTANCES`          | Yes                 | `CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE`                                                                                                                                                                                                                                                                                                                                                                                           |
+| `CREATE_BATCH_SET_JOB_RETRIES`                    | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `CREATE_BATCH_SET_REMOVAL_TIME`                   | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `CREATE_BATCH_SET_EXTERNAL_TASK_RETRIES`          | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `CREATE_BATCH_UPDATE_PROCESS_INSTANCES _SUSPEND`  | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `CREATE_BATCH_SET_VARIABLES`                      | No                  | -                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `ALL`                                             | Yes                 | `CREATE`, `READ`, `UPDATE`, `CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_RESOLVE_INCIDENT`, `CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE`, `CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION`, `CREATE_BATCH_OPERATION_DELETE_PROCESS_DEFINITION`, |
 
 ### `Group Membership` compatibility
 
 | C7 Permission | Migration supported | C8 Resource Type equivalent | C8 Permission equivalent |
 | ------------- | ------------------- | --------------------------- | ------------------------ |
-| CREATE        | No                  | -                           | -                        |
-| DELETE        | No                  | -                           | -                        |
-| ALL           | Yes                 | GROUP                       | UPDATE                   |
+| `CREATE`      | No                  | -                           | -                        |
+| `DELETE`      | No                  | -                           | -                        |
+| `ALL`         | Yes                 | `GROUP`                     | `UPDATE`                 |
 
 ### `Tenant Membership` compatibility
 
 | C7 Permission | Migration supported | C8 Resource Type equivalent | C8 Permission equivalent |
 | ------------- | ------------------- | --------------------------- | ------------------------ |
-| CREATE        | No                  | -                           | -                        |
-| DELETE        | No                  | -                           | -                        |
-| ALL           | Yes                 | TENANT                      | UPDATE                   |
+| `CREATE`      | No                  | -                           | -                        |
+| `DELETE`      | No                  | -                           | -                        |
+| `ALL`         | Yes                 | `TENANT`                    | `UPDATE`                 |
 
 ### `System` compatibility
 
-| C7 Permission | Migration supported | C8 Permission equivalent        |
-| ------------- | ------------------- | ------------------------------- |
-| READ          | Yes                 | READ, READ_USAGE_METRIC         |
-| SET           | No                  | -                               |
-| DELETE        | No                  | -                               |
-| ALL           | Yes                 | READ, READ_USAGE_METRIC, UPDATE |
+| C7 Permission | Migration supported | C8 Permission equivalent              |
+| ------------- | ------------------- | ------------------------------------- |
+| `READ`        | Yes                 | `READ`, `READ_USAGE_METRIC`           |
+| `SET`         | No                  | -                                     |
+| `DELETE`      | No                  | -                                     |
+| `ALL`         | Yes                 | `READ`, `READ_USAGE_METRIC`, `UPDATE` |
 
 ### `ALL` permissions compatibility
 
