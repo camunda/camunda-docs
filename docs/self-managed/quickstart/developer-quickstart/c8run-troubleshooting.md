@@ -9,7 +9,7 @@ Camunda 8 Run provides log files in the `c8run/logs` directory that can help dia
 
 - `c8run.log` – main log for Camunda 8 Run
 - `connectors.log` – Connectors component
-- `elasticsearch.log` – embedded [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) instance (if used). This instance serves as secondary storage for indexing and search.
+- `elasticsearch.log` – embedded Elasticsearch instance (if enabled). Camunda 8 Run bundles Elasticsearch for evaluations. If you point Camunda 8 Run to an external OpenSearch instead, the embedded instance (and this log) is not used.
 
 ## Startup failures
 
@@ -24,8 +24,8 @@ Camunda 8 Run provides log files in the `c8run/logs` directory that can help dia
    - `8086` – Connectors API
    - `26500` – Zeebe gRPC gateway
    - `9600` – Prometheus metrics
-   - `9200` – Elasticsearch/OpenSearch (embedded)
-   - `9300` – Elasticsearch/OpenSearch cluster communication
+   - `9200` – Elasticsearch (embedded)
+   - `9300` – Elasticsearch cluster communication
 
 2. Stop processes using these ports or change the Camunda core port:
 

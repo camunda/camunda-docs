@@ -9,13 +9,13 @@ The Orchestration Cluster centrally manages data retention for all data using un
 All cluster data, including deployed process definitions, process instance state, user operations, and technical metadata, is written to secondary storage. Depending on your configuration, this secondary storage is backed by [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) or an [RDBMS](/reference/glossary.md#rdbms). The data representing process instance state becomes immutable after the process instance is finished, and it becomes eligible for archiving.
 
 :::note
-Secondary storage is configurable. Choose the backend that best fits your requirements for indexing, querying, retention, and operations. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) for setup guidance, and refer to [secondary storage](/reference/glossary.md#secondary-storage) for terminology and conceptual context.
+Secondary storage is configurable. Choose the backend that best fits your requirements for indexing, querying, retention, and operations. See [configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md) for setup guidance, and refer to [secondary storage](/reference/glossary.md#secondary-storage) for terminology and conceptual context.
 :::
 
-During data archive, data is moved to a dated index (for example, `operate-variable_2020-01-01`), with the suffix representing the completion date of the associated process or operation.
+When using Elasticsearch/OpenSearch, finished data is moved to a dated index (for example, `operate-variable_2020-01-01`), with the suffix representing the completion date of the associated process or operation. For RDBMS backends, the exporter does not create dated indices. Data remains in the same tables and is managed by retention settings.
 
 :::note
-All data present in the database (from both main and dated indices) is visible from the UI.
+In Elasticsearch/OpenSearch, data from both main and dated indices remains visible from the UI. In RDBMS backends, data stays in the same tables and remains visible until retention policies delete it.
 :::
 
 ## Archive period

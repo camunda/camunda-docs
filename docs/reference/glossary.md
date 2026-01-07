@@ -160,7 +160,7 @@ A process cannot execute unless it is known by the [broker](#zeebe-broker). Depl
 
 ### Elasticsearch/OpenSearch
 
-Elasticsearch and OpenSearch are search and analytics engines commonly used as secondary storage backends for indexing and querying exported runtime data. They are populated from [primary storage](#primary-storage) and consumed by components such as Operate and Optimize.
+Elasticsearch and OpenSearch are search and analytics engines commonly used as secondary storage backends for indexing and querying exported runtime data. They are populated with process orchestration data and consumed by components such as Operate and Optimize.
 
 - [Elasticsearch and OpenSearch](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md)
 
@@ -177,16 +177,6 @@ A BPMN element is part of a [process](#process), defining one part of its BPMN m
 Use an element template to extend [Modeler](/components/modeler/about-modeler.md) with domain-specific diagram [elements](#element). The user edits such elements through a UI defined by the element template, and in the process configures standard technical bindings understood by the engine in simple and predictable ways. Element templates are used by [connectors](#connector) to create the connector-specific [element](#element) configuration.
 
 - [Element templates](/components/modeler/element-templates/about-templates.md)
-
-### Embedded H2
-
-Embedded H2 (file-based H2) refers to running the H2 relational database in a file-backed mode where the database files reside on the same host as the component using them. In Camunda documentation, H2 is discussed as a lightweight secondary storage option for local development and evaluation.
-
-Embedded H2 is not intended for production usage.
-
-- [Secondary storage](/self-managed/concepts/secondary-storage/index.md)
-
-See also: [Secondary storage](#secondary-storage), [H2](#h2)
 
 ### Embedding (vector embedding)
 
@@ -244,9 +234,18 @@ When an AI confidently produces incorrect or fabricated information that seems p
 
 ### H2
 
-H2 is a lightweight relational database engine. In Camunda documentation, H2 refers to a secondary storage backend used for local development and evaluation.
+H2 is a lightweight relational database engine used as a secondary storage backend for local development and evaluation in Camunda.
 
-See also: [Embedded H2](#embedded-h2), [Secondary storage](#secondary-storage)
+H2 can run in two modes:
+
+- **In-memory**: Data is stored only in memory and lost when the application stops. Useful for temporary testing.
+- **File-based (embedded)**: Database files are persisted to disk on the same host as the component using them. Suitable for local development where data persistence across restarts is needed.
+
+H2 is not intended for production usage.
+
+- [Secondary storage](/self-managed/concepts/secondary-storage/index.md)
+
+See also: [Secondary storage](#secondary-storage)
 
 ### Human task
 
@@ -523,7 +522,6 @@ Examples of secondary storage backends include:
 
 - [Elasticsearch/OpenSearch](#elasticsearchopensearch)
 - [RDBMS](#rdbms)
-- [Embedded H2](#embedded-h2)
 
 - [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)
 - [Managing secondary storage](/self-managed/concepts/secondary-storage/managing-secondary-storage.md)
