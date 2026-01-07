@@ -55,7 +55,6 @@ spec:
 
 and a `helm install` will result in the following error:
 
-
 > Error: INSTALLATION FAILED: failed to create typed patch object (default/RELEASE-identity; apps/v1, Kind=Deployment): .spec.template.spec.containers[name="identity"].env: duplicate entries for key [name="CAMUNDA_LICENSE_KEY"]
 
 
