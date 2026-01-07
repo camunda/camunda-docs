@@ -627,6 +627,10 @@ Installations of Camunda 8 Self-Managed that require a license can provide their
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | `camunda.security.csrf.enabled` | Enables or disables CSRF protection. Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks. | `true`        |
 
+:::caution
+Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
+:::
+
 ### `camunda.security.http-headers`
 
 | Property                                                                  | Description                                                                                                                                                      | Related Header                                                                                                                                                                                                                                           | Default value                     |
@@ -884,6 +888,16 @@ child-src;
 script-src-attr 'none'.
 ```
 
+### `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS`
+
+| Property                                                         | Description                                                                                                                        | Default value |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_TYPE`    | The owner type to assign to this authorization.                                                                                    |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_ID`      | The owner ID to assign to this authorization.                                                                                      |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_TYPE` | The [resource type](/components/concepts/access-control/authorizations.md#available-resources) that this authorization applies to. |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_ID`   | The resource ID that this authorization applies to.                                                                                |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_PERMISSIONS`   | Permissions to assign to this authorization. The available permissions vary by resource type.                                      |               |
+
 ### `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES`
 
 | Property                                                             | Description                                  | Default value |
@@ -1025,10 +1039,6 @@ script-src-attr 'none'.
 
 </TabItem>
 </Tabs>
-
-:::caution
-Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
-:::
 
 import SecondaryStorage from './partials/\_secondary-storage.md'
 

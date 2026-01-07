@@ -9,6 +9,8 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.7 release are summarized below.
 
+This release focuses primarily on consolidation and deprecation work to simplify APIs, align clients and SDKs, and prepare for upcoming features in 8.8 and later releases. While there are fewer net-new features in this release, these changes reduce long-term maintenance and improve consistency across Camunda components.
+
 | Scheduled release date | Scheduled end of maintenance | Release notes                                                                        | Blog                                                                            |
 | :--------------------- | :--------------------------- | :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
 | 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2025/04/camunda-8-7-release/) |
@@ -41,6 +43,8 @@ The Spring Zeebe SDK 8.7 now requires Spring Boot 3.4.x. For more information on
 Following the end-of-life of macOS 12, support for Desktop Modeler on macOS 12 has been removed.
 
 ## Key changes
+
+Collectively, these changes consolidate overlapping functionality, align configuration and client behavior across components, and establish clearer upgrade paths for upcoming releases.
 
 ### Deprecation of Self-Managed AWS Marketplace offering
 

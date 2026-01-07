@@ -1572,7 +1572,8 @@
       },
       "items": ["reference/data-collection/usage-metrics"]
     },
-    "reference/glossary"
+    "reference/glossary",
+    "reference/legal"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",

@@ -2,16 +2,21 @@
 id: c8run
 title: "Developer quickstart – Camunda 8 Run"
 sidebar_label: "Camunda 8 Run"
-description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local orchestration cluster using Camunda 8 Run."
+description: "A quickstart guide for developers to deploy and run Camunda 8 Self-Managed locally with Camunda 8 Run, including setup, configuration, and key components."
 ---
 
 import {C8Run} from "@site/src/components/CamundaDistributions";
 
 :::note
-Camunda 8 Run is not supported for production use.
+Camunda 8 Run provides a lightweight, self-managed environment for local development and prototyping. It is not intended for production use.
+
+For production deployments, install the Orchestration Cluster manually as a Java application.
+For detailed steps, see the [manual installation](../../../deployment/manual/install) guide.
 :::
 
-Camunda 8 Run enables you to run [Orchestration cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
+Camunda 8 Run is a local distribution of Camunda 8 that bundles the Camunda 8 runtime, core services, startup scripts, and a launcher application for Windows, macOS, and Linux.
+
+Camunda 8 Run enables you to run the [Orchestration Cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
 
 Camunda 8 Run includes the following:
 
@@ -23,12 +28,12 @@ Camunda 8 Run also supports document storage and management with [document handl
 
 :::note
 For the latest list of supported relational databases and versions, see the  
-[RDBMS version support policy](/self-managed/concepts/rdbms-support-policy.md).
+[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 :::
 
 ## Prerequisites
 
-- **OpenJDK 21–23**: Required for running Camunda 8 as a Java application.
+- **OpenJDK 21–25**: Required for running Camunda 8 as a Java application.
 - **Docker 20.10.21+**: Required for running Camunda 8 via Docker Compose.
 - **[Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)**
 - **If using Ubuntu**: Ubuntu 22.04 or newer
@@ -273,8 +278,14 @@ docker ps
 
 ### Enable TLS
 
-TLS can be enabled by providing a local keystore file using the `--keystore` argument at startup. Camunda 8 Run accepts `.jks` certificate files.  
+TLS can be enabled by providing a local keystore file using the [`--keystore` and `--keystorePassword` configuration options](#configuration-options) at startup. Camunda 8 Run accepts `.jks` certificate files.  
 Although Camunda 8 Run supports TLS, this is intended only for testing.
+
+:::note
+If you use a proxy together with TLS, ensure internal Camunda services are excluded from proxy routing. JVM-level proxy settings apply to all internal HTTP clients and may block communication between components such as Zeebe, Operate, Identity, or the connector runtime. Add these services to your `nonProxyHosts` configuration.
+
+For details, see [configure a proxy server in Self-Managed](../../../../components/connectors/protocol/rest/#configure-a-proxy-server-in-self-managed) in the REST connector documentation.
+:::
 
 ### Access metrics
 

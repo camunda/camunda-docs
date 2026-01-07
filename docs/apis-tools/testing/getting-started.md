@@ -233,7 +233,7 @@ CPT performs the following actions during the JUnit 5 lifecycle when running a t
 - `beforeAll` (test methods)
   - Start the test runtime
 - `beforeEach` (test method)
-  - Inject the `CamundaClient` and the `CamundaProcessTestContext`
+  - Inject the `CamundaClient`, the `CamundaProcessTestContext`, and the `TestScenarioRunner`
   - Publish the client created event for the Spring Boot process application to trigger the deployment and start job
     workers
   - Deploy resources defined via `@TestDeployment`
@@ -297,7 +297,7 @@ public class TestProcessApplication {}
 - `beforeAll` (test methods)
   - Start the test runtime
 - `beforeEach` (test method)
-  - Inject the `CamundaClient` and the `CamundaProcessTestContext`
+  - Inject the `CamundaClient`, the `CamundaProcessTestContext`, and the `TestScenarioRunner`
   - Deploy resources defined via `@TestDeployment`
 - `afterEach` (test method)
   - Collect the data for the coverage report

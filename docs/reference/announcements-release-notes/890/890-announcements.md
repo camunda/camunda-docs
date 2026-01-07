@@ -23,6 +23,36 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 ## Key changes
 
+### Supported environments
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenJDK 25 support
+
+Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration Cluster, Connectors, Optimize, and supporting tooling. You can now run Self-Managed deployments on OpenJDK 21–25 without additional configuration changes.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch minimum version raised to 8.18.6+
+
+The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.18.6 (previously 8.17.3). This aligns with the updated `ELASTICSEARCH_VERSION=8.18.6` default used by Camunda 8 Run, Docker Compose, and Helm templates. Upgrade your Elasticsearch/OpenSearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
 ### Agentic orchestration
 
 <div className="release-announcement-row">
@@ -86,6 +116,25 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch subchart no longer enabled by default
+
+Previously, the Elasticsearch subchart was enabled by default. To use OpenSearch, you would need to disable Elasticsearch and enable OpenSearch.
+
+With the inclusion of RDBMS, you must now specify the secondary storage you want to enable and use.
+
+:::note
+To continue using Elasticsearch provided as a subchart, you must add `global.elasticsearch.enabled: true` and `elasticsearch.enabled: true` to your `values.yaml`.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
@@ -106,6 +155,7 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
@@ -117,6 +167,17 @@ Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` f
 - Postgresql is currently supported.
 - Other RDBMS databases like OracleDB and MariaDB have limited functionality now, but will be fully supported in future alpha releases.
 - Operate is not yet supported with RDBMS until alpha3.
+
+<span className="badge badge--breaking-change">Breaking change</span>
+
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch subchart is no longer enabled by default
+
+Previously, the Elasticsearch subchart would be enabled, and if you want OpenSearch instead, you would disable Elasticsearch and enable OpenSearch. Now with the inclusion of RDBMS instead, we are making it mandatory to specify which secondary storage you want to use, and present them as equally valid options.
+
+If you rely on Elasticsearch provided as a subchart, you will need to add `global.elasticsearch.enabled: true` and `elasticsearch.enabled: true` to your `values.yaml` to continue using it.
 
 </div>
 </div>
@@ -196,7 +257,7 @@ When using JSON as the output for the logs the structure has slightly changed:
 See [Logging documentation](/self-managed/components/modeler/web-modeler/configuration/logging.md#json-structure) for more information.
 
 :::info
-To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-logging-framework-changes-from-logback-to-log4j2).
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 :::
 
 </div>
@@ -215,7 +276,28 @@ Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded 
 This enhancement ensures consistency across environments and simplifies setup for administrators.
 
 :::info
-To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-embedded-web-server-changed-from-undertow-to-tomcat).
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: Invite collaborators who haven't logged in before
+
+The behavior across OIDC providers is now aligned. Invitation suggestions only include users who have logged in at least once. This is a breaking change for Web Modeler installations using Keycloak as the OIDC provider. Before 8.9, Keycloak returned all organization users, including those who had never logged in.
+
+You can now invite users who have not yet logged in to Web Modeler by entering their email address. They will appear as “invited” in the collaborators panel. After their first log in, they will be added to the project automatically.
+
+Inviting the entire organization only applies to users who have logged in at least once.
+
+:::info
+To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 :::
 
 </div>
