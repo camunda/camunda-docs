@@ -52,6 +52,7 @@ https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/ama
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=inbound
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=outbound
+https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-textract/#execution-types
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/asana
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/automation-anywhere
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/automation-anywhere/
