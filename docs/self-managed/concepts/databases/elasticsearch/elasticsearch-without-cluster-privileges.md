@@ -10,8 +10,8 @@ If the Camunda single application cannot access Elasticsearch with cluster-level
 
 When running the schema manager as a standalone application, cluster-level privileges are required only during schema creation. The single application itself does not need cluster-level privileges.
 
-- **Database support**: This setup is supported only for Elasticsearch installations (OpenSearch is not supported).
-- **Privileges required by the single application**: The Camunda single application still requires an index-level privilege of at least `manage` to function properly.
+- Database support: This setup supports Elasticsearch only. For OpenSearch, see [Run OpenSearch without cluster privileges](./opensearch-without-cluster-privileges.md).
+- Privileges required by the single application: The Camunda single application still requires an index-level privilege of at least `manage` to function properly.
 
 To run the schema manager as a standalone application:
 
@@ -393,8 +393,8 @@ If the Camunda application(s) cannot access Elasticsearch with cluster-level pri
 
 Creating a snapshot in Elasticsearch requires `manage_snapshots` cluster-level privileges. These privileges are only needed by the application responsible for creating the backups; the Camunda application(s) do not require cluster-level privileges.
 
-- **Database support**: This setup is supported only for Elasticsearch installations (OpenSearch is not supported).
-- **Indices**: The standalone application only handles Operate and Tasklist indices. Optimize is not included in this procedure.
+- Database support: This setup supports Elasticsearch only. For OpenSearch, see [Run OpenSearch without cluster privileges](./opensearch-without-cluster-privileges.md).
+- Indices: The standalone application only handles Operate and Tasklist indices. Optimize is not included in this procedure.
 
 :::note
 
