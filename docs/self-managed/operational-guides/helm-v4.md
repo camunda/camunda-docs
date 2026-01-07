@@ -8,20 +8,20 @@ sidebar_label: "Helm v4"
 
 ## Overview
 
-Helm v4 is the latest major release of Helm which comes with a few minor breaking changes. This page outlines those changes and offers mitigations to help.
+Helm v4 is the latest major release of Helm which comes with a few minor breaking changes. This page outlines those changes and offers workarounds to help.
 
 Learn more about other Helm v4 changes [here](https://helm.sh/docs/overview/#whats-new)
 
 ## Camunda Helm chart Compatibility
 
-The Camunda Helm chart is already compatible with Helm v3 and Helm v4, however, if your `values.yaml` supplies extra environment variables that conflict with the default, then may need to apply mitigations outlined below.
+The Camunda Helm chart is already compatible with Helm v3 and Helm v4, however, if your `values.yaml` supplies extra environment variables that conflict with the default, then may need to upgrade to a newer patch version and apply workarounds outlined below.
 
-| Chart version                  | Helm CLI v3    | Helm CLI v4                         |
-| ------------------------------ | -------------- | ----------------------------------- |
-| Camunda Platform 8.6 - 11.x    | ✅             | ✅ (with mitigations below)         |
-| Camunda Platform 8.7 - 12.x    | ✅             | ✅ (with mitigations below)         |
-| Camunda Platform 8.8 - 13.x    | ✅             | ✅ (with mitigations below)         |
-| Camunda Platform 8.9 - 14.x    | ✅             | ✅ (with mitigations below)         |
+| Chart version               | Helm CLI v3    | Helm CLI v4                         |
+| --------------------------- | -------------- | ----------------------------------- |
+| Camunda 8.6 - Chart 11.x    | ✅             | ✅ (with workarounds below)         |
+| Camunda 8.7 - Chart 12.x    | ✅             | ✅ (with workarounds below)         |
+| Camunda 8.8 - Chart 13.x    | ✅             | ✅ (with workarounds below)         |
+| Camunda 8.9 - Chart 14.x    | ✅             | ✅ (with workarounds below)         |
 
 
 ## Helm CLI Breaking Changes
@@ -65,8 +65,8 @@ and a `helm install` will result in the following error:
 To mitigate this issue, you can either:
 
 1. Leverage `values.yaml` overrides outside of the env section wherever possible. For example, in the above example, we have the `global.license` options in `values.yaml` that can be used instead.
-2. Override `application.yaml` configuration via the `configuration` and `extraConfiguration` options in `values.yaml` instead of using environment variables.
-3. Disable server-side apply by setting `--server-side=false` in the `helm install` or `helm upgrade` command.
+2. Override `application.yaml` configuration via the `configuration` and `extraConfiguration` options in `values.yaml` instead of using environment variables. See [Configure Helm chart components](/docs/next/self-managed/deployment/helm/configure/application-configs/) for more details.
+3. Disable server-side apply by setting `--server-side=false` in the `helm install` or `helm upgrade` commands.
 4. Use Helm v3. However, note that Helm v3 will stop receiving bugfix updates on July 8th 2026, and will no longer receive security updates after November 11th 2026. [Helm support policy](https://helm.sh/blog/helm-4-released#helm-v3-support).
 
 If you cannot install a binary for Helm v3 due to a package manager only supporting Helm v4, you can use the following Docker command:
