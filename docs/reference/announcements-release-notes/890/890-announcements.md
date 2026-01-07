@@ -31,7 +31,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
 </div>
 <div className="release-announcement-content">
 
-#### Camunda Spring Boot Starter is based on Spring Boot 4.0.x
+#### Camunda Spring Boot Starter now requires Spring Boot 4.0.x
 
 Starting with 8.9.0-alpha3, the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md) requires Spring Boot 4.0.x.
 
