@@ -174,7 +174,7 @@ Camunda 8 Run is now easier to get started with. The CLI includes a helpful usag
 
 A revamped Java detection guided setup, log cleanup options, and better defaults for development environments (such as disk watermark thresholds) have been added. You can also start fresh using a new clean-state command, and the unified configuration file is now included and thoroughly documented.
 
-#### Use H2 for data storage
+#### Use H2 for data storage in Camunda 8 Run
 
 <!-- https://github.com/camunda/product-hub/issues/2832, https://github.com/camunda/product-hub/issues/2656 -->
 
