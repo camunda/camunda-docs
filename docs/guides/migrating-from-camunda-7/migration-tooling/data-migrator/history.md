@@ -31,6 +31,15 @@ The following requirements and limitations apply:
 - The History Data Migrator can only migrate to Camunda 8 **if a relational database (RDBMS) is used**, a feature planned for **Camunda 8.9**.
 - The History Data Migrator needs to access the Camunda 8 database (which means you can only run this tool in a **self-managed environment**).
 - If runtime and history data are migrated at the same time, you will end up with two instances in Camunda 8: a canceled historic process instance and an active new one in the runtime. They are linked by process variables.
+- Unsupported Camunda 8 entities and properties
+  - Sequence Flow - in Operate Sequence Flow can’t be highlighted
+  - User Task migration - information not available in C7
+  - Message subscription and correlated message subscription - information not available in Camunda 7
+  - Batch operation entity and item - Camunda 7 doesn’t keep much evidence for processed instances
+  - User metrics
+  - Exporter position - doesn’t exist in Camunda 7
+  - Process instance/Task tag - doesn’t exist in Camunda 7
+  - Audit log - [ticket](https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/517)
 
 ## Usage examples
 
