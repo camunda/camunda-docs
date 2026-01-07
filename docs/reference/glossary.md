@@ -92,6 +92,10 @@ See [Zeebe Client](#zeebe-client).
 
 See [Zeebe cluster](#zeebe-cluster).
 
+### Cluster variable
+
+A cluster [variable](../../components/concepts/variables/) is a centrally managed configuration value available across a Camunda cluster. It can be defined globally or at the tenant level and is used to provide environment-specific settings, such as API endpoints, feature flags, and shared configuration.
+
 ### Camunda 8
 
 Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:

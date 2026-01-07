@@ -1,11 +1,11 @@
 ---
-id: get-incident-process-instance-statistics
-title: "Get incident process instance statistics"
+id: get-process-instance-statistics-by-error
+title: "Get process instance statistics by error"
 description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
-sidebar_label: "Get incident process instance statistics"
+sidebar_label: "Get process instance statistics by error"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
@@ -25,20 +25,20 @@ import Heading from "@theme/Heading";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Get incident process instance statistics"}
+  children={"Get process instance statistics by error"}
 ></Heading>
 
 <MethodEndpoint
   method={"post"}
-  path={"/incidents/statistics/process-instances"}
+  path={"/incidents/statistics/process-instances-by-error"}
   context={"endpoint"}
 ></MethodEndpoint>
 
 <MarkerEventuallyConsistentExtension /> [Learn about endpoint
 consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
-Returns aggregated statistics for process instances with active incidents,
-grouped by error hash code.
+Returns statistics for active process instances that currently have active incidents,
+grouped by incident error hash code.
 
 <Heading
   id={"request"}
@@ -60,7 +60,7 @@ grouped by error hash code.
           properties: {
             page: {
               description:
-                "Pagination parameters for process instance statistics with active incidents.",
+                "Pagination parameters for process instance statistics grouped by incident error.\n",
               allOf: [
                 {
                   type: "object",
@@ -86,13 +86,15 @@ grouped by error hash code.
               ],
             },
             sort: {
-              description: "Sort field criteria.",
+              description:
+                "Sorting criteria for process instance statistics grouped by incident error.",
               type: "array",
               items: {
                 type: "object",
                 properties: {
                   field: {
-                    description: "The field to sort by.",
+                    description:
+                      "The field to sort the incident error statistics by.",
                     type: "string",
                     enum: ["errorMessage", "activeInstancesWithErrorCount"],
                   },
@@ -106,11 +108,12 @@ grouped by error hash code.
                   },
                 },
                 required: ["field"],
-                title: "IncidentProcessInstanceStatisticsQuerySortRequest",
+                title:
+                  "IncidentProcessInstanceStatisticsByErrorQuerySortRequest",
               },
             },
           },
-          title: "IncidentProcessInstanceStatisticsQuery",
+          title: "IncidentProcessInstanceStatisticsByErrorQuery",
         },
       },
     },
@@ -122,7 +125,8 @@ grouped by error hash code.
   label={undefined}
   responses={{
     "200": {
-      description: "The incident statistics result.",
+      description:
+        "The statistics about process instances with incident, grouped by error hash code are\nsuccessfully returned.\n",
       content: {
         "application/json": {
           schema: {
@@ -186,7 +190,8 @@ grouped by error hash code.
             ],
             properties: {
               items: {
-                description: "The incident statistics results.",
+                description:
+                  "Statistics of active process instances grouped by incident error.\n",
                 type: "array",
                 items: {
                   type: "object",
@@ -195,25 +200,25 @@ grouped by error hash code.
                       type: "integer",
                       format: "int32",
                       description:
-                        "A hash code representing the error details of an incident.",
+                        "The hash code identifying a specific incident error..",
                     },
                     errorMessage: {
                       type: "string",
                       description:
-                        "Error message which describes the error in more detail.",
+                        "The error message associated with the incident error hash code.",
                     },
                     activeInstancesWithErrorCount: {
                       type: "integer",
                       format: "int64",
                       description:
-                        "The number of active process instances with this error.",
+                        "The number of active process instances that currently have an active incident with this error.\n",
                     },
                   },
-                  title: "IncidentProcessInstanceStatisticsResult",
+                  title: "IncidentProcessInstanceStatisticsByErrorResult",
                 },
               },
             },
-            title: "IncidentProcessInstanceStatisticsQueryResult",
+            title: "IncidentProcessInstanceStatisticsByErrorQueryResult",
           },
         },
       },

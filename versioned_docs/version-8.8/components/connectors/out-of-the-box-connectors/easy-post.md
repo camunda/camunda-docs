@@ -93,7 +93,7 @@ Response:
 
 Allows you to retrieve a tracker by ID and get information about the status of the tracker.
 Set required properties in the **Input** section: Tracker ID fetched after buying shipment).
-Refer to the [tracker object documentation](https://www.easypost.com/docs/api/java#trackers) to learn more about the tracker object and to observe response examples.
+Refer to the [tracker object documentation](https://docs.easypost.com/docs/trackers#tracker-object) to learn more about the tracker object and to observe response examples.
 In the **Output** section, the pre-filled **Result Expression** returns the ID of the tracker, tracking code, and status of the shipment.
 
 FEEL expression:
