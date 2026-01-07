@@ -1523,7 +1523,8 @@
       "Migration manuals": [
         "apis-tools/migration-manuals/migrate-to-zeebe-user-tasks"
       ]
-    }
+    },
+    "apis-tools/mcp-docs/docs-mcp"
   ],
 
   "Reference": [
