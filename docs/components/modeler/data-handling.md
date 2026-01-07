@@ -16,7 +16,7 @@ To help with editor support, you can also add example data to an element. Add a 
 
 Providing this data is optional, but it's recommended if you want to take full advantage of the FEEL editor's suggestions.
 
-This data will also be used while [playing your process](/components/modeler/web-modeler/play-your-process.md) to set variables from the respective elements when performing the following actions:
+This data will also be used while [playing your process](/components/modeler/web-modeler/validation/play-your-process.md) to set variables from the respective elements when performing the following actions:
 
 - Starting a new instance
 - Completing a job

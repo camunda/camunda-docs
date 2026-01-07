@@ -206,7 +206,15 @@ Later in this guide, we will refer to it as **first cluster**.
      https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/auto-import-cluster-secret.yml.tpl
      ```
 
-   - Finally, import each cluster into the Managed Cluster Set and verify that they can be reached and managed successfully:
+   - If running on Red Hat OpenShift Service on AWS (ROSA), the following addition is required to ensure certificates are trusted.
+
+     Save the following file as `klusterlet-global-config.yml`:
+
+     ```bash reference
+     https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/klusterlet-global-config.yml
+     ```
+
+   - Finally, import the target cluster into the Managed Cluster Set and verify that they can be reached and managed successfully:
 
      ```bash reference
      https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/initiate-cluster-set.sh
@@ -378,9 +386,14 @@ chmod +x setup-namespaces-secrets.sh
 
 Before deploying, some values in the value files need to be updated. To assist with generating these values, save the following Bash script as `generate-zeebe-helm-values.sh`:
 
+<details>
+<summary>Show `generate-zeebe-helm-values.sh` script reference</summary>
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/generate-zeebe-helm-values.sh
 ```
+
+</details>
 
 Then, source the output of the script. By doing so, we can reuse the values later for substitution, instead of manually adjusting the values files. You will be prompted to specify the number of Zeebe brokers (total number of Zeebe brokers in both Kubernetes clusters), for a dual-region setup we recommend `8`, resulting in four brokers per region:
 
@@ -509,6 +522,12 @@ chmod +x check-deployment-ready.sh
 ```
 
 ## Verify connectivity to Camunda 8
+
+:::info Authentication changes in 8.8+
+
+Starting from version 8.8, the Orchestration Cluster is configured by default with [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) and is protected by basic authentication using `demo:demo` as the default username and password.
+
+:::
 
 The following script will port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 

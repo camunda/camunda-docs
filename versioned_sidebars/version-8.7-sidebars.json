@@ -79,7 +79,20 @@
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
-        "components/concepts/encryption-at-rest",
+        {
+          "type": "category",
+          "label": "Encryption",
+          "link": {
+            "type": "doc",
+            "id": "components/concepts/byok/overview"
+          },
+          "items": [
+            "components/concepts/encryption-at-rest",
+            "components/concepts/byok/aws-external-encryption-setup",
+            "components/concepts/byok/key-rotation-audit-logging",
+            "components/concepts/byok/faq-and-troubleshooting"
+          ]
+        },
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
@@ -535,7 +548,7 @@
         },
         {
           "type": "category",
-          "label": "Camunda connectors",
+          "label": "Built-in connectors",
           "link": {
             "type": "doc",
             "id": "components/connectors/out-of-the-box-connectors/available-connectors-overview"
@@ -575,6 +588,7 @@
             "components/connectors/protocol/http-webhook",
             "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
+            "components/connectors/out-of-the-box-connectors/message-send",
             {
               "Microsoft": [
                 "components/connectors/out-of-the-box-connectors/azure-open-ai",
@@ -599,7 +613,7 @@
         },
         {
           "type": "category",
-          "label": "Custom connectors",
+          "label": "Build custom connectors",
           "link": {
             "type": "doc",
             "id": "components/connectors/custom-built-connectors/build-connector"
@@ -1770,18 +1784,6 @@
             "reference/announcements-release-notes/860/860-release-notes"
           ]
         },
-        {
-          "type": "category",
-          "label": "8.5",
-          "link": {
-            "type": "doc",
-            "id": "reference/announcements-release-notes/850/850-announcements"
-          },
-          "items": [
-            "reference/announcements-release-notes/850/850-announcements",
-            "reference/announcements-release-notes/850/850-release-notes"
-          ]
-        },
         "reference/announcements-release-notes/release-policy"
       ]
     },
@@ -1794,6 +1796,7 @@
     "reference/licenses",
     "reference/notices",
     "reference/regions",
+    "reference/data-locations",
     "reference/saas-ip-addresses",
     {
       "type": "category",
@@ -1804,7 +1807,8 @@
       },
       "items": ["reference/data-collection/usage-metrics"]
     },
-    "reference/glossary"
+    "reference/glossary",
+    "reference/legal"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
@@ -1896,9 +1900,10 @@
             "self-managed/setup/guides/using-existing-keycloak",
             "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/air-gapped-installation",
+            "self-managed/setup/guides/install-bitnami-enterprise-images",
             "self-managed/setup/guides/running-custom-connectors",
             "self-managed/setup/guides/prefix-elasticsearch-indices",
-            "self-managed/setup/guides/multi-namespace-deployment",
+            "self-managed/setup/guides/data-retention",
             "self-managed/setup/guides/installing-payment-app-example",
             "self-managed/setup/guides/secret-management"
           ]
@@ -2062,6 +2067,7 @@
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"]
         },
         "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/custom-users-and-clients",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/elasticsearch-without-cluster-privileges",
         "self-managed/concepts/opensearch-privileges",

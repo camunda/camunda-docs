@@ -32,8 +32,10 @@
     "api:generate:camunda": "npm run api:generate camunda",
     "config-reference:download": "node ./config-reference/generate-config-reference.js download",
     "config-reference:download:camunda-spring-boot-starter": "npm run config-reference:download camunda-spring-boot-starter",
+    "config-reference:download:camunda-spring-boot-starter:8.8": "npm run config-reference:download:camunda-spring-boot-starter 8.8",
     "config-reference:generate": "node ./config-reference/generate-config-reference.js generate",
     "config-reference:generate:camunda-spring-boot-starter": "npm run config-reference:generate camunda-spring-boot-starter",
+    "config-reference:generate:camunda-spring-boot-starter:8.8": "npm run config-reference:generate:camunda-spring-boot-starter 8.8",
     "update-release-links": "node hacks/update-release-links.js"
   },
   "dependencies": {
@@ -45,6 +47,7 @@
     "@docusaurus/theme-mermaid": "^3.8.0",
     "@mdx-js/react": "^3.1.0",
     "@saucelabs/theme-github-codeblock": "^0.3.0",
+    "cheerio": "^1.1.2",
     "clsx": "^2.1.1",
     "docusaurus-plugin-openapi-docs": "^4.4.0",
     "docusaurus-theme-openapi-docs": "https://github.com/jwulf/docusaurus-openapi-docs/releases/download/oneOf-display-format-package/docusaurus-theme-openapi-docs-4.5.1.tgz",
@@ -75,7 +78,7 @@
     "jest": "^30.0.0",
     "lint-staged": "^16.0.0",
     "playwright": "^1.52.0",
-    "prettier": "3.6.2"
+    "prettier": "3.7.4"
   },
   "lint-staged": {
     "*.{css,js,json,MD,md,mdx,yaml,yml}": "prettier --write"

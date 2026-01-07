@@ -16,7 +16,7 @@ For example, in the following image the activities marked in green are the ones 
 
 You can use any BPMN elements and connectors as tools and to model sub-flows within the ad-hoc sub-process.
 
-## Tool Resolution
+## Tool resolution
 
 To resolve available tools, the AI Agent connector either resolves the tools by reling on data provided by the Zeebe engine or reads the BPMN model directly. The approach depends on the chosen AI Agent implementation:
 
@@ -25,12 +25,12 @@ groupId="ai-agent-implementation"
 defaultValue="process"
 queryString
 values={[
-{ label: "AI Agent Process", value: "process" },
+{ label: "AI Agent Sub-process", value: "process" },
 { label: "AI Agent Task", value: "task" },
 ]}>
 
 <TabItem value='process'>
-When using the **AI Agent Process** implementation, the connector relies on data provided by the [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#special-ad-hoc-sub-process-variables) implementation to resolve the tools.
+When using the **AI Agent Sub-process** implementation, the connector relies on data provided by the [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#special-ad-hoc-sub-process-variables) implementation to resolve the tools.
 </TabItem>
 
 <TabItem value='task'>
@@ -48,7 +48,7 @@ When using the **AI Agent Task** implementation, the connector reads the BPMN mo
 Refer to the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview) and [OpenAI](https://platform.openai.com/docs/guides/function-calling) documentation for examples of how tool/function calling works in combination with an LLM.
 :::
 
-## Tool Definitions
+## Tool definitions
 
 :::important
 The AI Agent connector only considers the **root node** of the sub-flow when resolving a tool definition.
@@ -80,8 +80,7 @@ schema resolution will collect all `fromAi` definitions within an activity and c
 the activity.
 
 :::important
-The first argument passed to the `fromAi` function must be a reference type (for example, not a static string), referencing a
-value within the variable defined as **Input element** in the multi-instance configuration. In the examples provided, `toolCall` is typically used as the input element. Example value: `toolCall.myParameter`.
+The first argument passed to the `fromAi` function must be a reference to a field within the `toolCall` context which will automatically be populated by the AI Agent connector. Example: `toolCall.myParameter`.
 :::
 
 By using the `fromAi` tool call as a wrapper function around the actual value, the connector can both **describe the parameter** for the LLM by generating a JSON Schema from the function calls and at the same time **utilize the LLM-generated value** as it can do with any other process variable.
@@ -123,7 +122,7 @@ fromAi(toolCall.shouldCalculate, "Defines if the calculation should be executed.
 ```
 
 For more complex type definitions, the fourth parameter of the function allows you to specify a JSON Schema from a
-FEEL context. Note that support for the JSON Schema features depends on your AI integration. For a list of examples, refer to the [JSON Schema documentation](https://json-schema.org/learn/miscellaneous-examples).
+FEEL context. Note that support for complex JSON Schema features may be limited by the selected provider/model. For a list of examples, refer to the [JSON Schema documentation](https://json-schema.org/learn/miscellaneous-examples).
 
 ```feel
 fromAi(
@@ -134,16 +133,40 @@ fromAi(
 )
 ```
 
+To mark a parameter as optional, you can use the `options` parameter:
+
+```feel
+fromAi(
+  toolCall.optionalParameter,
+  "An optional parameter",
+  "string",
+  null,
+  { required: false }
+)
+```
+
+Or using named parameters:
+
+```feel
+fromAi(
+  value: toolCall.optionalParameter,
+  description: "An optional parameter",
+  options: { required: false }
+)
+```
+
 You can combine multiple parameters within the same FEEL expression, for example:
 
 ```feel
 fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.secondNumber, "The second number.", "number")
 ```
 
-## Tool Call Responses
+For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) documentation.
+
+## Tool call responses
 
 To collect the output of the called tool and pass it back to the agent, the task within the ad-hoc sub-process needs to
-set its output to a predefined variable name. For the **AI Agent Process** implementation, this variable is predefined as
+set its output to a predefined variable name. For the **AI Agent Sub-process** implementation, this variable is predefined as
 `toolCallResult`. For the **AI Agent Task** implementation, the variable depends on the configuration of the [multi-instance execution](#tools-loop),
 but is also typically named `toolCallResult`.
 
@@ -170,3 +193,14 @@ Similar to the [user prompt](agentic-ai-aiagent.md#user-prompt) **Documents** fi
 (supporting the same file types as for the user prompt).
 
 When serializing the tool call response to JSON, document references are transformed into a content block containing the plain text or base64 encoded document content, before being passed to the LLM.
+
+## Gateway tool definitions
+
+Gateway tools are activities that expose multiple tools from an external source, such as an MCP server or an A2A agent. Unlike static tool definitions, gateway tools discover their available tools dynamically during agent initialization by calling the external source.
+
+To configure an activity as a gateway tool, set the [extension property](../../modeler/element-templates/defining-templates.md#zeebeproperty) `io.camunda.agenticai.gateway.type` on the activity. The property value specifies which gateway implementation to use (for example, `mcpClient`). The agent must also have access to a handler for the specified gateway type. Custom implementations can be made available to the agent in self-managed or hybrid setups.
+
+For more details, see the available gateway tool implementations:
+
+- [MCP Client connectors](../../early-access/alpha/mcp-client/mcp-client.md)
+<!-- TODO add A2A -->

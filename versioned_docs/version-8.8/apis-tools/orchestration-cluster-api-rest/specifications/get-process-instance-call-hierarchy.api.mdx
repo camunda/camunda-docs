@@ -1,0 +1,383 @@
+---
+id: get-process-instance-call-hierarchy
+title: "Get call hierarchy for process instance"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Get call hierarchy for process instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get call hierarchy for process instance"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/process-instances/{processInstanceKey}/call-hierarchy"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description:
+        "The key of the process instance to fetch the hierarchy for.",
+      schema: {
+        type: "string",
+        format: "string<ProcessInstanceKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The call hierarchy is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "array",
+            items: {
+              type: "object",
+              required: [
+                "processInstanceKey",
+                "processDefinitionKey",
+                "processDefinitionName",
+              ],
+              properties: {
+                processInstanceKey: {
+                  allOf: [
+                    {
+                      description:
+                        "System-generated key for a process instance.",
+                      format: "ProcessInstanceKey",
+                      example: "2251799813690746",
+                      type: "string",
+                      allOf: [
+                        {
+                          description:
+                            "Zeebe Engine resource key (Java long serialized as string)",
+                          type: "string",
+                          title: "LongKey",
+                        },
+                      ],
+                      title: "ProcessInstanceKey",
+                    },
+                  ],
+                  description: "The key of the process instance.",
+                },
+                processDefinitionKey: {
+                  allOf: [
+                    {
+                      description:
+                        "System-generated key for a deployed process definition.",
+                      format: "ProcessDefinitionKey",
+                      example: "2251799813686749",
+                      type: "string",
+                      allOf: [
+                        {
+                          description:
+                            "Zeebe Engine resource key (Java long serialized as string)",
+                          type: "string",
+                          title: "LongKey",
+                        },
+                      ],
+                      title: "ProcessDefinitionKey",
+                    },
+                  ],
+                  description: "The key of the process definition.",
+                },
+                processDefinitionName: {
+                  type: "string",
+                  description:
+                    "The name of the process definition (fall backs to the process definition ID if not available).",
+                },
+              },
+              title: "ProcessInstanceCallHierarchyEntry",
+            },
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

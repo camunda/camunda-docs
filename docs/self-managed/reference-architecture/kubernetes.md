@@ -46,9 +46,9 @@ The [reference architecture overview](/self-managed/reference-architecture/refer
 - **Web Modeler, Console, and Management Identity**: Management and design tools (Web Modeler, Console, Management Identity) for modeling and deploying diagrams, and monitoring the health of orchestration clusters.
 
 See the reference architecture for details on how these components communicate.
-:::
 
-_Infrastructure diagram for a single region setup (click on the image to open the PDF version):_
+_Infrastructure diagram for a single-region setup (click the image to open the PDF version)_
+
 [![Architecture Overview](./img/k8s-single.jpg)](./img/k8s-single.pdf)
 
 This Kubernetes architecture illustrates a high-availability setup across multiple availability zones (A, B, and C), with key networking components to ensure scalability, security, and reliability. We recommend using multiple availability zones to improve fault tolerance and eliminate single points of failure.
@@ -61,7 +61,7 @@ The database is not shown in the diagram. It should be hosted outside the Kubern
 
 ### Kubernetes
 
-A [multi-namespace deployment](/self-managed/deployment/helm/configure/multi-namespace-deployment.md) is recommended. For details on individual components, see the [components section](#components).
+A production deployment is recommended. For more information, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md) and the [components](#components) section.
 
 The following visuals provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/deployment/helm/install/quick-install.md). For clarity, ConfigMaps, Secrets, RBAC, and ReplicaSets are omitted.
 
@@ -85,7 +85,7 @@ The Orchestration Cluster exposes two services:
 
 Web Modeler, Console, and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
 
-Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [multi-namespace deployment guide](/self-managed/deployment/helm/configure/multi-namespace-deployment.md).
+Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md).
 
 ### High availability (HA)
 
@@ -242,10 +242,14 @@ Camunda maintains the required Docker images consumed by the Helm chart. These i
 
 The following databases are required:
 
-- Elasticsearch/OpenSearch
-  - Required by Orchestration Cluster and Optimize
-- PostgreSQL
-  - Required by Management Identity, Keycloak, and Web Modeler
+| Database                 | Requirement                                                 |
+| :----------------------- | :---------------------------------------------------------- |
+| Elasticsearch/OpenSearch | Required by Orchestration Cluster and Optimize.             |
+| PostgreSQL               | Required by Management Identity, Keycloak, and Web Modeler. |
+
+:::info OpenSearch support
+Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
+:::
 
 For more information, see the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#architecture).
 

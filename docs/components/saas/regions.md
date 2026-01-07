@@ -12,11 +12,8 @@ The following regions are available for customers on Trial, Starter, and Enterpr
 
 <img src={RegionMapImg} alt="World map showing the location of each GCP and AWS region" class="img-noborder"/>
 
-:::note
-
-- Console and Web Modeler cluster components are currently hosted in GCP (EU). [Contact us](/reference/contact.md) if you have additional questions.
-- Single-tenant clusters run on a dedicated GCP or AWS infrastructure.
-
+:::info
+See [Data locations](data-locations.md) for more information about where your Camunda 8 SaaS data is located and how data is handled.
 :::
 
 ## Google Cloud Platform (GCP) regions
@@ -33,7 +30,7 @@ The following GCP regions are currently supported in Camunda 8 SaaS.
 | Sydney, Australia (australia-southeast1)         | Melbourne, Australia (australia-southeast2)       |
 | Toronto, North America (northamerica-northeast2) | Montréal, North America (northamerica-northeast1) |
 
-To learn more about each region code/location, refer to [Google cloud locations](https://cloud.google.com/about/locations).
+To learn more about each region code/location, refer to [Google Cloud locations](https://cloud.google.com/about/locations).
 
 ## Amazon Web Services (AWS) regions
 
@@ -42,6 +39,7 @@ The following AWS regions are currently supported in Camunda 8 SaaS.
 | AWS region                          | Secondary backups region            |
 | :---------------------------------- | :---------------------------------- |
 | Frankfurt, Europe (eu-central-1)    | Ireland, Europe (eu-west-1)         |
+| Paris, Europe (eu-west-3)           | Ireland, Europe (eu-west-1)         |
 | North America, Virginia (us-east-1) | Oregon, North America (us-west-2)   |
 | Singapore, Asia (ap-southeast-1)    | Jakarta, Indonesia (ap-southeast-3) |
 

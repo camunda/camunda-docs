@@ -10,29 +10,26 @@ import TabItem from '@theme/TabItem';
 
 import StateContainer from './components/stateContainer.jsx';
 
-<!-- Image source: https://docs.google.com/presentation/d/1mbEIc0KuumQCYeg1YMpvdVR8AEUcbTWqlesX-IxVIjY/edit?usp=sharing -->
+<!-- Image source: https://miro.com/app/board/uXjVL-6SrPc=/ -->
+
+import OC from './img/oc-pod.jpg';
 
 <!-- Failover -->
 
-import Four from './img/4.svg';
-import Five from './img/5.svg';
-import Six from './img/6.svg';
+import Four from './img/4.jpg';
+import Five from './img/5.jpg';
+import Six from './img/6.jpg';
 
 <!-- Failback -->
 
-import Eight from './img/8.svg';
-import Nine from './img/9.svg';
-import Ten from './img/10.svg';
-import Eleven from './img/11.svg';
-import Twelve from './img/12.svg';
-import Thirteen from './img/13.svg';
-import Fourteen from './img/14.svg';
-
-:::info
-
-This procedure has been updated in the Camunda 8.6 release. The procedure used in Camunda 8.5 has been deprecated, and compatibility will be removed in the 8.7 release.
-
-:::
+import Eight from './img/8.jpg';
+import Nine from './img/9.jpg';
+import Ten from './img/10.jpg';
+import Eleven from './img/11.jpg';
+import Twelve from './img/12.jpg';
+import Thirteen from './img/13.jpg';
+import Fourteen from './img/14.jpg';
+import Fifteen from './img/15.jpg';
 
 ## Introduction
 
@@ -55,8 +52,8 @@ Running a dual-region configuration requires users to detect and manage any regi
 
 - A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region concept](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md) or [OpenShift dual-region concept](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md).
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
-    - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
-    - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
+    - [Helm](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
+    - [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
 - `cURL` or similar to interact with the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 ## Terminology
@@ -84,6 +81,16 @@ We use the same procedure to handle the loss of both active and passive regions.
 :::caution
 
 For the failback procedure, the recreated region must not include any active Camunda 8 deployments or residual persistent volumes associated with Camunda 8 or its Elasticsearch instance. It is essential to initiate a clean deployment to prevent data replication and state conflicts.
+
+:::
+
+:::info
+
+In the following examples, direct API calls are used because authentication methods may vary depending on your embedded Identity configuration.
+
+The **Management API** (default port `9600`) is not secured by default.
+
+The **v2 REST API** (default port `8080`) **requires authentication**, described in the [API authentication guide](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
 :::
 
@@ -153,6 +160,12 @@ echo "You have lost $CLUSTER_RECREATED, $CLUSTER_SURVIVING is still alive"
   </TabItem>
 </Tabs>
 
+The `camunda-zeebe-x` pod represents the new architecture that contains the Orchestration Cluster and its components. It includes the former Zeebe Gateway, Operate, Tasklist, the new embedded Identity, and the new Camunda Exporter.
+
+<div style={{textAlign: 'center'}}>
+  <img src={OC} alt="Orchestration Cluster" style={{border: 'none', width: '60%', transform: 'scale(1.3)'}} />
+</div>
+
 ### Failover phase
 
 The Failover phase outlines steps for removing lost brokers, redistributing load, disabling Elasticsearch export to a failed region, and restoring user interaction with Camunda 8 to ensure smooth recovery and continued functionality.
@@ -163,8 +176,8 @@ The Failover phase outlines steps for removing lost brokers, redistributing load
 #### Remove lost brokers from Zeebe cluster in the surviving region
 
 <StateContainer
-current={<Four viewBox="140 40 680 500" />}
-desired={<Five viewBox="140 40 680 500" />}
+current={<img src={Four} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Five} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
@@ -227,7 +240,7 @@ In our example, we went with port-forwarding to a localhost, but other alternati
          "health": "healthy"
       }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
    },
    {
       "nodeId": 2,
@@ -255,7 +268,7 @@ In our example, we went with port-forwarding to a localhost, but other alternati
          "health": "healthy"
       }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
    },
    {
       "nodeId": 4,
@@ -283,7 +296,7 @@ In our example, we went with port-forwarding to a localhost, but other alternati
          "health": "healthy"
       }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
    },
    {
       "nodeId": 6,
@@ -311,43 +324,56 @@ In our example, we went with port-forwarding to a localhost, but other alternati
          "health": "healthy"
       }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
    }
 ],
 "clusterSize": 8,
 "partitionsCount": 8,
 "replicationFactor": 4,
-"gatewayVersion": "8.6.0"
+"gatewayVersion": "8.8.0"
 }
 ```
 
    </summary>
 </details>
 
-2.  Port-forward the service of the Zeebe Gateway to access the [management REST API](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#managementserver)
+2. Port-forward the Zeebe Gateway service to access the [Management REST API](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#managementserver):
 
-    ```bash
-    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
-    ```
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   ```
 
-3.  Based on the [Cluster Scaling APIs](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
-    Depending on which region was lost, the load must be redistributed to the remaining brokers, either the even or odd numbered ones. In our example, we have lost `region 1` and with it our uneven brokers. This means we will have to redistribute to our existing even brokers. Make sure to only run the correct one based on the surviving region's brokers.
+3. Based on the [Cluster Scaling APIs](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute load to the remaining brokers and remove the lost ones.
+   Depending on which region was lost, you must redistribute to either the even- or odd-numbered brokers. In this example, `region 1` was lost, along with the odd-numbered brokers. Therefore, the load is redistributed to the even-numbered brokers. Run the appropriate command for the surviving region to remove the lost brokers and trigger redistribution.
+   Removing the lost (odd-numbered) brokers will automatically redistribute partitions to the remaining (even-numbered) brokers.
 
 <Tabs queryString="lost-region" values={[{label: 'Redistribute to even brokers', value: 'redistribute-to-even'}, {label: 'Redistribute to odd brokers', value: 'redistribute-to-odd'}]}>
 <TabItem value="redistribute-to-even" label="Redistribute to even brokers" default>
 
-    ```bash
-    curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
-    ```
+```bash
+curl -XPATCH 'http://localhost:9600/actuator/cluster?force=true' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "brokers": {
+      "remove": [1,3,5,7]
+      }
+    }'
+```
 
-    </TabItem>
-    <TabItem value="redistribute-to-odd" label="Redistribute to odd brokers">
+  </TabItem>
+  <TabItem value="redistribute-to-odd" label="Redistribute to odd brokers">
 
-    ```bash
-    curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["1", "3", "5", "7"]'
-    ```
+```bash
+curl -XPATCH 'http://localhost:9600/actuator/cluster?force=true' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "brokers": {
+      "remove": [0,2,4,6]
+      }
+    }'
+```
 
-    </TabItem>
+  </TabItem>
 
   </Tabs>
 
@@ -397,7 +423,7 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 2,
@@ -425,7 +451,7 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 4,
@@ -453,7 +479,7 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 6,
@@ -481,13 +507,13 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     }
   ],
   "clusterSize": 4,
   "partitionsCount": 8,
   "replicationFactor": 2,
-  "gatewayVersion": "8.6.0"
+  "gatewayVersion": "8.8.0"
 }
 ```
 
@@ -525,8 +551,8 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 #### Configure Zeebe to disable the Elastic exporter to the lost region
 
 <StateContainer
-current={<Five viewBox="140 40 680 500" />}
-desired={<Six viewBox="140 40 680 500" />}
+current={<img src={Five} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Six} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
@@ -535,6 +561,15 @@ desired={<Six viewBox="140 40 680 500" />}
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | **Zeebe configuration** | Zeebe brokers in the surviving region are still configured to point to the Elasticsearch instance of the lost region. Zeebe cannot continue exporting data. | Elasticsearch exporter to the failed region has been disabled in the Zeebe cluster. Zeebe can export data to Elasticsearch again. |
 | **User interaction**    | Regular interaction with Camunda 8 is not restored.                                                                                                         | Regular interaction with Camunda 8 is restored, marking the conclusion of the temporary recovery.                                 |
+
+:::info
+
+If you have upgraded from a previously migrated 8.7 system, you may still have the legacy `elasticsearchregion0` and `elasticsearchregion1` exporters configured.
+
+- If **both exporters are disabled**, you can safely ignore them.
+- If they are **enabled** (for example, because you’re using **Optimize**), apply the same logic to these exporters as described for the new ones in this guide.
+
+:::
 
 #### Procedure
 
@@ -555,7 +590,7 @@ desired={<Six viewBox="140 40 680 500" />}
    <summary>
 
    ```bash
-   [{"exporterId":"elasticsearchregion0","status":"ENABLED"},{"exporterId":"elasticsearchregion1","status":"ENABLED"}]
+   [{"exporterId":"camundaregion0","status":"ENABLED"},{"exporterId":"camundaregion1","status":"ENABLED"}]
    ```
 
    </summary>
@@ -564,7 +599,7 @@ desired={<Six viewBox="140 40 680 500" />}
 3. Based on the Exporter APIs you will send a request to the Zeebe Gateway to disable the Elasticsearch exporter connected with the lost region.
 
    ```bash
-   curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/disable'
+   curl -XPOST 'http://localhost:9600/actuator/exporters/camundaregion1/disable'
    ```
 
 #### Verification
@@ -581,7 +616,7 @@ curl -XGET 'http://localhost:9600/actuator/exporters'
   <summary>
 
 ```bash
-[{"exporterId":"elasticsearchregion0","status":"ENABLED"},{"exporterId":"elasticsearchregion1","status":"DISABLED"}]
+[{"exporterId":"camundaregion0","status":"ENABLED"},{"exporterId":"camundaregion1","status":"DISABLED"}]
 ```
 
   </summary>
@@ -615,40 +650,56 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 
 ### Failback phase
 
-<Tabs queryString="failback" values={[{label: 'Step 1', value: 'step1'}, {label: 'Step 2', value: 'step2'}, {label: 'Step 3', value: 'step3'}, {label: 'Step 4', value: 'step4'}, {label: 'Step 5', value: 'step5'}, {label: 'Step 6', value: 'step6'}, {label: 'Step 7', value: 'step7'}]}>
+<Tabs queryString="failback" values={[{label: 'Step 1', value: 'step1'}, {label: 'Step 2', value: 'step2'}, {label: 'Step 3', value: 'step3'}, {label: 'Step 4', value: 'step4'}, {label: 'Step 5', value: 'step5'}, {label: 'Step 6', value: 'step6'}, {label: 'Step 7', value: 'step7'}, {label: 'Step 8', value: 'step8'}]}>
 <TabItem value="step1" label="Step 1" default>
 
 #### Deploy Camunda 8 in the newly created region
 
 <StateContainer
-current={<Six viewBox="140 40 680 500" />}
-desired={<Eight viewBox="140 40 680 500" />}
+current={<img src={Six} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Eight} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
 
-| **Details**              | **Current state**                                                                                                   | **Desired state**                                                                                                |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Camunda 8**            | A standalone region with a fully functional Camunda 8 setup, including Zeebe, Operate, Tasklist, and Elasticsearch. | Restore dual-region functionality by deploying Camunda 8 (Zeebe and Elasticsearch) to the newly restored region. |
-| **Operate and Tasklist** | Operate and Tasklist are operational in the standalone region.                                                      | Operate and Tasklist need to stay disabled to avoid interference during the database backup and restore process. |
+| **Details**              | **Current state**                                                                                                                                             | **Desired state**                                                                                                                                                                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Camunda 8**            | A standalone region with a fully functional Camunda 8 setup, including the Orchestration Cluster (Zeebe, Operate, Tasklist, Zeebe Gateway) and Elasticsearch. | Restore dual-region functionality by deploying Camunda 8 isolated to the Orchestration Cluster (Zeebe and Zeebe Gateway) and Elasticsearch in the newly restored region. Disable the standalone Schema Manager to prevent seeding Elasticsearch. |
+| **Operate and Tasklist** | Operate and Tasklist are operational in the standalone region.                                                                                                | Keep Operate and Tasklist disabled in the restored region to avoid interference during the database backup and restore process. They will also be disabled in the following steps for the surviving region.                                      |
 
 #### Procedure
 
-This step is a re-deployment of the recreated region using the same value files that were used during the initial deployment.
+This step involves redeploying the recreated region using the same values files from the initial deployment.
 
-Additionally, the Helm command will disable Operate and Tasklist. These components will only be enabled at the end of the region recovery. Keeping them disabled in the newly created region is necessary to avoid data duplication by their Elasticsearch importers.
+The Helm command also disables Operate and Tasklist. These components will be re-enabled only after region recovery is complete. Keeping them disabled in the newly created region helps prevent data loss, as Operate and Tasklist may still rely on v1 APIs and functionality that are isolated to a single region. Disabling them also prevents user confusion, since no visible updates will appear for their actions while the exporters remain disabled in the following steps.
 
 <Tabs groupId="clusters-types">
   <TabItem value="EKS" label="EKS">
 
 This procedure requires your Helm values file, `camunda-values.yml,` in `aws/dual-region/kubernetes,` used to deploy EKS Dual-region Camunda clusters.
 
-Ensure that the values for `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL` and `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL` correctly point to their respective regions. The placeholder in `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, the result of the `aws/dual-region/scripts/generate_zeebe_helm_values.sh`.
+Ensure that the values for `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL` and `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL` correctly point to their respective regions. The placeholder in `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, the result of the `aws/dual-region/scripts/generate_zeebe_helm_values.sh`.
 
 This step is equivalent to applying for the region to be recreated:
 
 - [Setting up the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#camunda-8-helm-chart-prerequisites)
 - [Deploying the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#deploy-camunda-8)
+
+:::important
+The standalone Schema Manager must be disabled; otherwise, it will prevent a successful restore of the Elasticsearch backup later on. If you forget to disable it, you must manually remove all created indices in Elasticsearch in the restored region before restoring the backup.
+:::
+
+There is no Helm chart option for this setting. Because `orchestration.env` is an array, it cannot be overwritten through an overlay and must be added manually on a temporary basis.
+
+Edit the `camunda-values.yml` file in `aws/dual-region/kubernetes` to include the following under `orchestration.env`:
+
+```yaml
+orchestration:
+  env:
+    - name: CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA
+      value: "false"
+  # ...
+```
 
 From the terminal context of `aws/dual-region/kubernetes` execute:
 
@@ -659,9 +710,11 @@ helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
   --namespace $CAMUNDA_NAMESPACE_RECREATED \
   -f camunda-values.yml \
   -f $REGION_RECREATED/camunda-values.yml \
-  --set operate.enabled=false \
-  --set tasklist.enabled=false
+  --set orchestration.profiles.operate=false \
+  --set orchestration.profiles.tasklist=false
 ```
+
+After successfully applying the recreated region, remove the temporary `CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA` environment variable.
 
 </TabItem>
 <TabItem value="OpenShift" label="OpenShift">
@@ -669,9 +722,30 @@ helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
 Follow the installation steps **recreated region**:
 
 - [Setting up the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#configure-your-deployment-for-each-region) _Optional if you already have your pre-configured `generated-values-file.yml`_
-- Once your values file is generated from the installation step, install **Camunda 8 only in the recreated region**, you will need to adjust the installation command to disable Operate (`--set operate.enabled=false`) and Tasklist (`--set tasklist.enabled=false`):
+- Once your values file is generated from the installation step, install **Camunda 8 only in the recreated region**. Adjust the installation command to disable Operate and Tasklist:
 
-  Example command adapted from the installation step.
+  ```bash
+  --set orchestration.profiles.operate=false \
+  --set orchestration.profiles.tasklist=false
+  ```
+
+  :::important
+  The standalone Schema Manager must be disabled; otherwise, it will prevent a successful restore of the Elasticsearch backup later on. If you forget to disable it, you must manually remove all created indices in Elasticsearch in the restored region before restoring the backup.
+  :::
+
+  There is no Helm chart option for this setting. Because `orchestration.env` is an array, it cannot be overwritten through an overlay and must be added manually on a temporary basis.
+
+  Edit the `generated-values-region-1|2.yaml` to include the following under `orchestration.env`:
+
+  ```yaml
+  orchestration:
+    env:
+      - name: CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA
+        value: "false"
+    # ...
+  ```
+
+  Example command adapted from the installation step:
 
   ```bash
   helm upgrade --install \
@@ -680,9 +754,11 @@ Follow the installation steps **recreated region**:
   --kube-context "$CLUSTER_RECREATED" \
   --namespace "$CAMUNDA_NAMESPACE_RECREATED" \
   -f "<generated-values-region-1|2.yaml>" \
-  --set operate.enabled=false \
-  --set tasklist.enabled=false # <---- don't forget to disable operate and tasklist
+  --set orchestration.profiles.operate=false \
+  --set orchestration.profiles.tasklist=false
   ```
+
+  After successfully applying the recreated region, remove the temporary `CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA` environment variable again.
 
 - [Follow the installation step for the **recreated region only**](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#install-camunda-8-using-helm).
 
@@ -747,14 +823,14 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 1,
       "host": "camunda-zeebe-0.camunda-zeebe.camunda-paris",
       "port": 26501,
       "partitions": [],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 2,
@@ -782,14 +858,14 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 3,
       "host": "camunda-zeebe-1.camunda-zeebe.camunda-paris",
       "port": 26501,
       "partitions": [],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 4,
@@ -817,14 +893,14 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 5,
       "host": "camunda-zeebe-2.camunda-zeebe.camunda-paris",
       "port": 26501,
       "partitions": [],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 6,
@@ -852,20 +928,20 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 7,
       "host": "camunda-zeebe-3.camunda-zeebe.camunda-paris",
       "port": 26501,
       "partitions": [],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
   ],
   "clusterSize": 4,
   "partitionsCount": 8,
   "replicationFactor": 2,
-  "gatewayVersion": "8.6.0"
+  "gatewayVersion": "8.8.0"
 }
 ```
 
@@ -876,36 +952,144 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
   </TabItem>
   <TabItem value="step2" label="Step 2">
 
-#### Pause Zeebe exporters to Elasticsearch, pause Operate and Tasklist
+#### Deactivate Operate and Tasklist in the active region
 
 <StateContainer
-current={<Eight viewBox="140 40 680 500" />}
-desired={<Nine viewBox="140 40 680 500" />}
+current={<img src={Eight} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Nine} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
-<div>
+| **Details**   | **Current State**                                                                                                                                    | **Desired State**                                                                                           |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **Camunda 8** | The recovered region has been deployed with Operate and Tasklist disabled. Users can still access Operate and Tasklist through the surviving region. | Operate and Tasklist are turned off in the surviving region to avoid data loss during the backup procedure. |
 
-| **Details**              | **Current state**                                                                                                                                                                                                                                                  | **Desired state**                                                                                                                                                                                                       |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Camunda 8**            | Functioning Zeebe cluster within a single region: <br/> Working Camunda 8 installation in the surviving region <br/> Non-participating Camunda 8 installation in the recreated region. <br /> Currently exporting data to Elasticsearch from the surviving region. | Preparing the newly created region to take over and restore the dual-region setup. Stop Zeebe exporters to prevent new data from being exported to Elasticsearch, allowing for the creation of an Elasticsearch backup. |
-| **Operate and Tasklist** | Operate and Tasklist are operational in the surviving region.                                                                                                                                                                                                      | Temporarily scale down Operate and Tasklist to zero replicas, preventing user interaction with Camunda 8 and ensuring no new data is imported to Elasticsearch.                                                         |
+#### How to get there
+
+With the Orchestration Cluster, Operate and Tasklist are consolidated with the Zeebe Broker and Gateway into a single application.
+
+Similar to `Step 1`, this step redeploys the active region using the same value files from the initial deployment.
+
+Additionally, the Helm command disables Operate and Tasklist. These components will only be enabled at the end of the full region recovery again.
+
+This step reduces the deployed application to the Zeebe Cluster and Elasticsearch only.
+
+<Tabs groupId="clusters-types">
+  <TabItem value="EKS" label="EKS">
+
+This procedure requires your Helm values file, `camunda-values.yml,` in `aws/dual-region/kubernetes,` used to deploy EKS dual-region Camunda clusters.
+
+Ensure that the values for `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL` and `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL` correctly point to their respective regions. The placeholder in `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, generated by the `aws/dual-region/scripts/generate_zeebe_helm_values.sh` script.
+
+This step is equivalent to applying the configuration for the recreated region:
+
+- [Setting up the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#camunda-8-helm-chart-prerequisites)
+- [Deploying the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#deploy-camunda-8)
+
+If not already done, remove the `CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA` variable from the `camunda-values.yml`.
+
+Edit the `camunda-values.yml` in `aws/dual-region/kubernetes` and remove the following from `orchestration.env`:
+
+```yaml
+orchestration:
+  env:
+    - name: CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA
+      value: "false"
+  # ...
+```
+
+From the `aws/dual-region/kubernetes` directory, run:
+
+```bash
+helm upgrade --install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
+  --kube-context $CLUSTER_SURVIVING \
+  --namespace $CAMUNDA_NAMESPACE_SURVIVING \
+  -f camunda-values.yml \
+  -f $REGION_SURVIVING/camunda-values.yml \
+  --set orchestration.profiles.operate=false \
+  --set orchestration.profiles.tasklist=false
+```
+
+</TabItem>
+<TabItem value="OpenShift" label="OpenShift">
+
+Follow the installation steps for the **surviving region**:
+
+- [Set up the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#configure-your-deployment-for-each-region) (optional if you already have your pre-configured `generated-values-file.yml`)
+- Once your values file is generated from the installation step, upgrade **Camunda 8 only in the surviving region**. Adjust the installation command to disable Operate and Tasklist:
+
+  ```bash
+  --set orchestration.profiles.operate=false`
+  --set orchestration.profiles.tasklist=false`
+  ```
+
+  Example command adapted from the installation step:
+
+  ```bash
+  helm upgrade --install \
+  "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
+  --version "$HELM_CHART_VERSION" \
+  --kube-context "$CLUSTER_SURVIVING" \
+  --namespace "$CAMUNDA_NAMESPACE_SURVIVING" \
+  -f "<generated-values-region-1|2.yaml>" \
+  --set orchestration.profiles.operate=false \
+  --set orchestration.profiles.tasklist=false
+  ```
+
+- [Follow the installation step for the **surviving region only**](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#install-camunda-8-using-helm).
+
+</TabItem>
+</Tabs>
+
+#### Verification
+
+1. If the environment is exposed through an Ingress, verify that Operate and Tasklist are no longer accessible via the Ingress.
+2. Check the logs of any `camunda-zeebe-X` pod to confirm that only a subset of profiles are active:
+
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING logs camunda-zeebe-0 | grep "profiles are active"
+   ```
+
+   ```bash
+   # The default are 5 profiles, so this confirms that Operate and Tasklist are not enabled
+   io.camunda.application.StandaloneCamunda - The following 3 profiles are active: "broker", "identity", "consolidated-auth"
+   ```
+
+3. Alternatively, verify that the configuration does not list Operate and Tasklist as active profiles:
+
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING get cm camunda-zeebe-configuration-unified -oyaml | grep spring -A2
+   ```
+
+   ```bash
+   spring:
+     profiles:
+       active: "broker,identity,consolidated-auth"
+   ```
+
+  </TabItem>
+  <TabItem value="step3" label="Step 3">
+
+#### Pause Camunda exporters to Elasticsearch
+
+<StateContainer
+current={<img src={Nine} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Ten} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1'}} />}
+/>
+
+| **Details**   | **Current state**                                                                                                                                                                                                                                                                                                                                                      | **Desired state**                                                                                                                                                                                                   |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Camunda 8** | The Orchestration Cluster is operating in a single region:<ul><li> Isolated to a [Zeebe cluster](/reference/glossary.md#zeebe-cluster) in the surviving region.</li><li>Non-participating [Zeebe Brokers](/reference/glossary.md#zeebe-broker) in the recreated region.</li><li>Data is currently being exported to Elasticsearch from the surviving region.</li></ul> | Preparing the newly created region to take over and restore the dual-region setup. Stop Camunda exporters to prevent new data from being exported to Elasticsearch, allowing an Elasticsearch backup to be created. |
 
 :::note
 
-This step **does not** affect the process instances in any way. Process information may not be visible in Operate and Tasklist running in the affected instance.
+This step **does not** affect process instances. Process information may not be visible in Operate and Tasklist running in the affected instance.
 
 :::
 
 #### Procedure
 
-1. Disable Operate and Tasklist by scaling to 0:
-
-   ```bash
-   kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$CAMUNDA_RELEASE_NAME-operate --replicas 0
-   kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$CAMUNDA_RELEASE_NAME-tasklist --replicas 0
-   ```
-
-2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl using the [exporting API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#exporting-api):
+1. Disable the Camunda Exporter exporters in Zeebe using kubectl and the [exporting API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#exporting-api):
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -916,34 +1100,24 @@ This step **does not** affect the process instances in any way. Process informat
 
 #### Verification
 
-For Operate and Tasklist, you can confirm that the deployments have successfully scaled down by listing those and indicating `0/0` ready:
+There is no API available to confirm the status of the Camunda exporters. A response code of `204` indicates that the disabling was successful. This is a synchronous operation.
 
-```bash
-kubectl --context $CLUSTER_SURVIVING get deployments $CAMUNDA_RELEASE_NAME-operate $CAMUNDA_RELEASE_NAME-tasklist -n $CAMUNDA_NAMESPACE_SURVIVING
-# NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-# camunda-operate    0/0     0            0           23m
-# camunda-tasklist   0/0     0            0           23m
-```
-
-For the Zeebe Elasticsearch exporters, there's currently no API available to confirm this. Only the response code of `204` indicates a successful disabling. This is a synchronous operation.
-
-</div>
   </TabItem>
-  <TabItem value="step3" label="Step 3">
+  <TabItem value="step4" label="Step 4">
 
 #### Create and restore Elasticsearch backup
 
 <StateContainer
-current={<Nine viewBox="140 40 680 500" />}
-desired={<Ten viewBox="140 40 680 500" />}
+current={<img src={Ten} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Eleven} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
 
-| **Details**              | **Current State**                                                                                                        | **Desired State**                                                                                                                                                                     |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Camunda 8**            | Not reachable by end-users and not processing any new process instances. This state allows for data backup without loss. | Remain unreachable by end-users and not processing any new instances.                                                                                                                 |
-| **Elasticsearch Backup** | No backup is in progress.                                                                                                | Backup of Elasticsearch in the surviving region is initiated and being restored in the recreated region, containing all necessary data. The backup process may take time to complete. |
+| **Details**                          | **Current State**                                                                                                                                | **Desired State**                                                                                                                                                                     |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Camunda 8**<br />_(Zeebe Cluster)_ | Reachable by end-users but not processing any new process instances nor reflecting User changes. This state allows for data backup without loss. | Remain not processing any new instances nor processing user inputs.                                                                                                                   |
+| **Elasticsearch Backup**             | No backup is in progress.                                                                                                                        | Backup of Elasticsearch in the surviving region is initiated and being restored in the recreated region, containing all necessary data. The backup process may take time to complete. |
 
 #### How to get there
 
@@ -984,7 +1158,10 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
 
    ```bash
    ELASTIC_POD=$(kubectl --context $CLUSTER_SURVIVING get pod --selector=app\.kubernetes\.io/name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
-   kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup' -H 'Content-Type: application/json' -d'
+   kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- \
+    curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup' \
+    -H 'Content-Type: application/json' \
+    -d'
    {
    "type": "s3",
    "settings": {
@@ -996,11 +1173,14 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
    '
    ```
 
-3. Create an Elasticsearch backup in the surviving namespace `CAMUNDA_NAMESPACE_SURVIVING`. Depending on the amount of data, this operation will take a while to complete.
+3. Create an Elasticsearch backup in the surviving namespace `CAMUNDA_NAMESPACE_SURVIVING`. Depending on the amount of data, this operation will take a while to complete. It also explicitly includes the global state, which is required during restore because it contains the Camunda index templates.
 
    ```bash
    # The backup will be called failback
-   kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup/failback?wait_for_completion=true'
+   kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- \
+    curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup/failback?wait_for_completion=true' \
+    -H 'Content-Type: application/json' \
+    -d '{"include_global_state": true}'
    ```
 
 4. Verify the backup has been completed successfully by checking all backups and ensuring the `state` is `SUCCESS`:
@@ -1018,67 +1198,58 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
      "snapshots": [
        {
          "snapshot": "failback",
-         "uuid": "uTHGdUAYSk-91aAS0sMKFQ",
+         "uuid": "1S_C05K0RjqFyWMfjSKI_A",
          "repository": "camunda_backup",
-         "version_id": 8090299,
-         "version": "8.9.2",
+         "version_id": 8525000,
+         "version": "8.18.0",
          "indices": [
-           "operate-web-session-1.1.0_",
-           "tasklist-form-8.4.0_",
-           "operate-process-8.3.0_",
-           "zeebe-record_process-instance-creation_8.4.5_2024-03-28",
-           "operate-batch-operation-1.0.0_",
-           "operate-user-1.2.0_",
-           "operate-incident-8.3.1_",
-           "zeebe-record_job_8.4.5_2024-03-28",
-           "operate-variable-8.3.0_",
-           "tasklist-web-session-1.1.0_",
-           "tasklist-draft-task-variable-8.3.0_",
-           "operate-operation-8.4.0_",
-           "zeebe-record_process_8.4.5_2024-03-28",
-           ".ds-.logs-deprecation.elasticsearch-default-2024.03.28-000001",
-           "tasklist-process-8.4.0_",
-           "operate-metric-8.3.0_",
-           "operate-flownode-instance-8.3.1_",
-           "tasklist-flownode-instance-8.3.0_",
-           "tasklist-variable-8.3.0_",
+           "camunda-usage-metric-tu-8.8.0_",
            "tasklist-metric-8.3.0_",
-           "operate-post-importer-queue-8.3.0_",
-           "tasklist-task-variable-8.3.0_",
-           "operate-event-8.3.0_",
-           "tasklist-process-instance-8.3.0_",
+           "camunda-mapping-rule-8.8.0_",
+           "operate-job-8.6.0_",
+           "camunda-user-8.8.0_",
+           "camunda-usage-metric-8.8.0_",
            "operate-import-position-8.3.0_",
+           "camunda-correlated-message-subscription-8.8.0_",
+           "operate-variable-8.3.0_",
+           "operate-message-8.5.0_",
            "operate-decision-requirements-8.3.0_",
-           "zeebe-record_command-distribution_8.4.5_2024-03-28",
-           "operate-list-view-8.3.0_",
-           "zeebe-record_process-instance_8.4.5_2024-03-28",
-           "tasklist-import-position-8.2.0_",
-           "tasklist-user-1.4.0_",
+           "operate-process-8.3.0_",
+           "camunda-authorization-8.8.0_",
            "operate-decision-instance-8.3.0_",
-           "zeebe-record_deployment_8.4.5_2024-03-28",
-           "operate-migration-steps-repository-1.1.0_",
-           "tasklist-migration-steps-repository-1.1.0_",
-           ".ds-ilm-history-5-2024.03.28-000001",
-           "operate-decision-8.3.0_",
+           "operate-list-view-8.3.0_",
+           "camunda-group-8.8.0_",
+           "operate-batch-operation-1.0.0_",
+           "tasklist-form-8.4.0_",
+           "tasklist-task-variable-8.3.0_",
+           "operate-metric-8.3.0_",
+           "camunda-web-session-8.8.0_",
            "operate-sequence-flow-8.3.0_",
-           "tasklist-task-8.4.0_"
+           "tasklist-task-8.8.0_",
+           "tasklist-draft-task-variable-8.3.0_",
+           "operate-flownode-instance-8.3.1_",
+           "operate-event-8.3.0_",
+           "tasklist-import-position-8.2.0_",
+           "operate-decision-8.3.0_",
+           "operate-incident-8.3.1_",
+           "operate-operation-8.4.1_",
+           "camunda-role-8.8.0_",
+           "operate-post-importer-queue-8.3.0_",
+           "camunda-tenant-8.8.0_"
          ],
-         "data_streams": [
-           "ilm-history-5",
-           ".logs-deprecation.elasticsearch-default"
-         ],
+         "data_streams": [],
          "include_global_state": true,
          "state": "SUCCESS",
-         "start_time": "2024-03-28T03:17:38.340Z",
-         "start_time_in_millis": 1711595858340,
-         "end_time": "2024-03-28T03:17:39.340Z",
-         "end_time_in_millis": 1711595859340,
-         "duration_in_millis": 1000,
+         "start_time": "2025-09-29T11:38:18.285Z",
+         "start_time_in_millis": 1759145898285,
+         "end_time": "2025-09-29T11:38:19.292Z",
+         "end_time_in_millis": 1759145899292,
+         "duration_in_millis": 1007,
          "failures": [],
          "shards": {
-           "total": 43,
+           "total": 33,
            "failed": 0,
-           "successful": 43
+           "successful": 33
          },
          "feature_states": []
        }
@@ -1118,7 +1289,10 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
 7. Restore Elasticsearch backup in the new region namespace `CAMUNDA_NAMESPACE_RECREATED`. Depending on the amount of data, this operation may take a while to complete.
 
    ```bash
-   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XPOST 'http://localhost:9200/_snapshot/camunda_backup/failback/_restore?wait_for_completion=true'
+   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- \
+    curl -XPOST 'http://localhost:9200/_snapshot/camunda_backup/failback/_restore?wait_for_completion=true' \
+    -H 'Content-Type: application/json' \
+    -d '{"include_global_state": true}'
    ```
 
 8. Verify that the restore has been completed successfully in the new region:
@@ -1139,16 +1313,16 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
       {
          "snapshot": "failback",
          "repository": "camunda_backup",
-         "uuid": "8AmblqA2Q9WAhuDk-NO5Cg",
+         "uuid": "1S_C05K0RjqFyWMfjSKI_A",
          "state": "SUCCESS",
          "include_global_state": true,
          "shards_stats": {
          "initializing": 0,
          "started": 0,
          "finalizing": 0,
-         "done": 43,
+         "done": 33,
          "failed": 0,
-         "total": 43
+         "total": 33
          },
          "stats": {
          "incremental": {
@@ -1176,93 +1350,30 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
 </div>
 
   </TabItem>
-  <TabItem value="step4" label="Step 4">
-
-#### Start Operate and Tasklist again
-
-<StateContainer
-current={<Ten viewBox="140 40 680 500" />}
-desired={<Eleven viewBox="140 40 680 500" />}
-/>
-
-<div>
-
-| **Details**              | **Current state**                                               | **Desired state**                                                                                                       |
-| ------------------------ | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| **Camunda 8**            | Remains unreachable by end-users while restoring functionality. | Enable Operate and Tasklist in both the surviving and recreated regions to allow user interaction with Camunda 8 again. |
-| **Elasticsearch Backup** | Backup has been created and restored to the recreated region.   | N/A                                                                                                                     |
-
-#### Procedure
-
-We need to reapply/upgrade the Helm release to enable and deploy Operate and Tasklist.
-
-<Tabs groupId="clusters-types">
-  <TabItem value="EKS" label="EKS">
-
-The base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` contains the adjustments for Elasticsearch and the Zeebe initial brokers.
-
-1. Upgrade the normal Camunda environment in `CAMUNDA_NAMESPACE_SURVIVING` and `REGION_SURVIVING` to deploy Operate and Tasklist:
-
-   ```bash
-   helm upgrade $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
-   --version $HELM_CHART_VERSION \
-   --kube-context $CLUSTER_SURVIVING \
-   --namespace $CAMUNDA_NAMESPACE_SURVIVING \
-   -f camunda-values.yml \
-   -f $REGION_SURVIVING/camunda-values.yml
-   ```
-
-2. Upgrade the new region environment in `CAMUNDA_NAMESPACE_RECREATED` and `REGION_RECREATED` to deploy Operate and Tasklist:
-
-   ```bash
-   helm upgrade $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
-   --version $HELM_CHART_VERSION \
-   --kube-context $CLUSTER_RECREATED \
-   --namespace $CAMUNDA_NAMESPACE_RECREATED \
-   -f camunda-values.yml \
-   -f $REGION_RECREATED/camunda-values.yml
-   ```
-
-</TabItem>
-<TabItem value="OpenShift" label="OpenShift">
-
-Follow the installation instruction for the two regions, you will need to apply helm upgrade on the `CLUSTER_RECREATED` and on the `CLUSTER_SURVIVING`.
-
-- [Apply the initial installation on the two regions](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#install-camunda-8-using-helm).
-- Ensure that the services are exported correctly using `subctl`.
-- This step will re-enable Operate and Tasklist in the two regions.
-
-</TabItem>
-</Tabs>
-
-#### Verification
-
-For Operate and Tasklist, you can confirm that the deployments have been successfully deployed by listing those and indicating `1/1` ready. The same command can be applied for the `CLUSTER_RECREATED` and `CAMUNDA_NAMESPACE_RECREATED`:
-
-```bash
-kubectl --context $CLUSTER_SURVIVING get deployments -n $CAMUNDA_NAMESPACE_SURVIVING
-# NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
-# camunda-operate         1/1     1            1           3h24m
-# camunda-tasklist        1/1     1            1           3h24m
-# camunda-zeebe-gateway   1/1     1            1           3h24m
-```
-
-</div>
-  </TabItem>
   <TabItem value="step5" label="Step 5">
 
-#### Initialize new Zeebe exporter to the recreated region
+#### Initialize new Camunda exporter to the recreated region
 
 <StateContainer
-current={<Eleven viewBox="140 40 680 500" />}
-desired={<Twelve viewBox="140 40 680 500" />}
+current={<img src={Eleven} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Twelve} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
 
-| **Details**   | **Current state**                                   | **Desired state**                                                                                                                                                                                                                            |
-| ------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Camunda 8** | Reachable to end-users, but not exporting any data. | Start a new exporter to the recreated region.<br /> Ensure that both Elasticsearch instances are populated for data redundancy. <br /> Separate the initialization step (asynchronous) and confirm completion before resuming the exporters. |
+| **Details**              | **Current state**                                               | **Desired state**                                                                                                                                                                                                                            |
+| ------------------------ | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Camunda 8**            | Remains unreachable by end-users while restoring functionality. | Start a new exporter to the recreated region.<br /> Ensure that both Elasticsearch instances are populated for data redundancy. <br /> Separate the initialization step (asynchronous) and confirm completion before resuming the exporters. |
+| **Elasticsearch Backup** | Backup has been created and restored to the recreated region.   | N/A                                                                                                                                                                                                                                          |
+
+:::info
+
+If you have upgraded from a previously migrated 8.7 system, you may still have the legacy `elasticsearchregion0` and `elasticsearchregion1` exporters configured.
+
+- If **both exporters are disabled**, you can safely ignore them.
+- If the old exporter is **enabled** in the survived region (for example, because you’re using **Optimize**), apply the same logic to these exporters as described for the new ones in this guide.
+
+:::
 
 #### How to get there
 
@@ -1270,7 +1381,7 @@ desired={<Twelve viewBox="140 40 680 500" />}
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
-   curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/enable' -H 'Content-Type: application/json' -d '{"initializeFrom" : "elasticsearchregion0"}'
+   curl -XPOST 'http://localhost:9600/actuator/exporters/camundaregion1/enable' -H 'Content-Type: application/json' -d '{"initializeFrom" : "camundaregion0"}'
    ```
 
 #### Verification
@@ -1287,7 +1398,7 @@ curl -XGET 'http://localhost:9600/actuator/exporters'
   <summary>
 
 ```bash
-[{"exporterId":"elasticsearchregion0","status":"ENABLED"},{"exporterId":"elasticsearchregion1","status":"ENABLED"}]
+[{"exporterId":"camundaregion0","status":"ENABLED"},{"exporterId":"camundaregion1","status":"ENABLED"}]
 ```
 
   </summary>
@@ -1321,18 +1432,18 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 </TabItem>
   <TabItem value="step6" label="Step 6">
 
-#### Reactivate Zeebe exporter
+#### Reactivate Camunda exporter
 
 <StateContainer
-current={<Twelve viewBox="140 40 680 500" />}
-desired={<Thirteen viewBox="140 40 680 500" />}
+current={<img src={Twelve} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Thirteen} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
 
-| **Details**   | **Current state**                                                                                                                                   | **Desired state**                                                                          |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| **Camunda 8** | Reachable to end-users, but currently not exporting any data. Exporters are enabled for both regions, with the operation confirmed to be completed. | Reactivate existing exporters that will allow Zeebe to export data to Elasticsearch again. |
+| **Details**   | **Current state**                                                                                                                                          | **Desired state**                                                                          |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Camunda 8** | Not reachable yet by end-users and currently not exporting any data. Exporters are enabled for both regions, with the operation confirmed to be completed. | Reactivate existing exporters that will allow Zeebe to export data to Elasticsearch again. |
 
 #### How to get there
 
@@ -1356,31 +1467,67 @@ There is currently no API available to confirm the reactivation of the exporters
 #### Add new brokers to the Zeebe cluster
 
 <StateContainer
-current={<Thirteen viewBox="140 40 680 500" />}
-desired={<Fourteen viewBox="140 40 680 500" />}
+current={<img src={Thirteen} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Fourteen} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
 
-| **Details**          | **Current state**                                                                                                                  | **Desired state**                                                                             |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| **Camunda 8**        | Running in two regions, but not yet utilizing all Zeebe brokers. Operate and Tasklist redeployed, Elasticsearch exporters enabled. | Fully functional Camunda 8 setup utilizing both regions, recovering all dual-region benefits. |
-| **User interaction** | Users can interact with Camunda 8 again.                                                                                           | Dual-region functionality is restored, maximizing reliability and performance benefits.       |
+| **Details**   | **Current state**                                                                                                                          | **Desired state**                                                                                      |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| **Camunda 8** | Running in two regions, but not yet utilizing all Zeebe brokers. Operate and Tasklist remain unavailable, Elasticsearch exporters enabled. | Fully functional Zeebe cluster setup utilizing both regions, recovering the main dual-region benefits. |
 
 #### How to get there
 
-1. Based on the base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes`, you have to extract the `clusterSize` and `replicationFactor` as you have to re-add the brokers to the Zeebe cluster.
-2. Port-forwarding the Zeebe Gateway via `kubectl` for the REST API allows you to send a Cluster API call to add the new brokers to the Zeebe cluster with the previous information on size and replication.
-   E.g. in our case the `clusterSize` is 8 and `replicationFactor` is 4 meaning we have to list all broker IDs starting from 0 to 7 and set the correct `replicationFactor` in the query.
+1.  From the base Helm values file (`camunda-values.yml`) in `aws/dual-region/kubernetes`, extract the `clusterSize` and `replicationFactor` values. You’ll need these when re-adding the brokers to the Zeebe cluster.
 
-   ```bash
-   kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
-   curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?replicationFactor=4' -H 'Content-Type: application/json' -d '["0", "1", "2", "3", "4", "5", "6", "7"]'
-   ```
+2.  Port-forward the Zeebe Gateway to access the [management REST API](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#managementserver). This allows you to send a Cluster API call to add the new brokers to the Zeebe cluster using the previously extracted `clusterSize` and `replicationFactor`.
 
-   :::note
-   This step can take longer depending on the size of the cluster, size of the data and the current load.
-   :::
+    In this example, the `clusterSize` is `8` and the `replicationFactor` is `4`. Because the uneven brokers were lost, re-add them (brokers with IDs `1, 3, 5, 7`) and set the appropriate `replicationFactor` in the request.
+
+    ```bash
+    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+    ```
+
+    <Tabs queryString="lost-region" values={[{label: 'Re-add uneven brokers', value: 'redistribute-to-even'}, {label: 'Re-add even brokers', value: 'redistribute-to-odd'}]}>
+    <TabItem value="redistribute-to-even" label="Add the uneven brokers" default>
+
+         ```bash
+         curl -XPATCH 'http://localhost:9600/actuator/cluster?force=true' \
+           -H 'Content-Type: application/json' \
+           -d '{
+             "brokers": {
+               "add": [1,3,5,7]
+               },
+             "partitions": {
+               "replicationFactor": 4
+             }
+           }'
+         ```
+
+         </TabItem>
+         <TabItem value="redistribute-to-odd" label="Add the even brokers">
+
+         ```bash
+         curl -XPATCH 'http://localhost:9600/actuator/cluster?force=true' \
+           -H 'Content-Type: application/json' \
+           -d '{
+             "brokers": {
+               "add": [0,2,4,6]
+               },
+             "partitions": {
+               "replicationFactor": 4
+             }
+           }'
+         ```
+
+     </TabItem>
+
+     </Tabs>
+
+    :::note
+    This step can take longer depending on the cluster size, data volume, and current load.
+    :::
 
 #### Verification
 
@@ -1407,8 +1554,382 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
   </summary>
 </details>
 
+Another way to confirm this is to use the v2 topology REST endpoint to see that partitions are actively re-distributed to the uneven members.
+
+```bash
+kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
+
+curl -L -X GET 'http://localhost:8080/v2/topology' \
+  -H 'Accept: application/json'
+```
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+{
+  "brokers": [
+    {
+      "nodeId": 0,
+      "host": "camunda-zeebe-0.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    },
+    {
+      "nodeId": 1,
+      "host": "camunda-zeebe-0.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    },
+    {
+      "nodeId": 2,
+      "host": "camunda-zeebe-1.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    },
+    {
+      "nodeId": 3,
+      "host": "camunda-zeebe-1.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    },
+    {
+      "nodeId": 4,
+      "host": "camunda-zeebe-2.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    },
+    {
+      "nodeId": 5,
+      "host": "camunda-zeebe-2.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    },
+    {
+      "nodeId": 6,
+      "host": "camunda-zeebe-3.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 4,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    },
+    {
+      "nodeId": 7,
+      "host": "camunda-zeebe-3.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    },
+  ],
+  "clusterSize": 4,
+  "partitionsCount": 8,
+  "replicationFactor": 2,
+  "gatewayVersion": "8.8.0"
+}
+```
+
+  </summary>
+</details>
+
+</div>
+  </TabItem>
+    <TabItem value="step8" label="Step 8">
+
+#### Start Operate and Tasklist
+
+<StateContainer
+current={<img src={Fourteen} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Fifteen} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+/>
+
+<div>
+
+| **Details**          | **Current state**                                                                                                          | **Desired state**                                                                                                   |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Camunda 8**        | Remains unreachable by end-users while dual-region functionality is being restored.                                        | Enable Operate and Tasklist in both the surviving and recreated regions to restore user interaction with Camunda 8. |
+| **User interaction** | Users can interact with Zeebe cluster again. Dual-region functionality is restored, improving reliability and performance. | Users can fully utilize the Camunda 8 environment again.                                                            |
+
+#### Procedure
+
+:::info
+
+This step is executed at this stage because the application must be redeployed — all components run within the same Kubernetes pod. Performing it earlier would block the automatic rollout, as readiness only complete once Zeebe brokers have joined the cluster. Executing it prematurely would therefore require manual intervention.
+
+:::
+
+Reapply or upgrade the Helm release to enable and deploy Operate and Tasklist.
+
+<Tabs groupId="clusters-types">
+  <TabItem value="EKS" label="EKS">
+
+Assuming based on **Step 1** and **Step 2**, the base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` includes the adjustments for Elasticsearch and the Zeebe initial brokers.
+
+Make sure to remove the `CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA` variable from `camunda-values.yml`.
+
+Edit the `camunda-values.yml` in `aws/dual-region/kubernetes` and remove the following from the `orchestration.env`:
+
+```yaml
+orchestration:
+  env:
+    - name: CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA
+      value: "false"
+  # ...
+```
+
+1. Upgrade the Camunda environment in the surviving region (`CAMUNDA_NAMESPACE_SURVIVING` and `REGION_SURVIVING`) to deploy Operate and Tasklist:
+
+   ```bash
+   helm upgrade $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
+   --version $HELM_CHART_VERSION \
+   --kube-context $CLUSTER_SURVIVING \
+   --namespace $CAMUNDA_NAMESPACE_SURVIVING \
+   -f camunda-values.yml \
+   -f $REGION_SURVIVING/camunda-values.yml
+   ```
+
+2. Upgrade the environment in new region (`CAMUNDA_NAMESPACE_RECREATED` and `REGION_RECREATED`) to deploy Operate and Tasklist:
+
+   ```bash
+   helm upgrade $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
+   --version $HELM_CHART_VERSION \
+   --kube-context $CLUSTER_RECREATED \
+   --namespace $CAMUNDA_NAMESPACE_RECREATED \
+   -f camunda-values.yml \
+   -f $REGION_RECREATED/camunda-values.yml
+   ```
+
+</TabItem>
+<TabItem value="OpenShift" label="OpenShift">
+
+Follow the installation instructions for both regions. You’ll need to apply `helm upgrade` on both `CLUSTER_RECREATED` and `CLUSTER_SURVIVING`.
+
+Make sure to remove the `CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA` variable from `camunda-values.yml`.
+
+Edit the `generated-values-region-1|2.yml` file and remove the following from the `orchestration.env`:
+
+```yaml
+orchestration:
+  env:
+    - name: CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA
+      value: "false"
+  # ...
+```
+
+- [Apply the initial installation on the two regions](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#install-camunda-8-using-helm).
+- Ensure that the services are exported correctly using `subctl`.
+- This step re-enables Operate and Tasklist in both regions.
+
+</TabItem>
+</Tabs>
+
+#### Verification
+
+1. If the environment is exposed through an Ingress, verify that Operate and Tasklist are reachable again.
+2. Check the logs of any `camunda-zeebe-X` pod to confirm the active profiles.
+
+   Run this command for both the surviving and recreated clusters (`CLUSTER_RECREATED` and `CAMUNDA_NAMESPACE_RECREATED`):
+
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING logs camunda-zeebe-0 | grep "profiles are active"
+   ```
+
+   ```bash
+   # The default are 5 profiles, so this confirms that Operate and Tasklist are enabled
+   io.camunda.application.StandaloneCamunda - The following 5 profiles are active: "broker", "operate", "tasklist", "identity", "consolidated-auth"
+   ```
+
+3. Alternatively, verify that the configuration lists Operate and Tasklist as active profiles:
+
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING get cm camunda-zeebe-configuration-unified -oyaml | grep spring -A2
+   ```
+
+   ```bash
+   spring:
+     profiles:
+       active: "broker,operate,tasklist,identity,consolidated-auth"
+   ```
+
 </div>
   </TabItem>
 </Tabs>
 
-In conclusion, adhering to this updated operational procedure ensures a structured and efficient recovery process for maintaining operational continuity in dual-region deployments. Please remain cautious in managing dual-region environments and be prepared to implement the outlined steps for successful failover and failback.
+---
+
+### Conclusion
+
+Following this procedure ensures a structured and efficient recovery process that maintains operational continuity in dual-region deployments. Always manage dual-region environments carefully, and be prepared to follow these steps to perform a successful failover and failback.

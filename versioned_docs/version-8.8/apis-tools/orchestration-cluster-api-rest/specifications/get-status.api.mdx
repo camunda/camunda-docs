@@ -1,0 +1,59 @@
+---
+id: get-status
+title: "Get cluster status"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Get cluster status"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVE1v2zAM/SuCLru0cdptQJFb5mZBhi4p6mTFkOagOEwszJY8iU5rGP7voySnXwjQ9rZTLJLhIx8f2XAUO8sHSx7nlUUwfHXCdQlGoNRqsuEDvgNMUGBl+QnfgE2NLJ2PPHfqTi2X8WyaTJL5aBr/HiTzm9l0vFo5T5xB+scyzIBlIHLMmPVpmN56YxoA2bpmezByW0u1Y9L7DHyyTCDLQVhkWgErhUHpYNm9pEyiS1m7kA2YHtVmwJZaWaBuGn7e/+J+XtY7f4YqLVtcM6E2LBMfxWpP+Nf+5zfzX85upx5ho8EypZGg9kCW+h0QhFEAZrqbAPVXCszoEdnDMCwYIs4Nr+GVycnX2DSDQrSDKGoybbEdNKU22Eb7c4rfCyPFOg8EOXfoYCuqnD55rlORe/PrObu+nEOJAg7TmxmCshh0wjrxsJtRMmdjgXAvas+Tg38Jc9G/6B9FcKHvyD68nrDQuQcIHb+EyBDLoxAh+KMgbbtyZKeVkVgnLkWg8BsIA2ZYubE0HOsSnrA9knuvfRBZwsd3bQrhavxxO3flr4WV6VspXIxXhFRb7QMl5s5zvAMq3k2bpBE67/fO6J1qhSL1w3BzJHssikptBBupnVRAK6h2FBeU5GqwJKMdybNa91JdRGkIf/yV1lZERPuaaMfdVhtG/6FAmVJxtNidzg+YF4dFcZubyxRocY+UdhU87Fdohp31+h8pcZ3rdVQIqaIOwkbx8Odiejk8vZrEo2kyOqWMPXxAT29JGi+EelbHGPBxo+3RI9h4YkHhf3cPOzUhPGBU5kSCG5WnruluyZJ3PZG+wz1Y8qYhucHC5G3rzH8rMDXZV0/nw72eX6fxiJTc/gPu8ivB
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get cluster status"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/status"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description:
+        "The cluster is UP and has at least one partition with a healthy leader.",
+    },
+    "503": {
+      description:
+        "The cluster is DOWN and does not have any partition with a healthy leader.",
+    },
+  }}
+></StatusCodes>

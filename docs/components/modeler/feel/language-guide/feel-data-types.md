@@ -35,7 +35,8 @@ A whole or floating point number. The number can be negative.
 
 ### String
 
-A sequence of characters enclosed in double quotes `"`. The sequence can also contain escaped characters starting with `\` (e.g. `\'`, `\"`, `\\`, `\n`, `\r`, `\t`, unicode like `\u269D` or `\U101EF`).
+A sequence of characters enclosed in double quotes `"`. The sequence can contain escaped characters starting with
+`\` (e.g. `\'`, `\"`, `\\`, `\n`, `\r`, `\t`, Unicode like `\u269D` or `\U101EF`) and can span multiple lines.
 
 - Java Type: `java.lang.String`
 
@@ -70,38 +71,46 @@ date("2017-03-10")
 
 ### Time
 
-A local or zoned time. The time can have an offset or time zone ID.
+A local or zoned time. The time can have an optional timezone offset. The usage of a time zone ID is deprecated because
+it can lead to ambiguous results without a date component.
 
-- Format: `HH:mm:ss` / `HH:mm:ss+/-HH:mm` / `HH:mm:ss@ZoneId`
+- Format: `HH:mm:ss` / `HH:mm:ss+/-HH:mm`
 - Java Type: `java.time.LocalTime` / `java.time.OffsetTime`
 
 ```feel
 time("11:45:30")
 time("13:30")
 time("11:45:30+02:00")
-time("10:31:10@Europe/Paris")
 
 @"11:45:30"
 @"13:30"
 @"11:45:30+02:00"
-@"10:31:10@Europe/Paris"
 ```
 
 ### Date-time
 
 A date with a local or zoned time component. The time can have an offset or time zone ID.
 
-- Format: `yyyy-MM-dd'T'HH:mm:ss` / `yyyy-MM-dd'T'HH:mm:ss+/-HH:mm` / `yyyy-MM-dd'T'HH:mm:ss@ZoneId`
+- Formats:
+  - `yyyy-MM-dd'T'HH:mm:ss`
+  - `yyyy-MM-dd'T'HH:mm:ssZ`
+  - `yyyy-MM-dd'T'HH:mm:ss+/-HH:mm`
+  - `yyyy-MM-dd'T'HH:mm:ss@ZoneId`
+  - `yyyy-MM-dd'T'HH:mm:ss+/-HH:mm[ZoneId]`
 - Java Type: `java.time.LocalDateTime` / `java.time.DateTime`
 
 ```feel
 date and time("2015-09-18T10:31:10")
+date and time("2015-09-18T10:31:10Z")
 date and time("2015-09-18T10:31:10+01:00")
 date and time("2015-09-18T10:31:10@Europe/Paris")
+date and time("2015-09-18T10:31:10+02:00[Europe/Paris]")
 
 @"2015-09-18T10:31:10"
+@"2015-09-18T10:31:10Z"
 @"2015-09-18T10:31:10+01:00"
 @"2015-09-18T10:31:10@Europe/Paris"
+@"2015-09-18T10:31:10+02:00[Europe/Paris]"
 ```
 
 ### Days-time-duration

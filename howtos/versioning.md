@@ -9,7 +9,7 @@ Depending on the version, location of source files and sidebar navigation defini
 | Instance | Version(s)         | Source path                                       | Sidebars path                                                         |
 | -------- | ------------------ | ------------------------------------------------- | --------------------------------------------------------------------- |
 | `docs`   | Next               | [/docs/](../docs/)                                | [sidebars.js](../sidebars.js)                                         |
-| `docs`   | 8.7, 8.6, 8.5, ... | [/versioned_docs/version-\*/](../versioned_docs/) | [versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/) |
+| `docs`   | 8.8, 8.7, 8.6, ... | [/versioned_docs/version-\*/](../versioned_docs/) | [versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/) |
 
 ## Create new version
 
@@ -39,7 +39,7 @@ On the `main` docs branch, configure the `publish-prod` workflow to ignore tags 
 
 Create a new branch named `unsupported/x.xx` where `x.xx` is the version to be archived. The branch should be created from the latest commit on the `main` branch.
 
-For example, for the 8.5 docs archival, you would create a new branch named `unsupported/8.5`.
+For example, for the 8.6 docs archival, you would create a new branch named `unsupported/8.6`.
 
 #### Step 3: Create and publish the unsupported branch
 

@@ -10,7 +10,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 <div class="alphabet-rows">
   <div class="alphabet-navigation">
-    <div class="letter-link">A</div>
+    <div class="letter-link"><a href="#a">A</a></div>
     <div class="letter-link"><a href="#b">B</a></div>
     <div class="letter-link"><a href="#c">C</a></div>
     <div class="letter-link"><a href="#d">D</a></div>
@@ -31,7 +31,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link">Q</div>
     <div class="letter-link"><a href="#r">R</a></div>
     <div class="letter-link"><a href="#s">S</a></div>
-    <div class="letter-link">T</div>
+    <div class="letter-link"><a href="#t">T</a></div>
     <div class="letter-link"><a href="#u">U</a></div>
     <div class="letter-link">V</div>
     <div class="letter-link"><a href="#w">W</a></div>
@@ -40,6 +40,29 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link"><a href="#z">Z</a></div>
   </div>
 </div>
+
+## A
+
+### Agentic orchestration
+
+The governed coordination and management of AI agents, humans, and systems in a blended deterministic and dynamic process workflow to achieve defined goals.
+
+For example, orchestrate when and how AI agents act within a process, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop. You can build AI agents with Camunda using BPMN.
+
+- [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
+
+### Artificial intelligence (AI)
+
+A broad field of computer science focused on creating machines that can perform tasks requiring human-like intelligence. In practice, AI involves programming computers to learn, reason, and self-correct when solving problems. For example, AI applications include language understanding, image recognition, decision-making, and automation of complex tasks.
+
+### AI agent
+
+An autonomous system, typically powered by an [LLM](#large-language-model-llm), that perceives its environment, makes decisions, and acts to achieve goals. AI agents can perform tasks, interact with other agents or systems, and operate with varying degrees of independence.
+
+For example, build an invoice-processing AI agent in Camunda with BPMN, using an ad‑hoc subprocess and an AI Agent connector to provide LLM reasoning, tool calling, and short‑term memory in a governed feedback loop.
+
+- [AI agents](/components/agentic-orchestration/ai-agents.md)
+- [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
 
 ## B
 
@@ -68,6 +91,10 @@ See [Zeebe Client](#zeebe-client).
 ### Cluster
 
 See [Zeebe cluster](#zeebe-cluster).
+
+### Cluster variable
+
+A cluster [variable](../../components/concepts/variables/) is a centrally managed configuration value available across a Camunda cluster. It can be defined globally or at the tenant level and is used to provide environment-specific settings, such as API endpoints, feature flags, and shared configuration.
 
 ### Camunda 8
 
@@ -98,6 +125,10 @@ Connector types:
 - [Inbound](#inbound-connector)
 - [Protocol](#protocol-connector)
 
+### Context window
+
+The amount of text (in [tokens](#token-ai)) a model can consider at once when generating a response. A larger context window allows the model to handle longer inputs.
+
 ### Correlation
 
 Correlation refers to the act of matching a [message](#message) with an inflight [process instance](#process-instance).
@@ -106,7 +137,7 @@ Correlation refers to the act of matching a [message](#message) with an inflight
 
 ### Correlation key
 
-A correlation is an attribute within a [message](#message) that is used to match the message against a certain [variable](#process-instance-variable) within an inflight message. If the value of the correlation key matches the value of the [variable](#process-instance-variable) within the [process instance](#process-instance), the message is matched.
+A correlation is an attribute within a [message](#message) that is used to match the message against a certain [variable](#process-variable) within an inflight message. If the value of the correlation key matches the value of the variable within the [process instance](#process-instance), the message is matched.
 
 - [Message correlation](/components/concepts/messages.md)
 
@@ -136,13 +167,19 @@ A BPMN element is part of a [process](#process), defining one part of its BPMN m
 
 ### Element template
 
-Use an element template to extend the Desktop Modeler or Web Modeler with domain-specific diagram [elements](#element). Element templates are used by [connectors](#connector) to create the connector-specific [element](#element) configuration.
+Use an element template to extend [Modeler](/components/modeler/about-modeler.md) with domain-specific diagram [elements](#element). The user edits such elements through a UI defined by the element template, and in the process configures standard technical bindings understood by the engine in simple and predictable ways. Element templates are used by [connectors](#connector) to create the connector-specific [element](#element) configuration.
 
 - [Element templates](/components/modeler/element-templates/about-templates.md)
 
+### Embedding (vector embedding)
+
+A vector representation of data, including words, sentences, images, in a numerical space, where similar items are positioned near each other. Embeddings allow AI systems to compare meaning and perform tasks like semantic search.
+
+- [Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)
+
 ### Event
 
-An event represents a state change associated with an aspect of an executing [process instance](#process-instance). Events capture [variable](#process-instance-variable) changes, state transition in process elements, and so on. An event is represented by a timestamp, the variable name, and variable value. Events are stored in an append-only log.
+An event represents a state change associated with an aspect of an executing [process instance](#process-instance). Events capture [variable](#process-variable) changes, state transition in process elements, and so on. An event is represented by a timestamp, the variable name, and variable value. Events are stored in an append-only log.
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
@@ -157,6 +194,10 @@ An execution listener is a mechanism that allows users to execute custom logic a
 See [Zeebe Exporter](#zeebe-exporter).
 
 ## F
+
+### Fine-tuning
+
+The process of adapting a pre-trained AI model to a specific task or dataset, allowing it to specialize while leveraging prior knowledge.
 
 ### Flow node
 
@@ -174,7 +215,15 @@ In a clustered environment, a [broker](#zeebe-broker) which is not a [leader](#l
 
 See [Zeebe Gateway](#zeebe-gateway).
 
+### Generative AI
+
+Any AI system that can produce new content, such as text, images, or audio, in response to prompts. Generative AI doesn’t just analyze existing data; it creates original output that is often contextually relevant to the input.
+
 ## H
+
+### Hallucination
+
+When an AI confidently produces incorrect or fabricated information that seems plausible. It reflects the model’s tendency to produce patterns that appear coherent but lack factual accuracy.
 
 ### Human task
 
@@ -215,7 +264,7 @@ An incident represents an error condition which prevents [Zeebe](#zeebe) from ad
 
 An Ingress is a Kubernetes object that manages external access to the services within a Kubernetes cluster. An **Ingress controller** is required to route traffic to your services according to the rules defined on the Ingress.
 
-- [Ingress setup](/self-managed/deployment/helm/configure/ingress-setup.md)
+- [Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md)
 
 ## J
 
@@ -240,6 +289,10 @@ A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#jo
 - [Job workers](/components/concepts/job-workers.md)
 
 ## L
+
+### Large language model (LLM)
+
+A large language model (LLM) is a type of AI program specifically designed to understand and generate human-like text. These models are trained on massive amounts of text data, enabling them to learn the structure of language and perform a variety of tasks, such as conversation, summarization, and code generation.
 
 ### Leader
 
@@ -293,7 +346,7 @@ Outbound [Connectors](#connector) in Camunda 8 allow workflows to trigger with e
 
 ### Partition
 
-A partition represents a logical grouping of data in a [Zeebe Broker](#zeebe-broker). This data includes [process instance variables](#process-instance-variable) stored in RocksDB, [commands](#command), and [events](#event) generated by [Zeebe](#zeebe) stored in the [log](#log). The number of partitions is defined by configuration.
+A partition represents a logical grouping of data in a [Zeebe Broker](#zeebe-broker). This data includes [process variables](#process-variable) stored in RocksDB, [commands](#command), and [events](#event) generated by [Zeebe](#zeebe) stored in the [log](#log). The number of partitions is defined by configuration.
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md)
 
@@ -305,27 +358,30 @@ A [Camunda workflow](#workflow) uses this type of connector to retrieve data fro
 
 ### Process
 
-The general business construct — what you want to automate. In runtime discussions, [_process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
+The general business construct — what you want to automate.  
+In Camunda, a process is [modeled using BPMN](#process-model), then [deployed as a process definition](#process-definition), and finally [executed as a process instance](#process-instance).
+
+In runtime discussions, [_executing a process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
 
 ### Process definition
 
-The deployed and versioned artifact in the engine derived from a process model.  
+A [process model](#process-model) that has been deployed to the engine and versioned.  
 Identified by:
 
 - **processDefinitionKey**: Unique identifier generated by the engine
-- **process ID**: Identifier from the model, not guaranteed to be unique across deployments
-- **version**: Version number of the deployed process definition
+- **process ID**: Identifier assigned in the process model
+- **version**: Version number assigned by the engine
 
-The engine uses process definitions to start [process instances](/components/concepts/process-instance-creation.md).
+The engine uses process definitions to start [process instances](#process-instance).
 
 ### Process instance
 
-A [process instance](/components/concepts/process-instance-creation.md) is a single execution of a process definition. Can be active, completed, or terminated.  
-Identified uniquely by its **processInstanceKey**.
+A [process instance](/components/concepts/process-instance-creation.md) is an execution of a [process definition](#process-definition), uniquely identified by its **processInstanceKey**.  
+Each instance represents one run of the process and carries metadata from its originating process definition (process ID, version, and processDefinitionKey).
 
-Each instance carries metadata from its originating process definition (process ID, version, and processDefinitionKey).
+A process instance can be active (currently running), completed, or terminated.
 
-In runtime discussions, [_process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
+In runtime discussions, [_executing a process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
 
 ### Process instance tag
 
@@ -334,13 +390,6 @@ An optional, immutable, lightweight label attached when a process instance is cr
 - Tags on process instance creation: [Process instance creation – Tags](/components/concepts/process-instance-creation.md#tags)
 - Tags on jobs: [Job workers](/components/concepts/job-workers.md#tags)
 
-### Process instance variable
-
-A process instance variable represents the execution state (i.e data) of a process instance. These variables capture business process parameters which are the input and output of various stages of the process instance and which also influence process flow execution.
-
-- [Variables](/components/concepts/variables.md)
-- [Data flow](/components/modeler/bpmn/data-flow.md)
-
 ### Process model
 
 The BPMN representation of a [process](/components/concepts/processes.md), created in a BPMN file (for example, in Modeler).
@@ -348,6 +397,17 @@ The BPMN representation of a [process](/components/concepts/processes.md), creat
 Identified by its **process ID** (`bpmn:process id` attribute).
 
 A single BPMN file can contain multiple process models.
+
+### Process variable
+
+A process variable represents the execution state (i.e data) of a process instance. These variables capture business process parameters which are the input and output of various stages of the process instance and which also influence process flow execution.
+
+- [Variables](/components/concepts/variables.md)
+- [Data flow](/components/modeler/bpmn/data-flow.md)
+
+### Prompt
+
+A prompt is the input provided to a [generative AI model](#generative-ai). Prompt engineering refers to the practice of crafting effective instructions to achieve desired results from the AI.
 
 ### Protocol connector
 
@@ -404,6 +464,10 @@ Camunda can use RFC to call SAP functions directly as part of a business process
 
 - [RFC](/components/camunda-integrations/sap/csap-cli.md)
 
+### Robotic process automation (RPA)
+
+The use of software robots to automate repetitive, rule-based business tasks. RPA bots emulate human actions in digital systems, enhancing speed and accuracy.
+
 ## S
 
 ### SAP
@@ -436,6 +500,22 @@ Soft pause exporting is a feature that allows you to continue exporting records 
 An [inbound connector](#inbound-connector) that subscribes to a message queue.
 
 This way, a [Camunda workflow](#workflow) can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
+
+## T
+
+### Temperature
+
+A parameter that regulates the randomness or creativity of AI-generated text. Lower values result in more focused and predictable responses, while higher values lead to more creative and varied outputs.
+
+### Token (AI)
+
+The smallest unit of text such as a word, subword, or character, that a language model processes. Models read and generate text as a sequence of tokens. Often, pricing for AI models is based on the number of input/output tokens.
+
+### Token (process instance)
+
+In the context of a running process instance in Camunda, a token represents the current point of execution within the BPMN process model. You can think of it as a marker that moves through the process diagram, following the sequence flows as tasks and events are completed.
+
+When a process starts, a token is created at the start event and advances with each completed step. Once the token reaches the end event, it is consumed and the process instance ends. Tokens are not data themselves, but they determine which elements of the process are currently active.
 
 ## U
 
@@ -482,7 +562,7 @@ See [process instance](#process-instance).
 
 ### Workflow instance variable
 
-See [process instance variable](#process-instance-variable).
+See [process variable](#process-variable).
 
 ## Z
 

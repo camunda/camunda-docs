@@ -105,7 +105,7 @@ To deploy and use the webhook, you need to fill in several fields:
 2. **Webhook ID** - Context path for your inbound webhook. This is used to build a URL endpoint for your webhook. For example, given the `Webhook ID` value is `myWebhookPath`, the complete webhook URL endpoint will be `http(s)://<base URL>/inbound/myWebhookPath`.
 3. **HMAC authentication** - If an external caller uses HMAC as a means of request validation and authentication, you can `enable` this property. In that case, you'll need to specify additional field values. Read more about the [generic HTTP webhook configuration](/components/connectors/protocol/http-webhook.md).
 4. **Authorization** - Authorization method of the webhook.
-5. **Activation condition** - FEEL expression that assesses trigger conditions. Note: Unlike other properties, in the activation condition, you cannot use the process instance variables. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
+5. **Activation condition** - FEEL expression that assesses trigger conditions. Note: Unlike other properties, in the activation condition, you cannot use the process variables. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
 6. **Result variable** - Name of the process variable that will be created or updated with the result of the webhook. For example, if you want to save the result of the webhook in a variable called `myDocumentId`, you would specify `myDocumentId` as the **Result variable** value.
 7. **Result expression** - FEEL expression that transforms incoming body into BPMN process variables. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}` and you would like to extract `id` as a process variable `myDocumentId`. In that case, the **Variable mapping** might look as `={myDocumentId: request.body.id}`.
 8. **Response body expression** - FEEL expression that forces a webhook to return a specific response.
@@ -124,6 +124,57 @@ For example, given that your correlation key is defined with `requestIdValue` pr
 - **Correlation key (payload)**: `=request.body.request.id`
 
 See the [webhook documentation](/components/connectors/protocol/http-webhook.md) or the documentation of [other Connector types](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) for more details.
+
+### Consume unmatched events
+
+You can configure a connector to consume all unmatched events from the event source by enabling the **Consume unmatched events** checkbox in the **Activation** section of the connector properties.
+
+- When this option is enabled, the connector will consume all events that do not match the activation condition of any other connector with the same deduplication ID.
+  This is useful in scenarios where you want to ensure that all events are processed, even if they do not match any specific activation condition.
+
+- When this option is disabled, the connector will only consume events that match its activation condition. Events that do not match any activation condition will lead to an error.
+
+Here are some examples of how this option will affect the behavior of the connector when enabled or disabled, when the activation conditions of all the connectors with the same deduplication ID do not match the incoming event:
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2" style={{ verticalAlign: "middle", textAlign: "center" }}>Connector</th>
+      <th colspan="2">Consume unmatched events</th>
+    </tr>
+    <tr>
+      <th>✅ Enabled</th>
+      <th>◻️ Disabled</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Webhook Connector</td>
+      <td>Return a success response (200)</td>
+      <td>Return an error response (422, or specific HTTP status code depending on the error)</td>
+    </tr>
+    <tr>
+      <td>Kafka Connector</td>
+      <td>Commit the message offset</td>
+      <td>Do not commit the message offset</td>
+    </tr>
+    <tr>
+      <td>RabbitMQ Connector</td>
+      <td>Acknowledge the message</td>
+      <td>Reject the message</td>
+    </tr>
+    <tr>
+      <td>AWS SQS Connector</td>
+      <td>Delete the message from the queue</td>
+      <td>Do not delete the message from the queue</td>
+    </tr>
+    <tr>
+      <td>Email Connector</td>
+      <td>Mark the email as processed (e.g. marked as read, deleted, or moved)</td>
+      <td>Do not mark the email as processed</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Connector deduplication
 

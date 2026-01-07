@@ -1,0 +1,408 @@
+---
+id: migrate-process-instance
+title: "Migrate process instance"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Migrate process instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Migrate process instance"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances/{processInstanceKey}/migration"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Migrates a process instance to a new process definition.
+This request can contain multiple mapping instructions to define mapping between the active
+process instance's elements and target process definition elements.
+
+Use this to upgrade a process instance to a new version of a process or to
+a different process definition, e.g. to keep your running instances up-to-date with the
+latest process improvements.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description: "The key of the process instance that should be migrated.",
+      schema: {
+        type: "string",
+        format: "string<ProcessInstanceKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          description:
+            "The migration instructions describe how to migrate a process instance from one process definition to another.\n",
+          properties: {
+            mappingInstructions: {
+              description:
+                "Element mappings from the source process instance to the target process instance.",
+              type: "array",
+              items: {
+                type: "object",
+                description:
+                  "The mapping instructions describe how to map elements from the source process definition to the target process definition.\n",
+                properties: {
+                  sourceElementId: {
+                    description: "The element ID to migrate from.",
+                    allOf: [
+                      {
+                        description: "The model-defined id of an element.",
+                        format: "ElementId",
+                        type: "string",
+                        example: "Activity_106kosb",
+                        title: "ElementId",
+                      },
+                    ],
+                  },
+                  targetElementId: {
+                    description: "The element ID to migrate into.",
+                    allOf: [
+                      {
+                        description: "The model-defined id of an element.",
+                        format: "ElementId",
+                        type: "string",
+                        example: "Activity_106kosb",
+                        title: "ElementId",
+                      },
+                    ],
+                  },
+                },
+                required: ["sourceElementId", "targetElementId"],
+                title: "MigrateProcessInstanceMappingInstruction",
+              },
+            },
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+              title: "OperationReference",
+            },
+            targetProcessDefinitionKey: {
+              allOf: [
+                {
+                  description:
+                    "System-generated key for a deployed process definition.",
+                  format: "ProcessDefinitionKey",
+                  example: "2251799813686749",
+                  type: "string",
+                  allOf: [
+                    {
+                      description:
+                        "Zeebe Engine resource key (Java long serialized as string)",
+                      type: "string",
+                      title: "LongKey",
+                    },
+                  ],
+                  title: "ProcessDefinitionKey",
+                },
+              ],
+              description:
+                "The key of process definition to migrate the process instance to.",
+            },
+          },
+          required: ["targetProcessDefinitionKey", "mappingInstructions"],
+          title: "ProcessInstanceMigrationInstruction",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The process instance is migrated." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The process instance migration failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

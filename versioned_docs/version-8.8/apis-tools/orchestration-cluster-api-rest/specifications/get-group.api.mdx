@@ -1,0 +1,281 @@
+---
+id: get-group
+title: "Get group"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Get group"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWN9T2zgQ/lc0fmrnIA6U3vXyloaUo9PSDoQyNyEPsrJJVGzJJ8mEjMf/++1KNglJgHL3xEweGGxptT+//axsGTk+tVFnGJ0YXeTRaC/SORjupFan46gTTcGFnb1oDFYYmdMWblyrazUc9r6dXZxeDPpnvb87/R/9s8Fl98toRHsn4BhnUzrLkgWTzrLT49a1QkU5NzwDB4YMl5HCF7JEomhzL5KkP+duhs8G/imkAXTFmQLWnRjMoDaBulHaihlkPOqUkVvkpNQ6I9U0qqoRqbK5VhYs7R+22/TvMXXSMlsIAdZOijRdMAOuMArGZERo5UA5Os7zPJXCZyv+aUlHueLDQ+U+jcwCN2LGGl8wL5CR0tpfnfwE4ShHhurgZPA2pGg9qsezQfKtqNq7T+oLzlImq7XtXz+9so5qUI+TLoUm/HOwRepwnXaO2gfbS0A1B+tYysWNZbc8lWPGCzfDpNfJZgIhQa88tZS9GfCxh1MZXV1d7XeXwvCwJOuwqB4tJxYgSSH77bmydtn3IImhOy5TFkrIuK1zkcCYScWG55967M+j93+M3sycy20njufzectMxD6MpdOmpc00xlf6I7m3LYbJMMAyvmAJMD5GMbTJU7YEB7M5CDmRgjnNMGhWu80o0NBtTyMr7G7Wd6JNxjEpUWHkRrm77PL8lElfgckCD2ya9mcmnKrdiXiiC9dJUq5ucB3ueJZ7TKyuL6HyHNi62JpZxs2C6clWw0sDH/mYnQc0kQHruCtWwkamcTAFsxovLr073ArwvwaD7yyoYEKPgeEZtI9UUTvwwPZRu70XZVLJrMiaN34X3n5vt32HEV5+IV7F4C7HJAXorwWN0Mo0oiRoexh+HXqDlwUbogufdWIHuiucvMX2sCMmuFLaEcSQmC1SbUUUjIEq8V+hQeS9gQ9t5FSu+//Q4fj2MP6J/sU8uEc6V0mkbrXjkLmGRt5tduUnbRI5Rgd8E90zCtaKQuVpqudPkvmu+3fdv+v+V9H9R0/d4+YSXSGDU3kLCu82bM4DB0x0oXYMsGOAHQO8cgZ4v+2XHOaMamuoW8AYLJQWojD4q4HNZzL15unXXeNbfUEIHbNjhB0j7BjhtTICbmbgZrqeXvl5k5uRKn8lsHFZD0UqGhiBuW3mUIXB1EdlaOsKu7GcaeuqTplr4yp0BOVvuZEcDXrI0HZo/wbWqRY89cvb4EIbNJlpAv5m0BQmMVSxlxYWGYud9y8G7AQLMecLP4kh8w/NfGh/aG+1QKK/oL37/ZSFyL2BVSJrTBAjbTURhF9qxA/gLCAFS7e4IBUhhR+BGzA0r1nBVW3bW6L3xAvhSnj41KDt89WA3E+4leI5FSTjgSPVRHvBGkDbI0DnqdoIjRB5u3VQfxgQh8uJXNTjGV4jOesrBDJA3Q8BSQ2pT/EOWiQtobNYBPH7/9JabMeNcVtEuSMuwTMo6D9A2DL+MstZY/MDE8Fb6hj8SoGysMW1L2GH/QjBsINW+yUuJqlO4oxLFdcmbNzrfr08O+7ufznt9c8u+vuoseXunE9vjhjPuFrxgwbB020j5HL5of0/0+S64g7uXIycKBWl04dX1p0/DGNQi8KdZiCKcAztO4zKEtEBlyatKlpGgjQLXB8tu93Tw1haekZamfDUro+iV4N5c14Prd+y9QH1VmfrRa4WnmHSgt7w8QYW0XIuXo2qZtDp/Qm7XSEgdyvnNkbS1Hn3hHjSx5ap/gWUIENC
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get group"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/groups/{groupId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Get a group by its ID.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "groupId",
+      in: "path",
+      required: true,
+      description: "The group ID.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The group is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "Group search response item.",
+            type: "object",
+            properties: {
+              name: { type: "string", description: "The group name." },
+              groupId: { type: "string", description: "The group ID." },
+              description: {
+                type: "string",
+                description: "The group description.",
+              },
+            },
+            title: "GroupResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The group with the given ID was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

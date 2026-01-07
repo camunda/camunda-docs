@@ -1,25 +1,21 @@
 ---
 id: migration-tooling
-title: Migration tooling
-sidebar_label: Migration tooling
-description: "Understand the available migration tooling and its roadmap."
+title: Migration tools
+sidebar_label: Migration tools
+description: "Learn about the available migration tools."
 ---
 
 Camunda currently invests in tooling to help support and ease your migration from Camunda 7 to Camunda 8.
-
-:::info
-The migration tooling is currently under development, with an initial release planned for **Camunda 8.8 (October 2025)**.
-:::
 
 ## Migration tools
 
 Camunda provides the following migration tools:
 
-| Migration tool                                                                       | Description                                                                                                                                                                                         | GitHub link                                                                                                     |
-| :----------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| **[Migration Analyzer & Diagram Converter](#migration-analyzer--diagram-converter)** | Gain a first understanding of migration tasks. Available for local installation (Java or Docker) or [hosted as a free SaaS offering](https://migration-analyzer.consulting-sandbox.camunda.cloud/). | [camunda-7-to-8-migration-analyzer](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer) |
-| **[Data Migrator](#data-migrator)**                                                  | Copies active Camunda 7 runtime instances to Camunda 8. Planned to be extended to also copy existing audit trail data (history).                                                                    | [c7-data-migrator](https://github.com/camunda/c7-data-migrator)                                                 |
-| **[Code Conversion Utilities](./code-conversion.md)**                                | Mixture of code _mapping tables_, code conversion _patterns_, and automatable _refactoring recipes_.                                                                                                | [camunda-7-to-8-code-conversion](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion/)      |
+| Migration tool                                                                       | Description                                                                                                                                                                     | GitHub link                                                                                                     |
+| :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| **[Migration Analyzer & Diagram Converter](#migration-analyzer--diagram-converter)** | Gain an initial understanding of migration tasks. Available for local installation (Java or Docker) or [hosted as a free SaaS offering](https://diagram-converter.camunda.io/). | [camunda-7-to-8-migration-analyzer](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer) |
+| **[Data Migrator](#data-migrator)**                                                  | Copies active Camunda 7 runtime instances to Camunda 8. Planned to be extended to also copy existing audit trail data (history).                                                | [c7-data-migrator](https://github.com/camunda/c7-data-migrator)                                                 |
+| **[Code conversion utilities](./code-conversion.md)**                                | Mixture of code _mapping tables_, code conversion _patterns_, and automatable _refactoring recipes_.                                                                            | [camunda-7-to-8-code-conversion](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion/)      |
 
 ## Examples
 
@@ -54,15 +50,16 @@ Let's go through this step-by-step:
 
 ### Installation
 
-Please refer to the [Installation Guide](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation) for local setup instructions.
+Refer to the [Installation Guide](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation) for local setup instructions.
 
-To get started right away, try the free SaaS version:  
-[https://migration-analyzer.consulting-sandbox.camunda.cloud/](https://migration-analyzer.consulting-sandbox.camunda.cloud/)
+To get started right away, try the [free SaaS version](https://diagram-converter.camunda.io/).
 
 ### Analyzing your models using the Web Interface
 
-After [local installation](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation), open [http://localhost:8080/](http://localhost:8080/).  
-Or use the [SaaS deployment](https://migration-analyzer.consulting-sandbox.camunda.cloud/) (no local setup required).
+Open the Diagram Converter:
+
+- If [you've installed the Diagram Converter locally](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation), open [http://localhost:8080/](http://localhost:8080/).
+- If you're using the [SaaS deployment](https://diagram-converter.camunda.io/), no local setup is required.
 
 The wizard is straightforward. Upload one or more models:
 
@@ -74,7 +71,7 @@ Click **Analyze and convert**:
 
 On this screen you can now:
 
-- Download the analyzer results as Microsoft Excel file (XSLX)
+- Download the analyzer results as Microsoft Excel file (XLSX)
 - Download the analyzer results as CSV file
 - Download the converted models (individually or as ZIP)
 
@@ -135,8 +132,10 @@ java -jar camunda-7-to-8-migration-analyzer-cli.jar local
 
 Missing required parameter: '<file>'
 Usage: camunda-7-to-8-migration-analyzer-cli local [-dhoV] [--check] [--csv]
-       [--delegate-execution-as-job-type] [--disable-append-elements]
-       [--disable-default-job-type] [--md] [-nr]
+       [--add-data-migration-execution-listener]
+       [--data-migration-execution-listener-job-type=<dataMigrationExecutionListenerJobType>]
+       [--disable-append-elements]
+       [--always-use-default-job-type] [--md] [-nr]
        [--default-job-type=<defaultJobType>]
        [--platform-version=<platformVersion>] [--prefix=<prefix>] <file>
 Converts the diagram from the given directory or file
@@ -148,25 +147,32 @@ java -Dfile.encoding=UTF-8 -jar camunda-7-to-8-migration-analyzer-cli.jar local
 Parameter:
       <file>                 The file to convert or directory to search in
 Options:
+      --add-data-migration-execution-listener
+                             Add an execution listener on blank start events
+                               that can be used for the Camunda 7 Data Migrator
+      --always-use-default-job-type
+                             Always fill in the configured default job type,
+                               interesting if you want to use one delegation
+                               job worker (like the Camunda 7 Adapter).
       --check                If enabled, no converted diagrams are exported
       --csv                  If enabled, a CSV file will be created containing
-                               the conversions results
-      --xslx                 If enabled, a XSLX file will be created containing
-                               the analysis results
+                               the results for the analysis
   -d, --documentation        If enabled, messages are also appended to
                                documentation
+      --data-migration-execution-listener-job-type=<dataMigrationExecutionListen
+        erJobType>
+                             Name of the job type of the listener. If set, the
+                               default value from the 'converter-properties.
+                               properties' is overridden
       --default-job-type=<defaultJobType>
-                             If set, the default value from the
-                               'converter-properties.properties' for the job
-                               type is overridden
-      --delegate-execution-as-job-type, --delegate-expression-as-job-type
-                             If enabled, sets the delegate expression as the
-                               job type
+                             Job type used when adjusting delegates. If set,
+                               the default value from the 'converter-properties.
+                               properties' is overridden
       --disable-append-elements
                              Disables adding conversion messages to the bpmn xml
-      --disable-default-job-type
-                             Disables the default job type
   -h, --help                 Show this help message and exit.
+      --keep-job-type-blank  Sets all job types to blank so that you need to
+                               edit those after conversion yourself
       --md, --markdown       If enabled, a markdown file will be created
                                containing the results for all conversions
       -nr, --not-recursive   If enabled, recursive search in subfolders will be
@@ -178,6 +184,8 @@ Options:
       --prefix=<prefix>      Prefix for the name of the generated file
                                Default: converted-c8-
   -V, --version              Print version information and exit.
+      --xlsx                 If enabled, a XLSX file will be created containing
+                               the results for the analysis
 ```
 
 ### Converting your models

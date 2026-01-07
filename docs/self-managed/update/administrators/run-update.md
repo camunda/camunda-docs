@@ -12,13 +12,13 @@ This guide describes how to perform a Camunda 8.8 Self-Managed upgrade. Ensure y
 
 ## Step 1: Confirm prerequisites
 
-First, confirm you have completed the following prerequisites:
+Confirm you have completed the following prerequisites:
 
-| Prerequisite | Description                                                                 |
-| :----------- | :-------------------------------------------------------------------------- |
-| Test upgrade | Confirm that the upgrade runs successfully in a non-production environment. |
-| Backups      | Backups created and verified .                                              |
-| Secrets      | Export required secrets (Operate, Tasklist, Identity, etc.).                |
+| Prerequisite               | Description                                                                                                                                                                         |
+| :------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Backups                    | Create and verify backups. Test restoring backups to ensure data integrity. See [backup and restore](../../../self-managed/operational-guides/backup-restore/backup-and-restore.md) |
+| Validate 8.8 configuration | Validate your `8.8 values.yaml` with a clean 8.8 non-production installation before upgrading to ensure configuration compatibility.                                                |
+| Test upgrade               | Confirm that the upgrade runs successfully in a non‑production environment that mirrors your production cluster.                                                                    |
 
 ## Step 2: Perform upgrade
 
@@ -38,6 +38,10 @@ Perform an upgrade as follows.
 To upgrade with Helm, see the [Helm chart upgrade guide for 8.7 to 8.8](/self-managed/deployment/helm/upgrade/helm-870-880.md) for detailed instructions.
 The guide covers update options, secret handling, migration job monitoring, and other upgrade tasks.
 
+:::info
+**Important:** Upgrade to the latest 8.7 patch before moving to 8.8. Confirm your Helm chart and Helm CLI versions are compatible with 8.8, and review your values file for deprecated keys.
+:::
+
 :::note
 If you maintain custom deployment scripts, use the official Helm charts as a technical reference.
 :::
@@ -49,9 +53,13 @@ If you maintain custom deployment scripts, use the official Helm charts as a tec
 
 Camunda-provided Docker Compose files are only intended for development and testing purposes, and **are not recommended for production environments**. Docker Compose lacks the capabilities required for a production-ready system, such as automated migration job handling, high availability, failover support, scalable persistent storage management, and robust secret management with rotation.
 
+With Camunda 8.8, the default `docker-compose.yaml` file now deploys Orchestration cluster and connectors inline with the chart default configuration. To deploy Web Modeler, you should use other Docker Compose configuration examples.
+
 Because of these limitations, Camunda does not supply automated migration scripts for Docker Compose setups. If you still need to update a development environment, you can follow the [Component upgrade guides](../../components/components-upgrade/870-to-880.md) to manually update each service.
 
 For production deployments, we recommend either using Kubernetes with the official Camunda Helm chart or creating a custom deployment process with Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
+
+Manual upgrades involve multiple steps. In addition to updating container images, running migration jobs, you must also follow the component‑specific tasks listed in the component upgrade guide. Because of this complexity, it’s generally easier to migrate development environments to Kubernetes using the Helm charts, especially if you expect to upgrade frequently.
 
 </TabItem>
 </Tabs>

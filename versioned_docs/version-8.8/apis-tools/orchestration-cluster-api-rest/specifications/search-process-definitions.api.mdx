@@ -1,0 +1,761 @@
+---
+id: search-process-definitions
+title: "Search process definitions"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Search process definitions"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search process definitions"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-definitions/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Search for process definitions based on given criteria.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      description:
+                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Offset-based pagination",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                              default: 0,
+                              minimum: 0,
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based forward pagination",
+                          required: ["after"],
+                          properties: {
+                            after: {
+                              description:
+                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The end cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "EndCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based backward pagination",
+                          required: ["before"],
+                          properties: {
+                            before: {
+                              description:
+                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The start cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "StartCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                            },
+                          },
+                        },
+                      ],
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "processDefinitionKey",
+                      "name",
+                      "resourceName",
+                      "version",
+                      "versionTag",
+                      "processDefinitionId",
+                      "tenantId",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "ProcessDefinitionSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The process definition search filters.",
+              allOf: [
+                {
+                  description: "Process definition search filter.",
+                  type: "object",
+                  properties: {
+                    name: {
+                      description: "Name of this process definition.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    isLatestVersion: {
+                      description:
+                        "Whether to only return the latest version of each process definition.\nWhen using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`.\nThe response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`.\n",
+                      type: "boolean",
+                    },
+                    resourceName: {
+                      description: "Resource name of this process definition.",
+                      type: "string",
+                    },
+                    version: {
+                      description: "Version of this process definition.",
+                      type: "integer",
+                      format: "int32",
+                    },
+                    versionTag: {
+                      description: "Version tag of this process definition.",
+                      type: "string",
+                    },
+                    processDefinitionId: {
+                      description:
+                        "Process definition ID of this process definition.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    tenantId: {
+                      description: "Tenant ID of this process definition.",
+                      allOf: [
+                        {
+                          example: "customer-service",
+                          description: "The unique identifier of the tenant.",
+                          format: "TenantId",
+                          type: "string",
+                          title: "TenantId",
+                        },
+                      ],
+                    },
+                    processDefinitionKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a deployed process definition.",
+                          format: "ProcessDefinitionKey",
+                          example: "2251799813686749",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessDefinitionKey",
+                        },
+                      ],
+                      description: "The key for this process definition.",
+                    },
+                    hasStartForm: {
+                      description:
+                        "Indicates whether the start event of the process has an associated Form Key.",
+                      type: "boolean",
+                    },
+                  },
+                  title: "ProcessDefinitionFilter",
+                },
+              ],
+            },
+          },
+          title: "ProcessDefinitionSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The process definition search result.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        required: ["totalItems"],
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                            example: 1,
+                          },
+                          hasMoreTotalItems: {
+                            description:
+                              "Indicates if more results exist beyond the reported totalItems value. Due to system limitations, the totalItems value can be capped.\n",
+                            type: "boolean",
+                            example: false,
+                          },
+                          startCursor: {
+                            description:
+                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                            allOf: [
+                              {
+                                description:
+                                  "The start cursor in a search query result set.",
+                                format: "base64",
+                                type: "string",
+                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                title: "StartCursor",
+                              },
+                            ],
+                          },
+                          endCursor: {
+                            description:
+                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                            allOf: [
+                              {
+                                description:
+                                  "The end cursor in a search query result set.",
+                                format: "base64",
+                                type: "string",
+                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                title: "EndCursor",
+                              },
+                            ],
+                          },
+                        },
+                        example: { totalItems: 1, hasMoreTotalItems: false },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching process definitions.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    name: {
+                      description: "Name of this process definition.",
+                      type: "string",
+                    },
+                    resourceName: {
+                      description: "Resource name for this process definition.",
+                      type: "string",
+                    },
+                    version: {
+                      description: "Version of this process definition.",
+                      type: "integer",
+                      format: "int32",
+                    },
+                    versionTag: {
+                      description: "Version tag of this process definition.",
+                      type: "string",
+                    },
+                    processDefinitionId: {
+                      description:
+                        "Process definition ID of this process definition.",
+                      allOf: [
+                        {
+                          description:
+                            "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                          format: "ProcessDefinitionId",
+                          type: "string",
+                          example: "new-account-onboarding-workflow",
+                          title: "ProcessDefinitionId",
+                        },
+                      ],
+                    },
+                    tenantId: {
+                      description: "Tenant ID of this process definition.",
+                      allOf: [
+                        {
+                          example: "customer-service",
+                          description: "The unique identifier of the tenant.",
+                          format: "TenantId",
+                          type: "string",
+                          title: "TenantId",
+                        },
+                      ],
+                    },
+                    processDefinitionKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a deployed process definition.",
+                          format: "ProcessDefinitionKey",
+                          example: "2251799813686749",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessDefinitionKey",
+                        },
+                      ],
+                      description: "The key for this process definition.",
+                    },
+                    hasStartForm: {
+                      description:
+                        "Indicates whether the start event of the process has an associated Form Key.",
+                      type: "boolean",
+                    },
+                  },
+                  title: "ProcessDefinitionResult",
+                },
+              },
+            },
+            title: "ProcessDefinitionSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -81,16 +81,20 @@ global:
 
 ## Zeebe Backup with S3
 
-In general, some S3 compatible implementation are not able to properly handle the checksum feature of the S3 client being introduced with version 2.30.0. For more details, you can refer to [this documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
+In general, some S3 compatible implementations are not able to properly handle the checksum feature of the S3 client being introduced with version 2.30.0. For more details, you can refer to [the AWS documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
 
-As soon as issues appear that would be related to the checksum, it can be disabled by setting these environment variables on your Zeebe brokers:
+As soon as issues appear related to the checksum, it can be disabled by setting these environment variables on your Zeebe brokers:
 
 ```
 AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 AWS_RESPONSE_CHECKSUM_CALCULATION=WHEN_REQUIRED
 ```
 
-They will disable to automated creation of checksums.
+This will disable automated creation of checksums. If you are still encountering issues with MD5 checksums required by your provider, enable legacy support for the AWS S3 client by setting:
+
+```
+ZEEBE_BROKER_DATA_BACKUP_S3_SUPPORTLEGACYMD5=true
+```
 
 **Backups to IBM COS fail with 403 Access Denied**
 
@@ -162,7 +166,7 @@ Therefore, if you are not using the [ingress-nginx controller](https://github.co
 
 ## Identity `contextPath`
 
-Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
 
 For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured.
 
@@ -218,9 +222,12 @@ Additionally, you can use the `-h` option with each script to display help infor
 
 Before using it, clone the `c8-sm-checks` repository to your local environment by running the following command:
 
+<!-- TODO: [release-duty]:  -- Update version tag once a new version is released -->
+
 ```bash
 git clone https://github.com/camunda/c8-sm-checks.git
 cd c8-sm-checks
+git checkout v1.3.0
 ```
 
 ### Kubernetes connectivity scripts
@@ -262,7 +269,7 @@ These scripts focus on verifying the connectivity and health of Zeebe components
 This script verifies connectivity to a Zeebe instance using HTTP/2 and gRPC protocols, providing insights into the health and status of your Zeebe deployment.
 
 ```bash
-./checks/zeebe/connectivity.sh -a https://local.distro.example.com/auth/realms/camunda-platform/protocol/openid-connect/token -i myclientid -s 0Rn28VrQxGNxowrCWe6wbujwFghO4990 -u zeebe.distro.example.com -H zeebe.local.distro.example.com:443
+./checks/zeebe/connectivity.sh -a https://local.distro.example.com/auth/realms/camunda-platform/protocol/openid-connect/token -i myclientid -s 0Rn28VrQxGNxowrCWe6wbujwFghO4990 -u orchestration-api -H zeebe.local.distro.example.com:443
 ```
 
 Find more information on [how to register your application on Identity](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/payment-example-process-application/kube/README.md#4-generating-an-m2m-token-for-our-application).
@@ -324,3 +331,10 @@ skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe
 skopeo login registry.camunda.cloud --username <your-username> --password <your-password>
 skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/elasticsearch | jq '.RepoTags'
 ```
+
+## Incorrect authorizations when deploying resources from Modeler
+
+If you encounter missing or invalid authorizations when deploying resources or starting process instances from Web Modeler or Desktop Modeler, review which credentials are being used:
+
+- **Web Modeler** deploys as your logged-in user, so ensure that your [user](/components/identity/user.md) has the required permissions.
+- **Desktop Modeler** uses the client credentials you provide, so ensure that your [client](/components/identity/client.md) has the required permissions.
