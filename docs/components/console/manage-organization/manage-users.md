@@ -36,7 +36,7 @@ People who do not yet have a Camunda 8 account can also be invited to an organiz
 ## Resource-based authorizations
 
 Resource authorizations allow you to control the level of access a user has to a particular resource in the system. To create, update, or delete the resource authorizations assigned to a user, click on the respective row of the users table. As of 8.8, authorizations for orchestration clusters
-Zeebe, Operate and Tasklist applications are now part of the Orchestration cluster and are managed in the cluster’s [Identity](/docs/self-managed/components/orchestration-cluster/identity/overview.md).
+Zeebe, Operate and Tasklist applications are now part of the Orchestration cluster and are managed in the cluster’s [Identity](/self-managed/components/orchestration-cluster/identity/overview.md).
 
 ### Creation
 
