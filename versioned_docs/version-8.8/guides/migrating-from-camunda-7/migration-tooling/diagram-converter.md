@@ -25,25 +25,25 @@ The results are available as:
 In the following sections, you'll learn how to:
 
 - [Install the Diagram Converter](#install-the-diagram-converter)
-- [Analyze your diagrams using the Web Interface](#analyze-your-diagrams-using-the-web-interface)
+- [Analyze your diagrams using the web interface](#analyze-your-diagrams-using-the-web-interface)
 - [Use the CLI](#use-the-cli)
 - [Convert your diagrams](#convert-your-diagrams)
 
 ## Install the Diagram Converter
 
-### SaaS (Recommended for Quick Start)
+### Hosted Diagram Converter
 
-A free hosted version is available at [https://diagram-converter.camunda.io/](https://diagram-converter.camunda.io/).
+Use the hosted Diagram Converter at [https://diagram-converter.camunda.io/](https://diagram-converter.camunda.io/). This option requires no local setup and is suitable for quick evaluations or one-off migrations.
 
-Your models are **not** stored on this platform, and all processing happens in-memory. Your data is transmitted securely over HTTPS.
+Your models are not stored on this platform, and all processing happens in-memory. Your data is transmitted securely over HTTPS.
 
-### Local Web Application
+### Local web application
 
-**Requirements**:
+#### Prerequisites
 
-- Java 21 or higher
+- Java 21 or later
 
-**Steps**:
+#### Steps
 
 1. Download the latest `camunda-7-to-8-diagram-converter-webapp-{version}.jar` from [GitHub Releases](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases).
 2. Run the application:
@@ -54,19 +54,19 @@ Your models are **not** stored on this platform, and all processing happens in-m
 
 3. Access the web application at [http://localhost:8080/](http://localhost:8080/).
 
-To run on a different port:
+To run the application on a different port, for example `8090`:
 
 ```shell
 java -Dserver.port=8090 -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar
 ```
 
-### CLI Installation
+### CLI installation
 
-**Requirements**:
+#### Prerequisites
 
-- Java 21 or higher
+- Java 21 or later
 
-**Steps**:
+#### Steps
 
 1. Download the latest `camunda-7-to-8-diagram-converter-cli-{version}.jar` from [GitHub Releases](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases).
 2. Verify the installation:
@@ -75,12 +75,12 @@ java -Dserver.port=8090 -jar camunda-7-to-8-diagram-converter-webapp-{version}.j
    java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar --help
    ```
 
-## Analyze your diagrams using the Web Interface
+## Analyze your diagrams using the web interface
 
 Open the Diagram Converter:
 
-- If you've installed the Diagram Converter locally, open [http://localhost:8080/](http://localhost:8080/).
-- If you're using the [SaaS deployment](https://diagram-converter.camunda.io/), no local setup is required.
+- For a local installation, open [http://localhost:8080/](http://localhost:8080/).
+- For the hosted SaaS version, open [https://diagram-converter.camunda.io/](https://diagram-converter.camunda.io/).
 
 Upload one or more diagrams:
 
@@ -138,7 +138,7 @@ For Google Sheets, consider using this [Google Spreadsheet template](https://doc
 
 ## Use the CLI
 
-If you prefer the command line over a web interface, the CLI tool is for you. It is ideal for batch conversions or automation.
+If you prefer the command line, use the CLI for batch processing or automation.
 
 The CLI supports two modes:
 
@@ -151,13 +151,13 @@ The CLI supports two modes:
 java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local myDiagram.bpmn --xlsx
 ```
 
-You can also process all diagrams in a directory (including subdirectories):
+To process all diagrams in a directory (including subdirectories):
 
 ```shell
 java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local ./my-processes/
 ```
 
-Full options for `local` mode:
+To see all available options for `local` mode:
 
 ```shell
 java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local --help
@@ -217,13 +217,13 @@ Options:
 
 ### Engine mode
 
-You can also process diagrams directly from a running Camunda 7 process engine via its REST API:
+Use engine mode to process diagrams directly from a running Camunda 7 engine via its REST API:
 
 ```shell
 java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar engine http://localhost:8080/engine-rest
 ```
 
-Full options for `engine` mode:
+To see all available options for `engine` mode:
 
 ```shell
 java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar engine --help
@@ -283,7 +283,7 @@ Converted files can be downloaded via the web interface or generated via the CLI
 
 ## Extend the conversion logic
 
-You can extend the conversion logic by implementing custom visitors and conversions using the Java SPI (Service Provider Interface). This allows you to:
+You can extend the conversion logic by implementing custom visitors and conversions using the Java Service Provider Interface (SPI). This lets you:
 
 - Add custom conversion rules for proprietary extensions
 - Modify how specific BPMN elements are transformed
