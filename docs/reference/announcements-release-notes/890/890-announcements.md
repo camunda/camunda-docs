@@ -33,7 +33,11 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 #### Camunda Spring Boot Starter is based on Spring Boot 4.0.x
 
-With 8.9.0-alpha3, the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md) is based on Spring Boot 4.0.x. You thus need to migrate your application to Spring Boot 4.0.x to ensure compatibility. Note, this change was done as Spring [ends OSS Support for Spring Boot 3.x in June 2026](https://spring.io/projects/spring-boot#support).
+Starting with 8.9.0-alpha3, the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md) requires Spring Boot 4.0.x.
+
+To remain compatible, migrate your application to Spring Boot 4.0.x.
+
+This change aligns with the Spring Boot support policy, as OSS support for Spring Boot 3.x ends in June 2026. See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support).
 
 </div>
 </div>
