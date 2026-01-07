@@ -888,7 +888,7 @@ The deprecated APIs remain functional in this release but will no longer receive
 
 <!-- https://github.com/camunda/product-hub/issues/2226 -->
 
-Add Zeebe partitions to a running cluster in SaaS to increase capacity without downtime:
+Add Zeebe partitions to a running cluster in Self-Managed to increase capacity without downtime:
 
 - New partitions start processing tasks immediately
 - Existing messages remain on original partitions, potentially causing slight imbalances for message-heavy workloads (future updates will address this)
@@ -1320,7 +1320,7 @@ Camunda’s new Identity service enhances authentication and authorization for S
 | Self-Managed Identity management  | Admins can create and manage users, groups, roles, and memberships directly in the Identity database.                                                                                                                                                                   |
 | OIDC integration                  | Integrate external identity providers (IdP) such as Keycloak and Microsoft Entra.                                                                                                                                                                                       |
 | Role-based access control (RBAC)  | Assign roles and group permissions on a per-resource basis for fine-grained access control. Supported resources include Authorization, Claim Mapping Rules, Messages, Batches, Applications, Tenants, Deployments, Process Definitions, Decision Definitions, and more. |
-| Flexible mapping                  | Map users, groups, and roles to resource authorizations and tenants. Leverage OIDC token claims and application/client mappings to streamline permission assignments.                                                                                                   |
+| Flexible mapping                  | In Self-Managed environments, map users, groups, and roles to resource authorizations and tenants. Leverage OIDC token claims and application/client mappings to streamline permission assignments.                                                                                                   |
 | Migration support                 | Simplified migration tools make it easy for existing customers to transition to the new service.                                                                                                                                                                        |
 | Organizational Identity           | In SaaS environments, integrate your own IdP to manage organizational users and assign resources cluster-by-cluster.                                                                                                                                                    |
 | Cluster-specific Roles and Groups | In SaaS environments, manage distinct roles, groups, and authorizations for each cluster independently.                                                                                                                                                                 |

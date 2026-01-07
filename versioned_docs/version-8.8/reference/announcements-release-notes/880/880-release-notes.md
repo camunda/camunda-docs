@@ -888,7 +888,7 @@ The deprecated APIs remain functional in this release but will no longer receive
 
 <!-- https://github.com/camunda/product-hub/issues/2226 -->
 
-Add Zeebe partitions to a running cluster in SaaS to increase capacity without downtime:
+Add Zeebe partitions to a running cluster in Self-Managed to increase capacity without downtime:
 
 - New partitions start processing tasks immediately
 - Existing messages remain on original partitions, potentially causing slight imbalances for message-heavy workloads (future updates will address this)
