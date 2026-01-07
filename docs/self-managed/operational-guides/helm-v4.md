@@ -16,13 +16,12 @@ Learn more about other Helm v4 changes [here](https://helm.sh/docs/overview/#wha
 
 The Camunda Helm chart is already compatible with Helm v3 and Helm v4, however, if your `values.yaml` supplies extra environment variables that conflict with the default, then may need to upgrade to a newer patch version and apply workarounds outlined below.
 
-| Chart version               | Helm CLI v3    | Helm CLI v4                         |
-| --------------------------- | -------------- | ----------------------------------- |
-| Camunda 8.6 - Chart 11.x    | ✅             | ✅ (with workarounds below)         |
-| Camunda 8.7 - Chart 12.x    | ✅             | ✅ (with workarounds below)         |
-| Camunda 8.8 - Chart 13.x    | ✅             | ✅ (with workarounds below)         |
-| Camunda 8.9 - Chart 14.x    | ✅             | ✅ (with workarounds below)         |
-
+| Chart version            | Helm CLI v3 | Helm CLI v4                 |
+| ------------------------ | ----------- | --------------------------- |
+| Camunda 8.6 - Chart 11.x | ✅          | ✅ (with workarounds below) |
+| Camunda 8.7 - Chart 12.x | ✅          | ✅ (with workarounds below) |
+| Camunda 8.8 - Chart 13.x | ✅          | ✅ (with workarounds below) |
+| Camunda 8.9 - Chart 14.x | ✅          | ✅ (with workarounds below) |
 
 ## Helm CLI Breaking Changes
 
