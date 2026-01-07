@@ -875,7 +875,7 @@ The deprecated APIs remain functional in this release but will no longer receive
 
 - Create and manage users, groups, roles, and memberships directly in Identity’s database
 - Integrate external providers like Keycloak or Microsoft Entra via OIDC
-- Assign resource-level permissions using RBAC
+- Assign resource-based authorizations using RBAC
 - Map users, groups, and roles to resources using token claims and application/client mappings
 - Simplify migration with built-in tools
 
@@ -1545,11 +1545,11 @@ Built-in Keycloak integration in Self-Managed is removed, allowing customers to 
 - Keycloak remains fully supported as an external option. For cluster-level identity management it must be connected as an external OIDC provider moving forward.
 - OpenID Connect (OIDC) remains the standard for seamless integration with chosen IdPs.
 
-#### Resource-based permissions
+#### Resource-based authorizations
 
-Resource-level permissions are introduced to control read and write permissions per specific resource.
+Resource-based authorizations are introduced to control read and write permissions per specific resource. See [manage users](/components/console/manage-organization/manage-users.md#resource-based-authorizations).
 
-- Admin users retain full access, but regular users must be granted specific permissions to perform operations or view resources.
+- Admin users retain full access, but regular users must be granted specific permissions to perform operations or view resources. 
 - For organizations that build custom front-ends and access Camunda via API, users or Clients with API permissions can still access data through the V2 API, respecting their resource permissions.
 
 <!-- :::info
