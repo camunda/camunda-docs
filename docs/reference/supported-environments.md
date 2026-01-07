@@ -104,6 +104,10 @@ Requirements for components are as follows:
 | Web Modeler                                                | -            | <ul><li>H2 2.3</li><li>MariaDB 10.11, 11.4, 11.8</li><li>Microsoft SQL Server (MSSQL): 2019, 2022, 2025</li><li>MySQL 8.4</li><li>Oracle 19c, 23ai</li><li>PostgreSQL 14.x, 15.x, 16.x, 17.x, 18.x, or Amazon Aurora PostgreSQL 14.x, 15.x, 16.x, 17.x</li></ul>                                                                                |
 | Self-Managed Console                                       | -            | -                                                                                                                                                                                                                                                                                                                                               |
 
+:::info RDBMS support
+For a complete list of supported RDBMS versions, JDBC driver information (bundled vs. user-supplied), and component compatibility when using relational databases as secondary storage, see the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
+:::
+
 ### OpenSearch and Elasticsearch support
 
 - Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
