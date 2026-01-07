@@ -63,6 +63,38 @@ Add the following dependency to your Maven project:
 </dependency>
 ```
 
+### Spring Boot 4.0 support
+
+If you use the [dedicated Spring Boot 4.0 starter available since 8.8.9](../camunda-spring-boot-starter/getting-started.md#spring-boot-40-support),
+you need to use the dedicated Spring Boot 4.0 test artifact as well:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>camunda-process-test-spring-4</artifactId>
+  <version>${camunda.version}</version>
+  <scope>test</scope>
+</dependency>
+```
+
+Note: the 8.8.9 release of `camunda-process-test-spring-4` still contained `camunda-spring-boot-starter` as a dependency, potentially causing runtime issues.
+As a workaround till fixed with 8.8.10, you need to exclude it:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>camunda-process-test-spring-4</artifactId>
+  <version>${camunda.version}</version>
+  <scope>test</scope>
+  <exclusions>
+    <exclusion>
+      <groupId>io.camunda</groupId>
+      <artifactId>camunda-spring-boot-starter</artifactId>
+    </exclusion>
+  </exclusions>
+</dependency>
+```
+
 </TabItem>
 
 <TabItem value='java-client'>
