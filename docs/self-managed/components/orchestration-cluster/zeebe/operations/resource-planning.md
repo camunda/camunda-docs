@@ -156,13 +156,40 @@ If a partition goes under quorum (for example, if two nodes in a 3-node cluster 
 
 ## Memory
 
-Memory usage is based on the Java heap size (by default [25% of the max RAM](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html#GUID-DA88B6A6-AF89-4423-95A6-BBCBD9FAE781)) and native memory usage (also by default 25% of the max RAM, so Java itself will use **up to** 50% of the maximum RAM.
+Memory usage is based on the Java heap size (by default [25% of the max RAM](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html#GUID-DA88B6A6-AF89-4423-95A6-BBCBD9FAE781)) and native memory usage 
+(also by default 25% of the max RAM, so Java itself can use **up to** 50% of the maximum RAM.
 
-RocksDB will then allocate [512MB per partition](https://github.com/camunda/camunda/blob/main/dist/src/main/config/defaults.yaml) by default.
+Zeebe can use different memory allocation strategies for RocksDB, which can 
+be configured via the `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYALLOCATIONSTRATEGY` setting in the broker configuration.
 
-Some memory is required for the OS page cache since Zeebe makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance.
+If set to `PARTITION`, the total memory allocated to RocksDB will be the 
+configured number of partitions times the configured memory limit (via the 
+`ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYLIMIT`). If the value is set to 
+`BROKER`, the total memory allocated to RocksDB will be equal to the 
+configured memory limit. If set to `AUTO`, Zeebe will allocate the 
+remaining memory available to RocksDB after accounting for other components,
+such as the JVM heap and other native memory consumers.
 
-The minimum memory usage is:
+:::note
+When using the `PARTITION` strategy, the number of partitions used in the 
+calculation is the one configured and not necessarily the current number of 
+partitions in the cluster. These can differ when using dynamic scaling of 
+partitions.
+:::
+
+The default value is `AUTO`. The memory limits used by the JVM and HEAP can 
+be configured via the standard Java options, by respectively setting 
+`-XX:MaxRAMPercentage` and `-XX:MaxMetaspaceSize`.
+
+The default value for `rocksDB.memoryLimit` will then allocate [512MB]
+(https://github.com/camunda/camunda/blob/main/dist/src/main/config/defaults.yaml) when using the `PARTITION` or 
+`BROKER` strategies.
+
+Therefore, when hardconding these values the following consideretions 
+should be met. Some memory is required for the OS page cache since Zeebe 
+makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance.
+
+The minimum memory usage is (when using the `PARTITION` strategy):
 
 | Component           |                   Amount |
 | ------------------- | -----------------------: |
