@@ -95,7 +95,7 @@ You can repeat these variables for any number of OIDC IdPs by using a unique `<R
 
 The following OIDC-related properties are shared by all configured providers and **must be the same** for every IdP:
 
-Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
 
 ```yaml
