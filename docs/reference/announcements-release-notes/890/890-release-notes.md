@@ -37,6 +37,24 @@ These release notes identify the main new features included in the 8.9 minor rel
 | :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 13 January 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha3)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha3)</li></ul> | -    |
 
+### Agentic orchestration
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+#### Model timeout configuration
+
+<!-- https://github.com/camunda/connectors/issues/5808 -->
+
+The AI Agent connectors now support setting a timeout value on supported models.
+
+#### Query parameters support on OpenAI compatible models
+
+<!-- https://github.com/camunda/connectors/issues/5546 -->
+
+The OpenAI compatbile model configuration now allows configuration of query parameters to be added to the model endpoint URL. This might be needed for custom API endpoints requiring additional metadata (such as API versions) to be set via query parameters.
+
+<p class="link-arrow">[AI Agent](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</p>
+
 ### Camunda 8 Run
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
