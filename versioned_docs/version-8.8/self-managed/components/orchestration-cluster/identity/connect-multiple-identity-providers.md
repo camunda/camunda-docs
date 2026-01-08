@@ -51,7 +51,6 @@ camunda.security.authentication.providers.oidc.<REG_ID>.jwk-set-uri: <YOUR_JWKSE
 camunda.security.authentication.providers.oidc.<REG_ID>.scope: ["openid"]
 camunda.security.authentication.providers.oidc.<REG_ID>.audiences: <YOUR_CLIENTID>
 camunda.security.authentication.providers.oidc.<REG_ID>.grant-type:
-
 ```
 
 </TabItem>
