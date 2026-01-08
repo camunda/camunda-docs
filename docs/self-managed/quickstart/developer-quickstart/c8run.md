@@ -21,7 +21,6 @@ Camunda 8 Run includes the following:
 - Connectors
 - H2 (default secondary storage for Camunda 8 Run in 8.9-alpha3)
 - Elasticsearch (bundled, optional, enable when you need full-text indexing or advanced analytics)
-- OpenSearch (supported for Self‑Managed deployments; not bundled in Camunda 8 Run)
 
 Camunda 8 Run also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
@@ -88,7 +87,7 @@ For more advanced or permanent configuration, modify the default `configuration/
 
 ### Configure or switch secondary storage (H2 or Elasticsearch)
 
-Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts. Elasticsearch remains bundled and supported as an optional alternative that you can enable when you need full-text indexing, search, or advanced analytics; OpenSearch is supported for Self‑Managed deployments but is not bundled in Camunda 8 Run.
+Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts. Elasticsearch remains bundled and supported as an optional alternative that you can enable when you need full-text indexing, search, or advanced analytics.
 
 #### Default: H2 (Camunda 8 Run)
 
@@ -291,7 +290,7 @@ For more information, see the [metrics](/self-managed/operational-guides/monitor
 
 ### Configure or switch secondary storage (H2 or Elasticsearch)
 
-Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts. Elasticsearch remains bundled and supported as an optional alternative that you can enable when you need full-text indexing, search, or advanced analytics; OpenSearch is supported for Self‑Managed deployments but is not bundled in Camunda 8 Run.
+Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts. Elasticsearch remains bundled and supported as an optional alternative that you can enable when you need full-text indexing, search, or advanced analytics.
 
 #### Default: H2 (Camunda 8 Run)
 
