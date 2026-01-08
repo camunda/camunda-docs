@@ -51,7 +51,7 @@ Starting with the Camunda 8.8.9 patch release, a dedicated starter artifact was 
 </dependency>
 ```
 
-Please use this a a drop-in replacement for the default `camunda-spring-boot-starter` that will be based on Spring Boot 3.5 still for all Camunda 8.8 patch releases.
+You should use this as a drop-in replacement for the default `camunda-spring-boot-starter` that will still be based on Spring Boot 3.5 for all Camunda 8.8 patch releases.
 
 ## Get started
 
