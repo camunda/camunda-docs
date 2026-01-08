@@ -393,6 +393,25 @@ To learn more about migrating to the Camunda Java client, see the [migration gui
 </div>
 <div className="release-announcement-content">
 
+#### 8.8.9: Camunda Spring Boot Starter & Process Test - Spring Boot 4.0 support
+
+With the 8.8.9 patch release, dedicated Spring Boot 4.0 based modules are released for the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md#spring-boot-40-support) and [Camunda Process Test Spring](../../../apis-tools/testing/getting-started.md?client=spring-sdk#spring-boot-40-support) as drop-in replacements for the default Spring Boot 3.5.x-based modules.
+
+You must use these if you want to migrate your application to Spring Boot 4.0.
+
+:::note
+With Camunda 8.9, the default Spring Boot version for the Camunda Spring Boot Starter and Camunda Process Test Spring changes to 4.0.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
 #### The Node.js SDK is now the TypeScript SDK
 
 With the Camunda 8.8 release, the Node.js SDK now becomes the TypeScript SDK.
