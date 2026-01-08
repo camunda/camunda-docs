@@ -157,62 +157,20 @@ To process all diagrams in a directory (including subdirectories):
 java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local ./my-processes/
 ```
 
-To see all available options for `local` mode:
+Key options for `local` mode:
+
+| Option               | Description                                                   |
+| -------------------- | ------------------------------------------------------------- |
+| `--platform-version` | Semantic version of the target platform (defaults to latest)  |
+| `--csv`              | Create a CSV file with analysis results                       |
+| `--xlsx`             | Create an XLSX file with analysis results                     |
+| `--prefix`           | Prefix for the generated file name (default: `converted-c8-`) |
+| `-o, --override`     | Override existing files                                       |
+
+To see all available options:
 
 ```shell
 java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local --help
-
-Usage: camunda-7-to-8-diagram-converter-cli local [-dhoV] [--check] [--csv]
-       [--add-data-migration-execution-listener]
-       [--data-migration-execution-listener-job-type=<dataMigrationExecutionListenerJobType>]
-       [--disable-append-elements]
-       [--always-use-default-job-type] [--md] [-nr]
-       [--default-job-type=<defaultJobType>]
-       [--platform-version=<platformVersion>] [--prefix=<prefix>] <file>
-Converts the diagram from the given directory or file
-
-Parameter:
-      <file>                 The file to convert or directory to search in
-Options:
-      --add-data-migration-execution-listener
-                             Add an execution listener on blank start events
-                               that can be used for the Camunda 7 Data Migrator
-      --always-use-default-job-type
-                             Always fill in the configured default job type,
-                               interesting if you want to use one delegation
-                               job worker (like the Camunda 7 Adapter).
-      --check                If enabled, no converted diagrams are exported
-      --csv                  If enabled, a CSV file will be created containing
-                               the results for the analysis
-  -d, --documentation        If enabled, messages are also appended to
-                               documentation
-      --data-migration-execution-listener-job-type=<dataMigrationExecutionListen
-        erJobType>
-                             Name of the job type of the listener. If set, the
-                               default value from the 'converter-properties.
-                               properties' is overridden
-      --default-job-type=<defaultJobType>
-                             Job type used when adjusting delegates. If set,
-                               the default value from the 'converter-properties.
-                               properties' is overridden
-      --disable-append-elements
-                             Disables adding conversion messages to the bpmn xml
-  -h, --help                 Show this help message and exit.
-      --keep-job-type-blank  Sets all job types to blank so that you need to
-                               edit those after conversion yourself
-      --md, --markdown       If enabled, a markdown file will be created
-                               containing the results for all conversions
-      -nr, --not-recursive   If enabled, recursive search in subfolders will be
-                               omitted
-  -o, --override             If enabled, existing files are overridden
-      --platform-version=<platformVersion>
-                             Semantic version of the target platform, defaults
-                               to latest version
-      --prefix=<prefix>      Prefix for the name of the generated file
-                               Default: converted-c8-
-  -V, --version              Print version information and exit.
-      --xlsx                 If enabled, a XLSX file will be created containing
-                               the results for the analysis
 ```
 
 ### Engine mode
@@ -223,50 +181,21 @@ Use engine mode to process diagrams directly from a running Camunda 7 engine via
 java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar engine http://localhost:8080/engine-rest
 ```
 
-To see all available options for `engine` mode:
+Key options for `engine` mode:
+
+| Option                   | Description                                                    |
+| ------------------------ | -------------------------------------------------------------- |
+| `--platform-version`     | Semantic version of the target platform (defaults to latest)   |
+| `-u, --username`         | Username for basic auth                                        |
+| `-p, --password`         | Password for basic auth                                        |
+| `-t, --target-directory` | Directory to save the .bpmn files (default: current directory) |
+| `--csv`                  | Create a CSV file with analysis results                        |
+| `--xlsx`                 | Create an XLSX file with analysis results                      |
+
+To see all available options:
 
 ```shell
 java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar engine --help
-
-Usage: camunda-7-to-8-diagram-converter-cli engine [-dhoV] [--check] [--csv] [--xlsx]
-       [--disable-default-job-type] [--default-job-type=<defaultJobType>]
-       [-p=<password>] [--platform-version=<platformVersion>]
-       [--prefix=<prefix>] [-t=<targetDirectory>] [-u=<username>] <url>
-Converts the diagrams from the given process engine
-
-Parameter:
-      <url>               Fully qualified http(s) address to the process engine
-                            REST API
-                            Default: http://localhost:8080/engine-rest
-Options:
-      --check             If enabled, no converted diagrams are exported
-      --csv               If enabled, a CSV file will be created containing the
-                            results for all conversions
-  -d, --documentation     If enabled, messages are also appended to
-                            documentation
-      --default-job-type=<defaultJobType>
-                          If set, the default value from the
-                            'converter-properties.properties' for the job type
-                            is overridden
-      --disable-default-job-type
-                          Disables the default job type
-  -h, --help              Show this help message and exit.
-  -o, --override          If enabled, existing files are overridden
-  -p, --password=<password>
-                          Password for basic auth
-      --platform-version=<platformVersion>
-                          Semantic version of the target platform, defaults to
-                            latest version
-      --prefix=<prefix>   Prefix for the name of the generated file
-                            Default: converted-c8-
-  -t, --target-directory=<targetDirectory>
-                          The directory to save the .bpmn files
-                            Default: .
-  -u, --username=<username>
-                          Username for basic auth
-  -V, --version           Print version information and exit.
-      --xlsx              If enabled, a XLSX file will be created containing
-                            the results for the analysis
 ```
 
 ## Convert your diagrams
