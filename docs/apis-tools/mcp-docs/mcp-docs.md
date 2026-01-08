@@ -9,17 +9,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import McpServerImg from './img/camunda-docs-mcpserver.png';
 
-Use the Camunda Docs (Model Context Protocol) MCP server to query Camunda 8 documentation from within your IDE or AI tool.
-
-:::info Usage and limits
-The Camunda Docs MCP server is not designed for use in production environments, high-volume automation, or as part of a CI/CD pipeline. It is provided to help support Camunda developer IDE queries and coding assistance, evaluation, and testing. You must check and validate generated content and code as responses can be inaccurate. See [authentication and usage limits](#authentication-and-usage-limits).
-:::
+Use the Camunda Docs [(Model Context Protocol) MCP server](https://modelcontextprotocol.io/docs/getting-started/intro) to query Camunda 8 documentation in your IDE or AI tool.
 
 ## About
 
-Add the Camunda Docs (MCP) server to let your AI agent directly access the latest official Camunda 8 documentation.
+Add the Camunda Docs MCP server to let your AI agent directly access the latest official Camunda 8 documentation.
 
-For example, if you use an AI coding tool such as [Cursor](https://cursor.com/) or [Copilot](https://code.visualstudio.com/docs/copilot/overview), adding the MCP server can help ensure more accurate AI responses and code generation via the current Camunda documentation and context.
+For example, if you use an AI coding tool such as [Cursor](https://cursor.com/) or [Copilot](https://code.visualstudio.com/docs/copilot/overview), adding the MCP server can help ensure more accurate AI responses and code generation as it uses the current Camunda 8 documentation and context.
 
 <img src={McpServerImg} alt="Ask context-aware questions about Camunda within VS Code." title="Ask context-aware questions about Camunda within VS Code." class="img-800" style={{marginTop: '0'}}/>
 
@@ -122,13 +118,17 @@ Most clients accept the standard MCP protocol JSON configuration format:
 
 </Tabs>
 
-## Usage
+## Usage and limits
 
 Once connected to the MCP server within your editor, you can ask context-aware questions about Camunda. For example:
 
 - "What is BPMN?"
 - "How do I build an AI agent?"
 - "What properties are changed for Camunda 8.8?"
+
+:::info Usage and limits
+The Camunda Docs MCP server is not designed for use in production environments, high-volume automation, or as part of a CI/CD pipeline. It is provided to help support Camunda developer IDE queries and for coding assistance, evaluation, and testing. You must always check and validate AI generated content and code as responses can be inaccurate.
+:::
 
 ### Authentication and usage limits
 
@@ -139,6 +139,10 @@ This anonymous Google ID is only used to enforce per-user rate limits and preven
 - 40 requests per user per hour.
 - 200 requests per user per day.
 
+:::info
+The MCP server is powered by the Kapa.ai AI assistant. Refer to the [Kapa documentation](https://docs.kapa.ai/integrations/mcp/overview#authentication) to learn more about authentication.
+:::
+
 ### Tools
 
 The MCP server exposes a single semantic search tool:
@@ -147,11 +151,7 @@ The MCP server exposes a single semantic search tool:
 
 This tool allows AI tools/agents to perform semantic retrieval over the Camunda 8 documentation and other knowledge sources, such as forum posts, repos, podcasts, and product blogs.
 
-:::info
-The MCP server is powered by the [Kapa.ai](https://www.kapa.ai) AI assistant.
-:::
-
-## Example: Use with VS Code Copilot
+## Example VS Code Copilot integration
 
 1. Install the Camunda Docs MCP server.
 1. In VS Code, open Copilot Chat.
