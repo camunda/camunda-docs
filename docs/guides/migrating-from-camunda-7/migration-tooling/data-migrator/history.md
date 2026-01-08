@@ -436,14 +436,14 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | processInstanceKey     | Yes      |
 | processDefinitionKey   | Yes      |
 | processDefinitionId    | Yes      |
-| flowNodeScopeKey       | No       |
+| flowNodeScopeKey       | Yes      |
 | startDate              | Yes      |
 | endDate                | Yes      |
 | flowNodeId             | Yes      |
 | flowNodeName           | No       |
 | treePath               | Yes      |
 | type                   | Yes      |
-| state                  | No       |
+| state                  | Yes      |
 | incidentKey            | No       |
 | numSubprocessIncidents | No       |
 | hasIncident            | No       |
