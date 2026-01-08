@@ -592,7 +592,6 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | partitionId          | No       |
 | historyCleanupDate   | No       |
 
-
 ### Usage metric
 
 | Property    | Migrated |
