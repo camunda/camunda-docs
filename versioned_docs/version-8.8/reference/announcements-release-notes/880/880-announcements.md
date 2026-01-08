@@ -68,6 +68,15 @@ See the [component version matrix](/reference/supported-environments.md#componen
 
 ## Key changes
 
+### 8.8.x patch releases
+
+The following key changes were released in an 8.8.x patch release after the 8.8.0 minor release.
+
+| Patch release | Change                                                                                                                                                |
+| :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 8.8.9         | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
+| 8.8.9         | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
+
 ### APIs & tools
 
 <div className="release-announcement-row">
@@ -436,7 +445,7 @@ To learn more about migrating to the Camunda Java client, see the [migration gui
 </div>
 <div className="release-announcement-content">
 
-#### 8.8.9: Camunda Spring Boot Starter & Process Test - Spring Boot 4.0 support
+#### Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test
 
 With the 8.8.9 patch release, dedicated Spring Boot 4.0 based modules are released for the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md#spring-boot-40-support) and [Camunda Process Test Spring](../../../apis-tools/testing/getting-started.md?client=spring-sdk#spring-boot-40-support) as drop-in replacements for the default Spring Boot 3.5.x-based modules.
 
