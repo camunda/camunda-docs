@@ -68,6 +68,15 @@ See the [component version matrix](/reference/supported-environments.md#componen
 
 ## Key changes
 
+### 8.8.x patch releases
+
+The following key changes were also released as part of an 8.8.x patch release.
+
+| Patch release                                                  | Type            | Key change                                                                                                                                            |
+| :------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9) | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9) | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
+
 ### APIs & tools
 
 <div className="release-announcement-row">
@@ -426,6 +435,25 @@ The Camunda Spring Boot Starter is based on Spring Boot 3.5, see [version compat
 :::
 :::info
 To learn more about migrating to the Camunda Java client, see the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md).
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test
+
+With the 8.8.9 patch release, dedicated Spring Boot 4.0 based modules are released for the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md#spring-boot-40-support) and [Camunda Process Test Spring](../../../apis-tools/testing/getting-started.md?client=spring-sdk#spring-boot-40-support) as drop-in replacements for the default Spring Boot 3.5.x-based modules.
+
+You must use these if you want to migrate your application to Spring Boot 4.0.
+
+:::note
+With Camunda 8.9, the default Spring Boot version for the Camunda Spring Boot Starter and Camunda Process Test Spring changes to 4.0.
 :::
 
 </div>
