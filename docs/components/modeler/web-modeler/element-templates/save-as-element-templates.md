@@ -32,12 +32,13 @@ The **Save as template** feature is available for the following BPMN element typ
 - Manual task
 - Call activity
 
+You cannot create a template for the [undefined task type](../../../bpmn/undefined-tasks).
+
 **Events**
 
 - Message events
 - Signal events
-
-You cannot create a template for the [undefined task type](../../../bpmn/undefined-tasks).
+- Timer events
 
 ## Create an element template from an element
 
