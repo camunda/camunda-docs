@@ -41,12 +41,12 @@ The following requirements and limitations apply:
 The History Data Migrator does not support the following Camunda 8 entities or properties:
 
 - Sequence flow: Sequence flows cannot be highlighted in Operate.
-- User task migration metadata: Migration-specific user task metadata is not available in Camunda 7.
+- User task migration metadata: Information for user tasks migrated via process instance migration is not available in Camunda 7.
 - Message subscription and correlated message subscription: These entities are not available in Camunda 7.
 - Batch operation entity and batch operation item: Camunda 7 does not retain sufficient information about processed instances.
 - User metrics: Not available in Camunda 7.
 - Exporter position: This entity does not exist in Camunda 7.
-- Process instance and task tags: These properties do not exist in Camunda 7.
+- Process instance and user task tags: These properties do not exist in Camunda 7.
 - Audit log: Not supported. See the related tracking issue.
 
 ## Usage examples
