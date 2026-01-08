@@ -37,48 +37,60 @@ These release notes identify the main new features included in the 8.9 minor rel
 | :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 13 January 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha3)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha3)</li></ul> | -    |
 
-### Bring your own monitoring
+### Camunda 8 Run
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+#### Streamline your Camunda 8 Run experience
+
+<!-- https://github.com/camunda/product-hub/issues/2866 -->
+
+Camunda 8 Run is now easier to get started with. The CLI includes a helpful usage page, clearer error messages, especially for Elasticsearch startup, and prominently displays connection properties and credential information.
+
+A revamped Java detection guided setup, log cleanup options, and better defaults for development environments (such as disk watermark thresholds) have been added. You can also start fresh using a new clean-state command, and the unified configuration file is now included and thoroughly documented.
+
+#### Use H2 for data storage
+
+<!-- https://github.com/camunda/product-hub/issues/2832, https://github.com/camunda/product-hub/issues/2656 -->
+
+Camunda 8 Run now ships with H2 as the default secondary data store, providing:
+
+- A lighter, simpler local development experience.
+- Lower memory usage.
+- A fully functional stack without requiring an external database.
+
+New documentation walks you through:
+
+- Installing Camunda 8 Run with H2 as the default secondary storage.
+- Seamlessly switching from H2 to Elasticsearch or OpenSearch when needed.
+
+### Cluster Metrics endpoint
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
 <!-- https://github.com/camunda/product-hub/issues/2229 -->
 
-Camunda 8.9 introduces _bring your own monitoring (BYOM)_ for SaaS clusters. You can activate a secure metrics endpoint for your C8 cluster and integrate it with Prometheus, Datadog, or any monitoring system that supports Prometheus scraping.
+Camunda 8.9 provides a Cluster Metrics endpoint for SaaS clusters.
+You can activate a secure metrics endpoint for your Camunda 8 cluster and integrate it with Prometheus, Datadog, or any monitoring system that supports Prometheus scraping.
 
-This gives you real-time visibility into cluster performance, helps you troubleshoot faster, and lets you seamlessly integrate with your existing observability stack.
+This gives you real-time visibility into cluster performance, helps you troubleshoot faster, and allows you to seamlessly integrate with your existing observability stack.
 
-### Migrate process instances
+### Global user task listeners
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
-<!-- https://github.com/camunda/product-hub/issues/3065 -->
+<!-- https://github.com/camunda/product-hub/issues/2586 -->
 
-Camunda 8.9 now supports migration of process instances that include ad-hoc subprocesses, covering both single-instance and multi-instance (parallel and sequential) variants.
+Camunda 8.9 introduces configuration-based global user task listeners for Self-Managed deployments.
 
-With this enhancement, you can:
+Administrators can define cluster-wide listeners using configuration files or environment variables, ensuring they are applied consistently from cluster startup and preserved across backup and restore operations.
 
-- Safely migrate running instances.
-- Update AI agent flows.
-- Modernize process definitions without losing execution state.
-
-This unlocks more flexible, agent-driven orchestration and faster iteration on live automation.
+All user task lifecycle events emit payloads containing full variable context and metadata, enabling standardized integrations across all processes.
 
 ### Modeler
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
-#### Create event templates in Web Modeler
-
-<!-- https://github.com/camunda/product-hub/issues/3173 -->
-
-You can now create, discover, and apply templates for more BPMN event types, including message, signal, and timer, directly within the element template editor.
-
-You can also create global event templates that:
-
-- Are reusable across projects.
-- Standardize event configurations (for example, message names or payload structures).
-- Help ensure consistency across teams and models.
-
-#### Manage Camunda connections in Desktop Modeler
+#### Desktop Modeler: Manage Camunda connections
 
 <!-- https://github.com/camunda/product-hub/issues/2970 -->
 
@@ -90,6 +102,18 @@ You can now manage Camunda connections directly in Desktop Modeler:
 - Select an existing Orchestration Cluster or add a new one during deployment.
 
 This streamlines the deployment workflow and reduces setup friction.
+
+#### Web Modeler: Create event templates
+
+<!-- https://github.com/camunda/product-hub/issues/3173 -->
+
+You can now create, discover, and apply templates for more BPMN event types, including message, signal, and timer, directly within the element template editor.
+
+You can also create global event templates that:
+
+- Are reusable across projects.
+- Standardize event configurations (for example, message names or payload structures).
+- Help ensure consistency across teams and models.
 
 ### Orchestration Cluster
 
@@ -105,23 +129,11 @@ Camunda 8.9 adds support for cluster variables, letting you centrally manage con
 - `camunda.vars.tenant`: tenant scope.
 - `camunda.vars.env`: merged view with automatic priority.
 
-If the same variable exists at multiple scopes, tenant overrides global, and process-level variables have the highest priority. This hierarchy lets you create cascading configurations, where specific contexts override broader defaults.
+If the same variable exists at multiple scopes, tenant overrides global, and process-level variables have the highest priority. This hierarchy allows you to create cascading configurations, where specific contexts override broader defaults.
 
 Cluster variables support simple key-value pairs and nested objects, which you can access with dot notation for complex structures. You can manage all cluster variables via the Orchestration Cluster API.
 
 <p class="link-arrow">[Cluster variables overview](/components/modeler/feel/cluster-variable/overview.md)</p>
-
-#### Migrate legacy job-based user tasks to engine-managed user tasks
-
-<!-- https://github.com/camunda/product-hub/issues/2626 -->
-
-You can now migrate active instances from legacy job-based user tasks to modern, engine-managed Camunda user tasks through both the API and the Operate UI as part of process instance migration.
-
-This lets you:
-
-- Standardize on the Orchestration Cluster APIs.
-- Adopt the recommended user task type.
-- Prepare for the removal of job-based user task querying and management from the consolidated API.
 
 #### Use Amazon Aurora for secondary storage
 
@@ -138,21 +150,25 @@ Camunda 8.9 now supports Amazon Aurora as a secondary data store for orchestrati
 
 Helm charts and manual installation guides now include tested configurations and step-by-step references for Aurora, reducing operational complexity and accelerating adoption for AWS-centric organizations.
 
-### Self-Managed
+### Process instance migration
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3065 -->
+
+Camunda 8.9 now supports migration of process instances that include ad-hoc subprocesses, covering both single-instance and multi-instance (parallel and sequential) variants.
+
+With this enhancement, you can:
+
+- Safely migrate running instances.
+- Update AI agent flows.
+- Modernize process definitions without losing execution state.
+
+This unlocks more flexible, agent-driven orchestration and faster iteration on live automation.
+
+### RDBMS secondary storage
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
-
-#### Configure global user task listeners in Self-Managed
-
-<!-- https://github.com/camunda/product-hub/issues/2586 -->
-
-Camunda 8.9 introduces configuration-based global user task listeners for Self-Managed deployments.
-
-Administrators can define cluster-wide listeners using configuration files or environment variables, ensuring they are applied consistently from cluster startup and preserved across backup and restore operations.
-
-All user task lifecycle events emit payloads containing full variable context and metadata, enabling standardized integrations across all processes.
-
-#### Set up RDBMS as secondary storage in Helm
 
 <!-- https://github.com/camunda/product-hub/issues/2690 -->
 
@@ -165,29 +181,6 @@ With this update, administrators can:
 - Enable advanced authentication and custom JDBC drivers.
 
 This allows enterprises to run Camunda 8 on familiar, enterprise-managed RDBMS infrastructure aligned with existing security, backup, and compliance requirements.
-
-#### Streamline your Camunda 8 Run experience
-
-<!-- https://github.com/camunda/product-hub/issues/2866 -->
-
-Camunda 8 Run is now easier to get started with. The CLI includes a helpful usage page, clearer error messages, especially for Elasticsearch startup, and prominently displays connection properties and credential information.
-
-A revamped Java detection guided setup, log cleanup options, and better defaults for development environments (such as disk watermark thresholds) have been added. You can also start fresh using a new clean-state command, and the unified configuration file is now included and thoroughly documented.
-
-#### Use H2 for data storage in Camunda 8 Run
-
-<!-- https://github.com/camunda/product-hub/issues/2832, https://github.com/camunda/product-hub/issues/2656 -->
-
-Camunda 8 Run now ships with H2 as the default secondary data store, providing:
-
-- A lighter, simpler local development experience.
-- Lower memory usage.
-- A fully functional stack without requiring an external database.
-
-New documentation walks you through:
-
-- Installing Camunda 8 Run with H2 as the default secondary storage.
-- Seamlessly switching from H2 to Elasticsearch or OpenSearch when needed.
 
 ## 8.9.0-alpha2
 

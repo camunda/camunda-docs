@@ -24,26 +24,6 @@ Supported environment changes and breaking changes or deprecations for the Camun
 ## Key changes
 
 ### Agentic orchestration
-### APIs & tools
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Camunda Spring Boot Starter now requires Spring Boot 4.0.x
-
-Starting with 8.9.0-alpha3, the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md) requires Spring Boot 4.0.x.
-
-To remain compatible, migrate your application to Spring Boot 4.0.x.
-
-This change aligns with the Spring Boot support policy, as OSS support for Spring Boot 3.x ends in June 2026. See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support).
-
-</div>
-</div>
-
-### Supported environments
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -60,6 +40,25 @@ To resolve this, you must update both the MCP Client and MCP Remote Client conne
 :::info
 To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-client.md) documentation.
 :::
+
+</div>
+</div>
+
+### APIs & tools
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Spring Boot Starter now requires Spring Boot 4.0.x
+
+Starting with 8.9.0-alpha3, the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md) requires Spring Boot 4.0.x.
+
+To remain compatible, migrate your application to Spring Boot 4.0.x.
+
+This change aligns with the Spring Boot support policy, as OSS support for Spring Boot 3.x ends in June 2026. See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support).
 
 </div>
 </div>
