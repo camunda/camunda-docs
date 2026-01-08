@@ -12,11 +12,7 @@ All cluster data, including deployed process definitions, process instance state
 Secondary storage is configurable. Choose the backend that best fits your requirements for indexing, querying, retention, and operations. See [configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md) for setup guidance, and refer to [secondary storage](/reference/glossary.md#secondary-storage) for terminology and conceptual context.
 :::
 
-When using Elasticsearch/OpenSearch, finished data is moved to a dated index (for example, `operate-variable_2020-01-01`), with the suffix representing the completion date of the associated process or operation. For RDBMS backends, the exporter does not create dated indices. Data remains in the same tables and is managed by retention settings.
-
-:::note
-In Elasticsearch/OpenSearch, data from both main and dated indices remains visible from the UI. In RDBMS backends, data stays in the same tables and remains visible until retention policies delete it.
-:::
+When using Elasticsearch/OpenSearch, finished data is moved to a dated index (for example, `operate-variable_2020-01-01`), with the suffix representing the completion date of the associated process or operation. Data from both main and dated indices remains searchable and visible in the UI. For RDBMS backends, the exporter does not create dated indices. Data remains in the same tables and stays visible until retention policies delete it.
 
 ## Archive period
 
