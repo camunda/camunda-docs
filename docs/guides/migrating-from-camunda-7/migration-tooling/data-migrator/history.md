@@ -27,19 +27,27 @@ You can run audit data migration alongside normal operations (for example, after
 
 The following requirements and limitations apply:
 
-- The History Data Migrator needs to access the Camunda 7 database.
-- The History Data Migrator can only migrate to Camunda 8 **if a relational database (RDBMS) is used**, a feature planned for **Camunda 8.9**.
-- The History Data Migrator needs to access the Camunda 8 database (which means you can only run this tool in a **self-managed environment**).
-- If runtime and history data are migrated at the same time, you will end up with two instances in Camunda 8: a canceled historic process instance and an active new one in the runtime. They are linked by process variables.
-- Unsupported Camunda 8 entities and properties
-  - Sequence Flow - in Operate Sequence Flow can’t be highlighted
-  - User Task migration - information not available in C7
-  - Message subscription and correlated message subscription - information not available in Camunda 7
-  - Batch operation entity and item - Camunda 7 doesn’t keep much evidence for processed instances
-  - User metrics
-  - Exporter position - doesn’t exist in Camunda 7
-  - Process instance/Task tag - doesn’t exist in Camunda 7
-  - Audit log - [ticket](https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/517)
+- The History Data Migrator must be able to access the Camunda 7 database.
+- The History Data Migrator can migrate data to Camunda 8 only when a relational database (RDBMS) is used. This capability is planned for Camunda 8.9.
+- The History Data Migrator must be able to access the Camunda 8 database. As a result, you can run this tool only in a self-managed environment.
+- If you migrate runtime and history data at the same time, Camunda 8 will contain two process instances:
+  - A canceled historic process instance.
+  - An active runtime process instance.
+
+  These instances are linked by process variables.
+
+### Unsupported entities and properties
+
+The History Data Migrator does not support the following Camunda 8 entities or properties:
+
+- Sequence flow: Sequence flows cannot be highlighted in Operate.
+- User task migration metadata: Migration-specific user task metadata is not available in Camunda 7.
+- Message subscription and correlated message subscription: These entities are not available in Camunda 7.
+- Batch operation entity and batch operation item: Camunda 7 does not retain sufficient information about processed instances.
+- User metrics: Not available in Camunda 7.
+- Exporter position: This entity does not exist in Camunda 7.
+- Process instance and task tags: These properties do not exist in Camunda 7.
+- Audit log: Not supported. See the related tracking issue.
 
 ## Usage examples
 
@@ -254,367 +262,956 @@ The history cleanup date is migrated if the Camunda 7 instance has a removal tim
 - All other `tenantId`s will be migrated as-is.
 - For details, see [multi-tenancy](/components/concepts/multi-tenancy.md#tenant-identifier) in Camunda 8.
 
-## Camunda 8 history migration coverage table
+## Camunda 8 history migration coverage
 
-The following table shows which Camunda 8 entities and properties are covered by the History Data Migrator.
+The following table shows which Camunda 8 entities and properties are migrated by the History Data Migrator.
 
-| Camunda 8 Entity                    | Property                    | Migrated with History migrator |
-| ----------------------------------- | --------------------------- | ------------------------------ |
-| **Audit log**                       |                             |                                |
-|                                     | auditLogKey                 |                                |
-|                                     | entityKey                   |                                |
-|                                     | entityType                  |                                |
-|                                     | operationType               |                                |
-|                                     | entityVersion               |                                |
-|                                     | entityValueType             |                                |
-|                                     | entityOperationIntent       |                                |
-|                                     | batchOperationKey           |                                |
-|                                     | batchOperationType          |                                |
-|                                     | timestamp                   |                                |
-|                                     | actorType                   |                                |
-|                                     | actorId                     |                                |
-|                                     | tenantId                    |                                |
-|                                     | tenantScope                 |                                |
-|                                     | result                      |                                |
-|                                     | annotation                  |                                |
-|                                     | category                    |                                |
-|                                     | processDefinitionId         |                                |
-|                                     | decisionRequirementsId      |                                |
-|                                     | decisionDefinitionId        |                                |
-|                                     | processDefinitionKey        |                                |
-|                                     | processInstanceKey          |                                |
-|                                     | elementInstanceKey          |                                |
-|                                     | jobKey                      |                                |
-|                                     | userTaskKey                 |                                |
-|                                     | decisionRequirementsKey     |                                |
-|                                     | decisionDefinitionKey       |                                |
-|                                     | decisionEvaluationKey       |                                |
-|                                     | deploymentKey               |                                |
-|                                     | formKey                     |                                |
-|                                     | resourceKey                 |                                |
-| **Authorization**                   |                             |                                |
-|                                     | authorizationKey            |                                |
-|                                     | ownerId                     |                                |
-|                                     | ownerType                   |                                |
-|                                     | resourceType                |                                |
-|                                     | resourceMatcher             |                                |
-|                                     | resourceId                  |                                |
-|                                     | resourcePropertyName        |                                |
-|                                     | permissionTypes             |                                |
-| **Batch operation**                 |                             |                                |
-|                                     | batchOperationKey           |                                |
-|                                     | state                       |                                |
-|                                     | operationType               |                                |
-|                                     | startDate                   |                                |
-|                                     | endDate                     |                                |
-|                                     | actorType                   |                                |
-|                                     | actorId                     |                                |
-|                                     | operationsTotalCount        |                                |
-|                                     | operationsFailedCount       |                                |
-|                                     | operationsCompletedCount    |                                |
-|                                     | errors                      |                                |
-| **Batch operation item**            |                             |                                |
-|                                     | batchOperationKey           |                                |
-|                                     | itemKey                     |                                |
-|                                     | processInstanceKey          |                                |
-|                                     | state                       |                                |
-|                                     | processedDate               |                                |
-|                                     | errorMessage                |                                |
-| **Cluster variable**                |                             |                                |
-|                                     | id                          |                                |
-|                                     | name                        |                                |
-|                                     | type                        |                                |
-|                                     | doubleValue                 |                                |
-|                                     | longValue                   |                                |
-|                                     | value                       |                                |
-|                                     | fullValue                   |                                |
-|                                     | isPreview                   |                                |
-|                                     | tenantId                    |                                |
-|                                     | scope                       |                                |
-| **Correlated message subscription** |                             |                                |
-|                                     | correlationKey              |                                |
-|                                     | correlationTime             |                                |
-|                                     | flowNodeId                  |                                |
-|                                     | flowNodeInstanceKey         |                                |
-|                                     | historyCleanupDate          |                                |
-|                                     | messageKey                  |                                |
-|                                     | messageName                 |                                |
-|                                     | partitionId                 |                                |
-|                                     | processDefinitionId         |                                |
-|                                     | processDefinitionKey        |                                |
-|                                     | processInstanceKey          |                                |
-|                                     | rootProcessInstanceKey      |                                |
-|                                     | subscriptionKey             |                                |
-|                                     | subscriptionType            |                                |
-|                                     | tenantId                    |                                |
-| **Decision definition**             |                             |                                |
-|                                     | decisionDefinitionKey       | Yes                            |
-|                                     | name                        | Yes                            |
-|                                     | decisionDefinitionId        | Yes                            |
-|                                     | tenantId                    | Yes                            |
-|                                     | version                     | Yes                            |
-|                                     | decisionRequirementsId      | Yes                            |
-|                                     | decisionRequirementsKey     |                                |
-|                                     | decisionRequirementsName    |                                |
-|                                     | decisionRequirementsVersion |                                |
-| **Decision instance**               |                             |                                |
-|                                     | decisionInstanceId          |                                |
-|                                     | decisionInstanceKey         |                                |
-|                                     | state                       | Yes                            |
-|                                     | evaluationDate              | Yes                            |
-|                                     | evaluationFailure           |                                |
-|                                     | evaluationFailureMessage    |                                |
-|                                     | result                      | Yes                            |
-|                                     | flowNodeInstanceKey         | Yes                            |
-|                                     | flowNodeId                  | Yes                            |
-|                                     | processInstanceKey          | Yes                            |
-|                                     | processDefinitionKey        | Yes                            |
-|                                     | processDefinitionId         | Yes                            |
-|                                     | decisionDefinitionKey       | Yes                            |
-|                                     | decisionDefinitionId        | Yes                            |
-|                                     | decisionRequirementsKey     | Yes                            |
-|                                     | decisionRequirementsId      | Yes                            |
-|                                     | rootDecisionDefinitionKey   | Yes                            |
-|                                     | decisionType                | Yes                            |
-|                                     | tenantId                    | Yes                            |
-|                                     | partitionId                 | Yes                            |
-|                                     | evaluatedInputs             | Yes                            |
-|                                     | evaluatedOutputs            | Yes                            |
-|                                     | historyCleanupDate          | Yes                            |
-| **Decision requirements**           |                             |                                |
-|                                     | decisionRequirementsKey     | Yes                            |
-|                                     | decisionRequirementsId      | Yes                            |
-|                                     | name                        | Yes                            |
-|                                     | resourceName                | Yes                            |
-|                                     | version                     | Yes                            |
-|                                     | xml                         | Yes                            |
-|                                     | tenantId                    | Yes                            |
-| **Exporter position**               |                             |                                |
-|                                     | partitionId                 |                                |
-|                                     | exporter                    |                                |
-|                                     | lastExportedPosition        |                                |
-|                                     | created                     |                                |
-|                                     | lastUpdated                 |                                |
-| **Flow node instance**              |                             |                                |
-|                                     | flowNodeInstanceKey         |                                |
-|                                     | processInstanceKey          | Yes                            |
-|                                     | processDefinitionKey        | Yes                            |
-|                                     | processDefinitionId         | Yes                            |
-|                                     | flowNodeScopeKey            |                                |
-|                                     | startDate                   | Yes                            |
-|                                     | endDate                     | Yes                            |
-|                                     | flowNodeId                  | Yes                            |
-|                                     | flowNodeName                |                                |
-|                                     | treePath                    | Yes                            |
-|                                     | type                        | Yes                            |
-|                                     | state                       |                                |
-|                                     | incidentKey                 |                                |
-|                                     | numSubprocessIncidents      |                                |
-|                                     | hasIncident                 |                                |
-|                                     | tenantId                    | Yes                            |
-|                                     | partitionId                 |                                |
-|                                     | rootProcessInstanceKey      |                                |
-|                                     | historyCleanupDate          |                                |
-| **Form**                            |                             |                                |
-|                                     | formKey                     |                                |
-|                                     | tenantId                    |                                |
-|                                     | formId                      |                                |
-|                                     | schema                      |                                |
-|                                     | version                     |                                |
-|                                     | isDeleted                   |                                |
-| **Group**                           |                             |                                |
-|                                     | groupKey                    |                                |
-|                                     | groupId                     |                                |
-|                                     | name                        |                                |
-|                                     | description                 |                                |
-|                                     | members                     |                                |
-| **History deletion**                |                             |                                |
-|                                     | resourceKey                 |                                |
-|                                     | resourceType                |                                |
-|                                     | batchOperationKey           |                                |
-|                                     | partitionId                 |                                |
-| **Incident**                        |                             |                                |
-|                                     | incidentKey                 | Yes                            |
-|                                     | processDefinitionKey        | Yes                            |
-|                                     | processDefinitionId         | Yes                            |
-|                                     | processInstanceKey          | Yes                            |
-|                                     | rootProcessInstanceKey      |                                |
-|                                     | flowNodeInstanceKey         | Yes                            |
-|                                     | flowNodeId                  | Yes                            |
-|                                     | jobKey                      | Yes                            |
-|                                     | errorType                   |                                |
-|                                     | errorMessage                | Yes                            |
-|                                     | errorMessageHash            |                                |
-|                                     | creationDate                | Yes                            |
-|                                     | state                       | Yes                            |
-|                                     | treePath                    |                                |
-|                                     | tenantId                    | Yes                            |
-|                                     | partitionId                 |                                |
-|                                     | historyCleanupDate          |                                |
-| **Job**                             |                             |                                |
-|                                     | jobKey                      |                                |
-|                                     | type                        |                                |
-|                                     | worker                      |                                |
-|                                     | state                       |                                |
-|                                     | kind                        |                                |
-|                                     | listenerEventType           |                                |
-|                                     | retries                     |                                |
-|                                     | isDenied                    |                                |
-|                                     | deniedReason                |                                |
-|                                     | hasFailedWithRetriesLeft    |                                |
-|                                     | errorCode                   |                                |
-|                                     | errorMessage                |                                |
-|                                     | serializedCustomHeaders     |                                |
-|                                     | customHeaders               |                                |
-|                                     | deadline                    |                                |
-|                                     | endTime                     |                                |
-|                                     | processDefinitionId         |                                |
-|                                     | processDefinitionKey        |                                |
-|                                     | processInstanceKey          |                                |
-|                                     | rootProcessInstanceKey      |                                |
-|                                     | elementId                   |                                |
-|                                     | elementInstanceKey          |                                |
-|                                     | tenantId                    |                                |
-|                                     | partitionId                 |                                |
-|                                     | historyCleanupDate          |                                |
-|                                     | creationTime                |                                |
-|                                     | lastUpdateTime              |                                |
-| **Mapping rule**                    |                             |                                |
-|                                     | mappingRuleId               |                                |
-|                                     | mappingRuleKey              |                                |
-|                                     | claimName                   |                                |
-|                                     | claimValue                  |                                |
-|                                     | name                        |                                |
-| **Message subscription**            |                             |                                |
-|                                     | messageSubscriptionKey      |                                |
-|                                     | processDefinitionId         |                                |
-|                                     | processDefinitionKey        |                                |
-|                                     | processInstanceKey          |                                |
-|                                     | rootProcessInstanceKey      |                                |
-|                                     | flowNodeId                  |                                |
-|                                     | flowNodeInstanceKey         |                                |
-|                                     | messageSubscriptionState    |                                |
-|                                     | dateTime                    |                                |
-|                                     | messageName                 |                                |
-|                                     | correlationKey              |                                |
-|                                     | tenantId                    |                                |
-|                                     | partitionId                 |                                |
-|                                     | historyCleanupDate          |                                |
-| **Process definition**              |                             |                                |
-|                                     | processDefinitionKey        | Yes                            |
-|                                     | processDefinitionId         | Yes                            |
-|                                     | resourceName                | Yes                            |
-|                                     | name                        | Yes                            |
-|                                     | tenantId                    | Yes                            |
-|                                     | versionTag                  | Yes                            |
-|                                     | version                     | Yes                            |
-|                                     | bpmnXml                     | Yes                            |
-|                                     | formId                      |                                |
-| **Process instance**                |                             |                                |
-|                                     | processInstanceKey          | Yes                            |
-|                                     | rootProcessInstanceKey      |                                |
-|                                     | processDefinitionId         | Yes                            |
-|                                     | processDefinitionKey        |                                |
-|                                     | state                       | Yes                            |
-|                                     | startDate                   | Yes                            |
-|                                     | endDate                     | Yes                            |
-|                                     | tenantId                    | Yes                            |
-|                                     | parentProcessInstanceKey    | Yes                            |
-|                                     | parentElementInstanceKey    |                                |
-|                                     | numIncidents                |                                |
-|                                     | version                     | Yes                            |
-|                                     | partitionId                 | Yes                            |
-|                                     | treePath                    |                                |
-|                                     | historyCleanupDate          | Yes                            |
-|                                     | tags                        |                                |
-| **Role**                            |                             |                                |
-|                                     | roleKey                     |                                |
-|                                     | roleId                      |                                |
-|                                     | name                        |                                |
-|                                     | description                 |                                |
-|                                     | members                     |                                |
-| **Sequence flow**                   |                             |                                |
-|                                     | flowNodeId                  |                                |
-|                                     | processInstanceKey          |                                |
-|                                     | processDefinitionKey        |                                |
-|                                     | processDefinitionId         |                                |
-|                                     | tenantId                    |                                |
-|                                     | partitionId                 |                                |
-|                                     | historyCleanupDate          |                                |
-| **Tenant**                          |                             |                                |
-|                                     | tenantKey                   |                                |
-|                                     | tenantId                    |                                |
-|                                     | name                        |                                |
-|                                     | description                 |                                |
-|                                     | members                     |                                |
-| **Usage metric**                    |                             |                                |
-|                                     | key                         |                                |
-|                                     | startTime                   |                                |
-|                                     | endTime                     |                                |
-|                                     | tenantId                    |                                |
-|                                     | eventType                   |                                |
-|                                     | value                       |                                |
-|                                     | partitionId                 |                                |
-| **Usage metric TU**                 |                             |                                |
-|                                     | key                         |                                |
-|                                     | startTime                   |                                |
-|                                     | endTime                     |                                |
-|                                     | tenantId                    |                                |
-|                                     | assigneeHash                |                                |
-|                                     | partitionId                 |                                |
-| **User**                            |                             |                                |
-|                                     | userKey                     |                                |
-|                                     | username                    |                                |
-|                                     | name                        |                                |
-|                                     | email                       |                                |
-|                                     | password                    |                                |
-| **User task**                       |                             |                                |
-|                                     | userTaskKey                 | Yes                            |
-|                                     | elementId                   | Yes                            |
-|                                     | name                        | Yes                            |
-|                                     | processDefinitionId         | Yes                            |
-|                                     | creationDate                | Yes                            |
-|                                     | completionDate              | Yes                            |
-|                                     | assignee                    | Yes                            |
-|                                     | state                       | Yes                            |
-|                                     | formKey                     |                                |
-|                                     | processDefinitionKey        | Yes                            |
-|                                     | processInstanceKey          | Yes                            |
-|                                     | rootProcessInstanceKey      |                                |
-|                                     | elementInstanceKey          | Yes                            |
-|                                     | tenantId                    | Yes                            |
-|                                     | dueDate                     | Yes                            |
-|                                     | followUpDate                | Yes                            |
-|                                     | candidateGroups             |                                |
-|                                     | candidateUsers              |                                |
-|                                     | externalFormReference       |                                |
-|                                     | processDefinitionVersion    | Yes                            |
-|                                     | serializedCustomHeaders     |                                |
-|                                     | customHeaders               |                                |
-|                                     | priority                    | Yes                            |
-|                                     | tags                        |                                |
-|                                     | partitionId                 | Yes                            |
-|                                     | historyCleanupDate          | Yes                            |
-| **User task migration**             |                             |                                |
-|                                     | userTaskKey                 |                                |
-|                                     | processDefinitionKey        |                                |
-|                                     | processDefinitionId         |                                |
-|                                     | elementId                   |                                |
-|                                     | name                        |                                |
-|                                     | processDefinitionVersion    |                                |
-| **Variable**                        |                             |                                |
-|                                     | variableKey                 | Yes                            |
-|                                     | name                        | Yes                            |
-|                                     | type                        |                                |
-|                                     | doubleValue                 |                                |
-|                                     | longValue                   |                                |
-|                                     | value                       | Yes                            |
-|                                     | fullValue                   |                                |
-|                                     | isPreview                   |                                |
-|                                     | scopeKey                    | Yes                            |
-|                                     | processInstanceKey          | Yes                            |
-|                                     | rootProcessInstanceKey      |                                |
-|                                     | processDefinitionId         | Yes                            |
-|                                     | tenantId                    | Yes                            |
-|                                     | partitionId                 | Yes                            |
-|                                     | historyCleanupDate          | Yes                            |
+### Audit log
+
+| Property                | Migrated |
+| ----------------------- | -------- |
+| auditLogKey             | No       |
+| entityKey               | No       |
+| entityType              | No       |
+| operationType           | No       |
+| entityVersion           | No       |
+| entityValueType         | No       |
+| entityOperationIntent   | No       |
+| batchOperationKey       | No       |
+| batchOperationType      | No       |
+| timestamp               | No       |
+| actorType               | No       |
+| actorId                 | No       |
+| tenantId                | No       |
+| tenantScope             | No       |
+| result                  | No       |
+| annotation              | No       |
+| category                | No       |
+| processDefinitionId     | No       |
+| decisionRequirementsId  | No       |
+| decisionDefinitionId    | No       |
+| processDefinitionKey    | No       |
+| processInstanceKey      | No       |
+| elementInstanceKey      | No       |
+| jobKey                  | No       |
+| userTaskKey             | No       |
+| decisionRequirementsKey | No       |
+| decisionDefinitionKey   | No       |
+| decisionEvaluationKey   | No       |
+| deploymentKey           | No       |
+| formKey                 | No       |
+| resourceKey             | No       |
+
+### Authorization
+
+| Property             | Migrated |
+| -------------------- | -------- |
+| authorizationKey     | No       |
+| ownerId              | No       |
+| ownerType            | No       |
+| resourceType         | No       |
+| resourceMatcher      | No       |
+| resourceId           | No       |
+| resourcePropertyName | No       |
+| permissionTypes      | No       |
+
+### Batch operation
+
+| Property                 | Migrated |
+| ------------------------ | -------- |
+| batchOperationKey        | No       |
+| state                    | No       |
+| operationType            | No       |
+| startDate                | No       |
+| endDate                  | No       |
+| actorType                | No       |
+| actorId                  | No       |
+| operationsTotalCount     | No       |
+| operationsFailedCount    | No       |
+| operationsCompletedCount | No       |
+| errors                   | No       |
+
+### Batch operation item
+
+| Property           | Migrated |
+| ------------------ | -------- |
+| batchOperationKey  | No       |
+| itemKey            | No       |
+| processInstanceKey | No       |
+| state              | No       |
+| processedDate      | No       |
+| errorMessage       | No       |
+
+### Cluster variable
+
+| Property    | Migrated |
+| ----------- | -------- |
+| id          | No       |
+| name        | No       |
+| type        | No       |
+| doubleValue | No       |
+| longValue   | No       |
+| value       | No       |
+| fullValue   | No       |
+| isPreview   | No       |
+| tenantId    | No       |
+| scope       | No       |
+
+### Correlated message subscription
+
+| Property               | Migrated |
+| ---------------------- | -------- |
+| correlationKey         | No       |
+| correlationTime        | No       |
+| flowNodeId             | No       |
+| flowNodeInstanceKey    | No       |
+| historyCleanupDate     | No       |
+| messageKey             | No       |
+| messageName            | No       |
+| partitionId            | No       |
+| processDefinitionId    | No       |
+| processDefinitionKey   | No       |
+| processInstanceKey     | No       |
+| rootProcessInstanceKey | No       |
+| subscriptionKey        | No       |
+| subscriptionType       | No       |
+| tenantId               | No       |
+
+### Decision definition
+
+| Property                    | Migrated |
+| --------------------------- | -------- |
+| decisionDefinitionKey       | Yes      |
+| name                        | Yes      |
+| decisionDefinitionId        | Yes      |
+| tenantId                    | Yes      |
+| version                     | Yes      |
+| decisionRequirementsId      | Yes      |
+| decisionRequirementsKey     | No       |
+| decisionRequirementsName    | No       |
+| decisionRequirementsVersion | No       |
+
+### Decision instance
+
+| Property                  | Migrated |
+| ------------------------- | -------- |
+| decisionInstanceId        | No       |
+| decisionInstanceKey       | No       |
+| state                     | Yes      |
+| evaluationDate            | Yes      |
+| evaluationFailure         | No       |
+| evaluationFailureMessage  | No       |
+| result                    | Yes      |
+| flowNodeInstanceKey       | Yes      |
+| flowNodeId                | Yes      |
+| processInstanceKey        | Yes      |
+| processDefinitionKey      | Yes      |
+| processDefinitionId       | Yes      |
+| decisionDefinitionKey     | Yes      |
+| decisionDefinitionId      | Yes      |
+| decisionRequirementsKey   | Yes      |
+| decisionRequirementsId    | Yes      |
+| rootDecisionDefinitionKey | Yes      |
+| decisionType              | Yes      |
+| tenantId                  | Yes      |
+| partitionId               | Yes      |
+| evaluatedInputs           | Yes      |
+| evaluatedOutputs          | Yes      |
+| historyCleanupDate        | Yes      |
+
+### Decision requirements
+
+| Property                | Migrated |
+| ----------------------- | -------- |
+| decisionRequirementsKey | Yes      |
+| decisionRequirementsId  | Yes      |
+| name                    | Yes      |
+| resourceName            | Yes      |
+| version                 | Yes      |
+| xml                     | Yes      |
+| tenantId                | Yes      |
+
+### Exporter position
+
+| Property             | Migrated |
+| -------------------- | -------- |
+| partitionId          | No       |
+| exporter             | No       |
+| lastExportedPosition | No       |
+| created              | No       |
+| lastUpdated          | No       |
+
+### Flow node instance
+
+| Property               | Migrated |
+| ---------------------- | -------- |
+| flowNodeInstanceKey    | No       |
+| processInstanceKey     | Yes      |
+| processDefinitionKey   | Yes      |
+| processDefinitionId    | Yes      |
+| flowNodeScopeKey       | No       |
+| startDate              | Yes      |
+| endDate                | Yes      |
+| flowNodeId             | Yes      |
+| flowNodeName           | No       |
+| treePath               | Yes      |
+| type                   | Yes      |
+| state                  | No       |
+| incidentKey            | No       |
+| numSubprocessIncidents | No       |
+| hasIncident            | No       |
+| tenantId               | Yes      |
+| partitionId            | No       |
+| rootProcessInstanceKey | No       |
+| historyCleanupDate     | No       |
+
+### Form
+
+| Property  | Migrated |
+| --------- | -------- |
+| formKey   | No       |
+| tenantId  | No       |
+| formId    | No       |
+| schema    | No       |
+| version   | No       |
+| isDeleted | No       |
+
+### Group
+
+| Property    | Migrated |
+| ----------- | -------- |
+| groupKey    | No       |
+| groupId     | No       |
+| name        | No       |
+| description | No       |
+| members     | No       |
+
+### History deletion
+
+| Property          | Migrated |
+| ----------------- | -------- |
+| resourceKey       | No       |
+| resourceType      | No       |
+| batchOperationKey | No       |
+| partitionId       | No       |
+
+### Incident
+
+| Property               | Migrated |
+| ---------------------- | -------- |
+| incidentKey            | Yes      |
+| processDefinitionKey   | Yes      |
+| processDefinitionId    | Yes      |
+| processInstanceKey     | Yes      |
+| rootProcessInstanceKey | No       |
+| flowNodeInstanceKey    | Yes      |
+| flowNodeId             | Yes      |
+| jobKey                 | Yes      |
+| errorType              | No       |
+| errorMessage           | Yes      |
+| errorMessageHash       | No       |
+| creationDate           | Yes      |
+| state                  | Yes      |
+| treePath               | No       |
+| tenantId               | Yes      |
+| partitionId            | No       |
+| historyCleanupDate     | No       |
+
+### Job
+
+| Property                 | Migrated |
+| ------------------------ | -------- |
+| jobKey                   | No       |
+| type                     | No       |
+| worker                   | No       |
+| state                    | No       |
+| kind                     | No       |
+| listenerEventType        | No       |
+| retries                  | No       |
+| isDenied                 | No       |
+| deniedReason             | No       |
+| hasFailedWithRetriesLeft | No       |
+| errorCode                | No       |
+| errorMessage             | No       |
+| serializedCustomHeaders  | No       |
+| customHeaders            | No       |
+| deadline                 | No       |
+| endTime                  | No       |
+| processDefinitionId      | No       |
+| processDefinitionKey     | No       |
+| processInstanceKey       | No       |
+| rootProcessInstanceKey   | No       |
+| elementId                | No       |
+| elementInstanceKey       | No       |
+| tenantId                 | No       |
+| partitionId              | No       |
+| historyCleanupDate       | No       |
+| creationTime             | No       |
+| lastUpdateTime           | No       |
+
+### Mapping rule
+
+| Property       | Migrated |
+| -------------- | -------- |
+| mappingRuleId  | No       |
+| mappingRuleKey | No       |
+| claimName      | No       |
+| claimValue     | No       |
+| name           | No       |
+
+### Message subscription
+
+| Property                 | Migrated |
+| ------------------------ | -------- |
+| messageSubscriptionKey   | No       |
+| processDefinitionId      | No       |
+| processDefinitionKey     | No       |
+| processInstanceKey       | No       |
+| rootProcessInstanceKey   | No       |
+| flowNodeId               | No       |
+| flowNodeInstanceKey      | No       |
+| messageSubscriptionState | No       |
+| dateTime                 | No       |
+| messageName              | No       |
+| correlationKey           | No       |
+| tenantId                 | No       |
+| partitionId              | No       |
+| historyCleanupDate       | No       |
+
+### Process definition
+
+| Property             | Migrated |
+| -------------------- | -------- |
+| processDefinitionKey | Yes      |
+| processDefinitionId  | Yes      |
+| resourceName         | Yes      |
+| name                 | Yes      |
+| tenantId             | Yes      |
+| versionTag           | Yes      |
+| version              | Yes      |
+| bpmnXml              | Yes      |
+| formId               | No       |
+
+### Process instance
+
+| Property                 | Migrated |
+| ------------------------ | -------- |
+| processInstanceKey       | Yes      |
+| rootProcessInstanceKey   | No       |
+| processDefinitionId      | Yes      |
+| processDefinitionKey     | No       |
+| state                    | Yes      |
+| startDate                | Yes      |
+| endDate                  | Yes      |
+| tenantId                 | Yes      |
+| parentProcessInstanceKey | Yes      |
+| parentElementInstanceKey | No       |
+| numIncidents             | No       |
+| version                  | Yes      |
+| partitionId              | Yes      |
+| treePath                 | No       |
+| historyCleanupDate       | Yes      |
+| tags                     | No       |
+
+### Role
+
+| Property    | Migrated |
+| ----------- | -------- |
+| roleKey     | No       |
+| roleId      | No       |
+| name        | No       |
+| description | No       |
+| members     | No       |
+
+### Sequence flow
+
+| Property             | Migrated |
+| -------------------- | -------- |
+| flowNodeId           | No       |
+| processInstanceKey   | No       |
+| processDefinitionKey | No       |
+| processDefinitionId  | No       |
+| tenantId             | No       |
+| partitionId          | No       |
+| historyCleanupDate   | No       |
+
+### Tenant
+
+| Property    | Migrated |
+| ----------- | -------- |
+| tenantKey   | No       |
+| tenantId    | No       |
+| name        | No       |
+| description | No       |
+| members     | No       |
+
+### Usage metric
+
+| Property    | Migrated |
+| ----------- | -------- |
+| key         | No       |
+| startTime   | No       |
+| endTime     | No       |
+| tenantId    | No       |
+| eventType   | No       |
+| value       | No       |
+| partitionId | No       |
+
+### Usage metric (TU)
+
+| Property     | Migrated |
+| ------------ | -------- |
+| key          | No       |
+| startTime    | No       |
+| endTime      | No       |
+| tenantId     | No       |
+| assigneeHash | No       |
+| partitionId  | No       |
+
+### User
+
+| Property | Migrated |
+| -------- | -------- |
+| userKey  | No       |
+| username | No       |
+| name     | No       |
+| email    | No       |
+| password | No       |
+
+### User task
+
+| Property                 | Migrated |
+| ------------------------ | -------- |
+| userTaskKey              | Yes      |
+| elementId                | Yes      |
+| name                     | Yes      |
+| processDefinitionId      | Yes      |
+| creationDate             | Yes      |
+| completionDate           | Yes      |
+| assignee                 | Yes      |
+| state                    | Yes      |
+| formKey                  | No       |
+| processDefinitionKey     | Yes      |
+| processInstanceKey       | Yes      |
+| rootProcessInstanceKey   | No       |
+| elementInstanceKey       | Yes      |
+| tenantId                 | Yes      |
+| dueDate                  | Yes      |
+| followUpDate             | Yes      |
+| candidateGroups          | No       |
+| candidateUsers           | No       |
+| externalFormReference    | No       |
+| processDefinitionVersion | Yes      |
+| serializedCustomHeaders  | No       |
+| customHeaders            | No       |
+| priority                 | Yes      |
+| tags                     | No       |
+| partitionId              | Yes      |
+| historyCleanupDate       | Yes      |
+
+### User task migration
+
+| Property                 | Migrated |
+| ------------------------ | -------- |
+| userTaskKey              | No       |
+| processDefinitionKey     | No       |
+| processDefinitionId      | No       |
+| elementId                | No       |
+| name                     | No       |
+| processDefinitionVersion | No       |
+
+### Variable
+
+| Property               | Migrated |
+| ---------------------- | -------- |
+| variableKey            | Yes      |
+| name                   | Yes      |
+| type                   | No       |
+| doubleValue            | No       |
+| longValue              | No       |
+| value                  | Yes      |
+| fullValue              | No       |
+| isPreview              | No       |
+| scopeKey               | Yes      |
+| processInstanceKey     | Yes      |
+| rootProcessInstanceKey | No       |
+| processDefinitionId    | Yes      |
+| tenantId               | Yes      |
+| partitionId            | Yes      |
+| historyCleanupDate     | Yes      |
+
+## History migration coverage
+
+### Audit log
+
+| Property                | Migrated |
+| ----------------------- | -------- |
+| auditLogKey             | No       |
+| entityKey               | No       |
+| entityType              | No       |
+| operationType           | No       |
+| entityVersion           | No       |
+| entityValueType         | No       |
+| entityOperationIntent   | No       |
+| batchOperationKey       | No       |
+| batchOperationType      | No       |
+| timestamp               | No       |
+| actorType               | No       |
+| actorId                 | No       |
+| tenantId                | No       |
+| tenantScope             | No       |
+| result                  | No       |
+| annotation              | No       |
+| category                | No       |
+| processDefinitionId     | No       |
+| decisionRequirementsId  | No       |
+| decisionDefinitionId    | No       |
+| processDefinitionKey    | No       |
+| processInstanceKey      | No       |
+| elementInstanceKey      | No       |
+| jobKey                  | No       |
+| userTaskKey             | No       |
+| decisionRequirementsKey | No       |
+| decisionDefinitionKey   | No       |
+| decisionEvaluationKey   | No       |
+| deploymentKey           | No       |
+| formKey                 | No       |
+| resourceKey             | No       |
+
+### Authorization
+
+| Property             | Migrated |
+| -------------------- | -------- |
+| authorizationKey     | No       |
+| ownerId              | No       |
+| ownerType            | No       |
+| resourceType         | No       |
+| resourceMatcher      | No       |
+| resourceId           | No       |
+| resourcePropertyName | No       |
+| permissionTypes      | No       |
+
+### Batch operation
+
+| Property                 | Migrated |
+| ------------------------ | -------- |
+| batchOperationKey        | No       |
+| state                    | No       |
+| operationType            | No       |
+| startDate                | No       |
+| endDate                  | No       |
+| actorType                | No       |
+| actorId                  | No       |
+| operationsTotalCount     | No       |
+| operationsFailedCount    | No       |
+| operationsCompletedCount | No       |
+| errors                   | No       |
+
+### Batch operation item
+
+| Property           | Migrated |
+| ------------------ | -------- |
+| batchOperationKey  | No       |
+| itemKey            | No       |
+| processInstanceKey | No       |
+| state              | No       |
+| processedDate      | No       |
+| errorMessage       | No       |
+
+### Cluster variable
+
+| Property    | Migrated |
+| ----------- | -------- |
+| id          | No       |
+| name        | No       |
+| type        | No       |
+| doubleValue | No       |
+| longValue   | No       |
+| value       | No       |
+| fullValue   | No       |
+| isPreview   | No       |
+| tenantId    | No       |
+| scope       | No       |
+
+### Correlated message subscription
+
+| Property               | Migrated |
+| ---------------------- | -------- |
+| correlationKey         | No       |
+| correlationTime        | No       |
+| flowNodeId             | No       |
+| flowNodeInstanceKey    | No       |
+| historyCleanupDate     | No       |
+| messageKey             | No       |
+| messageName            | No       |
+| partitionId            | No       |
+| processDefinitionId    | No       |
+| processDefinitionKey   | No       |
+| processInstanceKey     | No       |
+| rootProcessInstanceKey | No       |
+| subscriptionKey        | No       |
+| subscriptionType       | No       |
+| tenantId               | No       |
+
+### Decision definition
+
+| Property                    | Migrated |
+| --------------------------- | -------- |
+| decisionDefinitionKey       | Yes      |
+| name                        | Yes      |
+| decisionDefinitionId        | Yes      |
+| tenantId                    | Yes      |
+| version                     | Yes      |
+| decisionRequirementsId      | Yes      |
+| decisionRequirementsKey     | No       |
+| decisionRequirementsName    | No       |
+| decisionRequirementsVersion | No       |
+
+### Decision instance
+
+| Property                  | Migrated |
+| ------------------------- | -------- |
+| decisionInstanceId        | No       |
+| decisionInstanceKey       | No       |
+| state                     | Yes      |
+| evaluationDate            | Yes      |
+| evaluationFailure         | No       |
+| evaluationFailureMessage  | No       |
+| result                    | Yes      |
+| flowNodeInstanceKey       | Yes      |
+| flowNodeId                | Yes      |
+| processInstanceKey        | Yes      |
+| processDefinitionKey      | Yes      |
+| processDefinitionId       | Yes      |
+| decisionDefinitionKey     | Yes      |
+| decisionDefinitionId      | Yes      |
+| decisionRequirementsKey   | Yes      |
+| decisionRequirementsId    | Yes      |
+| rootDecisionDefinitionKey | Yes      |
+| decisionType              | Yes      |
+| tenantId                  | Yes      |
+| partitionId               | Yes      |
+| evaluatedInputs           | Yes      |
+| evaluatedOutputs          | Yes      |
+| historyCleanupDate        | Yes      |
+
+### Decision requirements
+
+| Property                | Migrated |
+| ----------------------- | -------- |
+| decisionRequirementsKey | Yes      |
+| decisionRequirementsId  | Yes      |
+| name                    | Yes      |
+| resourceName            | Yes      |
+| version                 | Yes      |
+| xml                     | Yes      |
+| tenantId                | Yes      |
+
+### Exporter position
+
+| Property             | Migrated |
+| -------------------- | -------- |
+| partitionId          | No       |
+| exporter             | No       |
+| lastExportedPosition | No       |
+| created              | No       |
+| lastUpdated          | No       |
+
+### Flow node instance
+
+| Property               | Migrated |
+| ---------------------- | -------- |
+| flowNodeInstanceKey    | No       |
+| processInstanceKey     | Yes      |
+| processDefinitionKey   | Yes      |
+| processDefinitionId    | Yes      |
+| flowNodeScopeKey       | No       |
+| startDate              | Yes      |
+| endDate                | Yes      |
+| flowNodeId             | Yes      |
+| flowNodeName           | No       |
+| treePath               | Yes      |
+| type                   | Yes      |
+| state                  | No       |
+| incidentKey            | No       |
+| numSubprocessIncidents | No       |
+| hasIncident            | No       |
+| tenantId               | Yes      |
+| partitionId            | No       |
+| rootProcessInstanceKey | No       |
+| historyCleanupDate     | No       |
+
+### Form
+
+| Property  | Migrated |
+| --------- | -------- |
+| formKey   | No       |
+| tenantId  | No       |
+| formId    | No       |
+| schema    | No       |
+| version   | No       |
+| isDeleted | No       |
+
+### Group
+
+| Property    | Migrated |
+| ----------- | -------- |
+| groupKey    | No       |
+| groupId     | No       |
+| name        | No       |
+| description | No       |
+| members     | No       |
+
+### History deletion
+
+| Property          | Migrated |
+| ----------------- | -------- |
+| resourceKey       | No       |
+| resourceType      | No       |
+| batchOperationKey | No       |
+| partitionId       | No       |
+
+### Incident
+
+| Property               | Migrated |
+| ---------------------- | -------- |
+| incidentKey            | Yes      |
+| processDefinitionKey   | Yes      |
+| processDefinitionId    | Yes      |
+| processInstanceKey     | Yes      |
+| rootProcessInstanceKey | No       |
+| flowNodeInstanceKey    | Yes      |
+| flowNodeId             | Yes      |
+| jobKey                 | Yes      |
+| errorType              | No       |
+| errorMessage           | Yes      |
+| errorMessageHash       | No       |
+| creationDate           | Yes      |
+| state                  | Yes      |
+| treePath               | No       |
+| tenantId               | Yes      |
+| partitionId            | No       |
+| historyCleanupDate     | No       |
+
+### Job
+
+| Property                 | Migrated |
+| ------------------------ | -------- |
+| jobKey                   | No       |
+| type                     | No       |
+| worker                   | No       |
+| state                    | No       |
+| kind                     | No       |
+| listenerEventType        | No       |
+| retries                  | No       |
+| isDenied                 | No       |
+| deniedReason             | No       |
+| hasFailedWithRetriesLeft | No       |
+| errorCode                | No       |
+| errorMessage             | No       |
+| serializedCustomHeaders  | No       |
+| customHeaders            | No       |
+| deadline                 | No       |
+| endTime                  | No       |
+| processDefinitionId      | No       |
+| processDefinitionKey     | No       |
+| processInstanceKey       | No       |
+| rootProcessInstanceKey   | No       |
+| elementId                | No       |
+| elementInstanceKey       | No       |
+| tenantId                 | No       |
+| partitionId              | No       |
+| historyCleanupDate       | No       |
+| creationTime             | No       |
+| lastUpdateTime           | No       |
+
+### Mapping rule
+
+| Property       | Migrated |
+| -------------- | -------- |
+| mappingRuleId  | No       |
+| mappingRuleKey | No       |
+| claimName      | No       |
+| claimValue     | No       |
+| name           | No       |
+
+### Message subscription
+
+| Property                 | Migrated |
+| ------------------------ | -------- |
+| messageSubscriptionKey   | No       |
+| processDefinitionId      | No       |
+| processDefinitionKey     | No       |
+| processInstanceKey       | No       |
+| rootProcessInstanceKey   | No       |
+| flowNodeId               | No       |
+| flowNodeInstanceKey      | No       |
+| messageSubscriptionState | No       |
+| dateTime                 | No       |
+| messageName              | No       |
+| correlationKey           | No       |
+| tenantId                 | No       |
+| partitionId              | No       |
+| historyCleanupDate       | No       |
+
+### Process definition
+
+| Property             | Migrated |
+| -------------------- | -------- |
+| processDefinitionKey | Yes      |
+| processDefinitionId  | Yes      |
+| resourceName         | Yes      |
+| name                 | Yes      |
+| tenantId             | Yes      |
+| versionTag           | Yes      |
+| version              | Yes      |
+| bpmnXml              | Yes      |
+| formId               | No       |
+
+### Process instance
+
+| Property                 | Migrated |
+| ------------------------ | -------- |
+| processInstanceKey       | Yes      |
+| rootProcessInstanceKey   | No       |
+| processDefinitionId      | Yes      |
+| processDefinitionKey     | No       |
+| state                    | Yes      |
+| startDate                | Yes      |
+| endDate                  | Yes      |
+| tenantId                 | Yes      |
+| parentProcessInstanceKey | Yes      |
+| parentElementInstanceKey | No       |
+| numIncidents             | No       |
+| version                  | Yes      |
+| partitionId              | Yes      |
+| treePath                 | No       |
+| historyCleanupDate       | Yes      |
+| tags                     | No       |
+
+### Role
+
+| Property    | Migrated |
+| ----------- | -------- |
+| roleKey     | No       |
+| roleId      | No       |
+| name        | No       |
+| description | No       |
+| members     | No       |
+
+### Sequence flow
+
+| Property             | Migrated |
+| -------------------- | -------- |
+| flowNodeId           | No       |
+| processInstanceKey   | No       |
+| processDefinitionKey | No       |
+| processDefinitionId  | No       |
+| tenantId             | No       |
+| partitionId          | No       |
+| historyCleanupDate   | No       |
+
+### Tenant
+
+| Property    | Migrated |
+| ----------- | -------- |
+| tenantKey   | No       |
+| tenantId    | No       |
+| name        | No       |
+| description | No       |
+| members     | No       |
+
+### Usage metric
+
+| Property    | Migrated |
+| ----------- | -------- |
+| key         | No       |
+| startTime   | No       |
+| endTime     | No       |
+| tenantId    | No       |
+| eventType   | No       |
+| value       | No       |
+| partitionId | No       |
+
+### Usage metric (TU)
+
+| Property     | Migrated |
+| ------------ | -------- |
+| key          | No       |
+| startTime    | No       |
+| endTime      | No       |
+| tenantId     | No       |
+| assigneeHash | No       |
+| partitionId  | No       |
+
+### User
+
+| Property | Migrated |
+| -------- | -------- |
+| userKey  | No       |
+| username | No       |
+| name     | No       |
+| email    | No       |
+| password | No       |
+
+### User task
+
+| Property                 | Migrated |
+| ------------------------ | -------- |
+| userTaskKey              | Yes      |
+| elementId                | Yes      |
+| name                     | Yes      |
+| processDefinitionId      | Yes      |
+| creationDate             | Yes      |
+| completionDate           | Yes      |
+| assignee                 | Yes      |
+| state                    | Yes      |
+| formKey                  | No       |
+| processDefinitionKey     | Yes      |
+| processInstanceKey       | Yes      |
+| rootProcessInstanceKey   | No       |
+| elementInstanceKey       | Yes      |
+| tenantId                 | Yes      |
+| dueDate                  | Yes      |
+| followUpDate             | Yes      |
+| candidateGroups          | No       |
+| candidateUsers           | No       |
+| externalFormReference    | No       |
+| processDefinitionVersion | Yes      |
+| serializedCustomHeaders  | No       |
+| customHeaders            | No       |
+| priority                 | Yes      |
+| tags                     | No       |
+| partitionId              | Yes      |
+| historyCleanupDate       | Yes      |
+
+### User task migration
+
+| Property                 | Migrated |
+| ------------------------ | -------- |
+| userTaskKey              | No       |
+| processDefinitionKey     | No       |
+| processDefinitionId      | No       |
+| elementId                | No       |
+| name                     | No       |
+| processDefinitionVersion | No       |
+
+### Variable
+
+| Property               | Migrated |
+| ---------------------- | -------- |
+| variableKey            | Yes      |
+| name                   | Yes      |
+| type                   | No       |
+| doubleValue            | No       |
+| longValue              | No       |
+| value                  | Yes      |
+| fullValue              | No       |
+| isPreview              | No       |
+| scopeKey               | Yes      |
+| processInstanceKey     | Yes      |
+| rootProcessInstanceKey | No       |
+| processDefinitionId    | Yes      |
+| tenantId               | Yes      |
+| partitionId            | Yes      |
+| historyCleanupDate     | Yes      |
