@@ -580,7 +580,6 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | historyCleanupDate       | Yes      |
 | tags                     | No       |
 
-
 ### Sequence flow
 
 | Property             | Migrated |
