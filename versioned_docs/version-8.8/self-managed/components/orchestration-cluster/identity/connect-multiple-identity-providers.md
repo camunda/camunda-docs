@@ -116,6 +116,7 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ORGANIZATIONID=
 </Tabs>
 
 These define:
+
 - Which claim to use as the client ID and username
 - The claim containing group information (if applicable)
 - The claim for organization or tenant assignment
