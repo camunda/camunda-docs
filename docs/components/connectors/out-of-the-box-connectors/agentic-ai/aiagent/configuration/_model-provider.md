@@ -16,6 +16,20 @@ Select and configure authentication for the LLM model **Provider** you want to u
 
 :::
 
+#### Timeout handling
+
+The default timeout for model API calls is set by the runtime to 3 minutes. Self-managed Spring connector runtime instances provide the ability to override this value by setting the `camunda.connector.agenticai.aiagent.chat-model.api.default-timeout` property in the Spring application properties file.
+
+Furthermore, you can specify a custom timeout per provider in the **Timeout** field below. Setting this value will take precedence over the default timeout.
+
+All values must be provided in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), for example, `PT60S` for a 60-second timeout.
+
+Check the individual provider sections below for more details, especially if there are any provider-specific limitations.
+
+:::note
+The timeout setting must not be greater than the job worker timeout, otherwise the job might be reassigned by the engine while the model call is still in progress.
+:::
+
 #### Anthropic
 
 Select this option to use an Anthropic Claude LLM model (uses the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages)).
