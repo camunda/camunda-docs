@@ -14,12 +14,14 @@ When creating custom-built element templates, consider the best practices outlin
 
 1. Select the Web Modeler project where you want to create the template. Camunda recommends storing element templates in root project folders, not process applications, to simplify template management and avoid unnecessary versioning overhead.
 2. Click **Create new**, then select **Element template** to open the **Create new element template** screen.  
-   ![Create the new element template](../../../connectors/custom-built-connectors/img/configure-element-template-details.png)
+   ![Create the new element template](./img/element-template-generator/configure-element-template-details.png)
 
 3. Select the template starting point:
-   - **Call activity**: Start from a Call activity template.
-   - **Task**: Start from a Task template.  
-     You can choose from predefined Task templates, such as User task, Service task, Script task, and more.
+   - **Call activity**: Start from a call activity template.
+   - **Event**: Start from an event template.  
+     You can choose from predefined event templates, such as message event, timer event, signal event.
+   - **Task**: Start from a task template.  
+     You can choose from predefined task templates, such as user task, service task, script task, and more.
    - **Blank**: Start from a blank template.
      A blank template includes only the basic properties shared by all BPMN elements and allows you to customize the template from scratch.
 
