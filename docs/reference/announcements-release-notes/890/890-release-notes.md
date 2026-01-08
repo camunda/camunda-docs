@@ -51,46 +51,50 @@ The AI Agent connectors now support setting a timeout value on supported models.
 
 <!-- https://github.com/camunda/connectors/issues/5546 -->
 
-The OpenAI compatbile model configuration now allows configuration of query parameters to be added to the model endpoint URL. This might be needed for custom API endpoints requiring additional metadata (such as API versions) to be set via query parameters.
+The OpenAI compatible model configuration now allows configuration of query parameters to be added to the model endpoint URL. This might be needed for custom API endpoints requiring additional metadata (such as API versions) to be set via query parameters.
 
-<p class="link-arrow">[AI Agent](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</p>
+<p class="link-arrow">[AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</p>
 
 ### Camunda 8 Run
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
 
 #### Streamline your Camunda 8 Run experience
 
 <!-- https://github.com/camunda/product-hub/issues/2866 -->
 
-Camunda 8 Run is now easier to get started with. The CLI includes a helpful usage page, clearer error messages, especially for Elasticsearch startup, and prominently displays connection properties and credential information.
+Camunda 8 Run is now easier to use with improved setup and configuration.
+
+The CLI includes a helpful usage page, clearer error messages, especially for Elasticsearch startup, and prominently displays connection properties and credential information.
 
 A revamped Java detection guided setup, log cleanup options, and better defaults for development environments (such as disk watermark thresholds) have been added. You can also start fresh using a new clean-state command, and the unified configuration file is now included and thoroughly documented.
+
+<p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
 
 #### Use H2 for data storage
 
 <!-- https://github.com/camunda/product-hub/issues/2832, https://github.com/camunda/product-hub/issues/2656 -->
 
-Camunda 8 Run now ships with H2 as the default secondary data store, providing:
+Camunda 8 Run now includes H2 as the default secondary data store, providing:
 
 - A lighter, simpler local development experience.
 - Lower memory usage.
-- A fully functional stack without requiring an external database.
+- A fully functional stack that doesn't require an external database.
 
-New documentation walks you through:
+New documentation shows you how to:
 
-- Installing Camunda 8 Run with H2 as the default secondary storage.
-- Seamlessly switching from H2 to Elasticsearch or OpenSearch when needed.
+- Install Camunda 8 Run with H2 as the default secondary storage.
+- Seamlessly switch from H2 to Elasticsearch or OpenSearch when required.
 
 ### Cluster Metrics endpoint
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
 <!-- https://github.com/camunda/product-hub/issues/2229 -->
 
 Camunda 8.9 provides a Cluster Metrics endpoint for SaaS clusters.
-You can activate a secure metrics endpoint for your Camunda 8 cluster and integrate it with Prometheus, Datadog, or any monitoring system that supports Prometheus scraping.
 
-This gives you real-time visibility into cluster performance, helps you troubleshoot faster, and allows you to seamlessly integrate with your existing observability stack.
+- Activate a secure metrics endpoint for your cluster and integrate it with Prometheus, Datadog, or any monitoring system that supports Prometheus scraping.
+- Get real-time visibility into cluster performance, troubleshoot faster, and integrate with your existing observability stack.
 
 ### Global user task listeners
 
@@ -104,9 +108,11 @@ Administrators can define cluster-wide listeners using configuration files or en
 
 All user task lifecycle events emit payloads containing full variable context and metadata, enabling standardized integrations across all processes.
 
+<p class="link-arrow">[Global User task Listeners](/components/concepts/global-user-task-listeners.md)</p>
+
 ### Modeler
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
 #### Desktop Modeler: Manage Camunda connections
 
@@ -133,6 +139,8 @@ You can also create global event templates that:
 - Standardize event configurations (for example, message names or payload structures).
 - Help ensure consistency across teams and models.
 
+<p class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/defining-templates.md)</p>
+
 ### Orchestration Cluster
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects data storage">Data</span><span class="badge badge--medium" title="This feature affects FEEL expressions">FEEL expressions</span></div>
@@ -141,17 +149,24 @@ You can also create global event templates that:
 
 <!-- https://github.com/camunda/product-hub/issues/2717 -->
 
-Camunda 8.9 adds support for cluster variables, letting you centrally manage configuration across your cluster. You can access these variables directly in the Modeler using FEEL expressions:
+Camunda 8.9 now supports cluster variables, letting you centrally manage configuration across your cluster. You can access these variables directly in the Modeler using FEEL expressions:
 
-- `camunda.vars.cluster`: global scope.
-- `camunda.vars.tenant`: tenant scope.
-- `camunda.vars.env`: merged view with automatic priority.
+| Variable               | Scope                               | Priority |
+| :--------------------- | :---------------------------------- | :------- |
+| `camunda.vars.cluster` | Global                              | Lowest   |
+| `camunda.vars.tenant`  | Tenant                              | Medium   |
+| `camunda.vars.env`     | Merged view with automatic priority | Highest  |
 
-If the same variable exists at multiple scopes, tenant overrides global, and process-level variables have the highest priority. This hierarchy allows you to create cascading configurations, where specific contexts override broader defaults.
+For example, if the same variable exists in multiple scopes, the priority is as follows:
+
+- A Tenant variable overrides a Global variable.
+- A Process-level variable has the highest priority, overriding both.
+
+This hierarchy allows you to create cascading configurations, where specific contexts override broader defaults.
 
 Cluster variables support simple key-value pairs and nested objects, which you can access with dot notation for complex structures. You can manage all cluster variables via the Orchestration Cluster API.
 
-<p class="link-arrow">[Cluster variables overview](/components/modeler/feel/cluster-variable/overview.md)</p>
+<p class="link-arrow">[Cluster variables](/components/modeler/feel/cluster-variable/overview.md)</p>
 
 #### Use Amazon Aurora for secondary storage
 
@@ -183,6 +198,8 @@ With this enhancement, you can:
 - Modernize process definitions without losing execution state.
 
 This unlocks more flexible, agent-driven orchestration and faster iteration on live automation.
+
+<p class="link-arrow">[Process instance migration](/components/concepts/process-instance-migration.md)</p>
 
 ### RDBMS secondary storage
 
