@@ -61,19 +61,50 @@ The following requirements and limitations apply:
 | `HISTORY_DECISION_INSTANCE`   | Decision instances   |
 | `HISTORY_DECISION_DEFINITION` | Decision definitions |
 
-## Entity Transformation
+## Entity transformation
 
 Entity transformations are handled by built-in converters that transform Camunda 7 historic entities
 into Camunda 8 database models during migration. The History Data Migrator uses the
 `EntityInterceptor` interface to allow customization of this conversion process.
 
-## Custom Transformation
+### Built-in converters
+
+The following built-in transformers convert Camunda 7 historic entities:
+
+| Converter                                   | Camunda 7 entity type                    | Camunda 8 Model               |
+| ------------------------------------------- | ---------------------------------------- | ----------------------------- |
+| `ProcessInstanceTransformer`                | `HistoricProcessInstance`                | `ProcessInstanceDbModel`      |
+| `ProcessDefinitionTransformer`              | `ProcessDefinition`                      | `ProcessDefinitionDbModel`    |
+| `FlowNodeTransformer`                       | `HistoricActivityInstance`               | `FlowNodeInstanceDbModel`     |
+| `UserTaskTransformer`                       | `HistoricTaskInstance`                   | `UserTaskDbModel`             |
+| `IncidentTransformer`                       | `HistoricIncident`                       | `IncidentDbModel`             |
+| `VariableTransformer`                       | `HistoricVariableInstance`               | `VariableDbModel`             |
+| `DecisionInstanceTransformer`               | `HistoricDecisionInstance`               | `DecisionInstanceDbModel`     |
+| `DecisionDefinitionTransformer`             | `HistoricDecisionDefinition`             | `DecisionDefinitionDbModel`   |
+| `DecisionRequirementsDefinitionTransformer` | `HistoricDecisionRequirementsDefinition` | `DecisionRequirementsDbModel` |
+
+### Disable built-in transformers
+
+You can disable any built-in transformer using the `enabled` configuration property.
+
+This is useful when your migration use case is more complex and does not work out of the box. In this case, you can migrate entities entirely through custom interceptors:
+
+```yaml
+camunda:
+  migrator:
+    # Entity interceptor configuration
+    interceptors:
+      - class-name: io.camunda.migration.data.impl.interceptor.history.entity.ProcessInstanceTransformer
+        enabled: false
+```
+
+## Custom transformation
 
 The `EntityInterceptor` interface allows you to define custom logic that executes when a Camunda 7 historic entity is being converted to a Camunda 8 database model during migration. This is useful for enriching, auditing, or customizing entity conversion.
 
 Custom interceptors are enabled by default and can be restricted to specific entity types.
 
-### How to Implement an `EntityInterceptor`
+### How to implement an `EntityInterceptor`
 
 1. Create a new Maven project with the provided `pom.xml` structure
 2. Add a dependency on `camunda-7-to-8-data-migrator-core` (scope: `provided`)
@@ -82,7 +113,7 @@ Custom interceptors are enabled by default and can be restricted to specific ent
 5. Package as JAR and deploy to the `configuration/userlib` folder
 6. Configure in `configuration/application.yml`
 
-### Creating a Custom Entity Interceptor
+### Create a custom entity interceptor
 
 Here's an example of a custom entity interceptor which is only called for process instances:
 
@@ -110,7 +141,30 @@ public class ProcessInstanceEnricher implements EntityInterceptor {
 }
 ```
 
-### Type Restrictions
+#### Access Camunda 7 process engine
+
+To retrieve information from Camunda 7 entities, use the `processEngine` available in the `EntityConversionContext`.
+
+Use it to access services such as `RepositoryService` and `RuntimeService`. Fetch additional data as needed from other Camunda 7 entities.
+
+```java
+@Override
+public void execute(EntityConversionContext<?, ?> context) {
+  // Use ProcessEngine to retrieve deployment information from Camunda 7 process engine
+  ProcessEngine processEngine = context.getProcessEngine();
+
+// Example: Retrieve the deployment ID from the process definition
+  String deploymentId = processEngine.getRepositoryService()
+      .createProcessDefinitionQuery()
+      .processDefinitionKey(processInstance.getProcessDefinitionKey())
+      .singleResult()
+      .getDeploymentId();
+  // Custom conversion logic
+  // ...
+}
+```
+
+### Limit interceptors by entity type
 
 Entity interceptors can be restricted to specific entity types using the `getTypes()` method. Use Camunda 7 historic entity classes:
 
@@ -119,6 +173,7 @@ Entity interceptors can be restricted to specific entity types using the `getTyp
 public Set<Class<?>> getTypes() {
     // Handle only specific types
     return Set.of(
+        ProcessDefinition.class,            // Process definitions
         HistoricProcessInstance.class,      // Process instances
         HistoricActivityInstance.class,     // Flow nodes/activities
         HistoricTaskInstance.class,         // User tasks
@@ -136,22 +191,7 @@ public Set<Class<?>> getTypes() {
 }
 ```
 
-### Execution Order
-
-- Custom interceptors configured in the `application.yml` are executed in their order of appearance from top to bottom
-  - Built-in converters run first, followed by custom interceptors
-- In a Spring Boot environment, you can register interceptors as beans and change their execution order with the `@Order` annotation (lower values run first)
-
-### Error Handling
-
-When entity transformation fails:
-
-- The entire entity is skipped
-- Detailed error messages are logged with the specific entity type and error cause
-- The entity is marked for potential retry after fixing the underlying issue
-- You can use `--history --list-skipped` and `--history --retry-skipped` commands to manage failed migrations
-
-### Configuring Custom Interceptors
+### Configure custom interceptors
 
 Configure your custom interceptors in `application.yml`:
 
@@ -176,6 +216,24 @@ camunda:
 4. Restart the Data Migrator
 
 The `enabled` property is supported for all interceptors (both built-in and custom) and defaults to `true`.
+
+See [example interceptor](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/data-migrator/examples/entity-interceptor).
+
+### Execution order
+
+- Custom interceptors configured in the `application.yml` are executed in their order of appearance from top to bottom
+  - Built-in transformers run first (Order: 1-15), followed by custom interceptors
+- In a Spring Boot environment, you can register interceptors as beans and change their execution order with the `@Order` annotation (lower values run first)
+
+### Error handling
+
+When entity transformation fails:
+
+1. The migrator skips the entity.
+2. It logs a detailed error message with the entity type and error cause.
+3. It marks the entity as skipped.
+4. Use `--history --list-skipped` to view skipped entities.
+5. After you fix the underlying issue, use `--history --retry-skipped` to retry the migration.
 
 ## History cleanup
 

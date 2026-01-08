@@ -87,13 +87,9 @@ components:
           type: string
           description: The key of the entity this audit log refers to.
         entityType:
-          allOf:
-            - $ref: "#/components/schemas/AuditLogEntityTypeEnum"
-          description: The type of the entity.
+          $ref: "#/components/schemas/AuditLogEntityTypeEnum"
         operationType:
-          allOf:
-            - $ref: "#/components/schemas/AuditLogOperationTypeEnum"
-          description: The type of operation performed.
+          $ref: "#/components/schemas/AuditLogOperationTypeEnum"
         batchOperationKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/BatchOperationKey"
@@ -110,24 +106,18 @@ components:
           type: string
           description: The ID of the actor who performed the operation.
         actorType:
-          allOf:
-            - $ref: "#/components/schemas/AuditLogActorTypeEnum"
-          description: The type of the actor.
+          $ref: "#/components/schemas/AuditLogActorTypeEnum"
         tenantId:
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/TenantId"
           description: The tenant ID of the audit log.
         result:
-          allOf:
-            - $ref: "#/components/schemas/AuditLogResultEnum"
-          description: The result of the audit log.
+          $ref: "#/components/schemas/AuditLogResultEnum"
         annotation:
           type: string
           description: Additional notes about the operation.
         category:
-          allOf:
-            - $ref: "#/components/schemas/AuditLogCategoryEnum"
-          description: The category of the audit log.
+          $ref: "#/components/schemas/AuditLogCategoryEnum"
         processDefinitionId:
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/ProcessDefinitionId"
@@ -286,6 +276,7 @@ components:
             $ref: "#/components/schemas/AuditLogResult"
     AuditLogEntityTypeEnum:
       type: string
+      description: The type of entity affected by the operation.
       enum:
         - AUTHORIZATION
         - BATCH
@@ -294,14 +285,15 @@ components:
         - INCIDENT
         - MAPPING_RULE
         - PROCESS_INSTANCE
+        - RESOURCE
         - ROLE
         - TENANT
         - USER
         - USER_TASK
-        - RESOURCE
         - VARIABLE
     AuditLogOperationTypeEnum:
       type: string
+      description: The type of operation performed.
       enum:
         - ASSIGN
         - CANCEL
@@ -315,23 +307,29 @@ components:
         - RESUME
         - SUSPEND
         - UNASSIGN
+        - UNKNOWN
         - UPDATE
     AuditLogActorTypeEnum:
       type: string
+      description: The type of actor who performed the operation.
       enum:
-        - USER
+        - ANONYMOUS
         - CLIENT
+        - UNKNOWN
+        - USER
     AuditLogResultEnum:
       type: string
+      description: The result status of the operation.
       enum:
-        - SUCCESS
         - FAIL
+        - SUCCESS
     AuditLogCategoryEnum:
       type: string
+      description: The category of the audit log operation.
       enum:
-        - OPERATOR
-        - USER_TASK
         - ADMIN
+        - DEPLOYED_RESOURCES
+        - USER_TASKS
     EntityTypeFilterProperty:
       description: AuditLogEntityTypeEnum property with full advanced search capabilities.
       type: object
