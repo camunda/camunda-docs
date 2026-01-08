@@ -80,15 +80,15 @@ The History Data Migrator does not support the following Camunda 8 entities or p
 
 ## Entity transformation
 
-Entity transformations are handled by built-in converters that transform Camunda 7 historic entities
+Entity transformations are handled by built-in interceptors that transform Camunda 7 historic entities
 into Camunda 8 database models during migration. The History Data Migrator uses the
 `EntityInterceptor` interface to allow customization of this conversion process.
 
-### Built-in converters
+### Built-in interceptors
 
 The following built-in transformers convert Camunda 7 historic entities:
 
-| Converter                                   | Camunda 7 entity type                    | Camunda 8 Model               |
+| Interceptor                                 | Camunda 7 entity type                    | Camunda 8 Model               |
 | ------------------------------------------- | ---------------------------------------- | ----------------------------- |
 | `ProcessInstanceTransformer`                | `HistoricProcessInstance`                | `ProcessInstanceDbModel`      |
 | `ProcessDefinitionTransformer`              | `ProcessDefinition`                      | `ProcessDefinitionDbModel`    |
