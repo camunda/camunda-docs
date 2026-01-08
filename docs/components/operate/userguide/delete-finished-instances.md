@@ -10,8 +10,8 @@ Learn how to delete a finished process instance in Camunda 8 Operate.
 
 A finished process instance, meaning a canceled or a completed process instance, can be deleted from the **Processes** page or instance detail page.
 
-:::caution
-Use caution as you may not access process instances after you've deleted them.
+:::warning
+You may not access process instances after you've deleted them.
 :::
 
 ## Delete process instance from Processes page
