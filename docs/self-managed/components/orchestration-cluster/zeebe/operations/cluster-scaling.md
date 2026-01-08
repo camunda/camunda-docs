@@ -12,6 +12,10 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 
 - Partition count can only be increased and not decreased.
 - Backups are disallowed during partition scaling but can be taken before or after. A backup taken before scaling can only be restored to a cluster with the same partition count. After restoring, you can request scaling again to the desired partition count.
+- When scaling up the number of partitions it is recommended to keep in 
+  mind the RocksDB size per partition after the scaling operation, we 
+  recommend at the very least 32MB of RocksDB memory size per partition. For 
+  more information see the [resource planing page](/docs/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md).
   :::
 
 ## Considerations
