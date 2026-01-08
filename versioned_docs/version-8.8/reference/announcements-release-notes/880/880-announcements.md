@@ -70,12 +70,12 @@ See the [component version matrix](/reference/supported-environments.md#componen
 
 ### 8.8.x patch releases
 
-The following key changes were released in an 8.8.x patch release after the 8.8.0 minor release.
+The following key changes were also released as part of an 8.8.x patch release.
 
-| Patch release | Change                                                                                                                                                |
-| :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 8.8.9         | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
-| 8.8.9         | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
+| Patch release                                                  | Type            | Key change                                                                                                                                            |
+| :------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9) | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9) | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
 
 ### APIs & tools
 
