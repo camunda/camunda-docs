@@ -126,11 +126,11 @@ Once connected to the MCP server within your editor, you can ask context-aware q
 - "How do I build an AI agent?"
 - "What properties are changed for Camunda 8.8?"
 
-:::info Usage and limits
+:::info important
 The Camunda Docs MCP server is not designed for use in production environments, high-volume automation, or as part of a CI/CD pipeline. It is provided to help support Camunda developer IDE queries and for coding assistance, evaluation, and testing. You must always check and validate AI generated content and code as responses can be inaccurate.
 :::
 
-### Authentication and usage limits
+### Authentication
 
 When connecting to the MCP server for the first time, you must authenticate via Google sign-in.
 
