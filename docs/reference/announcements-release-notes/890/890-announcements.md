@@ -21,6 +21,54 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 :::
 
+## Supported environments
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch minimum version raised to 8.18.6+
+
+The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.18.6 (previously 8.17.3).
+
+- This aligns with the updated `ELASTICSEARCH_VERSION=8.18.6` default used by Camunda 8 Run, Docker Compose, and Helm templates.
+- You should upgrade your Elasticsearch/OpenSearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### AWS Paris region added
+
+Camunda 8.9 adds support for the AWS Paris region in Camunda 8 SaaS.
+
+<p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenJDK 25 support
+
+Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration Cluster, Connectors, Optimize, and supporting tooling. You can now run Self-Managed deployments on OpenJDK 21–25 without additional configuration changes.
+
+</div>
+</div>
+
 ## Key changes
 
 ### Agentic orchestration
@@ -346,51 +394,6 @@ This enhancement aligns Web Modeler’s database configuration with the Orchestr
 :::info
 To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-rdbms-support-h2-mariadb-mysql).
 :::
-
-</div>
-</div>
-
-### Supported environments
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Elasticsearch minimum version raised to 8.18.6+
-
-The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.18.6 (previously 8.17.3). This aligns with the updated `ELASTICSEARCH_VERSION=8.18.6` default used by Camunda 8 Run, Docker Compose, and Helm templates. Upgrade your Elasticsearch/OpenSearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
-
-<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### AWS Paris region added
-
-Camunda 8.9 adds support for the AWS Paris region in Camunda 8 SaaS.
-
-<p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### OpenJDK 25 support
-
-Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration Cluster, Connectors, Optimize, and supporting tooling. You can now run Self-Managed deployments on OpenJDK 21–25 without additional configuration changes.
 
 </div>
 </div>
