@@ -162,5 +162,3 @@ If an access token’s issuer is not configured, the request is denied.
 - [Configure external Identity Providers](./connect-external-identity-provider.md)
 - [Camunda authentication and authorization](../../../../components/concepts/access-control/authorizations.md)
 - [OIDC configuration reference](../core-settings/configuration/properties.md)
-
-
