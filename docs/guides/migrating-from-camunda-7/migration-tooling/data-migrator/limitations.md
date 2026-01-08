@@ -171,7 +171,6 @@ The history migration has the following limitations.
 
 ### DMN
 
-- The Data Migrator only migrates instances which are linked to process definition business rule tasks.
 - The properties `evaluationFailure` and `evaluationFailureMessage` are not populated in migrated decision instances.
 - Decision instance `inputs` and `outputs` are not yet migrated.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5364
