@@ -1,7 +1,7 @@
 ---
 id: data-retention
 title: Data retention
-description: "Overview of how the Orchestration Cluster stores and archives data in secondary storage backends such as Elasticsearch/OpenSearch or RDBMS."
+description: "Overview of how the Orchestration Cluster stores and archives data in secondary storage."
 ---
 
 The Orchestration Cluster centrally manages data retention for all data using unified storage and policy configuration.
