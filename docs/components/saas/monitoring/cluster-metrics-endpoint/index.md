@@ -33,8 +33,6 @@ When the Cluster Metrics endpoint is enabled for a cluster:
 
 The Cluster Metrics endpoint does not push metrics to customer systems.
 
-<!-- TODO: High-level Cluster Metrics endpoint architecture showing a Camunda 8 SaaS cluster exposing a metrics endpoint that is scraped by a customer monitoring system. -->
-
 ## Known limitations
 
 The Cluster Metrics endpoint exposes the application-level metrics produced by the Camunda version running in your cluster.
