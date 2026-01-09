@@ -50,16 +50,12 @@ New database versions are added based on the following criteria:
 
 If the availability window is missed, support is deferred to a subsequent minor release.
 
-:::note
-Exceptions may be approved on a case by case basis for strategic or customer-driven reasons. Any exceptions are explicitly documented and time-bound.
-:::
-
 ## Version deprecation and removal
 
 - **Vendor end-of-support:** Database versions are ** when** vendor support has ended or is scheduled to end within six months.
 - **Removal:** Deprecated versions may be removed in a subsequent Camunda minor release once vendor support has ended.
 - **Advance notice:** Deprecations and removals are communicated in advance via release notes.
-- **Exceptions:** Support may be extended in exceptional cases, but any extension is explicitly documented and time-bound.
+- **Exceptions:** Support may be extended in exceptional cases, but any extension is explicitly documented and time-bound. Camunda can remove support for a particular version if it contains known issues that prevent reliable operation. (ike CSV, critical defect etc.).
 
 ## Managed PostgreSQL services
 
