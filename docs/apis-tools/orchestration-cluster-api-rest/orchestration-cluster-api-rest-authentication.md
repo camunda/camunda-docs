@@ -7,7 +7,9 @@ description: "Step through authentication options for accessing the Orchestratio
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page describes the available authentication methods for accessing the Orchestration Cluster REST API. It explains when to use each method and how to configure your API requests for secure and appropriate access.
+This page describes the available authentication methods for accessing the Orchestration Cluster REST API.
+
+It explains when to use each method and how to configure your API requests for secure and appropriate access. When API authorizations are enabled, authenticated requests are evaluated against Orchestration Cluster authorizations, including the new process‑level and task‑level user task permissions.
 
 The Orchestration Cluster REST API supports three authentication methods depending on your environment and configuration: none, basic, and OIDC-based.
 
@@ -19,6 +21,17 @@ The Orchestration Cluster REST API supports three authentication methods dependi
 | [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
 | [Helm](/self-managed/deployment/helm/install/quick-install.md)                    | Basic Auth             | ✅ (when auth disabled) | ✅ (default)       | ✅ (when configured)    |
 | SaaS                                                                              | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
+
+:::info Authentication vs. authorization
+Authentication establishes who is calling the Orchestration Cluster REST API (for example, using Basic authentication or an OIDC access token). Authorization determines what that caller can do, based on authorizations configured in Identity.
+
+For user task endpoints, authorization is evaluated at two levels:
+
+- Process-level permissions on the `PROCESS_DEFINITION` resource (for example, `READ_USER_TASK`, `UPDATE_USER_TASK`, `CLAIM_USER_TASK`, `COMPLETE_USER_TASK`) can grant access to all user tasks of a process definition.
+- Task-level permissions on the `USER_TASK` resource (`READ`, `UPDATE`, `CLAIM`, `COMPLETE`) provide fine-grained access and can be scoped using property-based access control on attributes such as `assignee`, `candidateUsers`, and `candidateGroups`.
+
+If a caller has `PROCESS_DEFINITION[READ_USER_TASK]` or `PROCESS_DEFINITION[UPDATE_USER_TASK]` for a process, these process-level permissions take precedence over `USER_TASK[READ, UPDATE]` for tasks in that process.
+:::
 
 ## Authenticate API calls
 
@@ -54,7 +67,7 @@ See [Camunda components troubleshooting](/self-managed/operational-guides/troubl
 
 ## Using a token (OIDC/JWT)
 
-OIDC-based Authentication is recommended for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request.
+OIDC-based Authentication is recommended for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request. The token’s subject (user or client) must also have the necessary Orchestration Cluster authorizations (for example, `PROCESS_DEFINITION[READ_USER_TASK]` or `USER_TASK[READ]` for user task APIs), otherwise requests will fail with `403 Forbidden` even if authentication succeeds.
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={[
 {label: 'SaaS', value: 'saas' },
@@ -142,3 +155,4 @@ Official Camunda clients (Java client or Spring Boot Starter) handle token acqui
 
 - [Camunda Java client authentication and token management](../java-client/getting-started.md)
 - [Camunda Spring Boot Starter: Configuring the Camunda 8 connection](../camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection)
+- [Orchestration Cluster authorization: resources, permissions, and configuration](../../components/concepts/access-control/authorizations.md)
