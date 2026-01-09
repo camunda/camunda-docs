@@ -8,7 +8,7 @@ A high-level overview of batch operations in Camunda 8.
 
 ## About batch operations
 
-For a given process, you might have tens, hundreds, or even thousands of process instances. If an instance encounters an incident, or you need to update the instance for any other reason, you can perform an instance operation. However, if you need to perform the same operation on multiple instances, a batch operation:
+If a single process instance encounters an incident, or you need to update the instance for any other reason, you can perform an instance operation. However, if you need to perform the same operation on multiple instances, a batch operation:
 
 - Optimizes the performance of operations that need to be performed across many process instances.
 - Provides insights into the progress of the operation across all affected instances.
