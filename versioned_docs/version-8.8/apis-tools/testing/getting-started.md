@@ -7,7 +7,9 @@ description: "Integrate the Camunda Process Test library in your project."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-[Camunda Process Test](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-java) (CPT) is a Java library to test your BPMN processes and your process application.
+Use the [Camunda Process Test](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-java) (CPT) Java library to test your BPMN processes and your process application.
+
+## About
 
 CPT provides different runtimes to execute your process tests:
 
@@ -19,10 +21,7 @@ CPT is part of the Camunda 8 [public API](/reference/public-api.md) and is cover
 :::
 
 :::note
-CPT is the successor of [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md). Our previous testing
-library is deprecated and will be removed with version 8.10. See
-the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md) on how to migrate your process
-tests.
+CPT is the successor to [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md). Our previous testing library is deprecated and will be removed with version 8.10. See the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md) to learn how to migrate your process tests.
 :::
 
 ## Prerequisites
@@ -60,6 +59,39 @@ Add the following dependency to your Maven project:
   <artifactId>camunda-process-test-spring</artifactId>
   <version>${camunda.version}</version>
   <scope>test</scope>
+</dependency>
+```
+
+### Spring Boot 4.0 support
+
+If you use the [dedicated Spring Boot 4.0 starter available with 8.8.9](../camunda-spring-boot-starter/getting-started.md#spring-boot-40-support),
+you must also use the dedicated Spring Boot 4.0 test artifact:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>camunda-process-test-spring-4</artifactId>
+  <version>${camunda.version}</version>
+  <scope>test</scope>
+</dependency>
+```
+
+The 8.8.9 release of `camunda-process-test-spring-4` still contained `camunda-spring-boot-starter` as a dependency, potentially causing runtime issues.
+
+As a workaround until this is fixed with 8.8.10, you must exclude it:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>camunda-process-test-spring-4</artifactId>
+  <version>${camunda.version}</version>
+  <scope>test</scope>
+  <exclusions>
+    <exclusion>
+      <groupId>io.camunda</groupId>
+      <artifactId>camunda-spring-boot-starter</artifactId>
+    </exclusion>
+  </exclusions>
 </dependency>
 ```
 
