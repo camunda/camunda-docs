@@ -8,7 +8,7 @@ Learn how to monitor the [batch operations](../../concepts/batch-operations.md) 
 
 ## Before you begin
 
-To follow the steps in this guide, you must be [authorized to view running and completed batch operations](https://docs.camunda.io/docs/next/components/operate/userguide/access-control/#optional-authorizations).
+To follow the steps in this guide, you must be [authorized to view running and completed batch operations](https://docs.camunda.io/docs/next/components/operate/overview/access-control/#optional-authorizations).
 
 ## Monitor batch operations
 

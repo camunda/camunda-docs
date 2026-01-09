@@ -694,10 +694,17 @@ module.exports = {
             id: "components/operate/operate-introduction",
           },
           items: [
-            "components/operate/userguide/access-control",
+            {
+              Overview: [
+                "components/operate/overview/access-control",
+                "components/operate/overview/batch-operations-overview",
+                "components/operate/overview/batch-operation-details-overview",
+              ],
+            },
             "components/operate/userguide/basic-operate-navigation",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
+            "components/operate/userguide/manage-batch-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
             {
@@ -707,7 +714,12 @@ module.exports = {
               ],
             },
             "components/operate/userguide/process-instance-migration",
-            "components/operate/userguide/monitor-operation-status",
+            {
+              "Monitor process operations": [
+                "components/operate/userguide/monitor-operation-status",
+                "components/operate/userguide/monitor-batch-operations",
+              ],
+            },
           ],
         },
         {
