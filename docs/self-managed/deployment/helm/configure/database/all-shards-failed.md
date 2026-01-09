@@ -49,7 +49,7 @@ OpenSearch Node 1 (no shard) <-x-> OpenSearch Node 2 (not reachable; holds the s
 ```
 
 :::info
-Starting with version 8.8, Camunda stores authorization data in OpenSearch (or Elasticsearch), instead of using PostgreSQL and Keycloak as in previous versions.
+Starting with version 8.8, Camunda stores authorization data in secondary storage. In deployments using Elasticsearch or OpenSearch as the secondary storage backend, this data is stored in Elasticsearch/OpenSearch — see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) for details. Previously, this data was stored in PostgreSQL/Keycloak.
 
 This means:
 
