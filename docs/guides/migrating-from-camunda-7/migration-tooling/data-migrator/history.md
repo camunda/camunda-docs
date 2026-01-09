@@ -374,7 +374,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | tenantId                    | Yes      |
 | version                     | Yes      |
 | decisionRequirementsId      | Yes      |
-| decisionRequirementsKey     | No       |
+| decisionRequirementsKey     | Yes      |
 | decisionRequirementsName    | No       |
 | decisionRequirementsVersion | No       |
 
