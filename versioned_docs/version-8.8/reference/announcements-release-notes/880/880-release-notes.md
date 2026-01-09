@@ -1547,10 +1547,10 @@ Built-in Keycloak integration in Self-Managed is removed, allowing customers to 
 
 #### Resource-based authorizations
 
-Resource-based authorizations are introduced to control read and write permissions per specific resource. See [manage users](/components/console/manage-organization/manage-users.md#resource-based-authorizations).
+Resource-based authorizations control read and write permissions per specific resource. See [manage users](/components/console/manage-organization/manage-users.md#resource-based-authorizations).
 
 - Admin users retain full access, but regular users must be granted specific permissions to perform operations or view resources.
-- For organizations that build custom front-ends and access Camunda via API, users or Clients with API permissions can still access data through the V2 API, respecting their resource permissions.
+- For organizations that build custom front-ends and access Camunda via API, users or clients with API permissions can still access data through the V2 API, respecting their resource permissions.
 
 <!-- :::info
 Learn more about these updates in Introducing Enhanced Identity Management in Camunda 8.8.
