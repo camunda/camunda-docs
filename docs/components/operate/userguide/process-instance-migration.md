@@ -41,5 +41,5 @@ Now, you can see a preview of how flow nodes are mapped and how many process ins
 
 ## Next steps
 
-- [Monitor the operation status](./monitor-operation-status.md).
+- [Monitor the batch operation](./monitor-batch-operations.md).
 - [Learn about the limitations of process instance migration](/components/concepts/process-instance-migration.md#limitations).
