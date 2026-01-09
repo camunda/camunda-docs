@@ -94,6 +94,7 @@ camunda.security.authentication.providers.oidc.entraid.audiences: <YOUR_ENTRAID_
 camunda.security.authentication.providers.oidc.entraid.scope:
   ["openid", "profile", "<YOUR_ENTRAID_CLIENTID>/.default"]
 ```
+
 :::tip
 The **issuer-uri** property is required and identifies the identity provider that issues tokens for this configuration.
 :::
