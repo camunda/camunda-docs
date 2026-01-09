@@ -36,7 +36,7 @@ With the Camunda Spring Boot Starter, you can build:
 
 | Camunda Spring Boot Starter version | JDK  | Camunda version | Bundled Spring Boot version | Compatible Spring Boot version(s) |
 | ----------------------------------- | ---- | --------------- | --------------------------- | --------------------------------- |
-| 8.8.x                               | ≥ 17 | 8.8.x           | 3.5.x                       |                                   |
+| 8.8.x                               | ≥ 17 | 8.8.x           | 4.0.x                       |                                   |
 
 ## Get started
 

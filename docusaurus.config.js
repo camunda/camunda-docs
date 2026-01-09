@@ -254,6 +254,7 @@ module.exports = {
       "data-website-id": "1a0b2863-2767-4583-9d33-ded0095731e7",
       "data-project-name": "Camunda",
       "data-project-color": "#000000",
+      "data-button-hide": "true",
       "data-project-logo":
         "https://avatars.githubusercontent.com/u/2443838?s=200&v=4",
       "data-modal-disclaimer":
@@ -344,6 +345,12 @@ module.exports = {
           docId: "reference/overview",
           label: "Reference",
           position: "left",
+        },
+        {
+          type: "html",
+          position: "right",
+          value:
+            '<button class="button button--secondary button--md kapa-open" onclick="if(window.Kapa&&window.Kapa.open){window.Kapa.open({});} return false;" title="Ask AI" aria-label="Ask AI"><img src="/img/ai-star.png" alt="" style="height:1em;width:1em;margin-right:6px;vertical-align:middle;" />Ask AI</button>',
         },
         {
           to: "https://camunda.com/download?utm_source=docs.camunda.io&utm_medium=referral&utm_content=tryfreebutton",

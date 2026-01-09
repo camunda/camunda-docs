@@ -8,10 +8,13 @@ description: "A quickstart guide for developers to deploy and run Camunda 8 Self
 import {C8Run} from "@site/src/components/CamundaDistributions";
 
 :::note
-Camunda 8 Run provides a lightweight, self-managed environment for local development and prototyping.
+Camunda 8 Run provides a lightweight, self-managed environment for local development and prototyping. It is not intended for production use.
+
 For production deployments, install the Orchestration Cluster manually as a Java application.
 For detailed steps, see the [manual installation](../../../deployment/manual/install) guide.
 :::
+
+Camunda 8 Run is a local distribution of Camunda 8 that bundles the Camunda 8 runtime, core services, startup scripts, and a launcher application for Windows, macOS, and Linux.
 
 Camunda 8 Run enables you to run the [Orchestration Cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
 

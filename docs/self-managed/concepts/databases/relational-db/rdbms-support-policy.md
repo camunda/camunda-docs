@@ -4,15 +4,15 @@ title: RDBMS version support policy
 description: Defines Camunda’s official RDBMS version support policy, including supported databases, version adoption rules, and JDBC driver guidance.
 ---
 
-Camunda offers a support policy for relational databases (RDBMS) in Self-Managed Camunda 8 and Camunda 8 Run, including supported versions, adoption and deprecation rules, and JDBC driver guidance.
+Camunda provides an official support policy for relational databases (RDBMS) used with **Camunda 8 Self-Managed** and **Camunda 8 Run**. This policy defines supported database vendors and versions, adoption and deprecation rules, and JDBC driver guidance.
 
 :::caution work in progress
-The RDBMS support policy is a work in progress, content can change until completion in a future alpha release.
+The RDBMS support policy is a work in progress. Content may change until finalized in a future alpha or minor release.
 :::
 
 ## Supported RDBMS
 
-The following RDBMS databases are supported:
+The following relational databases are officially supported when used directly as the secondary storage backend:
 
 | Database             | Supported versions      |
 | :------------------- | :---------------------- |
@@ -24,30 +24,53 @@ The following RDBMS databases are supported:
 | H2                   | 2.x                     |
 
 :::info
-Changes to supported versions are announced in [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+Changes to supported versions are announced in the  
+[release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 :::
+
+## Managed and compatible database services
+
+Camunda supports **PostgreSQL as a database engine**, not specific managed service offerings.
+
+This means:
+
+- Any PostgreSQL-compatible managed service (for example, Azure Database for PostgreSQL) is expected to work.
+- Camunda does not test or certify individual managed service implementations.
+- Compatibility and correct behavior of the managed service itself are the responsibility of the service provider.
+
+If a managed service is fully compatible with the supported PostgreSQL versions listed above, it is considered supported from Camunda’s perspective.
+
+:::note
+This support model is similar to Camunda’s Kubernetes support policy: Camunda supports the underlying technology and versions, while cloud providers are responsible for ensuring their managed offerings remain compatible.
+:::
+
+## PostgreSQL-compatible managed services
+
+Camunda officially supports PostgreSQL as listed above.  
+PostgreSQL-compatible managed services (for example, AWS Aurora PostgreSQL or Azure Database for PostgreSQL) are expected to work because
 
 ## New version support
 
-New versions are added based on:
+New database versions are added based on the following criteria:
 
-- **Vendor release timeline:** Must be officially released by the vendor.
-- **Availability window:** Must be available at least three months before the next minor Camunda release.
-- **Testing requirements:** Must be fully tested and validated across Camunda components.
+- **Vendor release timeline:** The version must be officially released by the database vendor.
+- **Availability window:** The version must be available at least three months before the next Camunda minor release.
+- **Testing requirements:** The version must be tested and validated across relevant Camunda components.
 
 :::note
 Exceptions may be approved by engineering for strategic reasons or customer demand.
 :::
 
-## Version support deprecation/removal
+## Version support deprecation and removal
 
-Versions are deprecated and removed based on:
+Database versions are deprecated and removed based on:
 
-- **Vendor end-of-support (EoS):** Removed when EoS occurs or will occur within six months.
-- **Migration notice:** Adequate notice provided to customers via release notes.
+- **Vendor end of support (EoS):** Versions are removed when vendor support ends or is scheduled to end within six months.
+- **Migration notice:** Customers are informed in advance via release notes.
 - **Exceptions:** Engineering may extend support in special cases.
 
 ## JDBC driver policy
 
-- Camunda supports the latest vendor-compatible JDBC driver for each supported RDBMS. Customers should use the latest compatible driver.
-- Driver version details are not strictly fixed unless required for compatibility.
+- Camunda supports the latest vendor-compatible JDBC driver for each supported RDBMS.
+- Customers are responsible for providing JDBC drivers when required (for example, Oracle or MySQL).
+- Driver versions are not pinned unless a specific version is required for compatibility.
