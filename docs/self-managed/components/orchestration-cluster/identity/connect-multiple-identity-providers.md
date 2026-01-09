@@ -31,62 +31,70 @@ When multiple OIDC providers are set up, the clusterlogin page lets users select
 
 Multiple IdPs are configured by defining each provider as a separate registration using application.yaml or environment variables.
 
-Each provider is identified by a unique `registration-id`, which is a user-defined label (e.g., `ENTRA`, `KEYCLOAK`, `PARTNER_X`).
+Each provider is identified by a unique `<provider-id>`, which is a user-defined label (e.g., `ENTRA`, `KEYCLOAK`, `PARTNER_X`).
 
 ### Configure OIDC connection details for each provider
 
-Define each provider’s settings using the following pattern (`<REG_ID>` is your chosen registration id):
+Define each provider’s settings using the following pattern (`<provider-id>` is your chosen id):
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
 
 ```yaml
-camunda.security.authentication.providers.oidc.<REG_ID>.client-id: <YOUR_CLIENTID>
-camunda.security.authentication.providers.oidc.<REG_ID>.client-name: <YOUR_CLIENTNAME>
-camunda.security.authentication.providers.oidc.<REG_ID>.client-secret: <YOUR_CLIENTSECRET>
-camunda.security.authentication.providers.oidc.<REG_ID>.issuer-uri: <YOUR_ISSUERURI>
-camunda.security.authentication.providers.oidc.<REG_ID>.redirect-uri: <YOUR_REDIRECTURI>
-camunda.security.authentication.providers.oidc.<REG_ID>.token-uri: <YOUR_TOKENRUI>
-camunda.security.authentication.providers.oidc.<REG_ID>.jwk-set-uri: <YOUR_JWKSETURI>
-camunda.security.authentication.providers.oidc.<REG_ID>.scope: ["openid"]
-camunda.security.authentication.providers.oidc.<REG_ID>.audiences: <YOUR_CLIENTID>
-camunda.security.authentication.providers.oidc.<REG_ID>.grant-type:
+camunda.security.authentication.providers.oidc.<provider-id>.client-id: <YOUR_CLIENTID>
+camunda.security.authentication.providers.oidc.<provider-id>.client-name: <YOUR_CLIENTNAME>
+camunda.security.authentication.providers.oidc.<provider-id>.client-secret: <YOUR_CLIENTSECRET>
+camunda.security.authentication.providers.oidc.<provider-id>.issuer-uri: <YOUR_ISSUERURI>
+camunda.security.authentication.providers.oidc.<provider-id>.redirect-uri: <YOUR_REDIRECTURI>
+camunda.security.authentication.providers.oidc.<provider-id>.token-uri: <YOUR_TOKENRUI>
+camunda.security.authentication.providers.oidc.<provider-id>.jwk-set-uri: <YOUR_JWKSETURI>
+camunda.security.authentication.providers.oidc.<provider-id>.scope: ["openid"]
+camunda.security.authentication.providers.oidc.<provider-id>.audiences: <YOUR_CLIENTID>
+camunda.security.authentication.providers.oidc.<provider-id>.grant-type: <GRANT_TYPE>
 ```
 
 </TabItem>
 <TabItem value="env">
 ```
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<REG_ID>_CLIENTID=
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<REG_ID>_CLIENTNAME=
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<REG_ID>_CLIENTSECRET=
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<REG_ID>_ISSUERURI=
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<REG_ID>_REDIRECTURI=
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<REG_ID>_AUTHORIZATIONURI=
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<REG_ID>_TOKENURI=
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<REG_ID>_JWKSETURI=
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<REG_ID>_SCOPE=
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<REG_ID>_AUDIENCES=
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<REG_ID>_GRANTTYPE=
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<REG_ID>_AUTHORIZEREQUESTCONFIGURATION_ADDITIONALPARAMETERS=
+CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_CLIENTID=
+CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_CLIENTNAME=
+CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_CLIENTSECRET=
+CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_ISSUERURI=
+CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_REDIRECTURI=
+CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_AUTHORIZATIONURI=
+CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_TOKENURI=
+CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_JWKSETURI=
+CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_SCOPE=
+CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_AUDIENCES=
+CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_GRANTTYPE=
 ```
 </TabItem>
 </Tabs>
 
-**Example configuration using environment variables for two providers:**
+**Example configuration for two providers:**
 
-```
-# OIDC provider with registration ID: ENTRA (Microsoft Entra ID)
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_ENTRA_CLIENTID=<your-entra-client-id>
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_ENTRA_CLIENTSECRET=<your-entra-client-secret>
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_ENTRA_ISSUERURI=https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_ENTRA_REDIRECTURI=http://localhost:8080/sso-callback
+```yaml
+# Keycloak
+camunda.security.authentication.providers.oidc.keycloak.client-name: "Keycloak - MyCompany"
+camunda.security.authentication.providers.oidc.keycloak.client-id: <YOUR_KEYCLOAK_CLIENTID>
+camunda.security.authentication.providers.oidc.keycloak.client-secret: <YOUR_KEYCLOK_CLIENTSECRET>
+camunda.security.authentication.providers.oidc.keycloak.issuer-uri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
+camunda.security.authentication.providers.oidc.keycloak.redirect-uri: "http://localhost:8080/sso-callback"
+camunda.security.authentication.providers.oidc.keycloak.audiences: <YOUR_CLIENTID>
+camunda.security.authentication.providers.oidc.keycloak.scope: ["openid", "profile", "email"]
 
-# OIDC provider with registration ID: KEYCLOAK
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_KEYCLOAK_CLIENTID=<your-keycloak-client-id>
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_KEYCLOAK_CLIENTSECRET=<your-keycloak-client-secret>
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_KEYCLOAK_ISSUERURI=https://<KEYCLOAK_HOST>/realms/<REALM_NAME>
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_KEYCLOAK_REDIRECTURI=http://localhost:8080/sso-callback
+# Microsoft EntraID
+camunda.security.authentication.providers.oidc.entraid.client-name: "Microsoft EntraID - ContractorCompany"
+camunda.security.authentication.providers.oidc.entraid.client-id: <YOUR_ENTRAID_CLIENTID>
+camunda.security.authentication.providers.oidc.entraid.client-secret: <YOUR_ENTRAID_CLIENTSECRET>
+camunda.security.authentication.providers.oidc.entraid.issuer-uri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
+camunda.security.authentication.providers.oidc.entraid.redirect-uri: "http://localhost:8080/sso-callback"
+camunda.security.authentication.providers.oidc.entraid.audiences: <YOUR_ENTRAID_CLIENTID>
+camunda.security.authentication.providers.oidc.entraid.scope: ["openid", "profile", "<YOUR_ENTRAID_CLIENTID>/.default"]
 ```
+:::tip
+The **issuer-uri** property is required and identifies the identity provider that issues tokens for this configuration.
+:::
 
 You can repeat these variables for any number of OIDC IdPs by using a unique `<REG_ID>` for each.
 
@@ -127,7 +135,7 @@ All IdPs must use the same claims for these purposes.
 
 After configuring multiple IdPs and restarting the Orchestration Cluster:
 
-- The login page will show a list of available OIDC Providers. Users will see the `<REG_ID>` as the selection, so choose accordingly.
+- The cluster login page will show a list of available OIDC Providers. Users will see the `client name` as the selection, so choose accordingly.
 - Users can pick their identity provider, sign in, and proceed to Camunda UIs.
   - This login page is generated by Spring Security and suffices for most use cases.
 
@@ -139,7 +147,7 @@ If an access token’s issuer is not configured, the request is denied.
 
 ### Best Practices
 
-- Each IdP registration should use a unique and meaningful `<registration-id>`. This will be visible to users on the login page, so choose appropriately
+- Each IdP should use a unique and meaningful `<provider-id>`.
 - Ensure the `issuer URI` is present and correct for each provider.
 - Set up claims (clientId, username, groups) consistently across all IdPs.
 
