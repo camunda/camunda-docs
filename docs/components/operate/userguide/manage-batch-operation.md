@@ -18,7 +18,7 @@ You can suspend, resume, or cancel batch operations, if they're in one of the fo
 
 ## Before you begin
 
-To follow the steps in this guide, you must be [authorized to update batch operations](https://docs.camunda.io/docs/next/components/operate/overview/access-control/#optional-authorizations).
+To follow the steps in this guide, you must be [authorized to update batch operations](../overview/access-control.md#optional-authorizations).
 
 ## Manage a batch operation
 
