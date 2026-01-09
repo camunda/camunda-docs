@@ -128,7 +128,7 @@ Example:
 
 ### Timer event definition binding: `bpmn:TimerEventDefinition#property`
 
-Use `bpmn:TimerEventDefinition#property` to configure [timer event definitions](../../bpmn/timer-events/) for timer events.
+Use `bpmn:TimerEventDefinition#property` to configure [timer event definitions](../../bpmn/timer-events/timer-events.md) for timer events.
 
 This binding is only valid when your template sets the event definition via `elementType.eventDefinition` to `bpmn:TimerEventDefinition`.
 

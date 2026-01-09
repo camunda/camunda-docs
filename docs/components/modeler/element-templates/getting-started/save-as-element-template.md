@@ -29,7 +29,7 @@ You can save templates for the following BPMN element types.
 - Call activity
 
 :::note
-You cannot create a template for the [undefined task type](../../bpmn/undefined-tasks).
+You cannot create a template for the [undefined task type](../../bpmn/undefined-tasks/undefined-tasks.mdx).
 :::
 
 **Events**
