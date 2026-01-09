@@ -22,7 +22,7 @@ The following relational databases are officially supported:
 | Database                 | Supported versions              |
 | ------------------------ | ------------------------------- |
 | PostgreSQL               | 14 (deprecated), 15, 16, 17, 18 |
-| Amazon Aurora PostgreSQL | 14 (deprecated), 15, 16, 17, 18 |
+| Amazon Aurora PostgreSQL | 14 (deprecated), 15, 16, 17     |
 | MariaDB                  | 10.11, 11.4, 11.8               |
 | MySQL                    | 8.4                             |
 | Microsoft SQL Server     | 2019 (deprecated), 2022, 2025   |
@@ -52,7 +52,7 @@ If the availability window is missed, support is deferred to a subsequent minor 
 
 ## Version deprecation and removal
 
-- **Vendor end-of-support:** Database versions are ** when** vendor support has ended or is scheduled to end within six months.
+- **Vendor end-of-support:** Database versions are **when** vendor support has ended or is scheduled to end within six months.
 - **Removal:** Deprecated versions may be removed in a subsequent Camunda minor release once vendor support has ended.
 - **Advance notice:** Deprecations and removals are communicated in advance via release notes.
 - **Exceptions:** Support may be extended in exceptional cases, but any extension is explicitly documented and time-bound. Camunda can remove support for a particular version if it contains known issues that prevent reliable operation. (ike CSV, critical defect etc.).
