@@ -32,13 +32,13 @@ As of today, the following requirements and limitations apply:
 
 ### Identities
 
-| Identity type     | Migration supported |
-| ----------------- | ------------------- |
-| Users             | Yes                 |
-| Groups            | Not yet             |
-| Tenants           | Not yet             |
-| Group Memberships | Not yet             |
-| Tenant Membership | Not yet             |
+| Identity type      | Migration supported |
+| ------------------ | ------------------- |
+| Users              | Yes                 |
+| Groups             | Not yet             |
+| Tenants            | Not yet             |
+| Group Memberships  | Not yet             |
+| Tenant Memberships | Not yet             |
 
 ### Authorizations
 
@@ -162,7 +162,7 @@ Behaves the same as `Group Membership`.
 ### `ALL` permissions compatibility
 
 :::info
-As illustrated in the tables above, the `ALL` permission in Camunda 7 maps to **all the existing permissions in Camunda 8** for the given resource type, independently on whether some exist in Camunda 7 or not. This is true for all resource types.
+As illustrated in the tables above, the `ALL` permission in Camunda 7 maps to **all the existing permissions in Camunda 8** for the given resource type, independently of whether these exist in Camunda 7 or not. This is true for all resource types.
 :::
 
 ## Executing identity migration
@@ -173,5 +173,5 @@ As illustrated in the tables above, the `ALL` permission in Camunda 7 maps to **
 ```
 
 :::warning
-After migration has been completed, it is strongly recommended to verify the results on Camunda 8 before using the system in production.
+After migration has been completed, it is strongly recommended to verify the results in Camunda 8 before using the system in production.
 :::
