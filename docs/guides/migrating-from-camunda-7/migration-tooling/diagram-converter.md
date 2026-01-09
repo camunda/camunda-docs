@@ -25,21 +25,62 @@ The results are available as:
 In the following sections, you'll learn how to:
 
 - [Install the Diagram Converter](#install-the-diagram-converter)
-- [Analyze your diagrams](#analyze-your-diagrams-using-the-web-interface)
+- [Analyze your diagrams using the web interface](#analyze-your-diagrams-using-the-web-interface)
+- [Use the CLI](#use-the-cli)
 - [Convert your diagrams](#convert-your-diagrams)
 
 ## Install the Diagram Converter
 
-Refer to the [Installation Guide](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/diagram-converter#installation) for local setup instructions.
+### Hosted Diagram Converter
 
-To get started right away, try the [free SaaS version](https://diagram-converter.camunda.io/).
+Use the hosted Diagram Converter at [https://diagram-converter.camunda.io/](https://diagram-converter.camunda.io/). This option requires no local setup and is suitable for quick evaluations or one-off migrations.
 
-## Analyze your diagrams using the Web Interface
+Your models are not stored on this platform, and all processing happens in-memory. Your data is transmitted securely over HTTPS.
+
+### Local web application
+
+#### Prerequisites
+
+- Java 21 or later
+
+#### Steps
+
+1. Download the latest `camunda-7-to-8-diagram-converter-webapp-{version}.jar` from [GitHub Releases](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases).
+2. Run the application:
+
+   ```shell
+   java -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar
+   ```
+
+3. Access the web application at [http://localhost:8080/](http://localhost:8080/).
+
+To run the application on a different port, for example `8090`:
+
+```shell
+java -Dserver.port=8090 -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar
+```
+
+### CLI installation
+
+#### Prerequisites
+
+- Java 21 or later
+
+#### Steps
+
+1. Download the latest `camunda-7-to-8-diagram-converter-cli-{version}.jar` from [GitHub Releases](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases).
+2. Verify the installation:
+
+   ```shell
+   java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar --help
+   ```
+
+## Analyze your diagrams using the web interface
 
 Open the Diagram Converter:
 
-- If [you've installed the Diagram Converter locally](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/diagram-converter#installation), open [http://localhost:8080/](http://localhost:8080/).
-- If you're using the [SaaS deployment](https://diagram-converter.camunda.io/), no local setup is required.
+- For a local installation, open [http://localhost:8080/](http://localhost:8080/).
+- For the hosted SaaS version, open [https://diagram-converter.camunda.io/](https://diagram-converter.camunda.io/).
 
 Upload one or more diagrams:
 
@@ -95,77 +136,66 @@ For Google Sheets, consider using this [Google Spreadsheet template](https://doc
 
 ![The Google Sheet](../../img/analyzer-screenshot.png)
 
-### Analyze results with the CLI
+## Use the CLI
 
-If you prefer the command line over a web interface, the CLI tool is for you. It is ideal for batch conversions or automation.
+If you prefer the command line, use the CLI for batch processing or automation.
 
-After [installing](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/diagram-converter#installation), run the CLI:
+The CLI supports two modes:
+
+- **local**: Analyze and convert diagrams from your file system
+- **engine**: Analyze and convert diagrams directly from a running Camunda 7 process engine
+
+### Local mode
 
 ```shell
-java -jar camunda-7-to-8-diagram-converter-cli.jar local myDiagram.bpmn --xlsx
+java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local myDiagram.bpmn --xlsx
 ```
 
-You can also prompt a help message that will guide you through all parameters:
+To process all diagrams in a directory (including subdirectories):
 
 ```shell
-java -jar camunda-7-to-8-diagram-converter-cli.jar local
+java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local ./my-processes/
+```
 
-Missing required parameter: '<file>'
-Usage: camunda-7-to-8-diagram-converter-cli local [-dhoV] [--check] [--csv]
-       [--add-data-migration-execution-listener]
-       [--data-migration-execution-listener-job-type=<dataMigrationExecutionListenerJobType>]
-       [--disable-append-elements]
-       [--always-use-default-job-type] [--md] [-nr]
-       [--default-job-type=<defaultJobType>]
-       [--platform-version=<platformVersion>] [--prefix=<prefix>] <file>
-Converts the diagram from the given directory or file
+Key options for `local` mode:
 
-Execute as:
+| Option               | Description                                                   |
+| -------------------- | ------------------------------------------------------------- |
+| `--platform-version` | Semantic version of the target platform (defaults to latest)  |
+| `--csv`              | Create a CSV file with analysis results                       |
+| `--xlsx`             | Create an XLSX file with analysis results                     |
+| `--prefix`           | Prefix for the generated file name (default: `converted-c8-`) |
+| `-o, --override`     | Override existing files                                       |
 
-java -Dfile.encoding=UTF-8 -jar camunda-7-to-8-diagram-converter-cli.jar local
+To see all available options:
 
-Parameter:
-      <file>                 The file to convert or directory to search in
-Options:
-      --add-data-migration-execution-listener
-                             Add an execution listener on blank start events
-                               that can be used for the Camunda 7 Data Migrator
-      --always-use-default-job-type
-                             Always fill in the configured default job type,
-                               interesting if you want to use one delegation
-                               job worker (like the Camunda 7 Adapter).
-      --check                If enabled, no converted diagrams are exported
-      --csv                  If enabled, a CSV file will be created containing
-                               the results for the analysis
-  -d, --documentation        If enabled, messages are also appended to
-                               documentation
-      --data-migration-execution-listener-job-type=<dataMigrationExecutionListen
-        erJobType>
-                             Name of the job type of the listener. If set, the
-                               default value from the 'converter-properties.
-                               properties' is overridden
-      --default-job-type=<defaultJobType>
-                             Job type used when adjusting delegates. If set,
-                               the default value from the 'converter-properties.
-                               properties' is overridden
-      --disable-append-elements
-                             Disables adding conversion messages to the bpmn xml
-  -h, --help                 Show this help message and exit.
-      --keep-job-type-blank  Sets all job types to blank so that you need to
-                               edit those after conversion yourself
-      --md, --markdown       If enabled, a markdown file will be created
-                               containing the results for all conversions
-      -nr, --not-recursive   If enabled, recursive search in subfolders will be
-                               omitted
-  -o, --override             If enabled, existing files are overridden
-      --platform-version=<platformVersion>
-                             Semantic version of the target platform, defaults
-                               to latest version
-      --prefix=<prefix>      Prefix for the name of the generated file
-                               Default: converted-c8-
-  -V, --version              Print version information and exit.
-      --xlsx                 If enabled, a XLSX file will be created containing
-                               the results for the analysis
+```shell
+java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local --help
+```
+
+### Engine mode
+
+Use engine mode to process diagrams directly from a running Camunda 7 engine via its REST API:
+
+```shell
+java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar engine http://localhost:8080/engine-rest
+```
+
+Key options for `engine` mode:
+
+| Option                   | Description                                                    |
+| ------------------------ | -------------------------------------------------------------- |
+| `--platform-version`     | Semantic version of the target platform (defaults to latest)   |
+| `-u, --username`         | Username for basic auth                                        |
+| `-p, --password`         | Password for basic auth                                        |
+| `-t, --target-directory` | Directory to save the .bpmn files (default: current directory) |
+| `--csv`                  | Create a CSV file with analysis results                        |
+| `--xlsx`                 | Create an XLSX file with analysis results                      |
+
+To see all available options:
+
+```shell
+java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar engine --help
 ```
 
 ## Convert your diagrams
@@ -182,7 +212,13 @@ Converted files can be downloaded via the web interface or generated via the CLI
 
 ## Extend the conversion logic
 
-You can also extend the conversion logic. See [Extending the Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/diagram-converter?tab=readme-ov-file#how-to-extend-diagram-conversion) for details.
+You can extend the conversion logic by implementing custom visitors and conversions using the Java Service Provider Interface (SPI). This lets you:
+
+- Add custom conversion rules for proprietary extensions
+- Modify how specific BPMN elements are transformed
+- Add custom analysis messages
+
+For implementation details and examples, see the [extension example on GitHub](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/diagram-converter/extension-example).
 
 ## Convert expressions
 
