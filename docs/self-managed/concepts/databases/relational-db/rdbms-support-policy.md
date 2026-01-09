@@ -34,11 +34,11 @@ Changes to supported versions are announced in the
 [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 :::
 
-Versions marked as **deprecated** remain supported but are approaching vendor end-of-support. Customers are encouraged to plan upgrades to newer supported versions.
+Versions marked as **deprecated** remain supported but have reached, or are scheduled to reach, vendor end-of-support within six months. Customers are encouraged to plan upgrades to newer supported versions.
 
 ## Recommended database versions
 
-While multiple database versions may be supported at any given time, Camunda recommends that **new deployments** standardize on the **latest two supported versions** of a given database whenever possible.
+While multiple database versions may be supported at any given time, Camunda recommends that **new deployments** standardize on **one of the latest two supported versions** of a given database whenever possible. Older supported versions remain valid for existing deployments but are not recommended for new deployments.
 
 ## New version support
 
@@ -56,33 +56,29 @@ Exceptions may be approved on a case by case basis for strategic or customer-dri
 
 ## Version deprecation and removal
 
-- **Vendor end-of-support:** Versions are deprecated when vendor support ends or is scheduled to end within six months.
-- **Advance notice:** Deprecations are announced in advance via release notes.
+- **Vendor end-of-support:** Database versions are ** when** vendor support has ended or is scheduled to end within six months.
+- **Removal:** Deprecated versions may be removed in a subsequent Camunda minor release once vendor support has ended.
+- **Advance notice:** Deprecations and removals are communicated in advance via release notes.
 - **Exceptions:** Support may be extended in exceptional cases, but any extension is explicitly documented and time-bound.
 
 ## Managed PostgreSQL services
+
+Camunda supports PostgreSQL as a database engine, not individual managed service implementations.
 
 Managed PostgreSQL services are supported when:
 
 - they are fully compatible with the PostgreSQL versions listed in this policy, and
 - the service provider guarantees compatibility and support for those versions.
 
-Amazon Aurora PostgreSQL is explicitly tested and supported as a PostgreSQL-compatible engine and follows the same lifecycle rules as self-managed PostgreSQL.
-
 Provider-specific operational behavior and service characteristics remain the responsibility of the service provider.
 
-:::note
-This support model is similar to Camunda’s Kubernetes support policy: Camunda supports the underlying technology and versions, while cloud providers are responsible for ensuring their managed offerings remain compatible.
-:::
+Amazon Aurora PostgreSQL is listed separately because it is explicitly tested by Camunda, while other managed PostgreSQL services are supported based on compatibility guarantees provided by the service provider.
 
 ## Database-specific support notes
 
 ### PostgreSQL
 
-Camunda follows PostgreSQL’s annual release model and supports multiple active major versions concurrently.
-
-- Versions approaching vendor end-of-life are marked as deprecated before removal.
-- For new deployments, customers should prefer the latest two supported versions.
+Camunda follows PostgreSQL’s regular release cadence and supports multiple active major versions concurrently.
 
 ### MariaDB
 
@@ -112,10 +108,10 @@ Camunda supports **Oracle Long Term Support (LTS) releases**.
 H2 is supported for **development and testing purposes only**.
 
 - Production use is not recommended.
-- H2 support does not follow the same lifecycle guarantees as production databases.
+- H2 support does not follow the same deprecation and removal rules as production databases.
 
 ## JDBC driver policy
 
-- Camunda supports the latest vendor-compatible JDBC driver for each supported database version.
-- Customers are responsible for providing JDBC drivers where required (for example, Oracle or MySQL).
+- Camunda supports the latest vendor-released JDBC driver that is compatible with the supported database version, as specified by the database vendor..
+- Customers are responsible for selecting and providing JDBC drivers where required (for example, Oracle or MySQL).
 - JDBC driver versions are not pinned unless required for compatibility or stability reasons.
