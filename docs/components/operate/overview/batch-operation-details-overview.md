@@ -34,7 +34,6 @@ In the table, you can review these details about each item in the batch operatio
 
 | Column               | Description                                                                             |
 | -------------------- | --------------------------------------------------------------------------------------- |
-| Process name         | The name of the process definition.                                                     |
 | Process instance key | The key of the process instance. Clicking this opens the process instance details page. |
 | Operation state      | The state of the batch operation item.                                                  |
 | Time                 | The user or client responsible for triggering the operation.                            |
