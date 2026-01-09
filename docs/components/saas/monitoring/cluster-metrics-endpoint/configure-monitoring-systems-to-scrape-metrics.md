@@ -80,6 +80,8 @@ The Cluster Metrics endpoint exposes metrics in Prometheus-compatible formats. S
 
 In these cases, you can deploy a self-managed OpenTelemetry Collector to adapt the metrics to your monitoring system. For more information, see the [OpenTelemetry Collector documentation](https://opentelemetry.io/docs/collector/).
 
+![Integrate non-Prometheus monitoring systems](./img/cluster-metrics-endpoint-non-prometheus-architecture.png)
+
 Using an OpenTelemetry Collector allows you to normalize, enrich, and control the flow of metrics scraped from the Cluster Metrics endpoint. For example, you can:
 
 - Transform metrics to match internal naming conventions
