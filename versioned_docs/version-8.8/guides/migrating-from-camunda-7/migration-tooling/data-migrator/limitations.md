@@ -172,7 +172,7 @@ The history migration has the following limitations.
 ### DMN
 
 - The Data Migrator only migrates instances which are linked to process definition business rule tasks.
-  - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/634 
+  - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/634
 - The properties `evaluationFailure` and `evaluationFailureMessage` are not populated in migrated decision instances.
 - Decision instance `state` is always set to `EVALUATED`
 - Decisions containing only a single decision table or literal expression are currently not displayed correctly in Operate

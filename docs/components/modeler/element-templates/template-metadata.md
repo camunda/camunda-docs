@@ -169,6 +169,7 @@ These two key-value pairs define what BPMN types the template can be applied to 
   - `eventDefinition: String`: This key is used when templating an event. It can be ignored when templating any other element type. Supported values are:
     - `"bpmn:MessageEventDefinition"` use this value when you template a message event.
     - `"bpmn:SignalEventDefinition"` use this value when you template a signal event.
+    - `"bpmn:TimerEventDefinition"` use this value when you template a timer event.
 
 Some properties require a specific BPMN type, and thus a specific value for `elementType`, to work correctly.
 For example, if the template sets `zeebe:calledDecision` on an element and `appliesTo` is set to `bpmn:Task`, the `elementType` must be set to `bpmn:BusinessRuleTask`.
