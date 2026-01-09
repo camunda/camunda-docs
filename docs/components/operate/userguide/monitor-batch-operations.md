@@ -17,7 +17,7 @@ To follow the steps in this guide, you must be [authorized to view running and c
 
 ## View failure reasons
 
-On the batch operation details page, if an item in the batch fails, click the arrow next to the **Process name** to expand the row and see why it failed.
+On the batch operation details page, if an item in the batch fails, expand the row, and see why it failed.
 
 ## Next steps
 
