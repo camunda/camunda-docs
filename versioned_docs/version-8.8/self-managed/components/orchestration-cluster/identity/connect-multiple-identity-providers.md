@@ -81,7 +81,8 @@ camunda.security.authentication.providers.oidc.keycloak.client-secret: <YOUR_KEY
 camunda.security.authentication.providers.oidc.keycloak.issuer-uri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
 camunda.security.authentication.providers.oidc.keycloak.redirect-uri: "http://localhost:8080/sso-callback"
 camunda.security.authentication.providers.oidc.keycloak.audiences: <YOUR_CLIENTID>
-camunda.security.authentication.providers.oidc.keycloak.scope: ["openid", "profile", "email"]
+camunda.security.authentication.providers.oidc.keycloak.scope:
+  ["openid", "profile", "email"]
 
 # Microsoft EntraID
 camunda.security.authentication.providers.oidc.entraid.client-name: "Microsoft EntraID - ContractorCompany"
