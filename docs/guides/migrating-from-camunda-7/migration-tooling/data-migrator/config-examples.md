@@ -29,6 +29,11 @@ camunda.migrator:
   interceptors:
     - class-name: com.example.MyCustomInterceptor # Custom interceptor class
     - class-name: com.example.AnotherInterceptor # Another custom interceptor class
+  history:
+    auto-cancel:
+      cleanup:
+        enabled: true # Populate cleanup dates for auto-canceled entities
+        ttl: P6M # Time-to-live for auto-canceled history (6 months)
 ```
 
 ## Datasource

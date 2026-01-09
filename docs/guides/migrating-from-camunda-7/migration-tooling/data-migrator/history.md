@@ -30,11 +30,11 @@ The following requirements and limitations apply:
 - The History Data Migrator must be able to access the Camunda 7 database.
 - The History Data Migrator can migrate data to Camunda 8 only when a relational database (RDBMS) is used. This capability is planned for Camunda 8.9.
 - The History Data Migrator must be able to access the Camunda 8 database. As a result, you can run this tool only in a self-managed environment.
-- If you migrate runtime and history data at the same time, Camunda 8 will contain two process instances:
-  - A canceled historic process instance.
-  - An active runtime process instance.
+- If you migrate runtime and history data for an active C7 process instance, two separate records will appear in Operate:
+  1. **Fresh runtime instance**: The migrated active process instance running on Zeebe. This instance continues execution from the last wait state pre-migration and produces new history going forward. It has no historical data from before the migration.
+  2. **Auditable instance**: A canceled historic process instance that preserves the audit trail (history data) up to the last wait state pre-migration. This instance appears as canceled and serves only as an audit record of what happened in Camunda 7.
 
-  These instances are linked by process variables.
+  These two instances are separate entities and are not automatically linked in the UI, though they share the same process variables from the migration point.
 
 ### Unsupported entities and properties
 
@@ -77,6 +77,35 @@ The History Data Migrator does not support the following Camunda 8 entities or p
 | `HISTORY_FLOW_NODE`           | Flow node instances  |
 | `HISTORY_DECISION_INSTANCE`   | Decision instances   |
 | `HISTORY_DECISION_DEFINITION` | Decision definitions |
+
+## Cleanup behavior for completed instances
+
+Instances that were already completed in Camunda 7 retain their original cleanup dates:
+
+- If a `removalTime` exists in Camunda 7, it is migrated as-is
+- If no `removalTime` exists and the instance is completed, no cleanup date is set
+- Auto-cancel cleanup configuration **only applies to instances that were active/suspended** in Camunda 7
+
+## Auto-cancellation of active instances
+
+When migrating history data, the Data Migrator automatically handles **active or suspended** process instances from Camunda 7 by marking them as **canceled** in Camunda 8. This applies to:
+
+- Process instances
+- Flow nodes
+- User tasks
+- Incidents
+
+Auto-canceled entities are assigned the migration timestamp as their end date.
+
+By default, auto-canceled entities receive a cleanup date calculated as:
+
+```
+cleanup_date = end_date + 6 months
+```
+
+This ensures auto-canceled instances are eligible for history cleanup after 6 months, preventing unbounded growth of history data.
+
+Please also see configuration options for [history auto-cancellation](../data-migrator/config-properties.md#camundamigratorhistoryauto-cancelcleanup).
 
 ## Entity transformation
 
@@ -251,10 +280,6 @@ When entity transformation fails:
 3. It marks the entity as skipped.
 4. Use `--history --list-skipped` to view skipped entities.
 5. After you fix the underlying issue, use `--history --retry-skipped` to retry the migration.
-
-## History cleanup
-
-The history cleanup date is migrated if the Camunda 7 instance has a removal time.
 
 ## Tenants
 
