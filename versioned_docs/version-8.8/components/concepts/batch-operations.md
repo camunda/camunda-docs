@@ -68,4 +68,9 @@ Read more about [authorizations](/components/concepts/access-control/authorizati
 
 - [Learn how batch operations work](../zeebe/technical-concepts/batch-operations.md).
 - [Use batch operations in the Camunda 8 web interface](../operate/userguide/selections-operations.md).
-- [Use the batch operations API](/apis-tools/orchestration-cluster-api-rest/specifications/get-batch-operation.api.mdx).
+- Use the batch operations APIs:
+  - [Search batch operations](/apis-tools/orchestration-cluster-api-rest/specifications/search-batch-operations.api.mdx).
+  - [Cancel process instances (batch)](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation.api.mdx).
+  - [Resolve related incidents (batch)](/apis-tools/orchestration-cluster-api-rest/specifications/resolve-incidents-batch-operation.api.mdx).
+  - [Migrate process instances (batch)](/apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instances-batch-operation.api.mdx).
+  - [Modify process instances (batch)](/apis-tools/orchestration-cluster-api-rest/specifications/modify-process-instances-batch-operation.api.mdx).
