@@ -12,7 +12,7 @@ Before enabling the Cluster Metrics endpoint, ensure that:
 
 - You are using Camunda 8 SaaS.
 - You have access to Console and have permission to manage cluster-level settings.
-- The monitoring system’s source IP addresses are added to the cluster IP allowlist. The Cluster Metrics endpoint is not accessible unless IP allowlisting is configured.
+- If allowlisting is configured for your cluster, the monitoring system’s source IP addresses are added to the cluster IP allowlist.
 
 ## Enable Cluster Metrics endpoint
 
@@ -72,6 +72,8 @@ You can create multiple credentials for the same cluster:
 
 When credentials are removed or rotated, previously issued credentials may continue to work briefly. Access may persist for up to five minutes before the credentials are fully invalidated.
 
+To avoid interruptions during credential rotation, you can create multiple credentials for the same cluster and update your monitoring system to switch between credentials, rather than rotating a single credential in place.
+
 ## Authentication and IP allowlisting
 
 The Cluster Metrics endpoint enforces both authentication and network restrictions.
@@ -79,7 +81,7 @@ The Cluster Metrics endpoint enforces both authentication and network restrictio
 - **Authentication**  
   The endpoint uses Basic Authentication.
 - **IP allowlisting**  
-  The endpoint enforces the cluster-level IP allowlist. Requests from non-allowlisted IP addresses are rejected.
+  The endpoint enforces the cluster-level IP allowlist. Requests from non-allowlisted IP addresses are rejected. If an IP allowlist is configured for the cluster, you must add the source IP addresses of your monitoring system to the allowlist to access the endpoint.
 
 ### Error responses
 

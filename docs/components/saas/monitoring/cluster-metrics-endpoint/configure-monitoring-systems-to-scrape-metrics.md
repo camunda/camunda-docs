@@ -4,9 +4,7 @@ title: Configure monitoring systems to scrape metrics
 description: Learn how to configure monitoring systems to scrape metrics from the Cluster Metrics endpoint in Camunda 8 SaaS.
 ---
 
-This guide explains how to configure monitoring systems to collect metrics from a Camunda 8 SaaS cluster using the Cluster Metrics endpoint.
-
-The Cluster Metrics endpoint exposes metrics using a pull-based model and Prometheus-compatible format ([Prometheus](https://github.com/prometheus/docs/blob/main/docs/instrumenting/exposition_formats.md#text-based-format) and [OpenMetrics](https://github.com/prometheus/docs/blob/main/docs/instrumenting/exposition_formats.md#openmetrics-text-format) text exposition formats).
+This guide explains how to configure monitoring systems to scrape metrics from a Camunda 8 SaaS cluster using the Cluster Metrics endpoint.
 
 ## Before you begin
 
@@ -78,9 +76,9 @@ If metrics do not appear, review authentication, network access, and scrape conf
 
 ## Integrate non-Prometheus monitoring systems
 
-The Cluster Metrics endpoint exposes metrics in Prometheus format using a pull-based model. Some monitoring systems require additional components to ingest these metrics.
+The Cluster Metrics endpoint exposes metrics in Prometheus-compatible formats. Some monitoring systems require additional components to ingest these metrics.
 
-In these cases, you can deploy a customer-managed OpenTelemetry Collector to adapt the metrics to your monitoring system.
+In these cases, you can deploy a self-managed OpenTelemetry Collector to adapt the metrics to your monitoring system. For more information, see the [OpenTelemetry Collector documentation](https://opentelemetry.io/docs/collector/).
 
 Using an OpenTelemetry Collector allows you to normalize, enrich, and control the flow of metrics scraped from the Cluster Metrics endpoint. For example, you can:
 
@@ -96,7 +94,7 @@ Some monitoring systems support push-based ingestion only.
 
 In this case, use the following approach:
 
-1. Deploy a customer-managed OpenTelemetry Collector.
+1. Deploy a self-managed OpenTelemetry Collector.
 1. Configure the collector to scrape the Cluster Metrics endpoint.
 1. Configure the collector to push metrics to your monitoring system.
 
@@ -108,17 +106,13 @@ If your monitoring system requires a format other than Prometheus, use an OpenTe
 
 The OpenTelemetry Collector supports a wide range of exporters, allowing you to forward metrics to different monitoring backends.
 
-For more information, see the OpenTelemetry documentation:
-
-- [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)
-- [OpenTelemetry Collector exporters](https://opentelemetry.io/docs/collector/components/exporter/)
+For more information, see [OpenTelemetry Collector exporters](https://opentelemetry.io/docs/collector/components/exporter/).
 
 ## Troubleshoot common issues
 
 ### Authentication errors
 
 - Verify the configured username and password.
-- Confirm that credentials have not been rotated.
 - Check that the monitoring system’s IP address is allowlisted.
 
 ### Scrape timeouts

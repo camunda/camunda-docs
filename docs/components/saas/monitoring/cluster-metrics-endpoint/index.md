@@ -17,13 +17,12 @@ Before using the Cluster Metrics endpoint, ensure that:
 
 ## Supported environments
 
-The Cluster Metrics endpoint is supported for all Camunda 8 SaaS Orchestration clusters running a supported Camunda version.
-
-The Cluster Metrics endpoint is configured per Orchestration cluster. Clusters can enable the Cluster Metrics endpoint without upgrading.
+The Cluster Metrics endpoint is available for all Camunda 8 SaaS Orchestration clusters.
+The endpoint is configured per Orchestration cluster and can be enabled without requiring an upgrade or downtime.
 
 ## Metrics exposure model
 
-The Cluster Metrics endpoint exposes metrics using a pull-based model.
+The Cluster Metrics endpoint exposes metrics using a pull-based model and Prometheus-compatible format ([Prometheus](https://github.com/prometheus/docs/blob/main/docs/instrumenting/exposition_formats.md#text-based-format) and [OpenMetrics](https://github.com/prometheus/docs/blob/main/docs/instrumenting/exposition_formats.md#openmetrics-text-format) text exposition formats).
 
 When the Cluster Metrics endpoint is enabled for a cluster:
 
@@ -33,7 +32,7 @@ When the Cluster Metrics endpoint is enabled for a cluster:
 
 The Cluster Metrics endpoint does not push metrics to customer systems.
 
-## Known limitations
+## Monitoring endpoint constraints
 
 The Cluster Metrics endpoint exposes the application-level metrics produced by the Camunda version running in your cluster.
 
@@ -41,9 +40,9 @@ The following constraints apply:
 
 - The Cluster Metrics endpoint uses Basic Authentication only.
 - Metric names and labels depend on the Camunda version running in your cluster.
-- Metric and dashboard compatibility across Camunda versions is not guaranteed.
+- Metric and dashboard compatibility between Camunda versions is not guaranteed.
 
-If your monitoring system does not support Prometheus scraping, you can adapt the metrics using a customer-managed OpenTelemetry Collector. For more information, see [Integrate non-Prometheus monitoring systems](/components/saas/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics.md#integrate-non-prometheus-monitoring-systems).
+If your monitoring system does not support Prometheus scraping, you can adapt the metrics using a self-managed OpenTelemetry Collector. For more information, see [Integrate non-Prometheus monitoring systems](/components/saas/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics.md#integrate-non-prometheus-monitoring-systems).
 
 ## Next steps
 
