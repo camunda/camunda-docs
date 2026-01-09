@@ -91,7 +91,8 @@ camunda.security.authentication.providers.oidc.entraid.client-secret: <YOUR_ENTR
 camunda.security.authentication.providers.oidc.entraid.issuer-uri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
 camunda.security.authentication.providers.oidc.entraid.redirect-uri: "http://localhost:8080/sso-callback"
 camunda.security.authentication.providers.oidc.entraid.audiences: <YOUR_ENTRAID_CLIENTID>
-camunda.security.authentication.providers.oidc.entraid.scope: ["openid", "profile", "<YOUR_ENTRAID_CLIENTID>/.default"]
+camunda.security.authentication.providers.oidc.entraid.scope:
+  ["openid", "profile", "<YOUR_ENTRAID_CLIENTID>/.default"]
 ```
 :::tip
 The **issuer-uri** property is required and identifies the identity provider that issues tokens for this configuration.
