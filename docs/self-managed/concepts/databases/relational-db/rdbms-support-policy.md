@@ -12,8 +12,8 @@ This policy applies to **Camunda 8 Self-Managed** deployments.
 
 It covers relational databases used for:
 
-- [the secondary storage for the Orchestration Cluster](/docs/self-managed/concepts/secondary-storage/index.md),
-- [Web Modeler](/docs/self-managed/components/modeler/web-modeler/configuration/database.md).
+- [the secondary storage for the Orchestration Cluster](/self-managed/concepts/secondary-storage/index.md),
+- [Web Modeler](/self-managed/components/modeler/web-modeler/configuration/database.md).
 
 ## Supported RDBMS
 
