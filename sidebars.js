@@ -1470,6 +1470,7 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
                     "self-managed/deployment/helm/configure/database/rdbms",
+                    "self-managed/deployment/helm/configure/database/validate-rdbms",
                     "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
                     {
                       Troubleshooting: [
