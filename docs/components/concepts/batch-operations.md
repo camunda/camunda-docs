@@ -60,12 +60,14 @@ Learn more about batch partitions in our [implementation overview](../zeebe/tech
 
 ## Authorization
 
-To execute a batch operation, you need two sets of permissions:
+When executing a batch operation, there are two sets of permissions involved:
 
-| Batch operation permissions                                      | Item-level permissions                                                          |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Permission to create the batch operation.                        | Permission to read process instances and incidents from the secondary database. |
-| Permission to manage batch operations (suspend, resume, cancel). | Permission to execute the specific operation on each targeted process instance. |
+- Batch operation permissions.
+- Item-level, or process definition, permissions.
+
+To create a batch operation, you always need both the permission to create batch operations as well as permissions to read process instances and execute specific operations on each targeted process instance.
+
+To suspend, resume, or cancel an operation, you only need the relevant batch operation permissions.
 
 The system stores authorization claims with the batch operation and uses them throughout its lifecycle.
 
