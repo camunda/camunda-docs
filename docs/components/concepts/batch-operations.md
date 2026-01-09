@@ -47,7 +47,7 @@ A batch operation can have one of the following statuses:
 | Failed              | Every item in the batch operation failed.                                                                             |
 
 :::info
-Learn more about batch partitions in our [implementation explainer](../zeebe/technical-concepts/batch-operations.md).
+Learn more about batch partitions in our [implementation overview](../zeebe/technical-concepts/batch-operations.md).
 :::
 
 ## Authorization
