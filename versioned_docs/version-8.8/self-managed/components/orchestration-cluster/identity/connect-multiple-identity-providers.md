@@ -92,6 +92,7 @@ camunda.security.authentication.providers.oidc.entraid.redirect-uri: "http://loc
 camunda.security.authentication.providers.oidc.entraid.audiences: <YOUR_ENTRAID_CLIENTID>
 camunda.security.authentication.providers.oidc.entraid.scope: ["openid", "profile", "<YOUR_ENTRAID_CLIENTID>/.default"]
 ```
+
 :::tip
 The **issuer-uri** property is required and identifies the identity provider that issues tokens for this configuration.
 :::
