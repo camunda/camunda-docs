@@ -123,6 +123,25 @@ The `getJson` function accepts a document and an optional FEEL expression parame
 }
 ```
 
+### `createGithubAppInstallationToken`
+
+The `createGithubAppInstallationToken` function generates a GitHub App installation access token. This is useful when you need to authenticate as a GitHub App installation to access GitHub APIs.
+
+The function accepts three required parameters:
+
+- `privateKey`: The RSA private key of your GitHub App (PEM format). It is recommended to store this as a secret.
+- `appId`: The App ID of your GitHub App.
+- `installationId`: The installation ID of your GitHub App. See [GitHub's documentation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/authenticating-as-a-github-app-installation#generating-an-installation-access-token) for instructions on how to find your installation ID.
+
+```json
+{
+  "camunda.function.type": "createGithubAppInstallationToken",
+  "params": ["{{secrets.GITHUB_APP_PRIVATE_KEY}}", "12345", "67890"]
+}
+```
+
+The function returns the installation access token as a string, which can then be used to authenticate GitHub API requests.
+
 ## Create a custom function
 
 In **Self-Managed** deployments, you can create custom intrinsic functions by implementing the `IntrinsicFunctionProvider` interface
