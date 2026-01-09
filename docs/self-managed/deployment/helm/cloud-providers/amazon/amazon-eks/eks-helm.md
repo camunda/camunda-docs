@@ -13,19 +13,7 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 
 Lastly you'll verify that the connection to your Self-Managed Camunda 8 environment is working.
 
-## Requirements
-
-- A Kubernetes cluster; see the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) guide.
-- [Helm](https://helm.sh/docs/intro/install/)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
-- [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
-- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
-- A namespace to host the Camunda Platform.
-
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
-
-### Considerations
+## Considerations
 
 While this guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
@@ -36,6 +24,18 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 **Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
 
 :::
+
+## Prerequisites
+
+- A Kubernetes cluster; see the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) guide.
+- [Helm](https://helm.sh/docs/intro/install/)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
+- [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
+- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
+- A namespace to host the Camunda Platform.
+
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ## Architecture
 

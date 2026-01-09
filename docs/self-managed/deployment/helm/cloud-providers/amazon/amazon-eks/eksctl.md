@@ -12,15 +12,7 @@ While this guide is suitable for testing purposes, building a robust, scalable, 
 
 This guide provides a user-friendly approach for setting up and managing Amazon EKS clusters. It covers everything from the prerequisites, such as AWS IAM role configuration, to creating a fully functional Amazon EKS cluster and a managed Aurora PostgreSQL instance. Ideal for those seeking a practical and efficient method to deploy Camunda 8 on AWS, this guide provides detailed instructions for setting up the necessary environment and AWS IAM configurations.
 
-## Prerequisites
-
-- An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) is required to create resources within AWS.
-- [kubectl (1.33+)](https://kubernetes.io/docs/tasks/tools/#kubectl), a CLI tool to interact with the cluster.
-- [AWS CLI (2.23+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
-- [eksctl (0.215+)](https://eksctl.io/getting-started/), a CLI tool for creating and managing Amazon EKS clusters.
-- This guide uses GNU/Bash for all the shell commands listed.
-
-### Considerations
+## Considerations
 
 This is a basic setup to get started with Camunda 8 but does not reflect a high performance setup. For a better starting point towards production, we recommend utilizing [Infrastructure as Code tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code) and following our [Terraform guide](./terraform-setup.md).
 
@@ -37,25 +29,17 @@ Following this guide will incur costs on your Cloud provider account, namely for
 
 :::
 
-### Outcome
+## Prerequisites
 
-<!-- TODO : add architecture diagram (https://github.com/camunda/team-infrastructure-experience/issues/409) --->
-
-This guide results in the following:
-
-- An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
-- Installed and configured [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-- A [managed Aurora PostgreSQL 17.x](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 components.
-- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda platform..
-- [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured and [Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
-  - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
-  - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without supplying explicit credentials.
+- An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) is required to create resources within AWS.
+- [kubectl (1.33+)](https://kubernetes.io/docs/tasks/tools/#kubectl), a CLI tool to interact with the cluster.
+- [AWS CLI (2.23+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
+- [eksctl (0.215+)](https://eksctl.io/getting-started/), a CLI tool for creating and managing Amazon EKS clusters.
+- This guide uses GNU/Bash for all the shell commands listed.
 - [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
   - Ensure at least **3 Elastic IPs** (one per availability zone).
   - Verify quotas for **VPCs, EC2 instances, and storage**.
   - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
-
-This basic cluster setup is required to continue with the Helm set up as described in our [AWS Helm guide](./eks-helm.md).
 
 ## 1. Configure AWS and eksctl
 
@@ -1005,3 +989,19 @@ You have successfully set up an OpenSearch domain that is accessible from within
 ## 5. Install Camunda 8 using the Helm chart
 
 Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on Kubernetes](./eks-helm.md) for detailed instructions on deploying the platform to your Kubernetes cluster.
+
+## Outcome
+
+<!-- TODO : add architecture diagram (https://github.com/camunda/team-infrastructure-experience/issues/409) --->
+
+After completing this guide, you will have:
+
+- An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
+- Installed and configured [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
+- A [managed Aurora PostgreSQL 17.x](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 components.
+- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda platform.
+- [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured and [Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
+  - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
+  - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without supplying explicit credentials.
+
+This basic cluster setup is required to continue with the Helm set up as described in our [AWS Helm guide](./eks-helm.md).

@@ -9,6 +9,14 @@ import TabItem from "@theme/TabItem";
 
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster, and confirmation it is working as intended.
 
+## Considerations
+
+While this guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
+
+Multi-tenancy is disabled by default and is not covered further in this guide. If you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
+
+[Workload Identities](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview) offer a way to connect to Azure-managed PostgreSQL. This is not yet supported by Camunda.
+
 ## Prerequisites
 
 - A Kubernetes cluster; refer to the [Terraform guide](./terraform-setup.md) for details.
@@ -40,14 +48,6 @@ To demonstrate how to deploy with a custom domain, the following stack is also i
 :::info Single namespace deployment
 This guide uses a single Kubernetes namespace for simplicity, since the deployment is done with a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components), which recommends separating Orchestration Cluster and Web Modeler or Console into different namespaces in production to improve isolation and enable independent scaling.
 :::
-
-### Considerations
-
-While this guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
-
-Multi-tenancy is disabled by default and is not covered further in this guide. If you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
-
-[Workload Identities](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview) offer a way to connect to Azure-managed PostgreSQL. This is not yet supported by Camunda.
 
 ## Export environment variables
 

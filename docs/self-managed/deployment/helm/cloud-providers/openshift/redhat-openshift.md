@@ -17,7 +17,7 @@ However, it's important to note that the [Security Context Constraints (SCCs)](#
 
 Additional informational and high-level overview based on Kubernetes as upstream project is available on our [Kubernetes deployment reference](/self-managed/reference-architecture/kubernetes.md).
 
-## Requirements
+## Prerequisites
 
 - [Helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.

@@ -22,25 +22,7 @@ New to Terraform or Infrastructure as Code? Start with the [Terraform IaC docume
 
 :::
 
-## Requirements
-
-- **AWS account** – Required to create AWS resources. See [What is an AWS account?](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html).
-- **AWS CLI** – Command-line tool to manage AWS resources. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-- **Terraform** – IaC tool used to provision resources. [Install Terraform](https://developer.hashicorp.com/terraform/downloads).
-- **kubectl** – CLI for interacting with Kubernetes clusters. [Install kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
-- **jq** – Lightweight JSON processor. [Download jq](https://jqlang.github.io/jq/download/).
-- **IAM Roles for Service Accounts (IRSA)** – Configure IRSA to map IAM roles to Kubernetes service accounts. This removes the need for long-lived credentials and lets Kubernetes services assume IAM roles to interact with AWS services (for example, S3, RDS, Route 53).
-  - See the AWS [IRSA deep dive](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/).
-  - IRSA is recommended as an [EKS best practice](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
-- **AWS service quotas** – Verify your quotas before deployment:
-  - At least 3 Elastic IPs (one per availability zone).
-  - Adequate quotas for **VPCs, EC2 instances, and storage**.
-  - Request increases if needed via the AWS console. You pay only for used resources. See [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) and [Amazon EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)
-- **Shell** – Examples use GNU Bash.
-
-For the tool versions used in testing, see the repository’s [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file. It contains an up-to-date list of versions used for testing.
-
-### Considerations
+## Considerations
 
 #### General considerations
 
@@ -83,7 +65,7 @@ This guide will incur costs on your cloud provider account, specifically for the
 
 :::
 
-### Variants
+## Variants
 
 We support two variants of this architecture:
 
@@ -98,7 +80,7 @@ We support two variants of this architecture:
 
 Both can be set up with or without a **Domain** ([Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)).
 
-### Outcome
+## Outcome
 
 <!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
 <!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
@@ -113,6 +95,24 @@ After completing this guide, you will have:
 - (Optional) A managed [Aurora PostgreSQL](https://aws.amazon.com/rds/postgresql/) instance for Camunda.
 - (Optional) A managed [Amazon OpenSearch Service](https://aws.amazon.com/opensearch-service/) domain created and configured for use with the Camunda platform.
 - (Optional) [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) configured so Kubernetes workloads can assume IAM roles without stored credentials.
+
+## Prerequisites
+
+- **AWS account** – Required to create AWS resources. See [What is an AWS account?](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html).
+- **AWS CLI** – Command-line tool to manage AWS resources. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+- **Terraform** – IaC tool used to provision resources. [Install Terraform](https://developer.hashicorp.com/terraform/downloads).
+- **kubectl** – CLI for interacting with Kubernetes clusters. [Install kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
+- **jq** – Lightweight JSON processor. [Download jq](https://jqlang.github.io/jq/download/).
+- **IAM Roles for Service Accounts (IRSA)** – Configure IRSA to map IAM roles to Kubernetes service accounts. This removes the need for long-lived credentials and lets Kubernetes services assume IAM roles to interact with AWS services (for example, S3, RDS, Route 53).
+  - See the AWS [IRSA deep dive](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/).
+  - IRSA is recommended as an [EKS best practice](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
+- **AWS service quotas** – Verify your quotas before deployment:
+  - At least 3 Elastic IPs (one per availability zone).
+  - Adequate quotas for **VPCs, EC2 instances, and storage**.
+  - Request increases if needed via the AWS console. You pay only for used resources. See [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) and [Amazon EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)
+- **Shell** – Examples use GNU Bash.
+
+For the tool versions used in testing, see the repository’s [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file. It contains an up-to-date list of versions used for testing.
 
 ## 1. Configure AWS and initialize Terraform
 

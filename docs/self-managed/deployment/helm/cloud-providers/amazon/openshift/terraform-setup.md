@@ -21,20 +21,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 
 :::
 
-## Requirements
-
-- A [Red Hat Account](https://www.redhat.com/) to create the Red Hat OpenShift cluster.
-- An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create any resources within AWS.
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
-- [Terraform](https://developer.hashicorp.com/terraform/downloads)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [ROSA CLI](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/getting_started/rosa-quickstart-guide-ui.html) to interact with the cluster.
-- [jq](https://jqlang.github.io/jq/download/) to interact with some Terraform variables.
-- This guide uses GNU/Bash for all the shell commands listed.
-
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
-
-### Considerations
+## Considerations
 
 This setup provides a foundational starting point for working with Camunda 8, though it is not optimized for peak performance. It serves as a solid initial step in preparing a production environment by leveraging [Infrastructure as Code (IaC) tools](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
 
@@ -52,7 +39,7 @@ Following this guide will incur costs on your cloud provider account and your Re
 
 :::
 
-### Variants
+## Variants
 
 Unlike the [EKS Terraform setup](../amazon-eks/terraform-setup.md), we currently support only one main variant of this setup:
 
@@ -60,7 +47,7 @@ Unlike the [EKS Terraform setup](../amazon-eks/terraform-setup.md), we currently
 
 - The second variant, **IRSA** (IAM Roles for Service Accounts), may work but has not been tested. If you’re interested in setting it up, please refer to the EKS guide as a foundational resource.
 
-### Outcome
+## Outcome
 
 <!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
 <!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
@@ -72,6 +59,19 @@ Following this tutorial and steps will result in:
 
 - A [Red Hat OpenShift with Hosted Control Plane](https://www.redhat.com/en/topics/containers/what-are-hosted-control-planes#rosa-with-hcp) cluster running the latest ROSA version with six nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
+
+## Prerequisites
+
+- A [Red Hat Account](https://www.redhat.com/) to create the Red Hat OpenShift cluster.
+- An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create any resources within AWS.
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
+- [Terraform](https://developer.hashicorp.com/terraform/downloads)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [ROSA CLI](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/getting_started/rosa-quickstart-guide-ui.html) to interact with the cluster.
+- [jq](https://jqlang.github.io/jq/download/) to interact with some Terraform variables.
+- This guide uses GNU/Bash for all the shell commands listed.
+
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ## 1. Configure AWS and initialize Terraform
 
