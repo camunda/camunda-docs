@@ -25,7 +25,7 @@ Before configuring, collect the following information about your external Elasti
 
 | values.yaml option                                  | type    | default                             | description                                                                               |
 | --------------------------------------------------- | ------- | ----------------------------------- | ----------------------------------------------------------------------------------------- |
-| `global.elasticsearch.enabled`                      | boolean | `true`                              | Enable or disable all components connecting to Elasticsearch.                             |
+| `global.elasticsearch.enabled`                      | boolean | `false`                             | Enable or disable all components connecting to Elasticsearch.                             |
 | `global.elasticsearch.external.true`                | boolean | `false`                             | Set to `true` to connect to an external Elasticsearch instance.                           |
 | `global.elasticsearch.auth.username`                | string  | `""`                                | HTTP Basic username for Elasticsearch authentication.                                     |
 | `global.elasticsearch.auth.password`                | string  | `""`                                | HTTP Basic password for Elasticsearch authentication.                                     |
@@ -36,7 +36,7 @@ Before configuring, collect the following information about your external Elasti
 | `global.elasticsearch.url.protocol`                 | string  | `http`                              | Protocol to use when connecting to Elasticsearch. Possible values are `http` and `https`. |
 | `global.elasticsearch.url.host`                     | string  | `{{ .Release.Name }}-elasticsearch` | Hostname or IP address of the Elasticsearch instance.                                     |
 | `global.elasticsearch.url.port`                     | integer | `9200`                              | Port number of the Elasticsearch instance.                                                |
-| `elasticsearch.enabled`                             | boolean | `true`                              | Enable or disable the Elasticsearch subchart                                              |
+| `elasticsearch.enabled`                             | boolean | `false`                             | Enable or disable the Elasticsearch subchart                                              |
 
 ### Example usage
 

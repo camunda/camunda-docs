@@ -251,7 +251,6 @@ global:
         audience: "<mgmt-identity-app-id>"
         initialClaimName: preferred_username
         initialClaimValue: "<the email address of your initial admin user>"
-        redirectUrl: "<IDENTITY_URL>"
         secret:
           existingSecret: "entra-credentials"
           existingSecretKey: "identity-client-secret"
@@ -370,6 +369,8 @@ The following example shows a full configuration to enable Microsoft Entra:
 
 ```yaml
 global:
+  elasticsearch:
+    enabled: true
   identity:
     auth:
       enabled: true
@@ -384,7 +385,6 @@ global:
         audience: "<mgmt-identity-app-id>"
         initialClaimName: preferred_username
         initialClaimValue: "<the email address of your initial admin user>"
-        redirectUrl: "<IDENTITY_URL>"
         secret:
           existingSecret: "entra-credentials"
           existingSecretKey: "identity-client-secret"
@@ -475,6 +475,9 @@ webModelerPostgresql:
       userPasswordKey: "webmodeler-postgresql-user-password"
 
 console:
+  enabled: true
+
+elasticsearch:
   enabled: true
 ```
 

@@ -18,7 +18,7 @@ Camunda uses the `data.secondary-storage` configuration to define which database
 
 :::note
 For the latest list of supported relational databases and versions, see the  
-[RDBMS version support policy](/self-managed/concepts/rdbms-support-policy.md).
+[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 :::
 
 <Tabs groupId="configuration" defaultValue="helm" queryString values={[
@@ -29,27 +29,53 @@ For the latest list of supported relational databases and versions, see the
 
 <TabItem value="helm">
 
-When deploying with Helm, set the secondary storage type and connection details in your `values.yaml` file:
+When deploying with Helm, set the secondary storage type, connection details, and rdbms exporters in your `values.yaml` file:
 
 ```yaml
-data:
-  secondary-storage:
-    type: rdbms
+orchestration:
+  exporters:
+    camunda:
+      enabled: false
     rdbms:
-      url: jdbc:h2:mem:camunda
-      username: sa
-      password:
+      enabled: true
+  data:
+    secondaryStorage:
+      type: rdbms
+      rdbms:
+        url: jdbc:postgresql://hostname:5432/camunda
+        username: camunda
+        secret:
+          existingSecret: camunda-db-secret
+          existingSecretKey: password
 ```
 
-To configure Elasticsearch instead:
+More information about RDBMS in the Camunda Helm chart can be found on this [configuration page](/self-managed/deployment/helm/configure/database/rdbms.md).
+
+For Elasticsearch:
+The Camunda Helm chart by default enables the related exporter and doesn't require extra configuration.
 
 ```yaml
-data:
-  secondary-storage:
-    type: elasticsearch
-    elasticsearch:
-      url: http://elasticsearch:9200/
+global:
+  elasticsearch:
+    enabled: true
+    external: true
+    auth:
+      username: elastic
+      secret:
+        existingSecret: camunda-db-secret
+        existingSecretKey: password
+    url:
+      protocol: http
+      host: hostname
+      port: 443
+
+orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
 ```
+
+More information about Elasticsearch in the Camunda Helm chart can be found on this [configuration page](self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md).
 
 To explicitly disable secondary storage (for example, when running only the Zeebe engine), set:
 
@@ -130,7 +156,7 @@ data:
 :::note
 H2 is suitable for testing and local development only.  
 For production use, Operate and Tasklist require a persistent secondary storage backend such as a supported RDBMS or Elasticsearch.  
-Consult the [RDBMS version support policy](/self-managed/concepts/rdbms-support-policy.md) when choosing a relational database.
+Consult the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) when choosing a relational database.
 :::
 
 ## Run without secondary storage

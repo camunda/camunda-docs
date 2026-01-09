@@ -244,7 +244,7 @@ You have completed your first process instance by:
 
 For further information about the Node.js SDK, refer to [the Camunda 8 JavaScript SDK API documentation](https://camunda.github.io/camunda-8-js-sdk/).
 
-Find more examples on the [Developer Portal](https://developers.camunda.com/developer-resources/orchestration-use-cases/).
+Find more examples on the [Developer Portal](https://camunda.com/developers/).
 
 ## Teardown
 
