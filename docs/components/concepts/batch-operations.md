@@ -32,6 +32,10 @@ There are four types of batch operations:
 
 Furthermore, depending on the status of the batch operation, you may be able to suspend, cancel, or resume the operation.
 
+:::warning
+Canceling a batch operation does not rollback any changes that have already been produced.
+:::
+
 ## States
 
 A batch operation can have one of the following statuses:
