@@ -19,6 +19,25 @@ You can save a template when:
 
 You can also save a template from an element that already has a template applied, allowing you to version, extend, or modify existing template behavior.
 
+### Supported BPMN elements
+
+You can save templates for the following BPMN element types.
+
+**Tasks**
+
+- Manual task
+- Call activity
+
+:::note
+You cannot create a template for the [undefined task type](../../bpmn/undefined-tasks).
+:::
+
+**Events**
+
+- Message events
+- Signal events
+- Timer events
+
 ## Save a template in Web Modeler
 
 To save a template from a BPMN element:

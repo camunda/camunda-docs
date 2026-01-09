@@ -126,6 +126,46 @@ Example:
 }
 ```
 
+### Timer event definition binding: `bpmn:TimerEventDefinition#property`
+
+Use `bpmn:TimerEventDefinition#property` to configure [timer event definitions](../../bpmn/timer-events/) for timer events.
+
+This binding is only valid when your template sets the event definition via `elementType.eventDefinition` to `bpmn:TimerEventDefinition`.
+
+| Field                  | Value                                                                                           |
+| :--------------------- | :---------------------------------------------------------------------------------------------- |
+| Binding `type`         | `bpmn:TimerEventDefinition#property`                                                            |
+| Valid property `type`s | `String`, `Text`, `Hidden`, `Dropdown`                                                          |
+| Binding parameters     | `name`: The timer definition property to set (`timeDate`, `timeCycle`, or `timeDuration`)       |
+| Mapping result         | `<bpmn:timerEventDefinition><bpmn:[name]>[userInput]</bpmn:[name]></bpmn:timerEventDefinition>` |
+
+Only one of `timeDate`, `timeCycle`, or `timeDuration` can be defined per template.
+
+Example:
+
+```json
+{
+  "id": "timerCycle",
+  "label": "Schedule",
+  "type": "String",
+  "value": "0 0 9-17 * * MON-FRI",
+  "binding": {
+    "type": "bpmn:TimerEventDefinition#property",
+    "name": "timeCycle"
+  }
+}
+```
+
+:::note
+**Property-specific constraints:**
+
+- **`timeDuration`**: Cannot be used on process-level start events. Valid on event subprocess start events, intermediate catch events, and boundary events.
+- **`timeCycle`**: Can only be used on start events and boundary events. When a template with `timeCycle` is applied:
+  - Boundary events are automatically marked as non-interrupting.
+  - Start events in event subprocesses are also marked as non-interrupting.
+- **`timeDate`**: Can be used on process-level and event subprocess start events, intermediate catch events, and boundary events.
+  :::
+
 ### `group` (string, optional)
 
 Assigns the property to a visual section in the UI.

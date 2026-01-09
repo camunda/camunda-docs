@@ -100,6 +100,8 @@ A list of BPMN element types the template can be applied to.
 "appliesTo": ["bpmn:ServiceTask", "bpmn:Task"]
 ```
 
+- `"bpmn:TimerEventDefinition"`: Use this value when you template a timer event.
+
 ### `elementType` (optional)
 
 Defines which BPMN element type the element becomes when the template is applied.
