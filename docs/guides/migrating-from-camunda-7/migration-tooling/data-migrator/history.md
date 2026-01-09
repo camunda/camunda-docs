@@ -47,7 +47,7 @@ The History Data Migrator does not support the following Camunda 8 entities or p
 - User metrics: Not available in Camunda 7.
 - Exporter position: This entity does not exist in Camunda 7.
 - Process instance and user task tags: These properties do not exist in Camunda 7.
-- Audit log: Not supported. See the related tracking issue.
+- Audit log: Not supported. See the related tracking [issue](https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/517).
 
 ## Usage examples
 
