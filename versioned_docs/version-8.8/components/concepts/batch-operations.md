@@ -22,12 +22,12 @@ Example use cases include:
 
 There are four types of batch operations:
 
-| Type                      | Description                                                                            |
-| ------------------------- | -------------------------------------------------------------------------------------- |
-| Resolve incidents         | Resolves the [incidents](./incidents.md) associated with a batch of process instances. |
-| Modify process instances  | Moves a batch of process instances from one node to another.                           |
-| Migrate process instances | Migrates a batch of process instances to a new process version.                        |
-| Cancel process instances  | Cancels a batch of process instances.                                                  |
+| Type                      | Description                                                                                        |
+| ------------------------- | -------------------------------------------------------------------------------------------------- |
+| Resolve incidents         | Resolves the [incidents](./incidents.md) associated with a batch of process instances.             |
+| Modify process instances  | [Moves](./process-instance-modification.md) a batch of process instances from one node to another. |
+| Migrate process instances | [Migrates](./process-instance-migration.md) a batch of process instances to a new process version. |
+| Cancel process instances  | Cancels a batch of process instances.                                                              |
 
 Furthermore, depending on the status of the batch operation, you may be able to suspend, cancel, or resume the operation.
 
