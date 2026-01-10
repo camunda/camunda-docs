@@ -17,7 +17,7 @@ You can configure the connector runtime environment in the following ways:
 Starting from version 8.8, the connector runtime no longer requires a connection to Operate. It now depends only on the Orchestration Cluster REST API and Zeebe.
 :::
 
-To connect to **Zeebe** and the **Orchestration Cluster REST API**, the connector runtime uses the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md). Any configuration available in the Spring Boot Starter can also be applied to the connector runtime environment.
+To connect to the **Orchestration Cluster**, the connector runtime uses the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md). Any configuration available in the Spring Boot Starter can also be applied to the connector runtime environment.
 
 Below are some of the most common configuration options for the connector runtime. For a complete list, see the [Camunda Spring Boot Starter configuration reference](/apis-tools/camunda-spring-boot-starter/configuration.md#zeebe).
 
@@ -324,7 +324,25 @@ export SUPER_SECRETS_tenant1_MY_SECRET='foo' # This will be resolved by using {{
 
 <TabItem value='helm'>
 
-Connector secrets can be used in Helm charts. Review the documentation on [managing secrets in Helm charts](/self-managed/deployment/helm/configure/secret-management.md) for additional details.
+Connector secrets can be used in Helm charts, for example by referencing a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/):
+
+```yaml
+connectors:
+  envFrom:
+    - secretRef:
+      name: camunda-connector-secrets
+```
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: camunda-connector-secrets
+stringData:
+  MY_SECRET: foo
+```
+
+Review the documentation on [managing secrets in Helm charts](/self-managed/deployment/helm/configure/secret-management.md) for additional details.
 
 </TabItem>
 

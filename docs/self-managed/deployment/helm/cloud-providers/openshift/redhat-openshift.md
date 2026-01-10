@@ -22,7 +22,7 @@ Additional informational and high-level overview based on Kubernetes as upstream
 - [Helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
-- [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
+- [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
 - [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
   - Ensure at least **3 Elastic IPs** (one per availability zone).
@@ -160,16 +160,15 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
    </details>
    - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
-   To configure a Zeebe cluster securely, it's essential to set up a secure communication configuration between pods:
-   - We enable gRPC Ingress for the Core Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
-   - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Core pod and configure a secure TLS connection.
+   To configure the orchestration cluster securely, it's essential to set up a secure communication configuration between pods:
+   - We enable gRPC Ingress for the Zeebe Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
+   - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe pod and configure a secure TLS connection.
 
    Update your `values.yml` file with the following:
 
-   <!-- The following values file will need to be uncommented when the work on 8.8 is resumed; https://github.com/camunda/camunda-deployment-references/pull/134 -->
-   <!--```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/core-route.yml
-   ``` -->
+   ```yaml reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/orchestration-route.yml
+   ```
 
    The actual configuration properties can be reviewed [in the Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
 
@@ -376,7 +375,7 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
 
 </TabItem>
-  
+
 <TabItem value="without" label="Without domain">
 
 Identity, Keycloak and the Orchestration cluster must be port-forwarded to be able to connect to the cluster.

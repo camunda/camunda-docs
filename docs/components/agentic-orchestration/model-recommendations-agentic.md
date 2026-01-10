@@ -1,72 +1,77 @@
 ---
 id: model-recommendations-agentic
-title: LLM recommendations and best practice
+title: LLM recommendations
 sidebar_label: LLM recommendations
 description: Prompting recommendations when using models for agentic process
 ---
 
-Recommendations and best practices for working with models and effective prompts.
+Recommendations and best practices for working with Large Language Models (LLMs) and effective prompts.
 
 ## General model requirements
 
-To implement an agentic process, you must choose a model that meets certain baseline requirements. These include:
+To implement an agentic process, you must choose a model that meets certain baseline requirements.
+These include:
 
 ### Tool calling support
 
-Ensure the model can work with tool-calling mechanisms.
-
-The model should be able to invoke external tools (for example, via function calling or a structured **Tool calling** interface) as part of its output. If a model cannot call tools, it won’t be suitable for an agentic workflow.
+The model should be able to invoke external tools and work with work with tool-calling mechanisms, as part of its output.
+If a model cannot call tools, it won’t be suitable for an agentic workflow.
 
 ### Vendor compatibility
 
 The model must be available through at least one supported vendor or API.
 
-In practice, this means using a model from **AWS Bedrock**, **Google Vertex AI**, **Azure OpenAI**, **OpenAI** (or any platform compatible with the OpenAI API). Choosing a model from these ecosystems ensures it will integrate with Camunda’s connectors and the agentic orchestration framework.
+In practice, this means using a model from AWS Bedrock, Google Vertex AI, Azure OpenAI, OpenAI (or any platform compatible with the OpenAI API).
+Choosing a model from these ecosystems ensures it will integrate with Camunda’s connectors and the agentic orchestration framework.
 
 ### Plain text I/O
 
 The model should accept and return plain text.
 
-Agentic processes rely on text prompts and text-based replies (which may include JSON or other structured text). Avoid models that only produce non-text outputs or require special input formats. Text in, text out is essential for simplicity and reliable tool integration.
+Agentic processes rely on text prompts and text-based replies (which may include JSON or other structured text). Avoid models that only produce non-text outputs or require special input formats. _Text in, text out_ is essential for simplicity and reliable tool integration.
 
 ## General recommendations for agentic processes
 
-As well as choosing the right model, you should follow best practices in designing your agentic process. These recommendations help your AI agent work effectively and safely within a workflow.
+As well as choosing the right model, you should follow best practices in designing your agentic process.
+These recommendations help your AI agent work effectively and safely within a workflow.
 
 ### Use detailed tool descriptions
 
-When defining tools for the agent to use (for example, in your prompt or via `fromAi` expressions in Camunda), be very specific about what each tool does and what input it expects.
+When defining tools for the agent to use be very specific about what each tool does and what input it expects:
 
-- Write clear, instructive descriptions for each `toolCall`. This guides the model to generate the correct outputs for tools.
-- For example, `fromAi(toolCall.emailBody, "Body of the email to be sent")` is better than a vague description.
 - The more context you give the AI about the tool’s purpose, the more accurately it will use that tool.
+- Write clear, instructive descriptions for each tool call.
+
+You can do so via [`fromAi` expressions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai) in Camunda.
+For example, `fromAi(toolCall.emailBody, "Body of the email to be sent")`.
 
 ### Mind the context window
 
-Consider the model’s context size when designing your agent’s interactions.
+Consider the model’s context size when designing your agent’s interactions:
 
-- If your model has a 4k token limit, plan your prompt and tool usage so you don’t exceed that. Only include relevant information in the prompt and trim any unnecessary details.
-- When defining tools’ input/output, anticipate how large those inputs or outputs could be. A large chunk of text returned from a tool can quickly consume the context window, leaving little room for the model’s reasoning or response.
+- For example, if your model has a 4k token limit, plan your prompt and tool usage so you don’t exceed that. Only include relevant information in the prompt and trim any unnecessary details.
+- When defining tools’ input and output, anticipate how large those could be. A large chunk of text returned from a tool can quickly consume the context window, leaving little room for the model’s reasoning or response.
 
 ### Avoid overfilling the prompt with tool output
 
-Be cautious that tool responses don’t unintentionally fill the entire context. If a tool returns very large data (for example, the full text of a document or a lengthy JSON), consider post-processing it before feeding it back into the model.
+Be cautious that tool responses don’t unintentionally fill the entire context.
 
-For example, you might take only a summary of a document rather than the full text. This prevents the model’s next prompt from being dominated by irrelevant or excessive content, which can degrade performance and increase cost.
+- If a tool returns very large data, consider post-processing it before feeding it back into the model.
+- For example, you might take only a summary of a document rather than the full text.
+  This prevents the model’s next prompt from being dominated by irrelevant or excessive content, which can degrade performance and increase cost.
 
 ### Sanitize tool outputs
 
-Always clean and validate the output from tools before the AI agent uses it in a prompt. This is important for both security and prompt clarity.
+Sanitizing ensures the agent doesn’t accidentally get confused or manipulated by malformed tool data, and also reduces the risk of prompt injections coming from external tool results:
 
-- Remove any irrelevant, sensitive, or potentially prompt-breaking content.
+- Always clean and validate the output from tools before the AI agent uses it in a prompt, by removing any irrelevant, sensitive, or potentially prompt-breaking content. This is important for both security and prompt clarity.
 - For example, if a web search tool returns HTML or script tags, strip those out or convert them to plain text.
-- Sanitizing ensures the agent doesn’t accidentally get confused or manipulated by malformed tool data, and also reduces the risk of prompt injections coming from external tool results.
 
 ### Account for limited memory and long processes
 
 Agentic workflows can be long-running. The AI model won’t “remember” everything forever, as its memory is essentially the prompt history within the context window.
 
-- If your process spans multiple steps or lengthy pauses, store important information outside the model’s short-term memory. Use Camunda’s document storage or your own persistent storage layer (such as a database) to save key data between steps.
+- If your process spans multiple steps or lengthy pauses, store important information outside the model’s short-term memory. Use Camunda’s document storage or your own persistent storage layer, such as a database, to save key data between steps.
 - For example, if the agent gathers info in an early step that’s needed much later, persist that info so it can be reloaded into the prompt when required. This way, the agent can retrieve past knowledge without relying on an ever-growing prompt history.
 
 :::note
@@ -75,14 +80,14 @@ An agentic process might pause or wait for events, causing the context to reset 
 
 ### Incorporate human feedback when appropriate
 
-Consider adding a “human in the loop” as one of the agent’s tools. In practice, this could be a special tool (for example, `ask_human` or a review task) that the agent can invoke to get confirmation or guidance from a user.
+Consider adding a “human in the loop” as one of the agent’s tools. In practice, this could be a special tool, such as `ask_human` or a review task, that the agent can invoke to get confirmation or guidance from a user.
 
 - This is especially useful for high-stakes decisions or if the AI is unsure how to proceed. Designing your process with a human feedback option means the agent can defer to a person instead of guessing.
 - For example, the workflow might include a step where an employee reviews the AI’s draft output or where the AI explicitly asks the user to clarify an ambiguous request. This supervision loop can greatly improve the quality and safety of the agent’s actions.
 
 ## Prompting recommendations
 
-Constructing effective prompts is critical for guiding the model in an agentic process. Keep these guidelines in mind:
+Constructing effective prompts is critical for guiding the model in an agentic process. Keep the following guidelines in mind.
 
 ### Leverage vendor-specific best practices
 
@@ -98,35 +103,32 @@ Each model has recommended prompting techniques. Refer to the official documenta
 
 ### Use chain-of-thought and examples for complex tasks
 
-Don’t hesitate to let the model “think out loud” or show it how to handle tricky scenarios. Chain-of-thought prompting involves instructing the model to work through problems step by step. For example, you might include a phrase such as “Let’s reason this out step by step...” in your prompt, or have the agent output its reasoning in a hidden `<reflection>` tag (if your format supports it). This can improve the model’s reasoning accuracy.
+Don’t hesitate to let the model “think out loud” or guide it through tricky scenarios. Chain-of-thought prompting asks the model to solve problems step by step, for example, by including a phrase like “Let’s reason this out step by step...” or using a hidden `<reflection>` tag if supported.
+This approach helps improve reasoning accuracy.
 
-Additionally, provide in-context examples (few-shot prompting) to demonstrate how to handle edge cases, compliance requirements, or specific output formats. For example, if your agent should refuse certain requests, show a mini dialogue in the prompt where a user asks something non-compliant and the assistant gives a safe refusal.
-
-By including a few well-crafted examples covering alternative handling and edge cases, you set a clear expectation for the AI. If output needs to follow a structured format, you can illustrate that format in the prompt. Even better, configure the connector’s [response format](../connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) options to enforce JSON or parsed text responses. This ensures consistency across executions and reduces reliance on the model “guessing” the format.
+Also, provide a few in-context examples (few-shot prompting) to show how to handle edge cases, compliance rules, or specific output formats. Illustrate any structured output formats in the prompt, and if possible, configure the connector's [response format](../connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) options to enforce JSON or parsed text responses. Clear examples and format guidance set expectations for the AI, ensuring consistency and reducing errors.
 
 ### Define when and how the agent should seek user input
 
-In your system or prompt instructions, clarify the criteria for the AI to loop in a human. You might say, “If the user’s request is unclear or more information is needed, the assistant should ask a follow-up question via the customer communication tool.”
+In your system or prompt instructions, make it clear when the AI should involve a human. For example, you could say, “If the user’s request is unclear or more information is needed, the assistant should ask a follow-up question via the customer communication tool.”
 
-Determine the points in the process where user feedback is valuable—for example, after presenting an intermediate result or when the AI is uncertain about a critical decision. By specifying this, the model will know it’s acceptable (or even expected) to reach out for clarification rather than proceeding blindly.
+Decide which points in the process need user feedback, such as after showing an intermediate result or when the AI is unsure about a critical decision. Specify this in the prompt so the model knows it is acceptable or expected to ask for clarification.
 
-This ties back to having a human feedback tool: the prompt should instruct the AI on **when** to use that tool. For instance, “Before finalizing an answer, if confidence is low, you must call the `ask_user` tool to confirm the details.” Being explicit about this logic in the prompt helps the agent make better choices during execution.
+The instructions should also guide the AI on using the human feedback tool. For example, “Before finalizing an answer, if confidence is low, call the `ask_human` tool to confirm the details.” Being explicit helps the agent make better decisions.
 
 ### Set a clear persona and objective in the system prompt
 
-Always begin your prompt (or configure your system message) by establishing the AI’s role and goal. In an agentic process, the model might behave as a specialized assistant (for example, “You are **OrderAgent**, an AI assistant helping users track and modify their orders…”).
+Always start your prompt by defining the AI’s role and goal. For example, in an agentic process, the model could act as a specialized assistant: “You are OrderAgent, an AI assistant helping users track and modify their orders.”
 
-Describe the persona’s traits (helpful, knowledgeable, follows policy X, etc.) and the overarching objective or mission. For example: “Your goal is to resolve customer inquiries by using the tools provided, while remaining compliant with all company guidelines.”
-
-Defining the persona anchors the model’s tone and behavior consistently. Likewise, stating the objective gives the model a north star—it knows what it is trying to accomplish in the process. A well-defined persona and objective in the system prompt lead to more coherent and purpose-driven outputs from the agent.
+Include the persona’s traits and main objective. For example: “Your goal is to resolve customer inquiries using the tools provided while following all company guidelines.” Defining the persona and objective helps the model maintain a consistent tone and produce focused, coherent outputs.
 
 :::tip
-Prompt engineering is iterative. After writing an initial prompt (including role, examples, and instructions), test it with your model and sample scenarios. If the agent’s behavior isn’t quite right, refine the wording or add another example.
+Prompt engineering is iterative. After writing an initial prompt, test it with your model and sample scenarios. If the agent’s behavior isn’t quite right, refine the wording or add another example.
 
 Small phrasing changes can have a big impact. Continue to experiment and refine to achieve reliable, compliant results for your specific agentic use case.
 :::
 
-### Example generic prompt
+### Example of a generic prompt
 
 ```text
 You are **OrderAgent**, a helpful AI assistant supporting order management.

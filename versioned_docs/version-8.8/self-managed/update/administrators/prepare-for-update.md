@@ -46,6 +46,11 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
     <td><span className="label-highlight">Low</span></td>
 </tr>
 <tr>
+    <td>Identity</td>
+    <td>The HTTP port of the identity pod changed from 8080 to 8084. If you have restrictive network policies, please verify that the port is whitelisted.</td>
+    <td><span className="label-highlight">Low</span></td>
+</tr>
+<tr>
     <td>Orchestration Cluster API</td>
     <td><p>Introduced a new unified REST API for an Orchestration cluster.</p><p>
     <ul><li>Operate and Tasklist (V1) APIs are deprecated and should be replaced by the Orchestration Cluster API.</li>
@@ -106,6 +111,10 @@ The following table provides a high-level overview of the impact of these change
 ### Identity, authentication, and authorization
 
 Orchestration Cluster [Identity](/components/identity/identity-introduction.md) handles authentication and authorization for Orchestration Cluster components and resources.
+
+:::warning RBA Migration Impact
+If you use Resource-Based Authorization (RBA) and have users assigned to roles with `zeebe-api:write` permissions (especially the default Zeebe role) as well as other roles where RBA applies, then after migration these users will have wildcard permissions for the corresponding authorizations. This means access will not be restricted to specific resources in Tasklist or Operate while the user remains a member of this role.
+:::
 
 The following table provides a high-level overview of the impact of these changes:
 

@@ -57,6 +57,6 @@ See [event handling](#configuration-event-handling) for more information.
 <ConfigurationEventHandling />
 <ConfigurationResponse type="process" />
 <ConfigurationOutputMappingProcess />
-<ConfigurationErrorHandling />
+<ConfigurationErrorHandling type="process" />
 <ConfigurationRetries />
 <ConfigurationExecutionListeners />

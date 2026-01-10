@@ -21,7 +21,7 @@ Camunda Exporter indices that includes diagrams, currently these are generated m
 4. Install [python3](https://www.python.org/downloads/)
 5. Set up directory aliases
    ```shell
-   export INDEX_DIAGRAM_DIR=./camunda-docs/docs/self-managed/zeebe-deployment/exporters/index-diagrams
+   export INDEX_DIAGRAM_DIR=./camunda-docs/docs/self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams
    ```
 6. Generate the diagram templates which contain the mermaid diagrams as Markdown text.
    ```shell

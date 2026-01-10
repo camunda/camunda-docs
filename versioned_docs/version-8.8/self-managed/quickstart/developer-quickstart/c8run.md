@@ -2,7 +2,7 @@
 id: c8run
 title: "Developer quickstart – Camunda 8 Run"
 sidebar_label: "Camunda 8 Run"
-description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local orchestration cluster using Camunda 8 Run."
+description: "A quickstart guide for developers to deploy and run Camunda 8 Self-Managed locally with Camunda 8 Run, including setup, configuration, and key components."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -10,10 +10,15 @@ import TabItem from "@theme/TabItem";
 import {C8Run} from "@site/src/components/CamundaDistributions";
 
 :::note
-Camunda 8 Run is not supported for production use.
+Camunda 8 Run provides a lightweight, self-managed environment for local development and prototyping. It is not intended for production use.
+
+For production deployments, install the Orchestration Cluster manually as a Java application.
+For detailed steps, see the [manual installation](../../../deployment/manual/install) guide.
 :::
 
-Camunda 8 Run enables you to run [Orchestration cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
+Camunda 8 Run is a local distribution of Camunda 8 that bundles the Camunda 8 runtime, core services, startup scripts, and a launcher application for Windows, macOS, and Linux.
+
+Camunda 8 Run enables you to run the [Orchestration Cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
 
 Camunda 8 Run includes the following:
 
@@ -201,16 +206,46 @@ camunda:
 
 ## Shut down Camunda 8 Run
 
-To shut down Camunda 8 Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the `c8run` directory.
+To shut down (non-Docker) Camunda 8 Run and end all running processes, run the following command from the `c8run` directory:
 
-To shut down the Camunda 8 Run Docker distribution, use `./shutdown.sh --docker` (or `.\c8run.exe stop --docker` on Windows).
+```bash
+./shutdown.sh
+
+# Windows:
+# .\c8run.exe stop
+```
+
+If you started Camunda 8 Run with Docker `./start.sh --docker`, run the following command instead:
+
+```bash
+# Stop containers but keep existing data
+docker compose -f docker-compose-8.8/docker-compose.yaml down
+# (older bundles use: docker/docker-compose.yml)
+
+# Stop containers and remove all data volumes
+docker compose -f docker-compose-8.8/docker-compose.yaml down -v
+```
+
+The `-v` option removes all Docker volumes, including persisted data such as users and process instances. Omit `-v` if you want to keep your existing data for the next startup.
+
+To confirm that Camunda 8 Run has stopped, check for active containers:
+
+```bash
+docker ps
+```
 
 ## Advanced options
 
 ### Enable TLS
 
-TLS can be enabled by providing a local keystore file using the `--keystore` argument at startup. Camunda 8 Run accepts `.jks` certificate files.
+TLS can be enabled by providing a local keystore file using the [`--keystore` and `--keystorePassword` configuration options](#configuration-options) at startup. Camunda 8 Run accepts `.jks` certificate files.
 Although C8Run supports TLS, this is intended only for testing.
+
+:::note
+If you use a proxy together with TLS, ensure internal Camunda services are excluded from proxy routing. JVM-level proxy settings apply to all internal HTTP clients and may block communication between components such as Zeebe, Operate, Identity, or the connector runtime. Add these services to your `nonProxyHosts` configuration.
+
+For details, see [configure a proxy server in Self-Managed](../../../../components/connectors/protocol/rest/#configure-a-proxy-server-in-self-managed) in the REST connector documentation.
+:::
 
 ### Access metrics
 
@@ -262,4 +297,5 @@ The following advanced configuration options can be provided via environment var
 
 ## Next steps
 
-Check out the [getting started guide](/guides/getting-started-example.md) to start a new Java Project to connect to this local cluster.
+- Check out the [getting started guide](/guides/getting-started-example.md) to start a new Java Project to connect to this local cluster.
+- Identify and resolve [common issues when starting, configuring, or using Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run-troubleshooting.md).

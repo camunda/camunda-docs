@@ -407,6 +407,8 @@ public void handleJobFoo(final JobClient jobClient) {
 
 #### `ActivatedJob` parameter
 
+The `ActivatedJob` is also part of the native `JobHandler` functional interface.
+
 This will **prevent** the implicit variable fetching detection as you can retrieve variables in a programmatic way now:
 
 ```java
@@ -454,7 +456,7 @@ You can also use your own class into which the process variables are mapped to (
 
 ```java
 @JobWorker(type = "foo")
-public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables){
+public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables) {
   // do whatever you need to do
   variables.getMyAttributeX();
   variables.setMyAttributeY(42);
@@ -489,8 +491,8 @@ On top, you can directly retrieve the document content as `InputStream` or `byte
 You can use the `@CustomHeaders` annotation for a `Map<String, String>` parameter to retrieve [custom headers](/components/concepts/job-workers.md) for a job:
 
 ```java
-@JobWorker(type = "foo")
-public void handleFoo(@CustomHeaders Map<String, String> headers){
+@JobWorker
+public void handleFoo(@CustomHeaders Map<String, String> headers) {
   // do whatever you need to do
 }
 ```
@@ -498,6 +500,21 @@ public void handleFoo(@CustomHeaders Map<String, String> headers){
 :::note
 This will not have any effect on the variable fetching behavior.
 :::
+
+#### Using `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey`
+
+You can use the `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey` annotation for a `String`, `long` or `Long` parameter to retrieve the according key for a job:
+
+```java
+@JobWorker
+public void handleFoo(
+  @ProcessInstanceKey String processInstanceKey,
+  @ElementInstanceKey long elementInstanceKey,
+  @JobKey Long jobKey,
+  @ProcessDefinitionKey String processDefinitionKey) {
+  // do whatever you need to do
+}
+```
 
 ### Completing jobs
 
@@ -655,10 +672,14 @@ Whenever you want a job to fail in a controlled way, you can throw a `JobError` 
 public void handleJobFoo() {
   try {
    // some work
-  } catch(Exception e) {
-   // problem shall be indicated to the process:
-   throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
-   // this is a static function that returns an instance of JobError
+  } catch(DynamicRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, this::calculateRetryBackoff, e);
+    // this is a static function that returns an instance of JobError with a dynamic retry backoff
+  } catch(StaticRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
+    // this is a static function that returns an instance of JobError with a static retry backoff
   }
 }
 ```
@@ -668,7 +689,7 @@ The JobError takes 5 parameters:
 - `errorMessage`: String
 - `variables`: Object _(optional)_, default `null`
 - `retries`: Integer _(optional)_, defaults to `job.getRetries() - 1`
-- `retryBackoff`: Duration _(optional)_, defaults to `PT0S`
+- `retryBackoff`: Duration _or_ Function (Integer -> Duration) _(optional)_, defaults to the configured retry backoff, function input are the retries that will be submitted
 - `cause`: Exception _(optional)_, defaults to `null`
 
 :::note
@@ -735,7 +756,7 @@ camunda:
 
 #### Configure jobs in flight
 
-Number of jobs that are polled from the broker to be worked on in this client and thread pool size to handle the jobs:
+Number of jobs for a worker that are polled from the broker to be worked on in this client:
 
 ```java
 @JobWorker(maxJobsActive = 64)
@@ -869,6 +890,38 @@ camunda:
         timeout: PT1M
 ```
 
+#### Configure the retry backoff
+
+If you want to apply a retry backoff that should be applied if a job fails without a job error, you can set the annotation (`long` in milliseconds):
+
+```java
+@JobWorker(retryBackoff=10000L)
+public void work() {
+  // worker's code
+}
+```
+
+Moreover, you can override the retry backoff for the worker (as ISO 8601 duration expression):
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        foo:
+          retry-backoff: PT10S
+```
+
+You can also set a global default:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        retry-backoff: PT10S
+```
+
 ## Deploying resources on start-up
 
 To deploy process models on application start-up, use the `@Deployment` annotation:
@@ -892,6 +945,17 @@ Or, define wildcard patterns:
 @Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
 ```
 
+To adjust the tenant to deploy to, set the `tenantId` property of the `@Deployment` annotation:
+
+```java
+@Deployment(resources = "classpath:demoProcess.bpmn", tenantId = "myTenant")
+public class MyRandomBean {
+  // make sure this bean is registered
+}
+```
+
+By default, the `tenantId` set to `camunda.client.tenant-id` is used.
+
 To disable the deployment of annotations, you can set:
 
 ```yaml
@@ -913,7 +977,7 @@ To react on the creation of the Camunda client, you can do this:
 
 ```java
 @EventListener
-public void onCamundaClientCreated(CamundaClientCreatedEvent event){
+public void onCamundaClientCreated(CamundaClientCreatedEvent event) {
   // do what you need to do
 }
 ```
@@ -924,7 +988,7 @@ To react on the closing of the Camunda client, you can do this:
 
 ```java
 @EventListener
-public void onCamundaClientClosing(CamundaClientClosingEvent event){
+public void onCamundaClientClosing(CamundaClientClosingEvent event) {
   // do what you need to do
 }
 ```
@@ -947,6 +1011,19 @@ public class CamundaLifecycleListener implements CamundaClientLifecycleAware {
   }
 }
 ```
+
+### Post deployment event
+
+To react on the creation of [deployments on start-up](#deploying-resources-on-start-up), you can do this:
+
+```java
+@EventListener
+public void onDeploymentCreated(CamundaPostDeploymentEvent event) {
+  // do what you need to do
+}
+```
+
+The event will grant you access to a list of deployments that have been created.
 
 ## Observing metrics
 

@@ -41,7 +41,7 @@ Implement an AI agent using an AI Agent connector applied to a service task, pai
 <ConfigurationLimits />
 <ConfigurationResponse />
 <ConfigurationOutputMappingTask />
-<ConfigurationErrorHandling />
+<ConfigurationErrorHandling type="task" />
 <ConfigurationRetries />
 <ConfigurationExecutionListeners />
 

@@ -89,7 +89,7 @@ Furthermore, data is also sent from Operate and Optimize, which store data in El
 Elasticsearch needs enough memory available to load a large amount of this data into memory.
 :::
 
-Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda/camunda/blob/main/zeebe/benchmarks/project/src/main/resources/bpmn/typical_payload.json) we measured the following approximations for disk space requirements using Camunda 8 SaaS 1.2.4. Please note, that these are not exact numbers, but they might give you an idea what to expect:
+Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/typical_payload.json), Camunda measured the following approximate disk space requirements using Camunda 8 SaaS 1.2.4. These are not exact numbers, but they can help you estimate what to expect:
 
 - Zeebe: 75 kb / PI
 - Operate: 57 kb / PI
@@ -120,7 +120,7 @@ Spinning up a Camunda 8 Cluster means you run multiple components that all need 
 
 All components are clustered to provide high-availability, fault-tolerance and resiliency.
 
-Zeebe scales horizontally by adding more cluster nodes (pods). This is **limited by the [number of partitions](/components/zeebe/technical-concepts/partitions.md)** configured for a Zeebe cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your hardware. The **number of partitions cannot be changed after the cluster was initially provisioned** (at least not yet), elastic scalability of partitions is not yet possible.
+Zeebe scales horizontally by adding more cluster nodes (pods). This is **limited by the [number of partitions](/components/zeebe/technical-concepts/partitions.md)** configured for a Zeebe cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your hardware. The **[number of partitions can be scaled up](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) after the cluster is initially provisioned**, but not yet scaled down.
 
 If you anticipate the load increasing over time, prepare by configuring more partitions than you currently need as a buffer. For example, you could multiply the number of partitions you need for your current load by four to add a buffer. This typically has just a small impact on performance.
 
@@ -150,16 +150,17 @@ Contact your Customer Success Manager to increase the cluster size beyond the ma
 | Max Throughput **Tasks/day** **\***                                                 |                                 9 M |                                18 M |                             27 M |                             36 M |
 | Max Throughput **Tasks/second** **\***                                              |                                 100 |                                 200 |                              300 |                              400 |
 | Max Throughput **Process Instances/second** **\*\***                                |                                   5 |                                  10 |                               15 |                               20 |
-| Max Total Number of Process Instances stored (in Elasticsearch in total) **\*\*\*** |                                75 k |                               150 k |                            225 k |                            300 k |
+| Max Total Number of Process Instances stored (in Elasticsearch in total) **\*\*\*** |                               200 k |                               400 k |                            600 k |                            800 k |
 | Approximate resources provisioned **\*\*\*\***                                      | 11 vCPU, 22 GB memory, 192 GB disk. | 22 vCPU, 44 GB memory, 384 GB disk. | 33 vCPU, 66 GB mem, 576 GB disk. | 44 vCPU, 88 GB mem, 768 GB disk. |
 
-The numbers in the table were measured using Camunda 8 (version 8.6), [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes Cluster, and using a [realistic process](https://github.com/camunda/camunda/blob/main/zeebe/benchmarks/project/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) containing a mix of BPMN symbols such as tasks, events and call activities including subprocesses. To calculate day-based metrics, an equal distribution over 24 hours is assumed.
+The numbers in the table were measured using Camunda 8 (version 8.8), [the
+benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes Cluster, and using a [realistic process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) containing a mix of BPMN symbols such as tasks, events and call activities including subprocesses. To calculate day-based metrics, an equal distribution over 24 hours is assumed.
 
 **\*** Tasks (Service Tasks, Send Tasks, User Tasks, and so on) completed per day is the primary metric, as this is easy to measure and has a strong influence on resource consumption. This number assumes a constant load over the day. Tasks/day and Tasks/ second are scaled linearly.
 
 **\*\*** As Tasks are the primary resource driver, the number of process instances supported by a cluster is calculated based on the assumption of an average of 10 tasks per process. Customers can calculate a more accurate process instance estimate using their anticipated number of tasks per process.
 
-**\*\*\*** Total number of process instances within the retention period, regardless of if they are active or finished. This is limited by disk space, CPU, and memory for running and historical process instances available to ElasticSearch. Calculated assuming a typical set of process variables for process instances. Note that it makes a difference if you add one or two strings (requiring ~ 1kb of space) to your process instances, or if you attach a full JSON document containing 1MB, as this data needs to be stored in various places, influencing memory and disk requirements. If this number increases, you can still retain the runtime throughput, but Tasklist, Operate, and/or Optimize may lag behind.
+**\*\*\*** Max total number of historical process instances within the retention period. For active process instances this is limited mostly by the Zeebe resources and for historical instances by Elasticsearch resources. Calculated assuming a typical set of process variables for process instances. Note that it makes a difference if you add one or two strings (requiring ~ 1kb of space) to your process instances, or if you attach a full JSON document containing 1MB, as this data needs to be stored in various places, influencing memory and disk requirements. If this number increases, you can still retain the runtime throughput, but Tasklist, Operate, and/or Optimize may lag behind.
 The provisioned disk size is calculated as the sum of the disk size used by Zeebe and Elasticsearch.
 
 The max throughput numbers should be considered as peak loads, and the data retention configuration considered when defining the amount of data kept for completed instances in your cluster. See [Camunda 8 SaaS data retention](/components/saas/data-retention.md) for the default retention times for Zeebe, Tasklist, Operate and Optimize.
@@ -187,42 +188,33 @@ Such a cluster can serve roughly 65 tasks per second as a peak load, and it can 
 
 |                                    |                     | request | limit |
 | ---------------------------------- | ------------------- | ------- | ----- |
-| **Zeebe**                          |                     |         |       |
+| **Orchestration cluster**          |                     |         |       |
 | \# brokers                         | 3                   |         |       |
 | \# partitions                      | 3                   |         |       |
 | replication factor                 | 3                   |         |       |
-|                                    | vCPU \[cores\]      | 0.8     | 0.96  |
-|                                    | Mem \[GB\]          | 2       | 4     |
-|                                    | Disk \[GB\]         | 32      | 192   |
-| gateway                            | embedded in broker  |         |       |
-| **Operate**                        |                     |         |       |
-| #webapp                            | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.2     | 1     |
-| **Tasklist**                       |                     |         |       |
-| #webapp                            | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.2     | 2     |
-| **Optimize**                       |                     |         |       |
-| #importer                          | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.4     | 1     |
-| #webapp                            | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.4     | 1     |
-| **Elastic**                        |                     |         |       |
-| #statefulset                       | 1                   |         |       |
 |                                    | vCPU \[cores\]      | 1       | 2     |
-|                                    | Mem \[GB\] limit    | 3       | 6     |
-|                                    | Disk \[GB\] request | 64      | 100   |
+|                                    | Mem \[GB\]          | 2       | 3     |
+|                                    | Disk \[GB\]         | 32      | 128   |
 | **Connectors**                     |                     |         |       |
 | #                                  | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.2     | 0.4   |
-|                                    | Mem \[GB\] limit    | 0.25    | 0.5   |
+|                                    | vCPU \[cores\]      | 0.2     | 0.2   |
+|                                    | Mem \[GB\] limit    | 0.512   | 1     |
+| **Optimize**                       |                     |         |       |
+| #importer                          | 1                   |         |       |
+|                                    | vCPU \[cores\]      | 0.5     | 0.5   |
+|                                    | Mem \[GB\] limit    | 0.8     | 0.8   |
+| #webapp                            | 2                   |         |       |
+|                                    | vCPU \[cores\]      | 0.5     | 0.5   |
+|                                    | Mem \[GB\] limit    | 0.8     | 0.8   |
+| **Elastic**                        |                     |         |       |
+| #statefulset                       | 2                   |         |       |
+|                                    | vCPU \[cores\]      | 1       | 1     |
+|                                    | Mem \[GB\] limit    | 1.5     | 1.5   |
+|                                    | Disk \[GB\] request | 32      | 128   |
 | **Other** (Worker, Analytics, ...) |                     |         |       |
 | #                                  | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.4     | 0.4   |
-|                                    | Mem \[GB\] limit    | 0.45    | 0.45  |
+|                                    | vCPU \[cores\]      | 0.2     | 0.2   |
+|                                    | Mem \[GB\] limit    | 0.3     | 0.3   |
 
 ## Planning non-production environments
 

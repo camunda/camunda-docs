@@ -72,11 +72,11 @@ The available configuration options depend on the version of the cluster:
 
 ### Database
 
-Web Modeler currently supports PostgreSQL, Oracle, and Microsoft SQL Server (MSSQL) as persistent data storage.
+Web Modeler currently supports PostgreSQL, Oracle, Microsoft SQL Server (MSSQL), MySQL, MariaDB, and H2 as persistent data storage.
 
-:::info Oracle driver
-The Oracle driver is not provided by default and must be downloaded and supplied for the application to load.
-Refer to the [Oracle database configuration section](database.md#oracle) for details.
+:::info Oracle and MySQL driver
+The Oracle and MySQL drivers are not provided by default and must be downloaded and supplied for the application to load.
+Refer to the [Oracle](database.md#oracle) and [MySQL](database.md#mysql) database configuration section for details.
 :::
 
 | Environment variable                  | Description                                                                                                                                                                                                                                                                                                        | Example value                                            |
@@ -88,9 +88,6 @@ Refer to the [Oracle database configuration section](database.md#oracle) for det
 | `SPRING_DATASOURCE_HIKARI_SCHEMA`     | [optional; only supported for PostgreSQL]<br/>Database schema.<br/>Defaults to the default schema of the database user (usually `public`) if not set.<br/>Refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) for naming restrictions. | `custom_schema`                                          |
 
 Refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Web Modeler's database connection.
-
-Using a custom database schema via `SPRING_DATASOURCE_HIKARI_SCHEMA` is supported for PostgreSQL only. Oracle does not support custom schemas. MSSQL supports custom schemas, but this is not configurable in Web Modeler.
-If you want to use a custom schema in MSSQL, you must set the default schema for the database user accordingly.
 
 ### SMTP / email
 
@@ -150,9 +147,12 @@ For more details, [see the Zeebe connection troubleshooting section](/self-manag
 
 ### Logging
 
-| Environment variable | Description                                         | Example value                                  |
-| -------------------- | --------------------------------------------------- | ---------------------------------------------- |
-| `LOGGING_CONFIG`     | [optional]<br/>Path to custom logback configuration | `file:/full/path/to/custom-logback-config.xml` |
+| Environment variable                | Description                                                          | Example value                                 | Default value |
+| ----------------------------------- | -------------------------------------------------------------------- | --------------------------------------------- | ------------- |
+| `LOGGING_CONFIG`                    | [optional]<br/>Path to custom Log4j2 configuration.                  | `file:/full/path/to/custom-log4j2-spring.xml` | -             |
+| `CAMUNDA_MODELER_LOG_LEVEL`         | [optional]<br/>Defines the log level for the Web Modeler components. | `DEBUG`                                       | `INFO`        |
+| `CAMUNDA_LOG_FILE_APPENDER_ENABLED` | [optional]<br/>To enable logging to a file.                          | `true`                                        | `false`       |
+| `CAMUNDA_MODELER_LOG_APPENDER`      | [optional]<br/>Defines which appender to use for logging.            | `Stackdriver`                                 | `Console`     |
 
 Refer to the [advanced logging configuration guide](./logging.md#logging-configuration-for-the-restapi-component) for additional details on how to customize the `restapi` logging output.
 

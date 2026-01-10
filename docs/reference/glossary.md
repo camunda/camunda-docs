@@ -1,7 +1,7 @@
 ---
 id: glossary
 title: "Glossary"
-description: "This section defines common terminology referenced within the documentation."
+description: "Definitions for common Camunda 8 terms and abbreviations used across the docs, including Orchestration Cluster concepts, storage roles, and key deployment terms."
 toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
@@ -10,7 +10,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 <div class="alphabet-rows">
   <div class="alphabet-navigation">
-    <div class="letter-link"><a href="#b">A</a></div>
+    <div class="letter-link"><a href="#a">A</a></div>
     <div class="letter-link"><a href="#b">B</a></div>
     <div class="letter-link"><a href="#c">C</a></div>
     <div class="letter-link"><a href="#d">D</a></div>
@@ -31,7 +31,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link">Q</div>
     <div class="letter-link"><a href="#r">R</a></div>
     <div class="letter-link"><a href="#s">S</a></div>
-    <div class="letter-link">T</div>
+    <div class="letter-link"><a href="#t">T</a></div>
     <div class="letter-link"><a href="#u">U</a></div>
     <div class="letter-link">V</div>
     <div class="letter-link"><a href="#w">W</a></div>
@@ -45,17 +45,20 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 ### Agentic orchestration
 
-The governed coordination of AI agents, humans, and systems in a blended deterministic and dynamic BPMN process workflow to achieve a business goal.
+The governed coordination and management of AI agents, humans, and systems in a blended deterministic and dynamic process workflow to achieve defined goals.
 
-For example, orchestrate when and how AI agents act within a process, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop.
+For example, orchestrate when and how AI agents act within a process, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop. You can build AI agents with Camunda using BPMN.
 
-- [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md)
+- [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
+
+### Artificial intelligence (AI)
+
+A broad field of computer science focused on creating machines that can perform tasks requiring human-like intelligence. In practice, AI involves programming computers to learn, reason, and self-correct when solving problems. For example, AI applications include language understanding, image recognition, decision-making, and automation of complex tasks.
 
 ### AI agent
 
-The whole or part of an autonomous (LLM-powered) solution built in BPMN that interprets goals and context, plans steps, calls tools/APIs, and returns results.
-
-For example, build an invoice processing AI agent in Camunda using an ad‑hoc sub‑process and an AI Agent connector to provide LLM reasoning, tool calling, and short‑term memory in a governed feedback loop.
+An autonomous system, typically powered by an [LLM](#large-language-model-llm), that perceives its environment, makes decisions, and acts to achieve goals. AI agents can perform tasks, interact with other agents or systems, and operate with varying degrees of independence.
+For example, build an invoice-processing AI agent in Camunda with BPMN, using an ad-hoc subprocess and an AI Agent connector to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
@@ -88,6 +91,10 @@ See [Zeebe Client](#zeebe-client).
 
 See [Zeebe cluster](#zeebe-cluster).
 
+### Cluster variable
+
+A cluster [variable](../../components/concepts/variables/) is a centrally managed configuration value available across a Camunda cluster. It can be defined globally or at the tenant level and is used to provide environment-specific settings, such as API endpoints, feature flags, and shared configuration.
+
 ### Camunda 8
 
 Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
@@ -116,6 +123,10 @@ Connector types:
 - [Outbound](#outbound-connector)
 - [Inbound](#inbound-connector)
 - [Protocol](#protocol-connector)
+
+### Context window
+
+The amount of text (in [tokens](#token-ai)) a model can consider at once when generating a response. A larger context window allows the model to handle longer inputs.
 
 ### Correlation
 
@@ -147,6 +158,14 @@ A process cannot execute unless it is known by the [broker](#zeebe-broker). Depl
 
 ## E
 
+### Elasticsearch/OpenSearch
+
+Elasticsearch and OpenSearch are search and analytics engines commonly used as secondary storage backends for indexing and querying exported runtime data. They are populated with process orchestration data and consumed by components such as Operate, Tasklist, and Optimize.
+
+- [Elasticsearch and OpenSearch](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md)
+
+See also: [Secondary storage](#secondary-storage)
+
 ### Element
 
 A BPMN element is part of a [process](#process), defining one part of its BPMN model. Elements are the building blocks of a process and comprise [flow nodes](#flow-node), sequence flows, participants, data objects, and more.
@@ -155,9 +174,15 @@ A BPMN element is part of a [process](#process), defining one part of its BPMN m
 
 ### Element template
 
-Use an element template to extend the Desktop Modeler or Web Modeler with domain-specific diagram [elements](#element). Element templates are used by [connectors](#connector) to create the connector-specific [element](#element) configuration.
+Use an element template to extend [Modeler](/components/modeler/about-modeler.md) with domain-specific diagram [elements](#element). The user edits such elements through a UI defined by the element template, and in the process configures standard technical bindings understood by the engine in simple and predictable ways. Element templates are used by [connectors](#connector) to create the connector-specific [element](#element) configuration.
 
 - [Element templates](/components/modeler/element-templates/about-templates.md)
+
+### Embedding (vector embedding)
+
+A vector representation of data, including words, sentences, images, in a numerical space, where similar items are positioned near each other. Embeddings allow AI systems to compare meaning and perform tasks like semantic search.
+
+- [Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)
 
 ### Event
 
@@ -177,6 +202,10 @@ See [Zeebe Exporter](#zeebe-exporter).
 
 ## F
 
+### Fine-tuning
+
+The process of adapting a pre-trained AI model to a specific task or dataset, allowing it to specialize while leveraging prior knowledge.
+
 ### Flow node
 
 Flow nodes refer to a specific subset of BPMN [elements](#element). They comprise events, activities, and gateways. Other elements, such as sequence flows, participants, and data objects, are not considered flow nodes.
@@ -193,7 +222,30 @@ In a clustered environment, a [broker](#zeebe-broker) which is not a [leader](#l
 
 See [Zeebe Gateway](#zeebe-gateway).
 
+### Generative AI
+
+Any AI system that can produce new content, such as text, images, or audio, in response to prompts. Generative AI doesn’t just analyze existing data; it creates original output that is often contextually relevant to the input.
+
 ## H
+
+### Hallucination
+
+When an AI confidently produces incorrect or fabricated information that seems plausible. It reflects the model’s tendency to produce patterns that appear coherent but lack factual accuracy.
+
+### H2
+
+H2 is a lightweight relational database engine used as a secondary storage backend for local development and evaluation in Camunda.
+
+H2 can run in two modes:
+
+- **In-memory**: Data is stored only in memory and lost when the application stops. Useful for temporary testing.
+- **File-based (embedded)**: Database files are persisted to disk on the same host as the component using them. Suitable for local development where data persistence across restarts is needed.
+
+H2 is not intended for production usage.
+
+- [Secondary storage](/self-managed/concepts/secondary-storage/index.md)
+
+See also: [Secondary storage](#secondary-storage)
 
 ### Human task
 
@@ -260,6 +312,10 @@ A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#jo
 
 ## L
 
+### Large language model (LLM)
+
+A large language model (LLM) is a type of AI program specifically designed to understand and generate human-like text. These models are trained on massive amounts of text data, enabling them to learn the structure of language and perform a variety of tasks, such as conversation, summarization, and code generation.
+
 ### Leader
 
 In a clustered environment, one [broker](#zeebe-broker) (the [leader](#leader)) is responsible for process execution and housekeeping of data within a [partition](#partition). Housekeeping includes taking [snapshots](#snapshot), [replication](#replication), and running [exports](#zeebe-exporter).
@@ -322,6 +378,14 @@ An inbound polling [connector](#connector) that periodically polls an external s
 
 A [Camunda workflow](#workflow) uses this type of connector to retrieve data from a remote system that does not support real-time notifications or webhooks, but instead requires the client to periodically request updates.
 
+### Primary storage
+
+Primary storage is the authoritative store for workflow execution state managed by the Orchestration Cluster. In Self-Managed deployments, Zeebe brokers persist partition logs and snapshots on local disk. This data is required to execute workflows, recover after failures, and replicate state across brokers.
+
+Primary storage is not a search or analytics backend, and it is not configured as an external database (such as Elasticsearch/OpenSearch, H2, or an external RDBMS).
+
+See also: [Orchestration Cluster](#orchestration-cluster), [Log](#log), [Partition](#partition), [Snapshot](#snapshot), [Secondary storage](#secondary-storage)
+
 ### Process
 
 The general business construct — what you want to automate.  
@@ -371,6 +435,10 @@ A process variable represents the execution state (i.e data) of a process instan
 - [Variables](/components/concepts/variables.md)
 - [Data flow](/components/modeler/bpmn/data-flow.md)
 
+### Prompt
+
+A prompt is the input provided to a [generative AI model](#generative-ai). Prompt engineering refers to the practice of crafting effective instructions to achieve desired results from the AI.
+
 ### Protocol connector
 
 Protocol connectors are a type of [Connector](#connector) in Camunda that can serve as either [inbound](#inbound-connector) or [outbound](#outbound-connector) connectors, supporting a variety of technical protocols. These connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
@@ -384,6 +452,14 @@ The public API represents the official set of interfaces in Camunda 8 that are c
 - [Public API](/reference/public-api.md)
 
 ## R
+
+### RDBMS
+
+RDBMS (Relational Database Management System) refers to a user-managed relational database used as a secondary storage backend in Camunda 8 Self-Managed deployments, depending on the component and configuration. An external RDBMS is used for query and retention use cases, not for core workflow execution state.
+
+- [Helm database configuration (RDBMS)](/self-managed/deployment/helm/configure/database/rdbms.md)
+
+See also: [Secondary storage](#secondary-storage)
 
 ### Record
 
@@ -426,6 +502,10 @@ Camunda can use RFC to call SAP functions directly as part of a business process
 
 - [RFC](/components/camunda-integrations/sap/csap-cli.md)
 
+### Robotic process automation (RPA)
+
+The use of software robots to automate repetitive, rule-based business tasks. RPA bots emulate human actions in digital systems, enhancing speed and accuracy.
+
 ## S
 
 ### SAP
@@ -433,6 +513,18 @@ Camunda can use RFC to call SAP functions directly as part of a business process
 SAP stands for Systems, Applications, and Products in Data Processing; it's an enterprise software platform used to manage business operations such as finance, supply chain, and HR. Camunda integrates with SAP to automate and orchestrate workflows that involve SAP systems, allowing for greater flexibility, transparency, and control over complex business processes.
 
 - [SAP](/components/camunda-integrations/overview.md)
+
+### Secondary storage
+
+Secondary storage is used for indexing, search, analytics, and long-term retention. Data in secondary storage is typically exported from [primary storage](#primary-storage) and consumed by tools for observability and analytics.
+
+Examples of secondary storage backends include:
+
+- [Elasticsearch/OpenSearch](#elasticsearchopensearch)
+- [RDBMS](#rdbms)
+
+- [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)
+- [Managing secondary storage](/self-managed/concepts/secondary-storage/managing-secondary-storage.md)
 
 ### Segment
 
@@ -458,6 +550,22 @@ Soft pause exporting is a feature that allows you to continue exporting records 
 An [inbound connector](#inbound-connector) that subscribes to a message queue.
 
 This way, a [Camunda workflow](#workflow) can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
+
+## T
+
+### Temperature
+
+A parameter that regulates the randomness or creativity of AI-generated text. Lower values result in more focused and predictable responses, while higher values lead to more creative and varied outputs.
+
+### Token (AI)
+
+The smallest unit of text such as a word, subword, or character, that a language model processes. Models read and generate text as a sequence of tokens. Often, pricing for AI models is based on the number of input/output tokens.
+
+### Token (process instance)
+
+In the context of a running process instance in Camunda, a token represents the current point of execution within the BPMN process model. You can think of it as a marker that moves through the process diagram, following the sequence flows as tasks and events are completed.
+
+When a process starts, a token is created at the start event and advances with each completed step. Once the token reaches the end event, it is consumed and the process instance ends. Tokens are not data themselves, but they determine which elements of the process are currently active.
 
 ## U
 

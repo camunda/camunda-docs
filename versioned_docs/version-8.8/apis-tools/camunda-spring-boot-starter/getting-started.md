@@ -34,9 +34,24 @@ With the Camunda Spring Boot Starter, you can build:
 
 ## Version compatibility
 
-| Camunda Spring Boot Starter version | JDK  | Camunda version | Bundled Spring Boot version |
-| ----------------------------------- | ---- | --------------- | --------------------------- |
-| 8.8.x                               | ≥ 17 | 8.8.x           | 3.5.x                       |
+| Camunda Spring Boot Starter artifact | Camunda Spring Boot Starter version | JDK  | Bundled Spring Boot version | Compatible Spring Boot version(s) |
+| ------------------------------------ | ----------------------------------- | ---- | --------------------------- | --------------------------------- |
+| `camunda-spring-boot-starter`        | 8.8.x                               | ≥ 17 | 3.5.x                       |                                   |
+| `camunda-spring-boot-4-starter`      | >=8.8.9                             | ≥ 17 | 4.0.x                       |                                   |
+
+### Spring Boot 4.0 support
+
+Starting with the Camunda 8.8.9 patch release, a dedicated starter artifact was added that provides Spring Boot 4.0 support:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>camunda-spring-boot-4-starter</artifactId>
+  <version>8.8.x</version>
+</dependency>
+```
+
+You should use this as a drop-in replacement for the default `camunda-spring-boot-starter` that will still be based on Spring Boot 3.5 for all Camunda 8.8 patch releases.
 
 ## Get started
 

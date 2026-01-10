@@ -3,35 +3,44 @@ import IconAoDesignImg from "../assets/icon-docs.png";
 import IconAoAgentImg from "../assets/icon-agentic.png";
 import IconAoLlmImg from "../assets/icon-llm.png";
 
-export const introCards = [
+// Get started cards on introduction page
+export const getStartedCards = [
   {
-    link: "../../guides/getting-started-agentic-orchestration/",
-    title: "Build your first AI Agent",
+    link: "../../../guides/getting-started-agentic-orchestration/",
+    title: "Build your first AI agent",
     image: IconAoImg,
     description: "Get started by building and running your first AI agent.",
   },
+];
+
+// Fundamentals cards on introduction page
+export const fundamentalCards = [
   {
-    link: "./ao-design/",
-    title: "Design and architecture",
-    image: IconAoDesignImg,
-    description: "Plan and design your agentic orchestration solutions.",
-  },
-  {
-    link: "./ai-agents/",
+    link: "../ai-agents/",
     title: "AI agents",
     image: IconAoAgentImg,
     description:
       "Learn how to build and integrate AI agents into your end-to-end processes.",
   },
   {
-    link: "./choosing-right-model-agentic/",
-    title: "Choosing the right LLM",
+    link: "../ao-design/",
+    title: "Design and architecture",
+    image: IconAoDesignImg,
+    description: "Plan and design your agentic orchestration solutions.",
+  },
+];
+
+// Recommendation cards on introduction page
+export const recommendationCards = [
+  {
+    link: "../choose-right-model-agentic/",
+    title: "Choose the right LLM",
     image: IconAoLlmImg,
     description:
       "Learn how to choose the right Large Language Model (LLM) for AI agents.",
   },
   {
-    link: "./model-recommendations-agentic/",
+    link: "../model-recommendations-agentic/",
     title: "LLM recommendations",
     image: IconAoLlmImg,
     description:

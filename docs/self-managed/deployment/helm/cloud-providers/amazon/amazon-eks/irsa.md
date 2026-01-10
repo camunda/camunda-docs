@@ -9,12 +9,6 @@ import TabItem from '@theme/TabItem';
 
 ## IRSA configuration validation of a Camunda 8 helm deployment
 
-:::caution Camunda 8.8 compatibility
-This guide and the referenced helper scripts (including `c8-sm-checks` IRSA validation) are not yet fully validated against Camunda 8.8. You may encounter transient errors, missing flags, or deprecated value references when executing them with 8.8-based deployments. A refreshed, 8.8-tested version of this page and the scripts will be published soon.
-
-Proceed with caution in production environments until the update is available.
-:::
-
 The [c8-sm-checks](self-managed/operational-guides/troubleshooting.md#anomaly-detection-scripts) utility is designed to validate IAM Roles for Service Accounts ([IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)) configuration in EKS Kubernetes clusters on AWS. It ensures that key components in a Camunda 8 deployment, such as PostgreSQL and OpenSearch, are properly configured to securely interact with AWS resources via the appropriate IAM roles.
 
 ### IRSA check script
@@ -49,7 +43,7 @@ Compatibility is confirmed for [Camunda Helm chart releases version 11 and above
 
 #### Example usage
 
-You can find the complete usage details in the [c8-sm-checks repository](https://github.com/camunda/c8-sm-checks). Below is a quick reference for common usage options:
+You can find the complete usage details in the [c8-sm-checks repository](https://github.com/camunda/c8-sm-checks/). Below is a quick reference for common usage options:
 
 ```bash
 Usage: ./checks/kube/aws-irsa.sh [-h] [-n NAMESPACE] [-e EXCLUDE_COMPONENTS] [-p] [-l] [-s]
@@ -58,7 +52,7 @@ Options:
   -n NAMESPACE                    Specify the namespace to use (required)
   -e EXCLUDE_COMPONENTS           Comma-separated list of Components to exclude from the check (reference of the component is the root key used in the chart)
   -p                              Comma-separated list of Components to check IRSA for PostgreSQL (overrides default list: identityKeycloak,identity,webModeler)
-  -l                              Comma-separated list of Components to check IRSA for OpenSearch (overrides default list: zeebe,operate,tasklist,optimize)
+  -l                              Comma-separated list of Components to check IRSA for OpenSearch (overrides default list: orchestration,optimize)
   -s                              Disable pod spawn for IRSA and connectivity verification.
                                   By default, the script spawns jobs in the specified namespace to perform
                                   IRSA checks and network connectivity tests. These jobs use the amazonlinux:latest
@@ -68,10 +62,10 @@ Options:
 **Example Command:**
 
 ```bash
-./checks/kube/aws-irsa.sh -n camunda-primary -p "identity,webModeler" -l "zeebe,optimize"
+./checks/kube/aws-irsa.sh -n camunda-primary -p "identity,webModeler" -l "orchestration"
 ```
 
-In this example, the script will check **`identity`** and **`webModeler`** components (references of the component name in the helm chart) for Aurora PostgreSQL access and **`zeebe`** and **`optimize`** components for OpenSearch access in the `camunda-primary` namespace.
+In this example, the script will check **`identity`** and **`webModeler`** components (references of the component name in the helm chart) for Aurora PostgreSQL access and only **`orchestration`** for OpenSearch access in the `camunda-primary` namespace.
 
 #### Script output overview
 
@@ -181,9 +175,11 @@ If issues remain unresolved, compare your configuration with Camunda’s [refere
 
 [Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) is a default fallback for the AWS SDK due to the [default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html). Within the context of Amazon EKS, it means a pod will automatically assume the role of a node. This can hide many problems, including whether IRSA was set up correctly or not, since it will fall back to IMDS in case of failure and hide the actual error.
 
-Thus, if nothing within your cluster relies on the implicit node role, we recommend disabling it by defining in Terraform the `http_put_response_hop_limit`, for example.
+If nothing within your cluster relies on the implicit node role, Camunda recommends disabling it by configuring the `http_put_response_hop_limit` to 1. This decreases the default value from two to one, so pods are not allowed to assume the role of the node.
 
-Using a Terraform module like the [Amazon EKS module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest), one can define the following to decrease the default value of two to one, which results in pods not being allowed to assume the role of the node anymore.
+### Configure IMDS hop limit
+
+**For new node groups** that use a Terraform module such as the [Amazon EKS module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest), you can define the following:
 
 ```json
 eks_managed_node_group_defaults {
@@ -193,13 +189,25 @@ eks_managed_node_group_defaults {
 }
 ```
 
-Overall, this will disable the role assumption of the node for the Kubernetes pod. Depending on the resulting error within Operate, Zeebe, and Web-Modeler, you'll get a clearer error, which is helpful to debug the error more easily.
-
 :::note Enabled by default in the terraform reference architecture of EKS
 
 In the [reference architecture with terraform](terraform-setup.md), this setting is configured like that by default.
 
 :::
+
+**For existing worker node instances**, you can modify the hop limit using the AWS CLI:
+
+```bash
+aws ec2 modify-instance-metadata-options \
+    --instance-id <instance-id> \
+    --http-put-response-hop-limit 1
+```
+
+Replace `<instance-id>` with your actual EC2 instance ID. You'll need to run this command for each worker node in your cluster.
+
+More details can be found in the [AWS documentation on modifying IMDS for existing instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-existing-instances.html#modify-PUT-response-hop-limit).
+
+Overall, this will disable the role assumption of the node for the Kubernetes pod.
 
 ## Backup-related
 
@@ -217,6 +225,7 @@ Once the IRSA setup is complete, configure the Bitnami Elasticsearch chart in yo
 
 ```yaml
 elasticsearch:
+  enabled: true
   master:
     serviceAccount:
       create: true

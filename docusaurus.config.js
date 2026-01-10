@@ -2,6 +2,7 @@ const { unsupportedVersions } = require("./src/versions");
 const { currentVersion } = require("./src/versions");
 
 const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
+const docsSitebaseUrl = process.env.DOCS_SITE_BASE_URL || "/";
 const { themes } = require("prism-react-renderer");
 
 module.exports = {
@@ -18,7 +19,7 @@ module.exports = {
   // url: "https://camunda-cloud.github.io",
   url: docsSiteUrl,
   // baseUrl: "/camunda-cloud-documentation/",
-  baseUrl: process.env.DOCS_SITE_BASE_URL || "/",
+  baseUrl: docsSitebaseUrl,
   customFields: {
     canonicalUrlRoot: docsSiteUrl,
   },
@@ -163,7 +164,7 @@ module.exports = {
         docsPluginId: "default",
         config: {
           camunda: {
-            specPath: "api/camunda/camunda-openapi.yaml",
+            specPath: "api/camunda/v2/camunda-openapi.yaml",
             outputDir:
               "docs/apis-tools/orchestration-cluster-api-rest/specifications",
             sidebarOptions: {
@@ -174,6 +175,13 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.8: {
+                specPath: "api/camunda/version-8.8/camunda-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.7: {
                 specPath: "api/camunda/version-8.7/camunda-openapi.yaml",
                 outputDir:
@@ -230,6 +238,15 @@ module.exports = {
         },
       },
     ],
+    [
+      // RSS feed for security notices
+      "./static/plugins/notices-feed",
+      {
+        url: docsSiteUrl,
+        contextPath: docsSitebaseUrl,
+        maxItems: 50,
+      },
+    ],
   ],
   scripts: [
     {
@@ -237,6 +254,7 @@ module.exports = {
       "data-website-id": "1a0b2863-2767-4583-9d33-ded0095731e7",
       "data-project-name": "Camunda",
       "data-project-color": "#000000",
+      "data-button-hide": "true",
       "data-project-logo":
         "https://avatars.githubusercontent.com/u/2443838?s=200&v=4",
       "data-modal-disclaimer":
@@ -327,6 +345,12 @@ module.exports = {
           docId: "reference/overview",
           label: "Reference",
           position: "left",
+        },
+        {
+          type: "html",
+          position: "right",
+          value:
+            '<button class="button button--secondary button--md kapa-open" onclick="if(window.Kapa&&window.Kapa.open){window.Kapa.open({});} return false;" title="Ask AI" aria-label="Ask AI"><img src="/img/ai-star.png" alt="" style="height:1em;width:1em;margin-right:6px;vertical-align:middle;" />Ask AI</button>',
         },
         {
           to: "https://camunda.com/download?utm_source=docs.camunda.io&utm_medium=referral&utm_content=tryfreebutton",

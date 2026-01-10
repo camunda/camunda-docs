@@ -20,7 +20,8 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **External Dependencies**: Provision the following external dependencies:
   - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. For step-by-step instructions, see the [Aurora PostgreSQL module setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup) guide.
   - **Amazon OpenSearch**: The secondary datastore for the Orchestration Cluster, the Camunda 8 process orchestration engine. For step-by-step instructions, see the [OpenSearch](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eksctl.md#4-opensearch-domain) guide.
-  - **AWS Simple Active Directory**: For simple OIDC authentication. See the [AWS Simple Active Directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html) documentation for more information.
+    Note: Secondary storage is configurable. Depending on the components you run, you can use Elasticsearch/OpenSearch or an RDBMS-based secondary store for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
+  - **Identity Provider (IdP)**: An OIDC-compatible identity provider for authentication. See [Authentication and authorization](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) for supported options.
 - **Ingress NGINX**: Ensure the [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - To store the backups of the Camunda web applications. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. See the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
 - **Amazon S3** - An additional bucket to store backup files of the Orchestration Cluster brokers.
@@ -117,71 +118,19 @@ More information can be found in the [Ingress setup](/self-managed/deployment/he
 
 ### Identity provider integration
 
-Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication.
+Once secure HTTPS connections are enabled and correctly configured via Ingress, the next step is configuring authentication with an OIDC-compatible identity provider.
 
-This example uses AWS Simple Active Directory, which provides a subset implementation of a Microsoft Active Directory, and is compatible with our [Microsoft Entra ID](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md) guide.
+Camunda supports several authentication methods. Choose the guide that matches your identity provider:
 
-The following is an example configuration to add to your `values.yaml` files:
+- **[Microsoft Entra ID](/self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra.md)**: For organizations using Microsoft Entra ID (formerly Azure Active Directory).
+- **[External Keycloak](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md)**: For organizations with an existing Keycloak instance.
+- **[Generic OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider.md)**: For other OIDC-compatible providers such as Okta, Auth0, or Amazon Cognito.
+
+For a complete overview of authentication options and their trade-offs, see [Authentication and authorization](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md).
 
 :::note
-You must create a Kubernetes secret for all client secrets that exist in each app registration of your Active Directory.
+You must create Kubernetes secrets for all client secrets required by your identity provider configuration before installing the Helm chart.
 :::
-
-```yaml
-identity:
-  auth:
-    issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-    issuerBackendUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-    tokenUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token
-    jwksUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys
-    publicIssuerUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-    type: MICROSOFT
-    identity:
-      clientId: "00000000-0000-0000-0000-000000000000" #This is the application ID
-      secret:
-        existingSecret: oidc-certificate-identity #secret from the certificate that was created in the Active Directory
-        existingSecretKey: certificate-secret-data
-      audience: "00000000-0000-0000-0000-000000000000" #same as client ID
-      redirectUrl: https://management-and-modeling-host.com/identity
-      initialClaimValue: "00000000-0000-0000-0000-000000000000" #object ID of your user
-    optimize:
-      clientId: "00000000-0000-0000-0000-000000000000"
-      secret:
-        existingSecret: oidc-certificate-optimize
-        existingSecretKey: certificate-secret-data
-      audience: "00000000-0000-0000-0000-000000000000"
-      redirectUrl: https://orchestration-host.com/optimize
-    orchestration:
-      clientId: "00000000-0000-0000-0000-000000000000"
-      secret:
-        existingSecret: oidc-certificate-zeebe
-        existingSecretKey: certificate-secret-data
-      audience: "00000000-0000-0000-0000-000000000000"
-    connectors:
-      clientId: "00000000-0000-0000-0000-000000000000"
-      secret:
-        existingSecret: oidc-certificate-connectors
-        existingSecretKey: certificate-secret-data
-      audience: "00000000-0000-0000-0000-000000000000"
-      clientApiAudience: "00000000-0000-0000-0000-000000000000"
-      tokenScope: "00000000-0000-0000-0000-000000000000/.default" # same as appplication ID
-    console:
-      clientId: "00000000-0000-0000-0000-000000000000"
-      wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
-      audience: "00000000-0000-0000-0000-000000000000"
-      secret:
-        existingSecret: oidc-certificate-console
-        existingSecretKey: certificate-secret-data
-      redirectUrl: https://management-and-modeling-host.com
-    webModeler:
-      clientId: "00000000-0000-0000-0000-000000000000"
-      audience: "00000000-0000-0000-0000-000000000000"
-      clientApiAudience: "00000000-0000-0000-0000-000000000000"
-      publicApiAudience: "00000000-0000-0000-0000-000000000000"
-      redirectUrl: https://modeler.management-and-modeling-host.com
-```
-
-For more information, see how to [connect to an OpenID Connect provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
 
 ### Connect external databases
 
@@ -264,7 +213,7 @@ For more information on connecting to external databases, the following guides a
 ## Orchestration Cluster configuration
 
 :::note
-At this point, you should be able connect to your platform through HTTPS, correctly authenticate users using AWS Simple Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL.
+At this point, you should be able to connect to your platform through HTTPS, correctly authenticate users using your configured identity provider, and have connected to external databases such as Amazon OpenSearch and Amazon Aurora PostgreSQL.
 :::
 
 The next steps focus on the Camunda application-specific configurations suitable for a production environment. The following sections continue to add to the `management-and-modeling-values.yaml` and `orchestration-values.yaml` at the Camunda component-level.
@@ -502,55 +451,12 @@ global:
       secretName: camunda-platform
   identity:
     auth:
-      issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-      issuerBackendUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-      tokenUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token
-      jwksUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys
-      publicIssuerUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-      type: MICROSOFT
-      identity:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        secret:
-          existingSecret: oidc-certificate-identity
-          existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://management-and-modeling-host.com/identity
-        initialClaimValue: "00000000-0000-0000-0000-000000000000"
-      optimize:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        secret:
-          existingSecret: oidc-certificate-optimize
-          existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://orchestration-host.com/optimize
-      orchestration:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        secret:
-          existingSecret: oidc-certificate-zeebe
-          existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-      connectors:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        secret:
-          existingSecret: oidc-certificate-connectors
-          existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-        clientApiAudience: "00000000-0000-0000-0000-000000000000"
-        tokenScope: "00000000-0000-0000-0000-000000000000/.default"
-      console:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
-        audience: "00000000-0000-0000-0000-000000000000"
-        secret:
-          existingSecret: oidc-certificate-console
-          existingSecretKey: certificate-secret-data
-        redirectUrl: https://management-and-modeling-host.com
-      webModeler:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        audience: "00000000-0000-0000-0000-000000000000"
-        clientApiAudience: "00000000-0000-0000-0000-000000000000"
-        publicApiAudience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://modeler.management-and-modeling-host.com
+      # Configure authentication based on your identity provider.
+      # Set type to: "KEYCLOAK" (default), "MICROSOFT", or "GENERIC"
+      # See: https://docs.camunda.io/docs/self-managed/deployment/helm/configure/authentication-and-authorization/
+      type: "<KEYCLOAK|MICROSOFT|GENERIC>"
+      # ... additional provider-specific configuration
+      # Refer to the authentication guide for your chosen provider.
 identity:
   enabled: true
   contextPath: /identity
@@ -596,16 +502,19 @@ connectors:
 elasticsearch:
   enabled: false
 console:
+  # Multi-namespace deployments require manual console.configuration to define
+  # components across namespaces. The oAuth section must match your global.identity.auth settings.
+  # See: https://docs.camunda.io/docs/self-managed/deployment/helm/configure/authentication-and-authorization/
   configuration: |
     camunda:
       console:
         oAuth:
-          audience: "console-api"
-          clientId: "console"
-          issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-          jwksUri: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys"
-          type: "MICROSOFT"
-          wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
+          audience: "<console-audience>"
+          clientId: "<console-client-id>"
+          issuer: "<idp-issuer-url>"
+          jwksUri: "<idp-jwks-url>"
+          type: "<KEYCLOAK|MICROSOFT|GENERIC>"
+          wellKnown: "<idp-well-known-url>"
         managed:
           method: plain
           releases:
@@ -696,33 +605,12 @@ global:
     service:
       url: "http://management-identity.management-and-modeling.svc.cluster.local:80/identity"
     auth:
-      type: MICROSOFT
-      issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-      publicIssuerUrl: "https://orchestration-host.com/auth/realms/camunda-platform"
-      issuerBackendUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-      tokenUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token
-      jwksUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys
-      optimize:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        secret:
-          existingSecret: oidc-certificate-optimize
-          existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://orchestration-host.com/optimize
-      orchestration:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        secret:
-          existingSecret: oidc-certificate-zeebe
-          existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-      connectors:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        secret:
-          existingSecret: oidc-certificate-connectors
-          existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-        clientApiAudience: "00000000-0000-0000-0000-000000000000"
-        tokenScope: "00000000-0000-0000-0000-000000000000/.default"
+      # Configure authentication based on your identity provider.
+      # Set type to: "KEYCLOAK" (default), "MICROSOFT", or "GENERIC"
+      # See: https://docs.camunda.io/docs/self-managed/deployment/helm/configure/authentication-and-authorization/
+      type: "<KEYCLOAK|MICROSOFT|GENERIC>"
+      # ... additional provider-specific configuration
+      # Refer to the authentication guide for your chosen provider.
 orchestration:
   contextPath: /orchestration
   ingress:

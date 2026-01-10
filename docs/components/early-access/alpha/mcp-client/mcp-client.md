@@ -5,15 +5,14 @@ sidebar_label: MCP Client
 description: "Integrate MCP (Model Context Protocol) clients with agentic orchestration."
 ---
 
-Integrate [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) clients with [agentic orchestration](../../../agentic-orchestration/agentic-orchestration.md).
+Integrate [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) clients with [agentic orchestration](../../../agentic-orchestration/agentic-orchestration-overview.md).
 
-Camunda's MCP Client integration allows using the [AI agent connector](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) in combination with MCP clients to access tools provided by MCP servers. This includes both locally started [STDIO](https://modelcontextprotocol.io/specification/draft/basic/transports#stdio) servers and remote MCP servers using the [HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) transport.
+Camunda's MCP Client integration allows using the [AI agent connector](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) in combination with MCP clients to access tools provided by MCP servers. This includes both locally started [STDIO](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#stdio) servers and remote MCP servers using the [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) and [HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) transports.
 
 ![MCP Client integration architecture](img/mcp-clients-architecture.png)
 
-- [STDIO](https://modelcontextprotocol.io/specification/draft/basic/transports#stdio) (standard input/output) servers are operating system processes directly started and managed by the connector runtime. Communication with these servers is done via standard input and output streams.
-- Remote MCP servers are available via HTTP. Multiple standards exist ([HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse), [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#streamable-http)).  
-  Currently, only HTTP with SSE is supported by the MCP Client connectors.
+- [STDIO](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#stdio) (standard input/output) servers are operating system processes directly started and managed by the connector runtime. Communication with these servers is done via standard input and output streams.
+- Remote MCP servers are available via HTTP. Multiple standards exist, including [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) (recommended) and [HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) (legacy).
 
 :::note
 The MCP Client integration currently only supports tool-related functionality. Other MCP features such as resources or prompts are not supported.
@@ -106,10 +105,6 @@ When handling LLM tool call requests, the MCP Client integration of the AI agent
 
 ## MCP connectors
 
-:::note
-Remote MCP Client connectors do not currently support authentication. This feature will be added in a future release.
-:::
-
 Camunda provides two MCP connectors with different focuses. These connectors are not mutually exclusive and can be used together as long as the cluster/environment is configured accordingly.
 
 | Connector                                                       | STDIO | Remote/HTTP | Configuration                        | Availability                                                                                                | Description                                                                                                                                                                |
@@ -122,6 +117,27 @@ See the individual connector documentation for details on configuring and using 
 ### Common configuration options
 
 The provided connectors share a set of common options for configuring tool access and availability.
+
+#### Connector mode
+
+Choose how the connector operates based on your use case.
+
+##### AI Agent tool mode
+
+Use when the connector is invoked as a tool from within an AI Agent ad-hoc sub-process. This is the default mode.
+
+The **Method** and **Parameters** fields accept FEEL expressions and default to `toolCall.method` and `toolCall.params`, which are automatically populated by the AI Agent connector during tool discovery and tool calling.
+
+##### Standalone mode
+
+Use when invoking MCP operations directly from a BPMN process without an AI Agent. This mode allows you to call MCP servers independently of the agentic orchestration flow.
+
+Select the operation to perform:
+
+| Operation  | Description                                              | Configuration                                                                                                  |
+| :--------- | :------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- |
+| List tools | Retrieves the list of tools available on the MCP server. | No additional configuration required.                                                                          |
+| Call tool  | Invokes a specific tool on the MCP server.               | **Tool name**: The name of the tool to invoke.<br/>**Arguments**: Tool arguments as a FEEL context expression. |
 
 #### Tools
 
