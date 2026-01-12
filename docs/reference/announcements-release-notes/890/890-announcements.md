@@ -176,6 +176,7 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 <div className="release-announcement-badge">
 
 <span className="badge badge--new">New</span>
+
 </div>
 <div className="release-announcement-content">
 

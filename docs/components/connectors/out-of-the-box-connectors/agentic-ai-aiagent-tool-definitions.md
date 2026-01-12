@@ -198,7 +198,7 @@ When serializing the tool call response to JSON, document references are transfo
 
 Gateway tools are activities that expose multiple tools from an external source, such as an MCP server or an A2A agent. Unlike static tool definitions, gateway tools discover their available tools dynamically during agent initialization by calling the external source.
 
-To configure an activity as a gateway tool, set the [extension property](../../modeler/element-templates/defining-templates.md#zeebeproperty) `io.camunda.agenticai.gateway.type` on the activity. The property value specifies which gateway implementation to use (for example, `mcpClient`). The agent must also have access to a handler for the specified gateway type. Custom implementations can be made available to the agent in self-managed or hybrid setups.
+To configure an activity as a gateway tool, set the [extension property](../../modeler/element-templates/create/defining-templates.md) `io.camunda.agenticai.gateway.type` on the activity. The property value specifies which gateway implementation to use (for example, `mcpClient`). The agent must also have access to a handler for the specified gateway type. Custom implementations can be made available to the agent in self-managed or hybrid setups.
 
 For more details, see the available gateway tool implementations:
 
