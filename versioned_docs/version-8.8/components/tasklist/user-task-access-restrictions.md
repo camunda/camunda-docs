@@ -15,7 +15,7 @@ For Tasklist V2, use [authorization-based access control](../concepts/access-con
 For more information about the differences between V1 and V2, see [Tasklist API versions](api-versions.md).
 :::
 
-For a user to see a task in Tasklist, they must meet one of the following criteria in the BPMN process definition:
+If a user task has no access restrictions in the BPMN process definition, all users can see the task in Tasklist. If you've restricted access to the task, a user can only see the task if they meet one of the following criteria:
 
 - Be the **Assignee**.
 - Be listed as a **Candidate user**.
