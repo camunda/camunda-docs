@@ -4,7 +4,7 @@ title: "Amazon ECS"
 description: "Learn how to install Camunda 8 on AWS ECS."
 ---
 
-This guide provides a detailed walkthrough for installing the [Camunda 8 Orchestration Cluster](/docs/reference/glossary.md#orchestration-cluster) on AWS Elastic Container Service (ECS) using Fargate and Aurora PostgreSQL. It leverages AWS managed services, using ECS as the platform and Fargate as the runtime. Finally, you will verify that your Self-Managed Camunda 8 environment is deployed correctly and that all required connections are functioning as expected.
+This guide provides a detailed walkthrough for installing the [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster) on AWS Elastic Container Service (ECS) using Fargate and Aurora PostgreSQL. It leverages AWS managed services, using ECS as the platform and Fargate as the runtime. Finally, you will verify that your Self-Managed Camunda 8 environment is deployed correctly and that all required connections are functioning as expected.
 
 This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) and Connectors for Camunda 8. Web Modeler, Optimize, and Console are currently not covered.
 
