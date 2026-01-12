@@ -30,7 +30,11 @@ Once configured, the exporter starts receiving records the next time Zeebe is re
 
 A reference implementation is available via the Zeebe-maintained [Elasticsearch exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter).
 
-Exporters reduce the need for Zeebe to store data indefinitely. Once data is no longer required internally, Zeebe queries its exporters to determine if it can be safely deleted. If so, it is permanently removed, reducing disk usage.
+Zeebe manages data deletion through two distinct mechanisms to reduce disk usage:
+
+1. **Internal state deletion**: Zeebe automatically deletes data from its internal state (RocksDB) when it's no longer operationally required, such as when a process instance completes. This deletion is independent of exporters.
+
+2. **Log stream compaction**: The event log stream (which stores all runtime and historical records) is compacted based on positions acknowledged by exporters. Each exporter acknowledges the position of the last record it has successfully processed. The stream processor also marks the position it has processed. Log compaction then occurs up to the **lowest acknowledged position** across all exporters and the stream processor, ensuring the log can be safely truncated without losing data that exporters haven't yet consumed.
 
 :::note
 
