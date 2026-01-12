@@ -68,6 +68,15 @@ See the [component version matrix](/reference/supported-environments.md#componen
 
 ## Key changes
 
+### 8.8.x patch releases
+
+The following key changes were also released as part of an 8.8.x patch release.
+
+| Patch release                                                  | Type            | Key change                                                                                                                                            |
+| :------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9) | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9) | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
+
 ### APIs & tools
 
 <div className="release-announcement-row">
@@ -103,6 +112,49 @@ io.camunda.zeebe.client.api.command.MalformedResponseException:
 **Required action**
 
 You must update your clients to at least 8.7.16, as this contains the fix for this issue. Alternatively, you can opt out of using `preferRestOverGrpc=true` before upgrading your cluster.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Webhook alerts JSON format
+
+In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/console/manage-clusters/manage-alerts.md#webhook-alerts). The JSON format was modified so that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
+
+In 8.8.9, the `processVersion` field reverts to returning an integer value representing the process version only. A new `processVersionTag` field is introduced to include the process version tag when available.
+
+**Example JSON format change**
+
+Before 8.8.9:
+
+```json
+{
+  "processVersion": "v2.1.0" // String - could be tag or number
+}
+```
+
+After 8.8.9:
+
+```json
+{
+  "processVersion": 3, // Integer - always the version number
+  "processVersionTag": "v2.1.0" // String - the version tag (if exists)
+}
+```
+
+**Action required**
+
+Adapt any webhook-dependent integrations you have created for 8.8.x to handle the updated JSON structure:
+
+1. Update your integration to read `processVersion` as an integer value representing the process version number.
+2. If you need the process version tag, use the new `processVersionTag` field that contains the string value of the version tag (if one exists).
+3. Ensure your integration handles cases where `processVersionTag` might be null or absent (for processes without version tags).
+4. Test your webhook consumers to verify they correctly parse both the integer `processVersion` and string `processVersionTag` fields.
 
 </div>
 </div>
@@ -394,6 +446,25 @@ To learn more about migrating to the Camunda Java client, see the [migration gui
 </div>
 <div className="release-announcement-content">
 
+#### Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test
+
+With the 8.8.9 patch release, dedicated Spring Boot 4.0 based modules are released for the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md#spring-boot-40-support) and [Camunda Process Test Spring](../../../apis-tools/testing/getting-started.md?client=spring-sdk#spring-boot-40-support) as drop-in replacements for the default Spring Boot 3.5.x-based modules.
+
+You must use these if you want to migrate your application to Spring Boot 4.0.
+
+:::note
+With Camunda 8.9, the default Spring Boot version for the Camunda Spring Boot Starter and Camunda Process Test Spring changes to 4.0.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
 #### The Node.js SDK is now the TypeScript SDK
 
 With the Camunda 8.8 release, the Node.js SDK now becomes the TypeScript SDK.
@@ -558,7 +629,7 @@ To learn more, see [Elasticsearch changes in Components update 8.7 to 8.8](/self
 
 #### Camunda Exporter
 
-Previously, Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by the Elasticsearch (ES) or OpenSearch (OS) exporters.
+Previously, Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by Elasticsearch or OpenSearch (secondary storage) exporters — see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
 
 ![87-orchestration-cluster-state](../../img/87-orchestration-cluster-state.png)
 
@@ -569,7 +640,7 @@ With the Camunda 8.8 release, a new Camunda Exporter is introduced:
 
 ![brown-field-without-optimize](../../img/brown-field-orchestration-cluster-without-optimize.png)
 
-The new Camunda Exporter helps Camunda achieve a more streamlined architecture, better performance, and improved stability (especially concerning ES/OS).
+The new Camunda Exporter helps Camunda achieve a more streamlined architecture, better performance, and improved stability (especially concerning Elasticsearch/OpenSearch secondary storage).
 
 :::info
 To learn more, see the blog post [One Exporter to Rule Them All: Exploring Camunda Exporter](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/).

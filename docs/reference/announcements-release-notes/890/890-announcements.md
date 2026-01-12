@@ -23,6 +23,25 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 ## Key changes
 
+### APIs & tools
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Spring Boot Starter now requires Spring Boot 4.0.x
+
+Starting with 8.9.0-alpha3, the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md) requires Spring Boot 4.0.x.
+
+To remain compatible, migrate your application to Spring Boot 4.0.x.
+
+This change aligns with the Spring Boot support policy, as OSS support for Spring Boot 3.x ends in June 2026. See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support).
+
+</div>
+</div>
+
 ### Supported environments
 
 <div className="release-announcement-row">
@@ -116,6 +135,25 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch subchart no longer enabled by default
+
+Previously, the Elasticsearch subchart was enabled by default. To use OpenSearch, you would need to disable Elasticsearch and enable OpenSearch.
+
+With the inclusion of RDBMS, you must now specify the secondary storage you want to enable and use.
+
+:::note
+To continue using Elasticsearch provided as a subchart, you must add `global.elasticsearch.enabled: true` and `elasticsearch.enabled: true` to your `values.yaml`.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
@@ -136,6 +174,7 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
@@ -147,6 +186,17 @@ Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` f
 - Postgresql is currently supported.
 - Other RDBMS databases like OracleDB and MariaDB have limited functionality now, but will be fully supported in future alpha releases.
 - Operate is not yet supported with RDBMS until alpha3.
+
+<span className="badge badge--breaking-change">Breaking change</span>
+
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch subchart is no longer enabled by default
+
+Previously, the Elasticsearch subchart would be enabled, and if you want OpenSearch instead, you would disable Elasticsearch and enable OpenSearch. Now with the inclusion of RDBMS instead, we are making it mandatory to specify which secondary storage you want to use, and present them as equally valid options.
+
+If you rely on Elasticsearch provided as a subchart, you will need to add `global.elasticsearch.enabled: true` and `elasticsearch.enabled: true` to your `values.yaml` to continue using it.
 
 </div>
 </div>

@@ -19,6 +19,34 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 38
+
+### Publication date
+
+Jan 8, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `qs` used by Camunda Web Modeler was affected by CVE-2025-15284, an improper input validation vulnerability that allows HTTP DoS.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.4, ≤ 8.7.14, or ≤ 8.6.23
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.5, 8.7.15, 8.6.24
+
+The fix was deployed to Web Modeler SaaS on January 7, 2026, 13:45 CET.
+
 ## Notice 37
 
 ### Publication date
@@ -609,14 +637,7 @@ You are using Camunda Optimize ≤ 8.4.15, ≤ 8.5.12, ≤ 8.6.6, ≤ 8.7.0, ≤
 
 Camunda has provided the following release which contains a fix:
 
-- [Camunda Optimize 8.4.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
-- [Camunda Optimize 8.5.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
-- [Camunda Optimize 8.6.7](https://github.com/camunda/camunda/releases/tag/8.6.7-optimize)
-- [Camunda Optimize 8.7.0](https://github.com/camunda/camunda/releases/tag/8.7.0-optimize)
-- [Camunda Optimize 3.12.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
-- [Camunda Optimize 3.13.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
-- [Camunda Optimize 3.14.4](https://github.com/camunda/camunda-optimize/releases/tag/3.14.4)
-- [Camunda Optimize 3.15.2](https://github.com/camunda/camunda-optimize/releases/tag/3.15.2)
+- Camunda Optimize 8.4.16, 8.5.13, 8.6.7, 8.7.0, 3.12.16, 3.13.13, 3.14.4, 3.15.2
 
 ## Notice 17
 
@@ -754,7 +775,7 @@ You are using Camunda Identity version 8.5.3 or previous.
 
 Camunda has provided the following release which contains a fix:
 
-- [Camunda Identity 8.5.4](https://github.com/camunda/identity/releases/tag/8.5.4)
+- Camunda Identity 8.5.4
 
 ## Notice 12
 

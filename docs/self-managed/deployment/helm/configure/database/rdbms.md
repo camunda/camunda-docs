@@ -19,6 +19,8 @@ Ensure that:
 - Required JDBC parameters (SSL/TLS, authentication, failover) are configured as needed.
 - The database user has permissions to create and modify schema objects if `autoDDL` is enabled.
 
+For a short checklist and troubleshooting steps you can run after configuring the database, see [validate RDBMS connectivity (Helm)](/self-managed/deployment/helm/configure/database/validate-rdbms.md).
+
 ## Configuration
 
 ### Parameters
@@ -130,6 +132,8 @@ orchestration:
         runAsUser: 1001
 ```
 
+After loading JDBC drivers into pods, run the validation checklist in [validate RDBMS connectivity](/self-managed/deployment/helm/configure/database/validate-rdbms.md) to confirm the application can load the driver, reach the database, and initialize schema.
+
 ### Option 2: Using a custom Docker image
 
 :::warning Important
@@ -227,3 +231,11 @@ org.springframework.web.servlet.DispatcherServlet - Completed initialization in 
 ```
 
 If the flush interval is long or the queue size is large, exported data may take several seconds to appear in the database.
+
+## Using AWS Aurora PostgreSQL (optional)
+
+If you are using AWS Aurora PostgreSQL as your relational database, you can configure it the same way as a standard PostgreSQL instance.
+
+Optionally, Camunda also supports the AWS JDBC wrapper driver, which provides additional features such as improved failover handling and IAM-based authentication.
+
+For details and examples, see [using AWS Aurora PostgreSQL with Camunda](../../../../concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql).
