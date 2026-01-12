@@ -22,7 +22,6 @@ Camunda 8 Run provides log files in the `c8run/logs` directory that can help dia
 1. Check if the default ports are already occupied:
    - `8080` – Camunda core (Operate, Tasklist, Identity, APIs)
    - `8086` – Connectors API
-   - `26500` – Zeebe gRPC gateway
    - `9600` – Prometheus metrics
    - `9200` – Elasticsearch (embedded)
    - `9300` – Elasticsearch cluster communication

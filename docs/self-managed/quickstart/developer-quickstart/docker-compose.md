@@ -70,7 +70,6 @@ The Orchestration Cluster is the core of Camunda 8, providing process automation
 | Tasklist                       | [http://localhost:8088/tasklist](http://localhost:8088/tasklist) | Complete user tasks in running process instances. See [User tasks](../../../components/modeler/bpmn/user-tasks/user-tasks.md).                                                                                             |
 | Orchestration Cluster Identity | [http://localhost:8088/identity](http://localhost:8088/identity) | Manage users and permissions for Orchestration Cluster (lightweight).                                                                                                                                                      |
 | Orchestration Cluster REST API | `http://localhost:8088/v2`                                       | REST API for process automation.                                                                                                                                                                                           |
-| Orchestration Cluster gRPC API | `localhost:26500`                                                | gRPC API for high-performance process automation.                                                                                                                                                                          |
 
 :::note
 By default, the Orchestration Cluster uses [basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication). The full configuration uses Keycloak for [Management Identity authentication](/self-managed/concepts/authentication/authentication-to-management-components.md).
@@ -203,7 +202,7 @@ To deploy from Desktop Modeler to the lightweight configuration:
 1. Open Desktop Modeler and click the deployment icon (rocket symbol).
 1. Select **Camunda 8 Self-Managed**.
 1. Configure the connection:
-   - **Cluster endpoint**: `http://localhost:26500`
+   - **Cluster endpoint**: `http://localhost:8088`
    - **Authentication**: Select **None** (no authentication required by default)
 1. Click **Deploy**.
 
@@ -216,7 +215,7 @@ To deploy from Desktop Modeler to the full configuration:
 1. Open Desktop Modeler and click the deployment icon.
 1. Select **Camunda 8 Self-Managed**.
 1. Configure the connection:
-   - **Cluster endpoint**: `http://localhost:26500`
+   - **Cluster endpoint**: `http://localhost:8088`
    - **Authentication**: Select **OAuth**
    - **OAuth URL**: `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
    - **Client ID**: `orchestration` (from `.env` file: `ORCHESTRATION_CLIENT_ID`)
