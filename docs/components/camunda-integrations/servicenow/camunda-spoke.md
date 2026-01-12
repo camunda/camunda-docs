@@ -26,7 +26,9 @@ Start a Camunda process from ServiceNow.
 
 **Variables:** (Optional) Define key-value pairs to pass as process variables in JSON format.  
  Example: `{ "invoiceId": "12345", "amount": 250 }`
-Code Example: 
+
+Code Example:
+
 ```
 const returnObject = {
     "request_item_number": fd_data.trigger.request_item.number.toString() || "",
@@ -36,14 +38,14 @@ return JSON.stringify(returnObject);
 ```
 
 :::tip
-
 When adding the JSON payload as code snippet, make sure to properly convert ServiceNow types into a JSON compatible format. In the example above, `sys_id` is a ServiceNow GUID, but needs to be a string for the JSON payload - thus the explicit conversion via `fd_data.trigger.request_item.sys_id.toString()`
+:::
 
 **Tenant ID:** (Optional) Provide the tenant identifier if your Camunda setup uses multi-tenancy. Leave blank for single-tenant setups.  
  Example: `hr-emea`
 
-**Operation Reference:** (Optional) Add a unique identifier (for example, camId) to correlate this ServiceNow flow execution with a running Camunda process.  
- Example: `camID`
+**Operation Reference:** (Optional) A reference key chosen by the user that will be available in Camunda as a reference.
+Example: `camID`
 
 **Wait for completion?:** (Optional) Enable this if you want the flow to pause until the Camunda process completes.
 
@@ -55,7 +57,7 @@ Broadcast BPMN signals to one or many Camunda process instances
 **Supported Inputs**
 
 **Signal Name:** The name of the Camunda signal to send. Must match the signal name defined in your BPMN process.  
- Example: `sla_limit _exceeded`
+ Example: `sla_limit_exceeded`
 
 **Variables:** (Optional) Define key-value pairs to pass as process variables in JSON format.  
  Example: `{ "invoiceId": "12345", "amount": 250 }`
@@ -71,10 +73,10 @@ Correlate a running Camunda process instance from ServiceNow.
 
 **Supported Inputs**
 
-**Message Name:** (Optional) The name of the BPMN message element to correlate with. Must match the message name defined in your process model.  
+**Message Name:** The name of the BPMN message element to correlate with. Must match the message name defined in your process model.  
  Example: `managerApprovalDone`
 
-**Correlation Key:** (Optional) The process variable value used to match the message to the correct process instance.  
+**Correlation Key:** The process variable value used to match the message to the correct process instance.  
  Example: `approvalID`
 
 ## Cancel Process
@@ -87,8 +89,8 @@ Cancel a Camunda process instance from ServiceNow when needed.
 **Process Instance Key:** The unique key identifying a running Camunda process instance to cancel.  
  Example: `2251799813685252`
 
-**Operation Reference:** (Optional) Add a unique identifier (for example, camId) to correlate this ServiceNow flow execution with a running Camunda process.  
- Example: `camID`
+**Operation Reference:** (Optional) A reference key chosen by the user that will be available in Camunda as a reference.
+Example: `camID`
 
 ## Starting a ServiceNow process from Camunda
 

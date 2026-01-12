@@ -82,5 +82,3 @@ To start ServiceNow flows from Camunda asynchronously, ensure the following:
 
 - ServiceNow Integration Hub Enterprise Pack
 - ServiceNow Integration Hub Flow Trigger – REST plugin
-
-See [Requesting and activating Integration Hub](https://www.servicenow.com/docs/bundle/yokohama-integrate-applications/page/administer/flow-designer/concept/request-ih-overview.html) for details.
