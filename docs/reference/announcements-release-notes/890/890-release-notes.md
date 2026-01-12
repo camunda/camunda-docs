@@ -141,6 +141,19 @@ You can also create global event templates that:
 
 <p class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/defining-templates.md)</p>
 
+#### Web Modeler: Invite users via email
+
+<!-- https://github.com/camunda/product-hub/issues/3187 -->
+
+As a Self-Managed administrator, you can now invite users to Web Modeler projects via email across all OIDC providers, eliminating the need to wait for users to log in first.
+
+- Email-based invitations work for all OIDC providers (Keycloak, Entra ID, Okta, Auth0), matching SaaS behavior.
+- Keycloak no longer receives special treatment; all providers follow the same invitation workflow.
+
+This enables faster project provisioning and a consistent administrator experience across identity providers.
+
+<p class="link-arrow">[Add users to projects](/components/modeler/web-modeler/collaboration/collaboration.md#add-users-to-projects)</p>
+
 ### Orchestration Cluster
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects data storage">Data</span><span class="badge badge--medium" title="This feature affects FEEL expressions">FEEL expressions</span></div>
