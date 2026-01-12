@@ -26,7 +26,7 @@ The summary header includes the following details about the batch operation:
 | End time         | The operation's end time, if applicable.                                             |
 | Actor            | The user or client responsible for triggering the operation.                         |
 
-If batch operation finished with the "failed" state, the header will also include error messages.
+If the batch operation finishes with the "failed" state, the header also includes error messages.
 
 ## Items table
 
