@@ -16,7 +16,7 @@ In the table, you can review these details about each batch operation:
 
 | Column      | Description                                                                          |
 | ----------- | ------------------------------------------------------------------------------------ |
-| Operation   | The type of operation performed                                                      |
+| Operation   | The type of operation performed.                                                     |
 | Batch state | The current state of the batch operation.                                            |
 | Items       | The number of successful, failed, and pending items included in the batch operation. |
 | Actor       | The user or client responsible for initiating the operation.                         |
