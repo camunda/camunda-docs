@@ -59,9 +59,6 @@ You can create multiple credentials for the same cluster:
 1. Enter a username.
 1. Generate and copy the password when it is displayed.
 
-<!-- TODO: Credential behavior \
- Confirm if there is a limit on the number of credentials per cluster -->
-
 ### Rotate credentials
 
 Ƭo rotate a password:
