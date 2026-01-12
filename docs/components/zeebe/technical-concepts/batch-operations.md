@@ -4,20 +4,7 @@ title: Batch operations
 description: How distributed batch operations work in Zeebe engine.
 ---
 
-## Overview
-
-Batch operations allow you to perform actions on multiple process instances efficiently. This is particularly useful when you need to:
-
-- Cancel hundreds of process instances after discovering a critical bug
-- Migrate thousands of running instances to a new process version
-- Modify process instances to skip activities across multiple instances
-- Resolve incidents across multiple process instances simultaneously
-
-Instead of manually operating on each instance, batch operations let you specify filter criteria and automatically identify and process matching instances across your cluster.
-
-### How it works at a high level
-
-When you create a batch operation, you provide filter criteria (such as process definition, version, or state) rather than a specific list of instances. The system then:
+When you create a [batch operation](../../concepts/batch-operations.md), you provide filter criteria (such as process definition, version, or state) rather than a specific list of instances. The system then:
 
 1. Distributes the operation across all partitions in your cluster
 2. Each partition queries the secondary database to find matching instances
@@ -32,7 +19,7 @@ Batch operations execute concurrently with regular partition processing—they d
 To use batch operations, you need:
 
 - A Zeebe cluster with secondary storage configured (Elasticsearch or OpenSearch)
-- Appropriate [authorization permissions](#authorization) for the operations you want to perform
+- Appropriate [authorization permissions](../../concepts/batch-operations.md#authorization) for the operations you want to perform
 - Access to one of the following:
   - [Operate UI](/components/operate/operate-introduction.md) (for basic operations)
   - [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) (for full lifecycle management)
@@ -247,26 +234,6 @@ Batch operation performance can be tracked via [Grafana dashboards](/self-manage
 - Error rates by type and partition
 - Resource utilization during batch processing
 - Secondary database query performance
-
-## Authorization
-
-To execute a batch operation, users need two sets of permissions:
-
-### Batch operation permissions
-
-- Permission to create the batch operation.
-- Permission to manage batch operations (suspend, resume, cancel).
-
-### Item-level permissions
-
-- Permission to read process instances and incidents from the secondary database.
-- Permission to execute the specific operation on each targeted process instance.
-
-The system stores authorization claims with the batch operation and uses them throughout its lifecycle.
-
-:::info
-See the [authorizations](/components/concepts/access-control/authorizations.md) and [how to create authorizations in the Identity UI](/components/identity/authorization.md).
-:::
 
 ## Performance impact
 

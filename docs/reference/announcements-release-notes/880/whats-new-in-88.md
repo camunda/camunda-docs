@@ -344,7 +344,7 @@ The following table summarizes where Orchestration Cluster Identity entities are
 
 #### Camunda 8 Self-Managed - Basic Authentication
 
-If you are using built-in user management (Basic Authentication), Tasklist and Operate specific built-in user management (using ES/OS as storage) is no longer supported.
+If you are using built-in user management (Basic Authentication), Tasklist and Operate specific built-in user management (using Elasticsearch/OpenSearch secondary storage) is no longer supported.
 
 - Administrators must migrate their users manually into the Orchestration Cluster.
 - You must ensure that **usernames are identical**, otherwise users will not be able to see their assigned tasks.
