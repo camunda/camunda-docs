@@ -32,6 +32,14 @@ A reference implementation is available via the Zeebe-maintained [Elasticsearch 
 
 Exporters reduce the need for Zeebe to store data indefinitely. Once data is no longer required internally, Zeebe queries its exporters to determine if it can be safely deleted. If so, it is permanently removed, reducing disk usage.
 
+"Once data is not needed by Zeebe anymore, it queries its exporters to know if it can be safely deleted, and if so, permanently erases it, thereby reducing disk usage." ~ source
+Is this true? Does it query exporters? I thought the position is marked by exporters and based on that the data marked as safe to delete
+2 replies
+Roman Smirnov
+  Jun 6th, 2025 at 10:38 PM
+Zeebe itself deletes data (from RocksDb) when it is not needed anymore, for example, when an instance completes. There is no dependency on exporters.
+I think this sentence is about log compaction (of the log stream). And there it is exactly as you said. The exporter marks/acknowledge the position it consumed, so that the log stream may compacted up to this position. Strictly speaking, the stream processor (in the engine) does the same, it marks the position it processed. Log compaction happens to the lowest processed/acknowledged position.
+
 :::note
 
 If no exporters are configured, Zeebe automatically deletes data when it's no longer needed. To retain historical data, you **must** configure an exporter to stream records to an external system.
