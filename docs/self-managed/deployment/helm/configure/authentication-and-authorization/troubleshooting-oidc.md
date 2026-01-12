@@ -101,15 +101,15 @@ java.lang.IllegalArgumentException: Request header is too large
 
 **Why this happens:** When using an external OIDC provider (for example, Microsoft Entra ID), the access token and related cookies (such as `IDENTITY_JWT`, `IDENTITY_REFRESH_JWT`, and Optimize cookies) can make the HTTP request header larger than the default limit of the embedded application server (Tomcat).
 
-By default, Tomcat rejects requests whose headers exceed this limit (typically 8 KB). As a result, the request never reaches Camunda, and the login fails with Request header is too large.
+By default, Tomcat rejects requests whose headers exceed this limit (typically 8 KB). As a result, the request never reaches Camunda, and the login fails with request header is too large.
 
 **How to fix:**
 
 Increase the maximum allowed HTTP request header size for the Identity service.
 
-1. Configure the Spring Boot property server.max-http-request-header-size (via the `SERVER_MAXHTTPREQUESTHEADERSIZE` environment variable) to a value higher than the default, for example 40KB.
+1. Configure the Spring Boot property `server.max-http-request-header-size` (via the `SERVER_MAXHTTPREQUESTHEADERSIZE` environment variable) to a value higher than the default, for example 40KB.
 
-2. If you are using the Helm chart, set this environment variable on the Identity deployment in your values.yaml, similar to other Identity environment variables:
+2. If you are using the Helm chart, set this environment variable on the Identity deployment in your `values.yaml`, similar to other Identity environment variables:
 
    ```yaml
    identity:
