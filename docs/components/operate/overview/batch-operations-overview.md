@@ -8,7 +8,7 @@ A high-level overview of the **Batch Operations** page in Camunda 8 Operate.
 
 ## About the Batch Operations page
 
-The **Batch Operations** page is a centralized view for monitoring all batch operations performed across any process instance.
+Use the **Batch Operations** page to monitor all batch operations performed across any process instance.
 
 ## Batch operations table
 
