@@ -25,15 +25,15 @@ Camunda follows an **"all LTS versions"** rule for database support. All listed 
 
 The following relational databases are officially supported when used as an RDBMS backend (including as secondary storage where applicable):
 
-| Database                 | Supported versions            |
-| :----------------------- | :---------------------------- |
-| PostgreSQL               | 14, 15, 16, 17, 18            |
-| Amazon Aurora PostgreSQL | 14 (deprecated), 15, 16, 17   |
-| MariaDB                  | 10.11, 11.4, 11.8             |
-| MySQL                    | 8.4                           |
-| Microsoft SQL Server     | 2019 (deprecated), 2022, 2025 |
-| Oracle                   | 19c, 21c, 23ai                |
-| H2                       | 2.x                           |
+| Database                 | Supported versions              |
+| ------------------------ | ------------------------------- |
+| PostgreSQL               | 14 (deprecated), 15, 16, 17, 18 |
+| Amazon Aurora PostgreSQL | 14 (deprecated), 15, 16, 17     |
+| MariaDB                  | 10.11, 11.4, 11.8               |
+| MySQL                    | 8.4                             |
+| Microsoft SQL Server     | 2019 (deprecated), 2022, 2025   |
+| Oracle                   | 19c, 23ai                       |
+| H2                       | 2.3, 2.4                        |
 
 :::info
 Changes to supported versions are announced in the [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
