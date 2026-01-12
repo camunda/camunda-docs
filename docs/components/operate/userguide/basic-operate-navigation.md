@@ -22,4 +22,4 @@ To view a deployed process, take the following steps:
 
 Running process instances appear in the **Process Instances** table below the process model. To inspect a specific instance, click the **Process Instance Key**.
 
-Here, observe details about the process instance, including the instance history and the variables attached to the instance. To visualize the performance of process instances, we recommend utilizing [Optimize](/components/optimize/what-is-optimize.md).
+Here, observe details about the process instance, including the instance history and the variables attached to the instance. To visualize process instance performance, use [Optimize](/components/optimize/what-is-optimize.md).
