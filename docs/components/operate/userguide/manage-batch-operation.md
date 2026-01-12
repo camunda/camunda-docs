@@ -8,7 +8,7 @@ Learn how to manage [batch operations](../../concepts/batch-operations.md) in Ca
 
 ## Overview
 
-You can suspend, resume, or cancel batch operations, if they're in one of the following [states](../../concepts/batch-operations.md#states):
+You can suspend, resume, or cancel batch operations when they're in one of the following [states](../../concepts/batch-operations.md#states):
 
 | State     | Available actions |
 | --------- | ----------------- |
