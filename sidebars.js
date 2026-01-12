@@ -1516,6 +1516,7 @@ module.exports = {
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/jwt-token-claims",
                       ],
                     },
                   ],
