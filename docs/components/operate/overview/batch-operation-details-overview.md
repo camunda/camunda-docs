@@ -41,4 +41,4 @@ In the table, you can review these details about each item in the batch operatio
 ## Next steps
 
 - [Learn how to monitor batch operations](../userguide/monitor-batch-operations.md).
-- [Learn how to manage batch operations](../userguide/monitor-batch-operations.md).
+- [Learn how to manage batch operations](../userguide/manage-batch-operation.md).
