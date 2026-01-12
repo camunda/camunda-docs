@@ -111,11 +111,11 @@ Increase the maximum allowed HTTP request header size for the Identity service.
 
 2. If you are using the Helm chart, set this environment variable on the Identity deployment in your values.yaml, similar to other Identity environment variables:
 
-```yaml
-identity:
-  env:
-    - name: SERVER_MAXHTTPREQUESTHEADERSIZE
-      value: "40KB"
-```
+   ```yaml
+   identity:
+     env:
+       - name: SERVER_MAXHTTPREQUESTHEADERSIZE
+         value: "40KB"
+   ```
 
 3. Upgrade or redeploy the release so the new environment variable takes effect.
