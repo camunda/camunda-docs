@@ -14,7 +14,7 @@ A finished process instance, meaning a canceled or a completed process instance,
 You may not access process instances after you've deleted them.
 :::
 
-## Delete process instance from Processes page
+## Delete a process instance from the Processes page
 
 To delete a process instance from the **Processes** page, take the following steps:
 
@@ -22,7 +22,7 @@ To delete a process instance from the **Processes** page, take the following ste
 2. Click the **Delete** button on any process instance you want to delete.
 3. Confirm the delete operation by clicking **Delete**.
 
-## Delete process instance from instance detail page
+## Delete a process instance from the instance detail page
 
 1. On the **Processes** page, in the **Filter** panel, apply the **Finished Instances** filter by checking the appropriate box.
 2. Navigate to the instance detail page by clicking the **Process Instance Key** of the process instance you want to delete.
