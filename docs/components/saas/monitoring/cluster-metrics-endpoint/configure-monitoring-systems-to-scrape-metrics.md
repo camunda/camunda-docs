@@ -4,7 +4,7 @@ title: Configure monitoring systems to scrape metrics
 description: Learn how to configure monitoring systems to scrape metrics from the Cluster Metrics endpoint in Camunda 8 SaaS.
 ---
 
-This guide explains how to configure monitoring systems to scrape metrics from a Camunda 8 SaaS cluster using the Cluster Metrics endpoint.
+Configure your monitoring systems to scrape metrics from a Camunda 8 SaaS cluster using the Cluster Metrics endpoint.
 
 ## Before you begin
 
@@ -92,9 +92,7 @@ Using an OpenTelemetry Collector allows you to normalize, enrich, and control th
 
 ### Push-only monitoring systems
 
-Some monitoring systems support push-based ingestion only.
-
-In this case, use the following approach:
+If your monitoring system only supports push-based ingestion, use the following approach:
 
 1. Deploy a self-managed OpenTelemetry Collector.
 1. Configure the collector to scrape the Cluster Metrics endpoint.

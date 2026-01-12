@@ -4,7 +4,7 @@ title: Set up the Cluster Metrics endpoint
 description: Learn how to set up the Cluster Metrics endpoint in Camunda 8 SaaS, manage credentials, and obtain the connection details required to integrate with your monitoring system.
 ---
 
-This guide explains how to set up and manage the Cluster Metrics endpoint for a Camunda 8 SaaS Orchestration cluster, including how to activate and deactivate the endpoint and obtain the connection details required to integrate it with an external monitoring system.
+Set up and manage the Cluster Metrics endpoint for a Camunda 8 SaaS Orchestration cluster, including how to activate and deactivate the endpoint and obtain the connection details required to integrate it with an external monitoring system.
 
 ## Before you begin
 
@@ -16,12 +16,12 @@ Before enabling the Cluster Metrics endpoint, ensure that:
 
 ## Enable Cluster Metrics endpoint
 
-You enable the Cluster Metrics endpoint per Orchestration cluster using Camunda Console or API. When the endpoint is enabled, Camunda provisions a secure, cluster-scoped metrics endpoint for external scraping.
+Enable the Cluster Metrics endpoint per Orchestration cluster via either the Camunda Console or API. When the endpoint is enabled, Camunda provisions a secure, cluster-scoped metrics endpoint for external scraping.
 
 To activate the endpoint:
 
-1. Sign in to **Camunda Console**.
-1. Go to **Clusters**.
+1. Sign in to Camunda Console.
+1. Navigate to **Clusters**.
 1. Select an existing cluster, or create a new one.
 1. Open the **Monitoring** tab for the cluster.
 1. Click **Activate monitoring endpoint**.
@@ -32,20 +32,20 @@ To activate the endpoint:
 
 When the Cluster Metrics endpoint is activated, the Console displays a dialog containing the authentication credentials.
 
-Copy and store the password securely.
-The password is shown **only once** and cannot be retrieved after you close the dialog. If the password is lost, you must generate a new one.
-
-Click **Got it** to close the dialog.
+1. Copy and store the password securely.
+1. Click **Got it** to close the dialog.
 
 After closing the dialog, you can find the metrics endpoint URL in the **Monitoring** tab for the cluster.
 
+:::caution
+Copy and safely store the password when it is displayed. The password is not shown again after you close the dialog. If you lose it, generate a new password.
+:::
+
 The following information is required to connect your monitoring system:
 
-- **Metrics endpoint URL**: HTTPS endpoint used by your monitoring system to scrape metrics
-- **Username**: Used for Basic Authentication
-- **Password**: Used for Basic Authentication
-
-Copy and safely store the password when it is displayed. The password is not shown again after you close the dialog. If you lose it, generate a new password.
+- **Metrics endpoint URL**: HTTPS endpoint used by your monitoring system to scrape metrics.
+- **Username**: Used for Basic Authentication.
+- **Password**: Used for Basic Authentication.
 
 ## Manage authentication credentials
 
@@ -55,7 +55,7 @@ Authentication credentials are created and managed in Camunda Console.
 
 You can create multiple credentials for the same cluster:
 
-1. In the **Monitoring** tab, click **Create new credentials**.
+1. On the **Monitoring** tab, click **Create new credentials**.
 1. Enter a username.
 1. Generate and copy the password when it is displayed.
 
@@ -66,7 +66,7 @@ You can create multiple credentials for the same cluster:
 
 Ƭo rotate a password:
 
-1. In the **Monitoring** tab, locate the credential.
+1. On the **Monitoring** tab, locate the credential.
 1. Click the **Generate password** icon next to the username.
 1. Generate and copy the new password when prompted.
 
@@ -78,30 +78,26 @@ To avoid interruptions during credential rotation, you can create multiple crede
 
 The Cluster Metrics endpoint enforces both authentication and network restrictions.
 
-- **Authentication**  
-  The endpoint uses Basic Authentication.
-- **IP allowlisting**  
-  The endpoint enforces the cluster-level IP allowlist. Requests from non-allowlisted IP addresses are rejected. If an IP allowlist is configured for the cluster, you must add the source IP addresses of your monitoring system to the allowlist to access the endpoint.
+| Restriction     | Description                                                                                                                                                                                                                                                                                                      |
+| :-------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authentication  | The endpoint uses Basic Authentication.                                                                                                                                                                                                                                                                          |
+| IP allowlisting | The endpoint enforces the cluster-level IP allowlist. <ul><li><p>Requests from non-allowlisted IP addresses are rejected.</p></li><li><p>If an IP allowlist is configured for the cluster, you must add the source IP addresses of your monitoring system to the allowlist to access the endpoint.</p></li></ul> |
 
 ### Error responses
 
 The Cluster Metrics endpoint returns standard HTTP status codes to indicate access and availability issues:
 
-| Scenario                                      | HTTP status code          |
-| --------------------------------------------- | ------------------------- |
-| Request from a non-allowlisted IP address     | `403 Forbidden`           |
-| Invalid or missing authentication credentials | `401 Unauthorized`        |
-| Request rate exceeds allowed limits           | `429 Too Many Requests`   |
-| Metrics endpoint is temporarily unavailable   | `503 Service Unavailable` |
-| Request times out due to high load            | `504 Gateway Timeout`     |
+| Scenario                                       | HTTP status code          |
+| :--------------------------------------------- | :------------------------ |
+| Request from a non-allowlisted IP address.     | `403 Forbidden`           |
+| Invalid or missing authentication credentials. | `401 Unauthorized`        |
+| Request rate exceeds allowed limits.           | `429 Too Many Requests`   |
+| Metrics endpoint is temporarily unavailable.   | `503 Service Unavailable` |
+| Request times out due to high load.            | `504 Gateway Timeout`     |
 
 ## Disable the Cluster Metrics endpoint
 
-You can disable the Cluster Metrics endpoint if you no longer want to expose cluster metrics externally.
-
-### How to disable the Cluster Metrics endpoint
-
-You can disable the endpoint in either of the following ways:
+If you no longer want to expose cluster metrics externally, you can disable the Cluster Metrics endpoint:
 
 - Click **Deactivate** in the **Monitoring** tab, or
 - Delete all credentials associated with the endpoint
