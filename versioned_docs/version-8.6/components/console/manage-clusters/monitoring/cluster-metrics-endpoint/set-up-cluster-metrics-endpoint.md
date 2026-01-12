@@ -37,7 +37,7 @@ When the Cluster Metrics endpoint is activated, the Console displays a dialog co
 
 After closing the dialog, you can find the metrics endpoint URL in the **Monitoring** tab for the cluster.
 
-:::caution
+:::warning
 Copy and safely store the password when it is displayed. The password is not shown again after you close the dialog. If you lose it, generate a new password.
 :::
 
