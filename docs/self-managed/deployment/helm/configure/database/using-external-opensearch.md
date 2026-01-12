@@ -5,7 +5,11 @@ title: Use Amazon OpenSearch Service with the Helm chart
 description: Learn how to connect a Camunda 8 Self-Managed Helm chart deployment to an external Amazon OpenSearch Service instance.
 ---
 
-Learn how to configure and use Amazon OpenSearch with the Helm chart.
+Learn how to configure and use Amazon OpenSearch with the Helm chart. When configured, OpenSearch is used as a secondary storage backend for indexing and search. See [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) for the canonical definition.
+
+:::note
+Secondary storage is configurable. For supported components, you can use an RDBMS-based secondary store instead. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](/reference/glossary.md#rdbms).
+:::
 
 ## About this guide
 
