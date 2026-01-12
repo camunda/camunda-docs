@@ -38,6 +38,9 @@ Consider using [Camunda 8 SaaS](https://accounts.camunda.io/signup).
 - AWS does not support block storage options in combination with ECS Services and Fargate. For a detailed overview, have a look at the [AWS documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
 - Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a Zeebe broker. Autoscaling may not have effects as the brokers have to be explicitly joined into the Zeebe Cluster or when removed result in partitions or data becoming inaccessible.
 - An extra developed node-id provider is integrated into Zeebe that assigns an available node-id based on Zeebe cluster information, whereas this is typically provided statically.
+- This guide focuses on Aurora PostgreSQL for the secondary datastorage as it's a newly supported offering by Camunda 8.9 and potentially more familiar for customers.
+  - You may still use Elasticsearch / OpenSearch but need to adjust the required configuration. More information about the configuration can be found in [our documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
+  - Examples for how to deploy AWS OpenSearch can be found in other existing reference architectures for AWS.
 
 ## Outcome
 
@@ -420,14 +423,6 @@ Alternatives are for example:
 - AWS Step function that does the seeding
 
 It was implemented as a `local exec` with an ECS task since we wanted to provide a fully working reference end-to-end while still relying on something like IAM authentication.
-
-#### Elasticsearch / OpenSearch
-
-The guide focuses on Aurora PostgreSQL as it's a newly supported offering by Camunda 8.9 and potentially more familiar for customers.
-
-You may still use Elasticsearch / OpenSearch but need to adjust the required configuration. More information about the configuration can be found in [our documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
-
-Examples for how to deploy AWS OpenSearch can be found in other reference architectures.
 
 #### Rolling deployments
 
