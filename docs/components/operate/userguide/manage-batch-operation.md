@@ -18,7 +18,7 @@ You can suspend, resume, or cancel batch operations when they're in one of the f
 
 ## Before you begin
 
-To follow the steps in this guide, you must be [authorized to update batch operations](../overview/access-control.md#optional-authorizations).
+Before you begin, ensure you're [authorized to update batch operations](../overview/access-control.md#optional-authorizations).
 
 ## Manage a batch operation
 
