@@ -38,7 +38,7 @@ Consider using [Camunda 8 SaaS](https://accounts.camunda.io/signup).
 - AWS does not support block storage options in combination with ECS Services and Fargate. For a detailed overview, have a look at the [AWS documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
 - Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a Zeebe broker. Autoscaling may not have effects as the brokers have to be explicitly joined into the Zeebe Cluster or when removed result in partitions or data becoming inaccessible.
 - An extra developed node-id provider is integrated into Zeebe that assigns an available node-id based on Zeebe cluster information, whereas this is typically provided statically.
-- This guide focuses on Aurora PostgreSQL for the secondary datastorage as it's a newly supported offering by Camunda 8.9 and potentially more familiar for customers.
+- This guide focuses on Aurora PostgreSQL for the secondary datastorage as it's a newly supported offering by Camunda 8 and potentially more familiar for customers.
   - You may still use Elasticsearch / OpenSearch but need to adjust the required configuration. More information about the configuration can be found in [our documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
   - Examples for how to deploy AWS OpenSearch can be found in other existing reference architectures for AWS.
 
@@ -221,7 +221,7 @@ If not otherwise indicated, the `.tf` file is corresponding to the [root workspa
 
 - ECS Service and Task definition
   - the task definition contains the base setup for the Orchestration Cluster concerning the node-id provider and the EFS configuration as well as initial cluster endpoint. Zeebe Cluster size is automatically set to the task size.
-  - Camunda 8.9 supports for the initial contact points to resolve a DNS name with multi A records instead of having to define every single exact Zeebe broker address.
+  - Camunda 8 supports for the initial contact points to resolve a DNS name with multi A records instead of having to define every single exact Zeebe broker address.
 - Task specific IAM role to allow access to AWS services isolated to this component
   - e.g. S3 bucket or Aurora PostgreSQL access
 - S3 bucket for the node-id provider functionality
