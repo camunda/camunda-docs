@@ -27,7 +27,7 @@ Some elements do not support specific modifications:
 
 ## Enter batch modification mode
 
-1. On the **Processes** page, in the **Filter** panel, select the **Name** and **Version** of the process you want modify.
+1. On the **Processes** page, in the **Filter** panel, select the **Name** and **Version** of the process you want to modify.
 2. Select the flow node containing the process instances you intend to move.
 3. In the **Process Instances** table, start selecting which instances you want to move. As you select instances, the process instance toolbar will appear and you will now see the **Move** action become available.
 4. Once you are ready to continue, click **Move**. An information modal will appear indicating that you are switching to process instance batch move mode.
