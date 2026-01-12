@@ -9,7 +9,7 @@ Learn how to delete a specific process or decision definition version in Camunda
 ## Delete process definition
 
 :::warning
-Deleting a process definition will permanently remove it and will impact the following:
+Deleting a process definition permanently removes it and has the following effects:
 
 - All the deleted process definition's finished process instances will be deleted from the application.
 - All decision and process instances referenced by the deleted process instances will be deleted.
