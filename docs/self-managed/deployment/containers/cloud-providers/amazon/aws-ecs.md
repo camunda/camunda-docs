@@ -485,6 +485,8 @@ You can easily add TLS by attaching an AWS Certificate Manager (ACM) certificate
 
 Information on configuring a custom domain and understanding the ALB DNS name is available in the [Application Load Balancer documentation](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#dns-name).
 
+Without these additions, information is transmitted in plaintext and is therefore insecure.
+
 :::
 
 1. Navigate to the Terraform folder:
