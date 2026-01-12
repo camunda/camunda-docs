@@ -4,23 +4,17 @@ title: RDBMS version support policy
 description: Defines Camunda’s official RDBMS support policy, including supported databases, LTS-based version rules, managed PostgreSQL guidance, JDBC driver expectations, and component compatibility.
 ---
 
-Confirm which relational databases and versions Camunda supports for **Camunda 8 Self-Managed** and **Camunda 8 Run**, including lifecycle rules, managed PostgreSQL guidance, JDBC driver responsibilities, and component compatibility.
-
-:::caution Work in progress
-The RDBMS support policy is a work in progress. Content may change until finalized in a future alpha or minor release.
-:::
+Confirm which relational databases and versions Camunda supports for **Camunda 8 Self-Managed**, including lifecycle rules, managed PostgreSQL guidance, JDBC driver responsibilities, and component compatibility.
 
 ## Scope and applicability
 
 This policy applies to:
 
 - **Camunda 8 Self-Managed** deployments.
-- **Camunda 8 Run**, where components support using an RDBMS as secondary storage.
 
 It covers relational databases used for:
 
 - [Secondary storage for the Orchestration Cluster](/self-managed/concepts/secondary-storage/index.md)
-- Tasklist and Operate storage (where supported for a given release)
 - [Web Modeler](/self-managed/components/modeler/web-modeler/configuration/database.md)
 
 :::info
@@ -31,14 +25,15 @@ Camunda follows an **"all LTS versions"** rule for database support. All listed 
 
 The following relational databases are officially supported when used as an RDBMS backend (including as secondary storage where applicable):
 
-| Database             | Supported versions      |
-| :------------------- | :---------------------- |
-| PostgreSQL           | 14, 15, 16, 17, 18      |
-| MariaDB              | 10.6, 10.11, 11.4, 11.8 |
-| MySQL                | 8.4, 9.5                |
-| Microsoft SQL Server | 2019, 2022, 2025        |
-| Oracle               | 19c, 21c, 23ai          |
-| H2                   | 2.x                     |
+| Database                 | Supported versions            |
+| :----------------------- | :---------------------------- |
+| PostgreSQL               | 14, 15, 16, 17, 18            |
+| Amazon Aurora PostgreSQL | 14 (deprecated), 15, 16, 17   |
+| MariaDB                  | 10.11, 11.4, 11.8             |
+| MySQL                    | 8.4                           |
+| Microsoft SQL Server     | 2019 (deprecated), 2022, 2025 |
+| Oracle                   | 19c, 21c, 23ai                |
+| H2                       | 2.x                           |
 
 :::info
 Changes to supported versions are announced in the [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
@@ -48,21 +43,18 @@ Changes to supported versions are announced in the [release notes](/reference/an
 
 For **new deployments**, standardize on **one of the latest two supported versions** of a given database whenever possible. Older supported versions remain valid for existing deployments but are not recommended for new deployments.
 
-## Managed and compatible PostgreSQL services
+## Managed PostgreSQL services
 
-Camunda supports **PostgreSQL as a database engine**, not individual managed service implementations.
+Camunda supports PostgreSQL as a database engine, not individual managed service implementations.
 
-PostgreSQL-compatible managed services (for example, AWS Aurora PostgreSQL or Azure Database for PostgreSQL) are expected to work if they are fully compatible with the supported PostgreSQL versions listed above.
+Managed PostgreSQL services are supported when:
 
-This means:
+- They are fully compatible with the PostgreSQL versions listed in this policy, and
+- The service provider guarantees compatibility and support for those versions.
 
-- Camunda does not test or certify individual managed service implementations.
-- Service-provider-specific operational behavior and service characteristics remain the responsibility of the service provider.
-- If a managed service is fully compatible with a supported PostgreSQL version, it is considered supported from Camunda’s perspective.
+Provider-specific operational behavior and service characteristics remain the responsibility of the service provider.
 
-:::note
-This support model is similar to Camunda’s Kubernetes support policy: Camunda supports the underlying technology and versions, while cloud providers are responsible for ensuring their managed offerings remain compatible.
-:::
+Amazon Aurora PostgreSQL is listed separately because it is explicitly tested by Camunda, while other managed PostgreSQL services are supported based on compatibility guarantees provided by the service provider.
 
 ## New version support
 
@@ -73,10 +65,6 @@ New database versions are added based on the following criteria:
 - **Validation:** The version must be tested and validated across relevant Camunda components.
 
 If the availability window is missed, support is deferred to a subsequent minor release.
-
-:::note
-Exceptions may be approved by engineering for strategic reasons or customer demand.
-:::
 
 ## Version deprecation and removal
 
@@ -93,7 +81,7 @@ Camunda may remove support for a version if it contains known issues that preven
 
 ### PostgreSQL
 
-Camunda supports multiple active PostgreSQL major versions concurrently based on the all LTS versions rule.
+Camunda supports multiple active PostgreSQL major versions concurrently.
 
 ### MariaDB
 
@@ -111,10 +99,6 @@ Camunda supports SQL Server versions that are in mainstream or extended vendor s
 
 Camunda supports **Oracle LTS releases**.
 
-:::note
-Oracle JDBC drivers are proprietary and must be provided by you at runtime.
-:::
-
 ### H2
 
 H2 is supported for development, testing, and evaluation only. Production use is not recommended.
@@ -129,12 +113,12 @@ Driver versions are not pinned as a formal support guarantee unless explicitly s
 
 The following JDBC drivers are included in the Camunda application images:
 
-| Database             | Driver artifact                        | Version       | Notes                                             |
-| :------------------- | :------------------------------------- | :------------ | :------------------------------------------------ |
-| PostgreSQL           | `org.postgresql:postgresql`            | 42.7.8        | Bundled in Camunda images.                        |
-| MariaDB              | `org.mariadb.jdbc:mariadb-java-client` | 3.5.7         | Bundled in Camunda images.                        |
-| Microsoft SQL Server | `com.microsoft.sqlserver:mssql-jdbc`   | 12.10.2.jre11 | Bundled in Camunda images (**JRE 11**).           |
-| H2                   | `com.h2database:h2`                    | 2.3.232       | Bundled for development, testing, and evaluation. |
+| Database             | Driver artifact                        | Version       | Notes                                   |
+| :------------------- | :------------------------------------- | :------------ | :-------------------------------------- |
+| PostgreSQL           | `org.postgresql:postgresql`            | 42.7.8        | Bundled in Camunda images.              |
+| MariaDB              | `org.mariadb.jdbc:mariadb-java-client` | 3.5.7         | Bundled in Camunda images.              |
+| Microsoft SQL Server | `com.microsoft.sqlserver:mssql-jdbc`   | 12.10.2.jre11 | Bundled in Camunda images (**JRE 11**). |
+| H2                   | `com.h2database:h2`                    | 2.3.232       | Bundled in Camunda images.              |
 
 ### User-supplied drivers
 
@@ -147,8 +131,6 @@ The following databases require you to provide a compatible JDBC driver at runti
 
 :::info
 Camunda validates driver compatibility in CI by testing against the oldest and newest supported database versions. A single driver version is expected to work across the supported database versions listed on this page.
-
-Driver versions are not pinned. Use the latest driver version compatible with your database and environment.
 
 For deployment instructions, see [loading JDBC drivers into pods](/self-managed/deployment/helm/configure/database/rdbms.md#loading-jdbc-drivers-into-pods).
 :::
@@ -163,18 +145,18 @@ For deployment instructions, see [loading JDBC drivers into pods](/self-managed/
 
 This table shows RDBMS support status by component (including RDBMS as secondary storage where applicable):
 
-| Component                         | Support status     | Notes                                                                                                             |
-| :-------------------------------- | :----------------- | :---------------------------------------------------------------------------------------------------------------- |
-| **Orchestration Cluster (Zeebe)** | ✅ Fully supported | Supports RDBMS as secondary storage.                                                                              |
-| Tasklist                          | ✅ Fully supported | All functionality available.                                                                                      |
-| Operate                           | ⚠️ Limited         | Under active development. Functionality is limited in **8.9 alpha**.                                              |
-| Optimize                          | ❌ Not supported   | Out of scope for **Camunda 8.9** RDBMS support.                                                                   |
-| Web Modeler                       | ✅ Fully supported | See [Web Modeler database configuration](/self-managed/components/modeler/web-modeler/configuration/database.md). |
-| Identity                          | ✅ Fully supported | All functionality available.                                                                                      |
-| Management API (REST API)         | ✅ Fully supported | All functionality available.                                                                                      |
+| Component                 | Support status     | Notes                                                                                                             |
+| :------------------------ | :----------------- | :---------------------------------------------------------------------------------------------------------------- |
+| **Orchestration Cluster** | ✅ Fully supported | Supports RDBMS as secondary storage.                                                                              |
+| Tasklist UI               | ✅ Fully supported | All functionality available.                                                                                      |
+| Operate UI                | ⚠️ Limited         | Under active development. Functionality is limited in **8.9 alpha**.                                              |
+| Optimize                  | ❌ Not supported   | Out of scope for RDBMS support.                                                                                   |
+| Web Modeler               | ✅ Fully supported | See [Web Modeler database configuration](/self-managed/components/modeler/web-modeler/configuration/database.md). |
+| Identity                  | ✅ Fully supported | All functionality available.                                                                                      |
+| Management API (REST API) | ✅ Fully supported | All functionality available.                                                                                      |
 
 :::note
-"Orchestration Cluster (Zeebe)" refers to the orchestration runtime components. UI products are listed separately because their RDBMS support and maturity can differ by release.
+"Orchestration Cluster" refers to the secondary storage of the Orchestration Cluster. UI products are listed separately because their RDBMS support and maturity can differ by the alpha release.
 :::
 
 ## Known limitations
