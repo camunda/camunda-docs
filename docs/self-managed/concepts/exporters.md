@@ -30,15 +30,11 @@ Once configured, the exporter starts receiving records the next time Zeebe is re
 
 A reference implementation is available via the Zeebe-maintained [Elasticsearch exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter).
 
-Exporters reduce the need for Zeebe to store data indefinitely. Once data is no longer required internally, Zeebe queries its exporters to determine if it can be safely deleted. If so, it is permanently removed, reducing disk usage.
+Zeebe manages data deletion through two distinct mechanisms to reduce disk usage:
 
-"Once data is not needed by Zeebe anymore, it queries its exporters to know if it can be safely deleted, and if so, permanently erases it, thereby reducing disk usage." ~ source
-Is this true? Does it query exporters? I thought the position is marked by exporters and based on that the data marked as safe to delete
-2 replies
-Roman Smirnov
-  Jun 6th, 2025 at 10:38 PM
-Zeebe itself deletes data (from RocksDb) when it is not needed anymore, for example, when an instance completes. There is no dependency on exporters.
-I think this sentence is about log compaction (of the log stream). And there it is exactly as you said. The exporter marks/acknowledge the position it consumed, so that the log stream may compacted up to this position. Strictly speaking, the stream processor (in the engine) does the same, it marks the position it processed. Log compaction happens to the lowest processed/acknowledged position.
+1. **Internal state deletion**: Zeebe automatically deletes data from its internal state (RocksDB) when it's no longer operationally required, such as when a process instance completes. This deletion is independent of exporters.
+
+2. **Log stream compaction**: The event log stream (which stores all runtime and historical records) is compacted based on positions acknowledged by exporters. Each exporter acknowledges the position of the last record it has successfully processed. The stream processor also marks the position it has processed. Log compaction then occurs up to the **lowest acknowledged position** across all exporters and the stream processor, ensuring the log can be safely truncated without losing data that exporters haven't yet consumed.
 
 :::note
 
