@@ -4,7 +4,7 @@ title: "Amazon ECS"
 description: "Learn how to install Camunda 8 on AWS ECS."
 ---
 
-This guide provides a detailed walkthrough for installing the Camunda 8 Orchestration Cluster on AWS Elastic Container Service (ECS) using Fargate and Aurora PostgreSQL. It leverages AWS managed services, using ECS as the platform and Fargate as the runtime. Finally, you will verify that your Self-Managed Camunda 8 environment is deployed correctly and that all required connections are functioning as expected.
+This guide provides a detailed walkthrough for installing the [Camunda 8 Orchestration Cluster](/docs/reference/glossary.md#orchestration-cluster) on AWS Elastic Container Service (ECS) using Fargate and Aurora PostgreSQL. It leverages AWS managed services, using ECS as the platform and Fargate as the runtime. Finally, you will verify that your Self-Managed Camunda 8 environment is deployed correctly and that all required connections are functioning as expected.
 
 This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) and Connectors for Camunda 8. Web Modeler, Optimize, and Console are currently not covered.
 
@@ -13,14 +13,12 @@ If you are new to AWS ECS or Terraform, consider reviewing the [AWS ECS document
 :::
 
 :::note Using other cloud providers
-This guide is based on tools and services provided by AWS and relies on AWS offerings to work. Achieving similar on different cloud providers may be possible but requires a rework for said cloud provider. The ideas used in this guide and deployment are applicable though but again some of the required features are currently limited to AWS offerings.
-
-When using a different cloud provider, you are responsible for configuring and maintaining the resulting infrastructure. Support is limited to questions related to this guide—not to the specific tools or services of your chosen cloud provider.
+The concepts described in this guide can be applied to other cloud providers; however, you are responsible for the implementation and maintenance, and compatibility or correct behavior is not guaranteed. Certain implementations like the node-id provider are currently limited to S3.
 :::
 
 ## Considerations
 
-:::warning
+:::warning 8.9-alpha3 subject to changes
 This is currently in active development and released as part of the 8.9-alpha3 release. Contents of the documentation and resulting work may still change till the final 8.9 release.
 :::
 
@@ -34,11 +32,10 @@ Consider using [Camunda 8 SaaS](https://accounts.camunda.io/signup).
 
 - Unlike our other guides, which usually separate infrastructure setup from the deployment of Camunda 8, this is not the case with ECS. Since the infrastructure is largely managed by AWS, deploying Camunda 8 and provisioning the required AWS resources happens in a single step.
 - This work focuses on AWS ECS with Fargate but can work with managed instances for more predictable performance. You can find more information about how to migrate from Fargate to managed instances from the [AWS migration guide](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/migrate-fargate-to-managed-instances.html).
-- The target was a fully managed experience with AWS Fargate instead of EC2. With EC2 as target runtime, where a customer is fully responsible for the EC2 instances and managing those, different approaches following the "normal" deployment mode outlined in manual setup or derived from Kubernetes is possible by utilizing block storages and having a distinctive EC2 instance per Zeebe broker.
-- This work relies on a shared multi-AZ replicated EFS network disk
+- This work relies on a shared [multi-AZ replicated](https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html) EFS network disk
   - Cost and performance may differ from a related Kubernetes setup with block storage
   - The EFS volume is shared among all brokers to support the native ECS Service capabilities
-- AWS does not support block storage options in combination with ECS Services and Fargate
+- AWS does not support block storage options in combination with ECS Services and Fargate. For a detailed overview, have a look at the [AWS documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
 - Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a Zeebe broker. Autoscaling may not have effects as the brokers have to be explicitly joined into the Zeebe Cluster or when removed result in partitions or data becoming inaccessible.
 - An extra developed node-id provider is integrated into Zeebe that assigns an available node-id based on Zeebe cluster information, whereas this is typically provided statically.
 
@@ -484,6 +481,16 @@ The Terraform flow is as follows:
 ## 4. Verify connectivity to Camunda 8
 
 Using Terraform, you can obtain the HTTP endpoint of the Application Load Balancer and interact with Camunda through the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+:::info HTTPS
+
+To keep dependencies minimal and non-blocking for a quick start, this reference architecture omits a custom domain and TLS configuration.
+
+You can easily add TLS by attaching an AWS Certificate Manager (ACM) certificate to the Application Load Balancer (ALB). For details, see the AWS documentation on [creating an HTTPS listener](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html).
+
+Information on configuring a custom domain and understanding the ALB DNS name is available in the [Application Load Balancer documentation](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#dns-name).
+
+:::
 
 1. Navigate to the Terraform folder:
 
