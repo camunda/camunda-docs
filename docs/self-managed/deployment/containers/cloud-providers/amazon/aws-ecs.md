@@ -8,19 +8,47 @@ This guide provides a detailed walkthrough for installing the Camunda 8 Orchestr
 
 This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) and Connectors for Camunda 8. Web Modeler, Optimize, and Console are currently not covered.
 
+:::tip New to AWS ECS?
+If you are new to AWS ECS or Terraform, consider reviewing the [AWS ECS documentation](https://docs.aws.amazon.com/ecs/) and [Terraform documentation](https://developer.hashicorp.com/terraform/docs) before proceeding with this guide.
+:::
+
 :::note Using other cloud providers
 This guide is based on tools and services provided by AWS and relies on AWS offerings to work. Achieving similar on different cloud providers may be possible but requires a rework for said cloud provider. The ideas used in this guide and deployment are applicable though but again some of the required features are currently limited to AWS offerings.
 
 When using a different cloud provider, you are responsible for configuring and maintaining the resulting infrastructure. Support is limited to questions related to this guide—not to the specific tools or services of your chosen cloud provider.
 :::
 
-:::danger Cost management
-Following this guide will incur costs on your cloud provider account—primarily for ECS and AWS Aurora. Visit AWS and their [pricing calculator](https://calculator.aws/#/) for detailed cost estimates, as pricing varies by region.
+## Considerations
+
+:::warning
+This is currently in active development and released as part of the 8.9-alpha3 release. Contents of the documentation and resulting work may still change till the final 8.9 release.
 :::
 
-## Architecture
+:::danger Cost management
+This guide will result in costs on your cloud provider account—primarily for ECS and AWS Aurora. Visit AWS and their [pricing calculator](https://calculator.aws/#/) for detailed cost estimates, as pricing varies by region.
+:::
 
-The architecture outlined below describes a standard three-node deployment, distributed across three [availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) within a single AWS region. It includes a managed Aurora PostgreSQL instance deployed under the same conditions. This approach ensures high availability and redundancy in case of a zone failure.
+:::tip Looking for a simpler setup?
+Consider using [Camunda 8 SaaS](https://accounts.camunda.io/signup).
+:::
+
+- Unlike our other guides, which usually separate infrastructure setup from the deployment of Camunda 8, this is not the case with ECS. Since the infrastructure is largely managed by AWS, deploying Camunda 8 and provisioning the required AWS resources happens in a single step.
+- This work focuses on AWS ECS with Fargate but can work with managed instances for more predictable performance. You can find more information about how to migrate from Fargate to managed instances from the [AWS migration guide](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/migrate-fargate-to-managed-instances.html).
+- The target was a fully managed experience with AWS Fargate instead of EC2. With EC2 as target runtime, where a customer is fully responsible for the EC2 instances and managing those, different approaches following the "normal" deployment mode outlined in manual setup or derived from Kubernetes is possible by utilizing block storages and having a distinctive EC2 instance per Zeebe broker.
+- This work relies on a shared multi-AZ replicated EFS network disk
+  - Cost and performance may differ from a related Kubernetes setup with block storage
+  - The EFS volume is shared among all brokers to support the native ECS Service capabilities
+- AWS does not support block storage options in combination with ECS Services and Fargate
+- Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a Zeebe broker. Autoscaling may not have effects as the brokers have to be explicitly joined into the Zeebe Cluster or when removed result in partitions or data becoming inaccessible.
+- An extra developed node-id provider is integrated into Zeebe that assigns an available node-id based on Zeebe cluster information, whereas this is typically provided statically.
+
+## Outcome
+
+The result is a fully functioning Camunda Orchestration Cluster deployed in a high-availability setup using AWS ECS with Fargate and a managed Aurora PostgreSQL instance using IAM authentication. All ECS tasks share a single EFS volume dedicated to Camunda.
+
+### Architecture
+
+The architecture outlined below describes a standard Zeebe three-node deployment, distributed across three [availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) within a single AWS region. It includes a managed Aurora PostgreSQL instance deployed under the same conditions. This approach ensures high availability and redundancy in case of a zone failure.
 
 <!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ -->
 <!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder -->
@@ -29,7 +57,7 @@ _Infrastructure diagram for a 3 Zeebe Broker ECS architecture (click the image t
 
 [![AWS ECS Architecture](./assets/architecture.jpg)](./assets/architecture.pdf)
 
-This setup includes:
+After completing this guide, you will have:
 
 - A [Virtual Private Cloud](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) (VPC), which is a logically isolated virtual network.
   - _For simplification the private and public were not visualized in the diagram above._
@@ -52,40 +80,18 @@ This setup includes:
 
 Both subnet types are distributed across three availability zones in a single AWS region, supporting a high-availability architecture.
 
-:::note Single deployment
-You can also run this setup using scaled via the ECS Service to a single resulting task. However, in the event of a zone failure, the entire environment would become unreachable.
+:::note
+You can also run this setup scaled via the ECS Service to a single resulting task. However, in the event of a zone failure, the entire environment would become unreachable.
 :::
 
-## Requirements
+## Prerequisites
 
-- An AWS account to provision resources.
-  - At a high level, permissions are needed for **ecs**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **rds** services.
-- Terraform (v1.7 or later)
-- AWS CLI for `local-exec` to trigger the initial Aurora PostgreSQL user seeding
+- **AWS account** – An AWS account to provision resources with permissions for **ecs**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **rds** services.
+  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/example/policy.json).
+- **Terraform** – Infrastructure as code tool (v1.7 or later). [Install Terraform](https://developer.hashicorp.com/terraform/install).
+- **AWS CLI** – Command-line tool to manage AWS resources, used for `local-exec` to trigger the initial Aurora PostgreSQL user seeding. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 
-For the tool versions used in testing, see the repository’s [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file. It contains an up-to-date list of versions used for testing.
-
-## Outcome
-
-The result is a fully functioning Camunda Orchestration Cluster deployed in a high-availability setup using AWS ECS with Fargate and a managed Aurora PostgreSQL instance using IAM authentication.
-
-All ECS tasks share a single EFS volume dedicated to Camunda.
-
-## Considerations
-
-:::warning
-This is currently in active development and released as part of the 8.9-alpha3 release. Contents of the documentation and resulting work may still change till the final 8.9 release.
-:::
-
-- Unlike our other guides, which usually separate infrastructure setup from the deployment of Camunda 8, this is not the case with ECS. Since the infrastructure is largely managed by AWS, deploying Camunda 8 and provisioning the required AWS resources happens in a single step.
-- This work focuses on AWS ECS with Fargate but can work with managed instances for a more predictable performance. You can find more information about how to migrate from Fargate to managed instances from the [AWS migration guide](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/migrate-fargate-to-managed-instances.html).
-- The target was a fully managed experience with AWS Fargate instead of EC2. With EC2 as target runtime, where a customer is fully responsible for the EC2 instances and managing those, different approaches following the "normal" deployment mode outlined in manual setup or derived from Kubernetes is possible by utilizing block storages and having a distinctive EC2 instance per Zeebe broker.
-- This work relies on a shared a multi-AZ replicated EFS network disk
-  - cost and performance may differ from a related Kubernetes setup with block storage
-  - the EFS volume is shared among all brokers to support the native ECS Service capabilities
-- AWS does not support block storage options in combination with ECS Services and Fargate
-- Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a Zeebe broker. Autoscaling may not have effects as the brokers have to be explicitly joined into the Cluster or when removed result in partitions or data becoming inaccessible.
-- An extra developed node-id provider is integrated into Zeebe that assigns an available node-id based on Zeebe cluster information, whereas this is typically provided statically.
+For the exact tool versions used during testing, refer to the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
 
 ## 1. Configure AWS and initialize Terraform
 
@@ -102,7 +108,7 @@ Start by downloading a copy of the reference architecture from the GitHub reposi
 The reference architecture repository allows you to reuse and extend the provided Terraform examples. This flexible implementation avoids the constraints of relying on third-party-maintained Terraform modules:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/procedure/get-your-copy.sh <!-- TODO: create file -->
+https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/procedure/get-your-copy.sh
 ```
 
 With the reference architecture in place, you can proceed with the remaining steps in this documentation. Make sure you're in the correct directory before continuing with the instructions.
