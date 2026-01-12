@@ -27,7 +27,7 @@ To delete a process definition from the **Processes** page, take the following s
 :::warning
 Deleting a decision definition will delete the DRD and will impact the following:
 
-- By deleting a decision definition, you will be deleting the DRD which contains this decision definition. All other decision tables and literal expressions that are part of the DRD will also be deleted.
+- Deleting a decision definition removes the DRD that contains it. All other decision tables and literal expressions that are part of the DRD will also be deleted.
 - Deleting the only existing version of a decision definition could result in process incidents.
   :::
 
