@@ -65,6 +65,13 @@ For example, build an invoice-processing AI agent in Camunda with BPMN, using an
 
 ## B
 
+### Backpressure
+
+Backpressure is a protection mechanism that prevents [Zeebe brokers](#zeebe-broker) from being overloaded when they receive more [client](#zeebe-client) requests than they can process with acceptable latency. Zeebe brokers determine backpressure by using dynamic backpressure algorithms or - if enabled - flow control limits, which measure the rate of records written by the [exporter](#zeebe-exporter). When backpressure is activated, client requests are rejected to maintain system stability.
+
+- [Backpressure](/self-managed/components/orchestration-cluster/zeebe/operations/backpressure.md)
+- [Flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md)
+
 ### Broker
 
 See [Zeebe Broker](#zeebe-broker).
