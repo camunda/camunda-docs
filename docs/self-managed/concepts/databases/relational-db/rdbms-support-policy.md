@@ -111,14 +111,15 @@ Driver versions are not pinned as a formal support guarantee unless explicitly s
 
 ### Bundled drivers
 
-The following JDBC drivers are included in the Camunda application images:
+The following JDBC drivers and wrappers are included in the Camunda application images:
 
-| Database             | Driver artifact                        | Version       | Notes                                   |
-| :------------------- | :------------------------------------- | :------------ | :-------------------------------------- |
-| PostgreSQL           | `org.postgresql:postgresql`            | 42.7.8        | Bundled in Camunda images.              |
-| MariaDB              | `org.mariadb.jdbc:mariadb-java-client` | 3.5.7         | Bundled in Camunda images.              |
-| Microsoft SQL Server | `com.microsoft.sqlserver:mssql-jdbc`   | 12.10.2.jre11 | Bundled in Camunda images (**JRE 11**). |
-| H2                   | `com.h2database:h2`                    | 2.3.232       | Bundled in Camunda images.              |
+| Database / platform      | Driver artifact                                  | Version       | Notes                                                          |
+| :----------------------- | :----------------------------------------------- | :------------ | :------------------------------------------------------------- |
+| PostgreSQL               | `org.postgresql:postgresql`                      | 42.7.8        | Bundled in Camunda images.                                     |
+| MariaDB                  | `org.mariadb.jdbc:mariadb-java-client`           | 3.5.7         | Bundled in Camunda images.                                     |
+| Microsoft SQL Server     | `com.microsoft.sqlserver:mssql-jdbc`             | 12.10.2.jre11 | Bundled in Camunda images (JRE 11).                            |
+| H2                       | `com.h2database:h2`                              | 2.3.232       | Bundled in Camunda images.                                     |
+| Amazon Aurora (AWS JDBC) | `software.amazon.jdbc:aws-advanced-jdbc-wrapper` | 2.6.8         | JDBC wrapper for AWS Aurora; requires a supported base driver. |
 
 ### User-supplied drivers
 
