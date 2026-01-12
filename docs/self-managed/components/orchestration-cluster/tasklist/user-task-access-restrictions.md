@@ -6,7 +6,7 @@ description: "Control the level of access a user or group has to perform tasks i
 ---
 
 :::caution Tasklist V1 only
-User task access restrictions are only supported with the Tasklist V1 API and are not supported
+User task access restrictions are supported only by the Tasklist V1 API and are not supported
 in Tasklist V2. From Camunda 8.8, Tasklist runs in V2 mode by default.
 
 To continue using user task access restrictions, see
