@@ -86,16 +86,6 @@ New documentation shows you how to:
 - Install Camunda 8 Run with H2 as the default secondary storage.
 - Seamlessly switch from H2 to Elasticsearch or OpenSearch when required.
 
-### Cluster Metrics endpoint
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
-<!-- https://github.com/camunda/product-hub/issues/2229 -->
-
-Camunda 8.9 provides a Cluster Metrics endpoint for SaaS clusters.
-
-- Activate a secure metrics endpoint for your cluster and integrate it with Prometheus, Datadog, or any monitoring system that supports Prometheus scraping.
-- Get real-time visibility into cluster performance, troubleshoot faster, and integrate with your existing observability stack.
-
 ### Global user task listeners
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
