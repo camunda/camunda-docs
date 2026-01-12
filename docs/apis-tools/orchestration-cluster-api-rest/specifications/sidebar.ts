@@ -164,7 +164,7 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Cluster variable",
+      label: "Cluster Variable",
       items: [
         {
           type: "doc",
@@ -1160,6 +1160,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-user-task",
           label: "Assign user task",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-user-task-audit-logs",
+          label: "Search user task audit logs",
           className: "api-method post",
         },
         {

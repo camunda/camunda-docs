@@ -363,7 +363,7 @@ Once port-forwarding is active, access the UIs in your browser:
 
 - **PostgreSQL (Management Identity):** `localhost:5432`
 - **PostgreSQL (Web Modeler):** `localhost:5433`
-- **Elasticsearch:** `localhost:9200`
+- **Elasticsearch (secondary storage):** `localhost:9200`
 
 :::tip
 For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable by their in-cluster DNS names on your workstation.

@@ -160,6 +160,11 @@ Process instances with active joining parallel gateways cannot currently be migr
 
 The history migration has the following limitations.
 
+### General
+
+- To avoid collisions between definitions (process/decision/form), each definition migrated from Camunda 7 to 8 has its ID prefixed with `c7-legacy-`.
+  - Do not deploy new definitions in Camunda 8 with IDs starting with this prefix to avoid conflicts.
+
 ### Process instance
 
 - Process instance migration doesn't populate the `parentElementInstanceKey` and `tree` fields.
@@ -171,7 +176,6 @@ The history migration has the following limitations.
 
 ### DMN
 
-- The Data Migrator only migrates instances which are linked to process definition business rule tasks.
 - The properties `evaluationFailure` and `evaluationFailureMessage` are not populated in migrated decision instances.
 - Decision instance `inputs` and `outputs` are not yet migrated.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5364

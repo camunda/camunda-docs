@@ -53,8 +53,13 @@ Webhook alerts contain a JSON body with following structure:
       "jobKey": 1234567890123456,
       "creationTime": "2021-07-22T08:00:00.000+0000",
       "processName": "process-name",
-      "processVersion": 1
+      "processVersion": 1,
+      "processVersionTag": "versionTag"
     }
   ]
 }
 ```
+
+:::caution breaking change
+The JSON format was changed in 8.8.9. See [release announcements](/reference/announcements-release-notes/880/880-announcements.md#apis--tools#webhook-alerts-json-format) for more information and required actions.
+:::
