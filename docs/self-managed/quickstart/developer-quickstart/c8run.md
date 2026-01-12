@@ -144,6 +144,7 @@ The following components do not have a web interface, but their endpoints are us
 
 - **Orchestration Cluster REST API:** http://localhost:8080/v2/
 - **Inbound Connectors API:** http://localhost:8086/
+- **Zeebe API (gRPC):** http://localhost:26500/
 - **Metrics (Prometheus):** http://localhost:9600/actuator/prometheus
 - **Swagger UI (API Explorer):** http://localhost:8080/swagger-ui/index.html
 
@@ -188,6 +189,7 @@ All APIs **do not require authentication by default** in Camunda 8 Run and can b
 Available APIs include:
 
 - [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
+- [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md)
 
 ### Enable authentication and authorization
 
