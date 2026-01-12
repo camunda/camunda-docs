@@ -54,4 +54,4 @@ If your monitoring system does not support Prometheus scraping, you can adapt th
 
 - To enable the Cluster Metrics endpoint and obtain connection details, see [Set up the Cluster Metrics endpoint](/components/console/manage-clusters/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint.md).
 - To configure Prometheus to scrape metrics, see [Configure monitoring systems to scrape metrics](/components/console/manage-clusters/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics.md).
-- If your monitoring system does not support Prometheus scraping, see [Integrate non-Prometheus monitoring systems](/components/console/manage-clusters/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics.mdd#integrate-non-prometheus-monitoring-systems).
+- If your monitoring system does not support Prometheus scraping, see [Integrate non-Prometheus monitoring systems](/components/console/manage-clusters/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics.md#integrate-non-prometheus-monitoring-systems).
