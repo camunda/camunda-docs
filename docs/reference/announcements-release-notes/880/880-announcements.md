@@ -629,7 +629,7 @@ To learn more, see [Elasticsearch changes in Components update 8.7 to 8.8](/self
 
 #### Camunda Exporter
 
-Previously, Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by the Elasticsearch (ES) or OpenSearch (OS) exporters.
+Previously, Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by Elasticsearch or OpenSearch (secondary storage) exporters — see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
 
 ![87-orchestration-cluster-state](../../img/87-orchestration-cluster-state.png)
 
@@ -640,7 +640,7 @@ With the Camunda 8.8 release, a new Camunda Exporter is introduced:
 
 ![brown-field-without-optimize](../../img/brown-field-orchestration-cluster-without-optimize.png)
 
-The new Camunda Exporter helps Camunda achieve a more streamlined architecture, better performance, and improved stability (especially concerning ES/OS).
+The new Camunda Exporter helps Camunda achieve a more streamlined architecture, better performance, and improved stability (especially concerning Elasticsearch/OpenSearch secondary storage).
 
 :::info
 To learn more, see the blog post [One Exporter to Rule Them All: Exploring Camunda Exporter](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/).
