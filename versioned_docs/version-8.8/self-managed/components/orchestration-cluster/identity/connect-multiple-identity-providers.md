@@ -99,7 +99,7 @@ camunda.security.authentication.providers.oidc.entraid.scope:
 The **issuer-uri** property is required and identifies the identity provider that issues tokens for this configuration.
 :::
 
-You can repeat these variables for any number of OIDC IdPs by using a unique `<REG_ID>` for each.
+You can repeat these variables for any number of OIDC IdPs by using a unique `<provider-id>` for each.
 
 ### Global OIDC Properties
 
