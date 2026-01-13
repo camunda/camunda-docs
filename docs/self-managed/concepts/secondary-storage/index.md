@@ -36,6 +36,10 @@ For the latest list of supported database versions, see the
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
 :::
 
+:::note
+Starting in 8.9-alpha3, Camunda 8 Run and default lightweight installs use H2 as the default secondary storage. Elasticsearch remains supported and is bundled for backward compatibility; OpenSearch is supported for Self‑Managed deployments but is not bundled in Camunda 8 Run. Enable the backend you need explicitly when required.
+:::
+
 ### Data flow
 
 The following diagram shows how secondary storage fits into the Camunda data flow.

@@ -13,6 +13,7 @@ Select and configure authentication for the LLM model **Provider** you want to u
 
 - Different setup/authentication fields are shown depending on the provider you select.
 - Use [connector secrets](/components/console/manage-clusters/manage-secrets.md) to store credentials and avoid exposing sensitive information directly from the process.
+- Model API calls are timing out after three minutes by default.
 
 :::
 
