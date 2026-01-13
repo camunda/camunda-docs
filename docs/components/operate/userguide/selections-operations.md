@@ -25,5 +25,5 @@ To create a selection and apply an operation, take the following steps:
 
 ## Next steps
 
-- [Monitor the batch operation status](./monitor-operation-status.md).
+- [Monitor the batch operation](./monitor-batch-operations.md).
 - [Learn how batch operations work](../../zeebe/technical-concepts/batch-operations.md).

@@ -44,5 +44,5 @@ Exit the modification mode at any time by clicking **Exit** in the footer.
 
 ## Next steps
 
-- [Monitor the batch operation status](./monitor-operation-status.md).
+- [Monitor the batch operation](./monitor-batch-operations.md).
 - [Learn how batch operations work](../../zeebe/technical-concepts/batch-operations.md).
