@@ -55,6 +55,12 @@ The OpenAI compatible model configuration now allows configuration of query para
 
 <p class="link-arrow">[AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</p>
 
+#### AWS Bedrock API key authentication support
+
+<!-- https://github.com/camunda/connectors/issues/5551 -->
+
+The Amazon Bedrock model configuration now allows authentication using (long-term) Bedrock API keys as an alternative to the already existing authentication methods.
+
 ### Camunda 8 Run
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
