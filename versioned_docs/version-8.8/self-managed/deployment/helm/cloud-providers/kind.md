@@ -57,7 +57,7 @@ Before you begin, you'll need:
 - [mkcert](https://github.com/FiloSottile/mkcert#installation) (Domain mode only)
 
 :::tip
-You can also use [asdf](https://asdf-vm.com/) to install the tools, with the versions defined in [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/.tool-versions)
+You can also use [asdf](https://asdf-vm.com/) to install the tools, with the versions defined in [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/.tool-versions).
 :::
 
 ## Outcome
@@ -65,8 +65,8 @@ You can also use [asdf](https://asdf-vm.com/) to install the tools, with the ver
 By the end of this tutorial, you'll have:
 
 - A local Kubernetes cluster running with kind. This includes one control plane and two worker nodes.
-- An Ingress NGINX controller deployed for routing traffic (Domain mode only).
-- TLS certificates configured with mkcert (Domain mode only).
+- An Ingress NGINX controller deployed for routing traffic (domain mode only).
+- TLS certificates configured with mkcert (domain mode only).
 - Camunda 8 Self-Managed fully deployed and accessible.
 
 :::info Other installation profiles
@@ -134,9 +134,7 @@ Now that you've created the cluster, you'll need to choose a deployment mode for
 
 This section covers the full domain mode setup with TLS certificates and Ingress.
 
-:::tip Quick setup without TLS
 If you'd prefer a simpler setup without domain configuration, skip to [No-domain mode deployment](#no-domain-mode-deployment).
-:::
 
 ### Deploy the Ingress controller
 
@@ -210,17 +208,17 @@ The certificate generation script:
 
 ### Create Kubernetes secrets for TLS
 
-Create the TLS secret in Kubernetes. The Ingress controller will use this to serve HTTPS traffic for `camunda.example.com`:
+1. Create the TLS secret in Kubernetes. The Ingress controller will use this to serve HTTPS traffic for `camunda.example.com`:
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/local/kubernetes/kind-single-region/procedure/certs-create-secret.sh
-```
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/local/kubernetes/kind-single-region/procedure/certs-create-secret.sh
+   ```
 
-Then, create a ConfigMap with the CA certificate for pods that need to trust it:
+1. Then, create a ConfigMap with the CA certificate for pods that need to trust it:
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/local/kubernetes/kind-single-region/procedure/certs-create-ca-configmap.sh
-```
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/local/kubernetes/kind-single-region/procedure/certs-create-ca-configmap.sh
+   ```
 
 ### Deploy Camunda 8
 
@@ -266,9 +264,7 @@ Add (or update) the following entry in your `/etc/hosts` file:
 127.0.0.1  camunda-keycloak
 ```
 
-:::note
-The hostname `camunda-keycloak` is derived from the Helm release name (`camunda`) followed by `-keycloak`. If you use a different release name, adjust accordingly (e.g., `my-release-keycloak`).
-:::
+The hostname `camunda-keycloak` is derived from the Helm release name (`camunda`) followed by `-keycloak`. If you use a different release name, adjust accordingly (for example, `my-release-keycloak`).
 
 After adding this entry and deploying Camunda 8 in the next step, you'll be able to reach Keycloak at `http://camunda-keycloak:18080/auth`.
 
@@ -400,7 +396,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/local/k
 ## Cleanup
 
 :::warning Destructive action
-This will destroy all data of Camunda 8 in the local development cluster.
+This will permanently delete all Camunda 8 data in the local development cluster.
 :::
 
 If you used the Makefile for setup, you can use the corresponding clean command:
