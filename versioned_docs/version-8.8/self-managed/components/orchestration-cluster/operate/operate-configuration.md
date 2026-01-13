@@ -34,11 +34,11 @@ In 8.8+ installations, Operate reads data from Operate indices written by the
 [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
 
 :::note
-The Operate Importer is used only during 8.7 → 8.8 migrations.
+The Operate Importer is used only during 8.7 to 8.8 migrations.
 New 8.8+ installations do not require it.
 :::
 
-During 8.7 → 8.8 migrations, Operate imports remaining historical data from indices created by the [Zeebe Elasticsearch exporter](../zeebe/exporters/elasticsearch-exporter.md)
+During 8.7 to 8.8 migrations, Operate imports remaining historical data from indices created by the [Zeebe Elasticsearch exporter](../zeebe/exporters/elasticsearch-exporter.md)
 or the [Zeebe OpenSearch exporter](../zeebe/exporters/opensearch-exporter.md).
 
 In both cases, the Elasticsearch or OpenSearch connection settings must match the exporter configuration used by Zeebe.
