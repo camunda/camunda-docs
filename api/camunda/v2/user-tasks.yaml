@@ -352,6 +352,44 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+  /user-tasks/{userTaskKey}/audit-logs/search:
+    post:
+      tags:
+        - User task
+      operationId: searchUserTaskAuditLogs
+      summary: Search user task audit logs
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for user task audit logs based on given criteria.
+      parameters:
+        - name: userTaskKey
+          in: path
+          required: true
+          description: The key of the user task.
+          schema:
+            type: string
+            format: string<UserTaskKey>
+            description: System-generated key for a user task.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserTaskAuditLogSearchQueryRequest"
+      responses:
+        "200":
+          description: The user task audit log search result.
+          content:
+            application/json:
+              schema:
+                $ref: "audit-logs.yaml#/components/schemas/AuditLogSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 components:
   schemas:
     UserTaskSearchQuerySortRequest:
@@ -693,6 +731,17 @@ components:
           allOf:
             - $ref: "#/components/schemas/UserTaskVariableFilter"
           description: The user task variable search filters.
+    UserTaskAuditLogSearchQueryRequest:
+      allOf:
+        - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
+      description: User task search query request.
+      type: object
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "audit-logs.yaml#/components/schemas/AuditLogSearchQuerySortRequest"
     UserTaskStateEnum:
       description: The state of the user task.
       type: string

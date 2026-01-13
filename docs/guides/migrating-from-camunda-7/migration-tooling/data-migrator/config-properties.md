@@ -87,6 +87,18 @@ The following built-in interceptors are available and can be disabled:
 - `io.camunda.migration.data.impl.interceptor.SpinJsonVariableTransformer`
 - `io.camunda.migration.data.impl.interceptor.SpinXmlVariableTransformer`
 
+**Entity transformers:**
+
+- `io.camunda.migration.data.impl.interceptor.history.entity.ProcessInstanceTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.ProcessDefinitionTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.FlowNodeTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.UserTaskTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.IncidentTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.VariableTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.DecisionInstanceTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.DecisionDefinitionTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.DecisionRequirementsDefinitionTransformer`
+
 ## `camunda.migrator.c7.data-source`
 
 Prefix: `camunda.migrator.c7.data-source`
