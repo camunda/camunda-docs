@@ -173,7 +173,7 @@ The history migration has the following limitations.
 - As a result, you cannot query for the history of a subprocess or call activity using the
   parent process instance key.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5359
-- When migrating models including subprocesses, it is possible that during the first migration round the start event inside the subprocess is skipped. Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration
+- When migrating models including subprocesses, it is possible that during the migration flow nodes inside the subprocess are skipped due to dependencies. Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration.
 
 ### DMN
 
