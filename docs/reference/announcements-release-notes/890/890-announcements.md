@@ -157,7 +157,9 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 
 #### Camunda 8 Run with H2 as the default secondary data storage
 
-Camunda 8 Run now uses H2 as the default secondary data storage, instead of Elasticsearch, reducing memory usage and enabling a fully functional stack without requiring an external database.
+Camunda 8 Run now uses H2 as the default secondary data storage, instead of Elasticsearch.
+
+As a result, Operate and Tasklist run in V2 mode, and only V2 APIs are supported. This means that some deprecated features, such as draft variables, are no longer available; to continue using them, you must run Elasticsearch and switch back to V1 mode.
 
 :::info
 To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-release-notes/890/890-release-notes.md#use-h2-for-data-storage).
