@@ -23,7 +23,7 @@ AI agents represent the practical implementation of agentic process orchestratio
 
 ## About this guide
 
-In this tutorial, you will:
+In this guide, you will:
 
 - Run Camunda 8 using [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup) or locally with [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 - Deploy and start a business process using [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) or locally with [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
