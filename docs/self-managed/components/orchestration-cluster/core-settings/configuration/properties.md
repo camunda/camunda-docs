@@ -676,6 +676,8 @@ script-src-attr 'none'.
 
 ### `camunda.security.authentication.oidc`
 
+Configuration options to connect to an identity providers.
+
 | Property                                                            | Description                                                                                                                                                                                                                                                                                                                               | Default value                        |
 | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
 | `camunda.security.authentication.oidc.client-id`                    | The client ID for OIDC authentication.                                                                                                                                                                                                                                                                                                    |                                      |
@@ -725,6 +727,30 @@ These properties apply only when `camunda.security.authentication.oidc.client-au
 | `camunda.security.authentication.oidc.assertion.keystore.password`     | Keystore password.                                                |               |
 | `camunda.security.authentication.oidc.assertion.keystore.key-alias`    | Alias of the private key to be used to sign the client assertion. |               |
 | `camunda.security.authentication.oidc.assertion.keystore.key-password` | Password of the private key.                                      |               |
+
+### `camunda.security.authentication.providers.oidc`
+
+Configuration options to connect to multiple identity providers.
+
+:::note
+`<provider-id>` is a unique, user-defined identifier. All properties that share the same `<provider-id>` belong to the same identity provider configuration.
+:::
+
+| Property                                                                                    | Description                                                                                                                                                                                                                             | Default value                        |
+| ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `camunda.security.authentication.providers.oidc.<provider-id>.client-name`                  | The client name for OIDC authentication.                                                                                                                                                                                                |                                      |
+| `camunda.security.authentication.providers.oidc.<provider-id>.client-id`                    | The client ID for OIDC authentication.                                                                                                                                                                                                  |                                      |
+| `camunda.security.authentication.providers.oidc.<provider-id>.client-secret`                | The client secret for OIDC authentication. Only takes effect if `camunda.security.authentication.providers.oidc.[provider-id].client-authentication-method` is set to `client_secret_basic` or left default.                            |                                      |
+| `camunda.security.authentication.providers.oidc.<provider-id>.issuer-uri`                   | The issuer URI for OIDC authentication. If set, the individual endpoints of your OIDC provider will be fetched from its [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig). |                                      |
+| `camunda.security.authentication.providers.oidc.<provider-id>.redirect-uri`                 | The URI for redirects from the OIDC provider to the Orchestration Cluster after user login.                                                                                                                                             | `http://localhost:8080/sso-callback` |
+| `camunda.security.authentication.providers.oidc.<provider-id>.audiences`                    | Comma-separated list of audiences to validate in the OIDC token.                                                                                                                                                                        |                                      |
+| `camunda.security.authentication.providers.oidc.<provider-id>.scope`                        | Comma-separated list of scopes to request in the OIDC token.                                                                                                                                                                            | `openid, profile`                    |
+| `camunda.security.authentication.providers.oidc.<provider-id>.jwk-set-uri`                  | Sets the OIDC provider's JWK Set URI explicitly.                                                                                                                                                                                        |                                      |
+| `camunda.security.authentication.providers.oidc.<provider-id>.authorization-uri`            | Sets the OIDC provider's authorization URI explicitly.                                                                                                                                                                                  |                                      |
+| `camunda.security.authentication.providers.oidc.<provider-id>.token-uri`                    | Sets the OIDC provider's token URI explicitly.                                                                                                                                                                                          |                                      |
+| `camunda.security.authentication.providers.oidc.<provider-id>.client-authentication-method` | Sets the client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                        | `client_secret_basic`                |
+
+Client assertion settings are configured per identity provider. Each provider supports the same client assertion properties described in [Client assertion configuration](#camundasecurityauthenticationoidcassertion) and [Keystore Client assertion configuration](#camundasecurityauthenticationoidcassertionkeystore), applied within the scope of the corresponding `<provider-id>`.
 
 ### `camunda.security.initialization.default-roles`
 
@@ -791,6 +817,8 @@ These properties apply only when `camunda.security.authentication.oidc.client-au
 
 ### `CAMUNDA_SECURITY_AUTHENTICATION_OIDC`
 
+Configuration options to connect to an identity providers.
+
 | Property                                                            | Description                                                                                                                                                                                                                                                                                                                               | Default value                        |
 | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTID`                     | The client ID for OIDC authentication.                                                                                                                                                                                                                                                                                                    |                                      |
@@ -840,6 +868,30 @@ These properties apply only when `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AU
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE_PASSWORD`     | Keystore password.                                                |               |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE_KEY_ALIAS`    | Alias of the private key to be used to sign the client assertion. |               |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE_KEY_PASSWORD` | Password of the private key.                                      |               |
+
+### `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC`
+
+Configuration options to connect to multiple identity providers.
+
+:::note
+`<provider-id>` is a unique, user-defined identifier. All properties that share the same `<provider-id>` belong to the same identity provider configuration.
+:::
+
+| Property                                                                                    | Description                                                                                                                                                                                                                             | Default value                        |
+| ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_CLIENTNAME`                   | The client name for OIDC authentication.                                                                                                                                                                                                |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_CLIENTID`                     | The client ID for OIDC authentication.                                                                                                                                                                                                  |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_CLIENTSECRET`                 | The client secret for OIDC authentication. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_CLIENT_AUTHENTICATION_METHOD` is set to `client_secret_basic` or left default.                            |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_ISSUERURI`                    | The issuer URI for OIDC authentication. If set, the individual endpoints of your OIDC provider will be fetched from its [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig). |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_REDIRECTURI`                  | The URI for redirects from the OIDC provider to the Orchestration Cluster after user login.                                                                                                                                             | `http://localhost:8080/sso-callback` |
+| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_AUDIENCES`                    | Comma-separated list of audiences to validate in the OIDC token.                                                                                                                                                                        |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_SCOPE`                        | Comma-separated list of scopes to request in the OIDC token.                                                                                                                                                                            | `openid, profile`                    |
+| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_JWKSETURI`                    | Sets the OIDC provider's JWK Set URI explicitly.                                                                                                                                                                                        |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_AUTHORIZATIONURI`             | Sets the OIDC provider's authorization URI explicitly.                                                                                                                                                                                  |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_TOKENURI`                     | Sets the OIDC provider's token URI explicitly.                                                                                                                                                                                          |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_CLIENT_AUTHENTICATION_METHOD` | Sets the client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                        | `client_secret_basic`                |
+
+Client assertion settings are configured per identity provider. Each provider supports the same client assertion properties described in [Client assertion configuration](#camunda_security_authentication_oidc_assertion) and [Keystore Client assertion configuration](#camunda_security_authentication_oidc_assertion_keystore), applied within the scope of the corresponding `<provider-id>`.
 
 ### `CAMUNDA_SECURITY_CSRF`
 
