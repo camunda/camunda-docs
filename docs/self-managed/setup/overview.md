@@ -10,7 +10,11 @@ Use this overview to choose an installation approach for Camunda 8 Self-Managed 
 
 ## Production installations
 
-- [**Helm/Kubernetes**](/self-managed/deployment/helm/install/quick-install.md) (recommended): Run Camunda 8 Self-Managed on Kubernetes using Helm. With the right configuration, you can deploy on any Certified Kubernetes distribution (cloud or on-premises). Camunda also supports specific providers such as [Red Hat OpenShift](../../self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md) and [Amazon EKS](../../self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md).
+:::note
+Starting in 8.9-alpha3, Camunda 8 Run uses H2 as the default secondary storage out-of-the-box. Elasticsearch remains bundled and supported as an optional alternative; OpenSearch is supported for Self‑Managed deployments but is not bundled in Camunda 8 Run. See the [Camunda 8 Run configuration docs](../quickstart/developer-quickstart/c8run.md) for enabling Elasticsearch if required.
+:::
+
+- [**Helm/Kubernetes**](/self-managed/deployment/helm/install/quick-install.md) (Recommended): We recommend using Kubernetes and Helm to run Camunda 8 Self-Managed in production. With the right configuration, Camunda 8 Self-Managed can be deployed on any Certified Kubernetes distribution (cloud or on-premises). We also officially support a variety of providers like [Red Hat OpenShift](../../self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md) and [Amazon EKS](../../self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md).
 - [**Docker**](/self-managed/deployment/docker/docker.md): Run Camunda components as [Docker images](https://hub.docker.com/u/camunda) in production on Linux systems. Windows and macOS are supported for development environments only.
 - [**Manual**](/self-managed/deployment/manual/install.md): Run each Java application on virtual machines or bare-metal servers with a supported Java Virtual Machine (JVM). This offers flexibility but requires manual configuration of component interactions. Use this approach only when necessary. Windows and macOS are supported for development environments only.
 
