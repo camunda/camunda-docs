@@ -1,10 +1,11 @@
 ---
 id: aws-ecs
-title: "Amazon ECS"
+title: "Amazon ECS on AWS"
 description: "Learn how to install Camunda 8 on AWS ECS."
 ---
 
-This guide provides a detailed walkthrough for installing the [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster) on AWS Elastic Container Service (ECS) using Fargate and Aurora PostgreSQL. It leverages AWS managed services, using ECS as the platform and Fargate as the runtime. Finally, you will verify that your Self-Managed Camunda 8 environment is deployed correctly and that all required connections are functioning as expected.
+This guide shows you how to install the [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster) on AWS Elastic Container Service (ECS) using Fargate and Aurora
+PostgreSQL. You deploy a Self-Managed Camunda 8 environment using AWS managed services and then verify that all required components and connections are working.
 
 This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) and Connectors for Camunda 8. Web Modeler, Optimize, and Console are currently not covered.
 
@@ -12,23 +13,17 @@ This guide focuses on setting up the [Orchestration Cluster](/self-managed/refer
 If you are new to AWS ECS or Terraform, consider reviewing the [AWS ECS documentation](https://docs.aws.amazon.com/ecs/) and [Terraform documentation](https://developer.hashicorp.com/terraform/docs) before proceeding with this guide.
 :::
 
-:::note Using other cloud providers
 The concepts described in this guide can be applied to other cloud providers; however, you are responsible for the implementation and maintenance, and compatibility or correct behavior is not guaranteed. Certain implementations like the node-id provider are currently limited to S3.
-:::
 
 ## Considerations
 
-:::warning 8.9-alpha3 subject to changes
-This is currently in active development and released as part of the 8.9-alpha3 release. Contents of the documentation and resulting work may still change till the final 8.9 release.
+:::warning Experimental release (8.9.0-alpha3)
+This guide is based on an experimental release. Content and results may change before the final 8.9.0 release.
 :::
 
-:::danger Cost management
-This guide will result in costs on your cloud provider account—primarily for ECS and AWS Aurora. Visit AWS and their [pricing calculator](https://calculator.aws/#/) for detailed cost estimates, as pricing varies by region.
-:::
+Running this guide incurs costs on your AWS account, primarily for ECS and Aurora. Use the AWS [pricing calculator](https://calculator.aws/#/) to estimate costs for your region.
 
-:::tip Looking for a simpler setup?
-Consider using [Camunda 8 SaaS](https://accounts.camunda.io/signup).
-:::
+If you want a simpler setup, consider using [Camunda 8 SaaS](https://accounts.camunda.io/signup).
 
 - Unlike our other guides, which usually separate infrastructure setup from the deployment of Camunda 8, this is not the case with ECS. Since the infrastructure is largely managed by AWS, deploying Camunda 8 and provisioning the required AWS resources happens in a single step.
 - This work focuses on AWS ECS with Fargate but can work with managed instances for more predictable performance. You can find more information about how to migrate from Fargate to managed instances from the [AWS migration guide](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/migrate-fargate-to-managed-instances.html).
@@ -38,7 +33,7 @@ Consider using [Camunda 8 SaaS](https://accounts.camunda.io/signup).
 - AWS does not support block storage options in combination with ECS Services and Fargate. For a detailed overview, have a look at the [AWS documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
 - Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a Zeebe broker. Autoscaling may not have effects as the brokers have to be explicitly joined into the Zeebe Cluster or when removed result in partitions or data becoming inaccessible.
 - An extra developed node-id provider is integrated into Zeebe that assigns an available node-id based on Zeebe cluster information, whereas this is typically provided statically.
-- This guide focuses on Aurora PostgreSQL for the secondary datastorage as it's a newly supported offering by Camunda 8 and potentially more familiar for customers.
+- This guide focuses on Aurora PostgreSQL for the secondary datastorage as it is a newly supported offering by Camunda 8 and potentially more familiar for customers.
   - You may still use Elasticsearch / OpenSearch but need to adjust the required configuration. More information about the configuration can be found in [our documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
   - Examples for how to deploy AWS OpenSearch can be found in other existing reference architectures for AWS.
 
@@ -80,9 +75,7 @@ After completing this guide, you will have:
 
 Both subnet types are distributed across three availability zones in a single AWS region, supporting a high-availability architecture.
 
-:::note
-You can also run this setup scaled via the ECS Service to a single resulting task. However, in the event of a zone failure, the entire environment would become unreachable.
-:::
+You can also scale this setup to a single ECS task. In that case, a zone failure makes the environment unavailable.
 
 ## Prerequisites
 
@@ -218,18 +211,28 @@ If not otherwise indicated, the `.tf` file is corresponding to the [root workspa
 `ecs.tf` contains the ECS cluster, which is just a logical component to group ECS resources.
 
 `../modules/ecs/fargate/orchestration-cluster` is the main component `Orchestration Cluster` of Camunda and contains the definitions for:
+- ECS Service and task definition
+  - Defines the base setup for the Orchestration Cluster, including the node ID provider, EFS configuration, and initial cluster endpoints.
+  - Automatically sets the Zeebe cluster size based on the task count.
+  - Resolves initial contact points using DNS with multiple A records instead of requiring explicit Zeebe broker addresses.
 
-- ECS Service and Task definition
-  - the task definition contains the base setup for the Orchestration Cluster concerning the node-id provider and the EFS configuration as well as initial cluster endpoint. Zeebe Cluster size is automatically set to the task size.
-  - Camunda 8 supports for the initial contact points to resolve a DNS name with multi A records instead of having to define every single exact Zeebe broker address.
-- Task specific IAM role to allow access to AWS services isolated to this component
-  - e.g. S3 bucket or Aurora PostgreSQL access
-- S3 bucket for the node-id provider functionality
-- CloudWatch group as the Orchestration Cluster is the main component to be run
-  - can be shared with other Camunda components that have a 1:1 relationship to an Orchestration Cluster like Connectors
-- DNS related topics for ECS Service Connect as well as Route53 to allow easier access from within the VPC that are not part of the ECS cluster like EC2 instances or Kubernetes clusters
-- Load Balancer related configurations to add listener rules to a shared Load Balancer between Orchestration Cluster and Connectors
-- EFS Disk
+- Task-specific IAM role
+  - Grants access to AWS services required by this component, such as the S3 bucket and Aurora PostgreSQL.
+
+- S3 bucket
+  - Used by the ECS-specific node ID provider.
+
+- CloudWatch log group
+  - Used for Orchestration Cluster logs.
+  - Can be shared with other Camunda components that have a one-to-one relationship with the Orchestration Cluster, such as Connectors.
+
+- Networking configuration
+  - Integrates with ECS Service Connect and Amazon Route 53 to enable access from within the VPC, including from resources outside the ECS cluster (for example, EC2 instances or Kubernetes clusters).
+
+- Load balancer configuration
+  - Adds listener rules to a shared load balancer for the Orchestration Cluster and Connectors.
+
+- EFS file system
 
 The base terraform documentation for this module can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/ecs/fargate/orchestration-cluster).
 
@@ -279,11 +282,11 @@ If you're fine with username/password, you can remove the `postgres_seed.tf` and
 
 ### Advanced Topics
 
-#### Camunda Configuration
+#### Camunda components configuration
 
 The Terraform implementation does not abstract any configuration and anything you need to configure for the Camunda components can be found within their own documentation.
 
-Camunda components can be configured for example via environment variables or an application yaml.
+Camunda components can be configured for example via environment variables or an application YAML.
 
 ##### Environment Variables
 
@@ -396,9 +399,11 @@ task_desired_count = X
 
 ###### Wait for ready
 
-This flag will ensure that Terraform waits for a successful deployment of the ECS service. It's also useful for dependencies like the Connectors depending on the Orchestration Cluster, so they're not deployed before it avoid crashes.
+This flag ensures that Terraform waits until the ECS service is successfully deployed.
 
-Disabling it will allow a `fire and forget` approach as everything will be deployed at once.
+It is useful when other components, such as Connectors, depend on the Orchestration Cluster, because it prevents them from being deployed before the cluster is ready.
+
+If you disable this flag, Terraform deploys all resources at once without waiting for service readiness.
 
 ```hcl
 # both modules
@@ -559,4 +564,5 @@ For general troubleshooting assistance, consult the [operational guides troubles
 After setting up your cluster, many users typically do the following:
 
 - [Connect to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
-- [Adding TLS](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html) and [custom domain](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#dns-name) Route53 record to the Application Load Balancer (ALB)
+- [Add TLS](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html) and configure a [custom domain](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#dns-name) for the Application Load Balancer (ALB).
+
