@@ -1,0 +1,88 @@
+---
+id: batch-operations
+title: Batch operations
+description: Get an overview of batch operations in Camunda 8.
+---
+
+A high-level overview of batch operations in Camunda 8.
+
+## About batch operations
+
+If a single process instance encounters an incident, or you need to update the instance for any other reason, you can perform an instance operation. However, if you need to perform the same operation on multiple instances, a batch operation:
+
+- Optimizes the performance of operations that need to be performed across many process instances.
+- Provides insights into the progress of the operation across all affected instances.
+- Gives you control over operation execution, with the ability to suspend, resume, and cancel operations.
+
+A **batch operation** is an operation on a selection, or batch, of process instances. Instead of manually operating on each instance, you can specify filter criteria and automatically identify and process matching instances across your cluster in parallel. The individual operation in the batch applied to a process instance is called a [**batch item**](../zeebe/technical-concepts/batch-operations.md#batch-operation-components).
+
+Example use cases include:
+
+- Many process instances have encountered a critical bug.
+- You need to skip an activity across multiple instances.
+- There was in issue when executing a process that corrupted many or all instances of that process.
+
+## Types
+
+Here are the types of available batch operations:
+
+| Type                      | Description                                                                                        |
+| ------------------------- | -------------------------------------------------------------------------------------------------- |
+| Resolve incidents         | Resolves the [incidents](./incidents.md) associated with a batch of process instances.             |
+| Modify process instances  | [Moves](./process-instance-modification.md) a batch of process instances from one node to another. |
+| Migrate process instances | [Migrates](./process-instance-migration.md) a batch of process instances to a new process version. |
+| Cancel process instances  | Cancels a batch of process instances.                                                              |
+| Delete process instances  | Deletes a batch of process instances.                                                              |
+
+Furthermore, depending on the status of the batch operation, you may be able to suspend, cancel, or resume the operation.
+
+:::warning
+Canceling a batch operation does not rollback any changes that have already been produced.
+:::
+
+## States
+
+A batch operation can have one of the following statuses:
+
+| Type                | Description                                                                                                           |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Created             | The batch operation was created, but the filter hasn't been used yet to determine the affected process instances.     |
+| Active              | The batch operation is actively being processed.                                                                      |
+| Completed           | All items in the batch operation were processed, regardless of whether the individual operations succeeded or failed. |
+| Partially completed | The batch operation successfully processed at least one partition and failed to process at least one partition.       |
+| Suspended           | The batch operation was temporarily stopped. Suspended batch operations can be resumed.                               |
+| Canceled            | The batch operation was permanently stopped. Canceled batch operations can't be resumed.                              |
+| Failed              | The batch operation failed on all partitions.                                                                         |
+
+:::info
+Learn more about batch partitions in our [implementation overview](../zeebe/technical-concepts/batch-operations.md).
+:::
+
+## Authorization
+
+When executing a batch operation, there are two sets of permissions involved:
+
+- Batch operation permissions.
+- Item-level, or process definition, permissions.
+
+To create a batch operation, you always need both the permission to create batch operations as well as permissions to read process instances and execute specific operations on each targeted process instance.
+
+To suspend, resume, or cancel an operation, you only need the relevant batch operation permissions.
+
+The system stores authorization claims with the batch operation and uses them throughout its lifecycle.
+
+:::info
+Read more about [authorizations](/components/concepts/access-control/authorizations.md) and [how to create them in the Identity UI](/components/identity/authorization.md).
+:::
+
+## Next steps
+
+- [Learn how batch operations work](../zeebe/technical-concepts/batch-operations.md).
+- [Use batch operations in the Camunda 8 web interface](../operate/userguide/selections-operations.md).
+- Use the batch operations APIs:
+  - [Search batch operations](/apis-tools/orchestration-cluster-api-rest/specifications/search-batch-operations.api.mdx).
+  - [Cancel process instances (batch)](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation.api.mdx).
+  - [Resolve related incidents (batch)](/apis-tools/orchestration-cluster-api-rest/specifications/resolve-incidents-batch-operation.api.mdx).
+  - [Migrate process instances (batch)](/apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instances-batch-operation.api.mdx).
+  - [Modify process instances (batch)](/apis-tools/orchestration-cluster-api-rest/specifications/modify-process-instances-batch-operation.api.mdx).
+  - [Delete process instances (batch)](/apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instances-batch-operation.api.mdx).
