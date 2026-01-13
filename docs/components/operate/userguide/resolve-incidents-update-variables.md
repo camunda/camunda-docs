@@ -1,19 +1,27 @@
 ---
 id: resolve-incidents-update-variables
-title: Variables and incidents
+title: Resolve incidents and update variables
 description: "Let's examine variable and incidents."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-:::note
-This guide includes steps with community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md).
-:::
+Learn how to resolve incidents and update variables in Camunda 8 Operate.
+
+## Overview
 
 Every process instance created for the [`order-process.bpmn`](/bpmn/operate/order-process.bpmn) process model requires an `orderValue` so the XOR gateway evaluation will happen properly.
 
 Let’s look at a case where `orderValue` is present and was set as a string, but our `order-process.bpmn` model required an integer to properly evaluate the `orderValue` and route the instance.
+
+## Before you begin
+
+To follow this guide, install [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md), a community-supported command line interface for interacting with Camunda 8.
+
+## Create a process instance
+
+Create a process instance with an `orderValue` of `"99"`:
 
 <Tabs groupId="OS" defaultValue="linux" values={
 [
@@ -123,42 +131,38 @@ We’ll publish a message that will be correlated with the instance, so we can a
 
 In the Operate interface, you should now observe the process instance has an [incident](/components/concepts/incidents.md), which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
 
-![operate-incident-process-view](../../../images/operate/operate-process-view-incident.png)
-
 ## Diagnosing and resolving incidents
 
 Operate provides tools for diagnosing and resolving incidents. Let’s go through incident diagnosis and resolution step by step.
 
-When we inspect the process instance, we can observe exactly what our incident is: `Expected to evaluate condition 'orderValue>=100' successfully, but failed because: Cannot compare values of different types: STRING and INTEGER`
+When we inspect the process instance, we can observe exactly what our incident is:
 
-![operate-incident-instance-view](../../../images/operate/operate-view-instance-incident.png)
+1. Click the **Process Instance Key** for the process stuck on the **Order Value?** node.
+2. At the top of the instance detail page, click **View** to view the incident details.
+3. Observe the error message:
+
+```text
+Expected result of the expression 'orderValue >= 100' to be 'BOOLEAN', but was 'NULL'. The evaluation reported the following warnings:
+[NOT_COMPARABLE] Can't compare '"99"' with '100'
+```
 
 To resolve this incident, we must edit the `orderValue` variable so it’s an integer. To do so, take the following steps:
 
-1. Click the edit icon next to the variable you’d like to edit.
-
-![operate-incident-edit-variable](../../../images/operate/operate-view-instance-edit-icon.png)
-
-2. Edit the variable by removing the quotation marks from the `orderValue` value.
+1. Under **Variables**, click the edit icon next to the `orderValue` variable.
+2. Edit the variable by removing the quotation marks.
 3. Click the checkmark icon to save the change.
-
-![operate-incident-save-variable](../../../images/operate/operate-view-instance-save-variable-icon.png)
 
 We were able to solve this particular problem by **editing** a variable, but it’s worth noting you can also **add** a variable if a variable is missing from a process instance altogether.
 
-There’s one last step: initiating a “retry” of the process instance. There are two places on the process instance page where you can initiate a retry: in the top right corner of the page, and below **Operations**:
-
-![operate-retry-instance](../../../images/operate/operate-process-retry-incident.png)
+There’s one last step: initiating a “retry” of the process instance. Click the retry icon in the top right corner of the page.
 
 You should now see the incident has been resolved, and the process instance has progressed to the next step.
-
-![operate-incident-resolved-instance-view](../../../images/operate/operate-incident-resolved.png)
 
 ## Complete a process instance
 
 If you’d like to complete the process instance, create a worker for the `Ship Without Insurance` task:
 
-<Tabs groupId="OS" defaultValue="linux" values={
+<Tabs groupId="OS" className="tabs-hidden" defaultValue="linux" values={
 [
 {label: 'Linux', value: 'linux', },
 {label: 'macOS', value: 'macos', },
@@ -190,7 +194,3 @@ If you’d like to complete the process instance, create a worker for the `Ship 
 
 </TabItem>
 </Tabs>
-
-The completed process instance with the path taken:
-
-![operate-incident-resolved-path-view](../../../images/operate/operate-incident-resolved-path.png)
