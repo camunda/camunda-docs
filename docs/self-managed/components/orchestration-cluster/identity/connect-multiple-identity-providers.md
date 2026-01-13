@@ -19,7 +19,7 @@ With multiple IdPs configured:
 
 ## Overview
 
-When multiple OIDC providers are set up, the clusterlogin page lets users select the provider they wish to use. For API access, any bearer token issued by one of the configured and trusted issuers is accepted; all others are denied.
+When multiple OIDC providers are set up, the cluster login page lets users select the provider they wish to use. For API access, any bearer token issued by one of the configured and trusted issuers is accepted; all others are denied.
 
 ## Prerequisites
 
