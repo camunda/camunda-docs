@@ -172,7 +172,8 @@ The history migration has the following limitations.
   process instance.
 - As a result, you cannot query for the history of a subprocess or call activity using the
   parent process instance key.
-- See https://github.com/camunda/camunda-bpm-platform/issues/5359
+  - See https://github.com/camunda/camunda-bpm-platform/issues/5359
+- When migrating models including subprocesses, it is possible that during the migration flow nodes inside the subprocess are skipped due to dependencies. Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration.
 
 ### DMN
 
@@ -181,6 +182,7 @@ The history migration has the following limitations.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5364
 - Decision instance `state` and `type` are not yet migrated.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5370
+- DMN models version 1.1 are not supported by Operate, decision definition data will be migrated but the decision model itself will not be visible in Operate.
 
 ## Cockpit plugin
 
