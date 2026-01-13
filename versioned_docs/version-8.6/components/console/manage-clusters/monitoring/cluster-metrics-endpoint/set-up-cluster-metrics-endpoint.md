@@ -53,7 +53,9 @@ Authentication credentials are created and managed in Camunda Console.
 
 ### Create additional credentials
 
-You can create multiple credentials for the same cluster:
+You can create up to 20 credentials per cluster.
+
+To create additional credentials:
 
 1. On the **Monitoring** tab, click **Create new credentials**.
 1. Enter a username.

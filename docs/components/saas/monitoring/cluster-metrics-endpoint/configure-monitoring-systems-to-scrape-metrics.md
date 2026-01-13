@@ -31,6 +31,14 @@ The full metrics endpoint follows this format: `https://<metrics-target>/<cluste
 - `<metrics-target>`: The domain hosting the metrics endpoint.
 - `<cluster-id>`: The identifier of the Camunda 8 SaaS cluster.
 
+### Verify endpoint access
+
+Before configuring your monitoring system, use the following command to verify that the Cluster Metrics endpoint is reachable:
+
+```bash
+curl -v -u "<username>:<password>" https://<metrics-target>/<cluster-id>
+```
+
 ## Configure Prometheus scraping
 
 Prometheus can scrape the Cluster Metrics endpoint directly.
