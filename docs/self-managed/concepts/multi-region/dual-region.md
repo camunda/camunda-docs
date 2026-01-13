@@ -186,6 +186,8 @@ This numbering and the round-robin partition distribution assures the even repli
 
 Follow the [Cluster Scaling steps](../../components/orchestration-cluster/zeebe/operations/cluster-scaling.md) respecting the [Zeebe cluster configuration](#zeebe-cluster-configuration).
 
+- The cluster should be evenly scaled, keeping the regions balanced with the same number of brokers.
+
 ### Camunda 8 dual-region limitations
 
 | **Aspect**                  | **Details**                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
