@@ -151,6 +151,25 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda 8 Run with H2 as the default secondary data storage
+
+Camunda 8 Run now uses H2 as the default secondary data storage, instead of Elasticsearch.
+
+As a result, Operate and Tasklist run in V2 mode, and only V2 APIs are supported. This means that some deprecated features, such as draft variables, are no longer available; to continue using them, you must run Elasticsearch and switch back to V1 mode.
+
+:::info
+To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-release-notes/890/890-release-notes.md#use-h2-for-data-storage).
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
