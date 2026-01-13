@@ -94,6 +94,7 @@ module.exports = {
           ],
         },
         "components/concepts/process-applications",
+        "components/concepts/batch-operations",
         "components/concepts/workflow-patterns",
         {
           type: "category",
@@ -693,10 +694,17 @@ module.exports = {
             id: "components/operate/operate-introduction",
           },
           items: [
-            "components/operate/userguide/access-control",
+            {
+              Overview: [
+                "components/operate/overview/access-control",
+                "components/operate/overview/batch-operations-overview",
+                "components/operate/overview/batch-operation-details-overview",
+              ],
+            },
             "components/operate/userguide/basic-operate-navigation",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
+            "components/operate/userguide/manage-batch-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
             {
@@ -706,7 +714,12 @@ module.exports = {
               ],
             },
             "components/operate/userguide/process-instance-migration",
-            "components/operate/userguide/monitor-operation-status",
+            {
+              "Monitor process operations": [
+                "components/operate/userguide/monitor-operation-status",
+                "components/operate/userguide/monitor-batch-operations",
+              ],
+            },
           ],
         },
         {
@@ -1470,6 +1483,7 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
                     "self-managed/deployment/helm/configure/database/rdbms",
+                    "self-managed/deployment/helm/configure/database/validate-rdbms",
                     "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
                     {
                       Troubleshooting: [
@@ -1514,6 +1528,7 @@ module.exports = {
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/jwt-token-claims",
                       ],
                     },
                   ],
