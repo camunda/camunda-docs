@@ -41,6 +41,12 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
+#### AWS Bedrock API key authentication support
+
+<!-- https://github.com/camunda/connectors/issues/5551 -->
+
+The Amazon Bedrock model configuration now allows authentication using (long-term) Bedrock API keys as an alternative to the already existing authentication methods.
+
 #### Model timeout configuration
 
 <!-- https://github.com/camunda/connectors/issues/5808 -->
