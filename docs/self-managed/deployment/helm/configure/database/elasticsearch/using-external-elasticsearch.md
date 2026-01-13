@@ -13,6 +13,10 @@ Secondary storage is configurable. For supported components, you can use an RDBM
 
 By default, the [Helm chart deployment](/self-managed/deployment/helm/install/quick-install.md) creates a new Elasticsearch instance. You can also connect to an external Elasticsearch instance, either in the same Kubernetes cluster or outside it.
 
+:::note
+In 8.9-alpha3, H2 is the default secondary storage for lightweight Camunda 8 Run and quick-install scenarios. Elasticsearch is still bundled with the distribution and fully supported as an optional alternative; use this guide when you want to run or connect to an external Elasticsearch cluster instead of the default H2 store.
+:::
+
 For production deployments, Camunda recommends managing Elasticsearch installations externally (without enabling the Elasticsearch subchart). This gives more flexibility for scaling, backups, and upgrades without affecting the rest of the Camunda installation.
 
 ## Prerequisites
