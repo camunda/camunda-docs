@@ -143,7 +143,6 @@ You can run small Camunda 8 installations, one per solution, if you like. They c
 There are multiple ways to set up Camunda 8:
 
 - Use **Camunda's SaaS** offering: You don't need to install or operate the platform yourself. This is the most convenient and generally recommended option. If you face legal challenges around information security, privacy, and compliance, check the [Camunda Trust Center](https://camunda.com/trust-center/). However, be aware of the following limitations:
-
   - You cannot [migrate historical audit data from Camunda 7](./migration-tooling.md).
   - [Multi-tenancy](/self-managed/concepts/multi-tenancy.md) is not currently supported.
 

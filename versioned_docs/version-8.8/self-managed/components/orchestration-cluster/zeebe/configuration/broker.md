@@ -38,7 +38,7 @@ Configuration names are noted as the **header** of each documented section, whil
 :::note
 The Zeebe Broker is a Spring Boot application. As such, [many common Spring Boot properties will work out of the box](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html).
 
-Additionally, its REST server is a reactive Spring Boot server (powered by WebFlux), and can be configured using the standard `server.*` properties, as well as the usual WebFlux properties. Its management server (for example, where actuator endpoints live) is configured as a child application context, and is also a reactive WebFlux server. It can be configured via `management.server.*` properties.
+Additionally, its REST server is a Spring Boot server (powered by Spring MVC), and can be configured using the standard `server.*` properties, as well as the usual Spring MVC properties. Its management server (for example, where actuator endpoints live) is configured as a child application context, and is also a Spring MVC server. It can be configured via `management.server.*` properties.
 
 Finally, the REST server is only serving requests _if, and only if, the embedded gateway is enabled via_ `zeebe.broker.gateway.enable: true`.
 :::
@@ -82,17 +82,17 @@ server:
     certificate-private-key: /path/to/my/private.key
 ```
 
-### spring.webflux
+### server.servlet
 
-| Field     | Description                                                                                                                                                                                                                                                     | Example value |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| base-path | The context path prefix for all REST API requests. For example, if you configure `/zeebe`, then the client's REST address would be `http://localhost:8080/zeebe`. This setting can also be overridden using the environment variable `SPRING_WEBFLUX_BASEPATH`. | `/`           |
+| Field        | Description                                                                                                                                                                                                                                                        | Example value |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| context-path | The context path prefix for all REST API requests. For example, if you configure `/zeebe`, then the client's REST address would be `http://localhost:8080/zeebe`. This setting can also be overridden using the environment variable `SERVER_SERVLET_CONTEXTPATH`. | `/`           |
 
 #### YAML snippet
 
 ```yaml
-spring.webflux:
-  base-path: /
+server.servlet:
+  context-path: /
 ```
 
 ### management.server

@@ -49,7 +49,6 @@ When using a self-hosted GitHub instance, ensure the environment variable `CAMUN
 1. Within Web Modeler, navigate to the process application you would like to connect to GitHub, and click **Connect GitHub**.
 
 2. Provide the following information in the GitHub Configuration modal:
-
    - **Installation ID:** Found in the URL of your GitHub App's installation page.
    - **Client ID:** Found in your GitHub App's settings page. You can also use Application ID as an alternative. (If you are using GitHub Enterprise Server 3.13 or prior, you **have** to use Application ID)
    - **Private Key:** The contents of the .pem file downloaded from your GitHub App's settings page.

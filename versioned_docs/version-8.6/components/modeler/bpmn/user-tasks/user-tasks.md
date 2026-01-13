@@ -130,7 +130,6 @@ Depending on your use case, two different types of form references can be used:
    of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form)).
 
    The `bindingType` attribute determines which version of the linked form is used:
-
    - `latest`: The latest deployed version at the moment the user task is activated.
    - `deployment`: The version that was deployed together with the currently running version of the process.
    - `versionTag`: The latest deployed version that is annotated with the version tag specified in the `versionTag` attribute.

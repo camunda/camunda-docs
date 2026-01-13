@@ -53,8 +53,8 @@ const Infrastructure = () => {
     <div className="sm-infrastructure">
       <h2>Infrastructure</h2>
       <p>
-        Provision your cloud infrastructure to deploy Camunda 8
-        Self-Managed in a scalable, secure, and production-ready environment.
+        Provision your cloud infrastructure to deploy Camunda 8 Self-Managed in
+        a scalable, secure, and production-ready environment.
       </p>
       <div className="sm-grid-4">
         {infrastructureItems.map((item, index) => (

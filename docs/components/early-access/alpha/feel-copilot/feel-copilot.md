@@ -35,7 +35,6 @@ To use the FEEL Copilot in Web Modeler, take the following steps:
    :::note
 
    To open a FEEL popup from an empty diagram:
-
    1. In a new diagram, click the Start Event (the circle in the diagram).
    1. In the sidebar, click the plus (**+**) next to **Outputs**, and click **Variable assignment value**.
    1. Click the **Open popup editor** icon in the field to open the FEEL popup.

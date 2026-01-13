@@ -344,7 +344,6 @@ If no migration is required, you can keep the application running at version `N`
 1. Current state: Camunda single application is running at version `N` (for example, 8.7) and processing traffic with its indices in Elasticsearch.
 
 2. Verification: Check the upgrade documentation for version `N → N+1` (for example, 8.7 → 8.8) to determine if migrations are required.
-
    - If migrations are not required, continue while keeping `N` running.
    - If migrations are required, schedule downtime or maintenance window and stop the application before running migration steps.
 
@@ -390,7 +389,6 @@ Use the standalone schema manager if you need to:
 #### Procedure
 
 1. Prepare a schema manager configuration that includes the new settings.
-
    - For Operate and Tasklist version 8.7.11+, set `updateSchemaSettings: true`.
 
    Example configuration:

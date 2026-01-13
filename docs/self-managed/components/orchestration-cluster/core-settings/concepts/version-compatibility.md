@@ -21,13 +21,13 @@ Camunda 8 versions follow the `MAJOR.MINOR.PATCH` format (for example, `8.8.3`).
 
 ## Supported upgrade paths
 
-| Scenario                            | Example               | Compatibility                                              |
-| ----------------------------------- | --------------------- | ---------------------------------------------------------- |
-| Patch upgrade                       | 8.8.1 → 8.8.3         | Compatible                                                 |
-| Minor upgrade (single step)         | 8.7.5 → 8.8.3         | Compatible                                                 |
-| Minor upgrade (skipping a minor)    | 8.6.9 → 8.8.3         | Incompatible                                               |
-| Patch downgrade                     | 8.8.3 → 8.8.1         | Incompatible (broker); secondary storage skips (see below) |
-| Minor downgrade                     | 8.8.3 → 8.7.5         | Incompatible (broker); secondary storage skips (see below) |
+| Scenario                            | Example              | Compatibility                                              |
+| ----------------------------------- | -------------------- | ---------------------------------------------------------- |
+| Patch upgrade                       | 8.8.1 → 8.8.3        | Compatible                                                 |
+| Minor upgrade (single step)         | 8.7.5 → 8.8.3        | Compatible                                                 |
+| Minor upgrade (skipping a minor)    | 8.6.9 → 8.8.3        | Incompatible                                               |
+| Patch downgrade                     | 8.8.3 → 8.8.1        | Incompatible (broker); secondary storage skips (see below) |
+| Minor downgrade                     | 8.8.3 → 8.7.5        | Incompatible (broker); secondary storage skips (see below) |
 | Major change (upgrade or downgrade) | 8.x ↔ 9.x            | Incompatible                                               |
 | Alpha build involved                | 8.8.0-alpha1 ↔ 8.8.0 | Incompatible                                               |
 

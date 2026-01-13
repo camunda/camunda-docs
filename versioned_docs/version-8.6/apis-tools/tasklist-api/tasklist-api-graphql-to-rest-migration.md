@@ -79,7 +79,6 @@ curl -X 'POST' \
 Please note that several field names in request body and response were changed in REST API comparing to the equivalent GraphQL input/response models, in order to improve the consistency and clarity of our API:
 
 - in request body:
-
   - [`TaskQuery.processDefinitionId`](/apis-tools/tasklist-api/inputs/task-query.mdx#code-style-fontweight-normal-taskquerybprocessdefinitionidbcodestring-) ⇒ [`TaskSearchRequest.processDefinitionKey`](/apis-tools/tasklist-api-rest/schemas/requests/task-search-request.mdx#code-style-fontweight-normal-tasksearchrequestbprocessdefinitionkeybcodestring)
   - [`TaskQuery.processInstanceId`](/apis-tools/tasklist-api/inputs/task-query.mdx#code-style-fontweight-normal-taskquerybprocessinstanceidbcodestring-) ⇒ [`TaskSearchRequest.processInstanceKey`](/apis-tools/tasklist-api-rest/schemas/requests/task-search-request.mdx#code-style-fontweight-normal-tasksearchrequestbprocessinstancekeybcodestring)
 
