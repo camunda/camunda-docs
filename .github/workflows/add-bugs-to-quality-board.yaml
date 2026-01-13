@@ -7,18 +7,16 @@ on:
 jobs:
   add-to-quality-board:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
 
     steps:
-      - uses: actions/create-github-app-token@v2
-        id: app-token
-        with:
-          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
-          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
       - id: add-bug-to-quality-board
         name: Add issue to Quality Board
         uses: camunda/infra-global-github-actions/add-bug-to-quality-board@main
         with:
-          github-token: ${{ steps.app-token.outputs.token }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           project-number: "187"
           component-label: "component/documentation"
         if: >
