@@ -170,33 +170,6 @@ spring:
 Operate v2 has limited functionality in 8.9-alpha3 when running against H2. Full Operate support is planned for a later alpha. Tasklist and the v2 REST API have parity across supported secondary storage backends.
 :::
 
-- The URLs for the Docker Compose application can be found in the [Docker Compose](#docker-compose) documentation.
-- The Connectors API does not provide a web interface. If you access its URL in a browser, you may see a login page, but it cannot be used to sign in. Use the API endpoints directly instead.
-  :::
-
-### Deploy diagrams from Desktop Modeler
-
-Make sure you have installed [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md) before continuing.
-
-To [deploy diagrams](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, use the following configuration:
-
-- **Target:** Self-Managed
-- **Cluster endpoint:** `http://localhost:8080/v2`
-- **Authentication:** None
-
-A success notification will display when complete. [Start a new process instance](/components/modeler/desktop-modeler/start-instance.md) to view your running process in Operate.
-
-### Use built-in and custom connectors
-
-Desktop Modeler [automatically fetches](/components/modeler/desktop-modeler/use-connectors.md#automatic-connector-template-fetching) templates for pre-built connectors. [Custom connectors](/components/connectors/custom-built-connectors/connector-sdk.md) can also be added to your Camunda 8 Run distribution.
-
-To add a custom connector:
-
-1. Place the connector’s `.jar` file in the `/custom_connectors` folder within the `/c8run` directory.
-2. Place the element template in the appropriate folder for your installation. See [Search Paths](/components/modeler/desktop-modeler/search-paths/search-paths.md) for more information.
-
-Once configured, your connectors are available for use in Modeler.
-
 #### Optional: Elasticsearch
 
 If you need indexing, search, or full Operate/Tasklist functionality, enable Elasticsearch. Elasticsearch is still bundled with Camunda 8 Run in 8.9-alpha3 and can be managed by Camunda 8 Run or provided as an external service.
