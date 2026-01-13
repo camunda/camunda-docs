@@ -19,6 +19,8 @@ Ensure that:
 - Required JDBC parameters (SSL/TLS, authentication, failover) are configured as needed.
 - The database user has permissions to create and modify schema objects if `autoDDL` is enabled.
 
+For a short checklist and troubleshooting steps you can run after configuring the database, see [validate RDBMS connectivity (Helm)](/self-managed/deployment/helm/configure/database/validate-rdbms.md).
+
 ## Configuration
 
 ### Parameters
@@ -129,6 +131,8 @@ orchestration:
       securityContext:
         runAsUser: 1001
 ```
+
+After loading JDBC drivers into pods, run the validation checklist in [validate RDBMS connectivity](/self-managed/deployment/helm/configure/database/validate-rdbms.md) to confirm the application can load the driver, reach the database, and initialize schema.
 
 ### Option 2: Using a custom Docker image
 
