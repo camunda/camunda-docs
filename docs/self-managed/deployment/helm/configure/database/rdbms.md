@@ -58,8 +58,8 @@ For a short checklist and troubleshooting steps you can run after configuring th
 
 ### Example usage
 
-:::warning Important
-Operate does not support RDBMS until **Camunda 8.9.0-alpha3**.
+:::note
+Operate has limited functionality when using RDBMS as secondary storage in Camunda 8.9-alpha3. See [Operate limitations](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#operate-with-rdbms) for details on supported and unsupported features.
 :::
 
 ```yaml

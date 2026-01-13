@@ -150,7 +150,7 @@ This table shows RDBMS support status by component (including RDBMS as secondary
 | :------------------------ | :----------------- | :---------------------------------------------------------------------------------------------------------------- |
 | **Orchestration Cluster** | ✅ Fully supported | Supports RDBMS as secondary storage.                                                                              |
 | Tasklist UI               | ✅ Fully supported | All functionality available.                                                                                      |
-| Operate UI                | ⚠️ Limited         | Under active development. Functionality is limited in **8.9 alpha**.                                              |
+| Operate UI                | ⚠️ Limited         | Partial support in **8.9-alpha3**. See [Operate limitations](#operate-with-rdbms) below.                          |
 | Optimize                  | ❌ Not supported   | Out of scope for RDBMS support.                                                                                   |
 | Web Modeler               | ✅ Fully supported | See [Web Modeler database configuration](/self-managed/components/modeler/web-modeler/configuration/database.md). |
 | Identity                  | ✅ Fully supported | All functionality available.                                                                                      |
@@ -185,4 +185,25 @@ Because collation behavior varies across database vendors, results sorted by str
 
 ### Operate with RDBMS
 
-Operate support is limited when using RDBMS in Camunda 8.9 alpha. Operate RDBMS support is under active development and limitations are expected to be removed in a future minor release.
+Operate has partial support for RDBMS as secondary storage in Camunda 8.9-alpha3. Many core features work, but some functionality is not yet available. Operate RDBMS support is under active development. Unsupported features are planned for future releases.
+
+**Supported features:**
+
+- Process instance list with filtering, sorting, and selection
+- Operations panel and batch operations (retry, cancel, migrate)
+- Drill down to process instance details
+- Diagram display and element selection
+- Metadata popover, details view, and call activity breakdown
+- Execution listeners and Input/Output mappings
+- Operations Log and incident panel
+- Canceling and retrying process instances
+- Decision tables, literal expressions, and decision instances list
+- DRD Panel navigation and decision inputs/outputs
+
+**Not supported:**
+
+- Dashboard statistics (process statistics, incident statistics by error message)
+- Batch operation monitoring and batch move operations
+- Variable panel in process instance details
+- Process instance modification
+- Deleting process definitions, process instances, or decision definitions
