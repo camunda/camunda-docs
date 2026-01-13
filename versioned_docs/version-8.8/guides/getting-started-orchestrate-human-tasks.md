@@ -237,7 +237,7 @@ Ensure your installation of [Camunda 8 Run](/self-managed/quickstart/developer-q
 
 1. Click the rocket-shaped **Deploy** icon to begin deploying your process, and provide the following configuration:
    - **Target:** Self-Managed
-   - **Cluster endpoint:** `http://localhost:8080`
+   - **Cluster endpoint:** `http://localhost:8080/v2`
    - **Authentication:** None
 2. Click **Deploy** to deploy your process.
 3. To run your new process, click the arrow-shaped **Run** icon, and provide your form input as JSON (for example, `{"meal": "chicken"}`).

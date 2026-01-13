@@ -199,7 +199,7 @@ To deploy from Desktop Modeler to the lightweight configuration:
 1. Open Desktop Modeler and click the deployment icon (rocket symbol).
 1. Select **Camunda 8 Self-Managed**.
 1. Configure the connection:
-   - **Cluster endpoint**: `http://localhost:8088`
+   - **Cluster endpoint**: `http://localhost:8088/v2`
    - **Authentication**: Select **None** (no authentication required by default)
 1. Click **Deploy**.
 
@@ -212,7 +212,7 @@ To deploy from Desktop Modeler to the full configuration:
 1. Open Desktop Modeler and click the deployment icon.
 1. Select **Camunda 8 Self-Managed**.
 1. Configure the connection:
-   - **Cluster endpoint**: `http://localhost:8088`
+   - **Cluster endpoint**: `http://localhost:8088/v2`
    - **Authentication**: Select **OAuth**
    - **OAuth URL**: `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
    - **Client ID**: `orchestration` (from `.env` file: `ORCHESTRATION_CLIENT_ID`)

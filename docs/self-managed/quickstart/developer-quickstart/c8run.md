@@ -161,7 +161,7 @@ Make sure you have installed [Desktop Modeler](/components/modeler/desktop-model
 To [deploy diagrams](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, use the following configuration:
 
 - **Target:** Self-Managed
-- **Cluster endpoint:** `http://localhost:8080`
+- **Cluster endpoint:** `http://localhost:8080/v2`
 - **Authentication:** None
 
 A success notification will display when complete. [Start a new process instance](/components/modeler/desktop-modeler/start-instance.md) to view your running process in Operate.
