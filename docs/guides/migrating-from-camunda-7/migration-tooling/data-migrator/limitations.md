@@ -164,7 +164,8 @@ The history migration has the following limitations.
 
 - To avoid collisions between definitions (process/decision/form), each definition migrated from Camunda 7 to 8 has its ID prefixed with `c7-legacy-`.
   - Do not deploy new definitions in Camunda 8 with IDs starting with this prefix to avoid conflicts.
-- Avoid manipulation of Camunda 7 data in between Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable).
+- Avoid manipulating Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a 
+  specific migration issue to fix (e.g. moving instances out of states that are not migratable).
 - The History Data Migrator does not support the following Camunda 8 entities or properties:
   - Sequence flow: Sequence flows cannot be highlighted in Operate.
   - User task migration metadata: Information for user tasks migrated via process instance migration is not available in Camunda 7.
