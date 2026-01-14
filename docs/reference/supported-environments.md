@@ -93,7 +93,8 @@ If you want to use another NFS, it must meet these requirements:
 
 - Be POSIX-compliant.
 - Never reorder file operations.
-- Be a hard mount, not a soft mount, to avoid SIGBUS errors during a network partition.
+- Retry I/O operations across temporary network failures, instead of failing on timeout.
+- Doesn't surface network‑related failures in the client process.
 - **Only one container may mount the disk in write mode at a time.** Two containers mounting the same disk in write mode could cause data corruption.
 
 #### Performance
