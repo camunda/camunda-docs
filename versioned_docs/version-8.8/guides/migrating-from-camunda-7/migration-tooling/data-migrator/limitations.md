@@ -23,6 +23,7 @@ The runtime migration has the following limitations.
 - Data changed via user operations
   - Data set via user operations like setting a due date to a user task cannot be migrated currently.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5182
+- Avoid manipulation of Camunda 7 data in between Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable).
 
 ### Variables
 
