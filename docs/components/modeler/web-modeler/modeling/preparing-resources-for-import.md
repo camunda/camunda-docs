@@ -32,6 +32,12 @@ Each file should:
   - See below for instructions on getting each URL from GitHub.
 - Be within Web Modeler’s **per‑file size** limit (3 MB)
 
+Also:
+
+- Only include at most one README file
+- Element template ID's must be unique within the set of imported files.
+- BPMN process ID's must be unique within the set of imported files.
+
 ### Template IDs and versions
 
 - Use **stable, distinct `id` values** for templates so BPMN files can consistently reference them, and the ID doesn't conflict with other templates the user might download.
