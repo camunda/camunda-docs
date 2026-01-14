@@ -34,22 +34,49 @@ Once you have completed this guide, you will have an example AI agent running wi
 
 ## Prerequisites
 
+Requirements vary depending on your working environment and selected model provider. See below for details.
+
 The following prerequisites are required to build your first AI agent:
 
-| Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda 8 environment            | <p>To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:</p><p><ul><li><p> [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).</p></li><li><p> [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).</p></li></ul></p> |
-| A supported LLM provider account | <p>The AI Agent connector supports multiple model providers. You can try two use cases in this guide: a cloud-based option using AWS Bedrock, and a local LLM with Ollama.</p> <p> For more information on how to configure the connector with your preferred LLM provider, such as OpenAI or Anthropic, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).</p>                          |
+| Prerequisite          | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| :-------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda 8 environment | <p>To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:</p><p><ul><li><p> [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).</p></li><li><p> [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).</p></li></ul></p> |
+| A supported LLM       | <p>The AI Agent connector supports multiple model providers. In this guide, you can try two use cases: a cloud-based option using AWS Bedrock, and a local LLM with Ollama.</p> <p> For more information on how to configure the connector with your preferred LLM provider, such as OpenAI or Anthropic, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).</p>                         |
 
-:::important
+### Camunda 8 environment
 
-The AWS Bedrock option uses Claude Sonnet 4 in the `us-east-1` region.
+To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:
+
+- [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).
+- [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).
+
+### Supported models
+
+The AI Agent connector makes it easy to integrate Large Language Models (LLMs) into your process workflows.
+It supports multiple model providers and can communicate with any LLM that exposes an OpenAI‑compatible API.
+
+In this guide, you can try two use cases: a cloud-based option using AWS Bedrock, and a local LLM with Ollama.
+
+**(TBD!!) Summarize using a table: provider and model. Below another one with prerequisites**
+
+#### AWS Bedrock
+
+With AWS Bedrock, you will use the Claude Sonnet 4 model in the `us-east-1` region.
 
 To use it, you need access to:
 
 - An AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).
 - Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for more details.
-  :::
+
+#### Local LLM via Ollama
+
+With Ollama, you will use the GPT-OSS 20B model.
+
+To use it, you need:
+
+- Camunda 8 Run running locally.
+
+For more information on how to configure the connector with your preferred LLM provider, such as OpenAI or Anthropic, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
 ## Step 1: Install the example model blueprint
 
@@ -136,6 +163,8 @@ Export the secrets as environment variables before starting the distribution. If
 Configure your local LLM with Ollama.
 </TabItem>
 </Tabs>
+
+### Configure the model
 
 In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task.
 You can leave it as is or adjust its configuration to test other setups. To do so, use the properties panel of the AI Agent:
