@@ -25,7 +25,6 @@ camunda.migrator:
   validation-job-type: '=if legacyId != null then "migrator" else "noop"' # Job type for validation (optional - falls back to job-type if not defined)
   auto-ddl: true # Automatically create/update database schema
   table-prefix: MY_PREFIX_ # Optional table prefix for migrator schema
-  data-source: C7 # Choose if the migrator schema is created on the data source of 'C7' or 'C8'
   interceptors:
     - class-name: com.example.MyCustomInterceptor # Custom interceptor class
     - class-name: com.example.AnotherInterceptor # Another custom interceptor class

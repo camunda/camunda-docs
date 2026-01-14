@@ -22,6 +22,56 @@ Before you update:
 
 <!-- HEADS-UP: ADD NEW VERSIONS ALWAYS TO THE TOP OF THIS LIST -->
 
+### Version 0.2.x to 0.3.0
+
+**Release date:** TBD \
+**Camunda 8 compatibility:** 8.9.x
+
+#### Data Migrator: Automatic C8 datasource selection
+
+The migrator now automatically uses the C8 datasource for the migration schema when configured, removing the need for manual configuration.
+
+**What changed**
+
+- **Removed**: `camunda.migrator.data-source` configuration property
+- **New behavior**: Migration schema is automatically created on C8 database when `camunda.migrator.c8.data-source` is configured
+
+**Impact on existing migrations**
+
+:::warning Risk of duplicate migrations
+If you already ran migration in 0.2 **without** `camunda.migrator.data-source: C8` configured, upgrading to 0.3 will create a new migration schema on the C8 database. This resets migration tracking and may cause duplicate data migration.
+:::
+
+**Migration steps**
+
+1. **If your C7 and C8 datasources point to the same database in 0.2:**
+   - Remove the `camunda.migrator.data-source` property from your configuration
+   - No further action needed - the migration schema is already accessible from both datasources
+
+2. **If you explicitly configured `data-source: C8` in 0.2:**
+   - Remove the `camunda.migrator.data-source` property from your configuration
+   - No further action needed - your migration schema is already on the C8 database
+
+3. **If you used the default configuration (migration schema on C7 database):**
+   - **Option A (Recommended)**: Manually copy the migration schema from C7 to C8 database before upgrading
+   - **Option B**: Start from scratch without migration data.
+     - This leads to duplicate migrations.
+     - Before updating, you can use `--drop-schema` to remove the migration mapping table on C7 (e.g., to reclaim disk space)
+
+4. **If you haven't started migration yet:**
+   - Simply configure your C8 datasource for history migration:
+
+     ```yaml
+     camunda.migrator.c8.data-source:
+       jdbc-url: jdbc:postgresql://localhost:5432/camunda8
+       username: camunda
+       password: camunda
+     ```
+
+:::note
+See [History Atomicity](data-migrator/history.md#atomicity) for more details.
+:::
+
 ### Version 0.1.x to 0.2.0
 
 **Release date:** 17/12/2025 \
