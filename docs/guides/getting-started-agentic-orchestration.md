@@ -36,16 +36,20 @@ Once you have completed this guide, you will have an example AI agent running wi
 
 The following prerequisites are required to build your first AI agent:
 
-| Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda 8 environment            | <p>To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:</p><p><ul><li><p> [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).</p></li><li><p> [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).</p></li></ul></p>                                                                                                 |
-| A supported LLM provider account | <p>The AI Agent connector supports multiple model providers. This guide assumes you have access to an AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</p> <p> You can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).</p> |
+| Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda 8 environment            | <p>To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:</p><p><ul><li><p> [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).</p></li><li><p> [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).</p></li></ul></p> |
+| A supported LLM provider account | <p>The AI Agent connector supports multiple model providers. You can try two use cases in this guide: a cloud-based option using AWS Bedrock, and a local LLM with Ollama.</p> <p> For more information on how to configure the connector with your preferred LLM provider, such as OpenAI or Anthropic, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).</p>                          |
 
 :::important
-The AI Agent connector example in this guide is preconfigured to use AWS Bedrock with Claude Sonnet 4 in the `us-east-1` region.
 
-To use it without changes, you must first request access to Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for more details.
-:::
+The AWS Bedrock option uses Claude Sonnet 4 in the `us-east-1` region.
+
+To use it, you need access to:
+
+- An AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).
+- Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for more details.
+  :::
 
 ## Step 1: Install the example model blueprint
 
@@ -88,10 +92,23 @@ The example includes a form linked to the start event, allowing you to submit re
 
 <img src={AiAgentStartFormImg} alt="Example AI agent start form" className="img-800"/>
 
-## Step 2: Configure connector secrets
+## Step 2: Configure the AI Agent connector
 
-The example process is preconfigured to use AWS Bedrock as the model.
-For authentication, it is preconfigured to use the following connector secrets:
+Depending on your model choice, you need to configure the AI Agent connector accordingly.
+
+<Tabs groupId="setup" defaultValue="aws" values={
+[
+{ label: 'AWS Bedrock', value: 'aws', },
+{ label: 'Ollama', value: 'local', },
+]}>
+
+<TabItem value="aws">
+Configure AWS Bedrock.
+
+### Configure connector secrets
+
+The example blueprint downloaded in step one is preconfigured to use AWS Bedrock.
+For authentication, it uses the following connector secrets:
 
 - `AWS_BEDROCK_ACCESS_KEY`: The AWS Access Key ID for your AWS account able to call the Bedrock Converse API.
 - `AWS_BEDROCK_SECRET_KEY`: The AWS Secret Access Key for your AWS account.
@@ -113,10 +130,15 @@ Export the secrets as environment variables before starting the distribution. If
 </TabItem>
 </Tabs>
 
-## Step 3: Configure the AI Agent connector (optional)
+</TabItem>
+
+<TabItem value="local">
+Configure your local LLM with Ollama.
+</TabItem>
+</Tabs>
 
 In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task.
-You can leave it as is or adjust its configuration to test other setups. To do so, use the properties panel of the AI Agent.
+You can leave it as is or adjust its configuration to test other setups. To do so, use the properties panel of the AI Agent:
 
 <img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel"/>
 
