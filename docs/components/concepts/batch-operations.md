@@ -24,7 +24,7 @@ Example use cases include:
 
 ## Types
 
-There are four types of batch operations:
+Here are the types of available batch operations:
 
 | Type                      | Description                                                                                        |
 | ------------------------- | -------------------------------------------------------------------------------------------------- |
