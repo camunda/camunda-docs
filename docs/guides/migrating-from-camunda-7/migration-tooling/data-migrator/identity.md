@@ -42,7 +42,9 @@ As of today, the following requirements and limitations apply:
 
 ### Authorizations
 
-Not all authorizations can be migrated from Camunda 7 to Camunda 8 due to differences in the authorization models of both systems. When authorizations are migrated, those that are not supported are skipped, and the reason for incompatibility is logged by the migrator.
+Not all authorizations can be migrated from Camunda 7 to Camunda 8 due to differences in the authorization models of both systems.
+
+When identity migration is executed, authorizations that are not supported are skipped and the reason for incompatibility is logged by the migrator. If an authorization contains at least one unsupported permission, the whole authorization is skipped.
 
 The following tables provide an overview of the supported authorizations.
 
@@ -60,30 +62,30 @@ Because in Camunda 7 `GRANT` authorizations take precedence over `REVOKE` author
 
 #### By Resource Type
 
-| C7 Resource Type                   | Migration supported             | C8 Resource Type equivalent |
-| ---------------------------------- | ------------------------------- | --------------------------- |
-| `Application`                      | Yes                             | `Component`                 |
-| `Authorization`                    | [Partial\*](#authorization)     | `Authorization`             |
-| `Batch`                            | [Partial\*](#batch)             | `Batch`                     |
-| `Dashboard`                        | No                              | -                           |
-| `Decision Definition`              | Not yet                         | -                           |
-| `Decision Requirements Definition` | Not yet                         | -                           |
-| `Deployment`                       | Not yet                         | -                           |
-| `Filter`                           | No                              | -                           |
-| `Group`                            | Yes                             | `Group`                     |
-| `Group Membership`                 | [Partial\*](#group-membership)  | `Group`                     |
-| `Historic Process Instance`        | No                              | -                           |
-| `Historic Process Instance`        | No                              | -                           |
-| `Historic Task`                    | No                              | -                           |
-| `Process Definition`               | Not yet                         | -                           |
-| `Process Instance`                 | No                              | -                           |
-| `Report`                           | No                              | -                           |
-| `System`                           | [Partial\*](#system)            | `System`                    |
-| `Task`                             | No                              | -                           |
-| `Tenant`                           | Yes                             | `Tenant`                    |
-| `Tenant Membership`                | [Partial\*](#tenant-membership) | `Tenant`                    |
-| `User`                             | Yes                             | `User`                      |
-| `User Operation Log Category`      | No                              | -                           |
+| C7 Resource Type                   | Migration supported                             | C8 Resource Type equivalent        |
+| ---------------------------------- | ----------------------------------------------- | ---------------------------------- |
+| `Application`                      | Yes                                             | `Component`                        |
+| `Authorization`                    | [Partial\*](#authorization-compatibility)       | `Authorization`                    |
+| `Batch`                            | [Partial\*](#batch-compatibility)               | `Batch`                            |
+| `Dashboard`                        | No                                              | -                                  |
+| `Decision Definition`              | [Partial\*](#decision-definition-compatibility) | `Decision Definition`              |
+| `Decision Requirements Definition` | Yes                                             | `Decision Requirements Definition` |
+| `Deployment`                       | Not yet                                         | -                                  |
+| `Filter`                           | No                                              | -                                  |
+| `Group`                            | Yes                                             | `Group`                            |
+| `Group Membership`                 | [Partial\*](#group-membership-compatibility)    | `Group`                            |
+| `Historic Process Instance`        | No                                              | -                                  |
+| `Historic Process Instance`        | No                                              | -                                  |
+| `Historic Task`                    | No                                              | -                                  |
+| `Process Definition`               | [Partial\*](#process-definition-compatibility)  | `Process Definition`               |
+| `Process Instance`                 | No                                              | -                                  |
+| `Report`                           | No                                              | -                                  |
+| `System`                           | [Partial\*](#system-compatibility)              | `System`                           |
+| `Task`                             | No                                              | -                                  |
+| `Tenant`                           | Yes                                             | `Tenant`                           |
+| `Tenant Membership`                | [Partial\*](#tenant-membership-compatibility)   | `Tenant`                           |
+| `User`                             | Yes                                             | `User`                             |
+| `User Operation Log Category`      | No                                              | -                                  |
 
 Details for partial migration can be found below.
 
@@ -152,12 +154,51 @@ Behaves the same as `Group Membership`.
 
 ### `System` compatibility
 
-| C7 Permission | Migration supported | C8 Permission equivalent              |
-| ------------- | ------------------- | ------------------------------------- |
-| `READ`        | Yes                 | `READ`, `READ_USAGE_METRIC`           |
-| `SET`         | No                  | -                                     |
-| `DELETE`      | No                  | -                                     |
-| `ALL`         | Yes                 | `READ`, `READ_USAGE_METRIC`, `UPDATE` |
+| C7 Permission | Migration supported | C8 Permission equivalent                                 |
+| ------------- | ------------------- | -------------------------------------------------------- |
+| `READ`        | Yes                 | `READ`, `READ_USAGE_METRIC`                              |
+| `SET`         | No                  | -                                                        |
+| `DELETE`      | No                  | -                                                        |
+| `ALL`         | Yes                 | `READ`, `READ_USAGE_METRIC`, `UPDATE`, `READ_JOB_METRIC` |
+
+### `Decision Definition` compatibility
+
+| C7 Permission     | Migration supported | C8 Permission equivalent                                                                                     |
+| ----------------- | ------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `READ`            | Yes                 | `READ_DECISION_DEFINITION`, `READ_DECISION_INSTANCE`                                                         |
+| `UPDATE`          | No                  | -                                                                                                            |
+| `CREATE_INSTANCE` | Yes                 | `CREATE_DECISION_INSTANCE`                                                                                   |
+| `READ_HISTORY`    | No                  | -                                                                                                            |
+| `ALL`             | Yes                 | `CREATE_DECISION_INSTANCE`, `READ_DECISION_DEFINITION`, `READ_DECISION_INSTANCE`, `DELETE_DECISION_INSTANCE` |
+
+### `Process Definition` compatibility
+
+| C7 Permission              | Migration supported | C8 Permission equivalent                                                                                                                                                                                                        |
+| -------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `READ`                     | Yes                 | `READ_PROCESS_DEFINITION`                                                                                                                                                                                                       |
+| `UPDATE`                   | No                  | -                                                                                                                                                                                                                               |
+| `DELETE`                   | No                  | -                                                                                                                                                                                                                               |
+| `SUSPEND`                  | No                  | -                                                                                                                                                                                                                               |
+| `CREATE_INSTANCE`          | Yes                 | `CREATE_PROCESS_INSTANCE`                                                                                                                                                                                                       |
+| `READ_INSTANCE`            | Yes                 | `READ_PROCESS_INSTANCE`                                                                                                                                                                                                         |
+| `UPDATE_INSTANCE`          | Yes                 | `UPDATE_PROCESS_INSTANCE`                                                                                                                                                                                                       |
+| `RETRY_JOB`                | No                  | -                                                                                                                                                                                                                               |
+| `SUSPEND_INSTANCE`         | No                  | -                                                                                                                                                                                                                               |
+| `DELETE_INSTANCE`          | Yes                 | `DELETE_PROCESS_INSTANCE`                                                                                                                                                                                                       |
+| `MIGRATE_INSTANCE`         | No                  | -                                                                                                                                                                                                                               |
+| `READ_TASK`                | Yes                 | `READ_USER_TASK`                                                                                                                                                                                                                |
+| `UPDATE_TASK`              | Yes                 | `UPDATE_USER_TASK`                                                                                                                                                                                                              |
+| `TASK_ASSIGN`              | No                  | -                                                                                                                                                                                                                               |
+| `TASK_WORK`                | No                  | -                                                                                                                                                                                                                               |
+| `READ_TASK_VARIABLE`       | No                  | -                                                                                                                                                                                                                               |
+| `READ_HISTORY`             | No                  | -                                                                                                                                                                                                                               |
+| `READ_HISTORY_VARIABLE`    | No                  | -                                                                                                                                                                                                                               |
+| `DELETE_HISTORY`           | No                  | -                                                                                                                                                                                                                               |
+| `READ_INSTANCE_VARIABLE`   | No                  | -                                                                                                                                                                                                                               |
+| `UPDATE_INSTANCE_VARIABLE` | No                  | -                                                                                                                                                                                                                               |
+| `UPDATE_TASK_VARIABLE`     | No                  | -                                                                                                                                                                                                                               |
+| `UPDATE_HISTORY`           | No                  | -                                                                                                                                                                                                                               |
+| `ALL`                      | Yes                 | `CREATE_PROCESS_INSTANCE`, `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, `UPDATE_PROCESS_INSTANCE`, `UPDATE_USER_TASK`, `MODIFY_PROCESS_INSTANCE`, `CANCEL_PROCESS_INSTANCE`, `DELETE_PROCESS_INSTANCE` |
 
 ### `ALL` permissions compatibility
 
