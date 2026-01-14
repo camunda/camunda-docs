@@ -14,22 +14,6 @@ While this guide uses AWS as a reference, the steps are applicable to other [sup
 Before proceeding with the setup, ensure the following requirements are met:
 
 - **Kubernetes Cluster**: A functioning Kubernetes cluster with kubectl access and block storage persistent volumes for stateful components. This guide will use an AWS EKS cluster for reference. Step-by-step documentation is available to deploy an EKS cluster with [Terraform](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md), and [install Camunda 8](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md).
-
-:::danger Critical: Persistent volume reclaim policy
-
-**Your Kubernetes StorageClass MUST use a `Retain` reclaim policy for production deployments.**
-
-If the reclaim policy is set to `Delete` (the default in many Kubernetes distributions), **all Zeebe broker data will be permanently and irretrievably lost** when PersistentVolumeClaims are deleted during pod restarts, upgrades, or cluster maintenance operations.
-
-**Action required:**
-
-1. Verify your current StorageClass: `kubectl get storageclass`
-2. Ensure `RECLAIMPOLICY` shows `Retain`, not `Delete`
-3. If using `Delete`, create a new StorageClass with `persistentVolumeReclaimPolicy: Retain` before installing Camunda
-
-For more information, see the [Kubernetes documentation on reclaim policies](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming).
-:::
-
 - **Helm**: Make sure the [Helm CLI](/reference/supported-environments.md#clients) is installed.
 - **DNS Configuration**: You must have access to configure DNS for your domain in order to point to the Kubernetes cluster Ingress.
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
@@ -297,6 +281,21 @@ The following resources and configuration options are important to keep in mind 
 ### Reliability
 
 The following resources and configuration options are important to keep in mind regarding reliability:
+
+#### Persistent volume reclaim policy
+
+Ensure your Kubernetes StorageClass uses a `Retain` reclaim policy for production deployments. If set to `Delete` (the default in many distributions), Zeebe broker data will be permanently lost when PVCs are deleted during pod restarts or cluster maintenance.
+
+Verify your configuration:
+
+```bash
+kubectl get storageclass
+# RECLAIMPOLICY should show "Retain", not "Delete"
+```
+
+For more details, see [troubleshooting](/self-managed/operational-guides/troubleshooting.md#zeebe-data-loss-after-pod-restart-or-cluster-maintenance) and the [Kubernetes documentation on reclaim policies](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming).
+
+#### Node affinity and tolerations
 
 - Check node affinity and tolerations. Refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) to modify the node affinity and tolerations.
 

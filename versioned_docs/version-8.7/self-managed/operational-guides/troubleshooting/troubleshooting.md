@@ -280,3 +280,57 @@ The error message suggests adjusting the Ingress configuration to include the re
 :::note
 Sometimes, some checks may not be applicable to your setup if it's custom (for example, with the previous example the Ingress you use may not be [ingress-nginx](https://kubernetes.github.io/ingress-nginx/)).
 :::
+
+## Zeebe data loss after pod restart or cluster maintenance
+
+If you experience total data loss of Zeebe brokers after pod restarts, Helm upgrades, or cluster maintenance operations, the likely cause is an incorrectly configured PersistentVolume reclaim policy.
+
+### Symptoms
+
+- All process definitions and instances are missing after a pod restart
+- Zeebe brokers start fresh with no historical data
+- Elasticsearch/OpenSearch indices show data from before the incident, but Zeebe has no corresponding state
+
+### Root cause
+
+The Kubernetes StorageClass is configured with `reclaimPolicy: Delete` instead of `Retain`. When a PersistentVolumeClaim (PVC) is deleted—which can happen during pod restarts, StatefulSet updates, or Helm upgrades—Kubernetes automatically deletes the underlying PersistentVolume and all data stored on it.
+
+This is a common misconfiguration because `Delete` is the default reclaim policy in many Kubernetes distributions and cloud providers.
+
+### How to check your current configuration
+
+```bash
+# Check your StorageClass reclaim policy
+kubectl get storageclass
+
+# Look for the RECLAIMPOLICY column - it should show "Retain" for production workloads
+NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE
+gp3             ebs.csi.aws.com         Delete          WaitForFirstConsumer   # ❌ Problem
+ebs-sc          ebs.csi.aws.com         Retain          WaitForFirstConsumer   # ✅ Correct
+```
+
+### Solution
+
+1. **Create a new StorageClass with `Retain` policy** before deploying Camunda:
+
+   ```yaml
+   apiVersion: storage.k8s.io/v1
+   kind: StorageClass
+   metadata:
+     name: camunda-storage
+   provisioner: <your-provisioner> # e.g., ebs.csi.aws.com, disk.csi.azure.com
+   reclaimPolicy: Retain
+   volumeBindingMode: WaitForFirstConsumer
+   ```
+
+2. **For existing PersistentVolumes**, you can patch them to use `Retain`:
+
+   ```bash
+   kubectl patch pv <pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+   ```
+
+### Why this matters
+
+For stateful applications like Zeebe that store critical business data, the `Retain` policy is the industry-standard best practice. This ensures that even if a PVC is accidentally deleted, the underlying data remains intact and can be recovered.
+
+For more information, see the official Kubernetes documentation on [changing the reclaim policy of a PersistentVolume](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy/#why-change-reclaim-policy-of-a-persistentvolume).
