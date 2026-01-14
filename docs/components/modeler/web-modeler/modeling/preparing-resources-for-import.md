@@ -48,30 +48,9 @@ The one‑by‑one approach is a good fit when:
 - You have a **small set of resources**.
 - You don't expect to add or remove files often.
 
-### Building the Web Modeler import URL
+### Main process selection
 
-For single files on GitHub:
-
-1. Open the file in your public GitHub repository.
-2. Click **Raw**.
-3. Copy the URL from your browser’s address bar. It should start with https://raw.githubusercontent.com/...
-4. Form the Web Modeler URL like this:
-
-   ```
-   <Web Modeler host>/import/resources?source=<raw file URL>
-   ```
-
-5. To add more files, add a comma after the URL from step 4 and paste the next raw file URL.
-
-```
-<Web Modeler host>/import/resources?source=<raw file URL 1>,<raw file URL 2>
-```
-
-6. (Optional) You can add a title. This is used when the files are considered to be a process application.
-
-```
-<Web Modeler host>/import/resources?title=<process application title>&source=<raw file URL 1>,<raw file URL 2>
-```
+Web Modeler will treat the first BPMN file in the source list as the **main process**:
 
 ---
 
@@ -91,9 +70,7 @@ When preparing the `.zip`:
 - Keep the **total archive size** at or below **10 MB**.
 - Include at most **100** files that Web Modeler can support
 
-### Structuring the archive
-
-You can choose a structure that best suits your project. Some guidelines:
+### Main process selection
 
 - To control which BPMN Web Modeler treats as the **main process**:
   - Name the BPMN file you want to be the main process to match the **`.zip` filename** (for example, `support-agent.zip` and `support-agent.bpmn`), or
@@ -104,7 +81,7 @@ You can choose a structure that best suits your project. Some guidelines:
 To minimize issues when importing:
 
 - Do not include files with `..` or leading slashes in their name
-- Exclude **executables or scripts** that Web Modeler does not import.
+- Exclude executables, scripts, and any other file that Web Modeler does not support.
 - Ensure each resource file is within Web Modeler’s **per‑file size** limit.
 - Favor clear, stable naming for each file
 
