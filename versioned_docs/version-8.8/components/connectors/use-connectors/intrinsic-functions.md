@@ -129,8 +129,8 @@ The `createGithubAppInstallationToken` function generates a GitHub App installat
 
 The function accepts three required parameters:
 
-- `privateKey`: The RSA private key of your GitHub App (PEM format). It is recommended to store this as a secret.
-- `appId`: The App ID of your GitHub App.
+- `privateKey`: The RSA private key of your GitHub App (PEM format). Store this value as a secret.
+- `appId`: The app ID of your GitHub App.
 - `installationId`: The installation ID of your GitHub App. See [GitHub's documentation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/authenticating-as-a-github-app-installation#generating-an-installation-access-token) for instructions on how to find your installation ID.
 
 ```json
@@ -140,7 +140,7 @@ The function accepts three required parameters:
 }
 ```
 
-The function returns the installation access token as a string, which can then be used to authenticate GitHub API requests.
+The function returns the installation access token as a string. You can use this token to authenticate GitHub API requests.
 
 ## Create a custom function
 
