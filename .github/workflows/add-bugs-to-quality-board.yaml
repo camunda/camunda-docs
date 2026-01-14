@@ -3,6 +3,12 @@ name: Add bug issues to Quality Board
 on:
   issues:
     types: [opened, reopened, transferred, labeled]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to test with'
+        required: false
+        type: number
 
 jobs:
   add-to-quality-board:
