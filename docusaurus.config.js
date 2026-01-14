@@ -258,7 +258,7 @@ module.exports = {
       "data-project-logo":
         "https://avatars.githubusercontent.com/u/2443838?s=200&v=4",
       "data-modal-disclaimer":
-        "Camunda 8 docs AI is trained on Camunda 8 documentation, forum posts, product blogs, and more. You must check and validate generated content and code as responses can be inaccurate. If you have feedback please give a thumbs up or down as we continue to improve the AI.",
+        "Camunda 8 docs AI is trained on Camunda 8 documentation, forum posts, product blogs, and more. You must check and validate generated content and code before using in your environment as responses can be inaccurate. If you have feedback please give a thumbs up or down as we continue to improve the AI.",
       "data-modal-example-questions": `What's new in Camunda ${currentVersion}?,What's Camunda SaaS vs Self-Managed?`,
       "data-search-mode-enabled": "true",
       "data-button-border": "1px solid #555555",
