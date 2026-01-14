@@ -1,18 +1,18 @@
 ---
 id: data-retention
 title: Data retention
-description: "Overview of how the Orchestration Cluster stores and archives data in Elasticsearch or OpenSearch."
+description: "Overview of how the Orchestration Cluster stores and archives data in secondary storage."
 ---
 
 The Orchestration Cluster centrally manages data retention for all data using unified storage and policy configuration.
 
-All cluster data, including deployed process definitions, process instance state, user operations, and technical metadata, is written to secondary storage in Elasticsearch or OpenSearch. The data representing process instance state becomes immutable after the process instance is finished, and it becomes eligible for archiving.
-
-During data archive, data is moved to a dated index (e.g., `operate-variable_2020-01-01`), with the suffix representing the completion date of the associated process or operation.
+All cluster data, including deployed process definitions, process instance state, user operations, and technical metadata, is written to secondary storage. Depending on your configuration, this secondary storage is backed by [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) or an [RDBMS](/reference/glossary.md#rdbms). The data representing process instance state becomes immutable after the process instance is finished, and it becomes eligible for archiving.
 
 :::note
-All data present in the Database (from both **main** and **dated** indices) is visible from the UI.
+Secondary storage is configurable. Choose the backend that best fits your requirements for indexing, querying, retention, and operations. See [configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md) for setup guidance, and refer to [secondary storage](/reference/glossary.md#secondary-storage) for terminology and conceptual context.
 :::
+
+When using Elasticsearch/OpenSearch, finished data is moved to a dated index (for example, `operate-variable_2020-01-01`), with the suffix representing the completion date of the associated process or operation. Data from both main and dated indices remains searchable and visible in the UI. For RDBMS backends, the exporter does not create dated indices. Data remains in the same tables and stays visible until retention policies delete it.
 
 ## Archive period
 

@@ -30,7 +30,11 @@ Once configured, the exporter starts receiving records the next time Zeebe is re
 
 A reference implementation is available via the Zeebe-maintained [Elasticsearch exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter).
 
-Exporters reduce the need for Zeebe to store data indefinitely. Once data is no longer required internally, Zeebe queries its exporters to determine if it can be safely deleted. If so, it is permanently removed, reducing disk usage.
+Zeebe manages data deletion through two distinct mechanisms to reduce disk usage:
+
+1. **Internal state deletion**: Zeebe automatically deletes data from its internal state (RocksDB) when it's no longer operationally required, such as when a process instance completes. This deletion is independent of exporters.
+
+2. **Log stream compaction**: The event log stream (which stores all runtime and historical records) is compacted based on positions acknowledged by exporters. Each exporter acknowledges the position of the last record it has successfully processed. The stream processor also marks the position it has processed. Log compaction then occurs up to the **lowest acknowledged position** across all exporters and the stream processor, ensuring the log can be safely truncated without losing data that exporters haven't yet consumed.
 
 :::note
 
@@ -354,30 +358,3 @@ In earlier Camunda versions, some upgrades required manual data migrations. Thes
 
 Starting with **Camunda 8.8**, exporters are designed to support upgrades without requiring data migrations.  
 This approach reduces complexity, minimizes downtime, and enables faster, more reliable releases.
-
-### Schema compatibility guidelines (Elasticsearch/OpenSearch)
-
-As new features are added, the indices storing data evolve. To maintain **zero required data migrations** across versions, follow these schema guidelines.
-
-#### Schema changes to avoid
-
-The following **breaking changes** require data migrations and must be avoided:
-
-- **Field removal**: Deleting existing fields from index mappings
-- **Data type changes**: Changing the data type of existing fields (for example, `text` → `keyword`)
-- **Required field additions**: Adding mandatory fields without default values
-- **Record structure changes**: Modifying the structure of exported records in incompatible ways
-
-#### Safe schema evolution
-
-The following changes are considered **backwards compatible** and do **not** require data migrations:
-
-- **Additive changes**: Adding optional fields with default values
-- **New indices**: Creating new indices for new features
-- **Index settings**: Updating index settings in ways that do not affect existing data
-
-### Integration testing
-
-Schema compatibility is verified through the [`SchemaUpdateIT`](https://github.com/camunda/camunda/blob/main/schema-manager/src/test/java/io/camunda/search/schema/SchemaUpdateIT.java) integration test.
-
-This test runs on both **Elasticsearch** and **OpenSearch**. Any incompatible schema change causes the test to fail, preventing breaking changes from being introduced.

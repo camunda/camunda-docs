@@ -11,13 +11,20 @@ Use this guide to install Camunda 8 Self-Managed with the orchestration cluster,
 
 <!-- TODO: add links to explain the orchestration cluster and management cluster -->
 
+:::tip Need a Kubernetes cluster?
+If you don't have a Kubernetes cluster yet, check out our setup guides:
+
+- **Local development**: Follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md) to set up a local Kubernetes cluster.
+- **Cloud providers**: See our [cloud provider guides](/self-managed/deployment/helm/cloud-providers/index.md) for Amazon EKS, Google GKE, Azure AKS, and Red Hat OpenShift.
+  :::
+
 :::note
 By default, the Camunda Helm chart uses Bitnami open-source images. For production environments, Camunda recommends switching to vendor-supported enterprise images. This guide explains how to create registry secrets and install [Camunda with enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
 :::
 
 ## Prerequisites
 
-- **Kubernetes cluster**: A functioning Kubernetes cluster with [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) access and block-storage persistent volumes for stateful components. See [Cloud providers](/self-managed/deployment/helm/cloud-providers/index.md) for instructions to create a Kubernetes cluster.
+- **Kubernetes cluster**: A functioning Kubernetes cluster with [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) access and block-storage persistent volumes for stateful components.
 - **Helm**: The Helm CLI installed. See [Installing Helm](https://helm.sh/docs/intro/install/).
 
 ## Overview
@@ -96,6 +103,10 @@ By default, the Helm chart deploys the Camunda orchestration cluster with **basi
    :::note
    In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration component and share the same endpoint (port 8088).
    :::
+
+:::note
+Starting in 8.9-alpha3, the default secondary storage used by Camunda 8 Run and default Helm values is H2 for lightweight, out-of-the-box setups. Elasticsearch is still provided and supported as an optional alternative; OpenSearch is supported for Self‑Managed deployments but is not bundled in Camunda 8 Run. Enable the backend you require explicitly if you need full-featured search/analytics or to run existing Elasticsearch-backed Operate instances.
+:::
 
 ## Full Cluster
 
@@ -363,7 +374,7 @@ Once port-forwarding is active, access the UIs in your browser:
 
 - **PostgreSQL (Management Identity):** `localhost:5432`
 - **PostgreSQL (Web Modeler):** `localhost:5433`
-- **Elasticsearch:** `localhost:9200`
+- **Elasticsearch (secondary storage):** `localhost:9200`
 
 :::tip
 For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable by their in-cluster DNS names on your workstation.

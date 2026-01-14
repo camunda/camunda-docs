@@ -1,7 +1,7 @@
 ---
 id: glossary
 title: "Glossary"
-description: "This section defines common terminology referenced within the documentation."
+description: "Definitions for common Camunda 8 terms and abbreviations used across the docs, including Orchestration Cluster concepts, storage roles, and key deployment terms."
 toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
@@ -58,13 +58,19 @@ A broad field of computer science focused on creating machines that can perform 
 ### AI agent
 
 An autonomous system, typically powered by an [LLM](#large-language-model-llm), that perceives its environment, makes decisions, and acts to achieve goals. AI agents can perform tasks, interact with other agents or systems, and operate with varying degrees of independence.
-
-For example, build an invoice-processing AI agent in Camunda with BPMN, using an ad‑hoc subprocess and an AI Agent connector to provide LLM reasoning, tool calling, and short‑term memory in a governed feedback loop.
+For example, build an invoice-processing AI agent in Camunda with BPMN, using an ad-hoc subprocess and an AI Agent connector to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
 
 ## B
+
+### Backpressure
+
+Backpressure is a protection mechanism that prevents [Zeebe brokers](#zeebe-broker) from being overloaded when they receive more [client](#zeebe-client) requests than they can process with acceptable latency. Zeebe brokers determine backpressure by using dynamic backpressure algorithms or - if enabled - flow control limits, which measure the rate of records written by the [exporter](#zeebe-exporter). When backpressure is activated, client requests are rejected to maintain system stability.
+
+- [Backpressure](/self-managed/components/orchestration-cluster/zeebe/operations/backpressure.md)
+- [Flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md)
 
 ### Broker
 
@@ -159,6 +165,14 @@ A process cannot execute unless it is known by the [broker](#zeebe-broker). Depl
 
 ## E
 
+### Elasticsearch/OpenSearch
+
+Elasticsearch and OpenSearch are search and analytics engines commonly used as secondary storage backends for indexing and querying exported runtime data. They are populated with process orchestration data and consumed by components such as Operate, Tasklist, and Optimize.
+
+- [Elasticsearch and OpenSearch](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md)
+
+See also: [Secondary storage](#secondary-storage)
+
 ### Element
 
 A BPMN element is part of a [process](#process), defining one part of its BPMN model. Elements are the building blocks of a process and comprise [flow nodes](#flow-node), sequence flows, participants, data objects, and more.
@@ -224,6 +238,21 @@ Any AI system that can produce new content, such as text, images, or audio, in r
 ### Hallucination
 
 When an AI confidently produces incorrect or fabricated information that seems plausible. It reflects the model’s tendency to produce patterns that appear coherent but lack factual accuracy.
+
+### H2
+
+H2 is a lightweight relational database engine used as a secondary storage backend for local development and evaluation in Camunda.
+
+H2 can run in two modes:
+
+- **In-memory**: Data is stored only in memory and lost when the application stops. Useful for temporary testing.
+- **File-based (embedded)**: Database files are persisted to disk on the same host as the component using them. Suitable for local development where data persistence across restarts is needed.
+
+H2 is not intended for production usage.
+
+- [Secondary storage](/self-managed/concepts/secondary-storage/index.md)
+
+See also: [Secondary storage](#secondary-storage)
 
 ### Human task
 
@@ -356,6 +385,14 @@ An inbound polling [connector](#connector) that periodically polls an external s
 
 A [Camunda workflow](#workflow) uses this type of connector to retrieve data from a remote system that does not support real-time notifications or webhooks, but instead requires the client to periodically request updates.
 
+### Primary storage
+
+Primary storage is the authoritative store for workflow execution state managed by the Orchestration Cluster. In Self-Managed deployments, Zeebe brokers persist partition logs and snapshots on local disk. This data is required to execute workflows, recover after failures, and replicate state across brokers.
+
+Primary storage is not a search or analytics backend, and it is not configured as an external database (such as Elasticsearch/OpenSearch, H2, or an external RDBMS).
+
+See also: [Orchestration Cluster](#orchestration-cluster), [Log](#log), [Partition](#partition), [Snapshot](#snapshot), [Secondary storage](#secondary-storage)
+
 ### Process
 
 The general business construct — what you want to automate.  
@@ -423,6 +460,14 @@ The public API represents the official set of interfaces in Camunda 8 that are c
 
 ## R
 
+### RDBMS
+
+RDBMS (Relational Database Management System) refers to a user-managed relational database used as a secondary storage backend in Camunda 8 Self-Managed deployments, depending on the component and configuration. An external RDBMS is used for query and retention use cases, not for core workflow execution state.
+
+- [Helm database configuration (RDBMS)](/self-managed/deployment/helm/configure/database/rdbms.md)
+
+See also: [Secondary storage](#secondary-storage)
+
 ### Record
 
 A record represents a command or an event. For example, a command to create a new [process instance](#process-instance), or a state transition of an executing [process instance](#process-instance) representing an [event](#event) at a given point in time would result to generation of a record. During the execution lifecycle of a process instance, numerous records are generated to capture various commands and events generated. Records are stored in the log.
@@ -475,6 +520,18 @@ The use of software robots to automate repetitive, rule-based business tasks. RP
 SAP stands for Systems, Applications, and Products in Data Processing; it's an enterprise software platform used to manage business operations such as finance, supply chain, and HR. Camunda integrates with SAP to automate and orchestrate workflows that involve SAP systems, allowing for greater flexibility, transparency, and control over complex business processes.
 
 - [SAP](/components/camunda-integrations/overview.md)
+
+### Secondary storage
+
+Secondary storage is used for indexing, search, analytics, and long-term retention. Data in secondary storage is typically exported from [primary storage](#primary-storage) and consumed by tools for observability and analytics.
+
+Examples of secondary storage backends include:
+
+- [Elasticsearch/OpenSearch](#elasticsearchopensearch)
+- [RDBMS](#rdbms)
+
+- [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)
+- [Managing secondary storage](/self-managed/concepts/secondary-storage/managing-secondary-storage.md)
 
 ### Segment
 

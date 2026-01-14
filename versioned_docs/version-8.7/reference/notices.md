@@ -19,6 +19,34 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 38
+
+### Publication date
+
+Jan 8, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `qs` used by Camunda Web Modeler was affected by CVE-2025-15284, an improper input validation vulnerability that allows HTTP DoS.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.4, ≤ 8.7.14, or ≤ 8.6.23
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.5, 8.7.15, 8.6.24
+
+The fix was deployed to Web Modeler SaaS on January 7, 2026, 13:45 CET.
+
 ## Notice 37
 
 ### Publication date

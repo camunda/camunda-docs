@@ -38,7 +38,7 @@ The following prerequisites are required to build your first AI agent:
 
 | Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda 8 environment            | <p>To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:</p><p><ul><li><p> [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).</p></li><li><p> [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).</p></li></ul></p>                                                                                                 |
+| Camunda 8 environment            | <p>To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:</p><p><ul><li><p> [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).</p></li><li><p> [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).</p></li></ul></p>                                                                                                 |
 | A supported LLM provider account | <p>The AI Agent connector supports multiple model providers. This guide assumes you have access to an AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</p> <p> You can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).</p> |
 
 :::important
@@ -54,19 +54,26 @@ To start building your first AI agent, you can use a prebuilt Camunda blueprint 
 In this tutorial, you will use the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) blueprint from [Camunda marketplace](https://marketplace.camunda.com/en-US/home).
 Depending on the environment you choose, follow the corresponding steps below.
 
-### SaaS
+<Tabs groupId="environment" defaultValue="saas" values={
+[
+{ label: 'SaaS', value: 'saas', },
+{ label: 'Self-Managed', value: 'self-managed', },
+]}>
 
-1. In the blueprint page, click **For SAAS** and select the project you want to save the blueprint in, or create a new project and save it in this.
+<TabItem value="saas">
+1. In the blueprint page, click **For SAAS** and select or create a project to save the blueprint.
 1. The blueprint BPMN diagram opens in Web Modeler.
+</TabItem>
 
-### Self-Managed (local environment)
-
+<TabItem value="self-managed">
 1. In the blueprint page, click **For SM** and download the blueprint files from the repository.
 1. Open the blueprint BPMN diagram in Desktop Modeler or in Web Modeler.
+</TabItem>
+</Tabs>
 
 ### About the example AI agent process
 
-The example AI agent process is a chatbot that you (the user) can interact with via a [user task form](/components/modeler/forms/camunda-forms-reference.md).
+The example AI agent process is a chatbot that you can interact with via a [user task form](/components/modeler/forms/camunda-forms-reference.md).
 
 <img src={AiAgentExampleDiagramImg} alt="A example AI agent BPMN process diagram"/>
 
@@ -89,10 +96,22 @@ For authentication, it is preconfigured to use the following connector secrets:
 - `AWS_BEDROCK_ACCESS_KEY`: The AWS Access Key ID for your AWS account able to call the Bedrock Converse API.
 - `AWS_BEDROCK_SECRET_KEY`: The AWS Secret Access Key for your AWS account.
 
-You will configure these secrets differently in a Camunda 8 SaaS or a Self-Managed local environment.
+You will configure these secrets differently depending on your working environment.
 
-- For SaaS and Self-Managed deployments, you can configure the secrets in the [Console](../components/console/manage-clusters/manage-secrets.md).
-- For Camunda 8 Run, export the secrets as environment variables before starting the distribution. If you use Camunda 8 Run with Docker, add the secrets in the `connector-secrets.txt` file.
+<Tabs groupId="environment" defaultValue="saas" values={
+[
+{ label: 'SaaS', value: 'saas', },
+{ label: 'Self-Managed', value: 'self-managed', },
+]}>
+
+<TabItem value="saas">
+Configure the secrets using the [Console](../components/console/manage-clusters/manage-secrets.md).
+</TabItem>
+
+<TabItem value="self-managed">
+Export the secrets as environment variables before starting the distribution. If you use Camunda 8 Run with Docker, add the secrets in the `connector-secrets.txt` file.
+</TabItem>
+</Tabs>
 
 ## Step 3: Configure the AI Agent connector (optional)
 
@@ -134,8 +153,13 @@ When you run the AI agent process:
 
 You can observe this dynamic behavior in real-time through Operate, where you'll see which tasks were activated and in what order.
 
-### SaaS
+<Tabs groupId="environment" defaultValue="saas" values={
+[
+{ label: 'SaaS', value: 'saas', },
+{ label: 'Self-Managed', value: 'self-managed', },
+]}>
 
+<TabItem value="saas">
 In this example, you can quickly test the AI agent using the [Play](/components/modeler/web-modeler/collaboration/play-your-process.md) feature.
 
 1. Select the **Play** tab.
@@ -147,9 +171,9 @@ In this example, you can quickly test the AI agent using the [Play](/components/
 :::tip
 Instead of using **Play**, you can also test the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
 :::
+</TabItem>
 
-### Self-Managed (local environment)
-
+<TabItem value="self-managed">
 1. Deploy the process model to your local Camunda 8 environment using [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 1. Open Tasklist in your browser. For example at http://localhost:8080/tasklist, depending on your environment.
 1. On the **Processes** tab, find the `AI Agent Chat With Tools` process and click **Start process**.
@@ -157,6 +181,8 @@ Instead of using **Play**, you can also test the process within the **Implement*
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer.
 1. Select the **Tasks** tab in Tasklist. When the AI agent finishes processing, you should see either a `User Feedback` or a `Ask human to send email` task waiting for you to complete.
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish the process.
+</TabItem>
+</Tabs>
 
 ### Example prompts {#example-prompts}
 
