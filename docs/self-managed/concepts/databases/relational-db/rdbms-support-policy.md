@@ -185,22 +185,7 @@ Because collation behavior varies across database vendors, results sorted by str
 
 ### Operate with RDBMS
 
-Operate has partial support for RDBMS as secondary storage in Camunda 8.9-alpha3. Many core features work, but some functionality is not yet available. Operate RDBMS support is under active development. Unsupported features are planned for future releases.
-
-**Supported features:**
-
-- Process instance list with filtering, sorting, and selection
-- Operations panel and batch operations (retry, cancel, migrate)
-- Drill down to process instance details
-- Diagram display and element selection
-- Metadata popover, details view, and call activity breakdown
-- Execution listeners and Input/Output mappings
-- Operations Log and incident panel
-- Canceling and retrying process instances
-- Decision tables, literal expressions, and decision instances list
-- DRD Panel navigation and decision inputs/outputs
-
-**Not supported:**
+Operate has partial support for RDBMS as secondary storage in Camunda 8.9-alpha3, and is under active development. Most core features work, but the following functionality is not yet available:
 
 - Dashboard statistics (process statistics, incident statistics by error message)
 - Batch operation monitoring and batch move operations
