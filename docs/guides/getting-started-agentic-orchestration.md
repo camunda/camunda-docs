@@ -157,7 +157,7 @@ When configuring connectors, use [FEEL expressions](/components/modeler/feel/lan
 For a reference of available configuration options, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 :::
 
-## Step 4: Test your AI agent
+## Step 3: Test your AI agent
 
 You can now deploy and run your AI agent, and test it as a running process on your Camunda cluster running version 8.8 or higher.
 
