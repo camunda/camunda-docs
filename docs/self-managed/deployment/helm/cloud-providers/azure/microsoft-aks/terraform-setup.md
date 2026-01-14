@@ -477,10 +477,14 @@ In the remainder of the guide, we reference the `camunda` namespace to create so
 
 Camunda 8 requires high IOPS for performance-critical components like **Zeebe**, so it is important to use Azure **PremiumV2** disks rather than the default `Standard_LRS`.
 
+:::danger Reclaim policy must be Retain
+Using `reclaimPolicy: Delete` causes **permanent data loss** when pods restart. Always use `Retain` for production. See [troubleshooting](/self-managed/operational-guides/troubleshooting.md#zeebe-data-loss-after-pod-restart-or-cluster-maintenance) if you experience data loss.
+:::
+
 This step defines a custom `StorageClass` that:
 
 - Uses **PremiumV2_LRS** Azure Managed Disks
-- Sets a **`Retain`** reclaim policy
+- Sets a **`Retain`** reclaim policy to prevent data loss
 - Uses `WaitForFirstConsumer` volume binding
 - Becomes the default StorageClass for the cluster
 
