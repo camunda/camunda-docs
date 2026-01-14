@@ -41,9 +41,7 @@ Migration details are summarized as follows:
 
 As described in [the roll-out phase of the migration journey](../../migration-journey.md), you will typically use the following sequence of tasks when applying both data migrations (while keeping downtimes to a minimum):
 
-1. Stop the Camunda 7 solution (normally shut down your application). Avoid manipulating 
-   Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a specific migration 
-   issue to fix (e.g. moving instances out of states that are not migratable).
+1. Stop the Camunda 7 solution (normally shut down your application). Avoid manipulating Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable).
 2. Start the Data Migrator in "running instance migration mode".
 3. Wait until running instance migration is completed.
 4. Start the new Camunda 8 solution immediately so migrated process instances can continue right away.
