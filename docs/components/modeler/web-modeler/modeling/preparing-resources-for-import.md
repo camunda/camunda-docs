@@ -15,13 +15,27 @@ You can prepare resources for import into Web Modeler in two main ways:
 
 1. **Single resources (one by one)**
    - Each resource (BPMN, DMN, form, template, README, etc.) is accessible via its own public URL.
-   - End users import them individually or through lists of URLs (for example, internal documentation pages linking to each resource).
 
 2. **Packaged resources in a `.zip`**
    - You bundle all relevant files (for example, an entire process application) into a single `.zip`.
-   - End users provide a single URL to this `.zip` in Web Modeler’s import UI.
 
-You can mix these approaches if needed (for example, a Marketplace listing that exposes both a one‑by‑one link and a full process application `.zip`).
+---
+
+## Resource guidelines
+
+If the imported resources include a BPMN file, then the resources will be imported together as a new [process application](../../../concepts/process-applications.md).
+
+Each file should:
+
+- Be hosted at a **publicly accessible URL** that **does not redirect to another page**:
+  - No authentication, VPN, or non‑public network dependency.
+  - See below for instructions on getting each URL from GitHub.
+- Be within Web Modeler’s **per‑file size** limit (3 MB)
+
+### Template IDs and versions
+
+- Use **stable, distinct `id` values** for templates so BPMN files can consistently reference them, and the ID doesn't conflict with other templates the user might download.
+- Bump the `version` number whenever you introduce changes that could affect existing processes.
 
 ---
 
@@ -32,47 +46,32 @@ You can mix these approaches if needed (for example, a Marketplace listing that 
 The one‑by‑one approach is a good fit when:
 
 - You have a **small set of resources**.
-- You want consumers to **pick and choose** individual files.
-- You maintain an **internal catalog** (for example, a Confluence page or internal portal) with separate links.
+- You don't expect to add or remove files often.
 
-### Requirements for each resource
-
-Each file should:
-
-- Be hosted at a **publicly accessible URL**.
-  - No authentication, VPN, or non‑public network dependency.
-- Be of a **supported type**:
-  - BPMN, DMN, forms, element templates, Markdown, and other types recognized by Web Modeler.
-- Be **valid** according to its format:
-  - Valid BPMN XML.
-  - Valid DMN.
-  - Valid form JSON.
-  - Valid element template JSON.
-
-### Practical tips
-
-#### Using GitHub or similar hosts
+### Building the Web Modeler import URL
 
 For single files on GitHub:
 
 1. Open the file in your public GitHub repository.
 2. Click **Raw**.
-3. Copy the URL from your browser’s address bar.
-4. Use this URL in Web Modeler’s import dialog.
+3. Copy the URL from your browser’s address bar. It should start with https://raw.githubusercontent.com/...
+4. Form the Web Modeler URL like this:
 
-This URL usually points directly to the raw file content and can be used in Web Modeler.
+   ```
+   <Web Modeler host>/import/resources?source=<raw file URL>
+   ```
 
-#### Naming conventions
+5. To add more files, add a comma after the URL from step 4 and paste the next raw file URL.
 
-- Use meaningful filenames:
-  - For BPMN, choose names that hint at the role of the process (for example, `order-fulfillment.bpmn`).
-  - For templates, choose filenames that match the main connector or purpose.
-- Align filenames with how you describe the resource in documentation or Marketplace listings.
+```
+<Web Modeler host>/import/resources?source=<raw file URL 1>,<raw file URL 2>
+```
 
-#### Template IDs and versions
+6. (Optional) You can add a title. This is used when the files are considered to be a process application.
 
-- Use **stable `id` values** for templates so BPMN files can consistently reference them.
-- Bump the `version` number whenever you introduce changes that could affect existing processes.
+```
+<Web Modeler host>/import/resources?title=<process application title>&source=<raw file URL 1>,<raw file URL 2>
+```
 
 ---
 
@@ -82,8 +81,7 @@ This URL usually points directly to the raw file content and can be used in Web 
 
 Use a `.zip` when:
 
-- You want to distribute a **complete process application** in one step.
-- Your solution includes **many resources** (for example, multiple BPMN models, forms, DMNs, element templates, documentation).
+- Your solution includes **many (up to 100) resources** (for example, multiple BPMN models, forms, DMNs, element templates, documentation).
 - You want to minimize the chance of missing dependencies during import.
 
 ### File and archive limits
@@ -91,17 +89,12 @@ Use a `.zip` when:
 When preparing the `.zip`:
 
 - Keep the **total archive size** at or below **10 MB**.
-- Include at most **100** meaningful files that you expect Web Modeler to import.
-- Remove:
-  - Large, unnecessary artifacts (for example, big binaries or logs).
-  - Any files that are not needed by the consumer’s environment.
+- Include at most **100** files that Web Modeler can support
 
 ### Structuring the archive
 
 You can choose a structure that best suits your project. Some guidelines:
 
-- Use **logical folder groupings** (for example, `bpmn/`, `forms/`, `dmn/`, `templates/`, `docs/`) if this helps maintainers.
-- Avoid deeply nested, complex folder hierarchies if they don’t add value.
 - To control which BPMN Web Modeler treats as the **main process**:
   - Name the BPMN file you want to be the main process to match the **`.zip` filename** (for example, `support-agent.zip` and `support-agent.bpmn`), or
   - Be aware that if there is no BPMN matching the archive name, the BPMN file whose filename is **first alphabetically** will be chosen as the main process.
@@ -110,27 +103,37 @@ You can choose a structure that best suits your project. Some guidelines:
 
 To minimize issues when importing:
 
-- Avoid paths or names that might trigger safety checks:
-  - Do not include entries with `..` in their path.
-  - Avoid absolute paths or leading slashes.
-  - Remove hidden files (`.gitignore`, `.DS_Store`) and macOS metadata folders like `__MACOSX/`.
+- Do not include files with `..` or leading slashes in their name
 - Exclude **executables or scripts** that Web Modeler does not import.
 - Ensure each resource file is within Web Modeler’s **per‑file size** limit.
-- Favor clear, stable naming for files, especially for templates and BPMN.
+- Favor clear, stable naming for each file
 
-### Including element templates
+---
 
-If your `.zip` includes templates:
+### Building the Web Modeler import URL
 
-- Keep `id` and `version` consistent across environments.
-- Bump `version` when introducing changes that may break existing usage.
-- Remember that, during import:
-  - Templates that are **functionally equal** to existing ones can be ignored.
-  - Templates with lower or equal versions than an existing template may be ignored or not importable, depending on the environment and safeguards.
+1. Get the public URL to the file. For GitHub-hosted files, see below for instructions.
+2. Form the Web Modeler URL like this:
+   ```
+   <Web Modeler host>/import/resources?source=<raw file URL>
+   ```
+3. To add more files, add a comma after the URL from step 4 and paste the next raw file URL.
+
+```
+<Web Modeler host>/import/resources?source=<raw file URL 1>,<raw file URL 2>
+```
+
+4. (Optional) You can add a title. This is used when the files are considered to be a process application.
+
+```
+<Web Modeler host>/import/resources?title=<process application title>&source=<raw file URL 1>,<raw file URL 2>
+```
 
 ---
 
 ## Creating importable URLs from GitHub
+
+You can host your files on any public-facing website that does tno
 
 ### Single file URLs
 
