@@ -1589,6 +1589,11 @@ module.exports = {
               items: [
                 {
                   type: "category",
+                  label: "Local",
+                  items: ["self-managed/deployment/helm/cloud-providers/kind"],
+                },
+                {
+                  type: "category",
                   label: "Amazon",
                   link: {
                     type: "doc",
