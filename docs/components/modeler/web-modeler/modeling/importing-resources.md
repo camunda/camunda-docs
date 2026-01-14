@@ -13,91 +13,11 @@ Web Modeler can import different **resource types** into a project or process ap
 - DMN decision tables
 - Element/connector templates
 - Markdown files such as `README.md`
-- Other supported file types used by Camunda solutions
+- Any other resource type supported by Web Modeler
 
-Resources can be imported from:
-
-- **Camunda Marketplace links** (including “For SaaS”)
-- **Direct resource URLs** (one file at a time)
-- **URLs to a `.zip` archive** that packages multiple resources together
-
-All URLs must be **publicly accessible** to Web Modeler. Any URL that requires VPN, authentication, or is blocked by corporate networking rules cannot be imported.
+You can import resources by opening a URL hosted on your Web Modeler instance. See [this page](./preparing-resources-for-import.md) for more information on how to create this URL.
 
 ---
-
-## Importing single resources (one by one)
-
-You can import files individually by providing a direct URL:
-
-- From Marketplace, by using links that reference a single resource.
-- From your own hosting (for example, GitHub raw URLs, other public servers).
-
-### What happens when you import a single file
-
-Depending on the file type:
-
-- **BPMN**: Imported as a process. If the import flow groups it with other simultaneously imported resources, it may become part of a process application.
-- **Forms** (`.form`), **DMN** (`.dmn`), **element templates** (`.json`), **Markdown** (`.md`), and other supported types: Imported as individual resource files into the selected project or process application.
-- **Unsupported types**: Marked as _Unrecognized file_ and not imported.
-
-### Limits and validation
-
-Even for single-file imports:
-
-- Resources must be of a **supported type**.
-- Files must not exceed the **per‑file upload limit** enforced by Web Modeler.
-- Files must be **valid** according to their schema:
-  - Valid BPMN XML.
-  - Valid DMN.
-  - Valid form JSON.
-  - Valid element template JSON.
-- If a file is not valid or cannot be fetched, you may see errors such as:
-  - _Invalid file_
-  - _Unrecognized file_
-  - _Too large_
-  - _Network error_
-  - _Unknown error_
-
----
-
-## Importing multiple resources from a `.zip` archive
-
-Instead of importing resources one by one, you can provide a **single URL to a `.zip` file** that contains all the resources of a process application. Web Modeler will download the archive and import the supported files it contains.
-
-### Requirements for `.zip` imports
-
-- The `.zip` file must be hosted at a **publicly accessible URI**.
-- The **maximum size** of the `.zip` is **10 MB**.
-- Web Modeler will process at most **100 files** from a single `.zip`. Any remaining entries are ignored after that limit is reached.
-- Only **supported file types** are imported; other files are ignored or shown as _Unrecognized file_.
-
-### How Web Modeler processes `.zip` contents
-
-When importing from a `.zip`:
-
-1. Web Modeler downloads the archive from the given URL.
-2. It inspects the entries and applies a series of safety and validation rules, for example:
-   - Ignore or reject entries that:
-     - Contain `..` (parent directory references).
-     - Use **absolute paths** (for example, starting with `/` or drive letters like `C:`).
-     - Start with a leading `/`.
-     - Are **hidden files** (name starts with `.`) or macOS metadata (`__MACOSX/`, `.DS_Store`).
-     - Represent directories instead of files.
-   - Reject filenames with **null bytes** or control characters.
-   - Reject clearly unsafe or unsupported extensions (for example, executables or shell scripts).
-   - Do not process files that exceed Web Modeler’s **per‑file size limit**.
-3. For all remaining files:
-   - Supported types are imported.
-   - Unsupported or invalid files are reported in the UI with an appropriate status such as _Unrecognized file_, _Invalid file_, or _Too large_.
-
-### How the main process is selected
-
-When a `.zip` contains multiple BPMN files, Web Modeler chooses a **main process** as follows:
-
-1. If any BPMN file’s **base name** (filename without extension) is the same as the `.zip` file’s base name, that BPMN file becomes the **main process**.
-2. Otherwise, the BPMN file whose name is **first in alphabetical order** becomes the main process.
-
-This main process is what users will typically see highlighted as the entry point of the imported process application.
 
 ### Process application vs. importing “just files”
 
@@ -106,28 +26,31 @@ This main process is what users will typically see highlighted as the entry poin
 
 ---
 
-## README behavior and limitations
-
-Web Modeler only allows **one README file** per project or process application:
-
-- When importing:
-  - If there is **no existing README**, the first imported README may become the project or process application README.
-  - If there is already a README present, additional README files may be:
-    - Ignored, or
-    - Flagged with a status such as _Only one README file allowed_.
-- To avoid confusion, it is best to include at most **one** README for the target project or process application.
-
----
-
 ## Element templates and conflicts
 
-Element templates (including connector templates) can be imported both one by one and as part of `.zip` process applications. When an imported template has the same **ID** as an existing template, Web Modeler must decide whether to:
+Element templates (including connector templates) have an ID. The ID is used to look up the template when a BPMN process references it.
 
-- Reuse the existing template,
-- Replace it, or
-- Ignore the imported one.
+When importing templates, Web Modeler checks for potential **conflicts** with existing templates already available to your project or organization.
 
-### Consequences of replacing a template
+A conflict can happen when an imported template has the same **ID** as an existing template, but the imported template isn't available to your project.
+
+Web Modeler offers two options to resolve template conflicts:
+
+1. Save as copy
+2. Replace resource (template)
+
+### Save as copy
+
+This option creates a new file with a new, auto-generated ID.
+
+This option is not available when importing process applications.
+
+### Replacing a template
+
+An existing template can be replaced when:
+
+- The existing template belongs to the project being imported into
+- The imported template has a higher version than the existing one
 
 If an imported template **replaces** an existing template:
 
@@ -137,7 +60,7 @@ If an imported template **replaces** an existing template:
 
 This behavior ensures consistency for processes that already use the template, but you should be aware that historical versions cannot be republished under the same ID and version.
 
-### When imported templates are ignored
+### Ignored
 
 Templates can be **ignored** when Web Modeler detects a **functionally equivalent** template is already available to your project or organization. In other words, using the existing template should not break the imported process application.
 
@@ -161,34 +84,7 @@ In this case:
 
   but the template should **work as expected** from a functional point of view.
 
-### Edge case: existing template with same ID and version but different content
-
-If an existing template has the **same ID and version** as an imported template, but with slightly different internals (for example, changed variable bindings), Web Modeler will still treat them as the “same” template and may ignore the imported version.
-
-Potential consequences:
-
-- The imported process might behave slightly differently than its original environment expected, especially if:
-  - Certain fields in the BPMN expect bindings that only exist in the imported version but not in the existing version.
-- In extreme cases, some fields may not appear in the properties panel because the existing template does not define them.
-
-If such a situation is suspected, see the **manual upgrade** steps in the troubleshooting section.
-
----
-
-## Ignored vs. not importable resources
-
-When you import resources, Web Modeler can show different statuses:
-
-### Ignored resources
-
-These are resources that **could be imported**, but are intentionally not added because:
-
-- A **functionally equivalent template** is already present (see equality fields above).
-- A README would conflict with the “only one README” rule and is therefore ignored.
-
-The import is still considered successful overall; specific resources are simply **not added** because they would not change the effective behavior.
-
-### Not importable resources
+### Resources that cannot be imported
 
 These resources fail validation or cannot be processed. Common reasons include:
 
@@ -199,13 +95,13 @@ These resources fail validation or cannot be processed. Common reasons include:
   The file exceeds Web Modeler’s per‑file size limit.
 
 - **Invalid file**  
-  The file does not conform to the expected schema (for example, invalid BPMN XML or malformed JSON for templates).
+  The file does not conform to the expected schema (for example, malformed element template JSON).
 
 - **Network error**  
   Web Modeler could not download the file from the given URL.
 
-- **Conflicting version exists**  
-  A newer or equal version of the same template ID already exists, and Web Modeler will not replace it with the imported version.
+- **Existing template**
+  A newer or equal version of the same template ID already exists and its contents are not available to the project
 
 - **Unknown error**  
   A generic error for unexpected failures.
@@ -223,6 +119,7 @@ Symptoms:
 
 - A user task or connector task in BPMN shows a warning such as “template not found”.
 - Some fields you expect to see in the properties panel are missing.
+- Some templates could not be imported
 
 Likely causes:
 
@@ -262,7 +159,7 @@ If a process application depends on a template that is being ignored or differs 
 
 ### Many resources are ignored or not importable
 
-If you see many ignored or “not importable” statuses:
+If you see many resources that cannot be imported, check the following:
 
 - Confirm that the URLs (for single-file imports) or the `.zip` URL are:
   - Publicly reachable,
@@ -270,7 +167,6 @@ If you see many ignored or “not importable” statuses:
 - For `.zip` imports:
   - Check that the archive size is at most **10 MB**.
   - Ensure there are no more than **100** meaningful entries; extra files might be ignored.
-  - Remove hidden files, OS metadata, or unsupported file types from the archive.
 - For templates:
   - Verify that IDs and versions are what you expect.
   - Consider whether equal or higher versions already exist.
