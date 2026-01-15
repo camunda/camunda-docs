@@ -553,6 +553,7 @@ module.exports = {
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
+            "components/modeler/desktop-modeler/deploy-diagram",
             "components/modeler/desktop-modeler/start-instance",
             "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
@@ -1611,6 +1612,11 @@ module.exports = {
               items: [
                 {
                   type: "category",
+                  label: "Local",
+                  items: ["self-managed/deployment/helm/cloud-providers/kind"],
+                },
+                {
+                  type: "category",
                   label: "Amazon",
                   link: {
                     type: "doc",
@@ -1687,7 +1693,26 @@ module.exports = {
             },
           ],
         },
-        "self-managed/deployment/docker/docker",
+        {
+          type: "category",
+          label: "Containers",
+          items: [
+            "self-managed/deployment/docker/docker",
+            {
+              type: "category",
+              label: "Cloud providers",
+              items: [
+                {
+                  type: "category",
+                  label: "Amazon",
+                  items: [
+                    "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
         {
           type: "category",
           label: "Manual",
@@ -2003,6 +2028,7 @@ module.exports = {
             },
             {
               "Desktop Modeler": [
+                "self-managed/components/modeler/desktop-modeler/connect-to-self-managed",
                 "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed",
               ],
             },
