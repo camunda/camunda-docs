@@ -53,14 +53,16 @@ It supports multiple model providers and can communicate with any LLM that expos
 
 In this guide, you can try two use cases:
 
-| Setup | Model provider | Model used      | Prerequisites                                                                                                                                                                                                                                                                                                                                                                   |
-| :---- | :------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Cloud | AWS Bedrock    | Claude Sonnet 4 | <p><ul><li> An AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</li><li><p> Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for more details.</p></li></ul></p> |
-| Local | Ollama         | GPT-OSS 20B     | [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.                                                                                                                                                                                                                                                                                        |
+| Setup | Model provider | Model used      | Prerequisites                                                                                                                                                                                                                                                                                                                                                              |
+| :---- | :------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Cloud | AWS Bedrock    | Claude Sonnet 4 | <p><ul><li> An AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</li><li><p> Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for details.</p></li></ul></p> |
+| Local | Ollama         | GPT-OSS:20b     | <p><ul><li> [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.</li><li><p> Ollama and GPT-OSS:20b installed. See [Ollama's documentation](https://docs.ollama.com/) for details.</p></li></ul></p>                                                                                                                                   |
 
-:::tip
-You can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+:::important
+LLMs require a significant amount of available disk space and memory. GPT-OSS:20b requires more than 20GB of RAM to function and 14GB of free disk space to download.
 :::
+
+You can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
 ## Step 1: Install the example model blueprint
 
@@ -105,7 +107,7 @@ The example includes a form linked to the start event, allowing you to submit re
 
 ## Step 2: Configure the AI Agent connector
 
-Depending on your model choice, you need to configure the AI Agent connector accordingly.
+Depending on your model choice, configure the AI Agent connector accordingly.
 
 <Tabs groupId="setup" defaultValue="aws" values={
 [
@@ -114,7 +116,8 @@ Depending on your model choice, you need to configure the AI Agent connector acc
 ]}>
 
 <TabItem value="aws">
-Configure AWS Bedrock.
+
+Configure the connector secrets and template for AWS Bedrock.
 
 ### Configure connector secrets
 
@@ -141,26 +144,37 @@ Export the secrets as environment variables before starting the distribution. If
 </TabItem>
 </Tabs>
 
-</TabItem>
-
-<TabItem value="local">
-Configure your local LLM with Ollama.
-</TabItem>
-</Tabs>
-
-### Configure the model
+### Configure the connector template
 
 In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task.
 You can leave it as is or adjust its configuration to test other setups. To do so, use the properties panel of the AI Agent:
 
 <img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel"/>
 
-### Key configuration options
+</TabItem>
 
-- **Model provider**: Change from AWS Bedrock to OpenAI, Anthropic, or other supported providers.
-- **System prompt**: Customize the agent's behavior and personality.
-- **Model parameters**: Adjust temperature, max tokens, and other LLM settings.
-- **Connector secrets**: Update authentication credentials if changing providers.
+<TabItem value="local">
+Configure your local LLM with Ollama.
+
+### Configure the connector template
+
+The example blueprint downloaded in step one is preconfigured to use AWS Bedrock. Therefore, update the connector template as follows to use Ollama instead.
+
+The **Model provider** and **Model** are the sections where you configure Camunda to point to your local Ollama API, which serves the GPT-OSS:20b LLM.
+
+#### Model provider section
+
+1. Select **OpenAI Compatible** from the Provider dropdown.
+1. The default Ollama API is served at `http://localhost:11434/v1`, so enter this value in the API endpoint field.
+
+No authentication or additional headers are required for the local Ollama API, so you can leave the remaining fields blank.
+
+#### Model section
+
+1. Enter `gpt-oss:20b` in the Model field. Note that this field is case-sensitive, so be sure to enter it in all lowercase.
+
+</TabItem>
+</Tabs>
 
 :::tip
 When configuring connectors, use [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md), by clicking the `fx` icon, to reference process variables and create dynamic prompts based on runtime data.
