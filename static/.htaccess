@@ -34,6 +34,11 @@ RewriteEngine on
 RewriteCond %{SERVER_PORT} !^443$
 RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 
+# Redirect old unsupported domain to new unmaintained domain for backward compatibility
+
+RewriteCond %{HTTP_HOST} ^unsupported\.docs\.camunda\.io$ [NC]
+RewriteRule ^(.*)$ https://unmaintained.docs.camunda.io/$1 [R=301,L]
+
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
@@ -60,22 +65,22 @@ RewriteRule ^docs/8.9/(.*)$ /docs/next/$1 [R=302,L]
 RewriteRule ^docs/8.8/(.*)$ /docs/$1 [R=302,L]
 
 ## Archived versions. Note that the URL is adjusted to staging in the publish-stage workflow.
-RewriteRule ^docs/0.25/(.*)$ https://unsupported.docs.camunda.io/0.25/docs/$1 [R=301,L]
-RewriteRule ^docs/0.26/(.*)$ https://unsupported.docs.camunda.io/0.26/docs/$1 [R=301,L]
-RewriteRule ^docs/1.0/(.*)$ https://unsupported.docs.camunda.io/1.0/docs/$1 [R=301,L]
-RewriteRule ^docs/1.1/(.*)$ https://unsupported.docs.camunda.io/1.1/docs/$1 [R=301,L]
-RewriteRule ^docs/1.2/(.*)$ https://unsupported.docs.camunda.io/1.2/docs/$1 [R=301,L]
-RewriteRule ^docs/1.3/(.*)$ https://unsupported.docs.camunda.io/1.3/docs/$1 [R=301,L]
-RewriteRule ^optimize/3.7.0/(.*)$ https://unsupported.docs.camunda.io/1.3/optimize/$1 [R=301,L]
-RewriteRule ^docs/8.0/(.*)$ https://unsupported.docs.camunda.io/8.0/docs/$1 [R=301,L]
-RewriteRule ^optimize/3.8.0/(.*)$ https://unsupported.docs.camunda.io/8.0/optimize/$1 [R=301,L]
-RewriteRule ^docs/8.1/(.*)$ https://unsupported.docs.camunda.io/8.1/docs/$1 [R=301,L]
-RewriteRule ^optimize/3.9.0/(.*)$ https://unsupported.docs.camunda.io/8.1/optimize/$1 [R=301,L]
-RewriteRule ^docs/8.2/(.*)$ https://unsupported.docs.camunda.io/8.2/docs/$1 [R=301,L]
-RewriteRule ^optimize/3.10.0/(.*)$ https://unsupported.docs.camunda.io/8.2/optimize/$1 [R=301,L]
-RewriteRule ^docs/8.3/(.*)$ https://unsupported.docs.camunda.io/8.3/docs/$1 [R=301,L]
-RewriteRule ^docs/8.4/(.*)$ https://unsupported.docs.camunda.io/8.4/docs/$1 [R=301,L]
-RewriteRule ^docs/8.5/(.*)$ https://unsupported.docs.camunda.io/8.5/docs/$1 [R=301,L]
+RewriteRule ^docs/0.25/(.*)$ https://unmaintained.docs.camunda.io/0.25/docs/$1 [R=301,L]
+RewriteRule ^docs/0.26/(.*)$ https://unmaintained.docs.camunda.io/0.26/docs/$1 [R=301,L]
+RewriteRule ^docs/1.0/(.*)$ https://unmaintained.docs.camunda.io/1.0/docs/$1 [R=301,L]
+RewriteRule ^docs/1.1/(.*)$ https://unmaintained.docs.camunda.io/1.1/docs/$1 [R=301,L]
+RewriteRule ^docs/1.2/(.*)$ https://unmaintained.docs.camunda.io/1.2/docs/$1 [R=301,L]
+RewriteRule ^docs/1.3/(.*)$ https://unmaintained.docs.camunda.io/1.3/docs/$1 [R=301,L]
+RewriteRule ^optimize/3.7.0/(.*)$ https://unmaintained.docs.camunda.io/1.3/optimize/$1 [R=301,L]
+RewriteRule ^docs/8.0/(.*)$ https://unmaintained.docs.camunda.io/8.0/docs/$1 [R=301,L]
+RewriteRule ^optimize/3.8.0/(.*)$ https://unmaintained.docs.camunda.io/8.0/optimize/$1 [R=301,L]
+RewriteRule ^docs/8.1/(.*)$ https://unmaintained.docs.camunda.io/8.1/docs/$1 [R=301,L]
+RewriteRule ^optimize/3.9.0/(.*)$ https://unmaintained.docs.camunda.io/8.1/optimize/$1 [R=301,L]
+RewriteRule ^docs/8.2/(.*)$ https://unmaintained.docs.camunda.io/8.2/docs/$1 [R=301,L]
+RewriteRule ^optimize/3.10.0/(.*)$ https://unmaintained.docs.camunda.io/8.2/optimize/$1 [R=301,L]
+RewriteRule ^docs/8.3/(.*)$ https://unmaintained.docs.camunda.io/8.3/docs/$1 [R=301,L]
+RewriteRule ^docs/8.4/(.*)$ https://unmaintained.docs.camunda.io/8.4/docs/$1 [R=301,L]
+RewriteRule ^docs/8.5/(.*)$ https://unmaintained.docs.camunda.io/8.5/docs/$1 [R=301,L]
 
 # Timeless classics.
 # rules required after update to docusaurus 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
@@ -599,8 +604,8 @@ RewriteRule ^docs/8.7/components/document-handling/use-cases/send-document-to-ex
 RewriteRule ^docs/8.7/components/document-handling/use-cases/upload-document-to-bpmn-process/(.*)$ /docs/8.7/components/document-handling/upload-document-to-bpmn-process/ [R=301,L]
 
 # Remove 8.3 leftovers
-RewriteRule ^docs/self-managed/operational-guides/update-guide/820-to-830/(.*)$ https://unsupported.docs.camunda.io/8.3/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
-RewriteRule ^docs/8.7/self-managed/operational-guides/update-guide/820-to-830/(.*)$ https://unsupported.docs.camunda.io/8.3/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/update-guide/820-to-830/(.*)$ https://unmaintained.docs.camunda.io/8.3/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
+RewriteRule ^docs/8.7/self-managed/operational-guides/update-guide/820-to-830/(.*)$ https://unmaintained.docs.camunda.io/8.3/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
 
 # Rename indices page
 RewriteRule ^docs/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/(.*)$ /docs/self-managed/setup/guides/prefix-elasticsearch-indices/ [R=301,L]
@@ -917,7 +922,7 @@ RewriteRule ^docs/self-managed/platform-architecture/overview/?$ /docs/self-mana
 # remove tasklist API + Spring Zeebe tutorial
 RewriteRule ^docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/?$ /docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
 
-# remove unsupported versions
+# remove unmaintained versions
 RewriteRule ^docs/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]

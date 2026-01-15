@@ -3,18 +3,18 @@
 // Note: these type definitions are only checked within an editor. We aren't set up
 //   for type-checking in the build (yet!) but having these types defined helped me write this code.
 /**
- * @typedef {object} UnsupportedVersion
+ * @typedef {object} UnmaintainedVersion
  * @property {string} label
  * @property {string} urlSuffix
  */
 
 const currentVersion = "8.8";
 
-/** @type {Array<UnsupportedVersion>} */
-const unsupportedVersions = [
+/** @type {Array<UnmaintainedVersion>} */
+const unmaintainedVersions = [
   // 👋 When archiving a version, add it into here!
   //   `label` appears in the top navbar version selector.
-  //   `urlSuffix` gets appended to the target `unsupported.docs.camunda.io/` URL.
+  //   `urlSuffix` gets appended to the target `unmaintained.docs.camunda.io/` URL.
   { label: "8.5", urlSuffix: "8.5" },
   { label: "8.4", urlSuffix: "8.4" },
   { label: "8.3", urlSuffix: "8.3" },
@@ -31,5 +31,5 @@ const unsupportedVersions = [
 
 module.exports = {
   currentVersion,
-  unsupportedVersions,
+  unmaintainedVersions,
 };
