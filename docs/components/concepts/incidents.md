@@ -12,6 +12,7 @@ Incidents are created in different situations, including the following:
 - A condition doesn't return `true` or `false`.
 - A timer expression doesn't return the expected type.
 - A decision can't be evaluated.
+- A BPMN error is thrown and not caught by an error boundary event or error event subprocess.
 
 :::note
 Not all errors necessarily lead to incidents. For example, unexpected errors in Zeebe do not always result in incidents.
