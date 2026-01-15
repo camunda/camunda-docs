@@ -211,6 +211,7 @@ If not otherwise indicated, the `.tf` file is corresponding to the [root workspa
 `ecs.tf` contains the ECS cluster, which is just a logical component to group ECS resources.
 
 `../modules/ecs/fargate/orchestration-cluster` is the main component `Orchestration Cluster` of Camunda and contains the definitions for:
+
 - ECS Service and task definition
   - Defines the base setup for the Orchestration Cluster, including the node ID provider, EFS configuration, and initial cluster endpoints.
   - Automatically sets the Zeebe cluster size based on the task count.
@@ -296,7 +297,7 @@ An alternative approach, still with environment variables, could be to load them
 
 Example:
 
-```yaml title="orchestration-cluster-env"
+```bash title="orchestration-cluster-env"
 KEY=VALUE
 KEY2=VALUE2
 KEY3=${template}
@@ -322,7 +323,7 @@ locals {
 }
 ```
 
-This can than be passed to the module invocation
+This can then be passed to the module invocation
 
 ```hcl
 environment_variables = local.env_kv_pairs # or mixed with the concat function
@@ -330,8 +331,8 @@ environment_variables = local.env_kv_pairs # or mixed with the concat function
 
 ##### Application YAML
 
-    1. This can either be baked into a custom image permanently by you
-    2. Pull application YAML on startup via init container from external store or integrate in Terraform
+1. This can either be baked into a custom image permanently by you
+2. Pull application YAML on startup via init container from external store or integrate in Terraform
 
 Example:
 
@@ -482,7 +483,7 @@ The Terraform flow is as follows:
 
 Using Terraform, you can obtain the HTTP endpoint of the Application Load Balancer and interact with Camunda through the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
-:::info HTTPS
+:::warning HTTPS
 
 To keep dependencies minimal and non-blocking for a quick start, this reference architecture omits a custom domain and TLS configuration.
 
@@ -565,4 +566,3 @@ After setting up your cluster, many users typically do the following:
 
 - [Connect to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
 - [Add TLS](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html) and configure a [custom domain](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#dns-name) for the Application Load Balancer (ALB).
-
