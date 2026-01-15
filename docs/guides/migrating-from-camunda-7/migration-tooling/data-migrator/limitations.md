@@ -379,7 +379,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 
 | Property               | Can be migrated |
 | ---------------------- | --------------- |
-| flowNodeInstanceKey    | No              |
+| flowNodeInstanceKey    | Yes             |
 | processInstanceKey     | Yes             |
 | processDefinitionKey   | Yes             |
 | processDefinitionId    | Yes             |
@@ -387,7 +387,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | startDate              | Yes             |
 | endDate                | Yes             |
 | flowNodeId             | Yes             |
-| flowNodeName           | No              |
+| flowNodeName           | Yes             |
 | treePath               | Yes             |
 | type                   | Yes             |
 | state                  | Yes             |
@@ -395,9 +395,9 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | numSubprocessIncidents | No              |
 | hasIncident            | No              |
 | tenantId               | Yes             |
-| partitionId            | No              |
+| partitionId            | Yes             |
 | rootProcessInstanceKey | No              |
-| historyCleanupDate     | No              |
+| historyCleanupDate     | Yes             |
 
 ### Form
 
