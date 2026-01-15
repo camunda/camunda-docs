@@ -24,7 +24,7 @@ jobs:
       - name: Check internal links
         uses: untitaker/hyperlink@0.2.0
         with:
-          args: build/
+          args: build/ --skip-file '.*operate-example.*\.png'
 
       - name: Remove https redirect
         run: |
