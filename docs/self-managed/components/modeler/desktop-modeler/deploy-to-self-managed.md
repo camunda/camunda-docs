@@ -13,7 +13,7 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
    ![Self-Managed cluster connected](./img/deploy-selection.png)
 
-2. Click the **deploy** icon:
+2. Click the **Deploy** icon:
 
    ![deploy icon](./img/deploy-icon.png)
 
