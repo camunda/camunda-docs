@@ -45,21 +45,21 @@ To connect to OpenSearch using basic authentication, follow the configuration be
 
 ### Parameters
 
-| Parameter                                         | Type    | Default          | Description                                                      |
-| ------------------------------------------------- | ------- | ---------------- | ---------------------------------------------------------------- |
-| `global.opensearch.enabled`                       | boolean | `false`          | Enable external OpenSearch.                                      |
-| `global.opensearch.aws.enabled`                   | boolean | `false`          | Enable AWS IRSA integration.                                     |
-| `global.opensearch.tls.enabled`                   | boolean | `false`          | Enable TLS for external OpenSearch.                              |
-| `global.opensearch.tls.existingSecret`            | string  | `""`             | Reference an existing TLS secret for OpenSearch.                 |
-| `global.opensearch.auth.username`                 | string  | `""`             | Username for OpenSearch.                                         |
-| `global.opensearch.auth.secret.inlineSecret`      | string  | `""`             | Plain-text password for non-production use.                      |
-| `global.opensearch.auth.secret.existingSecret`    | string  | `""`             | Reference an existing Kubernetes Secret containing the password. |
-| `global.opensearch.auth.secret.existingSecretKey` | string  | `""`             | Key within the existing secret object.                           |
-| `global.opensearch.url.protocol`                  | string  | `"https"`        | Access protocol for OpenSearch.                                  |
-| `global.opensearch.url.host`                      | string  | `""`             | OpenSearch host, ideally the service name inside the namespace.  |
-| `global.opensearch.url.port`                      | number  | `443`            | Port used to access OpenSearch.                                  |
-| `global.opensearch.clusterName`                   | string  | `"opensearch"`   | Name of the OpenSearch cluster.                                  |
-| `global.opensearch.prefix`                        | string  | `"zeebe-record"` | Prefix used for OpenSearch indices or records.                   |
+| Parameter                                         | Type    | Default          | Description                                                                                                                                                                           |
+| ------------------------------------------------- | ------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `global.opensearch.enabled`                       | boolean | `false`          | Enable external OpenSearch.                                                                                                                                                           |
+| `global.opensearch.aws.enabled`                   | boolean | `false`          | Enable AWS IRSA integration.                                                                                                                                                          |
+| `global.opensearch.tls.enabled`                   | boolean | `false`          | Enable TLS for external OpenSearch.                                                                                                                                                   |
+| `global.opensearch.tls.existingSecret`            | string  | `""`             | Reference an existing TLS secret for OpenSearch.                                                                                                                                      |
+| `global.opensearch.auth.username`                 | string  | `""`             | Username for OpenSearch.                                                                                                                                                              |
+| `global.opensearch.auth.secret.inlineSecret`      | string  | `""`             | Plain-text password for non-production use.                                                                                                                                           |
+| `global.opensearch.auth.secret.existingSecret`    | string  | `""`             | Reference an existing Kubernetes Secret containing the password.                                                                                                                      |
+| `global.opensearch.auth.secret.existingSecretKey` | string  | `""`             | Key within the existing secret object.                                                                                                                                                |
+| `global.opensearch.url.protocol`                  | string  | `"https"`        | Access protocol for OpenSearch.                                                                                                                                                       |
+| `global.opensearch.url.host`                      | string  | `""`             | OpenSearch host, ideally the service name inside the namespace.                                                                                                                       |
+| `global.opensearch.url.port`                      | number  | `443`            | Port used to access OpenSearch.                                                                                                                                                       |
+| `global.opensearch.clusterName`                   | string  | `"opensearch"`   | Name of the OpenSearch cluster.                                                                                                                                                       |
+| `global.opensearch.prefix`                        | string  | `"zeebe-record"` | Index prefix for zeebe-record indices. See [Prefix Elasticsearch/OpenSearch indices](/self-managed/deployment/helm/configure/database/elasticsearch/prefix-elasticsearch-indices.md). |
 
 ### Example usage
 
@@ -86,6 +86,33 @@ This configuration disables the internal Elasticsearch component and the Elastic
 To avoid storing the username and password in plaintext in your `values.yaml`, reference a Kubernetes secret.
 For details and examples, see [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md).
 
+### Connect to external OpenSearch with custom index prefixes
+
+When running multiple Camunda instances on a shared OpenSearch cluster, use custom index prefixes to isolate data:
+
+```yaml
+global:
+  elasticsearch:
+    enabled: false
+  opensearch:
+    enabled: true
+    prefix: my-env-zeebe # Prefix for zeebe-record indices
+    auth:
+      username: admin
+      secret:
+        inlineSecret: pass
+    url:
+      protocol: https
+      host: opensearch.example.com
+      port: 443
+
+orchestration:
+  index:
+    prefix: my-env-camunda # Prefix for unified Camunda indices
+```
+
+For more details on index prefix configuration, including Optimize-specific settings, see [Prefix Elasticsearch/OpenSearch indices](/self-managed/deployment/helm/configure/database/elasticsearch/prefix-elasticsearch-indices.md).
+
 ### Component configuration
 
 Camunda components use the same configuration keys for both Elasticsearch and OpenSearch.
@@ -110,4 +137,5 @@ For full parameter details, see:
 - [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md)
 - [IAM roles for service accounts](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup)
 - [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md)
+- [Prefix Elasticsearch/OpenSearch indices](/self-managed/deployment/helm/configure/database/elasticsearch/prefix-elasticsearch-indices.md)
 - [Deploy Camunda 8](/self-managed/setup/overview.md)

@@ -40,28 +40,29 @@ The **Legacy Zeebe Exporter** creates `zeebe-record` indices. This exporter is d
 
 :::info When is the legacy Zeebe Exporter needed?
 The legacy Zeebe Exporter is automatically enabled when:
+
 - Optimize is enabled (`optimize.enabled: true`)
 - You explicitly enable it (`orchestration.exporters.zeebe.enabled: true`)
 - Data migration from pre-8.8 versions is required
-:::
+  :::
 
 ## Configuration reference
 
-| Configuration | Default | Used By | Purpose |
-|---------------|---------|---------|---------|
-| `orchestration.index.prefix` | `""` | Camunda Exporter, Orchestration Cluster | Prefix for unified Camunda indices |
-| `global.elasticsearch.prefix` | `zeebe-record` | Legacy Zeebe Exporter | Prefix for zeebe-record indices (consumed by Optimize) |
-| `global.opensearch.prefix` | `zeebe-record` | Legacy Zeebe Exporter | Prefix for zeebe-record indices when using OpenSearch |
+| Configuration                 | Default        | Used By                                 | Purpose                                                |
+| ----------------------------- | -------------- | --------------------------------------- | ------------------------------------------------------ |
+| `orchestration.index.prefix`  | `""`           | Camunda Exporter, Orchestration Cluster | Prefix for unified Camunda indices                     |
+| `global.elasticsearch.prefix` | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for zeebe-record indices (consumed by Optimize) |
+| `global.opensearch.prefix`    | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for zeebe-record indices when using OpenSearch  |
 
 ### Optimize-specific configuration
 
 When using custom prefixes with Optimize, you must also configure Optimize to know where to find the zeebe-record indices:
 
-| Environment Variable | Purpose |
-|---------------------|---------|
-| `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` | Prefix for Optimize's own indices (Elasticsearch) |
-| `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX` | Prefix for Optimize's own indices (OpenSearch) |
-| `CAMUNDA_OPTIMIZE_ZEEBE_NAME` | Must match `global.elasticsearch.prefix` or `global.opensearch.prefix` |
+| Environment Variable                                   | Purpose                                                                |
+| ------------------------------------------------------ | ---------------------------------------------------------------------- |
+| `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` | Prefix for Optimize's own indices (Elasticsearch)                      |
+| `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX`    | Prefix for Optimize's own indices (OpenSearch)                         |
+| `CAMUNDA_OPTIMIZE_ZEEBE_NAME`                          | Must match `global.elasticsearch.prefix` or `global.opensearch.prefix` |
 
 ## Usage
 
@@ -87,7 +88,7 @@ If you are not using Optimize, you only need to configure the Camunda Exporter p
 ```yaml
 orchestration:
   index:
-    prefix: custom-camunda  # Unified Camunda indices prefix
+    prefix: custom-camunda # Unified Camunda indices prefix
 ```
 
 </TabItem>
@@ -102,7 +103,7 @@ global:
 
 orchestration:
   index:
-    prefix: custom-camunda  # Unified Camunda indices prefix
+    prefix: custom-camunda # Unified Camunda indices prefix
 ```
 
 </TabItem>
@@ -123,19 +124,19 @@ When Optimize is enabled, you need to configure both exporter prefixes and Optim
 global:
   elasticsearch:
     enabled: true
-    prefix: custom-zeebe  # Legacy Zeebe Exporter prefix (read by Optimize)
+    prefix: custom-zeebe # Legacy Zeebe Exporter prefix (read by Optimize)
 
 orchestration:
   index:
-    prefix: custom-camunda  # Camunda Exporter prefix
+    prefix: custom-camunda # Camunda Exporter prefix
 
 optimize:
   enabled: true
   env:
     - name: CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX
-      value: custom-optimize  # Optimize's own indices
+      value: custom-optimize # Optimize's own indices
     - name: CAMUNDA_OPTIMIZE_ZEEBE_NAME
-      value: custom-zeebe  # Must match global.elasticsearch.prefix
+      value: custom-zeebe # Must match global.elasticsearch.prefix
 ```
 
 </TabItem>
@@ -147,19 +148,19 @@ global:
     enabled: false
   opensearch:
     enabled: true
-    prefix: custom-zeebe  # Legacy Zeebe Exporter prefix (read by Optimize)
+    prefix: custom-zeebe # Legacy Zeebe Exporter prefix (read by Optimize)
 
 orchestration:
   index:
-    prefix: custom-camunda  # Camunda Exporter prefix
+    prefix: custom-camunda # Camunda Exporter prefix
 
 optimize:
   enabled: true
   env:
     - name: CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX
-      value: custom-optimize  # Optimize's own indices
+      value: custom-optimize # Optimize's own indices
     - name: CAMUNDA_OPTIMIZE_ZEEBE_NAME
-      value: custom-zeebe  # Must match global.opensearch.prefix
+      value: custom-zeebe # Must match global.opensearch.prefix
   migration:
     env:
       - name: CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX
@@ -212,7 +213,7 @@ camunda:
   data:
     secondary-storage:
       elasticsearch:
-        index-prefix: custom-camunda  # Camunda Exporter prefix
+        index-prefix: custom-camunda # Camunda Exporter prefix
 
 zeebe:
   broker:
@@ -220,7 +221,7 @@ zeebe:
       elasticsearch:
         args:
           index:
-            prefix: custom-zeebe  # Legacy Zeebe Exporter prefix
+            prefix: custom-zeebe # Legacy Zeebe Exporter prefix
 ```
 
 ### OpenSearch
@@ -230,7 +231,7 @@ camunda:
   data:
     secondary-storage:
       opensearch:
-        index-prefix: custom-camunda  # Camunda Exporter prefix
+        index-prefix: custom-camunda # Camunda Exporter prefix
 
 zeebe:
   broker:
@@ -238,7 +239,7 @@ zeebe:
       opensearch:
         args:
           index:
-            prefix: custom-zeebe  # Legacy Zeebe Exporter prefix
+            prefix: custom-zeebe # Legacy Zeebe Exporter prefix
 ```
 
 </TabItem>
@@ -248,4 +249,4 @@ zeebe:
 ## Related resources
 
 - [Use external Elasticsearch](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md)
-- [Use external OpenSearch](/self-managed/deployment/helm/configure/database/opensearch/using-external-opensearch.md)
+- [Use external OpenSearch](/self-managed/deployment/helm/configure/database/using-external-opensearch.md)
