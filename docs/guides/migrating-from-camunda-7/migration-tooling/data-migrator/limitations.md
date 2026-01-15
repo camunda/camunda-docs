@@ -396,7 +396,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | hasIncident            | No              |
 | tenantId               | Yes             |
 | partitionId            | No              |
-| rootProcessInstanceKey | No              |
+| rootProcessInstanceKey | Yes             |
 | historyCleanupDate     | No              |
 
 ### Form
@@ -427,7 +427,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | processDefinitionKey   | Yes             |
 | processDefinitionId    | Yes             |
 | processInstanceKey     | Yes             |
-| rootProcessInstanceKey | No              |
+| rootProcessInstanceKey | Yes             |
 | flowNodeInstanceKey    | Yes             |
 | flowNodeId             | Yes             |
 | jobKey                 | Yes             |
@@ -511,7 +511,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | Property                 | Can be migrated |
 | ------------------------ | --------------- |
 | processInstanceKey       | Yes             |
-| rootProcessInstanceKey   | No              |
+| rootProcessInstanceKey   | Yes             |
 | processDefinitionId      | Yes             |
 | processDefinitionKey     | Yes             |
 | state                    | Yes             |
@@ -577,7 +577,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | formKey                  | No              |
 | processDefinitionKey     | Yes             |
 | processInstanceKey       | Yes             |
-| rootProcessInstanceKey   | No              |
+| rootProcessInstanceKey   | Yes             |
 | elementInstanceKey       | Yes             |
 | tenantId                 | Yes             |
 | dueDate                  | Yes             |
@@ -618,7 +618,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | isPreview              | No              |
 | scopeKey               | Yes             |
 | processInstanceKey     | Yes             |
-| rootProcessInstanceKey | No              |
+| rootProcessInstanceKey | Yes             |
 | processDefinitionId    | Yes             |
 | tenantId               | Yes             |
 | partitionId            | Yes             |
