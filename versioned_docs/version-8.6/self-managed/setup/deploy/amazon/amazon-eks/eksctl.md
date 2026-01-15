@@ -363,8 +363,8 @@ In the remainder of the guide, we reference the `camunda` namespace to create so
 
 We recommend using **gp3** volumes with Camunda 8 (see [volume performance](./amazon-eks.md#volume-performance)). It may be necessary to create the `gp3` StorageClass, as the default configuration only includes **gp2**. For detailed information, refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
 
-:::danger Reclaim policy must be Retain
-Using `reclaimPolicy: Delete` causes **permanent data loss** when pods restart. Always use `Retain` for production. See [troubleshooting](/self-managed/operational-guides/troubleshooting/troubleshooting.md#zeebe-data-loss-after-pod-restart-or-cluster-maintenance) if you experience data loss.
+:::danger Reclaim policy
+Using `reclaimPolicy: Delete` can cause **permanent data loss** if a PVC is deleted. Consider using `Retain` for production. See [troubleshooting](/self-managed/operational-guides/troubleshooting/troubleshooting.md#zeebe-data-loss-after-pvc-deletion) for details.
 :::
 
 To see the available StorageClasses in your Kubernetes cluster, including which one is set as default, use the following command:

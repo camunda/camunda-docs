@@ -283,7 +283,7 @@ The following resources and configuration options are important to keep in mind 
 
 #### Persistent volume reclaim policy
 
-Ensure your Kubernetes StorageClass uses a `Retain` reclaim policy for production deployments. If set to `Delete` (the default in many distributions), Zeebe broker data will be permanently lost when PVCs are deleted during pod restarts or cluster maintenance.
+Ensure your Kubernetes StorageClass uses a `Retain` reclaim policy for production deployments. If set to `Delete` (the default in many distributions), Zeebe broker data will be permanently lost if a PVC is deleted.
 
 Verify your configuration:
 
@@ -292,7 +292,7 @@ kubectl get storageclass
 # RECLAIMPOLICY should show "Retain", not "Delete"
 ```
 
-For more details, see [troubleshooting](/self-managed/operational-guides/troubleshooting.md#zeebe-data-loss-after-pod-restart-or-cluster-maintenance) and the [Kubernetes documentation on reclaim policies](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming).
+For more details, see [troubleshooting](/self-managed/operational-guides/troubleshooting.md#zeebe-data-loss-after-pvc-deletion) and the [Kubernetes documentation on reclaim policies](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming).
 
 #### Node affinity and tolerations
 

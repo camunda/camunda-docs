@@ -337,21 +337,21 @@ If you encounter missing or invalid authorizations when deploying resources or s
 - **Web Modeler** deploys as your logged-in user, so ensure that your [user](/components/identity/user.md) has the required permissions.
 - **Desktop Modeler** uses the client credentials you provide, so ensure that your [client](/components/identity/client.md) has the required permissions.
 
-## Zeebe data loss after pod restart or cluster maintenance
+## Zeebe data loss after PVC deletion
 
-If you experience total data loss of Zeebe brokers after pod restarts, Helm upgrades, or cluster maintenance operations, the likely cause is an incorrectly configured PersistentVolume reclaim policy.
+If all Zeebe data is lost after a PersistentVolumeClaim (PVC) was deleted, the likely cause is that your StorageClass uses the `Delete` reclaim policy instead of `Retain`.
 
 ### Symptoms
 
-- All process definitions and instances are missing after a pod restart
+- All process definitions and instances are gone
 - Zeebe brokers start fresh with no historical data
-- Elasticsearch/OpenSearch indices show data from before the incident, but Zeebe has no corresponding state
+- Elasticsearch/OpenSearch still has data, but Zeebe does not
 
 ### Root cause
 
-The Kubernetes StorageClass is configured with `reclaimPolicy: Delete` instead of `Retain`. When a PersistentVolumeClaim (PVC) is deleted—which can happen during pod restarts, StatefulSet updates, or Helm upgrades—Kubernetes automatically deletes the underlying PersistentVolume and all data stored on it.
-
-This is a common misconfiguration because `Delete` is the default reclaim policy in many Kubernetes distributions and cloud providers.
+- Your StorageClass has `reclaimPolicy: Delete` (the default in most Kubernetes distributions)
+- A PVC was deleted (manually, by automation, or during cluster maintenance)
+- Kubernetes automatically deleted the underlying PersistentVolume and all its data
 
 ### How to check your current configuration
 
