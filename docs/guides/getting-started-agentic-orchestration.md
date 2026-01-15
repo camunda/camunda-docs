@@ -29,6 +29,7 @@ In this guide, you will:
 - Deploy and start a business process using [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) or locally with [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 - Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities for the AI agent.
 - Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
+- Integrate a cloud-based or local Large Language Model (LLM) via an OpenAI‑compatible API.
 
 Once you have completed this guide, you will have an example AI agent running within Camunda 8.
 
@@ -48,7 +49,7 @@ To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using
 
 ### Supported models
 
-The AI Agent connector makes it easy to integrate Large Language Models (LLMs) into your process workflows.
+The AI Agent connector makes it easy to integrate LLMs into your process workflows.
 It supports multiple model providers and can communicate with any LLM that exposes an OpenAI‑compatible API.
 
 In this guide, you can try two use cases:
@@ -166,8 +167,7 @@ The **Model provider** and **Model** are the sections where you configure Camund
 
 1. Select **OpenAI Compatible** from the Provider dropdown.
 1. The default Ollama API is served at `http://localhost:11434/v1`, so enter this value in the API endpoint field.
-
-No authentication or additional headers are required for the local Ollama API, so you can leave the remaining fields blank.
+1. No authentication or additional headers are required for the local Ollama API, so leave the remaining fields blank.
 
 #### Model section
 
