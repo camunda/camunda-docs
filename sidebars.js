@@ -1589,6 +1589,11 @@ module.exports = {
               items: [
                 {
                   type: "category",
+                  label: "Local",
+                  items: ["self-managed/deployment/helm/cloud-providers/kind"],
+                },
+                {
+                  type: "category",
                   label: "Amazon",
                   link: {
                     type: "doc",
@@ -1665,7 +1670,26 @@ module.exports = {
             },
           ],
         },
-        "self-managed/deployment/docker/docker",
+        {
+          type: "category",
+          label: "Containers",
+          items: [
+            "self-managed/deployment/docker/docker",
+            {
+              type: "category",
+              label: "Cloud providers",
+              items: [
+                {
+                  type: "category",
+                  label: "Amazon",
+                  items: [
+                    "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
         {
           type: "category",
           label: "Manual",
