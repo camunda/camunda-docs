@@ -34,14 +34,10 @@ Once you have completed this guide, you will have an example AI agent running wi
 
 ## Prerequisites
 
-Requirements vary depending on your working environment and selected model provider. See below for details.
+To build your first AI agent, see the prerequisites below depending on:
 
-The following prerequisites are required to build your first AI agent:
-
-| Prerequisite          | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| :-------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda 8 environment | <p>To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:</p><p><ul><li><p> [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).</p></li><li><p> [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).</p></li></ul></p> |
-| A supported LLM       | <p>The AI Agent connector supports multiple model providers. In this guide, you can try two use cases: a cloud-based option using AWS Bedrock, and a local LLM with Ollama.</p> <p> For more information on how to configure the connector with your preferred LLM provider, such as OpenAI or Anthropic, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).</p>                         |
+- Your [working environment](#camunda-8-environment).
+- Your [chosen model](#supported-models).
 
 ### Camunda 8 environment
 
@@ -55,35 +51,23 @@ To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using
 The AI Agent connector makes it easy to integrate Large Language Models (LLMs) into your process workflows.
 It supports multiple model providers and can communicate with any LLM that exposes an OpenAI‑compatible API.
 
-In this guide, you can try two use cases: a cloud-based option using AWS Bedrock, and a local LLM with Ollama.
+In this guide, you can try two use cases:
 
-**(TBD!!) Summarize using a table: provider and model. Below another one with prerequisites**
+| Setup | Model provider | Model used      | Prerequisites                                                                                                                                                                                                                                                                                                                                                                   |
+| :---- | :------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Cloud | AWS Bedrock    | Claude Sonnet 4 | <p><ul><li> An AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</li><li><p> Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for more details.</p></li></ul></p> |
+| Local | Ollama         | GPT-OSS 20B     | [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.                                                                                                                                                                                                                                                                                        |
 
-#### AWS Bedrock
-
-With AWS Bedrock, you will use the Claude Sonnet 4 model in the `us-east-1` region.
-
-To use it, you need access to:
-
-- An AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).
-- Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for more details.
-
-#### Local LLM via Ollama
-
-With Ollama, you will use the GPT-OSS 20B model.
-
-To use it, you need:
-
-- Camunda 8 Run running locally.
-
-For more information on how to configure the connector with your preferred LLM provider, such as OpenAI or Anthropic, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+:::tip
+You can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+:::
 
 ## Step 1: Install the example model blueprint
 
 To start building your first AI agent, you can use a prebuilt Camunda blueprint process model.
 
 In this tutorial, you will use the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) blueprint from [Camunda marketplace](https://marketplace.camunda.com/en-US/home).
-Depending on the environment you choose, follow the corresponding steps below.
+Depending on your Camunda 8 working environment, follow the corresponding steps below.
 
 <Tabs groupId="environment" defaultValue="saas" values={
 [
