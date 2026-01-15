@@ -1974,8 +1974,7 @@
             },
             {
               "Desktop Modeler": [
-                "self-managed/components/modeler/desktop-modeler/connect-to-self-managed",
-
+                "self-managed/modeler/desktop-modeler/connect-to-self-managed",
                 "self-managed/modeler/desktop-modeler/deploy-to-self-managed"
               ]
             }
