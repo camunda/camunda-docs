@@ -27,39 +27,39 @@ Before you update:
 **Release date:** TBD \
 **Camunda 8 compatibility:** 8.9.x
 
-#### Data Migrator: Automatic C8 datasource selection
+#### Data Migrator: Automatic Camunda 8 datasource selection
 
-The migrator now automatically uses the C8 datasource for the migration schema when configured, removing the need for manual configuration.
+When the Camunda 8 datasource is configured, the migrator now creates and uses the migration schema on the Camunda 8 database automatically. Manual selection is no longer required.
 
-**What changed**
+##### What changed
 
-- **Removed**: `camunda.migrator.data-source` configuration property
-- **New behavior**: Migration schema is automatically created on C8 database when `camunda.migrator.c8.data-source` is configured
+- Removed: `camunda.migrator.data-source`
+- New behavior: The migration schema is created on the Camunda 8 database when `camunda.migrator.c8.data-source` is configured
 
-**Impact on existing migrations**
+##### Impact on existing migrations
 
 :::warning Risk of duplicate migrations
-If you already ran migration in 0.2 **without** `camunda.migrator.data-source: C8` configured, upgrading to 0.3 will create a new migration schema on the C8 database. This resets migration tracking and may cause duplicate data migration.
+If you ran a migration in 0.2.x without configuring `camunda.migrator.data-source: C8`, upgrading to 0.3.0 creates a new migration schema on the Camunda 8 database. This resets migration tracking and can result in duplicate data migration.
 :::
 
-**Migration steps**
+##### Migration steps
 
-1. **If your C7 and C8 datasources point to the same database in 0.2:**
-   - Remove the `camunda.migrator.data-source` property from your configuration
-   - No further action needed - the migration schema is already accessible from both datasources
+1. **If your Camunda 7 and Camunda 8 datasources point to the same database in 0.2.x:**
+   - Remove `camunda.migrator.data-source` from your configuration.
+   - No further action is required. The migration schema is already accessible from both datasources.
 
-2. **If you explicitly configured `data-source: C8` in 0.2:**
-   - Remove the `camunda.migrator.data-source` property from your configuration
-   - No further action needed - your migration schema is already on the C8 database
+2. **If you explicitly configured `camunda.migrator.data-source: C8` in 0.2.x:**
+   - Remove `camunda.migrator.data-source` from your configuration.
+   - No further action is required. The migration schema is already on the Camunda 8 database.
 
-3. **If you used the default configuration (migration schema on C7 database):**
-   - **Option A (Recommended)**: Manually copy the migration schema from C7 to C8 database before upgrading
-   - **Option B**: Start from scratch without migration data.
-     - This leads to duplicate migrations.
-     - Before updating, you can use `--drop-schema` to remove the migration mapping table on C7 (e.g., to reclaim disk space)
+3. **If you used the default configuration in 0.2.x (migration schema on the Camunda 7 database):**
+   - Option A (recommended): Copy the migration schema from the Camunda 7 database to the Camunda 8 database before upgrading.
+   - Option B: Start over without existing migration tracking.
+     - This can result in duplicate migrations.
+     - Before upgrading, you can use `--drop-schema` to remove the migration schema from the Camunda 7 database (for example, to reclaim disk space).
 
-4. **If you haven't started migration yet:**
-   - Simply configure your C8 datasource for history migration:
+4. **If you have not started a migration yet:**
+   - Configure the Camunda 8 datasource:
 
      ```yaml
      camunda.migrator.c8.data-source:
@@ -69,7 +69,7 @@ If you already ran migration in 0.2 **without** `camunda.migrator.data-source: C
      ```
 
 :::note
-See [History Atomicity](data-migrator/history.md#atomicity) for more details.
+See [history atomicity](data-migrator/history.md#atomicity) for more details.
 :::
 
 ### Version 0.1.x to 0.2.0

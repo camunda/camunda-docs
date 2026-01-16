@@ -96,17 +96,17 @@ See [configuration for history auto-cancellation](../data-migrator/config-proper
 
 ## Atomicity
 
-The History Data Migrator automatically uses the configured C8 datasource for both the migration mapping schema and migrated data, providing single-transaction atomicity for each entity migration.
+The History Data Migrator uses the configured Camunda 8 datasource for both the migration mapping schema and the migrated data. This ensures single-transaction atomicity for each entity migration.
 
-**What gets migrated atomically:**
+### What is migrated atomically
 
-Each entity migration writes multiple rows in one transaction:
+Each entity migration writes multiple rows in a single transaction:
 
-- **C8 data**: The migrated Camunda 8 entity (e.g., user task, process instance, variable)
-  - **Child entities**: Where applicable (e.g., decision instances with their child decisions, inputs, and outputs)
-- **Tracking information**: Mapping from C7 ID to C8 key for resumption and duplicate prevention
+- Camunda 8 data: The migrated entity (for example, a user task, process instance, or variable)
+- Child entities, when applicable (for example, decision instances and their related decisions, inputs, and outputs)
+- Tracking information: A mapping from the Camunda 7 ID to the Camunda 8 key, used for resuming migrations and preventing duplicates
 
-If an error occurs, all database modifications are rolled back together. This prevents inconsistent states like C8 data without tracking information (causing duplicates on retry) or orphaned child entities.
+If an error occurs, the transaction is rolled back and no partial data is persisted. This prevents inconsistent states such as Camunda 8 data without tracking information (which can cause duplicates on retry) or orphaned child entities.
 
 ## Entity transformation
 

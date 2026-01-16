@@ -42,11 +42,14 @@ Migration details are summarized as follows:
 
 As described in [the roll-out phase of the migration journey](../../migration-journey.md), you will typically use the following sequence of tasks when applying both data migrations (while keeping downtimes to a minimum):
 
-:::warning Configure C8 datasource upfront
-If you plan to migrate both runtime and history data, configure the C8 datasource **before** running your first migration. Without it, the migration schema is created on the C7 datasource as a fallback. If you later add the C8 datasource configuration, the migrator will create a new migration schema on C8, resetting migration tracking and potentially causing duplicate migrations.
+:::warning Configure the Camunda 8 datasource before your first migration
+
+If you plan to migrate both runtime and history data, configure the Camunda 8 datasource before running your first migration.
+
+If the Camunda 8 datasource is not configured, the migrator creates the migration schema on the Camunda 7 datasource as a fallback. If you add the Camunda 8 datasource later, the migrator creates a new migration schema on Camunda 8, which resets migration tracking and can result in duplicate migrations.
 
 ```yaml
-# Configure this BEFORE your first migration
+# Configure this before your first migration
 camunda.migrator.c8.data-source:
   jdbc-url: jdbc:postgresql://localhost:5432/camunda8
   username: camunda
