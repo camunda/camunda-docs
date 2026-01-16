@@ -86,6 +86,10 @@ In order to access the Camunda Platform through HTTPS with Ingress, TLS must be 
 2. **TLS certificate**: A TLS certificate created for your domain. The certificate must be an X.509 certificate, issued by a trusted Certificate Authority. The certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure Ingress resources. Reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
 3. **TLS secret**: A TLS secret created from your TLS certificate. This guide will use a secret called `camunda-platform`. For more information, see the Kubernetes documentation on how to create a [TLS secret](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets).
 
+:::note
+Multiple ingress controllers are supported. Speficify `ingress.className` or `ingress.grpc.className` to assign the ingress to the desired ingress controller
+:::
+
 The following is an example `values.yaml` configuration using the example Ingress domain and TLS secret:
 
 ```yaml

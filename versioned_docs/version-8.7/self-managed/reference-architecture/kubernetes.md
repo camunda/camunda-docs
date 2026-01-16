@@ -281,6 +281,10 @@ Using an Application Load Balancer requires the following:
 
 The setup does not require the configuration of the [TLS on the Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls). If the AWS Load Balancer Controller is correctly set up, it automatically pulls the correct certificate from ACM based on the host name.
 
+:::note
+ALB supports HTTP/2 over HTTPS listeners and allows a maximum of 128 streams per client HTTP/2 connection. The server-push feature of HTTP/2 is not supported. See more in [AWS ALB protocols](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-protocol-version:~:text=The%20maximum%20number%20of%20streams,client%20HTTP%2F2%20connection%20is%20128)
+:::
+
 ##### Network Load Balancer (NLB)
 
 Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingress-nginx), which deploys a Network Load Balancer. In this setup, TLS must be terminated within the Ingress, and AWS Certificate Manager (ACM) cannot be used. ACM does not allow exporting the private key required for TLS termination within the Ingress.
