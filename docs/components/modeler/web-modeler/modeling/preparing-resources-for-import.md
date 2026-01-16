@@ -74,7 +74,8 @@ Use a `.zip` when:
 When preparing the `.zip`:
 
 - Keep the **total archive size** at or below **10 MB**.
-- Include at most **100** files that Web Modeler can support
+- Include at most **100** files that Web Modeler can support.
+- Note that the folder structure **will not** be imported into Web Modeler.
 
 ### Main process selection
 
