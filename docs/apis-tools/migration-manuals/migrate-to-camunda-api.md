@@ -235,6 +235,8 @@ Response structure changes as outlined in [general changes][].
 | `isValueTruncated` | Renamed         | Now `isTruncated` (see get variable endpoint for full value if needed).  |
 | `draft`            | Removed         | Draft variables not supported in V2 (see save draft variables endpoint). |
 
+Note that for completed tasks the V1 API returned snapshot variables representing their value as they were at completion time, while the V2 API always returns the current runtime value of the variables.
+
 </TabItem>
 </Tabs>
 

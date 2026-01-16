@@ -66,6 +66,21 @@ Tasklist V2 does not support candidate users or candidate groups for task visibi
 [Authorization-based access control](../concepts/access-control/authorizations.md) in V2 provides
 fine-grained access at the process-definition level.
 
+### Variable semantics
+
+Tasklist V1 represents variables for completed tasks as they were at completion time.
+When a task is completed via the V1 API, Tasklist persists a snapshot of all visible variables and V1 task search reads only this snapshot for completed tasks.
+
+Tasklist V2, on the other hand, represents variables as runtime state.
+User task variable search endpoints always reflect the latest values and do not store an immutable “value at completion” snapshot.
+
+For compatibility purposes, when a task is completed via the V2 API Tasklist persists a snapshot of just the variables explicitly sent in the completion request.
+Because of this, mixing APIs for the same user task leads to unexpected results:
+if you complete a Camunda user task via Tasklist V2 and then query it via Tasklist V1, only the variables explicitly sent in the V2 completion request are visible in V1 results.
+Other process variables in scope are not included.
+
+For this reason it is strongly recommended to avoid mixing Tasklist V1 and V2 APIs for the same tasks during migration.
+
 ## Switching between V1 and V2 modes
 
 ### SaaS configuration
