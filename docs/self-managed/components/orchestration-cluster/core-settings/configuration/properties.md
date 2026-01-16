@@ -1054,6 +1054,16 @@ These properties apply only when `camunda.security.authentication.oidc.client-au
 | `camunda.security.multi-tenancy.api-enabled`    | Enables the multi-tenancy API and UI independently from multi-tenancy checks. | `true`        |
 | `camunda.security.multi-tenancy.checks-enabled` | Enables multi-tenancy checks. This requires the API to be protected.          | `false`       |
 
+### `camunda.security.transport-layer-security.cluster`
+
+| Property                                                                         | Description                                                                                                                           | Default value             |
+| :------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ | :------------------------ |
+| `camunda.security.transport-layer-security.cluster.enabled`                      | <p>Enables TLS authentication for internal cluster (broker-to-broker) communication.</p>                                              | `false`                   |
+| `camunda.security.transport-layer-security.cluster.certificate-chain-path`       | <p>Sets the path to the certificate chain file.</p>                                                                                   |                           |
+| `camunda.security.transport-layer-security.cluster.certificate-private-key-path` | <p>Sets the path to the private key file location.</p>                                                                                |                           |
+| `camunda.security.transport-layer-security.cluster.key-store.file-path`          | <p>Configures the keystore file containing both the certificate chain and the private key. Currently only supports PKCS12 format.</p> | `'./cluster.jks'`         |
+| `camunda.security.transport-layer-security.cluster.key-store.password`           | <p>Configures the keystore password.</p>                                                                                              | `${CLUSTER_KEY_STORE_PW}` |
+
 ### `camunda.persistent.sessions`
 
 | Property                              | Description                                                                            | Default value |
@@ -1215,6 +1225,16 @@ script-src-attr 'none'.
 | --------------------------------------------- | ----------------------------------------------------------------------------- | ------------- |
 | `CAMUNDA_SECURITY_MULTITENANCY_APIENABLED`    | Enables the multi-tenancy API and UI independently from multi-tenancy checks. | `true`        |
 | `CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED` | Enables multi-tenancy checks. This requires the API to be protected.          | `false`       |
+
+### `CAMUNDA_SECURITY_TRANSPORTLAYERSECURITY_CLUSTER`
+
+| Property                                                                    | Description                                                                                                                           | Default value             |
+| :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ | :------------------------ |
+| `CAMUNDA_SECURITY_TRANSPORTLAYERSECURITY_CLUSTER_ENABLED`                   | <p>Enables TLS authentication for internal cluster (broker-to-broker) communication.</p>                                              | `false`                   |
+| `CAMUNDA_SECURITY_TRANSPORTLAYERSECURITY_CLUSTER_CERTIFICATECHAINPATH`      | <p>Sets the path to the certificate chain file.</p>                                                                                   |                           |
+| `CAMUNDA_SECURITY_TRANSPORTLAYERSECURITY_CLUSTER_CERTIFICATEPRIVATEKEYPATH` | <p>Sets the path to the private key file location.</p>                                                                                |                           |
+| `CAMUNDA_SECURITY_TRANSPORTLAYERSECURITY_CLUSTER_KEYSTORE_FILEPATH`         | <p>Configures the keystore file containing both the certificate chain and the private key. Currently only supports PKCS12 format.</p> | `'./cluster.jks'`         |
+| `CAMUNDA_SECURITY_TRANSPORTLAYERSECURITY_CLUSTER_KEYSTORE_PASSWORD`         | <p>Configures the keystore password.</p>                                                                                              | `${CLUSTER_KEY_STORE_PW}` |
 
 ### `CAMUNDA_PERSISTENT_SESSIONS`
 
