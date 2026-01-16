@@ -16,25 +16,27 @@ Delete a process instance using the [Orchestration Cluster API](/apis-tools/orch
 You can also delete a process instance in Operate. See the [Operate user guide](../operate/userguide/delete-finished-instances.md).
 :::
 
-## Call activities
+## Limitations
 
-### Delete a called process instance
+You can delete only process instances in a completed or terminated state. This preserves consistency and integrity within the system.
+
+If a process instance is still active, cancel it first using the [cancel process instance API](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instance.api.mdx).
+
+### Limitations with call activities
+
+When process instances are linked through call activities, deletion is scoped to the selected instance only. Related parent or child process instances are not deleted automatically.
+
+#### Delete a called process instance
 
 If you delete a process instance that was created by a call activity, the parent process instance is not affected. Only the called process instance data is deleted.
 
-In Operate, you can still see the parent process instance, but you can’t navigate to the called process instance.
+In Operate, the parent process instance remains visible, but you can’t navigate to the deleted called process instance.
 
-### Delete a parent process instance
+#### Delete a parent process instance
 
 If you delete a parent process instance that contains a call activity, the called process instance is not affected. Only the parent process instance data is deleted.
 
-In Operate, you can still see the called process instance, but navigating to it shows an empty screen.
-
-## Limitations
-
-You can delete only process instances in a **completed** or **terminated** state. This preserves consistency and integrity.
-
-If the process instance is still active, cancel it first using the [cancel process instance API](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instance.api.mdx).
+In Operate, the called process instance remains visible, but navigating to it shows an empty screen.
 
 ## Eventual consistency
 
@@ -42,11 +44,13 @@ Process instance deletion runs asynchronously. Depending on how many process ins
 
 ## Technical details
 
+This section explains how process instance deletion is handled internally to help you understand timing and consistency behavior.
+
 Deleting one or more process instances uses [batch operations](./batch-operations.md).
 
 The Zeebe engine queries secondary storage for process instances to delete. For each instance found, the engine writes a delete command to the log, which results in a deleted event.
 
-Exporters consume the deleted event and write a record to secondary storage to mark the process instance for deletion. Then, an asynchronous scheduled task deletes all data associated with each marked process instance.
+Exporters consume the deleted event and write a record to secondary storage to mark the process instance for deletion. An asynchronous scheduled task then deletes all data associated with each marked process instance.
 
 ```mermaid
 sequenceDiagram
@@ -54,7 +58,7 @@ sequenceDiagram
     Engine->>Engine: Create batch operation
     Engine->>-V2 API: Batch operation create response
     Engine->>+Secondary storage: Query process instances
-    activate engine
+    activate Engine
     Secondary storage->>-Engine: Return process instance keys
     loop for each process instance key
     Engine->>Engine: Write DELETED event for each process instance key
