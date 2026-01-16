@@ -14,6 +14,12 @@ As a Spring Boot application, the Orchestration Cluster supports standard
 
 The following configurations apply to all components within the Orchestration Cluster.
 
+## Imported
+
+| Property                           | Description                                                                                                     | Default value |
+| :--------------------------------- | :-------------------------------------------------------------------------------------------------------------- | :------------ |
+| `camunda.api.long-polling.enabled` | <p>Enable [long-polling](/components/concepts/job-workers.md#long-polling) for the Camunda gRPC API server.</p> | `true`        |
+
 ## API
 
 <Tabs>
@@ -1045,6 +1051,13 @@ import SecondaryStorage from './partials/\_secondary-storage.md'
 | `camunda.system.io-thread-count`  | <p>Controls the number of io threads to be used.</p><p>These threads are used for workloads that write data to disk. While writing, these threads are blocked which means that they yield the CPU. </p>                                                                                                                                                                                                      | `2`           |
 | `camunda.system.clock-controlled` | <p>Controls whether the system clock or mutable one.</p><p>If enabled, time progression can be controlled programmatically for testing purposes.</p>                                                                                                                                                                                                                                                         | `false`       |
 
+### `camunda.system.restore`
+
+| Property                                        | Description | Default value  |
+| :---------------------------------------------- | :---------- | :------------- |
+| `camunda.system.restore.validate-config`        |             | `true`         |
+| `camunda.system.restore.ignore-files-in-target` |             | `lost + found` |
+
 ### `camunda.system.actor.idle`
 
 | Property                                    | Description                                                                                                                                                   | Default value |
@@ -1069,6 +1082,13 @@ import SecondaryStorage from './partials/\_secondary-storage.md'
 | `CAMUNDA_SYSTEM_CPUTHREADCOUNT`  | <p>Controls the number of non-blocking CPU threads to be used</p><p><strong>Warning:</strong> You should never specify a value that is larger than the number of physical cores available.</p><p>Good practice is to leave 1-2 cores for IO threads and the operating system (it has to run somewhere).</p><p>For example, when running Zeebe on a machine which has 4 cores, a good value would be `2`.</p> | `2`           |
 | `CAMUNDA_SYSTEM_IOTHREADCOUNT`   | <p>Controls the number of io threads to be used.</p><p>These threads are used for workloads that write data to disk. While writing, these threads are blocked which means that they yield the CPU. </p>                                                                                                                                                                                                      | `2`           |
 | `CAMUNDA_SYSTEM_CLOCKCONTROLLED` | <p>Controls whether the system clock or mutable one.</p><p>If enabled, time progression can be controlled programmatically for testing purposes.</p>                                                                                                                                                                                                                                                         | `false`       |
+
+### `CAMUNDA_SYSTEM_RESTORE`
+
+| Property                                     | Description | Default value  |
+| :------------------------------------------- | :---------- | :------------- |
+| `CAMUNDA_SYSTEM_RESTORE_VALIDATECONFIG`      |             | `true`         |
+| `CAMUNDA_SYSTEM_RESTORE_IGNOREFILESINTARGET` |             | `lost + found` |
 
 ### `CAMUNDA_SYSTEM_ACTOR_IDLE`
 
