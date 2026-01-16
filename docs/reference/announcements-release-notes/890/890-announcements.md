@@ -25,16 +25,51 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
 
-#### Elasticsearch minimum version raised to 8.18.6+
+#### Support for Latest Elasticsearch and OpenSearch Versions
 
-The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.18.6 (previously 8.17.3).
+We now support Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to take advantage of the latest database releases and features.
 
-- This aligns with the updated `ELASTICSEARCH_VERSION=8.18.6` default used by Camunda 8 Run, Docker Compose, and Helm templates.
-- You should upgrade your Elasticsearch/OpenSearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch minimum version raised to 8.19+
+
+The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.19 (previously 8.16+).
+
+- This aligns with the Elasticsearch versions maintained by Elastic as of April 2025.
+- Upgrade your Elasticsearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
+- For best results, we recommend upgrading to the latest supported Elasticsearch 9.2+ to take advantage of new features and improvements.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenSearch minimum version raised to 2.19+
+
+The minimum supported OpenSearch version for the Orchestration cluster and Optimize is now 2.19+ (previously 2.17+).
+
+- This aligns with the OpenSearch versions maintained as of April 2025.
+- Upgrade your OpenSearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
+- For best results, we recommend upgrading to the latest supported OpenSearch 3.4+ to take advantage of new features and improvements.
 
 <p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
@@ -424,7 +459,8 @@ This enhancement aligns Web Modeler’s database configuration with the Orchestr
 
 :::info
 To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-rdbms-support-h2-mariadb-mysql).
-:::
 
 </div>
 </div>
+:::
+
