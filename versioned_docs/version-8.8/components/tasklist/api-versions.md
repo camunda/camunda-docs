@@ -68,18 +68,17 @@ fine-grained access at the process-definition level.
 
 ### Variable semantics
 
-Tasklist V1 represents variables for completed tasks as they were at completion time.
-When a task is completed via the V1 API, Tasklist persists a snapshot of all visible variables and V1 task search reads only this snapshot for completed tasks.
+Tasklist V1 returns variables for completed tasks as they were at completion time. When a task is completed via the V1 API, Tasklist persists a snapshot of all visible variables. V1 task search for completed tasks reads only this snapshot.
 
-Tasklist V2, on the other hand, represents variables as runtime state.
-User task variable search endpoints always reflect the latest values and do not store an immutable “value at completion” snapshot.
+Tasklist V2 returns variables as runtime state. User task variable search endpoints always reflect the latest values and do not store an immutable “value at completion” snapshot.
 
-For compatibility purposes, when a task is completed via the V2 API Tasklist persists a snapshot of just the variables explicitly sent in the completion request.
-Because of this, mixing APIs for the same user task leads to unexpected results:
-if you complete a Camunda user task via Tasklist V2 and then query it via Tasklist V1, only the variables explicitly sent in the V2 completion request are visible in V1 results.
-Other process variables in scope are not included.
+For compatibility, when a task is completed via the V2 API, Tasklist persists a snapshot of only the variables explicitly included in the completion request.
 
-For this reason it is strongly recommended to avoid mixing Tasklist V1 and V2 APIs for the same tasks during migration.
+Because of this, mixing APIs for the same user task can lead to unexpected results. For example, if you complete a task via Tasklist V2 and then query it via Tasklist V1, V1 results show only the variables explicitly sent in the V2 completion request. Other in-scope process variables are not included.
+
+:::warning Avoid mixing Tasklist V1 and V2 APIs during migration
+To prevent unexpected variable results, avoid using Tasklist V1 and V2 APIs on the same tasks during migration.
+:::
 
 ## Switching between V1 and V2 modes
 
