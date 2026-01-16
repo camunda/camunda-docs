@@ -568,10 +568,7 @@ components:
           type: string
           enum:
             - activeInstancesWithErrorCount
-            - processDefinitionId
             - processDefinitionKey
-            - processDefinitionName
-            - processDefinitionVersion
             - tenantId
         order:
           $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
