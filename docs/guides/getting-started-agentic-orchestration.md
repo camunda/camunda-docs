@@ -29,7 +29,7 @@ In this guide, you will:
 - Deploy and start a business process using [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) or locally with [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 - Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities for the AI agent.
 - Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
-- Integrate a cloud-based or local Large Language Model (LLM) via an OpenAI‑compatible API.
+- Integrate a Large Language Model (LLM) into your AI agent.
 
 Once you have completed this guide, you will have an example AI agent running within Camunda 8.
 
@@ -60,7 +60,7 @@ In this guide, you can try two use cases:
 | Local | Ollama         | GPT-OSS:20b     | <p><ul><li> [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.</li><li><p> Ollama and GPT-OSS:20b installed. See [Ollama's documentation](https://docs.ollama.com/) for details.</p></li></ul></p>                                                                                                                                   |
 
 :::important
-LLMs require a significant amount of available disk space and memory. GPT-OSS:20b requires more than 20GB of RAM to function and 14GB of free disk space to download.
+Running LLMs locally requires substantial disk space and memory. GPT-OSS:20b requires more than 20GB of RAM to function and 14GB of free disk space to download.
 :::
 
 You can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
@@ -118,9 +118,9 @@ Depending on your model choice, configure the AI Agent connector accordingly.
 
 <TabItem value="aws">
 
-Configure the connector secrets and template for AWS Bedrock.
+Configure the connector's authentication and template for AWS Bedrock.
 
-### Configure connector secrets
+#### Configure authentication
 
 The example blueprint downloaded in step one is preconfigured to use AWS Bedrock.
 For authentication, it uses the following connector secrets:
@@ -145,7 +145,9 @@ Export the secrets as environment variables before starting the distribution. If
 </TabItem>
 </Tabs>
 
-### Configure the connector template
+See [Amazon Bedrock model provider](../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#amazon-bedrock) for more information about other available authentication methods.
+
+#### Configure properties
 
 In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task.
 You can leave it as is or adjust its configuration to test other setups. To do so, use the properties panel of the AI Agent:
@@ -157,19 +159,19 @@ You can leave it as is or adjust its configuration to test other setups. To do s
 <TabItem value="local">
 Configure your local LLM with Ollama.
 
-### Configure the connector template
+#### Configure properties
 
-The example blueprint downloaded in step one is preconfigured to use AWS Bedrock. Therefore, update the connector template as follows to use Ollama instead.
+The example blueprint downloaded in step one is preconfigured to use AWS Bedrock. Update the connector's configuration as follows to use Ollama instead.
 
-The **Model provider** and **Model** are the sections where you configure Camunda to point to your local Ollama API, which serves the GPT-OSS:20b LLM.
+Configure Camunda to point to your local Ollama API, which serves the GPT-OSS:20b LLM, using the Model provider and Model sections within the connector's properties panel.
 
-#### Model provider section
+**Model provider**
 
 1. Select **OpenAI Compatible** from the Provider dropdown.
 1. The default Ollama API is served at `http://localhost:11434/v1`, so enter this value in the API endpoint field.
 1. No authentication or additional headers are required for the local Ollama API, so leave the remaining fields blank.
 
-#### Model section
+**Model section**
 
 1. Enter `gpt-oss:20b` in the Model field. Note that this field is case-sensitive, so be sure to enter it in all lowercase.
 
