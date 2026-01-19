@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './styles.module.css';
 
-type Filter = 'all' | 'breaking-change' | 'new' | 'deprecated';
+type Filter = 'all' | 'breaking-change' | 'new' | 'deprecated' | 'change';
 
 const OPTIONS: Array<{ value: Filter; label: string }> = [
   { value: 'all', label: 'All' },
   { value: 'breaking-change', label: 'Breaking changes' },
+  { value: 'deprecated', label: 'Deprecation' },
+  { value: 'change', label: 'Change' },
   { value: 'new', label: 'New' },
-  { value: 'deprecated', label: 'Deprecated' },
 ];
 
 const EMPTY_MESSAGE_ATTR = 'data-empty-filter-message';
@@ -40,10 +41,33 @@ export default function ReleaseAnnouncementsFilter({
   defaultFilter?: Filter;
 }) {
   const [filter, setFilter] = useState<Filter>(defaultFilter);
+  const [availableTypes, setAvailableTypes] = useState<Set<Filter>>(() => new Set<Filter>(['all']));
   const listRef = useRef<HTMLDivElement | null>(null);
 
   const options = useMemo(() => OPTIONS, []);
 
+  // Detect which types exist on the page; hide filter badges that have no entries.
+  useEffect(() => {
+    const container = listRef.current;
+    if (!container) return;
+
+    const available = new Set<Filter>(['all']);
+    (['breaking-change', 'new', 'deprecated', 'change'] as const).forEach((t) => {
+      if (container.querySelector(`.release-announcement-row[data-type="${t}"]`)) {
+        available.add(t);
+      }
+    });
+
+    setAvailableTypes(available);
+
+    // If the default/active filter doesn't exist on this page, fall back to All.
+    if (filter !== 'all' && !available.has(filter)) {
+      setFilter('all');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Hide empty sections when filtering (keeps your previous behavior)
   useEffect(() => {
     const container = listRef.current;
     if (!container) return;
@@ -61,7 +85,6 @@ export default function ReleaseAnnouncementsFilter({
 
     if (filter === 'all') return;
 
-    // Only consider direct children so section boundaries (h2/h3) are predictable in MDX.
     const elements = Array.from(container.querySelectorAll<HTMLElement>(':scope > *'));
 
     for (let i = 0; i < elements.length; i++) {
@@ -69,10 +92,8 @@ export default function ReleaseAnnouncementsFilter({
       const level = getHeadingLevel(headingEl);
       if (!level) continue;
 
-      // If already hidden by a parent section, skip
       if (headingEl.hidden) continue;
 
-      // Find end of this section: next heading at the same or higher level.
       let end = elements.length;
       for (let j = i + 1; j < elements.length; j++) {
         const nextLevel = getHeadingLevel(elements[j]);
@@ -98,28 +119,30 @@ export default function ReleaseAnnouncementsFilter({
     <section className={styles.wrapper} data-announcement-filter={filter}>
       <div className={styles.controls}>
         <span className={styles.label} id="announcementFilterLabel">
-          Filter by type:
+          Filter:
         </span>
 
         <div className={styles.badgeGroup} role="group" aria-labelledby="announcementFilterLabel">
-          {options.map((o) => {
-            const isActive = o.value === filter;
+          {options
+            .filter((o) => o.value === 'all' || availableTypes.has(o.value))
+            .map((o) => {
+              const isActive = o.value === filter;
 
-            return (
-              <button
-                key={o.value}
-                type="button"
-                className={[
-                  styles.filterBadgeButton,
-                  isActive ? styles.filterBadgeButtonActive : styles.filterBadgeButtonInactive,
-                ].join(' ')}
-                aria-pressed={isActive}
-                onClick={() => setFilter(o.value)}
-              >
-                {o.label}
-              </button>
-            );
-          })}
+              return (
+                <button
+                  key={o.value}
+                  type="button"
+                  className={[
+                    styles.filterBadgeButton,
+                    isActive ? styles.filterBadgeButtonActive : styles.filterBadgeButtonInactive,
+                  ].join(' ')}
+                  aria-pressed={isActive}
+                  onClick={() => setFilter(o.value)}
+                >
+                  {o.label}
+                </button>
+              );
+            })}
         </div>
       </div>
 
