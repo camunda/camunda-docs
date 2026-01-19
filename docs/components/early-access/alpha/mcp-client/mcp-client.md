@@ -154,9 +154,9 @@ The parameters below configure the operation to execute on the MCP server. You t
 | Method     | Yes      | The [MCP method](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#protocol-messages) to call. Defaults to `toolCall.method`. |
 | Parameters | Yes      | The parameters to pass with the MCP client execution. Defaults to `toolCall.params`.                                                              |
 
-#### Tools
+#### Filters
 
-Allows filtering the list of tools provided by the MCP server. If not configured, all tools provided by the MCP server will be available to the AI agent.
+Allows filtering the list of available data by including or excluding specific data, such as tools, resources or prompts, similar to a Blacklist/Whitelist approach. It prevents also operations from being executed, when used for executional operations, such as tool calls. Below is an example for tool filtering - the same approach applies to resources and prompts.
 
 | Field          | Required | Description                                             | Example                                |
 | :------------- | :------- | :------------------------------------------------------ | :------------------------------------- |
