@@ -90,6 +90,7 @@ module.exports = {
             "components/concepts/process-instance-creation",
             "components/concepts/process-instance-modification",
             "components/concepts/process-instance-migration",
+            "components/concepts/process-instance-deletion",
             "components/concepts/incidents",
           ],
         },
