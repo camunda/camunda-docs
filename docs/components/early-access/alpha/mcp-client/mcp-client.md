@@ -156,7 +156,7 @@ The parameters below configure the operation to execute on the MCP server. You t
 
 #### Filters
 
-Allows filtering the list of available data by including or excluding specific data, such as tools, resources or prompts, similar to a Blacklist/Whitelist approach. It prevents also operations from being executed, when used for executional operations, such as tool calls. Below is an example for tool filtering - the same approach applies to resources and prompts.
+Allows filtering the list of available data by including or excluding specific data, such as tools, resources or prompts, similar to a blocklist/allowlist approach. It prevents also operations from being executed, when used for executional operations, such as tool calls. Below is an example for tool filtering - the same approach applies to resources and prompts.
 
 | Field          | Required | Description                                             | Example                                |
 | :------------- | :------- | :------------------------------------------------------ | :------------------------------------- |
