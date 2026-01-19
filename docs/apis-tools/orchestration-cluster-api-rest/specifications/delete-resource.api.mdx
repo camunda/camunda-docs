@@ -148,6 +148,12 @@ deployed using the deploy resources endpoint. Specify the resource you want to d
               minimum: 1,
               title: "OperationReference",
             },
+            deleteHistory: {
+              description:
+                "When set to *true*, asynchronously deletes all instances associated with this resource. History records are retained by default *false*. This flag is currently supported for process definitions only.",
+              type: "boolean",
+              default: false,
+            },
           },
           title: "DeleteResourceRequest",
         },
@@ -160,7 +166,43 @@ deployed using the deploy resources endpoint. Specify the resource you want to d
   id={undefined}
   label={undefined}
   responses={{
-    "200": { description: "The resource is deleted." },
+    "200": {
+      description: "The resource is deleted.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              resourceKey: {
+                type: "string",
+                description: "The key of the deleted resource.",
+              },
+              batchOperation: {
+                type: "object",
+                description:
+                  "The batch operation created to delete the resource.",
+                properties: {
+                  batchOperationKey: {
+                    type: "string",
+                    description:
+                      "The key of the batch operation created to delete the resource.",
+                  },
+                  batchOperationType: {
+                    type: "string",
+                    description:
+                      "The type of the batch operation created to delete the resource.",
+                    enum: ["DELETE_PROCESS_INSTANCE"],
+                  },
+                },
+                title: "BatchOperationCreatedResult",
+              },
+            },
+            required: ["resourceKey"],
+            title: "DeleteResourceResponse",
+          },
+        },
+      },
+    },
     "400": {
       description: "The provided data is not valid.",
       content: {
