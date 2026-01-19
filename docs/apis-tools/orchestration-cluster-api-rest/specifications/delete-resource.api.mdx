@@ -150,7 +150,7 @@ deployed using the deploy resources endpoint. Specify the resource you want to d
             },
             deleteHistory: {
               description:
-                "When set to *true*, asynchronously deletes all instances associated with this resource. History records are retained by default *false*. This flag is currently supported for process definitions only.",
+                "When set to true, asynchronously deletes all instances associated with this resource. By default, history records are retained (false). This flag is currently supported for process definitions only.",
               type: "boolean",
               default: false,
             },
@@ -167,7 +167,7 @@ deployed using the deploy resources endpoint. Specify the resource you want to d
   label={undefined}
   responses={{
     "200": {
-      description: "The resource is deleted.",
+      description: "The resource was deleted successfully and a response body is returned.",
       content: {
         "application/json": {
           schema: {
