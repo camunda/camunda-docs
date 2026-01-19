@@ -330,8 +330,9 @@ To use an Application Load Balancer:
 The setup does not require configuration of [TLS on the Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls). If the AWS Load Balancer Controller is correctly configured, it automatically retrieves the appropriate certificate from ACM based on the host name.
 
 :::note AWS ALB known limitations
-ALB supports HTTP/2 over HTTPS listeners and allows a maximum of 128 streams per client HTTP/2 connection. The server-push feature of HTTP/2 is not supported. See more in [AWS ALB protocols](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-protocol-version:~:text=The%20maximum%20number%20of%20streams,client%20HTTP%2F2%20connection%20is%20128).
-If you believe you need more then 128 stream per client, please see [Network Load Balancer](#network-load-balancer-nlb).
+Application Load Balancers (ALB) support HTTP/2 over HTTPS listeners and allow a maximum of 128 streams per client HTTP/2 connection. The HTTP/2 server-push feature is not supported. For details, see [AWS ALB protocols](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-protocol-version:~:text=The%20maximum%20number%20of%20streams,client%20HTTP%2F2%20connection%20is%20128).
+
+If you need more than 128 streams per client, see [Network Load Balancer](#network-load-balancer-nlb).
 :::
 
 ##### Network load balancer (NLB)
