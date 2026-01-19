@@ -6,7 +6,7 @@ type Filter = 'all' | 'breaking-change' | 'new' | 'deprecated' | 'change';
 const OPTIONS: Array<{ value: Filter; label: string }> = [
   { value: 'all', label: 'All' },
   { value: 'breaking-change', label: 'Breaking changes' },
-  { value: 'deprecated', label: 'Deprecation' },
+  { value: 'deprecated', label: 'Deprecated' },
   { value: 'change', label: 'Change' },
   { value: 'new', label: 'New' },
 ];
