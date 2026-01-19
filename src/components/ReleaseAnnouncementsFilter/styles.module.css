@@ -85,30 +85,26 @@
   display: none;
 }
 
+/* 2-column layout: Type | Change */
 .wrapper :global(.release-announcement-row) {
   display: grid;
-  grid-template-columns: 10rem 12rem minmax(0, 1fr);
-  gap: 0.25rem 0.75rem; /* was: 0.25rem 0.5rem */
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: 0.25rem 0.75rem;
   align-items: start;
-  margin-bottom: 1rem; /* was 2rem */
-  border-bottom: 1px solid var(--ifm-table-border-color); /* matches header border in dark mode too */
-}
-
-/* Optional: don’t draw a border after the last row */
-.wrapper :global(.release-announcement-row:last-of-type) {
-  border-bottom: 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--ifm-table-border-color);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .columnHeader {
   display: grid;
-  grid-template-columns: 10rem 12rem minmax(0, 1fr);
+  grid-template-columns: 10rem minmax(0, 1fr);
   gap: 0.375rem 0.75rem;
   align-items: end;
   padding: 0.55rem 0.6rem;
   margin: 0 0 0.25rem;
   border-bottom: 1px solid var(--ifm-table-border-color);
-
-  /* Match markdown table header background */
   background-color: var(
     --ifm-table-head-background,
     var(--ifm-color-emphasis-100, rgb(245, 246, 247))
@@ -137,18 +133,7 @@
 @media (max-width: 996px) {
   .wrapper :global(.release-announcement-row) {
     grid-template-columns: 1fr;
-    gap: 0.25rem;
-  }
-
-  .wrapper :global(.release-announcement-row > :nth-child(1)),
-  .wrapper :global(.release-announcement-row > :nth-child(2)) {
-    border-right: 0;
-    padding-right: 0;
-  }
-
-  .wrapper :global(.release-announcement-row > :nth-child(2)),
-  .wrapper :global(.release-announcement-row > :nth-child(3)) {
-    padding-left: 0;
+    gap: 0;
   }
 }
 
@@ -171,29 +156,30 @@
   }
 }
 
-/* Area column = plain text */
-.wrapper :global(.release-announcement-area) {
-  margin-top: 0.1rem;
-  font-weight: 600;
-  color: var(--ifm-color-emphasis-700);
-  font-size: 0.95rem; /* was 0.875rem */
-  line-height: 1.2;
-}
-
-/* If the area is still wrapped in a `.badge`, make it look like plain text */
-.wrapper :global(.release-announcement-area .badge) {
-  background: transparent !important;
-  border: 0 !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  color: inherit !important;
-  font: inherit !important;
-  white-space: normal !important;
-}
-
 /* Ensure rows have the same left/right inset as the header row */
 .wrapper :global(.release-announcement-row) {
   /* keep your existing grid rules here if already present */
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+}
+
+.areaInlineBadgeWrapper {
+  margin: 0.35rem 0 0.75rem;
+}
+
+.inlineMetaBadges {
+  margin: 0.35rem 0 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.areaInlineBadge {
+  font-weight: 600;
+}
+
+.deploymentInlineBadge {
+  font-weight: 600;
+  margin-right: 0.4rem; /* space between SaaS + Self-Managed when both exist */
 }

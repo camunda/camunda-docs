@@ -12,6 +12,8 @@ const OPTIONS: Array<{ value: Filter; label: string }> = [
 ];
 
 const EMPTY_MESSAGE_ATTR = 'data-empty-filter-message';
+const AREA_INLINE_BADGE_ATTR = 'data-area-inline-badge';
+const DEPLOYMENT_INLINE_BADGES_ATTR = 'data-deployment-inline-badges';
 
 function getHeadingLevel(el: Element): number | null {
   const tag = el.tagName.toLowerCase();
@@ -31,6 +33,14 @@ function sectionHasMatchingRows(sectionElements: HTMLElement[], filter: Filter):
   }
 
   return false;
+}
+
+function getDeployments(value: string): Array<'sm' | 'saas'> {
+  const v = value.trim().toLowerCase();
+  if (v === 'sm') return ['sm'];
+  if (v === 'saas') return ['saas'];
+  if (v === 'sm+saas' || v === 'saas+sm') return ['sm', 'saas'];
+  return [];
 }
 
 export default function ReleaseAnnouncementsFilter({
@@ -60,26 +70,88 @@ export default function ReleaseAnnouncementsFilter({
 
     setAvailableTypes(available);
 
-    // If the default/active filter doesn't exist on this page, fall back to All.
     if (filter !== 'all' && !available.has(filter)) {
       setFilter('all');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Inject "Area" + "Deployment" badges under each entry heading
+  useEffect(() => {
+    const container = listRef.current;
+    if (!container) return;
+
+    container.querySelectorAll(`[${AREA_INLINE_BADGE_ATTR}="true"]`).forEach((n) => n.remove());
+    container.querySelectorAll(`[${DEPLOYMENT_INLINE_BADGES_ATTR}="true"]`).forEach((n) => n.remove());
+
+    const rows = Array.from(container.querySelectorAll<HTMLElement>('.release-announcement-row'));
+    rows.forEach((row) => {
+      const contentEl = row.querySelector<HTMLElement>('.release-announcement-content');
+      if (!contentEl) return;
+
+      const areaText = (row.getAttribute('data-area') ?? '').trim();
+      const deploymentValue = (row.getAttribute('data-deployment') ?? '').trim();
+      const deployments = getDeployments(deploymentValue);
+
+      if (!areaText && deployments.length === 0) return;
+
+      const heading =
+        contentEl.querySelector<HTMLElement>('h4') ??
+        contentEl.querySelector<HTMLElement>('h3') ??
+        contentEl.querySelector<HTMLElement>('h5') ??
+        contentEl.querySelector<HTMLElement>('h2');
+
+      if (!heading) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = styles.inlineMetaBadges;
+
+      if (areaText) {
+        const areaBadgeWrap = document.createElement('span');
+        areaBadgeWrap.setAttribute(AREA_INLINE_BADGE_ATTR, 'true');
+
+        const areaBadge = document.createElement('span');
+        areaBadge.className = ['badge', 'badge--secondary', styles.areaInlineBadge].join(' ');
+        areaBadge.textContent = areaText;
+
+        areaBadgeWrap.appendChild(areaBadge);
+        wrapper.appendChild(areaBadgeWrap);
+      }
+
+      if (deployments.length > 0) {
+        const depWrap = document.createElement('span');
+        depWrap.setAttribute(DEPLOYMENT_INLINE_BADGES_ATTR, 'true');
+
+        deployments.forEach((d) => {
+          const b = document.createElement('span');
+          b.className = [
+            'badge',
+            // Use the same style for both so SaaS isn't formatted differently
+            'badge--secondary',
+            styles.deploymentInlineBadge,
+          ].join(' ');
+          b.textContent = d === 'saas' ? 'SaaS' : 'Self-Managed';
+          depWrap.appendChild(b);
+        });
+
+        wrapper.appendChild(depWrap);
+      }
+
+      heading.insertAdjacentElement('afterend', wrapper);
+    });
+  }, [children]);
+
   // Hide empty sections when filtering (keeps your previous behavior)
   useEffect(() => {
     const container = listRef.current;
     if (!container) return;
 
-    // Unhide anything previously hidden
     const previouslyHidden = container.querySelectorAll<HTMLElement>('[data-filter-hidden="true"]');
     previouslyHidden.forEach((el) => {
       el.hidden = false;
       el.removeAttribute('data-filter-hidden');
     });
 
-    // Remove any previously injected empty-state messages (from older versions)
     const existingMessages = container.querySelectorAll<HTMLElement>(`[${EMPTY_MESSAGE_ATTR}="true"]`);
     existingMessages.forEach((el) => el.remove());
 
@@ -148,7 +220,6 @@ export default function ReleaseAnnouncementsFilter({
 
       <div className={styles.columnHeader} aria-hidden="true">
         <div className={styles.columnHeaderCell}>Type</div>
-        <div className={styles.columnHeaderCell}>Area</div>
         <div className={styles.columnHeaderCell}>Change</div>
       </div>
 

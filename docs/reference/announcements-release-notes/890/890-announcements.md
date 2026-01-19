@@ -14,12 +14,9 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 <ReleaseAnnouncementsFilter>
 
-<div className="release-announcement-row" data-type="breaking-change">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Supported environments" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--breaking-change">Breaking change</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Supported environments</span>
   </div>
   <div className="release-announcement-content">
 
@@ -35,12 +32,9 @@ The minimum supported Elasticsearch version for the Orchestration cluster and Op
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new">
+<div className="release-announcement-row" data-type="new" data-area="Supported environments" data-deployment="saas">
   <div className="release-announcement-badge">
     <span className="badge badge--new">New</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Supported environments</span>
   </div>
   <div className="release-announcement-content">
 
@@ -53,12 +47,9 @@ Camunda 8.9 adds support for the AWS Paris region in Camunda 8 SaaS.
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new">
+<div className="release-announcement-row" data-type="new" data-area="Supported environments" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--new">New</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Supported environments</span>
   </div>
   <div className="release-announcement-content">
 
@@ -69,12 +60,9 @@ Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration Cluster, 
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="breaking-change">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Agentic orchestration" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--breaking-change">Breaking change</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Agentic orchestration</span>
   </div>
   <div className="release-announcement-content">
 
@@ -91,12 +79,9 @@ To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-clien
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="breaking-change">
+<div className="release-announcement-row" data-type="breaking-change" data-area="APIs &amp; tools" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--breaking-change">Breaking change</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">APIs &amp; tools</span>
   </div>
   <div className="release-announcement-content">
 
@@ -111,12 +96,9 @@ This change aligns with the Spring Boot support policy, as OSS support for Sprin
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="deprecated">
+<div className="release-announcement-row" data-type="deprecated" data-area="Connectors" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--deprecated">Deprecated</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Connectors</span>
   </div>
   <div className="release-announcement-content">
 
@@ -129,12 +111,9 @@ Going forward, you can use the [Orchestration Cluster REST API](/apis-tools/orch
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new">
+<div className="release-announcement-row" data-type="new" data-area="Connectors" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--new">New</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Connectors</span>
   </div>
   <div className="release-announcement-content">
 
@@ -151,12 +130,9 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="breaking-change">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Data" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--breaking-change">Breaking change</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Data</span>
   </div>
   <div className="release-announcement-content">
 
@@ -175,12 +151,9 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new">
+<div className="release-announcement-row" data-type="new" data-area="Data" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--new">New</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Data</span>
   </div>
   <div className="release-announcement-content">
 
@@ -195,12 +168,9 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new">
+<div className="release-announcement-row" data-type="new" data-area="Data" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--new">New</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Data</span>
   </div>
   <div className="release-announcement-content">
 
@@ -215,12 +185,9 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new">
+<div className="release-announcement-row" data-type="new" data-area="Data" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--new">New</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Data</span>
   </div>
   <div className="release-announcement-content">
 
@@ -237,12 +204,9 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="breaking-change">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Deployment" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--breaking-change">Breaking change</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Deployment</span>
   </div>
   <div className="release-announcement-content">
 
@@ -259,12 +223,9 @@ To continue using Elasticsearch provided as a subchart, you must add `global.ela
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new">
+<div className="release-announcement-row" data-type="new" data-area="Deployment" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--new">New</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Deployment</span>
   </div>
   <div className="release-announcement-content">
 
@@ -279,12 +240,9 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new">
+<div className="release-announcement-row" data-type="new" data-area="Deployment" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--new">New</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Deployment</span>
   </div>
   <div className="release-announcement-content">
 
@@ -299,12 +257,9 @@ Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` f
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new">
+<div className="release-announcement-row" data-type="new" data-area="Deployment" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--new">New</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Deployment</span>
   </div>
   <div className="release-announcement-content">
 
@@ -322,12 +277,9 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="breaking-change">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Modeler" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--breaking-change">Breaking change</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Modeler</span>
   </div>
   <div className="release-announcement-content">
 
@@ -344,12 +296,9 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="breaking-change">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Modeler" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--breaking-change">Breaking change</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Modeler</span>
   </div>
   <div className="release-announcement-content">
 
@@ -366,12 +315,9 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="breaking-change">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Modeler" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--breaking-change">Breaking change</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Modeler</span>
   </div>
   <div className="release-announcement-content">
 
@@ -390,12 +336,9 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="breaking-change">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Modeler" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--breaking-change">Breaking change</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Modeler</span>
   </div>
   <div className="release-announcement-content">
 
@@ -415,12 +358,9 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="breaking-change">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Modeler" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--breaking-change">Breaking change</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Modeler</span>
   </div>
   <div className="release-announcement-content">
 
@@ -437,12 +377,9 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new">
+<div className="release-announcement-row" data-type="new" data-area="Modeler" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--new">New</span>
-  </div>
-  <div className="release-announcement-area">
-    <span className="badge badge--secondary">Modeler</span>
   </div>
   <div className="release-announcement-content">
 
