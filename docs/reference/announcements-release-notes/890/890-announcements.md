@@ -4,9 +4,11 @@ title: "8.9 Release announcements"
 sidebar_label: Release announcements
 description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.9 release."
 toc_max_heading_level: 3
+hide_table_of_contents: true
 ---
 
 import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
+import ReleaseAnnouncementsFilter from '@site/src/components/ReleaseAnnouncementsFilter';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.9 release.
 
@@ -18,16 +20,18 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 - See [release notes](/reference/announcements-release-notes/890/890-release-notes.md) to learn more about new features and enhancements.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
+  :::
 
-:::
+<ReleaseAnnouncementsFilter>
 
-## Supported environments
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Supported environments</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Elasticsearch minimum version raised to 8.18.6+
 
@@ -41,11 +45,14 @@ The minimum supported Elasticsearch version for the Orchestration cluster and Op
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="new">
+  <div className="release-announcement-badge">
+    <span className="badge badge--new">New</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Supported environments</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### AWS Paris region added
 
@@ -56,11 +63,14 @@ Camunda 8.9 adds support for the AWS Paris region in Camunda 8 SaaS.
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="new">
+  <div className="release-announcement-badge">
+    <span className="badge badge--new">New</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Supported environments</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### OpenJDK 25 support
 
@@ -69,15 +79,14 @@ Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration Cluster, 
 </div>
 </div>
 
-## Key changes
-
-### Agentic orchestration
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Agentic orchestration</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### MCP Client and MCP Remote Client connectors
 
@@ -92,13 +101,14 @@ To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-clien
 </div>
 </div>
 
-### APIs & tools
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">APIs &amp; tools</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Camunda Spring Boot Starter now requires Spring Boot 4.0.x
 
@@ -111,13 +121,14 @@ This change aligns with the Spring Boot support policy, as OSS support for Sprin
 </div>
 </div>
 
-### Connectors
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="deprecated">
+  <div className="release-announcement-badge">
+    <span className="badge badge--deprecated">Deprecated</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Connectors</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Deprecated: Operate Connector
 
@@ -128,11 +139,14 @@ Going forward, you can use the [Orchestration Cluster REST API](/apis-tools/orch
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="new">
+  <div className="release-announcement-badge">
+    <span className="badge badge--new">New</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Connectors</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Virtual threads support
 
@@ -147,13 +161,14 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-### Data
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Data</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Camunda 8 Run with H2 as the default secondary data storage
 
@@ -170,11 +185,14 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="new">
+  <div className="release-announcement-badge">
+    <span className="badge badge--new">New</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Data</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Amazon Aurora secondary storage
 
@@ -187,11 +205,14 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="new">
+  <div className="release-announcement-badge">
+    <span className="badge badge--new">New</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Data</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### MySQL and Microsoft SQL Server secondary storage
 
@@ -204,11 +225,14 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="new">
+  <div className="release-announcement-badge">
+    <span className="badge badge--new">New</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Data</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### RDBMS secondary storage
 
@@ -223,13 +247,14 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
-### Deployment
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Deployment</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Elasticsearch subchart no longer enabled by default
 
@@ -244,11 +269,14 @@ To continue using Elasticsearch provided as a subchart, you must add `global.ela
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="new">
+  <div className="release-announcement-badge">
+    <span className="badge badge--new">New</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Deployment</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Cluster variables supported
 
@@ -261,11 +289,14 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="new">
+  <div className="release-announcement-badge">
+    <span className="badge badge--new">New</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Deployment</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Helm chart `values.yaml` options for RDBMS
 
@@ -278,11 +309,14 @@ Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` f
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="new">
+  <div className="release-announcement-badge">
+    <span className="badge badge--new">New</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Deployment</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Standardized JDBC driver management for RDBMS
 
@@ -298,13 +332,14 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
-### Modeler
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Modeler</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Web Modeler: Default logging format changed
 
@@ -319,11 +354,14 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Modeler</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Web Modeler: Embedded web server changed from Undertow to Tomcat
 
@@ -338,11 +376,14 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Modeler</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Web Modeler: Invite collaborators who haven't logged in before
 
@@ -359,11 +400,14 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Modeler</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Web Modeler: JSON format changes
 
@@ -381,11 +425,14 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Modeler</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Web Modeler: Logging framework changed from Logback to Apache Log4j 2
 
@@ -400,11 +447,14 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="new">
+  <div className="release-announcement-badge">
+    <span className="badge badge--new">New</span>
+  </div>
+  <div className="release-announcement-area">
+    <span className="badge badge--secondary">Modeler</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
 
@@ -418,3 +468,5 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 
 </div>
 </div>
+
+</ReleaseAnnouncementsFilter>
