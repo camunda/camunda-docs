@@ -238,11 +238,10 @@ https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter
 :::note
 There are three ways to define the token URL. They're prioritized as follows:
 
-1. directly as `camunda.client.auth.token-url`
-2. by providing the issuers' well-known configuration url `camunda.client.auth.well-known-configuration-url` which will then extract the token url from the field `token_url` inside the loaded configuration
-3. Provide the issuers' URL `camunda.client.auth.issuer-url`. This generates the well-known configuration URL and extracts the token URL from the `token_url` in the loaded configuration.
-
-:::
+1. Provide the `camunda.client.auth.token-url`.
+2. Provide the issuer's well-known configuration URL `camunda.client.auth.well-known-configuration-url`. This extracts the token URL from the `token_url` field in the loaded configuration.
+3. Provide the issuer's URL `camunda.client.auth.issuer-url`. This generates the well-known configuration URL and extracts the token URL from the `token_url` field in the loaded configuration.
+   :::
 
 #### Credentials cache path
 
