@@ -446,6 +446,7 @@ module.exports = {
                 "components/modeler/web-modeler/modeling/versions",
                 "components/modeler/web-modeler/modeling/file-download",
                 "components/modeler/web-modeler/modeling/import-diagram",
+                "components/modeler/web-modeler/modeling/import-resources",
                 "components/modeler/web-modeler/modeling/camunda-marketplace",
                 {
                   type: "category",
