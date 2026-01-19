@@ -164,6 +164,8 @@ The history migration has the following limitations.
 
 - To avoid collisions between definitions (process/decision/form), each definition migrated from Camunda 7 to 8 has its ID prefixed with `c7-legacy-`.
   - Do not deploy new definitions in Camunda 8 with IDs starting with this prefix to avoid conflicts.
+- When migrating entities, some might be skipped due to dependencies (parent entity not migrated yet). Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration. Example:
+  - Flow node instances might be skipped if their parent flow node (scope) hasn't been migrated yet.
 - The History Data Migrator does not support the following Camunda 8 entities or properties:
   - Sequence flow: Sequence flows cannot be highlighted in Operate.
   - User task migration metadata: Information for user tasks migrated via process instance migration is not available in Camunda 7.
@@ -182,7 +184,6 @@ The history migration has the following limitations.
 - As a result, you cannot query for the history of a subprocess or call activity using the
   parent process instance key.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5359
-- When migrating models including subprocesses, it is possible that during the migration flow nodes inside the subprocess are skipped due to dependencies. Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration.
 
 ### DMN
 
