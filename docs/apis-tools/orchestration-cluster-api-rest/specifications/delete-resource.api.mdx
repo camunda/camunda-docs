@@ -1,7 +1,7 @@
 ---
 id: delete-resource
 title: "Delete resource"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "<MarkerStronglyConsistentExtension />"
 sidebar_label: "Delete resource"
 hide_title: true
 hide_table_of_contents: true
@@ -34,8 +34,7 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+<MarkerStronglyConsistentExtension />
 
 Deletes a deployed resource.
 This can be a process definition, decision requirements definition, or form definition
@@ -148,12 +147,6 @@ deployed using the deploy resources endpoint. Specify the resource you want to d
               minimum: 1,
               title: "OperationReference",
             },
-            deleteHistory: {
-              description:
-                "When set to true, asynchronously deletes all instances associated with this resource. By default, history records are retained (false). This flag is currently supported for process definitions only.",
-              type: "boolean",
-              default: false,
-            },
           },
           title: "DeleteResourceRequest",
         },
@@ -166,44 +159,7 @@ deployed using the deploy resources endpoint. Specify the resource you want to d
   id={undefined}
   label={undefined}
   responses={{
-    "200": {
-      description:
-        "The resource was deleted successfully and a response body is returned.",
-      content: {
-        "application/json": {
-          schema: {
-            type: "object",
-            properties: {
-              resourceKey: {
-                type: "string",
-                description: "The key of the deleted resource.",
-              },
-              batchOperation: {
-                type: "object",
-                description:
-                  "The batch operation created to delete the resource.",
-                properties: {
-                  batchOperationKey: {
-                    type: "string",
-                    description:
-                      "The key of the batch operation created to delete the resource.",
-                  },
-                  batchOperationType: {
-                    type: "string",
-                    description:
-                      "The type of the batch operation created to delete the resource.",
-                    enum: ["DELETE_PROCESS_INSTANCE"],
-                  },
-                },
-                title: "BatchOperationCreatedResult",
-              },
-            },
-            required: ["resourceKey"],
-            title: "DeleteResourceResponse",
-          },
-        },
-      },
-    },
+    "200": { description: "The resource is deleted." },
     "400": {
       description: "The provided data is not valid.",
       content: {
