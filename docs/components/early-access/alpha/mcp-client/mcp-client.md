@@ -122,22 +122,37 @@ The provided connectors share a set of common options for configuring tool acces
 
 Choose how the connector operates based on your use case.
 
-##### AI Agent tool mode
+| Connector mode     | Description                                                                                                                                                                                                                             |
+| :----------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AI Agent tool mode | Use when the connector is invoked as a tool from within an AI Agent ad-hoc sub-process. This is the default mode, where method and params are automatically populated by the AI Agent connector during tool discovery and tool calling. |
+| Standalone mode    | Use when invoking MCP operations directly from a BPMN process without an AI Agent. This mode allows you to call MCP servers independently of the agentic orchestration flow.                                                            |
 
-Use when the connector is invoked as a tool from within an AI Agent ad-hoc sub-process. This is the default mode.
+#### Operation
 
-The **Method** and **Parameters** fields accept FEEL expressions and default to `toolCall.method` and `toolCall.params`, which are automatically populated by the AI Agent connector during tool discovery and tool calling.
+In the standalone connector mode, you are able to manually select the MCP operation to perform. When choosing the AI Agent tool mode, the operation is determined by the AI Agent connector based on the tool discovery and tool calling process described above.
 
 ##### Standalone mode
 
-Use when invoking MCP operations directly from a BPMN process without an AI Agent. This mode allows you to call MCP servers independently of the agentic orchestration flow.
-
 Select the operation to perform:
 
-| Operation  | Description                                              | Configuration                                                                                                  |
-| :--------- | :------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- |
-| List tools | Retrieves the list of tools available on the MCP server. | No additional configuration required.                                                                          |
-| Call tool  | Invokes a specific tool on the MCP server.               | **Tool name**: The name of the tool to invoke.<br/>**Arguments**: Tool arguments as a FEEL context expression. |
+| Operation               | Description                                                                                                                                                                     | Configuration                                                                                                                 |
+| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------- |
+| List tools              | Retrieves a list of tools available on the MCP server.                                                                                                                          | No additional configuration required.                                                                                         |
+| Call tool               | Invokes a specific tool on the MCP server.                                                                                                                                      | **Tool name**: The name of the tool to invoke.<br/>**Tool arguments**: Tool arguments as a FEEL context expression.           |
+| List resources          | Retrieves a list of available resources on the MCP server.                                                                                                                      | No additional configuration required.                                                                                         |
+| List resource templates | Retrieves a list of available resource templates on the MCP server.<br/>Those are similar to resources, but come with a number of parameters to invoke dynamic resource access. | No additional configuration required.                                                                                         |
+| Read resource           | Retrieves the content of a specific resource defined by its URI.                                                                                                                | **Resource URI**: The URI of the resource to read.                                                                            |
+| List prompts            | Retrieves a list of available prompts on the MCP server.                                                                                                                        | No additional configuration required.                                                                                         |
+| Get prompt              | Retrieves a specific prompt and its messages, potentially customized by the provided input arguments.                                                                           | **Prompt name**: The name of the prompt to retrieve.<br/>**Prompt arguments**: Prompt arguments as a FEEL context expression. |
+
+##### AI Agent tool mode
+
+The parameters below configure the operation to execute on the MCP server. You typically only need to change the default value if the ad-hoc sub-process multi-instance uses an input element other than `toolCall`.
+
+| Field      | Required | Description                                                                                                                                       |
+| :--------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Method     | Yes      | The [MCP method](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#protocol-messages) to call. Defaults to `toolCall.method`. |
+| Parameters | Yes      | The parameters to pass with the MCP client execution. Defaults to `toolCall.params`.                                                              |
 
 #### Tools
 
@@ -152,15 +167,6 @@ For example, an MCP client connected to
 a [file system MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) could be configured
 with `["read_file", "read_multiple_files"]` as included tools to only allow read-only operations to the file system.
 Alternatively, it could be configured with `["write_file"]` as a list of excluded tools to prevent write operations.
-
-#### Operation
-
-Configures the operation to execute on the MCP server. You typically only need to change the default value if the ad-hoc sub-process multi-instance uses an input element other than `toolCall`.
-
-| Field      | Required | Description                                                                                                                                       |
-| :--------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Method     | Yes      | The [MCP method](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#protocol-messages) to call. Defaults to `toolCall.method`. |
-| Parameters | Yes      | The parameters to pass with the MCP client execution. Defaults to `toolCall.params`.                                                              |
 
 #### Output mapping
 
