@@ -12,16 +12,6 @@ import ReleaseAnnouncementsFilter from '@site/src/components/ReleaseAnnouncement
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.9 release.
 
-| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Upgrade guides |
-| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | -------------- |
-| 14 April 2026      | 13 October 2028              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | -              |
-
-:::info 8.9 resources
-
-- See [release notes](/reference/announcements-release-notes/890/890-release-notes.md) to learn more about new features and enhancements.
-- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
-  :::
-
 <ReleaseAnnouncementsFilter>
 
 <div className="release-announcement-row" data-type="breaking-change">
