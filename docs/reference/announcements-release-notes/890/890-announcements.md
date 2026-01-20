@@ -32,9 +32,9 @@ The minimum supported Elasticsearch version for the Orchestration cluster and Op
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new" data-area="Supported environments" data-deployment="saas">
+<div className="release-announcement-row" data-type="feature" data-area="Supported environments" data-deployment="saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--new">New</span>
+    <span className="badge badge--feature">Feature</span>
   </div>
   <div className="release-announcement-content">
 
@@ -47,9 +47,9 @@ Camunda 8.9 adds support for the AWS Paris region in Camunda 8 SaaS.
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new" data-area="Supported environments" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="feature" data-area="Supported environments" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--new">New</span>
+    <span className="badge badge--feature">Feature</span>
   </div>
   <div className="release-announcement-content">
 
@@ -111,9 +111,9 @@ Going forward, you can use the [Orchestration Cluster REST API](/apis-tools/orch
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new" data-area="Connectors" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="feature" data-area="Connectors" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--new">New</span>
+    <span className="badge badge--feature">Feature</span>
   </div>
   <div className="release-announcement-content">
 
@@ -151,9 +151,9 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new" data-area="Data" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="feature" data-area="Data" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--new">New</span>
+    <span className="badge badge--feature">Feature</span>
   </div>
   <div className="release-announcement-content">
 
@@ -168,9 +168,9 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new" data-area="Data" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="feature" data-area="Data" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--new">New</span>
+    <span className="badge badge--feature">Feature</span>
   </div>
   <div className="release-announcement-content">
 
@@ -185,9 +185,9 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new" data-area="Data" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="feature" data-area="Data" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--new">New</span>
+    <span className="badge badge--feature">Feature</span>
   </div>
   <div className="release-announcement-content">
 
@@ -223,9 +223,9 @@ To continue using Elasticsearch provided as a subchart, you must add `global.ela
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new" data-area="Deployment" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="feature" data-area="Deployment" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--new">New</span>
+    <span className="badge badge--feature">Feature</span>
   </div>
   <div className="release-announcement-content">
 
@@ -240,9 +240,9 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new" data-area="Deployment" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="feature" data-area="Deployment" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--new">New</span>
+    <span className="badge badge--feature">Feature</span>
   </div>
   <div className="release-announcement-content">
 
@@ -257,9 +257,9 @@ Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` f
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new" data-area="Deployment" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="feature" data-area="Deployment" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--new">New</span>
+    <span className="badge badge--feature">Feature</span>
   </div>
   <div className="release-announcement-content">
 
@@ -377,9 +377,9 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="new" data-area="Modeler" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="feature" data-area="Modeler" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--new">New</span>
+    <span className="badge badge--feature">Feature</span>
   </div>
   <div className="release-announcement-content">
 

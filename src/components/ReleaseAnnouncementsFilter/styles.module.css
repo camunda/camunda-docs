@@ -70,8 +70,8 @@
   display: none;
 }
 
-.wrapper[data-announcement-filter="new"]
-  :global(.release-announcement-row:not([data-type="new"])) {
+.wrapper[data-announcement-filter="feature"]
+  :global(.release-announcement-row:not([data-type="feature"])) {
   display: none;
 }
 
@@ -181,5 +181,5 @@
 
 .deploymentInlineBadge {
   font-weight: 600;
-  margin-right: 0.4rem; /* space between SaaS + Self-Managed when both exist */
+  margin-right: 0; /* space between SaaS + Self-Managed when both exist */
 }

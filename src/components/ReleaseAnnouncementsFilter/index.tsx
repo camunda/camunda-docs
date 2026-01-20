@@ -1,14 +1,15 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './styles.module.css';
 
-type Filter = 'all' | 'breaking-change' | 'new' | 'deprecated' | 'change';
+type Filter = 'all' | 'breaking-change' | 'feature' | 'update' | 'deprecated' | 'change';
 
 const OPTIONS: Array<{ value: Filter; label: string }> = [
   { value: 'all', label: 'All' },
   { value: 'breaking-change', label: 'Breaking changes' },
   { value: 'deprecated', label: 'Deprecated' },
   { value: 'change', label: 'Change' },
-  { value: 'new', label: 'New' },
+  { value: 'update', label: 'Update' },
+  { value: 'feature', label: 'Feature' },
 ];
 
 const EMPTY_MESSAGE_ATTR = 'data-empty-filter-message';
@@ -62,7 +63,7 @@ export default function ReleaseAnnouncementsFilter({
     if (!container) return;
 
     const available = new Set<Filter>(['all']);
-    (['breaking-change', 'new', 'deprecated', 'change'] as const).forEach((t) => {
+    (['breaking-change', 'feature', 'update', 'deprecated', 'change'] as const).forEach((t) => {
       if (container.querySelector(`.release-announcement-row[data-type="${t}"]`)) {
         available.add(t);
       }
