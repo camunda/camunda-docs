@@ -19,6 +19,8 @@ Ensure that:
 - Required JDBC parameters (SSL/TLS, authentication, failover) are configured as needed.
 - The database user has permissions to create and modify schema objects if `autoDDL` is enabled.
 
+For a short checklist and troubleshooting steps you can run after configuring the database, see [validate RDBMS connectivity (Helm)](/self-managed/deployment/helm/configure/database/validate-rdbms.md).
+
 ## Configuration
 
 ### Parameters
@@ -56,8 +58,8 @@ Ensure that:
 
 ### Example usage
 
-:::warning Important
-Operate does not support RDBMS until **Camunda 8.9.0-alpha3**.
+:::note
+Operate has limited functionality when using RDBMS as secondary storage in Camunda 8.9-alpha3. See [Operate limitations](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#operate-with-rdbms) for details.
 :::
 
 ```yaml
@@ -129,6 +131,8 @@ orchestration:
       securityContext:
         runAsUser: 1001
 ```
+
+After loading JDBC drivers into pods, run the validation checklist in [validate RDBMS connectivity](/self-managed/deployment/helm/configure/database/validate-rdbms.md) to confirm the application can load the driver, reach the database, and initialize schema.
 
 ### Option 2: Using a custom Docker image
 

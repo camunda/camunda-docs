@@ -48,7 +48,7 @@ Templates with the same `id` and different `version` values offer an upgrade pat
 }
 ```
 
-Once a template with a new `version` is available to users, the editor tooling suggests an upgrade, [preserving technical bindings](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#upgrade-behavior) on a best-effort basis.
+Once a template with a new `version` is available to users, the editor tooling suggests an upgrade, [preserving element configurations](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#upgrade-behavior) on a best-effort basis.
 
 :::tip
 Versioning is an important cornerstone of template evolution. Review the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to understand the foundations of our upgrade mechanism and of the element template lifecycle.
@@ -169,6 +169,7 @@ These two key-value pairs define what BPMN types the template can be applied to 
   - `eventDefinition: String`: This key is used when templating an event. It can be ignored when templating any other element type. Supported values are:
     - `"bpmn:MessageEventDefinition"` use this value when you template a message event.
     - `"bpmn:SignalEventDefinition"` use this value when you template a signal event.
+    - `"bpmn:TimerEventDefinition"` use this value when you template a timer event.
 
 Some properties require a specific BPMN type, and thus a specific value for `elementType`, to work correctly.
 For example, if the template sets `zeebe:calledDecision` on an element and `appliesTo` is set to `bpmn:Task`, the `elementType` must be set to `bpmn:BusinessRuleTask`.

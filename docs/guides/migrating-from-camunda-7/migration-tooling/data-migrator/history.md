@@ -27,10 +27,16 @@ You can run audit data migration alongside normal operations (for example, after
 
 The following requirements and limitations apply:
 
-- The History Data Migrator needs to access the Camunda 7 database.
-- The History Data Migrator can only migrate to Camunda 8 **if a relational database (RDBMS) is used**, a feature planned for **Camunda 8.9**.
-- The History Data Migrator needs to access the Camunda 8 database (which means you can only run this tool in a **self-managed environment**).
-- If runtime and history data are migrated at the same time, you will end up with two instances in Camunda 8: a canceled historic process instance and an active new one in the runtime. They are linked by process variables.
+- Camunda 8 is up and running and Camunda 7 has been stopped.
+- The History Data Migrator must be able to access the Camunda 7 database.
+- The History Data Migrator can migrate data to Camunda 8 only when a relational database (RDBMS) is used. This capability is planned for Camunda 8.9.
+- The History Data Migrator must be able to access the Camunda 8 database. As a result, you can run this tool only in a self-managed environment.
+- If you manipulate Camunda 7 data between History Data Migrator runs, data consistency might be affected. See [Auto-cancellation of active instances](#auto-cancellation-of-active-instances) for details.
+- If you migrate runtime and history data for an active C7 process instance, two separate records will appear in Operate:
+  1. **Fresh runtime instance**: The migrated active process instance running on Zeebe. This instance continues execution from the last wait state before migration and produces new history going forward. It does not include historical data from before the migration.
+  2. **Auditable instance**: A canceled historic process instance that preserves the audit trail (history data) up to the last wait state pre-migration. This instance appears as canceled and serves only as an audit record of what happened in Camunda 7.
+
+  These two instances are separate entities and are not automatically linked in the UI, although they share the same process variables from the migration point.
 
 ## Usage examples
 
@@ -61,17 +67,48 @@ The following requirements and limitations apply:
 | `HISTORY_DECISION_INSTANCE`   | Decision instances   |
 | `HISTORY_DECISION_DEFINITION` | Decision definitions |
 
+## Cleanup behavior for completed instances
+
+Instances that were already completed in Camunda 7 retain their original cleanup dates:
+
+- If a `removalTime` exists in Camunda 7, it is migrated as-is.
+- If no `removalTime` exists and the instance is completed, no cleanup date is set.
+- Auto-cancel cleanup configuration **only applies to instances that were active or suspended** in Camunda 7.
+
+## Auto-cancellation of active instances
+
+When migrating history data, the Data Migrator automatically handles **active or suspended** process instances from Camunda 7 by marking them as **canceled** in Camunda 8. This applies to:
+
+- Process instances.
+- Flow nodes.
+- User tasks.
+- Incidents.
+
+Auto-canceled entities are assigned the migration timestamp as their end date.
+
+By default, auto-canceled entities receive a cleanup date calculated as:
+
+```
+cleanup_date = end_date + 6 months
+```
+
+This ensures auto-canceled instances are eligible for history cleanup after six months, preventing unbounded growth of history data.
+
+See [configuration for history auto-cancellation](../data-migrator/config-properties.md#camundamigratorhistoryauto-cancelcleanup) for more details.
+
+Please note that if any Camunda 7 process instances progress in their state in between multiple runs of the History Data Migrator, data consistency might be affected: for example, if a process instance is completed in Camunda 7 after the first run but before the second run, the History Data Migrator would migrate it as canceled in the first and as completed in the second run. As a result, in Operate you may see that a process instance was canceled in a Flow Node that chronologically precedes the end event in your model, where the instance will be marked as completed. To avoid such situations, ensure that Camunda 7 data remains unchanged between History Data Migrator runs.
+
 ## Entity transformation
 
-Entity transformations are handled by built-in converters that transform Camunda 7 historic entities
+Entity transformations are handled by built-in interceptors that transform Camunda 7 historic entities
 into Camunda 8 database models during migration. The History Data Migrator uses the
 `EntityInterceptor` interface to allow customization of this conversion process.
 
-### Built-in converters
+### Built-in interceptors
 
 The following built-in transformers convert Camunda 7 historic entities:
 
-| Converter                                   | Camunda 7 entity type                    | Camunda 8 Model               |
+| Interceptor                                 | Camunda 7 entity type                    | Camunda 8 Model               |
 | ------------------------------------------- | ---------------------------------------- | ----------------------------- |
 | `ProcessInstanceTransformer`                | `HistoricProcessInstance`                | `ProcessInstanceDbModel`      |
 | `ProcessDefinitionTransformer`              | `ProcessDefinition`                      | `ProcessDefinitionDbModel`    |
@@ -82,21 +119,6 @@ The following built-in transformers convert Camunda 7 historic entities:
 | `DecisionInstanceTransformer`               | `HistoricDecisionInstance`               | `DecisionInstanceDbModel`     |
 | `DecisionDefinitionTransformer`             | `HistoricDecisionDefinition`             | `DecisionDefinitionDbModel`   |
 | `DecisionRequirementsDefinitionTransformer` | `HistoricDecisionRequirementsDefinition` | `DecisionRequirementsDbModel` |
-
-### Disable built-in transformers
-
-You can disable any built-in transformer using the `enabled` configuration property.
-
-This is useful when your migration use case is more complex and does not work out of the box. In this case, you can migrate entities entirely through custom interceptors:
-
-```yaml
-camunda:
-  migrator:
-    # Entity interceptor configuration
-    interceptors:
-      - class-name: io.camunda.migration.data.impl.interceptor.history.entity.ProcessInstanceTransformer
-        enabled: false
-```
 
 ## Custom transformation
 
@@ -234,10 +256,6 @@ When entity transformation fails:
 3. It marks the entity as skipped.
 4. Use `--history --list-skipped` to view skipped entities.
 5. After you fix the underlying issue, use `--history --retry-skipped` to retry the migration.
-
-## History cleanup
-
-The history cleanup date is migrated if the Camunda 7 instance has a removal time.
 
 ## Tenants
 

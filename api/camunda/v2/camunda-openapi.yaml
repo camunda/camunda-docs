@@ -167,8 +167,10 @@ paths:
     $ref: "incidents.yaml#/paths/~1incidents~1{incidentKey}"
   /incidents/{incidentKey}/resolution:
     $ref: "incidents.yaml#/paths/~1incidents~1{incidentKey}~1resolution"
-  /incidents/statistics/process-instances:
-    $ref: "incidents.yaml#/paths/~1incidents~1statistics~1process-instances"
+  /incidents/statistics/process-instances-by-definition:
+    $ref: "incidents.yaml#/paths/~1incidents~1statistics~1process-instances-by-definition"
+  /incidents/statistics/process-instances-by-error:
+    $ref: "incidents.yaml#/paths/~1incidents~1statistics~1process-instances-by-error"
   /jobs/activation:
     $ref: "jobs.yaml#/paths/~1jobs~1activation"
   /jobs/search:
@@ -323,6 +325,8 @@ paths:
     $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1assignee"
   /user-tasks/{userTaskKey}/assignment:
     $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1assignment"
+  /user-tasks/{userTaskKey}/audit-logs/search:
+    $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1audit-logs~1search"
   /user-tasks/{userTaskKey}/completion:
     $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1completion"
   /user-tasks/{userTaskKey}/form:
