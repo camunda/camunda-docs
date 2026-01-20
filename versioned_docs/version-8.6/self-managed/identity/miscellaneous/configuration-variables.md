@@ -89,7 +89,7 @@ for `WEBMODELER`, which is`web-modeler`.
 
 Identity requires a database to store information
 about [resource authorization](/self-managed/identity/access-management/resource-authorizations.md)
-and [multi-tenancy](/self-managed/concepts/multi-tenancy.md).
+and [multi-tenancy](/self-managed/concepts/multi-tenancy.md) or if you are [using an external IdP](/self-managed/identity/configuration/configure-external-identity-provider.md).
 
 | Environment variable         | Description                                         |
 | :--------------------------- | :-------------------------------------------------- |

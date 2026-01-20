@@ -96,7 +96,7 @@ public static void main(String[] args) {
             .build()) {
 
         // Test the connection
-        client.newTopologyRequest().send().join();
+        client.newTopologyRequest().execute();
         System.out.println("Connected to Camunda 8!");
     }
 }
@@ -151,7 +151,7 @@ public static void main(String[] args) {
             .build()) {
 
         // Test the connection
-        client.newTopologyRequest().send().join();
+        client.newTopologyRequest().execute();
         System.out.println("Connected to Camunda 8!");
     }
 }
@@ -184,8 +184,9 @@ The client will automatically read the environment variables and configure the a
 
 - Ensure addresses use absolute URI format: `scheme://host(:port)`.
 - By default, environment variables override any values provided in Java code. To give Java code values precedence, use the `.applyEnvironmentOverrides(false)` method on `BasicAuthCredentialsProviderBuilder`.
-- The client adds an `Authorization` header to each request with the value `Basic username:password` (where `username:password` is base64 encoded).  
-  :::
+- The client adds an `Authorization` header to each request with the value `Basic username:password` (where `username:password` is base64 encoded).
+
+:::
 
 </TabItem>
 
@@ -196,7 +197,10 @@ The client will automatically read the environment variables and configure the a
 ```java
 private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: http://localhost:26500]";
 private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080]";
+// There are three ways to define the authorization server URL
 private static final String CAMUNDA_AUTHORIZATION_SERVER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
+private static final String CAMUNDA_WELL_KNOWN_CONFIGURATION_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/.well-known/openid-configuration]";
+private static final String CAMUNDA_ISSUER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform]";
 
 // Audience is the API that will receive the token, such as the Orchestration Cluster for example
 private static final String AUDIENCE = "[Orchestration Cluster audience]";
@@ -209,7 +213,11 @@ private static final String CLIENT_SECRET = "[Client Secret]";
 
 public static void main(String[] args) {
     CredentialsProvider credentialsProvider = new OAuthCredentialsProviderBuilder()
+            // Select the authorization server configuration option according to your properties from above
             .authorizationServerUrl(CAMUNDA_AUTHORIZATION_SERVER_URL)
+            .issuerUrl(CAMUNDA_ISSUER_URL)
+            .wellKnownConfigurationUrl(CAMUNDA_WELL_KNOWN_CONFIGURATION_URL)
+            // End authorization server
             .audience(AUDIENCE)
             .scope(SCOPE)
             .clientId(CLIENT_ID)
@@ -223,7 +231,7 @@ public static void main(String[] args) {
             .build()) {
 
         // Test the connection
-        client.newTopologyRequest().send().join();
+        client.newTopologyRequest().execute();
         System.out.println("Connected to Camunda 8!");
     }
 }
@@ -232,10 +240,10 @@ public static void main(String[] args) {
 **Notes for Microsoft Entra ID**
 
 - Use `scope=CLIENT_ID_OC + "/.default"` instead of `scope=CLIENT_ID_OC`.
-- The authorization URI is typically in the format:
+- The issuer URL is typically in the format:
 
 ```
-https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token
+https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
 ```
 
 :::note Audience validation
@@ -257,7 +265,11 @@ You can also set connection details via environment variables to create the clie
 ```bash
 export CAMUNDA_GRPC_ADDRESS='[Address of Zeebe API (gRPC) - default: http://localhost:26500]'
 export CAMUNDA_REST_ADDRESS='[Address of the Orchestration Cluster API - default: http://localhost:8080]'
+# There are three ways to define the authorization server URL
 export CAMUNDA_AUTHORIZATION_SERVER_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]'
+export CAMUNDA_WELL_KNOWN_CONFIGURATION_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/.well-known/openid-configuration]'
+export CAMUNDA_ISSUER_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform]'
+
 export CAMUNDA_TOKEN_AUDIENCE='[Audience]'
 export CAMUNDA_CLIENT_ID='[Client ID]'
 export CAMUNDA_CLIENT_SECRET='[Client Secret]'
@@ -273,8 +285,13 @@ The client will automatically read the environment variables and configure the a
 
 - Ensure addresses use absolute URI format: `scheme://host(:port)`.
 - By default, environment variables override any values provided in Java code. To give Java code values precedence, use the `.applyEnvironmentOverrides(false)` method on `OAuthCredentialsProviderBuilder`.
-- The client adds an `Authorization` header to each request with the value `Bearer <token>`. The token is obtained from the authorization server, cached to avoid unnecessary requests, and refreshed lazily upon expiration.  
-  :::
+- The client adds an `Authorization` header to each request with the value `Bearer <token>`. The token is obtained from the authorization server, cached to avoid unnecessary requests, and refreshed lazily upon expiration.
+- There are three ways to define the token URL. They're prioritized as follows:
+  1. Provide the `camunda.client.auth.token-url`.
+  2. Provide the issuer's well-known configuration URL `camunda.client.auth.well-known-configuration-url`. This extracts the token URL from the `token_url` field in the loaded configuration.
+  3. Provide the issuer's URL `camunda.client.auth.issuer-url`. This generates the well-known configuration URL and extracts the token URL from the `token_url` field in the loaded configuration.
+
+:::
 
 </TabItem>
 <TabItem value="mTLS">
@@ -293,7 +310,11 @@ Several identity providers, such as Keycloak, support client mTLS authentication
 ```java
 private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: http://localhost:26500]";
 private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080]";
-private static final String OAUTH_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
+// There are three ways to define the authorization server URL
+private static final String CAMUNDA_AUTHORIZATION_SERVER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
+private static final String CAMUNDA_WELL_KNOWN_CONFIGURATION_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/.well-known/openid-configuration]",
+private static final String CAMUNDA_ISSUER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform]";
+
 private static final String AUDIENCE = "[Audience - default: zeebe-api]";
 private static final String CLIENT_ID = "[Client ID]";
 private static final Path KEYSTORE_PATH = Paths.get("/path/to/keystore.p12");
@@ -305,7 +326,11 @@ private static final String TRUSTSTORE_PASSWORD = "password";
 public static void main(String[] args) {
 
     CredentialsProvider credentialsProvider = new OAuthCredentialsProviderBuilder()
-            .authorizationServerUrl(OAUTH_URL)
+            // Select the authorization server configuration option according to your properties from above
+            .authorizationServerUrl(CAMUNDA_AUTHORIZATION_SERVER_URL)
+            .issuerUrl(CAMUNDA_ISSUER_URL)
+            .wellKnownConfigurationUrl(CAMUNDA_WELL_KNOWN_CONFIGURATION_URL)
+            // End authorization server
             .audience(AUDIENCE)
             .clientId(CLIENT_ID)
             .keystorePath(KEYSTORE_PATH)
@@ -322,7 +347,7 @@ public static void main(String[] args) {
             .build()) {
 
         // Test the connection
-        client.newTopologyRequest().send().join();
+        client.newTopologyRequest().execute();
         System.out.println("Connected to Camunda 8!");
     }
 }
@@ -341,7 +366,11 @@ You can also set connection details via environment variables to create the clie
 ```bash
 export CAMUNDA_GRPC_ADDRESS='[Address of Zeebe API (gRPC) - default: http://localhost:26500]'
 export CAMUNDA_REST_ADDRESS='[Address of the Orchestration Cluster API - default: http://localhost:8080]'
-export CAMUNDA_OAUTH_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]'
+# There are three ways to define the authorization server URL
+export CAMUNDA_AUTHORIZATION_SERVER_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]'
+export CAMUNDA_WELL_KNOWN_CONFIGURATION_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/.well-known/openid-configuration]'
+export CAMUNDA_ISSUER_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform]'
+
 export CAMUNDA_TOKEN_AUDIENCE='[Audience - default: zeebe-api]'
 export CAMUNDA_CLIENT_ID='[Client ID]'
 export CAMUNDA_CLIENT_SECRET='[Client Secret]'
@@ -363,8 +392,14 @@ Refer to your identity provider documentation for configuring mutual TLS authent
 :::note
 
 - Ensure addresses use absolute URI format: `scheme://host(:port)`.
-- By default, environment variables override any values provided in Java code. To give Java code values precedence, use the `.applyEnvironmentOverrides(false)` method on `OAuthCredentialsProviderBuilder`.  
-  :::
+- By default, environment variables override any values provided in Java code. To give Java code values precedence, use the `.applyEnvironmentOverrides(false)` method on `OAuthCredentialsProviderBuilder`.
+- The client adds an `Authorization` header to each request with the value `Bearer <token>`. The token is obtained from the authorization server, cached to avoid unnecessary requests, and refreshed lazily upon expiration.
+- There are three ways to define the token URL. They're prioritized as follows:
+  1. Provide the `camunda.client.auth.token-url`.
+  2. Provide the issuer's well-known configuration URL `camunda.client.auth.well-known-configuration-url`. This extracts the token URL from the `token_url` field in the loaded configuration.
+  3. Provide the issuer's URL `camunda.client.auth.issuer-url`. This generates the well-known configuration URL and extracts the token URL from the `token_url` field in the loaded configuration.
+
+:::
 
 </TabItem>
 
@@ -391,7 +426,7 @@ public static void main(String[] args) {
             .build()) {
 
         // Test the connection
-        client.newTopologyRequest().send().join();
+        client.newTopologyRequest().execute();
         System.out.println("Connected to Camunda 8!");
     }
 }
@@ -437,8 +472,7 @@ With a connected client, you are ready to build your process application. Below 
 ```java
 final DeploymentEvent deploymentEvent = client.newDeployResourceCommand()
     .addResourceFromClasspath("process.bpmn")
-    .send()
-    .join();
+    .execute();
 ```
 
 This deploys your BPMN process definition to the cluster. Place your `.bpmn` files in `src/main/resources` and reference them by filename.
@@ -450,8 +484,7 @@ final ProcessInstanceEvent processInstanceEvent = client.newCreateInstanceComman
     .bpmnProcessId("my-process")
     .latestVersion()
     .variables(Map.of("orderId", "12345", "amount", 100.0))
-    .send()
-    .join();
+    .execute();
 ```
 
 This creates a new instance of your process. The `bpmnProcessId` should match the Process ID from your BPMN file, and you can pass initial variables as a Map.
