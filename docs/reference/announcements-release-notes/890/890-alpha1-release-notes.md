@@ -10,13 +10,56 @@ hide_table_of_contents: true
 
 import ReleaseAnnouncementsFilter from '@site/src/components/ReleaseAnnouncementsFilter';
 
-Supported environment changes and breaking changes or deprecations for the Camunda 8.9 release.
+New features and important updates included in the 8.9.0-alpha1 release.
 
-| Release date     | Changelog(s)                                                                                                                                                                               | Blog |
-| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
-| 13 November 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha1)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha1)</li></ul> | -    |
+**Release date:** 13 November 2025 | **Changelogs:** [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha1) / [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha1)
 
 <ReleaseAnnouncementsFilter>
+
+<div className="release-announcement-row" data-type="feature" data-area="Data" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--feature">Feature</span>
+  </div>
+  <div className="release-announcement-content">
+
+#### RDBMS secondary storage (H2, PostgreSQL, Oracle, MariaDB)
+
+<!-- https://github.com/camunda/product-hub/issues/2439 -->
+
+Camunda 8.9 introduces RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch for storing and querying process data.
+
+This feature enables organizations to use relational databases such as H2, PostgreSQL, Oracle, or MariaDB as the secondary storage layer, reducing operational complexity for teams that do not need the scale or performance of Elasticsearch or OpenSearch and prefer an RDBMS-based solution.
+
+Key highlights:
+
+- **Flexible database choice:** Use relational databases instead of Elasticsearch or OpenSearch.
+- **Separation of concerns:** Zeebe’s primary execution storage remains Raft + RocksDB; this update only extends the secondary storage layer.
+- **Consistent APIs:** Continue using the same REST API and data format as with Elasticsearch or OpenSearch—no query or integration changes needed.
+- **Simplified operations:** Leverage existing RDBMS expertise without maintaining Elasticsearch or OpenSearch clusters.
+
+:::note
+This alpha release introduces support for H2 in Camunda 8 Run only. Operate and external RDBMS configuration follows in upcoming alpha releases.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row" data-type="feature" data-area="Modeler" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--feature">Feature</span>
+  </div>
+  <div className="release-announcement-content">
+
+#### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
+
+<!-- https://github.com/camunda/product-hub/issues/3189 -->
+
+Web Modeler now supports H2, MariaDB, and MySQL as relational database systems, aligning with the configurations supported by the Orchestration cluster.
+
+This enhancement ensures consistency across environments, simplifies setup for administrators, and improves integration for both SaaS and Self-Managed deployments.
+
+</div>
+</div>
 
 <div className="release-announcement-row" data-type="update" data-area="Configuration" data-deployment="sm">
   <div className="release-announcement-badge">
@@ -57,51 +100,6 @@ Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL S
 :::note
 This alpha release introduces foundational support only. External configuration and Operate integration follows in upcoming alpha releases.
 :::
-
-</div>
-</div>
-
-<div className="release-announcement-row" data-type="update" data-area="Data" data-deployment="sm">
-  <div className="release-announcement-badge">
-    <span className="badge badge--update">Update</span>
-  </div>
-  <div className="release-announcement-content">
-
-#### RDBMS secondary storage (H2, PostgreSQL, Oracle, MariaDB)
-
-<!-- https://github.com/camunda/product-hub/issues/2439 -->
-
-Camunda 8.9 introduces RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch for storing and querying process data.
-
-This feature enables organizations to use relational databases such as H2, PostgreSQL, Oracle, or MariaDB as the secondary storage layer, reducing operational complexity for teams that do not need the scale or performance of Elasticsearch or OpenSearch and prefer an RDBMS-based solution.
-
-Key highlights:
-
-- **Flexible database choice:** Use relational databases instead of Elasticsearch or OpenSearch.
-- **Separation of concerns:** Zeebe’s primary execution storage remains Raft + RocksDB; this update only extends the secondary storage layer.
-- **Consistent APIs:** Continue using the same REST API and data format as with Elasticsearch or OpenSearch—no query or integration changes needed.
-- **Simplified operations:** Leverage existing RDBMS expertise without maintaining Elasticsearch or OpenSearch clusters.
-
-:::note
-This alpha release introduces support for H2 in Camunda 8 Run only. Operate and external RDBMS configuration follows in upcoming alpha releases.
-:::
-
-</div>
-</div>
-
-<div className="release-announcement-row" data-type="feature" data-area="Modeler" data-deployment="sm+saas">
-  <div className="release-announcement-badge">
-    <span className="badge badge--feature">Feature</span>
-  </div>
-  <div className="release-announcement-content">
-
-#### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
-
-<!-- https://github.com/camunda/product-hub/issues/3189 -->
-
-Web Modeler now supports H2, MariaDB, and MySQL as relational database systems, aligning with the configurations supported by the Orchestration cluster.
-
-This enhancement ensures consistency across environments, simplifies setup for administrators, and improves integration for both SaaS and Self-Managed deployments.
 
 </div>
 </div>

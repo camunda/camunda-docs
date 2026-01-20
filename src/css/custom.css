@@ -865,7 +865,7 @@ h3 .badge:nth-of-type(1) {
   line-height: 1.5;
 }
 .badge--update {
-  background-color: var(--ifm-color-success);
+  background-color: #007e89;
   color: #ffffff;
   width: 110px;
   min-width: 110px;

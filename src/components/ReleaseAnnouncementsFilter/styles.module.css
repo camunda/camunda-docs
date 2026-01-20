@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin: 0 0 1rem;
+  margin: 2rem 0 1rem 0;
   flex-wrap: wrap;
 }
 

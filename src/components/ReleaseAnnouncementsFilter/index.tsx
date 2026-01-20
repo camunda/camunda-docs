@@ -20,8 +20,8 @@ const TYPE_OPTIONS: Array<{ value: Exclude<TypeFilter, 'all'>; label: string }> 
   { value: 'breaking-change', label: 'Breaking changes' },
   { value: 'deprecated', label: 'Deprecated' },
   { value: 'change', label: 'Change' },
+  { value: 'feature', label: 'Feature' }, // moved before Update
   { value: 'update', label: 'Update' },
-  { value: 'feature', label: 'Feature' },
 ];
 
 const EMPTY_MESSAGE_ATTR = 'data-empty-filter-message';

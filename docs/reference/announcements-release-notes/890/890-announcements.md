@@ -10,7 +10,7 @@ hide_table_of_contents: true
 import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 import ReleaseAnnouncementsFilter from '@site/src/components/ReleaseAnnouncementsFilter';
 
-Supported environment changes and breaking changes or deprecations for the Camunda 8.9 release.
+Key changes (for example, deprecations and breaking changes) and supported environment changes for the Camunda 8.9 release.
 
 <ReleaseAnnouncementsFilter>
 
