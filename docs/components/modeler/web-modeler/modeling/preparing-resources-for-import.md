@@ -1,4 +1,11 @@
-# Preparing resources for import into Web Modeler
+---
+id: prepare-resources
+title: Prepare resources for importing into Web Modeler
+sidebar_label: Prepare import resources
+description: "Learn how to import resources into Web Modeler, how automatic handling works for template conflicts and ignored templates, and how to troubleshoot common import errors."
+---
+
+# Preparing resources for importing into Web Modeler
 
 This page is for repository maintainers, blueprint authors, and solution builders who prepare resources that other users will import into Web Modeler.
 

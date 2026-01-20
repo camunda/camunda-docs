@@ -450,6 +450,7 @@ module.exports = {
                 "components/modeler/web-modeler/modeling/file-download",
                 "components/modeler/web-modeler/modeling/import-diagram",
                 "components/modeler/web-modeler/modeling/import-resources",
+                "components/modeler/web-modeler/modeling/prepare-resources",
                 "components/modeler/web-modeler/modeling/camunda-marketplace",
                 {
                   type: "category",
