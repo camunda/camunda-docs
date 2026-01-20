@@ -2,14 +2,14 @@
 id: import-resources
 title: Import resources into Web Modeler
 sidebar_label: Import resources
-description: "Import process models, decision tables, forms, templates, and other supported resources into Camunda Web Modeler."
+description: "Learn how to import resources into Web Modeler, how automatic handling works for template conflicts and ignored templates, and how to troubleshoot common import errors."
 ---
 
-Import resources into Web Modeler, whether you are using a single file URL, a link from Camunda Marketplace, or a URL to a `.zip` file that contains a full process application.
+Learn how to import resources into Web Modeler, how automatic handling works for template conflicts and ignored templates, and how to troubleshoot common import errors.
 
-## About
+## Supported import resources
 
-Using Web Modeler, you can import the following **resource types** into a project or process application:
+Using Web Modeler, you can import the following resource types into a project or process application:
 
 - BPMN process models.
 - Forms.
@@ -18,7 +18,18 @@ Using Web Modeler, you can import the following **resource types** into a projec
 - Markdown files such as `README.md`.
 - Any other resource type supported by Web Modeler.
 
-To do so, open a URL hosted on your Web Modeler instance. See [Prepare resources](./preparing-resources-for-import.md) for more information on how to create this URL.
+## How to import
+
+These are the supported methods you can use to import:
+
+| Method                                                                            | Opens from                                 | Import source              | Supported resources    |
+| --------------------------------------------------------------------------------- | ------------------------------------------ | -------------------------- | ---------------------- |
+| [**Import**](<(./preparing-resources-for-import.md)>)                             | Web Modeler home page via URL              | Any publicly available URL | Any type of resource   |
+| [**Browse blueprints**](./camunda-marketplace.md#browse-marketplace-blueprints)   | Web Modeler project or folder page         | Camunda Marketplace only   | Blueprints only        |
+| [**Discover connectors**](./camunda-marketplace.md#browse-marketplace-connectors) | Append menu inside Web Modeler BPMN editor | Camunda Marketplace only   | Element templates only |
+| **Upload files**                                                                  | Web Modeler project or folder page         | Any downloaded file        | Any type of resource   |
+
+To import via a URL hosted on your Web Modeler, see [Prepare resources](./preparing-resources-for-import.md) for more information.
 
 :::important
 
