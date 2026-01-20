@@ -86,7 +86,7 @@
 }
 
 /* 2-column layout: Type | Change */
-.wrapper :global(.release-announcement-row) {
+.wrapper :global(.release-announcement-row:not([hidden])) {
   display: grid;
   grid-template-columns: 10rem minmax(0, 1fr);
   gap: 0.25rem 0.75rem;
@@ -95,6 +95,11 @@
   border-bottom: 1px solid var(--ifm-table-border-color);
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+}
+
+/* Ensure hidden rows are actually hidden (in case any other styles set display) */
+.wrapper :global(.release-announcement-row[hidden]) {
+  display: none;
 }
 
 .columnHeader {
