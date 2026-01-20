@@ -111,6 +111,16 @@ This change aligns with the Spring Boot support policy, as OSS support for Sprin
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+#### Resource deletion endpoint now has response body
+Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{resourceKey}/deletion` in the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) now returns a response body. The Camunda Java client has been updated to support this change.
+
+</div>
+</div>
 ### Connectors
 
 <div className="release-announcement-row">

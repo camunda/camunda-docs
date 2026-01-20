@@ -136,6 +136,28 @@
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
+            {
+              "type": "category",
+              "label": "Monitoring",
+              "link": {
+                "type": "doc",
+                "id": "components/console/manage-clusters/monitoring/overview"
+              },
+              "items": [
+                {
+                  "type": "category",
+                  "label": "Cluster Metrics endpoint",
+                  "link": {
+                    "type": "doc",
+                    "id": "components/console/manage-clusters/monitoring/cluster-metrics-endpoint/overview"
+                  },
+                  "items": [
+                    "components/console/manage-clusters/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint",
+                    "components/console/manage-clusters/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics"
+                  ]
+                }
+              ]
+            },
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/settings",
