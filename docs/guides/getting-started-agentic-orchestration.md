@@ -57,7 +57,7 @@ In this guide, you can try two use cases:
 | Setup | Model provider | Model used      | Prerequisites                                                                                                                                                                                                                                                                                                                                                              |
 | :---- | :------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Cloud | AWS Bedrock    | Claude Sonnet 4 | <p><ul><li> An AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</li><li><p> Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for details.</p></li></ul></p> |
-| Local | Ollama         | GPT-OSS:20b     | <p><ul><li> [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.</li><li><p> Ollama and GPT-OSS:20b installed. See [Ollama's documentation](https://docs.ollama.com/) for details.</p></li></ul></p>                                                                                                                                   |
+| Local | Ollama         | GPT-OSS:20b     | <p><ul><li> [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.</li><li><p> Ollama and GPT-OSS:20b installed. See [Set up Ollama](#set-up-ollama) for details.</p></li></ul></p>                                                                                                                                                      |
 
 :::important
 Running LLMs locally requires substantial disk space and memory. GPT-OSS:20b requires more than 20GB of RAM to function and 14GB of free disk space to download.
@@ -158,6 +158,20 @@ You can leave it as is or adjust its configuration to test other setups. To do s
 
 <TabItem value="local">
 Configure your local LLM with Ollama.
+
+#### Set up Ollama
+
+1. **Download and install**: Follow [Ollama's documentation](https://docs.ollama.com/quickstart) for details.
+2. **Confirm installation**: Start the application and check the running version in a terminal or command prompt with the command `ollama --version`.
+3. **Pull the GPT-OSS:20b model**: From the same terminal or command prompt, run `ollama pull gpt-oss:20b`.
+4. **Start the local server**: Run `ollama serve`.
+5. **Test**: Ollama serves an API by default at `http://localhost:11434`. To test it, use a tool like Postman or run this command from your terminal:
+
+```
+curl -X POST http://localhost:11434/v1/chat/completions \
+    -H "Content-Type: application/json" \
+    -d '{"model":"gpt-oss:20b","messages":[{"role":"user","content":"Hello!"}]}'
+```
 
 #### Configure properties
 
