@@ -1,32 +1,22 @@
 ---
 id: prepare-resources
-title: Prepare resources for importing into Web Modeler
+title: Prepare resources for import into Web Modeler
 sidebar_label: Prepare import resources
 description: "Learn how to import resources into Web Modeler, how automatic handling works for template conflicts and ignored templates, and how to troubleshoot common import errors."
 ---
 
-# Preparing resources for importing into Web Modeler
+Learn how to prepare resources for import into Web Modeler
 
-This page is for repository maintainers, blueprint authors, and solution builders who prepare resources that other users will import into Web Modeler.
+:::note
+This guide is intended for repository maintainers, blueprint authors, and solution builders who prepare resources for others to import into Web Modeler.
+:::
 
-It covers both:
-
-- Preparing **individual resources** that can be imported one by one.
-- Preparing a **`.zip` archive** that can import a full process application from a single URL.
-
----
-
-## Overview of approaches
+## Supported methods
 
 You can prepare resources for import into Web Modeler in two main ways:
 
-1. **Single resources (one by one)**
-   - Each resource (BPMN, DMN, form, template, README, etc.) is accessible via its own public URL.
-
-2. **Packaged resources in a `.zip`**
-   - You bundle all relevant files (for example, an entire process application) into a single `.zip`.
-
----
+1. **Individual resources**: Each resource (BPMN, DMN, form, template, README, etc.) is accessible via its own public URL and can be imported one by one.
+2. **Packaged resources**: Bundle all relevant files, such as an entire process application, into a single `.zip` file. This allows importing the full package from a single URL.
 
 ## Resource guidelines
 
@@ -50,9 +40,7 @@ Also:
 - Use **stable, distinct `id` values** for templates so BPMN files can consistently reference them, and the ID doesn't conflict with other templates the user might download.
 - Bump the `version` number whenever you introduce changes that could affect existing processes.
 
----
-
-## Preparing single resources (one by one)
+## Prepare individual resources
 
 ### When to use this approach
 
@@ -65,9 +53,7 @@ The one‑by‑one approach is a good fit when:
 
 Web Modeler will treat the first BPMN file in the source list as the **main process**:
 
----
-
-## Preparing a `.zip` with multiple resources
+## Prepare packaged resources
 
 ### When to use this approach
 
@@ -99,8 +85,6 @@ To minimize issues when importing:
 - Ensure each resource file is within Web Modeler’s **per‑file size** limit.
 - Favor clear, stable naming for each file
 
----
-
 ### Building the Web Modeler import URL
 
 1. Get the public URL to the file. For GitHub-hosted files, see below for instructions.
@@ -120,9 +104,7 @@ To minimize issues when importing:
 <Web Modeler host>/import/resources?title=<process application title>&source=<raw file URL 1>,<raw file URL 2>
 ```
 
----
-
-## Creating importable URLs from GitHub
+## Create importable URLs from GitHub
 
 You can host your files on any public-facing website that does tno
 

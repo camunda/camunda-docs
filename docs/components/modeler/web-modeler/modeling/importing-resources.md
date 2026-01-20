@@ -24,7 +24,7 @@ These are the supported methods you can use to import:
 
 | Method                                                                            | Opens from                                 | Import source              | Supported resources    |
 | --------------------------------------------------------------------------------- | ------------------------------------------ | -------------------------- | ---------------------- |
-| [**Import**](<(./preparing-resources-for-import.md)>)                             | Web Modeler home page via URL              | Any publicly available URL | Any type of resource   |
+| [**Import**](./preparing-resources-for-import.md)                                 | Web Modeler home page via URL              | Any publicly available URL | Any type of resource   |
 | [**Browse blueprints**](./camunda-marketplace.md#browse-marketplace-blueprints)   | Web Modeler project or folder page         | Camunda Marketplace only   | Blueprints only        |
 | [**Discover connectors**](./camunda-marketplace.md#browse-marketplace-connectors) | Append menu inside Web Modeler BPMN editor | Camunda Marketplace only   | Element templates only |
 | **Upload files**                                                                  | Web Modeler project or folder page         | Any downloaded file        | Any type of resource   |
