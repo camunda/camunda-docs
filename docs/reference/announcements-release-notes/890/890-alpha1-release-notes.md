@@ -5,6 +5,7 @@ sidebar_label: 8.9.0-alpha1
 description: "Release notes for 8.9, including alphas"
 keywords: ["8.9 release notes", "release notes for 8.9", "release notes"]
 page_rank: 90
+hide_table_of_contents: true
 ---
 
 import ReleaseAnnouncementsFilter from '@site/src/components/ReleaseAnnouncementsFilter';
@@ -17,7 +18,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 <ReleaseAnnouncementsFilter>
 
-<div className="release-announcement-row" data-type="update" data-area="Data" data-deployment="sm">
+<div className="release-announcement-row" data-type="update" data-area="Configuration" data-deployment="sm">
   <div className="release-announcement-badge">
     <span className="badge badge--update">Update</span>
   </div>
@@ -38,15 +39,13 @@ This change simplifies compliance and setup for RDBMS environments, ensuring con
 </div>
 </div>
 
-</ReleaseAnnouncementsFilter>
+<div className="release-announcement-row" data-type="update" data-area="Data" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--update">Update</span>
+  </div>
+  <div className="release-announcement-content">
 
-###
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Configuration">Configuration</span></div>
-
-### MySQL and Microsoft SQL Server secondary storage
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Data">Data</span></div>
+#### MySQL and Microsoft SQL Server secondary storage
 
 <!-- https://github.com/camunda/product-hub/issues/3043 -->
 
@@ -59,9 +58,16 @@ Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL S
 This alpha release introduces foundational support only. External configuration and Operate integration follows in upcoming alpha releases.
 :::
 
-### RDBMS secondary storage (H2, PostgreSQL, Oracle, MariaDB)
+</div>
+</div>
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Data">Data</span></div>
+<div className="release-announcement-row" data-type="update" data-area="Data" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--update">Update</span>
+  </div>
+  <div className="release-announcement-content">
+
+#### RDBMS secondary storage (H2, PostgreSQL, Oracle, MariaDB)
 
 <!-- https://github.com/camunda/product-hub/issues/2439 -->
 
@@ -80,12 +86,24 @@ Key highlights:
 This alpha release introduces support for H2 in Camunda 8 Run only. Operate and external RDBMS configuration follows in upcoming alpha releases.
 :::
 
-### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
+</div>
+</div>
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Data">Data</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div className="release-announcement-row" data-type="feature" data-area="Modeler" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--feature">Feature</span>
+  </div>
+  <div className="release-announcement-content">
+
+#### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
 
 <!-- https://github.com/camunda/product-hub/issues/3189 -->
 
 Web Modeler now supports H2, MariaDB, and MySQL as relational database systems, aligning with the configurations supported by the Orchestration cluster.
 
 This enhancement ensures consistency across environments, simplifies setup for administrators, and improves integration for both SaaS and Self-Managed deployments.
+
+</div>
+</div>
+
+</ReleaseAnnouncementsFilter>

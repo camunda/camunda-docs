@@ -346,7 +346,7 @@ export default function ReleaseAnnouncementsFilter({
 
       <div className={styles.columnHeader} aria-hidden="true">
         <div className={styles.columnHeaderCell}>Type</div>
-        <div className={styles.columnHeaderCell}>Change</div>
+        <div className={styles.columnHeaderCell}>Description</div>
       </div>
 
       <div ref={listRef} className={styles.list}>
