@@ -12,9 +12,11 @@ To continue using user task access restrictions, see [switching between V1 and V
 
 In Tasklist V2, task visibility is controlled by authorization-based access control rather than user task access restrictions. Starting with Camunda 8.9, Tasklist V2 supports:
 
-- Process-level permissions such as `PROCESS_DEFINITION.READ_USER_TASK` and `PROCESS_DEFINITION.UPDATE_USER_TASK`, which allow managers to see and act on all user tasks for a process.
+- Process-level permissions such as `READ_USER_TASK` and `UPDATE_USER_TASK` on the `Process Definition` resource, which allow managers to see and act on all user tasks for a process.
+
 - Task-level permissions on the `USER_TASK` resource type, including `READ`, `UPDATE`, `CLAIM`, and `COMPLETE`.
-- Property-based access control on `assignee`, `candidate users`, and `candidate groups`, so task workers can only see or work on tasks where they are involved.
+
+- Property-based access control using the `assignee`, `candidateUsers`, and `candidateGroups` task properties, so task workers can only see or work on tasks where they are involved.
 
 For more information about the differences between V1 and V2 and how authorizations work, see [Tasklist API versions](components/tasklist/api-versions.md) and
 [authorization-based access control](components/concepts/access-control/authorizations.md).

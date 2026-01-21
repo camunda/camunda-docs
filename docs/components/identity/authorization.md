@@ -29,19 +29,18 @@ To learn more, see [Orchestration Cluster authorizations](/components/concepts/a
 To create a new authorization:
 
 1. Log in to Identity and select the **Authorizations** tab.
-2. Select a resource type from the list on the left, and sekect **Create authorization**.
+2. Select a resource type from the list on the left, and select **Create authorization**.
 3. Enter the following information:
    - **Owner type**: The entity to which you want to assign permissions, such as a user, group, role, client, or mapping rule.
    - **Owner ID**: The ID of the owner.
    - **Resource type**: The selected resource type.
    - **Resource ID**: The ID of the resource. Use `*` to grant permissions for all resources of the selected type.
 
-   For **USER_TASK** authorizations, you can also use property-based matching:
-   - **Matcher**: How the resource is matched. For task permissions, choose **PROPERTY**.
-   - **Property name**: When using the `PROPERTY` matcher, the task property used to scope access. Supported properties are:
-     - `assignee`
-     - `candidateUsers`
-     - `candidateGroups`
+For **USER_TASK** authorizations, you can also use property-based matching. When using the `PROPERTY` matcher, select one of the following task properties to scope access:
+
+- `assignee`
+- `candidateUsers`
+- `candidateGroups`
 
 4. Select the permissions you want to grant.
 5. Click **Create authorization**.

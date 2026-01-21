@@ -43,22 +43,25 @@ For more information on updating clusters, see [update your cluster](/components
 You can enable user task access restrictions in the cluster to restrict Tasklist task access to assigned/candidate users and groups.
 
 :::caution Tasklist V1 only
-User task access restrictions are supported only by the Tasklist V1 API and are not supported
-in Tasklist V2. From Camunda 8.8, Tasklist runs in V2 mode by default.
+User task access restrictions are supported only by the Tasklist V1 API and are not available in Tasklist V2.
+From Camunda 8.8, Tasklist runs in V2 mode by default.
 
 To continue using user task access restrictions, see
 [switching between V1 and V2 modes](components/tasklist/api-versions.md#switching-between-v1-and-v2-modes)
 to enable Tasklist V1 mode.
 
-In Tasklist V2, task visibility is controlled by authorization-based access control rather than user task access restrictions. Starting with Camunda 8.9, Tasklist V2 supports:
+In Tasklist V2, task visibility is controlled by authorization-based access control rather than user task access
+restrictions. This includes:
 
-- Process-level permissions such as `PROCESS_DEFINITION.READ_USER_TASK` and `PROCESS_DEFINITION.UPDATE_USER_TASK`, which allow managers to see and act on all user tasks for a process.
-- Task-level permissions on the `USER_TASK` resource type, including `READ`, `UPDATE`, `CLAIM`, and `COMPLETE`.
-- Property-based access control on `assignee`, `candidate users`, and `candidate groups`, so task workers can only see or work on tasks where they are involved.
+- Process-level permissions that allow managers to see and act on all user tasks of a process.
+- Task-level permissions that provide fine-grained control over individual user tasks.
+- Property-based access control on task attributes such as `assignee`, `candidateUsers`, and `candidateGroups`.
 
-For more information about the differences between V1 and V2 and how authorizations work, see
-[Tasklist API versions](components/tasklist/api-versions.md) and
+For a conceptual overview of authorization, see
 [authorization-based access control](../../concepts/access-control/authorizations.md).
+
+For details on how the REST APIs apply authorization when handling requests, see
+[Authentication and authorization](../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 :::
 
 - Enable this setting to use user task access restrictions in the cluster. Tasks assigned to users or candidate groups are only visible to assigned users or respective group members.

@@ -33,16 +33,27 @@ To learn more about the Orchestration Cluster, see [What is the Orchestration Cl
 
 #### User task authorization model
 
-User task endpoints in this API use the same authorization model as Tasklist. Access is evaluated in two layers:
+User task endpoints in this API follow the authorization model defined for the Orchestration Cluster
+and used by Tasklist.
 
-- Process-level permissions on the `PROCESS_DEFINITION` resource grant task-related permissions such as `READ_USER_TASK`, `UPDATE_USER_TASK`, and, optionally, `CLAIM_USER_TASK` and `COMPLETE_USER_TASK`. These permissions allow a caller to read and modify all user tasks for the corresponding process definition.
-- Task-level permissions on the `USER_TASK` resource (`READ`, `UPDATE`, `CLAIM`, `COMPLETE`) provide fine-grained control over individual tasks. These permissions can use property-based matching on task attributes such as `assignee`, `candidateUsers`, and `candidateGroups` to implement task worker access control.
+Authorization is based on a combination of process-level and task-level permissions:
 
-When both layers are configured, process-level permissions take precedence. If a caller has `PROCESS_DEFINITION[READ_USER_TASK]` or `PROCESS_DEFINITION[UPDATE_USER_TASK]` for a process definition, the engine does not require additional `USER_TASK[READ, UPDATE]` permissions for tasks in that process.
+- Process-level permissions grant access to user tasks across an entire process.
+  For example, permissions such as `READ_USER_TASK`, `UPDATE_USER_TASK`, `CLAIM_USER_TASK`,
+  and `COMPLETE_USER_TASK` allow a caller to read and act on all user tasks of a process definition.
 
-If process-level permissions are not sufficient, the engine evaluates `USER_TASK` permissions, including property-based rules based on the task assignee and candidate users or groups.
+- Task-level permissions provide fine-grained control over individual user tasks.
+  These permissions (`READ`, `UPDATE`, `CLAIM`, `COMPLETE`) can be scoped using property-based
+  access control on task attributes such as `assignee`, `candidateUsers`, and `candidateGroups`.
 
-For an overview of available resources, permissions, and configuration options, see [Orchestration Cluster authorization](../../components/concepts/access-control/authorizations.md) and [Identity – Authorizations](../../components/identity/authorization.md).
+For the complete authorization model, including permission precedence and evaluation rules, see
+[Orchestration Cluster authorization](../../components/concepts/access-control/authorizations.md).
+
+For details on how the REST API applies this model when handling requests, see
+[Authentication and authorization](./orchestration-cluster-api-rest-authentication.md).
+
+For information about configuring authorizations in Identity, see
+[Identity – Authorizations](../../components/identity/authorization.md).
 
 ## Getting started
 

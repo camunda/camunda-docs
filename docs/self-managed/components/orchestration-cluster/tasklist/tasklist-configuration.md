@@ -56,7 +56,7 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 :::danger
 The `allow-non-self-assignment` flag controls the behavior of the deprecated [Tasklist API](/apis-tools/tasklist-api-rest/specifications/assign-task.api.mdx) used in Tasklist V1 only.
 
-It has no effect when Tasklist runs in V2 mode and does not apply to the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/tutorial.md). In V2, use [authorization-based access control](/components/concepts/access-control/authorizations.md#available-resources) to manage which users and applications can assign or update user tasks. For an overview of Tasklist V1 versus V2 behavior, see [Tasklist API versions](/components/tasklist/api-versions.md).
+It has no effect when Tasklist runs in V2 mode and does not apply to the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/tutorial.md). In V2, use [authorization-based access control](/components/concepts/access-control/authorizations.md#available-resources) to manage which users and applications can assign or update user tasks. For an overview of Tasklist V1 versus V2 behavior, see [Tasklist API versions](/components/tasklist/api-versions.md).
 
 Enabling this flag disables an intentional security mechanism and should only be done in development environments that still rely on Tasklist V1, typically with no Identity installed. Do not enable it in production or when using Tasklist V2.
 :::
@@ -72,7 +72,7 @@ camunda:
 
 ## Tasklist UI mode configuration
 
-Starting with Camunda 8.8, Tasklist can operate in two modes: V1 (legacy) and V2 (recommended). The V2 mode uses the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and is enabled by default.
+Starting with Camunda 8.8, Tasklist can operate in two modes: V1 (legacy) and V2 (recommended). The V2 mode uses the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and is enabled by default.
 
 :::warning Deprecation notice
 Tasklist V1 mode is deprecated and will be removed in Camunda 8.10. We recommend migrating to V2 mode for all new projects and planning migration for existing applications.
@@ -96,9 +96,9 @@ camunda:
     V2ModeEnabled: false
 ```
 
-| Name                           | Description                                                                                                                     | Default value |
-| :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| camunda.tasklist.V2ModeEnabled | Enables Tasklist V2 mode using the Orchestration Cluster API. Set to `false` to use the legacy V1 mode during migration period. | true          |
+| Name                           | Description                                                                                                                          | Default value |
+| :----------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| camunda.tasklist.V2ModeEnabled | Enables Tasklist V2 mode using the Orchestration Cluster REST API. Set to `false` to use the legacy V1 mode during migration period. | true          |
 
 ### When to use V1 mode
 

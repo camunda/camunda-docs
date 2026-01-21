@@ -99,22 +99,22 @@ Task-level permissions are evaluated using property-based access control:
 
 - Identity administrators can create `USER_TASK` authorizations that match on specific task properties:
   - `assignee`
-  - `candidate users`
-  - `candidate groups`.
+  - `candidateUsers`
+  - `candidateGroups`.
 - A user is authorized when their username or group memberships match one of these properties on the task and the authorization grants the required permission (for example, `READ`, `CLAIM`, or `COMPLETE`).
 
 These property-based checks are used by both the Tasklist UI and the Orchestration Cluster REST API, ensuring consistent task visibility and action rules across tools.
 
-### Default Task worker role
+### Default task worker role
 
-On new installations and upgrades, Camunda Identity automatically creates a Task worker role:
+On new installations and upgrades, Camunda Identity automatically creates a task worker role:
 
 - Role ID: `task-worker`
 - Resource type: `USER_TASK`
 - Scope: Property-based authorizations on
   - `assignee`
-  - `candidate users`
-  - `candidate groups`
+  - `candidateUsers`
+  - `candidateGroups`
 - Permissions: `READ`, `CLAIM`, and `COMPLETE` for matching tasks.
 
 This default role lets typical task workers see, claim, and complete only the tasks they are responsible for. Administrators and managers can continue to use process-level permissions for broader oversight.

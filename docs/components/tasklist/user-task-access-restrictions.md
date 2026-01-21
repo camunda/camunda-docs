@@ -16,9 +16,11 @@ to enable Tasklist V1 mode.
 
 In Tasklist V2, task visibility is controlled by authorization-based access control rather than user task access restrictions. Starting with Camunda 8.9, Tasklist V2 supports:
 
-- Process-level permissions such as `PROCESS_DEFINITION.READ_USER_TASK` and `PROCESS_DEFINITION.UPDATE_USER_TASK`, which allow managers to see and act on all user tasks for a process.
+- Process-level permissions such as `READ_USER_TASK` and `UPDATE_USER_TASK` on the `Process Definition` resource, which allow managers to see and act on all user tasks for a process.
+
 - Task-level permissions on the `USER_TASK` resource type, including `READ`, `UPDATE`, `CLAIM`, and `COMPLETE`.
-- Property-based access control on `assignee`, `candidate users`, and `candidate groups`, so task workers can only see or work on tasks where they are involved.
+
+- Property-based access control using the `assignee`, `candidateUsers`, and `candidateGroups` task properties, so task workers can only see or work on tasks where they are involved.
 
 For more information about the differences between V1 and V2 and how authorizations work, see [Tasklist API versions](components/tasklist/api-versions.md) and
 [authorization-based access control](../concepts/access-control/authorizations.md).
@@ -43,6 +45,12 @@ User task access restrictions are enabled by default on SaaS clusters that run T
 You can enable or disable user task access restrictions for Tasklist V1 from the
 [cluster settings in Console](components/console/manage-clusters/settings.md#enforce-user-task-restrictions).
 
-When activated, tasks assigned to users or candidate groups are only visible to the assigned user or respective group members. When deactivated, every user can see any task in Tasklist V1, regardless of the assignment.
+When activated, tasks are only visible to:
+
+- the assigned user,
+- users listed as candidate users, or
+- members of the respective candidate groups.
+
+When deactivated, every user can see any task in Tasklist V1, regardless of the assignment.
 
 This configuration does not affect OIDC API clients that call the Tasklist V1 REST API. When you retrieve tasks using such a client, all tasks are returned. It also does not affect Tasklist V2 or the Orchestration Cluster REST API, which always rely on authorization-based access control for task visibility.
