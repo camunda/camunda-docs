@@ -39,8 +39,7 @@ and used by Tasklist.
 Authorization is based on a combination of process-level and task-level permissions:
 
 - Process-level permissions grant access to user tasks across an entire process.
-  For example, permissions such as `READ_USER_TASK`, `UPDATE_USER_TASK`, `CLAIM_USER_TASK`,
-  and `COMPLETE_USER_TASK` allow a caller to read and act on all user tasks of a process definition.
+  For example, permissions such as `READ_USER_TASK`, `UPDATE_USER_TASK`, and where configured, `CLAIM_USER_TASK` and `COMPLETE_USER_TASK` allow a caller to read and act on all user tasks of a process definition.
 
 - Task-level permissions provide fine-grained control over individual user tasks.
   These permissions (`READ`, `UPDATE`, `CLAIM`, `COMPLETE`) can be scoped using property-based

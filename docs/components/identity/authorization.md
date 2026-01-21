@@ -83,9 +83,7 @@ Both process-level and task-level permissions can control access to user tasks:
 
 - Process-level permissions on the `Process Definition` resource, such as `READ_USER_TASK`, `UPDATE_USER_TASK`, and (where configured) `CLAIM_USER_TASK` and `COMPLETE_USER_TASK`.
 
-- Task-level permissions on `USER_TASK`, such as `READ`, `UPDATE`, `CLAIM`, and `COMPLETE`, can be scoped either to:
-  - individual tasks (for example, by user task key), or
-  - task properties such as assignee, candidate users, and candidate groups using property-based access control.
+- Task-level permissions on `USER_TASK`, such as `READ`, `UPDATE`, `CLAIM`, and `COMPLETE`, are typically scoped using property-based access control on task properties such as assignee, candidate users, and candidate groups.
 
 When both exist, process-level permissions take precedence:
 
