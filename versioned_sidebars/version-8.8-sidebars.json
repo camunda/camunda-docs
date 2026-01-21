@@ -486,6 +486,7 @@
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
+            "components/modeler/desktop-modeler/deploy-diagram",
             "components/modeler/desktop-modeler/start-instance",
             "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
@@ -1112,6 +1113,28 @@
         "components/saas/data-locations",
         {
           "type": "category",
+          "label": "Monitoring",
+          "link": {
+            "type": "doc",
+            "id": "components/saas/monitoring/overview"
+          },
+          "items": [
+            {
+              "type": "category",
+              "label": "Cluster Metrics endpoint",
+              "link": {
+                "type": "doc",
+                "id": "components/saas/monitoring/cluster-metrics-endpoint/overview"
+              },
+              "items": [
+                "components/saas/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint",
+                "components/saas/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
           "label": "Encryption",
           "link": {
             "type": "doc",
@@ -1121,6 +1144,7 @@
             "components/saas/encryption-at-rest",
             "components/saas/byok/aws-external-encryption-setup",
             "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/key-state-behavior",
             "components/saas/byok/faq-and-troubleshooting"
           ]
         },
@@ -3217,7 +3241,8 @@
                     "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
-                    "self-managed/components/orchestration-cluster/core-settings/configuration/logging"
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code"
                   ]
                 },
                 {
@@ -3371,6 +3396,7 @@
             },
             {
               "Desktop Modeler": [
+                "self-managed/components/modeler/desktop-modeler/connect-to-self-managed",
                 "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed"
               ]
             }

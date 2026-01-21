@@ -124,10 +124,9 @@ Use the publish message endpoint to send messages that can be buffered.
               messageKey: {
                 allOf: [
                   {
-                    description:
-                      "System-generated key for a message correlation.",
-                    format: "MessageCorrelationKey",
-                    example: "2251799813634265",
+                    description: "System-generated key for an message.",
+                    format: "MessageKey",
+                    example: "2251799813683467",
                     type: "string",
                     allOf: [
                       {
@@ -137,7 +136,7 @@ Use the publish message endpoint to send messages that can be buffered.
                         title: "LongKey",
                       },
                     ],
-                    title: "MessageCorrelationKey",
+                    title: "MessageKey",
                   },
                 ],
                 description: "The key of the correlated message",

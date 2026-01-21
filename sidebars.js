@@ -90,6 +90,7 @@ module.exports = {
             "components/concepts/process-instance-creation",
             "components/concepts/process-instance-modification",
             "components/concepts/process-instance-migration",
+            "components/concepts/process-instance-deletion",
             "components/concepts/incidents",
           ],
         },
@@ -394,8 +395,11 @@ module.exports = {
                     id: "components/early-access/alpha/mcp-client/mcp-client",
                   },
                   items: [
-                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
+                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
+                    "components/early-access/alpha/mcp-client/mcp-client-config",
+                    "components/early-access/alpha/mcp-client/mcp-client-tool-discovery",
+                    "components/early-access/alpha/mcp-client/mcp-client-human-in-the-loop",
                   ],
                 },
                 {
@@ -553,6 +557,7 @@ module.exports = {
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
+            "components/modeler/desktop-modeler/deploy-diagram",
             "components/modeler/desktop-modeler/start-instance",
             "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
@@ -1064,6 +1069,28 @@ module.exports = {
         "components/saas/data-locations",
         {
           type: "category",
+          label: "Monitoring",
+          link: {
+            type: "doc",
+            id: "components/saas/monitoring/overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Cluster Metrics endpoint",
+              link: {
+                type: "doc",
+                id: "components/saas/monitoring/cluster-metrics-endpoint/overview",
+              },
+              items: [
+                "components/saas/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint",
+                "components/saas/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
           label: "Encryption",
           link: {
             type: "doc",
@@ -1073,6 +1100,7 @@ module.exports = {
             "components/saas/encryption-at-rest",
             "components/saas/byok/aws-external-encryption-setup",
             "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/key-state-behavior",
             "components/saas/byok/faq-and-troubleshooting",
           ],
         },
@@ -2005,6 +2033,7 @@ module.exports = {
             },
             {
               "Desktop Modeler": [
+                "self-managed/components/modeler/desktop-modeler/connect-to-self-managed",
                 "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed",
               ],
             },

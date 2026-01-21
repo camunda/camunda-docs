@@ -75,17 +75,35 @@ Ensure the Camunda component versions are compatible with the Helm chart version
 
 The [sizing of a Camunda 8 installation](/components/best-practices/architecture/sizing-your-environment.md) depends on various influencing factors. Ensure to [determine these factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors), and conduct [benchmarking](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks) to validate an appropriate environment size for your test, integration, or production environments.
 
-#### Volume performance
+### Persistent volumes
 
-As a minimum requirement, the persistent volumes for Zeebe should use volumes with an absolute minimum of 1,000 IOPS. **NFS or other types of network storage volumes are not supported.**
+Camunda supports different types of storage volumes, including block storage and network file systems (NFS).
 
-To ensure an appropriate sizing, [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (for example, throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
+For details on typical volume usage, refer to these examples:
 
-For details on typical volume type usage, refer to the following examples specific to cloud service providers:
-
-- [Amazon EKS](/self-managed/reference-architecture/kubernetes.md#amazon-eks)
+- [Amazon EKS](/self-managed/reference-architecture/kubernetes.md#amazon-eks-1)
 - [Microsoft AKS](/self-managed/reference-architecture/kubernetes.md#microsoft-aks)
 - [Google GKE](/self-managed/reference-architecture/kubernetes.md#google-gke)
+
+#### Network File Systems
+
+Camunda guarantees support for Amazon Elastic File System (EFS).
+
+If you want to use another NFS, it must meet these requirements:
+
+- Be POSIX-compliant.
+- Never reorder file operations.
+- Retry I/O operations across temporary network failures, instead of failing on timeout.
+- Doesn't surface network‑related failures in the client process.
+- **Only one container may mount the disk in write mode at a time.** Two containers mounting the same disk in write mode could cause data corruption.
+
+#### Performance
+
+Regardless of the type, the network storage volumes you use must meet these requirements:
+
+- They must be capable of **at least 1,000 IOPS**.
+- The latency of write/msync operations must be in the **low single digit milliseconds** under normal conditions. Ideally, it's in the order of microseconds.
+- The p99 latency must be **lower than 300 milliseconds**.
 
 ### Helm charts version matrix
 
