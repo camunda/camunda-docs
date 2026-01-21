@@ -70,9 +70,16 @@ Additionally, if authorizations are enabled, ensure that your [client](/componen
 
 ## I cannot connect to a local orchestration cluster {#i-cannot-connect-to-local-zeebe}
 
-You try to connect (i.e., to deploy) to a local orchestration cluster, and Desktop Modeler tells you it "Cannot connect to orchestration cluster."
+You try to connect (e.g. to deploy) to a local orchestration cluster, and Desktop Modeler tells you it "Cannot connect to orchestration cluster".
 
 Ensure your local orchestration cluster is running. If you don't have one installed, consider [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), a lightweight all-in-one distribution.
+
+## I cannot connect to an orchestration cluster in a local network (macOS-only)
+
+You are on macOS and try to connect to an orchestration cluster which is running in a local network, and Desktop Modeler tells you it "Cannot connect to orchestration cluster".
+
+Ensure your Privacy & Security settings allow Desktop Modeler to access your local network, cf. [Control access to your local network on Mac
+](https://support.apple.com/en-gb/guide/mac-help/mchla4f49138/mac).
 
 ## How to configure a REST connection
 
