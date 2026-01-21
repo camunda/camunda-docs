@@ -74,28 +74,28 @@ You try to connect (i.e., to deploy) to a local orchestration cluster, and Deskt
 
 Ensure your local orchestration cluster is running. If you don't have one installed, consider [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), a lightweight all-in-one distribution.
 
-## I cannot connect to an orchestration cluster in a local network
+## Cannot connect to an orchestration cluster in a local network
 
-You try to connect to an orchestration cluster which is running in a local network, and Desktop Modeler tells you it "Cannot connect to orchestration cluster".
+Use this guidance when Desktop Modeler cannot connect to an orchestration cluster running in your local network and shows a "Cannot connect to orchestration cluster" error.
 
-Ensure your system allows Desktop Modeler access to the local network:
+Verify that your operating system allows Desktop Modeler to access the local network.
 
-<Tabs groupId="os" default="windows" queryString values={
-[
-{label: 'Windows', value: 'windows' },
-{label: 'macOS', value: 'macos' }
-]
-}>
+<Tabs groupId="os" default="windows" queryString values={[
+{ label: 'Windows', value: 'windows' },
+{ label: 'macOS', value: 'macos' }
+]}>
 
-<TabItem value='windows'>
+<TabItem value="windows">
 
-Ensure your Privacy & Security settings allow Desktop Modeler to access your local network, cf. [Control access to your local network](https://support.apple.com/en-gb/guide/mac-help/mchla4f49138/mac).
+Ensure your network is set to **Private** and that apps are allowed to communicate on private networks.  
+See [make a network public or private](https://support.microsoft.com/en-us/windows/essential-network-settings-and-tasks-in-windows-f21a9bbc-c582-55cd-35e0-73431160a1b9#ID0EFF).
 
 </TabItem>
 
-<TabItem value='macos'>
+<TabItem value="macos">
 
-Ensure your network interface is set to private, cf. [Make a network public or private](https://support.microsoft.com/en-us/windows/essential-network-settings-and-tasks-in-windows-f21a9bbc-c582-55cd-35e0-73431160a1b9#ID0EFF).
+Ensure **Privacy & Security** settings allow Desktop Modeler to access your local network.  
+See [control access to your local network](https://support.apple.com/en-gb/guide/mac-help/mchla4f49138/mac).
 
 </TabItem>
 
