@@ -2,8 +2,14 @@
 id: 890-alpha1-release-notes
 title: "8.9.0-alpha1 release notes"
 sidebar_label: 8.9.0-alpha1
-description: "Release notes for 8.9, including alphas"
-keywords: ["8.9 release notes", "release notes for 8.9", "release notes"]
+description: "Release notes for the 8.9. alpha 1 release"
+keywords:
+  [
+    "8.9 release notes",
+    "release notes for 8.9",
+    "release notes",
+    "8.9.0-alpha1",
+  ]
 page_rank: 90
 hide_table_of_contents: true
 ---
