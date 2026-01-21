@@ -72,6 +72,33 @@ You try to connect (i.e., to deploy) to a local cluster, and Desktop Modeler tel
 
 Ensure your local cluster is running. If you don't have one installed, consider [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md), a lightweight all-in-one distribution.
 
+## I cannot connect to an orchestration cluster in a local network
+
+You try to connect to an orchestration cluster which is running in a local network, and Desktop Modeler tells you it "Cannot connect to orchestration cluster".
+
+Ensure your system allows Desktop Modeler access to the local network:
+
+<Tabs groupId="os" default="windows" queryString values={
+[
+{label: 'Windows', value: 'windows' },
+{label: 'macOS', value: 'macos' }
+]
+}>
+
+<TabItem value='windows'>
+
+Ensure your Privacy & Security settings allow Desktop Modeler to access your local network, cf. [Control access to your local network](https://support.apple.com/en-gb/guide/mac-help/mchla4f49138/mac).
+
+</TabItem>
+
+<TabItem value='macos'>
+
+Ensure your network interface is set to private, cf. [Make a network public or private](https://support.microsoft.com/en-us/windows/essential-network-settings-and-tasks-in-windows-f21a9bbc-c582-55cd-35e0-73431160a1b9#ID0EFF).
+
+</TabItem>
+
+</Tabs>
+
 ## Resolve a general Zeebe connection issue
 
 You try to connect to Zeebe from both Desktop Modeler _and_ community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md), and neither of them works. General connection failures can have a couple of reasons:

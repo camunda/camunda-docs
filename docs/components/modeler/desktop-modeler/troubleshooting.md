@@ -74,6 +74,33 @@ You try to connect (i.e., to deploy) to a local orchestration cluster, and Deskt
 
 Ensure your local orchestration cluster is running. If you don't have one installed, consider [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), a lightweight all-in-one distribution.
 
+## I cannot connect to an orchestration cluster in a local network
+
+You try to connect to an orchestration cluster which is running in a local network, and Desktop Modeler tells you it "Cannot connect to orchestration cluster".
+
+Ensure your system allows Desktop Modeler access to the local network:
+
+<Tabs groupId="os" default="windows" queryString values={
+[
+{label: 'Windows', value: 'windows' },
+{label: 'macOS', value: 'macos' }
+]
+}>
+
+<TabItem value='windows'>
+
+Ensure your Privacy & Security settings allow Desktop Modeler to access your local network, cf. [Control access to your local network](https://support.apple.com/en-gb/guide/mac-help/mchla4f49138/mac).
+
+</TabItem>
+
+<TabItem value='macos'>
+
+Ensure your network interface is set to private, cf. [Make a network public or private](https://support.microsoft.com/en-us/windows/essential-network-settings-and-tasks-in-windows-f21a9bbc-c582-55cd-35e0-73431160a1b9#ID0EFF).
+
+</TabItem>
+
+</Tabs>
+
 ## How to configure a REST connection
 
 You try out [task testing](./task-testing.md) and Desktop Modeler tells you "Configure a REST connection to a Camunda 8 cluster."
