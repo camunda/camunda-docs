@@ -75,6 +75,26 @@ function getDeployments(value: string): Deployment[] {
 //   return fallbackRaw.trim();
 // }
 
+function getAreas(value: string): string[] {
+  // Supports: "Agentic orchestration" OR "Agentic orchestration+Connectors"
+  // Trims whitespace around each token.
+  const parts = value
+    .split('+')
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  // de-dupe while preserving order
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const p of parts) {
+    if (!seen.has(p)) {
+      seen.add(p);
+      out.push(p);
+    }
+  }
+  return out;
+}
+
 function rowMatchesMasterFilter(row: HTMLElement, masterFilter: MasterFilter): boolean {
   if (masterFilter.kind === 'all') return true;
 
@@ -88,9 +108,9 @@ function rowMatchesMasterFilter(row: HTMLElement, masterFilter: MasterFilter): b
     return rowDeployments.includes(masterFilter.value);
   }
 
-  // area: STRICT match (no aliasing)
-  const rowArea = (row.getAttribute('data-area') ?? '').trim();
-  return rowArea === masterFilter.value;
+  // area: match any area in a "+"-separated list
+  const rowAreas = getAreas(row.getAttribute('data-area') ?? '');
+  return rowAreas.includes(masterFilter.value);
 }
 
 export default function ReleaseAnnouncementsFilter({
@@ -126,8 +146,7 @@ export default function ReleaseAnnouncementsFilter({
       const t = (row.getAttribute('data-type') ?? '').trim() as Exclude<TypeFilter, 'all'>;
       if (t) types.add(t);
 
-      const aRaw = (row.getAttribute('data-area') ?? '').trim();
-      if (aRaw) areas.add(aRaw);
+      getAreas(row.getAttribute('data-area') ?? '').forEach((a) => areas.add(a));
 
       getDeployments(row.getAttribute('data-deployment') ?? '').forEach((d) => deployments.add(d));
     });
@@ -183,7 +202,7 @@ export default function ReleaseAnnouncementsFilter({
     return `area:${masterFilter.value}`;
   }, [masterFilter]);
 
-  // Inject "Area" + "Deployment" badges under each entry heading
+  // Inject "Type" + "Area" + "Deployment" badges under each entry heading
   useEffect(() => {
     const container = listRef.current;
     if (!container) return;
@@ -213,16 +232,20 @@ export default function ReleaseAnnouncementsFilter({
       const wrapper = document.createElement('div');
       wrapper.className = styles.inlineMetaBadges;
 
-      if (areaText) {
-        const areaBadgeWrap = document.createElement('span');
-        areaBadgeWrap.setAttribute(AREA_INLINE_BADGE_ATTR, 'true');
+      const rowAreas = getAreas(row.getAttribute('data-area') ?? '');
 
-        const areaBadge = document.createElement('span');
-        areaBadge.className = ['badge', 'badge--secondary', styles.areaInlineBadge].join(' ');
-        areaBadge.textContent = areaText;
+      if (rowAreas.length > 0) {
+        const areaWrap = document.createElement('span');
+        areaWrap.setAttribute(AREA_INLINE_BADGE_ATTR, 'true');
 
-        areaBadgeWrap.appendChild(areaBadge);
-        wrapper.appendChild(areaBadgeWrap);
+        rowAreas.forEach((areaText) => {
+          const areaBadge = document.createElement('span');
+          areaBadge.className = ['badge', 'badge--secondary', styles.areaInlineBadge].join(' ');
+          areaBadge.textContent = areaText;
+          areaWrap.appendChild(areaBadge);
+        });
+
+        wrapper.appendChild(areaWrap);
       }
 
       if (deployments.length > 0) {

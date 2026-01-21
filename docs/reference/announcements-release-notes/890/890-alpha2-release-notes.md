@@ -24,7 +24,7 @@ New features and important updates included in the 8.9.0-alpha1 release.
 
 <ReleaseAnnouncementsFilter>
 
-<div className="release-announcement-row" data-type="feature" data-area="Agentic orchestration" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="feature" data-area="Agentic orchestration+Connectors" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--feature">Feature</span>
   </div>
@@ -60,9 +60,9 @@ These connectors support multi-agent collaboration scenarios when combined with 
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="feature" data-area="Agentic orchestration" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="update" data-area="Agentic orchestration+Connectors" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--feature">Feature</span>
+    <span className="badge badge--update">Update</span>
   </div>
   <div className="release-announcement-content">
 
@@ -86,59 +86,11 @@ This feature introduces breaking changes in the element templates and the runtim
   </div>
 </div>
 
-</ReleaseAnnouncementsFilter>
-
-### Agentic orchestration
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
-
-#### A2A Client connectors
-
-Agent-to-Agent (A2A) Client connectors allow you to interact with remote agents using the [A2A protocol](https://a2a-protocol.org/v0.3.0/specification/).
-
-<table className="table-callout">
-<tr>
-    <td width="30%">**Connector**</td>
-    <td>**Description**</td>
-</tr>
-<tr>
-    <td>[A2A Client connector](/components/early-access/alpha/a2a-client/a2a-client-connector.md)</td>
-    <td>Interact with A2A agents, by retrieving the remote agent’s Agent Card and sending messages to the agent.</td>
-</tr>
-<tr>
-    <td>[A2A Client Polling connector](/components/early-access/alpha/a2a-client/a2a-client-polling-connector.md)</td>
-    <td>Poll for responses from asynchronous A2A tasks. Typically paired with the A2A Client connector when using the Polling response retrieval method.</td>
-</tr>
-<tr>
-    <td>[A2A Client Webhook connector](/components/early-access/alpha/a2a-client/a2a-client-webhook-connector.md)</td>
-    <td>Receive callbacks from remote A2A agents via HTTP webhooks. Typically paired with the A2A Client connector when using the Notification response retrieval method. </td>
-</tr>
-</table>
-
-These connectors support multi-agent collaboration scenarios when combined with the AI Agent connector, as well as providing the ability to discover remote agents, send messages, and receive responses through multiple mechanisms.
-
-<p class="link-arrow">[A2A Client connectors](/components/early-access/alpha/a2a-client/a2a-client.md)</p>
-
-#### MCP client authentication and transport protocol
-
-<!-- https://github.com/camunda/product-hub/issues/3127, https://github.com/camunda/connectors/issues/5652 -->
-
-The Camunda Model Context Protocol (MCP) client now supports OAuth, API key, and custom header–based authentication.
-
-- System administrators can configure secure, policy-compliant access for Camunda AI agents.
-- AI developers can discover and invoke enterprise MCP tools safely without exposing open endpoints.
-
-MCP client connectors now also support connections using the [streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) transport protocol.
-
-<p class="link-arrow">[MCP Client](/components/early-access/alpha/mcp-client/mcp-client.md)</p>
-
-:::note breaking changes
-This feature introduces breaking changes in the element templates and the runtime configuration of the MCP Client. To learn more, see [announcements](890-announcements.md#agentic-orchestration).
-:::
-
-### Connectors
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+<div className="release-announcement-row" data-type="update" data-area="Connectors" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--update">Update</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Amazon Textract connector improvements
 
@@ -148,6 +100,15 @@ The Amazon Textract connector is improved with input field visibility and pollin
 
 <p class="link-arrow">[Amazon Textract connector](/components/connectors/out-of-the-box-connectors/amazon-textract.md)</p>
 
+  </div>
+</div>
+
+<div className="release-announcement-row" data-type="update" data-area="Connectors" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--update">Update</span>
+  </div>
+  <div className="release-announcement-content">
+
 #### Azure Blob Storage connector supports OAuth 2.0
 
 <!-- https://github.com/camunda/camunda-docs/pull/7280 -->
@@ -156,6 +117,15 @@ The Azure Blob Storage connector now supports OAuth2.0 authentication with Micro
 
 <p class="link-arrow">[Azure Blob Storage connector OAuth 2.0](/components/connectors/out-of-the-box-connectors/azure-blob-storage.md#oauth-20)</p>
 
+  </div>
+</div>
+
+<div className="release-announcement-row" data-type="update" data-area="Connectors" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--update">Update</span>
+  </div>
+  <div className="release-announcement-content">
+
 #### Email connector supports SMTP no authentication mode
 
 <!-- https://github.com/camunda/connectors/issues/5473 -->
@@ -163,6 +133,15 @@ The Azure Blob Storage connector now supports OAuth2.0 authentication with Micro
 The Email connector now supports `noAuth` authentication mode for SMTP. This feature is useful for customers running local mail servers without authentication requirements.
 
 <p class="link-arrow">[Email connector](/components/connectors/out-of-the-box-connectors/email.md)</p>
+
+  </div>
+</div>
+
+<div className="release-announcement-row" data-type="update" data-area="Connectors" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--update">Update</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Runtime performance improvements with virtual threads executor (Self-Managed)
 
@@ -174,9 +153,14 @@ This allows the connector runtime to handle a larger number of concurrent jobs w
 
 <!-- To learn more about optimizing connector performance with virtual threads, see [Connectors performance](/self-managed/components/connectors/performance.md). -->
 
-### Console
+  </div>
+</div>
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
+<div className="release-announcement-row" data-type="feature" data-area="Console" data-deployment="saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--feature">Feature</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Bulk import secrets (SaaS)
 
@@ -189,6 +173,15 @@ You can now add/import secrets in Console by directly uploading or pasting the c
 
 <p class="link-arrow">[Connector secrets](/components/console/manage-clusters/manage-secrets.md)</p>
 
+  </div>
+</div>
+
+<div className="release-announcement-row" data-type="feature" data-area="Console" data-deployment="saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--feature">Feature</span>
+  </div>
+  <div className="release-announcement-content">
+
 #### Cluster description (SaaS)
 
 <!-- https://github.com/camunda/product-hub/issues/3284 -->
@@ -196,6 +189,15 @@ You can now add/import secrets in Console by directly uploading or pasting the c
 You can now add a cluster description when creating a cluster or by editing the cluster settings. This helps you document context, ownership, or add operational notes without changing the cluster name.
 
 <p class="link-arrow">[Create a cluster](/components/console/manage-clusters/create-cluster.md)</p>
+
+  </div>
+</div>
+
+<div className="release-announcement-row" data-type="feature" data-area="Console" data-deployment="saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--feature">Feature</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Import cluster secrets (SaaS)
 
@@ -207,6 +209,15 @@ Export a cluster’s secrets to a key-value file for backup or external workflow
 
 <p class="link-arrow">[Connector secrets](/components/console/manage-clusters/manage-secrets.md)</p>
 
+  </div>
+</div>
+
+<div className="release-announcement-row" data-type="feature" data-area="Console" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--feature">Feature</span>
+  </div>
+  <div className="release-announcement-content">
+
 #### Usage metrics for licence model and tenant (Self-Managed)
 
 <!-- https://github.com/camunda/product-hub/issues/2997 -->
@@ -217,9 +228,14 @@ Self-Managed environment usage metrics now support per-tenant reporting and alig
 This feature is already available in the Camunda 8.8 release for Camunda 8 SaaS.
 :::
 
-### Database and data storage
+  </div>
+</div>
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
+<div className="release-announcement-row" data-type="feature" data-area="Data+Deployment" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--feature">Feature</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Configure external RDBMS in Helm
 
@@ -232,6 +248,15 @@ Configure an external relational database (RDBMS) as secondary storage for the O
 
 <p class="link-arrow">[Configure RDBMS in Helm chart](/self-managed/deployment/helm/configure/database/rdbms.md)</p>
 
+  </div>
+</div>
+
+<div className="release-announcement-row" data-type="feature" data-area="Data" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--feature">Feature</span>
+  </div>
+  <div className="release-announcement-content">
+
 #### Open-source OpenSearch support
 
 <!-- https://github.com/camunda/product-hub/issues/3009 -->
@@ -242,6 +267,15 @@ You can now use the [open-source OpenSearch](https://opensearch.org/) project fo
 - For configuration instructions, see the updated Helm chart values and compatibility matrix.
 
 <p class="link-arrow">[Secondary storage](/self-managed/concepts/secondary-storage/index.md)</p>
+
+  </div>
+</div>
+
+<div className="release-announcement-row" data-type="feature" data-area="Data" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--feature">Feature</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### RDBMS version support policy
 
@@ -255,6 +289,15 @@ A new Camunda 8 Relational Database Management System RDBMS support policy provi
 
 <p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
+  </div>
+</div>
+
+<div className="release-announcement-row" data-type="feature" data-area="Data" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--feature">Feature</span>
+  </div>
+  <div className="release-announcement-content">
+
 #### SQL and Liquibase database scripts
 
 SQL and Liquibase scripts are provided for all Camunda-supported databases.
@@ -265,9 +308,14 @@ SQL and Liquibase scripts are provided for all Camunda-supported databases.
 
 <p class="link-arrow">[SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)</p>
 
-### Modeler
+  </div>
+</div>
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div className="release-announcement-row" data-type="update" data-area="Modeler" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--update">Update</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Element template signal support
 
@@ -280,6 +328,15 @@ Element templates now support reusable [BPMN signals](/components/modeler/bpmn/s
 
 <p class="link-arrow">[Element template `bpmn:Signal` binding](/components/modeler/element-templates/template-properties.md#signal-name-bpmnsignalproperty)</p>
 
+  </div>
+</div>
+
+<div className="release-announcement-row" data-type="update" data-area="Modeler" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--update">Update</span>
+  </div>
+  <div className="release-announcement-content">
+
 #### Web Modeler: Embedded web server changed from Undertow to Tomcat (Self-Managed)
 
 <!-- https://github.com/camunda/product-hub/issues/3191 -->
@@ -287,6 +344,15 @@ Element templates now support reusable [BPMN signals](/components/modeler/bpmn/s
 Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded web server instead of Undertow. Aligning Web Modeler logging with the Orchestration Cluster makes it easier for administrators to configure and maintain Self-Managed deployments.
 
 <p class="link-arrow">[Embedded web server](/self-managed/components/components-upgrade/880-to-890.md#embedded-web-server)</p>
+
+  </div>
+</div>
+
+<div className="release-announcement-row" data-type="feature" data-area="Modeler" data-deployment="saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--feature">Feature</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Web Modeler: IP egress monitoring (SaaS)
 
@@ -304,3 +370,8 @@ A new `/meta/ip-ranges` REST API endpoint allows you to monitor SaaS Web Modeler
 - Although expected changes are published via the API at least 24 hours in advance, in exceptional cases Camunda might have to update these addresses within 24 hours and without prior notice. See [static outbound IP addresses](/components/saas/ip-addresses.md#static-outbound-ip-addresses).
 
 :::
+
+  </div>
+</div>
+
+</ReleaseAnnouncementsFilter>
