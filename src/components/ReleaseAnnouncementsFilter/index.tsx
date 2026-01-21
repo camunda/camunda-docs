@@ -312,12 +312,11 @@ export default function ReleaseAnnouncementsFilter({
       // keep this attribute for backwards compat / existing CSS; only meaningful for type filters now
       data-announcement-filter={masterFilter.kind === 'type' ? masterFilter.value : 'all'}
     >
+      <p className={styles.label} id="announcementFilterLabel">
+         Filter by type, deployment, or area
+        </p>
       <div className={styles.controls}>
-        
-
-        <div className={styles.badgeGroup} role="group" aria-labelledby="announcementFilterLabel"><span className={styles.label} id="announcementFilterLabel">
-          Filter:
-        </span>
+        <div className={styles.badgeGroup} role="group" aria-labelledby="announcementFilterLabel">
           {masterOptions.map((o) => {
             const isActive = o.key === selectedKey;
 
@@ -343,11 +342,7 @@ export default function ReleaseAnnouncementsFilter({
           })}
         </div>
       </div>
-
-      <div className={styles.columnHeader} aria-hidden="true">
-        <div className={styles.columnHeaderCell}>Type</div>
-        <div className={styles.columnHeaderCell}>Description</div>
-      </div>
+      <p><hr className={styles.hr}/></p>
 
       <div ref={listRef} className={styles.list}>
         {children}

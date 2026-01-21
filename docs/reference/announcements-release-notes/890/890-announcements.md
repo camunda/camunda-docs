@@ -1,6 +1,6 @@
 ---
 id: 890-announcements
-title: "8.9 Release announcements"
+title: "8.9 release announcements"
 sidebar_label: Release announcements
 description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.9 release."
 toc_max_heading_level: 3

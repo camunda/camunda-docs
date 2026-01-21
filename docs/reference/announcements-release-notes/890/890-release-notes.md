@@ -1,6 +1,6 @@
 ---
 id: 890-release-notes
-title: "8.9 Release notes"
+title: "8.9 release notes"
 sidebar_label: Release notes
 description: "Release notes for 8.9, including alphas"
 keywords: ["8.9 release notes", "release notes for 8.9", "release notes"]
