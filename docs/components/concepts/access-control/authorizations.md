@@ -98,17 +98,19 @@ The following table lists all resources that support authorization in the Orches
 | System                           | `*`                                    | All system operations                | `READ`, `READ_USAGE_METRIC`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Tenant                           | `*`, `tenantA`                         | All tenants / Tenant ID              | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | User                             | `*`, `felix.mueller`                   | All users / Username                 | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
-| User Task                        | `*`, `1234567890`                      | All user tasks / User task key       | `READ`, `UPDATE`, `COMPLETE`, `CLAIM`                                                                                                                                                                                                                                                                                                                                                                                                      |
+| User Task                        | `*`                                    | All user tasks                       | `READ`, `UPDATE`, `COMPLETE`, `CLAIM`                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 ### User task authorizations and precedence
 
 User task access in the Orchestration Cluster can be controlled at two levels:
 
-- Process-level permissions on the Process Definition resource, for example:
+- Process-level permissions on the `Process Definition` resource, for example:
   - `READ_USER_TASK`: Read all user tasks of that process definition.
   - `UPDATE_USER_TASK`: Update, claim, and complete all user tasks of that process definition.
+  - Where configured, `CLAIM_USER_TASK` and `COMPLETE_USER_TASK`.
+
 - Task-level permissions on the `User Task` resource type (`USER_TASK` in the API):
-  - `READ`, `UPDATE`, `COMPLETE`, `CLAIM` on individual user tasks.
+  - `READ`, `UPDATE`, `COMPLETE`, `CLAIM` on user tasks, typically scoped using property-based access control on task attributes.
 
 These two levels are evaluated with clear precedence:
 
@@ -123,9 +125,9 @@ This allows you to:
 
 ### Property-based access control for user tasks
 
-In addition to authorizations on specific user task keys, the Orchestration Cluster supports property-based access control for the `User Task` resource.
+Task-level `USER_TASK` permissions are usually applied using property-based access control rather than per-task configuration.
 
-Instead of granting permissions per task key, you can grant permissions based on the following user task properties:
+Instead of granting permissions for specific task IDs, you can grant permissions based on the following user task properties:
 
 - `assignee`
 - `candidateUsers`
@@ -136,7 +138,7 @@ At runtime, when a user or client tries to read or modify a user task, the engin
 1. Collects the principal’s username and group memberships.
 2. Determines which of the above properties match the user task (for example, the user is the assignee, appears in `candidateUsers`, or belongs to one of the `candidateGroups`).
 3. Checks for `User Task` authorizations that:
-   - Use a PROPERTY matcher with a matching property name, and
+   - Use a `PROPERTY` matcher with a matching property name, and
    - Include the required permission (for example, `READ`, `CLAIM`, or `COMPLETE`).
 
 If at least one matching authorization is found, the user is authorized for that operation on the task.

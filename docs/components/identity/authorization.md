@@ -81,12 +81,15 @@ You cannot combine multiple task properties in a single authorization. To cover 
 
 Both process-level and task-level permissions can control access to user tasks:
 
-- Process-level permissions on `PROCESS_DEFINITION`, such as `READ_USER_TASK`, `UPDATE_USER_TASK`, and (where configured) `CLAIM_USER_TASK` and `COMPLETE_USER_TASK`
-- Task-level permissions on `USER_TASK`, such as `READ`, `UPDATE`, `CLAIM`, and `COMPLETE`, can be scoped to individual tasks or to task properties (assignee, candidate users, candidate groups).
+- Process-level permissions on the `Process Definition` resource, such as `READ_USER_TASK`, `UPDATE_USER_TASK`, and (where configured) `CLAIM_USER_TASK` and `COMPLETE_USER_TASK`.
+
+- Task-level permissions on `USER_TASK`, such as `READ`, `UPDATE`, `CLAIM`, and `COMPLETE`, can be scoped either to:
+  - individual tasks (for example, by user task key), or
+  - task properties such as assignee, candidate users, and candidate groups using property-based access control.
 
 When both exist, process-level permissions take precedence:
 
-- If a user already has the required `PROCESS_DEFINITION` permission for an operation (for example, `UPDATE_USER_TASK`), the system does not evaluate `USER_TASK` permissions for that operation.
+- If a user already has the required `Process Definition` permission for an operation (for example, `UPDATE_USER_TASK`), the system does not evaluate `USER_TASK` permissions for that operation.
 - `USER_TASK` permissions are evaluated when no effective process-level permission exists for that user.
 
 This precedence applies consistently across the Orchestration Cluster REST API and Tasklist.

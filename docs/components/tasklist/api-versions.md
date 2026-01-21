@@ -114,5 +114,5 @@ When switching between V1 and V2 mode, review and update authorizations to match
 
 In Tasklist V2, task-level visibility and actions are controlled by [authorization-based access control](../concepts/access-control/authorizations.md):
 
-- Process-level permissions (for example, `PROCESS_DEFINITION.READ_USER_TASK`, `PROCESS_DEFINITION.UPDATE_USER_TASK`) allow broad access to all user tasks of a process.
+- Process-level permissions such as `READ_USER_TASK` and `UPDATE_USER_TASK` on the `Process Definition` resource allow broad access to all user tasks of a process.
 - Task-level `USER_TASK` permissions, combined with property-based access control on the assignee, candidate users, and candidate groups, restrict visibility and actions to the tasks a user is responsible for.

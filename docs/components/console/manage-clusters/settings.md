@@ -53,7 +53,7 @@ to enable Tasklist V1 mode.
 In Tasklist V2, task visibility is controlled by authorization-based access control rather than user task access
 restrictions. This includes:
 
-- Process-level permissions that allow managers to see and act on all user tasks of a process.
+- Process-level permissions that allow managers to see and act on user tasks of a process (for example, `READ_USER_TASK`, `UPDATE_USER_TASK`, and, where configured, `CLAIM_USER_TASK` and `COMPLETE_USER_TASK`).
 - Task-level permissions that provide fine-grained control over individual user tasks.
 - Property-based access control on task attributes such as `assignee`, `candidateUsers`, and `candidateGroups`.
 
