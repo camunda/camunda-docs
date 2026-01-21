@@ -365,11 +365,8 @@ export default function ReleaseAnnouncementsFilter({
       // keep this attribute for backwards compat / existing CSS; only meaningful for type filters now
       data-announcement-filter={masterFilter.kind === 'type' ? masterFilter.value : 'all'}
     >
-      <p className={styles.label} id="announcementFilterLabel">
-         Filter by type, deployment, or area
-        </p>
       <div className={styles.controls}>
-        <div className={styles.badgeGroup} role="group" aria-labelledby="announcementFilterLabel">
+        <div className={styles.badgeGroup} role="group" aria-labelledby="announcementFilterLabel"><span className={styles.label}>Filter:</span>
           {masterOptions.map((o) => {
             const isActive = o.key === selectedKey;
 
