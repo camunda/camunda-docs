@@ -15,56 +15,52 @@ This guide is intended for repository maintainers, blueprint authors, and soluti
 
 You can prepare resources for import into Web Modeler in two main ways:
 
-1. **Individual resources**: Each resource (BPMN, DMN, form, template, README, etc.) is accessible via its own public URL and can be imported one by one.
-2. **Packaged resources**: Bundle all relevant files, such as an entire process application, into a single `.zip` file. This allows importing the full package from a single URL.
+1. [**Individual resources**](#prepare-individual-resources): Each resource (BPMN, DMN, form, template, README, etc.) is accessible via its own public URL and can be imported one by one.
+2. [**Packaged resources**](#prepare-packaged-resources): Bundle all relevant files, such as an entire process application, into a single `.zip` file. This allows importing the full package from a single URL.
 
-## Resource guidelines
+## Guidelines for importing
 
-If the imported resources include a BPMN file, then the resources will be imported together as a new [process application](../../../concepts/process-applications.md).
+### Resource requirements
 
-Each file should:
+Each resource must:
 
-- Be hosted at a **publicly accessible URL** that **does not redirect to another page**:
-  - No authentication, VPN, or non‑public network dependency.
-  - See below for instructions on getting each URL from GitHub.
-- Be within Web Modeler’s **per‑file size** limit (3 MB)
+- Be hosted at a **publicly accessible URL** that does not redirect to another page.
+- Not require authentication, VPN, or non‑public network dependencies.
+- Be within Web Modeler’s per‑file size limit of **three MB**.
+- Include at most one README file.
 
-Also:
+### Template naming
 
-- Only include at most one README file
-- Element template ID's must be unique within the set of imported files.
-- BPMN process ID's must be unique within the set of imported files.
+- Use stable, distinct ID values for templates so BPMN files can consistently reference them and to avoid conflicts with other templates users might download.
+- Increment the version number whenever you introduce changes that could affect existing processes.
+- Element template IDs must be unique within the set of imported files.
+- BPMN process IDs must be unique within the set of imported files.
 
-### Template IDs and versions
+:::important
 
-- Use **stable, distinct `id` values** for templates so BPMN files can consistently reference them, and the ID doesn't conflict with other templates the user might download.
-- Bump the `version` number whenever you introduce changes that could affect existing processes.
+- If the imported resources include at least **one BPMN**, Web Modeler treats them as a **process application** and groups them accordingly.
+- If no BPMN file is present, the resources are imported as **independent files** into the chosen project or folder.
+  :::
 
 ## Prepare individual resources
 
-### When to use this approach
-
-The one‑by‑one approach is a good fit when:
+Use this approach when:
 
 - You have a **small set of resources**.
 - You don't expect to add or remove files often.
 
-### Main process selection
-
-Web Modeler will treat the first BPMN file in the source list as the **main process**:
+Web Modeler will treat the first BPMN file in the source list as the **main process**.
 
 ## Prepare packaged resources
 
-### When to use this approach
+Use this approach when:
 
-Use a `.zip` when:
-
-- Your solution includes **many (up to 100) resources** (for example, multiple BPMN models, forms, DMNs, element templates, documentation).
-- You want to minimize the chance of missing dependencies during import.
+- Your solution includes **many resources (up to 100)**, such as multiple BPMN models, forms, DMNs, element templates, and documentation.
+- You want to minimize the risk of missing dependencies during import.
 
 ### File and archive limits
 
-When preparing the `.zip`:
+When preparing the packaged resources into a `.zip` file:
 
 - Keep the **total archive size** at or below **10 MB**.
 - Include at most **100** files that Web Modeler can support.
@@ -72,9 +68,10 @@ When preparing the `.zip`:
 
 ### Main process selection
 
-- To control which BPMN Web Modeler treats as the **main process**:
-  - Name the BPMN file you want to be the main process to match the **`.zip` filename** (for example, `support-agent.zip` and `support-agent.bpmn`), or
-  - Be aware that if there is no BPMN matching the archive name, the BPMN file whose filename is **first alphabetically** will be chosen as the main process.
+To control which BPMN file Web Modeler treats as the **main process**:
+
+- Name the BPMN file you want to be the main process to match the **`.zip` filename**. For example, `support-agent.zip` and `support-agent.bpmn`.
+- If no BPMN file matches the archive name, Web Modeler will choose the BPMN file whose filename comes first alphabetically as the main process.
 
 ### Content and security rules
 
