@@ -282,9 +282,15 @@ The following resources and configuration options are important to keep in mind 
 
 The following resources and configuration options are important to keep in mind regarding reliability:
 
+#### Storage class requirements
+
+Camunda's stateful components (Orchestration Cluster brokers, Elasticsearch/OpenSearch) require **block storage** with stable, low-latency I/O characteristics. Network file systems such as NFS are not supported for primary storage and can cause data corruption, I/O stalls, and unresponsive brokers.
+
+When selecting a StorageClass, ensure it provisions block storage volumes (for example, iSCSI, NVMe/TCP, or cloud provider block storage). Consult your storage provider's documentation for compatible CSI drivers and StorageClass configurations.
+
 #### Persistent volume reclaim policy
 
-Ensure your Kubernetes StorageClass uses a `Retain` reclaim policy for production deployments. If set to `Delete` (the default in many distributions), Zeebe broker data will be permanently lost if a PVC is deleted.
+Ensure your StorageClass uses a `Retain` reclaim policy for production deployments. If set to `Delete` (the default in many distributions), Orchestration Cluster broker data will be permanently lost if a PVC is deleted.
 
 Verify your configuration:
 
@@ -292,6 +298,17 @@ Verify your configuration:
 kubectl get storageclass
 # RECLAIMPOLICY should show "Retain", not "Delete"
 ```
+
+On OpenShift, verify your configuration using the `oc` CLI:
+
+```bash
+oc get storageclass
+# RECLAIMPOLICY should show "Retain", not "Delete"
+```
+
+:::note OpenShift
+OpenShift supports various CSI drivers and storage backends. Ensure your chosen StorageClass uses block storage (not NFS-based storage such as `trident-ontap-nas`) and has a `Retain` reclaim policy. When using NetApp Trident, prefer SAN-based StorageClasses (for example, `trident-ontap-san`) over NAS-based ones for Camunda's stateful workloads.
+:::
 
 For more details, see [troubleshooting](/self-managed/operational-guides/troubleshooting.md#zeebe-data-loss-after-pvc-deletion) and the [Kubernetes documentation on reclaim policies](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming).
 
