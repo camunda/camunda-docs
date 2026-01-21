@@ -60,6 +60,32 @@ These connectors support multi-agent collaboration scenarios when combined with 
 </div>
 </div>
 
+<div className="release-announcement-row" data-type="feature" data-area="Agentic orchestration" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--feature">Feature</span>
+  </div>
+  <div className="release-announcement-content">
+
+#### MCP client authentication and transport protocol
+
+<!-- https://github.com/camunda/product-hub/issues/3127, https://github.com/camunda/connectors/issues/5652 -->
+
+The Camunda Model Context Protocol (MCP) client now supports OAuth, API key, and custom header–based authentication.
+
+- System administrators can configure secure, policy-compliant access for Camunda AI agents.
+- AI developers can discover and invoke enterprise MCP tools safely without exposing open endpoints.
+
+MCP client connectors now also support connections using the [streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) transport protocol.
+
+<p class="link-arrow">[MCP Client](/components/early-access/alpha/mcp-client/mcp-client.md)</p>
+
+:::note breaking changes
+This feature introduces breaking changes in the element templates and the runtime configuration of the MCP Client. To learn more, see [announcements](890-announcements.md#agentic-orchestration).
+:::
+
+  </div>
+</div>
+
 </ReleaseAnnouncementsFilter>
 
 ### Agentic orchestration

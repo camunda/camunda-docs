@@ -1,19 +1,11 @@
 ---
 id: overview
-title: "Release information"
+title: "8.9 release information"
 sidebar_label: "8.9 release information"
 description: "Important announcements and release notes for upcoming and past Camunda 8 releases that customers should be aware of."
 ---
 
-Release notes, announcements, and supporting documentation for the Camunda 8.9 release.
-
-## Release schedule
-
-| Release type | Version      | Release date     | Scheduled end of maintenance |
-| :----------- | :----------- | :--------------- | :--------------------------- |
-| Minor        | 8.9.0        | 14 April 2026    | 13 October 2028              |
-| Alpha        | 8.9.0-alpha5 | 10 March 2026    | -                            |
-| Alpha        | 8.9.0-alpha4 | 10 February 2026 | -                            |
+Release notes, announcements, and supporting information for the Camunda 8.9 release.
 
 ## What's new in Camunda 8.9
 
@@ -51,6 +43,66 @@ Technical changelogs for Camunda 8 are available on GitHub:
 ## Release policy
 
 Review the [release policy](/reference/announcements-release-notes/release-policy.md) to learn more about Camunda releases, including alpha features and alpha releases.
+
+## Release schedule and overview
+
+Key dates, release notes, announcements, and supporting documentation for the Camunda 8.9 release.
+
+<table class="table-callout">
+  <thead>
+    <tr>
+      <th align="left">Release type</th>
+      <th align="left">Version</th>
+      <th align="left">Release date</th>
+      <th align="left">Release notes</th>
+      <th align="left">Scheduled end of maintenance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Minor</td>
+      <td>8.9.0</td>
+      <td>14 April 2026</td>
+      <td>-</td>
+      <td>13 October 2028</td>
+    </tr>
+    <tr>
+      <td>Alpha</td>
+      <td>8.9.0-alpha5</td>
+      <td>10 March 2026</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Alpha</td>
+      <td>8.9.0-alpha4</td>
+      <td>10 February 2026</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Alpha</td>
+      <td>8.9.0-alpha3</td>
+      <td>13 January 2026</td>
+      <td><a href="../890/890-alpha2-release-notes.md">Alpha 3 release notes</a></td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Alpha</td>
+      <td>8.9.0-alpha2</td>
+      <td>9 December 2026</td>
+      <td><a href="../890/890-alpha2-release-notes/">Alpha 2 release notes</a></td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Alpha</td>
+      <td>8.9.0-alpha1</td>
+      <td>11 November 2026</td>
+      <td><a href="./890/890-alpha1-release-notes.md">Alpha 1 release notes</a></td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Release history and information
 
