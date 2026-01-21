@@ -30,7 +30,7 @@ New features and important updates included in the 8.9.0-alpha1 release.
   </div>
   <div className="release-announcement-content">
 
-#### RDBMS secondary storage (H2, PostgreSQL, Oracle, MariaDB)
+### RDBMS secondary storage (H2, PostgreSQL, Oracle, MariaDB)
 
 <!-- https://github.com/camunda/product-hub/issues/2439 -->
 
@@ -58,7 +58,7 @@ This alpha release introduces support for H2 in Camunda 8 Run only. Operate and 
   </div>
   <div className="release-announcement-content">
 
-#### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
+### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
 
 <!-- https://github.com/camunda/product-hub/issues/3189 -->
 
@@ -75,7 +75,7 @@ This enhancement ensures consistency across environments, simplifies setup for a
   </div>
   <div className="release-announcement-content">
 
-#### JDBC driver management for RDBMS integrations
+### JDBC driver management for RDBMS integrations
 
 <!-- https://github.com/camunda/product-hub/issues/2742 -->
 
@@ -96,7 +96,7 @@ This change simplifies compliance and setup for RDBMS environments, ensuring con
   </div>
   <div className="release-announcement-content">
 
-#### MySQL and Microsoft SQL Server secondary storage
+### MySQL and Microsoft SQL Server secondary storage
 
 <!-- https://github.com/camunda/product-hub/issues/3043 -->
 

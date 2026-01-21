@@ -30,7 +30,7 @@ New features and important updates included in the 8.9.0-alpha1 release.
   </div>
   <div className="release-announcement-content">
 
-#### A2A Client connectors
+### A2A Client connectors
 
 Agent-to-Agent (A2A) Client connectors allow you to interact with remote agents using the [A2A protocol](https://a2a-protocol.org/v0.3.0/specification/).
 
@@ -66,7 +66,7 @@ These connectors support multi-agent collaboration scenarios when combined with 
   </div>
   <div className="release-announcement-content">
 
-#### MCP client authentication and transport protocol
+### MCP client authentication and transport protocol
 
 <!-- https://github.com/camunda/product-hub/issues/3127, https://github.com/camunda/connectors/issues/5652 -->
 
@@ -92,7 +92,7 @@ This feature introduces breaking changes in the element templates and the runtim
   </div>
   <div className="release-announcement-content">
 
-#### Amazon Textract connector improvements
+### Amazon Textract connector improvements
 
 <!-- https://github.com/camunda/connectors/pull/5490 -->
 
@@ -109,7 +109,7 @@ The Amazon Textract connector is improved with input field visibility and pollin
   </div>
   <div className="release-announcement-content">
 
-#### Azure Blob Storage connector supports OAuth 2.0
+### Azure Blob Storage connector supports OAuth 2.0
 
 <!-- https://github.com/camunda/camunda-docs/pull/7280 -->
 
@@ -126,7 +126,7 @@ The Azure Blob Storage connector now supports OAuth2.0 authentication with Micro
   </div>
   <div className="release-announcement-content">
 
-#### Email connector supports SMTP no authentication mode
+### Email connector supports SMTP no authentication mode
 
 <!-- https://github.com/camunda/connectors/issues/5473 -->
 
@@ -143,7 +143,7 @@ The Email connector now supports `noAuth` authentication mode for SMTP. This fea
   </div>
   <div className="release-announcement-content">
 
-#### Runtime performance improvements with virtual threads executor (Self-Managed)
+### Runtime performance improvements with virtual threads executor (Self-Managed)
 
 <!-- https://github.com/camunda/product-hub/issues/3050 -->
 
@@ -162,7 +162,7 @@ This allows the connector runtime to handle a larger number of concurrent jobs w
   </div>
   <div className="release-announcement-content">
 
-#### Bulk import secrets (SaaS)
+### Bulk import secrets (SaaS)
 
 <!-- https://github.com/camunda/product-hub/issues/3283 -->
 
@@ -182,7 +182,7 @@ You can now add/import secrets in Console by directly uploading or pasting the c
   </div>
   <div className="release-announcement-content">
 
-#### Cluster description (SaaS)
+### Cluster description (SaaS)
 
 <!-- https://github.com/camunda/product-hub/issues/3284 -->
 
@@ -199,7 +199,7 @@ You can now add a cluster description when creating a cluster or by editing the 
   </div>
   <div className="release-announcement-content">
 
-#### Import cluster secrets (SaaS)
+### Import cluster secrets (SaaS)
 
 <!-- https://github.com/camunda/product-hub/issues/3307 -->
 
@@ -218,7 +218,7 @@ Export a cluster’s secrets to a key-value file for backup or external workflow
   </div>
   <div className="release-announcement-content">
 
-#### Usage metrics for licence model and tenant (Self-Managed)
+### Usage metrics for licence model and tenant (Self-Managed)
 
 <!-- https://github.com/camunda/product-hub/issues/2997 -->
 
@@ -237,7 +237,7 @@ This feature is already available in the Camunda 8.8 release for Camunda 8 SaaS.
   </div>
   <div className="release-announcement-content">
 
-#### Configure external RDBMS in Helm
+### Configure external RDBMS in Helm
 
 Configure an external relational database (RDBMS) as secondary storage for the Orchestration Cluster when deploying with Helm.
 
@@ -257,7 +257,7 @@ Configure an external relational database (RDBMS) as secondary storage for the O
   </div>
   <div className="release-announcement-content">
 
-#### Open-source OpenSearch support
+### Open-source OpenSearch support
 
 <!-- https://github.com/camunda/product-hub/issues/3009 -->
 
@@ -277,7 +277,7 @@ You can now use the [open-source OpenSearch](https://opensearch.org/) project fo
   </div>
   <div className="release-announcement-content">
 
-#### RDBMS version support policy
+### RDBMS version support policy
 
 <!-- https://github.com/camunda/product-hub/issues/2654 -->
 
@@ -298,7 +298,7 @@ A new Camunda 8 Relational Database Management System RDBMS support policy provi
   </div>
   <div className="release-announcement-content">
 
-#### SQL and Liquibase database scripts
+### SQL and Liquibase database scripts
 
 SQL and Liquibase scripts are provided for all Camunda-supported databases.
 
@@ -317,7 +317,7 @@ SQL and Liquibase scripts are provided for all Camunda-supported databases.
   </div>
   <div className="release-announcement-content">
 
-#### Element template signal support
+### Element template signal support
 
 <!-- https://github.com/camunda/camunda-modeler/issues/5381 -->
 
@@ -337,7 +337,7 @@ Element templates now support reusable [BPMN signals](/components/modeler/bpmn/s
   </div>
   <div className="release-announcement-content">
 
-#### Web Modeler: Embedded web server changed from Undertow to Tomcat (Self-Managed)
+### Web Modeler: Embedded web server changed from Undertow to Tomcat (Self-Managed)
 
 <!-- https://github.com/camunda/product-hub/issues/3191 -->
 
@@ -354,7 +354,7 @@ Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded 
   </div>
   <div className="release-announcement-content">
 
-#### Web Modeler: IP egress monitoring (SaaS)
+### Web Modeler: IP egress monitoring (SaaS)
 
 <!-- https://github.com/camunda/product-hub/issues/3131 -->
 

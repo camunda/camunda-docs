@@ -17,7 +17,7 @@ type MasterOption =
   | { key: `area:${string}`; label: string; kind: 'area'; value: string };
 
 const TYPE_OPTIONS: Array<{ value: Exclude<TypeFilter, 'all'>; label: string }> = [
-  { value: 'breaking-change', label: 'Breaking changes' },
+  { value: 'breaking-change', label: 'Breaking change' },
   { value: 'deprecated', label: 'Deprecated' },
   { value: 'change', label: 'Change' },
   { value: 'feature', label: 'Feature' }, // moved before Update
@@ -27,6 +27,8 @@ const TYPE_OPTIONS: Array<{ value: Exclude<TypeFilter, 'all'>; label: string }> 
 const EMPTY_MESSAGE_ATTR = 'data-empty-filter-message';
 const AREA_INLINE_BADGE_ATTR = 'data-area-inline-badge';
 const DEPLOYMENT_INLINE_BADGES_ATTR = 'data-deployment-inline-badges';
+const TYPE_INLINE_BADGE_ATTR = 'data-type-inline-badge';
+const INLINE_META_BADGES_ATTR = 'data-inline-meta-badges';
 const ROW_FILTER_HIDDEN_ATTR = 'data-row-filter-hidden';
 
 function getHeadingLevel(el: Element): number | null {
@@ -111,6 +113,12 @@ function rowMatchesMasterFilter(row: HTMLElement, masterFilter: MasterFilter): b
   // area: match any area in a "+"-separated list
   const rowAreas = getAreas(row.getAttribute('data-area') ?? '');
   return rowAreas.includes(masterFilter.value);
+}
+
+function getTypeLabel(value: string): string | null {
+  const v = value.trim() as Exclude<TypeFilter, 'all'>;
+  const opt = TYPE_OPTIONS.find((o) => o.value === v);
+  return opt?.label ?? null;
 }
 
 export default function ReleaseAnnouncementsFilter({
@@ -207,47 +215,69 @@ export default function ReleaseAnnouncementsFilter({
     const container = listRef.current;
     if (!container) return;
 
+    // Remove any previously injected badge wrappers
+    container.querySelectorAll(`[${INLINE_META_BADGES_ATTR}="true"]`).forEach((n) => n.remove());
+    container.querySelectorAll(`[${TYPE_INLINE_BADGE_ATTR}="true"]`).forEach((n) => n.remove());
     container.querySelectorAll(`[${AREA_INLINE_BADGE_ATTR}="true"]`).forEach((n) => n.remove());
     container.querySelectorAll(`[${DEPLOYMENT_INLINE_BADGES_ATTR}="true"]`).forEach((n) => n.remove());
 
     const rows = Array.from(container.querySelectorAll<HTMLElement>('.release-announcement-row'));
     rows.forEach((row) => {
+      // Old two-column "badge" div is no longer used
+      row.querySelector<HTMLElement>('.release-announcement-badge')?.remove();
+
       const contentEl = row.querySelector<HTMLElement>('.release-announcement-content');
       if (!contentEl) return;
-
-      const areaText = (row.getAttribute('data-area') ?? '').trim();
-      const deploymentValue = (row.getAttribute('data-deployment') ?? '').trim();
-      const deployments = getDeployments(deploymentValue);
-
-      if (!areaText && deployments.length === 0) return;
 
       const heading =
         contentEl.querySelector<HTMLElement>('h4') ??
         contentEl.querySelector<HTMLElement>('h3') ??
-        contentEl.querySelector<HTMLElement>('h5') ??
-        contentEl.querySelector<HTMLElement>('h2');
+        contentEl.querySelector<HTMLElement>('h2') ??
+        contentEl.querySelector<HTMLElement>('h5');
 
       if (!heading) return;
 
+      const typeValue = (row.getAttribute('data-type') ?? '').trim();
+      const typeLabel = typeValue ? getTypeLabel(typeValue) : null;
+
+      const areas = getAreas(row.getAttribute('data-area') ?? '');
+      const deployments = getDeployments(row.getAttribute('data-deployment') ?? '');
+
+      if (!typeLabel && areas.length === 0 && deployments.length === 0) return;
+
       const wrapper = document.createElement('div');
       wrapper.className = styles.inlineMetaBadges;
+      wrapper.setAttribute(INLINE_META_BADGES_ATTR, 'true');
 
-      const rowAreas = getAreas(row.getAttribute('data-area') ?? '');
+      // Type badge (styled like area + deployment)
+      if (typeLabel) {
+        const typeWrap = document.createElement('span');
+        typeWrap.setAttribute(TYPE_INLINE_BADGE_ATTR, 'true');
 
-      if (rowAreas.length > 0) {
+        const b = document.createElement('span');
+        b.className = ['badge', 'badge--secondary', styles.typeInlineBadge].join(' ');
+        b.textContent = typeLabel;
+
+        typeWrap.appendChild(b);
+        wrapper.appendChild(typeWrap);
+      }
+
+      // Area badges (supports "A+B" => 2 badges)
+      if (areas.length > 0) {
         const areaWrap = document.createElement('span');
         areaWrap.setAttribute(AREA_INLINE_BADGE_ATTR, 'true');
 
-        rowAreas.forEach((areaText) => {
-          const areaBadge = document.createElement('span');
-          areaBadge.className = ['badge', 'badge--secondary', styles.areaInlineBadge].join(' ');
-          areaBadge.textContent = areaText;
-          areaWrap.appendChild(areaBadge);
+        areas.forEach((areaText) => {
+          const b = document.createElement('span');
+          b.className = ['badge', 'badge--secondary', styles.areaInlineBadge].join(' ');
+          b.textContent = areaText;
+          areaWrap.appendChild(b);
         });
 
         wrapper.appendChild(areaWrap);
       }
 
+      // Deployment badges (supports "sm+saas" => 2 badges)
       if (deployments.length > 0) {
         const depWrap = document.createElement('span');
         depWrap.setAttribute(DEPLOYMENT_INLINE_BADGES_ATTR, 'true');

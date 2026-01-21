@@ -94,91 +94,32 @@
   display: none;
 }
 
-/* 2-column layout: Type | Change */
+/* 1-column layout (no Type|Change grid) */
 .wrapper :global(.release-announcement-row:not([hidden])) {
-  display: grid;
-  grid-template-columns: 10rem minmax(0, 1fr);
-  gap: 0.25rem 0.75rem;
-  align-items: start;
+  display: block;
   margin-bottom: 1rem;
   border-bottom: 1px solid var(--ifm-table-border-color);
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  padding: 1rem 0;
 }
 
-/* Ensure hidden rows are actually hidden (in case any other styles set display) */
+/* Ensure hidden rows are actually hidden */
 .wrapper :global(.release-announcement-row[hidden]) {
   display: none;
 }
 
+/* Old 2-column header row not used */
 .columnHeader {
-  display: grid;
-  grid-template-columns: 10rem minmax(0, 1fr);
-  gap: 0.375rem 0.75rem;
-  align-items: end;
-  padding: 0.55rem 0.6rem;
-  margin: 0 0 0.25rem;
-  border-bottom: 1px solid var(--ifm-table-border-color);
-  background-color: var(
-    --ifm-table-head-background,
-    var(--ifm-color-emphasis-100, rgb(245, 246, 247))
-  );
+  display: none;
 }
 
-.columnHeaderCell {
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--ifm-table-head-color);
-}
-
-@media (max-width: 996px) {
-  .columnHeader {
-    display: none;
-  }
-}
-
-/* Add 20px space to the top of each column div within a row */
+/* Old per-cell padding-top from the grid layout is no longer wanted */
 .wrapper :global(.release-announcement-row > div) {
-  padding-top: 20px;
+  padding-top: 0;
 }
 
-/* Mobile: stack (remove separators/padding) */
-@media (max-width: 996px) {
-  .wrapper :global(.release-announcement-row) {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-}
-
-/* Mobile: tighten stacked rows (remove the extra space under badge + area) */
-@media (max-width: 996px) {
-  .wrapper :global(.release-announcement-row) {
-    gap: 0; /* removes vertical spacing between badge/area/content rows */
-  }
-
-  /* you added 20px padding-top to each cell; remove it on mobile to keep badge/area tight */
-  .wrapper :global(.release-announcement-row > div) {
-    padding-top: 0;
-  }
-
-  /* defensive: ensure no extra bottom spacing from these blocks */
-  .wrapper :global(.release-announcement-badge),
-  .wrapper :global(.release-announcement-area) {
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
-}
-
-/* Ensure rows have the same left/right inset as the header row */
-.wrapper :global(.release-announcement-row) {
-  /* keep your existing grid rules here if already present */
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-}
-
-.areaInlineBadgeWrapper {
-  margin: 0.35rem 0 0.75rem;
+/* Defensive: if any legacy badge column still exists in MDX, hide it */
+.wrapper :global(.release-announcement-badge) {
+  display: none;
 }
 
 .inlineMetaBadges {
@@ -189,11 +130,60 @@
   align-items: center;
 }
 
-.areaInlineBadge {
+.typeInlineBadge,
+.areaInlineBadge,
+.deploymentInlineBadge {
   font-weight: 600;
 }
 
+.wrapper
+  :global(.release-announcement-row[data-type="feature"])
+  .typeInlineBadge {
+  background: #a7f0ba;
+  border-color: #a7f0ba;
+  color: #14652c;
+}
+
+.wrapper
+  :global(.release-announcement-row[data-type="update"])
+  .typeInlineBadge {
+  background: #007e89;
+  border-color: #007e89;
+  color: var(--ifm-color-white);
+}
+
+.wrapper
+  :global(.release-announcement-row[data-type="breaking-change"])
+  .typeInlineBadge {
+  background: #ffd7d9;
+  border-color: #ffd7d9;
+  color: #a62341;
+}
+
+.wrapper
+  :global(.release-announcement-row[data-type="deprecated"])
+  .typeInlineBadge {
+  background: #ffc600;
+  border-color: #ffc600;
+  color: var(--ifm-color-black);
+}
+
+/* Only the inline deployment badges (SaaS + Self-Managed) */
 .deploymentInlineBadge {
-  font-weight: 600;
-  margin-right: 0; /* space between SaaS + Self-Managed when both exist */
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-font-color-base);
+}
+
+/* Only the inline area badges */
+.areaInlineBadge {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-font-color-base);
+}
+
+/* Remove top padding (and top margin) for h3 headings inside this filter component */
+.wrapper :global(.release-announcement-content h3) {
+  padding-top: 0;
+  margin-top: 0;
 }
