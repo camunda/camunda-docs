@@ -13,10 +13,10 @@ This guide is intended for repository maintainers, blueprint authors, and soluti
 
 ## Supported methods
 
-You can prepare resources for import into Web Modeler in two main ways:
+Prepare resources for import into Web Modeler in two main ways:
 
-1. [**Individual resources**](#prepare-individual-resources): Each resource (BPMN, DMN, form, template, README, etc.) is accessible via its own public URL and can be imported one by one.
-2. [**Packaged resources**](#prepare-packaged-resources): Bundle all relevant files, such as an entire process application, into a single `.zip` file. This allows importing the full package from a single URL.
+1. [**Individual resources**](#prepare-individual-resources): Each resource, such us a BPMN or DMN file, a template, or a README, is accessible via its own public URL and can be imported one by one.
+2. [**Packaged resources**](#prepare-packaged-resources): Bundle all resources, such as an entire process application, into a single `.zip` file. This allows importing the full package from a single URL.
 
 ## Guidelines for importing
 
@@ -31,102 +31,111 @@ Each resource must:
 
 ### Template naming
 
-- Use stable, distinct ID values for templates so BPMN files can consistently reference them and to avoid conflicts with other templates users might download.
+- Use stable, distinct template IDs to ensure BPMN files can reference them consistently and to avoid conflicts with other templates users might download.
 - Increment the version number whenever you introduce changes that could affect existing processes.
 - Element template IDs must be unique within the set of imported files.
 - BPMN process IDs must be unique within the set of imported files.
 
 :::important
 
-- If the imported resources include at least **one BPMN**, Web Modeler treats them as a **process application** and groups them accordingly.
+- If the imported resources include at least one BPMN, Web Modeler treats them as a **process application** and groups them accordingly.
 - If no BPMN file is present, the resources are imported as **independent files** into the chosen project or folder.
   :::
 
-## Prepare individual resources
+## Prepare import resources
+
+### Prepare individual resources
 
 Use this approach when:
 
-- You have a **small set of resources**.
+- You have a small set of resources.
 - You don't expect to add or remove files often.
 
-Web Modeler will treat the first BPMN file in the source list as the **main process**.
+:::info
+Web Modeler will treat the first BPMN file in the source list as the main process.
+:::
 
-## Prepare packaged resources
+### Prepare packaged resources
 
 Use this approach when:
 
-- Your solution includes **many resources (up to 100)**, such as multiple BPMN models, forms, DMNs, element templates, and documentation.
+- Your solution includes many resources (up to 100), such as multiple BPMN and DMN models, forms, element templates, and documentation.
 - You want to minimize the risk of missing dependencies during import.
 
-### File and archive limits
+#### File and archive limits
 
 When preparing the packaged resources into a `.zip` file:
 
-- Keep the **total archive size** at or below **10 MB**.
-- Include at most **100** files that Web Modeler can support.
+- Keep the total archive size at or below **10 MB**.
+- Include **at most 100 files** that Web Modeler can support.
 - Note that the folder structure **will not** be imported into Web Modeler.
 
-### Main process selection
+#### Main process selection
 
-To control which BPMN file Web Modeler treats as the **main process**:
+To control which BPMN file Web Modeler treats as the main process:
 
-- Name the BPMN file you want to be the main process to match the **`.zip` filename**. For example, `support-agent.zip` and `support-agent.bpmn`.
+- Name the BPMN file you want to be the main process to match the `.zip` filename. For example, `support-agent.bpmn` and `support-agent.zip`.
 - If no BPMN file matches the archive name, Web Modeler will choose the BPMN file whose filename comes first alphabetically as the main process.
 
-### Content and security rules
+#### Content and security rules
 
-To minimize issues when importing:
+To minimize issues during import:
 
-- Do not include files with `..` or leading slashes in their name
-- Exclude executables, scripts, and any other file that Web Modeler does not support.
-- Ensure each resource file is within Web Modeler’s **per‑file size** limit.
-- Favor clear, stable naming for each file
+- Do not include files with `..` or leading slashes in their name.
+- Exclude executables, scripts, and any other files not supported by Web Modeler.
+- Ensure each resource file is within Web Modeler’s per‑file size limit.
+- Use clear, stable file names.
 
-### Building the Web Modeler import URL
+## Create an import URL
 
-1. Get the public URL to the file. For GitHub-hosted files, see below for instructions.
+1. Get the public URL to the resource.
+
+For GitHub-hosted resources, see first [Create an import URL from GitHub](#create-an-import-url-from-github).
+
 2. Form the Web Modeler URL like this:
-   ```
-   <Web Modeler host>/import/resources?source=<raw file URL>
-   ```
-3. To add more files, add a comma after the URL from step 4 and paste the next raw file URL.
+
+```
+<Web Modeler host>/import/resources?source=<raw file URL>
+```
+
+3. To add more resources, add a comma after the last URL and paste the next URL:
 
 ```
 <Web Modeler host>/import/resources?source=<raw file URL 1>,<raw file URL 2>
 ```
 
-4. (Optional) You can add a title. This is used when the files are considered to be a process application.
+4. (Optional) Add a title. Use this when the resources are treated as a process application:
 
 ```
 <Web Modeler host>/import/resources?title=<process application title>&source=<raw file URL 1>,<raw file URL 2>
 ```
 
-## Create importable URLs from GitHub
+### Create an import URL from GitHub
 
-You can host your files on any public-facing website that does tno
+You can host your resources on any public-facing website that allows direct access. See [Resource requirements](#resource-requirements) for more details.
 
-### Single file URLs
+### Individual resource URL
 
-To create an importable URL for a single file:
+To create an importable URL for a single resource:
 
-1. Open the file in your public GitHub repository.
+1. Open the resource in your public GitHub repository.
 2. Click **Raw**.
 3. Copy the URL from your browser’s address bar.
 4. Use this URL in Web Modeler’s import dialog.
 
-### `.zip` file URLs
+### Packaged resources URL
 
-If you store a `.zip` in a public GitHub repository, you can create a URL compatible with Web Modeler:
+To create an importable URL for packaged resources into a `.zip` file:
 
 1. Open the `.zip` file in your publicly accessible GitHub repository.
 2. In the file view, right‑click the **Raw** button in the top right.
 3. Click **Copy link**.
 4. In a text editor:
    - Replace `github.com` with `raw.githubusercontent.com`.
-   - Remove the single `/raw` part that appears once in the path after the repository name.
+   - Remove the `/raw` segment that appears once in the path after the repository name.
    - Leave everything else unchanged.
 
-For example, you can automate this transformation with a small shell snippet:
+You can automate this transformation as follows:
 
 ```bash
 GITHUB_RAW_ZIP_URL=your_original_url
