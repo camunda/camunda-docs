@@ -312,3 +312,54 @@
     display: inline-flex;
   }
 }
+
+/* Dark mode alternatives for TYPE badges only */
+[data-theme="dark"]
+  .wrapper
+  :global(.release-announcement-row[data-type="feature"])
+  .typeInlineBadge {
+  background: none;
+  border-color: #1f8f3a;
+  color: #48c75c;
+}
+
+[data-theme="dark"]
+  .wrapper
+  :global(.release-announcement-row[data-type="update"])
+  .typeInlineBadge {
+  background: none; /* brighter teal for dark backgrounds */
+  border-color: #9d66ea;
+  color: #f99dff;
+}
+
+[data-theme="dark"]
+  .wrapper
+  :global(.release-announcement-row[data-type="breaking-change"])
+  .typeInlineBadge {
+  background: none;
+  border-color: #a2191f;
+  color: #ef9397;
+}
+
+/* Deprecated + Removed share the same styling */
+[data-theme="dark"]
+  .wrapper
+  :global(.release-announcement-row[data-type="deprecated"])
+  .typeInlineBadge,
+[data-theme="dark"]
+  .wrapper
+  :global(.release-announcement-row[data-type="removed"])
+  .typeInlineBadge {
+  background: none;
+  border-color: #ffd24d;
+  color: #d0ba72;
+}
+
+[data-theme="dark"]
+  .wrapper
+  :global(.release-announcement-row[data-type="announcement"])
+  .typeInlineBadge {
+  background: none; /* brighter teal for dark backgrounds */
+  border-color: #0e45b3;
+  color: #749ff2;
+}
