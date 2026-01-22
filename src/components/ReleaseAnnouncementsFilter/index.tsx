@@ -1,7 +1,15 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './styles.module.css';
 
-type TypeFilter = 'all' | 'breaking-change' | 'feature' | 'update' | 'deprecated' | 'change';
+type TypeFilter =
+  | 'all'
+  | 'breaking-change'
+  | 'feature'
+  | 'update'
+  | 'deprecated'
+  | 'removed'
+  | 'change'
+  | 'announcement';
 type Deployment = 'sm' | 'saas';
 
 type MasterFilter =
@@ -19,9 +27,11 @@ type MasterOption =
 const TYPE_OPTIONS: Array<{ value: Exclude<TypeFilter, 'all'>; label: string }> = [
   { value: 'breaking-change', label: 'Breaking changes' },
   { value: 'deprecated', label: 'Deprecated' },
+  { value: 'removed', label: 'Removed' },
   { value: 'change', label: 'Change' },
   { value: 'feature', label: 'New feature' },
-  { value: 'update', label: 'Updates' },
+  { value: 'update', label: 'Update' },
+  { value: 'announcement', label: 'Announcement' },
 ];
 
 const EMPTY_MESSAGE_ATTR = 'data-empty-filter-message';

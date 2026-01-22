@@ -1,7 +1,7 @@
 ---
 id: 890-alpha2-release-notes
-title: "8.9.0-alpha2 release notes"
-sidebar_label: 8.9.0-alpha2
+title: "8.9 alpha 2 release notes"
+sidebar_label: 8.9 alpha 2
 description: "Release notes for the 8.9. alpha 2 release"
 keywords:
   [
@@ -18,9 +18,9 @@ import ReleaseAnnouncementsFilter from '@site/src/components/ReleaseAnnouncement
 
 New features and important updates included in the 8.9.0-alpha2 release.
 
-| Release date     | Changelogs                                                                                                                                                         |
-| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 09 December 2025 | [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha2) / [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha2) |
+| Version      | Release date     | Changelogs                                                                                                                                                         |
+| :----------- | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 8.9.0-alpha2 | 09 December 2025 | [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha2) / [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha2) |
 
 <ReleaseAnnouncementsFilter>
 
