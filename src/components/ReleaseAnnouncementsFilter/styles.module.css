@@ -254,3 +254,19 @@
   outline: 2px solid var(--ifm-color-primary);
   outline-offset: 2px;
 }
+
+/* Desktop: Type badge lives in the left column; hide the inline (mobile) Type badge */
+.inlineMetaBadges .typeInlineBadge {
+  display: none;
+}
+
+/* Small screens: stack layout + move Type badge inline next to the other badges */
+@media (max-width: 996px) {
+  .wrapper :global(.release-announcement-type) {
+    display: none;
+  }
+
+  .inlineMetaBadges .typeInlineBadge {
+    display: inline-flex;
+  }
+}

@@ -235,8 +235,8 @@ export default function ReleaseAnnouncementsFilter({
   };
 
   // Inject badges:
-  // - Type badge goes into a left column (one badge)
-  // - Area + Deployment badges stay inline under the entry heading (right column)
+  // - Type badge goes into a left column (one badge) on desktop
+  // - On small screens, Type badge is shown inline next to area/deployment badges
   useEffect(() => {
     const container = listRef.current;
     if (!container) return;
@@ -249,11 +249,26 @@ export default function ReleaseAnnouncementsFilter({
 
     const rows = Array.from(container.querySelectorAll<HTMLElement>('.release-announcement-row'));
 
+    const createTypeBadge = (typeLabel: string) => {
+      const wrap = document.createElement('span');
+      wrap.setAttribute(TYPE_INLINE_BADGE_ATTR, 'true');
+
+      const b = document.createElement('span');
+      b.className = ['badge', 'badge--secondary', styles.typeInlineBadge].join(' ');
+      b.textContent = typeLabel;
+
+      wrap.appendChild(b);
+      return wrap;
+    };
+
     rows.forEach((row) => {
       const contentEl = row.querySelector<HTMLElement>('.release-announcement-content');
       if (!contentEl) return;
 
-      // Ensure a dedicated left column exists for the type badge
+      const typeValue = (row.getAttribute('data-type') ?? '').trim();
+      const typeLabel = typeValue ? getTypeLabel(typeValue) : null;
+
+      // Ensure a dedicated left column exists for the type badge (desktop)
       let typeCol = row.querySelector<HTMLElement>('.release-announcement-type');
 
       // If legacy badge column exists, reuse it as the type column
@@ -272,38 +287,31 @@ export default function ReleaseAnnouncementsFilter({
 
       // Populate the type column with the Type badge (and nothing else)
       typeCol.innerHTML = '';
-      const typeValue = (row.getAttribute('data-type') ?? '').trim();
-      const typeLabel = typeValue ? getTypeLabel(typeValue) : null;
-
       if (typeLabel) {
-        const typeWrap = document.createElement('span');
-        typeWrap.setAttribute(TYPE_INLINE_BADGE_ATTR, 'true');
-
-        const b = document.createElement('span');
-        b.className = ['badge', 'badge--secondary', styles.typeInlineBadge].join(' ');
-        b.textContent = typeLabel;
-
-        typeWrap.appendChild(b);
-        typeCol.appendChild(typeWrap);
+        typeCol.appendChild(createTypeBadge(typeLabel));
       }
 
-      // Inject Area + Deployment badges under the entry heading (right column)
+      // Build inline badges under the entry heading (right column): Type (mobile) + Area(s) + Deployment(s)
       const heading =
         contentEl.querySelector<HTMLElement>('h4') ??
         contentEl.querySelector<HTMLElement>('h3') ??
         contentEl.querySelector<HTMLElement>('h2') ??
         contentEl.querySelector<HTMLElement>('h5');
 
-      if (!heading) return;
-
       const areas = getAreas(row.getAttribute('data-area') ?? '');
       const deployments = getDeployments(row.getAttribute('data-deployment') ?? '');
 
-      if (areas.length === 0 && deployments.length === 0) return;
+      // Create wrapper if we have anything to show inline (Type OR areas OR deployments)
+      if (!typeLabel && areas.length === 0 && deployments.length === 0) return;
 
       const wrapper = document.createElement('div');
       wrapper.className = styles.inlineMetaBadges;
       wrapper.setAttribute(INLINE_META_BADGES_ATTR, 'true');
+
+      // Type badge inline too (for mobile; CSS will hide it on desktop)
+      if (typeLabel) {
+        wrapper.appendChild(createTypeBadge(typeLabel));
+      }
 
       if (areas.length > 0) {
         const areaWrap = document.createElement('span');
@@ -333,7 +341,12 @@ export default function ReleaseAnnouncementsFilter({
         wrapper.appendChild(depWrap);
       }
 
-      heading.insertAdjacentElement('afterend', wrapper);
+      if (heading) {
+        heading.insertAdjacentElement('afterend', wrapper);
+      } else {
+        // Fallback: if no heading found, still show badges at top of content
+        contentEl.insertAdjacentElement('afterbegin', wrapper);
+      }
     });
   }, [children]);
 
