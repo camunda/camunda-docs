@@ -296,12 +296,12 @@ export default function ReleaseAnnouncementsFilter({
     });
   }, [children]);
 
-  // Unified filtering (Type OR Deployment OR Area; plus All) + hide empty sections
+  // Unified filtering (Type OR Deployment OR Area; plus All) + heading visibility rules
   useEffect(() => {
     const container = listRef.current;
     if (!container) return;
 
-    // Reset previously hidden sections
+    // Reset previously hidden sections/headings
     const previouslyHidden = container.querySelectorAll<HTMLElement>('[data-filter-hidden="true"]');
     previouslyHidden.forEach((el) => {
       el.hidden = false;
@@ -329,25 +329,36 @@ export default function ReleaseAnnouncementsFilter({
       }
     });
 
-    // Hide headings/sections with no visible rows
-    const elements = Array.from(container.querySelectorAll<HTMLElement>(':scope > *'));
+    const directChildren = Array.from(container.querySelectorAll<HTMLElement>(':scope > *'));
 
-    for (let i = 0; i < elements.length; i++) {
-      const headingEl = elements[i];
+    // If any filter other than "All" is applied, hide ALL H2 headings (but keep their content)
+    if (masterFilter.kind !== 'all') {
+      directChildren.forEach((el) => {
+        if (el.tagName === 'H2') {
+          el.hidden = true;
+          el.setAttribute('data-filter-hidden', 'true');
+        }
+      });
+      return;
+    }
+
+    // "All" selected: hide headings/sections with no visible rows
+    for (let i = 0; i < directChildren.length; i++) {
+      const headingEl = directChildren[i];
       const level = getHeadingLevel(headingEl);
       if (!level) continue;
       if (headingEl.hidden) continue;
 
-      let end = elements.length;
-      for (let j = i + 1; j < elements.length; j++) {
-        const nextLevel = getHeadingLevel(elements[j]);
+      let end = directChildren.length;
+      for (let j = i + 1; j < directChildren.length; j++) {
+        const nextLevel = getHeadingLevel(directChildren[j]);
         if (nextLevel !== null && nextLevel <= level) {
           end = j;
           break;
         }
       }
 
-      const section = elements.slice(i, end);
+      const section = directChildren.slice(i, end);
       const hasVisible = sectionHasVisibleRows(section);
 
       if (!hasVisible) {

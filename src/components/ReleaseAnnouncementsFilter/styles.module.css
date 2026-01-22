@@ -97,7 +97,7 @@
 .wrapper :global(.release-announcement-row:not([hidden])) {
   display: block;
   margin-bottom: 1rem;
-  border-bottom: 1px solid var(--ifm-table-border-color);
+  border-bottom: 0;
   padding: 1rem 0;
 }
 
@@ -185,4 +185,9 @@
 .wrapper :global(.release-announcement-content h3) {
   padding-top: 0;
   margin-top: 0;
+}
+
+/* Add top padding to the first H2 inside the filter content */
+.list :global(> h2:first-of-type) {
+  padding-top: 3rem;
 }
