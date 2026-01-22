@@ -31,7 +31,8 @@ const TYPE_OPTIONS: Array<{ value: Exclude<TypeFilter, 'all'>; label: string }> 
   { value: 'change', label: 'Change' },
   { value: 'feature', label: 'New feature' },
   { value: 'update', label: 'Update' },
-  { value: 'announcement', label: 'Announcement' },
+  // Dropdown label (plural)
+  { value: 'announcement', label: 'Announcements' },
 ];
 
 const EMPTY_MESSAGE_ATTR = 'data-empty-filter-message';
@@ -127,6 +128,12 @@ function rowMatchesMasterFilter(row: HTMLElement, masterFilter: MasterFilter): b
 
 function getTypeLabel(value: string): string | null {
   const v = value.trim() as Exclude<TypeFilter, 'all'>;
+
+  // Badge labels (singular) for content
+  if (v === 'announcement') return 'Announcement';
+  if (v === 'breaking-change') return 'Breaking change';
+
+  // Dropdown labels come from TYPE_OPTIONS (e.g. "Breaking changes")
   const opt = TYPE_OPTIONS.find((o) => o.value === v);
   return opt?.label ?? null;
 }

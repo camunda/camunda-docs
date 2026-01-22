@@ -40,19 +40,15 @@ Technical changelogs for Camunda 8 are available on GitHub:
 | Camunda Helm chart | [github.com/camunda/camunda-platform-helm/releases](https://github.com/camunda/camunda-platform-helm/releases) |
 | Desktop Modeler    | [github.com/camunda/camunda-modeler/releases](https://github.com/camunda/camunda-modeler/releases)             |
 
-## Release policy
-
-Review the [release policy](/reference/announcements-release-notes/release-policy.md) to learn more about Camunda releases, including alpha features and alpha releases.
-
-## Release schedule and overview
+## Release schedule for 8.9
 
 Key dates, release notes, announcements, and supporting documentation for the Camunda 8.9 release.
 
 <table class="table-callout">
   <thead>
     <tr>
-      <th align="left">Release type</th>
       <th align="left">Version</th>
+      <th align="left">Release type</th>
       <th align="left">Release date</th>
       <th align="left">Release notes</th>
       <th align="left">Scheduled end of maintenance</th>
@@ -60,43 +56,43 @@ Key dates, release notes, announcements, and supporting documentation for the Ca
   </thead>
   <tbody>
     <tr>
-      <td>Minor</td>
       <td>8.9.0</td>
+      <td>Minor</td>
       <td>14 April 2026</td>
       <td>-</td>
       <td>13 October 2028</td>
     </tr>
     <tr>
-      <td>Alpha</td>
       <td>8.9.0-alpha5</td>
+      <td>Alpha</td>
       <td>10 March 2026</td>
       <td>-</td>
       <td>-</td>
     </tr>
     <tr>
-      <td>Alpha</td>
       <td>8.9.0-alpha4</td>
+      <td>Alpha</td>
       <td>10 February 2026</td>
       <td>-</td>
       <td>-</td>
     </tr>
     <tr>
-      <td>Alpha</td>
       <td>8.9.0-alpha3</td>
+      <td>Alpha</td>
       <td>13 January 2026</td>
       <td><a href="../890/890-alpha2-release-notes.md">Alpha 3 release notes</a></td>
       <td>-</td>
     </tr>
     <tr>
-      <td>Alpha</td>
       <td>8.9.0-alpha2</td>
+      <td>Alpha</td>
       <td>9 December 2026</td>
       <td><a href="../890/890-alpha2-release-notes/">Alpha 2 release notes</a></td>
       <td>-</td>
     </tr>
     <tr>
-      <td>Alpha</td>
       <td>8.9.0-alpha1</td>
+      <td>Alpha</td>
       <td>11 November 2026</td>
       <td><a href="./890/890-alpha1-release-notes.md">Alpha 1 release notes</a></td>
       <td>-</td>
@@ -104,7 +100,11 @@ Key dates, release notes, announcements, and supporting documentation for the Ca
   </tbody>
 </table>
 
-## Release history and information
+:::info
+Review the [release policy](/reference/announcements-release-notes/release-policy.md) to learn more about Camunda releases, including alpha features and alpha releases.
+:::
+
+## Previous releases
 
 Release dates and information for previous Camunda 8 releases.
 

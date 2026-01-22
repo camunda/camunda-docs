@@ -11,7 +11,7 @@ These release notes identify the main new features and updates in the 8.9 minor 
 
 | Version | Release date  | Scheduled end of maintenance |
 | :------ | :------------ | :--------------------------- |
-| 8.9     | 14 April 2026 | 13 October 2028              |
+| 8.9.0   | 14 April 2026 | 13 October 2028              |
 
 :::info
 The 8.9 release notes will be available on this page as part of the minor release in April 2026.
@@ -21,7 +21,7 @@ The 8.9 release notes will be available on this page as part of the minor releas
 
 Release notes are available for the following alpha releases:
 
-- [8.9 alpha 3 release notes](./890-alpha1-release-notes.md)
+- [8.9 alpha 3 release notes](./890-alpha3-release-notes.md)
 - [8.9 alpha 2 release notes](./890-alpha2-release-notes.md)
 - [8.9 alpha 1 release notes](./890-alpha1-release-notes.md)
 
