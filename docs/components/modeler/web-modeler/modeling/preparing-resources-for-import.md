@@ -1,7 +1,7 @@
 ---
 id: prepare-resources
 title: Prepare resources for import into Web Modeler
-sidebar_label: Prepare import resources
+sidebar_label: Prepare resources
 description: "Learn how to import resources into Web Modeler, how automatic handling works for template conflicts and ignored templates, and how to troubleshoot common import errors."
 ---
 
@@ -20,14 +20,12 @@ Prepare resources for import into Web Modeler in two main ways:
 
 ## Guidelines for importing
 
-### Resource requirements
+### Hosting requirements
 
-Each resource must:
+Each individual resource (or `.zip` file package) must:
 
 - Be hosted at a **publicly accessible URL** that does not redirect to another page.
 - Not require authentication, VPN, or non‑public network dependencies.
-- Be within Web Modeler’s per‑file size limit of **three MB**.
-- Include at most one README file.
 
 ### Template naming
 
@@ -51,6 +49,8 @@ Use this approach when:
 - You have a small set of resources.
 - You don't expect to add or remove files often.
 
+Keep each file within Web Modeler’s per‑resource size limit of **three MB**.
+
 :::info
 Web Modeler will treat the first BPMN file in the source list as the main process.
 :::
@@ -66,8 +66,10 @@ Use this approach when:
 
 When preparing the packaged resources into a `.zip` file:
 
-- Keep the total archive size at or below **10 MB**.
+- Keep the total `.zip` file size at or below **10 MB**.
 - Include **at most 100 files** that Web Modeler can support.
+- Keep each packaged file within Web Modeler’s per‑resource size limit of **three MB**.
+- Include at most one README file.
 - Note that the folder structure **will not** be imported into Web Modeler.
 
 #### Main process selection
@@ -83,14 +85,14 @@ To minimize issues during import:
 
 - Do not include files with `..` or leading slashes in their name.
 - Exclude executables, scripts, and any other files not supported by Web Modeler.
-- Ensure each resource file is within Web Modeler’s per‑file size limit.
+- Ensure each resource file is within Web Modeler’s per‑resource size limit.
 - Use clear, stable file names.
 
 ## Create an import URL
 
 1. Get the public URL to the resource.
 
-For GitHub-hosted resources, see first [Create an import URL from GitHub](#create-an-import-url-from-github).
+For GitHub-hosted resources, see first [Get public URLs from GitHub](#get-public-urls-from-github).
 
 2. Form the Web Modeler URL like this:
 
@@ -104,35 +106,39 @@ For GitHub-hosted resources, see first [Create an import URL from GitHub](#creat
 <Web Modeler host>/import/resources?source=<raw file URL 1>,<raw file URL 2>
 ```
 
-4. (Optional) Add a title. Use this when the resources are treated as a process application:
+4. (Optional) Add a title. When the resources are treated as a process application, this will be the process application's name.
 
 ```
-<Web Modeler host>/import/resources?title=<process application title>&source=<raw file URL 1>,<raw file URL 2>
+<Web Modeler host>/import/resources?title=<process application name>&source=<raw file URL 1>,<raw file URL 2>
 ```
 
-### Create an import URL from GitHub
+### Get public URLs from GitHub
 
-You can host your resources on any public-facing website that allows direct access. See [Resource requirements](#resource-requirements) for more details.
+You can host your resources on any public-facing website that allows direct access. See [Hosting requirements](#hosting-requirements) for more details.
 
 ### Individual resource URL
 
-To create an importable URL for a single resource:
+To get a public URL for a single resource:
 
 1. Open the resource in your public GitHub repository.
 2. Click **Raw**.
 3. Copy the URL from your browser’s address bar.
-4. Use this URL in Web Modeler’s import dialog.
+
+:::important
+
+The URL from step 3 is a direct link that Web Modeler can access without redirects.
+:::
 
 ### Packaged resources URL
 
-To create an importable URL for packaged resources into a `.zip` file:
+To get a public URL for packaged resources into a `.zip` file:
 
 1. Open the `.zip` file in your publicly accessible GitHub repository.
 2. In the file view, right‑click the **Raw** button in the top right.
 3. Click **Copy link**.
 4. In a text editor:
    - Replace `github.com` with `raw.githubusercontent.com`.
-   - Remove the `/raw` segment that appears once in the path after the repository name.
+   - Remove the `/raw` segment that appears once in the URL after the repository name.
    - Leave everything else unchanged.
 
 You can automate this transformation as follows:
