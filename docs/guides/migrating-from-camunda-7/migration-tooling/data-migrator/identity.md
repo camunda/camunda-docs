@@ -216,7 +216,7 @@ In practice, this means that, if a deployment contains process definitions, deci
 | `READ`        | Yes                 | `READ`                                                                             |
 | `CREATE`      | Yes                 | `CREATE`                                                                           |
 | `DELETE`      | Yes                 | `DELETE_RESOURCE`, `DELETE_FORM`, `DELETE_PROCESS`, `DELETE_DRD`                   |
-| `ALL`         | Yes                 | `CREATE`. `READ`, `DELETE_DRD`, `DELETE_FORM`, `DELETE_PROCESS`, `DELETE_RESOURCE` |
+| `ALL`         | Yes                 | `CREATE`, `READ`, `DELETE_DRD`, `DELETE_FORM`, `DELETE_PROCESS`, `DELETE_RESOURCE` |
 
 ### `ALL` permissions compatibility
 
