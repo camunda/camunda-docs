@@ -72,12 +72,12 @@ identity:
           application-id: application-id
 ```
 
-The member property must match its type:
+Each member type has a corresponding property you use to set the member identifier:
 
 | Member type   | Property         |
 | ------------- | ---------------- |
-| `GROUP`       | `group-name`     |
 | `USER`        | `username`       |
+| `GROUP`       | `group-name`     |
 | `APPLICATION` | `application-id` |
 
 In some contexts, like the Management Identity UI, the "Application ID" is referred to as the "Client ID".
@@ -96,12 +96,12 @@ IDENTITY_TENANTS_0_MEMBERS_2_TYPE="APPLICATION"
 IDENTITY_TENANTS_0_MEMBERS_2_APPLICATIONID="application-id"
 ```
 
-The member property must match its type:
+Each member type has a corresponding property you use to set the member identifier:
 
 | Member type   | Property                                     |
 | ------------- | -------------------------------------------- |
-| `GROUP`       | `IDENTITY_TENANTS_0_MEMBERS_0_GROUPNAME`     |
 | `USER`        | `IDENTITY_TENANTS_0_MEMBERS_0_USERNAME`      |
+| `GROUP`       | `IDENTITY_TENANTS_0_MEMBERS_0_GROUPNAME`     |
 | `APPLICATION` | `IDENTITY_TENANTS_0_MEMBERS_0_APPLICATIONID` |
 
 In some contexts, like the Management Identity UI, the "Application ID" is referred to as the "Client ID".
