@@ -548,6 +548,18 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Job metrics",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-job-statistics",
+          label: "Global job statistics",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "License",
       items: [
         {
