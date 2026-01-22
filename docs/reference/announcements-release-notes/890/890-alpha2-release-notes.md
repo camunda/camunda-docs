@@ -16,7 +16,7 @@ hide_table_of_contents: true
 
 import ReleaseAnnouncementsFilter from '@site/src/components/ReleaseAnnouncementsFilter';
 
-New features and important updates included in the 8.9.0-alpha2 release.
+New features and important updates included in the 8.9 alpha 2 release.
 
 | Version      | Release date     | Changelogs                                                                                                                                                         |
 | :----------- | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |

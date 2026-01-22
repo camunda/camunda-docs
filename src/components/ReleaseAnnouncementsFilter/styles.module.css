@@ -153,49 +153,49 @@
 .wrapper
   :global(.release-announcement-row[data-type="feature"])
   .typeInlineBadge {
-  background: #a7f0ba;
-  border-color: #a7f0ba;
-  color: #0c6027;
+  background: #dcfce7;
+  border-color: #61976d;
+  color: #16a34a;
 }
 
 .wrapper
   :global(.release-announcement-row[data-type="update"])
   .typeInlineBadge {
-  background: #d0e2ff;
-  border-color: #d0e2ff;
+  background: #e2ebfb;
+  border-color: #bbd0f0;
   color: #0043ce;
 }
 
 .wrapper
   :global(.release-announcement-row[data-type="announcement"])
   .typeInlineBadge {
-  background: #d0e2ff;
-  border-color: #d0e2ff;
+  background: #e2ebfb;
+  border-color: #bbd0f0;
   color: #0043ce;
 }
 
 .wrapper
   :global(.release-announcement-row[data-type="breaking-change"])
   .typeInlineBadge {
-  background: #ffd7d9;
-  border-color: #ffd7d9;
-  color: #91181b;
+  background: #fef4f3;
+  border-color: #facccd;
+  color: #b82a36;
 }
 
 .wrapper
   :global(.release-announcement-row[data-type="deprecated"])
   .typeInlineBadge {
-  background: #e9daff;
-  border-color: #e9daff;
-  color: #6a29c4;
+  background: #fef3c7;
+  border-color: #fde68a;
+  color: #b36000;
 }
 
 .wrapper
   :global(.release-announcement-row[data-type="removed"])
   .typeInlineBadge {
-  background: #e9daff;
-  border-color: #e9daff;
-  color: #6a29c4;
+  background: #fef3c7;
+  border-color: #fde68a;
+  color: #b36000;
 }
 
 /* Only the inline deployment badges (SaaS + Self-Managed) */

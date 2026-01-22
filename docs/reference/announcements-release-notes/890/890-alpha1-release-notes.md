@@ -16,11 +16,11 @@ hide_table_of_contents: true
 
 import ReleaseAnnouncementsFilter from '@site/src/components/ReleaseAnnouncementsFilter';
 
-New features and important updates included in the 8.9.0-alpha1 release.
+New features and important updates included in the 8.9 alpha 1 release.
 
-| Release date     | Changelogs                                                                                                                                                         |
-| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 13 November 2025 | [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha1) / [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha1) |
+| Version      | Release date     | Changelogs                                                                                                                                                         |
+| :----------- | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 8.9.0-alpha1 | 13 November 2025 | [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha1) / [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha1) |
 
 <ReleaseAnnouncementsFilter>
 
