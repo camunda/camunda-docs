@@ -17,11 +17,11 @@ type MasterOption =
   | { key: `area:${string}`; label: string; kind: 'area'; value: string };
 
 const TYPE_OPTIONS: Array<{ value: Exclude<TypeFilter, 'all'>; label: string }> = [
-  { value: 'breaking-change', label: 'Breaking change' },
+  { value: 'breaking-change', label: 'Breaking changes' },
   { value: 'deprecated', label: 'Deprecated' },
   { value: 'change', label: 'Change' },
-  { value: 'feature', label: 'Feature' }, // moved before Update
-  { value: 'update', label: 'Update' },
+  { value: 'feature', label: 'New feature' },
+  { value: 'update', label: 'Updates' },
 ];
 
 const EMPTY_MESSAGE_ATTR = 'data-empty-filter-message';
@@ -210,7 +210,33 @@ export default function ReleaseAnnouncementsFilter({
     return `area:${masterFilter.value}`;
   }, [masterFilter]);
 
-  // Inject "Type" + "Area" + "Deployment" badges under each entry heading
+  const setFilterFromKey = (key: string) => {
+    if (key === 'all') {
+      setMasterFilter({ kind: 'all' });
+      return;
+    }
+
+    if (key.startsWith('type:')) {
+      setMasterFilter({ kind: 'type', value: key.slice('type:'.length) as Exclude<TypeFilter, 'all'> });
+      return;
+    }
+
+    if (key.startsWith('deployment:')) {
+      setMasterFilter({ kind: 'deployment', value: key.slice('deployment:'.length) as Deployment });
+      return;
+    }
+
+    if (key.startsWith('area:')) {
+      setMasterFilter({ kind: 'area', value: key.slice('area:'.length) });
+      return;
+    }
+
+    setMasterFilter({ kind: 'all' });
+  };
+
+  // Inject badges:
+  // - Type badge goes into a left column (one badge)
+  // - Area + Deployment badges stay inline under the entry heading (right column)
   useEffect(() => {
     const container = listRef.current;
     if (!container) return;
@@ -222,34 +248,33 @@ export default function ReleaseAnnouncementsFilter({
     container.querySelectorAll(`[${DEPLOYMENT_INLINE_BADGES_ATTR}="true"]`).forEach((n) => n.remove());
 
     const rows = Array.from(container.querySelectorAll<HTMLElement>('.release-announcement-row'));
-    rows.forEach((row) => {
-      // Old two-column "badge" div is no longer used
-      row.querySelector<HTMLElement>('.release-announcement-badge')?.remove();
 
+    rows.forEach((row) => {
       const contentEl = row.querySelector<HTMLElement>('.release-announcement-content');
       if (!contentEl) return;
 
-      const heading =
-        contentEl.querySelector<HTMLElement>('h4') ??
-        contentEl.querySelector<HTMLElement>('h3') ??
-        contentEl.querySelector<HTMLElement>('h2') ??
-        contentEl.querySelector<HTMLElement>('h5');
+      // Ensure a dedicated left column exists for the type badge
+      let typeCol = row.querySelector<HTMLElement>('.release-announcement-type');
 
-      if (!heading) return;
+      // If legacy badge column exists, reuse it as the type column
+      const legacyBadgeCol = row.querySelector<HTMLElement>('.release-announcement-badge');
+      if (!typeCol && legacyBadgeCol) {
+        typeCol = legacyBadgeCol;
+        typeCol.classList.add('release-announcement-type');
+        typeCol.classList.remove('release-announcement-badge');
+      }
 
+      if (!typeCol) {
+        typeCol = document.createElement('div');
+        typeCol.className = 'release-announcement-type';
+        row.insertBefore(typeCol, contentEl);
+      }
+
+      // Populate the type column with the Type badge (and nothing else)
+      typeCol.innerHTML = '';
       const typeValue = (row.getAttribute('data-type') ?? '').trim();
       const typeLabel = typeValue ? getTypeLabel(typeValue) : null;
 
-      const areas = getAreas(row.getAttribute('data-area') ?? '');
-      const deployments = getDeployments(row.getAttribute('data-deployment') ?? '');
-
-      if (!typeLabel && areas.length === 0 && deployments.length === 0) return;
-
-      const wrapper = document.createElement('div');
-      wrapper.className = styles.inlineMetaBadges;
-      wrapper.setAttribute(INLINE_META_BADGES_ATTR, 'true');
-
-      // Type badge (styled like area + deployment)
       if (typeLabel) {
         const typeWrap = document.createElement('span');
         typeWrap.setAttribute(TYPE_INLINE_BADGE_ATTR, 'true');
@@ -259,10 +284,27 @@ export default function ReleaseAnnouncementsFilter({
         b.textContent = typeLabel;
 
         typeWrap.appendChild(b);
-        wrapper.appendChild(typeWrap);
+        typeCol.appendChild(typeWrap);
       }
 
-      // Area badges (supports "A+B" => 2 badges)
+      // Inject Area + Deployment badges under the entry heading (right column)
+      const heading =
+        contentEl.querySelector<HTMLElement>('h4') ??
+        contentEl.querySelector<HTMLElement>('h3') ??
+        contentEl.querySelector<HTMLElement>('h2') ??
+        contentEl.querySelector<HTMLElement>('h5');
+
+      if (!heading) return;
+
+      const areas = getAreas(row.getAttribute('data-area') ?? '');
+      const deployments = getDeployments(row.getAttribute('data-deployment') ?? '');
+
+      if (areas.length === 0 && deployments.length === 0) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = styles.inlineMetaBadges;
+      wrapper.setAttribute(INLINE_META_BADGES_ATTR, 'true');
+
       if (areas.length > 0) {
         const areaWrap = document.createElement('span');
         areaWrap.setAttribute(AREA_INLINE_BADGE_ATTR, 'true');
@@ -277,7 +319,6 @@ export default function ReleaseAnnouncementsFilter({
         wrapper.appendChild(areaWrap);
       }
 
-      // Deployment badges (supports "sm+saas" => 2 badges)
       if (deployments.length > 0) {
         const depWrap = document.createElement('span');
         depWrap.setAttribute(DEPLOYMENT_INLINE_BADGES_ATTR, 'true');
@@ -377,33 +418,27 @@ export default function ReleaseAnnouncementsFilter({
       data-announcement-filter={masterFilter.kind === 'type' ? masterFilter.value : 'all'}
     >
       <div className={styles.controls}>
-        <div className={styles.badgeGroup} role="group" aria-labelledby="announcementFilterLabel"><span className={styles.label}>Filter:</span>
-          {masterOptions.map((o) => {
-            const isActive = o.key === selectedKey;
+        <label className={styles.label} htmlFor="releaseAnnouncementsFilterSelect">
+          Filter by:
+        </label>
 
-            return (
-              <button
-                key={o.key}
-                type="button"
-                className={[
-                  styles.filterBadgeButton,
-                  isActive ? styles.filterBadgeButtonActive : styles.filterBadgeButtonInactive,
-                ].join(' ')}
-                aria-pressed={isActive}
-                onClick={() => {
-                  if (o.kind === 'all') setMasterFilter({ kind: 'all' });
-                  else if (o.kind === 'type') setMasterFilter({ kind: 'type', value: o.value });
-                  else if (o.kind === 'deployment') setMasterFilter({ kind: 'deployment', value: o.value });
-                  else setMasterFilter({ kind: 'area', value: o.value });
-                }}
-              >
-                {o.label}
-              </button>
-            );
-          })}
-        </div>
+        <select
+          id="releaseAnnouncementsFilterSelect"
+          className={styles.filterSelect}
+          value={selectedKey}
+          onChange={(e) => setFilterFromKey(e.target.value)}
+        >
+          {masterOptions.map((o) => (
+            <option key={o.key} value={o.key}>
+              {o.label}
+            </option>
+          ))}
+        </select>
       </div>
-      <p><hr className={styles.hr}/></p>
+
+      <p>
+        <hr className={styles.hr} />
+      </p>
 
       <div ref={listRef} className={styles.list}>
         {children}
