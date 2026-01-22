@@ -18,23 +18,23 @@ Using Web Modeler, you can import the following resource types into a project or
 - Markdown files such as `README.md`.
 - Any other resource type supported by Web Modeler.
 
-## How to import
+## How to add files
 
-These are the supported methods you can use to import:
+These are the supported methods you can use to add files to Web Modeler:
 
-| Method                                                                            | Opens from                                 | Import source              | Supported resources    |
-| --------------------------------------------------------------------------------- | ------------------------------------------ | -------------------------- | ---------------------- |
-| [**Import**](./preparing-resources-for-import.md)                                 | Web Modeler home page via URL              | Any publicly available URL | Any type of resource   |
-| [**Browse blueprints**](./camunda-marketplace.md#browse-marketplace-blueprints)   | Web Modeler project or folder page         | Camunda Marketplace only   | Blueprints only        |
-| [**Discover connectors**](./camunda-marketplace.md#browse-marketplace-connectors) | Append menu inside Web Modeler BPMN editor | Camunda Marketplace only   | Element templates only |
-| [**Upload files**](./import-diagram.md)                                           | Web Modeler project or folder page         | Any downloaded file        | Any type of resource   |
+| Method                                                                            | Opens from                                 | Import source              | Supported resources                                                                                                                           |
+| --------------------------------------------------------------------------------- | ------------------------------------------ | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**Import**](./preparing-resources-for-import.md)                                 | Web Modeler home page via URL              | Any publicly available URL | Any type of resource                                                                                                                          |
+| [**Browse blueprints**](./camunda-marketplace.md#browse-marketplace-blueprints)   | Web Modeler project or folder page         | Camunda Marketplace only   | [Blueprints](http://localhost:3000/docs/next/components/modeler/web-modeler/modeling/camunda-marketplace/#browse-marketplace-blueprints) only |
+| [**Discover connectors**](./camunda-marketplace.md#browse-marketplace-connectors) | Append menu inside Web Modeler BPMN editor | Camunda Marketplace only   | Element templates only                                                                                                                        |
+| [**Upload files**](./import-diagram.md)                                           | Web Modeler project or folder page         | Any downloaded file        | Any type of resource                                                                                                                          |
 
 To import via a URL hosted on your Web Modeler, see [Prepare resources](./preparing-resources-for-import.md) for more information.
 
 :::important
 
-- If the imported resources include at least **one BPMN**, Web Modeler treats them as a **process application** and groups them accordingly.
-- If no BPMN file is present, the resources are imported as **independent files** into the chosen project or folder.
+- **Import** and **Browse blueprints**: If the imported resources include at least **one BPMN**, Web Modeler treats them as a **process application** and groups them accordingly.
+- **Upload files** and **Discover connectors**: Always treats files as **independent files**, regardless of whether BPMN files are present.
   :::
 
 ## Template conflicts
@@ -51,7 +51,7 @@ You can resolve template conflicts using one of these two options:
 This option is not available when importing process applications.
 :::
 
-2. [Replace an existing template](#replacing-a-template).
+2. [Replace an existing template](#replace-a-template).
 
 ### Replace a template
 
@@ -96,7 +96,7 @@ When a template is ignored:
 You might not be able to import certain resources because they fail validation or cannot be processed.
 These are common reasons:
 
-- **Existing template**: A newer or equal version of the same template ID already exists and its contents are not available in your project.
+- **Existing template**: A newer or equal version of the same template ID already exists, and the incoming template's contents are not available in your project.
 - **Invalid file**: The file does not conform to the expected schema. For example, malformed element template JSON.
 - **Network error**: Web Modeler could not download the file from the given URL.
 - **Only one README file allowed**: You cannot add additional README files because each project or process application allows only a single README.
@@ -109,16 +109,17 @@ These are common reasons:
 If a process application depends on a template that is being ignored or differs from your existing template, you can manually upgrade it following these steps:
 
 1. Copy the desired template contents:
-   - Open the template JSON used by the process application (for example, from the process app repository).
+   - Open the template JSON file from the import source.
    - Copy the entire template definition.
 2. Navigate to the conflicting template:
    - In Web Modeler, open the existing template that shares the same ID and version.
    - If you do not have access, ask your organization or project admin to open it.
 3. Replace the contents of the existing template with the copied JSON.
 4. Increase the `version` field to a number higher than the highest published version.
-5. Republish:
-   - Publish the updated template to the relevant project and/or organization.
-   - Reopen the BPMN process; the properties panel should now reflect the updated template.
+5. Publish the updated template to the relevant project and/or organization.
+6. Reopen the BPMN process and click on an element that uses the template.
+7. The properties panel should now show "Update available". Click this button, then click "Update".
+8. The updated fields should now be visible in the properties panel.
 
 ### Many resources are ignored or not imported
 
@@ -136,7 +137,7 @@ If you see many resources that cannot be imported, check the following:
 
 If the issue persists, try importing a small subset of files or a simpler `.zip` to isolate problematic resources.
 
-### Process fields are missing or show “template not found”
+### Properties panel fields are missing or show “template not found”
 
 You may experience this issue when:
 
