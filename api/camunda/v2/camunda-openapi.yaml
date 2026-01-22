@@ -43,6 +43,7 @@ tags:
   - name: Group
   - name: Incident
   - name: Job
+  - name: Job metrics
   - name: License
   - name: Mapping rule
   - name: Message
@@ -183,6 +184,8 @@ paths:
     $ref: "jobs.yaml#/paths/~1jobs~1{jobKey}~1error"
   /jobs/{jobKey}/failure:
     $ref: "jobs.yaml#/paths/~1jobs~1{jobKey}~1failure"
+  /jobs/statistics/global:
+    $ref: "job-metrics.yaml#/paths/~1jobs~1statistics~1global"
   /license:
     $ref: "licenses.yaml#/paths/~1license"
   /mapping-rules:
