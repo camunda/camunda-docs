@@ -1,12 +1,12 @@
 ---
 id: import-diagram
 title: Upload files
-description: "You can upload a BPMN diagram, DMN diagram, or other supported file at any time with Web Modeler."
+description: "Upload a BPMN diagram, DMN diagram, or any other supported file at any time with Web Modeler."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-You can upload a BPMN diagram, DMN diagram, or other supported file into Web Modeler using several methods:
+Upload a BPMN diagram, DMN diagram, or any other supported file into Web Modeler using one of the following methods:
 
 - In a project, click **New > Upload files** and select the files from your computer.
 

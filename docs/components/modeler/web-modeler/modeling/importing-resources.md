@@ -22,12 +22,12 @@ Using Web Modeler, you can import the following resource types into a project or
 
 These are the supported methods you can use to add files to Web Modeler:
 
-| Method                                                                            | Opens from                                 | Import source              | Supported resources                                                                                                                           |
-| --------------------------------------------------------------------------------- | ------------------------------------------ | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**Import**](./preparing-resources-for-import.md)                                 | Web Modeler home page via URL              | Any publicly available URL | Any type of resource                                                                                                                          |
-| [**Browse blueprints**](./camunda-marketplace.md#browse-marketplace-blueprints)   | Web Modeler project or folder page         | Camunda Marketplace only   | [Blueprints](http://localhost:3000/docs/next/components/modeler/web-modeler/modeling/camunda-marketplace/#browse-marketplace-blueprints) only |
-| [**Discover connectors**](./camunda-marketplace.md#browse-marketplace-connectors) | Append menu inside Web Modeler BPMN editor | Camunda Marketplace only   | Element templates only                                                                                                                        |
-| [**Upload files**](./import-diagram.md)                                           | Web Modeler project or folder page         | Any downloaded file        | Any type of resource                                                                                                                          |
+| Method                                                                            | Opens from                                 | Import source              | Supported resources                                                       |
+| --------------------------------------------------------------------------------- | ------------------------------------------ | -------------------------- | ------------------------------------------------------------------------- |
+| [**Import**](./preparing-resources-for-import.md)                                 | Web Modeler home page via URL              | Any publicly available URL | Any type of resource                                                      |
+| [**Browse blueprints**](./camunda-marketplace.md#browse-marketplace-blueprints)   | Web Modeler project or folder page         | Camunda Marketplace only   | [Blueprints](./camunda-marketplace.md#browse-marketplace-blueprints) only |
+| [**Discover connectors**](./camunda-marketplace.md#browse-marketplace-connectors) | Append menu inside Web Modeler BPMN editor | Camunda Marketplace only   | Element templates only                                                    |
+| [**Upload files**](./import-diagram.md)                                           | Web Modeler project or folder page         | Any downloaded file        | Any type of resource                                                      |
 
 To import via a URL hosted on your Web Modeler, see [Prepare resources](./preparing-resources-for-import.md) for more information.
 
@@ -118,7 +118,7 @@ If a process application depends on a template that is being ignored or differs 
 4. Increase the `version` field to a number higher than the highest published version.
 5. Publish the updated template to the relevant project and/or organization.
 6. Reopen the BPMN process and click on an element that uses the template.
-7. The properties panel should now show "Update available". Click this button, then click "Update".
+7. Click **Update available**. Then, click **Update**.
 8. The updated fields should now be visible in the properties panel.
 
 ### Many resources are ignored or not imported
