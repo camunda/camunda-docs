@@ -12,6 +12,21 @@
 
 .label {
   font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.label::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px 14px;
+  /* Simple funnel/filter icon */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 3H2l8 9v7l4 2v-9l8-9z'/%3E%3C/svg%3E");
 }
 
 .hr {
@@ -258,6 +273,18 @@
 /* Desktop: Type badge lives in the left column; hide the inline (mobile) Type badge */
 .inlineMetaBadges .typeInlineBadge {
   display: none;
+}
+
+/* Desktop: hide the *wrapper span* for the inline Type badge so it doesn't consume flex gap */
+.inlineMetaBadges [data-type-inline-badge="true"] {
+  display: none;
+}
+
+/* Small screens: show the inline Type badge wrapper (next to area/deployment) */
+@media (max-width: 996px) {
+  .inlineMetaBadges [data-type-inline-badge="true"] {
+    display: inline-flex;
+  }
 }
 
 /* Small screens: stack layout + move Type badge inline next to the other badges */
