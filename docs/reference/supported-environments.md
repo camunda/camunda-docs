@@ -122,9 +122,8 @@ Requirements for components are as follows:
 | Web Modeler                                                | –            | <ul><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                                                                                                                                                                                 |
 | Self-Managed Console                                       | –            | –                                                                                                                                                                                                                                                                                                                                                                                       |
 
-:::note Running Optimize
-When running Optimize, ensure you use the [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) or
-the [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) version that is compatible with your Optimize version.
+:::info Optimize compatibility
+When running Optimize, make sure you use an [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) or [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) version that is compatible with your Optimize version.
 :::
 
 :::info RDBMS support

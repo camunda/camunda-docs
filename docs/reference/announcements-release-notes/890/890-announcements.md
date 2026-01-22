@@ -18,25 +18,9 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 - See [release notes](/reference/announcements-release-notes/890/890-release-notes.md) to learn more about new features and enhancements.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
-
-:::
+  :::
 
 ## Supported environments
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### Support for Latest Elasticsearch and OpenSearch Versions
-
-We now support Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to take advantage of the latest database releases and features.
-
-<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
-
-</div>
-</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -49,11 +33,11 @@ We now support Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to take adva
 The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.19 (previously 8.16+).
 
 - This aligns with the Elasticsearch versions maintained by Elastic as of April 2025.
-- We have updated `ELASTICSEARCH_VERSION=8.19.0` default used by Camunda 8 Run, Docker Compose, and Helm templates.
+- The default `ELASTICSEARCH_VERSION=8.19.0` used by Camunda 8 Run, Docker Compose, and Helm templates has been updated accordingly.
 - Upgrade your Elasticsearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
-- For best results, we recommend upgrading to the latest supported Elasticsearch 9.2+ to take advantage of new features and improvements.
+- For best results, Camunda recommends upgrading to the latest supported Elasticsearch 9.2+ to take advantage of new features and improvements.
 
-<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+<p className="link-arrow">[OpenSearch and Elasticsearch support](/reference/supported-environments.md#opensearch-and-elasticsearch-support)</p>
 
 </div>
 </div>
@@ -70,7 +54,7 @@ The minimum supported OpenSearch version for the Orchestration cluster and Optim
 
 - This aligns with the OpenSearch versions maintained as of April 2025.
 - Upgrade your OpenSearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
-- For best results, we recommend upgrading to the latest supported OpenSearch 3.4+ to take advantage of new features and improvements.
+- For best results, Camunda recommends upgrading to the latest supported OpenSearch 3.4+ to take advantage of new features and improvements.
 
 <p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
@@ -101,6 +85,21 @@ Camunda 8.9 adds support for the AWS Paris region in Camunda 8 SaaS.
 #### OpenJDK 25 support
 
 Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration Cluster, Connectors, Optimize, and supporting tooling. You can now run Self-Managed deployments on OpenJDK 21–25 without additional configuration changes.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Support for latest Elasticsearch and OpenSearch versions
+
+Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to take advantage of the latest database features and releases.
+
+<p className="link-arrow">[OpenSearch and Elasticsearch support](/reference/supported-environments.md#opensearch-and-elasticsearch-support)</p>
 
 </div>
 </div>
@@ -460,7 +459,7 @@ This enhancement aligns Web Modeler’s database configuration with the Orchestr
 
 :::info
 To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-rdbms-support-h2-mariadb-mysql).
+:::
 
 </div>
 </div>
-:::
