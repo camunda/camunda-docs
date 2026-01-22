@@ -12,10 +12,10 @@ This approach mirrors the Elasticsearch procedure, but uses OpenSearch-specific 
 
 When you run the schema manager as a standalone application, it requires
 cluster-level privileges only during schema creation and settings updates.
-The Camunda application then runs with index-level privileges only.
+The Camunda application then runs with minimal privileges (primarily index-level permissions, with one specific cluster-level requirement for clearing scrolls due to the OpenSearch security model).
 
 - Database support: This setup is supported only for OpenSearch installations (Elasticsearch procedure uses a different configuration).
-- Required privileges: The Camunda application requires the `manage` index-level privilege to operate (see [OpenSearch privileges](./opensearch-privileges.md)).
+- Required privileges: The Camunda application requires the `manage` index-level privilege, and the `indices:data/read/scroll/clear` cluster permission to operate (see [OpenSearch privileges](./opensearch-privileges.md)).
 
 To run the schema manager as a standalone application:
 
@@ -87,7 +87,7 @@ Wait for successful completion (application exits cleanly) before moving to step
 
 ### Start the Camunda single application {#start}
 
-Start the application with a less privileged OpenSearch user—only index‑level privileges (`manage` for required indices) are needed.
+Start the application with a less privileged OpenSearch user. Most operations require only index-level privileges (`manage` for required indices), but `indices:data/read/scroll/clear` must be assigned as a cluster permission. OpenSearch treats the permission to clear scrolls as a cluster-wide action because scroll IDs are not bound to a specific index endpoint in the request URL.
 
 #### OpenSearch user with required privileges
 

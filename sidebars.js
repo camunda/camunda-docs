@@ -90,10 +90,12 @@ module.exports = {
             "components/concepts/process-instance-creation",
             "components/concepts/process-instance-modification",
             "components/concepts/process-instance-migration",
+            "components/concepts/process-instance-deletion",
             "components/concepts/incidents",
           ],
         },
         "components/concepts/process-applications",
+        "components/concepts/batch-operations",
         "components/concepts/workflow-patterns",
         {
           type: "category",
@@ -393,8 +395,11 @@ module.exports = {
                     id: "components/early-access/alpha/mcp-client/mcp-client",
                   },
                   items: [
-                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
+                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
+                    "components/early-access/alpha/mcp-client/mcp-client-config",
+                    "components/early-access/alpha/mcp-client/mcp-client-tool-discovery",
+                    "components/early-access/alpha/mcp-client/mcp-client-human-in-the-loop",
                   ],
                 },
                 {
@@ -552,6 +557,7 @@ module.exports = {
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
+            "components/modeler/desktop-modeler/deploy-diagram",
             "components/modeler/desktop-modeler/start-instance",
             "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
@@ -693,10 +699,17 @@ module.exports = {
             id: "components/operate/operate-introduction",
           },
           items: [
-            "components/operate/userguide/access-control",
+            {
+              Overview: [
+                "components/operate/overview/access-control",
+                "components/operate/overview/batch-operations-overview",
+                "components/operate/overview/batch-operation-details-overview",
+              ],
+            },
             "components/operate/userguide/basic-operate-navigation",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
+            "components/operate/userguide/manage-batch-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
             {
@@ -706,7 +719,12 @@ module.exports = {
               ],
             },
             "components/operate/userguide/process-instance-migration",
-            "components/operate/userguide/monitor-operation-status",
+            {
+              "Monitor process operations": [
+                "components/operate/userguide/monitor-operation-status",
+                "components/operate/userguide/monitor-batch-operations",
+              ],
+            },
           ],
         },
         {
@@ -1051,6 +1069,28 @@ module.exports = {
         "components/saas/data-locations",
         {
           type: "category",
+          label: "Monitoring",
+          link: {
+            type: "doc",
+            id: "components/saas/monitoring/overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Cluster Metrics endpoint",
+              link: {
+                type: "doc",
+                id: "components/saas/monitoring/cluster-metrics-endpoint/overview",
+              },
+              items: [
+                "components/saas/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint",
+                "components/saas/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
           label: "Encryption",
           link: {
             type: "doc",
@@ -1060,6 +1100,7 @@ module.exports = {
             "components/saas/encryption-at-rest",
             "components/saas/byok/aws-external-encryption-setup",
             "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/key-state-behavior",
             "components/saas/byok/faq-and-troubleshooting",
           ],
         },
@@ -1470,6 +1511,7 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
                     "self-managed/deployment/helm/configure/database/rdbms",
+                    "self-managed/deployment/helm/configure/database/validate-rdbms",
                     "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
                     {
                       Troubleshooting: [
@@ -1509,11 +1551,12 @@ module.exports = {
                         id: "self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider",
                       },
                       items: [
-                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/jwt-token-claims",
                       ],
                     },
                   ],
@@ -1572,6 +1615,11 @@ module.exports = {
                 id: "self-managed/deployment/helm/cloud-providers/index",
               },
               items: [
+                {
+                  type: "category",
+                  label: "Local",
+                  items: ["self-managed/deployment/helm/cloud-providers/kind"],
+                },
                 {
                   type: "category",
                   label: "Amazon",
@@ -1650,7 +1698,26 @@ module.exports = {
             },
           ],
         },
-        "self-managed/deployment/docker/docker",
+        {
+          type: "category",
+          label: "Containers",
+          items: [
+            "self-managed/deployment/docker/docker",
+            {
+              type: "category",
+              label: "Cloud providers",
+              items: [
+                {
+                  type: "category",
+                  label: "Amazon",
+                  items: [
+                    "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
         {
           type: "category",
           label: "Manual",
@@ -1966,6 +2033,7 @@ module.exports = {
             },
             {
               "Desktop Modeler": [
+                "self-managed/components/modeler/desktop-modeler/connect-to-self-managed",
                 "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed",
               ],
             },

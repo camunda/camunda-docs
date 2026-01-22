@@ -23,6 +23,17 @@ These release notes identify the main new features included in the 8.8 minor rel
 
 :::
 
+### Technical Changelogs for all 8.8.x releases
+
+<details className="changelog-dropdown">
+  <summary>View GitHub changelogs for all patch releases</summary>
+
+<!-- RELEASE_LINKS_PLACEHOLDER -->
+<ul><li>[Camunda 8.8.9 (06.01.2026)](https://github.com/camunda/camunda/releases/tag/8.8.9)</li><li>[Camunda 8.8.8 (11.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.8)</li><li>[Camunda 8.8.7 (09.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.7)</li><li>[Camunda 8.8.6 (02.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.6)</li><li>[Camunda 8.8.5 (27.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.5)</li><li>[Camunda 8.8.4 (17.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.4)</li><li>[Camunda 8.8.3 (05.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.3)</li><li>[Camunda 8.8.2 (27.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.2)</li><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.5 (07.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.5)</li><li>[Connectors 8.8.4 (01.12.2025)](https://github.com/camunda/connectors/releases/tag/8.8.4)</li><li>[Connectors 8.8.3 (19.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.3)</li><li>[Connectors 8.8.2 (06.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.2)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
+<!-- RELEASE_LINKS_PLACEHOLDER -->
+
+</details>
+
 ## Agentic orchestration
 
 <div class="release"><span class="badge badge--medium" title="This feature affects agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects ai agents">AI agents</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
@@ -742,17 +753,6 @@ Use the version **Description** field to track changes alongside the version tag
 
 <p><a href="../../../../components/modeler/web-modeler/modeling/versions" class="link-arrow">Web Modeler versioning</a></p>
 
-### Technical Changelogs for all 8.8.x releases
-
-<details className="changelog-dropdown">
-  <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
-
-<!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.8.8 (11.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.8)</li><li>[Camunda 8.8.7 (09.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.7)</li><li>[Camunda 8.8.6 (02.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.6)</li><li>[Camunda 8.8.5 (27.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.5)</li><li>[Camunda 8.8.4 (17.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.4)</li><li>[Camunda 8.8.3 (05.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.3)</li><li>[Camunda 8.8.2 (27.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.2)</li><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.4 (01.12.2025)](https://github.com/camunda/connectors/releases/tag/8.8.4)</li><li>[Connectors 8.8.3 (19.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.3)</li><li>[Connectors 8.8.2 (06.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.2)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
-<!-- RELEASE_LINKS_PLACEHOLDER -->
-
-</details>
-
 ## 8.8.0-alpha8
 
 | Release date     | Changelog(s)                                                                                                                                                                               | Blog                                                                                   |
@@ -888,7 +888,7 @@ The deprecated APIs remain functional in this release but will no longer receive
 
 <!-- https://github.com/camunda/product-hub/issues/2226 -->
 
-Add Zeebe partitions to a running cluster in SaaS to increase capacity without downtime:
+Add Zeebe partitions to a running cluster in Self-Managed to increase capacity without downtime:
 
 - New partitions start processing tasks immediately
 - Existing messages remain on original partitions, potentially causing slight imbalances for message-heavy workloads (future updates will address this)
@@ -1320,7 +1320,7 @@ Camunda’s new Identity service enhances authentication and authorization for S
 | Self-Managed Identity management  | Admins can create and manage users, groups, roles, and memberships directly in the Identity database.                                                                                                                                                                   |
 | OIDC integration                  | Integrate external identity providers (IdP) such as Keycloak and Microsoft Entra.                                                                                                                                                                                       |
 | Role-based access control (RBAC)  | Assign roles and group permissions on a per-resource basis for fine-grained access control. Supported resources include Authorization, Claim Mapping Rules, Messages, Batches, Applications, Tenants, Deployments, Process Definitions, Decision Definitions, and more. |
-| Flexible mapping                  | Map users, groups, and roles to resource authorizations and tenants. Leverage OIDC token claims and application/client mappings to streamline permission assignments.                                                                                                   |
+| Flexible mapping                  | In Self-Managed environments, map users, groups, and roles to resource authorizations and tenants. Leverage OIDC token claims and application/client mappings to streamline permission assignments.                                                                     |
 | Migration support                 | Simplified migration tools make it easy for existing customers to transition to the new service.                                                                                                                                                                        |
 | Organizational Identity           | In SaaS environments, integrate your own IdP to manage organizational users and assign resources cluster-by-cluster.                                                                                                                                                    |
 | Cluster-specific Roles and Groups | In SaaS environments, manage distinct roles, groups, and authorizations for each cluster independently.                                                                                                                                                                 |
@@ -1440,7 +1440,7 @@ The new **Settings** window in Desktop Modeler allows you to configure the appli
 
 To learn more about these settings, see [Desktop Modeler settings](/components/modeler/desktop-modeler/settings/settings.md).
 
-### Version description<span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+#### Version description<span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 <!-- https://github.com/camunda/web-modeler/issues/12057 -->
 

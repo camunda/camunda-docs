@@ -88,7 +88,7 @@ for `WEBMODELER`, which is`web-modeler`.
 
 ## Database configuration
 
-Identity requires a database to store information about resource authorization and [multi-tenancy](/components/concepts/multi-tenancy.md).
+Identity requires a database to store information about resource authorization and [multi-tenancy](/components/concepts/multi-tenancy.md) or if you are [using an external IdP](/self-managed/components/management-identity/configuration/configure-external-identity-provider.md).
 
 | Environment variable         | Description                                         |
 | :--------------------------- | :-------------------------------------------------- |

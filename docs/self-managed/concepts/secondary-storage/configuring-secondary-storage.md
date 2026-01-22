@@ -29,27 +29,53 @@ For the latest list of supported relational databases and versions, see the
 
 <TabItem value="helm">
 
-When deploying with Helm, set the secondary storage type and connection details in your `values.yaml` file:
+When deploying with Helm, set the secondary storage type, connection details, and rdbms exporters in your `values.yaml` file:
 
 ```yaml
-data:
-  secondary-storage:
-    type: rdbms
+orchestration:
+  exporters:
+    camunda:
+      enabled: false
     rdbms:
-      url: jdbc:h2:mem:camunda
-      username: sa
-      password:
+      enabled: true
+  data:
+    secondaryStorage:
+      type: rdbms
+      rdbms:
+        url: jdbc:postgresql://hostname:5432/camunda
+        username: camunda
+        secret:
+          existingSecret: camunda-db-secret
+          existingSecretKey: password
 ```
 
-To configure Elasticsearch instead:
+More information about RDBMS in the Camunda Helm chart can be found on this [configuration page](/self-managed/deployment/helm/configure/database/rdbms.md).
+
+For Elasticsearch:
+The Camunda Helm chart by default enables the related exporter and doesn't require extra configuration.
 
 ```yaml
-data:
-  secondary-storage:
-    type: elasticsearch
-    elasticsearch:
-      url: http://elasticsearch:9200/
+global:
+  elasticsearch:
+    enabled: true
+    external: true
+    auth:
+      username: elastic
+      secret:
+        existingSecret: camunda-db-secret
+        existingSecretKey: password
+    url:
+      protocol: http
+      host: hostname
+      port: 443
+
+orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
 ```
+
+More information about Elasticsearch in the Camunda Helm chart can be found on this [configuration page](self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md).
 
 To explicitly disable secondary storage (for example, when running only the Zeebe engine), set:
 
@@ -128,9 +154,13 @@ data:
 | Debugging and troubleshooting             | H2 or PostgreSQL                   | Easier to inspect and visualize data.                         |
 
 :::note
-H2 is suitable for testing and local development only.  
-For production use, Operate and Tasklist require a persistent secondary storage backend such as a supported RDBMS or Elasticsearch.  
-Consult the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) when choosing a relational database.
+Starting in 8.9-alpha3, H2 is the default secondary storage for lightweight Camunda 8 Run setups and quickstarts. H2 remains suitable for local testing, demos, and file-based setups, but it is not recommended for production workloads where persistence, scaling, and full analytics are required.
+
+For production use, Operate and Tasklist should run against a persistent secondary storage backend such as a supported RDBMS or Elasticsearch. Consult the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) when choosing a relational database.
+:::
+
+:::note
+Switching the secondary storage type (for example H2 ⇄ Elasticsearch) in alpha3 does not preserve existing data. The system starts with a fresh secondary store. Also note Operate v2 has limited functionality in 8.9-alpha3 when running against H2. Full Operate support is planned for a later alpha.
 :::
 
 ## Run without secondary storage
