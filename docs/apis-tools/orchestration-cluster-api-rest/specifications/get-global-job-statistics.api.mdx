@@ -1,0 +1,385 @@
+---
+id: get-global-job-statistics
+title: "Global job statistics"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Global job statistics"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Global job statistics"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/jobs/statistics/global"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Returns global aggregated counts for jobs. Optionally filter by the creation time window and/or jobType.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          required: ["filter"],
+          properties: {
+            filter: {
+              description: "Filters for global job statistics query.",
+              type: "object",
+              required: ["from", "to"],
+              properties: {
+                from: {
+                  description:
+                    "Start of the time window to filter metrics. ISO 8601 date-time format.\n",
+                  type: "string",
+                  format: "date-time",
+                  example: "2024-07-28T15:51:28.071Z",
+                },
+                to: {
+                  description:
+                    "End of the time window to filter metrics. ISO 8601 date-time format.\n",
+                  type: "string",
+                  format: "date-time",
+                  example: "2024-07-29T15:51:28.071Z",
+                },
+                jobType: {
+                  description:
+                    "Optional job type to limit the aggregation to a single job type.",
+                  type: "string",
+                  example: "fetch-customer-data",
+                },
+              },
+              title: "GlobalJobStatisticsFilter",
+            },
+          },
+          title: "GlobalJobStatisticsQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Global job metrics",
+      content: {
+        "application/json": {
+          schema: {
+            description: "Global job statistics query result.",
+            type: "object",
+            required: ["items"],
+            properties: {
+              items: {
+                description: "List of aggregated job statistics.",
+                type: "array",
+                items: {
+                  description: "Aggregated job metrics for a time bucket.",
+                  type: "object",
+                  required: ["created", "completed", "failed"],
+                  properties: {
+                    created: {
+                      description: "Metric for a single job status.",
+                      type: "object",
+                      required: ["count", "lastUpdatedAt"],
+                      properties: {
+                        count: {
+                          description: "Number of jobs in this status.",
+                          type: "integer",
+                          format: "int64",
+                          example: 145,
+                        },
+                        lastUpdatedAt: {
+                          description:
+                            "ISO 8601 timestamp of the last update for this status.",
+                          type: "string",
+                          format: "date-time",
+                          example: "2024-07-29T15:51:28.071Z",
+                        },
+                      },
+                      title: "StatusMetric",
+                    },
+                    completed: {
+                      description: "Metric for a single job status.",
+                      type: "object",
+                      required: ["count", "lastUpdatedAt"],
+                      properties: {
+                        count: {
+                          description: "Number of jobs in this status.",
+                          type: "integer",
+                          format: "int64",
+                          example: 145,
+                        },
+                        lastUpdatedAt: {
+                          description:
+                            "ISO 8601 timestamp of the last update for this status.",
+                          type: "string",
+                          format: "date-time",
+                          example: "2024-07-29T15:51:28.071Z",
+                        },
+                      },
+                      title: "StatusMetric",
+                    },
+                    failed: {
+                      description: "Metric for a single job status.",
+                      type: "object",
+                      required: ["count", "lastUpdatedAt"],
+                      properties: {
+                        count: {
+                          description: "Number of jobs in this status.",
+                          type: "integer",
+                          format: "int64",
+                          example: 145,
+                        },
+                        lastUpdatedAt: {
+                          description:
+                            "ISO 8601 timestamp of the last update for this status.",
+                          type: "string",
+                          format: "date-time",
+                          example: "2024-07-29T15:51:28.071Z",
+                        },
+                      },
+                      title: "StatusMetric",
+                    },
+                  },
+                  title: "GlobalJobStatisticsItem",
+                },
+              },
+            },
+            title: "GlobalJobStatisticsQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

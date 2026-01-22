@@ -395,8 +395,11 @@ module.exports = {
                     id: "components/early-access/alpha/mcp-client/mcp-client",
                   },
                   items: [
-                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
+                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
+                    "components/early-access/alpha/mcp-client/mcp-client-config",
+                    "components/early-access/alpha/mcp-client/mcp-client-tool-discovery",
+                    "components/early-access/alpha/mcp-client/mcp-client-human-in-the-loop",
                   ],
                 },
                 {
@@ -445,8 +448,16 @@ module.exports = {
                 "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
                 "components/modeler/web-modeler/modeling/versions",
                 "components/modeler/web-modeler/modeling/file-download",
-                "components/modeler/web-modeler/modeling/import-diagram",
                 "components/modeler/web-modeler/modeling/camunda-marketplace",
+                {
+                  type: "category",
+                  label: "Import",
+                  items: [
+                    "components/modeler/web-modeler/modeling/import-diagram",
+                    "components/modeler/web-modeler/modeling/import-resources",
+                    "components/modeler/web-modeler/modeling/prepare-resources",
+                  ],
+                },
                 {
                   type: "category",
                   label: "Process applications",
@@ -1066,6 +1077,28 @@ module.exports = {
         "components/saas/data-locations",
         {
           type: "category",
+          label: "Monitoring",
+          link: {
+            type: "doc",
+            id: "components/saas/monitoring/overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Cluster Metrics endpoint",
+              link: {
+                type: "doc",
+                id: "components/saas/monitoring/cluster-metrics-endpoint/overview",
+              },
+              items: [
+                "components/saas/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint",
+                "components/saas/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
           label: "Encryption",
           link: {
             type: "doc",
@@ -1526,9 +1559,9 @@ module.exports = {
                         id: "self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider",
                       },
                       items: [
-                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/jwt-token-claims",
