@@ -281,6 +281,32 @@ The following resources and configuration options are important to keep in mind 
 
 The following resources and configuration options are important to keep in mind regarding reliability:
 
+#### Persistent volume reclaim policy
+
+:::warning Risk of data loss
+If your StorageClass uses a `Delete` reclaim policy (the default in many Kubernetes distributions and OpenShift), Orchestration Cluster broker data will be **permanently lost** if a PVC is deleted. This can lead to complete data loss and is unrecoverable.
+:::
+
+Ensure your StorageClass uses a `Retain` reclaim policy for production deployments.
+
+Verify your configuration on Kubernetes:
+
+```bash
+kubectl get storageclass
+# RECLAIMPOLICY should show "Retain", not "Delete"
+```
+
+On OpenShift, verify your configuration using the `oc` CLI:
+
+```bash
+oc get storageclass
+# RECLAIMPOLICY should show "Retain", not "Delete"
+```
+
+For more details, see [troubleshooting](/self-managed/operational-guides/troubleshooting.md#zeebe-data-loss-after-pvc-deletion) and the [Kubernetes documentation on reclaim policies](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming).
+
+#### Node affinity and tolerations
+
 - Check node affinity and tolerations. Refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) to modify the node affinity and tolerations.
 
   For example, this is the default affinity configuration for the zeebe Pod in the Camunda Helm chart:
