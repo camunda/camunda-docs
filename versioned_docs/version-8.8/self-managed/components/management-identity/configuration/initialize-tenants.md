@@ -32,7 +32,7 @@ When using Helm to deploy Camunda 8, you must configure tenants using environmen
 
 ## Initialize tenants in Management Identity
 
-First, you need to enable Management Identity's multi-tenancy flag:
+First, enable the Management Identity multi-tenancy flag:
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'application.yaml', value: 'yaml'},{label: 'Environment variables', value: 'env' }]} >
 <TabItem value="yaml">
