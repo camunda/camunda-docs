@@ -37,7 +37,7 @@ For the example scenario, the following sequence of messages would be sent to th
 When the configured event fires while one or more tool calls are still running, the agent:
 
 - **Cancels all still-running tool calls** belonging to the current agent step, including user tasks such as “Wait for user”.
-- Synthesizes a message for each cancelled tool and includes it in the LLM request, alongside the results of already completed tools and the event message.
+- Synthesizes a message for each canceled tool and includes it in the LLM request, alongside the results of already completed tools and the event message.
 - Keeps the surrounding **ad-hoc sub-process scope active**: the agent decides, based on the new LLM response, which elements to activate next or whether to complete the sub-process.
 
 :::note
@@ -59,7 +59,7 @@ For the AI Agent Sub-process (implemented as an ad-hoc sub-process):
 - **Only non-interrupting event subprocesses are allowed** on the agent scope, by design and enforced by Modeler.
 - The **Event handling behavior** field controls how the agent treats running tool calls when such a (non-interrupting) event subprocess is triggered:
   - [Wait for tool call results](#wait-for-tool-call-results): the event handler runs only after all tool calls complete.
-  - [Interrupt tool calls](#interrupt-tool-calls): running tools are cancelled, and their cancellation is surfaced to the LLM, even though the event subprocess itself remains non-interrupting from a BPMN perspective.
+  - [Interrupt tool calls](#interrupt-tool-calls): running tools are canceled, and their cancellation is surfaced to the LLM, even though the event subprocess itself remains non-interrupting from a BPMN perspective.
 
 By modeling an ad-hoc sub-process with an AI agent, you delegate control of sub-process execution (which tasks/tools run and when it completes) to the agent.
 
