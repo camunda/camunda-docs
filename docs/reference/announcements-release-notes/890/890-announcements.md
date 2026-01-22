@@ -49,6 +49,7 @@ We now support Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to take adva
 The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.19 (previously 8.16+).
 
 - This aligns with the Elasticsearch versions maintained by Elastic as of April 2025.
+- We have updated `ELASTICSEARCH_VERSION=8.19.0` default used by Camunda 8 Run, Docker Compose, and Helm templates.
 - Upgrade your Elasticsearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
 - For best results, we recommend upgrading to the latest supported Elasticsearch 9.2+ to take advantage of new features and improvements.
 
@@ -463,4 +464,3 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 :::
-
