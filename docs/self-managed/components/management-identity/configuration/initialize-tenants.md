@@ -21,14 +21,14 @@ In this guide, you'll learn how to initialize tenants in your app configuration.
 
 ## Before you begin
 
-Before you begin, you must [configure a database](../miscellaneous/configuration-variables.md#database-configuration). Management Identity needs this database to support multi-tenancy.
+Before you begin, [configure a database](../miscellaneous/configuration-variables.md#database-configuration). Management Identity requires a database to support multi-tenancy
 
-If you're deploying Camunda 8 with Docker, you have two options for programmatically configuring tenants in Management Identity:
+When deploying Camunda 8 with Docker, you can programmatically configure tenants in Management Identity in two ways:
 
 - `application.yaml`
 - Environment variables
 
-If you're using helm, you must use environment variables. We don't support configuring tenants with [helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters).
+When using Helm to deploy Camunda 8, you must configure tenants using environment variables. Configuration using [Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters) is not supported.
 
 ## Initialize tenants in Management Identity
 
