@@ -235,6 +235,14 @@ This will load this preset:
 https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/oidc.yaml
 ```
 
+:::note
+There are three ways to define the token URL. They're prioritized as follows:
+
+1. Provide the `camunda.client.auth.token-url`.
+2. Provide the issuer's well-known configuration URL `camunda.client.auth.well-known-configuration-url`. This extracts the token URL from the `token_url` field in the loaded configuration.
+3. Provide the issuer's URL `camunda.client.auth.issuer-url`. This generates the well-known configuration URL and extracts the token URL from the `token_url` field in the loaded configuration.
+   :::
+
 #### Credentials cache path
 
 You can define the credentials cache path of the zeebe client, the property contains directory path and file name:
