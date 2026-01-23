@@ -121,6 +121,7 @@ For more advanced or permanent configuration, modify the default `configuration/
 | Argument                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).                                                                                                                                                                                                                                                                                                 |
+| `--extra-driver <path>`    | Copies an external JDBC driver into `camunda-zeebe-<version>/lib` before startup. Use this when running against Oracle, MySQL, or other databases that require a driver that is not bundled with Camunda 8 Run. Repeat the flag to copy multiple jars.                                                                                                                                                                                 |
 | `--username <arg>`         | Configures the first user’s username as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                                       |
 | `--password <arg>`         | Configures the first user’s password as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                                       |
 | `--keystore <arg>`         | Configures the TLS certificate for HTTPS. If not specified, HTTP is used. For more information, see [enabling TLS](#enable-tls).                                                                                                                                                                                                                                                                                                       |
@@ -228,6 +229,199 @@ data:
 ```
 
 Start Camunda 8 Run without `--disable-elasticsearch` to let Camunda 8 Run manage Elasticsearch, or use `--disable-elasticsearch --config <file>` and point to an external cluster.
+
+#### Other relational secondary storage options
+
+Camunda 8 Run also supports PostgreSQL, MariaDB, MySQL, Oracle, and Microsoft SQL Server for the secondary storage. Each option requires updating `camunda.data.secondary-storage` and ensuring a compatible database is running. The snippets below use Docker to illustrate local environments, but you can connect to any existing database by adjusting the JDBC URL.
+
+##### PostgreSQL
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:postgresql://localhost:5432/camunda_secondary
+        username: camunda
+        password: camunda
+```
+
+Start the database:
+
+```bash
+docker run -d --name camunda-postgres \
+  -e POSTGRES_USER=camunda \
+  -e POSTGRES_PASSWORD=camunda \
+  -e POSTGRES_DB=camunda_secondary \
+  -p 5432:5432 postgres:latest
+```
+
+Reset the schema when needed:
+
+```bash
+docker exec camunda-postgres psql -U camunda -d postgres -c "
+  SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = 'camunda_secondary';
+  DROP DATABASE IF EXISTS \"camunda_secondary\";
+  CREATE DATABASE \"camunda_secondary\";
+"
+```
+
+##### MariaDB
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:mariadb://localhost:3306/camunda_secondary?serverTimezone=UTC
+        username: camunda
+        password: camunda
+```
+
+Start the database:
+
+```bash
+docker run -d --name camunda-mariadb \
+  -e MARIADB_USER=camunda \
+  -e MARIADB_PASSWORD=camunda \
+  -e MARIADB_ROOT_PASSWORD=rootcamunda \
+  -e MARIADB_DATABASE=camunda_secondary \
+  -p 3306:3306 mariadb:11.4
+```
+
+Reset the schema:
+
+```bash
+docker exec camunda-mariadb mariadb -uroot -prootcamunda -e "
+  DROP DATABASE IF EXISTS camunda_secondary;
+  CREATE DATABASE camunda_secondary;
+  GRANT ALL ON camunda_secondary.* TO 'camunda'@'%';
+"
+```
+
+Notes:
+
+Notes:
+
+- No extra driver is required; MariaDB ships with the distribution.
+
+##### MySQL
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:mysql://localhost:3307/camunda_secondary?serverTimezone=UTC
+        username: camunda
+        password: camunda
+```
+
+Start the database:
+
+```bash
+docker run -d --name camunda-mysql \
+  -e MYSQL_ROOT_PASSWORD=rootcamunda \
+  -e MYSQL_USER=camunda \
+  -e MYSQL_PASSWORD=camunda \
+  -e MYSQL_DATABASE=camunda_secondary \
+  -p 3306:3306 mysql:8.4
+```
+
+Reset the schema:
+
+```bash
+docker exec camunda-mysql mysql -uroot -prootcamunda -e "
+  DROP DATABASE IF EXISTS camunda_secondary;
+  CREATE DATABASE camunda_secondary;
+  GRANT ALL ON camunda_secondary.* TO 'camunda'@'%';
+"
+```
+
+Notes:
+
+- MySQL requires the official Connector/J driver. Copy the downloaded JAR into `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/mysql-connector.jar` to `./c8run start`.
+- Ensure the JDBC URL references the port you expose on the host (3306 in the example above).
+
+##### Oracle
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:oracle:thin:@//localhost:1521/FREEPDB1
+        username: camunda
+        password: camunda
+```
+
+Start the database:
+
+```bash
+docker run -d --name camunda-oracle \
+  -p 1521:1521 \
+  -e ORACLE_PASSWORD=camunda \
+  -e APP_USER=camunda \
+  -e APP_USER_PASSWORD=camunda \
+  gvenzl/oracle-free:23-slim
+```
+
+Reset the schema (drop and recreate the application user in `FREEPDB1`):
+
+```bash
+docker exec camunda-oracle bash -lc '
+  source /home/oracle/.bashrc >/dev/null 2>&1
+  sqlplus -s system/camunda@//localhost:1521/FREEPDB1 <<EOF
+  DROP USER camunda CASCADE;
+  CREATE USER camunda IDENTIFIED BY camunda;
+  GRANT CONNECT, RESOURCE, UNLIMITED TABLESPACE TO camunda;
+  EOF
+'
+```
+
+Notes:
+
+- Download the Oracle JDBC driver (for example, `ojdbc11.jar`) and either place it in `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/ojdbc11.jar` when starting Camunda 8 Run.
+
+##### Microsoft SQL Server
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:sqlserver://localhost:1433;databaseName=camunda_secondary;encrypt=false
+        username: camunda
+        password: Camunda123!
+```
+
+Start the database:
+
+```bash
+docker run -d --name camunda-mssql \
+  -e ACCEPT_EULA=Y \
+  -e MSSQL_SA_PASSWORD=Camunda123! \
+  -p 1433:1433 \
+  mcr.microsoft.com/mssql/server:2022-latest
+```
+
+Reset the schema:
+
+```bash
+docker exec camunda-mssql /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U SA -P 'Camunda123!' -Q "
+  ALTER DATABASE camunda_secondary SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+  DROP DATABASE camunda_secondary;
+  CREATE DATABASE camunda_secondary;
+  USE camunda_secondary;
+  CREATE USER camunda FOR LOGIN camunda;
+  ALTER ROLE db_owner ADD MEMBER camunda;
+"
+```
 
 ### Switching between storage types and migration notes
 
