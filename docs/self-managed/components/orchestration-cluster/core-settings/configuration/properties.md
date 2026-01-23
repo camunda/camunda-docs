@@ -424,8 +424,8 @@ The following configurations apply to all components within the Orchestration Cl
 
 | Property                                                                        | Description                                                                                             | Default value            |
 | :------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------ |:-------------------------|
-| `camunda.data.secondary-storage.elasticsearch.url`                              | <p>Endpoint for the database configured as secondary storage.</p>                                       | `http://localhost:9200`  |
-| `camunda.data.secondary-storage.elasticsearch.urls`                             | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters.</p> | `[]`                     |
+| `camunda.data.secondary-storage.elasticsearch.url`                              | <p>Endpoint for the database configured as secondary storage. Mutually exclusive with `urls` - configure only one.</p>                                       | `http://localhost:9200`  |
+| `camunda.data.secondary-storage.elasticsearch.urls`                             | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters. Mutually exclusive with `url` - configure only one.</p> | `[]`                     |
 | `camunda.data.secondary-storage.elasticsearch.cluster-name`                     | <p>Name of the cluster.</p>                                                                             | `elasticsearch`          |
 | `camunda.data.secondary-storage.elasticsearch.username`                         | <p>Username for the database configured as secondary storage.</p>                                       | `''`                     |
 | `camunda.data.secondary-storage.elasticsearch.password`                         | <p>Password for the database configured as secondary storage.</p>                                       | `''`                     |
@@ -446,8 +446,8 @@ The following configurations apply to all components within the Orchestration Cl
 
 | Property                                                                     | Description                                                                                             | Default value           |
 | :--------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ |:------------------------|
-| `camunda.data.secondary-storage.opensearch.url`                              | <p>Endpoint for the database configured as secondary storage.</p>                                       | `http://localhost:9200` |
-| `camunda.data.secondary-storage.opensearch.urls`                             | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters.</p> | `[]`                    |
+| `camunda.data.secondary-storage.opensearch.url`                              | <p>Endpoint for the database configured as secondary storage. Mutually exclusive with `urls` - configure only one.</p>                                       | `http://localhost:9200` |
+| `camunda.data.secondary-storage.opensearch.urls`                             | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters. Mutually exclusive with `url` - configure only one.</p> | `[]`                    |
 | `camunda.data.secondary-storage.opensearch.cluster-name`                     | <p>Name of the cluster.</p>                                                                             | `elasticsearch`         |
 | `camunda.data.secondary-storage.opensearch.username`                         | <p>Username for the database configured as secondary storage.</p>                                       | `''`                    |
 | `camunda.data.secondary-storage.opensearch.password`                         | <p>Password for the database configured as secondary storage.</p>                                       | `''`                    |
@@ -478,8 +478,8 @@ The following configurations apply to all components within the Orchestration Cl
 
 | Property                                                               | Description                                                                                             | Default value           |
 | :--------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ |:------------------------|
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URL`                      | <p>Endpoint for the database configured as secondary storage.</p>                                       | `http://localhost:9200` |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URLS`                     | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters.</p> | `[]`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URL`                      | <p>Endpoint for the database configured as secondary storage. Mutually exclusive with `URLS` - configure only one.</p>                                       | `http://localhost:9200` |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URLS`                     | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters. Mutually exclusive with `URL` - configure only one.</p> | `[]`                    |
 | `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_CLUSTERNAME`              | <p>Name of the cluster.</p>                                                                             | `elasticsearch`         |
 | `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_USERNAME`                 | <p>Username for the database configured as secondary storage.</p>                                       | `''`                    |
 | `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PASSWORD`                 | <p>Password for the database configured as secondary storage.</p>                                       | `''`                    |
@@ -499,8 +499,8 @@ The following configurations apply to all components within the Orchestration Cl
 
 | Property                                                            | Description                                                                                             | Default value           |
 | :------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------ |:------------------------|
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_URL`                      | <p>Endpoint for the database configured as secondary storage.</p>                                       | `http://localhost:9200` |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_URLS`                     | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters.</p> | `[]`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_URL`                      | <p>Endpoint for the database configured as secondary storage. Mutually exclusive with `URLS` - configure only one.</p>                                       | `http://localhost:9200` |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_URLS`                     | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters. Mutually exclusive with `URL` - configure only one.</p> | `[]`                    |
 | `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_CLUSTERNAME`              | <p>Name of the cluster.</p>                                                                             | `elasticsearch`         |
 | `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_USERNAME`                 | <p>Username for the database configured as secondary storage.</p>                                       | `''`                    |
 | `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PASSWORD`                 | <p>Password for the database configured as secondary storage.</p>                                       | `''`                    |
