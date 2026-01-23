@@ -27,7 +27,7 @@ When multiple OIDC providers are set up, the cluster login page lets users selec
 - At least two OIDC-compliant IdPs (for example, Microsoft Entra ID, Keycloak, Okta).
 - Administrative access to each IdP (to register applications and obtain credentials).
 
-## Configuration approach
+## Configure multiple identity providers
 
 Configure multiple IdPs by defining each provider as a separate registration in `application.yaml` or using environment variables.
 
@@ -35,7 +35,7 @@ Each provider is identified by a unique `<provider-id>`, which is a user-defined
 
 ### Configure OIDC connection details for each provider
 
-Define each provider’s settings using the following pattern (`<provider-id>` is your chosen id):
+Define each provider’s settings using the following pattern (`<provider-id>` is your chosen ID):
 
 <Tabs
 groupId="optionsType"
