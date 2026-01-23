@@ -8,6 +8,8 @@ description: "A quickstart guide for developers to deploy and run Camunda 8 Self
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import {C8Run} from "@site/src/components/CamundaDistributions";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 :::note
 Camunda 8 Run provides a lightweight, self-managed environment for local development and prototyping. It is not intended for production use.
@@ -214,27 +216,28 @@ spring:
 Operate v2 has limited functionality in 8.9-alpha3 when running against H2. Full Operate support is planned for a later alpha. Tasklist and the v2 REST API have parity across supported secondary storage backends.
 :::
 
-#### Optional: Elasticsearch
+#### External relational database options
 
-If you need indexing, search, or full Operate/Tasklist functionality, enable Elasticsearch. Elasticsearch is still bundled with Camunda 8 Run in 8.9-alpha3 and can be managed by Camunda 8 Run or provided as an external service.
+Use an external relational database for secondary storage (PostgreSQL, MariaDB, MySQL, Oracle, or Microsoft SQL Server).
 
-To use Elasticsearch:
+1. Set `camunda.data.secondary-storage` with the JDBC URL and credentials.
+2. Ensure the database is reachable before starting Camunda 8 Run.
+3. If you already run a database, reuse the same config and update the URL, host/port, and credentials.
+4. If a separate JDBC driver is required, add it with `--extra-driver` or drop the JAR into `camunda-zeebe-<version>/lib`.
 
-```yaml
-data:
-  secondary-storage:
-    type: elasticsearch
-    elasticsearch:
-      url: http://elasticsearch:9200/
-```
+<Tabs
+groupId="secondary-storage-rdbms"
+defaultValue="postgresql"
+values={[
+{label: 'PostgreSQL', value: 'postgresql'},
+{label: 'MariaDB', value: 'mariadb'},
+{label: 'MySQL', value: 'mysql'},
+{label: 'Oracle', value: 'oracle'},
+{label: 'Microsoft SQL Server', value: 'mssql'},
+]}>
+<TabItem value="postgresql">
 
-Start Camunda 8 Run without `--disable-elasticsearch` to let Camunda 8 Run manage Elasticsearch, or use `--disable-elasticsearch --config <file>` and point to an external cluster.
-
-#### Other relational secondary storage options
-
-Camunda 8 Run also supports PostgreSQL, MariaDB, MySQL, Oracle, and Microsoft SQL Server for the secondary storage. Each option requires updating `camunda.data.secondary-storage` and ensuring a compatible database is running. The snippets below use Docker to illustrate local environments, but you can connect to any existing database by adjusting the JDBC URL.
-
-##### PostgreSQL
+**Secondary storage config**
 
 ```yaml
 camunda:
@@ -247,7 +250,7 @@ camunda:
         password: camunda
 ```
 
-Start the database:
+**Start database (Docker)**
 
 ```bash
 docker run -d --name camunda-postgres \
@@ -257,7 +260,7 @@ docker run -d --name camunda-postgres \
   -p 5432:5432 postgres:latest
 ```
 
-Reset the schema when needed:
+**Reset schema**
 
 ```bash
 docker exec camunda-postgres psql -U camunda -d postgres -c "
@@ -267,7 +270,10 @@ docker exec camunda-postgres psql -U camunda -d postgres -c "
 "
 ```
 
-##### MariaDB
+</TabItem>
+<TabItem value="mariadb">
+
+**Secondary storage config**
 
 ```yaml
 camunda:
@@ -280,7 +286,7 @@ camunda:
         password: camunda
 ```
 
-Start the database:
+**Start database (Docker)**
 
 ```bash
 docker run -d --name camunda-mariadb \
@@ -291,7 +297,7 @@ docker run -d --name camunda-mariadb \
   -p 3306:3306 mariadb:11.4
 ```
 
-Reset the schema:
+**Reset schema**
 
 ```bash
 docker exec camunda-mariadb mariadb -uroot -prootcamunda -e "
@@ -301,13 +307,14 @@ docker exec camunda-mariadb mariadb -uroot -prootcamunda -e "
 "
 ```
 
-Notes:
-
-Notes:
+**Notes**
 
 - No extra driver is required; MariaDB ships with the distribution.
 
-##### MySQL
+</TabItem>
+<TabItem value="mysql">
+
+**Secondary storage config**
 
 ```yaml
 camunda:
@@ -320,7 +327,7 @@ camunda:
         password: camunda
 ```
 
-Start the database:
+**Start database (Docker)**
 
 ```bash
 docker run -d --name camunda-mysql \
@@ -331,7 +338,7 @@ docker run -d --name camunda-mysql \
   -p 3306:3306 mysql:8.4
 ```
 
-Reset the schema:
+**Reset schema**
 
 ```bash
 docker exec camunda-mysql mysql -uroot -prootcamunda -e "
@@ -341,12 +348,15 @@ docker exec camunda-mysql mysql -uroot -prootcamunda -e "
 "
 ```
 
-Notes:
+**Notes**
 
-- MySQL requires the official Connector/J driver. Copy the downloaded JAR into `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/mysql-connector.jar` to `./c8run start`.
-- Ensure the JDBC URL references the port you expose on the host (3306 in the example above).
+- MySQL requires the official Connector/J driver. Copy the JAR into `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/mysql-connector.jar` to `./c8run start`.
+- Ensure the JDBC URL uses the host port you expose (3306 in the example above).
 
-##### Oracle
+</TabItem>
+<TabItem value="oracle">
+
+**Secondary storage config**
 
 ```yaml
 camunda:
@@ -359,7 +369,7 @@ camunda:
         password: camunda
 ```
 
-Start the database:
+**Start database (Docker)**
 
 ```bash
 docker run -d --name camunda-oracle \
@@ -370,7 +380,7 @@ docker run -d --name camunda-oracle \
   gvenzl/oracle-free:23-slim
 ```
 
-Reset the schema (drop and recreate the application user in `FREEPDB1`):
+**Reset schema**
 
 ```bash
 docker exec camunda-oracle bash -lc '
@@ -383,11 +393,14 @@ docker exec camunda-oracle bash -lc '
 '
 ```
 
-Notes:
+**Notes**
 
-- Download the Oracle JDBC driver (for example, `ojdbc11.jar`) and either place it in `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/ojdbc11.jar` when starting Camunda 8 Run.
+- Download the Oracle JDBC driver (for example, `ojdbc11.jar`) and place it in `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/ojdbc11.jar`.
 
-##### Microsoft SQL Server
+</TabItem>
+<TabItem value="mssql">
+
+**Secondary storage config**
 
 ```yaml
 camunda:
@@ -400,7 +413,7 @@ camunda:
         password: Camunda123!
 ```
 
-Start the database:
+**Start database (Docker)**
 
 ```bash
 docker run -d --name camunda-mssql \
@@ -410,7 +423,7 @@ docker run -d --name camunda-mssql \
   mcr.microsoft.com/mssql/server:2022-latest
 ```
 
-Reset the schema:
+**Reset schema**
 
 ```bash
 docker exec camunda-mssql /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U SA -P 'Camunda123!' -Q "
@@ -422,6 +435,25 @@ docker exec camunda-mssql /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U SA -P
   ALTER ROLE db_owner ADD MEMBER camunda;
 "
 ```
+
+</TabItem>
+</Tabs>
+
+#### Optional: Elasticsearch
+
+If you need indexing, search, or full Operate/Tasklist functionality, enable Elasticsearch. Elasticsearch is still bundled with Camunda 8 Run in 8.9 and can be managed by Camunda 8 Run or provided as an external service.
+
+To use Elasticsearch:
+
+```yaml
+data:
+  secondary-storage:
+    type: elasticsearch
+    elasticsearch:
+      url: http://elasticsearch:9200/
+```
+
+Start Camunda 8 Run without `--disable-elasticsearch` to let Camunda 8 Run manage Elasticsearch, or use `--disable-elasticsearch --config <file>` and point to an external cluster.
 
 ### Switching between storage types and migration notes
 
