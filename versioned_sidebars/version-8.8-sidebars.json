@@ -486,6 +486,7 @@
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
+            "components/modeler/desktop-modeler/deploy-diagram",
             "components/modeler/desktop-modeler/start-instance",
             "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
@@ -1112,6 +1113,28 @@
         "components/saas/data-locations",
         {
           "type": "category",
+          "label": "Monitoring",
+          "link": {
+            "type": "doc",
+            "id": "components/saas/monitoring/overview"
+          },
+          "items": [
+            {
+              "type": "category",
+              "label": "Cluster Metrics endpoint",
+              "link": {
+                "type": "doc",
+                "id": "components/saas/monitoring/cluster-metrics-endpoint/overview"
+              },
+              "items": [
+                "components/saas/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint",
+                "components/saas/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
           "label": "Encryption",
           "link": {
             "type": "doc",
@@ -1121,6 +1144,7 @@
             "components/saas/encryption-at-rest",
             "components/saas/byok/aws-external-encryption-setup",
             "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/key-state-behavior",
             "components/saas/byok/faq-and-troubleshooting"
           ]
         },
@@ -2946,9 +2970,9 @@
                         "id": "self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider"
                       },
                       "items": [
-                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/jwt-token-claims"
@@ -3009,6 +3033,11 @@
                 "id": "self-managed/deployment/helm/cloud-providers/index"
               },
               "items": [
+                {
+                  "type": "category",
+                  "label": "Local",
+                  "items": ["self-managed/deployment/helm/cloud-providers/kind"]
+                },
                 {
                   "type": "category",
                   "label": "Amazon",
@@ -3212,7 +3241,8 @@
                     "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
-                    "self-managed/components/orchestration-cluster/core-settings/configuration/logging"
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code"
                   ]
                 },
                 {
@@ -3367,6 +3397,7 @@
             },
             {
               "Desktop Modeler": [
+                "self-managed/components/modeler/desktop-modeler/connect-to-self-managed",
                 "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed"
               ]
             }
@@ -3398,7 +3429,8 @@
                 "self-managed/components/management-identity/configuration/connect-to-an-oidc-provider",
                 "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/components/management-identity/configuration/configure-external-identity-provider",
-                "self-managed/components/management-identity/configuration/alternative-db"
+                "self-managed/components/management-identity/configuration/alternative-db",
+                "self-managed/components/management-identity/configuration/initialize-tenants"
               ]
             },
             "self-managed/components/management-identity/authentication",

@@ -2,7 +2,7 @@
 id: api-versions
 title: "Tasklist API versions"
 sidebar_label: "API versions"
-description: "Learn about the differences between Tasklist based on V1 and V2 API, and how to migrate."
+description: "Learn about the differences between Tasklist V1 and V2 APIs and how to migrate."
 ---
 
 Tasklist can be used in two modes: V1 (legacy) and V2:
@@ -10,7 +10,7 @@ Tasklist can be used in two modes: V1 (legacy) and V2:
 - Tasklist V1 is based on the deprecated [Tasklist API](../../apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
 - Tasklist V2 is based on the new [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
-**Camunda recommend using V2 for all new projects and migrating existing applications from V1.**
+Camunda recommends using V2 for all new projects and migrating existing applications from V1.
 
 ## Tasklist based on V2 API
 
@@ -18,11 +18,10 @@ Tasklist V2 uses the Orchestration Cluster API, providing a more robust and perf
 
 Key benefits of using V2 include:
 
-- **Improved performance:** The Orchestration Cluster API is optimized for faster performance and response times.
-- **Recommended user task implementation:** It uses the [Camunda user task implementation type](../modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks), which is the successor of the deprecated [Job
-  worker-based user tasks](../modeler/bpmn/user-tasks/user-tasks.md#job-worker-implementation).
-- **Unified API:** It aligns with the [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) for a consistent development experience and fine-grained [access control](../concepts/access-control/access-control-overview.md).
-- **User task listeners:** [Camunda user tasks](../modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks) support [listeners](components/concepts/user-task-listeners.md) to programmatically react to task lifecycle changes. While you can use V1 in combination with user task listeners, there are some [limitations](components/concepts/user-task-listeners.md#limitations-for-tasklist-V1). For the best experience, use V2 and the Orchestration Cluster REST API.
+- Improved performance: The Orchestration Cluster API is optimized for faster performance and response times.
+- Recommended user task implementation: It uses the [Camunda user task implementation type](../modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks), which is the successor of the deprecated [Job worker-based user tasks](../modeler/bpmn/user-tasks/user-tasks.md#job-worker-implementation).
+- Unified API: It aligns with the [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) for a consistent development experience and fine-grained [access control](../concepts/access-control/access-control-overview.md) at the process-definition level.
+- User task listeners: [Camunda user tasks](../modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks) support [listeners](components/concepts/user-task-listeners.md) to programmatically react to task lifecycle changes. While you can use V1 in combination with user task listeners, there are some [limitations](components/concepts/user-task-listeners.md#limitations-for-tasklist-V1). For the best experience, use V2 and the Orchestration Cluster REST API.
 
 ## Migration from V1 to V2
 
@@ -33,9 +32,9 @@ The following features are only available in Tasklist API V1 and are not support
 
 - Job worker-based user tasks.
 - Draft variables.
-- User task access restrictions (currently not supported; see [authorization-based access control](../concepts/access-control/authorizations.md) for interim access management).
+- User task access restrictions (not supported in V2; see [authorization-based access control](../concepts/access-control/authorizations.md) for process-definition–level access management).
 - Public start forms.
-- Advanced process filtering (currently limited to search by process definition ID).
+- Advanced process filtering (limited to search by process definition ID).
 - Task context description.
 - Searching for user tasks with variable filters will not include tasks created prior to the upgrade to version 8.8.
 
@@ -60,7 +59,26 @@ The Tasklist V1 UI mode will remain available until Camunda 8.10, allowing time 
 
 In Tasklist V2, specifying candidate groups and candidate users in BPMN process definitions currently has no effect on task visibility or assignment.
 
-If you need to restrict task visibility based on candidate users and groups, use [user task access restrictions](./user-task-access-restrictions.md) with Tasklist V1 mode, or use [authorization-based access control](../concepts/access-control/authorizations.md) for fine-grained access management in V2.
+If you need to restrict which users can see or claim individual tasks, use
+[user task access restrictions](./user-task-access-restrictions.md) with Tasklist V1.
+
+Tasklist V2 does not support candidate users or candidate groups for task visibility or assignment.
+[Authorization-based access control](../concepts/access-control/authorizations.md) in V2 provides
+fine-grained access at the process-definition level.
+
+### Variable semantics
+
+Tasklist V1 returns variables for completed tasks as they were at completion time. When a task is completed via the V1 API, Tasklist persists a snapshot of all visible variables. V1 task search for completed tasks reads only this snapshot.
+
+Tasklist V2 returns variables as runtime state. User task variable search endpoints always reflect the latest values and do not store an immutable “value at completion” snapshot.
+
+For compatibility, when a task is completed via the V2 API, Tasklist persists a snapshot of only the variables explicitly included in the completion request.
+
+Because of this, mixing APIs for the same user task can lead to unexpected results. For example, if you complete a task via Tasklist V2 and then query it via Tasklist V1, V1 results show only the variables explicitly sent in the V2 completion request. Other in-scope process variables are not included.
+
+:::warning Avoid mixing Tasklist V1 and V2 APIs during migration
+To prevent unexpected variable results, avoid using Tasklist V1 and V2 APIs on the same tasks during migration.
+:::
 
 ## Switching between V1 and V2 modes
 
@@ -92,6 +110,8 @@ When switching between V1 and V2 mode, review and update authorizations to match
 
 ### User task access restrictions
 
-[User task access restrictions](./user-task-access-restrictions.md) are only supported when using the Tasklist V1 API and are currently not supported in V2.
+[User task access restrictions](./user-task-access-restrictions.md) are only supported when using the Tasklist V1 API and are not supported in V2.
 
-In Tasklist V2, use [authorization-based access control](../concepts/access-control/authorizations.md) to manage user permissions and task visibility instead.
+Tasklist V2 does not support task-level visibility restrictions.
+[Authorization-based access control](../concepts/access-control/authorizations.md) applies only at
+the process-definition level and does not limit access to individual tasks.

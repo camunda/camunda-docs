@@ -221,6 +221,7 @@ components:
           allOf:
             - $ref: "#/components/schemas/IncidentErrorTypeFilterProperty"
         errorMessage:
+          description: The error message of this incident.
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
         elementId:
@@ -568,10 +569,7 @@ components:
           type: string
           enum:
             - activeInstancesWithErrorCount
-            - processDefinitionId
             - processDefinitionKey
-            - processDefinitionName
-            - processDefinitionVersion
             - tenantId
         order:
           $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
