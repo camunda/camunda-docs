@@ -2,20 +2,20 @@
 id: connect-multiple-identity-providers
 title: Connect to multiple identity providers
 sidebar_label: Connect to multiple identity providers
-description: Learn how to connect Camunda 8 Orchestration Cluster Identity to mulitple external Identity Providers (IdP) via OpenID Connect (OIDC) for authentication and user management
+description: Learn how to connect Camunda 8 Orchestration Cluster Identity to multiple external identity providers (IdPs) using OpenID Connect (OIDC) for authentication and user management.
 unlisted: true
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Camunda 8 Orchestration Cluster (OC) supports integrating multiple OpenID Connect (OIDC) Identity Providers (IdPs), allowing users from different organizations or platforms to authenticate using their preferred provider. This feature is essential for environments with diverse authentication needs, such as multi-organization, partner, or tenant scenarios.
+Camunda 8 Orchestration Cluster supports multiple OpenID Connect (OIDC) identity providers (IdPs). This lets users from different organizations authenticate using their preferred provider.
 
 With multiple IdPs configured:
 
-- Users will choose their IdP when logging in to a cluster.
-- Camunda will validate and accept access tokens from multiple trusted issuers for both web and automated (API) access.
-- You can offer greater flexibility and security, aligning with best practices for identity federation and multi-tenancy.
+- Users choose an IdP when logging in to a cluster.
+- Camunda validates and accepts access tokens from trusted issuers for UI and API access.
+- You can support identity federation and multi-tenancy scenarios with more flexible authentication.
 
 ## Overview
 
@@ -27,9 +27,9 @@ When multiple OIDC providers are set up, the cluster login page lets users selec
 - At least two OIDC-compliant IdPs (for example, Microsoft Entra ID, Keycloak, Okta).
 - Administrative access to each IdP (to register applications and obtain credentials).
 
-## Configuration Approach
+## Configuration approach
 
-Multiple IdPs are configured by defining each provider as a separate registration using application.yaml or environment variables.
+Configure multiple IdPs by defining each provider as a separate registration in `application.yaml` or using environment variables.
 
 Each provider is identified by a unique `<provider-id>`, which is a user-defined label (e.g., `ENTRA`, `KEYCLOAK`, `PARTNER_X`).
 
@@ -37,8 +37,16 @@ Each provider is identified by a unique `<provider-id>`, which is a user-defined
 
 Define each provider’s settings using the following pattern (`<provider-id>` is your chosen id):
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
-<TabItem value="yaml">
+<Tabs
+groupId="optionsType"
+defaultValue="yaml"
+queryString
+values={[
+{ label: "application.yaml", value: "yaml" },
+{ label: "Environment variables", value: "env" }
+]}
+
+> <TabItem value="yaml">
 
 ```yaml
 camunda.security.authentication.providers.oidc.<provider-id>.client-id: <YOUR_CLIENTID>
@@ -46,7 +54,7 @@ camunda.security.authentication.providers.oidc.<provider-id>.client-name: <YOUR_
 camunda.security.authentication.providers.oidc.<provider-id>.client-secret: <YOUR_CLIENTSECRET>
 camunda.security.authentication.providers.oidc.<provider-id>.issuer-uri: <YOUR_ISSUERURI>
 camunda.security.authentication.providers.oidc.<provider-id>.redirect-uri: <YOUR_REDIRECTURI>
-camunda.security.authentication.providers.oidc.<provider-id>.token-uri: <YOUR_TOKENRUI>
+camunda.security.authentication.providers.oidc.<provider-id>.token-uri: <YOUR_TOKENURI>
 camunda.security.authentication.providers.oidc.<provider-id>.jwk-set-uri: <YOUR_JWKSETURI>
 camunda.security.authentication.providers.oidc.<provider-id>.scope: ["openid"]
 camunda.security.authentication.providers.oidc.<provider-id>.audiences: <YOUR_CLIENTID>
@@ -71,13 +79,13 @@ CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_GRANTTYPE=
 </TabItem>
 </Tabs>
 
-**Example configuration for two providers:**
+Example configuration for two providers:
 
 ```yaml
 # Keycloak
 camunda.security.authentication.providers.oidc.keycloak.client-name: "Keycloak - MyCompany"
 camunda.security.authentication.providers.oidc.keycloak.client-id: <YOUR_KEYCLOAK_CLIENTID>
-camunda.security.authentication.providers.oidc.keycloak.client-secret: <YOUR_KEYCLOK_CLIENTSECRET>
+camunda.security.authentication.providers.oidc.keycloak.client-secret: <YOUR_KEYCLOAK_CLIENTSECRET>
 camunda.security.authentication.providers.oidc.keycloak.issuer-uri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
 camunda.security.authentication.providers.oidc.keycloak.redirect-uri: "http://localhost:8080/sso-callback"
 camunda.security.authentication.providers.oidc.keycloak.audiences: <YOUR_CLIENTID>
@@ -96,14 +104,14 @@ camunda.security.authentication.providers.oidc.entraid.scope:
 ```
 
 :::tip
-The **issuer-uri** property is required and identifies the identity provider that issues tokens for this configuration.
+The `issuer-uri` property is required for each provider configuration.
 :::
 
 You can repeat these variables for any number of OIDC IdPs by using a unique `<provider-id>` for each.
 
-### Global OIDC Properties
+### Configure global OIDC claims
 
-The following OIDC-related properties are shared by all configured providers and **must be the same** for every IdP:
+The following OIDC-related properties are shared by all configured providers and must be the same for every IdP:
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
@@ -134,42 +142,38 @@ These define:
 
 All IdPs must use the same claims for these purposes.
 
-### Login Page Behavior
+### Login page behavior
 
-After configuring multiple IdPs and restarting the Orchestration Cluster:
+After you configure multiple IdPs and restart Camunda 8 Orchestration Cluster, users can select an identity provider on the login page and sign in.
 
-- The cluster login page will show a list of available OIDC Providers. Users will see the `client name` as the selection, so choose accordingly.
-- Users can pick their identity provider, sign in, and proceed to Camunda UIs.
-  - This login page is generated by Spring Security and suffices for most use cases.
+### API authentication
 
-### API Authentication
-
-For machine-to-machine (M2M) API calls (REST/gRPC), Camunda accepts access tokens (bearer tokens) from **any** of the configured IdPs, as long as the `issuer` claim matches one of the trusted issuer URIs.
+For machine-to-machine (M2M) API calls (REST/gRPC), Camunda accepts access tokens (bearer tokens) from any of the configured IdPs, as long as the `issuer` claim matches one of the trusted issuer URIs.
 
 If an access token’s issuer is not configured, the request is denied.
 
-### Best Practices
+### Best practices
 
 - Each IdP should use a unique and meaningful `<provider-id>`.
 - Ensure the `issuer URI` is present and correct for each provider.
 - Set up claims (clientId, username, groups) consistently across all IdPs.
 
-### Overall Workflow
+### Overall workflow
 
-1. **Prepare and register applications/clients** in each IdP, obtaining client ID, secret, and issuer URI.
-2. **Configure environment variables** (or use application.yaml/Helm values) for each IdP as above.
-3. **Set global OIDC claims** that work across all providers.
-4. **Restart Camunda Orchestration Cluster** to apply changes.
-5. **Test logins** with accounts from each IdP to verify authentication and access.
-6. **Assign roles and authorizations** as required (for more, see [Authorizations](../../../../components/concepts/access-control/authorizations.md)).
+1. Prepare and register applications/clients in each IdP. Obtain the client ID, client secret, and issuer URI.
+2. Configure each IdP using environment variables or `application.yaml` (or Helm values).
+3. Configure global OIDC claims that work across all providers.
+4. Restart Camunda 8 Orchestration Cluster to apply the changes.
+5. Test login with accounts from each IdP.
+6. Assign roles and authorizations as needed. For details, see [Authorizations](../../../../components/concepts/access-control/authorizations.md).
 
 ### Troubleshooting
 
-- If users cannot log in, check that the client configuration, issuer URI, and claims match exactly what is set in the IdP.
-- Logs will indicate if an issuer or client configuration is missing or mismatched.
-- The login page may not show a provider if its configuration is incomplete.
+- If users cannot log in, verify that the client configuration, issuer URI, and claims match the values configured in the IdP.
+- Check the Orchestration Cluster logs for missing or mismatched issuer and client configuration.
+- If a provider does not appear on the login page, verify that its configuration is complete.
 
-### Further Resources
+### Further resources
 
 - [Configure external Identity Providers](./connect-external-identity-provider.md)
 - [Camunda authentication and authorization](../../../../components/concepts/access-control/authorizations.md)
