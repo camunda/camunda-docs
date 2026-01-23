@@ -69,21 +69,21 @@ Key dates, release notes, announcements, and supporting documentation for the Ca
       <td>8.9.0-alpha3</td>
       <td>Alpha</td>
       <td>13 January 2026</td>
-      <td><a href="../890/890-alpha2-release-notes.md">Alpha 3 release notes</a></td>
+      <td>[Alpha 3 release notes](./890/890-alpha3-release-notes.md)</td>
       <td>-</td>
     </tr>
     <tr>
       <td>8.9.0-alpha2</td>
       <td>Alpha</td>
       <td>9 December 2026</td>
-      <td><a href="../890/890-alpha2-release-notes/">Alpha 2 release notes</a></td>
+      <td>[Alpha 2 release notes](./890/890-alpha2-release-notes.md)</td>
       <td>-</td>
     </tr>
     <tr>
       <td>8.9.0-alpha1</td>
       <td>Alpha</td>
       <td>11 November 2026</td>
-      <td><a href="./890/890-alpha1-release-notes.md">Alpha 1 release notes</a></td>
+      <td>[Alpha 1 release notes](./890/890-alpha1-release-notes.md)</td>
       <td>-</td>
     </tr>
   </tbody>
