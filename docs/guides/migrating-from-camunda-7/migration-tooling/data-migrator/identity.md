@@ -27,7 +27,7 @@ As of today, the following requirements and limitations apply:
   - Supported authorizations
 - Migration for other identity entities as well as retrying skipped entities are either not yet implemented or not supported (detailed in the [Supported entities](#supported-entities) section below).
 - Once migration has been triggered, it's strongly recommended not to create new identity data on Camunda 7. Even if migration is attempted again, the new data might not be migrated.
-- In order for authorizations to work correctly after migration, process definitions, forms, DRD and decision definitions need to have the same IDs in Camunda 8 as in Camunda 7.
+- In order for authorizations to work correctly after migration, process definitions, forms, DRD and decision definitions need to have the same IDs in Camunda 8 as in Camunda 7. This should be the case if you have already migrated runtime and history data.
 
 ## Supported entities
 
