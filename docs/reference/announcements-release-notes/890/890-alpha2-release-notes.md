@@ -18,9 +18,9 @@ import ReleaseAnnouncementsFilter from '@site/src/components/ReleaseAnnouncement
 
 New features and important updates included in the 8.9 alpha 2 release.
 
-| Version      | Release date     | Changelogs                                                                                                                                                         |
-| :----------- | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 8.9.0-alpha2 | 09 December 2025 | [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha2) / [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha2) |
+| Version      | Release date     | Changelogs                                                                                                                                                        |
+| :----------- | :--------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 8.9.0-alpha2 | 09 December 2025 | [ Camunda 8 core](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha2) / [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha2) |
 
 <ReleaseAnnouncementsFilter>
 

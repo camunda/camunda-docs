@@ -7,7 +7,7 @@ keywords: ["8.9 release notes", "release notes for 8.9", "release notes"]
 page_rank: 90
 ---
 
-These release notes identify the main new features and updates in the 8.9 minor release, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
+These release notes identify the main new features and updates in the Camunda 8.9 minor release, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
 
 | Version | Release date  | Scheduled end of maintenance |
 | :------ | :------------ | :--------------------------- |
