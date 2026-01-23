@@ -56,7 +56,7 @@ For information about configuring authorizations in Identity, see
 
 ## Getting started
 
-This section helps you get up and running in minutes. To begin using the Orchestration Cluster REST API, you'll need the following.
+This section helps you get up and running in minutes. To begin using the Orchestration Cluster REST API, you need the following.
 
 ### Prerequisites
 
