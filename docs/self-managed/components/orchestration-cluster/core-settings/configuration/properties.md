@@ -422,33 +422,47 @@ The following configurations apply to all components within the Orchestration Cl
 
 ### `camunda.data.secondary-storage.elasticsearch`
 
-| Property                                                                        | Description                                                                                           | Default value           |
-| :------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------- | :---------------------- |
-| `camunda.data.secondary-storage.elasticsearch.url`                              | <p>Endpoint for the database configured as secondary storage.</p>                                     | `http://localhost:9200` |
-| `camunda.data.secondary-storage.elasticsearch.cluster-name`                     | <p>Name of the cluster.</p>                                                                           | `elasticsearch`         |
-| `camunda.data.secondary-storage.elasticsearch.username`                         | <p>Username for the database configured as secondary storage.</p>                                     | `''`                    |
-| `camunda.data.secondary-storage.elasticsearch.password`                         | <p>Password for the database configured as secondary storage.</p>                                     | `''`                    |
-| `camunda.data.secondary-storage.elasticsearch.security.enabled`                 | <p>Enable security.</p>                                                                               | `false`                 |
-| `camunda.data.secondary-storage.elasticsearch.security.certificate-path`        | <p>Path to certificate used by Elasticsearch.</p>                                                     | `''`                    |
-| `camunda.data.secondary-storage.elasticsearch.security.verify-hostname`         | <p>Should the hostname be validated.</p>                                                              | `true`                  |
-| `camunda.data.secondary-storage.elasticsearch.security.self-signed`             | <p>Certificate was self-signed.</p>                                                                   | `false`                 |
-| `camunda.data.secondary-storage.elasticsearch.index-prefix`                     | <p>Prefix to apply to the indexes.</p>                                                                | `''`                    |
-| `camunda.data.secondary-storage.elasticsearch.history.process-instance-enabled` | <p>If `true`, enables the archiving of the completed process instances and their related objects.</p> | `true`                  |
+| Property                                                                        | Description                                                                                             | Default value            |
+| :------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------ |:-------------------------|
+| `camunda.data.secondary-storage.elasticsearch.url`                              | <p>Endpoint for the database configured as secondary storage.</p>                                       | `http://localhost:9200`  |
+| `camunda.data.secondary-storage.elasticsearch.urls`                             | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters.</p> | `[]`                     |
+| `camunda.data.secondary-storage.elasticsearch.cluster-name`                     | <p>Name of the cluster.</p>                                                                             | `elasticsearch`          |
+| `camunda.data.secondary-storage.elasticsearch.username`                         | <p>Username for the database configured as secondary storage.</p>                                       | `''`                     |
+| `camunda.data.secondary-storage.elasticsearch.password`                         | <p>Password for the database configured as secondary storage.</p>                                       | `''`                     |
+| `camunda.data.secondary-storage.elasticsearch.security.enabled`                 | <p>Enable security.</p>                                                                                 | `false`                  |
+| `camunda.data.secondary-storage.elasticsearch.security.certificate-path`        | <p>Path to certificate used by Elasticsearch.</p>                                                       | `''`                     |
+| `camunda.data.secondary-storage.elasticsearch.security.verify-hostname`         | <p>Should the hostname be validated.</p>                                                                | `true`                   |
+| `camunda.data.secondary-storage.elasticsearch.security.self-signed`             | <p>Certificate was self-signed.</p>                                                                     | `false`                  |
+| `camunda.data.secondary-storage.elasticsearch.index-prefix`                     | <p>Prefix to apply to the indexes.</p>                                                                  | `''`                     |
+| `camunda.data.secondary-storage.elasticsearch.history.process-instance-enabled` | <p>If `true`, enables the archiving of the completed process instances and their related objects.</p>   | `true`                   |
+| `camunda.data.secondary-storage.elasticsearch.proxy.enabled`                    | <p>Enable proxy for connecting to Elasticsearch.</p>                                                    | `false`                  |
+| `camunda.data.secondary-storage.elasticsearch.proxy.host`                       | <p>Proxy host. Required if proxy is enabled.</p>                                                        | `''`                     |
+| `camunda.data.secondary-storage.elasticsearch.proxy.port`                       | <p>Proxy port. Required if proxy is enabled.</p>                                                        | `''`                     |
+| `camunda.data.secondary-storage.elasticsearch.proxy.ssl-enabled`                | <p>Enable SSL for the proxy connection.</p>                                                             | `false`                  |
+| `camunda.data.secondary-storage.elasticsearch.proxy.username`                   | <p>Username for proxy authentication.</p>                                                               | `''`                     |
+| `camunda.data.secondary-storage.elasticsearch.proxy.password`                   | <p>Password for proxy authentication.</p>                                                               | `''`                     |
 
 ### `camunda.data.secondary-storage.opensearch`
 
-| Property                                                                     | Description                                                                                           | Default value           |
-| :--------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- | :---------------------- |
-| `camunda.data.secondary-storage.opensearch.url`                              | <p>Endpoint for the database configured as secondary storage.</p>                                     | `http://localhost:9200` |
-| `camunda.data.secondary-storage.opensearch.cluster-name`                     | <p>Name of the cluster.</p>                                                                           | `elasticsearch`         |
-| `camunda.data.secondary-storage.opensearch.username`                         | <p>Username for the database configured as secondary storage.</p>                                     | `''`                    |
-| `camunda.data.secondary-storage.opensearch.password`                         | <p>Password for the database configured as secondary storage..</p>                                    | `''`                    |
-| `camunda.data.secondary-storage.opensearch.security.enabled`                 | <p>Enable security</p>                                                                                | `false`                 |
-| `camunda.data.secondary-storage.opensearch.security.certificate-path`        | <p>Path to certificate used by OpenSearch.</p>                                                        | `''`                    |
-| `camunda.data.secondary-storage.opensearch.security.verify-hostname`         | <p>CShould the hostname be validated.</p>                                                             | `true`                  |
-| `camunda.data.secondary-storage.opensearch.security.self-signed`             | <p>Certificate was self-signed.</p>                                                                   | `false`                 |
-| `camunda.data.secondary-storage.opensearch.index-prefix`                     | <p>Prefix to apply to the indexes.</p>                                                                | `''`                    |
-| `camunda.data.secondary-storage.opensearch.history.process-instance-enabled` | <p>If `true`, enables the archiving of the completed process instances and their related objects.</p> | `true`                  |
+| Property                                                                     | Description                                                                                             | Default value           |
+| :--------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ |:------------------------|
+| `camunda.data.secondary-storage.opensearch.url`                              | <p>Endpoint for the database configured as secondary storage.</p>                                       | `http://localhost:9200` |
+| `camunda.data.secondary-storage.opensearch.urls`                             | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters.</p> | `[]`                    |
+| `camunda.data.secondary-storage.opensearch.cluster-name`                     | <p>Name of the cluster.</p>                                                                             | `elasticsearch`         |
+| `camunda.data.secondary-storage.opensearch.username`                         | <p>Username for the database configured as secondary storage.</p>                                       | `''`                    |
+| `camunda.data.secondary-storage.opensearch.password`                         | <p>Password for the database configured as secondary storage.</p>                                       | `''`                    |
+| `camunda.data.secondary-storage.opensearch.security.enabled`                 | <p>Enable security.</p>                                                                                 | `false`                 |
+| `camunda.data.secondary-storage.opensearch.security.certificate-path`        | <p>Path to certificate used by OpenSearch.</p>                                                          | `''`                    |
+| `camunda.data.secondary-storage.opensearch.security.verify-hostname`         | <p>Should the hostname be validated.</p>                                                                | `true`                  |
+| `camunda.data.secondary-storage.opensearch.security.self-signed`             | <p>Certificate was self-signed.</p>                                                                     | `false`                 |
+| `camunda.data.secondary-storage.opensearch.index-prefix`                     | <p>Prefix to apply to the indexes.</p>                                                                  | `''`                    |
+| `camunda.data.secondary-storage.opensearch.history.process-instance-enabled` | <p>If `true`, enables the archiving of the completed process instances and their related objects.</p>   | `true`                  |
+| `camunda.data.secondary-storage.opensearch.proxy.enabled`                    | <p>Enable proxy for connecting to OpenSearch.</p>                                                       | `false`                 |
+| `camunda.data.secondary-storage.opensearch.proxy.host`                       | <p>Proxy host. Required if proxy is enabled.</p>                                                        | `''`                    |
+| `camunda.data.secondary-storage.opensearch.proxy.port`                       | <p>Proxy port. Required if proxy is enabled.</p>                                                        | `''`                    |
+| `camunda.data.secondary-storage.opensearch.proxy.ssl-enabled`                | <p>Enable SSL for the proxy connection.</p>                                                             | `false`                 |
+| `camunda.data.secondary-storage.opensearch.proxy.username`                   | <p>Username for proxy authentication.</p>                                                               | `''`                    |
+| `camunda.data.secondary-storage.opensearch.proxy.password`                   | <p>Password for proxy authentication.</p>                                                               | `''`                    |
 
 </TabItem>
 <TabItem value="env" label="Environment variables">
@@ -462,31 +476,45 @@ The following configurations apply to all components within the Orchestration Cl
 
 ### `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH`
 
-| Property                                                               | Description                                                       | Default value           |
-| :--------------------------------------------------------------------- | :---------------------------------------------------------------- | :---------------------- |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URL`                      | <p>Endpoint for the database configured as secondary storage.</p> | `http://localhost:9200` |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_CLUSTERNAME`              | <p>Name of the cluster.</p>                                       | `elasticsearch`         |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_USERNAME`                 | <p>Username for the database configured as secondary storage.</p> | `''`                    |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PASSWORD`                 | <p>Password for the database configured as secondary storage.</p> | `''`                    |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_ENABLED`         | <p>Enable security.</p>                                           | `false`                 |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_CERTIFICATEPATH` | <p>Path to certificate used by Elasticsearch.</p>                 | `''`                    |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_VERIFYHOSTNAME`  | <p>Should the hostname be validated.</p>                          | `true`                  |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_SELFSIGNED`      | <p>Certificate was self-signed.</p>                               | `false`                 |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_INDEXPREFIX`              | <p>Prefix to apply to the indexes.</p>                            | `''`                    |
+| Property                                                               | Description                                                                                             | Default value           |
+| :--------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ |:------------------------|
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URL`                      | <p>Endpoint for the database configured as secondary storage.</p>                                       | `http://localhost:9200` |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URLS`                     | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters.</p> | `[]`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_CLUSTERNAME`              | <p>Name of the cluster.</p>                                                                             | `elasticsearch`         |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_USERNAME`                 | <p>Username for the database configured as secondary storage.</p>                                       | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PASSWORD`                 | <p>Password for the database configured as secondary storage.</p>                                       | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_ENABLED`         | <p>Enable security.</p>                                                                                 | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_CERTIFICATEPATH` | <p>Path to certificate used by Elasticsearch.</p>                                                       | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_VERIFYHOSTNAME`  | <p>Should the hostname be validated.</p>                                                                | `true`                  |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_SELFSIGNED`      | <p>Certificate was self-signed.</p>                                                                     | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_INDEXPREFIX`              | <p>Prefix to apply to the indexes.</p>                                                                  | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PROXY_ENABLED`            | <p>Enable proxy for connecting to Elasticsearch.</p>                                                    | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PROXY_HOST`               | <p>Proxy host. Required if proxy is enabled.</p>                                                        | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PROXY_PORT`               | <p>Proxy port. Required if proxy is enabled.</p>                                                        | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PROXY_SSLENABLED`         | <p>Enable SSL for the proxy connection.</p>                                                             | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PROXY_USERNAME`           | <p>Username for proxy authentication.</p>                                                               | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PROXY_PASSWORD`           | <p>Password for proxy authentication.</p>                                                               | `''`                    |
 
 ### `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH`
 
-| Property                                                            | Description                                                        | Default value           |
-| :------------------------------------------------------------------ | :----------------------------------------------------------------- | :---------------------- |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_URL`                      | <p>Endpoint for the database configured as secondary storage.</p>  | `http://localhost:9200` |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_CLUSTERNAME`              | <p>Name of the cluster.</p>                                        | `elasticsearch'`        |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_USERNAME`                 | <p>Username for the database configured as secondary storage.</p>  | `''`                    |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PASSWORD`                 | <p>Password for the database configured as secondary storage..</p> | `''`                    |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_ENABLED`         | <p>Enable security</p>                                             | `false`                 |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_CERTIFICATEPATH` | <p>Path to certificate used by OpenSearch.</p>                     | `''`                    |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_VERIFYHOSTNAME`  | <p>CShould the hostname be validated.</p>                          | `true`                  |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_SELFSIGNED`      | <p>Certificate was self-signed.</p>                                | `false`                 |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_INDEXPREFIX`              | <p>Prefix to apply to the indexes.</p>                             | `''`                    |
+| Property                                                            | Description                                                                                             | Default value           |
+| :------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------ |:------------------------|
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_URL`                      | <p>Endpoint for the database configured as secondary storage.</p>                                       | `http://localhost:9200` |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_URLS`                     | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters.</p> | `[]`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_CLUSTERNAME`              | <p>Name of the cluster.</p>                                                                             | `elasticsearch`         |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_USERNAME`                 | <p>Username for the database configured as secondary storage.</p>                                       | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PASSWORD`                 | <p>Password for the database configured as secondary storage.</p>                                       | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_ENABLED`         | <p>Enable security.</p>                                                                                 | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_CERTIFICATEPATH` | <p>Path to certificate used by OpenSearch.</p>                                                          | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_VERIFYHOSTNAME`  | <p>Should the hostname be validated.</p>                                                                | `true`                  |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_SELFSIGNED`      | <p>Certificate was self-signed.</p>                                                                     | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_INDEXPREFIX`              | <p>Prefix to apply to the indexes.</p>                                                                  | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PROXY_ENABLED`            | <p>Enable proxy for connecting to OpenSearch.</p>                                                       | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PROXY_HOST`               | <p>Proxy host. Required if proxy is enabled.</p>                                                        | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PROXY_PORT`               | <p>Proxy port. Required if proxy is enabled.</p>                                                        | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PROXY_SSLENABLED`         | <p>Enable SSL for the proxy connection.</p>                                                             | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PROXY_USERNAME`           | <p>Username for proxy authentication.</p>                                                               | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PROXY_PASSWORD`           | <p>Password for proxy authentication.</p>                                                               | `''`                    |
 
   </TabItem>
 </Tabs>
