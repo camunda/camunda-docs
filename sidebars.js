@@ -1310,65 +1310,30 @@ module.exports = {
     "reference/overview",
     {
       type: "category",
-      label: "Release announcements and release notes",
+      label: "Release information",
       link: {
         type: "doc",
         id: "reference/announcements-release-notes/overview",
       },
       items: [
+        "reference/announcements-release-notes/890/whats-new-in-89",
+        "reference/announcements-release-notes/890/890-announcements",
         {
           type: "category",
-          label: "8.9",
+          label: "Release notes",
           link: {
             type: "doc",
-            id: "reference/announcements-release-notes/890/890-announcements",
+            id: "reference/announcements-release-notes/890/890-release-notes",
           },
           items: [
-            "reference/announcements-release-notes/890/whats-new-in-89",
-            "reference/announcements-release-notes/890/890-announcements",
-            "reference/announcements-release-notes/890/890-release-notes",
+            "reference/announcements-release-notes/890/890-alpha3-release-notes",
+            "reference/announcements-release-notes/890/890-alpha2-release-notes",
+            "reference/announcements-release-notes/890/890-alpha1-release-notes",
           ],
         },
-        {
-          type: "category",
-          label: "8.8",
-          link: {
-            type: "doc",
-            id: "reference/announcements-release-notes/880/whats-new-in-88",
-          },
-          items: [
-            "reference/announcements-release-notes/880/whats-new-in-88",
-            "reference/announcements-release-notes/880/880-announcements",
-            "reference/announcements-release-notes/880/880-release-notes",
-          ],
-        },
-        {
-          type: "category",
-          label: "8.7",
-          link: {
-            type: "doc",
-            id: "reference/announcements-release-notes/870/870-announcements",
-          },
-          items: [
-            "reference/announcements-release-notes/870/870-announcements",
-            "reference/announcements-release-notes/870/870-release-notes",
-          ],
-        },
-        {
-          type: "category",
-          label: "8.6",
-          link: {
-            type: "doc",
-            id: "reference/announcements-release-notes/860/860-announcements",
-          },
-          items: [
-            "reference/announcements-release-notes/860/860-announcements",
-            "reference/announcements-release-notes/860/860-release-notes",
-          ],
-        },
-        "reference/announcements-release-notes/release-policy",
       ],
     },
+    "reference/announcements-release-notes/release-policy",
     "reference/notices",
     "reference/licenses",
     "reference/public-api",

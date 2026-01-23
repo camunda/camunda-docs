@@ -1,0 +1,365 @@
+.wrapper {
+  margin: 1rem 0 1.5rem;
+}
+
+.controls {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin: 2.5rem 0 1rem 0;
+  flex-wrap: wrap;
+}
+
+.label {
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.label::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px 14px;
+  /* Simple funnel/filter icon */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 3H2l8 9v7l4 2v-9l8-9z'/%3E%3C/svg%3E");
+}
+
+.hr {
+  width: 100%;
+  text-align: left;
+  margin-left: 0;
+  background-color: var(--ifm-table-border-color);
+  margin-bottom: 0;
+}
+
+/* Chip container (pill background) */
+.badgeGroup {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+/* Chip button */
+.filterBadgeButton {
+  appearance: none;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-font-color-base);
+  font: inherit;
+  cursor: pointer;
+  line-height: 1;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.filterBadgeButton:hover {
+  background: var(--ifm-color-emphasis-200);
+}
+
+.filterBadgeButton:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.filterBadgeButtonInactive {
+  /* intentionally inherits the grey chip look */
+}
+
+/* Active chip */
+.filterBadgeButtonActive {
+  background: #007bff;
+  border-color: #007bff;
+  color: #ffffff;
+}
+
+.filterBadgeButtonActive:hover {
+  background: #007bff;
+  border-color: #007bff;
+  color: #ffffff;
+}
+
+/* Hide non-matching announcement rows (headings handled by JS in the component) */
+.wrapper[data-announcement-filter="breaking-change"]
+  :global(.release-announcement-row:not([data-type="breaking-change"])) {
+  display: none;
+}
+
+.wrapper[data-announcement-filter="feature"]
+  :global(.release-announcement-row:not([data-type="feature"])) {
+  display: none;
+}
+
+.wrapper[data-announcement-filter="deprecated"]
+  :global(.release-announcement-row:not([data-type="deprecated"])) {
+  display: none;
+}
+
+.wrapper[data-announcement-filter="change"]
+  :global(.release-announcement-row:not([data-type="change"])) {
+  display: none;
+}
+
+/* 1-column layout (no Type|Change grid) */
+.wrapper :global(.release-announcement-row:not([hidden])) {
+  display: block;
+  margin-bottom: 1rem;
+  border-bottom: 0;
+  padding: 1rem 0;
+}
+
+/* Ensure hidden rows are actually hidden */
+.wrapper :global(.release-announcement-row[hidden]) {
+  display: none;
+}
+
+/* Old 2-column header row not used */
+.columnHeader {
+  display: none;
+}
+
+/* Old per-cell padding-top from the grid layout is no longer wanted */
+.wrapper :global(.release-announcement-row > div) {
+  padding-top: 0;
+}
+
+/* Defensive: if any legacy badge column still exists in MDX, hide it */
+.wrapper :global(.release-announcement-badge) {
+  display: none;
+}
+
+.inlineMetaBadges {
+  margin: 0.35rem 0 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.typeInlineBadge,
+.areaInlineBadge,
+.deploymentInlineBadge {
+  font-weight: 600;
+}
+
+.wrapper
+  :global(.release-announcement-row[data-type="feature"])
+  .typeInlineBadge {
+  background: #dcfce7;
+  border-color: #61976d;
+  color: #16a34a;
+}
+
+.wrapper
+  :global(.release-announcement-row[data-type="update"])
+  .typeInlineBadge {
+  background: #e2ebfb;
+  border-color: #bbd0f0;
+  color: #0043ce;
+}
+
+.wrapper
+  :global(.release-announcement-row[data-type="announcement"])
+  .typeInlineBadge {
+  background: #e2ebfb;
+  border-color: #bbd0f0;
+  color: #0043ce;
+}
+
+.wrapper
+  :global(.release-announcement-row[data-type="breaking-change"])
+  .typeInlineBadge {
+  background: #fef4f3;
+  border-color: #facccd;
+  color: #b82a36;
+}
+
+.wrapper
+  :global(.release-announcement-row[data-type="deprecated"])
+  .typeInlineBadge {
+  background: #fef3c7;
+  border-color: #fde68a;
+  color: #b36000;
+}
+
+.wrapper
+  :global(.release-announcement-row[data-type="removed"])
+  .typeInlineBadge {
+  background: #fef3c7;
+  border-color: #fde68a;
+  color: #b36000;
+}
+
+/* Only the inline deployment badges (SaaS + Self-Managed) */
+.deploymentInlineBadge {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-font-color-base);
+}
+
+/* Only the inline area badges */
+.areaInlineBadge {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-font-color-base);
+}
+
+/* Remove top padding (and top margin) for h3 headings inside this filter component */
+.wrapper :global(.release-announcement-content h3) {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* Add top padding to the first H2 inside the filter content */
+.list :global(> h2:first-of-type) {
+  padding-top: 3rem;
+}
+
+/* 2-column layout: Type (left) | Content (right) */
+.wrapper :global(.release-announcement-row:not([hidden])) {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  column-gap: 5px; /* gap between columns */
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--ifm-table-border-color);
+  padding: 1rem 0.75rem 1rem 0;
+}
+
+/* Left column (Type badge) */
+.wrapper :global(.release-announcement-type) {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 0.15rem;
+}
+
+/* Right column (content) */
+.wrapper :global(.release-announcement-content) {
+  min-width: 0;
+}
+
+/* Small screens: stack Type above content */
+@media (max-width: 996px) {
+  .wrapper :global(.release-announcement-row:not([hidden])) {
+    grid-template-columns: 1fr;
+    row-gap: 0.5rem;
+  }
+}
+
+.filterSelect {
+  /* Restore the original select styling */
+  border: 1px solid var(--ifm-color-emphasis-200);
+  background-color: var(--ifm-color-emphasis-0);
+  color: var(--ifm-font-color-base);
+  font: inherit;
+  line-height: 1.2;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.875rem;
+
+  /* Keep custom down-caret */
+  appearance: none;
+  padding-right: 2.25rem; /* space for icon */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 12px 12px;
+}
+
+.filterSelect:hover {
+  background-color: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-300);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23444' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+}
+
+.filterSelect:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* Desktop: Type badge lives in the left column; hide the inline (mobile) Type badge */
+.inlineMetaBadges .typeInlineBadge {
+  display: none;
+}
+
+/* Desktop: hide the *wrapper span* for the inline Type badge so it doesn't consume flex gap */
+.inlineMetaBadges [data-type-inline-badge="true"] {
+  display: none;
+}
+
+/* Small screens: show the inline Type badge wrapper (next to area/deployment) */
+@media (max-width: 996px) {
+  .inlineMetaBadges [data-type-inline-badge="true"] {
+    display: inline-flex;
+  }
+}
+
+/* Small screens: stack layout + move Type badge inline next to the other badges */
+@media (max-width: 996px) {
+  .wrapper :global(.release-announcement-type) {
+    display: none;
+  }
+
+  .inlineMetaBadges .typeInlineBadge {
+    display: inline-flex;
+  }
+}
+
+/* Dark mode alternatives for TYPE badges only */
+[data-theme="dark"]
+  .wrapper
+  :global(.release-announcement-row[data-type="feature"])
+  .typeInlineBadge {
+  background: none;
+  border-color: #1f8f3a;
+  color: #48c75c;
+}
+
+[data-theme="dark"]
+  .wrapper
+  :global(.release-announcement-row[data-type="update"])
+  .typeInlineBadge {
+  background: none; /* brighter teal for dark backgrounds */
+  border-color: #9d66ea;
+  color: #f99dff;
+}
+
+[data-theme="dark"]
+  .wrapper
+  :global(.release-announcement-row[data-type="breaking-change"])
+  .typeInlineBadge {
+  background: none;
+  border-color: #a2191f;
+  color: #ef9397;
+}
+
+/* Deprecated + Removed share the same styling */
+[data-theme="dark"]
+  .wrapper
+  :global(.release-announcement-row[data-type="deprecated"])
+  .typeInlineBadge,
+[data-theme="dark"]
+  .wrapper
+  :global(.release-announcement-row[data-type="removed"])
+  .typeInlineBadge {
+  background: none;
+  border-color: #ffd24d;
+  color: #d0ba72;
+}
+
+[data-theme="dark"]
+  .wrapper
+  :global(.release-announcement-row[data-type="announcement"])
+  .typeInlineBadge {
+  background: none; /* brighter teal for dark backgrounds */
+  border-color: #0e45b3;
+  color: #749ff2;
+}

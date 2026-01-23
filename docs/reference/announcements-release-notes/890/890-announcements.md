@@ -1,35 +1,26 @@
 ---
 id: 890-announcements
-title: "8.9 Release announcements"
+title: "Release announcements"
 sidebar_label: Release announcements
 description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.9 release."
 toc_max_heading_level: 3
+hide_table_of_contents: true
 ---
 
 import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
+import ReleaseAnnouncementsFilter from '@site/src/components/ReleaseAnnouncementsFilter';
 
-Supported environment changes and breaking changes or deprecations for the Camunda 8.9 release.
+Key changes (for example, deprecations and breaking changes) and supported environment changes for the Camunda 8.9 release.
 
-| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Upgrade guides |
-| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | -------------- |
-| 14 April 2026      | 13 October 2028              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | -              |
+<ReleaseAnnouncementsFilter>
 
-:::info 8.9 resources
+<div className="release-announcement-row" data-type="breaking-change" data-area="Supported environments" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
-- See [release notes](/reference/announcements-release-notes/890/890-release-notes.md) to learn more about new features and enhancements.
-- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
-
-:::
-
-## Supported environments
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Elasticsearch minimum version raised to 8.18.6+
+### Elasticsearch minimum version raised to 8.18.6+
 
 The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.18.6 (previously 8.17.3).
 
@@ -41,13 +32,13 @@ The minimum supported Elasticsearch version for the Orchestration cluster and Op
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="announcement" data-area="Supported environments" data-deployment="saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--announcement">Announcement</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### AWS Paris region added
+### AWS Paris region added
 
 Camunda 8.9 adds support for the AWS Paris region in Camunda 8 SaaS.
 
@@ -56,30 +47,26 @@ Camunda 8.9 adds support for the AWS Paris region in Camunda 8 SaaS.
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="announcement" data-area="Supported environments" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--announcement">Announcement</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### OpenJDK 25 support
+### OpenJDK 25 support
 
 Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration Cluster, Connectors, Optimize, and supporting tooling. You can now run Self-Managed deployments on OpenJDK 21–25 without additional configuration changes.
 
 </div>
 </div>
 
-## Key changes
+<div className="release-announcement-row" data-type="breaking-change" data-area="Agentic orchestration" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
-### Agentic orchestration
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### MCP Client and MCP Remote Client connectors
+### MCP Client and MCP Remote Client connectors
 
 Breaking changes are [introduced in alpha 2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) to the element templates and the runtime configuration of the MCP Client.
 
@@ -92,15 +79,13 @@ To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-clien
 </div>
 </div>
 
-### APIs & tools
+<div className="release-announcement-row" data-type="breaking-change" data-area="APIs &amp; tools" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Camunda Spring Boot Starter now requires Spring Boot 4.0.x
+### Camunda Spring Boot Starter now requires Spring Boot 4.0.x
 
 Starting with 8.9.0-alpha3, the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md) requires Spring Boot 4.0.x.
 
@@ -111,25 +96,26 @@ This change aligns with the Spring Boot support policy, as OSS support for Sprin
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-#### Resource deletion endpoint now has response body
+<div className="release-announcement-row" data-type="breaking-change" data-area="APIs &amp; tools" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
+
+### Resource deletion endpoint now has response body
+
 Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{resourceKey}/deletion` in the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) now returns a response body. The Camunda Java client has been updated to support this change.
 
 </div>
 </div>
-### Connectors
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="deprecated" data-area="Connectors" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--deprecated">Deprecated</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### Deprecated: Operate Connector
+### Deprecated: Operate Connector
 
 The Operate Connector is deprecated, following the deprecation of the Operate API in Camunda 8.9 (see [Deprecated: Operate and Tasklist v1 REST APIs](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)).
 
@@ -138,13 +124,13 @@ Going forward, you can use the [Orchestration Cluster REST API](/apis-tools/orch
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="announcement" data-area="Connectors" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--announcement">Announcement</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### Virtual threads support
+### Virtual threads support
 
 Camunda 8.9 provides support for virtual threads in the connector runtime. Virtual threads are enabled by default for outbound connectors.
 
@@ -157,15 +143,13 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-### Data
+<div className="release-announcement-row" data-type="breaking-change" data-area="Data" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Camunda 8 Run with H2 as the default secondary data storage
+### Camunda 8 Run with H2 as the default secondary data storage
 
 Camunda 8 Run now uses H2 as the default secondary data storage, instead of Elasticsearch.
 
@@ -180,13 +164,13 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="announcement" data-area="Data" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--announcement">Announcement</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### Amazon Aurora secondary storage
+### Amazon Aurora secondary storage
 
 Camunda 8.9 introduces Amazon Aurora as a secondary data store for orchestration clusters.
 
@@ -197,13 +181,13 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="announcement" data-area="Data" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--announcement">Announcement</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### MySQL and Microsoft SQL Server secondary storage
+### MySQL and Microsoft SQL Server secondary storage
 
 Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the Orchestration cluster.
 
@@ -214,13 +198,13 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="announcement" data-area="Data" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--announcement">Announcement</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### RDBMS secondary storage
+### RDBMS secondary storage
 
 Camunda 8.9 introduces optional RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch.
 
@@ -233,15 +217,13 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
-### Deployment
+<div className="release-announcement-row" data-type="breaking-change" data-area="Deployment" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Elasticsearch subchart no longer enabled by default
+### Elasticsearch subchart no longer enabled by default
 
 Previously, the Elasticsearch subchart was enabled by default. To use OpenSearch, you would need to disable Elasticsearch and enable OpenSearch.
 
@@ -254,13 +236,13 @@ To continue using Elasticsearch provided as a subchart, you must add `global.ela
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="announcement" data-area="Deployment" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--announcement">Announcement</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### Cluster variables supported
+### Cluster variables supported
 
 Camunda 8.9 introduces cluster variables, letting you centrally manage configuration across your cluster.
 
@@ -271,13 +253,13 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="announcement" data-area="Deployment" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--announcement">Announcement</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### Helm chart `values.yaml` options for RDBMS
+### Helm chart `values.yaml` options for RDBMS
 
 Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file. See `orchestration.data.secondaryStorage.rdbms` for details.
 
@@ -288,13 +270,13 @@ Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` f
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="announcement" data-area="Deployment" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--announcement">Announcement</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### Standardized JDBC driver management for RDBMS
+### Standardized JDBC driver management for RDBMS
 
 Camunda 8.9 adds a standardized JDBC driver management system for manual installations.
 
@@ -308,15 +290,13 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
-### Modeler
+<div className="release-announcement-row" data-type="breaking-change" data-area="Modeler" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Web Modeler: Default logging format changed
+### Web Modeler: Default logging format changed
 
 By default, Web Modeler's `restapi` component now logs in a simple, readable format to the console instead of `JSON`.
 
@@ -329,13 +309,13 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Modeler" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### Web Modeler: Embedded web server changed from Undertow to Tomcat
+### Web Modeler: Embedded web server changed from Undertow to Tomcat
 
 Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded web server instead of [Undertow](https://undertow.io/). This aligns with the Orchestration Cluster.
 
@@ -348,13 +328,13 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Modeler" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### Web Modeler: Invite collaborators who haven't logged in before
+### Web Modeler: Invite collaborators who haven't logged in before
 
 The behavior across OIDC providers is now aligned. Invitation suggestions only include users who have logged in at least once. This is a breaking change for Web Modeler installations using Keycloak as the OIDC provider. Before 8.9, Keycloak returned all organization users, including those who had never logged in.
 
@@ -369,13 +349,13 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Modeler" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### Web Modeler: JSON format changes
+### Web Modeler: JSON format changes
 
 When using JSON as the output for the logs the structure has slightly changed:
 
@@ -391,13 +371,13 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Modeler" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### Web Modeler: Logging framework changed from Logback to Apache Log4j 2
+### Web Modeler: Logging framework changed from Logback to Apache Log4j 2
 
 Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging, in alignment with what the Orchestration Cluster uses.
 
@@ -410,13 +390,13 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="announcement" data-area="Modeler" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--announcement">Announcement</span>
+  </div>
+  <div className="release-announcement-content">
 
-#### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
+### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
 
 Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.
 
@@ -428,3 +408,5 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 
 </div>
 </div>
+
+</ReleaseAnnouncementsFilter>
