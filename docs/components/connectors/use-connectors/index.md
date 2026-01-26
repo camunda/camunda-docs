@@ -6,20 +6,14 @@ description: Learn how to use connectors in Web Modeler by creating a connector 
 
 Any task can be transformed into a connector task. This guide details the basic functionality all connectors share.
 
-Find the available connectors in Camunda 8 SaaS and how to use them in detail in
-the [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
-documentation. Additionally, learn how you can visit
-the [Camunda Marketplace](/components/modeler/web-modeler/modeling/camunda-marketplace.md) to add connectors from your BPMN
-diagram.
-
-:::info
-Learn how to [install connectors in Self-Managed](/self-managed/components/connectors/overview.md).
-:::
+Find available connectors in [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
+To add connectors from your BPMN diagram, visit the [Camunda Marketplace](/components/modeler/web-modeler/modeling/camunda-marketplace.md).
 
 :::note
-New to modeling with Camunda? The steps below assume some experience with Camunda modeling
-tools. [Model your first diagram](/components/modeler/web-modeler/modeling/model-your-first-diagram.md) to learn how to work with
-Web Modeler.
+Learn how to [install connectors in Self-Managed](/self-managed/components/connectors/overview.md).
+
+New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools.
+[Model your first diagram](/components/modeler/web-modeler/modeling/model-your-first-diagram.md) to learn how to work with Web Modeler.
 :::
 
 ## Using secrets
@@ -37,15 +31,15 @@ Each of
 the [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
 details which fields support secrets.
 
-Secrets are **not variables** and must be wrapped in double quotes as follows when used in a FEEL expression:
+Secrets are not variables and must be wrapped in double quotes as follows when used in a FEEL expression:
 
-```
+```feel
 = { myHeader: "{{secrets.MY_API_KEY}}"}
 ```
 
 Using the secrets placeholder syntax, you can use secrets in any part of a text, like in the following FEEL expression:
 
-```
+```feel
 = "https://" + baseUrl + "/{{secrets.TENANT_ID}}/accounting"
 ```
 
@@ -59,26 +53,26 @@ replaces the secrets placeholder upon execution.
 For further details on how secrets are implemented in connectors, consult
 our [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#secrets).
 
-:::note Warning
+:::warning
 `secrets.*` is a reserved syntax. Don't use this for other purposes than referencing your secrets in connector fields.
 Using this in other areas can lead to unexpected results and incidents.
 :::
 
-## Variable/response mapping
+## Variable and response mapping
 
-When a **Connector** is expected to return a result, **Connectors** feature a dedicated section known as
-`Response Mapping`,
-comprising two essential fields: `Result Variable` and `Result Expression`.
-These fields export responses from external **Connector** calls into process variables.
+When a connector is expected to return a result, connectors feature a dedicated section known as
+**Response Mapping**,
+comprising two essential fields: **Result Variable** and **Result Expression**.
+These fields export responses from external connector calls into process variables.
 
 ### Result variable
 
-This field declares a singular process variable designated for the export of responses from a **Connector** call.
+This field declares a singular process variable designated for the export of responses from a connector call.
 The resulting process variable can be subsequently utilized within the ongoing process.
 
 #### Example
 
-If you set `result` inside the `Result variable` field of the REST outbound connector, this variable is available:
+If you set `result` inside the **Result Variable** field of the REST outbound connector, this variable is available:
 
 ```json
 {
@@ -109,7 +103,7 @@ If you set `result` inside the `Result variable` field of the REST outbound conn
 
 ### Result expression
 
-This field facilitates the mapping of a **Connector** response into multiple process variables,
+This field facilitates the mapping of a connector response into multiple process variables,
 providing further flexibility of the variable utilization within the ongoing process.
 Additionally, the extracted values can be transformed with [FEEL expressions](/components/concepts/expressions.md).
 
@@ -122,7 +116,7 @@ It should only be used when a connector returns atomic values like a string or a
 
 #### Example
 
-If you set `{ "bodyReceived": body }` inside the `Result Expression` field of the REST outbound connector, this variable
+If you set `{ "bodyReceived": body }` inside the **Result Expression** field of the REST outbound connector, this variable
 is available:
 
 ```json
@@ -175,13 +169,13 @@ response:
 }
 ```
 
-If you declare a variable `myWeatherResponse` in the `Result Variable` field, the entire response is mapped to the
+If you declare a variable `myWeatherResponse` in the **Result Variable** field, the entire response is mapped to the
 declared variable.
 
 Now, let's imagine that you wish to extract only temperature into a process variable `berlinWeather` and wind speed into
 `berlinWindSpeed`. Let's also imagine you need weather in Fahrenheit declared in `berlinWeatherInFahrenheit`.
 
-In that case, you could declare `Result Expression` as follows:
+In that case, you could declare **Result Expression** as follows:
 
 ```
 = {
@@ -197,7 +191,7 @@ The **Activation** section pertains specifically to [inbound connectors](/compon
 
 ### Activation condition
 
-The **Activation condition** field evaluates conditions against the incoming message payload. It enables filtering of payloads that can initiate a process. If left empty, all valid incoming messages will trigger a new process—except those that fail pre-validation checks, such as **HMAC signature verification** for specific connectors.
+The **Activation condition** field evaluates conditions against the incoming message payload. It enables filtering of payloads that can initiate a process. If left empty, all valid incoming messages will trigger a new process—except those that fail pre-validation checks, such as HMAC signature verification for specific connectors.
 
 ## Correlation
 
@@ -213,7 +207,7 @@ The **Correlation key (payload)** field tells the connector how to extract the c
 ### Message ID expression
 
 The **Message ID expression** field defines how to extract a unique identifier from the incoming message payload.  
-Messages that share the same identifier within the defined **time-to-live (TTL)** will be correlated only once.  
+Messages that share the same identifier within the defined time-to-live (TTL) will be correlated only once.  
 Leaving this field empty may cause identical messages to be submitted and processed multiple times.
 
 ## BPMN errors and failing jobs {#bpmn-errors}
@@ -264,7 +258,7 @@ Use the provided FEEL functions:
   a [FailJob call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow
   engine.
 - [`ignoreError`](#function-ignoreerror) to recover from an error and complete a job successfully. This triggers
-  a [CompleJob call](/apis-tools/orchestration-cluster-api-rest/specifications/complete-job.api.mdx) to the workflow
+  a [CompleteJob call](/apis-tools/orchestration-cluster-api-rest/specifications/complete-job.api.mdx) to the workflow
   engine.
 
 The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with
@@ -287,7 +281,7 @@ Building on that, you can cover those use cases with BPMN errors that you consid
 technical exceptions thrown by a connector as well as regular results returned by the external system you integrated.
 The [example expressions](#bpmn-error-examples) below can serve as templates for such scenarios.
 
-### Function bpmnError()
+### Function bpmnError
 
 Returns a context entry with an `errorType`, `errorCode` and `errorMessage`.
 
@@ -301,7 +295,7 @@ bpmnError("123", "error received")
 // { errorType: "bpmnError", errorCode: "123", errorMessage: "error received" }
 ```
 
-### Function bpmnError() with variables
+### Function bpmnError with variables
 
 Returns a context entry with an `errorType`, `errorCode`, `errorMessage`, and `variables`.
 
@@ -316,7 +310,7 @@ bpmnError("123", "error received", {myVar: myValue})
 // { errorType: "bpmnError", errorCode: "123", errorMessage: "error received", variables: {myVar: myValue}}
 ```
 
-### Function jobError()
+### Function jobError
 
 Returns a context entry with an `errorType`, `errorMessage`, `variables`, `retries`, and `retryBackoff`.
 
@@ -349,9 +343,9 @@ jobError("job failed")
 // { errorType: "jobError", errorMessage: "job failed", variables: {}, retries: 0, retryBackoff: @"PT0S" }
 ```
 
-### Function ignoreError()
+### Function ignoreError
 
-Allows to complete a job successfully in the case of an error and returns a context entry with an (optiona) `variables` property. The `variables` will be used when sending the complete job command to the engine:
+Allows you to complete a job successfully when an error occurs and returns a context entry with an optional `variables` property. These `variables` are used when sending the complete job command to the engine:
 
 ```feel
 ignoreError({"status":"ok"})
@@ -362,6 +356,8 @@ You can also ignore the error without providing `variables` leading to a job com
 ```feel
 ignoreError()
 ```
+
+After defining error-handling functions, you can use them in FEEL expressions as shown in the following examples.
 
 ### BPMN error examples
 
