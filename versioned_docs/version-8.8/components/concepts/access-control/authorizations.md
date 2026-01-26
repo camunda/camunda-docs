@@ -162,7 +162,7 @@ These permissions should be strictly limited to trusted system administrators wh
 
 ### No validation of owner and resource IDs
 
-When you create an authorization, the Orchestration Cluster does not validate if the owner or the resource exists at that point in time.
+When you create an authorization, the Orchestration Cluster validates that the owner exists in Identity, but it does not validate that the resource exists.
 
 - This behavior provides flexibility to create authorizations for entities outside of the system (for example OIDC users) or for entities that will be created in the future (for example creating process definition authorizations before the process is deployed).
 
