@@ -260,8 +260,11 @@ Use the provided FEEL functions:
 - [`bpmnError`](#function-bpmnerror) to create a BPMN error object. This triggers
   a [ThrowError call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow
   engine.
-- [`jobError`](#function-jobError) to create a fail job object. This triggers
+- [`jobError`](#function-joberror) to create a fail job object. This triggers
   a [FailJob call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow
+  engine.
+- [`ignoreError`](#function-ignoreerror) to recover from an error and complete a job successfully. This triggers
+  a [CompleJob call](/apis-tools/orchestration-cluster-api-rest/specifications/complete-job.api.mdx) to the workflow
   engine.
 
 The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with
@@ -346,6 +349,20 @@ jobError("job failed")
 // { errorType: "jobError", errorMessage: "job failed", variables: {}, retries: 0, retryBackoff: @"PT0S" }
 ```
 
+### Function ignoreError()
+
+Allows to complete a job successfully in the case of an error and returns a context entry with an (optiona) `variables` property. The `variables` will be used when sending the complete job command to the engine:
+
+```feel
+ignoreError({"status":"ok"})
+```
+
+You can also ignore the error without providing `variables` leading to a job completion without any variables:
+
+```feel
+ignoreError()
+```
+
 ### BPMN error examples
 
 #### HTTP errors to BPMN errors
@@ -360,6 +377,8 @@ else if error.code = "500" then
   bpmnError("500", "Got a 500")
 else if response.body.status = "failed" then
   bpmnError("FAILED", "Action failed", response.body)
+else if error.code = "409" then
+  ignoreError({"created":true})
 else
   null
 ```
