@@ -448,8 +448,16 @@ module.exports = {
                 "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
                 "components/modeler/web-modeler/modeling/versions",
                 "components/modeler/web-modeler/modeling/file-download",
-                "components/modeler/web-modeler/modeling/import-diagram",
                 "components/modeler/web-modeler/modeling/camunda-marketplace",
+                {
+                  type: "category",
+                  label: "Import",
+                  items: [
+                    "components/modeler/web-modeler/modeling/import-diagram",
+                    "components/modeler/web-modeler/modeling/import-resources",
+                    "components/modeler/web-modeler/modeling/prepare-resources",
+                  ],
+                },
                 {
                   type: "category",
                   label: "Process applications",
@@ -2067,6 +2075,7 @@ module.exports = {
                 "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/alternative-db",
+                "self-managed/components/management-identity/configuration/initialize-tenants",
               ],
             },
             "self-managed/components/management-identity/authentication",
