@@ -26,7 +26,7 @@ Users can have various levels of access to a project in Web Modeler, outlined in
 After creating a project, you can invite members of your Camunda 8 organization to collaborate in Web Modeler.
 There are four roles with different levels of access rights that can be assigned to each user:
 
-- **Project Admin**: The user can edit the project itself, all folders and diagrams within the project, and invite more users to collaborate.
+- **Project Admin**: The user can edit the project itself, all folders, and diagrams within the project, and invite more users to collaborate.
 - **Editor**: The user can edit all folders and diagrams within the project.
 - **Commenter**: The user cannot edit folders or diagrams or invite users, but can view diagrams and properties and leave comments.
 - **Viewer**: The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
@@ -225,6 +225,28 @@ Users without email addresses will not receive any kind of notification about be
 
 When others are opening the same diagram as you, the updates on the diagram are sent in real time. You can also note who is in the diagram with you.
 ![real time collaboration](../img/real-time-collaboration.png)
+
+### Canvas lock
+
+To prevent conflicts and broken sessions when multiple people open the same diagram, the canvas uses an automatic lock.
+
+When a user with edit permissions starts editing a diagram, the canvas is automatically locked. While the lock is active, no other users can modify the diagram — this guarantees that changes are safe, consistent, and collision-free.
+
+Other collaborators can still:
+
+- Open and view the diagram in real time
+- Switch [modes](./collaborate-with-modes.md)
+- Navigate the canvas
+- Drill down into sub-processes
+- Inspect properties and linked assets
+- Add comments (if they have permission)
+
+#### Take over editing
+
+If another user with edit permissions needs to continue working, they can take control by clicking the **Take over** button in the canvas lock bar.
+This releases the current lock and immediately assigns edit control to the new user.
+
+This ensures smooth handovers, predictable collaboration, and eliminates conflicting edits while keeping the diagram fully accessible for all viewers.
 
 ### Undo/redo management limitations
 
