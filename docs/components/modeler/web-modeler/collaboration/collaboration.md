@@ -228,16 +228,16 @@ When others are opening the same diagram as you, the updates on the diagram are 
 
 ### Canvas lock
 
-To prevent conflicts and broken sessions when multiple people open the same diagram, the canvas uses an automatic lock.
+To prevent conflicts and broken sessions when multiple people open the same diagram, Web Modeler automatically locks the canvas.
 
-When a user with edit permissions starts editing a diagram, the canvas is automatically locked. While the lock is active, no other users can modify the diagram — this guarantees that changes are safe, consistent, and collision-free.
+When a user with edit permissions starts editing a diagram, the canvas is automatically locked. While the lock is active, no other users can modify the diagram — this prevents conflicting edits.
 
-Other collaborators can still:
+Other collaborators can still do the following:
 
 - Open and view the diagram in real time
 - Switch [modes](./collaborate-with-modes.md)
 - Navigate the canvas
-- Drill down into sub-processes
+- Drill down into subprocesses
 - Inspect properties and linked assets
 - Add comments (if they have permission)
 
@@ -246,7 +246,7 @@ Other collaborators can still:
 If another user with edit permissions needs to continue working, they can take control by clicking the **Take over** button in the canvas lock bar.
 This releases the current lock and immediately assigns edit control to the new user.
 
-This ensures smooth handovers, predictable collaboration, and eliminates conflicting edits while keeping the diagram fully accessible for all viewers.
+This approach enables predictable handovers and prevents conflicting edits while keeping the diagram accessible to all viewers.
 
 ### Undo/redo management limitations
 
