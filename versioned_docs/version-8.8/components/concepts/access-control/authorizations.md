@@ -81,6 +81,12 @@ For example, a `Process Definition` resource has a `CREATE_PROCESS_INSTANCE` per
 
 The following table lists all resources that support authorization in the **Orchestration Cluster** (Zeebe, Operate, Tasklist, **Orchestration Cluster** APIs), as well as the available permissions per resource.
 
+:::tip
+The wildcard character `*` matches all resources of the selected type.
+
+Partial wildcard matching, for example `my-resource*`, is not supported.
+:::
+
 | Resource type                        | Resource key example                   | Resource key type                    | Supported permissions                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | :----------------------------------- | :------------------------------------- | :----------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Authorization**                    | `*`                                    | All authorizations                   | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
