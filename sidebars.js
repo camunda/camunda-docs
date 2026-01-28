@@ -1459,6 +1459,7 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/install/quick-install",
+                "self-managed/deployment/helm/install/helm-with-rdbms",
                 "self-managed/deployment/helm/install/production/index",
               ],
             },
@@ -1518,9 +1519,16 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-external-opensearch",
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
-                    "self-managed/deployment/helm/configure/database/rdbms",
-                    "self-managed/deployment/helm/configure/database/validate-rdbms",
-                    "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
+                    {
+                      RDBMS: [
+                        "self-managed/deployment/helm/configure/database/rdbms",
+                        "self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers",
+                        "self-managed/deployment/helm/configure/database/rdbms-schema-management",
+                        "self-managed/deployment/helm/configure/database/rdbms-troubleshooting",
+                        "self-managed/deployment/helm/configure/database/validate-rdbms",
+                        "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
+                      ],
+                    },
                     {
                       Troubleshooting: [
                         "self-managed/deployment/helm/configure/database/all-shards-failed",
