@@ -260,16 +260,6 @@ docker run -d --name camunda-postgres \
   -p 5432:5432 postgres:latest
 ```
 
-**Reset schema**
-
-```bash
-docker exec camunda-postgres psql -U camunda -d postgres -c "
-  SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = 'camunda_secondary';
-  DROP DATABASE IF EXISTS \"camunda_secondary\";
-  CREATE DATABASE \"camunda_secondary\";
-"
-```
-
 </TabItem>
 <TabItem value="mariadb">
 
@@ -295,16 +285,6 @@ docker run -d --name camunda-mariadb \
   -e MARIADB_ROOT_PASSWORD=rootcamunda \
   -e MARIADB_DATABASE=camunda_secondary \
   -p 3306:3306 mariadb:11.4
-```
-
-**Reset schema**
-
-```bash
-docker exec camunda-mariadb mariadb -uroot -prootcamunda -e "
-  DROP DATABASE IF EXISTS camunda_secondary;
-  CREATE DATABASE camunda_secondary;
-  GRANT ALL ON camunda_secondary.* TO 'camunda'@'%';
-"
 ```
 
 **Notes**
@@ -336,16 +316,6 @@ docker run -d --name camunda-mysql \
   -e MYSQL_PASSWORD=camunda \
   -e MYSQL_DATABASE=camunda_secondary \
   -p 3306:3306 mysql:8.4
-```
-
-**Reset schema**
-
-```bash
-docker exec camunda-mysql mysql -uroot -prootcamunda -e "
-  DROP DATABASE IF EXISTS camunda_secondary;
-  CREATE DATABASE camunda_secondary;
-  GRANT ALL ON camunda_secondary.* TO 'camunda'@'%';
-"
 ```
 
 **Notes**
@@ -380,19 +350,6 @@ docker run -d --name camunda-oracle \
   gvenzl/oracle-free:23-slim
 ```
 
-**Reset schema**
-
-```bash
-docker exec camunda-oracle bash -lc '
-  source /home/oracle/.bashrc >/dev/null 2>&1
-  sqlplus -s system/camunda@//localhost:1521/FREEPDB1 <<EOF
-  DROP USER camunda CASCADE;
-  CREATE USER camunda IDENTIFIED BY camunda;
-  GRANT CONNECT, RESOURCE, UNLIMITED TABLESPACE TO camunda;
-  EOF
-'
-```
-
 **Notes**
 
 - Download the Oracle JDBC driver (for example, `ojdbc11.jar`) and place it in `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/ojdbc11.jar`.
@@ -421,19 +378,6 @@ docker run -d --name camunda-mssql \
   -e MSSQL_SA_PASSWORD=Camunda123! \
   -p 1433:1433 \
   mcr.microsoft.com/mssql/server:2022-latest
-```
-
-**Reset schema**
-
-```bash
-docker exec camunda-mssql /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U SA -P 'Camunda123!' -Q "
-  ALTER DATABASE camunda_secondary SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-  DROP DATABASE camunda_secondary;
-  CREATE DATABASE camunda_secondary;
-  USE camunda_secondary;
-  CREATE USER camunda FOR LOGIN camunda;
-  ALTER ROLE db_owner ADD MEMBER camunda;
-"
 ```
 
 </TabItem>
