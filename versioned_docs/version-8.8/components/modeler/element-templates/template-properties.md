@@ -50,7 +50,7 @@ The property object keys are divided into required and optional keys:
 - [`condition : Object`](#showing-properties-conditionally-condition): A condition that determines when the property is active and visible.
 - `id : String`: An identifier that can be used to reference the property in conditional properties.
 - [`editable: Boolean`](#preventing-edits-editable): Setting this key's value determines whether properties are read-only or editable in the properties panel.
-- [`entriesVisible: Boolean`](#displaying-all-entries-entriesvisible): Setting this key's value determines whether all entries of a dropdown property are visible without opening the dropdown.
+- [`entriesVisible: Boolean`](#displaying-all-entries-entriesvisible): Setting this key's value determines whether default properties are shown alongside properties defined in the element template.
 
 Not all keys and values are compatible with each other.
 Some keys or values require other keys to be set to a certain value, even if the key is marked as optional above.
