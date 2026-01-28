@@ -27,12 +27,7 @@ Before you begin:
 
 1. **Kubernetes cluster**: 1.24+ with sufficient resources for Camunda pods.
 2. **Helm 3.x**: Install or upgrade [Helm](https://helm.sh/docs/intro/install/).
-3. **External RDBMS**: A supported database reachable from your cluster.
-   - PostgreSQL 14+ (bundled driver available)
-   - Oracle 19c+ (custom driver required)
-   - MariaDB 10.11+ (bundled driver available)
-   - MySQL 8.4+ (custom driver required)
-   - See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for full details.
+3. **External RDBMS**: A supported database reachable from your cluster. See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for the complete list of supported databases and versions.
 4. **Database credentials**: Username and password for a database user with DDL permissions (if using auto-schema creation).
 5. **Elasticsearch/OpenSearch** (for Optimize): Required if you deploy Optimize alongside Camunda.
 
@@ -40,7 +35,7 @@ Before you begin:
 
 ### Step 1: Choose your RDBMS
 
-**PostgreSQL (recommended for testing and production):**
+**PostgreSQL (recommended):**
 
 - Bundled driver included; no additional setup required.
 - Excellent Kubernetes operator support (if desired).

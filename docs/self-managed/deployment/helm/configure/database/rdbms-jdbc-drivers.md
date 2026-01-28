@@ -13,20 +13,20 @@ This page covers JDBC driver management for RDBMS deployments in Kubernetes. For
 
 Camunda bundles JDBC drivers for databases where licensing permits:
 
-| Database   | Bundled | When to supply custom drivers                                     |
-| ---------- | ------- | ----------------------------------------------------------------- |
-| PostgreSQL | Yes     | Patches, extensions, or compatibility with older server versions. |
-| MariaDB    | Yes     | Custom JDBC features or compliance requirements.                  |
-| H2         | Yes     | Development only; not supported for production.                   |
-| Oracle     | No      | Always; licensing prevents bundling.                              |
-| MySQL      | No      | Always; licensing or version-specific requirements.               |
-| SQL Server | No      | Always; licensing prevents bundling.                              |
+| Database   | Bundled | Version | When to supply custom drivers                                     |
+| ---------- | ------- | ------- | ----------------------------------------------------------------- |
+| PostgreSQL | Yes     | 42.7.8  | Patches, extensions, or compatibility with older server versions. |
+| MariaDB    | Yes     | 3.5.7   | Custom JDBC features or compliance requirements.                  |
+| SQL Server | Yes     | 12.10.2 | Custom features or version-specific requirements.                 |
+| H2         | Yes     | 2.3.232 | Development only; not supported for production.                   |
+| Oracle     | No      | —       | Always; licensing prevents bundling.                              |
+| MySQL      | No      | —       | Licensing or version-specific requirements.                       |
 
 ### When to supply a custom driver
 
-You must supply a custom JDBC driver in these scenarios:
+Consider supplying a custom JDBC driver in these scenarios:
 
-1. **Oracle or MySQL databases**: No bundled drivers available; custom drivers required.
+1. **Oracle or MySQL databases**: No bundled drivers available; custom drivers recommended.
 2. **Version compatibility**: Your database version is not compatible with the bundled driver.
 3. **Security patches**: A critical patch is available for the bundled driver before the next Camunda release.
 4. **Custom extensions**: You use database-specific features not covered by bundled drivers.
@@ -99,15 +99,15 @@ This approach has not yet been validated in production.
 :::
 
 ```dockerfile
-FROM camunda/camunda-platform:8.8.0
+FROM camunda/camunda-platform:8.9.0
 ADD ojdbc8.jar /driver-lib/ojdbc8.jar
 ```
 
 Build and push:
 
 ```sh
-docker build -t internal-registry/orchestration:8.8.0 .
-docker push internal-registry/orchestration:8.8.0
+docker build -t internal-registry/orchestration:8.9.0 .
+docker push internal-registry/orchestration:8.9.0
 ```
 
 Configure in Helm:
@@ -121,7 +121,7 @@ orchestration:
       enabled: true
   image:
     repository: internal-registry/orchestration
-    tag: 8.8.0
+    tag: 8.9.0
   data:
     secondaryStorage:
       type: rdbms

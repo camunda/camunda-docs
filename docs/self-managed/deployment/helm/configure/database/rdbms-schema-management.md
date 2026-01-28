@@ -24,9 +24,14 @@ By default, `autoDDL: true` enables automatic schema creation via Liquibase. Thi
 
 **Prerequisites for autoDDL:**
 
-- Database user must have `CREATE TABLE`, `ALTER TABLE`, and `DROP TABLE` permissions.
-- For PostgreSQL: `CREATE` permission on the database.
-- For Oracle: `CREATE TABLE` and `TABLESPACE` (if using non-default tablespaces).
+For all databases, the database user must have `CREATE TABLE`, `ALTER TABLE`, and `DROP TABLE` permissions.
+
+Additional database-specific requirements:
+
+- **PostgreSQL**: `CREATE` permission on the database.
+- **Oracle**: `CREATE TABLE` and `TABLESPACE` (if using non-default tablespaces).
+- **SQL Server**: `CREATE TABLE`, `ALTER TABLE`, and `CONTROL` on the schema.
+- **MariaDB/MySQL**: `ALL PRIVILEGES` on the target database.
 
 ## Database user permissions
 
@@ -53,6 +58,15 @@ GRANT UNLIMITED TABLESPACE TO camunda;
 CREATE USER camunda@'%' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON camunda.* TO camunda@'%';
 FLUSH PRIVILEGES;
+```
+
+### SQL Server
+
+```sql
+CREATE LOGIN camunda WITH PASSWORD = 'password';
+CREATE USER camunda FOR LOGIN camunda;
+GRANT CREATE TABLE TO camunda;
+GRANT ALTER ON SCHEMA::dbo TO camunda;
 ```
 
 ## Manual schema management
@@ -84,12 +98,20 @@ With `autoDDL: false`, you must:
 After initial deployment or upgrade, verify the schema:
 
 ```sql
--- PostgreSQL/MySQL: Check tables exist
+-- PostgreSQL: Check tables exist
 SELECT table_name FROM information_schema.tables
 WHERE table_schema = 'public';
 
+-- MySQL/MariaDB: Check tables exist
+SELECT table_name FROM information_schema.tables
+WHERE table_schema = DATABASE();
+
 -- Oracle: Check tables
 SELECT table_name FROM user_tables;
+
+-- SQL Server: Check tables
+SELECT table_name FROM information_schema.tables
+WHERE table_schema = 'dbo';
 ```
 
 Expected tables include process instances, history, and metadata tables (roughly 20-30 total).
@@ -113,13 +135,12 @@ When upgrading Camunda versions:
 
 ### Step 1: Backup your database
 
-```bash
-# PostgreSQL example
-pg_dump -h hostname -U camunda camunda > backup.sql
+Backup your database before upgrading. Use your database vendor's native tools:
 
-# Oracle example
-expdp camunda/password@DATABASE directory=BACKUP_DIR dumpfile=backup.dmp
-```
+- **PostgreSQL**: [pg_dump documentation](https://www.postgresql.org/docs/current/app-pgdump.html)
+- **Oracle**: [EXPDP documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump-export-utility.html)
+- **MySQL/MariaDB**: [mysqldump documentation](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)
+- **SQL Server**: [SQL Server backup documentation](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/back-up-and-restore-of-sql-server-databases)
 
 ### Step 2: Test the upgrade in staging
 
@@ -153,13 +174,15 @@ Monitor the rollout:
 kubectl rollout status deployment/camunda-orchestration -n camunda
 ```
 
-### Step 6: Verify data integrity
+### Step 6: Verify schema initialization
 
-Query your application data to ensure the migration completed successfully:
+Verify that Liquibase completed the schema migration successfully by checking logs:
 
-```sql
-SELECT COUNT(*) FROM process_instances;
+```bash
+kubectl logs <pod-name> | grep -i liquibase
 ```
+
+Look for "Liquibase: Update successful" or similar completion messages. If the migration fails, Liquibase will log the specific error. For troubleshooting, see [Schema troubleshooting](#schema-troubleshooting).
 
 ## Schema troubleshooting
 
