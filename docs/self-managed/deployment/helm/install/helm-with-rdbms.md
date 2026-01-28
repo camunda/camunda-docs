@@ -338,7 +338,7 @@ opensearch:
 For detailed configuration options, see:
 
 - [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md): All Helm values, bundled vs. custom drivers, schema management, and troubleshooting.
-- [Production installation best practices](/self-managed/deployment/helm/install/production): Network policies, TLS, OIDC, and multi-namespace setup.
+- [Production installation best practices](/self-managed/deployment/helm/install/production/index.md): Network policies, TLS, OIDC, and multi-namespace setup.
 - [Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md): Full Helm chart reference.
 
 ## Important: Component storage requirements
@@ -412,7 +412,7 @@ Camunda does not manage database HA. Use cloud-managed databases (AWS Aurora, Az
 
 ## Next steps
 
-- **[Production guide](/self-managed/deployment/helm/install/production)**: Network security, TLS, OIDC, and high-availability configurations.
+- **[Production guide](/self-managed/deployment/helm/install/production/index.md)**: Network security, TLS, OIDC, and high-availability configurations.
 - **[Helm quick install](/self-managed/deployment/helm/install/quick-install.md)**: Get started with default settings for evaluation.
-- **[Operational tasks](/self-managed/deployment/helm/operational-tasks)**: Scaling, upgrades, and maintenance.
-- **[Backup and restore](/self-managed/deployment/helm/backup-restore)**: Data protection strategies.
+- **[Operational tasks](/self-managed/deployment/helm/operational-tasks/index.md)**: Scaling, upgrades, and maintenance.
+- **[Backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)**: Data protection strategies.
