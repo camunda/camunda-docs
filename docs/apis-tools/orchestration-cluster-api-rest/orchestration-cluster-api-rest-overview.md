@@ -19,23 +19,44 @@ The Orchestration Cluster REST API lets you interact programmatically with proce
 
 This API is designed to make it easy to [find resources](./orchestration-cluster-api-rest-data-fetching.md#advanced-search-filters) with a consistent experience, while ensuring all endpoints are secure with [authentication](./orchestration-cluster-api-rest-authentication.md) and fine-grained [resource authorization](/components/concepts/access-control/authorizations.md).
 
-**Key capabilities include**
+Key capabilities include:
 
-- **Full process lifecycle management** – Deploy, start, and monitor BPMN processes
-- **User task operations** – Assign, complete, and manage human tasks
-- **Variable management** – Read and update process variables
-- **Incident resolution** – Handle and resolve process incidents
-- **Advanced search and filtering** – Query process data with powerful search capabilities
+- Full process lifecycle management – Deploy, start, and monitor BPMN processes
+- User task operations – Claim, complete, and manage human tasks
+- Variable management – Read and update process variables
+- Incident resolution – Handle and resolve process incidents
+- Advanced search and filtering – Query process data with powerful search capabilities
 
 This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints). You can rely on backward compatibility for production use.
 
 To learn more about the Orchestration Cluster, see [What is the Orchestration Cluster?](/components/orchestration-cluster.md).
 
-Ready to get started? Follow the steps below to make your first API call.
+#### User task authorization model
+
+User task endpoints in this API follow the authorization model defined for the Orchestration Cluster
+and used by Tasklist.
+
+Authorization is based on a combination of process-level and task-level permissions:
+
+- Process-level permissions grant access to user tasks across an entire process.
+  For example, permissions such as `READ_USER_TASK`, `UPDATE_USER_TASK`, and where configured, `CLAIM_USER_TASK` and `COMPLETE_USER_TASK` allow a caller to read and act on all user tasks of a process definition.
+
+- Task-level permissions provide fine-grained control over individual user tasks.
+  These permissions (`READ`, `UPDATE`, `CLAIM`, `COMPLETE`) can be scoped using property-based
+  access control on task attributes such as `assignee`, `candidateUsers`, and `candidateGroups`.
+
+For the complete authorization model, including permission precedence and evaluation rules, see
+[Orchestration Cluster authorization](../../components/concepts/access-control/authorizations.md).
+
+For details on how the REST API applies this model when handling requests, see
+[Authentication and authorization](./orchestration-cluster-api-rest-authentication.md).
+
+For information about configuring authorizations in Identity, see
+[Identity – Authorizations](../../components/identity/authorization.md).
 
 ## Getting started
 
-This section helps you get up and running in minutes. To begin using the Orchestration Cluster REST API, you'll need the following:
+This section helps you get up and running in minutes. To begin using the Orchestration Cluster REST API, you'll need the following.
 
 ### Prerequisites
 
