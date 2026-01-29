@@ -192,3 +192,11 @@ Operate has partial support for RDBMS as secondary storage in Camunda 8.9-alpha3
 - Variable panel in process instance details
 - Process instance modification
 - Deleting process definitions, process instances, or decision definitions
+
+## Installation and deployment guides
+
+For hands-on instructions to deploy Camunda with RDBMS, see:
+
+- [Production architecture with RDBMS](/self-managed/deployment/manual/rdbms-production-architecture.md) - Reference topology and design considerations.
+- [Manual installation with RDBMS](/self-managed/deployment/manual/rdbms-manual-installation.md) - Step-by-step installation, configuration, and operations.
+- [Helm installation with RDBMS](/self-managed/deployment/helm/install/helm-with-rdbms.md) - Kubernetes/Helm-based deployment.
