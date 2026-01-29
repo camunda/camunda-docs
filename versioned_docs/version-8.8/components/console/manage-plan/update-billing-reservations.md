@@ -10,7 +10,7 @@ This setting is only visible in the **Enterprise plan** for owners and admins.
 
 ## Managing hardware packages
 
-Once signed up for the **Starter plan** or **Enterprise plan**, you have access to the **Billing** page.
+Once signed up for the **Enterprise plan**, you have access to the **Billing** page.
 
 - The created process instances from the current period are displayed at the top of the page.
 - Find a history of the metrics on a monthly basis at the bottom of the page.

@@ -62,7 +62,7 @@ To learn more, visit the [user task access restrictions documentation](/componen
 
 ## Limitations
 
-Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Starter plan, the number of users can be updated via the **Billing** page. There, under **General users**, the number can be increased or decreased.
+Depending on the plan to be used, the number of users that can be part of an organization varies.
 
 ## Restrictions
 
