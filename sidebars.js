@@ -865,7 +865,12 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/csv",
             "components/connectors/out-of-the-box-connectors/easy-post",
-            "components/connectors/out-of-the-box-connectors/email",
+            {
+              Email: [
+                "components/connectors/out-of-the-box-connectors/email-inbound",
+                "components/connectors/out-of-the-box-connectors/email-outbound",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/github",
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
