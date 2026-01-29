@@ -30,7 +30,7 @@ import TabItem from '@theme/TabItem';
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 import Install from './react-components/\_install-c8run.md'
 
-This tutorial introduces you to the basics of [human task orchestration](.) using either Camunda 8 Self-Managed or SaaS.
+This tutorial introduces you to the basics of [human task orchestration](../reference/glossary.md#human-task) using either Camunda 8 Self-Managed or SaaS.
 
 ## About
 
