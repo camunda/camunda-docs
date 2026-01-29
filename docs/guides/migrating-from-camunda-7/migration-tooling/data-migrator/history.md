@@ -27,9 +27,11 @@ You can run audit data migration alongside normal operations (for example, after
 
 The following requirements and limitations apply:
 
+- Camunda 8 is up and running and Camunda 7 has been stopped.
 - The History Data Migrator must be able to access the Camunda 7 database.
 - The History Data Migrator can migrate data to Camunda 8 only when a relational database (RDBMS) is used. This capability is planned for Camunda 8.9.
 - The History Data Migrator must be able to access the Camunda 8 database. As a result, you can run this tool only in a self-managed environment.
+- If you manipulate Camunda 7 data between History Data Migrator runs, data consistency might be affected. See [Auto-cancellation of active instances](#auto-cancellation-of-active-instances) for details.
 - If you migrate runtime and history data for an active C7 process instance, two separate records will appear in Operate:
   1. **Fresh runtime instance**: The migrated active process instance running on Zeebe. This instance continues execution from the last wait state before migration and produces new history going forward. It does not include historical data from before the migration.
   2. **Auditable instance**: A canceled historic process instance that preserves the audit trail (history data) up to the last wait state pre-migration. This instance appears as canceled and serves only as an audit record of what happened in Camunda 7.
@@ -93,6 +95,22 @@ cleanup_date = end_date + 6 months
 This ensures auto-canceled instances are eligible for history cleanup after six months, preventing unbounded growth of history data.
 
 See [configuration for history auto-cancellation](../data-migrator/config-properties.md#camundamigratorhistoryauto-cancelcleanup) for more details.
+
+Please note that if any Camunda 7 process instances progress in their state in between multiple runs of the History Data Migrator, data consistency might be affected: for example, if a process instance is completed in Camunda 7 after the first run but before the second run, the History Data Migrator would migrate it as canceled in the first and as completed in the second run. As a result, in Operate you may see that a process instance was canceled in a Flow Node that chronologically precedes the end event in your model, where the instance will be marked as completed. To avoid such situations, ensure that Camunda 7 data remains unchanged between History Data Migrator runs.
+
+## Atomicity
+
+The History Data Migrator uses the configured Camunda 8 datasource for both the migration mapping schema and the migrated data. This ensures single-transaction atomicity for each entity migration.
+
+### What is migrated atomically
+
+Each entity migration writes multiple rows in a single transaction:
+
+- Camunda 8 data: The migrated entity (for example, a user task, process instance, or variable)
+- Child entities, when applicable (for example, decision instances and their related decisions, inputs, and outputs)
+- Tracking information: A mapping from the Camunda 7 ID to the Camunda 8 key, used for resuming migrations and preventing duplicates
+
+If an error occurs, the transaction is rolled back and no partial data is persisted. This prevents inconsistent states such as Camunda 8 data without tracking information (which can cause duplicates on retry) or orphaned child entities.
 
 ## Entity transformation
 

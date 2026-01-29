@@ -29,30 +29,48 @@ In this guide, you will:
 - Deploy and start a business process using [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) or locally with [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 - Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities for the AI agent.
 - Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
+- Integrate a Large Language Model (LLM) into your AI agent.
 
 Once you have completed this guide, you will have an example AI agent running within Camunda 8.
 
 ## Prerequisites
 
-The following prerequisites are required to build your first AI agent:
+To build your first AI agent, see the prerequisites below depending on:
 
-| Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda 8 environment            | <p>To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:</p><p><ul><li><p> [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).</p></li><li><p> [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).</p></li></ul></p>                                                                                                 |
-| A supported LLM provider account | <p>The AI Agent connector supports multiple model providers. This guide assumes you have access to an AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</p> <p> You can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).</p> |
+- Your [working environment](#camunda-8-environment).
+- Your [chosen model](#supported-models).
+
+### Camunda 8 environment
+
+To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:
+
+- [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).
+- [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).
+
+### Supported models
+
+The AI Agent connector makes it easy to integrate LLMs into your process workflows.
+It supports multiple model providers and can communicate with any LLM that exposes an OpenAI‑compatible API.
+
+In this guide, you can try two use cases:
+
+| Setup | Model provider | Model used      | Prerequisites                                                                                                                                                                                                                                                                                                                                                              |
+| :---- | :------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Cloud | AWS Bedrock    | Claude Sonnet 4 | <p><ul><li> An AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</li><li><p> Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for details.</p></li></ul></p> |
+| Local | Ollama         | GPT-OSS:20b     | <p><ul><li> [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.</li><li><p> Ollama and GPT-OSS:20b installed. See [Set up Ollama](#set-up-ollama) for details.</p></li></ul></p>                                                                                                                                                      |
 
 :::important
-The AI Agent connector example in this guide is preconfigured to use AWS Bedrock with Claude Sonnet 4 in the `us-east-1` region.
-
-To use it without changes, you must first request access to Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for more details.
+Running LLMs locally requires substantial disk space and memory. GPT-OSS:20b requires more than 20GB of RAM to function and 14GB of free disk space to download.
 :::
+
+You can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
 ## Step 1: Install the example model blueprint
 
 To start building your first AI agent, you can use a prebuilt Camunda blueprint process model.
 
 In this tutorial, you will use the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) blueprint from [Camunda marketplace](https://marketplace.camunda.com/en-US/home).
-Depending on the environment you choose, follow the corresponding steps below.
+Depending on your Camunda 8 working environment, follow the corresponding steps below.
 
 <Tabs groupId="environment" defaultValue="saas" values={
 [
@@ -88,10 +106,24 @@ The example includes a form linked to the start event, allowing you to submit re
 
 <img src={AiAgentStartFormImg} alt="Example AI agent start form" className="img-800"/>
 
-## Step 2: Configure connector secrets
+## Step 2: Configure the AI Agent connector
 
-The example process is preconfigured to use AWS Bedrock as the model.
-For authentication, it is preconfigured to use the following connector secrets:
+Depending on your model choice, configure the AI Agent connector accordingly.
+
+<Tabs groupId="setup" defaultValue="aws" values={
+[
+{ label: 'AWS Bedrock', value: 'aws', },
+{ label: 'Ollama', value: 'local', },
+]}>
+
+<TabItem value="aws">
+
+Configure the connector's authentication and template for AWS Bedrock.
+
+#### Configure authentication
+
+The example blueprint downloaded in step one is preconfigured to use AWS Bedrock.
+For authentication, it uses the following connector secrets:
 
 - `AWS_BEDROCK_ACCESS_KEY`: The AWS Access Key ID for your AWS account able to call the Bedrock Converse API.
 - `AWS_BEDROCK_SECRET_KEY`: The AWS Secret Access Key for your AWS account.
@@ -113,19 +145,52 @@ Export the secrets as environment variables before starting the distribution. If
 </TabItem>
 </Tabs>
 
-## Step 3: Configure the AI Agent connector (optional)
+See [Amazon Bedrock model provider](../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#amazon-bedrock) for more information about other available authentication methods.
+
+#### Configure properties
 
 In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task.
-You can leave it as is or adjust its configuration to test other setups. To do so, use the properties panel of the AI Agent.
+You can leave it as is or adjust its configuration to test other setups. To do so, use the properties panel of the AI Agent:
 
 <img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel"/>
 
-### Key configuration options
+</TabItem>
 
-- **Model provider**: Change from AWS Bedrock to OpenAI, Anthropic, or other supported providers.
-- **System prompt**: Customize the agent's behavior and personality.
-- **Model parameters**: Adjust temperature, max tokens, and other LLM settings.
-- **Connector secrets**: Update authentication credentials if changing providers.
+<TabItem value="local">
+Configure your local LLM with Ollama.
+
+#### Set up Ollama
+
+1. **Download and install**: Follow [Ollama's documentation](https://docs.ollama.com/quickstart) for details.
+2. **Confirm installation**: Start the application and check the running version in a terminal or command prompt with the command `ollama --version`.
+3. **Pull the GPT-OSS:20b model**: From the same terminal or command prompt, run `ollama pull gpt-oss:20b`.
+4. **Start the local server**: Run `ollama serve`.
+5. **Test**: Ollama serves an API by default at `http://localhost:11434`. To test it, use a tool like Postman or run this command from your terminal:
+
+```
+curl -X POST http://localhost:11434/v1/chat/completions \
+    -H "Content-Type: application/json" \
+    -d '{"model":"gpt-oss:20b","messages":[{"role":"user","content":"Hello!"}]}'
+```
+
+#### Configure properties
+
+The example blueprint downloaded in step one is preconfigured to use AWS Bedrock. Update the connector's configuration as follows to use Ollama instead.
+
+Configure Camunda to point to your local Ollama API, which serves the GPT-OSS:20b LLM, using the Model provider and Model sections within the connector's properties panel.
+
+**Model provider**
+
+1. Select **OpenAI Compatible** from the Provider dropdown.
+1. The default Ollama API is served at `http://localhost:11434/v1`, so enter this value in the API endpoint field.
+1. No authentication or additional headers are required for the local Ollama API, so leave the remaining fields blank.
+
+**Model section**
+
+1. Enter `gpt-oss:20b` in the Model field. Note that this field is case-sensitive, so be sure to enter it in all lowercase.
+
+</TabItem>
+</Tabs>
 
 :::tip
 When configuring connectors, use [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md), by clicking the `fx` icon, to reference process variables and create dynamic prompts based on runtime data.
@@ -135,7 +200,7 @@ When configuring connectors, use [FEEL expressions](/components/modeler/feel/lan
 For a reference of available configuration options, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 :::
 
-## Step 4: Test your AI agent
+## Step 3: Test your AI agent
 
 You can now deploy and run your AI agent, and test it as a running process on your Camunda cluster running version 8.8 or higher.
 
