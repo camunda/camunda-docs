@@ -40,7 +40,7 @@ These release notes identify the main new features included in the 8.8 minor rel
 
 Camunda agentic orchestration allows you to build and orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
-<p><a href="../../../../components/agentic-orchestration/" class="link-arrow">Camunda Agentic orchestration</a></p>
+<p><a href="../../../../components/agentic-orchestration/agentic-orchestration-overview/" class="link-arrow">Camunda Agentic orchestration</a></p>
 
 Use the following new features to build and integrate AI agents into your processes:
 
