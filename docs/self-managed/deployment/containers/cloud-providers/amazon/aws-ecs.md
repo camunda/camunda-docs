@@ -187,7 +187,7 @@ Once authentication is configured, you can initialize your Terraform project. Ea
 Initialize the backend and download the required provider plugins:
 
 :::note
-Make sure you are in the `terraform` subfolder: `camunda-deployment-references/aws/containers/ecs-single-region-fargate/terraform`.
+Make sure you are in the `terraform/cluster` subfolder: `camunda-deployment-references/aws/containers/ecs-single-region-fargate/terraform/cluster`.
 :::
 
 ```bash reference
@@ -204,13 +204,13 @@ While each Camunda component is kept as a separate module to abstract the need o
 
 If wanting to deploy multiple Camunda 8 setups, it may make sense to abstract the root workspace to a common module as well to allow easier scaling.
 
-If not otherwise indicated, the `.tf` file is corresponding to the [root workspace path](https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/terraform).
+If not otherwise indicated, the `.tf` file is corresponding to the [root workspace path](https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/terraform/cluster).
 
 ### Elastic Container Service
 
 `ecs.tf` contains the ECS cluster, which is just a logical component to group ECS resources.
 
-`../modules/ecs/fargate/orchestration-cluster` is the main component `Orchestration Cluster` of Camunda and contains the definitions for:
+`../../modules/ecs/fargate/orchestration-cluster` is the main component `Orchestration Cluster` of Camunda and contains the definitions for:
 
 - ECS Service and task definition
   - Defines the base setup for the Orchestration Cluster, including the node ID provider, EFS configuration, and initial cluster endpoints.
@@ -237,7 +237,7 @@ If not otherwise indicated, the `.tf` file is corresponding to the [root workspa
 
 The base terraform documentation for this module can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/ecs/fargate/orchestration-cluster).
 
-`../modules/ecs/fargate/connectors` is a secondary component `Connectors` and contains the definitions for:
+`../../modules/ecs/fargate/connectors` is a secondary component `Connectors` and contains the definitions for:
 
 - ECS Service and Task definition
 - Task specific IAM role to allow access to AWS services isolated to this component
