@@ -1,30 +1,32 @@
 ---
 id: prefix-elasticsearch-indices
-sidebar_label: Prefix Elasticsearch/OpenSearch indices
-title: Helm chart Elasticsearch/OpenSearch indices prefix
-description: "Configure Elasticsearch/OpenSearch index prefixes to structure your data, and ensure data isolation."
+sidebar_label: Prefix Elasticsearch and OpenSearch indices
+title: Configure Elasticsearch and OpenSearch index prefixes
+description: "Configure Elasticsearch and OpenSearch index prefixes to organize indices and isolate data when multiple Camunda instances share a cluster."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-## Overview
+Camunda components store operational data in Elasticsearch or OpenSearch indices. By default, Camunda uses the standard index names created by each exporter.
 
-Elasticsearch and OpenSearch prefixes allow you to append a unique identifier to each index, making it easier to organize and retrieve relevant information by structuring your data. With a consistent prefix, all related indices are easily identifiable, simplifying queries and data management.
+Configure an index prefix when you need to:
 
-Using index prefixes in Camunda ensures data isolation by allowing multiple Camunda instances to run on a shared cluster without accessing each other's data. This is crucial for maintaining separation in multi-instance and multi-tenant environments, and when testing different configurations.
+- Organize indices by grouping related indices under a consistent naming pattern.
+- Isolate data when multiple Camunda instances share the same Elasticsearch or OpenSearch cluster, so they don’t write to or read from each other’s indices.
+- Avoid index name collisions in multi-instance environments (for example, separate dev/test/prod installations using one shared cluster).
 
 :::note
-Changing the index prefix after a Camunda instance has been running will create new empty indices with the new prefix. There is no built-in migration support between old and new prefixes.
+Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built-in migration support between old and new prefixes.
 :::
 
-## Understanding Camunda exporters
+## Exporters and index prefixes
 
-Camunda 8.8 and later uses two different exporters that each have their own index prefix configuration:
+Starting with Camunda 8.8, index prefixes are configured per exporter. Camunda uses two exporters, and each exporter has its own index prefix configuration.
 
 ### Camunda Exporter (default)
 
-The **Camunda Exporter** is the unified exporter enabled by default. It creates unified Camunda indices used by the Orchestration Cluster (Operate and Tasklist functionality).
+The Camunda Exporter is enabled by default. It creates unified Camunda indices used by the Orchestration Cluster (Operate and Tasklist).
 
 - **Helm configuration**: `orchestration.index.prefix`
 - **Default value**: `""` (empty string, meaning no prefix)
@@ -32,13 +34,13 @@ The **Camunda Exporter** is the unified exporter enabled by default. It creates 
 
 ### Legacy Zeebe Exporter
 
-The **Legacy Zeebe Exporter** creates `zeebe-record` indices. This exporter is disabled by default but is still required when Optimize is enabled, as Optimize reads from the zeebe-record indices.
+The Legacy Zeebe Exporter creates `zeebe-record` indices. This exporter is disabled by default. Optimize reads from the `zeebe-record` indices. When Optimize is enabled, the Legacy Zeebe Exporter is automatically enabled to provide these indices.
 
 - **Helm configuration**: `global.elasticsearch.prefix` or `global.opensearch.prefix`
 - **Default value**: `zeebe-record`
 - **Controlled by**: `orchestration.exporters.zeebe.enabled: false` (default)
 
-:::info When is the legacy Zeebe Exporter needed?
+:::info When the Legacy Zeebe Exporter is used
 The legacy Zeebe Exporter is automatically enabled when:
 
 - Optimize is enabled (`optimize.enabled: true`)
@@ -48,15 +50,15 @@ The legacy Zeebe Exporter is automatically enabled when:
 
 ## Configuration reference
 
-| Configuration                 | Default        | Used By                                 | Purpose                                                |
-| ----------------------------- | -------------- | --------------------------------------- | ------------------------------------------------------ |
-| `orchestration.index.prefix`  | `""`           | Camunda Exporter, Orchestration Cluster | Prefix for unified Camunda indices                     |
-| `global.elasticsearch.prefix` | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for zeebe-record indices (consumed by Optimize) |
-| `global.opensearch.prefix`    | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for zeebe-record indices when using OpenSearch  |
+| Configuration                 | Default        | Used By                                 | Purpose                                                  |
+| ----------------------------- | -------------- | --------------------------------------- | -------------------------------------------------------- |
+| `orchestration.index.prefix`  | `""`           | Camunda Exporter, Orchestration Cluster | Prefix for unified Camunda indices                       |
+| `global.elasticsearch.prefix` | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices (consumed by Optimize) |
+| `global.opensearch.prefix`    | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices when using OpenSearch  |
 
 ### Optimize-specific configuration
 
-When using custom prefixes with Optimize, you must also configure Optimize to know where to find the zeebe-record indices:
+When you use a custom prefix for `zeebe-record` indices and Optimize is enabled, you must also configure Optimize to use the same prefixes. If these values do not match the exporter prefix exactly, Optimize can start but does not display process data.
 
 | Environment Variable                                   | Purpose                                                                |
 | ------------------------------------------------------ | ---------------------------------------------------------------------- |
@@ -64,7 +66,7 @@ When using custom prefixes with Optimize, you must also configure Optimize to kn
 | `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX`    | Prefix for Optimize's own indices (OpenSearch)                         |
 | `CAMUNDA_OPTIMIZE_ZEEBE_NAME`                          | Must match `global.elasticsearch.prefix` or `global.opensearch.prefix` |
 
-## Usage
+## Configure index prefixes
 
 <Tabs groupId="featured" defaultValue="valuesYaml" queryString values={
 [
@@ -76,7 +78,7 @@ When using custom prefixes with Optimize, you must also configure Optimize to kn
 
 ### Basic configuration (without Optimize)
 
-If you are not using Optimize, you only need to configure the Camunda Exporter prefix:
+If Optimize is not enabled, configure only the Camunda Exporter prefix.
 
 <Tabs groupId="database" defaultValue="elasticsearch" values={
 [
@@ -111,7 +113,11 @@ orchestration:
 
 ### Full configuration (with Optimize)
 
-When Optimize is enabled, you need to configure both exporter prefixes and Optimize's environment variables:
+When Optimize is enabled, configure:
+
+- The Legacy Zeebe Exporter prefix (`global.elasticsearch.prefix` or `global.opensearch.prefix`)
+- The Camunda Exporter prefix (`orchestration.index.prefix`)
+- Optimize environment variables so Optimize can find the correct indices
 
 <Tabs groupId="database" defaultValue="elasticsearch" values={
 [
