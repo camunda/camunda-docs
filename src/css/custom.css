@@ -1191,12 +1191,12 @@ span.callout + p::after {
   background-color: transparent;
 }
 
-/* Unsupported versions in the versions selector */
+/* Unmaintained versions in the versions selector */
 .dropdown-separator {
   margin: 0.3rem 0;
 }
 
-.dropdown-unsupported-versions {
+.dropdown-unmaintained-versions {
   font-size: 0.75rem;
   padding: 0.2rem 0.5rem;
 }
