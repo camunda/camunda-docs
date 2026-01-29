@@ -31,20 +31,21 @@ Before configuring, collect the following information about your external Elasti
 
 ### Parameters
 
-| values.yaml option                                  | type    | default                             | description                                                                               |
-| --------------------------------------------------- | ------- | ----------------------------------- | ----------------------------------------------------------------------------------------- |
-| `global.elasticsearch.enabled`                      | boolean | `false`                             | Enable or disable all components connecting to Elasticsearch.                             |
-| `global.elasticsearch.external.true`                | boolean | `false`                             | Set to `true` to connect to an external Elasticsearch instance.                           |
-| `global.elasticsearch.auth.username`                | string  | `""`                                | HTTP Basic username for Elasticsearch authentication.                                     |
-| `global.elasticsearch.auth.password`                | string  | `""`                                | HTTP Basic password for Elasticsearch authentication.                                     |
-| `global.elasticsearch.tls.enabled`                  | boolean | `false`                             | Whether Elasticsearch listens on TLS.                                                     |
-| `global.elasticsearch.tls.secret.inlineSecret`      | string  | `""`                                | TLS certificate specified directly in `values.yaml`.                                      |
-| `global.elasticsearch.tls.secret.existingSecret`    | string  | `""`                                | Kubernetes Secret name containing a TLS certificate.                                      |
-| `global.elasticsearch.tls.secret.existingSecretKey` | string  | `""`                                | Kubernetes Secret key with the TLS certificate.                                           |
-| `global.elasticsearch.url.protocol`                 | string  | `http`                              | Protocol to use when connecting to Elasticsearch. Possible values are `http` and `https`. |
-| `global.elasticsearch.url.host`                     | string  | `{{ .Release.Name }}-elasticsearch` | Hostname or IP address of the Elasticsearch instance.                                     |
-| `global.elasticsearch.url.port`                     | integer | `9200`                              | Port number of the Elasticsearch instance.                                                |
-| `elasticsearch.enabled`                             | boolean | `false`                             | Enable or disable the Elasticsearch subchart                                              |
+| values.yaml option                                  | type    | default                             | description                                                                                                                                                                          |
+| --------------------------------------------------- | ------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `global.elasticsearch.enabled`                      | boolean | `false`                             | Enable or disable all components connecting to Elasticsearch.                                                                                                                        |
+| `global.elasticsearch.external.true`                | boolean | `false`                             | Set to `true` to connect to an external Elasticsearch instance.                                                                                                                      |
+| `global.elasticsearch.auth.username`                | string  | `""`                                | HTTP Basic username for Elasticsearch authentication.                                                                                                                                |
+| `global.elasticsearch.auth.password`                | string  | `""`                                | HTTP Basic password for Elasticsearch authentication.                                                                                                                                |
+| `global.elasticsearch.prefix`                       | string  | `zeebe-record`                      | Index prefix for zeebe-record indices. See [Prefix Elasticsearch indices](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md). |
+| `global.elasticsearch.tls.enabled`                  | boolean | `false`                             | Whether Elasticsearch listens on TLS.                                                                                                                                                |
+| `global.elasticsearch.tls.secret.inlineSecret`      | string  | `""`                                | TLS certificate specified directly in `values.yaml`.                                                                                                                                 |
+| `global.elasticsearch.tls.secret.existingSecret`    | string  | `""`                                | Kubernetes Secret name containing a TLS certificate.                                                                                                                                 |
+| `global.elasticsearch.tls.secret.existingSecretKey` | string  | `""`                                | Kubernetes Secret key with the TLS certificate.                                                                                                                                      |
+| `global.elasticsearch.url.protocol`                 | string  | `http`                              | Protocol to use when connecting to Elasticsearch. Possible values are `http` and `https`.                                                                                            |
+| `global.elasticsearch.url.host`                     | string  | `{{ .Release.Name }}-elasticsearch` | Hostname or IP address of the Elasticsearch instance.                                                                                                                                |
+| `global.elasticsearch.url.port`                     | integer | `9200`                              | Port number of the Elasticsearch instance.                                                                                                                                           |
+| `elasticsearch.enabled`                             | boolean | `false`                             | Enable or disable the Elasticsearch subchart                                                                                                                                         |
 
 ### Example usage
 
@@ -133,6 +134,35 @@ elasticsearch:
   enabled: false
 ```
 
+### Connect to external Elasticsearch with custom index prefixes
+
+When running multiple Camunda instances on a shared Elasticsearch cluster, use custom index prefixes to isolate data:
+
+```yaml
+global:
+  elasticsearch:
+    enabled: true
+    external: true
+    prefix: my-env-zeebe # Prefix for zeebe-record indices
+    auth:
+      username: elastic
+      secret:
+        inlineSecret: pass
+    url:
+      protocol: https
+      host: elastic.example.com
+      port: 443
+
+orchestration:
+  index:
+    prefix: my-env-camunda # Prefix for unified Camunda indices
+
+elasticsearch:
+  enabled: false
+```
+
+For more details on index prefix configuration, including Optimize-specific settings, see [Prefix Elasticsearch/OpenSearch indices](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md).
+
 ## Troubleshooting
 
 If Zeebe pods fail, check for the following error:
@@ -146,6 +176,7 @@ If Zeebe pods fail, check for the following error:
 ## References
 
 - [Camunda production installation guide with Kubernetes and Helm](versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md) (8.8 version not yet available)
+- [Prefix Elasticsearch/OpenSearch indices](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md)
 
 ## Next steps
 
