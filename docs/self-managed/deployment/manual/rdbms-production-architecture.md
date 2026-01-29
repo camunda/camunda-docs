@@ -53,7 +53,7 @@ Elasticsearch or OpenSearch is required **only for Optimize**. When Optimize is 
 
 Without Optimize: RDBMS-only stack is fully supported.
 
-## Hard production constraints (8.9)
+## Production constraints
 
 ❌ **ES/OS ↔ RDBMS migration not supported**: Choose your secondary storage backend before production. No automated migration tools available.
 
