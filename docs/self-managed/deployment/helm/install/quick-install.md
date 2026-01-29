@@ -1,5 +1,5 @@
 ---
-id: quick-install
+id: new-quick-install
 sidebar_label: Quick install
 title: Install Camunda with Helm for development
 description: Install Camunda 8 Self-Managed on Kubernetes using the Helm chart with default settings, suitable for testing and development.
@@ -11,388 +11,68 @@ Use this guide to install Camunda 8 Self-Managed with the orchestration cluster,
 
 <!-- TODO: add links to explain the orchestration cluster and management cluster -->
 
-:::tip Need a Kubernetes cluster?
-If you don't have a Kubernetes cluster yet, check out our setup guides:
-
-- **Local development**: Follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md) to set up a local Kubernetes cluster.
-- **Cloud providers**: See our [cloud provider guides](/self-managed/deployment/helm/cloud-providers/index.md) for Amazon EKS, Google GKE, Azure AKS, and Red Hat OpenShift.
-  :::
-
-:::note
-By default, the Camunda Helm chart uses Bitnami open-source images. For production environments, Camunda recommends switching to vendor-supported enterprise images. This guide explains how to create registry secrets and install [Camunda with enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
-:::
-
 ## Prerequisites
 
 - **Kubernetes cluster**: A functioning Kubernetes cluster with [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) access and block-storage persistent volumes for stateful components.
 - **Helm**: The Helm CLI installed. See [Installing Helm](https://helm.sh/docs/intro/install/).
 
-## Overview
+## Install Orchestration Cluster
 
-<HelmInstallOverviewMethods/>
+By default, the Helm chart deploys the Camunda orchestration cluster with **basic authentication**, intended only for testing and development.
 
-## Orchestration Cluster only
-
-By default, the Helm chart deploys the Camunda orchestration cluster with **basic authentication**, intended only for testing and development. In production, Camunda 8 is typically deployed together with additional applications such as Optimize, Web Modeler, and Console, which require **OIDC-based authentication** (for example, using Keycloak). For details, see the [Full Cluster](#full-cluster) section.
-
-1. **Create a namespace to install the platform on Kubernetes:**
-
-   ```bash
-   kubectl create namespace orchestration
-   ```
-
-   Output:
-
-   ```bash
-   namespace/orchestration created
-   ```
-
-2. **Add the Helm repository:**
-
-   To install the Camunda 8 Self-Managed [Helm chart](https://helm.sh/docs/topics/charts/), add the [Helm repository](https://helm.sh/docs/topics/chart_repository/) with the following command:
-
-   ```bash
-   helm repo add camunda https://helm.camunda.io
-   helm repo update
-   ```
-
-3. **Install the Helm chart:**
-
-   ```bash
-   helm install camunda camunda/camunda-platform -n orchestration
-   ```
-
-4. **Access the components:**
-
-   Use the default credentials:
-
-   ```
-   username: demo
-   password: demo
-   ```
-
-   Set up port-forwarding to access the services:
-
-   ```bash
-   # Zeebe Gateway (for gRPC and REST API)
-   kubectl port-forward svc/camunda-zeebe-gateway 26500:26500 -n orchestration
-   kubectl port-forward svc/camunda-zeebe-gateway 8088:8080 -n orchestration
-
-   # Connectors
-   kubectl port-forward svc/camunda-connectors 8086:8080 -n orchestration
-   ```
-
-   **Verify the installation:**
-
-   Test the Zeebe Gateway connection:
-
-   ```bash
-   curl -u demo:demo http://localhost:8088/v2/topology
-   ```
-
-   You should see a JSON response with the cluster topology information.
-
-   Available services:
-   - **Operate:** [http://localhost:8088/operate](http://localhost:8088/operate) - Monitor process instances
-   - **Tasklist:** [http://localhost:8088/tasklist](http://localhost:8088/tasklist) - Complete user tasks
-   - **Identity:** [http://localhost:8088/identity](http://localhost:8088/identity) - User and permission management
-   - **Connectors:** [http://localhost:8086](http://localhost:8086) - External system integrations
-   - **Zeebe Gateway (gRPC):** localhost:26500 - Process deployment and execution
-   - **Zeebe Gateway (HTTP):** [http://localhost:8088](http://localhost:8088) - Zeebe REST API
-
-   :::note
-   In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration component and share the same endpoint (port 8088).
-   :::
-
-:::note
-Starting in 8.9-alpha3, the default secondary storage used by Camunda 8 Run and default Helm values is H2 for lightweight, out-of-the-box setups. Elasticsearch is still provided and supported as an optional alternative; OpenSearch is supported for Self‑Managed deployments but is not bundled in Camunda 8 Run. Enable the backend you require explicitly if you need full-featured search/analytics or to run existing Elasticsearch-backed Operate instances.
-:::
-
-## Full Cluster
-
-<!-- TODO: Add links to doc pages that explain each component. -->
-
-The following components run outside the orchestration cluster and are disabled by default in Helm Charts:
-
-- Optimize
-- Web Modeler
-- Console
-- Management Identity
-- Keycloak
-
-These components do not support basic authentication, so you must use any OIDC provider. In the following example, we use Keycloak as a locally running OIDC provider. The values file will deploy all Camunda 8 components.
-
-<!-- TODO: Add a suitable link to explain what a values.yaml file is. -->
-
-Because the default configuration of the Helm chart uses basic authentication, you need to create a [values.yaml](https://helm.sh/docs/chart_template_guide/values_files/) file to modify the default configuration to:
-
-- Enable Keycloak to provide another method of authentication via OIDC.
-- Enable other Camunda components that run alongside the orchestration cluster.
-
-<!-- TODO: Remove setting existingSecret in favor of autoGenerate secrets -->
-
-Create a file called `camunda-values.yaml` with the following content:
-
-```yaml
-global:
-  elasticsearch:
-    enabled: true
-  secrets:
-    autoGenerated: true
-    name: "camunda-credentials"
-  identity:
-    auth:
-      enabled: true
-      publicIssuerUrl: "http://localhost:18080/auth/realms/camunda-platform"
-      webModeler:
-        redirectUrl: "http://localhost:8070"
-      console:
-        redirectUrl: "http://localhost:8087"
-      optimize:
-        redirectUrl: "http://localhost:8083"
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-optimize-client-token"
-
-      orchestration:
-        redirectUrl: "http://localhost:8080"
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-orchestration-client-token"
-      connectors:
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-connectors-client-token"
-  security:
-    authentication:
-      method: oidc
-
-identity:
-  enabled: true
-  firstUser:
-    secret:
-      existingSecret: "camunda-credentials"
-      existingSecretKey: "identity-firstuser-password"
-
-identityKeycloak:
-  enabled: true
-  postgresql:
-    auth:
-      existingSecret: "camunda-credentials"
-      secretKeys:
-        adminPasswordKey: "identity-keycloak-postgresql-admin-password"
-        userPasswordKey: "identity-keycloak-postgresql-user-password"
-  auth:
-    existingSecret: "camunda-credentials"
-    passwordSecretKey: "identity-keycloak-admin-password"
-
-optimize:
-  enabled: true
-
-connectors:
-  enabled: true
-  security:
-    authentication:
-      method: oidc
-      oidc:
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-connectors-client-token"
-
-webModeler:
-  enabled: true
-  restapi:
-    mail:
-      # This value is required, otherwise the restapi pod wouldn't start.
-      fromAddress: noreply@example.com
-
-# WebModeler Database.
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: "camunda-credentials"
-    secretKeys:
-      adminPasswordKey: "webmodeler-postgresql-admin-password"
-      userPasswordKey: "webmodeler-postgresql-user-password"
-
-orchestration:
-  enabled: true
-  clusterSize: "1"
-  partitionCount: "1"
-  replicationFactor: "1"
-  security:
-    authentication:
-      method: oidc
-      oidc:
-        redirectUrl: "http://localhost:8080"
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-orchestration-client-token"
-
-console:
-  enabled: true
-
-elasticsearch:
-  enabled: true
-  master:
-    replicaCount: 1
-    persistence:
-      size: 10Gi
-```
-
-### Install and verify the deployment
-
-Installing all components in a cluster requires downloading all related Docker images to the Kubernetes nodes. The time required depends on your cloud provider and network speed.
-
-1. **Create the namespace:**
-
-   ```bash
-   kubectl create namespace camunda
-   ```
-
-2. **Install the Helm chart:**
-
-   ```bash
-   helm install camunda camunda-platform \
-     --version 13.0.0 \
-     --namespace camunda \
-     -f camunda-values.yaml
-   ```
-
-3. **Wait for all pods to be ready:**
-
-   Monitor the pod status until all pods show `Running` and `Ready`:
-
-   ```bash
-   kubectl get pods -n camunda -w
-   ```
-
-   Wait until you see output similar to:
-
-   ```
-   NAME                                          READY   STATUS    RESTARTS   AGE
-   camunda-keycloak-0                           1/1     Running   0          5m
-   camunda-identity-6c8b7f4d9-xyz123           1/1     Running   0          5m
-   camunda-zeebe-0                              1/1     Running   0          5m
-   camunda-web-modeler-webapp-abc456-def789    1/1     Running   0          5m
-   ...
-   ```
-
-   Press `Ctrl+C` to stop monitoring once all pods are ready.
-
-### Get started with Web Modeler
-
-Follow this workflow to deploy your first process model and verify it works end-to-end:
-
-#### 1. Set up port-forwarding
-
-Open separate terminal windows and run these commands to access the required services:
+1. Create a namespace
 
 ```bash
-# Terminal 1: Keycloak (for authentication)
-kubectl port-forward svc/camunda-keycloak 18080:80 -n camunda
-
-# Terminal 2: Web Modeler (for modeling)
-kubectl port-forward svc/camunda-web-modeler-webapp 8070:80 -n camunda
-
-# Terminal 3: Zeebe Gateway (for deployment and process execution)
-kubectl port-forward svc/camunda-zeebe-gateway 8080:8080 -n camunda
+kubectl create namespace orchestration
 ```
 
-#### 2. Get your credentials
-
-Retrieve the password for the `demo` user:
+2. Add the Helm repository
 
 ```bash
-kubectl get secret camunda-credentials -n camunda -o jsonpath='{.data.identity-firstuser-password}' | base64 -d
+helm repo add camunda https://helm.camunda.io
+helm repo update
 ```
 
-#### 3. Access Web Modeler
-
-1. Open your browser and navigate to [http://localhost:8070](http://localhost:8070)
-2. Log in with:
-   - **Username:** `demo`
-   - **Password:** (use the password retrieved in step 2)
-
-#### 4. Create and deploy a process
-
-1. In Web Modeler, create a new BPMN diagram
-2. Design a simple process (or use the default process template)
-3. Click **Deploy & Run** to deploy your process to the Zeebe cluster
-
-#### 5. Verify in Operate
-
-1. Set up port-forwarding for Operate in a new terminal:
-
-   ```bash
-   kubectl port-forward svc/camunda-zeebe-gateway 8080:8080 -n camunda
-   ```
-
-2. Open [http://localhost:8080/operate](http://localhost:8080/operate) in your browser
-3. Log in with the same `demo` credentials
-4. Verify that your deployed process instance appears in the dashboard and shows the expected flow
-
-### Access all components
-
-For complete access to all Camunda components, set up port-forwarding for all services:
+3. Install the Helm chart
 
 ```bash
-# Authentication
-kubectl port-forward svc/camunda-keycloak 18080:80 -n camunda
-kubectl port-forward svc/camunda-identity 18081:80 -n camunda
-
-# Web interfaces
-kubectl port-forward svc/camunda-optimize 8083:80 -n camunda
-kubectl port-forward svc/camunda-web-modeler-webapp 8070:80 -n camunda
-kubectl port-forward svc/camunda-console 8087:80 -n camunda
-
-# Zeebe and Connectors
-kubectl port-forward svc/camunda-zeebe-gateway 26500:26500 -n camunda
-kubectl port-forward svc/camunda-zeebe-gateway 8080:8080 -n camunda
-kubectl port-forward svc/camunda-connectors 8085:8080 -n camunda
+helm install camunda camunda/camunda-platform -n orchestration
 ```
 
-#### Available URLs
+4. Set up port-forwarding:
 
-Once port-forwarding is active, access the UIs in your browser:
+```bash
+# Zeebe Gateway (for gRPC and REST API)
+kubectl port-forward svc/camunda-zeebe-gateway 26500:26500 -n orchestration
+kubectl port-forward svc/camunda-zeebe-gateway 8088:8080 -n orchestration
 
-| Component                | URL                                                              | Description                                                  |
-| ------------------------ | ---------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Zeebe Gateway (gRPC)** | [http://localhost:26500](http://localhost:26500)                 | Process deployment and execution                             |
-| **Zeebe Gateway (HTTP)** | [http://localhost:8080/](http://localhost:8080/)                 | Zeebe REST API                                               |
-| **Operate**              | [http://localhost:8080/operate](http://localhost:8080/operate)   | Monitor process instances                                    |
-| **Tasklist**             | [http://localhost:8080/tasklist](http://localhost:8080/tasklist) | Complete user tasks                                          |
-| **Web Modeler**          | [http://localhost:8070](http://localhost:8070)                   | Design and deploy processes                                  |
-| **Console**              | [http://localhost:8087](http://localhost:8087)                   | Manage clusters and APIs                                     |
-| **Identity**             | [http://localhost:8088/identity](http://localhost:8088/identity) | User and permission management for the orchestration cluster |
-| **Management Identity**  | [http://localhost:18081](http://localhost:18081)                 | User and permission management                               |
-| **Keycloak**             | [http://localhost:18080](http://localhost:18080)                 | Authentication server                                        |
-| **Optimize**             | [http://localhost:8083](http://localhost:8083)                   | Process analytics                                            |
-| **Connectors**           | [http://localhost:8085](http://localhost:8085)                   | External system integrations                                 |
-
-#### Database access (for administration)
-
-- **PostgreSQL (Management Identity):** `localhost:5432`
-- **PostgreSQL (Web Modeler):** `localhost:5433`
-- **Elasticsearch (secondary storage):** `localhost:9200`
-
-:::tip
-For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable by their in-cluster DNS names on your workstation.
-
-Example (requires `sudo` to bind privileged ports and modify `/etc/hosts`):
-
-```shell
-sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
+# Connectors
+kubectl port-forward svc/camunda-connectors 8086:8080 -n orchestration
 ```
 
-After this runs, you can reach services directly, for example:
+5. Log in with the default credentials:
 
-- Identity: `http://$CAMUNDA_RELEASE_NAME-identity/managementidentity`
-- Keycloak: `http://$CAMUNDA_RELEASE_NAME-keycloak`
-- Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
+- **Username:** demo
+- **Pass**word: demo
 
-You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.
-:::
+## Verify install
+
+Test the Zeebe Gateway connection:
+
+```bash
+curl -u demo:demo http://localhost:8088/v2/topology
+```
+
+You should see a JSON response with the cluster topology information.
+
+Available services:
+
+- **Operate:** [http://localhost:8088/operate](http://localhost:8088/operate) - Monitor process instances
+- **Tasklist:** [http://localhost:8088/tasklist](http://localhost:8088/tasklist) - Complete user tasks
+- **Identity:** [http://localhost:8088/identity](http://localhost:8088/identity) - User and permission management
+- **Connectors:** [http://localhost:8086](http://localhost:8086) - External system integrations
+- **Zeebe Gateway (gRPC):** localhost:26500 - Process deployment and execution
+- **Zeebe Gateway (HTTP):** [http://localhost:8088](http://localhost:8088) - Zeebe REST API
 
 ## Troubleshoot installation issues
 
