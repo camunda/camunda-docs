@@ -1,5 +1,5 @@
 ---
-id: new-orchestrate-human-tasks
+id: orchestrate-human-tasks
 title: Get started with human task orchestration
 sidebar_label: Orchestrate human tasks
 description: "For low-code developers using Camunda 8 SaaS, efficiently allocate work through user tasks."
