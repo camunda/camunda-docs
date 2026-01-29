@@ -1305,6 +1305,7 @@ module.exports = {
         "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api",
       ],
     },
+    "apis-tools/mcp-docs/docs-mcp",
   ],
   Reference: [
     "reference/overview",
