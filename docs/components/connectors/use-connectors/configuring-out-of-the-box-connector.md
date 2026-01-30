@@ -98,7 +98,7 @@ After the [user task](/guides/getting-started-orchestrate-human-tasks.md) **Uplo
 
 In [Operate](/components/operate/operate-introduction.md), you will now see the process move forward to **Review receipt**.
 
-![operate example](./img/operate-example-t.png)
+![operate example](./img/operate-example.png)
 
 ## Additional resources and next steps
 
