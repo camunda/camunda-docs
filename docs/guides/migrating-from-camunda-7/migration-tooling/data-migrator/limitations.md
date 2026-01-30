@@ -424,7 +424,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 ### Incident
 
 | Property               | Can be migrated |
-| ---------------------- | --------------- |
+|------------------------|-----------------|
 | incidentKey            | Yes             |
 | processDefinitionKey   | Yes             |
 | processDefinitionId    | Yes             |
@@ -432,11 +432,13 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | rootProcessInstanceKey | Yes             |
 | flowNodeInstanceKey    | Yes             |
 | flowNodeId             | Yes             |
-| jobKey                 | Yes             |
+| scopeKey               | No              |
+| jobKey                 | No              |
 | errorType              | No              |
 | errorMessage           | Yes             |
 | errorMessageHash       | No              |
 | creationDate           | Yes             |
+| endDate                | No              |
 | state                  | Yes             |
 | treePath               | No              |
 | tenantId               | Yes             |
