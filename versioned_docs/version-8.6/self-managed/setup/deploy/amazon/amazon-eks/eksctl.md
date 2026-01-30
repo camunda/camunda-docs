@@ -184,7 +184,7 @@ kind: ClusterConfig
 kubernetesNetworkConfig:
   ipFamily: IPv4
 managedNodeGroups:
-  - amiFamily: AmazonLinux2
+  - amiFamily: AmazonLinux2023
     desiredCapacity: ${NODE_COUNT:-4} # number of default nodes spawned if no cluster autoscaler is used
     disableIMDSv1: true
     iam:
