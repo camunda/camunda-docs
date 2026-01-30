@@ -1,8 +1,8 @@
 notify "Updating docusaurus.config.js..."
 
-# Update `url` to include `unsupported`
-#  Note that this introduces one line that reads "unsupported.unsupported.docs.camunda.io" but that line gets removed in a later step.
-sed -i '' "s/docs.camunda.io/unsupported.docs.camunda.io/" docusaurus.config.js
+# Update `url` to include `unmaintained`
+#  Note that this introduces one line that reads "unmaintained.unmaintained.docs.camunda.io" but that line gets removed in a later step.
+sed -i '' "s/docs.camunda.io/unmaintained.docs.camunda.io/" docusaurus.config.js
 
 # Update footer social icons based on the new baseUrl
 sed -i '' "s/src= \"\/img\//src=\"\/$ARCHIVED_VERSION\/img\//g" docusaurus.config.js

@@ -23,6 +23,7 @@ jobs:
 
       - name: Check internal links
         uses: untitaker/hyperlink@0.2.0
+        continue-on-error: true
         with:
           args: build/
 

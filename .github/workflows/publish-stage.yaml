@@ -23,7 +23,7 @@ jobs:
       - name: Cache Docusaurus
         uses: ./.github/actions/docusaurus-cache
       - name: Update redirects for environment
-        run: "sed -i 's!https://unsupported.docs.camunda.io!https://stage.unsupported.docs.camunda.io!g' ./static/.htaccess"
+        run: "sed -i 's!https://unmaintained.docs.camunda.io!https://stage.unmaintained.docs.camunda.io!g' ./static/.htaccess"
       - name: Build
         run: npm run build
         env:
