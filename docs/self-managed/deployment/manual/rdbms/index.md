@@ -50,9 +50,9 @@ All core components are supported with RDBMS secondary storage:
 
 ## Get started
 
-1. Review the [production architecture](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) for sizing and topology guidance.
-2. Configure drivers, connection details, and schema management in [RDBMS configuration for manual installations](/self-managed/deployment/manual/rdbms/configuration.md).
-3. Download SQL/Liquibase scripts as needed: [Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
+1. [Configure drivers and connections](/self-managed/deployment/manual/rdbms/configuration.md).
+2. Review [operations and maintenance](/self-managed/deployment/manual/rdbms/operations.md) for backup, upgrades, troubleshooting, and tuning.
+3. Review the [production architecture](/self-managed/deployment/manual/rdbms-production-architecture) for sizing and topology guidance.
 
 ## Related documentation
 

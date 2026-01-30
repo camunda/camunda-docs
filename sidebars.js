@@ -1750,6 +1750,7 @@ module.exports = {
               items: [
                 "self-managed/deployment/manual/rdbms/rdbms-production-architecture",
                 "self-managed/deployment/manual/rdbms/configuration",
+                "self-managed/deployment/manual/rdbms/operations",
               ],
             },
             {
