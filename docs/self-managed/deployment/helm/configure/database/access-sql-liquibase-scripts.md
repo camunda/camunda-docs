@@ -6,6 +6,13 @@ description: Learn where to obtain Camunda 8 SQL and Liquibase scripts, how to d
 
 Access and safely use the SQL and Liquibase scripts provided with Camunda 8 for supported databases. These scripts can be used for provisioning, upgrading, or managing database schemas in your environment.
 
+:::note Related pages
+
+- **[Configure RDBMS](rdbms.md)** - Configuration reference and Helm values.
+- **[Schema management](rdbms-schema-management.md)** - Schema creation, permissions, and auto-DDL configuration.
+- **[JDBC driver management](rdbms-jdbc-drivers.md)** - Managing custom database drivers.
+  :::
+
 ## Where the scripts are published
 
 The scripts are included in the **Camunda 8 Run distribution** and in each **Camunda GitHub release** as a versioned ZIP file:
