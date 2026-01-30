@@ -1,7 +1,7 @@
 ---
 id: configuration-mapping
-title: "Camunda 8.8 property changes"
-sidebar_label: 8.8 property changes
+title: "Property changes in Camunda 8.8"
+sidebar_label: Property changes in 8.8
 description: "Configuration property changes and backwards compatibility information for new Camunda 8.8 properties and legacy properties."
 hide_table_of_contents: true
 ---

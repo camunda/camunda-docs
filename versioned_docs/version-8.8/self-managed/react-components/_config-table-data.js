@@ -584,7 +584,14 @@ export const configs = [
     types: ["Breaking change"],
     area: ["Data"],
   },
-
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.history.process-instance-enabled",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.history.processInstanceEnabled",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
   {
     name: "camunda.data.secondary-storage.opensearch.url",
     legacy: [

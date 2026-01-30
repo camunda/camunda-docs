@@ -4,6 +4,7 @@ title: "Property reference"
 description: "Learn about the configuration properties available in your Orchestration Cluster."
 toc_min_heading_level: 2
 toc_max_heading_level: 2
+hide_table_of_contents: false
 ---
 
 import Tabs from '@theme/Tabs';
@@ -14,253 +15,13 @@ As a Spring Boot application, the Orchestration Cluster supports standard
 
 The following configurations apply to all components within the Orchestration Cluster.
 
-## API
+import Api from './partials/\_api.md'
 
-<Tabs>
-  <TabItem value="application.yaml" label="Application properties">
+<Api />
 
-### `camunda.api.long-polling`
+import Cluster from './partials/\_cluster.md'
 
-| Property                                       | Description                                                                                                                           | Default value |
-| :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `camunda.api.long-polling.enabled`             | <p>Enable [long-polling](/components/concepts/job-workers.md#long-polling) for the Camunda gRPC API server.</p>                       | `true`        |
-| `camunda.api.long-polling.timeout`             | <p>Set the timeout for long polling in milliseconds.</p>                                                                              | `10000`       |
-| `camunda.api.long-polling.probe-timeout`       | <p>Set the probe timeout for long polling in milliseconds.</p>                                                                        | `10000`       |
-| `camunda.api.long-polling.min-empty-responses` | <p>Set the number of minimum empty responses. A minimum number of responses with jobCount of 0 infers that no jobs are available.</p> | `10s`         |
-
-  </TabItem>
-    <TabItem value="env" label="Environment variables">
-
-### `CAMUNDA_API_LONGPOLLING`
-
-| Property                                    | Description                                                                                                                           | Default value |
-| :------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `CAMUNDA_API_LONGPOLLING_ENABLED`           | <p>Enable [long-polling](/components/concepts/job-workers.md#long-polling) for the Camunda gRPC API server.</p>                       | `true`        |
-| `CAMUNDA_API_LONGPOLLING_TIMEOUT`           | <p>Set the timeout for long polling in milliseconds.</p>                                                                              | `10000`       |
-| `CAMUNDA_API_LONGPOLLING_PROBETIMEOUT`      | <p>Set the probe timeout for long polling in milliseconds.</p>                                                                        | `10000`       |
-| `CAMUNDA_API_LONGPOLLING_MINEMPTYRESPONSES` | <p>Set the number of minimum empty responses. A minimum number of responses with jobCount of 0 infers that no jobs are available.</p> | `10s`         |
-
-  </TabItem>
-</Tabs>
-
-## API - gRPC
-
-<Tabs>
-  <TabItem value="application.yaml" label="Application properties">
-
-### `camunda.api.grpc`
-
-| Property                                   | Description                                                                                                                                                                                                                                                           | Default value |
-| :----------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.api.grpc.address`                 | <p>Set the address the gateway binds to.</p>                                                                                                                                                                                                                          | `0.0.0.0`     |
-| `camunda.api.grpc.port`                    | <p>Set the port the gateway binds to.</p>                                                                                                                                                                                                                             | `26500`       |
-| `camunda.api.grpc.min-keep-alive-interval` | <p>Set the minimum keep alive interval.</p><ul><li>This setting specifies the minimum accepted interval between keep alive pings.</li><li>This value must be specified as a positive integer followed by 's' for seconds, 'm' for minutes or 'h' for hours.</li></ul> | `30s`         |
-| `camunda.api.grpc.max-message-size`        | <p>Set the maximum size of the incoming and outgoing messages (that is, commands and events).</p>                                                                                                                                                                     | `4MB`         |
-| `camunda.api.grpc.management-threads`      | <p>Set the number of threads the gateway will use to communicate with the broker cluster.</p>                                                                                                                                                                         | `1`           |
-
-### `camunda.api.grpc.ssl`
-
-| Property                                       | Description                                                                                                                          | Default value       |
-| :--------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- | :------------------ |
-| `camunda.api.grpc.ssl.enabled`                 | <p>Enable SSL (Secure Sockets Layer) authentication for the gateway.</p>                                                             | `false`             |
-| `camunda.api.grpc.ssl.certificate`             | <p>Set the path to the certificate chain file.</p>                                                                                   | Null                |
-| `camunda.api.grpc.ssl.certificate-private-key` | <p>Set the path to the private key file location.</p>                                                                                | Null                |
-| `camunda.api.grpc.ssl.key-store.file-path`     | <p>Configure the keystore file containing both the certificate chain and the private key. Currently only supports PKCS12 format.</p> | `/path/to/keystore` |
-| `camunda.api.grpc.ssl.key-store.password`      | <p>Configure the keystore password.</p>                                                                                              | Null                |
-
-### `camunda.api.grpc.interceptors`
-
-| Property                                     | Description                                                                                                                                                                                                                                                         | Default value |
-| :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `camunda.api.grpc.interceptors[]`            | <p>This property is part of Camunda's gRPC interceptor system, which allows you to add custom processing logic to gRPC requests and responses.</p><p>The property is a list of interceptor configurations, each requiring an `id`, `jar-path` and `class-name`.</p> | No entries    |
-| `camunda.api.grpc.interceptors[].id`         | <p>The unique identifier for a particular gRPC interceptor configuration.</p>                                                                                                                                                                                       | Null          |
-| `camunda.api.grpc.interceptors[].jar-path`   | <p>The file path to a JAR file that contains a custom gRPC interceptor implementation.</p>                                                                                                                                                                          | Null          |
-| `camunda.api.grpc.interceptors[].class-name` | <p>Set the fully qualified class name of a custom gRPC interceptor implementation that should be loaded and executed by the Camunda gRPC server.</p>                                                                                                                | Null          |
-
-</TabItem>
-<TabItem value="env" label="Environment variables">
-
-### `CAMUNDA_API_GRPC`
-
-| Property                                | Description                                                                                                                                                                                                                                                           | Default value |
-| :-------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_API_GRPC_ADDRESS`              | <p>Set the address the gateway binds to.</p>                                                                                                                                                                                                                          | `0.0.0.0`     |
-| `CAMUNDA_API_GRPC_PORT`                 | <p>Set the port the gateway binds to.</p>                                                                                                                                                                                                                             | `26500`       |
-| `CAMUNDA_API_GRPC_MINKEEPALIVEINTERVAL` | <p>Set the minimum keep alive interval.</p><ul><li>This setting specifies the minimum accepted interval between keep alive pings.</li><li>This value must be specified as a positive integer followed by 's' for seconds, 'm' for minutes or 'h' for hours.</li></ul> | `30s`         |
-| `CAMUNDA_API_GRPC_MAXMESSAGESIZE`       | <p>Set the maximum size of the incoming and outgoing messages (that is, commands and events).</p>                                                                                                                                                                     | `4MB`         |
-| `CAMUNDA_API_GRPC_MANAGEMENTTHREADS`    | <p>Set the number of threads the gateway will use to communicate with the broker cluster.</p>                                                                                                                                                                         | `1`           |
-
-### `CAMUNDA_API_GRPC_SSL`
-
-| Property                                     | Description                                                                                                                          | Default value       |
-| :------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- | :------------------ |
-| `CAMUNDA_API_GRPC_SSL_ENABLED`               | <p>Enable SSL (Secure Sockets Layer) authentication for the gateway.</p>                                                             | `false`             |
-| `CAMUNDA_API_GRPC_SSL_CERTIFICATE`           | <p>Set the path to the certificate chain file.</p>                                                                                   | Null                |
-| `CAMUNDA_API_GRPC_SSL_CERTIFICATEPRIVATEKEY` | <p>Set the path to the private key file location.</p>                                                                                | Null                |
-| `CAMUNDA_API_GRPC_SSL_KEYSTORE_FILEPATH`     | <p>Configure the keystore file containing both the certificate chain and the private key. Currently only supports PKCS12 format.</p> | `/path/to/keystore` |
-| `CAMUNDA_API_GRPC_SSL_KEYSTORE_PASSWORD`     | <p>Configure the keystore password.</p>                                                                                              | Null                |
-
-### `CAMUNDA_API_GRPC_INTERCEPTORS`
-
-| Property                                    | Description                                                                                                                                          | Default value |
-| :------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_API_GRPC_INTERCEPTORS`             | <p>List of gRPC interceptor configurations.</p><p>Each entry requires `ID`, `JARPATH`, and `CLASSNAME`.</p>                                          | No entries    |
-| `CAMUNDA_API_GRPC_INTERCEPTORS_0_ID`        | <p>The unique identifier for a particular gRPC interceptor configuration.</p>                                                                        | Null          |
-| `CAMUNDA_API_GRPC_INTERCEPTORS_0_JARPATH`   | <p>The file path to a JAR file that contains a custom gRPC interceptor implementation.</p>                                                           | Null          |
-| `CAMUNDA_API_GRPC_INTERCEPTORS_0_CLASSNAME` | <p>Set the fully qualified class name of a custom gRPC interceptor implementation that should be loaded and executed by the Camunda gRPC server.</p> | Null          |
-
-  </TabItem>
-</Tabs>
-
-## API - REST
-
-<Tabs>
-  <TabItem value="application.yaml" label="Application properties">
-
-### `camunda.api.rest.filters`
-
-| Property                              | Description                                                                                                                                                                                                                               | Default value |
-| :------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.api.rest.filters[]`          | <p>This property is part of Camunda's REST filter system, which allows you to add filters to REST requests and responses.</p><p>The property is a list of filter configurations, each requiring an `id`, `jar-path` and `class-name`.</p> | No entries    |
-| `camunda.api.rest.filters[].id`       | <p>The unique identifier for a particular REST filter configuration.</p>                                                                                                                                                                  | Null          |
-| `camunda.api.rest.filters.jar-path`   | <p>The file path to a JAR file that contains a custom REST filter implementation.</p>                                                                                                                                                     | Null          |
-| `camunda.api.rest.filters.class-name` | <p>Set the fully qualified class name of a custom REST filter implementation that should be loaded and executed by the Camunda REST server.</p>                                                                                           | Null          |
-
-### `camunda.api.rest.process-cache`
-
-| Property                                         | Description                                                                                  | Default value |
-| :----------------------------------------------- | :------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.api.rest.process-cache.max-size`        | <p>Set the maximum number of entries that can be stored in the REST API's process cache.</p> | `100`         |
-| `camunda.api.rest.process-cache.expiration-idle` | <p>Set the idle expiration time for entries in the REST API's process cache.</p>             | `null`        |
-
-### `camunda.api.rest.executor`
-
-| Property                                              | Description                                                                                                                                                                                                                                                                                                                                                                                                 | Default value |
-| :---------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.api.rest.executor.core-pool-size-multiplier` | <p>Multiplier applied to the number of available processors to compute the executor's core pool size (minimum number of threads kept alive).</p><p>Effective value: `corePoolSize` = `availableProcessors` \* `corePoolSizeMultiplier`.</p><p>Use a higher value if you have steady, continuous traffic and want to minimize cold-start latency. Keep it low to allow the pool to scale down when idle.</p> | `1`           |
-| `camunda.api.rest.executor.max-pool-size-multiplier`  | <p>Multiplier applied to the number of available processors to compute the executor's maximum pool size (hard cap on threads).</p><p>Effective value: `maxPoolSize` = `availableProcessors` \* `maxPoolSizeMultiplier`.</p><p>Must be >= `corePoolSizeMultiplier`.</p><p>Increase cautiously, as high values can cause oversubscription for CPU-bound workloads.</p>                                        | `2`           |
-| `camunda.api.rest.executor.keep-alive`                | <p>Time in seconds that threads above the core size may remain idle before being terminated.</p><p>Lower values reclaim resources faster after bursts. Higher values reduce thread creation/destruction churn if bursts are frequent.</p>                                                                                                                                                                   | `60s`         |
-| `camunda.api.rest.executor.queue-capacity`            | <p>Capacity of the executor's task queue. A small bounded queue (for example, `64`) is recommended to handle short bursts while still allowing the pool to grow.</p>                                                                                                                                                                                                                                        | `64`          |
-
-</TabItem>
-<TabItem value="env" label="Environment variables">
-
-### `CAMUNDA_API_REST_FILTERS`
-
-| Property                               | Description                                                                                                                                                                                                                               | Default value |
-| :------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_API_REST_FILTERS`             | <p>This property is part of Camunda's REST filter system, which allows you to add filters to REST requests and responses.</p><p>The property is a list of filter configurations, each requiring an `id`, `jar-path` and `class-name`.</p> | No entries    |
-| `CAMUNDA_API_REST_FILTERS_0_ID`        | <p>The unique identifier for a particular REST filter configuration.</p>                                                                                                                                                                  | Null          |
-| `CAMUNDA_API_REST_FILTERS_0_JARPATH`   | <p>The file path to a JAR file that contains a custom REST filter implementation.</p>                                                                                                                                                     | Null          |
-| `CAMUNDA_API_REST_FILTERS_0_CLASSNAME` | <p>Set the fully qualified class name of a custom REST filter implementation that should be loaded and executed by the Camunda REST server.</p>                                                                                           | Null          |
-
-### `CAMUNDA_API_REST_PROCESSCACHE`
-
-| Property                                       | Description                                                                                  | Default value |
-| :--------------------------------------------- | :------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_API_REST_PROCESSCACHE_MAXSIZE`        | <p>Set the maximum number of entries that can be stored in the REST API's process cache.</p> | `100`         |
-| `CAMUNDA_API_REST_PROCESSCACHE_EXPIRATIONIDLE` | <p>Set the idle expiration time for entries in the REST API's process cache.</p>             | `null`        |
-
-### `CAMUNDA_API_REST_EXECUTOR`
-
-| Property                                           | Description                                                                                                                                                                                                                                                                                                                                                                                                 | Default value |
-| :------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_API_REST_EXECUTOR_COREPOOLSIZEMULTIPLIER` | <p>Multiplier applied to the number of available processors to compute the executor's core pool size (minimum number of threads kept alive).</p><p>Effective value: `corePoolSize` = `availableProcessors` \* `corePoolSizeMultiplier`.</p><p>Use a higher value if you have steady, continuous traffic and want to minimize cold-start latency. Keep it low to allow the pool to scale down when idle.</p> | `1`           |
-| `CAMUNDA_API_REST_EXECUTOR_MAXPOOLSIZEMULTIPLIER`  | <p>Multiplier applied to the number of available processors to compute the executor's maximum pool size (hard cap on threads).</p><p>Effective value: `maxPoolSize` = `availableProcessors` \* `maxPoolSizeMultiplier`.</p><p>Must be >= `corePoolSizeMultiplier`.</p><p>Increase cautiously, as high values can cause oversubscription for CPU-bound workloads.</p>                                        | `2`           |
-| `CAMUNDA_API_REST_EXECUTOR_KEEPALIVE`              | <p>Time in seconds that threads above the core size may remain idle before being terminated.</p><p>Lower values reclaim resources faster after bursts. Higher values reduce thread creation/destruction churn if bursts are frequent.</p>                                                                                                                                                                   | `60s`         |
-| `CAMUNDA_API_REST_EXECUTOR_QUEUECAPACITY`          | <p>Capacity of the executor's task queue. A small bounded queue (for example, `64`) is recommended to handle short bursts while still allowing the pool to grow.</p>                                                                                                                                                                                                                                        | `64`          |
-
-  </TabItem>
-</Tabs>
-
-## Cluster
-
-<Tabs>
-  <TabItem value="application.yaml" label="Application properties">
-
-### `camunda.cluster`
-
-| Property                             | Description                                                                                                                                        | Default value |
-| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.cluster.network.host`       | <p>The network host for internal cluster communication.</p>                                                                                        | `null`        |
-| `camunda.cluster.node-id`            | <p>Specifies the unique id of this broker node in a cluster. The id should be between 0 and number of nodes in the cluster (exclusive).</p>        | `0`           |
-| `camunda.cluster.partition-count`    | <p>The number of partitions in the cluster.</p>                                                                                                    | `1`           |
-| `camunda.cluster.replication-factor` | <p>The number of replicas for each partition in the cluster. The replication factor cannot be greater than the number of nodes in the cluster.</p> | `1`           |
-| `camunda.cluster.size`               | <p>The number of nodes in the cluster.</p>                                                                                                         | `1`           |
-
-### `camunda.cluster.global-listeners`
-
-| Property                                                        | Description                                                                                                                                                                                                                                                 | Default value |
-| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.cluster.global-listeners.user-task[]`                  | <p>List of configuration entries for global user task listeners (see also [Global user task listeners](/components/concepts/global-user-task-listeners.md).)</p>                                                                                            | No entries    |
-| `camunda.cluster.global-listeners.user-task[].event-types[]`    | <p>List of user task event types that trigger the listener. Supported values are `creating`, `assigning`, `updating`, `completing`, and `canceling`. The shorthand `all` value is also available if the listener should react to all lifecycle events. </p> | -             |
-| `camunda.cluster.global-listeners.user-task[].type`             | <p>The name of the job type. Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`. </p>                                                                                                    | -             |
-| `camunda.cluster.global-listeners.user-task[].retries`          | <p>The number of retries for the user task listener job. </p>                                                                                                                                                                                               | `"3"`         |
-| `camunda.cluster.global-listeners.user-task[].after-non-global` | <p>Boolean flag indicating whether the listener should run after model-level listeners. </p>                                                                                                                                                                | `false`       |
-
-### `camunda.cluster.metadata`
-
-| Property                                        | Description                                                                                                                                                         | Default value |
-| :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `camunda.cluster.metadata.sync-delay`           | <p>The delay between two sync requests in the `ClusterConfigurationManager`. A sync request is sent to another node to get the latest topology of the cluster. </p> | `10s`         |
-| `camunda.cluster.metadata.sync-request-timeout` | <p>The timeout for a sync request in the `ClusterConfigurationManager`.</p>                                                                                         | `2s`          |
-| `camunda.cluster.metadata.gossip-fanout`        | <p>The number of nodes to which a cluster topology is gossiped.</p>                                                                                                 | `2`           |
-
-### `camunda.cluster.raft`
-
-| Property                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default value |
-| :----------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.cluster.raft`                           | <p>Configuration for the Raft consensus protocol in the cluster.</p><p>This class provides settings for Raft algorithm parameters including timing, elections, and log flushing.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | none          |
-| `camunda.cluster.raft.priority-election-enabled` | <p>When this flag is enabled, the leader election algorithm attempts to elect the leaders based on a pre-defined priority. As a result, it tries to distribute the leaders uniformly across the brokers.</p><p>Note that it is only a best-effort strategy. It is not guaranteed to be a strictly uniform distribution.</p>                                                                                                                                                                                                                                                                                                                                      | `true`        |
-| `camunda.cluster.raft.flush-enabled`             | <p>If false, explicit flushing of the Raft log is disabled, and flushing only occurs right before a snapshot is taken. You should only disable explicit flushing if you are willing to accept potential data loss at the expense of performance. Before disabling it, try the delayed options, which provide a trade-off between safety and performance.</p><p>By default, for a given partition, data is flushed on every leader commit, and every follower append. This is to ensure consistency across all replicas. Disabling this can cause inconsistencies, and at worst, data corruption or data loss scenarios.</p>                                      | `true`        |
-| `camunda.cluster.raft.flush-delay`               | <p>If the delay is > 0, then flush requests are delayed by at least the given period. It is recommended that you find the smallest delay here with which you achieve your performance goals.</p><p>It's also likely that anything above 30s is not useful, as this is the typical default flush interval for the Linux OS.</p><p>The default behavior is optimized for safety, and flushing occurs on every leader commit and follower append in a synchronous fashion.</p>                                                                                                                                                                                      | `0s`          |
-| `camunda.cluster.raft.heartbeat-interval`        | <p>The heartbeat interval for Raft. The leader sends a heartbeat to a follower every `heartbeatInterval`. This is an advanced setting.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `250ms`       |
-| `camunda.cluster.raft.election-timeout`          | <p>The election timeout for Raft. If a follower does not receive a heartbeat from the leader within an election timeout, it can start a new leader election.</p><p>The `electionTimeout` should be greater than the configured `heartbeatInterval`.</p><p>When the `electionTimeout` is large, there will be a delay in detecting a leader failure.</p><p>When the `electionTimeout` is small, it can lead to false positives when detecting leader failures and thus leading to unnecessary leader changes.</p><p>If the network latency between the nodes is high, it is recommended to have a higher election timeout.</p><p>This is an advanced setting.</p> | `2.5s`        |
-
-</TabItem>
-<TabItem value="env" label="Environment variables">
-
-### `CAMUNDA_CLUSTER`
-
-| Property                            | Description                                                                                                                                        | Default value |
-| :---------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_CLUSTER_NETWORK_HOST`      | <p>The network host for internal cluster communication.</p>                                                                                        | `null`        |
-| `CAMUNDA_CLUSTER_NODEID`            | <p>Specifies the unique id of this broker node in a cluster. The id should be between 0 and number of nodes in the cluster (exclusive).</p>        | `0`           |
-| `CAMUNDA_CLUSTER_PARTITIONCOUNT`    | <p>The number of partitions in the cluster.</p>                                                                                                    | `1`           |
-| `CAMUNDA_CLUSTER_REPLICATIONFACTOR` | <p>The number of replicas for each partition in the cluster. The replication factor cannot be greater than the number of nodes in the cluster.</p> | `1`           |
-| `CAMUNDA_CLUSTER_SIZE`              | <p>The number of nodes in the cluster.</p>                                                                                                         | `1`           |
-
-### `CAMUNDA_CLUSTER_GLOBAL_LISTENERS`
-
-| Property                                                        | Description                                                                                                                                                                                                                                                 | Default value |
-| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK`                    | <p>List of configuration entries for global user task listeners (see also [Global user task listeners](/components/concepts/global-user-task-listeners.md).)</p>                                                                                            | No entries    |
-| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_EVENT_TYPES`      | <p>List of user task event types that trigger the listener. Supported values are `creating`, `assigning`, `updating`, `completing`, and `canceling`. The shorthand `all` value is also available if the listener should react to all lifecycle events. </p> | -             |
-| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_TYPE`             | <p>The name of the job type. Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`. </p>                                                                                                    | -             |
-| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_RETRIES`          | <p>The number of retries for the user task listener job. </p>                                                                                                                                                                                               | `"3"`         |
-| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_AFTER_NON_GLOBAL` | <p>Boolean flag indicating whether the listener should run after model-level listeners. </p>                                                                                                                                                                | `false`       |
-
-### `CAMUNDA_CLUSTER_METADATA`
-
-| Property                                      | Description                                                                                                                                                         | Default value |
-| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `CAMUNDA_CLUSTER_METADATA_SYNCDELAY`          | <p>The delay between two sync requests in the `ClusterConfigurationManager`. A sync request is sent to another node to get the latest topology of the cluster. </p> | `10s`         |
-| `CAMUNDA_CLUSTER_METADATA_SYNCREQUESTTIMEOUT` | <p>The timeout for a sync request in the `ClusterConfigurationManager`.</p>                                                                                         | `2s`          |
-| `CAMUNDA_CLUSTER_METADATA_GOSSIPFANOUT`       | <p>The number of nodes to which a cluster topology is gossiped.</p>                                                                                                 | `2`           |
-
-### `CAMUNDA_CLUSTER_RAFT`
-
-| Property                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default value |
-| :--------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_CLUSTER_RAFT`                         | <p>Configuration for the Raft consensus protocol in the cluster.</p><p>This class provides settings for Raft algorithm parameters including timing, elections, and log flushing.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | none          |
-| `CAMUNDA_CLUSTER_RAFT_PRIORITYELECTIONENABLED` | <p>When this flag is enabled, the leader election algorithm attempts to elect the leaders based on a pre-defined priority. As a result, it tries to distribute the leaders uniformly across the brokers.</p><p>Note that it is only a best-effort strategy. It is not guaranteed to be a strictly uniform distribution.</p>                                                                                                                                                                                                                                                                                                                                      | `true`        |
-| `CAMUNDA_CLUSTER_RAFT_FLUSHENABLED`            | <p>If false, explicit flushing of the Raft log is disabled, and flushing only occurs right before a snapshot is taken. You should only disable explicit flushing if you are willing to accept potential data loss at the expense of performance. Before disabling it, try the delayed options, which provide a trade-off between safety and performance.</p><p>By default, for a given partition, data is flushed on every leader commit, and every follower append. This is to ensure consistency across all replicas. Disabling this can cause inconsistencies, and at worst, data corruption or data loss scenarios.</p>                                      | `true`        |
-| `CAMUNDA_CLUSTER_RAFT_FLUSHDELAY`              | <p>If the delay is > 0, then flush requests are delayed by at least the given period. It is recommended that you find the smallest delay here with which you achieve your performance goals.</p><p>It's also likely that anything above 30s is not useful, as this is the typical default flush interval for the Linux OS.</p><p>The default behavior is optimized for safety, and flushing occurs on every leader commit and follower append in a synchronous fashion.</p>                                                                                                                                                                                      | `0s`          |
-| `CAMUNDA_CLUSTER_RAFT_HEARTBEATINTERVAL`       | <p>The heartbeat interval for Raft. The leader sends a heartbeat to a follower every `heartbeatInterval`. This is an advanced setting.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `'250ms'`     |
-| `CAMUNDA_CLUSTER_RAFT_ELECTIONTIMEOUT`         | <p>The election timeout for Raft. If a follower does not receive a heartbeat from the leader within an election timeout, it can start a new leader election.</p><p>The `electionTimeout` should be greater than the configured `heartbeatInterval`.</p><p>When the `electionTimeout` is large, there will be a delay in detecting a leader failure.</p><p>When the `electionTimeout` is small, it can lead to false positives when detecting leader failures and thus leading to unnecessary leader changes.</p><p>If the network latency between the nodes is high, it is recommended to have a higher election timeout.</p><p>This is an advanced setting.</p> | `2.5s`        |
-
-  </TabItem>
-</Tabs>
+<Cluster />
 
 ## Data
 
@@ -275,6 +36,16 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.data.export.distribution-interval` | <p>Configures the rate at which exporter positions are distributed to the followers. This is useful for fail-over and taking snapshots.</p><p>The follower is able to take snapshots based on replayed and distributed export position. When a follower takes over it can recover from the snapshot, it doesn't need to replay and export everything.</p><p>For example, it can start from the last exported position it has received by the distribution mechanism.</p> | `15s`         |
 | `camunda.data.export.skip-records`          | <p>Enable the exporters to skip record position. Allows to skip certain records by their position.</p><p>This is useful for debugging or skipping a record that is preventing processing or exporting to continue.</p><p>Record positions defined to skip in this definition will be skipped in all exporters. The value is a comma-separated list of records ids to skip. Whitespace is ignored.</p>                                                                    | `[]`          |
 
+### `camunda.data.audit-log`
+
+| Property                                   | Description                                                                                                 | Default value                  |
+| :----------------------------------------- | :---------------------------------------------------------------------------------------------------------- | :----------------------------- |
+| `camunda.data.audit-log.enabled`           | <p>Enable or disable the audit log.</p>                                                                     | `true`                         |
+| `camunda.data.audit-log.user.categories`   | <p>List of audit log categories to include for <strong>user</strong>-initiated actions.</p>                 | `[OPERATOR, USER_TASK, ADMIN]` |
+| `camunda.data.audit-log.user.excludes`     | <p>List of users to exclude from audit logging.</p>                                                         |                                |
+| `camunda.data.audit-log.client.categories` | <p>List of audit log categories to include for <strong>client</strong>-initiated actions (API clients).</p> | `[OPERATOR, USER_TASK, ADMIN]` |
+| `camunda.data.audit-log.client.excludes`   | <p>List of clients to exclude from audit logging.</p>                                                       |                                |
+
 </TabItem>
   <TabItem value="env" label="Environment variables">
 
@@ -285,6 +56,16 @@ The following configurations apply to all components within the Orchestration Cl
 | `CAMUNDA_DATA_SNAPSHOTPERIOD`              | <p>How often snapshots are taken of streams (in minutes).</p>                                                                                                                                                                                                                                                                                                                                                                                                            | `5m`          |
 | `CAMUNDA_DATA_EXPORT_DISTRIBUTIONINTERVAL` | <p>Configures the rate at which exporter positions are distributed to the followers. This is useful for fail-over and taking snapshots.</p><p>The follower is able to take snapshots based on replayed and distributed export position. When a follower takes over it can recover from the snapshot, it doesn't need to replay and export everything.</p><p>For example, it can start from the last exported position it has received by the distribution mechanism.</p> | `15s`         |
 | `CAMUNDA_DATA_EXPORT_SKIPRECORDS`          | <p>Enable the exporters to skip record position. Allows to skip certain records by their position.</p><p>This is useful for debugging or skipping a record that is preventing processing or exporting to continue.</p><p>Record positions defined to skip in this definition will be skipped in all exporters. The value is a comma-separated list of records ids to skip. Whitespace is ignored.</p>                                                                    | `[]`          |
+
+### `CAMUNDA_DATA_AUDITLOG`
+
+| Property                                  | Description                                                                                                 | Default value                  |
+| :---------------------------------------- | :---------------------------------------------------------------------------------------------------------- | :----------------------------- |
+| `CAMUNDA_DATA_AUDITLOG_ENABLED`           | <p>Enable or disable the audit log.</p>                                                                     | `true`                         |
+| `CAMUNDA_DATA_AUDITLOG_USER_CATEGORIES`   | <p>List of audit log categories to include for <strong>user</strong>-initiated actions.</p>                 | `[OPERATOR, USER_TASK, ADMIN]` |
+| `CAMUNDA_DATA_AUDITLOG_USER_EXCLUDES`     | <p>List of users to exclude from audit logging.</p>                                                         |                                |
+| `CAMUNDA_DATA_AUDITLOG_CLIENT_CATEGORIES` | <p>List of audit log categories to include for <strong>client</strong>-initiated actions (API clients).</p> | `[OPERATOR, USER_TASK, ADMIN]` |
+| `CAMUNDA_DATA_AUDITLOG_CLIENT_EXCLUDES`   | <p>List of clients to exclude from audit logging.</p>                                                       |                                |
 
   </TabItem>
 </Tabs>
@@ -500,7 +281,7 @@ The following configurations apply to all components within the Orchestration Cl
 
 | Property                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Default value |
 | :----------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.data.primary-storage.directory`         | <p>Specify the directory in which data is stored.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `'./data'`    |
+| `camunda.data.primary-storage.directory`         | <p>Specify the directory in which data is stored.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `'data'`      |
 | `camunda.data.primary-storage.runtime-directory` | <p>Specify the directory in which runtime is stored.</p><ul><li>By default, runtime is stored in `directory` for data.</li><li>If `runtime-directory` is configured, then the configured directory will be used. It will have a subdirectory for each partition to store its runtime.</li><li>There is no need to store the runtime in a persistent storage.</li><li>This configuration allows you to split runtime to another disk to optimize for performance and disk usage.</li></ul><p><strong>Note:</strong> If runtime is on a different disk than the data directory, files must be copied to the data directory while taking the snapshot. This can impact disk i/o or performance during snapshotting.</p> | `''`          |
 
 ### `camunda.data.primary-storage.disk`
@@ -540,7 +321,7 @@ The following configurations apply to all components within the Orchestration Cl
 
 | Property                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Default value |
 | :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_DATA_PRIMARYSTORAGE_DIRECTORY`        | <p>Specify the directory in which data is stored.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `./data`      |
+| `CAMUNDA_DATA_PRIMARYSTORAGE_DIRECTORY`        | <p>Specify the directory in which data is stored.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `data`        |
 | `CAMUNDA_DATA_PRIMARYSTORAGE_RUNTIMEDIRECTORY` | <p>Specify the directory in which runtime is stored.</p><ul><li>By default, runtime is stored in `directory` for data.</li><li>If `runtime-directory` is configured, then the configured directory will be used. It will have a subdirectory for each partition to store its runtime.</li><li>There is no need to store the runtime in a persistent storage.</li><li>This configuration allows you to split runtime to another disk to optimize for performance and disk usage.</li></ul><p><strong>Note:</strong> If runtime is on a different disk than the data directory, files must be copied to the data directory while taking the snapshot. This can impact disk i/o or performance during snapshotting.</p> | `''`          |
 
 ### `CAMUNDA_DATA_PRIMARYSTORAGE_DISK`
@@ -576,579 +357,26 @@ The following configurations apply to all components within the Orchestration Cl
   </TabItem>
 </Tabs>
 
-## Licensing
+import Licensing from './partials/\_licensing.md'
 
-Installations of Camunda 8 Self-Managed that require a license can provide their license key to the components. See [licensing](./licensing.md).
+<Licensing />
 
-<Tabs>
-  <TabItem value="application.yaml" label="Application properties">
+import Monitoring from './partials/\_monitoring.md'
 
-### `camunda.license`
+<Monitoring />
 
-| Property              | Description                                                                 | Default value |
-| :-------------------- | :-------------------------------------------------------------------------- | :------------ |
-| `camunda.license.key` | <p>Your Camunda 8 license key, if your installation requires a license.</p> | Null          |
+import Processing from './partials/\_processing.md'
 
-</TabItem>
-  <TabItem value="env" label="Environment variables">
+<Processing />
 
-### `CAMUNDA_LICENSE`
+import Security from './partials/\_security.md'
 
-| Property              | Description                                                                 | Default value |
-| :-------------------- | :-------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_LICENSE_KEY` | <p>Your Camunda 8 license key, if your installation requires a license.</p> | Null          |
-
-  </TabItem>
-</Tabs>
-
-## Security
-
-<Tabs>
-<TabItem value="conf" label="Application properties" default>
-
-### `camunda.security`
-
-| Property                                 | Description                                                                                         | Default value         |
-| ---------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------- |
-| `camunda.security.id-validation-pattern` | A Java regular expression that validates the user-defined identifiers of Identity-related entities. | `^[a-zA-Z0-9_@.+-]+$` |
-
-### `camunda.security.authentication`
-
-| Property                                                          | Description                                                                                                                                                                                                                                                                                                              | Default value |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| `camunda.security.authentication.authentication-refresh-interval` | The interval at which the memberships (groups, roles, tenants, component authorizations) are refreshed for logged in users. Find more details in [webserver and security](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md#propagation-of-membership-changes-to-active-sessions). | `PT30S`       |
-| `camunda.security.authorizations.enabled`                         | If authorizations are enabled.                                                                                                                                                                                                                                                                                           | `true`        |
-| `camunda.security.authentication.method`                          | The authentication method to use. Options: `basic`, `oidc`.                                                                                                                                                                                                                                                              | `basic`       |
-| `camunda.security.authentication.unprotected-api`                 | If the API can be used without authentication.                                                                                                                                                                                                                                                                           | `false`       |
-
-### `camunda.security.csrf`
-
-| Property                        | Description                                                                                                                                                                                   | Default value |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `camunda.security.csrf.enabled` | Enables or disables CSRF protection. Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks. | `true`        |
-
-:::caution
-Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
-:::
-
-### `camunda.security.http-headers`
-
-| Property                                                                  | Description                                                                                                                                                      | Related Header                                                                                                                                                                                                                                           | Default value                     |
-| ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| `camunda.security.http-headers.cache-control.enabled`                     | Enables or disables cache prevention headers. Default values: `Cache-Control: no-cache, no-store, max-age=0, must-revalidate`, `Pragma: no-cache`, `Expires: 0`. | [`Cache-Control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control), [`Pragma`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Pragma), [`Expires`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires) | `true`                            |
-| `camunda.security.http-headers.content-security-policy.enabled`           | Enables or disables CSP headers.                                                                                                                                 | [`Content-Security-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)                                                                                                                                           | `true`                            |
-| `camunda.security.http-headers.content-security-policy.policy-directives` | Custom CSP directives. If not set, [default values applied](#default-content-security-policy). If set, overrides default CSP policies.                           | [`Content-Security-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)                                                                                                                                           |                                   |
-| `camunda.security.http-headers.content-security-policy.report-only`       | Enables reporting mode without enforcing policies.                                                                                                               | [`Content-Security-Policy-Report-Only`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only)                                                                                                                   | `false`                           |
-| `camunda.security.http-headers.content-type-options.enabled`              | Enables or disables `X-Content-Type-Options` header with `nosniff` value.                                                                                        | [`X-Content-Type-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)                                                                                                                                             | `true`                            |
-| `camunda.security.http-headers.cross-origin-embedder-policy.value`        | Restricts embedded cross-origin resources. Options: `REQUIRE_CORP`, `UNSAFE_NONE`.                                                                               | [`Cross-Origin-Embedder-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy)                                                                                                                                 | `UNSAFE_NONE`                     |
-| `camunda.security.http-headers.cross-origin-opener-policy.value`          | Isolates windows from cross-origin openers. Options: `UNSAFE_NONE`, `SAME_ORIGIN_ALLOW_POPUPS`, `SAME_ORIGIN`.                                                   | [`Cross-Origin-Opener-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy)                                                                                                                                     | `SAME_ORIGIN_ALLOW_POPUPS`        |
-| `camunda.security.http-headers.cross-origin-resource-policy.value`        | Declares whether resources can be loaded cross-origin. Options: `SAME_ORIGIN`, `SAME_SITE`, `CROSS_ORIGIN`.                                                      | [`Cross-Origin-Resource-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Resource-Policy)                                                                                                                                 | `SAME_SITE`                       |
-| `camunda.security.http-headers.frame-options.enabled`                     | Enables or disables `X-Frame-Options` header. Default value is `SAMEORIGIN`.                                                                                     | [`X-Frame-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)                                                                                                                                                           | `true`                            |
-| `camunda.security.http-headers.frame-options.mode`                        | Frame options mode. Options: `DENY`, `SAMEORIGIN`.                                                                                                               | [`X-Frame-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)                                                                                                                                                           | `SAMEORIGIN`                      |
-| `camunda.security.http-headers.hsts.enabled`                              | Enables or disables `Strict-Transport-Security` header.                                                                                                          | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `true`                            |
-| `camunda.security.http-headers.hsts.include-subdomains`                   | Applies HSTS to all subdomains.                                                                                                                                  | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `false`                           |
-| `camunda.security.http-headers.hsts.max-age-in-seconds`                   | HSTS max age in seconds.                                                                                                                                         | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `31536000`                        |
-| `camunda.security.http-headers.hsts.preload`                              | Enables HSTS preloading.                                                                                                                                         | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `false`                           |
-| `camunda.security.http-headers.permissions-policy.value`                  | Restricts access to browser capabilities.                                                                                                                        | [`Permissions-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy)                                                                                                                                                     | Disables all features by default  |
-| `camunda.security.http-headers.referrer-policy.value`                     | Controls referrer information sharing. See available values below.                                                                                               | [`Referrer-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)                                                                                                                                                           | `STRICT_ORIGIN_WHEN_CROSS_ORIGIN` |
-
-#### Default Content Security Policy
-
-This is default value of the Content Security Policy when enabled:
-
-```
-default-src 'self';
-base-uri 'self';
-script-src 'self' https: *.chargebee.com *.mixpanel.com ajax.cloudflare.com static.cloudflareinsights.com;
-script-src-elem 'self' cdn.jsdelivr.net ;
-connect-src 'self' https: *.mixpanel.com cloudflareinsights.com *.appcues.net wss://api.appcues.net cdn.jsdelivr.net;
-style-src 'self' https: 'unsafe-inline' cdn.jsdelivr.net *.googleapis.com *.chargebee.com;
-img-src data: 'self';
-form-action 'self';
-frame-ancestors 'self';
-frame-src 'self' https: *.chargebee.com blob: ;
-object-src 'self' blob:;
-font-src 'self' data: fonts.camunda.io cdn.jsdelivr.net;
-worker-src 'self' blob:;
-child-src;
-script-src-attr 'none'.
-```
-
-### `camunda.security.authentication.oidc`
-
-Configuration options to connect to an identity providers.
-
-| Property                                                            | Description                                                                                                                                                                                                                             | Default value                        |
-| ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| `camunda.security.authentication.oidc.client-id`                    | The client ID for OIDC authentication.                                                                                                                                                                                                  |                                      |
-| `camunda.security.authentication.oidc.client-secret`                | The client secret for OIDC authentication. Only takes effect if `camunda.security.authentication.oidc.client-authentication-method` is set to `client_secret_basic` or left default.                                                    |                                      |
-| `camunda.security.authentication.oidc.issuer-uri`                   | The issuer URI for OIDC authentication. If set, the individual endpoints of your OIDC provider will be fetched from its [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig). |                                      |
-| `camunda.security.authentication.oidc.redirect-uri`                 | The URI for redirects from the OIDC provider to the Orchestration Cluster after user login.                                                                                                                                             | `http://localhost:8080/sso-callback` |
-| `camunda.security.authentication.oidc.username-claim`               | The JWT claim that identifies a user. Extracted from a token, this claim value becomes the user's username. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow.                           | `sub`                                |
-| `camunda.security.authentication.oidc.groups-claim`                 | The JWT claim that contains a user's or client's groups. Expects an array of String values. If not set, groups can be managed in the Orchestration Cluster through its REST APIs.                                                       |                                      |
-| `camunda.security.authentication.oidc.client-id-claim`              | The JWT claim that identifies a client. Extracted from a token, this claim value becomes the clients's ID. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow.                            |                                      |
-| `camunda.security.authentication.oidc.prefer-username-claim`        | Determines if a token that contains both, the configured username claim and the configured client id claim, is treated as a user or a client. If set to true, it is treated as a user. If set to false, it is treated as a client.      | `false`                              |
-| `camunda.security.authentication.oidc.audiences`                    | Comma-separated list of audiences to validate in the OIDC token.                                                                                                                                                                        |                                      |
-| `camunda.security.authentication.oidc.scope`                        | Comma-separated list of scopes to request in the OIDC token.                                                                                                                                                                            | `openid, profile`                    |
-| `camunda.security.authentication.oidc.jwk-set-uri`                  | Sets the OIDC provider's JWK Set URI explicitly. This will override the well-known configuration's value.                                                                                                                               |                                      |
-| `camunda.security.authentication.oidc.authorization-uri`            | Sets the OIDC provider's authorization URI explicitly. This will override the well-known configuration's value.                                                                                                                         |                                      |
-| `camunda.security.authentication.oidc.token-uri`                    | Sets the OIDC provider's token URI explicitly. This will override the well-known configuration's value.                                                                                                                                 |                                      |
-| `camunda.security.authentication.oidc.client-authentication-method` | Sets the client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                        | `client_secret_basic`                |
-| `camunda.security.authentication.oidc.clock-skew`                   | Sets the allowed clock skew when validating JWT issuance and expiration. Format: ISO 8601 duration (`PnDTnHnMn.nS`).                                                                                                                    | `60S`                                |
-| `camunda.security.authentication.oidc.id-token-algorithm`           | Sets the ID token signature algorithm.                                                                                                                                                                                                  | `RS256`                              |
-
-### `camunda.security.authentication.oidc.assertion`
-
-Configuration options for the client assertion used in Bearer JWT client authentication.
-
-:::note
-These properties apply only when `camunda.security.authentication.oidc.client-authentication-method` is set to `private_key_jwt`.
-The `key` value refers to the private key ID used to sign the client assertion JWT.
-:::
-
-| Property                                                              | Description                                                                | Default value |
-| --------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------- |
-| `camunda.security.authentication.oidc.assertion.kid-source`           | Source for generating the key ID. Options: `CERTIFICATE`, `PUBLIC_KEY`.    | `PUBLIC_KEY`  |
-| `camunda.security.authentication.oidc.assertion.kid-digest-algorithm` | Hash algorithm used to generate the key ID. Options: `SHA256`, `SHA1`.     | `SHA256`      |
-| `camunda.security.authentication.oidc.assertion.kid-encoding`         | Key ID encoding. Options: `BASE64URL`, `HEX`.                              | `BASE64URL`   |
-| `camunda.security.authentication.oidc.assertion.kid-case`             | Key ID case. Only applicable to `HEX` encoding. Options: `UPPER`, `LOWER`. |               |
-
-### `camunda.security.authentication.oidc.assertion.keystore`
-
-Configuration of the keystore used to build the client assertion for Bearer JWT client authentication.
-
-:::note
-These properties apply only when `camunda.security.authentication.oidc.client-authentication-method` is set to `private_key_jwt`.
-:::
-
-| Property                                                               | Description                                                       | Default value |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------- |
-| `camunda.security.authentication.oidc.assertion.keystore.path`         | Path to the `PKCS12` keystore.                                    |               |
-| `camunda.security.authentication.oidc.assertion.keystore.password`     | Keystore password.                                                |               |
-| `camunda.security.authentication.oidc.assertion.keystore.key-alias`    | Alias of the private key to be used to sign the client assertion. |               |
-| `camunda.security.authentication.oidc.assertion.keystore.key-password` | Password of the private key.                                      |               |
-
-### `camunda.security.authentication.providers.oidc`
-
-Configuration options to connect to multiple identity providers.
-
-:::note
-`<provider-id>` is a unique, user-defined identifier. All properties that share the same `<provider-id>` belong to the same identity provider configuration.
-:::
-
-| Property                                                                                    | Description                                                                                                                                                                                                                                                                                                                            | Default value                        |
-| ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| `camunda.security.authentication.providers.oidc.<provider-id>.client-name`                  | The client name for OIDC authentication.                                                                                                                                                                                                                                                                                               |                                      |
-| `camunda.security.authentication.providers.oidc.<provider-id>.client-id`                    | The client ID for OIDC authentication.                                                                                                                                                                                                                                                                                                 |                                      |
-| `camunda.security.authentication.providers.oidc.<provider-id>.client-secret`                | The client secret for OIDC authentication. Only takes effect if `camunda.security.authentication.providers.oidc.[provider-id].client-authentication-method` is set to `client_secret_basic` or left default.                                                                                                                           |                                      |
-| `camunda.security.authentication.providers.oidc.<provider-id>.issuer-uri`                   | The issuer URI for OIDC authentication, it is required and identifies the identity provider that issues tokens for this configuration. If set, the individual endpoints of your OIDC provider will be fetched from its [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig). |                                      |
-| `camunda.security.authentication.providers.oidc.<provider-id>.redirect-uri`                 | The URI for redirects from the OIDC provider to the Orchestration Cluster after user login.                                                                                                                                                                                                                                            | `http://localhost:8080/sso-callback` |
-| `camunda.security.authentication.providers.oidc.<provider-id>.audiences`                    | Comma-separated list of audiences to validate in the OIDC token.                                                                                                                                                                                                                                                                       |                                      |
-| `camunda.security.authentication.providers.oidc.<provider-id>.scope`                        | Comma-separated list of scopes to request in the OIDC token.                                                                                                                                                                                                                                                                           | `openid, profile`                    |
-| `camunda.security.authentication.providers.oidc.<provider-id>.jwk-set-uri`                  | Sets the OIDC provider's JWK Set URI explicitly. This will override the well-known configuration's value.                                                                                                                                                                                                                              |                                      |
-| `camunda.security.authentication.providers.oidc.<provider-id>.authorization-uri`            | Sets the OIDC provider's authorization URI explicitly. This will override the well-known configuration's value.                                                                                                                                                                                                                        |                                      |
-| `camunda.security.authentication.providers.oidc.<provider-id>.token-uri`                    | Sets the OIDC provider's token URI explicitly. This will override the well-known configuration's value.                                                                                                                                                                                                                                |                                      |
-| `camunda.security.authentication.providers.oidc.<provider-id>.client-authentication-method` | Sets the client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                                                                                                                       | `client_secret_basic`                |
-
-Client assertion settings are configured per identity provider. Each provider supports the same client assertion properties described in [Client assertion configuration](#camundasecurityauthenticationoidcassertion) and [Keystore Client assertion configuration](#camundasecurityauthenticationoidcassertionkeystore), applied within the scope of the corresponding `<provider-id>`.
-
-### `camunda.security.initialization.default-roles`
-
-| Property                                                                | Description                                  | Default value |
-| ----------------------------------------------------------------------- | -------------------------------------------- | ------------- |
-| `camunda.security.initialization.default-roles.<role>.clients.[0]`      | Clients assigned to the `<role>` role.       |               |
-| `camunda.security.initialization.default-roles.<role>.groups.[0]`       | Groups assigned to the `<role>` role.        |               |
-| `camunda.security.initialization.default-roles.<role>.mappingrules.[0]` | Mapping rules assigned to the `<role>` role. |               |
-| `camunda.security.initialization.default-roles.<role>.users.[0]`        | Users assigned to the `<role>` role.         |               |
-
-### `camunda.security.initialization.users`
-
-| Property                                             | Description                          | Default value |
-| ---------------------------------------------------- | ------------------------------------ | ------------- |
-| `camunda.security.initialization.users.[0].email`    | The email address of the first user. |               |
-| `camunda.security.initialization.users.[0].name`     | The name of the first user.          |               |
-| `camunda.security.initialization.users.[0].password` | The password of the first user.      |               |
-| `camunda.security.initialization.users.[0].username` | The username of the first user.      |               |
-
-### `camunda.security.initialization.mappingrules`
-
-| Property                                                           | Description                                  | Default value |
-| ------------------------------------------------------------------ | -------------------------------------------- | ------------- |
-| `camunda.security.initialization.mappingrules.[0].claim-name`      | The claim of the first mapping rule.         |               |
-| `camunda.security.initialization.mappingrules.[0].claim-value`     | The claim's value of the first mapping rule. |               |
-| `camunda.security.initialization.mappingrules.[0].mapping-rule-id` | The id of the first mapping rule.            |               |
-
-### `camunda.security.multi-tenancy`
-
-| Property                                        | Description                                                                   | Default value |
-| ----------------------------------------------- | ----------------------------------------------------------------------------- | ------------- |
-| `camunda.security.multi-tenancy.api-enabled`    | Enables the multi-tenancy API and UI independently from multi-tenancy checks. | `true`        |
-| `camunda.security.multi-tenancy.checks-enabled` | Enables multi-tenancy checks. This requires the API to be protected.          | `false`       |
-
-### `camunda.persistent.sessions`
-
-| Property                              | Description                                                                            | Default value |
-| ------------------------------------- | -------------------------------------------------------------------------------------- | ------------- |
-| `camunda.persistent.sessions.enabled` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `false`       |
-
-### `spring.profiles`
-
-| Property                 | Description                                                                                       | Default value       |
-| ------------------------ | ------------------------------------------------------------------------------------------------- | ------------------- |
-| `spring.profiles.active` | **Note:** This property will be deprecated as additional authentication methods become available. | `consolidated-auth` |
-
-</TabItem>
-<TabItem value="env" label="Environment variables">
-
-### `CAMUNDA_SECURITY`
-
-| Property                               | Description                                                                                         | Default value         |
-| -------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------- |
-| `CAMUNDA_SECURITY_IDVALIDATIONPATTERN` | A Java regular expression that validates the user-defined identifiers of Identity-related entities. | `^[a-zA-Z0-9_@.+-]+$` |
-
-### `CAMUNDA_SECURITY_AUTHENTICATION`
-
-| Property                                                        | Description                                                                                                                                                                                                                                                                                                              | Default value |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| `CAMUNDA_SECURITY_AUTHENTICATION_AUTHENTICATIONREFRESHINTERVAL` | The interval at which the memberships (groups, roles, tenants, component authorizations) are refreshed for logged in users. Find more details in [webserver and security](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md#propagation-of-membership-changes-to-active-sessions). | `PT30S`       |
-| `CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED`                       | If authorizations are enabled.                                                                                                                                                                                                                                                                                           | `true`        |
-| `CAMUNDA_SECURITY_AUTHENTICATION_METHOD`                        | The authentication method to use. Options: `basic`, `oidc`.                                                                                                                                                                                                                                                              | `basic`       |
-| `CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI`                | If the API can be used without authentication.                                                                                                                                                                                                                                                                           | `false`       |
-
-### `CAMUNDA_SECURITY_AUTHENTICATION_OIDC`
-
-Configuration options to connect to an identity providers.
-
-| Property                                                            | Description                                                                                                                                                                                                                             | Default value                        |
-| ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTID`                     | The client ID for OIDC authentication.                                                                                                                                                                                                  |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTSECRET`                 | The client secret for OIDC authentication. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` is set to `client_secret_basic` or left default.                                                    |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI`                    | The issuer URI for OIDC authentication. If set, the individual endpoints of your OIDC provider will be fetched from its [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig). |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_REDIRECTURI`                  | The URI for redirects from the OIDC provider to the Orchestration Cluster after user login.                                                                                                                                             | `http://localhost:8080/sso-callback` |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM`                | The JWT claim that identifies a user. Extracted from a token, this claim value becomes the user's username. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow.                           | `sub`                                |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM`                  | The JWT claim that contains a user's or client's groups. Expects an array of String values. If not set, groups can be managed in the Orchestration Cluster through its REST APIs.                                                       |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTIDCLAIM`                | The JWT claim that identifies a client. Extracted from a token, this claim value becomes the clients's id. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow.                            |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_PREFERUSERNAMECLAIM`          | Determines if a token that contains both, the configured username claim and the configured client id claim, is treated as a user or a client. If set to true, it is treated as a user. If set to false, it is treated as a client.      | `false`                              |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES`                    | Comma-separated list of audiences to validate in the OIDC token.                                                                                                                                                                        |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE`                        | Comma-separated list of scopes to request in the OIDC token.                                                                                                                                                                            | `openid, profile`                    |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI`                    | Sets the OIDC provider's JWK Set URI explicitly. This will override the well-known configuration's value.                                                                                                                               |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUTHORIZATIONURI`             | Sets the OIDC provider's authorization URI explicitly. This will override the well-known configuration's value.                                                                                                                         |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_TOKENURI`                     | Sets the OIDC provider's token URI explicitly. This will override the well-known configuration's value.                                                                                                                                 |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` | Sets the client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                        | `client_secret_basic`                |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLOCK_SKEW`                   | Sets the allowed clock skew when validating JWT issuance and expiration. Format: ISO 8601 duration (`PnDTnHnMn.nS`).                                                                                                                    | `60S`                                |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ID_TOKEN_ALGORITHM`           | Sets the ID token signature algorithm.                                                                                                                                                                                                  | `RS256`                              |
-
-### `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION`
-
-Configuration options for the client assertion used in Bearer JWT client authentication.
-
-:::note
-These properties apply only when `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` is set to `private_key_jwt`.
-The `key` value refers to the private key ID used to sign the client assertion JWT.
-:::
-
-| Property                                                              | Description                                                                | Default value |
-| --------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KID_SOURCE`           | Source for generating the key ID. Options: `CERTIFICATE`, `PUBLIC_KEY`.    | `PUBLIC_KEY`  |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KID_DIGEST_ALGORITHM` | Hash algorithm used to generate the key ID. Options: `SHA256`, `SHA1`.     | `SHA256`      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KID_ENCODING`         | Key ID encoding. Options: `BASE64URL`, `HEX`.                              | `BASE64URL`   |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KID_CASE`             | Key ID case. Only applicable to `HEX` encoding. Options: `UPPER`, `LOWER`. |               |
-
-### `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE`
-
-Configuration of the keystore used to build the client assertion for Bearer JWT client authentication.
-
-:::note
-These properties apply only when `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` is set to `private_key_jwt`.
-:::
-
-| Property                                                               | Description                                                       | Default value |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------- |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE_PATH`         | Path to the `PKCS12` keystore.                                    |               |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE_PASSWORD`     | Keystore password.                                                |               |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE_KEY_ALIAS`    | Alias of the private key to be used to sign the client assertion. |               |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE_KEY_PASSWORD` | Password of the private key.                                      |               |
-
-### `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC`
-
-Configuration options to connect to multiple identity providers.
-
-:::note
-`<provider-id>` is a unique, user-defined identifier. All properties that share the same `<provider-id>` belong to the same identity provider configuration.
-:::
-
-| Property                                                                                    | Description                                                                                                                                                                                                                                                                                                                            | Default value                        |
-| ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_CLIENTNAME`                   | The client name for OIDC authentication.                                                                                                                                                                                                                                                                                               |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_CLIENTID`                     | The client ID for OIDC authentication.                                                                                                                                                                                                                                                                                                 |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_CLIENTSECRET`                 | The client secret for OIDC authentication. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_CLIENT_AUTHENTICATION_METHOD` is set to `client_secret_basic` or left default.                                                                                                                           |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_ISSUERURI`                    | The issuer URI for OIDC authentication, it is required and identifies the identity provider that issues tokens for this configuration. If set, the individual endpoints of your OIDC provider will be fetched from its [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig). |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_REDIRECTURI`                  | The URI for redirects from the OIDC provider to the Orchestration Cluster after user login.                                                                                                                                                                                                                                            | `http://localhost:8080/sso-callback` |
-| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_AUDIENCES`                    | Comma-separated list of audiences to validate in the OIDC token.                                                                                                                                                                                                                                                                       |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_SCOPE`                        | Comma-separated list of scopes to request in the OIDC token.                                                                                                                                                                                                                                                                           | `openid, profile`                    |
-| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_JWKSETURI`                    | Sets the OIDC provider's JWK Set URI explicitly. This will override the well-known configuration's value.                                                                                                                                                                                                                              |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_AUTHORIZATIONURI`             | Sets the OIDC provider's authorization URI explicitly. This will override the well-known configuration's value.                                                                                                                                                                                                                        |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_TOKENURI`                     | Sets the OIDC provider's token URI explicitly. This will override the well-known configuration's value.                                                                                                                                                                                                                                |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_CLIENT_AUTHENTICATION_METHOD` | Sets the client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                                                                                                                       | `client_secret_basic`                |
-
-Client assertion settings are configured per identity provider. Each provider supports the same client assertion properties described in [Client assertion configuration](#camunda_security_authentication_oidc_assertion) and [Keystore Client assertion configuration](#camunda_security_authentication_oidc_assertion_keystore), applied within the scope of the corresponding `<provider-id>`.
-
-### `CAMUNDA_SECURITY_CSRF`
-
-| Property                        | Description                                                                                                                                                                                   | Default value |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_SECURITY_CSRF_ENABLED` | Enables or disables CSRF protection. Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks. | `true`        |
-
-### `CAMUNDA_SECURITY_HTTP_HEADERS`
-
-| Property                                                                  | Description                                                                                                                                                      | Related Header                                                                                                                                                                                                                                           | Default value                     |
-| ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_CACHE_CONTROL_ENABLED`                     | Enables or disables cache prevention headers. Default values: `Cache-Control: no-cache, no-store, max-age=0, must-revalidate`, `Pragma: no-cache`, `Expires: 0`. | [`Cache-Control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control), [`Pragma`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Pragma), [`Expires`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires) | `true`                            |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_CONTENT_SECURITY_POLICY_ENABLED`           | Enables or disables CSP headers.                                                                                                                                 | [`Content-Security-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)                                                                                                                                           | `true`                            |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_CONTENT_SECURITY_POLICY_POLICY_DIRECTIVES` | Custom CSP directives. If not set, [default values applied](#default-content-security-policy-1). If set, overrides default CSP policies.                         | [`Content-Security-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)                                                                                                                                           |                                   |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_CONTENT_SECURITY_POLICY_REPORT_ONLY`       | Enables reporting mode without enforcing policies.                                                                                                               | [`Content-Security-Policy-Report-Only`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only)                                                                                                                   | `false`                           |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_CONTENT_TYPE_OPTIONS_ENABLED`              | Enables or disables `X-Content-Type-Options` header with `nosniff` value.                                                                                        | [`X-Content-Type-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)                                                                                                                                             | `true`                            |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_CROSS_ORIGIN_EMBEDDER_POLICY_VALUE`        | Restricts embedded cross-origin resources. Options: `REQUIRE_CORP`, `UNSAFE_NONE`.                                                                               | [`Cross-Origin-Embedder-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy)                                                                                                                                 | `UNSAFE_NONE`                     |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_CROSS_ORIGIN_OPENER_POLICY_VALUE`          | Isolates windows from cross-origin openers. Options: `UNSAFE_NONE`, `SAME_ORIGIN_ALLOW_POPUPS`, `SAME_ORIGIN`.                                                   | [`Cross-Origin-Opener-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy)                                                                                                                                     | `SAME_ORIGIN_ALLOW_POPUPS`        |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_CROSS_ORIGIN_RESOURCE_POLICY_VALUE`        | Declares whether resources can be loaded cross-origin. Options: `SAME_ORIGIN`, `SAME_SITE`, `CROSS_ORIGIN`.                                                      | [`Cross-Origin-Resource-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Resource-Policy)                                                                                                                                 | `SAME_SITE`                       |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_FRAME_OPTIONS_ENABLED`                     | Enables or disables `X-Frame-Options` header. Default value is `SAMEORIGIN`.                                                                                     | [`X-Frame-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)                                                                                                                                                           | `true`                            |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_FRAME_OPTIONS_MODE`                        | Frame options mode. Options: `DENY`, `SAMEORIGIN`.                                                                                                               | [`X-Frame-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)                                                                                                                                                           | `SAMEORIGIN`                      |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_HSTS_ENABLED`                              | Enables or disables `Strict-Transport-Security` header.                                                                                                          | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `true`                            |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_HSTS_INCLUDE_SUBDOMAINS`                   | Applies HSTS to all subdomains.                                                                                                                                  | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `false`                           |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_HSTS_MAX_AGE_IN_SECONDS`                   | HSTS max age in seconds.                                                                                                                                         | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `31536000`                        |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_HSTS_PRELOAD`                              | Enables HSTS preloading.                                                                                                                                         | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `false`                           |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_PERMISSIONS_POLICY_VALUE`                  | Restricts access to browser capabilities.                                                                                                                        | [`Permissions-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy)                                                                                                                                                     | Disables all features by default  |
-| `CAMUNDA_SECURITY_HTTP_HEADERS_REFERRER_POLICY_VALUE`                     | Controls referrer information sharing. See available values below.                                                                                               | [`Referrer-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)                                                                                                                                                           | `STRICT_ORIGIN_WHEN_CROSS_ORIGIN` |
-
-#### Default Content Security Policy
-
-This is default value of the Content Security Policy when enabled:
-
-```
-default-src 'self';
-base-uri 'self';
-script-src 'self' https: *.chargebee.com *.mixpanel.com ajax.cloudflare.com static.cloudflareinsights.com;
-script-src-elem 'self' cdn.jsdelivr.net ;
-connect-src 'self' https: *.mixpanel.com cloudflareinsights.com *.appcues.net wss://api.appcues.net cdn.jsdelivr.net;
-style-src 'self' https: 'unsafe-inline' cdn.jsdelivr.net *.googleapis.com *.chargebee.com;
-img-src data: 'self';
-form-action 'self';
-frame-ancestors 'self';
-frame-src 'self' https: *.chargebee.com blob: ;
-object-src 'self' blob:;
-font-src 'self' data: fonts.camunda.io cdn.jsdelivr.net;
-worker-src 'self' blob:;
-child-src;
-script-src-attr 'none'.
-```
-
-### `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS`
-
-| Property                                                         | Description                                                                                                                        | Default value |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_TYPE`    | The owner type to assign to this authorization.                                                                                    |               |
-| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_ID`      | The owner ID to assign to this authorization.                                                                                      |               |
-| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_TYPE` | The [resource type](/components/concepts/access-control/authorizations.md#available-resources) that this authorization applies to. |               |
-| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_ID`   | The resource ID that this authorization applies to.                                                                                |               |
-| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_PERMISSIONS`   | Permissions to assign to this authorization. The available permissions vary by resource type.                                      |               |
-
-### `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES`
-
-| Property                                                             | Description                                  | Default value |
-| -------------------------------------------------------------------- | -------------------------------------------- | ------------- |
-| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<ROLE>_CLIENTS_0`      | Clients assigned to the `<role>` role.       |               |
-| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<ROLE>_GROUPS_0`       | Groups assigned to the `<role>` role.        |               |
-| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<ROLE>_MAPPINGRULES_0` | Mapping rules assigned to the `<role>` role. |               |
-| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<ROLE>_USERS_0`        | Users assigned to the `<role>` role.         |               |
-
-### `CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES`
-
-| Property                                                       | Description                                  | Default value |
-| -------------------------------------------------------------- | -------------------------------------------- | ------------- |
-| `CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES_0_CLAIMNAME`     | The claim of the first mapping rule.         |               |
-| `CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES_0_CLAIMVALUE`    | The claim's value of the first mapping rule. |               |
-| `CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES_0_MAPPINGRULEID` | The id of the first mapping rule.            |               |
-
-### `CAMUNDA_SECURITY_INITIALIZATION_USERS`
-
-| Property                                           | Description                          | Default value |
-| -------------------------------------------------- | ------------------------------------ | ------------- |
-| `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_EMAIL`    | The email address of the first user. |               |
-| `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_NAME`     | The name of the first user.          |               |
-| `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_PASSWORD` | The password of the first user.      |               |
-| `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_USERNAME` | The username of the first user.      |               |
-
-### `CAMUNDA_SECURITY_MULTITENANCY`
-
-| Property                                      | Description                                                                   | Default value |
-| --------------------------------------------- | ----------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_SECURITY_MULTITENANCY_APIENABLED`    | Enables the multi-tenancy API and UI independently from multi-tenancy checks. | `true`        |
-| `CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED` | Enables multi-tenancy checks. This requires the API to be protected.          | `false`       |
-
-### `CAMUNDA_PERSISTENT_SESSIONS`
-
-| Property                              | Description                                                                            | Default value |
-| ------------------------------------- | -------------------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `false`       |
-
-### `SPRING_PROFILES`
-
-| Property                 | Description                                                                                       | Default value       |
-| ------------------------ | ------------------------------------------------------------------------------------------------- | ------------------- |
-| `SPRING_PROFILES_ACTIVE` | **Note:** This property will be deprecated as additional authentication methods become available. | `consolidated-auth` |
-
-</TabItem>
-<TabItem value="helm" label="Helm values">
-
-### `orchestration.security.authentication`
-
-| Property                                                              | Description                                                                                                                                                                                                                                                                                                              | Default value |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| `orchestration.security.authentication.method`                        | The authentication method to use. Options: `basic`, `oidc`.                                                                                                                                                                                                                                                              | `basic`       |
-| `orchestration.security.authentication.authenticationRefreshInterval` | The interval at which the memberships (groups, roles, tenants, component authorizations) are refreshed for logged in users. Find more details in [webserver and security](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md#propagation-of-membership-changes-to-active-sessions). | `PT30S`       |
-| `orchestration.security.authentication.unprotectedApi`                | If the API can be used without authentication.                                                                                                                                                                                                                                                                           | `false`       |
-
-### `orchestration.security.authentication.oidc`
-
-| Property                                                   | Description                                                                                                                                                                                                   | Default value                        |
-| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| `orchestration.security.authentication.oidc.clientId`      | The client ID for OIDC authentication.                                                                                                                                                                        |                                      |
-| `orchestration.security.authentication.oidc.clientSecret`  | The client secret for OIDC authentication.                                                                                                                                                                    |                                      |
-| `orchestration.security.authentication.oidc.issuer`        | Sets the OIDC provider's authorization URI explicitly.                                                                                                                                                        |                                      |
-| `orchestration.security.authentication.oidc.jwksUrl`       | Sets the OIDC provider's JWK Set URI explicitly.                                                                                                                                                              |                                      |
-| `orchestration.security.authentication.oidc.tokenUrl`      | Sets the OIDC provider's token URI explicitly.                                                                                                                                                                |                                      |
-| `orchestration.security.authentication.oidc.redirectUrl`   | The URI for redirects from the OIDC provider to the Orchestration Cluster after user login                                                                                                                    | `http://localhost:8080/sso-callback` |
-| `orchestration.security.authentication.oidc.userNameClaim` | The JWT claim that identifies a user. Extracted from a token, this claim value becomes the user's username. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow. | `sub`                                |
-| `orchestration.security.authentication.oidc.clientIdClaim` | The JWT claim that identifies a client. Extracted from a token, this claim value becomes the clients's id. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow.  | `sub`                                |
-| `orchestration.security.authentication.oidc.groupsClaim`   | The JWT claim that contains a user's or client's groups. Expects an array of String values. If not set, groups can be managed in the Orchestration Cluster through its REST APIs.                             |                                      |
-| `orchestration.security.authentication.oidc.audiences`     | Comma-separated list of audiences to validate in the OIDC token.                                                                                                                                              |                                      |
-
-### `orchestration.security.authorizations`
-
-| Property                                        | Description                    | Default value |
-| ----------------------------------------------- | ------------------------------ | ------------- |
-| `orchestration.security.authorizations.enabled` | If authorizations are enabled. | `true`        |
-
-### `orchestration.security.csrf`
-
-| Property                              | Description                                                                                                                                                                                   | Default value |
-| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `orchestration.security.csrf.enabled` | Enables or disables CSRF protection. Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks. | `true`        |
-
-### `orchestration.security.httpHeaders`
-
-| Property                                                                    | Description                                                                                                                                                      | Related Header                                                                                                                                                                                                                                           | Default value                     |
-| --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| `orchestration.security.httpHeaders.cacheControl.enabled`                   | Enables or disables cache prevention headers. Default values: `Cache-Control: no-cache, no-store, max-age=0, must-revalidate`, `Pragma: no-cache`, `Expires: 0`. | [`Cache-Control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control), [`Pragma`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Pragma), [`Expires`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires) | `true`                            |
-| `orchestration.security.httpHeaders.contentSecurityPolicy.enabled`          | Enables or disables CSP headers.                                                                                                                                 | [`Content-Security-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)                                                                                                                                           | `true`                            |
-| `orchestration.security.httpHeaders.contentSecurityPolicy.policyDirectives` | Custom CSP directives. If not set, [default values applied](#default-content-security-policy-2). If set, overrides default CSP policies.                         | [`Content-Security-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)                                                                                                                                           |                                   |
-| `orchestration.security.httpHeaders.contentSecurityPolicy.reportOnly`       | Enables reporting mode without enforcing policies.                                                                                                               | [`Content-Security-Policy-Report-Only`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only)                                                                                                                   | `false`                           |
-| `orchestration.security.httpHeaders.contentTypeOptions.enabled`             | Enables or disables `X-Content-Type-Options` header with `nosniff` value.                                                                                        | [`X-Content-Type-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)                                                                                                                                             | `true`                            |
-| `orchestration.security.httpHeaders.crossOriginEmbedderPolicy.value`        | Restricts embedded cross-origin resources. Options: `REQUIRE_CORP`, `UNSAFE_NONE`.                                                                               | [`Cross-Origin-Embedder-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy)                                                                                                                                 | `UNSAFE_NONE`                     |
-| `orchestration.security.httpHeaders.crossOriginOpenerPolicy.value`          | Isolates windows from cross-origin openers. Options: `UNSAFE_NONE`, `SAME_ORIGIN_ALLOW_POPUPS`, `SAME_ORIGIN`.                                                   | [`Cross-Origin-Opener-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy)                                                                                                                                     | `SAME_ORIGIN_ALLOW_POPUPS`        |
-| `orchestration.security.httpHeaders.crossOriginResourcePolicy.value`        | Declares whether resources can be loaded cross-origin. Options: `SAME_ORIGIN`, `SAME_SITE`, `CROSS_ORIGIN`.                                                      | [`Cross-Origin-Resource-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Resource-Policy)                                                                                                                                 | `SAME_SITE`                       |
-| `orchestration.security.httpHeaders.frameOptions.enabled`                   | Enables or disables `X-Frame-Options` header. Default value is `SAMEORIGIN`.                                                                                     | [`X-Frame-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)                                                                                                                                                           | `true`                            |
-| `orchestration.security.httpHeaders.frameOptions.mode`                      | Frame options mode. Options: `DENY`, `SAMEORIGIN`.                                                                                                               | [`X-Frame-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)                                                                                                                                                           | `SAMEORIGIN`                      |
-| `orchestration.security.httpHeaders.hsts.enabled`                           | Enables or disables `Strict-Transport-Security` header.                                                                                                          | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `true`                            |
-| `orchestration.security.httpHeaders.hsts.includeSubdomains`                 | Applies HSTS to all subdomains.                                                                                                                                  | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `false`                           |
-| `orchestration.security.httpHeaders.hsts.maxAgeInSeconds`                   | HSTS max age in seconds.                                                                                                                                         | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `31536000`                        |
-| `orchestration.security.httpHeaders.hsts.preload`                           | Enables HSTS preloading.                                                                                                                                         | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `false`                           |
-| `orchestration.security.httpHeaders.permissionsPolicy.value`                | Restricts access to browser capabilities.                                                                                                                        | [`Permissions-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy)                                                                                                                                                     | Disables all features by default  |
-| `orchestration.security.httpHeaders.referrerPolicy.value`                   | Controls referrer information sharing. See available values below.                                                                                               | [`Referrer-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)                                                                                                                                                           | `STRICT_ORIGIN_WHEN_CROSS_ORIGIN` |
-
-#### Default Content Security Policy
-
-This is default value of the Content Security Policy when enabled:
-
-```
-default-src 'self';
-base-uri 'self';
-script-src 'self' https: *.chargebee.com *.mixpanel.com ajax.cloudflare.com static.cloudflareinsights.com;
-script-src-elem 'self' cdn.jsdelivr.net ;
-connect-src 'self' https: *.mixpanel.com cloudflareinsights.com *.appcues.net wss://api.appcues.net cdn.jsdelivr.net;
-style-src 'self' https: 'unsafe-inline' cdn.jsdelivr.net *.googleapis.com *.chargebee.com;
-img-src data: 'self';
-form-action 'self';
-frame-ancestors 'self';
-frame-src 'self' https: *.chargebee.com blob: ;
-object-src 'self' blob:;
-font-src 'self' data: fonts.camunda.io cdn.jsdelivr.net;
-worker-src 'self' blob:;
-child-src;
-script-src-attr 'none'.
-```
-
-### `orchestration.security.initialization`
-
-| Property                                      | Description                                                              | Default value |
-| --------------------------------------------- | ------------------------------------------------------------------------ | ------------- |
-| `orchestration.security.initialization.users` | List of users to initialize (each with username, password, name, email). |               |
-
-### `orchestration.security.multiTenancy`
-
-| Property                                            | Description                                                                   | Default value |
-| --------------------------------------------------- | ----------------------------------------------------------------------------- | ------------- |
-| `orchestration.security.multiTenancy.checksEnabled` | Enables multi-tenancy checks. This requires the API to be protected.          | `false`       |
-| `orchestration.security.multiTenancy.apiEnabled`    | Enables the multi-tenancy API and UI independently from multi-tenancy checks. | `true`        |
-
-</TabItem>
-</Tabs>
+<Security />
 
 import SecondaryStorage from './partials/\_secondary-storage.md'
 
 <SecondaryStorage />
 
-## System
+import System from './partials/\_system.md'
 
-<Tabs>
-  <TabItem value="application.yaml" label="Application properties">
-
-### `camunda.system`
-
-| Property                          | Description                                                                                                                                                                                                                                                                                                                                                                                                  | Default value |
-| :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.system.cpu-thread-count` | <p>Controls the number of non-blocking CPU threads to be used</p><p><strong>Warning:</strong> You should never specify a value that is larger than the number of physical cores available.</p><p>Good practice is to leave 1-2 cores for IO threads and the operating system (it has to run somewhere).</p><p>For example, when running Zeebe on a machine which has 4 cores, a good value would be `2`.</p> | `2`           |
-| `camunda.system.io-thread-count`  | <p>Controls the number of io threads to be used.</p><p>These threads are used for workloads that write data to disk. While writing, these threads are blocked which means that they yield the CPU. </p>                                                                                                                                                                                                      | `2`           |
-| `camunda.system.clock-controlled` | <p>Controls whether the system clock or mutable one.</p><p>If enabled, time progression can be controlled programmatically for testing purposes.</p>                                                                                                                                                                                                                                                         | `false`       |
-
-### `camunda.system.actor.idle`
-
-| Property                                    | Description                                                                                                                                                   | Default value |
-| :------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `camunda.system.actor.idle.max-spins`       | <p>The maximum number of busy-wait spins that an idle actor thread will perform before transitioning to a different idle state in Camunda's actor system.</p> | Null          |
-| `camunda.system.actor.idle.max-yields`      | <p>The maximum number of yield operations that an idle actor thread will perform before transitioning to the next idle state in Camunda's actor system.</p>   | Null          |
-| `camunda.system.actor.idle.max-park-period` | <p>The maximum duration that an idle actor thread will remain in the parked state in Camunda's actor system.</p>                                              | Null          |
-
-### `camunda.system.upgrade`
-
-| Property                                      | Description                                                                                                                                                                                                                                                                    | Default value |
-| :-------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.system.upgrade.enable-version-check` | <p>Toggles the version check restriction, used for migration.</p><p>This is useful for testing migration logic on snapshot or alpha versions.</p><p>The default value `True` means it is not allowed to migrate to an incompatible version such as: `SNAPSHOT` or `alpha`.</p> | `true`        |
-
-</TabItem>
-<TabItem value="env" label="Environment variables">
-
-### `CAMUNDA_SYSTEM`
-
-| Property                         | Description                                                                                                                                                                                                                                                                                                                                                                                                  | Default value |
-| :------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_SYSTEM_CPUTHREADCOUNT`  | <p>Controls the number of non-blocking CPU threads to be used</p><p><strong>Warning:</strong> You should never specify a value that is larger than the number of physical cores available.</p><p>Good practice is to leave 1-2 cores for IO threads and the operating system (it has to run somewhere).</p><p>For example, when running Zeebe on a machine which has 4 cores, a good value would be `2`.</p> | `2`           |
-| `CAMUNDA_SYSTEM_IOTHREADCOUNT`   | <p>Controls the number of io threads to be used.</p><p>These threads are used for workloads that write data to disk. While writing, these threads are blocked which means that they yield the CPU. </p>                                                                                                                                                                                                      | `2`           |
-| `CAMUNDA_SYSTEM_CLOCKCONTROLLED` | <p>Controls whether the system clock or mutable one.</p><p>If enabled, time progression can be controlled programmatically for testing purposes.</p>                                                                                                                                                                                                                                                         | `false`       |
-
-### `CAMUNDA_SYSTEM_ACTOR_IDLE`
-
-| Property                                  | Description                                                                                                                          | Default value |
-| :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_SYSTEM_ACTOR_IDLE_MAXSPINS`      | <p>The maximum number of busy-wwait spins that an idle actor thread will perform before transitioning to a different idle state.</p> | Null          |
-| `CAMUNDA_SYSTEM_ACTOR_IDLE_MAXYIELDS`     | <p>The maximum number of yield operations that an idle actor thread will perform before transitioning to the next idle state.</p>    | Null          |
-| `CAMUNDA_SYSTEM_ACTOR_IDLE_MAXPARKPERIOD` | <p>The maximum duration that an idle actor thread will remain in the parked state.</p>                                               | Null          |
-
-### `CAMUNDA_SYSTEM_UPGRADE`
-
-| Property                                    | Description                                                                                                                                                                                                                                                                    | Default value |
-| :------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_SYSTEM_UPGRADE_ENABLEVERSIONCHECK` | <p>Toggles the version check restriction, used for migration.</p><p>This is useful for testing migration logic on snapshot or alpha versions.</p><p>The default value `True` means it is not allowed to migrate to an incompatible version such as: `SNAPSHOT` or `alpha`.</p> | `true`        |
-
-  </TabItem>
-</Tabs>
+<System />
