@@ -6,9 +6,7 @@ sidebar_position: 2
 description: "The Zeebe client gRPC API is exposed through a single gateway service."
 ---
 
-The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file
-can be found in
-the [Zeebe repository](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/gateway.proto).
+The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file can be found in the [Zeebe repository](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/gateway.proto).
 
 ## Default service config
 
@@ -65,6 +63,14 @@ message ActivateJobsRequest {
   repeated string tenantIds = 7;
 }
 ```
+
+If `requestTimeout` is set to `0`, the effective timeout depends on whether long polling is enabled:
+
+- If long polling is enabled, the gateway uses its configured long-polling timeout  
+  (`camunda.api.long-polling.timeout` / `zeebe.gateway.longPolling.timeout`, default 10,000 ms).
+- If long polling is disabled, the request falls back to a client-side timeout. For gRPC clients, this currently defaults to 10 seconds.
+
+If `requestTimeout` is set to a value less than `0`, long polling is disabled and the request completes immediately, even when no job is activated.
 
 ### Output: `ActivateJobsResponse`
 
