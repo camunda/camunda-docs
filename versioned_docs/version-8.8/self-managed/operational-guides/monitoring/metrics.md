@@ -254,10 +254,6 @@ Zeebe comes with a pre-built dashboard, available in the repository:
 
 ![Grafana dashboard](assets/grafana-preview.png)
 
-:::tip
-You can also try out an [interactive dashboard](https://snapshots.raintank.io/dashboard/snapshot/Vbu3EHQMTI5Onh5RKuiS5J7QSMd7Sp5V) to learn about each panel and get an understanding of available data.
-:::
-
 ### Data layer
 
 A pre-built Grafana dashboard is available for the data layer in the repository:
