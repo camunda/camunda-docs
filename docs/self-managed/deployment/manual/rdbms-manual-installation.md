@@ -40,7 +40,27 @@ export CLASSPATH="/opt/camunda-drivers/*:$CLASSPATH"
 ./camunda.sh
 ```
 
-For Docker, create a custom image:
+For Docker, mount external drivers using a volume:
+
+```yaml
+services:
+  camunda:
+    image: camunda/camunda-platform:8.9.0
+    ports:
+      - "8080:8080"
+      - "26500:26500"
+      - "9600:9600"
+    environment:
+      SPRING_PROFILES_ACTIVE: rdbmsMysql,broker,insecure
+      CAMUNDA_DATA_SECONDARY_STORAGE_TYPE: rdbms
+      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL: jdbc:mysql://mysql:3306/camunda
+      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME: camunda
+      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD: demo
+    volumes:
+      - /path/to/driver-lib:/driver-lib
+```
+
+Alternatively, you can create a custom image:
 
 ```dockerfile
 FROM camunda/camunda-platform:8.9.0
@@ -66,9 +86,9 @@ For other databases, see [RDBMS Helm configuration](/self-managed/deployment/hel
 ### Step 2: Configure connection
 
 ```bash
-export SPRING_DATASOURCE_URL="jdbc:postgresql://localhost:5432/camunda"
-export SPRING_DATASOURCE_USERNAME="camunda"
-export SPRING_DATASOURCE_PASSWORD="your-secure-password"
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda"
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME="camunda"
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD="your-secure-password"
 ```
 
 ### Step 3: Schema initialization
@@ -76,7 +96,7 @@ export SPRING_DATASOURCE_PASSWORD="your-secure-password"
 By default, Liquibase automatically creates the schema on first startup. To manually manage schema:
 
 ```bash
-export CAMUNDA_RDBMS_AUTO_DDL=false
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_AUTO_DDL=false
 ```
 
 Then apply SQL/Liquibase scripts manually using your DBA tools. See [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
@@ -86,11 +106,10 @@ Then apply SQL/Liquibase scripts manually using your DBA tools. See [access SQL 
 ### Zeebe
 
 ```bash
-export ZEEBE_BROKER_DATA_SNAPSHOTPERIOD=5m
-export ZEEBE_BROKER_EXPORTER_RDBMS_ENABLED=true
-export ZEEBE_BROKER_EXPORTER_RDBMS_CLASSNAME=io.camunda.exporter.rdbms.RdbmsExporter
-export ZEEBE_BROKER_EXPORTER_RDBMS_ARGS_FLUSHINTERVAL=PT0.5S
-export ZEEBE_BROKER_EXPORTER_RDBMS_ARGS_QUEUESIZE=1000
+export CAMUNDA_DATA_SNAPSHOTPERIOD=5m
+export CAMUNDA_DATA_EXPORTERS_RDBMS_CLASSNAME=io.camunda.exporter.rdbms.RdbmsExporter
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_FLUSHINTERVAL=PT0.5S
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_QUEUESIZE=1000
 ```
 
 ### Operate and Tasklist
@@ -98,9 +117,9 @@ export ZEEBE_BROKER_EXPORTER_RDBMS_ARGS_QUEUESIZE=1000
 Use same RDBMS connection as Zeebe (shared schema):
 
 ```bash
-export SPRING_DATASOURCE_URL="jdbc:postgresql://localhost:5432/camunda"
-export SPRING_DATASOURCE_USERNAME="camunda"
-export SPRING_DATASOURCE_PASSWORD="your-secure-password"
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda"
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME="camunda"
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD="your-secure-password"
 ```
 
 ### Optimize (if used)
@@ -143,7 +162,7 @@ Ensure Zeebe has an exporter pushing analytics data to Elasticsearch/OpenSearch.
 For strict change control environments:
 
 ```bash
-export CAMUNDA_RDBMS_AUTO_DDL=false
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_AUTO_DDL=false
 ```
 
 DBA must apply schema changes manually using scripts. Zeebe fails to start if schema is out of date.
@@ -180,18 +199,21 @@ io.camunda.exporter.rdbms.RdbmsExporter - [RDBMS Exporter] Exporter opened with 
 
 ```bash
 # Lower flush interval = lower latency, more frequent writes
-export ZEEBE_BROKER_EXPORTER_RDBMS_ARGS_FLUSHINTERVAL=PT0.1S
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_FLUSHINTERVAL=PT0.1S
 
 # Higher queue size = better throughput, more memory
-export ZEEBE_BROKER_EXPORTER_RDBMS_ARGS_QUEUESIZE=5000
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_QUEUESIZE=5000
 ```
 
 ### Connection pooling
 
 ```bash
 # Tune based on workload
-export SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE=20
-export SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT=30000
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_MAXIMUM_POOL_SIZE=20
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_MINIMUM_IDLE=10
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_IDLE_TIMEOUT=600000
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_MAX_LIFETIME=1800000
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_CONNECTION_TIMEOUT=30000
 ```
 
 ### Database tuning
@@ -211,7 +233,7 @@ All RDBMS connections must use TLS in production:
 
 ```bash
 # PostgreSQL
-export SPRING_DATASOURCE_URL="jdbc:postgresql://localhost:5432/camunda?sslmode=require"
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda?sslmode=require"
 
 # See [RDBMS Helm configuration](/self-managed/deployment/helm/configure/database/rdbms.md) for other databases
 ```
@@ -221,7 +243,7 @@ export SPRING_DATASOURCE_URL="jdbc:postgresql://localhost:5432/camunda?sslmode=r
 Never hardcode passwords. Use environment variable injection:
 
 ```bash
-export SPRING_DATASOURCE_PASSWORD=$(cat /run/secrets/db_password)
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD=$(cat /run/secrets/db_password)
 ```
 
 ### Database permissions
