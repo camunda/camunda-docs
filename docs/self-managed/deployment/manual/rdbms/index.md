@@ -52,7 +52,7 @@ All core components are supported with RDBMS secondary storage:
 
 1. [Configure drivers and connections](/self-managed/deployment/manual/rdbms/configuration.md).
 2. Review [operations and maintenance](/self-managed/deployment/manual/rdbms/operations.md) for backup, upgrades, troubleshooting, and tuning.
-3. Review the [production architecture](/self-managed/deployment/manual/rdbms-production-architecture) for sizing and topology guidance.
+3. Review the [production architecture](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) for sizing and topology guidance.
 
 ## Related documentation
 
