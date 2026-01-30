@@ -22,7 +22,7 @@ Additional informational and high-level overview based on Kubernetes as upstream
 - [Helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
-- [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
+- [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
 - [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
   - Ensure at least **3 Elastic IPs** (one per availability zone).
@@ -375,7 +375,7 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
 
 </TabItem>
-  
+
 <TabItem value="without" label="Without domain">
 
 Identity, Keycloak and the Orchestration cluster must be port-forwarded to be able to connect to the cluster.
@@ -553,6 +553,19 @@ The following values are required for OAuth authentication:
 ## Pitfalls to avoid
 
 For general deployment pitfalls, visit the [deployment troubleshooting guide](self-managed/operational-guides/troubleshooting.md).
+
+### Persistent volume reclaim policy
+
+OpenShift StorageClasses often default to a `Delete` reclaim policy, which means persistent volume data is permanently deleted when a PVC is removed. This can lead to complete and unrecoverable data loss for Orchestration Cluster brokers.
+
+Ensure your StorageClass uses a `Retain` reclaim policy for production deployments. Verify your configuration:
+
+```bash
+oc get storageclass
+# RECLAIMPOLICY should show "Retain", not "Delete"
+```
+
+For more details, see the [production install guide](/self-managed/deployment/helm/install/production/index.md#persistent-volume-reclaim-policy).
 
 ### Security Context Constraints (SCCs)
 

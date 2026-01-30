@@ -19,6 +19,119 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 38
+
+### Publication date
+
+Jan 8, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `qs` used by Camunda Web Modeler was affected by CVE-2025-15284, an improper input validation vulnerability that allows HTTP DoS.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.4, ≤ 8.7.14, or ≤ 8.6.23
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.5, 8.7.15, 8.6.24
+
+The fix was deployed to Web Modeler SaaS on January 7, 2026, 13:45 CET.
+
+## Notice 37
+
+### Publication date
+
+December 12, 2025
+
+### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+
+### Impact
+
+The application is vulnerable to [CVE-2025-12183](https://nvd.nist.gov/vuln/detail/CVE-2025-12183), which allows remote attackers to cause denial of service and read adjacent memory via untrusted compressed input.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Tasklist/Zeebe/Operate ≤ 8.8.6, ≤ 8.7.20, or ≤ 8.6.32
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Tasklist/Zeebe/Operate 8.8.7, 8.7.21, 8.6.33
+
+## Notice 36
+
+### Publication date
+
+December 03, 2025
+
+### Products affected
+
+- Management Identity
+
+### Impact
+
+The application is vulnerable to [CVE-2025-53066](https://nvd.nist.gov/vuln/detail/CVE-2025-53066), which allows an unauthenticated attacker with network access via multiple protocols to compromise Oracle Java SE, Oracle GraalVM for JDK, Oracle GraalVM Enterprise Edition. Successful attacks of this vulnerability can result in unauthorized access to critical data or complete access to all Oracle Java SE, Oracle GraalVM for JDK, Oracle GraalVM Enterprise Edition accessible data.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Management Identity ≤ 8.8.2, ≤ 8.7.10, or ≤ 8.6.22
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Management Identity 8.8.3, 8.7.11, 8.6.23
+
+## Notice 35
+
+### Publication date
+
+November 26, 2025
+
+### Products affected
+
+- Camunda Web Modeler Self-Managed
+- Camunda Management Identity
+
+### Impact
+
+The embedded JDBC driver for Amazon Aurora PostgreSQL (`software.amazon.jdbc:aws-advanced-jdbc-wrapper`) was affected by
+[CVE-2025-12967](https://nvd.nist.gov/vuln/detail/CVE-2025-12967), which may allow for privilege escalation to the `rds_superuser` role.
+A low privilege authenticated user can create a crafted function that could be executed with permissions of other Amazon Relational Database Service (RDS) users.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.2, ≤ 8.7.12, or ≤ 8.6.21 with Amazon Aurora PostgreSQL
+- Management Identity ≤ 8.8.1, ≤ 8.7.9, or ≤ 8.6.21 with Amazon Aurora PostgreSQL
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.8.3, 8.7.13, 8.6.22
+- Management Identity 8.8.2, 8.7.10, 8.6.22
+
 ## Notice 34
 
 ### Publication date
@@ -524,14 +637,7 @@ You are using Camunda Optimize ≤ 8.4.15, ≤ 8.5.12, ≤ 8.6.6, ≤ 8.7.0, ≤
 
 Camunda has provided the following release which contains a fix:
 
-- [Camunda Optimize 8.4.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
-- [Camunda Optimize 8.5.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
-- [Camunda Optimize 8.6.7](https://github.com/camunda/camunda/releases/tag/8.6.7-optimize)
-- [Camunda Optimize 8.7.0](https://github.com/camunda/camunda/releases/tag/8.7.0-optimize)
-- [Camunda Optimize 3.12.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
-- [Camunda Optimize 3.13.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
-- [Camunda Optimize 3.14.4](https://github.com/camunda/camunda-optimize/releases/tag/3.14.4)
-- [Camunda Optimize 3.15.2](https://github.com/camunda/camunda-optimize/releases/tag/3.15.2)
+- Camunda Optimize 8.4.16, 8.5.13, 8.6.7, 8.7.0, 3.12.16, 3.13.13, 3.14.4, 3.15.2
 
 ## Notice 17
 
@@ -669,7 +775,7 @@ You are using Camunda Identity version 8.5.3 or previous.
 
 Camunda has provided the following release which contains a fix:
 
-- [Camunda Identity 8.5.4](https://github.com/camunda-cloud/identity/releases/tag/8.5.4)
+- Camunda Identity 8.5.4
 
 ## Notice 12
 

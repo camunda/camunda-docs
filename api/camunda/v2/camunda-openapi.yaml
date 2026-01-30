@@ -26,19 +26,24 @@ servers:
         description: The schema of the Orchestration Cluster REST API server.
 tags:
   - name: Ad-hoc sub-process
+  - name: Audit Log
   - name: Authentication
   - name: Authorization
   - name: Batch operation
   - name: Clock
   - name: Cluster
+  - name: Cluster Variable
+  - name: Conditional
   - name: Decision definition
   - name: Decision instance
   - name: Decision requirements
   - name: Document
   - name: Element instance
+  - name: Expression
   - name: Group
   - name: Incident
   - name: Job
+  - name: Job metrics
   - name: License
   - name: Mapping rule
   - name: Message
@@ -55,6 +60,10 @@ tags:
   - name: User task
   - name: Variable
 paths:
+  /audit-logs/search:
+    $ref: "audit-logs.yaml#/paths/~1audit-logs~1search"
+  /audit-logs/{auditLogKey}:
+    $ref: "audit-logs.yaml#/paths/~1audit-logs~1{auditLogKey}"
   /authentication/me:
     $ref: "authentication.yaml#/paths/~1authentication~1me"
   /authorizations:
@@ -79,6 +88,18 @@ paths:
     $ref: "clock.yaml#/paths/~1clock"
   /clock/reset:
     $ref: "clock.yaml#/paths/~1clock~1reset"
+  /cluster-variables/global:
+    $ref: "cluster-variables.yaml#/paths/~1cluster-variables~1global"
+  /cluster-variables/global/{name}:
+    $ref: "cluster-variables.yaml#/paths/~1cluster-variables~1global~1{name}"
+  /cluster-variables/search:
+    $ref: "cluster-variables.yaml#/paths/~1cluster-variables~1search"
+  /cluster-variables/tenants/{tenantId}:
+    $ref: "cluster-variables.yaml#/paths/~1cluster-variables~1tenants~1{tenantId}"
+  /cluster-variables/tenants/{tenantId}/{name}:
+    $ref: "cluster-variables.yaml#/paths/~1cluster-variables~1tenants~1{tenantId}~1{name}"
+  /conditionals/evaluation:
+    $ref: "conditionals.yaml#/paths/~1conditionals~1evaluation"
   /correlated-message-subscriptions/search:
     $ref: "messages.yaml#/paths/~1correlated-message-subscriptions~1search"
   /decision-definitions/evaluation:
@@ -119,6 +140,8 @@ paths:
     $ref: "element-instances.yaml#/paths/~1element-instances~1{elementInstanceKey}~1incidents~1search"
   /element-instances/{elementInstanceKey}/variables:
     $ref: "element-instances.yaml#/paths/~1element-instances~1{elementInstanceKey}~1variables"
+  /expression/evaluation:
+    $ref: "expression.yaml#/paths/~1expression~1evaluation"
   /groups:
     $ref: "groups.yaml#/paths/~1groups"
   /groups/search:
@@ -145,6 +168,10 @@ paths:
     $ref: "incidents.yaml#/paths/~1incidents~1{incidentKey}"
   /incidents/{incidentKey}/resolution:
     $ref: "incidents.yaml#/paths/~1incidents~1{incidentKey}~1resolution"
+  /incidents/statistics/process-instances-by-definition:
+    $ref: "incidents.yaml#/paths/~1incidents~1statistics~1process-instances-by-definition"
+  /incidents/statistics/process-instances-by-error:
+    $ref: "incidents.yaml#/paths/~1incidents~1statistics~1process-instances-by-error"
   /jobs/activation:
     $ref: "jobs.yaml#/paths/~1jobs~1activation"
   /jobs/search:
@@ -157,6 +184,8 @@ paths:
     $ref: "jobs.yaml#/paths/~1jobs~1{jobKey}~1error"
   /jobs/{jobKey}/failure:
     $ref: "jobs.yaml#/paths/~1jobs~1{jobKey}~1failure"
+  /jobs/statistics/global:
+    $ref: "job-metrics.yaml#/paths/~1jobs~1statistics~1global"
   /license:
     $ref: "licenses.yaml#/paths/~1license"
   /mapping-rules:
@@ -173,6 +202,8 @@ paths:
     $ref: "messages.yaml#/paths/~1messages~1publication"
   /process-definitions/search:
     $ref: "process-definitions.yaml#/paths/~1process-definitions~1search"
+  /process-definitions/statistics/message-subscriptions:
+    $ref: "process-definitions.yaml#/paths/~1process-definitions~1statistics~1message-subscriptions"
   /process-definitions/statistics/process-instances:
     $ref: "process-definitions.yaml#/paths/~1process-definitions~1statistics~1process-instances"
   /process-definitions/{processDefinitionKey}:
@@ -189,6 +220,8 @@ paths:
     $ref: "process-instances.yaml#/paths/~1process-instances"
   /process-instances/cancellation:
     $ref: "process-instances.yaml#/paths/~1process-instances~1cancellation"
+  /process-instances/deletion:
+    $ref: "process-instances.yaml#/paths/~1process-instances~1deletion"
   /process-instances/incident-resolution:
     $ref: "process-instances.yaml#/paths/~1process-instances~1incident-resolution"
   /process-instances/migration:
@@ -203,6 +236,8 @@ paths:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1call-hierarchy"
   /process-instances/{processInstanceKey}/cancellation:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1cancellation"
+  /process-instances/{processInstanceKey}/deletion:
+    $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1deletion"
   /process-instances/{processInstanceKey}/incident-resolution:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1incident-resolution"
   /process-instances/{processInstanceKey}/incidents/search:
@@ -293,6 +328,8 @@ paths:
     $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1assignee"
   /user-tasks/{userTaskKey}/assignment:
     $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1assignment"
+  /user-tasks/{userTaskKey}/audit-logs/search:
+    $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1audit-logs~1search"
   /user-tasks/{userTaskKey}/completion:
     $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1completion"
   /user-tasks/{userTaskKey}/form:

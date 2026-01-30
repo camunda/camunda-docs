@@ -56,7 +56,7 @@ You can also run this setup using a single AWS EC2 instance. However, in the eve
 
 - An AWS account to provision resources.
   - At a high level, permissions are needed for **ec2**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **es** services.
-  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/ec2/example/policy.json).
+  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/blob/main/aws/compute/ec2-single-region/example/policy.json).
 - Terraform (v1.7 or later)
 - A Unix-based operating system with `ssh` and `sftp`
   - Windows may be used with [Cygwin](https://www.cygwin.com/) or [Windows WSL](https://learn.microsoft.com/en-us/windows/wsl/install), though these configurations have not been tested.
@@ -89,7 +89,7 @@ With the reference architecture in place, you can proceed with the remaining ste
 
 ### Terraform prerequisites
 
-To manage Camunda 8 infrastructure on AWS using Terraform, you need to configure Terraform's backend to store the state file remotely in an S3 bucket. This provides secure, persistent state storage for your infrastructure.
+To manage Camunda 8 infrastructure on AWS using Terraform, you need to configure Terraform's backend to store the state file remotely in an S3 bucket. This provides secure, persistent primary storage for your infrastructure.
 
 :::note
 Advanced users may choose to configure a different backend. The setup described here is a recommended starting point for new users.

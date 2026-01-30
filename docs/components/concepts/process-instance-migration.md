@@ -10,7 +10,7 @@ import ProcessInstanceAfterMigration from './assets/process-instance-migration/m
 Process instance migration fits a running process instance to a different process definition.
 This can be useful when the process definition of a running process instance needs changes due to bugs or updated requirements.
 While doing so, we aim to interfere as little as possible with the process instance state during the migration.
-For example, a migrated active user task remains assigned to the same user.
+For example, a migrated active user task remains assigned to the same user if no implementation migration occurs.
 This principle applies to all parts of the process instance.
 
 :::tip
@@ -24,7 +24,7 @@ You can also migrate your process instances using Operate's UI by following [the
 
 :::
 
-## Changing the process instance flow for inactive parts
+## Change the process instance flow for inactive parts
 
 Process instance migration allows you to adjust the process model of your process instance to fit to new requirements.
 
@@ -62,7 +62,7 @@ After migrating our process instance, we can now complete the service task `A` t
 
 Process instance migration allows you to change the inactive parts of the process instance. In our example, we placed a user task `B` between the active service task `A` and the inactive end event. We did not change the active service task `A`, just the steps that follow.
 
-## Changing the active elements
+## Change the active elements
 
 Sometimes your requirements change so much that the currently active element no longer exists in the new process version.
 
@@ -96,7 +96,7 @@ Simply cancel the service task instance, and add a new instance of the service t
 ![The process instance can be modified to recreate the service task's job.](assets/process-instance-migration/migration-active_after-modification.png)
 :::
 
-## Correcting mistakes in a process instance
+## Correct mistakes in a process instance
 
 Process instance migration can also be used to correct mistakes that led to an [incident](/components/concepts/incidents.md) in a process instance.
 
@@ -119,7 +119,7 @@ Afterward, the process instance will continue as expected:
 
 ![After migrating the process instance, the input mapping is corrected and the incident is resolved by retry. Afterward, the process instance will continue as expected:](assets/process-instance-migration/migration-process_instance_with_incident_resolved.png)
 
-## Migrating active elements inside subprocesses
+## Migrate active elements inside subprocesses
 
 Active elements located inside subprocesses can be migrated as part of a process instance migration.
 
@@ -147,7 +147,40 @@ The called process instance is not changed when migrating the call activity.
 
 You can migrate a called process instance in the same way as a regular process instance.
 
-## Dealing with catch events
+## Migrate active elements inside ad-hoc subprocesses
+
+Active elements located inside ad-hoc subprocesses can be migrated as part of a process instance migration.
+
+Consider the following example, where you want to migrate an active element that is located in an ad-hoc subprocess:
+
+![The service task A is inside the ad-hoc subprocess A.](assets/process-instance-migration/migration-adhoc-subprocess_before.png)
+
+After migrating active element `A` to `B` and `Ad-Hoc Subprocess A` to `Ad-Hoc Subprocess B`, the process instance will look like this:
+
+![After migrating the process instance, it is waiting at service task B inside the Ad-Hoc Subprocess B.](assets/process-instance-migration/migration-adhoc-subprocess_after.png)
+
+:::important
+To migrate ad-hoc subprocesses, you must provide a mapping instruction from the process instance’s ad-hoc subprocess ID to the target ad-hoc subprocess ID.
+
+Changing the scope of ad-hoc subprocesses during migration is not possible.
+:::
+
+## Migrate job worker user tasks to Camunda user tasks
+
+You can migrate user tasks with a job worker implementation to Camunda user tasks by providing mapping instructions between the source and target user tasks.
+
+The target Camunda user task preserves `candidate groups`, `candidate users`, `due date`, `follow-up date`, and the `form id` or `form key` from the source task.
+
+The target user task uses the priority defined in the target user task definition, or a default value if none is defined.
+
+:::important
+When you migrate a job worker user task to a Camunda user task:
+
+- Embedded forms are not supported. The form defined in the target user task definition is used.
+- The current `assignee` is not preserved. The task is assigned to the initial assignee defined in the target user task definition.
+  :::
+
+## Deal with catch events
 
 An exception to changing the process instance state is specific to catch events.
 This is necessary to ensure that the process instance can be executed according to the new process definition.
@@ -268,16 +301,16 @@ The target process definition contains a compensation boundary event attached to
 
 If the process instance is migrated by providing mapping instruction between service tasks `A` -> `A`, the compensation subscription will be created on completion of the element `A`.
 
-However, if the process instance is migrated by providing mapping instruction between service tasks `A` -> `B`, then triggering compensation throw event afterward will **not** compensate `A`. This is because the subscription is only opened when completing a task with a compensation boundary event.
+However, if the process instance is migrated by providing mapping instruction between service tasks `A` -> `B`, then triggering compensation throw event afterward will not compensate `A`. This is because the subscription is only opened when completing a task with a compensation boundary event.
 
-## Dealing with gateways
+## Deal with gateways
 
 Process instance migration allows you to migrate several scenarios for gateways:
 
 - An active exclusive gateway with an incident can be migrated like any other active element.
 - Parallel and inclusive gateways can be involved in [additional scenarios](#migrating-joining-parallel-and-inclusive-gateways).
 
-### Migrating joining parallel and inclusive gateways
+### Migrate joining parallel and inclusive gateways
 
 Joining parallel and inclusive gateways with taken incoming sequence flows, and which are still waiting for more incoming sequence flows, require a mapping instruction similar to active elements.
 
@@ -427,7 +460,7 @@ The following limitations exist that may be supported in future versions:
   - An element that becomes nested in a newly added subprocess
   - An element that was nested in a subprocess is no longer nested in that subprocess
 - Mapping instructions cannot change the element type
-- Mapping instructions cannot change the task implementation, for example, from a job worker user task to a Camunda user task.
+- Mapping instructions can only change the user task implementation from a job-worker user task to a Camunda user task, but not vice-versa
 - The process instance must be in a wait state, i.e. waiting for an event or external input like job completion. It may not be taking a sequence flow or triggering an event while migrating the instance.
 
 A full overview of error codes can be found in the migration command [RPC](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) or [REST](/apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instance.api.mdx).
@@ -446,6 +479,7 @@ The following BPMN elements are supported by the migration tool.
 import EmbeddedSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/embedded-subprocess.svg';
 import CallActivitySvg from '../modeler/bpmn/assets/bpmn-symbols/call-activity.svg';
 import EventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/event-subprocess.svg'
+import AdHocSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/ad-hoc-subprocess.svg'
 
 <div className="bpmn-symbol-container">
     <a href="../../modeler/bpmn/embedded-subprocesses/">
@@ -456,6 +490,9 @@ import EventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/event-subpro
     </a>
     <a href="../../modeler/bpmn/event-subprocesses/">
         <EventSubprocessSvg className="implemented" />
+    </a>
+    <a href="../../modeler/bpmn/ad-hoc-subprocesses/">
+        <AdHocSubprocessSvg className="implemented" />
     </a>
 </div>
 

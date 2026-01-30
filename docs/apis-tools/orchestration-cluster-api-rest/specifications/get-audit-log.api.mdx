@@ -1,0 +1,735 @@
+---
+id: get-audit-log
+title: "Get audit log"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Get audit log"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get audit log"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/audit-logs/{auditLogKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Get an audit log entry by auditLogKey.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "auditLogKey",
+      in: "path",
+      required: true,
+      description: "The audit log key.",
+      schema: {
+        type: "string",
+        format: "string<AuditLogKey>",
+        example: "22517998136843567",
+        description: "System-generated key for an audit log entry.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The audit log entry is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "Audit log item.",
+            type: "object",
+            properties: {
+              auditLogKey: {
+                allOf: [
+                  {
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    description: "System-generated key for an audit log entry.",
+                    format: "AuditLogKey",
+                    example: "22517998136843567",
+                    type: "string",
+                    title: "AuditLogKey",
+                  },
+                ],
+                description: "The unique key of the audit log entry.",
+              },
+              entityKey: {
+                description:
+                  "System-generated entity key for an audit log entry.",
+                format: "AuditLogEntityKey",
+                example: "22517998136843567",
+                type: "string",
+                title: "AuditLogEntityKey",
+              },
+              entityType: {
+                type: "string",
+                description: "The type of entity affected by the operation.",
+                enum: [
+                  "AUTHORIZATION",
+                  "BATCH",
+                  "DECISION",
+                  "GROUP",
+                  "INCIDENT",
+                  "MAPPING_RULE",
+                  "PROCESS_INSTANCE",
+                  "RESOURCE",
+                  "ROLE",
+                  "TENANT",
+                  "USER",
+                  "USER_TASK",
+                  "VARIABLE",
+                ],
+                title: "AuditLogEntityTypeEnum",
+              },
+              operationType: {
+                type: "string",
+                description: "The type of operation performed.",
+                enum: [
+                  "ASSIGN",
+                  "CANCEL",
+                  "COMPLETE",
+                  "CREATE",
+                  "DELETE",
+                  "EVALUATE",
+                  "MIGRATE",
+                  "MODIFY",
+                  "RESOLVE",
+                  "RESUME",
+                  "SUSPEND",
+                  "UNASSIGN",
+                  "UNKNOWN",
+                  "UPDATE",
+                ],
+                title: "AuditLogOperationTypeEnum",
+              },
+              batchOperationKey: {
+                allOf: [
+                  {
+                    format: "BatchOperationKey | uuid",
+                    type: "string",
+                    description: "System-generated key for an batch operation.",
+                    example: "2251799813684321",
+                    title: "BatchOperationKey",
+                  },
+                ],
+                description: "Key of the batch operation.",
+              },
+              batchOperationType: {
+                allOf: [
+                  {
+                    description: "The type of the batch operation.",
+                    type: "string",
+                    enum: [
+                      "ADD_VARIABLE",
+                      "CANCEL_PROCESS_INSTANCE",
+                      "DELETE_DECISION_DEFINITION",
+                      "DELETE_PROCESS_DEFINITION",
+                      "DELETE_PROCESS_INSTANCE",
+                      "MIGRATE_PROCESS_INSTANCE",
+                      "MODIFY_PROCESS_INSTANCE",
+                      "RESOLVE_INCIDENT",
+                      "UPDATE_VARIABLE",
+                    ],
+                    title: "BatchOperationTypeEnum",
+                  },
+                ],
+                description:
+                  "The type of batch operation performed, if this is part of a batch.",
+              },
+              timestamp: {
+                type: "string",
+                description: "The timestamp when the operation occurred.",
+                format: "date-time",
+              },
+              actorId: {
+                type: "string",
+                description: "The ID of the actor who performed the operation.",
+              },
+              actorType: {
+                type: "string",
+                description: "The type of actor who performed the operation.",
+                enum: ["ANONYMOUS", "CLIENT", "UNKNOWN", "USER"],
+                title: "AuditLogActorTypeEnum",
+              },
+              tenantId: {
+                allOf: [
+                  {
+                    example: "customer-service",
+                    description: "The unique identifier of the tenant.",
+                    format: "TenantId",
+                    type: "string",
+                    title: "TenantId",
+                  },
+                ],
+                description: "The tenant ID of the audit log.",
+              },
+              result: {
+                type: "string",
+                description: "The result status of the operation.",
+                enum: ["FAIL", "SUCCESS"],
+                title: "AuditLogResultEnum",
+              },
+              annotation: {
+                type: "string",
+                description: "Additional notes about the operation.",
+              },
+              category: {
+                type: "string",
+                description: "The category of the audit log operation.",
+                enum: ["ADMIN", "DEPLOYED_RESOURCES", "USER_TASKS"],
+                title: "AuditLogCategoryEnum",
+              },
+              processDefinitionId: {
+                allOf: [
+                  {
+                    description:
+                      "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                    format: "ProcessDefinitionId",
+                    type: "string",
+                    example: "new-account-onboarding-workflow",
+                    title: "ProcessDefinitionId",
+                  },
+                ],
+                description: "The process definition ID.",
+              },
+              processDefinitionKey: {
+                allOf: [
+                  {
+                    description:
+                      "System-generated key for a deployed process definition.",
+                    format: "ProcessDefinitionKey",
+                    example: "2251799813686749",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "ProcessDefinitionKey",
+                  },
+                ],
+                description: "The key of the process definition.",
+              },
+              processInstanceKey: {
+                allOf: [
+                  {
+                    description: "System-generated key for a process instance.",
+                    format: "ProcessInstanceKey",
+                    example: "2251799813690746",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "ProcessInstanceKey",
+                  },
+                ],
+                description: "The key of the process instance.",
+              },
+              elementInstanceKey: {
+                allOf: [
+                  {
+                    description: "System-generated key for a element instance.",
+                    format: "ElementInstanceKey",
+                    example: "2251799813686789",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "ElementInstanceKey",
+                  },
+                ],
+                description: "The key of the element instance.",
+              },
+              jobKey: {
+                allOf: [
+                  {
+                    description: "System-generated key for a job.",
+                    format: "JobKey",
+                    example: "2251799813653498",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "JobKey",
+                  },
+                ],
+                description: "The key of the job.",
+              },
+              userTaskKey: {
+                allOf: [
+                  {
+                    description: "System-generated key for a user task.",
+                    format: "UserTaskKey",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "UserTaskKey",
+                  },
+                ],
+                description: "The key of the user task.",
+              },
+              decisionRequirementsId: {
+                type: "string",
+                description: "The decision requirements ID.",
+              },
+              decisionRequirementsKey: {
+                allOf: [
+                  {
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    description:
+                      "System-generated key for a deployed decision requirements definition.",
+                    format: "DecisionRequirementsKey",
+                    example: "2251799813683346",
+                    type: "string",
+                    title: "DecisionRequirementsKey",
+                  },
+                ],
+                description: "The assigned key of the decision requirements.",
+              },
+              decisionDefinitionId: {
+                allOf: [
+                  {
+                    description:
+                      "Id of a decision definition, from the model. Only ids of decision definitions that are deployed are useful.",
+                    format: "DecisionDefinitionId",
+                    type: "string",
+                    example: "new-hire-onboarding-workflow",
+                    title: "DecisionDefinitionId",
+                  },
+                ],
+                description: "The decision definition ID.",
+              },
+              decisionDefinitionKey: {
+                allOf: [
+                  {
+                    description:
+                      "System-generated key for a decision definition.",
+                    format: "DecisionDefinitionKey",
+                    example: "2251799813326547",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "DecisionDefinitionKey",
+                  },
+                ],
+                description: "The key of the decision definition.",
+              },
+              decisionEvaluationKey: {
+                allOf: [
+                  {
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    description:
+                      "System-generated key for a decision evaluation.",
+                    format: "DecisionEvaluationKey",
+                    example: "2251792362345323",
+                    type: "string",
+                    title: "DecisionEvaluationKey",
+                  },
+                ],
+                description: "The key of the decision evaluation.",
+              },
+              deploymentKey: {
+                allOf: [
+                  {
+                    description: "Key for a deployment.",
+                    format: "DeploymentKey",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "DeploymentKey",
+                  },
+                ],
+                description: "The key of the deployment.",
+              },
+              formKey: {
+                allOf: [
+                  {
+                    description: "System-generated key for a deployed form.",
+                    format: "FormKey",
+                    example: "2251799813684365",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "FormKey",
+                  },
+                ],
+                description: "The key of the form.",
+              },
+              resourceKey: {
+                allOf: [
+                  {
+                    type: "string",
+                    oneOf: [
+                      {
+                        description:
+                          "System-generated key for a deployed process definition.",
+                        format: "ProcessDefinitionKey",
+                        example: "2251799813686749",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ProcessDefinitionKey",
+                      },
+                      {
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        description:
+                          "System-generated key for a deployed decision requirements definition.",
+                        format: "DecisionRequirementsKey",
+                        example: "2251799813683346",
+                        type: "string",
+                        title: "DecisionRequirementsKey",
+                      },
+                      {
+                        description:
+                          "System-generated key for a deployed form.",
+                        format: "FormKey",
+                        example: "2251799813684365",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "FormKey",
+                      },
+                      {
+                        description:
+                          "System-generated key for a decision definition.",
+                        format: "DecisionDefinitionKey",
+                        example: "2251799813326547",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "DecisionDefinitionKey",
+                      },
+                    ],
+                    description: "The system-assigned key for this resource.",
+                    format: "ResourceKey",
+                    title: "ResourceKey",
+                  },
+                ],
+                description: "The system-assigned key for this resource.",
+              },
+            },
+            title: "AuditLogResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The audit log with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

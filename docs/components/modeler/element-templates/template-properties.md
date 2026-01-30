@@ -37,20 +37,20 @@ The property object keys are divided into required and optional keys:
 ### Optional keys
 
 - [`type : "String" | "Text" | "Boolean" | "Dropdown" | "Hidden"`](#setting-the-input-type-type): Defines the input type in the properties panel.
-- [`value : String | Number | Boolean`](#setting-a-default-value-value): A default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
-- [`generatedValue : Object`](#generating-a-value-generatedvalue): A configuration to generate a value when the property is applied to an element.
+- [`value : String | Number | Boolean`](#setting-a-default-value-value): The default value used if the bound property is not yet set by the user or if the type is `Hidden`.
+- [`generatedValue : Object`](#generating-a-value-generatedvalue): Configuration used to generate a value when the property is applied to an element.
 - [`placeholder : String`](#setting-a-text-placeholder-placeholder): Placeholder text shown in the input field when it is empty.
 - [`feel : "required" | "optional" | "static"`](#adding-feel-editor-support-feel): Defines whether the property supports FEEL expressions.
-- `label : String`: Label text above the property input.
+- `label : String`: Label text shown above the property input.
 - `tooltip : String`: Tooltip text shown when hovering over the label.
-- `description : String`: Description text below the property input.
-- [`optional : Boolean`](#preventing-persisting-empty-values-optional): Setting this key's value determines whether properties persist empty values in the underlying BPMN 2.0 XML.
-- [`constraints : Object`](#validating-user-input-constraints): A list of editing constraints to apply to the value of the property.
+- `description : String`: Description text shown below the property input.
+- [`optional : Boolean`](#preventing-persisting-empty-values-optional): Controls whether properties persist empty values in the underlying BPMN 2.0 XML.
+- [`constraints : Object`](#validating-user-input-constraints): A list of editing constraints applied to the property value.
 - [`group : String`](#grouping-fields-group): The group that the property belongs to.
-- [`condition : Object`](#showing-properties-conditionally-condition): A condition that determines when the property is active and visible.
-- `id : String`: An identifier that can be used to reference the property in conditional properties.
-- [`editable: Boolean`](#preventing-edits-editable): Setting this key's value determines whether properties are read-only or editable in the properties panel.
-- [`entriesVisible: Boolean`](#displaying-all-entries-entriesvisible): Setting this key's value determines whether all entries of a dropdown property are visible without opening the dropdown.
+- [`condition : Object`](#showing-properties-conditionally-condition): A condition that controls when the property is active and visible.
+- `id : String`: An identifier used to reference the property in conditional properties.
+- [`editable : Boolean`](#preventing-edits-editable): Controls whether the property is editable in the properties panel.
+- [`entriesVisible : Boolean`](#displaying-all-entries-entriesvisible): Controls whether default properties are shown alongside properties defined in the element template.
 
 Not all keys and values are compatible with each other.
 Some keys or values require other keys to be set to a certain value, even if the key is marked as optional above.
@@ -527,6 +527,64 @@ The binding name of `correlationKey` is not applicable to message start events o
 
 :::
 
+### Signal name: `bpmn:Signal#property`
+
+| **Binding `type`**         | `bpmn:Signal#property`                                                 |
+| -------------------------- | ---------------------------------------------------------------------- |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                     |
+| **Binding parameters**     | `name`: The name of the property. <br /> Supported properties: `name`. |
+| **Mapping result**         | `<bpmn:signal [name]="[userInput]" />`                                 |
+
+The `bpmn:Signal#property` binding allows you to set the name of a `bpmn:Signal` referred to by the templated element.
+This binding is only valid for templates of events with `bpmn:SignalEventDefinition`.
+
+```json
+{
+  ...,
+  "value": "aSignalName",
+  "binding": {
+    "type": "bpmn:Signal#property",
+    "name": "name"
+  }
+}
+```
+
+### Timer event definition property name: `bpmn:TimerEventDefinition#property`
+
+| **Binding `type`**         | `bpmn:TimerEventDefinition#property`                                                                     |
+| -------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                                       |
+| **Binding parameters**     | `name`: The name of the property.<br/>Supported properties: `timeDate`, `timeCycle`, and `timeDuration`. |
+| **Mapping result**         | `<bpmn:timerEventDefinition><bpmn:[name]>[userInput]</bpmn:[name]></bpmn:timerEventDefinition>`          |
+
+The `bpmn:TimerEventDefinition#property` binding allows you to configure [timer event definitions](../../bpmn/timer-events/) for timer events.
+This binding is only valid for templates of events with `bpmn:TimerEventDefinition` set via `elementType.eventDefinition`.
+
+Only one of `timeDate`, `timeCycle`, or `timeDuration` can be defined per template.
+
+```json
+{
+  ...,
+  "value": "0 0 9-17 * * MON-FRI",
+  "binding": {
+    "type": "bpmn:TimerEventDefinition#property",
+    "name": "timeCycle"
+  }
+}
+```
+
+:::note
+
+**Property-specific constraints:**
+
+- **`timeDuration`**: Cannot be used on process-level start events. Valid on event subprocess start events, intermediate catch events, and boundary events.
+- **`timeCycle`**: Can only be used on start events and boundary events. When a template with `timeCycle` is applied:
+  - Boundary events are automatically marked as non-interrupting.
+  - Start events in event subprocesses are also marked as non-interrupting.
+- **`timeDate`**: Can be used on process-level and event subprocess start events, intermediate catch events, and boundary events.
+
+:::
+
 ### Called element: `zeebe:calledElement`
 
 | **Binding `type`**         | `zeebe:calledElement`                                                                                          |
@@ -863,7 +921,7 @@ If the input `type` is `String` or `Text`, then [`feel`](#adding-feel-editor-sup
 
 The `zeebe:adHoc` binding marks a sub-process as ad-hoc when deployed to Zeebe. When configured, contained activities can be executed independently without following a predefined sequence flow.
 
-### Example
+#### Example
 
 ```json
 {
@@ -886,7 +944,7 @@ The `zeebe:adHoc` binding marks a sub-process as ad-hoc when deployed to Zeebe. 
 }
 ```
 
-### Example with `activeElementsCollection`
+#### Example with `activeElementsCollection`
 
 ```json
 {

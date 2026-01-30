@@ -26,6 +26,96 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-leading: calc(var(--ifm-leading-desktop) * 1rem);
   --ifm-alert-border-radius: 0;
   --ifm-breadcrumb-padding-horizontal: 0rem;
+  --kapa-button-text: #fff;
+  --kapa-button-bg: #fff;
+  --kapa-border-gradient: linear-gradient(
+    to right,
+    #6967ff,
+    #78a9ff,
+    #78a9ff,
+    #78a9ff,
+    #78a9ff
+  );
+}
+
+/* Show only Ask AI and Search on smaller screens */
+@media screen and (max-width: 800px) {
+  /* Hide all navbar items except search and AI button */
+  .navbar__items--right
+    > .navbar__item:not(:has(.DocSearch-Button)):not(:has(.kapa-open)) {
+    display: none !important;
+  }
+
+  /* Reorder navbar items - AI button first, then search */
+  .navbar__items--right {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+  }
+
+  /* Ensure Search and AI button remain visible */
+  .navbar__items--right > .navbar__item:has(.DocSearch-Button),
+  .navbar__items--right > .navbar__item:has(.kapa-open) {
+    display: flex !important;
+  }
+
+  /* Keep the actual buttons visible */
+  .DocSearch-Button,
+  .kapa-open {
+    display: inline-flex !important;
+  }
+
+  /* Add some spacing between buttons */
+  .navbar__item:has(.kapa-open) {
+    margin-right: 2rem;
+  }
+
+  /* Show Try-Free button in hamburger menu */
+  .navbar-sidebar .try-free {
+    display: inline-block !important;
+    color: #ffffff !important;
+    font-weight: 600;
+  }
+}
+
+/* Show only Ask AI and Search on screens between 801px and 996px */
+@media screen and (min-width: 801px) and (max-width: 996px) {
+  /* Hide all navbar items except search and AI button */
+  .navbar__items--right
+    > .navbar__item:not(:has(.DocSearch-Button)):not(:has(.kapa-open)) {
+    display: none !important;
+  }
+
+  /* Ensure Search and AI button remain visible */
+  .navbar__items--right > .navbar__item:has(.DocSearch-Button),
+  .navbar__items--right > .navbar__item:has(.kapa-open) {
+    display: flex !important;
+  }
+
+  /* Keep the actual buttons visible */
+  .DocSearch-Button,
+  .kapa-open {
+    display: inline-flex !important;
+  }
+
+  /* Add some spacing between buttons */
+  .navbar__item:has(.kapa-open) {
+    margin-right: 7rem;
+  }
+
+  /* Show Try-Free button in hamburger menu */
+  .navbar-sidebar .try-free {
+    display: inline-block !important;
+    color: #ffffff !important;
+    font-weight: 600;
+  }
+}
+
+/* Adjust Ask AI button spacing on screens between 769px and 800px */
+@media screen and (min-width: 769px) and (max-width: 800px) {
+  /* Add some spacing between buttons */
+  .navbar__item:has(.kapa-open) {
+    margin-right: 7rem;
+  }
 }
 
 .markdown {
@@ -56,6 +146,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-toc-border-color: #323232;
   --ifm-tabs-padding-vertical: 10px;
   --ifm-tabs-padding-horizontal: 15px;
+  --kapa-button-bg: black;
 }
 
 .footer--dark {
@@ -197,6 +288,7 @@ we make it less bold compared to the search keyword */
 .navbar__title {
   padding-left: 10px;
   font-size: 16px;
+  display: none;
 }
 
 a {
@@ -538,16 +630,55 @@ body {
   border-radius: 20px !important;
   margin-right: 10px;
   border: 1px solid #fc5d0d;
+  transition: all 0.3s ease;
 }
+
 .try-free:hover {
   background-color: #171c29;
   color: #ffffff;
   border: 1px solid #171c29;
+  transform: translateY(-2px);
+}
+
+.kapa-open {
+  color: #ffffff !important;
+  cursor: pointer;
+  background-image:
+    linear-gradient(135deg, #6967ff, #280892), var(--kapa-border-gradient);
+  background-size:
+    100% 100%,
+    600% 600%;
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  border: 3px solid transparent;
+  border-radius: 32px;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  position: relative;
+}
+
+.kapa-open:hover {
+  transform: translateY(-2px);
+  border-color: #6967ff;
+}
+
+[data-theme="dark"] .kapa-open {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .kapa-open:hover {
+  box-shadow: 0px 4px 12px rgba(120, 169, 255, 0.3);
+  border-color: #6967ff;
 }
 
 [data-theme="dark"] .try-free {
   border-color: rgb(255, 255, 255);
-  transition: 0.3s;
+  transition: 0.3s ease;
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: 1px solid white;
@@ -557,6 +688,7 @@ body {
   background-color: #ffffff;
   color: var(--ifm-color-black);
   border: 1px solid #171c29;
+  transform: translateY(-2px);
 }
 
 .dropdown {
@@ -574,6 +706,11 @@ body {
 
 .table-of-contents__link .callout {
   display: none;
+}
+
+/* Add padding to bottom of hamburger menu to prevent cookie button overlap */
+.navbar-sidebar__items {
+  padding-bottom: 60px;
 }
 
 /* style PushFeedback widget */
@@ -814,14 +951,21 @@ h3 .badge:nth-of-type(1) {
     font-size: 0.9em;
   }
 
+  .try-free {
+    font-size: 0.9em !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
   .navbar .navbar__item {
     padding: var(--ifm-navbar-item-padding-vertical)
-      calc(0.5 * var(--ifm-navbar-item-padding-horizontal));
+      calc(0.4 * var(--ifm-navbar-item-padding-horizontal));
   }
 }
 
-@media screen and (max-width: 1124px) {
-  .navbar .navbar__title {
+@media screen and (max-width: 1200px) {
+  /* Hide Try-Free from navbar only, not from hamburger menu */
+  .navbar__items--right .try-free {
     display: none;
   }
 }
@@ -979,6 +1123,14 @@ span.callout + p {
 span.callout + p::after {
   content: "\a";
   white-space: pre;
+}
+
+.plain tr:nth-child(2n) {
+  background-color: transparent !important;
+}
+
+.plain thead {
+  font-weight: bold !important;
 }
 
 /* Add space and thin border to images, remove drop shadow */

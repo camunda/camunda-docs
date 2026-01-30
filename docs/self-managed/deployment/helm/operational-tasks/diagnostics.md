@@ -9,6 +9,10 @@ description: "Get diagnostics and logs from a Helm chart deployment."
 
 This script automates the process of gathering logs and diagnostics from a Camunda Helm chart deployment running in a Kubernetes cluster. The script collects all relevant information (including pod logs, events, and resource details) into a single directory, and outputs it in a .zip file to make it easier to share this information with the Camunda Support team.
 
+:::caution Data privacy notice
+Before sharing the generated diagnostics file with Camunda Support, review and remove any sensitive information such as passwords, API keys, personal data, or business-sensitive data from the collected logs and configuration data.
+:::
+
 ### What the script collects
 
 The script outputs the following data from your namespace and creates a zip file containing the following:
@@ -35,7 +39,9 @@ chmod +x camunda-collect-diagnostics.sh
 ./camunda-collect-diagnostics.sh --namespace <namespace>
 ```
 
-4. Share the generated `.zip` archive with Camunda Support.
+4. Review the generated `.zip` archive and remove any sensitive or personally identifiable information (PII) before sharing.
+
+5. Share the reviewed `.zip` archive with Camunda Support.
 
 ### Diagnostic collection script
 

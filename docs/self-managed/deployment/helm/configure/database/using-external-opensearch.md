@@ -5,6 +5,14 @@ title: Use Amazon OpenSearch Service with the Helm chart
 description: Learn how to connect a Camunda 8 Self-Managed Helm chart deployment to an external Amazon OpenSearch Service instance.
 ---
 
+Learn how to configure and use Amazon OpenSearch with the Helm chart. When configured, OpenSearch is used as a secondary storage backend for indexing and search. See [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) for the canonical definition.
+
+:::note
+Secondary storage is configurable. For supported components, you can use an RDBMS-based secondary store instead. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](/reference/glossary.md#rdbms).
+:::
+
+## About this guide
+
 Camunda 8 Self-Managed includes two types of components:
 
 - **Camunda components** such as Operate, Optimize, and Tasklist.
@@ -13,6 +21,14 @@ Camunda 8 Self-Managed includes two types of components:
 For more details, see the [architecture overview](/self-managed/about-self-managed.md#architecture).
 
 By default, the [Helm chart deployment](/self-managed/setup/overview.md) installs a new Elasticsearch instance. This guide explains how to configure the Camunda Helm chart to use an external Amazon OpenSearch Service instance instead.
+
+:::note
+In 8.9-alpha3, H2 is the default secondary storage for lightweight Camunda 8 Run and quick-install scenarios. Elasticsearch remains bundled and supported as an optional alternative; OpenSearch is supported for Self‑Managed deployments but is not bundled in Camunda 8 Run. Use this guide when you want to run or connect to an external OpenSearch cluster instead of the default H2 store.
+:::
+
+:::info OpenSearch support
+Camunda 8 also supports the open-source [OpenSearch](https://opensearch.org/) distribution as well as [Amazon OpenSearch](https://aws.amazon.com/opensearch-service).
+:::
 
 ## Prerequisites
 
@@ -49,8 +65,6 @@ To connect to OpenSearch using basic authentication, follow the configuration be
 
 ```yaml
 global:
-  elasticsearch:
-    enabled: false
   opensearch:
     enabled: true
     auth:
@@ -65,9 +79,6 @@ global:
       protocol: https
       host: opensearch.example.com
       port: 443
-
-elasticsearch:
-  enabled: false
 ```
 
 This configuration disables the internal Elasticsearch component and the Elasticsearch configuration for all components. This is required to use Amazon OpenSearch Service.

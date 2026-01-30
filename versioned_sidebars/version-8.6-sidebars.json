@@ -84,6 +84,7 @@
             "components/concepts/encryption-at-rest",
             "components/concepts/byok/aws-external-encryption-setup",
             "components/concepts/byok/key-rotation-audit-logging",
+            "components/concepts/byok/key-state-behavior",
             "components/concepts/byok/faq-and-troubleshooting"
           ]
         },
@@ -121,6 +122,28 @@
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
+            {
+              "type": "category",
+              "label": "Monitoring",
+              "link": {
+                "type": "doc",
+                "id": "components/console/manage-clusters/monitoring/overview"
+              },
+              "items": [
+                {
+                  "type": "category",
+                  "label": "Cluster Metrics endpoint",
+                  "link": {
+                    "type": "doc",
+                    "id": "components/console/manage-clusters/monitoring/cluster-metrics-endpoint/overview"
+                  },
+                  "items": [
+                    "components/console/manage-clusters/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint",
+                    "components/console/manage-clusters/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics"
+                  ]
+                }
+              ]
+            },
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/settings",
@@ -215,6 +238,7 @@
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
+            "components/modeler/desktop-modeler/deploy-diagram",
             "components/modeler/desktop-modeler/start-instance",
             "components/modeler/desktop-modeler/use-connectors",
             "components/modeler/desktop-modeler/variables",
@@ -1571,7 +1595,8 @@
       },
       "items": ["reference/data-collection/usage-metrics"]
     },
-    "reference/glossary"
+    "reference/glossary",
+    "reference/legal"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
@@ -1741,6 +1766,7 @@
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"]
         },
         "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/custom-users-and-clients",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/elasticsearch-without-cluster-privileges",
         "self-managed/concepts/opensearch-privileges",
@@ -1971,6 +1997,7 @@
             },
             {
               "Desktop Modeler": [
+                "self-managed/modeler/desktop-modeler/connect-to-self-managed",
                 "self-managed/modeler/desktop-modeler/deploy-to-self-managed"
               ]
             }

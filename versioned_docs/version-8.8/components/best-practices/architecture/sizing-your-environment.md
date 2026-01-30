@@ -89,7 +89,7 @@ Furthermore, data is also sent from Operate and Optimize, which store data in El
 Elasticsearch needs enough memory available to load a large amount of this data into memory.
 :::
 
-Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda/camunda/blob/main/zeebe/benchmarks/project/src/main/resources/bpmn/typical_payload.json) we measured the following approximations for disk space requirements using Camunda 8 SaaS 1.2.4. Please note, that these are not exact numbers, but they might give you an idea what to expect:
+Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/typical_payload.json), Camunda measured the following approximate disk space requirements using Camunda 8 SaaS 1.2.4. These are not exact numbers, but they can help you estimate what to expect:
 
 - Zeebe: 75 kb / PI
 - Operate: 57 kb / PI
@@ -150,10 +150,11 @@ Contact your Customer Success Manager to increase the cluster size beyond the ma
 | Max Throughput **Tasks/day** **\***                                                 |                                 9 M |                                18 M |                             27 M |                             36 M |
 | Max Throughput **Tasks/second** **\***                                              |                                 100 |                                 200 |                              300 |                              400 |
 | Max Throughput **Process Instances/second** **\*\***                                |                                   5 |                                  10 |                               15 |                               20 |
-| Max Total Number of Process Instances stored (in Elasticsearch in total) **\*\*\*** |                                75 k |                               150 k |                            225 k |                            300 k |
+| Max Total Number of Process Instances stored (in Elasticsearch in total) **\*\*\*** |                               200 k |                               400 k |                            600 k |                            800 k |
 | Approximate resources provisioned **\*\*\*\***                                      | 11 vCPU, 22 GB memory, 192 GB disk. | 22 vCPU, 44 GB memory, 384 GB disk. | 33 vCPU, 66 GB mem, 576 GB disk. | 44 vCPU, 88 GB mem, 768 GB disk. |
 
-The numbers in the table were measured using Camunda 8 (version 8.6), [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes Cluster, and using a [realistic process](https://github.com/camunda/camunda/blob/main/zeebe/benchmarks/project/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) containing a mix of BPMN symbols such as tasks, events and call activities including subprocesses. To calculate day-based metrics, an equal distribution over 24 hours is assumed.
+The numbers in the table were measured using Camunda 8 (version 8.8), [the
+benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes Cluster, and using a [realistic process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) containing a mix of BPMN symbols such as tasks, events and call activities including subprocesses. To calculate day-based metrics, an equal distribution over 24 hours is assumed.
 
 **\*** Tasks (Service Tasks, Send Tasks, User Tasks, and so on) completed per day is the primary metric, as this is easy to measure and has a strong influence on resource consumption. This number assumes a constant load over the day. Tasks/day and Tasks/ second are scaled linearly.
 

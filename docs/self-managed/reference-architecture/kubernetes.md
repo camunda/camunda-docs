@@ -46,9 +46,9 @@ The [reference architecture overview](/self-managed/reference-architecture/refer
 - **Web Modeler, Console, and Management Identity**: Management and design tools (Web Modeler, Console, Management Identity) for modeling and deploying diagrams, and monitoring the health of orchestration clusters.
 
 See the reference architecture for details on how these components communicate.
-:::
 
-_Infrastructure diagram for a single region setup (click on the image to open the PDF version):_
+_Infrastructure diagram for a single-region setup (click the image to open the PDF version)_
+
 [![Architecture Overview](./img/k8s-single.jpg)](./img/k8s-single.pdf)
 
 This Kubernetes architecture illustrates a high-availability setup across multiple availability zones (A, B, and C), with key networking components to ensure scalability, security, and reliability. We recommend using multiple availability zones to improve fault tolerance and eliminate single points of failure.
@@ -242,10 +242,14 @@ Camunda maintains the required Docker images consumed by the Helm chart. These i
 
 The following databases are required:
 
-- Elasticsearch/OpenSearch
-  - Required by Orchestration Cluster and Optimize
-- PostgreSQL
-  - Required by Management Identity, Keycloak, and Web Modeler
+| Database                 | Requirement                                                 |
+| :----------------------- | :---------------------------------------------------------- |
+| Elasticsearch/OpenSearch | Required by Orchestration Cluster and Optimize.             |
+| PostgreSQL               | Required by Management Identity, Keycloak, and Web Modeler. |
+
+:::info OpenSearch support
+Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
+:::
 
 For more information, see the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#architecture).
 
@@ -328,6 +332,12 @@ To use an Application Load Balancer:
   ```
 
 The setup does not require configuration of [TLS on the Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls). If the AWS Load Balancer Controller is correctly configured, it automatically retrieves the appropriate certificate from ACM based on the host name.
+
+:::note AWS ALB known limitations
+Application Load Balancers (ALB) support HTTP/2 over HTTPS listeners and allow a maximum of 128 streams per client HTTP/2 connection. The HTTP/2 server-push feature is not supported. For details, see [AWS ALB protocols](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-protocol-version:~:text=The%20maximum%20number%20of%20streams,client%20HTTP%2F2%20connection%20is%20128).
+
+If you need more than 128 streams per client, see [Network Load Balancer](#network-load-balancer-nlb).
+:::
 
 ##### Network load balancer (NLB)
 

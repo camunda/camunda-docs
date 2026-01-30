@@ -68,6 +68,15 @@ See the [component version matrix](/reference/supported-environments.md#componen
 
 ## Key changes
 
+### 8.8.x patch releases
+
+The following key changes were also released as part of an 8.8.x patch release.
+
+| Patch release                                                  | Type            | Key change                                                                                                                                            |
+| :------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9) | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9) | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
+
 ### APIs & tools
 
 <div className="release-announcement-row">
@@ -103,6 +112,49 @@ io.camunda.zeebe.client.api.command.MalformedResponseException:
 **Required action**
 
 You must update your clients to at least 8.7.16, as this contains the fix for this issue. Alternatively, you can opt out of using `preferRestOverGrpc=true` before upgrading your cluster.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Webhook alerts JSON format
+
+In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/console/manage-clusters/manage-alerts.md#webhook-alerts). The JSON format was modified so that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
+
+In 8.8.9, the `processVersion` field reverts to returning an integer value representing the process version only. A new `processVersionTag` field is introduced to include the process version tag when available.
+
+**Example JSON format change**
+
+Before 8.8.9:
+
+```json
+{
+  "processVersion": "v2.1.0" // String - could be tag or number
+}
+```
+
+After 8.8.9:
+
+```json
+{
+  "processVersion": 3, // Integer - always the version number
+  "processVersionTag": "v2.1.0" // String - the version tag (if exists)
+}
+```
+
+**Action required**
+
+Adapt any webhook-dependent integrations you have created for 8.8.x to handle the updated JSON structure:
+
+1. Update your integration to read `processVersion` as an integer value representing the process version number.
+2. If you need the process version tag, use the new `processVersionTag` field that contains the string value of the version tag (if one exists).
+3. Ensure your integration handles cases where `processVersionTag` might be null or absent (for processes without version tags).
+4. Test your webhook consumers to verify they correctly parse both the integer `processVersion` and string `processVersionTag` fields.
 
 </div>
 </div>
@@ -387,6 +439,44 @@ To learn more about migrating to the Camunda Java client, see the [migration gui
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test
+
+With the 8.8.9 patch release, dedicated Spring Boot 4.0 based modules are released for the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md#spring-boot-40-support) and [Camunda Process Test Spring](../../../apis-tools/testing/getting-started.md?client=spring-sdk#spring-boot-40-support) as drop-in replacements for the default Spring Boot 3.5.x-based modules.
+
+You must use these if you want to migrate your application to Spring Boot 4.0.
+
+:::note
+With Camunda 8.9, the default Spring Boot version for the Camunda Spring Boot Starter and Camunda Process Test Spring changes to 4.0.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### The Node.js SDK is now the TypeScript SDK
+
+With the Camunda 8.8 release, the Node.js SDK now becomes the TypeScript SDK.
+
+- The **TypeScript SDK** provides clients for all Camunda 8 APIs. Use it in Node.js environments.
+
+- The **Orchestration Cluster API TypeScript client** is a lightweight client for the Camunda 8.8+ Orchestration Cluster REST API. Use it in Node.js or in the browser.
+
+To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md) documentation.
+
+</div>
+</div>
+
 ### Connectors
 
 <div className="release-announcement-row">
@@ -587,6 +677,25 @@ Only the combined Ingress configuration is officially supported. See the [Ingres
 
 :::caution
 Additional upgrade considerations are necessary for deployments that use custom scripts, such as Docker containers, manual installations, or custom-developed Kubernetes deployments. For these deployments, customers can either continue to deploy with their original 8.7 topology and upgrade each component independently, or adopt our Helm chart approach for the upgrade, which allows for unifying the deployment into a single JAR or container executable.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Change</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Helm chart: Custom users and clients for Management Identity
+
+You can now configure custom users and OAuth2 clients for Management Identity during Helm installation.
+
+See [adding users and clients](/self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients.md) for details on configuring custom users and clients on Management Identity during initial Helm install.
+
+:::caution
+Additional upgrade considerations are required for deployments that use custom environment variables, such as `KEYCLOAK_CLIENTS_2_PERMISSIONS_0_RESOURCE_SERVER_ID`. For these deployments, remove the environment variables that reference users or clients and use the configuration method described in the guide linked above.
 :::
 
 </div>

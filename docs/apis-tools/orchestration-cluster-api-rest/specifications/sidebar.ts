@@ -20,6 +20,24 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Audit Log",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs",
+          label: "Search audit logs",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-audit-log",
+          label: "Get audit log",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Authentication",
       items: [
         {
@@ -141,6 +159,66 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-topology",
           label: "Get cluster topology",
           className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Cluster Variable",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/create-global-cluster-variable",
+          label: "Create a global-scoped cluster variable",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-cluster-variable",
+          label: "Get a global-scoped cluster variable",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-global-cluster-variable",
+          label: "Delete a global-scoped cluster variable",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-cluster-variables",
+          label: "searchClusterVariables",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/create-tenant-cluster-variable",
+          label: "Create a tenant-scoped cluster variable",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-tenant-cluster-variable",
+          label: "Get a tenant-scoped cluster variable",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-tenant-cluster-variable",
+          label: "Delete a tenant-scoped cluster variable",
+          className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Conditional",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals",
+          label: "Evaluate root level conditional start events",
+          className: "api-method post",
         },
       ],
     },
@@ -284,6 +362,18 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Expression",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/evaluate-expression",
+          label: "Evaluate an expression",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Group",
       items: [
         {
@@ -400,6 +490,18 @@ const sidebar: SidebarsConfig = {
           label: "Resolve incident",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-statistics-by-definition",
+          label: "Get process instance statistics by definition",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-statistics-by-error",
+          label: "Get process instance statistics by error",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -440,6 +542,18 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/fail-job",
           label: "Fail job",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Job metrics",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-job-statistics",
+          label: "Global job statistics",
           className: "api-method post",
         },
       ],
@@ -540,6 +654,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-message-subscription-statistics",
+          label: "Get message subscription statistics",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-instance-statistics",
           label: "Get process instance statistics",
           className: "api-method post",
@@ -589,26 +709,31 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation",
-          label: "Create a batch operation to cancel process instances",
+          label: "Cancel process instances (batch)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instances-batch-operation",
+          label: "Delete process instances (batch)",
           className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/resolve-incidents-batch-operation",
-          label:
-            "Create a batch operation to resolve incidents of process instances",
+          label: "Resolve related incidents (batch)",
           className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instances-batch-operation",
-          label: "Create a batch operation to migrate process instances",
+          label: "Migrate process instances (batch)",
           className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/modify-process-instances-batch-operation",
-          label: "Create a batch operation to modify process instances",
+          label: "Modify process instances (batch)",
           className: "api-method post",
         },
         {
@@ -626,7 +751,7 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-call-hierarchy",
-          label: "Get call hierarchy for process instance",
+          label: "Get call hierarchy",
           className: "api-method get",
         },
         {
@@ -637,14 +762,20 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instance",
+          label: "Delete process instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/resolve-process-instance-incidents",
-          label: "Resolve process instance incidents",
+          label: "Resolve related incidents",
           className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-process-instance-incidents",
-          label: "Search for incidents associated with a process instance",
+          label: "Search related incidents",
           className: "api-method post",
         },
         {
@@ -662,13 +793,13 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-sequence-flows",
-          label: "Get process instance sequence flows",
+          label: "Get sequence flows",
           className: "api-method get",
         },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-statistics",
-          label: "Get process instance statistics",
+          label: "Get element instance statistics",
           className: "api-method get",
         },
       ],
@@ -1041,6 +1172,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-user-task",
           label: "Assign user task",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-user-task-audit-logs",
+          label: "Search user task audit logs",
           className: "api-method post",
         },
         {
