@@ -1,6 +1,6 @@
 ---
 id: rdbms-production-architecture
-sidebar_label: Production architecture with RDBMS
+sidebar_label: Production architecture
 title: Production architecture for Camunda 8 with RDBMS
 description: "Reference architecture for deploying Camunda 8 Self-Managed in production using an external RDBMS as secondary storage."
 ---
@@ -88,6 +88,6 @@ Without Optimize: RDBMS-only stack is fully supported.
 
 ## Next steps
 
-- [Manual installation guide](/self-managed/deployment/manual/rdbms-manual-installation.md)
+- [RDBMS configuration](/self-managed/deployment/manual/rdbms/configuration.md)
 - [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
 - [RDBMS Helm configuration](/self-managed/deployment/helm/configure/database/rdbms.md)

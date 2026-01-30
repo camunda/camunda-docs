@@ -1740,8 +1740,18 @@ module.exports = {
           items: [
             "self-managed/deployment/manual/install",
             "self-managed/deployment/manual/upgrade",
-            "self-managed/deployment/manual/rdbms-production-architecture",
-            "self-managed/deployment/manual/rdbms-manual-installation",
+            {
+              type: "category",
+              label: "Manual installation with RDBMS",
+              link: {
+                type: "doc",
+                id: "self-managed/deployment/manual/rdbms/index",
+              },
+              items: [
+                "self-managed/deployment/manual/rdbms/rdbms-production-architecture",
+                "self-managed/deployment/manual/rdbms/configuration",
+              ],
+            },
             {
               type: "category",
               label: "Cloud providers",

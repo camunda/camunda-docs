@@ -1,33 +1,32 @@
 ---
-id: rdbms-manual-installation
-sidebar_label: Manual installation with RDBMS
-title: Manual installation and operations guide for Camunda 8 with RDBMS
-description: "Step-by-step guide for deploying Camunda 8 Self-Managed in production using manual installation with an external RDBMS."
+id: configuration
+sidebar_label: Configuration
+title: Configure RDBMS for manual installations
+description: Configure drivers, connection parameters, schema management, and operations for manual RDBMS installations.
 ---
 
-Install, configure, and operate Camunda 8 Self-Managed in production environments using manual installation with a relational database (RDBMS) as secondary storage.
+Configure RDBMS secondary storage for **manual** Camunda 8 installations (VM, bare metal, or standalone Java).
 
 ## Prerequisites
 
-- **Supported RDBMS**: PostgreSQL, MariaDB, Oracle, MySQL, or SQL Server (see [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)).
-- **JDBC drivers**: PostgreSQL, MariaDB, SQL Server, H2 bundled. Oracle and MySQL must be user-supplied.
-- **Java 17+**: See [supported environments](/reference/supported-environments.md)
+- **Supported RDBMS**: See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
+- **JDBC drivers**: PostgreSQL, MariaDB, SQL Server, and H2 are bundled. Oracle and MySQL must be user-supplied.
+- **Java 17+**: See [supported environments](/reference/supported-environments.md).
 - **Database user**: Needs DDL permissions (CREATE TABLE, ALTER TABLE, DROP TABLE) for schema initialization.
-- **Elasticsearch/OpenSearch**: Only if using Optimize (required for analytics).
 
 ## JDBC driver management
 
 ### Bundled drivers
 
-Camunda bundles these drivers for redistribution:
+Camunda bundles these JDBC drivers for redistribution:
 
-| Database             | Version | User-supplied needed? |
-| -------------------- | ------- | --------------------- |
-| PostgreSQL           | 42.7.8  | Optional              |
-| MariaDB              | 3.5.7   | Optional              |
-| Microsoft SQL Server | 12.10.2 | Optional              |
-| H2                   | 2.3.232 | Optional              |
-| AWS Aurora JDBC      | 2.6.8   | Optional              |
+| Database             | Driver artifact                        | Version | User-supplied needed? |
+| -------------------- | -------------------------------------- | ------- | --------------------- |
+| PostgreSQL           | `org.postgresql:postgresql`            | 42.7.8  | Optional              |
+| MariaDB              | `org.mariadb.jdbc:mariadb-java-client` | 3.5.7   | Optional              |
+| Microsoft SQL Server | `com.microsoft.sqlserver:mssql-jdbc`   | 12.10.2 | Optional              |
+| H2                   | `com.h2database:h2`                    | 2.3.232 | Optional              |
+| AWS Aurora JDBC      | Bundled                                | 2.6.8   | Optional              |
 
 You can optionally supply your own version of any bundled driver for flexibility or compliance requirements.
 
@@ -40,7 +39,7 @@ export CLASSPATH="/opt/camunda-drivers/*:$CLASSPATH"
 ./camunda.sh
 ```
 
-For Docker, mount external drivers using a volume:
+For Docker, mount external drivers using a volume. The driver JAR must be placed directly in the mounted directory (no subdirectories):
 
 ```yaml
 services:
@@ -51,20 +50,12 @@ services:
       - "26500:26500"
       - "9600:9600"
     environment:
-      SPRING_PROFILES_ACTIVE: rdbmsMysql,broker,insecure
       CAMUNDA_DATA_SECONDARY_STORAGE_TYPE: rdbms
       CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL: jdbc:mysql://mysql:3306/camunda
       CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME: camunda
       CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD: demo
     volumes:
       - /path/to/driver-lib:/driver-lib
-```
-
-Alternatively, you can create a custom image:
-
-```dockerfile
-FROM camunda/camunda-platform:8.9.0
-COPY ./ojdbc11.jar /camunda/lib/
 ```
 
 ## Database setup
@@ -85,7 +76,10 @@ For other databases, see [RDBMS Helm configuration](/self-managed/deployment/hel
 
 ### Step 2: Configure connection
 
+Use the unified Camunda configuration properties:
+
 ```bash
+export CAMUNDA_DATA_SECONDARY_STORAGE_TYPE=rdbms
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda"
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME="camunda"
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD="your-secure-password"
@@ -114,7 +108,7 @@ export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_QUEUESIZE=1000
 
 ### Operate and Tasklist
 
-Use same RDBMS connection as Zeebe (shared schema):
+Use the same RDBMS connection as Zeebe (shared schema):
 
 ```bash
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda"
@@ -122,16 +116,27 @@ export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME="camunda"
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD="your-secure-password"
 ```
 
-### Optimize (if used)
+## Schema management
 
-Requires Elasticsearch/OpenSearch alongside RDBMS:
+### Liquibase (recommended)
 
-```bash
-export OPTIMIZE_ELASTICSEARCH_HOST="localhost"
-export OPTIMIZE_ELASTICSEARCH_PORT="9200"
+Liquibase is the recommended approach for schema management. It is supported for all components and automatically applies migrations on startup (when `auto-ddl=true`, the default).
+
+When Liquibase runs successfully, you'll see this log entry:
+
+```
+io.camunda.application.commons.rdbms.MyBatisConfiguration - Initializing Liquibase for RDBMS with global table trimmedPrefix ''.
 ```
 
-Ensure Zeebe has an exporter pushing analytics data to Elasticsearch/OpenSearch.
+### Manual SQL execution
+
+Manual SQL execution is equally supported. When using manual SQL:
+
+- You must strictly adhere to the bundled scripts in the order provided.
+- Camunda cannot guarantee future updates will work if you modify scripts.
+- This approach is useful when DBAs require strict control over database changes.
+
+Download scripts: [Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
 
 ## Operations
 
@@ -139,10 +144,10 @@ Ensure Zeebe has an exporter pushing analytics data to Elasticsearch/OpenSearch.
 
 **DBA owns backups** using native RDBMS tools (pg_dump, mysqldump, RMAN, etc.). Camunda handles consistency.
 
-- Use vendor-recommended backup procedures
-- Backup frequency depends on your RPO
-- Database backups capture consistent state (Camunda flushes synchronously)
-- Zeebe checkpoint position is stored in RDBMS
+- Use vendor-recommended backup procedures.
+- Backup frequency depends on your RPO (Recovery Point Objective).
+- Database backups capture consistent state (Camunda flushes synchronously).
+- Zeebe checkpoint position is stored in RDBMS.
 
 **Restore procedure**:
 
@@ -177,6 +182,8 @@ DBA must apply schema changes manually using scripts. Zeebe fails to start if sc
 io.camunda.application.commons.rdbms.MyBatisConfiguration - Initializing Liquibase for RDBMS with global table trimmedPrefix ''.
 ```
 
+No errors in Liquibase logs means migration was successful.
+
 **RdbmsExporter running:**
 
 ```
@@ -184,14 +191,32 @@ io.camunda.exporter.rdbms.RdbmsExporter - [RDBMS Exporter] RdbmsExporter created
 io.camunda.exporter.rdbms.RdbmsExporter - [RDBMS Exporter] Exporter opened with last exported position 126
 ```
 
+No errors in RdbmsExporter logs means the exporter is healthy. More details about exported records require DEBUG log level.
+
 ### Common failure modes
 
 | Symptom                                                      | Root cause                      | Fix                                                   |
 | ------------------------------------------------------------ | ------------------------------- | ----------------------------------------------------- |
 | `SQLNonTransientConnectionException: Socket fail to connect` | Invalid URL or unreachable host | Verify JDBC URL format and hostname/port resolution   |
 | `SQLInvalidAuthorizationSpecException: Access denied`        | Wrong credentials               | Check username/password and database user permissions |
-| `Failed to load driver class oracle.jdbc.OracleDriver`       | Missing JDBC driver             | Verify driver JAR in classpath                        |
+| `Failed to load driver class oracle.jdbc.OracleDriver`       | Missing JDBC driver             | Verify driver JAR in `/driver-lib` or classpath       |
 | `Table 'camunda.EXPORTER_POSITION' doesn't exist`            | autoDDL=false on empty DB       | Run schema initialization scripts manually            |
+
+**All failure modes above prevent Camunda startup.**
+
+### Auto-DDL behavior
+
+When started with `auto-ddl=false` on an empty database, the RdbmsExporter throws errors like:
+
+```
+### Error querying database. Cause: java.sql.SQLSyntaxErrorException: (conn=3) Table 'camunda.EXPORTER_POSITION' doesn't exist
+### The error may exist in URL [jar:file:.../camunda-db-rdbms-8.9.0-SNAPSHOT.jar!/mapper/ExporterPositionMapper.xml]
+### The error occurred while setting parameters
+### SQL: SELECT PARTITION_ID, EXPORTER, LAST_EXPORTED_POSITION, CREATED, LAST_UPDATED FROM EXPORTER_POSITION WHERE PARTITION_ID = ?
+### Cause: java.sql.SQLSyntaxErrorException: (conn=3) Table 'camunda.EXPORTER_POSITION' doesn't exist
+```
+
+**Solution**: Run schema initialization scripts manually using the bundled SQL or Liquibase scripts before starting Camunda.
 
 ## Performance tuning
 
@@ -207,8 +232,9 @@ export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_QUEUESIZE=5000
 
 ### Connection pooling
 
+Tune based on your workload. Camunda uses the Hikari connection pool following Spring Boot best practices:
+
 ```bash
-# Tune based on workload
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_MAXIMUM_POOL_SIZE=20
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_MINIMUM_IDLE=10
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_IDLE_TIMEOUT=600000
@@ -272,11 +298,10 @@ Before deploying to production:
 - [ ] Monitoring and alerting configured
 - [ ] Recovery procedure tested with backup/restore
 - [ ] HA topology deployed (3+ Zeebe brokers across AZs)
-- [ ] Optimize (if used) configured with Elasticsearch/OpenSearch
+- [ ] Optimize excluded (not supported with RDBMS secondary storage)
 
 ## Next steps
 
-- [Production architecture](/self-managed/deployment/manual/rdbms-production-architecture.md)
+- [RDBMS production architecture](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md)
 - [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
-- [RDBMS Helm configuration](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)
