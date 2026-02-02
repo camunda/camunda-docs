@@ -140,6 +140,17 @@ The `EntityInterceptor` interface allows you to define custom logic that execute
 
 Custom interceptors are enabled by default and can be restricted to specific entity types.
 
+### Type-safe API
+
+The `EntityInterceptor` interface uses Java generics to provide compile-time type safety:
+
+```java
+public interface EntityInterceptor<C7, C8> {
+    void execute(C7 entity, C8 builder);
+    // ...
+}
+```
+
 ### How to implement an `EntityInterceptor`
 
 1. Create a new Maven project with the provided `pom.xml` structure
@@ -154,7 +165,8 @@ Custom interceptors are enabled by default and can be restricted to specific ent
 Here's an example of a custom entity interceptor which is only called for process instances:
 
 ```java
-public class ProcessInstanceEnricher implements EntityInterceptor {
+public class ProcessInstanceEnricher
+    implements EntityInterceptor<HistoricProcessInstance, ProcessInstanceDbModel.ProcessInstanceDbModelBuilder> {
 
     /**
      * Restrict this interceptor to only handle process instances.
@@ -165,65 +177,111 @@ public class ProcessInstanceEnricher implements EntityInterceptor {
     }
 
     @Override
-    public void execute(EntityConversionContext<?, ?> context) {
-        HistoricProcessInstance c7Instance =
-            (HistoricProcessInstance) context.getC7Entity();
-        ProcessInstanceDbModel.Builder c8Builder =
-            (ProcessInstanceDbModel.Builder) context.getC8DbModelBuilder();
-
+    public void execute(HistoricProcessInstance entity,
+                        ProcessInstanceDbModel.ProcessInstanceDbModelBuilder builder) {
         // Custom conversion logic
         // For example, add custom metadata or modify the conversion
+      builder.processDefinitionId(entity.getProcessDefinitionKey());
     }
 }
 ```
 
 #### Access Camunda 7 process engine
 
-To retrieve information from Camunda 7 entities, use the `processEngine` available in the `EntityConversionContext`.
+To retrieve information from Camunda 7 entities, use the `EntityConversionContext` parameter which provides access to the `processEngine`.
 
 Use it to access services such as `RepositoryService` and `RuntimeService`. Fetch additional data as needed from other Camunda 7 entities.
 
 ```java
-@Override
-public void execute(EntityConversionContext<?, ?> context) {
-  // Use ProcessEngine to retrieve deployment information from Camunda 7 process engine
-  ProcessEngine processEngine = context.getProcessEngine();
+public class ProcessInstanceEnricher
+    implements EntityInterceptor<HistoricProcessInstance, ProcessInstanceDbModel.ProcessInstanceDbModelBuilder> {
 
-// Example: Retrieve the deployment ID from the process definition
-  String deploymentId = processEngine.getRepositoryService()
-      .createProcessDefinitionQuery()
-      .processDefinitionKey(processInstance.getProcessDefinitionKey())
-      .singleResult()
-      .getDeploymentId();
-  // Custom conversion logic
-  // ...
+    @Override
+    public Set<Class<?>> getTypes() {
+        return Set.of(HistoricProcessInstance.class);
+    }
+
+    /**
+     * Alternative execute signature with EntityConversionContext access.
+     * This signature gives you access to the process engine and other context.
+     */
+    @Override
+    public void execute(EntityConversionContext<HistoricProcessInstance,
+                                                ProcessInstanceDbModel.ProcessInstanceDbModelBuilder> context) {
+        // Access the entity and builder from context
+        HistoricProcessInstance entity = context.getC7Entity();
+        ProcessInstanceDbModel.ProcessInstanceDbModelBuilder builder = context.getC8DbModelBuilder();
+
+        // Use ProcessEngine to retrieve deployment information from Camunda 7 process engine
+        ProcessEngine processEngine = context.getProcessEngine();
+
+        // Example: Retrieve the deployment ID from the process definition
+        String deploymentId = processEngine.getRepositoryService()
+            .createProcessDefinitionQuery()
+            .processDefinitionKey(entity.getProcessDefinitionKey())
+            .singleResult()
+            .getDeploymentId();
+
+        // Custom conversion logic using the retrieved data
+        // ...
+    }
 }
 ```
+
+**Note:** The `EntityInterceptor` interface provides two `execute` method signatures:
+
+- `execute(C7 entity, C8 builder)` - Simple type-safe signature for basic transformations
+- `execute(EntityConversionContext<C7, C8> context)` - Full signature with access to process engine and other context
 
 ### Limit interceptors by entity type
 
 Entity interceptors can be restricted to specific entity types using the `getTypes()` method. Use Camunda 7 historic entity classes:
 
 ```java
-@Override
-public Set<Class<?>> getTypes() {
-    // Handle only specific types
-    return Set.of(
-        ProcessDefinition.class,            // Process definitions
-        HistoricProcessInstance.class,      // Process instances
-        HistoricActivityInstance.class,     // Flow nodes/activities
-        HistoricTaskInstance.class,         // User tasks
-        HistoricVariableInstance.class,     // Variables
-        HistoricIncident.class              // Incidents
-    );
-}
-```
+// Example 1: Handle multiple specific types
+public class MultiEntityInterceptor
+    implements EntityInterceptor<Object, Object> {
 
-```java
-// Or handle all entity types (default behavior)
-@Override
-public Set<Class<?>> getTypes() {
-    return Set.of(); // Empty set = handle all types
+    @Override
+    public Set<Class<?>> getTypes() {
+        // Handle only specific types
+        return Set.of(
+            ProcessDefinition.class,            // Process definitions
+            HistoricProcessInstance.class,      // Process instances
+            HistoricActivityInstance.class,     // Flow nodes/activities
+            HistoricTaskInstance.class,         // User tasks
+            HistoricVariableInstance.class,     // Variables
+            HistoricIncident.class,             // Incidents
+            HistoricDecisionInstance.class      // Decision instances
+        );
+    }
+
+    @Override
+    public void execute(Object entity, Object builder) {
+        // Handle different entity types
+        if (entity instanceof HistoricProcessInstance) {
+            // Process instance logic
+        } else if (entity instanceof HistoricActivityInstance) {
+            // Flow node logic
+        }
+        // etc.
+    }
+}
+
+// Example 2: Universal interceptor (handles all entity types)
+public class EntityLogger
+    implements EntityInterceptor<Object, Object> {
+
+    @Override
+    public Set<Class<?>> getTypes() {
+        return Set.of(); // Empty set = handle all types
+    }
+
+    @Override
+    public void execute(Object entity, Object builder) {
+        // This will be called for all entity types
+        System.out.println("Converting entity: " + entity.getClass().getSimpleName());
+    }
 }
 ```
 
