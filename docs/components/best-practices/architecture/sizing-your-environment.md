@@ -1,37 +1,37 @@
 ---
 id: sizing-your-environment
-title: Sizing your environment
+title: Size your environment
 tags:
   - Database
   - Performance
   - Hardware
   - Sizing
-description: "Define and size your environment for Camunda 8 appropriately by understanding the factors that influence hardware requirements."
+description: "Size your Camunda 8 environment by understanding the factors that influence it, including throughput, latency, payload size, and scalability behavior, among others."
 ---
 
-In order to define and size your environment for Camunda 8 appropriately, you need to understand the factors that influence hardware requirements. Then you can apply this knowledge to select the appropriate Camunda 8 SaaS hardware package or size your self-managed Kubernetes cluster.
+Size your Camunda 8 environment by understanding the factors that influence it, including throughput, latency, payload size, and scalability behavior, among others.
 
-## Understanding influencing factors
+After that, you’ll be able to select the appropriate Camunda 8 SaaS hardware package or size your Self-Managed Kubernetes cluster.
 
-Let's understand the important numbers.
+## Understand influencing factors
 
 ### Throughput
 
-Throughput defines, how many process instances can be executed in a certain timeframe.
+Throughput defines, how many process instances can be executed within a certain timeframe.
 
-It is typically easy to estimate the number of **process instances per day** you need to execute. If you only know the number of process instances per year, we recommend to divide this number by the 250 (average number of working days in a year).
+It is typically easy to estimate the number of **process instances per day** you need to execute. If you only know the number of process instances per year, divide it by 250 (average number of working days in a year).
 
-But the hardware sizing depends more on the **number of BPMN tasks** in a process model. For example, you will have a much higher throughput for processes with one service task than for processes with 30 service tasks.
+However, hardware sizing depends more on the **number of BPMN tasks** in a process model. For example, processes with one service task usually achieve much higher throughput than processes with 30 service tasks.
 
-If you already know your future process model, you can use this to count the number of tasks for your process. For example, the following onboarding process contains five service tasks in a typical execution.
+If you already know your future process model, use it to count the number of tasks in the process. For example, the following onboarding process contains five service tasks in a typical execution.
 
 <div bpmn="best-practices/sizing-your-environment-assets/customer_onboarding.bpmn" callouts="task1,task2,task3,task4,task5" />
 
-If you don't yet know the number of service tasks, we recommend to assume 10 service tasks as a rule of thumb.
+If you don't yet know the number of service tasks, assume 10 service tasks as a rule of thumb.
 
-The number of tasks per process allows you to calculate the required number of **tasks per day (tasks/day)** which can also be converted into **tasks per second (tasks/s)** (divide by 24 hours \* 60 minutes \* 60 seconds).
+The number of tasks per process allows you to calculate the required number of **tasks per day (tasks/day)**, which can also be converted into **tasks per second (tasks/s)** by dividing by 24 hours \* 60 minutes \* 60 seconds.
 
-**Example:**
+#### Example
 
 | Indicator                          |    Number | Calculation method | Comment                                     |
 | :--------------------------------- | --------: | :----------------: | :------------------------------------------ |
@@ -40,23 +40,27 @@ The number of tasks per process allows you to calculate the required number of *
 | Tasks per day                      |   100,000 |        \* 5        | Tasks in the process model as counted above |
 | Tasks per second                   |      1.16 |   / (24\*60\*60)   | Seconds per day                             |
 
-In most cases, we define throughput per day, as this time frame is easier to understand. But in high-performance use cases you might need to define the throughput per second.
+In most cases, throughput is defined per day, as this timeframe is easier to understand. However, in high-performance use cases, you may need to define the throughput per second.
 
 ### Peak loads
 
-In most scenarios, your load will be volatile and not constant. For example, your company might start 90% of their monthly process instances in the same day of the month. The **ability to handle those peaks is the more crucial requirement and should drive your decision** instead of looking at the average load.
+In most scenarios, load is volatile rather than constant. For example, a company might start 90% of its monthly process instances on a single day of the month. The **ability to handle these peaks is the more crucial requirement and should drive the decision**, rather than the average load.
 
-In the above example, that one day with the peak load defines your overall throughput requirements.
+In the example above, the peak day defines the overall throughput requirements.
 
-Sometimes, looking at peaks might also mean, that you are not looking at all 24 hours of a day, but only 8 business hours, or probably the busiest 2 hours of a day, depending on your typical workload.
+In some cases, planning for peak load also means focusing on a shorter time window, such as eight business hours, or even the busiest two hours of the day, depending on the typical workload.
 
 ### Latency and cycle time
 
-In some use cases, the cycle time of a process (or sometimes even the cycle time of single tasks) matter. For example, you want to provide a REST endpoint, that starts a process instance to calculate a score for a customer. This process needs to execute four service tasks, but the REST request should return a response synchronously, no later than 250 milliseconds after the request.
+In some use cases, the cycle time of a process (or even individual tasks) matters. For example, a REST endpoint might start a process instance to calculate a customer score. The process executes four service tasks, but the request must return synchronously within 250 milliseconds.
 
-While the cycle time of service tasks depends very much on what you do in these tasks, the overhead of the workflow engine itself can be measured. In an experiment with Camunda 8 1.2.4, running all worker code in the same GCP zone as Camunda 8, we measured around 10ms processing time per process node and approximately 50 ms latency to process service tasks in remote workers. Hence, to execute 4 service tasks results in 240 ms workflow engine overhead.
+While service task cycle time depends on the work performed in each task, the workflow engine overhead itself can be measured. In an experiment with Camunda 8 1.2.4, with all worker code running in the same GCP zone as Camunda 8, measured overhead was about 10 ms per process node and about 50 ms of latency for service tasks handled by remote workers. As a result, executing four service tasks adds roughly 240 ms of workflow engine overhead.
 
-The closer you push throughput to the limits, the more latency you will get. This is basically, because the different requests compete for hardware resources, especially disk write operations. As a consequence, whenever cycle time and latency matters to you, you should plan for hardware buffer to not utilize your cluster too much. This makes sure, your latency does not go up because of resource contention. A good rule of thumb is to multiply your average load by 20. This means, you cannot only accommodate unexpected peak loads, but also have more free resources on average, keeping latency down.
+The closer throughput gets to the cluster’s limits, the higher latency becomes, because requests compete for hardware resources (especially disk writes). When cycle time and latency are important, plan for sufficient headroom and avoid running the cluster near full utilization to prevent latency spikes from resource contention.
+
+:::tip
+As a rule of thumb, size for 20× the average load to accommodate peaks and keep latency low.
+:::
 
 | Indicator                                                      |    Number | Calculation method | Comment                                                                                 |
 | :------------------------------------------------------------- | --------: | :----------------: | :-------------------------------------------------------------------------------------- |
@@ -114,21 +118,19 @@ Using your throughput and retention settings, you can now calculate the required
 | Disk space                 |     \* 21 kib      |      72.10 GiB |                                                                                                    |
 | **Sum**                    |                    | **113.87 GiB** |                                                                                                    |
 
-## Understanding sizing and scalability behavior
+### Scalability
 
-Spinning up a Camunda 8 Cluster means you run multiple components that all need resources in the background, like the Zeebe Broker, Elasticsearch (as the database for Operate, Tasklist, and Optimize), Operate, Tasklist, and Optimize. All those components need to be equipped with resources.
+Running a Camunda 8 cluster means operating multiple components that all require resources, such as the Zeebe broker, Elasticsearch (the database for Operate, Tasklist, and Optimize), and the Operate, Tasklist, and Optimize applications themselves. These components run in a clustered setup to provide high availability, fault tolerance, and resilience.
 
-All components are clustered to provide high-availability, fault-tolerance and resiliency.
+Zeebe scales horizontally by adding more cluster nodes (pods). However, scaling is **limited by the configured number of [partitions](/components/zeebe/technical-concepts/partitions.md)**, because work within a single partition cannot be parallelized by design. Therefore, you must configure enough partitions to fully utilize your hardware. The **[number of partitions can be scaled up](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) after the cluster is initially provisioned**, but not yet scaled down.
 
-Zeebe scales horizontally by adding more cluster nodes (pods). This is **limited by the [number of partitions](/components/zeebe/technical-concepts/partitions.md)** configured for a Zeebe cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your hardware. The **[number of partitions can be scaled up](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) after the cluster is initially provisioned**, but not yet scaled down.
+If you expect load to grow over time, configure more partitions than you need today as a buffer. For example, four times your current requirement. This typically has only a small impact on performance.
 
-If you anticipate the load increasing over time, prepare by configuring more partitions than you currently need as a buffer. For example, you could multiply the number of partitions you need for your current load by four to add a buffer. This typically has just a small impact on performance.
+Camunda 8 runs on Kubernetes, and each component runs as a pod with assigned resources. You can also scale resources vertically (increase or decrease CPU and memory) within limits, but vertical scaling doesn’t always increase throughput because components depend on each other. In general, start with the minimal hardware package described below and adjust based on benchmarks.
 
-Camunda 8 runs on Kubernetes. Every component is operated as a so-called pod, that gets resources assigned. These resources can be vertically scaled (=get more or less hardware resources assigned dynamically) within certain limits. Note that vertically scaling not always results in more throughput, as the various components have dependencies on each other. This is a complex topic and requires running experiments with benchmarks. In general, we recommend to start with the minimalistic hardware package as described below. If you have further requirements, you use this as a starting point to increase resources.
+Camunda licensing does not depend on the provisioned hardware resources, so you can size according to your needs.
 
-Note that Camunda licensing does not depend on the provisioned hardware resources, making it easy to size according to your needs.
-
-## Sizing your runtime environment
+## Size your runtime environment
 
 First, calculate your requirements using the information provided above, taking the example calculations from above:
 
@@ -216,7 +218,7 @@ Such a cluster can serve roughly 65 tasks per second as a peak load, and it can 
 |                                    | vCPU \[cores\]      | 0.2     | 0.2   |
 |                                    | Mem \[GB\] limit    | 0.3     | 0.3   |
 
-## Planning non-production environments
+## Plan non-production environments
 
 All clusters can be used for development, testing, integration, Q&A, and production. In Camunda 8 SaaS, production and test environments are organized via separate organizations within Camunda 8 to ease the management of clusters, while also minimizing the risk to accidentally accessing a production cluster.
 
@@ -237,10 +239,12 @@ Ideally, every active developer runs its own cluster, so that the workflow engin
 
 However, some customers do share a Camunda 8 cluster amongst various developers for economic reasons. This can work well if everybody is aware of the problems that can arise.
 
-## Running experiments and benchmarks
+## Run experiments and benchmarks
 
-If you are in doubt about which package to choose, you can do a load test with a representative workload with the target hardware package. This will help you decide if the specific package can serve your needs.
+If you’re unsure which package to choose, run a load test with a representative workload on the target hardware package. This will help you determine whether the package meets your needs.
 
-This is recommended if you exceed the above numbers of three million process instances per day.
+:::tip
+Camunda recommends this if you exceed three million process instances per day.
+:::
 
 Take a look at the [Camunda 8 benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) as a starting point for your own benchmarks.
