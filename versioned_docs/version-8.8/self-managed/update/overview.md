@@ -22,7 +22,7 @@ Choose the upgrade guide that matches how your environment is deployed:
 :::tip Dual-region Helm deployments
 If you are upgrading a dual-region Helm deployment, follow the standard Helm upgrade guide and then complete the additional dual-region steps.
 
-<p><a href="../run-admin-upgrade" class="link-arrow">Camunda 8.7 to 8.8 Dual-Region Upgrade</a></p>
+<p><a href="../helm/upgrade-hc-870-880-dual-region" class="link-arrow">Camunda 8.7 to 8.8 Dual-Region Upgrade</a></p>
 :::
 
 ## Docker Compose deployments
@@ -31,7 +31,7 @@ Docker Compose is supported for development and testing environments only.
 
 Camunda does not provide an automated upgrade process for Docker Compose deployments. To upgrade, manually update each component by following the component upgrade guide:
 
-<p><a href="/self-managed/update/components/870-to-880.md" class="link-arrow">Component upgrade from 8.7 to 8.8</a></p>
+<p><a href="../components/870-to-880" class="link-arrow">Component upgrade from 8.7 to 8.8</a></p>
 
 With Camunda 8.8, the default `docker-compose.yaml` deploys the Orchestration Cluster and connectors. Web Modeler must be deployed using a separate Docker Compose configuration.
 
@@ -43,7 +43,7 @@ Some upgrades require additional component-level steps depending on which compon
 
 Follow the upgrade guide for your deployment method, and refer to this guide for any component-specific changes or migrations required for your setup.
 
-<p><a href="/self-managed/update/components/870-to-880.md" class="link-arrow">Component upgrade from 8.7 to 8.8</a></p>
+<p><a href="../components/870-to-880" class="link-arrow">Component upgrade from 8.7 to 8.8</a></p>
 
 ## Release notes and changes in 8.8
 

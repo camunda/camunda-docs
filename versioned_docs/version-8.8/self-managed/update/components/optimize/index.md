@@ -24,12 +24,12 @@ Review Optimize-specific changes introduced in 8.8, including supported database
 
 Optimize upgrades must be performed sequentially. If your Optimize deployment is running a version earlier than 8.7, complete the required intermediate upgrades before upgrading to 8.8.
 
-- <a href="../../../8.7/self-managed/optimize-deployment/migration-update/camunda-8/8.6-to-8.7.md" target="_blank" rel="noopener noreferrer">Optimize update notes (8.6 to 8.7)</a>
-- <a href="../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6.md" target="_blank" rel="noopener noreferrer">Optimize update notes (8.5/3.13 to 8.6)</a>
-- <a href="../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5.md" target="_blank" rel="noopener noreferrer">Optimize update notes (8.4/3.12 to 8.5/3.13)</a>
-- <a href="../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4.md" target="_blank" rel="noopener noreferrer">Optimize update notes (8.3/3.11 to 8.4/3.12)</a>
-- <a href="../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3.md" target="_blank" rel="noopener noreferrer">Optimize update notes (3.10 to 8.3/3.11)</a>
-- <a href="../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10.md" target="_blank" rel="noopener noreferrer">Optimize update notes (3.9.x to 3.10)</a>
-- <a href="../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-to-3.9.md" target="_blank" rel="noopener noreferrer">Optimize update notes (3.9-preview-x to 3.9.x)</a>
-- <a href="../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview.md" target="_blank" rel="noopener noreferrer">Optimize update notes (3.8.x to 3.9.x-preview-1)</a>
-- <a href="../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8.md" target="_blank" rel="noopener noreferrer">Optimize update notes (3.7.x to 3.8.x)</a>
+- <a href="../../../../8.7/self-managed/optimize-deployment/migration-update/camunda-8/8.6-to-8.7" target="_blank" rel="noopener noreferrer">Optimize update notes (8.6 to 8.7)</a>
+- <a href="../../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6" target="_blank" rel="noopener noreferrer">Optimize update notes (8.5/3.13 to 8.6)</a>
+- <a href="../../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5" target="_blank" rel="noopener noreferrer">Optimize update notes (8.4/3.12 to 8.5/3.13)</a>
+- <a href="../../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4" target="_blank" rel="noopener noreferrer">Optimize update notes (8.3/3.11 to 8.4/3.12)</a>
+- <a href="../../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3" target="_blank" rel="noopener noreferrer">Optimize update notes (3.10 to 8.3/3.11)</a>
+- <a href="../../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10" target="_blank" rel="noopener noreferrer">Optimize update notes (3.9.x to 3.10)</a>
+- <a href="../../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9" target="_blank" rel="noopener noreferrer">Optimize update notes (3.9-preview-x to 3.9.x)</a>
+- <a href="../../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1" target="_blank" rel="noopener noreferrer">Optimize update notes (3.8.x to 3.9.x-preview-1)</a>
+- <a href="../../../../8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8" target="_blank" rel="noopener noreferrer">Optimize update notes (3.7.x to 3.8.x)</a>
