@@ -41,6 +41,14 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
 
+#### Expanded RDBMS support
+
+<!-- https://github.com/camunda/product-hub/issues/3128 -->
+
+Camunda 8 Run now supports using any of the supported secondary storage relational databases instead of the default H2.
+
+This allows you to configure your local environment to match your production deployments, enabling deeper testing, faster debugging, and easier team onboarding.
+
 #### Streamline your Camunda 8 Run experience
 
 <!-- https://github.com/camunda/product-hub/issues/2866 -->
@@ -53,19 +61,17 @@ A revamped Java detection guided setup, log cleanup options, and better defaults
 
 <p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
 
-#### C8 Run supports other RDBMS (other than H2)
-
-<!-- https://github.com/camunda/product-hub/issues/3128 -->
-
-Camunda 8’s C8 Run distribution now supports configuration of all relational databases that are supported as a secondary storage, alongside H2. Developers can match their local environment to production deployments, enabling deeper testing, faster debugging, and easier team onboarding.
-
 ### Connectors
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
 #### Fetch Active Process Definitions
 
 <!-- https://github.com/camunda/product-hub/issues/2782 -->
 
-_Release notes needed_
+The connector runtime now activates inbound connectors for earlier process versions if they have active instances waiting on message subscriptions.
+
+Previously, only inbound connectors from the latest process version were activated, which could prevent active instances of older versions from completing.
 
 #### Multi-Region: Support connectors as part of automation cluster in 2 Region Setup
 
@@ -75,14 +81,13 @@ _Release notes needed_
 
 ### Console
 
-#### New regions are available for SaaS clusters on Amazon Web Services: SaaS region: AWS US-East-2
+#### AWS US-East-2 region available for SaaS
 
 <!-- https://github.com/camunda/product-hub/issues/3274 -->
 
-Camunda SaaS now available in AWS US East (Ohio)
-Camunda 8 SaaS is now available in a new U.S. region — AWS US East (us-east-2). This expansion allows customers to deploy orchestration workloads with full U.S. data residency and improved regional stability.
+Camunda 8 SaaS is now available in a new **AWS US East (us-east-2)** region in North America, allowing you to deploy orchestration workloads with full US data residency and improved regional stability.
 
-Need to add to support announcements as well
+<p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
 
 ### Modeler
 
