@@ -9,6 +9,9 @@ tags:
 description: "Size your Camunda 8 environment by understanding the factors that influence it, including throughput, latency, payload size, and scalability behavior, among others."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Size your Camunda 8 environment by understanding the factors that influence it, including throughput, latency, payload size, and scalability behavior, among others.
 
 After that, you’ll be able to select the appropriate Camunda 8 SaaS hardware package or size your Self-Managed Kubernetes cluster.
@@ -71,21 +74,23 @@ As a rule of thumb, size for 20× the average load to accommodate peaks and keep
 
 ### Payload size
 
-Every process instance can hold a payload (known as [process variables](/components/concepts/variables.md)). The payload of all running process instances must be managed by the runtime workflow engine, and all data of running and ended process instances is also forwarded to Operate and Optimize.
+Every process instance can hold a payload (known as [process variables](/components/concepts/variables.md)). The runtime workflow engine must manage the payload of all running process instances, and the data for both running and completed process instances is also forwarded to Operate and Optimize.
 
 The data you attach to a process instance (process variables) influences resource requirements. For example, it makes a big difference if you only add one or two strings (requiring around 1 KB of space) to your process instances, or a full JSON document containing 1 MB. Hence, the payload size is an important factor when looking at sizing.
 
+The data attached to a process instance affects resource requirements. For example, there is a significant difference between storing one or two strings (around one KB) and storing a full JSON document of one MB. Therefore, payload size is an important sizing factor.
+
 There are a few general rules regarding payload size:
 
-- The maximum [variable size per process instance is limited](/components/concepts/variables.md#variable-size-limitation), currently to roughly 3 MB.
-- We don't recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/components/best-practices/development/handling-data-in-processes.md).
-- Every [partition](/components/zeebe/technical-concepts/partitions.md) of the Zeebe installation can typically handle up to 1 GB of payload in total. Larger payloads can lead to slower processing. For example, if you run one million process instances with 4 KB of data each, you end up with 3.9 GB of data, and you should run at least four partitions. In reality, this typically means six partitions, as you want to run the number of partitions as a multiple of the replication factor, which by default is three.
+- The maximum [variable size per process instance is limited](/components/concepts/variables.md#variable-size-limitation), currently to roughly three MB.
+- Storing large amounts of data in the process context is not recommended. See [Best practices on handling data in processes](/components/best-practices/development/handling-data-in-processes.md).
+- Each [partition](/components/zeebe/technical-concepts/partitions.md) in a Zeebe installation can typically handle up to one GB of total payload. Larger payloads can slow down processing. For example, running one million process instances with four KB of data each results in about 3.9 GB of data, so at least four partitions are needed. In practice, this often means six partitions, because the number of partitions is typically configured as a multiple of the replication factor (three by default).
 
-The payload size also affects disk space requirements, as described in the next section.
+Payload size also affects disk space requirements. See [Disk space](#disk-space) for more details.
 
 ### Disk space
 
-The workflow engine itself will store data along every process instance, especially to keep the current state persistent. This is unavoidable. In case there are user tasks, data is also sent to Tasklist and kept there, until tasks are completed.
+The workflow engine stores data for every process instance, especially to keep the current state persistent. This is unavoidable. If user tasks are involved, data is also sent to Tasklist and kept there until the tasks are completed.
 
 Furthermore, data is also sent from Operate and Optimize, which store data in Elasticsearch. These tools keep historical audit data for the configured retention times. The total amount of disk space can be reduced by using **data retention settings**. We typically delete data in Operate after 30 to 90 days, but keep it in Optimize for a longer period of time to allow more analysis. A good rule of thumb is something between 6 and 18 months.
 
@@ -132,18 +137,20 @@ Camunda licensing does not depend on the provisioned hardware resources, so you 
 
 ## Size your runtime environment
 
-First, calculate your requirements using the information provided above, taking the example calculations from above:
+To size your Camunda 8 environment, first calculate your requirements.
+Once defined, select a hardware package that meets them.
 
-- Throughput: 20,000 process instances / day
-- Disk space: 114 GB
+<Tabs groupId="environment" defaultValue="saas" values={
+[
+{ label: 'SaaS', value: 'saas', },
+{ label: 'Self-Managed', value: 'self-managed', },
+]}>
 
-Now you can select a hardware package that can cover these requirements. In this example this fits well into a cluster of size 2x.
+<TabItem value="saas">
 
-### Camunda 8 SaaS
+Camunda 8 defines four [cluster sizes](/components/concepts/clusters.md#cluster-size) to choose from (1x, 2x, 3x, and 4x) after you have chosen your [cluster type](/components/concepts/clusters.md#cluster-type). The following table gives you an indication of the requirements each cluster size can support.
 
-Camunda 8 defines four [cluster sizes](/components/concepts/clusters.md#cluster-size) you can select from (1x, 2x, 3x, and 4x) after you have chosen your [cluster type](/components/concepts/clusters.md#cluster-type). The following table gives you an indication of what requirements you can fulfill with each cluster size.
-
-:::note
+:::important
 Contact your Customer Success Manager to increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
 :::
 
@@ -178,14 +185,16 @@ Data retention can be adjusted by Camunda on request (up to certain limits). You
 Why is the total number of process instances stored that low? This is related to limited resources provided to Elasticsearch, yielding performance problems with too much data stored there. By increasing the available memory to Elasticsearch you can also increase that number. At the same time, even with this rather low number, you can always guarantee the throughput of the core workflow engine during peak loads, as this performance is not influenced. Also, you can always increase memory for Elasticsearch later on if it is required.
 :::
 
-### Camunda 8 Self-Managed
+</TabItem>
 
-Provisioning Camunda 8 onto your Self-Managed Kubernetes cluster might depend on various factors. For example, most customers already have their own teams providing Elasticsearch for them as a service.
+<TabItem value="self-managed">
 
-However, the following example shows a possible configuration which is close to a cluster of size 1x in Camunda 8 SaaS, which can serve as a starting point for your own sizing.
+Provisioning Camunda 8 on a Self-Managed Kubernetes cluster can depend on various factors. For example, many customers already have teams that provide Elasticsearch as a service.
+
+However, the following example shows a possible configuration that is close to a 1x Camunda 8 SaaS cluster and can serve as a starting point for sizing.
 
 :::note
-Such a cluster can serve roughly 65 tasks per second as a peak load, and it can store up to 100,000 process instances in Elasticsearch (in-flight and history) before running out of disk-space.
+Such a cluster can handle roughly 65 tasks per second at peak load and can store up to 100,000 process instances in Elasticsearch (in-flight and historical) before running out of disk space.
 :::
 
 |                                    |                     | request | limit |
@@ -218,26 +227,31 @@ Such a cluster can serve roughly 65 tasks per second as a peak load, and it can 
 |                                    | vCPU \[cores\]      | 0.2     | 0.2   |
 |                                    | Mem \[GB\] limit    | 0.3     | 0.3   |
 
+</TabItem>
+</Tabs>
+
 ## Plan non-production environments
 
-All clusters can be used for development, testing, integration, Q&A, and production. In Camunda 8 SaaS, production and test environments are organized via separate organizations within Camunda 8 to ease the management of clusters, while also minimizing the risk to accidentally accessing a production cluster.
+All clusters can be used for development, testing, integration, Q&A, and production. In Camunda 8 SaaS, production and test environments are typically separated into different organizations to simplify cluster management and reduce the risk of accidentally accessing a production cluster.
 
-Note that functional unit tests that are written in Java and use [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test/), will use an in-memory broker in unit tests, so no development cluster is needed for this use case.
+Functional unit tests written in Java using [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test/) run with an in-memory broker, so no development cluster is required for this use case.
 
-For typical integration or functional test environments, you can normally just deploy a small cluster, like the one shown above, even if your production environment is sized bigger. This is typically sufficient, as functional tests typically run much smaller workloads.
+For most integration or functional test environments, a small cluster (like the one shown above) is usually sufficient, even if the production environment is larger, because test workloads are typically much smaller.
 
-Load or performance tests ideally run on the same sizing configuration as your production instance to yield reliable results.
+:::tip
+Load and performance tests should ideally run on the same sizing configuration as production to produce reliable results.
+:::
 
-A typical customer set-up consists of:
+A typical customer setup includes:
 
-- 1 Production cluster
-- 1 Integration or pre-prod cluster (equal in size to your anticipated production cluster if you want to run load tests or benchmarks)
-- 1 Test cluster
-- Multiple developer clusters
+- A production cluster.
+- An integration or pre-production cluster (sized like production if running load tests or benchmarks).
+- A test cluster.
+- Multiple developer clusters.
 
-Ideally, every active developer runs its own cluster, so that the workflow engine does not need to be shared amongst developers. Otherwise, clusters are not isolated, which can lead to errors if for example developer A deploys a new version of the same process as developer B. Typically, developer clusters can be deleted when they are no longer used, as no data needs to be kept, so you might not need one cluster per developer that works with Camunda 8 at some point in time. And using in-memory unit tests further reduces the contention on developer clusters.
+Ideally, each active developer has their own cluster so the workflow engine isn’t shared. Shared clusters are not isolated and can lead to issues. For example, if two developers deploy different versions of the same process. Developer clusters can usually be deleted when no longer needed, since no data must be retained, and in-memory unit tests further reduce contention.
 
-However, some customers do share a Camunda 8 cluster amongst various developers for economic reasons. This can work well if everybody is aware of the problems that can arise.
+Some customers share a Camunda 8 cluster across developers for cost reasons. This can work, as long as everyone is aware of the trade-offs.
 
 ## Run experiments and benchmarks
 
