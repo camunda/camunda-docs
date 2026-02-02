@@ -554,6 +554,19 @@ The following values are required for OAuth authentication:
 
 For general deployment pitfalls, visit the [deployment troubleshooting guide](self-managed/operational-guides/troubleshooting.md).
 
+### Persistent volume reclaim policy
+
+OpenShift StorageClasses often default to a `Delete` reclaim policy, which means persistent volume data is permanently deleted when a PVC is removed. This can lead to complete and unrecoverable data loss for Orchestration Cluster brokers.
+
+Ensure your StorageClass uses a `Retain` reclaim policy for production deployments. Verify your configuration:
+
+```bash
+oc get storageclass
+# RECLAIMPOLICY should show "Retain", not "Delete"
+```
+
+For more details, see the [production install guide](/self-managed/deployment/helm/install/production/index.md#persistent-volume-reclaim-policy).
+
 ### Security Context Constraints (SCCs)
 
 [Security Context Constraints (SCCs)](https://docs.openshift.com/container-platform/latest/authentication/managing-security-context-constraints.html) are a set of conditions that a pod must adhere to in order to be accepted into the system. They define the security conditions under which a pod operates.

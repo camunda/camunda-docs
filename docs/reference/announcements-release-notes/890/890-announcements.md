@@ -18,23 +18,43 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 - See [release notes](/reference/announcements-release-notes/890/890-release-notes.md) to learn more about new features and enhancements.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
-
-:::
+  :::
 
 ## Supported environments
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Elasticsearch minimum version raised to 8.18.6+
+#### Elasticsearch minimum version raised to 8.19+
 
-The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.18.6 (previously 8.17.3).
+The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.19 (previously 8.16+).
 
-- This aligns with the updated `ELASTICSEARCH_VERSION=8.18.6` default used by Camunda 8 Run, Docker Compose, and Helm templates.
-- You should upgrade your Elasticsearch/OpenSearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
+- This aligns with the Elasticsearch 8 versions maintained by Elastic as of April 2025.
+- The default Elasticsearch version used by Camunda 8 Run, Docker Compose, and Helm templates has been updated to `8.19.9+` accordingly.
+- Upgrade your Elasticsearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
+- For best results, Camunda recommends upgrading to the latest supported Elasticsearch 9.2+ to take advantage of new features and improvements.
+
+<p className="link-arrow">[OpenSearch and Elasticsearch support](/reference/supported-environments.md#opensearch-and-elasticsearch-support)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenSearch minimum version raised to 2.19+
+
+The minimum supported OpenSearch version for the Orchestration cluster and Optimize is now 2.19+ (previously 2.17+).
+
+- This aligns with the OpenSearch versions maintained as of April 2025.
+- Upgrade your OpenSearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
+- For best results, Camunda recommends upgrading to the latest supported OpenSearch 3.4+ to take advantage of new features and improvements.
 
 <p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
@@ -65,6 +85,21 @@ Camunda 8.9 adds support for the AWS Paris region in Camunda 8 SaaS.
 #### OpenJDK 25 support
 
 Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration Cluster, Connectors, Optimize, and supporting tooling. You can now run Self-Managed deployments on OpenJDK 21–25 without additional configuration changes.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Support for latest Elasticsearch and OpenSearch versions
+
+Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to take advantage of the latest database features and releases.
+
+<p className="link-arrow">[OpenSearch and Elasticsearch support](/reference/supported-environments.md#opensearch-and-elasticsearch-support)</p>
 
 </div>
 </div>
@@ -111,6 +146,16 @@ This change aligns with the Spring Boot support policy, as OSS support for Sprin
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+#### Resource deletion endpoint now has response body
+Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{resourceKey}/deletion` in the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) now returns a response body. The Camunda Java client has been updated to support this change.
+
+</div>
+</div>
 ### Connectors
 
 <div className="release-announcement-row">
