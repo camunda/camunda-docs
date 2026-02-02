@@ -2332,11 +2332,6 @@
           ]
         }
       ]
-    },
-    {
-      "type": "link",
-      "label": "Upgrade to Camunda 8.8",
-      "href": "../../../../docs/self-managed/update/admin-upgrade-overview"
     }
   ]
 }
