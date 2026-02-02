@@ -32,7 +32,7 @@ This release focuses primarily on consolidation and deprecation work to simplify
 
 ### Identity Keycloak now requires v25 or v26 <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](/self-managed/components/components-upgrade/860-to-870.md#identity).
+Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](versioned_docs/version-8.7/self-managed/operational-guides/update-guide/860-to-870.md#identity).
 
 ### Spring Zeebe SDK now requires Spring Boot 3.4.x <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -150,7 +150,7 @@ The configuration for the external database used by the Web Modeler REST API has
 ##### Bitnami Docker repository migration
 
 The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
-See [Bitnami Docker repository migration](/self-managed/deployment/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
+See [Bitnami Docker repository migration](/self-managed/update/helm/index.md#bitnami-docker-repository-migration) for migration details.
 
 #### Adjustments
 
@@ -170,4 +170,4 @@ Although the official SDK is largely compatible with the community library, some
 
 We recommend updating the configuration to match the new property format of the [Spring Zeebe SDK](/apis-tools/camunda-spring-boot-starter/getting-started.md) to avoid any issues. The old properties will be removed in a future release.
 
-For more information, see the [update guide](/self-managed/components/components-upgrade/860-to-870.md#connectors) and the [connectors configuration guide](/self-managed/components/connectors/connectors-configuration.md).
+For more information, see the [update guide](versioned_docs/version-8.7/self-managed/operational-guides/update-guide/860-to-870.md#connectors) and the [connectors configuration guide](/self-managed/components/connectors/connectors-configuration.md).

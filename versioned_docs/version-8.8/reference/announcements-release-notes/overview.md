@@ -51,7 +51,7 @@ Release announcements include:
 
 :::info
 
-- See [upgrade guides](/self-managed/components/components-upgrade/introduction.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
+- See [upgrade guides](/self-managed/update/components/introduction.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
 - See [supported environments](/reference/supported-environments.md) for environments and technologies supported by Camunda 8.
 
 :::
