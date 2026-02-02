@@ -287,9 +287,9 @@ docker run -d --name camunda-mariadb \
   -p 3306:3306 mariadb:11.4
 ```
 
-**Notes**
-
-- No extra driver is required; MariaDB ships with the distribution.
+:::note
+No extra driver is required; MariaDB ships with the distribution.
+:::
 
 </TabItem>
 <TabItem value="mysql">
@@ -318,10 +318,11 @@ docker run -d --name camunda-mysql \
   -p 3306:3306 mysql:8.4
 ```
 
-**Notes**
+:::note
+MySQL requires the official Connector/J driver. Copy the JAR into `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/mysql-connector.jar` to `./c8run start`.
 
-- MySQL requires the official Connector/J driver. Copy the JAR into `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/mysql-connector.jar` to `./c8run start`.
-- Ensure the JDBC URL uses the host port you expose (3306 in the example above).
+Ensure the JDBC URL uses the host port you expose (3306 in the example above).
+:::
 
 </TabItem>
 <TabItem value="oracle">
@@ -350,9 +351,9 @@ docker run -d --name camunda-oracle \
   gvenzl/oracle-free:23-slim
 ```
 
-**Notes**
-
-- Download the Oracle JDBC driver (for example, `ojdbc11.jar`) and place it in `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/ojdbc11.jar`.
+:::note
+Download the Oracle JDBC driver (for example, `ojdbc11.jar`) and place it in `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/ojdbc11.jar`.
+:::
 
 </TabItem>
 <TabItem value="mssql">
