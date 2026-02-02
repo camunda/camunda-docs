@@ -585,6 +585,78 @@ Only one of `timeDate`, `timeCycle`, or `timeDuration` can be defined per templa
 
 :::
 
+### Conditional event definition property: `bpmn:ConditionalEventDefinition#property`
+
+| **Binding `type`**         | `bpmn:ConditionalEventDefinition#property`                                                                        |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`                                                                                |
+| **Binding parameters**     | `name`: The name of the property.<br/>Supported property: `condition`.                                            |
+| **Mapping result**         | `<bpmn:conditionalEventDefinition><bpmn:condition>[userInput]</bpmn:condition></bpmn:conditionalEventDefinition>` |
+
+The `bpmn:ConditionalEventDefinition#property` binding allows you to configure the condition expression for [conditional events](../../bpmn/conditional-events/).
+This binding is only valid for templates of events with `bpmn:ConditionalEventDefinition` set via `elementType.eventDefinition`.
+
+```json
+{
+  "label": "Condition Expression",
+  "type": "String",
+  "value": "=orderTotal > 100",
+  "feel": "required",
+  "binding": {
+    "type": "bpmn:ConditionalEventDefinition#property",
+    "name": "condition"
+  }
+}
+```
+
+:::note
+The `condition` property requires a FEEL expression. When using `String` or `Text` input types, set `feel` to `required`.
+:::
+
+### Conditional filter: `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property`
+
+| **Binding `type`**         | `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property`                                |
+| -------------------------- | ------------------------------------------------------------------------------------------------- |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`                                                                |
+| **Binding parameters**     | `name`: The name of the property.<br/>Supported properties: `variableNames` and `variableEvents`. |
+| **Mapping result**         | `<zeebe:conditionalFilter [name]="[userInput]" />`                                                |
+
+The `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property` binding allows you to configure the conditional filter for [conditional events](../../bpmn/conditional-events/). The conditional filter controls which variable changes trigger the condition evaluation.
+
+```json
+[
+  {
+    "label": "Variable Names",
+    "type": "String",
+    "value": "orderTotal,discount",
+    "binding": {
+      "type": "bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property",
+      "name": "variableNames"
+    }
+  },
+  {
+    "label": "Variable Events",
+    "type": "String",
+    "value": "create,update",
+    "binding": {
+      "type": "bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property",
+      "name": "variableEvents"
+    }
+  }
+]
+```
+
+:::note
+
+**Property descriptions:**
+
+- **`variableNames`**: A comma-separated list of variable names that trigger condition evaluation when changed.
+- **`variableEvents`**: A comma-separated list of variable events (`create`, `update`) that trigger condition evaluation.
+
+When `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property` is used, `bpmn:ConditionalEventDefinition#property` with `condition` should also be set on the same element.
+
+:::
+
 ### Called element: `zeebe:calledElement`
 
 | **Binding `type`**         | `zeebe:calledElement`                                                                                          |
