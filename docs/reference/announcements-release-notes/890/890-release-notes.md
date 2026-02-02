@@ -112,19 +112,6 @@ You can now import a complete process application from the Camunda Marketplace�
 
 _Release notes needed_
 
-#### Support for Orchestration Cluster on AWS ECS (EC2+Fargate)
-
-<!-- https://github.com/camunda/product-hub/issues/3152 -->
-
-We’re excited to announce official support for running Camunda 8 orchestration clusters on AWS ECS. This release makes it easier and safer for teams that rely on ECS (including Fargate) to run Camunda 8 in production - without needing to adopt Kubernetes (EKS). The solution relies on AWS S3.
-
-What’s New
-ECS Guide - Validated deployment patterns for running brokers and related services on ECS with both EC2 and Fargate launch types.
-
-Build-in Storage Safety Guardrails - Checks and guidance to prevent unsafe configurations (e.g., multiple brokers writing to the same EFS volume).
-
-Cluster Membership Handling - Improved handling of broker restarts and ECS task scheduling to ensure stable cluster operation.
-
 #### Scheduling backup with the Orchestration cluster
 
 <!-- https://github.com/camunda/product-hub/issues/3032 -->
