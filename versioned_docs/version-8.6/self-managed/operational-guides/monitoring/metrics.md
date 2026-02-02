@@ -252,7 +252,3 @@ Zeebe comes with a pre-built dashboard, available in the repository:
 - The dashboard displays a healthy cluster topology, general throughput metrics, handled requests, exported events per second, disk and memory usage, and more.
 
 ![Grafana dashboard](assets/grafana-preview.png)
-
-:::tip
-You can also try out an [interactive dashboard](https://snapshots.raintank.io/dashboard/snapshot/Vbu3EHQMTI5Onh5RKuiS5J7QSMd7Sp5V) to learn about each panel and get an understanding of available data.
-:::
