@@ -30,7 +30,7 @@ Before making any changes:
 
 1. Identify the currently running Camunda version (for example, from startup logs or a `README.txt` file).
 1. Identify the target version you want to upgrade to.
-1. Confirm that the upgrade path does not skip a minor version. If it does, perform the required intermediate upgrades first. See [Upgrading from an earlier version](/self-managed/update/880/#upgrading-from-an-earlier-version).
+1. Confirm that the upgrade path does not skip a minor version. If it does, perform the required intermediate upgrades first. See [Upgrading from an earlier version](/self-managed/update/overview.md#upgrading-from-an-earlier-version).
 1. Review the component upgrade guide for any component-specific changes that apply to your setup. See [Upgrade Camunda components](/self-managed/update/components/introduction.md).
 1. Review the relevant release notes for behavioral changes or removed configuration options. See [Release notes overview](/reference/announcements-release-notes/overview.md).
 

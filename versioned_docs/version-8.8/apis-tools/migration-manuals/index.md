@@ -133,7 +133,7 @@ Ready to upgrade and migrate? Complete the following steps:
    - For Self-Managed environments, ensure your Orchestration Cluster is upgraded before upgrading your application clients.
    - Start with the [Self-Managed upgrade overview](/self-managed/update/overview.md) to plan the upgrade.
    - Review the relevant component and deployment upgrade guides as part of the cluster upgrade process:
-     - [Components upgrade guides](../../self-managed/update/components/introduction/)
+     - [Components upgrade guides](/self-managed/update/components/introduction.md)
      - [Helm upgrade guides](/self-managed/update/helm/index.md)
 
 2. Review the migration guides relevant to your setup:
