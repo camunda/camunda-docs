@@ -31,11 +31,208 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 </details>
 
+## 8.9.0-alpha4
+
+| Release date     | Changelog(s)                                                                                                                                                                               |
+| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 10 February 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha4)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha4)</li></ul> |
+
+### Camunda 8 Run
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
+
+#### Streamline your Camunda 8 Run experience
+
+<!-- https://github.com/camunda/product-hub/issues/2866 -->
+
+Camunda 8 Run is now easier to use with improved setup and configuration.
+
+The CLI includes a helpful usage page, clearer error messages, especially for Elasticsearch startup, and prominently displays connection properties and credential information.
+
+A revamped Java detection guided setup, log cleanup options, and better defaults for development environments (such as disk watermark thresholds) have been added. You can also start fresh using a new clean-state command, and the unified configuration file is now included and thoroughly documented.
+
+<p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
+
+#### C8 Run supports other RDBMS (other than H2)
+
+<!-- https://github.com/camunda/product-hub/issues/3128 -->
+
+Camunda 8’s C8 Run distribution now supports configuration of all relational databases that are supported as a secondary storage, alongside H2. Developers can match their local environment to production deployments, enabling deeper testing, faster debugging, and easier team onboarding.
+
+### Connectors
+
+#### Fetch Active Process Definitions
+
+<!-- https://github.com/camunda/product-hub/issues/2782 -->
+
+_Release notes needed_
+
+#### Multi-Region: Support connectors as part of automation cluster in 2 Region Setup
+
+<!-- https://github.com/camunda/product-hub/issues/2215 -->
+
+_Release notes needed_
+
+### Console
+
+#### New regions are available for SaaS clusters on Amazon Web Services: SaaS region: AWS US-East-2
+
+<!-- https://github.com/camunda/product-hub/issues/3274 -->
+
+Camunda SaaS now available in AWS US East (Ohio)
+Camunda 8 SaaS is now available in a new U.S. region — AWS US East (us-east-2). This expansion allows customers to deploy orchestration workloads with full U.S. data residency and improved regional stability.
+
+Need to add to support announcements as well
+
+### Modeler
+
+#### BPMN Conditional Events
+
+<!-- https://github.com/camunda/product-hub/issues/1733 -->
+
+Camunda 8 now supports BPMN Conditional Events, allowing users to start, continue, or interrupt process execution dynamically based on evaluated conditions. This enhancement provides first-class support for Conditional Start, Boundary, and Intermediate Catch Events, making process automation more expressive and migration from Camunda 7 smoother.
+
+#### Reliable Collaboration Locking in Web Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/3174 -->
+
+_Release notes needed_
+
+#### Download Whole Process Applications from Marketplace
+
+<!-- https://github.com/camunda/product-hub/issues/3164 -->
+
+You can now import a complete process application from the Camunda Marketplace—including all supported files (BPMN, DMN, forms, connector templates, and documentation)—in a single step with Web Modeler or via direct import links in Self-Managed environments. This simplifies adoption of marketplace best practices and reusable assets, accelerates onboarding, and reduces risk of incomplete or broken process deployments.
+
+### Orchestration Cluster
+
+#### Complete Unified Configuration for Orchestration cluster
+
+<!-- https://github.com/camunda/product-hub/issues/3129 -->
+
+_Release notes needed_
+
+#### Support for Orchestration Cluster on AWS ECS (EC2+Fargate)
+
+<!-- https://github.com/camunda/product-hub/issues/3152 -->
+
+We’re excited to announce official support for running Camunda 8 orchestration clusters on AWS ECS. This release makes it easier and safer for teams that rely on ECS (including Fargate) to run Camunda 8 in production - without needing to adopt Kubernetes (EKS). The solution relies on AWS S3.
+
+What’s New
+ECS Guide - Validated deployment patterns for running brokers and related services on ECS with both EC2 and Fargate launch types.
+
+Build-in Storage Safety Guardrails - Checks and guidance to prevent unsafe configurations (e.g., multiple brokers writing to the same EFS volume).
+
+Cluster Membership Handling - Improved handling of broker restarts and ECS task scheduling to ensure stable cluster operation.
+
+#### Scheduling backup with the Orchestration cluster
+
+<!-- https://github.com/camunda/product-hub/issues/3032 -->
+
+Scheduled Backups (cluster‑native): Configure backup intervals and retention directly in the Orchestration cluster. No external cron needed. Supports setting duration schedules, manual ad‑hoc backups, API‑based updates, metrics, and audit logs. Backwards compatible with existing backup commands.
+
+#### Modify Elements in the Multi-Instance Ad-hoc Subprocess
+
+<!-- https://github.com/camunda/product-hub/issues/3119 -->
+
+Operators can now dynamically activate, move, or remove element instances inside running multi-instance ad-hoc subprocesses—supporting parallel, sequential, and classic ad-hoc execution patterns. These new runtime capabilities, available in both Operate UI and the API, allow users to adapt, repair, and recover business processes on the fly, supporting flexibility for agentic automation, case management, and critical operations.
+
+#### Orchestration Cluster supports pre-configured entities for all Identity entities
+
+<!-- https://github.com/camunda/product-hub/issues/2446 -->
+
+You can now use declarative configuration for all Identity entities in Orchestration Cluster:
+
+Groups
+
+Tenants
+
+Roles
+
+Authorizations
+
+Assignments
+
+In previous releases it was already possible to use it for users, mapping rules and default role memberships.
+
+#### Migrate from Job-based user task to Camunda User Task with process instance migration
+
+<!-- https://github.com/camunda/product-hub/issues/2626 -->
+
+This release adds support to migrate active instances from legacy job‑based user tasks to modern, engine‑managed Camunda User Tasks through both the API and the Operate UI, as part of process instance migration.
+
+This capability enables customers to standardize on the Orchestration Cluster APIs and the recommended user task type ahead of the removal of job‑based user task querying and management in the consolidated API.
+
+#### Task permission management
+
+<!-- https://github.com/camunda/product-hub/issues/3122 -->
+
+This release enhances Camunda 8 Tasklist with granular task-level authorization integrated into the Tasklist UI and the orchestration cluster REST API.
+
+Key improvements include:
+
+Property-based task permissions:
+
+Users can be granted permission to view or work on a task based on task properties.
+
+Permissions apply when the assignee matches the current user, or when the user belongs to a candidate group or is listed as a candidate user.
+
+This ensures that all relevant participants - whether directly assigned or eligible to claim the task - have appropriate access.
+
+Applies consistently across both the Tasklist UI and the orchestration cluster REST API.
+
+Fine-grained security model:
+
+Visibility and action permissions are scoped at the individual task level, reducing unauthorized access and improving compliance alignment.
+This update strengthens security and usability, providing a clear, consistent, and secure user experience for task workers, managers, and integrations.
+
+#### User Operations Audit Log
+
+<!-- https://github.com/camunda/product-hub/issues/1732 -->
+
+Camunda 8.9 introduces a centralized, queryable audit log that records all critical user and client operations across process, identity, and user task domains. Teams can now trace who performed each action, when it occurred, what it affected, and whether it succeeded. Audit entries are available through Orchestration Cluster APIs and integrated into Operate, Tasklist, and Identity with built-in authorization controls.
+
+### RDBMS secondary storage
+
+#### Continuous backups with RDBMS as Secondary datastore
+
+<!-- https://github.com/camunda/product-hub/issues/2723 -->
+
+New Backup and Restore Mechanism for RDBMS: Enables customers to back up and restore Camunda when using RDBMS as a secondary datastore.
+
+Independent Backup Control Plans provide a method for handling primary and secondary backups separately while ensuring they align at restore time.
+
+Improved Disaster Recovery: Enhances the ability to recover Camunda instances with greater precision in data consistency.
+
+#### Reducing RTO with matching backups for RDMBS
+
+<!-- https://github.com/camunda/product-hub/issues/3031 -->
+
+New restore API syntax now supports timestamp flags --from and --to , enabling automatic selection of a compatible backup range. Paired with RDBMS, when no specific backup or timerange is specified, the tool is able to perform a restore to the latest known position with no user interaction. Ensures version compatibility across backups and offers an override via --allow-version-mismatch. This enhancement drastically reduces manual restore effort and enhances confidence in backup integrity.
+
+#### Production installation guide for C8 with RDBMS - helm installation
+
+<!-- https://github.com/camunda/product-hub/issues/3026 -->
+
+A new production installation guide for Camunda 8 is now available, delivering a fully supported, step-by-step resource for Kubernetes-based orchestration cluster deployment via Helm, with secondary storage in an RDBMS.
+
+#### Production installation guide for C8 with RDBMS - manual installation
+
+<!-- https://github.com/camunda/product-hub/issues/2740 -->
+
+The new Production Installation Guide for Camunda 8 with RDBMS (Manual Installation) provides platform administrators, database administrators, and development teams with a comprehensive, step-by-step resource for deploying and managing Camunda 8 using relational databases in production environments. This guide aims to dramatically simplify the RDBMS integration experience, align documentation with modern best practices, and minimize onboarding time and operational risk.
+
+#### Manual installation options support RDBMS for secondary storage
+
+<!-- https://github.com/camunda/product-hub/issues/2747 -->
+
+Camunda 8 orchestration clusters can now be installed manually (VM/bare metal/Java application) with full support for RDBMS (H2, PostgreSQL, Oracle, MariaDB) as secondary storage.
+
 ## 8.9.0-alpha3
 
-| Release date    | Changelog(s)                                                                                                                                                                               | Blog |
-| :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
-| 13 January 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha3)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha3)</li></ul> | -    |
+| Release date    | Changelog(s)                                                                                                                                                                               |
+| :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 13 January 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha3)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha3)</li></ul> |
 
 ### Agentic orchestration
 
