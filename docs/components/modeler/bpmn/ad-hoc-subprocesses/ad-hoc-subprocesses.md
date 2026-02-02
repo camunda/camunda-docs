@@ -91,7 +91,7 @@ Because a worker can activate multiple elements at once, and Zeebe creates a job
 
 In an ad-hoc sub-process handled by a job worker, the job worker decides which elements to activate and when the ad-hoc sub-process is complete.
 
-However, [Event sub-processes](/components/modeler/bpmn/event-subprocesses/event-subprocesses.md) are triggered by events, not by the job worker, so they can run outside the job worker's direct control. When an event sub-process finishes, it triggers the job worker again, handing control back so it can activate new elements (optionally canceling others) or complete the ad-hoc sub-process.
+However, [event sub-processes](../event-subprocesses/event-subprocesses.md) are triggered by events, not by the job worker, so they can run outside the job worker's direct control. When an event sub-process finishes, it triggers the job worker again, handing control back so it can activate new elements (optionally canceling others) or complete the ad-hoc sub-process.
 
 :::info Interrupting event sub-process
 An interrupting event sub-process is a special case: it cancels all active elements and completes the ad-hoc sub-process without waiting for the job worker to decide.
