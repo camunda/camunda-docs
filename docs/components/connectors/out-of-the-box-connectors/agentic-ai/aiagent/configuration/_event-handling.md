@@ -21,10 +21,7 @@ Consider the example scenario where the agent requested the execution of tools `
 
 The agent waits for all tool calls (including those that create user tasks, such as “Wait for user”) to complete before handling the event.
 
-Only after that, the job worker sends a new request to the LLM, including:
-
-- One message per completed tool.
-- Each message containing the **event payload**. For example, the timer or event subprocess handler output.
+Only after that, the job worker sends a new request to the LLM that includes one message per completed tool, each containing the corresponding event payload. For example, the timer or event subprocess handler output.
 
 For the example scenario, the following sequence of messages would be sent to the LLM after both tools complete:
 
@@ -49,6 +46,15 @@ For the example scenario, the following sequence of messages would be sent to th
 1. Tool A: `Tool A execution was cancelled`.
 1. Tool B: `Tool B result`.
 1. Event message: `Content from event message`.
+
+#### Event payload
+
+To provide additional data to the LLM from a handled event, create a `toolCallResult` variable from the event handling flow.
+
+The content of this variable is added to the LLM API request as a user message, after any tool call results, as follows:
+
+- If the event subprocess creates a non-empty `toolCallResult`, its contents are added as the event payload of the user message generated from the event.
+- If no `toolCallResult` is created, a generic message is added as the user message, describing that an interrupting/not interrupting event was handled.
 
 #### How event subprocesses work with the AI Agent Sub-process
 
