@@ -45,7 +45,7 @@ Select the operation to perform:
 ## Filters
 
 Filter the list of available data provided by the MCP server, such as tools, resources or prompts. If not configured, all tools provided by the MCP server will be available to the AI agent.
-It also prevents operations from being executed, when used for retrieval/execution operations, such as tool calls. 
+It also prevents operations from being executed, when used for retrieval/execution operations, such as tool calls.
 
 Below is an example for tool filtering - the same approach applies to resources and prompts.
 
