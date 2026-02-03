@@ -43,6 +43,13 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 ## B
 
+### Backpressure
+
+Backpressure is a protection mechanism that prevents [Zeebe brokers](#broker) from being overloaded when they receive more [client](#client) requests than they can process with acceptable latency. Zeebe brokers determine backpressure by using dynamic backpressure algorithms or - if enabled - flow control limits, which measure the rate of records written by the [exporter](#exporter). When backpressure is activated, client requests are rejected to maintain system stability.
+
+- [Backpressure](/self-managed/zeebe-deployment/operations/backpressure.md)
+- [Flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md)
+
 ### Bridge
 
 Synonym to "[Connector](#connector)".

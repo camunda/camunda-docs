@@ -156,6 +156,32 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 # 3. Specific content moves
 ##################################################################################
 
+# Fix broken links from camunda-platform-get-started README
+
+# Get started with Optimize
+RewriteRule ^docs/next/guides/improve-processes-with-optimize/?$ /docs/next/components/optimize/improve-processes-with-optimize/ [R=301,L]
+
+# Camunda 8 deployment guide
+RewriteRule ^docs/self-managed/platform-deployment/overview/?$ /docs/next/self-managed/deployment/ [R=301,L]
+
+# Sign up and log in
+RewriteRule ^docs/next/guides/getting-started/?$ /docs/components/saas/ [R=301,L]
+
+# Create a new cluster
+RewriteRule ^docs/guides/create-cluster/?$ /docs/components/console/manage-clusters/create-cluster/ [R=301,L]
+
+# Service task (microservice orchestration)
+RewriteRule ^docs/next/guides/orchestrate-microservices/?$ /docs/8.6/guides/orchestrate-microservices/ [R=301,L]
+
+# Connect to a mail provider
+RewriteRule ^docs/next/guides/configuring-out-of-the-box-connectors/?$ /docs/components/connectors/use-connectors/configuring-out-of-the-box-connectors/ [R=301,L]
+
+# Designing a process using BPMN
+RewriteRule ^docs/next/guides/automating-a-process-using-bpmn/?$ /docs/components/modeler/bpmn/automating-a-process-using-bpmn/ [R=301,L]
+
+# Create a user task form using Modeler
+RewriteRule ^docs/next/guides/utilizing-forms/?$ /docs/components/modeler/forms/utilizing-forms/ [R=301,L]
+
 #---------------------------------------------------------------------------------
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
@@ -231,6 +257,10 @@ RewriteRule ^docs/next/components/modeler/web-modeler/git-sync/?$ /docs/next/com
 
 ## Web Modeler folder restructure - moved to collaboration/
 RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
+
+# Removed power automate
+
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/power-automate/?$ /docs/components/connectors/introduction-to-connectors/ [R=301,L]
 
 # Add mapping rules
 RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules/?$ /docs/components/identity/mapping-rules/ [R=301,L]

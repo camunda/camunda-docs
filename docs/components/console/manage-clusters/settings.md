@@ -64,7 +64,7 @@ For details on how the REST APIs apply authorization when handling requests, see
 [Authentication and authorization](../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 :::
 
-- Enable this setting to use user task access restrictions in the cluster. Tasks assigned to users or candidate groups are only visible to assigned users or respective group members.
+- Enable this setting to use user task access restrictions in the cluster when Tasklist V1 is enabled. Tasks assigned to users or candidate groups are only visible to assigned users or respective group members.
 - Disable this setting if you do not want to use user task access restrictions in the cluster. Any user can see any task, regardless of the assignment. Use this mode in development environments to test assignment rules.
 
 Changes to this setting can take a few minutes to be applied, as it requires a Tasklist restart.
