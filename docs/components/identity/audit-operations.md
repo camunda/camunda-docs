@@ -15,7 +15,7 @@ To follow the steps in this guide, you must be [authorized to view operations in
 In Identity, you can audit all [`ADMIN` operations](../user-operations-audit-log/overview/recorded-operations.md#admin-operations):
 
 1. In the top navigation, click **Operations log**.
-2. To filter the log, click a column header.
+2. To sort the log, click a column header.
 
 ## Next steps
 

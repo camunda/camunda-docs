@@ -14,7 +14,7 @@ To follow the steps in this guide, you must be [authorized to view task history 
 
 1. On the **Tasks** page, click a task to audit.
 2. In the tasks detail view, click the **History** tab.
-3. To filter the log, click a column header.
+3. To sort the log, click a column header.
 4. To see the details of a particular operation, click the info icon at the end of the row.
 
 ## Next steps
