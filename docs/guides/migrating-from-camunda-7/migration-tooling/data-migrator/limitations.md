@@ -424,7 +424,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 ### Incident
 
 | Property               | Can be migrated |
-|------------------------|-----------------|
+| ---------------------- | --------------- |
 | incidentKey            | Yes             |
 | processDefinitionKey   | Yes             |
 | processDefinitionId    | Yes             |
