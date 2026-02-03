@@ -36,7 +36,17 @@ The value of a variable is stored as a JSON value. It can have one of the follow
 
 ## Variable size limitation
 
-Generally, there is a limit of 4 MB for the payload of a process instance. This 4 MB includes the variables and the workflow engine internal data, which means there is slightly less memory available for variables. The exact limitation depends on a few factors, but you can consider 3 MB as being safe. If in doubt, run a quick test case.
+Generally, there is a limit of 4 MB for the payload of a process instance. This 4 MB includes the variables and the workflow engine internal data, which means there is slightly less memory available for variables.
+
+However, due to how the workflow engine handles follow-up events, the **effective safe payload size is approximately 1.5 MB per process instance**. When follow-up events are processed, variable data is appended to subsequent events, which can cause the total event size to exceed the batch record size limit well before reaching the 4 MB threshold. This can result in `ExceededBatchRecordSizeException` errors.
+
+To avoid these exceptions in production environments:
+
+- **Keep your total variable payload under 1.5 MB per process instance** as a safe threshold.
+- **Allow a significant buffer** below even this limit to account for variations in event processing and workflow complexity.
+- **Test with production-like data volumes** to ensure your specific use case stays within safe limits.
+
+For more technical details about this limitation, see the related issue: [camunda/camunda#12873](https://github.com/camunda/camunda/issues/12873).
 
 :::note
 Regardless, we don't recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/components/best-practices/development/handling-data-in-processes.md).
