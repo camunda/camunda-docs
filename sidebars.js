@@ -162,6 +162,7 @@ module.exports = {
           Architecture: [
             "components/best-practices/architecture/deciding-about-your-stack",
             "components/best-practices/architecture/sizing-your-environment",
+            "components/best-practices/architecture/test-your-environment",
             "components/best-practices/architecture/understanding-human-tasks-management",
           ],
           Development: [
