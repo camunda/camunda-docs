@@ -69,7 +69,7 @@ A revamped Java detection guided setup, log cleanup options, and better defaults
 
 <!-- https://github.com/camunda/product-hub/issues/2782 -->
 
-The connector runtime now activates inbound connectors for earlier process versions if they have active instances waiting on message subscriptions. Previously, only inbound connectors from the latest process version were activated, which could prevent active instances of older versions from completing.
+The connectors runtime now activates inbound connectors for earlier process versions if they have active instances waiting on message subscriptions. Previously, only inbound connectors from the latest process version were activated, which could prevent active instances of older versions from completing.
 
 ### Console
 
@@ -105,7 +105,7 @@ _Release notes needed_
 
 You can now import a complete process application from the Camunda Marketplace (including all supported files such as BPMN, DMN, forms, connector templates, and documentation) in a single step in Web Modeler or via direct import links in Self-Managed environments.
 
-This simplifies adoption of marketplace best practices and reusable assets, accelerates onboarding, and reduces the risk of incomplete or broken process deployments.
+<p className="link-arrow">[Import resources into Web Modeler](/components/modeler/web-modeler/modeling/importing-resources.md)</p>
 
 ### Orchestration Cluster
 
@@ -114,6 +114,8 @@ This simplifies adoption of marketplace best practices and reusable assets, acce
 #### Unified configuration for the Orchestration Cluster
 
 <!-- https://github.com/camunda/product-hub/issues/3129 -->
+
+Camunda 8.8 introduced unified configuration for Orchestration Cluster components to let you define all essential cluster and component behavior in a single, centralized configuration system. Only the first partial set of unified configuration properties were introduced in Camunda 8.8.
 
 In Camunda 8.9, all remaining unified configuration property changes are complete.
 
