@@ -102,5 +102,5 @@ If you click the **Apply** button from the summary modal as described [here](#vi
 
 ## Next steps
 
-- [Monitor the operation status](./monitor-operation-status.md).
+- [Learn how to audit process instance operations](./audit-operations.md).
 - [Learn how to move a batch of process instances](./process-instance-batch-modification.md)
