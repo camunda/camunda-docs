@@ -432,13 +432,11 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | rootProcessInstanceKey | Yes             |
 | flowNodeInstanceKey    | Yes             |
 | flowNodeId             | Yes             |
-| scopeKey               | No              |
 | jobKey                 | No              |
 | errorType              | No              |
 | errorMessage           | Yes             |
 | errorMessageHash       | No              |
 | creationDate           | Yes             |
-| endDate                | No              |
 | state                  | Yes             |
 | treePath               | No              |
 | tenantId               | Yes             |
