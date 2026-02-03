@@ -65,13 +65,11 @@ A revamped Java detection guided setup, log cleanup options, and better defaults
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
-#### Fetch Active Process Definitions
+#### Fetch active process definitions
 
 <!-- https://github.com/camunda/product-hub/issues/2782 -->
 
-The connector runtime now activates inbound connectors for earlier process versions if they have active instances waiting on message subscriptions.
-
-Previously, only inbound connectors from the latest process version were activated, which could prevent active instances of older versions from completing.
+The connector runtime now activates inbound connectors for earlier process versions if they have active instances waiting on message subscriptions. Previously, only inbound connectors from the latest process version were activated, which could prevent active instances of older versions from completing.
 
 #### Multi-Region: Support connectors as part of automation cluster in 2 Region Setup
 
@@ -81,11 +79,13 @@ _Release notes needed_
 
 ### Console
 
-#### AWS US-East-2 region available for SaaS
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
+
+#### New AWS US East region
 
 <!-- https://github.com/camunda/product-hub/issues/3274 -->
 
-Camunda 8 SaaS is now available in a new **AWS US East (us-east-2)** region in North America, allowing you to deploy orchestration workloads with full US data residency and improved regional stability.
+A new Camunda 8 SaaS **AWS US East (us-east-2)** region in North America lets you deploy orchestration workloads with full US data residency and improved regional stability.
 
 <p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
 
@@ -95,7 +95,7 @@ Camunda 8 SaaS is now available in a new **AWS US East (us-east-2)** region in N
 
 <!-- https://github.com/camunda/product-hub/issues/1733 -->
 
-Camunda 8 now supports BPMN Conditional Events, allowing users to start, continue, or interrupt process execution dynamically based on evaluated conditions. This enhancement provides first-class support for Conditional Start, Boundary, and Intermediate Catch Events, making process automation more expressive and migration from Camunda 7 smoother.
+Camunda 8 now supports BPMN Conditional Events, allowing you to start, continue, or interrupt process execution dynamically based on evaluated conditions. This provides first-class support for Conditional Start, Boundary, and Intermediate Catch Events, making process automation more expressive and migration from Camunda 7 smoother.
 
 #### Reliable Collaboration Locking in Web Modeler
 
@@ -107,7 +107,7 @@ _Release notes needed_
 
 <!-- https://github.com/camunda/product-hub/issues/3164 -->
 
-You can now import a complete process application from the Camunda Marketplace—including all supported files (BPMN, DMN, forms, connector templates, and documentation)—in a single step with Web Modeler or via direct import links in Self-Managed environments. This simplifies adoption of marketplace best practices and reusable assets, accelerates onboarding, and reduces risk of incomplete or broken process deployments.
+You can now import a complete process application from the Camunda Marketplace (including all supported files such as BPMN, DMN, forms, connector templates, and documentation) in a single step with Web Modeler or via direct import links in Self-Managed environments. This simplifies adoption of marketplace best practices and reusable assets, accelerates onboarding, and reduces the risk of incomplete or broken process deployments.
 
 ### Orchestration Cluster
 
@@ -117,108 +117,97 @@ You can now import a complete process application from the Camunda Marketplace�
 
 _Release notes needed_
 
-#### Scheduling backup with the Orchestration cluster
+#### Schedule backups with the Orchestration cluster
 
 <!-- https://github.com/camunda/product-hub/issues/3032 -->
 
 Scheduled Backups (cluster‑native): Configure backup intervals and retention directly in the Orchestration cluster. No external cron needed. Supports setting duration schedules, manual ad‑hoc backups, API‑based updates, metrics, and audit logs. Backwards compatible with existing backup commands.
 
-#### Modify Elements in the Multi-Instance Ad-hoc Subprocess
+#### Modify elements in the Multi-Instance Ad-hoc Subprocess
 
 <!-- https://github.com/camunda/product-hub/issues/3119 -->
 
 Operators can now dynamically activate, move, or remove element instances inside running multi-instance ad-hoc subprocesses—supporting parallel, sequential, and classic ad-hoc execution patterns. These new runtime capabilities, available in both Operate UI and the API, allow users to adapt, repair, and recover business processes on the fly, supporting flexibility for agentic automation, case management, and critical operations.
 
-#### Orchestration Cluster supports pre-configured entities for all Identity entities
+#### Pre-configure Identity entities
 
 <!-- https://github.com/camunda/product-hub/issues/2446 -->
 
-You can now use declarative configuration for all Identity entities in Orchestration Cluster:
-
-Groups
-
-Tenants
-
-Roles
-
-Authorizations
-
-Assignments
-
-In previous releases it was already possible to use it for users, mapping rules and default role memberships.
-
-#### Migrate from Job-based user task to Camunda User Task with process instance migration
-
-<!-- https://github.com/camunda/product-hub/issues/2626 -->
-
-This release adds support to migrate active instances from legacy job‑based user tasks to modern, engine‑managed Camunda User Tasks through both the API and the Operate UI, as part of process instance migration.
-
-This capability enables customers to standardize on the Orchestration Cluster APIs and the recommended user task type ahead of the removal of job‑based user task querying and management in the consolidated API.
+You can now use declarative configuration for all Identity entities in the Orchestration Cluster, such as groups, tenants, roles, authorizations, and assignments. Previously, you could only use this for users, mapping rules, and default role memberships.
 
 #### Task permission management
 
 <!-- https://github.com/camunda/product-hub/issues/3122 -->
 
-This release enhances Camunda 8 Tasklist with granular task-level authorization integrated into the Tasklist UI and the orchestration cluster REST API.
+Granular task-level authorization is now integrated into the Tasklist UI and the Orchestration Cluster REST API.
 
-Key improvements include:
+- Property-based task permissions:
+  - Users can be granted permission to view or work on a task based on task properties.
+  - Permissions apply when the assignee matches the current user, or when the user belongs to a candidate group or is listed as a candidate user. This ensures that all relevant participants - whether directly assigned or eligible to claim the task - have appropriate access.
+  - This applies consistently across both the Tasklist UI and the orchestration cluster REST API.
 
-Property-based task permissions:
+- Fine-grained security model: Visibility and action permissions are scoped at the individual task level, reducing unauthorized access and improving compliance alignment.
 
-Users can be granted permission to view or work on a task based on task properties.
+This feature strengthens security and usability, and provides a clear, consistent, and secure user experience for task workers, managers, and integrations.
 
-Permissions apply when the assignee matches the current user, or when the user belongs to a candidate group or is listed as a candidate user.
-
-This ensures that all relevant participants - whether directly assigned or eligible to claim the task - have appropriate access.
-
-Applies consistently across both the Tasklist UI and the orchestration cluster REST API.
-
-Fine-grained security model:
-
-Visibility and action permissions are scoped at the individual task level, reducing unauthorized access and improving compliance alignment.
-This update strengthens security and usability, providing a clear, consistent, and secure user experience for task workers, managers, and integrations.
-
-#### User Operations Audit Log
+#### User operations audit log
 
 <!-- https://github.com/camunda/product-hub/issues/1732 -->
 
-Camunda 8.9 introduces a centralized, queryable audit log that records all critical user and client operations across process, identity, and user task domains. Teams can now trace who performed each action, when it occurred, what it affected, and whether it succeeded. Audit entries are available through Orchestration Cluster APIs and integrated into Operate, Tasklist, and Identity with built-in authorization controls.
+You can now view a centralized, queryable audit log that records all critical user and client operations across process, identity, and user task domains.
+
+- Teams can now trace who performed each action, when it occurred, what it affected, and whether it was successful.
+- Audit entries are available through Orchestration Cluster APIs and integrated into Operate, Tasklist, and Identity with built-in authorization controls.
+
+### Process instance migration
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+
+#### Migrate from job-based user tasks to Camunda User Tasks
+
+<!-- https://github.com/camunda/product-hub/issues/2626 -->
+
+You can now migrate active instances from legacy job‑based user tasks to modern, engine‑managed Camunda User Tasks via both the API and the Operate UI, as part of process instance migration.
+
+This lets you standardize on the Orchestration Cluster APIs and the recommended user task type before the removal of job‑based user task querying and management in the consolidated API.
+
+<p><a href="../../../../components/concepts/process-instance-migration/" class="link-arrow">Process instance migration</a></p>
 
 ### RDBMS secondary storage
 
-#### Continuous backups with RDBMS as Secondary datastore
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
+
+#### Continuous backup and restore
 
 <!-- https://github.com/camunda/product-hub/issues/2723 -->
-
-New Backup and Restore Mechanism for RDBMS: Enables customers to back up and restore Camunda when using RDBMS as a secondary datastore.
-
-Independent Backup Control Plans provide a method for handling primary and secondary backups separately while ensuring they align at restore time.
-
-Improved Disaster Recovery: Enhances the ability to recover Camunda instances with greater precision in data consistency.
-
-#### Reducing RTO with matching backups for RDMBS
-
 <!-- https://github.com/camunda/product-hub/issues/3031 -->
 
-New restore API syntax now supports timestamp flags --from and --to , enabling automatic selection of a compatible backup range. Paired with RDBMS, when no specific backup or timerange is specified, the tool is able to perform a restore to the latest known position with no user interaction. Ensures version compatibility across backups and offers an override via --allow-version-mismatch. This enhancement drastically reduces manual restore effort and enhances confidence in backup integrity.
+You can now back up and restore Camunda 8 when using RDBMS as secondary storage.
 
-#### Production installation guide for C8 with RDBMS - helm installation
+- Independent backup control plans handle primary and secondary backups separately while ensuring they align when restored.
+- Disaster recovery is improved as you can recover Camunda instances with greater precision in data consistency.
 
-<!-- https://github.com/camunda/product-hub/issues/3026 -->
+Additionally, the new restore API syntax now supports `--from` and `--to` timestamp flags, enabling automatic selection of a compatible backup range.
 
-A new production installation guide for Camunda 8 is now available, delivering a fully supported, step-by-step resource for Kubernetes-based orchestration cluster deployment via Helm, with secondary storage in an RDBMS.
-
-#### Production installation guide for C8 with RDBMS - manual installation
-
-<!-- https://github.com/camunda/product-hub/issues/2740 -->
-
-The new Production Installation Guide for Camunda 8 with RDBMS (Manual Installation) provides platform administrators, database administrators, and development teams with a comprehensive, step-by-step resource for deploying and managing Camunda 8 using relational databases in production environments. This guide aims to dramatically simplify the RDBMS integration experience, align documentation with modern best practices, and minimize onboarding time and operational risk.
+- When no specific backup or timerange is specified, a restore is performed to the latest known position with no user interaction.
+- Ensures version compatibility across backups and offers an override via `--allow-version-mismatch`.
+- Reduces manual restore effort and enhances confidence in backup integrity, with reduced Recovery Time Objective (RTO).
 
 #### Manual installation options support RDBMS for secondary storage
 
 <!-- https://github.com/camunda/product-hub/issues/2747 -->
 
-Camunda 8 orchestration clusters can now be installed manually (VM/bare metal/Java application) with full support for RDBMS (H2, PostgreSQL, Oracle, MariaDB) as secondary storage.
+Camunda 8 Orchestration Clusters can now be installed manually (VM/bare metal/Java application) with full support for RDBMS (H2, PostgreSQL, Oracle, MariaDB) as secondary storage.
+
+#### Production installation guides
+
+<!-- https://github.com/camunda/product-hub/issues/3026 -->
+<!-- https://github.com/camunda/product-hub/issues/2740 -->
+
+New production installation guides for Camunda 8 using RDBMS secondary storage:
+
+- Helm: Kubernetes-based orchestration cluster deployment via Helm, using RDBMS secondary storage.
+- Manual: Deploy and manage Camunda 8 using relational databases in production environments.
 
 ## 8.9.0-alpha3
 
