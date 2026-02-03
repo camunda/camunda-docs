@@ -81,5 +81,4 @@ description: "Learn how operation data from the audit log is presented in differ
 
 ## Explore further resources
 
-- Use the Camunda REST API to access the audit log
-- Permissions
+- [Use the Camunda REST API to access the audit log](../../apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx)
