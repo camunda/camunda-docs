@@ -9,10 +9,6 @@ PostgreSQL. You deploy a Self-Managed Camunda 8 environment using AWS managed se
 
 This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) and Connectors for Camunda 8. Web Modeler, Optimize, and Console are currently not covered.
 
-:::tip New to AWS ECS?
-If you are new to AWS ECS or Terraform, consider reviewing the [AWS ECS documentation](https://docs.aws.amazon.com/ecs/) and [Terraform documentation](https://developer.hashicorp.com/terraform/docs) before proceeding with this guide.
-:::
-
 The concepts described in this guide can be applied to other cloud providers; however, you are responsible for the implementation and maintenance, and compatibility or correct behavior is not guaranteed. Certain implementations like the node-id provider are currently limited to S3.
 
 ## Considerations
@@ -109,10 +105,6 @@ With the reference architecture in place, you can proceed with the remaining ste
 ### Terraform prerequisites
 
 To manage Camunda 8 infrastructure on AWS using Terraform, you need to configure Terraform's backend to store the state file remotely in an S3 bucket. This provides secure, persistent primary storage for your infrastructure.
-
-:::note
-Advanced users may choose to configure a different backend. The setup described here is a recommended starting point for new users.
-:::
 
 #### Set up AWS authentication
 
@@ -255,15 +247,6 @@ The base terraform documentation for this module can be found [alongside the rep
 In `camunda.tf` you can pass in any configuration adjustment required for the component or increase the resources. A few configuration options as mentioned above are kept as part of the modules to ensure the user can't interfere with the base setup. If you need to adjust those, then you have to adjust those in your copy of the modules.
 
 ### Aurora PostgreSQL
-
-:::info Optional module
-
-If you do not want to use this module, you can skip this section. However, you will need to adjust the remaining steps to remove any references to it.
-
-If you choose not to use this module, you must provide your own PostgreSQL, Elasticsearch or OpenSearch instance and make required config adjustments.
-
-Additionally, be sure to delete the `postgres.tf` and `postgres_seed.tf` file in your reference copy—otherwise, the resources defined in it will still be created. Additionally, remove the references for the IAM access in `iam.tf` following the `RDS IAM Auth Support` section.
-:::
 
 `postgres.tf` provisions an Aurora PostgreSQL cluster with a pre-created `camunda` database and admin credentials saved in the AWS Secrets Manager. This Aurora PostgreSQL cluster is used as secondary storage for the Orchestration Cluster.
 
