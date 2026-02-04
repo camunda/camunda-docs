@@ -163,22 +163,23 @@ be configured via the `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYALLOCATIONSTRATEG
 
 If set to `PARTITION` (the default option), the total memory allocated to
 RocksDB will be the configured number of partitions times the configured
-memory limit (via the `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYLIMIT`). If
-the value is set to `BROKER`, the total memory allocated to RocksDB will be
-equal to the configured memory limit. If set to `AUTO`, Zeebe will allocate the
-remaining memory available to RocksDB after accounting for other components,
-such as the JVM heap and other native memory consumers.
+memory limit (via the `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYLIMIT`).If the value is set to
+`BROKER`, the total memory allocated to RocksDB will be equal to the
+configured memory limit. If set to `FRACTION` Camunda will allocate
+the RocksDB memory based on a fraction of total memory.
 
 :::note
 When using the `PARTITION` strategy, the number of partitions used in the
 calculation is the one configured and not necessarily the current number of
 partitions in the cluster. These can differ when using dynamic scaling of
-partitions.
+partitions. Therefore, it is recommended that when using `PARTITION`
+strtegy and dynamic scaling, to update the configured number of partitions
+after scaling opertations.
 :::
 
-When using the `AUTO` strategy, the memory limits used by the JVM and
-HEAP can be configured via the standard Java options, by respectively setting
-`-XX:MaxRAMPercentage` and `-XX:MaxMetaspaceSize`.
+The default value is `FRACTION`. The fraction can be configured via the
+`ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYFRACTION` setting ([0,1]), with
+the default being `0.1` (10% of total memory).
 
 The default value for `rocksDB.memoryLimit` will then allocate [512MB]
 (https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#:~:text=%23%20memoryLimit) when using the `PARTITION` or
@@ -188,6 +189,8 @@ Therefore, when hardconding these values the following consideretions
 should be met. Some memory is required for the OS page cache since Zeebe
 makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance.
 
+The cache used by the OS will depend on the amount of partition leaders on the node, and the throughput of the system. For most use cases we recommend leaving 20 to 30% of the total memory for the OS page cache, but this can be adjusted based on the specific use case and observed performance.
+
 The minimum memory usage is (when using the `PARTITION` strategy):
 
 | Component           |                   Amount |
@@ -195,7 +198,7 @@ The minimum memory usage is (when using the `PARTITION` strategy):
 | Java Heap           |                      25% |
 | Java Native Memory  |                      25% |
 | RocksDB             |  512MB \* partitionCount |
-| OS Page Cache       |                        ? |
+| OS Page Cache       |                   20-30% |
 | ------------------- | ------------------------ |
 | Sum                 |    x MB + 50% of max RAM |
 | ------------------- | ------------------------ |
