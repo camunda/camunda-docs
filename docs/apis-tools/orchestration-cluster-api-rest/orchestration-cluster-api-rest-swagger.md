@@ -30,7 +30,7 @@ For SaaS clusters, Swagger UI is accessible through your cluster's dedicated end
 
 1. In the Camunda Console, go to your cluster
 2. In **Cluster Details**, find your **Region ID** and **Cluster ID**
-3. Use this URL format: `https://${REGION_ID}.operate.camunda.io/${CLUSTER_ID}/swagger-ui/index.html`
+3. Use this URL format: `https://${REGION_ID}.operate.camunda.io/${CLUSTER_ID}/swagger`
 
 :::note
 Swagger UI is protected with CSRF. If you are logged into the Camunda Console, you can access Swagger UI directly. If not, you may need to log in first.
@@ -38,20 +38,20 @@ Swagger UI is protected with CSRF. If you are logged into the Camunda Console, y
 
 **Example:**  
 If your Region ID is `bru-2` and Cluster ID is `abc123-def456-ghi789`, your Swagger UI URL would be:
-`https://bru-2.operate.camunda.io/abc123-def456-ghi789/swagger-ui/index.html`
+`https://bru-2.operate.camunda.io/abc123-def456-ghi789/swagger`
 
 ### Self-Managed
 
 For Self-Managed deployments, Swagger UI is available at your configured Zeebe Gateway endpoint.
 
 **Default setup:**
-`http://localhost:8080/swagger-ui/index.html`
+`http://localhost:8080/swagger`
 
 **Custom configuration:**
-Use the host and path defined in your Zeebe Gateway [configuration](/self-managed/deployment/helm/configure/ingress/ingress-setup.md), then append `/swagger-ui/index.html`.
+Use the host and path defined in your Zeebe Gateway [configuration](/self-managed/deployment/helm/configure/ingress/ingress-setup.md), then append `/swagger`.
 
 **Example with custom domain:**
-`https://your-zeebe-gateway.company.com/swagger-ui/index.html`
+`https://your-zeebe-gateway.company.com/swagger`
 
 ## Authentication in Swagger UI
 
