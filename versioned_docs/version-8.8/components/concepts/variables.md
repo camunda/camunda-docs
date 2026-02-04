@@ -36,7 +36,12 @@ The value of a variable is stored as a JSON value. It can have one of the follow
 
 ## Variable size limitation
 
-Generally, there is a limit of 4 MB for the payload of a process instance. This 4 MB includes the variables and the workflow engine internal data, which means there is slightly less memory available for variables. The exact limitation depends on a few factors, but you can consider 3 MB as being safe. If in doubt, run a quick test case.
+Generally, there is a limit of 4 MB for the payload of a process instance.
+This 4 MB includes the variables and the workflow engine internal data, which means there is slightly less memory available for variables.
+The exact limitation depends on a few factors, but you can consider ~1.5 MB as being safe when commands/events include variables (for example, when starting a process instance or completing a job with variables).
+This is because the engine can append follow-up records that temporarily duplicate the variable payload within the same batch.
+To avoid production surprises, consider leaving a buffer under the limit (for example, targeting ≤1 MB) and validating with a production-like test case.
+If in doubt, run a quick test case.
 
 :::note
 Regardless, we don't recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/components/best-practices/development/handling-data-in-processes.md).
