@@ -20,6 +20,14 @@ This guide offers a detailed blueprint tutorial for deploying two Amazon Web Ser
 This guide requires you to have previously completed or reviewed the steps taken in [deploying an EKS cluster with Terraform](./terraform-setup.md). If you have no experience with Terraform and Amazon EKS, review this content for the essentials of setting up an Amazon EKS cluster and configuring AWS IAM permissions. This content explains the process of using Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts.
 :::
 
+:::info Repository Migration 8.9
+
+The previous repository, [c8-multi-region](https://github.com/camunda/c8-multi-region), has been migrated to [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references) to consolidate all reference architectures into a single repository.
+
+The overall content remains unchanged, except for the required Helm chart updates for version 8.9 in the `camunda-values.yml` file.
+
+:::
+
 ## Prerequisites
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create resources within AWS.
@@ -63,13 +71,13 @@ There are two regions (`REGION_0` and `REGION_1`), each with its own Kubernetes 
 To streamline the execution of the subsequent commands, it is recommended to export multiple environment variables within your terminal.
 Additionally, it is recommended to manifest those changes for future interactions with the dual-region setup.
 
-1. Git clone or fork the repository [c8-multi-region](https://github.com/camunda/c8-multi-region):
+1. Git clone or fork the repository [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references):
 
 ```shell
-git clone https://github.com/camunda/c8-multi-region.git
+git clone https://github.com/camunda/camunda-deployment-references.git
 ```
 
-2. The cloned repository and folder `aws/dual-region/scripts/` provides a helper script [export_environment_prerequisites.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_prerequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
+2. The cloned repository and folder `aws/kubernetes/eks-dual-region/procedure` provides a helper script [export_environment_prerequisites.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/export_environment_prerequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
 3. You must adjust these environment variable values within the script to your needs.
 
 :::caution
@@ -90,14 +98,14 @@ Using the same namespace names on both clusters won't work as CoreDNS won't be a
 The dot is required to export those variables to your shell and not a spawned subshell.
 
 ```shell reference
-https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_prerequisites.sh
+https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/export_environment_prerequisites.sh
 ```
 
 ## Installing Amazon EKS clusters with Terraform
 
 ### Prerequisites
 
-1. From your cloned repository, navigate to `aws/dual-region/terraform`. This contains the Terraform base configuration for the dual-region setup.
+1. From your cloned repository, navigate to `aws/kubernetes/eks-dual-region/terraform/clusters`. This contains the Terraform base configuration for the dual-region setup.
 
 ### Contents elaboration
 
@@ -153,7 +161,7 @@ This file contains various variable definitions for both [local](https://develop
 
 ### Preparation
 
-1. Adjust any values in the [variables.tf](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/terraform/variables.tf) file to your liking. For example, the target regions and their name or CIDR blocks of each cluster.
+1. Adjust any values in the [variables.tf](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/terraform/clusters/variables.tf) file to your liking. For example, the target regions and their name or CIDR blocks of each cluster.
 2. Make sure that any adjustments are reflected in your [environment prerequisites](#environment-prerequisites) to ease the [in-cluster setup](#in-cluster-setup).
 3. Set up the authentication for the `AWS` provider.
 
@@ -178,7 +186,7 @@ Therefore, it can make sense to create an extra [AWS IAM user](https://docs.aws.
 
 :::
 
-1. Open a terminal and navigate to `aws/dual-region/terraform`.
+1. Open a terminal and navigate to `aws/kubernetes/eks-dual-region/terraform/clusters`.
 2. Initialize the working directory:
 
 ```hcl
@@ -228,11 +236,11 @@ You are configuring the CoreDNS from the cluster in **Region 0** to resolve cert
 1. Expose `kube-dns`, the in-cluster DNS resolver via an internal load-balancer in each cluster:
 
 ```shell
-kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/aws/dual-region/kubernetes/internal-dns-lb.yml
-kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/aws/dual-region/kubernetes/internal-dns-lb.yml
+kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/main/aws/kubernetes/eks-dual-region/procedure/manifests/internal-dns-lb.yml
+kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/main/aws/kubernetes/eks-dual-region/procedure/manifests/internal-dns-lb.yml
 ```
 
-2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_core_dns_entry.sh) in the folder `aws/dual-region/scripts/` of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
+2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/generate_core_dns_entry.sh) in the folder `aws/kubernetes/eks-dual-region/procedure/` of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
 
 ```shell
 ./generate_core_dns_entry.sh
@@ -240,7 +248,7 @@ kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/
 
 3. The script will retrieve the IPs of the load balancer via the AWS CLI and return the required config change.
 4. The script prints the `kubectl edit` commands to change the DNS settings of each cluster inline. Copy the statement between the placeholders to edit the CoreDNS configmap in cluster 0 and cluster 1, depending on the placeholder.  
-   An alternative to inline editing is to create two copies of the file `kubernetes/coredns.yml`, one for each cluster. Add the section generated by the script to each file. Apply the changes to each cluster with e.g. `kubectl --context cluster-london -n kube-system apply -f file.yml`. Replace the `context` parameter with your current values.
+   An alternative to inline editing is to create two copies of the file [./manifests/coredns.yml](https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-dual-region/procedure/manifests/coredns.yml), one for each cluster. Add the section generated by the script to each file. Apply the changes to each cluster with e.g. `kubectl --context cluster-london -n kube-system apply -f file.yml`. Replace the `context` parameter with your current values.
 
 <details>
   <summary>Example output</summary>
@@ -347,9 +355,9 @@ kubectl --context $CLUSTER_1 logs -f deployment/coredns -n kube-system
 
 ### Test DNS chaining
 
-The script [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/test_dns_chaining.sh) within the folder `aws/dual-region/scripts/` of the repository will help to test that the DNS chaining is working by using nginx pods and services to ping each other.
+The script [test_dns_chaining.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/test_dns_chaining.sh) within the folder `aws/kubernetes/eks-dual-region/procedure/` of the repository will help to test that the DNS chaining is working by using nginx pods and services to ping each other.
 
-1. Execute the [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/test_dns_chaining.sh). Make sure you have previously exported the [environment prerequisites](#environment-prerequisites) as the script builds on top of it.
+1. Execute the [test_dns_chaining.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/test_dns_chaining.sh). Make sure you have previously exported the [environment prerequisites](#environment-prerequisites) as the script builds on top of it.
 
 ```shell
 ./test_dns_chaining.sh
@@ -370,16 +378,16 @@ This step defines a custom `StorageClass` that:
 
 #### Apply the StorageClass
 
-Run the following script from the context of the `aws/dual-region/scripts/` folder to apply the new [storage class](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/kubernetes/storage-class.yml) and set it as default:
+Run the following script from the context of the `aws/kubernetes/eks-dual-region/procedure/` folder to apply the new [storage class](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/manifests/storage-class.yml) and set it as default:
 
 ```bash reference
-https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/storageclass-configure.sh
+https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/storageclass-configure.sh
 ```
 
 To verify completion of the operation, run:
 
 ```bash reference
-https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/storageclass-verify.sh
+https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/storageclass-verify.sh
 ```
 
 You must apply the custom `StorageClass` before installing the Camunda Helm chart so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
@@ -392,14 +400,14 @@ Elasticsearch will need an S3 bucket for data backup and restore procedure, requ
 
 You can pull the data from Terraform since you exposed those via `output.tf`.
 
-1. From the Terraform code location `aws/dual-region/terraform`, execute the following to export the access keys to environment variables. This will allow an easier creation of the Kubernetes secret via the command line:
+1. From the Terraform code location `aws/kubernetes/eks-dual-region/terraform/clusters`, execute the following to export the access keys to environment variables. This will allow an easier creation of the Kubernetes secret via the command line:
 
 ```shell
 export AWS_ACCESS_KEY_ES=$(terraform output -raw s3_aws_access_key)
 export AWS_SECRET_ACCESS_KEY_ES=$(terraform output -raw s3_aws_secret_access_key)
 ```
 
-2. From the folder `aws/dual-region/scripts` of the repository, execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/create_elasticsearch_secrets.sh). This will use the exported environment variables from **Step 1** to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment prerequisites](#environment-prerequisites).
+2. From the folder `aws/kubernetes/eks-dual-region/procedure` of the repository, execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/create_elasticsearch_secrets.sh). This will use the exported environment variables from **Step 1** to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment prerequisites](#environment-prerequisites).
 
 ```shell
 ./create_elasticsearch_secrets.sh
@@ -420,7 +428,7 @@ The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.
 
 ### Camunda 8 Helm chart prerequisites
 
-Within the cloned repository, navigate to `aws/dual-region/kubernetes`. This contains a dual-region example setup.
+Within the cloned repository, navigate to `aws/kubernetes/eks-dual-region/helm-values`. This contains a dual-region example setup.
 
 #### Content elaboration
 
@@ -479,13 +487,13 @@ This overlay contains the multi-region identification for the cluster in region 
 You must change the following environment variables for Zeebe. The default values will not work for you and are only for illustration.
 :::
 
-The base `camunda-values.yml` in `aws/dual-region/kubernetes` requires adjustments before installing the Helm chart:
+The base `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` requires adjustments before installing the Helm chart:
 
 - `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS`
 - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
 - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
 
-1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [environment prerequisites](#environment-prerequisites) for namespaces and regions.
+1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/camunda-deployment-references/tree/infraex-560/aws/kubernetes/eks-dual-region/procedure/generate_zeebe_helm_values.sh) in the repository folder `aws/kubernetes/eks-dual-region/procedure/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [environment prerequisites](#environment-prerequisites) for namespaces and regions.
 
 ```shell
 ./generate_zeebe_helm_values.sh
@@ -530,7 +538,7 @@ Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_CAMUNDA
 
 ### Deploy Camunda 8
 
-From the terminal context of `aws/dual-region/kubernetes`, execute the following:
+From the terminal context of `aws/kubernetes/eks-dual-region/helm-values`, execute the following:
 
 ```shell
 helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
