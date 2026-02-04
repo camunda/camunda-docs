@@ -106,7 +106,7 @@ This improvement creates a restricted but controlled collaborative environment, 
 
 <!-- https://github.com/camunda/product-hub/issues/3164 -->
 
-You can now import process applications of up to 100 files (including all supported files such as BPMN, DMN, forms, connector templates, and documentation) in a single step in Web Modeler or via direct import links in Self-Managed environments.
+You can now import large process applications (containing a maximum of 100 supported files such as BPMN, DMN, forms, connector templates, and documentation) in a single step in Web Modeler or via direct import links in Self-Managed environments.
 
 <p className="link-arrow">[Import resources into Web Modeler](/components/modeler/web-modeler/modeling/importing-resources.md)</p>
 
