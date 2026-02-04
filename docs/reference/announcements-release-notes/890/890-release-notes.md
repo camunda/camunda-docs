@@ -102,11 +102,11 @@ This improvement creates a restricted but controlled collaborative environment, 
 
 <p className="link-arrow">[Collaborate in Web Modeler](/components/modeler/web-modeler/collaboration/collaboration.md)</p>
 
-#### Import process applications from Camunda Marketplace
+#### Import large process applications into Web Modeler
 
 <!-- https://github.com/camunda/product-hub/issues/3164 -->
 
-You can now import a complete process application from the Camunda Marketplace (including all supported files such as BPMN, DMN, forms, connector templates, and documentation) in a single step in Web Modeler or via direct import links in Self-Managed environments.
+You can now import process applications of up to 100 files (including all supported files such as BPMN, DMN, forms, connector templates, and documentation) in a single step in Web Modeler or via direct import links in Self-Managed environments.
 
 <p className="link-arrow">[Import resources into Web Modeler](/components/modeler/web-modeler/modeling/importing-resources.md)</p>
 
