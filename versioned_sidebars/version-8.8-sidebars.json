@@ -475,7 +475,8 @@
             },
             "components/modeler/web-modeler/file-download",
             "components/modeler/web-modeler/web-modeler-settings",
-            "components/modeler/web-modeler/process-landscape-visualization"
+            "components/modeler/web-modeler/process-landscape-visualization",
+            "components/modeler/web-modeler/task-testing"
           ]
         },
         {
