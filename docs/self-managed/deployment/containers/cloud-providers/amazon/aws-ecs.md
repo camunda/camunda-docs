@@ -76,14 +76,6 @@ Both subnet types are distributed across three availability zones in a single AW
 
 For the exact tool versions used during testing, refer to the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
 
-## 1. Configure AWS and initialize Terraform
-
-:::note Terraform infrastructure example
-We do not recommend using the following Terraform-based infrastructure as a module, since we cannot guarantee compatibility.
-
-Instead, we suggest reusing or extending components of the Terraform example to ensure alignment with your environment.
-:::
-
 ### Obtain a copy of the reference architecture
 
 Start by downloading a copy of the reference architecture from the GitHub repository. This content will be used throughout the rest of the guide. The reference architectures are versioned according to Camunda releases (e.g., stable/8.x).
@@ -95,6 +87,14 @@ https://github.com/camunda/camunda-deployment-references/tree/main/aws/container
 ```
 
 With the reference architecture in place, you can proceed with the remaining steps in this documentation. Make sure you're in the correct directory before continuing with the instructions.
+
+## 1. Configure AWS and initialize Terraform
+
+:::note Terraform infrastructure example
+We do not recommend using the following Terraform-based infrastructure as a module, since we cannot guarantee compatibility.
+
+Instead, we suggest reusing or extending components of the Terraform example to ensure alignment with your environment.
+:::
 
 ### Terraform prerequisites
 
