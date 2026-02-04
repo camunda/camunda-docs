@@ -15,7 +15,7 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 - When scaling up the number of partitions it is recommended to keep in
   mind the RocksDB size per partition after the scaling operation, we
   recommend at the very least 32MB of RocksDB memory size per partition. For
-  more information see the [resource planing page](/docs/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md).
+  more information see the [resource planing page](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md).
   :::
 
 ## Considerations
