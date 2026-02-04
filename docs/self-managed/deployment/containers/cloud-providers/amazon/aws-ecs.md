@@ -9,8 +9,6 @@ PostgreSQL. You deploy a Self-Managed Camunda 8 environment using AWS managed se
 
 This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) and Connectors for Camunda 8. Web Modeler, Optimize, and Console are currently not covered.
 
-The concepts described in this guide can be applied to other cloud providers; however, you are responsible for the implementation and maintenance, and compatibility or correct behavior is not guaranteed. Certain implementations like the node-id provider are currently limited to S3.
-
 ## Considerations
 
 :::warning Experimental release (8.9.0-alpha3)
@@ -22,7 +20,7 @@ Running this guide incurs costs on your AWS account, primarily for ECS and Auror
 If you want a simpler setup, consider using [Camunda 8 SaaS](https://accounts.camunda.io/signup).
 
 - Unlike our other guides, which usually separate infrastructure setup from the deployment of Camunda 8, this is not the case with ECS. Since the infrastructure is largely managed by AWS, deploying Camunda 8 and provisioning the required AWS resources happens in a single step.
-- This work focuses on AWS ECS with Fargate but can work with managed instances for more predictable performance. You can find more information about how to migrate from Fargate to managed instances from the [AWS migration guide](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/migrate-fargate-to-managed-instances.html).
+- This work focuses on AWS ECS with Fargate.
 - This work relies on a shared [multi-AZ replicated](https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html) EFS network disk
   - Cost and performance may differ from a related Kubernetes setup with block storage
   - The EFS volume is shared among all brokers to support the native ECS Service capabilities
@@ -30,8 +28,6 @@ If you want a simpler setup, consider using [Camunda 8 SaaS](https://accounts.ca
 - Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a Zeebe broker. Autoscaling may not have effects as the brokers have to be explicitly joined into the Zeebe Cluster or when removed result in partitions or data becoming inaccessible.
 - An extra developed node-id provider is integrated into Zeebe that assigns an available node-id based on Zeebe cluster information, whereas this is typically provided statically.
 - This guide focuses on Aurora PostgreSQL for the secondary datastorage as it is a newly supported offering by Camunda 8 and potentially more familiar for customers.
-  - You may still use Elasticsearch / OpenSearch but need to adjust the required configuration. More information about the configuration can be found in [our documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
-  - Examples for how to deploy AWS OpenSearch can be found in other existing reference architectures for AWS.
 
 ## Outcome
 
@@ -59,8 +55,8 @@ After completing this guide, you will have:
     - [Elastic File System (EFS)](https://aws.amazon.com/efs/) as primary datastore for the Zeebe cluster
     - [Aurora PostgreSQL](https://aws.amazon.com/rds/aurora/) as secondary datastore
   - A [Public Subnet](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html), which has internet access via an [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html).
-    - (Optional) An [Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) (ALB) to expose web interfaces such as Operate, Tasklist, Connectors, and the Orchestration Cluster REST API. This uses sticky sessions, as requests are otherwise distributed round-robin across ECS instances.
-    - (Optional) A [Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html) (NLB) to expose the gRPC endpoint of the Zeebe Gateway, if external applications need to connect.
+    - An [Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) (ALB) to expose web interfaces such as Operate, Tasklist, Connectors, and the Orchestration Cluster REST API. This uses sticky sessions, as requests are otherwise distributed round-robin across ECS instances.
+    - A [Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html) (NLB) to expose the gRPC endpoint of the Zeebe Gateway, if external applications need to connect.
 - [Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) to control network traffic to and from the ECS instances.
 - An [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) to route traffic between the VPC and the internet.
 - A [S3 bucket](https://aws.amazon.com/s3/) used by the Orchestration Cluster’s ECS-specific node-id provider.
@@ -70,8 +66,6 @@ After completing this guide, you will have:
 - [IAM authentication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) to connect the Orchestration Cluster with the Aurora PostgreSQL cluster.
 
 Both subnet types are distributed across three availability zones in a single AWS region, supporting a high-availability architecture.
-
-You can also scale this setup to a single ECS task. In that case, a zone failure makes the environment unavailable.
 
 ## Prerequisites
 
@@ -252,8 +246,6 @@ In `camunda.tf` you can pass in any configuration adjustment required for the co
 
 `postgres_seed.tf` provisions a temporary ECS task to pre-seed the database for IAM authentication to work. The Aurora PostgreSQL cluster is not easily accessible from the outside as we don't expose it, therefore a workaround is required to do the initial user creation for the IAM authentication to work instead of using hard-coded username/password combinations.
 
-If you're fine with username/password, you can remove the `postgres_seed.tf` and reuse the admin user that was created on creation to configure the Orchestration Cluster to consume said user.
-
 ### Miscellaneous Resources
 
 `registry-auth.tf` contains the basics to create a secret via the AWS Secrets Manager for any kind of registry to access the Camunda images or bypass rate limitations.
@@ -275,8 +267,6 @@ Camunda components can be configured for example via environment variables or an
 ##### Environment Variables
 
 The base configuration is done via environment variables and defined directly as is in the invocation of the module.
-
-An alternative approach, still with environment variables, could be to load them from an external file.
 
 Example:
 
@@ -314,8 +304,7 @@ environment_variables = local.env_kv_pairs # or mixed with the concat function
 
 ##### Application YAML
 
-1. This can either be baked into a custom image permanently by you
-2. Pull application YAML on startup via init container from external store or integrate in Terraform
+Pull application YAML on startup via init container from external store or integrate in Terraform
 
 Example:
 
@@ -400,17 +389,6 @@ When wanting to use IAM authentication to simplify the authentication between Or
 
 Terraform itself can't do this initial seeding as the Aurora PostgreSQL is not publicly exposed, so a workaround is needed. In our reference architecture to keep things simple and working ideally immediately, a local execution was used that triggers a one time seeding job to do the required steps as the ECS has access to Aurora PostgreSQL cluster.
 
-As previously mentioned, if you don't want to do this local execution, you can delete the `postgres_seed.tf` and remove the `depends_on` in `camunda.tf`.
-
-Alternatives are for example:
-
-- Externally supplied PostgreSQL
-- Rely on username / password of e.g. admin user
-- Manual seeding via an EC2 instance or ECS task in the same VPC or a connected VPN
-- Temporarily exposing the Aurora PostgreSQL cluster (not recommended)
-- AWS Lambda function that does the seeding
-- AWS Step function that does the seeding
-
 It was implemented as a `local exec` with an ECS task since we wanted to provide a fully working reference end-to-end while still relying on something like IAM authentication.
 
 #### Rolling deployments
@@ -428,8 +406,6 @@ We strongly recommend managing sensitive information using a secure secrets mana
 
 :::info Terraform Flow
 Due to the `postgres_seed.tf` it is required that the machine executing it has the `AWS CLI` installed and configured to be able to start and wait for the seeding task to have finished.
-
-If that is not wanted or can't be done then please either execute it as two steps with manual seeding, fallback to username/password or supply a pre-configured secondary storage as previously mentioned.
 :::
 
 1. Open a terminal in the reference directory containing `config.tf` and the other `.tf` files.
