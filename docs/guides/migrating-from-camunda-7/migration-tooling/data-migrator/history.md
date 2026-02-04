@@ -135,7 +135,7 @@ Example BPMN configuration that will be migrated:
 
 When a user task has a form configured using `camunda:formRef` with a `camunda:formKey`, the migrator:
 
-1. Resolves the form definition based on the task definition key and process definition.
+1. Resolves the form definition based on the form key and binding (deployment, latest, or version).
 2. Links the user task to the migrated form in Camunda 8.
 
 Example BPMN configuration that will be migrated:
