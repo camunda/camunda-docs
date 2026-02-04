@@ -87,17 +87,20 @@ A new Camunda 8 SaaS **AWS US East (us-east-2)** region in North America lets yo
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
-#### BPMN Conditional Events
-
-<!-- https://github.com/camunda/product-hub/issues/1733 -->
-
-Camunda 8 now supports BPMN Conditional Events, allowing you to start, continue, or interrupt process execution dynamically based on evaluated conditions. This provides first-class support for Conditional Start, Boundary, and Intermediate Catch Events, making process automation more expressive and migration from Camunda 7 smoother.
-
-#### Reliable Collaboration Locking in Web Modeler
+#### Collaborate in Web Modeler
 
 <!-- https://github.com/camunda/product-hub/issues/3174 -->
 
-_Release notes needed_
+Live collaboration in Web Modeler is now more reliable with an improved collaboration experience.
+
+Once you start editing a diagram, the canvas locks so only you can continue making edits to the diagram.
+
+- Other users can view and interact with the diagram, but cannot make changes while it is locked by the current editor.
+- Users with edit permissions can take over editing of the diagram by clicking **Take over** in the canvas lock bar.
+
+This improvement creates a restricted but controlled collaborative environment, and helps prevent conflicts and broken sessions caused by multiple users editing the same diagram.
+
+<p className="link-arrow">[Collaborate in Web Modeler](/components/modeler/web-modeler/collaboration/collaboration.md)</p>
 
 #### Import process applications from Camunda Marketplace
 
@@ -110,34 +113,6 @@ You can now import a complete process application from the Camunda Marketplace (
 ### Orchestration Cluster
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
-
-#### Unified configuration for the Orchestration Cluster
-
-<!-- https://github.com/camunda/product-hub/issues/3129 -->
-
-Camunda 8.8 introduced unified configuration for Orchestration Cluster components to let you define all essential cluster and component behavior in a single, centralized configuration system. Only the first partial set of unified configuration properties were introduced in Camunda 8.8.
-
-In Camunda 8.9, all remaining unified configuration property changes are complete.
-
-<p class="link-arrow">[Property changes in Camunda 8.9](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
-
-#### Schedule backups with the Orchestration cluster
-
-<!-- https://github.com/camunda/product-hub/issues/3032 -->
-
-Scheduled Backups (cluster‑native): Configure backup intervals and retention directly in the Orchestration cluster. No external cron needed. Supports setting duration schedules, manual ad‑hoc backups, API‑based updates, metrics, and audit logs. Backwards compatible with existing backup commands.
-
-#### Modify elements in the Multi-Instance ad-hoc sub-process
-
-<!-- https://github.com/camunda/product-hub/issues/3119 -->
-
-Operators can now dynamically activate, move, or remove element instances inside running multi-instance ad-hoc subprocesses—supporting parallel, sequential, and classic ad-hoc execution patterns. These new runtime capabilities, available in both Operate UI and the API, allow users to adapt, repair, and recover business processes on the fly, supporting flexibility for agentic automation, case management, and critical operations.
-
-#### Pre-configure Identity entities
-
-<!-- https://github.com/camunda/product-hub/issues/2446 -->
-
-You can now use declarative configuration for all Identity entities in the Orchestration Cluster, such as groups, tenants, roles, authorizations, and assignments. Previously, you could only use this for users, mapping rules, and default role memberships.
 
 #### Manage task permissions
 
@@ -153,6 +128,46 @@ Granular task-level authorization is now integrated into the Tasklist UI and the
 - Fine-grained security: Visibility and action permissions are scoped at the individual task level, reducing unauthorized access and improving compliance alignment.
 
 This feature strengthens security and usability, and provides a clear, consistent, and secure user experience for task workers, managers, and integrations.
+
+#### Modify elements in the Multi-Instance ad-hoc sub-process
+
+<!-- https://github.com/camunda/product-hub/issues/3119 -->
+
+Operators can now dynamically activate, move, or remove element instances inside running multi-instance ad-hoc subprocesses—supporting parallel, sequential, and classic ad-hoc execution patterns.
+
+These new runtime capabilities, available in both Operate UI and the API, allow users to adapt, repair, and recover business processes on the fly, supporting flexibility for agentic automation, case management, and critical operations.
+
+#### Pre-configure Identity entities
+
+<!-- https://github.com/camunda/product-hub/issues/2446 -->
+
+You can now use declarative configuration for all Identity entities in the Orchestration Cluster, such as groups, tenants, roles, authorizations, and assignments. Previously, you could only use this for users, mapping rules, and default role memberships.
+
+#### Switch RocksDB memory to per-broker
+
+<!-- https://github.com/camunda/product-hub/issues/3304 -->
+
+_Release notes needed_
+
+#### Schedule backups with the Orchestration Cluster
+
+<!-- https://github.com/camunda/product-hub/issues/3032 -->
+
+You can now configure scheduled backup intervals and retention directly in the Orchestration Cluster.
+
+- External cron jobs are no longer needed.
+- Supports setting duration schedules, manual ad‑hoc backups, API‑based updates, metrics, and audit logs.
+- Backwards compatible with existing backup commands.
+
+#### Unified configuration for the Orchestration Cluster
+
+<!-- https://github.com/camunda/product-hub/issues/3129 -->
+
+Camunda 8.8 introduced unified configuration for Orchestration Cluster components to let you define all essential cluster and component behavior in a single, centralized configuration system. Only the first partial set of unified configuration properties were introduced in Camunda 8.8.
+
+In Camunda 8.9, all remaining unified configuration property changes are complete.
+
+<p class="link-arrow">[Property changes in Camunda 8.9](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
 
 #### User operations audit log
 
@@ -175,7 +190,7 @@ As part of process instance migration, you can now migrate active instances from
 
 This lets you standardize on the Orchestration Cluster APIs and the recommended user task type before the removal of job‑based user task querying and management in the consolidated API.
 
-<p><a href="../../../../components/concepts/process-instance-migration/" class="link-arrow">Process instance migration</a></p>
+<p class="link-arrow">[Process instance migration](/components/concepts/process-instance-migration.md)</p>
 
 ### RDBMS secondary storage
 
@@ -196,6 +211,8 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 - When no specific backup or timerange is specified, a restore is performed to the latest known position with no user interaction.
 - Ensures version compatibility across backups and offers an override via `--allow-version-mismatch`.
 - Reduces manual restore effort and enhances confidence in backup integrity, with reduced Recovery Time Objective (RTO).
+
+<p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
 
 #### Manual installation supports RDBMS secondary storage
 
