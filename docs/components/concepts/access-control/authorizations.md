@@ -107,8 +107,7 @@ User task access in the Orchestration Cluster is controlled using a combination 
 - Process-level permissions are granted on the `Process Definition` resource.
 - Task-level permissions are granted on the `USER_TASK` resource and typically use property-based access control.
 
-For Tasklist-specific behavior, permission evaluation, and recommended configuration,
-see [User task authorization in Tasklist](../../tasklist/user-task-authorization.md).
+For Tasklist-specific behavior, permission evaluation, and recommended configuration, see [User task authorization in Tasklist](../../tasklist/user-task-authorization.md).
 
 ## Configuration
 
@@ -173,7 +172,9 @@ These permissions should be strictly limited to trusted system administrators wh
 
 ### No validation of owner and resource IDs
 
-When you create an authorization, the Orchestration Cluster does not validate if the owner or the resource exists at that point in time.
+When you create an authorization, the Orchestration Cluster validates the owner depending on the `ownerType`. For `USER`, `ROLE`, `GROUP`, and `MAPPING_RULE`, the owner must exist in Identity. For `CLIENT`, the owner is not validated.
+
+The Orchestration Cluster does not validate whether the resource exists when creating an authorization.
 
 - This behavior lets you create authorizations for entities outside of the system (for example OIDC users) or for entities that will be created in the future (for example creating process definition authorizations before the process is deployed).
 

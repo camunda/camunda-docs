@@ -36,6 +36,10 @@ The runtime migration has the following limitations.
 To learn more about variable migration, see [variables](../variables).
 :::
 
+### Incidents
+
+Due to the [limitation regarding async before/after wait states](#async-beforeafter-wait-states), incident data from instances currently waiting due to failed jobs causing active incidents will not be migrated during runtime migration. We recommend to resolve incidents prior to runtime migration.
+
 ### BPMN elements
 
 Some BPMN elements and configurations supported in Camunda 7 are not supported in Camunda 8 or have specific limitations during migration. Below is an overview of these limitations and recommendations to address them.
@@ -165,6 +169,8 @@ The history migration has the following limitations.
 - To avoid collisions between definitions (process/decision/form), each definition migrated from Camunda 7 to 8 has its ID prefixed with `c7-legacy-`.
   - Do not deploy new definitions in Camunda 8 with IDs starting with this prefix to avoid conflicts.
 - Avoid manipulating Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable). See [Auto-cancellation of active instances](history.md#auto-cancellation-of-active-instances) for details.
+- When migrating entities, some might be skipped due to dependencies (parent entity not migrated yet). Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration. Example:
+  - Flow node instances might be skipped if their parent flow node (scope) hasn't been migrated yet.
 - The History Data Migrator does not support the following Camunda 8 entities or properties:
   - Sequence flow: Sequence flows cannot be highlighted in Operate.
   - User task migration metadata: Information for user tasks migrated via process instance migration is not available in Camunda 7.
@@ -183,7 +189,6 @@ The history migration has the following limitations.
 - As a result, you cannot query for the history of a subprocess or call activity using the
   parent process instance key.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5359
-- When migrating models including subprocesses, it is possible that during the migration flow nodes inside the subprocess are skipped due to dependencies. Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration.
 
 ### DMN
 
@@ -380,7 +385,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 
 | Property               | Can be migrated |
 | ---------------------- | --------------- |
-| flowNodeInstanceKey    | No              |
+| flowNodeInstanceKey    | Yes             |
 | processInstanceKey     | Yes             |
 | processDefinitionKey   | Yes             |
 | processDefinitionId    | Yes             |
@@ -388,7 +393,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | startDate              | Yes             |
 | endDate                | Yes             |
 | flowNodeId             | Yes             |
-| flowNodeName           | No              |
+| flowNodeName           | Yes             |
 | treePath               | Yes             |
 | type                   | Yes             |
 | state                  | Yes             |
@@ -396,9 +401,9 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | numSubprocessIncidents | No              |
 | hasIncident            | No              |
 | tenantId               | Yes             |
-| partitionId            | No              |
-| rootProcessInstanceKey | No              |
-| historyCleanupDate     | No              |
+| partitionId            | Yes             |
+| rootProcessInstanceKey | Yes             |
+| historyCleanupDate     | Yes             |
 
 ### Form
 
@@ -428,10 +433,10 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | processDefinitionKey   | Yes             |
 | processDefinitionId    | Yes             |
 | processInstanceKey     | Yes             |
-| rootProcessInstanceKey | No              |
+| rootProcessInstanceKey | Yes             |
 | flowNodeInstanceKey    | Yes             |
 | flowNodeId             | Yes             |
-| jobKey                 | Yes             |
+| jobKey                 | No              |
 | errorType              | No              |
 | errorMessage           | Yes             |
 | errorMessageHash       | No              |
@@ -512,7 +517,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | Property                 | Can be migrated |
 | ------------------------ | --------------- |
 | processInstanceKey       | Yes             |
-| rootProcessInstanceKey   | No              |
+| rootProcessInstanceKey   | Yes             |
 | processDefinitionId      | Yes             |
 | processDefinitionKey     | Yes             |
 | state                    | Yes             |
@@ -578,7 +583,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | formKey                  | No              |
 | processDefinitionKey     | Yes             |
 | processInstanceKey       | Yes             |
-| rootProcessInstanceKey   | No              |
+| rootProcessInstanceKey   | Yes             |
 | elementInstanceKey       | Yes             |
 | tenantId                 | Yes             |
 | dueDate                  | Yes             |
@@ -619,7 +624,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | isPreview              | No              |
 | scopeKey               | Yes             |
 | processInstanceKey     | Yes             |
-| rootProcessInstanceKey | No              |
+| rootProcessInstanceKey | Yes             |
 | processDefinitionId    | Yes             |
 | tenantId               | Yes             |
 | partitionId            | Yes             |

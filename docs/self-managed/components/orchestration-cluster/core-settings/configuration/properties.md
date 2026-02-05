@@ -4,6 +4,7 @@ title: "Property reference"
 description: "Learn about the configuration properties available in your Orchestration Cluster."
 toc_min_heading_level: 2
 toc_max_heading_level: 2
+hide_table_of_contents: false
 ---
 
 import Tabs from '@theme/Tabs';
@@ -14,253 +15,13 @@ As a Spring Boot application, the Orchestration Cluster supports standard
 
 The following configurations apply to all components within the Orchestration Cluster.
 
-## API
+import Api from './partials/\_api.md'
 
-<Tabs>
-  <TabItem value="application.yaml" label="Application properties">
+<Api />
 
-### `camunda.api.long-polling`
+import Cluster from './partials/\_cluster.md'
 
-| Property                                       | Description                                                                                                                           | Default value |
-| :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `camunda.api.long-polling.enabled`             | <p>Enable [long-polling](/components/concepts/job-workers.md#long-polling) for the Camunda gRPC API server.</p>                       | `true`        |
-| `camunda.api.long-polling.timeout`             | <p>Set the timeout for long polling in milliseconds.</p>                                                                              | `10000`       |
-| `camunda.api.long-polling.probe-timeout`       | <p>Set the probe timeout for long polling in milliseconds.</p>                                                                        | `10000`       |
-| `camunda.api.long-polling.min-empty-responses` | <p>Set the number of minimum empty responses. A minimum number of responses with jobCount of 0 infers that no jobs are available.</p> | `10s`         |
-
-  </TabItem>
-    <TabItem value="env" label="Environment variables">
-
-### `CAMUNDA_API_LONGPOLLING`
-
-| Property                                    | Description                                                                                                                           | Default value |
-| :------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `CAMUNDA_API_LONGPOLLING_ENABLED`           | <p>Enable [long-polling](/components/concepts/job-workers.md#long-polling) for the Camunda gRPC API server.</p>                       | `true`        |
-| `CAMUNDA_API_LONGPOLLING_TIMEOUT`           | <p>Set the timeout for long polling in milliseconds.</p>                                                                              | `10000`       |
-| `CAMUNDA_API_LONGPOLLING_PROBETIMEOUT`      | <p>Set the probe timeout for long polling in milliseconds.</p>                                                                        | `10000`       |
-| `CAMUNDA_API_LONGPOLLING_MINEMPTYRESPONSES` | <p>Set the number of minimum empty responses. A minimum number of responses with jobCount of 0 infers that no jobs are available.</p> | `10s`         |
-
-  </TabItem>
-</Tabs>
-
-## API - gRPC
-
-<Tabs>
-  <TabItem value="application.yaml" label="Application properties">
-
-### `camunda.api.grpc`
-
-| Property                                   | Description                                                                                                                                                                                                                                                           | Default value |
-| :----------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.api.grpc.address`                 | <p>Set the address the gateway binds to.</p>                                                                                                                                                                                                                          | `0.0.0.0`     |
-| `camunda.api.grpc.port`                    | <p>Set the port the gateway binds to.</p>                                                                                                                                                                                                                             | `26500`       |
-| `camunda.api.grpc.min-keep-alive-interval` | <p>Set the minimum keep alive interval.</p><ul><li>This setting specifies the minimum accepted interval between keep alive pings.</li><li>This value must be specified as a positive integer followed by 's' for seconds, 'm' for minutes or 'h' for hours.</li></ul> | `30s`         |
-| `camunda.api.grpc.max-message-size`        | <p>Set the maximum size of the incoming and outgoing messages (that is, commands and events).</p>                                                                                                                                                                     | `4MB`         |
-| `camunda.api.grpc.management-threads`      | <p>Set the number of threads the gateway will use to communicate with the broker cluster.</p>                                                                                                                                                                         | `1`           |
-
-### `camunda.api.grpc.ssl`
-
-| Property                                       | Description                                                                                                                          | Default value       |
-| :--------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- | :------------------ |
-| `camunda.api.grpc.ssl.enabled`                 | <p>Enable SSL (Secure Sockets Layer) authentication for the gateway.</p>                                                             | `false`             |
-| `camunda.api.grpc.ssl.certificate`             | <p>Set the path to the certificate chain file.</p>                                                                                   | Null                |
-| `camunda.api.grpc.ssl.certificate-private-key` | <p>Set the path to the private key file location.</p>                                                                                | Null                |
-| `camunda.api.grpc.ssl.key-store.file-path`     | <p>Configure the keystore file containing both the certificate chain and the private key. Currently only supports PKCS12 format.</p> | `/path/to/keystore` |
-| `camunda.api.grpc.ssl.key-store.password`      | <p>Configure the keystore password.</p>                                                                                              | Null                |
-
-### `camunda.api.grpc.interceptors`
-
-| Property                                     | Description                                                                                                                                                                                                                                                         | Default value |
-| :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `camunda.api.grpc.interceptors[]`            | <p>This property is part of Camunda's gRPC interceptor system, which allows you to add custom processing logic to gRPC requests and responses.</p><p>The property is a list of interceptor configurations, each requiring an `id`, `jar-path` and `class-name`.</p> | No entries    |
-| `camunda.api.grpc.interceptors[].id`         | <p>The unique identifier for a particular gRPC interceptor configuration.</p>                                                                                                                                                                                       | Null          |
-| `camunda.api.grpc.interceptors[].jar-path`   | <p>The file path to a JAR file that contains a custom gRPC interceptor implementation.</p>                                                                                                                                                                          | Null          |
-| `camunda.api.grpc.interceptors[].class-name` | <p>Set the fully qualified class name of a custom gRPC interceptor implementation that should be loaded and executed by the Camunda gRPC server.</p>                                                                                                                | Null          |
-
-</TabItem>
-<TabItem value="env" label="Environment variables">
-
-### `CAMUNDA_API_GRPC`
-
-| Property                                | Description                                                                                                                                                                                                                                                           | Default value |
-| :-------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_API_GRPC_ADDRESS`              | <p>Set the address the gateway binds to.</p>                                                                                                                                                                                                                          | `0.0.0.0`     |
-| `CAMUNDA_API_GRPC_PORT`                 | <p>Set the port the gateway binds to.</p>                                                                                                                                                                                                                             | `26500`       |
-| `CAMUNDA_API_GRPC_MINKEEPALIVEINTERVAL` | <p>Set the minimum keep alive interval.</p><ul><li>This setting specifies the minimum accepted interval between keep alive pings.</li><li>This value must be specified as a positive integer followed by 's' for seconds, 'm' for minutes or 'h' for hours.</li></ul> | `30s`         |
-| `CAMUNDA_API_GRPC_MAXMESSAGESIZE`       | <p>Set the maximum size of the incoming and outgoing messages (that is, commands and events).</p>                                                                                                                                                                     | `4MB`         |
-| `CAMUNDA_API_GRPC_MANAGEMENTTHREADS`    | <p>Set the number of threads the gateway will use to communicate with the broker cluster.</p>                                                                                                                                                                         | `1`           |
-
-### `CAMUNDA_API_GRPC_SSL`
-
-| Property                                     | Description                                                                                                                          | Default value       |
-| :------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- | :------------------ |
-| `CAMUNDA_API_GRPC_SSL_ENABLED`               | <p>Enable SSL (Secure Sockets Layer) authentication for the gateway.</p>                                                             | `false`             |
-| `CAMUNDA_API_GRPC_SSL_CERTIFICATE`           | <p>Set the path to the certificate chain file.</p>                                                                                   | Null                |
-| `CAMUNDA_API_GRPC_SSL_CERTIFICATEPRIVATEKEY` | <p>Set the path to the private key file location.</p>                                                                                | Null                |
-| `CAMUNDA_API_GRPC_SSL_KEYSTORE_FILEPATH`     | <p>Configure the keystore file containing both the certificate chain and the private key. Currently only supports PKCS12 format.</p> | `/path/to/keystore` |
-| `CAMUNDA_API_GRPC_SSL_KEYSTORE_PASSWORD`     | <p>Configure the keystore password.</p>                                                                                              | Null                |
-
-### `CAMUNDA_API_GRPC_INTERCEPTORS`
-
-| Property                                    | Description                                                                                                                                          | Default value |
-| :------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_API_GRPC_INTERCEPTORS`             | <p>List of gRPC interceptor configurations.</p><p>Each entry requires `ID`, `JARPATH`, and `CLASSNAME`.</p>                                          | No entries    |
-| `CAMUNDA_API_GRPC_INTERCEPTORS_0_ID`        | <p>The unique identifier for a particular gRPC interceptor configuration.</p>                                                                        | Null          |
-| `CAMUNDA_API_GRPC_INTERCEPTORS_0_JARPATH`   | <p>The file path to a JAR file that contains a custom gRPC interceptor implementation.</p>                                                           | Null          |
-| `CAMUNDA_API_GRPC_INTERCEPTORS_0_CLASSNAME` | <p>Set the fully qualified class name of a custom gRPC interceptor implementation that should be loaded and executed by the Camunda gRPC server.</p> | Null          |
-
-  </TabItem>
-</Tabs>
-
-## API - REST
-
-<Tabs>
-  <TabItem value="application.yaml" label="Application properties">
-
-### `camunda.api.rest.filters`
-
-| Property                              | Description                                                                                                                                                                                                                               | Default value |
-| :------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.api.rest.filters[]`          | <p>This property is part of Camunda's REST filter system, which allows you to add filters to REST requests and responses.</p><p>The property is a list of filter configurations, each requiring an `id`, `jar-path` and `class-name`.</p> | No entries    |
-| `camunda.api.rest.filters[].id`       | <p>The unique identifier for a particular REST filter configuration.</p>                                                                                                                                                                  | Null          |
-| `camunda.api.rest.filters.jar-path`   | <p>The file path to a JAR file that contains a custom REST filter implementation.</p>                                                                                                                                                     | Null          |
-| `camunda.api.rest.filters.class-name` | <p>Set the fully qualified class name of a custom REST filter implementation that should be loaded and executed by the Camunda REST server.</p>                                                                                           | Null          |
-
-### `camunda.api.rest.process-cache`
-
-| Property                                         | Description                                                                                  | Default value |
-| :----------------------------------------------- | :------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.api.rest.process-cache.max-size`        | <p>Set the maximum number of entries that can be stored in the REST API's process cache.</p> | `100`         |
-| `camunda.api.rest.process-cache.expiration-idle` | <p>Set the idle expiration time for entries in the REST API's process cache.</p>             | `null`        |
-
-### `camunda.api.rest.executor`
-
-| Property                                              | Description                                                                                                                                                                                                                                                                                                                                                                                                 | Default value |
-| :---------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.api.rest.executor.core-pool-size-multiplier` | <p>Multiplier applied to the number of available processors to compute the executor's core pool size (minimum number of threads kept alive).</p><p>Effective value: `corePoolSize` = `availableProcessors` \* `corePoolSizeMultiplier`.</p><p>Use a higher value if you have steady, continuous traffic and want to minimize cold-start latency. Keep it low to allow the pool to scale down when idle.</p> | `1`           |
-| `camunda.api.rest.executor.max-pool-size-multiplier`  | <p>Multiplier applied to the number of available processors to compute the executor's maximum pool size (hard cap on threads).</p><p>Effective value: `maxPoolSize` = `availableProcessors` \* `maxPoolSizeMultiplier`.</p><p>Must be >= `corePoolSizeMultiplier`.</p><p>Increase cautiously, as high values can cause oversubscription for CPU-bound workloads.</p>                                        | `2`           |
-| `camunda.api.rest.executor.keep-alive`                | <p>Time in seconds that threads above the core size may remain idle before being terminated.</p><p>Lower values reclaim resources faster after bursts. Higher values reduce thread creation/destruction churn if bursts are frequent.</p>                                                                                                                                                                   | `60s`         |
-| `camunda.api.rest.executor.queue-capacity`            | <p>Capacity of the executor's task queue. A small bounded queue (for example, `64`) is recommended to handle short bursts while still allowing the pool to grow.</p>                                                                                                                                                                                                                                        | `64`          |
-
-</TabItem>
-<TabItem value="env" label="Environment variables">
-
-### `CAMUNDA_API_REST_FILTERS`
-
-| Property                               | Description                                                                                                                                                                                                                               | Default value |
-| :------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_API_REST_FILTERS`             | <p>This property is part of Camunda's REST filter system, which allows you to add filters to REST requests and responses.</p><p>The property is a list of filter configurations, each requiring an `id`, `jar-path` and `class-name`.</p> | No entries    |
-| `CAMUNDA_API_REST_FILTERS_0_ID`        | <p>The unique identifier for a particular REST filter configuration.</p>                                                                                                                                                                  | Null          |
-| `CAMUNDA_API_REST_FILTERS_0_JARPATH`   | <p>The file path to a JAR file that contains a custom REST filter implementation.</p>                                                                                                                                                     | Null          |
-| `CAMUNDA_API_REST_FILTERS_0_CLASSNAME` | <p>Set the fully qualified class name of a custom REST filter implementation that should be loaded and executed by the Camunda REST server.</p>                                                                                           | Null          |
-
-### `CAMUNDA_API_REST_PROCESSCACHE`
-
-| Property                                       | Description                                                                                  | Default value |
-| :--------------------------------------------- | :------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_API_REST_PROCESSCACHE_MAXSIZE`        | <p>Set the maximum number of entries that can be stored in the REST API's process cache.</p> | `100`         |
-| `CAMUNDA_API_REST_PROCESSCACHE_EXPIRATIONIDLE` | <p>Set the idle expiration time for entries in the REST API's process cache.</p>             | `null`        |
-
-### `CAMUNDA_API_REST_EXECUTOR`
-
-| Property                                           | Description                                                                                                                                                                                                                                                                                                                                                                                                 | Default value |
-| :------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_API_REST_EXECUTOR_COREPOOLSIZEMULTIPLIER` | <p>Multiplier applied to the number of available processors to compute the executor's core pool size (minimum number of threads kept alive).</p><p>Effective value: `corePoolSize` = `availableProcessors` \* `corePoolSizeMultiplier`.</p><p>Use a higher value if you have steady, continuous traffic and want to minimize cold-start latency. Keep it low to allow the pool to scale down when idle.</p> | `1`           |
-| `CAMUNDA_API_REST_EXECUTOR_MAXPOOLSIZEMULTIPLIER`  | <p>Multiplier applied to the number of available processors to compute the executor's maximum pool size (hard cap on threads).</p><p>Effective value: `maxPoolSize` = `availableProcessors` \* `maxPoolSizeMultiplier`.</p><p>Must be >= `corePoolSizeMultiplier`.</p><p>Increase cautiously, as high values can cause oversubscription for CPU-bound workloads.</p>                                        | `2`           |
-| `CAMUNDA_API_REST_EXECUTOR_KEEPALIVE`              | <p>Time in seconds that threads above the core size may remain idle before being terminated.</p><p>Lower values reclaim resources faster after bursts. Higher values reduce thread creation/destruction churn if bursts are frequent.</p>                                                                                                                                                                   | `60s`         |
-| `CAMUNDA_API_REST_EXECUTOR_QUEUECAPACITY`          | <p>Capacity of the executor's task queue. A small bounded queue (for example, `64`) is recommended to handle short bursts while still allowing the pool to grow.</p>                                                                                                                                                                                                                                        | `64`          |
-
-  </TabItem>
-</Tabs>
-
-## Cluster
-
-<Tabs>
-  <TabItem value="application.yaml" label="Application properties">
-
-### `camunda.cluster`
-
-| Property                             | Description                                                                                                                                        | Default value |
-| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.cluster.network.host`       | <p>The network host for internal cluster communication.</p>                                                                                        | `null`        |
-| `camunda.cluster.node-id`            | <p>Specifies the unique id of this broker node in a cluster. The id should be between 0 and number of nodes in the cluster (exclusive).</p>        | `0`           |
-| `camunda.cluster.partition-count`    | <p>The number of partitions in the cluster.</p>                                                                                                    | `1`           |
-| `camunda.cluster.replication-factor` | <p>The number of replicas for each partition in the cluster. The replication factor cannot be greater than the number of nodes in the cluster.</p> | `1`           |
-| `camunda.cluster.size`               | <p>The number of nodes in the cluster.</p>                                                                                                         | `1`           |
-
-### `camunda.cluster.global-listeners`
-
-| Property                                                        | Description                                                                                                                                                                                                                                                 | Default value |
-| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.cluster.global-listeners.user-task[]`                  | <p>List of configuration entries for global user task listeners (see also [Global user task listeners](/components/concepts/global-user-task-listeners.md).)</p>                                                                                            | No entries    |
-| `camunda.cluster.global-listeners.user-task[].event-types[]`    | <p>List of user task event types that trigger the listener. Supported values are `creating`, `assigning`, `updating`, `completing`, and `canceling`. The shorthand `all` value is also available if the listener should react to all lifecycle events. </p> | -             |
-| `camunda.cluster.global-listeners.user-task[].type`             | <p>The name of the job type. Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`. </p>                                                                                                    | -             |
-| `camunda.cluster.global-listeners.user-task[].retries`          | <p>The number of retries for the user task listener job. </p>                                                                                                                                                                                               | `"3"`         |
-| `camunda.cluster.global-listeners.user-task[].after-non-global` | <p>Boolean flag indicating whether the listener should run after model-level listeners. </p>                                                                                                                                                                | `false`       |
-
-### `camunda.cluster.metadata`
-
-| Property                                        | Description                                                                                                                                                         | Default value |
-| :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `camunda.cluster.metadata.sync-delay`           | <p>The delay between two sync requests in the `ClusterConfigurationManager`. A sync request is sent to another node to get the latest topology of the cluster. </p> | `10s`         |
-| `camunda.cluster.metadata.sync-request-timeout` | <p>The timeout for a sync request in the `ClusterConfigurationManager`.</p>                                                                                         | `2s`          |
-| `camunda.cluster.metadata.gossip-fanout`        | <p>The number of nodes to which a cluster topology is gossiped.</p>                                                                                                 | `2`           |
-
-### `camunda.cluster.raft`
-
-| Property                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default value |
-| :----------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.cluster.raft`                           | <p>Configuration for the Raft consensus protocol in the cluster.</p><p>This class provides settings for Raft algorithm parameters including timing, elections, and log flushing.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | none          |
-| `camunda.cluster.raft.priority-election-enabled` | <p>When this flag is enabled, the leader election algorithm attempts to elect the leaders based on a pre-defined priority. As a result, it tries to distribute the leaders uniformly across the brokers.</p><p>Note that it is only a best-effort strategy. It is not guaranteed to be a strictly uniform distribution.</p>                                                                                                                                                                                                                                                                                                                                      | `true`        |
-| `camunda.cluster.raft.flush-enabled`             | <p>If false, explicit flushing of the Raft log is disabled, and flushing only occurs right before a snapshot is taken. You should only disable explicit flushing if you are willing to accept potential data loss at the expense of performance. Before disabling it, try the delayed options, which provide a trade-off between safety and performance.</p><p>By default, for a given partition, data is flushed on every leader commit, and every follower append. This is to ensure consistency across all replicas. Disabling this can cause inconsistencies, and at worst, data corruption or data loss scenarios.</p>                                      | `true`        |
-| `camunda.cluster.raft.flush-delay`               | <p>If the delay is > 0, then flush requests are delayed by at least the given period. It is recommended that you find the smallest delay here with which you achieve your performance goals.</p><p>It's also likely that anything above 30s is not useful, as this is the typical default flush interval for the Linux OS.</p><p>The default behavior is optimized for safety, and flushing occurs on every leader commit and follower append in a synchronous fashion.</p>                                                                                                                                                                                      | `0s`          |
-| `camunda.cluster.raft.heartbeat-interval`        | <p>The heartbeat interval for Raft. The leader sends a heartbeat to a follower every `heartbeatInterval`. This is an advanced setting.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `250ms`       |
-| `camunda.cluster.raft.election-timeout`          | <p>The election timeout for Raft. If a follower does not receive a heartbeat from the leader within an election timeout, it can start a new leader election.</p><p>The `electionTimeout` should be greater than the configured `heartbeatInterval`.</p><p>When the `electionTimeout` is large, there will be a delay in detecting a leader failure.</p><p>When the `electionTimeout` is small, it can lead to false positives when detecting leader failures and thus leading to unnecessary leader changes.</p><p>If the network latency between the nodes is high, it is recommended to have a higher election timeout.</p><p>This is an advanced setting.</p> | `2.5s`        |
-
-</TabItem>
-<TabItem value="env" label="Environment variables">
-
-### `CAMUNDA_CLUSTER`
-
-| Property                            | Description                                                                                                                                        | Default value |
-| :---------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_CLUSTER_NETWORK_HOST`      | <p>The network host for internal cluster communication.</p>                                                                                        | `null`        |
-| `CAMUNDA_CLUSTER_NODEID`            | <p>Specifies the unique id of this broker node in a cluster. The id should be between 0 and number of nodes in the cluster (exclusive).</p>        | `0`           |
-| `CAMUNDA_CLUSTER_PARTITIONCOUNT`    | <p>The number of partitions in the cluster.</p>                                                                                                    | `1`           |
-| `CAMUNDA_CLUSTER_REPLICATIONFACTOR` | <p>The number of replicas for each partition in the cluster. The replication factor cannot be greater than the number of nodes in the cluster.</p> | `1`           |
-| `CAMUNDA_CLUSTER_SIZE`              | <p>The number of nodes in the cluster.</p>                                                                                                         | `1`           |
-
-### `CAMUNDA_CLUSTER_GLOBAL_LISTENERS`
-
-| Property                                                        | Description                                                                                                                                                                                                                                                 | Default value |
-| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK`                    | <p>List of configuration entries for global user task listeners (see also [Global user task listeners](/components/concepts/global-user-task-listeners.md).)</p>                                                                                            | No entries    |
-| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_EVENT_TYPES`      | <p>List of user task event types that trigger the listener. Supported values are `creating`, `assigning`, `updating`, `completing`, and `canceling`. The shorthand `all` value is also available if the listener should react to all lifecycle events. </p> | -             |
-| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_TYPE`             | <p>The name of the job type. Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`. </p>                                                                                                    | -             |
-| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_RETRIES`          | <p>The number of retries for the user task listener job. </p>                                                                                                                                                                                               | `"3"`         |
-| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_AFTER_NON_GLOBAL` | <p>Boolean flag indicating whether the listener should run after model-level listeners. </p>                                                                                                                                                                | `false`       |
-
-### `CAMUNDA_CLUSTER_METADATA`
-
-| Property                                      | Description                                                                                                                                                         | Default value |
-| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `CAMUNDA_CLUSTER_METADATA_SYNCDELAY`          | <p>The delay between two sync requests in the `ClusterConfigurationManager`. A sync request is sent to another node to get the latest topology of the cluster. </p> | `10s`         |
-| `CAMUNDA_CLUSTER_METADATA_SYNCREQUESTTIMEOUT` | <p>The timeout for a sync request in the `ClusterConfigurationManager`.</p>                                                                                         | `2s`          |
-| `CAMUNDA_CLUSTER_METADATA_GOSSIPFANOUT`       | <p>The number of nodes to which a cluster topology is gossiped.</p>                                                                                                 | `2`           |
-
-### `CAMUNDA_CLUSTER_RAFT`
-
-| Property                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default value |
-| :--------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_CLUSTER_RAFT`                         | <p>Configuration for the Raft consensus protocol in the cluster.</p><p>This class provides settings for Raft algorithm parameters including timing, elections, and log flushing.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | none          |
-| `CAMUNDA_CLUSTER_RAFT_PRIORITYELECTIONENABLED` | <p>When this flag is enabled, the leader election algorithm attempts to elect the leaders based on a pre-defined priority. As a result, it tries to distribute the leaders uniformly across the brokers.</p><p>Note that it is only a best-effort strategy. It is not guaranteed to be a strictly uniform distribution.</p>                                                                                                                                                                                                                                                                                                                                      | `true`        |
-| `CAMUNDA_CLUSTER_RAFT_FLUSHENABLED`            | <p>If false, explicit flushing of the Raft log is disabled, and flushing only occurs right before a snapshot is taken. You should only disable explicit flushing if you are willing to accept potential data loss at the expense of performance. Before disabling it, try the delayed options, which provide a trade-off between safety and performance.</p><p>By default, for a given partition, data is flushed on every leader commit, and every follower append. This is to ensure consistency across all replicas. Disabling this can cause inconsistencies, and at worst, data corruption or data loss scenarios.</p>                                      | `true`        |
-| `CAMUNDA_CLUSTER_RAFT_FLUSHDELAY`              | <p>If the delay is > 0, then flush requests are delayed by at least the given period. It is recommended that you find the smallest delay here with which you achieve your performance goals.</p><p>It's also likely that anything above 30s is not useful, as this is the typical default flush interval for the Linux OS.</p><p>The default behavior is optimized for safety, and flushing occurs on every leader commit and follower append in a synchronous fashion.</p>                                                                                                                                                                                      | `0s`          |
-| `CAMUNDA_CLUSTER_RAFT_HEARTBEATINTERVAL`       | <p>The heartbeat interval for Raft. The leader sends a heartbeat to a follower every `heartbeatInterval`. This is an advanced setting.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `'250ms'`     |
-| `CAMUNDA_CLUSTER_RAFT_ELECTIONTIMEOUT`         | <p>The election timeout for Raft. If a follower does not receive a heartbeat from the leader within an election timeout, it can start a new leader election.</p><p>The `electionTimeout` should be greater than the configured `heartbeatInterval`.</p><p>When the `electionTimeout` is large, there will be a delay in detecting a leader failure.</p><p>When the `electionTimeout` is small, it can lead to false positives when detecting leader failures and thus leading to unnecessary leader changes.</p><p>If the network latency between the nodes is high, it is recommended to have a higher election timeout.</p><p>This is an advanced setting.</p> | `2.5s`        |
-
-  </TabItem>
-</Tabs>
+<Cluster />
 
 ## Data
 
@@ -275,6 +36,16 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.data.export.distribution-interval` | <p>Configures the rate at which exporter positions are distributed to the followers. This is useful for fail-over and taking snapshots.</p><p>The follower is able to take snapshots based on replayed and distributed export position. When a follower takes over it can recover from the snapshot, it doesn't need to replay and export everything.</p><p>For example, it can start from the last exported position it has received by the distribution mechanism.</p> | `15s`         |
 | `camunda.data.export.skip-records`          | <p>Enable the exporters to skip record position. Allows to skip certain records by their position.</p><p>This is useful for debugging or skipping a record that is preventing processing or exporting to continue.</p><p>Record positions defined to skip in this definition will be skipped in all exporters. The value is a comma-separated list of records ids to skip. Whitespace is ignored.</p>                                                                    | `[]`          |
 
+### `camunda.data.audit-log`
+
+| Property                                   | Description                                                                                                 | Default value                  |
+| :----------------------------------------- | :---------------------------------------------------------------------------------------------------------- | :----------------------------- |
+| `camunda.data.audit-log.enabled`           | <p>Enable or disable the audit log.</p>                                                                     | `true`                         |
+| `camunda.data.audit-log.user.categories`   | <p>List of audit log categories to include for <strong>user</strong>-initiated actions.</p>                 | `[OPERATOR, USER_TASK, ADMIN]` |
+| `camunda.data.audit-log.user.excludes`     | <p>List of users to exclude from audit logging.</p>                                                         |                                |
+| `camunda.data.audit-log.client.categories` | <p>List of audit log categories to include for <strong>client</strong>-initiated actions (API clients).</p> | `[OPERATOR, USER_TASK, ADMIN]` |
+| `camunda.data.audit-log.client.excludes`   | <p>List of clients to exclude from audit logging.</p>                                                       |                                |
+
 </TabItem>
   <TabItem value="env" label="Environment variables">
 
@@ -285,6 +56,16 @@ The following configurations apply to all components within the Orchestration Cl
 | `CAMUNDA_DATA_SNAPSHOTPERIOD`              | <p>How often snapshots are taken of streams (in minutes).</p>                                                                                                                                                                                                                                                                                                                                                                                                            | `5m`          |
 | `CAMUNDA_DATA_EXPORT_DISTRIBUTIONINTERVAL` | <p>Configures the rate at which exporter positions are distributed to the followers. This is useful for fail-over and taking snapshots.</p><p>The follower is able to take snapshots based on replayed and distributed export position. When a follower takes over it can recover from the snapshot, it doesn't need to replay and export everything.</p><p>For example, it can start from the last exported position it has received by the distribution mechanism.</p> | `15s`         |
 | `CAMUNDA_DATA_EXPORT_SKIPRECORDS`          | <p>Enable the exporters to skip record position. Allows to skip certain records by their position.</p><p>This is useful for debugging or skipping a record that is preventing processing or exporting to continue.</p><p>Record positions defined to skip in this definition will be skipped in all exporters. The value is a comma-separated list of records ids to skip. Whitespace is ignored.</p>                                                                    | `[]`          |
+
+### `CAMUNDA_DATA_AUDITLOG`
+
+| Property                                  | Description                                                                                                 | Default value                  |
+| :---------------------------------------- | :---------------------------------------------------------------------------------------------------------- | :----------------------------- |
+| `CAMUNDA_DATA_AUDITLOG_ENABLED`           | <p>Enable or disable the audit log.</p>                                                                     | `true`                         |
+| `CAMUNDA_DATA_AUDITLOG_USER_CATEGORIES`   | <p>List of audit log categories to include for <strong>user</strong>-initiated actions.</p>                 | `[OPERATOR, USER_TASK, ADMIN]` |
+| `CAMUNDA_DATA_AUDITLOG_USER_EXCLUDES`     | <p>List of users to exclude from audit logging.</p>                                                         |                                |
+| `CAMUNDA_DATA_AUDITLOG_CLIENT_CATEGORIES` | <p>List of audit log categories to include for <strong>client</strong>-initiated actions (API clients).</p> | `[OPERATOR, USER_TASK, ADMIN]` |
+| `CAMUNDA_DATA_AUDITLOG_CLIENT_EXCLUDES`   | <p>List of clients to exclude from audit logging.</p>                                                       |                                |
 
   </TabItem>
 </Tabs>
@@ -422,33 +203,49 @@ The following configurations apply to all components within the Orchestration Cl
 
 ### `camunda.data.secondary-storage.elasticsearch`
 
-| Property                                                                        | Description                                                                                           | Default value           |
-| :------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------- | :---------------------- |
-| `camunda.data.secondary-storage.elasticsearch.url`                              | <p>Endpoint for the database configured as secondary storage.</p>                                     | `http://localhost:9200` |
-| `camunda.data.secondary-storage.elasticsearch.cluster-name`                     | <p>Name of the cluster.</p>                                                                           | `elasticsearch`         |
-| `camunda.data.secondary-storage.elasticsearch.username`                         | <p>Username for the database configured as secondary storage.</p>                                     | `''`                    |
-| `camunda.data.secondary-storage.elasticsearch.password`                         | <p>Password for the database configured as secondary storage.</p>                                     | `''`                    |
-| `camunda.data.secondary-storage.elasticsearch.security.enabled`                 | <p>Enable security.</p>                                                                               | `false`                 |
-| `camunda.data.secondary-storage.elasticsearch.security.certificate-path`        | <p>Path to certificate used by Elasticsearch.</p>                                                     | `''`                    |
-| `camunda.data.secondary-storage.elasticsearch.security.verify-hostname`         | <p>Should the hostname be validated.</p>                                                              | `true`                  |
-| `camunda.data.secondary-storage.elasticsearch.security.self-signed`             | <p>Certificate was self-signed.</p>                                                                   | `false`                 |
-| `camunda.data.secondary-storage.elasticsearch.index-prefix`                     | <p>Prefix to apply to the indexes.</p>                                                                | `''`                    |
-| `camunda.data.secondary-storage.elasticsearch.history.process-instance-enabled` | <p>If `true`, enables the archiving of the completed process instances and their related objects.</p> | `true`                  |
+| Property                                                                               | Description                                                                                                                                                                                          | Default value           |
+| :------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------- |
+| `camunda.data.secondary-storage.elasticsearch.url`                                     | <p>Endpoint for the database configured as secondary storage. Mutually exclusive with `urls` - configure only one.</p>                                                                               | `http://localhost:9200` |
+| `camunda.data.secondary-storage.elasticsearch.urls`                                    | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters. Mutually exclusive with `url` - configure only one.</p>                                          | `[]`                    |
+| `camunda.data.secondary-storage.elasticsearch.cluster-name`                            | <p>Name of the cluster.</p>                                                                                                                                                                          | `elasticsearch`         |
+| `camunda.data.secondary-storage.elasticsearch.username`                                | <p>Username for the database configured as secondary storage.</p>                                                                                                                                    | `''`                    |
+| `camunda.data.secondary-storage.elasticsearch.password`                                | <p>Password for the database configured as secondary storage.</p>                                                                                                                                    | `''`                    |
+| `camunda.data.secondary-storage.elasticsearch.security.enabled`                        | <p>Enable security.</p>                                                                                                                                                                              | `false`                 |
+| `camunda.data.secondary-storage.elasticsearch.security.certificate-path`               | <p>Path to certificate used by Elasticsearch.</p>                                                                                                                                                    | `''`                    |
+| `camunda.data.secondary-storage.elasticsearch.security.verify-hostname`                | <p>Should the hostname be validated.</p>                                                                                                                                                             | `true`                  |
+| `camunda.data.secondary-storage.elasticsearch.security.self-signed`                    | <p>Certificate was self-signed.</p>                                                                                                                                                                  | `false`                 |
+| `camunda.data.secondary-storage.elasticsearch.index-prefix`                            | <p>Prefix to apply to the indexes.</p>                                                                                                                                                               | `''`                    |
+| `camunda.data.secondary-storage.elasticsearch.history.process-instance-enabled`        | <p>If `true`, enables the archiving of the completed process instances and their related objects.</p>                                                                                                | `true`                  |
+| `camunda.data.secondary-storage.elasticsearch.history.process-instance-retention-mode` | <p>Controls the retention behavior for process instance data in secondary storage. Supported values are <code>PI_HIERARCHY</code>, <code>PI_HIERARCHY_IGNORE_LEGACY</code>, and <code>PI</code>.</p> | `PI_HIERARCHY`          |
+| `camunda.data.secondary-storage.elasticsearch.proxy.enabled`                           | <p>Enable proxy for connecting to Elasticsearch.</p>                                                                                                                                                 | `false`                 |
+| `camunda.data.secondary-storage.elasticsearch.proxy.host`                              | <p>Proxy host. Required if proxy is enabled.</p>                                                                                                                                                     | `''`                    |
+| `camunda.data.secondary-storage.elasticsearch.proxy.port`                              | <p>Proxy port. Required if proxy is enabled.</p>                                                                                                                                                     | `''`                    |
+| `camunda.data.secondary-storage.elasticsearch.proxy.ssl-enabled`                       | <p>Enable SSL for the proxy connection.</p>                                                                                                                                                          | `false`                 |
+| `camunda.data.secondary-storage.elasticsearch.proxy.username`                          | <p>Username for proxy authentication.</p>                                                                                                                                                            | `''`                    |
+| `camunda.data.secondary-storage.elasticsearch.proxy.password`                          | <p>Password for proxy authentication.</p>                                                                                                                                                            | `''`                    |
 
 ### `camunda.data.secondary-storage.opensearch`
 
-| Property                                                                     | Description                                                                                           | Default value           |
-| :--------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- | :---------------------- |
-| `camunda.data.secondary-storage.opensearch.url`                              | <p>Endpoint for the database configured as secondary storage.</p>                                     | `http://localhost:9200` |
-| `camunda.data.secondary-storage.opensearch.cluster-name`                     | <p>Name of the cluster.</p>                                                                           | `elasticsearch`         |
-| `camunda.data.secondary-storage.opensearch.username`                         | <p>Username for the database configured as secondary storage.</p>                                     | `''`                    |
-| `camunda.data.secondary-storage.opensearch.password`                         | <p>Password for the database configured as secondary storage..</p>                                    | `''`                    |
-| `camunda.data.secondary-storage.opensearch.security.enabled`                 | <p>Enable security</p>                                                                                | `false`                 |
-| `camunda.data.secondary-storage.opensearch.security.certificate-path`        | <p>Path to certificate used by OpenSearch.</p>                                                        | `''`                    |
-| `camunda.data.secondary-storage.opensearch.security.verify-hostname`         | <p>CShould the hostname be validated.</p>                                                             | `true`                  |
-| `camunda.data.secondary-storage.opensearch.security.self-signed`             | <p>Certificate was self-signed.</p>                                                                   | `false`                 |
-| `camunda.data.secondary-storage.opensearch.index-prefix`                     | <p>Prefix to apply to the indexes.</p>                                                                | `''`                    |
-| `camunda.data.secondary-storage.opensearch.history.process-instance-enabled` | <p>If `true`, enables the archiving of the completed process instances and their related objects.</p> | `true`                  |
+| Property                                                                            | Description                                                                                                                                                                                          | Default value           |
+| :---------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------- |
+| `camunda.data.secondary-storage.opensearch.url`                                     | <p>Endpoint for the database configured as secondary storage. Mutually exclusive with `urls` - configure only one.</p>                                                                               | `http://localhost:9200` |
+| `camunda.data.secondary-storage.opensearch.urls`                                    | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters. Mutually exclusive with `url` - configure only one.</p>                                          | `[]`                    |
+| `camunda.data.secondary-storage.opensearch.cluster-name`                            | <p>Name of the cluster.</p>                                                                                                                                                                          | `elasticsearch`         |
+| `camunda.data.secondary-storage.opensearch.username`                                | <p>Username for the database configured as secondary storage.</p>                                                                                                                                    | `''`                    |
+| `camunda.data.secondary-storage.opensearch.password`                                | <p>Password for the database configured as secondary storage.</p>                                                                                                                                    | `''`                    |
+| `camunda.data.secondary-storage.opensearch.security.enabled`                        | <p>Enable security.</p>                                                                                                                                                                              | `false`                 |
+| `camunda.data.secondary-storage.opensearch.security.certificate-path`               | <p>Path to certificate used by OpenSearch.</p>                                                                                                                                                       | `''`                    |
+| `camunda.data.secondary-storage.opensearch.security.verify-hostname`                | <p>Should the hostname be validated.</p>                                                                                                                                                             | `true`                  |
+| `camunda.data.secondary-storage.opensearch.security.self-signed`                    | <p>Certificate was self-signed.</p>                                                                                                                                                                  | `false`                 |
+| `camunda.data.secondary-storage.opensearch.index-prefix`                            | <p>Prefix to apply to the indexes.</p>                                                                                                                                                               | `''`                    |
+| `camunda.data.secondary-storage.opensearch.history.process-instance-enabled`        | <p>If `true`, enables the archiving of the completed process instances and their related objects.</p>                                                                                                | `true`                  |
+| `camunda.data.secondary-storage.opensearch.history.process-instance-retention-mode` | <p>Controls the retention behavior for process instance data in secondary storage. Supported values are <code>PI_HIERARCHY</code>, <code>PI_HIERARCHY_IGNORE_LEGACY</code>, and <code>PI</code>.</p> | `PI_HIERARCHY`          |
+| `camunda.data.secondary-storage.opensearch.proxy.enabled`                           | <p>Enable proxy for connecting to OpenSearch.</p>                                                                                                                                                    | `false`                 |
+| `camunda.data.secondary-storage.opensearch.proxy.host`                              | <p>Proxy host. Required if proxy is enabled.</p>                                                                                                                                                     | `''`                    |
+| `camunda.data.secondary-storage.opensearch.proxy.port`                              | <p>Proxy port. Required if proxy is enabled.</p>                                                                                                                                                     | `''`                    |
+| `camunda.data.secondary-storage.opensearch.proxy.ssl-enabled`                       | <p>Enable SSL for the proxy connection.</p>                                                                                                                                                          | `false`                 |
+| `camunda.data.secondary-storage.opensearch.proxy.username`                          | <p>Username for proxy authentication.</p>                                                                                                                                                            | `''`                    |
+| `camunda.data.secondary-storage.opensearch.proxy.password`                          | <p>Password for proxy authentication.</p>                                                                                                                                                            | `''`                    |
 
 </TabItem>
 <TabItem value="env" label="Environment variables">
@@ -462,31 +259,49 @@ The following configurations apply to all components within the Orchestration Cl
 
 ### `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH`
 
-| Property                                                               | Description                                                       | Default value           |
-| :--------------------------------------------------------------------- | :---------------------------------------------------------------- | :---------------------- |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URL`                      | <p>Endpoint for the database configured as secondary storage.</p> | `http://localhost:9200` |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_CLUSTERNAME`              | <p>Name of the cluster.</p>                                       | `elasticsearch`         |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_USERNAME`                 | <p>Username for the database configured as secondary storage.</p> | `''`                    |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PASSWORD`                 | <p>Password for the database configured as secondary storage.</p> | `''`                    |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_ENABLED`         | <p>Enable security.</p>                                           | `false`                 |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_CERTIFICATEPATH` | <p>Path to certificate used by Elasticsearch.</p>                 | `''`                    |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_VERIFYHOSTNAME`  | <p>Should the hostname be validated.</p>                          | `true`                  |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_SELFSIGNED`      | <p>Certificate was self-signed.</p>                               | `false`                 |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_INDEXPREFIX`              | <p>Prefix to apply to the indexes.</p>                            | `''`                    |
+| Property                                                                           | Description                                                                                                                                                                                          | Default value           |
+| :--------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------- |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URL`                                  | <p>Endpoint for the database configured as secondary storage. Mutually exclusive with `URLS` - configure only one.</p>                                                                               | `http://localhost:9200` |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URLS`                                 | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters. Mutually exclusive with `URL` - configure only one.</p>                                          | `[]`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_CLUSTERNAME`                          | <p>Name of the cluster.</p>                                                                                                                                                                          | `elasticsearch`         |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_USERNAME`                             | <p>Username for the database configured as secondary storage.</p>                                                                                                                                    | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PASSWORD`                             | <p>Password for the database configured as secondary storage.</p>                                                                                                                                    | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_ENABLED`                     | <p>Enable security.</p>                                                                                                                                                                              | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_CERTIFICATEPATH`             | <p>Path to certificate used by Elasticsearch.</p>                                                                                                                                                    | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_VERIFYHOSTNAME`              | <p>Should the hostname be validated.</p>                                                                                                                                                             | `true`                  |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_SELFSIGNED`                  | <p>Certificate was self-signed.</p>                                                                                                                                                                  | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_HISTORY_PROCESSINSTANCEENABLED`       | <p>If <code>true</code>, enables the archiving of the completed process instances and their related objects.</p>                                                                                     | `true`                  |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_HISTORY_PROCESSINSTANCERETENTIONMODE` | <p>Controls the retention behavior for process instance data in secondary storage. Supported values are <code>PI_HIERARCHY</code>, <code>PI_HIERARCHY_IGNORE_LEGACY</code>, and <code>PI</code>.</p> | `PI_HIERARCHY`          |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_INDEXPREFIX`                          | <p>Prefix to apply to the indexes.</p>                                                                                                                                                               | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PROXY_ENABLED`                        | <p>Enable proxy for connecting to Elasticsearch.</p>                                                                                                                                                 | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PROXY_HOST`                           | <p>Proxy host. Required if proxy is enabled.</p>                                                                                                                                                     | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PROXY_PORT`                           | <p>Proxy port. Required if proxy is enabled.</p>                                                                                                                                                     | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PROXY_SSLENABLED`                     | <p>Enable SSL for the proxy connection.</p>                                                                                                                                                          | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PROXY_USERNAME`                       | <p>Username for proxy authentication.</p>                                                                                                                                                            | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PROXY_PASSWORD`                       | <p>Password for proxy authentication.</p>                                                                                                                                                            | `''`                    |
 
 ### `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH`
 
-| Property                                                            | Description                                                        | Default value           |
-| :------------------------------------------------------------------ | :----------------------------------------------------------------- | :---------------------- |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_URL`                      | <p>Endpoint for the database configured as secondary storage.</p>  | `http://localhost:9200` |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_CLUSTERNAME`              | <p>Name of the cluster.</p>                                        | `elasticsearch'`        |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_USERNAME`                 | <p>Username for the database configured as secondary storage.</p>  | `''`                    |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PASSWORD`                 | <p>Password for the database configured as secondary storage..</p> | `''`                    |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_ENABLED`         | <p>Enable security</p>                                             | `false`                 |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_CERTIFICATEPATH` | <p>Path to certificate used by OpenSearch.</p>                     | `''`                    |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_VERIFYHOSTNAME`  | <p>CShould the hostname be validated.</p>                          | `true`                  |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_SELFSIGNED`      | <p>Certificate was self-signed.</p>                                | `false`                 |
-| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_INDEXPREFIX`              | <p>Prefix to apply to the indexes.</p>                             | `''`                    |
+| Property                                                                        | Description                                                                                                                                                                                          | Default value           |
+| :------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------- |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_URL`                                  | <p>Endpoint for the database configured as secondary storage. Mutually exclusive with `URLS` - configure only one.</p>                                                                               | `http://localhost:9200` |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_URLS`                                 | <p>List of endpoints for the database configured as secondary storage. Use for multi-node clusters. Mutually exclusive with `URL` - configure only one.</p>                                          | `[]`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_CLUSTERNAME`                          | <p>Name of the cluster.</p>                                                                                                                                                                          | `elasticsearch`         |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_USERNAME`                             | <p>Username for the database configured as secondary storage.</p>                                                                                                                                    | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PASSWORD`                             | <p>Password for the database configured as secondary storage.</p>                                                                                                                                    | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_ENABLED`                     | <p>Enable security.</p>                                                                                                                                                                              | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_CERTIFICATEPATH`             | <p>Path to certificate used by OpenSearch.</p>                                                                                                                                                       | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_VERIFYHOSTNAME`              | <p>Should the hostname be validated.</p>                                                                                                                                                             | `true`                  |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_SELFSIGNED`                  | <p>Certificate was self-signed.</p>                                                                                                                                                                  | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_HISTORY_PROCESSINSTANCEENABLED`       | <p>If <code>true</code>, enables the archiving of the completed process instances and their related objects.</p>                                                                                     | `true`                  |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_HISTORY_PROCESSINSTANCERETENTIONMODE` | <p>Controls the retention behavior for process instance data in secondary storage. Supported values are <code>PI_HIERARCHY</code>, <code>PI_HIERARCHY_IGNORE_LEGACY</code>, and <code>PI</code>.</p> | `PI_HIERARCHY`          |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_INDEXPREFIX`                          | <p>Prefix to apply to the indexes.</p>                                                                                                                                                               | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PROXY_ENABLED`                        | <p>Enable proxy for connecting to OpenSearch.</p>                                                                                                                                                    | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PROXY_HOST`                           | <p>Proxy host. Required if proxy is enabled.</p>                                                                                                                                                     | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PROXY_PORT`                           | <p>Proxy port. Required if proxy is enabled.</p>                                                                                                                                                     | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PROXY_SSLENABLED`                     | <p>Enable SSL for the proxy connection.</p>                                                                                                                                                          | `false`                 |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PROXY_USERNAME`                       | <p>Username for proxy authentication.</p>                                                                                                                                                            | `''`                    |
+| `CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PROXY_PASSWORD`                       | <p>Password for proxy authentication.</p>                                                                                                                                                            | `''`                    |
 
   </TabItem>
 </Tabs>
@@ -500,7 +315,7 @@ The following configurations apply to all components within the Orchestration Cl
 
 | Property                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Default value |
 | :----------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.data.primary-storage.directory`         | <p>Specify the directory in which data is stored.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `'./data'`    |
+| `camunda.data.primary-storage.directory`         | <p>Specify the directory in which data is stored.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `'data'`      |
 | `camunda.data.primary-storage.runtime-directory` | <p>Specify the directory in which runtime is stored.</p><ul><li>By default, runtime is stored in `directory` for data.</li><li>If `runtime-directory` is configured, then the configured directory will be used. It will have a subdirectory for each partition to store its runtime.</li><li>There is no need to store the runtime in a persistent storage.</li><li>This configuration allows you to split runtime to another disk to optimize for performance and disk usage.</li></ul><p><strong>Note:</strong> If runtime is on a different disk than the data directory, files must be copied to the data directory while taking the snapshot. This can impact disk i/o or performance during snapshotting.</p> | `''`          |
 
 ### `camunda.data.primary-storage.disk`
@@ -540,7 +355,7 @@ The following configurations apply to all components within the Orchestration Cl
 
 | Property                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Default value |
 | :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_DATA_PRIMARYSTORAGE_DIRECTORY`        | <p>Specify the directory in which data is stored.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `./data`      |
+| `CAMUNDA_DATA_PRIMARYSTORAGE_DIRECTORY`        | <p>Specify the directory in which data is stored.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `data`        |
 | `CAMUNDA_DATA_PRIMARYSTORAGE_RUNTIMEDIRECTORY` | <p>Specify the directory in which runtime is stored.</p><ul><li>By default, runtime is stored in `directory` for data.</li><li>If `runtime-directory` is configured, then the configured directory will be used. It will have a subdirectory for each partition to store its runtime.</li><li>There is no need to store the runtime in a persistent storage.</li><li>This configuration allows you to split runtime to another disk to optimize for performance and disk usage.</li></ul><p><strong>Note:</strong> If runtime is on a different disk than the data directory, files must be copied to the data directory while taking the snapshot. This can impact disk i/o or performance during snapshotting.</p> | `''`          |
 
 ### `CAMUNDA_DATA_PRIMARYSTORAGE_DISK`
@@ -576,32 +391,11 @@ The following configurations apply to all components within the Orchestration Cl
   </TabItem>
 </Tabs>
 
-## Licensing
+import Licensing from './partials/\_licensing.md'
 
-Installations of Camunda 8 Self-Managed that require a license can provide their license key to the components. See [licensing](./licensing.md).
+<Licensing />
 
-<Tabs>
-  <TabItem value="application.yaml" label="Application properties">
-
-### `camunda.license`
-
-| Property              | Description                                                                 | Default value |
-| :-------------------- | :-------------------------------------------------------------------------- | :------------ |
-| `camunda.license.key` | <p>Your Camunda 8 license key, if your installation requires a license.</p> | Null          |
-
-</TabItem>
-  <TabItem value="env" label="Environment variables">
-
-### `CAMUNDA_LICENSE`
-
-| Property              | Description                                                                 | Default value |
-| :-------------------- | :-------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_LICENSE_KEY` | <p>Your Camunda 8 license key, if your installation requires a license.</p> | Null          |
-
-  </TabItem>
-</Tabs>
-
-## Security
+import Monitoring from './partials/\_monitoring.md'
 
 <Tabs>
 <TabItem value="conf" label="Application properties" default>
@@ -771,8 +565,7 @@ These properties apply only when `camunda.security.authentication.oidc.client-au
 | ------------------------ | ------------------------------------------------------------------------------------------------- | ------------------- |
 | `spring.profiles.active` | **Note:** This property will be deprecated as additional authentication methods become available. | `consolidated-auth` |
 
-</TabItem>
-<TabItem value="env" label="Environment variables">
+import Processing from './partials/\_processing.md'
 
 ### `CAMUNDA_SECURITY`
 
@@ -1039,64 +832,12 @@ script-src-attr 'none'.
 | `orchestration.security.multiTenancy.checksEnabled` | Enables multi-tenancy checks. This requires the API to be protected.          | `false`       |
 | `orchestration.security.multiTenancy.apiEnabled`    | Enables the multi-tenancy API and UI independently from multi-tenancy checks. | `true`        |
 
-</TabItem>
-</Tabs>
+<Security />
 
 import SecondaryStorage from './partials/\_secondary-storage.md'
 
 <SecondaryStorage />
 
-## System
+import System from './partials/\_system.md'
 
-<Tabs>
-  <TabItem value="application.yaml" label="Application properties">
-
-### `camunda.system`
-
-| Property                          | Description                                                                                                                                                                                                                                                                                                                                                                                                  | Default value |
-| :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.system.cpu-thread-count` | <p>Controls the number of non-blocking CPU threads to be used</p><p><strong>Warning:</strong> You should never specify a value that is larger than the number of physical cores available.</p><p>Good practice is to leave 1-2 cores for IO threads and the operating system (it has to run somewhere).</p><p>For example, when running Zeebe on a machine which has 4 cores, a good value would be `2`.</p> | `2`           |
-| `camunda.system.io-thread-count`  | <p>Controls the number of io threads to be used.</p><p>These threads are used for workloads that write data to disk. While writing, these threads are blocked which means that they yield the CPU. </p>                                                                                                                                                                                                      | `2`           |
-| `camunda.system.clock-controlled` | <p>Controls whether the system clock or mutable one.</p><p>If enabled, time progression can be controlled programmatically for testing purposes.</p>                                                                                                                                                                                                                                                         | `false`       |
-
-### `camunda.system.actor.idle`
-
-| Property                                    | Description                                                                                                                                                   | Default value |
-| :------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `camunda.system.actor.idle.max-spins`       | <p>The maximum number of busy-wait spins that an idle actor thread will perform before transitioning to a different idle state in Camunda's actor system.</p> | Null          |
-| `camunda.system.actor.idle.max-yields`      | <p>The maximum number of yield operations that an idle actor thread will perform before transitioning to the next idle state in Camunda's actor system.</p>   | Null          |
-| `camunda.system.actor.idle.max-park-period` | <p>The maximum duration that an idle actor thread will remain in the parked state in Camunda's actor system.</p>                                              | Null          |
-
-### `camunda.system.upgrade`
-
-| Property                                      | Description                                                                                                                                                                                                                                                                    | Default value |
-| :-------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.system.upgrade.enable-version-check` | <p>Toggles the version check restriction, used for migration.</p><p>This is useful for testing migration logic on snapshot or alpha versions.</p><p>The default value `True` means it is not allowed to migrate to an incompatible version such as: `SNAPSHOT` or `alpha`.</p> | `true`        |
-
-</TabItem>
-<TabItem value="env" label="Environment variables">
-
-### `CAMUNDA_SYSTEM`
-
-| Property                         | Description                                                                                                                                                                                                                                                                                                                                                                                                  | Default value |
-| :------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_SYSTEM_CPUTHREADCOUNT`  | <p>Controls the number of non-blocking CPU threads to be used</p><p><strong>Warning:</strong> You should never specify a value that is larger than the number of physical cores available.</p><p>Good practice is to leave 1-2 cores for IO threads and the operating system (it has to run somewhere).</p><p>For example, when running Zeebe on a machine which has 4 cores, a good value would be `2`.</p> | `2`           |
-| `CAMUNDA_SYSTEM_IOTHREADCOUNT`   | <p>Controls the number of io threads to be used.</p><p>These threads are used for workloads that write data to disk. While writing, these threads are blocked which means that they yield the CPU. </p>                                                                                                                                                                                                      | `2`           |
-| `CAMUNDA_SYSTEM_CLOCKCONTROLLED` | <p>Controls whether the system clock or mutable one.</p><p>If enabled, time progression can be controlled programmatically for testing purposes.</p>                                                                                                                                                                                                                                                         | `false`       |
-
-### `CAMUNDA_SYSTEM_ACTOR_IDLE`
-
-| Property                                  | Description                                                                                                                          | Default value |
-| :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_SYSTEM_ACTOR_IDLE_MAXSPINS`      | <p>The maximum number of busy-wwait spins that an idle actor thread will perform before transitioning to a different idle state.</p> | Null          |
-| `CAMUNDA_SYSTEM_ACTOR_IDLE_MAXYIELDS`     | <p>The maximum number of yield operations that an idle actor thread will perform before transitioning to the next idle state.</p>    | Null          |
-| `CAMUNDA_SYSTEM_ACTOR_IDLE_MAXPARKPERIOD` | <p>The maximum duration that an idle actor thread will remain in the parked state.</p>                                               | Null          |
-
-### `CAMUNDA_SYSTEM_UPGRADE`
-
-| Property                                    | Description                                                                                                                                                                                                                                                                    | Default value |
-| :------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `CAMUNDA_SYSTEM_UPGRADE_ENABLEVERSIONCHECK` | <p>Toggles the version check restriction, used for migration.</p><p>This is useful for testing migration logic on snapshot or alpha versions.</p><p>The default value `True` means it is not allowed to migrate to an incompatible version such as: `SNAPSHOT` or `alpha`.</p> | `true`        |
-
-  </TabItem>
-</Tabs>
+<System />

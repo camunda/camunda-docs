@@ -448,8 +448,16 @@ module.exports = {
                 "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
                 "components/modeler/web-modeler/modeling/versions",
                 "components/modeler/web-modeler/modeling/file-download",
-                "components/modeler/web-modeler/modeling/import-diagram",
                 "components/modeler/web-modeler/modeling/camunda-marketplace",
+                {
+                  type: "category",
+                  label: "Import",
+                  items: [
+                    "components/modeler/web-modeler/modeling/import-diagram",
+                    "components/modeler/web-modeler/modeling/import-resources",
+                    "components/modeler/web-modeler/modeling/prepare-resources",
+                  ],
+                },
                 {
                   type: "category",
                   label: "Process applications",
@@ -1045,9 +1053,6 @@ module.exports = {
             "components/console/manage-plan/available-plans",
             "components/console/manage-plan/upgrade-to-enterprise-plan",
             "components/console/manage-plan/update-billing-reservations",
-            "components/console/manage-plan/update-creditcard",
-            "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-starter-subscription",
           ],
         },
         {
@@ -1879,8 +1884,8 @@ module.exports = {
               items: [
                 {
                   Configuration: [
-                    "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
@@ -2068,6 +2073,7 @@ module.exports = {
                 "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/alternative-db",
+                "self-managed/components/management-identity/configuration/initialize-tenants",
               ],
             },
             "self-managed/components/management-identity/authentication",

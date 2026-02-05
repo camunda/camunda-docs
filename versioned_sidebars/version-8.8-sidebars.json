@@ -358,8 +358,11 @@
                     "id": "components/early-access/alpha/mcp-client/mcp-client"
                   },
                   "items": [
+                    "components/early-access/alpha/mcp-client/mcp-client-connector",
                     "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
-                    "components/early-access/alpha/mcp-client/mcp-client-connector"
+                    "components/early-access/alpha/mcp-client/mcp-client-config",
+                    "components/early-access/alpha/mcp-client/mcp-client-tool-discovery",
+                    "components/early-access/alpha/mcp-client/mcp-client-human-in-the-loop"
                   ]
                 },
                 "components/early-access/alpha/ms-teams/ms-teams"
@@ -1087,10 +1090,7 @@
             "components/console/manage-plan/create-account",
             "components/console/manage-plan/available-plans",
             "components/console/manage-plan/upgrade-to-enterprise-plan",
-            "components/console/manage-plan/update-billing-reservations",
-            "components/console/manage-plan/update-creditcard",
-            "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-starter-subscription"
+            "components/console/manage-plan/update-billing-reservations"
           ]
         },
         {
@@ -3236,8 +3236,8 @@
               "items": [
                 {
                   "Configuration": [
-                    "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
@@ -3428,7 +3428,8 @@
                 "self-managed/components/management-identity/configuration/connect-to-an-oidc-provider",
                 "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/components/management-identity/configuration/configure-external-identity-provider",
-                "self-managed/components/management-identity/configuration/alternative-db"
+                "self-managed/components/management-identity/configuration/alternative-db",
+                "self-managed/components/management-identity/configuration/initialize-tenants"
               ]
             },
             "self-managed/components/management-identity/authentication",

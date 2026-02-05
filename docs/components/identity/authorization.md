@@ -91,12 +91,10 @@ Access to user tasks can be controlled using a combination of process-level and 
   and `candidateGroups`.
 
 When both process-level and task-level permissions exist, process-level permissions take precedence:
-if a user already has the required `Process Definition` permission for an operation (for example, `UPDATE_USER_TASK`),
-the system does not evaluate `USER_TASK` permissions for that operation. Task-level `USER_TASK` permissions are
+if a user already has the required `Process Definition` permission for an operation (for example, `UPDATE_USER_TASK`), the system does not evaluate `USER_TASK` permissions for that operation. Task-level `USER_TASK` permissions are
 evaluated only when no effective process-level permission exists for that user and process definition.
 
-For Tasklist-specific behavior and practical authorization patterns, see
-[User task authorization in Tasklist](../tasklist/user-task-authorization.md).
+For Tasklist-specific behavior and practical authorization patterns, see [User task authorization in Tasklist](../tasklist/user-task-authorization.md).
 
 ### Authorization examples
 
@@ -109,8 +107,7 @@ To allow a supervisor to see and manage all user tasks for one or more processes
 - Resource ID: `*` (or a specific BPMN process ID)
 - Permissions: `READ_USER_TASK`, `UPDATE_USER_TASK`
 
-This grants broad visibility and control over all user tasks for the selected processes, without needing task-level
-authorizations.
+This grants broad visibility and control over all user tasks for the selected processes, without needing task-level authorizations.
 
 #### Task worker: property-based access
 
@@ -122,8 +119,7 @@ The default task worker role is created with property-based user task authorizat
 - Property name: `assignee`, `candidateUsers`, or `candidateGroups`
 - Permissions: `READ`, `CLAIM`, `COMPLETE`
 
-This ensures that task workers can only see, claim, and complete tasks where they are the assignee, a candidate user,
-or in a candidate group.
+This ensures that task workers can only see, claim, and complete tasks where they are the assignee, a candidate user, or in a candidate group.
 
 :::note
 Default roles, including task worker, are recreated each time the cluster starts and are not customizable.
@@ -131,6 +127,11 @@ To adjust permissions, create and manage custom roles instead.
 :::
 
 ## Change an existing authorization
+:::tip
+Partial wildcard matching, for example `my-resource*`, is not supported.
+:::
+
+## Update an authorization
 
 Authorizations cannot be updated after they are created.
 
