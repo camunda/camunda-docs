@@ -145,31 +145,29 @@ You'll run all commands in the following steps from `camunda-deployment-referenc
 
 ## Initialize Terraform
 
+1. Change to the `terraform/cluster` subfolder:
+
+   ```bash
+   cd terraform/cluster
+   ```
+
+2. Initialize the backend and configure Terraform's backend to store the state file remotely in your S3 bucket:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
+   ```
+
+Terraform will now use the S3 bucket to manage the state file, ensuring secure and persistent storage.
+
+## 2. Execution
+
 :::note Terraform infrastructure example
-We do not recommend using the following Terraform-based infrastructure as a module, since we cannot guarantee compatibility.
+Camunda doesn't recommend using the following Terraform-based infrastructure as a module, since we cannot guarantee compatibility.
 
 Instead, we suggest reusing or extending components of the Terraform example to ensure alignment with your environment.
 :::
 
-To manage Camunda 8 infrastructure on AWS using Terraform, you need to configure Terraform's backend to store the state file remotely in an S3 bucket. This provides secure, persistent primary storage for your infrastructure.
-
-Once authentication is configured, you can initialize your Terraform project. Earlier, you created a dedicated S3 bucket (`S3_TF_BUCKET_NAME`) for storing the state file. In this step, Terraform will use that bucket along with a specific key to manage your infrastructure state.
-
-Initialize the backend and download the required provider plugins:
-
-:::note
-Make sure you are in the `terraform/cluster` subfolder: `camunda-deployment-references/aws/containers/ecs-single-region-fargate/terraform/cluster`.
-:::
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
-```
-
-Terraform will now use the S3 bucket to manage the state file, ensuring remote and persistent storage.
-
 Read about the [Terraform implementation](./about/terraform-implementation.md) to learn more.
-
-## 2. Execution
 
 :::note Secret management
 
