@@ -9,9 +9,7 @@ import TabItem from "@theme/TabItem";
 
 This page describes the available authentication methods for accessing the Orchestration Cluster REST API.
 
-It explains when to use each method and how to configure your API requests for secure and appropriate access. When API authorizations are enabled, authenticated requests are evaluated against Orchestration Cluster authorizations, including the new process‑level and task‑level user task permissions.
-
-The Orchestration Cluster REST API supports three authentication methods depending on your environment and configuration: none, basic, and OIDC-based.
+It explains when to use each method and how to configure your API requests for secure and appropriate access. When API authorizations are enabled, authenticated requests are evaluated against Orchestration Cluster authorizations. The Orchestration Cluster REST API supports three authentication methods depending on your environment and configuration: none, basic, and OIDC-based.
 
 ## Authentication support matrix
 
@@ -62,7 +60,7 @@ See [Camunda components troubleshooting](/self-managed/operational-guides/troubl
 
 ## Using a token (OIDC/JWT)
 
-OIDC-based Authentication is recommended for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request. The token’s subject (user or client) must also have the necessary Orchestration Cluster authorizations (for example, `PROCESS_DEFINITION[READ_USER_TASK]` or `USER_TASK[READ]` for user task APIs), otherwise requests will fail with `403 Forbidden` even if authentication succeeds.
+OIDC-based authentication is recommended for production and required for SaaS. Obtain an access token and pass it as an OAuth 2.0 Bearer token in the `Authorization` header of each request. The token’s subject (user or client) must also have the required authorizations. Otherwise, requests fail with `403 Forbidden` even if authentication succeeds.
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={[
 {label: 'SaaS', value: 'saas' },

@@ -34,13 +34,17 @@ To create a new authorization:
    - **Owner type**: The entity to which you want to assign permissions, such as a user, group, role, client, or mapping rule.
    - **Owner ID**: The ID of the owner.
    - **Resource type**: The selected resource type.
-   - **Resource ID**: The ID of the resource. Use `*` to grant permissions for all resources of the selected type.
+   - **Resource scope**: Choose how this authorization is scoped:
+     - By **Resource ID**, or
+     - For `USER_TASK`, by **Resource property name** with the `PROPERTY` matcher.
+   - **Resource ID**: The ID of the resource within the selected resource type. Use `*` to grant permissions for all resources of that type.
+   - **Resource property name** _(USER_TASK only)_: The task property used when scoping access with the `PROPERTY` matcher. Supported values are:
+     - `assignee`
+     - `candidateUsers`
+     - `candidateGroups`
 
-For **USER_TASK** authorizations, you can also use property-based matching. When using the `PROPERTY` matcher, select one of the following task properties to scope access:
-
-- `assignee`
-- `candidateUsers`
-- `candidateGroups`
+   Only one of **Resource ID** or **Resource property name** can be specified.
+   If you use a resource property, set the matcher to `PROPERTY`.
 
 4. Select the permissions you want to grant.
 5. Click **Create authorization**.
@@ -101,6 +105,7 @@ For Tasklist-specific behavior and practical authorization patterns, see
 To allow a supervisor to see and manage all user tasks for one or more processes:
 
 - Resource type: `PROCESS_DEFINITION`
+- Resource scope: by **Resource ID**
 - Resource ID: `*` (or a specific BPMN process ID)
 - Permissions: `READ_USER_TASK`, `UPDATE_USER_TASK`
 
@@ -113,8 +118,8 @@ The default task worker role is created with property-based user task authorizat
 
 - Role ID: `task-worker`
 - Resource type: `USER_TASK`
-- Matcher: `PROPERTY`
-- Property name: one of `assignee`, `candidateUsers`, `candidateGroups`
+- Resource scope: by **Resource property name** (`PROPERTY` matcher)
+- Property name: `assignee`, `candidateUsers`, or `candidateGroups`
 - Permissions: `READ`, `CLAIM`, `COMPLETE`
 
 This ensures that task workers can only see, claim, and complete tasks where they are the assignee, a candidate user,

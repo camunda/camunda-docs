@@ -73,51 +73,16 @@ For example, a user’s authorizations allow them to access Operate, view runnin
 
 A user must be both authenticated and authorized to access protected resources.
 
-## Task authorizations and the task worker role
+### User task authorization
 
-Camunda 8 supports two levels of authorization for user tasks:
+User task access in Camunda 8 is controlled by the Orchestration Cluster authorization model.
 
-- Process-level permissions apply to all user tasks of a process definition.
-- Task-level permissions apply to individual user tasks and can be scoped using task properties such as assignee or candidate groups.
+Access can be granted at a broad process level or scoped to individual tasks, depending on how permissions are configured.
 
-Process-level permissions always take precedence. If a user has the required process-level permission, Camunda does not evaluate task-level permissions for the same operation.
+For details, see:
 
-For details on permission models, precedence rules, and property-based task authorizations, see [Orchestration Cluster authorization](./authorizations.md).
-
-### Permission precedence
-
-Process-level permissions always take precedence over task-level permissions:
-
-- If a user or client holds a relevant `PROCESS_DEFINITION` permission (for example, `READ_USER_TASK` or `UPDATE_USER_TASK`), Camunda grants access without additionally checking `USER_TASK` permissions.
-- Task-level `USER_TASK` checks are evaluated only when no process-level permission applies for the current principal and process definition.
-
-This precedence ensures backward compatibility with existing configurations that rely only on process-level permissions, while still allowing more restrictive task-level access where needed.
-
-### Property-based task authorizations
-
-Task-level permissions are evaluated using property-based access control:
-
-- Identity administrators can create `USER_TASK` authorizations that match on specific task properties:
-  - `assignee`
-  - `candidateUsers`
-  - `candidateGroups`.
-- A user is authorized when their username or group memberships match one of these properties on the task and the authorization grants the required permission (for example, `READ`, `CLAIM`, or `COMPLETE`).
-
-These property-based checks are used by both the Tasklist UI and the Orchestration Cluster REST API, ensuring consistent task visibility and action rules across tools.
-
-### Default task worker role
-
-On new installations and upgrades, Camunda Identity automatically creates a task worker role:
-
-- Role ID: `task-worker`
-- Resource type: `USER_TASK`
-- Scope: Property-based authorizations on
-  - `assignee`
-  - `candidateUsers`
-  - `candidateGroups`
-- Permissions: `READ`, `CLAIM`, and `COMPLETE` for matching tasks.
-
-This default role lets typical task workers see, claim, and complete only the tasks they are responsible for. Administrators and managers can continue to use process-level permissions for broader oversight.
+- [Orchestration Cluster authorization](./authorizations.md)
+- [User task authorization in Tasklist](../tasklist/user-task-authorization.md)
 
 ## Authentication methods
 

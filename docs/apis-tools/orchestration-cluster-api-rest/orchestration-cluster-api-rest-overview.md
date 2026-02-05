@@ -31,28 +31,14 @@ This API is part of the Camunda 8 [public API](/reference/public-api.md) and is 
 
 To learn more about the Orchestration Cluster, see [What is the Orchestration Cluster?](/components/orchestration-cluster.md).
 
-#### User task authorization model
+#### User task authorization
 
-User task endpoints in this API follow the authorization model defined for the Orchestration Cluster
-and used by Tasklist.
+User task endpoints are protected by the Orchestration Cluster authorization model.
 
-Authorization is based on a combination of process-level and task-level permissions:
+To configure permissions and control access to user tasks, see:
 
-- Process-level permissions grant access to user tasks across an entire process.  
-  For example, `READ_USER_TASK` and `UPDATE_USER_TASK` on the `Process Definition` resource allow a caller
-  to read and act on all user tasks of a process definition.
-
-- Task-level permissions provide fine-grained control over individual user tasks.  
-  Permissions on the `USER_TASK` resource (`READ`, `UPDATE`, `CLAIM`, `COMPLETE`) can be scoped using
-  property-based access control on task attributes such as `assignee`, `candidateUsers`, and `candidateGroups`.
-
-For Tasklist-specific guidance, including common user task operations and required permissions, see [User task authorization in Tasklist](../../components/tasklist/user-task-authorization.md).
-
-For details on how the REST API applies this model when handling requests, see
-[Authentication and authorization](./orchestration-cluster-api-rest-authentication.md).
-
-For information about configuring authorizations in Identity, see
-[Identity – Authorizations](../../components/identity/authorization.md).
+- [Orchestration Cluster authorization](../../components/concepts/access-control/authorizations.md)
+- [User task authorization in Tasklist](../../components/tasklist/user-task-authorization.md)
 
 ## Getting started
 

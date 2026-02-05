@@ -39,6 +39,22 @@ Tasklist evaluates user task authorization using the following authorization res
 For details about authorization resources, permission evaluation, and configuration, see
 [Authorization concepts](../concepts/access-control/authorizations.md).
 
+## Default task worker role
+
+On new installations and upgrades, Camunda Identity automatically creates a default `task-worker` role.
+
+This role grants property-based `USER_TASK` permissions:
+
+- Permissions: `READ`, `CLAIM`, `COMPLETE`
+- Scoped by:
+  - `assignee`
+  - `candidateUsers`
+  - `candidateGroups`
+
+This lets typical task workers see, claim, and complete only the tasks they are responsible for.
+
+You can use this role as-is or create custom roles with similar property-based authorizations.
+
 ## User task operations and required permissions
 
 The following table shows which permissions are required to perform common user task operations in Tasklist.
