@@ -151,11 +151,7 @@ We do not recommend using the following Terraform-based infrastructure as a modu
 Instead, we suggest reusing or extending components of the Terraform example to ensure alignment with your environment.
 :::
 
-### Terraform prerequisites
-
 To manage Camunda 8 infrastructure on AWS using Terraform, you need to configure Terraform's backend to store the state file remotely in an S3 bucket. This provides secure, persistent primary storage for your infrastructure.
-
-#### Initialize Terraform
 
 Once authentication is configured, you can initialize your Terraform project. Earlier, you created a dedicated S3 bucket (`S3_TF_BUCKET_NAME`) for storing the state file. In this step, Terraform will use that bucket along with a specific key to manage your infrastructure state.
 
