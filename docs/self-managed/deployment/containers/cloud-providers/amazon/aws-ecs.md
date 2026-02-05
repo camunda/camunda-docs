@@ -77,18 +77,6 @@ Both subnet types are distributed across three availability zones in a single AW
 
 For the exact tool versions used during testing, refer to the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
 
-## Clone the reference architecture
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/procedure/get-your-copy.sh
-```
-
-To use another version of the reference architecture, change the branch. For example, `BRANCH="stable/8.8"`.
-
-With the reference architecture, you can reuse and extend the provided Terraform examples. This flexible implementation avoids the constraints of relying on Terraform modules maintained by third-party developers.
-
-You'll run all commands in the following steps from `camunda-deployment-references/aws/containers/ecs-single-region-fargate/`.
-
 ## Set AWS credentials
 
 1. Create [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for your Terraform user via the AWS console.
@@ -142,6 +130,18 @@ Create an S3 bucket to store the Terraform state file. This is essential for col
    ```
 
 The S3 bucket is now ready to securely store your Terraform state files.
+
+## Clone the reference architecture
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/procedure/get-your-copy.sh
+```
+
+To use another version of the reference architecture, change the branch. For example, `BRANCH="stable/8.8"`.
+
+With the reference architecture, you can reuse and extend the provided Terraform examples. This flexible implementation avoids the constraints of relying on Terraform modules maintained by third-party developers.
+
+You'll run all commands in the following steps from `camunda-deployment-references/aws/containers/ecs-single-region-fargate/`.
 
 ## Initialize Terraform
 
