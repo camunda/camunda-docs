@@ -223,37 +223,44 @@ The following table shows which Camunda 8 entities and properties are migrated b
 
 | Property                | Can be migrated |
 | ----------------------- | --------------- |
-| auditLogKey             | No              |
-| entityKey               | No              |
-| entityType              | No              |
-| operationType           | No              |
-| entityVersion           | No              |
+| auditLogKey             | Yes             |
+| entityKey               | Partially       |
+| entityType              | Yes             |
+| operationType           | Yes             |
+| entityVersion           | Yes             |
 | entityValueType         | No              |
 | entityOperationIntent   | No              |
 | batchOperationKey       | No              |
 | batchOperationType      | No              |
-| timestamp               | No              |
-| actorType               | No              |
-| actorId                 | No              |
-| tenantId                | No              |
-| tenantScope             | No              |
-| result                  | No              |
-| annotation              | No              |
-| category                | No              |
-| processDefinitionId     | No              |
+| timestamp               | Yes             |
+| actorType               | Yes             |
+| actorId                 | Yes             |
+| tenantId                | Yes             |
+| tenantScope             | Yes             |
+| result                  | Yes             |
+| annotation              | Yes             |
+| category                | Yes             |
+| processDefinitionId     | Yes             |
 | decisionRequirementsId  | No              |
 | decisionDefinitionId    | No              |
-| processDefinitionKey    | No              |
-| processInstanceKey      | No              |
-| elementInstanceKey      | No              |
+| processDefinitionKey    | Yes             |
+| processInstanceKey      | Yes             |
+| elementInstanceKey      | Partially       |
 | jobKey                  | No              |
-| userTaskKey             | No              |
+| userTaskKey             | Yes             |
 | decisionRequirementsKey | No              |
 | decisionDefinitionKey   | No              |
 | decisionEvaluationKey   | No              |
 | deploymentKey           | No              |
 | formKey                 | No              |
 | resourceKey             | No              |
+
+Limitations:
+
+- The Audit log entities are only migrated for user tasks, process definitions, process instances, variables, decisions, users, groups, authorization.
+  For the following entities, the audit log is not migrated at all: batch operation, identity link, attachment, job definition, job, external task, metrics, operation log, filter, comment, and property.
+- The `entityKey` property is migrated only for entities that are related to user tasks, process definitions, and process instances.
+- The `elementInstanceKey` property is migrated only for entities that are related to user tasks.
 
 ### Batch operation
 
