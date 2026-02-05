@@ -88,17 +88,7 @@ With the reference architecture, you can reuse and extend the provided Terraform
 
 You'll run all commands in the following steps from `camunda-deployment-references/aws/containers/ecs-single-region-fargate/`.
 
-## 1. Configure AWS and initialize Terraform
-
-:::note Terraform infrastructure example
-We do not recommend using the following Terraform-based infrastructure as a module, since we cannot guarantee compatibility.
-
-Instead, we suggest reusing or extending components of the Terraform example to ensure alignment with your environment.
-:::
-
-### Terraform prerequisites
-
-To manage Camunda 8 infrastructure on AWS using Terraform, you need to configure Terraform's backend to store the state file remotely in an S3 bucket. This provides secure, persistent primary storage for your infrastructure.
+## Configure AWS
 
 #### Set up AWS authentication
 
@@ -165,6 +155,18 @@ Next, follow these steps to create an S3 bucket with versioning enabled:
    ```
 
 The S3 bucket is now ready to securely store your Terraform state files, with versioning enabled for added protection.
+
+## Initialize Terraform
+
+:::note Terraform infrastructure example
+We do not recommend using the following Terraform-based infrastructure as a module, since we cannot guarantee compatibility.
+
+Instead, we suggest reusing or extending components of the Terraform example to ensure alignment with your environment.
+:::
+
+### Terraform prerequisites
+
+To manage Camunda 8 infrastructure on AWS using Terraform, you need to configure Terraform's backend to store the state file remotely in an S3 bucket. This provides secure, persistent primary storage for your infrastructure.
 
 #### Initialize Terraform
 
