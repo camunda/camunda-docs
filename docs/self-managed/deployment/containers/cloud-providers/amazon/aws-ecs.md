@@ -94,12 +94,18 @@ You'll run all commands in the following steps from `camunda-deployment-referenc
 1. Create [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for your Terraform user via the AWS console.
 2. Set the [AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html):
 
-```bash
-export AWS_ACCESS_KEY_ID=
-export AWS_SECRET_ACCESS_KEY=
-```
+   ```bash
+   export AWS_ACCESS_KEY_ID=<your-access-key-id>
+   export AWS_SECRET_ACCESS_KEY=<your-secret-access-key>
+   ```
 
-Both the AWS CLI and Terraform will use those credentials.
+   Both the AWS CLI and Terraform will use those credentials.
+
+3. Ensure your credentials are correct:
+
+   ```bash
+   aws sts get-caller-identity
+   ```
 
 ## Create an S3 bucket
 
