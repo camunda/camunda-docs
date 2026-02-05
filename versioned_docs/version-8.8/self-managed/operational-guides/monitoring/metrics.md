@@ -252,7 +252,9 @@ Zeebe comes with a pre-built dashboard, available in the repository:
 - [Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard) the dashboard into your Grafana instance and select the correct Prometheus data source (if you have more than one).
 - The dashboard displays a healthy cluster topology, general throughput metrics, handled requests, exported events per second, disk and memory usage, and more.
 
-![Grafana dashboard](assets/grafana-preview.png)
+The following image shows an example of the Zeebe Grafana dashboard after import.
+
+![Example Zeebe Grafana dashboard](assets/grafana-preview.png)
 
 ### Data layer
 

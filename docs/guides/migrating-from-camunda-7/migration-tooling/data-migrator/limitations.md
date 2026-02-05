@@ -36,6 +36,10 @@ The runtime migration has the following limitations.
 To learn more about variable migration, see [variables](../variables).
 :::
 
+### Incidents
+
+Due to the [limitation regarding async before/after wait states](#async-beforeafter-wait-states), incident data from instances currently waiting due to failed jobs causing active incidents will not be migrated during runtime migration. We recommend to resolve incidents prior to runtime migration.
+
 ### BPMN elements
 
 Some BPMN elements and configurations supported in Camunda 7 are not supported in Camunda 8 or have specific limitations during migration. Below is an overview of these limitations and recommendations to address them.
@@ -432,7 +436,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | rootProcessInstanceKey | Yes             |
 | flowNodeInstanceKey    | Yes             |
 | flowNodeId             | Yes             |
-| jobKey                 | Yes             |
+| jobKey                 | No              |
 | errorType              | No              |
 | errorMessage           | Yes             |
 | errorMessageHash       | No              |
