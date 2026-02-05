@@ -37,6 +37,31 @@ These release notes identify the main new features included in the 8.9 minor rel
 | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 10 February 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha4)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha4)</li></ul> |
 
+### Agentic orchestration
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+#### MCP Client connector operations and filter options
+
+New operations are added in the `Standalone` Mode to the MCP Client connector:
+
+- List resources
+- List resource templates
+- Read resource
+- List prompts
+- Get prompt
+
+In addition, the **Tools** panel in the element template is replaced by dedicated filter options for each operation.
+
+:::caution Upgrading the template
+
+- The **Tools** section in version 0/1 of the template is replaced by a **Filters** section in version 2.
+- As Tool filters are not migrated during a Template Version upgrade, you must manually upgrade the template with any previously configured Tool filters.
+
+:::
+
+<p class="link-arrow">[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</p>
+
 ### Camunda 8 Run
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
