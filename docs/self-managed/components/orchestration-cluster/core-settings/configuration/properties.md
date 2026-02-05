@@ -832,6 +832,10 @@ script-src-attr 'none'.
 | `orchestration.security.multiTenancy.checksEnabled` | Enables multi-tenancy checks. This requires the API to be protected.          | `false`       |
 | `orchestration.security.multiTenancy.apiEnabled`    | Enables the multi-tenancy API and UI independently from multi-tenancy checks. | `true`        |
 
+</TabItem>
+</Tabs>
+import Security from './partials/_security.md'
+
 <Security />
 
 import SecondaryStorage from './partials/\_secondary-storage.md'

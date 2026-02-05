@@ -82,7 +82,7 @@ Access can be granted at a broad process level or scoped to individual tasks, de
 For details, see:
 
 - [Orchestration Cluster authorization](./authorizations.md)
-- [User task authorization in Tasklist](../tasklist/user-task-authorization.md)
+- [User task authorization in Tasklist](../../tasklist/user-task-authorization.md)
 
 ## Authentication methods
 
