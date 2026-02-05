@@ -38,7 +38,7 @@ When the configured event fires while one or more tool calls are still running, 
 - Keeps the surrounding **ad-hoc sub-process scope active**: the agent decides, based on the new LLM response, which elements to activate next or whether to complete the sub-process.
 
 :::note
-No BPMN interrupting event subprocess is involved; the interruption happens purely in the agent’s control flow (job worker), not by cancelling the BPMN parent scope.
+No BPMN interrupting event subprocess is involved; the interruption happens purely in the agent’s control flow (job worker), not by canceling the BPMN parent scope.
 :::
 
 For the example scenario, the following sequence of messages would be sent to the LLM:
