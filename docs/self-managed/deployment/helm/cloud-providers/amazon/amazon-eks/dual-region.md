@@ -95,9 +95,8 @@ The first step is to download a copy of the reference architecture from the [Git
 
 The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module maintained by a third party.
 
-```bash
-git clone https://github.com/camunda/camunda-deployment-references.git
-cd camunda-deployment-references/aws/kubernetes/eks-dual-region
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-dual-region/procedure/get-your-copy.sh
 ```
 
 With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
@@ -547,7 +546,7 @@ The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.
 
 :::
 
-### Create the Helm values files
+### Camunda 8 Helm chart prerequisites
 
 Within the cloned repository, navigate to `aws/kubernetes/eks-dual-region/helm-values`. This contains a dual-region example setup.
 
@@ -657,17 +656,17 @@ Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_CAMUNDA
 
 ### Install Camunda 8 using Helm
 
-From the terminal context of `aws/kubernetes/eks-dual-region/helm-values`, execute the following:
+From the terminal context of `aws/kubernetes/eks-dual-region/helm-values`, and ensure you have previously exported the [environment variables](#export-environment-variables), execute the following:
 
 ```shell
-helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
+helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
   --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
   -f camunda-values.yml \
   -f region0/camunda-values.yml
 
-helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
+helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
   --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
