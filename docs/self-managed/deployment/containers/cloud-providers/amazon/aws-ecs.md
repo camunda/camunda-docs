@@ -89,18 +89,19 @@ With the reference architecture, you can reuse and extend the provided Terraform
 
 You'll run all commands in the following steps from `camunda-deployment-references/aws/containers/ecs-single-region-fargate/`.
 
-## Configure the AWS CLI
+## Set AWS credentials
 
 1. Create [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for your Terraform user via the AWS console.
-2. Configure the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html):
+2. Set the [AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html):
 
 ```bash
-aws configure
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
 ```
 
-3. Enter your `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, region, and output format.
+Both the AWS CLI and Terraform will use those credentials.
 
-Terraform will now automatically detect and use those credentials.
+## Create an S3 bucket
 
 #### Create an S3 bucket for Terraform state management
 
