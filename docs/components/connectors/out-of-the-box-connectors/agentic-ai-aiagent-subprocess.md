@@ -35,14 +35,6 @@ This connector implementation creates an implicit feedback loop for tool calls a
 
 <img src={AgentProcessImg} alt="AI Agent Sub-process" class="img-700"/>
 
-## Event handling
-
-With an AI Agent Sub-process, an event handled as part of an [event subprocess](../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md) will directly trigger an execution of the underlying job worker which can either interrupt ongoing tool calls or wait for all tool calls to complete before handling the event.
-
-:::info
-See [event handling](#configuration-event-handling) for more information.
-:::
-
 ## Configuration
 
 <ConfigurationModelProvider />
