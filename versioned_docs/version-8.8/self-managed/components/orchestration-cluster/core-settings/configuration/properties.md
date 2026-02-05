@@ -556,6 +556,10 @@ The following configurations apply to all components within the Orchestration Cl
   </TabItem>
 </Tabs>
 
+import Expression from './partials/\_expression.md'
+
+<Expression />
+
 ## Licensing
 
 Installations of Camunda 8 Self-Managed that require a license can provide their license key to the components. See [licensing](./licensing.md).
