@@ -391,6 +391,10 @@ import Cluster from './partials/\_cluster.md'
   </TabItem>
 </Tabs>
 
+import Expression from './partials/\_expression.md'
+
+<Expression />
+
 import Licensing from './partials/\_licensing.md'
 
 <Licensing />
