@@ -129,14 +129,6 @@ Granular task-level authorization is now integrated into the Tasklist UI and the
 
 This feature strengthens security and usability, and provides a clear, consistent, and secure user experience for task workers, managers, and integrations.
 
-#### Modify elements in the Multi-Instance ad-hoc sub-process
-
-<!-- https://github.com/camunda/product-hub/issues/3119 -->
-
-Operators can now dynamically activate, move, or remove element instances inside running multi-instance ad-hoc subprocesses—supporting parallel, sequential, and classic ad-hoc execution patterns.
-
-These new runtime capabilities, available in both Operate UI and the API, allow users to adapt, repair, and recover business processes on the fly, supporting flexibility for agentic automation, case management, and critical operations.
-
 #### Pre-configure Identity entities
 
 <!-- https://github.com/camunda/product-hub/issues/2446 -->
