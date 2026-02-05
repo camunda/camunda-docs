@@ -69,7 +69,7 @@ message ActivateJobsRequest {
 If `requestTimeout` is set to `0`, the effective timeout depends on whether long polling is enabled:
 
 - If long polling is enabled, the gateway uses its configured long-polling timeout (`camunda.api.long-polling.timeout` / `zeebe.gateway.longPolling.timeout`, default 10,000 ms).
-- If long polling is disabled, the request falls back to a client-side timeout. For gRPC clients, this currently defaults to 10 seconds.
+- If long polling is disabled, the request falls back to a client-side timeout. For gRPC clients, this currently defaults to 10,000 ms.
 
 If `requestTimeout` is set to a value less than `0`, long polling is disabled and the request completes immediately, even when no job is activated.
 
