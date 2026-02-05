@@ -109,23 +109,15 @@ You'll run all commands in the following steps from `camunda-deployment-referenc
 
 ## Create an S3 bucket
 
-#### Create an S3 bucket for Terraform state management
+Create an S3 bucket to store the Terraform state file. This is essential for collaborative work and helps prevent issues such as state file corruption.
 
-Before initializing Terraform, you must create an S3 bucket to store the state file. This is essential for collaborative work and helps prevent issues such as state file corruption.
+1. Set your preferred AWS region as an environment variable:
 
-Begin by setting your preferred AWS region as an environment variable to avoid repeating it in every command:
+   ```bash
+   export AWS_REGION=<your-region>  # For example: eu-central-1
+   ```
 
-```bash
-export AWS_REGION=<your-region>
-```
-
-Replace `<your-region>` with your chosen AWS region (e.g., `eu-central-1`).
-
-Next, follow these steps to create an S3 bucket with versioning enabled:
-
-1. Open your terminal and ensure that the AWS CLI is installed and properly configured.
-
-2. Run the following command to create an S3 bucket for storing your Terraform state. Be sure to choose a unique bucket name, and ensure that the `AWS_REGION` environment variable is already set:
+2. Create an S3 bucket:
 
    ```bash reference
    https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
@@ -149,7 +141,7 @@ Next, follow these steps to create an S3 bucket with versioning enabled:
    https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
    ```
 
-The S3 bucket is now ready to securely store your Terraform state files, with versioning enabled for added protection.
+The S3 bucket is now ready to securely store your Terraform state files.
 
 ## Initialize Terraform
 
