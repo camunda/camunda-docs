@@ -8,7 +8,7 @@ description: "Migrate identity data to Camunda 8."
 Migrate identity data.
 
 :::info
-The identity migration mode of the Data Migrator is in an early development stage and will **not be released before Camunda 8.9 (April 2026)**. You can check the current state and track progress in the [GitHub repository](https://github.com/camunda/camunda-7-to-8-migration-tooling/).
+The identity migration mode of the Data Migrator is still in the development stage and will **not be released before Camunda 8.9 (April 2026)**. You can check the current state and track progress in the [GitHub repository](https://github.com/camunda/camunda-7-to-8-migration-tooling/).
 :::
 
 ## About identity migration
@@ -23,9 +23,9 @@ Identity data refers to:
 As of today, the following requirements and limitations apply:
 
 - The experimental feature **only** includes the migration of:
-  - Tenants (temporarily excluding tenant memberships)
-  - Supported authorizations
-- Migration for other identity entities as well as retrying skipped entities are either not yet implemented or not supported (detailed in the [Supported entities](#supported-entities) section below).
+  - Tenants.
+  - Supported authorizations (detailed in the [Supported entities](#supported-entities) section below).
+- Users, groups and memberships are currently not supported for migration.
 - Once migration has been triggered, it's strongly recommended not to create new identity data on Camunda 7. Even if migration is attempted again, the new data might not be migrated.
 - In order for authorizations to work correctly after migration, process definitions, forms, DRD and decision definitions need to have the same IDs in Camunda 8 as in Camunda 7. This should be the case if you have already migrated runtime and history data.
 
@@ -228,8 +228,14 @@ As illustrated in the tables above, the `ALL` permission in Camunda 7 maps to **
 ## Executing identity migration
 
 ```bash
-# Run identity migration (experimental)
+# Run identity migration
 ./start.sh --identity
+
+# List all skipped identity entities
+./start.sh --identity --list-skipped
+
+# Retry skipped identity entities
+./start.sh --identity --retry-skipped
 ```
 
 :::warning
