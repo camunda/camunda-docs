@@ -155,11 +155,17 @@ You can now configure scheduled backup intervals and retention directly in the O
 
 <!-- https://github.com/camunda/product-hub/issues/3129 -->
 
-Camunda 8.8 introduced unified configuration for Orchestration Cluster components to let you define all essential cluster and component behavior in a single, centralized configuration system. Only the first partial set of unified configuration properties were introduced in Camunda 8.8.
+In Camunda 8.9, the remaining unified configuration project property changes are complete.
 
-In Camunda 8.9, all remaining unified configuration property changes are complete.
+- All 8.9 property changes are documented in the [Camunda 8.9 property changes](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md#camunda-89-property-changes) table.
+- You can search, sort, and filter the table to show breaking changes, direct mappings, and new properties.
+- For more information on each property (including default values), see the [property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
 
 <p class="link-arrow">[Property changes in Camunda 8.9](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
+
+:::note
+Only the first partial set of the unified configuration project properties was introduced in Camunda 8.8.
+:::
 
 #### User operations audit log
 
