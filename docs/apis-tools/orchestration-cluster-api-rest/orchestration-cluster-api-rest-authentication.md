@@ -23,24 +23,9 @@ The Orchestration Cluster REST API supports three authentication methods dependi
 | SaaS                                                                              | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
 
 :::info Authentication vs. authorization
-Authentication establishes who is calling the Orchestration Cluster REST API (for example, using Basic authentication
-or an OIDC access token). Authorization determines what that caller can do, based on authorizations configured
-in Identity.
+Authentication establishes who is calling the Orchestration Cluster REST API (for example, using basic authentication or an OIDC access token). Authorization determines what that caller can do, based on authorizations configured in Identity.
 
-For user task endpoints, the Orchestration Cluster REST API applies the authorization model described in
-[Orchestration Cluster authorization](../../components/concepts/access-control/authorizations.md).
-
-At a high level, authorization is evaluated at two levels:
-
-- Process-level permissions on the Process Definition resource (for example, `READ_USER_TASK`, `UPDATE_USER_TASK`,
-  `CLAIM_USER_TASK`, `COMPLETE_USER_TASK`) can grant access to all user tasks of a process.
-- Task-level permissions on the User Task resource (`READ`, `UPDATE`, `CLAIM`, `COMPLETE`) provide fine-grained
-  access and can be scoped using property-based access control on attributes such as `assignee`, `candidateUsers`,
-  and `candidateGroups`.
-
-When both levels are configured, process-level permissions take precedence. For example, if a caller has
-`PROCESS_DEFINITION[READ_USER_TASK]` or `PROCESS_DEFINITION[UPDATE_USER_TASK]` for a process, additional
-`USER_TASK[READ, UPDATE]` permissions are not required for tasks in that process.
+To learn more about authorization resources, permissions, and precedence (including user task permissions), see [Orchestration Cluster authorization](../../components/concepts/access-control/authorizations.md).
 :::
 
 ## Authenticate API calls

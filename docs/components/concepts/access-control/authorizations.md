@@ -81,72 +81,34 @@ For example, a `Process Definition` resource has a `CREATE_PROCESS_INSTANCE` per
 
 The following table lists all resources that support authorization in the Orchestration Cluster (Zeebe, Operate, Tasklist, Orchestration Cluster APIs), as well as the available permissions per resource.
 
-| Resource type                    | Resource key example                   | Resource key type                    | Supported permissions                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| :------------------------------- | :------------------------------------- | :----------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Authorization                    | `*`                                    | All authorizations                   | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Batch                            | `*`                                    | All batches                          | `CREATE`, `CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_RESOLVE_INCIDENT`, `CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE`, `CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION`, `CREATE_BATCH_OPERATION_DELETE_PROCESS_DEFINITION`, `READ`, `UPDATE` |
-| Component                        | `*`, `operate`, `tasklist`, `identity` | All components, component name       | `ACCESS`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| Decision Definition              | `*`, `order_decision`                  | All decisions / Decision ID          | `CREATE_DECISION_INSTANCE`, `READ_DECISION_DEFINITION`, `READ_DECISION_INSTANCE`, `DELETE_DECISION_INSTANCE`                                                                                                                                                                                                                                                                                                                               |
-| Decision Requirements Definition | `*`, `order_decision`                  | All DRDs / DRD ID                    | `READ`                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| Document                         | `*`                                    | All Documents                        | `CREATE`, `READ`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Group                            | `*`, `accounting`                      | All groups / Group ID                | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Mapping Rule                     | `*`, `my_mapping`                      | All mappings / Mapping ID            | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Message                          | `*`                                    | All messages                         | `CREATE`, `READ`                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| Process Definition               | `*`, `order_process`                   | All processes / BPMN Process ID      | `CREATE_PROCESS_INSTANCE`, `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, `UPDATE_PROCESS_INSTANCE`, `UPDATE_USER_TASK`, `MODIFY_PROCESS_INSTANCE`, `CANCEL_PROCESS_INSTANCE`, `DELETE_PROCESS_INSTANCE`                                                                                                                                                                                                            |
-| Resource                         | `*`, `my_form`, `order_process`        | All resources / Form ID / Process ID | `CREATE (* resource id only)`, `READ`, `DELETE_DRD`, `DELETE_FORM`, `DELETE_PROCESS`, `DELETE_RESOURCE`                                                                                                                                                                                                                                                                                                                                    |
-| Role                             | `*`, `myrole`                          | All roles / Role ID                  | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
-| System                           | `*`                                    | All system operations                | `READ`, `READ_USAGE_METRIC`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Tenant                           | `*`, `tenantA`                         | All tenants / Tenant ID              | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
-| User                             | `*`, `felix.mueller`                   | All users / Username                 | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
-| User Task                        | `*`                                    | All user tasks                       | `READ`, `UPDATE`, `COMPLETE`, `CLAIM`                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Resource type                    | Resource key example                   | Resource key type                                                                                              | Supported permissions                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| :------------------------------- | :------------------------------------- | :------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorization                    | `*`                                    | All authorizations                                                                                             | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Batch                            | `*`                                    | All batches                                                                                                    | `CREATE`, `CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_RESOLVE_INCIDENT`, `CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE`, `CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION`, `CREATE_BATCH_OPERATION_DELETE_PROCESS_DEFINITION`, `READ`, `UPDATE` |
+| Component                        | `*`, `operate`, `tasklist`, `identity` | All components, component name                                                                                 | `ACCESS`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Decision Definition              | `*`, `order_decision`                  | All decisions / Decision ID                                                                                    | `CREATE_DECISION_INSTANCE`, `READ_DECISION_DEFINITION`, `READ_DECISION_INSTANCE`, `DELETE_DECISION_INSTANCE`                                                                                                                                                                                                                                                                                                                               |
+| Decision Requirements Definition | `*`, `order_decision`                  | All DRDs / DRD ID                                                                                              | `READ`                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Document                         | `*`                                    | All Documents                                                                                                  | `CREATE`, `READ`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Group                            | `*`, `accounting`                      | All groups / Group ID                                                                                          | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Mapping Rule                     | `*`, `my_mapping`                      | All mappings / Mapping ID                                                                                      | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Message                          | `*`                                    | All messages                                                                                                   | `CREATE`, `READ`                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Process Definition               | `*`, `order_process`                   | All processes / BPMN Process ID                                                                                | `CREATE_PROCESS_INSTANCE`, `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, `UPDATE_PROCESS_INSTANCE`, `UPDATE_USER_TASK`, `MODIFY_PROCESS_INSTANCE`, `CANCEL_PROCESS_INSTANCE`, `DELETE_PROCESS_INSTANCE`                                                                                                                                                                                                            |
+| Resource                         | `*`, `my_form`, `order_process`        | All resources / Form ID / Process ID                                                                           | `CREATE (* resource id only)`, `READ`, `DELETE_DRD`, `DELETE_FORM`, `DELETE_PROCESS`, `DELETE_RESOURCE`                                                                                                                                                                                                                                                                                                                                    |
+| Role                             | `*`, `myrole`                          | All roles / Role ID                                                                                            | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
+| System                           | `*`                                    | All system operations                                                                                          | `READ`, `READ_USAGE_METRIC`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Tenant                           | `*`, `tenantA`                         | All tenants / Tenant ID                                                                                        | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
+| User                             | `*`, `felix.mueller`                   | All users / Username                                                                                           | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
+| User Task                        | `assignee` (example)                   | Task property name used with `PROPERTY` matcher (for example, `assignee`, `candidateUsers`, `candidateGroups`) | `READ`, `UPDATE`, `COMPLETE`, `CLAIM`                                                                                                                                                                                                                                                                                                                                                                                                      |
 
-### User task authorizations and precedence
+### User task authorizations
 
-User task access in the Orchestration Cluster can be controlled at two levels:
+User task access in the Orchestration Cluster is controlled using a combination of process-level and task-level permissions.
 
-- Process-level permissions on the `Process Definition` resource, for example:
-  - `READ_USER_TASK`: Read all user tasks of that process definition.
-  - `UPDATE_USER_TASK`: Update, claim, and complete all user tasks of that process definition.
-  - Where configured, `CLAIM_USER_TASK` and `COMPLETE_USER_TASK`.
+- Process-level permissions are granted on the `Process Definition` resource.
+- Task-level permissions are granted on the `USER_TASK` resource and typically use property-based access control.
 
-- Task-level permissions on the `User Task` resource type (`USER_TASK` in the API):
-  - `READ`, `UPDATE`, `COMPLETE`, `CLAIM` on user tasks, typically scoped using property-based access control on task attributes.
-
-These two levels are evaluated with clear precedence:
-
-- If a user has the required process‑level permission (for example, `READ_USER_TASK` or `UPDATE_USER_TASK` on `Process Definition`), that permission takes precedence.
-- In that case, the engine does not perform additional checks against `User Task` authorizations for the same operation.
-- If the user does not have sufficient process‑level permissions, the engine evaluates `User Task` permissions instead (including property‑based authorizations described below).
-
-This allows you to:
-
-- Give task workers narrow, task‑level permissions so they only see and work on tasks that are relevant to them.
-- Give managers or administrators broader, process‑level permissions when they need to oversee or manage all tasks for a process definition.
-
-### Property-based access control for user tasks
-
-Task-level `USER_TASK` permissions are usually applied using property-based access control rather than per-task configuration.
-
-Instead of granting permissions for specific task IDs, you can grant permissions based on the following user task properties:
-
-- `assignee`
-- `candidateUsers`
-- `candidateGroups`
-
-At runtime, when a user or client tries to read or modify a user task, the engine:
-
-1. Collects the principal’s username and group memberships.
-2. Determines which of the above properties match the user task (for example, the user is the assignee, appears in `candidateUsers`, or belongs to one of the `candidateGroups`).
-3. Checks for `User Task` authorizations that:
-   - Use a `PROPERTY` matcher with a matching property name, and
-   - Include the required permission (for example, `READ`, `CLAIM`, or `COMPLETE`).
-
-If at least one matching authorization is found, the user is authorized for that operation on the task.
-
-Property‑based access control enables common scenarios where:
-
-- Task workers only see, claim, and complete tasks where they are the assignee, a candidate user, or a member of a candidate group.
-- Task managers rely on process‑level permissions for broader oversight when needed.
+For Tasklist-specific behavior, permission evaluation, and recommended configuration,
+see [User task authorization in Tasklist](../../tasklist/user-task-authorization.md).
 
 ## Configuration
 
@@ -249,31 +211,35 @@ Camunda provides predefined roles to simplify access management:
 - **app-integrations**: Automatically assigned to app integration clients in cluster deployment.
 - **readonly-admin**: Automatically assigned to Camunda Support agents for support cases.
 
-## Common use cases
+## Common authorization use cases
 
 ### Web component access
 
 Users need specific permissions to access Orchestration Cluster web components:
 
-- UI access: Resource type `Component` and Resource Key is one of the components Operate, Tasklist, Identity
-  - Example: `operate` for Operate access
-  - Example: `tasklist` for Tasklist access
-  - Example: `identity` for Identity access
-  - Example: `*` for access to all components
-- Without these permissions, users cannot log in to the components
+- UI access: Resource type `Component` and a resource key identifying the component:
+  - `operate` for Operate access
+  - `tasklist` for Tasklist access
+  - `identity` for Identity access
+  - `*` for access to all components
+- Without these permissions, users cannot access the components.
 
 #### Tasklist V1 and Tasklist V2
 
 Tasklist uses different mechanisms to control user task visibility, depending on the API version:
 
-- Tasklist V1: Uses user task access restrictions based on BPMN assignee, candidate users, and candidate groups. These restrictions are configured separately and apply only to Tasklist V1.
-- Tasklist V2 and the Orchestration Cluster REST API: Use the Orchestration Cluster authorization model described on this page, including process‑level permissions on `Process Definition` and task‑level authorizations on `User Task` (with property‑based access control).
+- Tasklist V1: Uses user task access restrictions based on BPMN assignee, candidate users, and candidate groups.
+  These restrictions are configured separately and apply only to Tasklist V1.
+- Tasklist V2 and the Orchestration Cluster REST API: Use the Orchestration Cluster authorization model,
+  including process-level permissions on `Process Definition` and task-level authorizations on `USER_TASK`
+  (with property-based access control). For Tasklist-specific behavior and recommended patterns, see
+  [User task authorization in Tasklist](../../tasklist/user-task-authorization.md).
 
-After switching from Tasklist V1 to Tasklist V2, user task access restrictions no longer apply. To restrict who can see, claim, and complete tasks in Tasklist V2, configure the appropriate `Process Definition` and `User Task` authorizations instead.
+After switching from Tasklist V1 to Tasklist V2, user task access restrictions no longer apply. Instead, configure the appropriate `Process Definition` and `USER_TASK` authorizations to control who can see, claim, and complete tasks.
 
 ### Resource-level access
 
-This section describes access to authorization resources, such as process definitions and decisions, not UI components or APIs. Users need additional permissions to access specific resources within web components:
+This section describes authorization for domain resources (such as process and decision definitions), not access to UI components or APIs. Users need additional permissions to access specific resources within web components:
 
 - Process-related: Resource type `Process Definition`
   - `READ_PROCESS_DEFINITION` to view process models
@@ -289,7 +255,7 @@ This section describes access to authorization resources, such as process defini
 
 ### API access
 
-When implementing your own integrations (for example, using a Camunda client), you should consider the following:
+When implementing your own integrations (for example, using a Camunda client), consider the following:
 
 - Job workers: Resource type `Process Definition`
-  - `UPDATE_PROCESS_INSTANCE` to activate or complete jobs for the specific process definitions
+  - `UPDATE_PROCESS_INSTANCE` to activate or complete jobs for the targeted process definitions

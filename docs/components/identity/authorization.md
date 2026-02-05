@@ -77,20 +77,22 @@ To create a property-based user task authorization:
 
 You cannot combine multiple task properties in a single authorization. To cover all three properties (`assignee`, `candidateUsers`, `candidateGroups`), create one authorization per property.
 
-### Authorization precedence for user tasks
+### Authorization for user tasks
 
-Both process-level and task-level permissions can control access to user tasks:
+Access to user tasks can be controlled using a combination of process-level and task-level permissions:
 
-- Process-level permissions on the `Process Definition` resource, such as `READ_USER_TASK`, `UPDATE_USER_TASK`, and (where configured) `CLAIM_USER_TASK` and `COMPLETE_USER_TASK`.
+- Process-level permissions on the `Process Definition` resource, such as `READ_USER_TASK` and `UPDATE_USER_TASK`.
+- Task-level permissions on the `USER_TASK` resource, such as `READ`, `UPDATE`, `CLAIM`, and `COMPLETE`, which are
+  typically scoped using property-based access control on task properties such as `assignee`, `candidateUsers`,
+  and `candidateGroups`.
 
-- Task-level permissions on `USER_TASK`, such as `READ`, `UPDATE`, `CLAIM`, and `COMPLETE`, are typically scoped using property-based access control on task properties such as assignee, candidate users, and candidate groups.
+When both process-level and task-level permissions exist, process-level permissions take precedence:
+if a user already has the required `Process Definition` permission for an operation (for example, `UPDATE_USER_TASK`),
+the system does not evaluate `USER_TASK` permissions for that operation. Task-level `USER_TASK` permissions are
+evaluated only when no effective process-level permission exists for that user and process definition.
 
-When both exist, process-level permissions take precedence:
-
-- If a user already has the required `Process Definition` permission for an operation (for example, `UPDATE_USER_TASK`), the system does not evaluate `USER_TASK` permissions for that operation.
-- `USER_TASK` permissions are evaluated when no effective process-level permission exists for that user.
-
-This precedence applies consistently across the Orchestration Cluster REST API and Tasklist.
+For Tasklist-specific behavior and practical authorization patterns, see
+[User task authorization in Tasklist](../tasklist/user-task-authorization.md).
 
 ### Authorization examples
 
@@ -100,9 +102,10 @@ To allow a supervisor to see and manage all user tasks for one or more processes
 
 - Resource type: `PROCESS_DEFINITION`
 - Resource ID: `*` (or a specific BPMN process ID)
-- Permissions: `READ_USER_TASK`, `UPDATE_USER_TASK`, and, where configured, `CLAIM_USER_TASK`, `COMPLETE_USER_TASK`
+- Permissions: `READ_USER_TASK`, `UPDATE_USER_TASK`
 
-This grants broad visibility and control over all user tasks for the selected processes, without needing task-level authorizations.
+This grants broad visibility and control over all user tasks for the selected processes, without needing task-level
+authorizations.
 
 #### Task worker: property-based access
 
@@ -114,10 +117,12 @@ The default task worker role is created with property-based user task authorizat
 - Property name: one of `assignee`, `candidateUsers`, `candidateGroups`
 - Permissions: `READ`, `CLAIM`, `COMPLETE`
 
-This ensures that task workers can only see, claim, and complete tasks where they are the assignee, a candidate user, or in a candidate group.
+This ensures that task workers can only see, claim, and complete tasks where they are the assignee, a candidate user,
+or in a candidate group.
 
 :::note
-Default roles, including task worker, are recreated each time the cluster starts and are not customizable. To adjust permissions, create and manage custom roles instead.
+Default roles, including task worker, are recreated each time the cluster starts and are not customizable.
+To adjust permissions, create and manage custom roles instead.
 :::
 
 ## Change an existing authorization

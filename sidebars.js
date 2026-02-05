@@ -736,6 +736,7 @@ module.exports = {
           },
           items: [
             "components/tasklist/userguide/access-control",
+            "components/tasklist/user-task-authorization",
             "components/tasklist/userguide/using-tasklist",
             "components/tasklist/api-versions",
             "components/tasklist/userguide/managing-tasks",
