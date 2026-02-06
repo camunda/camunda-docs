@@ -138,7 +138,7 @@ When you deploy a new version of a process that uses the same webhook endpoint a
 
 To activate the new version's webhook, ensure all process instances on the older version are completed, or use [process instance migration](/components/concepts/process-instance-migration.md) to move them to the new version. Alternatively, configure a different webhook endpoint in the new version if both versions need to run concurrently.
 
-Learn more about [connector deduplication](../advanced-topics/connector-deduplication.md#cross-version-deduplication).
+Learn more about [connector deduplication](../advanced-topics/deduplication.md#cross-version-deduplication).
 :::
 
 URLs of the exposed HTTP Webhooks adhere to the following pattern:

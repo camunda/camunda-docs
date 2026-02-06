@@ -461,7 +461,7 @@ The **Deduplication** section allows you to configure the connector deduplicatio
 By default, the connector runtime deduplicates connectors based on properties, so that elements with the same subscription properties only result in one subscription.
 
 :::info
-To learn more about deduplication, see [deduplication](../advanced-topics/connector-deduplication.md).
+To learn more about deduplication, see [deduplication](../advanced-topics/deduplication.md).
 :::
 
 To customize the deduplication behavior, select the **Manual mode** checkbox, and configure the custom deduplication ID.

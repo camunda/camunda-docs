@@ -149,7 +149,7 @@ See the [webhook documentation](/components/connectors/protocol/http-webhook.md)
 In the simplest case, each inbound connector element in a BPMN diagram corresponds to a unique endpoint, event consumer, or a polling task.
 However, sometimes you might want to have multiple BPMN elements listening to the same event source. For example, you might want to link multiple connector events to the same message queue consumer and activate only one of them based on the message content.
 
-Learn more about this feature in the [connector deduplication guide](../advanced-topics/connector-deduplication.md).
+Learn more about this feature in the [connector deduplication guide](../advanced-topics/deduplication.md).
 
 ## Working with request context
 
