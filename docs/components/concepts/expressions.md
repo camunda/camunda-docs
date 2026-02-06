@@ -40,16 +40,16 @@ Camunda 8 integrates the [FEEL Scala](https://github.com/camunda/feel-scala) eng
 
 ## Evaluation timeout
 
-Like any expression language, it's possible to write FEEL expressions that take a long time to evaluate.
+Use evaluation timeouts to prevent long-running FEEL expressions from blocking processing.
 
-Common scenarios that can lead to long evaluation times include:
+Some FEEL expressions may take a long time to evaluate, especially in the following cases:
 
 - Expressions with exponential complexity, such as recursive operations without proper bounds
 - Expressions that process very large input data sets
 
-To ensure that expression evaluation doesn't block other processing, evaluations time out after 5 seconds by default. You can [configure this timeout](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#expression).
+By default, expression evaluation times out after five seconds. You can [configure this timeout](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#expression).
 
-When an expression exceeds this timeout, the evaluation is interrupted and an incident is raised for the affected process instance.
+If an expression exceeds the timeout, evaluation is interrupted and an incident is raised for the affected process instance.
 
 ## Next steps
 
