@@ -30,8 +30,8 @@ The connector runtime maintains an internal state that tracks:
 
 The following endpoints of the Orchestration Cluster API are used as data sources:
 
-- [Search process definitions](/docs/apis-tools/orchestration-cluster-api-rest/specifications/search-process-definitions.api.mdx)
-- [Search message subscriptions](/docs/apis-tools/orchestration-cluster-api-rest/specifications/search-message-subscriptions.api.mdx)
+- [Search process definitions](/apis-tools/orchestration-cluster-api-rest/specifications/search-process-definitions.api.mdx)
+- [Search message subscriptions](/apis-tools/orchestration-cluster-api-rest/specifications/search-message-subscriptions.api.mdx)
 
 If a process definition matches at least one of these two criteria (i.e. it is either the latest version of that process definition, or it has active instances waiting on message subscriptions), the connector runtime will create an executable for every inbound connector element in that process and keep it active as long as these criteria are met.
 
