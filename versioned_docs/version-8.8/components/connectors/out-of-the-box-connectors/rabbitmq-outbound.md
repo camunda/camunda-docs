@@ -242,7 +242,7 @@ The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL
 The **Deduplication** section allows you to configure the connector deduplication parameters.
 Not to be confused with **message deduplication**, **Connector deduplication** is a mechanism in the connector Runtime that determines how many RabbitMQ subscriptions are created if there are multiple occurrences of the **RabbitMQ Consumer connector** in the BPMN diagram.
 
-By default, the connector runtime deduplicates connectors based on properties, so elements with the same subscription properties only result in one subscription. Learn more about deduplication in the [deduplication guide](../use-connectors/inbound.md#connector-deduplication).
+By default, the connector runtime deduplicates connectors based on properties, so elements with the same subscription properties only result in one subscription. Learn more about deduplication in the [deduplication guide](../advanced-topics/connector-deduplication.md).
 
 To customize the deduplication behavior, check the **Manual mode** checkbox and configure the custom deduplication ID.
 
