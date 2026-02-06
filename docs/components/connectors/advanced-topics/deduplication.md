@@ -38,7 +38,29 @@ In this context, **equal properties** means the properties that define the busin
 The automatic deduplication only takes into account the properties that are related to the business logic of the connector itself (for example, **Server URL** or **Authentication properties**).
 It does not take into account the properties that define output mapping (**Result variable**, **Result expression**, **Response expression**), correlation (**Correlation key (process)**, **Correlation key (payload)**, **Activation condition**), or other properties that are handled by the connector runtime and not by the connector itself.
 
-This way, two connectors of the same type that are identical in terms of business logic and are defined in the same business process will be deduplicated automatically.
+This way, two connectors of the same type that are identical in terms of business logic and are defined in the same process definition will be deduplicated automatically.
+
+### Cross-version deduplication
+
+As of Camunda 8.9, deduplication is performed across all versions of the same process definition. This means that if you deploy version 1 and version 2 of a process with the same compatible inbound connector, there will only be one executable connector instance serving both versions.
+
+This behavior is a natural extension of support for [inbound connectors across multiple process versions](./inbound-lifecycle.md). When connector properties are identical across versions, the connector runtime automatically consolidates them into a single subscription or endpoint.
+
+:::info
+To learn more about how inbound connectors behave across process versions, see [Inbound connector lifecycle](./inbound-lifecycle.md).
+:::
+
+:::warning Webhook connectors and multiple versions
+When using webhook connectors, you cannot reuse the same webhook endpoint for multiple process versions if you want to keep them both active simultaneously.
+
+The default behavior is to keep the old version running when you deploy a new version that uses the same endpoint. The new version's connector will not become active until no process instances are running on the older version.
+
+To resolve this:
+
+- Ensure no process instances are active for the older version before deploying the new version.
+- Consider using [process instance migration](/components/concepts/process-instance-migration.md) to move running instances from the old version to the new version before deployment.
+- Alternatively, use a different webhook endpoint path in the new version if you need both versions to run concurrently.
+  :::
 
 ## Manual deduplication
 
@@ -80,7 +102,7 @@ A deduplication ID can contain alphanumeric characters, dashes, and underscores.
 
 While deduplication is a powerful tool that can optimize the execution of your BPMN process, it has some limitations. It is important to understand them to avoid unexpected behavior.
 
-1. **Deduplication ID scope** - Deduplication ID is unique within a single BPMN diagram. It is not possible to deduplicate connectors across different BPMN diagrams.
+1. **Deduplication ID scope** - Deduplication ID is scoped to a single process definition across all its versions. It is not possible to deduplicate connectors across different process definitions.
 2. **Connector type** - connectors of different types cannot share the same deduplication ID (for example, a Webhook connector and a Message Queue connector).
 3. **Connector properties** - connectors that share the same deduplication ID must have the same business logic properties. This means they must have the same **Webhook ID**, **Server URL**, **Authentication properties**, etc. (depending on the connector type).
 4. **Activation condition** - connectors with the same deduplication ID must have mutually exclusive activation conditions. If multiple connectors with the same deduplication ID have activation conditions that can be true for the same message, the connector runtime will not be able to determine which connector should be triggered, and an error will occur.
