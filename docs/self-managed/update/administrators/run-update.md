@@ -1,14 +1,14 @@
 ---
 id: run-admin-upgrade
-title: "Perform an upgrade"
-description: "Administrator checklist for executing a Camunda 8.8 Self-Managed upgrade."
+title: "Perform an update"
+description: "Administrator checklist for executing a Camunda 8.8 Self-Managed update."
 ---
 
 import DocCardList from '@theme/DocCardList';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide describes how to perform a Camunda 8.8 Self-Managed upgrade. Ensure you have completed all steps in [Prepare for upgrade](./prepare-for-update.md) before continuing.
+This guide describes how to perform a Camunda 8.8 Self-Managed update. Ensure you have completed all steps in [Prepare for update](./prepare-for-update.md) before continuing.
 
 ## Step 1: Confirm prerequisites
 
@@ -17,12 +17,12 @@ Confirm you have completed the following prerequisites:
 | Prerequisite               | Description                                                                                                                                                                         |
 | :------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Backups                    | Create and verify backups. Test restoring backups to ensure data integrity. See [backup and restore](../../../self-managed/operational-guides/backup-restore/backup-and-restore.md) |
-| Validate 8.8 configuration | Validate your `8.8 values.yaml` with a clean 8.8 non-production installation before upgrading to ensure configuration compatibility.                                                |
-| Test upgrade               | Confirm that the upgrade runs successfully in a non‑production environment that mirrors your production cluster.                                                                    |
+| Validate 8.8 configuration | Validate your `8.8 values.yaml` with a clean 8.8 non-production installation before updating to ensure configuration compatibility.                                                 |
+| Test update                | Confirm that the update runs successfully in a non‑production environment that mirrors your production cluster.                                                                     |
 
-## Step 2: Perform upgrade
+## Step 2: Perform update
 
-Perform an upgrade as follows.
+Perform an update as follows.
 
 <Tabs groupId="installation" defaultValue="helm" queryString values={
 [
@@ -35,11 +35,11 @@ Perform an upgrade as follows.
 
 ### Helm chart
 
-To upgrade with Helm, see the [Helm chart upgrade guide for 8.7 to 8.8](/self-managed/deployment/helm/upgrade/helm-870-880.md) for detailed instructions.
-The guide covers update options, secret handling, migration job monitoring, and other upgrade tasks.
+To update with Helm, see the [Helm chart update guide for 8.7 to 8.8](/self-managed/deployment/helm/upgrade/helm-870-880.md) for detailed instructions.
+The guide covers update options, secret handling, migration job monitoring, and other update tasks.
 
 :::info
-**Important:** Upgrade to the latest 8.7 patch before moving to 8.8. Confirm your Helm chart and Helm CLI versions are compatible with 8.8, and review your values file for deprecated keys.
+**Important:** Update to the latest 8.7 patch before moving to 8.8. Confirm your Helm chart and Helm CLI versions are compatible with 8.8, and review your values file for deprecated keys.
 :::
 
 :::note
@@ -66,7 +66,7 @@ Manual upgrades involve multiple steps. In addition to updating container images
 
 ## Next steps
 
-After completing the upgrade to 8.8, you should:
+After completing the update to 8.8, you should:
 
 1. **Monitor cluster health and application stability** during the application rollout phase.
 2. **Update monitoring dashboards and alerts for Camunda 8.8** to reflect Camunda 8.8 changes.
@@ -76,7 +76,7 @@ After completing the upgrade to 8.8, you should:
 
 ## Useful resources
 
-- [Helm chart upgrade guide: 8.7 to 8.8](../../deployment/helm/upgrade/helm-870-880.md): Full step-by-step Helm upgrade guide.
+- [Helm chart update guide: 8.7 to 8.8](../../deployment/helm/upgrade/helm-870-880.md): Full step-by-step Helm update guide.
 - [Collecting diagnostics](../../deployment/helm/operational-tasks/diagnostics.md): How to gather troubleshooting data.
 - [Backup and restore guide](../../operational-guides/backup-restore/backup-and-restore.md): Recommended backup workflows.
 - [Troubleshooting guides](../../operational-guides/troubleshooting.md): Common issues and resolution steps.

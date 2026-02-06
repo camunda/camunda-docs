@@ -1,11 +1,11 @@
 ---
 id: admin-upgrade-overview
-title: "Upgrade to Camunda 8.9"
+title: "Update to Camunda 8.9"
 sidebar_label: "Upgrade to Camunda 8.9"
-description: "Administrator overview for preparing and running a Camunda 8.9 Self-Managed upgrade."
+description: "Administrator overview for preparing and running a Camunda 8.9 Self-Managed update."
 ---
 
-Prepare for and perform an upgrade from Camunda 8.8 to Camunda 8.9 for Self-Managed environments.
+Prepare for and perform an update from Camunda 8.8 to Camunda 8.9 for Self-Managed environments.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -19,12 +19,12 @@ This high-level guide only applies to Camunda 8 Self-Managed deployments. It doe
 Use this guide if you:
 
 - Maintain the infrastructure running Camunda 8.
-- Need to upgrade from Camunda 8.8.x to 8.9.x. (Upgrades from 8.7 or earlier require first moving to 8.8.x.)
-- Want to review pre-upgrade requirements and follow the technical upgrade steps.
+- Need to update from Camunda 8.8.x to 8.9.x. (Updates from 8.7 or earlier require first moving to 8.8.x.)
+- Want to review pre-update requirements and follow the technical update steps.
 
-## Upgrade steps
+## Update steps
 
-The upgrade process involves both preparing for and performing the upgrade.
+The update process involves both preparing for and performing the update.
 
 <ZeebeGrid zeebe={overviewCards} />
 
