@@ -5,7 +5,7 @@ Configures how the AI Agent sub-process should behave when handling results from
 :::important
 In AI Agent sub-processes (implemented as ad-hoc sub-processes), only non-interrupting event subprocesses are supported.
 
-As a result, even when using Cancel tool calls, the event subprocess itself remains non-interrupting; cancellation happens at the tool-call level, not by stopping the parent sub-process.
+As a result, even when using **Cancel tool calls**, the event subprocess itself remains non-interrupting; cancellation happens at the tool-call level, not by stopping the parent sub-process.
 
 See [How event subprocesses work with the AI Agent Sub-process](#how-event-subprocesses-work-with-the-ai-agent-sub-process) for more details.
 :::
@@ -38,7 +38,7 @@ When the configured event fires while one or more tool calls are still running, 
 - Keeps the surrounding **ad-hoc sub-process scope active**: The agent decides, based on the new LLM response, which elements to activate next or whether to complete the sub-process.
 
 :::note
-No BPMN interrupting event subprocess is involved; the interruption happens purely in the agent’s control flow (job worker), not by canceling the BPMN parent scope.
+No BPMN interrupting event subprocess is involved; the cancellation happens purely in the agent’s control flow (job worker), not by canceling the BPMN parent scope.
 :::
 
 For the example scenario, the following sequence of messages would be sent to the LLM:
