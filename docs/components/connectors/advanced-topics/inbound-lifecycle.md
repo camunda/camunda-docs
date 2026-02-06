@@ -47,8 +47,8 @@ The lifecycle of an executable starts when the connector runtime reacts to a cha
   This can happen for a number of reasons. Refer to the dedicated [Deduplication](deduplication) guide to learn more.
 - **FAILED TO ACTIVATE**: The runtime attempts to activate an executable. If an activation attempt fails, the executable is saved with the state **FAILED TO ACTIVATE**.
 - **ACTIVE**: When the executable is successfully activated, it will stay in the **ACTIVE** state. This means the executable is ready and listening to external events in the third-party system.
-- **CANCELLED:** The active executable can encounter an unrecoverable error. In this case, it may transition to the **CANCELLED** state. This is rare, and most connectors will have robust error handling with retries to deal with transient errors like temporary network issues.
+- **CANCELED:** The active executable can encounter an unrecoverable error. In this case, it may transition to the **CANCELED** state. This is rare, and most connectors will have robust error handling with retries to deal with transient errors like temporary network issues.
 
-When a new process version is deployed, the connector runtime will check if it is possible to deduplicate inbound connectors in the new version with any of the executables that are already active. If so, it will update the running executable. This will also lead to a restart attempt if the executable was in an inactive state (**CANCELLED** or **FAILED TO ACTIVATE**).
+When a new process version is deployed, the connector runtime will check if it is possible to deduplicate inbound connectors in the new version with any of the executables that are already active. If so, it will update the running executable. This will also lead to a restart attempt if the executable was in an inactive state (**CANCELED** or **FAILED TO ACTIVATE**).
 
 When the active executable is no longer needed (i.e. the process version it originates from is no longer the latest, and there are no active instances waiting on message subscriptions), the runtime will deactivate it.
