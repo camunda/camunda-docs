@@ -819,6 +819,42 @@ export const configs = [
     area: ["Data"],
   },
   {
+    name: "camunda.data.secondary-storage.elasticsearch.proxy.enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.proxy.host",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.proxy.port",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.proxy.ssl-enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.proxy.username",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.proxy.password",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
     name: "camunda.data.secondary-storage.elasticsearch.backup.repository-name",
     legacy: [
       "camunda.operate.backup.repositoryName",
@@ -1175,6 +1211,42 @@ export const configs = [
       "zeebe.broker.exporters.camundaexporter.args.history.maxDelayBetweenRuns",
     ],
     types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.proxy.enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.proxy.host",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.proxy.port",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.proxy.ssl-enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.proxy.username",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.proxy.password",
+    legacy: ["N/A"],
+    types: ["New"],
     area: ["Data"],
   },
   // Section: Data - Secondary Storage - RDBMS
