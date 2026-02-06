@@ -6,6 +6,16 @@ description: "Learn about the Terraform implementation for the ECS single-region
 
 Learn about the Terraform implementation for the ECS single-region (Fargate) reference architecture.
 
+:::note Terraform infrastructure example
+Camunda doesn't recommend using the following Terraform-based infrastructure as a module, since we cannot guarantee compatibility.
+
+Instead, we suggest [reusing or extending components of the Terraform example](#terraform-implementation.md) to ensure alignment with your environment.
+:::
+
+:::note Secret management
+Camunda strongly recommends managing sensitive information using a secure secrets management tool such as HashiCorp Vault. For guidance on injecting secrets into Terraform via Vault, refer to the [Terraform Vault Secrets Injection Guide](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
+:::
+
 ## Root workspace
 
 The root workspace houses the overall implementation to keep things configurable and interchangeable as needed.

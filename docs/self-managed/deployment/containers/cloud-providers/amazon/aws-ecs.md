@@ -159,54 +159,34 @@ You'll run all commands in the following steps from `camunda-deployment-referenc
 
 Terraform will now use the S3 bucket to manage the state file, ensuring secure and persistent storage.
 
-## 2. Execution
+## Create resources
 
-:::note Terraform infrastructure example
-Camunda doesn't recommend using the following Terraform-based infrastructure as a module, since we cannot guarantee compatibility.
-
-Instead, we suggest reusing or extending components of the Terraform example to ensure alignment with your environment.
-:::
-
-Read about the [Terraform implementation](./about/terraform-implementation.md) to learn more.
-
-:::note Secret management
-
-We strongly recommend managing sensitive information using a secure secrets management tool such as HashiCorp Vault. For guidance on injecting secrets into Terraform via Vault, refer to the [Terraform Vault Secrets Injection Guide](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
-:::
-
-:::info Terraform Flow
-Due to the `postgres_seed.tf` it is required that the machine executing it has the `AWS CLI` installed and configured to be able to start and wait for the seeding task to have finished.
-:::
-
-1. Open a terminal in the reference directory containing `config.tf` and the other `.tf` files.
-
-2. Perform a final initialization to apply any changes made throughout this guide:
+1. Perform a final initialization to apply any changes made throughout this guide:
 
    ```bash reference
    https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
    ```
 
-3. Plan the configuration files:
+2. Plan the configuration files:
 
    ```bash
    terraform plan -out cluster.plan # describe what will be created
    ```
 
-4. After reviewing the plan, you can confirm and apply the changes:
+3. After reviewing the plan, you can confirm and apply the changes:
 
    ```bash
    terraform apply cluster.plan     # apply the creation
    ```
 
-Terraform will now provision the Amazon ECS resources and the Aurora PostgreSQL cluster with all necessary configurations. This process may take approximately 20–30 minutes to complete.
+With this, Terraform provisions:
 
-The Terraform flow is as follows:
+- VPC and related resources, including IAM roles.
+- Aurora Postgres Cluster within the VPC. This includes [seeding the database](./about/terraform-implementation.md#aurora-postgresql-initial-user-seeding).
+- Orchestration Cluster.
+- Connectors.
 
-- Creation of the VPC and related resources, among that IAM roles
-- Creation of the Aurora Postgres Cluster within the VPC
-- Creation of the temporary Aurora Postgres seeding task and wait for it to finish
-- Creation of the Orchestration Cluster and wait for it to be ready
-- Creation of the Connectors and wait for it to be ready
+This process may take 20–30 minutes to complete.
 
 ## 4. Verify connectivity to Camunda 8
 
