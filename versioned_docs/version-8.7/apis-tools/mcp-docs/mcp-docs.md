@@ -120,15 +120,15 @@ Most clients accept the standard MCP protocol JSON configuration format:
 
 ## Usage and limits
 
+:::info important
+The Camunda Docs MCP server is not designed for use in production environments, high-volume automation, or as part of a CI/CD pipeline. It is provided to help support Camunda developer IDE queries and for coding assistance, evaluation, and testing. You must always check and validate AI generated content and code as responses can be inaccurate.
+:::
+
 Once connected to the MCP server within your editor, you can ask context-aware questions about Camunda. For example:
 
 - "What is BPMN?"
 - "How do I build an AI agent?"
 - "What properties are changed for Camunda 8.8?"
-
-:::info important
-The Camunda Docs MCP server is not designed for use in production environments, high-volume automation, or as part of a CI/CD pipeline. It is provided to help support Camunda developer IDE queries and for coding assistance, evaluation, and testing. You must always check and validate AI generated content and code as responses can be inaccurate.
-:::
 
 ### Authentication
 
@@ -139,7 +139,7 @@ This anonymous Google ID is only used to enforce per-user rate limits and preven
 - 40 requests per user per hour.
 - 200 requests per user per day.
 
-:::info
+:::note
 The MCP server is powered by the Kapa.ai AI assistant. Refer to the [Kapa documentation](https://docs.kapa.ai/integrations/mcp/overview#authentication) to learn more about authentication.
 :::
 
