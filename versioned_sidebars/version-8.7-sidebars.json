@@ -1748,8 +1748,7 @@
       "Migration manuals": [
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks"
       ]
-    },
-    "apis-tools/mcp-docs/docs-mcp"
+    }
   ],
   "Reference": [
     "reference/overview",
@@ -1809,6 +1808,7 @@
       "items": ["reference/data-collection/usage-metrics"]
     },
     "reference/glossary",
+    "reference/mcp-docs/docs-mcp",
     "reference/legal"
   ],
   "Self-Managed": [

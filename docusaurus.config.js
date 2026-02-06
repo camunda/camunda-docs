@@ -381,6 +381,10 @@ module.exports = {
               label: "Support and feedback",
               to: "docs/reference/contact",
             },
+            {
+              label: "Docs MCP server",
+              to: "docs/reference/mcp-docs",
+            },
           ],
         },
         {
