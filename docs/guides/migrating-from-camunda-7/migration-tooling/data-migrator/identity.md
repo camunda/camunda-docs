@@ -1,6 +1,6 @@
 ---
 id: identity
-title: Identity migration (experimental)
+title: Identity migration
 sidebar_label: Identity migration
 description: "Migrate identity data to Camunda 8."
 ---
@@ -22,7 +22,7 @@ Identity data refers to:
 
 As of today, the following requirements and limitations apply:
 
-- The experimental feature **only** includes the migration of:
+- This feature only includes the migration of:
   - Tenants.
   - Supported authorizations (detailed in the [Supported entities](#supported-entities) section below).
 - Users, groups and memberships are currently not supported for migration.
