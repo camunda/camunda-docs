@@ -13,6 +13,12 @@ Upgrade a Camunda 8 Self-Managed deployment from version 8.7 to 8.8. This guide 
 
 If your deployment is running a version earlier than 8.7, complete the required version-specific upgrades listed in [Upgrading from an earlier version](#upgrading-from-an-earlier-version) before proceeding.
 
+## Prepare for upgrade
+
+Review required preparation steps and important changes before upgrading to Camunda 8.8.
+
+<p><a href="../prepare-for-upgrade" class="link-arrow">Prepare for upgrade</a></p>
+
 ## Upgrade methods
 
 Choose the upgrade guide that matches how your environment is deployed:

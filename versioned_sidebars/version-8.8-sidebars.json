@@ -2729,6 +2729,7 @@
     {
       "type": "category",
       "label": "Upgrade to Camunda 8.8",
+      "className": "sidebar-cta",
       "link": {
         "type": "doc",
         "id": "apis-tools/migration-manuals/index"
@@ -3471,11 +3472,13 @@
     {
       "type": "category",
       "label": "Upgrade to Camunda 8.8",
+      "className": "sidebar-cta",
       "link": {
         "type": "doc",
         "id": "self-managed/update/admin-upgrade-overview"
       },
       "items": [
+        "self-managed/update/prepare-for-upgrade",
         {
           "type": "category",
           "label": "Helm upgrade",
@@ -3511,15 +3514,11 @@
               ]
             },
             {
-              "Elasticsearch": [
+              "Database": [
                 "self-managed/update/components/elasticsearch/changes-in-elasticsearch-8"
               ]
             },
-            {
-              "Keycloak": [
-                "self-managed/update/components/keycloak/keycloak-compatibility"
-              ]
-            },
+            "self-managed/update/components/keycloak/keycloak-compatibility",
             "self-managed/update/components/importer"
           ]
         }
