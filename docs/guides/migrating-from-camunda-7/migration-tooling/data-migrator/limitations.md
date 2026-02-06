@@ -255,12 +255,12 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | formKey                 | No              |
 | resourceKey             | No              |
 
-Limitations:
+The following limitations apply:
 
-- The Audit log entities are only migrated for user tasks, process definitions, process instances, variables, decisions, users, groups, authorization.
-  For the following entities, the audit log is not migrated at all: batch operation, identity link, attachment, job definition, job, external task, metrics, operation log, filter, comment, and property.
-- The `entityKey` property is migrated only for entities that are related to user tasks, process definitions, and process instances.
-- The `elementInstanceKey` property is migrated only for entities that are related to user tasks.
+- Audit log entries are migrated only for user tasks, process definitions, process instances, variables, decisions, users, groups, and authorizations.
+- Audit log entries are not migrated for batch operations, identity links, attachments, job definitions, jobs, external tasks, metrics, operation logs, filters, comments, and properties.
+- The `entityKey` property is migrated only for entities related to user tasks, process definitions, and process instances.
+- The `elementInstanceKey` property is migrated only for entities related to user tasks.
 
 ### Batch operation
 
