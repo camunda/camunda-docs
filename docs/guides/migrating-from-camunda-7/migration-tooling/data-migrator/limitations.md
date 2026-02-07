@@ -199,6 +199,21 @@ The history migration has the following limitations.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5370
 - DMN models version 1.1 are not supported by Operate, decision definition data will be migrated but the decision model itself will not be visible in Operate.
 
+### Forms
+
+The History Data Migrator supports migration of Camunda Forms, but with the following limitations:
+
+- Only [Camunda Forms](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) are migrated. Other form types are not supported:
+  - Embedded forms (HTML/JSF)
+  - External forms (URL-based forms)
+  - Generated forms (from form data definitions)
+- Supported form bindings:
+  - `deployment` - Form version deployed together with the process definition
+  - `latest` - Latest version of the form definition
+  - `version` - Specific version of the form definition
+- Unsupported form bindings:
+  - Expression-based bindings (for example, `${formKey}`)
+
 ## Cockpit plugin
 
 The [Cockpit plugin](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin.md) has the following limitations:
@@ -407,14 +422,13 @@ The following table shows which Camunda 8 entities and properties are migrated b
 
 ### Form
 
-| Property  | Can be migrated |
-| --------- | --------------- |
-| formKey   | No              |
-| tenantId  | No              |
-| formId    | No              |
-| schema    | No              |
-| version   | No              |
-| isDeleted | No              |
+| Property | Can be migrated |
+| -------- | --------------- |
+| formKey  | Yes             |
+| tenantId | Yes             |
+| formId   | Yes             |
+| schema   | Yes             |
+| version  | Yes             |
 
 ### History deletion
 
@@ -510,7 +524,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | versionTag           | Yes             |
 | version              | Yes             |
 | bpmnXml              | Yes             |
-| formId               | No              |
+| formId               | Yes             |
 
 ### Process instance
 
@@ -580,7 +594,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | completionDate           | Yes             |
 | assignee                 | Yes             |
 | state                    | Yes             |
-| formKey                  | No              |
+| formKey                  | Yes             |
 | processDefinitionKey     | Yes             |
 | processInstanceKey       | Yes             |
 | rootProcessInstanceKey   | Yes             |
@@ -598,17 +612,6 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | tags                     | No              |
 | partitionId              | Yes             |
 | historyCleanupDate       | Yes             |
-
-### User task migration
-
-| Property                 | Can be migrated |
-| ------------------------ | --------------- |
-| userTaskKey              | No              |
-| processDefinitionKey     | No              |
-| processDefinitionId      | No              |
-| elementId                | No              |
-| name                     | No              |
-| processDefinitionVersion | No              |
 
 ### Variable
 
