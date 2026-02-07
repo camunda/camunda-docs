@@ -1381,6 +1381,7 @@ module.exports = {
       items: ["reference/data-collection/usage-metrics"],
     },
     "reference/contact",
+    "reference/mcp-docs/docs-mcp",
     "reference/legal",
   ],
   "Self-Managed": [
