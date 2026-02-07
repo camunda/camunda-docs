@@ -788,6 +788,14 @@ export const configs = [
     area: ["Data"],
   },
 
+  // Section: Expression
+  {
+    name: "camunda.expression.timeout",
+    legacy: ["zeebe.broker.experimental.engine.expression.timeout"],
+    types: ["Direct mapping"],
+    area: ["Expression"],
+  },
+
   // System keys
 
   {

@@ -1705,6 +1705,15 @@ export const configs = [
     types: ["Breaking change"],
     area: ["Monitoring"],
   },
+
+  // Section: Expression
+  {
+    name: "camunda.expression.timeout",
+    legacy: ["zeebe.broker.experimental.engine.expression.timeout"],
+    types: ["Direct mapping"],
+    area: ["Expression"],
+  },
+
   // Section: Monitoring
   {
     name: "camunda.monitoring.metrics.actor",
