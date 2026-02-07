@@ -2,10 +2,16 @@
 id: rdbms
 sidebar_label: Configure RDBMS
 title: Configure RDBMS in Helm chart
-description: "Configure an external relational database (RDBMS) as secondary storage for Camunda 8 Self-Managed using the Helm chart."
+description: "Configure an external relational database (RDBMS) as secondary storage for Camunda 8 Self-Managed using the Helm chart. Helm values reference, JDBC drivers, schema management, and troubleshooting."
 ---
 
-Camunda 8 Self-Managed supports using an external relational database (RDBMS) as the Orchestration Cluster’s secondary storage instead of Elasticsearch or OpenSearch.
+Camunda 8 Self-Managed supports using an external relational database (RDBMS) as the Orchestration Cluster's secondary storage instead of Elasticsearch or OpenSearch.
+
+This page provides:
+
+- **[Configuration reference](#configuration)**: All Helm values organized by function.
+- **[Quick example](#example-usage)**: Minimal YAML to get started.
+- Links to detailed guides for specific tasks.
 
 ## Prerequisites
 
@@ -23,38 +29,62 @@ For a short checklist and troubleshooting steps you can run after configuring th
 
 ## Configuration
 
-### Parameters
+### Connection parameters (required)
 
-| Parameter                                                                                          | Type              | Default | Description                                                                        |
-| -------------------------------------------------------------------------------------------------- | ----------------- | ------- | ---------------------------------------------------------------------------------- |
-| `orchestration.data.secondaryStorage.type`                                                         | string            | `""`    | Sets the secondary storage type. Must be `rdbms` when using a relational database. |
-| `orchestration.data.secondaryStorage.rdbms.url`                                                    | string            | `""`    | JDBC connection URL for the external database.                                     |
-| `orchestration.data.secondaryStorage.rdbms.username`                                               | string            | `""`    | Username used to authenticate to the database.                                     |
-| `orchestration.data.secondaryStorage.rdbms.secret.existingSecret`                                  | string            | `""`    | Name of an existing Kubernetes secret containing the password.                     |
-| `orchestration.data.secondaryStorage.rdbms.secret.existingSecretKey`                               | string            | `""`    | Key within the Kubernetes secret that stores the password.                         |
-| `orchestration.data.secondaryStorage.rdbms.secret.inlineSecret`                                    | string            | `""`    | Inline password value. Use only for testing environments.                          |
-| `orchestration.data.secondaryStorage.rdbms.flushInterval`                                          | ISO-8601 duration | `""`    | How often the exporter flushes events to the database.                             |
-| `orchestration.data.secondaryStorage.rdbms.autoDDL`                                                | boolean           | `true`  | Enables Liquibase-powered auto-creation of database schema.                        |
-| `orchestration.data.secondaryStorage.rdbms.prefix`                                                 | string            | `""`    | Table name prefix added to all RDBMS tables.                                       |
-| `orchestration.data.secondaryStorage.rdbms.queueSize`                                              | integer           | `1000`  | Size of the exporter queue. Larger values buffer more events.                      |
-| `orchestration.data.secondaryStorage.rdbms.queueMemoryLimit`                                       | integer           | `20`    | Memory limit (MB) for the exporter queue.                                          |
-| `orchestration.data.secondaryStorage.rdbms.history.defaultHistoryTTL`                              | ISO-8601 duration | `""`    | Default TTL for historic process data.                                             |
-| `orchestration.data.secondaryStorage.rdbms.history.defaultBatchOperationHistoryTTL`                | ISO-8601 duration | `""`    | TTL for batch operation history.                                                   |
-| `orchestration.data.secondaryStorage.rdbms.history.batchOperationCancelProcessInstanceHistoryTTL`  | ISO-8601 duration | `""`    | TTL for cancel-process-instance history data.                                      |
-| `orchestration.data.secondaryStorage.rdbms.history.batchOperationMigrateProcessInstanceHistoryTTL` | ISO-8601 duration | `""`    | TTL for migrate-process-instance history.                                          |
-| `orchestration.data.secondaryStorage.rdbms.history.batchOperationModifyProcessInstanceHistoryTTL`  | ISO-8601 duration | `""`    | TTL for modify-process-instance history.                                           |
-| `orchestration.data.secondaryStorage.rdbms.history.batchOperationResolveIncidentHistoryTTL`        | ISO-8601 duration | `""`    | TTL for resolve-incident history.                                                  |
-| `orchestration.data.secondaryStorage.rdbms.history.minHistoryCleanupInterval`                      | ISO-8601 duration | `""`    | Minimum interval for periodic history cleanup.                                     |
-| `orchestration.data.secondaryStorage.rdbms.history.maxHistoryCleanupInterval`                      | ISO-8601 duration | `""`    | Maximum interval for periodic history cleanup.                                     |
-| `orchestration.data.secondaryStorage.rdbms.history.historyCleanupBatchSize`                        | integer           | `1000`  | Batch size when deleting history data.                                             |
-| `orchestration.data.secondaryStorage.rdbms.history.usageMetricsCleanup`                            | string            | `""`    | Cleanup configuration for usage metrics.                                           |
-| `orchestration.data.secondaryStorage.rdbms.history.processCache.maxSize`                           | string            | `""`    | Cache size for historic process definitions.                                       |
-| `orchestration.data.secondaryStorage.rdbms.history.batchOperationCache.maxSize`                    | integer           | `10000` | Cache size for batch operation history.                                            |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maximumPoolSize`                 | integer           | `""`    | Maximum number of JDBC connections.                                                |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.minimumIdle`                     | integer           | `""`    | Minimum number of idle JDBC connections.                                           |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.idleTimeout`                     | ISO-8601 duration | `""`    | Maximum time a connection may remain idle.                                         |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maxLifetime`                     | ISO-8601 duration | `""`    | Maximum lifetime of a JDBC connection.                                             |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.connectionTimeout`               | ISO-8601 duration | `""`    | Timeout for acquiring a connection from the pool.                                  |
+| Parameter                                            | Type   | Default | Description                                   |
+| ---------------------------------------------------- | ------ | ------- | --------------------------------------------- |
+| `orchestration.data.secondaryStorage.type`           | string | `""`    | Must be `rdbms` to use a relational database. |
+| `orchestration.data.secondaryStorage.rdbms.url`      | string | `""`    | JDBC connection URL for the database.         |
+| `orchestration.data.secondaryStorage.rdbms.username` | string | `""`    | Username for database authentication.         |
+
+### Database credentials
+
+Store the database password in a Kubernetes secret and reference it. For testing only, you can use `inlineSecret`.
+
+| Parameter                                                            | Type   | Default | Description                                         |
+| -------------------------------------------------------------------- | ------ | ------- | --------------------------------------------------- |
+| `orchestration.data.secondaryStorage.rdbms.secret.existingSecret`    | string | `""`    | Name of Kubernetes secret containing the password.  |
+| `orchestration.data.secondaryStorage.rdbms.secret.existingSecretKey` | string | `""`    | Key within the secret storing the password.         |
+| `orchestration.data.secondaryStorage.rdbms.secret.inlineSecret`      | string | `""`    | Password value (testing only, not production-safe). |
+
+### Connection pool and performance tuning
+
+| Parameter                                                                            | Type              | Default | Description                                    |
+| ------------------------------------------------------------------------------------ | ----------------- | ------- | ---------------------------------------------- |
+| `orchestration.data.secondaryStorage.rdbms.flushInterval`                            | ISO-8601 duration | `""`    | How frequently the exporter flushes events.    |
+| `orchestration.data.secondaryStorage.rdbms.queueSize`                                | integer           | `1000`  | Exporter queue size. Larger = more buffering.  |
+| `orchestration.data.secondaryStorage.rdbms.queueMemoryLimit`                         | integer           | `20`    | Memory limit (MB) for the exporter queue.      |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maximumPoolSize`   | integer           | `""`    | Maximum JDBC connections. Default: auto-tuned. |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.minimumIdle`       | integer           | `""`    | Minimum idle connections. Default: auto-tuned. |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.connectionTimeout` | ISO-8601 duration | `""`    | Timeout for acquiring a connection.            |
+
+### Schema and table management
+
+| Parameter                                           | Type    | Default | Description                                |
+| --------------------------------------------------- | ------- | ------- | ------------------------------------------ |
+| `orchestration.data.secondaryStorage.rdbms.autoDDL` | boolean | `true`  | Enable Liquibase auto-schema creation.     |
+| `orchestration.data.secondaryStorage.rdbms.prefix`  | string  | `""`    | Optional table name prefix for all tables. |
+
+### History and data retention
+
+| Parameter                                                                                          | Type              | Default | Description                               |
+| -------------------------------------------------------------------------------------------------- | ----------------- | ------- | ----------------------------------------- |
+| `orchestration.data.secondaryStorage.rdbms.history.defaultHistoryTTL`                              | ISO-8601 duration | `""`    | Default TTL for historic process data.    |
+| `orchestration.data.secondaryStorage.rdbms.history.minHistoryCleanupInterval`                      | ISO-8601 duration | `""`    | Minimum interval for history cleanup.     |
+| `orchestration.data.secondaryStorage.rdbms.history.maxHistoryCleanupInterval`                      | ISO-8601 duration | `""`    | Maximum interval for history cleanup.     |
+| `orchestration.data.secondaryStorage.rdbms.history.historyCleanupBatchSize`                        | integer           | `1000`  | Batch size when deleting historic data.   |
+| `orchestration.data.secondaryStorage.rdbms.history.defaultBatchOperationHistoryTTL`                | ISO-8601 duration | `""`    | TTL for batch operation history.          |
+| `orchestration.data.secondaryStorage.rdbms.history.batchOperationCancelProcessInstanceHistoryTTL`  | ISO-8601 duration | `""`    | TTL for cancel-process-instance history.  |
+| `orchestration.data.secondaryStorage.rdbms.history.batchOperationMigrateProcessInstanceHistoryTTL` | ISO-8601 duration | `""`    | TTL for migrate-process-instance history. |
+| `orchestration.data.secondaryStorage.rdbms.history.batchOperationModifyProcessInstanceHistoryTTL`  | ISO-8601 duration | `""`    | TTL for modify-process-instance history.  |
+| `orchestration.data.secondaryStorage.rdbms.history.batchOperationResolveIncidentHistoryTTL`        | ISO-8601 duration | `""`    | TTL for resolve-incident history.         |
+
+### Connection pool lifecycle
+
+| Parameter                                                                      | Type              | Default | Description                                |
+| ------------------------------------------------------------------------------ | ----------------- | ------- | ------------------------------------------ |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.idleTimeout` | ISO-8601 duration | `""`    | Maximum time a connection can remain idle. |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maxLifetime` | ISO-8601 duration | `""`    | Maximum lifetime of a JDBC connection.     |
 
 ### Example usage
 
@@ -80,157 +110,64 @@ orchestration:
           existingSecretKey: password
 ```
 
-## Loading JDBC drivers into pods
+## Bundled vs. custom JDBC drivers
 
-Some databases—such as Oracle—require JDBC drivers that cannot be included in the Camunda image due to licensing restrictions. You must provide these drivers at runtime using one of the following approaches:
+Camunda bundles JDBC drivers for some databases (PostgreSQL, MariaDB, H2). For others (Oracle, MySQL, SQL Server), you must supply a custom driver.
 
-1. **Init container**: Download JDBC drivers at pod startup.
-2. **Custom Docker image**: Build an image that bundles the driver.
-3. **Mounted volume**: Mount a persistent volume or secret that contains the driver.
+**See:** [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md) for:
 
-### Option 1: Using an init container
+- Which drivers are bundled
+- When to supply custom drivers
+- How to load drivers (init containers, custom images, volumes)
 
-:::note
-This example uses `/driver-lib`, which the Orchestration Cluster automatically adds to the classpath. If you use a different directory, additional override configuration may be required (command, entrypoint).
-:::
+## Schema creation and management
 
-```yaml
-orchestration:
-  exporters:
-    camunda:
-      enabled: false
-    rdbms:
-      enabled: true
-  data:
-    secondaryStorage:
-      type: rdbms
-      rdbms:
-        url: jdbc:oracle:thin:@//hostname:1521/FREEPDB1
-        username: myuser
-        secret:
-          inlineSecret: mypassword
-  extraVolumeMounts:
-    - name: jdbcdrivers
-      mountPath: /driver-lib
-  extraVolumes:
-    - name: jdbcdrivers
-      emptyDir: {}
-  initContainers:
-    - name: fetch-jdbc-drivers
-      image: alpine:3.19
-      imagePullPolicy: Always
-      command:
-        - sh
-        - -c
-        - >
-          wget https://repo1.maven.org/maven2/com/oracle/database/jdbc/ojdbc11/23.9.0.25.07/ojdbc11-23.9.0.25.07.jar
-          -O /driver-lib/ojdbc.jar
-      volumeMounts:
-        - name: jdbcdrivers
-          mountPath: /driver-lib
-      securityContext:
-        runAsUser: 1001
-```
+Camunda automatically creates your database schema using Liquibase (when `autoDDL: true`). You can also manage the schema manually if required.
 
-After loading JDBC drivers into pods, run the validation checklist in [validate RDBMS connectivity](/self-managed/deployment/helm/configure/database/validate-rdbms.md) to confirm the application can load the driver, reach the database, and initialize schema.
+**See:** [Schema management](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md) for:
 
-### Option 2: Using a custom Docker image
+- Automatic schema creation with autoDDL
+- Database user permissions for each RDBMS type
+- Manual schema management and DBA workflows
+- Schema upgrades and verification
 
-:::warning Important
-This approach has not yet been validated in production.
-:::
+## Troubleshooting and operations
 
-```dockerfile
-FROM camunda/camunda-platform:8.8.0
-ADD ojdbc8.jar /driver-lib/ojdbc8.jar
-```
+For detailed troubleshooting of common issues and post-deployment operations, see [RDBMS troubleshooting and operations](/self-managed/deployment/helm/configure/database/rdbms-troubleshooting.md), which covers:
 
-```sh
-docker build -t internal-registry/orchestration:8.8.0 .
-docker push internal-registry/orchestration:8.8.0
-```
-
-To use this custom image:
-
-```yaml
-orchestration:
-  exporters:
-    camunda:
-      enabled: false
-    rdbms:
-      enabled: true
-  image:
-    repository: internal-registry/orchestration
-    tag: 8.8.0
-  data:
-    secondaryStorage:
-      type: rdbms
-      rdbms:
-        url: jdbc:oracle:thin:@//hostname:1521/FREEPDB1
-        username: myuser
-        secret:
-          inlineSecret: mypassword
-```
-
-### Option 3: Mounting a JDBC driver from a volume
-
-:::warning Important
-Mounting an `emptyDir volume` does not persist across pod restarts. Use a ConfigMap, PersistentVolume, or custom image for production.
-:::
-
-```yaml
-orchestration:
-  exporters:
-    camunda:
-      enabled: false
-    rdbms:
-      enabled: true
-  data:
-    secondaryStorage:
-      type: rdbms
-      rdbms:
-        url: jdbc:oracle:thin:@//hostname:1521/FREEPDB1
-        username: myuser
-        secret:
-          inlineSecret: mypassword
-  extraVolumeMounts:
-    - name: jdbcdrivers
-      mountPath: /driver-lib
-  extraVolumes:
-    - name: jdbcdrivers
-```
-
-Copy the driver manually to the pod:
-
-```sh
-kubectl cp /path/to/ojdbc8.jar <pod-name>:/driver-lib/ojdbc8.jar
-```
+- Connection failures and authentication errors
+- JDBC driver loading issues
+- Schema creation failures
+- Slow data export and performance tuning
+- TLS/SSL configuration
+- Post-deployment operations (password rotation, driver updates, schema validation)
 
 ## Verifying connectivity
 
-To confirm that the Orchestration Cluster is successfully writing to the database:
+After deployment, verify the Orchestration Cluster is writing to the database:
 
-1. Verify that tables were created (for example, `\dt` or `\d` in PostgreSQL).
-2. Deploy a process model and start a process instance using Web Modeler.
-3. Query the database directly:
+1. Confirm tables were created:
+
+```sql
+SELECT * FROM zeebe_process;
+```
+
+2. Deploy a process and start an instance using Web Modeler.
+
+3. Query the database to confirm the instance was recorded:
 
 ```sql
 SELECT * FROM process_instances;
 ```
 
-4. Review logs for messages such as:
+4. Review logs for successful initialization:
 
 ```
-io.camunda.application.commons.rdbms.MyBatisConfiguration - Initializing Liquibase for RDBMS with global table trimmedPrefix ''.
-...
-
-io.camunda.exporter.rdbms.RdbmsExporter - [RDBMS Exporter[] RdbmsExporter created with Configuration: flushInterval=PT0.5S, queueSize=1000
-io.camunda.exporter.rdbms.RdbmsExporter - [RDBMS Exporter[] Exporter opened with last exported position 3318
-...
-org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+io.camunda.exporter.rdbms.RdbmsExporter - RdbmsExporter created with Configuration: flushInterval=PT0.5S
+io.camunda.exporter.rdbms.RdbmsExporter - Exporter opened with last exported position
 ```
 
-If the flush interval is long or the queue size is large, exported data may take several seconds to appear in the database.
+For a complete post-deployment checklist, see [validate RDBMS connectivity (Helm)](/self-managed/deployment/helm/configure/database/validate-rdbms.md).
 
 ## Using AWS Aurora PostgreSQL (optional)
 
@@ -239,3 +176,26 @@ If you are using AWS Aurora PostgreSQL as your relational database, you can conf
 Optionally, Camunda also supports the AWS JDBC wrapper driver, which provides additional features such as improved failover handling and IAM-based authentication.
 
 For details and examples, see [using AWS Aurora PostgreSQL with Camunda](../../../../concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql).
+
+## Limitations and unsupported scenarios
+
+### Component-specific RDBMS support
+
+- **Orchestration Cluster (Zeebe)**: ✅ Full RDBMS support (primary use case).
+- **Operate, Tasklist, Connectors**: ✅ Use the same RDBMS as Orchestration Cluster.
+- **WebModeler, Console, Identity**: ✅ RDBMS support planned.
+- **Optimize**: ❌ **Requires Elasticsearch or OpenSearch only.** Optimize cannot use RDBMS.
+
+If you deploy Optimize, you must still provision Elasticsearch or OpenSearch.
+
+### Multi-region deployments
+
+Cross-region RDBMS deployments are **not yet tested or supported** in Camunda 8.9. Deploy RDBMS in the same region as your Kubernetes cluster.
+
+### Self-managed database HA
+
+Camunda assumes your RDBMS handles its own HA (replication, failover). Use cloud-managed databases or vendor-specific HA solutions for production.
+
+### Custom JDBC driver libraries
+
+Only JDBC drivers from official vendor sources are supported. Custom or modified drivers may cause unexpected behavior.
