@@ -76,7 +76,7 @@ By default, the Helm chart deploys the Camunda orchestration cluster with **basi
    ```bash
    # Zeebe Gateway (for gRPC and REST API)
    kubectl port-forward svc/camunda-zeebe-gateway 26500:26500 -n orchestration
-   kubectl port-forward svc/camunda-zeebe-gateway 8088:8080 -n orchestration
+   kubectl port-forward svc/camunda-zeebe-gateway 8080:8080 -n orchestration
 
    # Connectors
    kubectl port-forward svc/camunda-connectors 8086:8080 -n orchestration
@@ -87,21 +87,21 @@ By default, the Helm chart deploys the Camunda orchestration cluster with **basi
    Test the Zeebe Gateway connection:
 
    ```bash
-   curl -u demo:demo http://localhost:8088/v2/topology
+   curl -u demo:demo http://localhost:8080/v2/topology
    ```
 
    You should see a JSON response with the cluster topology information.
 
    Available services:
-   - **Operate:** [http://localhost:8088/operate](http://localhost:8088/operate) - Monitor process instances
-   - **Tasklist:** [http://localhost:8088/tasklist](http://localhost:8088/tasklist) - Complete user tasks
-   - **Identity:** [http://localhost:8088/identity](http://localhost:8088/identity) - User and permission management
+   - **Operate:** [http://localhost:8080/operate](http://localhost:8080/operate) - Monitor process instances
+   - **Tasklist:** [http://localhost:8080/tasklist](http://localhost:8080/tasklist) - Complete user tasks
+   - **Identity:** [http://localhost:8080/identity](http://localhost:8080/identity) - User and permission management
    - **Connectors:** [http://localhost:8086](http://localhost:8086) - External system integrations
    - **Zeebe Gateway (gRPC):** localhost:26500 - Process deployment and execution
-   - **Zeebe Gateway (HTTP):** [http://localhost:8088](http://localhost:8088) - Zeebe REST API
+   - **Zeebe Gateway (HTTP):** [http://localhost:8080](http://localhost:8080) - Zeebe REST API
 
    :::note
-   In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration component and share the same endpoint (port 8088).
+   In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration component and share the same endpoint (port 8080).
    :::
 
 :::note
@@ -364,7 +364,7 @@ Once port-forwarding is active, access the UIs in your browser:
 | **Tasklist**             | [http://localhost:8080/tasklist](http://localhost:8080/tasklist) | Complete user tasks                                          |
 | **Web Modeler**          | [http://localhost:8070](http://localhost:8070)                   | Design and deploy processes                                  |
 | **Console**              | [http://localhost:8087](http://localhost:8087)                   | Manage clusters and APIs                                     |
-| **Identity**             | [http://localhost:8088/identity](http://localhost:8088/identity) | User and permission management for the orchestration cluster |
+| **Identity**             | [http://localhost:8080/identity](http://localhost:8080/identity) | User and permission management for the orchestration cluster |
 | **Management Identity**  | [http://localhost:18081](http://localhost:18081)                 | User and permission management                               |
 | **Keycloak**             | [http://localhost:18080](http://localhost:18080)                 | Authentication server                                        |
 | **Optimize**             | [http://localhost:8083](http://localhost:8083)                   | Process analytics                                            |

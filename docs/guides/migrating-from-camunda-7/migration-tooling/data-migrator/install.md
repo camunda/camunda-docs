@@ -50,7 +50,7 @@ Install the Data Migrator and run your first data migration.
    camunda.client:
      mode: self-managed
      grpc-address: http://localhost:26500
-     rest-address: http://localhost:8088
+     rest-address: http://localhost:8080
 
    camunda.migrator.c7.data-source:
      jdbc-url: jdbc:postgresql://localhost:5432/camunda7
