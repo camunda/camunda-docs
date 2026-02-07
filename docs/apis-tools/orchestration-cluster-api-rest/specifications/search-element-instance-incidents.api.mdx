@@ -1,7 +1,7 @@
 ---
 id: search-element-instance-incidents
 title: "Search for incidents of a specific element instance"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "<MarkerEventuallyConsistentExtension />"
 sidebar_label: "Search for incidents of a specific element instance"
 hide_title: true
 hide_table_of_contents: true
@@ -21,6 +21,7 @@ import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
 import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
 
 <Heading
   as={"h1"}
@@ -34,8 +35,7 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+<MarkerEventuallyConsistentExtension />
 
 Search for incidents caused by the specified element instance, including incidents of any child instances created from this element instance.
 
@@ -45,12 +45,9 @@ child element instances. This is useful, for example, if you want to isolate inc
 nested or subordinate elements within the given element instance while excluding incidents directly tied
 to the root element itself.
 
-<Heading
-  id={"request"}
-  as={"h2"}
-  className={"openapi-tabs__heading"}
-  children={"Request"}
-></Heading>
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
 
 <ParamsDetails
   parameters={[

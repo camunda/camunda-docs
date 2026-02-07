@@ -268,6 +268,18 @@ const sidebar: SidebarsConfig = {
           label: "Get decision instance",
           className: "api-method get",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-decision-instance",
+          label: "Delete decision instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-decision-instances-batch-operation",
+          label: "Delete decision instances (batch)",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -544,17 +556,11 @@ const sidebar: SidebarsConfig = {
           label: "Fail job",
           className: "api-method post",
         },
-      ],
-    },
-    {
-      type: "category",
-      label: "Job metrics",
-      items: [
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-job-statistics",
           label: "Global job statistics",
-          className: "api-method post",
+          className: "api-method get",
         },
       ],
     },
