@@ -1,4 +1,4 @@
-const { unsupportedVersions } = require("./src/versions");
+const { unmaintainedVersions } = require("./src/versions");
 const { currentVersion } = require("./src/versions");
 
 const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
@@ -307,12 +307,12 @@ module.exports = {
             },
             {
               type: "html",
-              className: "dropdown-unsupported-versions",
-              value: "<b>Unsupported versions</b>",
+              className: "dropdown-unmaintained-versions",
+              value: "<b>Unmaintained versions</b>",
             },
-            ...unsupportedVersions.map((version) => ({
+            ...unmaintainedVersions.map((version) => ({
               label: version.label,
-              href: `https://unsupported.docs.camunda.io/${version.urlSuffix}/`,
+              href: `https://unmaintained.docs.camunda.io/${version.urlSuffix}/`,
             })),
           ],
         },
