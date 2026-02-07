@@ -66,7 +66,7 @@ The 8.9 changes to the Web Modeler `restapi` component could affect your organiz
 - You are using a custom Undertow configuration.
 - You are using any tools that consume the log files.
 
-## Upgrade guides {#upgrade-guides}
+## Update guides {#upgrade-guides}
 
 Camunda 8.9 lays the foundation for future releases. Upgrading ensures compatibility and provides access to enhanced features.
 
@@ -80,7 +80,7 @@ The following guides offer detailed information on how you can upgrade to Camund
 </tr>
 <tr>
     <td>[Self-Managed upgrade guide](/self-managed/update/administrators/overview.md)</td>
-    <td>Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment.</td>
+    <td>Evaluate your infrastructure, understand operational changes, and choose the best upgrade strategy for your environment.</td>
     <td>Operations and platform administrators of Self-Managed installations.</td>
 </tr>
 <tr>
