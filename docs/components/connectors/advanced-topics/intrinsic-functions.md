@@ -4,6 +4,8 @@ title: Intrinsic functions
 description: Learn how to use intrinsic functions to preprocess connector input data before invoking a connector.
 ---
 
+<span className="badge badge--active--outbound">Outbound</span>
+
 Intrinsic functions are transformations you can use to preprocess connector input data before invoking a connector.
 
 - Intrinsic functions are JSON structures you can define in element template input fields.

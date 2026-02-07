@@ -228,7 +228,7 @@ A new `getJson` intrinsic function accepts a document and an optional FEEL expre
 - The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
 - If not provided, the whole document is returned as a JSON object.
 
-<p><a href="../../../../components/connectors/use-connectors/intrinsic-functions" class="link-arrow">Intrinsic functions</a></p>
+<p><a href="../../../../components/connectors/advanced-topics/intrinsic-functions" class="link-arrow">Intrinsic functions</a></p>
 
 ### Job header binding
 
@@ -1147,7 +1147,7 @@ A new `getJson` intrinsic function accepts a document and an optional FEEL expre
 - The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
 - If not provided, the whole document is returned as a JSON object.
 
-To learn more, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
+<p><a href="../../../../components/connectors/advanced-topics/intrinsic-functions" class="link-arrow">Intrinsic functions</a></p>
 
 ### Dynamic partition scaling <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
 
