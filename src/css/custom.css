@@ -1877,3 +1877,53 @@ h3 + .release-announcement-row {
 .release-announcement-content {
   flex: 4;
 }
+.sidebar-cta > .menu__list-item-collapsible {
+  display: flex;
+  align-items: center;
+  background: transparent;
+}
+.sidebar-cta > .menu__list-item-collapsible > .menu__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.sidebar-cta > .menu__list-item-collapsible > .menu__link .menu__link-text,
+.sidebar-cta > .menu__list-item-collapsible > .menu__link > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.sidebar-cta
+  > .menu__list-item-collapsible
+  > .menu__link
+  .menu__link-text::after,
+.sidebar-cta > .menu__list-item-collapsible > .menu__link > span::after {
+  content: "New";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--ifm-color-primary);
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+
+  padding: 2px 6px;
+  border-radius: 999px;
+
+  flex: 0 0 auto; /* never wrap or shrink */
+  white-space: nowrap;
+}
+
+.sidebar-cta > .menu__list-item-collapsible .menu__caret {
+  margin-left: auto;
+}

@@ -283,7 +283,7 @@ Operate and Tasklist indices use schema-specific versioning in their names (e.g.
 **Related Camunda documentation:**
 
 - [Configure Helm chart components](./application-configs.md) - How to use `orchestration.configuration` for advanced settings
-- [Upgrade from 8.7 to 8.8](/self-managed/deployment/helm/upgrade/helm-870-880.md) - Version upgrade guidance
+- [Upgrade from 8.7 to 8.8](/self-managed/update/helm/helm-870-880.md) - Version upgrade guidance
 - [Zeebe Elasticsearch Exporter retention](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#retention) - Legacy Zeebe exporter retention settings
 - [Zeebe Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) - Camunda exporter configuration (controls `orchestration.history.*` settings)
   - [History archiving settings](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=history#options) - Archiving and rollover configuration

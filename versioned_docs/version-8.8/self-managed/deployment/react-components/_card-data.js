@@ -25,7 +25,6 @@ export const overviewCards = [
     link: "./docker",
     title: "Docker Compose",
     image: IconGear,
-    title: "Perform upgrade",
     description:
       "Run Camunda 8 with Docker/Docker Compose for local development and testing.",
   },

@@ -406,7 +406,7 @@ Follow the example in the [Orchestration Cluster REST API documentation](/apis-t
 Upgrading directly from Camunda 8.7 to 8.8 is not supported and cannot be performed.
 :::
 
-For manual installations, see the [upgrade guide](/self-managed/deployment/manual/upgrade.md) for detailed instructions.
+For manual installations, see the [upgrade guide](/self-managed/update/manual/upgrade.md) for detailed instructions.
 
 ### Monitoring
 

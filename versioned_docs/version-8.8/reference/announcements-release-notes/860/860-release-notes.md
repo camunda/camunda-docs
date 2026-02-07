@@ -33,7 +33,7 @@ This closes the feature gap where the Spring Zeebe SDK released with Camunda 8.5
 
 | Release date   | End of maintenance | All Patch releases                                                                | Release blog                                                          | Update guide                                                                          |
 | -------------- | ------------------ | --------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 8 October 2024 | 14 April 2026      | [Patch Releases and Changelogs](#technical-changelogs-for-all-86x-patch-releases) | [Release blog](https://camunda.com/blog/2024/10/camunda-8-6-release/) | [Self-Managed update guide](self-managed/components/components-upgrade/850-to-860.md) |
+| 8 October 2024 | 14 April 2026      | [Patch Releases and Changelogs](#technical-changelogs-for-all-86x-patch-releases) | [Release blog](https://camunda.com/blog/2024/10/camunda-8-6-release/) | [Self-Managed update guide](versioned_docs/version-8.6/self-managed/setup/upgrade.md) |
 
 ### Flow control enabled by default <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 

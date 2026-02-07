@@ -27,7 +27,7 @@ Starting with Camunda 8.8, the Helm chart reflects a new architecture where Zeeb
 :::note Upgrading from 8.7?
 In Camunda 8.7, more components were enabled by default. If you're upgrading from 8.7 and used any of the components listed above, you must explicitly enable them in your 8.8 `values.yaml`.
 
-See the [8.7 to 8.8 upgrade guide](/self-managed/deployment/helm/upgrade/helm-870-880.md#ensure-required-components) for upgrade-specific instructions.
+See the [8.7 to 8.8 upgrade guide](/self-managed/update/helm/helm-870-880.md#ensure-required-components) for upgrade-specific instructions.
 :::
 
 ## Management Identity
