@@ -108,6 +108,22 @@ With the new Camunda 8 SaaS **AWS US East (us-east-2)** region in North America,
 
 <p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
 
+### Documentation
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Documentation</span></div>
+
+### Camunda Docs MCP server
+
+<!-- https://github.com/camunda/camunda-docs/issues/7597 -->
+
+Use the Camunda Docs (Model Context Protocol) MCP server to query Camunda 8 documentation in your IDE or AI tool.
+
+- Add the Camunda Docs MCP server to let your AI agent directly access the latest official Camunda 8 documentation.
+- For example, if you use an AI coding tool such as Cursor or Copilot, adding the MCP server can help ensure more accurate AI responses and code generation by accessing the current Camunda 8 documentation and context.
+- The MCP server is available at the following URL: `https://camunda-docs.mcp.kapa.ai`
+
+<p className="link-arrow">[Camunda Docs MCP server](/reference/mcp-docs/mcp-docs.md)</p>
+
 ### Modeler
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
