@@ -1052,9 +1052,6 @@ module.exports = {
             "components/console/manage-plan/available-plans",
             "components/console/manage-plan/upgrade-to-enterprise-plan",
             "components/console/manage-plan/update-billing-reservations",
-            "components/console/manage-plan/update-creditcard",
-            "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-starter-subscription",
           ],
         },
         {
@@ -1384,6 +1381,7 @@ module.exports = {
       items: ["reference/data-collection/usage-metrics"],
     },
     "reference/contact",
+    "reference/mcp-docs/docs-mcp",
     "reference/legal",
   ],
   "Self-Managed": [
@@ -1894,8 +1892,8 @@ module.exports = {
               items: [
                 {
                   Configuration: [
-                    "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",

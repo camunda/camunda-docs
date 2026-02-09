@@ -67,9 +67,12 @@ The minimum supported OpenSearch version for the Orchestration cluster and Optim
 </div>
 <div className="release-announcement-content">
 
-#### AWS Paris region added
+#### AWS regions added
 
-Camunda 8.9 adds support for the AWS Paris region in Camunda 8 SaaS.
+Camunda 8.9 adds support for the following new regions in Camunda 8 SaaS.
+
+- Paris, Europe (eu-west-3)
+- North America, Ohio (us-east-2)
 
 <p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
 
@@ -193,6 +196,23 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 
 ### Data
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Hierarchy-aware retention for process instance data
+
+Starting with Camunda 8.9, retention of process instance data in Elasticsearch/OpenSearch secondary storage becomes hierarchy-aware, meaning child process instances are retained as long as their root process instance is retained.
+
+You can control the retention behavior via the process instance retention mode configuration.
+
+<p className="link-arrow">[Hierarchy-aware retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md#hierarchy-aware-retention-elasticsearchopensearch)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
