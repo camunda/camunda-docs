@@ -20,7 +20,7 @@ Camunda bundles JDBC drivers for databases where licensing permits:
 | SQL Server | Yes     | 12.10.2 | Custom features or version-specific requirements.                 |
 | H2         | Yes     | 2.3.232 | Development only; not supported for production.                   |
 | Oracle     | No      | —       | Always; licensing prevents bundling.                              |
-| MySQL      | No      | —       | Licensing or version-specific requirements.                       |
+| MySQL      | No      | —       | Always; licensing prevents bundling.                              |
 
 ### When to supply a custom driver
 
