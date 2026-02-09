@@ -263,6 +263,8 @@ module.exports = {
       "data-search-mode-enabled": "true",
       "data-button-border": "1px solid #555555",
       "data-user-analytics-cookie-enabled": "false",
+      "data-mcp-enabled": "true",
+      "data-mcp-server-url": "https://camunda-docs.mcp.kapa.ai",
       async: true,
     },
   ],

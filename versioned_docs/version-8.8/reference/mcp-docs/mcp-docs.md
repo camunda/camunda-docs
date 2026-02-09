@@ -8,6 +8,7 @@ description: "Connect to Camunda documentation directly from your IDE or AI tool
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import McpServerImg from './img/camunda-docs-mcpserver.png';
+import McpServerDropdownImg from './img/camunda-docs-mcpserver-dropdown.png';
 
 Use the Camunda Docs [(Model Context Protocol) MCP server](https://modelcontextprotocol.io/docs/getting-started/intro) to query Camunda 8 documentation in your IDE or AI tool.
 
@@ -15,7 +16,7 @@ Use the Camunda Docs [(Model Context Protocol) MCP server](https://modelcontextp
 
 Add the Camunda Docs MCP server to let your AI agent directly access the latest official Camunda 8 documentation.
 
-For example, if you use an AI coding tool such as [Cursor](https://cursor.com/) or [Copilot](https://code.visualstudio.com/docs/copilot/overview), adding the MCP server can help ensure more accurate AI responses and code generation as it uses the current Camunda 8 documentation and context.
+For example, if you use an AI coding tool such as [Cursor](https://cursor.com/) or [Copilot](https://code.visualstudio.com/docs/copilot/overview), adding the MCP server can help ensure more accurate AI responses and code generation by accessing the current Camunda 8 documentation and context.
 
 <img src={McpServerImg} alt="Ask context-aware questions about Camunda within VS Code." title="Ask context-aware questions about Camunda within VS Code." class="img-800" style={{marginTop: '0'}}/>
 
@@ -27,7 +28,15 @@ https://camunda-docs.mcp.kapa.ai
 
 ## Install
 
-The steps required to install the MCP server varies depending on the AI assistant you want to use. For example:
+### One-click install
+
+You can perform a one-click installation or copy the MCP server URL via the **Use MCP** dropdown.
+
+<img src={McpServerDropdownImg} alt="Ask context-aware questions about Camunda within VS Code." title="Ask context-aware questions about Camunda within VS Code." class="img-700" style={{marginTop: '0'}}/>
+
+### Manual install
+
+The steps required to manually install the MCP server varies depending on your IDE/AI tool. For example:
 
 <Tabs groupId="ai-assistant" defaultValue="vscode" values={[
 {label: 'VS Code Copilot', value: 'vscode'},
@@ -120,7 +129,7 @@ Most clients accept the standard MCP protocol JSON configuration format:
 
 ## Usage and limits
 
-:::info important
+:::caution caution
 The Camunda Docs MCP server is not designed for use in production environments, high-volume automation, or as part of a CI/CD pipeline. It is provided to help support Camunda developer IDE queries and for coding assistance, evaluation, and testing. You must always check and validate AI generated content and code as responses can be inaccurate.
 :::
 
@@ -149,7 +158,7 @@ The MCP server exposes a single semantic search tool:
 
 `search_camunda_knowledge_sources`
 
-This tool allows AI tools/agents to perform semantic retrieval over the Camunda 8 documentation and other knowledge sources, such as forum posts, repos, podcasts, and product blogs.
+This tool allows AI tools/agents to perform semantic retrieval over the Camunda 8 documentation and other public knowledge sources, such as forum posts, repos, podcasts, and product blogs.
 
 ## Example VS Code Copilot integration
 
