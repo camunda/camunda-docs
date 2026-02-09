@@ -39,6 +39,10 @@ import Exporters from './partials/\_exporters.md'
 
 <Exporters />
 
+import Expression from './partials/\_expression.md'
+
+<Expression />
+
 import Licensing from './partials/\_licensing.md'
 
 <Licensing />
