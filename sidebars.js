@@ -90,10 +90,12 @@ module.exports = {
             "components/concepts/process-instance-creation",
             "components/concepts/process-instance-modification",
             "components/concepts/process-instance-migration",
+            "components/concepts/process-instance-deletion",
             "components/concepts/incidents",
           ],
         },
         "components/concepts/process-applications",
+        "components/concepts/batch-operations",
         "components/concepts/workflow-patterns",
         {
           type: "category",
@@ -393,8 +395,11 @@ module.exports = {
                     id: "components/early-access/alpha/mcp-client/mcp-client",
                   },
                   items: [
-                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
+                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
+                    "components/early-access/alpha/mcp-client/mcp-client-config",
+                    "components/early-access/alpha/mcp-client/mcp-client-tool-discovery",
+                    "components/early-access/alpha/mcp-client/mcp-client-human-in-the-loop",
                   ],
                 },
                 {
@@ -443,8 +448,16 @@ module.exports = {
                 "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
                 "components/modeler/web-modeler/modeling/versions",
                 "components/modeler/web-modeler/modeling/file-download",
-                "components/modeler/web-modeler/modeling/import-diagram",
                 "components/modeler/web-modeler/modeling/camunda-marketplace",
+                {
+                  type: "category",
+                  label: "Import",
+                  items: [
+                    "components/modeler/web-modeler/modeling/import-diagram",
+                    "components/modeler/web-modeler/modeling/import-resources",
+                    "components/modeler/web-modeler/modeling/prepare-resources",
+                  ],
+                },
                 {
                   type: "category",
                   label: "Process applications",
@@ -552,6 +565,7 @@ module.exports = {
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
+            "components/modeler/desktop-modeler/deploy-diagram",
             "components/modeler/desktop-modeler/start-instance",
             "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
@@ -693,10 +707,17 @@ module.exports = {
             id: "components/operate/operate-introduction",
           },
           items: [
-            "components/operate/userguide/access-control",
+            {
+              Overview: [
+                "components/operate/overview/access-control",
+                "components/operate/overview/batch-operations-overview",
+                "components/operate/overview/batch-operation-details-overview",
+              ],
+            },
             "components/operate/userguide/basic-operate-navigation",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
+            "components/operate/userguide/manage-batch-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
             {
@@ -706,7 +727,12 @@ module.exports = {
               ],
             },
             "components/operate/userguide/process-instance-migration",
-            "components/operate/userguide/monitor-operation-status",
+            {
+              "Monitor process operations": [
+                "components/operate/userguide/monitor-operation-status",
+                "components/operate/userguide/monitor-batch-operations",
+              ],
+            },
           ],
         },
         {
@@ -1026,9 +1052,6 @@ module.exports = {
             "components/console/manage-plan/available-plans",
             "components/console/manage-plan/upgrade-to-enterprise-plan",
             "components/console/manage-plan/update-billing-reservations",
-            "components/console/manage-plan/update-creditcard",
-            "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-starter-subscription",
           ],
         },
         {
@@ -1051,6 +1074,28 @@ module.exports = {
         "components/saas/data-locations",
         {
           type: "category",
+          label: "Monitoring",
+          link: {
+            type: "doc",
+            id: "components/saas/monitoring/overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Cluster Metrics endpoint",
+              link: {
+                type: "doc",
+                id: "components/saas/monitoring/cluster-metrics-endpoint/overview",
+              },
+              items: [
+                "components/saas/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint",
+                "components/saas/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
           label: "Encryption",
           link: {
             type: "doc",
@@ -1060,6 +1105,7 @@ module.exports = {
             "components/saas/encryption-at-rest",
             "components/saas/byok/aws-external-encryption-setup",
             "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/key-state-behavior",
             "components/saas/byok/faq-and-troubleshooting",
           ],
         },
@@ -1471,6 +1517,7 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
                     "self-managed/deployment/helm/configure/database/rdbms",
+                    "self-managed/deployment/helm/configure/database/validate-rdbms",
                     "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
                     {
                       Troubleshooting: [
@@ -1510,11 +1557,12 @@ module.exports = {
                         id: "self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider",
                       },
                       items: [
-                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/jwt-token-claims",
                       ],
                     },
                   ],
@@ -1573,6 +1621,11 @@ module.exports = {
                 id: "self-managed/deployment/helm/cloud-providers/index",
               },
               items: [
+                {
+                  type: "category",
+                  label: "Local",
+                  items: ["self-managed/deployment/helm/cloud-providers/kind"],
+                },
                 {
                   type: "category",
                   label: "Amazon",
@@ -1651,7 +1704,26 @@ module.exports = {
             },
           ],
         },
-        "self-managed/deployment/docker/docker",
+        {
+          type: "category",
+          label: "Containers",
+          items: [
+            "self-managed/deployment/docker/docker",
+            {
+              type: "category",
+              label: "Cloud providers",
+              items: [
+                {
+                  type: "category",
+                  label: "Amazon",
+                  items: [
+                    "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
         {
           type: "category",
           label: "Manual",
@@ -1812,8 +1884,8 @@ module.exports = {
               items: [
                 {
                   Configuration: [
-                    "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
@@ -1967,6 +2039,7 @@ module.exports = {
             },
             {
               "Desktop Modeler": [
+                "self-managed/components/modeler/desktop-modeler/connect-to-self-managed",
                 "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed",
               ],
             },
@@ -2000,6 +2073,7 @@ module.exports = {
                 "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/alternative-db",
+                "self-managed/components/management-identity/configuration/initialize-tenants",
               ],
             },
             "self-managed/components/management-identity/authentication",

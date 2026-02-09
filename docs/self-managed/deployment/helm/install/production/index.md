@@ -20,6 +20,7 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **External Dependencies**: Provision the following external dependencies:
   - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. For step-by-step instructions, see the [Aurora PostgreSQL module setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup) guide.
   - **Amazon OpenSearch**: The secondary datastore for the Orchestration Cluster, the Camunda 8 process orchestration engine. For step-by-step instructions, see the [OpenSearch](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eksctl.md#4-opensearch-domain) guide.
+    Note: Secondary storage is configurable. Depending on the components you run, you can use Elasticsearch/OpenSearch or an RDBMS-based secondary store for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
   - **Identity Provider (IdP)**: An OIDC-compatible identity provider for authentication. See [Authentication and authorization](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) for supported options.
 - **Ingress NGINX**: Ensure the [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - To store the backups of the Camunda web applications. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. See the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
@@ -85,6 +86,10 @@ In order to access the Camunda Platform through HTTPS with Ingress, TLS must be 
 1. **Domain name**: A public registered domain that has configurable DNS records. This guide will use `camunda.example.com` as the domain.
 2. **TLS certificate**: A TLS certificate created for your domain. The certificate must be an X.509 certificate, issued by a trusted Certificate Authority. The certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure Ingress resources. Reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
 3. **TLS secret**: A TLS secret created from your TLS certificate. This guide will use a secret called `camunda-platform`. For more information, see the Kubernetes documentation on how to create a [TLS secret](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets).
+
+:::note Multiple ingress controller support
+Multiple ingress controllers are supported. Specify `ingress.className` or `ingress.grpc.className` to assign the ingress to the desired ingress controller.
+:::
 
 The following is an example `values.yaml` configuration using the example Ingress domain and TLS secret:
 
@@ -280,6 +285,32 @@ The following resources and configuration options are important to keep in mind 
 ### Reliability
 
 The following resources and configuration options are important to keep in mind regarding reliability:
+
+#### Persistent volume reclaim policy
+
+:::warning Risk of data loss
+If your StorageClass uses a `Delete` reclaim policy (the default in many Kubernetes distributions and OpenShift), Orchestration Cluster broker data will be **permanently lost** if a PVC is deleted. This can lead to complete data loss and is unrecoverable.
+:::
+
+Ensure your StorageClass uses a `Retain` reclaim policy for production deployments.
+
+Verify your configuration on Kubernetes:
+
+```bash
+kubectl get storageclass
+# RECLAIMPOLICY should show "Retain", not "Delete"
+```
+
+On OpenShift, verify your configuration using the `oc` CLI:
+
+```bash
+oc get storageclass
+# RECLAIMPOLICY should show "Retain", not "Delete"
+```
+
+For more details, see [troubleshooting](/self-managed/operational-guides/troubleshooting.md#zeebe-data-loss-after-pvc-deletion) and the [Kubernetes documentation on reclaim policies](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming).
+
+#### Node affinity and tolerations
 
 - Check node affinity and tolerations. Refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) to modify the node affinity and tolerations.
 

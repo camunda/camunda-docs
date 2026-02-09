@@ -90,6 +90,7 @@
             "components/concepts/encryption-at-rest",
             "components/concepts/byok/aws-external-encryption-setup",
             "components/concepts/byok/key-rotation-audit-logging",
+            "components/concepts/byok/key-state-behavior",
             "components/concepts/byok/faq-and-troubleshooting"
           ]
         },
@@ -135,6 +136,28 @@
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
+            {
+              "type": "category",
+              "label": "Monitoring",
+              "link": {
+                "type": "doc",
+                "id": "components/console/manage-clusters/monitoring/overview"
+              },
+              "items": [
+                {
+                  "type": "category",
+                  "label": "Cluster Metrics endpoint",
+                  "link": {
+                    "type": "doc",
+                    "id": "components/console/manage-clusters/monitoring/cluster-metrics-endpoint/overview"
+                  },
+                  "items": [
+                    "components/console/manage-clusters/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint",
+                    "components/console/manage-clusters/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics"
+                  ]
+                }
+              ]
+            },
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/settings",
@@ -145,10 +168,7 @@
           "Manage your plan": [
             "components/console/manage-plan/available-plans",
             "components/console/manage-plan/upgrade-to-enterprise-plan",
-            "components/console/manage-plan/update-billing-reservations",
-            "components/console/manage-plan/update-creditcard",
-            "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-starter-subscription"
+            "components/console/manage-plan/update-billing-reservations"
           ]
         },
         {
@@ -318,6 +338,7 @@
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
+            "components/modeler/desktop-modeler/deploy-diagram",
             "components/modeler/desktop-modeler/start-instance",
             "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
@@ -2305,6 +2326,7 @@
             },
             {
               "Desktop Modeler": [
+                "self-managed/modeler/desktop-modeler/connect-to-self-managed",
                 "self-managed/modeler/desktop-modeler/deploy-to-self-managed"
               ]
             }

@@ -23,13 +23,24 @@ These release notes identify the main new features included in the 8.8 minor rel
 
 :::
 
+### Technical changelogs for all 8.8.x releases
+
+<details className="changelog-dropdown">
+  <summary>View GitHub changelogs for all patch releases</summary>
+
+<!-- RELEASE_LINKS_PLACEHOLDER -->
+<ul><li>[Camunda 8.8.9 (06.01.2026)](https://github.com/camunda/camunda/releases/tag/8.8.9)</li><li>[Camunda 8.8.8 (11.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.8)</li><li>[Camunda 8.8.7 (09.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.7)</li><li>[Camunda 8.8.6 (02.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.6)</li><li>[Camunda 8.8.5 (27.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.5)</li><li>[Camunda 8.8.4 (17.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.4)</li><li>[Camunda 8.8.3 (05.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.3)</li><li>[Camunda 8.8.2 (27.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.2)</li><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.5 (07.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.5)</li><li>[Connectors 8.8.4 (01.12.2025)](https://github.com/camunda/connectors/releases/tag/8.8.4)</li><li>[Connectors 8.8.3 (19.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.3)</li><li>[Connectors 8.8.2 (06.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.2)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
+<!-- RELEASE_LINKS_PLACEHOLDER -->
+
+</details>
+
 ## Agentic orchestration
 
 <div class="release"><span class="badge badge--medium" title="This feature affects agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects ai agents">AI agents</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
 Camunda agentic orchestration allows you to build and orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
-<p><a href="../../../../components/agentic-orchestration/" class="link-arrow">Camunda Agentic orchestration</a></p>
+<p><a href="../../../../components/agentic-orchestration/agentic-orchestration-overview/" class="link-arrow">Camunda Agentic orchestration</a></p>
 
 Use the following new features to build and integrate AI agents into your processes:
 
@@ -720,7 +731,7 @@ You can now save and rerun versioned test scenarios in Web Modeler:
 
 <p><a href="../../../../components/modeler/web-modeler/collaboration/play-your-process/" class="link-arrow">Scenarios</a></p>
 
-### RDBMS support for Oracle and MS SQL in Self-Managed
+#### RDBMS support for Oracle and MS SQL in Self-Managed
 
 <!-- https://github.com/camunda/product-hub/issues/2558 -->
 
@@ -741,17 +752,6 @@ Configure the ID token claim used for usernames via the `CAMUNDA_IDENTITY_USERNA
 Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
 
 <p><a href="../../../../components/modeler/web-modeler/versions" class="link-arrow">Web Modeler versioning</a></p>
-
-### Technical Changelogs for all 8.8.x releases
-
-<details className="changelog-dropdown">
-  <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
-
-<!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.8.9 (06.01.2026)](https://github.com/camunda/camunda/releases/tag/8.8.9)</li><li>[Camunda 8.8.8 (11.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.8)</li><li>[Camunda 8.8.7 (09.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.7)</li><li>[Camunda 8.8.6 (02.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.6)</li><li>[Camunda 8.8.5 (27.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.5)</li><li>[Camunda 8.8.4 (17.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.4)</li><li>[Camunda 8.8.3 (05.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.3)</li><li>[Camunda 8.8.2 (27.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.2)</li><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.5 (07.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.5)</li><li>[Connectors 8.8.4 (01.12.2025)](https://github.com/camunda/connectors/releases/tag/8.8.4)</li><li>[Connectors 8.8.3 (19.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.3)</li><li>[Connectors 8.8.2 (06.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.2)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
-<!-- RELEASE_LINKS_PLACEHOLDER -->
-
-</details>
 
 ## 8.8.0-alpha8
 
@@ -875,7 +875,7 @@ The deprecated APIs remain functional in this release but will no longer receive
 
 - Create and manage users, groups, roles, and memberships directly in Identity’s database
 - Integrate external providers like Keycloak or Microsoft Entra via OIDC
-- Assign resource-level permissions using RBAC
+- Assign resource-based authorizations using RBAC
 - Map users, groups, and roles to resources using token claims and application/client mappings
 - Simplify migration with built-in tools
 
@@ -1545,12 +1545,12 @@ Built-in Keycloak integration in Self-Managed is removed, allowing customers to 
 - Keycloak remains fully supported as an external option. For cluster-level identity management it must be connected as an external OIDC provider moving forward.
 - OpenID Connect (OIDC) remains the standard for seamless integration with chosen IdPs.
 
-#### Resource-based permissions
+#### Resource-based authorizations
 
-Resource-level permissions are introduced to control read and write permissions per specific resource.
+Resource-based authorizations control read and write permissions per specific resource. See [manage users](/components/console/manage-organization/manage-users.md#resource-based-authorizations).
 
 - Admin users retain full access, but regular users must be granted specific permissions to perform operations or view resources.
-- For organizations that build custom front-ends and access Camunda via API, users or Clients with API permissions can still access data through the V2 API, respecting their resource permissions.
+- For organizations that build custom front-ends and access Camunda via API, users or clients with API permissions can still access data through the V2 API, respecting their resource permissions.
 
 <!-- :::info
 Learn more about these updates in Introducing Enhanced Identity Management in Camunda 8.8.

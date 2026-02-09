@@ -36,6 +36,10 @@ The runtime migration has the following limitations.
 To learn more about variable migration, see [variables](../variables).
 :::
 
+### Incidents
+
+Due to the [limitation regarding async before/after wait states](#async-beforeafter-wait-states), incident data from instances currently waiting due to failed jobs causing active incidents will not be migrated during runtime migration. We recommend to resolve incidents prior to runtime migration.
+
 ### BPMN elements
 
 Some BPMN elements and configurations supported in Camunda 7 are not supported in Camunda 8 or have specific limitations during migration. Below is an overview of these limitations and recommendations to address them.
@@ -160,6 +164,23 @@ Process instances with active joining parallel gateways cannot currently be migr
 
 The history migration has the following limitations.
 
+### General
+
+- To avoid collisions between definitions (process/decision/form), each definition migrated from Camunda 7 to 8 has its ID prefixed with `c7-legacy-`.
+  - Do not deploy new definitions in Camunda 8 with IDs starting with this prefix to avoid conflicts.
+- Avoid manipulating Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable). See [Auto-cancellation of active instances](history.md#auto-cancellation-of-active-instances) for details.
+- When migrating entities, some might be skipped due to dependencies (parent entity not migrated yet). Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration. Example:
+  - Flow node instances might be skipped if their parent flow node (scope) hasn't been migrated yet.
+- The History Data Migrator does not support the following Camunda 8 entities or properties:
+  - Sequence flow: Sequence flows cannot be highlighted in Operate.
+  - User task migration metadata: Information for user tasks migrated via process instance migration is not available in Camunda 7.
+  - Message subscription and correlated message subscription: These entities are not available in Camunda 7.
+  - Batch operation entity and batch operation item: Camunda 7 does not retain sufficient information about processed instances.
+  - User metrics: Not available in Camunda 7.
+  - Exporter position: This entity does not exist in Camunda 7.
+  - Process instance and user task tags: These properties do not exist in Camunda 7.
+  - Audit log: Not supported. See the related tracking [issue](https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/517).
+
 ### Process instance
 
 - Process instance migration doesn't populate the `parentElementInstanceKey` and `tree` fields.
@@ -167,7 +188,7 @@ The history migration has the following limitations.
   process instance.
 - As a result, you cannot query for the history of a subprocess or call activity using the
   parent process instance key.
-- See https://github.com/camunda/camunda-bpm-platform/issues/5359
+  - See https://github.com/camunda/camunda-bpm-platform/issues/5359
 
 ### DMN
 
@@ -176,6 +197,7 @@ The history migration has the following limitations.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5364
 - Decision instance `state` and `type` are not yet migrated.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5370
+- DMN models version 1.1 are not supported by Operate, decision definition data will be migrated but the decision model itself will not be visible in Operate.
 
 ## Cockpit plugin
 
@@ -192,3 +214,425 @@ The [Cockpit plugin](/guides/migrating-from-camunda-7/migration-tooling/data-mig
   - https://github.com/camunda/camunda-bpm-platform/issues/5424
 - The Cockpit plugin doesn't have extensive test coverage yet so we cannot guarantee a high level of stability and therefore don't claim it to be production-ready.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5404
+
+## Camunda 8 history migration coverage
+
+The following table shows which Camunda 8 entities and properties are migrated by the History Data Migrator.
+
+### Audit log
+
+| Property                | Can be migrated |
+| ----------------------- | --------------- |
+| auditLogKey             | Yes             |
+| entityKey               | Partially       |
+| entityType              | Yes             |
+| operationType           | Yes             |
+| entityVersion           | Yes             |
+| entityValueType         | No              |
+| entityOperationIntent   | No              |
+| batchOperationKey       | No              |
+| batchOperationType      | No              |
+| timestamp               | Yes             |
+| actorType               | Yes             |
+| actorId                 | Yes             |
+| tenantId                | Yes             |
+| tenantScope             | Yes             |
+| result                  | Yes             |
+| annotation              | Yes             |
+| category                | Yes             |
+| processDefinitionId     | Yes             |
+| decisionRequirementsId  | No              |
+| decisionDefinitionId    | No              |
+| processDefinitionKey    | Yes             |
+| processInstanceKey      | Yes             |
+| elementInstanceKey      | Partially       |
+| jobKey                  | No              |
+| userTaskKey             | Yes             |
+| decisionRequirementsKey | No              |
+| decisionDefinitionKey   | No              |
+| decisionEvaluationKey   | No              |
+| deploymentKey           | No              |
+| formKey                 | No              |
+| resourceKey             | No              |
+
+The following limitations apply:
+
+- Audit log entries are migrated only for user tasks, process definitions, process instances, variables, decisions, users, groups, and authorizations.
+- Audit log entries are not migrated for batch operations, identity links, attachments, job definitions, jobs, external tasks, metrics, operation logs, filters, comments, and properties.
+- The `entityKey` property is migrated only for entities related to user tasks, process definitions, and process instances.
+- The `elementInstanceKey` property is migrated only for entities related to user tasks.
+
+### Batch operation
+
+| Property                 | Can be migrated |
+| ------------------------ | --------------- |
+| batchOperationKey        | No              |
+| state                    | No              |
+| operationType            | No              |
+| startDate                | No              |
+| endDate                  | No              |
+| actorType                | No              |
+| actorId                  | No              |
+| operationsTotalCount     | No              |
+| operationsFailedCount    | No              |
+| operationsCompletedCount | No              |
+| errors                   | No              |
+
+### Batch operation item
+
+| Property           | Can be migrated |
+| ------------------ | --------------- |
+| batchOperationKey  | No              |
+| itemKey            | No              |
+| processInstanceKey | No              |
+| state              | No              |
+| processedDate      | No              |
+| errorMessage       | No              |
+
+### Cluster variable
+
+| Property    | Can be migrated |
+| ----------- | --------------- |
+| id          | No              |
+| name        | No              |
+| type        | No              |
+| doubleValue | No              |
+| longValue   | No              |
+| value       | No              |
+| fullValue   | No              |
+| isPreview   | No              |
+| tenantId    | No              |
+| scope       | No              |
+
+### Correlated message subscription
+
+| Property               | Can be migrated |
+| ---------------------- | --------------- |
+| correlationKey         | No              |
+| correlationTime        | No              |
+| flowNodeId             | No              |
+| flowNodeInstanceKey    | No              |
+| historyCleanupDate     | No              |
+| messageKey             | No              |
+| messageName            | No              |
+| partitionId            | No              |
+| processDefinitionId    | No              |
+| processDefinitionKey   | No              |
+| processInstanceKey     | No              |
+| rootProcessInstanceKey | No              |
+| subscriptionKey        | No              |
+| subscriptionType       | No              |
+| tenantId               | No              |
+
+### Decision definition
+
+| Property                    | Can be migrated |
+| --------------------------- | --------------- |
+| decisionDefinitionKey       | Yes             |
+| name                        | Yes             |
+| decisionDefinitionId        | Yes             |
+| tenantId                    | Yes             |
+| version                     | Yes             |
+| decisionRequirementsId      | Yes             |
+| decisionRequirementsKey     | Yes             |
+| decisionRequirementsName    | No              |
+| decisionRequirementsVersion | No              |
+
+### Decision instance
+
+| Property                  | Can be migrated |
+| ------------------------- | --------------- |
+| decisionInstanceId        | Yes             |
+| decisionInstanceKey       | Yes             |
+| state                     | Yes             |
+| evaluationDate            | Yes             |
+| evaluationFailure         | No              |
+| evaluationFailureMessage  | No              |
+| result                    | Yes             |
+| flowNodeInstanceKey       | Yes             |
+| flowNodeId                | Yes             |
+| processInstanceKey        | Yes             |
+| processDefinitionKey      | Yes             |
+| processDefinitionId       | Yes             |
+| decisionDefinitionKey     | Yes             |
+| decisionDefinitionId      | Yes             |
+| decisionRequirementsKey   | Yes             |
+| decisionRequirementsId    | Yes             |
+| rootDecisionDefinitionKey | Yes             |
+| decisionType              | Yes             |
+| tenantId                  | Yes             |
+| partitionId               | Yes             |
+| evaluatedInputs           | Yes             |
+| evaluatedOutputs          | Yes             |
+| historyCleanupDate        | Yes             |
+
+### Decision requirements
+
+| Property                | Can be migrated |
+| ----------------------- | --------------- |
+| decisionRequirementsKey | Yes             |
+| decisionRequirementsId  | Yes             |
+| name                    | Yes             |
+| resourceName            | Yes             |
+| version                 | Yes             |
+| xml                     | Yes             |
+| tenantId                | Yes             |
+
+### Exporter position
+
+| Property             | Can be migrated |
+| -------------------- | --------------- |
+| partitionId          | No              |
+| exporter             | No              |
+| lastExportedPosition | No              |
+| created              | No              |
+| lastUpdated          | No              |
+
+### Flow node instance
+
+| Property               | Can be migrated |
+| ---------------------- | --------------- |
+| flowNodeInstanceKey    | Yes             |
+| processInstanceKey     | Yes             |
+| processDefinitionKey   | Yes             |
+| processDefinitionId    | Yes             |
+| flowNodeScopeKey       | Yes             |
+| startDate              | Yes             |
+| endDate                | Yes             |
+| flowNodeId             | Yes             |
+| flowNodeName           | Yes             |
+| treePath               | Yes             |
+| type                   | Yes             |
+| state                  | Yes             |
+| incidentKey            | No              |
+| numSubprocessIncidents | No              |
+| hasIncident            | No              |
+| tenantId               | Yes             |
+| partitionId            | Yes             |
+| rootProcessInstanceKey | Yes             |
+| historyCleanupDate     | Yes             |
+
+### Form
+
+| Property  | Can be migrated |
+| --------- | --------------- |
+| formKey   | No              |
+| tenantId  | No              |
+| formId    | No              |
+| schema    | No              |
+| version   | No              |
+| isDeleted | No              |
+
+### History deletion
+
+| Property          | Can be migrated |
+| ----------------- | --------------- |
+| resourceKey       | No              |
+| resourceType      | No              |
+| batchOperationKey | No              |
+| partitionId       | No              |
+
+### Incident
+
+| Property               | Can be migrated |
+| ---------------------- | --------------- |
+| incidentKey            | Yes             |
+| processDefinitionKey   | Yes             |
+| processDefinitionId    | Yes             |
+| processInstanceKey     | Yes             |
+| rootProcessInstanceKey | Yes             |
+| flowNodeInstanceKey    | Yes             |
+| flowNodeId             | Yes             |
+| jobKey                 | No              |
+| errorType              | No              |
+| errorMessage           | Yes             |
+| errorMessageHash       | No              |
+| creationDate           | Yes             |
+| state                  | Yes             |
+| treePath               | No              |
+| tenantId               | Yes             |
+| partitionId            | No              |
+| historyCleanupDate     | No              |
+
+### Job
+
+| Property                 | Can be migrated |
+| ------------------------ | --------------- |
+| jobKey                   | No              |
+| type                     | No              |
+| worker                   | No              |
+| state                    | No              |
+| kind                     | No              |
+| listenerEventType        | No              |
+| retries                  | No              |
+| isDenied                 | No              |
+| deniedReason             | No              |
+| hasFailedWithRetriesLeft | No              |
+| errorCode                | No              |
+| errorMessage             | No              |
+| serializedCustomHeaders  | No              |
+| customHeaders            | No              |
+| deadline                 | No              |
+| endTime                  | No              |
+| processDefinitionId      | No              |
+| processDefinitionKey     | No              |
+| processInstanceKey       | No              |
+| rootProcessInstanceKey   | No              |
+| elementId                | No              |
+| elementInstanceKey       | No              |
+| tenantId                 | No              |
+| partitionId              | No              |
+| historyCleanupDate       | No              |
+| creationTime             | No              |
+| lastUpdateTime           | No              |
+
+### Message subscription
+
+| Property                 | Can be migrated |
+| ------------------------ | --------------- |
+| messageSubscriptionKey   | No              |
+| processDefinitionId      | No              |
+| processDefinitionKey     | No              |
+| processInstanceKey       | No              |
+| rootProcessInstanceKey   | No              |
+| flowNodeId               | No              |
+| flowNodeInstanceKey      | No              |
+| messageSubscriptionState | No              |
+| dateTime                 | No              |
+| messageName              | No              |
+| correlationKey           | No              |
+| tenantId                 | No              |
+| partitionId              | No              |
+| historyCleanupDate       | No              |
+
+### Process definition
+
+| Property             | Can be migrated |
+| -------------------- | --------------- |
+| processDefinitionKey | Yes             |
+| processDefinitionId  | Yes             |
+| resourceName         | Yes             |
+| name                 | Yes             |
+| tenantId             | Yes             |
+| versionTag           | Yes             |
+| version              | Yes             |
+| bpmnXml              | Yes             |
+| formId               | No              |
+
+### Process instance
+
+| Property                 | Can be migrated |
+| ------------------------ | --------------- |
+| processInstanceKey       | Yes             |
+| rootProcessInstanceKey   | Yes             |
+| processDefinitionId      | Yes             |
+| processDefinitionKey     | Yes             |
+| state                    | Yes             |
+| startDate                | Yes             |
+| endDate                  | Yes             |
+| tenantId                 | Yes             |
+| parentProcessInstanceKey | Yes             |
+| parentElementInstanceKey | No              |
+| numIncidents             | No              |
+| version                  | Yes             |
+| partitionId              | Yes             |
+| treePath                 | No              |
+| historyCleanupDate       | Yes             |
+| tags                     | No              |
+
+### Sequence flow
+
+| Property             | Can be migrated |
+| -------------------- | --------------- |
+| flowNodeId           | No              |
+| processInstanceKey   | No              |
+| processDefinitionKey | No              |
+| processDefinitionId  | No              |
+| tenantId             | No              |
+| partitionId          | No              |
+| historyCleanupDate   | No              |
+
+### Usage metric
+
+| Property    | Can be migrated |
+| ----------- | --------------- |
+| key         | No              |
+| startTime   | No              |
+| endTime     | No              |
+| tenantId    | No              |
+| eventType   | No              |
+| value       | No              |
+| partitionId | No              |
+
+### Usage metric (TU)
+
+| Property     | Can be migrated |
+| ------------ | --------------- |
+| key          | No              |
+| startTime    | No              |
+| endTime      | No              |
+| tenantId     | No              |
+| assigneeHash | No              |
+| partitionId  | No              |
+
+### User task
+
+| Property                 | Can be migrated |
+| ------------------------ | --------------- |
+| userTaskKey              | Yes             |
+| elementId                | Yes             |
+| name                     | Yes             |
+| processDefinitionId      | Yes             |
+| creationDate             | Yes             |
+| completionDate           | Yes             |
+| assignee                 | Yes             |
+| state                    | Yes             |
+| formKey                  | No              |
+| processDefinitionKey     | Yes             |
+| processInstanceKey       | Yes             |
+| rootProcessInstanceKey   | Yes             |
+| elementInstanceKey       | Yes             |
+| tenantId                 | Yes             |
+| dueDate                  | Yes             |
+| followUpDate             | Yes             |
+| candidateGroups          | No              |
+| candidateUsers           | No              |
+| externalFormReference    | No              |
+| processDefinitionVersion | Yes             |
+| serializedCustomHeaders  | No              |
+| customHeaders            | No              |
+| priority                 | Yes             |
+| tags                     | No              |
+| partitionId              | Yes             |
+| historyCleanupDate       | Yes             |
+
+### User task migration
+
+| Property                 | Can be migrated |
+| ------------------------ | --------------- |
+| userTaskKey              | No              |
+| processDefinitionKey     | No              |
+| processDefinitionId      | No              |
+| elementId                | No              |
+| name                     | No              |
+| processDefinitionVersion | No              |
+
+### Variable
+
+| Property               | Can be migrated |
+| ---------------------- | --------------- |
+| variableKey            | Yes             |
+| name                   | Yes             |
+| type                   | No              |
+| doubleValue            | No              |
+| longValue              | No              |
+| value                  | Yes             |
+| fullValue              | No              |
+| isPreview              | No              |
+| scopeKey               | Yes             |
+| processInstanceKey     | Yes             |
+| rootProcessInstanceKey | Yes             |
+| processDefinitionId    | Yes             |
+| tenantId               | Yes             |
+| partitionId            | Yes             |
+| historyCleanupDate     | Yes             |

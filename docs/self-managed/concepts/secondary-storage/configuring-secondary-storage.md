@@ -154,9 +154,13 @@ data:
 | Debugging and troubleshooting             | H2 or PostgreSQL                   | Easier to inspect and visualize data.                         |
 
 :::note
-H2 is suitable for testing and local development only.  
-For production use, Operate and Tasklist require a persistent secondary storage backend such as a supported RDBMS or Elasticsearch.  
-Consult the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) when choosing a relational database.
+Starting in 8.9-alpha3, H2 is the default secondary storage for lightweight Camunda 8 Run setups and quickstarts. H2 remains suitable for local testing, demos, and file-based setups, but it is not recommended for production workloads where persistence, scaling, and full analytics are required.
+
+For production use, Operate and Tasklist should run against a persistent secondary storage backend such as a supported RDBMS or Elasticsearch. Consult the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) when choosing a relational database.
+:::
+
+:::note
+Switching the secondary storage type (for example H2 ⇄ Elasticsearch) in alpha3 does not preserve existing data. The system starts with a fresh secondary store. Also note Operate v2 has limited functionality in 8.9-alpha3 when running against H2. Full Operate support is planned for a later alpha.
 :::
 
 ## Run without secondary storage

@@ -43,6 +43,7 @@ tags:
   - name: Group
   - name: Incident
   - name: Job
+  - name: Job metrics
   - name: License
   - name: Mapping rule
   - name: Message
@@ -183,6 +184,8 @@ paths:
     $ref: "jobs.yaml#/paths/~1jobs~1{jobKey}~1error"
   /jobs/{jobKey}/failure:
     $ref: "jobs.yaml#/paths/~1jobs~1{jobKey}~1failure"
+  /jobs/statistics/global:
+    $ref: "job-metrics.yaml#/paths/~1jobs~1statistics~1global"
   /license:
     $ref: "licenses.yaml#/paths/~1license"
   /mapping-rules:
@@ -325,6 +328,8 @@ paths:
     $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1assignee"
   /user-tasks/{userTaskKey}/assignment:
     $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1assignment"
+  /user-tasks/{userTaskKey}/audit-logs/search:
+    $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1audit-logs~1search"
   /user-tasks/{userTaskKey}/completion:
     $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1completion"
   /user-tasks/{userTaskKey}/form:

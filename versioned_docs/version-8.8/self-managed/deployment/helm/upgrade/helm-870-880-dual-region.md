@@ -116,6 +116,13 @@ Since every setup can differ, here are some edge cases to consider when upgradin
 - **Optimize deployment (if Optimize is used alongside Identity):**  
   Keep the old Elasticsearch exporter enabled after migration, as Optimize does not yet support the Camunda Exporter.
 
+- **During initial migration execution:**  
+  If the importer deployment appears to be stuck processing the same import for an extended period and the data migration job does not complete, restarting the importer deployment may resolve the issue. If the importer has already completed successfully in the other region, this can be a good indicator that the importer is stuck, since both Elasticsearch instances are expected to contain the same data.
+
+  ```sh
+  kubectl delete pods -l "app.kubernetes.io/component=orchestration-importer"
+  ```
+
 Regardless, the regions must be upgraded **simultaneously**, though specific caveats may apply as outlined above.
 
 #### Post-migration
