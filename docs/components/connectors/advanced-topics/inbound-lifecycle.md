@@ -1,7 +1,7 @@
 ---
 id: inbound-lifecycle
 title: Inbound connector lifecycle
-description: Learn about the lifecycle of inbound connectors and how it affects your workflows
+description: Learn how the inbound connector lifecycle affects your processes.
 ---
 
 <span className="badge badge--active--inbound">Inbound</span>
@@ -13,11 +13,11 @@ This page explains when inbound connectors are activated and deactivated, what c
 
 ## Inbound connector executables
 
-An **executable** is an instance of an inbound connector that is managed by the connector runtime.
+An executable is an instance of an inbound connector that is managed by the connector runtime.
 
-An executable is mapped to one or several **process definitions** deployed to engine.
+An executable is mapped to one or more process definitions deployed to the engine.
 In the simplest case, deploying a new process definition will create a new executable in the connector runtime.
-However, in general, one executable can be reused for multiple inbound connector elements in the diagram. See [Deduplication](./deduplication.md) to learn more.
+However, in general, one executable can be reused for multiple inbound connector elements in the diagram. To learn how the runtime reuses executables across connectors, see [Inbound connector deduplication](./deduplication.md).
 
 ## Reacting to process definition deployments
 
@@ -25,8 +25,8 @@ However, in general, one executable can be reused for multiple inbound connector
 
 The connector runtime maintains an internal state that tracks:
 
-- **latest versions** of process definitions
-- previous versions of process definitions that have **active message subscriptions**
+- Latest versions of process definitions.
+- Previous process-definition versions with active message subscriptions.
 
 The following endpoints of the Orchestration Cluster API are used as data sources:
 
@@ -41,14 +41,16 @@ If a process definition is deleted from the engine; or it is replaced with a new
 
 ![Inbound connector lifecycle](../img/inbound-lifecycle.png)
 
-The lifecycle of an executable starts when the connector runtime reacts to a change in the engine state and decides that a new executable is needed to reflect it correctly.
+The lifecycle of an executable starts when the connector runtime detects a change in the engine state and determines that it needs a new executable to reflect that change.
 
-- **INVALID DEFINITION**: If the deduplication configuration is invalid, the runtime will save the executable with the state **INVALID DEFINITION**.
-  This can happen for a number of reasons. Refer to the dedicated [Deduplication](./deduplication.md) guide to learn more.
-- **FAILED TO ACTIVATE**: The runtime attempts to activate an executable. If an activation attempt fails, the executable is saved with the state **FAILED TO ACTIVATE**.
-- **ACTIVE**: When the executable is successfully activated, it will stay in the **ACTIVE** state. This means the executable is ready and listening to external events in the third-party system.
-- **CANCELED:** The active executable can encounter an unrecoverable error. In this case, it may transition to the **CANCELED** state. This is rare, and most connectors will have robust error handling with retries to deal with transient errors like temporary network issues.
+- `INVALID_DEFINITION` – The runtime detects an invalid deduplication configuration and stores the executable in this state. For details about supported configurations and common causes, see [Inbound connector deduplication](./deduplication.md).
 
-When a new process version is deployed, the connector runtime will check if it is possible to deduplicate inbound connectors in the new version with any of the executables that are already active. If so, it will update the running executable. This will also lead to a restart attempt if the executable was in an inactive state (**CANCELED** or **FAILED TO ACTIVATE**).
+- `FAILED_TO_ACTIVATE` – The runtime attempts to activate the executable, but the activation fails. The executable remains inactive in this state.
 
-When the active executable is no longer needed (i.e. the process version it originates from is no longer the latest, and there are no active instances waiting on message subscriptions), the runtime will deactivate it.
+- `ACTIVE` – The runtime successfully activates the executable. In this state, the executable is ready to receive and process external events from the third-party system.
+
+- `CANCELED` – An active executable encounters an unrecoverable error and transitions to this state. This is rare, as most connectors include retry logic to handle transient failures such as temporary network issues.
+
+When you deploy a new process version, the connector runtime checks whether it can deduplicate inbound connectors in the new version with any currently active executables. If deduplication is possible, the runtime updates the existing executable. If the executable is inactive (for example, in the `CANCELED` or `FAILED_TO_ACTIVATE` state), the runtime also attempts to restart it.
+
+When the executable is no longer needed—for example, when its originating process version is no longer the latest and no active instances are waiting on message subscriptions—the runtime deactivates it.

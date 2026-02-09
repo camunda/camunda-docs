@@ -1,14 +1,14 @@
 ---
 id: connector-deduplication
 title: Inbound connector deduplication
-description: Learn about how inbound connector deduplication works in Camunda
+description: Learn how inbound connector deduplication works in Camunda.
 ---
 
 <span className="badge badge--active--inbound">Inbound</span>
 
 In the simplest case, each inbound connector element in a BPMN diagram corresponds to a unique endpoint, event consumer, or a polling task.
-However, sometimes multiple inbound connector elements are combined in the connector runtime if they are compatible.
-This can be done automatically by the runtime, or requested by the user.
+However, the connector runtime can combine multiple compatible inbound connector elements.
+The runtime can do this automatically, or you can request it.
 
 This page explains the concept of deduplication in the connector runtime.
 
@@ -23,17 +23,18 @@ When the process execution arrives at the event gateway, the type of the message
 If each connector event listened to the message queue using a separate subscription, this might lead to race conditions if the message is received by a different consumer (for example, the `PAYMENT_COMPLETED` event being consumed by the consumer that expects `PAYMENT_CANCELLED`).
 Eventually, this might lead to message loss or delayed processing, while also increasing the load on the message broker as the message is returned to the queue.
 
-To avoid this, both events can be assigned to the same subscription by assigning the same **Deduplication ID** to both events. Then, all messages will be consumed by the same subscription, and the connector runtime will evaluate the **Activation condition** of each event to determine which one should be triggered.
+To avoid this, both events can be assigned to the same subscription by assigning the same deduplication ID to both events. Then, all messages will be consumed by the same subscription, and the connector runtime will evaluate the activation condition of each event to determine which one should be triggered.
 
 :::note
-When using this pattern, ensure the **Activation condition** of each event is mutually exclusive, so only one event is triggered for each message.
+When using this pattern, ensure each event’s activation condition is mutually exclusive, so only one event is triggered per message.
 Attempting to trigger multiple events for the same message will result in an error.
 :::
 
 ## Automatic deduplication
 
-By default, the connector runtime will assign the same deduplication ID to connector events that have equal properties, and different deduplication IDs to events that have different properties.
-In this context, **equal properties** means the properties that define the business logic of the connector are exactly the same, including whitespace characters.
+By default, the connector runtime assigns the same deduplication ID to connector events with matching properties, and different IDs to events with different properties.
+
+In this context, equal properties means the properties that define the business logic of the connector are exactly the same, including whitespace characters.
 
 The automatic deduplication only takes into account the properties that are related to the business logic of the connector itself (for example, **Server URL** or **Authentication properties**).
 It does not take into account the properties that define output mapping (**Result variable**, **Result expression**, **Response expression**), correlation (**Correlation key (process)**, **Correlation key (payload)**, **Activation condition**), or other properties that are handled by the connector runtime and not by the connector itself.
@@ -49,7 +50,7 @@ If needed, you can have multiple connectors with the same properties that have d
 To assign a deduplication ID, take the following steps:
 
 1. Enable the **Manual mode** checkbox in the **Deduplication** section of the connector properties.
-2. The **Deduplication ID** field will appear. Fill in the desired deduplication ID.
+2. In **Deduplication ID**, enter the deduplication ID.
 3. Repeat the process for all connectors that should share the same deduplication ID.
 4. Deploy the BPMN diagram for the changes to take effect.
 
@@ -61,12 +62,12 @@ When manual deduplication is used, connectors that have the same deduplication I
 
 ## Should I use automatic or manual deduplication?
 
-Use **automatic deduplication** if:
+Use automatic deduplication if:
 
 - You don't need to group connectors in a specific way and don't have any special requirements for deduplication.
 - Deduplication configuration is not important for your use case (you don't use multiple connectors in the same process that listen to the same event source).
 
-Use **manual deduplication** if:
+Use manual deduplication if:
 
 - You need to group connectors in a specific way that is not supported by automatic deduplication.
 - You are unsure which properties of the connector are used for automatic deduplication.
@@ -74,13 +75,13 @@ Use **manual deduplication** if:
 
 ## How to choose a deduplication ID
 
-A deduplication ID can contain alphanumeric characters, dashes, and underscores. It is recommended to use a descriptive name that reflects the purpose of the deduplication group, for example, `payment-outcome-event-consumer`.
+A deduplication ID can contain alphanumeric characters, dashes, and underscores. We recommend using a descriptive ID that reflects the deduplication group’s purpose, for example, `payment-outcome-event-consumer`.
 
 ## Limitations of deduplication
 
 While deduplication is a powerful tool that can optimize the execution of your BPMN process, it has some limitations. It is important to understand them to avoid unexpected behavior.
 
-1. **Deduplication ID scope** - Deduplication ID is unique within a single BPMN diagram. It is not possible to deduplicate connectors across different BPMN diagrams.
-2. **Connector type** - connectors of different types cannot share the same deduplication ID (for example, a Webhook connector and a Message Queue connector).
-3. **Connector properties** - connectors that share the same deduplication ID must have the same business logic properties. This means they must have the same **Webhook ID**, **Server URL**, **Authentication properties**, etc. (depending on the connector type).
-4. **Activation condition** - connectors with the same deduplication ID must have mutually exclusive activation conditions. If multiple connectors with the same deduplication ID have activation conditions that can be true for the same message, the connector runtime will not be able to determine which connector should be triggered, and an error will occur.
+1. **Deduplication ID scope** – The deduplication ID is scoped to a single process definition across all its versions. You can’t deduplicate connectors across different process definitions.
+2. **Connector type** – Connectors of different types can’t share the same deduplication ID (for example, a Webhook connector and a Message Queue connector).
+3. **Connector properties** – Connectors that share the same deduplication ID must use the same business-logic properties. This means they must have the same **Webhook ID**, **Server URL**, **Authentication properties**, and so on, depending on the connector type.
+4. **Activation condition** – Connectors with the same deduplication ID must have mutually exclusive activation conditions. If multiple connectors can evaluate to true for the same message, the connector runtime can’t determine which connector to trigger and returns an error.
