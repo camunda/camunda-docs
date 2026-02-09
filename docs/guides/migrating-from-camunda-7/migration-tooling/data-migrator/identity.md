@@ -1,6 +1,6 @@
 ---
 id: identity
-title: Identity migration (experimental)
+title: Identity migration
 sidebar_label: Identity migration
 description: "Migrate identity data to Camunda 8."
 ---
@@ -8,7 +8,7 @@ description: "Migrate identity data to Camunda 8."
 Migrate identity data.
 
 :::info
-The identity migration mode of the Data Migrator is in an early development stage and will **not be released before Camunda 8.9 (April 2026)**. You can check the current state and track progress in the [GitHub repository](https://github.com/camunda/camunda-7-to-8-migration-tooling/).
+The identity migration mode of the Data Migrator is still in the development stage and will **not be released before Camunda 8.9 (April 2026)**. You can check the current state and track progress in the [GitHub repository](https://github.com/camunda/camunda-7-to-8-migration-tooling/).
 :::
 
 ## About identity migration
@@ -22,11 +22,12 @@ Identity data refers to:
 
 As of today, the following requirements and limitations apply:
 
-- The experimental feature **only** includes the migration of:
-  - Tenants (temporarily excluding tenant memberships)
-  - Some authorizations.
-- Migration for other identity entities as well as retrying skipped entities are either not yet implemented or not supported (detailed in the [Supported entities](#supported-entities) section below).
+- This feature only includes the migration of:
+  - Tenants.
+  - Supported authorizations (detailed in the [Supported entities](#supported-entities) section below).
+- Users, groups and memberships are currently not supported for migration.
 - Once migration has been triggered, it's strongly recommended not to create new identity data on Camunda 7. Even if migration is attempted again, the new data might not be migrated.
+- In order for authorizations to work correctly after migration, process definitions, forms, DRD and decision definitions need to have the same IDs in Camunda 8 as in Camunda 7. This should be the case if you have already migrated runtime and history data.
 
 ## Supported entities
 
@@ -70,7 +71,7 @@ Because in Camunda 7 `GRANT` authorizations take precedence over `REVOKE` author
 | `Dashboard`                        | No                                              | -                                  |
 | `Decision Definition`              | [Partial\*](#decision-definition-compatibility) | `Decision Definition`              |
 | `Decision Requirements Definition` | Yes                                             | `Decision Requirements Definition` |
-| `Deployment`                       | Not yet                                         | -                                  |
+| `Deployment`                       | [Yes\*](#deployment-compatibility)              | -                                  |
 | `Filter`                           | No                                              | -                                  |
 | `Group`                            | Yes                                             | `Group`                            |
 | `Group Membership`                 | [Partial\*](#group-membership-compatibility)    | `Group`                            |
@@ -144,7 +145,7 @@ The `Group Membership` resource type does not exist in Camunda 8, but its functi
 
 ### `Tenant Membership` compatibility
 
-Behaves the same as `Group Membership`.
+The `Tenant Membership` resource type does not exist in Camunda 8, but its functionality is covered by the `Tenant` resource type in combination with the `UPDATE` permission. However, only the `ALL` permission from Camunda 7 is supported for migration, as individual `CREATE` and `DELETE` permissions would result in a more permissive authorization.
 
 | C7 Permission | Migration supported | C8 Resource Type equivalent | C8 Permission equivalent |
 | ------------- | ------------------- | --------------------------- | ------------------------ |
@@ -163,6 +164,8 @@ Behaves the same as `Group Membership`.
 
 ### `Decision Definition` compatibility
 
+As historic definitions are migrated with a prefixed ID to Camunda 8 to avoid collisions between native and migrated definitions ([ref](../data-migrator/limitations.md#history)), authorizations for `Decision Definition` resources are migrated twice: once for the original ID and once for the prefixed ID. This guarantees that authorizations remain effective after migration.
+
 | C7 Permission     | Migration supported | C8 Permission equivalent                                                                                     |
 | ----------------- | ------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `READ`            | Yes                 | `READ_DECISION_DEFINITION`, `READ_DECISION_INSTANCE`                                                         |
@@ -172,6 +175,8 @@ Behaves the same as `Group Membership`.
 | `ALL`             | Yes                 | `CREATE_DECISION_INSTANCE`, `READ_DECISION_DEFINITION`, `READ_DECISION_INSTANCE`, `DELETE_DECISION_INSTANCE` |
 
 ### `Process Definition` compatibility
+
+As historic definitions are migrated with a prefixed ID to Camunda 8 to avoid collisions between native and migrated definitions ([ref](../data-migrator/limitations.md#history)), authorizations for `Process Definition` resources are migrated twice: once for the original ID and once for the prefixed ID. This guarantees that authorizations remain effective after migration.
 
 | C7 Permission              | Migration supported | C8 Permission equivalent                                                                                                                                                                                                        |
 | -------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -200,6 +205,20 @@ Behaves the same as `Group Membership`.
 | `UPDATE_HISTORY`           | No                  | -                                                                                                                                                                                                                               |
 | `ALL`                      | Yes                 | `CREATE_PROCESS_INSTANCE`, `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, `UPDATE_PROCESS_INSTANCE`, `UPDATE_USER_TASK`, `MODIFY_PROCESS_INSTANCE`, `CANCEL_PROCESS_INSTANCE`, `DELETE_PROCESS_INSTANCE` |
 
+### `Deployment` compatibility
+
+As `Deployment` maps to `Resource` in Camunda 8, when migrating a `Deployment` authorization to Camunda 8, one authorization per resource contained in the deployment is created in Camunda 8, with the same permissions as the original `Deployment` authorization.
+This operates in combination with the prefix principle described for [Process Definition](#process-definition-compatibility) and [Decision Definition](#decision-definition-compatibility), which also applies for forms.
+
+In practice, this means that, if a deployment contains process definitions, decision definitions, and forms, for each of these resources two authorizations are created in Camunda 8: one for the original ID and one for the prefixed ID.
+
+| C7 Permission | Migration supported | C8 Permission equivalent                                                           |
+| ------------- | ------------------- | ---------------------------------------------------------------------------------- |
+| `READ`        | Yes                 | `READ`                                                                             |
+| `CREATE`      | Yes                 | `CREATE`                                                                           |
+| `DELETE`      | Yes                 | `DELETE_RESOURCE`, `DELETE_FORM`, `DELETE_PROCESS`, `DELETE_DRD`                   |
+| `ALL`         | Yes                 | `CREATE`, `READ`, `DELETE_DRD`, `DELETE_FORM`, `DELETE_PROCESS`, `DELETE_RESOURCE` |
+
 ### `ALL` permissions compatibility
 
 :::info
@@ -209,8 +228,14 @@ As illustrated in the tables above, the `ALL` permission in Camunda 7 maps to **
 ## Executing identity migration
 
 ```bash
-# Run identity migration (experimental)
+# Run identity migration
 ./start.sh --identity
+
+# List all skipped identity entities
+./start.sh --identity --list-skipped
+
+# Retry skipped identity entities
+./start.sh --identity --retry-skipped
 ```
 
 :::warning

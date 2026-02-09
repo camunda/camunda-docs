@@ -70,8 +70,7 @@ A `cancelRemainingInstances` boolean attribute can be configured to influence th
 
 You can handle an ad-hoc sub-process using a [job worker](/components/concepts/job-workers.md). To do this, define the sub-process with a task definition. The job worker can then control the sub-process by activating inner elements and deciding when it completes.
 
-When an ad-hoc sub-process is defined as a job worker, it creates a job upon activation. The worker must decide what the next step is.  
-It can use the `adHocSubProcessElements` variable (see [special ad-hoc sub-process variables](#special-ad-hoc-sub-process-variables)) to determine available elements.
+When an ad-hoc sub-process is defined as a job worker, it creates a job upon activation. The worker must decide what the next step is. It can use the `adHocSubProcessElements` variable (see [special ad-hoc sub-process variables](#special-ad-hoc-sub-process-variables)) to determine available elements.
 
 When a process instance reaches an ad-hoc sub-process with a job worker implementation:
 
@@ -87,6 +86,16 @@ Because a worker can activate multiple elements at once, and Zeebe creates a job
 
 - A job may be recreated while it is still processing.
 - Job completion may result in a `NOT_FOUND` rejection.
+
+### Event sub-processes
+
+In an ad-hoc sub-process handled by a job worker, the job worker decides which elements to activate and when the ad-hoc sub-process is complete.
+
+However, [event sub-processes](../event-subprocesses/event-subprocesses.md) are triggered by events, not by the job worker, so they can run outside the job worker's direct control. When an event sub-process finishes, it triggers the job worker again, handing control back so it can activate new elements (optionally canceling others) or complete the ad-hoc sub-process.
+
+:::info Interrupting event sub-process
+An interrupting event sub-process is a special case: it cancels all active elements and completes the ad-hoc sub-process without waiting for the job worker to decide.
+:::
 
 ## Collect output
 

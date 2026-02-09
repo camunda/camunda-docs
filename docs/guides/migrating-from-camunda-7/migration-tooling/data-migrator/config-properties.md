@@ -19,7 +19,7 @@ Read more about Camunda Client [configuration options](/apis-tools/camunda-sprin
 | :-------------- | :------- | :-------------------------------------------------------------------------------------------------- |
 | `.mode`         | `string` | Operation mode of the Camunda 8 client. Options: `self-managed` or `cloud`. Default: `self-managed` |
 | `.grpc-address` | `string` | The gRPC API endpoint for Camunda 8 Platform. Default: `http://localhost:26500`                     |
-| `.rest-address` | `string` | The REST API endpoint for Camunda 8 Platform. Default: `http://localhost:8088`                      |
+| `.rest-address` | `string` | The REST API endpoint for Camunda 8 Platform. Default: `http://localhost:8080`                      |
 
 ## `camunda.migrator`
 

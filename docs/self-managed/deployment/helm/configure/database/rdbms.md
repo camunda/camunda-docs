@@ -183,7 +183,7 @@ For details and examples, see [using AWS Aurora PostgreSQL with Camunda](../../.
 
 - **Orchestration Cluster (Zeebe)**: ✅ Full RDBMS support (primary use case).
 - **Operate, Tasklist, Connectors**: ✅ Use the same RDBMS as Orchestration Cluster.
-- **WebModeler, Console, Identity**: ✅ RDBMS support planned.
+- **Web Modeler, Console, Identity**: ✅ RDBMS support planned.
 - **Optimize**: ❌ **Requires Elasticsearch or OpenSearch only.** Optimize cannot use RDBMS.
 
 If you deploy Optimize, you must still provision Elasticsearch or OpenSearch.

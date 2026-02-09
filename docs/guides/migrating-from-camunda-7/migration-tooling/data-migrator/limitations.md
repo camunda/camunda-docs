@@ -36,6 +36,10 @@ The runtime migration has the following limitations.
 To learn more about variable migration, see [variables](../variables).
 :::
 
+### Incidents
+
+Due to the [limitation regarding async before/after wait states](#async-beforeafter-wait-states), incident data from instances currently waiting due to failed jobs causing active incidents will not be migrated during runtime migration. We recommend to resolve incidents prior to runtime migration.
+
 ### BPMN elements
 
 Some BPMN elements and configurations supported in Camunda 7 are not supported in Camunda 8 or have specific limitations during migration. Below is an overview of these limitations and recommendations to address them.
@@ -219,37 +223,44 @@ The following table shows which Camunda 8 entities and properties are migrated b
 
 | Property                | Can be migrated |
 | ----------------------- | --------------- |
-| auditLogKey             | No              |
-| entityKey               | No              |
-| entityType              | No              |
-| operationType           | No              |
-| entityVersion           | No              |
+| auditLogKey             | Yes             |
+| entityKey               | Partially       |
+| entityType              | Yes             |
+| operationType           | Yes             |
+| entityVersion           | Yes             |
 | entityValueType         | No              |
 | entityOperationIntent   | No              |
 | batchOperationKey       | No              |
 | batchOperationType      | No              |
-| timestamp               | No              |
-| actorType               | No              |
-| actorId                 | No              |
-| tenantId                | No              |
-| tenantScope             | No              |
-| result                  | No              |
-| annotation              | No              |
-| category                | No              |
-| processDefinitionId     | No              |
+| timestamp               | Yes             |
+| actorType               | Yes             |
+| actorId                 | Yes             |
+| tenantId                | Yes             |
+| tenantScope             | Yes             |
+| result                  | Yes             |
+| annotation              | Yes             |
+| category                | Yes             |
+| processDefinitionId     | Yes             |
 | decisionRequirementsId  | No              |
 | decisionDefinitionId    | No              |
-| processDefinitionKey    | No              |
-| processInstanceKey      | No              |
-| elementInstanceKey      | No              |
+| processDefinitionKey    | Yes             |
+| processInstanceKey      | Yes             |
+| elementInstanceKey      | Partially       |
 | jobKey                  | No              |
-| userTaskKey             | No              |
+| userTaskKey             | Yes             |
 | decisionRequirementsKey | No              |
 | decisionDefinitionKey   | No              |
 | decisionEvaluationKey   | No              |
 | deploymentKey           | No              |
 | formKey                 | No              |
 | resourceKey             | No              |
+
+The following limitations apply:
+
+- Audit log entries are migrated only for user tasks, process definitions, process instances, variables, decisions, users, groups, and authorizations.
+- Audit log entries are not migrated for batch operations, identity links, attachments, job definitions, jobs, external tasks, metrics, operation logs, filters, comments, and properties.
+- The `entityKey` property is migrated only for entities related to user tasks, process definitions, and process instances.
+- The `elementInstanceKey` property is migrated only for entities related to user tasks.
 
 ### Batch operation
 
@@ -432,7 +443,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | rootProcessInstanceKey | Yes             |
 | flowNodeInstanceKey    | Yes             |
 | flowNodeId             | Yes             |
-| jobKey                 | Yes             |
+| jobKey                 | No              |
 | errorType              | No              |
 | errorMessage           | Yes             |
 | errorMessageHash       | No              |
