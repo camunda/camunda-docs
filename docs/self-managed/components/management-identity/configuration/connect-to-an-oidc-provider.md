@@ -32,7 +32,7 @@ If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authenticati
   - Client secrets
   - Audience
 - A [claim name and value](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#oidc-configuration) to use for initial access.
-- Your OIDC provider must include the `aud` (audience) claim in access tokens. See [known limitations](#oidc-provider-known-limitations) for providers that do not meet this requirement.
+- Your OIDC provider must issue JWT access tokens that contain an `aud` (audience) claim matching the configured audience. Camunda validates this claim for M2M/auth flows, so providers that do not emit JWT access tokens with an `aud` claim are not supported. See [known limitations](#oidc-provider-known-limitations) for providers that do not meet this requirement.
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific
