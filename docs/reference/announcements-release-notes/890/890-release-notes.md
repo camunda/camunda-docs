@@ -104,7 +104,7 @@ The connectors runtime now activates inbound connectors for earlier process vers
 
 <!-- https://github.com/camunda/product-hub/issues/3274 -->
 
-A new Camunda 8 SaaS **AWS US East (us-east-2)** region in North America lets you deploy orchestration workloads with full US data residency and improved regional stability.
+With the new Camunda 8 SaaS **AWS US East (us-east-2)** region in North America, you can deploy orchestration workloads with full US data residency and improved regional stability.
 
 <p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
 
