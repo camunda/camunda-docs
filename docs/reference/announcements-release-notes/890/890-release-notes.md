@@ -55,7 +55,7 @@ In addition, the **Tools** panel in the element template is replaced by dedicate
 
 :::caution Upgrading the template
 
-- The **Tools** section in version 0/1 of the template is replaced by a **Filters** section in version 2.
+- The **Tools** section in version 0 and 1 of the template is replaced by a **Filters** section in version 2.
 - As Tool filters are not migrated during a Template Version upgrade, you must manually upgrade the template with any previously configured Tool filters.
 
 :::
