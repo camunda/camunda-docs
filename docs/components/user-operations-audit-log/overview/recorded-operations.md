@@ -100,10 +100,6 @@ These operations belong to the category `DEPLOYED_RESOURCES`. The following are 
 | Evaluate Decision        | Decision            | –                               |
 | Command rejection        | Command entity type | –                               |
 
-#### Deleted operations
-
-When a resource is deleted, the deletion operation is logged, but the rest of the operation logs for that resource are purged from the audit log.
-
 #### Batch operations
 
 While the operations for creating and managing batch operations are recorded in the user operations audit log, the batch operation state changes aren't. For more information, learn how to [monitor batch operations](../../operate/userguide/monitor-batch-operations.md).
