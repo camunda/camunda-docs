@@ -35,7 +35,7 @@ Camunda 8.8 introduces component-level changes that may require manual action, i
 - Authorization and web application permission changes
 - Web Modeler cluster configuration updates
 
-<p><a href="../870-to-880" class="link-arrow">Upgrade Camunda components from 8.7 to 8.8</a></p>
+<p><a href="./870-to-880" class="link-arrow">Upgrade Camunda components from 8.7 to 8.8</a></p>
 
 ## Component-specific guidance
 
@@ -45,22 +45,22 @@ Some components require additional, targeted steps depending on how they are dep
 
 Review these guides to migrate Optimize data, apply required configuration changes, and verify supported environments.
 
-<p><a href="../optimize" class="link-arrow">Upgrade Optimize from 8.7 to 8.8</a></p>
+<p><a href="./optimize" class="link-arrow">Upgrade Optimize from 8.7 to 8.8</a></p>
 
 ### Elasticsearch
 
 This applies if your Camunda deployment includes an Elasticsearch version upgrade as part of the Camunda 8.7 to 8.8 transition.
 
-<p><a href="../elasticsearch/changes-in-elasticsearch-8" class="link-arrow">Elasticsearch 7 to 8 compatibility changes for Camunda</a></p>
+<p><a href="./elasticsearch/changes-in-elasticsearch-8" class="link-arrow">Elasticsearch 7 to 8 compatibility changes for Camunda</a></p>
 
 ### Keycloak
 
 Upgrade Keycloak while preserving existing data and access to Camunda components.
 
-<p><a href="../keycloak/keycloak-compatibility" class="link-arrow">Keycloak compatibility considerations for Camunda</a></p>
+<p><a href="./keycloak/keycloak-compatibility" class="link-arrow">Keycloak compatibility considerations for Camunda</a></p>
 
 ### Importer
 
 The Importer is required only for certain migrations from Camunda 8.7 or earlier. Review this guide to understand when and how to enable it temporarily.
 
-<p><a href="../importer" class="link-arrow">Importer</a></p>
+<p><a href="./importer" class="link-arrow">Importer</a></p>
