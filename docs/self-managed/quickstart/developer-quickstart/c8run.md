@@ -64,8 +64,6 @@ To start Camunda 8 in Docker Compose using Camunda 8 Run you can use the followi
 - On Mac and Linux: `./start.sh --docker`
 - On Windows: `.\c8run.exe start --docker`
 
-When started with Docker, Operate will be available at [http://localhost:8088/operate](http://localhost:8088/operate).
-
 :::note
 If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-run) to end the current processes, then run the start script again.
 :::
