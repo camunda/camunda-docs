@@ -43,7 +43,7 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 #### MCP Client connector operations and filter options
 
-New operations are added in the `Standalone` Mode to the MCP Client connector:
+New operations are added in the `Standalone` mode to the MCP Client connector:
 
 - List resources
 - List resource templates
