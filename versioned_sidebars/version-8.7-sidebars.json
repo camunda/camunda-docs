@@ -1829,6 +1829,7 @@
       "items": ["reference/data-collection/usage-metrics"]
     },
     "reference/glossary",
+    "reference/mcp-docs/docs-mcp",
     "reference/legal"
   ],
   "Self-Managed": [
