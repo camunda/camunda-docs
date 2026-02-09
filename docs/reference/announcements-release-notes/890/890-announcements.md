@@ -67,9 +67,12 @@ The minimum supported OpenSearch version for the Orchestration cluster and Optim
 </div>
 <div className="release-announcement-content">
 
-#### AWS Paris region added
+#### AWS regions added
 
-Camunda 8.9 adds support for the AWS Paris region in Camunda 8 SaaS.
+Camunda 8.9 adds support for the following new regions in Camunda 8 SaaS.
+
+- Paris, Europe (eu-west-3)
+- North America, Ohio (us-east-2)
 
 <p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
 
