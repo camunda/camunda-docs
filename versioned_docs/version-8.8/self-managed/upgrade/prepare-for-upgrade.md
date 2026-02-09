@@ -11,11 +11,11 @@ Prepare your Self-Managed environment for an upgrade to Camunda 8.8. Use this gu
 
 Before upgrading, verify that your current installation meets the minimum requirements.
 
-| Area                | What to check                                                                                                                                                                                                                                    |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Camunda version     | Direct upgrades to 8.8 are supported only from the latest 8.7.x patch. If you are running an earlier version, first upgrade to 8.7. See [Upgrading from an earlier version](/self-managed/update/overview.md#upgrading-from-an-earlier-version). |
-| Environment support | Ensure your platform and dependencies are supported in 8.8. See [Supported environments](/reference/supported-environments.md).                                                                                                                  |
-| Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and Elasticsearch/OpenSearch setup.                                                                                                        |
+| Area                | What to check                                                                                                                                                                                                                                     |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda version     | Direct upgrades to 8.8 are supported only from the latest 8.7.x patch. If you are running an earlier version, first upgrade to 8.7. See [Upgrading from an earlier version](/self-managed/upgrade/overview.md#upgrading-from-an-earlier-version). |
+| Environment support | Ensure your platform and dependencies are supported in 8.8. See [Supported environments](/reference/supported-environments.md).                                                                                                                   |
+| Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and Elasticsearch/OpenSearch setup.                                                                                                         |
 
 ## Review platform changes in Camunda 8.8
 
@@ -159,9 +159,9 @@ See the [sizing and benchmarking recommendations](/reference/supported-environme
 
 Once you have completed all preparation steps and confirmed your environment is ready, proceed with the upgrade method that matches your deployment:
 
-- [Upgrade Helm chart](/self-managed/update/helm/index.md)
-- [Manual upgrade](/self-managed/update/manual/upgrade.md)
+- [Upgrade Helm chart](/self-managed/upgrade/helm/index.md)
+- [Manual upgrade](/self-managed/upgrade/manual/index.md)
 
 :::tip
-For more information on component-specific changes, see the [component upgrade guide](/self-managed/update/components/introduction.md) and version-specific documentation.
+For more information on component-specific changes, see the [component upgrade guide](/self-managed/upgrade/components/index.md) and version-specific documentation.
 :::

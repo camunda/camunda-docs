@@ -10,7 +10,7 @@ import { HelmChartValuesFileBitnamiLegacyLink } from "@site/src/components/Camun
 
 Use the guides below to upgrade a Camunda 8 Self-Managed deployment that is installed using the official Camunda Helm charts.
 
-If you are upgrading from a version earlier than 8.7, see [Upgrading from an earlier version](self-managed/update/overview.md#upgrading-from-an-earlier-version).
+If you are upgrading from a version earlier than 8.7, see [Upgrading from an earlier version](self-managed/upgrade/overview.md#upgrading-from-an-earlier-version).
 
 <ZeebeGrid zeebe={helmIndexCards} />
 
@@ -38,4 +38,4 @@ See the [Bitnami GitHub announcement](https://github.com/bitnami/containers/issu
 ## Related resources
 
 - [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/)
-- [Component upgrade from 8.7 to 8.8](self-managed/update/components/870-to-880.md)
+- [Component upgrade from 8.7 to 8.8](self-managed/upgrade/components/870-to-880.md)

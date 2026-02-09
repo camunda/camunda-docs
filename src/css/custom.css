@@ -1881,7 +1881,9 @@ h3 + .release-announcement-row {
   display: flex;
   align-items: center;
   background: transparent;
+  overflow: visible;
 }
+
 .sidebar-cta > .menu__list-item-collapsible > .menu__link {
   display: flex;
   align-items: center;
@@ -1889,6 +1891,7 @@ h3 + .release-announcement-row {
   gap: 0.5rem;
   min-width: 0;
   white-space: nowrap;
+  overflow: visible;
 }
 
 .sidebar-cta > .menu__list-item-collapsible > .menu__link .menu__link-text,
@@ -1898,6 +1901,9 @@ h3 + .release-announcement-row {
   gap: 0.5rem;
   min-width: 0;
   white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  max-width: none;
 }
 
 .sidebar-cta
@@ -1922,6 +1928,24 @@ h3 + .release-announcement-row {
 
   flex: 0 0 auto; /* never wrap or shrink */
   white-space: nowrap;
+}
+
+/* Fix the truncation that happens only when the category link is active */
+.sidebar-cta > .menu__list-item-collapsible > .menu__link.menu__link--active {
+  overflow: visible;
+}
+
+.sidebar-cta
+  > .menu__list-item-collapsible
+  > .menu__link.menu__link--active
+  .menu__link-text,
+.sidebar-cta
+  > .menu__list-item-collapsible
+  > .menu__link.menu__link--active
+  > span {
+  overflow: visible;
+  text-overflow: clip;
+  max-width: none;
 }
 
 .sidebar-cta > .menu__list-item-collapsible .menu__caret {

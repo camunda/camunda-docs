@@ -1,5 +1,5 @@
 ---
-id: introduction
+id: index
 sidebar_label: Component upgrade
 title: Upgrade Camunda components
 description: Upgrade individual Camunda 8 components when moving from version 8.7 to 8.8.

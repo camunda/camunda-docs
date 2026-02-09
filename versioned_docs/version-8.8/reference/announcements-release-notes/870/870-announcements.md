@@ -150,7 +150,7 @@ The configuration for the external database used by the Web Modeler REST API has
 ##### Bitnami Docker repository migration
 
 The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
-See [Bitnami Docker repository migration](/self-managed/update/helm/index.md#bitnami-docker-repository-migration) for migration details.
+See [Bitnami Docker repository migration](/self-managed/upgrade/helm/index.md#bitnami-docker-repository-migration) for migration details.
 
 #### Adjustments
 

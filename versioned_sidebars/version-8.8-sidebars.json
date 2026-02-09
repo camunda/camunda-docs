@@ -3478,51 +3478,51 @@
       "className": "sidebar-cta",
       "link": {
         "type": "doc",
-        "id": "self-managed/update/admin-upgrade-overview"
+        "id": "self-managed/upgrade/overview"
       },
       "items": [
-        "self-managed/update/prepare-for-upgrade",
+        "self-managed/upgrade/prepare-for-upgrade",
         {
           "type": "category",
           "label": "Helm upgrade",
           "link": {
             "type": "doc",
-            "id": "self-managed/update/helm/index"
+            "id": "self-managed/upgrade/helm/index"
           },
           "items": [
-            "self-managed/update/helm/upgrade-hc-870-880",
-            "self-managed/update/helm/upgrade-hc-870-880-dual-region"
+            "self-managed/upgrade/helm/upgrade-hc-870-880",
+            "self-managed/upgrade/helm/upgrade-hc-870-880-dual-region"
           ]
         },
-        "self-managed/update/manual/upgrade",
+        "self-managed/upgrade/manual/index",
         {
           "type": "category",
           "label": "Component upgrade",
           "link": {
             "type": "doc",
-            "id": "self-managed/update/components/introduction"
+            "id": "self-managed/upgrade/components/index"
           },
           "items": [
-            "self-managed/update/components/870-to-880",
+            "self-managed/upgrade/components/870-to-880",
             {
               "type": "category",
               "label": "Optimize",
               "link": {
                 "type": "doc",
-                "id": "self-managed/update/components/optimize/index"
+                "id": "self-managed/upgrade/components/optimize/index"
               },
               "items": [
-                "self-managed/update/components/optimize/870-to-880",
-                "self-managed/update/components/optimize/changes-in-88"
+                "self-managed/upgrade/components/optimize/870-to-880",
+                "self-managed/upgrade/components/optimize/changes-in-88"
               ]
             },
             {
               "Database": [
-                "self-managed/update/components/elasticsearch/changes-in-elasticsearch-8"
+                "self-managed/upgrade/components/elasticsearch/changes-in-elasticsearch-8"
               ]
             },
-            "self-managed/update/components/keycloak/keycloak-compatibility",
-            "self-managed/update/components/importer"
+            "self-managed/upgrade/components/keycloak/keycloak-compatibility",
+            "self-managed/upgrade/components/importer"
           ]
         }
       ]

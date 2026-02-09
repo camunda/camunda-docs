@@ -131,10 +131,10 @@ Ready to upgrade and migrate? Complete the following steps:
 
 1. Coordinate your platform and development teams:
    - For Self-Managed environments, ensure your Orchestration Cluster is upgraded before upgrading your application clients.
-   - Start with the [Self-Managed upgrade overview](/self-managed/update/overview.md) to plan the upgrade.
+   - Start with the [Self-Managed upgrade overview](/self-managed/upgrade/overview.md) to plan the upgrade.
    - Review the relevant component and deployment upgrade guides as part of the cluster upgrade process:
-     - [Components upgrade guides](/self-managed/update/components/introduction.md)
-     - [Helm upgrade guides](/self-managed/update/helm/index.md)
+     - [Components upgrade guides](/self-managed/upgrade/components/index.md)
+     - [Helm upgrade guides](/self-managed/upgrade/helm/index.md)
 
 2. Review the migration guides relevant to your setup:
    - [Migrate from V1 APIs to the Orchestration Cluster API](./migrate-to-camunda-api/)

@@ -179,7 +179,7 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 ##### Bitnami Docker repository migration
 
 The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
-See [Bitnami Docker repository migration](/self-managed/update/helm/index.md#bitnami-docker-repository-migration) for migration details.
+See [Bitnami Docker repository migration](/self-managed/upgrade/helm/index.md#bitnami-docker-repository-migration) for migration details.
 
 ### New base path for Operate and Tasklist web applications
 

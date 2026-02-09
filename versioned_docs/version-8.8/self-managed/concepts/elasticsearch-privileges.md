@@ -24,7 +24,7 @@ To use the [backup feature](/self-managed/operational-guides/backup-restore/back
 
 ### Update privileges
 
-When [updating](/self-managed/update/components/introduction.md) to a newer version of Camunda 8 which requires data migration, the following are required:
+When [updating](/self-managed/upgrade/components/index.md) to a newer version of Camunda 8 which requires data migration, the following are required:
 
 - `manage_pipeline` - Allows any data transformations to occur when updating.
 - `manage_index_templates` - See [cluster privileges](#cluster-privileges).
