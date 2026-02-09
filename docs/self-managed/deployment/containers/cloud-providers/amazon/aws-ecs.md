@@ -67,6 +67,18 @@ After completing this guide, you will have:
 
 Both subnet types are distributed across three availability zones in a single AWS region, supporting a high-availability architecture.
 
+:::warning HTTPS
+
+To keep dependencies minimal and non-blocking for a quick start, this reference architecture omits a custom domain and TLS configuration.
+
+You can easily add TLS by attaching an AWS Certificate Manager (ACM) certificate to the Application Load Balancer (ALB). For details, see the AWS documentation on [creating an HTTPS listener](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html).
+
+Information on configuring a custom domain and understanding the ALB DNS name is available in the [Application Load Balancer documentation](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#dns-name).
+
+Without these additions, information is transmitted in plaintext and is therefore insecure.
+
+:::
+
 ## Prerequisites
 
 - **AWS account** – An AWS account to provision resources with permissions for **ecs**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **rds** services.
@@ -141,8 +153,6 @@ To use another version of the reference architecture, change the branch. For exa
 
 With the reference architecture, you can reuse and extend the provided Terraform examples. This flexible implementation avoids the constraints of relying on Terraform modules maintained by third-party developers.
 
-You'll run all commands in the following steps from `camunda-deployment-references/aws/containers/ecs-single-region-fargate/`.
-
 ## Initialize Terraform
 
 1. Change to the `terraform/cluster` subfolder:
@@ -161,19 +171,13 @@ Terraform will now use the S3 bucket to manage the state file, ensuring secure a
 
 ## Create resources
 
-1. Perform a final initialization to apply any changes made throughout this guide:
-
-   ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
-   ```
-
-2. Plan the configuration files:
+1. Plan the configuration files:
 
    ```bash
    terraform plan -out cluster.plan # describe what will be created
    ```
 
-3. After reviewing the plan, you can confirm and apply the changes:
+2. After reviewing the plan, you can confirm and apply the changes:
 
    ```bash
    terraform apply cluster.plan     # apply the creation
@@ -188,56 +192,23 @@ With this, Terraform provisions:
 
 This process may take 20–30 minutes to complete.
 
-## 4. Verify connectivity to Camunda 8
+## Connect to Camunda 8
 
-Using Terraform, you can obtain the HTTP endpoint of the Application Load Balancer and interact with Camunda through the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+1. Extract the Application Load Balancer (ALB) endpoint from the state file, and access it in your browser:
 
-:::warning HTTPS
+   ```sh
+   terraform output -raw alb_endpoint
+   ```
 
-To keep dependencies minimal and non-blocking for a quick start, this reference architecture omits a custom domain and TLS configuration.
-
-You can easily add TLS by attaching an AWS Certificate Manager (ACM) certificate to the Application Load Balancer (ALB). For details, see the AWS documentation on [creating an HTTPS listener](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html).
-
-Information on configuring a custom domain and understanding the ALB DNS name is available in the [Application Load Balancer documentation](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#dns-name).
-
-Without these additions, information is transmitted in plaintext and is therefore insecure.
-
-:::
-
-1. Navigate to the Terraform folder:
-
-```sh
-cd camunda-deployment-references-main/aws/containers/ecs-single-region-fargate/terraform
-```
-
-2. Retrieve the Application Load Balancer output:
-
-```sh
-terraform output -raw alb_endpoint
-```
-
-The ALB exposes both the Orchestration and Connectors through the same port and uses listener rules with weights to determine the path they're on.
-
-- ALB:80
-  - `/*` routes to the Orchestration Cluster UI/REST API
-  - `/connectors*` routes to the Connectors
-- ALB:9600 (optional - not recommended to be exposed publicly)
-  - `/*` routes to the Orchestration Cluster
-  - Connectors has the management port with the web server combined by default
-- NLB:26500 (TCP)
-  - Exposes the Orchestration Cluster - Zeebe Gateway with gRPC
-
-3. Access the URL of `alb_endpoint` which should present you a login screen.
-
-   The admin user name as pre-configured in `camunda.tf` is `admin` and the password is randomly generated and can be retrieved via:
+2. Log in with these credentials:
+   - **Username:** `admin`
+   - **Password:** Extract the randomly-generated password from the state file:
 
    ```sh
    terraform output -raw admin_user_password
    ```
 
-4. Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to communicate with Camunda:
-
-   Follow the example in the [Orchestration Cluster REST API documentation](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
+3. Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to communicate with Camunda.
 
 ## Troubleshooting
 
