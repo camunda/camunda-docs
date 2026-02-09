@@ -1,5 +1,5 @@
 ---
-id: upgrade-hc-870-880-dual-region
+id: 870-to-880-dual-region
 sidebar_label: Dual-region upgrade
 title: Upgrade a dual-region deployment from 8.7 to 8.8 using Helm
 description: "Additional considerations when upgrading a dual-region Camunda 8 Self-Managed deployment from version 8.7 to 8.8."
@@ -8,7 +8,7 @@ toc_max_heading_level: 3
 
 Upgrading a Helm-based dual-region Camunda 8 Self-Managed deployment from 8.7 to 8.8 requires additional configuration beyond the standard upgrade.
 
-Use the [Upgrade from 8.7 to 8.8](./helm-870-880.md) guide as your baseline.  
+Use the [Upgrade from 8.7 to 8.8](./870-to-880.md) guide as your baseline.  
 If you have custom or non-default component configuration, refer to the [component upgrade guide](../components/870-to-880.md).
 
 :::info
@@ -82,7 +82,7 @@ In 8.8, basic authentication applies at the Orchestration Cluster level. If you 
 
 1. Migrate users to [embedded Identity](/self-managed/components/orchestration-cluster/identity/overview.md).
 2. Define initial users to avoid falling back to default `demo:demo` credentials.
-3. Review the [Authentication section](./helm-870-880.md#authentication) in the main upgrade guide.
+3. Review the [Authentication section](./870-to-880.md#authentication) in the main upgrade guide.
 
 ### API security defaults
 
@@ -118,7 +118,7 @@ Dual-region setups vary. The following scenarios may affect how you run the upgr
 
 - **Identity migration:**  
   If Identity is enabled:
-  - Enable [Identity migration](./helm-870-880.md#identity-migration).
+  - Enable [Identity migration](./870-to-880.md#identity-migration).
   - Follow the [secret extraction guidance](/self-managed/deployment/helm/configure/secret-management.md#extract-plaintext-values-and-reference-them-as-kubernetes-secrets).
 
 - **Helm-managed single region exporters:**  

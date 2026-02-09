@@ -3490,8 +3490,8 @@
             "id": "self-managed/upgrade/helm/index"
           },
           "items": [
-            "self-managed/upgrade/helm/upgrade-hc-870-880",
-            "self-managed/upgrade/helm/upgrade-hc-870-880-dual-region"
+            "self-managed/upgrade/helm/870-to-880",
+            "self-managed/upgrade/helm/870-to-880-dual-region"
           ]
         },
         "self-managed/upgrade/manual/index",
