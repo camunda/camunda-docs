@@ -18,7 +18,7 @@ This page guides you through the manual installation of Camunda 8 on a local mac
   - Java Virtual Machine. See [supported environments](/reference/supported-environments.md) for version details.
   - Configure the web applications to use an available port. By default, the Orchestration Cluster listens on port 8080.
 - Secondary storage
-  - **Elasticsearch or Amazon OpenSearch** (default): See [supported environments](/reference/supported-environments.md).
+  - **Elasticsearch or OpenSearch** (default): See [supported environments](/reference/supported-environments.md).
     - For deployment options, see the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/deploy).
   - **RDBMS** (PostgreSQL, MariaDB, Oracle, MySQL, SQL Server): See [RDBMS production architecture](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) and [manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md).
 

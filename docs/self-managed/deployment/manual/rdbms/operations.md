@@ -16,7 +16,7 @@ Operate and maintain RDBMS secondary storage for manual Camunda 8 installations 
 - Use vendor-recommended backup procedures.
 - Backup frequency depends on your RPO (Recovery Point Objective).
 - Database backups capture consistent state (Camunda flushes synchronously).
-- Zeebe checkpoint position is stored in RDBMS.
+- Zeebe exporter position is stored in RDBMS.
 
 **Restore procedure**:
 
@@ -48,7 +48,7 @@ DBA must apply schema changes manually using scripts. Zeebe fails to start if sc
 **Liquibase migration complete:**
 
 ```
-io.camunda.application.commons.rdbms.MyBatisConfiguration - Initializing Liquibase for RDBMS with global table trimmedPrefix ''.
+[INFO] io.camunda.application.commons.rdbms.MyBatisConfiguration - Initializing Liquibase for RDBMS with global table trimmedPrefix ''.
 ```
 
 No errors in Liquibase logs means migration was successful.
@@ -56,11 +56,11 @@ No errors in Liquibase logs means migration was successful.
 **RdbmsExporter running:**
 
 ```
-io.camunda.exporter.rdbms.RdbmsExporter - [RDBMS Exporter] RdbmsExporter created with Configuration: flushInterval=PT0.5S, queueSize=1000
-io.camunda.exporter.rdbms.RdbmsExporter - [RDBMS Exporter] Exporter opened with last exported position 126
+[INFO] io.camunda.exporter.rdbms.RdbmsExporter - [RDBMS Exporter] RdbmsExporter created with Configuration: flushInterval=PT0.5S, queueSize=1000
+[INFO] io.camunda.exporter.rdbms.RdbmsExporter - [RDBMS Exporter] Exporter opened with last exported position 126
 ```
 
-No errors in RdbmsExporter logs means the exporter is healthy. More details about exported records require DEBUG log level.
+No errors in RdbmsExporter logs means the exporter is healthy. For more details about exported records, enable DEBUG log level.
 
 ### Common failure modes
 
@@ -95,7 +95,7 @@ When started with `auto-ddl=false` on an empty database, the RdbmsExporter throw
 # Lower flush interval = lower latency, more frequent writes
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_FLUSHINTERVAL=PT0.1S
 
-# Higher queue size = better throughput, more memory
+# Higher queue size = higher throughput, more memory
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_QUEUESIZE=5000
 ```
 
@@ -119,6 +119,7 @@ Consult your database vendor's guides:
 - **Oracle**: SGA size, parallel execution
 - **MySQL/MariaDB**: Buffer pool sizing
 - **SQL Server**: Memory configuration
+- **AWS Aurora**: Consult AWS RDS documentation for Aurora-specific tuning
 
 ## Security
 
@@ -155,19 +156,9 @@ GRANT CREATE ON DATABASE camunda TO camunda;
 
 Avoid DROP, TRUNCATE, SUPERUSER, or other unnecessary privileges.
 
-## Production checklist
+## Production deployment
 
-Before deploying to production:
-
-- [ ] RDBMS backup strategy defined and tested
-- [ ] Schema initialization validated (autoDDL vs. manual)
-- [ ] TLS/SSL configured for database connections
-- [ ] Database user permissions set to minimum required
-- [ ] Connection pooling tuned for expected load
-- [ ] Monitoring and alerting configured
-- [ ] Recovery procedure tested with backup/restore
-- [ ] HA topology deployed (3+ Zeebe brokers across AZs)
-- [ ] Optimize excluded (not supported with RDBMS secondary storage)
+Before deploying to production, review the [production architecture guidance](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) for recommended topologies, and refer to the verification steps in the [troubleshooting section](#verification-and-troubleshooting) above to validate your RDBMS setup is healthy.
 
 ## Next steps
 

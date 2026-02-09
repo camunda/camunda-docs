@@ -20,13 +20,13 @@ Configure RDBMS secondary storage drivers, connections, and initial schema for *
 
 Camunda bundles these JDBC drivers for redistribution:
 
-| Database             | Driver artifact                        | Version | User-supplied needed? |
-| -------------------- | -------------------------------------- | ------- | --------------------- |
-| PostgreSQL           | `org.postgresql:postgresql`            | 42.7.8  | Optional              |
-| MariaDB              | `org.mariadb.jdbc:mariadb-java-client` | 3.5.7   | Optional              |
-| Microsoft SQL Server | `com.microsoft.sqlserver:mssql-jdbc`   | 12.10.2 | Optional              |
-| H2                   | `com.h2database:h2`                    | 2.3.232 | Optional              |
-| AWS Aurora JDBC      | Bundled                                | 2.6.8   | Optional              |
+| Database             | Driver artifact                        |
+| -------------------- | -------------------------------------- |
+| PostgreSQL           | `org.postgresql:postgresql`            |
+| MariaDB              | `org.mariadb.jdbc:mariadb-java-client` |
+| Microsoft SQL Server | `com.microsoft.sqlserver:mssql-jdbc`   |
+| H2                   | `com.h2database:h2`                    |
+| AWS Aurora JDBC      | Bundled                                |
 
 You can optionally supply your own version of any bundled driver for flexibility or compliance requirements.
 
@@ -95,7 +95,7 @@ export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_AUTO_DDL=false
 
 Then apply SQL/Liquibase scripts manually using your DBA tools. See [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
 
-## Component configuration
+## Orchestration Cluster configuration
 
 ### Zeebe
 
@@ -120,17 +120,17 @@ export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD="your-secure-password"
 
 ### Liquibase (recommended)
 
-Liquibase is the recommended approach for schema management. It is supported for all components and automatically applies migrations on startup (when `auto-ddl=true`, the default).
+Liquibase is the recommended approach for schema management. It is supported for the Orchestration Cluster and automatically applies migrations on startup (when `auto-ddl=true`, the default).
 
-When Liquibase runs successfully, you'll see this log entry:
+When Liquibase runs successfully, you'll see this log entry at INFO level:
 
 ```
-io.camunda.application.commons.rdbms.MyBatisConfiguration - Initializing Liquibase for RDBMS with global table trimmedPrefix ''.
+[INFO] io.camunda.application.commons.rdbms.MyBatisConfiguration - Initializing Liquibase for RDBMS with global table trimmedPrefix ''.
 ```
 
 ### Manual SQL execution
 
-Manual SQL execution is equally supported. When using manual SQL:
+Manual SQL execution is supported as an alternative. When using manual SQL:
 
 - You must strictly adhere to the bundled scripts in the order provided.
 - Camunda cannot guarantee future updates will work if you modify scripts.

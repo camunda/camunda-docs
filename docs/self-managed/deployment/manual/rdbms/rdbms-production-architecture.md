@@ -5,7 +5,7 @@ title: Production architecture for Camunda 8 with RDBMS
 description: "Reference architecture for deploying Camunda 8 Self-Managed in production using an external RDBMS as secondary storage."
 ---
 
-Understand the recommended architecture for running Camunda 8 Self-Managed in production with a relational database (RDBMS) as secondary storage, including supported topologies, component interactions, and critical constraints.
+Understand reference architectures for running Camunda 8 Self-Managed in production with a relational database (RDBMS) as secondary storage, including supported topologies, Orchestration Cluster interactions, and critical constraints.
 
 ## Recommended topology
 
@@ -41,7 +41,7 @@ Orchestration Cluster (HA)
 
 - Zeebe processes work
 - RdbmsExporter flushes state to RDBMS
-- Operate, Tasklist, Connectors read from shared RDBMS schema
+- Operate and Tasklist access the Orchestration Cluster API and do not directly access the database (v2 API)
 
 ## When Elasticsearch/OpenSearch is required
 
@@ -49,7 +49,7 @@ Elasticsearch or OpenSearch is required **only for Optimize**. When Optimize is 
 
 - Deploy Elasticsearch/OpenSearch alongside your RDBMS
 - Enable Zeebe exporter to push analytics data
-- All other components (Zeebe, Operate, Tasklist, Connectors) use RDBMS only
+- Zeebe, Operate, and Tasklist use RDBMS as secondary storage
 
 Without Optimize: RDBMS-only stack is fully supported.
 
@@ -75,16 +75,15 @@ Without Optimize: RDBMS-only stack is fully supported.
 
 ✅ **HA Zeebe cluster + external managed RDBMS** (recommended for production)
 
-✅ **Separate RDBMS per component** (advanced use case: different backup schedules, HA policies, compliance requirements per component)
+✅ **Separate RDBMS per Orchestration Cluster or team** (advanced use case: different backup schedules, HA policies, compliance requirements)
 
 ✅ **Managed database services** (AWS Aurora, Azure Database, GCP Cloud SQL)
 
-## Component-specific notes
+## Orchestration Cluster component details
 
 - **Zeebe**: Exporter flushes at configurable intervals (default 0.5s)
-- **Operate/Tasklist**: Read-only access to shared RDBMS schema, stateless, scalable independently
+- **Operate and Tasklist**: Access the Orchestration Cluster API (v2), stateless, scalable independently
 - **Optimize**: Requires Elasticsearch/OpenSearch (cannot use RDBMS)
-- **Connectors**: Stateless, reads process definitions from RDBMS
 
 ## Next steps
 
