@@ -154,18 +154,6 @@ Granular task-level authorization is now integrated into the Tasklist UI and the
 
 This feature strengthens security and usability, and provides a clear, consistent, and secure user experience for task workers, managers, and integrations.
 
-#### Pre-configure Identity entities
-
-<!-- https://github.com/camunda/product-hub/issues/2446 -->
-
-You can now use declarative configuration for all Identity entities in the Orchestration Cluster, such as groups, tenants, roles, authorizations, and assignments. Previously, you could only use this for users, mapping rules, and default role memberships.
-
-#### Switch RocksDB memory to per-broker
-
-<!-- https://github.com/camunda/product-hub/issues/3304 -->
-
-_Release notes needed_
-
 #### Schedule backups with the Orchestration Cluster
 
 <!-- https://github.com/camunda/product-hub/issues/3032 -->
@@ -191,15 +179,6 @@ In Camunda 8.9, the remaining unified configuration project property changes are
 :::note
 Only the first partial set of the unified configuration project properties was introduced in Camunda 8.8.
 :::
-
-#### User operations audit log
-
-<!-- https://github.com/camunda/product-hub/issues/1732 -->
-
-A new centralized, queryable audit log records all critical user and client operations across process, identity, and user task domains.
-
-- Teams can trace who performed each action and when, what was affected, and if the action was successful.
-- Audit entries are available via Orchestration Cluster APIs, and integrated into Operate, Tasklist, and Identity with built-in authorization controls.
 
 ### Process instance migration
 
