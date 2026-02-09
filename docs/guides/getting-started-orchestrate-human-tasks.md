@@ -30,39 +30,26 @@ import TabItem from '@theme/TabItem';
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 import Install from './react-components/\_install-c8run.md'
 
-This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
+This tutorial introduces you to the basics of [human task orchestration](../reference/glossary.md#human-task) using either Camunda 8 Self-Managed or SaaS.
 
-Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
+## About
+
+You will create a simple process to decide on dinner, and drive the process flow according to that decision.
+
+<img src={OperateHumanTasks} alt="Process instance monitoring in Operate" />
 
 :::note
 If you prefer a video-based learning experience or a more complex example, visit [this Camunda Academy course](https://bit.ly/3PJJocB).
 :::
 
-This guide introduces you to the basics of human task orchestration. You will create a simple process to decide on dinner, and drive the process flow according to that decision.
+## Prerequisites
 
-<Tabs groupId="install" defaultValue="saas" queryString values={
-[
-{label: 'Self-Managed', value: 'sm' },
-{label: 'SaaS', value: 'saas' },
-]}>
-<TabItem value="sm">
+You must have Camunda 8 (version 8.8 or newer) running, using either:
 
-<details>
-<summary>Have you installed Camunda yet?</summary>
-<Install/>
-</details>
-</TabItem>
-<TabItem value="saas">
-<details>
-<summary>Have you signed up for Camunda yet?</summary>
-<SaasPrereqs/>
-</details>
-</TabItem>
-</Tabs>
+- [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).
+- [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).
 
-Take the following five steps to create and run your first process with a human in the loop:
-
-## Step 1: Create a new process
+## Create a new process
 
 In this step, you will design a process that demonstrates how to route the process flow based on a user decision. In this example, you will create a process to decide what is for dinner.
 
@@ -120,7 +107,7 @@ Variables are part of a process instance and represent the data of the instance.
 
 <!-- TODO note that processes can be of any complexity, and link to advanced guides -->
 
-## Step 2: Design a form
+## Design a form
 
 You have now designed the process. To allow the user to make the decision, you will now design a [form](../components/modeler/forms/camunda-forms-reference.md). Forms can be added to user tasks and start events to capture user input, and the user input can be used to route the process flow, to make calls to APIs, or to orchestrate your services.
 
@@ -174,7 +161,7 @@ If the properties panel for your form doesn't open automatically, navigate to **
 </TabItem>
 </Tabs>
 
-## Step 3: Link the form to your process
+## Link the form to your process
 
 Once the form is designed, you must link it to your process.
 
@@ -208,7 +195,7 @@ If the properties panel for your task doesn't open automatically, navigate to **
 Forms linked in the user task are deployed together with the process. If you make changes to a form, you have to deploy the referencing process again to make the changes appear.
 :::
 
-## Step 4: Run your process
+## Run your process
 
 Your process is now ready to run. Given its human-centric nature, it is well suited to be run in Tasklist. In order to make it accessible from Tasklist, the process must be deployed first.
 
@@ -276,7 +263,7 @@ In production, Operate is used to monitor both long-running and straight-through
 </TabItem>
 </Tabs>
 
-## Step 5: Complete a user task
+## Complete a user task
 
 When the process instance arrives at the user task, a new user task instance is created at Zeebe. The process instance stops at this point and waits until the user task is completed. Applications like [Tasklist](/components/tasklist/introduction-to-tasklist.md) can be used by humans to complete these tasks. In this last step, you will open Tasklist to run the user task you created.
 
