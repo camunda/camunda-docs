@@ -263,7 +263,7 @@ To request a missing feature, please [contact us](/reference/contact.md).
 
 ## OIDC provider known limitations
 
-Audience validation relies on the `aud` (audience) claim in access tokens. As required by the [OpenID Connect Core 1.0 specification](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation), this claim must be present for token validation to succeed. However, some OIDC providers do not include it in all token types — particularly in machine-to-machine (M2M) access tokens issued via the OAuth2 Client Credentials flow.
+Audience validation in Camunda relies on the `aud` (audience) claim in JWT access tokens, and this claim must be present for token validation to succeed (see the `aud` claim definition in [RFC 7519, JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3)). However, some OIDC providers do not include it in all token types — particularly in machine-to-machine (M2M) access tokens issued via the OAuth2 Client Credentials flow.
 
 ### AWS Cognito
 
