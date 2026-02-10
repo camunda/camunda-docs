@@ -26,13 +26,17 @@ To learn more about the resulting infrastructure, read [ECS Architecture](./abou
 
 ## Prerequisites
 
-- **AWS account** – An AWS account to provision resources with permissions for **ecs**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **rds** services.
+- An AWS account to provision resources.
+  - This requires read/write permissions for: `ecs`, `iam`, `elasticloadbalancing`, `elasticfilesystem`, `secretsmanager`, `servicediscovery`, `ec2`, `kms`, `logs`, `s3`, and `rds` services. Refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/example/policy.json) for details.
   - The user who creates AWS resources retains administrative access to them. Therefore, to ensure the resources are properly managed and owned by a single identity, Camunda recommends you use a dedicated AWS IAM user for Terraform to ensure better control and security.
-  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/example/policy.json).
-- **Terraform** – Infrastructure as code tool (v1.7 or later). [Install Terraform](https://developer.hashicorp.com/terraform/install).
-- **AWS CLI** – Command-line tool to manage AWS resources, used for `local-exec` to trigger the initial Aurora PostgreSQL user seeding. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+- [Terraform](https://developer.hashicorp.com/terraform/install) (v1.7 or later) for managing infrastructure as code.
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) to manage AWS resources.
+- [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html):
+  - Ensure at least **3 Elastic IPs** (one per availability zone).
+  - Verify quotas for **VPCs, EC2 instances, and storage**.
+  - Request increases if needed via the [AWS console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html). Costs apply only for resources you provision and use.
 
-For the exact tool versions used during testing, refer to the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
+Refer to [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) for the exact tool versions used during testing.
 
 ## Set AWS credentials
 
