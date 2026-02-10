@@ -34,10 +34,10 @@ These operations belong to the category `USER_TASKS`. The following are recorded
 
 | Operation         | Entity              | Tracked rejections |
 | :---------------- | :------------------ | :----------------- |
+| Update task       | User task           | INVALID_STATE      |
 | Assign task       | User task           | INVALID_STATE      |
 | Unassign task     | User task           | INVALID_STATE      |
 | Complete task     | User task           | INVALID_STATE      |
-| Update task       | User task           | INVALID_STATE      |
 | Command rejection | Command entity type | –                  |
 
 ### ADMIN operations
@@ -49,26 +49,26 @@ These operations belong to the category `ADMIN`. The following are recorded in t
 | Operation            | Entity              | Tracked rejections |
 | :------------------- | :------------------ | :----------------- |
 | Create Authorization | Authorization       | –                  |
-| Delete Authorization | Authorization       | –                  |
 | Update Authorization | Authorization       | –                  |
+| Delete Authorization | Authorization       | –                  |
 | Create User          | User                | –                  |
 | Update User          | User                | –                  |
 | Delete User          | User                | –                  |
 | Create Tenant        | Tenant              | –                  |
-| Assign Tenant        | Tenant              | –                  |
-| Unassign Tenant      | Tenant              | –                  |
 | Update Tenant        | Tenant              | –                  |
 | Delete Tenant        | Tenant              | –                  |
+| Assign Tenant        | Tenant              | –                  |
+| Unassign Tenant      | Tenant              | –                  |
 | Create Role          | Role                | –                  |
-| Delete Role          | Role                | –                  |
 | Update Role          | Role                | –                  |
+| Delete Role          | Role                | –                  |
 | Assign Role          | Role                | –                  |
 | Unassign Role        | Role                | –                  |
 | Create Group         | Group               | –                  |
 | Update Group         | Group               | –                  |
+| Delete Group         | Group               | –                  |
 | Assign Group         | Group               | –                  |
 | Unassign Group       | Group               | –                  |
-| Delete Group         | Group               | –                  |
 | Create Mapping Rule  | MappingRule         | –                  |
 | Update Mapping Rule  | MappingRule         | –                  |
 | Delete Mapping Rule  | MappingRule         | –                  |
