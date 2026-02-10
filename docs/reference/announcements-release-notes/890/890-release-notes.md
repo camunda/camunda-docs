@@ -151,6 +151,32 @@ You can now import large process applications (containing a maximum of 100 suppo
 
 <p className="link-arrow">[Import resources into Web Modeler](/components/modeler/web-modeler/modeling/importing-resources.md)</p>
 
+#### Shared global clipboard and duplicate elements
+
+<!-- https://github.com/bpmn-io/bpmn-js/issues/1709 -->
+<!-- https://github.com/camunda/camunda-modeler/issues/4142 -->
+
+In Desktop Modeler and Web Modeler, you can copy-paste BPMN elements seamlessly between Camunda 7/8 diagrams and across clipboard-enabled BPMN tools/websites, and also quickly duplicate via **Cmd+D** (Mac) / **Ctrl+D** (Windows).
+
+#### Tabs autosave in Desktop Modeler
+
+<!-- https://github.com/bpmn-io/bpmn-js/issues/1709 -->
+<!-- https://github.com/camunda/camunda-modeler/issues/4142 -->
+
+The tabs autosave feature automatically saves diagram changes when you switch tabs in Desktop Modeler or when the app loses focus (for example, app switch, window blur). This ensures work is saved immediately, making it visible to your IDE and other tools without manual intervention.
+
+### Migration from Camunda 7 to Camunda 8
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda 7 migration">Camunda 7 migration</span></div>
+
+#### Audit log coverage for Camunda 7 to Camunda 8 migrations
+
+The audit log migrator automatically converts Camunda 7 `UserOperationLog` entries to Camunda 8 AuditLog format, preserving the complete history of user operations including who performed actions, what entities were affected (process instances, tasks, variables, decisions), operation types (create, update, delete, assign, complete), timestamps, and annotations.
+
+This ensures uninterrupted audit trail continuity across the migration, enabling customers to meet compliance requirements and maintain operational visibility without manual data reconstruction or workarounds.
+
+<p className="link-arrow">[Data Migrator history migration coverage](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations.md#camunda-8-history-migration-coverage)</p>
+
 ### Orchestration Cluster
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
