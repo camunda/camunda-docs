@@ -410,7 +410,7 @@ sudo kubefwd services -n "camunda"
 Now, you can reach services directly, for example:
 
 - **Identity**: `http://camunda-identity/managementidentity`
-- **Keycloak**: `http://keycloak-service:8080/auth`
+- **Keycloak**: `http://keycloak-service:18080/auth`
 - **Zeebe Gateway gRPC**: `camunda-zeebe-gateway:26500`
 
 You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily, then restores the file when it exits.
