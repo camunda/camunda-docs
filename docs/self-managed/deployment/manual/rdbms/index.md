@@ -12,7 +12,7 @@ Manual installation is **not** supported for Kubernetes. If you run on Kubernete
 :::
 
 :::caution
-RDBMS is the **only** supported secondary storage in this setup. There is no Elasticsearch/OpenSearch fallback and no mixed storage modes.
+RDBMS is configured as the only secondary storage for this deployment. You cannot mix RDBMS with Elasticsearch/OpenSearch, and data migration between storage types is not supported.
 :::
 
 ## Supported installation targets

@@ -11,21 +11,41 @@ Understand reference architectures for running Camunda 8 Self-Managed in product
 
 For production deployments with RDBMS, Camunda recommends a **HA Zeebe cluster backed by an external managed RDBMS**:
 
-```
-Orchestration Cluster (HA)
-├── Zeebe Broker 1 (AZ-1)
-├── Zeebe Broker 2 (AZ-2)
-├── Zeebe Broker 3 (AZ-3)
-└── Operate, Tasklist, Connectors (stateless)
-         ↓
-    External RDBMS
-    (PostgreSQL, MariaDB, Oracle, MySQL, SQL Server)
-    HA: 3-way replication across AZs
+```mermaid
+graph TB
+    subgraph oc["Orchestration Cluster (HA)"]
+        direction TB
+        subgraph brokers["Zeebe Brokers"]
+            b1["Broker 1<br/>(AZ-1)"]
+            b2["Broker 2<br/>(AZ-2)"]
+            b3["Broker 3<br/>(AZ-3)"]
+        end
+        stateless["<b>Stateless Components</b><br/>Operate • Tasklist<br/>Identity • Connectors"]
+
+        b1 -.->|gRPC| b2
+        b2 -.->|gRPC| b3
+        b1 -.->|gRPC| b3
+    end
+
+    subgraph storage["Secondary Storage"]
+        rdbms["<b>External RDBMS</b><br/>PostgreSQL • MariaDB<br/>Oracle • MySQL • SQL Server<br/><br/>HA: 3-way replication<br/>across AZs"]
+        opt["<b>Elasticsearch/OpenSearch</b><br/>(for Optimize only)"]
+    end
+
+    api["Clients & Workers<br/>gRPC / HTTP"]
+
+    stateless -->|v2 REST API| api
+    brokers -->|Export state<br/>RdbmsExporter| rdbms
+    brokers -->|Export analytics<br/>Optional| opt
+
+    style oc fill:#e1f5ff
+    style storage fill:#fff3e0
+    style api fill:#f3e5f5
 ```
 
 ### Key characteristics
 
-**Zeebe clustering**
+**Clustering**
 
 - Minimum three brokers for production HA
 - Each broker in separate availability zone
@@ -39,8 +59,8 @@ Orchestration Cluster (HA)
 
 **Data flow**
 
-- Zeebe processes work
-- RdbmsExporter flushes state to RDBMS
+- Processes are executed
+- State is flushed to RDBMS
 - Operate and Tasklist access the Orchestration Cluster API and do not directly access the database (v2 API)
 
 ## When Elasticsearch/OpenSearch is required
@@ -48,8 +68,8 @@ Orchestration Cluster (HA)
 Elasticsearch or OpenSearch is required **only for Optimize**. When Optimize is enabled:
 
 - Deploy Elasticsearch/OpenSearch alongside your RDBMS
-- Enable Zeebe exporter to push analytics data
-- Zeebe, Operate, and Tasklist use RDBMS as secondary storage
+- Enable the Elasticsearch or OpenSearch exporter to push analytics data
+- The Orchestration Cluster uses RDBMS as secondary storage
 
 Without Optimize: RDBMS-only stack is fully supported.
 
@@ -57,7 +77,7 @@ Without Optimize: RDBMS-only stack is fully supported.
 
 ❌ **ES/OS ↔ RDBMS migration not supported**: Choose your secondary storage backend before production. No automated migration tools available.
 
-❌ **Mixed storage modes not supported**: All Zeebe brokers must use the same storage backend (cannot mix RDBMS and ES/OS).
+❌ **Uniform broker configuration required**: All brokers in a cluster must export to the same secondary storage backend. You can deploy both RDBMS and Elasticsearch/OpenSearch in the same environment (e.g., RDBMS for Zeebe, Elasticsearch/OpenSearch for Optimize), but each broker cluster must choose one.
 
 ❌ **v1 API not supported**: Only the v2 Orchestration Cluster REST API works with RDBMS. See [migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 
@@ -75,13 +95,11 @@ Without Optimize: RDBMS-only stack is fully supported.
 
 ✅ **HA Zeebe cluster + external managed RDBMS** (recommended for production)
 
-✅ **Separate RDBMS per Orchestration Cluster or team** (advanced use case: different backup schedules, HA policies, compliance requirements)
-
 ✅ **Managed database services** (AWS Aurora, Azure Database, GCP Cloud SQL)
 
 ## Orchestration Cluster component details
 
-- **Zeebe**: Exporter flushes at configurable intervals (default 0.5s)
+- **Zeebe**: Exports state to RDBMS at configurable intervals (default 0.5s)
 - **Operate and Tasklist**: Access the Orchestration Cluster API (v2), stateless, scalable independently
 - **Optimize**: Requires Elasticsearch/OpenSearch (cannot use RDBMS)
 

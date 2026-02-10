@@ -97,23 +97,27 @@ Then apply SQL/Liquibase scripts manually using your DBA tools. See [access SQL 
 
 ## Orchestration Cluster configuration
 
-### Zeebe
+The Orchestration Cluster uses a unified RDBMS configuration for all components (Zeebe, Operate, Tasklist, Identity).
+
+### Connection parameters
+
+All components share the same database connection:
+
+```bash
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda"
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME="camunda"
+export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD="your-secure-password"
+```
+
+### Zeebe exporter configuration
+
+Configure Zeebe's exporter flush behavior:
 
 ```bash
 export CAMUNDA_DATA_SNAPSHOTPERIOD=5m
 export CAMUNDA_DATA_EXPORTERS_RDBMS_CLASSNAME=io.camunda.exporter.rdbms.RdbmsExporter
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_FLUSHINTERVAL=PT0.5S
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_QUEUESIZE=1000
-```
-
-### Operate and Tasklist
-
-Use the same RDBMS connection as Zeebe (shared schema):
-
-```bash
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda"
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME="camunda"
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD="your-secure-password"
 ```
 
 ## Schema management
