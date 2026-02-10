@@ -275,7 +275,7 @@ Heavy querying of the secondary database can notably affect its performance, esp
 
 ### Configuration
 
-Batch operation behavior can be configured through broker settings under `zeebe.broker.experimental.engine.batchOperation.*`. All settings are validated at startup, and invalid values will cause the broker to fail with a descriptive error message.
+Batch operation behavior can be configured through broker settings under `zeebe.broker.experimental.engine.batchOperations.*`. All settings are validated at startup, and invalid values will cause the broker to fail with a descriptive error message.
 
 :::note
 Default values are optimized for typical workloads. Only adjust these settings if you experience performance issues or have specific requirements.
@@ -356,7 +356,7 @@ The engine enforces a 4MB per-record limit. If initialization queries return ver
 :::
 
 :::tip
-These settings appear in `broker.yaml.template` under `experimental.engine.batchOperation`. You can reference this template for additional context and examples.
+These settings appear in `broker.yaml.template` under `experimental.engine.batchOperations`. You can reference this template for additional context and examples.
 :::
 
 #### Exporter configuration
