@@ -19,6 +19,34 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 39
+
+### Publication date
+
+Feb 10, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `fast-xml-parser` used by Camunda Web Modeler was affected by [CVE-2026-25128](https://nvd.nist.gov/vuln/detail/CVE-2026-25128), a RangeError vulnerability that could crash any application that processes untrusted XML input.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.6, ≤ 8.7.15, or ≤ 8.6.24
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.7, 8.7.16, 8.6.25
+
+The fix was deployed to Web Modeler SaaS on February 2, 2026, 15:15 CET.
+
 ## Notice 38
 
 ### Publication date
