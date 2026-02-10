@@ -207,15 +207,15 @@ This section details everything related to building the connection to OpenSearch
 You can define a number of connection points in a cluster. Therefore, everything under `opensearch.connection.nodes` is a list of nodes Optimize can connect to. If you have built an OpenSearch cluster with several nodes, it is recommended to define several connection points so if one node fails, Optimize is still able to talk to the cluster.
 :::
 
-| YAML path                                      | Default value             | Description                                                                                       |
-| ---------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| database                                       | CAMUNDA_OPTIMIZE_DATABASE | elasticsearch                                                                                     | Type of database being used. Either elasticsearch or opensearch |
-| opensearch.connection.timeout                  | 10000                     | Maximum time without connection to OpenSearch that Optimize should wait until a timeout triggers. |
-| opensearch.connection.pathPrefix               |                           | The path prefix under which OpenSearch is available.                                              |
-| opensearch.connection.nodes[*].host            | localhost                 | The address/hostname under which the OpenSearch node is available.                                |
-| opensearch.connection.nodes[*].httpPort        | 9205                      | A port number used by OpenSearch to accept HTTP connections.                                      |
-| opensearch.connection.skipHostnameVerification | false                     | Determines whether the hostname verification should be skipped.                                   |
-| opensearch.connection.awsEnabled               | false                     | Determines if AWS credentials shall be used for authentication                                    |
+| YAML path                                      | Default value | Description                                                                                       |
+| ---------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------- |
+| database                                       | elasticsearch | Type of database being used. Either elasticsearch or opensearch                                   |
+| opensearch.connection.timeout                  | 10000         | Maximum time without connection to OpenSearch that Optimize should wait until a timeout triggers. |
+| opensearch.connection.pathPrefix               |               | The path prefix under which OpenSearch is available.                                              |
+| opensearch.connection.nodes[*].host            | localhost     | The address/hostname under which the OpenSearch node is available.                                |
+| opensearch.connection.nodes[*].httpPort        | 9205          | A port number used by OpenSearch to accept HTTP connections.                                      |
+| opensearch.connection.skipHostnameVerification | false         | Determines whether the hostname verification should be skipped.                                   |
+| opensearch.connection.awsEnabled               | false         | Determines if AWS credentials shall be used for authentication                                    |
 
 #### Index settings
 
