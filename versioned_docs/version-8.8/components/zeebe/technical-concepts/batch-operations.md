@@ -293,22 +293,22 @@ Controls how frequently the batch operation scheduler checks for work:
 
 Controls how batch operations split large result sets into manageable pieces:
 
-| Parameter           | Type | Default     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ------------------- | ---- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `chunkSize`         | int  | **`1000`**  | Maximum number of items per chunk. This controls both the number of items written per chunk record during initialization and the number of items stored per chunk in RocksDB state.<br/><br/>**Note:** Values > 5000 are discouraged due to exporter pressure and the 4MB record size limit. The broker logs a warning if this threshold is exceeded.<br/><br/>**RocksDB optimization:** A chunk size of 3000 item keys results in approximately 24KB (31KB with overhead), which aligns well with RocksDB's 32KB block size for efficient read/write performance. |
-| `queryPageSize`     | int  | **`10000`** | Page size when querying the secondary database during initialization.<br/><br/>**For Elasticsearch/OpenSearch:** This interacts with the default 10,000 result window limit.                                                                                                                                                                                                                                                                                                                                                                                       |
-| `queryInClauseSize` | int  | **`1000`**  | Maximum number of keys in a single IN clause when querying by key list.<br/><br/>**Use case:** Primarily for RDBMS-based secondary databases.                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Parameter           | Type | Default     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------- | ---- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chunkSize`         | int  | **`100`**   | Maximum number of items per chunk. This controls both the number of items written per chunk record during initialization and the number of items stored per chunk in RocksDB state.<br/><br/>**Note:** The default value of 100 is a reasonable tradeoff between the number of records and exporter performance. Values > 3000 are not recommended as the broker logs a warning. Higher values may lead to performance issues in the exporters and can exceed the 4MB record size limit.<br/><br/>**RocksDB optimization:** A chunk size of 3000 item keys results in approximately 24KB (31KB with overhead), which aligns well with RocksDB's 32KB block size for efficient read/write performance. |
+| `queryPageSize`     | int  | **`10000`** | Page size when querying the secondary database during initialization.<br/><br/>**For Elasticsearch/OpenSearch:** This interacts with the default 10,000 result window limit.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `queryInClauseSize` | int  | **`1000`**  | Maximum number of keys in a single IN clause when querying by key list.<br/><br/>**Use case:** Primarily for RDBMS-based secondary databases.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 #### Retry and error handling settings
 
 Controls how the system handles transient failures when querying the secondary database:
 
-| Parameter                 | Type     | Default     | Description                                                                                                                                                                                            |
-| ------------------------- | -------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `queryRetryMax`           | int      | **`3`**     | Maximum number of retry attempts for transient query failures (e.g., network timeouts, temporary database unavailability).<br/><br/>**To disable:** Set to `0` to disable retries.                     |
-| `queryRetryInitialDelay`  | Duration | **`PT1S`**  | Initial delay before the first retry attempt.<br/><br/>**Behavior:** Each subsequent retry uses exponential backoff.                                                                                   |
-| `queryRetryMaxDelay`      | Duration | **`PT60S`** | Maximum delay between retry attempts.<br/><br/>**Constraint:** Must be greater than or equal to `queryRetryInitialDelay`.<br/>**Purpose:** Prevents excessive wait times.                              |
-| `queryRetryBackoffFactor` | double   | **`2.0`**   | Multiplier applied to the delay between consecutive retries.<br/><br/>**Example:** With factor `2.0` and initial delay `PT1S`, retries occur at 1s, 2s, 4s, 8s, etc. (capped by `queryRetryMaxDelay`). |
+| Parameter                 | Type     | Default     | Description                                                                                                                                                                                                                                      |
+| ------------------------- | -------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `queryRetryMax`           | int      | **`0`**     | Maximum number of retry attempts for transient query failures (e.g., network timeouts, temporary database unavailability).<br/><br/>**Default behavior:** Retries are disabled by default (set to `0`). Set to a higher value to enable retries. |
+| `queryRetryInitialDelay`  | Duration | **`PT1S`**  | Initial delay before the first retry attempt.<br/><br/>**Behavior:** Each subsequent retry uses exponential backoff.                                                                                                                             |
+| `queryRetryMaxDelay`      | Duration | **`PT60S`** | Maximum delay between retry attempts.<br/><br/>**Constraint:** Must be greater than or equal to `queryRetryInitialDelay`.<br/>**Purpose:** Prevents excessive wait times.                                                                        |
+| `queryRetryBackoffFactor` | double   | **`2.0`**   | Multiplier applied to the delay between consecutive retries.<br/><br/>**Example:** With factor `2.0` and initial delay `PT1S`, retries occur at 1s, 2s, 4s, 8s, etc. (capped by `queryRetryMaxDelay`).                                           |
 
 #### Configuration example
 
@@ -318,17 +318,17 @@ zeebe:
   broker:
     experimental:
       engine:
-        batchOperation:
+        batchOperations:
           # Scheduler
           schedulerInterval: PT1S
 
           # Chunking and pagination
-          chunkSize: 1000
+          chunkSize: 100
           queryPageSize: 10000
           queryInClauseSize: 1000
 
           # Retry and error handling
-          queryRetryMax: 3
+          queryRetryMax: 0
           queryRetryInitialDelay: PT1S
           queryRetryMaxDelay: PT60S
           queryRetryBackoffFactor: 2.0
