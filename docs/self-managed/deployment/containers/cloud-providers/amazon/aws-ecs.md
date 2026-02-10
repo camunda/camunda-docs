@@ -1,7 +1,8 @@
 ---
 id: aws-ecs
-title: "Amazon ECS on AWS"
-description: "Learn how to install Camunda 8 on AWS ECS."
+title: "Deploy the Orchestration Cluster to Amazon ECS"
+sidebar_label: Amazon ECS
+description: "Install the Camunda 8 Orchestration Cluster on AWS Elastic Container Service using Fargate and Aurora PostgreSQL."
 ---
 
 Install the [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster) on AWS Elastic Container Service (ECS) using Fargate and Aurora
@@ -9,23 +10,19 @@ PostgreSQL.
 
 ## About
 
-You deploy a Self-Managed Camunda 8 environment using AWS managed services and then verify that all required components and connections are working.
+In this guide, you:
 
-This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) and Connectors for Camunda 8. Web Modeler, Optimize, and Console are currently not covered.
+- Deploy a Self-Managed Camunda 8 environment using AWS managed services.
+- Verify all required components and connections are working.
+
+To learn more about the resulting infrastructure, read [ECS Architecture](./about/ecs-architecture.md).
 
 ## Considerations
 
-:::warning Experimental release (8.9.0-alpha3)
-This guide is based on an experimental release. Content and results may change before the final 8.9.0 release.
-:::
-
-Running this guide incurs costs on your AWS account, primarily for ECS and Aurora. Use the AWS [pricing calculator](https://calculator.aws/#/) to estimate costs for your region.
-
-If you want a simpler setup, consider using [Camunda 8 SaaS](https://accounts.camunda.io/signup).
-
-## Outcome
-
-The result is a fully functioning Camunda Orchestration Cluster deployed in a high-availability setup using AWS ECS with Fargate and a managed Aurora PostgreSQL instance using IAM authentication. All ECS tasks share a single EFS volume dedicated to Camunda.
+- **Running this guide incurs costs on your AWS account**, primarily for ECS and Aurora. Use the AWS [pricing calculator](https://calculator.aws/#/) to estimate costs for your region.
+- If you want a simpler setup, consider using [Camunda 8 SaaS](https://accounts.camunda.io/signup).
+- This guide is based on an experimental release, beginning with Camunda 8.9.0-alpha3. **Content and results may change before the final 8.9.0 release.**
+- Only the Orchestration Cluster is included. Web Modeler, Optimize, and Console are out-of-scope for this guide.
 
 ## Prerequisites
 
