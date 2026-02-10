@@ -206,6 +206,7 @@ You can define a number of connection points in a cluster. Therefore, everything
 
 | YAML path                                      | Environment Variable                                              | Default value | Description                                                                                       |
 | ---------------------------------------------- | ----------------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------- |
+| database                                       | CAMUNDA_OPTIMIZE_DATABASE                                         | elasticsearch | Type of database being used. Either elasticsearch or opensearch                                   |
 | opensearch.connection.timeout                  |                                                                   | 10000         | Maximum time without connection to OpenSearch that Optimize should wait until a timeout triggers. |
 | opensearch.connection.pathPrefix               |                                                                   |               | The path prefix under which OpenSearch is available.                                              |
 | opensearch.connection.nodes[*].host            | CAMUNDA_OPTIMIZE_OPENSEARCH_HOST                                  | localhost     | The address/hostname under which the OpenSearch node is available.                                |
