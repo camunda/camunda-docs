@@ -13,14 +13,14 @@ This page covers JDBC driver management for RDBMS deployments in Kubernetes. For
 
 Camunda bundles JDBC drivers for databases where licensing permits:
 
-| Database   | Bundled | Version | When to supply custom drivers                                     |
-| ---------- | ------- | ------- | ----------------------------------------------------------------- |
-| PostgreSQL | Yes     | 42.7.8  | Patches, extensions, or compatibility with older server versions. |
-| MariaDB    | Yes     | 3.5.7   | Custom JDBC features or compliance requirements.                  |
-| SQL Server | Yes     | 12.10.2 | Custom features or version-specific requirements.                 |
-| H2         | Yes     | 2.3.232 | Development only; not supported for production.                   |
-| Oracle     | No      | —       | Always; licensing prevents bundling.                              |
-| MySQL      | No      | —       | Always; licensing prevents bundling.                              |
+| Database   | Bundled | Version | When to supply custom drivers                                                                |
+| ---------- | ------- | ------- | -------------------------------------------------------------------------------------------- |
+| PostgreSQL | Yes     | 42.7.8  | Patches, extensions, or compatibility with older server versions.                            |
+| MariaDB    | Yes     | 3.5.7   | Custom JDBC features or compliance requirements.                                             |
+| SQL Server | Yes     | 12.10.2 | Custom features or version-specific requirements.                                            |
+| H2         | Yes     | 2.3.232 | Development and testing only; not recommended for production due to scalability limitations. |
+| Oracle     | No      | —       | Always; licensing prevents bundling.                                                         |
+| MySQL      | No      | —       | Always; licensing prevents bundling.                                                         |
 
 ### When to supply a custom driver
 
