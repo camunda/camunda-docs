@@ -312,7 +312,7 @@ Alternatively, you can run `make hosts.add-keycloak` to add this entry automatic
 
 After adding this entry and deploying Camunda 8 in the next step, you'll be able to reach Keycloak at `http://keycloak-service:18080/auth`.
 
-**Why port `18080`?** Keycloak listens on port `8080` inside the cluster, but that port is already used locally by the Zeebe Gateway HTTP endpoint. To avoid the conflict, the port-forward script maps Keycloak's container port `8080` to local port `18080`.
+**Why port `18080`?** The Keycloak instance is configured to listen on port `18080` (via `httpPort` in the operator CR) to avoid conflicts with the Zeebe Gateway HTTP endpoint, which uses port `8080` locally.
 
 ### Deploy Camunda 8
 
