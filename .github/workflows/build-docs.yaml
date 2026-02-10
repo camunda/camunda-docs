@@ -21,12 +21,10 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
-
       - name: Check internal links
         uses: untitaker/hyperlink@0.2.0
         with:
           args: build/
-
       - name: Remove https redirect
         run: |
           sed -i '/SERVER_PORT/d;/SERVER_NAME/d' build/.htaccess
