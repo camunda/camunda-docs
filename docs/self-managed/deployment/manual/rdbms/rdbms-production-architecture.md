@@ -85,9 +85,8 @@ Without Optimize: RDBMS-only stack is fully supported.
 
 ## Network and security
 
-- **Zeebe ↔ RDBMS**: Low-latency, private network connectivity
-- **All components ↔ RDBMS**: Use TLS in production
-- **Network isolation**: Restrict RDBMS access to Camunda pods only (use NetworkPolicies)
+- **Orchestration Cluster ↔ RDBMS**: Private network connectivity with TLS in production
+- **Network isolation**: Restrict RDBMS access to Orchestration Cluster pods only (use NetworkPolicies)
 
 ## Supported scenarios
 
