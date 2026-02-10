@@ -293,12 +293,11 @@ Controls how frequently the batch operation scheduler checks for work:
 
 Controls how batch operations split large result sets into manageable pieces:
 
-| Parameter           | Type | Default     | Description                                                                                                                                                                                                                               |
-| ------------------- | ---- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `chunkSize`         | int  | **`1000`**  | Maximum number of items written per chunk record during initialization.<br/><br/>**Note:** Values > 5000 are discouraged due to exporter pressure and the 4MB record size limit. The broker logs a warning if this threshold is exceeded. |
-| `dbChunkSize`       | int  | **`3500`**  | Number of items per chunk when writing to RocksDB state.<br/><br/>**Benefit:** Keeping chunks smaller improves cache efficiency.                                                                                                          |
-| `queryPageSize`     | int  | **`10000`** | Page size when querying the secondary database during initialization.<br/><br/>**For Elasticsearch/OpenSearch:** This interacts with the default 10,000 result window limit.                                                              |
-| `queryInClauseSize` | int  | **`1000`**  | Maximum number of keys in a single IN clause when querying by key list.<br/><br/>**Use case:** Primarily for RDBMS-based secondary databases.                                                                                             |
+| Parameter           | Type | Default     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ------------------- | ---- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `chunkSize`         | int  | **`1000`**  | Maximum number of items per chunk. This controls both the number of items written per chunk record during initialization and the number of items stored per chunk in RocksDB state.<br/><br/>**Note:** Values > 5000 are discouraged due to exporter pressure and the 4MB record size limit. The broker logs a warning if this threshold is exceeded.<br/><br/>**RocksDB optimization:** A chunk size of 3000 item keys results in approximately 24KB (31KB with overhead), which aligns well with RocksDB's 32KB block size for efficient read/write performance. |
+| `queryPageSize`     | int  | **`10000`** | Page size when querying the secondary database during initialization.<br/><br/>**For Elasticsearch/OpenSearch:** This interacts with the default 10,000 result window limit.                                                                                                                                                                                                                                                                                                                                                                                       |
+| `queryInClauseSize` | int  | **`1000`**  | Maximum number of keys in a single IN clause when querying by key list.<br/><br/>**Use case:** Primarily for RDBMS-based secondary databases.                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 #### Retry and error handling settings
 
@@ -325,7 +324,6 @@ zeebe:
 
           # Chunking and pagination
           chunkSize: 1000
-          dbChunkSize: 3500
           queryPageSize: 10000
           queryInClauseSize: 1000
 
