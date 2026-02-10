@@ -275,7 +275,7 @@ Heavy querying of the secondary database can notably affect its performance, esp
 
 ### Configuration
 
-Batch operation behavior can be configured through broker settings under `zeebe.broker.experimental.engine.batchOperation.*`. All settings are validated at startup, and invalid values will cause the broker to fail with a descriptive error message.
+Batch operation behavior can be configured through broker settings under `camunda.processing.engine.batch-operations.*`. All settings are validated at startup, and invalid values will cause the broker to fail with a descriptive error message.
 
 :::note
 Default values are optimized for typical workloads. Only adjust these settings if you experience performance issues or have specific requirements.
@@ -314,24 +314,23 @@ Controls how the system handles transient failures when querying the secondary d
 
 ```yaml
 # In your broker configuration file (for example, broker.yaml)
-zeebe:
-  broker:
-    experimental:
-      engine:
-        batchOperations:
-          # Scheduler
-          schedulerInterval: PT1S
+camunda:
+  processing:
+    engine:
+      batch-operations:
+        # Scheduler
+        scheduler-interval: PT1S
 
-          # Chunking and pagination
-          chunkSize: 100
-          queryPageSize: 10000
-          queryInClauseSize: 1000
+        # Chunking and pagination
+        chunk-size: 100
+        query-page-size: 10000
+        query-in-clause-size: 1000
 
-          # Retry and error handling
-          queryRetryMax: 0
-          queryRetryInitialDelay: PT1S
-          queryRetryMaxDelay: PT60S
-          queryRetryBackoffFactor: 2.0
+        # Retry and error handling
+        query-retry-max: 0
+        query-retry-initial-delay: PT1S
+        query-retry-max-delay: PT60S
+        query-retry-backoff-factor: 2.0
 ```
 
 #### Tuning recommendations
@@ -356,7 +355,7 @@ The engine enforces a 4MB per-record limit. If initialization queries return ver
 :::
 
 :::tip
-These settings appear in `broker.yaml.template` under `experimental.engine.batchOperation`. You can reference this template for additional context and examples.
+For backward compatibility, the legacy configuration path `zeebe.broker.experimental.engine.batchOperations.*` is still supported. However, the unified configuration format shown above (`camunda.processing.engine.batch-operations.*`) is recommended for new deployments.
 :::
 
 #### Exporter configuration
