@@ -112,7 +112,7 @@ With the new Camunda 8 SaaS **AWS US East (us-east-2)** region in North America,
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Documentation</span></div>
 
-### Camunda Docs MCP server
+#### Camunda Docs MCP server
 
 <!-- https://github.com/camunda/camunda-docs/issues/7597 -->
 
