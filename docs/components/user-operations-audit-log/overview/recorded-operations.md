@@ -88,10 +88,10 @@ These operations belong to the category `DEPLOYED_RESOURCES`. The following are 
 | Migrate Process instance | Process instance    | INVALID_STATE, PROCESSING_ERROR |
 | Create Variable          | Variable            | –                               |
 | Update Variable          | Variable            | –                               |
+| Resolve Incident         | Incident            | INVALID_STATE                   |
 | Create Resource          | Resource            | –                               |
 | Delete Resource          | Resource            | –                               |
 | Create Batch             | Batch               | –                               |
-| Resolve Incident         | Incident            | INVALID_STATE                   |
 | Suspend Batch            | Batch               | INVALID_STATE                   |
 | Resume Batch             | Batch               | INVALID_STATE                   |
 | Cancel Batch             | Batch               | INVALID_STATE                   |
