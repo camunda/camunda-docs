@@ -51,7 +51,7 @@ Review these guides to migrate Optimize data, apply required configuration chang
 
 This applies if your Camunda deployment includes an Elasticsearch version upgrade as part of the Camunda 8.7 to 8.8 transition.
 
-<p><a href="./elasticsearch/changes-in-elasticsearch-8" class="link-arrow">Elasticsearch 7 to 8 compatibility changes for Camunda</a></p>
+<p><a href="./database/changes-in-elasticsearch-8" class="link-arrow">Elasticsearch 7 to 8 compatibility changes for Camunda</a></p>
 
 ### Keycloak
 
