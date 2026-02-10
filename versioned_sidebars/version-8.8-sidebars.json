@@ -3518,7 +3518,7 @@
             },
             {
               "Database": [
-                "self-managed/upgrade/components/elasticsearch/changes-in-elasticsearch-8"
+                "self-managed/upgrade/components/database/changes-in-elasticsearch-8"
               ]
             },
             "self-managed/upgrade/components/keycloak/keycloak-compatibility",
