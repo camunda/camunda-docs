@@ -43,7 +43,7 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 #### MCP Client connector operations and filter options
 
-New operations are added in the `Standalone` mode to the MCP Client connector:
+New operations are added in the `Standalone` mode to the MCP (Model Context Protocol) Client connector:
 
 - List resources
 - List resource templates
@@ -116,11 +116,11 @@ With the new Camunda 8 SaaS **AWS US East (us-east-2)** region in North America,
 
 <!-- https://github.com/camunda/camunda-docs/issues/7597 -->
 
-Use the Camunda Docs (Model Context Protocol) MCP server to query Camunda 8 documentation in your IDE or AI tool.
+Use the Camunda Docs MCP server to query the latest official Camunda 8 documentation in your IDE or AI tool.
 
-- Add the Camunda Docs MCP server to let your AI agent directly access the latest official Camunda 8 documentation.
-- For example, if you use an AI coding tool such as Cursor or Copilot, adding the MCP server can help ensure more accurate AI responses and code generation by accessing the current Camunda 8 documentation and context.
-- The MCP server is available at the following URL: `https://camunda-docs.mcp.kapa.ai`
+- If you use an AI coding tool such as Cursor or Copilot, add the MCP server to help ensure more accurate AI responses and code generation using Camunda 8 documentation and context.
+- Once connected to the MCP server within your editor, you can ask context-aware questions about Camunda.
+- The MCP server is available at the following URL: `https://camunda-docs.mcp.kapa.ai`.
 
 <p className="link-arrow">[Camunda Docs MCP server](/reference/mcp-docs/mcp-docs.md)</p>
 
