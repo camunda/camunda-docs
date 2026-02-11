@@ -20,6 +20,14 @@ As outlined in [our strategy](https://camunda.com/blog/2025/08/changes-to-camund
 
 This guide demonstrates how to integrate these infrastructure components using official deployment methods that don't depend on Bitnami subcharts. Instead, we use vendor-supported deployment approaches—the recommended way to deploy and manage these services in production environments.
 
+:::caution What "vendor-supported" means
+"Vendor-supported" refers to the **deployment method** being officially maintained by the respective project teams (CloudNativePG community, Elastic, Keycloak team). It does **not** mean these infrastructure components are supported by Camunda.
+
+- **External dependencies**: PostgreSQL, Elasticsearch, and Keycloak remain external dependencies from a Camunda support standpoint, regardless of the deployment method used.
+- **Camunda support scope**: Camunda supports the **integration and configuration** of these components with the Camunda Helm chart. Camunda does not provide operational support for the infrastructure components themselves.
+- **Vendor support**: For operational support on infrastructure components, customers should engage the respective vendor or community support channels directly, or use managed services.
+  :::
+
 :::note Alternative: Bitnami Enterprise Images
 If you prefer to continue using Bitnami subcharts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
 :::
@@ -30,11 +38,11 @@ Using official vendor-supported methods provides several advantages over traditi
 
 - **Vendor maintenance**: Each deployment method is maintained by the respective project team (Elastic, CloudNativePG community, Keycloak team) with dedicated engineering resources
 - **Production-grade features**: Built-in management, monitoring, and scaling capabilities designed for enterprise environments
-- **Enterprise support**: Official support channels, dedicated vendor support teams, and comprehensive documentation
+- **Vendor support channels**: Official support channels, dedicated vendor support teams, and comprehensive documentation available directly from each project
 - **Security-focused**: Regular updates and CVE patches from upstream maintainers with specialized security teams
 - **Advanced lifecycle management**: Automated upgrades, failover, and disaster recovery capabilities
 - **Best practices implementation**: Following upstream recommended deployment patterns established by vendor experts
-- **Vendor expertise**: Access to specialized knowledge and troubleshooting from the teams that build these technologies
+- **Vendor expertise**: Access to specialized knowledge and troubleshooting from the teams that build these technologies (through vendor support channels)
 - **Future-proof architecture**: Doesn't depend on deprecated Bitnami subcharts, ensuring long-term maintainability
 
 ## Prerequisites
