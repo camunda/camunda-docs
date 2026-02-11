@@ -239,8 +239,9 @@ Instead of using **Play**, you can also test the process within the **Implement*
 1. Select the **Tasks** tab in Tasklist. When the AI agent finishes processing, you should see either a `User Feedback` or a `Ask human to send email` task waiting for you to complete.
 1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md). Open it in your browser at http://localhost:8080/operate.
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish the process.
-   </TabItem>
-   </Tabs>
+
+</TabItem>
+</Tabs>
 
 ### What to expect during execution
 
