@@ -15,19 +15,18 @@ Exporters are not available in Camunda 8 Software-as-a-Service (SaaS).
 
 ![record-stream](img/exporters-stream.png)
 
-Although clients can't directly inspect this stream, Zeebe can load and configure user-defined code, known as an exporter, to process each record. An exporter provides a single entry point to handle every record written to the stream.
+Although clients cannot directly inspect this stream, Zeebe can load user-defined code, known as an exporter, to process each record. An exporter provides a single entry point to handle every record written to the stream.
 
 Exporters can be used for various purposes:
 
 - Persist historical data by pushing it to an external data warehouse
 - Export records to visualization tools (for example, [zeebe-simple-monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor))
 
-Zeebe loads exporters only if they are configured via the main Zeebe YAML configuration file.
-Once configured, the exporter starts receiving records the next time Zeebe is restarted.
-Exporters are guaranteed to see only records produced after they're configured.
+Zeebe loads exporters only if they are configured in the main Zeebe YAML configuration file. Exporters are initialized when Zeebe starts.
 
-Camunda 8 Self‑Managed ships several built‑in exporters, including the [Camunda Exporter](../components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) and the [Elasticsearch](../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) and [OpenSearch](../components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) exporters.
-Use a custom exporter only when you need a different target system or behavior.
+Exporters receive only records produced after they are configured. Existing records in the log are not exported.
+
+Camunda 8 Self-Managed ships several built-in exporters, including the [Camunda Exporter](../components/orchestration-cluster/zeebe/exporters/camunda-exporter.md), [Elasticsearch](../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md), and [OpenSearch](../components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) exporters. Use a custom exporter only when you need a different target system or behavior.
 
 Zeebe manages data deletion through two distinct mechanisms to reduce disk usage:
 
@@ -132,7 +131,7 @@ Each loaded exporter introduces some performance overhead. A slow exporter will 
 
 To avoid performance bottlenecks, exporters should be kept as simple and lightweight as possible. Any heavy data transformation or enrichment should be delegated to external systems.
 
-:::caution
+:::warning
 When you enable or change exporter filters on an existing cluster, the exported record stream can change shape.
 If another component (such as Optimize) relies on a previously unfiltered sequence, this may lead to gaps or inconsistencies unless you follow the recommended upgrade flow.
 For Optimize‑specific guidance and examples, see the [Camunda 8 system configuration](../components/optimize/configuration/system-configuration-platform-8.md) documentation.

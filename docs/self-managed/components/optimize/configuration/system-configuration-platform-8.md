@@ -22,16 +22,16 @@ The settings below control how Optimize connects to and paginates this exporter 
 
 ### Exporter filters and Optimize data completeness
 
+This section describes how exporter filters affect Optimize data imports and data completeness. For YAML configuration details and property syntax, refer to the Elasticsearch and OpenSearch exporter documentation.
+
 From Camunda 8.9 and above, the Elasticsearch and OpenSearch exporters provide optional filters that can reduce the amount of data written for Optimize:
 
-- Variable names: Inclusion/exclusion lists with match modes such as exact, starts with, and ends with.
-- Variable value types: Inclusion/exclusion lists for inferred types like `String`, `Number`, `Boolean`, `Object`, `Array`, and `Null`.
-- BPMN process IDs: Inclusion/exclusion lists by `bpmnProcessId` that drop all records tied to selected processes.
-- Optimize mode: A mode that keeps only the value types and intents required by Optimize, and drops other record types not used by Optimize.
+- Variable names: Inclusion and exclusion lists with match modes such as exact, starts with, and ends with.
+- Variable value types: Inclusion and exclusion lists for inferred types such as `String`, `Number`, `Boolean`, `Object`, `Array`, and `Null`.
+- BPMN process IDs: Inclusion and exclusion lists by `bpmnProcessId` that drop all records tied to selected processes.
+- Optimize mode: Keeps only the record value types and intents required by Optimize and drops other record types not used by Optimize.
 
-These filters run inside the exporter and permanently drop matching records from the exported stream. Optimize can never import data that was never exported.
-
-For the exact configuration properties and YAML/env‑var syntax, see the Elasticsearch and OpenSearch exporter documentation.
+These filters run inside the exporter and permanently drop matching records from the exported stream. Optimize cannot import data that was never exported.
 
 #### Non‑retroactive filters and permanent gaps
 
