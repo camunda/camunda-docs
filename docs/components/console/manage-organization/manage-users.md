@@ -35,8 +35,9 @@ People who do not yet have a Camunda 8 account can also be invited to an organiz
 
 ## Resource-based authorizations
 
-Resource authorizations allow you to control the level of access a user has to a particular resource in the system. To create, update, or delete the resource authorizations
-assigned to a user, click on the respective row of the users table.
+Resource authorizations control a user’s access to specific resources. To create, update, or delete a user’s resource authorizations, select the user’s row in the users table.
+
+As of 8.8, authorizations for Orchestration Cluster applications (Zeebe, Operate, and Tasklist) are managed as part of the Orchestration Cluster and configured in [Identity](/self-managed/components/orchestration-cluster/identity/overview.md).
 
 ### Creation
 
@@ -52,8 +53,20 @@ To update an existing authorization, click on the **pencil icon** of the relevan
 
 ## User task access restrictions
 
-:::info
-User task access restrictions are only supported with the Tasklist v1 API. For more information, see the documentation on [Tasklist API versions](components/tasklist/api-versions.md#user-task-access-restrictions-and-the-tasklist-api).
+:::caution Tasklist V1 only
+User task access restrictions are supported only by the Tasklist V1 API and are not supported
+in Tasklist V2. From Camunda 8.8, Tasklist runs in V2 mode by default.
+
+To continue using user task access restrictions, see
+[switching between V1 and V2 modes](components/tasklist/api-versions.md#switching-between-v1-and-v2-modes)
+to enable Tasklist V1 mode.
+
+Tasklist V2 does not support task-level visibility restrictions.
+Authorization-based access control in V2 applies only at the process-definition level and does
+not limit access to individual tasks.
+
+For more information about the differences between V1 and V2, see
+[Tasklist API versions](components/tasklist/api-versions.md).
 :::
 
 You can control user access to user tasks in Tasklist via [user task access restrictions](components/tasklist/user-task-access-restrictions.md).
@@ -62,15 +75,7 @@ For example, if a task has a candidate group named `Team A` and a candidate user
 
 ## Limitations
 
-Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Starter plan, the number of users can be updated via the **Billing** page. There, under **General users**, the number can be increased or decreased.
-
-:::caution Starter plans
-The Starter plan is no longer available.
-
-- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan.
-- To compare plan features and contact Camunda for advice and an Enterprise plan quote, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
-
-:::
+Depending on the plan to be used, the number of users that can be part of an organization varies.
 
 ## Restrictions
 

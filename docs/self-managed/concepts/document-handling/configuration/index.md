@@ -29,6 +29,7 @@ Camunda 8 Run is a fast way for users to test the capabilities of the platform, 
 - **Local storage** can be configured for a cluster to store documents in a local folder.
   - It can be used only for local development with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
   - Local storage is not suitable for production use, as pods and file paths are not shared across components. This prevents components like Tasklist and Zeebe from accessing the same data. Files are stored locally, and their retention must be managed manually.
+  - If you're using a container image and a mounted volume for your storage, you can use the path `/usr/local/camunda/documents` as the mount path, as it will already have the right permissions for the Camunda process to read and write to it.
 - **In-memory** storage can be used to store documents during the application's runtime. When the application is stopped, documents are lost.
   - It can be used with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm](/self-managed/deployment/helm/install/quick-install.md).
   - In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.

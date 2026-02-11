@@ -37,6 +37,10 @@ To start a complete Camunda 8 Self-Managed environment locally:
 
 1. Wait for the environment to initialize (this can take several minutes). Monitor the logs (especially the Keycloak container log) to ensure all components start.
 
+:::note c8run with Docker
+If you start Docker Compose via `./c8run start --docker` (or `.\c8run.exe start --docker`), override environment variables in the `docker-compose/.env` file included in the distribution. Passing variables inline on the command line is ignored because the Camunda 8 Run helper script invokes Docker Compose via that `.env` file.
+:::
+
 ### Docker Compose configurations
 
 Camunda provides three Docker Compose configurations in the [Camunda Distributions repository](https://github.com/camunda/camunda-distributions):
@@ -62,10 +66,10 @@ The Orchestration Cluster is the core of Camunda 8, providing process automation
 
 | Component                      | URL                                                              | Description                                                                                                                                                                                                                |
 | :----------------------------- | :--------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Operate                        | [http://localhost:8088/operate](http://localhost:8088/operate)   | Monitor and troubleshoot process instances. See [Introduction to Operate](../../../components/operate/operate-introduction.md) and [Process instance creation](../../../components/concepts/process-instance-creation.md). |
-| Tasklist                       | [http://localhost:8088/tasklist](http://localhost:8088/tasklist) | Complete user tasks in running process instances. See [User tasks](../../../components/modeler/bpmn/user-tasks/user-tasks.md).                                                                                             |
-| Orchestration Cluster Identity | [http://localhost:8088/identity](http://localhost:8088/identity) | Manage users and permissions for Orchestration Cluster (lightweight).                                                                                                                                                      |
-| Orchestration Cluster REST API | `http://localhost:8088/v2`                                       | REST API for process automation.                                                                                                                                                                                           |
+| Operate                        | [http://localhost:8080/operate](http://localhost:8080/operate)   | Monitor and troubleshoot process instances. See [Introduction to Operate](../../../components/operate/operate-introduction.md) and [Process instance creation](../../../components/concepts/process-instance-creation.md). |
+| Tasklist                       | [http://localhost:8080/tasklist](http://localhost:8080/tasklist) | Complete user tasks in running process instances. See [User tasks](../../../components/modeler/bpmn/user-tasks/user-tasks.md).                                                                                             |
+| Orchestration Cluster Identity | [http://localhost:8080/identity](http://localhost:8080/identity) | Manage users and permissions for Orchestration Cluster (lightweight).                                                                                                                                                      |
+| Orchestration Cluster REST API | `http://localhost:8080/v2`                                       | REST API for process automation.                                                                                                                                                                                           |
 | Orchestration Cluster gRPC API | `localhost:26500`                                                | gRPC API for high-performance process automation.                                                                                                                                                                          |
 
 :::note
@@ -146,7 +150,7 @@ The `-v` flag deletes all volumes, removing all data (process instances, users, 
 
 ## Connectors
 
-Both the lightweight and full Docker Compose configurations include Camunda Connectors for integrating with external systems. The connector runtime executes both outbound connectors (called from BPMN processes) and inbound connectors (triggering process instances from external events).
+Both the lightweight and full Docker Compose configurations include built-in connectors for integrating with external systems. The connector runtime executes both outbound connectors (called from BPMN processes) and inbound connectors (triggering process instances from external events).
 
 For details on available connectors and how to use them, see:
 
@@ -255,7 +259,7 @@ When using the full configuration, Web Modeler connects automatically to the loc
 1. [Create a new project](../../../components/modeler/web-modeler/launch-web-modeler.md) or open an existing BPMN diagram.
 1. Use the visual modeler to [design your BPMN process](../../../components/modeler/bpmn/bpmn.md).
 1. Click **Deploy** to deploy the diagram to the pre-configured Orchestration Cluster.
-1. After deployment, you can [create process instances](../../../components/concepts/process-instance-creation.md) and monitor them in [Operate](http://localhost:8088/operate).
+1. After deployment, you can [create process instances](../../../components/concepts/process-instance-creation.md) and monitor them in [Operate](http://localhost:8080/operate).
 
 Web Modeler uses the `BEARER_TOKEN` authentication method to communicate with the Orchestration Cluster. The user's authentication token from Management Identity is automatically used for deployment.
 

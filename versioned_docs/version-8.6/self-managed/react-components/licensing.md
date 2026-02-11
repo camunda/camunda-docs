@@ -12,5 +12,7 @@ Installations of Camunda 8 Self-Managed which require a license can provide thei
 For Helm installations, license keys can be configured globally in your `values.yaml` file. See the [Helm installation documentation](/self-managed/setup/install.md#configure-license-key) for more details.
 
 :::note
-Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality.
+
+**Web Modeler without a license:** Web Modeler is limited to **five concurrent users** when running without a valid enterprise license. This applies to Self-Managed installations used for testing or development purposes. To support additional users or for production use, obtain a Camunda Self-Managed Enterprise Edition license by visiting the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::

@@ -75,17 +75,35 @@ Ensure the Camunda component versions are compatible with the Helm chart version
 
 The [sizing of a Camunda 8 installation](/components/best-practices/architecture/sizing-your-environment.md) depends on various influencing factors. Ensure to [determine these factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors), and conduct [benchmarking](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks) to validate an appropriate environment size for your test, integration, or production environments.
 
-#### Volume performance
+### Persistent volumes
 
-As a minimum requirement, the persistent volumes for Zeebe should use volumes with an absolute minimum of 1,000 IOPS. **NFS or other types of network storage volumes are not supported.**
+Camunda supports different types of storage volumes, including block storage and network file systems (NFS).
 
-To ensure an appropriate sizing, [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (e.g., throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
+For details on typical volume usage, refer to these examples:
 
-For details on typical volume type usage, refer to the following examples specific to cloud service providers:
-
-- [Amazon EKS](/self-managed/reference-architecture/kubernetes.md#amazon-eks)
+- [Amazon EKS](/self-managed/reference-architecture/kubernetes.md#amazon-eks-1)
 - [Microsoft AKS](/self-managed/reference-architecture/kubernetes.md#microsoft-aks)
 - [Google GKE](/self-managed/reference-architecture/kubernetes.md#google-gke)
+
+#### Network File Systems
+
+Camunda guarantees support for Amazon Elastic File System (EFS).
+
+If you want to use another NFS, it must meet these requirements:
+
+- Be POSIX-compliant.
+- Never reorder file operations.
+- Retry I/O operations across temporary network failures, instead of failing on timeout.
+- Doesn't surface network‑related failures in the client process.
+- **Only one container may mount the disk in write mode at a time.** Two containers mounting the same disk in write mode could cause data corruption.
+
+#### Performance
+
+Regardless of the type, the network storage volumes you use must meet these requirements:
+
+- They must be capable of **at least 1,000 IOPS**.
+- The latency of write/msync operations must be in the **low single digit milliseconds** under normal conditions. Ideally, it's in the order of microseconds.
+- The p99 latency must be **lower than 300 milliseconds**.
 
 ### Helm charts version matrix
 
@@ -93,25 +111,32 @@ Camunda Helm chart version `13.x.x` works with Camunda version `8.8.x`. Check th
 
 ## Component requirements
 
-Requirements for the components can be seen below:
+Requirements for components are as follows:
 
-| Component                                                  | Java version | Other requirements                                                                                                                                                                                                                                                                                                                              |
-| ---------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21+  | <ul><li>Amazon OpenSearch 2.17+ (requires use of [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md))</li><li>Elasticsearch 8.16+</li></ul>                                                                                                                                            |
-| Optimize                                                   | OpenJDK 21+  | <ul><li>Amazon OpenSearch 2.17+</li><li>Elasticsearch 8.16+</li></ul>                                                                                                                                                                                                                                                                           |
-| Connectors                                                 | OpenJDK 21+  |                                                                                                                                                                                                                                                                                                                                                 |
-| Management Identity                                        | OpenJDK 17+  | <ul><li>Keycloak 25.x, 26.x</li><li>Microsoft SQL Server: 2019</li><li>Oracle 19c</li><li>PostgreSQL 14.x, 15.x, 16.x, 17.x, or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x (required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration))</li></ul> |
-| Web Modeler                                                | -            | <ul><li>H2 2.3</li><li>MariaDB 10.4, 11.4, 11.8</li><li>Microsoft SQL Server (MSSQL): 2019, 2022</li><li>MySQL 8.4</li><li>Oracle 19c, 23ai</li><li>PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x, 18.x, or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x</li></ul>                                                                           |
-| Self-Managed Console                                       | -            | -                                                                                                                                                                                                                                                                                                                                               |
+| Component                                                  | Java version | Other requirements                                                                                                                                                                                                                                                                                                                                                                      |
+| :--------------------------------------------------------- | :----------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21+  | <ul><li>Elasticsearch 9.2+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.4+</li><li>OpenSearch 2.19+</li><li>For supported relational databases and versions when using an RDBMS (for example, as secondary storage), see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                       |
+| Optimize                                                   | OpenJDK 21+  | <ul><li>Elasticsearch 9.2+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.4+</li><li>OpenSearch 2.19+</li></ul>                                                                                                                                                                                                                                                                       |
+| Connectors                                                 | OpenJDK 21+  | –                                                                                                                                                                                                                                                                                                                                                                                       |
+| Management Identity                                        | OpenJDK 17+  | <ul><li>Keycloak 25.x, 26.x</li><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li><li>PostgreSQL is required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration)</li></ul> |
+| Web Modeler                                                | –            | <ul><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                                                                                                                                                                                 |
+| Self-Managed Console                                       | –            | –                                                                                                                                                                                                                                                                                                                                                                                       |
 
-When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
-
-Due to the [limitation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html#or1-considerations)
-for the index refresh interval, we do not support [OR1 instances](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html). More information on configuring Amazon OpenSearch can be found [here](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
-
-:::note Elasticsearch support
-Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
+:::info Optimize compatibility
+When running Optimize, make sure you use an [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) or [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) version that is compatible with your Optimize version.
 :::
+
+:::info RDBMS support
+For a complete list of supported RDBMS versions, JDBC driver information (bundled vs. user-supplied), and component compatibility when using relational databases as secondary storage, see the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
+:::
+
+### OpenSearch and Elasticsearch support
+
+- Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
+- Due to a [limitation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html#or1-considerations)
+  for the index refresh interval, [OR1 instances](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html) are not supported with Amazon OpenSearch. See [use Amazon OpenSearch Service with the Helm chart](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
+- When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/databases/elasticsearch/elasticsearch-privileges.md).
+- Camunda 8 works with the Elasticsearch [default distribution](https://www.elastic.co/downloads/elasticsearch) available with the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
 
 ### Component version matrix
 

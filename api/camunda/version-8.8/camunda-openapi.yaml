@@ -1543,7 +1543,7 @@ paths:
 
         [[CONSISTENCY:EVENTUAL]]
 
-        Search for user task variables based on given criteria.
+        Search for user task variables based on given criteria. By default, long variable values in the response are truncated.
       parameters:
         - name: userTaskKey
           in: path
@@ -1553,6 +1553,12 @@ paths:
             type: string
             format: string<UserTaskKey>
             description: Zeebe Engine resource key (Java long serialized as string)
+        - name: truncateValues
+          in: query
+          required: false
+          description: When true (default), long variable values in the response are truncated. When false, full variable values are returned.
+          schema:
+            type: boolean
       requestBody:
         required: false
         content:
@@ -1582,7 +1588,14 @@ paths:
 
         [[CONSISTENCY:EVENTUAL]]
 
-        Search for process and local variables based on given criteria.
+        Search for process and local variables based on given criteria. By default, long variable values in the response are truncated.
+      parameters:
+        - name: truncateValues
+          in: query
+          required: false
+          description: When true (default), long variable values in the response are truncated. When false, full variable values are returned.
+          schema:
+            type: boolean
       requestBody:
         required: false
         content:
@@ -5576,14 +5589,22 @@ paths:
         - Resource
       operationId: deleteResource
       summary: Delete resource
-      description: |
+      description: |-
 
 
         [[CONSISTENCY:STRONG]]
 
         Deletes a deployed resource.
-        This can be a process definition, decision requirements definition, or form definition
-        deployed using the deploy resources endpoint. Specify the resource you want to delete in the `resourceKey` parameter.
+
+        This can be a process definition, decision requirements
+        definition, or form definition deployed using the deploy resources endpoint. Specify the
+        resource you want to delete in the `resourceKey` parameter.
+
+        Once a resource has been deleted it cannot be recovered. If the resource needs to be
+        available again, a new deployment of the resource is required.
+
+        Only the resource itself is deleted from the runtime state. Deleting historic data
+        associated with a resource is not supported.
       parameters:
         - name: resourceKey
           in: path
@@ -6164,13 +6185,6 @@ components:
       type: string
       allOf:
         - $ref: "#/components/schemas/LongKey"
-    MessageCorrelationKey:
-      description: System-generated key for a message correlation.
-      format: MessageCorrelationKey
-      example: "2251799813634265"
-      type: string
-      allOf:
-        - $ref: "#/components/schemas/LongKey"
     DecisionDefinitionKey:
       description: System-generated key for a decision definition.
       format: DecisionDefinitionKey
@@ -6429,6 +6443,8 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/UserTaskResult"
+      required:
+        - items
     UserTaskFilter:
       description: User task filter request.
       type: object
@@ -6567,6 +6583,8 @@ components:
             - $ref: "#/components/schemas/StringFilterProperty"
     UserTaskResult:
       type: object
+      required:
+        - userTaskKey
       properties:
         name:
           type: string
@@ -6740,9 +6758,14 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/VariableSearchResult"
+      required:
+        - items
     VariableSearchResult:
       description: Variable search response item.
       type: object
+      required:
+        - value
+        - isTruncated
       allOf:
         - $ref: "#/components/schemas/VariableResultBase"
       properties:
@@ -6761,9 +6784,17 @@ components:
         value:
           description: Full value of this variable.
           type: string
+      required:
+        - value
     VariableResultBase:
       description: Variable response item.
       type: object
+      required:
+        - name
+        - processInstanceKey
+        - tenantId
+        - variableKey
+        - scopeKey
       properties:
         name:
           description: Name of this variable.
@@ -8212,9 +8243,9 @@ components:
           allOf:
             - $ref: "#/components/schemas/ElementId"
         creationTime:
-          type: string
+          allOf:
+            - $ref: "#/components/schemas/DateTimeFilterProperty"
           description: Date of incident creation.
-          format: date-time
         state:
           type: string
           description: State of this incident with a defined set of values.
@@ -8462,8 +8493,7 @@ components:
           description: The name of the message associated with the message subscription.
           type: string
         correlationKey:
-          allOf:
-            - $ref: "#/components/schemas/MessageCorrelationKey"
+          type: string
           description: The correlation key of the message subscription.
         tenantId:
           $ref: "#/components/schemas/TenantId"
@@ -9888,6 +9918,8 @@ components:
           nullable: true
     UserTaskAssignmentRequest:
       type: object
+      required:
+        - assignee
       properties:
         assignee:
           description: The assignee for the user task. The assignee must not be empty or `null`.
@@ -10417,7 +10449,6 @@ components:
             - endTime
             - errorCode
             - errorMessage
-            - hasFailedWithRetriesLeft
             - isDenied
             - jobKey
             - kind
@@ -10521,6 +10552,8 @@ components:
     JobSearchQueryResult:
       description: Job search response.
       type: object
+      required:
+        - items
       allOf:
         - $ref: "#/components/schemas/SearchQueryResponse"
       properties:
@@ -11405,7 +11438,7 @@ components:
             - $ref: "#/components/schemas/TenantId"
         messageKey:
           allOf:
-            - $ref: "#/components/schemas/MessageCorrelationKey"
+            - $ref: "#/components/schemas/MessageKey"
           description: The key of the correlated message
         processInstanceKey:
           description: The key of the first process instance the message correlated with

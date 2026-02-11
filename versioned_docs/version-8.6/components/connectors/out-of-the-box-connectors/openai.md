@@ -55,7 +55,7 @@ With the **Chat** operation, you can interact with OpenAI chat-based language mo
 
 The **Model** dropdown list allows you to select the model.
 
-Refer to the [Models](https://platform.openai.com/docs/models/models) section of OpenAI documentation for detailed information about models.
+Refer to the [Models](https://platform.openai.com/docs/models) section of OpenAI documentation for detailed information about models.
 
 #### Custom model version
 

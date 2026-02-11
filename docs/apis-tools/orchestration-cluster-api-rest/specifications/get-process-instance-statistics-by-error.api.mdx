@@ -1,0 +1,420 @@
+---
+id: get-process-instance-statistics-by-error
+title: "Get process instance statistics by error"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Get process instance statistics by error"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get process instance statistics by error"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/incidents/statistics/process-instances-by-error"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Returns statistics for active process instances that currently have active incidents,
+grouped by incident error hash code.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            page: {
+              description:
+                "Pagination parameters for process instance statistics grouped by incident error.\n",
+              allOf: [
+                {
+                  type: "object",
+                  title: "Offset-based pagination",
+                  properties: {
+                    from: {
+                      description:
+                        "The index of items to start searching from.",
+                      type: "integer",
+                      format: "int32",
+                      minimum: 0,
+                    },
+                    limit: {
+                      description:
+                        "The maximum number of items to return in one request.",
+                      type: "integer",
+                      format: "int32",
+                      default: 100,
+                      minimum: 1,
+                    },
+                  },
+                },
+              ],
+            },
+            sort: {
+              description:
+                "Sorting criteria for process instance statistics grouped by incident error.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description:
+                      "The field to sort the incident error statistics by.",
+                    type: "string",
+                    enum: ["errorMessage", "activeInstancesWithErrorCount"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title:
+                  "IncidentProcessInstanceStatisticsByErrorQuerySortRequest",
+              },
+            },
+          },
+          title: "IncidentProcessInstanceStatisticsByErrorQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The statistics about process instances with incident, grouped by error hash code are\nsuccessfully returned.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: ["totalItems"],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether there are more items matching the criteria beyond the returned items.\nThis is useful for determining if additional requests are needed to retrieve all results.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                      },
+                    },
+                    example: { totalItems: 1, hasMoreTotalItems: false },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description:
+                  "Statistics of active process instances grouped by incident error.\n",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    errorHashCode: {
+                      type: "integer",
+                      format: "int32",
+                      description:
+                        "The hash code identifying a specific incident error..",
+                    },
+                    errorMessage: {
+                      type: "string",
+                      description:
+                        "The error message associated with the incident error hash code.",
+                    },
+                    activeInstancesWithErrorCount: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The number of active process instances that currently have an active incident with this error.\n",
+                    },
+                  },
+                  title: "IncidentProcessInstanceStatisticsByErrorResult",
+                },
+              },
+            },
+            title: "IncidentProcessInstanceStatisticsByErrorQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

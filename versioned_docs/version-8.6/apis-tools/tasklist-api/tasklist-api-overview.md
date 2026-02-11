@@ -28,7 +28,7 @@ To obtain the Tasklist GraphQL schema, visit the API collection in [GitHub](http
 
 Alternatively, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](/apis-tools/tasklist-api/generated.md).
 
-There are also several [tools to explore GraphQL APIs](https://altair.sirmuel.design).
+There are also several [tools to explore GraphQL APIs](https://graphql.org/swapi-graphql/).
 
 For example, you want to know about provided types:
 

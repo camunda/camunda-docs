@@ -251,7 +251,6 @@ global:
         audience: "<mgmt-identity-app-id>"
         initialClaimName: preferred_username
         initialClaimValue: "<the email address of your initial admin user>"
-        redirectUrl: "<IDENTITY_URL>"
         secret:
           existingSecret: "entra-credentials"
           existingSecretKey: "identity-client-secret"
@@ -384,7 +383,6 @@ global:
         audience: "<mgmt-identity-app-id>"
         initialClaimName: preferred_username
         initialClaimValue: "<the email address of your initial admin user>"
-        redirectUrl: "<IDENTITY_URL>"
         secret:
           existingSecret: "entra-credentials"
           existingSecretKey: "identity-client-secret"

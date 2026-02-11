@@ -182,6 +182,8 @@ components:
             - version
             - decisionRequirementsId
             - decisionRequirementsKey
+            - decisionRequirementsName
+            - decisionRequirementsVersion
             - tenantId
         order:
           $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
@@ -212,6 +214,12 @@ components:
         name:
           type: string
           description: The DMN name of the decision definition.
+        isLatestVersion:
+          description: |
+            Whether to only return the latest version of each decision definition.
+            When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`.
+            The response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`.
+          type: boolean
         version:
           type: integer
           description: The assigned version of the decision definition.
@@ -230,6 +238,12 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/DecisionRequirementsKey"
           description: The assigned key of the decision requirements graph that the decision definition is part of.
+        decisionRequirementsName:
+          type: string
+          description: The DMN name of the decision requirements that the decision definition is part of.
+        decisionRequirementsVersion:
+          type: integer
+          description: The assigned version of the decision requirements that the decision definition is part of.
     DecisionDefinitionSearchQueryResult:
       type: object
       allOf:
@@ -268,6 +282,12 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/DecisionRequirementsKey"
           description: The assigned key of the decision requirements graph that the decision definition is part of.
+        decisionRequirementsName:
+          type: string
+          description: The DMN name of the decision requirements that the decision definition is part of.
+        decisionRequirementsVersion:
+          type: integer
+          description: The assigned version of the decision requirements that the decision definition is part of.
     DecisionEvaluationInstruction:
       type: object
       oneOf:

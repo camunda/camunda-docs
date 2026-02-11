@@ -88,7 +88,7 @@ Gateways rarely need migration. The relevant configuration is mostly in the [exp
 
 Expressions must be in [friendly-enough expression language (FEEL)](/components/concepts/expressions.md#the-expression-language) instead of [Java unified expression language (JUEL)](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/).
 
-Migrating simple expressions is doable (as you can see in [these test cases](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/test/java/org/camunda/community/migration/converter/ExpressionTransformerTest.java)), but not all expressions can be automatically converted.
+Migrating simple expressions is doable (as you can see in [these test cases](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/main/core/src/test/java/org/camunda/community/migration/converter/ExpressionTransformerTest.java)), but not all expressions can be automatically converted.
 
 The following is **not** possible:
 

@@ -9,7 +9,7 @@ Connect your ServiceNow instance with Camunda to enable end-to-end orchestration
 Install and configure the Camunda Spoke in ServiceNow, set up ServiceNow connectors in Camunda, and configure secure credentials. After setup, you can interact with ServiceNow tables and flows from Camunda and start or control Camunda processes from ServiceNow.
 
 :::tip
-**Before you begin**  
+**Before you begin**
 Ensure the following prerequisites are in place:
 
 - Administrator access to both Camunda and ServiceNow.
@@ -92,4 +92,4 @@ To start ServiceNow flows from Camunda asynchronously, ensure the following:
 - ServiceNow Integration Hub Enterprise Pack
 - ServiceNow Integration Hub Flow Trigger – REST plugin
 
-See [Requesting and activating Integration Hub](https://www.servicenow.com/docs/bundle/yokohama-integrate-applications/page/administer/flow-designer/concept/request-ih-overview.html) for details.
+See [Requesting and activating Integration Hub](https://developer.servicenow.com/dev.do#!/learn/learning-plans/zurich/servicenow_application_developer/app_store_learnv2_rest_zurich_activating_integration_hub) for details.

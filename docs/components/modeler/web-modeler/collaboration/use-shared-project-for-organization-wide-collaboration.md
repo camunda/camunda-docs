@@ -34,6 +34,11 @@ To create a shared project as a space for your organization's resources:
 3. On the right side of the page under **Collaborators**, select **Add user**.
 4. To add collaborators to your organization and project, enter the email address of the collaborator you would like to invite and select `Enter` or `Tab` between each entry. You may enter up to 20 email addresses. To add **all** existing organization members to your project, use the **All users in the organization** option to send a bulk invitation to all colleagues.
    <img src={BulkAddUserImg} alt="Add all organization users" width="750px"/>
+
+:::info Self-Managed restrictions
+For Self-Managed installations, the bulk invitation only works for users who have already logged into Web Modeler at least once. Users who have not yet logged in must be invited individually.
+:::
+
 5. (optional) Enter an invitation message in the text box below your invites.
 6. Select **Send invite**. This will invite the users to both the organization and project. Once your colleague clicks **Accept invitation**, they can access the shared project with the assigned role and permissions.
 

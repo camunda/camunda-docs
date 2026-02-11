@@ -75,7 +75,7 @@ async function deployResources() {
 const camundaApiUrl = process.env.CAMUNDA_REST_ADDRESS;
 ```
 
-5. On the next line, script the API endpoint to list the existing roles:
+5. On the next line, script the API endpoint to deploy the resources:
 
 ```javascript
 const url = `${camundaApiUrl}/deployments`;
@@ -98,27 +98,19 @@ formData.append("resources", fileContent, {
 The `resources` name must be exact according to the API requirements, the path to the file (`const bpmnFilePath = path.resolve("resources/calculate-sales-tax.bpmn");`) must be correct, and `contentType` must be `application/xml` to ensure the upload will not fail.
 :::
 
-7. Configure your POST request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
-
-```javascript
-const options = {
-  method: "POST",
-  url,
-  headers: {
-    Accept: "application/json",
-    Authorization: `Bearer ${accessToken}`,
-    ...formData.getHeaders(),
-  },
-  data: formData,
-};
-```
-
-8. Call the endpoint, process the results from the API call, and emit an error message from the server if necessary:
+7. Call the endpoint, process the results from the API call, and emit an error message from the server if necessary:
 
 ```javascript
 try {
-  const response = await axios(options);
-  const deployedResources = response.data.deployments;
+  const response = await axios.post(url, formData, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${accessToken}`,
+      ...formData.getHeaders(),
+    },
+  });
+
+  const deployedResources = response.data.deployments || [];
 
   // Emit deployed resources
   deployedResources.forEach((x) =>
@@ -128,14 +120,14 @@ try {
   );
 } catch (error) {
   // Emit an error from the server.
-  console.error(error.message);
+  console.error(`Error deploying resources: ${error.message}`);
 }
 ```
 
-9. In your terminal, run `node cli.js processInstances deploy`.
+8. In your terminal, run `node cli.js processInstances deploy`.
 
 :::note
-This `deploy` command is connected to the `deployResources` function at the bottom of the `camunda-process-instances.js` file, and executed by the `cli.js` file. While we will work with roles in this tutorial, you may add additional arguments depending on the API requests you want to make.
+This `deploy` command is connected to the `deployResources` function at the bottom of the `camunda-process-instances.js` file, and executed by the `cli.js` file. While we will work with process instances in this tutorial, you may add additional arguments depending on the API requests you want to make.
 :::
 
 The existing process definition key and ID will now output. If you have an invalid API name or action name, or no arguments provided, or improper/insufficient credentials configured, an error message will output as outlined in the `cli.js` file.
@@ -154,21 +146,13 @@ async function createInstance([processDefinitionKey]) {
 }
 ```
 
-2. Configure the API call:
+2. Build the payload you will send to the endpoint:
 
 ```javascript
-const options = {
-  method: "POST",
-  url,
-  headers: {
-    Accept: "application/json",
-    Authorization: `Bearer ${accessToken}`,
-  },
-  data: {
-    processDefinitionKey: processDefinitionKey,
-    variables: {
-      total: 90.0,
-    },
+const payload = {
+  processDefinitionKey,
+  variables: {
+    total: 90.0,
   },
 };
 ```
@@ -177,16 +161,22 @@ const options = {
 The request will succeed if the variable names are different, but the process instance itself will not function as expected.
 :::
 
-3. Process the results from the API call. For example:
+3. Call the endpoint, process the results from the API call, and emit an error message from the server if necessary:
 
 ```javascript
 try {
-  const response = await axios(options);
+  const response = await axios.post(url, payload, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
   const processInstance = response.data;
 
   console.log(`Process Instance Key: ${processInstance.processInstanceKey}`);
 } catch (error) {
-  console.error(error.message);
+  console.error(`Error creating process instance: ${error.message}`);
 }
 ```
 
@@ -206,35 +196,28 @@ async function viewInstance([processInstanceKey]) {
 }
 ```
 
-2. Configure the API call:
-
-```javascript
-const options = {
-  method: "GET",
-  url,
-  headers: {
-    Accept: "application/json",
-    Authorization: `Bearer ${accessToken}`,
-  },
-};
-```
-
-3. Process the results from the API call. For example:
+2. Call the endpoint, process the results from the API call, and emit an error message from the server if necessary:
 
 ```javascript
 try {
-  const response = await axios(options);
+  const response = await axios.get(url, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
   const results = response.data;
 
   console.log(
     `Process instance name: ${results.processDefinitionName}; State: ${results.state};`
   );
 } catch (error) {
-  console.error(error.message);
+  console.error(`Error retrieving process instance: ${error.message}`);
 }
 ```
 
-4. In your terminal, run `node cli.js processInstances view <key>`, where `<key>` is the process instance key. The `processDefinitionName` and `state` will then display in the output.
+3. In your terminal, run `node cli.js processInstances view <key>`, where `<key>` is the process instance key. The `processDefinitionName` and `state` will then display in the output.
 
 ## Troubleshooting
 

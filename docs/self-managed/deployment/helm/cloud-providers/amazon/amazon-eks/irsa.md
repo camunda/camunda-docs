@@ -225,6 +225,7 @@ Once the IRSA setup is complete, configure the Bitnami Elasticsearch chart in yo
 
 ```yaml
 elasticsearch:
+  enabled: true
   master:
     serviceAccount:
       create: true

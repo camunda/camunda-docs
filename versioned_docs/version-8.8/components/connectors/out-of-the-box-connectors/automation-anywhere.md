@@ -138,7 +138,7 @@ Response example:
 ### Get work item result from queue by ID
 
 This operation provides the ability to return the details of the specified work item from the work queue.
-It corresponds directly to the respective Automation Anywhere API - [`List Work Items in queue with filter by work item ID`](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-api-list-wlm-workitems.html).
+It corresponds directly to the respective Automation Anywhere API - [`List Work Items in queue with filter by work item ID`](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/get-all-work-items-in-queues-api.html).
 
 #### Usage
 

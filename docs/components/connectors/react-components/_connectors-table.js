@@ -209,13 +209,6 @@ const SearchableTable = () => {
       image: BoxImg,
     },
     {
-      name: "Camunda Operate",
-      description: "Fetch process execution data from Camunda Operate.",
-      type: "Outbound",
-      link: "../operate/",
-      image: CamundaImg,
-    },
-    {
       name: "CSV",
       description: "Read and write CSV documents.",
       type: "Outbound",
@@ -525,7 +518,7 @@ const SearchableTable = () => {
     <div className="connector-input">
       <input
         type="text"
-        placeholder="Find a Camunda connector"
+        placeholder="Find a built-in connector"
         value={searchTerm}
         onChange={handleSearch}
         className="connector-input-box"

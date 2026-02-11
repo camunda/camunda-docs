@@ -30,20 +30,26 @@ The following tables show the **top-level configuration sections** in `values.ya
 
 ### Bitnami subcharts
 
-| Section                | Purpose                                                                             |
-| ---------------------- | ----------------------------------------------------------------------------------- |
-| `elasticsearch`        | Provides an embedded Elasticsearch backend (Bitnami subchart)                       |
-| `identityKeycloak`     | Provides an embedded Keycloak service for Management Identity (Bitnami subchart)    |
-| `identityPostgresql`   | Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart) |
-| `webModelerPostgresql` | Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart)         |
+| Section                | Purpose                                                                                                                                                                                                                                                                           |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `elasticsearch`        | Provides an embedded Elasticsearch backend (Bitnami subchart). This can be used as a secondary storage backend for evaluations. See [secondary storage](/reference/glossary.md#secondary-storage) and [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch). |
+| `identityKeycloak`     | Provides an embedded Keycloak service for Management Identity (Bitnami subchart).                                                                                                                                                                                                 |
+| `identityPostgresql`   | Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart).                                                                                                                                                                                              |
+| `webModelerPostgresql` | Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart).                                                                                                                                                                                                      |
+
+:::note
+The Helm chart supports embedded Elasticsearch for evaluations. For production, configure a secondary storage backend that fits your requirements. Depending on the component and version, you can use Elasticsearch/OpenSearch or an RDBMS-based secondary store.
+
+See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms).
+:::
 
 :::info
 Bitnami subcharts are best suited for development and testing environments unless your operations team has experience managing Bitnami chart deployments in production.
 
-For production environments, Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach lets you use your preferred deployment methods, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda—providing greater operational control and flexibility.
+For production environments, deploy infrastructure services separately from the Camunda Helm charts. This lets you use your preferred deployment methods, leverage managed services (for example, Amazon OpenSearch Service), and manage infrastructure lifecycles independently of Camunda.
 
 **Alternative deployment approach:**  
-See [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
+See [deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
 :::
 
 #### Bitnami subcharts guidance

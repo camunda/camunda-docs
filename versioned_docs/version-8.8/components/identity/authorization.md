@@ -41,6 +41,10 @@ The authorization is created, and the owner is granted the specified permissions
 
 <img src={AuthImg} alt="Create authorization tab" class="img-700"/>
 
+:::tip
+Partial wildcard matching, for example `my-resource*`, is not supported.
+:::
+
 ## Update an authorization
 
 Authorizations cannot be updated after they are created.

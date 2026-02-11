@@ -36,7 +36,7 @@ With the Camunda Spring Boot Starter, you can build:
 
 | Camunda Spring Boot Starter version | JDK  | Camunda version | Bundled Spring Boot version | Compatible Spring Boot version(s) |
 | ----------------------------------- | ---- | --------------- | --------------------------- | --------------------------------- |
-| 8.8.x                               | ≥ 17 | 8.8.x           | 3.5.x                       |                                   |
+| 8.8.x                               | ≥ 17 | 8.8.x           | 4.0.x                       |                                   |
 
 ## Get started
 
@@ -144,21 +144,24 @@ camunda:
       method: oidc
       client-id: <your client id>
       client-secret: <your client secret>
-      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      issuer-url: http://localhost:18080/auth/realms/camunda-platform
       audience: <your client id of Orchestration Cluster or configured audience>
       scope: <your client id of Orchestration Cluster or configured audience>
     grpc-address: https://my-grpc-address
     rest-address: https://my-rest-address
 ```
 
+:::note
+Ensure all addresses use absolute URI format: `scheme://host(:port)`.
+:::
+
 **Notes for Microsoft Entra ID**
 
 - Use `scope: CLIENT_ID_OC + "/.default"` instead of `scope: CLIENT_ID_OC`.
-- The `token-url` is typically in the format:
+- The `issuer-url` is typically in the format:
 
 ```
-https://login.microsoftonline.com/
-<tenant_id>/oauth2/v2.0/token
+https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
 ```
 
 :::note Audience validation
@@ -181,14 +184,10 @@ camunda:
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-      token-url: https://my-oidc-provider/auth/realms/camunda-platform/protocol/openid-connect/token
-    grpc-address: https://my-grpc-address
-    rest-address: https://my-rest-address
+    cloud:
+      cluster-id: <your cluster id>
+      region: <your region>
 ```
-
-:::note
-Ensure all addresses use absolute URI format: `scheme://host(:port)`.
-:::
 
 ## Start building your process application
 

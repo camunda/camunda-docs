@@ -79,7 +79,7 @@ Camunda 8 SaaS offers a number of monitoring options to help you keep track of y
 
 ### Compliance
 
-<p><a title="Find a Camunda connector" href="https://camunda.com/trust-center/" target="_new"><img src={SaasComplianceImg} alt="Visit the Camunda Trust Center" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '25%'}} className="fade-in-top-image" title="Visit the Camunda Trust Center"/></a>At Camunda, we're committed to Information Security, Privacy and Compliance. Our mission is to establish trust through transparency.</p>
+<p><a title="Find a built-in connector" href="https://camunda.com/trust-center/" target="_new"><img src={SaasComplianceImg} alt="Visit the Camunda Trust Center" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '25%'}} className="fade-in-top-image" title="Visit the Camunda Trust Center"/></a>At Camunda, we're committed to Information Security, Privacy and Compliance. Our mission is to establish trust through transparency.</p>
 
 - Visit the [Camunda Trust Center](https://camunda.com/trust-center/) to learn more about our standards and certifications, including SOC 2 compliance, ISO/IEC 27001 certification, and GDPR Compliance.
 - Camunda is a member of the [Cloud Security Alliance](https://cloudsecurityalliance.org/star/registry/camunda/services/camunda).

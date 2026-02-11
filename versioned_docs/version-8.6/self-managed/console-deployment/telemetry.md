@@ -36,7 +36,7 @@ When the telemetry configuration is set to `online` (recommended), Console colle
 
 ### Example
 
-You can download an example [data file](https://github.com/camunda/camunda-docs/blob/main/docs/self-managed/console-deployment/telemetry-sample.json). Below is an extract to highlight the types of data collected:
+You can download an example [data file](https://github.com/camunda/camunda-docs/blob/main/docs/self-managed/components/console/telemetry-sample.json). Below is an extract to highlight the types of data collected:
 
 ```json
 {

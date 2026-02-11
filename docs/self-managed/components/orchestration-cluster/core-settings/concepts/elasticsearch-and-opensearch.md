@@ -1,10 +1,20 @@
 ---
 id: elasticsearch-and-opensearch
-title: "Elasticsearch and Opensearch"
-description: "The Orchestration Cluster stores and reads data from either Elasticsearch or OpenSearch."
+title: "Elasticsearch and OpenSearch"
+description: "Learn how the Orchestration Cluster uses Elasticsearch/OpenSearch as a secondary storage option, and when an RDBMS-based secondary store may be used instead."
 ---
 
-The Orchestration Cluster stores and reads data from either **Elasticsearch** or **OpenSearch**. You can select the database by setting the `CAMUNDA_DATABASE` environment variable or the equivalent configuration property.
+The Orchestration Cluster stores and reads data from a configured secondary storage backend for indexing and search. Depending on your deployment and configuration, this backend can be [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) or an [RDBMS](/reference/glossary.md#rdbms).
+
+This page focuses on using Elasticsearch and OpenSearch as the secondary storage backend.
+
+:::note
+Secondary storage is configurable. For RDBMS-based secondary storage, see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms) for details and limitations.
+:::
+
+## Select a database
+
+Select the database by setting the `CAMUNDA_DATABASE` environment variable or the equivalent configuration property.
 
 **Valid values:** `elasticsearch` (default) or `opensearch`.
 
@@ -12,7 +22,12 @@ The Orchestration Cluster stores and reads data from either **Elasticsearch** or
 CAMUNDA_DATABASE=opensearch
 ```
 
-We now support [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/). To see which versions are supported, refer to [supported environments](/reference/supported-environments.md). Using Amazon OpenSearch requires a new Camunda installation. Migration from previous Elasticsearch setups is not supported.
+:::info Elasticsearch and OpenSearch support
+
+- Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution. For version support information, see [supported environments](/reference/supported-environments.md).
+- Using OpenSearch requires a new Camunda installation. Migration from previous Elasticsearch setups is not supported.
+
+:::
 
 ## Connection settings
 
@@ -29,7 +44,7 @@ You can specify either `host` and `port` (deprecated) or `url` (recommended).
 ## Common configuration options
 
 :::note
-`.{ES/OS}` in the values below reference either `.elasticsearch` or `.opensearch`.
+`.{ES/OS}` in the values below reference either `.elasticsearch` or `.opensearch`. Both Elasticsearch and OpenSearch are used as secondary storage for indexing and search — see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) for the canonical definition.
 :::
 
 | Name                                             | Description                                  | Default value                                  |

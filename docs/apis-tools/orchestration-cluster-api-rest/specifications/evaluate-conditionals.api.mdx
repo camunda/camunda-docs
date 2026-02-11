@@ -1,0 +1,488 @@
+---
+id: evaluate-conditionals
+title: "Evaluate root level conditional start events"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Evaluate root level conditional start events"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Evaluate root level conditional start events"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/conditionals/evaluation"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Evaluates root-level conditional start events for process definitions.
+If the evaluation is successful, it will return the keys of all created process instances, along with their associated process definition key.
+Multiple root-level conditional start events of the same process definition can trigger if their conditions evaluate to true.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          required: ["variables"],
+          properties: {
+            tenantId: {
+              allOf: [
+                {
+                  example: "customer-service",
+                  description: "The unique identifier of the tenant.",
+                  format: "TenantId",
+                  type: "string",
+                  title: "TenantId",
+                },
+              ],
+              description:
+                "Used to evaluate root-level conditional start events for a tenant with the given ID.\nThis will only evaluate root-level conditional start events of process definitions which belong to the tenant.\n",
+            },
+            processDefinitionKey: {
+              allOf: [
+                {
+                  description:
+                    "System-generated key for a deployed process definition.",
+                  format: "ProcessDefinitionKey",
+                  example: "2251799813686749",
+                  type: "string",
+                  allOf: [
+                    {
+                      description:
+                        "Zeebe Engine resource key (Java long serialized as string)",
+                      type: "string",
+                      title: "LongKey",
+                    },
+                  ],
+                  title: "ProcessDefinitionKey",
+                },
+              ],
+              description:
+                "Used to evaluate root-level conditional start events of the process definition with the given key.\n",
+            },
+            variables: {
+              type: "object",
+              description:
+                "JSON object representing the variables to use for evaluation of the conditions and to pass to the process instances that have been triggered.\n",
+              additionalProperties: true,
+              example: { x: 2 },
+            },
+          },
+          title: "ConditionalEvaluationInstruction",
+        },
+        examples: {
+          "Evaluate conditionals across all process definitions": {
+            summary:
+              "Evaluate root-level conditional start events across all process definitions",
+            value: { variables: { orderAmount: 1000, region: "EU" } },
+          },
+          "Evaluate conditionals for specific process definition": {
+            summary:
+              "Evaluate root-level conditional start events for a specific process definition",
+            value: {
+              processDefinitionKey: "2251799813686749",
+              variables: { orderAmount: 1000 },
+            },
+          },
+          "Evaluate conditionals for specific tenant": {
+            summary:
+              "Evaluate root-level conditional start events for process definitions linked to a specific tenant",
+            value: { tenantId: "tenant-123", variables: { orderAmount: 1000 } },
+          },
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "Successfully evaluated root-level conditional start events.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: [
+              "processInstances",
+              "conditionalEvaluationKey",
+              "tenantId",
+            ],
+            properties: {
+              conditionalEvaluationKey: {
+                allOf: [
+                  {
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    description:
+                      "System-generated key for a conditional evaluation.",
+                    format: "ConditionalEvaluationKey",
+                    example: "2251799813687654",
+                    type: "string",
+                    title: "ConditionalEvaluationKey",
+                  },
+                ],
+                description:
+                  "The unique key of the conditional evaluation operation.",
+              },
+              tenantId: {
+                description:
+                  "The tenant ID of the conditional evaluation operation.",
+                allOf: [
+                  {
+                    example: "customer-service",
+                    description: "The unique identifier of the tenant.",
+                    format: "TenantId",
+                    type: "string",
+                    title: "TenantId",
+                  },
+                ],
+              },
+              processInstances: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    processDefinitionKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a deployed process definition.",
+                          format: "ProcessDefinitionKey",
+                          example: "2251799813686749",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessDefinitionKey",
+                        },
+                      ],
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a process instance.",
+                          format: "ProcessInstanceKey",
+                          example: "2251799813690746",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessInstanceKey",
+                        },
+                      ],
+                      description: "The key of the created process instance.",
+                    },
+                  },
+                  title: "ProcessInstanceReference",
+                },
+                description:
+                  "List of process instances created. If no root-level conditional start events evaluated to true, the list will be empty.",
+              },
+            },
+            title: "EvaluateConditionalResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description:
+        "The client is not authorized to start process instances for the specified process definition.\nIf a processDefinitionKey is not provided, this indicates that the client is not authorized\nto start process instances for at least one of the matched process definitions.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The process definition was not found for the given processDefinitionKey.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

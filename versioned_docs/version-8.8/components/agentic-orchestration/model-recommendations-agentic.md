@@ -1,6 +1,6 @@
 ---
 id: model-recommendations-agentic
-title: LLM recommendations and best practice
+title: LLM recommendations
 sidebar_label: LLM recommendations
 description: Prompting recommendations when using models for agentic process
 ---

@@ -154,7 +154,7 @@ Most of the screenshots in the user guide can be updated automatically:
 2. In the `/client` directory of the `camunda-optimize` repository, start the frontend development setup by running `yarn run start-backend` and `yarn start`.
 3. Wait for the data to be generated and imported and then run `yarn run screenshots`.
 
-On a technical level, the Optimize team takes screenshots within their [end-to-end test cases](https://github.com/camunda/camunda-optimize/blob/master/client/e2e/tests/Dashboard.js#L33).
+On a technical level, the Optimize team takes screenshots within their [end-to-end test cases](https://github.com/camunda/camunda-optimize/blob/main/optimize/client/e2e/tests/Dashboard.js#L41).
 
 ## Review process
 

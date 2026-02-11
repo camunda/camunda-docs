@@ -5,7 +5,14 @@ sidebar_label: Camunda Operate
 description: Fetch process execution data from Camunda Operate, a monitoring solution for Camunda 8.
 ---
 
-The **Camunda Operate connector** allows you to interact with [Camunda Operate](https://camunda.com/platform/operate/) in your BPMN process to fetch process execution data.
+The **Camunda Operate connector** allows you to interact with [Camunda Operate](https://camunda.com/platform/operate/) for Camunda Versions 8.8 and earlier
+in your BPMN process to fetch process execution data.
+
+:::warning
+The Camunda Operate connector is deprecated following the deprecation of the dedicated Operate API.
+Going forward consider using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
+via the [REST Connector](../protocol/rest.md).
+:::
 
 ## Prerequisites
 

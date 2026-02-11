@@ -44,6 +44,7 @@ Use the following names and values for the Identity SDK to ensure proper authent
 | `CAMUNDA_IDENTITY_CLIENTSECRET`      | `camunda.identity.client-secret`        | The client secret for the Identity client.                                                                                            | -                             |
 | `CAMUNDA_IDENTITY_AUTHSCOPES`        | `camunda.identity.auth-scopes`          | Defines the scopes that should be applied to the token, provided as list separated by spaces.                                         | `openid email offline_access` |
 | `CAMUNDA_IDENTITY_USEBACKENDAUTHURL` | `camunda.identity.use-backend-auth-url` | Whether the fetching refresh tokens and logout will be performed against the `issuer` or the `issuer-backend-url`.                    | `false`                       |
+| `CAMUNDA_IDENTITY_CLOCKSKEW`         | `camunda.identity.clock-skew`           | Sets the allowed clock skew when validating JWT issuance and expiration. Format: ISO 8601                                             | `60S`                         |
 
 ## License configuration
 
@@ -89,7 +90,7 @@ for `WEBMODELER`, which is`web-modeler`.
 
 Identity requires a database to store information
 about [resource authorization](/self-managed/identity/access-management/resource-authorizations.md)
-and [multi-tenancy](/self-managed/concepts/multi-tenancy.md).
+and [multi-tenancy](/self-managed/concepts/multi-tenancy.md) or if you are [using an external IdP](/self-managed/identity/configuration/configure-external-identity-provider.md).
 
 | Environment variable         | Description                                         |
 | :--------------------------- | :-------------------------------------------------- |

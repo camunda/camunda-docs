@@ -21,10 +21,9 @@ export const gettingStartedCards = [
   },
   {
     link: "./migration-tooling",
-    title: "Migration tooling",
+    title: "Migration tools",
     image: IconToolingImg,
-    description:
-      "Camunda tooling to ease migration from Camunda 7 to Camunda 8.",
+    description: "Camunda tools to ease migration from Camunda 7 to Camunda 8.",
   },
   {
     link: "./code-conversion",

@@ -81,7 +81,8 @@ function Feature({ imageUrl, url, title, description }) {
   );
 }
 
-const search_agentic_url = "/docs/components/agentic-orchestration/";
+const search_agentic_url =
+  "/docs/components/agentic-orchestration/agentic-orchestration-overview/";
 const search_agent_url = "/docs/guides/getting-started-agentic-orchestration/";
 const search_idp_url = "/docs/components/modeler/web-modeler/idp/";
 const release = "/docs/reference/announcements-release-notes/overview/";
@@ -91,6 +92,15 @@ const search_feel_url = "/docs/components/modeler/feel/what-is-feel/";
 function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
+
+  const openKapa = () => {
+    if (typeof window !== "undefined" && window.Kapa?.open) {
+      window.Kapa.open({});
+    } else {
+      console.warn("Kapa widget is not loaded yet.");
+    }
+  };
+
   return (
     <Layout
       title={`${siteConfig.title}`}

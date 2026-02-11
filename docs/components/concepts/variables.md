@@ -170,4 +170,5 @@ The data from the variable will be shown on the task tile, as shown in the examp
 
 ## Next steps
 
-- [Access variables](/components/modeler/feel/language-guide/feel-variables.md#access-variable)
+- Understand how to [access variables](/components/modeler/feel/language-guide/feel-variables.md).
+- Explore how to centrally manage cluster configuration with [cluster variables](../../components/modeler/feel/cluster-variable/overview.md).

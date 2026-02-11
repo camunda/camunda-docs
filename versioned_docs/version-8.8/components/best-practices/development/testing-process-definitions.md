@@ -253,7 +253,7 @@ assertThat(addInvoiceJobWorkerMock.getActivatedJobs().get(0).getVariablesAsMap()
 
 ### Drive the process and assert the state
 
-For tests, you drive the process from waitstate to waitstate and assert that you observe the expected process and variable states. For example, you might implement a test for the scenario when an invoice gets approved and processed without errors:
+For tests, you drive the process from wait state to wait state and assert that you observe the expected process and variable states. For example, you might implement a test for the scenario when an invoice gets approved and processed without errors:
 
 ```java
 @Test
@@ -295,7 +295,7 @@ public void happyPath() throws Exception {
 
 1. Create a new process instance. You may want to use some glue code to start your process (e.g. the REST API facade), or also create helper methods within your test class.
 
-2. Drive the process through its waitstates, e.g. by completing a waiting user task.
+2. Drive the process through its wait states, e.g. by completing a waiting user task.
 
 3. Assert that your process is in the expected state.
 

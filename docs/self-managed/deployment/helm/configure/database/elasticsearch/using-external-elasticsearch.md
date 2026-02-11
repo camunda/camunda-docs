@@ -5,9 +5,17 @@ title: Use external Elasticsearch with Helm
 description: "Learn how to use an external Elasticsearch instance in Camunda 8 Self-Managed Helm chart deployment."
 ---
 
-This guide explains how to connect Camunda 8 to an external Elasticsearch instance.
+This guide explains how to connect Camunda 8 to an external Elasticsearch instance. When configured, Elasticsearch is used as a secondary storage backend for indexing and querying data used by multiple Camunda components. See [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) for the canonical definition.
+
+:::note
+Secondary storage is configurable. For supported components, you can use an RDBMS-based secondary store instead. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](/reference/glossary.md#rdbms) for configuration guidance and limitations.
+:::
 
 By default, the [Helm chart deployment](/self-managed/deployment/helm/install/quick-install.md) creates a new Elasticsearch instance. You can also connect to an external Elasticsearch instance, either in the same Kubernetes cluster or outside it.
+
+:::note
+In 8.9-alpha3, H2 is the default secondary storage for lightweight Camunda 8 Run and quick-install scenarios. Elasticsearch is still bundled with the distribution and fully supported as an optional alternative; use this guide when you want to run or connect to an external Elasticsearch cluster instead of the default H2 store.
+:::
 
 For production deployments, Camunda recommends managing Elasticsearch installations externally (without enabling the Elasticsearch subchart). This gives more flexibility for scaling, backups, and upgrades without affecting the rest of the Camunda installation.
 
@@ -25,7 +33,7 @@ Before configuring, collect the following information about your external Elasti
 
 | values.yaml option                                  | type    | default                             | description                                                                               |
 | --------------------------------------------------- | ------- | ----------------------------------- | ----------------------------------------------------------------------------------------- |
-| `global.elasticsearch.enabled`                      | boolean | `true`                              | Enable or disable all components connecting to Elasticsearch.                             |
+| `global.elasticsearch.enabled`                      | boolean | `false`                             | Enable or disable all components connecting to Elasticsearch.                             |
 | `global.elasticsearch.external.true`                | boolean | `false`                             | Set to `true` to connect to an external Elasticsearch instance.                           |
 | `global.elasticsearch.auth.username`                | string  | `""`                                | HTTP Basic username for Elasticsearch authentication.                                     |
 | `global.elasticsearch.auth.password`                | string  | `""`                                | HTTP Basic password for Elasticsearch authentication.                                     |
@@ -36,7 +44,7 @@ Before configuring, collect the following information about your external Elasti
 | `global.elasticsearch.url.protocol`                 | string  | `http`                              | Protocol to use when connecting to Elasticsearch. Possible values are `http` and `https`. |
 | `global.elasticsearch.url.host`                     | string  | `{{ .Release.Name }}-elasticsearch` | Hostname or IP address of the Elasticsearch instance.                                     |
 | `global.elasticsearch.url.port`                     | integer | `9200`                              | Port number of the Elasticsearch instance.                                                |
-| `elasticsearch.enabled`                             | boolean | `true`                              | Enable or disable the Elasticsearch subchart                                              |
+| `elasticsearch.enabled`                             | boolean | `false`                             | Enable or disable the Elasticsearch subchart                                              |
 
 ### Example usage
 
