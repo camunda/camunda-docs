@@ -68,7 +68,10 @@ By the end of this tutorial, you'll have:
 - A local Kubernetes cluster running with kind. This includes one control plane and two worker nodes.
 - An Ingress NGINX controller deployed for routing traffic (domain mode only).
 - TLS certificates configured with mkcert (domain mode only).
-- Prerequisite services deployed via Kubernetes operators: Elasticsearch (ECK), PostgreSQL (CloudNativePG), and Keycloak (Keycloak Operator).
+- Prerequisite services deployed via Kubernetes operators:
+  - Elasticsearch (ECK)
+  - PostgreSQL (CloudNativePG)
+  - Keycloak (Keycloak Operator)
 - Camunda 8 Self-Managed fully deployed and accessible, connected to the operator-managed services.
 
 :::info Other installation profiles
@@ -224,19 +227,19 @@ The certificate generation script:
 
 ### Deploy prerequisite services
 
-Before deploying Camunda, you need to deploy the external services it depends on: Elasticsearch, PostgreSQL, and Keycloak. These are deployed using Kubernetes operators as described in [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
+Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
 
-- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
-- **PostgreSQL**: Deployed via [CloudNativePG](https://cloudnative-pg.io/)
-- **Keycloak**: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
+- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
+- Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
-Run the operator deployment script:
+Run the operator deployment script, specifying the domain deployment mode:
 
 ```bash
 CAMUNDA_MODE=domain ./procedure/operators-deploy.sh
 ```
 
-This script installs each operator and its custom resources, then waits for all instances to be ready. For domain mode, set the `CAMUNDA_MODE` environment variable.
+This script installs each operator and its custom resources, then waits for all instances to be ready.
 
 ### Deploy Camunda 8
 
@@ -249,7 +252,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 This uses the following Helm values:
 
 <details>
-<summary>Domain mode Helm values (Kind-specific)</summary>
+<summary>Domain mode Helm values (kind-specific)</summary>
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/helm-values/values-domain.yml
@@ -260,12 +263,12 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 <details>
 <summary>Operator-based Helm values (external Elasticsearch, PostgreSQL, Keycloak)</summary>
 
-The deployment script layers the following shared operator values before the Kind-specific values:
+The deployment script layers the following shared operator values before the kind-specific values:
 
-- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml) — Connects Camunda to the ECK-managed Elasticsearch
-- [`camunda-keycloak-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml) — Connects Camunda to the operator-managed Keycloak (domain mode)
-- [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml) — Configures Identity to use the CloudNativePG PostgreSQL
-- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml) — Configures Web Modeler to use the CloudNativePG PostgreSQL
+- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml): Connects Camunda to the ECK-managed Elasticsearch.
+- [`camunda-keycloak-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml): Connects Camunda to the operator-managed Keycloak (domain mode).
+- [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
+- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
 
 </details>
 
@@ -286,13 +289,13 @@ This section covers the simplified setup using port-forwarding without TLS.
 
 ### Deploy prerequisite services
 
-Before deploying Camunda, you need to deploy the external services it depends on: Elasticsearch, PostgreSQL, and Keycloak. These are deployed using Kubernetes operators as described in [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
+Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
 
-- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
-- **PostgreSQL**: Deployed via [CloudNativePG](https://cloudnative-pg.io/)
-- **Keycloak**: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
+- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
+- Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
-Run the operator deployment script:
+Run the operator deployment script, specifying the no-domain deployment mode:
 
 ```bash
 CAMUNDA_MODE=no-domain ./procedure/operators-deploy.sh
@@ -325,7 +328,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 This uses the following Helm values:
 
 <details>
-<summary>No-domain mode Helm values (Kind-specific)</summary>
+<summary>No-domain mode Helm values (kind-specific)</summary>
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/helm-values/values-no-domain.yml
@@ -336,12 +339,12 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 <details>
 <summary>Operator-based Helm values (external Elasticsearch, PostgreSQL, Keycloak)</summary>
 
-The deployment script layers the following shared operator values before the Kind-specific values:
+The deployment script layers the following shared operator values before the kind-specific values:
 
-- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml) — Connects Camunda to the ECK-managed Elasticsearch
-- [`camunda-keycloak-no-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml) — Connects Camunda to the operator-managed Keycloak (no-domain mode)
-- [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml) — Configures Identity to use the CloudNativePG PostgreSQL
-- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml) — Configures Web Modeler to use the CloudNativePG PostgreSQL
+- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml): Connects Camunda to the ECK-managed Elasticsearch.
+- [`camunda-keycloak-no-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml): Connects Camunda to the operator-managed Keycloak (no-domain mode).
+- [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
+- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
 
 </details>
 
