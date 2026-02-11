@@ -1,12 +1,12 @@
 ---
 id: conditional-events
 title: Conditional events
-description: "Conditional events are used to trigger events based on specific conditions"
+description: "Conditional events trigger when a specified condition evaluates to true"
 ---
 
-Conditional events are events that trigger when a condition evaluates to `true`. They evaluate a FEEL expression over process variables and trigger automatically when their scope starts or when relevant variables change.
+A conditional event triggers when its condition evaluates to `true`. It evaluates a FEEL expression over process variables and triggers automatically when its scope starts or when relevant variables change.
 
-![process with error event](assets/conditional-events.png)
+![BPMN diagram showing conditional start, intermediate, and boundary events](assets/conditional-events.png)
 
 ### Interrupting vs. non-interrupting events
 
@@ -35,14 +35,14 @@ A conditional start event starts a process instance or an event subprocess when 
 - Root conditional start events start a new process instance.
 - Event subprocess conditional start events start an event subprocess inside an active process instance.
 
-Event subprocess conditional start events can be interrupting or non-interrupting. See Interrupting vs. non-interrupting events above.
+Event subprocess conditional start events can be interrupting or non-interrupting. See [Interrupting vs. non-interrupting events](#interrupting-vs-non-interrupting-events) above.
 
 Typical use cases include:
 
 - Starting an escalation process when a case’s `priority` becomes `"high"`.
 - Triggering a monitoring subprocess when a risk score crosses a threshold.
 
-To start processes via conditional start events from external systems, use the Orchestration Cluster REST API. See [Evaluate root level conditional start events](https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals/) for request and response details.
+To start processes via conditional start events from external systems, use the Orchestration Cluster REST API. See [Evaluate root-level conditional start events](/apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals/) for request and response details.
 
 ### Intermediate conditional catch events
 
@@ -53,8 +53,7 @@ When the process instance enters the event:
 - The engine evaluates the condition once.
   - If the condition is already true, the event completes immediately.
   - If the condition is false, the process instance waits.
-- When relevant variables change in scope, the engine re-evaluates the condition.
-  When it evaluates to `true`, the event completes and the process continues.
+- When relevant variables change in scope, the engine re-evaluates the condition. If it evaluates to `true`, the event completes and the process continues.
 
 Intermediate conditional catch events are always interrupting, as they represent a waiting point in the process flow.
 
@@ -68,7 +67,7 @@ A conditional boundary event is attached to an activity and monitors data while 
 
 When the activity is entered, the engine evaluates the boundary event’s condition and continues to monitor relevant variable changes.
 
-Conditional boundary events can be interrupting or non-interrupting. See Interrupting vs. non-interrupting events above.
+Conditional boundary events can be interrupting or non-interrupting. See [Interrupting vs. non-interrupting events](#interrupting-vs-non-interrupting-events) above.
 
 Typical use cases include:
 
@@ -83,8 +82,7 @@ Conditional events use FEEL expressions in the `bpmn:condition` element. These e
 
 Example:
 
-```
-xml title="Conditional event definition with FEEL condition"
+```xml title="Conditional event definition with FEEL condition"
 <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_1">
 <bpmn:condition xsi:type="bpmn:tFormalExpression">= x > 1</bpmn:condition>
 </bpmn:conditionalEventDefinition>
@@ -102,7 +100,7 @@ Variable filters restrict when a conditional event is re-evaluated in response t
 
 You can define a filter by adding a `zeebe:conditionalFilter` extension element:
 
-xml title="Conditional event with Zeebe variable filter"
+```xml title="Conditional event with Zeebe variable filter"
 <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_1rp6yz6">
 <bpmn:condition xsi:type="bpmn:tFormalExpression">= x > 1</bpmn:condition>
 <bpmn:extensionElements>
@@ -111,6 +109,7 @@ variableNames="var1, var2"
 variableEvents="create, update" />
 </bpmn:extensionElements>
 </bpmn:conditionalEventDefinition>
+```
 
 The `zeebe:conditionalFilter` extension provides two main options:
 
@@ -125,11 +124,12 @@ The `zeebe:conditionalFilter` extension provides two main options:
   - `update`
   - `create, update`
 
-If you omit the `zeebe:conditionalFilter`, the engine treats the conditional event as listening to any variable change in the scope (any variable change in that scope). This mirrors the “unfiltered” default behavior of Camunda 7 conditional events, but with FEEL conditions and Zeebe extensions in Camunda 8.
+If you omit the `zeebe:conditionalFilter`, the engine treats the conditional event as listening to any variable change in the scope. This mirrors the “unfiltered” default behavior of Camunda 7 conditional events, but with FEEL conditions and Zeebe extensions in Camunda 8.
 
 Note that `variableEvents` is only supported for conditional events inside a running scope (for example, intermediate conditional catch events, conditional boundary events, and conditional event subprocess start events). It is not supported on root-level conditional start events, as Camunda Modeler prevents or clears it there.
 
-:::note Migration
+### Migration from Camunda 7
+
 In Camunda 7, `camunda:variableName` and `camunda:variableEvents` are attributes on the conditional event definition.
 
 During migration to Camunda 8, these attributes are converted into a `zeebe:conditionalFilter` extension:
@@ -139,7 +139,6 @@ During migration to Camunda 8, these attributes are converted into a `zeebe:cond
 
 This preserves evaluation behavior while ensuring BPMN 2.0–compliant XML.  
 Note that `variableEvents` filters only support `create` and `update` in Camunda 8. Any use of `delete` as a filter in Camunda 7 is not supported directly and is mapped to the closest available behavior during migration.
-:::
 
 ## Modeling conditional events in Modeler
 
@@ -149,7 +148,7 @@ Camunda Modeler (desktop and web) supports conditional start events, intermediat
 
 The system processes conditional events as follows:
 
-- Zeebe evaluates conditional events when their BPMN scope starts and when relevant variables change.
+- The Zeebe engine evaluates conditional events when their BPMN scope starts and when relevant variables change.
 - Operate displays conditional events in process instance views and supports instance migration and modification.
 - Optimize includes conditional events in BPMN diagrams and makes them available in reports.
 
@@ -157,8 +156,7 @@ The system processes conditional events as follows:
 
 A conditional start event:
 
-```
-<bpmn:startEvent id="ConditionalStart">
+```<bpmn:startEvent id="ConditionalStart">
 <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_Start">
 <bpmn:condition xsi:type="bpmn:tFormalExpression">= amount > 100</bpmn:condition>
 </bpmn:conditionalEventDefinition>
@@ -167,8 +165,7 @@ A conditional start event:
 
 An intermediate conditional catch event:
 
-```
-<bpmn:intermediateCatchEvent id="WaitForCondition">
+```<bpmn:intermediateCatchEvent id="WaitForCondition">
 <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_Catch">
 <bpmn:condition xsi:type="bpmn:tFormalExpression">= processorAvailable</bpmn:condition>
 <bpmn:extensionElements>
@@ -181,8 +178,7 @@ variableEvents="create, update" />
 
 A conditional boundary event:
 
-```
-<bpmn:boundaryEvent id="CancelReview" attachedToRef="ReviewApplication">
+```<bpmn:boundaryEvent id="CancelReview" attachedToRef="ReviewApplication">
 <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_Boundary">
 <bpmn:condition xsi:type="bpmn:tFormalExpression">= customerCancelled</bpmn:condition>
 </bpmn:conditionalEventDefinition>
@@ -191,4 +187,4 @@ A conditional boundary event:
 
 ## Additional resources
 
-- Orchestration Cluster REST API: [Evaluate root level conditional start events](https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals/)
+- [Evaluate root-level conditional start events](/apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals/) for request and response details.
