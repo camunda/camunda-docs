@@ -14,7 +14,7 @@ Upgrade individual Camunda 8 components when moving from version 8.7 to 8.8. Com
 Component-level changes are part of the overall upgrade process.
 
 Follow the upgrade path for your deployment method and apply component-level steps when required by your configuration.
-See [Upgrade Camunda 8](../overview.md).
+See [Upgrade Camunda 8](../index.md).
 :::
 
 ## When component-level changes apply
@@ -23,7 +23,12 @@ Additional steps may be required if your deployment:
 
 - Uses non-default or customized component configuration
 - Manages components outside the standard Helm or Manual upgrade flow
-- Is affected by component-specific changes introduced in Camunda 8.8. See [What’s new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md) and the [8.8 release notes](/reference/announcements-release-notes/880/880-release-notes.md).
+- Is affected by component-specific changes introduced in Camunda 8.8.
+
+For release context, see:
+
+- [What’s new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md)
+- [8.8 release notes](/reference/announcements-release-notes/880/880-release-notes.md).
 
 ## Upgrade components from 8.7 to 8.8
 
@@ -47,11 +52,11 @@ Review these guides to migrate Optimize data, apply required configuration chang
 
 <p><a href="./optimize" class="link-arrow">Upgrade Optimize from 8.7 to 8.8</a></p>
 
-### Elasticsearch
+### Database
 
-This applies if your Camunda deployment includes an Elasticsearch version upgrade as part of the Camunda 8.7 to 8.8 transition.
+- **Elasticsearch**: This applies if your Camunda deployment includes an Elasticsearch version upgrade as part of the Camunda 8.7 to 8.8 transition.
 
-<p><a href="./database/changes-in-elasticsearch-8" class="link-arrow">Elasticsearch 7 to 8 compatibility changes for Camunda</a></p>
+    <p><a href="./database/changes-in-elasticsearch-8" class="link-arrow">Elasticsearch 7 to 8 compatibility changes for Camunda</a></p>
 
 ### Keycloak
 

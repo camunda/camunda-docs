@@ -3486,7 +3486,7 @@
       "className": "sidebar-cta",
       "link": {
         "type": "doc",
-        "id": "self-managed/upgrade/overview"
+        "id": "self-managed/upgrade/index"
       },
       "items": [
         "self-managed/upgrade/prepare-for-upgrade",

@@ -183,7 +183,7 @@ RewriteRule ^docs/next/guides/automating-a-process-using-bpmn/?$ /docs/component
 RewriteRule ^docs/next/guides/utilizing-forms/?$ /docs/components/modeler/forms/utilizing-forms/ [R=301,L]
 
 # Self-Managed upgrade guide restructuring
-RewriteRule ^docs/self-managed/update/administrators/admin-upgrade-overview/?$ /docs/self-managed/upgrade/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/update/administrators/admin-upgrade-overview/?$ /docs/self-managed/upgrade/ [R=301,L]
 RewriteRule ^docs/self-managed/update/administrators/prepare-for-admin-upgrade/?$ /docs/self-managed/upgrade/prepare-for-upgrade/ [R=301,L]
 RewriteRule ^docs/self-managed/update/administrators/run-admin-upgrade/?$ /docs/self-managed/upgrade/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/components/components-upgrade/introduction/?$ /docs/self-managed/upgrade/components/ [R=301,L]

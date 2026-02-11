@@ -227,7 +227,7 @@ Before implementing dual-region, ensure your organization has:
 
 Follow the upgrade recommendations provided in the [Camunda Helm chart](/self-managed/upgrade/helm/index.md) and the [component-specific upgrade guides](/self-managed/upgrade/components/index.md).
 
-The general procedure outlined in the [upgrade overview](/self-managed/upgrade/overview.md) also applies. Before starting, always create a [Camunda-supported backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+The general procedure outlined in the [upgrade overview](/self-managed/upgrade/index.md) also applies. Before starting, always create a [Camunda-supported backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
 For dual-region setups, use a **staged upgrade approach**: upgrade one region at a time.
 Upgrading both regions simultaneously can cause a **loss of quorum** in Zeebe partitions if brokers in both regions are upgraded at once. To prevent this, complete the upgrade in one region before proceeding with the other, ensuring that only one Zeebe broker is updated during each phase.

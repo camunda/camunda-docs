@@ -417,7 +417,7 @@ The following guides provide detailed information on how you can upgrade to Camu
     <td>**Who is this guide for?**</td>
 </tr>
 <tr>
-    <td>[Self-Managed upgrade guide](/self-managed/upgrade/overview.md)</td>
+    <td>[Self-Managed upgrade guide](/self-managed/upgrade/index.md)</td>
     <td>Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment.</td>
     <td>Operations and platform administrators of Self-Managed installations.</td>
 </tr>

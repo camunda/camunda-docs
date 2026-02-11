@@ -8,15 +8,19 @@ import ZeebeGrid from '../../../components/zeebe/react-components/\_zeebe-card';
 import { helmIndexCards } from './../react-components/\_card-data';
 import { HelmChartValuesFileBitnamiLegacyLink } from "@site/src/components/CamundaDistributions";
 
+:::note
+This section is a work in progress for Camunda 8.9 and will be updated as upgrade requirements are finalized.
+:::
+
 Use the guides below to upgrade a Camunda 8 Self-Managed deployment that is installed using the official Camunda Helm charts.
 
-If you are upgrading from a version earlier than 8.7, see [Upgrading from an earlier version](self-managed/upgrade/index.md#upgrading-from-an-earlier-version).
+If you are upgrading from a version earlier than 8.8, see [Upgrading from an earlier version](self-managed/upgrade/index.md#upgrading-from-an-earlier-version).
 
 <ZeebeGrid zeebe={helmIndexCards} />
 
 ### Helm chart version
 
-The Camunda Helm chart version is independent from the Camunda application version. Use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to identify the Helm chart version that deploys Camunda 8.8.
+The Camunda Helm chart version is independent from the Camunda application version. Use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to identify the Helm chart version that deploys Camunda 8.9.
 
 You can also list available chart versions using the Helm CLI:
 
@@ -38,4 +42,4 @@ See the [Bitnami GitHub announcement](https://github.com/bitnami/containers/issu
 ## Related resources
 
 - [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/)
-- [Component upgrade from 8.7 to 8.8](self-managed/upgrade/components/870-to-880.md)
+- [Component upgrade from 8.8 to 8.9](self-managed/upgrade/components/880-to-890.md)
