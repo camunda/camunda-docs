@@ -220,6 +220,14 @@ For easy and reproducible installations, we will use yaml files to configure the
 
 Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
 
+:::important Database initialization prerequisite
+If you are using an external Aurora PostgreSQL database, you must create the individual component databases (Identity, Web Modeler) before installing the Helm chart. This initialization step is covered in the infrastructure setup guides:
+- **Terraform**: See [Configure the database and associated access](./terraform-setup.md#configure-the-database-and-associated-access) in the Terraform setup guide.
+- **eksctl**: See [Create the databases](./eksctl.md#create-the-databases) in the eksctl guide.
+
+Without this step, the Camunda components will fail to connect to their databases.
+:::
+
 <Tabs groupId="values">
   <TabItem value="with-domain-std" label="Standard with domain" default>
 
