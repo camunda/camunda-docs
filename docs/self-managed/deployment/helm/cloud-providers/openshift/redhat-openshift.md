@@ -274,19 +274,26 @@ Some components are not enabled by default in this deployment. For more informat
 
 #### Fill your deployment with actual values
 
-Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
+First, export the required environment variables for the Helm chart version and namespace:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/assemble-envsubst-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/chart-env.sh
 ```
 
-Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
+- `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed.
+- `CAMUNDA_RELEASE_NAME` is the name of the Helm release associated with this Camunda installation.
+
+If you plan to enable Web Modeler, export the SMTP password variable:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/generate-passwords.sh
 ```
 
-Use these environment variables in the `kubectl` command to create the secret.
+Once you've prepared the `values.yml` file and exported the required environment variables, run the following `envsubst` command to substitute the environment variables with their actual values:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/assemble-envsubst-values.sh
+```
 
 :::note Web Modeler SMTP secret
 If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)):
@@ -300,16 +307,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm.
 
-The following are the required environment variables with some example values:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/chart-env.sh
-```
-
-- `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed.
-- `CAMUNDA_RELEASE_NAME` is the name of the Helm release associated with this Camunda installation.
-
-Then run the following command:
+Run the following command:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/install-chart.sh
