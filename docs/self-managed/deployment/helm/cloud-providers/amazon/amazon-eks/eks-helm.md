@@ -9,6 +9,11 @@ description: "Set up the Camunda 8 environment with Helm and an optional Ingress
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+import IdpPrerequisite from '../../_partials/_idp-prerequisite.md'
+import NoDomainIdpChoice from '../../_partials/_no-domain-idp-choice.md'
+import WhyNoIdp from '../../_partials/_why-no-idp.md'
+import SingleNamespaceDeployment from '../../_partials/_single-namespace-deployment.md'
+
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing AWS Kubernetes EKS cluster. It also includes instructions for setting up optional DNS configurations and other optional AWS-managed services, such as OpenSearch and PostgreSQL.
 
 Lastly you'll verify that the connection to your Self-Managed Camunda 8 environment is working.
@@ -46,21 +51,11 @@ The architecture includes the following core components:
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
 
-:::note Identity provider prerequisite
-An OIDC-compatible identity provider (IdP) is required. This guide does **not** deploy Keycloak or any other IdP. You must configure your own IdP before proceeding. Options include:
-- **Keycloak via the Keycloak Operator**: See the [vendor-supported infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#keycloak-deployment) for installation steps and the corresponding Helm values overlay.
-- **External OIDC provider**: Configure your provider and use the OIDC values overlay. See [Connect to an OIDC provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md) for configuration details.
+<IdpPrerequisite />
 
-After deploying your IdP, combine your chosen auth overlay with the base values file using `yq` before running `envsubst`, as documented in the values file headers.
-:::
+<NoDomainIdpChoice />
 
-:::caution No-domain deployments and IdP choice
-If you deploy Camunda **without a domain** (using `kubectl port-forward`), you will generally need to use Keycloak as your IdP. Most external OIDC providers (for example, Microsoft Entra ID, Okta) do not allow `localhost` as a valid redirect URI for security reasons. Keycloak, when deployed locally in the cluster, can be configured to accept localhost-based redirect URIs.
-:::
-
-:::tip Why no IdP is included by default
-The choice of identity provider is highly specific to each organization's security requirements, existing infrastructure, and compliance needs. Rather than bundling a default IdP that may not match your setup, the reference architecture leaves this choice to you.
-:::
+<WhyNoIdp />
 
 To demonstrate how to deploy with a custom domain, the following stack is also included:
 
@@ -68,9 +63,7 @@ To demonstrate how to deploy with a custom domain, the following stack is also i
 - **external-dns**: Manages DNS record in Route53 for domain ownership confirmation
 - **ingress-nginx**: Provides HTTP/HTTPS load balancing and routing to Kubernetes services
 
-:::info Single namespace deployment
-This guide uses a single Kubernetes namespace for simplicity, since the deployment is done with a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components), which recommends separating Orchestration Cluster and Web Modeler or Console into different namespaces in production to improve isolation and enable independent scaling.
-:::
+<SingleNamespaceDeployment />
 
 ## Export environment variables
 
