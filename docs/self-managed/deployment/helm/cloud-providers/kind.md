@@ -54,6 +54,7 @@ Before you begin, you'll need:
 - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 - [Helm](https://helm.sh/docs/intro/install/)
+- [envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) (Domain mode only; part of the `gettext` package)
 - [mkcert](https://github.com/FiloSottile/mkcert#installation) (Domain mode only)
 
 :::tip
@@ -67,7 +68,11 @@ By the end of this tutorial, you'll have:
 - A local Kubernetes cluster running with kind. This includes one control plane and two worker nodes.
 - An Ingress NGINX controller deployed for routing traffic (domain mode only).
 - TLS certificates configured with mkcert (domain mode only).
-- Camunda 8 Self-Managed fully deployed and accessible.
+- Prerequisite services deployed via Kubernetes operators:
+  - Elasticsearch (ECK)
+  - PostgreSQL (CloudNativePG)
+  - Keycloak (Keycloak Operator)
+- Camunda 8 Self-Managed fully deployed and accessible, connected to the operator-managed services.
 
 :::info Other installation profiles
 With this guide, you deploy the full Camunda 8 platform with all components. For lighter setups or specific use cases, see the [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md), which covers different installation profiles, such as core only, with Connectors, and with Web Modeler.
@@ -208,7 +213,7 @@ The certificate generation script:
 
 ### Create Kubernetes secrets for TLS
 
-1. Create the TLS secret in Kubernetes. The Ingress controller will use this to serve HTTPS traffic for `camunda.example.com`:
+1. Create the TLS secret in Kubernetes. The Ingress controller will use this to serve HTTPS traffic for `camunda.example.com`. This also creates a `camunda-keycloak-tls` secret for the Keycloak Ingress:
 
    ```bash reference
    https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/certs-create-secret.sh
@@ -220,9 +225,25 @@ The certificate generation script:
    https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/certs-create-ca-configmap.sh
    ```
 
+### Deploy prerequisite services
+
+Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
+
+- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
+- Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
+
+Run the operator deployment script, specifying the domain deployment mode:
+
+```bash
+CAMUNDA_MODE=domain ./procedure/operators-deploy.sh
+```
+
+This script installs each operator and its custom resources, then waits for all instances to be ready.
+
 ### Deploy Camunda 8
 
-Deploy Camunda 8 with the domain mode Helm values:
+Deploy Camunda 8 with the domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based) to connect Camunda to the external Elasticsearch, PostgreSQL, and Keycloak instances:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/camunda-deploy-domain.sh
@@ -231,11 +252,23 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 This uses the following Helm values:
 
 <details>
-<summary>Domain mode Helm values</summary>
+<summary>Domain mode Helm values (kind-specific)</summary>
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/helm-values/values-domain.yml
 ```
+
+</details>
+
+<details>
+<summary>Operator-based Helm values (external Elasticsearch, PostgreSQL, Keycloak)</summary>
+
+The deployment script layers the following shared operator values before the kind-specific values:
+
+- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml): Connects Camunda to the ECK-managed Elasticsearch.
+- [`camunda-keycloak-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml): Connects Camunda to the operator-managed Keycloak (domain mode).
+- [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
+- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
 
 </details>
 
@@ -254,25 +287,39 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 
 This section covers the simplified setup using port-forwarding without TLS.
 
-### Configure your hosts file for Keycloak
+### Deploy prerequisite services
 
-When running without a domain, Console validates the JWT issuer claim against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means you need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
+Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
 
-Add (or update) the following entry in your `/etc/hosts` file:
+- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
+- Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
-```text
-127.0.0.1  camunda-keycloak
+Run the operator deployment script, specifying the no-domain deployment mode:
+
+```bash
+CAMUNDA_MODE=no-domain ./procedure/operators-deploy.sh
 ```
 
-The hostname `camunda-keycloak` is derived from the Helm release name (`camunda`) followed by `-keycloak`. If you use a different release name, adjust accordingly (for example, `my-release-keycloak`).
+This script installs each operator and its custom resources, then waits for all instances to be ready.
 
-After adding this entry and deploying Camunda 8 in the next step, you'll be able to reach Keycloak at `http://camunda-keycloak:18080/auth`.
+### Configure your hosts file for Keycloak
 
-**Why port `18080`?** We forward container port `18080` to a non-privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using port 18080.
+The Keycloak operator configures Keycloak with `keycloak-service` as its hostname. The JWT tokens issued by Keycloak use this hostname in the `iss` claim. To ensure your browser can resolve this hostname during the OIDC login flow, add the following entry to your `/etc/hosts` file:
+
+```text
+127.0.0.1  keycloak-service
+```
+
+Alternatively, you can run `make hosts.add-keycloak` to add this entry automatically.
+
+After adding this entry and deploying Camunda 8 in the next step, you'll be able to reach Keycloak at `http://keycloak-service:18080/auth`.
+
+**Why port `18080`?** The Keycloak instance is configured to listen on port `18080` (via `httpPort` in the operator CR) to avoid conflicts with the Zeebe Gateway HTTP endpoint, which uses port `8080` locally.
 
 ### Deploy Camunda 8
 
-Deploy Camunda 8 with the no-domain mode Helm values:
+Deploy Camunda 8 with the no-domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based) to connect Camunda to the external Elasticsearch, PostgreSQL, and Keycloak instances:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/camunda-deploy-no-domain.sh
@@ -281,11 +328,23 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 This uses the following Helm values:
 
 <details>
-<summary>No-domain mode Helm values</summary>
+<summary>No-domain mode Helm values (kind-specific)</summary>
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/helm-values/values-no-domain.yml
 ```
+
+</details>
+
+<details>
+<summary>Operator-based Helm values (external Elasticsearch, PostgreSQL, Keycloak)</summary>
+
+The deployment script layers the following shared operator values before the kind-specific values:
+
+- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml): Connects Camunda to the ECK-managed Elasticsearch.
+- [`camunda-keycloak-no-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml): Connects Camunda to the operator-managed Keycloak (no-domain mode).
+- [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
+- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
 
 </details>
 
@@ -354,7 +413,7 @@ sudo kubefwd services -n "camunda"
 Now, you can reach services directly, for example:
 
 - **Identity**: `http://camunda-identity/managementidentity`
-- **Keycloak**: `http://camunda-keycloak`
+- **Keycloak**: `http://keycloak-service:18080/auth`
 - **Zeebe Gateway gRPC**: `camunda-zeebe-gateway:26500`
 
 You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily, then restores the file when it exits.
@@ -372,7 +431,7 @@ You can still use localhost ports if you prefer traditional port-forwarding. Sto
 | Web Modeler          | http://localhost:8070              |
 | Console              | http://localhost:8087              |
 | Connectors           | http://localhost:8088              |
-| Keycloak             | http://camunda-keycloak:18080/auth |
+| Keycloak             | http://keycloak-service:18080/auth |
 
 :::tip Connecting to the workflow engine
 To interact with the Camunda workflow engine via Zeebe Gateway using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker, connect to `localhost:26500` (gRPC) or `http://localhost:8080` (REST).
@@ -419,7 +478,7 @@ kind delete cluster --name camunda-platform-local
 sudo sed -i '/camunda.example.com/d' /etc/hosts
 
 # (no-domain mode) Remove Keycloak hosts entry (requires sudo)
-sudo sed -i '/camunda-keycloak/d' /etc/hosts
+sudo sed -i '/keycloak-service/d' /etc/hosts
 
 # (domain mode) Clean certificates
 rm -rf .certs

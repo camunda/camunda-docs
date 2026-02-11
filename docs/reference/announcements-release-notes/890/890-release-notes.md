@@ -43,7 +43,7 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 #### MCP Client connector operations and filter options
 
-New operations are added in the `Standalone` mode to the MCP Client connector:
+New operations are added in the `Standalone` mode to the MCP (Model Context Protocol) Client connector:
 
 - List resources
 - List resource templates
@@ -108,6 +108,22 @@ With the new Camunda 8 SaaS **AWS US East (us-east-2)** region in North America,
 
 <p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
 
+### Documentation
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Documentation</span></div>
+
+#### Camunda Docs MCP server
+
+<!-- https://github.com/camunda/camunda-docs/issues/7597 -->
+
+Use the Camunda Docs MCP server to query the latest official Camunda 8 documentation in your IDE or AI tool.
+
+- If you use an AI coding tool such as Cursor or Copilot, add the MCP server to help ensure more accurate AI responses and code generation using Camunda 8 documentation and context.
+- Once connected to the MCP server within your editor, you can ask context-aware questions about Camunda.
+- The MCP server is available at the following URL: `https://camunda-docs.mcp.kapa.ai`.
+
+<p className="link-arrow">[Camunda Docs MCP server](/reference/mcp-docs/mcp-docs.md)</p>
+
 ### Modeler
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
@@ -134,6 +150,32 @@ This improvement creates a restricted but controlled collaborative environment, 
 You can now import large process applications (containing a maximum of 100 supported files such as BPMN, DMN, forms, connector templates, and documentation) in a single step in Web Modeler or via direct import links in Self-Managed environments.
 
 <p className="link-arrow">[Import resources into Web Modeler](/components/modeler/web-modeler/modeling/importing-resources.md)</p>
+
+#### Shared global clipboard and duplicate elements
+
+<!-- https://github.com/bpmn-io/bpmn-js/issues/1709 -->
+<!-- https://github.com/camunda/camunda-modeler/issues/4142 -->
+
+In Desktop Modeler and Web Modeler, you can copy-paste BPMN elements seamlessly between Camunda 7/8 diagrams and across clipboard-enabled BPMN tools/websites, and also quickly duplicate via **Cmd+D** (Mac) / **Ctrl+D** (Windows).
+
+#### Tabs autosave in Desktop Modeler
+
+<!-- https://github.com/bpmn-io/bpmn-js/issues/1709 -->
+<!-- https://github.com/camunda/camunda-modeler/issues/4142 -->
+
+The tabs autosave feature automatically saves diagram changes when you switch tabs in Desktop Modeler or when the app loses focus (for example, app switch, window blur). This ensures work is saved immediately, making it visible to your IDE and other tools without manual intervention.
+
+### Migration from Camunda 7 to Camunda 8
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda 7 migration">Camunda 7 migration</span></div>
+
+#### Audit log coverage for Camunda 7 to Camunda 8 migrations
+
+The audit log migrator automatically converts Camunda 7 `UserOperationLog` entries to Camunda 8 AuditLog format, preserving the complete history of user operations including who performed actions, what entities were affected (process instances, tasks, variables, decisions), operation types (create, update, delete, assign, complete), timestamps, and annotations.
+
+This ensures uninterrupted audit trail continuity across the migration, enabling customers to meet compliance requirements and maintain operational visibility without manual data reconstruction or workarounds.
+
+<p className="link-arrow">[Data Migrator history migration coverage](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations.md#camunda-8-history-migration-coverage)</p>
 
 ### Orchestration Cluster
 
@@ -200,22 +242,6 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 - Reduces manual restore effort and enhances confidence in backup integrity, with reduced Recovery Time Objective (RTO).
 
 <p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
-
-#### Manual installation supports RDBMS secondary storage
-
-<!-- https://github.com/camunda/product-hub/issues/2747 -->
-
-Camunda 8 Orchestration Clusters can now be installed manually (VM/bare metal/Java application) with full support for RDBMS (H2, PostgreSQL, Oracle, MariaDB) as secondary storage.
-
-#### Production installation guides
-
-<!-- https://github.com/camunda/product-hub/issues/3026 -->
-<!-- https://github.com/camunda/product-hub/issues/2740 -->
-
-New RDBMS production installation guides for Camunda 8 are available:
-
-- Helm: Kubernetes-based orchestration cluster deployment via Helm, using RDBMS secondary storage.
-- Manual: Deploy and manage Camunda 8 using relational databases in production environments.
 
 ## 8.9.0-alpha3
 

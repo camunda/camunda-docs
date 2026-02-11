@@ -182,7 +182,18 @@ Verify that Liquibase completed the schema migration successfully by checking lo
 kubectl logs <pod-name> | grep -i liquibase
 ```
 
-Look for "Liquibase: Update successful" or similar completion messages. If the migration fails, Liquibase will log the specific error. For troubleshooting, see [Schema troubleshooting](#schema-troubleshooting).
+Look for "Liquibase: Update successful" or similar completion messages. If the migration fails, Liquibase will log the specific error.
+
+You can also verify schema initialization by checking the `databasechangelog` table:
+
+```sql
+-- Verify Liquibase changelog table exists and contains entries
+SELECT COUNT(*) FROM databasechangelog;
+```
+
+This table should exist and contain entries for a fresh Camunda 8.9 installation. On upgrades, this number increases as new changesets are applied.
+
+For troubleshooting, see [schema troubleshooting](#schema-troubleshooting).
 
 ## Schema troubleshooting
 
