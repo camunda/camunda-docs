@@ -39,7 +39,7 @@ Additional informational and high-level overview based on Kubernetes as upstream
   - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - A namespace to host the Camunda Platform.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ## Architecture
 
@@ -74,7 +74,7 @@ Over this guide, you will add and merge values in this file to configure your de
 You can find a reference example of this file here:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/base.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/helm-values/base.yml
 ```
 
 :::danger Merging YAML files
@@ -106,7 +106,7 @@ The route created by OpenShift will use a domain to provide access to the platfo
 To retrieve the OpenShift applications domain (used as an example here), run the following command and define the route domain that will be used for the Camunda 8 deployment:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/setup-application-domain.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/procedure/setup-application-domain.sh
 ```
 
 If you choose to use a custom domain instead, ensure it is supported by your router configuration and replace the example domain with your desired domain. For more details on configuring custom domains in OpenShift, refer to the official [custom domain OpenShift documentation](https://docs.openshift.com/dedicated/applications/deployments/osd-config-custom-domains-applications.html).
@@ -124,7 +124,7 @@ oc get ingresses.config/cluster -o json | jq '.metadata.annotations."ingress.ope
 Alternatively, if you use a dedicated IngressController for the deployment:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/get-ingress-http2-status.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/procedure/get-ingress-http2-status.sh
 ```
 
 - If the output is `"true"`, it means HTTP/2 is enabled.
@@ -138,7 +138,7 @@ If HTTP/2 is not enabled, you can enable it by running the following command:
 **IngressController configuration:**
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/enable-ingress-http2.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/procedure/enable-ingress-http2.sh
 ```
 
 **Global cluster configuration:**
@@ -181,7 +181,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
    Update your `values.yml` file with the following:
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/orchestration-route.yml
+   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/helm-values/orchestration-route.yml
    ```
 
    The actual configuration properties can be reviewed [in the Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
@@ -189,7 +189,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 2. **Connectors:** update your `values.yml` file with the following:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/connectors-route.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/helm-values/connectors-route.yml
 ```
 
 The actual configuration properties can be reviewed [in the connectors configuration documentation](/self-managed/components/connectors/connectors-configuration.md#zeebe-broker-connection).
@@ -199,7 +199,7 @@ The actual configuration properties can be reviewed [in the connectors configura
 1. Set up the global configuration to enable the single Ingress definition with the host. Update your configuration file as shown below:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/helm-values/domain.yml
 ```
 
 <!--Intended space left for not breaking the build!-->
@@ -232,7 +232,7 @@ However, you can use `kubectl port-forward` to access the Camunda platform witho
 To make this work, you will need to configure the deployment to reference `localhost` with the forwarded port. Update your `values.yml` file with the following:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/helm-values/no-domain.yml
 ```
 
 <NoDomainInfo />
@@ -254,7 +254,7 @@ The `global.compatibility.openshift.adaptSecurityContext` variable in your value
 - `disabled`: The `runAsUser` and `fsGroup` values will not be modified (default).
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/scc.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/helm-values/scc.yml
 ```
 
 </TabItem>
@@ -263,7 +263,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/deployment/helm/install/quick-install.md).
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/no-scc.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/helm-values/no-scc.yml
 ```
 
 </TabItem>
@@ -278,7 +278,7 @@ Some components are not enabled by default in this deployment. For more informat
 First, export the required environment variables for the Helm chart version and namespace:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/chart-env.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/procedure/chart-env.sh
 ```
 
 - `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed.
@@ -287,20 +287,20 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 If you plan to enable Web Modeler, export the SMTP password variable:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/generate-passwords.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/procedure/generate-passwords.sh
 ```
 
 Once you've prepared the `values.yml` file and exported the required environment variables, run the following `envsubst` command to substitute the environment variables with their actual values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/assemble-envsubst-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/procedure/assemble-envsubst-values.sh
 ```
 
 :::note Web Modeler secrets
 If you plan to enable Web Modeler, create the required secrets for SMTP email notifications ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)) and the embedded PostgreSQL database:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/create-webmodeler-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/procedure/create-webmodeler-secret.sh
 ```
 :::
 
@@ -311,7 +311,7 @@ Now that the `generated-values.yml` is ready, you can install Camunda 8 using He
 Run the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/install-chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/openshift/single-region/procedure/install-chart.sh
 ```
 
 This command:
@@ -325,7 +325,7 @@ This command:
 You can track the progress of the installation using the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
 ## Verify connectivity to Camunda 8
@@ -426,7 +426,7 @@ For a detailed guide on generating and using a token, consult the relevant docum
 Export the following environment variables:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-verify-zeebe-domain.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/kubernetes/single-region/procedure/export-verify-zeebe-domain.sh
 ```
 
   </TabItem>
@@ -441,7 +441,7 @@ kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --
 Export the following environment variables:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
 ```
 
   </TabItem>
@@ -451,7 +451,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 Generate a temporary token to access the Orchestration Cluster REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Orchestration Cluster REST API and display the cluster topology:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
 ```
 
 ...and results in the following output:
@@ -460,7 +460,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
   <summary>Example output</summary>
 
 ```json reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
+https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
 </details>
