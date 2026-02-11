@@ -42,7 +42,7 @@ Typical use cases include:
 - Starting an escalation process when a case’s `priority` becomes `"high"`.
 - Triggering a monitoring subprocess when a risk score crosses a threshold.
 
-To start processes via conditional start events from external systems, use the Orchestration Cluster REST API. See [Evaluate root-level conditional start events](/apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals/) for request and response details.
+To start processes via conditional start events from external systems, use the Orchestration Cluster REST API. See [Evaluate root-level conditional start events](../../../../apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals/) for request and response details.
 
 ### Intermediate conditional catch events
 
@@ -187,4 +187,4 @@ A conditional boundary event:
 
 ## Additional resources
 
-- [Evaluate root-level conditional start events](/apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals/) for request and response details.
+- [Evaluate root-level conditional start events](../../../../apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals/) for request and response details.
