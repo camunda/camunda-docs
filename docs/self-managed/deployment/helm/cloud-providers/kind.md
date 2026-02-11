@@ -243,7 +243,7 @@ This script installs each operator and its custom resources, then waits for all 
 
 ### Deploy Camunda 8
 
-Deploy Camunda 8 with the domain mode Helm values. The deployment script layers the [vendor-supported Helm values](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based) to connect Camunda to the external Elasticsearch, PostgreSQL, and Keycloak instances:
+Deploy Camunda 8 with the domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based) to connect Camunda to the external Elasticsearch, PostgreSQL, and Keycloak instances:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/camunda-deploy-domain.sh
