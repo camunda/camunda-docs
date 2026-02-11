@@ -141,7 +141,7 @@ For more information about the Identity 8.8 changes, see [Identity, authenticati
 
 ## Verify infrastructure compatibility
 
-Check your infrastructure and data services before upgrading.
+Review your infrastructure to confirm compatibility with Camunda 8.8.
 
 | Area                     | 8.8 requirement                               | Action                                                                                                                                                  |
 | :----------------------- | :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |

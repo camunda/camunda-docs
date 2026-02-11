@@ -45,23 +45,28 @@ Do not summarize feature changes here. Link to release notes or component docs i
 
 </table>
 
+For a complete list of changes, see [What’s new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md).
+
 ## Verify infrastructure compatibility
 
-Review your infrastructure and data services to confirm compatibility with Camunda 8.9.
+Review your infrastructure to confirm compatibility with Camunda 8.9.
 
 <!--
 Populate this table only if Camunda 8.9 introduces new or changed infrastructure requirements.
 Remove the table if no infrastructure-related actions apply.
 -->
 
-<table className="table-callout">
-<tr>
-  <td style={{minWidth: "30%"}}>**Area**</td>
-  <td>**Requirement or change**</td>
-  <td style={{width: "160px"}}>**Action**</td>
-</tr>
+| Area                     | 8.8 requirement                               | Action                                                                                                                                                  |
+| :----------------------- | :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Elasticsearch/OpenSearch | Elasticsearch 8.16+, OpenSearch 2.17+.        | Upgrade the cluster to the new version. Check the [supported environments](/reference/supported-environments.md) matrix to confirm the minimum version. |
+| CPU/Memory               | Consolidated Zeebe StatefulSet shares limits. | Measure current usage. Test with a load generator.                                                                                                      |
+| Storage                  | Same or higher IOPS as 8.7.                   | Check there is required space for temporary migration file.                                                                                             |
 
-</table>
+:::caution Plan a performance test
+Component consolidation in 8.8 changes resource consumption patterns. Before upgrading production, run a load test that simulates real traffic and validate CPU, memory, and storage behavior.
+
+See the [sizing and benchmarking recommendations](/reference/supported-environments.md#sizing).
+:::
 
 ## Next steps
 
