@@ -146,7 +146,11 @@ As shown in the [architecture diagram](#web-modeler-and-console), this namespace
 - [Console](/self-managed/components/console/overview.md) — administrative interface
 - [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Web Modeler, Console, Optimize
 
-This namespace also includes Keycloak as an example OIDC Identity Provider (IdP) for Management Identity. You can replace Keycloak with any compatible OIDC provider to meet your organization's requirements.
+This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#keycloak-deployment) or Microsoft Entra ID).
+
+:::tip Why no IdP is included by default
+The choice of identity provider is highly specific to each organization's security requirements, existing infrastructure, and compliance needs. Rather than bundling a default IdP that may not match your setup, the reference architecture leaves this choice to you. This approach gives you full control over your authentication stack and avoids unnecessary complexity for teams that already have an IdP in place.
+:::
 
 :::warning Identity separation
 Console, Optimize, and Web Modeler rely on Management Identity (formerly Identity). This service is separate from the embedded Identity in the Orchestration Cluster and incompatible with it. To share the same user base and API clients across both, you must use OIDC.
@@ -189,7 +193,7 @@ Networking is largely managed through services and load balancers. The following
 
 - Stable, high-speed connection
 - Firewall rules for:
-  - `80`: Web UI (Console, Management Identity, Keycloak, Web Modeler)
+  - `80`: Web UI (Console, Management Identity, Web Modeler, and IdP if co-located)
   - `82`: Metrics (Management Identity)
   - `8080`: REST/Web UI (Connectors, Orchestration Cluster)
   - `8071`, `8091`: Management (Web Modeler)
@@ -245,7 +249,7 @@ The following databases are required:
 | Database                 | Requirement                                                 |
 | :----------------------- | :---------------------------------------------------------- |
 | Elasticsearch/OpenSearch | Required by Orchestration Cluster and Optimize.             |
-| PostgreSQL               | Required by Management Identity, Keycloak, and Web Modeler. |
+| PostgreSQL               | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster. |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
