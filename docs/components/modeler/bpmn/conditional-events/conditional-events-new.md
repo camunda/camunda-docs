@@ -39,7 +39,7 @@ Conditional start events start a process instance or event subprocess when the c
 - Trigger a monitoring subprocess when a risk score crosses a threshold
 
 **Evaluation from external systems:**  
-Use the Orchestration Cluster REST API to [evaluate root-level conditional start events](../../../../apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals/).
+Use the Orchestration Cluster REST API to [evaluate root-level conditional start events](../../../../apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals.api.mdx).
 
 </TabItem>
 
@@ -177,5 +177,4 @@ Only `create` and `update` are supported in Camunda 8. The `delete` event is map
 
 ## Additional resources
 
-- [Evaluate root-level conditional start events](../../../../apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals/)
-- Camunda Modeler (desktop and web) supports conditional events via the properties panel
+- [Evaluate root-level conditional start events](../../../../apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals.api.mdx)
