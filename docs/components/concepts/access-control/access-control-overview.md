@@ -73,17 +73,6 @@ For example, a user’s authorizations allow them to access Operate, view runnin
 
 A user must be both authenticated and authorized to access protected resources.
 
-### User task authorization
-
-User task access in Camunda 8 is controlled by the Orchestration Cluster authorization model.
-
-Access can be granted at a broad process level or scoped to individual tasks, depending on how permissions are configured.
-
-For details, see:
-
-- [Orchestration Cluster authorization](./authorizations.md)
-- [User task authorization in Tasklist](../../tasklist/user-task-authorization.md)
-
 ## Authentication methods
 
 Camunda 8 supports multiple authentication methods depending on the environment:
