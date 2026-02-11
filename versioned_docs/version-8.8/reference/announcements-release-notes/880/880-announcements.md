@@ -842,7 +842,7 @@ Full setup instructions are available in the [installation guide](/self-managed/
   
 #### Helm chart: Alternative infrastructure methods
 
-For production environments, use managed or external services first. If not available, prefer vendor-supported operators (PostgreSQL, Elasticsearch/OpenSearch, Keycloak) over Bitnami subcharts. Bitnami subcharts remain available for evaluation or proof-of-concept use. See [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md).
+For production environments, use managed or external services first. If not available, prefer vendor-supported operators (PostgreSQL, Elasticsearch/OpenSearch, Keycloak) over Bitnami subcharts. Bitnami subcharts remain available for evaluation or proof-of-concept use. See [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
 </div>
 </div>

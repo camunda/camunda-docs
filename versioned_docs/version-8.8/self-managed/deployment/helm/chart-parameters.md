@@ -43,7 +43,7 @@ Bitnami subcharts are best suited for development and testing environments unles
 For production environments, Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach lets you use your preferred deployment methods, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda—providing greater operational control and flexibility.
 
 **Alternative deployment approach:**  
-See [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
+See [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
 :::
 
 #### Bitnami subcharts guidance

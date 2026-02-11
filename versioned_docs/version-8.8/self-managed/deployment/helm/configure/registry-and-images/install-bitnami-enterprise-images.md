@@ -16,7 +16,7 @@ Bitnami Premium images do not change Camunda's support policy for infrastructure
 
 - **Customer support**: For any issues, customers contact **Camunda support** through the standard support channels.
 - **No direct vendor support**: Customers do not receive direct support from Bitnami (Broadcom). Camunda redistributes the images, but this does not establish a support relationship between the customer and Bitnami.
-- **Recommendation**: For production environments, Camunda recommends using managed services or [vendor-maintained deployment methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md) rather than Bitnami subcharts.
+- **Recommendation**: For production environments, Camunda recommends using managed services or [operator-based deployment methods](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) rather than Bitnami subcharts.
   :::
 
 :::info Important update since Camunda 8.8
@@ -34,7 +34,7 @@ Previously, some users deployed Bitnami subcharts in production. Starting with C
 
 :::note Alternative: Vendor-maintained deployment methods
 For production environments, consider using vendor-maintained deployment methods instead of Bitnami subcharts. This approach leverages official Kubernetes operators (CloudNativePG, ECK, Keycloak Operator) maintained by their respective project teams.  
-See [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md) for detailed instructions.
+See [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for detailed instructions.
 :::
 
 If you use Bitnami-based subcharts in production, Camunda strongly recommends using Bitnami Premium images licensed by Camunda and maintained by Bitnami (Broadcom). This guide explains how to configure and install Camunda with these images.
