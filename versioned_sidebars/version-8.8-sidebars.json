@@ -358,8 +358,11 @@
                     "id": "components/early-access/alpha/mcp-client/mcp-client"
                   },
                   "items": [
+                    "components/early-access/alpha/mcp-client/mcp-client-connector",
                     "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
-                    "components/early-access/alpha/mcp-client/mcp-client-connector"
+                    "components/early-access/alpha/mcp-client/mcp-client-config",
+                    "components/early-access/alpha/mcp-client/mcp-client-tool-discovery",
+                    "components/early-access/alpha/mcp-client/mcp-client-human-in-the-loop"
                   ]
                 },
                 "components/early-access/alpha/ms-teams/ms-teams"
@@ -832,8 +835,15 @@
             "components/connectors/use-connectors/configuring-out-of-the-box-connectors",
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
-            "components/connectors/use-connectors/outbound",
-            "components/connectors/use-connectors/intrinsic-functions",
+            "components/connectors/use-connectors/outbound"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Advanced connector topics",
+          "items": [
+            "components/connectors/advanced-topics/connector-deduplication",
+            "components/connectors/advanced-topics/intrinsic-functions",
             "components/connectors/use-connectors-in-hybrid-mode"
           ]
         },
@@ -2809,6 +2819,7 @@
       "items": ["reference/data-collection/usage-metrics"]
     },
     "reference/contact",
+    "reference/mcp-docs/docs-mcp",
     "reference/legal"
   ],
   "Self-Managed": [

@@ -223,37 +223,44 @@ The following table shows which Camunda 8 entities and properties are migrated b
 
 | Property                | Can be migrated |
 | ----------------------- | --------------- |
-| auditLogKey             | No              |
-| entityKey               | No              |
-| entityType              | No              |
-| operationType           | No              |
-| entityVersion           | No              |
+| auditLogKey             | Yes             |
+| entityKey               | Partially       |
+| entityType              | Yes             |
+| operationType           | Yes             |
+| entityVersion           | Yes             |
 | entityValueType         | No              |
 | entityOperationIntent   | No              |
 | batchOperationKey       | No              |
 | batchOperationType      | No              |
-| timestamp               | No              |
-| actorType               | No              |
-| actorId                 | No              |
-| tenantId                | No              |
-| tenantScope             | No              |
-| result                  | No              |
-| annotation              | No              |
-| category                | No              |
-| processDefinitionId     | No              |
+| timestamp               | Yes             |
+| actorType               | Yes             |
+| actorId                 | Yes             |
+| tenantId                | Yes             |
+| tenantScope             | Yes             |
+| result                  | Yes             |
+| annotation              | Yes             |
+| category                | Yes             |
+| processDefinitionId     | Yes             |
 | decisionRequirementsId  | No              |
 | decisionDefinitionId    | No              |
-| processDefinitionKey    | No              |
-| processInstanceKey      | No              |
-| elementInstanceKey      | No              |
+| processDefinitionKey    | Yes             |
+| processInstanceKey      | Yes             |
+| elementInstanceKey      | Partially       |
 | jobKey                  | No              |
-| userTaskKey             | No              |
+| userTaskKey             | Yes             |
 | decisionRequirementsKey | No              |
 | decisionDefinitionKey   | No              |
 | decisionEvaluationKey   | No              |
 | deploymentKey           | No              |
 | formKey                 | No              |
 | resourceKey             | No              |
+
+The following limitations apply:
+
+- Audit log entries are migrated only for user tasks, process definitions, process instances, variables, decisions, users, groups, and authorizations.
+- Audit log entries are not migrated for batch operations, identity links, attachments, job definitions, jobs, external tasks, metrics, operation logs, filters, comments, and properties.
+- The `entityKey` property is migrated only for entities related to user tasks, process definitions, and process instances.
+- The `elementInstanceKey` property is migrated only for entities related to user tasks.
 
 ### Batch operation
 
@@ -514,24 +521,24 @@ The following table shows which Camunda 8 entities and properties are migrated b
 
 ### Process instance
 
-| Property                 | Can be migrated |
-| ------------------------ | --------------- |
-| processInstanceKey       | Yes             |
-| rootProcessInstanceKey   | Yes             |
-| processDefinitionId      | Yes             |
-| processDefinitionKey     | Yes             |
-| state                    | Yes             |
-| startDate                | Yes             |
-| endDate                  | Yes             |
-| tenantId                 | Yes             |
-| parentProcessInstanceKey | Yes             |
-| parentElementInstanceKey | No              |
-| numIncidents             | No              |
-| version                  | Yes             |
-| partitionId              | Yes             |
-| treePath                 | No              |
-| historyCleanupDate       | Yes             |
-| tags                     | No              |
+| Property                 | Can be migrated     |
+| ------------------------ | ------------------- |
+| processInstanceKey       | Yes                 |
+| rootProcessInstanceKey   | Yes                 |
+| processDefinitionId      | Yes                 |
+| processDefinitionKey     | Yes                 |
+| state                    | Yes                 |
+| startDate                | Yes                 |
+| endDate                  | Yes                 |
+| tenantId                 | Yes                 |
+| parentProcessInstanceKey | Yes                 |
+| parentElementInstanceKey | No                  |
+| numIncidents             | No (`0` by default) |
+| version                  | Yes                 |
+| partitionId              | Yes                 |
+| treePath                 | No                  |
+| historyCleanupDate       | Yes                 |
+| tags                     | No                  |
 
 ### Sequence flow
 
