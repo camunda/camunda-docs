@@ -39,12 +39,6 @@ The architecture includes the following core components:
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
 
-<IdpPrerequisite />
-
-<NoDomainIdpChoice />
-
-<WhyNoIdp />
-
 To demonstrate how to deploy with a custom domain, the following stack is also included:
 
 - **cert-manager**: Automates TLS certificate management with [Let's Encrypt](https://letsencrypt.org/)
@@ -174,6 +168,14 @@ After exporting the above values, follow up with:
 ```shell reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-cert-manager-issuer.sh
 ```
+
+## Identity Provider (IdP) setup
+
+<IdpPrerequisite />
+
+<NoDomainIdpChoice />
+
+<WhyNoIdp />
 
 ## Deploy Camunda 8 via Helm charts
 
