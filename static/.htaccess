@@ -233,6 +233,7 @@ RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-release-note
 
 # Rename vendor-supported-infrastructure to operator-based-infrastructure (8.8)
 RewriteRule ^docs/next/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/next/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
+RewriteRule ^docs/8.8/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/8.8/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
 RewriteRule ^docs/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
 
 # Restructure Web Modeler Docs (8.8)
