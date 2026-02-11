@@ -6,12 +6,87 @@ description: "Connection to Camunda 8."
 
 ### General settings
 
-| YAML path               | Default value | Description                                                                                                                  |
-| ----------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| zeebe.enabled           | false         | Toggles whether Optimize should attempt to import data from the connected Zeebe instance.                                    |
-| zeebe.name              | zeebe-record  | The name suffix of the exported Zeebe records. This must match the record-prefix configured in the exporter of the instance. |
-| zeebe.partitionCount    | 1             | The number of partitions configured for the Zeebe record source.                                                             |
-| zeebe.maxImportPageSize | 200           | The max page size for importing Zeebe data.                                                                                  |
+Optimize imports process, variable, incident, and user task data from the Zeebe Elasticsearch or OpenSearch exporters in the Orchestration Cluster. For exporter configuration options (including filters), see:
+
+- [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)
+- [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md)
+
+The settings below control how Optimize connects to and paginates this exporter data.
+
+| YAML path               | Default value | Description                                                                                                                                                           |
+| ----------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| zeebe.enabled           | false         | Toggles whether Optimize should attempt to import data from the connected Zeebe instance.                                                                             |
+| zeebe.name              | zeebe-record  | The index prefix used for exported Zeebe records. This must match the `index.prefix` configured in the Elasticsearch or OpenSearch exporter that Optimize reads from. |
+| zeebe.partitionCount    | 1             | The number of partitions configured for the Zeebe record source.                                                                                                      |
+| zeebe.maxImportPageSize | 200           | The max page size for importing Zeebe data.                                                                                                                           |
+
+### Exporter filters and Optimize data completeness
+
+From Camunda 8.9 and above, the Elasticsearch and OpenSearch exporters provide optional filters that can reduce the amount of data written for Optimize:
+
+- Variable names: Inclusion/exclusion lists with match modes such as exact, starts with, and ends with.
+- Variable value types: Inclusion/exclusion lists for inferred types like `String`, `Number`, `Boolean`, `Object`, `Array`, and `Null`.
+- BPMN process IDs: Inclusion/exclusion lists by `bpmnProcessId` that drop all records tied to selected processes.
+- Optimize mode: A mode that keeps only the value types and intents required by Optimize, and drops other record types not used by Optimize.
+
+These filters run inside the exporter and permanently drop matching records from the exported stream. Optimize can never import data that was never exported.
+
+For the exact configuration properties and YAML/env‑var syntax, see the Elasticsearch and OpenSearch exporter documentation.
+
+#### Non‑retroactive filters and permanent gaps
+
+Process inclusion/exclusion filters are not retroactive:
+
+- Filters only affect records produced after the configuration change.
+- If a process is excluded (or not included) for some period and later re‑enabled, records from the excluded period were never exported.
+- As a result, Optimize will always show a permanent gap in that time window for the affected process, even if you later remove the filter or inclusion list.
+
+The same principle applies to variable‑name and variable‑type filters: variables that were dropped by the exporter during a given time window cannot be recovered in Optimize, even if you subsequently relax the filters.
+
+#### When it is safe to enable exporter filters
+
+The recommended patterns are:
+
+- Fresh 8.9+ clusters or new Optimize installations.
+  Enable exporter filters (variable, type, process, Optimize mode) before starting Optimize imports. Optimize will build its indices from a single, consistently filtered stream and no special action is required.
+
+- Clusters using exporters for 8.8 to 8.9 migration or other pipelines.
+  Do not change exporter filters during the migration window. Follow the main migration documentation and only enable filters after migration has completed, to avoid interfering with both migration and Optimize imports.
+
+#### Changing filters on existing clusters (sequence vs position)
+
+On clusters that have already exported unfiltered data to Optimize, enabling or changing exporter filters mid‑stream can cause Optimize to miss some re‑exported events:
+
+- Before 8.9, exporters always wrote an unfiltered event stream with a stable synthetic sequence counter per record. Optimize could reliably continue from “the last sequence it had seen”.
+- With 8.9 filters, re‑exporting from a snapshot after enabling filters can cause the same logical event to appear at a different effective sequence. Optimize may then skip some events because it assumes all records with a lower sequence than the last processed one have already been imported.
+
+Today, there is no automatic, upgrade‑safe way to change filters without any risk of gaps. Practically, you have two options:
+
+- Accept limited gaps. Leave Optimize running, change the exporter filters, and accept that some re‑exported events may be skipped. Optimize continues to track both position and sequence internally but may not retroactively fill all gaps.
+
+- Rebuild Optimize indices from a consistently filtered stream. For clusters that need a strictly consistent, filtered history:
+  1. Stop Optimize imports.
+  2. Enable or change exporter filters.
+  3. Recreate the Optimize indices so that Optimize rebuilds its state from scratch from the filtered exporter data.
+
+#### Supported versions
+
+- Exporter filters and Optimize mode are introduced in Camunda 8.9 and are not backported to earlier 8.x versions.
+- On clusters running earlier versions, the exporters always write an unfiltered event stream and this section does not apply.
+
+#### Required record types for Optimize
+
+Optimize requires at least the following record value types to populate standard reports:
+
+- `DEPLOYMENT`
+- `PROCESS`
+- `PROCESS_INSTANCE`
+- `VARIABLE`
+- `USER_TASK`
+- `INCIDENT`
+- `JOB`
+
+If exporter settings or Optimize mode disable these value types, Optimize data and reports will become incomplete or fail to load.
 
 ### Licensing
 

@@ -10,35 +10,34 @@ import TabItem from "@theme/TabItem";
 As Zeebe processes jobs and workflows, or performs internal maintenance (for example, Raft failover), it produces an ordered stream of records.
 
 :::note
-
 Exporters are not available in Camunda 8 Software-as-a-Service (SaaS).
-
 :::
 
 ![record-stream](img/exporters-stream.png)
 
-Although clients can't directly inspect this stream, Zeebe can load and configure user-defined code, known as an **exporter**, to process each record.
+Although clients can't directly inspect this stream, Zeebe can load and configure user-defined code, known as an exporter, to process each record. An exporter provides a single entry point to handle every record written to the stream.
 
-An **exporter** provides a single entry point to handle every record written to the stream. Exporters can be used for various purposes:
+Exporters can be used for various purposes:
 
 - Persist historical data by pushing it to an external data warehouse
-- Export records to visualization tools (e.g., [zeebe-simple-monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor))
+- Export records to visualization tools (for example, [zeebe-simple-monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor))
 
 Zeebe loads exporters only if they are configured via the main Zeebe YAML configuration file.
+Once configured, the exporter starts receiving records the next time Zeebe is restarted.
+Exporters are guaranteed to see only records produced after they're configured.
 
-Once configured, the exporter starts receiving records the next time Zeebe is restarted. Exporters are guaranteed to see only records produced after they're configured.
-
-A reference implementation is available via the Zeebe-maintained [Elasticsearch exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter).
+Camunda 8 Self‑Managed ships several built‑in exporters, including the [Camunda Exporter](../components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) and the [Elasticsearch](../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) and [OpenSearch](../components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) exporters.
+Use a custom exporter only when you need a different target system or behavior.
 
 Zeebe manages data deletion through two distinct mechanisms to reduce disk usage:
 
-1. **Internal state deletion**: Zeebe automatically deletes data from its internal state (RocksDB) when it's no longer operationally required, such as when a process instance completes. This deletion is independent of exporters.
+1. Internal state deletion: Zeebe automatically deletes data from its internal state (RocksDB) when it's no longer operationally required, such as when a process instance completes. This deletion is independent of exporters.
 
-2. **Log stream compaction**: The event log stream (which stores all runtime and historical records) is compacted based on positions acknowledged by exporters. Each exporter acknowledges the position of the last record it has successfully processed. The stream processor also marks the position it has processed. Log compaction then occurs up to the **lowest acknowledged position** across all exporters and the stream processor, ensuring the log can be safely truncated without losing data that exporters haven't yet consumed.
+2. Log stream compaction: The event log stream (which stores all runtime and historical records) is compacted based on positions acknowledged by exporters. Each exporter acknowledges the position of the last record it has successfully processed. The stream processor also marks the position it has processed. Log compaction then occurs up to the lowest acknowledged position across all exporters and the stream processor, ensuring the log can be safely truncated without losing data that exporters haven't yet consumed.
 
 :::note
 
-If no exporters are configured, Zeebe automatically deletes data when it's no longer needed. To retain historical data, you **must** configure an exporter to stream records to an external system.
+If no exporters are configured, Zeebe automatically deletes data when it's no longer needed. To retain historical data, you must configure an exporter to stream records to an external system.
 
 :::
 
@@ -108,7 +107,7 @@ This stream processor creates exactly one instance of each configured exporter a
 This means there is exactly one instance of each exporter per partition. For example, if you have four partitions and four processing threads, potentially four instances of your exporter may run simultaneously.
 :::
 
-Zeebe guarantees **at-least-once** delivery semantics. This means that each record will be seen by an exporter at least once, but possibly more. Duplicate delivery can occur in scenarios such as:
+Zeebe guarantees at-least-once delivery semantics. This means that each record will be seen by an exporter at least once, but possibly more. Duplicate delivery can occur in scenarios such as:
 
 - Reprocessing after Raft failover (i.e., leader re-election)
 - Errors occurring before the exporter updates its position
@@ -116,7 +115,7 @@ Zeebe guarantees **at-least-once** delivery semantics. This means that each reco
 To reduce duplicates, the stream processor tracks the position of the last successfully exported record for each exporter. Because the stream is an ordered sequence of records with monotonically increasing positions, tracking the position is sufficient. Exporters set this position once they can ensure the corresponding record was exported successfully.
 
 :::note
-Although Zeebe minimizes duplicate record delivery, exporters must be designed to handle duplicates. Export operations must be **idempotent**. This can be implemented within the exporter, but if exporting to an external system, it's recommended to handle deduplication there to minimize load on Zeebe. Refer to the exporter-specific documentation for implementation details.
+Although Zeebe minimizes duplicate record delivery, exporters must be designed to handle duplicates. Export operations must be idempotent. This can be implemented within the exporter, but if exporting to an external system, it's recommended to handle deduplication there to minimize load on Zeebe. Refer to the exporter-specific documentation for implementation details.
 :::
 
 ### Error handling
@@ -133,6 +132,12 @@ Each loaded exporter introduces some performance overhead. A slow exporter will 
 
 To avoid performance bottlenecks, exporters should be kept as simple and lightweight as possible. Any heavy data transformation or enrichment should be delegated to external systems.
 
+:::caution
+When you enable or change exporter filters on an existing cluster, the exported record stream can change shape.
+If another component (such as Optimize) relies on a previously unfiltered sequence, this may lead to gaps or inconsistencies unless you follow the recommended upgrade flow.
+For Optimize‑specific guidance and examples, see the [Camunda 8 system configuration](../components/optimize/configuration/system-configuration-platform-8.md) documentation.
+:::
+
 ## Purging
 
 The data purge feature allows you to delete all historical (and runtime) data from your cluster. Therefore every
@@ -142,7 +147,7 @@ When a purge is happening, the `Exporter#purge` method is called. This method:
 
 - Deletes all data exported so far.
 - Is blocking and only returns when all data has been deleted.
-- May be retried and therefore **must** be idempotent
+- May be retried and therefore must be idempotent
 
 When the purge cluster operation is executed, the following steps are taken:
 
@@ -167,10 +172,14 @@ All resources required for purging need to be closed afterwards to avoid memory 
 
 ## Custom exporter to filter specific records
 
-The exporter interface supports record filtering through the [`Context#RecordFilter`](https://github.com/camunda/camunda/blob/5e554728eaf1122962fe9833dc9e91ff1fb5a087/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Context.java#L67) interface.
+The exporter interface supports record filtering through the [`Context#RecordFilter`](https://github.com/camunda/camunda/blob/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Context.java) interface.
 
-- This interface provides methods to filter records based on record type, value type, and intent.
-- Valid record types and value types can be found in the [protocol definition](https://github.com/camunda/camunda/blob/stable/8.8/zeebe/protocol/src/main/resources/protocol.xml), while intents are listed in the [Intent enum class](https://github.com/camunda/camunda/blob/stable/8.8/zeebe/protocol/src/main/java/io/camunda/zeebe/protocol/record/intent/Intent.java).
+At a high level, filtering happens in two phases:
+
+- Metadata-level filtering via `acceptType`, `acceptValue`, and `acceptIntent`, which runs before records are deserialized and is very cheap.
+- Record-level filtering via `acceptRecord(Record<?>)`, which can inspect the fully deserialized record value when you need richer conditions (for example, inspecting variables or BPMN process IDs).
+
+Valid record types and value types can be found in the [protocol definition](https://github.com/camunda/camunda/blob/main/zeebe/protocol/src/main/resources/protocol.xml), while intents are listed in the [Intent enum class](https://github.com/camunda/camunda/blob/main/zeebe/protocol/src/main/java/io/camunda/zeebe/protocol/record/intent/Intent.java).
 
 For example, you can implement a custom exporter that only exports records with:
 
@@ -231,10 +240,13 @@ public class CustomExporter implements Exporter {
 
 :::note
 
-- After handling the record, you must acknowledge the position by calling `controller.updateLastExportedRecordPosition(record.getPosition())`. If the position is not acknowledged, the log compaction does not occur and results in out of disk space.
-- Filters are applied as an `AND` condition. This means all conditions must be met for a record to be accepted by the exporter.
-
-:::
+- After handling the record, you must acknowledge the position by calling `controller.updateLastExportedRecordPosition(record.getPosition())`.
+  Because the stream is an ordered sequence of records with monotonically increasing positions, tracking the position is sufficient.
+  Exporters set this position once they can ensure the corresponding record was exported successfully.
+- All filter methods are combined with logical `AND`.
+  A record is exported only if it passes `acceptType`, `acceptValue`, `acceptIntent`, and (when implemented) `acceptRecord`.
+  In simple cases you can implement only the metadata methods; use `acceptRecord` when you need to inspect full record values.
+  :::
 
 ### Listen to expired messages with a custom filter
 
@@ -348,6 +360,20 @@ For example, if you want to allow exporting only message events with `EXPIRED` i
 
         :::
 
+### Optimize‑oriented built‑in filters
+
+Camunda‑maintained exporters for Elasticsearch and OpenSearch include built‑in filters that reduce the volume of data exported when their indices are used primarily by Optimize. These filters can:
+
+- Restrict exported variables (by name pattern or inferred value type).
+- Include or exclude whole processes (based on `bpmnProcessId`).
+- Enable an Optimize mode that exports only the record types and intents Optimize actually consumes.
+
+For concrete arguments, examples, and version details, see:
+
+- [Elasticsearch exporter](../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration)
+- [OpenSearch exporter](../components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration)
+- [Camunda 8 system configuration](../components/optimize/configuration/system-configuration-platform-8.md)
+
 ## Schema
 
 In earlier Camunda versions, some upgrades required manual data migrations. These migrations often introduced:
@@ -356,5 +382,5 @@ In earlier Camunda versions, some upgrades required manual data migrations. Thes
 - Risk of human error
 - Complex backup and rollback procedures
 
-Starting with **Camunda 8.8**, exporters are designed to support upgrades without requiring data migrations.  
+Starting with Camunda 8.8, exporters are designed to support upgrades without requiring data migrations.  
 This approach reduces complexity, minimizes downtime, and enables faster, more reliable releases.
