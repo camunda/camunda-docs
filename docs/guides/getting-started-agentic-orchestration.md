@@ -161,10 +161,10 @@ Configure your local LLM with Ollama.
 #### Set up Ollama
 
 1. **Download and install**: Follow [Ollama's documentation](https://docs.ollama.com/quickstart) for details.
-2. **Confirm installation**: Start the application and check the running version in a terminal or command prompt with the command `ollama --version`.
-3. **Pull the GPT-OSS:20b model**: From the same terminal or command prompt, run `ollama pull gpt-oss:20b`.
-4. **Start the local server**: Run `ollama serve`.
-5. **Test**: Ollama serves an API by default at `http://localhost:11434`. To test it, use a tool like Postman or run this command from your terminal:
+1. **Confirm installation**: Check the installed version in a terminal or command prompt by running `ollama --version`.
+1. **Start the local server**: Start it using the application, or run `ollama serve` in a terminal or command prompt.
+1. **Pull the GPT-OSS:20b model**: If it isn't installed by default, run `ollama pull gpt-oss:20b` in a terminal or command prompt to download the model.
+1. **Test**: Ollama serves an API at `http://localhost:11434` by default. To test it, open that URL in a browser or run this command in your terminal:
 
 ```
 curl -X POST http://localhost:11434/v1/chat/completions \
@@ -174,19 +174,17 @@ curl -X POST http://localhost:11434/v1/chat/completions \
 
 #### Configure properties
 
-The example blueprint downloaded in step one is preconfigured to use AWS Bedrock. Update the connector's configuration as follows to use Ollama instead.
-
-Configure Camunda to point to your local Ollama API, which serves the GPT-OSS:20b LLM, using the Model provider and Model sections within the connector's properties panel.
+The example blueprint downloaded in step one is preconfigured to use AWS Bedrock. Update the connector's configuration using the Model provider and Model sections to use Ollama instead.
 
 **Model provider**
 
-1. Select **OpenAI Compatible** from the Provider dropdown.
-1. The default Ollama API is served at `http://localhost:11434/v1`, so enter this value in the API endpoint field.
+1. Select **OpenAI Compatible** from the **Provider** dropdown.
+1. Enter `http://localhost:11434/v1` in the **API endpoint** field. This is Ollama's default API URL.
 1. No authentication or additional headers are required for the local Ollama API, so leave the remaining fields blank.
 
 **Model**
 
-1. Enter `gpt-oss:20b` in the Model field. Note that this field is case-sensitive, so be sure to enter it in all lowercase.
+1. Enter `gpt-oss:20b` in the **Model** field. This field is case-sensitive, so be sure to enter it in all lowercase.
 
 </TabItem>
 </Tabs>
@@ -197,10 +195,10 @@ When configuring connectors, use [FEEL expressions](/components/modeler/feel/lan
 
 ## Step 3: Test your AI agent
 
-Now deploy and run your AI agent on your Camunda cluster.
+Deploy and run your AI agent in your Camunda cluster.
 
 :::important
-Whether you are testing your agent in Camunda 8 SaaS or locally with Camunda 8 Self-Managed, make sure you’re running a cluster on version 8.8 or higher.
+Whether you are testing your agent in Camunda 8 SaaS or locally with Camunda 8 Self-Managed, make sure you’re running a cluster with version 8.8 or higher.
 :::
 
 Depending on your working environment, test your agent by following the corresponding steps below.
@@ -212,15 +210,14 @@ Depending on your working environment, test your agent by following the correspo
 ]}>
 
 <TabItem value="saas">
-In this example, you can quickly test the AI agent using the [ feature.
 
-1. Open Web Modeler.
-1. Make sure Camunda 8.8 or higher is selected in the **Check problems against** field (see the bottom right of the window).
+1. Open [Web Modeler](<(/components/modeler/web-modeler/index.md)>).
+1. Make sure **Camunda 8.8** or higher is selected in the **Check problems against** field (see the bottom right of the window).
 1. Select the [**Play**](/components/modeler/web-modeler/validation/play-your-process.md) tab.
 1. Select the cluster you want to deploy and play the process on.
 1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
-1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md). Open it in your browser at http://localhost:8080/operate.
+1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md).
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
 
 :::tip
@@ -231,7 +228,7 @@ Instead of using **Play**, you can also test the process within the **Implement*
 <TabItem value="self-managed">
 
 1. Deploy the process model to your local Camunda 8 environment using [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
-1. Make sure Camunda 8.8 or higher is selected. See the bottom left of the window.
+1. Make sure **Camunda 8.8** or higher is selected (see the bottom left of the window).
 1. Open Tasklist in your browser at http://localhost:8080/tasklist.
 1. On the **Processes** tab, find the `AI Agent Chat With Tools` process and click **Start process**.
 1. In the start form, add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start process**.
