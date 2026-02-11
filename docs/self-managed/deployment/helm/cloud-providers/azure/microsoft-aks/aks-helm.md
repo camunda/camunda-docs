@@ -11,6 +11,10 @@ import IdpPrerequisite from '../../_partials/_idp-prerequisite.md'
 import NoDomainIdpChoice from '../../_partials/_no-domain-idp-choice.md'
 import WhyNoIdp from '../../_partials/_why-no-idp.md'
 import SingleNamespaceDeployment from '../../_partials/_single-namespace-deployment.md'
+import NoDomainInfo from '../../_partials/_no-domain-info.md'
+import HelmUpgradeNote from '../../_partials/_helm-upgrade-note.md'
+import KubefwdTip from '../../_partials/_kubefwd-tip.md'
+import PortForwardServices from '../../_partials/_port-forward-services.md'
 
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster, and confirmation it is working as intended.
 
@@ -227,9 +231,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-no-domain.yml
 ```
 
-:::info No-domain deployment
-When running without a domain, you will access the platform via `kubectl port-forward`. The IdP issuer URL must be aligned with your port-forward setup. Most external OIDC providers do not allow `localhost` as a redirect URI, so a no-domain deployment generally requires Keycloak deployed in the cluster. If using Keycloak via the Keycloak Operator, refer to the [vendor-supported infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#keycloak-deployment) for the no-domain Helm values overlay and host mapping instructions.
-:::
+<NoDomainInfo />
 
 #### Reference the credentials in secrets
 
@@ -338,11 +340,7 @@ This script:
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 
-:::note
-
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/deployment/helm/upgrade/index.md) or any other component upgrades.
-
-:::
+<HelmUpgradeNote />
 
 You can track the progress of the installation using the following command:
 
@@ -402,22 +400,7 @@ kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespa
 kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-:::tip Localhost development with kubefwd
-For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable by their in-cluster DNS names on your workstation.
-
-Example (requires `sudo` to bind privileged ports and modify `/etc/hosts`):
-
-```shell
-sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
-```
-
-After this runs, you can reach services directly, for example:
-
-- Identity: `http://$CAMUNDA_RELEASE_NAME-identity/managementidentity`
-- Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
-
-You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.
-:::
+<KubefwdTip />
 
 1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to your IdP and prompted to log in.
 2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
@@ -445,23 +428,7 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 
 This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
 
-<details>
-<summary>To access the other services and their UIs, port-forward those components as well:</summary>
-
-```shell
-Orchestration:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
-Optimize:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-optimize" 8083:80 --namespace "$CAMUNDA_NAMESPACE"
-Connectors:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-connectors" 8086:8080 --namespace "$CAMUNDA_NAMESPACE"
-WebModeler:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-web-modeler-webapp" 8070:80 --namespace "$CAMUNDA_NAMESPACE"
-Console:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8087:80 --namespace "$CAMUNDA_NAMESPACE"
-```
-
-</details>
+<PortForwardServices />
 
 </TabItem>
 </Tabs>
@@ -471,7 +438,7 @@ Console:
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
 
-For a detailed guide on generating and using a token, conduct the relevant documentation on [authenticating with the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
+For a detailed guide on generating and using a token, consult the relevant documentation on [authenticating with the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
@@ -511,13 +478,11 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 ```json reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
-  </summary>
 </details>
   </TabItem>
   <TabItem value="modeler" label="Desktop Modeler">
