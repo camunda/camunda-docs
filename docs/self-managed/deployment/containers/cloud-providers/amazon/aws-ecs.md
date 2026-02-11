@@ -68,7 +68,7 @@ After completing this guide, you will have:
 - [Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) to control network traffic to and from the ECS instances.
 - An [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) to route traffic between the VPC and the internet.
 - A [S3 bucket](https://aws.amazon.com/s3/) used by the Orchestration Cluster’s ECS-specific node-id provider.
-- A [S3 bucket](https://aws.amazon.com/s3/) for backup purposes with versioning enabled.
+- A versioning-enabled [S3 bucket](https://aws.amazon.com/s3/) for backups.
   - Use a separate bucket for backups. The node-id bucket has versioning disabled because frequent metadata changes would incur additional cost without any benefit.
 - [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) for application credentials and optional container registry credentials.
 - [AWS CloudWatch](https://aws.amazon.com/cloudwatch/) for logs.
@@ -568,17 +568,17 @@ For general troubleshooting assistance, consult the [operational guides troubles
 
 ### Backup and restore
 
-The general backup and restore procedure outlined in the [Backup and Restore documentation](/self-managed/operational-guides/backup-restore/backup-and-restore.md) applies.
+The general [backup and restore procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md) applies.
 
-The backup process itself does not require any changes.
+The backup process, itself, doesn't require changes.
 
 Restoring, however, introduces additional complexity because each broker's data directory (persistent volume) must be restored in a coordinated manner. To support this, an init container is introduced as part of the Orchestration Cluster, responsible for restoring the data directory for the broker running in that task. This mechanism corresponds to the step of [restoring the Zeebe Cluster](/self-managed/operational-guides/backup-restore/restore.md#restore-zeebe-cluster).
 
-This approach is implemented in the example module and can be enabled by providing the `restore_backup_id` parameter with the identifier of the backup to restore.
+This approach is implemented in the example module. Provide the `restore_backup_id` parameter to enable it.
 
-On startup, the init container leverages the node-id provider to determine its broker ID in alignment with the other tasks. It restores the partitions associated with that broker and then blocks execution until all brokers have completed their restore operations. Afterward, the init container exits, allowing the Orchestration Cluster container to start.
+On startup, the init container leverages the node-id provider to determine its broker ID in alignment with the other tasks. It restores the partitions associated with that broker, then blocks execution until all brokers have completed their restore operations. Afterward, the init container exits, allowing the Orchestration Cluster container to start.
 
-The init container must be configured identically to the Orchestration Cluster container. When environment variables are used, this requirement is satisfied automatically. If configuration is distributed through other mechanisms, those must be explicitly applied to the init container as well.
+You must configure the init container and the Orchestration Cluster container identically. If you use environment variables, this requirement is automatically satisfied. If configuration is distributed through other mechanisms, those must also be explicitly applied to the init container.
 
 As long as the `restore_backup_id` parameter remains set, the init container remains part of the task definition. After the backup has been successfully restored, subsequent executions will effectively be no-ops until the parameter is removed.
 
