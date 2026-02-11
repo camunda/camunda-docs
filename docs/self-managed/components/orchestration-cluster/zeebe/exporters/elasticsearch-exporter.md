@@ -14,7 +14,7 @@ For supported Elasticsearch versions in Camunda 8 Self-Managed, see
 
 As of 8.8, Camunda uses the
 [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)
-to consume new records. Records from 8.7 are consumed only during migration.
+to consume new records. Records from 8.7 and earlier are consumed only during migration.
 
 The Elasticsearch and OpenSearch exporters remain fully usable after migration
 (for example, for existing setups, Optimize, or other custom use cases).
@@ -402,30 +402,19 @@ your deployment method (e.g. Helm chart, Docker Compose). The simplest way is to
 the environment variable.
 :::
 
-## Legacy Zeebe records
+## Legacy Zeebe records and Optimize filters
 
-With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch Exporter no longer export all record types by default. Therefore, not all `zeebe-record` indices will be populated.
+With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default. As a result, fewer indices are created to store Zeebe data.
 
-The record types that continue to be exported by default are the following:
+By default, these exporters emit only the record value types and intents required by Optimize.
 
-- `DEPLOYMENT`
-- `PROCESS`
-- `PROCESS_INSTANCE`
-- `VARIABLE`
-- `USER_TASK`
-- `INCIDENT`
-- `JOB`
+To export additional record types, enable the [`includeEnabledRecords`](#configuration) configuration property.
 
-To export other record types, enable the [includeEnabledRecords](#configuration) configuration property.
+When you enable Optimize-specific filters (`optimizeModeEnabled`, `variable-name`,
+`variable-type`, or `bpmn-process-id`), filtering applies only to newly produced records. Existing documents in Elasticsearch or OpenSearch are not rewritten.
 
-## Upgrade note (8.8 to 8.9) and exporter filters
+:::info Upgrade note (8.8 to 8.9)
 
-Optimize uses an exporter-assigned sequence field to page through exported records efficiently.
+When upgrading from 8.8 to 8.9, exporter filtering behavior may affect data completeness. See the [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md) for guidance.
 
-Before 8.9, the Elasticsearch exporter always wrote an unfiltered stream, so this sequence remained stable even when records were re-exported.
-
-Starting in 8.9, enabling exporter filters (variable-name filters, variable-type filters, BPMN process filters, or Optimize mode) can change which records are exported and in which order.
-
-If you enable filters for a cluster that previously exported without them and then re-export from a snapshot, some re-exported records may fall before the last sequence Optimize has processed and be skipped.
-
-For upgrade-safe recommendations (when to enable filters and when a full re-import into Optimize is required), see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
+:::
