@@ -9,6 +9,11 @@ description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+import IdpPrerequisite from '../_partials/_idp-prerequisite.md'
+import NoDomainIdpChoice from '../_partials/_no-domain-idp-choice.md'
+import WhyNoIdp from '../_partials/_why-no-idp.md'
+import SingleNamespaceDeployment from '../_partials/_single-namespace-deployment.md'
+
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
 Deploying Camunda 8 on Red Hat OpenShift is supported using Helm, given the appropriate configurations.
@@ -39,26 +44,18 @@ This section installs Camunda 8 following the architecture described in the [ref
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
 
-:::info Identity Provider (IdP) prerequisite
-This reference architecture does not include an IdP. You must bring your own OIDC-compatible identity provider (for example, a self-hosted Keycloak instance). For OIDC configuration details, see [Connect to an OIDC provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md). If you need to deploy Keycloak inside the cluster, see the [vendor-supported infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#keycloak-deployment) for operator-based setup instructions.
-:::
+<IdpPrerequisite />
 
-:::caution No-domain deployments and IdP choice
-If you deploy Camunda **without a domain** (using `kubectl port-forward`), you will generally need to use Keycloak as your IdP. Most external OIDC providers do not allow `localhost` as a valid redirect URI for security reasons. Keycloak, when deployed locally in the cluster, can be configured to accept localhost-based redirect URIs.
-:::
+<NoDomainIdpChoice />
 
-:::tip Why no IdP is included by default
-The choice of identity provider is highly specific to each organization's security requirements, existing infrastructure, and compliance needs. Rather than bundling a default IdP that may not match your setup, the reference architecture leaves this choice to you.
-:::
+<WhyNoIdp />
 
 For OpenShift deployments, the following OpenShift-specific configurations are also included:
 
 - **OpenShift Routes**: Native OpenShift way to expose services externally (alternative to standard Kubernetes Ingress)
 - **Security Context Constraints (SCCs)**: Security framework for controlling pod and container permissions
 
-:::info Single namespace deployment
-This guide uses a single Kubernetes namespace for simplicity, since the deployment is done with a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components), which recommends separating Orchestration Cluster and Web Modeler or Console into different namespaces in production to improve isolation and enable independent scaling.
-:::
+<SingleNamespaceDeployment />
 
 ## Deploy Camunda 8 via Helm charts
 
