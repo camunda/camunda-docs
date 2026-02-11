@@ -26,7 +26,7 @@ If your deployment is running a version earlier than 8.8, complete the required 
 
 Review required preparation steps and important changes before upgrading to Camunda 8.9.
 
-<p><a href="../prepare-for-upgrade" class="link-arrow">Prepare for upgrade</a></p>
+<p><a href="./prepare-for-upgrade" class="link-arrow">Prepare for upgrade</a></p>
 
 ## Upgrade methods
 
@@ -37,7 +37,7 @@ Choose the upgrade guide that matches how your environment is deployed:
 :::tip Dual-region Helm deployments
 If you are upgrading a dual-region Helm deployment, follow the standard Helm upgrade guide and then complete the additional dual-region steps.
 
-<p><a href="../helm/880-to-890-dual-region" class="link-arrow">Camunda 8.8 to 8.9 Dual-Region Upgrade</a></p>
+<p><a href="./helm/880-to-890-dual-region" class="link-arrow">Camunda 8.8 to 8.9 Dual-Region Upgrade</a></p>
 :::
 
 ## Docker Compose deployments
@@ -46,7 +46,7 @@ Docker Compose is supported for development and testing environments only.
 
 Camunda does not provide an automated upgrade process for Docker Compose deployments. To upgrade, manually update each component by following the component upgrade guide:
 
-<p><a href="../components/880-to-890" class="link-arrow">Component upgrade from 8.8 to 8.9</a></p>
+<p><a href="./components/880-to-890" class="link-arrow">Component upgrade from 8.8 to 8.9</a></p>
 
 For production environments, use Kubernetes with the official Camunda Helm chart or create a custom deployment process using Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
 
@@ -56,7 +56,7 @@ Some upgrades require additional component-level steps depending on which compon
 
 Follow the upgrade guide for your deployment method, and refer to this guide for any component-specific changes or migrations required for your setup.
 
-<p><a href="../components/880-to-890" class="link-arrow">Component upgrade from 8.8 to 8.9</a></p>
+<p><a href="./components/880-to-890" class="link-arrow">Component upgrade from 8.8 to 8.9</a></p>
 
 ## Release notes and changes in 8.9
 
