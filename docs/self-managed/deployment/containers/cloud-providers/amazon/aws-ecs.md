@@ -69,7 +69,7 @@ After completing this guide, you will have:
 - An [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) to route traffic between the VPC and the internet.
 - A [S3 bucket](https://aws.amazon.com/s3/) used by the Orchestration Cluster’s ECS-specific node-id provider.
 - A [S3 bucket](https://aws.amazon.com/s3/) for backup purposes with versioning enabled.
-  - it's separate bucket for the backups as the node-id bucket has versioning disabled as the constant metadata changes will just incur cost and have no benefit.
+  - Use a separate bucket for backups. The node-id bucket has versioning disabled because frequent metadata changes would incur additional cost without any benefit.
 - [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) for application credentials and optional container registry credentials.
 - [AWS CloudWatch](https://aws.amazon.com/cloudwatch/) for logs.
 - [ECS Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) to connect ECS services directly with each other.
@@ -566,13 +566,13 @@ For general troubleshooting assistance, consult the [operational guides troubles
 
 ## Operations
 
-### Backup & restore
+### Backup and restore
 
 The general backup and restore procedure outlined in the [Backup and Restore documentation](/self-managed/operational-guides/backup-restore/backup-and-restore.md) applies.
 
 The backup process itself does not require any changes.
 
-Restoring, however, introduces additional complexity due to the need to restore persistent disks for all brokers in a coordinated manner. To solve this, an init container is introduced as part of the Orchestration Cluster, responsible for restoring broker disks. This is in particular about the step of [restoring the Zeebe Cluster](/self-managed/operational-guides/backup-restore/restore.md#restore-zeebe-cluster).
+Restoring, however, introduces additional complexity because each broker's data directory (persistent volume) must be restored in a coordinated manner. To support this, an init container is introduced as part of the Orchestration Cluster, responsible for restoring the data directory for the broker running in that task. This mechanism corresponds to the step of [restoring the Zeebe Cluster](/self-managed/operational-guides/backup-restore/restore.md#restore-zeebe-cluster).
 
 This approach is implemented in the example module and can be enabled by providing the `restore_backup_id` parameter with the identifier of the backup to restore.
 
