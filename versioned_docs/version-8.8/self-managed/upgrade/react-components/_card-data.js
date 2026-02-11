@@ -11,14 +11,14 @@ import IconArrow from "../manual/assets/icon-arrow.png";
 
 export const overviewCards = [
   {
-    link: "../helm",
+    link: "./helm",
     title: "Kubernetes with Helm",
     image: K8sIcon,
     description:
       "Upgrade a Helm-managed Camunda 8.7 deployment on Kubernetes to version 8.8.",
   },
   {
-    link: "../manual",
+    link: "./manual",
     title: "Manual",
     image: JarIcon,
     description:

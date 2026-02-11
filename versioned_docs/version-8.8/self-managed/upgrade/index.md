@@ -17,7 +17,7 @@ If your deployment is running a version earlier than 8.7, complete the required 
 
 Review required preparation steps and important changes before upgrading to Camunda 8.8.
 
-<p><a href="../prepare-for-upgrade" class="link-arrow">Prepare for upgrade</a></p>
+<p><a href="./prepare-for-upgrade" class="link-arrow">Prepare for upgrade</a></p>
 
 ## Upgrade methods
 
@@ -28,7 +28,7 @@ Choose the upgrade guide that matches how your environment is deployed:
 :::tip Dual-region Helm deployments
 If you are upgrading a dual-region Helm deployment, follow the standard Helm upgrade guide and then complete the additional dual-region steps.
 
-<p><a href="../helm/870-to-880-dual-region" class="link-arrow">Camunda 8.7 to 8.8 Dual-Region Upgrade</a></p>
+<p><a href="./helm/870-to-880-dual-region" class="link-arrow">Camunda 8.7 to 8.8 Dual-Region Upgrade</a></p>
 :::
 
 ## Docker Compose deployments
@@ -37,7 +37,7 @@ Docker Compose is supported for development and testing environments only.
 
 Camunda does not provide an automated upgrade process for Docker Compose deployments. To upgrade, manually update each component by following the component upgrade guide:
 
-<p><a href="../components/870-to-880" class="link-arrow">Component upgrade from 8.7 to 8.8</a></p>
+<p><a href="./components/870-to-880" class="link-arrow">Component upgrade from 8.7 to 8.8</a></p>
 
 With Camunda 8.8, the default `docker-compose.yaml` deploys the Orchestration Cluster and connectors. Web Modeler must be deployed using a separate Docker Compose configuration.
 
@@ -49,7 +49,7 @@ Some upgrades require additional component-level steps depending on which compon
 
 Follow the upgrade guide for your deployment method, and refer to this guide for any component-specific changes or migrations required for your setup.
 
-<p><a href="../components/870-to-880" class="link-arrow">Component upgrade from 8.7 to 8.8</a></p>
+<p><a href="./components/870-to-880" class="link-arrow">Component upgrade from 8.7 to 8.8</a></p>
 
 ## Release notes and changes in 8.8
 
@@ -70,16 +70,16 @@ Use the version-specific upgrade guides below to reach Camunda 8.7 before procee
 
 ### Kubernetes with Helm
 
-- <a href="../../../8.7/self-managed/setup/upgrade" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.6 to 8.7</a>
-- <a href="../../../8.6/self-managed/setup/upgrade" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.5 to 8.6</a>
+- <a href="../../8.7/self-managed/setup/upgrade" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.6 to 8.7</a>
+- <a href="../../8.6/self-managed/setup/upgrade" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.5 to 8.6</a>
 - <a href="https://unsupported.docs.camunda.io/8.5/docs/self-managed/setup/upgrade/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.4 to 8.5</a>
 - <a href="https://unsupported.docs.camunda.io/8.4/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.3 to 8.4</a>
 - <a href="https://unsupported.docs.camunda.io/8.3/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.2 to 8.3</a>
 
 ### Component-based upgrades
 
-- <a href="../../../8.7/self-managed/operational-guides/update-guide/860-to-870" target="_blank" rel="noopener noreferrer">Component upgrade from 8.6 to 8.7</a>
-- <a href="../../../8.6/self-managed/operational-guides/update-guide/850-to-860" target="_blank" rel="noopener noreferrer">Component upgrade from 8.5 to 8.6</a>
+- <a href="../../8.7/self-managed/operational-guides/update-guide/860-to-870" target="_blank" rel="noopener noreferrer">Component upgrade from 8.6 to 8.7</a>
+- <a href="../../8.6/self-managed/operational-guides/update-guide/850-to-860" target="_blank" rel="noopener noreferrer">Component upgrade from 8.5 to 8.6</a>
 - <a href="https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/840-to-850/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.4 to 8.5</a>
 - <a href="https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/830-to-840/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.3 to 8.4</a>
 - <a href="https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/820-to-830/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.2 to 8.3</a>
