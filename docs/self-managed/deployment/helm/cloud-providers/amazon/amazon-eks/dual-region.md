@@ -51,8 +51,6 @@ For the tool versions used in testing, see the repository's [.tool-versions](htt
 
 ### Considerations
 
-#### General considerations
-
 This setup provides a solid starting point for running Camunda 8 on AWS in a dual-region configuration. It is not optimized for peak performance. Use it as a foundation you can extend and adapt for production with [Infrastructure as Code (IaC) tools](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
 
 - To test or develop against Camunda 8, consider signing up for our [SaaS offering](https://camunda.com/platform/).
