@@ -1748,6 +1748,19 @@ module.exports = {
             "self-managed/deployment/manual/upgrade",
             {
               type: "category",
+              label: "Manual installation with RDBMS",
+              link: {
+                type: "doc",
+                id: "self-managed/deployment/manual/rdbms/index",
+              },
+              items: [
+                "self-managed/deployment/manual/rdbms/rdbms-production-architecture",
+                "self-managed/deployment/manual/rdbms/configuration",
+                "self-managed/deployment/manual/rdbms/operations",
+              ],
+            },
+            {
+              type: "category",
               label: "Cloud providers",
               items: [
                 {
