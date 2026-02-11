@@ -521,24 +521,24 @@ The following limitations apply:
 
 ### Process instance
 
-| Property                 | Can be migrated |
-| ------------------------ | --------------- |
-| processInstanceKey       | Yes             |
-| rootProcessInstanceKey   | Yes             |
-| processDefinitionId      | Yes             |
-| processDefinitionKey     | Yes             |
-| state                    | Yes             |
-| startDate                | Yes             |
-| endDate                  | Yes             |
-| tenantId                 | Yes             |
-| parentProcessInstanceKey | Yes             |
-| parentElementInstanceKey | No              |
-| numIncidents             | No              |
-| version                  | Yes             |
-| partitionId              | Yes             |
-| treePath                 | No              |
-| historyCleanupDate       | Yes             |
-| tags                     | No              |
+| Property                 | Can be migrated     |
+| ------------------------ | ------------------- |
+| processInstanceKey       | Yes                 |
+| rootProcessInstanceKey   | Yes                 |
+| processDefinitionId      | Yes                 |
+| processDefinitionKey     | Yes                 |
+| state                    | Yes                 |
+| startDate                | Yes                 |
+| endDate                  | Yes                 |
+| tenantId                 | Yes                 |
+| parentProcessInstanceKey | Yes                 |
+| parentElementInstanceKey | No                  |
+| numIncidents             | No (`0` by default) |
+| version                  | Yes                 |
+| partitionId              | Yes                 |
+| treePath                 | No                  |
+| historyCleanupDate       | Yes                 |
+| tags                     | No                  |
 
 ### Sequence flow
 
