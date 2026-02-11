@@ -211,7 +211,7 @@ Depending on your working environment, test your agent by following the correspo
 
 <TabItem value="saas">
 
-1. Open [Web Modeler](<(/components/modeler/web-modeler/index.md)>).
+1. Open [Web Modeler](/components/modeler/web-modeler/index.md).
 1. Make sure **Camunda 8.8** or higher is selected in the **Check problems against** field (see the bottom right of the window).
 1. Select the [**Play**](/components/modeler/web-modeler/validation/play-your-process.md) tab.
 1. Select the cluster you want to deploy and play the process on.
