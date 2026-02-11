@@ -31,15 +31,6 @@ This API is part of the Camunda 8 [public API](/reference/public-api.md) and is 
 
 To learn more about the Orchestration Cluster, see [What is the Orchestration Cluster?](/components/orchestration-cluster.md).
 
-#### User task authorization
-
-User task endpoints are protected by the Orchestration Cluster authorization model.
-
-To configure permissions and control access to user tasks, see:
-
-- [Orchestration Cluster authorization](../../components/concepts/access-control/authorizations.md)
-- [User task authorization in Tasklist](../../components/tasklist/user-task-authorization.md)
-
 ## Getting started
 
 This section helps you get up and running in minutes. To begin using the Orchestration Cluster REST API, you need the following.
