@@ -48,18 +48,20 @@ This section installs Camunda 8 following the architecture described in the [ref
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
 
-<IdpPrerequisite />
-
-<NoDomainIdpChoice />
-
-<WhyNoIdp />
-
 For OpenShift deployments, the following OpenShift-specific configurations are also included:
 
 - **OpenShift Routes**: Native OpenShift way to expose services externally (alternative to standard Kubernetes Ingress)
 - **Security Context Constraints (SCCs)**: Security framework for controlling pod and container permissions
 
 <SingleNamespaceDeployment />
+
+## Identity Provider (IdP) setup
+
+<IdpPrerequisite />
+
+<NoDomainIdpChoice />
+
+<WhyNoIdp />
 
 ## Deploy Camunda 8 via Helm charts
 
@@ -294,8 +296,8 @@ Once you've prepared the `values.yml` file and exported the required environment
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/assemble-envsubst-values.sh
 ```
 
-:::note Web Modeler SMTP secret
-If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)):
+:::note Web Modeler secrets
+If you plan to enable Web Modeler, create the required secrets for SMTP email notifications ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)) and the embedded PostgreSQL database:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/create-webmodeler-secret.sh
