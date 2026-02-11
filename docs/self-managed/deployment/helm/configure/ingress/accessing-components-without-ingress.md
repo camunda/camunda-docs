@@ -67,7 +67,7 @@ The name of the Keycloak service will be truncated after 20 characters if Keyclo
 :::
 
 :::note Keycloak Operator deployment
-If you're using Keycloak deployed via the Keycloak Operator (such as in the [vendor-supported infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md)), use `kubectl port-forward svc/keycloak-service 18080:8080` instead.
+If you're using Keycloak deployed via the Keycloak Operator (such as in the [operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md)), use `kubectl port-forward svc/keycloak-service 18080:18080` instead.
 :::
 
 Finally, you can access each app pointing your browser at:
