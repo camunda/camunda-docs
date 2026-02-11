@@ -29,7 +29,18 @@ The architecture includes the following core components:
 
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
-- **Keycloak as OIDC provider**: Example OIDC provider (can be replaced with any compatible IdP)
+
+:::info Identity Provider (IdP) prerequisite
+This reference architecture does not include an IdP. You must bring your own OIDC-compatible identity provider (for example, Microsoft Entra ID or a self-hosted Keycloak instance). For OIDC configuration details, see [Connect to an OIDC provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md). If you need to deploy Keycloak inside the cluster, see the [vendor-supported infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#keycloak-deployment) for operator-based setup instructions.
+:::
+
+:::caution No-domain deployments and IdP choice
+If you deploy Camunda **without a domain** (using `kubectl port-forward`), you will generally need to use Keycloak as your IdP. Most external OIDC providers (for example, Microsoft Entra ID, Okta) do not allow `localhost` as a valid redirect URI for security reasons. Keycloak, when deployed locally in the cluster, can be configured to accept localhost-based redirect URIs.
+:::
+
+:::tip Why no IdP is included by default
+The choice of identity provider is highly specific to each organization's security requirements, existing infrastructure, and compliance needs. Rather than bundling a default IdP that may not match your setup, the reference architecture leaves this choice to you.
+:::
 
 To demonstrate how to deploy with a custom domain, the following stack is also included:
 
@@ -197,7 +208,7 @@ Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubern
 
 #### Reference the credentials in secrets
 
-Before installing the Helm chart, create Kubernetes secrets to store the Keycloak database authentication credentials.
+Before installing the Helm chart, create Kubernetes secrets to store the database authentication credentials.
 
 To create the secrets, run the following commands:
 
@@ -213,28 +224,13 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-no-domain.yml
 ```
 
-:::info Keycloak issuer and localhost hostname alignment
-
-When running without a domain, Console validates the JWT issuer claim against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means that during port-forwarding you may need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
-
-Add (or update) the following entry in your `/etc/hosts` file while developing locally:
-
-```text
-127.0.0.1  $CAMUNDA_RELEASE_NAME-keycloak
-```
-
-After adding this entry, you can reach Keycloak at:
-`http://$CAMUNDA_RELEASE_NAME-keycloak:18080/auth`
-
-**Why port `18080`?**
-We forward container port `8080` (originally `80`) to a non‑privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using 8080.
-
-This constraint does not apply when a proper domain and Ingress are configured (the public FQDN is then used as the issuer and no hosts file changes are needed).
+:::info No-domain deployment
+When running without a domain, you will access the platform via `kubectl port-forward`. The IdP issuer URL must be aligned with your port-forward setup. Most external OIDC providers do not allow `localhost` as a redirect URI, so a no-domain deployment generally requires Keycloak deployed in the cluster. If using Keycloak via the Keycloak Operator, refer to the [vendor-supported infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#keycloak-deployment) for the no-domain Helm values overlay and host mapping instructions.
 :::
 
 #### Reference the credentials in secrets
 
-Before installing the Helm chart, create Kubernetes secrets to store the Keycloak database authentication credentials.
+Before installing the Helm chart, create Kubernetes secrets to store the database authentication credentials.
 
 To create the secrets, run the following command:
 
@@ -283,22 +279,6 @@ To switch to the internal PostgreSQL deployment, configure the Helm chart as fol
 <summary>Show configuration changes to disable external database usage</summary>
 
 ```yaml
-identityKeycloak:
-  postgresql:
-    enabled: true
-
-  # Remove external database configuration
-  # externalDatabase:
-  #   ...
-
-  # Remove service account and annotations
-  # serviceAccount:
-  #   ...
-
-  # Remove extra environment variables for external database driver
-  # extraEnvVars:
-  #   ...
-
 webModelerPostgresql:
   enabled: true
 
@@ -333,21 +313,13 @@ Once you've prepared the `values.yml` file, run the following `envsubst` command
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/assemble-envsubst-values.sh
 ```
 
-Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
+:::note Web Modeler SMTP secret
+If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)):
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/generate-passwords.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-webmodeler-secret.sh
 ```
-
-Use these environment variables in the `kubectl` command to create the secret.
-
-:::note
-The `smtp-password` is required for Web Modeler to send emails, but Web Modeler is not enabled by default in this guide. If you plan to enable Web Modeler, ensure you configure the SMTP settings as described in the [Web Modeler configuration guide](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email).
 :::
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/create-identity-secret.sh
-```
 
 ### 3. Install Camunda 8 using Helm
 
@@ -388,7 +360,7 @@ Below is a summary of the necessary instructions:
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
 
-1. Open Identity in your browser at `https://${DOMAIN_NAME}/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+1. Open Identity in your browser at `https://${DOMAIN_NAME}/managementidentity`. You will be redirected to your IdP and prompted to log in.
 2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
 
 ```shell
@@ -418,11 +390,12 @@ This operation links the OIDC client to the role's permissions in the Orchestrat
 
 <TabItem value="without" label="Without domain">
 
-Identity, Keycloak and the Orchestration cluster must be port-forwarded to be able to connect to the cluster.
+Identity and the Orchestration cluster must be port-forwarded to be able to connect to the cluster. If using the Keycloak Operator, also forward the Keycloak service.
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
-kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:8080 --namespace "$CAMUNDA_NAMESPACE"
+# If using Keycloak Operator:
+# kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:8080 --namespace "$CAMUNDA_NAMESPACE"
 kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
@@ -438,13 +411,12 @@ sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
 After this runs, you can reach services directly, for example:
 
 - Identity: `http://$CAMUNDA_RELEASE_NAME-identity/managementidentity`
-- Keycloak: `http://$CAMUNDA_RELEASE_NAME-keycloak`
 - Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
 
 You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.
 :::
 
-1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to your IdP and prompted to log in.
 2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
 
 ```shell
@@ -562,7 +534,7 @@ The following values are required for the OAuth authentication:
 - **Cluster endpoint:** `https://zeebe-$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
-- **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
+- **OAuth Token URL:** Your IdP's token endpoint (for example, `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token` when using Keycloak), replacing `$DOMAIN_NAME` with your domain
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
@@ -580,7 +552,7 @@ The following values are required for OAuth authentication:
 - **Cluster endpoint:** `http://localhost:26500`
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application.
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application.
-- **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
+- **OAuth Token URL:** Your IdP's token endpoint (for example, `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token` when using Keycloak with port-forwarding)
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed.
 
 </TabItem>
