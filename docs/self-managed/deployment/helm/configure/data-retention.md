@@ -54,6 +54,18 @@ The legacy Zeebe exporter is automatically enabled when:
 | `orchestration.retention.minimumAge` | string  | `30d`                           | How old the data must be before deletion. Uses [Elasticsearch TimeUnit format](https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#time-units) (e.g., `30d`, `7d`, `1h`) |
 | `orchestration.retention.policyName` | string  | `zeebe-record-retention-policy` | Name of the ILM/ISM policy to create and apply                                                                                                                                                            |
 
+:::note Exported data vs. retained data
+
+The `orchestration.retention` policy always applies to the Zeebe record indices that are actually written (for example, `zeebe-record-*`). If you configure exporter-side filters in the legacy Elasticsearch or OpenSearch exporter (such as exporting only a subset of variables or processes for data analysis tools like Optimize), retention does not restore filtered-out data. It only controls the lifetime of the exported subset.
+
+For Optimize and other data-analysis use cases, coordinate exporter filters and retention settings, and refer to:
+
+- [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/)
+- [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter/)
+- [Camunda 8 system configuration (Optimize)](/self-managed/components/optimize/configuration/system-configuration-platform-8/)
+
+:::
+
 **History archiving and retention parameters:**
 
 | Key                                                      | Type    | Default                                  | Description                                                                                                    |
@@ -286,14 +298,17 @@ Operate and Tasklist indices use schema-specific versioning in their names (e.g.
 
 ### References
 
+### References
+
 **Related Camunda documentation:**
 
 - [Configure Helm chart components](./application-configs.md) - How to use `orchestration.configuration` for advanced settings
 - [Upgrade from 8.8 to 8.9](/self-managed/upgrade/helm/880-to-890.md) - Version upgrade guidance
 - [Zeebe Elasticsearch Exporter retention](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#retention) - Legacy Zeebe exporter retention settings
 - [Zeebe Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) - Camunda exporter configuration (controls `orchestration.history.*` settings)
-  - [History archiving settings](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=history#options) - Archiving and rollover configuration
-  - [Retention settings](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=retention#options) - Historical data retention policies
+- [History archiving settings](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=history#options) - Archiving and rollover configuration
+- [Retention settings](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=retention#options) - Historical data retention policies
+- [Camunda 8 system configuration (Optimize)](/self-managed/components/optimize/configuration/system-configuration-platform-8/) - Optimize import and retention behavior and version support
 - [Operate data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md) - Operate-specific retention behavior
 - [Tasklist data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md) - Tasklist-specific retention behavior
 
