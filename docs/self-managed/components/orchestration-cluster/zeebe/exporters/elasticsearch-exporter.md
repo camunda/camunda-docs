@@ -404,7 +404,7 @@ the environment variable.
 
 ## Legacy Zeebe records and Optimize filters
 
-With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default. As a result, fewer indices are created to store Zeebe data.
+With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default. As a result, not all `zeebe-record` indices will be populated.
 
 By default, these exporters emit only the record value types and intents required by Optimize.
 
