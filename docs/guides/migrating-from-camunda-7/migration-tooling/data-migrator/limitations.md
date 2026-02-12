@@ -173,7 +173,6 @@ The history migration has the following limitations.
   - Flow node instances might be skipped if their parent flow node (scope) hasn't been migrated yet.
 - The History Data Migrator does not support the following Camunda 8 entities or properties:
   - Sequence flow: Sequence flows cannot be highlighted in Operate.
-  - User task migration metadata: Information for user tasks migrated via process instance migration is not available in Camunda 7.
   - Message subscription and correlated message subscription: These entities are not available in Camunda 7.
   - Batch operation entity and batch operation item: Camunda 7 does not retain sufficient information about processed instances.
   - User metrics: Not available in Camunda 7.
