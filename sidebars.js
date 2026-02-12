@@ -1544,6 +1544,7 @@ module.exports = {
                   items: [
                     "self-managed/deployment/helm/configure/ingress/ingress-setup",
                     "self-managed/deployment/helm/configure/ingress/accessing-components-without-ingress",
+                    "self-managed/deployment/helm/configure/ingress/gateway-api-setup",
                   ],
                 },
                 {
