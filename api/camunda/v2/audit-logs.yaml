@@ -129,6 +129,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The key of the process instance.
+        rootProcessInstanceKey:
+          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
         elementInstanceKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
@@ -172,6 +174,23 @@ components:
           allOf:
             - $ref: "deployments.yaml#/components/schemas/ResourceKey"
           description: The system-assigned key for this resource.
+        relatedEntityKey:
+          allOf:
+            - $ref: "#/components/schemas/AuditLogEntityKey"
+          description: |
+            The key of the related entity. The content depends on the operation type and entity type.
+            For example, for authorization operations, this will contain the ID of the owner (e.g., user or group) the authorization belongs to.
+        relatedEntityType:
+          allOf:
+            - $ref: "#/components/schemas/AuditLogEntityTypeEnum"
+          description: |
+            The type of the related entity. The content depends on the operation type and entity type.
+            For example, for authorization operations, this will contain the type of the owner (e.g., USER or GROUP) the authorization belongs to.
+        entityDescription:
+          type: string
+          description: |
+            Additional description of the entity affected by the operation.
+            For example, for variable operations, this will contain the variable name.
     AuditLogSearchQuerySortRequest:
       type: object
       properties:
@@ -326,6 +345,18 @@ components:
           description: The decision evaluation key search filter.
           allOf:
             - $ref: "keys.yaml#/components/schemas/DecisionEvaluationKeyFilterProperty"
+        relatedEntityKey:
+          description: The related entity key search filter.
+          allOf:
+            - $ref: "#/components/schemas/AuditLogEntityKeyFilterProperty"
+        relatedEntityType:
+          description: The related entity type search filter.
+          allOf:
+            - $ref: "#/components/schemas/EntityTypeFilterProperty"
+        entityDescription:
+          description: The entity description filter.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
     AuditLogSearchQueryResult:
       description: Audit log search response.
       type: object
@@ -359,6 +390,7 @@ components:
         - USER
         - USER_TASK
         - VARIABLE
+        - CLIENT
     AuditLogOperationTypeEnum:
       type: string
       description: The type of operation performed.
