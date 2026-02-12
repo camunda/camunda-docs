@@ -25,25 +25,25 @@ Ensure both are installed in your cluster.
 - Gateway API CRDs
 - A Gateway API controller
 
-## Gateway Controllers
+## Gateway controllers
 
-Just like Ingress Controllers, Gateway Controllers need to be installed before a cluster can use the Gateway API. [See the list of Gateway API implementations for details.](https://gateway-api.sigs.k8s.io/implementations/)
+Just like Ingress Controllers, Gateway controllers need to be installed before a cluster can use the Gateway API. [See the list of Gateway API implementations](https://gateway-api.sigs.k8s.io/implementations/) for details.
 
 In testing, we use the [NGINX Gateway Fabric](https://github.com/nginx/nginx-gateway-fabric).
 
-## Configuration
+## Configure the Helm chart
 
 | Parameter                              | Type    | Default | Description                                                                                                                  |
 | -------------------------------------- | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `global.gateway.enabled`               | boolean | `false` | Enable creating resources for the K8S Gateway API                                                                            |
-| `global.gateway.createGatewayResource` | bool    | `true`  | Create the Gateway CustomResource. Do not enable if you already have a Gateway resource.                                     |
+| `global.gateway.enabled`               | boolean | `false` | Enable creating resources for the Kubernetes Gateway API.                                                                    |
+| `global.gateway.createGatewayResource` | boolean | `true`  | Create the Gateway CustomResource. Do not enable if you already have a Gateway resource.                                     |
 | `global.gateway.external`              | boolean | `true`  | Set this to true if you are using the Gateway API but want to create the resources yourself.                                 |
-| `global.gateway.className`             | string  | `""`    | The name of the GatewayClass resource that defines which Gateway Controller will be operating on your Gateway and HTTPRoutes |
-| `global.gateway.labels`                | map     | `{}`    | Labels to add to the Gateway and HTTPRoute resources                                                                         |
-| `global.gateway.annotations`           | map     | `{}`    | Annotations to add to the Gateway and HTTPRoute resources                                                                    |
+| `global.gateway.className`             | string  | `""`    | Name of the GatewayClass resource that defines which Gateway controller operates on your Gateway and HTTPRoute resources.    |
+| `global.gateway.labels`                | map     | `{}`    | Labels to add to the Gateway and HTTPRoute resources.                                                                        |
+| `global.gateway.annotations`           | map     | `{}`    | Annotations to add to the Gateway and HTTPRoute resources.                                                                   |
 | `global.gateway.hostname`              | string  | `""`    | The external-facing URL hostname where Camunda will be installed.                                                            |
-| `global.gateway.tls.enabled`           | boolean | `false` | Enable TLS                                                                                                                   |
-| `global.gateway.tls.secretName`        | string  | `""`    | Name of the K8S Secret resource containing a TLS certificate                                                                 |
+| `global.gateway.tls.enabled`           | boolean | `false` | Enable TLS.                                                                                                                  |
+| `global.gateway.tls.secretName`        | string  | `""`    | Name of the Kubernetes Secret resource containing a TLS cert                                                                 |
 | `global.gateway.controllerNamespace`   | string  | `""`    | The namespace where the Gateway controller is installed.                                                                     |
 
 ## Example configuration
