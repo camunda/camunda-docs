@@ -57,9 +57,9 @@ For example, you log in with a username and password or through SSO.
 
 ### Authorization
 
-Authorization determines what an authenticated user or client is allowed to access in Camunda 8, and which actions they can perform on those resources.
+Authorization determines what an authenticated user or client is allowed to access in Camunda 8 and which actions they can perform on those resources.
 
-For example, a user’s authorizations allow them to access Operate, view running or completed process instances, start new process instances, or claim and complete user tasks in Tasklist and through the Orchestration Cluster REST API.
+For example, a user's authorizations allow them to access Operate, view running or completed process instances, start new process instances, or claim and complete user tasks in Tasklist and through the Orchestration Cluster REST API.
 
 | Identity type                  | Authorization model              | Description                                                                                                                                                                      | Management interface                   |
 | :----------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
@@ -93,7 +93,7 @@ For API documentation, link to the centralized authentication overview instead o
 :::warning
 The Operate, Tasklist, and Zeebe REST APIs are deprecated and should not be used for new development. While they continue to function, new development should use the Orchestration Cluster REST API by referencing the [Orchestration Cluster REST API migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 
-Authentication for all these APIs works the same way. See [Orchestration Cluster REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) for details.
+Authentication for these APIs works the same way. See [Orchestration Cluster REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) for details.
 :::
 
 ### Users and clients

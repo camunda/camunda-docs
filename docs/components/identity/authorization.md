@@ -13,9 +13,8 @@ Use authorizations to control access to resources in your Orchestration Cluster.
 An authorization grants an owner access to a resource and defines the specific permissions they have.
 
 - Owner: The entity that receives permissions, such as a [user](user.md), [group](group.md), [role](role.md), [client](client.md), or [mapping rule](mapping-rules.md).
-  - In SaaS deployments, the username is the user’s email address.
+  - In SaaS deployments, the username is the user's email address.
   - In Self-Managed deployments, the username must match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
-
 - Resource: The object that the permissions apply to, such as a process definition, decision definition, or system. See the full list of [available resources](/components/concepts/access-control/authorizations.md#available-resources).
 
 Each authorization specifies which permissions the owner has for the resource (for example, `READ`, `UPDATE`, `DELETE`).
@@ -28,7 +27,7 @@ To learn more, see [Orchestration Cluster authorizations](/components/concepts/a
 
 To create a new authorization:
 
-1. Log in to Identity and select the **Authorizations** tab.
+1. Log in to Identity, and select the **Authorizations** tab.
 2. Select a resource type from the list on the left, and select **Create authorization**.
 3. Enter the following information:
    - **Owner type**: The entity to which you want to assign permissions, such as a user, group, role, client, or mapping rule.
@@ -58,17 +57,17 @@ The authorization is created, and the owner is granted the specified permissions
 To support fine-grained access to user tasks in Tasklist and the Orchestration Cluster REST API, Identity provides a **USER_TASK** resource type with the following permissions:
 
 - `READ`: View the task and its properties.
-- `UPDATE`: Perform updates on the task (for example, change assignment, due dates, candidate users/groups).
+- `UPDATE`: Perform updates on the task (for example, change assignment, due dates, or candidate users or groups).
 - `CLAIM`: Claim a task from a pool of candidate users or groups.
 - `COMPLETE`: Complete the task, with or without variables.
 
 ### Configure property-based user task authorizations
 
-Property-based user task authorizations let you grant permissions based on task assignment rather than a specific task ID. A user is authorized when their username or group membership matches a corresponding task property.
+With property-based user task authorizations, you can grant permissions based on task assignment rather than a specific task ID. A user is authorized when their username or group membership matches a corresponding task property.
 
 To create a property-based user task authorization:
 
-1. Log in to Identity and select the **Authorizations** tab.
+1. Log in to Identity, and select the **Authorizations** tab.
 2. Create a new authorization for the `USER_TASK` resource type.
 3. Specify the **Owner type** and **Owner ID** (for example, a role that represents task workers).
 4. Set the matcher to `PROPERTY`.
@@ -76,23 +75,20 @@ To create a property-based user task authorization:
    - `assignee`
    - `candidateUsers`
    - `candidateGroups`
-6. Select the permissions to grant, for example `READ`, `CLAIM`, and `COMPLETE`.
+6. Select the permissions to grant (for example `READ`, `CLAIM`, and `COMPLETE`).
 7. Create the authorization.
 
-You cannot combine multiple task properties in a single authorization. To cover all three properties (`assignee`, `candidateUsers`, `candidateGroups`), create one authorization per property.
+You can't combine multiple task properties in a single authorization. To cover all three properties (`assignee`, `candidateUsers`, `candidateGroups`), create one authorization per property.
 
 ### Authorization for user tasks
 
-Access to user tasks can be controlled using a combination of process-level and task-level permissions:
+You can control access to user tasks using a combination of process-level and task-level permissions:
 
 - Process-level permissions on the `Process Definition` resource, such as `READ_USER_TASK` and `UPDATE_USER_TASK`.
-- Task-level permissions on the `USER_TASK` resource, such as `READ`, `UPDATE`, `CLAIM`, and `COMPLETE`, which are
-  typically scoped using property-based access control on task properties such as `assignee`, `candidateUsers`,
-  and `candidateGroups`.
+- Task-level permissions on the `USER_TASK` resource, such as `READ`, `UPDATE`, `CLAIM`, and `COMPLETE`, which are typically scoped using property-based access control on task properties such as `assignee`, `candidateUsers`, and `candidateGroups`.
 
-When both process-level and task-level permissions exist, process-level permissions take precedence:
-if a user already has the required `Process Definition` permission for an operation (for example, `UPDATE_USER_TASK`), the system does not evaluate `USER_TASK` permissions for that operation. Task-level `USER_TASK` permissions are
-evaluated only when no effective process-level permission exists for that user and process definition.
+When both process-level and task-level permissions exist, process-level permissions take precedence.
+If a user already has the required `Process Definition` permission for an operation (for example, `UPDATE_USER_TASK`), the system does not evaluate `USER_TASK` permissions for that operation. Task-level `USER_TASK` permissions are evaluated only when no effective process-level permission exists for that user and process definition.
 
 For Tasklist-specific behavior and practical authorization patterns, see [User task authorization in Tasklist](../tasklist/user-task-authorization.md).
 
@@ -127,6 +123,7 @@ To adjust permissions, create and manage custom roles instead.
 :::
 
 ## Change an existing authorization
+
 :::tip
 Partial wildcard matching, for example `my-resource*`, is not supported.
 :::
@@ -135,7 +132,7 @@ Partial wildcard matching, for example `my-resource*`, is not supported.
 
 Authorizations cannot be updated after they are created.
 
-To edit an authorization, [delete](#delete-an-authorization) the existing one and create a new authorization with the updated permissions.
+To edit an authorization, [delete](#delete-an-authorization) the existing one, and create a new authorization with the updated permissions.
 
 ## Delete an authorization
 

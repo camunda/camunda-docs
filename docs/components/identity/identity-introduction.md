@@ -15,7 +15,7 @@ Identity includes the following features:
 | Feature                   | Description                                                                                                                                                      |
 | :------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Unified access management | Authentication and authorization are handled consistently across all Orchestration Cluster components and APIs.                                                  |
-| Flexible authentication   | Identity supports multiple authentication modes, including no authentication, basic authentication, and OpenID Connect (OIDC), depending on the deployment type. |
+| Flexible authentication   | Identity supports multiple authentication modes, including no authentication, Basic authentication, and OpenID Connect (OIDC), depending on the deployment type. |
 | Tenant management         | Multi-tenancy is managed directly within the Orchestration Cluster, allowing for clear separation of resources.                                                  |
 
 For details about authorization concepts, resources, and configuration, see

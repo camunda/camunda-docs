@@ -21,11 +21,11 @@ This API is designed to make it easy to [find resources](./orchestration-cluster
 
 Key capabilities include:
 
-- Full process lifecycle management – Deploy, start, and monitor BPMN processes
-- User task operations – Claim, complete, and manage human tasks
-- Variable management – Read and update process variables
-- Incident resolution – Handle and resolve process incidents
-- Advanced search and filtering – Query process data with powerful search capabilities
+- Full process lifecycle management – Deploy, start, and monitor BPMN processes.
+- User task operations – Claim, complete, and manage human tasks.
+- Variable management – Read and update process variables.
+- Incident resolution – Handle and resolve process incidents.
+- Advanced search and filtering – Query process data with powerful search capabilities.
 
 This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints). You can rely on backward compatibility for production use.
 
@@ -33,7 +33,7 @@ To learn more about the Orchestration Cluster, see [What is the Orchestration Cl
 
 ## Getting started
 
-This section helps you get up and running in minutes. To begin using the Orchestration Cluster REST API, you need the following.
+This section helps you get up and running in minutes.
 
 ### Prerequisites
 
