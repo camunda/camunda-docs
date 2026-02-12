@@ -106,7 +106,20 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
 </TabItem>
 </Tabs>
 
-- **Redirect URI**: By default, the redirect URI is `http://localhost:8080/sso-callback`. Update this if your deployment uses a different hostname or port.
+- **Redirect URI**: By default, the redirect URI is `{baseUrl}/sso-callback`. At runtime, `{baseUrl}` will resolve to the URL used to access your Orchestration Cluster deployment. It can be changed to accommodate advanced use cases where proxies are involved, or to pass context information when configuring multiple OIDC providers. However, it's generally not necessary to configure anything here. Note that it **must** always point to the `/sso-callback` endpoint of your Orchestration Cluster deployment. For most Identity Providers, you will also have to configure accepted redirect URIs for security purposes, which should match with the one configured here (whether static, or dynamic using `{baseUrl}`).
+
+:::note
+
+`{baseUrl}` above is dynamically resolved on request to whatever was used to connect to your Orchestration Cluster instance. Specifically, it's made of `{scheme}://{host}:{port}/{contextPath}/`, all of which are specifically defined for the given request as:
+
+- `{scheme}`: the transport scheme, either `http` or `https`.
+- `{host}`: the hostname used to connect to your instance.
+- `{port}`: is the port (if any). Omitted if none was used.
+- `{contextPath}`: the context path for this Orchestration Cluster instance, if any. Omitted if there is none.
+
+So for example, if you accessed your instance via `https://camunda.acme.com/identity`, then `{baseUrl}` will be `https://camunda.acme.com`. If you accessed it via `https://services.acme.com:18080/camunda/`, then `{baseUrl}` will be `https://services.acme.com:18080/camunda`.
+
+:::
 
 - **Username claim**: By default, the `sub` (subject) claim from the token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your IdP includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (for example, `$['camundaorg']['username']`).
 
