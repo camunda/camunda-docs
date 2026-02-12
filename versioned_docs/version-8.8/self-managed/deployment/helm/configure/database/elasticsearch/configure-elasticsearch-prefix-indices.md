@@ -23,7 +23,7 @@ If Zeebe records indices and unified Camunda indices use the same Elasticsearch/
 
 Do not reuse the same prefix for:
 
-- Zeebe records indices (legacy exporter): `ZEEBE_BROKER_EXPORTERS_{ELASTICSEARCH|OPENSEARCH}_ARGS_INDEX_PREFIX`
+- Zeebe records indices (legacy exporter): `zeebe.broker.exporters.{elasticsearch|opensearch}.args.indexPrefix`
 - Unified Camunda indices (secondary storage): `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
 
 Reusing a shared prefix can cause Zeebe ILM/ISM policies and wildcard index patterns (for example, `custom*`) to also match unified indices, which may lead to unexpected data loss.
