@@ -285,6 +285,19 @@ module.exports = {
         },
         {
           type: "category",
+          label: "User operations audit log",
+          link: {
+            type: "doc",
+            id: "components/user-operations-audit-log/overview",
+          },
+          items: [
+            "components/user-operations-audit-log/overview/access-control",
+            "components/user-operations-audit-log/overview/recorded-operations",
+            "components/user-operations-audit-log/overview/operation-structure",
+          ],
+        },
+        {
+          type: "category",
           label: "Camunda integrations",
           link: {
             type: "doc",
@@ -727,12 +740,8 @@ module.exports = {
               ],
             },
             "components/operate/userguide/process-instance-migration",
-            {
-              "Monitor process operations": [
-                "components/operate/userguide/monitor-operation-status",
-                "components/operate/userguide/monitor-batch-operations",
-              ],
-            },
+            "components/operate/userguide/monitor-batch-operations",
+            "components/operate/userguide/audit-operations",
           ],
         },
         {
@@ -752,6 +761,7 @@ module.exports = {
             "components/tasklist/userguide/starting-processes",
             "components/tasklist/user-task-access-restrictions",
             "components/tasklist/userguide/tasklist-localization",
+            "components/tasklist/userguide/audit-task-history",
           ],
         },
         {
@@ -770,6 +780,7 @@ module.exports = {
             "components/identity/client",
             "components/identity/mapping-rules",
             "components/identity/tenant",
+            "components/identity/audit-operations",
           ],
         },
       ],
