@@ -71,7 +71,7 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
 :::info
 
 - See [release announcements](/reference/announcements-release-notes/880/880-announcements.md) and [release notes](/reference/announcements-release-notes/880/880-release-notes.md) for more detail on what's included in Camunda 8.8.
-- Ready to upgrade? See the [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.7 to 8.8.
+- Ready to update? See the [update guides](#upgrade-guides) to learn more about updating from Camunda 8.7 to 8.8.
 
 :::
 
@@ -404,11 +404,11 @@ Changes to [APIs & tools](/apis-tools/working-with-apis-tools.md) in 8.8 are sum
 To learn more about upgrading and migrating to 8.8, see the [API & tools upgrade guide](/apis-tools/migration-manuals/index.md).
 :::
 
-## Upgrade guides {#upgrade-guides}
+## Update guides {#upgrade-guides}
 
-Camunda 8.8 lays the foundation for future releases. Upgrading ensures compatibility and access to improved features.
+Camunda 8.8 lays the foundation for future releases. Updating ensures compatibility and access to improved features.
 
-The following guides provide detailed information on how you can upgrade to Camunda 8.8.
+The following guides provide detailed information on how you can update to Camunda 8.8.
 
 <table className="table-callout">
 <tr>
@@ -417,13 +417,13 @@ The following guides provide detailed information on how you can upgrade to Camu
     <td>**Who is this guide for?**</td>
 </tr>
 <tr>
-    <td>[Self-Managed upgrade guide](/self-managed/update/administrators/overview.md)</td>
+    <td>[Self-Managed update guide](/self-managed/update/administrators/overview.md)</td>
     <td>Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment.</td>
     <td>Operations and platform administrators of Self-Managed installations.</td>
 </tr>
 <tr>
-    <td>[APIs & tools upgrade guide](/apis-tools/migration-manuals/index.md)</td>
-    <td>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and tools transitions.</td>
+    <td>[APIs & tools update guide](/apis-tools/migration-manuals/index.md)</td>
+    <td>Plan and execute an update from Camunda 8.7 to 8.8, focusing on API and tools transitions.</td>
     <td><p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p></td>
 </tr>
 </table>

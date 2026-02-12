@@ -3,11 +3,11 @@ title: "Camunda 8.8 APIs & tools migration guide"
 description: "Plan and execute an update from Camunda 8.7 to 8.8. Includes architectural highlights, prerequisites, and breaking changes relevant for developers."
 ---
 
-Learn about important API & tools changes in Camunda 8.8 to consider when planning your upgrade from Camunda 8.7.
+Learn about important API & tools changes in Camunda 8.8 to consider when planning your update from Camunda 8.7.
 
 ## About this guide
 
-This guide focuses on the API and SDK transitions required in an upgrade from Camunda 8.7 to Camunda 8.8.
+This guide focuses on the API and SDK transitions required in an update from Camunda 8.7 to Camunda 8.8.
 
 Camunda 8.8 introduces a significant architectural evolution that impacts both infrastructure deployment and application integration:
 
@@ -16,10 +16,10 @@ Camunda 8.8 introduces a significant architectural evolution that impacts both i
 - Updated authentication models.
 - Deprecation of several legacy components.
 
-Camunda 8.8 lays the foundation for future releases. Upgrading ensures compatibility and access to improved features.
+Camunda 8.8 lays the foundation for future releases. Updating ensures compatibility and access to improved features.
 
 :::tip
-Plan and start your migration early to reduce upgrade risk beyond 8.8.
+Plan and start your migration early to reduce update risk beyond 8.8.
 :::
 
 :::info
@@ -57,7 +57,7 @@ The [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orche
 - The Orchestration Cluster API becomes the new default instead of the Zeebe gRPC API (which is still [retained for high performance use cases](https://camunda.com/blog/2025/07/retaining-grpc-support/)).
 
 :::info
-For more information on upgrading and migrating, see the following upgrade guides:
+For more information on updating and migrating, see the following update guides:
 
 - [Migrate from V1 APIs to the Orchestration Cluster API](migrate-to-camunda-api.md)
 - [Migrate from gRPC API to the Orchestration Cluster API](migrate-from-grpc-to-orchestration-cluster-api.md)
@@ -72,7 +72,7 @@ The [Camunda Java Client](/apis-tools/java-client/getting-started.md) is now the
 - Zeebe Java Client is deprecated with 8.8 and will be removed with 8.10. This allows you to plan and transition to the Camunda Java Client without immediate pressure, allowing for a smoother migration process.
 
 :::info
-For more information on upgrading and migrating, see [migrate to Camunda Java Client](migrate-to-camunda-java-client.md).
+For more information on updating and migrating, see [migrate to Camunda Java Client](migrate-to-camunda-java-client.md).
 :::
 
 ### Camunda Spring Boot Starter
@@ -86,7 +86,7 @@ The transition from Zeebe Spring SDK to Camunda Spring Boot Starter indicates si
 - There is a grace period during which the old Zeebe client is still available until version 8.10. This allows you to adapt to the new SDK and make the required changes incrementally.
 
 :::info
-For more information on upgrading and migrating, see [migrate to Camunda Spring Boot Starter](migrate-to-camunda-java-client.md).
+For more information on updating and migrating, see [migrate to Camunda Spring Boot Starter](migrate-to-camunda-java-client.md).
 :::
 
 ### Camunda Process Test (CPT)
@@ -103,7 +103,7 @@ For more information on upgrading and migrating, see [migrate to Camunda Spring 
 | 8.10    | ZPT will be removed completely. You must have migrated your tests to CPT by this time. |
 
 :::info
-For more information on upgrading and migrating,
+For more information on updating and migrating,
 see [migrate to Camunda Process Test](migrate-to-camunda-process-test.md).
 :::
 
@@ -116,7 +116,7 @@ see [migrate to Camunda Process Test](migrate-to-camunda-process-test.md).
 - From 8.8, new functionality is only added only for the Camunda user task type.
 
 :::info
-For more information on upgrading and migrating, see [migrate to Camunda user tasks](migrate-to-camunda-user-tasks.md).
+For more information on updating and migrating, see [migrate to Camunda user tasks](migrate-to-camunda-user-tasks.md).
 :::
 
 ### Tasklist GraphQL API
@@ -127,14 +127,14 @@ Check the Orchestration Cluster API on User Tasks for more information on how to
 
 ## Next steps
 
-Ready to upgrade and migrate? Complete the following steps:
+Ready to update and migrate? Complete the following steps:
 
 1. Coordinate your platform and development teams:
-   - For Self-Managed environments, ensure your Orchestration Cluster is upgraded before upgrading your application clients.
-   - Start with the [Self-Managed upgrade overview](../../self-managed/update/administrators/admin-upgrade-overview/) to plan the upgrade.
-   - Review the relevant component and deployment upgrade guides as part of the cluster upgrade process:
-     - [Components upgrade guides](../../self-managed/components/components-upgrade/introduction/)
-     - [Helm upgrade guides](../../self-managed/deployment/helm/upgrade/)
+   - For Self-Managed environments, ensure your Orchestration Cluster is updated before updating your application clients.
+   - Start with the [Self-Managed update overview](../../self-managed/update/administrators/admin-upgrade-overview/) to plan the update.
+   - Review the relevant component and deployment update guides as part of the cluster update process:
+     - [Components update guides](../../self-managed/components/components-upgrade/introduction/)
+     - [Helm update guides](../../self-managed/deployment/helm/upgrade/)
 
 2. Review the migration guides relevant to your setup:
    - [Migrate from V1 APIs to the Orchestration Cluster API](./migrate-to-camunda-api/)
