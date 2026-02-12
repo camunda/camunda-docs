@@ -313,7 +313,6 @@ The following limitations apply:
 | correlationTime        | No              |
 | flowNodeId             | No              |
 | flowNodeInstanceKey    | No              |
-| historyCleanupDate     | No              |
 | messageKey             | No              |
 | messageName            | No              |
 | partitionId            | No              |
@@ -411,7 +410,6 @@ The following limitations apply:
 | tenantId               | Yes             |
 | partitionId            | Yes             |
 | rootProcessInstanceKey | Yes             |
-| historyCleanupDate     | Yes             |
 
 ### Form
 
@@ -453,7 +451,6 @@ The following limitations apply:
 | treePath               | No              |
 | tenantId               | Yes             |
 | partitionId            | No              |
-| historyCleanupDate     | No              |
 
 ### Job
 
@@ -483,7 +480,6 @@ The following limitations apply:
 | elementInstanceKey       | No              |
 | tenantId                 | No              |
 | partitionId              | No              |
-| historyCleanupDate       | No              |
 | creationTime             | No              |
 | lastUpdateTime           | No              |
 
@@ -504,7 +500,6 @@ The following limitations apply:
 | correlationKey           | No              |
 | tenantId                 | No              |
 | partitionId              | No              |
-| historyCleanupDate       | No              |
 
 ### Process definition
 
@@ -551,7 +546,6 @@ The following limitations apply:
 | processDefinitionId  | No              |
 | tenantId             | No              |
 | partitionId          | No              |
-| historyCleanupDate   | No              |
 
 ### Usage metric
 
@@ -605,7 +599,6 @@ The following limitations apply:
 | priority                 | Yes             |
 | tags                     | No              |
 | partitionId              | Yes             |
-| historyCleanupDate       | Yes             |
 
 ### User task migration
 
@@ -636,4 +629,3 @@ The following limitations apply:
 | processDefinitionId    | Yes             |
 | tenantId               | Yes             |
 | partitionId            | Yes             |
-| historyCleanupDate     | Yes             |
