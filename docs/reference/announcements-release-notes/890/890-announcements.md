@@ -195,6 +195,27 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Inbound connectors now support older process versions
+
+Starting with Camunda 8.9, inbound connectors are activated not only for the latest process version, but also for older process versions that have active instances waiting on message subscriptions.
+
+- **Previous behavior:** Inbound connectors were only active for the latest deployed process version. If you deployed a new version of a process, the inbound connectors for the previous version were immediately deactivated, even if process instances were still running on that version.
+
+- **New behavior:** Inbound connectors remain active for any process version that has instances waiting on message subscriptions. This ensures that running process instances can continue to receive messages through inbound connectors, even after a newer version of the process is deployed.
+
+This change improves the reliability of long-running processes that depend on inbound connectors to receive external events.
+
+<p className="link-arrow">[Inbound connector lifecycle](/components/connectors/advanced-topics/inbound-lifecycle.md)</p>
+
+</div>
+</div>
+
 ### Data
 
 <div className="release-announcement-row">
