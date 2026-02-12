@@ -56,13 +56,13 @@ The legacy Zeebe exporter is automatically enabled when:
 
 :::note Exported data vs. retained data
 
-The `orchestration.retention` policy always applies to the Zeebe record indices that are actually written (for example, `zeebe-record-*`). If you configure exporter-side filters in the legacy Elasticsearch or OpenSearch exporter (such as exporting only a subset of variables or processes for data analysis tools like Optimize), retention does not restore filtered-out data. It only controls the lifetime of the exported subset.
+The `orchestration.retention` policy always applies to the Zeebe record indices that are actually written (for example, `zeebe-record-*`). If you configure exporter-side filters in the legacy Elasticsearch or OpenSearch exporter (such as exporting only a subset of variables or processes for data analysis tools like Optimize), retention policies apply only to data that was exported. They do not recreate or restore records that were filtered out by exporter-side filters.
 
-For Optimize and other data-analysis use cases, coordinate exporter filters and retention settings, and refer to:
+For Optimize and other data-analysis use cases, coordinate exporter-side filters and retention settings, and refer to:
 
-- [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/)
-- [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter/)
-- [Camunda 8 system configuration (Optimize)](/self-managed/components/optimize/configuration/system-configuration-platform-8/)
+- [Elasticsearch exporter](../../../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/)
+- [OpenSearch exporter](../../../../components/orchestration-cluster/zeebe/exporters/opensearch-exporter/)
+- [Camunda 8 system configuration (Optimize)](../../../../components/optimize/configuration/system-configuration-platform-8/)
 
 :::
 
@@ -295,8 +295,6 @@ The `camunda-history-retention-policy` is created by Camunda's retention tooling
 :::note Index naming
 Operate and Tasklist indices use schema-specific versioning in their names (e.g., `operate-process-8.3.0_`, `tasklist-task-8.8.0_`). The version numbers represent schema versions, which may differ from the Camunda platform version. When archived, these indices receive a date suffix (e.g., `operate-process-8.3.0_2024-01-15`).
 :::
-
-### References
 
 ### References
 

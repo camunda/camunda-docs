@@ -410,7 +410,7 @@ By default, these exporters emit only the record value types and intents require
 
 To export additional record types, enable the [`includeEnabledRecords`](#configuration) configuration property.
 
-When you enable Optimize-specific filters (`optimizeModeEnabled`, `variable-name`,
+When you enable exporter-side filters (`optimizeModeEnabled`, `variable-name`,
 `variable-type`, or `bpmn-process-id`), filtering applies only to newly produced records. Existing documents in Elasticsearch or OpenSearch are not rewritten.
 
 :::info Upgrade note (8.8 to 8.9)

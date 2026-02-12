@@ -132,7 +132,7 @@ Each loaded exporter introduces some performance overhead. A slow exporter will 
 To avoid performance bottlenecks, exporters should be kept as simple and lightweight as possible. Any heavy data transformation or enrichment should be delegated to external systems.
 
 :::warning
-When you enable or change exporter filters on an existing cluster, the exported record stream can change shape.
+When you enable or change exporter-side filters on an existing cluster, the exported record stream can change shape.
 If another component (such as Optimize) relies on a previously unfiltered sequence, this may lead to gaps or inconsistencies unless you follow the recommended upgrade flow.
 For Optimize‑specific guidance and examples, see the [Camunda 8 system configuration](../components/optimize/configuration/system-configuration-platform-8.md) documentation.
 :::
