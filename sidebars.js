@@ -795,7 +795,15 @@ module.exports = {
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
-            "components/connectors/use-connectors/intrinsic-functions",
+          ],
+        },
+        {
+          type: "category",
+          label: "Advanced connector topics",
+          items: [
+            "components/connectors/advanced-topics/connector-deduplication",
+            "components/connectors/advanced-topics/inbound-lifecycle",
+            "components/connectors/advanced-topics/intrinsic-functions",
             "components/connectors/use-connectors-in-hybrid-mode",
           ],
         },
@@ -1382,6 +1390,7 @@ module.exports = {
       items: ["reference/data-collection/usage-metrics"],
     },
     "reference/contact",
+    "reference/mcp-docs/docs-mcp",
     "reference/legal",
   ],
   "Self-Managed": [
