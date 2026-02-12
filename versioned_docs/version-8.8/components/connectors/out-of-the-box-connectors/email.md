@@ -852,7 +852,7 @@ The **Deduplication** section allows you to configure the connector deduplicatio
 To customize the deduplication behavior, select the **Manual mode** checkbox and configure the custom deduplication ID.
 
 :::info
-To learn more about deduplication, see [deduplication](../use-connectors/inbound.md#connector-deduplication).
+To learn more about deduplication, see [deduplication](../advanced-topics/deduplication.md).
 :::
 
 </TabItem>
