@@ -16,8 +16,21 @@ Configure an index prefix when you need to:
 - Isolate data when multiple Camunda instances share the same Elasticsearch or OpenSearch cluster, so they don’t write to or read from each other’s indices.
 - Avoid index name collisions in multi-instance environments (for example, separate dev/test/prod installations using one shared cluster).
 
-:::note
-Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built-in migration support between old and new prefixes.
+:::warning
+Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
+
+If Zeebe records indices and unified Camunda indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
+
+Do not reuse the same prefix for:
+
+- Zeebe records indices (legacy exporter): `zeebe.broker.exporters.{elasticsearch|opensearch}.args.indexPrefix`
+- Unified Camunda indices (secondary storage): `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
+
+In particular, do not configure `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix` (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`) to `zeebe-record`, because `zeebe-record` is the default value of `zeebe.broker.exporters.{elasticsearch|opensearch}.args.indexPrefix` for Zeebe records indices.
+
+Reusing a shared prefix can cause Zeebe ILM/ISM policies and wildcard index patterns (for example, `custom*`) to also match unified indices, which may lead to unexpected data loss.
+
+Also make sure one prefix does not include the other. For example, `custom` and `custom-zeebe` can still conflict because wildcard patterns like `custom*` match both.
 :::
 
 ## Exporters and index prefixes
@@ -195,6 +208,20 @@ CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX=custom-optimize
 CAMUNDA_OPTIMIZE_ZEEBE_NAME=custom-zeebe
 ```
 
+For example, recommended:
+
+```bash
+ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INDEX_PREFIX=custom-zeebe
+CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_INDEXPREFIX=custom-camunda
+```
+
+Not allowed (will cause conflicts):
+
+```bash
+ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INDEX_PREFIX=shared-prefix
+CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_INDEXPREFIX=shared-prefix
+```
+
 ### OpenSearch
 
 ```sh
@@ -207,6 +234,20 @@ ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INDEX_PREFIX=custom-zeebe
 # Optimize indices prefix (when Optimize is enabled)
 CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX=custom-optimize
 CAMUNDA_OPTIMIZE_ZEEBE_NAME=custom-zeebe
+```
+
+For example, recommended:
+
+```bash
+ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INDEX_PREFIX=custom-zeebe
+CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_INDEXPREFIX=custom-camunda
+```
+
+Not allowed (will cause conflicts):
+
+```bash
+ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INDEX_PREFIX=shared-prefix
+CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_INDEXPREFIX=shared-prefix
 ```
 
 </TabItem>
