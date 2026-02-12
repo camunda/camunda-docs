@@ -5,10 +5,10 @@ sidebar_label: "User task access restrictions"
 description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions."
 ---
 
-User task access restrictions allow you to ensure that only assigned or candidate [users](components/console/manage-organization/manage-users.md) and [groups](components/console/manage-organization/manage-user-groups.md) can access user tasks in [Tasklist](./introduction-to-tasklist.md) when using Tasklist V1. These restrictions are based on the candidate users and groups defined in a BPMN diagram.
+With user task access restrictions, you can ensure that only assigned or candidate [users](components/console/manage-organization/manage-users.md) and [groups](components/console/manage-organization/manage-user-groups.md) can access user tasks in [Tasklist](./introduction-to-tasklist.md) when using Tasklist V1. These restrictions are based on the candidate users and groups defined in a BPMN diagram.
 
 :::caution Tasklist V1 only
-User task access restrictions are supported only by the Tasklist V1 API and are not supported in Tasklist V2. From Camunda 8.8, Tasklist runs in V2 mode by default.
+User task access restrictions are supported only by the Tasklist V1 API and aren't supported in Tasklist V2. From Camunda 8.8, Tasklist runs in V2 mode by default.
 
 To continue using user task access restrictions, see [switching between V1 and V2 modes](components/tasklist/api-versions.md#switching-between-v1-and-v2-modes)
 to enable Tasklist V1 mode.
@@ -37,12 +37,12 @@ User task access restrictions are enabled by default on SaaS clusters that run T
 You can enable or disable user task access restrictions for Tasklist V1 from the
 [cluster settings in Console](components/console/manage-clusters/settings.md#enforce-user-task-restrictions).
 
-When activated, tasks are only visible to:
+When activated, tasks are visible only to:
 
-- the assigned user,
-- users listed as candidate users, or
-- members of the respective candidate groups.
+- The assigned user.
+- Users listed as candidate users.
+- Members of the respective candidate groups.
 
 When deactivated, every user can see any task in Tasklist V1, regardless of the assignment.
 
-This configuration does not affect OIDC API clients that call the Tasklist V1 REST API. When you retrieve tasks using such a client, all tasks are returned. It also does not affect Tasklist V2 or the Orchestration Cluster REST API, which always rely on authorization-based access control for task visibility.
+This configuration doesn't affect OIDC API clients that call the Tasklist V1 REST API. When you retrieve tasks using such a client, all tasks are returned. It also doesn't affect Tasklist V2 or the Orchestration Cluster REST API, which always rely on authorization-based access control for task visibility.

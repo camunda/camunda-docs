@@ -146,5 +146,5 @@ Delete an authorization by completing the following steps:
 The authorization is deleted, and the owner no longer has the permissions granted by it.
 
 :::caution
-Deleting an authorization is permanent and cannot be undone.
+Deleting an authorization is permanent and can't be undone.
 :::

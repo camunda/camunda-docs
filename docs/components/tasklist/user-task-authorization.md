@@ -27,7 +27,7 @@ For Tasklist, the recommended authorization model combines:
 - Task-level permissions for fine-grained access control on individual user tasks
 - The default task worker role for common user task operations
 
-This approach allows you to grant general access where appropriate while restricting access to specific tasks based on task properties, such as assignee or candidate groups.
+With this approach, you can grant general access where appropriate while restricting access to specific tasks based on task properties, such as assignee or candidate groups.
 
 ## Authorization resources used by Tasklist
 
@@ -45,13 +45,16 @@ On new installations and upgrades, Camunda Identity automatically creates a defa
 
 This role grants property-based `USER_TASK` permissions:
 
-- Permissions: `READ`, `CLAIM`, `COMPLETE`
+- Permissions:
+  - `READ`
+  - `CLAIM`
+  - `COMPLETE`
 - Scoped by:
   - `assignee`
   - `candidateUsers`
   - `candidateGroups`
 
-This lets typical task workers see, claim, and complete only the tasks they are responsible for.
+This lets typical task workers see, claim, and complete only the tasks they're responsible for.
 
 You can use this role as-is or create custom roles with similar property-based authorizations.
 
@@ -59,7 +62,7 @@ You can use this role as-is or create custom roles with similar property-based a
 
 The following table shows which permissions are required to perform common user task operations in Tasklist.
 
-The table reflects currently implemented permissions that are enforced by Tasklist.
+The table reflects currently-implemented permissions that are enforced by Tasklist.
 
 | Operation                                 | `USER_TASK` permission | `PROCESS_DEFINITION` permission |
 | ----------------------------------------- | ---------------------- | ------------------------------- |
@@ -76,20 +79,20 @@ The table reflects currently implemented permissions that are enforced by Taskli
 
 Tasklist relies on the Orchestration Cluster authorization model to control access to user tasks. Permissions are evaluated in two layers:
 
-1. Process-level permissions on the `Process Definition` resource (for example, `READ_USER_TASK`, `UPDATE_USER_TASK`).
-2. Task-level permissions on the `USER_TASK` resource (for example, `READ`, `UPDATE`, `CLAIM`, `COMPLETE`), often combined with property-based access control on `assignee`, `candidateUsers`, and `candidateGroups`.
+1. Process-level permissions on the `Process Definition` resource (`READ_USER_TASK` and `UPDATE_USER_TASK`).
+2. Task-level permissions on the `USER_TASK` resource (`READ`, `UPDATE`, `CLAIM`, and `COMPLETE`), often combined with property-based access control on `assignee`, `candidateUsers`, and `candidateGroups`.
 
 When both layers are configured, process-level permissions take precedence:
 
-- If a user already has the required process-level permission (for example, `READ_USER_TASK` or `UPDATE_USER_TASK` on `Process Definition`), Tasklist does not require or evaluate additional `USER_TASK` permissions for that operation.
+- If a user already has the required process-level permission (`READ_USER_TASK` or `UPDATE_USER_TASK` on `Process Definition`), Tasklist does not require or evaluate additional `USER_TASK` permissions for that operation.
 - If the user does not have sufficient process-level permissions, Tasklist evaluates `USER_TASK` permissions instead, including property-based authorizations based on task properties.
 
 ## Example: claim and complete group tasks
 
 To allow users to work on tasks that are assigned to their group:
 
-1. Grant the READ_USER_TASK permission on the `PROCESS_DEFINITION` resource for the relevant process.
-2. Grant the CLAIM and COMPLETE permissions on the `USER_TASK` resource using the `candidateGroups` property.
+1. Grant the `READ_USER_TASK` permission on the `PROCESS_DEFINITION` resource for the relevant process.
+2. Grant the `CLAIM` and `COMPLETE` permissions on the `USER_TASK` resource using the `candidateGroups` property.
 
 This configuration allows users to see tasks for the process and claim or complete only those tasks for which they are listed as a candidate group member.
 

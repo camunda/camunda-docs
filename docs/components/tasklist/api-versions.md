@@ -27,7 +27,7 @@ Key benefits of using V2 include:
 
 Before migrating to the Tasklist V2 API, review the features that are only available in the deprecated V1 API.
 
-The following features are only available in Tasklist API V1 and are not supported in V2:
+The following features are only available in Tasklist API V1 and aren't supported in V2:
 
 - Job worker-based user tasks.
 - Draft variables.
@@ -37,7 +37,7 @@ The following features are only available in Tasklist API V1 and are not support
 - Task context description.
 - Searching for user tasks with variable filters created before upgrading to version 8.8.
 
-Ensure that your application does not rely on these features before upgrading to the V2 API.
+Ensure your application does not rely on these features before upgrading to the V2 API.
 
 ## Deprecation timeline
 
@@ -81,7 +81,7 @@ In Tasklist V1 API mode, access to user tasks is not evaluated using fine-graine
 
 In Tasklist V2 API mode, access to user tasks is evaluated using the Orchestration Cluster authorization model.
 
-This page does not describe authorization behavior in detail. For information about authorization concepts, resources, and configuration, see
+For information about authorization concepts, resources, and configuration, see
 [authorization-based access control](../concepts/access-control/authorizations.md).
 
 For details about how existing Tasklist V1 permissions map to the V2 authorization model, see the
@@ -91,7 +91,7 @@ When switching between V1 and V2 modes, review and update authorizations to matc
 
 ### User task access restrictions
 
-[User task access restrictions](./user-task-access-restrictions.md) are supported only when using the Tasklist V1 API and are not supported in Tasklist V2.
+[User task access restrictions](./user-task-access-restrictions.md) are supported only when using the Tasklist V1 API and aren't supported in Tasklist V2.
 
 In Tasklist V2, access to user tasks is controlled by authorization-based access control rather than user task access restrictions.
 

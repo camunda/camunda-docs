@@ -31,7 +31,7 @@ The Camunda user task implementation type was previously referred to as the **Ze
 ### Assignments
 
 User tasks support specifying assignments, using the `zeebe:AssignmentDefinition` extension element.
-This can be used to define which user the task can be assigned to. One or all of the following attributes can be specified simultaneously:
+You can use this to define which user the task can be assigned to. You can specify one or all of the following attributes simultaneously:
 
 - `assignee`: Specifies the user assigned to the task. [Tasklist](/components/tasklist/introduction-to-tasklist.md) will claim the task for this user.
 - `candidateUsers`: Specifies the users that the task can be assigned to.
@@ -40,8 +40,7 @@ This can be used to define which user the task can be assigned to. One or all of
 In SaaS, all user IDs are converted to lowercase by default, as they are based on email addresses.
 
 :::info
-Assignment resources can also be used to configure [user task access restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md) when using Tasklist V1, so that only the assignee, candidate users, and members of candidate groups can see and work on a task. In Tasklist V2, candidate users and candidate groups are
-interpreted through authorization-based access control: they affect task visibility and assignment only when the user has matching task or process authorizations.
+You can also use assignment resources to configure [user task access restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md) when using Tasklist V1, so that only the assignee, candidate users, and members of candidate groups can see and work on a task. In Tasklist V2, candidate users and candidate groups are interpreted through authorization-based access control: they affect task visibility and assignment only when the user has matching task or process authorizations.
 :::
 
 Typically, the assignee, candidate users, and candidate groups are defined as [static values](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
@@ -65,7 +64,7 @@ For example, say you log into Tasklist using Camunda 8 login with email using yo
 ### Scheduling
 
 User tasks support specifying a task schedule using the `zeebe:taskSchedule` extension element.
-This can be used to define **when** users interact with a given task. One or both of the following attributes can be specified simultaneously:
+You can use this to define when users interact with a given task. You can specify one or both of the following attributes simultaneously:
 
 - `dueDate`: Specifies the due date of the user task.
 - `followUpDate`: Specifies the follow-up date of the user task.
@@ -75,8 +74,7 @@ For example, you can use the `followUpDate` to define the latest time a user sho
 use the `dueDate` to provide a deadline when the user task should be finished.
 :::
 
-You can define the due date and follow-up date as static values (e.g. `2023-02-28T13:13:10+02:00`), but you can also use [expressions](/components/concepts/expressions.md) (e.g. `= schedule.dueDate` and `= now() + duration("PT15S")`). The
-expressions are evaluated on activating the user task and must result in a `string` conforming to an ISO 8601 combined date and time representation.
+You can define the due date and follow-up date as static values (for example, `2023-02-28T13:13:10+02:00`) or [expressions](/components/concepts/expressions.md) (for example, `= schedule.dueDate` and `= now() + duration("PT15S")`). The expressions are evaluated on activating the user task and must result in a `string` conforming to an ISO 8601 combined date and time representation.
 
 import ISO8601DateTime from '../assets/react-components/iso-8601-date-time.md'
 
@@ -148,7 +146,7 @@ Furthermore, there is a third form option for job worker-based user tasks: embed
 ### Task headers
 
 A user task can define an arbitrary number of `taskHeaders`; they are static
-metadata stored with the user task in Zeebe. The headers can be used as configuration parameters for tasklist applications.
+metadata stored with the user task in Zeebe. The headers can be used as configuration parameters for Tasklist applications.
 
 ### User task listeners
 
