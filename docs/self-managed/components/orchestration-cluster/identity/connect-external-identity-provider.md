@@ -114,7 +114,7 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
 
 - `{scheme}`: the transport scheme, either `http` or `https`.
 - `{host}`: the hostname used to connect to your instance.
-- `{port}`: is the port (if any). Omitted if none was used.
+- `{port}`: the port (if any). Omitted if none was used.
 - `{contextPath}`: the context path for this Orchestration Cluster instance, if any. Omitted if there is none.
 
 So for example, if you accessed your instance via `https://camunda.acme.com/identity`, then `{baseUrl}` will be `https://camunda.acme.com`. If you accessed it via `https://services.acme.com:18080/camunda/`, then `{baseUrl}` will be `https://services.acme.com:18080/camunda`.
