@@ -184,7 +184,7 @@ The history migration has the following limitations.
 
 ### Process instance
 
-- Process instance migration doesn't populate the `parentElementInstanceKey` and `tree` fields.
+- Process instance migration doesn't populate the `tree` field.
 - This means that the history of subprocesses and call activities is not linked to their parent
   process instance.
 - As a result, you cannot query for the history of a subprocess or call activity using the
@@ -523,7 +523,7 @@ The following limitations apply:
 ### Process instance
 
 | Property                 | Can be migrated     |
-| ------------------------ | ------------------- |
+| ------------------------ |---------------------|
 | processInstanceKey       | Yes                 |
 | rootProcessInstanceKey   | Yes                 |
 | processDefinitionId      | Yes                 |
@@ -533,7 +533,7 @@ The following limitations apply:
 | endDate                  | Yes                 |
 | tenantId                 | Yes                 |
 | parentProcessInstanceKey | Yes                 |
-| parentElementInstanceKey | No                  |
+| parentElementInstanceKey | Yes                 |
 | numIncidents             | No (`0` by default) |
 | version                  | Yes                 |
 | partitionId              | Yes                 |
