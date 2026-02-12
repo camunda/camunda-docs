@@ -1,30 +1,35 @@
 ---
 id: gateway-api-setup
 sidebar_label: With Gateway API
-title: Configure the Helm chart with K8S Gateway API
-description: Set up and configure K8S Gateway API for Camunda 8 Self-Managed Helm deployments.
+title: Configure the Helm chart with Gateway API
+description: Set up and configure the Kubernetes Gateway API for Camunda 8 Self-Managed Helm deployments.
 ---
 
-The Kubernetes Gateway API is a newer way to manage Ingress traffic in Kubernetes clusters. The Gateway API improves upon the Ingress API in the following ways:
+Use this guide to configure the Camunda 8 Helm chart with the Kubernetes Gateway API instead of a traditional Ingress controller.
 
-- Allows for a separation between Cluster Operators who might have permissions to Gateway resources and Application Developers who might have permissions to HTTPRoute resources.
-- Allows for configuration of Nginx outside of using labels and annotations to tweak behavior (which is also beneficial for limiting permissions).
+The Gateway API provides a modern way to manage Ingress traffic in Kubernetes clusters. It improves on the Ingress API in the following ways:
+
+- Separates cluster operators, who manage Gateway resources, from application developers, who manage HTTPRoute resources.
+- Enables configuration of NGINX without relying on labels and annotations, which also helps limit permissions.
 
 :::note
-The Ingress-nginx controller is planned to reach end-of-life in March 2026 ([details](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/)). As a result, we recommend planning a migration—preferably to Gateway API where it fits your use case.
-If you decide not to adopt Gateway API, you can also migrate to a different Ingress controller and continue using the Ingress API; this remains a supported approach.
+The Ingress-NGINX controller is planned to reach end of life in March 2026 (see the Kubernetes announcement on Ingress-NGINX retirement). We recommend planning a migration to the Gateway API where it fits your use case.
+
+If you decide not to adopt the Gateway API, you can migrate to a different Ingress controller and continue using the Ingress API. This remains a supported approach.
 :::
 
 ## Prerequisites
 
-- Gateway API CRD's installed in your cluster
-- Gateway API Controller
+Ensure both are installed in your cluster.
+
+- Gateway API CRDs
+- A Gateway API controller
 
 ## Gateway Controllers
 
-Just like Ingress Controllers, Gateway Controllers need to be installed before a cluster can use the Gateway API. [List of Gateway API implementations](https://gateway-api.sigs.k8s.io/implementations/)
+Just like Ingress Controllers, Gateway Controllers need to be installed before a cluster can use the Gateway API. [See the list of Gateway API implementations for details.](https://gateway-api.sigs.k8s.io/implementations/)
 
-In testing, we make use of the [NGINX Gateway Fabric](https://github.com/nginx/nginx-gateway-fabric).
+In testing, we use the [NGINX Gateway Fabric](https://github.com/nginx/nginx-gateway-fabric).
 
 ## Configuration
 
@@ -36,12 +41,12 @@ In testing, we make use of the [NGINX Gateway Fabric](https://github.com/nginx/n
 | `global.gateway.className`             | string  | `""`    | The name of the GatewayClass resource that defines which Gateway Controller will be operating on your Gateway and HTTPRoutes |
 | `global.gateway.labels`                | map     | `{}`    | Labels to add to the Gateway and HTTPRoute resources                                                                         |
 | `global.gateway.annotations`           | map     | `{}`    | Annotations to add to the Gateway and HTTPRoute resources                                                                    |
-| `global.gateway.hostname`              | string  | `""`    | The external facing url hostname camunda will be installed on.                                                               |
+| `global.gateway.hostname`              | string  | `""`    | The external-facing URL hostname where Camunda will be installed.                                                            |
 | `global.gateway.tls.enabled`           | boolean | `false` | Enable TLS                                                                                                                   |
 | `global.gateway.tls.secretName`        | string  | `""`    | Name of the K8S Secret resource containing a TLS certificate                                                                 |
-| `global.gateway.controllerNamespace`   | string  | `""`    | Namespace the Gateway Controller is installed on.                                                                            |
+| `global.gateway.controllerNamespace`   | string  | `""`    | The namespace where the Gateway controller is installed.                                                                     |
 
-## Example configuration:
+## Example configuration
 
 ```yaml
 global:
