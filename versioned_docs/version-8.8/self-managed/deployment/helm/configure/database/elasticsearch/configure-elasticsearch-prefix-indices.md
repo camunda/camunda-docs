@@ -16,8 +16,17 @@ Configure an index prefix when you need to:
 - Isolate data when multiple Camunda instances share the same Elasticsearch or OpenSearch cluster, so they don’t write to or read from each other’s indices.
 - Avoid index name collisions in multi-instance environments (for example, separate dev/test/prod installations using one shared cluster).
 
-:::note
+:::warning
 Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built-in migration support between old and new prefixes.
+
+If Zeebe records indices and unified Camunda indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
+
+Do not reuse the same prefix for:
+
+- Zeebe records indices (legacy exporter): `ZEEBE_BROKER_EXPORTERS_{ELASTICSEARCH|OPENSEARCH}_ARGS_INDEX_PREFIX`
+- Unified Camunda indices (secondary storage): `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
+
+Also make sure one prefix does not include the other. For example, `custom` and `custom-zeebe` can still conflict because wildcard patterns like `custom*` match both.
 :::
 
 ## Exporters and index prefixes
