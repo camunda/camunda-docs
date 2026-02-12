@@ -42,12 +42,16 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage-m
 | `camunda.database.aws-enabled`                                                                                                                        | <p>Use basic authentication or AWS credentials to log in.</p><p><ul><li><p>Set to `false` to use basic authentication for OpenSearch, adhering to the global AWS OpenSearch configuration settings.</p></li><li><p>Set to `true` to log in with AWS credentials.</p></li></ul></p> | `false`                 |
 
 :::warning
-If Zeebe records indices and secondary storage indices use the same Elasticsearch or OpenSearch cluster, you must use different index prefixes.
+Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
+
+If Zeebe records indices and unified Camunda indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
 
 Do not reuse the same prefix for:
 
 - Zeebe records indices (legacy exporter): `ZEEBE_BROKER_EXPORTERS_{ELASTICSEARCH|OPENSEARCH}_ARGS_INDEX_PREFIX`
-- Secondary storage indices: `camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix`
+- Secondary storage indices: `camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix` (and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`)
+
+Reusing a shared prefix can cause Zeebe ILM/ISM policies and wildcard index patterns (for example, `custom*`) to also match unified indices, which may lead to unexpected data loss.
 
 Also make sure one prefix does not include the other. For example, `custom` and `custom-zeebe` can still conflict because wildcard patterns like `custom*` match both.
 :::

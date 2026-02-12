@@ -17,7 +17,7 @@ Configure an index prefix when you need to:
 - Avoid index name collisions in multi-instance environments (for example, separate dev/test/prod installations using one shared cluster).
 
 :::warning
-Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built-in migration support between old and new prefixes.
+Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
 
 If Zeebe records indices and unified Camunda indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
 
@@ -25,6 +25,8 @@ Do not reuse the same prefix for:
 
 - Zeebe records indices (legacy exporter): `ZEEBE_BROKER_EXPORTERS_{ELASTICSEARCH|OPENSEARCH}_ARGS_INDEX_PREFIX`
 - Unified Camunda indices (secondary storage): `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
+
+Reusing a shared prefix can cause Zeebe ILM/ISM policies and wildcard index patterns (for example, `custom*`) to also match unified indices, which may lead to unexpected data loss.
 
 Also make sure one prefix does not include the other. For example, `custom` and `custom-zeebe` can still conflict because wildcard patterns like `custom*` match both.
 :::
@@ -204,6 +206,20 @@ CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX=custom-optimize
 CAMUNDA_OPTIMIZE_ZEEBE_NAME=custom-zeebe
 ```
 
+For example, recommended:
+
+```bash
+ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INDEX_PREFIX=custom-zeebe
+CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_INDEXPREFIX=custom-camunda
+```
+
+Not allowed (will cause conflicts):
+
+```bash
+ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INDEX_PREFIX=shared-prefix
+CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_INDEXPREFIX=shared-prefix
+```
+
 ### OpenSearch
 
 ```sh
@@ -216,6 +232,20 @@ ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INDEX_PREFIX=custom-zeebe
 # Optimize indices prefix (when Optimize is enabled)
 CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX=custom-optimize
 CAMUNDA_OPTIMIZE_ZEEBE_NAME=custom-zeebe
+```
+
+For example, recommended:
+
+```bash
+ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INDEX_PREFIX=custom-zeebe
+CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_INDEXPREFIX=custom-camunda
+```
+
+Not allowed (will cause conflicts):
+
+```bash
+ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INDEX_PREFIX=shared-prefix
+CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_INDEXPREFIX=shared-prefix
 ```
 
 </TabItem>
