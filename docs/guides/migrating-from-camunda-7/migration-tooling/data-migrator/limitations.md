@@ -624,9 +624,9 @@ The following limitations apply:
 | ---------------------- | --------------- |
 | variableKey            | Yes             |
 | name                   | Yes             |
-| type                   | No              |
-| doubleValue            | No              |
-| longValue              | No              |
+| type                   | Yes             |
+| doubleValue            | Yes             |
+| longValue              | Yes             |
 | value                  | Yes             |
 | fullValue              | No              |
 | isPreview              | No              |
@@ -637,3 +637,4 @@ The following limitations apply:
 | tenantId               | Yes             |
 | partitionId            | Yes             |
 | historyCleanupDate     | Yes             |
+| elementInstanceKey     | No              |
