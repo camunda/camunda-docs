@@ -431,8 +431,8 @@ zeebe:
 
 The commented `variable-name` and `bpmn-process-id` sections above only illustrate where to configure exporter-side filters for Optimize in Camunda 8.9 and later. For the complete list of available options, their semantics, and upgrade behavior, see:
 
-- [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/)
-- [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter/)
+- [Elasticsearch exporter](../../../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/)
+- [OpenSearch exporter](../../../../components/orchestration-cluster/zeebe/exporters/opensearch-exporter/)
 
 ## Connectors configuration
 

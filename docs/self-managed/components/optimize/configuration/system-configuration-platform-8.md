@@ -20,9 +20,9 @@ The settings below control how Optimize connects to and paginates this exporter 
 | zeebe.partitionCount    | 1             | The number of partitions configured for the Zeebe record source.                                                                                                      |
 | zeebe.maxImportPageSize | 200           | The max page size for importing Zeebe data.                                                                                                                           |
 
-### Exporter filters and Optimize data completeness
+### Exporter-side filters and Optimize data completeness
 
-This section describes how exporter filters affect Optimize data imports and data completeness. For YAML configuration details and property syntax, refer to the Elasticsearch and OpenSearch exporter documentation.
+This section describes how exporter-side filters affect Optimize data imports and data completeness. For YAML configuration details and property syntax, refer to the Elasticsearch and OpenSearch exporter documentation.
 
 From Camunda 8.9 and above, the Elasticsearch and OpenSearch exporters provide optional filters that can reduce the amount of data written for Optimize:
 
@@ -43,35 +43,35 @@ Process inclusion/exclusion filters are not retroactive:
 
 The same principle applies to variable‑name and variable‑type filters: variables that were dropped by the exporter during a given time window cannot be recovered in Optimize, even if you subsequently relax the filters.
 
-#### When it is safe to enable exporter filters
+#### When it is safe to enable exporter-side filters
 
 The recommended patterns are:
 
 - Fresh 8.9+ clusters or new Optimize installations.
-  Enable exporter filters (variable, type, process, Optimize mode) before starting Optimize imports. Optimize will build its indices from a single, consistently filtered stream and no special action is required.
+  Enable exporter-side filters (variable, type, process, Optimize mode) before starting Optimize imports. Optimize will build its indices from a single, consistently filtered stream and no special action is required.
 
 - Clusters using exporters for 8.8 to 8.9 migration or other pipelines.
-  Do not change exporter filters during the migration window. Follow the main migration documentation and only enable filters after migration has completed, to avoid interfering with both migration and Optimize imports.
+  Do not change exporter-side filters during the migration window. Follow the main migration documentation and only enable filters after migration has completed, to avoid interfering with both migration and Optimize imports.
 
 #### Changing filters on existing clusters (sequence vs position)
 
-On clusters that have already exported unfiltered data to Optimize, enabling or changing exporter filters mid‑stream can cause Optimize to miss some re‑exported events:
+On clusters that have already exported unfiltered data to Optimize, enabling or changing exporter-side filters mid‑stream can cause Optimize to miss some re‑exported events:
 
 - Before 8.9, exporters always wrote an unfiltered event stream with a stable synthetic sequence counter per record. Optimize could reliably continue from “the last sequence it had seen”.
 - With 8.9 filters, re‑exporting from a snapshot after enabling filters can cause the same logical event to appear at a different effective sequence. Optimize may then skip some events because it assumes all records with a lower sequence than the last processed one have already been imported.
 
 Today, there is no automatic, upgrade‑safe way to change filters without any risk of gaps. Practically, you have two options:
 
-- Accept limited gaps. Leave Optimize running, change the exporter filters, and accept that some re‑exported events may be skipped. Optimize continues to track both position and sequence internally but may not retroactively fill all gaps.
+- Accept limited gaps. Leave Optimize running, change the exporter-side filters, and accept that some re‑exported events may be skipped. Optimize continues to track both position and sequence internally but may not retroactively fill all gaps.
 
 - Rebuild Optimize indices from a consistently filtered stream. For clusters that need a strictly consistent, filtered history:
   1. Stop Optimize imports.
-  2. Enable or change exporter filters.
+  2. Enable or change exporter-side filters.
   3. Recreate the Optimize indices so that Optimize rebuilds its state from scratch from the filtered exporter data.
 
 #### Supported versions
 
-- Exporter filters and Optimize mode are introduced in Camunda 8.9 and are not backported to earlier 8.x versions.
+- Exporter-side filters and Optimize mode are introduced in Camunda 8.9 and are not backported to earlier 8.x versions.
 - On clusters running earlier versions, the exporters always write an unfiltered event stream and this section does not apply.
 
 #### Required record types for Optimize
