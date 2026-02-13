@@ -2,10 +2,10 @@
 id: identity
 title: Identity migration
 sidebar_label: Identity migration
-description: "Migrate identity data to Camunda 8."
+description: "Copy identity data from Camunda 7 to 8."
 ---
 
-Migrate identity data.
+Use the Identity Data Migrator to copy authorizations and tenants to Camunda 8.
 
 :::info
 The identity migration mode of the Data Migrator is still in the development stage and will **not be released before Camunda 8.9 (April 2026)**. You can check the current state and track progress in the [GitHub repository](https://github.com/camunda/camunda-7-to-8-migration-tooling/).
@@ -13,33 +13,18 @@ The identity migration mode of the Data Migrator is still in the development sta
 
 ## About identity migration
 
-Identity data refers to:
+Identity data in Camunda includes:
 
-- Identities (users, groups, tenants and related memberships).
-- Authorizations.
+- **Identities**: Users, groups, tenants, and their related memberships
+- **Authorizations**: Permission rules that control access to resources
 
-## Requirements and limitations
+Please also have a look at the [limitations](./limitations.md#identity) of the Identity Data Migrator.
 
-As of today, the following requirements and limitations apply:
+### Users, groups, and memberships
 
-- This feature only includes the migration of:
-  - Tenants.
-  - Supported authorizations (detailed in the [Supported entities](#supported-entities) section below).
-- Users, groups and memberships are currently not supported for migration.
-- Once migration has been triggered, it's strongly recommended not to create new identity data on Camunda 7. Even if migration is attempted again, the new data might not be migrated.
-- In order for authorizations to work correctly after migration, process definitions, forms, DRD and decision definitions need to have the same IDs in Camunda 8 as in Camunda 7. This should be the case if you have already migrated runtime and history data.
-
-## Supported entities
-
-### Identities
-
-| Identity type      | Migration supported |
-| ------------------ | ------------------- |
-| Users              | Yes                 |
-| Groups             | Not yet             |
-| Tenants            | Not yet             |
-| Group Memberships  | Not yet             |
-| Tenant Memberships | Not yet             |
+- The Identity Data Migrator does **not** migrate Camunda 7 internally managed users, groups, and group memberships to Camunda 8.
+- We recommend integrating Camunda 8 with your organization's external Identity Provider (IdP) instead.
+- Most organizations already use an IdP to manage users, groups, and group memberships centrally, making manual migration unnecessary.
 
 ### Authorizations
 
