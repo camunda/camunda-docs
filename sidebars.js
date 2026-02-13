@@ -1717,6 +1717,12 @@ module.exports = {
                   label: "Amazon",
                   items: [
                     "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
+                    {
+                      About: [
+                        "self-managed/deployment/containers/cloud-providers/amazon/about/ecs-architecture",
+                        "self-managed/deployment/containers/cloud-providers/amazon/about/terraform-implementation",
+                      ],
+                    },
                   ],
                 },
               ],
