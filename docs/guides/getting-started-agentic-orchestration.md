@@ -30,7 +30,7 @@ In this guide, you will:
 - Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
 - Integrate a Large Language Model (LLM) into your AI agent.
 
-After completing it, you will have an example AI agent running within Camunda 8.
+After completing it, you will have an example AI agent running in Camunda 8.
 
 ## Prerequisites
 
@@ -48,7 +48,7 @@ To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using
 
 ### Supported models
 
-The AI Agent connector makes it easy to integrate LLMs into your process workflows and can communicate with any LLM that exposes an OpenAI‑compatible API.
+The AI Agent connector makes it easy to integrate LLMs into your process workflows, with out-of-the-box support for popular model providers such as Anthropic and Amazon Bedrock. It can also connect to any additional LLM that exposes an OpenAI-compatible API.
 See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for more details.
 
 In this guide, you can try two use cases:
@@ -81,10 +81,16 @@ Depending on your working environment, follow the corresponding steps below.
 </TabItem>
 
 <TabItem value="self-managed">
+
 1. In the [blueprint page](https://marketplace.camunda.com/en-US/apps/587865), click **For SM** and download the blueprint files from the repository.
-1. Open the blueprint BPMN diagram in Desktop Modeler.
-</TabItem>
-</Tabs>
+
+:::note
+If you’re using Camunda 8 Run and installed it using the [starter package](./getting-started-example.md#download-the-camunda-8-starter-package), the blueprint was already downloaded as part of it.
+:::
+
+2. Open the blueprint BPMN diagram in Desktop Modeler.
+   </TabItem>
+   </Tabs>
 
 ### About the example AI agent process
 
@@ -212,7 +218,6 @@ Depending on your working environment, test your agent by following the correspo
 <TabItem value="saas">
 
 1. Open [Web Modeler](/components/modeler/web-modeler/index.md).
-1. Make sure **Camunda 8.8** or higher is selected in the **Check problems against** field (see the bottom right of the window).
 1. Select the [**Play**](/components/modeler/web-modeler/validation/play-your-process.md) tab.
 1. Select the cluster you want to deploy and play the process on.
 1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
