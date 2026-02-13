@@ -16,21 +16,34 @@ Configure an index prefix when you need to:
 - Isolate data when multiple Camunda instances share the same Elasticsearch or OpenSearch cluster, so they don’t write to or read from each other’s indices.
 - Avoid index name collisions in multi-instance environments (for example, separate dev/test/prod installations using one shared cluster).
 
+## Index prefix configuration
+
+When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices (secondary storage) share the same cluster, their prefixes **must be distinct, non‑overlapping, and non‑reserved**.
+
+### Requirements
+
+1. Use unique prefixes – do not reuse the same prefix for both index types.
+2. Avoid overlapping prefixes – one prefix must not be a substring of another (for example, `custom` and `custom-zeebe` conflict because `custom*` matches both).
+3. Avoid reserved names – do not use `operate`, `tasklist`, or `camunda` as exporter prefixes.
+
+### Configuration properties
+
+| Index type                                | Configuration property                                                                                                                                 |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Elasticsearch/OpenSearch Exporter indices | `zeebe.broker.exporters.{elasticsearch\|opensearch}.args.index.prefix` (and `ZEEBE_BROKER_EXPORTERS_{ELASTICSEARCH\|OPENSEARCH}_ARGS_INDEX_PREFIX`)    |
+| Orchestration Cluster indices             | `camunda.data.secondary-storage.{elasticsearch\|opensearch}.indexPrefix` (and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH\|OPENSEARCH}_INDEXPREFIX`) |
+
+### Common mistakes to avoid
+
+- **Do not** set the Orchestration Cluster index prefix to `zeebe-record` (the default exporter prefix `zeebe.broker.exporters.{elasticsearch\|opensearch}.args.index.prefix`).
+- **Do not** set the exporter prefix to `operate`, `tasklist`, or `camunda`.
+
+### Why this matters
+
+Shared or overlapping prefixes cause ILM/ISM policies and wildcard patterns to match unintended indices, potentially leading to **unexpected data loss**.
+
 :::warning
-When Elasticsearch/OpenSearch Exporter indices (legacy exporter) and Orchestration Cluster indices (secondary storage) use the same Elasticsearch/OpenSearch cluster, you must keep their index prefixes **distinct, non‑overlapping, and non‑reserved**: do not reuse the same prefix for both, do not choose prefixes where one includes the other (for example, `custom` and `custom-zeebe`, because `custom*` matches both), and do not configure the exporter prefix to reserved Orchestration index names such as `operate`, `tasklist`, or `camunda`.
-
 Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
-
-Do not reuse the same prefix for:
-
-- Elasticsearch/OpenSearch Exporter indices (legacy exporter): `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix`
-- Orchestration Cluster indices (secondary storage): `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
-
-For example, do not configure `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix` (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`) to `zeebe-record`, because `zeebe-record` is the default value of `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` for Elasticsearch/OpenSearch Exporter indices. Similarly, do not configure `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` to values that match Orchestration indices such as `operate`, `tasklist`, or `camunda`, as this can also cause ILM/ISM rules for the exporter to affect Orchestration Cluster indices.
-
-Reusing a shared prefix can cause Elasticsearch/OpenSearch Exporter ILM/ISM policies and wildcard index patterns to also match Orchestration Cluster indices, which may lead to unexpected data loss.
-
-Also make sure one prefix does not include the other. For example, `custom` and `custom-zeebe` can still conflict because wildcard patterns like `custom*` match both.
 :::
 
 ## Exporters and index prefixes

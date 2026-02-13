@@ -79,20 +79,14 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage/m
 | `camunda.data.secondary-storage.elasticsearch.backup.incomplete-check-timeout`           | <p>Defines the timeout period for determining whether an incomplete backup should be considered as failed or still in progress.</p><p>This property helps distinguish between backups that are actively running versus those that may have stalled or failed silently.</p><p><strong>Note:</strong> This setting applies to backups of secondary storage.</p>         | `5m`                                 |
 
 :::warning
-When Elasticsearch/OpenSearch Exporter indices (legacy exporter) and Orchestration Cluster indices (secondary storage) use the same Elasticsearch/OpenSearch cluster, you must keep their index prefixes **distinct, non‑overlapping, and non‑reserved**: do not reuse the same prefix for both, do not choose prefixes where one includes the other (for example, `custom` and `custom-zeebe`, because `custom*` matches both), and do not configure the exporter prefix to reserved Orchestration index names such as `operate`, `tasklist`, or `camunda`.
+When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, their index prefixes must be distinct, non‑overlapping, and must not use reserved Orchestration index names (for example `operate`, `tasklist`, or `camunda`).
 
-Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
+The Orchestration Cluster prefix is configured via
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
+(and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`).
 
-Do not reuse the same prefix for:
-
-- Elasticsearch/OpenSearch Exporter indices (exporter): `CAMUNDA_DATA_EXPORTERS_{ELASTICSEARCH|OPENSEARCH}_ARGS_INDEX_PREFIX`
-- Orchestration Cluster indices: `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix` (and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`)
-
-For example, do not configure `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix` (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`) to `zeebe-record`, because `zeebe-record` is the default value of `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` for Elasticsearch/OpenSearch Exporter indices. Similarly, do not configure `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` to values that match Orchestration indices such as `operate`, `tasklist`, or `camunda`, as this can also cause ILM/ISM rules for the exporter to affect Orchestration Cluster indices.
-
-Reusing a shared prefix can cause Elasticsearch/OpenSearch Exporter ILM/ISM policies and wildcard index patterns to also match Orchestration Cluster indices, which may lead to unexpected data loss.
-
-Also make sure one prefix does not include the other. For example, `custom` and `custom-zeebe` can still conflict because wildcard patterns like `custom*` match both.
+For detailed requirements, configuration examples, and common mistakes, see
+[Index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
 :::
 
 ### `camunda.data.secondary-storage.opensearch`
