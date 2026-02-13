@@ -9,8 +9,8 @@ description: "Deploy Red Hat OpenShift on AWS using a Terraform module for a qui
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-import TerraformAwsAuth from '../../_partials/_terraform-aws-auth.md'
-import TerraformS3Bucket from '../../_partials/_terraform-s3-bucket.md'
+import TerraformAwsAuth from '../../\_partials/\_terraform-aws-auth.md'
+import TerraformS3Bucket from '../../\_partials/\_terraform-s3-bucket.md'
 
 This guide provides a detailed tutorial for deploying a [Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP)](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/architecture/index.html) capabilities. It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
 
@@ -35,7 +35,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 - [jq](https://jqlang.github.io/jq/download/) to interact with some Terraform variables.
 - This guide uses GNU/Bash for all the shell commands listed.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ### Considerations
 
@@ -80,10 +80,10 @@ Following this tutorial and steps will result in:
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/openshift/rosa-hcp-single-region/). This material will be used throughout the rest of this documentation, the reference architecture is versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/). This material will be used throughout the rest of this documentation, the reference architecture is versioned using the same Camunda versions (`stable/8.x`).
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/openshift/rosa-hcp-single-region/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/procedure/get-your-copy.sh
 ```
 
 With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
@@ -194,7 +194,7 @@ rosa verify openshift-client
    This configuration will use the previously created S3 bucket for storing the Terraform state file:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/openshift/rosa-hcp-single-region/terraform/cluster/config.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/terraform/cluster/config.tf
    ```
 
 3. Edit the `cluster.tf` file in the same directory as your `config.tf` file:
@@ -219,14 +219,14 @@ rosa verify openshift-client
    :::
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/openshift/rosa-hcp-single-region/terraform/cluster/cluster.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/terraform/cluster/cluster.tf
    ```
 
    :::caution Camunda Terraform module
 
    This ROSA module is based on the [official Red Hat Terraform module for ROSA HCP](https://registry.terraform.io/modules/terraform-redhat/rosa-hcp/rhcs/latest). Please be aware of potential differences and choices in implementation between this module and the official one.
 
-   We invite you to consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/modules/rosa-hcp/README.md) for more information.
+   We invite you to consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/rosa-hcp/README.md) for more information.
 
    :::
 
@@ -244,7 +244,7 @@ rosa verify openshift-client
 
 5. Configure user access to the cluster. By default, the user who creates the OpenShift cluster has administrative access. If you want to grant access to other users, follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html) when the cluster is created.
 
-6. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/modules/rosa-hcp/README.md).
+6. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/rosa-hcp/README.md).
 
 #### Define outputs
 
@@ -322,13 +322,13 @@ This setup creates a Certificate Authority (CA) for AWS VPN to perform encryptio
 Start by reviewing the `config.tf` file that configures the S3 backend for Terraform state management:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/openshift/rosa-hcp-single-region/terraform/vpn/config.tf
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/terraform/vpn/config.tf
 ```
 
 Then, review `vpn.tf`, which describes the VPC Client Endpoint configuration:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/openshift/rosa-hcp-single-region/terraform/vpn/vpn.tf
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/terraform/vpn/vpn.tf
 ```
 
 This VPN Client Endpoint follows [AWS best practices and constraints](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is-best-practices.html):
@@ -355,7 +355,7 @@ This VPN Client Endpoint follows [AWS best practices and constraints](https://do
 
 4. Network designs vary; please review and adjust the configuration to fit your topology.
 
-5. Customize the VPN module by referring to the [VPN module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/modules/vpn/README.md).
+5. Customize the VPN module by referring to the [VPN module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/vpn/README.md).
 
 #### Outputs
 
@@ -404,7 +404,7 @@ This section applies if you have previously created a private cluster and want t
 2. Generate your client’s VPN configuration file. This file is compatible with [OpenVPN (ovpn)](https://openvpn.net/) format:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/common/procedure/vpn/gather-vpn-config.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/vpn/gather-vpn-config.sh
    ```
 
 3. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
@@ -429,7 +429,7 @@ You can access the created OpenShift cluster using the following steps:
 2. Set up the required environment variables from the OpenShift terraform module:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/openshift/rosa-hcp-single-region/procedure/gather-cluster-login-id.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/procedure/gather-cluster-login-id.sh
    ```
 
 3. If you want to give cluster administrator access to the created user, this is not required for a standard installation but can be useful for debugging:

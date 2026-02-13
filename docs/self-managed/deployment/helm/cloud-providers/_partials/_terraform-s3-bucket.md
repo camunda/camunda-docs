@@ -31,25 +31,25 @@ Now, follow these steps to create the S3 bucket with versioning enabled:
 2. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
    ```
 
 3. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/common/procedure/s3-bucket/s3-bucket-versioning.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-versioning.sh
    ```
 
 4. Secure the bucket by blocking public access:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/common/procedure/s3-bucket/s3-bucket-private.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-private.sh
    ```
 
 5. Verify versioning is enabled on the bucket:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
    ```
 
 This S3 bucket will now securely store your Terraform state files with versioning enabled.

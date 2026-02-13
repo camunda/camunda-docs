@@ -9,8 +9,8 @@ description: "Deploy an Amazon Kubernetes Cluster (EKS) with a Terraform module 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-import TerraformAwsAuth from '../../_partials/_terraform-aws-auth.md'
-import TerraformS3Bucket from '../../_partials/_terraform-s3-bucket.md'
+import TerraformAwsAuth from '../../\_partials/\_terraform-aws-auth.md'
+import TerraformS3Bucket from '../../\_partials/\_terraform-s3-bucket.md'
 
 This guide explains how to provision an [Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) using Terraform, a widely used Infrastructure as Code (IaC) tool.  
 The EKS cluster serves as the infrastructure foundation for running Camunda 8.
@@ -41,7 +41,7 @@ New to Terraform or Infrastructure as Code? Start with the [Terraform IaC docume
   - Request increases if needed via the AWS console. You pay only for used resources. See [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) and [Amazon EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)
 - **Shell** – Examples use GNU Bash.
 
-For the tool versions used in testing, see the repository’s [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/.tool-versions) file. It contains an up-to-date list of versions used for testing.
+For the tool versions used in testing, see the repository’s [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file. It contains an up-to-date list of versions used for testing.
 
 ### Considerations
 
@@ -121,7 +121,7 @@ After completing this guide, you will have:
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
 
 The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module maintained by a third party.
 
@@ -129,14 +129,14 @@ The provided reference architecture repository allows you to directly reuse and 
    <TabItem value="standard" label="Standard" default>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/get-your-copy.sh
 ```
 
    </TabItem>
    <TabItem value="irsa" label="IRSA">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region-irsa/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/get-your-copy.sh
 ```
 
    </TabItem>
@@ -155,7 +155,7 @@ Once your authentication is set up, you can initialize your Terraform project. T
 Configure the backend and download the necessary provider plugins:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
 ```
 
 Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
@@ -192,14 +192,14 @@ The module is locally sourced in your clone. Any changes you make to the module 
    <TabItem value="standard" label="Standard" default>
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/terraform/cluster/cluster.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/terraform/cluster/cluster.tf
    ```
 
    </TabItem>
    <TabItem value="irsa" label="IRSA">
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region-irsa/terraform/cluster/cluster.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/terraform/cluster/cluster.tf
    ```
 
    </TabItem>
@@ -248,7 +248,7 @@ The module is locally sourced in your clone. Any changes you make to the module 
    </p>
    </details>
 
-1. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [EKS module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/modules/eks-cluster/README.md).
+1. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [EKS module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/eks-cluster/README.md).
 
    :::note Private cluster
 
@@ -302,7 +302,7 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
      <TabItem value="standard" label="Standard" default>
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/terraform/cluster/db.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/terraform/cluster/db.tf
    ```
 
      </TabItem>
@@ -323,7 +323,7 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
    Here's how to define the IAM role trust policy and access policy for Aurora:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region-irsa/terraform/cluster/db.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/terraform/cluster/db.tf
    ```
 
    Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_aurora_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
@@ -331,7 +331,7 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
    </TabItem>
    </Tabs>
 
-1. Customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/modules/aurora/README.md) for more details on other customization options.
+1. Customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/aurora/README.md) for more details on other customization options.
 
 ### OpenSearch module setup
 
@@ -386,7 +386,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    :::
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/terraform/cluster/opensearch.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/terraform/cluster/opensearch.tf
    ```
 
      </TabItem>
@@ -408,7 +408,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    Here's an example of how to define the IAM role trust policy and access policy for OpenSearch, this configuration will deploy an OpenSearch domain with advanced security enabled:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region-irsa/terraform/cluster/opensearch.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/terraform/cluster/opensearch.tf
    ```
 
    Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_opensearch_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
@@ -418,7 +418,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    </TabItem>
    </Tabs>
 
-1. Customize the cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/modules/opensearch/README.md).
+1. Customize the cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/opensearch/README.md).
 
 :::tip
 
@@ -451,7 +451,7 @@ We strongly recommend managing sensitive information such as the OpenSearch, Aur
 2. Perform a final initialization for anything changed throughout the guide:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
    ```
 
 3. Plan the configuration files:
@@ -524,13 +524,13 @@ This setup creates a Certificate Authority (CA) for AWS VPN to perform encryptio
 1. Review `config.tf`, which configures the S3 backend for Terraform state management:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/terraform/vpn/config.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/terraform/vpn/config.tf
    ```
 
 2. Review `vpn.tf`, which defines the VPC Client endpoint configuration:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/terraform/vpn/vpn.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/terraform/vpn/vpn.tf
    ```
 
 This VPN Client Endpoint follows [AWS best practices and constraints](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is-best-practices.html):
@@ -559,7 +559,7 @@ This VPN Client Endpoint follows [AWS best practices and constraints](https://do
 
 4. Review and adjust the configuration for your network design.
 
-5. For customization options, see the [VPN module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/modules/vpn/README.md).
+5. For customization options, see the [VPN module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/vpn/README.md).
 
 #### Outputs
 
@@ -602,7 +602,7 @@ This section applies if you have previously created a private cluster and want t
 2. Generate your client’s VPN configuration file. This file is compatible with [OpenVPN (ovpn)](https://openvpn.net/) format:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/common/procedure/vpn/gather-vpn-config.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/vpn/gather-vpn-config.sh
    ```
 
 3. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
@@ -652,13 +652,13 @@ This step defines a custom `StorageClass` that:
 Run the following script to apply the new storage class and set it as default:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/procedure/storageclass-configure.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/storageclass-configure.sh
 ```
 
 To verify completion of the operation, run:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/procedure/storageclass-verify.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/storageclass-verify.sh
 ```
 
 You must apply the custom `StorageClass` before installing the Camunda Helm chart so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
@@ -673,7 +673,7 @@ The following commands will export the required outputs as environment variables
   <TabItem value="standard" label="Standard" default>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/procedure/export-helm-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/export-helm-values.sh
 ```
 
   </TabItem>
@@ -681,7 +681,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognit
   <TabItem value="irsa" label="IRSA">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region-irsa/procedure/export-helm-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/export-helm-values.sh
 ```
 
 :::note IRSA users
@@ -712,7 +712,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
 1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/procedure/vars-create-db.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/vars-create-db.sh
    ```
 
    A **Kubernetes job** will connect to the database and create the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
@@ -723,7 +723,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
      <TabItem value="standard" label="Standard" default>
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/procedure/create-setup-db-secret.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/create-setup-db-secret.sh
    ```
 
    This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
@@ -741,7 +741,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
    <TabItem value="irsa" label="IRSA">
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region-irsa/procedure/create-setup-db-secret.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/create-setup-db-secret.sh
    ```
 
    This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
@@ -767,14 +767,14 @@ The choice depends on your infrastructure setup and security preferences. In thi
    <TabItem value="standard">
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/setup-postgres-create-db.yml
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/setup-postgres-create-db.yml
    ```
 
    </TabItem>
    <TabItem value="irsa">
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region-irsa/setup-postgres-create-db.yml
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/setup-postgres-create-db.yml
    ```
 
    </TabItem>
@@ -834,7 +834,7 @@ The standard installation comes already pre-configured, and no additional steps 
 1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region-irsa/procedure/vars-create-os.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/vars-create-os.sh
    ```
 
    A **Kubernetes job** will connect to the OpenSearch dommain and configure it.
@@ -842,7 +842,7 @@ The standard installation comes already pre-configured, and no additional steps 
 1. Create a secret that references the environment variables:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region-irsa/procedure/create-setup-os-secret.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/create-setup-os-secret.sh
    ```
 
    This command creates a secret named `setup-os-secret` and dynamically populates it with the values from your environment variables.
@@ -858,7 +858,7 @@ The standard installation comes already pre-configured, and no additional steps 
 1. Save the following manifest to a file, for example, `setup-opensearch-fgac.yml`.
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region-irsa/setup-opensearch-fgac.yml
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/setup-opensearch-fgac.yml
    ```
 
 1. Apply the manifest:
