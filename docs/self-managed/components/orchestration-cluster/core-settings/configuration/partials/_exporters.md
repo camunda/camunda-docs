@@ -26,7 +26,7 @@ Do not reuse the same prefix for:
 
 In particular, do not configure `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix` (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`) to `zeebe-record`, because `zeebe-record` is the default value of `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` for Elasticsearch/OpenSearch Exporter indices. Similarly, do not configure `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` to values that match Orchestration indices such as `operate`, `tasklist`, or `camunda`, as this can also cause ILM/ISM rules for the exporter to affect Orchestration Cluster indices.
 
-Reusing a shared prefix can cause Zeebe ILM/ISM policies and wildcard index patterns (for example, `custom*`) to also match Orchestration Cluster indices, which may lead to unexpected data loss.
+Reusing a shared prefix can cause Zeebe ILM/ISM policies and wildcard index patterns to also match Orchestration Cluster indices, which may lead to unexpected data loss.
 
 Also ensure that one prefix does not include the other. For example, `custom` and `custom-zeebe` can conflict because wildcard patterns like `custom*` match both.
 :::

@@ -585,7 +585,7 @@ These changes do not introduce new fields or richer context, but instead ensure 
 
 #### Elasticsearch and OpenSearch: Index prefixes must differ
 
-When upgrading to Camunda 8.8 or setting up 8.8 for the first time, if you run both the Elasticsearch/OpenSearch Exporter and Camunda Exporter on the same Elasticsearch/OpenSearch cluster, their index prefixes must not be the same.
+When upgrading to Camunda 8.8 or setting up 8.8 for the first time, if you run both the Elasticsearch/OpenSearch Exporter and Camunda Exporter on the same Elasticsearch/OpenSearch cluster, their index prefixes must not match, nor be contained within the other.
 
 Do not reuse the same prefix for:
 
