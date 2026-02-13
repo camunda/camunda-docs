@@ -17,7 +17,7 @@ Configure an index prefix when you need to:
 - Avoid index name collisions in multi-instance environments (for example, separate dev/test/prod installations using one shared cluster).
 
 :::warning
-If Elasticsearch/OpenSearch Exporter indices (legacy exporter) and Orchestration Cluster indices (secondary storage) use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
+When Elasticsearch/OpenSearch Exporter indices (legacy exporter) and Orchestration Cluster indices (secondary storage) use the same Elasticsearch/OpenSearch cluster, you must keep their index prefixes **distinct, non‑overlapping, and non‑reserved**: do not reuse the same prefix for both, do not choose prefixes where one includes the other (for example, `custom` and `custom-zeebe`, because `custom*` matches both), and do not configure the exporter prefix to reserved Orchestration index names such as `operate`, `tasklist`, or `camunda`.
 
 Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
 

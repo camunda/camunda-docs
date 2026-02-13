@@ -79,7 +79,7 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage/m
 | `camunda.data.secondary-storage.elasticsearch.backup.incomplete-check-timeout`           | <p>Defines the timeout period for determining whether an incomplete backup should be considered as failed or still in progress.</p><p>This property helps distinguish between backups that are actively running versus those that may have stalled or failed silently.</p><p><strong>Note:</strong> This setting applies to backups of secondary storage.</p>         | `5m`                                 |
 
 :::warning
-If Elasticsearch/OpenSearch Exporter indices (legacy exporter) and Orchestration Cluster indices (secondary storage) use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
+When Elasticsearch/OpenSearch Exporter indices (legacy exporter) and Orchestration Cluster indices (secondary storage) use the same Elasticsearch/OpenSearch cluster, you must keep their index prefixes **distinct, non‑overlapping, and non‑reserved**: do not reuse the same prefix for both, do not choose prefixes where one includes the other (for example, `custom` and `custom-zeebe`, because `custom*` matches both), and do not configure the exporter prefix to reserved Orchestration index names such as `operate`, `tasklist`, or `camunda`.
 
 Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
 
