@@ -290,7 +290,7 @@ void shouldCompleteJob() {
     // 3) With example data from the BPMN element
     processTestContext.completeJobWithExampleData("send-notification");
 
-    // 4) With job selector by element ID "task_sendNotification"
+    // 4) With job selector by element ID "send_notification_task"
     processTestContext.completeJob(JobSelectors.byElementId("send_notification_task"));
 
     // then: verify that the process instance completed the task
@@ -301,7 +301,7 @@ void shouldCompleteJob() {
 
 You can simulate the behavior of
 an [ad-hoc sub-process job worker](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation),
-for example, an AI agent, and control the execution of the ad-hoc sub-process. The job completion allows to
+for example, an AI agent, and control the execution of the ad-hoc sub-process. The job completion allows you to
 activate an element in the ad-hoc sub-process or to fulfill the completion condition.
 
 ```java
@@ -311,18 +311,18 @@ void shouldCompleteJobOfAdHocSubProcess() {
 
     // when: complete the job of the ad-hoc sub-process
     // 1) With activating an element with variables
-    camundaProcessTestContext.completeJobOfAdHocSubProcess(
+    processTestContext.completeJobOfAdHocSubProcess(
         JobSelectors.byElementId("ad-hoc-sub-process"),
         result -> result.activateElement("search-knowledge-base").variable("query", "launch rockets"));
 
     // 2) With job variables (for the ad-hoc sub-process)
-    camundaProcessTestContext.completeJobOfAdHocSubProcess(
+    processTestContext.completeJobOfAdHocSubProcess(
         JobSelectors.byElementId("ad-hoc-sub-process"),
         Map.of("agent", agentContext),
         result -> result.activateElement("search-knowledge-base").variable("query", "launch rockets"));
 
     // 3) With fulfilling the completion condition
-    camundaProcessTestContext.completeJobOfAdHocSubProcess(
+    processTestContext.completeJobOfAdHocSubProcess(
         JobSelectors.byElementId("ad-hoc-sub-process"),
         result -> result.completionConditionFulfilled(true));
 
@@ -359,7 +359,7 @@ void shouldCompleteJobOfUserTaskListener() {
 ## Throw BPMN errors from jobs
 
 You can throw a BPMN error from an active job to simulate the behavior of a job worker without invoking the actual worker.
-The command waits for the first job with the given job type and throw the BPMN error. If no job exists, the command fails.
+The command waits for the first job with the given job type and throws the BPMN error. If no job exists, the command fails.
 
 Identify the job by its job type or using a [JobSelector](#job-selector). Optionally, you can pass variables and an
 error message with the BPMN error.
