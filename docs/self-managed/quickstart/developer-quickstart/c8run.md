@@ -5,6 +5,8 @@ sidebar_label: "Camunda 8 Run"
 description: "A quickstart guide for developers to deploy and run Camunda 8 Self-Managed locally with Camunda 8 Run, including setup, configuration, and key components."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 import {C8Run} from "@site/src/components/CamundaDistributions";
 
 :::note
@@ -49,20 +51,63 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 1. Download the latest release of <C8Run/> for your operating system and architecture. Opening the `.tgz` file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
-3. Start Camunda 8 Run by running one of the following in your terminal:
+3. Start Camunda 8 Run by running the command:
 
-- On Mac and Linux:
-  - Run the helper script: `./start.sh`
-  - Or use the CLI command: `./c8run start`
-- On Windows:
-  - Use the CLI command: `.\c8run.exe start`
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
+Run the helper script:
+
+```bash
+./start.sh
+```
+
+Or use the CLI command:
+
+```bash
+./c8run start
+```
+
+</TabItem>
+<TabItem value="windows">
+
+Use the CLI command:
+
+```bash
+.\c8run.exe start
+```
+
+</TabItem>
+</Tabs>
 
 If startup is successful, a browser window for Operate will open automatically. Alternatively, you can access Operate at [http://localhost:8080/operate](http://localhost:8080/operate).
 
-To start Camunda 8 in Docker Compose using Camunda 8 Run you can use the following option. It is equivalent of running `docker compose up -d` :
+To start Camunda 8 in Docker Compose using Camunda 8 Run you can use the following option. It is equivalent of running `docker compose up -d`:
 
-- On Mac and Linux: `./start.sh --docker`
-- On Windows: `.\c8run.exe start --docker`
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
+```bash
+./start.sh --docker
+```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe start --docker
+```
+
+</TabItem>
+</Tabs>
 
 :::note
 If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-run) to end the current processes, then run the start script again.
@@ -211,9 +256,26 @@ Operate can run against the default H2 store in 8.9-alpha3, but some user-facing
 
 Start Camunda 8 Run with the configuration:
 
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
 ```bash
 ./start.sh --config application.yaml
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe start --config application.yaml
+```
+
+</TabItem>
+</Tabs>
 
 Once enabled, API requests must include valid credentials. For example:
 
@@ -245,12 +307,26 @@ camunda:
 
 To shut down (non-Docker) Camunda 8 Run and end all running processes, run the following command from the `c8run` directory:
 
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
 ```bash
 ./shutdown.sh
-
-# Windows:
-# .\c8run.exe stop
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe stop
+```
+
+</TabItem>
+</Tabs>
 
 If you started Camunda 8 Run with Docker `./start.sh --docker`, run the following command instead:
 
