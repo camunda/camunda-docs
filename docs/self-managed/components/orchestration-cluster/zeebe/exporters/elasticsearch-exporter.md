@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 For supported Elasticsearch versions in Camunda 8 Self-Managed, see
 [supported environments](/reference/supported-environments.md#camunda-8-self-managed).
 
-As of 8.8, Camunda uses the
+Starting with Camunda 8.8, Camunda uses the
 [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)
 to consume new records. Records from 8.7 and earlier are consumed only during migration.
 
@@ -69,15 +69,15 @@ exporters:
 The exporter can be configured by providing `args`. The table below explains all the different
 options, and the default values for these options:
 
-| Option                | Description                                                                                                                                             | Default                 |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| url                   | Valid URLs as comma-separated string.                                                                                                                   | `http://localhost:9200` |
-| requestTimeoutMs      | Request timeout (in ms) for Elasticsearch client.                                                                                                       | `30000`                 |
-| index                 | Refer to [index](#index) for index configuration options, including record/value-type switches, Optimize-focused filters, and the Optimize mode flag.   |                         |
-| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                                                                                              |                         |
-| retention             | Refer to [retention](#retention) for the retention configuration options.                                                                               |                         |
-| authentication        | Refer to [authentication](#authentication) for the authentication configuration options.                                                                |                         |
-| includeEnabledRecords | If `true`, all enabled record types configured under `index` are exported, ignoring Optimize mode defaults. Use mainly for migration/compatibility use. | `false`                 |
+| Option                | Description                                                                                                                                                   | Default                 |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| url                   | Valid URLs as a comma-separated string.                                                                                                                       | `http://localhost:9200` |
+| requestTimeoutMs      | Request timeout (in ms) for Elasticsearch client.                                                                                                             | `30000`                 |
+| index                 | Refer to [index](#index) for index configuration options, including record/value-type switches, Optimize-focused filters, and the Optimize mode flag.         |                         |
+| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                                                                                                    |                         |
+| retention             | Refer to [retention](#retention) for the retention configuration options.                                                                                     |                         |
+| authentication        | Refer to [authentication](#authentication) for the authentication configuration options.                                                                      |                         |
+| includeEnabledRecords | If `true`, all enabled record types configured under `index` are exported, ignoring Optimize mode defaults. Use mainly for migration/compatibility scenarios. | `false`                 |
 
 <Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' }]} >
 
@@ -151,7 +151,7 @@ exporters:
               - business_debug
 ```
 
-Variable names are first matched against inclusion rules (if present), then against exclusion rules. If a variable matches both, the exclusion wins.
+The exporter first matches variable names against inclusion rules (if present), then against exclusion rules. If a variable matches both, the exclusion wins.
 
 For details on how this interacts with Optimize, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
 
@@ -173,7 +173,7 @@ exporters:
             - Array
 ```
 
-Use this to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see
+Use this filter to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see
 [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
 
 ### BPMN process filters
@@ -200,7 +200,7 @@ Some value types that never expose `bpmnProcessId` (for example, `DEPLOYMENT`, `
 
 ### Optimize mode
 
-Optimize mode is an optional filter that restricts exported records to those used by Optimize, reducing index size.
+With Optimize mode, you can restrict exported records to those used by Optimize, reducing index size.
 
 Configuration:
 

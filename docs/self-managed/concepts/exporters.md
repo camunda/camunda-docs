@@ -24,7 +24,7 @@ Exporters can be used for various purposes:
 
 Zeebe loads exporters only if they are configured in the main Zeebe YAML configuration file. Exporters are initialized when Zeebe starts.
 
-Exporters receive only records produced after they are configured. Existing records in the log are not exported.
+Exporters receive only records produced after they are configured.
 
 Camunda 8 Self-Managed ships several built-in exporters, including the [Camunda Exporter](../components/orchestration-cluster/zeebe/exporters/camunda-exporter.md), [Elasticsearch](../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md), and [OpenSearch](../components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) exporters. Use a custom exporter only when you need a different target system or behavior.
 
@@ -359,7 +359,7 @@ For example, if you want to allow exporting only message events with `EXPIRED` i
 
         :::
 
-### Optimize‑oriented built‑in filters
+### Optimize-oriented built-in filters
 
 Camunda‑maintained exporters for Elasticsearch and OpenSearch include built‑in filters that reduce the volume of data exported when their indices are used primarily by Optimize. These filters can:
 
