@@ -9,16 +9,14 @@ description: "Control the level of access a user or group has to perform tasks i
 User task access restrictions are only supported with the Tasklist V1 API and are not supported
 in Tasklist V2. From Camunda 8.8, Tasklist runs in V2 mode by default.
 
-To continue using user task access restrictions, see
-[switching between V1 and V2 modes](components/tasklist/api-versions.md#switching-between-v1-and-v2-modes)
+To continue using user task access restrictions, see [switching between V1 and V2 modes](components/tasklist/api-versions.md#switching-between-v1-and-v2-modes)
 to enable Tasklist V1 mode.
 
 Tasklist V2 does not support task-level visibility restrictions.
 [Authorization-based access control](components/concepts/access-control/authorizations.md)
 in V2 applies only at the process-definition level and does not limit access to individual tasks.
 
-For more information about the differences between V1 and V2, see
-[Tasklist API versions](components/tasklist/api-versions.md).
+For more information about the differences between V1 and V2, see [Tasklist API versions](components/tasklist/api-versions.md).
 :::
 
 [User task access restrictions](components/tasklist/user-task-access-restrictions.md) are used in

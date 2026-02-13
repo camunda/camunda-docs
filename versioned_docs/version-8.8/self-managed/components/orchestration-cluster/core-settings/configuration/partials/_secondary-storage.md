@@ -41,6 +41,17 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage-m
 | `camunda.data.secondary-storage.elasticsearch.indexPrefix`<br/><br/>`camunda.data.secondary-storage.opensearch.indexPrefix`                           | Optional prefix for secondary storage index names.                                                                                                                                                                                                                                 | `-`                     |
 | `camunda.database.aws-enabled`                                                                                                                        | <p>Use basic authentication or AWS credentials to log in.</p><p><ul><li><p>Set to `false` to use basic authentication for OpenSearch, adhering to the global AWS OpenSearch configuration settings.</p></li><li><p>Set to `true` to log in with AWS credentials.</p></li></ul></p> | `false`                 |
 
+:::warning
+When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, their index prefixes must be distinct, non‑overlapping, and must not use reserved Orchestration index names (for example `operate`, `tasklist`, or `camunda`).
+
+The Orchestration Cluster prefix is configured via
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix`
+(and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`).
+
+For detailed requirements, configuration examples, and common mistakes, see
+[index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
+:::
+
   </TabItem>
   <TabItem value="secondary-storage-helm" label="Helm values">
 
@@ -62,7 +73,7 @@ Do **not** set both providers to `true` simultaneously.
 </Tabs>
 
 :::note
-Set `indexPrefix` only if you need to separate secondary storage indices from other indices in the same cluster (for example, when multiple Camunda environments share one cluster). Leave blank (`-`) to use the default.
+Set `indexPrefix` only if you need to separate Orchestration Cluster indices from other indices in the same cluster (for example, when multiple Camunda environments share one cluster). Leave blank (`-`) to use the default.
 :::
 
 #### Secure connection (HTTPS / TLS)
@@ -84,7 +95,7 @@ For Kubernetes-based deployments, mount a trust store and point `certificatePath
 
 ### Index & retention settings
 
-The following properties control index creation characteristics (shards, replicas, template priority) and retention/lifecycle policies for secondary storage indices.
+The following properties control index creation characteristics (shards, replicas, template priority) and retention/lifecycle policies for Orchestration Cluster indices.
 
 <Tabs>
   <TabItem value="db-env" label="Environment variables" default>
