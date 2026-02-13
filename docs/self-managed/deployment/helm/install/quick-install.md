@@ -6,6 +6,7 @@ description: Install Camunda 8 Self-Managed on Kubernetes using the Helm chart w
 ---
 
 import { HelmInstallOverviewMethods } from "@site/src/components/HelmInstallOverviewMethods";
+
 Use this guide to install Camunda 8 Self-Managed with the orchestration cluster, and optionally enable additional components.
 
 <!-- TODO: add links to explain the orchestration cluster and management cluster -->
