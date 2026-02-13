@@ -15,11 +15,11 @@ Use this guide to confirm upgrade eligibility, understand platform-level changes
 
 Before upgrading, verify that your current installation meets the minimum requirements.
 
-| Area                | What to check                                                                                                                                                                                                                                  |
-| :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda version     | Direct upgrades to 8.8 are supported only from the latest 8.7.x patch. If you are running an earlier version, first upgrade to 8.7. See [Upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version). |
-| Environment support | Ensure your platform and dependencies are supported in 8.8. See [Supported environments](/reference/supported-environments.md).                                                                                                                |
-| Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and Elasticsearch/OpenSearch setup.                                                                                                      |
+| Area                | What to check                                                                                                                                                                                                                                           |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Camunda version     | Direct upgrades to 8.8 are supported only from the latest 8.7.x patch. If you are running an earlier version, you must first upgrade to 8.7. See [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version). |
+| Environment support | Ensure your platform and dependencies are supported in 8.8. See [supported environments](/reference/supported-environments.md).                                                                                                                         |
+| Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and Elasticsearch/OpenSearch setup.                                                                                                               |
 
 ## Review platform changes in Camunda 8.8
 
@@ -84,7 +84,7 @@ Camunda 8.8 introduces architectural and behavioral changes that may require con
 </table>
 
 :::info
-For a complete list of changes, see [What’s new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md).
+For an overview of important changes, see [what’s new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md).
 :::
 
 ### Identity, authentication, and authorization

@@ -12,12 +12,12 @@ Upgrade a Helm-based dual-region Camunda 8 Self-Managed deployment from 8.7 to 8
 
 Upgrading a Helm-based dual-region Camunda 8 Self-Managed deployment from 8.7 to 8.8 requires additional configuration beyond the standard Helm upgrade.
 
-1. Start with the [Upgrade from 8.7 to 8.8](./870-to-880.md) guide, which covers the baseline Helm upgrade steps. Use this guide to address dual-region–specific requirements.
+1. Start with the [upgrade from 8.7 to 8.8](./870-to-880.md) guide, which covers the baseline Helm upgrade steps. Use this guide to address dual-region–specific requirements.
 
 1. If your deployment requires component-specific upgrade steps, also review the [component upgrade guide](../components/870-to-880.md).
 
 :::info
-Dual-region deployments, as described in [Dual-region setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md), require manual exporter configuration.
+Dual-region deployments, as described in [dual-region setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md), require manual exporter configuration.
 :::
 
 ## Required configuration changes
@@ -87,7 +87,7 @@ In 8.8, basic authentication applies at the Orchestration Cluster level. If you 
 
 1. Migrate users to [embedded Identity](/self-managed/components/orchestration-cluster/identity/overview.md).
 2. Define initial users to avoid falling back to default `demo:demo` credentials.
-3. Review the [Authentication section](./870-to-880.md#authentication) in the main upgrade guide.
+3. Review the [authentication section](./870-to-880.md#authentication) in the main upgrade guide.
 
 ### API security defaults
 
@@ -104,7 +104,7 @@ orchestration:
 
 ## Reference configuration example
 
-For a complete example showing the required 8.7 to 8.8 changes with migration enabled, see [Dual-region `values.yaml` migration example](https://github.com/camunda/c8-multi-region/blob/stable/8.8/aws/dual-region/kubernetes/camunda-values-migration.yml).
+For a complete example showing the required 8.7 to 8.8 changes with migration enabled, see [dual-region `values.yaml` migration example](https://github.com/camunda/c8-multi-region/blob/stable/8.8/aws/dual-region/kubernetes/camunda-values-migration.yml).
 
 ## Multi-region specific considerations
 

@@ -11,7 +11,7 @@ import { HelmChartValuesFileBitnamiLegacyLink } from "@site/src/components/Camun
 Upgrade a Camunda 8 Self-Managed deployment installation using the official Camunda Helm charts.
 
 :::caution earlier versions
-If you are upgrading from a version earlier than 8.7, see [Upgrading from an earlier version](self-managed/upgrade/index.md#upgrading-from-an-earlier-version).
+If you are upgrading from a version earlier than 8.7, see [upgrading from an earlier version](self-managed/upgrade/index.md#upgrading-from-an-earlier-version).
 :::
 
 ## Upgrade guides

@@ -14,13 +14,13 @@ Optimize requires a data migration when upgrading to 8.8. The steps depend on ho
 
 Follow the Optimize migration guide to run the required data upgrade without losing reports or dashboards.
 
-<p><a href="./870-to-880" class="link-arrow">Upgrade Optimize from 8.7 to 8.8</a></p>
+<p class="link-arrow">[Upgrade Optimize from 8.7 to 8.8](./870-to-880.md)</p>
 
 ## Changes in Optimize 8.8
 
 Review Optimize-specific changes introduced in 8.8, including supported database versions.
 
-<p><a href="./changes-in-88" class="link-arrow">Optimize changes in 8.8</a></p>
+<p class="link-arrow">[Optimize changes in 8.8](./changes-in-88.md)</p>
 
 ## Upgrading from an earlier Optimize version
 
