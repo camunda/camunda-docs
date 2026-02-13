@@ -591,7 +591,7 @@ When upgrading to Camunda 8.8 or setting up 8.8 greenfield, if you run both the 
 Do not reuse the same prefix for:
 
 - Elasticsearch/OpenSearch Expoter indices (legacy exporter): `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix`
-- Unified Camunda indices (secondary storage): `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
+- Orchestration Cluster indices: `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
 
 If these prefixes are identical, or if one prefix includes the other (for example, `custom` and `custom-zeebe`), ILM/ISM policies and wildcard patterns such as `custom*` can target more indices than intended, which may lead to unexpected data loss.
 
