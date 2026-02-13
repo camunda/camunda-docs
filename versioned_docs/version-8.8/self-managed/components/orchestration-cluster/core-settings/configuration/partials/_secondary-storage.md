@@ -42,20 +42,14 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage-m
 | `camunda.database.aws-enabled`                                                                                                                        | <p>Use basic authentication or AWS credentials to log in.</p><p><ul><li><p>Set to `false` to use basic authentication for OpenSearch, adhering to the global AWS OpenSearch configuration settings.</p></li><li><p>Set to `true` to log in with AWS credentials.</p></li></ul></p> | `false`                 |
 
 :::warning
-Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
+When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, their index prefixes must be distinct, non‑overlapping, and must not use reserved Orchestration index names (for example `operate`, `tasklist`, or `camunda`).
 
-If Zeebe records indices and unified Camunda indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
+The Orchestration Cluster prefix is configured via
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix`
+(and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`).
 
-Do not reuse the same prefix for:
-
-- Zeebe records indices (legacy exporter): `ZEEBE_BROKER_EXPORTERS_{ELASTICSEARCH|OPENSEARCH}_ARGS_INDEX_PREFIX`
-- Secondary storage indices: `camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix` (and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`)
-
-In particular, do not configure `camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix` (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`) to `zeebe-record`, because `zeebe-record` is the default value of `zeebe.broker.exporters.{elasticsearch|opensearch}.args.indexPrefix` for Zeebe records indices.
-
-Reusing a shared prefix can cause Zeebe ILM/ISM policies and wildcard index patterns (for example, `custom*`) to also match unified indices, which may lead to unexpected data loss.
-
-Also make sure one prefix does not include the other. For example, `custom` and `custom-zeebe` can still conflict because wildcard patterns like `custom*` match both.
+For detailed requirements, configuration examples, and common mistakes, see
+[index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
 :::
 
   </TabItem>
@@ -79,7 +73,7 @@ Do **not** set both providers to `true` simultaneously.
 </Tabs>
 
 :::note
-Set `indexPrefix` only if you need to separate secondary storage indices from other indices in the same cluster (for example, when multiple Camunda environments share one cluster). Leave blank (`-`) to use the default.
+Set `indexPrefix` only if you need to separate Orchestration Cluster indices from other indices in the same cluster (for example, when multiple Camunda environments share one cluster). Leave blank (`-`) to use the default.
 :::
 
 #### Secure connection (HTTPS / TLS)
@@ -101,7 +95,7 @@ For Kubernetes-based deployments, mount a trust store and point `certificatePath
 
 ### Index & retention settings
 
-The following properties control index creation characteristics (shards, replicas, template priority) and retention/lifecycle policies for secondary storage indices.
+The following properties control index creation characteristics (shards, replicas, template priority) and retention/lifecycle policies for Orchestration Cluster indices.
 
 <Tabs>
   <TabItem value="db-env" label="Environment variables" default>

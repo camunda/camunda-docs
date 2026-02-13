@@ -97,7 +97,7 @@ global:
 
 orchestration:
   index:
-    prefix: my-env-camunda # Prefix for unified Camunda indices
+    prefix: my-env-camunda # Prefix for Orchestration Cluster indices
 ```
 
 For more details about index prefix configuration and Optimize-specific settings, see [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md).
