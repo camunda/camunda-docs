@@ -275,11 +275,11 @@ To review how each component is configured and which OIDC clients are used:
 
 ## Connect to the cluster
 
-After applying this configuration, use the following `kubectl port-forward` commands to access the APIs and UIs from your localhost:
+After applying this configuration, use the following `kubectl port-forward` commands to access the APIs and UIs from your localhost. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md), also port-forward the Keycloak service:
 
 ```bash
-# Keycloak (required for all UIs)
-kubectl port-forward svc/camunda-keycloak 18080:80
+# Keycloak Operator service (only if using Keycloak)
+kubectl port-forward svc/keycloak-service 18080:18080
 
 # Management Identity
 kubectl port-forward svc/camunda-identity 8084:80
