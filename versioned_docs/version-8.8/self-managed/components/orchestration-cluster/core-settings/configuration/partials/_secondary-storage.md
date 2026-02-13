@@ -44,14 +44,14 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage-m
 :::warning
 Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
 
-If Elasticsearch/OpenSearch Expoter indices and unified Camunda indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
+If Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
 
 Do not reuse the same prefix for:
 
-- Elasticsearch/OpenSearch Expoter indices (legacy exporter): `ZEEBE_BROKER_EXPORTERS_{ELASTICSEARCH|OPENSEARCH}_ARGS_INDEX_PREFIX`
+- Elasticsearch/OpenSearch Exporter indices (legacy exporter): `ZEEBE_BROKER_EXPORTERS_{ELASTICSEARCH|OPENSEARCH}_ARGS_INDEX_PREFIX`
 - Orchestration Cluster indices: `camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix` (and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`)
 
-In particular, do not configure `camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix` (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`) to `zeebe-record`, because `zeebe-record` is the default value of `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` for Elasticsearch/OpenSearch Expoter indices.
+In particular, do not configure `camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix` (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`) to `zeebe-record`, because `zeebe-record` is the default value of `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` for Elasticsearch/OpenSearch Exporter indices. Similarly, do not configure `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` to values that match Orchestration indices such as `operate`, `tasklist`, or `camunda`, as this can also cause ILM/ISM rules for the exporter to affect Orchestration Cluster indices.
 
 Reusing a shared prefix can cause Zeebe ILM/ISM policies and wildcard index patterns (for example, `custom*`) to also match Orchestration Cluster indices, which may lead to unexpected data loss.
 

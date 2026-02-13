@@ -19,14 +19,14 @@ Configure an index prefix when you need to:
 :::warning
 Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
 
-If Elasticsearch/OpenSearch Expoter indices and unified Camunda indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
+If Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
 
 Do not reuse the same prefix for:
 
-- Elasticsearch/OpenSearch Expoter indices (legacy exporter): `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix`
-- Unified Camunda indices (secondary storage): `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
+- Elasticsearch/OpenSearch Exporter indices (legacy exporter): `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix`
+- Orchestration Cluster indices (secondary storage): `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
 
-In particular, do not configure `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix` (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`) to `zeebe-record`, because `zeebe-record` is the default value of `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` for Elasticsearch/OpenSearch Expoter indices.
+In particular, do not configure `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix` (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`) to `zeebe-record`, because `zeebe-record` is the default value of `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` for Elasticsearch/OpenSearch Exporter indices. Similarly, do not configure `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` to values that match Orchestration indices such as `operate`, `tasklist`, or `camunda`, as this can also cause ILM/ISM rules for the exporter to affect Orchestration Cluster indices.
 
 Reusing a shared prefix can cause Zeebe ILM/ISM policies and wildcard index patterns (for example, `custom*`) to also match Orchestration Cluster indices, which may lead to unexpected data loss.
 
@@ -39,7 +39,7 @@ Starting with Camunda 8.8, index prefixes are configured per exporter. Camunda u
 
 ### Camunda Exporter (default)
 
-The Camunda Exporter is enabled by default. It creates unified Camunda indices used by the Orchestration Cluster (Operate and Tasklist).
+The Camunda Exporter is enabled by default. It creates Orchestration Cluster indices used by the Orchestration Cluster (Operate and Tasklist).
 
 - **Helm configuration**: `orchestration.index.prefix`
 - **Default value**: `""` (empty string, meaning no prefix)
@@ -65,7 +65,7 @@ The legacy Zeebe Exporter is automatically enabled when:
 
 | Configuration                 | Default        | Used By                                 | Purpose                                                  |
 | ----------------------------- | -------------- | --------------------------------------- | -------------------------------------------------------- |
-| `orchestration.index.prefix`  | `""`           | Camunda Exporter, Orchestration Cluster | Prefix for unified Camunda indices                       |
+| `orchestration.index.prefix`  | `""`           | Camunda Exporter, Orchestration Cluster | Prefix for Orchestration Cluster indices                 |
 | `global.elasticsearch.prefix` | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices (consumed by Optimize) |
 | `global.opensearch.prefix`    | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices when using OpenSearch  |
 
@@ -103,7 +103,7 @@ If Optimize is not enabled, configure only the Camunda Exporter prefix.
 ```yaml
 orchestration:
   index:
-    prefix: custom-camunda # Unified Camunda indices prefix
+    prefix: custom-camunda # Orchestration Cluster indices prefix
 ```
 
 </TabItem>
@@ -118,7 +118,7 @@ global:
 
 orchestration:
   index:
-    prefix: custom-camunda # Unified Camunda indices prefix
+    prefix: custom-camunda # Orchestration Cluster indices prefix
 ```
 
 </TabItem>
@@ -197,7 +197,7 @@ optimize:
 ### Elasticsearch
 
 ```sh
-# Camunda Exporter - unified Camunda indices prefix
+# Camunda Exporter - Orchestration Cluster indices prefix
 CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_INDEXPREFIX=custom-camunda
 
 # Legacy Zeebe Exporter - zeebe-record indices prefix (for Optimize)
@@ -226,7 +226,7 @@ CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_INDEXPREFIX=shared-prefix
 ### OpenSearch
 
 ```sh
-# Camunda Exporter - unified Camunda indices prefix
+# Camunda Exporter - Orchestration Cluster indices prefix
 CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_INDEXPREFIX=custom-camunda
 
 # Legacy Zeebe Exporter - zeebe-record indices prefix (for Optimize)
