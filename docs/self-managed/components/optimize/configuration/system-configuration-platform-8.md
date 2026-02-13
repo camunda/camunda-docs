@@ -24,7 +24,7 @@ The settings below control how Optimize connects to and paginates this exporter 
 
 This section describes how exporter-side filters affect Optimize data imports and data completeness. For YAML configuration details and property syntax, refer to the Elasticsearch and OpenSearch exporter documentation.
 
-From Camunda 8.9 and above, the Elasticsearch and OpenSearch exporters provide optional filters that can reduce the amount of data written for Optimize:
+Starting from Camunda 8.9, the Elasticsearch and OpenSearch exporters provide optional filters that can reduce the amount of data written for Optimize:
 
 - Variable names: Inclusion and exclusion lists with match modes such as exact, starts with, and ends with.
 - Variable value types: Inclusion and exclusion lists for inferred types such as `String`, `Number`, `Boolean`, `Object`, `Array`, and `Null`.
@@ -47,7 +47,7 @@ The same principle applies to variable‑name and variable‑type filters: varia
 
 The recommended patterns are:
 
-- Fresh 8.9+ clusters or new Optimize installations.
+- Clusters running 8.9+ or new Optimize installations.
   Enable exporter-side filters (variable, type, process, Optimize mode) before starting Optimize imports. Optimize will build its indices from a single, consistently filtered stream and no special action is required.
 
 - Clusters using exporters for 8.8 to 8.9 migration or other pipelines.
@@ -60,7 +60,7 @@ On clusters that have already exported unfiltered data to Optimize, enabling or 
 - Before 8.9, exporters always wrote an unfiltered event stream with a stable synthetic sequence counter per record. Optimize could reliably continue from “the last sequence it had seen”.
 - With 8.9 filters, re‑exporting from a snapshot after enabling filters can cause the same logical event to appear at a different effective sequence. Optimize may then skip some events because it assumes all records with a lower sequence than the last processed one have already been imported.
 
-Today, there is no automatic, upgrade‑safe way to change filters without any risk of gaps. Practically, you have two options:
+There is no automatic, upgrade‑safe way to change filters without any risk of gaps. Practically, you have two options:
 
 - Accept limited gaps. Leave Optimize running, change the exporter-side filters, and accept that some re‑exported events may be skipped. Optimize continues to track both position and sequence internally but may not retroactively fill all gaps.
 

@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 :::note
 For supported OpenSearch versions in Camunda 8 Self-Managed, see [Supported Environments](../../../../../reference/supported-environments.md#camunda-8-self-managed).
 
-As of 8.8, Camunda uses the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)
+Starting with Camunda 8.8, Camunda uses the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)
 to consume new records. Records from 8.7 and earlier are consumed only during migration.
 
 The Elasticsearch and OpenSearch exporters remain fully usable after migration (for example, for existing setups, Optimize, or other custom use cases). Their functionality is not limited to the migration period.
@@ -64,7 +64,7 @@ options, and the default values for these options:
 
 | Option                | Description                                                                                                                                                      | Default                 |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| url                   | Valid URLs as comma-separated string.                                                                                                                            | `http://localhost:9200` |
+| url                   | Valid URLs as a comma-separated string.                                                                                                                          | `http://localhost:9200` |
 | requestTimeoutMs      | Request timeout (in ms) for the OpenSearch client.                                                                                                               | `30000`                 |
 | index                 | Refer to [index](#index) for index configuration options, including record/value-type switches, Optimize-focused filters, and the Optimize mode flag.            |                         |
 | bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                                                                                                       |                         |
@@ -143,7 +143,7 @@ exporters:
               - business_debug
 ```
 
-Variable names are first matched against inclusion rules (if present), then against exclusion rules. If a variable matches both, the exclusion wins.
+The exporter first matches variable names against inclusion rules (if present), then against exclusion rules. If a variable matches both, the exclusion wins.
 
 For details on how this interacts with Optimize, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
 
@@ -165,7 +165,7 @@ exporters:
             - Array
 ```
 
-Use this to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see
+Use this filter to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see
 [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
 
 ### BPMN process filters
@@ -190,7 +190,7 @@ Some value types that never expose `bpmnProcessId` (for example, `DEPLOYMENT`, `
 
 ### Optimize mode
 
-Optimize mode is an optional filter that restricts exported records to those used by Optimize, reducing index size.
+With Optimize mode, you can restrict exported records to those used by Optimize, reducing index size.
 
 ```yaml
 exporters:

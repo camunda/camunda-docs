@@ -61,7 +61,7 @@ options, and the default values for these options:
 
 | Option                | Description                                                                              | Default                 |
 | --------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
-| url                   | Valid URLs as comma-separated string.                                                    | `http://localhost:9200` |
+| url                   | Valid URLs as a comma-separated string.                                                  | `http://localhost:9200` |
 | requestTimeoutMs      | Request timeout (in ms) for Elasticsearch. client                                        | `30000`                 |
 | index                 | Refer to [index](#index) for the index configuration options.                            |                         |
 | bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                               |                         |
