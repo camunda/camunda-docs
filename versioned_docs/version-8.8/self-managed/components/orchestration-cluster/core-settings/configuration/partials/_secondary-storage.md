@@ -42,9 +42,9 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage-m
 | `camunda.database.aws-enabled`                                                                                                                        | <p>Use basic authentication or AWS credentials to log in.</p><p><ul><li><p>Set to `false` to use basic authentication for OpenSearch, adhering to the global AWS OpenSearch configuration settings.</p></li><li><p>Set to `true` to log in with AWS credentials.</p></li></ul></p> | `false`                 |
 
 :::warning
-Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
+If Elasticsearch/OpenSearch Exporter indices (legacy exporter) and Orchestration Cluster indices (secondary storage) use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
 
-If Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
+Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
 
 Do not reuse the same prefix for:
 

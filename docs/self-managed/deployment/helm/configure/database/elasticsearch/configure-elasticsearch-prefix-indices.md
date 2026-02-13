@@ -17,9 +17,9 @@ Configure an index prefix when you need to:
 - Avoid index name collisions in multi-instance environments (for example, separate dev/test/prod installations using one shared cluster).
 
 :::warning
-Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
+If Elasticsearch/OpenSearch Exporter indices (legacy exporter) and Orchestration Cluster indices (secondary storage) use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
 
-If Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
+Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
 
 Do not reuse the same prefix for:
 
