@@ -108,14 +108,14 @@ When enabled, this creates an Index Lifecycle Management (ILM) Policy that delet
 `minimumAge`.
 All index templates created by this exporter apply the created ILM Policy.
 
-| Option                 | Description                                                                                                                                                          | Default                                  |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| enabled                | If `true` the ILM Policy is created and applied to the index templates.                                                                                              | `false`                                  |
-| minimumAge             | Specifies how old the data must be, before the data is deleted as a duration.                                                                                        | `30d`                                    |
-| policyName             | The name of the created and applied ILM policy.                                                                                                                      | `camunda-retention-policy`               |
-| usageMetricsMinimumAge | Specifies how old the usage metrics data must be, before the data is deleted as a duration. Applies to `camunda-usage-metric` and `camunda-usage-metric-tu` indices. | `730d`                                   |
-| usageMetricsPolicyName | The name of the created and applied usage metrics ILM policy.                                                                                                        | `camunda-usage-metrics-retention-policy` |
-| applyPolicyJobInterval | The interval at which the ILM policy is periodically applied to all historical indices (starting from version 8.8.1).                                                | `PT1H`                                   |
+| Option                 | Description                                                                                                                                                                 | Default                                  |
+| ---------------------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ---------------------------------------- |
+| enabled                | If `true` the ILM Policy is created and applied to the index templates.                                                                                                     | `false`                                  |
+| minimumAge             | Specifies how old the data must be, before the data is deleted as a duration.                                                                                               | `30d`                                    |
+| policyName             | The name of the created and applied ILM policy.                                                                                                                             | `camunda-retention-policy`               |
+| usageMetricsMinimumAge | Specifies how old the usage metrics data must be, before the data is deleted as a duration. Applies to `camunda-usage-metric-8.8.0_` and `camunda-usage-metric-tu-8.8.0_` indices. | `730d`                                   |
+| usageMetricsPolicyName | The name of the created and applied usage metrics ILM policy.                                                                                                               | `camunda-usage-metrics-retention-policy` |
+| applyPolicyJobInterval | The interval at which the ILM policy is periodically applied to all historical indices (starting from version 8.8.1).                                                       | `PT1H`                                   |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or nanoseconds

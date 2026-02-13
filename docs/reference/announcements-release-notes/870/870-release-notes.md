@@ -21,9 +21,9 @@ As the [Spring-Boot OSS Support](https://spring.io/projects/spring-boot#support)
 
 ## 8.7 minor
 
-| Scheduled release date | Scheduled end of maintenance | All Patch releases                                                                | Release blog                                                          | Update guide                                                              |
-| ---------------------- | ---------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| 8 April 2025           | 13 October 2026              | [Patch Releases and Changelogs](#technical-changelogs-for-all-87x-patch-releases) | [Release blog](https://camunda.com/blog/2025/04/camunda-8-7-release/) | [Update guide](/self-managed/components/components-upgrade/860-to-870.md) |
+| Scheduled release date | Scheduled end of maintenance | All Patch releases                                                                | Release blog                                                          | Update guide                                                                                           |
+| ---------------------- | ---------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| 8 April 2025           | 13 October 2026              | [Patch Releases and Changelogs](#technical-changelogs-for-all-87x-patch-releases) | [Release blog](https://camunda.com/blog/2025/04/camunda-8-7-release/) | [Update guide](/versioned_docs/version-8.7/self-managed/operational-guides/update-guide/860-to-870.md) |
 
 ### AWS EKS and AWS OpenShift (ROSA) reference architecture <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 

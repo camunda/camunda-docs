@@ -98,8 +98,8 @@ The **v2 REST API** (default port `8080`) **requires authentication**, described
 
 The following procedures assume the following dual-region deployment for:
 
-- **AWS:** the deployment has been created using [AWS setup guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) and you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
-  Follow the [dual-region cluster deployment](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up).
+- **AWS:** the deployment has been created using [AWS setup guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md) and you have your own copy of the [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
+  Follow the [dual-region cluster deployment](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md##3-deploy-camunda-8-via-helm-charts) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#export-environment-variables) already set up).
 
 - **OpenShift:** the deployment has been created using [OpenShift setup guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#deploying-camunda-8-via-helm-charts-in-a-dual-region-setup) and previously completed changes in your `generated-values-region-1.yml` and `generated-values-region-2.yml` to adjust them in your setup.
 
@@ -683,7 +683,7 @@ Ensure that the values for `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_U
 This step is equivalent to applying for the region to be recreated:
 
 - [Setting up the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#camunda-8-helm-chart-prerequisites)
-- [Deploying the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#deploy-camunda-8)
+- [Deploying the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#install-camunda-8-using-helm)
 
 :::important
 The standalone Schema Manager must be disabled; otherwise, it will prevent a successful restore of the Elasticsearch backup later on. If you forget to disable it, you must manually remove all created indices in Elasticsearch in the restored region before restoring the backup.
@@ -983,7 +983,7 @@ Ensure that the values for `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_U
 This step is equivalent to applying the configuration for the recreated region:
 
 - [Setting up the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#camunda-8-helm-chart-prerequisites)
-- [Deploying the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#deploy-camunda-8)
+- [Deploying the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#install-camunda-8-using-helm)
 
 If not already done, remove the `CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA` variable from the `camunda-values.yml`.
 
