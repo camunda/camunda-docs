@@ -149,7 +149,7 @@ global:
 
 orchestration:
   index:
-    prefix: my-env-camunda # Prefix for unified Camunda indices
+    prefix: my-env-camunda # Prefix for Orchestration Cluster indices
 
 elasticsearch:
   enabled: false

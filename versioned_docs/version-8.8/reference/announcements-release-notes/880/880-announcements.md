@@ -585,14 +585,14 @@ These changes do not introduce new fields or richer context, but instead ensure 
 
 #### Elasticsearch and OpenSearch: Index prefixes must differ
 
-When upgrading to Camunda 8.8, if you run both Zeebe records indices (legacy exporter) and unified Camunda indices (secondary storage) on the same Elasticsearch/OpenSearch cluster, their index prefixes must not be the same.
+When upgrading to Camunda 8.8 or setting up 8.8 for the first time, if you run both the Elasticsearch/OpenSearch Exporter and Camunda Exporter on the same Elasticsearch/OpenSearch cluster, their index prefixes must not match, nor be contained within the other.
 
 Do not reuse the same prefix for:
 
-- Zeebe records indices (legacy exporter): `zeebe.broker.exporters.{elasticsearch|opensearch}.args.indexPrefix`
-- Unified Camunda indices (secondary storage): `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
+- Elasticsearch/OpenSearch Exporter indices (legacy exporter): `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix`
+- Orchestration Cluster indices (secondary storage): `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
 
-If these prefixes are identical, or if one prefix includes the other (for example, `custom` and `custom-zeebe`), Zeebe ILM/ISM policies and wildcard patterns such as `custom*` can also match unified indices, which may lead to unexpected data loss.
+If these prefixes are identical, or if one prefix includes the other (for example, `custom` and `custom-zeebe`), ILM/ISM policies and wildcard patterns such as `custom*` can target more indices than intended, which may lead to unexpected data loss.
 
 For configuration examples and details, see [Helm chart Elasticsearch/OpenSearch indices prefix](../../../self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md).
 
