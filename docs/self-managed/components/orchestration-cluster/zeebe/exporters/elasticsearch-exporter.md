@@ -133,7 +133,7 @@ and process values).
 
 ### Variable-name filters
 
-In Camunda 8.9 and above, you can filter exported variable records by variable name.
+Starting with Camunda 8.9, you can filter exported variable records by variable name.
 
 Configuration:
 
@@ -404,9 +404,8 @@ the environment variable.
 
 ## Legacy Zeebe records and Optimize filters
 
-With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default. As a result, not all `zeebe-record` indices will be populated.
-
-By default, these exporters emit only the record value types and intents required by Optimize.
+With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default.
+Instead, they will emit only the record value types and intents required by Optimize.
 
 To export additional record types, enable the [`includeEnabledRecords`](#configuration) configuration property.
 
