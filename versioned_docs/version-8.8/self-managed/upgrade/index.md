@@ -28,11 +28,13 @@ Get started by preparing your Self-Managed environment for upgrade to Camunda 8.
 </div>
 </div>
 
-:::info
+## About
 
-- This guide applies to Self-Managed installations only and does not apply to Camunda SaaS.
-- If your deployment is running a version earlier than 8.7, complete the required version-specific upgrades listed in [Upgrading from an earlier version](#upgrading-from-an-earlier-version) before upgrading to 8.8.
-  :::
+This guide applies to Self-Managed installations only and does not apply to Camunda SaaS.
+
+:::caution
+If your deployment is running a version **earlier than 8.7**, you must complete the required version-specific upgrades listed in [Upgrading from an earlier version](#upgrading-from-an-earlier-version) before you can upgrade to 8.8.
+:::
 
 ## Prepare for upgrade
 
@@ -70,7 +72,7 @@ Some upgrades require additional component-level steps depending on which compon
 
 <p><a href="./components/870-to-880" class="link-arrow">Component upgrade from 8.7 to 8.8</a></p>
 
-## Release notes and changes in 8.8
+## 8.8 release information
 
 Learn about new features, breaking changes, and deprecations in Camunda 8.8:
 
@@ -81,12 +83,13 @@ Learn about new features, breaking changes, and deprecations in Camunda 8.8:
 
 ## Upgrading from an earlier version
 
-Camunda 8 upgrades must be performed sequentially.
+**Camunda 8 upgrades must be performed sequentially.**
 
 - You must upgrade from the latest patch version of your current Camunda release to the latest patch version of the next release.
-- For example, upgrade from 8.6 to 8.7 before upgrading to 8.8. **Do not skip releases**.
+- For example, you must upgrade from 8.6 to 8.7 before you can upgrade to 8.8.
+- **Do not skip releases**.
 
-Use the following version-specific upgrade guides to reach Camunda 8.7 before proceeding with the 8.8 upgrade.
+Use the following version-specific upgrade guides to upgrade to Camunda 8.7 before you can proceed with the 8.8 upgrade.
 
 ### Kubernetes with Helm
 
