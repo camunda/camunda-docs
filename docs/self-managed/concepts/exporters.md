@@ -245,7 +245,7 @@ public class CustomExporter implements Exporter {
 - All filter methods are combined with logical `AND`.
   A record is exported only if it passes `acceptType`, `acceptValue`, `acceptIntent`, and (when implemented) `acceptRecord`.
   In simple cases you can implement only the metadata methods; use `acceptRecord` when you need to inspect full record values.
-  :::
+ :::
 
 ### Listen to expired messages with a custom filter
 
