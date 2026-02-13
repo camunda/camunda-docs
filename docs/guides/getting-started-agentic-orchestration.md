@@ -89,8 +89,9 @@ If you’re using Camunda 8 Run and installed it using the [starter package](./g
 :::
 
 2. Open the blueprint BPMN diagram in Desktop Modeler.
-   </TabItem>
-   </Tabs>
+
+</TabItem>
+</Tabs>
 
 ### About the example AI agent process
 
