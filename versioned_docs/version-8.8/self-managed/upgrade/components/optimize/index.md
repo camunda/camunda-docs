@@ -6,7 +6,9 @@ description: Upgrade Optimize when moving from Camunda 8.7 to 8.8, including req
 
 Upgrade Optimize as part of a Camunda 8 Self-Managed upgrade from version 8.7 to 8.8.
 
-Optimize requires a data migration when upgrading to 8.8. The steps depend on how Optimize is deployed and whether you are also upgrading your Elasticsearch or OpenSearch database.
+## About
+
+Optimize requires a data migration when upgrading to 8.8. The steps depend on how Optimize is deployed and if you are also upgrading your Elasticsearch or OpenSearch database.
 
 ## Upgrade Optimize from 8.7 to 8.8
 

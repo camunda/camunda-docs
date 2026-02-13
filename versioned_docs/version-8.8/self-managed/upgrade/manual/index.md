@@ -5,16 +5,15 @@ title: Manually upgrade a local Camunda installation
 description: Manually upgrade a local, Self-Managed Camunda installation from an archive distribution.
 ---
 
-import ZeebeGrid from '../../../components/zeebe/react-components/\_zeebe-card';
-import { overviewCards } from './assets/\_upgrade-card-data';
+Upgrade a local Self-Managed Camunda installation that was deployed from an archive distribution.
 
-Upgrade a local, Self-Managed Camunda installation that was deployed from an archive distribution.
+## About
 
 This guide applies to patch and minor version upgrades when Camunda is installed directly on a machine and managed manually.
 
-## Upgrade overview
-
-<ZeebeGrid zeebe={overviewCards} />
+1. [Plan the upgrade](#plan-the-upgrade): Identify your current version, choose the target version, and confirm the upgrade path and required changes.
+2. [Back up your installation](#back-up-your-installation): Take a full backup of your Orchestration cluster, including data and configuration files.
+3. [Run the upgrade](#run-the-upgrade): Stop Camunda, unpack the new version, merge configuration changes, and restart Camunda.
 
 ## Before you begin
 
