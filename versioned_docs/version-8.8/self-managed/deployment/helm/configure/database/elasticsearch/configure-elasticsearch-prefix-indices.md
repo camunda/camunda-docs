@@ -19,14 +19,14 @@ Configure an index prefix when you need to:
 :::warning
 Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
 
-If Zeebe records indices and unified Camunda indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
+If Elasticsearch/OpenSearch Expoter indices and unified Camunda indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
 
 Do not reuse the same prefix for:
 
-- Zeebe records indices (legacy exporter): `zeebe.broker.exporters.{elasticsearch|opensearch}.args.indexPrefix`
+- Elasticsearch/OpenSearch Expoter indices (legacy exporter): `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix`
 - Unified Camunda indices (secondary storage): `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
 
-In particular, do not configure `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix` (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`) to `zeebe-record`, because `zeebe-record` is the default value of `zeebe.broker.exporters.{elasticsearch|opensearch}.args.indexPrefix` for Zeebe records indices.
+In particular, do not configure `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix` (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`) to `zeebe-record`, because `zeebe-record` is the default value of `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` for Elasticsearch/OpenSearch Expoter indices.
 
 Reusing a shared prefix can cause Zeebe ILM/ISM policies and wildcard index patterns (for example, `custom*`) to also match unified indices, which may lead to unexpected data loss.
 

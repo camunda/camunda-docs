@@ -44,14 +44,14 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage-m
 :::warning
 Changing an index prefix after a Camunda instance has been running creates new, empty indices with the new prefix. Camunda does not provide built‑in migration support between old and new prefixes.
 
-If Zeebe records indices and unified Camunda indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
+If Elasticsearch/OpenSearch Expoter indices and unified Camunda indices use the same Elasticsearch/OpenSearch cluster, you must use different index prefixes.
 
 Do not reuse the same prefix for:
 
-- Zeebe records indices (legacy exporter): `ZEEBE_BROKER_EXPORTERS_{ELASTICSEARCH|OPENSEARCH}_ARGS_INDEX_PREFIX`
-- Secondary storage indices: `camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix` (and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`)
+- Elasticsearch/OpenSearch Expoter indices (legacy exporter): `ZEEBE_BROKER_EXPORTERS_{ELASTICSEARCH|OPENSEARCH}_ARGS_INDEX_PREFIX`
+- Orchestration Cluster indices: `camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix` (and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`)
 
-In particular, do not configure `camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix` (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`) to `zeebe-record`, because `zeebe-record` is the default value of `zeebe.broker.exporters.{elasticsearch|opensearch}.args.indexPrefix` for Zeebe records indices.
+In particular, do not configure `camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix` (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`) to `zeebe-record`, because `zeebe-record` is the default value of `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix` for Elasticsearch/OpenSearch Expoter indices.
 
 Reusing a shared prefix can cause Zeebe ILM/ISM policies and wildcard index patterns (for example, `custom*`) to also match unified indices, which may lead to unexpected data loss.
 
@@ -79,7 +79,7 @@ Do **not** set both providers to `true` simultaneously.
 </Tabs>
 
 :::note
-Set `indexPrefix` only if you need to separate secondary storage indices from other indices in the same cluster (for example, when multiple Camunda environments share one cluster). Leave blank (`-`) to use the default.
+Set `indexPrefix` only if you need to separate Orchestration Cluster indices from other indices in the same cluster (for example, when multiple Camunda environments share one cluster). Leave blank (`-`) to use the default.
 :::
 
 #### Secure connection (HTTPS / TLS)
@@ -101,7 +101,7 @@ For Kubernetes-based deployments, mount a trust store and point `certificatePath
 
 ### Index & retention settings
 
-The following properties control index creation characteristics (shards, replicas, template priority) and retention/lifecycle policies for secondary storage indices.
+The following properties control index creation characteristics (shards, replicas, template priority) and retention/lifecycle policies for Orchestration Cluster indices.
 
 <Tabs>
   <TabItem value="db-env" label="Environment variables" default>
