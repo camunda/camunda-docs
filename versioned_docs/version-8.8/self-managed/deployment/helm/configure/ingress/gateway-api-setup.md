@@ -102,7 +102,6 @@ spec:
       kind: Service
 ```
 
-
 ### HTTPRoute and GRPCRoute
 
 - [K8s HTTPRoute docs](https://gateway-api.sigs.k8s.io/api-types/httproute/)
