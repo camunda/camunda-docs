@@ -91,6 +91,10 @@ Learn about new features, breaking changes, and deprecations in Camunda 8.8:
 
 Use the following version-specific upgrade guides to upgrade to Camunda 8.7 **before** you can proceed with the 8.8 upgrade.
 
+:::note
+Each guide covers only the changes required for that specific version upgrade.
+:::
+
 ### Kubernetes with Helm
 
 - <a href="../../8.7/self-managed/setup/upgrade" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.6 to 8.7</a>
@@ -106,7 +110,3 @@ Use the following version-specific upgrade guides to upgrade to Camunda 8.7 **be
 - <a href="https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/840-to-850/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.4 to 8.5</a>
 - <a href="https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/830-to-840/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.3 to 8.4</a>
 - <a href="https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/820-to-830/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.2 to 8.3</a>
-
-:::note
-Each guide covers only the changes required for that specific version upgrade.
-:::
