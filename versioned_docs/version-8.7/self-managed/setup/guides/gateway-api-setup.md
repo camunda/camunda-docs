@@ -12,14 +12,13 @@ The Gateway API provides a modern way to manage Ingress traffic in Kubernetes cl
 - Separates cluster operators, who manage Gateway resources, from application developers, who manage HTTPRoute resources.
 - Enables configuration of NGINX without relying on labels and annotations, which also helps limit permissions.
 
-8.9 and later versions of the helm chart will support Gateway API with values.yaml options.
+  8.9 and later versions of the helm chart will support Gateway API with values.yaml options.
 
 :::note
 The Ingress-NGINX controller is planned to reach end of life in March 2026 (see the Kubernetes announcement on Ingress-NGINX retirement). We recommend planning a migration to the Gateway API where it fits your use case.
 
 If you decide not to adopt the Gateway API, you can migrate to a different Ingress controller and continue using the Ingress API. This remains a supported approach.
 :::
-
 
 ## Prerequisites
 
@@ -55,7 +54,7 @@ helm template camunda camunda/camunda-platform \
 
 ### Gateway
 
-* [K8s Gateway docs](https://gateway-api.sigs.k8s.io/api-types/gateway/)
+- [K8s Gateway docs](https://gateway-api.sigs.k8s.io/api-types/gateway/)
 
 Gateway resources are intended to be created by cluster operators to define how traffic can enter the cluster and which controllers are responsible for managing that traffic. They reference a GatewayClass resource, which defines which controller will manage the Gateway and HTTPRoute resources.
 
@@ -70,20 +69,19 @@ metadata:
 spec:
   gatewayClassName: nginx
   listeners:
-  - name: http
-    port: 80
-    protocol: HTTP
-    hostname: example.com
-  - name: grpc
-    port: 80
-    protocol: HTTP
-    hostname: grpc-example.com
+    - name: http
+      port: 80
+      protocol: HTTP
+      hostname: example.com
+    - name: grpc
+      port: 80
+      protocol: HTTP
+      hostname: grpc-example.com
 ```
-
 
 ### ReferenceGrants
 
-* [K8s ReferenceGrant docs](https://gateway-api.sigs.k8s.io/api-types/referencegrant/)
+- [K8s ReferenceGrant docs](https://gateway-api.sigs.k8s.io/api-types/referencegrant/)
 
 #### Example ReferenceGrant
 
@@ -96,19 +94,19 @@ metadata:
   name: camunda-camunda-platform
 spec:
   from:
-  - group: gateway.networking.k8s.io
-    kind: HTTPRoute
-    namespace: NAMESPACE
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: NAMESPACE
   to:
-  - group: ""
-    kind: Service
+    - group: ""
+      kind: Service
 ```
 
 
 ### HTTPRoute and GRPCRoute
 
-* [K8s HTTPRoute docs](https://gateway-api.sigs.k8s.io/api-types/httproute/)
-* [K8s GRPCRoute docs](https://gateway-api.sigs.k8s.io/api-types/grpcroute/)
+- [K8s HTTPRoute docs](https://gateway-api.sigs.k8s.io/api-types/httproute/)
+- [K8s GRPCRoute docs](https://gateway-api.sigs.k8s.io/api-types/grpcroute/)
 
 These routes are intended to be created by application developers exposing endpoints and routing them to specific services.
 
@@ -123,19 +121,19 @@ metadata:
   annotations:
 spec:
   parentRefs:
-  - name: camunda-camunda-platform
-    sectionName: http
+    - name: camunda-camunda-platform
+      sectionName: http
   hostnames:
-  - "example.com"
+    - "example.com"
   rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /orchestration
-    backendRefs:
-    - name: camunda-zeebe-gateway
-      namespace: NAMESPACE
-      port: 8080
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /orchestration
+      backendRefs:
+        - name: camunda-zeebe-gateway
+          namespace: NAMESPACE
+          port: 8080
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: GRPCRoute
@@ -144,12 +142,12 @@ metadata:
   annotations:
 spec:
   parentRefs:
-  - name: camunda-camunda-platform
+    - name: camunda-camunda-platform
   hostnames:
-  - "grpc-example.com"
+    - "grpc-example.com"
   rules:
-  - backendRefs:
-    - name: camunda-zeebe-gateway
-      namespace: NAMESPACE
-      port: 26500
+    - backendRefs:
+        - name: camunda-zeebe-gateway
+          namespace: NAMESPACE
+          port: 26500
 ```
