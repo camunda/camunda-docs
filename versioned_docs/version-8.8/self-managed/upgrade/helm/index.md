@@ -7,6 +7,7 @@ description: "Upgrade to a more recent version of the Camunda Helm charts, and v
 import ZeebeGrid from '../../../components/zeebe/react-components/\_zeebe-card';
 import { helmIndexCards } from './../react-components/\_card-data';
 import { HelmChartValuesFileBitnamiLegacyLink } from "@site/src/components/CamundaDistributions";
+import '../react-components/\_card.css';
 
 Upgrade a Camunda 8 Self-Managed deployment installation using the official Camunda Helm charts.
 

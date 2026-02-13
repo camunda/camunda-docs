@@ -8,6 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ZeebeGrid from '../../components/zeebe/react-components/\_zeebe-card';
 import { overviewCards } from './react-components/\_card-data';
+import './react-components/\_card.css';
 
 import OverviewImg from '../assets/hero-upgrade.png';
 
