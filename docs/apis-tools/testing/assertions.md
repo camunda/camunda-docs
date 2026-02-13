@@ -8,18 +8,10 @@ The class `CamundaAssert` is the entry point for all assertions. It is based on 
 
 The assertions follow the style: `assertThat(object_to_test)` + expected property.
 
-Use the assertions by adding the following static imports in your test class:
+Use the assertions by adding the following static import in your test class:
 
 ```java
 import static io.camunda.process.test.api.CamundaAssert.*;
-
-// optional:
-import static io.camunda.process.test.api.assertions.DecisionSelectors.*;
-import static io.camunda.process.test.api.assertions.ElementSelectors.*;
-import static io.camunda.process.test.api.assertions.IncidentSelectors.*;
-import static io.camunda.process.test.api.assertions.JobSelectors.*;
-import static io.camunda.process.test.api.assertions.ProcessInstanceSelectors.*;
-import static io.camunda.process.test.api.assertions.UserTaskSelectors.*;
 ```
 
 :::info Assertions are blocking
