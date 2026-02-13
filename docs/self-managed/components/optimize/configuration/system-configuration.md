@@ -161,6 +161,8 @@ if one node fails, Optimize is still able to talk to the cluster.
 | es.connection.proxy.host                      |                                                                      | null          | The proxy host to use, must be set if es.connection.proxy.enabled = true.                                                                                                 |
 | es.connection.proxy.port                      |                                                                      | null          | The proxy port to use, must be set if es.connection.proxy.enabled = true.                                                                                                 |
 | es.connection.proxy.sslEnabled                |                                                                      | false         | Whether this proxy is using a secured connection (HTTPS).                                                                                                                 |
+| es.connection.proxy.username                  |                                                                      | null          | Optional username for HTTP Basic proxy authentication. If both username and password are set, a preemptive `Proxy-Authorization` header is sent with each request.        |
+| es.connection.proxy.password                  |                                                                      | null          | Optional password for HTTP Basic proxy authentication.                                                                                                                    |
 | es.connection.skipHostnameVerification        | CAMUNDA_OPTIMIZE_ELASTICSEARCH_CONNECTION_SKIP_HOSTNAME_VERIFICATION | false         | Determines whether the hostname verification should be skipped.                                                                                                           |
 
 #### Elasticsearch index settings
@@ -213,6 +215,12 @@ You can define a number of connection points in a cluster. Therefore, everything
 | opensearch.connection.nodes[*].httpPort        | CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT                             | 9200            | A port number used by OpenSearch to accept HTTP connections.                                      |
 | opensearch.connection.skipHostnameVerification | CAMUNDA_OPTIMIZE_OPENSEARCH_CONNECTION_SKIP_HOSTNAME_VERIFICATION | false           | Determines whether the hostname verification should be skipped.                                   |
 | opensearch.connection.awsEnabled               | CAMUNDA_OPTIMIZE_OPENSEARCH_AWS_ENABLED                           | false           | Determines if AWS credentials shall be used for authentication                                    |
+| opensearch.connection.proxy.enabled            |                                                                   | false           | Whether an HTTP proxy should be used for requests to OpenSearch.                                  |
+| opensearch.connection.proxy.host               |                                                                   | null            | The proxy host to use, must be set if opensearch.connection.proxy.enabled = true.                 |
+| opensearch.connection.proxy.port               |                                                                   | null            | The proxy port to use, must be set if opensearch.connection.proxy.enabled = true.                 |
+| opensearch.connection.proxy.sslEnabled         |                                                                   | false           | Whether this proxy is using a secured connection (HTTPS).                                         |
+| opensearch.connection.proxy.username           |                                                                   | null            | Optional username for HTTP Basic proxy authentication. If both username and password are set, a preemptive `Proxy-Authorization` header is sent with each request. |
+| opensearch.connection.proxy.password           |                                                                   | null            | Optional password for HTTP Basic proxy authentication.                                            |
 
 #### OpenSearch index settings
 
