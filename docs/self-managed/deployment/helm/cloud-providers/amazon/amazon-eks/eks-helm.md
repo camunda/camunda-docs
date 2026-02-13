@@ -9,14 +9,14 @@ description: "Set up the Camunda 8 environment with Helm and an optional Ingress
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-import IdpPrerequisite from '../../_partials/_idp-prerequisite.md'
-import NoDomainIdpChoice from '../../_partials/_no-domain-idp-choice.md'
-import WhyNoIdp from '../../_partials/_why-no-idp.md'
-import SingleNamespaceDeployment from '../../_partials/_single-namespace-deployment.md'
-import NoDomainInfo from '../../_partials/_no-domain-info.md'
-import HelmUpgradeNote from '../../_partials/_helm-upgrade-note.md'
-import KubefwdTip from '../../_partials/_kubefwd-tip.md'
-import PortForwardServices from '../../_partials/_port-forward-services.md'
+import IdpPrerequisite from '../../\_partials/\_idp-prerequisite.md'
+import NoDomainIdpChoice from '../../\_partials/\_no-domain-idp-choice.md'
+import WhyNoIdp from '../../\_partials/\_why-no-idp.md'
+import SingleNamespaceDeployment from '../../\_partials/\_single-namespace-deployment.md'
+import NoDomainInfo from '../../\_partials/\_no-domain-info.md'
+import HelmUpgradeNote from '../../\_partials/\_helm-upgrade-note.md'
+import KubefwdTip from '../../\_partials/\_kubefwd-tip.md'
+import PortForwardServices from '../../\_partials/\_port-forward-services.md'
 
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing AWS Kubernetes EKS cluster. It also includes instructions for setting up optional DNS configurations and other optional AWS-managed services, such as OpenSearch and PostgreSQL.
 
@@ -221,6 +221,7 @@ Start by creating a `values.yml` file to store the configuration for your enviro
 
 :::important Database initialization prerequisite
 If you are using an external Aurora PostgreSQL database, you must create the individual component databases (Identity, Web Modeler) before installing the Helm chart. This initialization step is covered in the infrastructure setup guides:
+
 - **Terraform**: See [Configure the database and associated access](./terraform-setup.md#configure-the-database-and-associated-access) in the Terraform setup guide.
 - **eksctl**: See [Create the databases](./eksctl.md#create-the-databases) in the eksctl guide.
 
@@ -394,6 +395,7 @@ If you plan to enable Web Modeler, create the SMTP secret required for email not
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/aws-cognito/aws/kubernetes/eks-single-region/procedure/create-webmodeler-secret.sh
 ```
+
 :::
 
 ### 3. Install Camunda 8 using Helm
@@ -519,7 +521,7 @@ Identity and the Orchestration cluster must be port-forwarded to be able to conn
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --namespace "$CAMUNDA_NAMESPACE"
 # If using Keycloak Operator:
-kubectl port-forward "services/keycloak-service" 18080:8080 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/keycloak-service" 18080:18080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 <KubefwdTip />
