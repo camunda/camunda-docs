@@ -20,7 +20,6 @@ Element templates can depend on:
 To make a template available for use, complete two key steps:
 
 1. **Provision dependencies at runtime**: Make dependencies available in the clusters that need them.
-
    - For job workers, ensure the runtime is started and connected to the cluster (see [hosting custom connectors](/components/connectors/custom-built-connectors/host-custom-connector.md)).
    - Secrets must be configured beforehand.
    - Other dependency types (e.g., Camunda forms, RPA scripts, DMN decisions) need to be deployed to the cluster.

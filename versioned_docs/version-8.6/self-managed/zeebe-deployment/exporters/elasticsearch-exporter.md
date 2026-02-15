@@ -253,7 +253,6 @@ signed using trusted root certificate authorities.
 
 1.  First, create a new custom trust store which contains the same data as the default one, using PKCS12 format. To do so, find the
     location of the default `cacerts` trust store:
-
     - On Linux systems, find it at `$JAVA_HOME/lib/security/cacerts`.
     - For macOS, find it under `$(/usr/libexec/java_home)/jre/lib/security/cacerts`.
 
@@ -285,7 +284,6 @@ signed using trusted root certificate authorities.
     ```
 
     Then, specify the following properties when running the application:
-
     - `javax.net.ssl.trustStore`: must be set to the path of your custom trust store.
     - `javax.net.ssl.trustStorePassword`: set to your trust store password.
 
