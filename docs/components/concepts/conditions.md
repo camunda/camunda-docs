@@ -53,9 +53,9 @@ Only `create` and `update` are supported in Camunda 8. If a model uses `delete` 
 
 Process-level conditional start events can be evaluated on demand via APIs. The engine evaluates their conditions against a provided set of variables and starts matching process instances.
 
-- Orchestration Cluster REST API. Use the Evaluate root-level conditional start events endpoint (`POST /conditionals/evaluation`) to evaluate all matching conditional start events for the provided variables and start any resulting process instances. See [Evaluate root-level conditional start events](../apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals.api.mdx).
+- Orchestration Cluster REST API. Use the Evaluate root-level conditional start events endpoint (`POST /conditionals/evaluation`) to evaluate all matching conditional start events for the provided variables and start any resulting process instances. See [Evaluate root-level conditional start events](../../apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals.api.mdx).
 
-- Gateway gRPC API. Use the `EvaluateConditional` RPC on the gateway service. See the `EvaluateConditional` RPC in the [gateway service](../apis-tools/zeebe-api/gateway-service.md#evaluateconditional-rpc).
+- Gateway gRPC API. Use the `EvaluateConditional` RPC on the gateway service. See the `EvaluateConditional` RPC in the [gateway service](../../apis-tools/zeebe-api/gateway-service.md#evaluateconditional-rpc).
 
 - Clients and SDKs. Camunda client libraries (for example, Java and Python) provide convenience methods that call these APIs.
 

@@ -35,7 +35,7 @@ A conditional start event starts a process instance or an event subprocess when 
 - Root conditional start events start a new process instance.
 - Event subprocess conditional start events start an event subprocess within an active process instance.
 
-Event subprocess conditional start events can be interrupting or non-interrupting. See [interrupting vs. non-interrupting events](#interrupting-vs-non-interrupting-events).
+Event subprocess conditional start events can be interrupting or non-interrupting. See [Interrupting vs. non-interrupting events](#interrupting-vs-non-interrupting-events).
 
 You might use conditional start events to:
 
@@ -62,7 +62,7 @@ A conditional boundary event is attached to an activity and monitors data while 
 
 When the activity is entered, the engine evaluates the boundary event’s condition and continues to monitor relevant variable changes.
 
-Conditional boundary events can be interrupting or non-interrupting. See [interrupting vs. non-interrupting events](#interrupting-vs-non-interrupting-events).
+Conditional boundary events can be interrupting or non-interrupting. See [Interrupting vs. non-interrupting events](#interrupting-vs-non-interrupting-events).
 
 Typical use cases include:
 
