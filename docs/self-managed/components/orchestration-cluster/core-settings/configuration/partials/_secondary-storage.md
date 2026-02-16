@@ -6,7 +6,7 @@ import TabItem from '@theme/TabItem';
 Review [secondary storage management](/self-managed/concepts/secondary-storage/managing-secondary-storage.md) for guidance on best practices, ensuring data integrity and performance optimization.
 
 :::warning
-When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, their index prefixes must be different, one prefix must not be the beginning of the other (for example, avoid `custom` and `custom-zeebe` together because `custom*` matches both), they must not use the reserved Orchestration index names `operate`, `tasklist`, or `camunda`, and Orchestration Cluster indices must not use the reserved `zeebe-record` prefix, which is the default for Elasticsearch/OpenSearch Exporter indices.
+When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, they must use different index prefixes. One prefix must not be the beginning of the other (for example, avoid `custom` and `custom-zeebe` together because `custom*` matches both). Do not use `operate`, `tasklist`, or `camunda` as the full exporter prefix, and do not use `zeebe-record` as the Orchestration Cluster index prefix, as `zeebe-record` is the default prefix for Elasticsearch/OpenSearch Exporter indices.
 
 The Orchestration Cluster prefix is configured via
 `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
