@@ -231,13 +231,13 @@ Instructions define the actions and assertions to be performed in a test case. E
 
 An instruction to assert the evaluation of a decision.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -302,13 +302,13 @@ Example:
 
 An instruction to assert the state of an element instance.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -366,13 +366,13 @@ Example:
 
 An instruction to assert the state of multiple element instances.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -425,13 +425,13 @@ Example:
 
 An instruction to assert the state of a process instance.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -479,13 +479,13 @@ Example:
 
 An instruction to assert the state of a process instance message subscription.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -536,13 +536,13 @@ Example:
 
 An instruction to assert the state of a user task.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -634,13 +634,13 @@ Example:
 
 An instruction to assert the variables of a process instance.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -698,13 +698,13 @@ Example:
 
 An instruction to broadcast a signal.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -746,13 +746,13 @@ Example:
 
 An instruction to complete a job.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -802,13 +802,13 @@ Example:
 
 An instruction to complete a job of an ad-hoc sub-process.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -858,21 +858,24 @@ An instruction to complete a job of an ad-hoc sub-process.
 
 An instruction to activate an element in an ad-hoc sub-process.
 
-<table style="table-layout: fixed; width: 100%;">
+<table style={{width: '90%'}}>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 45%;">Description</th>
-    <th style="width: 30%;">Type</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
   </tr>
   <tr>
     <td>elementId</td>
     <td>The ID of the element to activate.</td>
-    <td>string (required)</td>
+    <td>string</td>
+    <td>Yes</td>
   </tr>
   <tr>
     <td>variables</td>
     <td>The variables to set when activating the element.</td>
-    <td>object (optional)</td>
+    <td>object</td>
+    <td>No</td>
   </tr>
 </tbody></table>
 
@@ -903,13 +906,13 @@ Example:
 
 An instruction to complete a job of a user task listener.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -952,41 +955,48 @@ An instruction to complete a job of a user task listener.
 
 The corrections to apply to a user task.
 
-<table style="table-layout: fixed; width: 100%;">
+<table style={{width: '90%'}}>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 45%;">Description</th>
-    <th style="width: 30%;">Type</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
   </tr>
   <tr>
     <td>assignee</td>
     <td>The assignee of the task.</td>
-    <td>string (optional)</td>
+    <td>string</td>
+    <td>No</td>
   </tr>
   <tr>
     <td>dueDate</td>
     <td>The due date of the task.</td>
-    <td>string (optional)</td>
+    <td>string</td>
+    <td>No</td>
   </tr>
   <tr>
     <td>followUpDate</td>
     <td>The follow up date of the task.</td>
-    <td>string (optional)</td>
+    <td>string</td>
+    <td>No</td>
   </tr>
   <tr>
     <td>candidateUsers</td>
     <td>The candidate users of the task.</td>
-    <td>array of string (optional)</td>
+    <td>array of string</td>
+    <td>No</td>
   </tr>
   <tr>
     <td>candidateGroups</td>
     <td>The candidate groups of the task.</td>
-    <td>array of string (optional)</td>
+    <td>array of string</td>
+    <td>No</td>
   </tr>
   <tr>
     <td>priority</td>
     <td>The priority of the task.</td>
-    <td>integer (optional)</td>
+    <td>integer</td>
+    <td>No</td>
   </tr>
 </tbody></table>
 
@@ -1009,13 +1019,13 @@ Example:
 
 An instruction to complete a user task.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1066,13 +1076,13 @@ Example:
 
 An instruction to correlate a message.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1122,13 +1132,13 @@ Example:
 
 An instruction to create a new process instance.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1171,16 +1181,18 @@ An instruction to create a new process instance.
 
 An instruction to execute when starting a process instance.
 
-<table style="table-layout: fixed; width: 100%;">
+<table style={{width: '90%'}}>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 45%;">Description</th>
-    <th style="width: 30%;">Type</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
   </tr>
   <tr>
     <td>elementId</td>
     <td>The ID of the element to start the process instance at.</td>
-    <td>string (required)</td>
+    <td>string</td>
+    <td>Yes</td>
   </tr>
 </tbody></table>
 
@@ -1188,21 +1200,24 @@ An instruction to execute when starting a process instance.
 
 An instruction to affect the runtime behavior of a process instance.
 
-<table style="table-layout: fixed; width: 100%;">
+<table style={{width: '90%'}}>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 45%;">Description</th>
-    <th style="width: 30%;">Type</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
   </tr>
   <tr>
     <td>type</td>
     <td>The type of the runtime instruction. Currently supports "TERMINATE_PROCESS_INSTANCE".</td>
-    <td>string (required)</td>
+    <td>string</td>
+    <td>Yes</td>
   </tr>
   <tr>
     <td>afterElementId</td>
     <td>The ID of the element after which to terminate the process instance. Required when type is "TERMINATE_PROCESS_INSTANCE".</td>
-    <td>string (required for TERMINATE_PROCESS_INSTANCE)</td>
+    <td>string</td>
+    <td>Yes</td>
   </tr>
 </tbody></table>
 
@@ -1226,13 +1241,13 @@ Example:
 
 An instruction to evaluate conditional start events.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1266,13 +1281,13 @@ Example:
 
 An instruction to evaluate a DMN decision.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1316,13 +1331,13 @@ Example:
 
 An instruction to increase the time.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1353,13 +1368,13 @@ Example:
 
 An instruction to mock a child process.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1401,13 +1416,13 @@ Example:
 
 An instruction to mock a DMN decision.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1448,13 +1463,13 @@ Example:
 
 An instruction to mock a job worker who completes jobs.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1503,13 +1518,13 @@ Example:
 
 An instruction to mock a job worker who throws BPMN errors.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1563,13 +1578,13 @@ Example:
 
 An instruction to publish a message.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1633,13 +1648,13 @@ Example:
 
 An instruction to resolve an incident.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1672,13 +1687,13 @@ Example:
 
 An instruction to set the time.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1709,13 +1724,13 @@ Example:
 
 An instruction to throw a BPMN error from a job.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1771,13 +1786,13 @@ Example:
 
 An instruction to create or update process instance variables.
 
-<table style="table-layout: fixed; width: 100%;">
+<table>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 35%;">Description</th>
-    <th style="width: 20%;">Type</th>
-    <th style="width: 10%;">Required</th>
-    <th style="width: 10%;">Default</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
   </tr>
   <tr>
     <td>type</td>
@@ -1832,11 +1847,11 @@ Selectors are used to identify specific resources in your process tests. Each se
 
 A selector to identify a decision definition.
 
-<table style="table-layout: fixed; width: 100%;">
+<table style={{width: '80%', display: 'table'}}>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 45%;">Description</th>
-    <th style="width: 30%;">Type</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
   </tr>
   <tr>
     <td>decisionDefinitionId</td>
@@ -1849,11 +1864,11 @@ A selector to identify a decision definition.
 
 A selector to identify a decision. The selector must contain at least one of the following properties:
 
-<table style="table-layout: fixed; width: 100%;">
+<table style={{width: '80%', display: 'table'}}>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 45%;">Description</th>
-    <th style="width: 30%;">Type</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
   </tr>
   <tr>
     <td>decisionDefinitionId</td>
@@ -1871,11 +1886,11 @@ A selector to identify a decision. The selector must contain at least one of the
 
 A selector to identify a BPMN element. The selector must contain at least one of the following properties:
 
-<table style="table-layout: fixed; width: 100%;">
+<table style={{width: '80%', display: 'table'}}>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 45%;">Description</th>
-    <th style="width: 30%;">Type</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
   </tr>
   <tr>
     <td>elementId</td>
@@ -1893,11 +1908,11 @@ A selector to identify a BPMN element. The selector must contain at least one of
 
 A selector to identify an incident. The selector must contain at least one of the following properties:
 
-<table style="table-layout: fixed; width: 100%;">
+<table style={{width: '80%', display: 'table'}}>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 45%;">Description</th>
-    <th style="width: 30%;">Type</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
   </tr>
   <tr>
     <td>elementId</td>
@@ -1915,11 +1930,11 @@ A selector to identify an incident. The selector must contain at least one of th
 
 A selector to identify a job. The selector must contain at least one of the following properties:
 
-<table style="table-layout: fixed; width: 100%;">
+<table style={{width: '80%', display: 'table'}}>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 45%;">Description</th>
-    <th style="width: 30%;">Type</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
   </tr>
   <tr>
     <td>jobType</td>
@@ -1942,11 +1957,11 @@ A selector to identify a job. The selector must contain at least one of the foll
 
 A selector to identify a message.
 
-<table style="table-layout: fixed; width: 100%;">
+<table style={{width: '80%', display: 'table'}}>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 45%;">Description</th>
-    <th style="width: 30%;">Type</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
   </tr>
   <tr>
     <td>messageName</td>
@@ -1964,11 +1979,11 @@ A selector to identify a message.
 
 A selector to identify a process definition.
 
-<table style="table-layout: fixed; width: 100%;">
+<table style={{width: '80%', display: 'table'}}>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 45%;">Description</th>
-    <th style="width: 30%;">Type</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
   </tr>
   <tr>
     <td>processDefinitionId</td>
@@ -1981,11 +1996,11 @@ A selector to identify a process definition.
 
 A selector to identify a process instance.
 
-<table style="table-layout: fixed; width: 100%;">
+<table style={{width: '80%', display: 'table'}}>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 45%;">Description</th>
-    <th style="width: 30%;">Type</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
   </tr>
   <tr>
     <td>processDefinitionId</td>
@@ -1998,11 +2013,11 @@ A selector to identify a process instance.
 
 A selector to identify a user task. The selector must contain at least one of the following properties:
 
-<table style="table-layout: fixed; width: 100%;">
+<table style={{width: '80%', display: 'table'}}>
   <tbody><tr>
-    <th style="width: 25%;">Property</th>
-    <th style="width: 45%;">Description</th>
-    <th style="width: 30%;">Type</th>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
   </tr>
   <tr>
     <td>elementId</td>
