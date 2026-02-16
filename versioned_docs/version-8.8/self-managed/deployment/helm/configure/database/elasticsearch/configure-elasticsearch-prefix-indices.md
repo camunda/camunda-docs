@@ -35,7 +35,7 @@ When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices
 
 ### Common mistakes to avoid
 
-- **Do not** set the Orchestration Cluster index prefix to `zeebe-record` (the default exporter prefix `zeebe.broker.exporters.{elasticsearch\|opensearch}.args.index.prefix`).
+- **Do not** set the Orchestration Cluster index prefix to `zeebe-record` (the default exporter prefix `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix`).
 - **Do not** set the exporter prefix to `operate`, `tasklist`, or `camunda`.
 
 ### Why this matters
