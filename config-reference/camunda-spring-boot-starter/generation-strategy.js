@@ -20,11 +20,40 @@ const getMetadata = (version) => {
   }
 };
 const getAdditionalProperties = (version) => {
+  let result;
   if (version === undefined) {
-    return additionalProperties;
+    result = additionalProperties;
   } else {
-    return require(`./${version}/additional-properties.json`);
+    result = require(`./${version}/additional-properties.json`);
   }
+  // add camunda.client.worker.override properties to the metadata to ensure they are included in the docs
+  const currentProperties = getMetadata(version).properties;
+  const group = {
+    name: "camunda.client.worker.override",
+    sourceType:
+      "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
+    placeHolderName: "job-type",
+    properties: currentProperties
+      .filter(
+        (property) =>
+          property.sourceType ===
+          "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
+      )
+      .map((property) => {
+        return {
+          name: property.name.replace(
+            "camunda.client.worker.defaults.",
+            "camunda.client.worker.override.{job-type}."
+          ),
+          type: property.type,
+          description: property.description,
+          sourceType: property.sourceType,
+        };
+      }),
+  };
+  result.properties.push(group);
+  return result;
+  // end of custom handling for camunda.client.worker.override properties
 };
 const getFilename = (version) => {
   return "properties-reference.md";

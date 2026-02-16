@@ -54,13 +54,6 @@
       "sourceMethod": "getDefaults()"
     },
     {
-      "name": "camunda.client.worker.override",
-      "type": "java.util.Map",
-      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. Overrides are specified as key-value pairs, where the key is the worker's job type and the values have the same properties as `camunda.client.worker.defaults` each: `camunda.client.worker.override.<job-type>.<property-name>: <property-value>`.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientWorkerProperties",
-      "sourceMethod": "getOverride()"
-    },
-    {
       "name": "camunda.client.zeebe",
       "type": "io.camunda.spring.client.properties.common.ZeebeClientProperties",
       "description": "Properties for Zeebe client settings."
@@ -93,6 +86,7 @@
     {
       "name": "management.endpoint.jobworkers",
       "type": "io.camunda.client.spring.actuator.JobWorkerController",
+      "description": "Properties for configuring the `jobworkers` management endpoint.",
       "sourceType": "io.camunda.client.spring.actuator.JobWorkerController"
     },
     {
@@ -523,6 +517,12 @@
       "type": "java.lang.String",
       "description": "The type of jobs to work on.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
+    },
+    {
+      "name": "camunda.client.worker.override",
+      "type": "java.util.Map<java.lang.String,io.camunda.client.spring.properties.CamundaClientJobWorkerProperties>",
+      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientWorkerProperties"
     },
     {
       "name": "management.endpoint.jobworkers.access",
@@ -992,18 +992,6 @@
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.auth.username"
-      }
-    },
-    {
-      "name": "management.endpoint.jobworkers.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether to enable the jobworkers endpoint.",
-      "sourceType": "io.camunda.client.spring.actuator.JobWorkerController",
-      "defaultValue": true,
-      "deprecated": true,
-      "deprecation": {
-        "replacement": "management.endpoint.jobworkers.access",
-        "since": "3.4.0"
       }
     },
     {

@@ -119,7 +119,7 @@ Type: <code>duration</code>
 
 <td>
 
-The maximum number of concurrent HTTP connections the client can open.
+The maximum number of concurrent HTTP connections the client can open. Available since 8.8.4.
 
 Type: <code>integer</code>
 
@@ -1013,7 +1013,243 @@ Type: <code>string</code>
 
 ### `camunda.client.worker.override`
 
-Properties for overriding settings of individual job workers registered to the Camunda client. Overrides are specified as key-value pairs, where the key is the worker's job type and the values have the same properties as `camunda.client.worker.defaults` each: `camunda.client.worker.override.<job-type>.<property-name>: <property-value>`.
+Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type.
+
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th>Default value</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.auto-complete" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_AUTOCOMPLETE"/><a href="#camundaclientworkeroverridejobtypeautocomplete" id="camundaclientworkeroverridejobtypeautocomplete" class="hash-link"/>
+</td>
+
+<td>
+
+Enable or disable automatic job completion after method invocation.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.enabled" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_ENABLED"/><a href="#camundaclientworkeroverridejobtypeenabled" id="camundaclientworkeroverridejobtypeenabled" class="hash-link"/>
+</td>
+
+<td>
+
+Enable or disable the job worker.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.fetch-variables" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_FETCHVARIABLES"/><a href="#camundaclientworkeroverridejobtypefetchvariables" id="camundaclientworkeroverridejobtypefetchvariables" class="hash-link"/>
+</td>
+
+<td>
+
+List of variable names to fetch on job activation. When set in defaults, it extends the list of variables to fetch from the annotation. When set in an override, it replaces the list of variables to fetch.
+
+Type: <code>array[string]</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.force-fetch-all-variables" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_FORCEFETCHALLVARIABLES"/><a href="#camundaclientworkeroverridejobtypeforcefetchallvariables" id="camundaclientworkeroverridejobtypeforcefetchallvariables" class="hash-link"/>
+</td>
+
+<td>
+
+Sets whether all variables are fetched. Overrides `fetch-variables`.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.max-jobs-active" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_MAXJOBSACTIVE"/><a href="#camundaclientworkeroverridejobtypemaxjobsactive" id="camundaclientworkeroverridejobtypemaxjobsactive" class="hash-link"/>
+</td>
+
+<td>
+
+The maximum number of jobs exclusively activated for this worker at the same time.
+
+Type: <code>integer</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.max-retries" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_MAXRETRIES"/><a href="#camundaclientworkeroverridejobtypemaxretries" id="camundaclientworkeroverridejobtypemaxretries" class="hash-link"/>
+</td>
+
+<td>
+
+The maximum number of retries before automatic responses (complete, fail, bpmn error) for jobs are no longer attempted.
+
+Type: <code>integer</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.name" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_NAME"/><a href="#camundaclientworkeroverridejobtypename" id="camundaclientworkeroverridejobtypename" class="hash-link"/>
+</td>
+
+<td>
+
+The name of the worker owner. If set to default, it is generated as `${beanName}#${methodName}`.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.poll-interval" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_POLLINTERVAL"/><a href="#camundaclientworkeroverridejobtypepollinterval" id="camundaclientworkeroverridejobtypepollinterval" class="hash-link"/>
+</td>
+
+<td>
+
+The maximal interval between polls for new jobs.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.request-timeout" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_REQUESTTIMEOUT"/><a href="#camundaclientworkeroverridejobtyperequesttimeout" id="camundaclientworkeroverridejobtyperequesttimeout" class="hash-link"/>
+</td>
+
+<td>
+
+The request timeout for the activate job request used to poll for new jobs.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.stream-enabled" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_STREAMENABLED"/><a href="#camundaclientworkeroverridejobtypestreamenabled" id="camundaclientworkeroverridejobtypestreamenabled" class="hash-link"/>
+</td>
+
+<td>
+
+Opt-in feature flag that enables job streaming. When enabled, the job worker uses both streaming and polling to activate jobs. A long-lived stream eagerly pushes new jobs, and polling retrieves jobs created <em>before</em> any streams were opened.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.stream-timeout" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_STREAMTIMEOUT"/><a href="#camundaclientworkeroverridejobtypestreamtimeout" id="camundaclientworkeroverridejobtypestreamtimeout" class="hash-link"/>
+</td>
+
+<td>
+
+If streaming is enabled, sets the maximum lifetime for a stream. When this timeout is reached, the stream closes, and no more jobs are activated or received. If the worker is still open, a new stream opens immediately.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.tenant-ids" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_TENANTIDS"/><a href="#camundaclientworkeroverridejobtypetenantids" id="camundaclientworkeroverridejobtypetenantids" class="hash-link"/>
+</td>
+
+<td>
+
+Sets the tenants for which the job worker is registered. When set in defaults, it extends the list of tenant IDs from the annotation. When set in override, it replaces the list of tenant IDs.
+
+Type: <code>array[string]</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.timeout" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_TIMEOUT"/><a href="#camundaclientworkeroverridejobtypetimeout" id="camundaclientworkeroverridejobtypetimeout" class="hash-link"/>
+</td>
+
+<td>
+
+The time a job remains exclusively assigned to the worker.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.type" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_TYPE"/><a href="#camundaclientworkeroverridejobtypetype" id="camundaclientworkeroverridejobtypetype" class="hash-link"/>
+</td>
+
+<td>
+
+The type of jobs to work on.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Deprecated properties
 

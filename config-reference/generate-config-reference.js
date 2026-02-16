@@ -187,23 +187,25 @@ const preGenerateDocs = (config) => {
   );
   console.log(`Found ${complexProperties.length} complex properties`);
   complexProperties.forEach((property) => {
+    console.log(`Handling complex property ${JSON.stringify(property)}`);
+    const properties = config.additionalProperties.properties?.filter(
+      (p) => p.name === property.name
+    )[0];
+    if (typeof properties === "undefined") {
+      console.log(`No additional properties found for ${property.name}`);
+      return;
+    }
     config.metadata.properties.splice(
       config.metadata.properties.indexOf(property),
       1
     );
-    const properties = config.additionalProperties.filter(
-      (p) => p.name === property.name
-    )[0];
-    console.log(...properties.properties);
     config.metadata.properties.push(...properties.properties);
-    console.log(config.metadata.properties);
     config.metadata.groups.push({
-      name: properties.placeHolderName,
+      name: properties.name,
       type: properties.sourceType,
       description: property.description,
       sourceType: property.sourceType,
     });
-    console.log(config.metadata.groups);
   });
 
   config.metadata.properties.forEach((property) => {
