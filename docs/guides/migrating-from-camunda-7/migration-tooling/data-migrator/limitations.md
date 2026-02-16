@@ -7,6 +7,31 @@ description: "Data Migrator limitations."
 
 An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrator, covering general limitations as well as specific limitations related to variables and BPMN elements.
 
+## Identity
+
+The following requirements and limitations apply:
+
+- Identity migration only includes the migration of:
+  - Tenants.
+  - Supported authorizations (detailed in the [Supported entities](identity.md#supported-entities) section below).
+- Users, groups and group memberships are currently not supported for migration since they are usually retrieved from an IdP.
+- Tenant memberships not yet supported.
+  - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/982
+- Once migration has been triggered, it's strongly recommended not to create new identity data on Camunda 7. Even if migration is attempted again, the new data might not be migrated.
+- In order for authorizations to work correctly after migration, process definitions, forms, DRD and decision definitions need to have the same IDs in Camunda 8 as in Camunda 7. This should be the case if you have already migrated runtime and history data.
+
+### Supported entities
+
+### Identities
+
+| Identity type      | Migration supported |
+| ------------------ | ------------------- |
+| Users              | Retrieved from IdP. |
+| Groups             | Retrieved from IdP. |
+| Group Memberships  | Retrieved from IdP. |
+| Tenants            | Yes                 |
+| Tenant Memberships | Not yet             |
+
 ## Runtime
 
 The runtime migration has the following limitations.
