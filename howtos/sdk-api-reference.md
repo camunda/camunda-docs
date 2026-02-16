@@ -4,10 +4,10 @@ The docs include generated API reference documentation for the Camunda SDKs. Unl
 
 ## Overview
 
-| SDK | Source repo | Doc tool | Workflow |
-|---|---|---|---|
-| TypeScript | [orchestration-cluster-api-js](https://github.com/camunda/orchestration-cluster-api-js) | TypeDoc + typedoc-plugin-markdown | [sync-ts-sdk-docs.yaml](../.github/workflows/sync-ts-sdk-docs.yaml) |
-| Python | [orchestration-cluster-api-python](https://github.com/camunda/orchestration-cluster-api-python) | README splitter + Sphinx + sphinx-markdown-builder | [sync-python-sdk-docs.yaml](../.github/workflows/sync-python-sdk-docs.yaml) |
+| SDK        | Source repo                                                                                     | Doc tool                                           | Workflow                                                                    |
+| ---------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------- |
+| TypeScript | [orchestration-cluster-api-js](https://github.com/camunda/orchestration-cluster-api-js)         | TypeDoc + typedoc-plugin-markdown                  | [sync-ts-sdk-docs.yaml](../.github/workflows/sync-ts-sdk-docs.yaml)         |
+| Python     | [orchestration-cluster-api-python](https://github.com/camunda/orchestration-cluster-api-python) | README splitter + Sphinx + sphinx-markdown-builder | [sync-python-sdk-docs.yaml](../.github/workflows/sync-python-sdk-docs.yaml) |
 
 ## How it works
 
@@ -42,13 +42,13 @@ The PR branch is version-scoped (e.g. `update-ts-sdk-docs/8.8`), so a backport s
 
 ### Next version (`docs/`)
 
-| SDK | Content | Location |
-|---|---|---|
-| TypeScript | Landing page | — (uses existing `typescript-sdk.md`) |
-| TypeScript | API reference | `docs/apis-tools/typescript/api-reference/` |
-| Python | Landing page | `docs/apis-tools/python-sdk/python-sdk.md` |
-| Python | Section pages (from README) | `docs/apis-tools/python-sdk/*.md` |
-| Python | API reference | `docs/apis-tools/python-sdk/api-reference/` |
+| SDK        | Content                     | Location                                    |
+| ---------- | --------------------------- | ------------------------------------------- |
+| TypeScript | Landing page                | — (uses existing `typescript-sdk.md`)       |
+| TypeScript | API reference               | `docs/apis-tools/typescript/api-reference/` |
+| Python     | Landing page                | `docs/apis-tools/python-sdk/python-sdk.md`  |
+| Python     | Section pages (from README) | `docs/apis-tools/python-sdk/*.md`           |
+| Python     | API reference               | `docs/apis-tools/python-sdk/api-reference/` |
 
 ### Released versions (`versioned_docs/`)
 
