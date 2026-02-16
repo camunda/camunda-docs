@@ -138,7 +138,7 @@ If no scope is defined, the process instance sets the variables **globally** in 
 
 Move modifications are supported for elements inside multi-instance subprocesses. When you move an element instance from within a multi-instance subprocess, the process instance terminates only that specific element instance and activates exactly one target element in the same instance of the multi-instance subprocess.
 
-This allows you to relocate execution within a specific iteration of a multi-instance activity without affecting other instances or creating new instances of the multi-instance subprocess.
+With move modifications in multi-instance subprocesses, you can relocate execution within a specific iteration of a multi-instance activity without affecting other instances or creating new instances of the multi-instance subprocess.
 
 :::note
 While move modifications are supported for elements inside multi-instance subprocesses, add (activate) modifications are not. You cannot directly add or activate new tokens to elements inside multi-instance subprocesses. The move operation is the supported way to relocate execution within multi-instance contexts.

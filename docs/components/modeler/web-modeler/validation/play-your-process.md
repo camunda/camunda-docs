@@ -205,7 +205,7 @@ Rewinding a process instance that has modifications applied to is currently not 
   - Boundary events
   - Events attached to event-based gateways
 - **Move tokens from** modification is not possible for a subprocess itself.
-- **Add token** modifications are currently not possible for elements with multiple running scopes. However, **Move tokens** modifications are supported for elements inside multi-instance subprocesses—the move operation terminates the specific element instance and activates the target element in the same instance of the multi-instance subprocess.
+- **Add token** modifications are not currently supported for elements with multiple running scopes. However, **Move tokens** modifications are supported for elements inside multi-instance subprocesses. The move operation terminates the specific element instance and activates the target element in the same instance of the multi-instance subprocess.
 
 ## Rapid iteration
 
