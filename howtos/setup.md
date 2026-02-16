@@ -12,7 +12,9 @@ npm install
 npm run start
 ```
 
-This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
+This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server. 
+
+Note: if you are updating API documentation or a similar task that modifies a lot of files at the same time, you'll want to stop the server and restart it after regeneration because the hot reload of many file changes explodes memory usage. 
 
 ### Troubleshooting checklist
 
