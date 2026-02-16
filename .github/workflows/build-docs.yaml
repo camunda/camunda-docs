@@ -14,18 +14,17 @@ jobs:
           node-version: 24
       - name: Install Dependencies
         run: npm ci
-      - name: Cache Docusaurus
-        uses: ./.github/actions/docusaurus-cache
+      # Removed because it's causing build issues
+      # - name: Cache Docusaurus
+      #   uses: ./.github/actions/docusaurus-cache
       - name: Build
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
-
       - name: Check internal links
         uses: untitaker/hyperlink@0.2.0
         with:
           args: build/
-
       - name: Remove https redirect
         run: |
           sed -i '/SERVER_PORT/d;/SERVER_NAME/d' build/.htaccess

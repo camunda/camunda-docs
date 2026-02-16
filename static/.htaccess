@@ -182,9 +182,80 @@ RewriteRule ^docs/next/guides/automating-a-process-using-bpmn/?$ /docs/component
 # Create a user task form using Modeler
 RewriteRule ^docs/next/guides/utilizing-forms/?$ /docs/components/modeler/forms/utilizing-forms/ [R=301,L]
 
+# Self-Managed upgrade guide restructuring
+RewriteRule ^docs/self-managed/update/administrators/admin-upgrade-overview/?$ /docs/self-managed/upgrade/ [R=301,L]
+RewriteRule ^docs/self-managed/update/administrators/prepare-for-admin-upgrade/?$ /docs/self-managed/upgrade/prepare-for-upgrade/ [R=301,L]
+RewriteRule ^docs/self-managed/update/administrators/run-admin-upgrade/?$ /docs/self-managed/upgrade/ [R=301,L]
+RewriteRule ^docs/self-managed/components/components-upgrade/introduction/?$ /docs/self-managed/upgrade/components/ [R=301,L]
+RewriteRule ^docs/self-managed/components/components-upgrade/830-to-840/?$ /docs/8.7/self-managed/operational-guides/update-guide/830-to-840/ [R=301,L]
+RewriteRule ^docs/self-managed/components/components-upgrade/840-to-850/?$ /docs/8.7/self-managed/operational-guides/update-guide/840-to-850/ [R=301,L]
+RewriteRule ^docs/self-managed/components/components-upgrade/850-to-860/?$ /docs/8.7/self-managed/operational-guides/update-guide/850-to-860/ [R=301,L]
+RewriteRule ^docs/self-managed/components/components-upgrade/860-to-870/?$ /docs/8.7/self-managed/operational-guides/update-guide/860-to-870/ [R=301,L]
+RewriteRule ^docs/self-managed/components/components-upgrade/870-to-880/?$ /docs/self-managed/upgrade/components/870-to-880/ [R=301,L]
+RewriteRule ^docs/self-managed/components/components-upgrade/keycloak/keycloak-update/?$ /docs/self-managed/upgrade/components/keycloak/keycloak-compatibility/ [R=301,L]
+RewriteRule ^docs/self-managed/components/components-upgrade/elasticsearch/7-to-8/?$ /docs/self-managed/upgrade/components/database/changes-in-elasticsearch-8/ [R=301,L]
+RewriteRule ^docs/self-managed/components/optimize/migration-update/camunda-8/3.10-to-3.11_8.3/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3/ [R=301,L]
+RewriteRule ^docs/self-managed/components/optimize/migration-update/camunda-8/3.11_8.3-to-3.12_8.4/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4/ [R=301,L]
+RewriteRule ^docs/self-managed/components/optimize/migration-update/camunda-8/3.12_8.4-to-3.13_8.5/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5/ [R=301,L]
+RewriteRule ^docs/self-managed/components/optimize/migration-update/camunda-8/3.13_8.5-to-8.6/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6/ [R=301,L]
+RewriteRule ^docs/self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8/ [R=301,L]
+RewriteRule ^docs/self-managed/components/optimize/migration-update/camunda-8/3.8-to-3.9-preview-1/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1/ [R=301,L]
+RewriteRule ^docs/self-managed/components/optimize/migration-update/camunda-8/3.9-preview-1-to-3.9/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9/ [R=301,L]
+RewriteRule ^docs/self-managed/components/optimize/migration-update/camunda-8/3.9-to-3.10/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10/ [R=301,L]
+RewriteRule ^docs/self-managed/components/optimize/migration-update/camunda-8/8.6-to-8.7/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/8.6-to-8.7/ [R=301,L]
+RewriteRule ^docs/self-managed/components/optimize/migration-update/camunda-8/8.7-to-8.8/?$ /docs/self-managed/upgrade/components/optimize/changes-in-88/ [R=301,L]
+RewriteRule ^docs/self-managed/components/optimize/migration-update/camunda-8/instructions/?$ /docs/self-managed/upgrade/components/optimize/870-to-880/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/core-settings/migration/importer/?$ /docs/self-managed/upgrade/components/importer/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/upgrade/?$ /docs/self-managed/upgrade/helm/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-820-830/?$ https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-830-840/?$ https://unsupported.docs.camunda.io/8.4/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-840-850/?$ https://unsupported.docs.camunda.io/8.5/docs/self-managed/setup/upgrade/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-850-860/?$ /docs/8.6/self-managed/setup/upgrade [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-860-870/?$ /docs/8.7/self-managed/setup/upgrade [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-870-880-dual-region/?$ /docs/self-managed/upgrade/helm/870-to-880-dual-region/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/?$ /docs/self-managed/upgrade/helm/870-to-880/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/manual/upgrade/?$ /docs/self-managed/upgrade/manual/ [R=301,L]
+
+
 #---------------------------------------------------------------------------------
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
+
+# Self-Managed upgrade guide restructuring
+RewriteRule ^docs/next/self-managed/update/administrators/admin-upgrade-overview/?$ /docs/next/self-managed/upgrade/ [R=301,L]
+RewriteRule ^docs/next/self-managed/update/administrators/prepare-for-admin-upgrade/?$ /docs/next/self-managed/upgrade/prepare-for-upgrade/ [R=301,L]
+RewriteRule ^docs/next/self-managed/update/administrators/run-admin-upgrade/?$ /docs/next/self-managed/upgrade/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/components-upgrade/introduction/?$ /docs/next/self-managed/upgrade/components/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/components-upgrade/830-to-840/?$ /docs/8.7/self-managed/operational-guides/update-guide/830-to-840/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/components-upgrade/840-to-850/?$ /docs/8.7/self-managed/operational-guides/update-guide/840-to-850/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/components-upgrade/850-to-860/?$ /docs/8.7/self-managed/operational-guides/update-guide/850-to-860/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/components-upgrade/860-to-870/?$ /docs/8.7/self-managed/operational-guides/update-guide/860-to-870/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/components-upgrade/870-to-880/?$ /docs/self-managed/upgrade/components/870-to-880/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/components-upgrade/880-to-890/?$ /docs/next/self-managed/upgrade/components/880-to-890/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/components-upgrade/keycloak/keycloak-update/?$ /docs/next/self-managed/upgrade/components/keycloak/keycloak-compatibility/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/components-upgrade/elasticsearch/7-to-8/?$ /docs/next/self-managed/upgrade/components/database/changes-in-elasticsearch-8/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/optimize/migration-update/camunda-8/3.10-to-3.11_8.3/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/optimize/migration-update/camunda-8/3.11_8.3-to-3.12_8.4/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/optimize/migration-update/camunda-8/3.12_8.4-to-3.13_8.5/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/optimize/migration-update/camunda-8/3.13_8.5-to-8.6/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/optimize/migration-update/camunda-8/3.8-to-3.9-preview-1/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/optimize/migration-update/camunda-8/3.9-preview-1-to-3.9/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/optimize/migration-update/camunda-8/3.9-to-3.10/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/optimize/migration-update/camunda-8/8.6-to-8.7/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/8.6-to-8.7/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/optimize/migration-update/camunda-8/8.7-to-8.8/?$ /docs/self-managed/upgrade/components/optimize/changes-in-88/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/optimize/migration-update/camunda-8/instructions/?$ /docs/self-managed/upgrade/components/optimize/870-to-880/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/migration/importer/?$ /docs/self-managed/upgrade/components/importer/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/?$ /docs/next/self-managed/upgrade/helm/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-820-830/?$ https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-830-840/?$ https://unsupported.docs.camunda.io/8.4/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-840-850/?$ https://unsupported.docs.camunda.io/8.5/docs/self-managed/setup/upgrade/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-850-860/?$ /docs/8.6/self-managed/setup/upgrade [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-860-870/?$ /docs/8.7/self-managed/setup/upgrade [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-870-880-dual-region/?$ /docs/self-managed/upgrade/helm/870-to-880-dual-region/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/?$ /docs/self-managed/upgrade/helm/870-to-880/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-880-890/?$ /docs/next/self-managed/upgrade/helm/880-to-890/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/manual/upgrade/?$ /docs/next/self-managed/upgrade/manual/ [R=301,L]
 
 # Change ID of choose-right-model-agentic
 RewriteRule ^docs/next/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/next/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
@@ -197,8 +268,6 @@ RewriteRule ^docs/apis-tools/node-js-sdk/$ /docs/apis-tools/typescript/typescrip
 # Removed Web Modeler Task testing page
 RewriteRule ^docs/next/components/concepts/task-testing/?$ /docs/next/components/modeler/task-testing/ [R=301,L]
 RewriteRule ^docs/components/concepts/task-testing/?$ /docs/components/modeler/task-testing/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/validation/task-testing/?$ /docs/next/components/concepts/task-testing/ [R=301,L]
-RewriteRule ^docs/components/modeler/web-modeler/task-testing/?$ /docs/components/concepts/task-testing/ [R=301,L]
 
 # Removal of refactoring suggestions
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/about-modeler/ [R=301,L]
@@ -207,6 +276,11 @@ RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/refactoring-s
 
 RewriteRule ^docs/self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak/?$ /docs/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak/ [R=301,L]
 RewriteRule ^docs/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider/?$ /docs/self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider/ [R=301,L]
+
+# Move intrinsic-functions to advanced-topics (8.9)
+RewriteRule ^docs/next/components/connectors/use-connectors/intrinsic-functions/?$ /docs/next/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
+RewriteRule ^docs/components/connectors/use-connectors/intrinsic-functions/?$ /docs/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
+RewriteRule ^docs/8.8/components/connectors/use-connectors/intrinsic-functions/?$ /docs/8.8/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
 
 # Removal of 8.5 announcements/release notes
 RewriteRule ^docs/next/reference/announcements-release-notes/850/(.*)$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]

@@ -171,6 +171,7 @@ The history migration has the following limitations.
 - Avoid manipulating Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable). See [Auto-cancellation of active instances](history.md#auto-cancellation-of-active-instances) for details.
 - When migrating entities, some might be skipped due to dependencies (parent entity not migrated yet). Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration. Example:
   - Flow node instances might be skipped if their parent flow node (scope) hasn't been migrated yet.
+  - Child process instances that have been called from parent call activities will be skipped on the first migration run as their parent flow node has not been migrated yet.
 - The History Data Migrator does not support the following Camunda 8 entities or properties:
   - Sequence flow: Sequence flows cannot be highlighted in Operate.
   - User task migration metadata: Information for user tasks migrated via process instance migration is not available in Camunda 7.
@@ -223,37 +224,44 @@ The following table shows which Camunda 8 entities and properties are migrated b
 
 | Property                | Can be migrated |
 | ----------------------- | --------------- |
-| auditLogKey             | No              |
-| entityKey               | No              |
-| entityType              | No              |
-| operationType           | No              |
-| entityVersion           | No              |
+| auditLogKey             | Yes             |
+| entityKey               | Partially       |
+| entityType              | Yes             |
+| operationType           | Yes             |
+| entityVersion           | Yes             |
 | entityValueType         | No              |
 | entityOperationIntent   | No              |
 | batchOperationKey       | No              |
 | batchOperationType      | No              |
-| timestamp               | No              |
-| actorType               | No              |
-| actorId                 | No              |
-| tenantId                | No              |
-| tenantScope             | No              |
-| result                  | No              |
-| annotation              | No              |
-| category                | No              |
-| processDefinitionId     | No              |
+| timestamp               | Yes             |
+| actorType               | Yes             |
+| actorId                 | Yes             |
+| tenantId                | Yes             |
+| tenantScope             | Yes             |
+| result                  | Yes             |
+| annotation              | Yes             |
+| category                | Yes             |
+| processDefinitionId     | Yes             |
 | decisionRequirementsId  | No              |
 | decisionDefinitionId    | No              |
-| processDefinitionKey    | No              |
-| processInstanceKey      | No              |
-| elementInstanceKey      | No              |
+| processDefinitionKey    | Yes             |
+| processInstanceKey      | Yes             |
+| elementInstanceKey      | Partially       |
 | jobKey                  | No              |
-| userTaskKey             | No              |
+| userTaskKey             | Yes             |
 | decisionRequirementsKey | No              |
 | decisionDefinitionKey   | No              |
 | decisionEvaluationKey   | No              |
 | deploymentKey           | No              |
 | formKey                 | No              |
 | resourceKey             | No              |
+
+The following limitations apply:
+
+- Audit log entries are migrated only for user tasks, process definitions, process instances, variables, decisions, users, groups, and authorizations.
+- Audit log entries are not migrated for batch operations, identity links, attachments, job definitions, jobs, external tasks, metrics, operation logs, filters, comments, and properties.
+- The `entityKey` property is migrated only for entities related to user tasks, process definitions, and process instances.
+- The `elementInstanceKey` property is migrated only for entities related to user tasks.
 
 ### Batch operation
 
@@ -305,7 +313,6 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | correlationTime        | No              |
 | flowNodeId             | No              |
 | flowNodeInstanceKey    | No              |
-| historyCleanupDate     | No              |
 | messageKey             | No              |
 | messageName            | No              |
 | partitionId            | No              |
@@ -403,7 +410,6 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | tenantId               | Yes             |
 | partitionId            | Yes             |
 | rootProcessInstanceKey | Yes             |
-| historyCleanupDate     | Yes             |
 
 ### Form
 
@@ -445,7 +451,6 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | treePath               | No              |
 | tenantId               | Yes             |
 | partitionId            | No              |
-| historyCleanupDate     | No              |
 
 ### Job
 
@@ -475,7 +480,6 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | elementInstanceKey       | No              |
 | tenantId                 | No              |
 | partitionId              | No              |
-| historyCleanupDate       | No              |
 | creationTime             | No              |
 | lastUpdateTime           | No              |
 
@@ -496,7 +500,6 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | correlationKey           | No              |
 | tenantId                 | No              |
 | partitionId              | No              |
-| historyCleanupDate       | No              |
 
 ### Process definition
 
@@ -514,24 +517,24 @@ The following table shows which Camunda 8 entities and properties are migrated b
 
 ### Process instance
 
-| Property                 | Can be migrated |
-| ------------------------ | --------------- |
-| processInstanceKey       | Yes             |
-| rootProcessInstanceKey   | Yes             |
-| processDefinitionId      | Yes             |
-| processDefinitionKey     | Yes             |
-| state                    | Yes             |
-| startDate                | Yes             |
-| endDate                  | Yes             |
-| tenantId                 | Yes             |
-| parentProcessInstanceKey | Yes             |
-| parentElementInstanceKey | No              |
-| numIncidents             | No              |
-| version                  | Yes             |
-| partitionId              | Yes             |
-| treePath                 | No              |
-| historyCleanupDate       | Yes             |
-| tags                     | No              |
+| Property                 | Can be migrated     |
+| ------------------------ | ------------------- |
+| processInstanceKey       | Yes                 |
+| rootProcessInstanceKey   | Yes                 |
+| processDefinitionId      | Yes                 |
+| processDefinitionKey     | Yes                 |
+| state                    | Yes                 |
+| startDate                | Yes                 |
+| endDate                  | Yes                 |
+| tenantId                 | Yes                 |
+| parentProcessInstanceKey | Yes                 |
+| parentElementInstanceKey | No                  |
+| numIncidents             | No (`0` by default) |
+| version                  | Yes                 |
+| partitionId              | Yes                 |
+| treePath                 | No                  |
+| historyCleanupDate       | Yes                 |
+| tags                     | No                  |
 
 ### Sequence flow
 
@@ -543,7 +546,6 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | processDefinitionId  | No              |
 | tenantId             | No              |
 | partitionId          | No              |
-| historyCleanupDate   | No              |
 
 ### Usage metric
 
@@ -597,7 +599,6 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | priority                 | Yes             |
 | tags                     | No              |
 | partitionId              | Yes             |
-| historyCleanupDate       | Yes             |
 
 ### User task migration
 
@@ -628,4 +629,3 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | processDefinitionId    | Yes             |
 | tenantId               | Yes             |
 | partitionId            | Yes             |
-| historyCleanupDate     | Yes             |

@@ -13,7 +13,7 @@ Configuration examples for the Data Migrator's `configuration/application.yml`.
 camunda.client:
   mode: self-managed # Operation mode: 'self-managed' or 'cloud'
   grpc-address: http://localhost:26500 # The gRPC API endpoint
-  rest-address: http://localhost:8088 # The REST API endpoint
+  rest-address: http://localhost:8080 # The REST API endpoint
 ```
 
 ## Data Migrator
