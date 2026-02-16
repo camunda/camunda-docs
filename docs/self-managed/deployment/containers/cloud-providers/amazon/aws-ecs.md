@@ -22,7 +22,7 @@ To learn more about the resulting infrastructure, read [ECS Architecture](./abou
 - This guide is based on an experimental release, beginning with Camunda 8.9.0-alpha3. **Content and results may change before the final 8.9.0 release.**
 - Only the Orchestration Cluster and Connectors are included. Web Modeler, Optimize, and Console are out-of-scope for this guide.
 - Unlike our other guides, which usually separate infrastructure setup from the deployment of Camunda 8, this is not the case with ECS. Since the infrastructure is largely managed by AWS, deploying Camunda 8 and provisioning the required AWS resources happen in a single step.
-- Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a Zeebe broker. Autoscaling may not have effects as the brokers have to be explicitly joined into the Zeebe Cluster or when removed result in partitions or data becoming inaccessible.
+- Scaling is a manual process as it requires invoking the [cluster scaling API](../../../../components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a Zeebe broker. Autoscaling may not have effects as the brokers have to be explicitly joined into the Zeebe Cluster or when removed result in partitions or data becoming inaccessible.
 - An extra developed node-id provider is integrated into Zeebe that assigns an available node-id based on Zeebe cluster information, whereas this is typically provided statically.
 
 :::note
@@ -165,13 +165,13 @@ This process may take 20–30 minutes to complete.
 
 ## Troubleshooting
 
-For general troubleshooting assistance, consult the [operational guides troubleshooting documentation](https://docs.camunda.io/docs/next/self-managed/operational-guides/troubleshooting/).
+For general troubleshooting assistance, consult the [operational guides troubleshooting documentation](../../../../operational-guides/troubleshooting.md).
 
 ### Access tasks or management API
 
 ECS tasks are not easily accessible without workarounds, some options are the following:
 
-- EC2 / ECS debug instance / task within the same VPC to try to ping and use the [management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md)
+- EC2 / ECS debug instance / task within the same VPC to try to ping and use the [management API](../../../../components/orchestration-cluster/zeebe/operations/management-api.md)
 - AWS VPN connected to the VPC
 - Lambda functions
 - Step functions
