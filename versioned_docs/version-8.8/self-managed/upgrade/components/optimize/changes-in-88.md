@@ -5,7 +5,9 @@ title: Optimize changes in 8.8
 description: Summary of environment and compatibility changes introduced in Optimize 8.8.
 ---
 
-This page summarizes notable changes introduced in Optimize 8.8 that may affect your upgrade.
+Learn more about notable changes introduced in Optimize 8.8 that may affect your upgrade.
+
+## About
 
 If you are upgrading from Optimize 8.7, follow the steps in [Upgrade Optimize from 8.7 to 8.8](./870-to-880.md).
 
