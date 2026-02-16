@@ -289,8 +289,8 @@ Follow this workflow to deploy your first process model and verify it works end-
 Open separate terminal windows and run these commands to access the required services:
 
 ```bash
-# Terminal 1: Keycloak (for authentication)
-kubectl port-forward svc/camunda-keycloak 18080:80 -n camunda
+# Terminal 1: Keycloak Operator service (for authentication, only if using Keycloak)
+kubectl port-forward svc/keycloak-service 18080:18080 -n camunda
 
 # Terminal 2: Web Modeler (for modeling)
 kubectl port-forward svc/camunda-web-modeler-webapp 8070:80 -n camunda
@@ -337,8 +337,8 @@ kubectl get secret camunda-credentials -n camunda -o jsonpath='{.data.identity-f
 For complete access to all Camunda components, set up port-forwarding for all services:
 
 ```bash
-# Authentication
-kubectl port-forward svc/camunda-keycloak 18080:80 -n camunda
+# Authentication — only if using Keycloak (deployed via the Keycloak Operator)
+kubectl port-forward svc/keycloak-service 18080:18080 -n camunda
 kubectl port-forward svc/camunda-identity 18081:80 -n camunda
 
 # Web interfaces
@@ -388,7 +388,7 @@ sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
 After this runs, you can reach services directly, for example:
 
 - Identity: `http://$CAMUNDA_RELEASE_NAME-identity/managementidentity`
-- Keycloak: `http://$CAMUNDA_RELEASE_NAME-keycloak`
+- Keycloak: `http://keycloak-service`
 - Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
 
 You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.

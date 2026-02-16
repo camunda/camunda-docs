@@ -123,13 +123,11 @@ console:
 For a full list of options, see the [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 :::note
-Console requires the Identity component for authentication. The Camunda Helm chart installs Identity by default. If you log in to Console using port-forward, you must also port-forward the Keycloak service:
+Console requires the Identity component for authentication. The Camunda Helm chart installs Identity by default. If you log in to Console using port-forward and use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md), you must also port-forward the Keycloak service:
 
 ```
-kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80
+kubectl port-forward svc/keycloak-service 18080:18080
 ```
-
-If you're using Keycloak deployed via the Keycloak Operator (such as in the [vendor-supported infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md)), use `kubectl port-forward svc/keycloak-service 18080:8080` instead.
 
 Alternatively, configure Identity with Ingress. See the [Ingress setup guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md).
 

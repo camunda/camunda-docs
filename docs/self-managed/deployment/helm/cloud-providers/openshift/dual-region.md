@@ -481,13 +481,19 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 
 #### Export Camunda 8 services using Submariner
 
-Once Camunda is deployed across the two clusters, the next step is to expose each service to Submariner so it can be resolved by the other cluster:
+Once Camunda is deployed across the two clusters, the next step is to expose each service to Submariner so it can be resolved by the other cluster.
+
+The following script exports all services for both clusters, then waits for the Submariner Lighthouse controller to create `ServiceImport` resources and propagate `*.svc.clusterset.local` DNS records. This wait is critical: without it, Zeebe brokers may fail to discover cross-cluster peers during startup, leading to topology initialization failures.
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/export-services-submariner.sh
 ```
 
-Alternatively, you can manage each service individually using the `ServiceExport` Custom Resource Definition (CRD).
+:::note
+The DNS propagation timeout defaults to 300 seconds and can be customized via the `DNS_WAIT_TIMEOUT` environment variable.
+:::
+
+Alternatively, you can manage each service individually using the `ServiceExport` Custom Resource Definition (CRD). If you do so manually, ensure you wait for the corresponding `ServiceImport` resources to appear before proceeding.
 
 <details>
    <summary>Example of the ServiceExport manifest</summary>

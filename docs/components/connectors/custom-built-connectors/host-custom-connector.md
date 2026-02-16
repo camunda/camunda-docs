@@ -101,15 +101,11 @@ There are multiple ways to configure a Helm/Kubernetes Self-Managed cluster.
 Refer to the [official guide](/self-managed/setup/overview.md) to learn more.
 
 For the purpose of this section, imagine you installed Helm charts with `helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION`,
-and forwarded Zeebe, Operate, and Keycloak ports:
+and forwarded Zeebe and Operate ports. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md), also forward the Keycloak port:
 
 - `kubectl port-forward svc/camunda-zeebe-gateway 26500:26500`
 - `kubectl port-forward svc/camunda-zeebe-gateway 8080:8080`
-- `kubectl port-forward svc/camunda-keycloak 18080:80`
-
-:::note Keycloak Operator deployment
-If you're using Keycloak deployed via the Keycloak Operator, use `kubectl port-forward svc/keycloak-service 18080:8080` instead for the Keycloak service.
-:::
+- `kubectl port-forward svc/keycloak-service 18080:18080` _(only if using Keycloak)_
 
 Now, you need to obtain both Zeebe and connectors' Operate OAuth clients. You can do it with `kubectl get secret camunda-zeebe-identity-secret -o jsonpath="{.data.*}" | base64 --decode`
 and `kubectl get secret camunda-connectors-identity-secret -o jsonpath="{.data.*}" | base64 --decode` respectively.

@@ -44,31 +44,25 @@ kubectl port-forward svc/camunda-optimize 8083:80
 kubectl port-forward svc/camunda-connectors 8086:8080
 ```
 
-To be able to use Web Modeler, create additional port-forwardings for Web Modeler itself and Keycloak (assuming that Keycloak is installed as part of the Helm release):
+To be able to use Web Modeler, create additional port-forwardings for Web Modeler itself. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md), also port-forward the Keycloak service:
 
 ```
 kubectl port-forward svc/camunda-web-modeler-webapp 8070:80
 
 kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 
-kubectl port-forward svc/camunda-keycloak 18080:80
+# Only if using Keycloak Operator
+kubectl port-forward svc/keycloak-service 18080:18080
 ```
 
-To use Console, create additional port-forwardings for Console and Keycloak (assuming Keycloak is installed as part of the Helm release):
+To use Console, create additional port-forwardings for Console. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md), also port-forward the Keycloak service:
 
 ```
 kubectl port-forward svc/camunda-console 8087:80
 
-kubectl port-forward svc/camunda-keycloak 18080:80
+# Only if using Keycloak Operator
+kubectl port-forward svc/keycloak-service 18080:18080
 ```
-
-:::note
-The name of the Keycloak service will be truncated after 20 characters if Keycloak 16 is used, for example: `svc/long-release-name-ke`
-:::
-
-:::note Keycloak Operator deployment
-If you're using Keycloak deployed via the Keycloak Operator (such as in the [vendor-supported infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md)), use `kubectl port-forward svc/keycloak-service 18080:8080` instead.
-:::
 
 Finally, you can access each app pointing your browser at:
 
