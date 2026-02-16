@@ -1,10 +1,10 @@
 ---
 id: conditions
-title: "Conditions"
+title: Conditions
 description: "Learn how conditional events let processes react automatically to data changes."
 ---
 
-Conditional events let a process react automatically when data matches a condition, without explicitly sending a message or broadcasting a signal. Instead of waiting for an external trigger, a conditional event evaluates an expression over process variables and triggers when that expression becomes `true`.
+With conditional events, you can configure a process to react automatically when data matches a condition, without explicitly sending a message or broadcasting a signal. Instead of waiting for an external trigger, a conditional event evaluates an expression over process variables and triggers when that expression becomes `true`.
 
 Conditional events are conceptually similar to [messages](messages.md) and [signals](signals.md), but differ in how they are triggered:
 
@@ -14,52 +14,58 @@ Conditional events are conceptually similar to [messages](messages.md) and [sign
 
 For details on which BPMN event types support conditionals and how to model them, see the [conditional events modeling guide](../modeler/bpmn/conditional-events/conditional-events.md).
 
-## How conditional events work
+## Evaluation semantics
 
-Each conditional event defines a condition (a FEEL expression) that must evaluate to a boolean value (`true` or `false`). Conceptually, the engine:
+Each conditional event defines a condition (a FEEL expression) that must evaluate to a boolean value (`true` or `false`).
 
-1. Evaluates the condition when a BPMN scope starts. For example, when a process instance starts, an activity begins, or an event subprocess is created.
+The engine evaluates the condition in two situations:
 
-2. Re-evaluates the condition when relevant variables change. Variable changes can come from internal execution (such as job completion or message correlation), or from APIs that modify variables.
+1. When a BPMN scope starts. For example, when a process instance, activity, or event subprocess is created.
+2. When relevant variables change within the event’s visible scope.
 
-If the condition becomes `true` while the event is active and in scope, the event triggers and the process follows the behavior defined by the underlying BPMN event (for example, continue past an intermediate catch, start an event subprocess, or interrupt an activity).
+If the condition becomes `true` while the event is active and in scope, the event triggers and the process follows the behavior defined by the underlying BPMN event.
 
-Different BPMN event types can be configured with conditions (for example, conditional start events, intermediate conditional catch events, and conditional boundary events). The modeling guide explains the behavior and limitations of each type in more detail.
+## Variable filter semantics
 
-## Triggering conditional events
+Conditional events can define a `zeebe:conditionalFilter` to limit when the engine re-evaluates the condition.
 
-### Triggering via data changes
+A filter can restrict evaluation based on:
 
-Most conditional events are triggered implicitly as part of normal process execution:
+- Specific variable names (`variableNames`)
+- Specific variable events (`variableEvents`, such as `create` or `update`)
 
-- When a scope starts (for example, a process or activity begins), any conditional events in that scope have their conditions evaluated once.
-- When variables change in that scope, the engine checks whether any conditional events that can "see" those variables should now trigger.
+If no filter is defined, the engine evaluates the condition on any variable change within the event’s visible scope.
 
-Conceptually, this follows two rules inherited from Camunda 7:
+The `variableEvents` attribute is supported only for conditional events within a running process instance. It is not supported for process-level conditional start events, because no process instance exists yet in which variable events could occur.
 
-- Scoped evaluation. Only conditional events whose variables are visible in the scope where the change occurred are considered.
+## Migration from Camunda 7
 
-- Top-down evaluation.The engine evaluates conditional events starting from the scope where the variable changed and then into nested scopes, stopping when an interrupting event cuts off further execution in that scope.
+In Camunda 7, conditional events use the `camunda:variableName` and `camunda:variableEvents` attributes.
 
-From a user perspective, you don’t “send” anything directly to a conditional event. Instead, you design your variable updates and scopes so that the right events see the right data at the right time.
+During migration to Camunda 8, these attributes are converted to a `zeebe:conditionalFilter` extension element:
 
-### Triggering root-level conditional start events via APIs
+- `camunda:variableName` → `zeebe:conditionalFilter variableNames="..."`
+- `camunda:variableEvents` → `zeebe:conditionalFilter variableEvents="..."`
 
-Root-level conditional start events can also be triggered on demand via APIs, by evaluating conditions against a given set of variables:
+Only `create` and `update` are supported in Camunda 8. If a model uses `delete` in Camunda 7, migration maps it to the closest supported behavior.
 
-- Orchestration Cluster REST API. Use **Evaluate root level conditional start events** (`POST /conditionals/evaluation`) to evaluate all matching root-level conditional start events for the provided variables and start any resulting process instances. See [Evaluate root level conditional start events](../apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals.api.mdx).
+## Evaluate conditional start events via APIs
 
-- Use the `EvaluateConditional` RPC on the gateway service to trigger the same evaluation via gRPC. See the `EvaluateConditional` RPC in the [gateway service](../apis-tools/zeebe-api/gateway-service.md#evaluateconditional-rpc).
+Process-level conditional start events can be evaluated on demand via APIs. The engine evaluates their conditions against a provided set of variables and starts matching process instances.
 
-- Clients and SDKs. Camunda client libraries (for example, Java and Python clients) expose convenience methods that internally call these APIs to evaluate conditional start events.
+- Orchestration Cluster REST API. Use the Evaluate root-level conditional start events endpoint (`POST /conditionals/evaluation`) to evaluate all matching conditional start events for the provided variables and start any resulting process instances. See [Evaluate root-level conditional start events](../apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals.api.mdx).
 
-These APIs only apply to root-level conditional start events. Conditional events inside running process instances are always triggered via scope start and variable changes, not via a direct “evaluate this event” API.
+- Gateway gRPC API. Use the `EvaluateConditional` RPC on the gateway service. See the `EvaluateConditional` RPC in the [gateway service](../apis-tools/zeebe-api/gateway-service.md#evaluateconditional-rpc).
+
+- Clients and SDKs. Camunda client libraries (for example, Java and Python) provide convenience methods that call these APIs.
+
+These APIs apply only to process-level conditional start events. Conditional events inside running process instances are evaluated automatically when their BPMN scope starts or when relevant variables change.
 
 ## Evaluation scope and isolation
 
 Because conditional events are driven by variable visibility and BPMN scopes:
 
-- A variable change affects only conditional events in the same scope and its children which can "see" that variable.
+- A variable change affects only conditional events in the same scope and its child scopes that can see that variable.
 - Conditional events in unrelated scopes or process instances are not affected by that change.
 - When an interrupting conditional event triggers in a scope, it cancels child scopes in that branch (for example, an interrupting conditional boundary event cancels its attached activity).
 
@@ -79,17 +85,11 @@ To keep models efficient:
 - Use the modeling options (such as variable filters) to limit when an event should be re-evaluated based on which variables changed.
 - Avoid patterns that create very large numbers of conditional events in a single instance (for example, extremely large multi-instance structures with conditionals on each child).
 
-## When to use conditional events
+## Runtime and tooling integration
 
-Conditional events are useful when you want a process to react to data changes rather than explicit external triggers. Typical situations include:
+The Zeebe engine evaluates conditional events automatically according to the rules described above.
 
-- Data-driven escalation. Starting an escalation subprocess when a `priority` or `riskScore` crosses a threshold.
+Conditional events are visible in runtime tools:
 
-- State-based progression. Continuing a process when `processorAvailable` becomes `true`, rather than polling or waiting for a message.
-
-- Reactive cleanup or compensating behavior. Reacting when `applicationCanceled` becomes `true` while a review or processing step is still running.
-
-In many cases, you can model similar behavior with messages, signals, or timers. Conditional events are best suited when:
-
-- The trigger is purely internal to the process data, and
-- You want the engine to detect the right moment automatically, based on variable changes, rather than coordinating explicit sends from external systems.
+- Operate displays conditional events in process instance views and supports instance migration and modification.
+- Optimize includes conditional events in BPMN diagrams and makes them available in reports.
