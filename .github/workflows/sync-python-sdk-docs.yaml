@@ -76,23 +76,18 @@ jobs:
 
       - name: Copy docs into camunda-docs
         run: |
-          DOCS_ROOT="docs/${{ steps.resolve.outputs.docs_root }}"
+          TARGET="docs/${{ steps.resolve.outputs.docs_root }}/apis-tools/python-sdk"
 
-          # Ensure target directories exist
-          mkdir -p "$DOCS_ROOT/apis-tools/python-sdk/api-reference"
+          # Clean previous generated docs
+          rm -rf "$TARGET"
+          mkdir -p "$TARGET"
 
-          # Copy the landing page (generated from README)
-          cp python-sdk/public/markdown/python-sdk.md "$DOCS_ROOT/apis-tools/python-sdk/python-sdk.md"
+          # Copy all generated pages (landing page, README sections, api-reference/)
+          cp -R python-sdk/public/markdown/* "$TARGET/"
 
-          # Copy the postprocessed API reference markdown files
-          cp python-sdk/public/markdown/index.md "$DOCS_ROOT/apis-tools/python-sdk/api-reference/"
-          cp python-sdk/public/markdown/client.md "$DOCS_ROOT/apis-tools/python-sdk/api-reference/"
-          cp python-sdk/public/markdown/async-client.md "$DOCS_ROOT/apis-tools/python-sdk/api-reference/"
-          cp python-sdk/public/markdown/configuration.md "$DOCS_ROOT/apis-tools/python-sdk/api-reference/"
-          cp python-sdk/public/markdown/runtime.md "$DOCS_ROOT/apis-tools/python-sdk/api-reference/"
-          cp python-sdk/public/markdown/types.md "$DOCS_ROOT/apis-tools/python-sdk/api-reference/"
-
-          echo "Copied landing page + $(ls "$DOCS_ROOT"/apis-tools/python-sdk/api-reference/*.md | wc -l) API reference files → ${{ steps.resolve.outputs.docs_root }}"
+          SECTION_COUNT=$(find "$TARGET" -maxdepth 1 -name '*.md' | wc -l | tr -d ' ')
+          API_COUNT=$(find "$TARGET/api-reference" -name '*.md' 2>/dev/null | wc -l | tr -d ' ')
+          echo "Copied ${SECTION_COUNT} section pages + ${API_COUNT} API reference files → ${{ steps.resolve.outputs.docs_root }}"
 
       - name: Check for changes
         id: check_changes
