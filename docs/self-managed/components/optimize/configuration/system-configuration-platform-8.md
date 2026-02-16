@@ -80,11 +80,11 @@ There is no automatic, upgrade‑safe way to change filters without any risk of 
 
 Optimize requires at least the following record value types to populate standard reports:
 
-- `DEPLOYMENT`
 - `PROCESS`
 - `PROCESS_INSTANCE`
-- `VARIABLE`
+- `INCIDENT`
 - `USER_TASK`
+- `VARIABLE`
 
 If exporter settings or Optimize mode disable these value types, Optimize data and reports will become incomplete or fail to load.
 
