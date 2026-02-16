@@ -321,12 +321,12 @@ Once successful, your project will display a new **Sync with Bitbucket** button.
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected repository at any time.
 
 1. In your connected process application, click **Sync with _GitProvider_** button.
-2. Enter a [version number](process-applications/process-applications.md#versioning) to create a new milestone for your process application. The new milestone will be created prior to pushing your changes to the central repository.
+2. Enter a [version number](process-applications/process-applications.md#process-application-versioning) to create a new version for your process application. The new version will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
 
 In the case of a merge conflict, select between your local Web Modeler changes and the changes in the remote repository to continue.
 
-Once the pull is complete and any merge conflicts are resolved, Web Modeler will push its changes. The newly created milestone is now accessible via the **View milestone** button in the success notification.
+Once the pull is complete and any merge conflicts are resolved, Web Modeler will push its changes. The newly created version is now accessible via the **View version** button in the success notification.
 
 ## Manage existing configurations
 
