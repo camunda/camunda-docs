@@ -62,6 +62,7 @@ To conclude for using the **Application Load Balancer** (ALB) to terminate TLS i
 - Deploy the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/).
 - A [certificate set up](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) in the AWS Certificate Manager (ACM).
 - Follow the [example by AWS](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md) to configure the Ingress for the Zeebe Gateway. To summarize, add the following annotations to the Zeebe Gateway ingress:
+
   ```shell
   alb.ingress.kubernetes.io/ssl-redirect: '443'
   alb.ingress.kubernetes.io/backend-protocol-version: GRPC
@@ -69,6 +70,7 @@ To conclude for using the **Application Load Balancer** (ALB) to terminate TLS i
   alb.ingress.kubernetes.io/scheme: internet-facing
   alb.ingress.kubernetes.io/target-type: ip
   ```
+
   - This does not require the configuration of the [TLS on the ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls)
   - If the AWS Load Balancer Controller is correctly set up, it automatically pulls the correct certificate from ACM based on the host name.
 

@@ -56,14 +56,12 @@ In the **Payload** section, you can include a **request body**. Learn more about
 ### Condition to proceed
 
 1. **Correlation key (process)**: Defines the correlation key based on the process instance.
-
    - **Example**: Using a process variable named `orderId`:
      ```
      Correlation key (process): =orderId
      ```
 
 2. **Correlation key (payload)**: Extracts the correlation key from the polled data.
-
    - **Example**: With data like `{"orderId": "123"}`:
      ```
      Correlation key (payload): =body.orderId
