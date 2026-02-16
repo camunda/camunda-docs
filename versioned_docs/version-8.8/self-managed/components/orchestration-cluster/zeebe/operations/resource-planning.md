@@ -178,7 +178,7 @@ after scaling opertations.
 :::
 
 When using the `FRACTION` strategy the fraction can be configured via the
-`CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYFRACTION` setting ([0,1]), with
+`ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYFRACTION` setting ([0,1]), with
 the default being `0.1` (10% of total memory).
 
 The default value for `rocksDB.memoryLimit` will then allocate [512MB]
