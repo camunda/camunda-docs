@@ -31,6 +31,26 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 </details>
 
+## 8.9.0-alpha5
+
+| Release date  | Changelog(s)                                                                                                                                                                               |
+| :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 10 March 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha5)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha5)</li></ul> |
+
+### Helm chart
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Configuration">Configuration</span></div>
+
+#### Helm chart values templating
+
+<!-- https://github.com/camunda/product-hub/issues/3357 -->
+
+The Camunda 8 Self-Managed Helm chart now documents all values that support Go template expressions, with guidance on how `values.yaml` templating is evaluated.
+
+`podLabels`, `podAnnotations` (all components), and `global.ingress.host` now support templating via `{{ "{{" }} }}` expressions (for example, `{{ "{{" }} .Release.Name }}`), enabling dynamic configuration for multi-environment deployments and integrations like Datadog APM.
+
+<p class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</p>
+
 ## 8.9.0-alpha4
 
 | Release date     | Changelog(s)                                                                                                                                                                               |
