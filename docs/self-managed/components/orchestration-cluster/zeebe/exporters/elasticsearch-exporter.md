@@ -69,15 +69,15 @@ exporters:
 The exporter can be configured by providing `args`. The table below explains all the different
 options, and the default values for these options:
 
-| Option                | Description                                                                                                                                                   | Default                 |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| url                   | Valid URLs as a comma-separated string.                                                                                                                       | `http://localhost:9200` |
-| requestTimeoutMs      | Request timeout (in ms) for Elasticsearch client.                                                                                                             | `30000`                 |
-| index                 | Refer to [index](#index) for index configuration options, including record/value-type switches, Optimize-focused filters, and the Optimize mode flag.         |                         |
-| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                                                                                                    |                         |
-| retention             | Refer to [retention](#retention) for the retention configuration options.                                                                                     |                         |
-| authentication        | Refer to [authentication](#authentication) for the authentication configuration options.                                                                      |                         |
-| includeEnabledRecords | If `true`, all enabled record types configured under `index` are exported, ignoring Optimize mode defaults. Use mainly for migration/compatibility scenarios. | `false`                 |
+| Option                | Description                                                                                                                                                                                    | Default                 |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| url                   | Valid URLs as a comma-separated string.                                                                                                                                                        | `http://localhost:9200` |
+| requestTimeoutMs      | Request timeout (in ms) for Elasticsearch client.                                                                                                                                              | `30000`                 |
+| index                 | Refer to [index](#index) for index configuration options, including record/value-type switches, Optimize-focused filters, and the Optimize mode flag.                                          |                         |
+| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                                                                                                                                     |                         |
+| retention             | Refer to [retention](#retention) for the retention configuration options.                                                                                                                      |                         |
+| authentication        | Refer to [authentication](#authentication) for the authentication configuration options.                                                                                                       |                         |
+| includeEnabledRecords | If `true`, exports all enabled record types configured under `index`. If `optimizeModeEnabled` is `true`, Optimize mode takes precedence. Use mainly for migration or compatibility scenarios. | `false`                 |
 
 <Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' }]} >
 
@@ -187,11 +187,10 @@ exporters:
   elasticsearch:
     args:
       index:
-        bpmn-process-id:
-          inclusion:
-            - orderProcess
-          exclusion:
-            - debugProcess
+        bpmnProcessIdInclusion:
+          - orderProcess
+        bpmnProcessIdExclusion:
+          - debugProcess
 ```
 
 Processes listed under `inclusion` are candidates; `exclusion` removes any of those candidates again.

@@ -146,7 +146,7 @@ When a purge is happening, the `Exporter#purge` method is called. This method:
 
 - Deletes all data exported so far.
 - Is blocking and only returns when all data has been deleted.
-- May be retried and therefore must be idempotent
+- May be retried and therefore must be idempotent.
 
 When the purge cluster operation is executed, the following steps are taken:
 
@@ -245,7 +245,7 @@ public class CustomExporter implements Exporter {
 - All filter methods are combined with logical `AND`.
   A record is exported only if it passes `acceptType`, `acceptValue`, `acceptIntent`, and (when implemented) `acceptRecord`.
   In simple cases you can implement only the metadata methods; use `acceptRecord` when you need to inspect full record values.
- :::
+  :::
 
 ### Listen to expired messages with a custom filter
 

@@ -8,8 +8,8 @@ description: "Connection to Camunda 8."
 
 Optimize imports process, variable, incident, and user task data from the Zeebe Elasticsearch or OpenSearch exporters in the Orchestration Cluster. For exporter configuration options (including filters), see:
 
-- [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)
-- [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md)
+- [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md).
+- [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md).
 
 The settings below control how Optimize connects to and paginates this exporter data.
 
@@ -47,11 +47,13 @@ The same principle applies to variable‑name and variable‑type filters: varia
 
 The recommended patterns are:
 
-- Clusters running 8.9+ or new Optimize installations.
-  Enable exporter-side filters (variable, type, process, Optimize mode) before starting Optimize imports. Optimize will build its indices from a single, consistently filtered stream and no special action is required.
+- Clusters running 8.9+ or new Optimize installations:
+  Enable exporter-side filters (variable, type, process, Optimize mode) before starting Optimize imports. Optimize will build its indices
+  from a single, consistently filtered stream and no special action is required.
 
-- Clusters using exporters for 8.8 to 8.9 migration or other pipelines.
-  Do not change exporter-side filters during the migration window. Follow the main migration documentation and only enable filters after migration has completed, to avoid interfering with both migration and Optimize imports.
+- Clusters using exporters for 8.8 to 8.9 migration or other pipelines:
+  Do not change exporter-side filters during the migration window. Follow the main migration documentation and only enable filters after
+  migration has completed, to avoid interfering with both migration and Optimize imports.
 
 #### Changing filters on existing clusters (sequence vs position)
 
@@ -83,8 +85,6 @@ Optimize requires at least the following record value types to populate standard
 - `PROCESS_INSTANCE`
 - `VARIABLE`
 - `USER_TASK`
-- `INCIDENT`
-- `JOB`
 
 If exporter settings or Optimize mode disable these value types, Optimize data and reports will become incomplete or fail to load.
 
