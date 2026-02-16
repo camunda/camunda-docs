@@ -42,20 +42,63 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 1. Download the latest release of <C8Run/> for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
-3. Start Camunda 8 Run by running one of the following in your terminal:
+3. Start Camunda 8 Run by following the steps below, depending on your operating system.
 
-- On Mac and Linux:
-  - Run the helper script: `./start.sh`
-  - Or use the command: `./c8run start`
-- On Windows:
-  - Use the command: `.\c8run.exe start`
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
+Run the helper script:
+
+```bash
+./start.sh
+```
+
+Or use the command:
+
+```bash
+./c8run start
+```
+
+</TabItem>
+<TabItem value="windows">
+
+Use the command:
+
+```bash
+.\c8run.exe start
+```
+
+</TabItem>
+</Tabs>
 
 If startup is successful, a browser window for Operate will open automatically. Alternatively, you can access Operate at [http://localhost:8080/operate](http://localhost:8080/operate)
 
 Alternatively, you can start Camunda 8 Run using Docker:
 
-- On Mac and Linux: `./start.sh --docker`
-- On Windows: `.\c8run.exe start --docker`
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
+```bash
+./start.sh --docker
+```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe start --docker
+```
+
+</TabItem>
+</Tabs>
 
 When started with Docker, Operate will be available at [http://localhost:8081](http://localhost:8081)
 
@@ -203,12 +246,26 @@ zeebeClient
 
 To shut down (non-Docker) Camunda 8 Run and end all running processes, run the following command from the `c8run` directory:
 
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
 ```bash
 ./shutdown.sh
-
-# Windows:
-# .\c8run.exe stop
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe stop
+```
+
+</TabItem>
+</Tabs>
 
 If you started Camunda 8 Run with Docker `./start.sh --docker`, run the following command instead:
 
