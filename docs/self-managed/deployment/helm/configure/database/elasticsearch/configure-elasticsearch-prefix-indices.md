@@ -23,15 +23,15 @@ When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices
 ### Requirements
 
 1. Use unique prefixes – Do not reuse the same prefix for both index types.
-2. Avoid prefix relationships between prefixes – Neither prefix may match the other prefix’s wildcard pattern. In other words, the literal string of prefix A must not match `prefixB*`, and the literal string of prefix B must not match `prefixA*`. For example, `custom` (exporter) and `custom-zeebe` (Orchestration Cluster) are unsafe because `custom*` matches both groups, while `custom-index1` and `custom-index2` are safe because `custom-index1*` matches only `custom-index1…` indices and `custom-index2*` matches only `custom-index2…` indices.
+2. Avoid prefix relationships between prefixes – Neither prefix may match the other prefix’s wildcard pattern. In other words, the literal string of prefix A must not match `prefixB*`, and the literal string of prefix B must not match `prefixA*`. For example, `custom` (Elasticsearch/OpenSearch exporter) and `custom-zeebe` (Orchestration Cluster) are unsafe because `custom*` matches both groups, while `custom-index1` and `custom-index2` are safe because `custom-index1*` matches only `custom-index1…` indices and `custom-index2*` matches only `custom-index2…` indices.
 3. Avoid reserved names as bare prefixes – Do not use `operate`, `tasklist`, or `camunda` as the full exporter prefix. Using these names as part of a longer custom prefix (for example, `custom-camunda`) is allowed, as long as rules 1 and 2 are still satisfied.
 
 ### Configuration properties
 
-| Index type                                | Configuration property                                                                                                                                 |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Elasticsearch/OpenSearch Exporter indices | `zeebe.broker.exporters.{elasticsearch\|opensearch}.args.index.prefix` (and `ZEEBE_BROKER_EXPORTERS_{ELASTICSEARCH\|OPENSEARCH}_ARGS_INDEX_PREFIX`)    |
-| Orchestration Cluster indices             | `camunda.data.secondary-storage.{elasticsearch\|opensearch}.indexPrefix` (and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH\|OPENSEARCH}_INDEXPREFIX`) |
+| Index type                                | Configuration property                                                                                                                                  |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Elasticsearch/OpenSearch Exporter indices | `zeebe.broker.exporters.{elasticsearch\|opensearch}.args.index.prefix` (and `ZEEBE_BROKER_EXPORTERS_{ELASTICSEARCH\|OPENSEARCH}_ARGS_INDEX_PREFIX`)     |
+| Orchestration Cluster indices             | `camunda.data.secondary-storage.{elasticsearch\|opensearch}.index-prefix` (and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH\|OPENSEARCH}_INDEXPREFIX`) |
 
 ### Common mistakes to avoid
 
