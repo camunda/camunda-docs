@@ -10,7 +10,7 @@ When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices
 
 The Orchestration Cluster prefix is configured via
 `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
-(and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`).
+(or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`).
 
 For detailed requirements, configuration examples, and common mistakes, see
 [index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
