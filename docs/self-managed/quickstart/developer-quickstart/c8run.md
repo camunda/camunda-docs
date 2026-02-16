@@ -5,8 +5,6 @@ sidebar_label: "Camunda 8 Run"
 description: "A quickstart guide for developers to deploy and run Camunda 8 Self-Managed locally with Camunda 8 Run, including setup, configuration, and key components."
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
 import {C8Run} from "@site/src/components/CamundaDistributions";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
