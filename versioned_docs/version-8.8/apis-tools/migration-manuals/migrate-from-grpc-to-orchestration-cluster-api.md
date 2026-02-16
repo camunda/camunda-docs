@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 Migrate from gRPC to the Orchestration Cluster REST API.
 
-## About this guide
+## About
 
 This guide provides an overview of the process for migrating to the Orchestration Cluster REST API.
 

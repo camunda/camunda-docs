@@ -259,7 +259,7 @@ orchestration:
 
 For a minor upgrade (N → N+1), pre-run the standalone schema manager of version N+1 with a privileged user to apply new templates/mappings. Then upgrade the application with schema creation disabled.
 
-If the upgrade requires a data/application migration (see [Upgrade overview](/self-managed/update/administrators/overview.md)):
+If the upgrade requires a data/application migration (see [Upgrade overview](/versioned_docs/version-8.8/self-managed/upgrade/index.md)):
 
 1. Stop or scale down the application.
 2. Run schema manager (version N+1) with elevated privileges.

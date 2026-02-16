@@ -171,6 +171,7 @@ The history migration has the following limitations.
 - Avoid manipulating Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable). See [Auto-cancellation of active instances](history.md#auto-cancellation-of-active-instances) for details.
 - When migrating entities, some might be skipped due to dependencies (parent entity not migrated yet). Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration. Example:
   - Flow node instances might be skipped if their parent flow node (scope) hasn't been migrated yet.
+  - Child process instances that have been called from parent call activities will be skipped on the first migration run as their parent flow node has not been migrated yet.
 - The History Data Migrator does not support the following Camunda 8 entities or properties:
   - Sequence flow: Sequence flows cannot be highlighted in Operate.
   - User task migration metadata: Information for user tasks migrated via process instance migration is not available in Camunda 7.
@@ -312,7 +313,6 @@ The following limitations apply:
 | correlationTime        | No              |
 | flowNodeId             | No              |
 | flowNodeInstanceKey    | No              |
-| historyCleanupDate     | No              |
 | messageKey             | No              |
 | messageName            | No              |
 | partitionId            | No              |
@@ -410,7 +410,6 @@ The following limitations apply:
 | tenantId               | Yes             |
 | partitionId            | Yes             |
 | rootProcessInstanceKey | Yes             |
-| historyCleanupDate     | Yes             |
 
 ### Form
 
@@ -452,7 +451,6 @@ The following limitations apply:
 | treePath               | No              |
 | tenantId               | Yes             |
 | partitionId            | No              |
-| historyCleanupDate     | No              |
 
 ### Job
 
@@ -482,7 +480,6 @@ The following limitations apply:
 | elementInstanceKey       | No              |
 | tenantId                 | No              |
 | partitionId              | No              |
-| historyCleanupDate       | No              |
 | creationTime             | No              |
 | lastUpdateTime           | No              |
 
@@ -503,7 +500,6 @@ The following limitations apply:
 | correlationKey           | No              |
 | tenantId                 | No              |
 | partitionId              | No              |
-| historyCleanupDate       | No              |
 
 ### Process definition
 
@@ -521,24 +517,24 @@ The following limitations apply:
 
 ### Process instance
 
-| Property                 | Can be migrated |
-| ------------------------ | --------------- |
-| processInstanceKey       | Yes             |
-| rootProcessInstanceKey   | Yes             |
-| processDefinitionId      | Yes             |
-| processDefinitionKey     | Yes             |
-| state                    | Yes             |
-| startDate                | Yes             |
-| endDate                  | Yes             |
-| tenantId                 | Yes             |
-| parentProcessInstanceKey | Yes             |
-| parentElementInstanceKey | No              |
-| numIncidents             | No              |
-| version                  | Yes             |
-| partitionId              | Yes             |
-| treePath                 | No              |
-| historyCleanupDate       | Yes             |
-| tags                     | No              |
+| Property                 | Can be migrated     |
+| ------------------------ | ------------------- |
+| processInstanceKey       | Yes                 |
+| rootProcessInstanceKey   | Yes                 |
+| processDefinitionId      | Yes                 |
+| processDefinitionKey     | Yes                 |
+| state                    | Yes                 |
+| startDate                | Yes                 |
+| endDate                  | Yes                 |
+| tenantId                 | Yes                 |
+| parentProcessInstanceKey | Yes                 |
+| parentElementInstanceKey | No                  |
+| numIncidents             | No (`0` by default) |
+| version                  | Yes                 |
+| partitionId              | Yes                 |
+| treePath                 | No                  |
+| historyCleanupDate       | Yes                 |
+| tags                     | No                  |
 
 ### Sequence flow
 
@@ -550,7 +546,6 @@ The following limitations apply:
 | processDefinitionId  | No              |
 | tenantId             | No              |
 | partitionId          | No              |
-| historyCleanupDate   | No              |
 
 ### Usage metric
 
@@ -604,7 +599,6 @@ The following limitations apply:
 | priority                 | Yes             |
 | tags                     | No              |
 | partitionId              | Yes             |
-| historyCleanupDate       | Yes             |
 
 ### User task migration
 
@@ -635,4 +629,3 @@ The following limitations apply:
 | processDefinitionId    | Yes             |
 | tenantId               | Yes             |
 | partitionId            | Yes             |
-| historyCleanupDate     | Yes             |

@@ -17,6 +17,8 @@ import CamundaUserTaskSelectionImg from '../tasklist-api-rest/assets/img/camunda
 
 Camunda 8.7 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Camunda user task ([formerly named Zeebe user task](/reference/announcements-release-notes/870/870-release-notes.md#zeebe-user-tasks-modeling-migration-support-saasself-managedmodeler)).
 
+## About
+
 Camunda user tasks have several benefits compared to Job worked-based user tasks, including:
 
 - Running directly on the automation engine for high performance.

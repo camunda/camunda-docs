@@ -685,10 +685,10 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 
 **Solutions:**
 
-- Verify Keycloak is accessible: `kubectl port-forward svc/keycloak-service 18080:8080 -n $CAMUNDA_NAMESPACE`
+- Verify Keycloak is accessible: `kubectl port-forward svc/keycloak-service 18080:18080 -n $CAMUNDA_NAMESPACE`
 
   :::note
-  This uses `keycloak-service` (the service name created by the Keycloak Operator) and port `8080` (Keycloak's internal port). This differs from Helm chart deployments which use `camunda-keycloak` service name and port `80`.
+  This uses `keycloak-service` (the service name created by the Keycloak Operator) and port `18080` (configured via `httpPort` in the Keycloak CR for local deployments). This differs from Helm chart deployments which use `camunda-keycloak` service name and port `80`.
   :::
 
 - Check client configurations in Keycloak admin console
