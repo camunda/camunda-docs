@@ -39,7 +39,7 @@ Backend selection and sizing should be based on benchmarking and realistic workl
 ### Elasticsearch/OpenSearch: shards and replicas
 
 :::warning
-When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices (secondary storage) share the same Elasticsearch/OpenSearch cluster, their index prefixes must be distinct and non‑overlapping, and must not use reserved Orchestration index names (for example `operate`, `tasklist`, or `camunda`).
+When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, their index prefixes must be different, one prefix must not be the beginning of the other (for example, avoid `custom` and `custom-zeebe` together because `custom*` matches both), and they must not use the reserved Orchestration index names `operate`, `tasklist`, or `camunda`.
 
 For detailed requirements, configuration examples, and common mistakes, see
 [Index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).

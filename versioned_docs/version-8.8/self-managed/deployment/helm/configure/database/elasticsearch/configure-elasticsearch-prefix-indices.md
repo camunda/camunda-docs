@@ -28,14 +28,14 @@ When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices
 
 ### Configuration properties
 
-| Index type                                | Configuration property                                                                                                                                 |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Elasticsearch/OpenSearch Exporter indices | `zeebe.broker.exporters.{elasticsearch\|opensearch}.args.index.prefix` (and `ZEEBE_BROKER_EXPORTERS_{ELASTICSEARCH\|OPENSEARCH}_ARGS_INDEX_PREFIX`)    |
-| Orchestration Cluster indices             | `camunda.data.secondary-storage.{elasticsearch\|opensearch}.indexPrefix` (and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH\|OPENSEARCH}_INDEXPREFIX`) |
+| Index type                                | Configuration property                         |
+| ----------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Elasticsearch/OpenSearch Exporter indices | `zeebe.broker.exporters.{elasticsearch         | opensearch}.args.index.prefix`(and`ZEEBE*BROKER_EXPORTERS*{ELASTICSEARCH\|OPENSEARCH}\_ARGS_INDEX_PREFIX`) |
+| Orchestration Cluster indices             | `camunda.data.secondary-storage.{elasticsearch | opensearch}.indexPrefix`(and`CAMUNDA*DATA_SECONDARYSTORAGE*{ELASTICSEARCH\|OPENSEARCH}\_INDEXPREFIX`)      |
 
 ### Common mistakes to avoid
 
-- **Do not** set the Orchestration Cluster index prefix to `zeebe-record` (the default exporter prefix `zeebe.broker.exporters.{elasticsearch\|opensearch}.args.index.prefix`).
+- **Do not** set the Orchestration Cluster index prefix to `zeebe-record` (the default exporter prefix `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix`).
 - **Do not** set the exporter prefix to `operate`, `tasklist`, or `camunda`.
 
 ### Why this matters

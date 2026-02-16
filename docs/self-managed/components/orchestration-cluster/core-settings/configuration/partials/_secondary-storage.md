@@ -5,6 +5,17 @@ import TabItem from '@theme/TabItem';
 
 Review [secondary storage management](/self-managed/concepts/secondary-storage/managing-secondary-storage.md) for guidance on best practices, ensuring data integrity and performance optimization.
 
+:::warning
+When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, their index prefixes must be different, one prefix must not be the beginning of the other (for example, avoid `custom` and `custom-zeebe` together because `custom*` matches both), and they must not use the reserved Orchestration index names `operate`, `tasklist`, or `camunda`.
+
+The Orchestration Cluster prefix is configured via
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
+(and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`).
+
+For detailed requirements, configuration examples, and common mistakes, see
+[index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
+:::
+
 <Tabs>
   <TabItem value="application.yaml" label="Application properties">
 
@@ -77,17 +88,6 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage/m
 | `camunda.data.secondary-storage.elasticsearch.backup.repository-name`                    | <p>Set the Elasticsearch snapshot repository name.</p><p><strong>Note:</strong> This setting applies to backups of secondary storage.</p>                                                                                                                                                                                                                             | `''`                                 |
 | `camunda.data.secondary-storage.elasticsearch.backup.snapshot-timeout`                   | <p>A backup of history data consists of multiple Elasticsearch snapshots.</p><p>The `snapshotTimeout` controls the maximum time to wait for a snapshot operation to complete during backup creation. When set to 0, the system will wait indefinitely for snapshots to finish.</p><p><strong>Note:</strong> This setting applies to backups of secondary storage.</p> | `0`                                  |
 | `camunda.data.secondary-storage.elasticsearch.backup.incomplete-check-timeout`           | <p>Defines the timeout period for determining whether an incomplete backup should be considered as failed or still in progress.</p><p>This property helps distinguish between backups that are actively running versus those that may have stalled or failed silently.</p><p><strong>Note:</strong> This setting applies to backups of secondary storage.</p>         | `5m`                                 |
-
-:::warning
-When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, their index prefixes must be distinct, non‑overlapping, and must not use reserved Orchestration index names (for example `operate`, `tasklist`, or `camunda`).
-
-The Orchestration Cluster prefix is configured via
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
-(and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`).
-
-For detailed requirements, configuration examples, and common mistakes, see
-[index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
-:::
 
 ### `camunda.data.secondary-storage.opensearch`
 
