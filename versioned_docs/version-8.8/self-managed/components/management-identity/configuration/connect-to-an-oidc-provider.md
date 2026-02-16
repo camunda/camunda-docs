@@ -32,6 +32,7 @@ If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authenticati
   - Client secrets
   - Audience
 - A [claim name and value](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#oidc-configuration) to use for initial access.
+- Your OIDC provider must issue JWT access tokens that contain an `aud` (audience) claim matching the configured audience. Camunda validates this claim for M2M/auth flows, so providers that do not emit JWT access tokens with an `aud` claim are not supported. See [known limitations](#oidc-provider-known-limitations) for providers that do not meet this requirement.
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific
@@ -259,3 +260,17 @@ When using [Management Identity](/self-managed/components/management-identity/ov
 | User profile management                                  | Fetches user details from the UserInfo endpoint after authentication to personalize the user experience.                                                                                                                                                                                                                             | <img src={CrossImg} class="table-tick" alt="Unavailable" width="15px"/> |
 
 To request a missing feature, please [contact us](/reference/contact.md).
+
+## OIDC provider known limitations
+
+Audience validation in Camunda relies on the `aud` (audience) claim in JWT access tokens, and this claim must be present for token validation to succeed (see the `aud` claim definition in [RFC 7519, JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3)). However, some OIDC providers do not include it in all token types — particularly in machine-to-machine (M2M) access tokens issued via the OAuth2 Client Credentials flow.
+
+### AWS Cognito
+
+AWS Cognito does not include the `aud` claim in M2M access tokens obtained via the Client Credentials flow. Instead, Cognito uses the `client_id` claim. This causes Camunda to reject the token with the error `Token audiences are [], expected at least one of [...]`, resulting in `UNAUTHENTICATED` errors for Connectors and any other M2M client authentication.
+
+Cognito Lambda triggers (such as pre-token generation) cannot modify M2M access tokens to add the `aud` claim.
+
+If you use another OIDC provider that does not include the `aud` claim in access tokens, you will encounter the same limitation. Verify that your provider includes the `aud` claim in both user and M2M access tokens before configuring Camunda.
+
+For more details, see [camunda/camunda#44650](https://github.com/camunda/camunda/issues/44650).
