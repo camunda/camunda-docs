@@ -40,7 +40,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 1. Download the latest release of <C8Run/> for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
-3. Start Camunda 8 Run by running the command:
+3. Start Camunda 8 Run by following the steps below, depending on your operating system.
 
 <Tabs groupId="os" defaultValue="maclinux" values={
 [
