@@ -19,7 +19,7 @@ You can customize the [Elasticsearch/OpenSearch connection settings](./configura
 
 ## Camunda 8 specific configuration
 
-For Camunda 8, Optimize imports process data from Zeebe records exported by the [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/) or [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter/) from the same cluster that Optimize uses to store its own data.
+For Camunda 8, Optimize imports process data from Zeebe records exported by the [Elasticsearch exporter](../orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) or [OpenSearch exporter](../orchestration-cluster/zeebe/exporters/opensearch-exporter/) from the same cluster that Optimize uses to store its own data.
 For the relevant Optimize import options and version support, refer to the [Camunda 8 system configuration](./configuration/system-configuration-platform-8.md).
 
 Starting with Camunda 8.9, you can optionally reduce the amount of data exported for Optimize by configuring exporter-side filters (for example, by variable name, variable type, or BPMN process ID) in the Elasticsearch/OpenSearch exporters. Use the [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/) and [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter/) documentation for the exact configuration options, and see the [Camunda 8 system configuration](./configuration/system-configuration-platform-8.md) for their implications on Optimize imports and supported versions.
