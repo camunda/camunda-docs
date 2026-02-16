@@ -256,6 +256,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The process instance key associated with this message subscription.
+        rootProcessInstanceKey:
+          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
         elementId:
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/ElementId"
@@ -411,6 +413,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The process instance key associated with this correlated message subscription.
+        rootProcessInstanceKey:
+          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
         subscriptionKey:
           allOf:
             - $ref: "#/components/schemas/MessageSubscriptionKey"

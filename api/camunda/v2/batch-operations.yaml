@@ -448,6 +448,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: the process instance key of the processed item.
+        rootProcessInstanceKey:
+          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
         state:
           description: State of the item.
           type: string
@@ -464,6 +466,18 @@ components:
         errorMessage:
           description: the error message from the engine in case of a failed operation.
           type: string
+    DecisionInstanceDeletionBatchOperationRequest:
+      type: object
+      description: The decision instance filter that defines which decision instances should be deleted.
+      properties:
+        filter:
+          allOf:
+            - $ref: "decision-instances.yaml#/components/schemas/DecisionInstanceFilter"
+          description: The decision instance filter.
+        operationReference:
+          $ref: "keys.yaml#/components/schemas/OperationReference"
+      required:
+        - filter
     ProcessInstanceCancellationBatchOperationRequest:
       type: object
       description: The process instance filter that defines which process instances should be canceled.
@@ -598,6 +612,7 @@ components:
         - ADD_VARIABLE
         - CANCEL_PROCESS_INSTANCE
         - DELETE_DECISION_DEFINITION
+        - DELETE_DECISION_INSTANCE
         - DELETE_PROCESS_DEFINITION
         - DELETE_PROCESS_INSTANCE
         - MIGRATE_PROCESS_INSTANCE
