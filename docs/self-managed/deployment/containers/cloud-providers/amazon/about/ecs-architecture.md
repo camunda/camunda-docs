@@ -31,7 +31,9 @@ After completing [Deploy the Orchestration Cluster to Amazon ECS](../aws-ecs.md)
     - A [Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html) (NLB) to expose the gRPC endpoint of the Zeebe Gateway, for external applications to connect to.
 - [Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) to control network traffic to and from the ECS instances.
 - An [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) to route traffic between the VPC and the internet.
-- A [S3 bucket](https://aws.amazon.com/s3/) used by the Orchestration Cluster’s ECS-specific node-id provider.
+- An [S3 bucket](https://aws.amazon.com/s3/) used by the Orchestration Cluster’s ECS-specific node-id provider.
+  - Versioning is disabled, as the constant metadata changes will incur cost and have no benefit.
+- An [S3 bucket](https://aws.amazon.com/s3/) for backup purposes with versioning enabled.
 - [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) for application credentials and optional container registry credentials.
 - [AWS CloudWatch](https://aws.amazon.com/cloudwatch/) for logs.
 - [ECS Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) to connect ECS services directly with each other.

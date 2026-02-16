@@ -133,6 +133,7 @@ It was implemented as a `local exec` with an ECS task since we wanted to provide
 - [`registry-auth.tf`](https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-single-region-fargate/terraform/cluster/registry-auth.tf): The basics to create a secret via the AWS Secrets Manager for any kind of registry to access the Camunda images or bypass rate limitations.
 - [`iam.tf`](https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-single-region-fargate/terraform/cluster/iam.tf): IAM roles and policies.
 - [`secrets.tf`](https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-single-region-fargate/terraform/cluster/secrets.tf): Random passwords and storage in AWS Secrets Manager.
+- [`s3.tf`](https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-single-region-fargate/terraform/cluster/s3.tf): A bucket for backup purposes with versioning and encryption enabled. Access is handled through IAM role policies.
 
 ## Variables
 
