@@ -12,10 +12,10 @@ The Importer runs temporarily during a migration. It is not a continuously runni
 
 ## When to use the Importer
 
-- **Migration from Camunda 8.7 or earlier**:  
-  Enable the Importer to migrate existing Zeebe workflow data into the 8.8 Orchestration Cluster.
-- **New 8.8 installations**:  
-  Do not configure or enable the Importer.
+| Scenario                              | Actions                                                                                         |
+| :------------------------------------ | :---------------------------------------------------------------------------------------------- |
+| Migration from Camunda 8.7 or earlier | Enable the Importer to migrate existing Zeebe workflow data into the 8.8 Orchestration Cluster. |
+| New 8.8 installations                 | Do not configure or enable the Importer.                                                        |
 
 ## Basic configuration for migration
 
