@@ -145,7 +145,9 @@ Configure the secrets using the [Console](../components/console/manage-clusters/
 </TabItem>
 
 <TabItem value="self-managed">
-Export the secrets as environment variables before starting the distribution. If you use Camunda 8 Run with Docker, add the secrets in the `connector-secrets.txt` file.
+Export the secrets as environment variables before starting the distribution.
+See [Connector secrets](/self-managed/quickstart/developer-quickstart/c8run-troubleshooting.md#connector-secrets-not-working) for details.
+
 </TabItem>
 </Tabs>
 
@@ -234,7 +236,6 @@ Instead of using **Play**, you can also test the process within the **Implement*
 <TabItem value="self-managed">
 
 1. Deploy the process model to your local Camunda 8 environment using [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
-1. Make sure **Camunda 8.8** or higher is selected (see the bottom left of the window).
 1. Open Tasklist in your browser at http://localhost:8080/tasklist.
 1. On the **Processes** tab, find the `AI Agent Chat With Tools` process and click **Start process**.
 1. In the start form, add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start process**.
