@@ -156,20 +156,49 @@ If a partition goes under quorum (for example, if two nodes in a 3-node cluster 
 
 ## Memory
 
-Memory usage is based on the Java heap size (by default [25% of the max RAM](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html#GUID-DA88B6A6-AF89-4423-95A6-BBCBD9FAE781)) and native memory usage (also by default 25% of the max RAM, so Java itself will use **up to** 50% of the maximum RAM.
+Memory usage is based on the Java heap size (by default [25% of the max RAM](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html#GUID-DA88B6A6-AF89-4423-95A6-BBCBD9FAE781)) and native memory usage
+(also by default 25% of the max RAM, so Java itself can use **up to** 50% of the maximum RAM.
 
-RocksDB will then allocate [512MB per partition](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L963) by default.
+Zeebe can use different memory allocation strategies for RocksDB, which can
+be configured via the `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYALLOCATIONSTRATEGY` setting in the broker configuration.
 
-Some memory is required for the OS page cache since Zeebe makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance.
+If set to `PARTITION` (the default option), the total memory allocated to RocksDB will be the
+configured number of partitions times the configured memory limit (via the
+`CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYALLOCATIONSTRATEGY`). If the value is set to
+`BROKER`, the total memory allocated to RocksDB will be equal to the
+configured memory limit. If set to `FRACTION` Camunda will allocate
+the RocksDB memory based on a fraction of total memory.
 
-The minimum memory usage is:
+:::note
+When using the `PARTITION` strategy, the number of partitions used in the
+calculation is the one configured and not necessarily the current number of
+partitions in the cluster. These can differ when using dynamic scaling of
+partitions. Therefore, it is recommended that when using `PARTITION`
+strtegy and dynamic scaling, to update the configured number of partitions
+after scaling opertations.
+:::
+
+When using the `FRACTION` strategy the fraction can be configured via the
+`CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYFRACTION` setting ([0,1]), with
+the default being `0.1` (10% of total memory).
+
+The default value for `rocksDB.memoryLimit` will then allocate [512MB]
+(https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#:~:text=%23%20memoryLimit) when using the `PARTITION` or
+`BROKER` strategies.
+
+Therefore, when hardconding these values the following consideretions
+should be met. Some memory is required for the OS page cache since Zeebe
+makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance.
+The cache used by the OS will depend on the amount of partition leaders on the node, and the throughput of the system. For most use cases we recommend leaving 20 to 30% of the total memory for the OS page cache, but this can be adjusted based on the specific use case and observed performance.
+
+The minimum memory usage is (when using the `PARTITION` strategy):
 
 | Component           |                   Amount |
 | ------------------- | -----------------------: |
 | Java Heap           |                      25% |
 | Java Native Memory  |                      25% |
 | RocksDB             |  512MB \* partitionCount |
-| OS Page Cache       |                        ? |
+| OS Page Cache       |                   20-30% |
 | ------------------- | ------------------------ |
 | Sum                 |    x MB + 50% of max RAM |
 | ------------------- | ------------------------ |
