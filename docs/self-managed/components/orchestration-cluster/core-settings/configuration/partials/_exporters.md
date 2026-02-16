@@ -4,7 +4,7 @@ import TabItem from '@theme/TabItem';
 ## Data - exporters
 
 :::warning
-When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, their index prefixes must be different, one prefix must not be the beginning of the other (for example, avoid `custom` and `custom-zeebe` together because `custom*` matches both), and they must not use the reserved Orchestration index names `operate`, `tasklist`, or `camunda`.
+When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, their index prefixes must be different, one prefix must not be the beginning of the other (for example, avoid `custom` and `custom-zeebe` together because `custom*` matches both), they must not use the reserved Orchestration index names `operate`, `tasklist`, or `camunda`, and Orchestration Cluster indices must not use the reserved `zeebe-record` prefix, which is the default for Elasticsearch/OpenSearch Exporter indices.
 
 The exporter prefix is configured via `camunda.data.exporters.elasticsearch.args.index-prefix` (or `CAMUNDA_DATA_EXPORTERS_{ELASTICSEARCH|OPENSEARCH}_ARGS_INDEX_PREFIX`).
 
