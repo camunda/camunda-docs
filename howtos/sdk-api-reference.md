@@ -71,3 +71,15 @@ To add a sync workflow for a new SDK:
 1. Create a workflow file in `.github/workflows/sync-<name>-sdk-docs.yaml` following the pattern of the existing workflows.
 2. Add a sidebar entry in `sidebars.js` for the new SDK's docs location.
 3. Ensure the SDK repo has a doc generation command that produces Docusaurus-compatible Markdown (with `mdx: { format: md }` frontmatter).
+
+## Testing locally 
+
+You can test the Python integration using `act`: 
+
+```bash
+act workflow_dispatch \
+  -W .github/workflows/sync-python-sdk-docs.yaml \
+  --input dry_run=true \
+  --input sdk_ref=main \
+  --bind
+```
