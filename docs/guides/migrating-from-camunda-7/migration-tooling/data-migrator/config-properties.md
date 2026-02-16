@@ -79,6 +79,7 @@ The following built-in interceptors are available and can be disabled:
 **Transformers (convert supported types):**
 
 - `io.camunda.migration.data.impl.interceptor.PrimitiveVariableTransformer`
+- `io.camunda.migration.data.impl.interceptor.StringVariableTransformer`
 - `io.camunda.migration.data.impl.interceptor.NullVariableTransformer`
 - `io.camunda.migration.data.impl.interceptor.DateVariableTransformer`
 - `io.camunda.migration.data.impl.interceptor.ObjectJsonVariableTransformer`
