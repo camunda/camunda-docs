@@ -58,6 +58,7 @@ The following requirements and limitations apply:
 
 | Entity type                   | Description          |
 | :---------------------------- | :------------------- |
+| `HISTORY_FORM_DEFINITION`     | Form definitions     |
 | `HISTORY_PROCESS_DEFINITION`  | Process definitions  |
 | `HISTORY_PROCESS_INSTANCE`    | Process instances    |
 | `HISTORY_INCIDENT`            | Process incidents    |
@@ -99,6 +100,56 @@ See [configuration for history auto-cancellation](../data-migrator/config-proper
 
 Please note that if any Camunda 7 process instances progress in their state in between multiple runs of the History Data Migrator, data consistency might be affected: for example, if a process instance is completed in Camunda 7 after the first run but before the second run, the History Data Migrator would migrate it as canceled in the first and as completed in the second run. As a result, in Operate you may see that a process instance was canceled in a Flow Node that chronologically precedes the end event in your model, where the instance will be marked as completed. To avoid such situations, ensure that Camunda 7 data remains unchanged between History Data Migrator runs.
 
+## Forms
+
+The History Data Migrator automatically migrates [Camunda Forms](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) from Camunda 7 to Camunda 8. This includes forms linked to process definitions (start forms) and user tasks.
+
+The form schema (JSON definition) is extracted from the Camunda 7 deployment resources and migrated to Camunda 8. The form structure, fields, and validation rules are preserved during migration.
+
+User tasks that reference non-existent forms will be migrated as well.
+
+### Form linking
+
+The migrator automatically detects and links forms in the following scenarios:
+
+#### Start forms
+
+When a process definition has a start form configured using `camunda:formRef` with a `camunda:formKey`, the migrator:
+
+1. Resolves the form definition based on the form key and binding (deployment, latest, or version).
+2. Links the process definition to the migrated form in Camunda 8.
+
+Example BPMN configuration that will be migrated:
+
+```xml
+<bpmn:startEvent id="StartEvent_1">
+  <bpmn:extensionElements>
+    <camunda:formData>
+      <camunda:formRef formKey="myStartForm" binding="deployment" />
+    </camunda:formData>
+  </bpmn:extensionElements>
+</bpmn:startEvent>
+```
+
+#### User task forms
+
+When a user task has a form configured using `camunda:formRef` with a `camunda:formKey`, the migrator:
+
+1. Resolves the form definition based on the form key and binding (deployment, latest, or version).
+2. Links the user task to the migrated form in Camunda 8.
+
+Example BPMN configuration that will be migrated:
+
+```xml
+<bpmn:userTask id="UserTask_1" name="Review Document">
+  <bpmn:extensionElements>
+    <camunda:formData>
+      <camunda:formRef formKey="reviewForm" binding="deployment" />
+    </camunda:formData>
+  </bpmn:extensionElements>
+</bpmn:userTask>
+```
+
 ## Atomicity
 
 The History Data Migrator uses the configured Camunda 8 datasource for both the migration mapping schema and the migrated data. This ensures single-transaction atomicity for each entity migration.
@@ -125,6 +176,7 @@ The following built-in transformers convert Camunda 7 historic entities:
 
 | Interceptor                                 | Camunda 7 entity type                    | Camunda 8 Model               |
 | ------------------------------------------- | ---------------------------------------- | ----------------------------- |
+| `FormTransformer`                           | `CamundaFormDefinitionEntity`            | `FormDbModel`                 |
 | `ProcessInstanceTransformer`                | `HistoricProcessInstance`                | `ProcessInstanceDbModel`      |
 | `ProcessDefinitionTransformer`              | `ProcessDefinition`                      | `ProcessDefinitionDbModel`    |
 | `FlowNodeTransformer`                       | `HistoricActivityInstance`               | `FlowNodeInstanceDbModel`     |
