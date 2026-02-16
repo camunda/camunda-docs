@@ -897,8 +897,7 @@ Example:
         "sampleType": "regolith"
       }
     }
-  ],
-  "completionConditionFulfilled": true
+  ]
 }
 ```
 
