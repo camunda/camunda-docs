@@ -1122,7 +1122,7 @@ Properties for overriding settings of individual job workers registered to the C
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.auto-complete" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_AUTOCOMPLETE"/><a href="#camundaclientworkeroverridejobtypeautocomplete" id="camundaclientworkeroverridejobtypeautocomplete" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.auto-complete" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_AUTOCOMPLETE"/><a href="#camundaclientworkeroverridejobtypeautocomplete" id="camundaclientworkeroverridejobtypeautocomplete" class="hash-link"/>
 </td>
 
 <td>
@@ -1138,7 +1138,7 @@ Type: <code>boolean</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.enabled" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_ENABLED"/><a href="#camundaclientworkeroverridejobtypeenabled" id="camundaclientworkeroverridejobtypeenabled" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.enabled" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_ENABLED"/><a href="#camundaclientworkeroverridejobtypeenabled" id="camundaclientworkeroverridejobtypeenabled" class="hash-link"/>
 </td>
 
 <td>
@@ -1154,7 +1154,7 @@ Type: <code>boolean</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.fetch-variables" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_FETCHVARIABLES"/><a href="#camundaclientworkeroverridejobtypefetchvariables" id="camundaclientworkeroverridejobtypefetchvariables" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.fetch-variables" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_FETCHVARIABLES"/><a href="#camundaclientworkeroverridejobtypefetchvariables" id="camundaclientworkeroverridejobtypefetchvariables" class="hash-link"/>
 </td>
 
 <td>
@@ -1170,7 +1170,7 @@ Type: <code>array[string]</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.force-fetch-all-variables" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_FORCEFETCHALLVARIABLES"/><a href="#camundaclientworkeroverridejobtypeforcefetchallvariables" id="camundaclientworkeroverridejobtypeforcefetchallvariables" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.force-fetch-all-variables" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_FORCEFETCHALLVARIABLES"/><a href="#camundaclientworkeroverridejobtypeforcefetchallvariables" id="camundaclientworkeroverridejobtypeforcefetchallvariables" class="hash-link"/>
 </td>
 
 <td>
@@ -1186,7 +1186,7 @@ Type: <code>boolean</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.max-jobs-active" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_MAXJOBSACTIVE"/><a href="#camundaclientworkeroverridejobtypemaxjobsactive" id="camundaclientworkeroverridejobtypemaxjobsactive" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.max-jobs-active" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_MAXJOBSACTIVE"/><a href="#camundaclientworkeroverridejobtypemaxjobsactive" id="camundaclientworkeroverridejobtypemaxjobsactive" class="hash-link"/>
 </td>
 
 <td>
@@ -1202,7 +1202,7 @@ Type: <code>integer</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.max-retries" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_MAXRETRIES"/><a href="#camundaclientworkeroverridejobtypemaxretries" id="camundaclientworkeroverridejobtypemaxretries" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.max-retries" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_MAXRETRIES"/><a href="#camundaclientworkeroverridejobtypemaxretries" id="camundaclientworkeroverridejobtypemaxretries" class="hash-link"/>
 </td>
 
 <td>
@@ -1218,7 +1218,7 @@ Type: <code>integer</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.name" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_NAME"/><a href="#camundaclientworkeroverridejobtypename" id="camundaclientworkeroverridejobtypename" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.name" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_NAME"/><a href="#camundaclientworkeroverridejobtypename" id="camundaclientworkeroverridejobtypename" class="hash-link"/>
 </td>
 
 <td>
@@ -1234,7 +1234,7 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.poll-interval" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_POLLINTERVAL"/><a href="#camundaclientworkeroverridejobtypepollinterval" id="camundaclientworkeroverridejobtypepollinterval" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.poll-interval" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_POLLINTERVAL"/><a href="#camundaclientworkeroverridejobtypepollinterval" id="camundaclientworkeroverridejobtypepollinterval" class="hash-link"/>
 </td>
 
 <td>
@@ -1250,7 +1250,7 @@ Type: <code>duration</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.request-timeout" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_REQUESTTIMEOUT"/><a href="#camundaclientworkeroverridejobtyperequesttimeout" id="camundaclientworkeroverridejobtyperequesttimeout" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.request-timeout" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_REQUESTTIMEOUT"/><a href="#camundaclientworkeroverridejobtyperequesttimeout" id="camundaclientworkeroverridejobtyperequesttimeout" class="hash-link"/>
 </td>
 
 <td>
@@ -1266,7 +1266,7 @@ Type: <code>duration</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.retry-backoff" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_RETRYBACKOFF"/><a href="#camundaclientworkeroverridejobtyperetrybackoff" id="camundaclientworkeroverridejobtyperetrybackoff" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.retry-backoff" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_RETRYBACKOFF"/><a href="#camundaclientworkeroverridejobtyperetrybackoff" id="camundaclientworkeroverridejobtyperetrybackoff" class="hash-link"/>
 </td>
 
 <td>
@@ -1282,7 +1282,7 @@ Type: <code>duration</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.stream-enabled" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_STREAMENABLED"/><a href="#camundaclientworkeroverridejobtypestreamenabled" id="camundaclientworkeroverridejobtypestreamenabled" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.stream-enabled" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_STREAMENABLED"/><a href="#camundaclientworkeroverridejobtypestreamenabled" id="camundaclientworkeroverridejobtypestreamenabled" class="hash-link"/>
 </td>
 
 <td>
@@ -1298,7 +1298,7 @@ Type: <code>boolean</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.stream-timeout" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_STREAMTIMEOUT"/><a href="#camundaclientworkeroverridejobtypestreamtimeout" id="camundaclientworkeroverridejobtypestreamtimeout" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.stream-timeout" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_STREAMTIMEOUT"/><a href="#camundaclientworkeroverridejobtypestreamtimeout" id="camundaclientworkeroverridejobtypestreamtimeout" class="hash-link"/>
 </td>
 
 <td>
@@ -1314,7 +1314,7 @@ Type: <code>duration</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.tenant-ids" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_TENANTIDS"/><a href="#camundaclientworkeroverridejobtypetenantids" id="camundaclientworkeroverridejobtypetenantids" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.tenant-ids" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_TENANTIDS"/><a href="#camundaclientworkeroverridejobtypetenantids" id="camundaclientworkeroverridejobtypetenantids" class="hash-link"/>
 </td>
 
 <td>
@@ -1330,7 +1330,7 @@ Type: <code>array[string]</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.timeout" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_TIMEOUT"/><a href="#camundaclientworkeroverridejobtypetimeout" id="camundaclientworkeroverridejobtypetimeout" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.timeout" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_TIMEOUT"/><a href="#camundaclientworkeroverridejobtypetimeout" id="camundaclientworkeroverridejobtypetimeout" class="hash-link"/>
 </td>
 
 <td>
@@ -1346,7 +1346,7 @@ Type: <code>duration</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.{job-type}.type" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_{JOBTYPE}_TYPE"/><a href="#camundaclientworkeroverridejobtypetype" id="camundaclientworkeroverridejobtypetype" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type&gt;.type" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE&gt;_TYPE"/><a href="#camundaclientworkeroverridejobtypetype" id="camundaclientworkeroverridejobtypetype" class="hash-link"/>
 </td>
 
 <td>

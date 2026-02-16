@@ -43,7 +43,7 @@ const getAdditionalProperties = (version) => {
         return {
           name: property.name.replace(
             "camunda.client.worker.defaults.",
-            "camunda.client.worker.override.{job-type}."
+            "camunda.client.worker.override.<job-type>."
           ),
           type: property.type,
           description: property.description,

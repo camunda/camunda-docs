@@ -226,7 +226,9 @@ const preGenerateDocs = (config) => {
       .replaceAll(/\./g, "")
       .replaceAll(/-/g, "")
       .replaceAll(/\{/g, "")
-      .replaceAll(/\}/g, "");
+      .replaceAll(/\}/g, "")
+      .replaceAll(/\</g, "")
+      .replaceAll(/\>/g, "");
     if (property.deprecation && property.deprecation.replacement) {
       property.deprecation.replacementEnv = property.deprecation.replacement
         .toUpperCase()
