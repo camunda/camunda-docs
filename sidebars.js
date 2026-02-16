@@ -1294,6 +1294,21 @@ module.exports = {
           ],
         },
         {
+          type: "category",
+          label: "C# SDK (Technical Preview)",
+          link: {
+            type: "doc",
+            id: "apis-tools/csharp-sdk/csharp-sdk",
+          },
+          items: [
+            {
+              type: "category",
+              label: "API Reference",
+              items: require("./docs/apis-tools/csharp-sdk/api-reference/sidebar"),
+            },
+          ],
+        },
+        {
           "Community clients": [
             "apis-tools/community-clients/index",
             "apis-tools/build-your-own-client",
