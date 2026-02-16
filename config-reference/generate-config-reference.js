@@ -238,7 +238,9 @@ const preGenerateDocs = (config) => {
         .replaceAll(/\./g, "")
         .replaceAll(/-/g, "")
         .replaceAll(/\{/g, "")
-        .replaceAll(/\}/g, "");
+        .replaceAll(/\}/g, "")
+        .replaceAll(/\</g, "")
+        .replaceAll(/\>/g, "");
     }
   });
 };
