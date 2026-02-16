@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 Migrate to the Camunda Java Client from the Zeebe Java Client.
 
-## About this guide
+## About
 
 This guide provides an overview of the process for migrating to the Camunda Java Client.
 

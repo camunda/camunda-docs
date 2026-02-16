@@ -53,13 +53,12 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 ## Allow non-self assignment
 
-:::info
-The `allow-non-self-assignment` flag controls the behavior of the deprecated [Tasklist API](/apis-tools/tasklist-api-rest/specifications/assign-task.api.mdx).
-It has no implication on the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/tutorial.md). Please refer to [access control](/components/concepts/access-control/authorizations.md#available-resources) to manage what operations can be performed by a given user or application.
-:::
-
 :::danger
-This disables an intentional security mechanism and should only be used in development environments with no Identity installed.
+The `allow-non-self-assignment` flag controls the behavior of the deprecated [Tasklist API](/apis-tools/tasklist-api-rest/specifications/assign-task.api.mdx) used in Tasklist V1 only.
+
+It has no effect when Tasklist runs in V2 mode and does not apply to the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/tutorial.md). In V2, use [authorization-based access control](/components/concepts/access-control/authorizations.md#available-resources) to manage which users and applications can assign or update user tasks. For an overview of Tasklist V1 versus V2 behavior, see [Tasklist API versions](/components/tasklist/api-versions.md).
+
+Enabling this flag disables an intentional security mechanism and should only be done in development environments that still rely on Tasklist V1, typically with no Identity installed. Do not enable it in production or when using Tasklist V2.
 :::
 
 To allow users to assign other users to tasks, set the configuration property `camunda.tasklist.feature-flag.allow-non-self-assignment` to `true`.
@@ -73,7 +72,7 @@ camunda:
 
 ## Tasklist UI mode configuration
 
-Starting with Camunda 8.8, Tasklist can operate in two modes: V1 (legacy) and V2 (recommended). The V2 mode uses the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and is enabled by default.
+Starting with Camunda 8.8, Tasklist can operate in two modes: V1 (legacy) and V2 (recommended). The V2 mode uses the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and is enabled by default.
 
 :::warning Deprecation notice
 Tasklist V1 mode is deprecated and will be removed in Camunda 8.10. We recommend migrating to V2 mode for all new projects and planning migration for existing applications.
@@ -97,22 +96,21 @@ camunda:
     V2ModeEnabled: false
 ```
 
-| Name                           | Description                                                                                                                     | Default value |
-| :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| camunda.tasklist.V2ModeEnabled | Enables Tasklist V2 mode using the Orchestration Cluster API. Set to `false` to use the legacy V1 mode during migration period. | true          |
+| Name                           | Description                                                                                                                          | Default value |
+| :----------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| camunda.tasklist.V2ModeEnabled | Enables Tasklist V2 mode using the Orchestration Cluster REST API. Set to `false` to use the legacy V1 mode during migration period. | true          |
 
 ### When to use V1 mode
 
-Use V1 mode only during the migration period if your application relies on features that are not available in V2:
+Use V1 mode only during the migration period if your application relies on legacy features that are not
+available in V2:
 
-- User task access restrictions
+- User task access restrictions (Tasklist V1-only feature; in V2, use authorization-based access control and task-level permissions instead)
+- Job worker-based user tasks
 - Draft variables
 - Public start forms
-- Advanced process filtering by name
-
-:::tip
-For a complete comparison of features and migration guidance, see [Tasklist API versions](/components/tasklist/api-versions.md).
-:::
+- Advanced process filtering (beyond searching by process definition ID)
+- Task context description
 
 ## Backups
 

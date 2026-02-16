@@ -103,7 +103,7 @@ Define address of the [Orchestration Cluster REST API](/apis-tools/orchestration
 ```yaml
 camunda:
   client:
-    rest-address: http://localhost:8088
+    rest-address: http://localhost:8080
 ```
 
 :::note

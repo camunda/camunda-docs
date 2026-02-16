@@ -71,7 +71,8 @@ The following requirements and limitations apply:
 
 Instances that were already completed in Camunda 7 retain their original cleanup dates:
 
-- If a `removalTime` exists in Camunda 7, it is migrated as-is.
+- If a `removalTime` exists in Camunda 7, it is migrated as-is for process and decision instances.
+  Camunda 8 uses this date for history cleanup. The child entities (for example, user tasks, variables, flow nodes) will be deleted according to the root instance's cleanup date.
 - If no `removalTime` exists and the instance is completed, no cleanup date is set.
 - Auto-cancel cleanup configuration **only applies to instances that were active or suspended** in Camunda 7.
 
@@ -86,7 +87,7 @@ When migrating history data, the Data Migrator automatically handles **active or
 
 Auto-canceled entities are assigned the migration timestamp as their end date.
 
-By default, auto-canceled entities receive a cleanup date calculated as:
+By default, auto-canceled instances receive a cleanup date calculated as:
 
 ```
 cleanup_date = end_date + 6 months
