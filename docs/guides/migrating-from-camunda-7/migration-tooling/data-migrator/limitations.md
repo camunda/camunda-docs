@@ -13,7 +13,7 @@ The following requirements and limitations apply:
 
 - Identity migration only includes the migration of:
   - Tenants.
-  - Supported authorizations (detailed in the [Supported entities](limitations.md#supported-entities) section below).
+  - Supported authorizations (detailed in the [Authorizations](identity.md#authorizations) section).
 - Users, groups and group memberships are not automatically migrated since they are usually retrieved from an IdP.
 - Tenant memberships are not yet supported.
   - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/982
