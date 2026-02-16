@@ -18,15 +18,15 @@ Identity data in Camunda includes:
 - **Identities**: Users, groups, tenants, and their related memberships
 - **Authorizations**: Permission rules that control access to resources
 
-Please also have a look at the [limitations](./limitations.md#identity) of the Identity Data Migrator.
+For more information about limitations, refer to the [limitations](./limitations.md#identity) of the Identity Data Migrator.
 
-### Users, groups, and memberships
+### Users, groups, and group memberships
 
 - The Identity Data Migrator does **not** migrate Camunda 7 internally managed users, groups, and group memberships to Camunda 8.
 - We recommend integrating Camunda 8 with your organization's external Identity Provider (IdP) instead.
-- Most organizations already use an IdP to manage users, groups, and group memberships centrally, making manual migration unnecessary.
+- Most organizations use an IdP to manage users, groups, and group memberships centrally, making manual migration unnecessary.
 
-### Authorizations
+## Authorizations
 
 Not all authorizations can be migrated from Camunda 7 to Camunda 8 due to differences in the authorization models of both systems.
 
