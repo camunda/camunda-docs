@@ -514,7 +514,7 @@ Bases: `Protocol`
 class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task=<camunda_orchestration_sdk.types.Unset object>, tags=<camunda_orchestration_sdk.types.Unset object>, log=NOTHING)
 ```
 
-Bases: `ActivateJobsJobsItem`
+Bases: `ActivatedJobResult`
 
 Read-only context for a job execution.
 
@@ -551,7 +551,7 @@ structured log messages.
 ### *classmethod* from_job(job, logger=None)
 
 * **Parameters:**
-  * **job** (*ActivateJobsJobsItem*)
+  * **job** (*ActivatedJobResult*)
   * **logger** ([*SdkLogger*](#sdklogger) *|* *None*)
 * **Return type:**
   [*JobContext*](#jobcontext)
