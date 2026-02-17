@@ -197,7 +197,7 @@ This is especially useful when you need:
 
 Camunda 8.9 introduces enhancements and changes to both Desktop Modeler and Web Modeler.
 
-### Desktop Modeler: Manage Camunda connections
+### Manage Camunda connections in Desktop Modeler
 
 You can now manage multiple Camunda connections in Desktop Modeler:
 
@@ -205,7 +205,7 @@ You can now manage multiple Camunda connections in Desktop Modeler:
 - Securely store credentials and configuration for each connection.
 - Deploy directly to a saved connection, and select clusters during deployment.
 
-### Web Modeler: event templates and email invitations
+### Web Modeler event templates and email invitations
 
 Usability improvements in Web Modeler also include:
 
@@ -214,7 +214,7 @@ Usability improvements in Web Modeler also include:
 
 Together, these changes simplify collaboration and help teams keep event configurations consistent.
 
-### Web Modeler: Log4j2 and Tomcat
+### Web Modeler Log4j2 and Tomcat changes
 
 | Feature                                             | Description                                                                                                                                                                                                  |
 | :-------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -232,7 +232,7 @@ You should:
 - Update any tooling that relies on old log formats or server behavior.
 - Validate the new setup in a staging environment before upgrading production.
 
-### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
+### Web Modeler RDBMS support (H2, MariaDB, MySQL)
 
 Web Modeler now supports H2, MariaDB, and MySQL as relational databases, aligning its storage options with those of the Orchestration Cluster.
 
