@@ -89,20 +89,28 @@ Ensure you source this file before running any deployment or configuration comma
 
 ### Configure your deployment
 
-Start by creating a `values.yml` file to store the configuration for your environment.
-This file will contain key-value pairs that will be substituted using `envsubst`.
-Over this guide, you will add and merge values in this file to configure your deployment to fit your needs.
+Start by copying the base Helm values file from the cloned repository into a working `values.yml` at the repository root:
+
+```bash
+cp generic/openshift/single-region/helm-values/base.yml values.yml
+```
+
+This file contains key-value pairs that will be substituted using `envsubst`.
+Over this guide, you will merge additional overlays into this file to configure your deployment.
 
 <!-- The overlays and merge order documented below are tested in CI by:
 Repo: camunda/camunda-deployment-references
 File: .github/workflows/aws_openshift_rosa_hcp_single_region_tests.yml
 Keep both in sync when adding or modifying overlays. -->
 
-You can find a reference example of this file here:
+<details>
+<summary>Review the base Helm values</summary>
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/openshift/single-region/helm-values/base.yml
 ```
+
+</details>
 
 :::danger Merging YAML files
 
@@ -381,13 +389,16 @@ Before deploying Camunda, you need to deploy the infrastructure services it depe
 
 All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
 
+:::note Working directory
+All commands in this guide assume you are at the **repository root** (the directory created by `get-your-copy.sh`). The deploy commands below use subshells `(cd ... && ./deploy.sh)` to preserve your working directory.
+:::
+
 #### Deploy Elasticsearch {#deploy-elasticsearch}
 
 Deploy Elasticsearch using the ECK operator:
 
 ```bash
-cd generic/kubernetes/operator-based/elasticsearch/
-./deploy.sh
+(cd generic/kubernetes/operator-based/elasticsearch && ./deploy.sh)
 ```
 
 This script installs the ECK operator, deploys an Elasticsearch cluster, and waits for readiness.
@@ -408,8 +419,7 @@ For more details on the Elasticsearch deployment, see [Elasticsearch deployment 
 Deploy PostgreSQL clusters using the CloudNativePG operator:
 
 ```bash
-cd generic/kubernetes/operator-based/postgresql/
-./deploy.sh
+(cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
 ```
 
 This script installs the CNPG operator (auto-detecting OpenShift to apply SCC patches), creates secrets, deploys PostgreSQL clusters, and waits for readiness.
@@ -441,9 +451,8 @@ Deploy Keycloak using the Keycloak Operator. PostgreSQL must be deployed first (
 Deploy Keycloak with OpenShift Routes:
 
 ```bash
-cd generic/kubernetes/operator-based/keycloak/
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-openshift.yml"
-./deploy.sh
+(cd generic/kubernetes/operator-based/keycloak && ./deploy.sh)
 ```
 
 <details>
@@ -461,9 +470,8 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-re
 Deploy Keycloak with nginx-ingress:
 
 ```bash
-cd generic/kubernetes/operator-based/keycloak/
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-nginx.yml"
-./deploy.sh
+(cd generic/kubernetes/operator-based/keycloak && ./deploy.sh)
 ```
 
 <details>
@@ -481,9 +489,8 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-re
 Deploy Keycloak without external access:
 
 ```bash
-cd generic/kubernetes/operator-based/keycloak/
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-no-domain.yml"
-./deploy.sh
+(cd generic/kubernetes/operator-based/keycloak && ./deploy.sh)
 ```
 
 <details>
