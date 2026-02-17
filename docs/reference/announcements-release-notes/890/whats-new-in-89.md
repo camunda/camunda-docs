@@ -12,6 +12,7 @@ keywords:
     "8.9 changes",
   ]
 page_rank: 90
+toc_max_heading_level: 2
 ---
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
@@ -70,6 +71,10 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 <tr>
     <td>[Supported environments](#environments)</td>
     <td>Updated support for Java, Elasticsearch/OpenSearch, RDBMS, Helm, and connector runtime (including virtual threads).</td>
+</tr>
+<tr>
+    <td>[Unified component configuration](#ucc)</td>
+    <td>In Camunda 8.9, all remaining unified configuration property changes are complete.</td>
 </tr>
 </table>
 
@@ -207,12 +212,12 @@ You can now manage multiple Camunda connections in Desktop Modeler:
 
 ### Web Modeler event templates and email invitations
 
-Usability improvements in Web Modeler also include:
+The following usability improvements simplify collaboration and help teams keep event configurations consistent.
 
-- Event templates: Create templates for message, signal, and timer events, and reuse and share templates across projects to standardize message names, payloads, and timer definitions.
-- Email invitations: Invite new users to Web Modeler projects via email, regardless of OIDC provider, and use a consistent invitation flow across Keycloak, Entra ID, Okta, Auth0, and other providers.
-
-Together, these changes simplify collaboration and help teams keep event configurations consistent.
+| Feature                                                                                                   | Description                                                                                                                                                                        |
+| :-------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Element templates](/components/modeler/element-templates/defining-templates.md)                          | Create templates for message, signal, and timer events, and reuse and share templates across projects to standardize message names, payloads, and timer definitions.               |
+| [Email invitations](/components/modeler/web-modeler/collaboration/collaboration.md#add-users-to-projects) | Invite new users to Web Modeler projects via email, regardless of OIDC provider, and use a consistent invitation flow across Keycloak, Entra ID, Okta, Auth0, and other providers. |
 
 ### Web Modeler Log4j2 and Tomcat changes
 
@@ -231,12 +236,6 @@ You should:
 - Review your logging and server configuration for Web Modeler.
 - Update any tooling that relies on old log formats or server behavior.
 - Validate the new setup in a staging environment before upgrading production.
-
-### Web Modeler RDBMS support (H2, MariaDB, MySQL)
-
-Web Modeler now supports H2, MariaDB, and MySQL as relational databases, aligning its storage options with those of the Orchestration Cluster.
-
-For administrators, this means more consistent database configuration across components, the ability to standardize on a single RDBMS stack where appropriate, and a simpler story for backup, high availability, and compliance across the platform.
 
 ## RDBMS secondary storage {#rdbms}
 
@@ -298,31 +297,19 @@ Camunda 8.9 updates several platform and environment baselines. Highlights inclu
 For complete details, including deprecations and breaking changes, see [release announcements](./890-announcements.md) and [supported environments](/reference/supported-environments.md).
 :::
 
-## Web Modeler
+## Unified component configuration {#ucc}
 
-### Logging framework changes from Logback to Log4j2
+In Camunda 8.9, the remaining unified configuration project property changes are complete.
 
-Web Modeler's `restapi` component uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging instead of [Logback](https://logback.qos.ch/).
+- All 8.9 property changes are documented in the [Camunda 8.9 property changes](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md#camunda-89-property-changes) table.
+- You can search, sort, and filter the table to show breaking changes, direct mappings, and new properties.
+- For more information on each property (including default values), see the [property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
 
-You can now also change the log levels at runtime.
+<p class="link-arrow">[Property changes in Camunda 8.9](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
 
-#### Are you affected by 8.9 Web Modeler changes?
-
-The 8.9 changes to the Web Modeler `restapi` component could affect your organization if you are in a Self-Managed environment and:
-
-- You are using a custom Logback configuration.
-- You are using any tools that consume the log files.
-
-### Embedded web server changes from Undertow to Tomcat
-
-Web Modeler's `restapi` component uses [Apache Tomcat](https://tomcat.apache.org/) instead of [Undertow](https://undertow.io/).
-
-#### Are you affected by 8.9 Web Modeler changes?
-
-The 8.9 changes to the Web Modeler `restapi` component could affect your organization if you are in a Self-Managed environment and:
-
-- You are using a custom Undertow configuration.
-- You are using any tools that consume the log files.
+:::note
+Only the first partial set of the unified configuration project properties was introduced in Camunda 8.8.
+:::
 
 ## Upgrade guides {#upgrade-guides}
 
