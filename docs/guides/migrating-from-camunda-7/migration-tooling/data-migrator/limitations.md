@@ -195,6 +195,7 @@ The history migration has the following limitations.
 - When migrating entities, some might be skipped due to dependencies (parent entity not migrated yet). Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration. Example:
   - Flow node instances might be skipped if their parent flow node (scope) hasn't been migrated yet.
   - Child process instances that have been called from parent call activities will be skipped on the first migration run as their parent flow node has not been migrated yet.
+- Camunda 7 does not store audit data of asyncBefore wait state for flow nodes. Migration of flow nodes is executed in all other cases.
 - The History Data Migrator does not support the following Camunda 8 entities or properties:
   - Sequence flow: Sequence flows cannot be highlighted in Operate.
   - Message subscription and correlated message subscription: These entities are not available in Camunda 7.
@@ -202,7 +203,6 @@ The history migration has the following limitations.
   - User metrics: Not available in Camunda 7.
   - Exporter position: This entity does not exist in Camunda 7.
   - Process instance and user task tags: These properties do not exist in Camunda 7.
-  - Audit log: Not supported. See the related tracking [issue](https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/517).
 
 ### Process instance
 
@@ -231,6 +231,12 @@ The History Data Migrator supports migration of Camunda Forms, but with the foll
   - `version` - Specific version of the form definition
 - Unsupported form bindings:
   - Expression-based bindings (for example, `${formKey}`)
+
+### Incidents
+
+The incidents are migrated in Resolved state. Operate does not visualize resolved incidents,
+therefore incidents of migrated process instances will not be visible in Operate.
+Audit data related to incidents, can be observed in the database.
 
 ## Cockpit plugin
 
