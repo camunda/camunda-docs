@@ -18,6 +18,22 @@ import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 
 Important changes in Camunda 8.9 you should consider when upgrading from Camunda 8.8.
 
+## Why upgrade to Camunda 8.9?
+
+Upgrading to Camunda 8.8 delivers significant benefits and keeps your installation aligned and ready for future releases.
+
+<div className="list-tick">
+
+- **Agentic orchestration**: [Build and orchestrate AI agents](#agentic-orchestration) within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
+
+- **RDBMS secondary storage**: Flexible data layer via first‑class RDBMS secondary storage options, including Amazon Aurora.
+
+- **Observability**: Simpler configuration and observability, with cluster‑wide variables and a new SaaS metrics endpoint.
+
+- **Improved developer experience**: A smoother developer and operator experience for Camunda 8 Run and Modeler.
+
+</div>
+
 ## Summary of important changes
 
 Important changes introduced in Camunda 8.9 are summarized as follows:
@@ -28,8 +44,32 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
     <td>**Summary**</td>
 </tr>
 <tr>
-    <td>[Web Modeler](#web-modeler)</td>
-    <td><ul><li>Migrated logging framework from `Logback` to `Log4j2`.</li><li>Migrated embedded web server from `Undertow` to `Tomcat`.</li></ul></td>
+    <td>[Agentic orchestration](#agentic-orchestration)</td>
+    <td>Refined AI and MCP connector capabilities, including new authentication, timeout, and configuration options.</td>
+</tr>
+<tr>
+    <td>[Camunda 8 Run](#camunda8run)</td>
+    <td>Use H2 as the default secondary storage for local/dev setups, with improved CLI guidance and defaults.</td>
+</tr>
+<tr>
+    <td>[Cluster configuration and observability](#observability)</td>
+    <td>Configure shared values with cluster variables and expose a Cluster Metrics endpoint for SaaS clusters that integrates with Prometheus-style monitoring.</td>
+</tr>
+<tr>
+    <td>[Global user task listeners](#listeners)</td>
+    <td>Define configuration‑based, cluster‑wide user task listeners with consistent payloads for all user task events.</td>
+</tr>
+<tr>
+    <td>[Modeler](#modeler)</td>
+    <td><ul><li>Web Modeler moves to Log4j2 and Tomcat, adds RDBMS support, event templates, and email invitations.</li><li>Desktop Modeler adds connection management for Orchestration Clusters.</li></ul></td>
+</tr>
+<tr>
+    <td>[RDBMS secondary storage](#rdbms)</td>
+    <td>Use relational databases (H2, PostgreSQL, Oracle, MariaDB, MySQL, SQL Server, Aurora PostgreSQL) as secondary storage for the Orchestration Cluster instead of, or alongside, Elasticsearch/OpenSearch.</td>
+</tr>
+<tr>
+    <td>[Supported environments](#environments)</td>
+    <td>Updated support for Java, Elasticsearch/OpenSearch, RDBMS, Helm, and connector runtime (including virtual threads).</td>
 </tr>
 </table>
 
@@ -39,6 +79,20 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 - Ready to upgrade? See the [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.8 to 8.9.
 
 :::
+
+## Agentic orchestration {#agentic-orchestration}
+
+## Camunda 8 Run {#camunda8run}
+
+## Cluster configuration and observability {#observability}
+
+## Global user task listeners {#listeners}
+
+## Modeler {#modeler}
+
+## RDBMS secondary storage {#rdbms}
+
+## Supported environments {#environments}
 
 ## Web Modeler
 
