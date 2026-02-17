@@ -234,9 +234,9 @@ The History Data Migrator supports migration of Camunda Forms, but with the foll
 
 ### Incidents
 
-The incidents are migrated in Resolved state. Operate does not visualize resolved incidents,
+The incidents are migrated in `resolved` state. Operate does not visualize resolved incidents,
 therefore incidents of migrated process instances will not be visible in Operate.
-Audit data related to incidents, can be observed by querying APIs.
+Audit data related to incidents can be observed by querying APIs.
 
 ## Cockpit plugin
 
