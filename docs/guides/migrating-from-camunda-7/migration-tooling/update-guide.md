@@ -27,6 +27,39 @@ Before you update:
 **Release date:** TBD \
 **Camunda 8 compatibility:** 8.9.x
 
+#### Data Migrator: Entity Interceptor API changes
+
+The `EntityInterceptor` interface now provides compile-time type safety using Java generics, eliminating the need for manual casting.
+
+##### What changed
+
+```java
+// 0.2.x
+public class ProcessInstanceEnricher implements EntityInterceptor {
+    @Override
+    public void execute(EntityConversionContext<?, ?> context) {
+        // Manual casting required
+        HistoricProcessInstance entity = (HistoricProcessInstance) context.getC7Entity();
+        ProcessInstanceDbModel.ProcessInstanceDbModelBuilder builder = (ProcessInstanceDbModel.ProcessInstanceDbModelBuilder) context.getC8DbModelBuilder();
+
+        // Custom logic
+        builder.processDefinitionId(entity.getProcessDefinitionKey());
+    }
+}
+
+// 0.3.x
+public class ProcessInstanceEnricher
+    implements EntityInterceptor<HistoricProcessInstance, ProcessInstanceDbModel.ProcessInstanceDbModelBuilder> {
+
+    @Override
+    public void execute(HistoricProcessInstance entity,
+                        ProcessInstanceDbModel.ProcessInstanceDbModelBuilder builder) {
+        // No casting needed! Type-safe access
+        builder.processDefinitionId(entity.getProcessDefinitionKey());
+    }
+}
+```
+
 #### Data Migrator: Automatic Camunda 8 datasource selection
 
 When the Camunda 8 datasource is configured, the migrator now creates and uses the migration schema on the Camunda 8 database automatically. Manual selection is no longer required.

@@ -57,9 +57,9 @@ jobs:
           exit 1
 
       - name: Create Issue From File
-        if: failure() && github.event_name == 'schedule' && steps.link-checker.outputs.exit_code != 0
+        if: ${{ failure() && github.event_name == 'schedule' && steps.link-checker.outputs.exit_code != 0 }}
         uses: peter-evans/create-issue-from-file@v6
         with:
           title: Link Checker Report
           content-filepath: ./lychee/out.md
-          labels: report, automated issue
+          labels: report, automated issue, kind/bug, dx

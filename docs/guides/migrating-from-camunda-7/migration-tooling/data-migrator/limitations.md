@@ -7,6 +7,29 @@ description: "Data Migrator limitations."
 
 An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrator, covering general limitations as well as specific limitations related to variables and BPMN elements.
 
+## Identity
+
+The following requirements and limitations apply:
+
+- Identity migration only includes the migration of:
+  - Tenants.
+  - Supported authorizations (detailed in the [Authorizations](identity.md#authorizations) section).
+- Users, groups and group memberships are not automatically migrated since they are usually retrieved from an IdP.
+- Tenant memberships are not yet supported.
+  - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/982
+- Once migration has been triggered, it's strongly recommended not to create new identity data on Camunda 7. Even if migration is attempted again, the new data might not be migrated.
+- In order for authorizations to work correctly after migration, process definitions, forms, DRD and decision definitions need to have the same IDs in Camunda 8 as in Camunda 7. This should be the case if you have already migrated runtime and history data.
+
+### Supported entities
+
+| Identity type      | Migration supported |
+| ------------------ | ------------------- |
+| Users              | Retrieved from IdP. |
+| Groups             | Retrieved from IdP. |
+| Group Memberships  | Retrieved from IdP. |
+| Tenants            | Yes                 |
+| Tenant Memberships | Not yet             |
+
 ## Runtime
 
 The runtime migration has the following limitations.
@@ -313,7 +336,6 @@ The following limitations apply:
 | correlationTime        | No              |
 | flowNodeId             | No              |
 | flowNodeInstanceKey    | No              |
-| historyCleanupDate     | No              |
 | messageKey             | No              |
 | messageName            | No              |
 | partitionId            | No              |
@@ -411,7 +433,6 @@ The following limitations apply:
 | tenantId               | Yes             |
 | partitionId            | Yes             |
 | rootProcessInstanceKey | Yes             |
-| historyCleanupDate     | Yes             |
 
 ### Form
 
@@ -453,7 +474,6 @@ The following limitations apply:
 | treePath               | No              |
 | tenantId               | Yes             |
 | partitionId            | No              |
-| historyCleanupDate     | No              |
 
 ### Job
 
@@ -483,7 +503,6 @@ The following limitations apply:
 | elementInstanceKey       | No              |
 | tenantId                 | No              |
 | partitionId              | No              |
-| historyCleanupDate       | No              |
 | creationTime             | No              |
 | lastUpdateTime           | No              |
 
@@ -504,7 +523,6 @@ The following limitations apply:
 | correlationKey           | No              |
 | tenantId                 | No              |
 | partitionId              | No              |
-| historyCleanupDate       | No              |
 
 ### Process definition
 
@@ -551,7 +569,6 @@ The following limitations apply:
 | processDefinitionId  | No              |
 | tenantId             | No              |
 | partitionId          | No              |
-| historyCleanupDate   | No              |
 
 ### Usage metric
 
@@ -605,7 +622,6 @@ The following limitations apply:
 | priority                 | Yes             |
 | tags                     | No              |
 | partitionId              | Yes             |
-| historyCleanupDate       | Yes             |
 
 ### User task migration
 
@@ -636,5 +652,4 @@ The following limitations apply:
 | processDefinitionId    | Yes             |
 | tenantId               | Yes             |
 | partitionId            | Yes             |
-| historyCleanupDate     | Yes             |
 | elementInstanceKey     | No              |
