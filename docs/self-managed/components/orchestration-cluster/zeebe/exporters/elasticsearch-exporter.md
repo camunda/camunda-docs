@@ -46,6 +46,12 @@ As the exporter is packaged with Zeebe, it is not necessary to specify a `jarPat
 
 The exporter can be enabled by configuring it with the `classpath` in the broker settings.
 
+Where you place the YAML depends on which configuration file you edit:
+
+- In the Zeebe `broker.yaml`, use the top-level `exporters:` block (as shown below).
+- In a Spring Boot `application.yaml` for the Camunda 8 distribution, nest it under `zeebe: broker: exporters:` (the same as `zeebe.broker.exporters`).
+- With Helm, add the nested config under `orchestration.configuration` or set environment variables like `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_...`.
+
 For example:
 
 ```yaml
@@ -54,6 +60,18 @@ exporters:
     className: io.camunda.zeebe.exporter.ElasticsearchExporter
     args:
     # Refer to the table below for the available args options
+```
+
+Application config example:
+
+```yaml
+zeebe:
+  broker:
+    exporters:
+      elasticsearch:
+        className: io.camunda.zeebe.exporter.ElasticsearchExporter
+        args:
+        # Refer to the table below for the available args options
 ```
 
 The exporter can be configured by providing `args`. The table below explains all the different
