@@ -9,6 +9,7 @@ mdx:
 
 # Camunda Orchestration Cluster API – Python SDK
 
+<!-- WARNING: The content and specific structure of this file drives Docusaurus generation in camunda-docs. Please refer to MAINTAINER.md before editing. -->
 
 A fully typed Python client for the [Camunda 8 Orchestration Cluster REST API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). Generated from the upstream OpenAPI spec with hand-written runtime infrastructure for authentication, configuration, and job workers.
 

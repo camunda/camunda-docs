@@ -90,9 +90,9 @@ Activate jobs
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  ActivateJobsResponse200
+  JobActivationResult
 * **Return type:**
-  ActivateJobsResponse200
+  JobActivationResult
 
 ### Examples
 
@@ -647,9 +647,9 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 * **Parameters:**
-  * **body** (*CancelProcessInstancesBatchOperationData*) – The process instance filter that defines
-    which process instances should be canceled.
-  * **data** (*CancelProcessInstancesBatchOperationData*)
+  * **body** (*ProcessInstanceCancellationBatchOperationRequest*) – The process instance filter that
+    defines which process instances should be canceled.
+  * **data** (*ProcessInstanceCancellationBatchOperationRequest*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.CancelProcessInstancesBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
@@ -680,8 +680,8 @@ Complete job
 > Complete a job with the given payload, which allows completing the associated service task.
 * **Parameters:**
   * **job_key** (*str*) – System-generated key for a job. Example: 2251799813653498.
-  * **body** (*CompleteJobData* *|* *Unset*)
-  * **data** (*CompleteJobData* *|* *Unset*)
+  * **body** (*JobCompletionRequest* *|* *Unset*)
+  * **data** (*JobCompletionRequest* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.CompleteJobBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -706,7 +706,7 @@ def complete_job_example() -> None:
 
     client.complete_job(
         job_key=JobKey("2251799813685249"),
-        data=CompleteJobData(
+        data=JobCompletionRequest(
             variables=JobCompletionRequestVariables.from_dict(
                 {"paymentId": "PAY-123", "status": "completed"}
             )
@@ -894,9 +894,9 @@ This is an atomic call, i.e. either all resources are deployed or none of them a
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  CreateDeploymentResponse200
+  DeploymentResult
 * **Return type:**
-  CreateDeploymentResponse200
+  DeploymentResult
 
 ### Examples
 
@@ -1125,7 +1125,7 @@ def create_job_worker(config, callback, auto_start=True)
 
 * **Parameters:**
   * **config** ([*WorkerConfig*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.WorkerConfig))
-  * **callback** (*Callable* *[* *[*[*JobContext*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) *]* *,* *Coroutine* *[**Any* *,* *Any* *,* *dict* *[**str* *,* *Any* *]*  *|* *CompleteJobData* *|* *None* *]* *]*  *|* *Callable* *[* *[*[*JobContext*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) *]* *,* *dict* *[**str* *,* *Any* *]*  *|* *None* *]*  *|* [*HintedCallable*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.HintedCallable))
+  * **callback** (*Callable* *[* *[*[*JobContext*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) *]* *,* *Coroutine* *[**Any* *,* *Any* *,* *dict* *[**str* *,* *Any* *]*  *|* *JobCompletionRequest* *|* *None* *]* *]*  *|* *Callable* *[* *[*[*JobContext*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) *]* *,* *dict* *[**str* *,* *Any* *]*  *|* *None* *]*  *|* [*HintedCallable*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.HintedCallable))
   * **auto_start** (*bool*)
 * **Return type:**
   [*JobWorker*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobWorker)
@@ -1151,9 +1151,9 @@ Create mapping rule
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  MappingRuleUpdateResult
+  CreateMappingRuleResponse201
 * **Return type:**
-  MappingRuleUpdateResult
+  CreateMappingRuleResponse201
 
 ### create_process_instance()
 
@@ -1386,8 +1386,8 @@ Delete decision instance
 * **Parameters:**
   * **decision_instance_key** (*str*) – System-generated key for a deployed decision instance.
     Example: 22517998136843567.
-  * **body** (*DeleteProcessInstanceRequestType0* *|* *None* *|* *Unset*)
-  * **data** (*DeleteProcessInstanceRequestType0* *|* *None* *|* *Unset*)
+  * **body** (*DeleteDecisionInstanceDataType0* *|* *None* *|* *Unset*)
+  * **data** (*DeleteDecisionInstanceDataType0* *|* *None* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.DeleteDecisionInstanceUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -1575,9 +1575,9 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 * **Parameters:**
-  * **body** (*DeleteProcessInstancesBatchOperationData*) – The process instance filter that defines
-    which process instances should be deleted.
-  * **data** (*DeleteProcessInstancesBatchOperationData*)
+  * **body** (*ProcessInstanceDeletionBatchOperationRequest*) – The process instance filter that
+    defines which process instances should be deleted.
+  * **data** (*ProcessInstanceDeletionBatchOperationRequest*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.DeleteProcessInstancesBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
@@ -1616,8 +1616,8 @@ will be deleted.
 
 * **Parameters:**
   * **resource_key** (*str*) – The system-assigned key for this resource.
-  * **body** (*DeleteResourceDataType0* *|* *None* *|* *Unset*)
-  * **data** (*DeleteResourceDataType0* *|* *None* *|* *Unset*)
+  * **body** (*DeleteResourceRequestType0* *|* *None* *|* *Unset*)
+  * **data** (*DeleteResourceRequestType0* *|* *None* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.DeleteResourceBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -1961,9 +1961,9 @@ Get audit log
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  GetAuditLogResponse200
+  AuditLogResult
 * **Return type:**
-  GetAuditLogResponse200
+  AuditLogResult
 
 ### get_authentication()
 
@@ -2513,9 +2513,9 @@ search filter.
 * **Parameters:**
   * **process_definition_key** (*str*) – System-generated key for a deployed process definition.
     Example: 2251799813686749.
-  * **body** (*GetProcessDefinitionStatisticsData* *|* *Unset*) – Process definition element statistics
-    request.
-  * **data** (*GetProcessDefinitionStatisticsData* *|* *Unset*)
+  * **body** (*ProcessDefinitionElementStatisticsQuery* *|* *Unset*) – Process definition element
+    statistics request.
+  * **data** (*ProcessDefinitionElementStatisticsQuery* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.GetProcessDefinitionStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -2525,9 +2525,9 @@ search filter.
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  GetProcessDefinitionStatisticsResponse200
+  ProcessDefinitionElementStatisticsQueryResult
 * **Return type:**
-  GetProcessDefinitionStatisticsResponse200
+  ProcessDefinitionElementStatisticsQueryResult
 
 ### get_process_definition_xml()
 
@@ -2577,9 +2577,9 @@ Get process instance
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  GetProcessInstanceResponse200
+  ProcessInstanceResult
 * **Return type:**
-  GetProcessInstanceResponse200
+  ProcessInstanceResult
 
 ### get_process_instance_call_hierarchy()
 
@@ -2631,9 +2631,9 @@ Get sequence flows
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  GetProcessInstanceSequenceFlowsResponse200
+  ProcessInstanceSequenceFlowsQueryResult
 * **Return type:**
-  GetProcessInstanceSequenceFlowsResponse200
+  ProcessInstanceSequenceFlowsQueryResult
 
 ### get_process_instance_statistics()
 
@@ -2656,9 +2656,9 @@ Get element instance statistics
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  GetProcessInstanceStatisticsResponse200
+  ProcessInstanceElementStatisticsQueryResult
 * **Return type:**
-  GetProcessInstanceStatisticsResponse200
+  ProcessInstanceElementStatisticsQueryResult
 
 ### get_process_instance_statistics_by_definition()
 
@@ -2825,9 +2825,9 @@ forms.
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  GetStartProcessFormResponse200
+  FormResult
 * **Return type:**
-  GetStartProcessFormResponse200
+  FormResult
 
 ### get_tenant()
 
@@ -2963,9 +2963,9 @@ Get user
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  UserResult
+  GetUserResponse200
 * **Return type:**
-  UserResult
+  GetUserResponse200
 
 ### get_user_task()
 
@@ -2988,9 +2988,9 @@ Get user task
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  GetUserTaskResponse200
+  UserTaskResult
 * **Return type:**
-  GetUserTaskResponse200
+  UserTaskResult
 
 ### Examples
 
@@ -3030,9 +3030,9 @@ forms.
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  GetUserTaskFormResponse200
+  FormResult
 * **Return type:**
-  GetUserTaskFormResponse200
+  FormResult
 
 ### get_variable()
 
@@ -3079,9 +3079,9 @@ latest process improvements.
 * **Parameters:**
   * **process_instance_key** (*str*) – System-generated key for a process instance. Example:
     2251799813690746.
-  * **body** (*MigrateProcessInstanceData*) – The migration instructions describe how to migrate a
-    process instance from one process definition to another.
-  * **data** (*MigrateProcessInstanceData*)
+  * **body** (*ProcessInstanceMigrationInstruction*) – The migration instructions describe how to
+    migrate a process instance from one process definition to another.
+  * **data** (*ProcessInstanceMigrationInstruction*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.MigrateProcessInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -3112,8 +3112,8 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 * **Parameters:**
-  * **body** (*MigrateProcessInstancesBatchOperationData*)
-  * **data** (*MigrateProcessInstancesBatchOperationData*)
+  * **body** (*ProcessInstanceMigrationBatchOperationRequest*)
+  * **data** (*ProcessInstanceMigrationBatchOperationRequest*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.MigrateProcessInstancesBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
@@ -3146,8 +3146,8 @@ For example, because an external system is not available or doesn’t respond as
 * **Parameters:**
   * **process_instance_key** (*str*) – System-generated key for a process instance. Example:
     2251799813690746.
-  * **body** (*ModifyProcessInstanceData*)
-  * **data** (*ModifyProcessInstanceData*)
+  * **body** (*ProcessInstanceModificationInstruction*)
+  * **data** (*ProcessInstanceModificationInstruction*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.ModifyProcessInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -3180,10 +3180,10 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 * **Parameters:**
-  * **body** (*ModifyProcessInstancesBatchOperationData*) – The process instance filter to define on
-    which process instances tokens should be moved,
+  * **body** (*ProcessInstanceModificationBatchOperationRequest*) – The process instance filter to
+    define on which process instances tokens should be moved,
     and new element instances should be activated or terminated.
-  * **data** (*ModifyProcessInstancesBatchOperationData*)
+  * **data** (*ProcessInstanceModificationBatchOperationRequest*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.ModifyProcessInstancesBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
@@ -3254,9 +3254,9 @@ Use the message correlation endpoint for such use cases.
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  PublishMessageResponse200
+  MessagePublicationResult
 * **Return type:**
-  PublishMessageResponse200
+  MessagePublicationResult
 
 ### Examples
 
@@ -3363,9 +3363,9 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 * **Parameters:**
-  * **body** (*ResolveIncidentsBatchOperationData* *|* *Unset*) – The process instance filter that
-    defines which process instances should have their incidents resolved.
-  * **data** (*ResolveIncidentsBatchOperationData* *|* *Unset*)
+  * **body** (*ProcessInstanceIncidentResolutionBatchOperationRequest* *|* *Unset*) – The process
+    instance filter that defines which process instances should have their incidents resolved.
+  * **data** (*ProcessInstanceIncidentResolutionBatchOperationRequest* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.ResolveIncidentsBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
@@ -3464,9 +3464,9 @@ Search audit logs
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  SearchAuditLogsResponse200
+  AuditLogSearchQueryResult
 * **Return type:**
-  SearchAuditLogsResponse200
+  AuditLogSearchQueryResult
 
 ### search_authorizations()
 
@@ -3503,8 +3503,8 @@ Search batch operation items
 
 > Search for batch operation items based on given criteria.
 * **Parameters:**
-  * **body** (*SearchBatchOperationItemsData* *|* *Unset*) – Batch operation item search request.
-  * **data** (*SearchBatchOperationItemsData* *|* *Unset*)
+  * **body** (*BatchOperationItemSearchQuery* *|* *Unset*) – Batch operation item search request.
+  * **data** (*BatchOperationItemSearchQuery* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.SearchBatchOperationItemsBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -3526,8 +3526,8 @@ Search batch operations
 
 > Search for batch operations based on given criteria.
 * **Parameters:**
-  * **body** (*SearchBatchOperationsData* *|* *Unset*) – Batch operation search request.
-  * **data** (*SearchBatchOperationsData* *|* *Unset*)
+  * **body** (*BatchOperationSearchQuery* *|* *Unset*) – Batch operation search request.
+  * **data** (*BatchOperationSearchQuery* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.SearchBatchOperationsBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -3562,9 +3562,9 @@ Search group clients
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  TenantClientSearchResult
+  SearchClientsForGroupResponse200
 * **Return type:**
-  TenantClientSearchResult
+  SearchClientsForGroupResponse200
 
 ### search_clients_for_role()
 
@@ -3589,9 +3589,9 @@ Search role clients
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  TenantClientSearchResult
+  SearchClientsForRoleResponse200
 * **Return type:**
-  TenantClientSearchResult
+  SearchClientsForRoleResponse200
 
 ### search_clients_for_tenant()
 
@@ -3611,9 +3611,9 @@ Search clients for tenant
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  TenantClientSearchResult
+  SearchClientsForTenantResponse200
 * **Return type:**
-  TenantClientSearchResult
+  SearchClientsForTenantResponse200
 
 ### search_cluster_variables()
 
@@ -3834,8 +3834,8 @@ Search groups for tenant
 > Retrieves a filtered and sorted list of groups for a specified tenant.
 * **Parameters:**
   * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
-  * **body** (*SearchGroupIdsForTenantData* *|* *Unset*)
-  * **data** (*SearchGroupIdsForTenantData* *|* *Unset*)
+  * **body** (*TenantGroupSearchQueryRequest* *|* *Unset*)
+  * **data** (*TenantGroupSearchQueryRequest* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.UnexpectedStatus** – If the response status code is not documented.
@@ -3881,8 +3881,8 @@ Search role groups
 > Search groups with assigned role.
 * **Parameters:**
   * **role_id** (*str*)
-  * **body** (*SearchGroupsForRoleData* *|* *Unset*)
-  * **data** (*SearchGroupsForRoleData* *|* *Unset*)
+  * **body** (*RoleGroupSearchQueryRequest* *|* *Unset*)
+  * **data** (*RoleGroupSearchQueryRequest* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.SearchGroupsForRoleBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -3960,9 +3960,9 @@ Search jobs
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  SearchJobsResponse200
+  JobSearchQueryResult
 * **Return type:**
-  SearchJobsResponse200
+  JobSearchQueryResult
 
 ### search_mapping_rule()
 
@@ -4075,8 +4075,8 @@ Search message subscriptions
 
 > Search for message subscriptions based on given criteria.
 * **Parameters:**
-  * **body** (*SearchMessageSubscriptionsData* *|* *Unset*)
-  * **data** (*SearchMessageSubscriptionsData* *|* *Unset*)
+  * **body** (*MessageSubscriptionSearchQuery* *|* *Unset*)
+  * **data** (*MessageSubscriptionSearchQuery* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.SearchMessageSubscriptionsBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -4086,9 +4086,9 @@ Search message subscriptions
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  SearchMessageSubscriptionsResponse200
+  MessageSubscriptionSearchQueryResult
 * **Return type:**
-  SearchMessageSubscriptionsResponse200
+  MessageSubscriptionSearchQueryResult
 
 ### search_process_definitions()
 
@@ -4100,8 +4100,8 @@ Search process definitions
 
 > Search for process definitions based on given criteria.
 * **Parameters:**
-  * **body** (*SearchProcessDefinitionsData* *|* *Unset*)
-  * **data** (*SearchProcessDefinitionsData* *|* *Unset*)
+  * **body** (*ProcessDefinitionSearchQuery* *|* *Unset*)
+  * **data** (*ProcessDefinitionSearchQuery* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.SearchProcessDefinitionsBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -4164,8 +4164,8 @@ Search process instances
 
 > Search for process instances based on given criteria.
 * **Parameters:**
-  * **body** (*SearchProcessInstancesData* *|* *Unset*) – Process instance search request.
-  * **data** (*SearchProcessInstancesData* *|* *Unset*)
+  * **body** (*ProcessInstanceSearchQuery* *|* *Unset*) – Process instance search request.
+  * **data** (*ProcessInstanceSearchQuery* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.SearchProcessInstancesBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -4175,9 +4175,9 @@ Search process instances
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  SearchProcessInstancesResponse200
+  ProcessInstanceSearchQueryResult
 * **Return type:**
-  SearchProcessInstancesResponse200
+  ProcessInstanceSearchQueryResult
 
 ### Examples
 
@@ -4188,7 +4188,7 @@ def search_process_instances_example() -> None:
     client = CamundaClient()
 
     result = client.search_process_instances(
-        data=SearchProcessInstancesData(
+        data=ProcessInstanceSearchQuery(
             filter_=ProcessInstanceSearchQueryFilter(
                 process_definition_id="order-process",
             ),
@@ -4291,8 +4291,8 @@ Search tenants
 
 > Retrieves a filtered and sorted list of tenants.
 * **Parameters:**
-  * **body** (*SearchTenantsData* *|* *Unset*) – Tenant search request
-  * **data** (*SearchTenantsData* *|* *Unset*)
+  * **body** (*TenantSearchQueryRequest* *|* *Unset*) – Tenant search request
+  * **data** (*TenantSearchQueryRequest* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.SearchTenantsBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -4318,8 +4318,8 @@ Search user task audit logs
 > Search for user task audit logs based on given criteria.
 * **Parameters:**
   * **user_task_key** (*str*) – System-generated key for a user task.
-  * **body** (*SearchUserTaskAuditLogsData* *|* *Unset*) – User task search query request.
-  * **data** (*SearchUserTaskAuditLogsData* *|* *Unset*)
+  * **body** (*UserTaskAuditLogSearchQueryRequest* *|* *Unset*) – User task search query request.
+  * **data** (*UserTaskAuditLogSearchQueryRequest* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.SearchUserTaskAuditLogsBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -4327,9 +4327,9 @@ Search user task audit logs
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  SearchUserTaskAuditLogsResponse200
+  AuditLogSearchQueryResult
 * **Return type:**
-  SearchUserTaskAuditLogsResponse200
+  AuditLogSearchQueryResult
 
 ### search_user_task_variables()
 
@@ -4369,8 +4369,8 @@ Search user tasks
 
 > Search for user tasks based on given criteria.
 * **Parameters:**
-  * **body** (*SearchUserTasksData* *|* *Unset*) – User task search query request.
-  * **data** (*SearchUserTasksData* *|* *Unset*)
+  * **body** (*UserTaskSearchQuery* *|* *Unset*) – User task search query request.
+  * **data** (*UserTaskSearchQuery* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.SearchUserTasksBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -4380,9 +4380,9 @@ Search user tasks
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  SearchUserTasksResponse200
+  UserTaskSearchQueryResult
 * **Return type:**
-  SearchUserTasksResponse200
+  UserTaskSearchQueryResult
 
 ### Examples
 
@@ -4393,7 +4393,7 @@ def search_user_tasks_example() -> None:
     client = CamundaClient()
 
     result = client.search_user_tasks(
-        data=SearchUserTasksData()
+        data=UserTaskSearchQuery()
     )
 
     if not isinstance(result.items, Unset):
@@ -4411,8 +4411,8 @@ Search users
 
 > Search for users based on given criteria.
 * **Parameters:**
-  * **body** (*SearchUsersData* *|* *Unset*)
-  * **data** (*SearchUsersData* *|* *Unset*)
+  * **body** (*UserSearchQueryRequest* *|* *Unset*)
+  * **data** (*UserSearchQueryRequest* *|* *Unset*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.SearchUsersBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -4422,9 +4422,9 @@ Search users
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  UserSearchResult
+  SearchUsersResponse200
 * **Return type:**
-  UserSearchResult
+  SearchUsersResponse200
 
 ### search_users_for_group()
 
@@ -4449,9 +4449,9 @@ Search group users
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  TenantUserSearchResult
+  SearchUsersForGroupResponse200
 * **Return type:**
-  TenantUserSearchResult
+  SearchUsersForGroupResponse200
 
 ### search_users_for_role()
 
@@ -4476,9 +4476,9 @@ Search role users
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  TenantUserSearchResult
+  SearchUsersForRoleResponse200
 * **Return type:**
-  TenantUserSearchResult
+  SearchUsersForRoleResponse200
 
 ### search_users_for_tenant()
 
@@ -4498,9 +4498,9 @@ Search users for tenant
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  TenantUserSearchResult
+  SearchUsersForTenantResponse200
 * **Return type:**
-  TenantUserSearchResult
+  SearchUsersForTenantResponse200
 
 ### search_variables()
 
@@ -5103,9 +5103,9 @@ Update mapping rule
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  MappingRuleUpdateResult
+  UpdateMappingRuleResponse200
 * **Return type:**
-  MappingRuleUpdateResult
+  UpdateMappingRuleResponse200
 
 ### update_role()
 
@@ -5215,9 +5215,9 @@ Update user
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  UserResult
+  UpdateUserResponse200
 * **Return type:**
-  UserResult
+  UpdateUserResponse200
 
 ### update_user_task()
 
