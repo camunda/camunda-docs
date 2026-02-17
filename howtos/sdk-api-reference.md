@@ -72,9 +72,9 @@ To add a sync workflow for a new SDK:
 2. Add a sidebar entry in `sidebars.js` for the new SDK's docs location.
 3. Ensure the SDK repo has a doc generation command that produces Docusaurus-compatible Markdown (with `mdx: { format: md }` frontmatter).
 
-## Testing locally 
+## Testing locally
 
-You can test the Python integration using `act`: 
+You can test the Python integration using `act`:
 
 ```bash
 act workflow_dispatch \
@@ -82,4 +82,10 @@ act workflow_dispatch \
   --input dry_run=true \
   --input sdk_ref=main \
   --bind
+```
+
+You need to move the content, as the files are output to a different directory when run locally:
+
+```bash
+rm -rf docs/apis-tools/python-sdk && mv docs/docs/apis-tools/python-sdk docs/apis-tools/python-sdk && rm -rf docs/docs/apis-tools
 ```
