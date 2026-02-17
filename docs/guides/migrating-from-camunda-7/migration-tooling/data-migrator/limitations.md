@@ -7,6 +7,29 @@ description: "Data Migrator limitations."
 
 An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrator, covering general limitations as well as specific limitations related to variables and BPMN elements.
 
+## Identity
+
+The following requirements and limitations apply:
+
+- Identity migration only includes the migration of:
+  - Tenants.
+  - Supported authorizations (detailed in the [Authorizations](identity.md#authorizations) section).
+- Users, groups and group memberships are not automatically migrated since they are usually retrieved from an IdP.
+- Tenant memberships are not yet supported.
+  - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/982
+- Once migration has been triggered, it's strongly recommended not to create new identity data on Camunda 7. Even if migration is attempted again, the new data might not be migrated.
+- In order for authorizations to work correctly after migration, process definitions, forms, DRD and decision definitions need to have the same IDs in Camunda 8 as in Camunda 7. This should be the case if you have already migrated runtime and history data.
+
+### Supported entities
+
+| Identity type      | Migration supported |
+| ------------------ | ------------------- |
+| Users              | Retrieved from IdP. |
+| Groups             | Retrieved from IdP. |
+| Group Memberships  | Retrieved from IdP. |
+| Tenants            | Yes                 |
+| Tenant Memberships | Not yet             |
+
 ## Runtime
 
 The runtime migration has the following limitations.
@@ -174,7 +197,6 @@ The history migration has the following limitations.
   - Child process instances that have been called from parent call activities will be skipped on the first migration run as their parent flow node has not been migrated yet.
 - The History Data Migrator does not support the following Camunda 8 entities or properties:
   - Sequence flow: Sequence flows cannot be highlighted in Operate.
-  - User task migration metadata: Information for user tasks migrated via process instance migration is not available in Camunda 7.
   - Message subscription and correlated message subscription: These entities are not available in Camunda 7.
   - Batch operation entity and batch operation item: Camunda 7 does not retain sufficient information about processed instances.
   - User metrics: Not available in Camunda 7.
@@ -184,12 +206,7 @@ The history migration has the following limitations.
 
 ### Process instance
 
-- Process instance migration doesn't populate the `parentElementInstanceKey` and `tree` fields.
-- This means that the history of subprocesses and call activities is not linked to their parent
-  process instance.
-- As a result, you cannot query for the history of a subprocess or call activity using the
-  parent process instance key.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5359
+- Process instance migration doesn't populate the `tree` field.
 
 ### DMN
 
@@ -199,6 +216,21 @@ The history migration has the following limitations.
 - Decision instance `state` and `type` are not yet migrated.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5370
 - DMN models version 1.1 are not supported by Operate, decision definition data will be migrated but the decision model itself will not be visible in Operate.
+
+### Forms
+
+The History Data Migrator supports migration of Camunda Forms, but with the following limitations:
+
+- Only [Camunda Forms](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) are migrated. Other form types are not supported:
+  - Embedded forms (HTML/JSF)
+  - External forms (URL-based forms)
+  - Generated forms (from form data definitions)
+- Supported form bindings:
+  - `deployment` - Form version deployed together with the process definition
+  - `latest` - Latest version of the form definition
+  - `version` - Specific version of the form definition
+- Unsupported form bindings:
+  - Expression-based bindings (for example, `${formKey}`)
 
 ## Cockpit plugin
 
@@ -413,14 +445,13 @@ The following limitations apply:
 
 ### Form
 
-| Property  | Can be migrated |
-| --------- | --------------- |
-| formKey   | No              |
-| tenantId  | No              |
-| formId    | No              |
-| schema    | No              |
-| version   | No              |
-| isDeleted | No              |
+| Property | Can be migrated |
+| -------- | --------------- |
+| formKey  | Yes             |
+| tenantId | Yes             |
+| formId   | Yes             |
+| schema   | Yes             |
+| version  | Yes             |
 
 ### History deletion
 
@@ -513,7 +544,7 @@ The following limitations apply:
 | versionTag           | Yes             |
 | version              | Yes             |
 | bpmnXml              | Yes             |
-| formId               | No              |
+| formId               | Yes             |
 
 ### Process instance
 
@@ -528,7 +559,7 @@ The following limitations apply:
 | endDate                  | Yes                 |
 | tenantId                 | Yes                 |
 | parentProcessInstanceKey | Yes                 |
-| parentElementInstanceKey | No                  |
+| parentElementInstanceKey | Yes                 |
 | numIncidents             | No (`0` by default) |
 | version                  | Yes                 |
 | partitionId              | Yes                 |
@@ -582,7 +613,7 @@ The following limitations apply:
 | completionDate           | Yes             |
 | assignee                 | Yes             |
 | state                    | Yes             |
-| formKey                  | No              |
+| formKey                  | Yes             |
 | processDefinitionKey     | Yes             |
 | processInstanceKey       | Yes             |
 | rootProcessInstanceKey   | Yes             |
@@ -599,17 +630,6 @@ The following limitations apply:
 | priority                 | Yes             |
 | tags                     | No              |
 | partitionId              | Yes             |
-
-### User task migration
-
-| Property                 | Can be migrated |
-| ------------------------ | --------------- |
-| userTaskKey              | No              |
-| processDefinitionKey     | No              |
-| processDefinitionId      | No              |
-| elementId                | No              |
-| name                     | No              |
-| processDefinitionVersion | No              |
 
 ### Variable
 
