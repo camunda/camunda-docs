@@ -208,11 +208,6 @@ The history migration has the following limitations.
 ### Process instance
 
 - Process instance migration doesn't populate the `tree` field.
-- This means that the history of subprocesses and call activities is not linked to their parent
-  process instance.
-- As a result, you cannot query for the history of a subprocess or call activity using the
-  parent process instance key.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5359
 
 ### DMN
 
