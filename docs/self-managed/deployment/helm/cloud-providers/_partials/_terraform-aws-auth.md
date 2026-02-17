@@ -16,15 +16,10 @@ A user who creates resources in AWS will always retain administrative access to 
 
 :::
 
-You can further change the region and other preferences and explore different [authentication](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) methods:
+The Terraform AWS provider supports [multiple authentication methods](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration). If you have configured the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), Terraform will automatically detect and use those credentials:
 
-- For development or testing purposes you can use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). If you have configured your AWS CLI, Terraform will automatically detect and use those credentials.
-  To configure the AWS CLI:
+```bash
+aws configure
+```
 
-  ```bash
-  aws configure
-  ```
-
-  Enter your `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, region, and output format. These can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
-
-- For production environments, we recommend the use of a dedicated IAM user. Create [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the new IAM user via the console, and export them as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+For production environments, avoid long-lived access keys. Prefer short-lived credentials such as [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), [IAM Identity Center (SSO)](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html), or [environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) sourced from a secrets manager. See the [provider documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) for the full list of supported methods.
