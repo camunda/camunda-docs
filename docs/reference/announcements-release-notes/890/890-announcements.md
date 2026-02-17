@@ -172,8 +172,6 @@ With task permission management, you can assign restricted permissions for user 
 
 Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this role to grant users limited access to work on tasks without assigning broader permissions.
 
-There are no breaking changes associated with this feature.
-
 <p className="link-arrow">[Task permission management](../../../../components/tasklist/user-task-authorization)</p>
 
 </div>
