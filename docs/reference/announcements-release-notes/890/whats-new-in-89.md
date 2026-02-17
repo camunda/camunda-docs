@@ -82,7 +82,7 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 
 ## Agentic orchestration {#agentic-orchestration}
 
-Camunda 8.9 refines the AI and MCP connector stack introduced in 8.8.
+Camunda 8.9 refines the AI and MCP connectors introduced in 8.8.
 
 ### AI Agent and model configuration improvements
 
@@ -140,6 +140,40 @@ The Camunda 8 Run CLI and configuration have been refined to:
 These changes reduce friction when setting up Camunda 8 Run for the first time, debugging local setup issues, and switching between different configurations or environments.
 
 ## Cluster configuration and observability {#observability}
+
+Camunda 8.9 improves central configuration and runtime visibility.
+
+### Cluster variables for shared configuration
+
+Use cluster variables to define configuration values once and reuse them across processes and tenants using FEEL expressions.
+
+| Variable               | Scope                               | Priority |
+| :--------------------- | :---------------------------------- | :------- |
+| `camunda.vars.cluster` | Global                              | Lowest   |
+| `camunda.vars.tenant`  | Tenant                              | Medium   |
+| `camunda.vars.env`     | Merged view with automatic priority | Highest  |
+
+The hierarchy allows you to create cascading configurations, where specific contexts override broader defaults.
+
+You can use cluster variables to centralize:
+
+- URLs, endpoints, and credentials references.
+- Feature flags and environment names.
+- Shared configuration used across multiple processes or applications.
+
+:::note
+Administrators can manage cluster variables via the Orchestration Cluster API, while modelers access them from BPMN and DMN using FEEL.
+:::
+
+### Cluster Metrics endpoint for SaaS clusters
+
+Camunda 8.9 introduces a Cluster Metrics endpoint for SaaS clusters, allowing you to:
+
+- Expose cluster metrics compatible with Prometheus‑style scraping.
+- Integrate directly with tools such as Prometheus, Datadog, or other metrics backends that support Prometheus endpoints.
+- Gain real‑time visibility into cluster performance and health.
+
+This helps operations teams consolidate Camunda monitoring into existing observability stacks, and standardize dashboards, alerts, and SLOs across environments.
 
 ## Global user task listeners {#listeners}
 
