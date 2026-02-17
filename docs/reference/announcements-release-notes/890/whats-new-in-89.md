@@ -92,6 +92,48 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 
 ## RDBMS secondary storage {#rdbms}
 
+Camunda 8.9 introduces relational databases as first‑class secondary storage options for the Orchestration Cluster.
+
+### RDBMS secondary storage for orchestration data
+
+You can now use relational databases to store and query orchestration data instead of relying solely on Elasticsearch or OpenSearch.
+
+Supported options include H2 (for development and test scenarios), PostgreSQL, Oracle, MariaDB, MySQL, Microsoft SQL Server, and Amazon Aurora PostgreSQL.
+
+- Zeebe’s primary execution storage remains unchanged (Raft + RocksDB).
+- The same REST API and data model are used regardless of whether you choose Elasticsearch/OpenSearch or an RDBMS as secondary storage.
+- You can select the storage option that best matches your operational, compliance, and cost requirements.
+
+This is particularly useful if you already standardize on one of the supported RDBMS platforms, want to avoid operating and scaling additional search clusters where they are not required, or prefer existing RDBMS tooling for backup, monitoring, and compliance.
+
+### Amazon Aurora as managed secondary storage
+
+Camunda 8.9 adds support for Amazon Aurora PostgreSQL as secondary storage, enabling:
+
+- A fully managed, cloud‑native RDBMS for secondary storage.
+- Integration with AWS features such as IAM/IRSA, high availability, and automatic failover.
+- Helm and manual installation guidance with tested configurations for Aurora.
+
+Aurora is a good fit if you run Camunda on AWS and want managed RDBMS operations instead of self‑managing PostgreSQL, and integration with existing AWS security and reliability practices.
+
+### RDBMS support policy and database scripts
+
+To clarify long‑term support, Camunda 8.9 introduces:
+
+- An RDBMS support policy covering supported database versions and adoption of new versions.
+- SQL and Liquibase scripts for all supported databases, distributed as part of the official Camunda distribution.
+
+This helps DBAs and operations teams validate that existing database versions are supported, plan upgrades based on a predictable policy and script set, and standardize roll‑outs and migrations across environments.
+
+### Standardized JDBC driver management
+
+For manual installations, Camunda 8.9 introduces a standardized directory and configuration for JDBC drivers:
+
+- A new `/driver-lib` directory separates drivers bundled by Camunda from customer‑supplied drivers (for example, Oracle or specific vendor builds).
+- Configuration options allow you to choose which drivers are active, and explicitly configure driver classes where required.
+
+This structure simplifies license‑compliant driver distribution, multi‑database support in regulated environments, and provides a clear separation between Camunda-managed and customer-managed artifacts.
+
 ## Supported environments {#environments}
 
 ## Web Modeler
