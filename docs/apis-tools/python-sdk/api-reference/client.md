@@ -1,6 +1,7 @@
 ---
 title: CamundaClient
 sidebar_label: CamundaClient
+sidebar_position: 2
 mdx:
   format: md
 ---
@@ -15,11 +16,11 @@ class CamundaClient(configuration=None, auth_provider=None, logger=None, \*\*kwa
 
 Bases: `object`
 
-- **Parameters:**
-  - **configuration** ([_CamundaSdkConfiguration_](runtime.md#camunda_orchestration_sdk.runtime.configuration_resolver.CamundaSdkConfiguration))
-  - **auth_provider** ([_AuthProvider_](runtime.md#camunda_orchestration_sdk.runtime.auth.AuthProvider))
-  - **logger** ([_CamundaLogger_](runtime.md#camunda_orchestration_sdk.runtime.logging.CamundaLogger) _|_ _None_)
-  - **kwargs** (_Any_)
+* **Parameters:**
+  * **configuration** ([*CamundaSdkConfiguration*](runtime.md#camunda_orchestration_sdk.runtime.configuration_resolver.CamundaSdkConfiguration))
+  * **auth_provider** ([*AuthProvider*](runtime.md#camunda_orchestration_sdk.runtime.auth.AuthProvider))
+  * **logger** ([*CamundaLogger*](runtime.md#camunda_orchestration_sdk.runtime.logging.CamundaLogger) *|* *None*)
+  * **kwargs** (*Any*)
 
 ### activate_ad_hoc_sub_process_activities()
 
@@ -34,24 +35,24 @@ Activate activities within an ad-hoc sub-process
 The provided element IDs must exist within the ad-hoc sub-process instance identified by the
 provided adHocSubProcessInstanceKey.
 
-- **Parameters:**
-  - **ad_hoc_sub_process_instance_key** (_str_) – System-generated key for a element instance.
+* **Parameters:**
+  * **ad_hoc_sub_process_instance_key** (*str*) – System-generated key for a element instance.
     Example: 2251799813686789.
-  - **body** (_AdHocSubProcessActivateActivitiesInstruction_)
-  - **data** (_AdHocSubProcessActivateActivitiesInstruction_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.ActivateAdHocSubProcessActivitiesBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.ActivateAdHocSubProcessActivitiesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.ActivateAdHocSubProcessActivitiesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.ActivateAdHocSubProcessActivitiesNotFound** – If the response status code is 404. The ad-hoc sub-process instance is not found or the provided key does not identify an ad-hoc sub-process.
-  - **errors.ActivateAdHocSubProcessActivitiesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.ActivateAdHocSubProcessActivitiesServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **body** (*AdHocSubProcessActivateActivitiesInstruction*)
+  * **data** (*AdHocSubProcessActivateActivitiesInstruction*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.ActivateAdHocSubProcessActivitiesBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.ActivateAdHocSubProcessActivitiesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.ActivateAdHocSubProcessActivitiesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.ActivateAdHocSubProcessActivitiesNotFound** – If the response status code is 404. The ad-hoc sub-process instance is not found or the provided key does not identify an ad-hoc sub-process.
+  * **errors.ActivateAdHocSubProcessActivitiesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.ActivateAdHocSubProcessActivitiesServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### activate_jobs()
@@ -63,21 +64,20 @@ def activate_jobs(, data, \*\*kwargs)
 Activate jobs
 
 > Iterate through all known partitions and activate jobs up to the requested maximum.
-
-- **Parameters:**
-  - **body** (_JobActivationRequest_)
-  - **data** (_JobActivationRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.ActivateJobsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.ActivateJobsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.ActivateJobsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.ActivateJobsServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*JobActivationRequest*)
+  * **data** (*JobActivationRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.ActivateJobsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.ActivateJobsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.ActivateJobsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.ActivateJobsServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ActivateJobsResponse200
-- **Return type:**
+* **Return type:**
   ActivateJobsResponse200
 
 ### Examples
@@ -111,22 +111,22 @@ Assign a client to a group
 
 Members of the group inherit the group authorizations, roles, and tenant assignments.
 
-- **Parameters:**
-  - **group_id** (_str_)
-  - **client_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.AssignClientToGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.AssignClientToGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.AssignClientToGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
-  - **errors.AssignClientToGroupConflict** – If the response status code is 409. The client with the given ID is already assigned to the group.
-  - **errors.AssignClientToGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.AssignClientToGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **group_id** (*str*)
+  * **client_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.AssignClientToGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.AssignClientToGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.AssignClientToGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
+  * **errors.AssignClientToGroupConflict** – If the response status code is 409. The client with the given ID is already assigned to the group.
+  * **errors.AssignClientToGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.AssignClientToGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### assign_client_to_tenant()
@@ -141,21 +141,21 @@ Assign a client to a tenant
 
 The client can then access tenant data and perform authorized actions.
 
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **client_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.AssignClientToTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.AssignClientToTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.AssignClientToTenantNotFound** – If the response status code is 404. The tenant was not found.
-  - **errors.AssignClientToTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.AssignClientToTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **client_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.AssignClientToTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.AssignClientToTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.AssignClientToTenantNotFound** – If the response status code is 404. The tenant was not found.
+  * **errors.AssignClientToTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.AssignClientToTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### assign_group_to_tenant()
@@ -170,21 +170,21 @@ Assign a group to a tenant
 
 Group members (users, clients) can then access tenant data and perform authorized actions.
 
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **group_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.AssignGroupToTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.AssignGroupToTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.AssignGroupToTenantNotFound** – If the response status code is 404. Not found. The tenant or group was not found.
-  - **errors.AssignGroupToTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.AssignGroupToTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **group_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.AssignGroupToTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.AssignGroupToTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.AssignGroupToTenantNotFound** – If the response status code is 404. Not found. The tenant or group was not found.
+  * **errors.AssignGroupToTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.AssignGroupToTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### assign_mapping_rule_to_group()
@@ -196,23 +196,22 @@ def assign_mapping_rule_to_group(group_id, mapping_rule_id, \*\*kwargs)
 Assign a mapping rule to a group
 
 > Assigns a mapping rule to a group.
-
-- **Parameters:**
-  - **group_id** (_str_)
-  - **mapping_rule_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.AssignMappingRuleToGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.AssignMappingRuleToGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.AssignMappingRuleToGroupNotFound** – If the response status code is 404. The group or mapping rule with the given ID was not found.
-  - **errors.AssignMappingRuleToGroupConflict** – If the response status code is 409. The mapping rule with the given ID is already assigned to the group.
-  - **errors.AssignMappingRuleToGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.AssignMappingRuleToGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **group_id** (*str*)
+  * **mapping_rule_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.AssignMappingRuleToGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.AssignMappingRuleToGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.AssignMappingRuleToGroupNotFound** – If the response status code is 404. The group or mapping rule with the given ID was not found.
+  * **errors.AssignMappingRuleToGroupConflict** – If the response status code is 409. The mapping rule with the given ID is already assigned to the group.
+  * **errors.AssignMappingRuleToGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.AssignMappingRuleToGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### assign_mapping_rule_to_tenant()
@@ -224,22 +223,21 @@ def assign_mapping_rule_to_tenant(tenant_id, mapping_rule_id, \*\*kwargs)
 Assign a mapping rule to a tenant
 
 > Assign a single mapping rule to a specified tenant.
-
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **mapping_rule_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.AssignMappingRuleToTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.AssignMappingRuleToTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.AssignMappingRuleToTenantNotFound** – If the response status code is 404. Not found. The tenant or mapping rule was not found.
-  - **errors.AssignMappingRuleToTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.AssignMappingRuleToTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **mapping_rule_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.AssignMappingRuleToTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.AssignMappingRuleToTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.AssignMappingRuleToTenantNotFound** – If the response status code is 404. Not found. The tenant or mapping rule was not found.
+  * **errors.AssignMappingRuleToTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.AssignMappingRuleToTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### assign_role_to_client()
@@ -254,22 +252,22 @@ Assign a role to a client
 
 this role.
 
-- **Parameters:**
-  - **role_id** (_str_)
-  - **client_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.AssignRoleToClientBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.AssignRoleToClientForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.AssignRoleToClientNotFound** – If the response status code is 404. The role with the given ID was not found.
-  - **errors.AssignRoleToClientConflict** – If the response status code is 409. The role was already assigned to the client with the given ID.
-  - **errors.AssignRoleToClientInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.AssignRoleToClientServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **client_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.AssignRoleToClientBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.AssignRoleToClientForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.AssignRoleToClientNotFound** – If the response status code is 404. The role with the given ID was not found.
+  * **errors.AssignRoleToClientConflict** – If the response status code is 409. The role was already assigned to the client with the given ID.
+  * **errors.AssignRoleToClientInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.AssignRoleToClientServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### assign_role_to_group()
@@ -284,22 +282,22 @@ Assign a role to a group
 
 authorizations associated with this role.
 
-- **Parameters:**
-  - **role_id** (_str_)
-  - **group_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.AssignRoleToGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.AssignRoleToGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.AssignRoleToGroupNotFound** – If the response status code is 404. The role or group with the given ID was not found.
-  - **errors.AssignRoleToGroupConflict** – If the response status code is 409. The role is already assigned to the group with the given ID.
-  - **errors.AssignRoleToGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.AssignRoleToGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **group_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.AssignRoleToGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.AssignRoleToGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.AssignRoleToGroupNotFound** – If the response status code is 404. The role or group with the given ID was not found.
+  * **errors.AssignRoleToGroupConflict** – If the response status code is 409. The role is already assigned to the group with the given ID.
+  * **errors.AssignRoleToGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.AssignRoleToGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### assign_role_to_mapping_rule()
@@ -311,23 +309,22 @@ def assign_role_to_mapping_rule(role_id, mapping_rule_id, \*\*kwargs)
 Assign a role to a mapping rule
 
 > Assigns a role to a mapping rule.
-
-- **Parameters:**
-  - **role_id** (_str_)
-  - **mapping_rule_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.AssignRoleToMappingRuleBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.AssignRoleToMappingRuleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.AssignRoleToMappingRuleNotFound** – If the response status code is 404. The role or mapping rule with the given ID was not found.
-  - **errors.AssignRoleToMappingRuleConflict** – If the response status code is 409. The role is already assigned to the mapping rule with the given ID.
-  - **errors.AssignRoleToMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.AssignRoleToMappingRuleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **mapping_rule_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.AssignRoleToMappingRuleBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.AssignRoleToMappingRuleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.AssignRoleToMappingRuleNotFound** – If the response status code is 404. The role or mapping rule with the given ID was not found.
+  * **errors.AssignRoleToMappingRuleConflict** – If the response status code is 409. The role is already assigned to the mapping rule with the given ID.
+  * **errors.AssignRoleToMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.AssignRoleToMappingRuleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### assign_role_to_tenant()
@@ -343,21 +340,21 @@ Assign a role to a tenant
 Users, Clients or Groups, that have the role assigned, will get access to the tenant’s data and can
 perform actions according to their authorizations.
 
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **role_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.AssignRoleToTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.AssignRoleToTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.AssignRoleToTenantNotFound** – If the response status code is 404. Not found. The tenant or role was not found.
-  - **errors.AssignRoleToTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.AssignRoleToTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **role_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.AssignRoleToTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.AssignRoleToTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.AssignRoleToTenantNotFound** – If the response status code is 404. Not found. The tenant or role was not found.
+  * **errors.AssignRoleToTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.AssignRoleToTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### assign_role_to_user()
@@ -372,22 +369,22 @@ Assign a role to a user
 
 this role.
 
-- **Parameters:**
-  - **role_id** (_str_)
-  - **username** (_str_) – The unique name of a user. Example: swillis.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.AssignRoleToUserBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.AssignRoleToUserForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.AssignRoleToUserNotFound** – If the response status code is 404. The role or user with the given ID or username was not found.
-  - **errors.AssignRoleToUserConflict** – If the response status code is 409. The role is already assigned to the user with the given ID.
-  - **errors.AssignRoleToUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.AssignRoleToUserServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **username** (*str*) – The unique name of a user. Example: swillis.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.AssignRoleToUserBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.AssignRoleToUserForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.AssignRoleToUserNotFound** – If the response status code is 404. The role or user with the given ID or username was not found.
+  * **errors.AssignRoleToUserConflict** – If the response status code is 409. The role is already assigned to the user with the given ID.
+  * **errors.AssignRoleToUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.AssignRoleToUserServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### assign_user_task()
@@ -399,23 +396,22 @@ def assign_user_task(user_task_key, , data, \*\*kwargs)
 Assign user task
 
 > Assigns a user task with the given key to the given assignee.
-
-- **Parameters:**
-  - **user_task_key** (_str_) – System-generated key for a user task.
-  - **body** (_UserTaskAssignmentRequest_)
-  - **data** (_UserTaskAssignmentRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.AssignUserTaskBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.AssignUserTaskNotFound** – If the response status code is 404. The user task with the given key was not found.
-  - **errors.AssignUserTaskConflict** – If the response status code is 409. The user task with the given key is in the wrong state currently. More details are provided in the response body.
-  - **errors.AssignUserTaskInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.AssignUserTaskServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **user_task_key** (*str*) – System-generated key for a user task.
+  * **body** (*UserTaskAssignmentRequest*)
+  * **data** (*UserTaskAssignmentRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.AssignUserTaskBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.AssignUserTaskNotFound** – If the response status code is 404. The user task with the given key was not found.
+  * **errors.AssignUserTaskConflict** – If the response status code is 409. The user task with the given key is in the wrong state currently. More details are provided in the response body.
+  * **errors.AssignUserTaskInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.AssignUserTaskServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### Examples
@@ -446,22 +442,22 @@ Assign a user to a group
 
 Group members inherit the group authorizations, roles, and tenant assignments.
 
-- **Parameters:**
-  - **group_id** (_str_)
-  - **username** (_str_) – The unique name of a user. Example: swillis.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.AssignUserToGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.AssignUserToGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.AssignUserToGroupNotFound** – If the response status code is 404. The group or user with the given ID or username was not found.
-  - **errors.AssignUserToGroupConflict** – If the response status code is 409. The user with the given ID is already assigned to the group.
-  - **errors.AssignUserToGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.AssignUserToGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **group_id** (*str*)
+  * **username** (*str*) – The unique name of a user. Example: swillis.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.AssignUserToGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.AssignUserToGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.AssignUserToGroupNotFound** – If the response status code is 404. The group or user with the given ID or username was not found.
+  * **errors.AssignUserToGroupConflict** – If the response status code is 409. The user with the given ID is already assigned to the group.
+  * **errors.AssignUserToGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.AssignUserToGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### assign_user_to_tenant()
@@ -476,21 +472,21 @@ Assign a user to a tenant
 
 authorized actions.
 
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **username** (_str_) – The unique name of a user. Example: swillis.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.AssignUserToTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.AssignUserToTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.AssignUserToTenantNotFound** – If the response status code is 404. Not found. The tenant or user was not found.
-  - **errors.AssignUserToTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.AssignUserToTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **username** (*str*) – The unique name of a user. Example: swillis.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.AssignUserToTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.AssignUserToTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.AssignUserToTenantNotFound** – If the response status code is 404. Not found. The tenant or user was not found.
+  * **errors.AssignUserToTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.AssignUserToTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### auth_provider
@@ -508,21 +504,20 @@ def broadcast_signal(, data, \*\*kwargs)
 Broadcast signal
 
 > Broadcasts a signal.
-
-- **Parameters:**
-  - **body** (_SignalBroadcastRequest_)
-  - **data** (_SignalBroadcastRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.BroadcastSignalBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.BroadcastSignalNotFound** – If the response status code is 404. The signal is not found.
-  - **errors.BroadcastSignalInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.BroadcastSignalServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*SignalBroadcastRequest*)
+  * **data** (*SignalBroadcastRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.BroadcastSignalBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.BroadcastSignalNotFound** – If the response status code is 404. The signal is not found.
+  * **errors.BroadcastSignalInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.BroadcastSignalServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   SignalBroadcastResult
-- **Return type:**
+* **Return type:**
   SignalBroadcastResult
 
 ### Examples
@@ -555,21 +550,22 @@ Cancel Batch operation
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint
 (/batch-operations/{batchOperationKey}).
 
-- **Parameters:**
-  - **batch_operation_key** (_str_) – System-generated key for an batch operation. Example: 2251799813684321.
-  - **body** (_Any_ _|_ _Unset_)
-  - **data** (_Any_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CancelBatchOperationBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CancelBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.CancelBatchOperationNotFound** – If the response status code is 404. Not found. The batch operation was not found.
-  - **errors.CancelBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **batch_operation_key** (*str*) – System-generated key for an batch operation. Example:
+    2251799813684321.
+  * **body** (*Any* *|* *Unset*)
+  * **data** (*Any* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CancelBatchOperationBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CancelBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.CancelBatchOperationNotFound** – If the response status code is 404. Not found. The batch operation was not found.
+  * **errors.CancelBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### cancel_process_instance()
@@ -584,21 +580,22 @@ Cancel process instance
 
 process instance resource, the cancellation resource must be posted.
 
-- **Parameters:**
-  - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
-  - **body** (_CancelProcessInstanceDataType0_ _|_ _None_ _|_ _Unset_)
-  - **data** (_CancelProcessInstanceDataType0_ _|_ _None_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CancelProcessInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CancelProcessInstanceNotFound** – If the response status code is 404. The process instance is not found.
-  - **errors.CancelProcessInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.CancelProcessInstanceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **process_instance_key** (*str*) – System-generated key for a process instance. Example:
+    2251799813690746.
+  * **body** (*CancelProcessInstanceDataType0* *|* *None* *|* *Unset*)
+  * **data** (*CancelProcessInstanceDataType0* *|* *None* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CancelProcessInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CancelProcessInstanceNotFound** – If the response status code is 404. The process instance is not found.
+  * **errors.CancelProcessInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.CancelProcessInstanceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### Examples
@@ -635,21 +632,21 @@ parentProcessInstanceKey are ignored and overridden during this batch operation.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-- **Parameters:**
-  - **body** (_CancelProcessInstancesBatchOperationData_) – The process instance filter that defines
+* **Parameters:**
+  * **body** (*CancelProcessInstancesBatchOperationData*) – The process instance filter that defines
     which process instances should be canceled.
-  - **data** (_CancelProcessInstancesBatchOperationData_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CancelProcessInstancesBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
-  - **errors.CancelProcessInstancesBatchOperationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.CancelProcessInstancesBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.CancelProcessInstancesBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **data** (*CancelProcessInstancesBatchOperationData*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CancelProcessInstancesBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  * **errors.CancelProcessInstancesBatchOperationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.CancelProcessInstancesBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.CancelProcessInstancesBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   BatchOperationCreatedResult
-- **Return type:**
+* **Return type:**
   BatchOperationCreatedResult
 
 ### client
@@ -669,7 +666,7 @@ Close underlying HTTP clients.
 This closes both the API client’s httpx client and, when available, the
 auth provider’s token client.
 
-- **Return type:**
+* **Return type:**
   None
 
 ### complete_job()
@@ -681,23 +678,22 @@ def complete_job(job_key, \*, data=<camunda_orchestration_sdk.types.Unset object
 Complete job
 
 > Complete a job with the given payload, which allows completing the associated service task.
-
-- **Parameters:**
-  - **job_key** (_str_) – System-generated key for a job. Example: 2251799813653498.
-  - **body** (_CompleteJobData_ _|_ _Unset_)
-  - **data** (_CompleteJobData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CompleteJobBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CompleteJobNotFound** – If the response status code is 404. The job with the given key was not found.
-  - **errors.CompleteJobConflict** – If the response status code is 409. The job with the given key is in the wrong state currently. More details are provided in the response body.
-  - **errors.CompleteJobInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.CompleteJobServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **job_key** (*str*) – System-generated key for a job. Example: 2251799813653498.
+  * **body** (*CompleteJobData* *|* *Unset*)
+  * **data** (*CompleteJobData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CompleteJobBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CompleteJobNotFound** – If the response status code is 404. The job with the given key was not found.
+  * **errors.CompleteJobConflict** – If the response status code is 409. The job with the given key is in the wrong state currently. More details are provided in the response body.
+  * **errors.CompleteJobInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.CompleteJobServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### Examples
@@ -727,23 +723,22 @@ def complete_user_task(user_task_key, \*, data=<camunda_orchestration_sdk.types.
 Complete user task
 
 > Completes a user task with the given key.
-
-- **Parameters:**
-  - **user_task_key** (_str_) – System-generated key for a user task.
-  - **body** (_UserTaskCompletionRequest_ _|_ _Unset_)
-  - **data** (_UserTaskCompletionRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CompleteUserTaskBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CompleteUserTaskNotFound** – If the response status code is 404. The user task with the given key was not found.
-  - **errors.CompleteUserTaskConflict** – If the response status code is 409. The user task with the given key is in the wrong state currently. More details are provided in the response body.
-  - **errors.CompleteUserTaskInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.CompleteUserTaskServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **user_task_key** (*str*) – System-generated key for a user task.
+  * **body** (*UserTaskCompletionRequest* *|* *Unset*)
+  * **data** (*UserTaskCompletionRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CompleteUserTaskBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CompleteUserTaskNotFound** – If the response status code is 404. The user task with the given key was not found.
+  * **errors.CompleteUserTaskConflict** – If the response status code is 409. The user task with the given key is in the wrong state currently. More details are provided in the response body.
+  * **errors.CompleteUserTaskInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.CompleteUserTaskServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### Examples
@@ -786,21 +781,21 @@ with.
 The message is not buffered.
 Use the publish message endpoint to send messages that can be buffered.
 
-- **Parameters:**
-  - **body** (_MessageCorrelationRequest_)
-  - **data** (_MessageCorrelationRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CorrelateMessageBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CorrelateMessageForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.CorrelateMessageNotFound** – If the response status code is 404. Not found
-  - **errors.CorrelateMessageInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.CorrelateMessageServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*MessageCorrelationRequest*)
+  * **data** (*MessageCorrelationRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CorrelateMessageBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CorrelateMessageForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.CorrelateMessageNotFound** – If the response status code is 404. Not found
+  * **errors.CorrelateMessageInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.CorrelateMessageServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   MessageCorrelationResult
-- **Return type:**
+* **Return type:**
   MessageCorrelationResult
 
 ### Examples
@@ -834,20 +829,20 @@ Create admin user
 
 managed in the Orchestration Cluster and while no user is assigned to the admin role.
 
-- **Parameters:**
-  - **body** (_UserRequest_)
-  - **data** (_UserRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateAdminUserBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateAdminUserForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.CreateAdminUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.CreateAdminUserServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*UserRequest*)
+  * **data** (*UserRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateAdminUserBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateAdminUserForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.CreateAdminUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.CreateAdminUserServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### create_authorization()
@@ -859,23 +854,22 @@ def create_authorization(, data, \*\*kwargs)
 Create authorization
 
 > Create the authorization.
-
-- **Parameters:**
-  - **body** (_AuthorizationIdBasedRequest_ _|_ _AuthorizationPropertyBasedRequest_)
-  - **data** (_AuthorizationIdBasedRequest_ _|_ _AuthorizationPropertyBasedRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateAuthorizationBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateAuthorizationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.CreateAuthorizationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.CreateAuthorizationNotFound** – If the response status code is 404. The owner was not found.
-  - **errors.CreateAuthorizationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.CreateAuthorizationServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*AuthorizationIdBasedRequest* *|* *AuthorizationPropertyBasedRequest*)
+  * **data** (*AuthorizationIdBasedRequest* *|* *AuthorizationPropertyBasedRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateAuthorizationBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateAuthorizationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.CreateAuthorizationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.CreateAuthorizationNotFound** – If the response status code is 404. The owner was not found.
+  * **errors.CreateAuthorizationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.CreateAuthorizationServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   AuthorizationCreateResult
-- **Return type:**
+* **Return type:**
   AuthorizationCreateResult
 
 ### create_deployment()
@@ -890,18 +884,18 @@ Deploy resources
 
 This is an atomic call, i.e. either all resources are deployed or none of them are.
 
-- **Parameters:**
-  - **body** (_CreateDeploymentData_)
-  - **data** (_CreateDeploymentData_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateDeploymentBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateDeploymentServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*CreateDeploymentData*)
+  * **data** (*CreateDeploymentData*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateDeploymentBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateDeploymentServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   CreateDeploymentResponse200
-- **Return type:**
+* **Return type:**
   CreateDeploymentResponse200
 
 ### Examples
@@ -953,20 +947,20 @@ Upload document
 Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-
 production), local (non-production)
 
-- **Parameters:**
-  - **store_id** (_str_ _|_ _Unset_)
-  - **document_id** (_str_ _|_ _Unset_) – Document Id that uniquely identifies a document.
-  - **body** (_CreateDocumentData_)
-  - **data** (_CreateDocumentData_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateDocumentBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateDocumentUnsupportedMediaType** – If the response status code is 415. The server cannot process the request because the media type (Content-Type) of the request payload is not supported by the server for the requested resource and method.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **store_id** (*str* *|* *Unset*)
+  * **document_id** (*str* *|* *Unset*) – Document Id that uniquely identifies a document.
+  * **body** (*CreateDocumentData*)
+  * **data** (*CreateDocumentData*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateDocumentBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateDocumentUnsupportedMediaType** – If the response status code is 415. The server cannot process the request because the media type (Content-Type) of the request payload is not supported by the server for the requested resource and method.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   DocumentReference
-- **Return type:**
+* **Return type:**
   DocumentReference
 
 ### create_document_link()
@@ -981,20 +975,20 @@ Create document link
 
 Note that this is currently supported for document stores of type: AWS, GCP
 
-- **Parameters:**
-  - **document_id** (_str_) – Document Id that uniquely identifies a document.
-  - **store_id** (_str_ _|_ _Unset_)
-  - **content_hash** (_str_ _|_ _Unset_)
-  - **body** (_DocumentLinkRequest_ _|_ _Unset_)
-  - **data** (_DocumentLinkRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateDocumentLinkBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **document_id** (*str*) – Document Id that uniquely identifies a document.
+  * **store_id** (*str* *|* *Unset*)
+  * **content_hash** (*str* *|* *Unset*)
+  * **body** (*DocumentLinkRequest* *|* *Unset*)
+  * **data** (*DocumentLinkRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateDocumentLinkBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   DocumentLink
-- **Return type:**
+* **Return type:**
   DocumentLink
 
 ### create_documents()
@@ -1028,19 +1022,19 @@ The client can choose to retry the whole batch or individual documents based on 
 Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-
 production), local (non-production)
 
-- **Parameters:**
-  - **store_id** (_str_ _|_ _Unset_)
-  - **body** (_CreateDocumentsData_)
-  - **data** (_CreateDocumentsData_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateDocumentsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateDocumentsUnsupportedMediaType** – If the response status code is 415. The server cannot process the request because the media type (Content-Type) of the request payload is not supported by the server for the requested resource and method.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **store_id** (*str* *|* *Unset*)
+  * **body** (*CreateDocumentsData*)
+  * **data** (*CreateDocumentsData*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateDocumentsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateDocumentsUnsupportedMediaType** – If the response status code is 415. The server cannot process the request because the media type (Content-Type) of the request payload is not supported by the server for the requested resource and method.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   DocumentCreationBatchResponse
-- **Return type:**
+* **Return type:**
   DocumentCreationBatchResponse
 
 ### create_element_instance_variables()
@@ -1056,20 +1050,21 @@ Update element instance variables
 with the given variable data.
 Specify the element instance in the elementInstanceKey parameter.
 
-- **Parameters:**
-  - **element_instance_key** (_str_) – System-generated key for a element instance. Example: 2251799813686789.
-  - **body** (_SetVariableRequest_)
-  - **data** (_SetVariableRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateElementInstanceVariablesBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateElementInstanceVariablesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.CreateElementInstanceVariablesServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **element_instance_key** (*str*) – System-generated key for a element instance. Example:
+    2251799813686789.
+  * **body** (*SetVariableRequest*)
+  * **data** (*SetVariableRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateElementInstanceVariablesBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateElementInstanceVariablesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.CreateElementInstanceVariablesServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### create_global_cluster_variable()
@@ -1080,20 +1075,20 @@ def create_global_cluster_variable(, data, \*\*kwargs)
 
 Create a global-scoped cluster variable
 
-- **Parameters:**
-  - **body** (_CreateClusterVariableRequest_)
-  - **data** (_CreateClusterVariableRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateGlobalClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateGlobalClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.CreateGlobalClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.CreateGlobalClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*CreateClusterVariableRequest*)
+  * **data** (*CreateClusterVariableRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateGlobalClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateGlobalClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.CreateGlobalClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.CreateGlobalClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ClusterVariableResult
-- **Return type:**
+* **Return type:**
   ClusterVariableResult
 
 ### create_group()
@@ -1105,22 +1100,21 @@ def create_group(\*, data=<camunda_orchestration_sdk.types.Unset object>, \*\*kw
 Create group
 
 > Create a new group.
-
-- **Parameters:**
-  - **body** (_GroupCreateRequest_ _|_ _Unset_)
-  - **data** (_GroupCreateRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.CreateGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.CreateGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.CreateGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*GroupCreateRequest* *|* *Unset*)
+  * **data** (*GroupCreateRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.CreateGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.CreateGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.CreateGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   GroupCreateResult
-- **Return type:**
+* **Return type:**
   GroupCreateResult
 
 ### create_mapping_rule()
@@ -1132,21 +1126,20 @@ def create_mapping_rule(\*, data=<camunda_orchestration_sdk.types.Unset object>,
 Create mapping rule
 
 > Create a new mapping rule
-
-- **Parameters:**
-  - **body** (_MappingRuleCreateRequest_ _|_ _Unset_)
-  - **data** (_MappingRuleCreateRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateMappingRuleBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateMappingRuleForbidden** – If the response status code is 403. The request to create a mapping rule was denied. More details are provided in the response body.
-  - **errors.CreateMappingRuleNotFound** – If the response status code is 404. The request to create a mapping rule was denied.
-  - **errors.CreateMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*MappingRuleCreateRequest* *|* *Unset*)
+  * **data** (*MappingRuleCreateRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateMappingRuleBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateMappingRuleForbidden** – If the response status code is 403. The request to create a mapping rule was denied. More details are provided in the response body.
+  * **errors.CreateMappingRuleNotFound** – If the response status code is 404. The request to create a mapping rule was denied.
+  * **errors.CreateMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   MappingRuleUpdateResult
-- **Return type:**
+* **Return type:**
   MappingRuleUpdateResult
 
 ### create_process_instance()
@@ -1165,22 +1158,22 @@ The process definition to use to create the instance can be specified either usi
 Waits for the completion of the process instance before returning a result
 when awaitCompletion is enabled.
 
-- **Parameters:**
-  - **body** (_ProcessCreationById_ _|_ _ProcessCreationByKey_) – Instructions for creating a process
+* **Parameters:**
+  * **body** (*ProcessCreationById* *|* *ProcessCreationByKey*) – Instructions for creating a process
     instance. The process definition can be specified
     either by id or by key.
-  - **data** (_ProcessCreationById_ _|_ _ProcessCreationByKey_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateProcessInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateProcessInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.CreateProcessInstanceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.CreateProcessInstanceGatewayTimeout** – If the response status code is 504. The process instance creation request timed out in the gateway. This can happen if the awaitCompletion request parameter is set to true and the created process instance did not complete within the defined request timeout. This often happens when the created instance is not fully automated or contains wait states.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **data** (*ProcessCreationById* *|* *ProcessCreationByKey*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateProcessInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateProcessInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.CreateProcessInstanceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.CreateProcessInstanceGatewayTimeout** – If the response status code is 504. The process instance creation request timed out in the gateway. This can happen if the awaitCompletion request parameter is set to true and the created process instance did not complete within the defined request timeout. This often happens when the created instance is not fully automated or contains wait states.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   CreateProcessInstanceResult
-- **Return type:**
+* **Return type:**
   CreateProcessInstanceResult
 
 ### Examples
@@ -1247,22 +1240,21 @@ def create_role(\*, data=<camunda_orchestration_sdk.types.Unset object>, \*\*kwa
 Create role
 
 > Create a new role.
-
-- **Parameters:**
-  - **body** (_RoleCreateRequest_ _|_ _Unset_)
-  - **data** (_RoleCreateRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateRoleBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.CreateRoleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.CreateRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.CreateRoleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*RoleCreateRequest* *|* *Unset*)
+  * **data** (*RoleCreateRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateRoleBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.CreateRoleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.CreateRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.CreateRoleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   RoleCreateResult
-- **Return type:**
+* **Return type:**
   RoleCreateResult
 
 ### create_tenant()
@@ -1274,23 +1266,22 @@ def create_tenant(, data, \*\*kwargs)
 Create tenant
 
 > Creates a new tenant.
-
-- **Parameters:**
-  - **body** (_TenantCreateRequest_)
-  - **data** (_TenantCreateRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.CreateTenantNotFound** – If the response status code is 404. Not found. The resource was not found.
-  - **errors.CreateTenantConflict** – If the response status code is 409. Tenant with this id already exists.
-  - **errors.CreateTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.CreateTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*TenantCreateRequest*)
+  * **data** (*TenantCreateRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.CreateTenantNotFound** – If the response status code is 404. Not found. The resource was not found.
+  * **errors.CreateTenantConflict** – If the response status code is 409. Tenant with this id already exists.
+  * **errors.CreateTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.CreateTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   TenantCreateResult
-- **Return type:**
+* **Return type:**
   TenantCreateResult
 
 ### create_tenant_cluster_variable()
@@ -1301,21 +1292,21 @@ def create_tenant_cluster_variable(tenant_id, , data, \*\*kwargs)
 
 Create a tenant-scoped cluster variable
 
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **body** (_CreateClusterVariableRequest_)
-  - **data** (_CreateClusterVariableRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateTenantClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateTenantClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.CreateTenantClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.CreateTenantClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **body** (*CreateClusterVariableRequest*)
+  * **data** (*CreateClusterVariableRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateTenantClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateTenantClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.CreateTenantClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.CreateTenantClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ClusterVariableResult
-- **Return type:**
+* **Return type:**
   ClusterVariableResult
 
 ### create_user()
@@ -1327,23 +1318,22 @@ def create_user(, data, \*\*kwargs)
 Create user
 
 > Create a new user.
-
-- **Parameters:**
-  - **body** (_UserRequest_)
-  - **data** (_UserRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.CreateUserBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.CreateUserUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.CreateUserForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.CreateUserConflict** – If the response status code is 409. A user with this username already exists.
-  - **errors.CreateUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.CreateUserServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*UserRequest*)
+  * **data** (*UserRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateUserBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateUserUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.CreateUserForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.CreateUserConflict** – If the response status code is 409. A user with this username already exists.
+  * **errors.CreateUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.CreateUserServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   UserCreateResult
-- **Return type:**
+* **Return type:**
   UserCreateResult
 
 ### delete_authorization()
@@ -1355,20 +1345,20 @@ def delete_authorization(authorization_key, \*\*kwargs)
 Delete authorization
 
 > Deletes the authorization with the given key.
-
-- **Parameters:**
-  - **authorization_key** (_str_) – System-generated key for an authorization. Example: 2251799813684332.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteAuthorizationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.DeleteAuthorizationNotFound** – If the response status code is 404. The authorization with the authorizationKey was not found.
-  - **errors.DeleteAuthorizationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.DeleteAuthorizationServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **authorization_key** (*str*) – System-generated key for an authorization. Example:
+    2251799813684332.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteAuthorizationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.DeleteAuthorizationNotFound** – If the response status code is 404. The authorization with the authorizationKey was not found.
+  * **errors.DeleteAuthorizationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.DeleteAuthorizationServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### delete_decision_instance()
@@ -1380,24 +1370,23 @@ def delete_decision_instance(decision_instance_key, \*, data=<camunda_orchestrat
 Delete decision instance
 
 > Delete all associated decision evaluations based on provided key.
-
-- **Parameters:**
-  - **decision_instance_key** (_str_) – System-generated key for a deployed decision instance.
+* **Parameters:**
+  * **decision_instance_key** (*str*) – System-generated key for a deployed decision instance.
     Example: 22517998136843567.
-  - **body** (_DeleteProcessInstanceRequestType0_ _|_ _None_ _|_ _Unset_)
-  - **data** (_DeleteProcessInstanceRequestType0_ _|_ _None_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteDecisionInstanceUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.DeleteDecisionInstanceForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.DeleteDecisionInstanceNotFound** – If the response status code is 404. The decision instance is not found.
-  - **errors.DeleteDecisionInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.DeleteDecisionInstanceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **body** (*DeleteProcessInstanceRequestType0* *|* *None* *|* *Unset*)
+  * **data** (*DeleteProcessInstanceRequestType0* *|* *None* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteDecisionInstanceUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.DeleteDecisionInstanceForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.DeleteDecisionInstanceNotFound** – If the response status code is 404. The decision instance is not found.
+  * **errors.DeleteDecisionInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.DeleteDecisionInstanceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   BatchOperationCreatedResult
-- **Return type:**
+* **Return type:**
   BatchOperationCreatedResult
 
 ### delete_decision_instances_batch_operation()
@@ -1413,21 +1402,21 @@ Delete decision instances (batch)
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-- **Parameters:**
-  - **body** (_DecisionInstanceDeletionBatchOperationRequest_) – The decision instance filter that
+* **Parameters:**
+  * **body** (*DecisionInstanceDeletionBatchOperationRequest*) – The decision instance filter that
     defines which decision instances should be deleted.
-  - **data** (_DecisionInstanceDeletionBatchOperationRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteDecisionInstancesBatchOperationBadRequest** – If the response status code is 400. The decision instance batch operation failed. More details are provided in the response body.
-  - **errors.DeleteDecisionInstancesBatchOperationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.DeleteDecisionInstancesBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.DeleteDecisionInstancesBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **data** (*DecisionInstanceDeletionBatchOperationRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteDecisionInstancesBatchOperationBadRequest** – If the response status code is 400. The decision instance batch operation failed. More details are provided in the response body.
+  * **errors.DeleteDecisionInstancesBatchOperationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.DeleteDecisionInstancesBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.DeleteDecisionInstancesBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   BatchOperationCreatedResult
-- **Return type:**
+* **Return type:**
   BatchOperationCreatedResult
 
 ### delete_document()
@@ -1443,18 +1432,18 @@ Delete document
 Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-
 production), local (non-production)
 
-- **Parameters:**
-  - **document_id** (_str_) – Document Id that uniquely identifies a document.
-  - **store_id** (_str_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteDocumentNotFound** – If the response status code is 404. The document with the given ID was not found.
-  - **errors.DeleteDocumentInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **document_id** (*str*) – Document Id that uniquely identifies a document.
+  * **store_id** (*str* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteDocumentNotFound** – If the response status code is 404. The document with the given ID was not found.
+  * **errors.DeleteDocumentInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### delete_global_cluster_variable()
@@ -1465,20 +1454,20 @@ def delete_global_cluster_variable(name, \*\*kwargs)
 
 Delete a global-scoped cluster variable
 
-- **Parameters:**
-  - **name** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteGlobalClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.DeleteGlobalClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.DeleteGlobalClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.DeleteGlobalClusterVariableNotFound** – If the response status code is 404. Cluster variable not found
-  - **errors.DeleteGlobalClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **name** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteGlobalClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.DeleteGlobalClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.DeleteGlobalClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.DeleteGlobalClusterVariableNotFound** – If the response status code is 404. Cluster variable not found
+  * **errors.DeleteGlobalClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### delete_group()
@@ -1490,20 +1479,19 @@ def delete_group(group_id, \*\*kwargs)
 Delete group
 
 > Deletes the group with the given ID.
-
-- **Parameters:**
-  - **group_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.DeleteGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
-  - **errors.DeleteGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.DeleteGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **group_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.DeleteGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
+  * **errors.DeleteGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.DeleteGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### delete_mapping_rule()
@@ -1515,20 +1503,19 @@ def delete_mapping_rule(mapping_rule_id, \*\*kwargs)
 Delete a mapping rule
 
 > Deletes the mapping rule with the given ID.
-
-- **Parameters:**
-  - **mapping_rule_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteMappingRuleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.DeleteMappingRuleNotFound** – If the response status code is 404. The mapping rule with the mappingRuleId was not found.
-  - **errors.DeleteMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.DeleteMappingRuleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **mapping_rule_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteMappingRuleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.DeleteMappingRuleNotFound** – If the response status code is 404. The mapping rule with the mappingRuleId was not found.
+  * **errors.DeleteMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.DeleteMappingRuleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### delete_process_instance()
@@ -1540,24 +1527,24 @@ def delete_process_instance(process_instance_key, \*, data=<camunda_orchestratio
 Delete process instance
 
 > Deletes a process instance. Only instances that are completed or terminated can be deleted.
-
-- **Parameters:**
-  - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
-  - **body** (_DeleteProcessInstanceDataType0_ _|_ _None_ _|_ _Unset_)
-  - **data** (_DeleteProcessInstanceDataType0_ _|_ _None_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteProcessInstanceUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.DeleteProcessInstanceForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.DeleteProcessInstanceNotFound** – If the response status code is 404. The process instance is not found.
-  - **errors.DeleteProcessInstanceConflict** – If the response status code is 409. The process instance is not in a completed or terminated state and cannot be deleted.
-  - **errors.DeleteProcessInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.DeleteProcessInstanceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **process_instance_key** (*str*) – System-generated key for a process instance. Example:
+    2251799813690746.
+  * **body** (*DeleteProcessInstanceDataType0* *|* *None* *|* *Unset*)
+  * **data** (*DeleteProcessInstanceDataType0* *|* *None* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteProcessInstanceUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.DeleteProcessInstanceForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.DeleteProcessInstanceNotFound** – If the response status code is 404. The process instance is not found.
+  * **errors.DeleteProcessInstanceConflict** – If the response status code is 409. The process instance is not in a completed or terminated state and cannot be deleted.
+  * **errors.DeleteProcessInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.DeleteProcessInstanceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   BatchOperationCreatedResult
-- **Return type:**
+* **Return type:**
   BatchOperationCreatedResult
 
 ### delete_process_instances_batch_operation()
@@ -1574,21 +1561,21 @@ Only process instances in a final state (COMPLETED or TERMINATED) can be deleted
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-- **Parameters:**
-  - **body** (_DeleteProcessInstancesBatchOperationData_) – The process instance filter that defines
+* **Parameters:**
+  * **body** (*DeleteProcessInstancesBatchOperationData*) – The process instance filter that defines
     which process instances should be deleted.
-  - **data** (_DeleteProcessInstancesBatchOperationData_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteProcessInstancesBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
-  - **errors.DeleteProcessInstancesBatchOperationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.DeleteProcessInstancesBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.DeleteProcessInstancesBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **data** (*DeleteProcessInstancesBatchOperationData*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteProcessInstancesBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  * **errors.DeleteProcessInstancesBatchOperationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.DeleteProcessInstancesBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.DeleteProcessInstancesBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   BatchOperationCreatedResult
-- **Return type:**
+* **Return type:**
   BatchOperationCreatedResult
 
 ### delete_resource()
@@ -1614,21 +1601,21 @@ the created batch operation are included in the response. Note that history dele
 supported for process resources; for other resource types this flag is ignored and no history
 will be deleted.
 
-- **Parameters:**
-  - **resource_key** (_str_) – The system-assigned key for this resource.
-  - **body** (_DeleteResourceDataType0_ _|_ _None_ _|_ _Unset_)
-  - **data** (_DeleteResourceDataType0_ _|_ _None_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteResourceBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.DeleteResourceNotFound** – If the response status code is 404. The resource is not found.
-  - **errors.DeleteResourceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.DeleteResourceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **resource_key** (*str*) – The system-assigned key for this resource.
+  * **body** (*DeleteResourceDataType0* *|* *None* *|* *Unset*)
+  * **data** (*DeleteResourceDataType0* *|* *None* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteResourceBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.DeleteResourceNotFound** – If the response status code is 404. The resource is not found.
+  * **errors.DeleteResourceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.DeleteResourceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   DeleteResourceResponse
-- **Return type:**
+* **Return type:**
   DeleteResourceResponse
 
 ### Examples
@@ -1652,20 +1639,19 @@ def delete_role(role_id, \*\*kwargs)
 Delete role
 
 > Deletes the role with the given ID.
-
-- **Parameters:**
-  - **role_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.DeleteRoleNotFound** – If the response status code is 404. The role with the ID was not found.
-  - **errors.DeleteRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.DeleteRoleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.DeleteRoleNotFound** – If the response status code is 404. The role with the ID was not found.
+  * **errors.DeleteRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.DeleteRoleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### delete_tenant()
@@ -1677,21 +1663,20 @@ def delete_tenant(tenant_id, \*\*kwargs)
 Delete tenant
 
 > Deletes an existing tenant.
-
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.DeleteTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.DeleteTenantNotFound** – If the response status code is 404. Not found. The tenant was not found.
-  - **errors.DeleteTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.DeleteTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.DeleteTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.DeleteTenantNotFound** – If the response status code is 404. Not found. The tenant was not found.
+  * **errors.DeleteTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.DeleteTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### delete_tenant_cluster_variable()
@@ -1702,21 +1687,21 @@ def delete_tenant_cluster_variable(tenant_id, name, \*\*kwargs)
 
 Delete a tenant-scoped cluster variable
 
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **name** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteTenantClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.DeleteTenantClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.DeleteTenantClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.DeleteTenantClusterVariableNotFound** – If the response status code is 404. Cluster variable not found
-  - **errors.DeleteTenantClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **name** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteTenantClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.DeleteTenantClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.DeleteTenantClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.DeleteTenantClusterVariableNotFound** – If the response status code is 404. Cluster variable not found
+  * **errors.DeleteTenantClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### delete_user()
@@ -1728,20 +1713,19 @@ def delete_user(username, \*\*kwargs)
 Delete user
 
 > Deletes a user.
-
-- **Parameters:**
-  - **username** (_str_) – The unique name of a user. Example: swillis.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.DeleteUserBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.DeleteUserNotFound** – If the response status code is 404. The user is not found.
-  - **errors.DeleteUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.DeleteUserServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **username** (*str*) – The unique name of a user. Example: swillis.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteUserBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.DeleteUserNotFound** – If the response status code is 404. The user is not found.
+  * **errors.DeleteUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.DeleteUserServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### deploy_resources_from_files()
@@ -1763,19 +1747,19 @@ This is a convenience wrapper around [`create_deployment()`](#create_deployment)
   convenience lists (`processes`, `decisions`, `decision_requirements`, `forms`).
 
 * **Parameters:**
-  - **files** (_list_ _[\*\*str_ _|_ _Path_ _]_) – File paths (`str` or `Path`) to deploy.
-  - **tenant_id** (_str_ _|_ _None_) – Optional tenant identifier. If not provided, the default tenant is used.
+  * **files** (*list* *[**str* *|* *Path* *]*) – File paths (`str` or `Path`) to deploy.
+  * **tenant_id** (*str* *|* *None*) – Optional tenant identifier. If not provided, the default tenant is used.
 * **Returns:**
   The deployment result with extracted resource lists.
 * **Return type:**
   ExtendedDeploymentResult
 * **Raises:**
-  - **FileNotFoundError** – If any file path does not exist.
-  - **PermissionError** – If any file path cannot be read.
-  - **IsADirectoryError** – If any file path is a directory.
-  - **OSError** – For other I/O failures while reading files.
-  - **Exception** – Propagates any exception raised by [`create_deployment()`](#create_deployment) (including
-    typed API errors in `camunda_orchestration_sdk.errors` and `httpx.TimeoutException`).
+  * **FileNotFoundError** – If any file path does not exist.
+  * **PermissionError** – If any file path cannot be read.
+  * **IsADirectoryError** – If any file path is a directory.
+  * **OSError** – For other I/O failures while reading files.
+  * **Exception** – Propagates any exception raised by [`create_deployment()`](#create_deployment) (including
+        typed API errors in `camunda_orchestration_sdk.errors` and `httpx.TimeoutException`).
 
 ### evaluate_conditionals()
 
@@ -1792,21 +1776,21 @@ with their associated process definition key.
 Multiple root-level conditional start events of the same process definition can trigger if their
 conditions evaluate to true.
 
-- **Parameters:**
-  - **body** (_ConditionalEvaluationInstruction_)
-  - **data** (_ConditionalEvaluationInstruction_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.EvaluateConditionalsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.EvaluateConditionalsForbidden** – If the response status code is 403. The client is not authorized to start process instances for the specified process definition. If a processDefinitionKey is not provided, this indicates that the client is not authorized to start process instances for at least one of the matched process definitions.
-  - **errors.EvaluateConditionalsNotFound** – If the response status code is 404. The process definition was not found for the given processDefinitionKey.
-  - **errors.EvaluateConditionalsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.EvaluateConditionalsServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*ConditionalEvaluationInstruction*)
+  * **data** (*ConditionalEvaluationInstruction*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.EvaluateConditionalsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.EvaluateConditionalsForbidden** – If the response status code is 403. The client is not authorized to start process instances for the specified process definition. If a processDefinitionKey is not provided, this indicates that the client is not authorized to start process instances for at least one of the matched process definitions.
+  * **errors.EvaluateConditionalsNotFound** – If the response status code is 404. The process definition was not found for the given processDefinitionKey.
+  * **errors.EvaluateConditionalsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.EvaluateConditionalsServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   EvaluateConditionalResult
-- **Return type:**
+* **Return type:**
   EvaluateConditionalResult
 
 ### evaluate_decision()
@@ -1823,20 +1807,20 @@ You specify the decision to evaluate either by using its unique key (as returned
 DeployResource), or using the decision ID. When using the decision ID, the latest deployed
 version of the decision is used.
 
-- **Parameters:**
-  - **body** (_DecisionEvaluationByID_ _|_ _DecisionEvaluationByKey_)
-  - **data** (_DecisionEvaluationByID_ _|_ _DecisionEvaluationByKey_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.EvaluateDecisionBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.EvaluateDecisionNotFound** – If the response status code is 404. The decision is not found.
-  - **errors.EvaluateDecisionInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.EvaluateDecisionServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*DecisionEvaluationByID* *|* *DecisionEvaluationByKey*)
+  * **data** (*DecisionEvaluationByID* *|* *DecisionEvaluationByKey*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.EvaluateDecisionBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.EvaluateDecisionNotFound** – If the response status code is 404. The decision is not found.
+  * **errors.EvaluateDecisionInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.EvaluateDecisionServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   EvaluateDecisionResult
-- **Return type:**
+* **Return type:**
   EvaluateDecisionResult
 
 ### Examples
@@ -1883,20 +1867,20 @@ Evaluate an expression
 
 variables when a tenant ID is provided.
 
-- **Parameters:**
-  - **body** (_ExpressionEvaluationRequest_)
-  - **data** (_ExpressionEvaluationRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.EvaluateExpressionBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.EvaluateExpressionUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.EvaluateExpressionForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.EvaluateExpressionInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*ExpressionEvaluationRequest*)
+  * **data** (*ExpressionEvaluationRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.EvaluateExpressionBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.EvaluateExpressionUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.EvaluateExpressionForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.EvaluateExpressionInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ExpressionEvaluationResult
-- **Return type:**
+* **Return type:**
   ExpressionEvaluationResult
 
 ### fail_job()
@@ -1908,23 +1892,22 @@ def fail_job(job_key, \*, data=<camunda_orchestration_sdk.types.Unset object>, \
 Fail job
 
 > Mark the job as failed.
-
-- **Parameters:**
-  - **job_key** (_str_) – System-generated key for a job. Example: 2251799813653498.
-  - **body** (_JobFailRequest_ _|_ _Unset_)
-  - **data** (_JobFailRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.FailJobBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.FailJobNotFound** – If the response status code is 404. The job with the given jobKey is not found. It was completed by another worker, or the process instance itself was canceled.
-  - **errors.FailJobConflict** – If the response status code is 409. The job with the given key is in the wrong state (i.e: not ACTIVATED or ACTIVATABLE). The job was failed by another worker with retries = 0, and the process is now in an incident state.
-  - **errors.FailJobInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.FailJobServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **job_key** (*str*) – System-generated key for a job. Example: 2251799813653498.
+  * **body** (*JobFailRequest* *|* *Unset*)
+  * **data** (*JobFailRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.FailJobBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.FailJobNotFound** – If the response status code is 404. The job with the given jobKey is not found. It was completed by another worker, or the process instance itself was canceled.
+  * **errors.FailJobConflict** – If the response status code is 409. The job with the given key is in the wrong state (i.e: not ACTIVATED or ACTIVATABLE). The job was failed by another worker with retries = 0, and the process is now in an incident state.
+  * **errors.FailJobInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.FailJobServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### Examples
@@ -1954,20 +1937,20 @@ def get_audit_log(audit_log_key, \*\*kwargs)
 Get audit log
 
 > Get an audit log entry by auditLogKey.
-
-- **Parameters:**
-  - **audit_log_key** (_str_) – System-generated key for an audit log entry. Example: 22517998136843567.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetAuditLogUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetAuditLogForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetAuditLogNotFound** – If the response status code is 404. The audit log with the given key was not found.
-  - **errors.GetAuditLogInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **audit_log_key** (*str*) – System-generated key for an audit log entry. Example:
+    22517998136843567.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetAuditLogUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetAuditLogForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetAuditLogNotFound** – If the response status code is 404. The audit log with the given key was not found.
+  * **errors.GetAuditLogInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   GetAuditLogResponse200
-- **Return type:**
+* **Return type:**
   GetAuditLogResponse200
 
 ### get_authentication()
@@ -1979,18 +1962,17 @@ def get_authentication(\*\*kwargs)
 Get current user
 
 > Retrieves the current authenticated user.
-
-- **Raises:**
-  - **errors.GetAuthenticationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetAuthenticationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetAuthenticationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Raises:**
+  * **errors.GetAuthenticationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetAuthenticationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetAuthenticationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   CamundaUserResult
-- **Parameters:**
-  **kwargs** (_Any_)
-- **Return type:**
+* **Parameters:**
+  **kwargs** (*Any*)
+* **Return type:**
   CamundaUserResult
 
 ### get_authorization()
@@ -2002,20 +1984,20 @@ def get_authorization(authorization_key, \*\*kwargs)
 Get authorization
 
 > Get authorization by the given key.
-
-- **Parameters:**
-  - **authorization_key** (_str_) – System-generated key for an authorization. Example: 2251799813684332.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetAuthorizationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetAuthorizationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetAuthorizationNotFound** – If the response status code is 404. The authorization with the given key was not found.
-  - **errors.GetAuthorizationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **authorization_key** (*str*) – System-generated key for an authorization. Example:
+    2251799813684332.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetAuthorizationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetAuthorizationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetAuthorizationNotFound** – If the response status code is 404. The authorization with the given key was not found.
+  * **errors.GetAuthorizationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   AuthorizationResult
-- **Return type:**
+* **Return type:**
   AuthorizationResult
 
 ### get_batch_operation()
@@ -2027,19 +2009,19 @@ def get_batch_operation(batch_operation_key, \*\*kwargs)
 Get batch operation
 
 > Get batch operation by key.
-
-- **Parameters:**
-  - **batch_operation_key** (_str_) – System-generated key for an batch operation. Example: 2251799813684321.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetBatchOperationBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetBatchOperationNotFound** – If the response status code is 404. The batch operation is not found.
-  - **errors.GetBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **batch_operation_key** (*str*) – System-generated key for an batch operation. Example:
+    2251799813684321.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetBatchOperationBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetBatchOperationNotFound** – If the response status code is 404. The batch operation is not found.
+  * **errors.GetBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   BatchOperationResponse
-- **Return type:**
+* **Return type:**
   BatchOperationResponse
 
 ### get_decision_definition()
@@ -2051,21 +2033,21 @@ def get_decision_definition(decision_definition_key, \*\*kwargs)
 Get decision definition
 
 > Returns a decision definition by key.
-
-- **Parameters:**
-  - **decision_definition_key** (_str_) – System-generated key for a decision definition. Example: 2251799813326547.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetDecisionDefinitionBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetDecisionDefinitionUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetDecisionDefinitionForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetDecisionDefinitionNotFound** – If the response status code is 404. The decision definition with the given key was not found. More details are provided in the response body.
-  - **errors.GetDecisionDefinitionInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **decision_definition_key** (*str*) – System-generated key for a decision definition. Example:
+    2251799813326547.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetDecisionDefinitionBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetDecisionDefinitionUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetDecisionDefinitionForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetDecisionDefinitionNotFound** – If the response status code is 404. The decision definition with the given key was not found. More details are provided in the response body.
+  * **errors.GetDecisionDefinitionInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   DecisionDefinitionResult
-- **Return type:**
+* **Return type:**
   DecisionDefinitionResult
 
 ### Examples
@@ -2092,21 +2074,21 @@ def get_decision_definition_xml(decision_definition_key, \*\*kwargs)
 Get decision definition XML
 
 > Returns decision definition as XML.
-
-- **Parameters:**
-  - **decision_definition_key** (_str_) – System-generated key for a decision definition. Example: 2251799813326547.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetDecisionDefinitionXmlBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetDecisionDefinitionXmlUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetDecisionDefinitionXmlForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetDecisionDefinitionXmlNotFound** – If the response status code is 404. The decision definition with the given key was not found. More details are provided in the response body.
-  - **errors.GetDecisionDefinitionXmlInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **decision_definition_key** (*str*) – System-generated key for a decision definition. Example:
+    2251799813326547.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetDecisionDefinitionXmlBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetDecisionDefinitionXmlUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetDecisionDefinitionXmlForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetDecisionDefinitionXmlNotFound** – If the response status code is 404. The decision definition with the given key was not found. More details are provided in the response body.
+  * **errors.GetDecisionDefinitionXmlInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   str
-- **Return type:**
+* **Return type:**
   str
 
 ### get_decision_instance()
@@ -2118,22 +2100,21 @@ def get_decision_instance(decision_evaluation_instance_key, \*\*kwargs)
 Get decision instance
 
 > Returns a decision instance.
-
-- **Parameters:**
-  - **decision_evaluation_instance_key** (_str_) – System-generated key for a deployed decision
+* **Parameters:**
+  * **decision_evaluation_instance_key** (*str*) – System-generated key for a deployed decision
     instance. Example: 22517998136843567.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetDecisionInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetDecisionInstanceUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetDecisionInstanceForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetDecisionInstanceNotFound** – If the response status code is 404. The decision instance with the given key was not found. More details are provided in the response body.
-  - **errors.GetDecisionInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetDecisionInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetDecisionInstanceUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetDecisionInstanceForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetDecisionInstanceNotFound** – If the response status code is 404. The decision instance with the given key was not found. More details are provided in the response body.
+  * **errors.GetDecisionInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   DecisionInstanceGetQueryResult
-- **Return type:**
+* **Return type:**
   DecisionInstanceGetQueryResult
 
 ### get_decision_requirements()
@@ -2145,22 +2126,21 @@ def get_decision_requirements(decision_requirements_key, \*\*kwargs)
 Get decision requirements
 
 > Returns Decision Requirements as JSON.
-
-- **Parameters:**
-  - **decision_requirements_key** (_str_) – System-generated key for a deployed decision requirements
+* **Parameters:**
+  * **decision_requirements_key** (*str*) – System-generated key for a deployed decision requirements
     definition. Example: 2251799813683346.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetDecisionRequirementsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetDecisionRequirementsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetDecisionRequirementsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetDecisionRequirementsNotFound** – If the response status code is 404. The decision requirements with the given key was not found. More details are provided in the response body.
-  - **errors.GetDecisionRequirementsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetDecisionRequirementsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetDecisionRequirementsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetDecisionRequirementsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetDecisionRequirementsNotFound** – If the response status code is 404. The decision requirements with the given key was not found. More details are provided in the response body.
+  * **errors.GetDecisionRequirementsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   DecisionRequirementsResult
-- **Return type:**
+* **Return type:**
   DecisionRequirementsResult
 
 ### get_decision_requirements_xml()
@@ -2172,22 +2152,21 @@ def get_decision_requirements_xml(decision_requirements_key, \*\*kwargs)
 Get decision requirements XML
 
 > Returns decision requirements as XML.
-
-- **Parameters:**
-  - **decision_requirements_key** (_str_) – System-generated key for a deployed decision requirements
+* **Parameters:**
+  * **decision_requirements_key** (*str*) – System-generated key for a deployed decision requirements
     definition. Example: 2251799813683346.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetDecisionRequirementsXmlBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetDecisionRequirementsXmlUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetDecisionRequirementsXmlForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetDecisionRequirementsXmlNotFound** – If the response status code is 404. The decision requirements with the given key was not found. More details are provided in the response body.
-  - **errors.GetDecisionRequirementsXmlInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetDecisionRequirementsXmlBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetDecisionRequirementsXmlUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetDecisionRequirementsXmlForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetDecisionRequirementsXmlNotFound** – If the response status code is 404. The decision requirements with the given key was not found. More details are provided in the response body.
+  * **errors.GetDecisionRequirementsXmlInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   str
-- **Return type:**
+* **Return type:**
   str
 
 ### get_document()
@@ -2203,19 +2182,19 @@ Download document
 Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-
 production), local (non-production)
 
-- **Parameters:**
-  - **document_id** (_str_) – Document Id that uniquely identifies a document.
-  - **store_id** (_str_ _|_ _Unset_)
-  - **content_hash** (_str_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetDocumentNotFound** – If the response status code is 404. The document with the given ID was not found.
-  - **errors.GetDocumentInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **document_id** (*str*) – Document Id that uniquely identifies a document.
+  * **store_id** (*str* *|* *Unset*)
+  * **content_hash** (*str* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetDocumentNotFound** – If the response status code is 404. The document with the given ID was not found.
+  * **errors.GetDocumentInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   File
-- **Return type:**
+* **Return type:**
   File
 
 ### get_element_instance()
@@ -2227,21 +2206,21 @@ def get_element_instance(element_instance_key, \*\*kwargs)
 Get element instance
 
 > Returns element instance as JSON.
-
-- **Parameters:**
-  - **element_instance_key** (_str_) – System-generated key for a element instance. Example: 2251799813686789.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetElementInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetElementInstanceUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetElementInstanceForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetElementInstanceNotFound** – If the response status code is 404. The element instance with the given key was not found. More details are provided in the response body.
-  - **errors.GetElementInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **element_instance_key** (*str*) – System-generated key for a element instance. Example:
+    2251799813686789.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetElementInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetElementInstanceUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetElementInstanceForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetElementInstanceNotFound** – If the response status code is 404. The element instance with the given key was not found. More details are provided in the response body.
+  * **errors.GetElementInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ElementInstanceResult
-- **Return type:**
+* **Return type:**
   ElementInstanceResult
 
 ### get_global_cluster_variable()
@@ -2252,20 +2231,20 @@ def get_global_cluster_variable(name, \*\*kwargs)
 
 Get a global-scoped cluster variable
 
-- **Parameters:**
-  - **name** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetGlobalClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetGlobalClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetGlobalClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetGlobalClusterVariableNotFound** – If the response status code is 404. Cluster variable not found
-  - **errors.GetGlobalClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **name** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetGlobalClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetGlobalClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetGlobalClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetGlobalClusterVariableNotFound** – If the response status code is 404. Cluster variable not found
+  * **errors.GetGlobalClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ClusterVariableResult
-- **Return type:**
+* **Return type:**
   ClusterVariableResult
 
 ### get_global_job_statistics()
@@ -2280,22 +2259,22 @@ Global job statistics
 
 jobType.
 
-- **Parameters:**
-  - **from** (_datetime.datetime_)
-  - **to** (_datetime.datetime_)
-  - **job_type** (_str_ _|_ _Unset_)
-  - **from\_** (_datetime.datetime_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetGlobalJobStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetGlobalJobStatisticsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetGlobalJobStatisticsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetGlobalJobStatisticsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **from** (*datetime.datetime*)
+  * **to** (*datetime.datetime*)
+  * **job_type** (*str* *|* *Unset*)
+  * **from_** (*datetime.datetime*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetGlobalJobStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetGlobalJobStatisticsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetGlobalJobStatisticsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetGlobalJobStatisticsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   GlobalJobStatisticsQueryResult
-- **Return type:**
+* **Return type:**
   GlobalJobStatisticsQueryResult
 
 ### get_group()
@@ -2307,20 +2286,19 @@ def get_group(group_id, \*\*kwargs)
 Get group
 
 > Get a group by its ID.
-
-- **Parameters:**
-  - **group_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
-  - **errors.GetGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **group_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
+  * **errors.GetGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   GroupResult
-- **Return type:**
+* **Return type:**
   GroupResult
 
 ### get_incident()
@@ -2332,21 +2310,20 @@ def get_incident(incident_key, \*\*kwargs)
 Get incident
 
 > Returns incident as JSON.
-
-- **Parameters:**
-  - **incident_key** (_str_) – System-generated key for a incident. Example: 2251799813689432.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetIncidentBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetIncidentUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetIncidentForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetIncidentNotFound** – If the response status code is 404. The incident with the given key was not found.
-  - **errors.GetIncidentInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **incident_key** (*str*) – System-generated key for a incident. Example: 2251799813689432.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetIncidentBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetIncidentUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetIncidentForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetIncidentNotFound** – If the response status code is 404. The incident with the given key was not found.
+  * **errors.GetIncidentInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   IncidentResult
-- **Return type:**
+* **Return type:**
   IncidentResult
 
 ### Examples
@@ -2371,16 +2348,15 @@ def get_license(\*\*kwargs)
 Get license status
 
 > Obtains the status of the current Camunda license.
-
-- **Raises:**
-  - **errors.GetLicenseInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Raises:**
+  * **errors.GetLicenseInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   LicenseResponse
-- **Parameters:**
-  **kwargs** (_Any_)
-- **Return type:**
+* **Parameters:**
+  **kwargs** (*Any*)
+* **Return type:**
   LicenseResponse
 
 ### get_mapping_rule()
@@ -2392,19 +2368,18 @@ def get_mapping_rule(mapping_rule_id, \*\*kwargs)
 Get a mapping rule
 
 > Gets the mapping rule with the given ID.
-
-- **Parameters:**
-  - **mapping_rule_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetMappingRuleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetMappingRuleNotFound** – If the response status code is 404. The mapping rule with the mappingRuleId was not found.
-  - **errors.GetMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **mapping_rule_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetMappingRuleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetMappingRuleNotFound** – If the response status code is 404. The mapping rule with the mappingRuleId was not found.
+  * **errors.GetMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   MappingRuleResult
-- **Return type:**
+* **Return type:**
   MappingRuleResult
 
 ### get_process_definition()
@@ -2416,22 +2391,21 @@ def get_process_definition(process_definition_key, \*\*kwargs)
 Get process definition
 
 > Returns process definition as JSON.
-
-- **Parameters:**
-  - **process_definition_key** (_str_) – System-generated key for a deployed process definition.
+* **Parameters:**
+  * **process_definition_key** (*str*) – System-generated key for a deployed process definition.
     Example: 2251799813686749.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetProcessDefinitionBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetProcessDefinitionUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetProcessDefinitionForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetProcessDefinitionNotFound** – If the response status code is 404. The process definition with the given key was not found. More details are provided in the response body.
-  - **errors.GetProcessDefinitionInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetProcessDefinitionBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetProcessDefinitionUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetProcessDefinitionForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetProcessDefinitionNotFound** – If the response status code is 404. The process definition with the given key was not found. More details are provided in the response body.
+  * **errors.GetProcessDefinitionInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ProcessDefinitionResult
-- **Return type:**
+* **Return type:**
   ProcessDefinitionResult
 
 ### get_process_definition_instance_statistics()
@@ -2443,21 +2417,20 @@ def get_process_definition_instance_statistics(\*, data=<camunda_orchestration_s
 Get process instance statistics
 
 > Get statistics about process instances, grouped by process definition and tenant.
-
-- **Parameters:**
-  - **body** (_ProcessDefinitionInstanceStatisticsQuery_ _|_ _Unset_)
-  - **data** (_ProcessDefinitionInstanceStatisticsQuery_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetProcessDefinitionInstanceStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetProcessDefinitionInstanceStatisticsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetProcessDefinitionInstanceStatisticsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetProcessDefinitionInstanceStatisticsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*ProcessDefinitionInstanceStatisticsQuery* *|* *Unset*)
+  * **data** (*ProcessDefinitionInstanceStatisticsQuery* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetProcessDefinitionInstanceStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetProcessDefinitionInstanceStatisticsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetProcessDefinitionInstanceStatisticsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetProcessDefinitionInstanceStatisticsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ProcessDefinitionInstanceStatisticsQueryResult
-- **Return type:**
+* **Return type:**
   ProcessDefinitionInstanceStatisticsQueryResult
 
 ### get_process_definition_instance_version_statistics()
@@ -2469,24 +2442,23 @@ def get_process_definition_instance_version_statistics(process_definition_id, \*
 Get process instance statistics by version
 
 > Get statistics about process instances, grouped by version for a given process definition.
-
-- **Parameters:**
-  - **process_definition_id** (_str_) – Id of a process definition, from the model. Only ids of
+* **Parameters:**
+  * **process_definition_id** (*str*) – Id of a process definition, from the model. Only ids of
     process definitions that are deployed are useful. Example: new-account-onboarding-
     workflow.
-  - **body** (_ProcessDefinitionInstanceVersionStatisticsQuery_ _|_ _Unset_)
-  - **data** (_ProcessDefinitionInstanceVersionStatisticsQuery_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetProcessDefinitionInstanceVersionStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetProcessDefinitionInstanceVersionStatisticsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetProcessDefinitionInstanceVersionStatisticsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetProcessDefinitionInstanceVersionStatisticsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **body** (*ProcessDefinitionInstanceVersionStatisticsQuery* *|* *Unset*)
+  * **data** (*ProcessDefinitionInstanceVersionStatisticsQuery* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetProcessDefinitionInstanceVersionStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetProcessDefinitionInstanceVersionStatisticsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetProcessDefinitionInstanceVersionStatisticsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetProcessDefinitionInstanceVersionStatisticsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ProcessDefinitionInstanceVersionStatisticsQueryResult
-- **Return type:**
+* **Return type:**
   ProcessDefinitionInstanceVersionStatisticsQueryResult
 
 ### get_process_definition_message_subscription_statistics()
@@ -2498,21 +2470,20 @@ def get_process_definition_message_subscription_statistics(\*, data=<camunda_orc
 Get message subscription statistics
 
 > Get message subscription statistics, grouped by process definition.
-
-- **Parameters:**
-  - **body** (_ProcessDefinitionMessageSubscriptionStatisticsQuery_ _|_ _Unset_)
-  - **data** (_ProcessDefinitionMessageSubscriptionStatisticsQuery_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetProcessDefinitionMessageSubscriptionStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetProcessDefinitionMessageSubscriptionStatisticsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetProcessDefinitionMessageSubscriptionStatisticsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetProcessDefinitionMessageSubscriptionStatisticsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*ProcessDefinitionMessageSubscriptionStatisticsQuery* *|* *Unset*)
+  * **data** (*ProcessDefinitionMessageSubscriptionStatisticsQuery* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetProcessDefinitionMessageSubscriptionStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetProcessDefinitionMessageSubscriptionStatisticsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetProcessDefinitionMessageSubscriptionStatisticsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetProcessDefinitionMessageSubscriptionStatisticsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ProcessDefinitionMessageSubscriptionStatisticsQueryResult
-- **Return type:**
+* **Return type:**
   ProcessDefinitionMessageSubscriptionStatisticsQueryResult
 
 ### get_process_definition_statistics()
@@ -2527,23 +2498,23 @@ Get process definition statistics
 
 search filter.
 
-- **Parameters:**
-  - **process_definition_key** (_str_) – System-generated key for a deployed process definition.
+* **Parameters:**
+  * **process_definition_key** (*str*) – System-generated key for a deployed process definition.
     Example: 2251799813686749.
-  - **body** (_GetProcessDefinitionStatisticsData_ _|_ _Unset_) – Process definition element statistics
+  * **body** (*GetProcessDefinitionStatisticsData* *|* *Unset*) – Process definition element statistics
     request.
-  - **data** (_GetProcessDefinitionStatisticsData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetProcessDefinitionStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetProcessDefinitionStatisticsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetProcessDefinitionStatisticsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetProcessDefinitionStatisticsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **data** (*GetProcessDefinitionStatisticsData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetProcessDefinitionStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetProcessDefinitionStatisticsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetProcessDefinitionStatisticsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetProcessDefinitionStatisticsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   GetProcessDefinitionStatisticsResponse200
-- **Return type:**
+* **Return type:**
   GetProcessDefinitionStatisticsResponse200
 
 ### get_process_definition_xml()
@@ -2555,22 +2526,21 @@ def get_process_definition_xml(process_definition_key, \*\*kwargs)
 Get process definition XML
 
 > Returns process definition as XML.
-
-- **Parameters:**
-  - **process_definition_key** (_str_) – System-generated key for a deployed process definition.
+* **Parameters:**
+  * **process_definition_key** (*str*) – System-generated key for a deployed process definition.
     Example: 2251799813686749.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetProcessDefinitionXmlBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetProcessDefinitionXmlUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetProcessDefinitionXmlForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetProcessDefinitionXmlNotFound** – If the response status code is 404. The process definition with the given key was not found. More details are provided in the response body.
-  - **errors.GetProcessDefinitionXmlInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetProcessDefinitionXmlBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetProcessDefinitionXmlUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetProcessDefinitionXmlForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetProcessDefinitionXmlNotFound** – If the response status code is 404. The process definition with the given key was not found. More details are provided in the response body.
+  * **errors.GetProcessDefinitionXmlInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   str
-- **Return type:**
+* **Return type:**
   str
 
 ### get_process_instance()
@@ -2582,21 +2552,21 @@ def get_process_instance(process_instance_key, \*\*kwargs)
 Get process instance
 
 > Get the process instance by the process instance key.
-
-- **Parameters:**
-  - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetProcessInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetProcessInstanceUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetProcessInstanceForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetProcessInstanceNotFound** – If the response status code is 404. The process instance with the given key was not found.
-  - **errors.GetProcessInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **process_instance_key** (*str*) – System-generated key for a process instance. Example:
+    2251799813690746.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetProcessInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetProcessInstanceUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetProcessInstanceForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetProcessInstanceNotFound** – If the response status code is 404. The process instance with the given key was not found.
+  * **errors.GetProcessInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   GetProcessInstanceResponse200
-- **Return type:**
+* **Return type:**
   GetProcessInstanceResponse200
 
 ### get_process_instance_call_hierarchy()
@@ -2611,20 +2581,21 @@ Get call hierarchy
 
 instance.
 
-- **Parameters:**
-  - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetProcessInstanceCallHierarchyBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetProcessInstanceCallHierarchyUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetProcessInstanceCallHierarchyForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetProcessInstanceCallHierarchyNotFound** – If the response status code is 404. The process instance is not found.
-  - **errors.GetProcessInstanceCallHierarchyInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **process_instance_key** (*str*) – System-generated key for a process instance. Example:
+    2251799813690746.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetProcessInstanceCallHierarchyBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetProcessInstanceCallHierarchyUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetProcessInstanceCallHierarchyForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetProcessInstanceCallHierarchyNotFound** – If the response status code is 404. The process instance is not found.
+  * **errors.GetProcessInstanceCallHierarchyInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   list[Any]
-- **Return type:**
+* **Return type:**
   list[Any]
 
 ### get_process_instance_sequence_flows()
@@ -2636,20 +2607,20 @@ def get_process_instance_sequence_flows(process_instance_key, \*\*kwargs)
 Get sequence flows
 
 > Get sequence flows taken by the process instance.
-
-- **Parameters:**
-  - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetProcessInstanceSequenceFlowsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetProcessInstanceSequenceFlowsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetProcessInstanceSequenceFlowsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetProcessInstanceSequenceFlowsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **process_instance_key** (*str*) – System-generated key for a process instance. Example:
+    2251799813690746.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetProcessInstanceSequenceFlowsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetProcessInstanceSequenceFlowsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetProcessInstanceSequenceFlowsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetProcessInstanceSequenceFlowsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   GetProcessInstanceSequenceFlowsResponse200
-- **Return type:**
+* **Return type:**
   GetProcessInstanceSequenceFlowsResponse200
 
 ### get_process_instance_statistics()
@@ -2661,20 +2632,20 @@ def get_process_instance_statistics(process_instance_key, \*\*kwargs)
 Get element instance statistics
 
 > Get statistics about elements by the process instance key.
-
-- **Parameters:**
-  - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetProcessInstanceStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetProcessInstanceStatisticsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetProcessInstanceStatisticsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetProcessInstanceStatisticsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **process_instance_key** (*str*) – System-generated key for a process instance. Example:
+    2251799813690746.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetProcessInstanceStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetProcessInstanceStatisticsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetProcessInstanceStatisticsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetProcessInstanceStatisticsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   GetProcessInstanceStatisticsResponse200
-- **Return type:**
+* **Return type:**
   GetProcessInstanceStatisticsResponse200
 
 ### get_process_instance_statistics_by_definition()
@@ -2690,20 +2661,20 @@ Get process instance statistics by definition
 definition. The result set is scoped to a specific incident error hash code, which must be
 provided as a filter in the request body.
 
-- **Parameters:**
-  - **body** (_IncidentProcessInstanceStatisticsByDefinitionQuery_)
-  - **data** (_IncidentProcessInstanceStatisticsByDefinitionQuery_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetProcessInstanceStatisticsByDefinitionBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetProcessInstanceStatisticsByDefinitionUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetProcessInstanceStatisticsByDefinitionForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetProcessInstanceStatisticsByDefinitionInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*IncidentProcessInstanceStatisticsByDefinitionQuery*)
+  * **data** (*IncidentProcessInstanceStatisticsByDefinitionQuery*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetProcessInstanceStatisticsByDefinitionBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetProcessInstanceStatisticsByDefinitionUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetProcessInstanceStatisticsByDefinitionForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetProcessInstanceStatisticsByDefinitionInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   IncidentProcessInstanceStatisticsByDefinitionQueryResult
-- **Return type:**
+* **Return type:**
   IncidentProcessInstanceStatisticsByDefinitionQueryResult
 
 ### get_process_instance_statistics_by_error()
@@ -2718,20 +2689,20 @@ Get process instance statistics by error
 
 grouped by incident error hash code.
 
-- **Parameters:**
-  - **body** (_IncidentProcessInstanceStatisticsByErrorQuery_ _|_ _Unset_)
-  - **data** (_IncidentProcessInstanceStatisticsByErrorQuery_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetProcessInstanceStatisticsByErrorBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetProcessInstanceStatisticsByErrorUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetProcessInstanceStatisticsByErrorForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetProcessInstanceStatisticsByErrorInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*IncidentProcessInstanceStatisticsByErrorQuery* *|* *Unset*)
+  * **data** (*IncidentProcessInstanceStatisticsByErrorQuery* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetProcessInstanceStatisticsByErrorBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetProcessInstanceStatisticsByErrorUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetProcessInstanceStatisticsByErrorForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetProcessInstanceStatisticsByErrorInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   IncidentProcessInstanceStatisticsByErrorQueryResult
-- **Return type:**
+* **Return type:**
   IncidentProcessInstanceStatisticsByErrorQueryResult
 
 ### get_resource()
@@ -2747,10 +2718,8 @@ Get resource
 :::info
 Currently, this endpoint only supports RPA resources.
 :::
-
-- **resource_key**: The system-assigned key for this resource.
-
-````
+* **resource_key**: The system-assigned key for this resource.
+```
 
 * **Raises:**
   * **errors.GetResourceNotFound** – If the response status code is 404. A resource with the given key was not found.
@@ -2769,7 +2738,7 @@ Currently, this endpoint only supports RPA resources.
 
 ```python
 def get_resource_content(resource_key, \*\*kwargs)
-````
+```
 
 Get resource content
 
@@ -2778,10 +2747,8 @@ Get resource content
 :::info
 Currently, this endpoint only supports RPA resources.
 :::
-
-- **resource_key**: The system-assigned key for this resource.
-
-````
+* **resource_key**: The system-assigned key for this resource.
+```
 
 * **Raises:**
   * **errors.GetResourceContentNotFound** – If the response status code is 404. A resource with the given key was not found.
@@ -2800,25 +2767,24 @@ Currently, this endpoint only supports RPA resources.
 
 ```python
 def get_role(role_id, \*\*kwargs)
-````
+```
 
 Get role
 
 > Get a role by its ID.
-
-- **Parameters:**
-  - **role_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetRoleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetRoleNotFound** – If the response status code is 404. The role with the given ID was not found.
-  - **errors.GetRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetRoleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetRoleNotFound** – If the response status code is 404. The role with the given ID was not found.
+  * **errors.GetRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   RoleResult
-- **Return type:**
+* **Return type:**
   RoleResult
 
 ### get_start_process_form()
@@ -2834,21 +2800,21 @@ Get process start form
 Note that this endpoint will only return linked forms. This endpoint does not support embedded
 forms.
 
-- **Parameters:**
-  - **process_definition_key** (_str_) – System-generated key for a deployed process definition.
+* **Parameters:**
+  * **process_definition_key** (*str*) – System-generated key for a deployed process definition.
     Example: 2251799813686749.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetStartProcessFormBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetStartProcessFormUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetStartProcessFormForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetStartProcessFormNotFound** – If the response status code is 404. Not found
-  - **errors.GetStartProcessFormInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetStartProcessFormBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetStartProcessFormUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetStartProcessFormForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetStartProcessFormNotFound** – If the response status code is 404. Not found
+  * **errors.GetStartProcessFormInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   GetStartProcessFormResponse200
-- **Return type:**
+* **Return type:**
   GetStartProcessFormResponse200
 
 ### get_tenant()
@@ -2860,21 +2826,20 @@ def get_tenant(tenant_id, \*\*kwargs)
 Get tenant
 
 > Retrieves a single tenant by tenant ID.
-
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetTenantUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetTenantNotFound** – If the response status code is 404. Tenant not found.
-  - **errors.GetTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetTenantUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetTenantNotFound** – If the response status code is 404. Tenant not found.
+  * **errors.GetTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   TenantResult
-- **Return type:**
+* **Return type:**
   TenantResult
 
 ### get_tenant_cluster_variable()
@@ -2885,21 +2850,21 @@ def get_tenant_cluster_variable(tenant_id, name, \*\*kwargs)
 
 Get a tenant-scoped cluster variable
 
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **name** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetTenantClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetTenantClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetTenantClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetTenantClusterVariableNotFound** – If the response status code is 404. Cluster variable not found
-  - **errors.GetTenantClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **name** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetTenantClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetTenantClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetTenantClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetTenantClusterVariableNotFound** – If the response status code is 404. Cluster variable not found
+  * **errors.GetTenantClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ClusterVariableResult
-- **Return type:**
+* **Return type:**
   ClusterVariableResult
 
 ### get_topology()
@@ -2911,17 +2876,16 @@ def get_topology(\*\*kwargs)
 Get cluster topology
 
 > Obtains the current topology of the cluster the gateway is part of.
-
-- **Raises:**
-  - **errors.GetTopologyUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetTopologyInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Raises:**
+  * **errors.GetTopologyUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetTopologyInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   TopologyResponse
-- **Parameters:**
-  **kwargs** (_Any_)
-- **Return type:**
+* **Parameters:**
+  **kwargs** (*Any*)
+* **Return type:**
   TopologyResponse
 
 ### Examples
@@ -2949,23 +2913,22 @@ def get_usage_metrics(\*, start_time, end_time, tenant_id=<camunda_orchestration
 Get usage metrics
 
 > Retrieve the usage metrics based on given criteria.
-
-- **Parameters:**
-  - **start_time** (_datetime.datetime_) – Example: 2025-06-07T13:14:15Z.
-  - **end_time** (_datetime.datetime_) – Example: 2025-06-07T13:14:15Z.
-  - **tenant_id** (_str_ _|_ _Unset_) – The unique identifier of the tenant. Example: customer-service.
-  - **with_tenants** (_bool_ _|_ _Unset_) – Default: False.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetUsageMetricsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetUsageMetricsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetUsageMetricsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetUsageMetricsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **start_time** (*datetime.datetime*) – Example: 2025-06-07T13:14:15Z.
+  * **end_time** (*datetime.datetime*) – Example: 2025-06-07T13:14:15Z.
+  * **tenant_id** (*str* *|* *Unset*) – The unique identifier of the tenant. Example: customer-service.
+  * **with_tenants** (*bool* *|* *Unset*) – Default: False.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetUsageMetricsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetUsageMetricsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetUsageMetricsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetUsageMetricsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   UsageMetricsResponse
-- **Return type:**
+* **Return type:**
   UsageMetricsResponse
 
 ### get_user()
@@ -2977,20 +2940,19 @@ def get_user(username, \*\*kwargs)
 Get user
 
 > Get a user by its username.
-
-- **Parameters:**
-  - **username** (_str_) – The unique name of a user. Example: swillis.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetUserUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetUserForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetUserNotFound** – If the response status code is 404. The user with the given username was not found.
-  - **errors.GetUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **username** (*str*) – The unique name of a user. Example: swillis.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetUserUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetUserForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetUserNotFound** – If the response status code is 404. The user with the given username was not found.
+  * **errors.GetUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   UserResult
-- **Return type:**
+* **Return type:**
   UserResult
 
 ### get_user_task()
@@ -3002,21 +2964,20 @@ def get_user_task(user_task_key, \*\*kwargs)
 Get user task
 
 > Get the user task by the user task key.
-
-- **Parameters:**
-  - **user_task_key** (_str_) – System-generated key for a user task.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetUserTaskBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetUserTaskUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetUserTaskForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetUserTaskNotFound** – If the response status code is 404. The user task with the given key was not found.
-  - **errors.GetUserTaskInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **user_task_key** (*str*) – System-generated key for a user task.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetUserTaskBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetUserTaskUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetUserTaskForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetUserTaskNotFound** – If the response status code is 404. The user task with the given key was not found.
+  * **errors.GetUserTaskInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   GetUserTaskResponse200
-- **Return type:**
+* **Return type:**
   GetUserTaskResponse200
 
 ### Examples
@@ -3045,20 +3006,20 @@ Get user task form
 Note that this endpoint will only return linked forms. This endpoint does not support embedded
 forms.
 
-- **Parameters:**
-  - **user_task_key** (_str_) – System-generated key for a user task.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetUserTaskFormBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetUserTaskFormUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetUserTaskFormForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetUserTaskFormNotFound** – If the response status code is 404. Not found
-  - **errors.GetUserTaskFormInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **user_task_key** (*str*) – System-generated key for a user task.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetUserTaskFormBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetUserTaskFormUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetUserTaskFormForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetUserTaskFormNotFound** – If the response status code is 404. Not found
+  * **errors.GetUserTaskFormInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   GetUserTaskFormResponse200
-- **Return type:**
+* **Return type:**
   GetUserTaskFormResponse200
 
 ### get_variable()
@@ -3070,21 +3031,20 @@ def get_variable(variable_key, \*\*kwargs)
 Get variable
 
 > Get the variable by the variable key.
-
-- **Parameters:**
-  - **variable_key** (_str_) – System-generated key for a variable. Example: 2251799813683287.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.GetVariableBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.GetVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.GetVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.GetVariableNotFound** – If the response status code is 404. Not found
-  - **errors.GetVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **variable_key** (*str*) – System-generated key for a variable. Example: 2251799813683287.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetVariableBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetVariableNotFound** – If the response status code is 404. Not found
+  * **errors.GetVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   VariableResult
-- **Return type:**
+* **Return type:**
   VariableResult
 
 ### migrate_process_instance()
@@ -3104,23 +3064,24 @@ Use this to upgrade a process instance to a new version of a process or to
 a different process definition, e.g. to keep your running instances up-to-date with the
 latest process improvements.
 
-- **Parameters:**
-  - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
-  - **body** (_MigrateProcessInstanceData_) – The migration instructions describe how to migrate a
+* **Parameters:**
+  * **process_instance_key** (*str*) – System-generated key for a process instance. Example:
+    2251799813690746.
+  * **body** (*MigrateProcessInstanceData*) – The migration instructions describe how to migrate a
     process instance from one process definition to another.
-  - **data** (_MigrateProcessInstanceData_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.MigrateProcessInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.MigrateProcessInstanceNotFound** – If the response status code is 404. The process instance is not found.
-  - **errors.MigrateProcessInstanceConflict** – If the response status code is 409. The process instance migration failed. More details are provided in the response body.
-  - **errors.MigrateProcessInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.MigrateProcessInstanceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **data** (*MigrateProcessInstanceData*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.MigrateProcessInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.MigrateProcessInstanceNotFound** – If the response status code is 404. The process instance is not found.
+  * **errors.MigrateProcessInstanceConflict** – If the response status code is 409. The process instance migration failed. More details are provided in the response body.
+  * **errors.MigrateProcessInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.MigrateProcessInstanceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### migrate_process_instances_batch_operation()
@@ -3138,20 +3099,20 @@ filters for state are ignored and overridden during this batch operation.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-- **Parameters:**
-  - **body** (_MigrateProcessInstancesBatchOperationData_)
-  - **data** (_MigrateProcessInstancesBatchOperationData_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.MigrateProcessInstancesBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
-  - **errors.MigrateProcessInstancesBatchOperationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.MigrateProcessInstancesBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.MigrateProcessInstancesBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*MigrateProcessInstancesBatchOperationData*)
+  * **data** (*MigrateProcessInstancesBatchOperationData*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.MigrateProcessInstancesBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  * **errors.MigrateProcessInstancesBatchOperationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.MigrateProcessInstancesBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.MigrateProcessInstancesBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   BatchOperationCreatedResult
-- **Return type:**
+* **Return type:**
   BatchOperationCreatedResult
 
 ### modify_process_instance()
@@ -3170,21 +3131,22 @@ to terminate an active instance of an element.
 Use this to repair a process instance that is stuck on an element or took an unintended path.
 For example, because an external system is not available or doesn’t respond as expected.
 
-- **Parameters:**
-  - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
-  - **body** (_ModifyProcessInstanceData_)
-  - **data** (_ModifyProcessInstanceData_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.ModifyProcessInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.ModifyProcessInstanceNotFound** – If the response status code is 404. The process instance is not found.
-  - **errors.ModifyProcessInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.ModifyProcessInstanceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **process_instance_key** (*str*) – System-generated key for a process instance. Example:
+    2251799813690746.
+  * **body** (*ModifyProcessInstanceData*)
+  * **data** (*ModifyProcessInstanceData*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.ModifyProcessInstanceBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.ModifyProcessInstanceNotFound** – If the response status code is 404. The process instance is not found.
+  * **errors.ModifyProcessInstanceInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.ModifyProcessInstanceServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### modify_process_instances_batch_operation()
@@ -3205,22 +3167,22 @@ It is only possible to use the element id of the source and target.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-- **Parameters:**
-  - **body** (_ModifyProcessInstancesBatchOperationData_) – The process instance filter to define on
+* **Parameters:**
+  * **body** (*ModifyProcessInstancesBatchOperationData*) – The process instance filter to define on
     which process instances tokens should be moved,
     and new element instances should be activated or terminated.
-  - **data** (_ModifyProcessInstancesBatchOperationData_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.ModifyProcessInstancesBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
-  - **errors.ModifyProcessInstancesBatchOperationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.ModifyProcessInstancesBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.ModifyProcessInstancesBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **data** (*ModifyProcessInstancesBatchOperationData*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.ModifyProcessInstancesBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  * **errors.ModifyProcessInstancesBatchOperationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.ModifyProcessInstancesBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.ModifyProcessInstancesBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   BatchOperationCreatedResult
-- **Return type:**
+* **Return type:**
   BatchOperationCreatedResult
 
 ### pin_clock()
@@ -3239,19 +3201,19 @@ To change the time, the clock must be pinned again with a new timestamp.
 This endpoint is an alpha feature and may be subject to change
 in future releases.
 
-- **Parameters:**
-  - **body** (_ClockPinRequest_)
-  - **data** (_ClockPinRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.PinClockBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.PinClockInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.PinClockServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*ClockPinRequest*)
+  * **data** (*ClockPinRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.PinClockBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.PinClockInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.PinClockServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### publish_message()
@@ -3269,19 +3231,19 @@ Messages can be buffered.
 The endpoint does not wait for a correlation result.
 Use the message correlation endpoint for such use cases.
 
-- **Parameters:**
-  - **body** (_MessagePublicationRequest_)
-  - **data** (_MessagePublicationRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.PublishMessageBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.PublishMessageInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.PublishMessageServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*MessagePublicationRequest*)
+  * **data** (*MessagePublicationRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.PublishMessageBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.PublishMessageInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.PublishMessageServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   PublishMessageResponse200
-- **Return type:**
+* **Return type:**
   PublishMessageResponse200
 
 ### Examples
@@ -3321,16 +3283,16 @@ normal behavior after it has been pinned to a specific time.
 This endpoint is an alpha feature and may be subject to change
 in future releases.
 
-- **Raises:**
-  - **errors.ResetClockInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.ResetClockServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Raises:**
+  * **errors.ResetClockInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.ResetClockServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Parameters:**
-  **kwargs** (_Any_)
-- **Return type:**
+* **Parameters:**
+  **kwargs** (*Any*)
+* **Return type:**
   None
 
 ### resolve_incident()
@@ -3345,21 +3307,21 @@ Resolve incident
 
 to reset the job’s retries, followed by this call.
 
-- **Parameters:**
-  - **incident_key** (_str_) – System-generated key for a incident. Example: 2251799813689432.
-  - **body** (_IncidentResolutionRequest_ _|_ _Unset_)
-  - **data** (_IncidentResolutionRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.ResolveIncidentBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.ResolveIncidentNotFound** – If the response status code is 404. The incident with the incidentKey is not found.
-  - **errors.ResolveIncidentInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.ResolveIncidentServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **incident_key** (*str*) – System-generated key for a incident. Example: 2251799813689432.
+  * **body** (*IncidentResolutionRequest* *|* *Unset*)
+  * **data** (*IncidentResolutionRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.ResolveIncidentBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.ResolveIncidentNotFound** – If the response status code is 404. The incident with the incidentKey is not found.
+  * **errors.ResolveIncidentInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.ResolveIncidentServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### Examples
@@ -3388,21 +3350,21 @@ filters for state are ignored and overridden during this batch operation.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-- **Parameters:**
-  - **body** (_ResolveIncidentsBatchOperationData_ _|_ _Unset_) – The process instance filter that
+* **Parameters:**
+  * **body** (*ResolveIncidentsBatchOperationData* *|* *Unset*) – The process instance filter that
     defines which process instances should have their incidents resolved.
-  - **data** (_ResolveIncidentsBatchOperationData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.ResolveIncidentsBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
-  - **errors.ResolveIncidentsBatchOperationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.ResolveIncidentsBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.ResolveIncidentsBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+  * **data** (*ResolveIncidentsBatchOperationData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.ResolveIncidentsBatchOperationBadRequest** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  * **errors.ResolveIncidentsBatchOperationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.ResolveIncidentsBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.ResolveIncidentsBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   BatchOperationCreatedResult
-- **Return type:**
+* **Return type:**
   BatchOperationCreatedResult
 
 ### resolve_process_instance_incidents()
@@ -3414,21 +3376,21 @@ def resolve_process_instance_incidents(process_instance_key, \*\*kwargs)
 Resolve related incidents
 
 > Creates a batch operation to resolve multiple incidents of a process instance.
-
-- **Parameters:**
-  - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.ResolveProcessInstanceIncidentsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.ResolveProcessInstanceIncidentsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.ResolveProcessInstanceIncidentsNotFound** – If the response status code is 404. The process instance is not found.
-  - **errors.ResolveProcessInstanceIncidentsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.ResolveProcessInstanceIncidentsServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **process_instance_key** (*str*) – System-generated key for a process instance. Example:
+    2251799813690746.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.ResolveProcessInstanceIncidentsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.ResolveProcessInstanceIncidentsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.ResolveProcessInstanceIncidentsNotFound** – If the response status code is 404. The process instance is not found.
+  * **errors.ResolveProcessInstanceIncidentsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.ResolveProcessInstanceIncidentsServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   BatchOperationCreatedResult
-- **Return type:**
+* **Return type:**
   BatchOperationCreatedResult
 
 ### resume_batch_operation()
@@ -3444,22 +3406,23 @@ Resume Batch operation
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint
 (/batch-operations/{batchOperationKey}).
 
-- **Parameters:**
-  - **batch_operation_key** (_str_) – System-generated key for an batch operation. Example: 2251799813684321.
-  - **body** (_Any_ _|_ _Unset_)
-  - **data** (_Any_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.ResumeBatchOperationBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.ResumeBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.ResumeBatchOperationNotFound** – If the response status code is 404. Not found. The batch operation was not found.
-  - **errors.ResumeBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.ResumeBatchOperationServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **batch_operation_key** (*str*) – System-generated key for an batch operation. Example:
+    2251799813684321.
+  * **body** (*Any* *|* *Unset*)
+  * **data** (*Any* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.ResumeBatchOperationBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.ResumeBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.ResumeBatchOperationNotFound** – If the response status code is 404. Not found. The batch operation was not found.
+  * **errors.ResumeBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.ResumeBatchOperationServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### search_audit_logs()
@@ -3471,21 +3434,20 @@ def search_audit_logs(\*, data=<camunda_orchestration_sdk.types.Unset object>, \
 Search audit logs
 
 > Search for audit logs based on given criteria.
-
-- **Parameters:**
-  - **body** (_AuditLogSearchQueryRequest_ _|_ _Unset_) – Audit log search request.
-  - **data** (_AuditLogSearchQueryRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchAuditLogsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchAuditLogsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchAuditLogsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchAuditLogsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*AuditLogSearchQueryRequest* *|* *Unset*) – Audit log search request.
+  * **data** (*AuditLogSearchQueryRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchAuditLogsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchAuditLogsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchAuditLogsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchAuditLogsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   SearchAuditLogsResponse200
-- **Return type:**
+* **Return type:**
   SearchAuditLogsResponse200
 
 ### search_authorizations()
@@ -3497,21 +3459,20 @@ def search_authorizations(\*, data=<camunda_orchestration_sdk.types.Unset object
 Search authorizations
 
 > Search for authorizations based on given criteria.
-
-- **Parameters:**
-  - **body** (_AuthorizationSearchQuery_ _|_ _Unset_)
-  - **data** (_AuthorizationSearchQuery_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchAuthorizationsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchAuthorizationsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchAuthorizationsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchAuthorizationsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*AuthorizationSearchQuery* *|* *Unset*)
+  * **data** (*AuthorizationSearchQuery* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchAuthorizationsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchAuthorizationsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchAuthorizationsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchAuthorizationsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   AuthorizationSearchResult
-- **Return type:**
+* **Return type:**
   AuthorizationSearchResult
 
 ### search_batch_operation_items()
@@ -3523,19 +3484,18 @@ def search_batch_operation_items(\*, data=<camunda_orchestration_sdk.types.Unset
 Search batch operation items
 
 > Search for batch operation items based on given criteria.
-
-- **Parameters:**
-  - **body** (_SearchBatchOperationItemsData_ _|_ _Unset_) – Batch operation item search request.
-  - **data** (_SearchBatchOperationItemsData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchBatchOperationItemsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchBatchOperationItemsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*SearchBatchOperationItemsData* *|* *Unset*) – Batch operation item search request.
+  * **data** (*SearchBatchOperationItemsData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchBatchOperationItemsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchBatchOperationItemsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   BatchOperationItemSearchQueryResult
-- **Return type:**
+* **Return type:**
   BatchOperationItemSearchQueryResult
 
 ### search_batch_operations()
@@ -3547,19 +3507,18 @@ def search_batch_operations(\*, data=<camunda_orchestration_sdk.types.Unset obje
 Search batch operations
 
 > Search for batch operations based on given criteria.
-
-- **Parameters:**
-  - **body** (_SearchBatchOperationsData_ _|_ _Unset_) – Batch operation search request.
-  - **data** (_SearchBatchOperationsData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchBatchOperationsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchBatchOperationsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*SearchBatchOperationsData* *|* *Unset*) – Batch operation search request.
+  * **data** (*SearchBatchOperationsData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchBatchOperationsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchBatchOperationsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   BatchOperationSearchQueryResult
-- **Return type:**
+* **Return type:**
   BatchOperationSearchQueryResult
 
 ### search_clients_for_group()
@@ -3571,23 +3530,22 @@ def search_clients_for_group(group_id, \*, data=<camunda_orchestration_sdk.types
 Search group clients
 
 > Search clients assigned to a group.
-
-- **Parameters:**
-  - **group_id** (_str_)
-  - **body** (_SearchClientsForGroupData_ _|_ _Unset_)
-  - **data** (_SearchClientsForGroupData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchClientsForGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchClientsForGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchClientsForGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchClientsForGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
-  - **errors.SearchClientsForGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **group_id** (*str*)
+  * **body** (*SearchClientsForGroupData* *|* *Unset*)
+  * **data** (*SearchClientsForGroupData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchClientsForGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchClientsForGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchClientsForGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchClientsForGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
+  * **errors.SearchClientsForGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   TenantClientSearchResult
-- **Return type:**
+* **Return type:**
   TenantClientSearchResult
 
 ### search_clients_for_role()
@@ -3599,23 +3557,22 @@ def search_clients_for_role(role_id, \*, data=<camunda_orchestration_sdk.types.U
 Search role clients
 
 > Search clients with assigned role.
-
-- **Parameters:**
-  - **role_id** (_str_)
-  - **body** (_SearchClientsForRoleData_ _|_ _Unset_)
-  - **data** (_SearchClientsForRoleData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchClientsForRoleBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchClientsForRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchClientsForRoleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchClientsForRoleNotFound** – If the response status code is 404. The role with the given ID was not found.
-  - **errors.SearchClientsForRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **body** (*SearchClientsForRoleData* *|* *Unset*)
+  * **data** (*SearchClientsForRoleData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchClientsForRoleBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchClientsForRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchClientsForRoleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchClientsForRoleNotFound** – If the response status code is 404. The role with the given ID was not found.
+  * **errors.SearchClientsForRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   TenantClientSearchResult
-- **Return type:**
+* **Return type:**
   TenantClientSearchResult
 
 ### search_clients_for_tenant()
@@ -3627,18 +3584,17 @@ def search_clients_for_tenant(tenant_id, \*, data=<camunda_orchestration_sdk.typ
 Search clients for tenant
 
 > Retrieves a filtered and sorted list of clients for a specified tenant.
-
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **body** (_SearchClientsForTenantData_ _|_ _Unset_)
-  - **data** (_SearchClientsForTenantData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **body** (*SearchClientsForTenantData* *|* *Unset*)
+  * **data** (*SearchClientsForTenantData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   TenantClientSearchResult
-- **Return type:**
+* **Return type:**
   TenantClientSearchResult
 
 ### search_cluster_variables()
@@ -3650,21 +3606,21 @@ def search_cluster_variables(\*, data=<camunda_orchestration_sdk.types.Unset obj
 Search for cluster variables based on given criteria. By default, long variable values in the
 response are truncated.
 
-- **Parameters:**
-  - **truncate_values** (_bool_ _|_ _Unset_)
-  - **body** (_ClusterVariableSearchQueryRequest_ _|_ _Unset_) – Cluster variable search query request.
-  - **data** (_ClusterVariableSearchQueryRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchClusterVariablesBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchClusterVariablesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchClusterVariablesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchClusterVariablesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **truncate_values** (*bool* *|* *Unset*)
+  * **body** (*ClusterVariableSearchQueryRequest* *|* *Unset*) – Cluster variable search query request.
+  * **data** (*ClusterVariableSearchQueryRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchClusterVariablesBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchClusterVariablesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchClusterVariablesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchClusterVariablesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ClusterVariableSearchQueryResult
-- **Return type:**
+* **Return type:**
   ClusterVariableSearchQueryResult
 
 ### search_correlated_message_subscriptions()
@@ -3676,21 +3632,20 @@ def search_correlated_message_subscriptions(\*, data=<camunda_orchestration_sdk.
 Search correlated message subscriptions
 
 > Search correlated message subscriptions based on given criteria.
-
-- **Parameters:**
-  - **body** (_CorrelatedMessageSubscriptionSearchQuery_ _|_ _Unset_)
-  - **data** (_CorrelatedMessageSubscriptionSearchQuery_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchCorrelatedMessageSubscriptionsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchCorrelatedMessageSubscriptionsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchCorrelatedMessageSubscriptionsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchCorrelatedMessageSubscriptionsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*CorrelatedMessageSubscriptionSearchQuery* *|* *Unset*)
+  * **data** (*CorrelatedMessageSubscriptionSearchQuery* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchCorrelatedMessageSubscriptionsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchCorrelatedMessageSubscriptionsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchCorrelatedMessageSubscriptionsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchCorrelatedMessageSubscriptionsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   CorrelatedMessageSubscriptionSearchQueryResult
-- **Return type:**
+* **Return type:**
   CorrelatedMessageSubscriptionSearchQueryResult
 
 ### search_decision_definitions()
@@ -3702,21 +3657,20 @@ def search_decision_definitions(\*, data=<camunda_orchestration_sdk.types.Unset 
 Search decision definitions
 
 > Search for decision definitions based on given criteria.
-
-- **Parameters:**
-  - **body** (_DecisionDefinitionSearchQuery_ _|_ _Unset_)
-  - **data** (_DecisionDefinitionSearchQuery_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchDecisionDefinitionsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchDecisionDefinitionsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchDecisionDefinitionsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchDecisionDefinitionsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*DecisionDefinitionSearchQuery* *|* *Unset*)
+  * **data** (*DecisionDefinitionSearchQuery* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchDecisionDefinitionsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchDecisionDefinitionsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchDecisionDefinitionsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchDecisionDefinitionsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   DecisionDefinitionSearchQueryResult
-- **Return type:**
+* **Return type:**
   DecisionDefinitionSearchQueryResult
 
 ### Examples
@@ -3745,21 +3699,20 @@ def search_decision_instances(\*, data=<camunda_orchestration_sdk.types.Unset ob
 Search decision instances
 
 > Search for decision instances based on given criteria.
-
-- **Parameters:**
-  - **body** (_DecisionInstanceSearchQuery_ _|_ _Unset_)
-  - **data** (_DecisionInstanceSearchQuery_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchDecisionInstancesBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchDecisionInstancesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchDecisionInstancesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchDecisionInstancesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*DecisionInstanceSearchQuery* *|* *Unset*)
+  * **data** (*DecisionInstanceSearchQuery* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchDecisionInstancesBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchDecisionInstancesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchDecisionInstancesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchDecisionInstancesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   DecisionInstanceSearchQueryResult
-- **Return type:**
+* **Return type:**
   DecisionInstanceSearchQueryResult
 
 ### search_decision_requirements()
@@ -3771,21 +3724,20 @@ def search_decision_requirements(\*, data=<camunda_orchestration_sdk.types.Unset
 Search decision requirements
 
 > Search for decision requirements based on given criteria.
-
-- **Parameters:**
-  - **body** (_DecisionRequirementsSearchQuery_ _|_ _Unset_)
-  - **data** (_DecisionRequirementsSearchQuery_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchDecisionRequirementsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchDecisionRequirementsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchDecisionRequirementsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchDecisionRequirementsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*DecisionRequirementsSearchQuery* *|* *Unset*)
+  * **data** (*DecisionRequirementsSearchQuery* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchDecisionRequirementsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchDecisionRequirementsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchDecisionRequirementsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchDecisionRequirementsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   DecisionRequirementsSearchQueryResult
-- **Return type:**
+* **Return type:**
   DecisionRequirementsSearchQueryResult
 
 ### search_element_instance_incidents()
@@ -3809,22 +3761,23 @@ nested or subordinate elements within the given element instance while excluding
 tied
 to the root element itself.
 
-- **Parameters:**
-  - **element_instance_key** (_str_) – System-generated key for a element instance. Example: 2251799813686789.
-  - **body** (_IncidentSearchQuery_)
-  - **data** (_IncidentSearchQuery_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchElementInstanceIncidentsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchElementInstanceIncidentsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchElementInstanceIncidentsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchElementInstanceIncidentsNotFound** – If the response status code is 404. The element instance with the given key was not found.
-  - **errors.SearchElementInstanceIncidentsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **element_instance_key** (*str*) – System-generated key for a element instance. Example:
+    2251799813686789.
+  * **body** (*IncidentSearchQuery*)
+  * **data** (*IncidentSearchQuery*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchElementInstanceIncidentsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchElementInstanceIncidentsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchElementInstanceIncidentsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchElementInstanceIncidentsNotFound** – If the response status code is 404. The element instance with the given key was not found.
+  * **errors.SearchElementInstanceIncidentsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   IncidentSearchQueryResult
-- **Return type:**
+* **Return type:**
   IncidentSearchQueryResult
 
 ### search_element_instances()
@@ -3836,21 +3789,20 @@ def search_element_instances(\*, data=<camunda_orchestration_sdk.types.Unset obj
 Search element instances
 
 > Search for element instances based on given criteria.
-
-- **Parameters:**
-  - **body** (_ElementInstanceSearchQuery_ _|_ _Unset_) – Element instance search request.
-  - **data** (_ElementInstanceSearchQuery_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchElementInstancesBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchElementInstancesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchElementInstancesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchElementInstancesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*ElementInstanceSearchQuery* *|* *Unset*) – Element instance search request.
+  * **data** (*ElementInstanceSearchQuery* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchElementInstancesBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchElementInstancesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchElementInstancesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchElementInstancesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ElementInstanceSearchQueryResult
-- **Return type:**
+* **Return type:**
   ElementInstanceSearchQueryResult
 
 ### search_group_ids_for_tenant()
@@ -3862,18 +3814,17 @@ def search_group_ids_for_tenant(tenant_id, \*, data=<camunda_orchestration_sdk.t
 Search groups for tenant
 
 > Retrieves a filtered and sorted list of groups for a specified tenant.
-
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **body** (_SearchGroupIdsForTenantData_ _|_ _Unset_)
-  - **data** (_SearchGroupIdsForTenantData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **body** (*SearchGroupIdsForTenantData* *|* *Unset*)
+  * **data** (*SearchGroupIdsForTenantData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   TenantGroupSearchResult
-- **Return type:**
+* **Return type:**
   TenantGroupSearchResult
 
 ### search_groups()
@@ -3885,21 +3836,20 @@ def search_groups(\*, data=<camunda_orchestration_sdk.types.Unset object>, \*\*k
 Search groups
 
 > Search for groups based on given criteria.
-
-- **Parameters:**
-  - **body** (_GroupSearchQueryRequest_ _|_ _Unset_) – Group search request.
-  - **data** (_GroupSearchQueryRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchGroupsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchGroupsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchGroupsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchGroupsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*GroupSearchQueryRequest* *|* *Unset*) – Group search request.
+  * **data** (*GroupSearchQueryRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchGroupsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchGroupsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchGroupsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchGroupsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   GroupSearchQueryResult
-- **Return type:**
+* **Return type:**
   GroupSearchQueryResult
 
 ### search_groups_for_role()
@@ -3911,23 +3861,22 @@ def search_groups_for_role(role_id, \*, data=<camunda_orchestration_sdk.types.Un
 Search role groups
 
 > Search groups with assigned role.
-
-- **Parameters:**
-  - **role_id** (_str_)
-  - **body** (_SearchGroupsForRoleData_ _|_ _Unset_)
-  - **data** (_SearchGroupsForRoleData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchGroupsForRoleBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchGroupsForRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchGroupsForRoleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchGroupsForRoleNotFound** – If the response status code is 404. The role with the given ID was not found.
-  - **errors.SearchGroupsForRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **body** (*SearchGroupsForRoleData* *|* *Unset*)
+  * **data** (*SearchGroupsForRoleData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchGroupsForRoleBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchGroupsForRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchGroupsForRoleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchGroupsForRoleNotFound** – If the response status code is 404. The role with the given ID was not found.
+  * **errors.SearchGroupsForRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   RoleGroupSearchResult
-- **Return type:**
+* **Return type:**
   RoleGroupSearchResult
 
 ### search_incidents()
@@ -3939,21 +3888,20 @@ def search_incidents(\*, data=<camunda_orchestration_sdk.types.Unset object>, \*
 Search incidents
 
 > Search for incidents based on given criteria.
-
-- **Parameters:**
-  - **body** (_IncidentSearchQuery_ _|_ _Unset_)
-  - **data** (_IncidentSearchQuery_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchIncidentsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchIncidentsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchIncidentsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchIncidentsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*IncidentSearchQuery* *|* *Unset*)
+  * **data** (*IncidentSearchQuery* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchIncidentsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchIncidentsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchIncidentsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchIncidentsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   IncidentSearchQueryResult
-- **Return type:**
+* **Return type:**
   IncidentSearchQueryResult
 
 ### Examples
@@ -3982,21 +3930,20 @@ def search_jobs(\*, data=<camunda_orchestration_sdk.types.Unset object>, \*\*kwa
 Search jobs
 
 > Search for jobs based on given criteria.
-
-- **Parameters:**
-  - **body** (_JobSearchQuery_ _|_ _Unset_) – Job search request.
-  - **data** (_JobSearchQuery_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchJobsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchJobsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchJobsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchJobsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*JobSearchQuery* *|* *Unset*) – Job search request.
+  * **data** (*JobSearchQuery* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchJobsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchJobsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchJobsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchJobsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   SearchJobsResponse200
-- **Return type:**
+* **Return type:**
   SearchJobsResponse200
 
 ### search_mapping_rule()
@@ -4008,21 +3955,20 @@ def search_mapping_rule(\*, data=<camunda_orchestration_sdk.types.Unset object>,
 Search mapping rules
 
 > Search for mapping rules based on given criteria.
-
-- **Parameters:**
-  - **body** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
-  - **data** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchMappingRuleBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchMappingRuleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchMappingRuleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*MappingRuleSearchQueryRequest* *|* *Unset*)
+  * **data** (*MappingRuleSearchQueryRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchMappingRuleBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchMappingRuleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchMappingRuleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   MappingRuleSearchQueryResult
-- **Return type:**
+* **Return type:**
   MappingRuleSearchQueryResult
 
 ### search_mapping_rules_for_group()
@@ -4034,23 +3980,22 @@ def search_mapping_rules_for_group(group_id, \*, data=<camunda_orchestration_sdk
 Search group mapping rules
 
 > Search mapping rules assigned to a group.
-
-- **Parameters:**
-  - **group_id** (_str_)
-  - **body** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
-  - **data** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchMappingRulesForGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchMappingRulesForGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchMappingRulesForGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchMappingRulesForGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
-  - **errors.SearchMappingRulesForGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **group_id** (*str*)
+  * **body** (*MappingRuleSearchQueryRequest* *|* *Unset*)
+  * **data** (*MappingRuleSearchQueryRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchMappingRulesForGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchMappingRulesForGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchMappingRulesForGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchMappingRulesForGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
+  * **errors.SearchMappingRulesForGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   SearchQueryResponse
-- **Return type:**
+* **Return type:**
   SearchQueryResponse
 
 ### search_mapping_rules_for_role()
@@ -4062,23 +4007,22 @@ def search_mapping_rules_for_role(role_id, \*, data=<camunda_orchestration_sdk.t
 Search role mapping rules
 
 > Search mapping rules with assigned role.
-
-- **Parameters:**
-  - **role_id** (_str_)
-  - **body** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
-  - **data** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchMappingRulesForRoleBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchMappingRulesForRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchMappingRulesForRoleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchMappingRulesForRoleNotFound** – If the response status code is 404. The role with the given ID was not found.
-  - **errors.SearchMappingRulesForRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **body** (*MappingRuleSearchQueryRequest* *|* *Unset*)
+  * **data** (*MappingRuleSearchQueryRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchMappingRulesForRoleBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchMappingRulesForRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchMappingRulesForRoleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchMappingRulesForRoleNotFound** – If the response status code is 404. The role with the given ID was not found.
+  * **errors.SearchMappingRulesForRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   SearchQueryResponse
-- **Return type:**
+* **Return type:**
   SearchQueryResponse
 
 ### search_mapping_rules_for_tenant()
@@ -4090,18 +4034,17 @@ def search_mapping_rules_for_tenant(tenant_id, \*, data=<camunda_orchestration_s
 Search mapping rules for tenant
 
 > Retrieves a filtered and sorted list of MappingRules for a specified tenant.
-
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **body** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
-  - **data** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **body** (*MappingRuleSearchQueryRequest* *|* *Unset*)
+  * **data** (*MappingRuleSearchQueryRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   SearchQueryResponse
-- **Return type:**
+* **Return type:**
   SearchQueryResponse
 
 ### search_message_subscriptions()
@@ -4113,21 +4056,20 @@ def search_message_subscriptions(\*, data=<camunda_orchestration_sdk.types.Unset
 Search message subscriptions
 
 > Search for message subscriptions based on given criteria.
-
-- **Parameters:**
-  - **body** (_SearchMessageSubscriptionsData_ _|_ _Unset_)
-  - **data** (_SearchMessageSubscriptionsData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchMessageSubscriptionsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchMessageSubscriptionsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchMessageSubscriptionsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchMessageSubscriptionsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*SearchMessageSubscriptionsData* *|* *Unset*)
+  * **data** (*SearchMessageSubscriptionsData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchMessageSubscriptionsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchMessageSubscriptionsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchMessageSubscriptionsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchMessageSubscriptionsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   SearchMessageSubscriptionsResponse200
-- **Return type:**
+* **Return type:**
   SearchMessageSubscriptionsResponse200
 
 ### search_process_definitions()
@@ -4139,21 +4081,20 @@ def search_process_definitions(\*, data=<camunda_orchestration_sdk.types.Unset o
 Search process definitions
 
 > Search for process definitions based on given criteria.
-
-- **Parameters:**
-  - **body** (_SearchProcessDefinitionsData_ _|_ _Unset_)
-  - **data** (_SearchProcessDefinitionsData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchProcessDefinitionsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchProcessDefinitionsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchProcessDefinitionsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchProcessDefinitionsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*SearchProcessDefinitionsData* *|* *Unset*)
+  * **data** (*SearchProcessDefinitionsData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchProcessDefinitionsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchProcessDefinitionsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchProcessDefinitionsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchProcessDefinitionsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ProcessDefinitionSearchQueryResult
-- **Return type:**
+* **Return type:**
   ProcessDefinitionSearchQueryResult
 
 ### search_process_instance_incidents()
@@ -4176,22 +4117,23 @@ with
 subprocesses or called processes under the root instance while excluding incidents directly tied to
 the root.
 
-- **Parameters:**
-  - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
-  - **body** (_IncidentSearchQuery_ _|_ _Unset_)
-  - **data** (_IncidentSearchQuery_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchProcessInstanceIncidentsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchProcessInstanceIncidentsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchProcessInstanceIncidentsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchProcessInstanceIncidentsNotFound** – If the response status code is 404. The process instance with the given key was not found.
-  - **errors.SearchProcessInstanceIncidentsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **process_instance_key** (*str*) – System-generated key for a process instance. Example:
+    2251799813690746.
+  * **body** (*IncidentSearchQuery* *|* *Unset*)
+  * **data** (*IncidentSearchQuery* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchProcessInstanceIncidentsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchProcessInstanceIncidentsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchProcessInstanceIncidentsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchProcessInstanceIncidentsNotFound** – If the response status code is 404. The process instance with the given key was not found.
+  * **errors.SearchProcessInstanceIncidentsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   IncidentSearchQueryResult
-- **Return type:**
+* **Return type:**
   IncidentSearchQueryResult
 
 ### search_process_instances()
@@ -4203,21 +4145,20 @@ def search_process_instances(\*, data=<camunda_orchestration_sdk.types.Unset obj
 Search process instances
 
 > Search for process instances based on given criteria.
-
-- **Parameters:**
-  - **body** (_SearchProcessInstancesData_ _|_ _Unset_) – Process instance search request.
-  - **data** (_SearchProcessInstancesData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchProcessInstancesBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchProcessInstancesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchProcessInstancesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchProcessInstancesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*SearchProcessInstancesData* *|* *Unset*) – Process instance search request.
+  * **data** (*SearchProcessInstancesData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchProcessInstancesBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchProcessInstancesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchProcessInstancesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchProcessInstancesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   SearchProcessInstancesResponse200
-- **Return type:**
+* **Return type:**
   SearchProcessInstancesResponse200
 
 ### Examples
@@ -4257,21 +4198,20 @@ def search_roles(\*, data=<camunda_orchestration_sdk.types.Unset object>, \*\*kw
 Search roles
 
 > Search for roles based on given criteria.
-
-- **Parameters:**
-  - **body** (_RoleSearchQueryRequest_ _|_ _Unset_) – Role search request.
-  - **data** (_RoleSearchQueryRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchRolesBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchRolesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchRolesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchRolesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*RoleSearchQueryRequest* *|* *Unset*) – Role search request.
+  * **data** (*RoleSearchQueryRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchRolesBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchRolesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchRolesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchRolesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   RoleSearchQueryResult
-- **Return type:**
+* **Return type:**
   RoleSearchQueryResult
 
 ### search_roles_for_group()
@@ -4283,23 +4223,22 @@ def search_roles_for_group(group_id, \*, data=<camunda_orchestration_sdk.types.U
 Search group roles
 
 > Search roles assigned to a group.
-
-- **Parameters:**
-  - **group_id** (_str_)
-  - **body** (_RoleSearchQueryRequest_ _|_ _Unset_) – Role search request.
-  - **data** (_RoleSearchQueryRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchRolesForGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchRolesForGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchRolesForGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchRolesForGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
-  - **errors.SearchRolesForGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **group_id** (*str*)
+  * **body** (*RoleSearchQueryRequest* *|* *Unset*) – Role search request.
+  * **data** (*RoleSearchQueryRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchRolesForGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchRolesForGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchRolesForGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchRolesForGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
+  * **errors.SearchRolesForGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   SearchQueryResponse
-- **Return type:**
+* **Return type:**
   SearchQueryResponse
 
 ### search_roles_for_tenant()
@@ -4311,18 +4250,17 @@ def search_roles_for_tenant(tenant_id, \*, data=<camunda_orchestration_sdk.types
 Search roles for tenant
 
 > Retrieves a filtered and sorted list of roles for a specified tenant.
-
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **body** (_RoleSearchQueryRequest_ _|_ _Unset_) – Role search request.
-  - **data** (_RoleSearchQueryRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **body** (*RoleSearchQueryRequest* *|* *Unset*) – Role search request.
+  * **data** (*RoleSearchQueryRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   SearchQueryResponse
-- **Return type:**
+* **Return type:**
   SearchQueryResponse
 
 ### search_tenants()
@@ -4334,22 +4272,21 @@ def search_tenants(\*, data=<camunda_orchestration_sdk.types.Unset object>, \*\*
 Search tenants
 
 > Retrieves a filtered and sorted list of tenants.
-
-- **Parameters:**
-  - **body** (_SearchTenantsData_ _|_ _Unset_) – Tenant search request
-  - **data** (_SearchTenantsData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchTenantsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchTenantsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchTenantsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchTenantsNotFound** – If the response status code is 404. Not found
-  - **errors.SearchTenantsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*SearchTenantsData* *|* *Unset*) – Tenant search request
+  * **data** (*SearchTenantsData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchTenantsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchTenantsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchTenantsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchTenantsNotFound** – If the response status code is 404. Not found
+  * **errors.SearchTenantsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   TenantSearchQueryResult
-- **Return type:**
+* **Return type:**
   TenantSearchQueryResult
 
 ### search_user_task_audit_logs()
@@ -4361,20 +4298,19 @@ def search_user_task_audit_logs(user_task_key, \*, data=<camunda_orchestration_s
 Search user task audit logs
 
 > Search for user task audit logs based on given criteria.
-
-- **Parameters:**
-  - **user_task_key** (_str_) – System-generated key for a user task.
-  - **body** (_SearchUserTaskAuditLogsData_ _|_ _Unset_) – User task search query request.
-  - **data** (_SearchUserTaskAuditLogsData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchUserTaskAuditLogsBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchUserTaskAuditLogsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **user_task_key** (*str*) – System-generated key for a user task.
+  * **body** (*SearchUserTaskAuditLogsData* *|* *Unset*) – User task search query request.
+  * **data** (*SearchUserTaskAuditLogsData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchUserTaskAuditLogsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchUserTaskAuditLogsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   SearchUserTaskAuditLogsResponse200
-- **Return type:**
+* **Return type:**
   SearchUserTaskAuditLogsResponse200
 
 ### search_user_task_variables()
@@ -4389,20 +4325,20 @@ Search user task variables
 
 response are truncated.
 
-- **Parameters:**
-  - **user_task_key** (_str_) – System-generated key for a user task.
-  - **truncate_values** (_bool_ _|_ _Unset_)
-  - **body** (_SearchUserTaskVariablesData_ _|_ _Unset_) – User task search query request.
-  - **data** (_SearchUserTaskVariablesData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchUserTaskVariablesBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchUserTaskVariablesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **user_task_key** (*str*) – System-generated key for a user task.
+  * **truncate_values** (*bool* *|* *Unset*)
+  * **body** (*SearchUserTaskVariablesData* *|* *Unset*) – User task search query request.
+  * **data** (*SearchUserTaskVariablesData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchUserTaskVariablesBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchUserTaskVariablesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   VariableSearchQueryResult
-- **Return type:**
+* **Return type:**
   VariableSearchQueryResult
 
 ### search_user_tasks()
@@ -4414,21 +4350,20 @@ def search_user_tasks(\*, data=<camunda_orchestration_sdk.types.Unset object>, \
 Search user tasks
 
 > Search for user tasks based on given criteria.
-
-- **Parameters:**
-  - **body** (_SearchUserTasksData_ _|_ _Unset_) – User task search query request.
-  - **data** (_SearchUserTasksData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchUserTasksBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchUserTasksUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchUserTasksForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchUserTasksInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*SearchUserTasksData* *|* *Unset*) – User task search query request.
+  * **data** (*SearchUserTasksData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchUserTasksBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchUserTasksUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchUserTasksForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchUserTasksInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   SearchUserTasksResponse200
-- **Return type:**
+* **Return type:**
   SearchUserTasksResponse200
 
 ### Examples
@@ -4457,21 +4392,20 @@ def search_users(\*, data=<camunda_orchestration_sdk.types.Unset object>, \*\*kw
 Search users
 
 > Search for users based on given criteria.
-
-- **Parameters:**
-  - **body** (_SearchUsersData_ _|_ _Unset_)
-  - **data** (_SearchUsersData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchUsersBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchUsersUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchUsersForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchUsersInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **body** (*SearchUsersData* *|* *Unset*)
+  * **data** (*SearchUsersData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchUsersBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchUsersUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchUsersForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchUsersInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   UserSearchResult
-- **Return type:**
+* **Return type:**
   UserSearchResult
 
 ### search_users_for_group()
@@ -4483,23 +4417,22 @@ def search_users_for_group(group_id, \*, data=<camunda_orchestration_sdk.types.U
 Search group users
 
 > Search users assigned to a group.
-
-- **Parameters:**
-  - **group_id** (_str_)
-  - **body** (_SearchUsersForGroupData_ _|_ _Unset_)
-  - **data** (_SearchUsersForGroupData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchUsersForGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchUsersForGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchUsersForGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchUsersForGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
-  - **errors.SearchUsersForGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **group_id** (*str*)
+  * **body** (*SearchUsersForGroupData* *|* *Unset*)
+  * **data** (*SearchUsersForGroupData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchUsersForGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchUsersForGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchUsersForGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchUsersForGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
+  * **errors.SearchUsersForGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   TenantUserSearchResult
-- **Return type:**
+* **Return type:**
   TenantUserSearchResult
 
 ### search_users_for_role()
@@ -4511,23 +4444,22 @@ def search_users_for_role(role_id, \*, data=<camunda_orchestration_sdk.types.Uns
 Search role users
 
 > Search users with assigned role.
-
-- **Parameters:**
-  - **role_id** (_str_)
-  - **body** (_SearchUsersForRoleData_ _|_ _Unset_)
-  - **data** (_SearchUsersForRoleData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchUsersForRoleBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchUsersForRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchUsersForRoleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchUsersForRoleNotFound** – If the response status code is 404. The role with the given ID was not found.
-  - **errors.SearchUsersForRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **body** (*SearchUsersForRoleData* *|* *Unset*)
+  * **data** (*SearchUsersForRoleData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchUsersForRoleBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchUsersForRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchUsersForRoleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchUsersForRoleNotFound** – If the response status code is 404. The role with the given ID was not found.
+  * **errors.SearchUsersForRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   TenantUserSearchResult
-- **Return type:**
+* **Return type:**
   TenantUserSearchResult
 
 ### search_users_for_tenant()
@@ -4539,18 +4471,17 @@ def search_users_for_tenant(tenant_id, \*, data=<camunda_orchestration_sdk.types
 Search users for tenant
 
 > Retrieves a filtered and sorted list of users for a specified tenant.
-
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **body** (_SearchUsersForTenantData_ _|_ _Unset_)
-  - **data** (_SearchUsersForTenantData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **body** (*SearchUsersForTenantData* *|* *Unset*)
+  * **data** (*SearchUsersForTenantData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   TenantUserSearchResult
-- **Return type:**
+* **Return type:**
   TenantUserSearchResult
 
 ### search_variables()
@@ -4565,21 +4496,21 @@ Search variables
 
 the response are truncated.
 
-- **Parameters:**
-  - **truncate_values** (_bool_ _|_ _Unset_)
-  - **body** (_SearchVariablesData_ _|_ _Unset_) – Variable search query request.
-  - **data** (_SearchVariablesData_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SearchVariablesBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SearchVariablesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.SearchVariablesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SearchVariablesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **truncate_values** (*bool* *|* *Unset*)
+  * **body** (*SearchVariablesData* *|* *Unset*) – Variable search query request.
+  * **data** (*SearchVariablesData* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchVariablesBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchVariablesUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchVariablesForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchVariablesInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   VariableSearchQueryResult
-- **Return type:**
+* **Return type:**
   VariableSearchQueryResult
 
 ### suspend_batch_operation()
@@ -4595,22 +4526,23 @@ Suspend Batch operation
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint
 (/batch-operations/{batchOperationKey}).
 
-- **Parameters:**
-  - **batch_operation_key** (_str_) – System-generated key for an batch operation. Example: 2251799813684321.
-  - **body** (_Any_ _|_ _Unset_)
-  - **data** (_Any_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.SuspendBatchOperationBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.SuspendBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.SuspendBatchOperationNotFound** – If the response status code is 404. Not found. The batch operation was not found.
-  - **errors.SuspendBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.SuspendBatchOperationServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **batch_operation_key** (*str*) – System-generated key for an batch operation. Example:
+    2251799813684321.
+  * **body** (*Any* *|* *Unset*)
+  * **data** (*Any* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SuspendBatchOperationBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SuspendBatchOperationForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SuspendBatchOperationNotFound** – If the response status code is 404. Not found. The batch operation was not found.
+  * **errors.SuspendBatchOperationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.SuspendBatchOperationServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### throw_job_error()
@@ -4622,23 +4554,22 @@ def throw_job_error(job_key, , data, \*\*kwargs)
 Throw error for job
 
 > Reports a business error (i.e. non-technical) that occurs while processing a job.
-
-- **Parameters:**
-  - **job_key** (_str_) – System-generated key for a job. Example: 2251799813653498.
-  - **body** (_JobErrorRequest_)
-  - **data** (_JobErrorRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.ThrowJobErrorBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.ThrowJobErrorNotFound** – If the response status code is 404. The job with the given key was not found or is not activated.
-  - **errors.ThrowJobErrorConflict** – If the response status code is 409. The job with the given key is in the wrong state currently. More details are provided in the response body.
-  - **errors.ThrowJobErrorInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.ThrowJobErrorServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **job_key** (*str*) – System-generated key for a job. Example: 2251799813653498.
+  * **body** (*JobErrorRequest*)
+  * **data** (*JobErrorRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.ThrowJobErrorBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.ThrowJobErrorNotFound** – If the response status code is 404. The job with the given key was not found or is not activated.
+  * **errors.ThrowJobErrorConflict** – If the response status code is 409. The job with the given key is in the wrong state currently. More details are provided in the response body.
+  * **errors.ThrowJobErrorInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.ThrowJobErrorServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### unassign_client_from_group()
@@ -4654,21 +4585,21 @@ Unassign a client from a group
 The client is removed as a group member, with associated authorizations, roles, and tenant
 assignments no longer applied.
 
-- **Parameters:**
-  - **group_id** (_str_)
-  - **client_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnassignClientFromGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnassignClientFromGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UnassignClientFromGroupNotFound** – If the response status code is 404. The group with the given ID was not found, or the client is not assigned to this group.
-  - **errors.UnassignClientFromGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnassignClientFromGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **group_id** (*str*)
+  * **client_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnassignClientFromGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnassignClientFromGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UnassignClientFromGroupNotFound** – If the response status code is 404. The group with the given ID was not found, or the client is not assigned to this group.
+  * **errors.UnassignClientFromGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnassignClientFromGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### unassign_client_from_tenant()
@@ -4683,21 +4614,21 @@ Unassign a client from a tenant
 
 The client can no longer access tenant data.
 
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **client_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnassignClientFromTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnassignClientFromTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UnassignClientFromTenantNotFound** – If the response status code is 404. The tenant does not exist or the client was not assigned to it.
-  - **errors.UnassignClientFromTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnassignClientFromTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **client_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnassignClientFromTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnassignClientFromTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UnassignClientFromTenantNotFound** – If the response status code is 404. The tenant does not exist or the client was not assigned to it.
+  * **errors.UnassignClientFromTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnassignClientFromTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### unassign_group_from_tenant()
@@ -4713,21 +4644,21 @@ Unassign a group from a tenant
 Members of the group (users, clients) will no longer have access to the tenant’s data - except they
 are assigned directly to the tenant.
 
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **group_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnassignGroupFromTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnassignGroupFromTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UnassignGroupFromTenantNotFound** – If the response status code is 404. Not found. The tenant or group was not found.
-  - **errors.UnassignGroupFromTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnassignGroupFromTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **group_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnassignGroupFromTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnassignGroupFromTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UnassignGroupFromTenantNotFound** – If the response status code is 404. Not found. The tenant or group was not found.
+  * **errors.UnassignGroupFromTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnassignGroupFromTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### unassign_mapping_rule_from_group()
@@ -4739,22 +4670,21 @@ def unassign_mapping_rule_from_group(group_id, mapping_rule_id, \*\*kwargs)
 Unassign a mapping rule from a group
 
 > Unassigns a mapping rule from a group.
-
-- **Parameters:**
-  - **group_id** (_str_)
-  - **mapping_rule_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnassignMappingRuleFromGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnassignMappingRuleFromGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UnassignMappingRuleFromGroupNotFound** – If the response status code is 404. The group or mapping rule with the given ID was not found, or the mapping rule is not assigned to this group.
-  - **errors.UnassignMappingRuleFromGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnassignMappingRuleFromGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **group_id** (*str*)
+  * **mapping_rule_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnassignMappingRuleFromGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnassignMappingRuleFromGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UnassignMappingRuleFromGroupNotFound** – If the response status code is 404. The group or mapping rule with the given ID was not found, or the mapping rule is not assigned to this group.
+  * **errors.UnassignMappingRuleFromGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnassignMappingRuleFromGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### unassign_mapping_rule_from_tenant()
@@ -4766,22 +4696,21 @@ def unassign_mapping_rule_from_tenant(tenant_id, mapping_rule_id, \*\*kwargs)
 Unassign a mapping rule from a tenant
 
 > Unassigns a single mapping rule from a specified tenant without deleting the rule.
-
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **mapping_rule_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnassignMappingRuleFromTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnassignMappingRuleFromTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UnassignMappingRuleFromTenantNotFound** – If the response status code is 404. Not found. The tenant or mapping rule was not found.
-  - **errors.UnassignMappingRuleFromTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnassignMappingRuleFromTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **mapping_rule_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnassignMappingRuleFromTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnassignMappingRuleFromTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UnassignMappingRuleFromTenantNotFound** – If the response status code is 404. Not found. The tenant or mapping rule was not found.
+  * **errors.UnassignMappingRuleFromTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnassignMappingRuleFromTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### unassign_role_from_client()
@@ -4796,21 +4725,21 @@ Unassign a role from a client
 
 associated with this role.
 
-- **Parameters:**
-  - **role_id** (_str_)
-  - **client_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnassignRoleFromClientBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnassignRoleFromClientForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UnassignRoleFromClientNotFound** – If the response status code is 404. The role or client with the given ID or username was not found.
-  - **errors.UnassignRoleFromClientInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnassignRoleFromClientServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **client_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnassignRoleFromClientBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnassignRoleFromClientForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UnassignRoleFromClientNotFound** – If the response status code is 404. The role or client with the given ID or username was not found.
+  * **errors.UnassignRoleFromClientInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnassignRoleFromClientServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### unassign_role_from_group()
@@ -4825,21 +4754,21 @@ Unassign a role from a group
 
 the authorizations associated with this role.
 
-- **Parameters:**
-  - **role_id** (_str_)
-  - **group_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnassignRoleFromGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnassignRoleFromGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UnassignRoleFromGroupNotFound** – If the response status code is 404. The role or group with the given ID was not found.
-  - **errors.UnassignRoleFromGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnassignRoleFromGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **group_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnassignRoleFromGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnassignRoleFromGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UnassignRoleFromGroupNotFound** – If the response status code is 404. The role or group with the given ID was not found.
+  * **errors.UnassignRoleFromGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnassignRoleFromGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### unassign_role_from_mapping_rule()
@@ -4851,22 +4780,21 @@ def unassign_role_from_mapping_rule(role_id, mapping_rule_id, \*\*kwargs)
 Unassign a role from a mapping rule
 
 > Unassigns a role from a mapping rule.
-
-- **Parameters:**
-  - **role_id** (_str_)
-  - **mapping_rule_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnassignRoleFromMappingRuleBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnassignRoleFromMappingRuleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UnassignRoleFromMappingRuleNotFound** – If the response status code is 404. The role or mapping rule with the given ID was not found.
-  - **errors.UnassignRoleFromMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnassignRoleFromMappingRuleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **mapping_rule_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnassignRoleFromMappingRuleBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnassignRoleFromMappingRuleForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UnassignRoleFromMappingRuleNotFound** – If the response status code is 404. The role or mapping rule with the given ID was not found.
+  * **errors.UnassignRoleFromMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnassignRoleFromMappingRuleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### unassign_role_from_tenant()
@@ -4882,21 +4810,21 @@ Unassign a role from a tenant
 Users, Clients or Groups, that have the role assigned, will no longer have access to the
 tenant’s data - unless they are assigned directly to the tenant.
 
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **role_id** (_str_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnassignRoleFromTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnassignRoleFromTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UnassignRoleFromTenantNotFound** – If the response status code is 404. Not found. The tenant or role was not found.
-  - **errors.UnassignRoleFromTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnassignRoleFromTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **role_id** (*str*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnassignRoleFromTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnassignRoleFromTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UnassignRoleFromTenantNotFound** – If the response status code is 404. Not found. The tenant or role was not found.
+  * **errors.UnassignRoleFromTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnassignRoleFromTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### unassign_role_from_user()
@@ -4911,21 +4839,21 @@ Unassign a role from a user
 
 this role.
 
-- **Parameters:**
-  - **role_id** (_str_)
-  - **username** (_str_) – The unique name of a user. Example: swillis.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnassignRoleFromUserBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnassignRoleFromUserForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UnassignRoleFromUserNotFound** – If the response status code is 404. The role or user with the given ID or username was not found.
-  - **errors.UnassignRoleFromUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnassignRoleFromUserServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **username** (*str*) – The unique name of a user. Example: swillis.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnassignRoleFromUserBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnassignRoleFromUserForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UnassignRoleFromUserNotFound** – If the response status code is 404. The role or user with the given ID or username was not found.
+  * **errors.UnassignRoleFromUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnassignRoleFromUserServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### unassign_user_from_group()
@@ -4941,21 +4869,21 @@ Unassign a user from a group
 The user is removed as a group member, with associated authorizations, roles, and tenant assignments
 no longer applied.
 
-- **Parameters:**
-  - **group_id** (_str_)
-  - **username** (_str_) – The unique name of a user. Example: swillis.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnassignUserFromGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnassignUserFromGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UnassignUserFromGroupNotFound** – If the response status code is 404. The group or user with the given ID was not found, or the user is not assigned to this group.
-  - **errors.UnassignUserFromGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnassignUserFromGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **group_id** (*str*)
+  * **username** (*str*) – The unique name of a user. Example: swillis.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnassignUserFromGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnassignUserFromGroupForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UnassignUserFromGroupNotFound** – If the response status code is 404. The group or user with the given ID was not found, or the user is not assigned to this group.
+  * **errors.UnassignUserFromGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnassignUserFromGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### unassign_user_from_tenant()
@@ -4970,21 +4898,21 @@ Unassign a user from a tenant
 
 The user can no longer access tenant data.
 
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **username** (_str_) – The unique name of a user. Example: swillis.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnassignUserFromTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnassignUserFromTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UnassignUserFromTenantNotFound** – If the response status code is 404. Not found. The tenant or user was not found.
-  - **errors.UnassignUserFromTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnassignUserFromTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **username** (*str*) – The unique name of a user. Example: swillis.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnassignUserFromTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnassignUserFromTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UnassignUserFromTenantNotFound** – If the response status code is 404. Not found. The tenant or user was not found.
+  * **errors.UnassignUserFromTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnassignUserFromTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### unassign_user_task()
@@ -4996,21 +4924,20 @@ def unassign_user_task(user_task_key, \*\*kwargs)
 Unassign user task
 
 > Removes the assignee of a task with the given key.
-
-- **Parameters:**
-  - **user_task_key** (_str_) – System-generated key for a user task.
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UnassignUserTaskBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UnassignUserTaskNotFound** – If the response status code is 404. The user task with the given key was not found.
-  - **errors.UnassignUserTaskConflict** – If the response status code is 409. The user task with the given key is in the wrong state currently. More details are provided in the response body.
-  - **errors.UnassignUserTaskInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnassignUserTaskServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **user_task_key** (*str*) – System-generated key for a user task.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UnassignUserTaskBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnassignUserTaskNotFound** – If the response status code is 404. The user task with the given key was not found.
+  * **errors.UnassignUserTaskConflict** – If the response status code is 409. The user task with the given key is in the wrong state currently. More details are provided in the response body.
+  * **errors.UnassignUserTaskInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnassignUserTaskServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### Examples
@@ -5033,22 +4960,22 @@ def update_authorization(authorization_key, , data, \*\*kwargs)
 Update authorization
 
 > Update the authorization with the given key.
-
-- **Parameters:**
-  - **authorization_key** (_str_) – System-generated key for an authorization. Example: 2251799813684332.
-  - **body** (_AuthorizationIdBasedRequest_ _|_ _AuthorizationPropertyBasedRequest_)
-  - **data** (_AuthorizationIdBasedRequest_ _|_ _AuthorizationPropertyBasedRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UpdateAuthorizationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.UpdateAuthorizationNotFound** – If the response status code is 404. The authorization with the authorizationKey was not found.
-  - **errors.UpdateAuthorizationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UpdateAuthorizationServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **authorization_key** (*str*) – System-generated key for an authorization. Example:
+    2251799813684332.
+  * **body** (*AuthorizationIdBasedRequest* *|* *AuthorizationPropertyBasedRequest*)
+  * **data** (*AuthorizationIdBasedRequest* *|* *AuthorizationPropertyBasedRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UpdateAuthorizationUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.UpdateAuthorizationNotFound** – If the response status code is 404. The authorization with the authorizationKey was not found.
+  * **errors.UpdateAuthorizationInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UpdateAuthorizationServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### update_global_cluster_variable()
@@ -5063,22 +4990,22 @@ Update a global-scoped cluster variable
 
 The variable must exist, otherwise a 404 error is returned.
 
-- **Parameters:**
-  - **name** (_str_)
-  - **body** (_UpdateClusterVariableRequest_)
-  - **data** (_UpdateClusterVariableRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UpdateGlobalClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UpdateGlobalClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.UpdateGlobalClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UpdateGlobalClusterVariableNotFound** – If the response status code is 404. Cluster variable not found
-  - **errors.UpdateGlobalClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **name** (*str*)
+  * **body** (*UpdateClusterVariableRequest*)
+  * **data** (*UpdateClusterVariableRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UpdateGlobalClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UpdateGlobalClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.UpdateGlobalClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UpdateGlobalClusterVariableNotFound** – If the response status code is 404. Cluster variable not found
+  * **errors.UpdateGlobalClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ClusterVariableResult
-- **Return type:**
+* **Return type:**
   ClusterVariableResult
 
 ### update_group()
@@ -5090,23 +5017,22 @@ def update_group(group_id, , data, \*\*kwargs)
 Update group
 
 > Update a group with the given ID.
-
-- **Parameters:**
-  - **group_id** (_str_)
-  - **body** (_GroupUpdateRequest_)
-  - **data** (_GroupUpdateRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UpdateGroupBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UpdateGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.UpdateGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
-  - **errors.UpdateGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UpdateGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **group_id** (*str*)
+  * **body** (*GroupUpdateRequest*)
+  * **data** (*GroupUpdateRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UpdateGroupBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UpdateGroupUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.UpdateGroupNotFound** – If the response status code is 404. The group with the given ID was not found.
+  * **errors.UpdateGroupInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UpdateGroupServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   GroupUpdateResult
-- **Return type:**
+* **Return type:**
   GroupUpdateResult
 
 ### update_job()
@@ -5118,23 +5044,22 @@ def update_job(job_key, , data, \*\*kwargs)
 Update job
 
 > Update a job with the given key.
-
-- **Parameters:**
-  - **job_key** (_str_) – System-generated key for a job. Example: 2251799813653498.
-  - **body** (_JobUpdateRequest_)
-  - **data** (_JobUpdateRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UpdateJobBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UpdateJobNotFound** – If the response status code is 404. The job with the jobKey is not found.
-  - **errors.UpdateJobConflict** – If the response status code is 409. The job with the given key is in the wrong state currently. More details are provided in the response body.
-  - **errors.UpdateJobInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UpdateJobServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **job_key** (*str*) – System-generated key for a job. Example: 2251799813653498.
+  * **body** (*JobUpdateRequest*)
+  * **data** (*JobUpdateRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UpdateJobBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UpdateJobNotFound** – If the response status code is 404. The job with the jobKey is not found.
+  * **errors.UpdateJobConflict** – If the response status code is 409. The job with the given key is in the wrong state currently. More details are provided in the response body.
+  * **errors.UpdateJobInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UpdateJobServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### update_mapping_rule()
@@ -5146,23 +5071,22 @@ def update_mapping_rule(mapping_rule_id, \*, data=<camunda_orchestration_sdk.typ
 Update mapping rule
 
 > Update a mapping rule.
-
-- **Parameters:**
-  - **mapping_rule_id** (_str_)
-  - **body** (_MappingRuleUpdateRequest_ _|_ _Unset_)
-  - **data** (_MappingRuleUpdateRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UpdateMappingRuleBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UpdateMappingRuleForbidden** – If the response status code is 403. The request to update a mapping rule was denied. More details are provided in the response body.
-  - **errors.UpdateMappingRuleNotFound** – If the response status code is 404. The request to update a mapping rule was denied.
-  - **errors.UpdateMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UpdateMappingRuleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **mapping_rule_id** (*str*)
+  * **body** (*MappingRuleUpdateRequest* *|* *Unset*)
+  * **data** (*MappingRuleUpdateRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UpdateMappingRuleBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UpdateMappingRuleForbidden** – If the response status code is 403. The request to update a mapping rule was denied. More details are provided in the response body.
+  * **errors.UpdateMappingRuleNotFound** – If the response status code is 404. The request to update a mapping rule was denied.
+  * **errors.UpdateMappingRuleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UpdateMappingRuleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   MappingRuleUpdateResult
-- **Return type:**
+* **Return type:**
   MappingRuleUpdateResult
 
 ### update_role()
@@ -5174,23 +5098,22 @@ def update_role(role_id, , data, \*\*kwargs)
 Update role
 
 > Update a role with the given ID.
-
-- **Parameters:**
-  - **role_id** (_str_)
-  - **body** (_RoleUpdateRequest_)
-  - **data** (_RoleUpdateRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UpdateRoleBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UpdateRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.UpdateRoleNotFound** – If the response status code is 404. The role with the ID is not found.
-  - **errors.UpdateRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UpdateRoleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **role_id** (*str*)
+  * **body** (*RoleUpdateRequest*)
+  * **data** (*RoleUpdateRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UpdateRoleBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UpdateRoleUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.UpdateRoleNotFound** – If the response status code is 404. The role with the ID is not found.
+  * **errors.UpdateRoleInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UpdateRoleServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   RoleUpdateResult
-- **Return type:**
+* **Return type:**
   RoleUpdateResult
 
 ### update_tenant()
@@ -5202,23 +5125,22 @@ def update_tenant(tenant_id, , data, \*\*kwargs)
 Update tenant
 
 > Updates an existing tenant.
-
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **body** (_TenantUpdateRequest_)
-  - **data** (_TenantUpdateRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UpdateTenantBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UpdateTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UpdateTenantNotFound** – If the response status code is 404. Not found. The tenant was not found.
-  - **errors.UpdateTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UpdateTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **body** (*TenantUpdateRequest*)
+  * **data** (*TenantUpdateRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UpdateTenantBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UpdateTenantForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UpdateTenantNotFound** – If the response status code is 404. Not found. The tenant was not found.
+  * **errors.UpdateTenantInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UpdateTenantServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   TenantUpdateResult
-- **Return type:**
+* **Return type:**
   TenantUpdateResult
 
 ### update_tenant_cluster_variable()
@@ -5233,23 +5155,23 @@ Update a tenant-scoped cluster variable
 
 The variable must exist, otherwise a 404 error is returned.
 
-- **Parameters:**
-  - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **name** (_str_)
-  - **body** (_UpdateClusterVariableRequest_)
-  - **data** (_UpdateClusterVariableRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UpdateTenantClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UpdateTenantClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
-  - **errors.UpdateTenantClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UpdateTenantClusterVariableNotFound** – If the response status code is 404. Cluster variable not found
-  - **errors.UpdateTenantClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
+  * **name** (*str*)
+  * **body** (*UpdateClusterVariableRequest*)
+  * **data** (*UpdateClusterVariableRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UpdateTenantClusterVariableBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UpdateTenantClusterVariableUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.UpdateTenantClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UpdateTenantClusterVariableNotFound** – If the response status code is 404. Cluster variable not found
+  * **errors.UpdateTenantClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   ClusterVariableResult
-- **Return type:**
+* **Return type:**
   ClusterVariableResult
 
 ### update_user()
@@ -5261,23 +5183,22 @@ def update_user(username, , data, \*\*kwargs)
 Update user
 
 > Updates a user.
-
-- **Parameters:**
-  - **username** (_str_) – The unique name of a user. Example: swillis.
-  - **body** (_UserUpdateRequest_)
-  - **data** (_UserUpdateRequest_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UpdateUserBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UpdateUserForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
-  - **errors.UpdateUserNotFound** – If the response status code is 404. The user was not found.
-  - **errors.UpdateUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UpdateUserServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **username** (*str*) – The unique name of a user. Example: swillis.
+  * **body** (*UserUpdateRequest*)
+  * **data** (*UserUpdateRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UpdateUserBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UpdateUserForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UpdateUserNotFound** – If the response status code is 404. The user was not found.
+  * **errors.UpdateUserInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UpdateUserServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   UserResult
-- **Return type:**
+* **Return type:**
   UserResult
 
 ### update_user_task()
@@ -5289,23 +5210,22 @@ def update_user_task(user_task_key, \*, data=<camunda_orchestration_sdk.types.Un
 Update user task
 
 > Update a user task with the given key.
-
-- **Parameters:**
-  - **user_task_key** (_str_) – System-generated key for a user task.
-  - **body** (_UserTaskUpdateRequest_ _|_ _Unset_)
-  - **data** (_UserTaskUpdateRequest_ _|_ _Unset_)
-  - **kwargs** (_Any_)
-- **Raises:**
-  - **errors.UpdateUserTaskBadRequest** – If the response status code is 400. The provided data is not valid.
-  - **errors.UpdateUserTaskNotFound** – If the response status code is 404. The user task with the given key was not found.
-  - **errors.UpdateUserTaskConflict** – If the response status code is 409. The user task with the given key is in the wrong state currently. More details are provided in the response body.
-  - **errors.UpdateUserTaskInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
-  - **errors.UpdateUserTaskServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
-  - **errors.UnexpectedStatus** – If the response status code is not documented.
-  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Parameters:**
+  * **user_task_key** (*str*) – System-generated key for a user task.
+  * **body** (*UserTaskUpdateRequest* *|* *Unset*)
+  * **data** (*UserTaskUpdateRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UpdateUserTaskBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UpdateUserTaskNotFound** – If the response status code is 404. The user task with the given key was not found.
+  * **errors.UpdateUserTaskConflict** – If the response status code is 409. The user task with the given key is in the wrong state currently. More details are provided in the response body.
+  * **errors.UpdateUserTaskInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UpdateUserTaskServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
   None
-- **Return type:**
+* **Return type:**
   None
 
 ### Examples

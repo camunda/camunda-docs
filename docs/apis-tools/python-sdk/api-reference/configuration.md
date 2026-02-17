@@ -1,6 +1,7 @@
 ---
 title: Configuration
 sidebar_label: Configuration
+sidebar_position: 4
 mdx:
   format: md
 ---
@@ -34,16 +35,15 @@ The following are accepted as keyword arguments and will be used to construct ht
 > `follow_redirects`: Whether or not to follow redirects. Default value is False.
 
 > `httpx_args`: A dictionary of additional arguments to be passed to the `httpx.Client` and `httpx.AsyncClient` constructor.
-
-- **Parameters:**
-  - **base_url** (_str_)
-  - **raise_on_unexpected_status** (_bool_)
-  - **cookies** (_dict_ _[\*\*str_ _,_ _str_ _]_)
-  - **headers** (_dict_ _[\*\*str_ _,_ _str_ _]_)
-  - **timeout** (_httpx.Timeout_ _|_ _None_)
-  - **verify_ssl** (_str_ _|_ _bool_ _|_ _ssl.SSLContext_)
-  - **follow_redirects** (_bool_)
-  - **httpx_args** (_dict_ _[\*\*str_ _,_ _Any_ _]_)
+* **Parameters:**
+  * **base_url** (*str*)
+  * **raise_on_unexpected_status** (*bool*)
+  * **cookies** (*dict* *[**str* *,* *str* *]*)
+  * **headers** (*dict* *[**str* *,* *str* *]*)
+  * **timeout** (*httpx.Timeout* *|* *None*)
+  * **verify_ssl** (*str* *|* *bool* *|* *ssl.SSLContext*)
+  * **follow_redirects** (*bool*)
+  * **httpx_args** (*dict* *[**str* *,* *Any* *]*)
 
 ### raise_on_unexpected_status
 
@@ -51,7 +51,7 @@ Whether or not to raise an errors.UnexpectedStatus if the API returns a
 status code that was not documented in the source OpenAPI document. Can also be provided as a keyword
 argument to the constructor.
 
-- **Type:**
+* **Type:**
   bool
 
 ### get_async_httpx_client()
@@ -62,8 +62,8 @@ def get_async_httpx_client()
 
 Get the underlying httpx.AsyncClient, constructing a new one if not previously set
 
-- **Return type:**
-  _AsyncClient_
+* **Return type:**
+  *AsyncClient*
 
 ### get_httpx_client()
 
@@ -73,8 +73,8 @@ def get_httpx_client()
 
 Get the underlying httpx.Client, constructing a new one if not previously set
 
-- **Return type:**
-  _Client_
+* **Return type:**
+  *Client*
 
 ### raise_on_unexpected_status
 
@@ -92,10 +92,10 @@ Manually set the underlying httpx.AsyncClient
 
 **NOTE**: This will override any other settings on the client, including cookies, headers, and timeout.
 
-- **Parameters:**
-  **async_client** (_AsyncClient_)
-- **Return type:**
-  [_Client_](#client)
+* **Parameters:**
+  **async_client** (*AsyncClient*)
+* **Return type:**
+  [*Client*](#client)
 
 ### set_httpx_client()
 
@@ -107,10 +107,10 @@ Manually set the underlying httpx.Client
 
 **NOTE**: This will override any other settings on the client, including cookies, headers, and timeout.
 
-- **Parameters:**
-  **client** (_Client_)
-- **Return type:**
-  [_Client_](#client)
+* **Parameters:**
+  **client** (*Client*)
+* **Return type:**
+  [*Client*](#client)
 
 ### with_cookies()
 
@@ -120,10 +120,10 @@ def with_cookies(cookies)
 
 Get a new client matching this one with additional cookies
 
-- **Parameters:**
-  **cookies** (_dict_ _[\*\*str_ _,_ _str_ _]_)
-- **Return type:**
-  [_Client_](#client)
+* **Parameters:**
+  **cookies** (*dict* *[**str* *,* *str* *]*)
+* **Return type:**
+  [*Client*](#client)
 
 ### with_headers()
 
@@ -133,10 +133,10 @@ def with_headers(headers)
 
 Get a new client matching this one with additional headers
 
-- **Parameters:**
-  **headers** (_dict_ _[\*\*str_ _,_ _str_ _]_)
-- **Return type:**
-  [_Client_](#client)
+* **Parameters:**
+  **headers** (*dict* *[**str* *,* *str* *]*)
+* **Return type:**
+  [*Client*](#client)
 
 ### with_timeout()
 
@@ -146,10 +146,10 @@ def with_timeout(timeout)
 
 Get a new client matching this one with a new timeout configuration
 
-- **Parameters:**
-  **timeout** (_Timeout_)
-- **Return type:**
-  [_Client_](#client)
+* **Parameters:**
+  **timeout** (*Timeout*)
+* **Return type:**
+  [*Client*](#client)
 
 ## AuthenticatedClient
 
@@ -178,19 +178,18 @@ The following are accepted as keyword arguments and will be used to construct ht
 > `follow_redirects`: Whether or not to follow redirects. Default value is False.
 
 > `httpx_args`: A dictionary of additional arguments to be passed to the `httpx.Client` and `httpx.AsyncClient` constructor.
-
-- **Parameters:**
-  - **base_url** (_str_)
-  - **token** (_str_)
-  - **prefix** (_str_)
-  - **auth_header_name** (_str_)
-  - **raise_on_unexpected_status** (_bool_)
-  - **cookies** (_dict_ _[\*\*str_ _,_ _str_ _]_)
-  - **headers** (_dict_ _[\*\*str_ _,_ _str_ _]_)
-  - **timeout** (_httpx.Timeout_ _|_ _None_)
-  - **verify_ssl** (_str_ _|_ _bool_ _|_ _ssl.SSLContext_)
-  - **follow_redirects** (_bool_)
-  - **httpx_args** (_dict_ _[\*\*str_ _,_ _Any_ _]_)
+* **Parameters:**
+  * **base_url** (*str*)
+  * **token** (*str*)
+  * **prefix** (*str*)
+  * **auth_header_name** (*str*)
+  * **raise_on_unexpected_status** (*bool*)
+  * **cookies** (*dict* *[**str* *,* *str* *]*)
+  * **headers** (*dict* *[**str* *,* *str* *]*)
+  * **timeout** (*httpx.Timeout* *|* *None*)
+  * **verify_ssl** (*str* *|* *bool* *|* *ssl.SSLContext*)
+  * **follow_redirects** (*bool*)
+  * **httpx_args** (*dict* *[**str* *,* *Any* *]*)
 
 ### raise_on_unexpected_status
 
@@ -198,28 +197,28 @@ Whether or not to raise an errors.UnexpectedStatus if the API returns a
 status code that was not documented in the source OpenAPI document. Can also be provided as a keyword
 argument to the constructor.
 
-- **Type:**
+* **Type:**
   bool
 
 ### token
 
 The token to use for authentication
 
-- **Type:**
+* **Type:**
   str
 
 ### prefix
 
 The prefix to use for the Authorization header
 
-- **Type:**
+* **Type:**
   str
 
 ### auth_header_name
 
 The name of the Authorization header
 
-- **Type:**
+* **Type:**
   str
 
 ### auth_header_name
@@ -236,8 +235,8 @@ def get_async_httpx_client()
 
 Get the underlying httpx.AsyncClient, constructing a new one if not previously set
 
-- **Return type:**
-  _AsyncClient_
+* **Return type:**
+  *AsyncClient*
 
 ### get_httpx_client()
 
@@ -247,8 +246,8 @@ def get_httpx_client()
 
 Get the underlying httpx.Client, constructing a new one if not previously set
 
-- **Return type:**
-  _Client_
+* **Return type:**
+  *Client*
 
 ### prefix
 
@@ -272,10 +271,10 @@ Manually set the underlying httpx.AsyncClient
 
 **NOTE**: This will override any other settings on the client, including cookies, headers, and timeout.
 
-- **Parameters:**
-  **async_client** (_AsyncClient_)
-- **Return type:**
-  [_AuthenticatedClient_](#authenticatedclient)
+* **Parameters:**
+  **async_client** (*AsyncClient*)
+* **Return type:**
+  [*AuthenticatedClient*](#authenticatedclient)
 
 ### set_httpx_client()
 
@@ -287,10 +286,10 @@ Manually set the underlying httpx.Client
 
 **NOTE**: This will override any other settings on the client, including cookies, headers, and timeout.
 
-- **Parameters:**
-  **client** (_Client_)
-- **Return type:**
-  [_AuthenticatedClient_](#authenticatedclient)
+* **Parameters:**
+  **client** (*Client*)
+* **Return type:**
+  [*AuthenticatedClient*](#authenticatedclient)
 
 ### token
 
@@ -306,10 +305,10 @@ def with_cookies(cookies)
 
 Get a new client matching this one with additional cookies
 
-- **Parameters:**
-  **cookies** (_dict_ _[\*\*str_ _,_ _str_ _]_)
-- **Return type:**
-  [_AuthenticatedClient_](#authenticatedclient)
+* **Parameters:**
+  **cookies** (*dict* *[**str* *,* *str* *]*)
+* **Return type:**
+  [*AuthenticatedClient*](#authenticatedclient)
 
 ### with_headers()
 
@@ -319,10 +318,10 @@ def with_headers(headers)
 
 Get a new client matching this one with additional headers
 
-- **Parameters:**
-  **headers** (_dict_ _[\*\*str_ _,_ _str_ _]_)
-- **Return type:**
-  [_AuthenticatedClient_](#authenticatedclient)
+* **Parameters:**
+  **headers** (*dict* *[**str* *,* *str* *]*)
+* **Return type:**
+  [*AuthenticatedClient*](#authenticatedclient)
 
 ### with_timeout()
 
@@ -332,7 +331,7 @@ def with_timeout(timeout)
 
 Get a new client matching this one with a new timeout configuration
 
-- **Parameters:**
-  **timeout** (_Timeout_)
-- **Return type:**
-  [_AuthenticatedClient_](#authenticatedclient)
+* **Parameters:**
+  **timeout** (*Timeout*)
+* **Return type:**
+  [*AuthenticatedClient*](#authenticatedclient)
