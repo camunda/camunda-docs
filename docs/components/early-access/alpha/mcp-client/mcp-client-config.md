@@ -32,14 +32,22 @@ Use when invoking MCP operations directly from a BPMN process without an AI Agen
 
 Select the operation to perform:
 
-| Operation  | Description                                              | Configuration                                                                                                  |
-| :--------- | :------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- |
-| List tools | Retrieves the list of tools available on the MCP server. | No additional configuration required.                                                                          |
-| Call tool  | Invokes a specific tool on the MCP server.               | **Tool name**: The name of the tool to invoke.<br/>**Arguments**: Tool arguments as a FEEL context expression. |
+| Operation               | Description                                                                                                                                                                   | Configuration                                                                                                                                           |
+| :---------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| List tools              | Retrieves a list of tools available on the MCP server.                                                                                                                        | No additional configuration required.                                                                                                                   |
+| Call tool               | Invokes a specific tool on the MCP server.                                                                                                                                    | <p><ul><li>**Tool name**: The name of the tool to invoke.</li><li><p>**Tool arguments**: Tool arguments as a FEEL context expression.</p></li></ul></p> |
+| List resources          | Retrieves a list of available resources on the MCP server.                                                                                                                    | No additional configuration required.                                                                                                                   |
+| List resource templates | <p>Retrieves a list of available resource templates on the MCP server.</p><p>These are similar to resources, but include a set of parameters for dynamic resource access.</p> | No additional configuration required.                                                                                                                   |
+| Read resource           | Retrieves the content of a specific resource defined by its URI.                                                                                                              | **Resource URI**: The URI of the resource to read.                                                                                                      |
+| List prompts            | Retrieves a list of available prompts on the MCP server.                                                                                                                      | No additional configuration required.                                                                                                                   |
+| Get prompt              | Retrieves a specific prompt and its messages, potentially customized based on the provided input arguments.                                                                   | No additional configuration required.                                                                                                                   |
 
-## Tools
+## Filters
 
-Filter the list of tools provided by the MCP server. If not configured, all tools provided by the MCP server will be available to the AI agent.
+Filter the list of available data provided by the MCP server, such as tools, resources, or prompts. If not configured, all tools provided by the MCP server will be available to the AI agent.
+Filters can also prevent operations from being executed when applied to retrieval or execution operations, such as tool calls.
+
+Below is an example of tool filtering. The same approach applies to resources and prompts:
 
 | Field          | Required | Description                                             | Example                                |
 | :------------- | :------- | :------------------------------------------------------ | :------------------------------------- |
