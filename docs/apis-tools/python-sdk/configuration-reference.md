@@ -2,7 +2,7 @@
 id: configuration-reference
 title: Configuration reference
 sidebar_label: Configuration reference
-sidebar_position: 4
+sidebar_position: 13
 mdx:
   format: md
 ---

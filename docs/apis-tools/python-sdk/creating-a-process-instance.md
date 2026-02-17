@@ -2,7 +2,7 @@
 id: creating-a-process-instance
 title: Creating a Process Instance
 sidebar_label: Creating a Process Instance
-sidebar_position: 6
+sidebar_position: 9
 mdx:
   format: md
 ---
