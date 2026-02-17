@@ -134,16 +134,6 @@ as local variables of the event subprocess. The scope must be a flow scope of th
 
 If no scope is defined, the process instance sets the variables **globally** in the root scope of the process instance.
 
-## Move elements inside multi-instance subprocesses
-
-Move modifications are supported for elements inside multi-instance subprocesses. When you move an element instance from within a multi-instance subprocess, the process instance terminates only that specific element instance and activates exactly one target element in the same instance of the multi-instance subprocess.
-
-With move modifications in multi-instance subprocesses, you can relocate execution within a specific iteration of a multi-instance activity without affecting other instances or creating new instances of the multi-instance subprocess.
-
-:::note
-While move modifications are supported for elements inside multi-instance subprocesses, add (activate) modifications are not. You cannot directly add or activate new tokens to elements inside multi-instance subprocesses. The move operation is the supported way to relocate execution within multi-instance contexts.
-:::
-
 ## Terminate an element instance
 
 We can use the modification command to terminate an active element instance of the process instance. Consider the
@@ -179,6 +169,36 @@ The process instance can't terminate the last active element instance of a child
 process instance doesn't apply the termination instruction and rejects the command.
 
 Instead, we can terminate the call activity that created the child process instance.
+:::
+
+## Move an element instance
+
+We can use the modification command to move an element instance. The move operation combines termination and activation in a single instruction—it terminates the source element instance and activates a target element in one atomic operation.
+
+This is the recommended way to relocate execution within a process instance, as it ensures the operation is performed atomically and handles complex scenarios like multi-instance subprocesses correctly.
+
+### Using the move instruction API
+
+When using the [modification API](../../apis-tools/orchestration-cluster-api-rest/specifications/modify-process-instance.api.mdx), you can provide a move instruction with the following parameters:
+
+- **Source element**: Specify the element instance to move from, either by element ID or by element instance key.
+- **Target element**: Specify the element ID of the element to activate
+- **Ancestor scope instruction** (for nested elements): Controls how the target element is activated within subprocess hierarchies. See the [multi-instance subprocesses](#moving-elements-inside-multi-instance-subprocesses) section below for details on using this with multi-instance activities.
+
+### Moving elements inside multi-instance subprocesses
+
+Move modifications are supported for elements inside multi-instance subprocesses. When you move an element instance from within a multi-instance subprocess, the process instance terminates only that specific element instance and activates exactly one target element in the same instance of the multi-instance subprocess.
+
+This allows you to relocate execution within a specific iteration of a multi-instance activity without affecting other instances or creating new instances of the multi-instance subprocess.
+
+The **ancestor scope instruction** provides three strategies for controlling how the target element is activated:
+
+- `direct`: Specify the key of the ancestor scope the element instance should be created in
+- `inferred`: Let the engine automatically find the appropriate ancestor element scope
+- `sourceParent`: Use the source element's parent scope (recommended for moving between sibling elements inside multi-instance subprocesses, as it offers better performance than `inferred`)
+
+:::note
+While move modifications are supported for elements inside multi-instance subprocesses, add (activate) modifications are not. You cannot directly add or activate new tokens to elements inside multi-instance subprocesses. The move operation is the supported way to relocate execution within multi-instance contexts.
 :::
 
 ## Execute the modification instructions
