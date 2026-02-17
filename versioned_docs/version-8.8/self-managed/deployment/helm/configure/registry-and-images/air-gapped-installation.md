@@ -87,10 +87,10 @@ A helper script is available in the [camunda-helm-respository](https://github.co
 
 Camunda provides custom [Keycloak images](https://github.com/camunda/keycloak) that include the AWS JDBC wrapper and Camunda Identity theme. These images follow Bitnami's environment variable conventions.
 
-| Variant     | Registry                                                                | Tag prefix     | Availability        |
-| ----------- | ----------------------------------------------------------------------- | -------------- | ------------------- |
-| Open-source | [docker.io/camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) | `bitnami-*`    | Public (Docker Hub) |
-| Enterprise  | `registry.camunda.cloud/keycloak-ee/keycloak`                           | `bitnami-ee-*` | Licensed customers  |
+| Variant     | Registry                                                                | Tag prefix     | Availability                 |
+| ----------- | ----------------------------------------------------------------------- | -------------- | ---------------------------- |
+| Open-source | [docker.io/camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) | `bitnami-*`    | Public (Docker Hub)          |
+| Enterprise  | `registry.camunda.cloud/keycloak-ee/keycloak`                           | `bitnami-ee-*` | Camunda Enterprise customers |
 
 For backward compatibility, both variants are also available without the prefix in their respective registries.
 

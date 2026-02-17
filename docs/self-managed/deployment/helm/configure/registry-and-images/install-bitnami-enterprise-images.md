@@ -62,7 +62,7 @@ Each Camunda Helm chart version lists its chart dependencies in the `Chart.yaml`
 
 ### Why Camunda uses Bitnami Premium images
 
-- **Availability:** Debian-based Premium images accessible via a vendor-proxied registry (Camunda facilitates access for licensed customers)
+- **Availability:** Debian-based Premium images accessible via a vendor-proxied registry (Camunda facilitates access for Camunda Enterprise customers)
 - **Timely patches:** Bitnami maintains these images with regular security patches and updates
 - **Exclusions:** PhotonOS-based Premium images are not distributed by Camunda
 
@@ -72,11 +72,11 @@ For more information, see [Bitnami](https://bitnami.com/) and [Bitnami Documenta
 
 Bitnami Premium images offer key advantages over open-source variants:
 
-| Benefit Category | Key Features                                                                                                                                                             |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Security**     | <ul><li>Timely CVE patches</li><li>Security hardening</li><li>Regular vulnerability assessments</li></ul>                                                                |
-| **Maintenance**  | <ul><li>Regular image updates by Bitnami (Broadcom)</li><li>Patched builds for critical vulnerabilities</li></ul>                                                        |
-| **Enterprise**   | <ul><li>Access via private registry (`registry.camunda.cloud`)</li><li>Customer-exclusive availability</li><li>Redistributed by Camunda for licensed customers</li></ul> |
+| Benefit Category | Key Features                                                                                                                                                                       |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Security**     | <ul><li>Timely CVE patches</li><li>Security hardening</li><li>Regular vulnerability assessments</li></ul>                                                                          |
+| **Maintenance**  | <ul><li>Regular image updates by Bitnami (Broadcom)</li><li>Patched builds for critical vulnerabilities</li></ul>                                                                  |
+| **Enterprise**   | <ul><li>Access via private registry (`registry.camunda.cloud`)</li><li>Customer-exclusive availability</li><li>Redistributed by Camunda for Camunda Enterprise customers</li></ul> |
 
 ## Environment-specific recommendations
 
