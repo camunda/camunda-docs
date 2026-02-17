@@ -12,7 +12,7 @@ Manual installation is **not** supported for Kubernetes. If you run on Kubernete
 :::
 
 :::caution
-RDBMS is configured as the only secondary storage for this deployment. You cannot mix RDBMS with Elasticsearch/OpenSearch, and data migration between storage types is not supported.
+RDBMS is configured as the only supported secondary storage backend for this deployment. The Orchestration Cluster reads from a single secondary store, so mixing RDBMS with Elasticsearch/OpenSearch is not supported, and data migration between storage types is not supported. Optimize requires Elasticsearch/OpenSearch and is not supported with this RDBMS-only deployment.
 :::
 
 ## Supported installation targets

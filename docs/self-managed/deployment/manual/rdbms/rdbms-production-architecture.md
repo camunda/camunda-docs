@@ -68,7 +68,7 @@ graph TB
 Elasticsearch or OpenSearch is required **only for Optimize**. When Optimize is enabled:
 
 - Deploy Elasticsearch/OpenSearch alongside your RDBMS
-- Enable the Elasticsearch or OpenSearch exporter to push analytics data
+- Enable the Elasticsearch or OpenSearch exporter to store analytics data
 - The Orchestration Cluster uses RDBMS as secondary storage
 
 Without Optimize: RDBMS-only stack is fully supported.
@@ -77,7 +77,7 @@ Without Optimize: RDBMS-only stack is fully supported.
 
 ❌ **ES/OS ↔ RDBMS migration not supported**: Choose your secondary storage backend before production. No automated migration tools available.
 
-❌ **Uniform broker configuration required**: All brokers in a cluster must export to the same secondary storage backend. You can deploy both RDBMS and Elasticsearch/OpenSearch in the same environment (e.g., RDBMS for Zeebe, Elasticsearch/OpenSearch for Optimize), but each broker cluster must choose one.
+❌ **Uniform broker configuration required**: All brokers in a Zeebe cluster must export to the same secondary storage backend. You may run Elasticsearch/OpenSearch only to support Optimize, but the cluster still uses a single backend for its own secondary storage.
 
 ❌ **v1 API not supported**: Only the v2 Orchestration Cluster REST API works with RDBMS. See [migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 

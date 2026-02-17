@@ -11,7 +11,7 @@ Configure RDBMS secondary storage drivers, connections, and initial schema for *
 
 - **Supported RDBMS**: See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 - **JDBC drivers**: PostgreSQL, MariaDB, SQL Server, and H2 are bundled. Oracle and MySQL must be user-supplied.
-- **Java 17+**: See [supported environments](/reference/supported-environments.md).
+- **Java 21+**: Required for Orchestration Cluster components (Zeebe, Operate, Tasklist). Management Identity remains Java 17+. See [supported environments](/reference/supported-environments.md).
 - **Database user**: Needs DDL permissions (CREATE TABLE, ALTER TABLE, DROP TABLE) for schema initialization.
 
 ## JDBC driver management
@@ -97,11 +97,11 @@ Then apply SQL/Liquibase scripts manually using your DBA tools. See [access SQL 
 
 ## Orchestration Cluster configuration
 
-The Orchestration Cluster uses a unified RDBMS configuration for all components (Zeebe, Operate, Tasklist, Identity).
+The Orchestration Cluster uses a single RDBMS configuration shared across the orchestration services and the UIs that read from secondary storage.
 
 ### Connection parameters
 
-All components share the same database connection:
+All orchestration services and UIs share the same database connection:
 
 ```bash
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda"
