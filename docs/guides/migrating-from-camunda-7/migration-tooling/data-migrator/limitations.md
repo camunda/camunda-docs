@@ -536,7 +536,7 @@ The following limitations apply:
 ### Process instance
 
 | Property                 | Can be migrated     |
-| ------------------------ |---------------------|
+| ------------------------ | ------------------- |
 | processInstanceKey       | Yes                 |
 | rootProcessInstanceKey   | Yes                 |
 | processDefinitionId      | Yes                 |
