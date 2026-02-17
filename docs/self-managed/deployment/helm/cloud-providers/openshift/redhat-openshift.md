@@ -62,6 +62,31 @@ This guide uses a single Kubernetes namespace for simplicity, since the deployme
 
 ## Deploy Camunda 8 via Helm charts
 
+### Obtain a copy of the reference architecture
+
+All configuration files, deployment scripts, and Helm values referenced in this guide are available in the [Camunda deployment references](https://github.com/camunda/camunda-deployment-references) repository.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/openshift/single-region/get-your-copy.sh
+```
+
+This places you at the repository root, from which both directories are accessible:
+
+- `generic/kubernetes/operator-based/` — operator deployment scripts (Elasticsearch, PostgreSQL, Keycloak)
+- `generic/openshift/single-region/` — OpenShift-specific Helm values and procedures
+
+### Environment setup
+
+Source the environment variables required by the deployment scripts:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/kubernetes/operator-based/0-set-environment.sh
+```
+
+:::note
+Ensure you source this file before running any deployment or configuration commands in the following sections.
+:::
+
 ### Configure your deployment
 
 Start by creating a `values.yml` file to store the configuration for your environment.
@@ -354,12 +379,15 @@ Before deploying Camunda, you need to deploy the infrastructure services it depe
 - **PostgreSQL**: Deployed via [CloudNativePG](https://cloudnative-pg.io/)
 - **Keycloak**: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
+All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
+
 #### Deploy Elasticsearch {#deploy-elasticsearch}
 
 Deploy Elasticsearch using the ECK operator:
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/kubernetes/operator-based/elasticsearch/deploy.sh
+```bash
+cd generic/kubernetes/operator-based/elasticsearch/
+./deploy.sh
 ```
 
 This script installs the ECK operator, deploys an Elasticsearch cluster, and waits for readiness.
@@ -379,8 +407,9 @@ For more details on the Elasticsearch deployment, see [Elasticsearch deployment 
 
 Deploy PostgreSQL clusters using the CloudNativePG operator:
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/kubernetes/operator-based/postgresql/deploy.sh
+```bash
+cd generic/kubernetes/operator-based/postgresql/
+./deploy.sh
 ```
 
 This script installs the CNPG operator (auto-detecting OpenShift to apply SCC patches), creates secrets, deploys PostgreSQL clusters, and waits for readiness.
@@ -412,11 +441,9 @@ Deploy Keycloak using the Keycloak Operator. PostgreSQL must be deployed first (
 Deploy Keycloak with OpenShift Routes:
 
 ```bash
+cd generic/kubernetes/operator-based/keycloak/
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-openshift.yml"
-```
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/kubernetes/operator-based/keycloak/deploy.sh
+./deploy.sh
 ```
 
 <details>
@@ -434,11 +461,9 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-re
 Deploy Keycloak with nginx-ingress:
 
 ```bash
+cd generic/kubernetes/operator-based/keycloak/
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-nginx.yml"
-```
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/kubernetes/operator-based/keycloak/deploy.sh
+./deploy.sh
 ```
 
 <details>
@@ -456,11 +481,9 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-re
 Deploy Keycloak without external access:
 
 ```bash
+cd generic/kubernetes/operator-based/keycloak/
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-no-domain.yml"
-```
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/kubernetes/operator-based/keycloak/deploy.sh
+./deploy.sh
 ```
 
 <details>
