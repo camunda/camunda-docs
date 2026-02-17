@@ -6,7 +6,7 @@ description: "Use conditional events to trigger process behavior when a FEEL con
 
 A conditional event triggers when its condition evaluates to `true`. A conditional event triggers when its condition evaluates to `true`.
 
-![BPMN diagram showing conditional start, intermediate, and boundary events](assets/conditional-events.png)
+![BPMN diagram showing conditional start, intermediate, and boundary events](assets/all-conditional-event-types.png)
 
 ## Interrupting vs. non-interrupting events
 
