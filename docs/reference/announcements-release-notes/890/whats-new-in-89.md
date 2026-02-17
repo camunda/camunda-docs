@@ -50,7 +50,7 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
     <td>[Camunda 8 Run](#camunda8run)</td>
-    <td>Use H2 as the default secondary storage for local/dev setups, with improved CLI guidance and defaults.</td>
+    <td>Use H2 as the default secondary storage for your local/development setups.</td>
 </tr>
 <tr>
     <td>[Cluster configuration and observability](#observability)</td>
@@ -62,11 +62,11 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
     <td>[Modeler](#modeler)</td>
-    <td><ul><li>Web Modeler moves to Log4j2 and Tomcat, adds RDBMS support, event templates, and email invitations.</li><li>Desktop Modeler adds connection management for Orchestration Clusters.</li></ul></td>
+    <td>Web Modeler moves to Log4j2 and Tomcat, adds RDBMS support, event templates, and email invitations. Desktop Modeler adds cluster connection management.</td>
 </tr>
 <tr>
     <td>[RDBMS secondary storage](#rdbms)</td>
-    <td>Use relational databases (H2, PostgreSQL, Oracle, MariaDB, MySQL, SQL Server, Aurora PostgreSQL) as secondary storage for the Orchestration Cluster instead of, or alongside, Elasticsearch/OpenSearch.</td>
+    <td>Use relational databases (H2, PostgreSQL, Oracle, MariaDB, MySQL, SQL Server, Aurora PostgreSQL) as secondary storage for the Orchestration Cluster.</td>
 </tr>
 <tr>
     <td>[Supported environments](#environments)</td>
@@ -74,7 +74,7 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
     <td>[Unified component configuration](#ucc)</td>
-    <td>In Camunda 8.9, all remaining unified configuration property changes are complete.</td>
+    <td>In Camunda 8.9, the remaining unified configuration property changes are complete.</td>
 </tr>
 </table>
 
