@@ -151,7 +151,10 @@ Examples:
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
 | `status: "Ok"`                                       | **source:** `=status`<br/>**target:** `paymentStatus`                                                                                | `paymentStatus: "OK"`                              |
 | `result: {"status": "Ok", "transactionId": "t-789"}` | **source:** `=result.status`<br/>**target:** `paymentStatus`<br/>**source:** `=result.transactionId`<br/>**target:** `transactionId` | `paymentStatus: "Ok"`<br/>`transactionId: "t-789"` |
-| `status: "Ok"`<br/>`transactionId: "t-789"`          | **source:** `=transactionId`<br/>**target:** `order.transactionId`                                                                   | `order: {"transactionId": "t-789"}`                |
+
+:::note
+Avoid using output mappings or result variables that contain a period (for example, `customer.name`). Using a period is discouraged because it updates a property of an existing process variable within the task scope, which can lead to confusing behavior or unexpected results in the process flow.
+:::
 
 ### Context variable
 
