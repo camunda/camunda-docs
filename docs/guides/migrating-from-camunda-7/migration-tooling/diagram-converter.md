@@ -9,6 +9,8 @@ With **Diagram Converter**, you'll get an initial understanding of the migration
 
 In a second step, it can also convert these files from the Camunda 7 format to the Camunda 8 format. For example, it updates namespaces and renames XML properties, if needed.
 
+All BPMN elements supported by C8 can be transformed. For the full list see the [BPMN coverage page](../../../components/modeler/bpmn/bpmn-coverage.md).
+
 You can use the Diagram Converter in the following ways:
 
 - **Web Interface**: A wizard-like UI built with Java (Spring Boot) and React. Available versions:
