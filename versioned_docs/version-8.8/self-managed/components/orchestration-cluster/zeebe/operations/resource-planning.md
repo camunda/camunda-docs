@@ -39,7 +39,7 @@ totalSnapshotSize = partitionsPerNode * singleSnapshotSize * 2
 //   the last snapshot (already replicated) +
 //   the next snapshot (in transit, while it is being replicated)
 
-partitionsPerNode = leaderPartitionsPerNde + followerPartitionsPerNode
+partitionsPerNode = leaderPartitionsPerNode + followerPartitionsPerNode
 
 leaderPartitionsPerNode = partitionsCount / numberOfNodes
 followerPartitionsPerNode = partitionsCount * replicationFactor / numberOfNodes
@@ -161,35 +161,32 @@ Memory usage is based on the Java heap size (by default [25% of the max RAM](htt
 Zeebe can use different memory allocation strategies for RocksDB, which can
 be configured via the `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYALLOCATIONSTRATEGY` setting in the broker configuration.
 
-If set to `PARTITION` (the default option), the total memory allocated to
-RocksDB will be the configured number of partitions times the configured
-memory limit (via the `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYLIMIT`).If the value is set to
-`BROKER`, the total memory allocated to RocksDB will be equal to the
-configured memory limit. If set to `FRACTION` Camunda will allocate
-the RocksDB memory based on a fraction of total memory.
+- If set to `PARTITION` (the default option), the total memory allocated to RocksDB will be the configured number of partitions times the configured memory limit (via the `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYLIMIT`).
+- If the value is set to `BROKER`, the total memory allocated to RocksDB will be equal to the configured memory limit.
+- If set to `FRACTION` Camunda will allocate the RocksDB memory based on a fraction of total memory.
 
 :::note
 When using the `PARTITION` strategy, the number of partitions used in the
 calculation is the one configured and not necessarily the current number of
 partitions in the cluster. These can differ when using dynamic scaling of
 partitions. Therefore, it is recommended that when using `PARTITION`
-strtegy and dynamic scaling, to update the configured number of partitions
-after scaling opertations.
+strategy and dynamic scaling, to update the configured number of partitions
+after scaling operations.
 :::
 
 When using the `FRACTION` strategy the fraction can be configured via the
 `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYFRACTION` setting ([0,1]), with
 the default being `0.1` (10% of total memory).
 
-The default value for `rocksDB.memoryLimit` will then allocate [512MB]
+The default value for `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYLIMIT` will then allocate [512MB]
 (https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#:~:text=%23%20memoryLimit) when using the `PARTITION` or
 `BROKER` strategies.
 
-Therefore, when hardconding these values the following consideretions
+Therefore, when hardcoding these values the following considerations
 should be met. Some memory is required for the OS page cache since Zeebe
 makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance.
 
-The cache used by the OS will depend on the amount of partition leaders on the node, and the throughput of the system. For most use cases we recommend leaving 20 to 30% of the total memory for the OS page cache, but this can be adjusted based on the specific use case and observed performance.
+The cache used by the OS will depend on many factors such as the amount of partition on the node, or the throughput of the system. For most use cases we recommend leaving 20 to 30% of the total memory for the OS page cache, but this can be adjusted based on the specific use case and observed performance.
 
 The minimum memory usage is (when using the `PARTITION` strategy):
 
