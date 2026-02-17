@@ -481,7 +481,7 @@ The following limitations apply:
 | state                  | Yes             |
 | treePath               | No              |
 | tenantId               | Yes             |
-| partitionId            | No              |
+| partitionId            | Yes             |
 
 ### Job
 
