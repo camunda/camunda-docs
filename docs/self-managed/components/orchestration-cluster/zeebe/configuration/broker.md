@@ -5,7 +5,7 @@ sidebar_label: "Broker configuration"
 description: "Let's analyze how to configure the Zeebe Broker"
 ---
 
-A complete broker configuration template is available in the [Zeebe repo](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template).
+A complete broker configuration template is available in the [Zeebe repo](https://github.com/camunda/camunda/blob/main/dist/src/main/config/defaults.yaml).
 
 ## Conventions
 
@@ -948,9 +948,9 @@ processing: maxCommandsInBatch = 100
 
 ### Experimental configuration
 
-See the experimental section of the [broker.yaml.template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L883).
+See the experimental section of the [defaults.yaml](https://github.com/camunda/camunda/blob/main/dist/src/main/config/defaults.yaml).
 
-Be aware that all configuration's which are part of the experimental section are subject to change and can be dropped at any time.
+Be aware that all configurations which are part of the experimental section are subject to change and can be dropped at any time.
 
 ### Multitenancy configuration
 

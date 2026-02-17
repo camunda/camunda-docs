@@ -38,6 +38,13 @@ Backend selection and sizing should be based on benchmarking and realistic workl
 
 ### Elasticsearch/OpenSearch: shards and replicas
 
+:::warning
+When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, they must use different index prefixes. One prefix must not be the beginning of the other (for example, avoid `custom` and `custom-zeebe` together because `custom*` matches both). Do not use `operate`, `tasklist`, or `camunda` as the full exporter prefix, and do not use `zeebe-record` as the Orchestration Cluster index prefix, as `zeebe-record` is the default prefix for Elasticsearch/OpenSearch Exporter indices.
+
+For detailed requirements, configuration examples, and common mistakes, see
+[Index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
+:::
+
 If you use [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) as your secondary storage backend, configure shards and replicas to support resilience and scalability.
 
 #### Shards
