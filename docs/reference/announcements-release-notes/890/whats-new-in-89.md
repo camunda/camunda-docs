@@ -119,6 +119,26 @@ This allows system administrators to enforce organization‑specific security po
 
 ## Camunda 8 Run {#camunda8run}
 
+Camunda 8.9 focuses on making Camunda 8 Run simpler to use in local and development scenarios.
+
+### H2 as default secondary storage
+
+Camunda 8 Run now uses H2 as the default secondary data store.
+
+- You can start a fully functional local stack without provisioning Elasticsearch or OpenSearch.
+- Memory footprint is reduced compared to a full external search cluster.
+- Developers can bootstrap quickly with minimal configuration.
+
+### Improved CLI and configuration experience
+
+The Camunda 8 Run CLI and configuration have been refined to:
+
+- Provide more helpful usage output and clearer error messages (for example, around Elasticsearch startup).
+- Include guided Java detection, sensible development defaults (such as disk watermark thresholds), and a clean‑state command for resetting a local environment.
+- Ship a fully documented unified configuration file by default.
+
+These changes reduce friction when setting up Camunda 8 Run for the first time, debugging local setup issues, and switching between different configurations or environments.
+
 ## Cluster configuration and observability {#observability}
 
 ## Global user task listeners {#listeners}
