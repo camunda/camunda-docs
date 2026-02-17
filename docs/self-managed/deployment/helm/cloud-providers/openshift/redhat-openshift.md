@@ -6,7 +6,9 @@ description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 
 <!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md. The user should have a similar experience when reading both guides. -->
 
-{/_ TODO: Before merging, revert all `blob/feat/ocp-single-region-to-operators` back to `blob/main` once https://github.com/camunda/camunda-deployment-references/pull/1872 is merged. _/}
+<!-- TODO: Before merging:
+1. Revert all blob/feat/ocp-single-region-to-operators back to blob/main once PR #1872 in camunda-deployment-references is merged.
+2. Replace vendor-supported-infrastructure.md with operator-based-infrastructure.md once PR #7904 in camunda-docs is merged. -->
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -42,7 +44,7 @@ This section installs Camunda 8 following the architecture described in the [ref
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
 - **Keycloak as OIDC provider**: Example OIDC provider (can be replaced with any compatible IdP)
 
-Infrastructure components are deployed using **official Kubernetes operators** as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
+Infrastructure components are deployed using **official Kubernetes operators** as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
 
 - **[Elasticsearch with ECK](#deploy-elasticsearch)**: Deployed via [Elastic Cloud on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) for secondary storage
 - **[PostgreSQL with CloudNativePG](#deploy-postgresql)**: Deployed via [CloudNativePG](https://cloudnative-pg.io/) for Identity and Web Modeler databases
@@ -65,10 +67,10 @@ Start by creating a `values.yml` file to store the configuration for your enviro
 This file will contain key-value pairs that will be substituted using `envsubst`.
 Over this guide, you will add and merge values in this file to configure your deployment to fit your needs.
 
-{/_ The overlays and merge order documented below are tested in CI by:
+<!-- The overlays and merge order documented below are tested in CI by:
 Repo: camunda/camunda-deployment-references
 File: .github/workflows/aws_openshift_rosa_hcp_single_region_tests.yml
-Keep both in sync when adding or modifying overlays. _/}
+Keep both in sync when adding or modifying overlays. -->
 
 You can find a reference example of this file here:
 
@@ -345,7 +347,7 @@ Some components are not enabled by default in this deployment. For more informat
 
 ### Deploy prerequisite services
 
-Before deploying Camunda, you need to deploy the infrastructure services it depends on: Elasticsearch, PostgreSQL, and Keycloak. These are deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
+Before deploying Camunda, you need to deploy the infrastructure services it depends on: Elasticsearch, PostgreSQL, and Keycloak. These are deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
 
 - **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
 - **PostgreSQL**: Deployed via [CloudNativePG](https://cloudnative-pg.io/)
@@ -370,7 +372,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-re
 
 </details>
 
-For more details on the Elasticsearch deployment, see [Elasticsearch deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment).
+For more details on the Elasticsearch deployment, see [Elasticsearch deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#elasticsearch-deployment).
 
 #### Deploy PostgreSQL {#deploy-postgresql}
 
@@ -397,7 +399,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-re
 
 </details>
 
-For more details on the PostgreSQL deployment, see [PostgreSQL deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
+For more details on the PostgreSQL deployment, see [PostgreSQL deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#postgresql-deployment).
 
 #### Deploy Keycloak {#deploy-keycloak}
 
