@@ -644,12 +644,12 @@ The following limitations apply:
 | doubleValue            | Yes             |
 | longValue              | Yes             |
 | value                  | Yes             |
-| fullValue              | No              |
-| isPreview              | No              |
+| fullValue              | Yes             |
+| isPreview              | Yes             |
 | scopeKey               | Yes             |
 | processInstanceKey     | Yes             |
 | rootProcessInstanceKey | Yes             |
 | processDefinitionId    | Yes             |
 | tenantId               | Yes             |
 | partitionId            | Yes             |
-| elementInstanceKey     | No              |
+| elementInstanceKey     | Yes             |
