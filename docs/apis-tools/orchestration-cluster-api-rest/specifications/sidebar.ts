@@ -180,6 +180,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-global-cluster-variable",
+          label: "Update a global-scoped cluster variable",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-global-cluster-variable",
           label: "Delete a global-scoped cluster variable",
           className: "api-method delete",
@@ -201,6 +207,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-tenant-cluster-variable",
           label: "Get a tenant-scoped cluster variable",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-tenant-cluster-variable",
+          label: "Update a tenant-scoped cluster variable",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -267,6 +279,18 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-decision-instance",
           label: "Get decision instance",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-decision-instance",
+          label: "Delete decision instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-decision-instances-batch-operation",
+          label: "Delete decision instances (batch)",
+          className: "api-method post",
         },
       ],
     },
@@ -544,17 +568,11 @@ const sidebar: SidebarsConfig = {
           label: "Fail job",
           className: "api-method post",
         },
-      ],
-    },
-    {
-      type: "category",
-      label: "Job metrics",
-      items: [
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-job-statistics",
           label: "Global job statistics",
-          className: "api-method post",
+          className: "api-method get",
         },
       ],
     },

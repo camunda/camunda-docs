@@ -692,6 +692,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The process instance key associated with the job.
+        rootProcessInstanceKey:
+          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
         retries:
           description: The amount of retries left to this job.
           type: integer
