@@ -114,7 +114,7 @@ SELECT table_name FROM information_schema.tables
 WHERE table_schema = 'dbo';
 ```
 
-Expected tables include process instances, history, and metadata tables (roughly 20-30 total).
+Expected tables include workflow and history tables (for example, `process_instance`, `variable`, and `job`) and Liquibase metadata tables like `databasechangelog` and `databasechangeloglock`.
 
 You can also verify by checking logs:
 
@@ -125,8 +125,8 @@ kubectl logs <pod-name> | grep -i liquibase
 Success indicators:
 
 ```
-io.camunda.application.commons.rdbms.MyBatisConfiguration - Initializing Liquibase for RDBMS
-org.springframework.web.servlet.DispatcherServlet - Completed initialization in X ms
+INFO  io.camunda.application.commons.rdbms.MyBatisConfiguration - Initializing Liquibase for RDBMS
+INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in X ms
 ```
 
 ## Upgrading the schema
@@ -138,8 +138,9 @@ When upgrading Camunda versions:
 Backup your database before upgrading. Use your database vendor's native tools:
 
 - **PostgreSQL**: [pg_dump documentation](https://www.postgresql.org/docs/current/app-pgdump.html)
-- **Oracle**: [EXPDP documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump-export-utility.html)
-- **MySQL/MariaDB**: [mysqldump documentation](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)
+- **Oracle**: [EXPDP documentation](https://docs.oracle.com/en/database/oracle/oracle-database/sutil/oracle-data-pump-export-utility.html)
+- **MySQL**: [mysqldump documentation](https://dev.mysql.com/doc/refman/en/mysqldump.html)
+- **MariaDB**: [mariadb-dump documentation](https://mariadb.com/kb/en/mariadb-dump/)
 - **SQL Server**: [SQL Server backup documentation](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/back-up-and-restore-of-sql-server-databases)
 
 ### Step 2: Test the upgrade in staging
