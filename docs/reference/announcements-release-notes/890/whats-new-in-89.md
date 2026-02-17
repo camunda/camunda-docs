@@ -153,13 +153,13 @@ Use cluster variables to define configuration values once and reuse them across 
 | `camunda.vars.tenant`  | Tenant                              | Medium   |
 | `camunda.vars.env`     | Merged view with automatic priority | Highest  |
 
-The hierarchy allows you to create cascading configurations, where specific contexts override broader defaults.
-
 You can use cluster variables to centralize:
 
 - URLs, endpoints, and credentials references.
 - Feature flags and environment names.
 - Shared configuration used across multiple processes or applications.
+
+<p class="link-arrow">[Cluster variables](/components/modeler/feel/cluster-variable/overview.md)</p>
 
 :::note
 Administrators can manage cluster variables via the Orchestration Cluster API, while modelers access them from BPMN and DMN using FEEL.
@@ -175,9 +175,68 @@ Camunda 8.9 introduces a Cluster Metrics endpoint for SaaS clusters, allowing yo
 
 This helps operations teams consolidate Camunda monitoring into existing observability stacks, and standardize dashboards, alerts, and SLOs across environments.
 
+<p class="link-arrow">[Cluster Metrics endpoint](/components/saas/monitoring/cluster-metrics-endpoint/index.md)</p>
+
 ## Global user task listeners {#listeners}
 
+Camunda 8.9 introduces configuration‑based global user task listeners for Self‑Managed deployments.
+
+- Administrators can define cluster‑wide listeners using configuration files or environment variables.
+- Listeners are active from cluster startup and preserved across backup and restore.
+- All user task lifecycle events emit rich payloads - full variable context at the time of the event, and standardized metadata for traceability and integration.
+
+This is especially useful when you need:
+
+- Organization‑wide auditing and compliance for user task activity.
+- Standardized integrations with notification systems, custom UIs, or analytics platforms.
+- Consistent behavior across all processes and tenants, without per‑process configuration.
+
+<p class="link-arrow">[Global User task Listeners](/components/concepts/global-user-task-listeners.md)</p>
+
 ## Modeler {#modeler}
+
+Camunda 8.9 introduces enhancements and changes to both Desktop Modeler and Web Modeler.
+
+### Desktop Modeler: Manage Camunda connections
+
+You can now manage multiple Camunda connections in Desktop Modeler:
+
+- Add, edit, delete, and save connection profiles.
+- Securely store credentials and configuration for each connection.
+- Deploy directly to a saved connection, and select clusters during deployment.
+
+### Web Modeler: event templates and email invitations
+
+Usability improvements in Web Modeler also include:
+
+- Event templates: Create templates for message, signal, and timer events, and reuse and share templates across projects to standardize message names, payloads, and timer definitions.
+- Email invitations: Invite new users to Web Modeler projects via email, regardless of OIDC provider, and use a consistent invitation flow across Keycloak, Entra ID, Okta, Auth0, and other providers.
+
+Together, these changes simplify collaboration and help teams keep event configurations consistent.
+
+### Web Modeler: Log4j2 and Tomcat
+
+| Feature                                             | Description                                                                                                                                                                                                  |
+| :-------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Logging framework changes from Logback to Log4j2    | Web Modeler's `restapi` component uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging instead of [Logback](https://logback.qos.ch/). You can now also change the log levels at runtime. |
+| Embedded web server changes from Undertow to Tomcat | Web Modeler's `restapi` component uses [Apache Tomcat](https://tomcat.apache.org/) instead of [Undertow](https://undertow.io/).                                                                              |
+
+These changes could affect your organization if you are in a Self-Managed environment and:
+
+- You are using a custom Logback and/or Undertow configuration.
+- You are using any tools that consume the log files.
+
+You should:
+
+- Review your logging and server configuration for Web Modeler.
+- Update any tooling that relies on old log formats or server behavior.
+- Validate the new setup in a staging environment before upgrading production.
+
+### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
+
+Web Modeler now supports H2, MariaDB, and MySQL as relational databases, aligning its storage options with those of the Orchestration Cluster.
+
+For administrators, this means more consistent database configuration across components, the ability to standardize on a single RDBMS stack where appropriate, and a simpler story for backup, high availability, and compliance across the platform.
 
 ## RDBMS secondary storage {#rdbms}
 
@@ -224,6 +283,20 @@ For manual installations, Camunda 8.9 introduces a standardized directory and co
 This structure simplifies license‑compliant driver distribution, multi‑database support in regulated environments, and provides a clear separation between Camunda-managed and customer-managed artifacts.
 
 ## Supported environments {#environments}
+
+Camunda 8.9 updates several platform and environment baselines. Highlights include:
+
+| Environment                  | Description                                                                                                                                                                                                                              |
+| :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Java                         | Certification for OpenJDK 25 across core components and tooling, alongside existing OpenJDK 21–24 support.                                                                                                                               |
+| Elasticsearch/OpenSearch     | <ul><li><p>Updated minimum versions for Self‑Managed deployments.</p></li><li>Recommended upgrades to Elasticsearch 9.2+ and OpenSearch 3.4+ to align with Camunda 8.9 defaults and benefit from recent database improvements.</li></ul> |
+| SaaS regions                 | Support for an additional AWS region (including new European region options) so you can select clusters closer to your data and users.                                                                                                   |
+| Helm and RDBMS configuration | <p><ul><li><p>New RDBMS configuration options in the Helm values file for orchestration data.</p></li><li>Expanded secret and configuration patterns aligned with the Orchestration Cluster architecture.</li></ul></p>                  |
+| Connector runtime            | Virtual threads enabled by default for outbound connectors, improving concurrency and resource usage where supported.                                                                                                                    |
+
+:::info
+For complete details, including deprecations and breaking changes, see [release announcements](./890-announcements.md) and [supported environments](/reference/supported-environments.md).
+:::
 
 ## Web Modeler
 
