@@ -82,6 +82,41 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 
 ## Agentic orchestration {#agentic-orchestration}
 
+Camunda 8.9 refines the AI and MCP connector stack introduced in 8.8.
+
+### AI Agent and model configuration improvements
+
+Enhancements make AI interactions more robust, configurable, and compatible with a wider range of AI providers.
+
+<table className="table-callout">
+<tr>
+    <td width="30%">**Feature**</td>
+    <td>**Description**</td>
+</tr>
+<tr>
+    <td>[AI Agent connectors](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</td>
+    <td>Timeout configuration at the model level, allowing you to cap how long AI calls can run.</td>
+</tr>
+<tr>
+    <td>[Amazon Bedrock connector](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md)</td>
+    <td>Support for long‑term API key authentication in addition to existing methods.</td>
+</tr>
+<tr>
+    <td>OpenAI-compatible models</td>
+    <td>Custom query parameters in the endpoint URL, useful for setting API versions, and passing additional metadata required by custom API gateways.</td>
+</tr>
+</table>
+
+### MCP Client connector authentication
+
+The [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client-connector.md) now supports multiple authentication strategies for connecting to MCP servers:
+
+- OAuth
+- API key
+- Custom header–based authentication
+
+This allows system administrators to enforce organization‑specific security policies for AI tools, integrate with MCP servers that require custom or provider‑specific auth flows, and continue using a consistent connector abstraction while varying the authentication mechanism.
+
 ## Camunda 8 Run {#camunda8run}
 
 ## Cluster configuration and observability {#observability}
