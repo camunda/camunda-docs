@@ -19,7 +19,7 @@ If you don't have a Kubernetes cluster yet, check out our setup guides:
   :::
 
 :::note
-By default, the Camunda Helm chart uses Bitnami open-source images. For production environments, Camunda recommends switching to vendor-supported enterprise images. This guide explains how to create registry secrets and install [Camunda with enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
+By default, the Camunda Helm chart uses Bitnami open-source images. For production environments, Camunda recommends switching to Bitnami Premium enterprise images. This guide explains how to create registry secrets and install [Camunda with enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
 :::
 
 ## Prerequisites

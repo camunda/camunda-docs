@@ -9,7 +9,7 @@ This guide explains how to configure the Camunda Helm chart to use Bitnami Premi
 
 ## Overview
 
-By default, the Camunda Helm chart deploys Bitnami open-source images. For production environments that require enhanced security and timely patches, Camunda enables access to Bitnami Premium images through a vendor-proxied registry for licensed enterprise customers.
+By default, the Camunda Helm chart deploys Bitnami open-source images. For production environments that require enhanced security and timely patches, Camunda enables access to Bitnami Premium images through a vendor-proxied registry for Camunda Enterprise customers.
 
 :::caution Support boundaries
 Bitnami Premium images do not change Camunda's support policy for infrastructure components. PostgreSQL, Elasticsearch, and Keycloak deployed via Bitnami subcharts remain **external dependencies** from a support standpoint — they are not first-class supported Camunda components.
@@ -32,8 +32,8 @@ Previously, some users deployed Bitnami subcharts in production. Starting with C
 - Achieve greater operational control and flexibility
   :::
 
-:::note Alternative: Vendor-maintained deployment methods
-For production environments, consider using vendor-maintained deployment methods instead of Bitnami subcharts. This approach leverages official Kubernetes operators (CloudNativePG, ECK, Keycloak Operator) maintained by their respective project teams.  
+:::note Alternative: Use official Kubernetes operators
+For production environments, consider using the official Kubernetes operators for PostgreSQL, Elasticsearch/OpenSearch, and Keycloak instead of Bitnami subcharts. These operators are maintained by their respective upstream projects.  
 See [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for detailed instructions.
 :::
 
@@ -46,7 +46,7 @@ Following [Bitnami chart security policy changes](https://github.com/bitnami/cha
 **You don't need to use any charts other than those specified in the `Chart.yaml` dependencies.** The Camunda Helm chart automatically manages all required chart dependencies.
 
 :::info Camunda provides Premium images only
-Camunda provides access to **Bitnami Premium images** exclusively for licensed enterprise customers. The Helm charts, however, remain based on the open-source Bitnami charts.
+Camunda provides access to **Bitnami Premium images** exclusively for Camunda Enterprise customers. The Helm charts, however, remain based on the open-source Bitnami charts.
 
 Each Camunda Helm chart version lists its chart dependencies in the `Chart.yaml` file. For example, see the [Camunda 8.8 Chart.yaml](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.8/Chart.yaml) file for a complete list of dependent charts.
 

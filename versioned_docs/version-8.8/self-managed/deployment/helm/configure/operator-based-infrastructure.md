@@ -62,7 +62,7 @@ This deployment approach separates infrastructure management from application de
 
 <!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764643761312188&cot=14 -->
 
-![Vendor-supported infrastructure architecture](assets/vendor-components-arch.jpg)
+![Operator-based infrastructure architecture](assets/vendor-components-arch.jpg)
 
 ## Infrastructure components
 
