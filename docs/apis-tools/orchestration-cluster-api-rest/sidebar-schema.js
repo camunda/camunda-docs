@@ -6,6 +6,7 @@ module.exports = {
     "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication",
     "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching",
     "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-swagger",
+    "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-mcp-gateway",
     {
       Specifications: require("./specifications/sidebar"),
     },
