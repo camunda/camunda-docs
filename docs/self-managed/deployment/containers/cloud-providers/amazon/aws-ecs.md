@@ -91,7 +91,7 @@ You can also scale this setup to a single ECS task. In that case, a zone failure
 
 For the exact tool versions used during testing, refer to the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
 
-## 1. Configure AWS and initialize Terraform
+## Configure AWS and initialize Terraform
 
 :::note Terraform infrastructure example
 We do not recommend using the following Terraform-based infrastructure as a module, since we cannot guarantee compatibility.
@@ -201,7 +201,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/pr
 
 Terraform will now use the S3 bucket to manage the state file, ensuring remote and persistent storage.
 
-## 2. Terraform setup
+## Terraform setup
 
 The root workspace houses the overall implementation to keep things configurable and interchangeable as needed.
 
@@ -443,7 +443,7 @@ The Orchestration Cluster is stateful and overprovisioning will not help the dep
 
 For the Connectors task, it's kept at a maximum of `200%` and minimum of `50%` as the application is stateless and can therefore scale above the initial target during upgrades.
 
-## 3. Execution
+## Execution
 
 :::note Secret management
 
@@ -486,7 +486,7 @@ The Terraform flow is as follows:
 - Creation of the Orchestration Cluster and wait for it to be ready
 - Creation of the Connectors and wait for it to be ready
 
-## 4. Verify connectivity to Camunda 8
+## Verify connectivity to Camunda 8
 
 Using Terraform, you can obtain the HTTP endpoint of the Application Load Balancer and interact with Camunda through the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
