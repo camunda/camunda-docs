@@ -41,6 +41,7 @@ Additional informational and high-level overview based on Kubernetes as upstream
   - Verify quotas for **VPCs, EC2 instances, and storage**.
   - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - A namespace to host the Camunda Platform.
+- Permissions to install Kubernetes operators (cluster-admin or equivalent) for deploying the infrastructure services (Elasticsearch, PostgreSQL, Keycloak). These operators can also be installed via the [OpenShift OperatorHub](https://docs.openshift.com/container-platform/latest/operators/understanding/olm-understanding-operatorhub.html), but this guide installs them directly from source for full control over versions and configuration.
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
@@ -50,6 +51,11 @@ This section installs Camunda 8 following the architecture described in the [ref
 
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
+
+Infrastructure components are deployed using **official Kubernetes operators** as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
+
+- **[Elasticsearch with ECK](#deploy-elasticsearch)**: Deployed via [Elastic Cloud on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) for secondary storage
+- **[PostgreSQL with CloudNativePG](#deploy-postgresql)**: Deployed via [CloudNativePG](https://cloudnative-pg.io/) for Identity and Web Modeler databases
 
 For OpenShift deployments, the following OpenShift-specific configurations are also included:
 
@@ -426,7 +432,7 @@ This script installs the CNPG operator (auto-detecting OpenShift to apply SCC pa
 
 The following PostgreSQL clusters are created:
 
-- **pg-keycloak**: Database for Keycloak authentication
+- **pg-keycloak**: Database for Keycloak authentication (only needed if using Keycloak as IdP)
 - **pg-identity**: Database for Camunda Identity component
 - **pg-webmodeler**: Database for Web Modeler component (remove from configuration if not needed)
 
@@ -443,7 +449,7 @@ For more details on the PostgreSQL deployment, see [PostgreSQL deployment in the
 
 #### Deploy Keycloak {#deploy-keycloak}
 
-Deploy Keycloak using the Keycloak Operator. PostgreSQL must be deployed first (Keycloak requires the `pg-keycloak` database).
+Deploy Keycloak using the Keycloak Operator. First, deploy the PostgreSQL database for Keycloak, then deploy the Keycloak operator and instance.
 
 <Tabs queryString="current-ingress">
 <TabItem value="openshift-routes" label="Using OpenShift Routes" default>
@@ -451,6 +457,10 @@ Deploy Keycloak using the Keycloak Operator. PostgreSQL must be deployed first (
 Deploy Keycloak with OpenShift Routes:
 
 ```bash
+# Deploy the PostgreSQL database for Keycloak
+CLUSTER_FILTER=pg-keycloak (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+
+# Deploy Keycloak
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-openshift.yml"
 (cd generic/kubernetes/operator-based/keycloak && ./deploy.sh)
 ```
@@ -470,6 +480,10 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-re
 Deploy Keycloak with nginx-ingress:
 
 ```bash
+# Deploy the PostgreSQL database for Keycloak
+CLUSTER_FILTER=pg-keycloak (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+
+# Deploy Keycloak
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-nginx.yml"
 (cd generic/kubernetes/operator-based/keycloak && ./deploy.sh)
 ```
@@ -489,6 +503,10 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-re
 Deploy Keycloak without external access:
 
 ```bash
+# Deploy the PostgreSQL database for Keycloak
+CLUSTER_FILTER=pg-keycloak (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+
+# Deploy Keycloak
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-no-domain.yml"
 (cd generic/kubernetes/operator-based/keycloak && ./deploy.sh)
 ```
