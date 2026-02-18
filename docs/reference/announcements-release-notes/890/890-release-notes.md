@@ -37,6 +37,32 @@ These release notes identify the main new features included in the 8.9 minor rel
 | :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 10 March 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha5)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha5)</li></ul> |
 
+### Helm chart
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Configuration">Configuration</span></div>
+
+#### Helm chart values templating
+
+<!-- https://github.com/camunda/product-hub/issues/3357 -->
+
+The Helm chart now documents all values supporting Go template expressions, including guidance on how `values.yaml` templating is evaluated.
+
+`podLabels`, `podAnnotations` (all components), and `global.ingress.host` now support templating via `{{ "{{" }} }}` expressions (for example, `{{ "{{" }} .Release.Name }}`), enabling dynamic configuration for multi-environment deployments and integrations such as Datadog APM.
+
+<p class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</p>
+
+### Orchestration Cluster
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+
+#### Modify elements in multi-instance ad-hoc sub-processes
+
+<!-- https://github.com/camunda/product-hub/issues/3119 -->
+
+Operators can now dynamically activate, move, or remove element instances inside running multi-instance ad-hoc subprocesses—supporting parallel, sequential, and classic ad-hoc execution patterns.
+
+These new runtime capabilities, available in both Operate UI and the API, allow users to adapt, repair, and recover business processes on the fly, supporting flexibility for agentic automation, case management, and critical operations.
+
 ## 8.9.0-alpha4
 
 | Release date     | Changelog(s)                                                                                                                                                                               |
