@@ -16,7 +16,8 @@ description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
    - Replace inline :::note helm upgrade with <HelmUpgradeNote />
    - Replace inline kubefwd tip with <KubefwdTip />
    - Replace inline port-forward details with <PortForwardServices />
-   - Add <NoDomainInfo /> in No Ingress tab -->
+   - Add <NoDomainInfo /> in No Ingress tab
+   - Adapt and integrate the Keycloak Operator Helm values merge (`camunda-keycloak-domain-values.yml`) and identity secrets overlay merge (`camunda-values-identity-secrets.yml`) into this page (current content is not aligned with our page) -->
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -238,39 +239,36 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 
 2. **Connectors:** merge the connectors route overlay:
 
-```bash
-yq '. *+ load("generic/openshift/single-region/helm-values/connectors-route.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
-```
+   ```bash
+   yq '. *+ load("generic/openshift/single-region/helm-values/connectors-route.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+   ```
 
-<details>
-<summary>Review the connectors route configuration</summary>
+   <details>
+   <summary>Review the connectors route configuration</summary>
 
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/openshift/single-region/helm-values/connectors-route.yml
-```
+   ```yaml reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/openshift/single-region/helm-values/connectors-route.yml
+   ```
 
-</details>
+   </details>
 
-The actual configuration properties can be reviewed [in the connectors configuration documentation](/self-managed/components/connectors/connectors-configuration.md#zeebe-broker-connection).
+   The actual configuration properties can be reviewed [in the connectors configuration documentation](/self-managed/components/connectors/connectors-configuration.md#zeebe-broker-connection).
+   1. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
-1. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
+   1. Set up the global configuration to enable the single Ingress definition with the host. Merge the domain overlay:
 
-1. Set up the global configuration to enable the single Ingress definition with the host. Merge the domain overlay:
+      ```bash
+      yq '. *+ load("generic/openshift/single-region/helm-values/domain.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+      ```
 
-```bash
-yq '. *+ load("generic/openshift/single-region/helm-values/domain.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
-```
+      <details>
+      <summary>Review the domain configuration</summary>
 
-<details>
-<summary>Review the domain configuration</summary>
+      ```yaml reference
+      https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/openshift/single-region/helm-values/domain.yml
+      ```
 
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/openshift/single-region/helm-values/domain.yml
-```
-
-</details>
-
-<!--Intended space left for not breaking the build!-->
+      </details>
 
 <!--Intended space left for not breaking the build!-->
   </TabItem>
@@ -543,7 +541,37 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-re
 
 </details>
 
-Merge the **Keycloak** overlay (choose the appropriate one for your setup):
+Merge the **Identity PostgreSQL** overlay:
+
+```bash
+yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the Identity PostgreSQL Helm overlay</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml
+```
+
+</details>
+
+If **Web Modeler** is enabled, also merge the **Web Modeler PostgreSQL** overlay:
+
+```bash
+yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the Web Modeler PostgreSQL Helm overlay</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml
+```
+
+</details>
+
+Merge the **Keycloak** overlay _(optional — only if Keycloak was deployed as your IdP; choose the appropriate variant for your setup)_:
 
 <Tabs queryString="current-ingress">
 <TabItem value="openshift-routes" label="Using OpenShift Routes" default>
@@ -596,43 +624,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-re
 </TabItem>
 </Tabs>
 
-Merge the **Identity PostgreSQL** overlay:
-
-```bash
-yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
-```
-
-<details>
-<summary>Review the Identity PostgreSQL Helm overlay</summary>
-
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml
-```
-
-</details>
-
-If **Web Modeler** is enabled, also merge the **Web Modeler PostgreSQL** overlay:
-
-```bash
-yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
-```
-
-<details>
-<summary>Review the Web Modeler PostgreSQL Helm overlay</summary>
-
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml
-```
-
-</details>
-
 #### Fill your deployment with actual values
-
-Once you've prepared the `values.yml` file with all overlays merged, run the following `envsubst` command to substitute the environment variables with their actual values:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/openshift/single-region/procedure/assemble-envsubst-values.sh
-```
 
 If **Web Modeler** is enabled, create the SMTP secret:
 
@@ -644,12 +636,18 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-re
 Database and authentication secrets are automatically managed by the operators:
 
 - **PostgreSQL credentials**: Created by CloudNativePG via `set-secrets.sh`
-- **Keycloak admin credentials**: Created by the Keycloak Operator
+- **Keycloak admin credentials** _(optional)_: Created by the Keycloak Operator
 - **Elasticsearch credentials**: Created by ECK
 - **Identity secrets**: Created by the operator-based deployment scripts
 
 Only the SMTP password for Web Modeler needs to be created manually.
 :::
+
+Once you've prepared the `values.yml` file with all overlays merged, run the following `envsubst` command to substitute the environment variables with their actual values:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/generic/openshift/single-region/procedure/assemble-envsubst-values.sh
+```
 
 ### Install Camunda 8 using Helm
 
