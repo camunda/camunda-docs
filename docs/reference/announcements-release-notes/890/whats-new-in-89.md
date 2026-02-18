@@ -114,13 +114,15 @@ Enhancements make AI interactions more robust, configurable, and compatible with
 
 ### MCP Client connector authentication
 
-The [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client-connector.md) now supports multiple authentication strategies for connecting to MCP servers:
+The MCP Client connector now supports multiple authentication strategies for connecting to MCP servers:
 
 - OAuth
 - API key
 - Custom header–based authentication
 
 This allows system administrators to enforce organization‑specific security policies for AI tools, integrate with MCP servers that require custom or provider‑specific auth flows, and continue using a consistent connector abstraction while varying the authentication mechanism.
+
+<p class="link-arrow">[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client-connector.md)</p>
 
 ## Camunda 8 Run {#camunda8run}
 
@@ -143,6 +145,8 @@ The Camunda 8 Run CLI and configuration have been refined to:
 - Ship a fully documented unified configuration file by default.
 
 These changes reduce friction when setting up Camunda 8 Run for the first time, debugging local setup issues, and switching between different configurations or environments.
+
+<p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
 
 ## Cluster configuration and observability {#observability}
 
@@ -172,7 +176,7 @@ Administrators can manage cluster variables via the Orchestration Cluster API, w
 
 ### Cluster Metrics endpoint for SaaS clusters
 
-Camunda 8.9 introduces a Cluster Metrics endpoint for SaaS clusters, allowing you to:
+Use the new Cluster Metrics endpoint for SaaS clusters to:
 
 - Expose cluster metrics compatible with Prometheus‑style scraping.
 - Integrate directly with tools such as Prometheus, Datadog, or other metrics backends that support Prometheus endpoints.
@@ -184,7 +188,7 @@ This helps operations teams consolidate Camunda monitoring into existing observa
 
 ## Global user task listeners {#listeners}
 
-Camunda 8.9 introduces configuration‑based global user task listeners for Self‑Managed deployments.
+Use configuration‑based global user task listeners in your Self‑Managed deployments.
 
 - Administrators can define cluster‑wide listeners using configuration files or environment variables.
 - Listeners are active from cluster startup and preserved across backup and restore.
@@ -209,6 +213,8 @@ You can now manage multiple Camunda connections in Desktop Modeler:
 - Add, edit, delete, and save connection profiles.
 - Securely store credentials and configuration for each connection.
 - Deploy directly to a saved connection, and select clusters during deployment.
+
+<p class="link-arrow">[Connect to Camunda 8 in Desktop Modeler](/components/modeler/desktop-modeler/connect-to-camunda-8.md)</p>
 
 ### Web Modeler event templates and email invitations
 
@@ -237,6 +243,8 @@ You should:
 - Update any tooling that relies on old log formats or server behavior.
 - Validate the new setup in a staging environment before upgrading production.
 
+<p class="link-arrow">[Web Modeler logging](/self-managed/components/modeler/web-modeler/configuration/logging.md)</p>
+
 ## RDBMS secondary storage {#rdbms}
 
 Camunda 8.9 introduces relational databases as first‑class secondary storage options for the Orchestration Cluster.
@@ -253,6 +261,8 @@ Supported options include H2 (for development and test scenarios), PostgreSQL, O
 
 This is particularly useful if you already standardize on one of the supported RDBMS platforms, want to avoid operating and scaling additional search clusters where they are not required, or prefer existing RDBMS tooling for backup, monitoring, and compliance.
 
+<p class="link-arrow">[Secondary storage](/self-managed/concepts/secondary-storage/index.md)</p>
+
 ### Amazon Aurora as managed secondary storage
 
 Camunda 8.9 adds support for Amazon Aurora PostgreSQL as secondary storage, enabling:
@@ -263,7 +273,9 @@ Camunda 8.9 adds support for Amazon Aurora PostgreSQL as secondary storage, enab
 
 Aurora is a good fit if you run Camunda on AWS and want managed RDBMS operations instead of self‑managing PostgreSQL, and integration with existing AWS security and reliability practices.
 
-### RDBMS support policy and database scripts
+<p class="link-arrow">[Using AWS Aurora PostgreSQL with Camunda](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql)</p>
+
+### RDBMS version support policy and database scripts
 
 To clarify long‑term support, Camunda 8.9 introduces:
 
@@ -271,6 +283,8 @@ To clarify long‑term support, Camunda 8.9 introduces:
 - SQL and Liquibase scripts for all supported databases, distributed as part of the official Camunda distribution.
 
 This helps DBAs and operations teams validate that existing database versions are supported, plan upgrades based on a predictable policy and script set, and standardize roll‑outs and migrations across environments.
+
+<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
 ### Standardized JDBC driver management
 
@@ -281,17 +295,19 @@ For manual installations, Camunda 8.9 introduces a standardized directory and co
 
 This structure simplifies license‑compliant driver distribution, multi‑database support in regulated environments, and provides a clear separation between Camunda-managed and customer-managed artifacts.
 
+<p class="link-arrow">[Loading JDBC drivers into pods](/self-managed/deployment/helm/configure/database/rdbms.md#loading-jdbc-drivers-into-pods)</p>
+
 ## Supported environments {#environments}
 
 Camunda 8.9 updates several platform and environment baselines. Highlights include:
 
 | Environment                  | Description                                                                                                                                                                                                                              |
 | :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Java                         | Certification for OpenJDK 25 across core components and tooling, alongside existing OpenJDK 21–24 support.                                                                                                                               |
-| Elasticsearch/OpenSearch     | <ul><li><p>Updated minimum versions for Self‑Managed deployments.</p></li><li>Recommended upgrades to Elasticsearch 9.2+ and OpenSearch 3.4+ to align with Camunda 8.9 defaults and benefit from recent database improvements.</li></ul> |
-| SaaS regions                 | Support for an additional AWS region (including new European region options) so you can select clusters closer to your data and users.                                                                                                   |
-| Helm and RDBMS configuration | <p><ul><li><p>New RDBMS configuration options in the Helm values file for orchestration data.</p></li><li>Expanded secret and configuration patterns aligned with the Orchestration Cluster architecture.</li></ul></p>                  |
 | Connector runtime            | Virtual threads enabled by default for outbound connectors, improving concurrency and resource usage where supported.                                                                                                                    |
+| Elasticsearch/OpenSearch     | <ul><li><p>Updated minimum versions for Self‑Managed deployments.</p></li><li>Recommended upgrades to Elasticsearch 9.2+ and OpenSearch 3.4+ to align with Camunda 8.9 defaults and benefit from recent database improvements.</li></ul> |
+| Helm and RDBMS configuration | <p><ul><li><p>New RDBMS configuration options in the Helm values file for orchestration data.</p></li><li>Expanded secret and configuration patterns aligned with the Orchestration Cluster architecture.</li></ul></p>                  |
+| Java                         | Certification for OpenJDK 25 across core components and tooling, alongside existing OpenJDK 21–24 support.                                                                                                                               |
+| SaaS regions                 | Support for an additional AWS region (including new European region options) so you can select clusters closer to your data and users.                                                                                                   |
 
 :::info
 For complete details, including deprecations and breaking changes, see [release announcements](./890-announcements.md) and [supported environments](/reference/supported-environments.md).
