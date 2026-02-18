@@ -159,6 +159,7 @@ Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{res
 
 </div>
 </div>
+
 ### Connectors
 
 <div className="release-announcement-row">
@@ -172,6 +173,25 @@ Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{res
 The Operate Connector is deprecated, following the deprecation of the Operate API in Camunda 8.9 (see [Deprecated: Operate and Tasklist v1 REST APIs](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)).
 
 Going forward, you can use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) via the [REST Connector](/components/connectors/protocol/rest.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Inbound connectors now support older process versions
+
+Starting with Camunda 8.9, inbound connectors are activated not only for the latest process version, but also for older process versions that have active instances waiting on message subscriptions.
+
+Inbound connectors now remain active for any process version that has instances waiting on message subscriptions. This ensures that running process instances can continue to receive messages through inbound connectors, even after a newer version of the process is deployed.
+
+This change improves the reliability of long-running processes that depend on inbound connectors to receive external events.
+
+<p className="link-arrow">[Inbound connector lifecycle](/components/connectors/advanced-topics/inbound-lifecycle.md)</p>
 
 </div>
 </div>
