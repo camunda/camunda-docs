@@ -34,9 +34,9 @@ If you want a simpler setup, consider using [Camunda 8 SaaS](https://accounts.ca
   - The EFS volume is shared among all brokers to support the native ECS Service capabilities.
 - AWS does not support block storage options in combination with ECS Services and Fargate. For a detailed overview, have a look at the [AWS documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
 - Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a [Zeebe broker](../../../../../components/zeebe/technical-concepts/architecture.md#brokers). Autoscaling may not have effects as the brokers have to be explicitly joined into the [Zeebe cluster](../../../../../components/zeebe/technical-concepts/clustering.md) or when removed result in partitions or data becoming inaccessible.
-- A node-id provider is integrated into the Orchestration Cluster and assigns an available node-id based on Zeebe cluster information, instead of relying on a statistically-configured node-id.
+- A node-id provider is integrated into Zeebe that assigns an available node-id based on Zeebe cluster information, instead of relying on a statically-configured node-id.
 - This guide focuses on Aurora PostgreSQL for the secondary datastorage as it is a newly supported offering by Camunda 8 and potentially more familiar for customers.
-  - You may still use Elasticsearch/OpenSearch but need to adjust the required configuration. More information about the configuration can be found in [our documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
+  - You may still use Elasticsearch or OpenSearch but need to adjust the required configuration. More information about the configuration can be found in [our documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
   - Examples for how to deploy AWS OpenSearch can be found in other existing reference architectures for AWS.
 
 :::note
