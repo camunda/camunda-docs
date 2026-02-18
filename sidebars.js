@@ -1282,7 +1282,7 @@ module.exports = {
           label: "Python SDK",
           link: {
             type: "doc",
-            id: "apis-tools/python-sdk/python-sdk",
+            id: "apis-tools/python-sdk",
           },
           items: [
             {
