@@ -5,6 +5,17 @@ import TabItem from '@theme/TabItem';
 
 Review [secondary storage management](/self-managed/concepts/secondary-storage-management.md) for guidance on best practices, ensuring data integrity and performance optimization.
 
+:::warning
+When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, they must use different index prefixes. One prefix must not be the beginning of the other (for example, avoid `custom` and `custom-zeebe` together because `custom*` matches both). Do not use `operate`, `tasklist`, or `camunda` as the full exporter prefix, and do not use `zeebe-record` as the Orchestration Cluster index prefix, as `zeebe-record` is the default prefix for Elasticsearch/OpenSearch Exporter indices.
+
+The Orchestration Cluster prefix is configured via
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix`
+(or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`).
+
+For detailed requirements, configuration examples, and common mistakes, see
+[index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
+:::
+
 ### Connection
 
 <Tabs>
@@ -62,7 +73,7 @@ Do **not** set both providers to `true` simultaneously.
 </Tabs>
 
 :::note
-Set `indexPrefix` only if you need to separate secondary storage indices from other indices in the same cluster (for example, when multiple Camunda environments share one cluster). Leave blank (`-`) to use the default.
+Set `indexPrefix` only if you need to separate Orchestration Cluster indices from other indices in the same cluster (for example, when multiple Camunda environments share one cluster). Leave blank (`-`) to use the default.
 :::
 
 #### Secure connection (HTTPS / TLS)
@@ -84,7 +95,7 @@ For Kubernetes-based deployments, mount a trust store and point `certificatePath
 
 ### Index & retention settings
 
-The following properties control index creation characteristics (shards, replicas, template priority) and retention/lifecycle policies for secondary storage indices.
+The following properties control index creation characteristics (shards, replicas, template priority) and retention/lifecycle policies for Orchestration Cluster indices.
 
 <Tabs>
   <TabItem value="db-env" label="Environment variables" default>

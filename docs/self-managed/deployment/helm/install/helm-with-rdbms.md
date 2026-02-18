@@ -11,13 +11,13 @@ This guide walks you through deploying Camunda 8 using Helm charts with an exter
 
 In Camunda 8, secondary storage stores historical data and process state. By default, Elasticsearch or OpenSearch is used. With RDBMS, you replace that with a relational database:
 
-| Aspect               | Elasticsearch/OpenSearch | RDBMS                           |
-| -------------------- | ------------------------ | ------------------------------- |
-| **Storage choice**   | Managed by Camunda       | You manage (PostgreSQL, etc.)   |
-| **Scaling**          | Independent scaling      | Database-native scaling         |
-| **Backup strategy**  | Snapshot-based           | SQL-native backups              |
-| **Monitoring**       | Elasticsearch metrics    | Database-native monitoring      |
-| **Operator support** | None (currently)         | Kubernetes operators (optional) |
+| Aspect               | Elasticsearch/OpenSearch                            | RDBMS                                                       |
+| -------------------- | --------------------------------------------------- | ----------------------------------------------------------- |
+| **Storage choice**   | Helm-managed subchart                               | You manage (PostgreSQL, etc.)                               |
+| **Scaling**          | Scale the search cluster independently from Camunda | Scale via your database service (vertical or read replicas) |
+| **Backup strategy**  | ES/OS snapshot/restore tooling                      | Database-native backups (e.g., pg_dump, vendor tools)       |
+| **Monitoring**       | ES/OS metrics and dashboards                        | Database-native monitoring and alerts                       |
+| **Operator support** | No ES/OS operator bundled                           | Database operators (optional)                               |
 
 When using RDBMS, **Optimize still requires Elasticsearch or OpenSearch**. Only the Orchestration Cluster uses RDBMS.
 
@@ -35,23 +35,23 @@ Before you begin:
 
 ### Step 1: Choose your RDBMS
 
-**PostgreSQL (recommended):**
+**PostgreSQL:**
 
 - Bundled driver included; no additional setup required.
-- Excellent Kubernetes operator support (if desired).
+- Excellent Kubernetes operator support (optional).
 - Managed services available on AWS (Aurora PostgreSQL), Azure, GCP, etc.
 
-**Oracle (enterprise environments):**
+**Oracle:**
 
 - Custom JDBC driver required; use init container to load.
 - Advanced security and HA features.
-- Managed services available on AWS RDS, Azure, OCI.
+- Managed services available on AWS (RDS), Azure, OCI.
 
 **MariaDB/MySQL:**
 
 - Bundled driver available for MariaDB; custom driver for MySQL.
 - Community-friendly; good for development.
-- Managed services widely available (AWS RDS, Azure, GCP).
+- Managed services widely available on AWS (RDS), Azure, GCP.
 
 ### Step 2: Prepare your database
 
@@ -338,7 +338,7 @@ For detailed configuration options, see:
 
 ## Important: Component storage requirements
 
-**Optimize requires Elasticsearch or OpenSearch—not RDBMS.** If you deploy Optimize, configure it with Elasticsearch or OpenSearch even if your Orchestration Cluster uses RDBMS:
+**Optimize requires Elasticsearch or OpenSearch—not RDBMS.** If you deploy Optimize, configure it with Elasticsearch or OpenSearch and enable the Elasticsearch/OpenSearch exporter for Zeebe, even if your Orchestration Cluster uses RDBMS:
 
 ```yaml
 orchestration:
@@ -349,8 +349,11 @@ orchestration:
 optimize:
   enabled: true
 
-opensearch:
-  enabled: true # Optimize still needs this
+# Choose one secondary storage for Optimize:
+# opensearch:
+#   enabled: true
+# elasticsearch:
+#   enabled: true
 ```
 
 Mixing storage types (RDBMS for Orchestration, Elasticsearch/OpenSearch for Optimize) is supported and tested.

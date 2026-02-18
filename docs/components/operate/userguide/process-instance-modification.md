@@ -23,7 +23,11 @@ Some elements do not support specific modifications:
   - Boundary events
   - Events attached to event-based gateways
 - **Move tokens from** modification is not possible for a subprocess itself.
-- **Add token**/**Move tokens to** modifications are currently not possible for elements with multiple running scopes.
+- **Add token** modifications are not currently supported for elements with multiple running scopes.
+
+:::note Multi-instance subprocesses
+While **Add token** modifications are not supported for elements inside multi-instance subprocesses, **Move** modifications are supported. When you move an element instance within a multi-instance subprocess, the operation terminates only that specific element instance and activates the target element in the same instance of the multi-instance subprocess.
+:::
 
 ## Enter process instance modification mode
 

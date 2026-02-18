@@ -13,20 +13,20 @@ This page covers JDBC driver management for RDBMS deployments in Kubernetes. For
 
 Camunda bundles JDBC drivers for databases where licensing permits:
 
-| Database   | Bundled | Version | When to supply custom drivers                                                                |
-| ---------- | ------- | ------- | -------------------------------------------------------------------------------------------- |
-| PostgreSQL | Yes     | 42.7.8  | Patches, extensions, or compatibility with older server versions.                            |
-| MariaDB    | Yes     | 3.5.7   | Custom JDBC features or compliance requirements.                                             |
-| SQL Server | Yes     | 12.10.2 | Custom features or version-specific requirements.                                            |
-| H2         | Yes     | 2.3.232 | Development and testing only; not recommended for production due to scalability limitations. |
-| Oracle     | No      | —       | Always; licensing prevents bundling.                                                         |
-| MySQL      | No      | —       | Always; licensing prevents bundling.                                                         |
+| Database   | Bundled | When to supply custom drivers                                                                |
+| ---------- | ------- | -------------------------------------------------------------------------------------------- |
+| PostgreSQL | Yes     | Patches, extensions, or compatibility with older server versions.                            |
+| MariaDB    | Yes     | Custom JDBC features or compliance requirements.                                             |
+| SQL Server | Yes     | Custom features or version-specific requirements.                                            |
+| H2         | Yes     | Development and testing only; not recommended for production due to scalability limitations. |
+| Oracle     | No      | Always; licensing prevents bundling.                                                         |
+| MySQL      | No      | Always; licensing prevents bundling.                                                         |
 
 ### When to supply a custom driver
 
 Consider supplying a custom JDBC driver in these scenarios:
 
-1. **Oracle or MySQL databases**: No bundled drivers available; custom drivers recommended.
+1. **Oracle or MySQL databases**: No bundled drivers available; custom drivers required.
 2. **Version compatibility**: Your database version is not compatible with the bundled driver.
 3. **Security patches**: A critical patch is available for the bundled driver before the next Camunda release.
 4. **Custom extensions**: You use database-specific features not covered by bundled drivers.
@@ -44,7 +44,7 @@ Choose one of the three approaches below. **Init container is recommended for pr
 
 ## Loading JDBC drivers into pods
 
-Some databases—such as Oracle—require JDBC drivers that cannot be included in the Camunda image due to licensing restrictions. You must provide these drivers at runtime using one of the following approaches.
+Some databases—such as Oracle and MySQL—require JDBC drivers that cannot be included in the Camunda image due to licensing restrictions. You must provide these drivers at runtime using one of the following approaches.
 
 ### Option 1: Using an init container
 
@@ -94,8 +94,8 @@ After loading JDBC drivers into pods, run the validation checklist in [validate 
 
 ### Option 2: Using a custom Docker image
 
-:::warning Important
-This approach has not yet been validated in production.
+:::note
+This is a custom image approach. For production, prefer the init-container method to stay aligned with supported Helm patterns.
 :::
 
 ```dockerfile
@@ -182,8 +182,8 @@ kubectl logs <pod-name> | grep -i "driver\|jdbc"
 Common success indicators in logs:
 
 ```
-org.springframework.boot.StartupInfoLogger - Started Application in X seconds
-io.camunda.exporter.rdbms.RdbmsExporter - RdbmsExporter created with Configuration
+INFO  org.springframework.boot.StartupInfoLogger - Started Application in X seconds
+INFO  io.camunda.exporter.rdbms.RdbmsExporter - RdbmsExporter created with Configuration
 ```
 
 Common failure indicators:
