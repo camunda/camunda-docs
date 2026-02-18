@@ -46,7 +46,7 @@ The PR branch is version-scoped (e.g. `update-ts-sdk-docs/8.8`), so a backport s
 | ---------- | --------------------------- | ------------------------------------------- |
 | TypeScript | Landing page                | — (uses existing `typescript-sdk.md`)       |
 | TypeScript | API reference               | `docs/apis-tools/typescript/api-reference/` |
-| Python     | Landing page                | `docs/apis-tools/python-sdk/python-sdk.md`  |
+| Python     | Landing page                | `docs/apis-tools/python-sdk.md`             |
 | Python     | Section pages (from README) | `docs/apis-tools/python-sdk/*.md`           |
 | Python     | API reference               | `docs/apis-tools/python-sdk/api-reference/` |
 
