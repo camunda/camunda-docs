@@ -26,7 +26,7 @@ Previously, some users deployed Bitnami subcharts in production. Starting with C
 
 :::note Alternative: Vendor-supported Infrastructure
 For production environments, consider using vendor-supported deployment methods instead of Bitnami subcharts. This approach leverages official Kubernetes operators (CloudNativePG, ECK, Keycloak Operator) that provide enterprise-grade features and vendor support.  
-See [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md) for detailed instructions.
+See [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for detailed instructions.
 :::
 
 If you use Bitnami-based subcharts in production, Camunda strongly recommends using Bitnami Premium images licensed by Camunda and maintained by Bitnami (Broadcom). This guide explains how to configure and install Camunda with these images.

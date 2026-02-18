@@ -1,8 +1,8 @@
 #### Create an S3 bucket for Terraform state management
 
-Before setting up Terraform, you need to create an S3 bucket that will store the state file. This is important for collaboration and to prevent issues like state file corruption.
+Before setting up Terraform, you need to create an S3 bucket to store the state file. This is important for collaboration and preventing issues like state file corruption.
 
-To start, set the region as an environment variable upfront to avoid repeating it in each command:
+To start, set the region as an environment variable to avoid repeating it in each command:
 
 ```bash
 export AWS_REGION=<your-region>
@@ -10,18 +10,11 @@ export AWS_REGION=<your-region>
 
 Replace `<your-region>` with your chosen AWS region (for example, `eu-central-1`).
 
-:::note Special case us-east-1
+:::note Region configuration
 
-Regions outside of `us-east-1` require the appropriate `LocationConstraint` to be specified in order to create the bucket in the desired region.
-While `us-east-1` does not require it and can only be created without specifying it.
+- Regions outside of `us-east-1` require the appropriate `LocationConstraint` to be specified in order to create the bucket in the desired region. Region `us-east-1` can only be created without specifying it.
+- This region can be different from the regions used for other resources, but it must be set explicitly in the backend configuration using the flag: `-backend-config="region=<your-region>"`. For clarity, this guide explicitly sets the bucket region in all relevant commands.
 
-:::
-
-:::note Region of the bucket's state
-
-This region can be different from the regions used for other resources, but it requires to be set explicitly in the backend configuration using the flag: `-backend-config="region=<your-region>"`.
-
-For clarity, this guide explicitly sets the bucket region in all relevant commands.
 :::
 
 Now, follow these steps to create the S3 bucket with versioning enabled:
