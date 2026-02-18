@@ -212,6 +212,7 @@ module.exports = {
           items: [
             "components/agentic-orchestration/ai-agents",
             "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/monitor-agents-operate",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
           ],
