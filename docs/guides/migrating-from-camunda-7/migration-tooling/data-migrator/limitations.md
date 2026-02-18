@@ -232,6 +232,10 @@ The History Data Migrator supports migration of Camunda Forms, but with the foll
 - Unsupported form bindings:
   - Expression-based bindings (for example, `${formKey}`)
 
+### Incidents
+
+- When there's a failing start timer, the incident cannot be migrated (as there's no process instance history) and will be skipped.
+
 ## Cockpit plugin
 
 The [Cockpit plugin](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin.md) has the following limitations:
@@ -471,7 +475,7 @@ The following limitations apply:
 | processDefinitionId    | Yes             |
 | processInstanceKey     | Yes             |
 | rootProcessInstanceKey | Yes             |
-| flowNodeInstanceKey    | Yes             |
+| flowNodeInstanceKey    | Yes\*           |
 | flowNodeId             | Yes             |
 | jobKey                 | No              |
 | errorType              | No              |
@@ -481,7 +485,9 @@ The following limitations apply:
 | state                  | Yes             |
 | treePath               | No              |
 | tenantId               | Yes             |
-| partitionId            | No              |
+| partitionId            | Yes             |
+
+\* `flowNodeInstanceKey` will not be populated when an incident occurs in flow node in waiting state with asyncBefore configuration.
 
 ### Job
 
