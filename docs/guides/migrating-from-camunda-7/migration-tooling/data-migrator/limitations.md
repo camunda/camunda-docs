@@ -61,9 +61,7 @@ To learn more about variable migration, see [variables](../variables).
 
 ### Incidents
 
-- Due to the [limitation regarding async before/after wait states](#async-beforeafter-wait-states):
-  - Incident data from instances currently waiting due to failed jobs causing active incidents will not be migrated during runtime migration. We recommend to resolve incidents prior to runtime migration.
-  - `flowNodeInstanceKey` will not be populated when the associated flow node instance is not migrated for this reason.
+Due to the [limitation regarding async before/after wait states](#async-beforeafter-wait-states), incident data from instances currently waiting due to failed jobs causing active incidents will not be migrated during runtime migration. We recommend to resolve incidents prior to runtime migration.
 
 ### BPMN elements
 
@@ -477,7 +475,7 @@ The following limitations apply:
 | processDefinitionId    | Yes             |
 | processInstanceKey     | Yes             |
 | rootProcessInstanceKey | Yes             |
-| flowNodeInstanceKey    | Yes             |
+| flowNodeInstanceKey    | Yes\*           |
 | flowNodeId             | Yes             |
 | jobKey                 | No              |
 | errorType              | No              |
@@ -488,6 +486,8 @@ The following limitations apply:
 | treePath               | No              |
 | tenantId               | Yes             |
 | partitionId            | Yes             |
+
+\* `flowNodeInstanceKey` will not be populated when an incident occurs in flow node in waiting state with asyncBefore configuration.
 
 ### Job
 
