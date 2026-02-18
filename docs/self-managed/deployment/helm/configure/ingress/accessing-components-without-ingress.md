@@ -44,7 +44,7 @@ kubectl port-forward svc/camunda-optimize 8083:80
 kubectl port-forward svc/camunda-connectors 8086:8080
 ```
 
-To be able to use Web Modeler, create additional port-forwardings for Web Modeler itself. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also port-forward the Keycloak service:
+To be able to use Web Modeler, create additional port-forwardings for Web Modeler itself, and if you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also port-forward the Keycloak service:
 
 ```
 kubectl port-forward svc/camunda-web-modeler-webapp 8070:80

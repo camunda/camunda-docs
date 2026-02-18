@@ -10,13 +10,13 @@ Advanced users may want to handle this part differently and use a different back
 
 The [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. Before you can use the provider, you must authenticate it using your AWS credentials.
 
-:::caution Ownership of the created resources
+:::warning Ownership of created resources
 
-A user who creates resources in AWS will always retain administrative access to those resources, including any Kubernetes clusters created. It is recommended to create a dedicated [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) for Terraform purposes, ensuring that the resources are managed and owned by that user.
+A user who creates resources in AWS will always retain administrative access to those resources, including any Kubernetes clusters created. Camunda recommends you create a dedicated [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) for Terraform purposes, ensuring the resources are managed and owned by that user.
 
 :::
 
-The Terraform AWS provider supports [multiple authentication methods](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration). If you have configured the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), Terraform will automatically detect and use those credentials:
+The AWS Terraform provider supports [multiple authentication methods](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration). If you have configured the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), Terraform will automatically detect and use those credentials:
 
 ```bash
 aws configure
