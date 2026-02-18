@@ -237,6 +237,7 @@ The History Data Migrator supports migration of Camunda Forms, but with the foll
 The incidents are migrated in `resolved` state. Operate does not visualize resolved incidents,
 therefore incidents of migrated process instances will not be visible in Operate.
 Audit data related to incidents can be observed by querying APIs.
+- When there's a failing start timer, the incident cannot be migrated (as there's no process instance history) and will be skipped.
 
 ## Cockpit plugin
 
@@ -477,7 +478,7 @@ The following limitations apply:
 | processDefinitionId    | Yes             |
 | processInstanceKey     | Yes             |
 | rootProcessInstanceKey | Yes             |
-| flowNodeInstanceKey    | Yes             |
+| flowNodeInstanceKey    | Yes\*           |
 | flowNodeId             | Yes             |
 | jobKey                 | No              |
 | errorType              | No              |
@@ -487,7 +488,9 @@ The following limitations apply:
 | state                  | Yes             |
 | treePath               | No              |
 | tenantId               | Yes             |
-| partitionId            | No              |
+| partitionId            | Yes             |
+
+\* `flowNodeInstanceKey` will not be populated when an incident occurs in flow node in waiting state with asyncBefore configuration.
 
 ### Job
 

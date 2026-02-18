@@ -160,6 +160,23 @@ Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{res
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Task permission management and new task-worker role
+
+With task permission management, you can assign restricted permissions for user task operations.
+
+Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this role to grant users limited access to work on tasks without assigning broader permissions.
+
+<p className="link-arrow">[Task permission management](../../../../components/tasklist/user-task-authorization)</p>
+
+</div>
+</div>
+
 ### Connectors
 
 <div className="release-announcement-row">

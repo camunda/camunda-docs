@@ -105,6 +105,30 @@ If you ran a migration in 0.2.x without configuring `camunda.migrator.data-sourc
 See [history atomicity](data-migrator/history.md#atomicity) for more details.
 :::
 
+#### Data Migrator: New `StringVariableTransformer`
+
+- **New transformer**: `StringVariableTransformer` now handles string variables specifically
+- **Modified transformer**: `PrimitiveVariableTransformer` no longer handles string variables, only:
+  - `BooleanValue`
+  - `IntegerValue`
+  - `LongValue`
+  - `DoubleValue`
+  - `ShortValue`
+
+**If you need to disable the new string transformer:**
+
+```yaml
+camunda:
+  migrator:
+    interceptors:
+      - class-name: io.camunda.migration.data.impl.interceptor.StringVariableTransformer
+        enabled: false
+```
+
+:::note Further reading
+See the [Variables documentation](data-migrator/variables.md#supported-types) for the complete list of variable types and their interceptors.
+:::
+
 ### Version 0.1.x to 0.2.0
 
 **Release date:** 17/12/2025 \
