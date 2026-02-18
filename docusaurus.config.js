@@ -312,7 +312,7 @@ module.exports = {
             },
             ...unmaintainedVersions.map((version) => ({
               label: version.label,
-              href: `https://unmaintained.docs.camunda.io/${version.urlSuffix}/`,
+              href: `https://unsupported.docs.camunda.io/${version.urlSuffix}/`,
             })),
           ],
         },

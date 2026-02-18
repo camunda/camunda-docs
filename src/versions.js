@@ -14,7 +14,7 @@ const currentVersion = "8.8";
 const unmaintainedVersions = [
   // 👋 When archiving a version, add it into here!
   //   `label` appears in the top navbar version selector.
-  //   `urlSuffix` gets appended to the target `unmaintained.docs.camunda.io/` URL.
+  //   `urlSuffix` gets appended to the target `unsupported.docs.camunda.io/` URL.
   { label: "8.5", urlSuffix: "8.5" },
   { label: "8.4", urlSuffix: "8.4" },
   { label: "8.3", urlSuffix: "8.3" },
