@@ -83,6 +83,27 @@ The user guide section on variable scopes and variable visibility explains the u
 
 // TODO add link to variables page
 
+### Variable filter semantics
+
+Conditional events can define a `zeebe:conditionalFilter` to limit when the engine re-evaluates the condition.
+
+A filter can restrict evaluation based on:
+
+- Specific variable names (`variableNames`)
+- Specific variable events (`variableEvents`, such as `create` or `update`)
+
+If no filter is defined, the engine evaluates the condition on any variable change within the event’s visible scope.
+
+The `variableEvents` attribute is supported only for conditional events within a running process instance.
+It is not supported for process-level conditional start events, because no process instance exists yet in which variable events could occur.
+
+:::warning Important
+Please always define variable filters for conditional events unless you explicitly want the event to trigger on every variable change when the condition is satisfied.
+
+If a conditional event has no variable filters and its condition is satisfied, it will trigger on every variable change within its visible scope.
+This can lead to unintended triggers, such as multiple triggers of the same event in rapid succession.
+:::
+
 ### Considerations
 
 While conditional events are powerful for enabling reactive process behavior, they require careful modeling to avoid unintended triggers and performance issues.
@@ -155,22 +176,6 @@ When evaluating conditional start events (via REST/gRPC API or Client SDKs):
 
 These APIs apply only to process-level conditional start events.
 Conditional events inside running process instances are evaluated automatically when their BPMN scope starts or when relevant variables change.
-
-## Variable filter semantics
-
-Conditional events can define a `zeebe:conditionalFilter` to limit when the engine re-evaluates the condition.
-
-A filter can restrict evaluation based on:
-
-- Specific variable names (`variableNames`)
-- Specific variable events (`variableEvents`, such as `create` or `update`)
-
-If no filter is defined, the engine evaluates the condition on any variable change within the event’s visible scope.
-
-The `variableEvents` attribute is supported only for conditional events within a running process instance.
-It is not supported for process-level conditional start events, because no process instance exists yet in which variable events could occur.
-
-// TODO - add performance considerations around variable filters, especially for events with no filters
 
 ## Cardinality and performance considerations
 
