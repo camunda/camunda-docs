@@ -16,7 +16,9 @@ If you are new to AWS ECS or Terraform, consider reviewing the [AWS ECS document
 This guide is based on an experimental release. Content and results may change before the final 8.9.0 release.
 :::
 
+:::warning
 Running this guide incurs costs on your AWS account, primarily for ECS and Aurora. Use the AWS [pricing calculator](https://calculator.aws/#/) to estimate costs for your region.
+:::
 
 If you want a simpler setup, consider using [Camunda 8 SaaS](https://accounts.camunda.io/signup).
 
