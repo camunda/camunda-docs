@@ -148,47 +148,40 @@ Only the leader of a partition exports events. Only committed events (events tha
 
 When a partition fails over to a new leader, the new leader is able to construct the current partition state by projecting the event log from the point of the last snapshot. The position of exporters cannot be reconstructed from the event log, so it is set to the last snapshot. This means an exporter can see the same events twice in the event of a fail-over.
 
-You should assign idempotent ids to events in your exporter if this is an issue for your system. The combination of record position and partition ID is reliable as a unique ID for an event.
+You should assign idempotent IDs to events in your exporter if this is a concern for your system. The combination of record position and partition ID provides a reliable unique identifier for an event.
 
 ### Effect of quorum loss
 
-If a partition goes under quorum (for example, if two nodes in a 3-node cluster go down), the leader of the partition continues to accept requests, but these requests are not replicated and are not marked as committed. In this case, they cannot be truncated. This causes the event log to grow. The amount of disk space needed to continue operating in this scenario is a function of the broker throughput and the amount of time to quorum being restored. You should ensure your nodes have sufficient disk space to handle this failure mode.
+If a partition drops below quorum (for example, if two nodes in a three-node cluster go down), the partition leader continues to accept requests. However, these requests are not replicated and are not marked as committed. As a result, they cannot be truncated, causing the event log to grow.
+
+The disk space required to continue operating in this scenario depends on broker throughput and the time required to restore quorum. Ensure that nodes have sufficient disk space to handle this failure mode.
 
 ## Memory
 
-Memory usage is based on the Java heap size (by default [25% of the max RAM](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html#GUID-DA88B6A6-AF89-4423-95A6-BBCBD9FAE781)) and native memory usage (also by default 25% of the max RAM, so Java itself can use **up to** 50% of the maximum RAM.
+Memory usage is determined by the Java heap size (by default, [25% of the maximum RAM](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html#GUID-DA88B6A6-AF89-4423-95A6-BBCBD9FAE781)) and native memory usage (also 25% by default). As a result, the JVM can use up to 50% of the available RAM.
 
-Zeebe can use different memory allocation strategies for RocksDB, which can
-be configured via the `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYALLOCATIONSTRATEGY` setting in the broker configuration.
+Zeebe supports multiple RocksDB memory allocation strategies, configured via the `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYALLOCATIONSTRATEGY` setting in the broker configuration:
 
-- If set to `PARTITION` (the default option), the total memory allocated to RocksDB will be the configured number of partitions times the configured memory limit (via the `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYLIMIT`).
-- If the value is set to `BROKER`, the total memory allocated to RocksDB will be equal to the configured memory limit.
-- If set to `FRACTION` Camunda will allocate the RocksDB memory based on a fraction of total memory.
+- `PARTITION` (default): Total RocksDB memory equals the configured number of partitions multiplied by the configured memory limit (`ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYLIMIT`).
+- `BROKER`: Total RocksDB memory equals the configured memory limit, regardless of the number of partitions.
+- `FRACTION`: RocksDB memory is allocated as a fraction of total available memory.
 
 :::note
-When using the `PARTITION` strategy, the number of partitions used in the
-calculation is the one configured and not necessarily the current number of
-partitions in the cluster. These can differ when using dynamic scaling of
-partitions. Therefore, it is recommended that when using `PARTITION`
-strategy and dynamic scaling, to update the configured number of partitions
-after scaling operations.
+When using the `PARTITION` strategy, the calculation is based on the configured number of partitions, not necessarily the current number of partitions in the cluster. These values can differ when using dynamic partition scaling. If you use the `PARTITION` strategy together with dynamic scaling, update the configured number of partitions after scaling operations.
 :::
 
-When using the `FRACTION` strategy the fraction can be configured via the
-`ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYFRACTION` setting ([0,1]), with
-the default being `0.1` (10% of total memory).
+When using the `FRACTION` strategy, configure the fraction using `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYFRACTION` (range `[0,1]`). The default is `0.1` (10% of total memory).
 
-The default value for `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYLIMIT` will then allocate [512MB]
-(https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#:~:text=%23%20memoryLimit) when using the `PARTITION` or
-`BROKER` strategies.
+For the `PARTITION` and `BROKER` strategies, the default value of `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYLIMIT` allocates [512 MB](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#:~:text=%23%20memoryLimit).
 
-Therefore, when hardcoding these values the following considerations
-should be met. Some memory is required for the OS page cache since Zeebe
-makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance.
+When hardcoding memory values, consider the following:
 
-The cache used by the OS will depend on many factors such as the amount of partition on the node, or the throughput of the system. For most use cases we recommend leaving 20 to 30% of the total memory for the OS page cache, but this can be adjusted based on the specific use case and observed performance.
+- Zeebe relies heavily on memory-mapped files, so sufficient OS page cache is required.
+- Insufficient page cache can lead to degraded I/O performance.
 
-The minimum memory usage is (when using the `PARTITION` strategy):
+The amount of OS page cache required depends on factors such as the number of partitions on a node and system throughput. For most use cases, reserve 20–30% of total memory for the OS page cache, adjusting as needed based on observed performance.
+
+The minimum memory usage (when using the `PARTITION` strategy) is:
 
 | Component           |                   Amount |
 | ------------------- | -----------------------: |
