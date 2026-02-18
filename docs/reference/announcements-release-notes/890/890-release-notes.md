@@ -359,7 +359,7 @@ You can also create global event templates that:
 - Standardize event configurations (for example, message names or payload structures).
 - Help ensure consistency across teams and models.
 
-<p class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/defining-templates.md)</p>
+<p class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/create/defining-templates.md)</p>
 
 #### Web Modeler: Invite users via email
 
