@@ -10,7 +10,16 @@ This guide walks you through deploying the [Camunda 8 Orchestration Cluster](/re
 If you are new to AWS ECS or Terraform, consider reviewing the [AWS ECS documentation](https://docs.aws.amazon.com/ecs/) and [Terraform documentation](https://developer.hashicorp.com/terraform/docs) before proceeding with this guide.
 :::
 
-## Considerations
+## Prerequisites
+
+- **AWS account** – An AWS account to provision resources with permissions for **ecs**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **rds** services.
+  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/example/policy.json).
+- **Terraform** – Infrastructure as code tool (v1.7 or later). [Install Terraform](https://developer.hashicorp.com/terraform/install).
+- **AWS CLI** – Command-line tool to manage AWS resources, used for `local-exec` to trigger the initial Aurora PostgreSQL user seeding. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+
+For the exact tool versions used during testing, refer to the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
+
+### Considerations
 
 :::warning Experimental release (8.9.0-alpha3)
 This guide is based on an experimental release. Content and results may change before the final 8.9.0 release.
@@ -40,11 +49,11 @@ Reference architectures and examples provided in this guide are not turnkey modu
 You are responsible for operating and maintaining the infrastructure. Camunda updates the reference architecture over time, and changes may not be backward compatible. You can use these updates to upgrade your customized codebase as needed.
 :::
 
-## Outcome
+### Outcome
 
 The result is a fully functioning Camunda Orchestration Cluster deployed in a high-availability setup using AWS ECS with Fargate and a managed Aurora PostgreSQL instance using IAM authentication. All ECS tasks share a single EFS volume dedicated to Camunda.
 
-### Architecture
+#### Architecture
 
 The architecture outlined below describes a standard Zeebe three-node deployment, distributed across three [availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) within a single AWS region. It includes a managed Aurora PostgreSQL instance deployed under the same conditions. This approach ensures high availability and redundancy in case of a zone failure.
 
@@ -81,15 +90,6 @@ After completing this guide, you will have:
 Both subnet types are distributed across three availability zones in a single AWS region, supporting a high-availability architecture.
 
 You can also scale this setup to a single ECS task. In that case, a zone failure makes the environment unavailable.
-
-## Prerequisites
-
-- **AWS account** – An AWS account to provision resources with permissions for **ecs**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **rds** services.
-  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/example/policy.json).
-- **Terraform** – Infrastructure as code tool (v1.7 or later). [Install Terraform](https://developer.hashicorp.com/terraform/install).
-- **AWS CLI** – Command-line tool to manage AWS resources, used for `local-exec` to trigger the initial Aurora PostgreSQL user seeding. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-
-For the exact tool versions used during testing, refer to the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
 
 ## Configure AWS and initialize Terraform
 
