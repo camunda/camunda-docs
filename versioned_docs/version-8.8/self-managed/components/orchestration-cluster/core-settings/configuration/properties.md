@@ -390,6 +390,19 @@ The following configurations apply to all components within the Orchestration Cl
 
 ## Data - secondary storage
 
+:::warning
+When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, they must use different index prefixes. One prefix must not be the beginning of the other (for example, avoid `custom` and `custom-zeebe` together because `custom*` matches both). Do not use `operate`, `tasklist`, or `camunda` as the full exporter prefix, and do not use `zeebe-record` as the Orchestration Cluster index prefix, as `zeebe-record` is the default prefix for Elasticsearch/OpenSearch Exporter indices.
+
+The Orchestration Cluster prefix is configured via:
+
+- Application property: `camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix`
+- Environment variable: `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`
+- Helm value: `orchestration.index.prefix`
+
+For detailed requirements, configuration examples, and common mistakes, see
+[index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
+:::
+
 <Tabs>
   <TabItem value="application.yaml" label="Application properties">
 
