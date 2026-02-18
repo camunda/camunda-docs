@@ -32,8 +32,10 @@ If you want a simpler setup, consider using [Camunda 8 SaaS](https://accounts.ca
   - You may still use Elasticsearch or OpenSearch but need to adjust the required configuration. More information about the configuration can be found in [our documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
   - Examples for how to deploy AWS OpenSearch can be found in other existing reference architectures for AWS.
 
-:::note
-You are responsible for the implementation and maintenance of your infrastructure.
+:::warning
+Reference architectures and examples provided in this guide are not turnkey modules. Camunda recommends cloning the repository and modifying it locally.
+
+You are responsible for operating and maintaining the infrastructure. Camunda updates the reference architecture over time, and changes may not be backward compatible. You can use these updates to upgrade your customized codebase as needed.
 :::
 
 ## Outcome
