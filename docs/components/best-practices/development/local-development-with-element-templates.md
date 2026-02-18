@@ -13,7 +13,7 @@ This guide explains how to set up element templates in your local environment.
 ## Prerequisites
 
 - [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) installed on your local machine.
-- Basic knowledge of [element templates with dependencies](/components/modeler/element-templates/element-template-with-dependencies.md).
+- Basic knowledge of [element templates with dependencies](/components/modeler/element-templates/create/element-templates-with-dependencies.md).
 - Familiarity with [custom connectors](/components/connectors/manage-connector-templates.md).
 
 ## Provisioning secrets
@@ -128,6 +128,6 @@ To make your element templates available in Desktop Modeler, see the [configurat
 
 ## Additional resources and next steps
 
-- [Using element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/using-templates.md)
+- [Using element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md)
 - [Run your first local Camunda 8 project](/guides/getting-started-example.md)
 - [Available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
