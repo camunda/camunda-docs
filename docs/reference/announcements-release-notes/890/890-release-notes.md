@@ -37,7 +37,33 @@ These release notes identify the main new features included in the 8.9 minor rel
 | :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 10 March 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha5)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha5)</li></ul> |
 
-### Helm chart
+### Camunda 8 Run
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
+
+#### Expanded RDBMS support
+
+<!-- https://github.com/camunda/product-hub/issues/3128 -->
+
+You can now configure Camunda 8 Run to use any of the supported secondary storage relational databases instead of the default H2.
+
+This allows you to set up your local environment to match your production deployments, enabling deeper testing, faster debugging, and easier team onboarding.
+
+### Console
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
+
+#### Reduce manual backup cooldown in SaaS
+
+<!-- https://github.com/camunda/product-hub/issues/3400 -->
+
+The cooldown time between manual and scheduled backups in SaaS is reduced to 15 minutes.
+
+You can now safely combine frequent scheduled backups with additional on‑demand manual backups (for example, hourly scheduled backups plus a daily manual backup) without hitting unexpected rate‑limit conflicts, while still benefiting from separate retention of manual and scheduled backups.
+
+<p class="link-arrow">[SaaS backups](/components/saas/backups.md)</p>
+
+### Helm chart deployment
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Configuration">Configuration</span></div>
 
@@ -53,7 +79,22 @@ The Helm chart now documents all values supporting Go template expressions, incl
 
 ### Orchestration Cluster
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
+
+#### Manage task permissions
+
+<!-- https://github.com/camunda/product-hub/issues/3122 -->
+
+Granular task-level authorization is now integrated into the Tasklist UI and the Orchestration Cluster REST API.
+
+- Property-based task permissions:
+  - Grant users permission to view or work on a task, based on task properties.
+  - Permissions apply when the assignee matches the current user, or when the user belongs to a candidate group (or is listed as a candidate user). This ensures all relevant users have appropriate access, whether directly assigned or eligible to claim the task.
+  - Permissions apply consistently across both the Tasklist UI and the orchestration cluster REST API.
+
+- Fine-grained security: Visibility and action permissions are scoped at the individual task level, reducing unauthorized access and improving compliance alignment.
+
+This feature strengthens security and usability, and provides a clear, consistent, and secure user experience for task workers, managers, and integrations.
 
 #### Modify elements in multi-instance ad-hoc sub-processes
 
@@ -62,6 +103,90 @@ The Helm chart now documents all values supporting Go template expressions, incl
 Operators can now dynamically activate, move, or remove element instances inside running multi-instance ad-hoc subprocesses—supporting parallel, sequential, and classic ad-hoc execution patterns.
 
 These new runtime capabilities, available in both Operate UI and the API, allow users to adapt, repair, and recover business processes on the fly, supporting flexibility for agentic automation, case management, and critical operations.
+
+#### Monitor batch operations
+
+<!-- https://github.com/camunda/product-hub/issues/3066 -->
+
+Operate now includes a dedicated Batch Operations view powered by the Orchestration Cluster API.
+
+- Users can search and filter batches, view progress and per-item results (including errors), and manage running batches via suspend, resume, and cancel actions.
+- This capability, aligned with Zeebe-managed batch operations introduced in 8.8, brings consistent and transparent monitoring across distributed partitions for improved operational control.
+
+<p class="link-arrow">[Monitor batch operations](/components/operate/userguide/monitor-batch-operations.md)</p>
+
+#### Operate uses the Orchestration Cluster REST API
+
+Operate now uses the Orchestration Cluster REST API as its single interface for accessing and managing process data. This ensures a consistent Operate experience across OpenSearch, Elasticsearch, and RDBMS.
+
+You can continue to investigate, manage, and automate process operations without any loss of functionality while also reusing the same REST endpoints for custom tools and integrations.
+
+- Operate now uses the Orchestration Cluster REST API as the single backend interface.
+- The frontend is fully aligned with the Orchestration Cluster REST API (V2) API across all supported data stores.
+- The V2 API has been extended with new endpoints to support Operate functionality.
+- Batch modification and monitoring behavior has been updated to work with the new API.
+- Proactive permission checks in the UI have been removed: UI elements are now always visible, and permission errors are shown only when an action is attempted.
+
+<p class="link-arrow">[Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)</p>
+
+#### Preconfigure Identity entities
+
+<!-- https://github.com/camunda/product-hub/issues/2446 -->
+
+You can now use declarative configuration for all Identity entities in the Orchestration Cluster, such as groups, tenants, roles, authorizations, and assignments. Previously, you could only use this for users, mapping rules, and default role memberships.
+
+#### Schedule backups with the Orchestration Cluster
+
+<!-- https://github.com/camunda/product-hub/issues/3032 -->
+
+You can now configure scheduled backup intervals and retention directly in the Orchestration Cluster.
+
+- External cron jobs are no longer needed.
+- Supports setting duration schedules, manual ad‑hoc backups, API‑based updates, metrics, and audit logs.
+- Backwards compatible with existing backup commands.
+
+#### User operations audit log
+
+<!-- https://github.com/camunda/product-hub/issues/1732 -->
+
+A new centralized, queryable audit log records all critical user and client operations across process, identity, and user task domains.
+
+- Teams can trace who performed each action and when, what was affected, and if the action was successful.
+- Audit entries are available via Orchestration Cluster APIs, and integrated into Operate, Tasklist, and Identity with built-in authorization controls.
+
+### RDBMS secondary storage
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
+
+#### Continuous backup and restore
+
+<!-- https://github.com/camunda/product-hub/issues/2723 -->
+<!-- https://github.com/camunda/product-hub/issues/3031 -->
+
+You can now back up and restore Camunda 8 when using RDBMS as secondary storage.
+
+- Independent backup control plans handle primary and secondary backups separately while ensuring they align when restored.
+- Disaster recovery is improved as you can recover Camunda instances with greater precision in data consistency.
+
+Additionally, the new restore API syntax now supports `--from` and `--to` timestamp flags, enabling automatic selection of a compatible backup range.
+
+- When no specific backup or timerange is specified, a restore is performed to the latest known position with no user interaction.
+- Ensures version compatibility across backups and offers an override via `--allow-version-mismatch`.
+- Reduces manual restore effort and enhances confidence in backup integrity, with reduced Recovery Time Objective (RTO).
+
+<p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
+
+#### Production installation guide for C8 with RDBMS - manual installation
+
+<!-- https://github.com/camunda/product-hub/issues/2740 -->
+
+The new Production Installation Guide for Camunda 8 with RDBMS (Manual Installation) provides platform administrators, database administrators, and development teams with a comprehensive, step-by-step resource for deploying and managing Camunda 8 using relational databases in production environments. This guide aims to dramatically simplify the RDBMS integration experience, align documentation with modern best practices, and minimize onboarding time and operational risk.
+
+#### Manual installation options support RDBMS for secondary storage
+
+<!-- https://github.com/camunda/product-hub/issues/2747 -->
+
+Camunda 8 orchestration clusters can now be installed manually (VM/bare metal/Java application) with full support for RDBMS (H2, PostgreSQL, Oracle, MariaDB) as secondary storage.
 
 ## 8.9.0-alpha4
 
