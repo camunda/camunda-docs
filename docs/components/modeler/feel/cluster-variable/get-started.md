@@ -20,7 +20,7 @@ POST /v2/cluster-variables/global
 Content-Type: application/json
 
 {
-  "key": "PAYMENT_API_CONFIG",
+  "name": "PAYMENT_API_CONFIG",
   "value": {
     "endpoint": "https://api.payment.prod.example.com",
     "timeout_ms": 5000,
@@ -42,7 +42,7 @@ POST /v2/cluster-variables/tenant/{tenantId}
 Content-Type: application/json
 
 {
-  "key": "PAYMENT_API_CONFIG",
+  "name": "PAYMENT_API_CONFIG",
   "value": {
     "endpoint": "https://api.payment.dev.example.com",
     "timeout_ms": 30000,
