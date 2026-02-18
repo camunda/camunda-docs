@@ -206,6 +206,17 @@ def lift_form_key(value)
 * **Return type:**
   *FormKey*
 
+### lift_global_listener_id()
+
+```python
+def lift_global_listener_id(value)
+```
+
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *GlobalListenerId*
+
 ### lift_incident_key()
 
 ```python
@@ -282,6 +293,17 @@ def lift_process_instance_key(value)
   **value** (*Any*)
 * **Return type:**
   *ProcessInstanceKey*
+
+### lift_root_process_instance_key()
+
+```python
+def lift_root_process_instance_key(value)
+```
+
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *RootProcessInstanceKey*
 
 ### lift_scope_key()
 
@@ -569,6 +591,17 @@ def try_lift_form_key(value)
 * **Return type:**
   *Tuple*[bool, *FormKey* | Exception]
 
+### try_lift_global_listener_id()
+
+```python
+def try_lift_global_listener_id(value)
+```
+
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *GlobalListenerId* | Exception]
+
 ### try_lift_incident_key()
 
 ```python
@@ -645,6 +678,17 @@ def try_lift_process_instance_key(value)
   **value** (*Any*)
 * **Return type:**
   *Tuple*[bool, *ProcessInstanceKey* | Exception]
+
+### try_lift_root_process_instance_key()
+
+```python
+def try_lift_root_process_instance_key(value)
+```
+
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *RootProcessInstanceKey* | Exception]
 
 ### try_lift_scope_key()
 

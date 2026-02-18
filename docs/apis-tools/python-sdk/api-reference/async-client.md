@@ -841,9 +841,9 @@ managed in the Orchestration Cluster and while no user is assigned to the admin 
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  None
+  UserCreateResult
 * **Return type:**
-  None
+  UserCreateResult
 
 ### create_authorization()
 
@@ -1075,6 +1075,7 @@ async def create_global_cluster_variable(, data, \*\*kwargs)
 
 Create a global-scoped cluster variable
 
+> Create a global-scoped cluster variable.
 * **Parameters:**
   * **body** (*CreateClusterVariableRequest*)
   * **data** (*CreateClusterVariableRequest*)
@@ -1090,6 +1091,33 @@ Create a global-scoped cluster variable
   ClusterVariableResult
 * **Return type:**
   ClusterVariableResult
+
+### create_global_task_listener()
+
+```python
+async def create_global_task_listener(, data, \*\*kwargs)
+```
+
+Create global user task listener
+
+> Create a new global user task listener.
+* **Parameters:**
+  * **body** (*CreateGlobalTaskListenerRequest*)
+  * **data** (*CreateGlobalTaskListenerRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.CreateGlobalTaskListenerBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.CreateGlobalTaskListenerUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.CreateGlobalTaskListenerForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.CreateGlobalTaskListenerConflict** – If the response status code is 409. A global listener with this id already exists.
+  * **errors.CreateGlobalTaskListenerInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.CreateGlobalTaskListenerServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
+  GlobalTaskListenerResult
+* **Return type:**
+  GlobalTaskListenerResult
 
 ### create_group()
 
@@ -1305,6 +1333,7 @@ async def create_tenant_cluster_variable(tenant_id, , data, \*\*kwargs)
 
 Create a tenant-scoped cluster variable
 
+> Create a new cluster variable for the given tenant.
 * **Parameters:**
   * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
   * **body** (*CreateClusterVariableRequest*)
@@ -1398,9 +1427,9 @@ Delete decision instance
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  BatchOperationCreatedResult
+  None
 * **Return type:**
-  BatchOperationCreatedResult
+  None
 
 ### delete_decision_instances_batch_operation()
 
@@ -1467,6 +1496,7 @@ async def delete_global_cluster_variable(name, \*\*kwargs)
 
 Delete a global-scoped cluster variable
 
+> Delete a global-scoped cluster variable.
 * **Parameters:**
   * **name** (*str*)
   * **kwargs** (*Any*)
@@ -1476,6 +1506,32 @@ Delete a global-scoped cluster variable
   * **errors.DeleteGlobalClusterVariableForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
   * **errors.DeleteGlobalClusterVariableNotFound** – If the response status code is 404. Cluster variable not found
   * **errors.DeleteGlobalClusterVariableInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
+  None
+* **Return type:**
+  None
+
+### delete_global_task_listener()
+
+```python
+async def delete_global_task_listener(id, \*\*kwargs)
+```
+
+Delete global user task listener
+
+> Deletes a global user task listener.
+* **Parameters:**
+  * **id** (*str*) – The user-defined id for the global listener Example: GlobalListener_1.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.DeleteGlobalTaskListenerBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.DeleteGlobalTaskListenerUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.DeleteGlobalTaskListenerForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.DeleteGlobalTaskListenerNotFound** – If the response status code is 404. The global user task listener was not found.
+  * **errors.DeleteGlobalTaskListenerInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.DeleteGlobalTaskListenerServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
@@ -1556,9 +1612,9 @@ Delete process instance
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  BatchOperationCreatedResult
+  None
 * **Return type:**
-  BatchOperationCreatedResult
+  None
 
 ### delete_process_instances_batch_operation()
 
@@ -1700,6 +1756,7 @@ async def delete_tenant_cluster_variable(tenant_id, name, \*\*kwargs)
 
 Delete a tenant-scoped cluster variable
 
+> Delete a tenant-scoped cluster variable.
 * **Parameters:**
   * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
   * **name** (*str*)
@@ -2243,6 +2300,7 @@ async def get_global_cluster_variable(name, \*\*kwargs)
 
 Get a global-scoped cluster variable
 
+> Get a global-scoped cluster variable.
 * **Parameters:**
   * **name** (*str*)
   * **kwargs** (*Any*)
@@ -2448,18 +2506,18 @@ Get process instance statistics
 ### get_process_definition_instance_version_statistics()
 
 ```python
-async def get_process_definition_instance_version_statistics(process_definition_id, \*, data=<camunda_orchestration_sdk.types.Unset object>, \*\*kwargs)
+async def get_process_definition_instance_version_statistics(, data, \*\*kwargs)
 ```
 
 Get process instance statistics by version
 
 > Get statistics about process instances, grouped by version for a given process definition.
+
+The process definition ID must be provided as a required field in the request body filter.
+
 * **Parameters:**
-  * **process_definition_id** (*str*) – Id of a process definition, from the model. Only ids of
-    process definitions that are deployed are useful. Example: new-account-onboarding-
-    workflow.
-  * **body** (*ProcessDefinitionInstanceVersionStatisticsQuery* *|* *Unset*)
-  * **data** (*ProcessDefinitionInstanceVersionStatisticsQuery* *|* *Unset*)
+  * **body** (*ProcessDefinitionInstanceVersionStatisticsQuery*)
+  * **data** (*ProcessDefinitionInstanceVersionStatisticsQuery*)
   * **kwargs** (*Any*)
 * **Raises:**
   * **errors.GetProcessDefinitionInstanceVersionStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
@@ -2862,6 +2920,7 @@ async def get_tenant_cluster_variable(tenant_id, name, \*\*kwargs)
 
 Get a tenant-scoped cluster variable
 
+> Get a tenant-scoped cluster variable.
 * **Parameters:**
   * **tenant_id** (*str*) – The unique identifier of the tenant. Example: customer-service.
   * **name** (*str*)
@@ -5025,6 +5084,34 @@ The variable must exist, otherwise a 404 error is returned.
   ClusterVariableResult
 * **Return type:**
   ClusterVariableResult
+
+### update_global_task_listener()
+
+```python
+async def update_global_task_listener(id, , data, \*\*kwargs)
+```
+
+Update global user task listener
+
+> Updates a global user task listener.
+* **Parameters:**
+  * **id** (*str*) – The user-defined id for the global listener Example: GlobalListener_1.
+  * **body** (*UpdateGlobalTaskListenerRequest*)
+  * **data** (*UpdateGlobalTaskListenerRequest*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.UpdateGlobalTaskListenerBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.UpdateGlobalTaskListenerUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.UpdateGlobalTaskListenerForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.UpdateGlobalTaskListenerNotFound** – If the response status code is 404. The global user task listener was not found.
+  * **errors.UpdateGlobalTaskListenerInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UpdateGlobalTaskListenerServiceUnavailable** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
+  GlobalTaskListenerResult
+* **Return type:**
+  GlobalTaskListenerResult
 
 ### update_group()
 
