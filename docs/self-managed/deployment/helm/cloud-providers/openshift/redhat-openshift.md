@@ -425,14 +425,13 @@ For more details on the Elasticsearch deployment, see [Elasticsearch deployment 
 Deploy PostgreSQL clusters using the CloudNativePG operator:
 
 ```bash
-(cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+CLUSTER_FILTER="pg-identity,pg-webmodeler" (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
 ```
 
-This script installs the CNPG operator (auto-detecting OpenShift to apply SCC patches), creates secrets, deploys PostgreSQL clusters, and waits for readiness.
+This script installs the CNPG operator (auto-detecting OpenShift to apply SCC patches), creates secrets, deploys the specified PostgreSQL clusters, and waits for readiness.
 
 The following PostgreSQL clusters are created:
 
-- **pg-keycloak**: Database for Keycloak authentication (only needed if using Keycloak as IdP)
 - **pg-identity**: Database for Camunda Identity component
 - **pg-webmodeler**: Database for Web Modeler component (remove from configuration if not needed)
 
@@ -447,9 +446,9 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-re
 
 For more details on the PostgreSQL deployment, see [PostgreSQL deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#postgresql-deployment).
 
-#### Deploy Keycloak {#deploy-keycloak}
+#### Deploy Keycloak (optional) {#deploy-keycloak}
 
-Deploy Keycloak using the Keycloak Operator. First, deploy the PostgreSQL database for Keycloak, then deploy the Keycloak operator and instance.
+If you choose Keycloak as your identity provider (IdP), deploy it using the Keycloak Operator. First, deploy its PostgreSQL database, then deploy the Keycloak operator and instance. If you use an external OIDC provider instead, skip this section.
 
 <Tabs queryString="current-ingress">
 <TabItem value="openshift-routes" label="Using OpenShift Routes" default>
