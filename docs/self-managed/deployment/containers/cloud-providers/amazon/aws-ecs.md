@@ -4,16 +4,18 @@ title: "Amazon ECS on AWS"
 description: "Learn how to install Camunda 8 on AWS ECS."
 ---
 
-This guide shows you how to install the [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster) on AWS Elastic Container Service (ECS) using Fargate and Aurora
-PostgreSQL. You deploy a Self-Managed Camunda 8 environment using AWS managed services and then verify that all required components and connections are working.
+Install the [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster) on AWS Elastic Container Service (ECS) using Fargate and Aurora PostgreSQL.
 
-This guide focuses on setting up the Orchestration Cluster and Connectors for Camunda 8. Web Modeler, Optimize, and Console are currently not covered.
+## About
+
+In this guide, you:
+
+- Deploy the Camunda 8 Orchestration Cluster and Connectors using AWS managed services. Web Modeler, Optimize, and Console aren't included.
+- Verify all required components and connections are working.
 
 :::tip New to AWS ECS?
 If you are new to AWS ECS or Terraform, consider reviewing the [AWS ECS documentation](https://docs.aws.amazon.com/ecs/) and [Terraform documentation](https://developer.hashicorp.com/terraform/docs) before proceeding with this guide.
 :::
-
-You are responsible for the implementation and maintenance of your infrastructure.
 
 ## Considerations
 
@@ -36,6 +38,10 @@ If you want a simpler setup, consider using [Camunda 8 SaaS](https://accounts.ca
 - This guide focuses on Aurora PostgreSQL for the secondary datastorage as it is a newly supported offering by Camunda 8 and potentially more familiar for customers.
   - You may still use Elasticsearch/OpenSearch but need to adjust the required configuration. More information about the configuration can be found in [our documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
   - Examples for how to deploy AWS OpenSearch can be found in other existing reference architectures for AWS.
+
+:::note
+You are responsible for the implementation and maintenance of your infrastructure.
+:::
 
 ## Outcome
 
