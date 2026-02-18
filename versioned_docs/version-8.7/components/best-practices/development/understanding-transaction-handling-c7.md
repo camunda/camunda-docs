@@ -90,7 +90,7 @@ Aside a general strategy to mark service tasks as being save points you will oft
 
 **Do** configure a savepoint **after**
 
-- _User tasks_ <img src="/img/bpmn-elements/task-user.svg" alt="User Task"/>: This savepoint allows users to complete their tasks without waiting for expensive subsequent steps and without seeing an unexpected rollback of their user transaction to the waitstate before the user task. Sometimes, e.g. when validating user input by means of a subsequent step, you want exactly that: rolling back the user transaction to the user task waitstate. In that case you might want to introduce a savepoint right after the validation step.
+- _User tasks_ <img src="/img/bpmn-elements/task-user.svg" alt="User Task"/>: This savepoint allows users to complete their tasks without waiting for expensive subsequent steps and without seeing an unexpected rollback of their user transaction to the wait statee before the user task. Sometimes, e.g. when validating user input by means of a subsequent step, you want exactly that: rolling back the user transaction to the user task wait state. In that case you might want to introduce a savepoint right after the validation step.
 
 - Service Tasks (or other steps) causing _Non-idempotent Side Effects_ <img src="/img/bpmn-elements/task-service.svg" alt="Service Task" /> <img src="/img/bpmn-elements/task-script.svg" alt="Script Task" /> <img src="/img/bpmn-elements/task-send.svg" alt="Send Task" /> <img src="/img/bpmn-elements/message-intermediate-send.svg" alt="Message Intermediate Event" /> <img src="/img/bpmn-elements/message-end.svg" alt="Message End Event" />: This savepoint makes sure that a side effect which must not happen more often than once is not accidentally repeated because any subsequent steps might roll back the transaction to a savepoint well before the affected step. End Events should be included if the process can be called from other processes.
 
@@ -168,4 +168,4 @@ Learn more about [rollback on exceptions](https://docs.camunda.org/manual/latest
 
 As an alternative to rolling back transactions, you can also handle those exceptions within the process, refer to [dealing with problems and exceptions](./dealing-with-problems-and-exceptions.md#handling-errors-on-the-process-level) for details.
 
-Just be aware of the following technical constraint: in case your transaction manager marks the current transaction _for rollback_ (as possible in Java transaction managers), handling the exception by a processis not possible as the workflow engine cannot commit its work in this transaction.
+Just be aware of the following technical constraint: in case your transaction manager marks the current transaction _for rollback_ (as possible in Java transaction managers), handling the exception by a process is not possible as the workflow engine cannot commit its work in this transaction.

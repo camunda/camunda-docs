@@ -543,7 +543,7 @@ paths:
               $ref: "#/components/schemas/DeleteProcessInstanceRequest"
       responses:
         "204":
-          description: The process instance will be deleted.
+          description: The process instance is marked for deletion.
         "401":
           $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
@@ -845,6 +845,13 @@ components:
           description: |
             The unique key identifying the process definition, for example, returned for a process in the
             deploy resources endpoint.
+        processDefinitionVersion:
+          description: |
+            As the version is already identified by the `processDefinitionKey`, the value of this field is ignored.
+            It's here for backwards-compatibility only as previous releases accepted it in request bodies.
+          type: integer
+          format: int32
+          default: -1
         variables:
           description: |
             JSON object that will instantiate the variables for the root variable scope
@@ -1264,6 +1271,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
           description: The parent element instance key.
+        rootProcessInstanceKey:
+          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
         tags:
           $ref: "identifiers.yaml#/components/schemas/TagSet"
     CancelProcessInstanceRequest:
@@ -1316,6 +1325,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The key of this process instance.
+        rootProcessInstanceKey:
+          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
         processDefinitionKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"
@@ -1518,9 +1529,11 @@ components:
         mapping:
           direct: "#/components/schemas/DirectAncestorKeyInstruction"
           inferred: "#/components/schemas/InferredAncestorKeyInstruction"
+          sourceParent: "#/components/schemas/UseSourceParentKeyInstruction"
       oneOf:
         - $ref: "#/components/schemas/DirectAncestorKeyInstruction"
         - $ref: "#/components/schemas/InferredAncestorKeyInstruction"
+        - $ref: "#/components/schemas/UseSourceParentKeyInstruction"
     DirectAncestorKeyInstruction:
       type: object
       description: Provides a concrete key to use as ancestor scope for the created element instance.
@@ -1551,6 +1564,17 @@ components:
           description: The type of ancestor scope instruction.
           type: string
           example: inferred
+      required:
+        - ancestorScopeType
+    UseSourceParentKeyInstruction:
+      type: object
+      description: |
+        Instructs the engine to use the source's direct parent key as the ancestor scope key for the target element. This is a simpler alternative to `inferred` that skips hierarchy traversal and directly uses the source's parent key. This is useful when the source and target elements are siblings within the same flow scope.
+      properties:
+        ancestorScopeType:
+          description: The type of ancestor scope instruction.
+          type: string
+          example: sourceParent
       required:
         - ancestorScopeType
     ProcessInstanceModificationTerminateInstruction:

@@ -1,0 +1,384 @@
+---
+id: update-tenant-cluster-variable
+title: "Update a tenant-scoped cluster variable"
+description: "<MarkerStronglyConsistentExtension />"
+sidebar_label: "Update a tenant-scoped cluster variable"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "put api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update a tenant-scoped cluster variable"}
+></Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/cluster-variables/tenants/{tenantId}/{name}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Updates the value of an existing tenant-scoped cluster variable.
+The variable must exist, otherwise a 404 error is returned.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      schema: {
+        example: "customer-service",
+        description: "The unique identifier of the tenant.",
+        format: "TenantId",
+        type: "string",
+        title: "TenantId",
+      },
+      description: "The tenant ID",
+    },
+    {
+      name: "name",
+      in: "path",
+      required: true,
+      schema: { type: "string" },
+      description: "The name of the cluster variable",
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          required: ["value"],
+          properties: {
+            value: {
+              type: "object",
+              description:
+                "The new value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.",
+            },
+          },
+          title: "UpdateClusterVariableRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Cluster variable updated successfully",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Cluster variable response item.",
+                type: "object",
+                required: ["name", "value", "scope"],
+                properties: {
+                  name: {
+                    type: "string",
+                    description:
+                      "The name of the cluster variable. Unique within its scope (global or tenant-specific).",
+                  },
+                  scope: {
+                    type: "string",
+                    enum: ["GLOBAL", "TENANT"],
+                    description: "The scope of a cluster variable.",
+                    title: "ClusterVariableScopeEnum",
+                  },
+                  tenantId: {
+                    type: "string",
+                    description:
+                      "Only provided if the cluster variable scope is TENANT.",
+                  },
+                },
+                title: "ClusterVariableResultBase",
+              },
+            ],
+            properties: {
+              value: {
+                description: "Full value of this cluster variable.",
+                type: "string",
+              },
+            },
+            title: "ClusterVariableResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Cluster variable not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

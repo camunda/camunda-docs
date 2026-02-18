@@ -4,6 +4,8 @@ title: "Dual-region setup (EKS)"
 description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a peered setup allowing dual-region communication."
 ---
 
+<!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, similar to the single-region Terraform setup. The user should have a similar experience when reading both guides. -->
+
 <!-- Image source: https://docs.google.com/presentation/d/1w1KUsvx4r6RS7DAozx6X65BtLJcIxU6ve_y3bYFcfYk/edit?usp=sharing -->
 
 import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
@@ -14,34 +16,61 @@ import TabItem from '@theme/TabItem';
 Review our [dual-region concept documentation](/self-managed/concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
 :::
 
-This guide offers a detailed blueprint tutorial for deploying two Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) clusters, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
+This guide explains how to deploy two [Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) clusters](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) in a dual-region setup using Terraform, a widely used Infrastructure as Code (IaC) tool.
+The dual-region EKS clusters serve as the infrastructure foundation for running Camunda 8 with disaster recovery capabilities.
 
-:::note
-This guide requires you to have previously completed or reviewed the steps taken in [deploying an EKS cluster with Terraform](./terraform-setup.md). If you have no experience with Terraform and Amazon EKS, review this content for the essentials of setting up an Amazon EKS cluster and configuring AWS IAM permissions. This content explains the process of using Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts.
+For advanced EKS scenarios, see the [Amazon EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/).
+
+:::tip
+
+New to Terraform or Infrastructure as Code? Start with the [Terraform IaC documentation](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code) and try the [interactive quick start](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code#quick-start). Additionally, review the [single-region EKS Terraform setup](./terraform-setup.md) for the essentials of setting up an Amazon EKS cluster and configuring AWS IAM permissions.
+
 :::
 
-## Prerequisites
+:::info Repository Migration 8.9
 
-- An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create resources within AWS.
-- [Helm](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
-- [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [Terraform](https://developer.hashicorp.com/terraform/downloads)
+The previous repository, [c8-multi-region](https://github.com/camunda/c8-multi-region), has been migrated to [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references) to consolidate all reference architectures into a single repository.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+The overall content remains unchanged, except for the required Helm chart updates for version 8.9 in the `camunda-values.yml` file.
 
-## Considerations
-
-This setup provides an essential foundation for setting up Camunda 8 in a dual-region setup. Though it's not tailored for optimal performance, it's a good initial step for preparing a production environment by incorporating [IaC tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
-
-To try out Camunda 8 or develop against it, consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have two Amazon EKS clusters (peered together) and an S3 bucket, consider skipping to [deploy Camunda 8 to the clusters](#deploy-camunda-8-to-the-clusters).
-
-For the simplicity of this guide, certain best practices will be provided with links to additional resources, enabling you to explore the topic in more detail.
-
-:::caution
-Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), traffic between regions, and S3. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 :::
 
-## Outcome
+## Requirements
+
+- **AWS account** – Required to create AWS resources. See [What is an AWS account?](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html).
+- **AWS CLI** – Command-line tool to manage AWS resources. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+- **Terraform** – IaC tool used to provision resources. [Install Terraform](https://developer.hashicorp.com/terraform/downloads).
+- **kubectl** – CLI for interacting with Kubernetes clusters. [Install kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
+- **Helm** – Package manager for Kubernetes. [Install Helm](https://helm.sh/docs/intro/install/).
+- **AWS service quotas** – Verify your quotas before deployment:
+  - At least 6 Elastic IPs (three per availability zone, per region).
+  - Adequate quotas for **VPCs, EC2 instances, and storage** in both regions.
+  - Request increases if needed via the AWS console. You pay only for used resources. See [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) and [Amazon EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html).
+
+For the tool versions used in testing, see the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file. It contains an up-to-date list of versions used for testing.
+
+### Considerations
+
+This setup provides a solid starting point for running Camunda 8 on AWS in a dual-region configuration. It is not optimized for peak performance. Use it as a foundation you can extend and adapt for production with [Infrastructure as Code (IaC) tools](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
+
+- To test or develop against Camunda 8, consider signing up for our [SaaS offering](https://camunda.com/platform/).
+- If you already have two Amazon EKS clusters (peered together) and an S3 bucket, skip ahead to [deploy Camunda 8 via Helm charts](#3-deploy-camunda-8-via-helm-charts).
+
+:::warning
+
+Reference architectures and examples provided in this guide are not turnkey modules. Camunda recommends cloning the repository and modifying it locally.
+
+You are responsible for operating and maintaining the infrastructure. Camunda updates the reference architecture over time and changes may not be backward compatible. You can use these updates to upgrade your customized codebase as needed.
+
+:::
+
+:::danger Cost management
+
+This guide will incur costs on your cloud provider account, specifically for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), traffic between regions, and S3. For more details, see [AWS EKS pricing](https://aws.amazon.com/eks/pricing/) and the [AWS Pricing Calculator](https://calculator.aws/#/). Costs vary by region.
+
+:::
+
+### Outcome
 
 <!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
 <!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
@@ -49,28 +78,41 @@ Following this guide will incur costs on your Cloud provider account, namely for
 _Infrastructure diagram for a dual-region EKS setup (click on the image to open the PDF version)_
 [![Infrastructure Diagram EKS Dual-Region](./assets/eks-dual-region.jpg)](./assets/eks-dual-region.pdf)
 
-Completion of this tutorial will result in:
+After completing this guide, you will have:
 
 - Two Amazon EKS Kubernetes clusters in two different geographic regions with each four nodes ready for the Camunda 8 dual-region installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - A [VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) between the two EKS clusters, allowing cross-cluster communication between different regions.
 - An [Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) (S3) bucket for [Elasticsearch backups](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html).
 
-## Environment prerequisites
+## 1. Configure AWS and apply Terraform
 
-There are two regions (`REGION_0` and `REGION_1`), each with its own Kubernetes cluster (`CLUSTER_0` and `CLUSTER_1`).
+### Obtain a copy of the reference architecture
 
-To streamline the execution of the subsequent commands, it is recommended to export multiple environment variables within your terminal.
-Additionally, it is recommended to manifest those changes for future interactions with the dual-region setup.
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-dual-region/). This material will be used throughout the rest of this documentation.
 
-1. Git clone or fork the repository [c8-multi-region](https://github.com/camunda/c8-multi-region):
+The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module maintained by a third party.
 
-```shell
-git clone https://github.com/camunda/c8-multi-region.git
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-dual-region/procedure/get-your-copy.sh
 ```
 
-2. The cloned repository and folder `aws/dual-region/scripts/` provides a helper script [export_environment_prerequisites.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_prerequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
-3. You must adjust these environment variable values within the script to your needs.
+With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
+
+### Export environment variables
+
+To streamline the execution of the subsequent commands, it is recommended to export multiple environment variables within your terminal.
+
+There are two regions (`REGION_0` and `REGION_1`), each with its own Kubernetes cluster (`CLUSTER_0` and `CLUSTER_1`). It is recommended to save these changes for future interactions with the dual-region setup.
+
+1. Navigate to the `procedure` folder within your cloned repository:
+
+```shell
+cd aws/kubernetes/eks-dual-region/procedure
+```
+
+2. The folder provides a helper script [export_environment_prerequisites.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/export_environment_prerequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
+3. Adjust the environment variable values within the script to your needs.
 
 :::caution
 
@@ -90,36 +132,30 @@ Using the same namespace names on both clusters won't work as CoreDNS won't be a
 The dot is required to export those variables to your shell and not a spawned subshell.
 
 ```shell reference
-https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_prerequisites.sh
+https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/export_environment_prerequisites.sh
 ```
 
-## Installing Amazon EKS clusters with Terraform
+### Dual-region EKS cluster module setup
 
-### Prerequisites
+This module provides the foundational configuration for AWS access and Terraform usage.
 
-1. From your cloned repository, navigate to `aws/dual-region/terraform`. This contains the Terraform base configuration for the dual-region setup.
+We use [Terraform modules](https://developer.hashicorp.com/terraform/language/modules) to abstract resources into reusable components and simplify infrastructure management.
 
-### Contents elaboration
+The [Camunda AWS EKS cluster module](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/eks-cluster/) is publicly available and serves as a robust starting point for deploying Amazon EKS clusters. Review the module before implementation to understand its structure and capabilities.
 
-#### config.tf
+The module is locally sourced in your clone. Any changes you make to the module in your repository take effect immediately in your setup.
+
+#### Terraform files overview
+
+From your cloned repository, navigate to `aws/kubernetes/eks-dual-region/terraform/clusters`. This contains the Terraform base configuration for the dual-region setup.
+
+##### config.tf
 
 This file contains the [backend](https://developer.hashicorp.com/terraform/language/backend) and [provider](https://developer.hashicorp.com/terraform/language/providers/configuration) configuration, meaning where to store the [Terraform state](https://developer.hashicorp.com/terraform/language/state) and which providers to use, their versions, and potential credentials.
 
 The important part of `config.tf` is the initialization of two AWS providers, as you need one per region and this is a limitation by AWS given everything is scoped to a region.
 
-:::note
-
-It's recommended to use a different backend than `local`. Find more information in the [Terraform documentation](https://developer.hashicorp.com/terraform/language/backend).
-
-:::
-
-:::caution
-
-Do not store sensitive information (credentials) in your Terraform files.
-
-:::
-
-#### clusters.tf
+##### clusters.tf
 
 This file is using [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allows abstracting resources into reusable components.
 
@@ -127,7 +163,7 @@ The Terraform modules of [AWS EKS](https://github.com/camunda/camunda-deployment
 
 This contains the declaration of the two clusters. One of them has an explicit provider declaration, as otherwise everything is deployed to the default AWS provider, which is limited to a single region.
 
-#### vpc-peering.tf
+##### vpc-peering.tf
 
 For a multi-region setup, you need to have the [virtual private cloud (VPC)](https://aws.amazon.com/vpc/) peered to route traffic between regions using private IPv4 addresses and not publicly route the traffic and expose it. For more information, review the [AWS documentation on VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html).
 
@@ -137,24 +173,24 @@ The previously mentioned [Camunda module](https://github.com/camunda/camunda-dep
 
 This file covers the VPC peering between the two VPCs and allow any traffic between those two by adjusting each cluster's security groups.
 
-#### s3.tf
+##### s3.tf
 
 For Elasticsearch, an S3 bucket is required to allow [creating and restoring snapshots](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html). There are [alternative ways](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html), but since this is focused on AWS, it makes sense to remain within the same cloud environment.
 
 This file covers the declaration of an S3 bucket to use for the backups. Additionally, a service account with access to use within the Kubernetes cluster to configure Elasticsearch to access the S3 bucket.
 
-#### output.tf
+##### output.tf
 
 [Terraform outputs](https://developer.hashicorp.com/terraform/language/values/outputs) allow you to reuse generated values in future steps. For example, the access keys of the service account with S3 access.
 
-#### variables.tf
+##### variables.tf
 
 This file contains various variable definitions for both [local](https://developer.hashicorp.com/terraform/language/values/locals) and [input](https://developer.hashicorp.com/terraform/language/values/variables) types. The difference is that input variables require you to define the value on execution. While local variables are permanently defined, they are namely for code duplication purposes and readability.
 
-### Preparation
+#### Preparation
 
-1. Adjust any values in the [variables.tf](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/terraform/variables.tf) file to your liking. For example, the target regions and their name or CIDR blocks of each cluster.
-2. Make sure that any adjustments are reflected in your [environment prerequisites](#environment-prerequisites) to ease the [in-cluster setup](#in-cluster-setup).
+1. Adjust any values in the [variables.tf](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/terraform/clusters/variables.tf) file to your liking. For example, the target regions and their name or CIDR blocks of each cluster.
+2. Make sure that any adjustments are reflected in your [environment variables](#export-environment-variables) to ease the [cluster configuration](#2-preparation-for-camunda-8-installation).
 3. Set up the authentication for the `AWS` provider.
 
 :::note
@@ -168,40 +204,130 @@ There are several ways to authenticate the `AWS` provider:
 
 :::
 
-### Execution
+### Terraform prerequisites
 
-:::caution
+To manage the infrastructure for Camunda 8 on AWS using Terraform, we need to set up Terraform's backend to store the state file remotely in an S3 bucket. This ensures secure and persistent storage of the state file.
 
-A user who creates resources in AWS will therefore own these resources. In this particular case, the user will always have admin access to the Kubernetes cluster until the cluster is deleted.
+:::note
+Advanced users may want to handle this part differently and use a different backend. The backend setup provided is an example for new users.
+:::
 
-Therefore, it can make sense to create an extra [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) which credentials are used for Terraform purposes.
+#### Set up AWS authentication
+
+The [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. Before you can use the provider, you must authenticate it using your AWS credentials.
+
+:::caution Ownership of the created resources
+
+A user who creates resources in AWS will always retain administrative access to those resources, including any Kubernetes clusters created. It is recommended to create a dedicated [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) for Terraform purposes, ensuring that the resources are managed and owned by that user.
 
 :::
 
-1. Open a terminal and navigate to `aws/dual-region/terraform`.
-2. Initialize the working directory:
+You can further change the region and other preferences and explore different [authentication](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) methods:
 
-```hcl
-terraform init -upgrade
+- For development or testing purposes you can use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). If you have configured your AWS CLI, Terraform will automatically detect and use those credentials.
+  To configure the AWS CLI:
+
+  ```bash
+  aws configure
+  ```
+
+  Enter your `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, region, and output format. These can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+
+- For production environments, we recommend the use of a dedicated IAM user. Create [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the new IAM user via the console, and export them as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+
+#### Create an S3 bucket for Terraform state management
+
+Before setting up Terraform, you need to create an S3 bucket that will store the state file. This is important for collaboration and to prevent issues like state file corruption.
+
+To start, set the region as an environment variable upfront to avoid repeating it in each command:
+
+```bash
+export AWS_REGION=<your-region>
 ```
 
-3. Apply the configuration files:
+Replace `<your-region>` with your chosen AWS region (for example, `eu-central-1`).
 
-```hcl
-terraform apply
+Now, follow these steps to create the S3 bucket with versioning enabled:
+
+1. Open your terminal and ensure the AWS CLI is installed and configured.
+
+2. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
+   ```
+
+3. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-versioning.sh
+   ```
+
+4. Secure the bucket by blocking public access:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-private.sh
+   ```
+
+5. Verify versioning is enabled on the bucket:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
+   ```
+
+This S3 bucket will now securely store your Terraform state files with versioning enabled.
+
+#### Initialize Terraform
+
+Once your authentication is set up, you can initialize your Terraform project. The previous steps configured a dedicated S3 Bucket (`S3_TF_BUCKET_NAME`) to store your state, and the following creates a bucket key that will be used by your configuration.
+
+Configure the backend and download the necessary provider plugins:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
 ```
 
-If you have not set a default value for `cluster_name`, you will be asked to provide a suitable name.
+Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
 
-4. After reviewing the plan, you can type `yes` to confirm and apply the changes.
+### Create the EKS clusters
 
-At this point, Terraform will create the Amazon EKS clusters with all the necessary configurations. The completion of this process may require approximately 20-30 minutes.
+:::note Secret management
 
-## In-cluster setup
+We strongly recommend managing sensitive information using a secure secrets management solution like HashiCorp Vault. For details on how to inject secrets directly into Terraform via Vault, see the [Terraform Vault Secrets Injection Guide](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
 
-Now that you have created two peered Kubernetes clusters with Terraform, you will still have to configure various things to make the dual-region work:
+:::
 
-### Cluster access
+1. Open a terminal in the reference folder where `config.tf` and other `.tf` files are.
+
+   ```bash
+      cd ./aws/kubernetes/eks-dual-region/terraform/clusters/
+   ```
+
+2. Perform a final initialization for anything changed throughout the guide:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
+   ```
+
+3. Plan the configuration files:
+
+   ```bash
+   terraform plan -out cluster.plan # describe what will be created
+   ```
+
+4. After reviewing the plan, you can confirm and apply the changes.
+
+   ```bash
+   terraform apply cluster.plan     # apply the creation
+   ```
+
+Terraform will now create the Amazon EKS clusters with all the necessary configurations. The completion of this process may require approximately 20-30 minutes for each component.
+
+## 2. Preparation for Camunda 8 installation
+
+Now that you have created two peered Kubernetes clusters with Terraform, you will need to configure various components to make the dual-region setup work.
+
+### Access the created EKS clusters
 
 To ease working with two clusters, create or update your local `kubeconfig` to contain those new contexts. Using an alias for those new clusters allows you to directly use kubectl and Helm with a particular cluster.
 
@@ -215,9 +341,9 @@ aws eks --region $REGION_1 update-kubeconfig --name $CLUSTER_1 --alias $CLUSTER_
 
 The region and name must align with the values you have defined in Terraform.
 
-### DNS chaining
+### Configure DNS chaining
 
-This allows for easier communication between the two clusters by forwarding DNS queries from the region 0 cluster to the region 1 cluster and vice versa.
+DNS chaining allows for easier communication between the two clusters by forwarding DNS queries from the region 0 cluster to the region 1 cluster and vice versa.
 
 <CoreDNSKubeDNS />
 
@@ -228,11 +354,11 @@ You are configuring the CoreDNS from the cluster in **Region 0** to resolve cert
 1. Expose `kube-dns`, the in-cluster DNS resolver via an internal load-balancer in each cluster:
 
 ```shell
-kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/aws/dual-region/kubernetes/internal-dns-lb.yml
-kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/aws/dual-region/kubernetes/internal-dns-lb.yml
+kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/main/aws/kubernetes/eks-dual-region/procedure/manifests/internal-dns-lb.yml
+kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/main/aws/kubernetes/eks-dual-region/procedure/manifests/internal-dns-lb.yml
 ```
 
-2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_core_dns_entry.sh) in the folder `aws/dual-region/scripts/` of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
+2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/generate_core_dns_entry.sh) in the folder `aws/kubernetes/eks-dual-region/procedure/` of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment variables](#export-environment-variables) since the script builds on top of it.
 
 ```shell
 ./generate_core_dns_entry.sh
@@ -240,7 +366,7 @@ kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/
 
 3. The script will retrieve the IPs of the load balancer via the AWS CLI and return the required config change.
 4. The script prints the `kubectl edit` commands to change the DNS settings of each cluster inline. Copy the statement between the placeholders to edit the CoreDNS configmap in cluster 0 and cluster 1, depending on the placeholder.  
-   An alternative to inline editing is to create two copies of the file `kubernetes/coredns.yml`, one for each cluster. Add the section generated by the script to each file. Apply the changes to each cluster with e.g. `kubectl --context cluster-london -n kube-system apply -f file.yml`. Replace the `context` parameter with your current values.
+   An alternative to inline editing is to create two copies of the file [./manifests/coredns.yml](https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-dual-region/procedure/manifests/coredns.yml), one for each cluster. Add the section generated by the script to each file. Apply the changes to each cluster with e.g. `kubectl --context cluster-london -n kube-system apply -f file.yml`. Replace the `context` parameter with your current values.
 
 <details>
   <summary>Example output</summary>
@@ -345,11 +471,11 @@ kubectl --context $CLUSTER_0 logs -f deployment/coredns -n kube-system
 kubectl --context $CLUSTER_1 logs -f deployment/coredns -n kube-system
 ```
 
-### Test DNS chaining
+#### Verify DNS chaining
 
-The script [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/test_dns_chaining.sh) within the folder `aws/dual-region/scripts/` of the repository will help to test that the DNS chaining is working by using nginx pods and services to ping each other.
+The script [test_dns_chaining.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/test_dns_chaining.sh) within the folder `aws/kubernetes/eks-dual-region/procedure/` of the repository will help to test that the DNS chaining is working by using nginx pods and services to ping each other.
 
-1. Execute the [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/test_dns_chaining.sh). Make sure you have previously exported the [environment prerequisites](#environment-prerequisites) as the script builds on top of it.
+1. Execute the [test_dns_chaining.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/test_dns_chaining.sh). Make sure you have previously exported the [environment variables](#export-environment-variables) as the script builds on top of it.
 
 ```shell
 ./test_dns_chaining.sh
@@ -370,21 +496,21 @@ This step defines a custom `StorageClass` that:
 
 #### Apply the StorageClass
 
-Run the following script from the context of the `aws/dual-region/scripts/` folder to apply the new [storage class](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/kubernetes/storage-class.yml) and set it as default:
+Run the following script from the context of the `aws/kubernetes/eks-dual-region/procedure/` folder to apply the new [storage class](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/manifests/storage-class.yml) and set it as default:
 
 ```bash reference
-https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/storageclass-configure.sh
+https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/storageclass-configure.sh
 ```
 
 To verify completion of the operation, run:
 
 ```bash reference
-https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/storageclass-verify.sh
+https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/storageclass-verify.sh
 ```
 
 You must apply the custom `StorageClass` before installing the Camunda Helm chart so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
 
-## Deploy Camunda 8 to the clusters
+## 3. Deploy Camunda 8 via Helm charts
 
 ### Create the secret for Elasticsearch
 
@@ -392,14 +518,14 @@ Elasticsearch will need an S3 bucket for data backup and restore procedure, requ
 
 You can pull the data from Terraform since you exposed those via `output.tf`.
 
-1. From the Terraform code location `aws/dual-region/terraform`, execute the following to export the access keys to environment variables. This will allow an easier creation of the Kubernetes secret via the command line:
+1. From the Terraform code location `aws/kubernetes/eks-dual-region/terraform/clusters`, execute the following to export the access keys to environment variables. This will allow an easier creation of the Kubernetes secret via the command line:
 
 ```shell
 export AWS_ACCESS_KEY_ES=$(terraform output -raw s3_aws_access_key)
 export AWS_SECRET_ACCESS_KEY_ES=$(terraform output -raw s3_aws_secret_access_key)
 ```
 
-2. From the folder `aws/dual-region/scripts` of the repository, execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/create_elasticsearch_secrets.sh). This will use the exported environment variables from **Step 1** to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment prerequisites](#environment-prerequisites).
+2. From the folder `aws/kubernetes/eks-dual-region/procedure` of the repository, execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/create_elasticsearch_secrets.sh). This will use the exported environment variables from **Step 1** to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment variables](#export-environment-variables).
 
 ```shell
 ./create_elasticsearch_secrets.sh
@@ -420,11 +546,9 @@ The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.
 
 ### Camunda 8 Helm chart prerequisites
 
-Within the cloned repository, navigate to `aws/dual-region/kubernetes`. This contains a dual-region example setup.
+Within the cloned repository, navigate to `aws/kubernetes/eks-dual-region/helm-values`. This contains a dual-region example setup.
 
-#### Content elaboration
-
-Our approach is to work with layered Helm values files:
+The approach is to work with layered Helm values files:
 
 - Have a base `camunda-values.yml` that is generally applicable for both Camunda installations
 - Two overlays that are for region 0 and region 1 installations
@@ -473,19 +597,19 @@ This overlay contains the multi-region identification for the cluster in region 
 
 This overlay contains the multi-region identification for the cluster in region 1.
 
-#### Preparation
+### Configure Zeebe environment variables
 
 :::caution
 You must change the following environment variables for Zeebe. The default values will not work for you and are only for illustration.
 :::
 
-The base `camunda-values.yml` in `aws/dual-region/kubernetes` requires adjustments before installing the Helm chart:
+The base `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` requires adjustments before installing the Helm chart:
 
 - `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS`
 - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
 - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
 
-1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [environment prerequisites](#environment-prerequisites) for namespaces and regions.
+1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/camunda-deployment-references/tree/infraex-560/aws/kubernetes/eks-dual-region/procedure/generate_zeebe_helm_values.sh) in the repository folder `aws/kubernetes/eks-dual-region/procedure/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [export environment variables](#export-environment-variables) section for namespaces and regions.
 
 ```shell
 ./generate_zeebe_helm_values.sh
@@ -528,19 +652,19 @@ Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_CAMUNDA
 
 2. As the script suggests, replace the environment variables within `camunda-values.yml`.
 
-### Deploy Camunda 8
+### Install Camunda 8 using Helm
 
-From the terminal context of `aws/dual-region/kubernetes`, execute the following:
+From the terminal context of `aws/kubernetes/eks-dual-region/helm-values`, and ensure you have previously exported the [environment variables](#export-environment-variables), execute the following:
 
 ```shell
-helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
+helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
   --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
   -f camunda-values.yml \
   -f region0/camunda-values.yml
 
-helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
+helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
   --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
@@ -548,7 +672,7 @@ helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
   -f region1/camunda-values.yml
 ```
 
-### Verify Camunda 8
+## 4. Verify connectivity to Camunda 8
 
 :::info Authentication changes in 8.8+
 
@@ -814,3 +938,9 @@ curl -u demo:demo -L -X GET 'http://localhost:8080/v2/topology' \
 
   </summary>
 </details>
+
+## Next steps
+
+After successfully deploying Camunda 8 in a dual-region setup, consider the following next steps:
+
+- [Dual-region operational procedures](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) - Learn how to perform failover and failback operations.

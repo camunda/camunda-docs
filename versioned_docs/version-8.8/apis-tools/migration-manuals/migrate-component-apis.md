@@ -8,7 +8,11 @@ description: "Making necessary changes to continue using Camunda's V1 component 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This document outlines the necessary changes to continue using the component REST APIs after upgrading to Camunda 8.8—if migration to the new [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) is not yet possible.
+Learn about the changes required to continue using Camunda's V1 component REST APIs.
+
+## About
+
+This document outlines the changes required to continue using the component REST APIs after upgrading to Camunda 8.8, if migration to the new [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) is not yet possible.
 
 In this context, **components** refer to the standalone Camunda applications **Operate** and **Tasklist**, each exposing its own V1 REST API.
 
@@ -18,12 +22,15 @@ As of version 8.8, the V1 component APIs are deprecated. We strongly recommend [
 
 ## Migrate V1 APIs
 
-With Camunda 8.8, permissions for resource access have been reworked. For the V1 APIs, this means that access to endpoints now depends on specific read and write permissions for related resources.  
+With Camunda 8.8, permissions for resource access have been reworked. For the V1 APIs, this means that access to endpoints now depends on specific read and write permissions for related resources.
+
 To continue using the V1 APIs, users and clients must be assigned the appropriate permissions under [the new authorization model](/components/concepts/access-control/authorizations.md).
 
 Users now require wildcard (`*`) permissions for the resource type and permission type being accessed.
 
+:::info
 For guidance on assigning permissions in Identity, see the [Identity authorization guide](../../components/identity/authorization.md).
+:::
 
 ### Mapping Operate permissions to new authorizations
 

@@ -30,17 +30,18 @@ See the [secondary storage documentation](/self-managed/components/orchestration
 
 ## Zeebe Elasticsearch or OpenSearch exporter
 
-:::note
-**Version 8.8+:** The Importer is required only for **migration scenarios** (upgrades from 8.7). Keep it enabled until all remaining 8.7 records have been imported. After that, the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) takes over and writes directly to the Operate indices. The Importer can then be safely disabled for subsequent restarts or deployments.
+In 8.8+ installations, Operate reads data from Operate indices written by the
+[Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
 
-New 8.8+ installations do **not** need to enable or configure the Importer. Its only purpose is to temporarily support migrations from 8.7 data.
+:::note
+The Operate Importer is used only during 8.7 to 8.8 migrations.
+New 8.8+ installations do not require it.
 :::
 
-For Elasticsearch, Operate imports data from indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe/exporters/elasticsearch-exporter.md).
+During 8.7 to 8.8 migrations, Operate imports remaining historical data from indices created by the [Zeebe Elasticsearch exporter](../zeebe/exporters/elasticsearch-exporter.md)
+or the [Zeebe OpenSearch exporter](../zeebe/exporters/opensearch-exporter.md).
 
-For OpenSearch, Operate imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe/exporters/opensearch-exporter.md).
-
-Therefore, settings for this Elasticsearch or OpenSearch connection must be defined and must correspond to the settings on the Zeebe side.
+In both cases, the Elasticsearch or OpenSearch connection settings must match the exporter configuration used by Zeebe.
 
 ### Settings to connect and import
 

@@ -6,10 +6,6 @@ description: Configure your RPA workers for production use cases.
 
 Use the RPA worker’s production configuration options to run RPA scripts reliably at scale.
 
-:::info
-To get started, see [get started with RPA](./getting-started.md).
-:::
-
 ## Configuration options
 
 ### Transition from a development setup

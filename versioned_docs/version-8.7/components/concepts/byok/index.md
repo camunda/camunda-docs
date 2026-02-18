@@ -47,7 +47,7 @@ With BYOK, you maintain visibility through **AWS CloudTrail** and **Amazon Cloud
 | Camunda  | Surface any key-related errors in the Console            |
 
 :::warning Key management
-If your AWS KMS key is disabled, deleted, or permissions are revoked, your cluster and its data become inaccessible.
+If your AWS KMS key is disabled, deleted, or permissions are revoked, your cluster and its data become inaccessible. For details on how Camunda responds when an external AWS KMS key becomes disabled, deleted, or misconfigured, see [key state behavior](/components/concepts/byok/key-state-behavior.md).
 :::
 
 ## Cost implications

@@ -103,7 +103,7 @@ Define address of the [Orchestration Cluster REST API](/apis-tools/orchestration
 ```yaml
 camunda:
   client:
-    rest-address: http://localhost:8088
+    rest-address: http://localhost:8080
 ```
 
 :::note
@@ -234,6 +234,14 @@ This will load this preset:
 ```yaml reference referenceLinkText="Source" title="OIDC authentication"
 https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/oidc.yaml
 ```
+
+:::note
+There are three ways to define the token URL. They're prioritized as follows:
+
+1. Provide the `camunda.client.auth.token-url`.
+2. Provide the issuer's well-known configuration URL `camunda.client.auth.well-known-configuration-url`. This extracts the token URL from the `token_url` field in the loaded configuration.
+3. Provide the issuer's URL `camunda.client.auth.issuer-url`. This generates the well-known configuration URL and extracts the token URL from the `token_url` field in the loaded configuration.
+   :::
 
 #### Credentials cache path
 

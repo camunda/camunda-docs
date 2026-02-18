@@ -320,17 +320,6 @@ On Windows, open this page directly: [http://localhost:9200/\_cluster/health](ht
    docker compose -f docker-compose-8.8/docker-compose.yaml down -v
    ```
 
-### Cannot access services in Docker mode
-
-**Problem:** Services are not reachable at the expected URLs when using Docker mode.
-
-**Solution:**  
-When Camunda 8 Run is started with `--docker`, services may run on different ports.
-
-- Operate: http://localhost:8088/operate
-
-Refer to the [Docker Compose documentation](./docker-compose.md) for the complete list of service URLs.
-
 ## Configuration issues
 
 ### Custom configuration not loading

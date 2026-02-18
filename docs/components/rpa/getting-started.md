@@ -11,21 +11,15 @@ import RpaTaskConfig from './img/rpa-task-configuration.png';
 
 Use the RPA worker and Camunda Modeler to create, test, and automate RPA scripts.
 
-:::tip
-
-- New to RPA? See the [overview page](/components/rpa/overview.md) to learn about robotic process automation (RPA) capabilities.
-- Before getting started, review [RPA known issues](https://github.com/camunda/rpa-worker/discussions/categories/known-issues) to ensure environment compatibility.
-  :::
-
 ## About the RPA worker
 
-The RPA worker is available on all major platforms (Windows, Linux, and macOS). This lets you automate applications on their native platforms, which is typically Windows. For console applications or browser automation, you can use a lightweight distribution such as the [Docker image](/self-managed/deployment/docker/docker.md).
+The RPA worker is available on all major platforms (Windows, Linux, and macOS). This lets you automate applications on their native platforms, which is typically Windows. For console applications or browser automation, you can use a lightweight distribution such as this [Docker image](../../../self-managed/deployment/docker/).
 
 ## Create your first script
 
 Get started with RPA by creating your first RPA script. [Camunda Modeler](/components/modeler/about-modeler.md) offers an interface for editing and testing your scripts:
 
-1. **Download Camunda Modeler**: Download the latest version of Camunda Modeler from the [Camunda website](https://camunda.com/download/modeler/). Because RPA scripts run locally, the RPA editor is only available in [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
+1. **Download Camunda Modeler**: Download the latest version of Camunda Modeler from the [Camunda website](https://camunda.com/download/modeler/). Because RPA scripts run locally, the RPA editor is only available in [Desktop Modeler](../../modeler/desktop-modeler/).
 2. **Open the RPA script editor**: Open Desktop Modeler and navigate to the RPA script editor under **Testing**.
    <img src={RpaEditorInitial} alt="RPA editor interface showing the initial script view in Desktop Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
@@ -55,8 +49,8 @@ Once you are happy with your script and have tested it locally, you can start au
 ### Link RPA task to BPMN
 
 1. **Deploy the RPA file**:
-   1. If you have not already, [set up client connection credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) for your Modeler.
-   2. Assign the **RPA role** to the client in the [Orchestration Cluster Identity](../identity/role.md#assign-client-to-a-role).
+   1. If you have not already, [set up client connection credentials](../../console/manage-clusters/manage-api-clients/#create-a-client) for your Modeler.
+   2. Assign the **RPA role** to the client in the [Orchestration Cluster Identity](../../identity/role/#assign-client-to-a-role).
    3. Deploy your RPA script file by clicking on the rocket (🚀) icon in Modeler.
    4. Note the ID of your RPA script. You will need this in the next step.
 

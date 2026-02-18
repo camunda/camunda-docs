@@ -75,6 +75,13 @@ In Web Modeler, applied templates can be **saved as a new template**, allowing r
 
 ## B
 
+### Backpressure
+
+Backpressure is a protection mechanism that prevents [Zeebe brokers](#zeebe-broker) from being overloaded when they receive more [client](#zeebe-client) requests than they can process with acceptable latency. Zeebe brokers determine backpressure by using dynamic backpressure algorithms or - if enabled - flow control limits, which measure the rate of records written by the [exporter](#zeebe-exporter). When backpressure is activated, client requests are rejected to maintain system stability.
+
+- [Backpressure](/self-managed/components/orchestration-cluster/zeebe/operations/backpressure.md)
+- [Flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md)
+
 ### Broker
 
 See [Zeebe Broker](#zeebe-broker).
@@ -201,7 +208,7 @@ A BPMN element is part of a [process](#process), defining one part of its BPMN m
 
 ### Element template
 
-An **element template** defines a reusable configuration that extends Modeler with domain-specific BPMN element behavior and UI. Templates describe:
+Use an element template to extend [Modeler](/components/modeler/about-modeler.md) with domain-specific diagram [elements](#element). The user edits such elements through a UI defined by the element template, and in the process configures BPMN element properties in simple and predictable ways. Element templates are used by [connectors](#connector) to create the connector-specific [element](#element) configuration.
 
 - The element(s) they apply to
 - The UI fields shown in the properties panel

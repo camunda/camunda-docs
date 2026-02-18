@@ -6,6 +6,8 @@ description: "A quickstart guide for developers to deploy and run Camunda 8 Self
 ---
 
 import {C8Run} from "@site/src/components/CamundaDistributions";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 :::note
 Camunda 8 Run provides a lightweight, self-managed environment for local development and prototyping. It is not intended for production use.
@@ -22,7 +24,8 @@ Camunda 8 Run includes the following:
 
 - Orchestration Cluster
 - Connectors
-- Elasticsearch (default [secondary storage](/self-managed/concepts/secondary-storage/index.md))
+- H2 (default secondary storage for Camunda 8 Run in 8.9-alpha3)
+- Elasticsearch (bundled, optional, enable when you need full-text indexing or advanced analytics)
 
 Camunda 8 Run also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
@@ -48,22 +51,63 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 1. Download the latest release of <C8Run/> for your operating system and architecture. Opening the `.tgz` file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
-3. Start Camunda 8 Run by running one of the following in your terminal:
+3. Start Camunda 8 Run by following the steps below, depending on your operating system.
 
-- On Mac and Linux:
-  - Run the helper script: `./start.sh`
-  - Or use the CLI command: `./c8run start`
-- On Windows:
-  - Use the CLI command: `.\c8run.exe start`
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
+Run the helper script:
+
+```bash
+./start.sh
+```
+
+Or use the CLI command:
+
+```bash
+./c8run start
+```
+
+</TabItem>
+<TabItem value="windows">
+
+Use the CLI command:
+
+```bash
+.\c8run.exe start
+```
+
+</TabItem>
+</Tabs>
 
 If startup is successful, a browser window for Operate will open automatically. Alternatively, you can access Operate at [http://localhost:8080/operate](http://localhost:8080/operate).
 
-To start Camunda 8 in Docker Compose using Camunda 8 Run you can use the following option. It is equivalent of running `docker compose up -d` :
+To start Camunda 8 in Docker Compose using Camunda 8 Run you can use the following option. It is equivalent of running `docker compose up -d`:
 
-- On Mac and Linux: `./start.sh --docker`
-- On Windows: `.\c8run.exe start --docker`
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
 
-When started with Docker, Operate will be available at [http://localhost:8088/operate](http://localhost:8088/operate).
+```bash
+./start.sh --docker
+```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe start --docker
+```
+
+</TabItem>
+</Tabs>
 
 :::note
 If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-run) to end the current processes, then run the start script again.
@@ -77,6 +121,7 @@ For more advanced or permanent configuration, modify the default `configuration/
 | Argument                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).                                                                                                                                                                                                                                                                                                 |
+| `--extra-driver <path>`    | Copies an external JDBC driver into `camunda-zeebe-<version>/lib` before startup. Use this when running against Oracle, MySQL, or other databases that require a driver that is not bundled with Camunda 8 Run. Repeat the flag to copy multiple jars.                                                                                                                                                                                 |
 | `--username <arg>`         | Configures the first user’s username as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                                       |
 | `--password <arg>`         | Configures the first user’s password as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                                       |
 | `--keystore <arg>`         | Configures the TLS certificate for HTTPS. If not specified, HTTP is used. For more information, see [enabling TLS](#enable-tls).                                                                                                                                                                                                                                                                                                       |
@@ -87,123 +132,289 @@ For more advanced or permanent configuration, modify the default `configuration/
 | `--disable-elasticsearch`  | Prevents the built-in Elasticsearch from starting. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) section for details.                                                                                                                                                                                                                              |
 | `--startup-url`            | The URL to open after startup (e.g., `'http://localhost:8080/operate'`). By default, Operate is opened.                                                                                                                                                                                                                                                                                                                                |
 
-### Start external Elasticsearch
+### Configure or switch secondary storage (H2 or Elasticsearch)
 
-In Camunda 8.9 and later, Camunda 8 Run may not include an embedded Elasticsearch instance.
-If you want to use Elasticsearch, run your own instance and point Camunda 8 Run to it.
+Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts. Elasticsearch remains bundled and supported as an optional alternative that you can enable when you need full-text indexing, search, or advanced analytics.
 
-Start a single-node Elasticsearch container:
+#### Default: H2 (Camunda 8 Run)
 
-```bash
-docker run \
-  -m 1GB \
-  -d \
-  --name elasticsearch \
-  -p 9200:9200 \
-  -p 9300:9300 \
-  -e "discovery.type=single-node" \
-  -e "xpack.security.enabled=false" \
-  elasticsearch:8.18.6
+The default Camunda 8 Run configuration in 8.9-alpha3 uses an H2 database for secondary storage. This is convenient for local development and demos.
+
+In-memory H2 example:
+
+```yaml
+data:
+  secondary-storage:
+    type: rdbms
+    rdbms:
+      url: jdbc:h2:mem:camunda
+      username: sa
+      password:
 ```
 
-Create an `application.yaml` that points Camunda 8 Run to your external Elasticsearch:
+To persist H2 data to disk:
 
 ```yaml
 camunda:
   data:
     secondary-storage:
-      elasticsearch:
-        url: "http://127.0.0.1:9200/"
+      type: rdbms
+      rdbms:
+        url: jdbc:h2:file:./camunda-data/h2db
+        username: sa
+        password:
 ```
 
-Start Camunda 8 Run with the embedded Elasticsearch disabled and your custom config:
+<details>
 
-```bash
-./start.sh --disable-elasticsearch --config application.yaml
-```
-
-Use external Elasticsearch when you need indexing, search, or full Operate/Tasklist functionality.
-
-## Work with Camunda 8 Run
-
-### Access Camunda components
-
-Camunda 8 Run uses basic authentication with demo/demo for all web interfaces. OIDC/Keycloak is not included in this distribution.  
-You can log in to all web interfaces using the default credentials:
-
-- **Username:** `demo`
-- **Password:** `demo`
-
-These web interfaces are available at:
-
-- **Operate:** http://localhost:8080/operate
-- **Tasklist:** http://localhost:8080/tasklist
-- **Identity:** http://localhost:8080/identity
-
-The following components do not have a web interface, but their endpoints are useful for additional configuration:
-
-- **Orchestration Cluster REST API:** http://localhost:8080/v2/
-- **Inbound Connectors API:** http://localhost:8086/
-- **Zeebe API (gRPC):** http://localhost:26500/
-- **Metrics (Prometheus):** http://localhost:9600/actuator/prometheus
-- **Swagger UI (API Explorer):** http://localhost:8080/swagger-ui/index.html
-
-:::note
-
-- The URLs for the Docker Compose application can be found in the [Docker Compose](#docker-compose) documentation.
-- The Connectors API does not provide a web interface. If you access its URL in a browser, you may see a login page, but it cannot be used to sign in. Use the API endpoints directly instead.
-  :::
-
-### Deploy diagrams from Desktop Modeler
-
-Make sure you have installed [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md) before continuing.
-
-To [deploy diagrams](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, use the following configuration:
-
-- **Target:** Self-Managed
-- **Cluster endpoint:** `http://localhost:26500` (Zeebe Gateway)
-- **Authentication:** None
-
-A success notification will display when complete. [Start a new process instance](/components/modeler/desktop-modeler/start-instance.md) to view your running process in Operate.
-
-### Use built-in and custom connectors
-
-Desktop Modeler [automatically fetches](/components/modeler/desktop-modeler/use-connectors.md#automatic-connector-template-fetching) templates for pre-built connectors. [Custom connectors](/components/connectors/custom-built-connectors/connector-sdk.md) can also be added to your Camunda 8 Run distribution.
-
-To add a custom connector:
-
-1. Place the connector’s `.jar` file in the `/custom_connectors` folder within the `/c8run` directory.
-2. Place the element template in the appropriate folder for your installation. See [Search Paths](/components/modeler/desktop-modeler/search-paths/search-paths.md) for more information.
-
-Once configured, your connectors are available for use in Modeler.
-
-### Configure Connector secrets
-
-Connector Secrets can be provided as environment variables by adding them to the `.env` file in the root folder.  
-When starting Camunda 8 Run with the `--docker` option, add the connector secrets to the `connector-secrets.txt` file in the docker-compose folder.
-
-### Use Camunda APIs
-
-All APIs **do not require authentication by default** in Camunda 8 Run and can be accessed without credentials or tokens.
-
-Available APIs include:
-
-- [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
-- [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md)
-
-### Enable authentication and authorization
-
-By default, Camunda 8 Run configures authentication for web interfaces (demo/demo) but all API endpoints are open and do not require authentication.  
-To secure APIs, enable authorization in `application.yaml`.
-
-You can either:
-
-- Update the existing `configuration/application.yaml`, or
-- Create a new `application.yaml` in the `/c8run` folder and pass it at startup using the [`--config` flag](#configuration-options):
+<summary>Full example configuration</summary>
 
 ```yaml
 camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:h2:mem:camunda
+        username: sa
+        password:
+        flushInterval: PT0.5S
+        queueSize: 1000
   security:
+    initialization:
+      users:
+        - username: demo
+          password: demo
+          name: Demo
+          email: demo@example.com
+    authentication:
+      method: BASIC
+      unprotected-api: true
+    authorizations:
+      enabled: false
+
+zeebe:
+  broker:
+    network:
+      host: localhost
+      advertisedHost: localhost
+  gateway:
+    cluster:
+      initialContactPoints: zeebe:26502
+      memberId: identity
+
+spring:
+  profiles:
+    active: "broker,consolidated-auth,identity,tasklist"
+```
+
+</details>
+
+:::note
+Operate v2 has limited functionality in 8.9-alpha3 when running against H2. Full Operate support is planned for a later alpha. Tasklist and the v2 REST API have parity across supported secondary storage backends.
+:::
+
+#### External relational database options
+
+Use an external relational database for secondary storage (PostgreSQL, MariaDB, MySQL, Oracle, or Microsoft SQL Server).
+
+1. Set `camunda.data.secondary-storage` with the JDBC URL and credentials.
+2. Ensure the database is reachable before starting Camunda 8 Run.
+3. If you already run a database, reuse the same config and update the URL, host/port, and credentials.
+4. If a separate JDBC driver is required, add it with `--extra-driver` or drop the JAR into `camunda-zeebe-<version>/lib`.
+
+<Tabs
+groupId="secondary-storage-rdbms"
+defaultValue="postgresql"
+values={[
+{label: 'PostgreSQL', value: 'postgresql'},
+{label: 'MariaDB', value: 'mariadb'},
+{label: 'MySQL', value: 'mysql'},
+{label: 'Oracle', value: 'oracle'},
+{label: 'Microsoft SQL Server', value: 'mssql'},
+]}>
+<TabItem value="postgresql">
+
+**Secondary storage config**
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:postgresql://localhost:5432/camunda_secondary
+        username: camunda
+        password: camunda
+```
+
+**Start database (Docker)**
+
+```bash
+docker run -d --name camunda-postgres \
+  -e POSTGRES_USER=camunda \
+  -e POSTGRES_PASSWORD=camunda \
+  -e POSTGRES_DB=camunda_secondary \
+  -p 5432:5432 postgres:latest
+```
+
+</TabItem>
+<TabItem value="mariadb">
+
+**Secondary storage config**
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:mariadb://localhost:3306/camunda_secondary?serverTimezone=UTC
+        username: camunda
+        password: camunda
+```
+
+**Start database (Docker)**
+
+```bash
+docker run -d --name camunda-mariadb \
+  -e MARIADB_USER=camunda \
+  -e MARIADB_PASSWORD=camunda \
+  -e MARIADB_ROOT_PASSWORD=rootcamunda \
+  -e MARIADB_DATABASE=camunda_secondary \
+  -p 3306:3306 mariadb:11.4
+```
+
+:::note
+No extra driver is required; MariaDB ships with the distribution.
+:::
+
+</TabItem>
+<TabItem value="mysql">
+
+**Secondary storage config**
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:mysql://localhost:3307/camunda_secondary?serverTimezone=UTC
+        username: camunda
+        password: camunda
+```
+
+**Start database (Docker)**
+
+```bash
+docker run -d --name camunda-mysql \
+  -e MYSQL_ROOT_PASSWORD=rootcamunda \
+  -e MYSQL_USER=camunda \
+  -e MYSQL_PASSWORD=camunda \
+  -e MYSQL_DATABASE=camunda_secondary \
+  -p 3306:3306 mysql:8.4
+```
+
+:::note
+MySQL requires the official Connector/J driver. Copy the JAR into `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/mysql-connector.jar` to `./c8run start`.
+
+Ensure the JDBC URL uses the host port you expose (3306 in the example above).
+:::
+
+</TabItem>
+<TabItem value="oracle">
+
+**Secondary storage config**
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:oracle:thin:@//localhost:1521/FREEPDB1
+        username: camunda
+        password: camunda
+```
+
+**Start database (Docker)**
+
+```bash
+docker run -d --name camunda-oracle \
+  -p 1521:1521 \
+  -e ORACLE_PASSWORD=camunda \
+  -e APP_USER=camunda \
+  -e APP_USER_PASSWORD=camunda \
+  gvenzl/oracle-free:23-slim
+```
+
+:::note
+Download the Oracle JDBC driver (for example, `ojdbc11.jar`) and place it in `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/ojdbc11.jar`.
+:::
+
+</TabItem>
+<TabItem value="mssql">
+
+**Secondary storage config**
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:sqlserver://localhost:1433;databaseName=camunda_secondary;encrypt=false
+        username: camunda
+        password: Camunda123!
+```
+
+**Start database (Docker)**
+
+```bash
+docker run -d --name camunda-mssql \
+  -e ACCEPT_EULA=Y \
+  -e MSSQL_SA_PASSWORD=Camunda123! \
+  -p 1433:1433 \
+  mcr.microsoft.com/mssql/server:2022-latest
+```
+
+</TabItem>
+</Tabs>
+
+#### Optional: Elasticsearch
+
+If you need indexing, search, or full Operate/Tasklist functionality, enable Elasticsearch. Elasticsearch is still bundled with Camunda 8 Run in 8.9 and can be managed by Camunda 8 Run or provided as an external service.
+
+To use Elasticsearch:
+
+```yaml
+data:
+  secondary-storage:
+    type: elasticsearch
+    elasticsearch:
+      url: http://elasticsearch:9200/
+```
+
+Start Camunda 8 Run without `--disable-elasticsearch` to let Camunda 8 Run manage Elasticsearch, or use `--disable-elasticsearch --config <file>` and point to an external cluster.
+
+### Switching between storage types and migration notes
+
+- Switching the secondary storage type (for example, H2 ⇄ Elasticsearch) in 8.9-alpha3 does **not** preserve existing secondary-store data. The system starts with a fresh secondary store.
+- If you upgrade from alpha1/alpha2 and keep the same secondary storage backend, no migration steps are required. Only users who change the storage backend need to update configuration and accept a fresh secondary store.
+- To switch storage, update `data.secondary-storage` in `application.yaml` (or Helm `values.yaml`) and restart Camunda 8 Run. Use `--disable-elasticsearch` to prevent Camunda 8 Run from starting the embedded Elasticsearch when you want to rely on H2 or an external ES instance.
+
+Choose **H2** for quick local development and **Elasticsearch** for production-like scenarios where advanced search/analytics are required.
+
+### Operate limitations in 8.9-alpha3
+
+Operate can run against the default H2 store in 8.9-alpha3, but some user-facing Operate features are intentionally limited in this alpha. This page records the high-level expectations for alpha3:
+
+- Operate may not provide complete analytics, advanced search, or long-running query features when backed by H2.
+- Performance and scaling behavior when using H2 will differ from Elasticsearch in production scenarios.
+- Users who require full Operate feature parity should enable Elasticsearch (embedded or external) until full H2 parity is confirmed in a later alpha.
+
+<!--- Maybe add something like "For engineering details and progress on Operate feature parity, see issue #7315 and the Operate migration tracking in the project board. If we want a precise feature list for alpha3, I can add a checklist here after stakeholder confirmation." ---!>
     authentication:
       # Require authentication for API requests
       unprotected-api: false
@@ -214,9 +425,26 @@ camunda:
 
 Start Camunda 8 Run with the configuration:
 
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
 ```bash
 ./start.sh --config application.yaml
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe start --config application.yaml
+```
+
+</TabItem>
+</Tabs>
 
 Once enabled, API requests must include valid credentials. For example:
 
@@ -248,12 +476,26 @@ camunda:
 
 To shut down (non-Docker) Camunda 8 Run and end all running processes, run the following command from the `c8run` directory:
 
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
 ```bash
 ./shutdown.sh
-
-# Windows:
-# .\c8run.exe stop
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe stop
+```
+
+</TabItem>
+</Tabs>
 
 If you started Camunda 8 Run with Docker `./start.sh --docker`, run the following command instead:
 
@@ -278,7 +520,7 @@ docker ps
 
 ### Enable TLS
 
-TLS can be enabled by providing a local keystore file using the [`--keystore` and `--keystorePassword` configuration options](#configuration-options) at startup. Camunda 8 Run accepts `.jks` certificate files.  
+TLS can be enabled by providing a local keystore file using the [`--keystore` and `--keystorePassword` configuration options](#configuration-options) at startup. Camunda 8 Run accepts `.jks` certificate files.
 Although Camunda 8 Run supports TLS, this is intended only for testing.
 
 :::note
@@ -289,57 +531,40 @@ For details, see [configure a proxy server in Self-Managed](../../../../componen
 
 ### Access metrics
 
-Metrics are enabled in Camunda 8 Run by default and can be accessed at [http://localhost:9600/actuator/prometheus](http://localhost:9600/actuator/prometheus).  
+Metrics are enabled in Camunda 8 Run by default and can be accessed at [http://localhost:9600/actuator/prometheus](http://localhost:9600/actuator/prometheus).
 For more information, see the [metrics](/self-managed/operational-guides/monitoring/metrics.md) documentation.
 
-### Configure or switch secondary storage (Elasticsearch or H2)
+### Configure or switch secondary storage (H2 or Elasticsearch)
 
-Camunda 8 Run supports multiple secondary-storage options.  
-By default, it uses **Elasticsearch**, but you can switch to an RDBMS backend such as **H2** for lightweight local development or testing.
+Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts. Elasticsearch remains bundled and supported as an optional alternative that you can enable when you need full-text indexing, search, or advanced analytics.
 
-#### Default: Elasticsearch
+#### Default: H2 (Camunda 8 Run)
 
-Camunda 8 Run starts with **Elasticsearch** as the default secondary storage.
+The default Camunda 8 Run configuration in 8.9-alpha3 uses an H2 database for secondary storage. This is convenient for local development and demos.
+
+In-memory H2 example:
 
 ```yaml
 data:
   secondary-storage:
-    type: elasticsearch
+    type: rdbms
+    rdbms:
+      url: jdbc:h2:mem:camunda
+      username: sa
+      password:
 ```
 
-#### Optional: H2 (for local testing)
-
-To test Camunda 8 Run with an in-memory H2 database, configure `type: rdbms` as shown below.
-
-:::note Important!
-Disable Operate and webapp backup when using H2; otherwise, Camunda 8 Run will not start correctly.
-:::
+To persist H2 data to disk:
 
 ```yaml
 camunda:
-  backup:
-    webapps:
-      enabled: false
   data:
     secondary-storage:
       type: rdbms
       rdbms:
-        url: jdbc:h2:mem:camunda
+        url: jdbc:h2:file:./camunda-data/h2db
         username: sa
         password:
-        flushInterval: PT0.5S
-        queueSize: 1000
-
-spring:
-  profiles:
-    active: "broker,consolidated-auth,identity,tasklist"
-```
-
-H2 runs in memory by default, so data is lost when you stop Camunda 8 Run.
-To persist data locally, use a file-based configuration such as:
-
-```yaml
-url: jdbc:h2:file:./camunda-data/h2db
 ```
 
 <details>
@@ -348,9 +573,6 @@ url: jdbc:h2:file:./camunda-data/h2db
 
 ```yaml
 camunda:
-  backup:
-    webapps:
-      enabled: false
   data:
     secondary-storage:
       type: rdbms
@@ -367,10 +589,6 @@ camunda:
           password: demo
           name: Demo
           email: demo@example.com
-      defaultRoles:
-        admin:
-          users:
-            - demo
     authentication:
       method: BASIC
       unprotected-api: true
@@ -395,20 +613,32 @@ spring:
 </details>
 
 :::note
-Operate and Tasklist work with H2 only after both migrate to the v2 APIs.  
-Use H2 for testing Camunda 8 Run only, and disable Operate and webapp backup.
+Operate v2 has limited functionality in 8.9-alpha3 when running against H2; full Operate support is planned for a later alpha. Tasklist and the v2 REST API have parity across supported secondary storage backends.
 :::
 
-### Switching between storage types
+#### Optional: Elasticsearch
 
-To change storage in Camunda 8 Run:
+If you need indexing, search, or full Operate/Tasklist functionality, enable Elasticsearch. Elasticsearch is still bundled with Camunda 8 Run in 8.9-alpha3 and can be managed by Camunda 8 Run or provided as an external service.
 
-- **Switch to Elasticsearch (default)** — remove or comment out the `data.secondary-storage` section.
-- **Switch to H2** — add the H2 configuration shown above and restart Camunda 8 Run.
-- **Switch back to Elasticsearch** — delete or comment out the H2 section and restart Camunda 8 Run.
+To use Elasticsearch:
 
-Choose **H2** for quick local development with minimal setup,  
-and **Elasticsearch** for production-like scenarios or when using Operate and Tasklist.
+```yaml
+data:
+  secondary-storage:
+    type: elasticsearch
+    elasticsearch:
+      url: http://elasticsearch:9200/
+```
+
+Start Camunda 8 Run without `--disable-elasticsearch` to let Camunda 8 Run manage Elasticsearch, or use `--disable-elasticsearch --config <file>` and point to an external cluster.
+
+### Switching between storage types and migration notes
+
+- Switching the secondary storage type (for example, H2 ⇄ Elasticsearch) in 8.9-alpha3 does **not** preserve existing secondary-store data. The system starts with a fresh secondary store.
+- If you upgrade from alpha1/alpha2 and keep the same secondary storage backend, no migration steps are required. Only users who change the storage backend need to update configuration and accept a fresh secondary store.
+- To switch storage, update `data.secondary-storage` in `application.yaml` (or Helm `values.yaml`) and restart Camunda 8 Run. Use `--disable-elasticsearch` to prevent Run from starting the embedded Elasticsearch when you want to rely on H2 or an external ES instance.
+
+Choose **H2** for quick local development and **Elasticsearch** for production-like scenarios where advanced search/analytics are required.
 
 ### Primary vs. secondary storage
 
@@ -417,7 +647,7 @@ Camunda 8 uses two layers of storage:
 - **Primary storage** is handled by the Zeebe broker to store workflow execution data.
 - **Secondary storage** is used by applications like Operate, Tasklist, and Identity to read and present that data.
 
-For more details on how these layers interact, see [secondary storage architecture](/self-managed/concepts/secondary-storage/index.md).  
+For more details on how these layers interact, see [secondary storage architecture](/self-managed/concepts/secondary-storage/index.md).
 Camunda 8 Run uses v2 APIs by default, so no additional configuration is required when H2 becomes the default in a future release.
 
 ### Known limitations

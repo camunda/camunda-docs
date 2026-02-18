@@ -49,6 +49,13 @@ See [Orchestration Cluster](#orchestration-cluster).
 
 ## B
 
+### Backpressure
+
+Backpressure is a protection mechanism that prevents [Zeebe brokers](#broker) from being overloaded when they receive more [client](#client) requests than they can process with acceptable latency. Zeebe brokers determine backpressure by using dynamic backpressure algorithms or - if enabled - flow control limits, which measure the rate of records written by the [exporter](#exporter). When backpressure is activated, client requests are rejected to maintain system stability.
+
+- [Backpressure](/self-managed/zeebe-deployment/operations/backpressure.md)
+- [Flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md)
+
 ### Bridge
 
 Synonym to "[Connector](#connector)".
@@ -133,7 +140,7 @@ A BPMN element is part of a [process](#process), defining one part of its BPMN m
 
 ### Element template
 
-Use an element template to extend [Modeler](/components/modeler/about-modeler.md) with domain-specific diagram [elements](#element). The user edits such elements through a UI defined by the element template, and in the process configures standard technical bindings understood by the engine in simple and predictable ways. Element templates are used by [connectors](#connector) to create the connector-specific [element](#element) configuration.
+Use an element template to extend [Modeler](/components/modeler/about-modeler.md) with domain-specific diagram [elements](#element). The user edits such elements through a UI defined by the element template, and in the process configures BPMN element properties in simple and predictable ways. Element templates are used by [connectors](#connector) to create the connector-specific [element](#element) configuration.
 
 - [Element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md)
 

@@ -1,0 +1,29 @@
+name: Add bug issues to Quality Board
+
+on:
+  issues:
+    types: [opened, reopened, transferred, labeled]
+
+jobs:
+  add-to-quality-board:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+
+    steps:
+      - id: add-bug-to-quality-board
+        name: Add issue to Quality Board
+        uses: camunda/infra-global-github-actions/add-bug-to-quality-board@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          project-number: "187"
+          component-label: "component/documentation"
+        if: >
+          contains(github.event.issue.labels.*.name, 'kind/bug') &&
+          (
+              github.event.action == 'opened' ||
+              github.event.action == 'reopened' ||
+              github.event.action == 'transferred' ||
+              (github.event.action == 'labeled' && github.event.label.name == 'kind/bug')
+          )

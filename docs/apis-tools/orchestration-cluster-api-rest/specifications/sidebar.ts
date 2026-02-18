@@ -164,7 +164,7 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Cluster variable",
+      label: "Cluster Variable",
       items: [
         {
           type: "doc",
@@ -177,6 +177,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-cluster-variable",
           label: "Get a global-scoped cluster variable",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-global-cluster-variable",
+          label: "Update a global-scoped cluster variable",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -201,6 +207,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-tenant-cluster-variable",
           label: "Get a tenant-scoped cluster variable",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-tenant-cluster-variable",
+          label: "Update a tenant-scoped cluster variable",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -267,6 +279,18 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-decision-instance",
           label: "Get decision instance",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-decision-instance",
+          label: "Delete decision instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-decision-instances-batch-operation",
+          label: "Delete decision instances (batch)",
+          className: "api-method post",
         },
       ],
     },
@@ -543,6 +567,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/fail-job",
           label: "Fail job",
           className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-job-statistics",
+          label: "Global job statistics",
+          className: "api-method get",
         },
       ],
     },
@@ -1160,6 +1190,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-user-task",
           label: "Assign user task",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-user-task-audit-logs",
+          label: "Search user task audit logs",
           className: "api-method post",
         },
         {

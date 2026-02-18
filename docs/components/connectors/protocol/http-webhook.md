@@ -133,6 +133,14 @@ The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL
 Once you click the **Deploy** button, your HTTP Webhook will be activated and publicly available.
 You can trigger it by making a POST request to the generated URL.
 
+:::warning Webhook endpoints and process versions
+When you deploy a new process version that uses the same webhook endpoint as an existing version, the new version won’t become active until no process instances are running on the older version. Webhook endpoints can’t be shared across multiple active process versions.
+
+To activate the new version, complete all process instances on the older version or migrate them using [process instance migration](/components/concepts/process-instance-migration.md). If you need both versions active, use a different webhook endpoint path in the new version.
+
+For related behavior across versions, see [Cross-version deduplication](../advanced-topics/deduplication.md#cross-version-deduplication).
+:::
+
 URLs of the exposed HTTP Webhooks adhere to the following pattern:
 
 `http(s)://<base URL>/inbound/<webhook ID>>`

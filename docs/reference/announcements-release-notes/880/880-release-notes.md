@@ -40,7 +40,7 @@ These release notes identify the main new features included in the 8.8 minor rel
 
 Camunda agentic orchestration allows you to build and orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
-<p><a href="../../../../components/agentic-orchestration/" class="link-arrow">Camunda Agentic orchestration</a></p>
+<p><a href="../../../../components/agentic-orchestration/agentic-orchestration-overview/" class="link-arrow">Camunda Agentic orchestration</a></p>
 
 Use the following new features to build and integrate AI agents into your processes:
 
@@ -228,7 +228,7 @@ A new `getJson` intrinsic function accepts a document and an optional FEEL expre
 - The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
 - If not provided, the whole document is returned as a JSON object.
 
-<p><a href="../../../../components/connectors/use-connectors/intrinsic-functions" class="link-arrow">Intrinsic functions</a></p>
+<p><a href="../../../../components/connectors/advanced-topics/intrinsic-functions" class="link-arrow">Intrinsic functions</a></p>
 
 ### Job header binding
 
@@ -875,7 +875,7 @@ The deprecated APIs remain functional in this release but will no longer receive
 
 - Create and manage users, groups, roles, and memberships directly in Identity’s database
 - Integrate external providers like Keycloak or Microsoft Entra via OIDC
-- Assign resource-level permissions using RBAC
+- Assign resource-based authorizations using RBAC
 - Map users, groups, and roles to resources using token claims and application/client mappings
 - Simplify migration with built-in tools
 
@@ -1147,7 +1147,7 @@ A new `getJson` intrinsic function accepts a document and an optional FEEL expre
 - The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
 - If not provided, the whole document is returned as a JSON object.
 
-To learn more, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
+To learn more, see [intrinsic functions](/components/connectors/advanced-topics/intrinsic-functions.md).
 
 ### Dynamic partition scaling <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
 
@@ -1545,12 +1545,12 @@ Built-in Keycloak integration in Self-Managed is removed, allowing customers to 
 - Keycloak remains fully supported as an external option. For cluster-level identity management it must be connected as an external OIDC provider moving forward.
 - OpenID Connect (OIDC) remains the standard for seamless integration with chosen IdPs.
 
-#### Resource-based permissions
+#### Resource-based authorizations
 
-Resource-level permissions are introduced to control read and write permissions per specific resource.
+Resource-based authorizations control read and write permissions per specific resource. See [manage users](/components/console/manage-organization/manage-users.md#resource-based-authorizations).
 
 - Admin users retain full access, but regular users must be granted specific permissions to perform operations or view resources.
-- For organizations that build custom front-ends and access Camunda via API, users or Clients with API permissions can still access data through the V2 API, respecting their resource permissions.
+- For organizations that build custom front-ends and access Camunda via API, users or clients with API permissions can still access data through the V2 API, respecting their resource permissions.
 
 <!-- :::info
 Learn more about these updates in Introducing Enhanced Identity Management in Camunda 8.8.

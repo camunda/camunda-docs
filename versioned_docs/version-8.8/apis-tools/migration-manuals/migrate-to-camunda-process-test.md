@@ -8,30 +8,33 @@ description: "Learn how to migrate from Zeebe Process Test to Camunda Process Te
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your
-process applications. It is the successor to [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md) (ZPT).
-Starting with version **8.8**, ZPT is deprecated and will be removed in version **8.10**. See
-the [announcement](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/) for
-details.
+Learn how to migrate from Zeebe Process Test to Camunda Process Test
+
+## About
+
+[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your process applications.
+
+- It is the successor to [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md) (ZPT).
+- Starting with version **8.8**, ZPT is deprecated and will be removed in version **8.10**. See [release announcement](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/).
 
 This guide walks you through migrating your existing test cases from ZPT to CPT step-by-step.
 
-:::note
-Be aware that there are differences between ZPT and CPT in both API and behavior, which may increase migration effort depending on your existing test cases.
+### Key differences
 
-**Key differences:**
+There are key differences between ZPT and CPT in both API and behavior, which may increase migration effort depending on your existing test cases.
 
-- **Underlying engine:** ZPT uses only Camunda’s workflow engine (Zeebe) with access to internal components, whereas CPT runs the full Camunda distribution and interacts with the Orchestration Cluster API.
-- **Assertions and utilities:** CPT uses different names to align with the API, and not all ZPT assertions/utilities have equivalents in CPT.
-- **Startup time:** CPT takes longer to start as it runs the full Orchestration Cluster distribution.
+| Aspect                       | Zeebe Process Test (ZPT)                                                        | Camunda Process Test (CPT)                                                                            |
+| :--------------------------- | :------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------- |
+| **Underlying engine**        | Uses only Camunda's workflow engine (Zeebe) with access to internal components. | Runs the full Camunda distribution and interacts with the Orchestration Cluster API.                  |
+| **Assertions and utilities** | Uses specific naming conventions.                                               | Uses different names to align with the API; not all ZPT assertions/utilities have equivalents in CPT. |
+| **Startup time**             | Faster startup.                                                                 | Takes longer to start as it runs the full Orchestration Cluster distribution.                         |
 
-**Key advantages of CPT:**
+### Key advantages of CPT
 
 - Access to Camunda’s Orchestration Cluster API and Connectors
 - Support for Camunda user tasks
 - Blocking assertions for asynchronous processing
 - Enhanced mocking utilities
-  :::
 
 ## Update your dependency
 

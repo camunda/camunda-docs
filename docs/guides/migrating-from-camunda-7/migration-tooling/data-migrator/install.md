@@ -11,6 +11,7 @@ Install the Data Migrator and run your first data migration.
 
 - Java 21+
 - Running Camunda 8 (SaaS or self-managed)
+- Camunda 7 has been stopped
 - Access to Camunda 7 database
 - Models migrated and deployed to C8
 
@@ -23,7 +24,7 @@ Install the Data Migrator and run your first data migration.
 
 ## Quick start
 
-1. Make sure Camunda 8 is up and running, and all process models to migrate are deployed.
+1. Make sure Camunda 8 is up and running, all process models to migrate are deployed, and Camunda 7 has been stopped.
 
    To be used with the Runtime Data Migrator, **every process model requires**:
    - A blank start event (you must add one if the process model doesn't have one already).
@@ -49,7 +50,7 @@ Install the Data Migrator and run your first data migration.
    camunda.client:
      mode: self-managed
      grpc-address: http://localhost:26500
-     rest-address: http://localhost:8088
+     rest-address: http://localhost:8080
 
    camunda.migrator.c7.data-source:
      jdbc-url: jdbc:postgresql://localhost:5432/camunda7

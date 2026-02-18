@@ -24,6 +24,10 @@ The database vendor is automatically detected but can be overridden using the `d
 The required isolation level to run the Data Migrator with is `READ COMMITTED`.
 Other transaction isolation levels are not supported and might lead to unexpected behavior.
 
+## History migration atomicity
+
+Read more about [history migration atomicity](../data-migrator/history.md#atomicity).
+
 ## Compatibility
 
 The migrator supports the following SQL databases:

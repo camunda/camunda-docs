@@ -221,6 +221,7 @@ components:
           allOf:
             - $ref: "#/components/schemas/IncidentErrorTypeFilterProperty"
         errorMessage:
+          description: The error message of this incident.
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
         elementId:
@@ -433,6 +434,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The process instance key associated to this incident.
+        rootProcessInstanceKey:
+          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
         elementInstanceKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
@@ -568,10 +571,7 @@ components:
           type: string
           enum:
             - activeInstancesWithErrorCount
-            - processDefinitionId
             - processDefinitionKey
-            - processDefinitionName
-            - processDefinitionVersion
             - tenantId
         order:
           $ref: "search-models.yaml#/components/schemas/SortOrderEnum"

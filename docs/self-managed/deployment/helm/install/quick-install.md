@@ -11,13 +11,20 @@ Use this guide to install Camunda 8 Self-Managed with the orchestration cluster,
 
 <!-- TODO: add links to explain the orchestration cluster and management cluster -->
 
+:::tip Need a Kubernetes cluster?
+If you don't have a Kubernetes cluster yet, check out our setup guides:
+
+- **Local development**: Follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md) to set up a local Kubernetes cluster.
+- **Cloud providers**: See our [cloud provider guides](/self-managed/deployment/helm/cloud-providers/index.md) for Amazon EKS, Google GKE, Azure AKS, and Red Hat OpenShift.
+  :::
+
 :::note
 By default, the Camunda Helm chart uses Bitnami open-source images. For production environments, Camunda recommends switching to vendor-supported enterprise images. This guide explains how to create registry secrets and install [Camunda with enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
 :::
 
 ## Prerequisites
 
-- **Kubernetes cluster**: A functioning Kubernetes cluster with [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) access and block-storage persistent volumes for stateful components. See [Cloud providers](/self-managed/deployment/helm/cloud-providers/index.md) for instructions to create a Kubernetes cluster.
+- **Kubernetes cluster**: A functioning Kubernetes cluster with [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) access and block-storage persistent volumes for stateful components.
 - **Helm**: The Helm CLI installed. See [Installing Helm](https://helm.sh/docs/intro/install/).
 
 ## Overview
@@ -69,7 +76,7 @@ By default, the Helm chart deploys the Camunda orchestration cluster with **basi
    ```bash
    # Zeebe Gateway (for gRPC and REST API)
    kubectl port-forward svc/camunda-zeebe-gateway 26500:26500 -n orchestration
-   kubectl port-forward svc/camunda-zeebe-gateway 8088:8080 -n orchestration
+   kubectl port-forward svc/camunda-zeebe-gateway 8080:8080 -n orchestration
 
    # Connectors
    kubectl port-forward svc/camunda-connectors 8086:8080 -n orchestration
@@ -80,22 +87,26 @@ By default, the Helm chart deploys the Camunda orchestration cluster with **basi
    Test the Zeebe Gateway connection:
 
    ```bash
-   curl -u demo:demo http://localhost:8088/v2/topology
+   curl -u demo:demo http://localhost:8080/v2/topology
    ```
 
    You should see a JSON response with the cluster topology information.
 
    Available services:
-   - **Operate:** [http://localhost:8088/operate](http://localhost:8088/operate) - Monitor process instances
-   - **Tasklist:** [http://localhost:8088/tasklist](http://localhost:8088/tasklist) - Complete user tasks
-   - **Identity:** [http://localhost:8088/identity](http://localhost:8088/identity) - User and permission management
+   - **Operate:** [http://localhost:8080/operate](http://localhost:8080/operate) - Monitor process instances
+   - **Tasklist:** [http://localhost:8080/tasklist](http://localhost:8080/tasklist) - Complete user tasks
+   - **Identity:** [http://localhost:8080/identity](http://localhost:8080/identity) - User and permission management
    - **Connectors:** [http://localhost:8086](http://localhost:8086) - External system integrations
    - **Zeebe Gateway (gRPC):** localhost:26500 - Process deployment and execution
-   - **Zeebe Gateway (HTTP):** [http://localhost:8088](http://localhost:8088) - Zeebe REST API
+   - **Zeebe Gateway (HTTP):** [http://localhost:8080](http://localhost:8080) - Zeebe REST API
 
    :::note
-   In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration component and share the same endpoint (port 8088).
+   In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration component and share the same endpoint (port 8080).
    :::
+
+:::note
+Starting in 8.9-alpha3, the default secondary storage used by Camunda 8 Run and default Helm values is H2 for lightweight, out-of-the-box setups. Elasticsearch is still provided and supported as an optional alternative; OpenSearch is supported for Self‑Managed deployments but is not bundled in Camunda 8 Run. Enable the backend you require explicitly if you need full-featured search/analytics or to run existing Elasticsearch-backed Operate instances.
+:::
 
 ## Full Cluster
 
@@ -353,7 +364,7 @@ Once port-forwarding is active, access the UIs in your browser:
 | **Tasklist**             | [http://localhost:8080/tasklist](http://localhost:8080/tasklist) | Complete user tasks                                          |
 | **Web Modeler**          | [http://localhost:8070](http://localhost:8070)                   | Design and deploy processes                                  |
 | **Console**              | [http://localhost:8087](http://localhost:8087)                   | Manage clusters and APIs                                     |
-| **Identity**             | [http://localhost:8088/identity](http://localhost:8088/identity) | User and permission management for the orchestration cluster |
+| **Identity**             | [http://localhost:8080/identity](http://localhost:8080/identity) | User and permission management for the orchestration cluster |
 | **Management Identity**  | [http://localhost:18081](http://localhost:18081)                 | User and permission management                               |
 | **Keycloak**             | [http://localhost:18080](http://localhost:18080)                 | Authentication server                                        |
 | **Optimize**             | [http://localhost:8083](http://localhost:8083)                   | Process analytics                                            |

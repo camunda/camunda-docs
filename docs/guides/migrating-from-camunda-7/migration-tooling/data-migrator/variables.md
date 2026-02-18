@@ -172,6 +172,12 @@ Variable interceptors can be restricted to specific variable types using the `ge
 public Set<Class<?>> getTypes() {
     // Handle only specific types
     return Set.of(
+        BooleanValue.class,      // Boolean values
+        IntegerValue.class,      // Integer values
+        LongValue.class,         // Long values
+        DoubleValue.class,       // Double values
+        ShortValue.class,        // Short values
+        StringValue.class,       // String values
         PrimitiveValue.class,    // String, Integer, Boolean, etc.
         DateValue.class,         // Date variables
         ObjectValue.class        // JSON, XML, Java serialized objects

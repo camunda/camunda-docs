@@ -27,27 +27,16 @@ You can run audit data migration alongside normal operations (for example, after
 
 The following requirements and limitations apply:
 
+- Camunda 8 is up and running and Camunda 7 has been stopped.
 - The History Data Migrator must be able to access the Camunda 7 database.
 - The History Data Migrator can migrate data to Camunda 8 only when a relational database (RDBMS) is used. This capability is planned for Camunda 8.9.
 - The History Data Migrator must be able to access the Camunda 8 database. As a result, you can run this tool only in a self-managed environment.
-- If you migrate runtime and history data at the same time, Camunda 8 will contain two process instances:
-  - A canceled historic process instance.
-  - An active runtime process instance.
+- If you manipulate Camunda 7 data between History Data Migrator runs, data consistency might be affected. See [Auto-cancellation of active instances](#auto-cancellation-of-active-instances) for details.
+- If you migrate runtime and history data for an active C7 process instance, two separate records will appear in Operate:
+  1. **Fresh runtime instance**: The migrated active process instance running on Zeebe. This instance continues execution from the last wait state before migration and produces new history going forward. It does not include historical data from before the migration.
+  2. **Auditable instance**: A canceled historic process instance that preserves the audit trail (history data) up to the last wait state pre-migration. This instance appears as canceled and serves only as an audit record of what happened in Camunda 7.
 
-  These instances are linked by process variables.
-
-### Unsupported entities and properties
-
-The History Data Migrator does not support the following Camunda 8 entities or properties:
-
-- Sequence flow: Sequence flows cannot be highlighted in Operate.
-- User task migration metadata: Information for user tasks migrated via process instance migration is not available in Camunda 7.
-- Message subscription and correlated message subscription: These entities are not available in Camunda 7.
-- Batch operation entity and batch operation item: Camunda 7 does not retain sufficient information about processed instances.
-- User metrics: Not available in Camunda 7.
-- Exporter position: This entity does not exist in Camunda 7.
-- Process instance and user task tags: These properties do not exist in Camunda 7.
-- Audit log: Not supported. See the related tracking [issue](https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/517).
+  These two instances are separate entities and are not automatically linked in the UI, although they share the same process variables from the migration point.
 
 ## Usage examples
 
@@ -69,6 +58,7 @@ The History Data Migrator does not support the following Camunda 8 entities or p
 
 | Entity type                   | Description          |
 | :---------------------------- | :------------------- |
+| `HISTORY_FORM_DEFINITION`     | Form definitions     |
 | `HISTORY_PROCESS_DEFINITION`  | Process definitions  |
 | `HISTORY_PROCESS_INSTANCE`    | Process instances    |
 | `HISTORY_INCIDENT`            | Process incidents    |
@@ -77,6 +67,102 @@ The History Data Migrator does not support the following Camunda 8 entities or p
 | `HISTORY_FLOW_NODE`           | Flow node instances  |
 | `HISTORY_DECISION_INSTANCE`   | Decision instances   |
 | `HISTORY_DECISION_DEFINITION` | Decision definitions |
+
+## Cleanup behavior for completed instances
+
+Instances that were already completed in Camunda 7 retain their original cleanup dates:
+
+- If a `removalTime` exists in Camunda 7, it is migrated as-is for process and decision instances.
+  Camunda 8 uses this date for history cleanup. The child entities (for example, user tasks, variables, flow nodes) will be deleted according to the root instance's cleanup date.
+- If no `removalTime` exists and the instance is completed, no cleanup date is set.
+- Auto-cancel cleanup configuration **only applies to instances that were active or suspended** in Camunda 7.
+
+## Auto-cancellation of active instances
+
+When migrating history data, the Data Migrator automatically handles **active or suspended** process instances from Camunda 7 by marking them as **canceled** in Camunda 8. This applies to:
+
+- Process instances.
+- Flow nodes.
+- User tasks.
+- Incidents.
+
+Auto-canceled entities are assigned the migration timestamp as their end date.
+
+By default, auto-canceled instances receive a cleanup date calculated as:
+
+```
+cleanup_date = end_date + 6 months
+```
+
+This ensures auto-canceled instances are eligible for history cleanup after six months, preventing unbounded growth of history data.
+
+See [configuration for history auto-cancellation](../data-migrator/config-properties.md#camundamigratorhistoryauto-cancelcleanup) for more details.
+
+Please note that if any Camunda 7 process instances progress in their state in between multiple runs of the History Data Migrator, data consistency might be affected: for example, if a process instance is completed in Camunda 7 after the first run but before the second run, the History Data Migrator would migrate it as canceled in the first and as completed in the second run. As a result, in Operate you may see that a process instance was canceled in a Flow Node that chronologically precedes the end event in your model, where the instance will be marked as completed. To avoid such situations, ensure that Camunda 7 data remains unchanged between History Data Migrator runs.
+
+## Forms
+
+The History Data Migrator automatically migrates [Camunda Forms](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) from Camunda 7 to Camunda 8. This includes forms linked to process definitions (start forms) and user tasks.
+
+The form schema (JSON definition) is extracted from the Camunda 7 deployment resources and migrated to Camunda 8. The form structure, fields, and validation rules are preserved during migration.
+
+User tasks that reference non-existent forms will be migrated as well.
+
+### Form linking
+
+The migrator automatically detects and links forms in the following scenarios:
+
+#### Start forms
+
+When a process definition has a start form configured using `camunda:formRef` with a `camunda:formKey`, the migrator:
+
+1. Resolves the form definition based on the form key and binding (deployment, latest, or version).
+2. Links the process definition to the migrated form in Camunda 8.
+
+Example BPMN configuration that will be migrated:
+
+```xml
+<bpmn:startEvent id="StartEvent_1">
+  <bpmn:extensionElements>
+    <camunda:formData>
+      <camunda:formRef formKey="myStartForm" binding="deployment" />
+    </camunda:formData>
+  </bpmn:extensionElements>
+</bpmn:startEvent>
+```
+
+#### User task forms
+
+When a user task has a form configured using `camunda:formRef` with a `camunda:formKey`, the migrator:
+
+1. Resolves the form definition based on the form key and binding (deployment, latest, or version).
+2. Links the user task to the migrated form in Camunda 8.
+
+Example BPMN configuration that will be migrated:
+
+```xml
+<bpmn:userTask id="UserTask_1" name="Review Document">
+  <bpmn:extensionElements>
+    <camunda:formData>
+      <camunda:formRef formKey="reviewForm" binding="deployment" />
+    </camunda:formData>
+  </bpmn:extensionElements>
+</bpmn:userTask>
+```
+
+## Atomicity
+
+The History Data Migrator uses the configured Camunda 8 datasource for both the migration mapping schema and the migrated data. This ensures single-transaction atomicity for each entity migration.
+
+### What is migrated atomically
+
+Each entity migration writes multiple rows in a single transaction:
+
+- Camunda 8 data: The migrated entity (for example, a user task, process instance, or variable)
+- Child entities, when applicable (for example, decision instances and their related decisions, inputs, and outputs)
+- Tracking information: A mapping from the Camunda 7 ID to the Camunda 8 key, used for resuming migrations and preventing duplicates
+
+If an error occurs, the transaction is rolled back and no partial data is persisted. This prevents inconsistent states such as Camunda 8 data without tracking information (which can cause duplicates on retry) or orphaned child entities.
 
 ## Entity transformation
 
@@ -90,6 +176,7 @@ The following built-in transformers convert Camunda 7 historic entities:
 
 | Interceptor                                 | Camunda 7 entity type                    | Camunda 8 Model               |
 | ------------------------------------------- | ---------------------------------------- | ----------------------------- |
+| `FormTransformer`                           | `CamundaFormDefinitionEntity`            | `FormDbModel`                 |
 | `ProcessInstanceTransformer`                | `HistoricProcessInstance`                | `ProcessInstanceDbModel`      |
 | `ProcessDefinitionTransformer`              | `ProcessDefinition`                      | `ProcessDefinitionDbModel`    |
 | `FlowNodeTransformer`                       | `HistoricActivityInstance`               | `FlowNodeInstanceDbModel`     |
@@ -100,26 +187,22 @@ The following built-in transformers convert Camunda 7 historic entities:
 | `DecisionDefinitionTransformer`             | `HistoricDecisionDefinition`             | `DecisionDefinitionDbModel`   |
 | `DecisionRequirementsDefinitionTransformer` | `HistoricDecisionRequirementsDefinition` | `DecisionRequirementsDbModel` |
 
-### Disable built-in transformers
-
-You can disable any built-in transformer using the `enabled` configuration property.
-
-This is useful when your migration use case is more complex and does not work out of the box. In this case, you can migrate entities entirely through custom interceptors:
-
-```yaml
-camunda:
-  migrator:
-    # Entity interceptor configuration
-    interceptors:
-      - class-name: io.camunda.migration.data.impl.interceptor.history.entity.ProcessInstanceTransformer
-        enabled: false
-```
-
 ## Custom transformation
 
 The `EntityInterceptor` interface allows you to define custom logic that executes when a Camunda 7 historic entity is being converted to a Camunda 8 database model during migration. This is useful for enriching, auditing, or customizing entity conversion.
 
 Custom interceptors are enabled by default and can be restricted to specific entity types.
+
+### Type-safe API
+
+The `EntityInterceptor` interface uses Java generics to provide compile-time type safety:
+
+```java
+public interface EntityInterceptor<C7, C8> {
+    void execute(C7 entity, C8 builder);
+    // ...
+}
+```
 
 ### How to implement an `EntityInterceptor`
 
@@ -135,7 +218,8 @@ Custom interceptors are enabled by default and can be restricted to specific ent
 Here's an example of a custom entity interceptor which is only called for process instances:
 
 ```java
-public class ProcessInstanceEnricher implements EntityInterceptor {
+public class ProcessInstanceEnricher
+    implements EntityInterceptor<HistoricProcessInstance, ProcessInstanceDbModel.ProcessInstanceDbModelBuilder> {
 
     /**
      * Restrict this interceptor to only handle process instances.
@@ -146,65 +230,111 @@ public class ProcessInstanceEnricher implements EntityInterceptor {
     }
 
     @Override
-    public void execute(EntityConversionContext<?, ?> context) {
-        HistoricProcessInstance c7Instance =
-            (HistoricProcessInstance) context.getC7Entity();
-        ProcessInstanceDbModel.Builder c8Builder =
-            (ProcessInstanceDbModel.Builder) context.getC8DbModelBuilder();
-
+    public void execute(HistoricProcessInstance entity,
+                        ProcessInstanceDbModel.ProcessInstanceDbModelBuilder builder) {
         // Custom conversion logic
         // For example, add custom metadata or modify the conversion
+      builder.processDefinitionId(entity.getProcessDefinitionKey());
     }
 }
 ```
 
 #### Access Camunda 7 process engine
 
-To retrieve information from Camunda 7 entities, use the `processEngine` available in the `EntityConversionContext`.
+To retrieve information from Camunda 7 entities, use the `EntityConversionContext` parameter which provides access to the `processEngine`.
 
 Use it to access services such as `RepositoryService` and `RuntimeService`. Fetch additional data as needed from other Camunda 7 entities.
 
 ```java
-@Override
-public void execute(EntityConversionContext<?, ?> context) {
-  // Use ProcessEngine to retrieve deployment information from Camunda 7 process engine
-  ProcessEngine processEngine = context.getProcessEngine();
+public class ProcessInstanceEnricher
+    implements EntityInterceptor<HistoricProcessInstance, ProcessInstanceDbModel.ProcessInstanceDbModelBuilder> {
 
-// Example: Retrieve the deployment ID from the process definition
-  String deploymentId = processEngine.getRepositoryService()
-      .createProcessDefinitionQuery()
-      .processDefinitionKey(processInstance.getProcessDefinitionKey())
-      .singleResult()
-      .getDeploymentId();
-  // Custom conversion logic
-  // ...
+    @Override
+    public Set<Class<?>> getTypes() {
+        return Set.of(HistoricProcessInstance.class);
+    }
+
+    /**
+     * Alternative execute signature with EntityConversionContext access.
+     * This signature gives you access to the process engine and other context.
+     */
+    @Override
+    public void execute(EntityConversionContext<HistoricProcessInstance,
+                                                ProcessInstanceDbModel.ProcessInstanceDbModelBuilder> context) {
+        // Access the entity and builder from context
+        HistoricProcessInstance entity = context.getC7Entity();
+        ProcessInstanceDbModel.ProcessInstanceDbModelBuilder builder = context.getC8DbModelBuilder();
+
+        // Use ProcessEngine to retrieve deployment information from Camunda 7 process engine
+        ProcessEngine processEngine = context.getProcessEngine();
+
+        // Example: Retrieve the deployment ID from the process definition
+        String deploymentId = processEngine.getRepositoryService()
+            .createProcessDefinitionQuery()
+            .processDefinitionKey(entity.getProcessDefinitionKey())
+            .singleResult()
+            .getDeploymentId();
+
+        // Custom conversion logic using the retrieved data
+        // ...
+    }
 }
 ```
+
+**Note:** The `EntityInterceptor` interface provides two `execute` method signatures:
+
+- `execute(C7 entity, C8 builder)` - Simple type-safe signature for basic transformations
+- `execute(EntityConversionContext<C7, C8> context)` - Full signature with access to process engine and other context
 
 ### Limit interceptors by entity type
 
 Entity interceptors can be restricted to specific entity types using the `getTypes()` method. Use Camunda 7 historic entity classes:
 
 ```java
-@Override
-public Set<Class<?>> getTypes() {
-    // Handle only specific types
-    return Set.of(
-        ProcessDefinition.class,            // Process definitions
-        HistoricProcessInstance.class,      // Process instances
-        HistoricActivityInstance.class,     // Flow nodes/activities
-        HistoricTaskInstance.class,         // User tasks
-        HistoricVariableInstance.class,     // Variables
-        HistoricIncident.class              // Incidents
-    );
-}
-```
+// Example 1: Handle multiple specific types
+public class MultiEntityInterceptor
+    implements EntityInterceptor<Object, Object> {
 
-```java
-// Or handle all entity types (default behavior)
-@Override
-public Set<Class<?>> getTypes() {
-    return Set.of(); // Empty set = handle all types
+    @Override
+    public Set<Class<?>> getTypes() {
+        // Handle only specific types
+        return Set.of(
+            ProcessDefinition.class,            // Process definitions
+            HistoricProcessInstance.class,      // Process instances
+            HistoricActivityInstance.class,     // Flow nodes/activities
+            HistoricTaskInstance.class,         // User tasks
+            HistoricVariableInstance.class,     // Variables
+            HistoricIncident.class,             // Incidents
+            HistoricDecisionInstance.class      // Decision instances
+        );
+    }
+
+    @Override
+    public void execute(Object entity, Object builder) {
+        // Handle different entity types
+        if (entity instanceof HistoricProcessInstance) {
+            // Process instance logic
+        } else if (entity instanceof HistoricActivityInstance) {
+            // Flow node logic
+        }
+        // etc.
+    }
+}
+
+// Example 2: Universal interceptor (handles all entity types)
+public class EntityLogger
+    implements EntityInterceptor<Object, Object> {
+
+    @Override
+    public Set<Class<?>> getTypes() {
+        return Set.of(); // Empty set = handle all types
+    }
+
+    @Override
+    public void execute(Object entity, Object builder) {
+        // This will be called for all entity types
+        System.out.println("Converting entity: " + entity.getClass().getSimpleName());
+    }
 }
 ```
 
@@ -252,427 +382,8 @@ When entity transformation fails:
 4. Use `--history --list-skipped` to view skipped entities.
 5. After you fix the underlying issue, use `--history --retry-skipped` to retry the migration.
 
-## History cleanup
-
-The history cleanup date is migrated if the Camunda 7 instance has a removal time.
-
 ## Tenants
 
 - Camunda 7's `null` tenant is migrated to Camunda 8's `<default>` tenant.
 - All other `tenantId`s will be migrated as-is.
 - For details, see [multi-tenancy](/components/concepts/multi-tenancy.md#tenant-identifier) in Camunda 8.
-
-## Camunda 8 history migration coverage
-
-The following table shows which Camunda 8 entities and properties are migrated by the History Data Migrator.
-
-### Audit log
-
-| Property                | Migrated |
-| ----------------------- | -------- |
-| auditLogKey             | No       |
-| entityKey               | No       |
-| entityType              | No       |
-| operationType           | No       |
-| entityVersion           | No       |
-| entityValueType         | No       |
-| entityOperationIntent   | No       |
-| batchOperationKey       | No       |
-| batchOperationType      | No       |
-| timestamp               | No       |
-| actorType               | No       |
-| actorId                 | No       |
-| tenantId                | No       |
-| tenantScope             | No       |
-| result                  | No       |
-| annotation              | No       |
-| category                | No       |
-| processDefinitionId     | No       |
-| decisionRequirementsId  | No       |
-| decisionDefinitionId    | No       |
-| processDefinitionKey    | No       |
-| processInstanceKey      | No       |
-| elementInstanceKey      | No       |
-| jobKey                  | No       |
-| userTaskKey             | No       |
-| decisionRequirementsKey | No       |
-| decisionDefinitionKey   | No       |
-| decisionEvaluationKey   | No       |
-| deploymentKey           | No       |
-| formKey                 | No       |
-| resourceKey             | No       |
-
-### Batch operation
-
-| Property                 | Migrated |
-| ------------------------ | -------- |
-| batchOperationKey        | No       |
-| state                    | No       |
-| operationType            | No       |
-| startDate                | No       |
-| endDate                  | No       |
-| actorType                | No       |
-| actorId                  | No       |
-| operationsTotalCount     | No       |
-| operationsFailedCount    | No       |
-| operationsCompletedCount | No       |
-| errors                   | No       |
-
-### Batch operation item
-
-| Property           | Migrated |
-| ------------------ | -------- |
-| batchOperationKey  | No       |
-| itemKey            | No       |
-| processInstanceKey | No       |
-| state              | No       |
-| processedDate      | No       |
-| errorMessage       | No       |
-
-### Cluster variable
-
-| Property    | Migrated |
-| ----------- | -------- |
-| id          | No       |
-| name        | No       |
-| type        | No       |
-| doubleValue | No       |
-| longValue   | No       |
-| value       | No       |
-| fullValue   | No       |
-| isPreview   | No       |
-| tenantId    | No       |
-| scope       | No       |
-
-### Correlated message subscription
-
-| Property               | Migrated |
-| ---------------------- | -------- |
-| correlationKey         | No       |
-| correlationTime        | No       |
-| flowNodeId             | No       |
-| flowNodeInstanceKey    | No       |
-| historyCleanupDate     | No       |
-| messageKey             | No       |
-| messageName            | No       |
-| partitionId            | No       |
-| processDefinitionId    | No       |
-| processDefinitionKey   | No       |
-| processInstanceKey     | No       |
-| rootProcessInstanceKey | No       |
-| subscriptionKey        | No       |
-| subscriptionType       | No       |
-| tenantId               | No       |
-
-### Decision definition
-
-| Property                    | Migrated |
-| --------------------------- | -------- |
-| decisionDefinitionKey       | Yes      |
-| name                        | Yes      |
-| decisionDefinitionId        | Yes      |
-| tenantId                    | Yes      |
-| version                     | Yes      |
-| decisionRequirementsId      | Yes      |
-| decisionRequirementsKey     | Yes      |
-| decisionRequirementsName    | No       |
-| decisionRequirementsVersion | No       |
-
-### Decision instance
-
-| Property                  | Migrated |
-| ------------------------- | -------- |
-| decisionInstanceId        | No       |
-| decisionInstanceKey       | No       |
-| state                     | Yes      |
-| evaluationDate            | Yes      |
-| evaluationFailure         | No       |
-| evaluationFailureMessage  | No       |
-| result                    | Yes      |
-| flowNodeInstanceKey       | Yes      |
-| flowNodeId                | Yes      |
-| processInstanceKey        | Yes      |
-| processDefinitionKey      | Yes      |
-| processDefinitionId       | Yes      |
-| decisionDefinitionKey     | Yes      |
-| decisionDefinitionId      | Yes      |
-| decisionRequirementsKey   | Yes      |
-| decisionRequirementsId    | Yes      |
-| rootDecisionDefinitionKey | Yes      |
-| decisionType              | Yes      |
-| tenantId                  | Yes      |
-| partitionId               | Yes      |
-| evaluatedInputs           | Yes      |
-| evaluatedOutputs          | Yes      |
-| historyCleanupDate        | Yes      |
-
-### Decision requirements
-
-| Property                | Migrated |
-| ----------------------- | -------- |
-| decisionRequirementsKey | Yes      |
-| decisionRequirementsId  | Yes      |
-| name                    | Yes      |
-| resourceName            | Yes      |
-| version                 | Yes      |
-| xml                     | Yes      |
-| tenantId                | Yes      |
-
-### Exporter position
-
-| Property             | Migrated |
-| -------------------- | -------- |
-| partitionId          | No       |
-| exporter             | No       |
-| lastExportedPosition | No       |
-| created              | No       |
-| lastUpdated          | No       |
-
-### Flow node instance
-
-| Property               | Migrated |
-| ---------------------- | -------- |
-| flowNodeInstanceKey    | No       |
-| processInstanceKey     | Yes      |
-| processDefinitionKey   | Yes      |
-| processDefinitionId    | Yes      |
-| flowNodeScopeKey       | Yes      |
-| startDate              | Yes      |
-| endDate                | Yes      |
-| flowNodeId             | Yes      |
-| flowNodeName           | No       |
-| treePath               | Yes      |
-| type                   | Yes      |
-| state                  | Yes      |
-| incidentKey            | No       |
-| numSubprocessIncidents | No       |
-| hasIncident            | No       |
-| tenantId               | Yes      |
-| partitionId            | No       |
-| rootProcessInstanceKey | No       |
-| historyCleanupDate     | No       |
-
-### Form
-
-| Property  | Migrated |
-| --------- | -------- |
-| formKey   | No       |
-| tenantId  | No       |
-| formId    | No       |
-| schema    | No       |
-| version   | No       |
-| isDeleted | No       |
-
-### History deletion
-
-| Property          | Migrated |
-| ----------------- | -------- |
-| resourceKey       | No       |
-| resourceType      | No       |
-| batchOperationKey | No       |
-| partitionId       | No       |
-
-### Incident
-
-| Property               | Migrated |
-| ---------------------- | -------- |
-| incidentKey            | Yes      |
-| processDefinitionKey   | Yes      |
-| processDefinitionId    | Yes      |
-| processInstanceKey     | Yes      |
-| rootProcessInstanceKey | No       |
-| flowNodeInstanceKey    | Yes      |
-| flowNodeId             | Yes      |
-| jobKey                 | Yes      |
-| errorType              | No       |
-| errorMessage           | Yes      |
-| errorMessageHash       | No       |
-| creationDate           | Yes      |
-| state                  | Yes      |
-| treePath               | No       |
-| tenantId               | Yes      |
-| partitionId            | No       |
-| historyCleanupDate     | No       |
-
-### Job
-
-| Property                 | Migrated |
-| ------------------------ | -------- |
-| jobKey                   | No       |
-| type                     | No       |
-| worker                   | No       |
-| state                    | No       |
-| kind                     | No       |
-| listenerEventType        | No       |
-| retries                  | No       |
-| isDenied                 | No       |
-| deniedReason             | No       |
-| hasFailedWithRetriesLeft | No       |
-| errorCode                | No       |
-| errorMessage             | No       |
-| serializedCustomHeaders  | No       |
-| customHeaders            | No       |
-| deadline                 | No       |
-| endTime                  | No       |
-| processDefinitionId      | No       |
-| processDefinitionKey     | No       |
-| processInstanceKey       | No       |
-| rootProcessInstanceKey   | No       |
-| elementId                | No       |
-| elementInstanceKey       | No       |
-| tenantId                 | No       |
-| partitionId              | No       |
-| historyCleanupDate       | No       |
-| creationTime             | No       |
-| lastUpdateTime           | No       |
-
-### Message subscription
-
-| Property                 | Migrated |
-| ------------------------ | -------- |
-| messageSubscriptionKey   | No       |
-| processDefinitionId      | No       |
-| processDefinitionKey     | No       |
-| processInstanceKey       | No       |
-| rootProcessInstanceKey   | No       |
-| flowNodeId               | No       |
-| flowNodeInstanceKey      | No       |
-| messageSubscriptionState | No       |
-| dateTime                 | No       |
-| messageName              | No       |
-| correlationKey           | No       |
-| tenantId                 | No       |
-| partitionId              | No       |
-| historyCleanupDate       | No       |
-
-### Process definition
-
-| Property             | Migrated |
-| -------------------- | -------- |
-| processDefinitionKey | Yes      |
-| processDefinitionId  | Yes      |
-| resourceName         | Yes      |
-| name                 | Yes      |
-| tenantId             | Yes      |
-| versionTag           | Yes      |
-| version              | Yes      |
-| bpmnXml              | Yes      |
-| formId               | No       |
-
-### Process instance
-
-| Property                 | Migrated |
-| ------------------------ | -------- |
-| processInstanceKey       | Yes      |
-| rootProcessInstanceKey   | No       |
-| processDefinitionId      | Yes      |
-| processDefinitionKey     | No       |
-| state                    | Yes      |
-| startDate                | Yes      |
-| endDate                  | Yes      |
-| tenantId                 | Yes      |
-| parentProcessInstanceKey | Yes      |
-| parentElementInstanceKey | No       |
-| numIncidents             | No       |
-| version                  | Yes      |
-| partitionId              | Yes      |
-| treePath                 | No       |
-| historyCleanupDate       | Yes      |
-| tags                     | No       |
-
-### Sequence flow
-
-| Property             | Migrated |
-| -------------------- | -------- |
-| flowNodeId           | No       |
-| processInstanceKey   | No       |
-| processDefinitionKey | No       |
-| processDefinitionId  | No       |
-| tenantId             | No       |
-| partitionId          | No       |
-| historyCleanupDate   | No       |
-
-### Usage metric
-
-| Property    | Migrated |
-| ----------- | -------- |
-| key         | No       |
-| startTime   | No       |
-| endTime     | No       |
-| tenantId    | No       |
-| eventType   | No       |
-| value       | No       |
-| partitionId | No       |
-
-### Usage metric (TU)
-
-| Property     | Migrated |
-| ------------ | -------- |
-| key          | No       |
-| startTime    | No       |
-| endTime      | No       |
-| tenantId     | No       |
-| assigneeHash | No       |
-| partitionId  | No       |
-
-### User task
-
-| Property                 | Migrated |
-| ------------------------ | -------- |
-| userTaskKey              | Yes      |
-| elementId                | Yes      |
-| name                     | Yes      |
-| processDefinitionId      | Yes      |
-| creationDate             | Yes      |
-| completionDate           | Yes      |
-| assignee                 | Yes      |
-| state                    | Yes      |
-| formKey                  | No       |
-| processDefinitionKey     | Yes      |
-| processInstanceKey       | Yes      |
-| rootProcessInstanceKey   | No       |
-| elementInstanceKey       | Yes      |
-| tenantId                 | Yes      |
-| dueDate                  | Yes      |
-| followUpDate             | Yes      |
-| candidateGroups          | No       |
-| candidateUsers           | No       |
-| externalFormReference    | No       |
-| processDefinitionVersion | Yes      |
-| serializedCustomHeaders  | No       |
-| customHeaders            | No       |
-| priority                 | Yes      |
-| tags                     | No       |
-| partitionId              | Yes      |
-| historyCleanupDate       | Yes      |
-
-### User task migration
-
-| Property                 | Migrated |
-| ------------------------ | -------- |
-| userTaskKey              | No       |
-| processDefinitionKey     | No       |
-| processDefinitionId      | No       |
-| elementId                | No       |
-| name                     | No       |
-| processDefinitionVersion | No       |
-
-### Variable
-
-| Property               | Migrated |
-| ---------------------- | -------- |
-| variableKey            | Yes      |
-| name                   | Yes      |
-| type                   | No       |
-| doubleValue            | No       |
-| longValue              | No       |
-| value                  | Yes      |
-| fullValue              | No       |
-| isPreview              | No       |
-| scopeKey               | Yes      |
-| processInstanceKey     | Yes      |
-| rootProcessInstanceKey | No       |
-| processDefinitionId    | Yes      |
-| tenantId               | Yes      |
-| partitionId            | Yes      |
-| historyCleanupDate     | Yes      |

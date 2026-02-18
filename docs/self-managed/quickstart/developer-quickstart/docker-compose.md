@@ -66,10 +66,10 @@ The Orchestration Cluster is the core of Camunda 8, providing process automation
 
 | Component                      | URL                                                              | Description                                                                                                                                                                                                                |
 | :----------------------------- | :--------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Operate                        | [http://localhost:8088/operate](http://localhost:8088/operate)   | Monitor and troubleshoot process instances. See [Introduction to Operate](../../../components/operate/operate-introduction.md) and [Process instance creation](../../../components/concepts/process-instance-creation.md). |
-| Tasklist                       | [http://localhost:8088/tasklist](http://localhost:8088/tasklist) | Complete user tasks in running process instances. See [User tasks](../../../components/modeler/bpmn/user-tasks/user-tasks.md).                                                                                             |
-| Orchestration Cluster Identity | [http://localhost:8088/identity](http://localhost:8088/identity) | Manage users and permissions for Orchestration Cluster (lightweight).                                                                                                                                                      |
-| Orchestration Cluster REST API | `http://localhost:8088/v2`                                       | REST API for process automation.                                                                                                                                                                                           |
+| Operate                        | [http://localhost:8080/operate](http://localhost:8080/operate)   | Monitor and troubleshoot process instances. See [Introduction to Operate](../../../components/operate/operate-introduction.md) and [Process instance creation](../../../components/concepts/process-instance-creation.md). |
+| Tasklist                       | [http://localhost:8080/tasklist](http://localhost:8080/tasklist) | Complete user tasks in running process instances. See [User tasks](../../../components/modeler/bpmn/user-tasks/user-tasks.md).                                                                                             |
+| Orchestration Cluster Identity | [http://localhost:8080/identity](http://localhost:8080/identity) | Manage users and permissions for Orchestration Cluster (lightweight).                                                                                                                                                      |
+| Orchestration Cluster REST API | `http://localhost:8080/v2`                                       | REST API for process automation.                                                                                                                                                                                           |
 | Orchestration Cluster gRPC API | `localhost:26500`                                                | gRPC API for high-performance process automation.                                                                                                                                                                          |
 
 :::note
@@ -259,7 +259,7 @@ When using the full configuration, Web Modeler connects automatically to the loc
 1. [Create a new project](../../../components/modeler/web-modeler/launch-web-modeler.md) or open an existing BPMN diagram.
 1. Use the visual modeler to [design your BPMN process](../../../components/modeler/bpmn/bpmn.md).
 1. Click **Deploy** to deploy the diagram to the pre-configured Orchestration Cluster.
-1. After deployment, you can [create process instances](../../../components/concepts/process-instance-creation.md) and monitor them in [Operate](http://localhost:8088/operate).
+1. After deployment, you can [create process instances](../../../components/concepts/process-instance-creation.md) and monitor them in [Operate](http://localhost:8080/operate).
 
 Web Modeler uses the `BEARER_TOKEN` authentication method to communicate with the Orchestration Cluster. The user's authentication token from Management Identity is automatically used for deployment.
 

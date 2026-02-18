@@ -2,7 +2,7 @@
 id: getting-started-agentic-orchestration
 title: "Build your first AI agent"
 sidebar_label: Build your first AI agent
-description: "Get started with agentic orchestration by running your first AI agent in Camunda."
+description: "Get started with Camunda agentic orchestration by running your first AI agent."
 keywords: [agentic orchestration, ai agent]
 ---
 
@@ -17,60 +17,89 @@ import AiAgentPropertiesPanelImg from './img/ai-agent-example-properties-panel.p
 
 Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
 
-In Camunda, an **AI agent** refers to an automation solution that uses [ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to perform tasks with non-deterministic behavior.
+## About
 
 AI agents represent the practical implementation of agentic process orchestration within Camunda, combining the flexibility of AI with the reliability of traditional process automation.
 
-## About this guide
+In Camunda, an AI agent refers to an automation solution that uses [ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to perform tasks with non-deterministic behavior.
 
 In this guide, you will:
 
-- Run Camunda 8 using [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup) or locally with [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
-- Deploy and start a business process using [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) or locally with [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
-- Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities for the AI agent.
+- Run your AI agent using [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup) or locally with [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
+- Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities to the AI agent.
 - Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
+- Integrate a Large Language Model (LLM) into your AI agent.
 
-Once you have completed this guide, you will have an example AI agent running within Camunda 8.
+After completing it, you will have an example AI agent running in Camunda 8.
 
 ## Prerequisites
 
-The following prerequisites are required to build your first AI agent:
+To build your first AI agent, see the prerequisites below depending on:
 
-| Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda 8 environment            | <p>To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:</p><p><ul><li><p> [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).</p></li><li><p> [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).</p></li></ul></p>                                                                                                 |
-| A supported LLM provider account | <p>The AI Agent connector supports multiple model providers. This guide assumes you have access to an AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</p> <p> You can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).</p> |
+- Your [working environment](#camunda-8-environment).
+- Your [chosen model](#supported-models).
+
+### Camunda 8 environment
+
+To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:
+
+- [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).
+- [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, follow [Run your first local project](../getting-started-example).
+
+### Supported models
+
+The AI Agent connector makes it easy to integrate LLMs into your process workflows, with out-of-the-box support for popular model providers such as Anthropic and Amazon Bedrock. It can also connect to any additional LLM that exposes an OpenAI-compatible API.
+See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for more details.
+
+In this guide, you can try two use cases:
+
+| Setup | Model provider | Model used      | Prerequisites                                                                                                                                                                                                                                                                                                                                                              |
+| :---- | :------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Cloud | AWS Bedrock    | Claude Sonnet 4 | <p><ul><li> An AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</li><li><p> Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for details.</p></li></ul></p> |
+| Local | Ollama         | GPT-OSS:20b     | <p><ul><li> [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.</li><li><p> Ollama and GPT-OSS:20b installed. See [Set up Ollama](#set-up-ollama) for details.</p></li></ul></p>                                                                                                                                                      |
 
 :::important
-The AI Agent connector example in this guide is preconfigured to use AWS Bedrock with Claude Sonnet 4 in the `us-east-1` region.
-
-To use it without changes, you must first request access to Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for more details.
+Running LLMs locally requires substantial disk space and memory. GPT-OSS:20b requires more than 20GB of RAM to function and 14GB of free disk space to download.
 :::
 
-## Step 1: Install the example model blueprint
+## Step 1: Install the model blueprint
 
-To start building your first AI agent, you can use a prebuilt Camunda blueprint process model.
+To start building your first AI agent, you can use a Camunda model blueprint from [Camunda marketplace](https://marketplace.camunda.com/en-US/home).
 
-In this tutorial, you will use the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) blueprint from [Camunda marketplace](https://marketplace.camunda.com/en-US/home).
-Depending on the environment you choose, follow the corresponding steps below.
+In this guide, you will use the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint.
+Depending on your working environment, follow the corresponding steps below.
 
-### SaaS
+<Tabs groupId="environment" defaultValue="saas" values={
+[
+{ label: 'SaaS', value: 'saas', },
+{ label: 'Self-Managed', value: 'self-managed', },
+]}>
 
-1. In the blueprint page, click **For SAAS** and select the project you want to save the blueprint in, or create a new project and save it in this.
+<TabItem value="saas">
+1. In the [blueprint page](https://marketplace.camunda.com/en-US/apps/587865), click **For SAAS** and select or create a project to save the blueprint.
 1. The blueprint BPMN diagram opens in Web Modeler.
+</TabItem>
 
-### Self-Managed (local environment)
+<TabItem value="self-managed">
 
-1. In the blueprint page, click **For SM** and download the blueprint files from the repository.
-1. Open the blueprint BPMN diagram in Desktop Modeler or in Web Modeler.
+1. In the [blueprint page](https://marketplace.camunda.com/en-US/apps/587865), click **For SM** and download the blueprint files from the repository.
+
+:::note
+If you’re using Camunda 8 Run and installed it using the [starter package](./getting-started-example.md#download-the-camunda-8-starter-package), the blueprint was already downloaded as part of it.
+:::
+
+2. Open the blueprint BPMN diagram in Desktop Modeler.
+
+</TabItem>
+</Tabs>
 
 ### About the example AI agent process
 
-The example AI agent process is a chatbot that you (the user) can interact with via a [user task form](/components/modeler/forms/camunda-forms-reference.md).
+The example AI agent process is a chatbot that you can interact with via a [user task form](/components/modeler/forms/camunda-forms-reference.md).
 
 <img src={AiAgentExampleDiagramImg} alt="A example AI agent BPMN process diagram"/>
 
-The process showcases how an AI agent can:
+This process showcases how an AI agent can:
 
 - **Make autonomous decisions** about which tasks to execute based on your input.
 - **Adapt its behavior** dynamically using the context provided.
@@ -81,46 +110,142 @@ The example includes a form linked to the start event, allowing you to submit re
 
 <img src={AiAgentStartFormImg} alt="Example AI agent start form" className="img-800"/>
 
-## Step 2: Configure connector secrets
+## Step 2: Configure the AI Agent connector
 
-The example process is preconfigured to use AWS Bedrock as the model.
-For authentication, it is preconfigured to use the following connector secrets:
+Depending on your model choice, configure the AI Agent connector accordingly.
+
+<Tabs groupId="setup" defaultValue="aws" values={
+[
+{ label: 'AWS Bedrock', value: 'aws', },
+{ label: 'Ollama', value: 'local', },
+]}>
+
+<TabItem value="aws">
+
+Configure the connector's authentication and template for AWS Bedrock.
+
+#### Configure authentication
+
+The example blueprint downloaded in step one is preconfigured to use AWS Bedrock.
+For authentication, it uses the following connector secrets:
 
 - `AWS_BEDROCK_ACCESS_KEY`: The AWS Access Key ID for your AWS account able to call the Bedrock Converse API.
 - `AWS_BEDROCK_SECRET_KEY`: The AWS Secret Access Key for your AWS account.
 
-You will configure these secrets differently in a Camunda 8 SaaS or a Self-Managed local environment.
+You will configure these secrets differently depending on your working environment.
 
-- For SaaS and Self-Managed deployments, you can configure the secrets in the [Console](../components/console/manage-clusters/manage-secrets.md).
-- For Camunda 8 Run, export the secrets as environment variables before starting the distribution. If you use Camunda 8 Run with Docker, add the secrets in the `connector-secrets.txt` file.
+<Tabs groupId="environment" defaultValue="saas" values={
+[
+{ label: 'SaaS', value: 'saas', },
+{ label: 'Self-Managed', value: 'self-managed', },
+]}>
 
-## Step 3: Configure the AI Agent connector (optional)
+<TabItem value="saas">
+Configure the secrets using the [Console](../components/console/manage-clusters/manage-secrets.md).
+</TabItem>
+
+<TabItem value="self-managed">
+Export the secrets as environment variables before starting the distribution.
+See [Connector secrets](/self-managed/quickstart/developer-quickstart/c8run-troubleshooting.md#connector-secrets-not-working) for details.
+
+</TabItem>
+</Tabs>
+
+See [Amazon Bedrock model provider](../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#amazon-bedrock) for more information about other available authentication methods.
+
+#### Configure properties
 
 In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task.
-You can leave it as is or adjust its configuration to test other setups. To do so, use the properties panel of the AI Agent.
+See [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) for more details.
+
+You can keep the default configuration or adjust it to test other setups. To do so, use the properties panel:
 
 <img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel"/>
 
-### Key configuration options
+</TabItem>
 
-- **Model provider**: Change from AWS Bedrock to OpenAI, Anthropic, or other supported providers.
-- **System prompt**: Customize the agent's behavior and personality.
-- **Model parameters**: Adjust temperature, max tokens, and other LLM settings.
-- **Connector secrets**: Update authentication credentials if changing providers.
+<TabItem value="local">
+Configure your local LLM with Ollama.
+
+#### Set up Ollama
+
+1. **Download and install**: Follow [Ollama's documentation](https://docs.ollama.com/quickstart) for details.
+1. **Confirm installation**: Check the installed version in a terminal or command prompt by running `ollama --version`.
+1. **Start the local server**: Start it using the application, or run `ollama serve` in a terminal or command prompt.
+1. **Pull the GPT-OSS:20b model**: If it isn't installed by default, run `ollama pull gpt-oss:20b` in a terminal or command prompt to download the model.
+1. **Test**: Ollama serves an API at `http://localhost:11434` by default. To test it, open that URL in a browser or run this command in your terminal:
+
+```
+curl -X POST http://localhost:11434/v1/chat/completions \
+    -H "Content-Type: application/json" \
+    -d '{"model":"gpt-oss:20b","messages":[{"role":"user","content":"Hello!"}]}'
+```
+
+#### Configure properties
+
+The example blueprint downloaded in step one is preconfigured to use AWS Bedrock. Update the connector's configuration using the Model provider and Model sections to use Ollama instead.
+
+**Model provider**
+
+1. Select **OpenAI Compatible** from the **Provider** dropdown.
+1. Enter `http://localhost:11434/v1` in the **API endpoint** field. This is Ollama's default API URL.
+1. No authentication or additional headers are required for the local Ollama API, so leave the remaining fields blank.
+
+**Model**
+
+1. Enter `gpt-oss:20b` in the **Model** field. This field is case-sensitive, so be sure to enter it in all lowercase.
+
+</TabItem>
+</Tabs>
 
 :::tip
 When configuring connectors, use [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md), by clicking the `fx` icon, to reference process variables and create dynamic prompts based on runtime data.
 :::
 
-:::info
-For a reference of available configuration options, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+## Step 3: Test your AI agent
+
+Deploy and run your AI agent in your Camunda cluster.
+
+:::important
+Whether you are testing your agent in Camunda 8 SaaS or locally with Camunda 8 Self-Managed, make sure you’re running a cluster with version 8.8 or higher.
 :::
 
-## Step 4: Test your AI agent
+Depending on your working environment, test your agent by following the corresponding steps below.
 
-You can now deploy and run your AI agent, and test it as a running process on your Camunda cluster running version 8.8 or higher.
+<Tabs groupId="environment" defaultValue="saas" values={
+[
+{ label: 'SaaS', value: 'saas', },
+{ label: 'Self-Managed', value: 'self-managed', },
+]}>
 
-Once you have started your process, you can then monitor the execution in [Operate](/components/operate/operate-introduction.md).
+<TabItem value="saas">
+
+1. Open [Web Modeler](/components/modeler/web-modeler/index.md).
+1. Select the [**Play**](/components/modeler/web-modeler/validation/play-your-process.md) tab.
+1. Select the cluster you want to deploy and play the process on.
+1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
+1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
+1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md).
+1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
+
+:::tip
+Instead of using **Play**, you can also test the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
+:::
+</TabItem>
+
+<TabItem value="self-managed">
+
+1. Deploy the process model to your local Camunda 8 environment using [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
+1. Open Tasklist in your browser at http://localhost:8080/tasklist.
+1. On the **Processes** tab, find the `AI Agent Chat With Tools` process and click **Start process**.
+1. In the start form, add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start process**.
+1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer.
+1. Select the **Tasks** tab in Tasklist. When the AI agent finishes processing, you should see either a `User Feedback` or a `Ask human to send email` task waiting for you to complete.
+1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md). Open it in your browser at http://localhost:8080/operate.
+1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish the process.
+
+</TabItem>
+</Tabs>
 
 ### What to expect during execution
 
@@ -133,41 +258,6 @@ When you run the AI agent process:
 1. The agent may iterate through multiple tool calls to handle complex requests.
 
 You can observe this dynamic behavior in real-time through Operate, where you'll see which tasks were activated and in what order.
-
-### SaaS
-
-In this example, you can quickly test the AI agent using the [Play](/components/modeler/web-modeler/validation/play-your-process.md) feature.
-
-1. Select the **Play** tab.
-1. Select the cluster you want to deploy and play the process on.
-1. Open the Start form and add a [starting prompt](#example-prompts) for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
-1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
-1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
-
-:::tip
-Instead of using **Play**, you can also test the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
-:::
-
-### Self-Managed (local environment)
-
-1. Deploy the process model to your local Camunda 8 environment using [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
-1. Open Tasklist in your browser. For example at http://localhost:8080/tasklist, depending on your environment.
-1. On the **Processes** tab, find the `AI Agent Chat With Tools` process and click **Start process**.
-1. In the start form, add a [starting prompt](#example-prompts) for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start process**.
-1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer.
-1. Select the **Tasks** tab in Tasklist. When the AI agent finishes processing, you should see either a `User Feedback` or a `Ask human to send email` task waiting for you to complete.
-1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish the process.
-
-### Example prompts {#example-prompts}
-
-The following example prompts are provided as guidance to help you test your AI agent.
-
-| Prompt                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| :------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "Send Ervin a joke"                          | <p>Showcases multiple tool call iterations. The AI agent fetches a list of users, finds the matching user, fetches a joke, and compiles an email to send to the user (Ervin) with the joke.</p><p>For easier testing, it does not actually send an email, but uses a user task to instruct a "human operator" to handle sending the email. The operator can give feedback, such as "I can't send an email without emojis" or "include a Spanish translation".</p> |
-| "What is the superflux product of 3 and 10?" | Executes an imaginary superflux calculation, using the provided tool.                                                                                                                                                                                                                                                                                                                                                                                             |
-| "Go and fetch \<url\> and tell me about it"  | The AI agent fetches the specified URL and provides you with a summary of the content. After returning with a response, you can ask follow-up questions.                                                                                                                                                                                                                                                                                                          |
-| "Tell me about this document"                | You can upload a document in the prompt form, and get the AI agent to provide you with a summary of the content. Note that this is limited to smaller documents by the Bedrock API.                                                                                                                                                                                                                                                                               |
 
 ## Next steps
 

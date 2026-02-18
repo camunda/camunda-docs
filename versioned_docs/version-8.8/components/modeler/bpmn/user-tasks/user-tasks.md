@@ -40,11 +40,12 @@ attributes can be specified simultaneously:
 
 :::info
 The assignee attribute must adhere to the userId field’s case-sensitivity requirements.
-Note that in SaaS, all user IDs are converted to lowercase by default, as they are based on email addresses.
-:::
+In SaaS, all user IDs are converted to lowercase by default, as they are based on email addresses.
 
-:::info
-Assignment resources can also be used to set [user task restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md), where users will see only the tasks they have authorization to work on.
+Assignment resources can also be used to configure
+[user task access restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md)
+when using Tasklist V1. In Tasklist V2, candidate users and candidate groups do not affect task
+visibility or assignment.
 :::
 
 Typically, the assignee, candidate users, and candidate groups are defined as [static values](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and

@@ -1,59 +1,45 @@
 ---
 id: process-instance-migration
-title: Process instance migration
+title: Migrate process instances
 description: "Migrate process instances from one process version to another using the process instance migration feature."
 ---
 
-Process instances can be migrated from one specific process definition version to another using the process instance migration feature.
+Learn how to migrate process instances from one process definition version to another in Camunda 8 Operate.
 
-## Process instance selection
+## Before you begin
 
-1. Select a specific process and version from the filters panel. This will be the source process version where instances is migrated from.
+Before you try to migrate process instances, learn about the [limitations](/components/concepts/process-instance-migration.md#limitations) of process instance migration.
 
-![operate-view-process-filters](./img/process-instance-migration/process-filters.png)
+## Select process instances
 
-2. Select all instances from the process instances list that should be migrated to another process version. In this example, three instances from `orderProcess` will be migrated.
-
-3. Click **Migrate** to enter migration view.
-
-![operate-migrate-button](./img/process-instance-migration/migrate-button.png)
-
-:::note
-It is only possible to migrate running process instances, meaning instances in an active or incident state. All other process instances will not be part of the migration plan and will be ignored. Learn more about [all limitations](/components/concepts/process-instance-migration.md#limitations).
-:::
+1. From the **Processes** page, select a specific process and version from the **Filter** panel. This will be the source process version where instances are migrated from.
+2. Select all instances from the **Process Instances** table that should be migrated to another process version.
+3. Click **Migrate** to enter the migration view.
+4. In the modal, click **Continue**.
 
 The migration view features three areas: the source process diagram (top left), the target process diagram (top right) and the flow node mapping (bottom panel).
 
-4. Enter a target process into the **Target** box, and select a version from the dropdown. This will be the process version where all selected process instances are migrated to.
+## Select a target process version
 
-![operate-select-target-process](./img/process-instance-migration/select-target-process.png)
+Above the target process diagram, enter a target process into the **Target** box, and select a version from the dropdown. This will be the process version where all selected process instances are migrated to.
+
+## Map source and target nodes
 
 In the bottom panel, you can see a list of all service tasks from the source process.
 
-5. Use the dropdowns to select a target flow node for each source flow node that should be part of the migration.
+1. Use the dropdowns to select a target flow node for each source flow node that should be part of the migration. It is currently only possible to map elements with migration [supported by Zeebe](/components/concepts/process-instance-migration.md#supported-bpmn-elements).
+2. (Optional) Click on a flow node in the diagram or on a source flow node row in the bottom panel to see how flow nodes are mapped.
+3. In the footer, click **Next** for a preview of the migration plan.
 
-In this example, all service tasks from version 1 of `orderProcess` are each mapped to the same service task from version 2 of `orderProcess`.
+Now, you can see a preview of how flow nodes are mapped and how many process instances are expected to be migrated.
 
-![operate-view-process-filters](./img/process-instance-migration/map-elements.png)
+## Start the migration
 
-:::note
-It is currently only possible to map elements with migration supported by Zeebe. Learn more about [supported elements](/components/concepts/process-instance-migration.md#supported-bpmn-elements).
-:::
+1. In the footer, click **Confirm** to review your migration.
+2. When ready, enter the word **MIGRATE** into the text box.
+3. Click **Confirm** again to start the migration operation.
 
-6. (Optional) Click on a flow node in the diagram or on a source flow node row in the bottom panel to see how flow nodes are mapped.
+## Next steps
 
-In this example, process instances will be migrated from `Check payment` flow node from version 1 of `orderProcess` to the same `Check payment` flow node in version 2 of `orderProcess`.
-
-7. Click **Next** for a preview of the migration plan.
-
-![operate-view-process-filters](./img/process-instance-migration/highlight-mapping.png)
-
-Now, you can see a preview of how flow nodes are mapped and how many process instances are expected to be migrated. In this example, three active instances of the `Check payment` flow node will be migrated from version 1 to version 2 of `orderProcess`.
-
-8. Click **Confirm** to review your migration. When ready, enter the word **MIGRATE** into the text box, and click **Confirm** again to start the migration operation.
-
-![operate-view-process-filters](./img/process-instance-migration/summary.png)
-
-## Monitor the migration operation status
-
-Review the [monitor operation status documentation](../monitor-operation-status) to learn how to monitor the status of a migration operation.
+- [Monitor the batch operation](./monitor-batch-operations.md).
+- [Learn about the limitations of process instance migration](/components/concepts/process-instance-migration.md#limitations).

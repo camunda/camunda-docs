@@ -36,11 +36,11 @@ Get started with Camunda agentic orchestration by building and running your firs
 
 ## Learn the fundamentals
 
-Understand the core concepts of Camunda agentic orchestration.
+Understand the fundamental concepts of Camunda agentic orchestration.
 
 <AoGrid ao={fundamentalCards} columns={2}/>
 
-## Follow our best practices
+## Explore further resources
 
 Read our guidelines and recommendations for using Camunda AI agents.
 
