@@ -40,7 +40,28 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 1. Download the latest release of <C8Run/> for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
-3. Start Camunda 8 Run by running `./start.sh` (or `.\c8run.exe start` on Windows) in your terminal.
+3. Start Camunda 8 Run by following the steps below, depending on your operating system.
+
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
+```bash
+./start.sh
+```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe start
+```
+
+</TabItem>
+</Tabs>
 
 When successful, a new Operate window automatically opens.
 
@@ -173,7 +194,28 @@ zeebeClient
 
 ## Shut down Camunda 8 Run
 
-To shut down Camunda 8 Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the C8Run directory.
+To shut down Camunda 8 Run and end all running processes, run the following command from the C8Run directory:
+
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
+```bash
+./shutdown.sh
+```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe stop
+```
+
+</TabItem>
+</Tabs>
 
 ## Known issues
 

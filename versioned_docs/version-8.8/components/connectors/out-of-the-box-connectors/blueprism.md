@@ -62,7 +62,7 @@ The **Blue Prism connector** currently supports two operation types in the **Ope
 ### Get item from a queue by ID
 
 This operation allows you to return details of a specified item from a work queue.
-It matches directly to respective Blue Prism API endpoint - [`Return details of a specified item from a work queue`](https://docs.blueprism.com/en-US/bundle/blue_prism_API_7_3_0_OpenAPI/page/index.html#tag/Work-Queues/operation/getWorkQueueItemFromWorkQueue).
+It matches directly to respective Blue Prism API endpoint - [`Return details of a specified item from a work queue`](https://documentation.blueprism.com/bp-7-5/en-us/bp-api/bpe-7-5-0-api-spec.html#tag/Work-Queues/operation/getWorkQueueItemFromWorkQueue).
 
 #### Usage
 
@@ -116,7 +116,7 @@ Response example:
 ### Create work queue item
 
 This operation allows you to create work queue items in the specified queue.
-It matches directly to respective Blue Prism API endpoint - [`Create work queue items`](https://docs.blueprism.com/en-US/bundle/blue_prism_API_7_3_0_OpenAPI/page/index.html#tag/Work-Queues/operation/createWorkQueueItems).
+It matches directly to respective Blue Prism API endpoint - [`Create work queue items`](https://documentation.blueprism.com/bp-7-5/en-us/bp-api/bpe-7-5-0-api-spec.html#tag/Work-Queues/operation/createWorkQueueItems).
 
 #### Usage
 

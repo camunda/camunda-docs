@@ -31,21 +31,16 @@ The Camunda user task implementation type was previously referred to as the **Ze
 ### Assignments
 
 User tasks support specifying assignments, using the `zeebe:AssignmentDefinition` extension element.
-This can be used to define which user the task can be assigned to. One or all of the following
-attributes can be specified simultaneously:
+You can use this to define which user the task can be assigned to. You can specify one or all of the following attributes simultaneously:
 
 - `assignee`: Specifies the user assigned to the task. [Tasklist](/components/tasklist/introduction-to-tasklist.md) will claim the task for this user.
 - `candidateUsers`: Specifies the users that the task can be assigned to.
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
-:::info
-The assignee attribute must adhere to the userId field’s case-sensitivity requirements.
 In SaaS, all user IDs are converted to lowercase by default, as they are based on email addresses.
 
-Assignment resources can also be used to configure
-[user task access restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md)
-when using Tasklist V1. In Tasklist V2, candidate users and candidate groups do not affect task
-visibility or assignment.
+:::info
+You can also use assignment resources to configure [user task access restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md) when using Tasklist V1, so that only the assignee, candidate users, and members of candidate groups can see and work on a task. In Tasklist V2, candidate users and candidate groups are interpreted through authorization-based access control: they affect task visibility and assignment only when the user has matching task or process authorizations.
 :::
 
 Typically, the assignee, candidate users, and candidate groups are defined as [static values](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
@@ -53,8 +48,7 @@ Typically, the assignee, candidate users, and candidate groups are defined as [s
 [expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers, book.author)` and `= reviewer_roles`). The expressions are evaluated on activating the user task and must result in a
 `string` for the assignee and a `list of strings` for the candidate users and a `list of strings` for the candidate groups.
 
-For [Tasklist](/components/tasklist/introduction-to-tasklist.md) to claim the task for a known Tasklist user,
-the value of the `assignee` must be the user's **unique identifier**.
+For [Tasklist](/components/tasklist/introduction-to-tasklist.md) to claim the task for a known Tasklist user, the value of the `assignee` must be the user's **unique identifier**.
 The unique identifier depends on the authentication method used to login to Tasklist:
 
 - Camunda 8 (login with email, Google, GitHub): `email`
@@ -70,8 +64,7 @@ For example, say you log into Tasklist using Camunda 8 login with email using yo
 ### Scheduling
 
 User tasks support specifying a task schedule using the `zeebe:taskSchedule` extension element.
-This can be used to define **when** users interact with a given task. One or both of the following
-attributes can be specified simultaneously:
+You can use this to define when users interact with a given task. You can specify one or both of the following attributes simultaneously:
 
 - `dueDate`: Specifies the due date of the user task.
 - `followUpDate`: Specifies the follow-up date of the user task.
@@ -81,10 +74,7 @@ For example, you can use the `followUpDate` to define the latest time a user sho
 use the `dueDate` to provide a deadline when the user task should be finished.
 :::
 
-You can define the due date and follow-up date as static values (e.g. `2023-02-28T13:13:10+02:00`), but you can also use
-[expressions](/components/concepts/expressions.md) (e.g. `= schedule.dueDate` and `= now() + duration("PT15S")`). The
-expressions are evaluated on activating the user task and must result in a `string` conforming to an ISO 8601 combined
-date and time representation.
+You can define the due date and follow-up date as static values (for example, `2023-02-28T13:13:10+02:00`) or [expressions](/components/concepts/expressions.md) (for example, `= schedule.dueDate` and `= now() + duration("PT15S")`). The expressions are evaluated on activating the user task and must result in a `string` conforming to an ISO 8601 combined date and time representation.
 
 import ISO8601DateTime from '../assets/react-components/iso-8601-date-time.md'
 
@@ -125,8 +115,7 @@ Depending on your use case, two different types of form references can be used:
 
 1. **Camunda Forms** provide a flexible way of linking a user task to a Camunda Form via the form ID.
    Forms linked this way can be deployed together with the referencing process models.
-   To link a user task to a Camunda Form, you have to specify the ID of the Camunda Form as the `formId` attribute
-   of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form)).
+   To link a user task to a Camunda Form, you have to specify the ID of the Camunda Form as the `formId` attribute of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form)).
 
    The `bindingType` attribute determines which version of the linked form is used:
    - `latest`: The latest deployed version at the moment the user task is activated.
@@ -149,19 +138,15 @@ Depending on your use case, two different types of form references can be used:
    A custom form reference will not be shown in Tasklist.
 
 :::info
-For user tasks with a [job worker implementation](#job-worker-implementation), the custom form references are defined on the `formKey` attribute
-of the `zeebe:formDefinition` extension element instead of the `externalReference` attribute.
+For user tasks with a [job worker implementation](#job-worker-implementation), the custom form references are defined on the `formKey` attribute of the `zeebe:formDefinition` extension element instead of the `externalReference` attribute.
 
-Furthermore, there is a third form option for job worker-based user tasks: embedded Camunda Forms. You can use them to
-embed a form's JSON configuration directly into the BPMN process XML as a `zeebe:UserTaskForm` extension element of the
-process element. The embedded form can then be referenced via the `formKey` attribute (see [XML representation](#camunda-form-embedded)).
+Furthermore, there is a third form option for job worker-based user tasks: embedded Camunda Forms. You can use them to embed a form's JSON configuration directly into the BPMN process XML as a `zeebe:UserTaskForm` extension element of the process element. The embedded form can then be referenced via the `formKey` attribute (see [XML representation](#camunda-form-embedded)).
 :::
 
 ### Task headers
 
 A user task can define an arbitrary number of `taskHeaders`; they are static
-metadata stored with the user task in Zeebe. The headers can be used as
-configuration parameters for tasklist applications.
+metadata stored with the user task in Zeebe. The headers can be used as configuration parameters for Tasklist applications.
 
 ### User task listeners
 
@@ -275,9 +260,7 @@ A user task with an external task form referenced by a custom form reference:
 ```
 
 :::info
-If you choose the [job worker
-implementation](#job-worker-implementation) for a user task, the custom form reference needs to be set to the `formKey` attribute instead of
-the `externalReference` attribute.
+If you choose the [job worker implementation](#job-worker-implementation) for a user task, the custom form reference needs to be set to the `formKey` attribute instead of the `externalReference` attribute.
 :::
 
 #### Camunda Form (embedded)

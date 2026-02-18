@@ -113,7 +113,7 @@ All index templates created by this exporter apply the created ILM Policy.
 | enabled                | If `true` the ILM Policy is created and applied to the index templates.                                                                                              | `false`                                  |
 | minimumAge             | Specifies how old the data must be, before the data is deleted as a duration.                                                                                        | `30d`                                    |
 | policyName             | The name of the created and applied ILM policy.                                                                                                                      | `camunda-retention-policy`               |
-| usageMetricsMinimumAge | Specifies how old the usage metrics data must be, before the data is deleted as a duration. Applies to `camunda-usage-metric` and `camunda-usage-metric-tu` indices. | `730d`                                   |
+| usageMetricsMinimumAge | Specifies how old the usage metrics data must be, before the data is deleted as a duration. Applies to `camunda-usage-metric-8.8.0_` and `camunda-usage-metric-tu-8.8.0_` indices. | `730d`                                   |
 | usageMetricsPolicyName | The name of the created and applied usage metrics ILM policy.                                                                                                        | `camunda-usage-metrics-retention-policy` |
 
 :::note

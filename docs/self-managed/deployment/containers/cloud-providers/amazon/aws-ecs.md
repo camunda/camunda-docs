@@ -68,6 +68,8 @@ After completing this guide, you will have:
 - [Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) to control network traffic to and from the ECS instances.
 - An [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) to route traffic between the VPC and the internet.
 - A [S3 bucket](https://aws.amazon.com/s3/) used by the Orchestration Cluster’s ECS-specific node-id provider.
+- A versioning-enabled [S3 bucket](https://aws.amazon.com/s3/) for backups.
+  - Use a separate bucket for backups. The node-id bucket has versioning disabled because frequent metadata changes would incur additional cost without any benefit.
 - [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) for application credentials and optional container registry credentials.
 - [AWS CloudWatch](https://aws.amazon.com/cloudwatch/) for logs.
 - [ECS Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) to connect ECS services directly with each other.
@@ -187,7 +189,7 @@ Once authentication is configured, you can initialize your Terraform project. Ea
 Initialize the backend and download the required provider plugins:
 
 :::note
-Make sure you are in the `terraform` subfolder: `camunda-deployment-references/aws/containers/ecs-single-region-fargate/terraform`.
+Make sure you are in the `terraform/cluster` subfolder: `camunda-deployment-references/aws/containers/ecs-single-region-fargate/terraform/cluster`.
 :::
 
 ```bash reference
@@ -204,13 +206,13 @@ While each Camunda component is kept as a separate module to abstract the need o
 
 If wanting to deploy multiple Camunda 8 setups, it may make sense to abstract the root workspace to a common module as well to allow easier scaling.
 
-If not otherwise indicated, the `.tf` file is corresponding to the [root workspace path](https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/terraform).
+If not otherwise indicated, the `.tf` file is corresponding to the [root workspace path](https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/terraform/cluster).
 
 ### Elastic Container Service
 
 `ecs.tf` contains the ECS cluster, which is just a logical component to group ECS resources.
 
-`../modules/ecs/fargate/orchestration-cluster` is the main component `Orchestration Cluster` of Camunda and contains the definitions for:
+`../../modules/ecs/fargate/orchestration-cluster` is the main component `Orchestration Cluster` of Camunda and contains the definitions for:
 
 - ECS Service and task definition
   - Defines the base setup for the Orchestration Cluster, including the node ID provider, EFS configuration, and initial cluster endpoints.
@@ -237,7 +239,7 @@ If not otherwise indicated, the `.tf` file is corresponding to the [root workspa
 
 The base terraform documentation for this module can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/ecs/fargate/orchestration-cluster).
 
-`../modules/ecs/fargate/connectors` is a secondary component `Connectors` and contains the definitions for:
+`../../modules/ecs/fargate/connectors` is a secondary component `Connectors` and contains the definitions for:
 
 - ECS Service and Task definition
 - Task specific IAM role to allow access to AWS services isolated to this component
@@ -280,6 +282,8 @@ If you're fine with username/password, you can remove the `postgres_seed.tf` and
 `iam.tf` contains various IAM roles and policies.
 
 `secrets.tf` contains the creation of random passwords and storage in AWS Secrets Manager.
+
+`s3.tf` contains a bucket for backup purposes with versioning and encryption enabled. Access is handled through IAM role policies.
 
 ### Advanced Topics
 
@@ -559,6 +563,24 @@ aws ecs execute-command \
 You can find more information about `AWS ECS Exec` within the [AWS documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec-run.html).
 
 For general troubleshooting assistance, consult the [operational guides troubleshooting documentation](/self-managed/operational-guides/troubleshooting.md).
+
+## Operations
+
+### Backup and restore
+
+The general [backup and restore procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md) applies.
+
+The backup process, itself, doesn't require changes.
+
+Restoring, however, introduces additional complexity because each broker's data directory (persistent volume) must be restored in a coordinated manner. To support this, an init container is introduced as part of the Orchestration Cluster, responsible for restoring the data directory for the broker running in that task. This mechanism corresponds to the step of [restoring the Zeebe Cluster](/self-managed/operational-guides/backup-restore/restore.md#restore-zeebe-cluster).
+
+This approach is implemented in the example module. Provide the `restore_backup_id` parameter to enable it.
+
+On startup, the init container leverages the node-id provider to determine its broker ID in alignment with the other tasks. It restores the partitions associated with that broker, then blocks execution until all brokers have completed their restore operations. Afterward, the init container exits, allowing the Orchestration Cluster container to start.
+
+You must configure the init container and the Orchestration Cluster container identically. If you use environment variables, this requirement is automatically satisfied. If configuration is distributed through other mechanisms, those must also be explicitly applied to the init container.
+
+As long as the `restore_backup_id` parameter remains set, the init container remains part of the task definition. After the backup has been successfully restored, subsequent executions will effectively be no-ops until the parameter is removed.
 
 ## Next steps
 

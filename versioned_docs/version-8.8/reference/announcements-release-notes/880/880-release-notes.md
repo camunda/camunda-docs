@@ -40,7 +40,7 @@ These release notes identify the main new features included in the 8.8 minor rel
 
 Camunda agentic orchestration allows you to build and orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
-<p><a href="../../../../components/agentic-orchestration/" class="link-arrow">Camunda Agentic orchestration</a></p>
+<p><a href="../../../../components/agentic-orchestration/agentic-orchestration-overview/" class="link-arrow">Camunda Agentic orchestration</a></p>
 
 Use the following new features to build and integrate AI agents into your processes:
 
@@ -228,7 +228,7 @@ A new `getJson` intrinsic function accepts a document and an optional FEEL expre
 - The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
 - If not provided, the whole document is returned as a JSON object.
 
-<p><a href="../../../../components/connectors/use-connectors/intrinsic-functions" class="link-arrow">Intrinsic functions</a></p>
+<p><a href="../../../../components/connectors/advanced-topics/intrinsic-functions" class="link-arrow">Intrinsic functions</a></p>
 
 ### Job header binding
 
@@ -1147,7 +1147,7 @@ A new `getJson` intrinsic function accepts a document and an optional FEEL expre
 - The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
 - If not provided, the whole document is returned as a JSON object.
 
-To learn more, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
+<p><a href="../../../../components/connectors/advanced-topics/intrinsic-functions" class="link-arrow">Intrinsic functions</a></p>
 
 ### Dynamic partition scaling <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
 

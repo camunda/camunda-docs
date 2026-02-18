@@ -67,9 +67,12 @@ The minimum supported OpenSearch version for the Orchestration cluster and Optim
 </div>
 <div className="release-announcement-content">
 
-#### AWS Paris region added
+#### AWS regions added
 
-Camunda 8.9 adds support for the AWS Paris region in Camunda 8 SaaS.
+Camunda 8.9 adds support for the following new regions in Camunda 8 SaaS.
+
+- Paris, Europe (eu-west-3)
+- North America, Ohio (us-east-2)
 
 <p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
 
@@ -156,6 +159,7 @@ Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{res
 
 </div>
 </div>
+
 ### Connectors
 
 <div className="release-announcement-row">
@@ -169,6 +173,25 @@ Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{res
 The Operate Connector is deprecated, following the deprecation of the Operate API in Camunda 8.9 (see [Deprecated: Operate and Tasklist v1 REST APIs](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)).
 
 Going forward, you can use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) via the [REST Connector](/components/connectors/protocol/rest.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Inbound connectors now support older process versions
+
+Starting with Camunda 8.9, inbound connectors are activated not only for the latest process version, but also for older process versions that have active instances waiting on message subscriptions.
+
+Inbound connectors now remain active for any process version that has instances waiting on message subscriptions. This ensures that running process instances can continue to receive messages through inbound connectors, even after a newer version of the process is deployed.
+
+This change improves the reliability of long-running processes that depend on inbound connectors to receive external events.
+
+<p className="link-arrow">[Inbound connector lifecycle](/components/connectors/advanced-topics/inbound-lifecycle.md)</p>
 
 </div>
 </div>
@@ -193,6 +216,23 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 
 ### Data
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Hierarchy-aware retention for process instance data
+
+Starting with Camunda 8.9, retention of process instance data in Elasticsearch/OpenSearch secondary storage becomes hierarchy-aware, meaning child process instances are retained as long as their root process instance is retained.
+
+You can control the retention behavior via the process instance retention mode configuration.
+
+<p className="link-arrow">[Hierarchy-aware retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md#hierarchy-aware-retention-elasticsearchopensearch)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">

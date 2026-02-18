@@ -579,6 +579,28 @@ These changes do not introduce new fields or richer context, but instead ensure 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch and OpenSearch: Index prefixes must differ
+
+When upgrading to Camunda 8.8 or setting up 8.8 for the first time, if you run both the Elasticsearch/OpenSearch Exporter and Camunda Exporter on the same Elasticsearch/OpenSearch cluster, their index prefixes must not match, nor be contained within the other.
+
+Do not reuse the same prefix for:
+
+- Elasticsearch/OpenSearch Exporter indices (legacy exporter): `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix`
+- Orchestration Cluster indices (secondary storage): `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
+
+If these prefixes are identical, or if one prefix includes the other (for example, `custom` and `custom-zeebe`), ILM/ISM policies and wildcard patterns such as `custom*` can target more indices than intended, which may lead to unexpected data loss.
+
+For configuration examples and details, see [Helm chart Elasticsearch/OpenSearch indices prefix](../../../self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
@@ -614,7 +636,7 @@ To revert to 0 replicas, set:
 - Environment variable: `CAMUNDA_DATABASE_INDEX_NUMBER_OF_REPLICAS=0`
 
 :::info
-To learn more, see [Elasticsearch changes in Components update 8.7 to 8.8](/self-managed/components/components-upgrade/870-to-880.md#elasticsearch).
+To learn more, see [Elasticsearch changes in Components update 8.7 to 8.8](/self-managed/upgrade/components/870-to-880.md#elasticsearch).
 :::
 
 </div>
@@ -803,7 +825,7 @@ With the Camunda 8.8 release, the default ID token claim that Web Modeler uses t
 With the Camunda 8.8 release, the Camunda Helm charts are updated to use the new Bitnami Docker repository.
 
 :::info
-See [Bitnami Docker repository migration](/self-managed/deployment/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
+See [Bitnami Docker repository migration](/self-managed/upgrade/helm/index.md#bitnami-docker-repository-migration) for migration details.
 :::
 
 </div>
@@ -972,7 +994,7 @@ For future use, refer to the [new AWS Marketplace listing](https://aws.amazon.co
 
 With the Camunda 8.8 release, the deprecated authentication methods `OAUTH` and `CLIENT_CREDENTIALS` for configured [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) are no longer supported.
 
-For more information on how to migrate, see the [upgrade guide](/self-managed/components/components-upgrade/870-to-880.md#cluster-configuration).
+For more information on how to migrate, see the [upgrade guide](/self-managed/upgrade/components/870-to-880.md#cluster-configuration).
 
 </div>
 </div>
@@ -988,7 +1010,7 @@ For more information on how to migrate, see the [upgrade guide](/self-managed/co
 The available configuration options for [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) now depend on the version of the cluster.
 For version 8.8 and above, [new configuration options](/self-managed/components/modeler/web-modeler/configuration/configuration.md#additional-configuration-for-cluster-versions--88) are required.
 
-For more information on how to modify your existing configuration, see the [upgrade guide](/self-managed/components/components-upgrade/870-to-880.md#changed-configuration-options).
+For more information on how to modify your existing configuration, see the [upgrade guide](/self-managed/upgrade/components/870-to-880.md#changed-configuration-options).
 
 </div>
 </div>
