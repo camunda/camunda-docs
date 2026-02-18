@@ -101,7 +101,7 @@ There are multiple ways to configure a Helm/Kubernetes Self-Managed cluster.
 Refer to the [official guide](/self-managed/setup/overview.md) to learn more.
 
 For the purpose of this section, imagine you installed Helm charts with `helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION`,
-and forwarded Zeebe and Operate ports. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md), also forward the Keycloak port:
+and forwarded Zeebe and Operate ports. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also forward the Keycloak port:
 
 - `kubectl port-forward svc/camunda-zeebe-gateway 26500:26500`
 - `kubectl port-forward svc/camunda-zeebe-gateway 8080:8080`
