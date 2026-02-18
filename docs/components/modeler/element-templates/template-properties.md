@@ -621,7 +621,7 @@ The `condition` property requires a FEEL expression. When using `String` or `Tex
 | **Binding parameters**     | `name`: The name of the property.<br/>Supported properties: `variableNames` and `variableEvents`. |
 | **Mapping result**         | `<zeebe:conditionalFilter [name]="[userInput]" />`                                                |
 
-The `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property` binding allows you to configure the conditional filter for [conditional events](../../bpmn/conditional-events/). The conditional filter controls which variable changes trigger the condition evaluation.
+The `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property` binding allows you to configure the conditional filter for [conditional events](../bpmn/conditional-events/conditional-events.md). The conditional filter controls which variable changes trigger the condition evaluation.
 
 ```json
 [
