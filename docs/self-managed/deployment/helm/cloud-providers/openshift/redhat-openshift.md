@@ -8,7 +8,15 @@ description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 
 <!-- TODO: Before merging:
 1. Revert all blob/feat/ocp-single-region-to-operators back to blob/main once PR #1872 in camunda-deployment-references is merged.
-2. Replace vendor-supported-infrastructure.md with operator-based-infrastructure.md once PR #7904 in camunda-docs is merged. -->
+2. Replace vendor-supported-infrastructure.md with operator-based-infrastructure.md once PR #7904 in camunda-docs is merged.
+3. After PR #7906 (feature/extract-oidc) merges:
+   - Add partial imports (IdpPrerequisite, NoDomainIdpChoice, WhyNoIdp, SingleNamespaceDeployment, NoDomainInfo, HelmUpgradeNote, KubefwdTip, PortForwardServices)
+   - Replace inline :::info Single namespace deployment with <SingleNamespaceDeployment />
+   - Add "## Identity Provider (IdP) setup" section with <IdpPrerequisite />, <NoDomainIdpChoice />, <WhyNoIdp />
+   - Replace inline :::note helm upgrade with <HelmUpgradeNote />
+   - Replace inline kubefwd tip with <KubefwdTip />
+   - Replace inline port-forward details with <PortForwardServices />
+   - Add <NoDomainInfo /> in No Ingress tab -->
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -33,7 +41,6 @@ Additional informational and high-level overview based on Kubernetes as upstream
   - Verify quotas for **VPCs, EC2 instances, and storage**.
   - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - A namespace to host the Camunda Platform.
-- Permissions to install Kubernetes operators (cluster-admin or equivalent) for deploying the infrastructure services (Elasticsearch, PostgreSQL, Keycloak). These operators can also be installed via the [OpenShift OperatorHub](https://docs.openshift.com/container-platform/latest/operators/understanding/olm-understanding-operatorhub.html), but this guide installs them directly from source for full control over versions and configuration.
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-region-to-operators/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
@@ -43,13 +50,6 @@ This section installs Camunda 8 following the architecture described in the [ref
 
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
-- **Keycloak as OIDC provider**: Example OIDC provider (can be replaced with any compatible IdP)
-
-Infrastructure components are deployed using **official Kubernetes operators** as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
-
-- **[Elasticsearch with ECK](#deploy-elasticsearch)**: Deployed via [Elastic Cloud on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) for secondary storage
-- **[PostgreSQL with CloudNativePG](#deploy-postgresql)**: Deployed via [CloudNativePG](https://cloudnative-pg.io/) for Identity and Web Modeler databases
-- **[Keycloak with Keycloak Operator](#deploy-keycloak)**: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation) for authentication
 
 For OpenShift deployments, the following OpenShift-specific configurations are also included:
 
@@ -210,7 +210,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
    - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
    To configure the orchestration cluster securely, it's essential to set up a secure communication configuration between pods:
-   - We enable gRPC Ingress for the Zeebe Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
+   - We enable gRPC Ingress for the Zeebe Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$CAMUNDA_DOMAIN`) for the gRPC proxy, different from the one used by other services (`$CAMUNDA_DOMAIN`). We also note that the port used for gRPC is `443`.
    - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe pod and configure a secure TLS connection.
 
    Merge the orchestration route overlay into your `values.yml` file:
@@ -308,19 +308,19 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/ocp-single-re
 
 :::info Keycloak issuer and localhost hostname alignment
 
-When running without a domain, Console validates the JWT issuer claim against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means that during port-forwarding you may need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
+When running without a domain using the Keycloak Operator, Console validates the JWT issuer claim against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means that during port-forwarding you may need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
 
 Add (or update) the following entry in your `/etc/hosts` file while developing locally:
 
 ```text
-127.0.0.1  $CAMUNDA_RELEASE_NAME-keycloak
+127.0.0.1  keycloak-service
 ```
 
 After adding this entry, you can reach Keycloak at:
-`http://$CAMUNDA_RELEASE_NAME-keycloak:18080/auth`
+`http://keycloak-service:18080/auth`
 
 **Why port `18080`?**
-We forward container port `8080` (originally `80`) to a non‑privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using 8080.
+The Keycloak Operator deploys the Keycloak service on port `18080`. We forward that port to the same local port (`18080`) to keep the JWT issuer URL consistent and avoid token validation mismatches.
 
 This constraint does not apply when a proper domain and Ingress are configured (the public FQDN is then used as the issuer and no hosts file changes are needed).
 :::
@@ -381,11 +381,11 @@ Some components are not enabled by default in this deployment. For more informat
 
 ### Deploy prerequisite services
 
-Before deploying Camunda, you need to deploy the infrastructure services it depends on: Elasticsearch, PostgreSQL, and Keycloak. These are deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
+Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch and PostgreSQL) is deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md). Keycloak can optionally be deployed as your OIDC provider:
 
 - **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
 - **PostgreSQL**: Deployed via [CloudNativePG](https://cloudnative-pg.io/)
-- **Keycloak**: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
+- **Keycloak** _(optional)_: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation) — can be replaced with any OIDC-compatible IdP
 
 All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
 
@@ -684,7 +684,7 @@ Below is a summary of the necessary instructions:
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
 
-1. Open Identity in your browser at `https://${DOMAIN_NAME}/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+1. Open Identity in your browser at `https://${CAMUNDA_DOMAIN}/managementidentity`. You will be redirected to your IdP and prompted to log in.
 2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
 
 ```shell
@@ -702,7 +702,7 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `https://${DOMAIN_NAME}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+6. Open the Orchestration Cluster Identity in your browser at `https://${CAMUNDA_DOMAIN}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
 7. In the Identity navigation menu, select **Roles**.
 8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
@@ -714,12 +714,13 @@ This operation links the OIDC client to the role's permissions in the Orchestrat
 
 <TabItem value="without" label="Without domain">
 
-Identity, Keycloak and the Orchestration cluster must be port-forwarded to be able to connect to the cluster.
+Identity and the Orchestration cluster must be port-forwarded to be able to connect to the cluster. If using Keycloak via the Keycloak Operator, you also need to port-forward the Keycloak service.
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
-kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:8080 --namespace "$CAMUNDA_NAMESPACE"
 kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
+# If using Keycloak Operator:
+kubectl port-forward "services/keycloak-service" 18080:18080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 :::tip Localhost development with kubefwd
@@ -734,13 +735,13 @@ sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
 After this runs, you can reach services directly, for example:
 
 - Identity: `http://$CAMUNDA_RELEASE_NAME-identity/managementidentity`
-- Keycloak: `http://$CAMUNDA_RELEASE_NAME-keycloak`
+- Keycloak: `http://keycloak-service:18080`
 - Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
 
 You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.
 :::
 
-1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to your IdP and prompted to log in.
 2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
 
 ```shell
@@ -856,10 +857,10 @@ Follow our existing [Modeler guide on deploying a diagram](/self-managed/compone
 
 The following values are required for the OAuth authentication:
 
-- **Cluster endpoint:** `https://zeebe-$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
+- **Cluster endpoint:** `https://zeebe-$CAMUNDA_DOMAIN`, replacing `$CAMUNDA_DOMAIN` with your domain
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
-- **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
+- **OAuth Token URL:** Your IdP's token endpoint (for example, `https://$CAMUNDA_DOMAIN/auth/realms/camunda-platform/protocol/openid-connect/token` when using Keycloak), replacing `$CAMUNDA_DOMAIN` with your domain
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
@@ -877,7 +878,7 @@ The following values are required for OAuth authentication:
 - **Cluster endpoint:** `http://localhost:26500`
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
-- **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
+- **OAuth Token URL:** Your IdP's token endpoint (for example, `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token` when using Keycloak with port-forwarding)
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
