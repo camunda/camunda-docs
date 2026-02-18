@@ -5,6 +5,17 @@ import TabItem from '@theme/TabItem';
 
 Review [secondary storage management](/self-managed/concepts/secondary-storage-management.md) for guidance on best practices, ensuring data integrity and performance optimization.
 
+:::warning
+When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, they must use different index prefixes. One prefix must not be the beginning of the other (for example, avoid `custom` and `custom-zeebe` together because `custom*` matches both). Do not use `operate`, `tasklist`, or `camunda` as the full exporter prefix, and do not use `zeebe-record` as the Orchestration Cluster index prefix, as `zeebe-record` is the default prefix for Elasticsearch/OpenSearch Exporter indices.
+
+The Orchestration Cluster prefix is configured via
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix`
+(or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`).
+
+For detailed requirements, configuration examples, and common mistakes, see
+[index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
+:::
+
 ### Connection
 
 <Tabs>
@@ -40,17 +51,6 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage-m
 | `camunda.data.secondary-storage.elasticsearch.security.selfSigned`<br/><br/>`camunda.data.secondary-storage.opensearch.security.selfSigned`           | Indicates the certificate is self-signed (enables relaxed trust handling when supported).                                                                                                                                                                                          | `false`                 |
 | `camunda.data.secondary-storage.elasticsearch.indexPrefix`<br/><br/>`camunda.data.secondary-storage.opensearch.indexPrefix`                           | Optional prefix for secondary storage index names.                                                                                                                                                                                                                                 | `-`                     |
 | `camunda.database.aws-enabled`                                                                                                                        | <p>Use basic authentication or AWS credentials to log in.</p><p><ul><li><p>Set to `false` to use basic authentication for OpenSearch, adhering to the global AWS OpenSearch configuration settings.</p></li><li><p>Set to `true` to log in with AWS credentials.</p></li></ul></p> | `false`                 |
-
-:::warning
-When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, their index prefixes must be distinct, non‑overlapping, and must not use reserved Orchestration index names (for example `operate`, `tasklist`, or `camunda`).
-
-The Orchestration Cluster prefix is configured via
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.indexPrefix`
-(and `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`).
-
-For detailed requirements, configuration examples, and common mistakes, see
-[index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
-:::
 
   </TabItem>
   <TabItem value="secondary-storage-helm" label="Helm values">
