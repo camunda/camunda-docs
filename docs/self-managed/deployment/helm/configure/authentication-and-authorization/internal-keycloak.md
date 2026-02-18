@@ -275,7 +275,7 @@ To review how each component is configured and which OIDC clients are used:
 
 ## Connect to the cluster
 
-After applying this configuration, use the following `kubectl port-forward` commands to access the APIs and UIs from your localhost. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md), also port-forward the Keycloak service:
+After applying this configuration, use the following `kubectl port-forward` commands to access the APIs and UIs from your localhost. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also port-forward the Keycloak service:
 
 ```bash
 # Keycloak Operator service (only if using Keycloak)
