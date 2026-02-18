@@ -141,7 +141,7 @@ module.exports = {
           items: ["components/concepts/message-aggregation"],
         },
         "components/concepts/signals",
-        "components/concepts/conditions",
+        "components/concepts/conditionals",
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",

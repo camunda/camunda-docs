@@ -28,70 +28,62 @@ If the delivery address is changed, the boundary event triggers and interrupts t
 Finally, the interrupting event subprocess can cancel the work at any time while the instance is running.
 If order is canceled while preparing the order, the conditional start event inside the event subprocess fires and interrupts the main process, starting the cancellation subprocess to handle the cancellation logic.
 
-// TODO - start here
+## Conditional start events
 
-## Interrupting vs. non-interrupting events
+Conditional start events can be used to start a process instance.
+Deploying a process with a conditional start event creates a subscription for that event.
+When the condition of the start event evaluates to `true`, the engine starts a new process instance.
 
-Some conditional events—such as event subprocess start events and boundary events—can be interrupting or non-interrupting.
+When deploying a process with a conditional start event, the following rules apply:
 
-- Interrupting: When triggered, the event stops the current execution path before continuing along the event’s outgoing flow.
-- Non-interrupting: When triggered, the event starts an additional execution path while the current activity or scope continues.
+- The condition of the conditional start event must be unique across a process definition.
+  If multiple conditional start events have the same condition, the deployment will fail with a validation error.
+- Upon deployment of a new version, the previous version’s conditional start event subscription is removed and replaced with the new version’s subscription.
 
-Conditional events behave differently depending on where they appear in the BPMN model. The following sections describe each supported event type in Camunda 8.
+To start processes via conditional start events from external systems, use the Orchestration Cluster REST API or Camunda Client SDKs.
+See [Triggering root level conditional start events via API](../../../concepts/conditionals.md#triggering-root-level-conditional-start-events-via-api) for more details.
 
-## Types of conditional events
+## Event subprocess conditional start events
 
-Camunda 8 supports conditional events in the following positions:
+Event subprocess conditional start events start an event subprocess within an active process instance when the configured condition evaluates to `true` in the scope of that instance.
+This allows a running instance to react to state changes (for example, cancellation flags, escalation thresholds, or data corrections) without requiring an explicit external signal or message correlation.
 
-- Root conditional start events (on the process)
-- Conditional event subprocess start events (interrupting and non-interrupting)
-- Intermediate conditional catch events
-- Conditional boundary events (interrupting and non-interrupting)
+An event subprocess conditional start event can be interrupting or non-interrupting:
 
-In all cases, the event triggers when its condition evaluates to `true`.
+- Interrupting starts the event subprocess and cancels the currently active work in the scope it interrupts, so the instance continues via the event subprocess path.
+- Non-interrupting starts the event subprocess in parallel while the existing execution continues.
 
-### Conditional start events
+A non-interrupting event subprocess conditional start event can trigger more than once in the same process instance.  
+It triggers each time the condition becomes `true`.
+If you don’t specify variable names or event filters, any variable change can re-evaluate the condition.
+This can start unintended executions of the event subprocess.
+See [Interrupting vs. non-interrupting conditional events](../../../concepts/conditionals.md#non-interrupting-conditional-events) for details.
 
-A conditional start event starts a process instance or an event subprocess when its condition becomes `true`.
-
-- Root conditional start events start a new process instance.
-- Event subprocess conditional start events start an event subprocess within an active process instance.
-
-Event subprocess conditional start events can be interrupting or non-interrupting. See [Interrupting vs. non-interrupting events](#interrupting-vs-non-interrupting-events).
-
-You might use conditional start events to:
-
-- Start an escalation process when a case’s `priority` becomes `"high"`.
-- Trigger a monitoring subprocess when a risk score crosses a threshold.
-
-To start processes via conditional start events from external systems, use the Orchestration Cluster REST API. See [Evaluate root-level conditional start events](../../../../apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals.api.mdx) for request and response details.
-
-### Intermediate conditional catch events
+## Intermediate conditional catch events
 
 An intermediate conditional catch event waits until its condition becomes `true`.
-
-When the process instance reaches the event, it waits until the condition evaluates to `true`, then continues along the outgoing sequence flow. For details on evaluation timing and scope rules, see [Evaluation semantics](../../../concepts/conditions.md#evaluation-semantics).
+When the process instance reaches the event, it waits until the condition evaluates to `true`, then continues along the outgoing sequence flow.
+For details on evaluation timing and scope rules, see [Evaluation semantics](../../../concepts/conditionals.md#evaluation-semantics).
 
 Intermediate conditional catch events are always interrupting, as they represent a waiting point in the process flow.
 
-Typical use cases include:
-
-- “Wait until `processorAvailable` becomes `true`, then proceed to `Assign task`.”
-
-### Conditional boundary events
+## Conditional boundary events
 
 A conditional boundary event is attached to an activity and monitors data while the activity is active.
+When the activity is entered, the engine evaluates the boundary event’s condition and triggers immediately if the condition is satisfied.
 
-When the activity is entered, the engine evaluates the boundary event’s condition and continues to monitor relevant variable changes.
+Conditional boundary events can be interrupting or non-interrupting:
 
-Conditional boundary events can be interrupting or non-interrupting. See [Interrupting vs. non-interrupting events](#interrupting-vs-non-interrupting-events).
+- Interrupting triggers the boundary event and cancels the attached activity, so execution continues via the boundary event’s outgoing sequence flow.
+- Non-interrupting triggers the boundary event without canceling the attached activity, starting an additional path via the boundary event’s outgoing sequence flow while the attached activity continues.
 
-Typical use cases include:
+A non-interrupting conditional boundary event can trigger more than once while the attached activity is active.
+It triggers each time the condition becomes `true`.
+If you don’t specify variable names or event filters, any variable change can re-evaluate the condition.
+This can start unintended boundary-event executions in parallel.
+See [Interrupting vs. non-interrupting conditional events](../../../concepts/conditionals.md#non-interrupting-conditional-events) for details.
 
-- Interrupting: “If `customerCancelled = true` while `Review application` is running, cancel the review.”
-- Non-interrupting: “While waiting for documents, start separate checks whenever `documentReceived = true`.”
-
-## Conditions
+## Conditional Definitions
 
 ### Condition expressions (FEEL)
 
@@ -109,7 +101,7 @@ Example:
 
 The FEEL expression is evaluated using variables available in the event’s scope.
 
-For details on how and when conditions are evaluated, see [Evaluation semantics](../../../concepts/conditions.md#evaluation-semantics).
+For details on how and when conditions are evaluated, see [Evaluation semantics](../../../concepts/conditionals.md#evaluation-semantics).
 
 ### Variable filters
 
@@ -140,11 +132,13 @@ The `zeebe:conditionalFilter` extension supports:
   - `update`
   - `create, update`
 
-For runtime behavior and limitations of variable filters, see [Variable filter semantics](../../../concepts/conditions.md#variable-filter-semantics).
+For runtime behavior and limitations of variable filters, see [Variable filter semantics](../../../concepts/conditionals.md#variable-filter-semantics).
 
 ## Modeling conditional events in Modeler
 
-Camunda Modeler (desktop and web) supports conditional start events, intermediate conditional catch events, and conditional boundary events. Use the properties panel to define the FEEL condition and optional variable filters.
+Camunda Modeler (desktop and web) supports conditional start events, intermediate conditional catch events, and conditional boundary events.
+Use the properties panel to define the FEEL condition and optional variable filters.
+// TODO - need screenshots of properties panel with conditional event definition and filter configuration
 
 ## XML representation
 
