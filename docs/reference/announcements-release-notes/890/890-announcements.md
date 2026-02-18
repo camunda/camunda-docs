@@ -246,7 +246,7 @@ Starting with Camunda 8.9, retention of process instance data in Elasticsearch/O
 
 You can control the retention behavior via the process instance retention mode configuration.
 
-<p className="link-arrow">[Hierarchy-aware retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md#hierarchy-aware-retention-elasticsearchopensearch)</p>
+<p className="link-arrow">[Hierarchy-aware retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md#hierarchy-aware-retention)</p>
 
 </div>
 </div>
