@@ -702,7 +702,7 @@ message EvaluateConditionalRequest {
   string tenantId = 1;
   // Used to evaluate root-level conditional start events of the process definition with the given key.
   optional int64 processDefinitionKey = 2;
-  // Serialised JSON object representing the variables to use for evaluation of the conditions and to pass to the process instances that have been triggered.
+  // Serialized JSON object representing the variables to use for evaluation of the conditions and to pass to the process instances that have been triggered.
   string variables = 3;
 }
 ```
