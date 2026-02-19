@@ -618,19 +618,19 @@ The following limitations apply:
 | ---------------------- | --------------- |
 | variableKey            | Yes             |
 | name                   | Yes             |
-| type                   | No              |
-| doubleValue            | No              |
-| longValue              | No              |
+| type                   | Yes             |
+| doubleValue            | Yes             |
+| longValue              | Yes             |
 | value                  | Yes             |
-| fullValue              | No              |
-| isPreview              | No              |
+| fullValue              | Yes             |
+| isPreview              | Yes             |
 | scopeKey               | Yes             |
 | processInstanceKey     | Yes             |
 | rootProcessInstanceKey | Yes             |
 | processDefinitionId    | Yes             |
 | tenantId               | Yes             |
 | partitionId            | Yes             |
-
+| elementInstanceKey     | Yes             |
 
 ## Cockpit plugin
 
@@ -647,3 +647,4 @@ The [Cockpit plugin](/guides/migrating-from-camunda-7/migration-tooling/data-mig
   - https://github.com/camunda/camunda-bpm-platform/issues/5424
 - The Cockpit plugin doesn't have extensive test coverage yet so we cannot guarantee a high level of stability and therefore don't claim it to be production-ready.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5404
+
