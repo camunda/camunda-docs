@@ -27,7 +27,7 @@ This section describes how exporter-side filters affect Optimize data imports an
 Starting from Camunda 8.9, the Elasticsearch and OpenSearch exporters provide optional filters that can reduce the amount of data written for Optimize:
 
 - Variable names: Inclusion and exclusion lists with match modes such as exact, starts with, and ends with.
-- Variable value types: Inclusion and exclusion lists for inferred types such as `String`, `Number`, `Boolean`, `Object`, `Array`, and `Null`.
+- Variable value types: Inclusion and exclusion lists for inferred types such as `String`, `Number`, `Boolean`, `Object` and `Null`.
 - BPMN process IDs: Inclusion and exclusion lists by `bpmnProcessId` that drop all records tied to selected processes.
 - Optimize mode: Keeps only the record value types and intents required by Optimize and drops other record types not used by Optimize.
 

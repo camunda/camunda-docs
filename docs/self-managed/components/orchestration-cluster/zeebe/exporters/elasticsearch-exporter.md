@@ -142,6 +142,10 @@ exporters:
   elasticsearch:
     args:
       index:
+          variableNameInclusionStartWith:
+              - business_
+          variableNameExclusionStartWith:
+              -  business_debug      
         variable-name:
           inclusion:
             start-with:
@@ -158,15 +162,20 @@ For details on how this interacts with Optimize, see [Camunda 8 system configura
 ### Variable-type filters
 
 Variable-type filters let you restrict exported variables by their inferred JSON type,
-such as `String`, `Number`, `Boolean`, `Object`, `Array`, or `Null`.
-
+such as `String`, `Number`, `Boolean`, `Object` or `Null`.
+The exporter first matches variable types against inclusion rules (if present), then against exclusion rules. If a variable type matches both, the exclusion wins.
 Configuration:
 
 ```yaml
 exporters:
   elasticsearch:
     args:
-      index:
+     index:
+         variableValueTypeInclusion:
+             - Object
+             - String                
+         variableValueTypeExclusion:
+             - Object
         variable-type:
           exclusion:
             - Object
@@ -186,7 +195,11 @@ Configuration:
 exporters:
   elasticsearch:
     args:
-      index:
+          index:
+            bpmnProcessIdInclusion:
+                - orderProcess
+            bpmnProcessIdExclusion:
+                - debugProcess
         bpmnProcessIdInclusion:
           - orderProcess
         bpmnProcessIdExclusion:

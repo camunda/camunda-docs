@@ -133,7 +133,11 @@ Configuration:
 exporters:
   opensearch:
     args:
-      index:
+     index:
+        variableNameInclusionStartWith:
+            - business_
+        variableNameExclusionStartWith:
+            -  business_debug
         variable-name:
           inclusion:
             start-with:
@@ -150,7 +154,7 @@ For details on how this interacts with Optimize, see [Camunda 8 system configura
 ### Variable-type filters
 
 Variable-type filters let you restrict exported variables by their inferred JSON type,
-such as `String`, `Number`, `Boolean`, `Object`, `Array`, or `Null`.
+such as `String`, `Number`, `Boolean`, `Object` or `Null`.
 
 Configuration:
 
@@ -182,6 +186,10 @@ exporters:
   opensearch:
     args:
       index:
+        bpmnProcessIdInclusion:
+            - orderProcess
+        bpmnProcessIdExclusion:
+            - debugProcess 
         bpmnProcessIdInclusion:
           - orderProcess
         bpmnProcessIdExclusion:

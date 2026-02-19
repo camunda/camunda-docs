@@ -403,6 +403,12 @@ zeebe:
               #     - technicalProcess
               index:
                 prefix: "zeebe-record"
+                # Example: exporter-side filters for Optimize (Camunda 8.9+)
+                # bpmnProcessIdExclusion:
+                #   - technicalProcess
+                # variableNameInclusionStartWith:
+                #   - businessTotal
+                prefix: "zeebe-record"
         gateway:
           enable: true
           network:
