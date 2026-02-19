@@ -134,10 +134,15 @@ For runtime behavior and limitations of variable filters, see [Variable filter s
 
 ## Modeling conditional events in Modeler
 
-Camunda Modeler (desktop and web) supports conditional start events, intermediate conditional catch events, and conditional boundary events.
-Use the properties panel to define the FEEL condition and optional variable filters.
+Camunda Modeler (desktop and web) supports conditional start events, intermediate conditional catch events, and interrupting or non-interrupting conditional boundary events.
 
-// TODO - need screenshots of properties panel with conditional event definition and filter configuration
+To add a conditional event:
+
+1. Select an existing start event, intermediate event, or boundary event, or use the **Create element** popup and search for _conditional_.
+2. Change the element type to **Conditional start event**, **Conditional intermediate catch event**, or **Conditional boundary event** as needed.
+3. With the conditional event selected, use the properties panel on the right to configure it:
+   - In the **Condition** / **FEEL expression** field, enter the condition starting with `=` (for example, `= x > 1`).
+   - In the **Variable filters** section, optionally restrict when the condition is re-evaluated by specifying variable names and the variable events (`create`, `update`, or `create, update`).
 
 ## XML representation
 
