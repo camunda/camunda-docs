@@ -30,7 +30,7 @@ After completing it, you will better understand how to debug your AI agents with
 This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), where you will use the same example AI agent process. Therefore, the same [prerequisites apply](../..//guides/getting-started-agentic-orchestration.md#prerequisites). However, it can be applied to other AI agent process implementations.
 :::
 
-## Step 1: Trigger the AI Agent connector
+## Step 1: Run your AI agent process
 
 Run your process instance using a prompt to trigger the AI Agent connector.
 
@@ -38,56 +38,51 @@ For example, enter "Visit _docs.camunda.io_ and tell me about it" in the **How c
 
 ## Step 2: Open the process instance in Operate
 
-1. Open [Operate](/components/operate/operate-introduction.md). If working with Self-Managed, open it in your browser at http://localhost:8080/operate.
+1. Open [Operate](/components/operate/operate-introduction.md). If working locally with Self-Managed, open it in your browser at http://localhost:8080/operate.
 2. Locate the process instance created by your prompt. See [View a deployed process](/components/operate/userguide/basic-operate-navigation.md#view-a-deployed-process) for more details.
 3. Open your process instance view by clicking on its process instance key.
 
 At this point, you should see the process progressing through your model.
 
-## Step 3: Understand what Operate shows (and what it doesn’t)
+## Step 3: Understand what Operate shows
 
-Operate can show that an agent activity executed and that a tool task was triggered multiple times. However, the **inputs and outputs of tool calls are not always visible where you expect them**.
+With Operate, you can track the agent activity and see which tool tasks are called.
 
-In particular:
+1. To show how many times each BPMN element is triggered, select **Execution count**.
 
-- Clicking the BPMN element that represents the tool (for example, _query knowledge base_) may show **technical variables** and **mapping rules**, but not the actual input/output payload you want for debugging.
-- The data you want (tool inputs/results) is often stored in a **parent scope** and is accessible via **inner instances** in the execution tree.
+For this particular prompt example, you can see:
 
-## Step 4: Inspect tool calls using the execution tree (inner instances)
+- The AI Agent connector was triggered once.
+- Within it, the agent executed the **Fetch URL** tool. This aligns with your prompt example: Visit a website URL and extract information from it.
 
-To see tool call inputs and results, use the execution tree:
+2. Select the **Fetch URL** tool element.
 
-1. In the process instance view, locate the agent/tool activity that ran.
-2. Open the **execution tree** (the call hierarchy / inner instances).
-3. Select the **inner instance** representing a specific tool invocation.
+- In the bottom-left pane, you can see where the element belongs in the execution tree.
+- In the bottom-right pane, the element details are displayed, including the [**Variables**](/components/concepts/execution-listeners/) and [**Input/Output Mappings**](/components/concepts/variables/#inputoutput-variable-mappings) columns, among others.
+  However, the actual tool inputs and results are stored in a **parent scope** and are accessible via the element's inner instance in the execution tree.
 
-In many agent setups, each tool execution produces an inner instance. The inner instance is usually where you can find:
+## Step 4: Inspect tool calls
 
-- The _query_ passed into the tool (for example: “Do you support loans in Madrid, Spain…”).
-- The tool result (for example, documents retrieved from a knowledge base).
+Each tool execution produces an inner instance where you can find:
 
-### Why this is confusing today
+- The inputs passed into the tool.
+- The results.
 
-A common stumbling block is that:
+To see the **Fetch URL** tool input and results:
 
-- Clicking the “tool element” in the diagram does not directly reveal the tool call payload.
-- The tool call payload is attached to a different scope (often the parent), so you must know to navigate via inner instances.
+1. In the execution tree, select the **AI_Agent#innerInstance** parent element of the **Fetch URL** tool. You will see:
 
-If you see a tool invoked “twice,” you may need to select the correct tool invocation in **instance history** and then open the **corresponding inner instance** to get the actual inputs and outputs.
+- The **toolCall** variable (the _input_). In its value field, you can see the URL you asked the agent to fetch information from.
+- The **toolCallResult** variable (the _results_). See [Tool call responses](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-call-responses) for more details.
 
-## Step 5: Validate whether you’re seeing mapping rules or live values
+2. To better inspect the results, click the pencil icon to enter edit mode for **toolCallResult**.
+3. Click the two-squares icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value. The result is a reference to a document where the actual output is stored.
 
-Operate may show:
+:::note
+If a tool is executed more than once, select the desired tool invocation in **Instance History**, then open the corresponding inner instance to view the actual inputs and results.
+:::
 
-- **Input mappings**: how values are assigned (the rules).
-- **Variables**: the values at runtime (what you usually need for debugging).
-
-A practical rule of thumb:
-
-- If you only see _how_ something is mapped, you are looking at **mapping rules**.
-- If you see the concrete query, retrieved documents, or tool outputs, you are looking at **runtime values** (typically attached to the inner instance / parent scope).
-
-## Step 6: Review the agent context variable (conversation and tool-call metadata)
+## Step 5: Review the agent context variable (conversation and tool-call metadata)
 
 Many implementations store an “agent context” as a process variable. When this is the case, you can inspect it in Operate to see:
 
