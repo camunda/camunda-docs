@@ -11,7 +11,7 @@ import { fundamentalCards } from '../../../react-components/\_mcp-card-data';
 Integrate [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) clients with [agentic orchestration](../../../agentic-orchestration/agentic-orchestration-overview.md).
 
 :::tip Camunda as an MCP server
-The Orchestration Cluster includes a built-in [MCP gateway](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md) that can be used as a remote MCP server with the MCP Client connectors. See [Enable and connect](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-setup.md#use-with-the-mcp-client-connectors) for configuration details.
+The Orchestration Cluster includes a built-in [MCP server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md) that can be used as a remote MCP server with the MCP Client connectors. See [Enable and connect](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-setup.md#use-with-the-mcp-client-connectors) for configuration details.
 :::
 
 ## About

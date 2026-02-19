@@ -60,7 +60,7 @@ export const mcpApiCards = [
     title: "Orchestration Cluster MCP Server",
     image: IconMcpImg,
     description:
-      "Exposes selected Orchestraction Cluster APIs as MCP tools for AI agents and LLM-powered applications.",
+      "Exposes selected Orchestration Cluster APIs as MCP tools for AI agents and LLM-powered applications.",
     type: "MCP",
   },
 ];

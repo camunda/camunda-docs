@@ -2,17 +2,17 @@
 id: orchestration-cluster-api-mcp-setup
 title: "Enable and connect"
 sidebar_label: "Enable and connect"
-description: "Enable the MCP gateway on your Orchestration Cluster and configure MCP clients to connect."
+description: "Enable the Orchestration Cluster MCP Server and configure MCP clients to connect."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page explains how to enable the MCP gateway on your Orchestration Cluster and configure MCP clients to consume it.
+This page explains how to enable the MCP server on your Orchestration Cluster and configure MCP clients to consume it.
 
-## Enable the MCP gateway
+## Enable the Orchestration Cluster MCP Server
 
-The MCP gateway is opt-in and must be enabled before MCP clients can connect. How to enable it depends on your deployment type.
+The MCP server is opt-in and must be enabled before MCP clients can connect. How to enable it depends on your deployment type.
 
 <Tabs groupId="deployment" defaultValue="c8run" queryString values={[
 {label: 'Camunda 8 Run', value: 'c8run' },
@@ -23,9 +23,7 @@ The MCP gateway is opt-in and must be enabled before MCP clients can connect. Ho
 
 <TabItem value="c8run">
 
-The MCP gateway is **enabled by default** in Camunda 8 Run. No additional configuration is needed.
-
-The gateway is available at `http://localhost:8080/mcp/cluster`.
+The MCP server is **enabled by default** in Camunda 8 Run. No additional configuration is needed.
 
 </TabItem>
 
@@ -59,22 +57,22 @@ orchestration:
 In the Camunda Console, navigate to your cluster, open **Cluster Settings**, and enable **MCP Support**.
 
 :::info
-MCP gateway support is available on SaaS clusters running Camunda 8.9.0 or later.
+MCP server support is available on SaaS clusters running Camunda 8.9.0 or later.
 :::
 
 </TabItem>
 
 </Tabs>
 
-For a full reference of MCP configuration properties, see [Property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#mcp-gateway).
+For a full reference of MCP configuration properties, see [Property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#mcp-server).
 
 ## Connect an MCP client
 
-Once the MCP gateway is enabled, you can connect any MCP-compliant client. The approach depends on your client's capabilities and your authentication requirements.
+Once the MCP server is enabled, you can connect any MCP-compliant client. The approach depends on your client's capabilities and your authentication requirements.
 
 ### MCP endpoint URL
 
-The MCP gateway is served at `/mcp/cluster` on the Orchestration Cluster. The full endpoint URL depends on your deployment type:
+The MCP server is served at `/mcp/cluster` on the Orchestration Cluster. The full endpoint URL depends on your deployment type:
 
 | Deployment                     | MCP endpoint URL                                                  |
 | :----------------------------- | :---------------------------------------------------------------- |
@@ -86,7 +84,7 @@ For SaaS, find your **Region Id** and **Cluster Id** in the Camunda Console unde
 
 ### Direct HTTP connection
 
-If your Orchestration Cluster does not require authentication — for example, when running locally with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) — you can connect directly to the MCP gateway endpoint without any additional tooling.
+If your Orchestration Cluster does not require authentication — for example, when running locally with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) — you can connect directly to the MCP server endpoint without any additional tooling.
 
 Any MCP client that supports [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) can be used. For authenticated environments, use [`c8ctl mcp-proxy`](#using-c8ctl-mcp-proxy) instead.
 
@@ -105,7 +103,7 @@ Any MCP client that supports [Streamable HTTP](https://modelcontextprotocol.io/s
 
 Many MCP clients, such as VS Code (GitHub Copilot) and Claude Code, do not natively support the OAuth 2.0 client credentials flow required for authenticated environments. The [`c8ctl`](https://github.com/camunda/c8ctl) `mcp-proxy` command bridges this gap by providing a local STDIO-to-Remote HTTP proxy that handles authentication transparently.
 
-The proxy authenticates to the MCP gateway using OAuth 2.0 client credentials, and exposes a local STDIO MCP interface that your client connects to.
+The proxy authenticates to the MCP server using OAuth 2.0 client credentials, and exposes a local STDIO MCP interface that your client connects to.
 
 #### Prerequisites
 
@@ -151,7 +149,7 @@ For the full list of supported environment variables, see the [`c8ctl` documenta
 
 ### Use with the MCP Client connectors
 
-You can also connect to the MCP gateway from within a BPMN process using Camunda's [MCP Client connectors](/components/early-access/alpha/mcp-client/mcp-client.md). This allows an AI agent running in an agentic orchestration workflow to interact with Camunda's own operational data — for example, to query incidents or start processes as part of an automated workflow.
+You can also connect to the MCP server from within a BPMN process using Camunda's [MCP Client connectors](/components/early-access/alpha/mcp-client/mcp-client.md). This allows an AI agent running in an agentic orchestration workflow to interact with Camunda's own operational data — for example, to query incidents or start processes as part of an automated workflow.
 
 <Tabs groupId="mcp-connector" defaultValue="remote" queryString values={[
 {label: 'MCP Remote Client connector', value: 'remote' },
@@ -180,7 +178,7 @@ For more details, see [MCP Remote Client connector](/components/early-access/alp
 
 <TabItem value="client">
 
-The [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client-connector.md) manages persistent MCP connections through the connector runtime. Configure the Camunda MCP gateway as a remote HTTP client in your connector runtime configuration (for example, `application.yml`):
+The [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client-connector.md) manages persistent MCP connections through the connector runtime. Configure the Camunda MCP server as a remote HTTP client in your connector runtime configuration (for example, `application.yml`):
 
 ```yaml
 camunda:
