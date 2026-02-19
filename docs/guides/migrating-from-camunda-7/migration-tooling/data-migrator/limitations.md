@@ -12,11 +12,9 @@ An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrat
 The following requirements and limitations apply:
 
 - Identity migration only includes the migration of:
-  - Tenants.
+  - Tenants and their associated memberships.
   - Supported authorizations (detailed in the [Authorizations](identity.md#authorizations) section).
 - Users, groups and group memberships are not automatically migrated since they are usually retrieved from an IdP.
-- Tenant memberships are not yet supported.
-  - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/982
 - Once migration has been triggered, it's strongly recommended not to create new identity data on Camunda 7. Even if migration is attempted again, the new data might not be migrated.
 - In order for authorizations to work correctly after migration, process definitions, forms, DRD and decision definitions need to have the same IDs in Camunda 8 as in Camunda 7. This should be the case if you have already migrated runtime and history data.
 
@@ -28,7 +26,9 @@ The following requirements and limitations apply:
 | Groups             | Retrieved from IdP. |
 | Group Memberships  | Retrieved from IdP. |
 | Tenants            | Yes                 |
-| Tenant Memberships | Not yet             |
+| Tenant Memberships | Yes\*               |
+
+(\*) Tenant memberships are migrated as part of their respective tenants and not tracked individually. This means that if a tenant is migrated, all its memberships are migrated as well, and if a tenant is skipped, so will be its memberships. For this reason, if the migration of an individual tenant membership fails (for example, due to a missing user), it cannot be retried.
 
 ## Runtime
 
@@ -647,4 +647,3 @@ The [Cockpit plugin](/guides/migrating-from-camunda-7/migration-tooling/data-mig
   - https://github.com/camunda/camunda-bpm-platform/issues/5424
 - The Cockpit plugin doesn't have extensive test coverage yet so we cannot guarantee a high level of stability and therefore don't claim it to be production-ready.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5404
-
