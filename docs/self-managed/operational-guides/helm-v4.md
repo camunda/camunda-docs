@@ -16,9 +16,9 @@ If you hit this issue, upgrade to a newer chart patch version (where available) 
 
 | Chart version             | Helm CLI v3 | Helm CLI v4                 |
 | ------------------------- | ----------- | --------------------------- |
-| Camunda 8.6 - Chart 11.x  | ✅          | ✅ (with workarounds below) |
-| Camunda 8.7 - Chart 12.x  | ✅          | ✅ (with workarounds below) |
-| Camunda 8.8 - Chart 13.x  | ✅          | ✅ (with workarounds below) |
+| Camunda 8.6 - Chart 11.x  | ✅          | ❌                          |
+| Camunda 8.7 - Chart 12.x  | ✅          | ❌                          |
+| Camunda 8.8 - Chart 13.x  | ✅          | ❌                          |
 | Camunda 8.9 - Chart 14.x  | ✅          | ✅ (with workarounds below) |
 | Camunda 8.10 - Chart 15.x | ❌          | ✅ (with workarounds below) |
 
