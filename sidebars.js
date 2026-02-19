@@ -1710,7 +1710,11 @@ module.exports = {
               items: [
                 {
                   type: "category",
-                  label: "Amazon",
+                  label: "Amazon ECS",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/containers/cloud-providers/amazon/index",
+                  },
                   items: [
                     "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
                   ],
