@@ -14,12 +14,13 @@ The Camunda Helm chart is compatible with Helm CLI v3 and Helm CLI v4. In Helm v
 
 If you hit this issue, upgrade to a newer chart patch version (where available) and apply the workarounds outlined below.
 
-| Chart version            | Helm CLI v3 | Helm CLI v4                 |
-| ------------------------ | ----------- | --------------------------- |
-| Camunda 8.6 - Chart 11.x | ✅          | ✅ (with workarounds below) |
-| Camunda 8.7 - Chart 12.x | ✅          | ✅ (with workarounds below) |
-| Camunda 8.8 - Chart 13.x | ✅          | ✅ (with workarounds below) |
-| Camunda 8.9 - Chart 14.x | ✅          | ✅ (with workarounds below) |
+| Chart version             | Helm CLI v3 | Helm CLI v4                 |
+| ------------------------- | ----------- | --------------------------- |
+| Camunda 8.6 - Chart 11.x  | ✅          | ✅ (with workarounds below) |
+| Camunda 8.7 - Chart 12.x  | ✅          | ✅ (with workarounds below) |
+| Camunda 8.8 - Chart 13.x  | ✅          | ✅ (with workarounds below) |
+| Camunda 8.9 - Chart 14.x  | ✅          | ✅ (with workarounds below) |
+| Camunda 8.10 - Chart 15.x | ❌          | ✅ (with workarounds below) |
 
 ## Helm CLI breaking changes
 
