@@ -15,12 +15,5 @@ module.exports = {
         "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-intermediate-tutorial",
       ],
     },
-    {
-      "MCP Gateway": [
-        "apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview",
-        "apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-setup",
-        "apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-tools",
-      ],
-    },
   ],
 };
