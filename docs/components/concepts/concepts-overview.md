@@ -6,7 +6,7 @@ description: "Learn how Camunda 8 components work together to orchestrate and au
 
 import ArchDiagramImg from '../assets/c8-architecture-diagram.png';
 
-Use [Camunda 8](https://camunda.io) to orchestrate and automate complex business processes for people, systems, and devices.
+Use [Camunda 8](https://camunda.io) to orchestrate and automate complex business processes that include people, AI agents, systems, and devices.
 
 ## About Camunda 8
 
@@ -52,23 +52,17 @@ For deployment and configuration guidance, see the Self-Managed documentation:
 
 ## Camunda 8 use cases
 
-With Camunda 8, orchestrate, observe, and analyze microservices and human tasks.
+With Camunda 8, you can model, execute, and operate end-to-end processes that span microservices, APIs, AI agents, human tasks, legacy systems, IoT devices, and more.
 
-An end-to-end, automated business process typically requires multiple microservices to achieve an outcome. Software developers and architects often struggle to effectively communicate across multiple microservices, monitor their performance, and identify and resolve problems when they occur.
+Most real-world automation is distributed. A single business outcome (for example, customer onboarding, claims handling, or order fulfillment) often requires many independently deployed services and external systems. That makes it hard to keep the overall process visible, understand where work is waiting, and recover cleanly when something fails.
 
-Camunda enables organizations to overcome these issues without compromising autonomy and the coupling of microservices. Camunda offers speed, scale, and security when paired with microservices, without the overhead of building and maintaining a daunting infrastructure.
+Camunda provides a process orchestration layer that coordinates these endpoints without forcing you into a tightly coupled architecture. You define process and decision logic using BPMN and DMN, then run it on a stateful, event-driven workflow engine designed for long-running, high-volume execution. This gives teams a consistent way to trigger work, correlate events, handle retries and compensation, and troubleshoot incidents across the full business process, not just within a single service.
 
-In addition to microservices, many organizations have mission-critical processes that require people to perform tasks manually. An end-to-end business process often requires the combination of manual work with automated steps in a unified workflow.
+Many processes also require human input, either as a normal step (for example, review or approval) or as a fallback when automation cannot proceed. Camunda lets you model human tasks alongside automated steps and then assign, track, and escalate work so the process keeps moving. For example, if customer onboarding is blocked waiting for a verification task, the process can route to the right person, enforce due dates, and make the delay visible in operations tooling.
 
-It’s important that workflows are properly orchestrated to achieve a desired outcome. For example, if a customer onboarding process is delayed because an employee doesn’t know they need to complete a task, the customer will have a poor experience. Camunda provides a lightweight, developer-friendly, easy-to-integrate solution with the [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md) feature of Camunda 8 to help individuals and groups fix slow, inefficient, or broken human workflows.
+Camunda also supports agentic orchestration. You can treat AI agents as process endpoints, just like a microservice or API call, and orchestrate them together with deterministic steps and human checkpoints. You can also build agents in Camunda by modeling agent behavior such as planning loops, tool use, and reflection, including short-term and long-term memory and retrieval-augmented generation (RAG). This makes agent actions observable and auditable, and it helps you combine dynamic agent decisions with the guardrails and policies your process requires.
 
-For a closer look at other use cases, refer to the [solutions page](https://camunda.com/solutions/) which outlines the following:
-
-- Modernize legacy IT systems
-- Orchestrate, monitor, and analyze RPA bots
-- Replace homegrown workflow automation software
-- Modernize legacy business process management systems (BPMS)
-- Build a centralized process automation platform
+Common use cases include orchestrating microservices across complex integrations, modernizing long-running processes that cross legacy systems, coordinating human work with automation, and running AI-assisted steps (for example, document interpretation or decision support) inside governed, end-to-end processes.
 
 ## What are the core quality attributes of Camunda 8?
 
@@ -78,35 +72,39 @@ Camunda 8 is designed to operate on a very large scale. To achieve this, it prov
 - **High availability and fault tolerance** via a pre-configured replication mechanism, ensuring Camunda 8 can recover from machine or software failure with no data loss and minimal downtime. This ensures the system as a whole remains available without requiring manual action.
 - **Audit trail** as all process-relevant events are written to an append-only log, providing an audit trail and a history of the state of a process.
 - **Reactive publish-subscribe interaction model** which enables microservices that connect to Camunda 8 to maintain a high degree of control and autonomy, including control over processing rates. These properties make Camunda 8 resilient, scalable, and reactive.
-- **Visual processes modeled in ISO-standard BPMN 2.0** so technical and non-technical stakeholders can collaborate on process design in a widely-used modeling language.
-- **Language-agnostic client model** makes it possible to build a client in nearly any programming language an organization uses to build microservices.
-- **Operational ease-of-use** as a SaaS provider we take care of all operational details.
+- **Visual processes modeled in ISO-standard BPMN 2.0** so technical and business stakeholders can collaborate on process design in a widely-used modeling language.
+- **Language-agnostic client model** makes it possible to build a client in nearly any programming language an organization uses to automate work.
+- **Operational ease-of-use** because as a SaaS provider, we take care of all operational details.
 
 ## What are the Camunda 8 components?
 
 ### Modeler
 
-Model and deploy business process diagrams with BPMN and DMN. By using industry-standard BPMN flowcharts to model and automate end-to-end processes, both developers and business stakeholders can collaborate and work on process diagrams and decision tables simultaneously, and use collaborative features such as comments to discuss. Available via [web and desktop app](/components/modeler/about-modeler.md).
+Design fully executable process and decision models that reduce misalignment and handoff friction while giving engineers the freedom they need to build the right solution. Camunda Modeler gives business users an intuitive way to model processes and decisions using the BPMN and DMN standards so their intent is clear, structured, and directly usable by developers. Developers can take the model as-is and build scalable, flexible solutions without worrying about losing alignment with business intent. Available via [web and desktop app](/components/modeler/about-modeler.md).
 
 #### Connectors
 
-Connectors help you communicate with systems and technology, reducing the time required to automate and orchestrate business processes that span multiple systems. Connectors are inserted into BPMN diagrams directly from within the Camunda Modeler interface. Once added to your diagram, they are configured via an intuitive properties panel on the right side of the screen.
+Connectors communicate with any system or technology, reducing the time it takes to automate and orchestrate business processes. Use connectors to orchestrate across APIs, microservices, RPA bots, AI/ML tools, enterprise applications, legacy systems, and more. Browse connectors in [Camunda Marketplace](https://marketplace.camunda.com/).
+
+#### AI agents
+
+Build [enterprise-grade AI agents](/components/agentic-orchestration/ai-agents.md) with guardrails so that they can solve complex problems with autonomy. Camunda implements agentic BPMN that enables teams to model deterministic process logic and dynamic agentic behavior (reasoning loops, memory, prompts, RAG, and human‑in‑the‑loop boundaries) in one unified, executable model.
 
 #### Forms
 
-[Create and implement custom forms](/components/modeler/forms/utilizing-forms.md) that power workflows requiring human interaction.
-
-### Workflow engine & decision engine
-
-Powered by Zeebe, Camunda’s cloud-native workflow engine provides organizations with speed, scale, and security without the overhead of building and maintaining a complex infrastructure. Zeebe can scale throughput linearly by adding cluster nodes, allowing the processing of an unlimited amount of transactions at consistently low latencies. Zeebe also supports geo-replication across data centers to provide enterprise-grade availability.
+Some automated processes require human contribution and interaction. [Create and implement custom forms](/components/modeler/forms/utilizing-forms.md) that give work instructions, collect information, and help people make decisions about the tasks they need to complete.
 
 ### Tasklist
 
-With [Tasklist](/components/tasklist/introduction-to-tasklist.md), process owners can achieve end-to-end process automation by [orchestrating human tasks](/guides/getting-started-orchestrate-human-tasks.md). When a user needs to work on a task, it appears in Tasklist.
+[Tasklist](/components/tasklist/introduction-to-tasklist.md) offers a lightweight, user-friendly interface for human work, tightly integrated with custom forms. It provides an out-of-the-box user interface for tasks so teams can rapidly iterate on process development without having to build a custom front-end application.
+
+### Workflow and decision engine
+
+[Zeebe](/components/zeebe/zeebe-overview.md) is a distributed workflow and decision engine that replaces a traditional relational database with an event streaming, message-based architecture. This approach eliminates database bottlenecks, ensures horizontal scalability, and provides built-in resilience.
 
 ### Operate
 
-[Operate](/components/operate/operate-introduction.md) provides transparency and real-time visibility to monitor, analyze, and resolve problems with processes running in Camunda 8.
+[Operate](/components/operate/operate-introduction.md) enables teams to monitor running processes, troubleshoot and resolve incidents, and modify and migrate process instances. Trace process flows in real time, investigate failures, modify variables, and resume execution where needed, all within the context of the end-to-end business process.
 
 ### Optimize
 
@@ -114,25 +112,29 @@ With [Tasklist](/components/tasklist/introduction-to-tasklist.md), process owner
 
 ### Console
 
-With [Console](/components/console/introduction-to-console.md), teams can create, configure, manage, and monitor clusters for all environments from development to production. Console also offers control over organizational settings such as user management, roles, and insights into usage metrics.
+With [Console](/components/console/introduction-to-console.md), teams can create, configure, manage, and monitor clusters for all environments, from development to production. Console offers control over organizational settings such as user management, roles, as well as insights into usage metrics.
 
 ## How does Camunda 8 compare to other solutions?
 
-### End-to-end orchestration
+### Composability
 
-Design, automate, and improve all components of the business process across different technologies, systems, infrastructures, people, and devices.
+Camunda's Integrated yet flexible architecture facilitates best-of-breed technology and reuse. Combine Camunda task automation with other tools and custom code for maximum flexibility. Choose SaaS or Self-Managed and use your preferred cloud, Kubernetes, and identity provider.
 
 ### Open architecture
 
-Fit into diverse and complex enterprise environments and technology stacks with Camunda's open and scalable architecture based on open components that can be easily integrated with most common technical architectures and frameworks.
+Integrate with a variety of applications, systems, and services to scale your architecture. Camunda works with your preferred source control, CI/CD pipelines, and programming languages; while well-documented APIs and SDKs, plus polyglot clients, enable easy integration and customization.
 
-### Standards-based business & IT collaboration
+### IT and business collaboration
 
-Use BPMN and DMN standards as a common language for developers and business stakeholders alike throughout the entire process automation lifecycle.
+IT and business stakeholders build and test processes in a shared modeling environment, while reusable processes, decision tables, agents, forms, and connectors make onboarding new teams easy.
 
-### Developer-friendly approach
+### Scalability
 
-The platform and tools are usable in your environment right away, with full public access to all of Camunda's documentation, [open APIs for integration](/apis-tools/working-with-apis-tools.md), and a [community](https://camunda.com/developers/) comprised of around 100,000 developers.
+Event streaming avoids database bottlenecks and can scale process throughput infinitely. Camunda's distributed architecture ensures continuity in the case of hardware or network failure and supports replication across global data centers for high availability.
+
+### Intelligence
+
+Prepare for the autonomous enterprise by blending deterministic and non-deterministic process execution. Camunda enables teams to integrate AI/ML into business processes where it makes sense without sacrificing reliability or regulatory compliance.
 
 ## Next steps
 
@@ -141,3 +143,4 @@ The platform and tools are usable in your environment right away, with full publ
 - [Create a Camunda 8 account](/components/console/manage-plan/create-account.md)
 - [Migrate from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-7/index.md)
 - [Automate a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md)
+- [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
