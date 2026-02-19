@@ -27,7 +27,7 @@ Ensure the following are installed in your cluster:
 - Gateway API CRDs.
 - A Gateway API controller.
 
-## Gateway controllers
+### Gateway controllers
 
 Just like Ingress controllers, Gateway controllers must be installed before a cluster can use the Gateway API. See [Gateway API implementations](https://gateway-api.sigs.k8s.io/implementations/) for details.
 
