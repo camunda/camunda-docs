@@ -64,7 +64,7 @@ MCP server support is available on SaaS clusters running Camunda 8.9.0 or later.
 
 </Tabs>
 
-For a full reference of MCP configuration properties, see [Property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#mcp-server).
+For a full reference of MCP configuration properties, see [Property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#api---mcp).
 
 ## Connect an MCP client
 
