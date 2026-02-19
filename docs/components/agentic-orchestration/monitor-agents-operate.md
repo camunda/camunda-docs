@@ -76,13 +76,13 @@ To see the **Fetch URL** tool input and results:
 - The **toolCallResult** variable (the _results_). See [Tool call responses](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-call-responses) for more details.
 
 2. To better inspect the results, click the pencil icon to enter edit mode for **toolCallResult**.
-3. Click the two-squares icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value. The result is a reference to a document where the actual output is stored.
+3. Click the two-squares icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value. The result is a reference to a document where the actual output is stored. See [**TBD - Add link**] to other section/explanation within this guide Camunda Document Storage.
 
 :::note
 If a tool is executed more than once, select the desired tool invocation in **Instance History**, then open the corresponding inner instance to view the actual inputs and results.
 :::
 
-## Step 5: Review the agent context variable (conversation and tool-call metadata)
+## Step 5: Analyze the agent context
 
 Many implementations store an “agent context” as a process variable. When this is the case, you can inspect it in Operate to see:
 
@@ -134,22 +134,18 @@ To test escalation behavior, ask something your knowledge base likely does not c
 
 Then rerun the same question to confirm the agent can answer without escalation.
 
-## Troubleshooting and common pitfalls
+## Troubleshoot
 
-### “I can’t find the tool input/output”
+### You cannot find tool input/output
 
+- You may be looking at a connector’s local scope. The BPMN element’s local variables show configuration details but not the actual payload.
 - Look for **inner instances** created by the agent’s tool calls.
-- The BPMN element’s local variables may only show configuration (vector store, embedding model, connector config), not the actual payload.
 
-### “I only see technical variables”
+### You cannot see knowledge-base documents
 
-- You may be looking at a connector’s local scope. Navigate up/down the scope tree and check the parent/inner instances.
+- Some tool results may be stored as documents. If Operate does not display document contents, you see references to them.
 
-### “I don’t see knowledge-base documents”
-
-Some tool results may be stored as documents. If Operate does not display document contents, you may only see references.
-
-### “My agent context is missing”
+### Your agent context is missing
 
 - If agent memory was stored in Document Storage or a custom memory integration, Operate may not have the full content.
 - Consider temporarily storing a debugging-friendly subset of context as process variables in lower environments.
@@ -160,3 +156,5 @@ Some tool results may be stored as documents. If Operate does not display docume
   - Use process variables for agent context in development/test.
   - Use Document Storage in production for long-running conversations, and implement an alternate “trace view” (outside Operate) if needed.
 - If you use Optimize, consider extracting key metrics (for example, token usage and tool-call counts) to process-level variables so they can be aggregated and visualized.
+
+## TBD - Follow up with Tasklist and complete execution
