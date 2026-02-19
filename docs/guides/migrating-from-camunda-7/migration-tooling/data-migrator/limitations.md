@@ -201,7 +201,7 @@ The history migration has the following limitations.
   - Batch operation entity and batch operation item: Camunda 7 does not retain sufficient information about processed instances.
   - User metrics: Not available in Camunda 7.
   - Exporter position: This entity does not exist in Camunda 7.
-  - Process instance and user task tags: These entities do not exist in Camunda 7.
+  - Process instance and user task tags: These properties do not exist in Camunda 7.
   - Audit log: Not supported. See the related tracking [issue](https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/517).
 
 ### DMN
