@@ -589,15 +589,14 @@ Only one of `timeDate`, `timeCycle`, or `timeDuration` can be defined per templa
 
 | **Binding `type`**         | `zeebe:calledElement`                                                                                                                                                   |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean` (only for `propagateAllParentVariables` and `propagateAllChildVariables`)                             |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean` (only for the `propagateAllParentVariables` and `propagateAllChildVariables` properties)              |
 | **Binding parameters**     | `property`: The name of the property.<br/> Supported properties: `processId`, `bindingType`, `versionTag`, `propagateAllParentVariables`, `propagateAllChildVariables`. |
 | **Mapping result**         | `<zeebe:calledElement [property]="[userInput]" />`                                                                                                                      |
 
 The `zeebe:calledElement` binding allows you to configure a process called by a call activity.
 
 You can set the value of the property `bindingType` to control the [resource binding type](../../../best-practices/modeling/choosing-the-resource-binding-type).
-We recommend setting the property `bindingType` to the value `"versionTag"` and setting the property `versionTag`
-to the value of the version tag of the process you want to call.
+We recommend setting the property `bindingType` to the value `"versionTag"` and setting the property `versionTag` to the value of the version tag of the process you want to call.
 
 ```json
 [
@@ -631,10 +630,10 @@ to the value of the version tag of the process you want to call.
 
 #### Variable propagation
 
-You can control automatic variable propagation between the parent process and the called process using `propagateAllParentVariables` and `propagateAllChildVariables`. These properties only support `Boolean` and `Hidden` types and do not support FEEL expressions.
+You can control automatic variable propagation between the parent process and the called process by using the `propagateAllParentVariables` and `propagateAllChildVariables` properties. These properties support only the `Boolean` and `Hidden` types and do not support FEEL expressions.
 
-- `propagateAllParentVariables`: When set to `true`, all variables from the parent process are automatically copied to the called process.
-- `propagateAllChildVariables`: When set to `true`, all variables from the called process are automatically copied back to the parent process upon completion.
+- `propagateAllParentVariables`: When you set this property to `true`, the engine copies all variables from the parent process to the called process.
+- `propagateAllChildVariables`: When you set this property to `true`, the engine copies all variables from the called process back to the parent process when the called process completes.
 
 ```json
 [
@@ -659,8 +658,6 @@ You can control automatic variable propagation between the parent process and th
   ...
 ]
 ```
-
-:::
 
 ### User task implementation: `zeebe:userTask`
 
