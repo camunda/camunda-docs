@@ -15,8 +15,7 @@ The diagram below shows all the four types of conditional events: root level sta
 ![BPMN diagram showing conditional start, intermediate, and boundary events](assets/all-conditional-event-types.png)
 
 In this example, the process starts with a root-level conditional start event.
-Root level conditional start events can be triggered via Orchestration Cluster API or Camunda Client SDKs.
-// TODO - link to triggering section below
+Root level conditional start events can be triggered via Orchestration Cluster API or Camunda Client SDKs (see [Triggering root level conditional start events via API](../../../concepts/conditionals.md#triggering-root-level-conditional-start-events-via-api) for more details).
 A new instance is created once the condition `=orderReceived = true` evaluates to true.
 
 The intermediate conditional catch event acts like a wait-until condition.
@@ -27,6 +26,7 @@ If the delivery address is changed, the boundary event triggers and interrupts t
 
 Finally, the interrupting event subprocess can cancel the work at any time while the instance is running.
 If order is canceled while preparing the order, the conditional start event inside the event subprocess fires and interrupts the main process, starting the cancellation subprocess to handle the cancellation logic.
+See [Triggering conditional events](../../../concepts/conditionals.md#triggering-conditional-events) for details on how and when conditional events are triggered.
 
 ## Conditional start events
 
@@ -57,13 +57,13 @@ A non-interrupting event subprocess conditional start event can trigger more tha
 It triggers each time the condition becomes `true`.
 If you don’t specify variable names or event filters, any variable change can re-evaluate the condition.
 This can start unintended executions of the event subprocess.
-See [Interrupting vs. non-interrupting conditional events](../../../concepts/conditionals.md#non-interrupting-conditional-events) for details.
+See [Variable filter semantics](../../../concepts/conditionals.md#variable-filter-semantics) for details.
 
 ## Intermediate conditional catch events
 
 An intermediate conditional catch event waits until its condition becomes `true`.
 When the process instance reaches the event, it waits until the condition evaluates to `true`, then continues along the outgoing sequence flow.
-For details on evaluation timing and scope rules, see [Evaluation semantics](../../../concepts/conditionals.md#evaluation-semantics).
+For details on how and when the condition is triggered, see [Triggering conditional events](../../../concepts/conditionals.md#triggering-conditional-events).
 
 Intermediate conditional catch events are always interrupting, as they represent a waiting point in the process flow.
 
@@ -81,7 +81,7 @@ A non-interrupting conditional boundary event can trigger more than once while t
 It triggers each time the condition becomes `true`.
 If you don’t specify variable names or event filters, any variable change can re-evaluate the condition.
 This can start unintended boundary-event executions in parallel.
-See [Interrupting vs. non-interrupting conditional events](../../../concepts/conditionals.md#non-interrupting-conditional-events) for details.
+See [Variable filter semantics](../../../concepts/conditionals.md#variable-filter-semantics) for details.
 
 ## Conditional Definitions
 
@@ -100,8 +100,6 @@ Example:
 ```
 
 The FEEL expression is evaluated using variables available in the event’s scope.
-
-For details on how and when conditions are evaluated, see [Evaluation semantics](../../../concepts/conditionals.md#evaluation-semantics).
 
 ### Variable filters
 
@@ -138,6 +136,7 @@ For runtime behavior and limitations of variable filters, see [Variable filter s
 
 Camunda Modeler (desktop and web) supports conditional start events, intermediate conditional catch events, and conditional boundary events.
 Use the properties panel to define the FEEL condition and optional variable filters.
+
 // TODO - need screenshots of properties panel with conditional event definition and filter configuration
 
 ## XML representation
@@ -184,4 +183,4 @@ Use the properties panel to define the FEEL condition and optional variable filt
 
 ## Additional resources
 
-- [Evaluate root-level conditional start events](../../../../apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals.api.mdx) for request and response details.
+- [Conditionals concept documentation](../../../concepts/conditionals.md)
