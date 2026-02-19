@@ -159,6 +159,11 @@ exporters:
   opensearch:
     args:
       index:
+            variableValueTypeInclusion:
+                - Object
+                - Array                
+            variableValueTypeExclusion:
+                - Object      
         variable-type:
           exclusion:
             - Object
