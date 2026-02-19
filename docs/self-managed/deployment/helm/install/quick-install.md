@@ -57,10 +57,38 @@ In production, Camunda 8 is typically deployed together with additional componen
    ```bash
    helm install camunda camunda/camunda-platform \
      --set orchestration.exporters.rdbms.enabled=true \
+     --set-string 'orchestration.env[0].name=CAMUNDA_PERSISTENT_SESSIONS_ENABLED' \
+     --set-string 'orchestration.env[0].value=false' \
      -n orchestration
    ```
 
    This enables the RDBMS exporter with embedded H2 as secondary storage. Since Camunda 8.9, the chart no longer includes a default secondary storage — you must explicitly choose one (`rdbms`, `elasticsearch`, or `opensearch`).
+
+   <!-- TODO before 8.9 GA:
+     The install command below includes a temporary workaround:
+       --set-string orchestration.env[0].name=CAMUNDA_PERSISTENT_SESSIONS_ENABLED
+       --set-string orchestration.env[0].value=false
+
+     Why: The Helm chart (PR #5098) now enables persistent web sessions for RDBMS,
+     but the application image does not yet include the PersistentWebSessionClient
+     bean for the RDBMS backend. This causes a Spring bean injection failure
+     (NoSuchBeanDefinitionException: PersistentWebSessionClient) at startup,
+     crashing all Zeebe brokers in CrashLoopBackOff.
+
+     The env var override disables persistent sessions until the app catches up.
+
+     Before GA:
+     - Remove the workaround once the app image supports persistent sessions with RDBMS
+       (tracking: https://github.com/camunda/camunda-platform-helm/issues/5099)
+     - Replace the install command with:
+       ```
+       helm install camunda camunda/camunda-platform \
+         --set orchestration.exporters.rdbms.enabled=true \
+         -n orchestration
+       ```
+     - Confirm the Connectors service port in the chart NOTES matches the actual port (currently NOTES say 8086, service is 8080)
+     - Validate that a plain `helm install` without any `--set` gives a clear error message guiding the user to choose a secondary storage
+   -->
 
 4. **Access the components:**
 
