@@ -11,9 +11,42 @@ Install Camunda 8 Self-Managed manually on a VM, bare-metal server, or standalon
 Manual installation is **not** supported for Kubernetes. If you run on Kubernetes, use the [Helm charts](/self-managed/deployment/helm/index.md).
 :::
 
-:::caution
-RDBMS is configured as the only supported secondary storage backend for this deployment. The Orchestration Cluster reads from a single secondary store, so mixing RDBMS with Elasticsearch/OpenSearch is not supported, and data migration between storage types is not supported. Optimize requires Elasticsearch/OpenSearch and is not supported with this RDBMS-only deployment.
-:::
+## Secondary storage architecture
+
+The Orchestration Cluster reads from a single configured secondary storage type (RDBMS in this deployment). However, the Zeebe broker can export to multiple targets simultaneously. If you deploy Optimize, configure both the RDBMS exporter (for Orchestration Cluster operations) and the Elasticsearch/OpenSearch exporter (for Optimize).
+
+```mermaid
+graph LR
+    subgraph zeebe[Zeebe Broker]
+        engine[Workflow Engine]
+    end
+
+    subgraph storage[Secondary Storage]
+        rdbms[RDBMS]
+        es[Elasticsearch/OpenSearch]
+    end
+
+    subgraph apps[Applications]
+        oc[Orchestration Cluster]
+        opt[Optimize]
+    end
+
+    engine -->|RDBMS Exporter| rdbms
+    engine -.->|ES/OS Exporter| es
+
+    rdbms --> oc
+    es --> opt
+
+    style rdbms fill:#e1f5ff
+    style es fill:#fff3e0
+    style opt fill:#f3e5f5
+```
+
+**Key points:**
+
+- The Orchestration Cluster reads from RDBMS via the Orchestration Cluster REST API.
+- Optimize requires Elasticsearch or OpenSearch and reads directly from it.
+- The Zeebe broker exports to both targets simultaneously to support this architecture.
 
 ## Supported installation targets
 
@@ -35,12 +68,7 @@ If you run on Kubernetes, use [Helm charts](/self-managed/deployment/helm/index.
 
 ## Supported features
 
-The Orchestration Cluster is fully supported with RDBMS secondary storage, including:
-
-- Zeebe (workflow engine)
-- Operate (instance monitoring)
-- Tasklist (user task management)
-- Orchestration Cluster Identity
+The Orchestration Cluster is fully supported with RDBMS secondary storage for workflow execution, instance monitoring, and user task management.
 
 ## Get started
 
