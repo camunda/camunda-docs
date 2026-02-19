@@ -148,7 +148,7 @@ As shown in the [architecture diagram](#web-modeler-and-console), this namespace
 
 This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or Microsoft Entra ID).
 
-:::tip Why no IdP is included by default
+:::tip Why isn't an IdP included by default?
 The choice of identity provider is highly specific to each organization's security requirements, existing infrastructure, and compliance needs. Rather than bundling a default IdP that may not match your setup, the reference architecture leaves this choice to you. This approach gives you full control over your authentication stack and avoids unnecessary complexity for teams that already have an IdP in place.
 :::
 

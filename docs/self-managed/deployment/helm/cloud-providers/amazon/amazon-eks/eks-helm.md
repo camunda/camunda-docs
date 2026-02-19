@@ -219,8 +219,8 @@ For easy and reproducible installations, we will use yaml files to configure the
 
 Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
 
-:::important Database initialization prerequisite
-If you are using an external Aurora PostgreSQL database, you must create the individual component databases (Identity, Web Modeler) before installing the Helm chart. This initialization step is covered in the infrastructure setup guides:
+:::note Database initialization prerequisite
+If you're using an external Aurora PostgreSQL database, you must create the individual component databases (Identity and Web Modeler) before installing the Helm chart. This initialization step is covered in the infrastructure setup guides:
 
 - **Terraform**: See [Configure the database and associated access](./terraform-setup.md#configure-the-database-and-associated-access) in the Terraform setup guide.
 - **eksctl**: See [Create the databases](./eksctl.md#create-the-databases) in the eksctl guide.
@@ -431,7 +431,7 @@ Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://gi
 
 #### Identity
 
-Identity uses PostgreSQL, and `identity` is configured to use IRSA with Amazon Aurora PostgreSQL. Check the [Identity database configuration](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#running-identity-on-amazon-aurora-postgresql) for more details. Identity includes the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
+Identity uses PostgreSQL, and `identity` is configured to use IRSA with Amazon Aurora PostgreSQL. Check the [Identity database configuration](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#running-identity-on-amazon-aurora-postgresql) for more details. Identity includes [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
 :::info Keycloak with IRSA
 If you deploy Keycloak via the Keycloak Operator and want it to use IRSA for database access, refer to the [official Keycloak documentation](https://www.keycloak.org/server/db#preparing-keycloak-for-amazon-aurora-postgresql) for instructions on configuring Amazon Aurora PostgreSQL with a custom JDBC wrapper.
@@ -627,7 +627,7 @@ The following values are required for the OAuth authentication:
 - **Cluster endpoint:** `https://zeebe-$CAMUNDA_DOMAIN`, replacing `$CAMUNDA_DOMAIN` with your domain
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
-- **OAuth Token URL:** Your IdP's token endpoint (e.g., `https://$CAMUNDA_DOMAIN/auth/realms/camunda-platform/protocol/openid-connect/token` for Keycloak), replacing `$CAMUNDA_DOMAIN` with your domain
+- **OAuth Token URL:** Your IdP's token endpoint (for example, `https://$CAMUNDA_DOMAIN/auth/realms/camunda-platform/protocol/openid-connect/token` for Keycloak), replacing `$CAMUNDA_DOMAIN` with your domain
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
@@ -645,7 +645,7 @@ The following values are required for OAuth authentication:
 - **Cluster endpoint:** `http://localhost:26500`
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
-- **OAuth Token URL:** Your IdP's token endpoint (e.g., `http://keycloak-service:18080/auth/realms/camunda-platform/protocol/openid-connect/token` for Keycloak Operator)
+- **OAuth Token URL:** Your IdP's token endpoint (for example, `http://keycloak-service:18080/auth/realms/camunda-platform/protocol/openid-connect/token` for Keycloak Operator)
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
