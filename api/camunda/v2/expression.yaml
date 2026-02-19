@@ -60,7 +60,6 @@ components:
           example: "=x + y"
         result:
           description: The result value. Its type can vary.
-          type: object
           example: 30
         warnings:
           type: array

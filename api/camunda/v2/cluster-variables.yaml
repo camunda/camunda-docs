@@ -5,6 +5,12 @@ paths:
       tags:
         - Cluster Variable
       summary: Create a global-scoped cluster variable
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Create a global-scoped cluster variable.
       requestBody:
         required: true
         content:
@@ -26,13 +32,18 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      description: "[[CONSISTENCY:STRONG]]"
   /cluster-variables/tenants/{tenantId}:
     post:
       operationId: createTenantClusterVariable
       tags:
         - Cluster Variable
       summary: Create a tenant-scoped cluster variable
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Create a new cluster variable for the given tenant.
       parameters:
         - name: tenantId
           in: path
@@ -61,7 +72,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      description: "[[CONSISTENCY:STRONG]]"
   /cluster-variables/search:
     post:
       tags:
@@ -107,6 +117,12 @@ paths:
       tags:
         - Cluster Variable
       summary: Get a global-scoped cluster variable
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Get a global-scoped cluster variable.
       parameters:
         - name: name
           in: path
@@ -135,7 +151,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      description: "[[CONSISTENCY:EVENTUAL]]"
     put:
       operationId: updateGlobalClusterVariable
       tags:
@@ -187,6 +202,12 @@ paths:
       tags:
         - Cluster Variable
       summary: Delete a global-scoped cluster variable
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Delete a global-scoped cluster variable.
       parameters:
         - name: name
           in: path
@@ -211,13 +232,18 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      description: "[[CONSISTENCY:STRONG]]"
   /cluster-variables/tenants/{tenantId}/{name}:
     get:
       operationId: getTenantClusterVariable
       tags:
         - Cluster Variable
       summary: Get a tenant-scoped cluster variable
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Get a tenant-scoped cluster variable.
       parameters:
         - name: tenantId
           in: path
@@ -252,7 +278,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      description: "[[CONSISTENCY:EVENTUAL]]"
     put:
       operationId: updateTenantClusterVariable
       tags:
@@ -310,6 +335,12 @@ paths:
       tags:
         - Cluster Variable
       summary: Delete a tenant-scoped cluster variable
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Delete a tenant-scoped cluster variable.
       parameters:
         - name: tenantId
           in: path
@@ -340,7 +371,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      description: "[[CONSISTENCY:STRONG]]"
 components:
   schemas:
     ClusterVariableScopeEnum:

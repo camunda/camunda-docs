@@ -106,6 +106,9 @@ components:
           description: The ID of the actor who performed the operation.
         actorType:
           $ref: "#/components/schemas/AuditLogActorTypeEnum"
+        agentElementId:
+          type: string
+          description: The element ID of the agent that performed the operation (e.g. ad-hoc subprocess element ID).
         tenantId:
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/TenantId"
@@ -130,7 +133,13 @@ components:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The key of the process instance.
         rootProcessInstanceKey:
-          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         elementInstanceKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
@@ -281,6 +290,10 @@ components:
           description: The actor type search filter.
           allOf:
             - $ref: "#/components/schemas/AuditLogActorTypeFilterProperty"
+        agentElementId:
+          description: The agent element ID search filter.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
         entityKey:
           description: The entity key search filter.
           allOf:
