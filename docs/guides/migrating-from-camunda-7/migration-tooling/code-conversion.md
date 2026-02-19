@@ -230,7 +230,7 @@ Always back up your code or use version control before running recipes. This ens
 :::
 
 :::note
-The use of `camunda-7-to-8-code-conversion-recipes` artifact requires access to the Camunda Enterprise Maven repository. See the [Camunda 7 documentation](https://docs.camunda.org/get-started/apache-maven/#camunda-artifact-storage) for instructions on how to set up the repository in your Maven configuration.
+The use of `camunda-7-to-8-code-conversion-recipes` artifact requires access to the Camunda Enterprise Maven repository. See the [Camunda 7 documentation](https://docs.camunda.org/get-started/apache-maven/#camunda-artifact-storage) for instructions on setting up the repository in your Maven configuration.
 :::
 
 Choose the recipes that match your codebase:
