@@ -19,9 +19,9 @@ Replace `<your-region>` with your chosen AWS region (for example, `eu-central-1`
 
 Now, follow these steps to create the S3 bucket with versioning enabled:
 
-1. Open your terminal and ensure the AWS CLI is installed and configured.
+1. Open your terminal, and ensure the AWS CLI is installed and configured.
 
-2. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
+2. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name, and set the `AWS_REGION` environment variable beforehand:
 
    ```bash reference
    https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
