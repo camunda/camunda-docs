@@ -17,8 +17,9 @@ The Orchestration Cluster reads from a single configured secondary storage type 
 
 ```mermaid
 graph LR
-    subgraph zeebe[Zeebe Broker]
-        engine[Workflow Engine]
+    subgraph oc[Orchestration Cluster]
+        zeebe[Zeebe Broker]
+        api[Orchestration Cluster API]
     end
 
     subgraph storage[Secondary Storage]
@@ -26,16 +27,12 @@ graph LR
         es[Elasticsearch/OpenSearch]
     end
 
-    subgraph apps[Applications]
-        oc[Orchestration Cluster]
-        opt[Optimize]
-    end
+    opt[Optimize]
 
-    engine -->|RDBMS Exporter| rdbms
-    engine -.->|ES/OS Exporter| es
-
-    rdbms --> oc
-    es --> opt
+    zeebe -->|Export| rdbms
+    zeebe -.->|Export| es
+    api -->|Read| rdbms
+    opt -->|Read/Write| es
 
     style rdbms fill:#e1f5ff
     style es fill:#fff3e0
@@ -44,9 +41,9 @@ graph LR
 
 **Key points:**
 
-- The Orchestration Cluster reads from RDBMS via the Orchestration Cluster REST API.
-- Optimize requires Elasticsearch or OpenSearch and reads directly from it.
-- The Zeebe broker exports to both targets simultaneously to support this architecture.
+- Requests to the Orchestration Cluster API read from the configured secondary storage (RDBMS).
+- Optimize requires Elasticsearch or OpenSearch and reads and writes directly to it.
+- The Orchestration Cluster exports to multiple targets simultaneously to support this architecture.
 
 ## Supported installation targets
 

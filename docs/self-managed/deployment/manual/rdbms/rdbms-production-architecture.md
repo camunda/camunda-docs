@@ -20,7 +20,7 @@ graph TB
             b2["Broker 2<br/>(AZ-2)"]
             b3["Broker 3<br/>(AZ-3)"]
         end
-        stateless["<b>Stateless Components</b><br/>Operate • Tasklist<br/>Identity • Connectors"]
+        api["<b>Orchestration Cluster API (v2)</b>"]
 
         b1 -.->|gRPC| b2
         b2 -.->|gRPC| b3
@@ -32,10 +32,12 @@ graph TB
         opt["<b>Elasticsearch/OpenSearch</b><br/>(for Optimize only)"]
     end
 
-    api["Clients & Workers<br/>gRPC / HTTP"]
+    apiClients["Web UIs and API clients<br/>Operate • Tasklist • Identity<br/>HTTP/REST"]
+    grpcClients["Workers and client apps<br/>gRPC (including Connectors/MCP Client)"]
 
-    stateless -->|v2 REST API| api
-    brokers -->|Export state<br/>RdbmsExporter| rdbms
+    apiClients --> api
+    grpcClients --> brokers
+    brokers -->|Export events| rdbms
     brokers -->|Export analytics<br/>Optional| opt
 
     style oc fill:#e1f5ff
@@ -61,7 +63,7 @@ graph TB
 
 - Processes are executed
 - State is flushed to RDBMS
-- Operate and Tasklist access the Orchestration Cluster API and do not directly access the database (v2 API)
+- Operate and Tasklist access the Orchestration Cluster v2 API and do not directly access the database
 
 ## When Elasticsearch/OpenSearch is required
 
@@ -81,7 +83,7 @@ Without Optimize: RDBMS-only stack is fully supported.
 
 ❌ **v1 API not supported**: Only the v2 Orchestration Cluster REST API works with RDBMS. See [migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 
-❌ **No automatic fallback**: If RDBMS becomes unavailable, Zeebe continues processing in-memory but cannot export. Pending operations queue until database recovers.
+❌ **No automatic fallback**: If the secondary storage becomes unavailable, Zeebe can continue processing but cannot export. Pending operations queue until storage recovers (applies to any secondary storage backend).
 
 ## Network and security
 
@@ -95,12 +97,6 @@ Without Optimize: RDBMS-only stack is fully supported.
 ✅ **HA Zeebe cluster + external managed RDBMS** (recommended for production)
 
 ✅ **Managed database services** (AWS Aurora, Azure Database, GCP Cloud SQL)
-
-## Orchestration Cluster component details
-
-- **Zeebe**: Exports state to RDBMS at configurable intervals (default 0.5s)
-- **Operate and Tasklist**: Access the Orchestration Cluster API (v2), stateless, scalable independently
-- **Optimize**: Requires Elasticsearch/OpenSearch (cannot use RDBMS)
 
 ## Next steps
 
