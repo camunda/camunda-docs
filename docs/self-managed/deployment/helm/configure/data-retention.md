@@ -36,9 +36,9 @@ For index prefix requirements and examples when both index families share the sa
 
 :::warning
 
-Zeebe records retention requirements `orchestration.retention.*` applies only to Elasticsearch/OpenSearch Exporter indices (Zeebe records), not to Orchestration Cluster indices managed by the Camunda Exporter.
+Zeebe records retention requirements `orchestration.retention.*` apply only to Elasticsearch/OpenSearch Exporter indices (Zeebe records), not to Orchestration Cluster indices managed by the Camunda Exporter.
 
-The `orchestration.retention` configuration requires the legacy Zeebe Elasticsearch/OpenSearch exporter to be enabled. The legacy exporter is automatically enabled when:
+The `orchestration.retention` configuration requires the legacy Zeebe Elasticsearch/OpenSearch Exporter to be enabled. The legacy exporter is automatically enabled when:
 
 - `orchestration.exporters.zeebe.enabled: true` is set, OR
 - Optimize is enabled (`optimize.enabled: true`), OR
@@ -157,7 +157,7 @@ orchestration:
 
 After deploying with retention enabled, verify that the ILM/ISM policies were created successfully.
 
-- Zeebe records retention (`zeebe-record-retention-policy`) applies to Elasticsearch/OpenSearch Exporter indices (Zeebe records) created by the legacy exporter (for example, indices matching the exporter prefix such as `zeebe-record-*`). The Zeebe Elasticsearch/OpenSearch exporter creates this policy automatically during initialization, typically within a few minutes of deployment.
+- Zeebe records retention (`zeebe-record-retention-policy`) applies to Elasticsearch/OpenSearch Exporter indices (Zeebe records) created by the legacy exporter (for example, indices matching the exporter prefix such as `zeebe-record-*`). The Zeebe Elasticsearch/OpenSearch Exporter creates this policy automatically during initialization, typically within a few minutes of deployment.
 
 - History retention (`camunda-history-retention-policy`) applies to archived Orchestration Cluster indices used by Operate, Tasklist, and Camunda (for example, `operate-process-*`, `tasklist-task-*` with date suffixes). The retention tooling creates this policy when `orchestration.history.retention.enabled: true`. The archiver then:
   1. Creates the ILM/ISM policy with the configured `minimumAge` setting when retention is first enabled.
