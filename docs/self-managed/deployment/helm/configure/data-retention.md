@@ -17,13 +17,13 @@ If you use an RDBMS as your secondary storage backend, implement retention and c
 **Configure data retention during initial installation.** Adding retention configuration after deployment may require manual policy creation in Elasticsearch/OpenSearch. See [Differences from previous versions](#differences-from-previous-versions) for version-specific behavior.
 :::
 
-### Prerequisites
+## Prerequisites
 
 - Camunda 8.8+ Helm chart deployment
 - Elasticsearch 7+ or OpenSearch 2.5+
 - Access to modify your `values.yaml` file
 
-### Configuration
+## Configuration
 
 Configure retention policies in your `values.yaml` file under the `orchestration` section.
 
@@ -49,22 +49,22 @@ Starting in Camunda 8.8, `orchestration.exporters.zeebe.enabled` defaults to `fa
 For full exporter configuration and retention options, see [Zeebe Elasticsearch Exporter retention](../../../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter).
 :::
 
-#### Parameters
+### Parameters
 
 **Zeebe records retention parameters:**
 
-| Key                                  | Type    | Default                         | Description                                                                                                                                                                                               |
-| ------------------------------------ | ------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `orchestration.retention.enabled`    | boolean | `false`                         | If `true`, creates and applies the ILM/ISM policy to Zeebe record indices. **Requires the legacy Zeebe exporter to be enabled** (see prerequisites above).                                                |
-| `orchestration.retention.minimumAge` | string  | `30d`                           | How old the data must be before deletion. Uses [Elasticsearch TimeUnit format](https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#time-units) (e.g., `30d`, `7d`, `1h`) |
-| `orchestration.retention.policyName` | string  | `zeebe-record-retention-policy` | Name of the ILM/ISM policy to create and apply                                                                                                                                                            |
+| Key                                  | Type    | Default                         | Description                                                                                                                                                                                                      |
+| ------------------------------------ | ------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `orchestration.retention.enabled`    | boolean | `false`                         | If `true`, creates and applies the ILM/ISM policy to Zeebe record indices. **Requires the legacy Zeebe exporter to be enabled** (see prerequisites above).                                                       |
+| `orchestration.retention.minimumAge` | string  | `30d`                           | How old the data must be before deletion. Uses [Elasticsearch TimeUnit format](https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#time-units) (for example, `30d`, `7d`, `1h`) |
+| `orchestration.retention.policyName` | string  | `zeebe-record-retention-policy` | Name of the ILM/ISM policy to create and apply                                                                                                                                                                   |
 
 **History archiving and retention parameters:**
 
 | Key                                                      | Type    | Default                                  | Description                                                                                                    |
 | -------------------------------------------------------- | ------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `orchestration.history.waitPeriodBeforeArchiving`        | string  | `1h`                                     | Grace period before archiving completed processes. Processes finished within this window are not yet archived. |
-| `orchestration.history.rolloverInterval`                 | string  | `1d`                                     | Time range for creating dated indices (e.g., `1d` creates daily indices).                                      |
+| `orchestration.history.rolloverInterval`                 | string  | `1d`                                     | Time range for creating dated indices (for example, `1d` creates daily indices).                               |
 | `orchestration.history.rolloverBatchSize`                | integer | `100`                                    | Maximum number of process instances per archiving batch                                                        |
 | `orchestration.history.elsRolloverDateFormat`            | string  | `date`                                   | Date format for historical indices in Java DateTimeFormatter syntax                                            |
 | `orchestration.history.delayBetweenRuns`                 | integer | `2000`                                   | Millisecond interval between archiver runs                                                                     |
@@ -75,9 +75,9 @@ For full exporter configuration and retention options, see [Zeebe Elasticsearch 
 | `orchestration.history.retention.usageMetricsMinimumAge` | string  | `730d`                                   | Retention period for usage metrics indices (2 years by default)                                                |
 | `orchestration.history.retention.usageMetricsPolicyName` | string  | `camunda-usage-metrics-retention-policy` | Name of the ILM/ISM policy for usage metrics                                                                   |
 
-#### Example usage
+### Example usage
 
-##### Orchestration Cluster history retention (recommended)
+#### Orchestration Cluster history retention (recommended)
 
 In most deployments starting with Camunda 8.8, you only need retention for Orchestration Cluster indices (archived Operate, Tasklist, and Camunda data).
 
@@ -98,7 +98,7 @@ orchestration:
       usageMetricsPolicyName: camunda-usage-metrics-retention-policy
 ```
 
-##### Zeebe records retention (optional)
+#### Zeebe records retention (optional)
 
 Enable Zeebe records retention only if you still use the legacy Elasticsearch/OpenSearch Exporter (for example, when Optimize reads from `zeebe-record-*` indices).
 
@@ -123,7 +123,7 @@ orchestration:
     policyName: zeebe-record-retention-policy
 ```
 
-##### Retention configuration
+#### Retention configuration
 
 Both scenarios use the same retention configuration:
 
@@ -151,28 +151,19 @@ orchestration:
       usageMetricsPolicyName: camunda-usage-metrics-retention-policy
 ```
 
-### Troubleshooting
+## Troubleshooting
 
-#### Verifying retention policies
+### Verifying retention policies
 
 After deploying with retention enabled, verify that the ILM/ISM policies were created successfully.
 
-- `zeebe-record-retention-policy` applies to Elasticsearch/OpenSearch Exporter indices (Zeebe records) created by the legacy exporter (for example, `zeebe-record-*`).
-- `camunda-history-retention-policy` applies to archived Orchestration Cluster indices used by Operate, Tasklist, and Camunda (for example, `operate-process-*`, `tasklist-task-*` with date suffixes).
+- Zeebe records retention (`zeebe-record-retention-policy`) applies to Elasticsearch/OpenSearch Exporter indices (Zeebe records) created by the legacy exporter (for example, indices matching the exporter prefix such as `zeebe-record-*`). The Zeebe Elasticsearch/OpenSearch exporter creates this policy automatically during initialization, typically within a few minutes of deployment.
 
-Zeebe records retention (`zeebe-record-retention-policy`):
-Created automatically by the Zeebe Elasticsearch/OpenSearch exporter during initialization, typically within a few minutes of deployment.
-This policy is applied to runtime Zeebe record indices (for example, `zeebe-record-*`).
-
-History retention (`camunda-history-retention-policy`):
-Created automatically by Camunda's retention tooling when `orchestration.history.retention.enabled: true`.
-The archiver will:
-
-1. Create the ILM/ISM policy with the configured `minimumAge` setting when retention is first enabled.
-1. Wait for `waitPeriodBeforeArchiving` (default: 1 hour) after a process instance completes.
-1. Archive completed instances to dated indices (for example, `operate-process-8.3.0_2024-01-15`, `tasklist-task-8.8.0_2024-01-15`).
-1. Attach the policy directly to each archived index as it is created.
-   The policy applies directly to archived Operate, Tasklist, and Camunda indices (not via index templates).
+- History retention (`camunda-history-retention-policy`) applies to archived Orchestration Cluster indices used by Operate, Tasklist, and Camunda (for example, `operate-process-*`, `tasklist-task-*` with date suffixes). The retention tooling creates this policy when `orchestration.history.retention.enabled: true`. The archiver then:
+  1. Creates the ILM/ISM policy with the configured `minimumAge` setting when retention is first enabled.
+  2. Waits for `waitPeriodBeforeArchiving` (default: 1 hour) after a process instance completes.
+  3. Archives completed instances to dated indices (for example, `operate-process-8.3.0_2024-01-15`, `tasklist-task-8.8.0_2024-01-15`).
+  4. Attaches the policy directly to each archived index as it is created. The policy applies directly to archived Operate, Tasklist, and Camunda indices (not via index templates).
 
 Set your database URL:
 
@@ -265,7 +256,7 @@ Expected output showing the policy is attached:
 }
 ```
 
-#### Manually creating or updating policies (8.7 and earlier)
+### Manually creating or updating policies (8.7 and earlier)
 
 For Camunda 8.8+, policies are created automatically by the retention tooling. If you need to manually create or update policies, use the policy names configured in your `values.yaml` with the commands in the [Camunda 8.7 manual policy management guide](/versioned_docs/version-8.7/self-managed/setup/guides/data-retention.md#manual-policy-management).
 
@@ -283,7 +274,7 @@ For Camunda 8.8+, policies are created automatically by the retention tooling. I
 
 The curl commands for creating and applying policies are the same across versions—only the policy names differ. See the [8.7 guide's manual policy section](/versioned_docs/version-8.7/self-managed/setup/guides/data-retention.md#manual-policy-management) for complete ILM and ISM policy creation commands.
 
-#### Known limitations
+### Known limitations
 
 **OpenSearch policy updates:**
 
@@ -299,7 +290,7 @@ See the [OpenSearch ISM API documentation](https://opensearch.org/docs/latest/im
 
 **Elasticsearch bulk operations:**
 
-When applying retention policies to a large number of existing indices, the operation may fail due to HTTP line length limits in Elasticsearch. This typically occurs when using wildcard patterns to apply settings to many indices at once (e.g., `operate-*`, `tasklist-*`).
+When applying retention policies to a large number of existing indices, the operation may fail due to HTTP line length limits in Elasticsearch. This typically occurs when using wildcard patterns to apply settings to many indices at once (for example, `operate-*`, `tasklist-*`).
 
 **Workarounds:**
 
@@ -312,10 +303,10 @@ When applying retention policies to a large number of existing indices, the oper
 The `camunda-history-retention-policy` is created by Camunda's retention tooling as part of the archiving workflow. If you query for this policy immediately after deployment and before any archiving occurs, you may receive a 404 response. The policy is created when the first archived index is created by the archiver.
 
 :::note Index naming
-Operate and Tasklist indices use schema-specific versioning in their names (e.g., `operate-process-8.3.0_`, `tasklist-task-8.8.0_`). The version numbers represent schema versions, which may differ from the Camunda platform version. When archived, these indices receive a date suffix (e.g., `operate-process-8.3.0_2024-01-15`).
+Operate and Tasklist indices use schema-specific versioning in their names (for example, `operate-process-8.3.0_`, `tasklist-task-8.8.0_`). The version numbers represent schema versions, which may differ from the Camunda platform version. When archived, these indices receive a date suffix (for example, `operate-process-8.3.0_2024-01-15`).
 :::
 
-### References
+## References
 
 **Related Camunda documentation:**
 
@@ -335,7 +326,7 @@ Operate and Tasklist indices use schema-specific versioning in their names (e.g.
 - [OpenSearch ISM documentation](https://opensearch.org/docs/latest/im-plugin/ism/index/) - Official OpenSearch ISM guide
 - [Helm values documentation](https://helm.sh/docs/chart_template_guide/values_files/) - Working with Helm values files
 
-### Differences from previous versions
+## Differences from previous versions
 
 **Camunda 8.8:**
 
@@ -347,7 +338,7 @@ Operate and Tasklist indices use schema-specific versioning in their names (e.g.
 
 **Camunda 8.7 and earlier:**
 
-- **Operate**: Creates ILM policy when enabled, but configuration updates (e.g., changing `minimumAge`) are not applied automatically - manual policy updates required
+- **Operate**: Creates ILM policy when enabled, but configuration updates (for example, changing `minimumAge`) are not applied automatically - manual policy updates required
 - **Zeebe**: Creates policies on initial install and applies ILM configuration updates automatically
 - **Tasklist**: Does not apply ILM configuration updates after deployment - manual policy updates required
 - **Versions 8.5-8.6**: ILM policies sometimes missing after configuration; may require manual creation or new record export to trigger policy creation
