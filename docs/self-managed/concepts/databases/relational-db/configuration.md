@@ -191,7 +191,7 @@ The following additional configuration options are available under `camunda.data
 The RDBMS exporter provides automatic history cleanup, which works in two stages:
 
 1. **TTL marking**  
-   When a root process instance finishes, the entire process instance hierarchy (root + child process instances started via Call Activities) and related data are marked for deletion once the root instance's time-to-live expires.
+   When a root process instance finishes, the entire process instance hierarchy (the root and any child process instances started via Call Activities), and all related data are marked for deletion once the root instance's time-to-live expires.
 
 2. **Periodic cleanup job**  
    A scheduled cleanup job deletes marked records in batches and adjusts future intervals dynamically:
