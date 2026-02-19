@@ -35,41 +35,23 @@ These filters run inside the exporter and permanently drop matching records from
 
 #### Non‑retroactive filters and permanent gaps
 
-Process inclusion/exclusion filters are not retroactive:
+Exporter-side filters are not retroactive:
 
 - Filters only affect records produced after the configuration change.
 - If a process is excluded (or not included) for some period and later re‑enabled, records from the excluded period were never exported.
 - As a result, Optimize will always show a permanent gap in that time window for the affected process, even if you later remove the filter or inclusion list.
 
-The same principle applies to variable‑name and variable‑type filters: variables that were dropped by the exporter during a given time window cannot be recovered in Optimize, even if you subsequently relax the filters.
-
-#### When it is safe to enable exporter-side filters
-
-The recommended patterns are:
-
-- Clusters running 8.9+ or new Optimize installations:
-  Enable exporter-side filters (variable, type, process, Optimize mode) before starting Optimize imports. Optimize will build its indices
-  from a single, consistently filtered stream and no special action is required.
-
-- Clusters using exporters for 8.8 to 8.9 migration or other pipelines:
-  Do not change exporter-side filters during the migration window. Follow the main migration documentation and only enable filters after
-  migration has completed, to avoid interfering with both migration and Optimize imports.
+The same principle applies to variable‑name and variable‑type filters and other exporter-side filters: records that were dropped during a given time window cannot be recovered in Optimize, even if you subsequently relax the filters.
 
 #### Changing filters on existing clusters (sequence vs position)
 
-On clusters that have already exported unfiltered data to Optimize, enabling or changing exporter-side filters mid‑stream can cause Optimize to miss some re‑exported events:
+Whenever possible, enable exporter-side filters (variable, type, process, Optimize mode) before Optimize starts importing from that exporter. This way, Optimize builds its indices from a single, consistently filtered stream and no extra re-indexing is required.
 
-- Before 8.9, exporters always wrote an unfiltered event stream with a stable synthetic sequence counter per record. Optimize could reliably continue from “the last sequence it had seen”.
-- With 8.9 filters, re‑exporting from a snapshot after enabling filters can cause the same logical event to appear at a different effective sequence. Optimize may then skip some events because it assumes all records with a lower sequence than the last processed one have already been imported.
+On clusters that have already exported data to Optimize, enabling or changing exporter-side filters mid‑stream can cause Optimize to miss some re‑exported events.
 
-There is no automatic, upgrade‑safe way to change filters without any risk of gaps. Practically, you have two options:
+As long as the exporter configuration (including any existing filters) remains unchanged, the exporter assigns a monotonically increasing `sequence` to each exported record, and Optimize can reliably resume imports from the “last seen” sequence. When you change exporter-side filters, the at‑least‑once delivery semantics of the Elasticsearch/OpenSearch exporter mean that some events may be exported again after a failover, restart, or snapshot replay. Records that are now filtered out no longer appear in the stream, the remaining records are renumbered in this shorter stream, and an event that was already exported can reappear with a different sequence. Optimize, which resumes from the previous “last seen” sequence, may then skip that re‑exported event.
 
-- Accept limited gaps. Leave Optimize running, change the exporter-side filters, and accept that some re‑exported events may be skipped. Optimize continues to track both position and sequence internally but may not retroactively fill all gaps.
-
-- Rebuild Optimize indices from a consistently filtered stream. For clusters that need a strictly consistent, filtered history:
-  1. Stop Optimize imports.
-  2. Enable or change exporter-side filters.
-  3. Recreate the Optimize indices so that Optimize rebuilds its state from scratch from the filtered exporter data.
+To keep Optimize imports consistent and avoid gaps, we recommend changing exporter-side filters only when the exporter has no pending records and Optimize has already imported all available data from that exporter.
 
 #### Supported versions
 
