@@ -15,7 +15,7 @@ The Gateway API provides a modern way to manage Ingress traffic in Kubernetes cl
 - Enables configuration of NGINX without relying on labels and annotations, which also helps limit permissions.
 
 :::important
-The Ingress-NGINX controller is planned to reach end of life in March 2026 (see the Kubernetes announcement on Ingress-NGINX retirement). Plan a migration to the Gateway API where it fits your use case.
+The Ingress-NGINX controller is planned to reach end of life in March 2026 (see [the Kubernetes announcement on Ingress-NGINX retirement](https://www.kubernetes.dev/blog/2025/11/12/ingress-nginx-retirement/)). Plan a migration to the Gateway API where it fits your use case.
 
 If you decide not to adopt the Gateway API, you can migrate to a different Ingress controller and continue using the Ingress API. This remains a supported approach.
 :::

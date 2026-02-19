@@ -15,7 +15,7 @@ The Gateway API provides a modern way to manage Ingress traffic in Kubernetes cl
   8.9 and later versions of the helm chart will support Gateway API with values.yaml options.
 
 :::note
-The Ingress-NGINX controller is planned to reach end of life in March 2026 (see the Kubernetes announcement on Ingress-NGINX retirement). We recommend planning a migration to the Gateway API where it fits your use case.
+The Ingress-NGINX controller is planned to reach end of life in March 2026 (see [the Kubernetes announcement on Ingress-NGINX retirement](https://www.kubernetes.dev/blog/2025/11/12/ingress-nginx-retirement/)). Plan a migration to the Gateway API where it fits your use case.
 
 If you decide not to adopt the Gateway API, you can migrate to a different Ingress controller and continue using the Ingress API. This remains a supported approach.
 :::
