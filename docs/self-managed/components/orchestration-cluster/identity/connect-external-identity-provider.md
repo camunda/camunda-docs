@@ -463,17 +463,17 @@ private static final String clusterRestLocal = "http://localhost:8080";
 
 ## Logout handling (RP‑initiated logout)
 
-When Orchestration Cluster Identity is configured with an external OIDC‑compliant IdP, you can enable **RP‑initiated logout** so that signing out of Camunda also initiates a logout at the IdP.
+When Orchestration Cluster Identity is configured with an external OIDC‑compliant Identity Provider (IdP), you can enable relying party (RP) initiated logout so that signing out of Camunda also initiates a logout at the IdP.
 
 :::note
-This applies to Self‑Managed Orchestration Clusters only; SaaS logout behavior is handled separately.
+This applies to Self‑Managed Orchestration Clusters only. RP-initiated logout is not supported in SaaS.
 :::
 
 ### Configure RP-initiated logout
 
 #### Enable or disable RP-initiated logout
 
-Identity exposes a configuration option that controls whether logout calls the IdP or only clears the Orchestration Cluster session. You can enable or disable RP-initiated logout using the following setting:
+You can enable or disable RP-initiated logout using the following setting:
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
@@ -505,11 +505,10 @@ RP-initiated logout is enabled by default for all new deployments.
 - **Orchestration Cluster‑only logout (RP-initiated logout flag disabled)**
   - Logout clears only the Orchestration Cluster session.
   - No request is sent to the IdP, so the user stays signed in there.
-
-- **Single logout (RP-initiated logout flag enabled)** — **default for new 8.9+ installations**
+- **RP-initiated logout (RP-initiated logout flag enabled)** — **default for new 8.9+ installations**
   - Logout clears the Orchestration Cluster session and calls the IdP’s logout endpoint.
-  - The user is signed out of Orchestration Cluster Identity, Tasklist, and Operate, as well as the IdP, and is then redirected to the login page.
-  - Whether the user is also logged out of other applications that use the same IdP depends on how the IdP implements single sign‑out.
+  - The user is signed out of Orchestration Cluster Identity, Tasklist, and Operate, as well as the IdP, and is then redirected to the login page of the Camunda app the user initiated the logout from.
+  - Whether the user is also logged out of other applications that use the same IdP depends on how the IdP implements RP-initiated logout.
 
 Existing Self‑Managed deployments upgrading from earlier versions can continue to use cluster‑only logout. If you want to keep the previous behavior after upgrading, explicitly set the `IDPLOGOUTENABLED` [configuration property](#enable-or-disable-rp-initiated-logout) to `false`.
 
