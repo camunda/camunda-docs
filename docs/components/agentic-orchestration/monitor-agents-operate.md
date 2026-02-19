@@ -58,7 +58,7 @@ For this particular prompt example, you can see:
 2. Select the **Fetch URL** tool element.
 
 - In the bottom-left pane, you can see where the element belongs in the execution tree.
-- In the bottom-right pane, the element details are displayed, including the [**Variables**](/components/concepts/execution-listeners/) and [**Input/Output Mappings**](/components/concepts/variables/#inputoutput-variable-mappings) columns, among others.
+- In the bottom-right pane, the element details are displayed, including the [**Variables**](components/concepts/variables.md) and [**Input/Output Mappings**](/components/concepts/variables.md#inputoutput-variable-mappings) columns, among others.
   However, the actual tool inputs and results are stored in a **parent scope** and are accessible via the element's inner instance in the execution tree.
 
 ## Step 4: Inspect tool calls
@@ -84,77 +84,58 @@ If a tool is executed more than once, select the desired tool invocation in **In
 
 ## Step 5: Analyze the agent context
 
-Many implementations store an “agent context” as a process variable. When this is the case, you can inspect it in Operate to see:
+Within the AI Agent connector, you can examine the agent context.
+To view it:
 
-- The conversation (user prompts and agent replies).
+1. Select the **AI Agent** element in the execution tree.
+2. To better inspect the value, click the pencil icon to enter edit mode for the **agentContext** variable.
+3. Click the two-squares icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value.
+
+In the JSON payload, you can find information about:
+
+- Defined tools.
+- The conversation, including your prompts and agent's replies.
 - Tool calls invoked by the agent.
-- Tool call inputs and outputs (depending on what your agent stores).
-- Additional metadata used for debugging (for example, reasoning traces, planning artifacts, token usage).
+- Tool call inputs and results.
+- Additional metadata, such as reasoning traces and token usage.
 
-### Tip: the agent context may be large
+## Step 6: Understand how agent memory is stored
 
-In Operate, large JSON variables can be hard to read. Expand the variable view and use search (browser search can help) to locate:
+In Modeler, within the AI Agent sub-process, you can define how the conversation memory is stored using the **Memory storage type** field.
 
-- Tool name / tool call identifier
-- Input payload fields
-- Output payload fields
-- “messages” or conversation entries
+By default, agent memory uses the **In Process** type, which stores it as part of the agent context.
+With this option, you can view it in Operate within the agent context, as you did in the previous step, [Analyze the agent context](#step-5-analyze-the-agent-context).
 
-:::note
-Be mindful of sensitive data: agent context may contain user prompts, customer metadata, or tool outputs.
-:::
+With the **Camunda Document Storage** option instead:
 
-## Step 7: Know the current limitation with Document Storage
+- You can't view the full conversation and chain-of-thought traces in Operate. Operate only show a **document reference** and metadata.
+- Use this option for long conversations, where Operate variable limits might be exceeded.
 
-If your agent memory is stored in **Camunda Document Storage** instead of a process variable:
+See [Memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for more details.
 
-- Operate may show only a **document reference** and metadata.
-- You may not be able to view the full conversation, chain-of-thought-like traces, or full tool outputs from within Operate.
+:::note Agent memory storage
 
-This is especially relevant because storing agent memory in Document Storage can be a better technical default for long conversations:
+- Use **In Process** for testing and debugging scenarios: Better visibility in Operate.
+- Use **Camunda Document Storage** for production scenarios: Better runtime behavior for long contexts.
+  :::
 
-- Process variables have size and performance constraints.
-- Longer conversations can exceed variable limits, potentially causing failures.
-- Document Storage keeps process variables smaller and avoids those limits.
+## Step 7: Review the results
 
-### Trade-off
+In the **User Feedback** element, you will see the execution count in green. This means the process instance execution is stopped there and waiting for action.
 
-- **Process variable storage**: better visibility in Operate (today), but may hit size limits.
-- **Document Storage**: better runtime behavior for long contexts, but reduced visibility in Operate (today).
+In this case, the required action is to provide feedback on the agent results. To do so:
 
-## Step 8: Test a “missing knowledge” path (human-in-the-loop) to validate behavior
-
-To test escalation behavior, ask something your knowledge base likely does not contain (for example, a new city):
-
-1. Ask: “Do you support loans in Barcelona?”
-2. Observe the agent trying multiple knowledge-base queries (different search terms).
-3. Confirm that the agent escalates to a human specialist.
-4. Provide the human response (example: “Yes, we do support loans in Barcelona.”).
-5. If your flow supports it, store the confirmation back into the knowledge base.
-
-Then rerun the same question to confirm the agent can answer without escalation.
-
-## Troubleshoot
-
-### You cannot find tool input/output
-
-- You may be looking at a connector’s local scope. The BPMN element’s local variables show configuration details but not the actual payload.
-- Look for **inner instances** created by the agent’s tool calls.
-
-### You cannot see knowledge-base documents
-
-- Some tool results may be stored as documents. If Operate does not display document contents, you see references to them.
-
-### Your agent context is missing
-
-- If agent memory was stored in Document Storage or a custom memory integration, Operate may not have the full content.
-- Consider temporarily storing a debugging-friendly subset of context as process variables in lower environments.
+1. Select the **User Feedback** element.
+2. Open [Tasklist](/components/tasklist/introduction-to-tasklist.md).
+3. Select the User Feedback task and assign to yourself by clicking **Assign to me**.
+4. Analyze the result. You will see an overview of the website URL requested in the prompt.
+5. You can follow up with more prompts to continue testing your AI agent.
+6. Select the **Are you satisfied with the result?** checkbox when you want to finish the process, then click **Complete task**.
+7. Go back to Operate. You will see the process instance is now completed, and the end event has been triggered.
 
 ## Next steps
 
-- Decide on a debugging strategy for your environment:
-  - Use process variables for agent context in development/test.
-  - Use Document Storage in production for long-running conversations, and implement an alternate “trace view” (outside Operate) if needed.
-- If you use Optimize, consider extracting key metrics (for example, token usage and tool-call counts) to process-level variables so they can be aggregated and visualized.
+Now that you know how to monitor your AI agents with Operate, you can:
 
-## TBD - Follow up with Tasklist and complete execution
+- Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+- Explore other [AI agent model blueprints](https://marketplace.camunda.com/en-US/listing?q=ai&cat=107793&locale=en-US) from Camunda marketplace.
