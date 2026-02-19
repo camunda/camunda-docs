@@ -5,12 +5,12 @@ sidebar_label: "Overview"
 description: "Enable AI agents and LLM-powered applications to interact with Camunda 8 through the Model Context Protocol (MCP)."
 ---
 
-The MCP gateway is an API surface of the Orchestration Cluster that exposes Camunda's operational capabilities through the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP). It enables AI agents and LLM-powered applications to discover and invoke Camunda tools using a standardized interface — without custom API integration code.
+The MCP server is an API surface of the Orchestration Cluster that exposes Camunda's operational capabilities through the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP). It enables AI agents and LLM-powered applications to discover and invoke Camunda tools using a standardized interface — without custom API integration code.
 
-Like the [REST API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), the MCP gateway is built into the Orchestration Cluster and shares the same [authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) and [authorization](/components/concepts/access-control/authorizations.md) model. It can be enabled independently.
+Like the [Orchestration Cluster API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), the MCP gateway is built into the Orchestration Cluster and shares the same [authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) and [authorization](/components/concepts/access-control/authorizations.md) model. It can be enabled independently.
 
 :::note
-The MCP gateway exposes Camunda as an MCP _server_. If you are looking to connect an AI agent running in a BPMN process to an external MCP server, see the [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md).
+This is the Orchestration Cluster MCP _server_. If you are looking to connect an AI agent running in a BPMN process to an external MCP server, see the [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md).
 :::
 
 ## Why use the MCP gateway?

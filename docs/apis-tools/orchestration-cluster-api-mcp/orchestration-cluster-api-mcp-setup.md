@@ -204,7 +204,7 @@ camunda:
                     client-authentication: credentials-body
 ```
 
-The example below shows a SaaS configuration. Replace the URL and OAuth values with your cluster's connection details. For local unauthenticated setups, you can omit the `authentication` block and use `http://localhost:8080/mcp/cluster` as the URL.
+The example above shows a SaaS configuration. Replace the URL and OAuth values with your cluster's connection details. For local unauthenticated setups, you can omit the `authentication` block and use `http://localhost:8080/mcp/cluster` as the URL.
 
 Then reference the client ID `camunda-mcp` in the MCP Client connector element template within your BPMN process. For more details, see [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client-connector.md).
 
