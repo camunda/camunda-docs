@@ -9,7 +9,7 @@ page_rank: 90
 import "./react-components/\_apitools-card.css";
 import HeroImg from './img/hero-apis.png';
 import ApiGrid from './react-components/\_apitools-card';
-import { apiCards, clientCards } from './react-components/\_apitools-card-data';
+import { apiCards, mcpApiCards, clientCards } from './react-components/\_apitools-card-data';
 import AskAi from './react-components/\_banner-ask-ai.md'
 
 <h3 class="subheading">Camunda 8 APIs and official clients and SDKs.</h3>
@@ -41,6 +41,12 @@ Use Camunda 8 APIs and clients to build, automate, and monitor your applications
 Use the following APIs for Camunda 8 integration and automation:
 
 <ApiGrid api={apiCards} />
+
+## MCP servers
+
+Camunda provides MCP servers that expose Camunda capabilities as [Model Context Protocol](https://modelcontextprotocol.io/) tools, designed for use in AI integrations and LLM-powered applications.
+
+<ApiGrid api={mcpApiCards} />
 
 ## API clients
 

@@ -6,6 +6,7 @@ import IconAdminImg from "../img/icon-console.png";
 import IconOptimizeImg from "../img/icon-optimize.png";
 import IconModelerImg from "../img/icon-modeler.png";
 import IconZeebeImg from "../img/icon-orchcluster.png";
+import IconMcpImg from "../img/icon-mcp.png";
 
 export const apiCards = [
   {
@@ -50,6 +51,17 @@ export const apiCards = [
     image: IconZeebeImg,
     description: "Advanced integrations and high-performance use cases.",
     type: "gRPC",
+  },
+];
+
+export const mcpApiCards = [
+  {
+    link: "../orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/",
+    title: "Orchestration Cluster MCP Server",
+    image: IconMcpImg,
+    description:
+      "Exposes selected Orchestraction Cluster APIs as MCP tools for AI agents and LLM-powered applications.",
+    type: "MCP",
   },
 ];
 
