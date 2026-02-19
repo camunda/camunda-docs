@@ -204,17 +204,8 @@ The history migration has the following limitations.
   - Process instance and user task tags: These properties do not exist in Camunda 7.
   - Audit log: Not supported. See the related tracking [issue](https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/517).
 
-### Process instance
-
-- Process instance migration doesn't populate the `tree` field.
-
 ### DMN
 
-- The properties `evaluationFailure` and `evaluationFailureMessage` are not populated in migrated decision instances.
-- Decision instance `inputs` and `outputs` are not yet migrated.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5364
-- Decision instance `state` and `type` are not yet migrated.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5370
 - DMN models version 1.1 are not supported by Operate, decision definition data will be migrated but the decision model itself will not be visible in Operate.
 
 ### Forms
@@ -235,22 +226,6 @@ The History Data Migrator supports migration of Camunda Forms, but with the foll
 ### Incidents
 
 - When there's a failing start timer, the incident cannot be migrated (as there's no process instance history) and will be skipped.
-
-## Cockpit plugin
-
-The [Cockpit plugin](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin.md) has the following limitations:
-
-- The migration schema has no authorization mechanism. Anyone with authenticated access to the Camunda 7 Cockpit can see the Cockpit Plugin and read the migration schema.
-- If the migration of a process instance or any other entity is skipped for multiple reasons, only one reason is stored and displayed.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5389
-- For historic data migration the skip reason is currently only stored for the initial migration attempt. If migration fails again after retry, the skip reason is not updated.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5390
-- There are currently some UI inconsistencies. See:
-  - https://github.com/camunda/camunda-bpm-platform/issues/5422
-  - https://github.com/camunda/camunda-bpm-platform/issues/5423
-  - https://github.com/camunda/camunda-bpm-platform/issues/5424
-- The Cockpit plugin doesn't have extensive test coverage yet so we cannot guarantee a high level of stability and therefore don't claim it to be production-ready.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5404
 
 ## Camunda 8 history migration coverage
 
@@ -656,3 +631,20 @@ The following limitations apply:
 | tenantId               | Yes             |
 | partitionId            | Yes             |
 | elementInstanceKey     | Yes             |
+
+## Cockpit plugin
+
+The [Cockpit plugin](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin.md) has the following limitations:
+
+- The migration schema has no authorization mechanism. Anyone with authenticated access to the Camunda 7 Cockpit can see the Cockpit Plugin and read the migration schema.
+- If the migration of a process instance or any other entity is skipped for multiple reasons, only one reason is stored and displayed.
+  - See https://github.com/camunda/camunda-bpm-platform/issues/5389
+- For historic data migration the skip reason is currently only stored for the initial migration attempt. If migration fails again after retry, the skip reason is not updated.
+  - See https://github.com/camunda/camunda-bpm-platform/issues/5390
+- There are currently some UI inconsistencies. See:
+  - https://github.com/camunda/camunda-bpm-platform/issues/5422
+  - https://github.com/camunda/camunda-bpm-platform/issues/5423
+  - https://github.com/camunda/camunda-bpm-platform/issues/5424
+- The Cockpit plugin doesn't have extensive test coverage yet so we cannot guarantee a high level of stability and therefore don't claim it to be production-ready.
+  - See https://github.com/camunda/camunda-bpm-platform/issues/5404
+
