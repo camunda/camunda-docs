@@ -46,7 +46,7 @@ The `orchestration.retention` configuration requires the legacy Zeebe Elasticsea
 
 In Camunda 8.8, `orchestration.exporters.zeebe.enabled` defaults to `false`. If you need Zeebe record retention without Optimize, you must explicitly enable it.
 
-For full exporter configuration and retention options, see [Zeebe Elasticsearch Exporter retention](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#retention).
+For full exporter configuration and retention options, see [Zeebe Elasticsearch Exporter retention](../../../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#retention).
 :::
 
 #### Parameters
@@ -102,7 +102,7 @@ orchestration:
 
 Enable Zeebe records retention only if you still use the legacy Elasticsearch/OpenSearch Exporter (for example, when Optimize reads from `zeebe-record-*` indices).
 
-Exporter configuration and full retention examples are documented in [Zeebe Elasticsearch Exporter retention](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter). The snippet below shows only the Helm values related to enabling retention:
+Exporter configuration and full retention examples are documented in [Zeebe Elasticsearch Exporter retention](../../../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter). The snippet below shows only the Helm values related to enabling retention:
 
 ```yaml
 # Either enable Optimize, which in turn enables the legacy Zeebe exporter:
@@ -321,7 +321,7 @@ Operate and Tasklist indices use schema-specific versioning in their names (e.g.
 
 - [Configure Helm chart components](./application-configs.md) - How to use `orchestration.configuration` for advanced settings
 - [Upgrade from 8.8 to 8.9](/self-managed/upgrade/helm/880-to-890.md) - Version upgrade guidance
-- [Zeebe Elasticsearch Exporter retention](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#retention) - Legacy Zeebe exporter retention settings
+- [Zeebe Elasticsearch Exporter retention](../../../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#retention) - Legacy Zeebe exporter retention settings
 - [Zeebe Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) - Camunda exporter configuration (controls `orchestration.history.*` settings)
   - [History archiving settings](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=history#options) - Archiving and rollover configuration
   - [Retention settings](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=retention#options) - Historical data retention policies
