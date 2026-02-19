@@ -23,7 +23,7 @@ The following mandatory authorizations are required to work with Tasklist:
 
 The following optional authorizations can also be defined:
 
-| Authorization type             | Resource type        | Resource ID                                                                        | Permission                |
-| :----------------------------- | :------------------- | :--------------------------------------------------------------------------------- | :------------------------ |
-| Assign and complete user tasks | `Process Definition` | ID of the respective BPMN process definition or `*` (for all process definitions). | `UPDATE_USER_TASK`        |
-| View BPMN diagrams             | `Process Definition` | ID of the respective BPMN process definition or `*` (for all process definitions). | `READ_PROCESS_DEFINITION` |
+| Authorization type             | Resource type      | Resource ID                                                                       | Permission                                                     |
+| :----------------------------- | :----------------- | :-------------------------------------------------------------------------------- | :------------------------------------------------------------- |
+| Assign and complete user tasks | Process Definition | ID of the respective BPMN process definition or \* (for all process definitions). | `CLAIM_USER_TASK`, `COMPLETE_USER_TASK`, or `UPDATE_USER_TASK` |
+| View BPMN diagrams             | Process Definition | ID of the respective BPMN process definition or \* (for all process definitions). | `READ_PROCESS_DEFINITION`                                      |
