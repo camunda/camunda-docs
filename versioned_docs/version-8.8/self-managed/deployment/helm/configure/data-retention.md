@@ -23,12 +23,12 @@ Configure retention policies in your `values.yaml` file under the `orchestration
 
 Retention policy types:
 
-1. **Elasticsearch/OpenSearch Exporter indices (Zeebe records)** (`orchestration.retention`) – Retention for Zeebe record indices written by the legacy Elasticsearch/OpenSearch Exporter (for example, `zeebe-record-*`). These are **not** Orchestration Cluster indices.
+1. **Elasticsearch/OpenSearch Exporter indices (Zeebe records)** (`orchestration.retention`) – Retention for Zeebe record indices written by the legacy Elasticsearch/OpenSearch Exporter (for example, `zeebe-record-*`). These are _not_ Orchestration Cluster indices.
 1. **Orchestration Cluster indices (historical data)** (`orchestration.history.retention`) – Retention for archived Operate, Tasklist, and Camunda indices stored in secondary storage.
 
 For index prefix requirements and examples when both index families share the same Elasticsearch/OpenSearch cluster, see [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md).
 
-:::caution
+:::warning
 
 Zeebe records retention requirements `orchestration.retention.*` applies only to Elasticsearch/OpenSearch Exporter indices (Zeebe records), not to Orchestration Cluster indices managed by the Camunda Exporter.
 
