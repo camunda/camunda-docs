@@ -529,11 +529,11 @@ The binding name of `correlationKey` is not applicable to message start events o
 
 ### Called element: `zeebe:calledElement`
 
-| **Binding `type`**         | `zeebe:calledElement`                                                                                          |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                                             |
-| **Binding parameters**     | `property`: The name of the property.<br/> Supported properties: `processId`, `bindingType`, and `versionTag`. |
-| **Mapping result**         | `<zeebe:calledElement [property]="[userInput]" />`                                                             |
+| **Binding `type`**         | `zeebe:calledElement`                                                                                                                                                   |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean` (only for `propagateAllParentVariables` and `propagateAllChildVariables`)                             |
+| **Binding parameters**     | `property`: The name of the property.<br/> Supported properties: `processId`, `bindingType`, `versionTag`, `propagateAllParentVariables`, `propagateAllChildVariables`. |
+| **Mapping result**         | `<zeebe:calledElement [property]="[userInput]" />`                                                                                                                      |
 
 The `zeebe:calledElement` binding allows you to configure a process called by a call activity.
 
@@ -571,9 +571,36 @@ to the value of the version tag of the process you want to call.
 ]
 ```
 
-:::note
+#### Variable propagation
 
-For `zeebe:calledElement` bindings, variable propagation is not supported. To provide or retrieve variables, use `zeebe:input` and `zeebe:output` bindings.
+You can control automatic variable propagation between the parent process and the called process using `propagateAllParentVariables` and `propagateAllChildVariables`. These properties only support `Boolean` and `Hidden` types and do not support FEEL expressions.
+
+- `propagateAllParentVariables`: When set to `true`, all variables from the parent process are automatically copied to the called process.
+- `propagateAllChildVariables`: When set to `true`, all variables from the called process are automatically copied back to the parent process upon completion.
+
+```json
+[
+  {
+    ...,
+    "type": "Boolean",
+    "value": true,
+    "binding": {
+      "type": "zeebe:calledElement",
+      "property": "propagateAllParentVariables"
+    }
+  },
+  {
+    ...,
+    "type": "Hidden",
+    "value": "false",
+    "binding": {
+      "type": "zeebe:calledElement",
+      "property": "propagateAllChildVariables"
+    }
+  },
+  ...
+]
+```
 
 :::
 
