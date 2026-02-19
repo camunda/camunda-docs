@@ -35,8 +35,6 @@ In testing, we use the [NGINX Gateway Fabric](https://github.com/nginx/nginx-gat
 
 ## Implement
 
-### Quickstart
-
 The quickest way to get started is to run `helm template` against an 8.9 or later version of the helm chart to grab the resources and modify from there.
 
 ```bash
