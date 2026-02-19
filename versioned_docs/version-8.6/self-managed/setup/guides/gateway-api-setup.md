@@ -33,7 +33,7 @@ Just like Ingress Controllers, Gateway controllers need to be installed before a
 
 In testing, we use the [NGINX Gateway Fabric](https://github.com/nginx/nginx-gateway-fabric).
 
-## Implementing the Gateway Resource Types
+## Implement
 
 ### Quickstart
 

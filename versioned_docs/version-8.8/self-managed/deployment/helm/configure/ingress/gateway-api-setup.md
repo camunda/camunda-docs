@@ -33,7 +33,7 @@ Just like Ingress controllers, Gateway controllers must be installed before a cl
 
 In testing, Camunda uses the [NGINX Gateway Fabric](https://github.com/nginx/nginx-gateway-fabric).
 
-## Implement gateway resource types
+## Implement
 
 ### Quickstart
 
