@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 import ZeebeGrid from '../../components/zeebe/react-components/\_zeebe-card';
 import { overviewCards } from './react-components/\_card-data';
 
-import OverviewImg from '../assets/hero-upgrade.png';
+import OverviewImg from '../assets/hero-upgrade-89.png';
 
 <h3 class="subheading">Upgrade your Camunda 8 Self-Managed deployment from version 8.8 to 8.9.</h3>
 
@@ -44,7 +44,7 @@ Camunda 8 upgrades must be performed sequentially. If your deployment is running
 
 Review required preparation steps and important changes before upgrading to Camunda 8.9.
 
-<p><a href="./prepare-for-upgrade" class="link-arrow">Prepare for upgrade</a></p>
+<p class="link-arrow">[Prepare for upgrade](prepare-for-upgrade.md)</p>
 
 ## Upgrade guides
 
@@ -55,7 +55,7 @@ Choose the upgrade guide that matches how your environment is deployed:
 :::info Dual-region Helm deployments
 If you are upgrading a dual-region Helm deployment, follow the standard Helm upgrade guide and then complete the additional dual-region steps.
 
-<p><a href="./helm/880-to-890-dual-region" class="link-arrow">Camunda 8.8 to 8.9 Dual-Region Upgrade</a></p>
+<p class="link-arrow">[Camunda 8.7 to 8.8 Dual-Region Upgrade](./helm/880-to-890-dual-region.md)</p>
 :::
 
 ## Docker Compose deployments
@@ -64,7 +64,7 @@ Docker Compose is supported for development and testing environments only.
 
 Camunda does not provide an automated upgrade process for Docker Compose deployments. To upgrade, manually update each component by following the component upgrade guide:
 
-<p><a href="./components/880-to-890" class="link-arrow">Component upgrade from 8.8 to 8.9</a></p>
+<p class="link-arrow">[Component upgrade from 8.8 to 8.9](./components/880-to-890.md)</p>
 
 For production environments, use Kubernetes with the official Camunda Helm chart or create a custom deployment process using Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
 
@@ -72,7 +72,7 @@ For production environments, use Kubernetes with the official Camunda Helm chart
 
 Some upgrades require additional component-level steps depending on which components you use or how your environment is configured. Follow the upgrade guide for your deployment method, and refer to this guide for any component-specific changes or migrations required for your setup.
 
-<p><a href="./components/880-to-890" class="link-arrow">Component upgrade from 8.8 to 8.9</a></p>
+<p class="link-arrow">[Component upgrade from 8.8 to 8.9](./components/880-to-890.md)</p>
 
 ## 8.9 release information
 
