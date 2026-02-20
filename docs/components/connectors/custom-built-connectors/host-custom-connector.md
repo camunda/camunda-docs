@@ -80,7 +80,7 @@ docker run --rm --name=CustomConnectorInSMWithKeyCloak \
     -e CAMUNDA_CLIENT_SECRET=<YOUR_CAMUNDA_CLIENT_SECRET> \
     -e CAMUNDA_CLIENT_CONFIG_PATH=/tmp/zeebe_auth_cache \
     -e ZEEBE_TOKEN_AUDIENCE=zeebe-api \
-    -e ZEEBE_AUTHORIZATION_SERVER_URL=http://keycloak:18080/auth/realms/camunda-platform/protocol/openid-connect/token \
+    -e ZEEBE_AUTHORIZATION_SERVER_URL=http://keycloak-service:18080/auth/realms/camunda-platform/protocol/openid-connect/token \
     -e CAMUNDA_IDENTITY_TYPE=KEYCLOAK \
     -e CAMUNDA_IDENTITY_AUDIENCE=operate-api \
     -e CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=http://keycloak:18080/auth/realms/camunda-platform \
@@ -101,15 +101,17 @@ There are multiple ways to configure a Helm/Kubernetes Self-Managed cluster.
 Refer to the [official guide](/self-managed/setup/overview.md) to learn more.
 
 For the purpose of this section, imagine you installed Helm charts with `helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION`,
-and forwarded Zeebe, Operate, and Keycloak ports:
+and forwarded the Zeebe and Operate ports. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also forward the Keycloak port:
 
-- `kubectl port-forward svc/camunda-zeebe-gateway 26500:26500`
-- `kubectl port-forward svc/camunda-zeebe-gateway 8080:8080`
-- `kubectl port-forward svc/camunda-keycloak 18080:80`
+```bash
+kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
+kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
+```
 
-:::note Keycloak Operator deployment
-If you're using Keycloak deployed via the Keycloak Operator, use `kubectl port-forward svc/keycloak-service 18080:18080` instead for the Keycloak service.
-:::
+```bash
+# Only if using Keycloak
+kubectl port-forward svc/keycloak-service 18080:18080
+```
 
 Now, you need to obtain both Zeebe and connectors' Operate OAuth clients. You can do it with `kubectl get secret camunda-zeebe-identity-secret -o jsonpath="{.data.*}" | base64 --decode`
 and `kubectl get secret camunda-connectors-identity-secret -o jsonpath="{.data.*}" | base64 --decode` respectively.
