@@ -285,6 +285,22 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Process modeling",
+          link: {
+            type: "doc",
+            id: "components/modeler/about-modeler",
+          },
+          items: [
+            require("./docs/components/modeler/forms/sidebar-schema"),
+            require("./docs/components/modeler/element-templates/sidebar-schema"),
+            "components/modeler/data-handling",
+            "components/modeler/using-web-and-desktop-modeler-together",
+            "components/modeler/task-testing",
+            require("./docs/components/modeler/reference/sidebar-schema"),
+          ],
+        },
+        {
+          type: "category",
           label: "Camunda integrations",
           link: {
             type: "doc",
@@ -421,23 +437,6 @@ module.exports = {
             },
           ],
         },
-      ],
-    },
-
-    {
-      type: "category",
-      label: "Modeler",
-      link: {
-        type: "doc",
-        id: "components/modeler/about-modeler",
-      },
-      items: [
-        require("./docs/components/modeler/forms/sidebar-schema"),
-        require("./docs/components/modeler/element-templates/sidebar-schema"),
-        "components/modeler/data-handling",
-        "components/modeler/using-web-and-desktop-modeler-together",
-        "components/modeler/task-testing",
-        require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
     {
