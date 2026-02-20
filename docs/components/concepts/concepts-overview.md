@@ -52,7 +52,7 @@ For deployment and configuration guidance, see the Self-Managed documentation:
 
 ## Camunda 8 use cases
 
-With Camunda 8, you can model, execute, and operate end-to-end processes that span microservices, APIs, AI agents, human tasks, legacy systems, IoT devices, and more.
+With Camunda 8, you can model, execute, and operate complex business processes from end to end.
 
 Most real-world automation is distributed. A single business outcome (for example, customer onboarding, claims handling, or order fulfillment) often requires many independently deployed services and external systems. That makes it hard to keep the overall process visible, understand where work is waiting, and recover cleanly when something fails.
 
@@ -84,7 +84,7 @@ Design fully executable process and decision models that reduce misalignment and
 
 #### Connectors
 
-Connectors communicate with any system or technology, reducing the time it takes to automate and orchestrate business processes. Use connectors to orchestrate across APIs, microservices, RPA bots, AI/ML tools, enterprise applications, legacy systems, and more. Browse connectors in [Camunda Marketplace](https://marketplace.camunda.com/).
+Connectors communicate with any system or technology, reducing the time it takes to automate and orchestrate business processes. Outbound Connectors trigger events outside of Camunda, while inbound connectors allow processes running on Camunda to receive messages from external systems. Browse connectors in [Camunda Marketplace](https://marketplace.camunda.com/).
 
 #### AI agents
 
@@ -126,7 +126,7 @@ Integrate with a variety of applications, systems, and services to scale your ar
 
 ### IT and business collaboration
 
-IT and business stakeholders build and test processes in a shared modeling environment, while reusable processes, decision tables, agents, forms, and connectors make onboarding new teams easy.
+IT and business stakeholders build and test processes in a shared modeling environment using the shared languages of BPMN and DMN. Reusable process assets such as connectors and AI agents make it easy to onboard new teams.
 
 ### Scalability
 
