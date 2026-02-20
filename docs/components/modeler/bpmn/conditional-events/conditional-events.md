@@ -15,7 +15,7 @@ The diagram below shows all four types of conditional events: root-level start, 
 
 In this example, the process starts with a root-level conditional start event.
 Root-level conditional start events can be triggered via the Orchestration Cluster REST API or Camunda Client SDKs (see [Trigger root-level conditional start events via API](../../../concepts/conditionals.md#trigger-root-level-conditional-start-events-via-api) for more details).
-A new instance is created once the condition `=orderReceived = true` evaluates to true.
+A new instance is created once the condition `= orderReceived = true` evaluates to `true`.
 
 The intermediate conditional catch event acts like a wait-until condition.
 It continues to “Ship order” only after inventory is successfully reserved.
@@ -39,7 +39,7 @@ When deploying a process with a conditional start event, the following rules app
   If multiple conditional start events have the same condition, the deployment will fail with a validation error.
 - Upon deployment of a new version, the previous version’s conditional start event subscription is removed and replaced with the new version’s subscription.
 
-To start processes via conditional start events from external systems, use REST/gRPC API or Camunda Client SDKs.
+To start processes via conditional start events from external systems, use the Orchestration Cluster REST API, the Zeebe gRPC API, or a Camunda Client SDK.
 See [Trigger root-level conditional start events via API](../../../concepts/conditionals.md#trigger-root-level-conditional-start-events-via-api) for more details.
 
 ## Event subprocess conditional start events
@@ -76,7 +76,7 @@ Conditional boundary events can be interrupting or non-interrupting:
 - Interrupting triggers the boundary event and cancels the attached activity, so execution continues via the boundary event’s outgoing sequence flow.
 - Non-interrupting triggers the boundary event without canceling the attached activity, starting an additional path via the boundary event’s outgoing sequence flow while the attached activity continues.
 
-Similar to event subprocess conditional start events, a non-interrupting conditional boundary event can trigger more than once while the attached activity is active.
+Like a non-interrupting event subprocess conditional start event, a non-interrupting conditional boundary event can trigger multiple times while the attached activity is active.
 It triggers each time the condition becomes `true`.
 If you don’t specify variable names or event filters, any variable change can re-evaluate the condition.
 This can start unintended boundary-event executions in parallel.
