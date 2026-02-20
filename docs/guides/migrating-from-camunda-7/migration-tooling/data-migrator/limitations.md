@@ -195,16 +195,17 @@ The history migration has the following limitations.
 - When migrating entities, some might be skipped due to dependencies (parent entity not migrated yet). Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration. Example:
   - Flow node instances might be skipped if their parent flow node (scope) hasn't been migrated yet.
   - Child process instances that have been called from parent call activities will be skipped on the first migration run as their parent flow node has not been migrated yet.
+- Camunda 7 does not store audit data of asyncBefore wait state for flow nodes. Migration of flow nodes is executed in all other cases.
 - The History Data Migrator does not support the following Camunda 8 entities or properties:
   - Sequence flow: Sequence flows cannot be highlighted in Operate.
   - Message subscription and correlated message subscription: These entities are not available in Camunda 7.
   - Batch operation entity and batch operation item: Camunda 7 does not retain sufficient information about processed instances.
   - User metrics: Not available in Camunda 7.
   - Exporter position: This entity does not exist in Camunda 7.
-  - Process instance and user task tags: These properties do not exist in Camunda 7.
-  - Audit log: Not supported. See the related tracking [issue](https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/517).
 
 ### DMN
+
+The History Data Migrator supports migration of DMN entities, but with the following limitations:
 
 - DMN models version 1.1 are not supported by Operate, decision definition data will be migrated but the decision model itself will not be visible in Operate.
 
@@ -225,7 +226,12 @@ The History Data Migrator supports migration of Camunda Forms, but with the foll
 
 ### Incidents
 
-- When there's a failing start timer, the incident cannot be migrated (as there's no process instance history) and will be skipped.
+The History Data Migrator supports migration of DMN entities, but with the following limitations:
+
+- The incidents are migrated in `resolved` state. Operate does not visualize resolved incidents,
+therefore incidents of migrated process instances will not be visible in Operate.
+Audit data related to incidents can be observed by querying APIs.
+- When there's a failing start timer in Camunda 7, the incident cannot be migrated (as there's no process instance history) and will be skipped.
 
 ## Camunda 8 history migration coverage
 
@@ -546,7 +552,11 @@ The following limitations apply:
 | partitionId              | Yes                 |
 | treePath                 | No                  |
 | historyCleanupDate       | Yes                 |
-| tags                     | No                  |
+| tags                     | Yes\*               |
+
+\* Tags do not exist in Camunda 7, but we allow to set them during migration via [interceptors](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md#entity-transformation)
+and they will be visible in Camunda 8 after migration.
+Default tags: `legacy-id-<processInstanceId>`, `business-key-<businessKey>` (if business key exists).
 
 ### Sequence flow
 
@@ -609,8 +619,11 @@ The following limitations apply:
 | serializedCustomHeaders  | No              |
 | customHeaders            | No              |
 | priority                 | Yes             |
-| tags                     | No              |
+| tags                     | Yes\*           |
 | partitionId              | Yes             |
+
+\* Tags do not exist in Camunda 7, but we allow to set them during migration via [interceptors](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md#entity-transformation)
+and they will be visible in Camunda 8 after migration.
 
 ### Variable
 
@@ -647,4 +660,3 @@ The [Cockpit plugin](/guides/migrating-from-camunda-7/migration-tooling/data-mig
   - https://github.com/camunda/camunda-bpm-platform/issues/5424
 - The Cockpit plugin doesn't have extensive test coverage yet so we cannot guarantee a high level of stability and therefore don't claim it to be production-ready.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5404
-

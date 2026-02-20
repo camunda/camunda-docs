@@ -141,6 +141,7 @@ module.exports = {
           items: ["components/concepts/message-aggregation"],
         },
         "components/concepts/signals",
+        "components/concepts/conditionals",
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
@@ -644,6 +645,7 @@ module.exports = {
                 "components/modeler/bpmn/message-events/message-events",
                 "components/modeler/bpmn/signal-events/signal-events",
                 "components/modeler/bpmn/timer-events/timer-events",
+                "components/modeler/bpmn/conditional-events/conditional-events",
                 "components/modeler/bpmn/error-events/error-events",
                 "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
@@ -1136,6 +1138,7 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/orchestration-cluster-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/orchestration-cluster-api-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         {
@@ -1468,6 +1471,7 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/install/quick-install",
+                "self-managed/deployment/helm/install/helm-with-rdbms",
                 "self-managed/deployment/helm/install/production/index",
               ],
             },
@@ -1495,7 +1499,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
-                "self-managed/deployment/helm/configure/vendor-supported-infrastructure",
+                "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
@@ -1527,9 +1531,16 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-external-opensearch",
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
-                    "self-managed/deployment/helm/configure/database/rdbms",
-                    "self-managed/deployment/helm/configure/database/validate-rdbms",
-                    "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
+                    {
+                      RDBMS: [
+                        "self-managed/deployment/helm/configure/database/rdbms",
+                        "self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers",
+                        "self-managed/deployment/helm/configure/database/rdbms-schema-management",
+                        "self-managed/deployment/helm/configure/database/rdbms-troubleshooting",
+                        "self-managed/deployment/helm/configure/database/validate-rdbms",
+                        "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
+                      ],
+                    },
                     {
                       Troubleshooting: [
                         "self-managed/deployment/helm/configure/database/all-shards-failed",
@@ -2135,6 +2146,7 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.9",
+      className: "sidebar-cta",
       link: {
         type: "doc",
         id: "self-managed/upgrade/index",

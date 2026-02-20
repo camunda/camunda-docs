@@ -15,7 +15,11 @@ Remove any unused sections or empty tables before publishing.
 This page is a work in progress for Camunda 8.9 and will be updated as upgrade requirements are finalized.
 :::
 
-Prepare your Self-Managed environment for an upgrade to Camunda 8.9. Use this guide to confirm that your deployment is eligible for upgrade and to complete any actions required before running the upgrade.
+Prepare your Self-Managed environment for an upgrade to Camunda 8.9.
+
+## About
+
+Use this guide to confirm upgrade eligibility, understand platform-level changes, and identify actions you may need to take before running an upgrade.
 
 ## Evaluate your current environment
 
@@ -23,11 +27,11 @@ Before upgrading, verify that your current installation meets the minimum requir
 
 | Area                | What to check                                                                                                                                                                                                                                  |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda version     | Direct upgrades to 8.9 are supported only from the latest 8.8.x patch. If you are running an earlier version, first upgrade to 8.8. See [Upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version). |
-| Environment support | Ensure your platform and dependencies are supported in 8.9. See [Supported environments](/reference/supported-environments.md).                                                                                                                |
+| Camunda version     | Direct upgrades to 8.9 are supported only from the latest 8.8.x patch. If you are running an earlier version, first upgrade to 8.8. See [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version). |
+| Environment support | Ensure your platform and dependencies are supported in 8.9. See [supported environments](/reference/supported-environments.md).                                                                                                                |
 | Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and Elasticsearch/OpenSearch setup.                                                                                                      |
 
-## Review required pre-upgrade actions for Camunda 8.9
+## Review pre-upgrade actions required for Camunda 8.9
 
 This section lists any actions you must complete before upgrading to Camunda 8.9.
 
