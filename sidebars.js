@@ -799,6 +799,20 @@ module.exports = {
             "components/console/manage-organization/delete-account",
           ],
         },
+        {
+          "Manage clusters": [
+            "components/console/manage-clusters/create-cluster",
+            "components/console/manage-clusters/manage-cluster",
+            "components/console/manage-clusters/cluster-connectors",
+            "components/console/manage-clusters/manage-api-clients",
+            "components/console/manage-clusters/manage-secrets",
+            "components/console/manage-clusters/manage-alerts",
+            "components/console/manage-clusters/manage-ip-allowlists",
+            "components/console/manage-clusters/create-backups",
+            "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity",
+          ],
+        },
       ],
     },
     {
@@ -1052,20 +1066,6 @@ module.exports = {
         id: "components/console/introduction-to-console",
       },
       items: [
-        {
-          "Manage clusters": [
-            "components/console/manage-clusters/create-cluster",
-            "components/console/manage-clusters/manage-cluster",
-            "components/console/manage-clusters/cluster-connectors",
-            "components/console/manage-clusters/manage-api-clients",
-            "components/console/manage-clusters/manage-secrets",
-            "components/console/manage-clusters/manage-alerts",
-            "components/console/manage-clusters/manage-ip-allowlists",
-            "components/console/manage-clusters/create-backups",
-            "components/console/manage-clusters/settings",
-            "components/console/manage-clusters/cluster-capacity",
-          ],
-        },
         {
           "Manage your plan": [
             "components/console/manage-plan/create-account",
