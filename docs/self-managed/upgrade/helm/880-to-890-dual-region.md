@@ -17,14 +17,18 @@ TODO (8.9):
 This page is a work in progress for Camunda 8.9 and will be updated as upgrade requirements are finalized.
 :::
 
+Upgrade a Helm-based dual-region Camunda 8 Self-Managed deployment from 8.7 to 8.8.
+
+## About
+
 Upgrading a Helm-based dual-region Camunda 8 Self-Managed deployment from 8.8 to 8.9 may require additional configuration beyond the standard Helm upgrade.
 
-Start with the [Upgrade from 8.8 to 8.9](./880-to-890.md) guide, which covers the baseline Helm upgrade steps. Use this guide to address dual-region–specific requirements.
+1. Start with the [upgrade from 8.8 to 8.9](./880-to-890.md) guide, which covers the baseline Helm upgrade steps. Use this guide to address dual-region–specific requirements.
 
-If your deployment requires component-specific upgrade steps, also review the [component upgrade guide](../components/880-to-890.md).
+1. If your deployment requires component-specific upgrade steps, also review the [component upgrade guide](../components/880-to-890.md).
 
 :::info
-Dual-region deployments, as described in [Dual-region setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md), may require manual exporter configuration.
+Dual-region deployments, as described in [dual-region setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md), may require manual exporter configuration.
 :::
 
 ## Required configuration changes
