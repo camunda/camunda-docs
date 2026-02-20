@@ -133,11 +133,11 @@ Configuration:
 exporters:
   opensearch:
     args:
-     index:
+      index:
         variableNameInclusionStartWith:
-            - business_
+          - business_
         variableNameExclusionStartWith:
-            -  business_debug
+          - business_debug
 ```
 
 The exporter first matches variable names against inclusion rules (if present), then against exclusion rules. If a variable matches both, the exclusion wins.
@@ -156,11 +156,11 @@ exporters:
   opensearch:
     args:
       index:
-            variableValueTypeInclusion:
-                - Object
-                - Array                
-            variableValueTypeExclusion:
-                - Object      
+        variableValueTypeInclusion:
+          - Object
+          - String
+        variableValueTypeExclusion:
+          - Object
 ```
 
 Use this filter to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see
@@ -176,9 +176,9 @@ exporters:
     args:
       index:
         bpmnProcessIdInclusion:
-            - orderProcess
+          - orderProcess
         bpmnProcessIdExclusion:
-            - debugProcess 
+          - debugProcess
 ```
 
 Processes listed under `inclusion` are candidates; `exclusion` removes any of those candidates again.
