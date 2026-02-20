@@ -1068,21 +1068,6 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Console",
-      link: {
-        type: "doc",
-        id: "components/console/introduction-to-console",
-      },
-      items: [
-        {
-          Troubleshooting: [
-            "components/console/console-troubleshooting/common-pitfalls",
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Camunda 8 SaaS",
       link: {
         type: "doc",
