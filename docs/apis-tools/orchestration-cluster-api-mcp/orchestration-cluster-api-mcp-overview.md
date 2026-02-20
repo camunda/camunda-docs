@@ -26,26 +26,7 @@ Building AI-powered applications that interact with Camunda traditionally requir
 - **Broad compatibility**: Works with any MCP-compliant client, including VS Code (GitHub Copilot), Claude Code, Cursor, and custom AI applications.
 - **Consistent security**: Inherits the same authentication and authorization model as the REST API.
 
-## Available capabilities
-
-The MCP server exposes tools across the following domains:
-
-| Domain              | Capabilities                                                    |
-| :------------------ | :-------------------------------------------------------------- |
-| Cluster             | Check cluster health and retrieve topology information.         |
-| Incidents           | Search, retrieve, and resolve incidents.                        |
-| Process definitions | Search process definitions and retrieve BPMN XML.               |
-| Process instances   | Search, retrieve, and create process instances.                 |
-| User tasks          | Search, retrieve, and assign user tasks. Search task variables. |
-| Variables           | Search and retrieve variables.                                  |
-
-For the full list of available tools, see [Available tools](./orchestration-cluster-api-mcp-tools.md).
-
-## Transport
-
-The MCP server uses the [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) transport and is served at the `/mcp/cluster` endpoint. It is stateless and no session management is required.
-
-## Authentication
+### Authentication
 
 The MCP server uses the same authentication model as the [Orchestration Cluster REST API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md). OAuth tokens obtained for the REST API work without changes.
 
@@ -57,11 +38,15 @@ For SaaS environments:
 
 For the full authentication reference, including Self-Managed OIDC and basic authentication setup, see [Authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
-## Availability
+### Transport
 
-The MCP server is available from Camunda 8.9 onwards. It must be explicitly enabled on your cluster before use. See [Enable and connect](./orchestration-cluster-api-mcp-setup.md) for instructions per deployment type.
+The MCP server uses the [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) transport and is served at the `/mcp/cluster` endpoint. It is stateless and no session management is required.
 
-## Quick start
+## Get started
+
+:::important
+The MCP server is available from Camunda 8.9 onwards.
+:::
 
 If you have a local Orchestration Cluster running with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), the MCP server is enabled by default. Connect any MCP client using this configuration:
 
@@ -76,4 +61,19 @@ If you have a local Orchestration Cluster running with [Camunda 8 Run](/self-man
 }
 ```
 
-For production environments and other deployment types, see [Enable and connect](./orchestration-cluster-api-mcp-setup.md).
+For production environments and other deployment types, the MCP server must be explicitly enabled on your cluster before use. See [Enable and connect](./orchestration-cluster-api-mcp-setup.md) for more details.
+
+## Available capabilities
+
+The MCP server exposes tools across the following domains:
+
+| Domain              | Capabilities                                                    |
+| :------------------ | :-------------------------------------------------------------- |
+| Cluster             | Check cluster health and retrieve topology information.         |
+| Incidents           | Search, retrieve, and resolve incidents.                        |
+| Process definitions | Search process definitions and retrieve BPMN XML.               |
+| Process instances   | Search, retrieve, and create process instances.                 |
+| User tasks          | Search, retrieve, and assign user tasks. Search task variables. |
+| Variables           | Search and retrieve variables.                                  |
+
+For the full list of available tools, see [Available tools](./orchestration-cluster-api-mcp-tools.md).
