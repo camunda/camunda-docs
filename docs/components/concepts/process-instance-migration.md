@@ -586,6 +586,12 @@ import EscalationBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bp
 
 import CompensationBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/compensation-boundary-event.svg'
 
+import ConditionalEventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/conditional-event-subprocess.svg'
+import ConditionalEventSubprocessNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/conditional-event-subprocess-non-interrupting.svg'
+import ConditionalCatchEventSvg from '../modeler/bpmn/assets/bpmn-symbols/conditional-catch-event.svg'
+import ConditionalBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/conditional-boundary-event.svg'
+import ConditionalBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/conditional-boundary-event-non-interrupting.svg'
+
 <table className="bpmn-coverage-event-table">
   <thead>
       <tr>
@@ -750,6 +756,36 @@ import CompensationBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/co
             </a>
         </td>
         <td></td>
+    </tr>
+    <tr>
+        <td>
+            Conditional
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/conditional-events/">
+                <ConditionalEventSubprocessSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/conditional-events/">
+                <ConditionalEventSubprocessNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/conditional-events/">
+                <ConditionalCatchEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/conditional-events/">
+                <ConditionalBoundaryEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/conditional-events/">
+                <ConditionalBoundaryEventNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
     </tr>
 
   </tbody>

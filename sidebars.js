@@ -141,6 +141,7 @@ module.exports = {
           items: ["components/concepts/message-aggregation"],
         },
         "components/concepts/signals",
+        "components/concepts/conditionals",
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
@@ -643,6 +644,7 @@ module.exports = {
                 "components/modeler/bpmn/message-events/message-events",
                 "components/modeler/bpmn/signal-events/signal-events",
                 "components/modeler/bpmn/timer-events/timer-events",
+                "components/modeler/bpmn/conditional-events/conditional-events",
                 "components/modeler/bpmn/error-events/error-events",
                 "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
@@ -1135,6 +1137,7 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/orchestration-cluster-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/orchestration-cluster-api-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         {
@@ -2142,6 +2145,7 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.9",
+      className: "sidebar-cta",
       link: {
         type: "doc",
         id: "self-managed/upgrade/index",

@@ -28,14 +28,14 @@ export const overviewCards = [
 
 export const helmIndexCards = [
   {
-    link: "../helm/880-to-890",
+    link: "./880-to-890",
     title: "Upgrade Camunda 8.8 to 8.9 using Helm",
     image: IconArrow,
     description:
       "Follow the main Helm upgrade guide to perform the required configuration changes and run the Helm upgrade.",
   },
   {
-    link: "../helm/880-to-890-dual-region",
+    link: "./880-to-890-dual-region",
     title: "Upgrade a dual-region deployment from 8.8 to 8.9 using Helm",
     image: IconArrow,
     description:
