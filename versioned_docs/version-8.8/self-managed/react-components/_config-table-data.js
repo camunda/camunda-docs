@@ -292,6 +292,12 @@ export const configs = [
     types: ["Direct mapping"],
     area: ["Cluster"],
   },
+  {
+    name: "camunda.cluster.raft.segment-preallocation-strategy",
+    legacy: ["zeebe.broker.experimental.raft.segmentPreallocationStrategy"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
 
   // Data keys
 
