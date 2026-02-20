@@ -5,7 +5,11 @@ sidebar_label: "Overview"
 description: "Enable AI agents and LLM-powered applications to interact with Camunda 8 through the Model Context Protocol (MCP)."
 ---
 
-The Orchestration Cluster MCP Server is an API surface of the Orchestration Cluster that exposes Camunda's operational capabilities through the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP). It enables AI agents and LLM-powered applications to discover and invoke Camunda tools using a standardized interface — without custom API integration code.
+Enable AI agents and LLM-powered applications to interact with Camunda 8 through the Model Context Protocol (MCP).
+
+## About
+
+The Orchestration Cluster MCP Server is an API surface of the Orchestration Cluster that exposes Camunda's operational capabilities through the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP). It enables AI agents and LLM-powered applications to discover and invoke Camunda tools using a standardized interface, without custom API integration code.
 
 Like the [Orchestration Cluster API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), the MCP server is built into the Orchestration Cluster and shares the same [authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) and [authorization](/components/concepts/access-control/authorizations.md) model. It can be enabled independently.
 
@@ -13,14 +17,14 @@ Like the [Orchestration Cluster API](../orchestration-cluster-api-rest/orchestra
 This is the Orchestration Cluster MCP Server. If you are looking to connect an AI agent running in a BPMN process to an external MCP server, see the [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md).
 :::
 
-## Why use the Orchestration Cluster MCP Server?
+### Why use the Orchestration Cluster MCP Server
 
 Building AI-powered applications that interact with Camunda traditionally requires writing custom client code to call REST APIs, handle authentication, parse responses, and format data for AI consumption. The MCP server removes this by providing:
 
-- **Standardized access** – AI agents discover and invoke Camunda capabilities through the MCP protocol, without bespoke integration code.
-- **Tool discovery** – MCP clients automatically discover available tools and their schemas at runtime.
-- **Broad compatibility** – Works with any MCP-compliant client, including VS Code (GitHub Copilot), Claude Code, Cursor, and custom AI applications.
-- **Consistent security** – Inherits the same authentication and authorization model as the REST API.
+- **Standardized access**: AI agents discover and invoke Camunda capabilities through the MCP protocol, without bespoke integration code.
+- **Tool discovery**: MCP clients automatically discover available tools and their schemas at runtime.
+- **Broad compatibility**: Works with any MCP-compliant client, including VS Code (GitHub Copilot), Claude Code, Cursor, and custom AI applications.
+- **Consistent security**: Inherits the same authentication and authorization model as the REST API.
 
 ## Available capabilities
 
@@ -39,7 +43,7 @@ For the full list of available tools, see [Available tools](./orchestration-clus
 
 ## Transport
 
-The MCP server uses the [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) transport and is served at the `/mcp/cluster` endpoint. It is stateless — no session management is required.
+The MCP server uses the [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) transport and is served at the `/mcp/cluster` endpoint. It is stateless and no session management is required.
 
 ## Authentication
 

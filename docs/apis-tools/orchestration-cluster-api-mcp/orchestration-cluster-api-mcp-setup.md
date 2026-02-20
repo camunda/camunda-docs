@@ -8,11 +8,12 @@ description: "Enable the Orchestration Cluster MCP Server and configure MCP clie
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page explains how to enable the MCP server on your Orchestration Cluster and configure MCP clients to consume it.
+Enable the Orchestration Cluster MCP Server and configure MCP clients to connect.
 
 ## Enable the Orchestration Cluster MCP Server
 
-The MCP server is opt-in and must be enabled before MCP clients can connect. How to enable it depends on your deployment type.
+The MCP server is opt-in and must be enabled before MCP clients can connect.
+Depending on your deployment, enable it as follows:
 
 <Tabs groupId="deployment" defaultValue="c8run" queryString values={[
 {label: 'Camunda 8 Run', value: 'c8run' },
@@ -74,19 +75,20 @@ Once the MCP server is enabled, you can connect any MCP-compliant client. The ap
 
 The MCP server is served at `/mcp/cluster` on the Orchestration Cluster. The full endpoint URL depends on your deployment type:
 
-| Deployment                     | MCP endpoint URL                                                  |
-| :----------------------------- | :---------------------------------------------------------------- |
-| Camunda 8 Run / Docker Compose | `http://localhost:8080/mcp/cluster`                               |
-| SaaS                           | `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/mcp/cluster` |
-| Self-Managed (custom)          | `https://<your-host>/mcp/cluster`                                 |
+| Deployment            | MCP endpoint URL                                                  |
+| :-------------------- | :---------------------------------------------------------------- |
+| Camunda 8 Run         | `http://localhost:8080/mcp/cluster`                               |
+| Docker Compose        | `http://localhost:8080/mcp/cluster`                               |
+| SaaS                  | `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/mcp/cluster` |
+| Self-Managed (custom) | `https://<your-host>/mcp/cluster`                                 |
 
 For SaaS, find your **Region Id** and **Cluster Id** in the Camunda Console under **Cluster Details**.
 
 ### Direct HTTP connection
 
-If your Orchestration Cluster does not require authentication — for example, when running locally with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) — you can connect directly to the MCP server endpoint without any additional tooling.
+If your Orchestration Cluster does not require authentication, for example when running locally with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), you can connect directly to the MCP server endpoint without any additional tooling.
 
-Any MCP client that supports [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) can be used. For authenticated environments, use [`c8ctl mcp-proxy`](#using-c8ctl-mcp-proxy) instead.
+Any MCP client that supports [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) can be used. For authenticated environments, [use `c8ctl mcp-proxy`](#using-c8ctl-mcp-proxy) instead.
 
 ```json
 {
@@ -99,7 +101,7 @@ Any MCP client that supports [Streamable HTTP](https://modelcontextprotocol.io/s
 }
 ```
 
-### Using c8ctl mcp-proxy
+### Use `c8ctl mcp-proxy`
 
 Many MCP clients, such as VS Code (GitHub Copilot) and Claude Code, do not natively support the OAuth 2.0 client credentials flow required for authenticated environments. The [`c8ctl`](https://github.com/camunda/c8ctl) `mcp-proxy` command bridges this gap by providing a local STDIO-to-Remote HTTP proxy that handles authentication transparently.
 
@@ -107,8 +109,8 @@ The proxy authenticates to the MCP server using OAuth 2.0 client credentials, an
 
 #### Prerequisites
 
-- [Node.js](https://nodejs.org/) 18 or later
-- [Client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) for your Camunda cluster
+- [Node.js](https://nodejs.org/) 18 or later.
+- [Client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) for your Camunda cluster.
 
 #### Configuration
 
@@ -160,17 +162,17 @@ You can also connect to the MCP server from within a BPMN process using Camunda'
 
 The [MCP Remote Client connector](/components/early-access/alpha/mcp-client/mcp-remote-client-connector.md) connects to remote MCP servers over HTTP. Configure it in the properties panel with the following settings:
 
-- **Transport type**: Streamable HTTP
-- **URL**: Your MCP endpoint URL (see [above](#mcp-endpoint-url))
-- **Authentication**: OAuth 2.0
+- **Transport type**: Streamable HTTP.
+- **URL**: Your MCP endpoint URL (see [above](#mcp-endpoint-url)).
+- **Authentication**: OAuth 2.0.
 
 | Field                    | Value                                                                                                                                          |
 | :----------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
-| OAuth 2.0 token endpoint | Your OAuth token endpoint (`https://login.cloud.camunda.io/oauth/token` for SaaS)                                                              |
-| Client ID                | Your OAuth client ID                                                                                                                           |
+| OAuth 2.0 token endpoint | Your OAuth token endpoint (`https://login.cloud.camunda.io/oauth/token` for SaaS).                                                             |
+| Client ID                | Your OAuth client ID.                                                                                                                          |
 | Client secret            | Your OAuth client secret. Use [secrets](/components/console/manage-clusters/manage-secrets.md) (for example, `{{secrets.MCP_CLIENT_SECRET}}`). |
-| Audience                 | The audience for your cluster API (`zeebe.camunda.io` for SaaS)                                                                                |
-| Client authentication    | Send client credentials in body                                                                                                                |
+| Audience                 | The audience for your cluster API (`zeebe.camunda.io` for SaaS).                                                                               |
+| Client authentication    | Send client credentials in body.                                                                                                               |
 
 For more details, see [MCP Remote Client connector](/components/early-access/alpha/mcp-client/mcp-remote-client-connector.md).
 

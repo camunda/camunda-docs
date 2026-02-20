@@ -5,7 +5,7 @@ sidebar_label: "Available tools"
 description: "List of MCP tools exposed by the Orchestration Cluster MCP Server."
 ---
 
-The following tools are available through the MCP server, grouped by domain.
+The following tools are available through the Orchestration Cluster MCP server, grouped by domain.
 
 :::info
 Tool names, parameters, and response schemas are fully discoverable by MCP clients at runtime. The exact tool signatures may evolve across versions.
