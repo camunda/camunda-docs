@@ -270,7 +270,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | resourceKey             | No              |
 | relatedEntityType       | No              |
 | relatedEntityKey        | No              |
-| entityDescription       | No              |
+| entityDescription       | Partially       |
 | partitionId             | Yes             |
 | historyCleanupDate      | Yes             |
 
@@ -280,6 +280,7 @@ The following limitations apply:
 - Audit log entries are not migrated for batch operations, identity links, attachments, job definitions, jobs, external tasks, metrics, operation logs, filters, comments, and properties.
 - The `entityKey` property is migrated only for entities related to user tasks, process definitions, and process instances.
 - The `elementInstanceKey` property is migrated only for entities related to user tasks.
+- The `entityDescription` property is migrated only for user, group, tenant, and delete variable operations.
 
 ### Batch operation
 
