@@ -778,6 +778,15 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Camunda Hub",
+      link: {
+        type: "doc",
+        id: "components/camunda-hub",
+      },
+      items: [],
+    },
+    {
+      type: "category",
       label: "Connectors",
       link: {
         type: "doc",
