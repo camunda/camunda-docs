@@ -813,6 +813,14 @@ module.exports = {
             "components/console/manage-clusters/cluster-capacity",
           ],
         },
+        {
+          "Manage your plan": [
+            "components/console/manage-plan/create-account",
+            "components/console/manage-plan/available-plans",
+            "components/console/manage-plan/upgrade-to-enterprise-plan",
+            "components/console/manage-plan/update-billing-reservations",
+          ],
+        },
       ],
     },
     {
@@ -1066,14 +1074,6 @@ module.exports = {
         id: "components/console/introduction-to-console",
       },
       items: [
-        {
-          "Manage your plan": [
-            "components/console/manage-plan/create-account",
-            "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-enterprise-plan",
-            "components/console/manage-plan/update-billing-reservations",
-          ],
-        },
         {
           Troubleshooting: [
             "components/console/console-troubleshooting/common-pitfalls",
