@@ -104,7 +104,7 @@ Some automated processes require human contribution and interaction. [Create and
 
 ### Operate
 
-[Operate](/components/operate/operate-introduction.md) enables teams to monitor running processes, troubleshoot and resolve incidents, and modify and migrate process instances. Trace process flows in real time, investigate failures, modify variables, and resume execution where needed, all within the context of the end-to-end business process.
+With [Operate](/components/operate/operate-introduction.md), teams can monitor running processes, troubleshoot and resolve incidents, and modify and migrate process instances. Trace process flows in real time, investigate failures, modify variables, and resume execution where needed, all within the context of the end-to-end business process.
 
 ### Optimize
 
