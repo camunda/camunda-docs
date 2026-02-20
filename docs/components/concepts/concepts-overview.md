@@ -74,7 +74,7 @@ Camunda 8 is designed to operate on a very large scale. To achieve this, it prov
 - **Reactive publish-subscribe interaction model** which enables microservices that connect to Camunda 8 to maintain a high degree of control and autonomy, including control over processing rates. These properties make Camunda 8 resilient, scalable, and reactive.
 - **Visual processes modeled in ISO-standard BPMN 2.0** so technical and business stakeholders can collaborate on process design in a widely-used modeling language.
 - **Language-agnostic client model** makes it possible to build a client in nearly any programming language an organization uses to automate work.
-- **Operational ease-of-use** because as a SaaS provider, we take care of all operational details.
+- **Operational ease of use** because, as a SaaS provider, we take care of all operational details.
 
 ## What are the Camunda 8 components?
 
