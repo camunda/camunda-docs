@@ -141,6 +141,7 @@ module.exports = {
           items: ["components/concepts/message-aggregation"],
         },
         "components/concepts/signals",
+        "components/concepts/conditionals",
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
@@ -643,6 +644,7 @@ module.exports = {
                 "components/modeler/bpmn/message-events/message-events",
                 "components/modeler/bpmn/signal-events/signal-events",
                 "components/modeler/bpmn/timer-events/timer-events",
+                "components/modeler/bpmn/conditional-events/conditional-events",
                 "components/modeler/bpmn/error-events/error-events",
                 "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
@@ -1467,6 +1469,7 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/install/quick-install",
+                "self-managed/deployment/helm/install/helm-with-rdbms",
                 "self-managed/deployment/helm/install/production/index",
               ],
             },
@@ -1526,9 +1529,16 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-external-opensearch",
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
-                    "self-managed/deployment/helm/configure/database/rdbms",
-                    "self-managed/deployment/helm/configure/database/validate-rdbms",
-                    "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
+                    {
+                      RDBMS: [
+                        "self-managed/deployment/helm/configure/database/rdbms",
+                        "self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers",
+                        "self-managed/deployment/helm/configure/database/rdbms-schema-management",
+                        "self-managed/deployment/helm/configure/database/rdbms-troubleshooting",
+                        "self-managed/deployment/helm/configure/database/validate-rdbms",
+                        "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
+                      ],
+                    },
                     {
                       Troubleshooting: [
                         "self-managed/deployment/helm/configure/database/all-shards-failed",
@@ -1963,6 +1973,7 @@ module.exports = {
               Identity: [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
+                "self-managed/components/orchestration-cluster/identity/connect-multiple-identity-providers",
                 "self-managed/components/orchestration-cluster/identity/debugging-authentication",
                 "self-managed/components/orchestration-cluster/identity/special-oidc-cases",
               ],

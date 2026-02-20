@@ -2239,7 +2239,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Cancels multiple running process instances.
         Since only ACTIVE root instances can be cancelled, any given filters for state and
@@ -2280,7 +2280,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Resolves multiple instances of process instances.
         Since only process instances with ACTIVE state can have unresolved incidents, any given
@@ -2321,7 +2321,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Migrate multiple instances of process instances.
         Since only process instances with ACTIVE state can be migrated, any given
@@ -2362,7 +2362,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Modify multiple process instances.
         Since only process instances with ACTIVE state can be modified, any given
@@ -5167,7 +5167,7 @@ paths:
       description: |-
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Create a new user.
       requestBody:
@@ -5279,7 +5279,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Deletes a user.
       parameters:
@@ -5312,7 +5312,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Updates a user.
       parameters:
@@ -5358,7 +5358,7 @@ paths:
       description: |-
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
       requestBody:
@@ -5920,7 +5920,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Cancels a running batch operation.
         This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
@@ -5961,7 +5961,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Suspends a running batch operation.
         This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
@@ -6004,7 +6004,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Resumes a suspended batch operation.
         This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).

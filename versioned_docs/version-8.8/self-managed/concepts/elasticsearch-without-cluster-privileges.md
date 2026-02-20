@@ -431,7 +431,7 @@ camunda:
           certificate-path: PATH_TO_CA_CERT
 ```
 
-For additional configuration options, see the [common database configuration guide](#TODO link to common database configuration page after it is created).
+For additional configuration options, see the [common database configuration guide](../components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
 
 ### 2. Start the backup application
 
