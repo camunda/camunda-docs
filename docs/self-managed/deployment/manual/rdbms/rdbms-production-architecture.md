@@ -15,7 +15,7 @@ For production deployments with RDBMS, Camunda recommends a **HA Zeebe cluster b
 graph TB
     subgraph oc["Orchestration Cluster (HA)"]
         direction TB
-        subgraph brokers["Zeebe Brokers"]
+        subgraph brokers["Brokers"]
             b1["Broker 1<br/>(AZ-1)"]
             b2["Broker 2<br/>(AZ-2)"]
             b3["Broker 3<br/>(AZ-3)"]
@@ -63,7 +63,7 @@ graph TB
 
 - Processes are executed
 - State is flushed to RDBMS
-- Operate and Tasklist access the Orchestration Cluster v2 API and do not directly access the database
+- Operate and Tasklist access the Orchestration Cluster v2 API and do not directly access secondary storage
 
 ## When Elasticsearch/OpenSearch is required
 
@@ -79,11 +79,9 @@ Without Optimize: RDBMS-only stack is fully supported.
 
 ❌ **ES/OS ↔ RDBMS migration not supported**: Choose your secondary storage backend before production. No automated migration tools available.
 
-❌ **Uniform broker configuration required**: All brokers in a Zeebe cluster must export to the same secondary storage backend. You may run Elasticsearch/OpenSearch only to support Optimize, but the cluster still uses a single backend for its own secondary storage.
+❌ **Uniform broker configuration required**: All brokers in the Orchestration Cluster must export to the same secondary storage backend for its Orchestration Cluster indices. In addition, you may run Elasticsearch/OpenSearch to support Optimize, but the Orchestration Cluster still uses a single backend for its own secondary storage.
 
 ❌ **v1 API not supported**: Only the v2 Orchestration Cluster REST API works with RDBMS. See [migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
-
-❌ **No automatic fallback**: If the secondary storage becomes unavailable, Zeebe can continue processing but cannot export. Pending operations queue until storage recovers (applies to any secondary storage backend).
 
 ## Network and security
 

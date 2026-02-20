@@ -18,7 +18,7 @@ The Orchestration Cluster reads from a single configured secondary storage type 
 ```mermaid
 graph LR
     subgraph oc[Orchestration Cluster]
-        zeebe[Zeebe Broker]
+        broker[Broker]
         api[Orchestration Cluster API]
     end
 
@@ -29,8 +29,8 @@ graph LR
 
     opt[Optimize]
 
-    zeebe -->|Export| rdbms
-    zeebe -.->|Export| es
+    broker -->|Export| rdbms
+    broker -.->|Export| es
     api -->|Read| rdbms
     opt -->|Read/Write| es
 
