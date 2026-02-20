@@ -39,6 +39,7 @@ You cannot create a template for the [undefined task type](../../../bpmn/undefin
 - Message events
 - Signal events
 - Timer events
+- Conditional events
 
 ## Create an element template from an element
 
