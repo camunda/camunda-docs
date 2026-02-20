@@ -14,7 +14,7 @@ The diagram below shows all four types of conditional events: root-level start, 
 ![BPMN diagram showing conditional start, intermediate, and boundary events](assets/all-conditional-event-types.png)
 
 In this example, the process starts with a root-level conditional start event.
-Root-level conditional start events can be triggered via the Orchestration Cluster REST API or Camunda Client SDKs (see [Triggering root-level conditional start events via API](../../../concepts/conditionals.md#triggering-root-level-conditional-start-events-via-api) for more details).
+Root-level conditional start events can be triggered via the Orchestration Cluster REST API or Camunda Client SDKs (see [Trigger root-level conditional start events via API](../../../concepts/conditionals.md#trigger-root-level-conditional-start-events-via-api) for more details).
 A new instance is created once the condition `=orderReceived = true` evaluates to true.
 
 The intermediate conditional catch event acts like a wait-until condition.
@@ -39,8 +39,8 @@ When deploying a process with a conditional start event, the following rules app
   If multiple conditional start events have the same condition, the deployment will fail with a validation error.
 - Upon deployment of a new version, the previous version’s conditional start event subscription is removed and replaced with the new version’s subscription.
 
-To start processes via conditional start events from external systems, use the Orchestration Cluster REST API or Camunda Client SDKs.
-See [Triggering root-level conditional start events via API](../../../concepts/conditionals.md#triggering-root-level-conditional-start-events-via-api) for more details.
+To start processes via conditional start events from external systems, use REST/gRPC API or Camunda Client SDKs.
+See [Trigger root-level conditional start events via API](../../../concepts/conditionals.md#trigger-root-level-conditional-start-events-via-api) for more details.
 
 ## Event subprocess conditional start events
 
@@ -52,6 +52,10 @@ An event subprocess conditional start event can be interrupting or non-interrupt
 - Interrupting starts the event subprocess and cancels the currently active work in the scope it interrupts, so the instance continues via the event subprocess path.
 - Non-interrupting starts the event subprocess in parallel while the existing execution continues.
 
+A non-interrupting event subprocess conditional start event can trigger more than once while the instance is active.
+It triggers each time the condition becomes `true`.
+If you don’t specify variable names or event filters, any variable change can re-evaluate the condition.
+This can start unintended event subprocess executions in parallel.
 For runtime evaluation behavior and filter semantics, see [Variable filter semantics](../../../concepts/conditionals.md#variable-filter-semantics).
 
 ## Intermediate conditional catch events
@@ -72,7 +76,7 @@ Conditional boundary events can be interrupting or non-interrupting:
 - Interrupting triggers the boundary event and cancels the attached activity, so execution continues via the boundary event’s outgoing sequence flow.
 - Non-interrupting triggers the boundary event without canceling the attached activity, starting an additional path via the boundary event’s outgoing sequence flow while the attached activity continues.
 
-A non-interrupting conditional boundary event can trigger more than once while the attached activity is active.
+Similar to event subprocess conditional start events, a non-interrupting conditional boundary event can trigger more than once while the attached activity is active.
 It triggers each time the condition becomes `true`.
 If you don’t specify variable names or event filters, any variable change can re-evaluate the condition.
 This can start unintended boundary-event executions in parallel.
