@@ -41,7 +41,7 @@ Additional steps may be required if your deployment:
 
 For release context, see:
 
-- [What’s new in Camunda 8.8](/reference/announcements-release-notes/890/whats-new-in-89.md)
+- [What’s new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md)
 - [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 
 :::
