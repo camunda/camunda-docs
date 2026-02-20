@@ -17,7 +17,7 @@ If you don't have a Kubernetes cluster yet, check out our setup guides:
   :::
 
 :::note
-This guide deploys the orchestration cluster with basic authentication and RDBMS (embedded H2) as secondary storage. For a full deployment with all components (Optimize, Web Modeler, Console, Identity, Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). For production environments, see the [production installation guide](/self-managed/deployment/helm/install/production/index.md).
+In this guide, you deploy the Orchestration Cluster with Basic authentication and RDBMS (embedded H2) as secondary storage. For a full deployment with all components (Optimize, Web Modeler, Console, Identity, and Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). For production environments, see the [production installation guide](/self-managed/deployment/helm/install/production/index.md).
 :::
 
 ## Prerequisites
@@ -27,7 +27,7 @@ This guide deploys the orchestration cluster with basic authentication and RDBMS
 
 ## Orchestration Cluster only
 
-The Helm chart deploys the Camunda orchestration cluster with **basic authentication** and **RDBMS** as secondary storage (using embedded H2 when no external database URL is provided), intended only for testing and development. No external database or identity provider is required.
+The Helm chart deploys the Camunda Orchestration Cluster with **Basic authentication** and **RDBMS** as secondary storage (using embedded H2 when no external database URL is provided), intended only for testing and development. No external database or identity provider is required.
 
 In production, Camunda 8 is typically deployed together with additional components such as Optimize, Web Modeler, and Console, which require OIDC-based authentication and external databases. For a full local deployment with all components, follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md).
 
@@ -62,7 +62,7 @@ In production, Camunda 8 is typically deployed together with additional componen
      -n orchestration
    ```
 
-   This enables the RDBMS exporter with embedded H2 as secondary storage. Since Camunda 8.9, the chart no longer includes a default secondary storage — you must explicitly choose one (`rdbms`, `elasticsearch`, or `opensearch`).
+   This enables the RDBMS exporter with embedded H2 as secondary storage. Starting with Camunda 8.9, the chart no longer includes a default secondary storage; you must explicitly choose one (`rdbms`, `elasticsearch`, or `opensearch`).
 
    <!-- TODO before 8.9 GA:
      The install command below includes a temporary workaround:
