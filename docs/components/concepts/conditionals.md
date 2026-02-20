@@ -74,7 +74,7 @@ Given the following process definition:
 <img src={ConditionalScopeIsolation} alt="Process definition with parallel branches and conditional boundary events" width="60%"/>
 
 Service task A and service task B are active in parallel branches of the process.
-If a variable is set in the context of the subprocess instance, then only the conditional boundary event on service task A is evaluated.
+If a variable is set in the subprocess instance, then only the conditional boundary event on service task A is evaluated.
 The boundary event on service task B cannot trigger because the variable is not visible in its scope.
 See [variable scopes](variables.md#variable-scopes) for more details on variable visibility rules.
 
@@ -103,19 +103,19 @@ They do not apply to root-level conditional start events, because no process ins
 
 Conditional events enable reactive process behavior, but incorrect modeling can lead to unintended triggers. Keep the following behavior in mind.
 
-##### Single evaluation per state change
+##### Single evaluation per state update
 
-If a single command (e.g. update variables API, job completion etc.) updates multiple variables and more than one of the variables satisfies the condition, the subscription triggers only once.
+If a single command (for example, an update variables request or job completion) updates multiple variables and more than one satisfies the condition, the subscription triggers only once.
 
 Using the process definition shown earlier (a service task with an interrupting conditional boundary event), assume the boundary condition is `x > 10 or y > 5`.
 
 If both variables `x` and `y` are updated in a single request (for example, via the [Update element instance variables API](../../apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables.api.mdx)) and both satisfy the condition, the boundary event triggers only once.
 
-##### Input mappings can trigger attached boundary events in the scope
+##### Triggering from input mappings
 
 If an activity defines an input mapping that sets a variable satisfying the boundary condition, the conditional boundary event can trigger when the activity is activated.
 
-##### Output mappings do not trigger attached boundary events in the scope
+##### No triggering from output mappings
 
 If an activity defines an output mapping that sets a variable satisfying the boundary condition, the conditional boundary event does not trigger when the activity completes.
 
