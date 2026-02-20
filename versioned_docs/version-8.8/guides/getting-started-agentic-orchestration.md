@@ -284,6 +284,35 @@ For example:
 1. Add a clear tool description and explicit input/output variables so the LLM can choose and call it correctly.
 1. Test with prompts in Operate/Tasklist and refine task descriptions and prompt instructions based on observed behavior.
 
+#### Practical example: `fromAi()` input and `toolCallResult` output
+
+Assume you add a service task called **Get order status** as a new tool in the ad-hoc sub-process.
+
+Use `fromAi()` in the tool input mapping so the LLM can provide structured inputs:
+
+```feel
+= {
+    customerEmail: fromAi(toolCall.customerEmail, "Customer email used to find the order", "string"),
+    orderId: fromAi(toolCall.orderId, "Order identifier to look up", "string")
+}
+```
+
+Then return the tool response by setting `toolCallResult` in your result expression or output mapping:
+
+```feel
+= {
+    toolCallResult: {
+        orderId: orderId,
+        status: orderStatus,
+        message: "Order status retrieved successfully"
+    }
+}
+```
+
+At runtime, each tool call contributes one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
+
+When adding your first tool, inspect the tasks already available to the agent in this blueprint and follow the same pattern for `fromAi()` inputs and `toolCallResult`/`toolCallResults` outputs.
+
 You can also:
 
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
