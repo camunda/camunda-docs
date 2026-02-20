@@ -177,6 +177,29 @@ Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this rol
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deprecated enum literals in Orchestration Cluster API v2
+
+The following enum literals in the V2 Orchestration Cluster API are now marked as deprecated:
+
+- `UNSPECIFIED` in `DecisionDefinitionTypeEnum`
+- `UNKNOWN` in `DecisionInstanceStateFilterProperty`
+- `UNKNOWN` in `DecisionInstanceStateEnum`
+
+This impacts customers using self-built/generated API clients.
+
+These values should be avoided in new integrations, as they are planned for removal in the next minor release.
+
+<p className="link-arrow">[Orchestration Cluster API reference](../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)</p>
+
+</div>
+</div>
+
 ### Connectors
 
 <div className="release-announcement-row">
