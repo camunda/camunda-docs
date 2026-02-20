@@ -45,11 +45,11 @@ The same principle applies to variable‑name and variable‑type filters and ot
 
 #### Changing filters on existing clusters (sequence vs position)
 
-Whenever possible, enable exporter-side filters (variable, type, process, Optimize mode) before Optimize starts importing from that exporter. This way, Optimize builds its indices from a single, consistently filtered stream and no extra re-indexing is required.
-
 On clusters that have already exported data to Optimize, enabling or changing exporter-side filters mid‑stream can cause Optimize to miss some re‑exported events.
 
-As long as the exporter configuration (including any existing filters) remains unchanged, the exporter assigns a monotonically increasing `sequence` to each exported record, and Optimize can reliably resume imports from the “last seen” sequence. When you change exporter-side filters, the at‑least‑once delivery semantics of the Elasticsearch/OpenSearch exporter mean that some events may be exported again after a failover, restart, or snapshot replay. Records that are now filtered out no longer appear in the stream, the remaining records are renumbered in this shorter stream, and an event that was already exported can reappear with a different sequence. Optimize, which resumes from the previous “last seen” sequence, may then skip that re‑exported event.
+As long as the exporter configuration (including any existing filters) remains unchanged, the exporter assigns a monotonically increasing `sequence` to each exported record, and Optimize can reliably resume imports from the “last seen” sequence.
+
+The Elasticsearch/OpenSearch exporter uses at-least-once delivery: after a failover, restart, or snapshot replay, it may export the same event again. If you change exporter-side filters between the original export and the re‑export, some records that were previously exported may now be filtered out. The remaining records are renumbered in this shorter stream. As a result, an event that Optimize already imported can reappear with a different sequence and be skipped when Optimize resumes from the previous “last seen” sequence.
 
 To keep Optimize imports consistent and avoid gaps, we recommend changing exporter-side filters only when the exporter has no pending records and Optimize has already imported all available data from that exporter.
 
