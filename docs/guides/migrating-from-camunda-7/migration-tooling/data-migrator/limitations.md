@@ -202,7 +202,6 @@ The history migration has the following limitations.
   - Batch operation entity and batch operation item: Camunda 7 does not retain sufficient information about processed instances.
   - User metrics: Not available in Camunda 7.
   - Exporter position: This entity does not exist in Camunda 7.
-  - Process instance and user task tags: These properties do not exist in Camunda 7.
 
 ### DMN
 
@@ -553,7 +552,11 @@ The following limitations apply:
 | partitionId              | Yes                 |
 | treePath                 | No                  |
 | historyCleanupDate       | Yes                 |
-| tags                     | No                  |
+| tags                     | Yes\*               |
+
+\* Tags do not exist in Camunda 7, but we allow to set them during migration via [interceptors](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md#entity-transformation)
+and they will be visible in Camunda 8 after migration.
+Default tags: `legacy-id-<processInstanceId>`, `business-key-<businessKey>` (if business key exists).
 
 ### Sequence flow
 
@@ -616,8 +619,11 @@ The following limitations apply:
 | serializedCustomHeaders  | No              |
 | customHeaders            | No              |
 | priority                 | Yes             |
-| tags                     | No              |
+| tags                     | Yes\*           |
 | partitionId              | Yes             |
+
+\* Tags do not exist in Camunda 7, but we allow to set them during migration via [interceptors](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md#entity-transformation)
+and they will be visible in Camunda 8 after migration.
 
 ### Variable
 
@@ -654,4 +660,3 @@ The [Cockpit plugin](/guides/migrating-from-camunda-7/migration-tooling/data-mig
   - https://github.com/camunda/camunda-bpm-platform/issues/5424
 - The Cockpit plugin doesn't have extensive test coverage yet so we cannot guarantee a high level of stability and therefore don't claim it to be production-ready.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5404
-
