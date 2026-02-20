@@ -938,9 +938,9 @@ processing: maxCommandsInBatch = 100
 
 ### Experimental configuration
 
-See the experimental section of the [broker.yaml.template](https://github.com/camunda/camunda/blob/8.6.0/dist/src/main/config/broker.yaml.template#L883).
+See the experimental section of the [broker.yaml.template](https://github.com/camunda/camunda/blob/8.6.0/dist/src/main/config/broker.yaml.template#:~:text=%23%20experimental).
 
-Be aware that all configuration's which are part of the experimental section are subject to change and can be dropped at any time.
+Be aware that all configurations which are part of the experimental section are subject to change and can be dropped at any time.
 
 ### Multitenancy configuration
 

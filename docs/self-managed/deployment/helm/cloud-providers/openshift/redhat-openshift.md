@@ -9,6 +9,15 @@ description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+import IdpPrerequisite from '../\_partials/\_idp-prerequisite.md'
+import NoDomainIdpChoice from '../\_partials/\_no-domain-idp-choice.md'
+import WhyNoIdp from '../\_partials/\_why-no-idp.md'
+import SingleNamespaceDeployment from '../\_partials/\_single-namespace-deployment.md'
+import NoDomainInfo from '../\_partials/\_no-domain-info.md'
+import HelmUpgradeNote from '../\_partials/\_helm-upgrade-note.md'
+import KubefwdTip from '../\_partials/\_kubefwd-tip.md'
+import PortForwardServices from '../\_partials/\_port-forward-services.md'
+
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
 Deploying Camunda 8 on Red Hat OpenShift is supported using Helm, given the appropriate configurations.
@@ -38,16 +47,21 @@ This section installs Camunda 8 following the architecture described in the [ref
 
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
-- **Keycloak as OIDC provider**: Example OIDC provider (can be replaced with any compatible IdP)
 
 For OpenShift deployments, the following OpenShift-specific configurations are also included:
 
 - **OpenShift Routes**: Native OpenShift way to expose services externally (alternative to standard Kubernetes Ingress)
 - **Security Context Constraints (SCCs)**: Security framework for controlling pod and container permissions
 
-:::info Single namespace deployment
-This guide uses a single Kubernetes namespace for simplicity, since the deployment is done with a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components), which recommends separating Orchestration Cluster and Web Modeler or Console into different namespaces in production to improve isolation and enable independent scaling.
-:::
+<SingleNamespaceDeployment />
+
+## Identity Provider (IdP) setup
+
+<IdpPrerequisite />
+
+<NoDomainIdpChoice />
+
+<WhyNoIdp />
 
 ## Deploy Camunda 8 via Helm charts
 
@@ -161,7 +175,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
    - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
    To configure the orchestration cluster securely, it's essential to set up a secure communication configuration between pods:
-   - We enable gRPC Ingress for the Zeebe Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
+   - We enable gRPC Ingress for the Zeebe Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$CAMUNDA_DOMAIN`) for the gRPC proxy, different from the one used by other services (`$CAMUNDA_DOMAIN`). We also note that the port used for gRPC is `443`.
    - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe pod and configure a secure TLS connection.
 
    Update your `values.yml` file with the following:
@@ -221,24 +235,7 @@ To make this work, you will need to configure the deployment to reference `local
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/no-domain.yml
 ```
 
-:::info Keycloak issuer and localhost hostname alignment
-
-When running without a domain, Console validates the JWT issuer claim against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means that during port-forwarding you may need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
-
-Add (or update) the following entry in your `/etc/hosts` file while developing locally:
-
-```text
-127.0.0.1  $CAMUNDA_RELEASE_NAME-keycloak
-```
-
-After adding this entry, you can reach Keycloak at:
-`http://$CAMUNDA_RELEASE_NAME-keycloak:18080/auth`
-
-**Why port `18080`?**
-We forward container port `8080` (originally `80`) to a non‑privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using 8080.
-
-This constraint does not apply when a proper domain and Ingress are configured (the public FQDN is then used as the issuer and no hosts file changes are needed).
-:::
+<NoDomainInfo />
 
   </TabItem>
 </Tabs>
@@ -278,31 +275,7 @@ Some components are not enabled by default in this deployment. For more informat
 
 #### Fill your deployment with actual values
 
-Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/assemble-envsubst-values.sh
-```
-
-Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/generate-passwords.sh
-```
-
-Use these environment variables in the `kubectl` command to create the secret.
-
-- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)).
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/create-identity-secret.sh
-```
-
-### Install Camunda 8 using Helm
-
-Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm.
-
-The following are the required environment variables with some example values:
+First, export the required environment variables for the Helm chart version and namespace:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/chart-env.sh
@@ -311,7 +284,32 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 - `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed.
 - `CAMUNDA_RELEASE_NAME` is the name of the Helm release associated with this Camunda installation.
 
-Then run the following command:
+If you plan to enable Web Modeler, export the SMTP password variable:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/generate-passwords.sh
+```
+
+Once you've prepared the `values.yml` file and exported the required environment variables, run the following `envsubst` command to substitute the environment variables with their actual values:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/assemble-envsubst-values.sh
+```
+
+:::note Web Modeler secrets
+If you plan to enable Web Modeler, create the required secrets for SMTP email notifications ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)) and the embedded PostgreSQL database:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/create-webmodeler-secret.sh
+```
+
+:::
+
+### Install Camunda 8 using Helm
+
+Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm.
+
+Run the following command:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/install-chart.sh
@@ -323,11 +321,7 @@ This command:
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 
-:::note
-
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/upgrade/helm/index.md) or any other component upgrades.
-
-:::
+<HelmUpgradeNote />
 
 You can track the progress of the installation using the following command:
 
@@ -348,7 +342,7 @@ Below is a summary of the necessary instructions:
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
 
-1. Open Identity in your browser at `https://${DOMAIN_NAME}/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+1. Open Identity in your browser at `https://${CAMUNDA_DOMAIN}/managementidentity`. You will be redirected to your IdP and prompted to log in.
 2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
 
 ```shell
@@ -366,7 +360,7 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `https://${DOMAIN_NAME}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+6. Open the Orchestration Cluster Identity in your browser at `https://${CAMUNDA_DOMAIN}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
 7. In the Identity navigation menu, select **Roles**.
 8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
@@ -378,33 +372,18 @@ This operation links the OIDC client to the role's permissions in the Orchestrat
 
 <TabItem value="without" label="Without domain">
 
-Identity, Keycloak and the Orchestration cluster must be port-forwarded to be able to connect to the cluster.
+Identity and the Orchestration cluster must be port-forwarded to be able to connect to the cluster. If using Keycloak via the Keycloak Operator, you also need to port-forward the Keycloak service.
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
-kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:8080 --namespace "$CAMUNDA_NAMESPACE"
-kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --namespace "$CAMUNDA_NAMESPACE"
+# If using Keycloak Operator:
+kubectl port-forward "services/keycloak-service" 18080:18080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-:::tip Localhost development with kubefwd
-For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable by their in-cluster DNS names on your workstation.
+<KubefwdTip />
 
-Example (requires `sudo` to bind privileged ports and modify `/etc/hosts`):
-
-```shell
-sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
-```
-
-After this runs, you can reach services directly, for example:
-
-- Identity: `http://$CAMUNDA_RELEASE_NAME-identity/managementidentity`
-- Keycloak: `http://$CAMUNDA_RELEASE_NAME-keycloak`
-- Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
-
-You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.
-:::
-
-1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to your IdP and prompted to log in.
 2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
 
 ```shell
@@ -430,23 +409,7 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 
 This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
 
-<details>
-<summary>To access the other services and their UIs, port-forward those Components as well:</summary>
-
-```shell
-Orchestration:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
-Optimize:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-optimize" 8083:80 --namespace "$CAMUNDA_NAMESPACE"
-Connectors:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-connectors" 8086:8080 --namespace "$CAMUNDA_NAMESPACE"
-WebModeler:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-web-modeler-webapp" 8070:80 --namespace "$CAMUNDA_NAMESPACE"
-Console:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8087:80 --namespace "$CAMUNDA_NAMESPACE"
-```
-
-</details>
+<PortForwardServices />
 
 </TabItem>
 </Tabs>
@@ -456,7 +419,7 @@ Console:
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
 
-For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
+For a detailed guide on generating and using a token, consult the relevant documentation on [authenticating with the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
@@ -496,13 +459,11 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 ```json reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
-  </summary>
 </details>
 
   </TabItem>
@@ -520,10 +481,10 @@ Follow our existing [Modeler guide on deploying a diagram](/self-managed/compone
 
 The following values are required for the OAuth authentication:
 
-- **Cluster endpoint:** `https://zeebe-$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
+- **Cluster endpoint:** `https://zeebe-$CAMUNDA_DOMAIN`, replacing `$CAMUNDA_DOMAIN` with your domain
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
-- **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
+- **OAuth Token URL:** Your IdP's token endpoint (for example, `https://$CAMUNDA_DOMAIN/auth/realms/camunda-platform/protocol/openid-connect/token` when using Keycloak), replacing `$CAMUNDA_DOMAIN` with your domain
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
@@ -541,7 +502,7 @@ The following values are required for OAuth authentication:
 - **Cluster endpoint:** `http://localhost:26500`
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
-- **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
+- **OAuth Token URL:** Your IdP's token endpoint (for example, `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token` when using Keycloak with port-forwarding)
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>

@@ -9,13 +9,23 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::note
-Please refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch are supported in a Camunda 8 Self-Managed setup.
-:::
+For supported Elasticsearch versions in Camunda 8 Self-Managed, see
+[supported environments](/reference/supported-environments.md#camunda-8-self-managed).
 
-:::note
-As of **8.8**, Camunda uses the [**Camunda Exporter**](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) to consume new records. Records from **≤8.7** are only consumed during migration.
+Starting with Camunda 8.8, Camunda uses the
+[Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)
+to consume new records. Records from 8.7 and earlier are consumed only during migration.
 
-The Elasticsearch and OpenSearch exporters remain fully usable after migration for existing setups, Optimize, and other custom use cases—their functionality is **not limited to the migration period**.
+The Elasticsearch and OpenSearch exporters remain fully usable after migration
+(for example, for existing setups, Optimize, or other custom use cases).
+Their functionality is not limited to the migration period.
+
+From 8.9 onward, the Elasticsearch exporter also supports Optimize-focused
+export filters (for example, variable-name filters, variable-type filters,
+BPMN process include/exclude, and an Optimize mode flag).
+
+For Optimize-specific guidance and recommended settings, see
+[Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
 :::
 
 The Zeebe Elasticsearch exporter acts as a bridge between
@@ -59,15 +69,15 @@ exporters:
 The exporter can be configured by providing `args`. The table below explains all the different
 options, and the default values for these options:
 
-| Option                | Description                                                                              | Default                 |
-| --------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
-| url                   | Valid URLs as comma-separated string.                                                    | `http://localhost:9200` |
-| requestTimeoutMs      | Request timeout (in ms) for Elasticsearch. client                                        | `30000`                 |
-| index                 | Refer to [index](#index) for the index configuration options.                            |                         |
-| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                               |                         |
-| retention             | Refer to [retention](#retention) for the retention configuration options.                |                         |
-| authentication        | Refer to [authentication](#authentication) for the authentication configuration options. |                         |
-| includeEnabledRecords | If `true` all enabled record types will be exported.                                     | `false`                 |
+| Option                | Description                                                                                                                                                                                    | Default                 |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| url                   | Valid URLs as a comma-separated string.                                                                                                                                                        | `http://localhost:9200` |
+| requestTimeoutMs      | Request timeout (in ms) for Elasticsearch client.                                                                                                                                              | `30000`                 |
+| index                 | Refer to [index](#index) for index configuration options, including record/value-type switches, Optimize-focused filters, and the Optimize mode flag.                                          |                         |
+| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                                                                                                                                     |                         |
+| retention             | Refer to [retention](#retention) for the retention configuration options.                                                                                                                      |                         |
+| authentication        | Refer to [authentication](#authentication) for the authentication configuration options.                                                                                                       |                         |
+| includeEnabledRecords | If `true`, exports all enabled record types configured under `index`. If `optimizeModeEnabled` is `true`, Optimize mode takes precedence. Use mainly for migration or compatibility scenarios. | `false`                 |
 
 <Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' }]} >
 
@@ -120,6 +130,88 @@ and process values).
 | userTask                      | If `true` records related to user tasks will be exported                                                                                                                                                                                                                                                                                                          | `true`          |
 | variable                      | If `true` records related to variables will be exported                                                                                                                                                                                                                                                                                                           | `true`          |
 | variableDocument              | If `true` records related to variable documents will be exported                                                                                                                                                                                                                                                                                                  | `true`          |
+
+### Variable-name filters
+
+Starting with Camunda 8.9, you can filter exported variable records by variable name.
+
+Configuration:
+
+```yaml
+exporters:
+  elasticsearch:
+    args:
+      index:
+          variableNameInclusionStartWith:
+              - business_
+          variableNameExclusionStartWith:
+              -  business_debug      
+```
+
+The exporter first matches variable names against inclusion rules (if present), then against exclusion rules. If a variable matches both, the exclusion wins.
+
+For details on how this interacts with Optimize, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
+
+### Variable-type filters
+
+Variable-type filters let you restrict exported variables by their inferred JSON type,
+such as `String`, `Number`, `Boolean`, `Object` or `Null`.
+The exporter first matches variable types against inclusion rules (if present), then against exclusion rules. If a variable type matches both, the exclusion wins.
+Configuration:
+
+```yaml
+exporters:
+  elasticsearch:
+    args:
+     index:
+         variableValueTypeInclusion:
+             - Object
+             - String                
+         variableValueTypeExclusion:
+             - Object
+```
+
+Use this filter to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see
+[Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
+
+### BPMN process filters
+
+BPMN process filters control which processes (by `bpmnProcessId`) are exported. All records that carry the given `bpmnProcessId` follow the same decision.
+
+Configuration:
+
+```yaml
+exporters:
+  elasticsearch:
+    args:
+          index:
+            bpmnProcessIdInclusion:
+                - orderProcess
+            bpmnProcessIdExclusion:
+                - debugProcess
+```
+
+Processes listed under `inclusion` are candidates; `exclusion` removes any of those candidates again.
+
+Some value types that never expose `bpmnProcessId` (for example, `DEPLOYMENT`, `DECISION`) are not affected and remain controlled only via the `index.*` flags.
+
+### Optimize mode
+
+With Optimize mode, you can restrict exported records to those used by Optimize, reducing index size.
+
+Configuration:
+
+```yaml
+exporters:
+  elasticsearch:
+    args:
+      index:
+        optimizeModeEnabled: true
+```
+
+When enabled, the exporter emits only the value types and intents that Optimize imports. Other value types are dropped unless you explicitly opt in to the legacy behavior (for example, via `includeEnabledRecords`).
+
+Use this flag only if the exporter indices are dedicated to Optimize. For SaaS and Self-Managed recommendations, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
 
 </TabItem>
 
@@ -307,18 +399,18 @@ your deployment method (e.g. Helm chart, Docker Compose). The simplest way is to
 the environment variable.
 :::
 
-## Legacy Zeebe records
+## Legacy Zeebe records and Optimize filters
 
-With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch Exporter no longer export all record types by default. Therefore, not all `zeebe-record` indices will be populated.
+With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default.
+Instead, they will emit only the record value types and intents required by Optimize.
 
-The record types that continue to be exported by default are the following:
+To export additional record types, enable the [`includeEnabledRecords`](#configuration) configuration property.
 
-- `DEPLOYMENT`
-- `PROCESS`
-- `PROCESS_INSTANCE`
-- `VARIABLE`
-- `USER_TASK`
-- `INCIDENT`
-- `JOB`
+When you enable exporter-side filters (`optimizeModeEnabled`, `variable-name`,
+`variable-type`, or `bpmn-process-id`), filtering applies only to newly produced records. Existing documents in Elasticsearch or OpenSearch are not rewritten.
 
-To export other record types, enable the [includeEnabledRecords](#configuration) configuration property.
+:::info Upgrade note (8.8 to 8.9)
+
+When upgrading from 8.8 to 8.9, exporter filtering behavior may affect data completeness. See the [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md) for guidance.
+
+:::

@@ -32,21 +32,21 @@ Read more about [history migration atomicity](../data-migrator/history.md#atomic
 
 The migrator supports the following SQL databases:
 
-| Database       | Version | JDBC Driver                | Notes                      |
-| -------------- | ------- | -------------------------- | -------------------------- |
-| **H2**         | 2.3.232 | `org.h2.Driver`            | Default, good for testing  |
-| **PostgreSQL** | 17      | `org.postgresql.Driver`    | Recommended for production |
-| **Oracle**     | 23ai    | `oracle.jdbc.OracleDriver` | Recommended for production |
+| Database                 | Version        | JDBC Driver                                    | Notes                      |
+|--------------------------|----------------|------------------------------------------------|----------------------------|
+| **H2**                   | 2.3.232        | `org.h2.Driver`                                | Default, good for testing  |
+| **PostgreSQL**           | 15, 16, 17, 18 | `org.postgresql.Driver`                        | Recommended for production |
+| **Oracle**               | 19c, 23ai      | `oracle.jdbc.OracleDriver`                     | Recommended for production |
+| **Microsoft SQL Server** | 2022           | `com.microsoft.sqlserver.jdbc.SQLServerDriver` | Recommended for production |
+| **MySQL**                | 8.0            | `com.mysql.cj.jdbc.Driver`                     | Recommended for production |
+| **MariaDB**              | 10.6, 11.8     | `org.mariadb.jdbc.Driver`                      | Recommended for production |
 
 The migrator supports migration only within the same database vendor:
 
 | Migration Path          | Status           |
 | ----------------------- | ---------------- |
 | PostgreSQL → PostgreSQL | ✅ Supported     |
-| Oracle → Oracle         | ✅ Supported     |
-| H2 → H2                 | ✅ Supported     |
 | PostgreSQL → Oracle     | ❌ Not supported |
-| Oracle → PostgreSQL     | ❌ Not supported |
 
 ## Dropping the migration mapping schema
 
