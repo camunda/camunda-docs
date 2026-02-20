@@ -832,7 +832,43 @@ camunda:
 
 Generally, the [client default `tenant-id`](#multi-tenancy) is used for all job worker activations.
 
-Configure global worker defaults for additional `tenant-ids` to be used by all workers:
+##### Filtering by assigned tenants
+
+You can configure a job worker to use the tenants assigned to it in the engine, rather than providing explicit tenant IDs. Use the `tenantFilter` annotation property with `TenantFilter.ASSIGNED`:
+
+```java
+@JobWorker(tenantFilter = TenantFilter.ASSIGNED)
+public void foo() {
+  // worker's code
+}
+```
+
+When `TenantFilter.ASSIGNED` is set, any `tenant-ids` configured via the annotation or YAML are ignored.
+
+You can also override the tenant filter for a specific worker:
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        foo:
+          tenant-filter: ASSIGNED
+```
+
+To configure a global default:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        tenant-filter: ASSIGNED
+```
+
+##### Filtering by provided tenant IDs
+
+The default behaviour is `TenantFilter.PROVIDED`, where the worker retrieves jobs for the tenant IDs explicitly configured. Configure global worker defaults for additional `tenant-ids` to be used by all workers:
 
 ```yaml
 camunda:
