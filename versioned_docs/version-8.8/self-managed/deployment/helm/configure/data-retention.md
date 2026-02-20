@@ -75,6 +75,8 @@ For full exporter configuration and retention options, see [Zeebe Elasticsearch 
 
 In most deployments starting with Camunda 8.8, you only need retention for Orchestration Cluster indices (archived Operate, Tasklist, and Camunda data).
 
+The example below sets most properties to their current default values and explicitly enables history retention (`orchestration.history.retention.enabled: true`). If defaults change in future versions, clusters that keep these explicit values will retain the behavior shown here.
+
 ```yaml
 orchestration:
   history:
@@ -92,7 +94,7 @@ orchestration:
       usageMetricsPolicyName: camunda-usage-metrics-retention-policy
 ```
 
-#### Zeebe records retention (optional)
+#### Zeebe records retention
 
 Enable Zeebe records retention only if you still use the legacy Elasticsearch/OpenSearch Exporter (for example, when Optimize reads from `zeebe-record-*` indices).
 
@@ -153,11 +155,13 @@ After deploying with retention enabled, verify that the ILM/ISM policies were cr
 
 - Zeebe records retention (`zeebe-record-retention-policy`) applies to Elasticsearch/OpenSearch Exporter indices (Zeebe records) created by the legacy exporter (for example, indices matching the exporter prefix such as `zeebe-record-*`). The Zeebe Elasticsearch/OpenSearch Exporter creates this policy automatically during initialization, typically within a few minutes of deployment.
 
-- History retention (`camunda-history-retention-policy`) applies to archived Orchestration Cluster indices used by Operate, Tasklist, and Camunda (for example, `operate-process-*`, `tasklist-task-*` with date suffixes). The retention tooling creates this policy when `orchestration.history.retention.enabled: true`. The archiver then:
-  1. Creates the ILM/ISM policy with the configured `minimumAge` setting when retention is first enabled.
-  2. Waits for `waitPeriodBeforeArchiving` (default: 1 hour) after a process instance completes.
-  3. Archives completed instances to dated indices (for example, `operate-process-8.3.0_2024-01-15`, `tasklist-task-8.8.0_2024-01-15`).
-  4. Attaches the policy directly to each archived index as it is created. The policy applies directly to archived Operate, Tasklist, and Camunda indices (not via index templates).
+- History retention (`camunda-history-retention-policy`) applies to archived Orchestration Cluster indices used by Operate, Tasklist, and Camunda (for example, `operate-process-*`, `tasklist-task-*` with date suffixes).
+
+The schema manager creates this ILM/ISM policy on application startup when `orchestration.history.retention.enabled: true`. After that, the archiver:
+
+1. Waits for `waitPeriodBeforeArchiving` (default: 1 hour) after a process instance completes.
+2. Archives completed instances to dated indices (for example, `operate-process-8.3.0_2024-01-15`, `tasklist-task-8.8.0_2024-01-15`).
+3. Attaches the policy directly to each archived index as it creates it.
 
 Set your database URL:
 
@@ -219,7 +223,7 @@ Examples:
 - `tasklist-task-8.8.0_2024-01-15`
 
 :::note Index versioning
-The version number in index names (for example, `8.3.0`) represents the **schema version**, not necessarily the Camunda platform version. Schema versions evolve independently as index structures change. For details, see [Operate schema and migration documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration.md).
+The version number in index names (for example, `8.3.0`) represents the **schema version**, not necessarily the Camunda platform version. Schema versions evolve independently as index structures change. For details, see [schema and migration documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration.md).
 :::
 
 If no archived indices exist:
