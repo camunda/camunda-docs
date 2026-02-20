@@ -55,7 +55,7 @@ Choose the upgrade guide that matches how your environment is deployed:
 :::info Dual-region Helm deployments
 If you are upgrading a dual-region Helm deployment, follow the standard Helm upgrade guide and then complete the additional dual-region steps.
 
-<p class="link-arrow">[Camunda 8.7 to 8.8 Dual-Region Upgrade](./helm/880-to-890-dual-region.md)</p>
+<p class="link-arrow">[Camunda 8.8 to 8.9 Dual-Region Upgrade](./helm/880-to-890-dual-region.md)</p>
 :::
 
 ## Docker Compose deployments
