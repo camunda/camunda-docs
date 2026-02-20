@@ -1297,7 +1297,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.8",
+      label: "Upgrade to Camunda 8.9",
       link: {
         type: "doc",
         id: "apis-tools/migration-manuals/index",
