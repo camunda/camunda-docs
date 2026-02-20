@@ -53,7 +53,7 @@ Several BPMN intermediate events (and the receive task) can be used to make a pr
 |                         | Message Event                                                                | Receive Task                                                                            | Timer Event                                                                    | Signal Event                                                              | Conditional Event                                                            |
 | ----------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 |                         | ![message intermediate](/img/bpmn-elements/message-intermediate.svg)         | ![task receive](/img/bpmn-elements/task-receive.svg)                                    | ![timer intermediate](/img/bpmn-elements/timer-intermediate.svg)               | ![signal intermediate](/img/bpmn-elements/signal-intermediate.svg)        | ![conditional intermediate](/img/bpmn-elements/conditional-intermediate.svg) |
-| Use when                | You route an incoming **message** to a specific and unique process instance. | As alternative to message events (to leverage BPMN boundary events, e.g. for timeouts). | You want to make your process instance wait for a certain (point in) **time**. | You route an incoming **signal** to all process instances waiting for it. | When a specific **condition** is met, the waiting process instance moves on. |
+| Use when                | You route an incoming **message** to a specific and unique process instance. | As alternative to message events (to leverage BPMN boundary events, for example for timeouts). | You want to make your process instance wait for a certain (point in) **time**. | You route an incoming **signal** to all process instances waiting for it. | When a specific **condition** is met, the waiting process instance moves on. |
 | Supported for Execution | ✔                                                                            | ✔                                                                                       | ✔                                                                              | ✔                                                                         | Not yet supported in Camunda 8                                               |
 |                         | [Learn more](/components/modeler/bpmn/message-events/message-events.md)      | [Learn more](/components/modeler/bpmn/receive-tasks/receive-tasks.md)                   | [Learn more](/components/modeler/bpmn/timer-events/timer-events.md)            | [Learn more](/components/modeler/bpmn/signal-events/signal-events.md)     |                                                                              |
 
@@ -87,7 +87,7 @@ This could end with a successful income confirmation. However, it could also end
 
 <span className="callout">3</span>
 
-In this case, a **conditional event** watching this data (e.g. a process variable changed by the user task) triggers and causes the process to reconsider the consequences of the new findings.
+In this case, a **conditional event** watching this data (for example a process variable changed by the user task) triggers and causes the process to reconsider the consequences of the new findings.
 
 A conditional event's condition expression is evaluated at it's "scope" creation time, too, and not just when variable data changes. For our example of a boundary conditional event, that means that the activity it is attached to could principally be left immediately via the boundary event. However, our process example evaluates the data via the exclusive gateway - therefore such a scenario is semantically impossible.
 
@@ -175,7 +175,7 @@ The message name for start events should be unique for the whole workflow engine
 ## Technology examples for messages sent by external systems
 
 In this section, we give examples for _technical messages_, which are received from
-other systems, typically by leveraging technologies like e.g. SOAP, REST, JMS or
+other systems, typically by leveraging technologies like for example SOAP, REST, JMS or
 other.
 
 <div bpmn="best-practices/routing-events-to-processes-assets/invoice-external-system.bpmn" callouts="start_event_invoice_received" />
@@ -206,7 +206,7 @@ If messages are exchanged between different processes deployed in the workflow e
 
 <span className="callout">1</span>
 
-Use some simple code on the sending side to route the message to a new process instance, e.g. by starting a new process instance by the BPMN ID in Java:
+Use some simple code on the sending side to route the message to a new process instance, for example by starting a new process instance by the BPMN ID in Java:
 
 ```java
 @JobWorker(type="routeInput")
