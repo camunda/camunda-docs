@@ -5,6 +5,10 @@ title: Keycloak compatibility considerations for Camunda
 description: Review Keycloak upgrade considerations and compatibility requirements when used with Camunda.
 ---
 
+Review Keycloak upgrade considerations and compatibility requirements when used with Camunda.
+
+## About
+
 When upgrading Keycloak in a Camunda Self-Managed environment, follow the official [Keycloak upgrade guide](https://www.keycloak.org/docs/latest/upgrading/index.html).
 
 Before upgrading, review the Camunda [supported environments](reference/supported-environments.md#camunda-8-self-managed) to ensure the Keycloak version you plan to use is compatible with your Camunda release.

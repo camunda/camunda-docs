@@ -5,7 +5,7 @@ title: Keycloak compatibility considerations for Camunda
 description: Review Keycloak upgrade considerations and compatibility requirements when used with Camunda.
 ---
 
-Review Keycloak upgrade considerations and compatibility requirements when used with Camunda
+Review Keycloak upgrade considerations and compatibility requirements when used with Camunda.
 
 ## About
 

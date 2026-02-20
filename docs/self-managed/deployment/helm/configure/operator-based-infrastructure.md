@@ -85,7 +85,7 @@ All configuration files, deployment scripts, and automation tools referenced in 
 <summary><strong>Quick deployment commands</strong></summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/camunda-deployment-references/generic/kubernetes/operator-based/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/get-your-copy.sh
 ```
 
 Then execute:
@@ -174,10 +174,11 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 **Deployment steps performed by the script:**
 
+- Auto-detect OpenShift and apply Security Context Constraints (SCC) patches if needed
 - Install CloudNativePG operator to `cnpg-system` namespace
 - Generate PostgreSQL authentication secrets using `./set-secrets.sh`
-- Deploy three PostgreSQL clusters from `postgresql-clusters.yml`
-- Wait for readiness validation of all clusters
+- Deploy PostgreSQL clusters from `postgresql-clusters.yml` (optionally filtered via `CLUSTER_FILTER` environment variable)
+- Wait for readiness validation of all deployed clusters
 
 #### Operator Custom Resources
 
@@ -203,30 +204,15 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 #### Execution
 
-<Tabs groupId="postgres-deployment">
-  <TabItem value="standard" label="Kubernetes" default>
-
 1. **Navigate to PostgreSQL directory**: `cd postgresql/`
 2. **Review deployment script**: `cat deploy.sh` to understand the deployment steps
 3. **Review cluster configuration**: `cat postgresql-clusters.yml` to verify PostgreSQL cluster settings
 4. **Adapt configuration if needed**: Modify `postgresql-clusters.yml` for your specific requirements (resource limits, storage, etc.)
 5. **Execute deployment**: `./deploy.sh`
 
-  </TabItem>
-  <TabItem value="openshift" label="OpenShift">
-
-1. **Navigate to PostgreSQL directory**: `cd postgresql/`
-2. **Review OpenShift deployment script**: `cat deploy-openshift.sh` to understand the OpenShift-specific deployment steps
-3. **Review cluster configuration**: `cat postgresql-clusters.yml` to verify PostgreSQL cluster settings
-4. **Adapt configuration if needed**: Modify `postgresql-clusters.yml` for your specific requirements (resource limits, storage, etc.)
-5. **Execute OpenShift deployment**: `./deploy-openshift.sh`
-
-:::note OpenShift Security Context Constraints
-The `deploy-openshift.sh` script applies necessary Security Context Constraints (SCC) patches required for CloudNativePG to run properly on OpenShift platforms.
+:::note OpenShift compatibility
+The `deploy.sh` script automatically detects OpenShift environments and applies the necessary Security Context Constraints (SCC) patches for CloudNativePG compatibility. No separate script is required.
 :::
-
-  </TabItem>
-</Tabs>
 
 ### Camunda Helm configuration
 

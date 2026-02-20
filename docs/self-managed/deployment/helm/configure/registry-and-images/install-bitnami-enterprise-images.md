@@ -32,9 +32,8 @@ Previously, some users deployed Bitnami subcharts in production. Starting with C
 - Achieve greater operational control and flexibility
   :::
 
-:::note Alternative: Use official Kubernetes operators
-For production environments, consider using the official Kubernetes operators for PostgreSQL, Elasticsearch/OpenSearch, and Keycloak instead of Bitnami subcharts. These operators are maintained by their respective upstream projects.  
-See [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for detailed instructions.
+:::note Alternative: Operator-based infrastructure
+For production environments, consider using official Kubernetes operators for PostgreSQL (CloudNativePG), Elasticsearch/OpenSearch (ECK), and Keycloak instead of Bitnami subcharts. See [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for detailed instructions.
 :::
 
 If you use Bitnami-based subcharts in production, Camunda strongly recommends using Bitnami Premium images licensed by Camunda and maintained by Bitnami (Broadcom). This guide explains how to configure and install Camunda with these images.
