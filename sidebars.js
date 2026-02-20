@@ -809,6 +809,20 @@ module.exports = {
                 },
               ],
             },
+            {
+              type: "category",
+              label: "Collaborate",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/collaboration/collaboration",
+              },
+              items: [
+                "components/modeler/web-modeler/collaboration/collaborate-with-modes",
+                "components/modeler/web-modeler/collaboration/design-your-process",
+                "components/modeler/web-modeler/collaboration/implement-your-process",
+                "components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
+              ],
+            },
           ],
         },
       ],
