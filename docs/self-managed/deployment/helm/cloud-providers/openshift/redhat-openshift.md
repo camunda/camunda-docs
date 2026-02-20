@@ -6,21 +6,17 @@ description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 
 <!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md. The user should have a similar experience when reading both guides. -->
 
-<!-- TODO: Before merging:
-1. Revert all blob/main back to blob/main once PR #1872 in camunda-deployment-references is merged.
-2. Replace vendor-supported-infrastructure.md with operator-based-infrastructure.md once PR #7904 in camunda-docs is merged.
-3. After PR #7906 (feature/extract-oidc) merges:
-   - Add partial imports (IdpPrerequisite, NoDomainIdpChoice, WhyNoIdp, SingleNamespaceDeployment, NoDomainInfo, HelmUpgradeNote, KubefwdTip, PortForwardServices)
-   - Replace inline :::info Single namespace deployment with <SingleNamespaceDeployment />
-   - Add "## Identity Provider (IdP) setup" section with <IdpPrerequisite />, <NoDomainIdpChoice />, <WhyNoIdp />
-   - Replace inline :::note helm upgrade with <HelmUpgradeNote />
-   - Replace inline kubefwd tip with <KubefwdTip />
-   - Replace inline port-forward details with <PortForwardServices />
-   - Add <NoDomainInfo /> in No Ingress tab
-   - Adapt and integrate the Keycloak Operator Helm values merge (`camunda-keycloak-domain-values.yml`) and identity secrets overlay merge (`camunda-values-identity-secrets.yml`) into this page (current content is not aligned with our page) -->
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+
+import IdpPrerequisite from '../\_partials/\_idp-prerequisite.md'
+import NoDomainIdpChoice from '../\_partials/\_no-domain-idp-choice.md'
+import WhyNoIdp from '../\_partials/\_why-no-idp.md'
+import SingleNamespaceDeployment from '../\_partials/\_single-namespace-deployment.md'
+import NoDomainInfo from '../\_partials/\_no-domain-info.md'
+import HelmUpgradeNote from '../\_partials/\_helm-upgrade-note.md'
+import KubefwdTip from '../\_partials/\_kubefwd-tip.md'
+import PortForwardServices from '../\_partials/\_port-forward-services.md'
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
@@ -53,7 +49,7 @@ This section installs Camunda 8 following the architecture described in the [ref
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
 
-Infrastructure components are deployed using **official Kubernetes operators** as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
+Infrastructure components are deployed using **official Kubernetes operators** as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
 - **[Elasticsearch with ECK](#deploy-elasticsearch)**: Deployed via [Elastic Cloud on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) for secondary storage
 - **[PostgreSQL with CloudNativePG](#deploy-postgresql)**: Deployed via [CloudNativePG](https://cloudnative-pg.io/) for Identity and Web Modeler databases
@@ -63,9 +59,15 @@ For OpenShift deployments, the following OpenShift-specific configurations are a
 - **OpenShift Routes**: Native OpenShift way to expose services externally (alternative to standard Kubernetes Ingress)
 - **Security Context Constraints (SCCs)**: Security framework for controlling pod and container permissions
 
-:::info Single namespace deployment
-This guide uses a single Kubernetes namespace for simplicity, since the deployment is done with a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components), which recommends separating Orchestration Cluster and Web Modeler or Console into different namespaces in production to improve isolation and enable independent scaling.
-:::
+<SingleNamespaceDeployment />
+
+## Identity Provider (IdP) setup
+
+<IdpPrerequisite />
+
+<NoDomainIdpChoice />
+
+<WhyNoIdp />
 
 ## Deploy Camunda 8 via Helm charts
 
@@ -329,6 +331,8 @@ The Keycloak Operator deploys the Keycloak service on port `18080`. We forward t
 This constraint does not apply when a proper domain and Ingress are configured (the public FQDN is then used as the issuer and no hosts file changes are needed).
 :::
 
+<NoDomainInfo />
+
   </TabItem>
 </Tabs>
 
@@ -385,7 +389,7 @@ Some components are not enabled by default in this deployment. For more informat
 
 ### Deploy prerequisite services
 
-Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch and PostgreSQL) is deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md). Keycloak can optionally be deployed as your OIDC provider:
+Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch and PostgreSQL) is deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md). Keycloak can optionally be deployed as your OIDC provider:
 
 - **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
 - **PostgreSQL**: Deployed via [CloudNativePG](https://cloudnative-pg.io/)
@@ -416,7 +420,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 </details>
 
-For more details on the Elasticsearch deployment, see [Elasticsearch deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#elasticsearch-deployment).
+For more details on the Elasticsearch deployment, see [Elasticsearch deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment).
 
 #### Deploy PostgreSQL {#deploy-postgresql}
 
@@ -442,7 +446,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 </details>
 
-For more details on the PostgreSQL deployment, see [PostgreSQL deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#postgresql-deployment).
+For more details on the PostgreSQL deployment, see [PostgreSQL deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
 #### Deploy Keycloak (optional) {#deploy-keycloak}
 
@@ -520,7 +524,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 </TabItem>
 </Tabs>
 
-For more details on the Keycloak deployment, see [Keycloak deployment in the vendor-supported infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#keycloak-deployment).
+For more details on the Keycloak deployment, see [Keycloak deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment).
 
 #### Merge operator overlays into values
 
@@ -674,11 +678,7 @@ This command:
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 
-:::note
-
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/upgrade/helm/index.md) or any other component upgrades.
-
-:::
+<HelmUpgradeNote />
 
 You can track the progress of the installation using the following command:
 
@@ -733,28 +733,12 @@ Identity and the Orchestration cluster must be port-forwarded to be able to conn
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
-kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --namespace "$CAMUNDA_NAMESPACE"
 # If using Keycloak Operator:
 kubectl port-forward "services/keycloak-service" 18080:18080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-:::tip Localhost development with kubefwd
-For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable by their in-cluster DNS names on your workstation.
-
-Example (requires `sudo` to bind privileged ports and modify `/etc/hosts`):
-
-```shell
-sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
-```
-
-After this runs, you can reach services directly, for example:
-
-- Identity: `http://$CAMUNDA_RELEASE_NAME-identity/managementidentity`
-- Keycloak: `http://keycloak-service:18080`
-- Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
-
-You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.
-:::
+<KubefwdTip />
 
 1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to your IdP and prompted to log in.
 2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
@@ -782,23 +766,7 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 
 This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
 
-<details>
-<summary>To access the other services and their UIs, port-forward those Components as well:</summary>
-
-```shell
-Orchestration:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
-Optimize:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-optimize" 8083:80 --namespace "$CAMUNDA_NAMESPACE"
-Connectors:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-connectors" 8086:8080 --namespace "$CAMUNDA_NAMESPACE"
-WebModeler:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-web-modeler-webapp" 8070:80 --namespace "$CAMUNDA_NAMESPACE"
-Console:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8087:80 --namespace "$CAMUNDA_NAMESPACE"
-```
-
-</details>
+<PortForwardServices />
 
 </TabItem>
 </Tabs>
@@ -808,7 +776,7 @@ Console:
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
 
-For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
+For a detailed guide on generating and using a token, consult the relevant documentation on [authenticating with the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
@@ -848,13 +816,11 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 ```json reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
-  </summary>
 </details>
 
   </TabItem>

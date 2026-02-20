@@ -395,6 +395,12 @@ zeebe:
               url: "http://RELEASE-elasticsearch:9200"
               index:
                 prefix: "zeebe-record"
+                # Example: exporter-side filters for Optimize (Camunda 8.9+)
+                # bpmnProcessIdExclusion:
+                #   - technicalProcess
+                # variableNameInclusionStartWith:
+                #   - businessTotal
+                prefix: "zeebe-record"
         gateway:
           enable: true
           network:
@@ -420,6 +426,11 @@ zeebe:
           cpuThreadCount: "3"
           ioThreadCount: "3"
 ```
+
+The commented `variable-name` and `bpmn-process-id` sections above only illustrate where to configure exporter-side filters for Optimize in Camunda 8.9 and later. For the complete list of available options, their semantics, and upgrade behavior, see:
+
+- [Elasticsearch exporter](../../../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/)
+- [OpenSearch exporter](../../../../components/orchestration-cluster/zeebe/exporters/opensearch-exporter/)
 
 ## Connectors configuration
 
