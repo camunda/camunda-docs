@@ -461,19 +461,19 @@ private static final String clusterRestLocal = "http://localhost:8080";
 </TabItem>
 </Tabs>
 
-## Logout handling (RP‑initiated logout)
+## Logout handling (RP-initiated logout)
 
-When Orchestration Cluster Identity is configured with an external OIDC‑compliant Identity Provider (IdP), you can enable relying party (RP) initiated logout so that signing out of Camunda also initiates a logout at the IdP.
+When Orchestration Cluster Identity is configured with an external OIDC-compliant identity provider (IdP), you can enable relying party (RP)-initiated logout so that signing out of Camunda also triggers a logout at the IdP.
 
 :::note
-This applies to Self‑Managed Orchestration Clusters only. RP-initiated logout is not supported in SaaS.
+This applies to Self-Managed Orchestration Clusters only. RP-initiated logout is not supported in SaaS.
 :::
 
 ### Configure RP-initiated logout
 
 #### Enable or disable RP-initiated logout
 
-You can enable or disable RP-initiated logout using the following setting:
+Enable or disable RP-initiated logout using the following setting:
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
@@ -502,21 +502,26 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_IDPLOGOUTENABLED=<true|false>
 RP-initiated logout is enabled by default for all new deployments.
 :::
 
-- **Orchestration Cluster‑only logout (RP-initiated logout flag disabled)**
-  - Logout clears only the Orchestration Cluster session.
-  - No request is sent to the IdP, so the user stays signed in there.
-- **RP-initiated logout (RP-initiated logout flag enabled)** — **default for new 8.9+ installations**
-  - Logout clears the Orchestration Cluster session and calls the IdP’s logout endpoint.
-  - The user is signed out of Orchestration Cluster Identity, Tasklist, and Operate, as well as the IdP, and is then redirected to the login page of the Camunda app the user initiated the logout from.
-  - Whether the user is also logged out of other applications that use the same IdP depends on how the IdP implements RP-initiated logout.
+**Logout behavior depends on this setting:**
 
-Existing Self‑Managed deployments upgrading from earlier versions can continue to use cluster‑only logout. If you want to keep the previous behavior after upgrading, explicitly set the `IDPLOGOUTENABLED` [configuration property](#enable-or-disable-rp-initiated-logout) to `false`.
+- **Orchestration Cluster-only logout (RP-initiated logout disabled)**
+  - Clears only the Orchestration Cluster session.
+  - No request is sent to the IdP, so the user remains signed in there.
+
+- **RP-initiated logout (enabled)** (default for new 8.9+ installations)
+  - Clears the Orchestration Cluster session and calls the IdP logout endpoint.
+  - Signs the user out of Orchestration Cluster Identity, Tasklist, Operate, and the IdP.
+  - Redirects the user to the login page of the Camunda app where logout was initiated.
+  - Logout behavior for other applications using the same IdP depends on the IdP’s RP-initiated logout implementation.
+
+Existing Self-Managed deployments upgraded from earlier versions can continue to use Orchestration Cluster-only logout. To preserve the previous behavior after upgrading, explicitly set the `IDPLOGOUTENABLED` configuration property to `false`.
 
 #### Configure the IdP logout endpoint
 
-By default, Identity obtains the IdP’s logout endpoint from the OIDC discovery document (a.k.a. the `.well-known` endpoint). If you choose not to use `issuer-uri` and instead configure endpoints manually, you can define the logout endpoint alongside `authorization-uri`, `token-uri`, and `jwk-set-uri`, as illustrated in the [special OIDC configuration cases](./special-oidc-cases.md):
+By default, Identity retrieves the IdP logout endpoint from the OIDC discovery document (the `.well-known` endpoint). If you do not use `issuer-uri` and instead configure endpoints manually, define the logout endpoint alongside `authorization-uri`, `token-uri`, and `jwk-set-uri`, as shown in the [special OIDC configuration cases](./special-oidc-cases.md):
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml'}, {label: 'Environment variables', value: 'env'}]}>
+
 <TabItem value="yaml">
 
 ```yaml
@@ -533,7 +538,7 @@ camunda.security:
 
 <TabItem value="env">
 
-```
+```bash
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ENDSESSIONENDPOINTURI=https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/logout
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUTHORIZATIONURI=https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/authorize
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_TOKENURI=https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/token
