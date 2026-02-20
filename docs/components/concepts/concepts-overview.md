@@ -112,7 +112,7 @@ With [Operate](/components/operate/operate-introduction.md), teams can monitor r
 
 ### Console
 
-With [Console](/components/console/introduction-to-console.md), teams can create, configure, manage, and monitor clusters for all environments, from development to production. Console offers control over organizational settings such as user management, roles, as well as insights into usage metrics.
+With [Console](/components/console/introduction-to-console.md), teams can create, configure, manage, and monitor clusters for all environments, from development to production. Console offers control over organizational settings such as user and role management, and provides insights into usage metrics.
 
 ## How does Camunda 8 compare to other solutions?
 
