@@ -122,7 +122,7 @@ Camunda's integrated yet flexible architecture facilitates best-of-breed technol
 
 ### Open architecture
 
-Integrate with a variety of applications, systems, and services to scale your architecture. Camunda works with your preferred source control, CI/CD pipelines, and programming languages; while well-documented APIs and SDKs, plus polyglot clients, enable easy integration and customization.
+Integrate with a variety of applications, systems, and services to scale your architecture. Camunda works with your preferred source control, CI/CD pipelines, and programming languages, while well-documented APIs, SDKs, and polyglot clients enable easy integration and customization.
 
 ### IT and business collaboration
 
