@@ -432,58 +432,6 @@ module.exports = {
         id: "components/modeler/about-modeler",
       },
       items: [
-        {
-          type: "category",
-          label: "Web Modeler",
-          link: {
-            type: "doc",
-            id: "components/modeler/web-modeler/index",
-          },
-          items: [
-            {
-              type: "doc",
-              id: "components/modeler/web-modeler/web-modeler-settings",
-              label: "Settings",
-            },
-            "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
-          ],
-        },
-        {
-          type: "category",
-          label: "Desktop Modeler",
-          link: {
-            type: "doc",
-            id: "components/modeler/desktop-modeler/index",
-          },
-          items: [
-            "components/modeler/desktop-modeler/install-the-modeler",
-            "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-8",
-            "components/modeler/desktop-modeler/deploy-diagram",
-            "components/modeler/desktop-modeler/start-instance",
-            "components/modeler/desktop-modeler/process-applications",
-            "components/modeler/desktop-modeler/use-connectors",
-            "components/modeler/desktop-modeler/variables",
-            {
-              "Element templates": [
-                "components/modeler/desktop-modeler/element-templates/configuring-templates",
-                "components/modeler/desktop-modeler/element-templates/using-templates",
-              ],
-            },
-            {
-              "Additional configuration": [
-                "components/modeler/desktop-modeler/flags/flags",
-                "components/modeler/desktop-modeler/plugins/plugins",
-                "components/modeler/desktop-modeler/custom-lint-rules/custom-lint-rules",
-                "components/modeler/desktop-modeler/search-paths/search-paths",
-                "components/modeler/desktop-modeler/telemetry/telemetry",
-              ],
-            },
-            "components/modeler/desktop-modeler/settings/settings",
-            "components/modeler/desktop-modeler/task-testing",
-            "components/modeler/desktop-modeler/troubleshooting",
-          ],
-        },
         require("./docs/components/modeler/forms/sidebar-schema"),
         require("./docs/components/modeler/element-templates/sidebar-schema"),
         "components/modeler/data-handling",
@@ -728,6 +676,11 @@ module.exports = {
                 "components/modeler/web-modeler/modeling/file-download",
                 "components/modeler/web-modeler/modeling/camunda-marketplace",
                 {
+                  type: "doc",
+                  id: "components/modeler/web-modeler/web-modeler-settings",
+                  label: "Settings",
+                },
+                {
                   type: "category",
                   label: "Import",
                   items: [
@@ -813,6 +766,7 @@ module.exports = {
                 "components/modeler/web-modeler/collaboration/design-your-process",
                 "components/modeler/web-modeler/collaboration/implement-your-process",
                 "components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
+                "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
               ],
             },
             {
@@ -825,6 +779,42 @@ module.exports = {
             },
           ],
         },
+      ],
+    },
+    {
+      type: "category",
+      label: "Desktop Modeler",
+      link: {
+        type: "doc",
+        id: "components/modeler/desktop-modeler/index",
+      },
+      items: [
+        "components/modeler/desktop-modeler/install-the-modeler",
+        "components/modeler/desktop-modeler/model-your-first-diagram",
+        "components/modeler/desktop-modeler/connect-to-camunda-8",
+        "components/modeler/desktop-modeler/deploy-diagram",
+        "components/modeler/desktop-modeler/start-instance",
+        "components/modeler/desktop-modeler/process-applications",
+        "components/modeler/desktop-modeler/use-connectors",
+        "components/modeler/desktop-modeler/variables",
+        {
+          "Element templates": [
+            "components/modeler/desktop-modeler/element-templates/configuring-templates",
+            "components/modeler/desktop-modeler/element-templates/using-templates",
+          ],
+        },
+        {
+          "Additional configuration": [
+            "components/modeler/desktop-modeler/flags/flags",
+            "components/modeler/desktop-modeler/plugins/plugins",
+            "components/modeler/desktop-modeler/custom-lint-rules/custom-lint-rules",
+            "components/modeler/desktop-modeler/search-paths/search-paths",
+            "components/modeler/desktop-modeler/telemetry/telemetry",
+          ],
+        },
+        "components/modeler/desktop-modeler/settings/settings",
+        "components/modeler/desktop-modeler/task-testing",
+        "components/modeler/desktop-modeler/troubleshooting",
       ],
     },
     {
