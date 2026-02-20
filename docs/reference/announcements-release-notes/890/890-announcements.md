@@ -162,6 +162,52 @@ Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{res
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenAPI request type-hardening can break generated clients
+
+Starting with 8.9.0, some request properties in the OpenAPI contract use stricter schema types (for example branded key/id types) instead of plain `string`.
+
+This can cause compile-time breaks for customers using self-built/generated SDKs, even when runtime payload values remain string-like.
+
+Affected contract updates include:
+
+- `CreateDeploymentData.body.tenantId`: `string` → `TenantId`
+- `CreateDocumentData.query.documentId`: `string` → `DocumentId`
+- `SearchCorrelatedMessageSubscriptionsData.body.filter.processDefinitionKey.$eq`: `string` → `ProcessDefinitionKey`
+- `CorrelatedMessageSubscriptionFilter.processDefinitionKey`: `string` → `ProcessDefinitionKeyFilterProperty | undefined`
+- `CorrelatedMessageSubscriptionSearchQuery.filter.processDefinitionKey.$eq`: `string` → `ProcessDefinitionKey`
+
+<p className="link-arrow">[Migration guidance for generated clients](../../../apis-tools/migration-manuals/migrate-to-camunda-api.md#generated-client-compatibility-for-89-openapi-updates)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenAPI enum additions can break strict generated clients
+
+Starting with 8.9.0, new enum literals were added to the OpenAPI contract. While additive at schema level, this can break generated clients that assume closed enums (for example, exhaustive matching without fallback or strict deserializers).
+
+Added literals include:
+
+- `BatchOperationTypeEnum` / `BatchOperationTypeFilterProperty`: `DELETE_DECISION_INSTANCE`
+- `ResourceTypeEnum`: `USER_TASK`
+- `PermissionTypeEnum`: `COMPLETE`
+
+<p className="link-arrow">[Migration guidance for generated clients](../../../apis-tools/migration-manuals/migrate-to-camunda-api.md#generated-client-compatibility-for-89-openapi-updates)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
