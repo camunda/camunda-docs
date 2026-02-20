@@ -18,6 +18,14 @@ export const apiCards = [
     type: "REST",
   },
   {
+    link: "../orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/",
+    title: "Orchestration Cluster MCP Server",
+    image: IconMcpImg,
+    description:
+      "Exposes selected Orchestration Cluster APIs as MCP tools for AI agents and LLM-powered applications.",
+    type: "MCP",
+  },
+  {
     link: "../administration-api/administration-api-reference/",
     title: "Administration API (SaaS)",
     image: IconAdminImg,
@@ -51,17 +59,6 @@ export const apiCards = [
     image: IconZeebeImg,
     description: "Advanced integrations and high-performance use cases.",
     type: "gRPC",
-  },
-];
-
-export const mcpApiCards = [
-  {
-    link: "../orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/",
-    title: "Orchestration Cluster MCP Server",
-    image: IconMcpImg,
-    description:
-      "Exposes selected Orchestration Cluster APIs as MCP tools for AI agents and LLM-powered applications.",
-    type: "MCP",
   },
 ];
 
