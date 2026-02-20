@@ -44,6 +44,12 @@ Choose one of the three approaches below. **Init container is recommended for pr
 
 ## Loading JDBC drivers into pods
 
+:::note
+
+The following applies to each of the components that require JDBC drivers: Orchestration Cluster, Identity, and Web Modeler, though examples may only reference Orchestration Cluster.
+
+:::
+
 Some databases—such as Oracle and MySQL—require JDBC drivers that cannot be included in the Camunda image due to licensing restrictions. You must provide these drivers at runtime using one of the following approaches.
 
 ### Option 1: Using an init container
