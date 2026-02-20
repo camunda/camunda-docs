@@ -46,7 +46,7 @@ If you're already invested in Kubernetes tooling and patterns and you want to re
 
 - **Multi-region support:** When deploying to Amazon ECS, the only supported and tested pattern is a single AWS Region with multiple Availability Zones (multi‑AZ). All core pieces of the Orchestration Cluster are expected to live in one region.
 - **Performance:** The Amazon ECS with Fargate deployment uses Amazon EFS as primary storage. This may result in higher costs and lower performance than a Kubernetes setup with block storage.
-- **Scalability:** Scaling in the Amazon ECS environment is a manual process that requires invoking the [cluster scaling API](../../../../components/orchestration-cluster/zeebe/operations/cluster-scaling.md).
+- **Scalability:** Scaling in the Amazon ECS environment is a manual process that requires you to invoke the [cluster scaling API](../../../../components/orchestration-cluster/zeebe/operations/cluster-scaling.md).
 
 Check out our [Amazon EKS deployment guide](../../../helm/cloud-providers/amazon/amazon-eks/amazon-eks.md) if a Kubernetes environment better suits your needs.
 
