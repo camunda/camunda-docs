@@ -514,7 +514,7 @@ Existing Self‑Managed deployments upgrading from earlier versions can continue
 
 #### Configure the IdP logout endpoint
 
-By default, Identity obtains the IdP’s logout endpoint from the OIDC discovery document. If you choose not to use `issuer-uri` and instead configure endpoints manually, you can define the logout endpoint alongside `authorization-uri`, `token-uri`, and `jwk-set-uri`, as illustrated in the [special OIDC configuration cases](./special-oidc-cases.md):
+By default, Identity obtains the IdP’s logout endpoint from the OIDC discovery document (a.k.a. the `.well-known` endpoint). If you choose not to use `issuer-uri` and instead configure endpoints manually, you can define the logout endpoint alongside `authorization-uri`, `token-uri`, and `jwk-set-uri`, as illustrated in the [special OIDC configuration cases](./special-oidc-cases.md):
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
