@@ -393,14 +393,6 @@ zeebe:
             className: "io.camunda.zeebe.exporter.ElasticsearchExporter"
             args:
               url: "http://RELEASE-elasticsearch:9200"
-              # Example: exporter-side filters for Optimize (Camunda 8.9+)
-              # variable-name:
-              #   inclusion:
-              #     exact:
-              #       - businessTotal
-              # bpmn-process-id:
-              #   exclusion:
-              #     - technicalProcess
               index:
                 prefix: "zeebe-record"
                 # Example: exporter-side filters for Optimize (Camunda 8.9+)
