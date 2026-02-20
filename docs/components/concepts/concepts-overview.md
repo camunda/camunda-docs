@@ -118,7 +118,7 @@ With [Console](/components/console/introduction-to-console.md), teams can create
 
 ### Composability
 
-Camunda's Integrated yet flexible architecture facilitates best-of-breed technology and reuse. Combine Camunda task automation with other tools and custom code for maximum flexibility. Choose SaaS or Self-Managed and use your preferred cloud, Kubernetes, and identity provider.
+Camunda's integrated yet flexible architecture facilitates best-of-breed technology and reuse. Combine Camunda task automation with other tools and custom code for maximum flexibility. Choose SaaS or Self-Managed, and use your preferred cloud, Kubernetes, and identity provider.
 
 ### Open architecture
 
