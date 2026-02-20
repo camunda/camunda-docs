@@ -783,7 +783,23 @@ module.exports = {
         type: "doc",
         id: "components/camunda-hub",
       },
-      items: [],
+      items: [
+        {
+          "Manage organizations": [
+            "components/console/manage-organization/organization-settings",
+            "components/console/manage-organization/manage-users",
+            "components/console/manage-organization/manage-user-groups",
+            "components/console/manage-organization/external-sso",
+            "components/console/manage-organization/view-organization-activity",
+            "components/console/manage-organization/enable-alpha-features",
+            "components/console/manage-organization/usage-history",
+            "components/console/manage-organization/usage-alerts",
+            "components/console/manage-organization/advanced-search",
+            "components/console/manage-organization/switch-organization",
+            "components/console/manage-organization/delete-account",
+          ],
+        },
+      ],
     },
     {
       type: "category",
@@ -1036,21 +1052,6 @@ module.exports = {
         id: "components/console/introduction-to-console",
       },
       items: [
-        {
-          "Manage your organization": [
-            "components/console/manage-organization/organization-settings",
-            "components/console/manage-organization/manage-users",
-            "components/console/manage-organization/manage-user-groups",
-            "components/console/manage-organization/external-sso",
-            "components/console/manage-organization/view-organization-activity",
-            "components/console/manage-organization/enable-alpha-features",
-            "components/console/manage-organization/usage-history",
-            "components/console/manage-organization/usage-alerts",
-            "components/console/manage-organization/advanced-search",
-            "components/console/manage-organization/switch-organization",
-            "components/console/manage-organization/delete-account",
-          ],
-        },
         {
           "Manage clusters": [
             "components/console/manage-clusters/create-cluster",
