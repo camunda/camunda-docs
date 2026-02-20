@@ -17,7 +17,7 @@ TODO (8.9):
 This page is a work in progress for Camunda 8.9 and will be updated as upgrade requirements are finalized.
 :::
 
-Upgrade a Helm-based dual-region Camunda 8 Self-Managed deployment from 8.7 to 8.8.
+Upgrade a Helm-based dual-region Camunda 8 Self-Managed deployment from 8.8 to 8.9.
 
 ## About
 
