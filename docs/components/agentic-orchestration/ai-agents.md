@@ -38,12 +38,12 @@ Poor or missing documentation increases the risk of:
 
 ### Example: weak vs strong tool definition
 
-| Tool definition | Example                                                                                                                                                                                                                                         |
-| :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Weak            | **Name**: `Lookup`<br/>**Description**: `Find customer data`                                                                                                                                                                                    |
-| Strong          | **Name**: `Resolve customer by legal company name`<br/>**Description**: `Use this tool when a document mentions a company and you need its internal customer ID. If multiple matches are returned, request human validation before continuing.` |
+| Tool definition | Example                                                                                                                                                                                                                                           |
+| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Weak            | **Name**: `Lookup`<br/>**Documentation**: `Find customer data`                                                                                                                                                                                    |
+| Strong          | **Name**: `Resolve customer by legal company name`<br/>**Documentation**: `Use this tool when a document mentions a company and you need its internal customer ID. If multiple matches are returned, request human validation before continuing.` |
 
-The stronger definition makes expected behavior explicit and improves reliability during tool selection and execution.
+A clear tool name and documentation make expected behavior explicit, improving reliability during tool selection and execution.
 
 ## AI agent integration features
 
