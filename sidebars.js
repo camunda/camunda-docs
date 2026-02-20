@@ -440,17 +440,6 @@ module.exports = {
             id: "components/modeler/web-modeler/index",
           },
           items: [
-            "components/modeler/web-modeler/launch-web-modeler",
-            {
-              Validation: [
-                "components/modeler/web-modeler/validation/play-your-process",
-                "components/modeler/web-modeler/validation/test-scenario-files",
-                "components/modeler/web-modeler/validation/token-simulation",
-                "components/modeler/web-modeler/validation/task-testing",
-              ],
-            },
-            "components/modeler/web-modeler/run-or-publish-your-process",
-            "components/modeler/web-modeler/process-landscape-visualization",
             {
               type: "doc",
               id: "components/modeler/web-modeler/web-modeler-settings",
@@ -729,7 +718,10 @@ module.exports = {
           "Model business processes": [
             {
               Model: [
+                "components/modeler/web-modeler/launch-web-modeler",
                 "components/modeler/web-modeler/modeling/model-your-first-diagram",
+                "components/modeler/web-modeler/run-or-publish-your-process",
+                "components/modeler/web-modeler/process-landscape-visualization",
                 "components/modeler/web-modeler/modeling/context-pad",
                 "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
                 "components/modeler/web-modeler/modeling/versions",
@@ -821,6 +813,14 @@ module.exports = {
                 "components/modeler/web-modeler/collaboration/design-your-process",
                 "components/modeler/web-modeler/collaboration/implement-your-process",
                 "components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
+              ],
+            },
+            {
+              Validate: [
+                "components/modeler/web-modeler/validation/play-your-process",
+                "components/modeler/web-modeler/validation/test-scenario-files",
+                "components/modeler/web-modeler/validation/token-simulation",
+                "components/modeler/web-modeler/validation/task-testing",
               ],
             },
           ],
