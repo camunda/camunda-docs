@@ -12,7 +12,7 @@ Run the Camunda 8 Orchestration Cluster and Connectors in Amazon Elastic Contain
 
 ## About
 
-In an environment like Amazon ECS, where brokers can restart anywhere and multiple tasks write to shared volumes, you need to trust that your data is safe and managed properly. Camunda 8 is production-tested to run in Amazon ECS, including Fargate. This includes checks and guidance to prevent silent data corruption and unsafe configurations.
+In an environment like Amazon ECS, where brokers can restart anywhere and multiple tasks write to shared volumes, you need to trust your data is safe and managed properly. You can deploy Camunda 8 to Amazon ECS, including Fargate. This includes checks and guidance to prevent silent data corruption and unsafe configurations.
 
 ## Get started
 
