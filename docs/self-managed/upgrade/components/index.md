@@ -18,12 +18,14 @@ TODO (8.9):
 This section is a work in progress for Camunda 8.9 and will be updated as upgrade requirements are finalized.
 :::
 
-Upgrade individual Camunda 8 components when moving from version 8.8 to 8.9. Component-level steps may be required depending on which Camunda components you use and how your environment is configured.
+Upgrade individual Camunda 8 components when moving from version 8.8 to 8.9.
 
-:::important
-Component-level changes are part of the overall upgrade process.
+## About
 
-Follow the upgrade path for your deployment method and apply component-level steps when required by your configuration.
+Component-level steps may be required depending on which Camunda components you use and how your environment is configured.
+
+:::caution
+Component-level changes are part of the overall upgrade process. Follow the upgrade path for your deployment method and apply component-level steps when required by your configuration.
 See [Upgrade Camunda 8](../index.md).
 :::
 
@@ -35,16 +37,20 @@ Additional steps may be required if your deployment:
 - Manages components outside the standard Helm or Manual upgrade flow
 - Is affected by component-specific changes introduced in Camunda 8.9.
 
+:::info
+
 For release context, see:
 
 - [What’s new in Camunda 8.8](/reference/announcements-release-notes/890/whats-new-in-89.md)
 - [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 
+:::
+
 ## Upgrade components from 8.8 to 8.9
 
 This section links to component-level guidance for the 8.8 to 8.9 upgrade.
 
-<p><a href="./880-to-890" class="link-arrow">Upgrade Camunda components from 8.8 to 8.9</a></p>
+<p class="link-arrow">[Upgrade Camunda components from 8.8 to 8.9](880-to-890.md)</p>
 
 ## Component-specific guidance
 
