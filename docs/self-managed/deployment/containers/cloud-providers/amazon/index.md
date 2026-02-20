@@ -67,4 +67,4 @@ image: ReferenceIcon,
 description: "The ECS single-region (Fargate) reference architecture.",
 },
 ]
-} columns={3}/>
+} columns={2}/>
