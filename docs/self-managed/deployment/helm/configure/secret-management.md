@@ -47,19 +47,19 @@ These secrets are used by Camunda applications and external integrations. Config
 
 ### Secrets using the structured pattern
 
-| **Secret**                                | **Chart values key**                                | **Type**   | **Purpose**                                                              |
-| ----------------------------------------- | --------------------------------------------------- | ---------- | ------------------------------------------------------------------------ |
-| **Enterprise License Key**                | `global.license.secret`                             | Internal   | Camunda Enterprise license key                                           |
-| **Identity First User Password**          | `identity.firstUser.secret`                         | Internal   | Default user password (`demo/demo`)                                      |
-| **OAuth Client Secret (Admin)**           | `global.identity.auth.admin.secret`                 | Internal   | OAuth admin client secret for administrative operations                  |
-| **OAuth Client Secret (Connectors)**      | `connectors.security.authentication.oidc.secret`    | Internal   | OAuth client secret for connectors                                       |
-| **OAuth Client Secret (Orchestration)**   | `orchestration.security.authentication.oidc.secret` | Internal   | OAuth client secret for Orchestration Cluster                            |
-| **OAuth Client Secret (Optimize)**        | `global.identity.auth.optimize.secret`              | Internal   | OAuth client secret for Optimize                                         |
-| **Identity External Database Password**   | `identity.externalDatabase.secret`                  | External   | Password for external PostgreSQL if using an external DB for Identity    |
-| **WebModeler External Database Password** | `webModeler.restapi.externalDatabase.secret`        | External   | Password for external PostgreSQL if using an external DB for Web Modeler |
-| **SMTP Password**                         | `webModeler.restapi.mail.secret`                    | External   | SMTP credentials for sending email notifications                         |
-| **External Elasticsearch Auth**           | `global.elasticsearch.auth.secret`                  | External   | Password for external Elasticsearch authentication (basic auth)          |
-| **External OpenSearch Auth**              | `global.opensearch.auth.secret`                     | External   | Password for external OpenSearch authentication (basic auth)             |
+| **Secret**                                | **Chart values key**                                | **Type** | **Purpose**                                                              |
+| ----------------------------------------- | --------------------------------------------------- | -------- | ------------------------------------------------------------------------ |
+| **Enterprise License Key**                | `global.license.secret`                             | Internal | Camunda Enterprise license key                                           |
+| **Identity First User Password**          | `identity.firstUser.secret`                         | Internal | Default user password (`demo/demo`)                                      |
+| **OAuth Client Secret (Admin)**           | `global.identity.auth.admin.secret`                 | Internal | OAuth admin client secret for administrative operations                  |
+| **OAuth Client Secret (Connectors)**      | `connectors.security.authentication.oidc.secret`    | Internal | OAuth client secret for connectors                                       |
+| **OAuth Client Secret (Orchestration)**   | `orchestration.security.authentication.oidc.secret` | Internal | OAuth client secret for Orchestration Cluster                            |
+| **OAuth Client Secret (Optimize)**        | `global.identity.auth.optimize.secret`              | Internal | OAuth client secret for Optimize                                         |
+| **Identity External Database Password**   | `identity.externalDatabase.secret`                  | External | Password for external PostgreSQL if using an external DB for Identity    |
+| **WebModeler External Database Password** | `webModeler.restapi.externalDatabase.secret`        | External | Password for external PostgreSQL if using an external DB for Web Modeler |
+| **SMTP Password**                         | `webModeler.restapi.mail.secret`                    | External | SMTP credentials for sending email notifications                         |
+| **External Elasticsearch Auth**           | `global.elasticsearch.auth.secret`                  | External | Password for external Elasticsearch authentication (basic auth)          |
+| **External OpenSearch Auth**              | `global.opensearch.auth.secret`                     | External | Password for external OpenSearch authentication (basic auth)             |
 
 ### Secrets using Bitnami subchart patterns
 
@@ -174,34 +174,9 @@ webModelerPostgresql:
       userPasswordKey: web-modeler-postgresql-user-password
 ```
 
-### Auto-generated secrets
-
-The Helm chart can automatically generate secrets with random passwords for both development and production environments. This removes the need to create secrets manually during initial setup. You can enable this feature during installation by setting `--set global.secrets.autoGenerated=true`.
-
-### Important limitations
-
-The auto-generated secret uses Helm hooks (`pre-install`) with a `keep` resource policy. This means:
-
-- The secret is created before the main Helm release installation.
-- The secret is not managed by later Helm operations (upgrade, rollback, uninstall).
-- If you delete the secret, generated passwords are lost permanently.
-- The secret becomes orphaned from the Helm release lifecycle.
-
-### Configuring components to use auto-generated secrets
-
-Enabling `global.secrets.autoGenerated: true` only creates the secret with random values. You must configure each component to reference the auto-generated secret by name and key. The key can be custom, but the name must match the definition above.
-
-```yaml
-connectors:
-  security:
-    authentication:
-      oidc:
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-connectors-client-token"
-```
-
-For details on Identity secrets during installation, see the [installation guide](/self-managed/deployment/helm/install/quick-install.md#create-identity-secrets).
+:::note
+Auto-generated secrets (`global.secrets.autoGenerated`) are no longer supported starting in Camunda 8.9. Create your secrets explicitly using [inline secrets](#method-1-inline-secrets-non-production-only) for non-production environments or [external Kubernetes secrets](#method-2-external-kubernetes-secrets-recommended) for production environments.
+:::
 
 ## Document Store secrets
 
@@ -292,7 +267,7 @@ You can use a single consolidated secret (e.g., app-credentials) or one secret p
 
 ### Find any plaintext secrets in your `values.yaml`
 
-#### A - If the secrets already exist in Kubernetes (e.g. autogenerated via chart)
+#### A - If the secrets already exist in Kubernetes
 
 You can read the current (base64-encoded) data from existing secrets and reuse it in your new consolidated secret.
 
