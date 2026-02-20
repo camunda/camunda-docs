@@ -34,9 +34,9 @@ This deployment targets a single AWS Region with multiple Availability Zones, ru
 
 Other dependencies include:
 
-- Amazon EFS as primary storage.
-- Aurora PostgreSQL as secondary storage.
-- Amazon S3 for node ID metadata and backups.
+- Amazon EFS as primary storage
+- Aurora PostgreSQL as secondary storage
+- Amazon S3 for node ID metadata and backups
 
 For more implementation details, read the [Architecture](./aws-ecs#architecture) section of our deployment guide.
 
