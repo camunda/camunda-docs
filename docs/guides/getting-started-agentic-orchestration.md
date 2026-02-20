@@ -285,11 +285,11 @@ For example:
 1. Add a clear tool description and explicit input/output variables so the LLM can choose and call it correctly.
 1. Test with prompts in Operate/Tasklist and refine task descriptions and prompt instructions based on observed behavior.
 
-#### Practical example: `fromAi()` input and `toolCallResult` output
+#### Practical example: [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) input and `toolCallResult` output
 
 Assume you add a service task called **Get order status** as a new tool in the ad-hoc sub-process.
 
-Use `fromAi()` in the tool input mapping so the LLM can provide structured inputs:
+Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) in the tool input mapping so the LLM can provide structured inputs:
 
 ```feel
 = {
