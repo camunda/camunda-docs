@@ -58,7 +58,7 @@ Check out our [Amazon EKS deployment guide](../../../helm/cloud-providers/amazon
 link: "../../../../components/orchestration-cluster/core-settings/configuration/properties#camundaclusternode-id-provider",
 title: "Configure the Node ID provider",
 image: ConfigIcon,
-description: "A reference for Node ID provider configurations.",
+description: "Configuration reference for the Node ID provider.",
 },
 {
 link: "https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate",
