@@ -549,6 +549,50 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI=https://login.microsoftonline.com
 
 </Tabs>
 
+#### Configure the post-logout redirect URL in the IdP
+
+To ensure users are redirected correctly after logout, the administrator must configure a post-logout redirect URL in the IdP. The post-logout URL is the Camunda hostname plus `/post-logout`. For example, for a local setup where Identity is accessible at `http://localhost:8080`, configure the following post-logout redirect URL in the IdP:
+
+```
+http://localhost:8080/post-logout
+```
+
+#### Troubleshooting RP-initiated logout
+
+If RP-initiated logout does not behave as expected, check the application logs for the following messages.
+
+**Unable to determine end-session endpoint**
+
+If OIDC is configured using explicit authorization/token/logout URIs instead of the issuer URI, and no logout endpoint is specified, then following message is logged:
+
+```
+Unable to determine end-session endpoint for OIDC logout. Falling back to {baseLogoutUrl} without logout hint.'
+```
+
+**No client registration found**
+
+If the `registrationId` used for logout (the identifier of the OIDC client registration configured for the IdP) cannot be resolved to a client registration, Identity cannot construct an RP-initiated logout request. The following message is logged:
+
+```
+No client registration found for id '{registrationId}'. Falling back to '{baseLogoutUrl}' without logout hint.
+```
+
+**Missing login_hint / logout_hint**
+
+Some IdPs require a `logout_hint` parameter for RP-initiated logout. Identity derives `logout_hint` from the OIDC user's `login_hint` claim, which typically contains a user identifier (for example, username or email) that the IdP can use to identify the session to terminate. If no `login_hint` is present, the following message is logged and the logout request is sent without a logout hint:
+
+```
+No 'login_hint' claim found in OIDC user. Falling back to '{baseLogoutUrl}' without logout hint.
+```
+
+**No post-logout redirect URL configured**
+
+The post-logout redirect URL must be explicitly configured in the IdP by the administrator. If no valid post-logout redirect URL is available, Identity falls back to a default path. In this case, the following message is logged:
+
+```
+No valid post-logout redirect URL found in session, falling back to default: '/'
+```
+
 ## Troubleshooting
 
 - Check the logs for authentication errors.
