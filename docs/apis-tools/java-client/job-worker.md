@@ -282,16 +282,32 @@ builder.streamTimeout(Duration.ofMinutes(30));
 
 ## Multi-tenancy
 
-You can configure a job worker to pick up jobs belonging to one or more tenants. When using the builder, you can configure
-the tenant(s) it works for.
+You can configure a job worker to pick up jobs belonging to one or more tenants. The job worker builder provides two ways to control which tenants a worker retrieves jobs for: explicitly providing tenant IDs, or using the tenants assigned to the worker in the engine.
 
-Alternatively, you can configure default tenant(s) on the client. If you configure a default, all job workers you open will work on jobs for the configured default tenants.
+### Filtering by assigned tenants
+
+Use the `.tenantFilter()` method to control how the worker resolves tenants. It accepts a `TenantFilter` enum with two options:
+
+- **`TenantFilter.PROVIDED`** _(default)_: The worker retrieves jobs for the tenant IDs explicitly provided via `.tenantId()` or `.tenantIds()`. See [Filtering by provided tenant IDs](#filtering-by-provided-tenant-ids) below.
+- **`TenantFilter.ASSIGNED`**: The worker retrieves jobs for the tenants assigned to it in the engine. When this option is set, any tenant IDs configured via `.tenantId()` or `.tenantIds()` are ignored.
+
+Using `TenantFilter.ASSIGNED`:
+
+```java
+client.newWorker()
+    .jobType("myJobType")
+    .handler(new MyJobTypeHandler())
+    .tenantFilter(TenantFilter.ASSIGNED)
+    .open();
+```
+
+### Filtering by provided tenant IDs
+
+When using `TenantFilter.PROVIDED` (the default), you must also specify the tenant IDs the worker should retrieve jobs for.
 
 :::note
 The client must be authorized for **all** the provided tenants. If it is not, the job worker will not work on any jobs.
 :::
-
-### Job worker builder
 
 Opening a job worker for a single tenant:
 
