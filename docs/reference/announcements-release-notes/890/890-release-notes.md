@@ -243,6 +243,16 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 
 <p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
 
+#### Production installation guides
+
+<!-- https://github.com/camunda/product-hub/issues/3026 -->
+<!-- https://github.com/camunda/product-hub/issues/2740 -->
+
+New RDBMS production installation guides for Camunda 8 are available:
+
+- Helm: Kubernetes-based orchestration cluster deployment via Helm, using RDBMS secondary storage.
+- Manual: Deploy and manage Camunda 8 using relational databases in production environments.
+
 ## 8.9.0-alpha3
 
 | Release date    | Changelog(s)                                                                                                                                                                               |
