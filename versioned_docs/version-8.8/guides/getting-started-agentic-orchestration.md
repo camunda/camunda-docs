@@ -110,6 +110,14 @@ The example includes a form linked to the start event, allowing you to submit re
 
 <img src={AiAgentStartFormImg} alt="Example AI agent start form" className="img-800"/>
 
+:::tip Understand the decision model behind this example
+To make this agent reliable, treat each activity in the ad-hoc sub-process as a documented tool. Learn why this matters in [AI agents: Why tool documentation in ad-hoc sub-processes matters](/components/agentic-orchestration/ai-agents.md#why-tool-documentation-in-ad-hoc-sub-processes-matters).
+
+For a runtime view of what the LLM decides vs. what Camunda orchestrates, see [Design and architecture: How execution works in an AI agent](/components/agentic-orchestration/design-architecture.md#how-execution-works-in-an-ai-agent).
+
+For prompt configuration details, see [AI Agent connector: System prompt, user prompt, and tool descriptions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#system-prompt-user-prompt-and-tool-descriptions).
+:::
+
 ## Step 2: Configure the AI Agent connector
 
 Depending on your model choice, configure the AI Agent connector accordingly.
@@ -221,12 +229,11 @@ Depending on your working environment, test your agent by following the correspo
 <TabItem value="saas">
 
 1. Open [Web Modeler](/components/modeler/web-modeler/index.md).
-1. Select the [**Play**](/components/modeler/web-modeler/collaboration/play-your-process.md) tab.
-1. Select the cluster you want to deploy and play the process on.
-1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
-1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
-1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md).
-1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
+2. Select the cluster you want to deploy and play the process on.
+3. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
+4. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
+5. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md).
+6. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
 
 :::tip
 Instead of using **Play**, you can also test the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
@@ -251,9 +258,10 @@ Instead of using **Play**, you can also test the process within the **Implement*
 
 When you run the AI agent process:
 
-1. The AI agent receives your prompt and analyzes it.
-1. It determines which tools from the ad-hoc subprocess should be activated.
-1. Tasks can execute in parallel or sequentially, depending on the agent's decisions.
+1. The AI agent receives your prompt and analyzes it together with the configured system prompt and tool descriptions.
+1. The LLM determines which tools from the ad-hoc subprocess should be activated.
+1. Camunda executes the selected BPMN activities.
+1. Tasks can execute in parallel or sequentially, depending on the agent's decisions and process state.
 1. Process variables are updated as each tool completes its execution.
 1. The agent may iterate through multiple tool calls to handle complex requests.
 
@@ -269,9 +277,48 @@ For example:
 - Change the provided system prompt to adjust the behavior of the AI agent.
 - Experiment with different model providers and configurations in the AI Agent connector.
 
+### Add a new tool (quick summary)
+
+1. Add a BPMN activity inside the ad-hoc sub-process.
+1. Configure the task implementation (connector, service task, user task, DMN, and so on).
+1. Add a clear tool description and explicit input/output variables so the LLM can choose and call it correctly.
+1. Test with prompts in Operate/Tasklist and refine task descriptions and prompt instructions based on observed behavior.
+
+#### Practical example: [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) input and `toolCallResult` output
+
+Assume you add a service task called **Get order status** as a new tool in the ad-hoc sub-process.
+
+Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) in the tool input mapping so the LLM can provide structured inputs:
+
+```feel
+= {
+    customerEmail: fromAi(toolCall.customerEmail, "Customer email used to find the order", "string"),
+    orderId: fromAi(toolCall.orderId, "Order identifier to look up", "string")
+}
+```
+
+Then return the tool response by setting `toolCallResult` in your result expression or output mapping:
+
+```feel
+= {
+    toolCallResult: {
+        orderId: orderId,
+        status: orderStatus,
+        message: "Order status retrieved successfully"
+    }
+}
+```
+
+At runtime, each tool call contributes one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
+
+When adding your first tool, inspect the tasks already available to the agent in this blueprint and follow the same pattern for `fromAi()` inputs and `toolCallResult`/`toolCallResults` outputs.
+
 You can also:
 
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+- Understand why tool definitions are critical in [AI agents](/components/agentic-orchestration/ai-agents.md#why-tool-documentation-in-ad-hoc-sub-processes-matters).
+- Understand runtime responsibilities in [Design and architecture](/components/agentic-orchestration/design-architecture.md#how-execution-works-in-an-ai-agent).
+- Learn prompt interplay in the [AI Agent connector concepts](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#system-prompt-user-prompt-and-tool-descriptions).
 - Read the [Building Your First AI Agent in Camunda](https://camunda.com/blog/2025/02/building-ai-agent-camunda/) blog.
 - Explore other [AI blueprints](https://marketplace.camunda.com/en-US/listing?q=ai&cat=107793&locale=en-US) from Camunda marketplace.
 
