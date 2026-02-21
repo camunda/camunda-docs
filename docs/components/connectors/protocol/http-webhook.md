@@ -128,6 +128,16 @@ For example, if you want to set the message ID to the value of the `transactionI
 The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't be correlated immediately).
 The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
 
+### XML payloads
+
+You can send XML to the webhook or return XML using the response expression, but XML content is treated as a plain string. It will not be parsed or extracted into process variables.
+
+If you need to use correlation keys with XML payloads, send the correlation key in a request header and retrieve it using the **Correlation key (payload)** property. For example:
+
+```feel
+=request.headers["x-correlation-id"]
+```
+
 ## Activate the HTTP Webhook connector by deploying your diagram
 
 Once you click the **Deploy** button, your HTTP Webhook will be activated and publicly available.
