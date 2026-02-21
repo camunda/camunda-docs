@@ -38,7 +38,7 @@ Get started with Camunda agentic orchestration by building and running your firs
 
 Understand the fundamental concepts of Camunda agentic orchestration.
 
-<AoGrid ao={fundamentalCards} columns={2}/>
+<AoGrid ao={fundamentalCards} columns={3}/>
 
 ## Explore further resources
 

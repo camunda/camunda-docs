@@ -271,6 +271,7 @@ For example:
 
 You can also:
 
+- [Monitor your AI agent with Operate](/components/agentic-orchestration/monitor-agents-operate.md).
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 - Read the [Building Your First AI Agent in Camunda](https://camunda.com/blog/2025/02/building-ai-agent-camunda/) blog.
 - Explore other [AI blueprints](https://marketplace.camunda.com/en-US/listing?q=ai&cat=107793&locale=en-US) from Camunda marketplace.
