@@ -134,35 +134,22 @@ For more advanced or permanent configuration, modify the default `configuration/
 
 ### Configure or switch secondary storage (H2 or Elasticsearch)
 
-Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts. Elasticsearch remains bundled and supported as an optional alternative that you can enable when you need full-text indexing, search, or advanced analytics.
+Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts and its data persists across restarts. Elasticsearch remains bundled and supported as an optional alternative that you can enable when you need full-text indexing, search, or advanced analytics.
 
 #### Default: H2 (Camunda 8 Run)
 
-The default Camunda 8 Run configuration in 8.9-alpha3 uses an H2 database for secondary storage. This is convenient for local development and demos.
+The default Camunda 8 Run configuration in 8.9-alpha3 uses an H2 database for secondary storage. This is convenient for local development and demos and stores data on disk.
 
-In-memory H2 example:
+File-based H2 example (default in 8.9-alpha3):
 
 ```yaml
 data:
   secondary-storage:
     type: rdbms
     rdbms:
-      url: jdbc:h2:mem:camunda
+      url: jdbc:h2:file:./camunda-data/h2db
       username: sa
       password:
-```
-
-To persist H2 data to disk:
-
-```yaml
-camunda:
-  data:
-    secondary-storage:
-      type: rdbms
-      rdbms:
-        url: jdbc:h2:file:./camunda-data/h2db
-        username: sa
-        password:
 ```
 
 <details>
@@ -175,7 +162,7 @@ camunda:
     secondary-storage:
       type: rdbms
       rdbms:
-        url: jdbc:h2:mem:camunda
+        url: jdbc:h2:file:./camunda-data/h2db
         username: sa
         password:
         flushInterval: PT0.5S
@@ -540,31 +527,18 @@ Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha
 
 #### Default: H2 (Camunda 8 Run)
 
-The default Camunda 8 Run configuration in 8.9-alpha3 uses an H2 database for secondary storage. This is convenient for local development and demos.
+The default Camunda 8 Run configuration in 8.9-alpha3 uses an H2 database for secondary storage. This is convenient for local development and demos and stores data on disk.
 
-In-memory H2 example:
+File-based H2 example:
 
 ```yaml
 data:
   secondary-storage:
     type: rdbms
     rdbms:
-      url: jdbc:h2:mem:camunda
+      url: jdbc:h2:file:./camunda-data/h2db
       username: sa
       password:
-```
-
-To persist H2 data to disk:
-
-```yaml
-camunda:
-  data:
-    secondary-storage:
-      type: rdbms
-      rdbms:
-        url: jdbc:h2:file:./camunda-data/h2db
-        username: sa
-        password:
 ```
 
 <details>
@@ -577,7 +551,7 @@ camunda:
     secondary-storage:
       type: rdbms
       rdbms:
-        url: jdbc:h2:mem:camunda
+        url: jdbc:h2:file:./camunda-data/h2db
         username: sa
         password:
         flushInterval: PT0.5S
@@ -654,7 +628,7 @@ Camunda 8 Run uses v2 APIs by default, so no additional configuration is require
 
 - Tasklist can use H2 through the v2 APIs. Operate support for H2 is under active development and may have limitations in current alpha versions.
 - H2 is intended for testing and local development only.
-- Data stored in H2 is ephemeral unless configured as file-based.
+- H2 data persists to the configured file path (default `./camunda-data/h2db`). Keep the path stable to avoid accidental data loss.
 - Performance and memory use may vary depending on local environment.
 
 ### Environment variables
