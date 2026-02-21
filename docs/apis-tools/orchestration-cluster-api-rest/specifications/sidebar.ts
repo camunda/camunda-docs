@@ -398,6 +398,30 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Global listener",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/create-global-task-listener",
+          label: "Create global user task listener",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-global-task-listener",
+          label: "Update global user task listener",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-global-task-listener",
+          label: "Delete global user task listener",
+          className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Group",
       items: [
         {
@@ -573,6 +597,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-job-statistics",
           label: "Global job statistics",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-job-type-statistics",
+          label: "Get job statistics by type",
+          className: "api-method post",
         },
       ],
     },

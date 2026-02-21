@@ -10,7 +10,7 @@ components:
           format: uri
           description: A URI identifying the problem type.
           default: about:blank
-          example: about:blank
+          example: https://docs.camunda.io/api/v2.0/problem-types/bad-request
         title:
           type: string
           description: A summary of the problem type.
@@ -28,6 +28,6 @@ components:
           example: Request property [maxJobsToActivates] cannot be parsed
         instance:
           type: string
-          format: uri
+          format: uri-reference
           description: A URI path identifying the origin of the problem.
           example: /v2/jobs/activation

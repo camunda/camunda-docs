@@ -311,6 +311,12 @@ components:
           type: array
           items:
             $ref: "identifiers.yaml#/components/schemas/TenantId"
+        tenantFilter:
+          allOf:
+            - $ref: "#/components/schemas/TenantFilterEnum"
+          description: |
+            The tenant filtering strategy - determines whether to use provided tenant IDs or assigned tenant IDs from the authenticated principal's authorized tenants.
+          default: PROVIDED
       required:
         - type
         - timeout
@@ -413,6 +419,14 @@ components:
           $ref: "#/components/schemas/UserTaskProperties"
         tags:
           $ref: "identifiers.yaml#/components/schemas/TagSet"
+        rootProcessInstanceKey:
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
     UserTaskProperties:
       type: object
       description: Contains properties of a user task.
@@ -693,7 +707,13 @@ components:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The process instance key associated with the job.
         rootProcessInstanceKey:
-          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         retries:
           description: The amount of retries left to this job.
           type: integer
@@ -910,6 +930,14 @@ components:
           format: int64
           description: The new timeout for the job in milliseconds.
           nullable: true
+    TenantFilterEnum:
+      description: |
+        The tenant filtering strategy for job activation. Determines whether to use tenant IDs provided in the request or tenant IDs assigned to the authenticated principal.
+      type: string
+      enum:
+        - PROVIDED
+        - ASSIGNED
+      default: PROVIDED
     JobStateEnum:
       description: The state of the job.
       type: string

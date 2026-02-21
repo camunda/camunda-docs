@@ -270,7 +270,7 @@ paths:
       description: |-
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Creates a batch operation to resolve multiple incidents of a process instance.
       parameters:
@@ -356,7 +356,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Cancels multiple running process instances.
         Since only ACTIVE root instances can be cancelled, any given filters for state and
@@ -397,7 +397,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Resolves multiple instances of process instances.
         Since only process instances with ACTIVE state can have unresolved incidents, any given
@@ -438,7 +438,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Migrate multiple process instances.
         Since only process instances with ACTIVE state can be migrated, any given
@@ -479,7 +479,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Modify multiple process instances.
         Since only process instances with ACTIVE state can be modified, any given
@@ -522,7 +522,7 @@ paths:
       description: |-
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Deletes a process instance. Only instances that are completed or terminated can be deleted.
       parameters:
@@ -573,7 +573,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Delete multiple process instances. This will delete the historic data from secondary storage.
         Only process instances in a final state (COMPLETED or TERMINATED) can be deleted.
@@ -1272,7 +1272,13 @@ components:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
           description: The parent element instance key.
         rootProcessInstanceKey:
-          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         tags:
           $ref: "identifiers.yaml#/components/schemas/TagSet"
     CancelProcessInstanceRequest:
@@ -1326,7 +1332,13 @@ components:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The key of this process instance.
         rootProcessInstanceKey:
-          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         processDefinitionKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"

@@ -8,7 +8,7 @@ paths:
       description: |-
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Create a new user.
       requestBody:
@@ -118,7 +118,7 @@ paths:
       description: |-
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Updates a user.
       parameters:
@@ -163,7 +163,7 @@ paths:
       description: |-
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Deletes a user.
       parameters:
