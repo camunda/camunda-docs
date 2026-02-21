@@ -9,7 +9,7 @@ In case you have a large shared Elasticsearch/OpenSearch cluster that you want t
 :::note Heads Up!
 Although a shared Elasticsearch/OpenSearch cluster setup is possible, it's recommended to operate a dedicated Elasticsearch/OpenSearch cluster per Optimize instance.
 
-This is due to the fact that a dedicated cluster provides the highest reliability (no resource sharing and no breaking side effects due to misconfiguration) and flexibility (e.g. Elasticsearch/OpenSearch and/or Optimize updates can be performed independently between different Optimize setups).
+This is due to the fact that a dedicated cluster provides the highest reliability (no resource sharing and no breaking side effects due to misconfiguration) and flexibility (e.g. Elasticsearch/OpenSearch and/or Optimize upgrades can be performed independently between different Optimize setups).
 :::
 
 The following illustration demonstrates this use case with two Optimize instances that connect to the same Elasticsearch/OpenSearch cluster but are configured with different `*.settings.index.prefix` values. This results in different indexes and aliases created on the cluster, strictly isolating the data of both Optimize instances, so no instance accesses the data of the other instance.
