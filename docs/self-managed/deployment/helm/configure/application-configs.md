@@ -17,10 +17,10 @@ This page explains how to configure Camunda components in Helm charts. You can d
 
 ### Parameters
 
-| Key                                  | Type   | Description                                                                                                             |
-| ------------------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------- |
-| `<componentName>.configuration`      | string | Full application configuration content (for example, the contents of `application.yaml`).                               |
-| `<componentName>.extraConfiguration` | map    | Additional configuration files. Keys are filenames, values are file contents. Mounted into the container at `./config`. |
+| Key                                  | Type   | Description                                                                                                                                                                                                            |
+| ------------------------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<componentName>.configuration`      | string | Full application configuration content (for example, the contents of `application.yaml`).                                                                                                                              |
+| `<componentName>.extraConfiguration` | list   | Additional configuration entries. Each entry has a `file` (filename) and `content` (file contents). Behavior depends on the component — see [how it works per component](#how-extraConfiguration-works-per-component). |
 
 ### Configuration options
 
@@ -36,69 +36,56 @@ Use `<componentName>.configuration` to define an application configuration file 
 For example, `application.yaml`:
 
 ```yaml
-operate:
+orchestration:
   configuration: |-
-    camunda.operate:
-      # ELS instance to store Operate data
-      elasticsearch:
-        # Cluster name
-        clusterName: elasticsearch
-        # Host
-        host: <your-release-name>-elasticsearch
-        # Transport port
-        port: 9200
-        numberOfShards: 3
-      # Zeebe instance
-      zeebe:
-        # Broker contact point
-        brokerContactPoint: "<your-release-name>-zeebe-gateway:26500"
-      # ELS instance to export Zeebe data to
-      zeebeElasticsearch:
-        # Cluster name
-        clusterName: elasticsearch
-        # Host
-        host: <your-release-name>-elasticsearch
-        # Transport port
-        port: 9200
-        # Index prefix, configured in Zeebe Elasticsearch exporter
-        prefix: zeebe-record
-    #Spring Boot Actuator endpoints to be exposed
-    management.endpoints.web.exposure.include: health,info,conditions,configprops,prometheus,loggers,usage-metrics,backups
+    camunda:
+      # Orchestration cluster settings
+      database:
+      data:
+        snapshot-period: "5m"
+        primary-storage:
+          disk:
+            free-space:
+              processing: "2GB"
+              replication: "1GB"
+        secondary-storage:
+          autoconfigure-camunda-exporter: true
+          type: "elasticsearch"
+          elasticsearch:
+            url: "http://camunda-elasticsearch:9200"
+            cluster-name: "elasticsearch"
+            username: ""
+            password: "${VALUES_ELASTICSEARCH_PASSWORD:}"
+            index-prefix: ""
+            number-of-replicas: "1"
 ```
 
 #### componentName.extraConfiguration
 
-Use `<componentName>.extraConfiguration` to provide additional configuration files.
-Each key is the filename, and each value is the file content. A common use case is providing a custom `log4j2.xml` file. When the Helm chart processes this option, it mounts the file under the `./config` directory:
+Use `<componentName>.extraConfiguration` to provide additional configuration overrides. This option accepts an **ordered list** of entries, where each entry specifies a `file` name and its `content`. Entries are processed in order, so **later entries override earlier ones** for duplicate keys — mimicking Spring Boot's `spring.config.import` semantics.
 
-```xml
-operate:
+```yaml
+identity:
   extraConfiguration:
-    log4j2.xml: |-
-      <?xml version="1.0" encoding="UTF-8"?>
-      <Configuration status="WARN" monitorInterval="30">
-        <Properties>
-          <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
-          <Property name="log.stackdriver.serviceName">${env:OPERATE_LOG_STACKDRIVER_SERVICENAME:-operate}</Property>
-          <Property name="log.stackdriver.serviceVersion">${env:OPERATE_LOG_STACKDRIVER_SERVICEVERSION:-}</Property>
-        </Properties>
-        <Appenders>
-          <Console name="Console" target="SYSTEM_OUT" follow="true">
-            <PatternLayout pattern="${LOG_PATTERN}"/>
-          </Console>
-          <Console name="Stackdriver" target="SYSTEM_OUT" follow="true">
-            <StackdriverLayout serviceName="${log.stackdriver.serviceName}"
-              serviceVersion="${log.stackdriver.serviceVersion}" />
-          </Console>
-        </Appenders>
-        <Loggers>
-          <Logger name="io.camunda.operate" level="debug" />
-          <Root level="debug">
-            <AppenderRef ref="${env:OPERATE_LOG_APPENDER:-Console}"/>
-          </Root>
-        </Loggers>
-      </Configuration>
+    - file: logging-debug.yaml
+      content: |
+        logging:
+          level:
+            ROOT: DEBUG
+            io.camunda.identity: DEBUG
+    - file: logging-production.yaml
+      content: |
+        logging:
+          level:
+            ROOT: INFO
+            io.camunda.identity: INFO
 ```
+
+In this example, `logging-production.yaml` is applied after `logging-debug.yaml`, so the final effective log level is `INFO` (last writer wins).
+
+:::note Why an ordered list?
+Previous versions of the Helm chart used a map (key-value pairs) for `extraConfiguration`. Maps in Go (and Helm) do not guarantee iteration order. Since configuration layering is order-dependent, `extraConfiguration` now uses an array to ensure entries are always applied in the order you define them.
+:::
 
 ### Default properties
 
@@ -113,77 +100,114 @@ helm template <your-release-name> \
 
 The `--show-only` flag prints the `configmap`. Copy the `application.yml` content and place it under the appropriate `<component>.configuration` key in `values.yaml`.
 
+### How extraConfiguration works per component
+
+Camunda components use different runtimes and configuration mechanisms. The Helm chart handles `extraConfiguration` differently for each, so the user-facing `values.yaml` API remains consistent while the underlying behavior adapts to what each application actually supports.
+
+#### Spring Boot components
+
+**Applies to:** Identity, Connectors, Orchestration, WebModeler REST API
+
+Spring Boot components support loading multiple configuration files via `spring.config.import`. Each `extraConfiguration` entry is mounted as an **individual file** in the container's config directory and imported by Spring at startup. Order is preserved by the array in the values.yaml. Spring applies files in import order, with later files overriding earlier ones.
+
 ```yaml
-# Source: camunda-platform/templates/operate/configmap.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: <your-release-name>-operate-configuration
-  labels:
-    app: camunda-platform
-    app.kubernetes.io/name: camunda-platform
-    app.kubernetes.io/instance: <your-release-name>
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/part-of: camunda-platform
-    helm.sh/chart: camunda-platform-10.3.2
-    app.kubernetes.io/component: operate
-    app.kubernetes.io/version: "8.5.5"
-data:
-  application.yml: |
-    spring:
-      profiles:
-        active: "identity-auth"
-      security:
-        oauth2:
-          resourceserver:
-            jwt:
-              issuer-uri: "http://<your-release-name>-keycloak:80/auth/realms/camunda-platform"
-              jwk-set-uri: "http://<your-release-name>-keycloak:80/auth/realms/camunda-platform/protocol/openid-connect/certs"
-
-    camunda:
-      identity:
-        clientId: "operate"
-        audience: "operate-api"
-        baseUrl: "http://<your-release-name>-identity:80"
-
-    # Operate configuration file
-    camunda.operate:
-      identity:
-        redirectRootUrl: "http://localhost:8081"
-
-      # ELS instance to store Operate data
-      elasticsearch:
-        # Cluster name
-        clusterName: elasticsearch
-        # Host
-        host: <your-release-name>-elasticsearch
-        # Transport port
-        port: 9200
-        # Elasticsearch full url
-        url: "http://<your-release-name>-elasticsearch:9200"
-      # ELS instance to export Zeebe data to
-      zeebeElasticsearch:
-        # Cluster name
-        clusterName: elasticsearch
-        # Host
-        host: <your-release-name>-elasticsearch
-        # Transport port
-        port: 9200
-        # Index prefix, configured in Zeebe Elasticsearch exporter
-        prefix: zeebe-record
-        # Elasticsearch full url
-        url: "http://<your-release-name>-elasticsearch:9200"
-      # Zeebe instance
-      zeebe:
-        # Broker contact point
-        brokerContactPoint: "<your-release-name>-zeebe-gateway:26500"
-    logging:
-      level:
-        ROOT: INFO
-        io.camunda.operate: INFO
-    #Spring Boot Actuator endpoints to be exposed
-    management.endpoints.web.exposure.include: health,info,conditions,configprops,prometheus,loggers,usage-metrics,backups
+identity:
+  extraConfiguration:
+    - file: custom-logging.yaml
+      content: |
+        logging:
+          level:
+            ROOT: DEBUG
+    - file: custom-cache.yaml
+      content: |
+        spring:
+          cache:
+            type: caffeine
 ```
+
+Both files are mounted and imported separately. No merging happens at Helm template time.
+
+#### Node.js Components
+
+**Applies to:** Console
+
+Console is a Node.js application that reads only two configuration files: `application.yaml` (the main config) and `application-override.yaml` (a single override file). It does not support loading multiple override files.
+
+Because of this constraint, the Helm chart **merges all `extraConfiguration` entries at template rendering time** into a single `application-override.yaml` using deep merge. Later entries override earlier ones for duplicate keys.
+
+```yaml
+console:
+  extraConfiguration:
+    - file: feature-flags.yaml
+      content: |
+        camunda:
+          console:
+            features:
+              newDashboard: true
+    - file: logging.yaml
+      content: |
+        camunda:
+          console:
+            logging:
+              level: INFO
+```
+
+The Helm chart merges both entries and renders a single `application-override.yaml` in the ConfigMap:
+
+```yaml
+# Rendered application-override.yaml
+camunda:
+  console:
+    features:
+      newDashboard: true
+    logging:
+      level: INFO
+```
+
+:::note
+`console.overrideConfiguration` is the old way of overriding the default application configuration for Console. It has been deprecated. Please convert to using `console.extraConfiguration`.
+:::
+
+#### Customer Configuration Loading
+
+**Applies to:** Optimize
+
+Optimize uses its own configuration loader (not standard Spring Boot conventions). It reads only two files: `environment-config.yaml` (main config) and `application-ccsm.yaml` (Identity/auth config, loaded when the `ccsm` Spring profile is active). It does **not** scan its config directory for additional files.
+
+The Helm chart extracts the default `environment-config.yaml`, then **merges all `extraConfiguration` entries at template rendering time** into the final `environment-config.yaml`. Later entries override earlier ones.
+
+```yaml
+optimize:
+  extraConfiguration:
+    - file: custom-zeebe.yaml
+      content: |
+        zeebe:
+          partitionCount: 6
+    - file: custom-es.yaml
+      content: |
+        es:
+          connection:
+            nodes:
+              - host: "custom-es-host"
+                httpPort: 9200
+```
+
+Both entries are merged with the default Optimize config into a single `environment-config.yaml`.
+
+:::caution
+The `content` must be valid YAML. If invalid YAML is provided, Helm will fail during template rendering with a parse error. This is intentional. It prevents deploying broken configuration.
+:::
+
+### Summary
+
+| Component           | Runtime       | Config format | How `extraConfiguration` is applied                             |
+| ------------------- | ------------- | ------------- | --------------------------------------------------------------- |
+| Identity            | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import`   |
+| Connectors          | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import`   |
+| Orchestration       | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import`   |
+| WebModeler REST API | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import`   |
+| Console             | Node.js       | YAML          | Merged at template time into single `application-override.yaml` |
+| Optimize            | Java (custom) | YAML          | Merged at template time into single `environment-config.yaml`   |
 
 ## Practical example: migrating from environment variables to a configuration file
 
