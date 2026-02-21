@@ -22,9 +22,9 @@ Access tokens have a validity period that can be found in the access token. Afte
 
 Currently, Camunda 8 SaaS supports the following scopes:
 
-- Orchestration Cluster API - Access to the [REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md).
-- Optimize API - Access to the [Optimize REST API](/apis-tools/optimize-api/overview.md).
-- Administration API - Resource:Secrets - Access cluster secrets in a [hybrid setup](/components/connectors/use-connectors-in-hybrid-mode.md).
+- "Orchestration Cluster API" - Access to the [REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md).
+- "Optimize API" - Access to the [Optimize REST API](/apis-tools/optimize-api/overview.md).
+- "Administration API - Resource: Secrets" - Access cluster secrets in a [hybrid setup](/components/connectors/use-connectors-in-hybrid-mode.md).
 
 To create a client, take the following steps:
 
