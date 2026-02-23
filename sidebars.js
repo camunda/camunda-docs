@@ -1852,7 +1852,15 @@ module.exports = {
             },
           ],
         },
-        "self-managed/concepts/audit-log",
+        {
+          type: "category",
+          label: "User operations audit log",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/audit-log/index",
+          },
+          items: ["self-managed/concepts/audit-log/configure-audit-log"],
+        },
         "self-managed/concepts/exporters",
         "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         {
