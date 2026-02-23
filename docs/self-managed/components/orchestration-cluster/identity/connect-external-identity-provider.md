@@ -607,7 +607,6 @@ No 'login_hint' claim found in OIDC user. Falling back to '{baseLogoutUrl}' with
 
 Ensure that your IdP includes a `login_hint` claim in the ID token if your IdP requires `logout_hint` during logout.
 
-
 #### No post-logout redirect URL configured
 
 You must explicitly configure the post-logout redirect URL in your IdP. If no valid post-logout redirect URL is available, Identity falls back to a default path. In this case, the following message is logged:
