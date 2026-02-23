@@ -15,6 +15,7 @@ For production deployments with RDBMS, Camunda recommends a **HA Zeebe cluster b
 graph TB
     subgraph oc["Orchestration Cluster (HA)"]
         direction TB
+        gateway["<b>Gateway</b><br/>(gRPC / HTTP)"]
         subgraph brokers["Brokers"]
             b1["Broker 1<br/>(AZ-1)"]
             b2["Broker 2<br/>(AZ-2)"]
@@ -22,6 +23,8 @@ graph TB
         end
         api["<b>Orchestration Cluster API (v2)</b>"]
 
+        gateway --> brokers
+        gateway --> api
         b1 -.->|gRPC| b2
         b2 -.->|gRPC| b3
         b1 -.->|gRPC| b3
@@ -32,17 +35,15 @@ graph TB
         opt["<b>Elasticsearch/OpenSearch</b><br/>(for Optimize only)"]
     end
 
-    apiClients["Web UIs and API clients<br/>Operate • Tasklist • Identity<br/>HTTP/REST"]
-    grpcClients["Workers and client apps<br/>gRPC (including Connectors/MCP Client)"]
+    clients["<b>Clients</b><br/>Web UIs • Workers • Applications<br/>Operate • Tasklist • Identity • Connectors"]
 
-    apiClients --> api
-    grpcClients --> brokers
+    clients --> gateway
     brokers -->|Export events| rdbms
     brokers -->|Export analytics<br/>Optional| opt
 
     style oc fill:#e1f5ff
     style storage fill:#fff3e0
-    style api fill:#f3e5f5
+    style gateway fill:#f3e5f5
 ```
 
 ### Key characteristics
