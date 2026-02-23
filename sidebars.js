@@ -774,6 +774,7 @@ module.exports = {
             "components/identity/client",
             "components/identity/mapping-rules",
             "components/identity/tenant",
+            "components/identity/global-user-task-listener",
           ],
         },
       ],

@@ -20,7 +20,23 @@ They are particularly useful for:
 - Enforcing governance rules and validations. For example, pre-completion checks.
 - Consistently applying due date and priority policies.
 
-## Configure global user task listeners
+## Manage global user task listeners
+
+You can manage global user task listeners in the following ways:
+
+| Approach                                                                                                                            | How to use                                                                                                                         | Requires restart |
+| :---------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- | :--------------- |
+| **[Identity/Admin UI](/components/identity/global-user-task-listener.md)**                                                          | Create, update, and delete listeners from the **Global user task listeners** page in Identity.                                     | No               |
+| **[Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/create-global-user-task-listener.api.mdx)** | Create, update, and delete listeners programmatically via REST API.                                                                | No               |
+| **[Unified Configuration](#configure-global-user-task-listeners-via-config-file)**                                                  | Define listeners in a YAML configuration file or via environment variables. Useful for GitOps or infrastructure-as-code workflows. | Yes              |
+
+Listeners managed through the Identity UI or the API are persisted in the cluster database and take effect immediately without a cluster restart. Listeners defined in the Unified Configuration are applied on startup and cannot be modified at runtime.
+
+:::note
+Configuration-file-based listeners and API/UI-managed listeners are independent. Both sets are active at the same time if both are configured.
+:::
+
+## Configure global user task listeners via config file
 
 You configure global user task listeners at the cluster level in the [Unified Configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners).
 
@@ -29,7 +45,7 @@ Configuration path: `camunda.cluster.global-listeners.user-task`
 Each listener entry can be configured with the following properties:
 
 | Property           | Required | Description                                                                                                                                                                                                                                                     |
-|:-------------------| :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :----------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `event-types`      | Yes      | <p>List of user task event types that trigger the listener.</p><p>Supported values: `creating`, `assigning`, `updating`, `completing`, `canceling`.</p><p>The shorthand `all` value is also available if the listener should react to all lifecycle events.</p> |
 | `type`             | Yes      | <p>The name of the job type.</p><p>Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`.</p>                                                                                                   |
 | `retries`          | No       | Number of retries for the user task listener job. Defaults to `3` if not set.                                                                                                                                                                                   |
@@ -93,9 +109,11 @@ After the restart, the new configuration applies to new lifecycle events for bot
 
 For a given event on a task instance:
 
-- Global listeners run in the order defined in the configuration.
+- Global listeners run in the order they were defined (configuration order for config-file-based listeners, creation order for API/UI-managed listeners).
 - Model-level listeners run next, in the order defined in the BPMN model.
-- Global listeners marked with `after-non-global: true` run after model-level listeners.
+- Global listeners marked with `after-non-global: true` (or **After non-global** enabled in the UI) run after model-level listeners.
+
+Configuration-file-based listeners and API/UI-managed listeners are independent sets. Within each set, the above ordering applies. The overall execution order is: config-file listeners, then API/UI listeners (both sets respect the `after-non-global` flag).
 
 ## Supported features
 
@@ -120,9 +138,11 @@ The [same limitations as model-level user task listeners](/components/concepts/u
 In addition to the above:
 
 - **No tenant-specific configuration**: Configuration is cluster-wide, not per tenant. Payloads include `tenantId` for downstream handling.
-- **Restart required**: Configuration changes take effect only after a cluster restart.
+- **Restart required (config-file approach only)**: Changes to the Unified Configuration take effect only after a cluster restart. Listeners managed via the Identity UI or the API take effect immediately.
 
 ## See also
 
+- [Manage global user task listeners in Identity](/components/identity/global-user-task-listener.md).
+- [Global User Task Listener API](/apis-tools/orchestration-cluster-api-rest/specifications/create-global-user-task-listener.api.mdx).
 - [Global listener configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners).
 - [Configure properties through Helm charts](/self-managed/deployment/helm/configure/application-configs.md).

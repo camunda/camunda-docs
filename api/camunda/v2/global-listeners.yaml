@@ -1,0 +1,307 @@
+paths:
+  /global-listeners/user-task:
+    post:
+      operationId: createGlobalUserTaskListener
+      tags:
+        - Global User Task Listener
+      summary: Create a global user task listener
+      description: "[[CONSISTENCY:STRONG]]"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateGlobalUserTaskListenerRequest"
+      responses:
+        "201":
+          description: Global user task listener created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalUserTaskListenerResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "409":
+          description: A global user task listener with the given type already exists.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+  /global-listeners/user-task/search:
+    post:
+      tags:
+        - Global User Task Listener
+      operationId: searchGlobalUserTaskListeners
+      summary: Search global user task listeners
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for global user task listeners based on given criteria.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlobalUserTaskListenerSearchQueryRequest"
+      responses:
+        "200":
+          description: The global user task listener search result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalUserTaskListenerSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+  /global-listeners/user-task/{type}:
+    get:
+      operationId: getGlobalUserTaskListener
+      tags:
+        - Global User Task Listener
+      summary: Get a global user task listener
+      description: "[[CONSISTENCY:EVENTUAL]]"
+      parameters:
+        - name: type
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The job type of the global user task listener
+      responses:
+        "200":
+          description: Global user task listener found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalUserTaskListenerResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: Global user task listener not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+    put:
+      operationId: updateGlobalUserTaskListener
+      tags:
+        - Global User Task Listener
+      summary: Update a global user task listener
+      description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Updates an existing global user task listener.
+        The listener must exist, otherwise a 404 error is returned.
+      parameters:
+        - name: type
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The job type of the global user task listener
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateGlobalUserTaskListenerRequest"
+      responses:
+        "200":
+          description: Global user task listener updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalUserTaskListenerResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: Global user task listener not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+    delete:
+      operationId: deleteGlobalUserTaskListener
+      tags:
+        - Global User Task Listener
+      summary: Delete a global user task listener
+      description: "[[CONSISTENCY:STRONG]]"
+      parameters:
+        - name: type
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The job type of the global user task listener
+      responses:
+        "204":
+          description: Global user task listener deleted successfully
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: Global user task listener not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+components:
+  schemas:
+    UserTaskListenerEventTypeEnum:
+      type: string
+      enum:
+        - creating
+        - assigning
+        - updating
+        - completing
+        - canceling
+        - all
+      description: The event type that triggers the user task listener.
+    CreateGlobalUserTaskListenerRequest:
+      type: object
+      required:
+        - type
+        - eventTypes
+      properties:
+        type:
+          type: string
+          description: The job type of the listener. Must be unique across all global user task listeners.
+        eventTypes:
+          type: array
+          description: List of user task event types that trigger the listener. Use `all` as the only element to match all supported event types.
+          items:
+            $ref: "#/components/schemas/UserTaskListenerEventTypeEnum"
+          minItems: 1
+        retries:
+          type: integer
+          format: int32
+          description: Number of retries for the user task listener job. Defaults to `3` if not set.
+          default: 3
+          minimum: 0
+        afterNonGlobal:
+          type: boolean
+          description: When `true`, this listener runs after all model-level (non-global) user task listeners for the same event. Defaults to `false` (runs before model-level listeners).
+          default: false
+    UpdateGlobalUserTaskListenerRequest:
+      type: object
+      properties:
+        eventTypes:
+          type: array
+          description: List of user task event types that trigger the listener. Use `all` as the only element to match all supported event types.
+          items:
+            $ref: "#/components/schemas/UserTaskListenerEventTypeEnum"
+          minItems: 1
+        retries:
+          type: integer
+          format: int32
+          description: Number of retries for the user task listener job.
+          minimum: 0
+        afterNonGlobal:
+          type: boolean
+          description: When `true`, this listener runs after all model-level (non-global) user task listeners for the same event.
+    GlobalUserTaskListenerResult:
+      type: object
+      required:
+        - type
+        - eventTypes
+        - retries
+        - afterNonGlobal
+      properties:
+        type:
+          type: string
+          description: The job type of the listener. Unique across all global user task listeners.
+        eventTypes:
+          type: array
+          description: List of user task event types that trigger the listener.
+          items:
+            $ref: "#/components/schemas/UserTaskListenerEventTypeEnum"
+        retries:
+          type: integer
+          format: int32
+          description: Number of retries for the user task listener job.
+        afterNonGlobal:
+          type: boolean
+          description: When `true`, this listener runs after model-level listeners.
+    GlobalUserTaskListenerSearchQueryRequest:
+      description: Global user task listener search query request.
+      type: object
+      allOf:
+        - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/GlobalUserTaskListenerSearchQuerySortRequest"
+        filter:
+          description: The global user task listener search filters.
+          allOf:
+            - $ref: "#/components/schemas/GlobalUserTaskListenerSearchQueryFilterRequest"
+    GlobalUserTaskListenerSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - type
+            - retries
+            - afterNonGlobal
+        order:
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+      required:
+        - field
+    GlobalUserTaskListenerSearchQueryFilterRequest:
+      description: Global user task listener filter request.
+      type: object
+      properties:
+        type:
+          description: The job type of the listener.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        afterNonGlobal:
+          description: Filter listeners by execution order relative to model-level listeners.
+          type: boolean
+    GlobalUserTaskListenerSearchQueryResult:
+      description: Global user task listener search query response.
+      type: object
+      allOf:
+        - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching global user task listeners.
+          type: array
+          items:
+            $ref: "#/components/schemas/GlobalUserTaskListenerResult"
