@@ -20,9 +20,8 @@ Start building and integrating AI agents into your end-to-end processes.
 
 ## Why tool documentation in ad-hoc sub-processes matters
 
-In an AI agent model, each BPMN activity inside the ad-hoc sub-process is effectively a tool exposed to the LLM.
-
-The activity name and documentation/description is used by the LLM to decide what to do next.
+In an AI agent model, each BPMN activity inside an ad-hoc sub-process is effectively a tool exposed to the LLM.
+The activity name its documentation are used by the LLM to decide what to do next.
 
 Clear, behavior-oriented descriptions help the LLM:
 
@@ -43,7 +42,7 @@ Poor or missing documentation increases the risk of:
 | Weak            | **Name**: `Lookup`<br/>**Documentation**: `Find customer data`                                                                                                                                                                                    |
 | Strong          | **Name**: `Resolve customer by legal company name`<br/>**Documentation**: `Use this tool when a document mentions a company and you need its internal customer ID. If multiple matches are returned, request human validation before continuing.` |
 
-A clear tool name and documentation make expected behavior explicit, improving reliability during tool selection and execution.
+A clear tool name and precise documentation make the expected behavior explicit, improving reliability during tool selection and execution.
 
 ## AI agent integration features
 

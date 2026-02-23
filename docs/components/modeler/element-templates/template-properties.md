@@ -585,19 +585,90 @@ Only one of `timeDate`, `timeCycle`, or `timeDuration` can be defined per templa
 
 :::
 
+### Conditional event definition property: `bpmn:ConditionalEventDefinition#property`
+
+| **Binding `type`**         | `bpmn:ConditionalEventDefinition#property`                                                                        |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`                                                                                |
+| **Binding parameters**     | `name`: The name of the property.<br/>Supported property: `condition`.                                            |
+| **Mapping result**         | `<bpmn:conditionalEventDefinition><bpmn:condition>[userInput]</bpmn:condition></bpmn:conditionalEventDefinition>` |
+
+The `bpmn:ConditionalEventDefinition#property` binding allows you to configure the condition expression for [conditional events](../../bpmn/conditional-events/).
+This binding is only valid for templates of events with `bpmn:ConditionalEventDefinition` set via `elementType.eventDefinition`.
+
+```json
+{
+  "label": "Condition Expression",
+  "type": "String",
+  "value": "=orderTotal > 100",
+  "feel": "required",
+  "binding": {
+    "type": "bpmn:ConditionalEventDefinition#property",
+    "name": "condition"
+  }
+}
+```
+
+:::note
+The `condition` property requires a FEEL expression. When using `String` or `Text` input types, set `feel` to `required`.
+:::
+
+### Conditional filter: `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property`
+
+| **Binding `type`**         | `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property`                                |
+| -------------------------- | ------------------------------------------------------------------------------------------------- |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`                                                                |
+| **Binding parameters**     | `name`: The name of the property.<br/>Supported properties: `variableNames` and `variableEvents`. |
+| **Mapping result**         | `<zeebe:conditionalFilter [name]="[userInput]" />`                                                |
+
+The `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property` binding allows you to configure the conditional filter for [conditional events](../bpmn/conditional-events/conditional-events.md). The conditional filter controls which variable changes trigger the condition evaluation.
+
+```json
+[
+  {
+    "label": "Variable Names",
+    "type": "String",
+    "value": "orderTotal,discount",
+    "binding": {
+      "type": "bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property",
+      "name": "variableNames"
+    }
+  },
+  {
+    "label": "Variable Events",
+    "type": "String",
+    "value": "create,update",
+    "binding": {
+      "type": "bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property",
+      "name": "variableEvents"
+    }
+  }
+]
+```
+
+:::note
+
+**Property descriptions:**
+
+- **`variableNames`**: A comma-separated list of variable names that trigger condition evaluation when changed.
+- **`variableEvents`**: A comma-separated list of variable events (`create`, `update`) that trigger condition evaluation.
+
+When `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property` is used, `bpmn:ConditionalEventDefinition#property` with `condition` should also be set on the same element.
+
+:::
+
 ### Called element: `zeebe:calledElement`
 
-| **Binding `type`**         | `zeebe:calledElement`                                                                                          |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                                             |
-| **Binding parameters**     | `property`: The name of the property.<br/> Supported properties: `processId`, `bindingType`, and `versionTag`. |
-| **Mapping result**         | `<zeebe:calledElement [property]="[userInput]" />`                                                             |
+| **Binding `type`**         | `zeebe:calledElement`                                                                                                                                                   |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean` (only for the `propagateAllParentVariables` and `propagateAllChildVariables` properties)              |
+| **Binding parameters**     | `property`: The name of the property.<br/> Supported properties: `processId`, `bindingType`, `versionTag`, `propagateAllParentVariables`, `propagateAllChildVariables`. |
+| **Mapping result**         | `<zeebe:calledElement [property]="[userInput]" />`                                                                                                                      |
 
 The `zeebe:calledElement` binding allows you to configure a process called by a call activity.
 
 You can set the value of the property `bindingType` to control the [resource binding type](../../../best-practices/modeling/choosing-the-resource-binding-type).
-We recommend setting the property `bindingType` to the value `"versionTag"` and setting the property `versionTag`
-to the value of the version tag of the process you want to call.
+We recommend setting the property `bindingType` to the value `"versionTag"` and setting the property `versionTag` to the value of the version tag of the process you want to call.
 
 ```json
 [
@@ -629,11 +700,36 @@ to the value of the version tag of the process you want to call.
 ]
 ```
 
-:::note
+#### Variable propagation
 
-For `zeebe:calledElement` bindings, variable propagation is not supported. To provide or retrieve variables, use `zeebe:input` and `zeebe:output` bindings.
+You can control automatic variable propagation between the parent process and the called process by using the `propagateAllParentVariables` and `propagateAllChildVariables` properties. These properties support only the `Boolean` and `Hidden` types and do not support FEEL expressions.
 
-:::
+- `propagateAllParentVariables`: When you set this property to `true`, the engine copies all variables from the parent process to the called process.
+- `propagateAllChildVariables`: When you set this property to `true`, the engine copies all variables from the called process back to the parent process when the called process completes.
+
+```json
+[
+  {
+    ...,
+    "type": "Boolean",
+    "value": true,
+    "binding": {
+      "type": "zeebe:calledElement",
+      "property": "propagateAllParentVariables"
+    }
+  },
+  {
+    ...,
+    "type": "Hidden",
+    "value": "false",
+    "binding": {
+      "type": "zeebe:calledElement",
+      "property": "propagateAllChildVariables"
+    }
+  },
+  ...
+]
+```
 
 ### User task implementation: `zeebe:userTask`
 

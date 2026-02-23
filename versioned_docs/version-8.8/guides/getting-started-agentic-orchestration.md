@@ -302,7 +302,6 @@ Then return the tool response by setting `toolCallResult` in your result express
 
 At runtime, each tool call contributes one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
 
-When adding your first tool, inspect the tasks already available to the agent in this blueprint and follow the same pattern for `fromAi()` inputs and `toolCallResult`/`toolCallResults` outputs.
 For your own tools, inspect the tasks already available to the agent in this blueprint and apply a similar pattern for `fromAi()` inputs and `toolCallResult`/`toolCallResults` outputs.
 
 ## Next steps
