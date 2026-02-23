@@ -1,8 +1,8 @@
 ---
 id: overview
-title: User operation audit log
-sidebar_label: User operation audit log
-description: A high-level overview of the User operation audit log in Camunda 8.
+title: User operations audit log
+sidebar_label: User operations audit log
+description: A high-level overview of the User operations audit log in Camunda 8.
 ---
 
 import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
@@ -14,7 +14,7 @@ Audit a comprehensive record of operations across process, identity, and user ta
 
 ## About
 
-With the **user operation audit log**, you'll access a record of operations, including who performed them, when, and on which entities.
+With the **user operations audit log**, you'll access a record of operations, including who performed them, when, and on which entities.
 
 Use the audit log to:
 
@@ -28,10 +28,10 @@ Use the audit log to:
 When the audit log is active, a record is written to [secondary storage](../../self-managed/concepts/secondary-storage/index.md) for every applicable operation instance. Because of this, you can expect an increase in disk usage by a factor of 1.5 to 2.0.
 
 :::warning
-The user operation audit log is enabled by default. Because of the increase in resource usage on secondary storage, you may see increased costs associated with this feature.
+The user operations audit log is enabled by default. Because of the increase in resource usage on secondary storage, you may see increased costs associated with this feature.
 :::
 
-By default, only user operations are tracked, not [client](../zeebe/technical-concepts/architecture.md#clients) operations. You can configure the user operations audit log to fine-tune log thoroughness, resource usage, and financial costs according to your needs. Additionally, if using Camunda 8 Self-Managed, you control the [secondary storage retention policy](../../self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#index--retention-settings), which applies to user operation audit log records.
+By default, only user operations are tracked, not [client](../zeebe/technical-concepts/architecture.md#clients) or agent operations. You can configure the user operations audit log to fine-tune log thoroughness, resource usage, and financial costs according to your needs. Additionally, if using Camunda 8 Self-Managed, you control the [secondary storage retention policy](../../self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#index--retention-settings), which applies to user operations audit log records.
 
 ## Get started
 
