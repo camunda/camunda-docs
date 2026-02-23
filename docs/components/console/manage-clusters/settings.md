@@ -43,19 +43,11 @@ For more information on updating clusters, see [update your cluster](/components
 You can enable user task access restrictions in the cluster to restrict Tasklist task access to assigned/candidate users and groups.
 
 :::caution Tasklist V1 only
-User task access restrictions are supported only by the Tasklist V1 API and are not supported
-in Tasklist V2. From Camunda 8.8, Tasklist runs in V2 mode by default.
+User task access restrictions are supported only by the Tasklist V1 API and are not available in Tasklist V2. From Camunda 8.8, Tasklist runs in V2 mode by default.
 
-To continue using user task access restrictions, see
-[switching between V1 and V2 modes](components/tasklist/api-versions.md#switching-between-v1-and-v2-modes)
-to enable Tasklist V1 mode.
+To continue using user task access restrictions, see [switching between V1 and V2 modes](components/tasklist/api-versions.md#switching-between-v1-and-v2-modes) to enable Tasklist V1 mode.
 
-Tasklist V2 does not support task-level visibility restrictions.
-Authorization-based access control in V2 applies only at the process-definition level and does
-not limit access to individual tasks.
-
-For more information about the differences between V1 and V2, see
-[Tasklist API versions](components/tasklist/api-versions.md).
+In Tasklist V2, task visibility is controlled by authorization-based access control rather than user task access restrictions. For a conceptual overview of how authorizations control access to user tasks, see [authorization-based access control](../../concepts/access-control/authorizations.md).
 :::
 
 - Enable this setting to use user task access restrictions in the cluster when Tasklist V1 is enabled. Tasks assigned to users or candidate groups are only visible to assigned users or respective group members.

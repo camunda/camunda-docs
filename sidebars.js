@@ -141,6 +141,7 @@ module.exports = {
           items: ["components/concepts/message-aggregation"],
         },
         "components/concepts/signals",
+        "components/concepts/conditionals",
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
@@ -555,6 +556,7 @@ module.exports = {
                 "components/modeler/web-modeler/validation/play-your-process",
                 "components/modeler/web-modeler/validation/test-scenario-files",
                 "components/modeler/web-modeler/validation/token-simulation",
+                "components/modeler/web-modeler/validation/task-testing",
               ],
             },
             "components/modeler/web-modeler/run-or-publish-your-process",
@@ -655,6 +657,7 @@ module.exports = {
                 "components/modeler/bpmn/message-events/message-events",
                 "components/modeler/bpmn/signal-events/signal-events",
                 "components/modeler/bpmn/timer-events/timer-events",
+                "components/modeler/bpmn/conditional-events/conditional-events",
                 "components/modeler/bpmn/error-events/error-events",
                 "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
@@ -753,6 +756,7 @@ module.exports = {
           },
           items: [
             "components/tasklist/userguide/access-control",
+            "components/tasklist/user-task-authorization",
             "components/tasklist/userguide/using-tasklist",
             "components/tasklist/api-versions",
             "components/tasklist/userguide/managing-tasks",
@@ -805,7 +809,15 @@ module.exports = {
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
-            "components/connectors/use-connectors/intrinsic-functions",
+          ],
+        },
+        {
+          type: "category",
+          label: "Advanced connector topics",
+          items: [
+            "components/connectors/advanced-topics/connector-deduplication",
+            "components/connectors/advanced-topics/inbound-lifecycle",
+            "components/connectors/advanced-topics/intrinsic-functions",
             "components/connectors/use-connectors-in-hybrid-mode",
           ],
         },
@@ -1136,6 +1148,7 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/orchestration-cluster-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/orchestration-cluster-api-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         {
@@ -1392,6 +1405,7 @@ module.exports = {
       items: ["reference/data-collection/usage-metrics"],
     },
     "reference/contact",
+    "reference/mcp-docs/docs-mcp",
     "reference/legal",
   ],
   "Self-Managed": [
@@ -1467,6 +1481,7 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/install/quick-install",
+                "self-managed/deployment/helm/install/helm-with-rdbms",
                 "self-managed/deployment/helm/install/production/index",
               ],
             },
@@ -1494,7 +1509,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
-                "self-managed/deployment/helm/configure/vendor-supported-infrastructure",
+                "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
@@ -1526,9 +1541,16 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-external-opensearch",
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
-                    "self-managed/deployment/helm/configure/database/rdbms",
-                    "self-managed/deployment/helm/configure/database/validate-rdbms",
-                    "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
+                    {
+                      RDBMS: [
+                        "self-managed/deployment/helm/configure/database/rdbms",
+                        "self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers",
+                        "self-managed/deployment/helm/configure/database/rdbms-schema-management",
+                        "self-managed/deployment/helm/configure/database/rdbms-troubleshooting",
+                        "self-managed/deployment/helm/configure/database/validate-rdbms",
+                        "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
+                      ],
+                    },
                     {
                       Troubleshooting: [
                         "self-managed/deployment/helm/configure/database/all-shards-failed",
@@ -1546,6 +1568,7 @@ module.exports = {
                   items: [
                     "self-managed/deployment/helm/configure/ingress/ingress-setup",
                     "self-managed/deployment/helm/configure/ingress/accessing-components-without-ingress",
+                    "self-managed/deployment/helm/configure/ingress/gateway-api-setup",
                   ],
                 },
                 {
@@ -1582,33 +1605,6 @@ module.exports = {
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",
                 "self-managed/deployment/helm/configure/configure-multi-tenancy",
-              ],
-            },
-            {
-              type: "category",
-              label: "Upgrade",
-              link: {
-                type: "doc",
-                id: "self-managed/deployment/helm/upgrade/index",
-              },
-              items: [
-                "self-managed/deployment/helm/upgrade/upgrade-hc-880-890",
-                {
-                  type: "category",
-                  label: "Upgrade 8.7 to 8.8",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/deployment/helm/upgrade/upgrade-hc-870-880",
-                  },
-                  items: [
-                    "self-managed/deployment/helm/upgrade/upgrade-hc-870-880-dual-region",
-                  ],
-                },
-                "self-managed/deployment/helm/upgrade/upgrade-hc-860-870",
-                "self-managed/deployment/helm/upgrade/upgrade-hc-850-860",
-                "self-managed/deployment/helm/upgrade/upgrade-hc-840-850",
-                "self-managed/deployment/helm/upgrade/upgrade-hc-830-840",
-                "self-managed/deployment/helm/upgrade/upgrade-hc-820-830",
               ],
             },
             {
@@ -1739,7 +1735,6 @@ module.exports = {
           label: "Manual",
           items: [
             "self-managed/deployment/manual/install",
-            "self-managed/deployment/manual/upgrade",
             {
               type: "category",
               label: "Cloud providers",
@@ -1990,6 +1985,7 @@ module.exports = {
               Identity: [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
+                "self-managed/components/orchestration-cluster/identity/connect-multiple-identity-providers",
                 "self-managed/components/orchestration-cluster/identity/debugging-authentication",
                 "self-managed/components/orchestration-cluster/identity/special-oidc-cases",
               ],
@@ -2153,47 +2149,6 @@ module.exports = {
                 "self-managed/components/optimize/configuration/multi-tenancy",
               ],
             },
-            {
-              "Migration & update": [
-                "self-managed/components/optimize/migration-update/camunda-8/instructions",
-                "self-managed/components/optimize/migration-update/camunda-8/8.7-to-8.8",
-                "self-managed/components/optimize/migration-update/camunda-8/8.6-to-8.7",
-                "self-managed/components/optimize/migration-update/camunda-8/3.13_8.5-to-8.6",
-                "self-managed/components/optimize/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
-                "self-managed/components/optimize/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
-                "self-managed/components/optimize/migration-update/camunda-8/3.10-to-3.11_8.3",
-                "self-managed/components/optimize/migration-update/camunda-8/3.9-to-3.10",
-                "self-managed/components/optimize/migration-update/camunda-8/3.9-preview-1-to-3.9",
-                "self-managed/components/optimize/migration-update/camunda-8/3.8-to-3.9-preview-1",
-                "self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8",
-              ],
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Components upgrade",
-          link: {
-            type: "doc",
-            id: "self-managed/components/components-upgrade/introduction",
-          },
-          items: [
-            "self-managed/components/components-upgrade/880-to-890",
-            "self-managed/components/components-upgrade/870-to-880",
-            "self-managed/components/components-upgrade/860-to-870",
-            "self-managed/components/components-upgrade/850-to-860",
-            "self-managed/components/components-upgrade/840-to-850",
-            "self-managed/components/components-upgrade/830-to-840",
-            {
-              Elasticsearch: [
-                "self-managed/components/components-upgrade/elasticsearch/7-to-8",
-              ],
-            },
-            {
-              Keycloak: [
-                "self-managed/components/components-upgrade/keycloak/keycloak-update",
-              ],
-            },
           ],
         },
       ],
@@ -2201,13 +2156,43 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.9",
+      className: "sidebar-cta",
       link: {
         type: "doc",
-        id: "self-managed/update/administrators/admin-upgrade-overview",
+        id: "self-managed/upgrade/index",
       },
       items: [
-        "self-managed/update/administrators/prepare-for-admin-upgrade",
-        "self-managed/update/administrators/run-admin-upgrade",
+        "self-managed/upgrade/prepare-for-upgrade",
+        {
+          type: "category",
+          label: "Helm upgrade",
+          link: {
+            type: "doc",
+            id: "self-managed/upgrade/helm/index",
+          },
+          items: [
+            "self-managed/upgrade/helm/880-to-890",
+            "self-managed/upgrade/helm/880-to-890-dual-region",
+          ],
+        },
+        "self-managed/upgrade/manual/index",
+        {
+          type: "category",
+          label: "Component upgrade",
+          link: {
+            type: "doc",
+            id: "self-managed/upgrade/components/index",
+          },
+          items: [
+            "self-managed/upgrade/components/880-to-890",
+            {
+              Database: [
+                "self-managed/upgrade/components/database/changes-in-elasticsearch-8",
+              ],
+            },
+            "self-managed/upgrade/components/keycloak/keycloak-compatibility",
+          ],
+        },
       ],
     },
   ],

@@ -434,6 +434,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The process instance key associated to this incident.
+        rootProcessInstanceKey:
+          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
         elementInstanceKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"

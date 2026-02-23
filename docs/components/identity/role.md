@@ -13,7 +13,7 @@ A role is a collection of [authorizations](authorization.md) that defines a set 
 Roles are used to grant users the system and data access required to fulfill a certain responsibility. A role can be assigned to [users](user.md) directly or as part of a [group](group.md) they belong to.
 
 :::info
-The Orchestration Cluster creates [a set of default roles](../concepts/access-control/authorizations.md#default-roles) on startup. If deleted, default roles are automatically recreated on cluster startup.
+The Orchestration Cluster creates [a set of default roles](../concepts/access-control/authorizations.md#default-roles) on startup. If deleted, they're automatically recreated on cluster startup.
 :::
 
 ## Create a role

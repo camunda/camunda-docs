@@ -11,8 +11,6 @@ Learn how AI agents use gateway tool definitions to automatically discover and i
 
 AI agents can detect and use tools provided by MCP clients via activities within an ad-hoc sub-process. This is made possible by so-called [_gateway tool definitions_](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#gateway-tool-definitions), which provide access to a list of tools instead of a single tool definition.
 
-/Users/angel.fernandez/Documents/Repos/camunda-docs/docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md
-
 Tool discovery and calling are performed within the ad-hoc sub-process, rather than directly in the AI agent. This enables:
 
 - Running the AI agent and individual MCP clients in different deployments. For example, a custom MCP client interacting with a local filesystem could be connected to a Camunda 8 SaaS instance.

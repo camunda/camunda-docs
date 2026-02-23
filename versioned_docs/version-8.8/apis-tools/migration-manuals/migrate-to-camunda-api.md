@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 Migrate from Camunda V1 component REST APIs to the V2 Orchestration Cluster REST API.
 
-## About this guide
+## About
 
 This guide covers how to migrate to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), and what to consider when migrating. It covers all public endpoints in the component REST APIs and their Orchestration Cluster API counterparts or required migration changes.
 

@@ -23,7 +23,6 @@ Some elements do not support specific modifications:
   - Boundary events
   - Events attached to event-based gateways
 - **Move** modification is not possible for a subprocess itself.
-- **Move** modifications are currently not possible for elements with multiple running scopes.
 
 ## Enter batch modification mode
 
@@ -41,6 +40,8 @@ Exit the modification mode at any time by clicking **Exit** in the footer.
 1. Select the flow node you want to move the selected process instances to.
 2. When you have made all your intended selections and you are ready to continue, click **Apply Modification** in the footer. A confirmation modal will appear indicating that you are about to apply the selected modifications.
 3. Click the **Apply** button from the summary modal to start the batch modification.
+
+When moving elements inside multi-instance subprocesses, the move operation terminates only that specific element instance and activates the target element in the same instance of the multi-instance subprocess.
 
 ## Next steps
 

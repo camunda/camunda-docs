@@ -16,7 +16,7 @@ You can use different certificates, or even reuse the same configuration for bot
 
 ### gRPC
 
-You can configure TLS for the gRPC gateway in the `security` section of the configuration files. The following configurations are present in both `gateway.yaml.template` and `broker.standalone.yaml.template`, the file you should edit depends on whether you are using a standalone gateway or an embedded gateway.
+You can configure TLS for the gRPC gateway in the `security` section of the configuration files. The following configurations are present in both `gateway.default.yaml` and `config/defaults.yaml`, the file you should edit depends on whether you are using a standalone gateway or an embedded gateway.
 
 ```yaml
 ---

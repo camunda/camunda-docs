@@ -19,7 +19,7 @@ Read more about Camunda Client [configuration options](/apis-tools/camunda-sprin
 | :-------------- | :------- | :-------------------------------------------------------------------------------------------------- |
 | `.mode`         | `string` | Operation mode of the Camunda 8 client. Options: `self-managed` or `cloud`. Default: `self-managed` |
 | `.grpc-address` | `string` | The gRPC API endpoint for Camunda 8 Platform. Default: `http://localhost:26500`                     |
-| `.rest-address` | `string` | The REST API endpoint for Camunda 8 Platform. Default: `http://localhost:8088`                      |
+| `.rest-address` | `string` | The REST API endpoint for Camunda 8 Platform. Default: `http://localhost:8080`                      |
 
 ## `camunda.migrator`
 
@@ -79,6 +79,7 @@ The following built-in interceptors are available and can be disabled:
 **Transformers (convert supported types):**
 
 - `io.camunda.migration.data.impl.interceptor.PrimitiveVariableTransformer`
+- `io.camunda.migration.data.impl.interceptor.StringVariableTransformer`
 - `io.camunda.migration.data.impl.interceptor.NullVariableTransformer`
 - `io.camunda.migration.data.impl.interceptor.DateVariableTransformer`
 - `io.camunda.migration.data.impl.interceptor.ObjectJsonVariableTransformer`
