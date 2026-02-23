@@ -16,10 +16,14 @@ Monitor and troubleshoot your AI agent process instances in Camunda 8 using Oper
 In this guide, you will:
 
 - Inspect an AI agent process instance in Operate.
-- Understand agent’s relevant variables such as tool call inputs and results.
+- Understand agent’s tool usage and metadata such as tool call inputs and results.
 - Analyze the agent context and how it is stored.
 
-After completing it, you will better understand how to debug your AI agents with Operate.
+:::note
+Operate enables inspection of execution paths, tool usage, and agent metadata. However, certain runtime artifacts, such as document storage contents, may require additional configuration.
+:::
+
+After completing this guide, you will be able to inspect, debug, and monitor AI agent executions in Camunda 8.
 
 ## Prerequisites
 
@@ -76,7 +80,23 @@ To see the **Fetch URL** tool input and results:
 - The **toolCallResult** variable (the _results_). See [Tool call responses](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-call-responses) for more details.
 
 2. To better inspect the results, click the pencil icon to enter edit mode for **toolCallResult**.
-3. Click the two-squares icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value. The result is a reference to a document where the actual output is stored. See [**TBD - Add link**] to other section/explanation within this guide Camunda Document Storage.
+3. Click the two-squares icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value. The result is a reference to a document where the actual output is stored. You will learn more about this in [Step 6](#step-6-understand-how-agent-memory-is-stored).
+
+Here's the **toolCallResult** value:
+
+```json
+{
+  "storeId": "gcp",
+  "documentId": "1aa0e4f6-7cee-4c19-ac2e-cebee3c7b151",
+  "contentHash": "649a8575bf8ced157fbbba7acc02ba33058bb2e3f40fb37b0f303730fb64fba0",
+  "metadata": {
+    "contentType": "text/html; charset=utf-8",
+    "size": 33722,
+    "fileName": "1aa0e4f6-7cee-4c19-ac2e-cebee3c7b151"
+  },
+  "camunda.document.type": "camunda"
+}
+```
 
 :::note
 If a tool is executed more than once, select the desired tool invocation in **Instance History**, then open the corresponding inner instance to view the actual inputs and results.
@@ -99,6 +119,52 @@ In the JSON payload, you can find information about:
 - Tool call inputs and results.
 - Additional metadata, such as reasoning traces and token usage.
 
+Here's the example conversation stored in the agent's context:
+
+```json
+"type": "in-process",
+"conversationId": "130bbad7-b316-4cac-9653-a77e37e11f8b",
+"messages": [
+  {
+    "role": "system",
+    "content": [
+      {
+        "type": "text",
+        "text": "You are a helpful, generic chat agent which can answer a wide amount of questions based on your knowledge and an optional set of available tools.\n\nIf tools are provided, you should prefer them instead of guessing an answer. You can call the same tool multiple times by providing different input values. Don't guess any tools which were not explicitely configured. If no tool matches the request, try to generate an answer. If you're not able to find a good answer, return with a message stating why you're not able to.\n\nIf you are prompted to interact with a person, never guess contact details, but use available user/person lookup tools instead and return with an error if you're not able to look up appropriate data.\n\nThinking, step by step, before you execute your tools, you think using the template `<thinking><context></context><reflection></reflection></thinking>`"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "content": [
+      {
+        "type": "text",
+        "text": "Visit https://docs.camunda.io/ and tell me about it"
+      }
+    ],
+    "metadata": {
+      "timestamp": "2026-02-23T11:48:03.90923378Z"
+    }
+  },
+  {
+    "role": "assistant",
+    "content": [
+      {
+        "type": "text",
+        "text": "<thinking>\n<context>\nThe user wants me to visit a specific URL (https://docs.camunda.io/) and tell them about it. I have a tool called \"Fetch_URL\" that can fetch the contents of a given URL. This seems like a perfect match for the request.\n</context>\n<reflection>\nI should use the Fetch_URL tool to get the contents of https://docs.camunda.io/ and then analyze what I find to provide information about it to the user.\n</reflection>\n</thinking>"
+      }
+    ],
+    "toolCalls": [
+      {
+        "id": "tooluse_kBcf61pS50OS31KYQnRFzy",
+        "name": "Fetch_URL",
+        "arguments": {
+          "url": "https://docs.camunda.io/"
+        }
+      }
+    ],
+```
+
 ## Step 6: Understand how agent memory is stored
 
 In Modeler, within the AI Agent sub-process, you can define how the conversation memory is stored using the **Memory storage type** field.
@@ -116,8 +182,9 @@ See [Memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent
 :::note Agent memory storage
 
 - Use **In Process** for testing and debugging scenarios: Better visibility in Operate.
-- Use **Camunda Document Storage** for production scenarios: Better runtime behavior for long contexts.
-  :::
+- Use **Camunda Document Storage** for production scenarios: Better scalability and runtime behavior for long contexts.
+
+:::
 
 ## Step 7: Review the results
 
