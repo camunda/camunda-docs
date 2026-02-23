@@ -229,7 +229,7 @@ Depending on your working environment, test your agent by following the correspo
 <TabItem value="saas">
 
 1. Open [Web Modeler](/components/modeler/web-modeler/index.md).
-1. Select the [**Play**](/components/modeler/web-modeler/validation/play-your-process.md) tab.
+1. Select the [**Play**](/components/modeler/web-modeler/collaboration/play-your-process.md) tab.
 1. Select the cluster you want to deploy and play the process on.
 1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
