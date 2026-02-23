@@ -81,6 +81,18 @@ The Helm chart now documents all values supporting Go template expressions, incl
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
 
+#### Configure RocksDB memory per-broker
+
+<!-- https://github.com/camunda/product-hub/issues/3304 -->
+
+You can now configure RocksDB memory on a per broker basis instead of per partition, simplifying capacity planning and aligning with familiar JVM-style sizing.
+
+- This reduces the risk of unexpected out-of-memory crashes, and is crucial for usage with dynamically adding partitions, making broker provisioning safer and more predictable. Going forward, Camunda recommends you use the `FRACTION` allocation strategy.
+
+- The default remains per-partition for backwards compatibility but this is deprecated and will be changed in 8.10 to a fractional approach, with a 10% default (using `camunda.data.primary-storage.rocks-db.memory-allocation-strategy=FRACTION` and `camunda.data.primary-storage.rocks-db.memory-fraction=0.1`).
+
+- Camunda recommends you test this out before 8.10 to find the right value, or configure the allocation strategy to `PARTITION`.
+
 #### Manage task permissions
 
 <!-- https://github.com/camunda/product-hub/issues/3122 -->
@@ -95,6 +107,8 @@ Granular task-level authorization is now integrated into the Tasklist UI and the
 - Fine-grained security: Visibility and action permissions are scoped at the individual task level, reducing unauthorized access and improving compliance alignment.
 
 This feature strengthens security and usability, and provides a clear, consistent, and secure user experience for task workers, managers, and integrations.
+
+<p class="link-arrow">[Configure user task authorization](/components/tasklist/user-task-authorization.md)</p>
 
 #### Modify elements in multi-instance ad-hoc sub-processes
 
@@ -145,6 +159,12 @@ You can now configure scheduled backup intervals and retention directly in the O
 - Supports setting duration schedules, manual ad‑hoc backups, API‑based updates, metrics, and audit logs.
 - Backwards compatible with existing backup commands.
 
+#### Update cluster variables
+
+<!-- https://github.com/camunda/product-hub/issues/3349 -->
+
+You can now update existing cluster variables in the Orchestration Cluster user interface, without needing to delete and recreate the variable.
+
 #### User operations audit log
 
 <!-- https://github.com/camunda/product-hub/issues/1732 -->
@@ -153,6 +173,20 @@ A new centralized, queryable audit log records all critical user and client oper
 
 - Teams can trace who performed each action and when, what was affected, and if the action was successful.
 - Audit entries are available via Orchestration Cluster APIs, and integrated into Operate, Tasklist, and Identity with built-in authorization controls.
+
+### Process instance migration
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+
+#### Migrate from job-based user tasks to Camunda User Tasks
+
+<!-- https://github.com/camunda/product-hub/issues/2626 -->
+
+As part of process instance migration, you can now migrate active instances from legacy job‑based user tasks to modern, engine‑managed Camunda User Tasks via both the API and the Operate UI.
+
+This lets you standardize on the Orchestration Cluster APIs and the recommended user task type before the removal of job‑based user task querying and management in the consolidated API.
+
+<p class="link-arrow">[Process instance migration](/components/concepts/process-instance-migration.md)</p>
 
 ### RDBMS secondary storage
 
@@ -555,6 +589,8 @@ For example, if the same variable exists in multiple scopes, the priority is as 
 This hierarchy allows you to create cascading configurations, where specific contexts override broader defaults.
 
 Cluster variables support simple key-value pairs and nested objects, which you can access with dot notation for complex structures. You can manage all cluster variables via the Orchestration Cluster API.
+
+You can edit cluster variables directly
 
 <p class="link-arrow">[Cluster variables](/components/modeler/feel/cluster-variable/overview.md)</p>
 
