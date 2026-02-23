@@ -551,53 +551,72 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI=https://login.microsoftonline.com
 
 #### Configure the post-logout redirect URL in the IdP
 
-To ensure users are redirected correctly after logout, the administrator must configure a post-logout redirect URL in the IdP. The post-logout URL is the Camunda hostname plus `/post-logout`. For example, for a local setup where Identity is accessible at `http://localhost:8080`, configure the following post-logout redirect URL in the IdP:
+To ensure users are redirected correctly after logout, configure a post-logout redirect URL in your IdP. The post-logout URL is the Camunda hostname plus `/post-logout`. 
+
+For example, if Identity is accessible at `http://localhost:8080`, configure the following post-logout redirect URL in your IdP:
 
 ```
 http://localhost:8080/post-logout
 ```
 
-#### Troubleshooting RP-initiated logout
+## Troubleshooting
 
-If RP-initiated logout does not behave as expected, check the application logs for the following messages.
+### General authentication issues
 
-**Unable to determine end-session endpoint**
+If authentication does not work as expected:
 
-If OIDC is configured using explicit authorization/token/logout URIs instead of the issuer URI, and no logout endpoint is specified, then following message is logged:
+- Check your application logs for authentication errors.
+- Ensure your IdP client is configured to allow the specified redirect URI.
+- Verify the claim names match your IdP's token claims.
+
+### RP-initiated logout
+
+If RP-initiated logout does not behave as expected, check your application logs for the following messages.
+
+#### Unable to determine end-session endpoint
+
+If you configure OIDC using explicit authorization, token, or logout URIs instead of the issuer URI, and do not specify a logout endpoint, the following message is logged:
 
 ```
-Unable to determine end-session endpoint for OIDC logout. Falling back to {baseLogoutUrl} without logout hint.'
+Unable to determine end-session endpoint for OIDC logout. Falling back to {baseLogoutUrl} without logout hint.
 ```
 
-**No client registration found**
+Ensure you either:
+- Configure the `issuer-uri` so Identity can retrieve the logout endpoint from the OIDC discovery document, or
+- Explicitly set the `endsession-endpoint-uri`.
 
-If the `registrationId` used for logout (the identifier of the OIDC client registration configured for the IdP) cannot be resolved to a client registration, Identity cannot construct an RP-initiated logout request. The following message is logged:
+#### No client registration found
+
+If the `registrationId` used for logout (the identifier of the configured OIDC client registration) cannot be resolved, Identity cannot construct an RP-initiated logout request. The following message is logged:
 
 ```
-No client registration found for id '{registrationId}'. Falling back to '{baseLogoutUrl}' without logout hint.
+No client registration found for id `{registrationId}`. Falling back to {baseLogoutUrl} without logout hint.
 ```
 
-**Missing login_hint / logout_hint**
+Verify that the configured client registration ID matches the OIDC client definition in your IdP configuration.
 
-Some IdPs require a `logout_hint` parameter for RP-initiated logout. Identity derives `logout_hint` from the OIDC user's `login_hint` claim, which typically contains a user identifier (for example, username or email) that the IdP can use to identify the session to terminate. If no `login_hint` is present, the following message is logged and the logout request is sent without a logout hint:
+#### Missing login_hint / logout_hint
+
+Some IdPs require a `logout_hint` parameter for RP-initiated logout. Identity derives `logout_hint` from the OIDC user's `login_hint` claim. This claim typically contains a user identifier, such as a username or email, which the IdP uses to identify the session to terminate.
+
+If no `login_hint` is present, the following message is logged and the logout request is sent without a logout hint:
 
 ```
 No 'login_hint' claim found in OIDC user. Falling back to '{baseLogoutUrl}' without logout hint.
 ```
 
-**No post-logout redirect URL configured**
+Ensure that your IdP includes a `login_hint` claim in the ID token if your IdP requires `logout_hint` during logout.
 
-The post-logout redirect URL must be explicitly configured in the IdP by the administrator. If no valid post-logout redirect URL is available, Identity falls back to a default path. In this case, the following message is logged:
+
+#### No post-logout redirect URL configured
+
+You must explicitly configure the post-logout redirect URL in your IdP. If no valid post-logout redirect URL is available, Identity falls back to a default path. In this case, the following message is logged:
 
 ```
 No valid post-logout redirect URL found in session, falling back to default: '/'
 ```
 
-## Troubleshooting
-
-- Check the logs for authentication errors.
-- Ensure your IdP client is configured to allow the specified redirect URI.
-- Verify the claim names match your IdP's token claims.
+Ensure that the post-logout redirect URL (`<camunda-host>/post-logout`) is registered in your IdP configuration.
 
 ## Further resources
 
