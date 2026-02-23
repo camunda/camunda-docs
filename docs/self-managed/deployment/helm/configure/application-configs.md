@@ -204,7 +204,7 @@ The `content` must be valid YAML. If invalid YAML is provided, Helm will fail du
 | ------------------- | ------------- | ------------- | --------------------------------------------------------------- |
 | Identity            | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import`   |
 | Connectors          | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import`   |
-| Orchestration       | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import`   |
+| Orchestration Cluster       | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import`   |
 | WebModeler REST API | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import`   |
 | Console             | Node.js       | YAML          | Merged at template time into single `application-override.yaml` |
 | Optimize            | Java (custom) | YAML          | Merged at template time into single `environment-config.yaml`   |
