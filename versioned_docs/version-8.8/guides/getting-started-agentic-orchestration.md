@@ -270,16 +270,16 @@ You can observe this dynamic behavior in real-time through Operate, where you'll
 
 ## Step 4: Add your first tool
 
-As an example, you could add a service task, for example **Get order status** inside the ad-hoc sub-process to expose a new tool to the AI agent.
-
-In similar scenarios, teams typically follow a pattern like this:
+You can customize your AI agent by adding tools. To do so, you typically follow these steps:
 
 1. Add a BPMN activity inside the ad-hoc sub-process.
-1. Configure the task implementation (connector, service task, user task, DMN, and so on).
-1. Add a clear tool name and description, plus explicit input/output variables so the LLM can choose and call it correctly.
-1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) for typed inputs and return `toolCallResult` in outputs.
+1. Configure the task implementation, including the connector, service task, user task, and DMN.
+1. Add a precise tool name and description, and define explicit input and output variables so the LLM can select and call the tool correctly.
+1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) for typed inputs, and return `toolCallResult` in the outputs.
 
-For example, use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) in the tool input mapping so the LLM can provide structured inputs:
+As an example, you will now add a service task called **Get order status** inside the AI Agent ad-hoc sub-process.
+
+1. Use `fromAi()` in the tool's input mapping so the LLM can provide structured inputs:
 
 ```feel
 = {
@@ -288,7 +288,7 @@ For example, use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-
 }
 ```
 
-Then return the tool response by setting `toolCallResult` in your result expression or output mapping:
+2. Return the tool response by setting `toolCallResult` in the result expression or output mapping:
 
 ```feel
 = {
@@ -300,18 +300,18 @@ Then return the tool response by setting `toolCallResult` in your result express
 }
 ```
 
-At runtime, each tool call contributes one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
+At runtime, each tool call produces one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
 
-For your own tools, inspect the tasks already available to the agent in this blueprint and apply a similar pattern for `fromAi()` inputs and `toolCallResult`/`toolCallResults` outputs.
+For your own tools, review the tasks already available to the agent in this blueprint and apply a similar pattern for `fromAi()` inputs and `toolCallResult` and `toolCallResults` outputs.
 
 ## Next steps
 
-Now that you’ve built your first Camunda AI agent, why not try customizing it further?
+Now that you’ve built your first Camunda AI agent, why not tailor it further?
 
 For example:
 
 - Add and configure more tools in the ad-hoc sub-process that the AI agent can use.
-- Change the provided system prompt to adjust the behavior of the AI agent.
+- Update the system prompt to adjust the AI agent's behavior.
 - Experiment with different model providers and configurations in the AI Agent connector.
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
