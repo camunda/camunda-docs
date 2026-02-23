@@ -195,7 +195,7 @@ optimize:
 Both entries are merged with the default Optimize config into a single `environment-config.yaml`.
 
 :::caution
-The `content` must be valid YAML. If invalid YAML is provided, Helm will fail during template rendering with a parse error. This is intentional. It prevents deploying broken configuration.
+The `content` must be valid YAML. If invalid YAML is provided, Helm will fail during template rendering with a parse error. This is intentional and prevents deploying a broken configuration.
 :::
 
 ### Summary
