@@ -286,10 +286,10 @@ You can configure a job worker to pick up jobs belonging to one or more tenants.
 
 ### Filtering by assigned tenants
 
-Use the `.tenantFilter()` method to control how the worker resolves tenants. It accepts a `TenantFilter` enum with two options:
+Use `.tenantFilter()` to control how the worker resolves tenants. It accepts a `TenantFilter` enum with two options:
 
-- **`TenantFilter.PROVIDED`** _(default)_: The worker retrieves jobs for the tenant IDs explicitly provided via `.tenantId()` or `.tenantIds()`. See [Filtering by provided tenant IDs](#filtering-by-provided-tenant-ids) below.
-- **`TenantFilter.ASSIGNED`**: The worker retrieves jobs for the tenants assigned to it in the engine. When this option is set, any tenant IDs configured via `.tenantId()` or `.tenantIds()` are ignored.
+- `TenantFilter.PROVIDED` _(default)_: The worker retrieves jobs for the tenant IDs explicitly provided via `.tenantId()` or `.tenantIds()`. See [Filtering by provided tenant IDs](#filtering-by-provided-tenant-ids) below.
+- `TenantFilter.ASSIGNED`: The worker retrieves jobs for the tenants assigned to it in the engine. When this option is set, any tenant IDs configured via `.tenantId()` or `.tenantIds()` are ignored.
 
 Using `TenantFilter.ASSIGNED`:
 
