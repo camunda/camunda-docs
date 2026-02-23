@@ -1,14 +1,14 @@
 ---
-id: vendor-supported-infrastructure
-sidebar_label: Vendor-supported infrastructure
-title: Deploy infrastructure with vendor-supported methods
-description: "Deploy Camunda 8 infrastructure components using vendor-supported deployment methods as an alternative to Bitnami subcharts."
+id: operator-based-infrastructure
+sidebar_label: Operator-based infrastructure
+title: Deploy infrastructure with Kubernetes operators
+description: "Deploy Camunda 8 infrastructure components using official Kubernetes operators as an alternative to Bitnami subcharts."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide explains how to deploy Camunda 8 infrastructure components using **vendor-supported deployment methods** as an alternative to the Bitnami subcharts. This approach provides production-grade, officially maintained deployment solutions for PostgreSQL, Elasticsearch, and Keycloak.
+This guide explains how to deploy Camunda 8 infrastructure components using **official Kubernetes operators** as an alternative to the Bitnami subcharts. This approach provides production-grade, officially maintained deployment solutions for PostgreSQL, Elasticsearch, and Keycloak.
 
 ## Overview
 
@@ -18,23 +18,30 @@ Starting with Camunda 8.8, we continue to strengthen our commitment to robust, p
 
 As outlined in [our strategy](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/), Camunda reinforces building deployments on solid foundations—primarily managed PostgreSQL and Elasticsearch services, along with external OIDC providers. However, we understand that managed infrastructure components aren't always available in your organization's service catalog.
 
-This guide demonstrates how to integrate these infrastructure components using official deployment methods that don't depend on Bitnami subcharts. Instead, we use vendor-supported deployment approaches—the recommended way to deploy and manage these services in production environments.
+This guide demonstrates how to integrate these infrastructure components using official Kubernetes operators that don't depend on Bitnami subcharts. These operators are the recommended way to deploy and manage these services in production environments.
+
+:::caution Support scope
+PostgreSQL, Elasticsearch, and Keycloak are **external dependencies** — they are not Camunda products, regardless of the deployment method used.
+
+- **Camunda support scope**: Camunda supports the **integration and configuration** of these components with the Camunda Helm chart. Camunda does not provide operational support for the infrastructure components themselves.
+- **Operator support**: For operational support on infrastructure components, engage the respective project teams or community support channels directly (CloudNativePG, Elastic, Keycloak), or use managed services.
+  :::
 
 :::note Alternative: Bitnami Enterprise Images
 If you prefer to continue using Bitnami subcharts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
 :::
 
-## Why use vendor-supported deployment methods?
+## Why use Kubernetes operators?
 
-Using official vendor-supported methods provides several advantages over traditional subcharts:
+Using official Kubernetes operators provides several advantages over traditional subcharts:
 
 - **Vendor maintenance**: Each deployment method is maintained by the respective project team (Elastic, CloudNativePG community, Keycloak team) with dedicated engineering resources
 - **Production-grade features**: Built-in management, monitoring, and scaling capabilities designed for enterprise environments
-- **Enterprise support**: Official support channels, dedicated vendor support teams, and comprehensive documentation
+- **Vendor support channels**: Official support channels, dedicated vendor support teams, and comprehensive documentation available directly from each project
 - **Security-focused**: Regular updates and CVE patches from upstream maintainers with specialized security teams
 - **Advanced lifecycle management**: Automated upgrades, failover, and disaster recovery capabilities
 - **Best practices implementation**: Following upstream recommended deployment patterns established by vendor experts
-- **Vendor expertise**: Access to specialized knowledge and troubleshooting from the teams that build these technologies
+- **Vendor expertise**: Access to specialized knowledge and troubleshooting from the teams that build these technologies (through vendor support channels)
 - **Future-proof architecture**: Doesn't depend on deprecated Bitnami subcharts, ensuring long-term maintainability
 
 ## Prerequisites
@@ -55,11 +62,11 @@ This deployment approach separates infrastructure management from application de
 
 <!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764643761312188&cot=14 -->
 
-![Vendor-supported infrastructure architecture](assets/vendor-components-arch.jpg)
+![Operator-based infrastructure architecture](assets/vendor-components-arch.jpg)
 
 ## Infrastructure components
 
-This approach uses three vendor-supported infrastructure components, each maintained by their respective project teams:
+This approach uses three operator-managed infrastructure components, each maintained by their respective project teams:
 | Component | Purpose | Official Documentation |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.28/) |
@@ -78,7 +85,7 @@ All configuration files, deployment scripts, and automation tools referenced in 
 <summary><strong>Quick deployment commands</strong></summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/camunda-deployment-references/generic/kubernetes/operator-based/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/get-your-copy.sh
 ```
 
 Then execute:
@@ -129,7 +136,7 @@ Each infrastructure component should be deployed individually in the following o
 | 1     | **[PostgreSQL](#postgresql-deployment)**       | None         | Database clusters for Keycloak, Management Identity, and Web Modeler |
 | 2     | **[Elasticsearch](#elasticsearch-deployment)** | None         | Secondary storage for orchestration cluster components               |
 | 3     | **[Keycloak](#keycloak-deployment)**           | PostgreSQL   | Authentication and identity management                               |
-| 4     | **[Camunda Platform](#camunda-deployment)**    | All above    | Deploy using Helm with vendor-supported infrastructure               |
+| 4     | **[Camunda Platform](#camunda-deployment)**    | All above    | Deploy using Helm with operator-managed infrastructure               |
 
 :::tip Automation with GitOps
 While this guide demonstrates manual deployment using command-line tools, these same configurations can be automated using GitOps solutions like ArgoCD, Flux, or other Kubernetes deployment pipelines. All configuration files referenced in this guide are designed to work seamlessly with declarative deployment approaches.
@@ -167,10 +174,11 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 **Deployment steps performed by the script:**
 
+- Auto-detect OpenShift and apply Security Context Constraints (SCC) patches if needed
 - Install CloudNativePG operator to `cnpg-system` namespace
 - Generate PostgreSQL authentication secrets using `./set-secrets.sh`
-- Deploy three PostgreSQL clusters from `postgresql-clusters.yml`
-- Wait for readiness validation of all clusters
+- Deploy PostgreSQL clusters from `postgresql-clusters.yml` (optionally filtered via `CLUSTER_FILTER` environment variable)
+- Wait for readiness validation of all deployed clusters
 
 #### Operator Custom Resources
 
@@ -196,30 +204,15 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 #### Execution
 
-<Tabs groupId="postgres-deployment">
-  <TabItem value="standard" label="Kubernetes" default>
-
 1. **Navigate to PostgreSQL directory**: `cd postgresql/`
 2. **Review deployment script**: `cat deploy.sh` to understand the deployment steps
 3. **Review cluster configuration**: `cat postgresql-clusters.yml` to verify PostgreSQL cluster settings
 4. **Adapt configuration if needed**: Modify `postgresql-clusters.yml` for your specific requirements (resource limits, storage, etc.)
 5. **Execute deployment**: `./deploy.sh`
 
-  </TabItem>
-  <TabItem value="openshift" label="OpenShift">
-
-1. **Navigate to PostgreSQL directory**: `cd postgresql/`
-2. **Review OpenShift deployment script**: `cat deploy-openshift.sh` to understand the OpenShift-specific deployment steps
-3. **Review cluster configuration**: `cat postgresql-clusters.yml` to verify PostgreSQL cluster settings
-4. **Adapt configuration if needed**: Modify `postgresql-clusters.yml` for your specific requirements (resource limits, storage, etc.)
-5. **Execute OpenShift deployment**: `./deploy-openshift.sh`
-
-:::note OpenShift Security Context Constraints
-The `deploy-openshift.sh` script applies necessary Security Context Constraints (SCC) patches required for CloudNativePG to run properly on OpenShift platforms.
+:::note OpenShift compatibility
+The `deploy.sh` script automatically detects OpenShift environments and applies the necessary Security Context Constraints (SCC) patches for CloudNativePG compatibility. No separate script is required.
 :::
-
-  </TabItem>
-</Tabs>
 
 ### Camunda Helm configuration
 
@@ -354,7 +347,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ### Overview
 
-The [Keycloak Operator](https://www.keycloak.org/operator/installation) provides the official vendor-supported way to deploy and manage Keycloak instances on Kubernetes. Maintained by the Keycloak team, it provides the recommended approach for automated deployment, configuration, and lifecycle management.
+The [Keycloak Operator](https://www.keycloak.org/operator/installation) provides the official operator-based way to deploy and manage Keycloak instances on Kubernetes. Maintained by the Keycloak team, it provides the recommended approach for automated deployment, configuration, and lifecycle management.
 
 Use the latest Keycloak version listed in our [supported environments matrix](/reference/supported-environments.md).
 
@@ -729,8 +722,8 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 If you're migrating from existing Bitnami sub-chart deployments:
 
 1. **Export data**: Create backups of existing databases and Elasticsearch indices
-2. **Deploy vendor-supported infrastructure**: Install the vendor-supported infrastructure alongside existing deployment
-3. **Migrate data**: Transfer data to vendor-supported services
+2. **Deploy operator-based infrastructure**: Install the operator-managed infrastructure alongside existing deployment
+3. **Migrate data**: Transfer data to operator-managed services
 4. **Update configuration**: Switch Camunda configuration to use new services
 5. **Cleanup**: Remove old sub-chart deployments once migration is complete
 

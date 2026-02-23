@@ -9,35 +9,53 @@ import TabItem from '@theme/TabItem';
 import ZeebeGrid from '../../components/zeebe/react-components/\_zeebe-card';
 import { overviewCards } from './react-components/\_card-data';
 
+import OverviewImg from '../assets/hero-upgrade-89.png';
+
+<h3 class="subheading">Upgrade your Camunda 8 Self-Managed deployment from version 8.8 to 8.9.</h3>
+
+<div class="double-column-container" style={{marginBottom: '50px'}}>
+<div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
+
+Get started by preparing your Self-Managed environment for upgrade to Camunda 8.9. Confirm upgrade eligibility, understand platform-level changes, and identify actions you might need to take before upgrading.
+
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Prepare for upgrade" href="./prepare-for-upgrade/" style={{marginBottom: '30px', marginTop: '20px'}}>Prepare for upgrade</a>
+
+</div>
+<div class="double-column-right" style={{flex: '1'}}>
+
+<img src={OverviewImg} alt="Upgrade your Camunda 8 Self-Managed deployment from version 8.8 to 8.9" title="Upgrade your Camunda 8 Self-Managed deployment from version 8.8 to 8.9" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
+
+</div>
+</div>
+
 :::note
 This section is a work in progress for Camunda 8.9 and will be updated as upgrade requirements are finalized.
+:::
 
-If you need details that are not yet covered here, see:
-
-- [What’s new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md)
-- [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md)
-  :::
+## About
 
 Upgrade a Camunda 8 Self-Managed deployment from version 8.8 to 8.9. This guide applies to Self-Managed installations only and does not apply to Camunda SaaS.
 
-If your deployment is running a version earlier than 8.8, complete the required version-specific upgrades listed in [Upgrading from an earlier version](#upgrading-from-an-earlier-version) before proceeding.
+:::caution version 8.8 required
+Camunda 8 upgrades must be performed sequentially. If your deployment is running a version **earlier than 8.8**, you must complete the required version-specific upgrades listed in [upgrading from an earlier version](#upgrading-from-an-earlier-version) before you can upgrade to 8.9.
+:::
 
 ## Prepare for upgrade
 
 Review required preparation steps and important changes before upgrading to Camunda 8.9.
 
-<p><a href="./prepare-for-upgrade" class="link-arrow">Prepare for upgrade</a></p>
+<p class="link-arrow">[Prepare for upgrade](prepare-for-upgrade.md)</p>
 
-## Upgrade methods
+## Upgrade guides
 
 Choose the upgrade guide that matches how your environment is deployed:
 
 <ZeebeGrid zeebe={overviewCards} />
 
-:::tip Dual-region Helm deployments
+:::info Dual-region Helm deployments
 If you are upgrading a dual-region Helm deployment, follow the standard Helm upgrade guide and then complete the additional dual-region steps.
 
-<p><a href="./helm/880-to-890-dual-region" class="link-arrow">Camunda 8.8 to 8.9 Dual-Region Upgrade</a></p>
+<p class="link-arrow">[Camunda 8.8 to 8.9 Dual-Region Upgrade](./helm/880-to-890-dual-region.md)</p>
 :::
 
 ## Docker Compose deployments
@@ -46,21 +64,19 @@ Docker Compose is supported for development and testing environments only.
 
 Camunda does not provide an automated upgrade process for Docker Compose deployments. To upgrade, manually update each component by following the component upgrade guide:
 
-<p><a href="./components/880-to-890" class="link-arrow">Component upgrade from 8.8 to 8.9</a></p>
+<p class="link-arrow">[Component upgrade from 8.8 to 8.9](./components/880-to-890.md)</p>
 
 For production environments, use Kubernetes with the official Camunda Helm chart or create a custom deployment process using Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
 
-## Component-specific upgrade guidance
+## Upgrade components
 
-Some upgrades require additional component-level steps depending on which components you use or how your environment is configured.
+Some upgrades require additional component-level steps depending on which components you use or how your environment is configured. Follow the upgrade guide for your deployment method, and refer to this guide for any component-specific changes or migrations required for your setup.
 
-Follow the upgrade guide for your deployment method, and refer to this guide for any component-specific changes or migrations required for your setup.
+<p class="link-arrow">[Component upgrade from 8.8 to 8.9](./components/880-to-890.md)</p>
 
-<p><a href="./components/880-to-890" class="link-arrow">Component upgrade from 8.8 to 8.9</a></p>
+## 8.9 release information
 
-## Release notes and changes in 8.9
-
-For details about new features, breaking changes, and deprecations in Camunda 8.9, see:
+Learn about new features, breaking changes, and deprecations in Camunda 8.9:
 
 - [What's new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md)
 - [8.9 Release announcements](/reference/announcements-release-notes/890/890-announcements.md)
@@ -68,11 +84,17 @@ For details about new features, breaking changes, and deprecations in Camunda 8.
 
 ## Upgrading from an earlier version
 
-Camunda 8 upgrades must be performed sequentially. Upgrade from the latest patch version of your current Camunda release to the latest patch version of the next release.
+**Camunda 8 upgrades must be performed sequentially.**
 
-For example, upgrade from 8.7 to 8.8 before upgrading to 8.9. Do not skip releases.
+- You must upgrade from the latest patch version of your current Camunda release to the latest patch version of the next release.
+- For example, you must upgrade from 8.7 to 8.8 before you can upgrade to 8.9.
+- **Do not skip releases**.
 
-Use the version-specific upgrade guides below to reach Camunda 8.8 before proceeding with the 8.9 upgrade.
+Use the following version-specific upgrade guides to upgrade sequentially until you reach Camunda 8.8 before you proceed with the 8.9 upgrade.
+
+:::note
+Each guide covers only the changes required for that specific version upgrade.
+:::
 
 ### Kubernetes with Helm
 
@@ -91,5 +113,3 @@ Use the version-specific upgrade guides below to reach Camunda 8.8 before procee
 - <a href="https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/840-to-850/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.4 to 8.5</a>
 - <a href="https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/830-to-840/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.3 to 8.4</a>
 - <a href="https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/820-to-830/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.2 to 8.3</a>
-
-Each guide covers only the changes required for that specific version upgrade.
