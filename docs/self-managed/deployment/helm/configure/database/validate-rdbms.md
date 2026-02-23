@@ -6,6 +6,14 @@ description: Verify that an Orchestration Cluster deployed via Helm can connect 
 
 Verify RDBMS connectivity, schema initialization, and exporter activity for Helm deployments.
 
+:::note Related pages
+
+- **[Configure RDBMS](rdbms.md)** - Configuration reference and Helm values.
+- **[JDBC driver management](rdbms-jdbc-drivers.md)** - Managing custom database drivers.
+- **[Schema management](rdbms-schema-management.md)** - Schema creation and lifecycle.
+- **[Troubleshooting](rdbms-troubleshooting.md)** - Common issues and diagnostic steps.
+  :::
+
 :::note
 8.9-alpha3 stabilizes application-side RDBMS behavior. Log lines and behavior may change in later alphas. This page documents current alpha3 patterns.
 :::

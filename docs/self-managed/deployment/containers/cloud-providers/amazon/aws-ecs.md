@@ -4,51 +4,63 @@ title: "Amazon ECS on AWS"
 description: "Learn how to install Camunda 8 on AWS ECS."
 ---
 
-This guide shows you how to install the [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster) on AWS Elastic Container Service (ECS) using Fargate and Aurora
-PostgreSQL. You deploy a Self-Managed Camunda 8 environment using AWS managed services and then verify that all required components and connections are working.
-
-This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) and Connectors for Camunda 8. Web Modeler, Optimize, and Console are currently not covered.
+This guide walks you through deploying the [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster) and Connectors on AWS Elastic Container Service (ECS) using Fargate and Aurora PostgreSQL, and verifying that all components are working.
 
 :::tip New to AWS ECS?
 If you are new to AWS ECS or Terraform, consider reviewing the [AWS ECS documentation](https://docs.aws.amazon.com/ecs/) and [Terraform documentation](https://developer.hashicorp.com/terraform/docs) before proceeding with this guide.
 :::
 
-The concepts described in this guide can be applied to other cloud providers; however, you are responsible for the implementation and maintenance, and compatibility or correct behavior is not guaranteed. Certain implementations like the node-id provider are currently limited to S3.
+## Prerequisites
 
-## Considerations
+- **AWS account** – An AWS account to provision resources with permissions for **ecs**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **rds** services.
+  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/example/policy.json).
+- **Terraform** – Infrastructure as code tool (v1.7 or later). [Install Terraform](https://developer.hashicorp.com/terraform/install).
+- **AWS CLI** – Command-line tool to manage AWS resources, used for `local-exec` to trigger the initial Aurora PostgreSQL user seeding. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+
+For the exact tool versions used during testing, refer to the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
+
+### Considerations
 
 :::warning Experimental release (8.9.0-alpha3)
 This guide is based on an experimental release. Content and results may change before the final 8.9.0 release.
 :::
 
+:::warning
 Running this guide incurs costs on your AWS account, primarily for ECS and Aurora. Use the AWS [pricing calculator](https://calculator.aws/#/) to estimate costs for your region.
+:::
 
 If you want a simpler setup, consider using [Camunda 8 SaaS](https://accounts.camunda.io/signup).
 
 - Unlike our other guides, which usually separate infrastructure setup from the deployment of Camunda 8, this is not the case with ECS. Since the infrastructure is largely managed by AWS, deploying Camunda 8 and provisioning the required AWS resources happens in a single step.
-- This work focuses on AWS ECS with Fargate but can work with managed instances for more predictable performance. You can find more information about how to migrate from Fargate to managed instances from the [AWS migration guide](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/migrate-fargate-to-managed-instances.html).
-- This work relies on a shared [multi-AZ replicated](https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html) EFS network disk
-  - Cost and performance may differ from a related Kubernetes setup with block storage
-  - The EFS volume is shared among all brokers to support the native ECS Service capabilities
+- This guide focuses on AWS ECS with Fargate but can work with managed instances for more predictable performance. You can find more information about how to migrate from Fargate to managed instances from the [AWS migration guide](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/migrate-fargate-to-managed-instances.html).
+- This guide relies on a shared [multi-AZ replicated](https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html) EFS network disk.
+  - Cost and performance may differ from a related Kubernetes setup with block storage.
+  - The EFS volume is shared among all brokers to support the native ECS Service capabilities.
 - AWS does not support block storage options in combination with ECS Services and Fargate. For a detailed overview, have a look at the [AWS documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
-- Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a Zeebe broker. Autoscaling may not have effects as the brokers have to be explicitly joined into the Zeebe Cluster or when removed result in partitions or data becoming inaccessible.
-- An extra developed node-id provider is integrated into Zeebe that assigns an available node-id based on Zeebe cluster information, whereas this is typically provided statically.
+- Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a [Zeebe broker](../../../../../components/zeebe/technical-concepts/architecture.md#brokers). Autoscaling may not have effects as the brokers have to be explicitly joined into the [Zeebe cluster](../../../../../components/zeebe/technical-concepts/clustering.md) or when removed result in partitions or data becoming inaccessible.
+- A node-id provider is integrated into Zeebe that assigns an available node-id based on Zeebe cluster information, instead of relying on a statically-configured node-id.
 - This guide focuses on Aurora PostgreSQL for the secondary datastorage as it is a newly supported offering by Camunda 8 and potentially more familiar for customers.
-  - You may still use Elasticsearch / OpenSearch but need to adjust the required configuration. More information about the configuration can be found in [our documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
+  - You may still use Elasticsearch or OpenSearch but need to adjust the required configuration. More information about the configuration can be found in [our documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
   - Examples for how to deploy AWS OpenSearch can be found in other existing reference architectures for AWS.
 
-## Outcome
+:::warning
+Reference architectures and examples provided in this guide are not turnkey modules. Camunda recommends cloning the repository and modifying it locally.
+
+You are responsible for operating and maintaining the infrastructure. Camunda updates the reference architecture over time, and changes may not be backward compatible. You can use these updates to upgrade your customized codebase as needed.
+:::
+
+### Outcome
 
 The result is a fully functioning Camunda Orchestration Cluster deployed in a high-availability setup using AWS ECS with Fargate and a managed Aurora PostgreSQL instance using IAM authentication. All ECS tasks share a single EFS volume dedicated to Camunda.
 
-### Architecture
+#### Architecture
 
 The architecture outlined below describes a standard Zeebe three-node deployment, distributed across three [availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) within a single AWS region. It includes a managed Aurora PostgreSQL instance deployed under the same conditions. This approach ensures high availability and redundancy in case of a zone failure.
 
 <!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ -->
 <!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder -->
 
-_Infrastructure diagram for a 3 Zeebe Broker ECS architecture (click the image to view the PDF version)_
+_Infrastructure diagram for the Orchestration Cluster ECS architecture (click the image to view the PDF version)_
 
 [![AWS ECS Architecture](./assets/architecture.jpg)](./assets/architecture.pdf)
 
@@ -67,7 +79,7 @@ After completing this guide, you will have:
     - (Optional) A [Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html) (NLB) to expose the gRPC endpoint of the Zeebe Gateway, if external applications need to connect.
 - [Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) to control network traffic to and from the ECS instances.
 - An [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) to route traffic between the VPC and the internet.
-- A [S3 bucket](https://aws.amazon.com/s3/) used by the Orchestration Cluster’s ECS-specific node-id provider.
+- An [S3 bucket](https://aws.amazon.com/s3/) used by the Orchestration Cluster’s ECS-specific node-id provider.
 - A versioning-enabled [S3 bucket](https://aws.amazon.com/s3/) for backups.
   - Use a separate bucket for backups. The node-id bucket has versioning disabled because frequent metadata changes would incur additional cost without any benefit.
 - [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) for application credentials and optional container registry credentials.
@@ -79,16 +91,7 @@ Both subnet types are distributed across three availability zones in a single AW
 
 You can also scale this setup to a single ECS task. In that case, a zone failure makes the environment unavailable.
 
-## Prerequisites
-
-- **AWS account** – An AWS account to provision resources with permissions for **ecs**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **rds** services.
-  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/example/policy.json).
-- **Terraform** – Infrastructure as code tool (v1.7 or later). [Install Terraform](https://developer.hashicorp.com/terraform/install).
-- **AWS CLI** – Command-line tool to manage AWS resources, used for `local-exec` to trigger the initial Aurora PostgreSQL user seeding. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-
-For the exact tool versions used during testing, refer to the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
-
-## 1. Configure AWS and initialize Terraform
+## Configure AWS and initialize Terraform
 
 :::note Terraform infrastructure example
 We do not recommend using the following Terraform-based infrastructure as a module, since we cannot guarantee compatibility.
@@ -198,7 +201,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/pr
 
 Terraform will now use the S3 bucket to manage the state file, ensuring remote and persistent storage.
 
-## 2. Terraform setup
+## Terraform setup
 
 The root workspace houses the overall implementation to keep things configurable and interchangeable as needed.
 
@@ -440,7 +443,7 @@ The Orchestration Cluster is stateful and overprovisioning will not help the dep
 
 For the Connectors task, it's kept at a maximum of `200%` and minimum of `50%` as the application is stateless and can therefore scale above the initial target during upgrades.
 
-## 3. Execution
+## Execution
 
 :::note Secret management
 
@@ -483,7 +486,7 @@ The Terraform flow is as follows:
 - Creation of the Orchestration Cluster and wait for it to be ready
 - Creation of the Connectors and wait for it to be ready
 
-## 4. Verify connectivity to Camunda 8
+## Verify connectivity to Camunda 8
 
 Using Terraform, you can obtain the HTTP endpoint of the Application Load Balancer and interact with Camunda through the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
