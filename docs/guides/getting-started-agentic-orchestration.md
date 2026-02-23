@@ -268,28 +268,18 @@ When you run the AI agent process:
 
 You can observe this dynamic behavior in real-time through Operate, where you'll see which tasks were activated and in what order.
 
-## Next steps
+## Step 4: Add your first tool
 
-Now that you’ve built your first Camunda AI agent, why not try customizing it further?
+Add a service task called **Get order status** inside the ad-hoc sub-process to expose a new tool to the AI agent.
 
-For example:
-
-- Add and configure more tools in the ad-hoc sub-process that the AI agent can use.
-- Change the provided system prompt to adjust the behavior of the AI agent.
-- Experiment with different model providers and configurations in the AI Agent connector.
-
-### Add a new tool (quick summary)
+Use this pattern:
 
 1. Add a BPMN activity inside the ad-hoc sub-process.
 1. Configure the task implementation (connector, service task, user task, DMN, and so on).
-1. Add a clear tool description and explicit input/output variables so the LLM can choose and call it correctly.
-1. Test with prompts in Operate/Tasklist and refine task descriptions and prompt instructions based on observed behavior.
+1. Add a clear tool name and description, plus explicit input/output variables so the LLM can choose and call it correctly.
+1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) for typed inputs and return `toolCallResult` in outputs.
 
-#### Practical example: [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) input and `toolCallResult` output
-
-Assume you add a service task called **Get order status** as a new tool in the ad-hoc sub-process.
-
-Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) in the tool input mapping so the LLM can provide structured inputs:
+For example, use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) in the tool input mapping so the LLM can provide structured inputs:
 
 ```feel
 = {
@@ -314,14 +304,16 @@ At runtime, each tool call contributes one `toolCallResult`, and the ad-hoc mult
 
 When adding your first tool, inspect the tasks already available to the agent in this blueprint and follow the same pattern for `fromAi()` inputs and `toolCallResult`/`toolCallResults` outputs.
 
-You can also:
+## Next steps
 
+Now that you’ve built your first Camunda AI agent, why not try customizing it further?
+
+For example:
+
+- Add and configure more tools in the ad-hoc sub-process that the AI agent can use.
+- Change the provided system prompt to adjust the behavior of the AI agent.
+- Experiment with different model providers and configurations in the AI Agent connector.
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
-- Understand why tool definitions are critical in [AI agents](/components/agentic-orchestration/ai-agents.md#why-tool-documentation-in-ad-hoc-sub-processes-matters).
-- Understand runtime responsibilities in [Design and architecture](/components/agentic-orchestration/design-architecture.md#how-execution-works-in-an-ai-agent).
-- Learn prompt interplay in the [AI Agent connector concepts](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#system-prompt-user-prompt-and-tool-descriptions).
-- Read the [Building Your First AI Agent in Camunda](https://camunda.com/blog/2025/02/building-ai-agent-camunda/) blog.
-- Explore other [AI blueprints](https://marketplace.camunda.com/en-US/listing?q=ai&cat=107793&locale=en-US) from Camunda marketplace.
 
 :::info Camunda Academy
 Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to model, deploy, and manage AI agents in your end-to-end processes.
