@@ -29,11 +29,13 @@ Configuration path: `camunda.cluster.global-listeners.user-task`
 Each listener entry can be configured with the following properties:
 
 | Property           | Required | Description                                                                                                                                                                                                                                                     |
-|:-------------------| :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :----------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`               | Yes      | User-provided unique identifier for the listener. This identifier is used to interact with the global listener through API                                                                                                                                      |
 | `event-types`      | Yes      | <p>List of user task event types that trigger the listener.</p><p>Supported values: `creating`, `assigning`, `updating`, `completing`, `canceling`.</p><p>The shorthand `all` value is also available if the listener should react to all lifecycle events.</p> |
 | `type`             | Yes      | <p>The name of the job type.</p><p>Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`.</p>                                                                                                   |
 | `retries`          | No       | Number of retries for the user task listener job. Defaults to `3` if not set.                                                                                                                                                                                   |
 | `after-non-global` | No       | Boolean indicating whether the listener should run after model-level listeners. Defaults to `false` (runs before model-level listeners).                                                                                                                        |
+| `priority`         | No       | The priority of the listener. Higher priority listeners are executed before lower priority ones. Defaults to `50` if not set.                                                                                                                                   |
 
 ### How the configuration is validated
 
