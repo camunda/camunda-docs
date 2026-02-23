@@ -398,42 +398,6 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Global User Task Listener",
-      items: [
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/create-global-user-task-listener",
-          label: "Create a global user task listener",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-global-user-task-listeners",
-          label: "Search global user task listeners",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-user-task-listener",
-          label: "Get a global user task listener",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-global-user-task-listener",
-          label: "Update a global user task listener",
-          className: "api-method put",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-global-user-task-listener",
-          label: "Delete a global user task listener",
-          className: "api-method delete",
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Group",
       items: [
         {
