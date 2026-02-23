@@ -106,7 +106,7 @@ Camunda components use different runtimes and configuration mechanisms. The Helm
 
 #### Spring Boot components
 
-**Applies to:** Identity, Connectors, Orchestration, WebModeler REST API
+**Applies to:** Identity, Connectors, Orchestration, Web Modeler REST API
 
 Spring Boot components support loading multiple configuration files via `spring.config.import`. Each `extraConfiguration` entry is mounted as an **individual file** in the container's config directory and imported by Spring at startup. Order is preserved by the array in the values.yaml. Spring applies files in import order, with later files overriding earlier ones.
 
