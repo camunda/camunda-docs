@@ -293,7 +293,7 @@ Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-func
 ```feel
 = {
     customerEmail: fromAi(toolCall.customerEmail, "Customer email used to find the order", "string"),
-    orderId: fromAi(toolCall.orderId, "Order identifier to look up", "string")
+    orderId: fromAi(toolCall.orderId, "Order identifier to look up", "integer")
 }
 ```
 
