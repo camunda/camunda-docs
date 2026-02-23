@@ -17,6 +17,7 @@ In Operate, you can audit all [`DEPLOYED_RESOURCES` and `USER_TASKS` operations]
 1. In the top navigation, click **Operations Log**.
 2. To sort the log, click a column header.
 3. To see the details of a particular operation, click the info icon at the end of the row.
+4. To filter the audit log, expand the **Filter** panel on the left side of the page.
 
 ## Audit process instance operations
 
