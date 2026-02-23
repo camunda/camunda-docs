@@ -270,9 +270,9 @@ You can observe this dynamic behavior in real-time through Operate, where you'll
 
 ## Step 4: Add your first tool
 
-Add a service task called **Get order status** inside the ad-hoc sub-process to expose a new tool to the AI agent.
+As an example, you could add a service task, for example **Get order status** inside the ad-hoc sub-process to expose a new tool to the AI agent.
 
-Use this pattern:
+In similar scenarios, teams typically follow a pattern like this:
 
 1. Add a BPMN activity inside the ad-hoc sub-process.
 1. Configure the task implementation (connector, service task, user task, DMN, and so on).
@@ -302,7 +302,7 @@ Then return the tool response by setting `toolCallResult` in your result express
 
 At runtime, each tool call contributes one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
 
-When adding your first tool, inspect the tasks already available to the agent in this blueprint and follow the same pattern for `fromAi()` inputs and `toolCallResult`/`toolCallResults` outputs.
+For your own tools, inspect the tasks already available to the agent in this blueprint and apply a similar pattern for `fromAi()` inputs and `toolCallResult`/`toolCallResults` outputs.
 
 ## Next steps
 

@@ -229,11 +229,12 @@ Depending on your working environment, test your agent by following the correspo
 <TabItem value="saas">
 
 1. Open [Web Modeler](/components/modeler/web-modeler/index.md).
-2. Select the cluster you want to deploy and play the process on.
-3. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
-4. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
-5. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md).
-6. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
+1. Select the [**Play**](/components/modeler/web-modeler/validation/play-your-process.md) tab.
+1. Select the cluster you want to deploy and play the process on.
+1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
+1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
+1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md).
+1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
 
 :::tip
 Instead of using **Play**, you can also test the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
@@ -269,9 +270,9 @@ You can observe this dynamic behavior in real-time through Operate, where you'll
 
 ## Step 4: Add your first tool
 
-Add a service task called **Get order status** inside the ad-hoc sub-process to expose a new tool to the AI agent.
+As an example, you could add a service task, for example **Get order status** inside the ad-hoc sub-process to expose a new tool to the AI agent.
 
-Use this pattern:
+In similar scenarios, teams typically follow a pattern like this:
 
 1. Add a BPMN activity inside the ad-hoc sub-process.
 1. Configure the task implementation (connector, service task, user task, DMN, and so on).
@@ -302,6 +303,7 @@ Then return the tool response by setting `toolCallResult` in your result express
 At runtime, each tool call contributes one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
 
 When adding your first tool, inspect the tasks already available to the agent in this blueprint and follow the same pattern for `fromAi()` inputs and `toolCallResult`/`toolCallResults` outputs.
+For your own tools, inspect the tasks already available to the agent in this blueprint and apply a similar pattern for `fromAi()` inputs and `toolCallResult`/`toolCallResults` outputs.
 
 ## Next steps
 
