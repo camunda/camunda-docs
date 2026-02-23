@@ -1852,6 +1852,7 @@ module.exports = {
             },
           ],
         },
+        "self-managed/concepts/audit-log",
         "self-managed/concepts/exporters",
         "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         {
