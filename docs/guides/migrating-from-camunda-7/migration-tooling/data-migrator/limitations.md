@@ -229,8 +229,8 @@ The History Data Migrator supports migration of Camunda Forms, but with the foll
 The History Data Migrator supports migration of DMN entities, but with the following limitations:
 
 - The incidents are migrated in `resolved` state. Operate does not visualize resolved incidents,
-  therefore incidents of migrated process instances will not be visible in Operate.
-  Audit data related to incidents can be observed by querying APIs.
+therefore incidents of migrated process instances will not be visible in Operate.
+Audit data related to incidents can be observed by querying APIs.
 - When there's a failing start timer in Camunda 7, the incident cannot be migrated (as there's no process instance history) and will be skipped.
 
 ## Camunda 8 history migration coverage
