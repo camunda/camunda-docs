@@ -551,7 +551,7 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI=https://login.microsoftonline.com
 
 #### Configure the post-logout redirect URL in the IdP
 
-To ensure users are redirected correctly after logout, configure a post-logout redirect URL in your IdP. The post-logout URL is the Camunda hostname plus `/post-logout`. 
+To ensure users are redirected correctly after logout, configure a post-logout redirect URL in your IdP. The post-logout URL is the Camunda hostname plus `/post-logout`.
 
 For example, if Identity is accessible at `http://localhost:8080`, configure the following post-logout redirect URL in your IdP:
 
