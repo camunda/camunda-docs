@@ -582,6 +582,7 @@ Unable to determine end-session endpoint for OIDC logout. Falling back to {baseL
 ```
 
 Ensure you either:
+
 - Configure the `issuer-uri` so Identity can retrieve the logout endpoint from the OIDC discovery document, or
 - Explicitly set the `endsession-endpoint-uri`.
 
