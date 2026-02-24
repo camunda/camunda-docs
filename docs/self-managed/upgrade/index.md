@@ -28,10 +28,6 @@ Get started by preparing your Self-Managed environment for upgrade to Camunda 8.
 </div>
 </div>
 
-:::note
-This section is a work in progress for Camunda 8.9 and will be updated as upgrade requirements are finalized.
-:::
-
 ## About
 
 Upgrade a Camunda 8 Self-Managed deployment from version 8.8 to 8.9. This guide applies to Self-Managed installations only and does not apply to Camunda SaaS.
