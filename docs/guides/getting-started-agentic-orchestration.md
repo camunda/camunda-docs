@@ -110,6 +110,14 @@ The example includes a form linked to the start event, allowing you to submit re
 
 <img src={AiAgentStartFormImg} alt="Example AI agent start form" className="img-800"/>
 
+:::tip Understand the decision model behind this example
+To make this agent reliable, treat each activity in the ad-hoc sub-process as a documented tool. Learn why this matters in [AI agents: Why tool documentation in ad-hoc sub-processes matters](/components/agentic-orchestration/ai-agents.md#why-tool-documentation-in-ad-hoc-sub-processes-matters).
+
+For a runtime view of what the LLM decides vs. what Camunda orchestrates, see [Design and architecture: How execution works in an AI agent](/components/agentic-orchestration/design-architecture.md#how-execution-works-in-an-ai-agent).
+
+For prompt configuration details, see [AI Agent connector: System prompt, user prompt, and tool descriptions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#system-prompt-user-prompt-and-tool-descriptions).
+:::
+
 ## Step 2: Configure the AI Agent connector
 
 Depending on your model choice, configure the AI Agent connector accordingly.
@@ -251,30 +259,65 @@ Instead of using **Play**, you can also test the process within the **Implement*
 
 When you run the AI agent process:
 
-1. The AI agent receives your prompt and analyzes it.
-1. It determines which tools from the ad-hoc subprocess should be activated.
-1. Tasks can execute in parallel or sequentially, depending on the agent's decisions.
+1. The AI agent receives your prompt and analyzes it together with the configured system prompt and tool descriptions.
+1. The LLM determines which tools from the ad-hoc subprocess should be activated.
+1. Camunda executes the selected BPMN activities.
+1. Tasks can execute in parallel or sequentially, depending on the agent's decisions and process state.
 1. Process variables are updated as each tool completes its execution.
 1. The agent may iterate through multiple tool calls to handle complex requests.
 
 You can observe this dynamic behavior in real-time through Operate, where you'll see which tasks were activated and in what order.
 
+## Step 4: Add your first tool
+
+You can customize your AI agent by adding tools. To do so, you typically follow these steps:
+
+1. Add a BPMN activity inside the ad-hoc sub-process.
+1. Configure the task implementation, including the connector, service task, user task, and DMN.
+1. Add a precise tool name and description, and define explicit input and output variables so the LLM can select and call the tool correctly.
+1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) for typed inputs, and return `toolCallResult` in the outputs.
+
+As an example, you will now add a service task called **Get order status** inside the AI Agent ad-hoc sub-process.
+
+1. Use `fromAi()` in the tool's input mapping so the LLM can provide structured inputs:
+
+```feel
+= {
+    customerEmail: fromAi(toolCall.customerEmail, "Customer email used to find the order", "string"),
+    orderId: fromAi(toolCall.orderId, "Order identifier to look up", "integer")
+}
+```
+
+2. Return the tool response by setting `toolCallResult` in the result expression or output mapping:
+
+```feel
+= {
+    toolCallResult: {
+        orderId: orderId,
+        status: orderStatus,
+        message: "Order status retrieved successfully"
+    }
+}
+```
+
+At runtime, each tool call produces one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
+
+For your own tools, review the tasks already available to the agent in this blueprint and apply a similar pattern for `fromAi()` inputs and `toolCallResult` and `toolCallResults` outputs.
+
 ## Next steps
 
-Now that you’ve built your first Camunda AI agent, why not try customizing it further?
+Now that you’ve built your first Camunda AI agent, why not tailor it further?
 
 For example:
 
 - Add and configure more tools in the ad-hoc sub-process that the AI agent can use.
-- Change the provided system prompt to adjust the behavior of the AI agent.
+- Update the system prompt to adjust the AI agent's behavior.
 - Experiment with different model providers and configurations in the AI Agent connector.
 
 You can also:
 
 - [Monitor your AI agent with Operate](/components/agentic-orchestration/monitor-agents-operate.md).
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
-- Read the [Building Your First AI Agent in Camunda](https://camunda.com/blog/2025/02/building-ai-agent-camunda/) blog.
-- Explore other [AI blueprints](https://marketplace.camunda.com/en-US/listing?q=ai&cat=107793&locale=en-US) from Camunda marketplace.
 
 :::info Camunda Academy
 Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to model, deploy, and manage AI agents in your end-to-end processes.
