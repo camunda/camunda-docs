@@ -243,6 +243,18 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 
 <p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
 
+### Helm chart deployment
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm chart">Helm chart</span></div>
+
+#### Default REST port unified to 8080
+
+The Orchestration component's default HTTP port in the Helm chart has changed from 8090 to 8080 (`orchestration.service.httpPort`), aligning with the Orchestration Cluster's default configuration.
+
+#### Authorization initialization via Helm
+
+You can now initialize authorization rules directly through `values.yaml`, reducing manual post-installation setup for access control configuration.
+
 ## 8.9.0-alpha3
 
 | Release date    | Changelog(s)                                                                                                                                                                               |
@@ -449,6 +461,12 @@ With this update, administrators can:
 - Enable advanced authentication and custom JDBC drivers.
 
 This allows enterprises to run Camunda 8 on familiar, enterprise-managed RDBMS infrastructure aligned with existing security, backup, and compliance requirements.
+
+#### No default secondary storage in Helm
+
+With RDBMS support, the Helm chart no longer defaults to Elasticsearch as secondary storage. You must now explicitly set `orchestration.data.secondaryStorage.type` to `elasticsearch`, `opensearch`, or `rdbms`. This also introduces `global.noSecondaryStorage` for engine-only deployments without any secondary storage.
+
+<p class="link-arrow">[Configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage/)</p>
 
 ## 8.9.0-alpha2
 
