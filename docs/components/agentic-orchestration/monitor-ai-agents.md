@@ -1,15 +1,15 @@
 ---
-id: monitor-agents-operate
-title: Monitor your AI agents with Operate
+id: monitor-ai-agents
+title: Monitor your AI agents
 sidebar_label: Monitor your AI agents
-description: "Monitor and troubleshoot your AI agent process instances in Camunda 8 using Operate."
+description: "Monitor and troubleshoot your AI agent process instances in Camunda 8 using Operate and Optimize."
 keywords: ["agentic ai", "AI agents"]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Monitor and troubleshoot your AI agent process instances in Camunda 8 using Operate.
+Monitor and troubleshoot your AI agent process instances in Camunda 8 using Operate and Optimize.
 
 ## About
 
@@ -18,6 +18,7 @@ In this guide, you will:
 - Inspect an AI agent process instance in Operate.
 - Understand agent’s tool usage and metadata such as tool call inputs and results.
 - Analyze the agent context and how it is stored.
+- Examine process data in Optimize.
 
 :::note
 Operate enables inspection of execution paths, tool usage, and agent metadata. However, certain runtime artifacts, such as document storage contents, may require additional configuration.
@@ -186,9 +187,21 @@ See [Memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent
 
 :::
 
-## Step 7: Review the results
+## Step 7: Examine process data in Optimize
 
-In the **User Feedback** element, you will see the execution count in green. This means the process instance execution is stopped there and waiting for action.
+By leveraging data collected during process execution, you can use [Optimize](/components/optimize/what-is-optimize.md) to explore reports and process dashboards, and identify areas for improvement in your AI agent processes.
+
+1. Open Optimize.
+2. Go to the **Dashboards** tab.
+3. Select your AI agent process, `AI Agent Chat With Tools`.
+4. Verify that Optimize shows data for the recently executed process instance in the **Business Operations** section, including the running process model diagram and other statistics below.
+5. Explore other metrics provided in the **Business Reporting** and **Process Improvement** sections.
+
+See [Getting started](/components/optimize/improve-processes-with-optimize.md) for more details on what you can do with Optimize for business intelligence.
+
+## Step 8: Review the results
+
+Go back to Operate. In the **User Feedback** element, you will see the execution count in green. This means the process instance execution is stopped there and waiting for action.
 
 In this case, the required action is to provide feedback on the agent results. To do so:
 
