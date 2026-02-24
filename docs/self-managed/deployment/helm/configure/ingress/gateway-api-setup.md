@@ -33,18 +33,18 @@ In testing, we use the [NGINX Gateway Fabric](https://github.com/nginx/nginx-gat
 
 ## Configure the Helm chart
 
-| Parameter                              | Type    | Default | Description                                                                                                                  |
-| -------------------------------------- | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `global.gateway.enabled`               | boolean | `false` | Enable creating resources for the Kubernetes Gateway API.                                                                    |
-| `global.gateway.createGatewayResource` | boolean | `true`  | Create the Gateway CustomResource. Do not enable if you already have a Gateway resource.                                     |
-| `global.gateway.external`              | boolean | `true`  | Set this to true if you are using the Gateway API but want to create the resources yourself.                                 |
-| `global.gateway.className`             | string  | `""`    | Name of the GatewayClass resource that defines which Gateway controller operates on your Gateway and HTTPRoute resources.    |
-| `global.gateway.labels`                | map     | `{}`    | Labels to add to the Gateway and HTTPRoute resources.                                                                        |
-| `global.gateway.annotations`           | map     | `{}`    | Annotations to add to the Gateway and HTTPRoute resources.                                                                   |
-| `global.gateway.hostname`              | string  | `""`    | The external-facing URL hostname where Camunda will be installed.                                                            |
-| `global.gateway.tls.enabled`           | boolean | `false` | Enable TLS.                                                                                                                  |
-| `global.gateway.tls.secretName`        | string  | `""`    | Name of the Kubernetes Secret resource containing a TLS cert                                                                 |
-| `global.gateway.controllerNamespace`   | string  | `""`    | The namespace where the Gateway controller is installed.                                                                     |
+| Parameter                              | Type    | Default | Description                                                                                                               |
+| -------------------------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `global.gateway.enabled`               | boolean | `false` | Enable creating resources for the Kubernetes Gateway API.                                                                 |
+| `global.gateway.createGatewayResource` | boolean | `true`  | Create the Gateway CustomResource. Do not enable if you already have a Gateway resource.                                  |
+| `global.gateway.external`              | boolean | `true`  | Set this to true if you are using the Gateway API but want to create the resources yourself.                              |
+| `global.gateway.className`             | string  | `""`    | Name of the GatewayClass resource that defines which Gateway controller operates on your Gateway and HTTPRoute resources. |
+| `global.gateway.labels`                | map     | `{}`    | Labels to add to the Gateway and HTTPRoute resources.                                                                     |
+| `global.gateway.annotations`           | map     | `{}`    | Annotations to add to the Gateway and HTTPRoute resources.                                                                |
+| `global.gateway.hostname`              | string  | `""`    | The external-facing URL hostname where Camunda will be installed.                                                         |
+| `global.gateway.tls.enabled`           | boolean | `false` | Enable TLS.                                                                                                               |
+| `global.gateway.tls.secretName`        | string  | `""`    | Name of the Kubernetes Secret resource containing a TLS cert                                                              |
+| `global.gateway.controllerNamespace`   | string  | `""`    | The namespace where the Gateway controller is installed.                                                                  |
 
 ## Example configuration
 
