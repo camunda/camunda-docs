@@ -49,14 +49,16 @@ To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using
 ### Supported models
 
 The AI Agent connector makes it easy to integrate LLMs into your process workflows, with out-of-the-box support for popular model providers such as Anthropic and Amazon Bedrock. It can also connect to any additional LLM that exposes an OpenAI-compatible API.
+If you're using Camunda 8 SaaS, you can also use [EasyLLM](/components/agentic-orchestration/easy-llm.md) to run the model without additional LLM provider setup.
 See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for more details.
 
-In this guide, you can try two use cases:
+In this guide, you can try three use cases:
 
-| Setup | Model provider | Model used      | Prerequisites                                                                                                                                                                                                                                                                                                                                                              |
-| :---- | :------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Cloud | AWS Bedrock    | Claude Sonnet 4 | <p><ul><li> An AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</li><li><p> Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for details.</p></li></ul></p> |
-| Local | Ollama         | GPT-OSS:20b     | <p><ul><li> [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.</li><li><p> Ollama and GPT-OSS:20b installed. See [Set up Ollama](#set-up-ollama) for details.</p></li></ul></p>                                                                                                                                                      |
+| Setup                    | Model provider | Model used                                      | Prerequisites                                                                                                                                                                                                                                                                                                                                                              |
+| :----------------------- | :------------- | :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SaaS                     | EasyLLM        | Camunda-managed model (for example, Claude 3.7) | <p><ul><li> Camunda 8 SaaS trial or enterprise organization.</li><li><p> EasyLLM available in your organization. No additional LLM provider credentials are required to run this guide.</p></li></ul></p>                                                                                                                                                                  |
+| Cloud (customer-managed) | AWS Bedrock    | Claude Sonnet 4                                 | <p><ul><li> An AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</li><li><p> Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for details.</p></li></ul></p> |
+| Local                    | Ollama         | GPT-OSS:20b                                     | <p><ul><li> [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.</li><li><p> Ollama and GPT-OSS:20b installed. See [Set up Ollama](#set-up-ollama) for details.</p></li></ul></p>                                                                                                                                                      |
 
 :::important
 Running LLMs locally requires substantial disk space and memory. GPT-OSS:20b requires more than 20GB of RAM to function and 14GB of free disk space to download.
@@ -121,12 +123,28 @@ For prompt configuration details, see [AI Agent connector: System prompt, user p
 ## Step 2: Configure the AI Agent connector
 
 Depending on your model choice, configure the AI Agent connector accordingly.
+If you're using SaaS with EasyLLM, you can typically run the blueprint without additional LLM setup.
 
-<Tabs groupId="setup" defaultValue="aws" values={
+<Tabs groupId="setup" defaultValue="easyllm" values={
 [
+{ label: 'EasyLLM (SaaS)', value: 'easyllm', },
 { label: 'AWS Bedrock', value: 'aws', },
 { label: 'Ollama', value: 'local', },
 ]}>
+
+<TabItem value="easyllm">
+
+Use Camunda-managed EasyLLM in SaaS with minimal setup.
+
+1. Use the SaaS blueprint from Step 1 and open it in Web Modeler.
+1. Verify your organization has AI features enabled (EasyLLM is enabled automatically when AI features are enabled).
+1. Keep the connector's default model settings from the blueprint, then deploy and run.
+
+Most AI blueprints are already set up to use EasyLLM in SaaS. You only need to configure a customer-managed provider if you want custom billing, quotas, or provider control.
+
+For details, see [Get started with EasyLLM](/components/agentic-orchestration/easy-llm.md).
+
+</TabItem>
 
 <TabItem value="aws">
 
