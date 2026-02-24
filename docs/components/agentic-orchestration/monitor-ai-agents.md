@@ -55,8 +55,9 @@ At this point, you should see the process progressing through your model.
 
 With Operate, you can track the agent activity and see which tool tasks are called.
 
-1. To show how many times each BPMN element is triggered, select **Execution count**.
-   For this particular prompt example, you can see: - The AI Agent connector was triggered once. - Within it, the agent executed the **Fetch URL** tool. This aligns with your prompt example of extracting information from a website.
+1. To show how many times each BPMN element is triggered, select **Execution count**. For this particular prompt example, you can see:
+   - The AI Agent connector was triggered once.
+   - Within it, the agent executed the **Fetch URL** tool. This aligns with your prompt example of extracting information from a website.
 
 2. Select the **Fetch URL** tool element:
    - In the bottom-left pane, you can see where the element belongs in the execution tree.
@@ -73,13 +74,13 @@ Each tool execution produces an inner instance where you can find:
 To see the **Fetch URL** tool input and results:
 
 1. In the execution tree, select the **AI_Agent#innerInstance** parent element of the **Fetch URL** tool. You will see:
-   - The **toolCall** variable (the _input_). In its value field, you can see the URL you asked the agent to fetch information from.
-   - The **toolCallResult** variable (the _results_). See [Tool call responses](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-call-responses) for more details.
+   - The `toolCall` variable (the _input_). In its value field, you can see the URL you asked the agent to fetch information from.
+   - The `toolCallResult` variable (the _results_). See [Tool call responses](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-call-responses) for more details.
 
-2. To better inspect the results, click the pencil icon to enter edit mode for **toolCallResult**.
-3. Click the two-squares icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value. The result is a reference to a document where the actual output is stored. You will learn more about this in [Step 6](#step-6-understand-how-agent-memory-is-stored).
+2. To better inspect the results, click the pencil icon to enter edit mode for `toolCallResult`.
+3. Click the two-squares icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value. The result is a reference to a document where the actual output is stored (you will learn more about this in [Step 6](#step-6-understand-how-agent-memory-is-stored)).
 
-Here's the **toolCallResult** value:
+Here's the `toolCallResult` value:
 
 ```json
 {
@@ -105,7 +106,7 @@ Within the AI Agent connector, you can examine the agent context.
 To view it:
 
 1. Select the **AI Agent** element in the execution tree.
-2. To better inspect the value, click the pencil icon to enter edit mode for the **agentContext** variable.
+2. To better inspect the value, click the pencil icon to enter edit mode for the `agentContext` variable.
 3. Click the two-squares icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value.
 
 In the JSON payload, you can find information about:
@@ -189,7 +190,7 @@ By leveraging data collected during process execution, you can use [Optimize](/c
 
 1. Open Optimize.
 2. Go to the **Dashboards** tab.
-3. Select your AI agent process, `AI Agent Chat With Tools`.
+3. Select your AI agent process, **AI Agent Chat With Tools**.
 4. Verify that Optimize shows data for the recently executed process instance in the **Business Operations** section, including the running process model diagram and other statistics below.
 5. Explore other metrics provided in the **Business Reporting** and **Process Improvement** sections.
 
@@ -203,7 +204,7 @@ In this case, the required action is to provide feedback on the agent results. T
 
 1. Select the **User Feedback** element.
 2. Open [Tasklist](/components/tasklist/introduction-to-tasklist.md).
-3. Select the User Feedback task and assign to yourself by clicking **Assign to me**.
+3. Select the user feedback task and assign to yourself by clicking **Assign to me**.
 4. Analyze the result. You will see an overview of the website URL requested in the prompt.
 5. You can follow up with more prompts to continue testing your AI agent.
 6. Select the **Are you satisfied with the result?** checkbox when you want to finish the process, then click **Complete task**.
@@ -211,7 +212,7 @@ In this case, the required action is to provide feedback on the agent results. T
 
 ## Next steps
 
-Now that you know how to monitor your AI agents with Operate, you can:
+Now that you know how to monitor your AI agents, you can:
 
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 - Explore other [AI agent model blueprints](https://marketplace.camunda.com/en-US/listing?q=ai&cat=107793&locale=en-US) from Camunda marketplace.
