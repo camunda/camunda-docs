@@ -261,6 +261,7 @@ module.exports = {
             id: "components/agentic-orchestration/agentic-orchestration-overview",
           },
           items: [
+            "components/agentic-orchestration/easy-llm",
             "components/agentic-orchestration/ai-agents",
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/monitor-ai-agents",
