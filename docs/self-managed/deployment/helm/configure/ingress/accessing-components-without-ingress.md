@@ -64,7 +64,6 @@ kubectl port-forward svc/camunda-console 8087:80
 kubectl port-forward svc/keycloak-service 18080:18080
 ```
 
-
 Finally, you can access each app pointing your browser at:
 
 - Orcestration: [http://localhost:8080](http://localhost:8080)
