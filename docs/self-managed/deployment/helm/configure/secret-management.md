@@ -60,6 +60,7 @@ These secrets are used by Camunda applications and external integrations. Config
 | **SMTP Password**                         | `webModeler.restapi.mail.secret`                    | External | SMTP credentials for sending email notifications                         |
 | **External Elasticsearch Auth**           | `global.elasticsearch.auth.secret`                  | External | Password for external Elasticsearch authentication (basic auth)          |
 | **External OpenSearch Auth**              | `global.opensearch.auth.secret`                     | External | Password for external OpenSearch authentication (basic auth)             |
+| **RDBMS Auth**                            | `orchestration.data.secondaryStorage.rdbms.secret`  | External | Password for external RDBMS authentication (basic auth)                  |
 
 ### Secrets using Bitnami subchart patterns
 
