@@ -62,11 +62,12 @@ These secrets are used by Camunda applications and external integrations. Config
 | **External OpenSearch Auth**              | `global.opensearch.auth.secret`                     | External | Password for external OpenSearch authentication (basic auth)             |
 | **RDBMS Auth**                            | `orchestration.data.secondaryStorage.rdbms.secret`  | External | Password for external RDBMS authentication (basic auth)                  |
 | **External Elasticsearch Auth (deprecated)**    | `global.elasticsearch.auth.secret`                         | External   | Password for external Elasticsearch authentication (basic auth)          |
-| **External Elasticsearch Auth (Orchestration)** | `orchestration.data.secondaryStorage.elasticsearch.secret` | External   | Password for external Elasticsearch authentication (basic auth)             |
+| **External Elasticsearch Auth (Orchestration)** | `orchestration.data.secondaryStorage.elasticsearch.secret` | External   | Password for external Elasticsearch authentication (basic auth)          |
 | **External OpenSearch Auth (deprecated)**       | `global.opensearch.auth.secret`                            | External   | Password for external OpenSearch authentication (basic auth)             |
 | **External OpenSearch Auth (Orchestration)**    | `orchestration.data.secondaryStorage.opensearch.secret`    | External   | Password for external OpenSearch authentication (basic auth)             |
-| **External Elasticsearch Auth (Optimize)**      | `optimize.database.elasticsearch.auth.secret`              | External   | Password for external Elasticsearch authentication (basic auth)             |
+| **External Elasticsearch Auth (Optimize)**      | `optimize.database.elasticsearch.auth.secret`              | External   | Password for external Elasticsearch authentication (basic auth)          |
 | **External OpenSearch Auth (Optimize)**         | `optimize.database.opensearch.auth.secret`                 | External   | Password for external OpenSearch authentication (basic auth)             |
+| **RDBMS Auth (Orchestration)**                  | `orchestration.data.secondaryStorage.rdbms.secret`         | External   | Password for external RDBMS authentication                               |
 
 ### Secrets using Bitnami subchart patterns
 
@@ -416,6 +417,9 @@ stringData:
   # Only if connecting to opensearch
   orchestration-opensearch-password: "${ORCHESTRATION_OPENSEARCH_SECRET}"
   optimize-opensearch-password: "${OPTIMIZE_OPENSEARCH_SECRET}"
+
+  # Only if connecting to an RDBMS
+  orchestration-rdbms-password: "${ORCHESTRATION_RDBMS_SECRET}"
 EOF
 ```
 
@@ -476,6 +480,10 @@ connectors:
 orchestration:
   data:
     secondaryStorage:
+      rdbms:
+        secret:
+          existingSecret: "camunda-credentials"
+          existingSecretKey: "orchestration-rdbms-password"
       elasticsearch:
         secret:
           existingSecret: "camunda-credentials"
