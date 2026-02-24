@@ -45,34 +45,34 @@ The `source` property only distinguishes how the listener was defined, as explai
 For a given event on a task instance:
 
 - Global listeners run in the order defined by the `priority` property of each listener.
-  - listeners with a higher priority are executed first.
-  - listeners with the same priority are sorted by their `id` in lexicographical order to ensure a deterministic execution order.
+  - Listeners with a higher priority are executed first.
+  - Listeners with the same priority are sorted by their `id` in lexicographical order to ensure a deterministic execution order.
 - Model-level listeners run next, in the order defined in the BPMN model.
-- Global listeners marked with `after-non-global: true` run after model-level listeners.
+- Global listeners marked with `after-non-global: true` (Unified Configuration) or `afterNonGlobal: true` (API) run after model-level listeners.
 
 ## Configure global user task listeners
 
 You can configure global user task listeners at the cluster level:
 
-- [through the Unified Configuration](#configure-through-unified-configuration).
-- [via the Orchestration Cluster API](#configure-via-orchestration-cluster-api).
-- using the Admin UI, which is based on the Orchestration Cluster API.
+- [Configure through Unified Configuration](#configure-through-unified-configuration).
+- [Configure via the Orchestration Cluster API](#configure-via-orchestration-cluster-api).
+- [Configure via the Admin UI](#configure-via-admin-ui).
 
-You should use the Unified Configuration if:
+Use the Unified Configuration if:
 
-- you want to define a static set of global listeners that are always active in the cluster.
-- you want to use versioning tools to keep track of configuration changes.
+- You want to define a static set of global listeners that are always active in the cluster.
+- You want to use versioning tools to keep track of configuration changes.
 
-You should use the Orchestration Cluster API if:
+Use the Orchestration Cluster API if:
 
-- you want to dynamically manage listeners without restarting the cluster.
-- you want to manage permissions for who can create, update, or delete global listeners through API access control.
+- You want to dynamically manage listeners without restarting the cluster.
+- You want to manage permissions for who can create, update, or delete global listeners through API access control.
 
 The two ways of configuring global listeners can be used at the same time, however it is important to be aware of the behaviour after a cluster restart:
 
-- all listeners defined through the Unified Configuration are recreated after a restart, even if they were deleted through the API before the restart.
-- listeners defined through the API are not affected by restarts, so they remain active in addition to the listeners defined through the Unified Configuration.
-- if an `id` conflict occurs between a listener defined through the Unified Configuration and another defined through the API, the listener defined through the Unified Configuration takes precedence and completely replaces the API-defined one.
+- All listeners defined through the Unified Configuration are recreated after a restart, even if they were deleted through the API before the restart.
+- Listeners defined through the API are not affected by restarts, so they remain active in addition to the listeners defined through the Unified Configuration.
+- If an `id` conflict occurs between a listener defined through the Unified Configuration and another defined through the API, the listener defined through the Unified Configuration takes precedence and completely replaces the API-defined one.
 
 ### Configure through Unified Configuration
 
@@ -156,15 +156,15 @@ The changes to the global listeners take effect immediately after the API call, 
 
 ### Configure via Admin UI
 
-You can visually configure global listeners through the Admin UI, which provides a user-friendly interface to manage the listeners in the _Global Task Listeners_ tab.
+You can visually configure global listeners through the Admin UI, which provides a user-friendly interface to manage the listeners in the **Global Task Listeners** tab.
 
-You can update, and delete global listeners through the Admin UI without needing to interact directly with the API or restart the cluster.
+You can update and delete global listeners through the Admin UI without needing to interact directly with the API or restart the cluster.
 
 The Admin UI uses the Orchestration Cluster API to interact with the global user task listeners configuration, so the exact same considerations apply.
 
 #### Known limitations
 
-The list of listeners shown in the Admin UI is retrieved from the data stored in the secondary storage and it is affected by its data availability times, so changes to the configuration could not be immediately visible in the UI.
+The Admin UI retrieves the listener list from secondary storage. Because secondary storage is eventually consistent, changes might not appear immediately.
 
 ## Supported features
 
@@ -189,7 +189,7 @@ The [same limitations as model-level user task listeners](/components/concepts/u
 In addition to the above:
 
 - **No tenant-specific configuration**: Configuration is cluster-wide, not per tenant. Payloads include `tenantId` for downstream handling.
-- **Restart required**: When configuring listeners through the Unified Configuration, the configuration changes take effect only after a cluster restart. This limitation does not apply when using the Orchestration Cluster API to manage the listeners.
+- **Restart required**: Changes made through Unified Configuration take effect only after a cluster restart. This limitation does not apply when you manage listeners through the Orchestration Cluster API.
 
 ## See also
 
