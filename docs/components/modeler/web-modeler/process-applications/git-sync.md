@@ -381,10 +381,11 @@ Refer to [Configuration of the restapi component](../../../../self-managed/compo
 
 ## Troubleshooting
 
-### File names
+### File and folder names
 
-- Duplicate file names are not allowed for the same file type.
-- Characters with special meaning to Git (for example, `/`), or characters disallowed by Git, are not allowed in either branch or file names.
+- Duplicate file names of the same file type are not allowed within the same folder.
+- Duplicate folder names are not allowed within the same parent folder.
+- Characters with special meaning to Git (for example, `/`), or characters disallowed by Git, are not allowed in either branch, file or folder names.
 
 ### File extensions
 
