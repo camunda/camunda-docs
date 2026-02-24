@@ -8,6 +8,8 @@ description: "Deploy Camunda 8 Self-Managed on a local Kubernetes cluster using 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+import IdentitySecret from './\_partials/\_identity-secret.md'
+
 With this guide, you'll deploy Camunda 8 Self-Managed to a local Kubernetes cluster using [kind (Kubernetes in Docker)](https://kind.sigs.k8s.io/). The setup is optimized for learning, development, and testing, with reduced resource requirements suitable for a personal machine.
 
 While this guide uses kind, the same concepts apply to other local Kubernetes tools, like [K3s](https://k3s.io/), [minikube](https://minikube.sigs.k8s.io/), or [MicroK8s](https://microk8s.io/).
@@ -241,6 +243,8 @@ CAMUNDA_MODE=domain ./procedure/operators-deploy.sh
 
 This script installs each operator and its custom resources, then waits for all instances to be ready.
 
+<IdentitySecret />
+
 ### Deploy Camunda 8
 
 Deploy Camunda 8 with the domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based) to connect Camunda to the external Elasticsearch, PostgreSQL, and Keycloak instances:
@@ -316,6 +320,8 @@ Alternatively, you can run `make hosts.add-keycloak` to add this entry automatic
 After adding this entry and deploying Camunda 8 in the next step, you'll be able to reach Keycloak at `http://keycloak-service:18080/auth`.
 
 **Why port `18080`?** The Keycloak instance is configured to listen on port `18080` (via `httpPort` in the operator CR) to avoid conflicts with the Zeebe Gateway HTTP endpoint, which uses port `8080` locally.
+
+<IdentitySecret />
 
 ### Deploy Camunda 8
 
