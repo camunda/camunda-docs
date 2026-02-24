@@ -12,6 +12,13 @@ export const getStartedCards = [
     image: IconAoImg,
     description: "Get started by building and running your first AI agent.",
   },
+  {
+    link: "../easy-llm/",
+    title: "Get started with EasyLLM",
+    image: IconAoImg,
+    description:
+      "Get started with EasyLLM to run AI Agents quickly in Camunda SaaS.",
+  },
 ];
 
 // Fundamentals cards on introduction page
