@@ -5,7 +5,7 @@ title: Enable additional Camunda components
 description: Enable optional components like Management Identity, Web Modeler, Console, and Optimize in the Camunda Helm chart.
 ---
 
-Starting with Camunda 8.8, the Helm chart reflects a new architecture where Zeebe, Zeebe Gateway, Operate, and Tasklist are consolidated into a single [Orchestration Cluster](/reference/glossary.md#orchestration-cluster). As a result, the default deployment includes only the Orchestration Cluster, and Connectors. This page explains how to enable additional components you may need.
+Starting with Camunda 8.8, the Helm chart reflects a new architecture where Zeebe, Zeebe Gateway, Operate, and Tasklist are consolidated into a single [Orchestration Cluster](/reference/glossary.md#orchestration-cluster). As a result, the default deployment includes only the Orchestration Cluster and Connectors. This page explains how to enable additional components you may need.
 
 ## Default vs. additional components
 

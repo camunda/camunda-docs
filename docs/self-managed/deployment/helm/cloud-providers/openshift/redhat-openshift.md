@@ -24,7 +24,7 @@ Deploying Camunda 8 on Red Hat OpenShift is supported using Helm, given the appr
 
 However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/deployment/helm/install/quick-install.md).
 
-Additional informational and high-level overview based on Kubernetes as upstream project is available on our [Kubernetes deployment reference](/self-managed/reference-architecture/kubernetes.md).
+Additional information and a high-level overview of Kubernetes as the upstream project is available on our [Kubernetes deployment reference](/self-managed/reference-architecture/kubernetes.md).
 
 ## Requirements
 
@@ -36,7 +36,7 @@ Additional informational and high-level overview based on Kubernetes as upstream
 - [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
   - Ensure at least **3 Elastic IPs** (one per availability zone).
   - Verify quotas for **VPCs, EC2 instances, and storage**.
-  - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
+  - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)); costs apply only to resources used.
 - A namespace to host the Camunda Platform.
 - Permissions to install Kubernetes operators (cluster-admin or equivalent) for deploying the infrastructure services (Elasticsearch, PostgreSQL, Keycloak). These operators can also be installed via the [OpenShift OperatorHub](https://docs.openshift.com/container-platform/latest/operators/understanding/olm-understanding-operatorhub.html), but this guide installs them directly from source for full control over versions and configuration.
 
@@ -200,44 +200,46 @@ This will add the necessary annotation to [enable HTTP/2 for Ingress in your Ope
 Additionally, the Zeebe Gateway should be configured to use an encrypted connection with TLS. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encryption or pass-through routes, and not for edge-terminated or insecure routes.
 
 1. **Zeebe cluster:** two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway are required, one for the **service** and the other one for the **route**:
-   - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`. This certificate is also use in the other components such as Operate, Tasklist.
 
-     In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
+- The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`. This certificate is also used in the other components such as Operate, Tasklist.
 
-     Another option is [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
+  In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
+
+  Another option is [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
 
    <details>
      <summary>PKCS #8, PKCS #1 syntax</summary>
 
-   > PKCS #1 private key encoding. PKCS #1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS #8.
+> PKCS #1 private key encoding. PKCS #1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS #8.
 
-   > PKCS #8 private key encoding. PKCS #8 produces a PEM block with a static header and both the private key algorithm and the private key in the body. A key that uses this encoding can be recognised by its BEGIN PRIVATE KEY header.
+> PKCS #8 private key encoding. PKCS #8 produces a PEM block with a static header and both the private key algorithm and the private key in the body. A key that uses this encoding can be recognised by its BEGIN PRIVATE KEY header.
 
-   [PKCS #1, PKCS #8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
+[PKCS #1, PKCS #8 syntax definition from cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
 
    </details>
    - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
-   To configure the orchestration cluster securely, it's essential to set up a secure communication configuration between pods:
-   - We enable gRPC Ingress for the Zeebe Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$CAMUNDA_DOMAIN`) for the gRPC proxy, different from the one used by other services (`$CAMUNDA_DOMAIN`). We also note that the port used for gRPC is `443`.
-   - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe pod and configure a secure TLS connection.
+To configure the orchestration cluster securely, it's essential to set up a secure communication configuration between pods:
 
-   Merge the orchestration route overlay into your `values.yml` file:
+- We enable gRPC Ingress for the Zeebe Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$CAMUNDA_DOMAIN`) for the gRPC proxy, different from the one used by other services (`$CAMUNDA_DOMAIN`). We also note that the port used for gRPC is `443`.
+- We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe pod and configure a secure TLS connection.
 
-   ```bash
-   yq '. *+ load("generic/openshift/single-region/helm-values/orchestration-route.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
-   ```
+Merge the orchestration route overlay into your `values.yml` file:
+
+```bash
+yq '. *+ load("generic/openshift/single-region/helm-values/orchestration-route.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
 
    <details>
    <summary>Review the orchestration route configuration</summary>
 
-   ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/orchestration-route.yml
-   ```
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/orchestration-route.yml
+```
 
    </details>
 
-   The actual configuration properties can be reviewed [in the Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
+The actual configuration properties can be reviewed [in the Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
 
 2. **Connectors:** merge the connectors route overlay:
 

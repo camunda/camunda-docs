@@ -13,7 +13,7 @@ You need to keep `port-forward` running all the time to communicate with the rem
 
 ## Accessing workflow engine
 
-To interact with Camunda workflow engine via [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md) using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
+To interact with Camunda workflow engine via [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md) using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as follows:
 
 ```
 kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
@@ -31,7 +31,7 @@ To interact with Camunda web applications like Operate, Tasklist, and Optimize, 
 
 :::note
 To use the web applications without Camunda Identity, you can set `global.identity.auth.enabled: false` in the values file to disable the authentication mechanism.
-Do _not_ disable it if you like to use Web Modeler, as it requires Camunda Identity and Keycloak.
+Do _not_ disable it if you want to use Web Modeler, as it requires Camunda Identity and Keycloak.
 :::
 
 First, port-forward for each application service:
@@ -44,7 +44,7 @@ kubectl port-forward svc/camunda-optimize 8083:80
 kubectl port-forward svc/camunda-connectors 8086:8080
 ```
 
-To be able to use Web Modeler, create additional port-forwardings for Web Modeler itself, and if you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also port-forward the Keycloak service:
+To be able to use Web Modeler, create additional port-forward commands for Web Modeler itself, and if you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also port-forward the Keycloak service:
 
 ```
 kubectl port-forward svc/camunda-web-modeler-webapp 8070:80
@@ -55,7 +55,7 @@ kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 kubectl port-forward svc/keycloak-service 18080:18080
 ```
 
-To use Console, create additional port-forwardings for Console. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also port-forward the Keycloak service:
+To use Console, create additional port-forward commands for Console. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also port-forward the Keycloak service:
 
 ```
 kubectl port-forward svc/camunda-console 8087:80
@@ -66,7 +66,7 @@ kubectl port-forward svc/keycloak-service 18080:18080
 
 Finally, you can access each app pointing your browser at:
 
-- Orcestration: [http://localhost:8080](http://localhost:8080)
+- Orchestration: [http://localhost:8080](http://localhost:8080)
 - Optimize: [http://localhost:8083](http://localhost:8083)
 - Web Modeler: [http://localhost:8070](http://localhost:8070)
 - Console: [http://localhost:8087](http://localhost:8087)
