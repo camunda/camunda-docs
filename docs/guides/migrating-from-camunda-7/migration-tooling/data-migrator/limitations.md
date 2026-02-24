@@ -192,9 +192,17 @@ The history migration has the following limitations.
 - To avoid collisions between definitions (process/decision/form), each definition migrated from Camunda 7 to 8 has its ID prefixed with `c7-legacy-`.
   - Do not deploy new definitions in Camunda 8 with IDs starting with this prefix to avoid conflicts.
 - Avoid manipulating Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable). See [Auto-cancellation of active instances](history.md#auto-cancellation-of-active-instances) for details.
-- When migrating entities, some might be skipped due to dependencies (parent entity not migrated yet). Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration. Example:
-  - Flow node instances might be skipped if their parent flow node (scope) hasn't been migrated yet.
-  - Child process instances that have been called from parent call activities will be skipped on the first migration run as their parent flow node has not been migrated yet.
+- When migrating entities, some might be skipped due to dependencies (parent entity not migrated yet):
+  - The migrator automatically retries skipped entities after the initial migration to resolve cross-entity-type dependencies.
+  - This automatic retry continues until no more progress can be made.
+  - Entities that remain skipped after all automatic retries are logged as warnings with their skip reasons.
+  - You can manually retry remaining skipped entities using the `--retry-skipped` flag after fixing underlying issues.
+  - Examples of temporary skip reasons:
+    - Flow node instances might be skipped if their parent flow node (scope) hasn't been migrated yet.
+    - Child process instances that have been called from parent call activities will be skipped on the first migration run as their parent flow node has not been migrated yet.
+- The History Data Migrator does not support the following Camunda 7 entity types:
+  - **CMMN entities**: CMMN user tasks and CMMN variables are not supported and will be skipped during migration.
+  - **Standalone user tasks**: User tasks that are not associated with a process instance are not supported and will be skipped during migration.
 - Camunda 7 does not store audit data of asyncBefore wait state for flow nodes. Migration of flow nodes is executed in all other cases.
 - The History Data Migrator does not support the following Camunda 8 entities or properties:
   - Sequence flow: Sequence flows cannot be highlighted in Operate.
@@ -229,8 +237,8 @@ The History Data Migrator supports migration of Camunda Forms, but with the foll
 The History Data Migrator supports migration of DMN entities, but with the following limitations:
 
 - The incidents are migrated in `resolved` state. Operate does not visualize resolved incidents,
-therefore incidents of migrated process instances will not be visible in Operate.
-Audit data related to incidents can be observed by querying APIs.
+  therefore incidents of migrated process instances will not be visible in Operate.
+  Audit data related to incidents can be observed by querying APIs.
 - When there's a failing start timer in Camunda 7, the incident cannot be migrated (as there's no process instance history) and will be skipped.
 
 ## Camunda 8 history migration coverage

@@ -376,11 +376,18 @@ See [example interceptor](https://github.com/camunda/camunda-7-to-8-migration-to
 
 When entity transformation fails:
 
-1. The migrator skips the entity.
-2. It logs a detailed error message with the entity type and error cause.
-3. It marks the entity as skipped.
-4. Use `--history --list-skipped` to view skipped entities.
-5. After you fix the underlying issue, use `--history --retry-skipped` to retry the migration.
+1. The entity is marked as skipped in the migration database.
+2. After the initial migration completes, the migrator automatically retries all skipped entities.
+3. This automatic retry continues in multiple passes until no more progress can be made (no more entities are successfully migrated).
+4. Entities that remain skipped after all automatic retry attempts are logged as warnings with their skip reasons.
+5. Use `--history --list-skipped` to view entities that remain skipped after automatic retries.
+6. After you fix the underlying issue (e.g., unsupported variable types, missing dependencies), use `--history --retry-skipped` to manually retry the migration.
+
+This automatic retry mechanism is particularly useful for resolving cross-entity-type dependencies, such as:
+
+- Flow node instances that depend on their parent flow node (scope)
+- Child process instances that depend on parent call activities
+- Variables or user tasks that depend on their parent process instance
 
 ## Tenants
 
