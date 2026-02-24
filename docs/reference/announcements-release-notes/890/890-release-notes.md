@@ -93,6 +93,8 @@ You can now configure RocksDB memory on a per broker basis instead of per partit
 
 - Camunda recommends you test this out before 8.10 to find the right value, or configure the allocation strategy to `PARTITION`.
 
+<p class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+
 #### Manage task permissions
 
 <!-- https://github.com/camunda/product-hub/issues/3122 -->
