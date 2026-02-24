@@ -38,12 +38,14 @@ This guide is a follow-up to [Build your first AI agent](../../guides/getting-st
 ## Step 1: Run your AI agent process
 
 Run your process instance using a prompt to trigger the AI Agent connector.
+For example:
 
-For example, enter "Visit _docs.camunda.io_ and tell me about it" in the **How can I help you today?** field, and click **Start instance**.
+1. Enter "Visit _docs.camunda.io_ and tell me about it" in the **How can I help you today?** field.
+1. Click **Start instance**.
 
 ## Step 2: Open the process instance in Operate
 
-1. Open [Operate](/components/operate/operate-introduction.md). If working locally with Self-Managed, open it in your browser at http://localhost:8080/operate.
+1. Open [Operate](/components/operate/operate-introduction.md).
 2. Locate the process instance created by your prompt. See [View a deployed process](/components/operate/userguide/basic-operate-navigation.md#view-a-deployed-process) for more details.
 3. Open your process instance view by clicking on its process instance key.
 
@@ -54,17 +56,12 @@ At this point, you should see the process progressing through your model.
 With Operate, you can track the agent activity and see which tool tasks are called.
 
 1. To show how many times each BPMN element is triggered, select **Execution count**.
+   For this particular prompt example, you can see: - The AI Agent connector was triggered once. - Within it, the agent executed the **Fetch URL** tool. This aligns with your prompt example of extracting information from a website.
 
-For this particular prompt example, you can see:
-
-- The AI Agent connector was triggered once.
-- Within it, the agent executed the **Fetch URL** tool. This aligns with your prompt example: Visit a website URL and extract information from it.
-
-2. Select the **Fetch URL** tool element.
-
-- In the bottom-left pane, you can see where the element belongs in the execution tree.
-- In the bottom-right pane, the element details are displayed, including the [**Variables**](components/concepts/variables.md) and [**Input/Output Mappings**](/components/concepts/variables.md#inputoutput-variable-mappings) columns, among others.
-  However, the actual tool inputs and results are stored in a **parent scope** and are accessible via the element's inner instance in the execution tree.
+2. Select the **Fetch URL** tool element:
+   - In the bottom-left pane, you can see where the element belongs in the execution tree.
+   - In the bottom-right pane, the element details are displayed, including the [**Variables**](components/concepts/variables.md) and [**Input/Output Mappings**](/components/concepts/variables.md#inputoutput-variable-mappings) columns, among others.
+     However, the actual tool inputs and results are stored in a **parent scope** and are accessible via the element's inner instance in the execution tree.
 
 ## Step 4: Inspect tool calls
 
@@ -76,9 +73,8 @@ Each tool execution produces an inner instance where you can find:
 To see the **Fetch URL** tool input and results:
 
 1. In the execution tree, select the **AI_Agent#innerInstance** parent element of the **Fetch URL** tool. You will see:
-
-- The **toolCall** variable (the _input_). In its value field, you can see the URL you asked the agent to fetch information from.
-- The **toolCallResult** variable (the _results_). See [Tool call responses](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-call-responses) for more details.
+   - The **toolCall** variable (the _input_). In its value field, you can see the URL you asked the agent to fetch information from.
+   - The **toolCallResult** variable (the _results_). See [Tool call responses](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-call-responses) for more details.
 
 2. To better inspect the results, click the pencil icon to enter edit mode for **toolCallResult**.
 3. Click the two-squares icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value. The result is a reference to a document where the actual output is stored. You will learn more about this in [Step 6](#step-6-understand-how-agent-memory-is-stored).

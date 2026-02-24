@@ -30,7 +30,7 @@ export const fundamentalCards = [
     description: "Plan and design your agentic orchestration solutions.",
   },
   {
-    link: "../monitor-agents-operate/",
+    link: "../monitor-ai-agents/",
     title: "Monitor your AI agents",
     image: IconAoAgentImg,
     description: "Monitor your AI agents with Operate.",
