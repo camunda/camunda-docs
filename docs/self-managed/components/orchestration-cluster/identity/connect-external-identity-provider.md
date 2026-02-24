@@ -106,18 +106,38 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
 </TabItem>
 </Tabs>
 
-- **Redirect URI**: By default, the redirect URI is `{baseUrl}/sso-callback`. At runtime, `{baseUrl}` will resolve to the URL used to access your Orchestration Cluster deployment. It can be changed to accommodate advanced use cases where proxies are involved, or to pass context information when configuring multiple OIDC providers. However, it's generally not necessary to configure anything here. Note that it **must** always point to the `/sso-callback` endpoint of your Orchestration Cluster deployment. For most Identity Providers, you will also have to configure accepted redirect URIs for security purposes, which should match with the one configured here (whether static, or dynamic using `{baseUrl}`).
+## Redirect URI
+
+Use the redirect URI to define where the Identity Provider (IdP) sends users back after successful authentication.
+
+By default, the redirect URI is:
+
+`{baseUrl}/sso-callback`
+
+At runtime, `{baseUrl}` resolves to the URL used to access your Orchestration Cluster deployment. In most cases, you do not need to change this value.
+
+You may need to customize the redirect URI in advanced scenarios, such as:
+
+- When your deployment is accessed through reverse proxies or load balancers
+- When you need to pass context information while configuring multiple OIDC providers
+
+Regardless of customization, the redirect URI must always point to the `/sso-callback` endpoint of your Orchestration Cluster deployment.
+
+Most Identity Providers require you to explicitly configure allowed redirect URIs for security reasons. Ensure the value configured in your IdP exactly matches the redirect URI used here, whether it is static or dynamically resolved using `{baseUrl}`.
 
 :::note
 
-`{baseUrl}` above is dynamically resolved on request to whatever was used to connect to your Orchestration Cluster instance. Specifically, it's made of `{scheme}://{host}:{port}/{contextPath}/`, all of which are specifically defined for the given request as:
+`{baseUrl}` is dynamically resolved for each request based on the URL used to access the Orchestration Cluster instance. It is composed of the following parts:
 
-- `{scheme}`: the transport scheme, either `http` or `https`.
-- `{host}`: the hostname used to connect to your instance.
-- `{port}`: the port (if any). Omitted if none was used.
-- `{contextPath}`: the context path for this Orchestration Cluster instance, if any. Omitted if there is none.
+- `{scheme}`: The transport scheme (`http` or `https`)
+- `{host}`: The hostname used to connect to the instance
+- `{port}`: The port number, if specified (omitted if not used)
+- `{contextPath}`: The context path of the Orchestration Cluster instance, if configured (omitted if none)
 
-So for example, if you accessed your instance via `https://camunda.acme.com/identity`, then `{baseUrl}` will be `https://camunda.acme.com`. If you accessed it via `https://services.acme.com:18080/camunda/`, then `{baseUrl}` will be `https://services.acme.com:18080/camunda`.
+For example:
+
+- Accessing the instance via `https://camunda.acme.com/identity` resolves `{baseUrl}` to `https://camunda.acme.com`
+- Accessing the instance via `https://services.acme.com:18080/camunda/` resolves `{baseUrl}` to `https://services.acme.com:18080/camunda`
 
 :::
 
