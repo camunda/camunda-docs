@@ -466,7 +466,7 @@ This allows enterprises to run Camunda 8 on familiar, enterprise-managed RDBMS i
 
 With RDBMS support, the Helm chart no longer defaults to Elasticsearch as secondary storage. You must now explicitly set `orchestration.data.secondaryStorage.type` to `elasticsearch`, `opensearch`, or `rdbms`. This also introduces `global.noSecondaryStorage` for engine-only deployments without any secondary storage.
 
-<p class="link-arrow">[Configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage/)</p>
+<p class="link-arrow">[Configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md)</p>
 
 ## 8.9.0-alpha2
 
