@@ -42,7 +42,7 @@ The process instance will continue with the flow after the boundary event, skipp
 ### Triggering on variable changes
 
 In addition to scope activation, conditional events can also be triggered when relevant variables change within the event’s visible scope.
-When a variable changes (for example, it is created or updated), the engine evaluates the condition for any active conditional events in the variable's scope and all child scopes (see [Top-down evaluation](#top-down-evaluation)).
+When a variable changes (for example, it is created or updated), the engine evaluates the condition for any active conditional events in the variable's scope and all child scopes whose condition depends on that variable (see [Top-down evaluation](#top-down-evaluation)).
 
 Given the following process definition:
 <img src={ConditionalEventSubprocess} alt="Process definition with event subprocess conditional start event" width="40%"/>
@@ -52,6 +52,13 @@ Assume the process instance starts with variable `x` initialized to `5`.
 The main process starts and executes the service task, while the event subprocess is not triggered because the condition is not satisfied.
 If the process instance updates variable `x` to `11` (for example, via the [Update element instance variables API](../../apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables.api.mdx)), the engine evaluates the condition for the conditional start event in the event subprocess.
 Since the condition is now `true`, the conditional start event triggers and the event subprocess starts.
+
+### Expression-based subscriptions
+
+When a conditional event is activated, the engine analyzes its FEEL condition and derives which variables
+the expression depends on (including nested properties, for example `order.total`).
+The subscription is re-evaluated only when one of those referenced variables changes within the event’s
+visible scope.
 
 #### Top-down evaluation
 
@@ -81,19 +88,15 @@ See [variable scopes](variables.md#variable-scopes) for more details on variable
 #### Variable filter semantics
 
 Conditional events can define variable filters to limit when the engine re-evaluates the condition.
+By default, the engine derives the set of variables that can trigger an event from the FEEL expression.
+The subscription is re-evaluated only when one of those referenced variables changes within the event’s visible scope.
 See how filters can be defined in the [conditional events modeling guide](../modeler/bpmn/conditional-events/conditional-events.md#variable-filters).
 
-A filter can restrict evaluation based on:
-
-- Specific variable names
-- Specific variable change types (for example, `create` or `update`)
-
-If no filter is defined, the engine evaluates the condition on every variable change within the event’s visible scope.
+Variable filters restrict evaluation based on specific variable change types (for example, `create` or `update`).
 
 :::warning Important
-Define variable filters unless you intentionally want the event to be evaluated on every variable change while the condition is satisfied.
-
-Without a filter, a conditional event whose condition evaluates to `true` can trigger repeatedly.
+Even with expression-based dependencies and optional filters, a conditional event whose condition evaluates to `true` can trigger repeatedly while it remains `true` (for example, for non-interrupting events).
+Model conditions and process behavior so repeated triggers are either expected or idempotent.
 :::
 
 Variable change type filters apply only to conditional events within a running process instance.
@@ -152,9 +155,9 @@ Conditional events inside running process instances are evaluated automatically 
 
 In Camunda 7, conditional events use the `camunda:variableName` and `camunda:variableEvents` attributes.
 
-During migration to Camunda 8, these attributes are converted into a conditional filter configuration.
+In Camunda 8, the FEEL condition expression is the single source of truth for which variables can trigger
+the event. During migration, `camunda:variableEvents` is converted into a `variableEvents` filter
+configuration where applicable.
 
-- `camunda:variableName` maps to variable name filters.
-- `camunda:variableEvents` maps to variable event filters.
-
-Camunda 8 supports only `create` and `update`. If a model uses `delete` in Camunda 7, migration maps it to the closest supported behavior.
+Camunda 8 supports only `create` and `update`.
+If a model uses `delete` in Camunda 7, migration maps it to the closest supported behavior.

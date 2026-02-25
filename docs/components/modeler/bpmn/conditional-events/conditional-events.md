@@ -52,11 +52,12 @@ An event subprocess conditional start event can be interrupting or non-interrupt
 - Interrupting starts the event subprocess and cancels the currently active work in the scope it interrupts, so the instance continues via the event subprocess path.
 - Non-interrupting starts the event subprocess in parallel while the existing execution continues.
 
-A non-interrupting event subprocess conditional start event can trigger more than once while the instance is active.
-It triggers each time the condition becomes `true`.
-If you don’t specify variable names or event filters, any variable change can re-evaluate the condition.
-This can start unintended event subprocess executions in parallel.
-For runtime evaluation behavior and filter semantics, see [Variable filter semantics](../../../concepts/conditionals.md#variable-filter-semantics).
+A non-interrupting event subprocess conditional start event can trigger more than once while the instance
+is active.
+It triggers each time the condition becomes `true`, based on changes to variables referenced in the expression.
+You can use variable event filters to further restrict which change types (`create`, `update`) trigger evaluation.
+For runtime evaluation behavior and filter semantics, see [Variable filter semantics]
+(../../../concepts/conditionals.md#variable-filter-semantics).
 
 ## Intermediate conditional catch events
 
@@ -76,10 +77,10 @@ Conditional boundary events can be interrupting or non-interrupting:
 - Interrupting triggers the boundary event and cancels the attached activity, so execution continues via the boundary event’s outgoing sequence flow.
 - Non-interrupting triggers the boundary event without canceling the attached activity, starting an additional path via the boundary event’s outgoing sequence flow while the attached activity continues.
 
-Like a non-interrupting event subprocess conditional start event, a non-interrupting conditional boundary event can trigger multiple times while the attached activity is active.
-It triggers each time the condition becomes `true`.
-If you don’t specify variable names or event filters, any variable change can re-evaluate the condition.
-This can start unintended boundary-event executions in parallel.
+Like a non-interrupting event subprocess conditional start event, a non-interrupting conditional boundary
+event can trigger multiple times while the attached activity is active.
+It triggers each time the condition becomes `true`, based on changes to variables referenced in the expression.
+You can use variable event filters to further restrict which change types trigger evaluation.
 See [Variable filter semantics](../../../concepts/conditionals.md#variable-filter-semantics) for details.
 
 ## Define conditions and variable filters
@@ -98,15 +99,15 @@ Example:
 </bpmn:conditionalEventDefinition>
 ```
 
-The FEEL expression is evaluated using variables available in the event’s scope.
+The engine evaluates the FEEL expression using variables available in the event’s scope and derives which variables can trigger the conditional event from this expression.
 
 ### Variable filters
 
-Variable filters restrict when a conditional event is re-evaluated in response to variable changes.
+Variable filters restrict when a conditional event is re-evaluated in response to variable changes for those referenced variables.
 
 The `variableEvents` attribute applies only to conditional events inside running process instances. It does not apply to root-level conditional start events.
 
-Define a filter by adding a `zeebe:conditionalFilter` extension element:
+Define an event-type filter by adding a `zeebe:conditionalFilter` extension element:
 
 ```xml title="Conditional event with Zeebe variable filter"
 <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_1rp6yz6">
@@ -116,7 +117,6 @@ Define a filter by adding a `zeebe:conditionalFilter` extension element:
 
   <bpmn:extensionElements>
     <zeebe:conditionalFilter
-      variableNames="var1, var2"
       variableEvents="create, update" />
   </bpmn:extensionElements>
 </bpmn:conditionalEventDefinition>
@@ -124,7 +124,6 @@ Define a filter by adding a `zeebe:conditionalFilter` extension element:
 
 The `zeebe:conditionalFilter` extension element supports:
 
-- `variableNames` limits evaluation to changes of specific variables in the event’s visible scope.
 - `variableEvents` specifies which variable events trigger evaluation. Supported values:
   - `create`
   - `update`
@@ -142,7 +141,7 @@ To add a conditional event:
 2. Change the element type to **Conditional start event**, **Conditional intermediate catch event**, or **Conditional boundary event** as needed.
 3. With the conditional event selected, use the properties panel on the right to configure it:
    - In the **Condition** field, enter a FEEL expression starting with `=` (for example, `= x > 1`).
-   - In the **Variable filters** section, optionally restrict when the condition is re-evaluated by specifying variable names and the variable events (`create`, `update`, or `create, update`).
+   - In the **Variable filters** section, optionally restrict when the condition is re-evaluated by specifying which variable events (`create`, `update`, or `create, update`) should trigger evaluation.
 
 ## XML representation
 
@@ -167,7 +166,6 @@ To add a conditional event:
 
     <bpmn:extensionElements>
       <zeebe:conditionalFilter
-        variableNames="processorAvailable"
         variableEvents="create, update" />
     </bpmn:extensionElements>
   </bpmn:conditionalEventDefinition>
