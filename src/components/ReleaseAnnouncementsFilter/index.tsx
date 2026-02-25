@@ -266,7 +266,22 @@ export default function ReleaseAnnouncementsFilter({
 
     const rows = Array.from(container.querySelectorAll<HTMLElement>('.release-announcement-row'));
 
-    const createTypeBadge = (typeLabel: string) => {
+    const addInteractiveProps = (el: HTMLElement, onActivate: () => void, ariaLabel: string) => {
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('aria-label', ariaLabel);
+      el.style.cursor = 'pointer';
+
+      el.onclick = () => onActivate();
+      el.onkeydown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onActivate();
+        }
+      };
+    };
+
+    const createTypeBadge = (typeValue: Exclude<TypeFilter, 'all'>, typeLabel: string) => {
       const wrap = document.createElement('span');
       wrap.setAttribute(TYPE_INLINE_BADGE_ATTR, 'true');
 
@@ -274,15 +289,51 @@ export default function ReleaseAnnouncementsFilter({
       b.className = ['badge', 'badge--secondary', styles.typeInlineBadge].join(' ');
       b.textContent = typeLabel;
 
+      addInteractiveProps(
+        b,
+        () => setMasterFilter({ kind: 'type', value: typeValue }),
+        `Filter by type: ${typeLabel}`
+      );
+
       wrap.appendChild(b);
       return wrap;
+    };
+
+    const createAreaBadge = (areaText: string) => {
+      const b = document.createElement('span');
+      b.className = ['badge', 'badge--secondary', styles.areaInlineBadge].join(' ');
+      b.textContent = areaText;
+
+      addInteractiveProps(
+        b,
+        () => setMasterFilter({ kind: 'area', value: areaText }),
+        `Filter by area: ${areaText}`
+      );
+
+      return b;
+    };
+
+    const createDeploymentBadge = (deployment: Deployment) => {
+      const label = deployment === 'saas' ? 'SaaS' : 'Self-Managed';
+
+      const b = document.createElement('span');
+      b.className = ['badge', 'badge--secondary', styles.deploymentInlineBadge].join(' ');
+      b.textContent = label;
+
+      addInteractiveProps(
+        b,
+        () => setMasterFilter({ kind: 'deployment', value: deployment }),
+        `Filter by deployment: ${label}`
+      );
+
+      return b;
     };
 
     rows.forEach((row) => {
       const contentEl = row.querySelector<HTMLElement>('.release-announcement-content');
       if (!contentEl) return;
 
-      const typeValue = (row.getAttribute('data-type') ?? '').trim();
+      const typeValue = (row.getAttribute('data-type') ?? '').trim() as Exclude<TypeFilter, 'all'>;
       const typeLabel = typeValue ? getTypeLabel(typeValue) : null;
 
       // Ensure a dedicated left column exists for the type badge (desktop)
@@ -304,8 +355,8 @@ export default function ReleaseAnnouncementsFilter({
 
       // Populate the type column with the Type badge (and nothing else)
       typeCol.innerHTML = '';
-      if (typeLabel) {
-        typeCol.appendChild(createTypeBadge(typeLabel));
+      if (typeLabel && typeValue) {
+        typeCol.appendChild(createTypeBadge(typeValue, typeLabel));
       }
 
       // Build inline badges under the entry heading (right column): Type (mobile) + Area(s) + Deployment(s)
@@ -326,8 +377,8 @@ export default function ReleaseAnnouncementsFilter({
       wrapper.setAttribute(INLINE_META_BADGES_ATTR, 'true');
 
       // Type badge inline too (for mobile; CSS will hide it on desktop)
-      if (typeLabel) {
-        wrapper.appendChild(createTypeBadge(typeLabel));
+      if (typeLabel && typeValue) {
+        wrapper.appendChild(createTypeBadge(typeValue, typeLabel));
       }
 
       if (areas.length > 0) {
@@ -335,10 +386,7 @@ export default function ReleaseAnnouncementsFilter({
         areaWrap.setAttribute(AREA_INLINE_BADGE_ATTR, 'true');
 
         areas.forEach((areaText) => {
-          const b = document.createElement('span');
-          b.className = ['badge', 'badge--secondary', styles.areaInlineBadge].join(' ');
-          b.textContent = areaText;
-          areaWrap.appendChild(b);
+          areaWrap.appendChild(createAreaBadge(areaText));
         });
 
         wrapper.appendChild(areaWrap);
@@ -349,10 +397,7 @@ export default function ReleaseAnnouncementsFilter({
         depWrap.setAttribute(DEPLOYMENT_INLINE_BADGES_ATTR, 'true');
 
         deployments.forEach((d) => {
-          const b = document.createElement('span');
-          b.className = ['badge', 'badge--secondary', styles.deploymentInlineBadge].join(' ');
-          b.textContent = d === 'saas' ? 'SaaS' : 'Self-Managed';
-          depWrap.appendChild(b);
+          depWrap.appendChild(createDeploymentBadge(d));
         });
 
         wrapper.appendChild(depWrap);
