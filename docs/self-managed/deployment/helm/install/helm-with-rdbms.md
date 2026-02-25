@@ -134,6 +134,10 @@ kubectl create secret generic camunda-db-secret \
 
 If you're using Oracle, MySQL, or a database version not covered by bundled drivers, you must provide the JDBC driver.
 
+:::note
+For detailed information about JDBC driver strategies, security configurations, and validation, see [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md).
+:::
+
 **Option A: Init container (recommended for production)**
 
 Update your `values-rdbms.yaml`:
@@ -159,6 +163,8 @@ orchestration:
       volumeMounts:
         - name: jdbcdrivers
           mountPath: /driver-lib
+      securityContext:
+        runAsUser: 1001
 ```
 
 For other driver sources (e.g., private repositories), adjust the `wget` command or use a private container registry for pre-built images.
