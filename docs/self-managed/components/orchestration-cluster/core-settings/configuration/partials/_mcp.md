@@ -22,13 +22,4 @@ import TabItem from '@theme/TabItem';
 | `CAMUNDA_MCP_ENABLED` | <p>Enable the MCP server. When enabled, the Orchestration Cluster exposes a [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) MCP server at `/mcp/cluster`.</p> | `false`       |
 
   </TabItem>
-  <TabItem value="helm" label="Helm values">
-
-### `orchestration.mcp`
-
-| Helm value                  | Description                                                                                                                                                                                                                | Default value |
-| :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `orchestration.mcp.enabled` | <p>Enable the MCP server. When enabled, the Orchestration Cluster exposes a [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) MCP server at `/mcp/cluster`.</p> | `false`       |
-
-  </TabItem>
 </Tabs>
