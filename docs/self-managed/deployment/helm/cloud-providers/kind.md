@@ -445,11 +445,21 @@ At any time, run `kubectl get services -n camunda` to get a full list of deploye
 
 ### Default credentials
 
+#### Camunda admin
+
 - **Username**: `admin`
 - **Password**: Run the following script
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/get-password.sh
+```
+
+#### Keycloak admin
+
+The Keycloak operator generates a separate set of admin credentials stored in the `keycloak-initial-admin` secret. These credentials are different from the Camunda admin credentials and are used to access the Keycloak administration console.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/get-keycloak-password.sh
 ```
 
 ## Cleanup
