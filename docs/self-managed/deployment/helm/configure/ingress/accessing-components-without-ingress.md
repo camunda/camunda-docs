@@ -13,13 +13,17 @@ You need to keep `port-forward` running all the time to communicate with the rem
 
 ## Accessing workflow engine
 
-To interact with Camunda workflow engine via [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md) using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as follows:
+To interact with Camunda workflow engine via [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md) using a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as follows:
 
 ```
+# gRPC (used by Zeebe clients, e.g. Desktop Modeler, zbctl)
 kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
+
+# REST API (used by the Orchestration Cluster REST API)
+kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
 ```
 
-Now, you can connect and execute operations against your new Zeebe cluster.
+Now, you can connect and execute operations against your new Zeebe cluster. Port `26500` provides gRPC access, and port `8080` provides [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) access.
 
 :::note
 Accessing the Zeebe cluster directly using `kubectl port-forward` is recommended for development purposes.
@@ -37,12 +41,14 @@ Do _not_ disable it if you want to use Web Modeler, as it requires Camunda Ident
 First, port-forward for each application service:
 
 ```shell
-kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
-
 kubectl port-forward svc/camunda-optimize 8083:80
 
 kubectl port-forward svc/camunda-connectors 8086:8080
 ```
+
+:::note
+The Zeebe Gateway port-forward on port `8080` (shown in the [workflow engine section](#accessing-workflow-engine) above) also serves the Orchestration web interface.
+:::
 
 To be able to use Web Modeler, create additional port-forward commands for Web Modeler itself, and if you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also port-forward the Keycloak service:
 
