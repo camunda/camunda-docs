@@ -33,10 +33,6 @@ Additional information and a high-level overview of Kubernetes as the upstream p
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
-- [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
-  - Ensure at least **3 Elastic IPs** (one per availability zone).
-  - Verify quotas for **VPCs, EC2 instances, and storage**.
-  - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)); costs apply only to resources used.
 - A namespace to host the Camunda Platform.
 - Permissions to install Kubernetes operators (cluster-admin or equivalent) for deploying the infrastructure services (Elasticsearch, PostgreSQL, Keycloak). These operators can also be installed via the [OpenShift OperatorHub](https://docs.openshift.com/container-platform/latest/operators/understanding/olm-understanding-operatorhub.html), but this guide installs them directly from source for full control over versions and configuration.
 
@@ -53,6 +49,7 @@ Infrastructure components are deployed using **official Kubernetes operators** a
 
 - **[Elasticsearch with ECK](#deploy-elasticsearch)**: Deployed via [Elastic Cloud on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) for secondary storage
 - **[PostgreSQL with CloudNativePG](#deploy-postgresql)**: Deployed via [CloudNativePG](https://cloudnative-pg.io/) for Identity and Web Modeler databases
+- **[Keycloak](#deploy-keycloak) (optional)**: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation) as an identity provider for Single Sign-On (SSO)
 
 For OpenShift deployments, the following OpenShift-specific configurations are also included:
 
@@ -258,22 +255,23 @@ The actual configuration properties can be reviewed [in the Zeebe Gateway config
    </details>
 
    The actual configuration properties can be reviewed [in the connectors configuration documentation](/self-managed/components/connectors/connectors-configuration.md#zeebe-broker-connection).
-   1. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
-   2. Set up the global configuration to enable the single Ingress definition with the host. Merge the domain overlay:
+1. **TLS for internal applications:** Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
-      ```bash
-      yq '. *+ load("generic/openshift/single-region/helm-values/domain.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
-      ```
+1. **Domain configuration:** Set up the global configuration to enable the single Ingress definition with the host. Merge the domain overlay:
 
-      <details>
-      <summary>Review the domain configuration</summary>
+   ```bash
+   yq '. *+ load("generic/openshift/single-region/helm-values/domain.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+   ```
 
-      ```yaml reference
-      https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/domain.yml
-      ```
+   <details>
+   <summary>Review the domain configuration</summary>
 
-      </details>
+   ```yaml reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/domain.yml
+   ```
+
+   </details>
 
 <!--Intended space left for not breaking the build!-->
   </TabItem>
@@ -703,7 +701,7 @@ Below is a summary of the necessary instructions:
   <TabItem value="with" label="With domain" default>
 
 1. Open Identity in your browser at `https://${CAMUNDA_DOMAIN}/managementidentity`. You will be redirected to your IdP and prompted to log in.
-2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
+2. Log in with the initial user `admin`. This username is defined by the `identity.firstUser.username` value in your Helm chart configuration. Retrieve the auto-generated password from the Kubernetes secret:
 
 ```shell
 kubectl get secret identity-secret-for-components \
@@ -744,7 +742,7 @@ kubectl port-forward "services/keycloak-service" 18080:18080 --namespace "$CAMUN
 <KubefwdTip />
 
 1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to your IdP and prompted to log in.
-2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
+2. Log in with the initial user `admin`. This username is defined by the `identity.firstUser.username` value in your Helm chart configuration. Retrieve the auto-generated password from the Kubernetes secret:
 
 ```shell
 kubectl get secret identity-secret-for-components \
@@ -851,7 +849,9 @@ The following values are required for the OAuth authentication:
 
 <TabItem value="without">
 
-This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster:
+This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster.
+
+Desktop Modeler communicates via gRPC, so only port `26500` needs to be forwarded. If you also need REST API access (port `8080`), refer to the [REST API section above](#use-the-token).
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 26500:26500 --namespace "$CAMUNDA_NAMESPACE"
