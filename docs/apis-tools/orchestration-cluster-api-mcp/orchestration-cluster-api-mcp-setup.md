@@ -43,7 +43,7 @@ services:
 
 <TabItem value="helm">
 
-Set the following `extraConfiguration` value in your Helm chart values:
+Set the following [`extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md#configuration-options) value in your Helm chart values:
 
 ```yaml
 orchestration:
