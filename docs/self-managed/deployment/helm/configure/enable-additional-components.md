@@ -129,7 +129,6 @@ Console requires the Identity component for authentication. The Camunda Helm cha
 kubectl port-forward svc/keycloak-service 18080:18080
 ```
 
-
 Alternatively, configure Identity with Ingress. See the [Ingress setup guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md).
 
 :::
