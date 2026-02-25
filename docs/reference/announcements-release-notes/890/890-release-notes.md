@@ -85,11 +85,11 @@ The Helm chart now documents all values supporting Go template expressions, incl
 
 <!-- https://github.com/camunda/product-hub/issues/3304 -->
 
-You can now configure RocksDB memory on a per broker basis instead of per partition, simplifying capacity planning and aligning with familiar JVM-style sizing.
+You can now configure RocksDB memory on a per-broker basis instead of per-partition, simplifying capacity planning and aligning with familiar JVM-style sizing.
 
 - This reduces the risk of unexpected out-of-memory crashes, and is crucial for usage with dynamically adding partitions, making broker provisioning safer and more predictable. Going forward, Camunda recommends you use the `FRACTION` allocation strategy.
 
-- The default remains per-partition for backwards compatibility but this is deprecated and will be changed in 8.10 to a fractional approach, with a 10% default (using `camunda.data.primary-storage.rocks-db.memory-allocation-strategy=FRACTION` and `camunda.data.primary-storage.rocks-db.memory-fraction=0.1`).
+- The default remains per-partition for backwards compatibility, but this is deprecated and will be changed to a fractional approach in 8.10, with a 10% default (using `camunda.data.primary-storage.rocks-db.memory-allocation-strategy=FRACTION` and `camunda.data.primary-storage.rocks-db.memory-fraction=0.1`).
 
 - Camunda recommends you test this out before 8.10 to find the right value, or configure the allocation strategy to `PARTITION`.
 
