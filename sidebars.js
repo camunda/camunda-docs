@@ -2096,6 +2096,19 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Microsoft Teams app",
+          link: {
+            type: "doc",
+            id: "self-managed/components/ms-teams/ms-teams",
+          },
+          items: [
+            "self-managed/components/ms-teams/ms-teams-tabs",
+            "self-managed/components/ms-teams/ms-teams-chatbot",
+            "self-managed/components/ms-teams/ms-teams-installation",
+          ],
+        },
+        {
+          type: "category",
           label: "Management Identity",
           link: {
             type: "doc",
