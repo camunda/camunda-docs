@@ -53,8 +53,8 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 1. Create the required account and OCM roles using [AWS STS (Security Token Service)](https://docs.openshift.com/rosa/rosa_architecture/rosa-sts-about-iam-resources.html):
 
    ```bash
-   rosa create account-roles --mode auto --yes
-   rosa create ocm-role --mode auto --yes
+   rosa create account-roles --mode auto
+   rosa create ocm-role --mode auto
    ```
 
    :::tip STS mode (recommended)
