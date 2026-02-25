@@ -30,15 +30,15 @@ Build and use AI agents to execute the non-deterministic parts of a process, int
 
 ## Get started
 
-Get started with Camunda agentic orchestration.
+Get started with Camunda agentic orchestration by building and running your first AI agent.
 
-<AoGrid ao={getStartedCards} columns={2}/>
+<p><a href="../../../guides/getting-started-agentic-orchestration/" class="link-arrow">Build your first AI agent</a></p>
 
 ## Learn the fundamentals
 
 Understand the fundamental concepts of Camunda agentic orchestration.
 
-<AoGrid ao={fundamentalCards} columns={2}/>
+<AoGrid ao={fundamentalCards} columns={3}/>
 
 ## Explore further resources
 

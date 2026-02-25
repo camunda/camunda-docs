@@ -12,13 +12,6 @@ export const getStartedCards = [
     image: IconAoImg,
     description: "Get started by building and running your first AI agent.",
   },
-  {
-    link: "../easy-llm/",
-    title: "Get started with EasyLLM",
-    image: IconAoImg,
-    description:
-      "Get started with EasyLLM to run AI Agents quickly in Camunda SaaS.",
-  },
 ];
 
 // Fundamentals cards on introduction page
@@ -29,6 +22,13 @@ export const fundamentalCards = [
     image: IconAoAgentImg,
     description:
       "Learn how to build and integrate AI agents into your end-to-end processes.",
+  },
+  {
+    link: "../camunda-provided-llm/",
+    title: "Camunda-provided LLM",
+    image: IconAoLlmImg,
+    description:
+      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
   },
   {
     link: "../ao-design/",
