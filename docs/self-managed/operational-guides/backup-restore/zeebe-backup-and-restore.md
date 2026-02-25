@@ -125,6 +125,7 @@ When the response is 200 OK, the response body consists of a JSON object describ
   - `FAILED` if at least one partition has failed. In this case, `failureReason` contains a string describing the reason for failure.
   - `INCOMPLETE` if at least one partition's backup does not exist.
   - `IN_PROGRESS` if at least one partition's backup is in progress.
+  - `DELETED` if at least one partition's backup is deleted.
 - `details`: Gives the state of each partition's backup.
 - `failureReason`: The reason for failure if the state is `FAILED`.
 
