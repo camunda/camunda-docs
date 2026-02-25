@@ -8,35 +8,25 @@ Conditional events allow a process to react to changes in process state instead 
 
 Conditional events are useful when the producer of a change is not a single known sender, when correlation logic would add unnecessary complexity, or when the process logic is naturally expressed as guard conditions over process state.
 
-The engine evaluates the FEEL expression and triggers the event when the result is `true`.
-The diagram below shows all four types of conditional events: root-level start, event subprocess start, intermediate catch, and boundary events.
+The engine evaluates the FEEL expression and triggers the event when the result is `true`. The diagram below shows all four types of conditional events: root-level start, event subprocess start, intermediate catch, and boundary events.
 
 ![BPMN diagram showing conditional start, intermediate, and boundary events](assets/all-conditional-event-types.png)
 
-In this example, the process starts with a root-level conditional start event.
-Root-level conditional start events can be triggered via the Orchestration Cluster REST API or Camunda Client SDKs (see [Trigger root-level conditional start events via API](../../../concepts/conditionals.md#trigger-root-level-conditional-start-events-via-api) for more details).
-A new instance is created once the condition `= orderReceived = true` evaluates to `true`.
+In this example, the process starts with a root-level conditional start event. Root-level conditional start events can be triggered via the Orchestration Cluster REST API or Camunda Client SDKs (see [Trigger root-level conditional start events via API](../../../concepts/conditionals.md#trigger-root-level-conditional-start-events-via-api) for more details). A new instance is created once the condition `= orderReceived = true` evaluates to `true`.
 
-The intermediate conditional catch event acts like a wait-until condition.
-It continues to “Ship order” only after inventory is successfully reserved.
+The intermediate conditional catch event acts like a wait-until condition. It continues to “Ship order” only after inventory is successfully reserved.
 
-The interrupting conditional boundary event attached to “Review order” handles changes mid-review.
-If the delivery address is changed, the boundary event triggers and interrupts the user task, routing execution to “Apply changes” before completing the order preparation.
+The interrupting conditional boundary event attached to “Review order” handles changes mid-review. If the delivery address is changed, the boundary event triggers and interrupts the user task, routing execution to “Apply changes” before completing the order preparation.
 
-Finally, the interrupting event subprocess can cancel the work at any time while the instance is running.
-If the order is canceled while it is being prepared, the conditional start event inside the event subprocess fires and interrupts the main process, starting the cancellation subprocess to handle the cancellation logic.
-See [Triggering conditional events](../../../concepts/conditionals.md#triggering-conditional-events) for details on how and when conditional events are triggered.
+Finally, the interrupting event subprocess can cancel the work at any time while the instance is running. If the order is canceled while it is being prepared, the conditional start event inside the event subprocess fires and interrupts the main process, starting the cancellation subprocess to handle the cancellation logic. See [Triggering conditional events](../../../concepts/conditionals.md#triggering-conditional-events) for details on how and when conditional events are triggered.
 
 ## Conditional start events
 
-Conditional start events can be used to start a process instance.
-Deploying a process with a conditional start event creates a subscription for that event.
-When the condition of the start event evaluates to `true`, the engine starts a new process instance.
+Conditional start events can be used to start a process instance. Deploying a process with a conditional start event creates a subscription for that event. When the condition of the start event evaluates to `true`, the engine starts a new process instance.
 
 When deploying a process with a conditional start event, the following rules apply:
 
-- The condition of the conditional start event must be unique across a process definition.
-  If multiple conditional start events have the same condition, the deployment will fail with a validation error.
+- The condition of the conditional start event must be unique across a process definition. If multiple conditional start events have the same condition, the deployment will fail with a validation error.
 - Upon deployment of a new version, the previous version’s conditional start event subscription is removed and replaced with the new version’s subscription.
 
 To start processes via conditional start events from external systems, use the Orchestration Cluster REST API, the Zeebe gRPC API, or a Camunda Client SDK.
@@ -52,36 +42,24 @@ An event subprocess conditional start event can be interrupting or non-interrupt
 - Interrupting starts the event subprocess and cancels the currently active work in the scope it interrupts, so the instance continues via the event subprocess path.
 - Non-interrupting starts the event subprocess in parallel while the existing execution continues.
 
-A non-interrupting event subprocess conditional start event can trigger more than once while the instance
-is active.
-It triggers each time the condition becomes `true`, based on changes to variables referenced in the expression.
-You can use variable event filters to further restrict which change types (`create`, `update`) trigger evaluation.
-For runtime evaluation behavior and filter semantics, see [Variable filter semantics]
-(../../../concepts/conditionals.md#variable-filter-semantics).
+A non-interrupting event subprocess conditional start event can trigger more than once while the instance is active. It triggers each time the condition becomes `true`, based on changes to variables referenced in the expression. You can use variable event filters to further restrict which change types (`create`, `update`) trigger evaluation. For runtime evaluation behavior and filter semantics, see [Variable filter semantics](../../../concepts/conditionals.md#variable-filter-semantics).
 
 ## Intermediate conditional catch events
 
-An intermediate conditional catch event waits until its condition becomes `true`.
-When the process instance reaches the event, it waits until the condition evaluates to `true`, then continues along the outgoing sequence flow.
-For details on how and when the condition is triggered, see [Triggering conditional events](../../../concepts/conditionals.md#triggering-conditional-events).
+An intermediate conditional catch event waits until its condition becomes `true`. When the process instance reaches the event, it waits until the condition evaluates to `true`, then continues along the outgoing sequence flow. For details on how and when the condition is triggered, see [Triggering conditional events](../../../concepts/conditionals.md#triggering-conditional-events).
 
 Intermediate conditional catch events are always interrupting, as they represent a waiting point in the process flow.
 
 ## Conditional boundary events
 
-A conditional boundary event is attached to an activity and monitors data while the activity is active.
-When the activity is entered, the engine evaluates the boundary event’s condition and triggers immediately if the condition is satisfied.
+A conditional boundary event is attached to an activity and monitors data while the activity is active. When the activity is entered, the engine evaluates the boundary event’s condition and triggers immediately if the condition is satisfied.
 
 Conditional boundary events can be interrupting or non-interrupting:
 
 - Interrupting triggers the boundary event and cancels the attached activity, so execution continues via the boundary event’s outgoing sequence flow.
 - Non-interrupting triggers the boundary event without canceling the attached activity, starting an additional path via the boundary event’s outgoing sequence flow while the attached activity continues.
 
-Like a non-interrupting event subprocess conditional start event, a non-interrupting conditional boundary
-event can trigger multiple times while the attached activity is active.
-It triggers each time the condition becomes `true`, based on changes to variables referenced in the expression.
-You can use variable event filters to further restrict which change types trigger evaluation.
-See [Variable filter semantics](../../../concepts/conditionals.md#variable-filter-semantics) for details.
+Like a non-interrupting event subprocess conditional start event, a non-interrupting conditional boundary event can trigger multiple times while the attached activity is active. It triggers each time the condition becomes `true`, based on changes to variables referenced in the expression. You can use variable event filters to further restrict which change types trigger evaluation. See [Variable filter semantics](../../../concepts/conditionals.md#variable-filter-semantics) for details.
 
 ## Define conditions and variable filters
 
