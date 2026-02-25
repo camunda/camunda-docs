@@ -9,7 +9,7 @@ This guide walks you through deploying Camunda 8 using Helm charts with an exter
 
 Related guides:
 
-- [Secondary storage overview](/self-managed/concepts/secondary-storage/)
+- [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
 - [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
 
