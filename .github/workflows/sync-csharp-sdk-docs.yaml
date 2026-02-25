@@ -1,0 +1,140 @@
+name: Sync C# SDK API Reference
+
+on:
+  schedule:
+    - cron: "0 16 * * 4" # Runs every Thursday at 4 PM UTC (1h after REST API sync)
+  workflow_dispatch:
+    inputs:
+      docs_version:
+        description: "Docs version to update (e.g. '8.8'). Leave empty for next (docs/)."
+        required: false
+        default: ""
+      sdk_ref:
+        description: "Git ref of the C# SDK repo. Ignored when docs_version is set (uses stable/<version>)."
+        required: false
+        default: "main"
+      dry_run:
+        description: "Dry run — generate docs but skip PR creation"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  sync-csharp-sdk-docs:
+    runs-on: ubuntu-latest
+    env:
+      DOCS_VERSION: ${{ github.event.inputs.docs_version || '' }}
+    steps:
+      - name: Resolve refs and paths
+        id: resolve
+        run: |
+          VERSION="${{ github.event.inputs.docs_version }}"
+          if [ -n "$VERSION" ]; then
+            echo "sdk_ref=stable/${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "docs_root=versioned_docs/version-${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=update-csharp-sdk-docs/${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
+          else
+            echo "sdk_ref=${{ github.event.inputs.sdk_ref || 'main' }}" >> "$GITHUB_OUTPUT"
+            echo "docs_root=docs" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=update-csharp-sdk-docs" >> "$GITHUB_OUTPUT"
+            echo "version_label=next" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout camunda-docs
+        uses: actions/checkout@v4
+        with:
+          repository: camunda/camunda-docs
+          path: docs
+
+      - name: Checkout C# SDK
+        uses: actions/checkout@v4
+        with:
+          repository: camunda/orchestration-cluster-api-csharp
+          ref: ${{ steps.resolve.outputs.sdk_ref }}
+          path: csharp-sdk
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: pip install pyyaml
+
+      - name: Build SDK
+        working-directory: csharp-sdk
+        run: dotnet build src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj -c Release
+
+      - name: Generate DocFX metadata
+        working-directory: csharp-sdk
+        run: dotnet docfx metadata docs/docfx.json
+
+      - name: Generate markdown docs
+        working-directory: csharp-sdk
+        run: python3 scripts/generate-docusaurus-md.py
+
+      - name: Copy docs into camunda-docs
+        run: |
+          TARGET="docs/${{ steps.resolve.outputs.docs_root }}/apis-tools/csharp-sdk/api-reference"
+
+          # Clean previous generated docs
+          rm -rf "$TARGET"
+          mkdir -p "$TARGET"
+
+          # Copy generated markdown and sidebar
+          cp -R csharp-sdk/docs-md/api-reference/* "$TARGET/"
+
+          echo "Copied $(find "$TARGET" -name '*.md' | wc -l) markdown files → ${{ steps.resolve.outputs.docs_root }}"
+
+      - name: Check for changes
+        id: check_changes
+        working-directory: docs
+        run: |
+          if git diff-index --quiet HEAD; then
+            echo "No changes to commit."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Changes detected."
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate token
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
+        id: generate_token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
+          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: "${{ steps.generate_token.outputs.token }}"
+          path: docs
+          title: "docs: update C# SDK API reference (${{ steps.resolve.outputs.version_label }})"
+          body: |
+            ## Description
+
+            Auto-generated PR from the [sync C# SDK docs workflow](https://github.com/camunda/camunda-docs/tree/main/.github/workflows/sync-csharp-sdk-docs.yaml).
+
+            Updates the C# SDK API reference documentation from [`orchestration-cluster-api-csharp@${{ steps.resolve.outputs.sdk_ref }}`](https://github.com/camunda/orchestration-cluster-api-csharp/tree/${{ steps.resolve.outputs.sdk_ref }}).
+
+            **Target:** `${{ steps.resolve.outputs.docs_root }}/apis-tools/csharp-sdk/api-reference/`
+
+            ## When should this change go live?
+
+            - There is **no urgency** with this change and can be released at any time.
+
+            ## PR Checklist
+
+            - My changes are in `/${{ steps.resolve.outputs.docs_root }}`.
+          branch: ${{ steps.resolve.outputs.pr_branch }}
+          commit-message: "docs: update C# SDK API reference (${{ steps.resolve.outputs.version_label }})"
+          labels: "component:docs"

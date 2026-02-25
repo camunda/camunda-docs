@@ -43,12 +43,16 @@ services:
 
 <TabItem value="helm">
 
-Set `orchestration.mcp.enabled` in your Helm chart values:
+Set the following [`extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md#configuration-options) value in your Helm chart values:
 
 ```yaml
 orchestration:
-  mcp:
-    enabled: true
+  extraConfiguration:
+    - file: mcp-gateway.yaml
+      content: |
+        camunda:
+          mcp:
+            enabled: true
 ```
 
 </TabItem>
