@@ -281,6 +281,11 @@ export default function ReleaseAnnouncementsFilter({
       };
     };
 
+    const applyFilterAndScrollTop = (next: MasterFilter) => {
+      setMasterFilter(next);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     const createTypeBadge = (typeValue: Exclude<TypeFilter, 'all'>, typeLabel: string) => {
       const wrap = document.createElement('span');
       wrap.setAttribute(TYPE_INLINE_BADGE_ATTR, 'true');
@@ -291,7 +296,7 @@ export default function ReleaseAnnouncementsFilter({
 
       addInteractiveProps(
         b,
-        () => setMasterFilter({ kind: 'type', value: typeValue }),
+        () => applyFilterAndScrollTop({ kind: 'type', value: typeValue }),
         `Filter by type: ${typeLabel}`
       );
 
@@ -306,7 +311,7 @@ export default function ReleaseAnnouncementsFilter({
 
       addInteractiveProps(
         b,
-        () => setMasterFilter({ kind: 'area', value: areaText }),
+        () => applyFilterAndScrollTop({ kind: 'area', value: areaText }),
         `Filter by area: ${areaText}`
       );
 
@@ -322,7 +327,7 @@ export default function ReleaseAnnouncementsFilter({
 
       addInteractiveProps(
         b,
-        () => setMasterFilter({ kind: 'deployment', value: deployment }),
+        () => applyFilterAndScrollTop({ kind: 'deployment', value: deployment }),
         `Filter by deployment: ${label}`
       );
 
