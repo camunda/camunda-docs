@@ -32,13 +32,12 @@ You can review the full history of user task actions, including assignment chang
 
 These operations belong to the category `USER_TASKS`. The following are recorded in the audit log:
 
-| Operation         | Entity              | Tracked rejections |
-| :---------------- | :------------------ | :----------------- |
-| Update task       | User task           | INVALID_STATE      |
-| Assign task       | User task           | INVALID_STATE      |
-| Unassign task     | User task           | INVALID_STATE      |
-| Complete task     | User task           | INVALID_STATE      |
-| Command rejection | Command entity type | –                  |
+| Operation     | Entity    | Tracked rejections |
+| :------------ | :-------- | :----------------- |
+| Update task   | User task | INVALID_STATE      |
+| Assign task   | User task | INVALID_STATE      |
+| Unassign task | User task | INVALID_STATE      |
+| Complete task | User task | INVALID_STATE      |
 
 ### ADMIN operations
 
@@ -46,33 +45,32 @@ You can trace all changes to identity resources, like authorizations, users, and
 
 These operations belong to the category `ADMIN`. The following are recorded in the audit log:
 
-| Operation            | Entity              | Tracked rejections |
-| :------------------- | :------------------ | :----------------- |
-| Create Authorization | Authorization       | –                  |
-| Update Authorization | Authorization       | –                  |
-| Delete Authorization | Authorization       | –                  |
-| Create User          | User                | –                  |
-| Update User          | User                | –                  |
-| Delete User          | User                | –                  |
-| Create Tenant        | Tenant              | –                  |
-| Update Tenant        | Tenant              | –                  |
-| Delete Tenant        | Tenant              | –                  |
-| Assign Tenant        | Tenant              | –                  |
-| Unassign Tenant      | Tenant              | –                  |
-| Create Role          | Role                | –                  |
-| Update Role          | Role                | –                  |
-| Delete Role          | Role                | –                  |
-| Assign Role          | Role                | –                  |
-| Unassign Role        | Role                | –                  |
-| Create Group         | Group               | –                  |
-| Update Group         | Group               | –                  |
-| Delete Group         | Group               | –                  |
-| Assign Group         | Group               | –                  |
-| Unassign Group       | Group               | –                  |
-| Create Mapping Rule  | MappingRule         | –                  |
-| Update Mapping Rule  | MappingRule         | –                  |
-| Delete Mapping Rule  | MappingRule         | –                  |
-| Command rejection    | Command entity type | –                  |
+| Operation            | Entity        | Tracked rejections |
+| :------------------- | :------------ | :----------------- |
+| Create Authorization | Authorization | –                  |
+| Update Authorization | Authorization | –                  |
+| Delete Authorization | Authorization | –                  |
+| Create User          | User          | –                  |
+| Update User          | User          | –                  |
+| Delete User          | User          | –                  |
+| Create Tenant        | Tenant        | –                  |
+| Update Tenant        | Tenant        | –                  |
+| Delete Tenant        | Tenant        | –                  |
+| Assign Tenant        | Tenant        | –                  |
+| Unassign Tenant      | Tenant        | –                  |
+| Create Role          | Role          | –                  |
+| Update Role          | Role          | –                  |
+| Delete Role          | Role          | –                  |
+| Assign Role          | Role          | –                  |
+| Unassign Role        | Role          | –                  |
+| Create Group         | Group         | –                  |
+| Update Group         | Group         | –                  |
+| Delete Group         | Group         | –                  |
+| Assign Group         | Group         | –                  |
+| Unassign Group       | Group         | –                  |
+| Create Mapping Rule  | MappingRule   | –                  |
+| Update Mapping Rule  | MappingRule   | –                  |
+| Delete Mapping Rule  | MappingRule   | –                  |
 
 ### DEPLOYED_RESOURCES operations
 
@@ -80,25 +78,24 @@ You can audit user and client actions that modified or influenced deployed resou
 
 These operations belong to the category `DEPLOYED_RESOURCES`. The following are recorded in the audit log:
 
-| Operation                | Entity              | Tracked rejections              |
-| :----------------------- | :------------------ | :------------------------------ |
-| Create Process instance  | Process instance    | –                               |
-| Cancel Process instance  | Process instance    | –                               |
-| Modify Process instance  | Process instance    | –                               |
-| Migrate Process instance | Process instance    | INVALID_STATE, PROCESSING_ERROR |
-| Create Variable          | Variable            | –                               |
-| Update Variable          | Variable            | –                               |
-| Resolve Incident         | Incident            | INVALID_STATE                   |
-| Create Resource          | Resource            | –                               |
-| Delete Resource          | Resource            | –                               |
-| Create Batch             | Batch               | –                               |
-| Suspend Batch            | Batch               | INVALID_STATE                   |
-| Resume Batch             | Batch               | INVALID_STATE                   |
-| Cancel Batch             | Batch               | INVALID_STATE                   |
-| Create Decision          | Decision            | –                               |
-| Delete Decision          | Decision            | –                               |
-| Evaluate Decision        | Decision            | –                               |
-| Command rejection        | Command entity type | –                               |
+| Operation                | Entity           | Tracked rejections              |
+| :----------------------- | :--------------- | :------------------------------ |
+| Create Process instance  | Process instance | –                               |
+| Cancel Process instance  | Process instance | –                               |
+| Modify Process instance  | Process instance | –                               |
+| Migrate Process instance | Process instance | INVALID_STATE, PROCESSING_ERROR |
+| Create Variable          | Variable         | –                               |
+| Update Variable          | Variable         | –                               |
+| Resolve Incident         | Incident         | INVALID_STATE                   |
+| Create Resource          | Resource         | –                               |
+| Delete Resource          | Resource         | –                               |
+| Create Batch             | Batch            | –                               |
+| Suspend Batch            | Batch            | INVALID_STATE                   |
+| Resume Batch             | Batch            | INVALID_STATE                   |
+| Cancel Batch             | Batch            | INVALID_STATE                   |
+| Create Decision          | Decision         | –                               |
+| Delete Decision          | Decision         | –                               |
+| Evaluate Decision        | Decision         | –                               |
 
 #### Batch operations
 
