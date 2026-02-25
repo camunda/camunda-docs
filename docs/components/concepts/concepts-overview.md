@@ -69,7 +69,7 @@ Common use cases include orchestrating microservices across complex integrations
 Camunda 8 is designed to operate on a very large scale. To achieve this, it provides:
 
 - **Horizontal scalability** and no dependence on an external database; [Zeebe](/components/zeebe/zeebe-overview.md) (the workflow engine inside Camunda 8) writes data directly to the file system on the same servers where it is deployed. Zeebe enables distribution processing across a cluster of machines to deliver high throughput.
-- **High availability and fault tolerance** via a pre-configured replication mechanism, ensuring Camunda 8 can recover from machine or software failure with no data loss and minimal downtime. This ensures the system as a whole remains available without requiring manual action.
+- **High availability and fault tolerance** via a pre-configured replication mechanism, ensuring Camunda 8 can recover from machine or software failure with no data loss and minimal downtime. This ensures the system as a whole remains available without requiring manual action, which is particularly critical for AI-assisted processes, where every agent decision and action must be traceable end-to-end.
 - **Audit trail** as all process-relevant events are written to an append-only log, providing an audit trail and a history of the state of a process.
 - **Reactive publish-subscribe interaction model** which enables microservices that connect to Camunda 8 to maintain a high degree of control and autonomy, including control over processing rates. These properties make Camunda 8 resilient, scalable, and reactive.
 - **Visual processes modeled in ISO-standard BPMN 2.0** so technical and business stakeholders can collaborate on process design in a widely-used modeling language.
@@ -84,7 +84,7 @@ Design fully executable process and decision models that reduce misalignment and
 
 #### Connectors
 
-Connectors communicate with any system or technology, reducing the time it takes to automate and orchestrate business processes. Outbound Connectors trigger events outside of Camunda, while inbound connectors allow processes running on Camunda to receive messages from external systems. Browse connectors in [Camunda Marketplace](https://marketplace.camunda.com/).
+Connectors communicate with any system or technology, reducing the time it takes to automate and orchestrate business processes. Outbound Connectors trigger events outside of Camunda, while inbound connectors allow processes running on Camunda to receive messages from external systems. Connectors also serve as the tool layer for AI agents, enabling agents to interact with external systems in a governed, reusable way. Browse connectors in [Camunda Marketplace](https://marketplace.camunda.com/).
 
 #### AI agents
 
@@ -104,7 +104,7 @@ Some automated processes require human contribution and interaction. [Create and
 
 ### Operate
 
-With [Operate](/components/operate/operate-introduction.md), teams can monitor running processes, troubleshoot and resolve incidents, and modify and migrate process instances. Trace process flows in real time, investigate failures, modify variables, and resume execution where needed, all within the context of the end-to-end business process.
+With [Operate](/components/operate/operate-introduction.md), teams can monitor running processes, troubleshoot and resolve incidents, and modify and migrate process instances. Trace process flows in real time, investigate failures, modify variables, and resume execution where needed, all within the context of the end-to-end business process. For AI-assisted processes, Operate provides visibility into agent actions and decisions at runtime, enabling teams to detect and resolve unexpected behavior.
 
 ### Optimize
 
@@ -130,11 +130,11 @@ IT and business stakeholders build and test processes in a shared modeling envir
 
 ### Scalability
 
-Event streaming avoids database bottlenecks and can scale process throughput infinitely. Camunda's distributed architecture ensures continuity in the case of hardware or network failure and supports replication across global data centers for high availability.
+Event streaming avoids database bottlenecks and can scale process throughput in a highly effective way. Camunda's distributed architecture ensures continuity in the case of hardware or network failure and supports replication across global data centers for high availability.
 
 ### Intelligence
 
-Prepare for the autonomous enterprise by blending deterministic and non-deterministic process execution. Camunda enables teams to integrate AI/ML into business processes where it makes sense without sacrificing reliability or regulatory compliance.
+Camunda enables teams to embed AI agents into governed business processes, combining autonomous agent reasoning with the auditability and compliance controls that enterprise operations require.
 
 ## Next steps
 
