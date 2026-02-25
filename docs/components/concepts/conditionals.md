@@ -17,27 +17,21 @@ For details on which BPMN event types support conditionals and how to model them
 
 ## Triggering conditional events
 
-When a conditional event scope is activated, the engine creates a subscription.
-It evaluates the condition whenever relevant variables change within the event’s visible scope.
-If the condition becomes `true` while the event is active and in scope, the event triggers and the process follows the behavior defined by the underlying BPMN event.
+When a conditional event scope is activated, the engine creates a subscription. It evaluates the condition whenever relevant variables change within the event’s visible scope. If the condition becomes `true` while the event is active and in scope, the event triggers and the process follows the behavior defined by the underlying BPMN event.
+
 The following sections describe how conditional events are evaluated and triggered, including how variable filters affect re-evaluation.
 
-The semantics described below apply to conditional events within running process instances.
-For process-level conditional start events, see [Trigger root-level conditional start events via API](#trigger-root-level-conditional-start-events-via-api).
+The semantics described below apply to conditional events within running process instances. For process-level conditional start events, see [Trigger root-level conditional start events via API](#trigger-root-level-conditional-start-events-via-api).
 
 ### Triggering on scope activation
 
-When a scope is activated, the engine evaluates the condition for conditional events in that scope.
-For example, when an activity with an attached conditional boundary event is activated, the engine evaluates the condition for that boundary event immediately at activation.
+When a scope is activated, the engine evaluates the condition for conditional events in that scope. For example, when an activity with an attached conditional boundary event is activated, the engine evaluates the condition for that boundary event immediately at activation.
 
 Consider the following process definition:
 <img src={ConditionalBoundary} alt="Process definition with conditional boundary event" width="40%"/>
 
-An interrupting conditional boundary event with condition `x > 10` is attached to the service task A.
-Assume the process instance starts with variable `x` initialized to `11`.
-When the start event completes and service task A is activated, the boundary condition evaluates to `true`, and the boundary event triggers immediately.
-Service task A will be terminated and the created job will be canceled.
-The process instance will continue with the flow after the boundary event, skipping the service task A.
+An interrupting conditional boundary event with condition `x > 10` is attached to the service task A. Assume the process instance starts with variable `x` initialized to `11`. When the start event completes and service task A is activated, the boundary condition evaluates to `true`, and the boundary event triggers immediately.
+Service task A will be terminated and the created job will be canceled. The process instance will continue with the flow after the boundary event, skipping the service task A.
 
 ### Triggering on variable changes
 
@@ -47,31 +41,21 @@ When a variable changes (for example, it is created or updated), the engine eval
 Given the following process definition:
 <img src={ConditionalEventSubprocess} alt="Process definition with event subprocess conditional start event" width="40%"/>
 
-An event subprocess with a conditional start event is defined with condition `x > 10`.
-Assume the process instance starts with variable `x` initialized to `5`.
-The main process starts and executes the service task, while the event subprocess is not triggered because the condition is not satisfied.
-If the process instance updates variable `x` to `11` (for example, via the [Update element instance variables API](../../apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables.api.mdx)), the engine evaluates the condition for the conditional start event in the event subprocess.
-Since the condition is now `true`, the conditional start event triggers and the event subprocess starts.
+An event subprocess with a conditional start event is defined with condition `x > 10`. Assume the process instance starts with variable `x` initialized to `5`. The main process starts and executes the service task, while the event subprocess is not triggered because the condition is not satisfied.
+If the process instance updates variable `x` to `11` (for example, via the [Update element instance variables API](../../apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables.api.mdx)), the engine evaluates the condition for the conditional start event in the event subprocess. Since the condition is now `true`, the conditional start event triggers and the event subprocess starts.
 
 ### Expression-based subscriptions
 
-When a conditional event is activated, the engine analyzes its FEEL condition and derives which variables
-the expression depends on (including nested properties, for example `order.total`).
-The subscription is re-evaluated only when one of those referenced variables changes within the event’s
-visible scope.
+When a conditional event is activated, the engine analyzes its FEEL condition and derives which variables the expression depends on (including nested properties, for example `order.total`). The subscription is re-evaluated only when one of those referenced variables changes within the event’s visible scope.
 
 #### Top-down evaluation
 
-When a variable changes, the engine evaluates conditions in a top-down order based on scopes.
-Starting from the scope where the variable changed, the engine evaluates conditions for any active conditional events in that scope.
-It then evaluates conditions in child scopes, continuing down the hierarchy.
-This continues until a triggered event interrupts one of the scopes or there are no more child scopes to evaluate.
+When a variable changes, the engine evaluates conditions in a top-down order based on scopes. Starting from the scope where the variable changed, the engine evaluates conditions for any active conditional events in that scope. It then evaluates conditions in child scopes, continuing down the hierarchy. This continues until a triggered event interrupts one of the scopes or there are no more child scopes to evaluate.
 
 Given the following process definition:
 <img src={ConditionalTopDownEvaluation} alt="Process definition with nested conditional boundary events" width="60%"/>
 
-If a variable is set within the scope of the root process instance or subprocess instance, the engine evaluates the subprocess’s conditional boundary event first.
-If the condition is satisfied, execution is interrupted; otherwise, the engine evaluates the conditional boundary event on the inner service task A and triggers it if its condition is satisfied.
+If a variable is set within the scope of the root process instance or subprocess instance, the engine evaluates the subprocess’s conditional boundary event first. If the condition is satisfied, execution is interrupted; otherwise, the engine evaluates the conditional boundary event on the inner service task A and triggers it if its condition is satisfied.
 
 #### Scope isolation
 
@@ -80,17 +64,11 @@ A variable change can trigger only the conditional events that can see that vari
 Given the following process definition:
 <img src={ConditionalScopeIsolation} alt="Process definition with parallel branches and conditional boundary events" width="60%"/>
 
-Service task A and service task B are active in parallel branches of the process.
-If a variable is set in the subprocess instance, then only the conditional boundary event on service task A is evaluated.
-The boundary event on service task B cannot trigger because the variable is not visible in its scope.
-See [variable scopes](variables.md#variable-scopes) for more details on variable visibility rules.
+Service task A and service task B are active in parallel branches of the process. If a variable is set in the subprocess instance, then only the conditional boundary event on service task A is evaluated. The boundary event on service task B cannot trigger because the variable is not visible in its scope. See [variable scopes](variables.md#variable-scopes) for more details on variable visibility rules.
 
 #### Variable filter semantics
 
-Conditional events can define variable filters to limit when the engine re-evaluates the condition.
-By default, the engine derives the set of variables that can trigger an event from the FEEL expression.
-The subscription is re-evaluated only when one of those referenced variables changes within the event’s visible scope.
-See how filters can be defined in the [conditional events modeling guide](../modeler/bpmn/conditional-events/conditional-events.md#variable-filters).
+Conditional events can define variable filters to limit when the engine re-evaluates the condition. By default, the engine derives the set of variables that can trigger an event from the FEEL expression. The subscription is re-evaluated only when one of those referenced variables changes within the event’s visible scope. See how filters can be defined in the [conditional events modeling guide](../modeler/bpmn/conditional-events/conditional-events.md#variable-filters).
 
 Variable filters restrict evaluation based on specific variable change types (for example, `create` or `update`).
 
@@ -99,8 +77,7 @@ Even with expression-based dependencies and optional filters, a conditional even
 Model conditions and process behavior so repeated triggers are either expected or idempotent.
 :::
 
-Variable change type filters apply only to conditional events within a running process instance.
-They do not apply to root-level conditional start events, because no process instance exists yet.
+Variable change type filters apply only to conditional events within a running process instance. They do not apply to root-level conditional start events, because no process instance exists yet.
 
 #### Considerations
 
@@ -155,9 +132,6 @@ Conditional events inside running process instances are evaluated automatically 
 
 In Camunda 7, conditional events use the `camunda:variableName` and `camunda:variableEvents` attributes.
 
-In Camunda 8, the FEEL condition expression is the single source of truth for which variables can trigger
-the event. During migration, `camunda:variableEvents` is converted into a `variableEvents` filter
-configuration where applicable.
+In Camunda 8, the FEEL condition expression is the single source of truth for which variables can trigger the event. During migration, `camunda:variableEvents` is converted into a `variableEvents` filter configuration where applicable.
 
-Camunda 8 supports only `create` and `update`.
-If a model uses `delete` in Camunda 7, migration maps it to the closest supported behavior.
+Camunda 8 supports only `create` and `update`. If a model uses `delete` in Camunda 7, migration maps it to the closest supported behavior.
