@@ -830,11 +830,9 @@ camunda:
 
 #### Control tenant usage
 
-Generally, the [client default `tenant-id`](#multi-tenancy) is used for all job worker activations.
+Job workers can be configured to work on jobs from specific [tenants](#multi-tenancy) using either [specific tenant IDs](#filtering-by-provided-tenant-IDs) or the [assigned tenants in the engine](#filtering-by-assigned-tenants).
 
-You can configure a worker to use [specific tenant IDs](#filtering-by-provided-tenant-IDs) or the [assigned tenants in the engine](#filtering-by-assigned-tenants), which allows you to have different workers for different tenants.
-
-For SaaS deployments, you always assign job workers to tenants through the UI or API. For self-managed deployments, assignments let you change which job workers are assigned to which tenants without restarting the job worker. If you provide tenant IDs in the job worker definition, you must restart the job worker for changes to take effect.
+For SaaS deployments, you always assign job workers to tenants through the UI or API. For self-managed deployments, use the TenantFilter setting to control how job workers are related to tenants. Using the Assigned setting, you manage job worker access to tenants through the API and UI like in SaaS. Using the Provided setting, you will define tenant access in the Job worker's configuration and restart the job worker for any changes to take effect.
 
 ##### Filtering by assigned tenants
 
