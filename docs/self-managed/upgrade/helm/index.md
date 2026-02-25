@@ -8,15 +8,15 @@ import ZeebeGrid from '../../../components/zeebe/react-components/\_zeebe-card';
 import { helmIndexCards } from './../react-components/\_card-data';
 import { HelmChartValuesFileBitnamiLegacyLink } from "@site/src/components/CamundaDistributions";
 
-:::note
-This section is a work in progress for Camunda 8.9 and will be updated as upgrade requirements are finalized.
-:::
-
 Upgrade a Camunda 8 Self-Managed deployment installation using the official Camunda Helm charts.
 
 :::caution earlier versions
 If you are upgrading from a version earlier than 8.8, see [upgrading from an earlier version](self-managed/upgrade/index.md#upgrading-from-an-earlier-version).
 :::
+
+## Upgrade guides
+
+Use the following guides to upgrade a Camunda 8 Self-Managed deployment installation using the official Camunda Helm charts.
 
 <ZeebeGrid zeebe={helmIndexCards} />
 
