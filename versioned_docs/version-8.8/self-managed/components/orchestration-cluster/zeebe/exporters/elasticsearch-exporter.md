@@ -71,14 +71,14 @@ Add the same configuration under `orchestration.configuration` in your `values.y
 The exporter can be configured by providing `args`. The table below explains all the different
 options, and the default values for these options:
 
-| Option                  | Description                                                                              | Default                 |
-| ----------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
-| url                     | Valid URLs as comma-separated string.                                                    | `http://localhost:9200` |
+| Option                | Description                                                                              | Default                 |
+| --------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
+| url                   | Valid URLs as a comma-separated string.                                                  | `http://localhost:9200` |
 | request-timeout-ms      | Request timeout (in ms) for Elasticsearch. client                                        | `30000`                 |
-| index                   | Refer to [index](#index) for the index configuration options.                            |                         |
-| bulk                    | Refer to [bulk](#bulk) for the bulk configuration options.                               |                         |
-| retention               | Refer to [retention](#retention) for the retention configuration options.                |                         |
-| authentication          | Refer to [authentication](#authentication) for the authentication configuration options. |                         |
+| index                 | Refer to [index](#index) for the index configuration options.                            |                         |
+| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                               |                         |
+| retention             | Refer to [retention](#retention) for the retention configuration options.                |                         |
+| authentication        | Refer to [authentication](#authentication) for the authentication configuration options. |                         |
 | include-enabled-records | If `true` all enabled record types will be exported.                                     | `false`                 |
 
 <Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' }]} >

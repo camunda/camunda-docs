@@ -370,7 +370,6 @@ kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 :::caution
 For illustration purposes only. These values will not work in your environment.
@@ -411,7 +410,6 @@ kubectl --context cluster-paris -n kube-system edit configmap coredns
 ### Cluster 1 - End ###
 ```
 
-  </summary>
 </details>
 
 <details>
@@ -621,7 +619,6 @@ The base `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` re
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 :::danger
 For illustration purposes only. These values will not work in your environment.
@@ -647,7 +644,6 @@ Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_CAMUNDA
   value: http://camunda-elasticsearch-master-hl.camunda-paris.svc.cluster.local:9200
 ```
 
-  </summary>
 </details>
 
 2. As the script suggests, replace the environment variables within `camunda-values.yml`.
@@ -698,7 +694,6 @@ curl -u demo:demo -L -X GET 'http://localhost:8080/v2/topology' \
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 ```shell
 {
@@ -936,7 +931,6 @@ curl -u demo:demo -L -X GET 'http://localhost:8080/v2/topology' \
 }
 ```
 
-  </summary>
 </details>
 
 ## Next steps

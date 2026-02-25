@@ -19,6 +19,10 @@ import Api from './partials/\_api.md'
 
 <Api />
 
+import Mcp from './partials/\_mcp.md'
+
+<Mcp />
+
 import Cluster from './partials/\_cluster.md'
 
 <Cluster />
