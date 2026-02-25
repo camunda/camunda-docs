@@ -138,9 +138,9 @@ Operate now uses the Orchestration Cluster REST API as its single interface for 
 You can continue to investigate, manage, and automate process operations without any loss of functionality while also reusing the same REST endpoints for custom tools and integrations.
 
 - Operate now uses the Orchestration Cluster REST API as the single backend interface.
-- The frontend is fully aligned with the Orchestration Cluster REST API (V2) API across all supported data stores.
+- The frontend is fully aligned with the Orchestration Cluster REST API (V2) across all supported data stores.
 - The V2 API has been extended with new endpoints to support Operate functionality.
-- Batch modification and monitoring behavior has been updated to work with the new API.
+- Batch modification and monitoring behavior is updated to work with the new API.
 - Proactive permission checks in the UI have been removed: UI elements are now always visible, and permission errors are shown only when an action is attempted.
 
 <p class="link-arrow">[Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)</p>
