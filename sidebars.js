@@ -625,7 +625,7 @@ module.exports = {
       },
       items: [
         {
-          "Manage organizations": [
+          "Manage organization": [
             "components/console/manage-organization/organization-settings",
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/manage-user-groups",
@@ -637,6 +637,18 @@ module.exports = {
             "components/console/manage-organization/advanced-search",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/delete-account",
+          ],
+        },
+        {
+          type: "category",
+          label: "Manage workspaces",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/collaboration/collaboration",
+          },
+          items: [
+            "components/camunda-hub/workspaces/create-workspace",
+            "components/camunda-hub/workspaces/manage-workspaces",
           ],
         },
         {
@@ -754,13 +766,7 @@ module.exports = {
               ],
             },
             {
-              type: "category",
-              label: "Collaborate",
-              link: {
-                type: "doc",
-                id: "components/modeler/web-modeler/collaboration/collaboration",
-              },
-              items: [
+              Collaborate: [
                 "components/modeler/web-modeler/collaboration/collaborate-with-modes",
                 "components/modeler/web-modeler/collaboration/design-your-process",
                 "components/modeler/web-modeler/collaboration/implement-your-process",
