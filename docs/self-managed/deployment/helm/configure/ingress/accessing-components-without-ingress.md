@@ -16,10 +16,10 @@ You need to keep `port-forward` running all the time to communicate with the rem
 To interact with Camunda workflow engine via [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md) using a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as follows:
 
 ```
-# gRPC (used by Zeebe clients, e.g. Desktop Modeler, zbctl)
+# gRPC
 kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
 
-# REST API (used by the Orchestration Cluster REST API)
+# REST API
 kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
 ```
 
@@ -77,7 +77,7 @@ Finally, you can access each app pointing your browser at:
 - Web Modeler: [http://localhost:8070](http://localhost:8070)
 - Console: [http://localhost:8087](http://localhost:8087)
 
-Log in to these services using the first user `demo`/`demo` credentials.
+Log in to these services using the default first user credentials `demo`/`demo`. These defaults come from the Helm chart value `orchestration.security.initialization.users` (which seeds the `demo` user with password `demo` for the orchestration cluster). If you have overridden these values or use a custom identity provider, use the credentials you configured instead.
 
 <details>
   <summary>Operate and Tasklist Login</summary>
