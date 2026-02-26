@@ -22,7 +22,9 @@ Consider the following aspects regarding your model requirements and setup const
 
 ## Models available in Camunda Provided LLM
 
-Camunda-provided LLM provides access to a set of LLMs from multiple providers. The available models available may change over time, but typically include popular general-purpose models from major providers:
+Camunda-provided LLM provides access to a set of LLMs from multiple providers. This is provied for experimentation and evaluation purposes, allowing you to test different models without needing to set up your own LLM provider.
+
+When configuring your agent to use Camunda-provided LLM, you can select from the available models provided by Camunda. The specific models available may change over time as new models are added or removed, but typically include popular general-purpose models from major providers, such as:
 
 - **Anthropic models**: `us.anthropic.claude-3-7-sonnet-20250219-v1:0` is a versatile model suitable for a wide range of agentic orchestration tasks, with strong reasoning and language capabilities.
 
