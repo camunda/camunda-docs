@@ -5,7 +5,7 @@ title: Helm chart parameters
 description: Overview of Helm chart parameters for Camunda Self-Managed.
 ---
 
-import MigrationTip from './operational-tasks/migration/\_partials/\_migration-tip.md'
+import MigrationTip from './operational-tasks/migration-from-bitnami/\_partials/\_migration-tip.md'
 
 Helm chart parameters let you configure the components and behavior of your Camunda Self-Managed installation. The main way to customize these parameters is by using a `values.yaml` file.
 

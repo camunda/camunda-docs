@@ -5,7 +5,7 @@ title: Install Bitnami enterprise images
 description: Configure the Camunda Helm chart to use Bitnami Premium enterprise images, understand CVE reporting, support boundaries, and set expectations on vulnerabilities.
 ---
 
-import MigrationTip from '../../operational-tasks/migration/\_partials/\_migration-tip.md'
+import MigrationTip from '../../operational-tasks/migration-from-bitnami/\_partials/\_migration-tip.md'
 
 This guide explains how to configure the Camunda Helm chart to use Bitnami Premium images designed for production environments. These images are referred to as Enterprise images, indicating that they are intended for Camunda Enterprise customers. The guide also covers configuration steps, security considerations, CVE reporting, and best practices.
 

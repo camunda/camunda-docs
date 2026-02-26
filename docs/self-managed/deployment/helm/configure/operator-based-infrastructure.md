@@ -7,7 +7,7 @@ description: "Deploy Camunda 8 infrastructure components using official Kubernet
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import MigrationTip from '../operational-tasks/migration/\_partials/\_migration-tip.md'
+import MigrationTip from '../operational-tasks/migration-from-bitnami/\_partials/\_migration-tip.md'
 
 This guide explains how to deploy Camunda 8 infrastructure components using **official Kubernetes operators** as an alternative to the Bitnami subcharts. This approach provides production-grade, officially maintained deployment solutions for PostgreSQL, Elasticsearch, and Keycloak.
 
