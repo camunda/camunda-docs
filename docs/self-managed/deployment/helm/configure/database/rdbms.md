@@ -112,7 +112,7 @@ orchestration:
 
 ## Bundled vs. custom JDBC drivers
 
-Camunda bundles JDBC drivers for some databases (PostgreSQL, MariaDB, H2). For others (Oracle, MySQL, SQL Server), you must supply a custom driver.
+Camunda bundles JDBC drivers for some databases (PostgreSQL, MariaDB, SQL Server, H2). For others (Oracle, MySQL), you must supply a custom driver.
 
 **See:** [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md) for:
 
