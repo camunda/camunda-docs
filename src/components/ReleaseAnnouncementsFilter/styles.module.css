@@ -70,10 +70,6 @@
   outline-offset: 2px;
 }
 
-.filterBadgeButtonInactive {
-  /* intentionally inherits the grey chip look */
-}
-
 /* Active chip */
 .filterBadgeButtonActive {
   background: #007bff;

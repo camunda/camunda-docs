@@ -438,6 +438,12 @@ export default function ReleaseAnnouncementsFilter({
       row.removeAttribute(ROW_FILTER_HIDDEN_ATTR);
     });
 
+    // Reset any previously reordered rows
+    const reorderedRows = container.querySelectorAll<HTMLElement>('[data-reordered="true"]');
+    reorderedRows.forEach((row) => {
+      row.removeAttribute('data-reordered');
+    });
+
     // Remove empty messages (keeps previous behavior)
     const existingMessages = container.querySelectorAll<HTMLElement>(`[${EMPTY_MESSAGE_ATTR}="true"]`);
     existingMessages.forEach((el) => el.remove());
@@ -451,6 +457,46 @@ export default function ReleaseAnnouncementsFilter({
         row.setAttribute(ROW_FILTER_HIDDEN_ATTR, 'true');
       }
     });
+
+    // When filtering by area, reorder visible rows so "feature" types appear first
+    if (masterFilter.kind === 'area') {
+      const visibleRows = rows.filter((row) => !row.hidden);
+
+      // Define sort priority: feature first, then everything else in original order
+      const TYPE_SORT_PRIORITY: Record<string, number> = {
+        feature: 0,
+      };
+      const DEFAULT_PRIORITY = 1;
+
+      const sorted = [...visibleRows].sort((a, b) => {
+        const aType = (a.getAttribute('data-type') ?? '').trim();
+        const bType = (b.getAttribute('data-type') ?? '').trim();
+        const aPriority = TYPE_SORT_PRIORITY[aType] ?? DEFAULT_PRIORITY;
+        const bPriority = TYPE_SORT_PRIORITY[bType] ?? DEFAULT_PRIORITY;
+
+        if (aPriority !== bPriority) return aPriority - bPriority;
+
+        // Preserve original DOM order for rows with equal priority
+        return visibleRows.indexOf(a) - visibleRows.indexOf(b);
+      });
+
+      // Only rearrange DOM if order actually changed
+      const orderChanged = sorted.some((row, idx) => row !== visibleRows[idx]);
+      if (orderChanged) {
+        // Find the parent and insert sorted rows in order
+        // Use the first visible row's parent as the reference container
+        const parent = sorted[0]?.parentElement;
+        if (parent) {
+          // Insert each sorted row before the next sibling of the last inserted row
+          // to maintain their position relative to other (non-row) elements
+          const firstVisibleRow = visibleRows[0];
+          sorted.forEach((row) => {
+            row.setAttribute('data-reordered', 'true');
+            parent.insertBefore(row, firstVisibleRow);
+          });
+        }
+      }
+    }
 
     const directChildren = Array.from(container.querySelectorAll<HTMLElement>(':scope > *'));
 
