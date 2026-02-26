@@ -20,13 +20,19 @@ export const fundamentalCards = [
     title: "AI agents",
     image: IconAoAgentImg,
     description:
-      "Learn how to build and integrate AI agents into your end-to-end processes.",
+      "Build and integrate AI agents into your end-to-end processes.",
   },
   {
     link: "../ao-design/",
     title: "Design and architecture",
     image: IconAoDesignImg,
     description: "Plan and design your agentic orchestration solutions.",
+  },
+  {
+    link: "../monitor-ai-agents/",
+    title: "Monitor your AI agents",
+    image: IconAoAgentImg,
+    description: "Monitor your AI agents with Operate.",
   },
 ];
 
