@@ -53,6 +53,10 @@ For a **Bearer Token** type authentication, take the following steps:
 
 Visit [Microsoft Teams Access Token](https://learn.microsoft.com/azure/active-directory/develop/access-tokens) for more information.
 
+:::note
+Bearer tokens expire after **60–90 minutes**. The connector cannot refresh them automatically, so you must provide a new valid access token before expiry.
+:::
+
 #### Options to obtain an access token
 
 - Via the Graph Explorer:
@@ -74,6 +78,10 @@ For a **Refresh Token** type authentication, take the following steps:
 3. Set **Tenant ID** to `Tenant ID`. Your Microsoft Teams tenant ID is a unique identifier. Read more on [how to find a tenant ID](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant).
 4. Set the **Client ID** field: the application ID that the [Azure app registration portal](https://go.microsoft.com/fwlink/?linkid=2083908) assigned to your app.
 5. Set the **Secret ID** field: the client secret that you created in the app registration portal for your app.
+
+:::note
+Refresh tokens expire after **90 days** by default. The connector cannot persist updated refresh tokens when stored as a secret or hardcoded value, so the originally configured token will expire regardless of usage. You must obtain and configure a new refresh token before the 90-day expiry. See [Microsoft's documentation on refresh token lifetimes](https://learn.microsoft.com/en-us/entra/identity-platform/refresh-tokens#token-lifetime) for details.
+:::
 
 ### Client credentials type authentication
 
