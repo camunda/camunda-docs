@@ -44,7 +44,17 @@ module.exports = {
               items: [
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/install",
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/runtime",
-                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history",
+                {
+                  type: "category",
+                  label: "History",
+                  link: {
+                    type: "doc",
+                    id: "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history",
+                  },
+                  items: [
+                    "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history-coverage",
+                  ],
+                },
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/identity",
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/variables",
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin",
