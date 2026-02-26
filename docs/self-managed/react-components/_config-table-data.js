@@ -164,6 +164,12 @@ export const configs = [
     area: ["Cluster"],
   },
   {
+    name: "camunda.cluster.gateway-id",
+    legacy: ["zeebe.gateway.cluster.memberId"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
     name: "camunda.cluster.partitioning.scheme",
     legacy: ["zeebe.broker.experimental.partitioning.scheme"],
     types: ["Direct mapping"],
