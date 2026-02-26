@@ -8,15 +8,11 @@ import AoGrid from "@site/docs/components/react-components/\_ao-card.js";
 import ConfigIcon from "@site/docs/components/assets/icon-config.png";
 import ReferenceIcon from "@site/docs/components/assets/icon-reference-api.png";
 
-Run the Camunda 8 Orchestration Cluster and Connectors in Amazon Elastic Container Service (ECS).
-
-## About
-
-In an environment like Amazon ECS, where brokers can restart anywhere and multiple tasks write to shared volumes, you need to trust your data is safe and managed properly. You can deploy Camunda 8 to Amazon ECS, including Fargate. This includes checks and guidance to prevent silent data corruption and unsafe configurations.
+Deploy Camunda 8 to Amazon Elastic Container Service (ECS) and Fargate, including checks and guidance to prevent silent data corruption and unsafe configurations.
 
 ## Get started
 
-Get started with Amazon ECS and Fargate.
+Get started with Amazon ECS and Fargate:
 
 <p><a href="./aws-ecs" class="link-arrow">Deploy the Orchestration Cluster to Amazon ECS</a></p>
 
