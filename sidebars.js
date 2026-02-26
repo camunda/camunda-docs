@@ -1691,16 +1691,16 @@ module.exports = {
               items: [
                 {
                   type: "category",
-                  label: "Migration",
+                  label: "Migration from Bitnami",
                   link: {
                     type: "doc",
-                    id: "self-managed/deployment/helm/operational-tasks/migration/index",
+                    id: "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index",
                   },
                   items: [
-                    "self-managed/deployment/helm/operational-tasks/migration/bitnami-to-operators",
-                    "self-managed/deployment/helm/operational-tasks/migration/bitnami-to-managed-services",
-                    "self-managed/deployment/helm/operational-tasks/migration/alternatives",
-                    "self-managed/deployment/helm/operational-tasks/migration/zero-downtime",
+                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators",
+                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-managed-services",
+                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives",
+                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime",
                   ],
                 },
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
