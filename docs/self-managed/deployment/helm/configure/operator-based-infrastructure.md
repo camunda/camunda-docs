@@ -31,6 +31,10 @@ PostgreSQL, Elasticsearch, and Keycloak are **external dependencies** — they a
 If you prefer to continue using Bitnami subcharts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
 :::
 
+:::tip Migrating from Bitnami subcharts?
+If you have an existing Camunda deployment using Bitnami subcharts, see the [migration guide](/self-managed/deployment/helm/operational-tasks/migration/index.md) for automated tooling to migrate your data to Kubernetes operators or managed services with minimal downtime.
+:::
+
 ## Why use Kubernetes operators?
 
 Using official Kubernetes operators provides several advantages over traditional subcharts:

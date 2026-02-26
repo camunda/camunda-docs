@@ -56,6 +56,10 @@ For production environments, deploy infrastructure services separately from the 
 See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
 :::
 
+:::tip Already using Bitnami subcharts in production?
+If you have an existing Camunda deployment using Bitnami subcharts and want to migrate to operators or managed services, see the [migration guide](/self-managed/deployment/helm/operational-tasks/migration/index.md) for step-by-step instructions with automated tooling.
+:::
+
 #### Bitnami subcharts guidance
 
 **Development and testing environments**: Bitnami subcharts provide ready-to-use infrastructure components that you can deploy with Camunda applications using minimal configuration.

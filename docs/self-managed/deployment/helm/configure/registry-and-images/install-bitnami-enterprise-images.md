@@ -32,6 +32,10 @@ For production environments, consider using the official Kubernetes operators fo
 
 For detailed instructions, see [Deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
+:::tip Ready to move away from Bitnami subcharts?
+If you want to migrate from Bitnami subcharts to Kubernetes operators or managed services, see the [migration guide](/self-managed/deployment/helm/operational-tasks/migration/index.md) for step-by-step instructions and automated tooling.
+:::
+
 If you use Bitnami-based subcharts in production, Camunda strongly recommends using Bitnami Premium images licensed by Camunda and maintained by Bitnami (Broadcom). This guide explains how to configure and install Camunda with these images.
 
 ## Understanding Bitnami image offerings
