@@ -89,3 +89,15 @@ following tool definition when accessed through an MCP Client activity with the 
 ```
 
 When handling LLM tool call requests, the MCP Client integration of the AI agent connector transparently maps the unique tool names back to the matching activity. The tool name and arguments are then passed to the MCP Client connector for the actual tool call.
+
+## Name restrictions
+
+Because the `___` sequence is used as a separator in the tool naming convention, **MCP client activity IDs must not contain `___`**. If an activity ID contains this reserved separator, the AI agent connector raises a `ConnectorException` with the error code `MCP_GATEWAY_INVALID_TOOL_DEFINITIONS` when attempting tool discovery.
+
+For example, an activity ID such as `my___client` is invalid and would result in the following error:
+
+```
+Invalid MCP client activity ID(s) detected: ['my___client']. Activity IDs must not contain the reserved separator '___'. Please rename the affected activities in the BPMN model.
+```
+
+To resolve this error, rename the affected MCP Client activities in your BPMN model so that their IDs do not contain `___`.
