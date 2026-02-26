@@ -80,6 +80,7 @@ Depending on your infrastructure capabilities and organizational requirements, c
 | **Kubernetes operators** (CloudNativePG, ECK, Keycloak Operator)                       | Teams running Kubernetes who want production-grade, self-managed infrastructure with operator lifecycle management. | [Migrate to Kubernetes operators](./bitnami-to-operators.md)    |
 | **Managed services** (AWS RDS, Amazon OpenSearch, Azure Database for PostgreSQL, etc.) | Teams using cloud providers who prefer fully managed infrastructure with minimal operational overhead.              | [Migrate to managed services](./bitnami-to-managed-services.md) |
 | **Manual deployment** (VMs, bare-metal, Docker Compose)                                | Teams who cannot use operators or managed services, or require full control over infrastructure deployment.         | [Advanced alternatives](./alternatives.md)                      |
+| **Zero-downtime migration** (logical replication, CCR)                                 | Teams with strict SLA requirements who cannot afford any maintenance window.                                        | [Zero-downtime migration](./zero-downtime.md)                   |
 
 ## Prerequisites (all paths)
 

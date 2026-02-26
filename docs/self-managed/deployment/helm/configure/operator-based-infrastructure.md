@@ -7,6 +7,7 @@ description: "Deploy the databases (PostgreSQL, Elasticsearch) and OIDC provider
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import MigrationTip from '../operational-tasks/migration/\_partials/\_migration-tip.md'
 
 This guide explains how to deploy Camunda 8 infrastructure components using **official Kubernetes operators** as an alternative to the Bitnami subcharts. This approach provides production-grade, officially maintained deployment solutions for PostgreSQL, Elasticsearch, and Keycloak.
 
@@ -31,9 +32,7 @@ PostgreSQL, Elasticsearch, and Keycloak are **external dependencies** — they a
 If you prefer to continue using Bitnami subcharts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
 :::
 
-:::tip Migrating from Bitnami subcharts?
-If you have an existing Camunda deployment using Bitnami subcharts, see the [migration guide](/self-managed/deployment/helm/operational-tasks/migration/index.md) for automated tooling to migrate your data to Kubernetes operators or managed services with minimal downtime.
-:::
+<MigrationTip />
 
 ## Why use Kubernetes operators?
 

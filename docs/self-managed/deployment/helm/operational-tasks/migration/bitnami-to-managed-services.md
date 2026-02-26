@@ -7,6 +7,8 @@ description: "Migrate Camunda 8 Self-Managed infrastructure from Bitnami subchar
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import FailbackCaution from './\_partials/\_ops-failback-caution.md'
+import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 
 This guide walks you through migrating a Camunda 8 Helm installation from Bitnami-managed infrastructure to **cloud-managed services** such as:
 
@@ -457,3 +459,62 @@ After confirming the migration is successful, remove old Bitnami resources as de
 
 - **Cloud SQL Auth Proxy**: Use the [Cloud SQL Auth Proxy](https://cloud.google.com/sql/docs/postgres/sql-proxy) sidecar in your pods for secure connectivity.
 - **Workload Identity**: Leverage [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) for IAM-based authentication.
+
+## Operational readiness
+
+Before running this migration in production, follow these operational readiness steps to minimize risk — especially when migrating to external managed services where network and IAM configurations add complexity.
+
+### Staging rehearsal
+
+1. **Provision staging managed services** that mirror your production setup (same cloud provider, same region, same tier/SKU).
+2. **Run the full migration end-to-end** in staging, including all four phases plus validation.
+3. **Measure actual timings**: record how long each phase takes. Network latency to external services (RDS, Cloud SQL, OpenSearch) may increase backup/restore times compared to in-cluster operators.
+4. **Test rollback**: after a successful staging migration, run `bash rollback.sh` to verify the Helm values revert correctly and Camunda reconnects to the Bitnami subcharts.
+
+:::tip
+When staging with managed services, use the same authentication method (IAM, managed identity, workload identity) that you plan to use in production — password-based staging does not catch permission issues.
+:::
+
+### Production dry-run
+
+<DryRunCommands />
+
+Pay special attention to:
+
+- External endpoints and port configurations.
+- Kubernetes Secret names and keys referenced in the Helm values.
+- Network connectivity from the cluster to the managed services (security groups, private endpoints, firewall rules).
+
+### Pre-migration checklist
+
+Before starting the migration in production:
+
+- [ ] **Verify managed service connectivity**: from within the cluster, confirm you can connect to each managed service endpoint using `kubectl run` with a temporary client pod.
+- [ ] **Notify stakeholders**: announce the maintenance window at least 48 hours in advance.
+- [ ] **Verify independent backups**: confirm a recent backup exists via both your cluster backup tool (Velero, snapshots) and the cloud provider's managed service backup (RDS snapshots, automated backups).
+- [ ] **Check IAM permissions**: ensure the Kubernetes service account has the correct role bindings for the managed services (IRSA for AWS, Workload Identity for GCP, Managed Identity for Azure).
+- [ ] **Monitor readiness**: have dashboards open for cluster health, managed service metrics (CPU, connections, storage), and pod status.
+
+### Failback procedure
+
+1. **Immediate failback** (Bitnami PVCs still exist): run `bash rollback.sh` to revert the Helm values.
+2. **Late failback** (Bitnami PVCs deleted): restore from the backup taken during Phase 2. If your managed service has point-in-time recovery (PITR), you can also restore from a managed service snapshot, but note that Camunda would need to be reconfigured to point back to the Bitnami infrastructure.
+
+<FailbackCaution />
+
+### Data safety measures
+
+- All `pg_dump` backups are stored on a dedicated PVC that persists independently.
+- Managed services typically offer their own automated backups (RDS snapshots, Cloud SQL backups). Verify these are enabled and have adequate retention.
+- The migration scripts are **idempotent** and can be re-run safely.
+- No Bitnami resources are deleted during migration — they must be explicitly removed afterward.
+
+### Post-migration monitoring
+
+After completing the migration, monitor the following for at least 48 hours:
+
+- **Pod restarts**: `kubectl get pods -n ${NAMESPACE} --watch`
+- **Managed service metrics**: check connection counts, latency, CPU, and storage usage in your cloud provider console.
+- **Camunda component logs**: look for connection timeouts, SSL/TLS handshake errors, or authentication failures.
+- **Process instance completion**: verify that in-flight process instances continue to execute correctly.
+- **Zeebe export lag**: confirm that Zeebe exporters are writing to the external Elasticsearch/OpenSearch without delays.
