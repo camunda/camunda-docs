@@ -111,8 +111,7 @@ In this example, we include a Maven project's `POM` file. Other build tools like
 [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) act as
 the modeling interface for the users of your connector.
 
-The template can be written manually but we recommend to use the `element-template-generator` which generates the
-element template for your connector as part of your build process.
+The template can be written manually but we recommend to use the [`element-template-generator`](https://github.com/camunda/connectors/tree/main/element-template-generator) which generates the element template for your connector as part of your build process.
 
 Element templates define the data and configuration bindings to your connector on the BPMN element via properties Properties have different types that define their visual representation. The can also be hidden
 in the modeling UI but still applied to the BPMN:
