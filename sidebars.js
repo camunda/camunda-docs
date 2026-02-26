@@ -1610,6 +1610,7 @@ module.exports = {
                     "self-managed/deployment/helm/operational-tasks/migration/bitnami-to-operators",
                     "self-managed/deployment/helm/operational-tasks/migration/bitnami-to-managed-services",
                     "self-managed/deployment/helm/operational-tasks/migration/alternatives",
+                    "self-managed/deployment/helm/operational-tasks/migration/zero-downtime",
                   ],
                 },
                 "self-managed/deployment/helm/operational-tasks/diagnostics",

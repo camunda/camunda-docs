@@ -9,6 +9,8 @@ description: "Step-by-step guide to migrate Camunda 8 Self-Managed infrastructur
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import FailbackCaution from './\_partials/\_ops-failback-caution.md'
+import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 
 This guide walks you through migrating a Camunda 8 Helm installation from Bitnami-managed infrastructure (PostgreSQL, Elasticsearch, Keycloak) to **Kubernetes operator-managed equivalents**:
 
@@ -419,3 +421,62 @@ bash 1-deploy-targets.sh --status
 ```
 
 This shows which phases have been completed and their timestamps.
+
+## Operational readiness
+
+Before running this migration in production, follow these operational readiness steps to minimize risk and ensure a smooth transition.
+
+### Staging rehearsal
+
+1. **Clone your production environment** to a staging cluster (same Helm chart version, same component configuration, comparable data volumes).
+2. **Run the full migration end-to-end** in staging, including all four phases, validation, and clean up.
+3. **Measure actual timings**: record how long each phase takes, especially the `2-backup.sh` and `3-cutover.sh` phases, as they determine your downtime window.
+4. **Test rollback**: after a successful staging migration, intentionally run `bash rollback.sh` to verify you can revert cleanly.
+
+:::tip
+Use a representative data set — empty databases migrate in seconds but do not reveal performance bottlenecks that large datasets will.
+:::
+
+### Production dry-run
+
+<DryRunCommands />
+
+Review the output carefully. Ensure that all Kubernetes resources, secrets, and Helm values match your expectations before removing `--dry-run`.
+
+### Pre-migration checklist
+
+Before starting the migration in production:
+
+- [ ] **Notify stakeholders**: announce the maintenance window at least 48 hours in advance. Include expected start time, duration (measured in staging), and impact on end users.
+- [ ] **Verify backups**: confirm that your existing backup strategy (Velero, volume snapshots, or cloud provider backups) has a recent successful backup. The migration creates its own backup, but an independent one provides an additional safety net.
+- [ ] **Scale down non-essential consumers**: if you have external systems consuming Camunda APIs, consider pausing them during the freeze window to prevent data inconsistencies.
+- [ ] **Check cluster resources**: ensure the cluster has enough CPU, memory, and storage to run both old and new infrastructure simultaneously during the migration (both exist briefly).
+- [ ] **Review `env.sh`**: double-check all variables, especially `NAMESPACE`, `CAMUNDA_RELEASE_NAME`, `PG_TARGET_MODE`, and `ES_TARGET_MODE`.
+- [ ] **Monitor readiness**: have dashboards open for cluster health, pod status, and storage capacity.
+
+### Failback procedure
+
+If the migration succeeds but you discover issues in the hours or days following:
+
+1. **Immediate failback** (Bitnami PVCs still exist): run `bash rollback.sh` to revert the Helm values and re-attach to the original Bitnami StatefulSets.
+2. **Late failback** (Bitnami PVCs deleted): restore from the backup taken during Phase 2 or from your independent backup.
+
+<FailbackCaution />
+
+### Data safety measures
+
+- All `pg_dump` backups are stored on a dedicated PVC (`migration-backup-pvc`) that persists independently of the migration.
+- Elasticsearch snapshots are stored in a registered repository and retained according to the configured retention policy.
+- The migration scripts are **idempotent**: re-running a phase that was interrupted picks up where it left off.
+- No Bitnami resources are deleted during the migration — they are only disconnected from the Helm release. You must explicitly remove them afterward.
+
+### Post-migration monitoring
+
+After completing the migration, monitor the following for at least 48 hours:
+
+- **Pod restarts**: `kubectl get pods -n ${NAMESPACE} --watch`
+- **CNPG cluster health**: `kubectl get clusters -n ${NAMESPACE}` (should show `Cluster in healthy state`)
+- **ECK cluster health**: `kubectl get elasticsearch -n ${NAMESPACE}` (should show `green`)
+- **Camunda component logs**: check for connection errors, authentication failures, or data inconsistencies.
+- **Process instance completion**: verify that in-flight process instances continue to execute correctly.
+- **Zeebe export lag**: confirm that Zeebe exporters are writing to the new Elasticsearch without delays.

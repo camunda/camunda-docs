@@ -7,6 +7,7 @@ description: "Alternative migration paths for Camunda 8 Self-Managed when Kubern
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 
 This guide covers advanced migration alternatives for organizations that **cannot use Kubernetes operators or managed services** for their infrastructure components. These approaches require more manual effort but provide full control over the deployment.
 
@@ -450,3 +451,61 @@ Regardless of the infrastructure target, Keycloak migration always involves migr
 - If using the **Keycloak Operator** (recommended): Deploy a Keycloak Custom Resource pointing to the migrated PostgreSQL database.
 - If using an **external OIDC provider**: Configure Camunda to use the external provider via [External OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md). You can then decommission Keycloak entirely.
 - If using a **standalone Keycloak instance** (VM or Docker): Point it to the migrated PostgreSQL database and update the Camunda Helm values to reference the external Keycloak URL.
+
+## Operational readiness
+
+Before running any of the alternative migration approaches in production, follow these steps to minimize risk.
+
+### Staging rehearsal
+
+1. **Replicate your production environment** in a staging/test cluster — including the target infrastructure (standalone StatefulSets, VMs, Docker Compose, etc.).
+2. **Run the full migration end-to-end** using the chosen approach (manual StatefulSets, VMs, or Docker).
+3. **Measure actual timings**: since alternative deployments vary widely, timing data from staging is critical for setting maintenance windows.
+4. **Test the failback path**: verify that you can roll back by restoring the original Helm values and reconnecting to the Bitnami subcharts.
+
+:::tip
+For VM-based or Docker Compose targets, include network connectivity testing (firewall rules, DNS resolution from Kubernetes to external hosts) as part of the rehearsal.
+:::
+
+### Production dry-run
+
+If you're using the migration scripts, use the `--dry-run` flag:
+
+```bash
+bash 2-backup.sh --dry-run
+bash 3-cutover.sh --dry-run
+```
+
+If you're performing the migration manually (as described in this guide), create a step-by-step runbook and walk through it without executing destructive commands. Document each command and expected output.
+
+### Pre-migration checklist
+
+- [ ] **Verify target connectivity**: confirm that the Kubernetes cluster can reach the target infrastructure (VMs, external databases). Test with `curl`, `psql`, or `kubectl exec` from within the cluster.
+- [ ] **Notify stakeholders**: announce the maintenance window.
+- [ ] **Verify backups**: ensure you have a recent backup from your existing backup strategy, independent of the migration scripts.
+- [ ] **Document the runbook**: for manual migrations, have a written, step-by-step runbook reviewed by a second team member.
+- [ ] **Prepare rollback commands**: pre-write the `helm upgrade` command needed to revert to Bitnami subcharts.
+
+### Failback procedure
+
+1. **Helm rollback**: revert the Helm values to use Bitnami subcharts again. Since the Bitnami PVCs still exist (they are not deleted during migration), data is intact.
+2. **If Bitnami PVCs are deleted**: restore from your independent backup or from the `pg_dump` files created during migration.
+
+<FailbackCaution />
+
+### Data safety measures
+
+- Always create `pg_dump` backups before any data migration, regardless of the target infrastructure.
+- Store backup files outside the cluster (cloud storage bucket, NFS share) for redundancy.
+- The same `pg_restore` flags (`--clean --if-exists --no-owner --no-privileges`) apply to all targets and are idempotent.
+- Keep the old Bitnami infrastructure running in read-only mode (if possible) for several days as a safety net.
+
+### Post-migration monitoring
+
+After completing the migration, monitor for at least 48 hours:
+
+- **Pod restarts**: `kubectl get pods -n ${NAMESPACE} --watch`
+- **Target database health**: monitor connection counts, replication status (if using replicas), and storage usage.
+- **Camunda component logs**: look for connection errors, authentication failures, or data inconsistencies.
+- **Process instance completion**: verify that in-flight process instances continue to execute correctly.
+- **External connectivity stability**: for VM or Docker targets, monitor network latency and connection drops between Kubernetes and the external infrastructure.
