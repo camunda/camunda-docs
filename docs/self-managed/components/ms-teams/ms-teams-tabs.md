@@ -13,13 +13,13 @@ The Camunda for Microsoft Teams app adds visual tabs to your Teams sidebar, prov
 
 ## Tasks
 
-The **Tasks** tab lets you browse and manage user tasks from your Camunda clusters.
+With the **Tasks** tab, you can browse and manage user tasks from your Camunda clusters.
 
 - **Filter tasks** by category: My tasks, All open tasks, Unclaimed tasks, or Completed tasks.
 - **Sort and search** tasks using additional filter controls (assignee, candidate group, process, dates, priority).
-- **Switch between views** — card view or list view.
+- **Switch between views**: Card view or list view.
 - **View task details** including the process it belongs to, priority, due date, and creation time.
-- **Assign a task** to yourself and **complete it** — either by filling in a Camunda form or by providing data manually.
+- **Assign a task** to yourself and **complete it**, either by filling in a Camunda form or by providing data manually.
 - **Paginate** through large task lists or load more on mobile.
 
 :::note
@@ -28,7 +28,7 @@ Tasks update automatically as you complete work in Camunda or Microsoft Teams.
 
 ## Processes
 
-The **Processes** tab lets you view and start Camunda process definitions.
+With the **Processes** tab, you can view and start Camunda process definitions.
 
 - Browse all available process definitions displayed as cards.
 - Select a process and choose a specific version.
@@ -44,15 +44,15 @@ To start a process:
 
 ## Incidents
 
-The **Incidents** tab lets you monitor incidents that occurred during process execution.
+With the **Incidents** tab, you can monitor incidents that occurred during process execution.
 
 - See a list of active incidents with error type, description, and timestamp.
-- **Retry** a failed incident directly from Teams.
-- **Copy a link** to the incident or **open it in [Operate](/components/operate/operate-introduction.md)** for deeper investigation.
+- Retry a failed incident directly from Teams.
+- Copy a link to the incident or open it in [Operate](/components/operate/operate-introduction.md) for deeper investigation.
 
 ## Onboarding
 
-When you first open the app, the **Onboarding** page guides you through connecting your Teams account to your Camunda account via single sign-on. If you don't have a Camunda account yet, you can sign up from here.
+When you first open the app, the **Onboarding** page guides you through connecting your Teams account to your Camunda account via single sign-on. If you don't have a Camunda account yet, you can sign up from this page.
 
 ## Cluster status
 
