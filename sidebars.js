@@ -657,17 +657,13 @@ module.exports = {
                   ],
                 },
                 {
-                  "Manage your plan": [
+                  "Manage plan": [
                     "components/console/manage-plan/create-account",
                     "components/console/manage-plan/available-plans",
                     "components/console/manage-plan/upgrade-to-enterprise-plan",
                     "components/console/manage-plan/update-billing-reservations",
                   ],
                 },
-              ],
-            },
-            {
-              Workspaces: [
                 {
                   type: "category",
                   label: "Manage workspaces",
@@ -680,6 +676,11 @@ module.exports = {
                     "components/camunda-hub/workspaces/manage-workspaces",
                   ],
                 },
+              ],
+            },
+            {
+              Workspace: [
+                "components/camunda-hub/workspaces/manage-workspace",
                 {
                   type: "category",
                   label: "Manage projects",
