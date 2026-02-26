@@ -38,7 +38,7 @@ Once Camunda-provided LLM is available in your organization, its credentials are
   - **Provider**: `OpenaAI Compatible`.
   - **API endpoint**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_ENDPOINT}}`.
   - **API key**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_KEY}}`.
-  - **Model**: Select a model from the list, for example, `us.anthropic.claude-3-7-sonnet-20250219-v1:0`. See [Available models](#available-models) for more details.
+  - **Model**: Select a model from the [list of available models](./choose-right-model-agentic.md#models-available-in-camunda-provided-llm). For example `gpt-5.2`.
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   <img
@@ -49,12 +49,6 @@ Once Camunda-provided LLM is available in your organization, its credentials are
     style={{ width: "auto", maxWidth: "50%", height: "auto" }}
   />
 </div>
-
-## Available models
-
-Camunda-provided LLM provides access to a set of LLMs from multiple providers. The available models available may change over time, but typically include popular general-purpose models from major providers:
-
-- **Anthropic models**: `us.anthropic.claude-3-7-sonnet-20250219-v1:0` is a versatile model suitable for a wide range of agentic orchestration tasks, with strong reasoning and language capabilities.
 
 ## Trial vs. enterprise budgets
 
