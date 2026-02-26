@@ -114,7 +114,7 @@ New documentation shows you how to:
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="feature" data-area="Listeners" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="feature" data-area="Listeners" data-deployment="sm">
   <div className="release-announcement-badge">
     <span className="badge badge--feature">Feature</span>
   </div>
