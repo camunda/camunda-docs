@@ -2044,6 +2044,29 @@ module.exports = {
           ],
         },
         {
+          Optimize: [
+            "self-managed/components/optimize/overview",
+            {
+              Configuration: [
+                {
+                  "System configuration": [
+                    "self-managed/components/optimize/configuration/system-configuration",
+                    "self-managed/components/optimize/configuration/system-configuration-platform-8",
+                  ],
+                },
+                "self-managed/components/optimize/configuration/logging",
+                "self-managed/components/optimize/configuration/security-instructions",
+                "self-managed/components/optimize/configuration/shared-elasticsearch-cluster",
+                "self-managed/components/optimize/configuration/history-cleanup",
+                "self-managed/components/optimize/configuration/localization",
+                "self-managed/components/optimize/configuration/object-variables",
+                "self-managed/components/optimize/configuration/variable-import",
+                "self-managed/components/optimize/configuration/multi-tenancy",
+              ],
+            },
+          ],
+        },
+        {
           type: "category",
           label: "Management Identity",
           link: {
@@ -2109,29 +2132,6 @@ module.exports = {
                 "self-managed/components/management-identity/miscellaneous/resource-management",
                 "self-managed/components/management-identity/miscellaneous/starting-configuration",
                 "self-managed/components/management-identity/miscellaneous/troubleshoot-identity",
-              ],
-            },
-          ],
-        },
-        {
-          Optimize: [
-            "self-managed/components/optimize/overview",
-            {
-              Configuration: [
-                {
-                  "System configuration": [
-                    "self-managed/components/optimize/configuration/system-configuration",
-                    "self-managed/components/optimize/configuration/system-configuration-platform-8",
-                  ],
-                },
-                "self-managed/components/optimize/configuration/logging",
-                "self-managed/components/optimize/configuration/security-instructions",
-                "self-managed/components/optimize/configuration/shared-elasticsearch-cluster",
-                "self-managed/components/optimize/configuration/history-cleanup",
-                "self-managed/components/optimize/configuration/localization",
-                "self-managed/components/optimize/configuration/object-variables",
-                "self-managed/components/optimize/configuration/variable-import",
-                "self-managed/components/optimize/configuration/multi-tenancy",
               ],
             },
           ],
