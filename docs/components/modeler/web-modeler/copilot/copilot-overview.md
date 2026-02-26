@@ -14,12 +14,6 @@ import CopilotOutputMapping from './img/copilot-output-mapping.png';
 
 Camunda Copilot is an AI assistant integrated into [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) that helps you with BPMN process modeling, FEEL expressions, and Form building. It is available in both SaaS and Self-Managed deployments.
 
-:::note Terms of use
-By using this tool, you agree to Camunda's use of the anonymized input and output data and anonymized feedback to improve it.
-
-While your latest artifacts will be saved in your account, Camunda does not save your prompts and the resulting outputs.
-:::
-
 ## How it works
 
 Camunda Copilot uses a multi-agent architecture to handle different types of tasks:
