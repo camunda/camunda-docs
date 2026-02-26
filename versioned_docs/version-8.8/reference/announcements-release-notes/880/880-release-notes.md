@@ -700,7 +700,7 @@ Element template management is now more flexible for developers and DevOps teams
 
 Chat with the AI FEEL Copilot for help generating FEEL (Friendly Enough Expression Language) expressions in Web Modeler.
 
-<p><a href="../../../../components/early-access/alpha/feel-copilot/" class="link-arrow">FEEL Copilot</a></p>
+<p><a href="../../../../components/modeler/web-modeler/copilot/copilot-overview/" class="link-arrow">Camunda Copilot</a></p>
 
 ### FEEL Playground
 
