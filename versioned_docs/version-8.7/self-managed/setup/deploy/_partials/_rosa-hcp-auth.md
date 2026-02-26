@@ -30,11 +30,11 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    - On the **Verify ROSA prerequisites** page, select **I agree to share my contact information with Red Hat**.
    - Choose **Enable ROSA**.
 
-   :::info AWS billing account vs. associated AWS infrastructure account
+   :::note AWS billing account vs. associated AWS infrastructure account
 
-   Only a single **AWS billing account** can be associated with a Red Hat account for ROSA service billing. This is the account linked through the [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html) activation step above.
+   Only a single AWS billing account can be associated with a Red Hat account for ROSA service billing. This is the account linked through the [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html) activation step above.
 
-   However, the **associated AWS infrastructure account** — the account where the ROSA cluster resources (EC2 instances, VPCs, etc.) are actually deployed — can be a different AWS account. This allows organizations to separate billing ownership from infrastructure management. For more details, see the [ROSA billing FAQ](https://docs.openshift.com/rosa/rosa_architecture/rosa_policy_service_definition/rosa-policy-understand-availability.html).
+   However, the associated AWS infrastructure account — the account where the ROSA cluster resources (EC2 instances, VPCs, etc.) are actually deployed — can be a different AWS account. This allows organizations to separate billing ownership from infrastructure management. For more details, see the [ROSA billing FAQ](https://docs.openshift.com/rosa/rosa_architecture/rosa_policy_service_definition/rosa-policy-understand-availability.html).
 
    :::
 
@@ -59,7 +59,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
    :::tip STS mode (recommended)
 
-   ROSA HCP uses [AWS STS](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html) by default. STS provides **short-lived, temporary credentials** through IAM roles instead of long-lived access keys, following [AWS security best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html).
+   ROSA HCP uses [AWS STS](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html) by default. STS provides short-lived, temporary credentials through IAM roles instead of long-lived access keys, following [AWS security best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html).
    - **`account-roles`**: Creates the account-wide IAM roles that ROSA needs to manage AWS resources (installer, support, control plane, and worker roles).
    - **`ocm-role`**: Links the [OpenShift Cluster Manager (OCM)](https://console.redhat.com/openshift) to your AWS account, enabling OCM to manage clusters on your behalf.
 

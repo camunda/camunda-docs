@@ -103,7 +103,7 @@ It is presented as an example for running Camunda 8 in ROSA.
 Configure `CLUSTER_1_REGION` and `CLUSTER_2_REGION` with the target regions respectively.
 
 ```bash
-# set the region, adjust to your needs
+# Set the region, adjust as needed
 export CLUSTER_1_REGION="us-east-1"
 export CLUSTER_2_REGION="us-east-2"
 ```
@@ -115,7 +115,9 @@ rosa verify quota --region="$CLUSTER_1_REGION"
 rosa verify quota --region="$CLUSTER_2_REGION"
 ```
 
-**Note**: This may fail due to organizational policies.
+:::note
+This may fail due to organizational policies.
+:::
 
 #### Set up the ROSA clusters module
 

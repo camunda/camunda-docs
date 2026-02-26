@@ -116,7 +116,9 @@ Verify your AWS quotas:
 rosa verify quota --region="$AWS_REGION"
 ```
 
-**Note**: This may fail due to organizational policies.
+:::note
+This may fail due to organizational policies.
+:::
 
 #### Set up the ROSA cluster module
 
