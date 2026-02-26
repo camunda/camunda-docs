@@ -207,6 +207,7 @@
           "items": [
             "components/agentic-orchestration/ai-agents",
             "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/monitor-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic"
           ]
@@ -2958,7 +2959,8 @@
                   },
                   "items": [
                     "self-managed/deployment/helm/configure/ingress/ingress-setup",
-                    "self-managed/deployment/helm/configure/ingress/accessing-components-without-ingress"
+                    "self-managed/deployment/helm/configure/ingress/accessing-components-without-ingress",
+                    "self-managed/deployment/helm/configure/ingress/gateway-api-setup"
                   ]
                 },
                 {
