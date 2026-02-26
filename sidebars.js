@@ -141,6 +141,7 @@ module.exports = {
           items: ["components/concepts/message-aggregation"],
         },
         "components/concepts/signals",
+        "components/concepts/conditionals",
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
@@ -212,6 +213,7 @@ module.exports = {
           items: [
             "components/agentic-orchestration/ai-agents",
             "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/monitor-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
           ],
@@ -643,6 +645,7 @@ module.exports = {
                 "components/modeler/bpmn/message-events/message-events",
                 "components/modeler/bpmn/signal-events/signal-events",
                 "components/modeler/bpmn/timer-events/timer-events",
+                "components/modeler/bpmn/conditional-events/conditional-events",
                 "components/modeler/bpmn/error-events/error-events",
                 "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
@@ -719,19 +722,13 @@ module.exports = {
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/manage-batch-operations",
+            "components/operate/userguide/monitor-batch-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
             {
               "Process instance modification": [
                 "components/operate/userguide/process-instance-modification",
                 "components/operate/userguide/process-instance-batch-modification",
-              ],
-            },
-            "components/operate/userguide/process-instance-migration",
-            {
-              "Monitor process operations": [
-                "components/operate/userguide/monitor-operation-status",
-                "components/operate/userguide/monitor-batch-operations",
               ],
             },
           ],
@@ -1135,6 +1132,7 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/orchestration-cluster-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/orchestration-cluster-api-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         {
@@ -1495,7 +1493,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
-                "self-managed/deployment/helm/configure/vendor-supported-infrastructure",
+                "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
@@ -1721,6 +1719,19 @@ module.exports = {
           label: "Manual",
           items: [
             "self-managed/deployment/manual/install",
+            {
+              type: "category",
+              label: "Manual installation with RDBMS",
+              link: {
+                type: "doc",
+                id: "self-managed/deployment/manual/rdbms/index",
+              },
+              items: [
+                "self-managed/deployment/manual/rdbms/rdbms-production-architecture",
+                "self-managed/deployment/manual/rdbms/configuration",
+                "self-managed/deployment/manual/rdbms/operations",
+              ],
+            },
             {
               type: "category",
               label: "Cloud providers",
@@ -2142,6 +2153,7 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.9",
+      className: "sidebar-cta",
       link: {
         type: "doc",
         id: "self-managed/upgrade/index",

@@ -108,7 +108,7 @@ If secondary storage is disabled, the following components and features are unav
 | :--------------- | :--------------------------------------------------------------------------------- | :--------------------- |
 | Web applications | Operate, Tasklist, Identity UI, Optimize, Play (Modeler Play tab)                  | Disabled               |
 | APIs & services  | Orchestration Cluster REST API (search endpoints), batch operations, usage metrics | Return `403 Forbidden` |
-| Data & storage   | Elasticsearch/OpenSearch exporters, Schema Manager, secondary storage backups      | Disabled               |
+| Data & storage   | Elasticsearch/OpenSearch Exporters, Schema Manager, secondary storage backups      | Disabled               |
 
 :::note
 

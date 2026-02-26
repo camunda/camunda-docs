@@ -17,10 +17,6 @@ BPMN events allow us to react to all kinds of information. We can use them to tr
 
 <div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/events.bpmn" />
 
-:::caution Camunda 7 Only
-Condition events are [not yet supported in Camunda 8](/components/modeler/bpmn/bpmn-coverage.md).
-:::
-
 ### Boundary events to add activities on triggers
 
 BPMN allows us to attach events to the boundary of activities to trigger some follow-up action. By modeling such an event as either **interrupting** or **non-interrupting**, we can decide to do the activities either _instead of_ the activity we attach the event to, or _in addition to_ it.
