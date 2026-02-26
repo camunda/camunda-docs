@@ -626,161 +626,169 @@ module.exports = {
           },
           items: [
             {
-              "Manage organization": [
-                "components/console/manage-organization/organization-settings",
-                "components/console/manage-organization/manage-users",
-                "components/console/manage-organization/manage-user-groups",
-                "components/console/manage-organization/external-sso",
-                "components/console/manage-organization/view-organization-activity",
-                "components/console/manage-organization/enable-alpha-features",
-                "components/console/manage-organization/usage-history",
-                "components/console/manage-organization/usage-alerts",
-                "components/console/manage-organization/advanced-search",
-                "components/console/manage-organization/switch-organization",
-                "components/console/manage-organization/delete-account",
-              ],
-            },
-            {
-              type: "category",
-              label: "Manage workspaces",
-              link: {
-                type: "doc",
-                id: "components/modeler/web-modeler/collaboration/collaboration",
-              },
-              items: [
-                "components/camunda-hub/workspaces/create-workspace",
-                "components/camunda-hub/workspaces/manage-workspaces",
-              ],
-            },
-            {
-              type: "category",
-              label: "Manage projects",
-              link: {
-                type: "doc",
-                id: "components/modeler/web-modeler/process-applications/process-applications",
-              },
-              items: [
+              Organization: [
                 {
-                  type: "doc",
-                  label: "Lifecycle",
-                  id: "components/modeler/web-modeler/process-applications/process-application-pipeline",
+                  "Manage organization": [
+                    "components/console/manage-organization/organization-settings",
+                    "components/console/manage-organization/manage-users",
+                    "components/console/manage-organization/manage-user-groups",
+                    "components/console/manage-organization/external-sso",
+                    "components/console/manage-organization/view-organization-activity",
+                    "components/console/manage-organization/enable-alpha-features",
+                    "components/console/manage-organization/usage-history",
+                    "components/console/manage-organization/usage-alerts",
+                    "components/console/manage-organization/advanced-search",
+                    "components/console/manage-organization/switch-organization",
+                    "components/console/manage-organization/delete-account",
+                  ],
                 },
                 {
-                  type: "doc",
-                  label: "Creation",
-                  id: "components/modeler/web-modeler/process-applications/create-a-process-application",
+                  "Manage clusters": [
+                    "components/console/manage-clusters/create-cluster",
+                    "components/console/manage-clusters/manage-cluster",
+                    "components/console/manage-clusters/cluster-connectors",
+                    "components/console/manage-clusters/manage-api-clients",
+                    "components/console/manage-clusters/manage-secrets",
+                    "components/console/manage-clusters/manage-alerts",
+                    "components/console/manage-clusters/manage-ip-allowlists",
+                    "components/console/manage-clusters/create-backups",
+                    "components/console/manage-clusters/settings",
+                    "components/console/manage-clusters/cluster-capacity",
+                  ],
                 },
                 {
-                  type: "doc",
-                  label: "Deployment",
-                  id: "components/modeler/web-modeler/process-applications/deploy-process-application",
-                },
-                {
-                  type: "doc",
-                  label: "Versioning",
-                  id: "components/modeler/web-modeler/process-applications/process-application-versioning",
-                },
-                {
-                  type: "doc",
-                  label: "Git Sync",
-                  id: "components/modeler/web-modeler/process-applications/git-sync",
+                  "Manage your plan": [
+                    "components/console/manage-plan/create-account",
+                    "components/console/manage-plan/available-plans",
+                    "components/console/manage-plan/upgrade-to-enterprise-plan",
+                    "components/console/manage-plan/update-billing-reservations",
+                  ],
                 },
               ],
             },
             {
-              "Manage clusters": [
-                "components/console/manage-clusters/create-cluster",
-                "components/console/manage-clusters/manage-cluster",
-                "components/console/manage-clusters/cluster-connectors",
-                "components/console/manage-clusters/manage-api-clients",
-                "components/console/manage-clusters/manage-secrets",
-                "components/console/manage-clusters/manage-alerts",
-                "components/console/manage-clusters/manage-ip-allowlists",
-                "components/console/manage-clusters/create-backups",
-                "components/console/manage-clusters/settings",
-                "components/console/manage-clusters/cluster-capacity",
-              ],
-            },
-            {
-              "Manage your plan": [
-                "components/console/manage-plan/create-account",
-                "components/console/manage-plan/available-plans",
-                "components/console/manage-plan/upgrade-to-enterprise-plan",
-                "components/console/manage-plan/update-billing-reservations",
-              ],
-            },
-            {
-              "Model business processes": [
+              Workspaces: [
                 {
-                  Model: [
-                    "components/modeler/web-modeler/launch-web-modeler",
-                    "components/modeler/web-modeler/modeling/model-your-first-diagram",
-                    "components/modeler/web-modeler/run-or-publish-your-process",
-                    "components/modeler/web-modeler/process-landscape-visualization",
-                    "components/modeler/web-modeler/modeling/context-pad",
-                    "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
-                    "components/modeler/web-modeler/modeling/versions",
-                    "components/modeler/web-modeler/modeling/file-download",
-                    "components/modeler/web-modeler/modeling/camunda-marketplace",
+                  type: "category",
+                  label: "Manage workspaces",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/collaboration/collaboration",
+                  },
+                  items: [
+                    "components/camunda-hub/workspaces/create-workspace",
+                    "components/camunda-hub/workspaces/manage-workspaces",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Manage projects",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/process-applications/process-applications",
+                  },
+                  items: [
                     {
                       type: "doc",
-                      id: "components/modeler/web-modeler/web-modeler-settings",
-                      label: "Settings",
+                      label: "Lifecycle",
+                      id: "components/modeler/web-modeler/process-applications/process-application-pipeline",
                     },
                     {
-                      type: "category",
-                      label: "Import",
-                      items: [
-                        "components/modeler/web-modeler/modeling/import-diagram",
-                        "components/modeler/web-modeler/modeling/import-resources",
-                        "components/modeler/web-modeler/modeling/prepare-resources",
-                      ],
+                      type: "doc",
+                      label: "Creation",
+                      id: "components/modeler/web-modeler/process-applications/create-a-process-application",
                     },
                     {
-                      type: "category",
-                      label: "Element templates",
-                      link: {
-                        type: "doc",
-                        id: "components/modeler/web-modeler/element-templates/manage-element-templates",
-                      },
-                      items: [
-                        "components/modeler/web-modeler/element-templates/element-template-generator",
-                        "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
-                        "components/modeler/web-modeler/element-templates/save-as-element-templates",
-                        "components/modeler/web-modeler/element-templates/best-practices",
-                      ],
+                      type: "doc",
+                      label: "Deployment",
+                      id: "components/modeler/web-modeler/process-applications/deploy-process-application",
                     },
                     {
-                      "AI features": [
-                        "components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai",
-                      ],
+                      type: "doc",
+                      label: "Versioning",
+                      id: "components/modeler/web-modeler/process-applications/process-application-versioning",
                     },
                     {
-                      "Advanced modeling": [
-                        "components/modeler/web-modeler/modeling/advanced-modeling/business-rule-task-linking",
-                        "components/modeler/web-modeler/modeling/advanced-modeling/call-activity-linking",
-                        "components/modeler/web-modeler/modeling/advanced-modeling/form-linking",
-                        "components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes",
-                        "components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files",
-                      ],
+                      type: "doc",
+                      label: "Git Sync",
+                      id: "components/modeler/web-modeler/process-applications/git-sync",
                     },
                   ],
                 },
                 {
-                  Collaborate: [
-                    "components/modeler/web-modeler/collaboration/collaborate-with-modes",
-                    "components/modeler/web-modeler/collaboration/design-your-process",
-                    "components/modeler/web-modeler/collaboration/implement-your-process",
-                    "components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
-                    "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
-                  ],
-                },
-                {
-                  Validate: [
-                    "components/modeler/web-modeler/validation/play-your-process",
-                    "components/modeler/web-modeler/validation/test-scenario-files",
-                    "components/modeler/web-modeler/validation/token-simulation",
-                    "components/modeler/web-modeler/validation/task-testing",
+                  "Model business processes": [
+                    {
+                      Model: [
+                        "components/modeler/web-modeler/launch-web-modeler",
+                        "components/modeler/web-modeler/modeling/model-your-first-diagram",
+                        "components/modeler/web-modeler/run-or-publish-your-process",
+                        "components/modeler/web-modeler/process-landscape-visualization",
+                        "components/modeler/web-modeler/modeling/context-pad",
+                        "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
+                        "components/modeler/web-modeler/modeling/versions",
+                        "components/modeler/web-modeler/modeling/file-download",
+                        "components/modeler/web-modeler/modeling/camunda-marketplace",
+                        {
+                          type: "doc",
+                          id: "components/modeler/web-modeler/web-modeler-settings",
+                          label: "Settings",
+                        },
+                        {
+                          type: "category",
+                          label: "Import",
+                          items: [
+                            "components/modeler/web-modeler/modeling/import-diagram",
+                            "components/modeler/web-modeler/modeling/import-resources",
+                            "components/modeler/web-modeler/modeling/prepare-resources",
+                          ],
+                        },
+                        {
+                          type: "category",
+                          label: "Element templates",
+                          link: {
+                            type: "doc",
+                            id: "components/modeler/web-modeler/element-templates/manage-element-templates",
+                          },
+                          items: [
+                            "components/modeler/web-modeler/element-templates/element-template-generator",
+                            "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
+                            "components/modeler/web-modeler/element-templates/save-as-element-templates",
+                            "components/modeler/web-modeler/element-templates/best-practices",
+                          ],
+                        },
+                        {
+                          "AI features": [
+                            "components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai",
+                          ],
+                        },
+                        {
+                          "Advanced modeling": [
+                            "components/modeler/web-modeler/modeling/advanced-modeling/business-rule-task-linking",
+                            "components/modeler/web-modeler/modeling/advanced-modeling/call-activity-linking",
+                            "components/modeler/web-modeler/modeling/advanced-modeling/form-linking",
+                            "components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes",
+                            "components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files",
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      Collaborate: [
+                        "components/modeler/web-modeler/collaboration/collaborate-with-modes",
+                        "components/modeler/web-modeler/collaboration/design-your-process",
+                        "components/modeler/web-modeler/collaboration/implement-your-process",
+                        "components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
+                        "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
+                      ],
+                    },
+                    {
+                      Validate: [
+                        "components/modeler/web-modeler/validation/play-your-process",
+                        "components/modeler/web-modeler/validation/test-scenario-files",
+                        "components/modeler/web-modeler/validation/token-simulation",
+                        "components/modeler/web-modeler/validation/task-testing",
+                      ],
+                    },
                   ],
                 },
               ],
