@@ -485,13 +485,15 @@ orchestration:
           existingSecret: "camunda-credentials"
           existingSecretKey: "orchestration-rdbms-password"
       elasticsearch:
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "orchestration-elasticsearch-password"
+        auth:
+          secret:
+            existingSecret: "camunda-credentials"
+            existingSecretKey: "orchestration-elasticsearch-password"
       opensearch:
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "orchestration-opensearch-password"
+        auth:
+          secret:
+            existingSecret: "camunda-credentials"
+            existingSecretKey: "orchestration-opensearch-password"
   security:
     authentication:
       oidc:
