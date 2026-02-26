@@ -7,6 +7,10 @@ description: "Overview of the Camunda 8 container deployment reference architect
 
 This reference architecture describes how to deploy Camunda 8 Self-Managed with containers. This deployment method is ideal for users who want a portable, consistent runtime and the benefits of containerization without managing Kubernetes.
 
+:::note
+This method of deployment requires a solid understanding of infrastructure, networking, and application management. Consider evaluating your deployment platform options based on your familiarity and need. If you prefer a simpler and managed solution, Camunda 8 SaaS can significantly reduce maintenance efforts, allowing you to focus on your core business needs.
+:::
+
 ## Key features
 
 - **Environment isolation:** Each container runs in its own isolated environment. This helps prevent conflicts between applications and improves security.
