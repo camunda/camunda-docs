@@ -8,7 +8,7 @@ description: "Overview of the Camunda 8 container deployment reference architect
 This reference architecture describes how to deploy Camunda 8 Self-Managed with containers. This deployment method is ideal for users who want a portable, consistent runtime and the benefits of containerization without managing Kubernetes.
 
 :::note
-This method of deployment requires a solid understanding of infrastructure, networking, and application management. Consider evaluating your deployment platform options based on your familiarity and need. If you prefer a simpler and managed solution, Camunda 8 SaaS can significantly reduce maintenance efforts, allowing you to focus on your core business needs.
+This method of deployment requires a solid understanding of infrastructure, networking, and application management. Consider evaluating your [deployment platform options](/self-managed/reference-architecture/reference-architecture.md) based on your familiarity and need. If you prefer a simpler and managed solution, [Camunda 8 SaaS](https://camunda.com/platform/) can significantly reduce maintenance efforts, allowing you to focus on your core business needs.
 :::
 
 ## Key features
@@ -20,7 +20,7 @@ This method of deployment requires a solid understanding of infrastructure, netw
 
 This section includes the following reference architectures:
 
-- [Amazon ECS](../deployment/containers/cloud-providers/amazon/aws-ecs.md): A fully functioning Camunda Orchestration Cluster deployed in a high-availability setup using Amazon Elastic Container Service (ECS), AWS Fargate, and a managed Amazon Aurora PostgreSQL instance.
+- [Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md): A fully functioning Camunda Orchestration Cluster deployed in a high-availability setup using Amazon Elastic Container Service (ECS), AWS Fargate, and a managed Amazon Aurora PostgreSQL instance.
 
 ## Amazon ECS Architecture
 
@@ -28,6 +28,6 @@ The architecture outlined below describes a standard Zeebe three-node deployment
 
 _Infrastructure diagram for the Orchestration Cluster ECS architecture (click the image to view the PDF version)._
 
-[![Architecture Overview](../deployment/containers/cloud-providers/amazon/assets/architecture.jpg)](../deployment/containers/cloud-providers/amazon/assets/architecture.pdf)
+[![Architecture Overview](./img/ecs-architecture.jpg)](./img/ecs-architecture.pdf)
 
-For more information, see [Amazon ECS on AWS](../deployment/containers/cloud-providers/amazon/aws-ecs.md#architecture).
+For more information, see [Amazon ECS on AWS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md#architecture).
