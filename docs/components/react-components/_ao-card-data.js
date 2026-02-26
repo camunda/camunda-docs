@@ -40,7 +40,7 @@ export const fundamentalCards = [
     link: "../monitor-ai-agents/",
     title: "Monitor your AI agents",
     image: IconAoAgentImg,
-    description: "Monitor your AI agents with Operate.",
+    description: "Monitor and troubleshoot your AI agents.",
   },
 ];
 
