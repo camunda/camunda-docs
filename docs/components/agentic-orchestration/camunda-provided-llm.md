@@ -12,7 +12,7 @@ Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.
 
 ## About
 
-With Camunda-provided LLM, you can run AI agents in your processes right away without additional setup. It is a Camunda-managed LLM provider option that comes with automatically configured credentials.
+Camunda-provided LLM is a Camunda-managed LLM provider option that comes with automatically configured credentials. With it, you can run AI agents in your processes right away without additional setup.
 
 :::info
 Camunda-provided LLM is free to use within the provided budget, and is intended for testing and experimentation. When you're ready for production or need more control, switch to a customer-managed provider.
@@ -34,7 +34,11 @@ See [Trial vs. enterprise budgets](#trial-vs-enterprise-budgets) for more detail
 Once Camunda-provided LLM is available in your organization, its credentials are populated automatically as cluster secrets.
 
 - If you are using an AI agent blueprint, no additional configuration is needed, since most AI agent blueprints default to use Camunda-provided LLM. Explore selected AI agent blueprints in the [Camunda Marketplace](https://marketplace.camunda.com/en-US/home).
-- If you are building your own agent from scratch, enable Camunda-provided LLM by configuring your AI agent connector with the following parameters: - **Provider**: `OpenaAI Compatible`. - **API endpoint**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_ENDPOINT}}`. - **API key**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_KEY}}`. - **Model**: Select a model from the list, for example, `us.anthropic.claude-3-7-sonnet-20250219-v1:0`. See [Available models](#available-models) for more details.
+- If you are building your own agent from scratch, enable Camunda-provided LLM by configuring your AI agent connector with the following parameters:
+  - **Provider**: `OpenaAI Compatible`.
+  - **API endpoint**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_ENDPOINT}}`.
+  - **API key**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_KEY}}`.
+  - **Model**: Select a model from the list, for example, `us.anthropic.claude-3-7-sonnet-20250219-v1:0`. See [Available models](#available-models) for more details.
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   <img
@@ -81,7 +85,7 @@ The total cost of an agent run depends on how many LLM calls it makes, which can
 When your organization reaches its Camunda-provided LLM budget cap:
 
 - Additional LLM calls are **blocked**.
-- Your process execution may fail with an “out of budget” error, such as `COST_LIMIT_EXCEEDED`, depending on the integration and how your process handles errors.
+- Your process execution may fail with an “out of budget” error, such as `COST_LIMIT_EXCEEDED`, depending on how your process handles errors.
 
 :::tip
 If your process model doesn’t handle LLM failures, an exhausted budget may result in incidents or failed instances. Consider adding BPMN error handling to provide a user-friendly fallback path.
@@ -89,7 +93,7 @@ If your process model doesn’t handle LLM failures, an exhausted budget may res
 
 ## Switch away from Camunda-provided LLM
 
-As you move from evaluation to production, you may want to bring your own LLM provider. This gives you:
+As you move from evaluation to production, you may want to switch to your own LLM provider. This gives you:
 
 - Direct control over provider choice.
 - Your own billing and quota management.
