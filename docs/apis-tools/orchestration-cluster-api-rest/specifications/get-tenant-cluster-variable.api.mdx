@@ -1,7 +1,7 @@
 ---
 id: get-tenant-cluster-variable
 title: "Get a tenant-scoped cluster variable"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "<MarkerEventuallyConsistentExtension />"
 sidebar_label: "Get a tenant-scoped cluster variable"
 hide_title: true
 hide_table_of_contents: true
@@ -21,6 +21,7 @@ import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
 import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
 
 <Heading
   as={"h1"}
@@ -34,15 +35,11 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+<MarkerEventuallyConsistentExtension />
 
-<Heading
-  id={"request"}
-  as={"h2"}
-  className={"openapi-tabs__heading"}
-  children={"Request"}
-></Heading>
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
 
 <ParamsDetails
   parameters={[

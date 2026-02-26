@@ -33,6 +33,7 @@ https://docs.camunda.io/docs/components/concepts/variables/?utm_source=modeler&u
 https://docs.camunda.io/docs/components/modeler/desktop-modeler/troubleshooting/#i-cannot-connect-to-zeebe
 https://docs.camunda.io/docs/components/modeler/forms/form-element-library/forms-element-library-text/
 https://docs.camunda.io/docs/components/modeler/forms/configuration/forms-config-templating-syntax/
+https://docs.camunda.io/docs/components/modeler/desktop-modeler/connect-to-camunda-8/
 
 # Modeling Guidance
 

@@ -19,6 +19,62 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 40
+
+### Publication date
+
+Feb 23, 2026
+
+### Products affected
+
+C7 to C8 Migration Tooling
+
+### Impact
+
+The version of Tomcat used by the Diagram Converter Webapp was affected by:
+
+* [CVE-2025-66614](https://nvd.nist.gov/vuln/detail/CVE-2025-66614)
+* [CVE-2026-24734](https://nvd.nist.gov/vuln/detail/CVE-2026-24734)
+
+### How to determine if the installation is affected
+
+You are using:
+
+* C7 to C8 Migration Tooling 0.2.0 **AND**
+* the Diagram Converter Webapp
+
+### Solution
+
+Camunda has released the **C7 to C8 Migration Tooling 0.2.1**, which includes the fix.
+
+## Notice 39
+
+### Publication date
+
+Feb 10, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `fast-xml-parser` used by Camunda Web Modeler was affected by [CVE-2026-25128](https://nvd.nist.gov/vuln/detail/CVE-2026-25128), a RangeError vulnerability that could crash any application that processes untrusted XML input.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.6, ≤ 8.7.15, or ≤ 8.6.24
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.7, 8.7.16, 8.6.25
+
+The fix was deployed to Web Modeler SaaS on February 2, 2026, 15:15 CET.
+
 ## Notice 38
 
 ### Publication date

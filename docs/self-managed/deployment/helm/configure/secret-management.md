@@ -9,11 +9,11 @@ This guide provides an overview for configuring and managing secrets when using 
 
 ## Secret configuration patterns
 
-The Helm chart supports different patterns for secret management depending on your Camunda version:
+The Helm chart supports different patterns for secret management.
 
-### New pattern (Camunda 8.8+, recommended)
+### Structured secret pattern
 
-Starting with Camunda 8.8, the new pattern uses a structured `secret:` configuration under components with three options:
+The structured `secret:` configuration under components provides three options:
 
 - `inlineSecret`: Plain-text value for non-production usage
 - `existingSecret`: Reference to an existing Kubernetes Secret name
@@ -30,10 +30,6 @@ component:
       existingSecretKey: "secret-key"
 ```
 
-### Legacy pattern (Camunda 8.7 and below)
-
-For Camunda 8.7 and earlier versions, the legacy pattern uses direct `existingSecret` and `existingSecretKey` fields. These are deprecated in 8.8+ but still supported for backward compatibility.
-
 ### Bitnami subchart pattern
 
 Some components use Bitnami subcharts for database services (PostgreSQL), which follow their own authentication patterns that differ from the main Camunda secret structure. These use the standard Bitnami PostgreSQL Helm chart pattern with `existingSecret` and `secretKeys` containing `adminPasswordKey` and `userPasswordKey`.
@@ -45,22 +41,28 @@ The following Bitnami subchart configurations are available:
 - **`identityKeycloak.postgresql.auth`** - PostgreSQL database for Keycloak (when using Identity with Keycloak)
 - **`webModelerPostgresql.auth`** - PostgreSQL database for Web Modeler
 
-## Internal secrets
+## Application secrets
 
-These secrets are used by Camunda applications and must be configured manually when using external secrets.
+These secrets are used by Camunda applications and external integrations. Configure them manually when using external secrets.
 
-### Secrets using the new pattern (Camunda 8.8+)
+### Secrets using the structured pattern
 
-| **Secret**                              | **Chart values key**                                | **Purpose**                                             |
-| --------------------------------------- | --------------------------------------------------- | ------------------------------------------------------- |
-| **Enterprise License Key**              | `global.license.secret`                             | Camunda Enterprise license key                          |
-| **Identity First User Password**        | `identity.firstUser.secret`                         | Default user password (`demo/demo`)                     |
-| **OAuth Client Secret (Admin)**         | `global.identity.auth.admin.secret`                 | OAuth admin client secret for administrative operations |
-| **OAuth Client Secret (Connectors)**    | `connectors.security.authentication.oidc.secret`    | OAuth client secret for connectors                      |
-| **OAuth Client Secret (Orchestration)** | `orchestration.security.authentication.oidc.secret` | OAuth client secret for Orchestration Cluster           |
-| **OAuth Client Secret (Optimize)**      | `global.identity.auth.optimize.secret`              | OAuth client secret for Optimize                        |
+| **Secret**                                | **Chart values key**                                | **Type** | **Purpose**                                                              |
+| ----------------------------------------- | --------------------------------------------------- | -------- | ------------------------------------------------------------------------ |
+| **Enterprise License Key**                | `global.license.secret`                             | Internal | Camunda Enterprise license key                                           |
+| **Identity First User Password**          | `identity.firstUser.secret`                         | Internal | Default user password (`demo/demo`)                                      |
+| **OAuth Client Secret (Admin)**           | `global.identity.auth.admin.secret`                 | Internal | OAuth admin client secret for administrative operations                  |
+| **OAuth Client Secret (Connectors)**      | `connectors.security.authentication.oidc.secret`    | Internal | OAuth client secret for connectors                                       |
+| **OAuth Client Secret (Orchestration)**   | `orchestration.security.authentication.oidc.secret` | Internal | OAuth client secret for Orchestration Cluster                            |
+| **OAuth Client Secret (Optimize)**        | `global.identity.auth.optimize.secret`              | Internal | OAuth client secret for Optimize                                         |
+| **Identity External Database Password**   | `identity.externalDatabase.secret`                  | External | Password for external PostgreSQL if using an external DB for Identity    |
+| **WebModeler External Database Password** | `webModeler.restapi.externalDatabase.secret`        | External | Password for external PostgreSQL if using an external DB for Web Modeler |
+| **SMTP Password**                         | `webModeler.restapi.mail.secret`                    | External | SMTP credentials for sending email notifications                         |
+| **External Elasticsearch Auth**           | `global.elasticsearch.auth.secret`                  | External | Password for external Elasticsearch authentication (basic auth)          |
+| **External OpenSearch Auth**              | `global.opensearch.auth.secret`                     | External | Password for external OpenSearch authentication (basic auth)             |
+| **RDBMS Auth**                            | `orchestration.data.secondaryStorage.rdbms.secret`  | External | Password for external RDBMS authentication (basic auth)                  |
 
-### Secrets using Bitnami subchart patterns (all versions)
+### Secrets using Bitnami subchart patterns
 
 | **Secret**                          | **Chart values key**                              | **Purpose**                                       |
 | ----------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
@@ -74,28 +76,14 @@ These secrets are used by Camunda applications and must be configured manually w
 - `adminPasswordKey`: Password for the PostgreSQL administrator (typically used for administrative operations)
 - `userPasswordKey`: Password for the application-specific database user (used by the Camunda component)
 
-## External secrets
-
-These secrets are necessary when integrating Camunda with third-party services.
-
-### Secrets using the new pattern (Camunda 8.8+)
-
-| **Secret**                                | **Chart values key**                         | **Purpose**                                                              |
-| ----------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------ |
-| **Identity External Database Password**   | `identity.externalDatabase.secret`           | Password for external PostgreSQL if using an external DB for Identity    |
-| **WebModeler External Database Password** | `webModeler.restapi.externalDatabase.secret` | Password for external PostgreSQL if using an external DB for Web Modeler |
-| **SMTP Password**                         | `webModeler.restapi.mail.secret`             | SMTP credentials for sending email notifications                         |
-| **External Elasticsearch Auth**           | `global.elasticsearch.auth.secret`           | Password for external Elasticsearch authentication (basic auth)          |
-| **External OpenSearch Auth**              | `global.opensearch.auth.secret`              | Password for external OpenSearch authentication (basic auth)             |
-
 ## How to configure secrets
 
-Secrets can be configured in different ways depending on your Camunda version:
+Secrets can be configured in different ways:
 
-- **Camunda 8.8+**: Use the new structured `secret:` pattern with `inlineSecret` for non-production or external Kubernetes Secrets for production
-- **Camunda 8.7 and below**: Use the legacy pattern with direct `existingSecret` fields
+- Use the structured `secret:` pattern with `inlineSecret` for non-production or external Kubernetes Secrets for production
+- For Bitnami subchart components (PostgreSQL, Keycloak), use their native `existingSecret` pattern
 
-### Method 1: Inline secrets (Camunda 8.8+, non-production only)
+### Method 1: Inline secrets (non-production only)
 
 For development or testing environments, provide secrets directly in your `values.yaml` using the `inlineSecret` field:
 
@@ -111,9 +99,9 @@ identity:
       inlineSecret: "demo-password"
 ```
 
-### Method 2: External Kubernetes secrets (recommended for all versions)
+### Method 2: External Kubernetes secrets (recommended)
 
-For production environments, create a Kubernetes Secret and reference it from your `values.yaml`. This method works for both Camunda 8.8+ (with new pattern) and 8.7 and below (with legacy pattern).
+For production environments, create a Kubernetes Secret and reference it from your `values.yaml`.
 
 #### Step 1: Create the secret
 
@@ -140,7 +128,7 @@ stringData:
 
 #### Step 2: Reference in `values.yaml`
 
-**For components using the new pattern:**
+**For components using the structured pattern:**
 
 ```yaml
 global:
@@ -187,40 +175,13 @@ webModelerPostgresql:
       userPasswordKey: web-modeler-postgresql-user-password
 ```
 
-### Auto-generated secrets
-
-The Helm chart can automatically generate secrets with random passwords for both development and production environments. This removes the need to create secrets manually during initial setup. You can enable this feature during installation by setting `--set global.secrets.autoGenerated=true`.
-
-### Important limitations
-
-The auto-generated secret uses Helm hooks (`pre-install`) with a `keep` resource policy. This means:
-
-- The secret is created before the main Helm release installation.
-- The secret is not managed by later Helm operations (upgrade, rollback, uninstall).
-- If you delete the secret, generated passwords are lost permanently.
-- The secret becomes orphaned from the Helm release lifecycle.
-
-### Configuring components to use auto-generated secrets
-
-Enabling `global.secrets.autoGenerated: true` only creates the secret with random values. You must configure each component to reference the auto-generated secret by name and key. The key can be custom, but the name must match the definition above.
-
-```yaml
-connectors:
-  security:
-    authentication:
-      oidc:
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-connectors-client-token"
-```
-
-For details on Identity secrets during installation, see the [installation guide](/self-managed/deployment/helm/install/quick-install.md#create-identity-secrets).
+:::note
+Auto-generated secrets (`global.secrets.autoGenerated`) are no longer supported starting in Camunda 8.9. Create your secrets explicitly using [inline secrets](#method-1-inline-secrets-non-production-only) for non-production environments or [external Kubernetes secrets](#method-2-external-kubernetes-secrets-recommended) for production environments.
+:::
 
 ## Document Store secrets
 
-Document Store secrets now follow the structured `secret:` pattern introduced in Camunda 8.8+, with separate secret configurations for each credential component.
-
-### Secrets using the new pattern (Camunda 8.8+)
+Document Store secrets use the structured `secret:` pattern with separate secret configurations for each credential component.
 
 | **Secret**                               | **Chart values key**                                   | **Purpose**                                                      |
 | ---------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------- |
@@ -228,119 +189,15 @@ Document Store secrets now follow the structured `secret:` pattern introduced in
 | **AWS Document Store Secret Access Key** | `global.documentStore.type.aws.secretAccessKey.secret` | AWS secret access key for S3 document storage authentication     |
 | **GCP Document Store Service Account**   | `global.documentStore.type.gcp.secret`                 | GCP service account JSON for GCS document storage authentication |
 
-### Secrets using the legacy pattern (deprecated)
-
-The following legacy fields are deprecated in Camunda 8.8+ but remain functional during the transition period:
-
-| **Secret**                         | **Chart values key (deprecated)**                                                                                                                                                   | **Purpose**                                                                                                                                    |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| **AWS Document Store Credentials** | `global.documentStore.type.aws.existingSecret`, `global.documentStore.type.aws.accessKeyIdKey`, `global.documentStore.type.aws.secretAccessKeyKey`                                  | AWS credentials for S3 document storage (requires multiple keys: access key ID and secret access key)                                          |
-| **GCP Document Store Credentials** | `global.documentStore.type.gcp.existingSecret`, `global.documentStore.type.gcp.credentialsKey`, `global.documentStore.type.gcp.mountPath`, `global.documentStore.type.gcp.fileName` | GCP service account JSON for GCS document storage (single key containing JSON file, with additional mount configuration for file-based access) |
-
-## Migration from legacy pattern (8.7 → 8.8+)
-
-If you are upgrading from Camunda 8.7 or earlier and using the legacy secret management pattern, migrate to the new structured `secret:` pattern available in Camunda 8.8+ for better consistency and future compatibility. The legacy fields are deprecated in 8.8+ but will remain functional during the transition period.
-
-:::warning
-
-The new pattern requires you to configure both `existingSecret` and `existingSecretKey`.
-Unlike the legacy pattern, which provided default key values, the new pattern has no defaults. You must specify the exact secret name and key for each component.
-
-This explicit configuration improves security and removes ambiguity but requires more setup.
-
-:::
-
-### Scenario 1: Migrating an external secret reference
-
-This scenario applies when your legacy configuration references a Kubernetes secret by name.
-
-**Legacy configuration:**
-
-```yaml
-global:
-  identity:
-    auth:
-      optimize:
-        existingSecret:
-          name: optimize-secret
-        existingSecretKey: client-secret
-```
-
-**New configuration:**
-
-```yaml
-global:
-  identity:
-    auth:
-      optimize:
-        secret:
-          existingSecret: optimize-secret
-          existingSecretKey: client-secret
-```
-
-### Scenario 2: Migrating a plaintext secret
-
-This scenario applies when your legacy configuration provided a plaintext string directly in `existingSecret`.
-
-**Legacy configuration:**
-
-```yaml
-global:
-  identity:
-    auth:
-      optimize:
-        existingSecret: "my-plaintext-secret"
-```
-
-**New configuration:**
-
-```yaml
-global:
-  identity:
-    auth:
-      optimize:
-        secret:
-          inlineSecret: "my-plaintext-secret"
-```
-
-### Scenario 3: Migrating AWS Document Store secrets
-
-This scenario applies when migrating from the legacy single-secret AWS document store configuration to the new separate secrets pattern.
-
-**Legacy configuration:**
-
-```yaml
-global:
-  documentStore:
-    type:
-      aws:
-        existingSecret: "aws-credentials"
-        accessKeyIdKey: "awsAccessKeyId"
-        secretAccessKeyKey: "awsSecretAccessKey"
-```
-
-**New configuration (using separate secrets):**
-
-```yaml
-global:
-  documentStore:
-    type:
-      aws:
-        accessKeyId:
-          secret:
-            existingSecret: "aws-access-key-secret"
-            existingSecretKey: "access-key-id"
-        secretAccessKey:
-          secret:
-            existingSecret: "aws-secret-key-secret"
-            existingSecretKey: "secret-access-key"
-```
-
 ## TLS certificates
 
 TLS certificate secrets for Camunda components and external services.
 
-### Secrets using the new pattern (Camunda 8.9+)
+:::note Migrating from legacy TLS secret configuration
+The structured `secret:` pattern for TLS certificates was introduced in Camunda 8.9. If you are upgrading from an earlier version and using legacy TLS secret fields (such as `global.elasticsearch.tls.existingSecret`), see the [8.8 secret management guide](/versioned_docs/version-8.8/self-managed/deployment/helm/configure/secret-management.md) for migration instructions.
+:::
+
+### TLS certificate secrets
 
 | **Secret**                          | **Chart values key**              | **Purpose**                                         |
 | ----------------------------------- | --------------------------------- | --------------------------------------------------- |
@@ -411,7 +268,7 @@ You can use a single consolidated secret (e.g., app-credentials) or one secret p
 
 ### Find any plaintext secrets in your `values.yaml`
 
-#### A - If the secrets already exist in Kubernetes (e.g. autogenerated via chart)
+#### A - If the secrets already exist in Kubernetes
 
 You can read the current (base64-encoded) data from existing secrets and reuse it in your new consolidated secret.
 
@@ -474,13 +331,11 @@ _Note: Remove any old plaintext values so the chart doesn’t override the secre
 
 ### Hands-on example (Camunda setup)
 
-Below is a ready-to-use example for Camunda deployments. Keep only thoese secret that matches your setup.
+Below is a ready-to-use example for Camunda deployments. Keep only those secrets that match your setup.
 
 #### 1. Extract (only for enabled components)
 
 ```shell
-# NOTE: All Helm chart values mentioned here are based on the 8.7 syntax.
-
 # Change this according to your Helm chart release/deployment name and namespace.
 RELEASE_NAME=camunda-dev
 RELEASE_NAMESPACE=camunda-dev

@@ -5,6 +5,9 @@ sidebar_label: "Broker configuration"
 description: "Let's analyze how to configure the Zeebe Broker"
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 A complete broker configuration template is available in the [Zeebe repo](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template).
 
 ## Conventions
@@ -38,7 +41,7 @@ Configuration names are noted as the **header** of each documented section, whil
 :::note
 The Zeebe Broker is a Spring Boot application. As such, [many common Spring Boot properties will work out of the box](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html).
 
-Additionally, its REST server is a reactive Spring Boot server (powered by WebFlux), and can be configured using the standard `server.*` properties, as well as the usual WebFlux properties. Its management server (for example, where actuator endpoints live) is configured as a child application context, and is also a reactive WebFlux server. It can be configured via `management.server.*` properties.
+Additionally, its REST server is a Spring Boot server (powered by Spring MVC), and can be configured using the standard `server.*` properties. Its management server (for example, where actuator endpoints live) is configured as a child application context, and is also a Spring MVC server. It can be configured via `management.server.*` properties.
 
 Finally, the REST server is only serving requests _if, and only if, the embedded gateway is enabled via_ `zeebe.broker.gateway.enable: true`.
 :::
@@ -82,17 +85,17 @@ server:
     certificate-private-key: /path/to/my/private.key
 ```
 
-### spring.webflux
+### server.servlet
 
-| Field     | Description                                                                                                                                                                                                                                                     | Example value |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| base-path | The context path prefix for all REST API requests. For example, if you configure `/zeebe`, then the client's REST address would be `http://localhost:8080/zeebe`. This setting can also be overridden using the environment variable `SPRING_WEBFLUX_BASEPATH`. | `/`           |
+| Field        | Description                                                                                                                                                                                                                                                        | Example value |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| context-path | The context path prefix for all REST API requests. For example, if you configure `/zeebe`, then the client's REST address would be `http://localhost:8080/zeebe`. This setting can also be overridden using the environment variable `SERVER_SERVLET_CONTEXTPATH`. | `/`           |
 
 #### YAML snippet
 
 ```yaml
-spring.webflux:
-  base-path: /
+server.servlet:
+  context-path: /
 ```
 
 ### management.server
@@ -948,9 +951,9 @@ processing: maxCommandsInBatch = 100
 
 ### Experimental configuration
 
-See the experimental section of the [broker.yaml.template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L883).
+See the experimental section of the [defaults.yaml](https://github.com/camunda/camunda/blob/main/dist/src/main/config/defaults.yaml).
 
-Be aware that all configuration's which are part of the experimental section are subject to change and can be dropped at any time.
+Be aware that all configurations which are part of the experimental section are subject to change and can be dropped at any time.
 
 ### Multitenancy configuration
 
@@ -1061,3 +1064,55 @@ camunda:
         maxRetryDelay: 10s
         retryDelayMultiplier: 2
 ```
+
+### Continuous backups configuration
+
+Configuration options for primary storage continuous backups.
+
+#### camunda.data.primary-storage.backup
+
+| Field                        | Description                                                                                                                                            | Example value    |
+| :--------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------- |
+| `continuous`                 | Enables or disables the continuous backups feature.                                                                                                    | `true`           |
+| `required`                   | Forces the continuous backups feature to be properly configured during broker startup.                                                                 | `true`           |
+| `schedule`                   | The interval at which a primary storage backup is taken. Can be a CRON expression, an ISO-8601 duration, or `none`.                                    | `PT12H`          |
+| `checkpoint-interval`        | The interval at which checkpoints are ingested into the log stream. Uses an ISO-8601 duration.                                                         | `PT5M`           |
+| `offset`                     | Optional offset for the generated backup identifiers.                                                                                                  | `20260215115715` |
+| `retention.window`           | The active window of backups available for restore in the configured backup store. Uses an ISO-8601 duration.                                          | `P1W`            |
+| `retention.cleanup-schedule` | The interval at which the retention mechanism checks for backups outside the active window. Can be a CRON expression, an ISO-8601 duration, or `none`. | `PT1H`           |
+
+<Tabs>
+  <TabItem value="application.yaml" label="Application properties">
+
+```yaml
+camunda:
+  data:
+    primary-storage:
+      backup:
+        required: "false"
+        continuous: "true"
+        schedule: "PT10M"
+        checkpoint-interval: "PT1M"
+        offset: 20260215115715
+        retention:
+          window: "P1W"
+          cleanup-schedule: "PT1H"
+```
+
+  </TabItem>
+
+  <TabItem value="env" label="Environment variables">
+
+```bash
+CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_REQUIRED=false
+CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_CONTINUOUS=true
+CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_SCHEDULE="PT10M"
+CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_CHECKPOINTINTERVAL="PT1M"
+CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_OFFSET=20260215115715
+CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_RETENTION_WINDOW="P1W"
+CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_RETENTION_CLEANUPSCHEDULE="PT1H"
+```
+
+  </TabItem>
+
+</Tabs>

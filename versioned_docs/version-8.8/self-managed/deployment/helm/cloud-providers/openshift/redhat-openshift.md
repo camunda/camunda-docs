@@ -325,7 +325,7 @@ This command:
 
 :::note
 
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/deployment/helm/upgrade/index.md) or any other component upgrades.
+This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/upgrade/helm/index.md) or any other component upgrades.
 
 :::
 
@@ -553,6 +553,19 @@ The following values are required for OAuth authentication:
 ## Pitfalls to avoid
 
 For general deployment pitfalls, visit the [deployment troubleshooting guide](self-managed/operational-guides/troubleshooting.md).
+
+### Persistent volume reclaim policy
+
+OpenShift StorageClasses often default to a `Delete` reclaim policy, which means persistent volume data is permanently deleted when a PVC is removed. This can lead to complete and unrecoverable data loss for Orchestration Cluster brokers.
+
+Ensure your StorageClass uses a `Retain` reclaim policy for production deployments. Verify your configuration:
+
+```bash
+oc get storageclass
+# RECLAIMPOLICY should show "Retain", not "Delete"
+```
+
+For more details, see the [production install guide](/self-managed/deployment/helm/install/production/index.md#persistent-volume-reclaim-policy).
 
 ### Security Context Constraints (SCCs)
 

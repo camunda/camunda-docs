@@ -174,7 +174,7 @@ void testDuplicate() throws Exception {
 
 ### Drive the process and assert the state
 
-For tests, you drive the process from waitstate to waitstate and assert that you observe the expected process and variable states. For example, you might implement a test to test the scenario that a tweet gets approved:
+For tests, you drive the process from wait state to wait state and assert that you observe the expected process and variable states. For example, you might implement a test to test the scenario that a tweet gets approved:
 
 ```java
 @Test
@@ -210,7 +210,7 @@ void testTweetApproved() throws Exception {
 
 1. Create a new process instance. You may want to use some glue code to start your process (e.g. the REST API facade), or also create helper methods within your test class.
 
-2. Drive the process to its next waitstate, e.g. by completing a waiting user task. You may extract boilerplate code into helper methods as shown below.
+2. Drive the process to its next wait state, e.g. by completing a waiting user task. You may extract boilerplate code into helper methods as shown below.
 
 3. Assert that your process is in the expected state.
 

@@ -146,7 +146,11 @@ As shown in the [architecture diagram](#web-modeler-and-console), this namespace
 - [Console](/self-managed/components/console/overview.md) — administrative interface
 - [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Web Modeler, Console, Optimize
 
-This namespace also includes Keycloak as an example OIDC Identity Provider (IdP) for Management Identity. You can replace Keycloak with any compatible OIDC provider to meet your organization's requirements.
+This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or Microsoft Entra ID).
+
+:::tip Why isn't an IdP included by default?
+The choice of identity provider is highly specific to each organization's security requirements, existing infrastructure, and compliance needs. Rather than bundling a default IdP that may not match your setup, the reference architecture leaves this choice to you. This approach gives you full control over your authentication stack and avoids unnecessary complexity for teams that already have an IdP in place.
+:::
 
 :::warning Identity separation
 Console, Optimize, and Web Modeler rely on Management Identity (formerly Identity). This service is separate from the embedded Identity in the Orchestration Cluster and incompatible with it. To share the same user base and API clients across both, you must use OIDC.
@@ -189,7 +193,7 @@ Networking is largely managed through services and load balancers. The following
 
 - Stable, high-speed connection
 - Firewall rules for:
-  - `80`: Web UI (Console, Management Identity, Keycloak, Web Modeler)
+  - `80`: Web UI (Console, Management Identity, Web Modeler, and IdP if co-located)
   - `82`: Metrics (Management Identity)
   - `8080`: REST/Web UI (Connectors, Orchestration Cluster)
   - `8071`, `8091`: Management (Web Modeler)
@@ -242,10 +246,10 @@ Camunda maintains the required Docker images consumed by the Helm chart. These i
 
 The following databases are required:
 
-| Database                 | Requirement                                                 |
-| :----------------------- | :---------------------------------------------------------- |
-| Elasticsearch/OpenSearch | Required by Orchestration Cluster and Optimize.             |
-| PostgreSQL               | Required by Management Identity, Keycloak, and Web Modeler. |
+| Database                 | Requirement                                                                                        |
+| :----------------------- | :------------------------------------------------------------------------------------------------- |
+| Elasticsearch/OpenSearch | Required by Orchestration Cluster and Optimize.                                                    |
+| PostgreSQL               | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster. |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
@@ -332,6 +336,12 @@ To use an Application Load Balancer:
   ```
 
 The setup does not require configuration of [TLS on the Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls). If the AWS Load Balancer Controller is correctly configured, it automatically retrieves the appropriate certificate from ACM based on the host name.
+
+:::note AWS ALB known limitations
+Application Load Balancers (ALB) support HTTP/2 over HTTPS listeners and allow a maximum of 128 streams per client HTTP/2 connection. The HTTP/2 server-push feature is not supported. For details, see [AWS ALB protocols](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-protocol-version:~:text=The%20maximum%20number%20of%20streams,client%20HTTP%2F2%20connection%20is%20128).
+
+If you need more than 128 streams per client, see [Network Load Balancer](#network-load-balancer-nlb).
+:::
 
 ##### Network load balancer (NLB)
 

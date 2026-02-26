@@ -131,6 +131,14 @@ Connector types:
 - [Inbound](#inbound-connector)
 - [Protocol](#protocol-connector)
 
+### Connector runtime
+
+The [connector runtime](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) is the execution environment responsible for running connector logic, resolving authentication, handling secrets, and communicating with external systems. In SaaS, the runtime is fully managed. In Self-Managed environments, the runtime can run inside the cluster or in hybrid mode.
+
+### Connector template
+
+A [connector template](/components/connectors/custom-built-connectors/connector-templates.md) is a type of element template used to configure connectors in Modeler. Templates define UI fields, metadata, and bindings required for connector operations. Modeler internally labels all templates as element templates, but connector templates are the subset specifically used to configure connectors.
+
 ### Context window
 
 The amount of text (in [tokens](#token-ai)) a model can consider at once when generating a response. A larger context window allows the model to handle longer inputs.
@@ -181,7 +189,7 @@ A BPMN element is part of a [process](#process), defining one part of its BPMN m
 
 ### Element template
 
-Use an element template to extend [Modeler](/components/modeler/about-modeler.md) with domain-specific diagram [elements](#element). The user edits such elements through a UI defined by the element template, and in the process configures standard technical bindings understood by the engine in simple and predictable ways. Element templates are used by [connectors](#connector) to create the connector-specific [element](#element) configuration.
+Use an element template to extend [Modeler](/components/modeler/about-modeler.md) with domain-specific diagram [elements](#element). The user edits such elements through a UI defined by the element template, and in the process configures BPMN element properties in simple and predictable ways. Element templates are used by [connectors](#connector) to create the connector-specific [element](#element) configuration.
 
 - [Element templates](/components/modeler/element-templates/about-templates.md)
 

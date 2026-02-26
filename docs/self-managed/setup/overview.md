@@ -32,7 +32,7 @@ Choosing the right storage configuration is a critical step for production deplo
 
 Guidance:
 
-- Prefer managed or vendor-supported infrastructure for production deployments to reduce operational overhead and improve reliability (for example, managed Elasticsearch/OpenSearch services or managed RDBMS).
+- Prefer managed services or operator-based infrastructure for production deployments to reduce operational overhead and improve reliability (for example, managed Elasticsearch/OpenSearch services or managed RDBMS).
 - Benchmark and size your environment using [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and the Camunda benchmark project referenced there.
 
 :::info

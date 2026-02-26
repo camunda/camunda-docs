@@ -87,7 +87,7 @@ Any file within a process application can be linked as a resource. Linking a res
 
 ### Deploying a process application
 
-Process applications can be deployed using the [deploy feature](./connect-to-camunda-8.md). When deploying a process application, all files that are part of the process application will be deployed.
+Process applications can be deployed using the [deploy feature](./deploy-diagram.md). When deploying a process application, all files that are part of the process application will be deployed.
 
 <p><img src={DeployImg} alt="Deploying a process application" /></p>
 
