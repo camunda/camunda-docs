@@ -41,7 +41,7 @@ ways such as:
 
 - **Create your own GitHub repository**: Click **Use this template** and follow the prompted steps. You can manage code changes in your new repository afterward.
 - **Experiment locally**: Check out the source code to your local machine using [Git](https://git-scm.com/). You won't be able to check in code changes to the repository due to restricted write access.
-- **Fetch the source**: Download the source code as a ZIP archive using **Code > **Download ZIP\*\*.
+- **Fetch the source**: Download the source code as a ZIP archive using **Code > Download ZIP**.
   You can adjust and manage the code the way you like afterward using your chosen source code
   management tools.
 
@@ -111,9 +111,9 @@ In this example, we include a Maven project's `POM` file. Other build tools like
 [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) act as
 the modeling interface for the users of your connector.
 
-The template can be written manually but we recommend to use the [`element-template-generator`](https://github.com/camunda/connectors/tree/main/element-template-generator) which generates the element template for your connector as part of your build process.
+The template can be written manually but we recommend using the [`element-template-generator`](https://github.com/camunda/connectors/tree/main/element-template-generator) which generates the element template for your connector as part of your build process.
 
-Element templates define the data and configuration bindings to your connector on the BPMN element via properties Properties have different types that define their visual representation. The can also be hidden
+Element templates define the data and configuration bindings to your connector on the BPMN element via properties. Properties have different types that define their visual representation. They can also be hidden
 in the modeling UI but still applied to the BPMN:
 
 ```json
@@ -292,7 +292,7 @@ Using the `@Variable` annotation, a primitive type has to specify the variable n
 
 Types can use [Jakarta Validation](https://beanvalidation.org/) annotations. Validation will be applied during binding.
 
-Its also possible to bind job headers using the `@Header` annotation (**(6)**) but this is only recommended for static config data defined at modeling time.
+It's also possible to bind job headers using the `@Header` annotation (**(6)**) but this is only recommended for static config data defined at modeling time.
 
 If the connector handles exceptional cases, it can use any exception to express technical errors. If a technical
 error should be associated with a specific error code, the connector can throw a `ConnectorException` and define
@@ -303,7 +303,7 @@ by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-er
 
 ### Inbound connector project outline
 
-There are multiple parts of a connector that enables it for reuse, as a
+There are multiple parts of a connector that enable it for reuse, as a
 reusable building block, for modeling, and for the runtime behavior.
 For example, the following parts make up an inbound connector:
 
@@ -311,7 +311,7 @@ For example, the following parts make up an inbound connector:
 my-connector
 ├── element-templates
 │   └── inbound-template-connector.json                                     (1)
-├── pom.xml
+├── pom.xml                                                      (6)
 ├── src
 │   ├── main
 │   │   ├── java/io/camunda/connector
@@ -322,7 +322,7 @@ my-connector
 │   │   │       └── subscription
 │   │   │           ├── MockSubscription.java
 │   │   │           └── MockSubscriptionEvent.java
-│   │   └── resources/META-IN/services
+│   │   └── resources/META-INF/services
 │   │       └── io.camunda.connector.api.inbound.InboundConnectorExecutable (5)
 ```
 
@@ -332,13 +332,13 @@ For the modeling building blocks, the connector provides
 You provide the runtime logic as Java source code.
 Typically, a connector runtime logic consists of exactly one implementation of
 a `InboundConnectorExecutable` with **(2)** and at least one input object like **(3)**, and connector's
-properties like **(4)**
+properties like **(4)**.
 
 For a detectable connector function, you are required to expose your function class name in the
 [`InboundConnectorExecutable` SPI implementation](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ServiceLoader.html)
 with **(5)**.
 
-A configuration file like **(5)** manages the project setup, including dependencies.
+A configuration file like **(6)** manages the project setup, including dependencies.
 In this example, we include a Maven project's `POM` file. Other build tools like
 [Gradle](https://gradle.org/) can also be used.
 
@@ -463,7 +463,7 @@ Depending on the strategy, the connector implementation should either forward th
 
 #### Validation
 
-Validating input data is a common task in a connectors. The SDK provides
+Validating input data is a common task in connectors. The SDK provides
 an out-of-the-box solution for input validation.
 
 A default implementation of the SDK's core validation API is provided in a separate,
