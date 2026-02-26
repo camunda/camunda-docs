@@ -349,8 +349,6 @@
                 "id": "components/early-access/alpha/alpha-features"
               },
               "items": [
-                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-                "components/early-access/alpha/feel-copilot/feel-copilot",
                 {
                   "type": "category",
                   "label": "MCP Client",

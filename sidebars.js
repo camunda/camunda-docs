@@ -387,8 +387,6 @@ module.exports = {
                 id: "components/early-access/alpha/alpha-features",
               },
               items: [
-                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-                "components/early-access/alpha/feel-copilot/feel-copilot",
                 {
                   type: "category",
                   label: "MCP Client",
@@ -511,7 +509,17 @@ module.exports = {
                 },
                 {
                   "AI features": [
-                    "components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai",
+                    {
+                      type: "category",
+                      label: "Camunda Copilot",
+                      link: {
+                        type: "doc",
+                        id: "components/modeler/web-modeler/copilot/copilot-overview",
+                      },
+                      items: [
+                        "components/modeler/web-modeler/copilot/built-in-tools",
+                      ],
+                    },
                   ],
                 },
                 {
