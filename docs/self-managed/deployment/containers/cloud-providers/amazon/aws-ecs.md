@@ -1,6 +1,6 @@
 ---
 id: aws-ecs
-title: "Amazon ECS on AWS"
+title: "Amazon ECS"
 description: "Learn how to install Camunda 8 on AWS ECS."
 ---
 
