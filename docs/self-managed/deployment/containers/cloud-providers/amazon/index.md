@@ -20,7 +20,7 @@ Get started with Amazon ECS and Fargate:
 
 When you deploy the Camunda 8 orchestration cluster to Amazon ECS, you benefit from:
 
-- **Simplicity:** You don't need to adopt Kubernetes via Amazon EKS and its complexities.
+- **Simplicity**: Deploy applications without the complexity of Kubernetes.
 - **Safety:** Trust that Camunda 8 on ECS won't corrupt data under supported configurations, so you can meet compliance and SLA requirements.
 - **Observability:** You can monitor broker health to ensure cluster stability in ECS's dynamic environment.
 - **Cluster membership handling:** The deployment manages broker restarts and ECS task scheduling to keep the cluster stable.
