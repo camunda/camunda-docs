@@ -1,27 +1,27 @@
 ---
 id: process-applications
-title: Process applications
+title: Projects
 description: In Web Modeler a process application is a type of folder that contains a set of related files you can work on and deploy as a single bundle.
 ---
 
 import ProcessApplicationImg from './img/diagram-process-application-get-started.png'
 import FileListImg from './img/file-list.png'
 
-In Web Modeler a [process application](../../../concepts/process-applications.md) is a type of folder that contains a main process BPMN diagram and a set of related files you can work on and [deploy](deploy-process-application.md) as a single bundle.
+In Web Modeler a [project](../../../concepts/process-applications.md) is a type of folder that contains a main process BPMN diagram and a set of related files you can work on and [deploy](deploy-process-application.md) as a single bundle.
 
 <p><img src={ProcessApplicationImg} alt="Process application" /></p>
 
-For example, a process application for a consumer loan application might consist of a main process BPMN diagram and a number of additional supporting files, such as DMN diagrams and forms.
+For example, a project for a consumer loan application might consist of a main process BPMN diagram and a number of additional supporting files, such as DMN diagrams and forms.
 
 <p><img src={FileListImg} alt="Process application file list" /></p>
 
-## Process application development lifecycle
+## Project development lifecycle
 
-In Web Modeler your can quickly develop and progress low-risk process application releases through the stages of a typical development lifecycle.
+In Web Modeler your can quickly develop and progress low-risk project releases through the stages of a typical development lifecycle.
 
 - [Process application development lifecycle](process-application-pipeline.md)
 
-## Create a process application
+## Create a project
 
 Get started by creating a new process application.
 

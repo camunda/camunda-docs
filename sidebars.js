@@ -652,6 +652,41 @@ module.exports = {
           ],
         },
         {
+          type: "category",
+          label: "Manage projects",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/process-applications/process-applications",
+          },
+          items: [
+            {
+              type: "doc",
+              label: "Lifecycle",
+              id: "components/modeler/web-modeler/process-applications/process-application-pipeline",
+            },
+            {
+              type: "doc",
+              label: "Creation",
+              id: "components/modeler/web-modeler/process-applications/create-a-process-application",
+            },
+            {
+              type: "doc",
+              label: "Deployment",
+              id: "components/modeler/web-modeler/process-applications/deploy-process-application",
+            },
+            {
+              type: "doc",
+              label: "Versioning",
+              id: "components/modeler/web-modeler/process-applications/process-application-versioning",
+            },
+            {
+              type: "doc",
+              label: "Git Sync",
+              id: "components/modeler/web-modeler/process-applications/git-sync",
+            },
+          ],
+        },
+        {
           "Manage clusters": [
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/manage-cluster",
@@ -698,41 +733,6 @@ module.exports = {
                     "components/modeler/web-modeler/modeling/import-diagram",
                     "components/modeler/web-modeler/modeling/import-resources",
                     "components/modeler/web-modeler/modeling/prepare-resources",
-                  ],
-                },
-                {
-                  type: "category",
-                  label: "Process applications",
-                  link: {
-                    type: "doc",
-                    id: "components/modeler/web-modeler/process-applications/process-applications",
-                  },
-                  items: [
-                    {
-                      type: "doc",
-                      label: "Lifecycle",
-                      id: "components/modeler/web-modeler/process-applications/process-application-pipeline",
-                    },
-                    {
-                      type: "doc",
-                      label: "Creation",
-                      id: "components/modeler/web-modeler/process-applications/create-a-process-application",
-                    },
-                    {
-                      type: "doc",
-                      label: "Deployment",
-                      id: "components/modeler/web-modeler/process-applications/deploy-process-application",
-                    },
-                    {
-                      type: "doc",
-                      label: "Versioning",
-                      id: "components/modeler/web-modeler/process-applications/process-application-versioning",
-                    },
-                    {
-                      type: "doc",
-                      label: "Git Sync",
-                      id: "components/modeler/web-modeler/process-applications/git-sync",
-                    },
                   ],
                 },
                 {
@@ -1973,8 +1973,13 @@ module.exports = {
           ],
         },
         {
-          Console: [
-            "self-managed/components/console/overview",
+          type: "category",
+          label: "Camunda Hub",
+          link: {
+            type: "doc",
+            id: "self-managed/components/console/overview",
+          },
+          items: [
             {
               Configuration: [
                 "self-managed/components/console/configuration/configuration",
