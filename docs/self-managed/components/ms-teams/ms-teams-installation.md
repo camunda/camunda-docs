@@ -1,7 +1,7 @@
 ---
 id: ms-teams-installation
-title: Installation and configuration
-sidebar_label: Installation and configuration
+title: Install Camunda for Microsoft Teams
+sidebar_label: Install
 description: "Install and configure the Camunda for Microsoft Teams app in a Self-Managed environment using Docker."
 ---
 
@@ -15,21 +15,20 @@ The Camunda for Microsoft Teams app requires a backend service called **App Inte
 
 Before you begin, ensure the following are available:
 
-| Prerequisite         | Description                                                                                            |
-| :------------------- | :----------------------------------------------------------------------------------------------------- |
-| Docker               | Docker installed on the system that will host the App Integrations backend.                            |
-| PostgreSQL           | A PostgreSQL database accessible from the Docker container.                                            |
-| Camunda Self-Managed | A running Camunda Self-Managed distribution (for example, `camunda.your-domain.com`).                  |
-| DNS name             | A DNS name for the App Integrations backend (for example, `app-integrations.camunda.your-domain.com`). |
-| Node.js              | Node.js 20 or later (required for the Teams app integration CLI).                                      |
+- A running Camunda Self-Managed distribution (for example, `camunda.your-domain.com`) with Identity (Keycloak).
+- Docker installed on the system hosting the App Integrations backend.
+- A PostgreSQL database accessible from the Docker container.
+- Node.js 20 or later for the Teams app integration CLI.
+- Microsoft Teams with admin permissions to add apps.
+- A DNS name for the App Integrations backend (for example, `app-integrations.camunda.your-domain.com`).
+- Microsoft Teams with admin permissions to add apps.
 
 ## Step 1: Create applications in Camunda Identity
 
-Before writing the configuration file, register two OAuth2 applications in your Camunda Self-Managed Identity management.
+Before writing the configuration file, register two `OAuth2` applications in your Camunda Self-Managed Identity management.
 
 1. Access the Identity management in your Camunda Self-Managed distribution.
-
-2. Create the following two applications:
+2. Create the following two applications.
 
 ### App Integrations M2M (Machine-to-Machine)
 
@@ -38,7 +37,7 @@ Before writing the configuration file, register two OAuth2 applications in your 
 | Type           | `m2m`                        |
 | Access to APIs | Orchestration API (`read:*`) |
 
-Note down the generated `clientId` and `clientSecret` — you will need them for `auth.m2m` in the configuration file.
+Note down the generated `clientId` and `clientSecret`. You will need them for `auth.m2m` in the configuration file.
 
 ### App Integrations SPA (Single Page Application)
 
@@ -47,7 +46,7 @@ Note down the generated `clientId` and `clientSecret` — you will need them for
 | Type          | `Confidential`                |
 | Redirect URIs | `https://<your-public-url>/*` |
 
-Note down the generated `clientId` and `clientSecret` — you will need them for `auth.spa` in the configuration file.
+Note down the generated `clientId` and `clientSecret`. You will need them for `auth.spa` in the configuration file.
 
 ### Grant offline access in Keycloak
 
@@ -73,10 +72,10 @@ c8teams create my-teams-app
 
 The CLI will interactively ask you for:
 
-- A project/package name
-- The application display name
-- Your App Integrations backend URL
-- Whether to create a new Teams app and Entra (Azure AD) app or use existing ones
+- A project/package name.
+- The application display name.
+- Your App Integrations backend URL.
+- Whether to create a new Teams app and Entra (Azure AD) app or use existing ones.
 
 ### Build and deploy
 
@@ -86,7 +85,7 @@ pnpm install
 c8teams build
 ```
 
-The `build` command compiles the app package from the template and will offer to deploy immediately. You can also deploy separately:
+The `build` command compiles the app package from the template and deploys immediately. You can also deploy separately as follows:
 
 ```bash
 c8teams deploy
@@ -111,7 +110,11 @@ Create a `config.yaml` file with your configuration settings. This file will be 
 
 ### Secret management
 
-The configuration file supports referencing environment variables for any value. This is **strongly recommended** for sensitive fields such as passwords, client secrets, and encryption keys.
+The configuration file supports referencing environment variables for any value.
+
+:::important
+This is **strongly recommended** for sensitive fields such as passwords, client secrets, and encryption keys.
+:::
 
 Instead of hardcoding a secret in `config.yaml`, use the `${{ ENV_VAR_NAME }}` syntax:
 
@@ -236,8 +239,8 @@ docker run -d \
 
 :::note
 
-- **CONFIG environment variable**: Must be set to `config/app-integrations.yaml` to point to the mounted configuration file.
-- **NODE_ENV environment variable**: Set to `production` for deployed environments.
+- **`CONFIG` environment variable**: Must be set to `config/app-integrations.yaml` to point to the mounted configuration file.
+- **`NODE_ENV` environment variable**: Set to `production` for deployed environments.
 - **Volume mount**: The `config.yaml` file is mounted to `/app/apps/backend/config/app-integrations.yaml` inside the container.
 
 :::

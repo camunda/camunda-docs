@@ -1,7 +1,7 @@
 ---
 id: ms-teams-chatbot
-title: Chat Bot
-sidebar_label: Chat Bot
+title: Chat bot
+sidebar_label: Chat bot
 description: "Interact with Camunda using the conversational bot in Microsoft Teams personal chats, group chats, and channels."
 ---
 

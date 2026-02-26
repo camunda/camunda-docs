@@ -2102,9 +2102,9 @@ module.exports = {
             id: "self-managed/components/ms-teams/ms-teams",
           },
           items: [
-            "self-managed/components/ms-teams/ms-teams-tabs",
-            "self-managed/components/ms-teams/ms-teams-chatbot",
             "self-managed/components/ms-teams/ms-teams-installation",
+            "self-managed/components/ms-teams/ms-teams-chatbot",
+            "self-managed/components/ms-teams/ms-teams-tabs",
           ],
         },
         {
