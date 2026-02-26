@@ -199,7 +199,7 @@ export default function ReleaseAnnouncementsFilter({
     // Types (only those present)
     TYPE_OPTIONS.forEach((o) => {
       if (availableTypes.has(o.value)) {
-        opts.push({ key: `type:${o.value}`, kind: 'type', value: o.value, label: o.label });
+        opts.push({ key: `type:${o.value}`, kind: 'type', value: o.value, label: `Type: ${o.label}` });
       }
     });
 
@@ -209,13 +209,13 @@ export default function ReleaseAnnouncementsFilter({
       { value: 'sm' as const, label: 'Self-Managed' },
     ] as const).forEach((d) => {
       if (availableDeployments.has(d.value)) {
-        opts.push({ key: `deployment:${d.value}`, kind: 'deployment', value: d.value, label: d.label });
+        opts.push({ key: `deployment:${d.value}`, kind: 'deployment', value: d.value, label: `Deployment: ${d.label}` });
       }
     });
 
     // Areas
     availableAreas.forEach((a) => {
-      opts.push({ key: `area:${a}`, kind: 'area', value: a, label: a });
+      opts.push({ key: `area:${a}`, kind: 'area', value: a, label: `Area: ${a}` });
     });
 
     return opts;
