@@ -253,11 +253,15 @@ New RDBMS production installation guides for Camunda 8 are available:
 - Helm: Kubernetes-based orchestration cluster deployment via Helm, using RDBMS secondary storage.
 - Manual: Deploy and manage Camunda 8 using relational databases in production environments.
 
+<p class="link-arrow">[RDBMS Helm deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)</p>
+
 #### Manual installation supports RDBMS secondary storage
 
 <!-- https://github.com/camunda/product-hub/issues/2747 -->
 
 Camunda 8 Orchestration Clusters can now be installed manually (VM/bare metal/Java application) with full support for RDBMS (H2, PostgreSQL, Oracle, MariaDB) as secondary storage.
+
+<p class="link-arrow">[Manual installation with RDBMS](/self-managed/deployment/manual/index.md)</p>
 
 ## 8.9.0-alpha3
 
