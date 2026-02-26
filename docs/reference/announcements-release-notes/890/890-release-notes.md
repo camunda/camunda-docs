@@ -261,7 +261,7 @@ New RDBMS production installation guides for Camunda 8 are available:
 
 Camunda 8 Orchestration Clusters can now be installed manually (VM/bare metal/Java application) with full support for RDBMS (H2, PostgreSQL, Oracle, MariaDB) as secondary storage.
 
-<p class="link-arrow">[Manual installation with RDBMS](/self-managed/deployment/manual/index.md)</p>
+<p class="link-arrow">[Manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md)</p>
 
 ## 8.9.0-alpha3
 
