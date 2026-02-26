@@ -195,6 +195,12 @@ a.apitools-card {
   margin-top: 10px;
 }
 
+.badge--mcp {
+  background-color: #6929c4;
+  color: #fff;
+  margin-top: 10px;
+}
+
 [data-theme="dark"] .badge--rest {
   background-color: #005d5d;
   color: #bae6ff;
@@ -202,4 +208,8 @@ a.apitools-card {
 [data-theme="dark"] .badge--grpc {
   background-color: #9a4e00;
   color: #e1d9cd;
+}
+[data-theme="dark"] .badge--mcp {
+  background-color: #31135e;
+  color: #d4bbff;
 }

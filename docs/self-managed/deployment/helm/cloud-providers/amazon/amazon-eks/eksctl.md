@@ -27,6 +27,8 @@ This is a basic setup to get started with Camunda 8 but does not reflect a high 
 We refer to this architecture as the **standard installation**, which can be set up with or without a **domain** ([Ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
 The standard installation utilizes a username and password connection for the Camunda components (or simply relies on network isolation for certain components). This option is straightforward and easier to implement, making it ideal for environments where simplicity and rapid deployment are priorities, or where network isolation provides sufficient security.
 
+**Secondary storage options:** This guide provisions a managed OpenSearch domain by default. The Orchestration Cluster is fully supported with RDBMS (PostgreSQL, MySQL, MariaDB, or Oracle) as an alternative secondary storage backend. If you prefer to use RDBMS instead of OpenSearch, you can configure this during the Helm installation step. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
+
 To try out Camunda 8 or develop against it, consider signing up for our [SaaS offering](https://camunda.com/platform/), or if you already have an Amazon EKS cluster, consider skipping to the [Helm guide](./eks-helm.md).
 
 While the guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).

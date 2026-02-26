@@ -24,7 +24,7 @@ The following sections describe how to manage users in a Self-Managed environmen
 To create a user:
 
 1. Log in to Identity in your cluster, and click on the **Users** tab.
-2. Click on the **Create user** button, and provide the following the user details:
+2. Click on the **Create user** button, and provide the following user details:
    - **Username**: The username for the user.
    - **Name**: The name of the user.
    - **Email**: The email address of the user.

@@ -36,7 +36,7 @@ Use Camunda 8 APIs and clients to build, automate, and monitor your applications
 
 :::
 
-## APIs and reference
+## APIs
 
 Use the following APIs for Camunda 8 integration and automation:
 

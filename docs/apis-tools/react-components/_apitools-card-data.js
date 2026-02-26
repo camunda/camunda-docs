@@ -6,6 +6,7 @@ import IconAdminImg from "../img/icon-console.png";
 import IconOptimizeImg from "../img/icon-optimize.png";
 import IconModelerImg from "../img/icon-modeler.png";
 import IconZeebeImg from "../img/icon-orchcluster.png";
+import IconMcpImg from "../img/icon-mcp.png";
 
 export const apiCards = [
   {
@@ -15,6 +16,14 @@ export const apiCards = [
     description:
       "Main API for process automation, orchestration, and task management.",
     type: "REST",
+  },
+  {
+    link: "../orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/",
+    title: "Orchestration Cluster MCP Server",
+    image: IconMcpImg,
+    description:
+      "Exposes selected Orchestration Cluster APIs as MCP tools for AI agents and LLM-powered applications.",
+    type: "MCP",
   },
   {
     link: "../administration-api/administration-api-reference/",
