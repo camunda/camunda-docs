@@ -213,6 +213,7 @@ module.exports = {
           items: [
             "components/agentic-orchestration/ai-agents",
             "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/monitor-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
           ],
@@ -721,19 +722,13 @@ module.exports = {
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/manage-batch-operations",
+            "components/operate/userguide/monitor-batch-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
             {
               "Process instance modification": [
                 "components/operate/userguide/process-instance-modification",
                 "components/operate/userguide/process-instance-batch-modification",
-              ],
-            },
-            "components/operate/userguide/process-instance-migration",
-            {
-              "Monitor process operations": [
-                "components/operate/userguide/monitor-operation-status",
-                "components/operate/userguide/monitor-batch-operations",
               ],
             },
           ],
@@ -1724,6 +1719,19 @@ module.exports = {
           label: "Manual",
           items: [
             "self-managed/deployment/manual/install",
+            {
+              type: "category",
+              label: "Manual installation with RDBMS",
+              link: {
+                type: "doc",
+                id: "self-managed/deployment/manual/rdbms/index",
+              },
+              items: [
+                "self-managed/deployment/manual/rdbms/rdbms-production-architecture",
+                "self-managed/deployment/manual/rdbms/configuration",
+                "self-managed/deployment/manual/rdbms/operations",
+              ],
+            },
             {
               type: "category",
               label: "Cloud providers",
