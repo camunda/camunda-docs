@@ -1598,6 +1598,19 @@ module.exports = {
                 id: "self-managed/deployment/helm/operational-tasks/index",
               },
               items: [
+                {
+                  type: "category",
+                  label: "Migration",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/operational-tasks/migration/index",
+                  },
+                  items: [
+                    "self-managed/deployment/helm/operational-tasks/migration/bitnami-to-operators",
+                    "self-managed/deployment/helm/operational-tasks/migration/bitnami-to-managed-services",
+                    "self-managed/deployment/helm/operational-tasks/migration/alternatives",
+                  ],
+                },
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
               ],
