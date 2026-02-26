@@ -1,3 +1,4 @@
+/// <reference path="../../types/css-modules.d.ts" />
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './styles.module.css';
 
@@ -270,6 +271,7 @@ export default function ReleaseAnnouncementsFilter({
       el.setAttribute('role', 'button');
       el.setAttribute('tabindex', '0');
       el.setAttribute('aria-label', ariaLabel);
+      el.setAttribute('title', 'Filter by');
       el.style.cursor = 'pointer';
 
       el.onclick = () => onActivate();
