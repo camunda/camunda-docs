@@ -13,7 +13,7 @@ The Gateway API provides a modern way to manage Ingress traffic in Kubernetes cl
 - Enables configuration of NGINX without relying on labels and annotations, which also helps limit permissions.
 
 :::note
-The Ingress-NGINX controller is planned to reach end of life in March 2026 (see the Kubernetes announcement on Ingress-NGINX retirement). We recommend planning a migration to the Gateway API where it fits your use case.
+The Ingress-NGINX controller is planned to reach end of life in March 2026 (see [the Kubernetes announcement on Ingress-NGINX retirement](https://www.kubernetes.dev/blog/2025/11/12/ingress-nginx-retirement/)). Plan a migration to the Gateway API where it fits your use case.
 
 If you decide not to adopt the Gateway API, you can migrate to a different Ingress controller and continue using the Ingress API. This remains a supported approach.
 :::
@@ -25,7 +25,7 @@ Ensure both are installed in your cluster.
 - Gateway API CRDs
 - A Gateway API controller
 
-## Gateway controllers
+### Gateway controllers
 
 Just like Ingress Controllers, Gateway controllers need to be installed before a cluster can use the Gateway API. [See the list of Gateway API implementations](https://gateway-api.sigs.k8s.io/implementations/) for details.
 
