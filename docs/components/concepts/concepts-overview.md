@@ -80,7 +80,7 @@ Camunda 8 is designed to operate on a very large scale. To achieve this, it prov
 
 ### Modeler
 
-Design fully executable process and decision models that reduce misalignment and handoff friction while giving engineers the freedom they need to build the right solution. Camunda Modeler gives business users an intuitive way to model processes and decisions using the BPMN and DMN standards so their intent is clear, structured, and directly usable by developers. Developers can take the model as-is and build scalable, flexible solutions without worrying about losing alignment with business intent. Available via [web and desktop app](/components/modeler/about-modeler.md).
+Design fully-executable process and decision models that reduce misalignment and handoff friction while giving engineers the freedom they need to build the right solution. Camunda Modeler gives business users an intuitive way to model processes and decisions using the BPMN and DMN standards so their intent is clear, structured, and directly usable by developers. Developers can take the model as-is and build scalable, flexible solutions without worrying about losing alignment with business intent. Available via [web and desktop app](/components/modeler/about-modeler.md).
 
 #### Connectors
 
