@@ -7,6 +7,12 @@ description: "Deploy Camunda 8 on Kubernetes using Helm charts with an external 
 
 This guide walks you through deploying Camunda 8 using Helm charts with an external relational database (RDBMS) as secondary storage instead of Elasticsearch or OpenSearch.
 
+Related guides:
+
+- [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
+- [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md)
+- [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
+
 ## What changes when using RDBMS?
 
 In Camunda 8, secondary storage stores historical data and process state. By default, Elasticsearch or OpenSearch is used. With RDBMS, you replace that with a relational database:
@@ -134,6 +140,10 @@ kubectl create secret generic camunda-db-secret \
 
 If you're using Oracle, MySQL, or a database version not covered by bundled drivers, you must provide the JDBC driver.
 
+:::note
+For detailed information about JDBC driver strategies, security configurations, and validation, see [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md).
+:::
+
 **Option A: Init container (recommended for production)**
 
 Update your `values-rdbms.yaml`:
@@ -159,6 +169,8 @@ orchestration:
       volumeMounts:
         - name: jdbcdrivers
           mountPath: /driver-lib
+      securityContext:
+        runAsUser: 1001
 ```
 
 For other driver sources (e.g., private repositories), adjust the `wget` command or use a private container registry for pre-built images.
