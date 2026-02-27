@@ -20,6 +20,6 @@ In the table, you can review these details about each batch operation:
 | Batch state | The current state of the batch operation.                                            |
 | Items       | The number of successful, failed, and pending items included in the batch operation. |
 | Actor       | The user or client responsible for initiating the operation.                         |
-| Start time  | The operation's start time.                                                          |
+| Start date  | The operation's start date and time.                                                 |
 
-Learn how to monitor batch operations in our [user guide](../userguide/monitor-batch-operations.md).
+Learn how to monitor batch operations in the [user guide](../userguide/monitor-batch-operations.md).

@@ -114,7 +114,7 @@ The proxy authenticates to the MCP server using OAuth 2.0 client credentials, an
 #### Prerequisites
 
 - [Node.js](https://nodejs.org/) 18 or later.
-- [Client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) for your Camunda cluster.
+- [Client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) for your Camunda cluster with the **Orchestration Cluster API** scope enabled.
 
 #### Configuration
 
@@ -148,7 +148,7 @@ Add the following to your MCP client configuration (for example, `.vscode/mcp.js
 | `CAMUNDA_TOKEN_AUDIENCE` | Token audience for the Orchestration Cluster API.                                                                        |
 
 :::tip Where to find these values
-When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details — including the base URL, OAuth endpoint, client ID, and audience — are displayed on the credentials page. Copy them into the configuration above.
+When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details — including the base URL, OAuth endpoint, client ID, and audience — are displayed on the credentials page. You can also copy a ready-to-use `c8ctl` configuration snippet directly from the **MCP** tab on the credentials screen.
 :::
 
 For the full list of supported environment variables, see the [`c8ctl` documentation](https://github.com/camunda/c8ctl).
