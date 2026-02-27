@@ -371,7 +371,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Microsoft Teams app",
+              label: "Microsoft Teams",
               link: {
                 type: "doc",
                 id: "components/camunda-integrations/ms-teams/ms-teams",

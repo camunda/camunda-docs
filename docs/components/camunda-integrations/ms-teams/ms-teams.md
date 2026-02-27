@@ -1,7 +1,7 @@
 ---
 id: ms-teams
 title: Camunda for Microsoft Teams
-sidebar_label: Microsoft Teams app
+sidebar_label: Microsoft Teams
 description: "Bring Camunda's process management capabilities directly into Microsoft Teams for Self-Managed environments."
 ---
 
@@ -12,7 +12,7 @@ Bring Camunda's business process management capabilities directly into Microsoft
 
 ## About
 
-With **Camunda for Microsoft Teams** app, you can manage processes, complete tasks, monitor incidents, and receive notifications without leaving your collaboration environment.
+With **Camunda for Microsoft Teams**, you can manage processes, complete tasks, monitor incidents, and receive notifications without leaving your collaboration environment.
 
 The app offers two ways to interact with Camunda:
 
@@ -24,7 +24,7 @@ The app offers two ways to interact with Camunda:
 You sign in using your organization's Microsoft account, and then link it to your Camunda account during a one-time onboarding step.
 
 :::info Self-Managed only
-This section covers the Self-Managed installation and configuration of the Camunda for Microsoft Teams app. The Self-Managed setup requires installation and configuration by your organization's administrator. For SaaS usage, refer to the [SaaS Microsoft Teams app documentation](/components/early-access/alpha/ms-teams/ms-teams.md).
+This section covers the Self-Managed installation and configuration of Camunda for Microsoft Teams. The Self-Managed setup requires installation and configuration by your organization's administrator. For SaaS usage, refer to the [SaaS Microsoft Teams documentation](/components/early-access/alpha/ms-teams/ms-teams.md).
 :::
 
 ### Key features

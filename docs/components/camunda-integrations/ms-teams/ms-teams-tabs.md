@@ -9,7 +9,7 @@ Browse tasks, start processes, and monitor incidents using embedded tabs in Micr
 
 ## About
 
-The Camunda for Microsoft Teams app adds visual tabs to your Teams sidebar, providing a rich interface for interacting with your Camunda clusters. Each tab focuses on a specific area of process management.
+Camunda for Microsoft Teams adds visual tabs to your Teams sidebar, providing a rich interface for interacting with your Camunda clusters. Each tab focuses on a specific area of process management.
 
 ## Tasks
 

@@ -2,14 +2,14 @@
 id: ms-teams-installation
 title: Install Camunda for Microsoft Teams
 sidebar_label: Install
-description: "Install and configure the Camunda for Microsoft Teams app in a Self-Managed environment using Docker."
+description: "Install and configure Camunda for Microsoft Teams in a Self-Managed environment using Docker."
 ---
 
-Install and configure the Camunda for Microsoft Teams app in a Self-Managed environment using Docker.
+Install and configure Camunda for Microsoft Teams in a Self-Managed environment using Docker.
 
 ## About
 
-The Camunda for Microsoft Teams app requires a backend service called **App Integrations** to connect Microsoft Teams to your Camunda Self-Managed distribution. This guide walks you through setting up the backend, registering the Teams app, and configuring the connection.
+Camunda for Microsoft Teams requires a backend service called **App Integrations** to connect Microsoft Teams to your Camunda Self-Managed distribution. This guide walks you through setting up the backend, registering the Teams app, and configuring the connection.
 
 ## Prerequisites
 
@@ -54,7 +54,7 @@ In your Keycloak admin console, ensure that users who will use the Teams integra
 
 You can assign `offline_access` at the realm level (**Realm Roles** → `offline_access`) or via a group/client scope, depending on your setup.
 
-## Step 2: Set up the Microsoft Teams app (CLI)
+## Step 2: Set up the Microsoft Teams Camunda App using CLI
 
 The `@camunda/teams-app-integration-cli` (command: `c8teams`) automates the creation, build, and deployment of the Teams app package, as well as generating the `teams` section of the backend configuration.
 
