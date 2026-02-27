@@ -7,11 +7,11 @@ description: "Configure Camunda 8 Self-Managed to use an external Elasticsearch 
 
 Configure Camunda 8 Self-Managed to connect to an external Elasticsearch instance as a secondary storage backend. Elasticsearch is used for indexing and querying operational data consumed by multiple Camunda components. For a canonical definition, see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
 
-Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by default. To use Elasticsearch as secondary storage, you must explicitly enable it in your Helm values (`global.elasticsearch.enabled: true`). You can either enable the bundled Elasticsearch subchart (`elasticsearch.enabled: true`) or connect Camunda to an existing external Elasticsearch instance, either running inside the same Kubernetes cluster or outside it.
+Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by default. To use Elasticsearch as secondary storage, you must explicitly enable it in your Helm values (`global.elasticsearch.enabled: true`). You can either deploy Elasticsearch using the [ECK operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) (recommended) or connect Camunda to an existing external Elasticsearch instance, either running inside the same Kubernetes cluster or outside it.
 
-For the [quick-install](/self-managed/deployment/helm/install/quick-install.md) scenario, RDBMS with embedded H2 is used instead. Secondary storage is configurable — for supported components, you can also use an RDBMS-based secondary store. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms) for configuration details and limitations.
-
-For production deployments, Camunda recommends managing Elasticsearch externally and disabling the Elasticsearch subchart. This gives more flexibility for scaling, backups, and upgrades without affecting the rest of the Camunda installation.
+:::note
+The bundled Elasticsearch Bitnami subchart (`elasticsearch.enabled: true`) is deprecated and will be removed in a future release. For production deployments, use the [ECK (Elastic Cloud on Kubernetes) operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) or a managed Elasticsearch service instead. See [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for details.
+:::
 
 ## Prerequisites
 
