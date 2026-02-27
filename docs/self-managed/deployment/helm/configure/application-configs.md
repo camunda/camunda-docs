@@ -572,6 +572,7 @@ zeebe:
 Here, the bucket name is set twice. The environment variable `zeebetest1` overrides the configuration file `zeebeOtherBucketName`. See [Spring externalized configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html) for precedence details.
 
 ### Limitations
+
 Setting the `configuration` option replaces the entire contents of the application's configuration file. During upgrades, if the `configuration` option remains and there are breaking changes to the configuration file format or required defaults, this can prevent the component from starting.
 
 - Use `extraConfiguration` by default so you only maintain a small set of overrides.
