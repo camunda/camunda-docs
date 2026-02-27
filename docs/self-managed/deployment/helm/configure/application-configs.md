@@ -26,7 +26,7 @@ For the complete list of configuration options per component, see the Self-Manag
 | Key                                  | Type   | Description                                                                                                                                                                                                            |
 | ------------------------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<componentName>.extraConfiguration` | list   | **Recommended:** Additional configuration entries layered on top of the default configuration. Each entry has a `file` (filename) and `content` (file contents). See [how it works per component](#how-extraconfiguration-works-per-component). |
-| `<componentName>.configuration`      | string | **Advanced:** Full application configuration file content (for example, the full contents of `application.yaml`). Using this **replaces** the component's default application configuration.                               |
+| `<componentName>.configuration`      | string | **Advanced:** Full application configuration file content (for example, the full contents of `application.yaml`). Using this **replaces** the component's default application configuration.                                                    |
 
 ### Configuration options
 
