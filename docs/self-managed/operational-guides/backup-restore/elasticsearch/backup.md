@@ -738,4 +738,4 @@ For Zeebe, you would also have to remove the separately backed up `zeebe-record`
 This only affects the primary storage and does not interfere with Elasticsearch/OpenSearch backups.
 :::
 
-With Camunda 8.9 you now have the option to enable a retention mechanism over primary storage (Zeebe's) backups. This will periodically delete backups from the configured blob storage based on the preconfigured retention window. Learn more about configuring backup retention [here](../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackupretention).
+With Camunda 8.9 you now have the option to enable a retention mechanism over primary storage (Zeebe's) backups. This will periodically delete backups from the configured blob storage based on the preconfigured retention window. Learn more about configuring backup retention [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackupretention).
