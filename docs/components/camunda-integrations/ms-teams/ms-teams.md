@@ -56,9 +56,8 @@ You sign in using your organization's Microsoft account, and then link it to you
 
 | Prerequisite                        | Description                                                                                                                                                  |
 | :---------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda for Microsoft Teams app     | The Camunda for Microsoft Teams app must be [installed](./ms-teams-installation.md) and added to your Microsoft tenant by your organization's administrator. |
 | Camunda 8 Self-Managed installation | A running and accessible Camunda 8 Self-Managed installation.                                                                                                |
-| App Integrations                    | Installed and configured App Integrations backend. See the [installation guide](./ms-teams-installation.md) for setup details.                               |
+| Camunda for Microsoft Teams app     | The Camunda for Microsoft Teams app must be [installed](./ms-teams-installation.md) and added to your Microsoft tenant by your organization's administrator. |
 
 </TabItem>
 
@@ -96,7 +95,10 @@ The Self-Managed setup requires installation and configuration by your organizat
 :::
 
 1. Open **Microsoft Teams**.
-2. Open **Apps** and search for **Camunda** in the **Built for your org** organisation. Note that your administrator may have renamed the app — contact them if you cannot find it.
+2. Open **Apps** and search for **Camunda** in the **Built for your org** organisation.
+   :::note
+   Your administrator may have renamed the app — contact them if you cannot find it.
+   :::
 3. Click **Add** to install the app.
 
 </TabItem>
@@ -160,7 +162,7 @@ Use the **Switch environment** button at the top of the app to change your activ
 <TabItem value="self-managed">
 
 - Verify your Camunda Self-Managed distribution is running and accessible.
-- Check your Identity (Keycloak) configuration and ensure the user has the required roles.
+- Check your Identity configuration and ensure the user has the required roles.
 - If no tasks or incidents are visible, double-check your cluster configuration in the `config.yaml` file.
 
 </TabItem>

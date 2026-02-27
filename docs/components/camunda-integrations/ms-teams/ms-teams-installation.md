@@ -299,4 +299,4 @@ Below is a reference of each section in the `config.yaml` file.
 
 - **`teams.serviceUrl`:** The default value (`https://smba.trafficmanager.net/teams`) works for most deployments. Only override it if your environment requires a different Bot Framework service endpoint. If you're not sure, leave it as is.
 
-- **`exporter.apiKey`:** The exporter API key must match the key configured in the Helm chart of your Camunda orchestration cluster. Refer to the [Camunda Self-Managed Helm chart documentation](/self-managed/setup/overview.md) for instructions on how to configure the exporter API key in your cluster. The App Integrations backend uses this key to authenticate with the exporter endpoint.
+- **`exporter.apiKey`:** The exporter API key must match the key configured in the Helm chart of your Camunda orchestration cluster. Refer to the [Camunda Self-Managed Helm chart documentation](../../../../self-managed/quickstart/administrator-quickstart/) for instructions on how to configure the exporter API key in your cluster. The App Integrations backend uses this key to authenticate with the exporter endpoint.
