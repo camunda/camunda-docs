@@ -21,13 +21,14 @@ Depending on the view you're using to access the audit log in [Operate](../../op
 
 ### Actor
 
-Three types of possible actors may trigger operations:
+Two types of actors may trigger operations:
 
-| Actor type | Identifier                                                            |
-| :--------- | :-------------------------------------------------------------------- |
-| User       | Username                                                              |
-| Client     | Client ID                                                             |
-| Agent      | Human-readable agent identifier. For example, "Invoice Triage Agent". |
+| Actor type | Identifier |
+| :--------- | :--------- |
+| User       | Username   |
+| Client     | Client ID  |
+
+Agents can perform operations on behalf of a user or client. In this case, you'll see the agent's information in the record.
 
 ## REST API
 

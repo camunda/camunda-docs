@@ -12,7 +12,7 @@ Configure the user operations audit log in Camunda 8 Self-Managed.
 
 ## Configure recorded operations
 
-By default, the audit log is enabled and only user operations are tracked. To change the default behavior, such as to disable the audit log or record [client](../../../components/zeebe/technical-concepts/architecture.md#clients) and agent operations, you must configure your deployment:
+By default, the audit log is enabled and only user operations are tracked. To change the default behavior, such as to disable the audit log or record [client](../../../components/zeebe/technical-concepts/architecture.md#clients) operations, you must configure your deployment:
 
 <Tabs groupId="configType" defaultValue="application.yaml">
 <TabItem value="application.yaml" label="Application properties">
