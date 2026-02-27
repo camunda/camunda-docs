@@ -8,7 +8,7 @@ description: "Management Identity is the component within Camunda 8 Self-Managed
 The Management Identity component in Camunda 8 Self-Managed is used to manage authentication, access, and authorization for components outside the [Orchestration Cluster](/self-managed/components/orchestration-cluster/overview.md) ([Console](../console/overview.md), [Web Modeler](../modeler/web-modeler/overview.md), and [Optimize](../optimize/overview.md)).
 
 :::note
-Management Identity is separate from the [Identity component within the Orchestration Cluster](/self-managed/components/orchestration-cluster/identity/overview.md), which handles authentication and authorization for Orchestration Cluster applications and APIs.
+Management Identity is separate from the [Admin component within the Orchestration Cluster](/self-managed/components/orchestration-cluster/admin/overview.md), which handles authentication for Zeebe, Operate, Tasklist, and Orchestration Cluster API.
 :::
 
 ## About Management Identity
@@ -55,7 +55,7 @@ Control who can access what by assigning permissions through roles.
 
 ### Multi-tenancy
 
-Isolate data and access in Optimize between different customers or business units by organizing resources into tenants. This is effective only if you have [multi-tenancy checks enabled for your Orchestration Cluster](/components/identity/tenant.md).
+Isolate data and access in Optimize between different customers or business units by organizing resources into tenants. This is effective only if you have [multi-tenancy checks enabled for your Orchestration Cluster](/components/admin/tenant.md).
 
 - [Manage tenants for Optimize](manage-tenants.md)
 

@@ -24,7 +24,7 @@ The Orchestration Cluster in Camunda 8 provides a fine-grained authorization sys
 This system only applies to the following Orchestration Cluster components:
 
 - [Zeebe](../../zeebe/zeebe-overview.md)
-- [Identity](../../identity/identity-introduction.md)
+- [Identity](../../admin/admin-introduction.md)
 - [Operate](../../operate/operate-introduction.md)
 - [Tasklist](../../tasklist/introduction-to-tasklist.md)
 - [Orchestration Cluster APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)

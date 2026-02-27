@@ -14,7 +14,7 @@ Configure initial [tenants](/components/concepts/multi-tenancy.md) for Optimize 
 
 Tenants managed within Management Identity only apply to [Optimize](../../optimize/overview.md). Furthermore, they're only effective when the following conditions are met:
 
-- You've [enabled multi-tenancy checks for your Orchestration Cluster](/components/identity/tenant.md).
+- You've [enabled multi-tenancy checks for your Orchestration Cluster](/components/admin/tenant.md).
 - Your tenants have the same identifiers in the Orchestration Cluster and Management Identity.
 
 In this guide, you'll learn how to initialize tenants in your app configuration.
@@ -111,5 +111,5 @@ In some contexts, like the Management Identity UI, the "Application ID" is refer
 
 ## Next steps
 
-- [Enable multi-tenancy checks for your Orchestration Cluster](/components/identity/tenant.md)
+- [Enable multi-tenancy checks for your Orchestration Cluster](/components/admin/tenant.md)
 - [Manage tenants in the Management Identity application](../manage-tenants.md)

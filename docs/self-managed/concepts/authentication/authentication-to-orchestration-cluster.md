@@ -8,7 +8,7 @@ description: "Learn about authentication methods for the Orchestration Cluster o
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Authentication to the Orchestration Cluster components and their resources is managed by [Identity](../../components/orchestration-cluster/identity/overview.md).
+Authentication to the Orchestration Cluster components and their resources is managed by [Admin](../../components/orchestration-cluster/admin/overview.md).
 
 ## About Orchestration Cluster authentication
 
@@ -23,14 +23,14 @@ The Orchestration Cluster supports two authentication methods:
 
 |                          | **API access**        | **Web UI access**     | **User management**            |
 | ------------------------ | --------------------- | --------------------- | ------------------------------ |
-| **Basic authentication** | Username and password | Username and password | Via Identity                   |
+| **Basic authentication** | Username and password | Username and password | Via Admin                      |
 | **OIDC**                 | OAuth 2.0 (via IdP)   | OIDC (via IdP)        | Via External Identity Provider |
 
 Additionally, an [Unprotected API mode](#unprotected-api-mode) is available for development purposes, which can be applied to either method.
 
 ## Basic authentication
 
-With basic authentication, Orchestration Cluster components are protected with a username and password. User management is handled within the built-in Identity service.
+With basic authentication, Orchestration Cluster components are protected with a username and password. User management is handled within the built-in Admin service.
 
 :::note
 This is the default authentication method for all installation options: [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/deployment/helm/index.md), and [Manual installation](/self-managed/deployment/manual/install.md).
@@ -75,9 +75,9 @@ With OIDC, authentication is delegated to an [external Identity Provider (IdP)](
 
 This is the **recommended method for production environments**.
 
-- [Users](/components/identity/user.md) are managed in your external IdP and [mapped through rules](/components/concepts/access-control/mapping-rules.md) in Identity.
-- [User groups](/components/identity/group.md) can be managed in Identity or configured to use groups from your IdP.
-- [Clients](/components/identity/client.md) are managed in your external IdP and [mapped through rules](/components/concepts/access-control/mapping-rules.md) in Identity.
+- [Users](/components/admin/user.md) are managed in your external IdP and [mapped through rules](/components/concepts/access-control/mapping-rules.md) in Admin.
+- [User groups](/components/admin/group.md) can be managed in Admin or configured to use groups from your IdP.
+- [Clients](/components/admin/client.md) are managed in your external IdP and [mapped through rules](/components/concepts/access-control/mapping-rules.md) in Admin.
 
 Using OIDC provides several security benefits:
 
@@ -86,7 +86,7 @@ Using OIDC provides several security benefits:
 - **Enhanced security:** Enforce MFA, password rotation policies, and other advanced security measures offered by your IdP.
 
 :::info
-For more information, see [connect Orchestration Cluster Identity to an external IdP](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
+For more information, see [connect Orchestration Cluster Admin to an external IdP](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md).
 :::
 
 ### Example configuration

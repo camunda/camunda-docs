@@ -24,7 +24,7 @@ Complete the following steps:
 
 1. [Add your external IdP to Keycloak](#add-your-external-idp-to-keycloak)
 2. [Configure identity provider mappers](#configure-identity-provider-mappers)
-3. [Configure Orchestration Cluster Identity](#configure-orchestration-cluster-identity)
+3. [Configure Orchestration Cluster Admin](#configure-orchestration-cluster-identity)
 4. [Configure Management Identity access](#configure-management-identity-access-optional) (optional)
 
 ### Add your external IdP to Keycloak
@@ -79,11 +79,11 @@ Create a mapper to assign federated users to this group:
 - **Mapper Type**: Hardcoded Group
 - **Group**: `external-idp-users`
 
-### Configure Orchestration Cluster Identity
+### Configure Orchestration Cluster Admin
 
 External IdP users can authenticate, but still require authorization to access Camunda components.
 
-Log in to **Orchestration Cluster Identity** as an administrator.
+Log in to **Orchestration Cluster Admin** as an administrator.
 
 #### Grant component access
 
@@ -148,7 +148,7 @@ You can also assign roles directly to users in Keycloak, or use [mapping rules i
 
 ## Next steps
 
-- To understand the differences between Orchestration Cluster Identity and Management Identity, see [Identity types in Camunda 8](/components/concepts/access-control/access-control-overview.md#identity-types-in-camunda-8).
+- To understand the differences between Orchestration Cluster Admin and Management Identity, see [Identity types in Camunda 8](/components/concepts/access-control/access-control-overview.md#identity-types-in-camunda-8).
 - To learn more about mapping rules, see [Mapping rules](/components/concepts/access-control/mapping-rules.md).
 - To configure additional authorizations, see [Orchestration Cluster authorization](/components/concepts/access-control/authorizations.md).
 - To use an external IdP without the internal Keycloak, see [Set up the Helm chart with an external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md).

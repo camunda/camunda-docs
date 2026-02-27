@@ -56,7 +56,7 @@ The Camunda‑hosted [Console](/components/console/introduction-to-console.md) a
 
 ## Identity
 
-[Identity](/components/identity/identity-introduction.md) is managed by Camunda for SaaS. Single Sign-on (SSO) is supported.
+[Identity](/components/admin/admin-introduction.md) is managed by Camunda for SaaS. Single Sign-on (SSO) is supported.
 
 | Host location                       | Data handled                                                               | Personal data processing                                                                                                                                                                      |
 | :---------------------------------- | :------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -64,7 +64,7 @@ The Camunda‑hosted [Console](/components/console/introduction-to-console.md) a
 
 :::info Learn more
 
-- [Identity](/components/identity/identity-introduction.md)
+- [Identity](/components/admin/admin-introduction.md)
 - [Connect to an identity provider](/components/console/manage-organization/external-sso.md)
 
 :::

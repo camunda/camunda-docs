@@ -15,7 +15,7 @@ This method of deployment requires a solid understanding of infrastructure, netw
 
 ## Key features
 
-- **Single application JAR**: Starting from Camunda 8.8, all core components (Zeebe, Tasklist, Operate, and Identity) are bundled into a single JAR file. This simplifies deployment by reducing the number of artifacts to manage. This bundled component is called Orchestration Cluster.
+- **Single application JAR**: Starting from Camunda 8.8, all core components (Zeebe, Tasklist, Operate, and Admin) are bundled into a single JAR file. This simplifies deployment by reducing the number of artifacts to manage. This bundled component is called Orchestration Cluster.
 - **Full control**: Users are responsible for all aspects of deployment, including installation, configuration, scaling, and maintenance. This offers maximum flexibility for custom environments.
 
 Other deployment options, such as containerized deployments or managed services, might offer more convenience and automation. However, VM based deployment gives you the flexibility to tailor the deployment to your exact needs, which can be beneficial for regulated or highly customized environments.
@@ -30,7 +30,7 @@ This section includes deployment reference architectures for manual setups:
 
 ## Considerations
 
-- This overview page focuses on deploying the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster), the single JAR comprised of Zeebe, Operate, Tasklist, and Orchestration Cluster Identity, as well as the Connectors runtime. Web Modeler, Console, Optimize, and Management Identity deployments are not included.
+- This overview page focuses on deploying the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster), the single JAR composed of Admin, Operate, Tasklist, and Zeebe, as well as the connectors runtime. Web Modeler, Console, Optimize, and Management Identity deployments are not included.
 - General guidance and examples focuses on **unix** users, but can be adapted by Windows users with options like [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or included `batch` files.
 
 ## Architecture
@@ -52,7 +52,7 @@ The Orchestration Cluster is packaged as a single JAR file and includes the foll
 - [Zeebe](/components/zeebe/zeebe-overview.md)
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md)
+- [Admin](/self-managed/components/orchestration-cluster/admin/overview.md)
 
 It facilitates:
 
