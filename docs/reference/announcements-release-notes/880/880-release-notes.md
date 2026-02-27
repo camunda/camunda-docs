@@ -393,7 +393,7 @@ The app integration allows you to:
 - Start processes from a channel, chat, or the app **Home** tab.
 - Fill out start forms in Microsoft Teams and submit them to kick off workflows, with optional links to Operate for monitoring.
 
-<p><a href="../../../../components/early-access/alpha/ms-teams/" class="link-arrow">Camunda for Microsoft Teams app</a></p>
+<p><a href="../../../../camunda-integrations/ms-teams/" class="link-arrow">Camunda for Microsoft Teams app</a></p>
 
 :::note
 The Microsoft Teams integration is released as an [early access](/components/early-access/overview.md) alpha feature to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.

@@ -35,7 +35,9 @@ You sign in using your organization's Microsoft account, and then link it to you
 | Notifications       | Receive personal and channel alerts for new or assigned user tasks. |
 | Cluster management  | View cluster health and wake up suspended clusters.                 |
 
-## Prerequisites
+## Get started
+
+### Prerequisites
 
 <Tabs groupId="environment" defaultValue="saas" values={[
 { label: 'SaaS', value: 'saas' },
@@ -63,8 +65,6 @@ You sign in using your organization's Microsoft account, and then link it to you
 
 </Tabs>
 
-## Get started
-
 ### Install the app in Microsoft Teams
 
 <Tabs groupId="environment" defaultValue="saas" values={[
@@ -91,14 +91,16 @@ If your organization manages Teams apps centrally, contact your Teams administra
 <TabItem value="self-managed">
 
 :::info
-The Self-Managed setup requires installation and configuration by your organization's administrator.
+The Self-Managed setup first requires installation and configuration by your organization's administrator. See [Install](./ms-teams-installation.md) for more details.
 :::
 
 1. Open **Microsoft Teams**.
-2. Open **Apps** and search for **Camunda** in the **Built for your org** organisation.
-   :::note
-   Your administrator may have renamed the app — contact them if you cannot find it.
-   :::
+2. Open **Apps** and search for **Camunda** in the **Built for your org** organization.
+
+:::note
+Your administrator may have renamed the app. Contact them if you cannot find it.
+:::
+
 3. Click **Add** to install the app.
 
 </TabItem>
@@ -118,68 +120,6 @@ Once you are signed in, select the organization and cluster you want to work in 
 
 Use the **Switch environment** button at the top of the app to change your active organization and cluster at any time.
 
-## Troubleshooting
-
-### The app is not shown in the Microsoft Teams store
-
-<Tabs groupId="environment" defaultValue="saas" values={[
-{ label: 'SaaS', value: 'saas' },
-{ label: 'Self-Managed', value: 'self-managed' },
-]}>
-
-<TabItem value="saas">
-
-- Verify your organization allows third-party app installations.
-- Search for **Camunda** in the Microsoft Teams app store.
-- Check with your Teams administrator for app approval policies.
-
-</TabItem>
-
-<TabItem value="self-managed">
-
-- The app is provisioned during [installation](./ms-teams-installation.md) and appears in the **Built for your org** section of Microsoft Teams Apps.
-- If the app is not visible, check with your IT administrator.
-
-</TabItem>
-
-</Tabs>
-
-### Unable to connect to Camunda organization
-
-<Tabs groupId="environment" defaultValue="saas" values={[
-{ label: 'SaaS', value: 'saas' },
-{ label: 'Self-Managed', value: 'self-managed' },
-]}>
-
-<TabItem value="saas">
-
-- Ensure you have the required permissions in your Camunda organization.
-- Verify your Camunda SaaS account is active and accessible.
-- If no tasks or incidents are visible, double-check your Camunda organization, cluster, and tenant settings.
-
-</TabItem>
-
-<TabItem value="self-managed">
-
-- Verify your Camunda Self-Managed distribution is running and accessible.
-- Check your Identity configuration and ensure the user has the required roles.
-- If no tasks or incidents are visible, double-check your cluster configuration in the `config.yaml` file.
-
-</TabItem>
-
-</Tabs>
-
-### Tasks not displayed
-
-- Check you are connected to the correct Camunda cluster.
-- If notifications are not shown, check Microsoft Teams notifications are enabled, or re-run `@Camunda Set up notifications` in the channel.
-- This could be due to an expired Camunda session or missing permissions. Sign out and sign in again.
-
-## Get help
-
-- Contact [Camunda support](/reference/contact.md) for assistance.
-- Provide feedback through the [Camunda roadmap portal](https://roadmap.camunda.com).
-
 ## Explore further resources
 
-<AoGrid ao={msTeamsCards} columns={2}/>
+<AoGrid ao={msTeamsCards} columns={3}/>

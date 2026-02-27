@@ -4,6 +4,13 @@ import IconConfig from "../../components/assets/icon-config.png";
 
 export const msTeamsCards = [
   {
+    link: "./ms-teams-troubleshoot/",
+    title: "Troubleshoot",
+    image: IconConfig,
+    description:
+      "Troubleshoot Camunda for Microsoft Teams to fix common setup and connectivity issues.",
+  },
+  {
     link: "./ms-teams-chatbot/",
     title: "Chat bot",
     image: IconIntegration,

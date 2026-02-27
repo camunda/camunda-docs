@@ -295,6 +295,20 @@ module.exports = {
           items: [
             {
               type: "category",
+              label: "Microsoft Teams",
+              link: {
+                type: "doc",
+                id: "components/camunda-integrations/ms-teams/ms-teams",
+              },
+              items: [
+                "components/camunda-integrations/ms-teams/ms-teams-installation",
+                "components/camunda-integrations/ms-teams/ms-teams-troubleshoot",
+                "components/camunda-integrations/ms-teams/ms-teams-chatbot",
+                "components/camunda-integrations/ms-teams/ms-teams-tabs",
+              ],
+            },
+            {
+              type: "category",
               label: "SAP",
               link: {
                 type: "doc",
@@ -367,19 +381,6 @@ module.exports = {
                 "components/camunda-integrations/servicenow/best-practices",
                 "components/camunda-integrations/servicenow/troubleshooting",
                 "components/camunda-integrations/servicenow/glossary",
-              ],
-            },
-            {
-              type: "category",
-              label: "Microsoft Teams",
-              link: {
-                type: "doc",
-                id: "components/camunda-integrations/ms-teams/ms-teams",
-              },
-              items: [
-                "components/camunda-integrations/ms-teams/ms-teams-installation",
-                "components/camunda-integrations/ms-teams/ms-teams-chatbot",
-                "components/camunda-integrations/ms-teams/ms-teams-tabs",
               ],
             },
           ],
