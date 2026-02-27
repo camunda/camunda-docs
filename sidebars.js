@@ -369,6 +369,19 @@ module.exports = {
                 "components/camunda-integrations/servicenow/glossary",
               ],
             },
+            {
+              type: "category",
+              label: "Microsoft Teams app",
+              link: {
+                type: "doc",
+                id: "components/camunda-integrations/ms-teams/ms-teams",
+              },
+              items: [
+                "components/camunda-integrations/ms-teams/ms-teams-installation",
+                "components/camunda-integrations/ms-teams/ms-teams-chatbot",
+                "components/camunda-integrations/ms-teams/ms-teams-tabs",
+              ],
+            },
           ],
         },
         {
@@ -2094,19 +2107,7 @@ module.exports = {
             "self-managed/components/connectors/performance",
           ],
         },
-        {
-          type: "category",
-          label: "Microsoft Teams app",
-          link: {
-            type: "doc",
-            id: "self-managed/components/ms-teams/ms-teams",
-          },
-          items: [
-            "self-managed/components/ms-teams/ms-teams-installation",
-            "self-managed/components/ms-teams/ms-teams-chatbot",
-            "self-managed/components/ms-teams/ms-teams-tabs",
-          ],
-        },
+
         {
           type: "category",
           label: "Management Identity",

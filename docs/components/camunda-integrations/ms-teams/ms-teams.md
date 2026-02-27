@@ -6,7 +6,7 @@ description: "Bring Camunda's process management capabilities directly into Micr
 ---
 
 import AoGrid from '../../../components/react-components/\_ao-card';
-import { msTeamsCards } from '../../react-components/\_ms-teams-card-data';
+import { msTeamsCards } from '../../../self-managed/react-components/\_ms-teams-card-data';
 
 Bring Camunda's business process management capabilities directly into Microsoft Teams in your Self-Managed environment.
 
