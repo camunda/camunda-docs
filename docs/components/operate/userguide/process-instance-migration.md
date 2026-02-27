@@ -17,7 +17,7 @@ Before you try to migrate process instances, learn about the [limitations](/comp
 3. Click **Migrate** to enter the migration view.
 4. In the modal, click **Continue**.
 
-The migration view features three areas: the source process diagram (top left), the target process diagram (top right) and the flow node mapping (bottom panel).
+The migration view features three areas: the source process diagram (top left), the target process diagram (top right) and the element mapping (bottom panel).
 
 ## Select a target process version
 
@@ -27,11 +27,11 @@ Above the target process diagram, enter a target process into the **Target** box
 
 In the bottom panel, you can see a list of all service tasks from the source process.
 
-1. Use the dropdowns to select a target flow node for each source flow node that should be part of the migration. It is currently only possible to map elements with migration [supported by Zeebe](/components/concepts/process-instance-migration.md#supported-bpmn-elements).
-2. (Optional) Click on a flow node in the diagram or on a source flow node row in the bottom panel to see how flow nodes are mapped.
+1. Use the dropdowns to select a target element for each source element that should be part of the migration. It is currently only possible to map elements with migration [supported by Zeebe](/components/concepts/process-instance-migration.md#supported-bpmn-elements).
+2. (Optional) Click on an element in the diagram or on a source element row in the bottom panel to see how elements are mapped.
 3. In the footer, click **Next** for a preview of the migration plan.
 
-Now, you can see a preview of how flow nodes are mapped and how many process instances are expected to be migrated.
+Now, you can see a preview of how elements are mapped and how many process instances are expected to be migrated.
 
 ## Start the migration
 
