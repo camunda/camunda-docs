@@ -65,7 +65,11 @@ In production, Camunda 8 is typically deployed together with additional componen
      -n orchestration
    ```
 
-   This enables the RDBMS exporter with embedded H2 as secondary storage. The cluster is configured with a single broker and a single partition because the embedded H2 database is local to each broker — running multiple brokers would result in separate, independent databases and incomplete query results. Starting with Camunda 8.9, the chart no longer includes a default secondary storage; you must explicitly choose a secondary storage backend such as RDBMS, Elasticsearch, or OpenSearch in your Helm values.
+This enables the RDBMS exporter with embedded H2 as secondary storage. The cluster is configured with a single broker, a single partition, and a replication factor of 1. The replication factor must be less than or equal to the cluster size. For a single-broker cluster, the only valid replication factor is 1.
+
+The embedded H2 database is local to each broker. Running multiple brokers would result in separate, independent databases and incomplete query results.
+
+Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by default. You must explicitly enable a secondary storage backend (RDBMS, Elasticsearch, or OpenSearch) in your Helm values.
 
    <!-- TODO before 8.9 GA:
      The install command below includes a temporary workaround:

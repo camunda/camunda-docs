@@ -7,15 +7,11 @@ description: "Configure Camunda 8 Self-Managed to use an external Elasticsearch 
 
 Configure Camunda 8 Self-Managed to connect to an external Elasticsearch instance as a secondary storage backend. Elasticsearch is used for indexing and querying operational data consumed by multiple Camunda components. For a canonical definition, see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
 
-By default, the [Helm chart deployment](/self-managed/deployment/helm/install/quick-install.md) provisions an Elasticsearch instance using the bundled Elasticsearch subchart. You can instead connect Camunda to an existing external Elasticsearch instance, either running inside the same Kubernetes cluster or outside it.
+Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by default. To use Elasticsearch as secondary storage, you must explicitly enable it in your Helm values (`global.elasticsearch.enabled: true`). You can either enable the bundled Elasticsearch subchart (`elasticsearch.enabled: true`) or connect Camunda to an existing external Elasticsearch instance, either running inside the same Kubernetes cluster or outside it.
 
-Secondary storage is configurable. For supported components, you can use an RDBMS-based secondary store instead. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms) for configuration details and limitations.
+For the [quick-install](/self-managed/deployment/helm/install/quick-install.md) scenario, RDBMS with embedded H2 is used instead. Secondary storage is configurable — for supported components, you can also use an RDBMS-based secondary store. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms) for configuration details and limitations.
 
 For production deployments, Camunda recommends managing Elasticsearch externally and disabling the Elasticsearch subchart. This gives more flexibility for scaling, backups, and upgrades without affecting the rest of the Camunda installation.
-
-:::note
-In 8.9-alpha3, H2 is the default secondary storage for lightweight Camunda 8 Run and quick-install scenarios. Elasticsearch is still bundled with the distribution and fully supported as an optional alternative. Use this guide when you want to run or connect to an external Elasticsearch cluster instead of the default H2 store.
-:::
 
 ## Prerequisites
 
