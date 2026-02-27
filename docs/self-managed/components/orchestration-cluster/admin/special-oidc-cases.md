@@ -38,6 +38,7 @@ camunda.security:
       authorization-uri: http://localhost:18080/protocol/openid-connect/auth
       token-uri: http://<Docker network domain name>:18080/protocol/openid-connect/token
       jwk-set-uri: http://<Docker network domain name>:18080/protocol/openid-connect/certs
+      end-session-endpoint-uri: http://<Docker network domain name>:18080/protocol/openid-connect/logout
 ```
 
 </TabItem>
@@ -48,6 +49,7 @@ camunda.security:
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUTHORIZATIONURI=http://localhost:18080/protocol/openid-connect/auth
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_TOKENURI=http://<Docker network domain name>:18080/protocol/openid-connect/token
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI=http://<Docker network domain name>:18080/protocol/openid-connect/certs
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ENDSESSIONENDPOINTURI=http://<Docker network domain name>:18080/protocol/openid-connect/logout
 ```
 
 </TabItem>
