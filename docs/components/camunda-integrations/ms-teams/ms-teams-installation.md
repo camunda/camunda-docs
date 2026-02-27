@@ -7,6 +7,10 @@ description: "Install and configure Camunda for Microsoft Teams in a Self-Manage
 
 Install and configure Camunda for Microsoft Teams in a Self-Managed environment using Docker.
 
+:::note
+No installation is needed for SaaS environments. The Camunda app is already available in the Microsoft Teams app store and can be used by all users with a Camunda SaaS subscription. See the [Get started](./ms-teams.md#get-started) section for details.
+:::
+
 ## About
 
 Camunda for Microsoft Teams requires a backend service called **App Integrations** to connect Microsoft Teams to your Camunda Self-Managed distribution. This guide walks you through setting up the backend, registering the Teams app, and configuring the connection.

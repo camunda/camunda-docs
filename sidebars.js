@@ -431,7 +431,6 @@ module.exports = {
                     "components/early-access/alpha/a2a-client/a2a-client-usage-patterns",
                   ],
                 },
-                "components/early-access/alpha/ms-teams/ms-teams",
               ],
             },
           ],

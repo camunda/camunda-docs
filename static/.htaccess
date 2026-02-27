@@ -146,7 +146,7 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 
 ## Microsoft Teams app redirect for app store documentation link.
 
-RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=301,L]
+RewriteRule ^docs/ms-teams/?$ /docs/components/camunda-integrations/ms-teams/ms-teams/ [R=301,L]
 
 ## Redirect update-guide introduction to new components-upgrade introduction
 
