@@ -8,6 +8,7 @@ description: "Deploy Red Hat OpenShift on AWS using a Terraform module for a qui
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import RosaHcpAuth from '../../\_partials/\_rosa-hcp-auth.md'
 
 This guide provides a detailed tutorial for deploying a [Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP)](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/architecture/index.html) capabilities. It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
 
@@ -201,75 +202,17 @@ The [Camunda-provided module](https://github.com/camunda/camunda-deployment-refe
 This module is based on the official [ROSA HCP Terraform module documentation](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html). It is presented as an example for running Camunda 8 in ROSA. For advanced use cases or custom setups, we encourage you to use the official module, which includes vendor-supported features.
 :::
 
-#### Set up ROSA authentication
+<RosaHcpAuth />
 
-To set up a ROSA cluster, certain prerequisites must be configured on your AWS account. Below is an excerpt from the [official ROSA planning prerequisites checklist](https://docs.openshift.com/rosa/rosa_planning/rosa-cloud-expert-prereq-checklist.html):
+Verify your AWS quotas:
 
-1. Verify that your AWS account is correctly configured:
+```bash
+rosa verify quota --region="$AWS_REGION"
+```
 
-   ```bash
-   aws sts get-caller-identity
-   ```
-
-1. Check if the ELB service role exists, as if you have never created a load balancer in your AWS account, the role for Elastic Load Balancing (ELB) might not exist yet:
-
-   ```bash
-   aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing"
-   ```
-
-   If it doesn't exist, create it:
-
-   ```bash
-   aws iam create-service-linked-role --aws-service-name "elasticloadbalancing.amazonaws.com"
-   ```
-
-1. Create a Red Hat Hybrid Cloud Console account if you don’t already have one: [Red Hat Hybrid Cloud Console](https://console.redhat.com/).
-
-1. Enable ROSA on your AWS account via the [AWS Console](https://console.aws.amazon.com/rosa/).
-
-1. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
-   - Navigate to the ROSA console: [AWS ROSA Console](https://console.aws.amazon.com/rosa).
-   - Choose **Get started**.
-   - On the **Verify ROSA prerequisites** page, select **I agree to share my contact information with Red Hat**.
-   - Choose **Enable ROSA**.
-
-   **Note**: Only a single AWS account can be associated with a Red Hat account for service billing.
-
-1. Install the ROSA CLI from the [OpenShift AWS Console](https://console.redhat.com/openshift/downloads#tool-rosa).
-
-1. Get an API token, go to the [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa), click **Load token**, and save it. Use the token to log in with ROSA CLI:
-
-   ```bash
-   export RHCS_TOKEN="<yourToken>"
-   rosa login --token="$RHCS_TOKEN"
-
-   # Verify the login
-   rosa whoami
-   ```
-
-1. Verify your AWS quotas:
-
-   ```bash
-   rosa verify quota --region="$AWS_REGION"
-   ```
-
-   **Note**: This may fail due to organizational policies.
-
-1. Create the required account roles:
-
-   ```bash
-   rosa create account-roles --mode auto
-   ```
-
-1. Verify your AWS quotas, and if quotas are insufficient, consult the following:
-   - [Provisioned AWS Infrastructure](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-aws-prereqs.html#rosa-aws-policy-provisioned_rosa-sts-aws-prereqs)
-   - [Required AWS Service Quotas](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-required-aws-service-quotas.html#rosa-sts-required-aws-service-quotas)
-
-1. Ensure the `oc` CLI is installed. If it’s not already installed, follow the [official ROSA oc installation guide](https://docs.openshift.com/rosa/cli_reference/openshift_cli/getting-started-cli.html#cli-getting-started):
-
-   ```bash
-   rosa verify openshift-client
-   ```
+:::note
+This may fail due to organizational policies.
+:::
 
 #### Set up the ROSA cluster module
 
