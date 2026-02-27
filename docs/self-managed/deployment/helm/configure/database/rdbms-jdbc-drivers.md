@@ -5,7 +5,7 @@ title: JDBC driver management for RDBMS
 description: "Understand bundled JDBC drivers, when to supply custom drivers, and how to load them in Kubernetes."
 ---
 
-This page covers JDBC driver management for RDBMS deployments in Kubernetes. For configuration and troubleshooting, see [configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md).
+This page covers JDBC driver management for RDBMS deployments in Kubernetes. For background on secondary storage, see [secondary storage overview](/self-managed/concepts/secondary-storage/index.md). For configuration and troubleshooting, see [configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md). For end-to-end installation steps, see [install with RDBMS as secondary storage](/self-managed/deployment/helm/install/helm-with-rdbms.md).
 
 ## Bundled vs. custom JDBC drivers
 

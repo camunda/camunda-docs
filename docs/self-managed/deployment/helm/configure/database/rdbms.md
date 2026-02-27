@@ -13,6 +13,12 @@ This page provides:
 - **[Quick example](#example-usage)**: Minimal YAML to get started.
 - Links to detailed guides for specific tasks.
 
+Related guides:
+
+- [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
+- [Install with RDBMS as secondary storage](/self-managed/deployment/helm/install/helm-with-rdbms.md)
+- [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
+
 ## Prerequisites
 
 Provide a supported relational database that is reachable by the Camunda components.
@@ -112,7 +118,7 @@ orchestration:
 
 ## Bundled vs. custom JDBC drivers
 
-Camunda bundles JDBC drivers for some databases (PostgreSQL, MariaDB, SQL Server, H2). For others (Oracle, MySQL), you must supply a custom driver.
+Camunda bundles JDBC drivers for some databases. For others, you must supply a custom driver. See [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for the complete list of supported databases.
 
 **See:** [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md) for:
 
