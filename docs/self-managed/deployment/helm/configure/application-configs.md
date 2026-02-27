@@ -36,6 +36,7 @@ Two Helm values are available for component configuration:
 - `<componentName>.configuration`
 
 :::tip Which should I use?
+
 - Use `<componentName>.extraConfiguration` for most changes. It keeps the chart-provided defaults intact and lets you add/override only the keys you need.
 - Use `<componentName>.configuration` only if you intentionally want to take full control of the application's configuration file. It **overwrites** the default config and can affect startup behavior and upgrades.
 :::
