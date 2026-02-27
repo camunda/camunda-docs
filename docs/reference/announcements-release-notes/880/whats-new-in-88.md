@@ -178,7 +178,7 @@ Only the first partial set of unified configuration properties is introduced in 
 
 The Orchestration Cluster Identity component UI handles authentication and authorization for the Orchestration Cluster components and its resources.
 
-<p><a href="../../../../components/admin/admin-introduction/" class="link-arrow">Introduction to Identity</a></p>
+<p><a href="../../../../components/admin/admin-introduction/" class="link-arrow">Introduction to Admin</a></p>
 
 :::note
 With this 8.8 change, the source of truth for Identity and Access Management for the Orchestration Cluster (including Zeebe, Operate, Tasklist, and its APIs) is now the Orchestration Cluster itself. This removes the reliance on the separate [Management Identity](/self-managed/components/management-identity/overview.md) (formerly "Identity") component.
