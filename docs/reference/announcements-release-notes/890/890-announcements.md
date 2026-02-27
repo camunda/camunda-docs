@@ -128,6 +128,31 @@ Camunda 8.9 drops support for Keycloak 25.x. Only Keycloak 26.x is now supported
 
 ## Key changes
 
+### Identity renamed to Admin
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Orchestration Cluster Admin renamed to Admin
+
+Starting with Camunda 8.9, the Orchestration Cluster Admin component has been renamed to **Admin** (also referred to as Orchestration Cluster Admin).
+
+Admin is the cluster-level admin UI that hosts identity management (users, groups, roles, authorizations, tenants, mapping rules, and clients) and other administrative features. The underlying identity management capabilities remain the same.
+
+What changed:
+
+- The component is now called **Orchestration Cluster Admin** (previously Orchestration Cluster Admin).
+- Documentation paths have been updated: `/components/identity/` is now `/components/admin/`.
+- The UI and features remain unchanged; only the name has been updated.
+
+<p className="link-arrow">[Introduction to Admin](/components/admin/admin-introduction.md)</p>
+
+</div>
+</div>
+
 ### Agentic orchestration
 
 <div className="release-announcement-row">

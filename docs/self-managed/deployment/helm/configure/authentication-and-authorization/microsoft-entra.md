@@ -219,7 +219,7 @@ By default:
 - `azp` carries the client ID in Entra.
 
 You can adjust these values if your organization uses different claim mappings.
-For more information, see the [Orchestration Cluster OIDC configuration guide](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md#step-1-configure-the-oidc-client-id-claim).
+For more information, see the [Orchestration Cluster OIDC configuration guide](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-1-configure-the-oidc-client-id-claim).
 
 #### Configure Connectors
 

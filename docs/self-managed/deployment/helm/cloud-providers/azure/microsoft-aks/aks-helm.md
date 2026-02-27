@@ -37,7 +37,7 @@ In addition to the infrastructure diagram provided in the [Terraform setup guide
 
 The architecture includes the following core components:
 
-- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Admin)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
 
 To demonstrate how to deploy with a custom domain, the following stack is also included:
@@ -190,7 +190,7 @@ For easy and reproducible installations, we will use YAML files to configure the
 Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
 
 :::note Database initialization prerequisite
-If you're using an external Azure Database for PostgreSQL, you must create the individual component databases (Identity and Web Modeler) before installing the Helm chart. This initialization step is covered in the [Configure the database and associated access](./terraform-setup.md#configure-the-database-and-associated-access) section of the Terraform setup guide.
+If you're using an external Azure Database for PostgreSQL, you must create the individual component databases (Management Identity and Web Modeler) before installing the Helm chart. This initialization step is covered in the [Configure the database and associated access](./terraform-setup.md#configure-the-database-and-associated-access) section of the Terraform setup guide.
 
 Without this step, the Camunda components will fail to connect to their databases.
 :::
@@ -330,16 +330,16 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
-### Generate an M2M token using Identity
+### Generate an M2M token using Management Identity
 
-Generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/components/management-identity/overview.md), along with the [incorporating applications documentation](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
+Generate an M2M token by following the steps outlined in the [Management Identity getting started guide](/self-managed/components/management-identity/overview.md), along with the [incorporating applications documentation](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
 
 Below is a summary of the necessary instructions:
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
 
-1. Open Identity in your browser at `https://${CAMUNDA_DOMAIN}/managementidentity`. You will be redirected to your IdP and prompted to log in.
+1. Open Management Identity in your browser at `https://${CAMUNDA_DOMAIN}/managementidentity`. You will be redirected to your IdP and prompted to log in.
 2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
 
 ```shell
@@ -357,19 +357,19 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `https://${CAMUNDA_DOMAIN}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
-7. In the Identity navigation menu, select **Roles**.
-8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+6. Open the Orchestration Cluster Admin in your browser at `https://${CAMUNDA_DOMAIN}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Admin navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/admin/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
 10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
 
-This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/admin/role.md#manage-clients).
 
 </TabItem>
 
 <TabItem value="without" label="Without domain">
 
-Identity and the Orchestration cluster must be port-forwarded to be able to connect to the cluster. If using Keycloak via the Keycloak Operator, you also need to port-forward the Keycloak service.
+Admin and the Orchestration cluster must be port-forwarded to be able to connect to the cluster. If using Keycloak via the Keycloak Operator, you also need to port-forward the Keycloak service.
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
@@ -380,7 +380,7 @@ kubectl port-forward "services/keycloak-service" 18080:18080 --namespace "$CAMUN
 
 <KubefwdTip />
 
-1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to your IdP and prompted to log in.
+1. Open Management Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to your IdP and prompted to log in.
 2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
 
 ```shell
@@ -398,13 +398,13 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `http://localhost:8080/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
-7. In the Identity navigation menu, select **Roles**.
-8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+6. Open the Orchestration Cluster Admin in your browser at `http://localhost:8080/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Admin navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/admin/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
 10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
 
-This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/admin/role.md#manage-clients).
 
 <PortForwardServices />
 
@@ -479,7 +479,7 @@ The following values are required for the OAuth authentication:
 
 - **Cluster endpoint:** `https://zeebe-$CAMUNDA_DOMAIN`, replacing `$CAMUNDA_DOMAIN` with your domain
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
-- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
+- **Client Secret:** Retrieve the client secret value from the Management Identity page of your created M2M application
 - **OAuth Token URL:** Your IdP's token endpoint (for example, `https://$CAMUNDA_DOMAIN/auth/realms/camunda-platform/protocol/openid-connect/token` when using Keycloak), replacing `$CAMUNDA_DOMAIN` with your domain
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
@@ -497,7 +497,7 @@ The following values are required for OAuth authentication:
 
 - **Cluster endpoint:** `http://localhost:26500`
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application.
-- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application.
+- **Client Secret:** Retrieve the client secret value from the Management Identity page of your created M2M application.
 - **OAuth Token URL:** Your IdP's token endpoint (for example, `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token` when using Keycloak with port-forwarding)
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed.
 

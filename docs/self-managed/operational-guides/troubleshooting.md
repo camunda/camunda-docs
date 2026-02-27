@@ -336,8 +336,8 @@ skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/ela
 
 If you encounter missing or invalid authorizations when deploying resources or starting process instances from Web Modeler or Desktop Modeler, review which credentials are being used:
 
-- **Web Modeler** deploys as your logged-in user, so ensure that your [user](/components/identity/user.md) has the required permissions.
-- **Desktop Modeler** uses the client credentials you provide, so ensure that your [client](/components/identity/client.md) has the required permissions.
+- **Web Modeler** deploys as your logged-in user, so ensure that your [user](/components/admin/user.md) has the required permissions.
+- **Desktop Modeler** uses the client credentials you provide, so ensure that your [client](/components/admin/client.md) has the required permissions.
 
 ## Zeebe data loss after PVC deletion
 
