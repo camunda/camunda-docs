@@ -2107,7 +2107,6 @@ module.exports = {
             "self-managed/components/connectors/performance",
           ],
         },
-
         {
           type: "category",
           label: "Management Identity",
