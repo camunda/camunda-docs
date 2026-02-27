@@ -23,7 +23,7 @@ Starting with Camunda 8.8, the Helm chart reflects a new architecture where Zeeb
 - Elasticsearch
 - OpenSearch
 - RDBMS
-- PostgreSQL (Bitnami subchart) - only if needed for Web Modeler or Identity
+- PostgreSQL (Bitnami subchart) - only if needed for Web Modeler or Management Identity
 - Keycloak (Bitnami subchart) - only if using internal authentication
 
 :::note Upgrading from 8.7?
@@ -36,7 +36,7 @@ See the [8.7 to 8.8 upgrade guide](/versioned_docs/version-8.8/self-managed/upgr
 
 In Camunda 8.8, identity management is split into two distinct scopes:
 
-- **Orchestration Cluster Identity** - Manages authentication and authorization for core orchestration components (Zeebe, Operate, Tasklist) and their APIs. This is built into the Orchestration Cluster and does not require Management Identity.
+- **Orchestration Cluster Admin** - Manages authentication and authorization for core orchestration components (Zeebe, Operate, Tasklist) and their APIs. This is built into the Orchestration Cluster and does not require Management Identity.
 - **Management Identity** - Controls access for management and modeling components (Web Modeler, Console, Optimize). This is a separate component that must be explicitly enabled.
 
 Management Identity must be enabled if you want to use any of the following components:
@@ -123,13 +123,13 @@ console:
 For a full list of options, see the [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 :::note
-Console requires the Identity component for authentication. The Camunda Helm chart installs Identity by default. If you log in to Console using port-forward and use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), you must also port-forward the Keycloak service:
+Console requires the Management Identity component for authentication. The Camunda Helm chart installs Management Identity by default. If you log in to Console using port-forward and use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), you must also port-forward the Keycloak service:
 
 ```
 kubectl port-forward svc/keycloak-service 18080:18080
 ```
 
-Alternatively, configure Identity with Ingress. See the [Ingress setup guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md).
+Alternatively, configure Management Identity with Ingress. See the [Ingress setup guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md).
 
 :::
 

@@ -930,7 +930,7 @@ See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsof
 
 With the 8.8 release, Camunda announces the removal of tenant-providing interceptors.
 
-It is superseded by built-in [tenant management](/components/identity/tenant.md).
+It is superseded by built-in [tenant management](/components/admin/tenant.md).
 
 </div>
 </div>
