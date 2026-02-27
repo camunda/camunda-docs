@@ -1,5 +1,5 @@
 ---
-title: Connect Identity to an identity provider
+title: Connect Admin to an identity provider
 sidebar_label: Connect to an identity provider
 description: Learn how to connect Camunda 8 Orchestration Cluster Admin to an external Identity Provider (IdP) via OpenID Connect (OIDC) for authentication and user management.
 ---
@@ -7,10 +7,10 @@ description: Learn how to connect Camunda 8 Orchestration Cluster Admin to an ex
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Configure Identity to use an external identity provider (IdP) via OpenID Connect (OIDC) at the application level, including claims and mapping rules.
+Configure Admin to use an external identity provider (IdP) via OpenID Connect (OIDC) at the application level, including claims and mapping rules.
 
 :::info Deploying with Helm?
-If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Identity.
+If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Admin.
 :::
 
 ## About Authentication and authorization
@@ -24,7 +24,7 @@ You can configure IdP integration to control authentication and authorization fo
 
 ## Web components
 
-Configure Identity so your users can use your IdP to authenticate to the Orchestration Cluster.
+Configure Admin so your users can use your IdP to authenticate to the Orchestration Cluster.
 
 ### Prerequisites
 
@@ -564,7 +564,7 @@ camunda.security:
       authorization-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/authorize
       token-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/token
       jwk-set-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/discovery/v2.0/keys
-      endsession-endpoint-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/logout
+      end-session-endpoint-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/logout
 ```
 
 </TabItem>
@@ -622,8 +622,8 @@ Unable to determine end-session endpoint for OIDC logout. Falling back to {baseL
 
 Ensure you either:
 
-- Configure the `issuer-uri` so Identity can retrieve the logout endpoint from the OIDC discovery document, or
-- Explicitly set the `endsession-endpoint-uri`.
+- Configure the `issuer-uri` so Admin can retrieve the logout endpoint from the OIDC discovery document, or
+- Explicitly set the `end-session-endpoint-uri`.
 
 #### No client registration found
 

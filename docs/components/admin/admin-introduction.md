@@ -4,7 +4,7 @@ title: Introduction to Admin
 description: "Admin is the cluster-level admin UI for managing identity and access control for an orchestration cluster."
 ---
 
-Use the integrated [Orchestration Cluster](../orchestration-cluster.md) Admin (the cluster-level admin UI hosting Identity and other administrative features, previously known as Orchestration Cluster Admin) to manage Camunda 8 authentication, authorization, and entities.
+Use the integrated [Orchestration Cluster](../orchestration-cluster.md) Admin (the cluster-level admin UI hosting Identity and other administrative features, previously known as Orchestration Cluster Identity) to manage Camunda 8 authentication, authorization, and entities.
 
 ## About Admin
 
