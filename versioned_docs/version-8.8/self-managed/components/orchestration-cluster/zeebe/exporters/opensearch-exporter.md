@@ -72,15 +72,15 @@ Add the same configuration under `orchestration.configuration` in your `values.y
 The exporter can be configured by providing `args`. The table below explains all the different
 options, and the default values for these options:
 
-| Option                | Description                                                                              | Default                 |
-| --------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
-| url                   | Valid URLs as a comma-separated string.                                                  | `http://localhost:9200` |
-| requestTimeoutMs      | Request timeout (in ms) for the OpenSearch client.                                       | `30000`                 |
-| index                 | Refer to [tndex](#index) for the index configuration options.                            |                         |
-| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                               |                         |
-| retention             | Refer to [retention](#retention) for the retention configuration options.                |                         |
-| authentication        | Refer to [authentication](#authentication) for the authentication configuration options. |                         |
-| aws                   | Refer to [AWS](#aws) for the AWS configuration options.                                  |                         |
+| Option                  | Description                                                                              | Default                 |
+| ----------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
+| url                     | Valid URLs as a comma-separated string.                                                  | `http://localhost:9200` |
+| request-timeout-ms      | Request timeout (in ms) for the OpenSearch client.                                       | `30000`                 |
+| index                   | Refer to [index](#index) for the index configuration options.                            |                         |
+| bulk                    | Refer to [bulk](#bulk) for the bulk configuration options.                               |                         |
+| retention               | Refer to [retention](#retention) for the retention configuration options.                |                         |
+| authentication          | Refer to [authentication](#authentication) for the authentication configuration options. |                         |
+| aws                     | Refer to [AWS](#aws) for the AWS configuration options.                                  |                         |
 | include-enabled-records | If `true` all enabled record types will be exported.                                     | `false`                 |
 
 <Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' },{label: 'AWS', value: 'aws' }]} >
@@ -212,52 +212,54 @@ Here is an example configuration of the exporter:
 
 ```yaml
 ---
-exporters:
-  opensearch:
-    # Opensearch Exporter ----------
-    # An example configuration for the opensearch exporter:
-    #
-    # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_OPENSEARCH_..."
+camunda:
+  data:
+    exporters:
+      opensearch:
+        # OpenSearch Exporter ----------
+        # An example configuration for the OpenSearch exporter:
+        #
+        # These settings can also be overridden using environment variables "CAMUNDA_DATA_EXPORTERS_OPENSEARCH_..."
 
-    className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
+        class-name: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
 
-    args:
-      # A comma separated list of URLs pointing to the Opensearch instances you wish to export to.
-      # For example, if you want to connect to multiple nodes for redundancy:
-      # url: http://localhost:9200,http://localhost:9201
-      url: http://localhost:9200
+        args:
+          # A comma separated list of URLs pointing to the OpenSearch instances you wish to export to.
+          # For example, if you want to connect to multiple nodes for redundancy:
+          # url: http://localhost:9200,http://localhost:9201
+          url: http://localhost:9200
 
-      bulk:
-        delay: 5
-        size: 1000
-        memory-limit: 10485760
+          bulk:
+            delay: 5
+            size: 1000
+            memory-limit: 10485760
 
-      retention:
-        enabled: true
-        minimum-age: 30d
-        policy-name: zeebe-records-retention-policy
-        policy-description: Zeebe records retention policy
+          retention:
+            enabled: true
+            minimum-age: 30d
+            policy-name: zeebe-records-retention-policy
+            policy-description: Zeebe records retention policy
 
-      authentication:
-        username: opensearch
-        password: changeme
+          authentication:
+            username: opensearch
+            password: changeme
 
-      aws:
-        enabled: true
-        service-name: es
-        region: eu-west-1
+          aws:
+            enabled: true
+            service-name: es
+            region: eu-west-1
 
-      index:
-        prefix: zeebe-record
-        create-template: true
+          index:
+            prefix: zeebe-record
+            create-template: true
 
-        command: false
-        event: true
-        rejection: false
+            command: false
+            event: true
+            rejection: false
 
-        command-distribution: true
-        decision-requirements: true
-        decision: true
+            command-distribution: true
+            decision-requirements: true
+            decision: true
         decision-evaluation: true
         deployment: true
         deployment-distribution: true
