@@ -1,15 +1,94 @@
 ---
-id: backup
+id: es-backup
 sidebar_label: Create a backup
-title: Camunda backup creation
-keywords: ["backup", "backups"]
-description: "Learn how to back up your Camunda 8 Self-Managed components."
+title: Camunda backup creation (Elasticsearch/OpenSearch)
+keywords: ["backup", "backups", "elasticsearch", "opensearch"]
+description: "Learn how to back up your Camunda 8 Self-Managed components using Elasticsearch or OpenSearch."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 Back up your Camunda 8 Self-Managed components and cluster.
+
+### Prerequisites
+
+The following prerequisites are required before you can create a backup.
+
+| Prerequisite                                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| :------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Set up a snapshot repository in the secondary datastore. | <p>Configure a snapshot repository on the datastore itself:</p><p><ul><li>[Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)</li><li>[OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)</li></ul></p><p><small>Note: For Elasticsearch configuration with the Camunda Helm chart on AWS EKS using IRSA, see [configuration example](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa.md#backup-related).</small></p> |
+| Configure component backup storage.                      | <p>Configure the backup storage for the following components. This is also important for restoring a backup.</p><p><ul><li>[Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#backups)</li><li>[Optimize Elasticsearch](/self-managed/components/optimize/configuration/system-configuration.md#elasticsearch-backup-settings) / [Optimize OpenSearch](/self-managed/components/optimize/configuration/system-configuration.md#opensearch-backup-settings)</li><li>[Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#backups)</li></ul></p> |
+| Configure Zeebe backup storage.                          | Configure the backup storage for Zeebe. This is required regardless of your secondary storage choice. See [Zeebe backup configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackup).                                                                                                                                                                                                                                                                                                                                                                                   |
+
+:::note
+You should keep the backup storage of the components configured at all times to ease the backup and restore process and avoid unnecessary restarts.
+:::
+
+:::tip
+You can use the same backup storage location for both Elasticsearch / OpenSearch snapshots and Zeebe partition backups, as long as different paths are configured:
+
+- Set the `basePath` for Zeebe.
+- Set the `base_path` for Elasticsearch / OpenSearch.
+
+To learn more about how to configure these settings, refer to the prerequisites linked documentation above.
+:::
+
+## Considerations
+
+### Why you should use backup and restore
+
+:::note
+The Camunda 8.8 release introduces breaking changes for [Operate and Tasklist](../webapps-backup.md).
+:::
+
+:::note
+If the Camunda applications cannot access Elasticsearch with cluster-level privileges, run the backup of Operate and Tasklist indices (steps 2 and 4 from the [backup](#back-up-process) procedure) as a standalone application separate from the main application.
+For details, see the **standalone backup application** for [Elasticsearch](/self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges.md#standalone-backup-application) or [OpenSearch](/self-managed/concepts/databases/elasticsearch/opensearch-without-cluster-privileges.md#standalone-backup-application).
+:::
+
+The Camunda 8 components like the Orchestration Cluster and Optimize store data in various formats and across multiple indices in Elasticsearch or OpenSearch. Because of this distributed and interdependent architecture, creating a consistent and reliable backup requires coordination between the components.
+
+For example, using Elasticsearch or OpenSearch's native snapshot capabilities directly does not produce a coherent backup. This is because Operate, Tasklist, and Optimize each manage their data across multiple indices, which cannot be reliably captured together without involvement from the components that understand their structure. For this reason, backups must be initiated through each component individually, using their built-in backup functionality.
+
+The same principle applies to Zeebe. Backups must be scheduled through Zeebe to ensure a consistent snapshot of all partition data. Simply taking a disk-level snapshot of each Zeebe broker is not enough, as the brokers operate independently and data may not be aligned across them at the time of the snapshot. Since disk-level backups are not synchronized, this can lead to inconsistencies and invalid recovery points.
+
+A complete backup of a Camunda 8 cluster using Elasticsearch or OpenSearch includes:
+
+- Backups of Web Applications (Operate, Tasklist), and Optimize (triggered through their APIs).
+- Backup of indices from Elasticsearch/OpenSearch containing exported Zeebe records.
+- A Zeebe broker partition backup (triggered through its API).
+
+Because the data across these systems is interdependent, all components must be backed up as part of the same backup window. Backups taken independently at different times may not align and could result in an unreliable restore point.
+
+:::warning
+To ensure a consistent backup, you must follow the process outlined in this guide. Deviating from it can result in undetected data loss, as there is no reliable method to verify cross-component data integrity after backup.
+:::
+
+Following the documented procedure results in a hot backup, meaning that:
+
+- Zeebe continues to process and export data.
+- Web Applications (Operate, Tasklist), and Optimize remain fully operational during the backup process.
+
+This ensures high availability while preserving the integrity of the data snapshot.
+
+### Additional considerations
+
+A backup `x` of Camunda 8 using Elasticsearch or OpenSearch consists of backup `x` of Zeebe, backup `x` of Optimize, and backup `x` of Web Applications (Operate, Tasklist). The backup ID must be an integer and greater than the previous backups.
+
+Optimize is not part of the Web Applications backup API and needs to be executed separately to successfully make a backup. Depending on your deployment configuration, you may not have Optimize deployed. It is safe to ignore the backup instructions for Optimize if it is not deployed.
+
+:::warning breaking change
+As of Camunda 8.8, the `indexPrefix` of Operate and Takslist must match. By default it is set to `""`. If overriden, it must set consistently across Operate and Tasklist.
+:::
+
+:::warning breaking change
+As of Camunda 8.8, configuring Operate and Tasklist with different repository names will potentially create multiple backups in different repositories.
+:::
+
+:::warning breaking changes
+As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/actuator/backupHistory` (Web Applications) and `/actuator/backupRuntime` (Zeebe). The previous `/actuator/backups` endpoint is still active only if the applications are deployed standalone (each application is running in its own process).
+:::
 
 ## About the backup process
 
@@ -20,7 +99,7 @@ You can also optionally [back up your Web Modeler data](#back-up-web-modeler-dat
 :::caution before you begin
 
 - To create a consistent backup, you **must** complete the backing in the outlined order.
-- You must complete the [prerequisites](backup-and-restore.md#prerequisites) before creating a backup.
+- You must complete the [prerequisites](#prerequisites) before creating a backup.
 
 :::
 
@@ -30,9 +109,9 @@ You can also optionally [back up your Web Modeler data](#back-up-web-modeler-dat
 
 :::note
 
-This will heavily depend on your setup, the following examples are based on examples given in the [Management API](backup-and-restore.md#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
+This will heavily depend on your setup, the following examples are based on examples given in the [Management API](../backup-and-restore.md#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
 
-As noted in the [Management API](backup-and-restore.md#management-api) section, this API is typically not publicly exposed. Therefore, you will need to access it directly using any means available within your environment.
+As noted in the [Management API](../backup-and-restore.md#management-api) section, this API is typically not publicly exposed. Therefore, you will need to access it directly using any means available within your environment.
 
 :::
 
@@ -79,7 +158,7 @@ As noted in the [Management API](backup-and-restore.md#management-api) section, 
 
 This step uses the [management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md?exporting=softPause#exporting-api).
 
-This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [why you should use backup and restore](backup-and-restore.md#why-you-should-use-backup-and-restore).
+This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [why you should use backup and restore](../backup-and-restore.md#why-you-should-use-backup-and-restore).
 
 ```bash
 curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/exporting/pause?soft=true"
@@ -652,3 +731,11 @@ You can use the **delete backup APIs** for each component to remove the associat
 - [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#delete-backup-api)
 
 For Zeebe, you would also have to remove the separately backed up `zeebe-record` index snapshot using the [Elasticsearch](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-delete) / [OpenSearch](https://docs.opensearch.org/docs/latest/api-reference/snapshots/delete-snapshot/) API directly.
+
+### Primary storage retention
+
+:::note
+This only affects the primary storage and does not interfere with Elasticsearch/OpenSearch backups.
+:::
+
+With Camunda 8.9 you now have the option to enable a retention mechanism over primary storage (Zeebe's) backups. This will periodically delete backups from the configured blob storage based on the preconfigured retention window. Learn more about configuring backup retention [here](../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackupretention).

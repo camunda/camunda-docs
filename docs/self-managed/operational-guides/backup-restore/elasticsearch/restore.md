@@ -1,9 +1,9 @@
 ---
-id: restore
+id: es-restore
 title: "Restore a backup"
 sidebar_label: "Restore a backup"
-keywords: ["backup", "backups", "restore"]
-description: "Learn how to restore a Camunda 8 Self-Managed backup."
+keywords: ["backup", "backups", "restore", "elasticsearch", "opensearch"]
+description: "Learn how to restore a Camunda 8 Self-Managed backup using Elasticsearch or OpenSearch."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -68,7 +68,7 @@ The following specific prerequisites are required when restoring Elasticsearch/O
 | Prerequisite        | Description                                                                                                                                                                                                                      |
 | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Clean state/data    | Elasticsearch or OpenSearch is set up and running with a clean state and no existing data.                                                                                                                                       |
-| Snapshot repository | Elasticsearch or OpenSearch is configured to use the same snapshot repository as the backup. See [prerequisites](backup-and-restore.md#prerequisites).                                                                           |
+| Snapshot repository | Elasticsearch or OpenSearch is configured to use the same snapshot repository as the backup. See [prerequisites](./backup.md#prerequisites).                                                                                     |
 | Sizing              | Elasticsearch or OpenSearch should be sized the same or larger than the original cluster. Restoring to a smaller cluster (for example, with fewer data nodes) can prevent shards from being assigned and cause restore failures. |
 
 ### 1. Restore [Templates](https://www.elastic.co/docs/manage-data/data-store/templates)
@@ -625,7 +625,7 @@ The following specific prerequisites are required when restoring the Zeebe Clust
 | Prerequisite       | Description                                                                                                                                                                                      |
 | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Pre-existing data  | Persistent volumes or disks must not contain any pre-existing data.                                                                                                                              |
-| Backup storage     | Zeebe is configured with the same backup storage as outlined in the [prerequisites](backup-and-restore.md#prerequisites).                                                                        |
+| Backup storage     | Zeebe is configured with the same backup storage as outlined in the [prerequisites](./backup.md#prerequisites).                                                                                  |
 | Components stopped | It’s critical that no Camunda components are running during a Zeebe restore. Restored components may propagate an incorrect cluster configuration, potentially disrupting cluster communication. |
 
 ### Restore Zeebe Cluster
