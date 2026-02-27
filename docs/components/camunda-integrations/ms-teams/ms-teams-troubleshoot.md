@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 import AoGrid from '../../../components/react-components/\_ao-card';
 import { msTeamsCards } from '../../../self-managed/react-components/\_ms-teams-card-data';
 
-Troubleshoot Camunda for Microsoft Teams to fix common setup and connectivity issues in both SaaS and Self-Managed environments.
+Troubleshoot Camunda for Microsoft Teams to fix common setup and connectivity issues.
 
 ### The app is not shown in the Microsoft Teams store
 
