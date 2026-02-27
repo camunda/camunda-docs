@@ -39,6 +39,10 @@ Use the hosted Diagram Converter at [https://diagram-converter.camunda.io/](http
 
 Your models are not stored on this platform, and all processing happens in-memory. Your data is transmitted securely over HTTPS.
 
+:::note
+The hosted version has a limit on the number of files that can be processed in a single batch request. If you need to convert a larger number of files, use the [local web application](#local-web-application) or the [CLI](#use-the-cli).
+:::
+
 ### Local web application
 
 #### Prerequisites
@@ -60,6 +64,12 @@ To run the application on a different port, for example `8090`:
 
 ```shell
 java -Dserver.port=8090 -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar
+```
+
+To increase the maximum number of files allowed per batch request (default is 50), configure `server.tomcat.max-part-count`:
+
+```shell
+java -Dserver.tomcat.max-part-count=200 -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar
 ```
 
 ### CLI installation
