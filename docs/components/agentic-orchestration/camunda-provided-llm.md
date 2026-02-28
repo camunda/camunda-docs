@@ -6,8 +6,6 @@ description: "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM."
 keywords: [agentic orchestration, ai agent]
 ---
 
-import EasyLLMSetup from './img/ao-easyllm-setup.png';
-
 Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.
 
 ## About
@@ -39,16 +37,6 @@ Once Camunda-provided LLM is available in your organization, its credentials are
   - **API endpoint**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_ENDPOINT}}`.
   - **API key**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_KEY}}`.
   - **Model**: Select a model from the [list of supported models](#supported-models). For example `us.anthropic.claude-3-7-sonnet-20250219-v1:0`.
-
-<div style={{ display: "flex", justifyContent: "center" }}>
-  <img
-    src={EasyLLMSetup}
-    title="Set up Camunda-provided LLM"
-    alt="Set up Camunda-provided LLM"
-    className="img-noborder img-transparent"
-    style={{ width: "auto", maxWidth: "50%", height: "auto" }}
-  />
-</div>
 
 ## Supported models
 
