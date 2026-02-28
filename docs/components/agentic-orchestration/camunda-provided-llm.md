@@ -38,7 +38,7 @@ Once Camunda-provided LLM is available in your organization, its credentials are
   - **Provider**: `OpenaAI Compatible`.
   - **API endpoint**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_ENDPOINT}}`.
   - **API key**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_KEY}}`.
-  - **Model**: Select a model from the [list of available models](./choose-right-model-agentic.md#models-available-in-camunda-provided-llm). For example `gpt-5.2`.
+  - **Model**: Select a model from the [list of supported models](#supported-models). For example `us.anthropic.claude-3-7-sonnet-20250219-v1:0`.
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   <img
@@ -49,6 +49,17 @@ Once Camunda-provided LLM is available in your organization, its credentials are
     style={{ width: "auto", maxWidth: "50%", height: "auto" }}
   />
 </div>
+
+## Supported models
+
+Camunda-provided LLM supports LLMs from multiple providers. The available models available may change over time, but typically include popular general-purpose models from major providers:
+
+- **Anthropic models**: `us.anthropic.claude-3-7-sonnet-20250219-v1:0` is a versatile model suitable for a wide range of agentic orchestration tasks, with strong reasoning and language capabilities.
+- **OpenAI models**: `gpt-5.2` is a powerful model with advanced reasoning, coding, and language skills, ideal for complex workflows requiring high accuracy.
+- **Google models**: `gemini-3-pro` is a strong performer in reasoning and language tasks, making it a good choice for customer support and content generation workflows.
+
+When selecting a model, consider your agentic process requirements, such as advanced reasoning, coding capabilities, or language understanding.
+You can also benchmark different models to find the best fit. See [Choose the right LLM](./choose-right-model-agentic.md) for more details.
 
 ## Trial vs. enterprise budgets
 

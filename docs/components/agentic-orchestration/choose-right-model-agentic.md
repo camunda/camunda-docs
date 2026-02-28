@@ -20,6 +20,7 @@ Consider the following aspects regarding your model requirements and setup const
 | **Cost vs. speed**        | Larger models offer higher accuracy but often with higher latency and cost. Balance performance against Service Level Agreements (SLAs) and budgets.                 |
 | **Accuracy vs. openness** | Proprietary models often lead in benchmark accuracy. Open-source models provide flexibility, fine-tuning, and offline use cases.                                     |
 
+
 ## Models available in Camunda Provided LLM
 
 Camunda-provided LLM provides access to a set of LLMs from multiple providers. This is provied for experimentation and evaluation purposes, allowing you to test different models without needing to set up your own LLM provider.
