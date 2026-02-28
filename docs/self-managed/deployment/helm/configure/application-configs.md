@@ -7,11 +7,9 @@ description: "Learn how to configure individual Camunda components in Helm chart
 
 This page explains how to configure Camunda components in Helm charts.
 
-For most use cases, use `<componentName>.extraConfiguration` to add or override a small set of properties while keeping the chart-provided defaults. Use `<componentName>.configuration` only when you intentionally want to replace the entire default application configuration file (advanced).
+For most use cases, use `<componentName>.extraConfiguration` to add or override properties while keeping the chart-provided defaults. Use `<componentName>.configuration` only when you intentionally want to replace the entire default application configuration file.
 
-For the complete list of configuration options per component, see the Self-Managed **Components** documentation (this is where each component documents its supported application configuration):
-
-- [Components (Self-Managed)](../../../components/orchestration-cluster/overview.md)
+For the complete list of configuration options per component, see the [Self-Managed Components documentation](../../../components/orchestration-cluster/overview.md) (this is where each component documents its supported application configuration).
 
 ## Prerequisites
 
@@ -37,7 +35,7 @@ Two Helm values are available for component configuration:
 
 :::tip Which should I use?
 
-- Use `<componentName>.extraConfiguration` for most changes. It keeps the chart-provided defaults intact and lets you add/override only the keys you need.
+- Use `<componentName>.extraConfiguration`. It keeps the chart-provided defaults intact and lets you add/override only the keys you need.
 - Use `<componentName>.configuration` only if you intentionally want to take full control of the application's configuration file. It **overwrites** the default config and can affect startup behavior and upgrades.
   :::
 
