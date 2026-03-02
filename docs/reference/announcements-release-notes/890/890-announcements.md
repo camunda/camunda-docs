@@ -523,6 +523,21 @@ The legacy keys still work in 8.9 but produce deprecation warnings and will be r
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Bitnami subcharts deprecated
+
+The four Bitnami-based subcharts (`identityPostgresql`, `identityKeycloak`, `webModelerPostgresql`, `elasticsearch`) are deprecated in Camunda 8.9 and will be removed in 8.10. If any of these subcharts are enabled, Helm prints a deprecation warning during installation or upgrade.
+
+Migrate to externally managed services before upgrading to 8.10.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">

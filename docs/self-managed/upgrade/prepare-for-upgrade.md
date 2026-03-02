@@ -61,6 +61,11 @@ This section lists actions you must complete or review before upgrading to Camun
     <td><p>Legacy TLS secret configuration (`*.tls.existingSecret`) is deprecated. Migrate to `*.tls.secret.existingSecret`. The legacy keys still work in 8.9.</p></td>
     <td><span className="label-highlight">Recommended</span></td>
 </tr>
+<tr>
+    <td>Helm chart: Bitnami subcharts</td>
+    <td><p>The Bitnami-based subcharts (`identityPostgresql`, `identityKeycloak`, `webModelerPostgresql`, `elasticsearch`) are deprecated in 8.9 and will be removed in 8.10. Plan migration to externally managed services.</p></td>
+    <td><span className="label-highlight">Recommended</span></td>
+</tr>
 </table>
 
 :::info
