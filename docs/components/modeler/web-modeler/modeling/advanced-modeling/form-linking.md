@@ -51,11 +51,11 @@ When deploying a BPMN diagram, Web Modeler will not automatically deploy linked 
 
 If you make changes to a form, you must deploy the updated form version separately before or after deploying the diagram, depending on your release process. This allows you to coordinate form and process updates more deliberately and avoid unintentionally deploying in-progress form changes.
 
-As a result, you no longer need to re-link forms or [copy & paste JSON configuration](#camunda-form-embedded) when making changes — but you are responsible for ensuring the correct form version is deployed and available to your process.
+As a result, you no longer need to re-link forms or [copy and paste JSON configuration](#camunda-form-embedded) when making changes — but you are responsible for ensuring the correct form version is deployed and available to your process.
 
 :::warning
 When deploying a diagram, Web Modeler will not deploy any linked forms automatically.
-This means that if you need to make sure that all forms linked in your BPMN diagram are already available in the cluster, and that the binding choosed resolves to the desired version. All diagrams will always use the latest version of the form regardless of which version was used when the diagram was initially deployed (unless you change the [binding type for a linked form](#camunda-form-linked)).
+Ensure that all forms linked in your BPMN diagram are available in the cluster and that the chosen binding resolves to the desired version. Diagrams use the latest version of the form unless you change the [binding type for a linked form](#camunda-form-linked).
 :::
 
 :::info
