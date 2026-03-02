@@ -1,10 +1,10 @@
-Deploy Elasticsearch using the ECK operator:
+To deploy Elasticsearch using the ECK operator:
 
 ```bash
 (cd generic/kubernetes/operator-based/elasticsearch && ./deploy.sh)
 ```
 
-This script installs the ECK operator, deploys an Elasticsearch cluster, and waits for readiness.
+The script installs the ECK operator, deploys an Elasticsearch cluster, and waits until it is ready.
 
 <details>
 <summary>Review the Elasticsearch cluster configuration</summary>
