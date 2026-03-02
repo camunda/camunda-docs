@@ -222,6 +222,13 @@ See the [API reference for process instance creation](/apis-tools/orchestration-
 
 When a process instance with a business ID creates a child process instance via a [call activity](/components/modeler/bpmn/call-activities/call-activities.md), the business ID is automatically propagated to the child. This applies to all levels of nesting: every descendant inherits the root instance's business ID and can't override it. This lets you trace an entire process hierarchy by a single domain identifier.
 
+### Retrieving process instances by business ID
+
+The business ID is available as a property on the process instance. You can use it to look up or filter process instances through the API:
+
+- [Get process instance](/apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance.api.mdx) — retrieve a single process instance and inspect its `businessId` field.
+- [Search process instances](/apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx) — filter process instances by `businessId` to find all instances linked to a specific business case.
+
 ## Tags
 
 Process instance tags are lightweight, immutable labels you can attach when creating a process instance via the API or clients. Tags are inherited by all jobs created from that instance. They help downstream workers and external systems make quick routing or decision choices without inspecting full variable payloads.
