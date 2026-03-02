@@ -415,13 +415,13 @@ This module is **enabled by default**. To opt out, you must:
 - Manually provide credentials and PostgreSQL endpoints for the Helm chart
 
 :::tip Alternative: Operator-based PostgreSQL deployment
-In case your organization do not want to use a managed Azure Database for PostgreSQL service, CloudNativePG is an option.
-For more details on the PostgreSQL deployment with CloudNativePG Operator, see [PostgreSQL deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment). for a production-grade setup with automated scaling, upgrades, and built-in security.
+If your organization does not want to use a managed Azure Database for PostgreSQL service, CloudNativePG is an option.
+For more details on the PostgreSQL deployment with CloudNativePG Operator, see [PostgreSQL deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) for a production-grade setup with automated scaling, upgrades, and built-in security.
 :::
 
 #### 4. (Optional) Deploy Elasticsearch {#deploy-elasticsearch}
 
-In case your organization needs to use Elasticsearch as data storage and do not want to use a managed Elasticsearch service, ECK Operator is an option.
+If your organization needs to use Elasticsearch as a data store and does not want to use a managed Elasticsearch service, the ECK operator is an option.
 
 :::warning Production Elasticsearch recommendation
 For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)). Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option.
