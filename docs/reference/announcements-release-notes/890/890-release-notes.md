@@ -45,6 +45,23 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 <!-- https://github.com/camunda/product-hub/issues/3010 -->
 
+### Audit log
+
+<!-- https://github.com/camunda/product-hub/issues/6925 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span><span class="badge badge--medium" title="This feature affects Identity">Identity</span></div>
+
+You can now use the user operations audit log to access a record of operations, including who performed them, when, and on which entities.
+
+Use the audit log to:
+
+- Prove compliance
+- Meet governance and regulatory requirements
+- Maintain operational integrity and transparency
+- Troubleshoot issues
+
+This feature is available in Operate, Identity, Tasklist, and the [Camunda 8 Rest API](/apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx).
+
 ### Camunda 8 Run
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
