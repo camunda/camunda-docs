@@ -243,6 +243,11 @@ Uniqueness control is opt-in. Enable it using the configuration property [`camun
 When a business ID is specified, the partition for the new process instance is determined deterministically based on the business ID rather than using the default round-robin distribution. This is necessary to support the uniqueness control feature, as the check must happen on a single partition. Be aware that this may result in uneven distribution of instances across partitions if business IDs aren't well-distributed.
 :::
 
+### Limitations
+
+- Searching process instance related entities (for example, jobs, user tasks, or incidents) by business ID is not yet supported.
+- When using [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) to increase the number of partitions, new process instances created with a business ID are only distributed across the original set of partitions, not to any newly added partitions.
+
 ## Tags
 
 Process instance tags are lightweight, immutable labels you can attach when creating a process instance via the API or clients. Tags are inherited by all jobs created from that instance. They help downstream workers and external systems make quick routing or decision choices without inspecting full variable payloads.
