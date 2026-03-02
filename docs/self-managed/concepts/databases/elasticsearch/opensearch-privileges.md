@@ -14,9 +14,6 @@ Action groups are a set of permissions. Permissions have the `cluster|indices` p
 - `cluster_manage_pipelines` - Necessary to migrate indices.
 - `manage_snapshots` - Necessary to take backups.
 - `cluster_manage_index_templates` - Necessary to manage index templates, including `indices:admin/template/*`, `indices:admin/index_template/*`, and `cluster:admin/component_template/*`.
-- `indices:admin/index_template/put` - Necessary to create and manage index schema on start up and migration.
-- `indices:admin/index_template/get` - Necessary to create and manage index schema on start up and migration.
-- `indices:admin/index_template/delete` - Necessary to create and manage index schema on start up and migration.
 - `indices:data/write/reindex` - Necessary to reindex during archiving. Required to move data from runtime indices to dated indices.
 - `indices:data/read/scroll` - Necessary to scroll through data when reading large result sets.
 - `indices:data/read/scroll/clear` - Necessary to search with paging.
