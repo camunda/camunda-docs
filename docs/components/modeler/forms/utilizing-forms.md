@@ -70,7 +70,7 @@ With Camunda 8.4, we improved the way you can link forms to BPMN diagrams in Web
 
 - Diagrams will always have the latest form updates.
 - No need to manually re-link forms or use a JSON configuration.
-- Forms will be automatically deployed with the diagram.
+- Linked Camunda Forms must now be explicitly deployed.
 
 See the [form linking reference](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#camunda-form-linked) for more details.
 :::
