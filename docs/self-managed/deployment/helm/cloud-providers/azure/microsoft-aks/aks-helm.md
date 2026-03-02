@@ -25,8 +25,9 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
-- (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - A namespace to host the Camunda Platform; in this guide we will reference `camunda` as the target namespace.
+- (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
+- (optional) Permissions to install Kubernetes operators (cluster-admin or equivalent) for deploying the infrastructure services (Elasticsearch, PostgreSQL, Keycloak). These operators can also be installed via the [OpenShift OperatorHub](https://docs.openshift.com/container-platform/latest/operators/understanding/olm-understanding-operatorhub.html), but this guide installs them directly from source for full control over versions and configuration.
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
 
@@ -250,67 +251,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 ### 2. Configure your deployment
 
-#### Enable Web Modeller and Console services
+#### Enable Enterprise components
 
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and Connectors](/self-managed/deployment/helm/install/quick-install.md#configuring-web-modeler-console-and-connectors).
-
-#### Elasticsearch options
-
-Camunda Helm chart supports both internal and external Elasticsearch deployments. For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)). Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option. In this guide, we default to the internal deployment of Elasticsearch.
-
-<details>
-<summary>Show configuration to enable internal Elasticsearch</summary>
-
-```yaml
-global:
-  elasticsearch:
-    enabled: true
-  opensearch:
-    enabled: false
-
-elasticsearch:
-  enabled: true
-```
-
-</details>
-
-#### (Optional) Use internal PostgreSQL instead of the managed PostgreSQL service
-
-In some scenarios, you might prefer to use an internal PostgreSQL deployment instead of the external Azure Database for PostgreSQL service. This could be due to cost considerations, network restrictions, or the need for tighter control over the database environment.
-
-For example, if your application or service is deployed in a private network and requires a database that resides within the same Kubernetes cluster for performance or security reasons, the internal PostgreSQL deployment would be a better fit.
-
-To switch to the internal PostgreSQL deployment, configure the Helm chart as follows. Additionally, remove configurations related to the external database and secret references to avoid conflicts.
-
-<details>
-<summary>Show configuration changes to disable external database usage</summary>
-
-```yaml
-webModelerPostgresql:
-  enabled: true
-
-webModeler:
-  # Remove this part
-
-  # restapi:
-  #     externalDatabase:
-  #         url: jdbc:postgresql://$\{DB_HOST}:5432/$\{DB_WEBMODELER_NAME}
-  #         user: $\{DB_WEBMODELER_USERNAME}
-  #         ...
-
-identity:
-  # Remove this part
-
-  # externalDatabase:
-  #     enabled: true
-  #     host: $\{DB_HOST}
-  #     port: 5432
-  #     username: $\{DB_IDENTITY_USERNAME}
-  #     database: $\{DB_IDENTITY_NAME}
-  #     ...
-```
-
-</details>
 
 #### Fill your deployment with actual values
 

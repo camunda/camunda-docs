@@ -7,6 +7,8 @@ description: "Deploy an Azure Kubernetes Service (AKS) cluster with a Terraform 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+import DeployECKElasticsearch from '../../\_partials/\_deploy-eck-elasticsearch.md'
+
 This guide provides a detailed tutorial for deploying an Azure Kubernetes Service (AKS) cluster, tailored specifically for deploying Camunda 8 using Terraform, a popular Infrastructure as Code (IaC) tool.
 
 This guide is designed to help you leverage the power of Infrastructure as Code (IaC) to streamline and reproduce your cloud infrastructure setup. By walking through the essentials of setting up an AKS cluster, and provisioning managed Azure resources such as Azure Database for PostgreSQL, this guide demonstrates how to use Terraform with Azure. It makes the process accessible even to those new to Terraform or IaC concepts. It utilizes Azure-managed services where available, offering these as optional components for added convenience and maintainability.
@@ -412,6 +414,21 @@ This module is **enabled by default**. To opt out, you must:
 - Remove the `db.tf` file from the root
 - Manually provide credentials and PostgreSQL endpoints for the Helm chart
 
+:::tip Alternative: Operator-based PostgreSQL deployment
+In case your organization do not want to use a managed Azure Database for PostgreSQL service, CloudNativePG is an option.
+For more details on the PostgreSQL deployment with CloudNativePG Operator, see [PostgreSQL deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment). for a production-grade setup with automated scaling, upgrades, and built-in security.
+:::
+
+#### 4. (Optional) Deploy Elasticsearch {#deploy-elasticsearch}
+
+In case your organization needs to use Elasticsearch as data storage and do not want to use a managed Elasticsearch service, ECK Operator is an option.
+
+:::warning Production Elasticsearch recommendation
+For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)). Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option.
+:::
+
+<DeployECKElasticsearch />
+
 ### Execution
 
 :::note Secret management
@@ -583,6 +600,6 @@ kubectl delete secret setup-db-secret --namespace "$CAMUNDA_NAMESPACE"
 
 Running these commands cleans up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
 
-## 2. Install Camunda 8 using the Helm chart
+## 3. Install Camunda 8 using the Helm chart
 
 Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on Kubernetes](./aks-helm.md) for detailed instructions on deploying the platform to your Kubernetes cluster.
