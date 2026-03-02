@@ -20,7 +20,7 @@ With the **Tasks** tab, you can browse and manage user tasks from your Camunda c
 - **Switch between views**: Card view or list view.
 - **View task details** including the process it belongs to, priority, due date, and creation time.
 - **Assign a task** to yourself and **complete it**, either by filling in a Camunda form or by providing data manually.
-- **Paginate** through large task lists or load more on mobile.
+- **Navigate pages** in large task lists or load more items on mobile.
 
 :::note
 Tasks update automatically as you complete work in Camunda or Microsoft Teams.

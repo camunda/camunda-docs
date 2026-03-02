@@ -11,13 +11,13 @@ Interact with Camunda using a conversational bot in Microsoft Teams personal cha
 
 The Camunda bot is available in your personal chat, group chats, and channels. You can interact with it by typing commands or by pressing buttons on the interactive cards it sends.
 
-## Commands
+## Available commands
 
 The following commands are recognized by the bot:
 
 | Command                                 | What it does                                                                                                                  |
 | :-------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| **Hi** (or hey, hello, greetings, etc.) | The bot greets you. If you haven't connected your Camunda account yet, it shows you how to get started.                       |
+| **Hi** (or hey, hello, greetings, and similar messages) | The bot greets you. If you haven't connected your Camunda account yet, it shows you how to get started.                       |
 | **Help** (or ?, support, commands)      | Shows a help card with available commands and setup information.                                                              |
 | **Switch context**                      | Enables you to change your active organization and cluster.                                                                   |
 | **Start a process**                     | Walks you through selecting and starting a Camunda process. If no cluster is selected yet, it asks you to pick one first.     |
@@ -25,22 +25,22 @@ The following commands are recognized by the bot:
 | **Reset notifications**                 | Shows the active notification subscriptions for the current channel and lets you remove them.                                 |
 
 :::important
-If you type something the bot doesn't recognize, it will let you know and suggest using the **Help** command.
+If you type an unrecognized command, the bot notifies you and suggests using **Help**.
 :::
 
 ## Interactive card actions
 
 The bot sends interactive cards with buttons you can click. These cards support the following actions.
 
-### Organization and cluster selection
+### Select an organization and cluster
 
 Pick your organization from a dropdown, then select a cluster. The bot remembers your choice for future interactions.
 
-### Starting processes
+### Start processes
 
 Choose a process definition from the list and fill in the start form or provide variables. The bot confirms when the process has started successfully, or shows an error if something went wrong.
 
-### Working with tasks
+### Work with tasks
 
 | Action            | Description                                                                                                          |
 | :---------------- | :------------------------------------------------------------------------------------------------------------------- |
@@ -54,7 +54,7 @@ Choose a process definition from the list and fill in the start form or provide 
 
 If your cluster is sleeping, the bot shows a **Wake up cluster** button to wake it up.
 
-### Pop-up dialogs
+### Pop-up dialog
 
 When a form is too complex to display inside a chat card, the bot opens a pop-up dialog with the full form interface, giving you the same rich experience as the [tabs](./ms-teams-tabs.md).
 

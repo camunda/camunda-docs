@@ -12,7 +12,7 @@ import { msTeamsCards } from '../../../self-managed/react-components/\_ms-teams-
 
 Troubleshoot Camunda for Microsoft Teams to fix common setup and connectivity issues.
 
-### The app is not shown in the Microsoft Teams store
+### The app does not appear in the Microsoft Teams store
 
 <Tabs groupId="environment" defaultValue="saas" values={[
 { label: 'SaaS', value: 'saas' },
