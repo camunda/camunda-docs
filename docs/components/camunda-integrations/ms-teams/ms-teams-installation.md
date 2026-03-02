@@ -25,11 +25,10 @@ Before you begin, ensure the following are available:
 - Node.js 20 or later for the Teams app integration CLI.
 - Microsoft Teams with admin permissions to add apps.
 - A DNS name for the App Integrations backend (for example, `app-integrations.camunda.your-domain.com`).
-- Microsoft Teams with admin permissions to add apps.
 
 ## Step 1: Create applications in Camunda Identity
 
-Before writing the configuration file, register two `OAuth2` applications in your Camunda Self-Managed Identity management.
+Before writing the configuration file, register two OAuth 2.0 applications in your Camunda Self-Managed Identity service.
 
 1. Access the Identity management in your Camunda Self-Managed distribution.
 2. Create the following two applications.
@@ -74,7 +73,7 @@ npm install -g @camunda/teams-app-integration-cli
 c8teams create my-teams-app
 ```
 
-The CLI will interactively ask you for:
+The CLI prompts you for:
 
 - A project/package name.
 - The application display name.
@@ -89,7 +88,7 @@ pnpm install
 c8teams build
 ```
 
-The `build` command compiles the app package from the template and deploys immediately. You can also deploy separately as follows:
+The `build` command compiles the app package from the template and deploys it. You can also deploy separately as follows:
 
 ```bash
 c8teams deploy
@@ -116,8 +115,8 @@ Create a `config.yaml` file with your configuration settings. This file will be 
 
 The configuration file supports referencing environment variables for any value.
 
-:::important
-This is **strongly recommended** for sensitive fields such as passwords, client secrets, and encryption keys.
+:::note
+This is strongly recommended for sensitive fields such as passwords, client secrets, and encryption keys.
 :::
 
 Instead of hardcoding a secret in `config.yaml`, use the `${{ ENV_VAR_NAME }}` syntax:
@@ -136,7 +135,7 @@ session:
   secret: ${{ SESSION_SECRET }}
 ```
 
-You can also use the shorthand `$ENV_VAR_NAME` (without braces).
+You can also use the shorthand `$ENV_VAR_NAME` without braces.
 
 In your deployment, mount the secrets as environment variables on the container (for example, via Kubernetes Secrets, Docker `--env-file`, or your CI/CD pipeline's secret store) rather than storing them in plain text in the config file.
 
@@ -184,7 +183,7 @@ backendUrl: https://<your-public-url>
 flavor: self-managed
 
 organisation:
-  name: <your-organisation-name>
+  name: <your-organization-name>
 
 clusters:
   - uuid: <unique-cluster-uuid>
@@ -210,7 +209,7 @@ The `stage` field controls the environment label.
 | `dev`   | Development environment.                        |
 | `local` | Local development (not for deployed instances). |
 
-Use `prod` for any real deployment.
+Use `prod` for production deployment.
 
 ## Step 4: Start the application
 
@@ -297,6 +296,6 @@ Below is a reference of each section in the `config.yaml` file.
 
 - **`teams.multitenant`:** Multi-tenant support is no longer available for newly created Azure Bot registrations. Only set `multitenant` to `true` if you have an existing Teams application that was already registered with multi-tenant support enabled. For all new installations, leave this at the default (the CLI creates single-tenant apps) or explicitly set it to `false`.
 
-- **`teams.serviceUrl`:** The default value (`https://smba.trafficmanager.net/teams`) works for most deployments. Only override it if your environment requires a different Bot Framework service endpoint. If you're not sure, leave it as is.
+- **`teams.serviceUrl`:** The default value (`https://smba.trafficmanager.net/teams`) works for most deployments. Only override it if your environment requires a different Bot Framework service endpoint. If you are unsure, keep the default value.
 
 - **`exporter.apiKey`:** The exporter API key must match the key configured in the Helm chart of your Camunda orchestration cluster. Refer to the [Camunda Self-Managed Helm chart documentation](../../../../self-managed/quickstart/administrator-quickstart/) for instructions on how to configure the exporter API key in your cluster. The App Integrations backend uses this key to authenticate with the exporter endpoint.
