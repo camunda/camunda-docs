@@ -37,6 +37,14 @@ These release notes identify the main new features included in the 8.9 minor rel
 | :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 10 March 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha5)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha5)</li></ul> |
 
+### Agentic orchestration
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+
+#### Orchestration Cluster MCP support
+
+<!-- https://github.com/camunda/product-hub/issues/3010 -->
+
 ### Camunda 8 Run
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
@@ -65,7 +73,29 @@ You can now safely combine frequent scheduled backups with additional on‑deman
 
 ### Helm chart deployment
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Configuration">Configuration</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Configuration">Configuration</span><span class="badge badge--medium" title="This feature affects Helm">Helm</span></div>
+
+#### Connect to Elastic/OpenSearch with multi-host names
+
+<!-- https://github.com/camunda/product-hub/issues/2890 -->
+
+#### Gateway API support
+
+<!-- https://github.com/camunda/product-hub/issues/3374 -->
+
+The Kubernetes Gateway API is now supported in the official Helm chart, allowing you to expose Operate, Tasklist, Console, Web Modeler, Identity, Optimize, and Zeebe (REST and gRPC) using Gateway and Route resources instead of relying on ingress-nginx.
+
+You can use new Helm values to choose between Ingress and Gateway per deployment, with documented step-by-step examples and migration guidance so you can move away from ingress-nginx before it is retired in March 2026.
+
+#### Helm 4 support
+
+<!-- https://github.com/camunda/product-hub/issues/3358 -->
+
+As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
+
+:::note
+Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
+:::
 
 #### Helm chart values templating
 
@@ -77,9 +107,44 @@ The Helm chart now documents all values supporting Go template expressions, incl
 
 <p class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</p>
 
+### Microsoft Teams app
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda integrations">Integrations</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3008 -->
+
+The Camunda for Microsoft Teams app is now available in Self-Managed environments as well as SaaS.
+
+You can use this app to view, claim, and complete Camunda tasks directly in Microsoft Teams.
+
+### Modeler
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+#### Process application subfolders
+
+<!-- https://github.com/camunda/product-hub/issues/2674 -->
+
+You can now add subfolders to your process applications, giving you more flexibility when organizing your files and allowing you to sync to your existing version control system without reorganizing the filesystem.
+
+<p class="link-arrow">[Process applications](/components/concepts/process-applications.md)</p>
+
+#### Variable intelligence smart prefill
+
+<!-- https://github.com/camunda/product-hub/issues/3199 -->
+
 ### Orchestration Cluster
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
+
+#### Application profile consolidation
+
+<!-- https://github.com/camunda/product-hub/issues/2859 -->
+
+The Operate, Tasklist, and Identity application profiles are now merged into the existing gateway profile to provide a simplified but flexible deployment model.
+
+- These components are now treated as UIs served by the gateway.
+- Control their inclusion via configuration properties (for example, `camunda.webapps.enabled=operate,identity`).
 
 #### Configure RocksDB memory per-broker
 
@@ -94,6 +159,22 @@ You can now configure RocksDB memory on a per-broker basis instead of per-partit
 - Camunda recommends you test this out before 8.10 to find the right value, or configure the allocation strategy to `PARTITION`.
 
 <p class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+
+#### Delete processes and decisions (instances and definitions)
+
+<!-- https://github.com/camunda/product-hub/issues/2472 -->
+
+The Orchestration Cluster API and Operate UI now support secure, consistent deletion of process and decision definitions, as well as batch or individual deletion of finished process and decision instances (including all dependent data) from both primary and secondary storage.
+
+This features ensures compliance, data consistency across regions, and simplified operational management of obsolete process data.
+
+#### Dynamic connector access to tenants in multi-tenant environments
+
+<!-- https://github.com/camunda/product-hub/issues/2959 -->
+
+Use the new **dynamic client access to tenants** setting to define tenant access by explicit tenant assignment instead of defining access in the machine client’s configuration.
+
+If you sue this setting, you no longer need to restart the associated run-time environment when adding new machine clients (such as job workers or connectors).
 
 #### Manage task permissions
 
@@ -132,6 +213,8 @@ Operate now includes a dedicated Batch Operations view powered by the Orchestrat
 <p class="link-arrow">[Monitor batch operations](/components/operate/userguide/monitor-batch-operations.md)</p>
 
 #### Operate uses the Orchestration Cluster REST API
+
+<!-- https://github.com/camunda/product-hub/issues/2477 -->
 
 Operate now uses the Orchestration Cluster REST API as its single interface for accessing and managing process data. This ensures a consistent Operate experience across OpenSearch, Elasticsearch, and RDBMS.
 
@@ -212,17 +295,26 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 
 <p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
 
-#### Production installation guide for C8 with RDBMS - manual installation
-
-<!-- https://github.com/camunda/product-hub/issues/2740 -->
-
-The new Production Installation Guide for Camunda 8 with RDBMS (Manual Installation) provides platform administrators, database administrators, and development teams with a comprehensive, step-by-step resource for deploying and managing Camunda 8 using relational databases in production environments. This guide aims to dramatically simplify the RDBMS integration experience, align documentation with modern best practices, and minimize onboarding time and operational risk.
-
 #### Manual installation options support RDBMS for secondary storage
 
 <!-- https://github.com/camunda/product-hub/issues/2747 -->
 
 Camunda 8 orchestration clusters can now be installed manually (VM/bare metal/Java application) with full support for RDBMS (H2, PostgreSQL, Oracle, MariaDB) as secondary storage.
+
+#### Manual RDBMS production installation guide
+
+<!-- https://github.com/camunda/product-hub/issues/2740 -->
+
+The new Production Installation Guide for Camunda 8 with RDBMS (Manual Installation) provides platform administrators, database administrators, and development teams with a comprehensive, step-by-step resource for deploying and managing Camunda 8 using relational databases in production environments. This guide aims to dramatically simplify the RDBMS integration experience, align documentation with modern best practices, and minimize onboarding time and operational risk.
+
+#### Run Optimize with Orchestration Cluster RDBMS
+
+<!-- https://github.com/camunda/product-hub/issues/2686 -->
+
+Orchestration Clusters can run with RDBMS as the sole secondary data store (for straightforward environments) or in combination with Optimize (which requires Elasticsearch or OpenSearch for analytics use cases). Administrators can:
+
+- Deploy a simple stack using only RDBMS if analytics are not required.
+- Add Optimize with Elasticsearch/OpenSearch for teams that require reporting and analytics. Process data ingestion and storage responsibilities remain strictly separated between orchestration and analytics.
 
 ## 8.9.0-alpha4
 
