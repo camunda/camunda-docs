@@ -188,6 +188,36 @@ For each new message a new instance is created.
 
 A process can also have one or more [timer start events](/components/modeler/bpmn/timer-events/timer-events.md#timer-start-events). An instance of the process is created when the associated timer is triggered. Timers can also trigger periodically.
 
+## Business ID
+
+### What is a business ID?
+
+A business ID is a domain-specific identifier you can assign to a process instance. Compare this to the process instance key, which is a system-generated numeric identifier. With a business ID, you can link a process instance directly to a domain object in your system, such as an order number, a case reference, or a customer ticket ID.
+
+For example, consider a process that ships book orders where every order is identified by an ID in your order management system. When you start the process to ship an order, you can use the order ID as the business ID. This lets you easily find all process instances related to a particular order.
+
+You set the business ID at process instance creation time via the `businessId` field in the creation request.
+
+<details>
+   <summary>Create a process instance with a business ID via Orchestration Cluster REST API</summary>
+   <p>
+
+```
+curl -L 'http://localhost:8080/v2/process-instances' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "processDefinitionId": "order-process",
+  "processDefinitionVersion": 1,
+  "businessId": "order-1234"
+}'
+```
+
+See the [API reference for process instance creation](/apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+
+   </p>
+ </details>
+
 ## Tags
 
 Process instance tags are lightweight, immutable labels you can attach when creating a process instance via the API or clients. Tags are inherited by all jobs created from that instance. They help downstream workers and external systems make quick routing or decision choices without inspecting full variable payloads.
