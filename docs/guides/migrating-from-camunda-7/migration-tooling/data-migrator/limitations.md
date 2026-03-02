@@ -494,13 +494,13 @@ The following limitations apply:
 
 | Property                 | Can be migrated |
 | ------------------------ | --------------- |
-| jobKey                   | No              |
+| jobKey                   | Yes             |
 | type                     | No              |
-| worker                   | No              |
-| state                    | No              |
-| kind                     | No              |
-| listenerEventType        | No              |
-| retries                  | No              |
+| worker                   | Yes             |
+| state                    | Yes\*           |
+| kind                     | Yes\*           |
+| listenerEventType        | Yes\*           |
+| retries                  | No\*            |
 | isDenied                 | No              |
 | deniedReason             | No              |
 | hasFailedWithRetriesLeft | No              |
@@ -510,16 +510,24 @@ The following limitations apply:
 | customHeaders            | No              |
 | deadline                 | No              |
 | endTime                  | No              |
-| processDefinitionId      | No              |
-| processDefinitionKey     | No              |
-| processInstanceKey       | No              |
-| rootProcessInstanceKey   | No              |
-| elementId                | No              |
-| elementInstanceKey       | No              |
-| tenantId                 | No              |
-| partitionId              | No              |
-| creationTime             | No              |
+| processDefinitionId      | Yes             |
+| processDefinitionKey     | Yes             |
+| processInstanceKey       | Yes             |
+| rootProcessInstanceKey   | Yes             |
+| elementId                | Yes             |
+| elementInstanceKey       | Yes             |
+| tenantId                 | Yes             |
+| partitionId              | Yes             |
+| creationTime             | Yes             |
 | lastUpdateTime           | No              |
+
+Only Camunda 7 jobs of type async continuation are migrated to Camunda 8. Further limitations:
+
+- `state` is set to `COMPLETED` for all migrated jobs.
+- `kind` is set to `BPMN_ELEMENT` for all migrated jobs.
+- `listenerEventType` is set to `UNSPECIFIED` for all migrated jobs.
+- `retries` is set to `0` for all migrated jobs.
+- `elementInstanceKey` is not populated for jobs related to flow nodes in waiting state with `asyncBefore` configuration.
 
 ### Job metrics batch
 
