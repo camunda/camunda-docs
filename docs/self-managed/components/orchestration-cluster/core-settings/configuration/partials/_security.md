@@ -121,6 +121,16 @@ These properties apply only when `camunda.security.authentication.oidc.client-au
 | `camunda.security.authentication.oidc.assertion.keystore.key-alias`    | Alias of the private key to be used to sign the client assertion. |               |
 | `camunda.security.authentication.oidc.assertion.keystore.key-password` | Password of the private key.                                      |               |
 
+### `camunda.security.initialization.authorizations`
+
+| Property                                                          | Description                                                                                                                        | Default value |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `camunda.security.initialization.authorizations.[0].ownerType`    | The owner type to assign to this authorization.                                                                                    |               |
+| `camunda.security.initialization.authorizations.[0].ownerId`      | The owner ID to assign to this authorization.                                                                                      |               |
+| `camunda.security.initialization.authorizations.[0].resourceType` | The [resource type](/components/concepts/access-control/authorizations.md#available-resources) that this authorization applies to. |               |
+| `camunda.security.initialization.authorizations.[0].resourceId`   | The resource ID that this authorization applies to.                                                                                |               |
+| `camunda.security.initialization.authorizations.[0].permissions`  | Permissions to assign to this authorization. The available permissions vary by resource type.                                      |               |
+
 ### `camunda.security.initialization.default-roles`
 
 | Property                                                                | Description                                  | Default value |
@@ -129,6 +139,43 @@ These properties apply only when `camunda.security.authentication.oidc.client-au
 | `camunda.security.initialization.default-roles.<role>.groups.[0]`       | Groups assigned to the `<role>` role.        |               |
 | `camunda.security.initialization.default-roles.<role>.mappingrules.[0]` | Mapping rules assigned to the `<role>` role. |               |
 | `camunda.security.initialization.default-roles.<role>.users.[0]`        | Users assigned to the `<role>` role.         |               |
+
+### `camunda.security.initialization.groups`
+
+| Property                                                  | Description                               | Default value |
+| --------------------------------------------------------- | ----------------------------------------- | ------------- |
+| `camunda.security.initialization.groups.[0].groupId`      | The ID of this group.                     |               |
+| `camunda.security.initialization.groups.[0].name`         | The name of this group.                   |               |
+| `camunda.security.initialization.groups.[0].description`  | The description of this group.            |               |
+| `camunda.security.initialization.groups.[0].clients`      | The clients assigned to this group.       |               |
+| `camunda.security.initialization.groups.[0].mappingRules` | The mapping rules assigned to this group. |               |
+| `camunda.security.initialization.groups.[0].roles`        | The roles assigned to this group.         |               |
+| `camunda.security.initialization.groups.[0].users`        | The users assigned to this group.         |               |
+
+### `camunda.security.initialization.roles`
+
+| Property                                                 | Description                              | Default value |
+| -------------------------------------------------------- | ---------------------------------------- | ------------- |
+| `camunda.security.initialization.roles.[0].roleId`       | The ID of this role.                     |               |
+| `camunda.security.initialization.roles.[0].name`         | The name of this role.                   |               |
+| `camunda.security.initialization.roles.[0].description`  | The description of this role.            |               |
+| `camunda.security.initialization.roles.[0].clients`      | The clients assigned to this role.       |               |
+| `camunda.security.initialization.roles.[0].groups`       | The groups assigned to this role.        |               |
+| `camunda.security.initialization.roles.[0].mappingRules` | The mapping rules assigned to this role. |               |
+| `camunda.security.initialization.roles.[0].users`        | The users assigned to this role.         |               |
+
+### `camunda.security.initialization.tenants`
+
+| Property                                                   | Description                                | Default value |
+| ---------------------------------------------------------- | ------------------------------------------ | ------------- |
+| `camunda.security.initialization.tenants.[0].tenantId`     | The ID of this tenant.                     |               |
+| `camunda.security.initialization.tenants.[0].name`         | The name of this tenant.                   |               |
+| `camunda.security.initialization.tenants.[0].description`  | The description of this tenant.            |               |
+| `camunda.security.initialization.tenants.[0].clients`      | The clients assigned to this tenant.       |               |
+| `camunda.security.initialization.tenants.[0].groups`       | The groups assigned to this tenant.        |               |
+| `camunda.security.initialization.tenants.[0].mappingRules` | The mapping rules assigned to this tenant. |               |
+| `camunda.security.initialization.tenants.[0].roles`        | The roles assigned to this tenant.         |               |
+| `camunda.security.initialization.tenants.[0].users`        | The users assigned to this tenant.         |               |
 
 ### `camunda.security.initialization.users`
 
@@ -294,6 +341,16 @@ child-src;
 script-src-attr 'none'.
 ```
 
+### `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS`
+
+| Property                                                         | Description                                                                                                                        | Default value |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_TYPE`    | The owner type to assign to this authorization.                                                                                    |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_ID`      | The owner ID to assign to this authorization.                                                                                      |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_TYPE` | The [resource type](/components/concepts/access-control/authorizations.md#available-resources) that this authorization applies to. |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_ID`   | The resource ID that this authorization applies to.                                                                                |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_PERMISSIONS`   | Permissions to assign to this authorization. The available permissions vary by resource type.                                      |               |
+
 ### `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES`
 
 | Property                                                             | Description                                  | Default value |
@@ -310,6 +367,43 @@ script-src-attr 'none'.
 | `CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES_0_CLAIMNAME`     | The claim of the first mapping rule.         |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES_0_CLAIMVALUE`    | The claim's value of the first mapping rule. |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES_0_MAPPINGRULEID` | The id of the first mapping rule.            |               |
+
+### `CAMUNDA_SECURITY_INITIALIZATION_GROUPS`
+
+| Property                                                 | Description                               | Default value |
+| -------------------------------------------------------- | ----------------------------------------- | ------------- |
+| `CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_GROUP_ID`      | The ID of this group.                     |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_NAME`          | The name of this group.                   |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_DESCRIPTION`   | The description of this group.            |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_CLIENTS`       | The clients assigned to this group.       |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_MAPPING_RULES` | The mapping rules assigned to this group. |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_ROLES`         | The roles assigned to this group.         |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_USERS`         | The users assigned to this group.         |               |
+
+### `CAMUNDA_SECURITY_INITIALIZATION_ROLES`
+
+| Property                                                | Description                              | Default value |
+| ------------------------------------------------------- | ---------------------------------------- | ------------- |
+| `CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_ROLE_ID`       | The ID of this role.                     |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_NAME`          | The name of this role.                   |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_DESCRIPTION`   | The description of this role.            |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_CLIENTS`       | The clients assigned to this role.       |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_GROUPS`        | The groups assigned to this role.        |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_MAPPING_RULES` | The mapping rules assigned to this role. |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_USERS`         | The users assigned to this role.         |               |
+
+### `CAMUNDA_SECURITY_INITIALIZATION_TENANTS`
+
+| Property                                                  | Description                                | Default value |
+| --------------------------------------------------------- | ------------------------------------------ | ------------- |
+| `CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_TENANT_ID`     | The ID of this tenant.                     |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_NAME`          | The name of this tenant.                   |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_DESCRIPTION`   | The description of this tenant.            |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_CLIENTS`       | The clients assigned to this tenant.       |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_GROUPS`        | The groups assigned to this tenant.        |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_MAPPING_RULES` | The mapping rules assigned to this tenant. |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_ROLES`         | The roles assigned to this tenant.         |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_USERS`         | The users assigned to this tenant.         |               |
 
 ### `CAMUNDA_SECURITY_INITIALIZATION_USERS`
 

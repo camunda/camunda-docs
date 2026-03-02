@@ -1668,6 +1668,7 @@
           "items": [
             "self-managed/setup/guides/accessing-components-without-ingress",
             "self-managed/setup/guides/ingress-setup",
+            "self-managed/setup/guides/gateway-api-setup",
             "self-managed/setup/guides/using-existing-elasticsearch",
             "self-managed/setup/guides/using-existing-opensearch",
             "self-managed/setup/guides/using-existing-postgres",

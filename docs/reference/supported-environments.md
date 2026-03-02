@@ -1,11 +1,8 @@
 ---
 id: supported-environments
 title: "Supported environments"
-description: "Find out where to run Camunda 8 components for SaaS and Self-Managed, including Optimize for both Camunda 8 and Camunda 7."
+description: "Find out where to run Camunda 8 components for SaaS and Self-Managed."
 ---
-
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
 
 The following browsers, operating systems, clients, deployment options, and component requirements are tested and supported for compatibility with Camunda 8.
 
@@ -45,8 +42,8 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 - **Zeebe Java Client**: OpenJDK 8+
 - **Connector SDK**: OpenJDK 17+
-- **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 3.5.x
-- **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
+- **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 4.0.x
+- **Helm CLI**: 4.x [recommended], 3.19.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
 
 ## Camunda 8 Self-Managed
 
@@ -64,7 +61,7 @@ The following are tested and supported deployment options for Kubernetes, Docker
   - [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
   - [Google GKE](/self-managed/deployment/helm/cloud-providers/gcp/google-gke.md)
 - [Red Hat OpenShift](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md)
-- [Docker](/self-managed/deployment/docker/docker.md) (`linux/amd64`)
+- [Docker](/self-managed/deployment/docker/docker.md) (`linux/amd64`, `linux/arm64`)
 - [Manual](/self-managed/deployment/manual/install.md)
 
 :::note Helm chart compatibility
@@ -107,7 +104,7 @@ Regardless of the type, the network storage volumes you use must meet these requ
 
 ### Helm charts version matrix
 
-Camunda Helm chart version `13.x.x` works with Camunda version `8.8.x`. Check the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.8/) for more details.
+Camunda Helm chart version `14.x.x` works with Camunda version `8.9.x`. Check the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for more details.
 
 ## Component requirements
 
@@ -115,9 +112,9 @@ Requirements for components are as follows:
 
 | Component                                                  | Java version | Other requirements                                                                                                                                                                                                                                                                                                                                                                      |
 | :--------------------------------------------------------- | :----------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21+  | <ul><li>Elasticsearch 9.2+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.4+</li><li>OpenSearch 2.19+</li><li>For supported relational databases and versions when using an RDBMS (for example, as secondary storage), see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                       |
-| Optimize                                                   | OpenJDK 21+  | <ul><li>Elasticsearch 9.2+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.4+</li><li>OpenSearch 2.19+</li></ul>                                                                                                                                                                                                                                                                       |
-| Connectors                                                 | OpenJDK 21+  | –                                                                                                                                                                                                                                                                                                                                                                                       |
+| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21–25 | <ul><li>Elasticsearch 9.2+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.4+</li><li>OpenSearch 2.19+</li><li>For supported relational databases and versions when using an RDBMS (for example, as secondary storage), see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                       |
+| Optimize                                                   | OpenJDK 21–25 | <ul><li>Elasticsearch 9.2+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.4+</li><li>OpenSearch 2.19+</li></ul>                                                                                                                                                                                                                                                                       |
+| Connectors                                                 | OpenJDK 21–25 | –                                                                                                                                                                                                                                                                                                                                                                                       |
 | Management Identity                                        | OpenJDK 17+  | <ul><li>Keycloak 25.x, 26.x</li><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li><li>PostgreSQL is required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration)</li></ul> |
 | Web Modeler                                                | –            | <ul><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                                                                                                                                                                                 |
 | Self-Managed Console                                       | –            | –                                                                                                                                                                                                                                                                                                                                                                                       |
@@ -140,44 +137,12 @@ For a complete list of supported RDBMS versions, JDBC driver information (bundle
 
 ### Component version matrix
 
-The following matrix shows which component versions work together.
+The following matrix shows which component versions work together. Components within the same column must share the same `minor` and `patch` version.
 
-<Tabs
-defaultValue="version-8-7-x"
-values={[
-{label: 'Version <= 8.7.x', value: 'version-8-7-x'},
-{label: 'Version 8.8.x+', value: 'version-8-8-x'},
-]}>
-
-<TabItem value="version-8-7-x">
-
-From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the exact same `minor` and `patch` level to ensure compatibility.
-
-| Design                                        | Automate                                                                                                | Improve        |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------- | -------------- |
-| Desktop Modeler 5.31+ <br/> Web Modeler 8.7.x | (Zeebe, Operate, Tasklist) 8.7.x, Connectors 8.7.x, <br/>Identity 8.7.x, Console 8.7.x, RPA worker 1.0+ | Optimize 8.7.x |
-| Desktop Modeler 5.28+ <br/> Web Modeler 8.6.x | (Zeebe, Operate, Tasklist) 8.6.x, Connectors 8.6.x, <br/>Identity 8.6.x, Console 8.6.x                  | Optimize 8.6.x |
-| Desktop Modeler 5.22+ <br/> Web Modeler 8.5.x | Zeebe 8.5.x, Operate 8.5.x, Tasklist 8.5.x, <br/>Identity 8.5.x, Connectors 8.5.x, Console 8.5.x        | Optimize 8.5.x |
-| Desktop Modeler 5.19+ <br/> Web Modeler 8.4.x | Zeebe 8.4.x, Operate 8.4.x, Tasklist 8.4.x, <br/>Identity 8.4.x, Connectors 8.4.x                       | Optimize 8.4.x |
+| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) | Design                                     |
+| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------ |
+| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                            | Management Identity 8.9.x<br/>Self-Managed Console 8.9.x                                               | Web Modeler 8.9.x<br/>Desktop Modeler TBD |
 
 :::note
-You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
+You can use newer versions of Desktop and Web Modeler with older versions of the Orchestration Cluster.
 :::
-
-</TabItem>
-
-<TabItem value="version-8-8-x">
-
-From version `8.8.0` forward, Zeebe, Operate, Tasklist and Identity must run on the exact same `minor` and `patch` level to ensure compatibility.
-
-| Design                                     | [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Web Modeler 8.8.x<br/> Desktop Modeler TBD | (Zeebe, Operate, Tasklist, Identity) 8.8.x, <br/>Connectors 8.8.x, Optimize 8.8.x                               | Management Identity 8.8.x, Self-Managed Console 8.8.x                                                  |
-
-:::note
-You can also use newer versions of Desktop and Web Modeler with older versions of the Orchestration Cluster.
-:::
-
-</TabItem>
-
-</Tabs>
