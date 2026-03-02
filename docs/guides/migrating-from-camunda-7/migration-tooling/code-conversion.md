@@ -118,6 +118,7 @@ Client code (code that calls the Camunda API):
 Glue code (code executed by the process engine):
 
 - Converting JavaDelegates to Job Workers
+- Converting ExecutionListeners to Job Workers
 - Converting External Task Workers to Job Workers
 - Converting expressions
 
@@ -156,7 +157,7 @@ The patterns inform the OpenRewrite recipe development. If you find a pattern th
 The Camunda 7 to 8 OpenRewrite recipes help you automatically refactor:
 
 - Client code using the Camunda 7 Java API
-- Java delegates (glue code)
+- Java delegates and execution listeners (glue code)
 - External task workers
 - Unit tests (work in progress)
 
@@ -203,7 +204,7 @@ Add the following to your `pom.xml`:
             <plugin>
                 <groupId>org.openrewrite.maven</groupId>
                 <artifactId>rewrite-maven-plugin</artifactId>
-                <version>6.0.5</version>
+                <version>6.29.0</version>
                 <configuration>
                     <activeRecipes>
                         <recipe>io.camunda.migration.code.recipes.AllClientRecipes</recipe>
@@ -229,10 +230,14 @@ Add the following to your `pom.xml`:
 Always back up your code or use version control before running recipes. This ensures you can review and rollback changes if needed.
 :::
 
+:::note
+The use of `camunda-7-to-8-code-conversion-recipes` artifact requires access to the Camunda Enterprise Maven repository. See the [Camunda 7 documentation](https://docs.camunda.org/get-started/apache-maven/#camunda-artifact-storage) for instructions on setting up the repository in your Maven configuration.
+:::
+
 Choose the recipes that match your codebase:
 
 - Include `AllClientRecipes` if you have code that calls the Camunda API (starting processes, correlating messages, etc.)
-- Include `AllDelegateRecipes` if you have Java delegates
+- Include `AllDelegateRecipes` if you have Java delegates or execution listeners
 - Include `AllExternalWorkerRecipes` if you have external task workers
 
 #### Step 2: Run the recipes

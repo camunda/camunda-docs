@@ -1880,7 +1880,9 @@ h3 + .release-announcement-row {
 
 .release-announcement-content {
   flex: 4;
+  min-width: 0;
 }
+
 .sidebar-cta > .menu__list-item-collapsible {
   display: flex;
   align-items: center;

@@ -19,6 +19,10 @@ import Api from './partials/\_api.md'
 
 <Api />
 
+import Mcp from './partials/\_mcp.md'
+
+<Mcp />
+
 import Cluster from './partials/\_cluster.md'
 
 <Cluster />
@@ -137,6 +141,7 @@ script-src-attr 'none'.
 | `camunda.security.authentication.oidc.jwk-set-uri`                  | Sets the OIDC provider's JWK Set URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                       |                                      |
 | `camunda.security.authentication.oidc.authorization-uri`            | Sets the OIDC provider's authorization URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                 |                                      |
 | `camunda.security.authentication.oidc.token-uri`                    | Sets the OIDC provider's token URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                         |                                      |
+| `camunda.security.authentication.oidc.end-session-endpoint-uri`     | Sets the OIDC provider's end session endpoint URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                          |                                      |
 | `camunda.security.authentication.oidc.client-authentication-method` | Sets the client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                                                                                                                          | `client_secret_basic`                |
 | `camunda.security.authentication.oidc.clock-skew`                   | Sets the allowed clock skew when validating JWT issuance and expiration. Format: ISO 8601 duration (`PnDTnHnMn.nS`).                                                                                                                                                                                                                      | `60S`                                |
 | `camunda.security.authentication.oidc.id-token-algorithm`           | Sets the ID token signature algorithm.                                                                                                                                                                                                                                                                                                    | `RS256`                              |

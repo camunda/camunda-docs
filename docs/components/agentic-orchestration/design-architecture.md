@@ -52,14 +52,36 @@ Follow these principles when designing your agentic orchestration solution:
 
 - **Prompt versioning**: Version every prompt, so you can revert to using a previous prompt when required.
 
-### Mixing Agents with Workflow patterns
+### How execution works in an AI agent
+
+In Camunda agentic orchestration, decision-making and orchestration are intentionally split:
+
+- **LLM responsibility**: Interprets the system prompt, current user prompt, and available tool descriptions. It decides which tool to call, in what order, and with which parameters.
+- **Camunda responsibility**: Executes the selected BPMN activities, stores process state, applies retries and incident handling, and coordinates user tasks and other deterministic workflow logic.
+
+Think of the ad-hoc sub-process as a governed toolbox:
+
+- Each activity can be selected by the LLM as a tool.
+- Activities can be executed multiple times, in different orders, in parallel, or skipped.
+- The LLM chooses a path from the allowed options, while Camunda enforces process boundaries and execution reliability.
+
+This is a typical execution timeline:
+
+1. A user submits a prompt.
+1. The LLM evaluates the prompt together with the configured system prompt and available tool definitions.
+1. The LLM chooses one or more tool calls.
+1. Camunda activates and executes the corresponding BPMN activities.
+1. Results are written to process variables and returned to the LLM context.
+1. The loop repeats until the LLM returns a final response or the process routes to deterministic follow-up steps.
+
+### Mixing agents with workflow patterns
 
 <p><img src={WorkflowImg} style={{marginBottom: '0'}} title="Diagram showing how to mix agents into your workflow patterns" className="img-transparent"/></p>
 
 <table className="table-callout">
 <tr>
     <td><span className="callout">1</span></td>
-    <td>**Process Flow Within Tools**: Full BPMN control inside ad-hoc sub-processes for ultimate flexibility.</td>
+    <td>**Process flow within tools**: Full BPMN control inside ad-hoc sub-processes for ultimate flexibility.</td>
 </tr>
 <tr>
     <td><span className="callout">2</span></td>
@@ -67,7 +89,7 @@ Follow these principles when designing your agentic orchestration solution:
 </tr>
 <tr>
     <td><span className="callout">3</span></td>
-    <td>**Event-Driven Agent Reconfiguration**: Sub-workflows handle new data, guiding the next AI steps.</td>
+    <td>**Event-driven agent reconfiguration**: Sub-workflows handle new data, guiding the next AI steps.</td>
 </tr>
 <tr>
     <td><span className="callout">4</span></td>
@@ -75,6 +97,6 @@ Follow these principles when designing your agentic orchestration solution:
 </tr>
 <tr>
     <td><span className="callout">5</span></td>
-    <td>**Multi-Agent Orchestration**: Agents orchestrate other agents for streamlined, scalable solutions.</td>
+    <td>**Multi-agent orchestration**: Agents orchestrate other agents for streamlined, scalable solutions.</td>
 </tr>
 </table>

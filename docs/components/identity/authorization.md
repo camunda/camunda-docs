@@ -84,11 +84,12 @@ You can't combine multiple task properties in a single authorization. To cover a
 
 You can control access to user tasks using a combination of process-level and task-level permissions:
 
-- Process-level permissions on the `Process Definition` resource, such as `READ_USER_TASK` and `UPDATE_USER_TASK`.
+- Process-level permissions on the `Process Definition` resource, such as `READ_USER_TASK`, `CLAIM_USER_TASK`, `COMPLETE_USER_TASK`, and `UPDATE_USER_TASK`.
 - Task-level permissions on the `USER_TASK` resource, such as `READ`, `UPDATE`, `CLAIM`, and `COMPLETE`, which are typically scoped using property-based access control on task properties such as `assignee`, `candidateUsers`, and `candidateGroups`.
 
 When both process-level and task-level permissions exist, process-level permissions take precedence.
-If a user already has the required `Process Definition` permission for an operation (for example, `UPDATE_USER_TASK`), the system does not evaluate `USER_TASK` permissions for that operation. Task-level `USER_TASK` permissions are evaluated only when no effective process-level permission exists for that user and process definition.
+If a user already has the required `Process Definition` permission for an operation (for example, `READ_USER_TASK`, `CLAIM_USER_TASK`, `COMPLETE_USER_TASK`, or `UPDATE_USER_TASK`), the system does not evaluate `USER_TASK` permissions for that operation.
+Task-level `USER_TASK` permissions are evaluated only when no effective process‑level permission exists for that user and process definition.
 
 For Tasklist-specific behavior and practical authorization patterns, see [User task authorization in Tasklist](../tasklist/user-task-authorization.md).
 
@@ -101,7 +102,7 @@ To allow a supervisor to see and manage all user tasks for one or more processes
 - Resource type: `PROCESS_DEFINITION`
 - Resource scope: by **Resource ID**
 - Resource ID: `*` (or a specific BPMN process ID)
-- Permissions: `READ_USER_TASK`, `UPDATE_USER_TASK`
+- Permissions: `READ_USER_TASK`, `UPDATE_USER_TASK`, `CLAIM_USER_TASK`, `COMPLETE_USER_TASK`
 
 This grants broad visibility and control over all user tasks for the selected processes, without needing task-level authorizations.
 
