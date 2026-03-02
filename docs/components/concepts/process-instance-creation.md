@@ -229,6 +229,20 @@ The business ID is available as a property on the process instance. You can use 
 - [Get process instance](/apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance.api.mdx) — retrieve a single process instance and inspect its `businessId` field.
 - [Search process instances](/apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx) — filter process instances by `businessId` to find all instances linked to a specific business case.
 
+### Uniqueness control
+
+With uniqueness control, you can ensure that only one active process instance exists for a given business ID within the same process definition. This prevents duplicate processing of the same business case.
+
+Uniqueness is checked against **active root process instances**. A root process instance is one that wasn't created by a call activity. In other words, it's the top-level instance in a process hierarchy. Child process instances created via call activities don't count toward the uniqueness check, even though they inherit the parent's business ID.
+
+When uniqueness control is enabled, creating a process instance is rejected if a root process instance of the same process definition is already active with the same business ID. The rejection returns an `ALREADY_EXISTS` error (HTTP `409 Conflict`). Once the existing root process instance completes, a new instance with the same business ID can be created.
+
+Uniqueness control is opt-in. Enable it using the configuration property [`camunda.process-instance-creation.business-id-uniqueness-enabled`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#process-instance-creation). For SaaS, configure this in the cluster configuration via Console. For Self-Managed, set it in the application config (for example, `application.yaml` or as an environment variable).
+
+:::note
+When a business ID is specified, the partition for the new process instance is determined deterministically based on the business ID rather than using the default round-robin distribution. This is necessary to support the uniqueness control feature, as the check must happen on a single partition. Be aware that this may result in uneven distribution of instances across partitions if business IDs aren't well-distributed.
+:::
+
 ## Tags
 
 Process instance tags are lightweight, immutable labels you can attach when creating a process instance via the API or clients. Tags are inherited by all jobs created from that instance. They help downstream workers and external systems make quick routing or decision choices without inspecting full variable payloads.
