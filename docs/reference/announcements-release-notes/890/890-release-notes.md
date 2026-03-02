@@ -45,20 +45,22 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 <!-- https://github.com/camunda/product-hub/issues/3010 -->
 
-The Orchestration Cluster now exposes its operational capabilities via a built-in Model Context Protocol (MCP) server, enabling AI agents and LLM-powered applications to access Camunda data through a standardized interface.
+The Orchestration Cluster now exposes its operational capabilities via a built-in Model Context Protocol (MCP) server, enabling AI agents and LLM-powered applications to access Camunda data using a standardized interface.
 
-- Any MCP-compliant client (such as VS Code, GitHub Copilot, or Claude Code) can be connected to discover and invoke Camunda tools without custom API integration code.
+- Connect any MCP-compliant client (such as VS Code, GitHub Copilot, or Claude Code) to discover and invoke Camunda tools without custom API integration code.
 - Available tools cover process definitions, process instances, user tasks, incidents, and variables.
 - Streamable HTTP transport is supported, using the same authentication model as the REST API.
-- The MCP server is enabled by default in Camunda 8 Run. You can enable the MCP server in Camunda SaaS in your cluster settings in Console.
+- The MCP server is enabled by default in Camunda 8 Run. You can enable the MCP server in Camunda SaaS via your cluster settings in Console.
+
+<p class="link-arrow">[Orchestration Cluster MCP Server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md)</p>
 
 ### Audit log
 
-<!-- https://github.com/camunda/product-hub/issues/6925 -->
+<!-- https://github.com/camunda/product-hub/issues/1732 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span><span class="badge badge--medium" title="This feature affects Identity">Identity</span></div>
 
-You can now use the user operations audit log to access a record of operations, including who performed them, when, and on which entities.
+You can use the new user operations audit log to access a record of operations, including who performed an operation, when it was performed, and on which entities the operation was performed.
 
 Use the audit log to:
 
@@ -77,9 +79,11 @@ This feature is available in Operate, Identity, Tasklist, and the [Camunda 8 Res
 
 <!-- https://github.com/camunda/product-hub/issues/3128 -->
 
-You can now configure Camunda 8 Run to use any of the supported secondary storage relational databases instead of the default H2.
+You can now configure Camunda 8 Run to use any of the supported secondary storage relational databases instead of the default H2 (for example, PostgreSQL, MariaDB, MySQL, Oracle, or Microsoft SQL Server).
 
-This allows you to set up your local environment to match your production deployments, enabling deeper testing, faster debugging, and easier team onboarding.
+This allows you to set up your local environment to match your production deployment, enabling deeper testing, faster debugging, and easier team onboarding.
+
+<p class="link-arrow">[Camunda 8 Run external relational database options](/self-managed/quickstart/developer-quickstart/c8run.md#external-relational-database-options)</p>
 
 ### Console
 
@@ -130,6 +134,8 @@ The Kubernetes Gateway API is now supported in the official Helm chart, allowing
 
 You can use new Helm values to choose between Ingress and Gateway per deployment, with documented step-by-step examples and migration guidance so you can move away from ingress-nginx before it is retired in March 2026.
 
+<p class="link-arrow">[Configure the Helm chart with Gateway API](/self-managed/deployment/helm/configure/ingress/gateway-api-setup.md)</p>
+
 #### Helm 4 support
 
 <!-- https://github.com/camunda/product-hub/issues/3358 -->
@@ -146,7 +152,8 @@ Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure sol
 
 The Helm chart now documents all values supporting Go template expressions, including guidance on how `values.yaml` templating is evaluated.
 
-`podLabels`, `podAnnotations` (all components), and `global.ingress.host` now support templating via `{{ "{{" }} }}` expressions (for example, `{{ "{{" }} .Release.Name }}`), enabling dynamic configuration for multi-environment deployments and integrations such as Datadog APM.
+- `podLabels`, `podAnnotations` (all components), and `global.ingress.host` now support templating via `{{ "{{" }} }}` expressions (for example, `{{ "{{" }} .Release.Name }}`).
+- This feature enables dynamic configuration for multi-environment deployments and integrations, such as Datadog APM.
 
 <p class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</p>
 
@@ -231,7 +238,7 @@ Use the new **dynamic client access to tenants** setting to define tenant access
 
 If you use this setting, you no longer need to restart the associated run-time environment when adding new machine clients (such as job workers or connectors).
 
-#### ElasticSearch 9 support
+#### Elasticsearch 9 support
 
 <!-- https://github.com/camunda/product-hub/issues/2835 -->
 
@@ -259,6 +266,8 @@ This feature strengthens security and usability, and provides a clear, consisten
 Operators can now dynamically activate, move, or remove element instances inside running multi-instance ad-hoc subprocesses—supporting parallel, sequential, and classic ad-hoc execution patterns.
 
 These new runtime capabilities, available in both Operate UI and the API, allow users to adapt, repair, and recover business processes on the fly, supporting flexibility for agentic automation, case management, and critical operations.
+
+<p class="link-arrow">[Process instance modification](/components/concepts/process-instance-modification.md)</p>
 
 #### Monitor batch operations
 
