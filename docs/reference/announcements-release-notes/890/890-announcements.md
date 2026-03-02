@@ -974,7 +974,7 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 
 #### Web Modeler: Form deployment changes
 
-With Camunda 8.9, users can now deploy forms independently. This enhancement provides greater control over what is deployed and when, enabling more precise management of changes and updates across environments.
+With Camunda 8.9, you can now deploy forms independently. This enhancement provides greater control over what is deployed and when, enabling more precise management of changes and updates across environments.
 
 As part of this improvement, we have removed the automatic deployment of [linked forms](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md). Forms must now be explicitly deployed, giving teams finer control over versioning, release timing, and deployment scope.
 
