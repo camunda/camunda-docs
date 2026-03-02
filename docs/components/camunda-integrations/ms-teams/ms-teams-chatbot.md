@@ -1,7 +1,7 @@
 ---
 id: ms-teams-chatbot
-title: Chat bot
-sidebar_label: Chat bot
+title: Chatbot
+sidebar_label: Chatbot
 description: "Interact with Camunda using a conversational bot in Microsoft Teams personal chats, group chats, and channels."
 ---
 
@@ -15,14 +15,14 @@ The Camunda bot is available in your personal chat, group chats, and channels. Y
 
 The following commands are recognized by the bot:
 
-| Command                                 | What it does                                                                                                                  |
-| :-------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| Command                                                 | What it does                                                                                                                  |
+| :------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------- |
 | **Hi** (or hey, hello, greetings, and similar messages) | The bot greets you. If you haven't connected your Camunda account yet, it shows you how to get started.                       |
-| **Help** (or ?, support, commands)      | Shows a help card with available commands and setup information.                                                              |
-| **Switch context**                      | Enables you to change your active organization and cluster.                                                                   |
-| **Start a process**                     | Walks you through selecting and starting a Camunda process. If no cluster is selected yet, it asks you to pick one first.     |
-| **Set up notifications**                | Subscribes the current channel or chat to receive notifications about new user tasks for a selected organization and cluster. |
-| **Reset notifications**                 | Shows the active notification subscriptions for the current channel and lets you remove them.                                 |
+| **Help** (or ?, support, commands)                      | Shows a help card with available commands and setup information.                                                              |
+| **Switch context**                                      | Enables you to change your active organization and cluster.                                                                   |
+| **Start a process**                                     | Walks you through selecting and starting a Camunda process. If no cluster is selected yet, it asks you to pick one first.     |
+| **Set up notifications**                                | Subscribes the current channel or chat to receive notifications about new user tasks for a selected organization and cluster. |
+| **Reset notifications**                                 | Shows the active notification subscriptions for the current channel and lets you remove them.                                 |
 
 :::important
 If you type an unrecognized command, the bot notifies you and suggests using **Help**.
@@ -78,8 +78,9 @@ To enable channel notifications:
 
 ### Notification behavior
 
-- Cards sent by notifications are interactive. You can assign, complete, or manage tasks directly from the notification card.
-- Notification cards update automatically to reflect the latest task state. For example, when someone else completes or assigns the task.
+Cards sent by notifications are interactive. You can assign, complete, or manage tasks directly from the notification card.
+
+Notification cards update automatically to reflect the latest task state. For example, when someone else completes or assigns the task.
 
 ## Error handling
 
