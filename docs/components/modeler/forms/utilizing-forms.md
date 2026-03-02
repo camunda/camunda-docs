@@ -70,28 +70,28 @@ With Camunda 8.4, we improved the way you can link forms to BPMN diagrams in Web
 
 - Diagrams will always have the latest form updates.
 - No need to manually re-link forms or use a JSON configuration.
-- Linked Camunda Forms must now be explicitly deployed.
+- Linked Camunda Forms must now be deployed explicitly.
 
 See the [form linking reference](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#camunda-form-linked) for more details.
 :::
 
-## Deploy your form
+## Deploy a linked form
 
-Linked forms must be explicitly deployed separately for clusters with a version 8.4 or higher.
+Linked forms must be deployed separately in clusters running version 8.4 or later.
 
-To deploy your latest form changes, just click the blue **Deploy** button.
+To deploy your latest form changes, click the blue **Deploy** button.
 
 ## Deploy your diagram and start an instance
 
-To execute your process diagram, click the blue **Deploy** button. Any form linked in your process must be deployed before to avoid incidents. You can now start a new process instance to initiate your process diagram.
+To execute your process diagram, click the blue **Deploy** button. Deploy any linked forms beforehand to avoid incidents. Then start a new process instance.
 Click the blue **Run** button.
 You can now monitor your instances in [Operate](/components/operate/operate-introduction.md).
 
 :::info
-Linked Camunda Forms must now be explicitly deployed, giving teams finer control over versioning, release timing, and deployment scope.
+Linked Camunda Forms must now be deployed explicitly. This gives teams finer control over versioning, release timing, and deployment scope.
 As linked forms are resolved to their latest version (unless you change the [binding type](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#camunda-form-linked)), make sure that the version deployed in the target cluster matches the one linked in your diagram.
 
-When deploying to a Camunda 8 cluster with a version lower than 8.4, forms linked to user tasks or none start events will be automatically embedded into the user task to guarantee backwards compatibility.
+When deploying to a Camunda 8 cluster running a version earlier than 8.4, forms linked to user tasks or none start events will be automatically embedded into the user task to guarantee backwards compatibility.
 Read more about the different ways to reference Camunda Forms in the [user task forms reference](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).
 :::
 
