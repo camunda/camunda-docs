@@ -75,17 +75,21 @@ With Camunda 8.4, we improved the way you can link forms to BPMN diagrams in Web
 See the [form linking reference](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#camunda-form-linked) for more details.
 :::
 
+## Deploy your form
+
+Linked forms must be explicitly deployed separately for clusters with a version 8.4 or higher.
+
+To deploy your latest form changes, just click the blue **Deploy** button.
+
 ## Deploy your diagram and start an instance
 
-To execute your completed process diagram, click the blue **Deploy** button.
-Linked forms will automatically be deployed along with the diagram.
-You can now start a new process instance to initiate your process diagram.
+To execute your process diagram, click the blue **Deploy** button. Any form linked in your process must be deployed before to avoid incidents. You can now start a new process instance to initiate your process diagram.
 Click the blue **Run** button.
 You can now monitor your instances in [Operate](/components/operate/operate-introduction.md).
 
 :::info
-Linked Camunda Forms will automatically be deployed along with the diagram.
-As linked forms are resolved to their latest version (unless you change the [binding type](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#camunda-form-linked)), make sure you don't accidentally deploy a diagram.
+Linked Camunda Forms must now be explicitly deployed, giving teams finer control over versioning, release timing, and deployment scope.
+As linked forms are resolved to their latest version (unless you change the [binding type](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#camunda-form-linked)), make sure that the version deployed in the target cluster matches the one linked in your diagram.
 
 When deploying to a Camunda 8 cluster with a version lower than 8.4, forms linked to user tasks or none start events will be automatically embedded into the user task to guarantee backwards compatibility.
 Read more about the different ways to reference Camunda Forms in the [user task forms reference](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).
