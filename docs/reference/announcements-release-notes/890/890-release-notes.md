@@ -45,6 +45,13 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 <!-- https://github.com/camunda/product-hub/issues/3010 -->
 
+The Orchestration Cluster now exposes its operational capabilities via a built-in Model Context Protocol (MCP) server, enabling AI agents and LLM-powered applications to access Camunda data through a standardized interface.
+
+- Any MCP-compliant client (such as VS Code, GitHub Copilot, or Claude Code) can be connected to discover and invoke Camunda tools without custom API integration code.
+- Available tools cover process definitions, process instances, user tasks, incidents, and variables.
+- Streamable HTTP transport is supported, using the same authentication model as the REST API.
+- The MCP server is enabled by default in Camunda 8 Run. You can enable the MCP server in Camunda SaaS in your cluster settings in Console.
+
 ### Audit log
 
 <!-- https://github.com/camunda/product-hub/issues/6925 -->
@@ -143,6 +150,18 @@ The Helm chart now documents all values supporting Go template expressions, incl
 
 <p class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</p>
 
+### Intelligent Document Processing (IDP)
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
+
+#### IDP document classification templates
+
+<!-- https://github.com/camunda/product-hub/issues/3148 -->
+
+#### IDP multiple text extraction engines
+
+<!-- https://github.com/camunda/product-hub/issues/3171 -->
+
 ### Microsoft Teams app
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda integrations">Integrations</span></div>
@@ -156,14 +175,6 @@ You can use this app to view, claim, and complete Camunda tasks directly in Micr
 ### Modeler
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
-
-#### IDP document classification templates
-
-<!-- https://github.com/camunda/product-hub/issues/3148 -->
-
-#### IDP multiple text extraction engines
-
-<!-- https://github.com/camunda/product-hub/issues/3171 -->
 
 #### Process application subfolders
 
