@@ -71,13 +71,32 @@ You can now safely combine frequent scheduled backups with additional on‑deman
 
 <p class="link-arrow">[SaaS backups](/components/saas/backups.md)</p>
 
-### Helm chart deployment
+### Deployment
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Configuration">Configuration</span><span class="badge badge--medium" title="This feature affects Helm">Helm</span></div>
+
+#### ARM Docker production support
+
+<!-- https://github.com/camunda/product-hub/issues/2603 -->
+
+You can now use the `linux/arm64` image for Docker production environments.
+
+<p class="link-arrow">[Camunda Docker images](/self-managed/deployment/docker/docker.md)</p>
 
 #### Connect to Elastic/OpenSearch with multi-host names
 
 <!-- https://github.com/camunda/product-hub/issues/2890 -->
+
+#### Proxy support for AWS OpenSearch
+
+<!-- https://github.com/camunda/product-hub/issues/3048 -->
+
+You can now configure outbound proxy settings in Camunda 8 components to connect to Elastic, OpenSearch (AWS OpenSearch).
+
+- This enables seamless integration with AWS-hosted OpenSearch services in environments where proxy routing is required (for example, corporate networks or regulated production setups).
+- This feature is supported for Zeebe, Operate, Tasklist, Optimize, and Integration components.
+
+<p class="link-arrow">[Property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage)</p>
 
 #### Gateway API support
 
@@ -120,6 +139,14 @@ You can use this app to view, claim, and complete Camunda tasks directly in Micr
 ### Modeler
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+#### IDP document classification templates
+
+<!-- https://github.com/camunda/product-hub/issues/3148 -->
+
+#### IDP multiple text extraction engines
+
+<!-- https://github.com/camunda/product-hub/issues/3171 -->
 
 #### Process application subfolders
 
@@ -166,7 +193,7 @@ You can now configure RocksDB memory on a per-broker basis instead of per-partit
 
 The Orchestration Cluster API and Operate UI now support secure, consistent deletion of process and decision definitions, as well as batch or individual deletion of finished process and decision instances (including all dependent data) from both primary and secondary storage.
 
-This features ensures compliance, data consistency across regions, and simplified operational management of obsolete process data.
+This feature ensures compliance, data consistency across regions, and simplified operational management of obsolete process data.
 
 #### Dynamic connector access to tenants in multi-tenant environments
 
@@ -174,7 +201,11 @@ This features ensures compliance, data consistency across regions, and simplifie
 
 Use the new **dynamic client access to tenants** setting to define tenant access by explicit tenant assignment instead of defining access in the machine client’s configuration.
 
-If you sue this setting, you no longer need to restart the associated run-time environment when adding new machine clients (such as job workers or connectors).
+If you use this setting, you no longer need to restart the associated run-time environment when adding new machine clients (such as job workers or connectors).
+
+#### ElasticSearch 9 support
+
+<!-- https://github.com/camunda/product-hub/issues/2835 -->
 
 #### Manage task permissions
 
@@ -233,6 +264,18 @@ You can continue to investigate, manage, and automate process operations without
 <!-- https://github.com/camunda/product-hub/issues/2446 -->
 
 You can now use declarative configuration for all Identity entities in the Orchestration Cluster, such as groups, tenants, roles, authorizations, and assignments. Previously, you could only use this for users, mapping rules, and default role memberships.
+
+#### Retention policy across hierarchy
+
+<!-- https://github.com/camunda/product-hub/issues/2170 -->
+
+When deleting process instances, all child process and decision instances are retained until the root process instance is deleted.
+
+- This feature ensures that audit trails remain intact for the entire process hierarchy.
+- Even if a called process completes significantly earlier, its data remains available until the parent instance completes and expires under retention policy.
+- This guarantees continuous visibility and compliance-grade auditability for hierarchical workflows.
+
+<p class="link-arrow">[Hierarchy-aware data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md#hierarchy-aware-retention)</p>
 
 #### Schedule backups with the Orchestration Cluster
 
@@ -295,17 +338,23 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 
 <p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
 
+#### Installation guide for RDBMS (Orchestration Cluster and Web Modeler)
+
+<!-- https://github.com/camunda/product-hub/issues/3135 -->
+
+A new installation guide covers how you can configure Camunda 8 with relational databases across the Orchestration Cluster and Web Modeler. The guide covers database provisioning, connections and authentication including Aurora IAM, JDBC driver handling, optional schema management with SQL or Liquibase, and backup and restore considerations so teams can deploy faster with fewer errors and aligned best practices.
+
 #### Manual installation options support RDBMS for secondary storage
 
 <!-- https://github.com/camunda/product-hub/issues/2747 -->
 
 Camunda 8 orchestration clusters can now be installed manually (VM/bare metal/Java application) with full support for RDBMS (H2, PostgreSQL, Oracle, MariaDB) as secondary storage.
 
-#### Manual RDBMS production installation guide
+#### Manual production installation guide for RDBMS
 
 <!-- https://github.com/camunda/product-hub/issues/2740 -->
 
-The new Production Installation Guide for Camunda 8 with RDBMS (Manual Installation) provides platform administrators, database administrators, and development teams with a comprehensive, step-by-step resource for deploying and managing Camunda 8 using relational databases in production environments. This guide aims to dramatically simplify the RDBMS integration experience, align documentation with modern best practices, and minimize onboarding time and operational risk.
+A new production installation guide for Camunda 8 with RDBMS (manual installation) provides platform administrators, database administrators, and development teams with comprehensive, step-by-step instructions for deploying and managing Camunda 8 using relational databases in production environments.
 
 #### Run Optimize with Orchestration Cluster RDBMS
 
