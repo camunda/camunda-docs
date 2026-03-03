@@ -30,7 +30,7 @@ jobs:
                 | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' \
                 | sort -V \
                 | tail -n1 \
-                | awk -F. '{printf "%d.%d", $1, $2+1}'
+                | awk -F. '{printf "%d.%d", $1, $2+2}'
           )
 
           # If a stable camunda branch exists for the
