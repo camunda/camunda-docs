@@ -377,7 +377,7 @@ See [Migrate extraConfiguration from 8.8 to 8.9](/self-managed/deployment/helm/c
 
 Previously, the Elasticsearch subchart was enabled by default. To use OpenSearch, you would need to disable Elasticsearch and enable OpenSearch.
 
-With the inclusion of RDBMS as a secondary storage option, there is no longer a default secondary storage type. You must now explicitly set `orchestration.data.secondaryStorage.type` to one of `elasticsearch`, `opensearch`, or `rdbms` in your `values.yaml`. Helm will fail with a validation error if this is not configured.
+With the inclusion of RDBMS as a secondary storage option, there is no longer a default secondary storage type. Setting `orchestration.data.secondaryStorage.type` explicitly in your `values.yaml` is recommended. The chart can auto-detect the type from `global.elasticsearch.enabled` or `global.opensearch.enabled`, but Helm will fail with a validation error if no secondary storage is configured at all.
 
 :::note
 To continue using Elasticsearch provided as a subchart, you must add `global.elasticsearch.enabled: true`, `elasticsearch.enabled: true`, and `orchestration.data.secondaryStorage.type: elasticsearch` to your `values.yaml`.
