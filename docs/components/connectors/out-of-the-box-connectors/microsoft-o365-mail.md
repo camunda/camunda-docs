@@ -1,7 +1,7 @@
 ---
 id: microsoft-o365-mail
 title: Microsoft 365 connector
-sidebar_label: Microsoft 365
+sidebar_label: Microsoft 365 Email (Outbound)
 description: Send and read Microsoft 365 emails from your BPMN process.
 ---
 
@@ -29,6 +29,10 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 ## Access control
 
 Each operation requires permissions to be assigned by a system administrator. Learn more about [Microsoft permissions](https://learn.microsoft.com/en-us/entra/identity-platform/permissions-consent-overview).
+
+:::note
+**Important:** By default, an application with Mail API permissions can access **all mailboxes** in your organization. To restrict access to specific mailboxes, use **Role-Based Access Control (RBAC) for Applications**. Learn more about [scoping application permissions to specific Exchange Online mailboxes](https://learn.microsoft.com/en-us/graph/auth-limit-mailbox-access).
+:::
 
 ### Bearer token authentication
 

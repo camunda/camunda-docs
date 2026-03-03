@@ -348,7 +348,7 @@ const SearchableTable = () => {
       image: MessageSendImg,
     },
     {
-      name: "Microsoft 365 Email",
+      name: "Microsoft 365 Email (outbound)",
       description: "Interactions with Microsoft 365 mail from your processes.",
       type: "Outbound",
       link: "../microsoft-o365-mail/",

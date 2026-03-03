@@ -12,74 +12,40 @@ The **Microsoft 365 Email Inbound connector** allows you to consume emails by mo
 - A [Microsoft 365](https://outlook.office.com/mail/) mailbox to monitor.
 - Sufficient access rights at [Microsoft Entra](https://entra.microsoft.com) to create a new app and set [Microsoft Graph](https://developer.microsoft.com/en-us/graph) permissions.
 - Required Microsoft Graph API permissions for your application:
-  - `Mail.Read` - Read emails from mailboxes
-  - `Mail.ReadWrite` - Read and modify emails (required for operations like mark as read, move, delete)
+  - `Mail.Read` - Read emails from mailboxes.
+  - `Mail.ReadWrite` - Read and modify emails (required for operations like mark as read, move, delete).
 
-Learn more about [creating, configuring, and authorizing Microsoft App](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
+Learn more about [creating, configuring, and authorizing Microsoft Apps](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
 
 :::note
-Use Camunda secrets to avoid exposing your Microsoft credentials as plain text.
-Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your Microsoft credentials as plain text. Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Security considerations
 
 ### Authentication security
 
-The connector uses **OAuth 2.0 client credentials flow** for authentication, which is the recommended approach for server-to-server communication without user interaction. This flow provides:
+The connector uses OAuth 2.0 client credentials flow for authentication, which is the recommended approach for server-to-server communication without user interaction. This flow provides:
 
-- **No user credentials stored**: The application authenticates using its own credentials (Client ID and Client Secret)
-- **Scoped permissions**: API permissions are explicitly granted to the application
-- **Auditable access**: All API calls are associated with the registered application
+- **No user credentials stored**: The application authenticates using its own credentials (Client ID and Client Secret).
+- **Scoped permissions**: API permissions are explicitly granted to the application.
+- **Auditable access**: All API calls are associated with the registered application.
 
 ### Restricting mailbox access with RBAC
 
-By default, an Azure AD application with `Mail.Read` or `Mail.ReadWrite` permissions can access **all mailboxes** in your organization. To restrict access to specific mailboxes, use **Role-Based Access Control (RBAC) for Applications**.
+:::note
+**Important:** By default, an Azure AD application with `Mail.Read` or `Mail.ReadWrite` permissions can access **all mailboxes** in your organization. In the OAuth 2.0 client credentials flow, the application gets access to all mailboxes it has been granted permissions for.
 
-#### Configure application access policies
-
-Use **RBAC for Applications** to restrict application access to specific mailboxes. This approach uses Exchange Online PowerShell to assign application roles scoped to specific mailboxes:
-
-1. Connect to Exchange Online PowerShell:
-
-```powershell
-Connect-ExchangeOnline -Organization yourorganization.onmicrosoft.com
-```
-
-2. Create a mail-enabled security group containing the mailboxes you want to allow access to:
-
-```powershell
-New-DistributionGroup -Name "Camunda Email Access" -Type Security
-Add-DistributionGroupMember -Identity "Camunda Email Access" -Member user@yourorganization.com
-```
-
-3. Assign the application permission to the security group:
-
-```powershell
-New-ManagementRoleAssignment -Role "ApplicationImpersonation" `
-  -App <Your-Application-Client-ID> `
-  -CustomResourceScope "Camunda Email Access"
-```
-
-Replace `<Your-Application-Client-ID>` with your Azure AD application's Client ID.
-
-4. Verify the access policy is working:
-
-```powershell
-Test-ApplicationAccessPolicy -Identity user@yourorganization.com `
-  -AppId <Your-Application-Client-ID>
-```
-
-For more information, refer to:
-
-- [Scoping application permissions to specific Exchange Online mailboxes](https://learn.microsoft.com/en-us/graph/auth-limit-mailbox-access)
-- [Exchange Online PowerShell](https://learn.microsoft.com/en-us/powershell/exchange/exchange-online-powershell)
+To restrict access to specific mailboxes, use **Role-Based Access Control (RBAC) for Applications**. Learn more about [scoping application permissions to specific Exchange Online mailboxes](https://learn.microsoft.com/en-us/graph/auth-limit-mailbox-access).
+:::
 
 ## Configuring Microsoft 365
 
 To use the Microsoft 365 Email Inbound connector, you must register an application in Microsoft Entra (formerly Azure AD) and configure the required permissions.
 
-This is a simplified guide. For the full guide, refer to the [official Microsoft documentation](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
+:::note
+This is a simplified guide to help you get started. For the full guide, refer to the [official Microsoft documentation](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
+:::
 
 ### Register an application in Microsoft Entra
 
@@ -96,12 +62,12 @@ This is a simplified guide. For the full guide, refer to the [official Microsoft
 2. Click **Add a permission**.
 3. Select **Microsoft Graph** > **Application permissions**.
 4. Search for and add the following permissions:
-   - `Mail.Read` - Required for reading emails
-   - `Mail.ReadWrite` - Required for operations like mark as read, move, or delete emails
+   - `Mail.Read` - Required for reading emails.
+   - `Mail.ReadWrite` - Required for operations like mark as read, move, or delete emails.
 5. Click **Add permissions**.
 6. Click **Grant admin consent** for your organization. This requires administrator privileges.
 
-:::note
+:::important
 The **Grant admin consent** step is critical. Without admin consent, the application cannot access mailbox data.
 :::
 
@@ -118,9 +84,9 @@ The **Grant admin consent** step is critical. Without admin consent, the applica
 
 You will need the following values to configure the connector:
 
-- **Client ID**: Found on the application's **Overview** page (also called "Application ID")
-- **Client Secret**: The value you copied in the previous step
-- **Tenant ID**: Found on the application's **Overview** page (also called "Directory ID")
+- **Client ID**: Found on the application's **Overview** page (also called "Application ID").
+- **Client Secret**: The value you copied in the previous step.
+- **Tenant ID**: Found on the application's **Overview** page (also called "Directory ID").
 
 Store these values securely, preferably using [Camunda secrets](/components/console/manage-clusters/manage-secrets.md).
 
@@ -136,34 +102,19 @@ Store these values securely, preferably using [Camunda secrets](/components/cons
 
 To make your **Microsoft 365 Email Inbound connector** executable, fill in the required properties.
 
-### Authentication
-
-The connector uses **OAuth 2.0 client credentials flow** for authentication.
-
-In the **Authentication** section, provide:
-
-- **Tenant ID**: Your Azure AD tenant ID
-- **Client ID**: The Application (client) ID from your Azure AD app registration
-- **Client Secret**: The client secret value from your Azure AD app registration
-
-:::note
-In the client credential flow, the application gets access to all mailboxes it has been granted permissions for.
-Ensure your app has the necessary Graph API permissions (`Mail.Read`, `Mail.ReadWrite`) configured in Azure AD.
-:::
-
 ### Mailbox Configuration
 
 In the **Mailbox** section, configure which mailbox and folder to monitor:
 
-- **User ID/User Principal Name**: The email address or user principal name of the mailbox to monitor (e.g., `user@company.com`)
+- **User ID/User Principal Name**: The email address or user principal name of the mailbox to monitor (for example, `user@company.com`)
 - **Folder Name/Folder ID**: Specify which folder to monitor. You can provide either:
-  - **Folder name**: A well-known folder name like `inbox`, `drafts`, `sentitems`, or a custom folder name
-  - **Folder ID**: The unique identifier of a specific folder
+  - **Folder name**: A well-known folder name like `inbox`, `drafts`, `sentitems`, or a custom folder name.
+  - **Folder ID**: The unique identifier of a specific folder.
 - **Specified folder ID**: A checkbox to indicate whether you provided a folder ID (checked) or folder name (unchecked). This helps prevent name collisions.
 
 ### Polling Configuration
 
-Configure how frequently the connector checks for new emails using the **Polling Interval** field. Specify the time between polls in ISO 8601 duration format (e.g., `PT30S` for 30 seconds, `PT5M` for 5 minutes).
+Configure how frequently the connector checks for new emails using the **Polling Interval** field. Specify the time between polls in ISO 8601 duration format (for example, `PT30S` for 30 seconds, `PT5M` for 5 minutes).
 
 :::tip
 Choose an appropriate polling interval based on your use case. More frequent polling increases API usage but provides faster response times.
@@ -179,7 +130,7 @@ The simple filter provides the following options:
 
 - **Only Unread**: When enabled (default), only unread emails (`isRead eq false`) will trigger the process. When disabled, all emails (both read and unread) will trigger the process.
 - **Subject Contains** (optional): Only fetch emails where the subject contains this text (case-sensitive)
-- **From Email Address** (optional): Only fetch emails from this sender address (exact match, e.g., `invoice@vendor.com`)
+- **From Email Address** (optional): Only fetch emails from this sender address (exact match, for example, `invoice@vendor.com`)
 
 #### Advanced Filter
 
@@ -362,4 +313,15 @@ To monitor multiple folders, create separate connector instances with different 
 
 ### How are email attachments handled?
 
-Email attachments are automatically fetched and made available through the Camunda document API. The attachment metadata is included in the response (as shown in the Output Mapping section), and you can access the actual attachment content through the document ID.
+Email attachments are automatically fetched and stored using [Camunda document handling](/components/document-handling/getting-started.md). The attachment metadata is included in the connector output (see [Output Mapping](#output-mapping)), and each attachment is available as a document reference that you can use in subsequent process steps.
+
+For example, to pass an attachment to another connector or download it, use the document reference from the `attachments` array:
+
+```feel
+= {
+  "firstAttachment": value.attachments[1],
+  "allAttachments": value.attachments
+}
+```
+
+Learn more about working with documents in [document handling](/components/document-handling/getting-started.md).
