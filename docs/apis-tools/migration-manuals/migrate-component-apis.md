@@ -23,7 +23,7 @@ To continue using the V1 APIs, users and clients must be assigned the appropriat
 
 Users now require wildcard (`*`) permissions for the resource type and permission type being accessed.
 
-For guidance on assigning permissions in Identity, see the [Identity authorization guide](../../components/admin/authorization.md).
+For guidance on assigning permissions in Admin, see the [Admin authorization guide](../../components/admin/authorization.md).
 
 ### Mapping Operate permissions to new authorizations
 

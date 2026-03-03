@@ -24,7 +24,7 @@ Complete the following steps:
 
 1. [Add your external IdP to Keycloak](#add-your-external-idp-to-keycloak)
 2. [Configure identity provider mappers](#configure-identity-provider-mappers)
-3. [Configure Orchestration Cluster Admin](#configure-orchestration-cluster-identity)
+3. [Configure Orchestration Cluster Admin](#configure-orchestration-cluster-admin)
 4. [Configure Management Identity access](#configure-management-identity-access-optional) (optional)
 
 ### Add your external IdP to Keycloak

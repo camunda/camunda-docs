@@ -41,10 +41,10 @@ Understanding which identity is required for a given action helps you apply the 
 
 In production setups, both the Orchestration Cluster Admin and the Management Identity can integrate with an external OIDC IdP (such as Entra ID) for unified user management, single sign-on (SSO), and consistent security policies.
 
-| Identity type                  | Description                                                                                                                                          | Default IdP              | External IdP support                  |
-| :----------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------- | :------------------------------------ |
+| Identity type               | Description                                                                                                                                          | Default IdP              | External IdP support                  |
+| :-------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------- | :------------------------------------ |
 | Orchestration Cluster Admin | Built-in user management with support for external IdP integration via OIDC. Connects to enterprise IdPs such as Microsoft Entra ID, Okta, and more. | Built-in user management | OIDC integration with enterprise IdPs |
-| Management Identity            | Uses Keycloak by default, but can be configured with an external IdP via OIDC.                                                                       | Keycloak                 | OIDC integration with external IdPs   |
+| Management Identity         | Uses Keycloak by default, but can be configured with an external IdP via OIDC.                                                                       | Keycloak                 | OIDC integration with external IdPs   |
 
 ## Authentication vs. authorization
 
@@ -61,10 +61,10 @@ Authorization determines what an authenticated user or client is allowed to acce
 
 For example, a user's authorizations allow them to access Operate, view running or completed process instances, start new process instances, or claim and complete user tasks in Tasklist and through the Orchestration Cluster REST API.
 
-| Identity type                  | Authorization model              | Description                                                                                                                                                                      | Management interface                   |
-| :----------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
-| Orchestration Cluster Admin | Fine-grained permissions         | Controls access to applications, APIs, and runtime resources through specific permissions for each resource type and action (for example, `PROCESS_DEFINITION` and `USER_TASK`). | Camunda Admin UI or API               |
-| Management Identity            | Role-based access control (RBAC) | Uses predefined roles and permissions for users and groups to manage Console, Web Modeler, and Optimize.                                                                         | Keycloak admin console or external IdP |
+| Identity type               | Authorization model              | Description                                                                                                                                                                      | Management interface                   |
+| :-------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
+| Orchestration Cluster Admin | Fine-grained permissions         | Controls access to applications, APIs, and runtime resources through specific permissions for each resource type and action (for example, `PROCESS_DEFINITION` and `USER_TASK`). | Camunda Admin UI or API                |
+| Management Identity         | Role-based access control (RBAC) | Uses predefined roles and permissions for users and groups to manage Console, Web Modeler, and Optimize.                                                                         | Keycloak admin console or external IdP |
 
 ### How authentication and authorization work together
 

@@ -1052,7 +1052,7 @@ Follow the installation steps for the **surviving region**:
 
    ```bash
    # The default are 5 profiles, so this confirms that Operate and Tasklist are not enabled
-   io.camunda.application.StandaloneCamunda - The following 3 profiles are active: "broker", "identity", "consolidated-auth"
+   io.camunda.application.StandaloneCamunda - The following 3 profiles are active: "broker", "admin", "consolidated-auth"
    ```
 
 3. Alternatively, verify that the configuration does not list Operate and Tasklist as active profiles:
@@ -1064,7 +1064,7 @@ Follow the installation steps for the **surviving region**:
    ```bash
    spring:
      profiles:
-       active: "broker,identity,consolidated-auth"
+       active: "broker,admin,consolidated-auth"
    ```
 
   </TabItem>
@@ -1909,7 +1909,7 @@ orchestration:
 
    ```bash
    # The default are 5 profiles, so this confirms that Operate and Tasklist are enabled
-   io.camunda.application.StandaloneCamunda - The following 5 profiles are active: "broker", "operate", "tasklist", "identity", "consolidated-auth"
+   io.camunda.application.StandaloneCamunda - The following 5 profiles are active: "broker", "operate", "tasklist", "admin", "consolidated-auth"
    ```
 
 3. Alternatively, verify that the configuration lists Operate and Tasklist as active profiles:
@@ -1921,7 +1921,7 @@ orchestration:
    ```bash
    spring:
      profiles:
-       active: "broker,operate,tasklist,identity,consolidated-auth"
+       active: "broker,operate,tasklist,admin,consolidated-auth"
    ```
 
 </div>

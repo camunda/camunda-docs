@@ -72,7 +72,7 @@ To suspend, resume, or cancel an operation, you only need the relevant batch ope
 The system stores authorization claims with the batch operation and uses them throughout its lifecycle.
 
 :::info
-Read more about [authorizations](/components/concepts/access-control/authorizations.md) and [how to create them in the Identity UI](/components/admin/authorization.md).
+Read more about [authorizations](/components/concepts/access-control/authorizations.md) and [how to create them in the Admin UI](/components/admin/authorization.md).
 :::
 
 ## Next steps

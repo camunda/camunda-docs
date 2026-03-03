@@ -7,7 +7,7 @@ description: "Manage tenants within the Orchestration Cluster Admin to logically
 
 <span class="badge badge--platform">Self-Managed only</span>
 
-Use Identity to manage Orchestration Cluster tenants and isolate data within a single cluster.
+Use Admin to manage Orchestration Cluster tenants and isolate data within a single cluster.
 
 ## About tenants
 
@@ -19,7 +19,7 @@ This enables multiple teams, departments, or clients to share a single environme
 To learn more about tenants, see [multi-tenancy](../concepts/multi-tenancy.md).
 :::
 
-You can manage your Orchestration Cluster tenants directly in [Identity](identity-introduction.md).
+You can manage your Orchestration Cluster tenants directly in [Admin](admin-introduction.md).
 
 - **Tenancy** is enabled by default.
 - **Tenancy checks** are disabled by default. All data maps to the `<default>` tenant.
@@ -31,7 +31,7 @@ To enable multi-tenancy checks, see [Self-Managed configuration properties](/sel
 ## Create a tenant
 
 :::note
-The `<default>` tenant is automatically created when Identity starts.
+The `<default>` tenant is automatically created when Admin starts.
 :::
 
 1. Log in to Admin and open the **Tenants** tab.

@@ -221,7 +221,8 @@ Users need specific permissions to access Orchestration Cluster web components:
 - UI access: Resource type `Component` and a resource key identifying the component:
   - `operate` for Operate access
   - `tasklist` for Tasklist access
-  - `identity` for Admin access
+  - `admin` for Admin access
+  - `identity` for Admin access (deprecated - please use `admin` instead)
   - `*` for access to all components
 - Without these permissions, users cannot access the components.
 
@@ -243,6 +244,7 @@ After switching from Tasklist V1 to Tasklist V2, user task access restrictions n
 This section describes authorization for domain resources (such as process and decision definitions), not access to UI components or APIs. Users need additional permissions to access specific resources within web components:
 
 - Process-related: Resource type `Process Definition`
+
   - `READ_PROCESS_DEFINITION` to view process models
   - `CREATE_PROCESS_INSTANCE` to start new processes
   - `UPDATE_PROCESS_INSTANCE` to update running instances

@@ -1945,7 +1945,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
-                    "self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/admin-as-code",
                   ],
                 },
                 {
@@ -2036,6 +2036,7 @@ module.exports = {
                 "self-managed/components/orchestration-cluster/admin/overview",
                 "self-managed/components/orchestration-cluster/admin/connect-external-identity-provider",
                 "self-managed/components/orchestration-cluster/admin/connect-multiple-identity-providers",
+                "self-managed/components/orchestration-cluster/admin/bring-your-groups",
                 "self-managed/components/orchestration-cluster/admin/debugging-authentication",
                 "self-managed/components/orchestration-cluster/admin/special-oidc-cases",
               ],

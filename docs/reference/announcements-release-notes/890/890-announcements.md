@@ -117,17 +117,19 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 </div>
 <div className="release-announcement-content">
 
-#### Orchestration Cluster Admin renamed to Admin
+#### Orchestration Cluster Identity renamed to Admin
 
-Starting with Camunda 8.9, the Orchestration Cluster Admin component has been renamed to **Admin** (also referred to as Orchestration Cluster Admin).
+Starting with Camunda 8.9, the Orchestration Cluster Identity component has been renamed to **Admin** (also referred to as Orchestration Cluster Admin).
 
 Admin is the cluster-level admin UI that hosts identity management (users, groups, roles, authorizations, tenants, mapping rules, and clients) and other administrative features. The underlying identity management capabilities remain the same.
 
 What changed:
 
-- The component is now called **Orchestration Cluster Admin** (previously Orchestration Cluster Admin).
+- The component is now called **Admin** (previously Orchestration Cluster Identity).
+- The `admin` Spring profile replaces the `identity` profile. Both profiles work interchangeably in 8.9; the `identity` profile is deprecated and will be removed in a future version.
+- API paths have changed from `/identity/*` to `/admin/*`. The old paths remain functional and redirect to new paths, but are deprecated.
+- Helm values have changed from `orchestration.identity.*` to `orchestration.admin.*`. The old values remain functional but are deprecated.
 - Documentation paths have been updated: `/components/identity/` is now `/components/admin/`.
-- The UI and features remain unchanged; only the name has been updated.
 
 <p className="link-arrow">[Introduction to Admin](/components/admin/admin-introduction.md)</p>
 

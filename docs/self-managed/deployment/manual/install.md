@@ -196,9 +196,9 @@ camunda:
 
 Connectors require authentication to use their full capabilities. By default, the Orchestration Cluster uses basic authentication. You can configure the cluster to automatically create a user with the necessary permissions at startup.
 
-If you don’t configure a user at startup, create one manually in the Identity UI after deployment.
+If you don’t configure a user at startup, create one manually in the Admin UI after deployment.
 
-For more details, see [Identity configuration overview](/self-managed/components/orchestration-cluster/admin/overview.md).
+For more details, see [Admin configuration overview](/self-managed/components/orchestration-cluster/admin/overview.md).
 
 <Tabs>
   <TabItem value="env" label="Environment variables">
