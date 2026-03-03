@@ -43,7 +43,7 @@ This section lists actions you must complete or review before upgrading to Camun
 </tr>
 <tr>
     <td>Helm chart: REST port</td>
-    <td><p>The default HTTP port for the Orchestration component changed from 8090 to 8080. If you have hardcoded port references in network policies, ingress rules, or monitoring, update them.</p></td>
+    <td><p>The default HTTP port for the Orchestration component changed from 8090 to 8080. If you have hardcoded port references in network policies, Ingress rules, or monitoring, update them.</p></td>
     <td><span className="label-highlight yellow">Check</span></td>
 </tr>
 <tr>

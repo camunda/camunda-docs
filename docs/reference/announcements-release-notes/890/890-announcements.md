@@ -495,7 +495,7 @@ All secrets must now be explicitly provided via Kubernetes Secrets referenced in
 
 The Orchestration component's default HTTP port has changed from 8090 to 8080 (`orchestration.service.httpPort`). This aligns the Helm chart with the Orchestration Cluster's default configuration.
 
-If you have hardcoded port 8090 in network policies, ingress rules, health check probes, or service mesh configuration, update these references to 8080 or explicitly set `orchestration.service.httpPort: 8090` in your `values.yaml`.
+If you have hardcoded port 8090 in network policies, Ingress rules, health check probes, or service mesh configuration, update these references to 8080 or explicitly set `orchestration.service.httpPort: 8090` in your `values.yaml`.
 
 </div>
 </div>

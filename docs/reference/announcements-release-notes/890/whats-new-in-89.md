@@ -76,7 +76,7 @@ The Helm chart now supports relational databases as a first-class secondary stor
 
 ### Default REST port changed
 
-The Orchestration component's default HTTP port has changed from 8090 to 8080. Update any hardcoded port references in network policies, ingress rules, or service configuration.
+The Orchestration component's default HTTP port has changed from 8090 to 8080. Update any hardcoded port references in network policies, Ingress rules, or service configuration.
 
 ## Web Modeler
 
