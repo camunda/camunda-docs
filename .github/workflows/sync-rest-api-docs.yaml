@@ -17,16 +17,8 @@ jobs:
           repository: camunda/camunda-docs
           path: docs
 
-      - name: Checkout Camunda
-        uses: actions/checkout@v6
-        with:
-          repository: camunda/camunda
-          path: rest-spec
-          fetch-depth: 0
-          sparse-checkout: zeebe/gateway-protocol/src/main/proto/v2
-          sparse-checkout-cone-mode: false
-
-      - name: Sync documentation
+      - name: Check for stable
+        id: compute_branch
         run: |
           # Get the latest docs tag, and increment the minor version
           # to store the next minor release.
@@ -43,19 +35,30 @@ jobs:
 
           # If a stable camunda branch exists for the
           # next minor release, use it. Otherwise, use main.
-          cd ../rest-spec
           stable_branch="stable/$next_minor_release"
-          if git branch --remote | grep "origin/$stable_branch"; then
+          if git ls-remote --heads https://github.com/camunda/camunda $stable_branch; then
             echo "Found a stable branch: origin/$stable_branch"
-            git checkout --track -B $stable_branch "origin/$stable_branch"
+            echo "camunda_branch=$stable_branch" >> "$GITHUB_OUTPUT"
           else
             echo "No stable branch for version $next_minor_release, using main"
-            git checkout main
+            echo "camunda_branch=main" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Checkout Camunda
+        uses: actions/checkout@v6
+        with:
+          repository: camunda/camunda
+          path: rest-spec
+          ref: ${{ steps.compute_branch.outputs.camunda_branch }}
+          sparse-checkout: zeebe/gateway-protocol/src/main/proto/v2
+          sparse-checkout-cone-mode: false
+
+      - name: Sync documentation
+        run: |
           # Copy the rest specs to the docs repo, and generate the docs.
-          mv zeebe/gateway-protocol/src/main/proto/v2/* ../docs/api/camunda/v2
-          cd ../docs/api/camunda/v2
+          cd docs
+          mv ../rest-spec/zeebe/gateway-protocol/src/main/proto/v2/* api/camunda/v2
+          cd api/camunda/v2
           mv rest-api.yaml camunda-openapi.yaml
           npm i
           npm run api:generate:camunda
