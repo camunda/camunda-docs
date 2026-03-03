@@ -11,7 +11,7 @@ This guide provides a unified approach to configuring relational databases for C
 
 :::info
 
-- For **Orchestration Cluster configuration reference**, see [RDBMS configuration overview](/self-managed/concepts/databases/relational-db/database-configuration.md).
+- For **Orchestration Cluster configuration reference**, see [RDBMS configuration overview](/self-managed/concepts/databases/relational-db/configuration.md).
 - For **Web Modeler configuration reference**, see [Web Modeler database configuration](/self-managed/components/modeler/web-modeler/configuration/database.md).
 - For **supported vendors and versions**, see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 - For **deployment-specific setup**, see [Helm RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md) or [manual RDBMS configuration](/self-managed/deployment/manual/rdbms/configuration.md).
@@ -240,7 +240,7 @@ webModeler:
       # No password needed; IAM token generated at runtime
 ```
 
-For detailed Aurora setup, see [Orchestration Cluster RDBMS configuration](/self-managed/concepts/databases/relational-db/database-configuration.md) and [Web Modeler configuration](/self-managed/components/modeler/web-modeler/configuration/database.md).
+For detailed Aurora setup, see [Orchestration Cluster RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and [Web Modeler configuration](/self-managed/components/modeler/web-modeler/configuration/database.md).
 
 ## Step 4: JDBC driver management
 
