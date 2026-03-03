@@ -513,149 +513,131 @@ module.exports = {
       ],
     },
     {
-      Components: [
+      type: "category",
+      label: "Orchestration Cluster",
+      link: {
+        type: "doc",
+        id: "components/orchestration-cluster",
+      },
+      items: [
         {
           type: "category",
-          label: "Orchestration Cluster",
+          label: "Zeebe",
           link: {
             type: "doc",
-            id: "components/orchestration-cluster",
+            id: "components/zeebe/zeebe-overview",
+          },
+          items: [
+            "components/zeebe/technical-concepts/technical-concepts-overview",
+            "components/zeebe/technical-concepts/architecture",
+            "components/zeebe/technical-concepts/batch-operations",
+            "components/zeebe/technical-concepts/clustering",
+            "components/zeebe/technical-concepts/health",
+            "components/zeebe/technical-concepts/partitions",
+            "components/zeebe/technical-concepts/internal-processing",
+            "components/zeebe/technical-concepts/process-lifecycles",
+            "components/zeebe/technical-concepts/protocols",
+          ],
+        },
+        {
+          type: "category",
+          label: "Operate",
+          link: {
+            type: "doc",
+            id: "components/operate/operate-introduction",
           },
           items: [
             {
-              type: "category",
-              label: "Zeebe",
-              link: {
-                type: "doc",
-                id: "components/zeebe/zeebe-overview",
-              },
-              items: [
-                "components/zeebe/technical-concepts/technical-concepts-overview",
-                "components/zeebe/technical-concepts/architecture",
-                "components/zeebe/technical-concepts/batch-operations",
-                "components/zeebe/technical-concepts/clustering",
-                "components/zeebe/technical-concepts/health",
-                "components/zeebe/technical-concepts/partitions",
-                "components/zeebe/technical-concepts/internal-processing",
-                "components/zeebe/technical-concepts/process-lifecycles",
-                "components/zeebe/technical-concepts/protocols",
+              Overview: [
+                "components/operate/overview/access-control",
+                "components/operate/overview/batch-operations-overview",
+                "components/operate/overview/batch-operation-details-overview",
               ],
             },
+            "components/operate/userguide/basic-operate-navigation",
+            "components/operate/userguide/resolve-incidents-update-variables",
+            "components/operate/userguide/selections-operations",
+            "components/operate/userguide/manage-batch-operations",
+            "components/operate/userguide/delete-finished-instances",
+            "components/operate/userguide/delete-resources",
             {
-              type: "category",
-              label: "Operate",
-              link: {
-                type: "doc",
-                id: "components/operate/operate-introduction",
-              },
-              items: [
-                {
-                  Overview: [
-                    "components/operate/overview/access-control",
-                    "components/operate/overview/batch-operations-overview",
-                    "components/operate/overview/batch-operation-details-overview",
-                  ],
-                },
-                "components/operate/userguide/basic-operate-navigation",
-                "components/operate/userguide/resolve-incidents-update-variables",
-                "components/operate/userguide/selections-operations",
-                "components/operate/userguide/manage-batch-operations",
-                "components/operate/userguide/delete-finished-instances",
-                "components/operate/userguide/delete-resources",
-                {
-                  "Process instance modification": [
-                    "components/operate/userguide/process-instance-modification",
-                    "components/operate/userguide/process-instance-batch-modification",
-                  ],
-                },
-                "components/operate/userguide/process-instance-migration",
-                {
-                  "Monitor process operations": [
-                    "components/operate/userguide/monitor-operation-status",
-                    "components/operate/userguide/monitor-batch-operations",
-                  ],
-                },
+              "Process instance modification": [
+                "components/operate/userguide/process-instance-modification",
+                "components/operate/userguide/process-instance-batch-modification",
               ],
             },
+            "components/operate/userguide/process-instance-migration",
             {
-              type: "category",
-              label: "Tasklist",
-              link: {
-                type: "doc",
-                id: "components/tasklist/introduction-to-tasklist",
-              },
-              items: [
-                "components/tasklist/userguide/access-control",
-                "components/tasklist/user-task-authorization",
-                "components/tasklist/userguide/using-tasklist",
-                "components/tasklist/api-versions",
-                "components/tasklist/userguide/managing-tasks",
-                "components/tasklist/userguide/using-filters",
-                "components/tasklist/userguide/defining-task-priorities",
-                "components/tasklist/userguide/starting-processes",
-                "components/tasklist/user-task-access-restrictions",
-                "components/tasklist/userguide/tasklist-localization",
-              ],
-            },
-            {
-              type: "category",
-              label: "Identity",
-              link: {
-                type: "doc",
-                id: "components/identity/identity-introduction",
-              },
-              items: [
-                "components/identity/access-control",
-                "components/identity/user",
-                "components/identity/group",
-                "components/identity/role",
-                "components/identity/authorization",
-                "components/identity/client",
-                "components/identity/mapping-rules",
-                "components/identity/tenant",
+              "Monitor process operations": [
+                "components/operate/userguide/monitor-operation-status",
+                "components/operate/userguide/monitor-batch-operations",
               ],
             },
           ],
         },
         {
           type: "category",
-          label: "Camunda Hub",
+          label: "Tasklist",
           link: {
             type: "doc",
-            id: "components/camunda-hub",
+            id: "components/tasklist/introduction-to-tasklist",
           },
           items: [
+            "components/tasklist/userguide/access-control",
+            "components/tasklist/user-task-authorization",
+            "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/api-versions",
+            "components/tasklist/userguide/managing-tasks",
+            "components/tasklist/userguide/using-filters",
+            "components/tasklist/userguide/defining-task-priorities",
+            "components/tasklist/userguide/starting-processes",
+            "components/tasklist/user-task-access-restrictions",
+            "components/tasklist/userguide/tasklist-localization",
+          ],
+        },
+        {
+          type: "category",
+          label: "Identity",
+          link: {
+            type: "doc",
+            id: "components/identity/identity-introduction",
+          },
+          items: [
+            "components/identity/access-control",
+            "components/identity/user",
+            "components/identity/group",
+            "components/identity/role",
+            "components/identity/authorization",
+            "components/identity/client",
+            "components/identity/mapping-rules",
+            "components/identity/tenant",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Camunda Hub",
+      link: {
+        type: "doc",
+        id: "components/camunda-hub",
+      },
+      items: [
+        {
+          Organization: [
             {
-              Organization: [
-                {
-                  "Manage organization": [
-                    "components/console/manage-organization/organization-settings",
-                    "components/console/manage-organization/manage-users",
-                    "components/console/manage-organization/manage-user-groups",
-                    "components/console/manage-organization/external-sso",
-                    "components/console/manage-organization/view-organization-activity",
-                    "components/console/manage-organization/enable-alpha-features",
-                    "components/console/manage-organization/usage-history",
-                    "components/console/manage-organization/usage-alerts",
-                    "components/console/manage-organization/advanced-search",
-                    "components/console/manage-organization/switch-organization",
-                    "components/console/manage-organization/delete-account",
-                  ],
-                },
-                {
-                  "Manage clusters": [
-                    "components/console/manage-clusters/create-cluster",
-                    "components/console/manage-clusters/manage-cluster",
-                    "components/console/manage-clusters/cluster-connectors",
-                    "components/console/manage-clusters/manage-api-clients",
-                    "components/console/manage-clusters/manage-secrets",
-                    "components/console/manage-clusters/manage-alerts",
-                    "components/console/manage-clusters/manage-ip-allowlists",
-                    "components/console/manage-clusters/create-backups",
-                    "components/console/manage-clusters/settings",
-                    "components/console/manage-clusters/cluster-capacity",
-                  ],
-                },
+              "Manage organization": [
+                "components/console/manage-organization/organization-settings",
+                "components/console/manage-organization/manage-users",
+                "components/console/manage-organization/manage-user-groups",
+                "components/console/manage-organization/external-sso",
+                "components/console/manage-organization/view-organization-activity",
+                "components/console/manage-organization/enable-alpha-features",
+                "components/console/manage-organization/usage-history",
+                "components/console/manage-organization/usage-alerts",
+                "components/console/manage-organization/advanced-search",
+                "components/console/manage-organization/switch-organization",
+                "components/console/manage-organization/delete-account",
                 {
                   "Manage plan": [
                     "components/console/manage-plan/create-account",
@@ -664,415 +646,447 @@ module.exports = {
                     "components/console/manage-plan/update-billing-reservations",
                   ],
                 },
-                {
-                  type: "category",
-                  label: "Manage workspaces",
-                  link: {
-                    type: "doc",
-                    id: "components/modeler/web-modeler/collaboration/collaboration",
-                  },
-                  items: [
-                    "components/camunda-hub/workspaces/create-workspace",
-                    "components/camunda-hub/workspaces/manage-workspaces",
-                  ],
-                },
               ],
             },
             {
-              Workspace: [
-                "components/camunda-hub/workspaces/manage-workspace",
-                {
-                  type: "category",
-                  label: "Manage projects",
-                  link: {
-                    type: "doc",
-                    id: "components/modeler/web-modeler/process-applications/process-applications",
-                  },
-                  items: [
-                    {
-                      type: "doc",
-                      label: "Lifecycle",
-                      id: "components/modeler/web-modeler/process-applications/process-application-pipeline",
-                    },
-                    {
-                      type: "doc",
-                      label: "Creation",
-                      id: "components/modeler/web-modeler/process-applications/create-a-process-application",
-                    },
-                    {
-                      type: "doc",
-                      label: "Deployment",
-                      id: "components/modeler/web-modeler/process-applications/deploy-process-application",
-                    },
-                    {
-                      type: "doc",
-                      label: "Versioning",
-                      id: "components/modeler/web-modeler/process-applications/process-application-versioning",
-                    },
-                    {
-                      type: "doc",
-                      label: "Git Sync",
-                      id: "components/modeler/web-modeler/process-applications/git-sync",
-                    },
-                  ],
-                },
-                {
-                  "Model business processes": [
-                    {
-                      Model: [
-                        "components/modeler/web-modeler/launch-web-modeler",
-                        "components/modeler/web-modeler/modeling/model-your-first-diagram",
-                        "components/modeler/web-modeler/run-or-publish-your-process",
-                        "components/modeler/web-modeler/process-landscape-visualization",
-                        "components/modeler/web-modeler/modeling/context-pad",
-                        "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
-                        "components/modeler/web-modeler/modeling/versions",
-                        "components/modeler/web-modeler/modeling/file-download",
-                        "components/modeler/web-modeler/modeling/camunda-marketplace",
-                        {
-                          type: "doc",
-                          id: "components/modeler/web-modeler/web-modeler-settings",
-                          label: "Settings",
-                        },
-                        {
-                          type: "category",
-                          label: "Import",
-                          items: [
-                            "components/modeler/web-modeler/modeling/import-diagram",
-                            "components/modeler/web-modeler/modeling/import-resources",
-                            "components/modeler/web-modeler/modeling/prepare-resources",
-                          ],
-                        },
-                        {
-                          type: "category",
-                          label: "Element templates",
-                          link: {
-                            type: "doc",
-                            id: "components/modeler/web-modeler/element-templates/manage-element-templates",
-                          },
-                          items: [
-                            "components/modeler/web-modeler/element-templates/element-template-generator",
-                            "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
-                            "components/modeler/web-modeler/element-templates/save-as-element-templates",
-                            "components/modeler/web-modeler/element-templates/best-practices",
-                          ],
-                        },
-                        {
-                          "AI features": [
-                            "components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai",
-                          ],
-                        },
-                        {
-                          "Advanced modeling": [
-                            "components/modeler/web-modeler/modeling/advanced-modeling/business-rule-task-linking",
-                            "components/modeler/web-modeler/modeling/advanced-modeling/call-activity-linking",
-                            "components/modeler/web-modeler/modeling/advanced-modeling/form-linking",
-                            "components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes",
-                            "components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files",
-                          ],
-                        },
-                      ],
-                    },
-                    {
-                      Collaborate: [
-                        "components/modeler/web-modeler/collaboration/collaborate-with-modes",
-                        "components/modeler/web-modeler/collaboration/design-your-process",
-                        "components/modeler/web-modeler/collaboration/implement-your-process",
-                        "components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
-                        "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
-                      ],
-                    },
-                    {
-                      Validate: [
-                        "components/modeler/web-modeler/validation/play-your-process",
-                        "components/modeler/web-modeler/validation/test-scenario-files",
-                        "components/modeler/web-modeler/validation/token-simulation",
-                        "components/modeler/web-modeler/validation/task-testing",
-                      ],
-                    },
-                  ],
-                },
+              type: "category",
+              label: "Manage the catalog",
+              link: {
+                type: "doc",
+                id: "components/camunda-hub/catalog/index",
+              },
+              items: [],
+            },
+            {
+              "Manage clusters": [
+                "components/console/manage-clusters/create-cluster",
+                "components/console/manage-clusters/manage-cluster",
+                "components/console/manage-clusters/cluster-connectors",
+                "components/console/manage-clusters/manage-api-clients",
+                "components/console/manage-clusters/manage-secrets",
+                "components/console/manage-clusters/manage-alerts",
+                "components/console/manage-clusters/manage-ip-allowlists",
+                "components/console/manage-clusters/create-backups",
+                "components/console/manage-clusters/settings",
+                "components/console/manage-clusters/cluster-capacity",
+              ],
+            },
+            {
+              type: "category",
+              label: "Manage workspaces",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/collaboration/collaboration",
+              },
+              items: [
+                "components/camunda-hub/workspaces/create-workspace",
+                "components/camunda-hub/workspaces/manage-workspaces",
               ],
             },
           ],
         },
         {
-          type: "category",
-          label: "Desktop Modeler",
-          link: {
-            type: "doc",
-            id: "components/modeler/desktop-modeler/index",
-          },
-          items: [
-            "components/modeler/desktop-modeler/install-the-modeler",
-            "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-8",
-            "components/modeler/desktop-modeler/deploy-diagram",
-            "components/modeler/desktop-modeler/start-instance",
-            "components/modeler/desktop-modeler/process-applications",
-            "components/modeler/desktop-modeler/use-connectors",
-            "components/modeler/desktop-modeler/variables",
-            {
-              "Element templates": [
-                "components/modeler/desktop-modeler/element-templates/configuring-templates",
-                "components/modeler/desktop-modeler/element-templates/using-templates",
-              ],
-            },
-            {
-              "Additional configuration": [
-                "components/modeler/desktop-modeler/flags/flags",
-                "components/modeler/desktop-modeler/plugins/plugins",
-                "components/modeler/desktop-modeler/custom-lint-rules/custom-lint-rules",
-                "components/modeler/desktop-modeler/search-paths/search-paths",
-                "components/modeler/desktop-modeler/telemetry/telemetry",
-              ],
-            },
-            "components/modeler/desktop-modeler/settings/settings",
-            "components/modeler/desktop-modeler/task-testing",
-            "components/modeler/desktop-modeler/troubleshooting",
-          ],
-        },
-        {
-          type: "category",
-          label: "Connectors",
-          link: {
-            type: "doc",
-            id: "components/connectors/introduction-to-connectors",
-          },
-          items: [
+          Workspace: [
+            "components/camunda-hub/workspaces/manage-workspace",
             {
               type: "category",
-              label: "How to use connectors",
+              label: "Manage the catalog",
               link: {
                 type: "doc",
-                id: "components/connectors/use-connectors/index",
+                id: "components/camunda-hub/catalog/index",
               },
-              items: [
-                "components/connectors/use-connectors/configuring-out-of-the-box-connectors",
-                "components/connectors/connector-types",
-                "components/connectors/use-connectors/inbound",
-                "components/connectors/use-connectors/outbound",
-              ],
+              items: [],
             },
             {
               type: "category",
-              label: "Advanced connector topics",
-              items: [
-                "components/connectors/advanced-topics/connector-deduplication",
-                "components/connectors/advanced-topics/inbound-lifecycle",
-                "components/connectors/advanced-topics/intrinsic-functions",
-                "components/connectors/use-connectors-in-hybrid-mode",
-              ],
-            },
-            {
-              type: "category",
-              label: "Built-in connectors",
+              label: "Manage projects",
               link: {
                 type: "doc",
-                id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+                id: "components/modeler/web-modeler/process-applications/process-applications",
               },
               items: [
                 {
-                  "Agentic AI": [
+                  type: "doc",
+                  label: "Lifecycle",
+                  id: "components/modeler/web-modeler/process-applications/process-application-pipeline",
+                },
+                {
+                  type: "doc",
+                  label: "Creation",
+                  id: "components/modeler/web-modeler/process-applications/create-a-process-application",
+                },
+                {
+                  type: "doc",
+                  label: "Deployment",
+                  id: "components/modeler/web-modeler/process-applications/deploy-process-application",
+                },
+                {
+                  type: "doc",
+                  label: "Versioning",
+                  id: "components/modeler/web-modeler/process-applications/process-application-versioning",
+                },
+                {
+                  type: "doc",
+                  label: "Git Sync",
+                  id: "components/modeler/web-modeler/process-applications/git-sync",
+                },
+              ],
+            },
+            {
+              "Model business processes": [
+                {
+                  Model: [
+                    "components/modeler/web-modeler/launch-web-modeler",
+                    "components/modeler/web-modeler/modeling/model-your-first-diagram",
+                    "components/modeler/web-modeler/run-or-publish-your-process",
+                    "components/modeler/web-modeler/process-landscape-visualization",
+                    "components/modeler/web-modeler/modeling/context-pad",
+                    "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
+                    "components/modeler/web-modeler/modeling/versions",
+                    "components/modeler/web-modeler/modeling/file-download",
+                    "components/modeler/web-modeler/modeling/camunda-marketplace",
+                    {
+                      type: "doc",
+                      id: "components/modeler/web-modeler/web-modeler-settings",
+                      label: "Settings",
+                    },
                     {
                       type: "category",
-                      label: "AI Agent",
-                      link: {
-                        type: "doc",
-                        id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent",
-                      },
+                      label: "Import",
                       items: [
-                        {
-                          type: "category",
-                          label: "AI Agent Sub-process",
-                          link: {
-                            type: "doc",
-                            id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess",
-                          },
-                          items: [
-                            "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example",
-                          ],
-                        },
-                        {
-                          type: "category",
-                          label: "AI Agent Task",
-                          link: {
-                            type: "doc",
-                            id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task",
-                          },
-                          items: [
-                            "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example",
-                          ],
-                        },
-                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
-                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
+                        "components/modeler/web-modeler/modeling/import-diagram",
+                        "components/modeler/web-modeler/modeling/import-resources",
+                        "components/modeler/web-modeler/modeling/prepare-resources",
                       ],
                     },
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver",
+                    {
+                      type: "category",
+                      label: "Element templates",
+                      link: {
+                        type: "doc",
+                        id: "components/modeler/web-modeler/element-templates/manage-element-templates",
+                      },
+                      items: [
+                        "components/modeler/web-modeler/element-templates/element-template-generator",
+                        "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
+                        "components/modeler/web-modeler/element-templates/save-as-element-templates",
+                        "components/modeler/web-modeler/element-templates/best-practices",
+                      ],
+                    },
+                    {
+                      "AI features": [
+                        "components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai",
+                      ],
+                    },
+                    {
+                      "Advanced modeling": [
+                        "components/modeler/web-modeler/modeling/advanced-modeling/business-rule-task-linking",
+                        "components/modeler/web-modeler/modeling/advanced-modeling/call-activity-linking",
+                        "components/modeler/web-modeler/modeling/advanced-modeling/form-linking",
+                        "components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes",
+                        "components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files",
+                      ],
+                    },
                   ],
                 },
                 {
-                  "Amazon AWS": [
-                    "components/connectors/out-of-the-box-connectors/amazon-bedrock",
-                    "components/connectors/out-of-the-box-connectors/amazon-comprehend",
-                    "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
-                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
-                    "components/connectors/out-of-the-box-connectors/aws-lambda",
-                    "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
-                    "components/connectors/out-of-the-box-connectors/amazon-sns",
-                    "components/connectors/out-of-the-box-connectors/amazon-sqs",
-                    "components/connectors/out-of-the-box-connectors/amazon-s3",
-                    "components/connectors/out-of-the-box-connectors/amazon-textract",
+                  Collaborate: [
+                    "components/modeler/web-modeler/collaboration/collaborate-with-modes",
+                    "components/modeler/web-modeler/collaboration/design-your-process",
+                    "components/modeler/web-modeler/collaboration/implement-your-process",
+                    "components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
+                    "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
                   ],
                 },
-                "components/connectors/out-of-the-box-connectors/asana",
-                "components/connectors/out-of-the-box-connectors/automation-anywhere",
-                "components/connectors/out-of-the-box-connectors/blueprism",
-                "components/connectors/out-of-the-box-connectors/box",
-                "components/connectors/out-of-the-box-connectors/csv",
-                "components/connectors/out-of-the-box-connectors/easy-post",
-                "components/connectors/out-of-the-box-connectors/email",
-                "components/connectors/out-of-the-box-connectors/github",
-                "components/connectors/out-of-the-box-connectors/gitlab",
                 {
-                  Google: [
-                    "components/connectors/out-of-the-box-connectors/google-cloud-storage",
-                    "components/connectors/out-of-the-box-connectors/googledrive",
-                    "components/connectors/out-of-the-box-connectors/google-maps-platform",
-                    "components/connectors/out-of-the-box-connectors/google-sheets",
-                    "components/connectors/out-of-the-box-connectors/google-gemini",
+                  Validate: [
+                    "components/modeler/web-modeler/validation/play-your-process",
+                    "components/modeler/web-modeler/validation/test-scenario-files",
+                    "components/modeler/web-modeler/validation/token-simulation",
+                    "components/modeler/web-modeler/validation/task-testing",
                   ],
                 },
-                "components/connectors/protocol/graphql",
-                "components/connectors/protocol/http-webhook",
-                "components/connectors/out-of-the-box-connectors/hubspot",
-                "components/connectors/out-of-the-box-connectors/hugging-face",
-                "components/connectors/out-of-the-box-connectors/kafka",
-                "components/connectors/out-of-the-box-connectors/message-send",
-                {
-                  Microsoft: [
-                    "components/connectors/out-of-the-box-connectors/azure-open-ai",
-                    "components/connectors/out-of-the-box-connectors/azure-blob-storage",
-                    "components/connectors/out-of-the-box-connectors/microsoft-teams",
-                    "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
-                  ],
-                },
-                "components/connectors/out-of-the-box-connectors/openai",
-                "components/connectors/protocol/polling",
-                "components/connectors/out-of-the-box-connectors/rabbitmq",
-                "components/connectors/protocol/rest",
-                "components/connectors/out-of-the-box-connectors/salesforce",
-                "components/connectors/out-of-the-box-connectors/sendgrid",
-                "components/connectors/out-of-the-box-connectors/slack",
-                "components/connectors/protocol/soap",
-                "components/connectors/out-of-the-box-connectors/sql",
-                "components/connectors/out-of-the-box-connectors/twilio",
-                "components/connectors/out-of-the-box-connectors/uipath",
-                "components/connectors/out-of-the-box-connectors/embeddings-vector-db",
-                "components/connectors/out-of-the-box-connectors/whatsapp",
-              ],
-            },
-            {
-              type: "category",
-              label: "Build custom connectors",
-              link: {
-                type: "doc",
-                id: "components/connectors/custom-built-connectors/build-connector",
-              },
-              items: [
-                {
-                  type: "category",
-                  label: "Connector templates",
-                  link: {
-                    type: "doc",
-                    id: "components/connectors/custom-built-connectors/connector-templates",
-                  },
-                  items: [
-                    "components/connectors/manage-connector-templates",
-                    "components/connectors/custom-built-connectors/create-connector-from-rest",
-                  ],
-                },
-                "components/connectors/custom-built-connectors/connector-sdk",
-                "components/connectors/custom-built-connectors/host-custom-connectors",
               ],
             },
           ],
         },
+      ],
+    },
+    {
+      type: "category",
+      label: "Desktop Modeler",
+      link: {
+        type: "doc",
+        id: "components/modeler/desktop-modeler/index",
+      },
+      items: [
+        "components/modeler/desktop-modeler/install-the-modeler",
+        "components/modeler/desktop-modeler/model-your-first-diagram",
+        "components/modeler/desktop-modeler/connect-to-camunda-8",
+        "components/modeler/desktop-modeler/deploy-diagram",
+        "components/modeler/desktop-modeler/start-instance",
+        "components/modeler/desktop-modeler/process-applications",
+        "components/modeler/desktop-modeler/use-connectors",
+        "components/modeler/desktop-modeler/variables",
+        {
+          "Element templates": [
+            "components/modeler/desktop-modeler/element-templates/configuring-templates",
+            "components/modeler/desktop-modeler/element-templates/using-templates",
+          ],
+        },
+        {
+          "Additional configuration": [
+            "components/modeler/desktop-modeler/flags/flags",
+            "components/modeler/desktop-modeler/plugins/plugins",
+            "components/modeler/desktop-modeler/custom-lint-rules/custom-lint-rules",
+            "components/modeler/desktop-modeler/search-paths/search-paths",
+            "components/modeler/desktop-modeler/telemetry/telemetry",
+          ],
+        },
+        "components/modeler/desktop-modeler/settings/settings",
+        "components/modeler/desktop-modeler/task-testing",
+        "components/modeler/desktop-modeler/troubleshooting",
+      ],
+    },
+    {
+      type: "category",
+      label: "Connectors",
+      link: {
+        type: "doc",
+        id: "components/connectors/introduction-to-connectors",
+      },
+      items: [
         {
           type: "category",
-          label: "Optimize",
+          label: "How to use connectors",
           link: {
             type: "doc",
-            id: "components/optimize/what-is-optimize",
+            id: "components/connectors/use-connectors/index",
           },
           items: [
-            "components/optimize/improve-processes-with-optimize",
-            "components/optimize/userguide/collections-dashboards-reports",
-            "components/optimize/userguide/user-permissions",
-            "components/optimize/userguide/data-sources",
+            "components/connectors/use-connectors/configuring-out-of-the-box-connectors",
+            "components/connectors/connector-types",
+            "components/connectors/use-connectors/inbound",
+            "components/connectors/use-connectors/outbound",
+          ],
+        },
+        {
+          type: "category",
+          label: "Advanced connector topics",
+          items: [
+            "components/connectors/advanced-topics/connector-deduplication",
+            "components/connectors/advanced-topics/inbound-lifecycle",
+            "components/connectors/advanced-topics/intrinsic-functions",
+            "components/connectors/use-connectors-in-hybrid-mode",
+          ],
+        },
+        {
+          type: "category",
+          label: "Built-in connectors",
+          link: {
+            type: "doc",
+            id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+          },
+          items: [
             {
-              Dashboards: [
-                "components/optimize/userguide/creating-dashboards",
-                "components/optimize/userguide/edit-mode",
-                "components/optimize/userguide/view-mode",
-              ],
-            },
-            {
-              "Dashboards maintained by Camunda": [
-                "components/optimize/userguide/process-dashboards",
-                "components/optimize/userguide/instant-process-dashboards",
-              ],
-            },
-            "components/optimize/userguide/creating-reports",
-            "components/optimize/userguide/process-KPIs",
-
-            {
-              "Process analysis": [
-                "components/optimize/userguide/process-analysis/process-analysis-overview",
-                "components/optimize/userguide/process-analysis/task-analysis",
-                "components/optimize/userguide/process-analysis/branch-analysis",
-                "components/optimize/userguide/process-analysis/user-task-analytics",
+              "Agentic AI": [
                 {
-                  "Report analysis": [
-                    "components/optimize/userguide/process-analysis/report-analysis/overview",
+                  type: "category",
+                  label: "AI Agent",
+                  link: {
+                    type: "doc",
+                    id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent",
+                  },
+                  items: [
                     {
-                      "Edit mode": [
-                        "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
-                        "components/optimize/userguide/process-analysis/report-analysis/select-process-definitions",
-                        "components/optimize/userguide/process-analysis/report-analysis/define-reports",
-                        "components/optimize/userguide/process-analysis/report-analysis/measures",
-                        "components/optimize/userguide/process-analysis/report-analysis/compare-target-values",
-                        "components/optimize/userguide/process-analysis/report-analysis/process-instance-parts",
-                        "components/optimize/userguide/process-analysis/report-analysis/configure-reports",
+                      type: "category",
+                      label: "AI Agent Sub-process",
+                      link: {
+                        type: "doc",
+                        id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess",
+                      },
+                      items: [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example",
                       ],
                     },
-
-                    "components/optimize/userguide/process-analysis/report-analysis/view-mode",
+                    {
+                      type: "category",
+                      label: "AI Agent Task",
+                      link: {
+                        type: "doc",
+                        id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task",
+                      },
+                      items: [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example",
+                      ],
+                    },
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                   ],
                 },
+                "components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver",
+              ],
+            },
+            {
+              "Amazon AWS": [
+                "components/connectors/out-of-the-box-connectors/amazon-bedrock",
+                "components/connectors/out-of-the-box-connectors/amazon-comprehend",
+                "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
+                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
+                "components/connectors/out-of-the-box-connectors/aws-lambda",
+                "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
+                "components/connectors/out-of-the-box-connectors/amazon-sns",
+                "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                "components/connectors/out-of-the-box-connectors/amazon-s3",
+                "components/connectors/out-of-the-box-connectors/amazon-textract",
+              ],
+            },
+            "components/connectors/out-of-the-box-connectors/asana",
+            "components/connectors/out-of-the-box-connectors/automation-anywhere",
+            "components/connectors/out-of-the-box-connectors/blueprism",
+            "components/connectors/out-of-the-box-connectors/box",
+            "components/connectors/out-of-the-box-connectors/csv",
+            "components/connectors/out-of-the-box-connectors/easy-post",
+            "components/connectors/out-of-the-box-connectors/email",
+            "components/connectors/out-of-the-box-connectors/github",
+            "components/connectors/out-of-the-box-connectors/gitlab",
+            {
+              Google: [
+                "components/connectors/out-of-the-box-connectors/google-cloud-storage",
+                "components/connectors/out-of-the-box-connectors/googledrive",
+                "components/connectors/out-of-the-box-connectors/google-maps-platform",
+                "components/connectors/out-of-the-box-connectors/google-sheets",
+                "components/connectors/out-of-the-box-connectors/google-gemini",
+              ],
+            },
+            "components/connectors/protocol/graphql",
+            "components/connectors/protocol/http-webhook",
+            "components/connectors/out-of-the-box-connectors/hubspot",
+            "components/connectors/out-of-the-box-connectors/hugging-face",
+            "components/connectors/out-of-the-box-connectors/kafka",
+            "components/connectors/out-of-the-box-connectors/message-send",
+            {
+              Microsoft: [
+                "components/connectors/out-of-the-box-connectors/azure-open-ai",
+                "components/connectors/out-of-the-box-connectors/azure-blob-storage",
+                "components/connectors/out-of-the-box-connectors/microsoft-teams",
+                "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
+              ],
+            },
+            "components/connectors/out-of-the-box-connectors/openai",
+            "components/connectors/protocol/polling",
+            "components/connectors/out-of-the-box-connectors/rabbitmq",
+            "components/connectors/protocol/rest",
+            "components/connectors/out-of-the-box-connectors/salesforce",
+            "components/connectors/out-of-the-box-connectors/sendgrid",
+            "components/connectors/out-of-the-box-connectors/slack",
+            "components/connectors/protocol/soap",
+            "components/connectors/out-of-the-box-connectors/sql",
+            "components/connectors/out-of-the-box-connectors/twilio",
+            "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/embeddings-vector-db",
+            "components/connectors/out-of-the-box-connectors/whatsapp",
+          ],
+        },
+        {
+          type: "category",
+          label: "Build custom connectors",
+          link: {
+            type: "doc",
+            id: "components/connectors/custom-built-connectors/build-connector",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Connector templates",
+              link: {
+                type: "doc",
+                id: "components/connectors/custom-built-connectors/connector-templates",
+              },
+              items: [
+                "components/connectors/manage-connector-templates",
+                "components/connectors/custom-built-connectors/create-connector-from-rest",
+              ],
+            },
+            "components/connectors/custom-built-connectors/connector-sdk",
+            "components/connectors/custom-built-connectors/host-custom-connectors",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Optimize",
+      link: {
+        type: "doc",
+        id: "components/optimize/what-is-optimize",
+      },
+      items: [
+        "components/optimize/improve-processes-with-optimize",
+        "components/optimize/userguide/collections-dashboards-reports",
+        "components/optimize/userguide/user-permissions",
+        "components/optimize/userguide/data-sources",
+        {
+          Dashboards: [
+            "components/optimize/userguide/creating-dashboards",
+            "components/optimize/userguide/edit-mode",
+            "components/optimize/userguide/view-mode",
+          ],
+        },
+        {
+          "Dashboards maintained by Camunda": [
+            "components/optimize/userguide/process-dashboards",
+            "components/optimize/userguide/instant-process-dashboards",
+          ],
+        },
+        "components/optimize/userguide/creating-reports",
+        "components/optimize/userguide/process-KPIs",
 
+        {
+          "Process analysis": [
+            "components/optimize/userguide/process-analysis/process-analysis-overview",
+            "components/optimize/userguide/process-analysis/task-analysis",
+            "components/optimize/userguide/process-analysis/branch-analysis",
+            "components/optimize/userguide/process-analysis/user-task-analytics",
+            {
+              "Report analysis": [
+                "components/optimize/userguide/process-analysis/report-analysis/overview",
                 {
-                  Filters: [
-                    "components/optimize/userguide/process-analysis/filters",
-                    "components/optimize/userguide/process-analysis/metadata-filters",
-                    "components/optimize/userguide/process-analysis/instance-state-filters",
-                    "components/optimize/userguide/process-analysis/flow-node-filters",
-                    "components/optimize/userguide/process-analysis/process-instance-filters",
-                    "components/optimize/userguide/process-analysis/variable-filters",
+                  "Edit mode": [
+                    "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
+                    "components/optimize/userguide/process-analysis/report-analysis/select-process-definitions",
+                    "components/optimize/userguide/process-analysis/report-analysis/define-reports",
+                    "components/optimize/userguide/process-analysis/report-analysis/measures",
+                    "components/optimize/userguide/process-analysis/report-analysis/compare-target-values",
+                    "components/optimize/userguide/process-analysis/report-analysis/process-instance-parts",
+                    "components/optimize/userguide/process-analysis/report-analysis/configure-reports",
                   ],
                 },
+
+                "components/optimize/userguide/process-analysis/report-analysis/view-mode",
               ],
             },
 
             {
-              "Additional features": [
-                "components/optimize/userguide/additional-features/alerts",
-                "components/optimize/userguide/additional-features/export-import",
-                "components/optimize/userguide/additional-features/variable-labeling",
-                "components/optimize/userguide/additional-features/process-variants-comparison",
-                "components/optimize/userguide/additional-features/ml-dataset",
+              Filters: [
+                "components/optimize/userguide/process-analysis/filters",
+                "components/optimize/userguide/process-analysis/metadata-filters",
+                "components/optimize/userguide/process-analysis/instance-state-filters",
+                "components/optimize/userguide/process-analysis/flow-node-filters",
+                "components/optimize/userguide/process-analysis/process-instance-filters",
+                "components/optimize/userguide/process-analysis/variable-filters",
               ],
             },
+          ],
+        },
+
+        {
+          "Additional features": [
+            "components/optimize/userguide/additional-features/alerts",
+            "components/optimize/userguide/additional-features/export-import",
+            "components/optimize/userguide/additional-features/variable-labeling",
+            "components/optimize/userguide/additional-features/process-variants-comparison",
+            "components/optimize/userguide/additional-features/ml-dataset",
           ],
         },
       ],
