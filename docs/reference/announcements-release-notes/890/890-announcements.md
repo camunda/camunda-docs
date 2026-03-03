@@ -377,7 +377,7 @@ See [Migrate extraConfiguration from 8.8 to 8.9](/self-managed/deployment/helm/c
 
 Previously, the Elasticsearch subchart was enabled by default. To use OpenSearch, you would need to disable Elasticsearch and enable OpenSearch.
 
-With the inclusion of RDBMS as a secondary storage option, there is no longer a default secondary storage type. Setting `orchestration.data.secondaryStorage.type` explicitly in your `values.yaml` is recommended. The chart can auto-detect the type from `global.elasticsearch.enabled` or `global.opensearch.enabled`, but Helm will fail with a validation error if no secondary storage is configured at all.
+With the inclusion of RDBMS as a secondary storage option and the [deprecation of Bitnami subcharts](#helm-chart-bitnami-subcharts-deprecated) (including the bundled Elasticsearch subchart), there is no longer a default secondary storage type. Setting `orchestration.data.secondaryStorage.type` explicitly in your `values.yaml` is recommended. The chart can auto-detect the type from `global.elasticsearch.enabled` or `global.opensearch.enabled`, but Helm will fail with a validation error if no secondary storage is configured at all. Alternatively, set `global.noSecondaryStorage: true` to run in engine-only mode without secondary storage.
 
 :::note
 To continue using Elasticsearch provided as a subchart, you must add `global.elasticsearch.enabled: true`, `elasticsearch.enabled: true`, and `orchestration.data.secondaryStorage.type: elasticsearch` to your `values.yaml`.
@@ -411,7 +411,7 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 
 #### Helm chart `values.yaml` options for RDBMS
 
-Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file, providing a first-class alternative to Elasticsearch and OpenSearch. Configure database connections directly under `orchestration.data.secondaryStorage.rdbms`, including JDBC URL and authentication.
+Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file, providing a first-class alternative to Elasticsearch and OpenSearch. Configure database connections directly under `orchestration.data.secondaryStorage.rdbms`, including JDBC URL and authentication. See [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md).
 
 - Supports all databases in the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md): PostgreSQL, Oracle, MariaDB, MySQL, Microsoft SQL Server, H2, and Amazon Aurora.
 - Advanced authentication and custom JDBC drivers can be configured via init containers or mounted volumes.
@@ -516,7 +516,7 @@ Affected paths:
 - `global.opensearch.tls.existingSecret` → `global.opensearch.tls.secret.existingSecret`
 - `console.tls.existingSecret` → `console.tls.secret.existingSecret`
 
-The legacy keys still work in 8.9 but produce deprecation warnings and will be removed in a future version.
+The legacy keys still work in 8.9 but produce deprecation warnings and will be removed in a future version. See [Secret management](/self-managed/deployment/helm/configure/secret-management.md).
 
 </div>
 </div>
