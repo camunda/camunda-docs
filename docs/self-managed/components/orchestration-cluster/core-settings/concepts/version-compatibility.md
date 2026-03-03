@@ -21,13 +21,13 @@ Camunda 8 versions follow the `MAJOR.MINOR.PATCH` format (for example, `8.8.3`).
 
 ## Supported upgrade paths
 
-| Scenario                            | Example               | Compatibility                                              |
-| ----------------------------------- | --------------------- | ---------------------------------------------------------- |
-| Patch upgrade                       | 8.8.1 → 8.8.3         | Compatible                                                 |
-| Minor upgrade (single step)         | 8.7.5 → 8.8.3         | Compatible                                                 |
-| Minor upgrade (skipping a minor)    | 8.6.9 → 8.8.3         | Incompatible                                               |
-| Patch downgrade                     | 8.8.3 → 8.8.1         | Incompatible (broker); secondary storage skips (see below) |
-| Minor downgrade                     | 8.8.3 → 8.7.5         | Incompatible (broker); secondary storage skips (see below) |
+| Scenario                            | Example              | Compatibility                                              |
+| ----------------------------------- | -------------------- | ---------------------------------------------------------- |
+| Patch upgrade                       | 8.8.1 → 8.8.3        | Compatible                                                 |
+| Minor upgrade (single step)         | 8.7.5 → 8.8.3        | Compatible                                                 |
+| Minor upgrade (skipping a minor)    | 8.6.9 → 8.8.3        | Incompatible                                               |
+| Patch downgrade                     | 8.8.3 → 8.8.1        | Incompatible (broker); secondary storage skips (see below) |
+| Minor downgrade                     | 8.8.3 → 8.7.5        | Incompatible (broker); secondary storage skips (see below) |
 | Major change (upgrade or downgrade) | 8.x ↔ 9.x            | Incompatible                                               |
 | Alpha build involved                | 8.8.0-alpha1 ↔ 8.8.0 | Incompatible                                               |
 
@@ -102,7 +102,7 @@ Always upgrade between stable releases.
 
 ## Recommended operational steps
 
-1. Before upgrading to a new minor (for example, `8.7.x → 8.8.y`), update to the **latest patch** of your current minor (for example, `8.7.latest`) to ensure schema version metadata exists.
+1. Before upgrading to a new minor (for example, `8.7.x → 8.8.y`), upgrade to the **latest patch** of your current minor (for example, `8.7.latest`) to ensure schema version metadata exists.
 1. Avoid skipping minor versions; perform sequential minor upgrades.
 1. Do not include pre-release builds in production upgrade chains.
 1. Investigate any broker health status showing `brokerStatus: DOWN` after an upgrade. This typically indicates a rejected upgrade path.
