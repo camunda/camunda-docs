@@ -65,14 +65,8 @@ Take the following steps:
 When using Camunda Forms, any submit button present in the form schema is hidden so we can control when a user can complete a task.
 :::
 
-:::tip Improvements for linked forms
-With Camunda 8.4, we improved the way you can link forms to BPMN diagrams in Web Modeler:
-
-- Diagrams will always have the latest form updates.
-- No need to manually re-link forms or use a JSON configuration.
-- Linked Camunda Forms must now be deployed explicitly.
-
-See the [form linking reference](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#camunda-form-linked) for more details.
+:::tip Linked Camunda Forms must be explicitly deployed.
+With Camunda 8.9, linked Camunda Forms are no longer auto-deployed. This change provides greater control over what is deployed and when, enabling more precise management of changes and updates across environments.
 :::
 
 ## Deploy a linked form
