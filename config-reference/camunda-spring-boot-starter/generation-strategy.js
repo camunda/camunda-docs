@@ -28,11 +28,13 @@ const getAdditionalProperties = (version) => {
   }
   // add camunda.client.worker.override properties to the metadata to ensure they are included in the docs
   const currentProperties = getMetadata(version).properties;
+  const placeholderName =
+    version === "8.8" ? "job-type" : "job-type|worker-name";
   const group = {
     name: "camunda.client.worker.override",
     sourceType:
       "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
-    placeHolderName: "job-type",
+    placeHolderName: placeholderName,
     properties: currentProperties
       .filter(
         (property) =>
@@ -43,7 +45,7 @@ const getAdditionalProperties = (version) => {
         return {
           name: property.name.replace(
             "camunda.client.worker.defaults.",
-            "camunda.client.worker.override.<job-type>."
+            `camunda.client.worker.override.<${placeholderName}>.`
           ),
           type: property.type,
           description: property.description,
