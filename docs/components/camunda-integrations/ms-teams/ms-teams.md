@@ -12,6 +12,10 @@ import { msTeamsCards } from '../../../self-managed/react-components/\_ms-teams-
 
 Bring Camunda's business process management capabilities directly into Microsoft Teams.
 
+:::note
+The Microsoft Teams integration is released as an [early access](/components/early-access/overview.md) alpha feature to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
+:::
+
 ## About
 
 With **Camunda for Microsoft Teams**, you can manage processes, complete tasks, monitor incidents, and receive notifications without leaving your collaboration environment.
