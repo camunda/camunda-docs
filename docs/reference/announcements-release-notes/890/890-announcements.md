@@ -411,7 +411,7 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 
 #### Helm chart `values.yaml` options for RDBMS
 
-Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file, providing a first-class alternative to Elasticsearch and OpenSearch. Configure database connections directly under `orchestration.data.secondaryStorage.rdbms`, including JDBC URL, authentication, flush intervals, and history cleanup settings.
+Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file, providing a first-class alternative to Elasticsearch and OpenSearch. Configure database connections directly under `orchestration.data.secondaryStorage.rdbms`, including JDBC URL and authentication.
 
 - Supports all databases in the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md): PostgreSQL, Oracle, MariaDB, MySQL, Microsoft SQL Server, H2, and Amazon Aurora.
 - Advanced authentication and custom JDBC drivers can be configured via init containers or mounted volumes.
@@ -532,6 +532,39 @@ The legacy keys still work in 8.9 but produce deprecation warnings and will be r
 The four Bitnami-based subcharts (`identityPostgresql`, `identityKeycloak`, `webModelerPostgresql`, `elasticsearch`) are deprecated in Camunda 8.9 and will be removed in 8.10. If any of these subcharts are enabled, Helm prints a deprecation warning during installation or upgrade.
 
 Migrate to externally managed services before upgrading to 8.10.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: `global.elasticsearch` and `global.opensearch` deprecated
+
+The `global.elasticsearch.*` and `global.opensearch.*` configuration trees are deprecated in 8.9 and will be removed in 8.10. These options are not truly global — only the Orchestration and Optimize components use them.
+
+Migrate to the new component-specific configuration:
+
+- **Orchestration:** `orchestration.data.secondaryStorage.elasticsearch.*` / `orchestration.data.secondaryStorage.opensearch.*`
+- **Optimize:** `optimize.database.elasticsearch.*` / `optimize.database.opensearch.*`
+
+The legacy keys still work in 8.9 with deprecation warnings. Existing deployments will continue to function without changes.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Identity profile renamed to admin
+
+The orchestration profile `orchestration.profiles.identity` is deprecated and renamed to `orchestration.profiles.admin`. If your `values.yaml` uses the `identity` profile key, the chart automatically migrates it to `admin` and prints a deprecation warning. Update your values file to use `orchestration.profiles.admin` directly.
 
 </div>
 </div>

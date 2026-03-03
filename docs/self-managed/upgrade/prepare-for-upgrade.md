@@ -66,6 +66,16 @@ This section lists actions you must complete or review before upgrading to Camun
     <td><p>The Bitnami-based subcharts (`identityPostgresql`, `identityKeycloak`, `webModelerPostgresql`, `elasticsearch`) are deprecated in 8.9 and will be removed in 8.10. Plan migration to externally managed services.</p></td>
     <td><span className="label-highlight">Recommended</span></td>
 </tr>
+<tr>
+    <td>Helm chart: ES/OS global config</td>
+    <td><p>`global.elasticsearch.*` and `global.opensearch.*` are deprecated in 8.9 and will be removed in 8.10. Migrate to `orchestration.data.secondaryStorage.elasticsearch/opensearch.*` and `optimize.database.elasticsearch/opensearch.*`. Legacy keys still work in 8.9.</p></td>
+    <td><span className="label-highlight">Recommended</span></td>
+</tr>
+<tr>
+    <td>Helm chart: Orchestration profile</td>
+    <td><p>`orchestration.profiles.identity` is deprecated and renamed to `orchestration.profiles.admin`. The chart auto-migrates the old key with a deprecation warning. Update your values file to use the new key.</p></td>
+    <td><span className="label-highlight">Recommended</span></td>
+</tr>
 </table>
 
 :::info
