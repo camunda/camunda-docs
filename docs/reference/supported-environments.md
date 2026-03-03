@@ -61,7 +61,7 @@ The following are tested and supported deployment options for Kubernetes, Docker
   - [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
   - [Google GKE](/self-managed/deployment/helm/cloud-providers/gcp/google-gke.md)
 - [Red Hat OpenShift](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md)
-- [Docker](/self-managed/deployment/docker/docker.md) (`linux/amd64`)
+- [Docker](/self-managed/deployment/docker/docker.md) (`linux/amd64`, `linux/arm64`)
 - [Manual](/self-managed/deployment/manual/install.md)
 
 :::note Helm chart compatibility

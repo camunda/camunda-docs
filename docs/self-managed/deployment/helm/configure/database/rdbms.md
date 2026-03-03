@@ -13,6 +13,12 @@ This page provides:
 - **[Quick example](#example-usage)**: Minimal YAML to get started.
 - Links to detailed guides for specific tasks.
 
+Related guides:
+
+- [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
+- [Install with RDBMS as secondary storage](/self-managed/deployment/helm/install/helm-with-rdbms.md)
+- [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
+
 ## Prerequisites
 
 Provide a supported relational database that is reachable by the Camunda components.

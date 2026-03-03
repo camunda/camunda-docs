@@ -13,6 +13,12 @@ keywords:
 
 These release notes identify the new features included in 8.7, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
 
+## 8.7.24
+
+### Spring Zeebe SDK - Spring Boot 4.0 support
+
+Starting with the `8.7.24` patch release, a dedicated starter artifact is available that provides [Spring Boot 4.0 support](../../../apis-tools/spring-zeebe-sdk/getting-started.md#spring-boot-40-support).
+
 ## 8.7.17
 
 ### Spring Zeebe SDK - Spring Boot 3.5 support

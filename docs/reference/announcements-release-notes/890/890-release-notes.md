@@ -243,25 +243,17 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 
 <p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
 
-#### Production installation guides
+### Helm chart deployment
 
-<!-- https://github.com/camunda/product-hub/issues/3026 -->
-<!-- https://github.com/camunda/product-hub/issues/2740 -->
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm chart">Helm chart</span></div>
 
-New RDBMS production installation guides for Camunda 8 are available:
+#### Default REST port unified to 8080
 
-- Helm: Kubernetes-based orchestration cluster deployment via Helm, using RDBMS secondary storage.
-- Manual: Deploy and manage Camunda 8 using relational databases in production environments.
+The Orchestration component's default HTTP port in the Helm chart has changed from 8090 to 8080 (`orchestration.service.httpPort`), aligning with the Orchestration Cluster's default configuration.
 
-<p class="link-arrow">[RDBMS Helm deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)</p>
+#### Authorization initialization via Helm
 
-#### Manual installation supports RDBMS secondary storage
-
-<!-- https://github.com/camunda/product-hub/issues/2747 -->
-
-Camunda 8 Orchestration Clusters can now be installed manually (VM/bare metal/Java application) with full support for RDBMS (H2, PostgreSQL, Oracle, MariaDB) as secondary storage.
-
-<p class="link-arrow">[Manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md)</p>
+You can now initialize authorization rules directly through `values.yaml`, reducing manual post-installation setup for access control configuration.
 
 ## 8.9.0-alpha3
 
@@ -469,6 +461,12 @@ With this update, administrators can:
 - Enable advanced authentication and custom JDBC drivers.
 
 This allows enterprises to run Camunda 8 on familiar, enterprise-managed RDBMS infrastructure aligned with existing security, backup, and compliance requirements.
+
+#### No default secondary storage in Helm
+
+With RDBMS support, the Helm chart no longer defaults to Elasticsearch as secondary storage. You must now explicitly set `orchestration.data.secondaryStorage.type` to `elasticsearch`, `opensearch`, or `rdbms`. This also introduces `global.noSecondaryStorage` for engine-only deployments without any secondary storage.
+
+<p class="link-arrow">[Configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md)</p>
 
 ## 8.9.0-alpha2
 
