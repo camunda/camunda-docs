@@ -352,6 +352,27 @@ To continue using Elasticsearch provided as a subchart, you must add `global.ela
 </div>
 <div className="release-announcement-content">
 
+#### Secure connectivity (AWS PrivateLink) for SaaS
+
+Camunda 8.9 introduces Secure connectivity for AWS-hosted Orchestration clusters in Camunda 8 SaaS.
+
+Secure connectivity enables private inbound access from your AWS VPC to your cluster using AWS PrivateLink, without routing traffic over the public internet.
+
+- Applies per cluster.
+- Supports inbound connectivity only.
+- Public connectivity remains enabled.
+
+<p className="link-arrow">[Secure connectivity (AWS PrivateLink)](../../../components/saas/secure-connectivity/index.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
 #### Cluster variables supported
 
 Camunda 8.9 introduces cluster variables, letting you centrally manage configuration across your cluster.

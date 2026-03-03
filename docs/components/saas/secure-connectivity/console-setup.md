@@ -1,25 +1,26 @@
 ---
 id: secure-connectivity-console-setup
-title: Enable Secure connectivity for a cluster
+title: Enable secure connectivity
 description: Configure AWS PrivateLink connectivity for a Camunda 8 SaaS Orchestration cluster in Console.
 ---
 
-# Enable Secure connectivity for a cluster
+# Enable secure connectivity for a cluster
 
-This guide explains how to enable Secure connectivity (AWS PrivateLink) for an AWS-hosted Camunda 8 SaaS Orchestration cluster.
+This guide explains how to enable secure connectivity (AWS PrivateLink) for an AWS-hosted Camunda 8 SaaS Orchestration cluster.
 
 Secure connectivity must be enabled per cluster.
 
-For a conceptual overview, see [Secure connectivity (AWS PrivateLink)](/index.md).
+For a conceptual overview, see [secure connectivity (AWS PrivateLink)](./index.md).
 
 ## Prerequisites
 
-Before enabling Secure connectivity:
+Before enabling secure connectivity:
 
 - The cluster must be hosted in AWS.
 - The cluster must be version 8.8 or later.
 - You must have sufficient permissions to manage clusters in Console.
 - You must know the AWS account IDs or ARNs that should be allowed to connect.
+- Your organization must be on an Enterprise plan.
 
 On the AWS side, you must have:
 
@@ -29,9 +30,7 @@ On the AWS side, you must have:
 
 For AWS configuration details, see the AWS PrivateLink documentation.
 
-<!-- TODO: Confirm whether Enterprise plan restriction should be stated here. -->
-
-## Enable Secure connectivity for a cluster
+## Enable secure connectivity for a cluster
 
 1. Navigate to **Console → Clusters**.
 2. Select the cluster.
@@ -122,7 +121,7 @@ For each connection, Console displays:
 
 New endpoint connections appear in this section after they are created in AWS.
 
-## Deactivate Secure connectivity
+## Deactivate secure connectivity
 
 In the **Private networking** tab, select **Deactivate service** to remove the VPC endpoint service for the cluster.
 
@@ -154,4 +153,4 @@ You can still view the **Service details** and **Endpoint connections** sections
 
 You can create up to 10 VPC endpoint connections per cluster.
 
-For organization-wide limits and adjustments, see [Secure connectivity (AWS PrivateLink)](/index.md).
+For organization-wide limits and adjustments, see [secure connectivity (AWS PrivateLink)](./index.md).

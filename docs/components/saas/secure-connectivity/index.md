@@ -14,14 +14,13 @@ Secure connectivity:
 
 - Applies per cluster.
 - Is available only for AWS-hosted Orchestration clusters.
-- Supports inbound connectivity only.
+- Supports inbound connectivity only. It enables private access from your AWS VPC to Camunda. It does not provide outbound private connectivity from Camunda to your services.
 - Adds a private connectivity path. Public endpoints remain enabled in 8.9.
-
-<!-- TODO: Confirm whether Secure connectivity is Enterprise-only at GA and add availability statement here. -->
+- Is available to Enterprise customers.
 
 ## How it works
 
-When you enable Secure connectivity for a cluster:
+When you enable secure connectivity for a cluster:
 
 - Camunda provisions a VPC endpoint service for that cluster in the cluster’s AWS region.
 - You create one or more VPC interface endpoints in your AWS account that connect to the endpoint service.
@@ -35,32 +34,28 @@ Secure connectivity relies on standard AWS PrivateLink functionality. For an ove
 
 At a high level:
 
-1. Enable Secure connectivity for a cluster in Console.
+1. Enable secure connectivity for a cluster in Console.
 2. Review the VPC endpoint service details provided by Camunda.
 3. Create one or more VPC interface endpoints in your AWS account.
 4. Configure appropriate security groups and optional private DNS.
 5. Test connectivity from resources inside your VPC.
 
-Camunda owns and operates:
+Camunda owns and operates the VPC endpoint service and the associated cluster-side infrastructure.
 
-- The VPC endpoint service.
-- The cluster-side load balancer and ingress configuration.
+You own and manage resources in your AWS VPC, including:
 
-You own and manage:
-
-- Your AWS VPC.
 - VPC interface endpoints.
 - Security groups.
 - Routing and DNS configuration.
 - AWS permissions and quotas.
 
-For step-by-step Console instructions, see [Enable Secure connectivity for a cluster](/console-setup.md).
+For step-by-step Console instructions, see [Enable secure connectivity for a cluster](./console-setup.md).
 
 ## Security and isolation
 
 Secure connectivity restricts private access to your cluster using AWS PrivateLink and an allowlist of AWS principals.
 
-When enabling Secure connectivity, you define one or more allowed AWS principals (AWS account IDs or ARNs). Only those principals can create VPC endpoints that connect to your cluster’s endpoint service.
+When enabling secure connectivity, you define one or more allowed AWS principals (AWS account IDs or ARNs). Only those principals can create VPC endpoints that connect to your cluster’s endpoint service.
 
 Requests from AWS accounts that are not explicitly allowed cannot establish a PrivateLink connection.
 
@@ -95,7 +90,7 @@ In 8.9, the following combinations are supported:
 
 Private-only connectivity is not supported in 8.9.
 
-## What Secure connectivity does not change
+## What secure connectivity does not change
 
 Secure connectivity:
 

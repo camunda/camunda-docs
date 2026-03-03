@@ -1103,6 +1103,18 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Secure connectivity (AWS PrivateLink)",
+          link: {
+            type: "doc",
+            id: "components/saas/secure-connectivity/secure-connectivity-AWS",
+          },
+          items: [
+            "components/saas/secure-connectivity/secure-connectivity-console-setup",
+          ],
+        },
+
+        {
+          type: "category",
           label: "Encryption",
           link: {
             type: "doc",
@@ -1116,6 +1128,7 @@ module.exports = {
             "components/saas/byok/faq-and-troubleshooting",
           ],
         },
+
         "components/saas/backups",
         "components/saas/auto-updates",
         "components/saas/data-retention",
