@@ -14,7 +14,7 @@ In a SaaS environment, user management is handled through [Camunda 8 Console](/c
 
 For Self-Managed deployments, user management depends on your authentication setup:
 
-- When using **basic authentication**, users are managed through Identity. This involves creating, updating, and deleting them directly in your cluster.
+- When using **basic authentication**, users are managed through Admin. This involves creating, updating, and deleting them directly in your cluster.
 - If you have configured an external [OpenID Connect (OIDC) provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md), user management is handled by that provider.
 
 The following sections describe how to manage users in a Self-Managed environment with **basic authentication** enabled.

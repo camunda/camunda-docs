@@ -1,22 +1,28 @@
 ---
 id: admin-introduction
 title: Introduction to Admin
-description: "Admin is the cluster-level admin UI for managing identity and access control for an orchestration cluster."
+description: "Admin is the cluster-level admin UI for managing authentication, authorization, and administration for an orchestration cluster."
 ---
 
-Use the integrated [Orchestration Cluster](../orchestration-cluster.md) Admin (the cluster-level admin UI hosting Identity and other administrative features, previously known as Orchestration Cluster Identity) to manage Camunda 8 authentication, authorization, and entities.
+Use the integrated [Orchestration Cluster](../orchestration-cluster.md) Admin component to manage Camunda 8 authentication, authorization, and cluster administration.
+
+:::note
+Admin was previously named "Identity" in Camunda 8.8. The component was renamed in 8.9 to reflect its expanded scope and to avoid confusion with [Management Identity](/self-managed/components/management-identity/overview.md).
+:::
 
 ## About Admin
 
-Admin provides a unified and secure way to control access to all Orchestration Cluster components, including Zeebe, Operate, Tasklist, and APIs.
+Admin provides a unified and secure way to control access and administer all Orchestration Cluster components, including Zeebe, Operate, Tasklist, and APIs.
+
+<!-- TODO: Document additional Admin features beyond identity management when available -->
 
 Admin includes the following features:
 
-| Feature                   | Description                                                                                                                                                    |
-| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Unified access management | Authentication and authorization are handled consistently across all Orchestration Cluster components and APIs.                                                |
+| Feature                   | Description                                                                                                                                                   |
+| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Unified access management | Authentication and authorization are handled consistently across all Orchestration Cluster components and APIs.                                               |
 | Flexible authentication   | Admin supports multiple authentication modes, including no authentication, Basic authentication, and OpenID Connect (OIDC), depending on the deployment type. |
-| Tenant management         | Multi-tenancy is managed directly within the Orchestration Cluster, allowing for clear separation of resources.                                                |
+| Tenant management         | Multi-tenancy is managed directly within the Orchestration Cluster, allowing for clear separation of resources.                                               |
 
 For details about authorization concepts, resources, and configuration, see
 [Orchestration Cluster authorizations](../concepts/access-control/authorizations.md).

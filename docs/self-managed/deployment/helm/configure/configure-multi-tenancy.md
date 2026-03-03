@@ -50,9 +50,9 @@ Multi-tenancy behavior differs depending on the identity component:
 
 ### Parameters
 
-| values.yaml option                          | type    | default | description                                                                          |
-| ------------------------------------------- | ------- | ------- | ------------------------------------------------------------------------------------ |
-| `global.multitenancy.enabled`               | boolean | `false` | (Management Identity) Enable multi-tenancy globally.                                 |
+| values.yaml option                          | type    | default | description                                                                       |
+| ------------------------------------------- | ------- | ------- | --------------------------------------------------------------------------------- |
+| `global.multitenancy.enabled`               | boolean | `false` | (Management Identity) Enable multi-tenancy globally.                              |
 | `orchestration.multitenancy.checks.enabled` | boolean | `false` | (Orchestration Cluster Admin) Enforce tenant validation across requests.          |
 | `orchestration.multitenancy.api.enabled`    | boolean | `true`  | (Orchestration Cluster Admin) Enable the multi-tenancy API for tenant management. |
 
