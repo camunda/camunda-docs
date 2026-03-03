@@ -333,6 +333,46 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 <div className="release-announcement-content">
 
+#### Helm chart: `extraConfiguration` format changed from map to ordered list
+
+The `<componentName>.extraConfiguration` Helm value has changed from a **map** (key-value pairs) to an **ordered list** of `file`/`content` entries. This ensures configuration entries are always applied in the order you define them, since maps in Go templates do not guarantee iteration order.
+
+The old map format is **not supported** in Camunda 8.9. If you upgrade without converting to the new list format, Helm will fail during template rendering.
+
+**Before (8.8 — map):**
+
+```yaml
+identity:
+  extraConfiguration:
+    custom-logging.yaml: |
+      logging:
+        level:
+          ROOT: DEBUG
+```
+
+**After (8.9 — ordered list):**
+
+```yaml
+identity:
+  extraConfiguration:
+    - file: custom-logging.yaml
+      content: |
+        logging:
+          level:
+            ROOT: DEBUG
+```
+
+See [Migrate extraConfiguration from 8.8 to 8.9](/self-managed/deployment/helm/configure/application-configs.md#migrate-extraconfiguration-from-88-to-89) for detailed migration steps.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Elasticsearch subchart no longer enabled by default
 
 Previously, the Elasticsearch subchart was enabled by default. To use OpenSearch, you would need to disable Elasticsearch and enable OpenSearch.
@@ -512,7 +552,7 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 
 Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.
 
-This enhancement aligns Web Modeler’s database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
+This enhancement aligns Web Modeler's database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
 
 :::info
 To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-rdbms-support-h2-mariadb-mysql).

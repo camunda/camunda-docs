@@ -1,11 +1,15 @@
 ---
 id: application-configs
-sidebar_label: Components
-title: Configure Helm chart components
+sidebar_label: Configure component configuration
+title: Configure component configuration
 description: "Learn how to configure individual Camunda components in Helm charts."
 ---
 
-This page explains how to configure Camunda components in Helm charts. You can define options in `values.yaml` and provide custom files for additional configuration.
+This page explains how to configure Camunda components in Helm charts.
+
+For most use cases, use `<componentName>.extraConfiguration` to add or override properties while keeping the chart-provided defaults. Use `<componentName>.configuration` only when you intentionally want to replace the entire default application configuration file.
+
+For the complete list of configuration options per component, see the [Self-Managed Components documentation](../../../components/orchestration-cluster/overview.md) (this is where each component documents its supported application configuration).
 
 ## Prerequisites
 
@@ -17,21 +21,69 @@ This page explains how to configure Camunda components in Helm charts. You can d
 
 ### Parameters
 
-| Key                                  | Type   | Description                                                                                                                                                                                                            |
-| ------------------------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<componentName>.configuration`      | string | Full application configuration content (for example, the contents of `application.yaml`).                                                                                                                              |
-| `<componentName>.extraConfiguration` | list   | Additional configuration entries. Each entry has a `file` (filename) and `content` (file contents). Behavior depends on the component — see [how it works per component](#how-extraConfiguration-works-per-component). |
+| Key                                  | Type   | Description                                                                                                                                                                                                                                     |
+| ------------------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<componentName>.extraConfiguration` | list   | **Recommended:** Additional configuration entries layered on top of the default configuration. Each entry has a `file` (filename) and `content` (file contents). See [how it works per component](#how-extraconfiguration-works-per-component). |
+| `<componentName>.configuration`      | string | **Advanced:** Full application configuration file content (for example, the full contents of `application.yaml`). Using this **replaces** the component's default application configuration.                                                    |
 
 ### Configuration options
 
 Two Helm values are available for component configuration:
 
-- `<componentName>.configuration`
 - `<componentName>.extraConfiguration`
+- `<componentName>.configuration`
+
+:::tip Which should I use?
+
+- Use `<componentName>.extraConfiguration`. It keeps the chart-provided defaults intact and lets you add/override only the keys you need.
+- Use `<componentName>.configuration` only if you intentionally want to take full control of the application's configuration file. It **overwrites** the default config and can affect startup behavior and upgrades.
+  :::
+
+#### componentName.extraConfiguration
+
+Use `<componentName>.extraConfiguration` to add or override configuration **without replacing** the component's default configuration. This option accepts an **ordered list** of entries, where each entry specifies a `file` name and its `content`. Entries are processed in order, so **later entries override earlier ones** for duplicate keys — mimicking Spring Boot's `spring.config.import` semantics.
+
+:::info Recommended default
+Start with `<componentName>.extraConfiguration` whenever possible. It is safer for upgrades because the Helm chart can continue to evolve its defaults while you only maintain the deltas you actually care about.
+:::
+
+```yaml
+identity:
+  extraConfiguration:
+    - file: logging-debug.yaml
+      content: |
+        logging:
+          level:
+            ROOT: DEBUG
+            io.camunda.identity: DEBUG
+    - file: logging-production.yaml
+      content: |
+        logging:
+          level:
+            ROOT: INFO
+            io.camunda.identity: INFO
+```
+
+In this example, `logging-production.yaml` is applied after `logging-debug.yaml`, so the final effective log level is `INFO` (last writer wins).
+
+:::note Why an ordered list?
+Previous versions of the Helm chart used a map (key-value pairs) for `extraConfiguration`. Maps in Go (and Helm) do not guarantee iteration order. Since configuration layering is order-dependent, `extraConfiguration` now uses an array to ensure entries are always applied in the order you define them.
+:::
 
 #### componentName.configuration
 
 Use `<componentName>.configuration` to define an application configuration file directly in `values.yaml`.
+
+:::caution Advanced option (overwrites defaults)
+When you set `<componentName>.configuration`, the Helm chart renders **your content as the entire application configuration file** for that component.
+
+This means:
+
+- You are responsible for including any settings that the chart normally provides by default.
+- During upgrades, configuration format or default changes may require you to update your configuration before the component can start.
+
+Prefer `<componentName>.extraConfiguration` unless you specifically need to replace the full file.
+:::
 
 For example, `application.yaml`:
 
@@ -60,36 +112,14 @@ orchestration:
             number-of-replicas: "1"
 ```
 
-#### componentName.extraConfiguration
-
-Use `<componentName>.extraConfiguration` to provide additional configuration overrides. This option accepts an **ordered list** of entries, where each entry specifies a `file` name and its `content`. Entries are processed in order, so **later entries override earlier ones** for duplicate keys — mimicking Spring Boot's `spring.config.import` semantics.
-
-```yaml
-identity:
-  extraConfiguration:
-    - file: logging-debug.yaml
-      content: |
-        logging:
-          level:
-            ROOT: DEBUG
-            io.camunda.identity: DEBUG
-    - file: logging-production.yaml
-      content: |
-        logging:
-          level:
-            ROOT: INFO
-            io.camunda.identity: INFO
-```
-
-In this example, `logging-production.yaml` is applied after `logging-debug.yaml`, so the final effective log level is `INFO` (last writer wins).
-
-:::note Why an ordered list?
-Previous versions of the Helm chart used a map (key-value pairs) for `extraConfiguration`. Maps in Go (and Helm) do not guarantee iteration order. Since configuration layering is order-dependent, `extraConfiguration` now uses an array to ensure entries are always applied in the order you define them.
-:::
-
 ### Default properties
 
-The `helm template` command generates the application's default configuration. Keep the original `values.yaml` unchanged and maintain a separate file with your custom settings. For details, see [Creating your own values files](self-managed/deployment/helm/chart-parameters.md#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
+The `helm template` command can show you the application's default configuration as rendered by the chart.
+
+- Use this output as a **reference** to discover the right keys and defaults.
+- Only copy the full content into `<componentName>.configuration` if you intentionally want to **replace** the default config (advanced).
+
+Keep the original `values.yaml` unchanged and maintain a separate file with your custom settings. For details, see [Creating your own values files](self-managed/deployment/helm/chart-parameters.md#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
 
 ```bash
 helm template <your-release-name> \
@@ -98,7 +128,10 @@ helm template <your-release-name> \
     --show-only templates/operate/configmap.yaml
 ```
 
-The `--show-only` flag prints the `configmap`. Copy the `application.yml` content and place it under the appropriate `<component>.configuration` key in `values.yaml`.
+The `--show-only` flag prints the `configmap`.
+
+- If you are using `<componentName>.extraConfiguration`, use the rendered `application.yml` to identify the correct keys and then add only the overrides you need.
+- If you are using `<componentName>.configuration`, copy the full `application.yml` content, modify it, and place it under the appropriate `<component>.configuration` key in `values.yaml`.
 
 ### How extraConfiguration works per component
 
@@ -168,7 +201,7 @@ camunda:
 `console.overrideConfiguration` is the old way of overriding the default application configuration for Console. It has been deprecated. Please convert to using `console.extraConfiguration`.
 :::
 
-#### Customer Configuration Loading
+#### Custom configuration loading
 
 **Applies to:** Optimize
 
@@ -393,7 +426,35 @@ zeebe:
 
 ### Step 5: Add the configuration to `values.yaml`
 
-Finally, place the updated configuration under `zeebe.configuration` in `values.yaml`:
+Prefer adding the new settings via `zeebe.extraConfiguration` so you only maintain the keys you changed and keep the chart-provided defaults.
+
+For example:
+
+```yaml
+zeebe:
+  extraConfiguration:
+    - file: backup-s3.yaml
+      content: |-
+        zeebe:
+          broker:
+            data:
+              backup:
+                store: "S3"
+                s3:
+                  bucketName: "zeebebackuptest"
+                  region: "us-east-1"
+                  endpoint: "http://loki-minio.monitoring.svc.cluster.local:9000"
+                  accessKey: "supersecretaccesskey"
+                  secretKey: "supersecretkey"
+                  apiCallTimeout: "PT180S"
+                  basePath: "zeebebackup"
+```
+
+:::caution Advanced alternative: `zeebe.configuration` overwrites defaults
+If you intentionally want to fully control Zeebe's `application.yml`, place the full configuration under `zeebe.configuration`.
+
+This replaces the chart's default configuration and may require updates during upgrades.
+:::
 
 ```yaml
 zeebe:
@@ -424,7 +485,6 @@ zeebe:
                 #   - technicalProcess
                 # variableNameInclusionStartWith:
                 #   - businessTotal
-                prefix: "zeebe-record"
         gateway:
           enable: true
           network:
@@ -511,16 +571,126 @@ Here, the bucket name is set twice. The environment variable `zeebetest1` overri
 
 ### Limitations
 
-Customizing the `configuration` option will replace the entire contents of the configuration file. During upgrades, if the `configuration` option remains and if there are any application-level breaking changes to the configuration file format, this may cause the application component to crash.
+Setting the `configuration` option replaces the entire contents of the application's configuration file. During upgrades, if the `configuration` option remains and there are breaking changes to the configuration file format or required defaults, this can prevent the component from starting.
 
-- The `configuration` option replaces the entire configuration file. During upgrades, if the file format changes, the component may fail to start until the configuration is updated.
+- Use `extraConfiguration` by default so you only maintain a small set of overrides.
+- The `configuration` option is an advanced override: if the file format or defaults change, the component may fail to start until you update your full configuration.
 - Forgetting to wrap multiline values with (`|`) in Helm can cause parse errors.
 - Mixing `env` and `configuration` for the same property without realizing precedence can lead to unexpected results.
+
+## Migrate extraConfiguration from 8.8 to 8.9
+
+In Camunda 8.8 and earlier, `<componentName>.extraConfiguration` was a **map** where each key was a filename and each value was the file content:
+
+```yaml
+# 8.8 format (map)
+identity:
+  extraConfiguration:
+    custom-logging.yaml: |
+      logging:
+        level:
+          ROOT: DEBUG
+          io.camunda.identity: DEBUG
+    custom-cache.yaml: |
+      spring:
+        cache:
+          type: caffeine
+```
+
+Starting with Camunda 8.9, `<componentName>.extraConfiguration` is an **ordered list** of entries, where each entry has a `file` (filename) and `content` (file contents):
+
+```yaml
+# 8.9 format (ordered list)
+identity:
+  extraConfiguration:
+    - file: custom-logging.yaml
+      content: |
+        logging:
+          level:
+            ROOT: DEBUG
+            io.camunda.identity: DEBUG
+    - file: custom-cache.yaml
+      content: |
+        spring:
+          cache:
+            type: caffeine
+```
+
+### Why this changed
+
+Maps in Go templates (used by Helm) do not guarantee iteration order. Since configuration layering is order-dependent — later entries override earlier ones for the same keys — the map format could produce unpredictable results. The ordered list format ensures entries are always applied in the sequence you define them.
+
+### Migration steps
+
+For every component where you use `extraConfiguration`, convert each map entry to a list entry:
+
+1. **Identify all components** in your `values.yaml` that use `extraConfiguration` (for example, `identity`, `orchestration`, `connectors`, `optimize`, `console`, `webModeler`).
+
+2. **Convert each map entry to a list entry.** For every key-value pair in the old map, create a list item with `file:` set to the former key and `content:` set to the former value.
+
+   **Before (8.8):**
+
+   ```yaml
+   orchestration:
+     extraConfiguration:
+       backup-s3.yaml: |
+         zeebe:
+           broker:
+             data:
+               backup:
+                 store: "S3"
+                 s3:
+                   bucketName: "my-bucket"
+       custom-threads.yaml: |
+         zeebe:
+           broker:
+             threads:
+               cpuThreadCount: "4"
+   ```
+
+   **After (8.9):**
+
+   ```yaml
+   orchestration:
+     extraConfiguration:
+       - file: backup-s3.yaml
+         content: |
+           zeebe:
+             broker:
+               data:
+                 backup:
+                   store: "S3"
+                   s3:
+                     bucketName: "my-bucket"
+       - file: custom-threads.yaml
+         content: |
+           zeebe:
+             broker:
+               threads:
+                 cpuThreadCount: "4"
+   ```
+
+3. **Order entries intentionally.** If two entries set the same configuration key, the **last entry in the list wins**. Arrange entries so that your highest-priority overrides appear last.
+
+4. **Validate your configuration** before upgrading by running `helm template` with your updated values file and verifying the rendered ConfigMaps:
+
+   ```bash
+   helm template my-release camunda/camunda-platform \
+     -f values-8.9.yaml \
+     --show-only templates/orchestration/configmap.yaml
+   ```
+
+5. **Proceed with the upgrade** using the updated values file. See the [8.8 to 8.9 upgrade guide](/self-managed/upgrade/helm/880-to-890.md) for additional steps.
+
+:::caution
+The old map format is **not supported** in Camunda 8.9. If you upgrade without converting to the list format, Helm will fail during template rendering.
+:::
 
 ## References
 
 For more details on where to find configuration options for specific components, see the following pages:
 
+- [Components (Self-Managed)](../../../components/orchestration-cluster/overview.md)
 - [Zeebe Broker](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md)
 - [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md)
 - [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md)
