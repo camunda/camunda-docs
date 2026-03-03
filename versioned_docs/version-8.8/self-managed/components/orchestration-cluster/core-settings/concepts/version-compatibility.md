@@ -56,6 +56,7 @@ Secondary storage holds exported data. Starting with Camunda 8.8, schema upgrade
 If you upgrade from an earlier patch that does **not** store schema version metadata, the schema manager treats it as an indeterminate case (assumed fresh install) and proceeds.
 
 ### Schema manager rules
+
 All minor version upgrades must follow the required upgrade procedure described below. Upgrades must start from the latest patch of the current minor and proceed strictly minor-by-minor.
 The schema manager compares the stored schema version (the last successful schema upgrade) with the current application version:
 
