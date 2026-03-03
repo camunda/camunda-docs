@@ -39,7 +39,7 @@ Starting with the Camunda 8.7.24 patch release, a dedicated starter artifact is 
 You should use this as a drop-in replacement for the default `spring-boot-starter-camunda-sdk` when upgrading to Spring Boot 4.0.
 
 :::note
-There is also a new `camunda-spring-boot-3-starter` module, which is an alias for `spring-boot-starter-camunda-sdk` in the 8.7 release. Use `camunda-spring-boot-3-starter` if you want to stay on Spring Boot 3.5 when upgrading to Camunda 8.8 or newer.
+There is also a new `camunda-spring-boot-3-starter` module, which is an alias for `spring-boot-starter-camunda-sdk` in the 8.7 release. Use `camunda-spring-boot-3-starter` if you want to stay on Spring Boot 3.5 when eventuallyt upgrading to Camunda 8.8 or newer, where the default `camunda-spring-boot-starter` module will be based on Spring Boot 4.0.
 :::
 
 ## Add the Spring Zeebe SDK to your project
