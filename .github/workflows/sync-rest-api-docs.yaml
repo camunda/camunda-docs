@@ -36,8 +36,8 @@ jobs:
           # If a stable camunda branch exists for the
           # next minor release, use it. Otherwise, use main.
           stable_branch="stable/$next_minor_release"
-          if git ls-remote --heads https://github.com/camunda/camunda $stable_branch; then
-            echo "Found a stable branch: origin/$stable_branch"
+          if git ls-remote --exit-code --heads https://github.com/camunda/camunda $stable_branch; then
+            echo "Found a stable branch: $stable_branch"
             echo "camunda_branch=$stable_branch" >> "$GITHUB_OUTPUT"
           else
             echo "No stable branch for version $next_minor_release, using main"
