@@ -106,7 +106,7 @@ All version upgrades must follow this procedure. This applies to any minor versi
 
 1. Update to the latest patch version of your current minor. For example, before upgrading from `8.7.x` to `8.8.y`, first upgrade to `8.7.latest`.
 
-2. Upgrade to the next minor version (never skip minors).    For example, `8.7.x → 8.8.y` is supported, but `8.6.x → 8.8.y` is not.
+2. Upgrade to the next minor version (never skip minors). For example, `8.7.x → 8.8.y` is supported, but `8.6.x → 8.8.y` is not.
 
 3. After reaching the target minor, update to the latest patch version of that minor. For example, after upgrading to `8.8.0`, update to `8.8.latest`.
 
