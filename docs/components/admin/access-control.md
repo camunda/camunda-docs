@@ -14,9 +14,9 @@ If you already have another administration user, they can assign these [in the A
 
 The following mandatory authorizations are required to work with Admin:
 
-| Authorization type      | Resource type | Resource ID                                          | Permission |
-| :---------------------- | :------------ | :--------------------------------------------------- | :--------- |
-| Admin component access  | `Component`   | `identity` or `*` (for access to all web components) | `ACCESS`   |
+| Authorization type     | Resource type | Resource ID                                                                  | Permission |
+| :--------------------- | :------------ | :--------------------------------------------------------------------------- | :--------- |
+| Admin component access | `Component`   | `admin` or `identity` (deprecated) or `*` (for access to all web components) | `ACCESS`   |
 
 ## Authorizations per resource
 

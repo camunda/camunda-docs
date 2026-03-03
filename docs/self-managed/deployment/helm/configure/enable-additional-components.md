@@ -23,7 +23,7 @@ Starting with Camunda 8.8, the Helm chart reflects a new architecture where Zeeb
 - Elasticsearch
 - OpenSearch
 - RDBMS
-- PostgreSQL (Bitnami subchart) - only if needed for Web Modeler or Management Identity
+- PostgreSQL (Bitnami subchart) - only if needed for Web Modeler or Identity
 - Keycloak (Bitnami subchart) - only if using internal authentication
 
 :::note Upgrading from 8.7?
@@ -123,13 +123,13 @@ console:
 For a full list of options, see the [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 :::note
-Console requires the Management Identity component for authentication. The Camunda Helm chart installs Management Identity by default. If you log in to Console using port-forward and use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), you must also port-forward the Keycloak service:
+Console requires the Identity component for authentication. The Camunda Helm chart installs Identity by default. If you log in to Console using port-forward and use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), you must also port-forward the Keycloak service:
 
 ```
 kubectl port-forward svc/keycloak-service 18080:18080
 ```
 
-Alternatively, configure Management Identity with Ingress. See the [Ingress setup guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md).
+Alternatively, configure Identity with Ingress. See the [Ingress setup guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md).
 
 :::
 

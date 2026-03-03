@@ -282,9 +282,15 @@ For example, this is useful when working with services that must be isolated wit
 
 ## I
 
-### Identity
+### Admin
 
-Use Identity in the [Orchestration Cluster](#orchestration-cluster) to administer the integrated authentication and authorization.
+Use Admin in the [Orchestration Cluster](#orchestration-cluster) to administer authentication, authorization, and cluster administration features.
+
+:::note
+Admin was previously named "Identity" in Camunda 8.8. The component was renamed in 8.9 to reflect its expanded scope.
+:::
+
+- [Admin overview](/components/admin/admin-introduction.md)
 
 ### Inbound connector
 
