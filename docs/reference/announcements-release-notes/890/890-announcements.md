@@ -191,6 +191,55 @@ Affected contract updates include:
 </div>
 <div className="release-announcement-content">
 
+#### Message subscription filter request type changed
+
+Starting with 8.9.0, in `CorrelatedMessageSubscriptionFilter` (request), `processDefinitionKey` changed from `string | undefined` to `ProcessDefinitionKeyFilterProperty | undefined`.
+
+This can cause compile-time or integration breaks for customers using self-built/generated SDKs or handwritten integrations that still pass a plain string.
+
+- Old: `CorrelatedMessageSubscriptionFilter.processDefinitionKey: string | undefined`
+- New: `CorrelatedMessageSubscriptionFilter.processDefinitionKey: ProcessDefinitionKeyFilterProperty | undefined`
+
+Example request payload update:
+
+- Before: `"processDefinitionKey": "2251799813685251"`
+- After: `"processDefinitionKey": { "$eq": "2251799813685251" }`
+
+If you generate clients from the Camunda OpenAPI specification, regenerate your client and update request payload construction, references, and type mappings accordingly.
+
+<p className="link-arrow">[Migration guidance for generated clients](../../../apis-tools/migration-manuals/migrate-to-camunda-api.md#generated-client-compatibility-for-89-openapi-updates)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenAPI schema rename can break generated clients
+
+Starting with 8.9.0, the OpenAPI schema type `ProcessInstanceIncidentSearchQuery` was renamed to `IncidentSearchQuery`.
+
+This can cause compile-time or integration breaks for customers using self-built/generated SDKs that still reference the previous type name.
+
+- Old: `ProcessInstanceIncidentSearchQuery`
+- New: `IncidentSearchQuery`
+
+If you generate clients from the Camunda OpenAPI specification, regenerate your client and update references/imports/type mappings to the new name.
+
+<p className="link-arrow">[Migration guidance for generated clients](../../../apis-tools/migration-manuals/migrate-to-camunda-api.md#generated-client-compatibility-for-89-openapi-updates)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### OpenAPI enum additions can break strict generated clients
 
 Starting with 8.9.0, new enum literals were added to the OpenAPI contract. While additive at schema level, this can break generated clients that assume closed enums (for example, exhaustive matching without fallback or strict deserializers).
@@ -225,7 +274,7 @@ Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this rol
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
+<span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
 
