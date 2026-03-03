@@ -112,6 +112,7 @@ All version upgrades must follow this procedure. This applies to any minor versi
 3. After reaching the target minor, update to the latest patch version of that minor. For example, after upgrading to `8.8.0`, update to `8.8.latest`.
 
 You must not:
+
 - Skip minor versions.
 - Downgrade minor or major versions.
 - Include pre-release (`-alpha*`) versions in an upgrade chain.
