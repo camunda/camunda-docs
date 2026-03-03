@@ -61,6 +61,7 @@ The following requirements and limitations apply:
 | `HISTORY_FORM_DEFINITION`     | Form definitions     |
 | `HISTORY_PROCESS_DEFINITION`  | Process definitions  |
 | `HISTORY_PROCESS_INSTANCE`    | Process instances    |
+| `HISTORY_JOB`                 | Jobs                 |
 | `HISTORY_INCIDENT`            | Process incidents    |
 | `HISTORY_VARIABLE`            | Process variables    |
 | `HISTORY_USER_TASK`           | User tasks           |
@@ -181,6 +182,7 @@ The following built-in transformers convert Camunda 7 historic entities:
 | `ProcessDefinitionTransformer`              | `ProcessDefinition`                      | `ProcessDefinitionDbModel`    |
 | `FlowNodeTransformer`                       | `HistoricActivityInstance`               | `FlowNodeInstanceDbModel`     |
 | `UserTaskTransformer`                       | `HistoricTaskInstance`                   | `UserTaskDbModel`             |
+| `JobTransformer`                            | `HistoricJobLog`                         | `JobDbModel`                  |
 | `IncidentTransformer`                       | `HistoricIncident`                       | `IncidentDbModel`             |
 | `VariableTransformer`                       | `HistoricVariableInstance`               | `VariableDbModel`             |
 | `DecisionInstanceTransformer`               | `HistoricDecisionInstance`               | `DecisionInstanceDbModel`     |
