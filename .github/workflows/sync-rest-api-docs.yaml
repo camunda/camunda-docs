@@ -22,6 +22,7 @@ jobs:
         with:
           repository: camunda/camunda
           path: rest-spec
+          fetch-depth: 0
           sparse-checkout: zeebe/gateway-protocol/src/main/proto/v2
           sparse-checkout-cone-mode: false
 
