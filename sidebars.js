@@ -2206,10 +2206,7 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/helm/index",
           },
-          items: [
-            "self-managed/upgrade/helm/880-to-890",
-            "self-managed/upgrade/helm/880-to-890-dual-region",
-          ],
+          items: ["self-managed/upgrade/helm/880-to-890"],
         },
         "self-managed/upgrade/manual/index",
         {
