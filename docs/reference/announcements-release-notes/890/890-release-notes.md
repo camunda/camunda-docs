@@ -101,7 +101,7 @@ You can now safely combine frequent scheduled backups with additional on‑deman
 
 ### Deployment
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Configuration">Configuration</span><span class="badge badge--medium" title="This feature affects Helm">Helm</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Configuration">Configuration</span><span class="badge badge--medium" title="This feature affects Helm">Helm</span><span class="badge badge--medium" title="This feature affects Docker">Docker</span></div>
 
 #### ARM Docker production support
 
