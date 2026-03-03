@@ -63,13 +63,13 @@ The hosted version has a limit on the number of files that can be processed in a
 To run the application on a different port, for example `8090`:
 
 ```shell
-java -Dserver.port=8090 -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar
+java --server.port=8090 -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar
 ```
 
-To increase the maximum number of files allowed per batch request (default is 50), configure `server.tomcat.max-part-count`:
+To increase the maximum number of files allowed per batch request (default is 100), configure `server.tomcat.max-part-count`:
 
 ```shell
-java -Dserver.tomcat.max-part-count=200 -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar
+java --server.tomcat.max-part-count=200 -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar
 ```
 
 ### CLI installation
