@@ -4,7 +4,7 @@ title: Version compatibility checks
 description: "How Camunda 8 validates version compatibility during upgrades (broker and secondary storage)."
 ---
 
-This page describes how Camunda 8 validates version compatibility when you upgrade a self-managed orchestration cluster. It covers:
+This page describes how Camunda 8 validates version compatibility when you upgrade a Self-managed Orchestration Cluster. It covers:
 
 - What defines a compatible or incompatible upgrade path
 - How the **broker** enforces version rules
@@ -19,17 +19,37 @@ Camunda 8 versions follow the `MAJOR.MINOR.PATCH` format (for example, `8.8.3`).
 - **Patch**: Bug or security fixes. You can move forward within the same minor (for example, `8.8.1 → 8.8.3`).
 - **Pre-release (alpha)**: Builds tagged with `-alpha*` are not valid endpoints in a supported upgrade path.
 
+## Required upgrade procedure
+
+All version upgrades must follow this procedure. This applies to any minor version upgrade in a Self-managed Orchestration Cluster.
+
+1. Update to the latest patch version of your current minor. For example, before upgrading from `8.7.x` to `8.8.y`, first upgrade to `8.7.latest`.
+
+2. Upgrade to the next minor version (never skip minors). For example, `8.7.x → 8.8.y` is supported, but `8.6.x → 8.8.y` is not.
+
+3. After reaching the target minor, update to the latest patch version of that minor. For example, after upgrading to `8.8.0`, update to `8.8.latest`.
+
+You must not:
+
+- Skip minor versions.
+- Downgrade minor or major versions.
+- Include pre-release (`-alpha*`) versions in an upgrade chain.
+
+Failure to follow this procedure results in an unsupported upgrade path. The broker or schema manager will block startup to prevent unsafe migrations.
+
 ## Supported upgrade paths
 
-| Scenario                            | Example               | Compatibility                                              |
-| ----------------------------------- | --------------------- | ---------------------------------------------------------- |
-| Patch upgrade                       | 8.8.1 → 8.8.3         | Compatible                                                 |
-| Minor upgrade (single step)         | 8.7.5 → 8.8.3         | Compatible                                                 |
-| Minor upgrade (skipping a minor)    | 8.6.9 → 8.8.3         | Incompatible                                               |
-| Patch downgrade                     | 8.8.3 → 8.8.1         | Incompatible (broker); secondary storage skips (see below) |
-| Minor downgrade                     | 8.8.3 → 8.7.5         | Incompatible (broker); secondary storage skips (see below) |
-| Major change (upgrade or downgrade) | 8.x ↔ 9.x            | Incompatible                                               |
-| Alpha build involved                | 8.8.0-alpha1 ↔ 8.8.0 | Incompatible                                               |
+The examples below assume that 8.8.3 represents the latest available patch version at the time of the upgrade. When upgrading to a new minor version, always upgrade to the latest available patch of that minor.
+
+| Scenario                                                    | Example               | Compatibility                                              |
+| ----------------------------------------------------------- | --------------------- | ---------------------------------------------------------- |
+| Patch upgrade                                               | 8.8.1 → 8.8.3         | Compatible                                                 |
+| Minor upgrade (single step, latest patch required)          | 8.7.5 → 8.8.3         | Compatible                                                 |
+| Minor upgrade (skipping a minor)                            | 8.6.9 → 8.8.3         | Incompatible                                               |
+| Patch downgrade                                             | 8.8.3 → 8.8.1         | Incompatible (broker); secondary storage skips (see below) |
+| Minor downgrade                                             | 8.8.3 → 8.7.5         | Incompatible (broker); secondary storage skips (see below) |
+| Major change (upgrade or downgrade)                         | 8.x ↔ 9.x             | Incompatible                                               |
+| Alpha build involved                                        | 8.8.0-alpha1 ↔ 8.8.0  | Incompatible                                               |
 
 ## Broker behavior
 
@@ -100,24 +120,6 @@ Because schema upgrades are backward compatible from 8.8 onward, a temporary mix
 
 Alpha builds (`-alpha*`) are for evaluation and are **not** valid sources or targets for a supported production upgrade path.  
 Always upgrade between stable releases.
-
-## Required upgrade procedure
-
-All version upgrades must follow this procedure. This applies to any minor version upgrade in a self-managed orchestration cluster.
-
-1. Update to the latest patch version of your current minor. For example, before upgrading from `8.7.x` to `8.8.y`, first upgrade to `8.7.latest`.
-
-2. Upgrade to the next minor version (never skip minors). For example, `8.7.x → 8.8.y` is supported, but `8.6.x → 8.8.y` is not.
-
-3. After reaching the target minor, update to the latest patch version of that minor. For example, after upgrading to `8.8.0`, update to `8.8.latest`.
-
-You must not:
-
-- Skip minor versions.
-- Downgrade minor or major versions.
-- Include pre-release (`-alpha*`) versions in an upgrade chain.
-
-Failure to follow this procedure results in an unsupported upgrade path. The broker or schema manager will block startup to prevent unsafe migrations.
 
 ## See also
 
