@@ -44,10 +44,6 @@ Given the following process definition:
 An event subprocess with a conditional start event is defined with condition `x > 10`. Assume the process instance starts with variable `x` initialized to `5`. The main process starts and executes the service task, while the event subprocess is not triggered because the condition is not satisfied.
 If the process instance updates variable `x` to `11` (for example, via the [Update element instance variables API](../../apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables.api.mdx)), the engine evaluates the condition for the conditional start event in the event subprocess. Since the condition is now `true`, the conditional start event triggers and the event subprocess starts.
 
-### Expression-based subscriptions
-
-When a conditional event is activated, the engine analyzes its FEEL condition and derives which variables the expression depends on (including nested properties, for example `order.total`). The subscription is re-evaluated only when one of those referenced variables changes within the event’s visible scope.
-
 #### Top-down evaluation
 
 When a variable changes, the engine evaluates conditions in a top-down order based on scopes. Starting from the scope where the variable changed, the engine evaluates conditions for any active conditional events in that scope. It then evaluates conditions in child scopes, continuing down the hierarchy. This continues until a triggered event interrupts one of the scopes or there are no more child scopes to evaluate.
@@ -66,16 +62,30 @@ Given the following process definition:
 
 Service task A and service task B are active in parallel branches of the process. If a variable is set in the subprocess instance, then only the conditional boundary event on service task A is evaluated. The boundary event on service task B cannot trigger because the variable is not visible in its scope. See [variable scopes](variables.md#variable-scopes) for more details on variable visibility rules.
 
+#### Expression-based evaluation
+
+When a conditional event is activated, the engine analyzes its FEEL condition and derives which variables the expression depends on.
+The subscription is re-evaluated only when one of those referenced variables changes within the event’s visible scope.
+
+Following rules apply for condition expressions:
+
+- Condition `x > 1` will be re-evaluated only when variable `x` changes.
+- Condition `x > 1 and y < 5` will be re-evaluated when either variable `x` or variable `y` changes.
+- Condition `x.y.z = true` will be re-evaluated when variable `x` changes, because the expression depends on the value of `x` (even if it accesses a property of `x`).
+
+:::warning
+Prefer using plain FEEL expressions instead of a nested variable access (for example, `x > 1` instead of `x.value > 1`) to ensure the engine can correctly derive variable dependencies and re-evaluate the condition when relevant variables change.
+When nested variable access is used, the engine treats the entire variable as a dependency.
+For example, if the condition is `x.value > 1`, the engine treats variable `x` as a dependency.
+The condition will be re-evaluated everytime the variable `x` changes regardless of whether the change affects the `value` property or not.
+This can lead to unintended triggers for non-interrupting conditional events if variable `x` is updated frequently.
+:::
+
 #### Variable filter semantics
 
-Conditional events can define variable filters to limit when the engine re-evaluates the condition. By default, the engine derives the set of variables that can trigger an event from the FEEL expression. The subscription is re-evaluated only when one of those referenced variables changes within the event’s visible scope. See how filters can be defined in the [conditional events modeling guide](../modeler/bpmn/conditional-events/conditional-events.md#variable-filters).
+Conditional events can define variable filters to limit when the engine re-evaluates the condition. The engine derives the set of variable names that can trigger an event from the FEEL expression. The subscription is re-evaluated only when one of those referenced variables changes within the event’s visible scope. See how filters can be defined in the [conditional events modeling guide](../modeler/bpmn/conditional-events/conditional-events.md#variable-filters).
 
 Variable filters restrict evaluation based on specific variable change types (for example, `create` or `update`).
-
-:::warning Important
-Even with expression-based dependencies and optional filters, a conditional event whose condition evaluates to `true` can trigger repeatedly while it remains `true` (for example, for non-interrupting events).
-Model conditions and process behavior so repeated triggers are either expected or idempotent.
-:::
 
 Variable change type filters apply only to conditional events within a running process instance. They do not apply to root-level conditional start events, because no process instance exists yet.
 
@@ -132,6 +142,6 @@ Conditional events inside running process instances are evaluated automatically 
 
 In Camunda 7, conditional events use the `camunda:variableName` and `camunda:variableEvents` attributes.
 
-In Camunda 8, the FEEL condition expression is the single source of truth for which variables can trigger the event. During migration, `camunda:variableEvents` is converted into a `variableEvents` filter configuration where applicable.
+In Camunda 8, the FEEL condition expression is the single source of truth for which variables can trigger the event. Meaning that, `camunda:variableName` attribute is not supported in Camunda 8, and the engine derives variable dependencies directly from the FEEL expression. During migration, `camunda:variableEvents` is converted into a `variableEvents` filter configuration where applicable.
 
 Camunda 8 supports only `create` and `update`. If a model uses `delete` in Camunda 7, migration maps it to the closest supported behavior.

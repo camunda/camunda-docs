@@ -77,7 +77,7 @@ Example:
 </bpmn:conditionalEventDefinition>
 ```
 
-The engine evaluates the FEEL expression using variables available in the event’s scope and derives which variables can trigger the conditional event from this expression.
+The engine derives which variables can trigger the conditional event from this expression and evaluates the FEEL expression using variables available in the event’s scope. See [Expression-based evaluation](../../../concepts/conditionals.md#expression-based-evaluation) for details on how the engine evaluates conditions.
 
 ### Variable filters
 
