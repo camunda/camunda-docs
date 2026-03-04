@@ -339,6 +339,8 @@ A new centralized, queryable audit log records all critical user and client oper
 - Teams can trace who performed each action and when, what was affected, and if the action was successful.
 - Audit entries are available via Orchestration Cluster APIs, and integrated into Operate, Tasklist, and Identity with built-in authorization controls.
 
+See [Audit log](#audit-log) for more information.
+
 ### Process instance migration
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
