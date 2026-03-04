@@ -192,9 +192,17 @@ The history migration has the following limitations.
 - To avoid collisions between definitions (process/decision/form), each definition migrated from Camunda 7 to 8 has its ID prefixed with `c7-legacy-`.
   - Do not deploy new definitions in Camunda 8 with IDs starting with this prefix to avoid conflicts.
 - Avoid manipulating Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable). See [Auto-cancellation of active instances](history.md#auto-cancellation-of-active-instances) for details.
-- When migrating entities, some might be skipped due to dependencies (parent entity not migrated yet). Simply rerun the migration with the `--retry-skipped` flag to ensure complete migration. Example:
-  - Flow node instances might be skipped if their parent flow node (scope) hasn't been migrated yet.
-  - Child process instances that have been called from parent call activities will be skipped on the first migration run as their parent flow node has not been migrated yet.
+- During migration, some entities may be skipped due to unresolved dependencies (for example, when a parent entity has not yet been migrated).
+  - After the initial migration completes, the migrator automatically retries skipped entities to resolve cross-entity dependencies.
+  - Automatic retries run in multiple passes until no further progress can be made.
+  - Entities that remain skipped after all automatic retries are logged as warnings, along with their skip reasons.
+  - After fixing underlying issues, you can manually retry remaining skipped entities using the `--retry-skipped` flag.
+  - Examples of temporary skip reasons include:
+    - Flow node instances whose parent flow node (scope) has not yet been migrated.
+    - Child process instances called from parent call activities, where the parent flow node has not yet been migrated.
+- The History Data Migrator does not support the following Camunda 7 entity types:
+  - **CMMN entities**: CMMN user tasks and CMMN variables are not supported and are skipped during migration.
+  - **Standalone user tasks**: User tasks that are not associated with a process instance are not supported and are skipped during migration.
 - Camunda 7 does not store audit data of asyncBefore wait state for flow nodes. Migration of flow nodes is executed in all other cases.
 - The History Data Migrator does not support the following Camunda 8 entities or properties:
   - Sequence flow: Sequence flows cannot be highlighted in Operate.
@@ -229,8 +237,8 @@ The History Data Migrator supports migration of Camunda Forms, but with the foll
 The History Data Migrator supports migration of DMN entities, but with the following limitations:
 
 - The incidents are migrated in `resolved` state. Operate does not visualize resolved incidents,
-therefore incidents of migrated process instances will not be visible in Operate.
-Audit data related to incidents can be observed by querying APIs.
+  therefore incidents of migrated process instances will not be visible in Operate.
+  Audit data related to incidents can be observed by querying APIs.
 - When there's a failing start timer in Camunda 7, the incident cannot be migrated (as there's no process instance history) and will be skipped.
 
 ## Camunda 8 history migration coverage
@@ -253,6 +261,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | timestamp               | Yes             |
 | actorType               | Yes             |
 | actorId                 | Yes             |
+| agentElementId          | No              |
 | tenantId                | Yes             |
 | tenantScope             | Yes             |
 | result                  | Yes             |
@@ -263,6 +272,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | decisionDefinitionId    | No              |
 | processDefinitionKey    | Yes             |
 | processInstanceKey      | Yes             |
+| rootProcessInstanceKey  | Yes             |
 | elementInstanceKey      | Partially       |
 | jobKey                  | No              |
 | userTaskKey             | Yes             |
@@ -272,6 +282,11 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | deploymentKey           | No              |
 | formKey                 | No              |
 | resourceKey             | No              |
+| relatedEntityType       | No              |
+| relatedEntityKey        | No              |
+| entityDescription       | Partially       |
+| partitionId             | Yes             |
+| historyCleanupDate      | Yes             |
 
 The following limitations apply:
 
@@ -279,6 +294,7 @@ The following limitations apply:
 - Audit log entries are not migrated for batch operations, identity links, attachments, job definitions, jobs, external tasks, metrics, operation logs, filters, comments, and properties.
 - The `entityKey` property is migrated only for entities related to user tasks, process definitions, and process instances.
 - The `elementInstanceKey` property is migrated only for entities related to user tasks.
+- The `entityDescription` property is migrated only for user, group, tenant, and delete variable operations.
 
 ### Batch operation
 
@@ -295,17 +311,19 @@ The following limitations apply:
 | operationsFailedCount    | No              |
 | operationsCompletedCount | No              |
 | errors                   | No              |
+| historyCleanupDate       | No              |
 
 ### Batch operation item
 
-| Property           | Can be migrated |
-| ------------------ | --------------- |
-| batchOperationKey  | No              |
-| itemKey            | No              |
-| processInstanceKey | No              |
-| state              | No              |
-| processedDate      | No              |
-| errorMessage       | No              |
+| Property               | Can be migrated |
+| ---------------------- | --------------- |
+| batchOperationKey      | No              |
+| itemKey                | No              |
+| processInstanceKey     | No              |
+| rootProcessInstanceKey | No              |
+| state                  | No              |
+| processedDate          | No              |
+| errorMessage           | No              |
 
 ### Cluster variable
 
@@ -430,13 +448,14 @@ The following limitations apply:
 
 ### Form
 
-| Property | Can be migrated |
-| -------- | --------------- |
-| formKey  | Yes             |
-| tenantId | Yes             |
-| formId   | Yes             |
-| schema   | Yes             |
-| version  | Yes             |
+| Property  | Can be migrated |
+| --------- | --------------- |
+| formKey   | Yes             |
+| tenantId  | Yes             |
+| formId    | Yes             |
+| schema    | Yes             |
+| version   | Yes             |
+| isDeleted | No              |
 
 ### History deletion
 
@@ -459,7 +478,7 @@ The following limitations apply:
 | flowNodeInstanceKey    | Yes\*           |
 | flowNodeId             | Yes             |
 | jobKey                 | No              |
-| errorType              | No              |
+| errorType              | Yes\*\*         |
 | errorMessage           | Yes             |
 | errorMessageHash       | No              |
 | creationDate           | Yes             |
@@ -468,7 +487,8 @@ The following limitations apply:
 | tenantId               | Yes             |
 | partitionId            | Yes             |
 
-\* `flowNodeInstanceKey` will not be populated when an incident occurs in flow node in waiting state with asyncBefore configuration.
+\* `flowNodeInstanceKey` will not be populated when an incident occurs in flow node in waiting state with asyncBefore configuration.  
+\*\* `errorType` is populated when an equivalent mapping is possible. In all other cases, it's set to `UNKNOWN`.
 
 ### Job
 
@@ -500,6 +520,25 @@ The following limitations apply:
 | partitionId              | No              |
 | creationTime             | No              |
 | lastUpdateTime           | No              |
+
+### Job metrics batch
+
+| Property           | Can be migrated |
+| ------------------ | --------------- |
+| jobMetricsBatchKey | No              |
+| partitionId        | No              |
+| startTime          | No              |
+| endTime            | No              |
+| incompleteBatch    | No              |
+| tenantId           | No              |
+| failedCount        | No              |
+| lastFailedAt       | No              |
+| completedCount     | No              |
+| lastCompletedAt    | No              |
+| createdCount       | No              |
+| lastCreatedAt      | No              |
+| jobType            | No              |
+| worker             | No              |
 
 ### Message subscription
 
@@ -644,6 +683,16 @@ and they will be visible in Camunda 8 after migration.
 | tenantId               | Yes             |
 | partitionId            | Yes             |
 | elementInstanceKey     | Yes             |
+
+### Web session
+
+| Property                     | Can be migrated |
+| ---------------------------- | --------------- |
+| sessionId                    | No              |
+| creationTime                 | No              |
+| lastAccessedTime             | No              |
+| maxInactiveIntervalInSeconds | No              |
+| attributes                   | No              |
 
 ## Cockpit plugin
 

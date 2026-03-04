@@ -18,8 +18,7 @@ For production, we recommend using [Kubernetes with Helm](../helm/install/quick-
 
 ## Platform support
 
-- Use the `linux/amd64` image for production environments.
-- The `linux/arm64` image is available for development purposes.
+- Use the `linux/amd64` or `linux/arm64` image for production environments.
 - All images are publicly accessible.
 
 Docker images are supported for production only on Linux systems.
