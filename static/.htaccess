@@ -106,6 +106,7 @@ RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs/?$ /do
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=inbound [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook/?$ /docs/components/connectors/out-of-the-box-connectors/github/?github=inbound [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/kafka-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/kafka/?kafka=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/?microsofto365mail=inbound [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/rabbitmq/?rabbitmq=inbound [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rest/?$ /docs/components/connectors/protocol/rest/ [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/slack-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/slack/?slack=inbound [R=301,L]
