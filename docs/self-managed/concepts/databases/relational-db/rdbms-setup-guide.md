@@ -114,10 +114,9 @@ orchestration:
       rdbms:
         url: jdbc:postgresql://postgres.example.com:5432/camunda_oc
         username: camunda_oc
-        password:
-          secretKeyRef:
-            name: rdbms-credentials
-            key: password
+        secret:
+          existingSecret: rdbms-credentials
+          existingSecretKey: password
         # Optional: Liquibase auto-schema creation (default: true)
         # autoDDL: true
 ```
@@ -162,9 +161,10 @@ webModeler:
     externalDatabase:
       enabled: true
       url: jdbc:postgresql://postgres.example.com:5432/camunda_wm
-      user: camunda_wm
-      password: your-secure-password
-      # Or use secretRef for production
+      username: camunda_wm
+      secret:
+        inlineSecret: your-secure-password
+      # Or use existingSecret for production
 ```
 
 For full Web Modeler reference, see [Web Modeler database configuration](/self-managed/components/modeler/web-modeler/configuration/database.md).
@@ -204,10 +204,9 @@ orchestration:
   data:
     secondaryStorage:
       rdbms:
-        password:
-          secretKeyRef:
-            name: rdbms-credentials
-            key: password
+        secret:
+          existingSecret: rdbms-credentials
+          existingSecretKey: password
 ```
 
 ### Aurora IAM authentication
@@ -236,7 +235,7 @@ webModeler:
     externalDatabase:
       enabled: true
       url: "jdbc:aws-wrapper:postgresql://aurora-cluster.123456789012.us-east-1.rds.amazonaws.com:5432/camunda?wrapperPlugins=iam"
-      user: db_user # IAM database user
+      username: db_user # IAM database user
       # No password needed; IAM token generated at runtime
 ```
 
@@ -266,17 +265,17 @@ For access to SQL/Liquibase scripts or manual DBA procedures, see [Access SQL an
 
 ### Orchestration Cluster checklist
 
-1. Confirm the RDBMS exporter is enabled in Zeebe.
+1. Confirm the RDBMS exporter is enabled.
 2. Check logs for Liquibase initialization:  
    `[INFO] io.camunda.application.commons.rdbms.MyBatisConfiguration - Initializing Liquibase for RDBMS`
-3. Verify database contains tables: `zeebe_record`, `zeebe_decision`, etc.
+3. Verify database schema was initialized. See [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md) for the complete table list for your database platform.
 4. Run [RDBMS validation tests](/self-managed/deployment/helm/configure/database/validate-rdbms.md).
 
 ### Web Modeler checklist
 
 1. Confirm the database connection is configured.
 2. Check logs for Flyway schema initialization.
-3. Verify the database contains Web Modeler tables (e.g., `CAM_RESOURCE`, `CAM_COMMENT`).
+3. Verify database schema was initialized (see [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md) for the Web Modeler schema definition).
 4. Test the health endpoint: `/health`.
 
 ### Common issues
