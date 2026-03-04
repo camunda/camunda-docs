@@ -29,22 +29,16 @@ When Camunda uses an RDBMS as **secondary storage**, a restore involves **two in
 - **Zeebe (primary storage)**
 - **The external RDBMS used for secondary storage**
 
-Because these systems maintain complementary portions of the data, **both must be restored to the same backup point** to ensure consistency.
-
-:::note
-When restoring Camunda 8 from a backup, all components must be restored from their backup that corresponds to the same backup ID.
-:::
-
 ## Prerequisites
 
 The following prerequisites are required before you can restore a backup:
 
-| Prerequisite       | Description                                                                                                                         |
-| :----------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
-| Clean state/data   | The RDBMS instance is set up and running with a clean state (empty database or dedicated restore target).                           |
-| Backup available   | You have a valid RDBMS backup and a corresponding Zeebe backup created with the same backup ID. See [Create a backup](./backup.md). |
-| Backup storage     | Zeebe is configured with the same backup storage as outlined in the [prerequisites](./backup.md#prerequisites).                     |
-| Components stopped | All Camunda components (Zeebe, Operate, Tasklist, Optimize, Connectors) must be stopped before starting the restore process.        |
+| Prerequisite       | Description                                                                                                                  |
+| :----------------- | :--------------------------------------------------------------------------------------------------------------------------- |
+| Clean state/data   | The RDBMS instance is set up and running with a clean state (empty database or dedicated restore target).                    |
+| Backup available   | You have a valid RDBMS backup and at least one Zeebe backup available. See [Create a backup](./backup.md).                   |
+| Backup storage     | Zeebe is configured with the same backup storage as outlined in the [prerequisites](./backup.md#prerequisites).              |
+| Components stopped | All Camunda components (Zeebe, Operate, Tasklist, Optimize, Connectors) must be stopped before starting the restore process. |
 
 :::warning
 It is critical that no Camunda components are running during the restore. Running components may propagate an incorrect cluster configuration, potentially disrupting cluster communication and data consistency.
@@ -52,82 +46,192 @@ It is critical that no Camunda components are running during the restore. Runnin
 
 ## Restore process
 
-### Example API endpoint definition
-
-This will heavily depend on your setup. The following examples are based on examples given in the [Management API](../backup-and-restore.md#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
-
-```bash
-# Set the backup ID to restore from.
-export BACKUP_ID=<your-backup-id>
-
-# For Kubernetes port-forwarding, set the following endpoints:
-export ORCHESTRATION_CLUSTER_MANAGEMENT_API=http://localhost:9600
-```
-
-### Step 1: Stop all Camunda components
+## Step 1: Stop all Camunda components
 
 Before restoring, ensure all Camunda 8 components are stopped. No component should be running during the restore process to avoid data inconsistencies.
 
-### Step 2: Restore the RDBMS backup
+## Step 2: Restore the RDBMS backup
 
-Restore the database backup into an empty or clean database instance using your RDBMS-specific tooling.
+Perform the restoration of your RDBMS secondary storage using it's official or compatible tools.
 
-<Tabs groupId="rdbms-restore">
-   <TabItem value="postgresql" label="PostgreSQL" default>
+## Step 3: Restore Zeebe from its backup
 
-```bash
-pg_restore -h $DB_HOST -U $DB_USER -d $DB_NAME -c "camunda_backup_$BACKUP_ID.dump"
-```
-
-Alternatively, if you used a plain SQL dump:
-
-```bash
-psql -h $DB_HOST -U $DB_USER -d $DB_NAME -f "camunda_backup_$BACKUP_ID.sql"
-```
-
-   </TabItem>
-   <TabItem value="mariadb" label="MariaDB / MySQL">
-
-```bash
-mysql -h $DB_HOST -u $DB_USER -p $DB_NAME < "camunda_backup_$BACKUP_ID.sql"
-```
-
-   </TabItem>
-   <TabItem value="oracle" label="Oracle">
-
-Use Oracle RMAN or Data Pump (`impdp`) to restore the backup according to your organization's procedures.
-
-```bash
-impdp $DB_USER/$DB_PASSWORD@$DB_HOST/$DB_SERVICE directory=BACKUP_DIR dumpfile="camunda_backup_$BACKUP_ID.dmp" logfile="camunda_restore_$BACKUP_ID.log"
-```
-
-   </TabItem>
-   <TabItem value="mssql" label="SQL Server">
-
-```sql
-RESTORE DATABASE [camunda]
-FROM DISK = N'/var/opt/mssql/backup/camunda_backup_<BACKUP_ID>.bak'
-WITH REPLACE;
-```
-
-   </TabItem>
-</Tabs>
-
-:::note
-Verify the RDBMS restore completed successfully before proceeding. Use your database system's validation tools to confirm data integrity.
-:::
-
-### Step 3: Restore Zeebe from its backup
-
-Restore Zeebe using the same backup ID as the RDBMS restore. The Zeebe restore process replays data from the backup into each broker's partition.
-
-See [Restore Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md) for the full API reference and detailed instructions.
+Camunda provides a standalone app which must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured - via environment variables or using the configuration file located in `config/application.yaml`.
 
 :::warning
 Persistent volumes or disks must not contain any pre-existing data before restoring Zeebe. If data exists from a previous deployment, it must be cleared first.
 :::
 
-### Step 4: Start all Camunda 8 components
+:::warning
+When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count **must be same** as in the backup.
+
+The amount of partitions backed up are also visible in the backup store of Zeebe, see [how to figure out available backups](#available-backups-of-zeebe-partitions).
+If brokers were dynamically scaled between backup and restore, this is not an issue - as long as the partition count remains unchanged.
+:::
+
+There are two options in terms of what type of how the primary storage is restored. You can either restore to the latest backup or a specified time range. A compatible backup must be available to perform any of the two scenarios.
+
+### Restoring Zeebe
+
+<Tabs>
+   <TabItem value="kubernetes" label="Kubernetes" default>
+
+Assuming you're using the official [Camunda Helm chart](/self-managed/deployment/helm/install/quick-install.md), you'll have to adjust your Helm `values.yml` to supply the following temporarily.
+
+It will overwrite the start command of the resulting Zeebe pod, executing a restore script.
+It's important that the backup is configured for Zeebe to be able to restore from the backup!
+
+```yaml
+orchestration:
+   enabled: true
+   env:
+   # Environment variables to overwrite the Zeebe startup behavior
+   - name: SPRING_PROFILES_ACTIVE
+     value: "restore"
+   - name: ZEEBE_RESTORE
+     value: "true"
+   - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+     value: "S3" # just as an example
+  # Rest of the backup store configuration
+   - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
+     value: "rdbms"
+  # Rest of the RDBMS configuration
+   ...
+
+connectors:
+   enabled: false
+optimize:
+   enabled: false
+```
+
+:::note Alternative overwrite
+
+Alternative approach to overwriting the startup behaviour to restore the partitions.
+
+```yaml
+orchestration:
+   enabled: true
+   command: ["/usr/local/camunda/bin/restore"]
+   env:
+      - name: SPRING_PROFILES_ACTIVE
+        value: "restore"
+   # all the envs related to the backup store as above
+   ...
+```
+
+:::
+
+If you're not using the Camunda Helm chart, you can use a similar approach natively with Kubernetes to overwrite the command.
+
+The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
+
+After removing the temporary restore command or unsetting the `ZEEBE_RESTORE` to restore Zeebe’s default behavior, you may optionally restart the StatefulSet to ensure the changes take effect immediately. This can be done by [scaling](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) the StatefulSet down and back up, or by [deleting](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/) the pods so they are recreated with the newly deployed revision.
+
+:::tip
+
+In Kubernetes, Zeebe is a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which are meant for long-running and persistent applications. There is no `restartPolicy` due to which the resulting pods of the Zeebe `StatefulSet` will always restart and `crashloop` as the restore application won't overwrite the data. Meaning that you have to observe the Zeebe brokers during restore and may have to look at the logs with `--previous` if it already restarted.
+
+It will not try to import or overwrite the data again but should be noted that you may miss the `successful` first run if you're not observing it actively.
+
+:::
+
+   </TabItem>
+   <TabItem value="manual" label="Manual" default>
+
+To restore a Zeebe Cluster, run the following in each node where the broker will be running:
+
+```bash
+mkdir -p camunda
+tar -xzf camunda-zeebe-X.Y.Z.tar.gz --strip-components=1 -C camunda/
+./camunda/bin/restore
+```
+
+   </TabItem>
+</Tabs>
+
+### Time range restore
+
+Apart from restoring to match your secondary storage, you can restore Zeebe within a specified time window as a point in time restore. The configured backup and checkpoint interval is the factor that determines how fine grained the time window can be. You can find more about configuring the backup scheduler [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup). Using Zeebe's [backup management API](../../zeebe-backup-and-restore/#request-runtime-state) you can get information regarding your active restore window.
+
+To perform a time range restore, you can specify the window that you want the state to be derived from using the `--from` and `--to` command line parameters or, respectively, `ZEEBE_RESTORE_FROM_TIMESTAMP` and `ZEEBE_RESTORE_TO_TIMESTAMP` environment variables. The value of these parameters is an
+
+<Tabs>
+
+    <TabItem value="env" label="Environment variables" default>
+
+```yaml
+orchestration:
+  enabled: true
+  env:
+    # Environment variables to overwrite the Zeebe startup behavior
+    - name: SPRING_PROFILES_ACTIVE
+      value: "restore"
+    - name: ZEEBE_RESTORE
+      value: "true"
+    - name: ZEEBE_RESTORE_FROM_TIMESTAMP
+      value: "2026-01-10T13:00:00Z"
+    - name: ZEEBE_RESTORE_TO_TIMESTAMP
+      value: "2026-01-10T14:00:00Z"
+    - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+      value: "S3" # just as an example
+    # Rest of the backup store configuration
+    - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
+      value: "rdbms"
+  # Rest of the secondary storage configuration
+```
+
+    </TabItem>
+
+    <TabItem value="cli" label="Command line" default>
+
+```bash
+
+export ZEEBE_RESTORE_FROM_TIMESTAMP=2026-01-10T13:00:00Z
+export ZEEBE_RESTORE_TO_TIMESTAMP=2026-01-10T14:00:00Z
+
+mkdir -p camunda
+tar -xzf camunda-zeebe-X.Y.Z.tar.gz --strip-components=1 -C camunda/
+./camunda/bin/restore --from="${ZEEBE_RESTORE_FROM_TIMESTAMP}" --to="${ZEEBE_RESTORE_TO_TIMESTAMP}"
+```
+
+   </TabItem>
+</Tabs>
+
+Ommiting the `from` parameter will perform a point in time restore, applying the closest backup to the restored secondary storage backup. When the cluster is restarted in normal mode, the remaining state will be re-exported to match the state closest to the provided `to` timestamp. How fine grained the restore points are is based on the scheduler's configured checkpoint interval. Learn more about configuring the checkpoint scheduler [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).
+
+:::note
+When using this approach the restored secondary storage backup must be at a prior time to the desired primary storage's restore window.
+:::
+
+### Restore success or failure
+
+If restore was successful, the app exits with the log message `Successfully restored broker from backup`.
+
+However, the restore will fail if:
+
+- There is no valid backup matching the secondary storage.
+- There is no valid backup within the specified range.
+- The backup store is not configured correctly.
+- The configured data directory is not empty.
+- Due to any other unexpected errors.
+
+If the restore fails, you can re-run the application after fixing the root cause.
+
+### Data directory is not empty
+
+If the data directory is not empty, the restore will fail with an error message:
+
+```
+Brokers's data directory /usr/local/zeebe/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
+```
+
+On some filesystems, the data directory may contain special files and folders that can't or shouldn't be deleted.
+In such cases, the restore application can be configured to ignore the presence of these files and folders.
+The config `zeebe.restore.ignoreFilesInTarget` takes a list of file and folder names to ignore.
+By default, it ignores `lost+found` folder found on ext4 filesystems.
+To also ignore `.snapshot` folders, set `zeebe.restore.ignoreFilesInTarget: [".snapshot", "lost+found"]` or the equivalent environment variable `ZEEBE_RESTORE_IGNOREFILESINTARGET=".snapshot,lost+found"`.
+
+## Step 4: Start all Camunda 8 components
 
 After both primary and secondary storage are restored, start the components in the following order:
 
