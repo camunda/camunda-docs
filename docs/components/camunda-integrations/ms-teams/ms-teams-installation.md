@@ -96,7 +96,7 @@ c8teams deploy
 
 This provisions the app in your Microsoft Teams tenant and publishes it to the Teams Admin Portal for approval. After a successful deployment, the CLI automatically prints the `teams` configuration snippet (including `clientId`, `appId`, `appPassword`, `tenantId`, and `tabEndpoint`) ready to paste into your `config.yaml`.
 
-Save this output for [Step 3](#step-3-create-the-configuration-file).
+Save this output for [Step 4](#step-4-create-the-configuration-file).
 
 :::tip
 If you need to retrieve the configuration snippet again later, run:
@@ -107,7 +107,45 @@ c8teams show-config
 
 :::
 
-## Step 3: Create the configuration file
+## Step 3: Configure the App Integrations exporter
+
+The App Integrations backend requires a Zeebe exporter to be configured in your Camunda orchestration cluster. This exporter streams process data to the App Integrations backend.
+
+Add the following configuration to your orchestration cluster Helm chart values:
+
+```yaml
+orchestration:
+  exporters:
+    appIntegrations:
+      apiKey:
+        secret:
+          existingSecret: apiKey-secret
+          existingSecretKey: apiKey
+  extraConfiguration:
+    - file: application.yaml
+      content: |
+        zeebe:
+          broker:
+            exporters:
+              appIntegrations:
+                className: "io.camunda.exporter.appint.AppIntegrationsExporter"
+                args:
+                  url: <your-public-url>
+```
+
+Replace `<your-public-url>` with the public URL of your App Integrations backend (for example, `https://app-integrations.camunda.your-domain.com`).
+
+The `existingSecret` references a Kubernetes Secret that contains the API key. Create this secret in your cluster before deploying:
+
+```bash
+kubectl create secret generic apiKey-secret --from-literal=apiKey=<your-exporter-api-key>
+```
+
+:::note
+The same API key must be set in the `exporter.apiKey` field of the App Integrations [configuration file](#step-4-create-the-configuration-file) so that the backend can authenticate with the exporter endpoint.
+:::
+
+## Step 4: Create the configuration file
 
 Create a `config.yaml` file with your configuration settings. This file will be mounted into the Docker container.
 
@@ -141,7 +179,7 @@ In your deployment, mount the secrets as environment variables on the container 
 
 ### Example configuration file
 
-Replace the placeholder values with your actual settings. Use the credentials from [Step 1](#step-1-create-applications-in-camunda-identity) and the Teams configuration from [Step 2](#step-2-set-up-the-microsoft-teams-app-cli). For production deployments, replace sensitive values with environment variable references as described in [Secret management](#secret-management).
+Replace the placeholder values with your actual settings. Use the credentials from [Step 1](#step-1-create-applications-in-camunda-identity) and the Teams configuration from [Step 2](#step-2-set-up-the-microsoft-teams-app-cli). The `exporter.apiKey` must match the API key configured in the orchestration cluster Helm chart in [Step 3](#step-3-configure-the-app-integrations-exporter). For production deployments, replace sensitive values with environment variable references as described in [Secret management](#secret-management).
 
 ```yaml
 serverPort: 8080
@@ -211,7 +249,7 @@ The `stage` field controls the environment label.
 
 Use `prod` for production deployment.
 
-## Step 4: Start the application
+## Step 5: Start the application
 
 ### Configure your PostgreSQL connection
 
@@ -252,50 +290,48 @@ docker run -d \
 
 Below is a reference of each section in the `config.yaml` file.
 
-| Section           | Field                               | Description                                                                                                     |
-| :---------------- | :---------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
-| `serverPort`      | —                                   | The port the backend server listens on inside the container (default: `8080`).                                  |
-| `stage`           | —                                   | Environment stage: `local`, `dev`, `int`, or `prod`.                                                            |
-| **auth**          |                                     | Authentication configuration for connecting to your Camunda platform.                                           |
-|                   | `m2m.clientId` / `m2m.clientSecret` | Machine-to-machine OAuth2 credentials for backend services.                                                     |
-|                   | `spa.clientId` / `spa.clientSecret` | Single Page Application OAuth2 credentials for frontend.                                                        |
-|                   | `issuer`                            | The OAuth2/OIDC issuer URL (your Keycloak realm URL).                                                           |
-|                   | `audience`                          | The OAuth2 audience (typically `camunda-platform`).                                                             |
-| **db**            |                                     | PostgreSQL database connection settings.                                                                        |
-|                   | `username`                          | Database username.                                                                                              |
-|                   | `password`                          | Database password.                                                                                              |
-|                   | `database`                          | Database name.                                                                                                  |
-|                   | `host`                              | Database hostname (as reachable from the container).                                                            |
-|                   | `loginType`                         | Authentication type (`password` for username/password auth).                                                    |
-|                   | `encryptionKey`                     | 32-character key used for encrypting sensitive data.                                                            |
-| **teams**         |                                     | Microsoft Teams integration settings.                                                                           |
-|                   | `clientId`                          | Azure AD app client ID.                                                                                         |
-|                   | `appId`                             | Teams app ID.                                                                                                   |
-|                   | `appPassword`                       | Azure AD app password (client secret).                                                                          |
-|                   | `tenantId`                          | Azure AD tenant ID.                                                                                             |
-|                   | `tabEndpoint`                       | Public URL endpoint for the Teams tab.                                                                          |
-|                   | `multitenant`                       | Enable multi-tenant mode (default: `true`). See [note on multitenant](#notes).                                  |
-|                   | `serviceUrl`                        | Bot Framework service URL (default: `https://smba.trafficmanager.net/teams`). See [note on serviceUrl](#notes). |
-| **session**       |                                     | Session management configuration.                                                                               |
-|                   | `secure`                            | Set to `true` for HTTPS environments.                                                                           |
-|                   | `secret`                            | A random secret string for signing session cookies.                                                             |
-| **frontendUrl**   | —                                   | Public URL where the frontend is accessible.                                                                    |
-| **backendUrl**    | —                                   | Public URL where the backend is accessible.                                                                     |
-| **flavor**        | —                                   | Deployment flavor (must be `self-managed`).                                                                     |
-| **organisation**  | `name`                              | Display name for your organization.                                                                             |
-| **clusters**      | —                                   | Array of Camunda cluster configurations.                                                                        |
-|                   | `uuid`                              | Unique identifier for the cluster.                                                                              |
-|                   | `name`                              | Display name for the cluster.                                                                                   |
-|                   | `urls.orchestration`                | Zeebe/Orchestration API URL.                                                                                    |
-|                   | `urls.tasklist`                     | Tasklist URL.                                                                                                   |
-|                   | `urls.operate`                      | Operate URL.                                                                                                    |
-|                   | `exporter.apiKey`                   | API key for the exporter. See [note on exporter API key](#notes).                                               |
-| **subscriptions** | —                                   | Subscription configuration (empty object `{}` for Self-Managed).                                                |
+| Section           | Field                               | Description                                                                                                                                         |
+| :---------------- | :---------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `serverPort`      | —                                   | The port the backend server listens on inside the container (default: `8080`).                                                                      |
+| `stage`           | —                                   | Environment stage: `local`, `dev`, `int`, or `prod`.                                                                                                |
+| **auth**          |                                     | Authentication configuration for connecting to your Camunda platform.                                                                               |
+|                   | `m2m.clientId` / `m2m.clientSecret` | Machine-to-machine OAuth2 credentials for backend services.                                                                                         |
+|                   | `spa.clientId` / `spa.clientSecret` | Single Page Application OAuth2 credentials for frontend.                                                                                            |
+|                   | `issuer`                            | The OAuth2/OIDC issuer URL (your Keycloak realm URL).                                                                                               |
+|                   | `audience`                          | The OAuth2 audience (typically `camunda-platform`).                                                                                                 |
+| **db**            |                                     | PostgreSQL database connection settings.                                                                                                            |
+|                   | `username`                          | Database username.                                                                                                                                  |
+|                   | `password`                          | Database password.                                                                                                                                  |
+|                   | `database`                          | Database name.                                                                                                                                      |
+|                   | `host`                              | Database hostname (as reachable from the container).                                                                                                |
+|                   | `loginType`                         | Authentication type (`password` for username/password auth).                                                                                        |
+|                   | `encryptionKey`                     | 32-character key used for encrypting sensitive data.                                                                                                |
+| **teams**         |                                     | Microsoft Teams integration settings.                                                                                                               |
+|                   | `clientId`                          | Azure AD app client ID.                                                                                                                             |
+|                   | `appId`                             | Teams app ID.                                                                                                                                       |
+|                   | `appPassword`                       | Azure AD app password (client secret).                                                                                                              |
+|                   | `tenantId`                          | Azure AD tenant ID.                                                                                                                                 |
+|                   | `tabEndpoint`                       | Public URL endpoint for the Teams tab.                                                                                                              |
+|                   | `multitenant`                       | Enable multi-tenant mode (default: `true`). See [note on multitenant](#notes).                                                                      |
+|                   | `serviceUrl`                        | Bot Framework service URL (default: `https://smba.trafficmanager.net/teams`). See [note on serviceUrl](#notes).                                     |
+| **session**       |                                     | Session management configuration.                                                                                                                   |
+|                   | `secure`                            | Set to `true` for HTTPS environments.                                                                                                               |
+|                   | `secret`                            | A random secret string for signing session cookies.                                                                                                 |
+| **frontendUrl**   | —                                   | Public URL where the frontend is accessible.                                                                                                        |
+| **backendUrl**    | —                                   | Public URL where the backend is accessible.                                                                                                         |
+| **flavor**        | —                                   | Deployment flavor (must be `self-managed`).                                                                                                         |
+| **organisation**  | `name`                              | Display name for your organization.                                                                                                                 |
+| **clusters**      | —                                   | Array of Camunda cluster configurations.                                                                                                            |
+|                   | `uuid`                              | Unique identifier for the cluster.                                                                                                                  |
+|                   | `name`                              | Display name for the cluster.                                                                                                                       |
+|                   | `urls.orchestration`                | Zeebe/Orchestration API URL.                                                                                                                        |
+|                   | `urls.tasklist`                     | Tasklist URL.                                                                                                                                       |
+|                   | `urls.operate`                      | Operate URL.                                                                                                                                        |
+|                   | `exporter.apiKey`                   | API key for the exporter. Must match the key configured in the [orchestration cluster Helm chart](#step-3-configure-the-app-integrations-exporter). |
+| **subscriptions** | —                                   | Subscription configuration (empty object `{}` for Self-Managed).                                                                                    |
 
 ### Notes
 
 - **`teams.multitenant`:** Multi-tenant support is no longer available for newly created Azure Bot registrations. Only set `multitenant` to `true` if you have an existing Teams application that was already registered with multi-tenant support enabled. For all new installations, leave this at the default (the CLI creates single-tenant apps) or explicitly set it to `false`.
 
 - **`teams.serviceUrl`:** The default value (`https://smba.trafficmanager.net/teams`) works for most deployments. Only override it if your environment requires a different Bot Framework service endpoint. If you are unsure, keep the default value.
-
-- **`exporter.apiKey`:** The exporter API key must match the key configured in the Helm chart of your Camunda orchestration cluster. Refer to the [Camunda Self-Managed Helm chart documentation](../../../../self-managed/quickstart/administrator-quickstart/) for instructions on how to configure the exporter API key in your cluster. The App Integrations backend uses this key to authenticate with the exporter endpoint.
