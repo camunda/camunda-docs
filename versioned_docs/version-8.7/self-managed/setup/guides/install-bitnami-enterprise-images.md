@@ -135,7 +135,7 @@ This command references `values-enterprise.yaml` from the **`main` branch**, whi
 
 This is **intentional and recommended**: using the latest images ensures you benefit from the most recent security patches and bug fixes.
 
-All dependency versions listed in [supported environments](/docs/8.7/reference/supported-environments/#component-requirements) are supported. If you need to use the exact image versions from a specific chart release, reference the release tag instead of `main`:
+All dependency versions listed in [supported environments](/reference/supported-environments.md#component-requirements) are supported. If you need to use the exact image versions from a specific chart release, reference the release tag instead of `main`:
 
 ```shell
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
