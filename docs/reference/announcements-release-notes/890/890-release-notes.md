@@ -193,10 +193,6 @@ You can now add subfolders to your process applications, giving you more flexibi
 
 <p class="link-arrow">[Process applications](/components/concepts/process-applications.md)</p>
 
-#### Variable intelligence smart prefill
-
-<!-- https://github.com/camunda/product-hub/issues/3199 -->
-
 ### Orchestration Cluster
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
