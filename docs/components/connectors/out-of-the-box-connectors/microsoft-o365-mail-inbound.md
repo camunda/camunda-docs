@@ -1,9 +1,11 @@
 ---
 id: microsoft-o365-mail-inbound
-title: Microsoft 365 Email Inbound connector
+title: Microsoft 365 email inbound connector
 sidebar_label: Microsoft 365 Email (Inbound)
-description: Consume emails from Microsoft 365 mailboxes and trigger BPMN processes automatically.
+description: Integrate Outlook email with Microsoft 365 in your processes.
 ---
+
+import MicrosoftGraphAuth from './\_partials/\_microsoft-graph-auth.md'
 
 The **Microsoft 365 Email Inbound connector** allows you to consume emails by monitoring [Microsoft 365](https://outlook.office.com/mail/) mailboxes and mapping them to your BPMN processes as start or intermediate events.
 
@@ -25,21 +27,22 @@ Use Camunda secrets to avoid exposing your Microsoft credentials as plain text. 
 
 ### Authentication security
 
-The connector uses OAuth 2.0 client credentials flow for authentication, which is the recommended approach for server-to-server communication without user interaction. This flow provides:
+The connector supports multiple authentication methods. For server-to-server scenarios without user interaction, **Client credentials** is recommended. For delegated (user-context) scenarios, use **Refresh token**. **Bearer token** is available but not recommended for polling connectors due to short token lifetimes.
 
-- **No user credentials stored**: The application authenticates using its own credentials (Client ID and Client Secret).
+All authentication methods provide:
+
 - **Scoped permissions**: API permissions are explicitly granted to the application.
 - **Auditable access**: All API calls are associated with the registered application.
 
 ### Restricting mailbox access with RBAC
 
-:::note
-**Important:** By default, an Azure AD application with `Mail.Read` or `Mail.ReadWrite` permissions can access **all mailboxes** in your organization. In the OAuth 2.0 client credentials flow, the application gets access to all mailboxes it has been granted permissions for.
+:::warning
+By default, an Azure AD application with `Mail.Read` or `Mail.ReadWrite` permissions can access _all mailboxes_ in your organization. In the OAuth 2.0 client credentials flow, the application gets access to all mailboxes it has been granted permissions for.
 
-To restrict access to specific mailboxes, use **Role-Based Access Control (RBAC) for Applications**. Learn more about [scoping application permissions to specific Exchange Online mailboxes](https://learn.microsoft.com/en-us/graph/auth-limit-mailbox-access).
+To restrict access to specific mailboxes, use _Role-Based Access Control (RBAC) for Applications_. Learn more about [scoping application permissions to specific Exchange Online mailboxes](https://learn.microsoft.com/en-us/graph/auth-limit-mailbox-access).
 :::
 
-## Configuring Microsoft 365
+## Configure the Microsoft 365 Outlook connector
 
 To use the Microsoft 365 Email Inbound connector, you must register an application in Microsoft Entra (formerly Azure AD) and configure the required permissions.
 
@@ -52,7 +55,7 @@ This is a simplified guide to help you get started. For the full guide, refer to
 1. Sign in to the [Microsoft Entra admin center](https://entra.microsoft.com).
 2. Navigate to **Identity** > **Applications** > **App registrations**.
 3. Click **New registration**.
-4. Enter a name for your application (for example, "Camunda Email Connector").
+4. Enter a name for your application (for example, `Camunda Email Connector`).
 5. Select **Accounts in this organizational directory only** for supported account types.
 6. Click **Register**.
 
@@ -67,30 +70,25 @@ This is a simplified guide to help you get started. For the full guide, refer to
 5. Click **Add permissions**.
 6. Click **Grant admin consent** for your organization. This requires administrator privileges.
 
-:::important
+:::warning
 The **Grant admin consent** step is critical. Without admin consent, the application cannot access mailbox data.
 :::
 
-### Create client credentials
+## Authentication
 
-1. Navigate to **Certificates & secrets** in your application.
-2. Click **New client secret**.
-3. Enter a description (for example, "Camunda Connector Secret").
-4. Select an expiration period. **Note:** You will need to rotate the secret before it expires.
-5. Click **Add**.
-6. **Copy the secret value immediately**. This value is only displayed once and cannot be retrieved later.
+Choose an authentication type in the **Authentication** section of the connector properties panel. The connector uses the [Microsoft Graph API](https://learn.microsoft.com/en-us/graph/overview) and supports the following authentication methods. Visit the [Microsoft Graph auth overview](https://learn.microsoft.com/en-us/graph/auth/) for more information.
 
-### Gather required credentials
+<MicrosoftGraphAuth />
 
-You will need the following values to configure the connector:
+:::note Choosing an auth type for email polling
 
-- **Client ID**: Found on the application's **Overview** page (also called "Application ID").
-- **Client Secret**: The value you copied in the previous step.
-- **Tenant ID**: Found on the application's **Overview** page (also called "Directory ID").
+- **Client credentials** (recommended): Uses Azure SDK's automatic token renewal. Best suited for long-running polling connectors.
+- **Refresh token**: The connector re-exchanges the refresh token for a fresh access token on every poll cycle, ensuring continuous access. Suitable for delegated (user-context) scenarios.
+- **Bearer token**: The client is created once with the provided token. Bearer tokens are short-lived (typically 1 hour) and **not recommended for polling connectors** — the token will expire and the connector will stop working.
 
-Store these values securely, preferably using [Camunda secrets](/components/console/manage-clusters/manage-secrets.md).
+:::
 
-## Create a Microsoft 365 Email Inbound connector event
+## Create a Microsoft 365 email inbound connector event
 
 1. Add a **Start Event** or an **Intermediate Catch Event** to your BPMN diagram.
 2. Change its template to **Microsoft 365 Email Inbound**.
@@ -98,33 +96,32 @@ Store these values securely, preferably using [Camunda secrets](/components/cons
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the email monitoring.
 
-## Configure your Microsoft 365 Email Inbound connector
+## Configure your Microsoft 365 email inbound connector
 
 To make your **Microsoft 365 Email Inbound connector** executable, fill in the required properties.
 
-### Mailbox Configuration
+### Mailbox configuration
 
 In the **Mailbox** section, configure which mailbox and folder to monitor:
 
-- **User ID/User Principal Name**: The email address or user principal name of the mailbox to monitor (for example, `user@company.com`)
-- **Folder Name/Folder ID**: Specify which folder to monitor. You can provide either:
-  - **Folder name**: A well-known folder name like `inbox`, `drafts`, `sentitems`, or a custom folder name.
-  - **Folder ID**: The unique identifier of a specific folder.
-- **Specified folder ID**: A checkbox to indicate whether you provided a folder ID (checked) or folder name (unchecked). This helps prevent name collisions.
+- **User ID/User Principal Name**: The email address or user principal name of the mailbox to monitor (for example, `user@company.com`).
+- **Folder Identifier Type**: Select how to identify the folder to monitor:
+  - **Folder ID** (default): Use a [well-known folder ID](https://learn.microsoft.com/en-us/graph/api/resources/mailfolder?view=graph-rest-1.0#properties) such as `inbox`, `drafts`, or `sentitems`, or a custom folder ID. Prefer this option when using well-known folders.
+  - **Folder Name**: Use the display name of the folder. The name must be unique within the mailbox. Use this option for custom folders where you don't know the folder ID.
 
-### Polling Configuration
+### Polling configuration
 
-Configure how frequently the connector checks for new emails using the **Polling Interval** field. Specify the time between polls in ISO 8601 duration format (for example, `PT30S` for 30 seconds, `PT5M` for 5 minutes).
+Configure how frequently the connector checks for new emails using the **Polling Interval** field. Specify the time between polls in ISO 8601 duration format (for example, `PT30S` for 30 seconds, `PT5M` for 5 minutes). Review [how to configure a time duration](/components/modeler/bpmn/timer-events/timer-events.md#time-duration) for details on the format.
 
 :::tip
 Choose an appropriate polling interval based on your use case. More frequent polling increases API usage but provides faster response times.
 :::
 
-### Email Filtering
+### Email filtering
 
 Optionally filter which emails trigger the process:
 
-#### Simple Filter
+#### Simple filter
 
 The simple filter provides the following options:
 
@@ -132,7 +129,7 @@ The simple filter provides the following options:
 - **Subject Contains** (optional): Only fetch emails where the subject contains this text (case-sensitive)
 - **From Email Address** (optional): Only fetch emails from this sender address (exact match, for example, `invoice@vendor.com`)
 
-#### Advanced Filter
+#### Advanced filter
 
 For more complex filtering, use the **Advanced Configuration** section to provide an [OData filter query](https://learn.microsoft.com/en-us/graph/query-parameters#filter-parameter).
 
@@ -154,39 +151,44 @@ Filter emails whose body contains specific text:
 contains(body/content, 'password') and isRead eq false
 ```
 
-### Email Processing Operations
+### Email processing operations
 
 Configure what happens to emails after they trigger a process. **At least one operation must be configured.**
 
 - **Mark as read**: Mark the email as read after processing
 - **Delete**: Delete the email after processing
   - **Force delete**: Bypass the deleted items folder and permanently delete
-- **Move to folder**: Move the email to a different folder after processing
-  - **Target folder**: Specify the destination folder (name or ID)
+- **Move to folder**: Move the email to a different folder after processing. Select a **Folder Identifier Type** (folder ID or folder name) and specify the destination folder.
 
 :::warning Avoid Infinite Reprocessing Loops
 Ensure your processing operation removes emails from matching your filter criteria. If emails continue to match the filter after processing, they will be reprocessed on every polling cycle, potentially creating multiple process instances for the same email.
 
 **Examples of dangerous configurations:**
 
-- Disabling "Only Unread" filter (fetching all emails) and only using "Mark as read" (emails remain in the monitored folder and continue matching the filter)
+- Disabling **Only Unread** filter (fetching all emails) and only using **Mark as read** (emails remain in the monitored folder and continue matching the filter)
 - Moving emails to a different folder and then having another process or rule move them back to the monitored folder (they will match the filter again)
 
 :::
 
-### Activation Condition
+### Activation condition
 
 **Activation condition** is an optional FEEL expression field that allows for fine-tuning of connector activation. This condition filters whether the process step triggers when an email is consumed.
 
-For example, `=(value.subject = "Order Confirmation")` only triggers the start event or continues the catch event if the email subject matches exactly. Leave this field empty to trigger your process for every email that matches the filtering criteria.
+For example, `=(subject = "Order Confirmation")` only triggers the start event or continues the catch event if the email subject matches exactly. Leave this field empty to trigger your process for every email that matches the filtering criteria.
 
 :::note
 The activation condition is evaluated after the email filter. Use email filters for simple conditions and activation conditions for complex FEEL-based logic.
 :::
 
+When an email matches the filter but does not meet the activation condition, the connector does not trigger and the email is not processed (not marked as read, deleted, or moved). This means the email will be fetched again on the next polling cycle. To change this behavior, enable the **Consume unmatched events** checkbox in the **Activation** section. Learn more about [consuming unmatched events](../use-connectors/inbound.md#consume-unmatched-events).
+
 ### Correlation
 
 The **Correlation** section allows you to configure message correlation parameters.
+
+:::note
+The **Correlation** section is not applicable for the plain **start event** element template of the Microsoft 365 Email Inbound connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
+:::
 
 #### Correlation key
 
@@ -196,23 +198,23 @@ The **Correlation** section allows you to configure message correlation paramete
 For example, if your correlation key is defined with the `orderId` process variable, and the incoming email subject contains `Order #12345`, you could extract the order ID from the subject:
 
 - **Correlation key (process)**: `=orderId`
-- **Correlation key (payload)**: `=substring(value.subject, 7)` (extracts "12345" from "Order #12345")
+- **Correlation key (payload)**: `=substring(subject, 7)` (extracts "12345" from "Order #12345")
 
-:::info
+:::note
 To learn more about correlation keys, see [messages](../../../concepts/messages).
 :::
 
-#### Message ID Expression
+#### Message ID expression
 
 The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming email. The message ID serves as a unique identifier and is used for message deduplication.
 
 By default, the connector uses the email's unique identifier from Microsoft Graph. However, you can customize this if needed:
 
 ```feel
-= value.id
+= id
 ```
 
-:::info
+:::note
 To learn more about how message IDs influence message correlation, see [messages](../../../concepts/messages#message-correlation-overview).
 :::
 
@@ -230,13 +232,13 @@ The **Deduplication** section allows you to configure connector deduplication pa
 
 By default, the connector runtime deduplicates connectors based on properties, so elements with the same subscription properties only result in one subscription.
 
-:::info
+:::note
 To learn more about deduplication, see [deduplication](../use-connectors/inbound.md#connector-deduplication).
 :::
 
 To customize the deduplication behavior, select the **Manual mode** checkbox and configure a custom deduplication ID.
 
-### Output Mapping
+### Output mapping
 
 The **Microsoft 365 Email Inbound connector** returns the consumed email message with the following structure:
 
@@ -278,14 +280,14 @@ You can use an output mapping to map the response:
 
 ```feel
 = {
-  "emailSubject": value.subject,
-  "senderEmail": value.sender.address,
-  "receivedAt": value.receivedDateTime,
-  "hasAttachments": count(value.attachments) > 0
+  "emailSubject": response.subject,
+  "senderEmail": response.sender.address,
+  "receivedAt": response.receivedDateTime,
+  "hasAttachments": count(response.attachments) > 0
 }
 ```
 
-## Activate the Microsoft 365 Email Inbound connector by deploying your diagram
+## Activate the Microsoft 365 email inbound connector by deploying your diagram
 
 When you click the **Deploy** button, your Microsoft 365 Email Inbound connector is activated and starts monitoring the specified mailbox for new emails.
 
@@ -319,9 +321,13 @@ For example, to pass an attachment to another connector or download it, use the 
 
 ```feel
 = {
-  "firstAttachment": value.attachments[1],
-  "allAttachments": value.attachments
+  "firstAttachment": response.attachments[1],
+  "allAttachments": response.attachments
 }
 ```
 
 Learn more about working with documents in [document handling](/components/document-handling/getting-started.md).
+
+### What lifecycle does the Microsoft 365 Email Inbound connector have?
+
+The Microsoft 365 Email Inbound connector is a long-running connector that is activated when the process is deployed, and deactivated when the process is undeployed or overwritten by a new version.

@@ -349,7 +349,7 @@ const SearchableTable = () => {
     },
     {
       name: "Microsoft 365 Email outbound",
-      description: "Interactions with Microsoft 365 mail from your processes.",
+      description: "Send Outlook emails from Microsoft 365 in your processes.",
       type: "Outbound",
       link: "../microsoft-o365-mail/",
       image: Microsoft365Img,
@@ -357,7 +357,7 @@ const SearchableTable = () => {
     {
       name: "Microsoft 365 Email inbound",
       description:
-        "Consume emails from Microsoft 365 mailboxes and trigger processes.",
+        "Consume Outlook emails from Microsoft 365 mailboxes and trigger processes.",
       type: "Inbound",
       link: "../microsoft-o365-mail-inbound/",
       image: Microsoft365Img,
