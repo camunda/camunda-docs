@@ -65,7 +65,7 @@ For example, build an invoice-processing AI agent in Camunda with BPMN, using an
 
 ### Audit log
 
-See [user operations audit log](#user-operations-audit-log).
+The [audit log](../components/audit-log/overview.md) is a record of operations, including who performed them, when, and on which entities. Use the audit log to prove compliance, meet governance and regulatory requirements, maintain operational integrity and transparency, and troubleshoot issues.
 
 ## B
 
@@ -587,10 +587,6 @@ In the context of a running process instance in Camunda, a token represents the 
 When a process starts, a token is created at the start event and advances with each completed step. Once the token reaches the end event, it is consumed and the process instance ends. Tokens are not data themselves, but they determine which elements of the process are currently active.
 
 ## U
-
-### User operations audit log
-
-The [user operations audit log](../components/user-operations-audit-log/overview.md) is a record of operations, including who performed them, when, and on which entities. Use the audit log to prove compliance, meet governance and regulatory requirements, maintain operational integrity and transparency, and troubleshoot issues.
 
 ### User task
 

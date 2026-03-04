@@ -41,7 +41,7 @@ These operations belong to the category `USER_TASKS`. The following are recorded
 
 ### ADMIN operations
 
-You can trace all changes to identity resources, like authorizations, users, and tenants. With this, you can detect misconfigurations and investigate potential unauthorized access to sensitive process data.
+You can track all changes to identity resources, like authorizations, users, and tenants. With this, you can detect misconfigurations and investigate potential unauthorized access to sensitive process data.
 
 These operations belong to the category `ADMIN`. The following are recorded in the audit log:
 
@@ -99,4 +99,4 @@ These operations belong to the category `DEPLOYED_RESOURCES`. The following are 
 
 #### Batch operations
 
-While the operations for creating and managing batch operations are recorded in the user operations audit log, the batch operation state changes aren't. For more information, learn how to [monitor batch operations](../../operate/userguide/monitor-batch-operations.md).
+While the operations for creating and managing batch operations are recorded in the audit log, the batch operation state changes aren't. For more information, learn how to [monitor batch operations](../../operate/userguide/monitor-batch-operations.md).

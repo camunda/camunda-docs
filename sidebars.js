@@ -286,15 +286,15 @@ module.exports = {
         },
         {
           type: "category",
-          label: "User operations audit log",
+          label: "Audit log",
           link: {
             type: "doc",
-            id: "components/user-operations-audit-log/overview",
+            id: "components/audit-log/overview",
           },
           items: [
-            "components/user-operations-audit-log/overview/access-control",
-            "components/user-operations-audit-log/overview/recorded-operations",
-            "components/user-operations-audit-log/overview/operation-structure",
+            "components/audit-log/overview/access-control",
+            "components/audit-log/overview/recorded-operations",
+            "components/audit-log/overview/operation-structure",
           ],
         },
         {
@@ -1065,6 +1065,7 @@ module.exports = {
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
+            "components/console/manage-clusters/configure-audit-log",
             "components/console/manage-clusters/settings",
             "components/console/manage-clusters/cluster-capacity",
           ],
@@ -1854,7 +1855,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "User operations audit log",
+          label: "Audit log",
           link: {
             type: "doc",
             id: "self-managed/concepts/audit-log/index",

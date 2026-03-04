@@ -4,11 +4,11 @@ title: Audit task history
 description: "Learn how to audit task history."
 ---
 
-Audit [task history](../../user-operations-audit-log/overview.md) in Camunda 8 Tasklist.
+Audit [task history](../../audit-log/overview.md) in Camunda 8 Tasklist.
 
 ## Prerequisites
 
-To follow the steps in this guide, you must be [authorized to view task history records](../../user-operations-audit-log/overview/access-control.md).
+To follow the steps in this guide, you must be [authorized to view task history records](../../audit-log/overview/access-control.md).
 
 ## Audit task history
 
@@ -19,5 +19,5 @@ To follow the steps in this guide, you must be [authorized to view task history 
 
 ## Next steps
 
-- [Learn about `USER_TASKS` operations](../../user-operations-audit-log/overview/recorded-operations.md#user_tasks-operations).
-- [Learn about the operation data structure in the history table.](../../user-operations-audit-log/overview/operation-structure.md)
+- [Learn about `USER_TASKS` operations](../../audit-log/overview/recorded-operations.md#user_tasks-operations).
+- [Learn about the operation data structure in the history table.](../../audit-log/overview/operation-structure.md)

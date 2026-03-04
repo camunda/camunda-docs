@@ -4,15 +4,15 @@ title: Audit operations
 description: "Learn how to audit operations."
 ---
 
-Audit [operations](../../user-operations-audit-log/overview.md) in Camunda 8 Operate.
+Audit [operations](../../audit-log/overview.md) in Camunda 8 Operate.
 
 ## Prerequisites
 
-To follow the steps in this guide, you must be [authorized to view operations in the audit log](../../user-operations-audit-log/overview/access-control.md).
+To follow the steps in this guide, you must be [authorized to view operations in the audit log](../../audit-log/overview/access-control.md).
 
 ## Audit all operations
 
-In Operate, you can audit all [`DEPLOYED_RESOURCES` and `USER_TASKS` operations](../../user-operations-audit-log/overview/recorded-operations.md) in the general operations log:
+In Operate, you can audit all [`DEPLOYED_RESOURCES` and `USER_TASKS` operations](../../audit-log/overview/recorded-operations.md) in the general operations log:
 
 1. In the top navigation, click **Operations Log**.
 2. To sort the log, click a column header.
@@ -30,5 +30,5 @@ You can also review operations at the process instance level:
 
 ## Next steps
 
-- [Learn about the operation data structure in the operations log.](../../user-operations-audit-log/overview/operation-structure.md)
+- [Learn about the operation data structure in the operations log.](../../audit-log/overview/operation-structure.md)
 - [Use the Audit Log REST API to programmatically access the audit log](../../../apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx).

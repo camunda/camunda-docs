@@ -1,8 +1,8 @@
 ---
 id: overview
-title: User operations audit log
-sidebar_label: User operations audit log
-description: A high-level overview of the User operations audit log in Camunda 8.
+title: Audit log
+sidebar_label: Audit log
+description: A high-level overview of the audit log in Camunda 8.
 ---
 
 import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
@@ -14,7 +14,7 @@ Audit a comprehensive record of operations across process, identity, and user ta
 
 ## About
 
-With the **user operations audit log**, you'll access a record of operations, including who performed them, when, and on which entities.
+With the **audit log**, you'll access a record of operations, including who performed them, when, and on which entities.
 
 Use the audit log to:
 
@@ -28,10 +28,15 @@ Use the audit log to:
 When the audit log is active, a record is written to [secondary storage](../../self-managed/concepts/secondary-storage/index.md) for every applicable operation instance. Because of this, you can expect an increase in disk usage by a factor of 1.5 to 2.0.
 
 :::warning
-The user operations audit log is enabled by default. Because of the increase in resource usage on secondary storage, you may see increased costs associated with this feature.
+The audit log is enabled by default. Because of the increase in resource usage on secondary storage, you may see increased costs associated with this feature.
 :::
 
-By default, only user operations are tracked, not [client](../zeebe/technical-concepts/architecture.md#clients) operations. You can configure the user operations audit log to fine-tune log thoroughness, resource usage, and financial costs according to your needs. Additionally, if using Camunda 8 Self-Managed, you control the [secondary storage retention policy](../../self-managed/concepts/audit-log/configure.md#configure-secondary-storage-retention), which applies to user operations audit log records.
+By default, only user operations are tracked, not [client](../zeebe/technical-concepts/architecture.md#clients) operations. You can configure the audit log to fine tune log thoroughness, resource usage, and financial costs according to your needs:
+
+- [SaaS](../console/manage-clusters/configure-audit-log.md)
+- [Self-Managed](../../self-managed/concepts/audit-log/configure.md)
+
+Additionally, if you're using Camunda 8 Self-Managed, you control the [secondary storage retention policy](../../self-managed/concepts/audit-log/configure.md#configure-secondary-storage-retention), which applies to audit log records.
 
 ## Get started
 

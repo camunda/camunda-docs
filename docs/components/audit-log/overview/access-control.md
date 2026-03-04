@@ -2,7 +2,7 @@
 id: access-control
 title: Access control
 sidebar_label: Access control
-description: Reference the permissions required to access user operations audit log entries.
+description: Reference the permissions required to access audit log entries.
 ---
 
 Reference the permissions required to access audit log entries.
