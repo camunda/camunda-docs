@@ -295,6 +295,20 @@ module.exports = {
           items: [
             {
               type: "category",
+              label: "Microsoft Teams",
+              link: {
+                type: "doc",
+                id: "components/camunda-integrations/ms-teams/ms-teams",
+              },
+              items: [
+                "components/camunda-integrations/ms-teams/ms-teams-installation",
+                "components/camunda-integrations/ms-teams/ms-teams-troubleshoot",
+                "components/camunda-integrations/ms-teams/ms-teams-chatbot",
+                "components/camunda-integrations/ms-teams/ms-teams-tabs",
+              ],
+            },
+            {
+              type: "category",
               label: "SAP",
               link: {
                 type: "doc",
@@ -418,7 +432,6 @@ module.exports = {
                     "components/early-access/alpha/a2a-client/a2a-client-usage-patterns",
                   ],
                 },
-                "components/early-access/alpha/ms-teams/ms-teams",
               ],
             },
           ],
@@ -2206,10 +2219,7 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/helm/index",
           },
-          items: [
-            "self-managed/upgrade/helm/880-to-890",
-            "self-managed/upgrade/helm/880-to-890-dual-region",
-          ],
+          items: ["self-managed/upgrade/helm/880-to-890"],
         },
         "self-managed/upgrade/manual/index",
         {
