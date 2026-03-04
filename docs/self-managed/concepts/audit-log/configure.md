@@ -12,7 +12,9 @@ Configure the audit log in Camunda 8 Self-Managed.
 
 ## Configure recorded operations
 
-The audit log is an important feature with which you can meet regulatory requirements and maintain operational integrity by accessing a record of operations. These records include who performed the operations, when, and on which entities. The audit log is enabled by default, and the storage it requires may result in increased costs. To mitigate these resource costs, only user operations are tracked by default, not [client](../../../components/zeebe/technical-concepts/architecture.md#clients) operations.
+The audit log is an important feature with which you can meet regulatory requirements and maintain operational integrity by accessing a record of operations. These records include who performed the operations, when, and on which entities.
+
+The audit log is enabled by default, and the storage it requires may result in increased costs. To mitigate these resource costs, only user operations are tracked by default, not [client](../../../components/zeebe/technical-concepts/architecture.md#clients) operations.
 
 To change the default behavior in Camunda 8 Self-Managed, such as to disable the audit log or configure recorded operations, you must configure your deployment:
 
