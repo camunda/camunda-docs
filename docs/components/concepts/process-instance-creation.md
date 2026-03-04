@@ -255,6 +255,17 @@ When a business ID is specified, the partition for the new process instance is d
 
 In a multi-tenant environment, uniqueness is enforced **per tenant**. The same business ID can exist in different tenants without conflict. Two active root process instances in different tenants may share the same business ID and process definition without triggering a rejection.
 
+### Process instance migration
+
+When a process instance with a business ID is [migrated](/components/concepts/process-instance-migration.md) to a different process definition, the business ID is preserved and carried over to the target process definition. The business ID remains immutable; it cannot be changed or removed as part of the migration.
+
+During migration, the business ID's association with the process definition is updated; it moves from the source process definition to the target process definition.
+
+When [uniqueness control](#uniqueness-control) is enabled, this has two consequences:
+
+- After migration, a new process instance with the same business ID can be created for the **source** process definition, since the migrated instance is no longer associated with it.
+- Migration is **rejected** if the target process definition already has an active root process instance with the same business ID. This prevents duplicates in the target definition.
+
 ### Limitations
 
 - Searching process instance related entities (for example, jobs, user tasks, or incidents) by business ID is not yet supported.
