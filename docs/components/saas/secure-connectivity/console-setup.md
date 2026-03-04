@@ -4,8 +4,6 @@ title: Enable secure connectivity
 description: Configure AWS PrivateLink connectivity for a Camunda 8 SaaS Orchestration cluster in Console.
 ---
 
-# Enable secure connectivity for a cluster
-
 This guide explains how to enable secure connectivity (AWS PrivateLink) for an AWS-hosted Camunda 8 SaaS Orchestration cluster.
 
 Secure connectivity must be enabled per cluster.
@@ -17,7 +15,7 @@ For a conceptual overview, see [secure connectivity (AWS PrivateLink)](./index.m
 Before enabling secure connectivity:
 
 - The cluster must be hosted in AWS.
-- The cluster must be version 8.8 or later.
+- The cluster must be version 8.8.0+.
 - You must have sufficient permissions to manage clusters in Console.
 - You must know the AWS account IDs or ARNs that should be allowed to connect.
 - Your organization must be on an Enterprise plan.
@@ -32,19 +30,19 @@ For AWS configuration details, see the AWS PrivateLink documentation.
 
 ## Enable secure connectivity for a cluster
 
-1. Navigate to **Console → Clusters**.
+1. Navigate to **Console > Clusters**.
 2. Select the cluster.
 3. Open the **Private networking** tab. The **Private networking** tab is available only for clusters hosted in AWS. It is not displayed for clusters hosted in other cloud providers.
 4. Select **Activate PrivateLink endpoint service**.
 
-### Step 1: Allowed principals
+### Allowed principals
 
 1. In **Principal ARN**, enter the ARN of an AWS principal that should be allowed to connect.
 2. Select **Add principal**.
 3. Repeat for additional principals as needed.
 4. Select **Next**.
 
-### Step 2: Supported regions
+### Supported regions
 
 1. Review the cluster’s AWS region (pre-selected).
 2. Optionally add additional regions to allow cross-region endpoint connections.
@@ -88,7 +86,7 @@ Removing a previously allowed principal does not invalidate existing VPC endpoin
 
 VPC endpoint connections are automatically approved when the AWS principal creating the interface endpoint is included in the **Allowed principals** list.
 
-Manual approval of endpoint connections is not required.
+You don’t need to manually approve endpoint connections.
 
 ### Removing supported regions
 
@@ -116,8 +114,8 @@ The **Endpoint connections** section lists VPC interface endpoint connections cr
 
 For each connection, Console displays:
 
-- The VPC endpoint identifier
-- The connection status (for example, Pending or Available)
+- The VPC endpoint identifier.
+- The connection status (for example, Pending or Available).
 
 New endpoint connections appear in this section after they are created in AWS.
 
@@ -132,7 +130,7 @@ Public connectivity remains available.
 After activating the PrivateLink endpoint service in Console:
 
 1. Copy the **Service name** from the **Service details** section.
-2. In your AWS account, create a VPC **Interface endpoint** that connects to this service.
+2. In your AWS account, create a VPC interface endpoint that connects to this service.
 3. Configure subnets, security groups, and optional private DNS according to your AWS requirements.
 
 AWS-side provisioning must follow the standard AWS PrivateLink process.
