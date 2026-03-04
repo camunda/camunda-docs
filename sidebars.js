@@ -626,7 +626,7 @@ module.exports = {
         {
           Organization: [
             {
-              "Manage organization": [
+              "Manage the organization": [
                 "components/console/manage-organization/organization-settings",
                 "components/console/manage-organization/manage-users",
                 "components/console/manage-organization/manage-user-groups",
@@ -688,15 +688,7 @@ module.exports = {
         {
           Workspace: [
             "components/camunda-hub/workspaces/manage-workspace",
-            {
-              type: "category",
-              label: "Manage the catalog",
-              link: {
-                type: "doc",
-                id: "components/camunda-hub/catalog/index",
-              },
-              items: [],
-            },
+            "components/camunda-hub/view-assigned-clusters",
             {
               type: "category",
               label: "Manage projects",
@@ -732,6 +724,7 @@ module.exports = {
                 },
               ],
             },
+            "components/camunda-hub/catalog/browse",
             {
               "Model business processes": [
                 {
