@@ -275,7 +275,7 @@ For access to SQL/Liquibase scripts or manual DBA procedures, see [Access SQL an
 
 1. Confirm the database connection is configured.
 2. Check logs for Flyway schema initialization.
-3. Verify database schema was initialized (see [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md) for the Web Modeler schema definition).
+3. Verify database contains tables (Flyway creates these automatically on startup).
 4. Test the health endpoint: `/health`.
 
 ### Common issues
