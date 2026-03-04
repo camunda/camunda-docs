@@ -241,6 +241,10 @@ Uniqueness is checked against **active root process instances**. A root process 
 
 When uniqueness control is enabled, creating a process instance is rejected if a root process instance of the same process definition is already active with the same business ID. The rejection returns an `ALREADY_EXISTS` error (HTTP `409 Conflict`). Once the existing root process instance completes, a new instance with the same business ID can be created.
 
+:::note Retroactive enforcement
+Uniqueness control is **retroactive**. When you enable it, business IDs that were already assigned to active process instances _before_ the feature was turned on are taken into account. This means an existing active instance's business ID can block the creation of a new instance with the same business ID and process definition, even if the original instance was created while uniqueness control was disabled.
+:::
+
 Uniqueness control is opt-in. Enable it using the configuration property [`camunda.process-instance-creation.business-id-uniqueness-enabled`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#process-instance-creation). For SaaS, configure this in the cluster configuration via Console. For Self-Managed, set it in the application config (for example, `application.yaml` or as an environment variable).
 
 :::note
