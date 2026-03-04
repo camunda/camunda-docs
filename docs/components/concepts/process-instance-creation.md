@@ -196,7 +196,7 @@ A business ID is a domain-specific identifier you can assign to a process instan
 
 For example, consider a process that ships book orders where every order is identified by an ID in your order management system. When you start the process to ship an order, you can use the order ID as the business ID. This lets you easily find all process instances related to a particular order.
 
-You set the business ID at process instance creation time via the `businessId` field in the creation request.
+You set the business ID at process instance creation time via the `businessId` field in the creation request. The business ID is **immutable**; once set, it cannot be changed or removed for the lifetime of the process instance. The maximum length for a business ID is **256 characters**.
 
 <details>
    <summary>Create a process instance with a business ID via Orchestration Cluster REST API</summary>
