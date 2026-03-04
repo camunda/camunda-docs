@@ -39,7 +39,6 @@ Camunda Copilot automatically detects and uses context from your current work to
 - When no element is selected, Copilot uses only the file context.
 - When a specific context is active (for example, a selected BPMN element or FEEL expression), it is shown as a context tag above the chat input.
 - Removing a context tag clears that context and, for BPMN elements, also unselects the element in the canavs.
-  <image placeholder>
 
 This context allows Camunda Copilot to:
 
