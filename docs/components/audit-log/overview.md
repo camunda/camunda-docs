@@ -31,12 +31,10 @@ When the audit log is active, a record is written to [secondary storage](../../s
 The audit log is enabled by default. Because of the increase in resource usage on secondary storage, you may see increased costs associated with this feature.
 :::
 
-By default, only user operations are tracked, not [client](../zeebe/technical-concepts/architecture.md#clients) operations. You can configure the audit log to fine tune log thoroughness, resource usage, and financial costs according to your needs:
+By default, only user operations are tracked, not [client](../zeebe/technical-concepts/architecture.md#clients) operations. You can configure the audit log to fine tune log thoroughness and resource usage according to your needs:
 
 - [SaaS](../console/manage-clusters/configure-audit-log.md)
 - [Self-Managed](../../self-managed/concepts/audit-log/configure.md)
-
-Additionally, if you're using Camunda 8 Self-Managed, you control the [secondary storage retention policy](../../self-managed/concepts/audit-log/configure.md#configure-secondary-storage-retention), which applies to audit log records.
 
 ## Get started
 

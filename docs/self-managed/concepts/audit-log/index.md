@@ -15,4 +15,4 @@ When the audit log is active, a record is written to [secondary storage](../../c
 The audit log is enabled by default. Because of the increase in resource usage on secondary storage, you may see increased costs associated with this feature.
 :::
 
-You can [configure the audit log](./configure.md) to fine tune log thoroughness, resource usage, and financial costs according to your needs.
+You can [configure the audit log](./configure.md) to fine tune log thoroughness and resource usage according to your needs.
