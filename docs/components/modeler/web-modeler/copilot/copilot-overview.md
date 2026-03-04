@@ -12,82 +12,50 @@ import CopilotHistoryActions from './img/copilot-history-actions.png';
 import CopilotFormCreation from './img/copilot-form-creation.png';
 import CopilotOutputMapping from './img/copilot-output-mapping.png';
 
-Camunda Copilot is an AI assistant integrated into [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) that helps you with BPMN process modeling, FEEL expressions, and Form building. It is available in both SaaS and Self-Managed deployments.
-
-## How it works
-
-Camunda Copilot uses a multi-agent architecture to handle different types of tasks:
-
-```mermaid
-flowchart TD
-    User["User Chat"] -->|"message"| Supervisor["Supervisor Agent"]
-    Supervisor -->|"BPMN tasks"| BpmnAgent["BPMN Sub-Agent"]
-    Supervisor -->|"FEEL tasks"| FeelAgent["FEEL Sub-Agent"]
-    Supervisor -->|"Form tasks"| FormAgent["Form Sub-Agent"]
-    BpmnAgent --> BpmnTools["BPMN Tools"]
-    FormAgent --> FormToolsBox["Form Tools"]
-    FeelAgent --> SharedTools["Shared Tools"]
-    BpmnAgent --> SharedTools
-    FormAgent --> SharedTools
-    SharedTools --> FrontendTools["Frontend Tools"]
-    SharedTools --> GeneralTools["General Tools"]
-    SharedTools --> IntegrationTools["Integration Tools"]
-```
-
-- **Supervisor Agent**: Routes your requests to the appropriate specialized sub-agent based on the task type.
-- **BPMN Sub-Agent**: Creates, modifies, and explains BPMN process diagrams.
-- **FEEL Sub-Agent**: Generates, translates, debugs, and explains FEEL expressions.
-- **Form Sub-Agent**: Creates, modifies, and validates Camunda Forms.
-
-Each sub-agent has access to specialized [built-in tools](built-in-tools.md) that allow it to interact with your diagrams and forms.
+Camunda Copilot is an AI assistant that helps you with BPMN process modeling, FEEL expressions, and form building. It is available in both SaaS and Self-Managed deployments of Web Modeler, and can be used only in the BPMN diagram and form editors.
 
 ## Get started
 
-To use Camunda Copilot in Web Modeler:
-
 1. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
-2. Open an existing BPMN diagram, Form, or create a new one via **New project > Create new > BPMN diagram** or **Form**.
-3. Click the **Camunda Copilot Agent** button in the top-right corner of the header to open the Copilot chat panel.
-
-<img src={CopilotEmptyState} alt="Copilot chat panel showing welcome message" />
-
-4. In the chat box, enter your prompt. A prompt should be a simple, clear, and concise request.
-5. Wait for Copilot to respond. Response times vary depending on the complexity of your request.
+2. Open an existing BPMN diagram or form, or create a new one via New project > Create new > BPMN diagram or Form.
+3. Click the Camunda Copilot icon in the top-right corner of the editor header to open the Copilot panel.
+4. In the chat box, enter a simple, clear, and concise prompt describing what you need.
+5. Wait for Copilot to respond; response times may vary depending on the complexity of your request.
 
 <img src={CopilotBpmnGeneration} alt="Copilot generating a mortgage approval workflow" />
 
-:::note
-Timeouts can occur if your query is too complex. Try breaking complex requests into smaller steps.
+:::tip
+To avoid timeouts and get better results, break long or complex prompts into smaller, focused requests and send them one at a time.
 :::
+
+## Review and undo changes
+
+Camunda Copilot can both answer questions and generate or update BPMN diagrams and forms. When Copilot applies a change on the canvas, Web Modeler automatically creates a new version so your previous work is preserved. If you are not satisfied with the result, you can roll back to a previous version from the version history, or continue iterating with Copilot until the result meets your needs.
 
 ## Context awareness
 
-Copilot automatically detects and uses context from your current work to provide more relevant responses.
+Camunda Copilot automatically detects and uses context from your current work to provide more relevant responses:
 
-### What context is used
+- When no element is selected, Copilot uses only the file context.
+- When a specific context is active (for example, a selected BPMN element or FEEL expression), it is shown as a context tag above the chat input.
+- Removing a context tag clears that context and, for BPMN elements, also unselects the element in the canavs.
+  <image placeholder>
 
-| Context type           | When active                     | Description                                          |
-| ---------------------- | ------------------------------- | ---------------------------------------------------- |
-| File                   | Always                          | The current BPMN diagram or Form you're editing      |
-| Selected element       | When a BPMN element is selected | The specific element you've clicked on the canvas    |
-| Form content           | When editing a Form             | The current Form JSON structure                      |
-| FEEL expression        | When FEEL popup is open         | The expression you're working on                     |
-| Properties panel field | When editing a specific field   | The field you're configuring in the properties panel |
-
-### Context bar
-
-When context is active, you'll see context chips displayed above the chat input. These chips indicate what Copilot knows about your current work:
-
-- **Element: [name]** - Shows when you have a BPMN element selected
-- **Variable: [field ID]** - Shows when you're editing a specific properties panel field
-- **FEEL expression** - Shows when you have the FEEL popup open
-
-This context allows Copilot to:
+This context allows Camunda Copilot to:
 
 - Understand which element you're asking about
 - Apply changes to the correct element
 - Generate FEEL expressions for the right field
 - Create forms linked to the current process
+
+### What context is used
+
+| Context type    | When active                         | Description                                        |
+| --------------- | ----------------------------------- | -------------------------------------------------- |
+| File            | When a BPMN diagram or form is open | The current BPMN diagram or Form you're editing    |
+| BPMN element    | When a BPMN element is selected     | The specific element you've selected on the canvas |
+| Form content    | When editing a Form                 | The current Form JSON structure                    |
+| FEEL expression | When FEEL editor is open            | The FEEL expression you're working on              |
 
 ## Conversation history
 
@@ -240,6 +208,33 @@ Example questions:
 ## Configuration
 
 For Self-Managed deployments, see [Copilot configuration](/self-managed/components/modeler/web-modeler/configuration/copilot.md) to configure LLM providers and agent settings.
+
+## How it works
+
+Camunda Copilot uses a multi-agent architecture to handle different types of tasks:
+
+```mermaid
+flowchart TD
+    User["User Chat"] -->|"message"| Supervisor["Supervisor Agent"]
+    Supervisor -->|"BPMN tasks"| BpmnAgent["BPMN Sub-Agent"]
+    Supervisor -->|"FEEL tasks"| FeelAgent["FEEL Sub-Agent"]
+    Supervisor -->|"Form tasks"| FormAgent["Form Sub-Agent"]
+    BpmnAgent --> BpmnTools["BPMN Tools"]
+    FormAgent --> FormToolsBox["Form Tools"]
+    FeelAgent --> SharedTools["Shared Tools"]
+    BpmnAgent --> SharedTools
+    FormAgent --> SharedTools
+    SharedTools --> FrontendTools["Frontend Tools"]
+    SharedTools --> GeneralTools["General Tools"]
+    SharedTools --> IntegrationTools["Integration Tools"]
+```
+
+- **Supervisor Agent**: Routes your requests to the appropriate specialized sub-agent based on the task type.
+- **BPMN Sub-Agent**: Creates, modifies, and explains BPMN process diagrams.
+- **FEEL Sub-Agent**: Generates, translates, debugs, and explains FEEL expressions.
+- **Form Sub-Agent**: Creates, modifies, and validates Camunda Forms.
+
+Each sub-agent has access to specialized [built-in tools](built-in-tools.md) that allow it to interact with your diagrams and forms.
 
 ## Related resources
 
