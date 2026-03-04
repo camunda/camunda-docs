@@ -385,17 +385,6 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 
 A new installation guide covers how you can configure Camunda 8 with relational databases across the Orchestration Cluster and Web Modeler. The guide covers database provisioning, connections and authentication including Aurora IAM, JDBC driver handling, optional schema management with SQL or Liquibase, and backup and restore considerations so teams can deploy faster with fewer errors and aligned best practices.
 
-#### Run Optimize with Orchestration Cluster RDBMS
-
-<!-- https://github.com/camunda/product-hub/issues/2686 -->
-
-Orchestration Clusters can run with RDBMS as the sole secondary data store (for straightforward environments) or in combination with Optimize (which requires Elasticsearch or OpenSearch for analytics use cases). Administrators can:
-
-- Deploy a simple stack using only RDBMS if analytics are not required.
-- Add Optimize with Elasticsearch/OpenSearch for teams that require reporting and analytics. Process data ingestion and storage responsibilities remain strictly separated between orchestration and analytics.
-
-### RDBMS
-
 #### Manual installation supports RDBMS secondary storage
 
 <!-- https://github.com/camunda/product-hub/issues/2747 -->
@@ -415,6 +404,15 @@ New RDBMS production installation guides for Camunda 8 are available:
 - Manual: Deploy and manage Camunda 8 using relational databases in production environments.
 
 <p class="link-arrow">[RDBMS Helm deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)</p>
+
+#### Run Optimize with Orchestration Cluster RDBMS
+
+<!-- https://github.com/camunda/product-hub/issues/2686 -->
+
+Orchestration Clusters can run with RDBMS as the sole secondary data store (for straightforward environments) or in combination with Optimize (which requires Elasticsearch or OpenSearch for analytics use cases). Administrators can:
+
+- Deploy a simple stack using only RDBMS if analytics are not required.
+- Add Optimize with Elasticsearch/OpenSearch for teams that require reporting and analytics. Process data ingestion and storage responsibilities remain strictly separated between orchestration and analytics.
 
 ## 8.9.0-alpha4
 
