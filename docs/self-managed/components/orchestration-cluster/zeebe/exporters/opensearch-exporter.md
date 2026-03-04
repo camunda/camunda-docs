@@ -71,19 +71,23 @@ Set environment variables in the format `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_...` 
 
 Add the same configuration under `orchestration.configuration` in your `values.yaml` file.
 
+:::warning
+Do not configure both legacy (`zeebe.broker.exporters.*`) and unified (`camunda.data.exporters.*`) exporter properties at the same time. Exporter properties are a breaking-change mapping in unified configuration, and the application fails to start until legacy properties are removed.
+:::
+
 The exporter can be configured by providing `args`. The table below explains all the different
 options, and the default values for these options:
 
-| Option                | Description                                                                                                                                                                                    | Default                 |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| url                   | Valid URLs as a comma-separated string.                                                                                                                                                        | `http://localhost:9200` |
-| request-timeout-ms      | Request timeout (in ms) for the OpenSearch client.                                                                                                                                             | `30000`                 |
-| index                 | Refer to [index](#index) for index configuration options, including record/value-type switches, Optimize-focused filters, and the Optimize mode flag.                                          |                         |
-| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                                                                                                                                     |                         |
-| retention             | Refer to [retention](#retention) for the retention configuration options.                                                                                                                      |                         |
-| authentication        | Refer to [authentication](#authentication) for the authentication configuration options.                                                                                                       |                         |
-| aws                   | Refer to [AWS](#aws) for the AWS configuration options.                                                                                                                                        |                         |
-| include-enabled-records | If `true`, exports all enabled record types configured under `index`. If `optimizeModeEnabled` is `true`, Optimize mode takes precedence. Use mainly for migration or compatibility scenarios. | `false`                 |
+| Option                  | Description                                                                                                                                                                                      | Default                 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
+| url                     | Valid URLs as a comma-separated string.                                                                                                                                                          | `http://localhost:9200` |
+| request-timeout-ms      | Request timeout (in ms) for the OpenSearch client.                                                                                                                                               | `30000`                 |
+| index                   | Refer to [index](#index) for index configuration options, including record/value-type switches, Optimize-focused filters, and the Optimize mode flag.                                            |                         |
+| bulk                    | Refer to [bulk](#bulk) for the bulk configuration options.                                                                                                                                       |                         |
+| retention               | Refer to [retention](#retention) for the retention configuration options.                                                                                                                        |                         |
+| authentication          | Refer to [authentication](#authentication) for the authentication configuration options.                                                                                                         |                         |
+| aws                     | Refer to [AWS](#aws) for the AWS configuration options.                                                                                                                                          |                         |
+| include-enabled-records | If `true`, exports all enabled record types configured under `index`. If `optimize-mode-enabled` is `true`, Optimize mode takes precedence. Use mainly for migration or compatibility scenarios. | `false`                 |
 
 <Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' },{label: 'AWS', value: 'aws' }]} >
 
@@ -142,14 +146,16 @@ Starting with Camunda 8.9, you can filter exported variable records by variable 
 Configuration:
 
 ```yaml
-exporters:
-  opensearch:
-    args:
-      index:
-        variableNameInclusionStartWith:
-          - business_
-        variableNameExclusionStartWith:
-          - business_debug
+camunda:
+  data:
+    exporters:
+      opensearch:
+        args:
+          index:
+            variable-name-inclusion-start-with:
+              - business_
+            variable-name-exclusion-start-with:
+              - business_debug
 ```
 
 The exporter first matches variable names against inclusion rules (if present), then against exclusion rules. If a variable matches both, the exclusion wins.
@@ -164,15 +170,17 @@ such as `String`, `Number`, `Boolean`, `Object` or `Null`.
 Configuration:
 
 ```yaml
-exporters:
-  opensearch:
-    args:
-      index:
-        variableValueTypeInclusion:
-          - Object
-          - String
-        variableValueTypeExclusion:
-          - Object
+camunda:
+  data:
+    exporters:
+      opensearch:
+        args:
+          index:
+            variable-value-type-inclusion:
+              - Object
+              - String
+            variable-value-type-exclusion:
+              - Object
 ```
 
 Use this filter to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see
@@ -183,14 +191,16 @@ Use this filter to drop large object or array payloads at export time. Type infe
 BPMN process filters control which processes (by `bpmnProcessId`) are exported. All records that carry the given `bpmnProcessId` follow the same decision.
 
 ```yaml
-exporters:
-  opensearch:
-    args:
-      index:
-        bpmnProcessIdInclusion:
-          - orderProcess
-        bpmnProcessIdExclusion:
-          - debugProcess
+camunda:
+  data:
+    exporters:
+      opensearch:
+        args:
+          index:
+            bpmn-process-id-inclusion:
+              - orderProcess
+            bpmn-process-id-exclusion:
+              - debugProcess
 ```
 
 Processes listed under `inclusion` are candidates; `exclusion` removes any of those candidates again.
@@ -202,14 +212,16 @@ Some value types that never expose `bpmnProcessId` (for example, `DEPLOYMENT`, `
 With Optimize mode, you can restrict exported records to those used by Optimize, reducing index size.
 
 ```yaml
-exporters:
-  opensearch:
-    args:
-      index:
-        optimizeModeEnabled: true
+camunda:
+  data:
+    exporters:
+      opensearch:
+        args:
+          index:
+            optimize-mode-enabled: true
 ```
 
-When enabled, the exporter emits only the value types and intents that Optimize imports. Other value types are dropped unless you explicitly opt in to the legacy behavior (for example, via `includeEnabledRecords`).
+When enabled, the exporter emits only the value types and intents that Optimize imports. Other value types are dropped unless you explicitly opt in to the legacy behavior (for example, via `include-enabled-records`).
 
 Use this flag only if the exporter indices are dedicated to Optimize. For SaaS and Self-Managed recommendations, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
 
@@ -429,9 +441,9 @@ the environment variable.
 With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default.
 By default, they emit only the record value types and intents required by Optimize.
 
-To export additional record types, enable the [`includeEnabledRecords`](#configuration) configuration property.
+To export additional record types, enable the [`include-enabled-records`](#configuration) configuration property.
 
-When you enable exporter-side filters (`optimizeModeEnabled`, `variable-name`,
+When you enable exporter-side filters (`optimize-mode-enabled`, `variable-name`,
 `variable-type`, or `bpmn-process-id`), filtering applies only to newly produced records. Existing documents in Elasticsearch or OpenSearch are not rewritten.
 
 To export other record types, enable the [include-enabled-records](#configuration) configuration property.

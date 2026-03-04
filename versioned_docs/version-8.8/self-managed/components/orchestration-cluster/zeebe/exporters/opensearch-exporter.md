@@ -69,6 +69,10 @@ Set environment variables in the format `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_...` 
 
 Add the same configuration under `orchestration.configuration` in your `values.yaml` file.
 
+:::warning
+Do not configure both legacy (`zeebe.broker.exporters.*`) and unified (`camunda.data.exporters.*`) exporter properties at the same time. Exporter properties are a breaking-change mapping in unified configuration, and the application fails to start until legacy properties are removed.
+:::
+
 The exporter can be configured by providing `args`. The table below explains all the different
 options, and the default values for these options:
 
@@ -160,7 +164,7 @@ either:
 
 A retention policy can be set up to delete old data.
 When enabled, this creates an Index State Management (ISM) policy that deletes the data after the
-specified `minimumAge`. All index templates created by this exporter apply the created ISM policy.
+specified `minimum-age`. All index templates created by this exporter apply the created ISM policy.
 
 | Option             | Description                                                                   | Default                         |
 | ------------------ | ----------------------------------------------------------------------------- | ------------------------------- |
@@ -260,32 +264,32 @@ camunda:
             command-distribution: true
             decision-requirements: true
             decision: true
-        decision-evaluation: true
-        deployment: true
-        deployment-distribution: true
-        error: true
-        escalation: true
-        form: true
-        incident: true
-        job: true
-        job-batch: false
-        message: true
-        message-start-event-subscription: true
-        message-subscription: true
-        process: true
-        process-event: false
-        process-instance: true
-        process-instance-creation: true
-        process-instance-migration: true
-        process-instance-modification: true
-        process-message-subscription: true
-        resource-deletion: true
-        signal: true
-        signal-subscription: true
-        timer: true
-        user-task: true
-        variable: true
-        variable-document: true
+            decision-evaluation: true
+            deployment: true
+            deployment-distribution: true
+            error: true
+            escalation: true
+            form: true
+            incident: true
+            job: true
+            job-batch: false
+            message: true
+            message-start-event-subscription: true
+            message-subscription: true
+            process: true
+            process-event: false
+            process-instance: true
+            process-instance-creation: true
+            process-instance-migration: true
+            process-instance-modification: true
+            process-message-subscription: true
+            resource-deletion: true
+            signal: true
+            signal-subscription: true
+            timer: true
+            user-task: true
+            variable: true
+            variable-document: true
 ```
 
 ## Self-signed certificates

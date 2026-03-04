@@ -68,17 +68,21 @@ Set environment variables in the format `CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_..
 
 Add the same configuration under `orchestration.configuration` in your `values.yaml` file.
 
+:::warning
+Do not configure both legacy (`zeebe.broker.exporters.*`) and unified (`camunda.data.exporters.*`) exporter properties at the same time. Exporter properties are a breaking-change mapping in unified configuration, and the application fails to start until legacy properties are removed.
+:::
+
 The exporter can be configured by providing `args`. The table below explains all the different
 options, and the default values for these options:
 
-| Option                | Description                                                                              | Default                 |
-| --------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
-| url                   | Valid URLs as a comma-separated string.                                                  | `http://localhost:9200` |
+| Option                  | Description                                                                              | Default                 |
+| ----------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
+| url                     | Valid URLs as a comma-separated string.                                                  | `http://localhost:9200` |
 | request-timeout-ms      | Request timeout (in ms) for Elasticsearch. client                                        | `30000`                 |
-| index                 | Refer to [index](#index) for the index configuration options.                            |                         |
-| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                               |                         |
-| retention             | Refer to [retention](#retention) for the retention configuration options.                |                         |
-| authentication        | Refer to [authentication](#authentication) for the authentication configuration options. |                         |
+| index                   | Refer to [index](#index) for the index configuration options.                            |                         |
+| bulk                    | Refer to [bulk](#bulk) for the bulk configuration options.                               |                         |
+| retention               | Refer to [retention](#retention) for the retention configuration options.                |                         |
+| authentication          | Refer to [authentication](#authentication) for the authentication configuration options. |                         |
 | include-enabled-records | If `true` all enabled record types will be exported.                                     | `false`                 |
 
 <Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' }]} >
@@ -158,7 +162,7 @@ With the default configuration, the exporter will aggregate records and flush th
 <TabItem value="retention">
 
 A retention policy can be set up to delete old data.
-When enabled, this creates an Index Lifecycle Management (ILM) Policy that deletes the data after the specified `minimumAge`.
+When enabled, this creates an Index Lifecycle Management (ILM) Policy that deletes the data after the specified `minimum-age`.
 All index templates created by this exporter apply the created ILM Policy.
 
 | Option      | Description                                                                  | Default                         |

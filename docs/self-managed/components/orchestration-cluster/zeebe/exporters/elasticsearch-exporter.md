@@ -78,6 +78,10 @@ Set environment variables in the format `CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_..
 
 Add the same configuration under `orchestration.configuration` in your `values.yaml` file.
 
+:::warning
+Do not configure both legacy (`zeebe.broker.exporters.*`) and unified (`camunda.data.exporters.*`) exporter properties at the same time. Exporter properties are a breaking-change mapping in unified configuration, and the application fails to start until legacy properties are removed.
+:::
+
 The exporter can be configured by providing `args`. The table below explains all the different
 options, and the default values for these options:
 
@@ -100,48 +104,48 @@ cluster, but rather only a subset of them. This can also be configured to limit 
 being exported (e.g. only events, no commands), and the value type of these records (e.g. only job
 and process values).
 
-| Option                        | Description                                                                                                                                                                                                                                                                                                                                                        | Default         |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| prefix                        | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                                                                                                                                                                                            | zeebe-record    |
-| create-template                | If `true` missing indexes will be created automatically.                                                                                                                                                                                                                                                                                                           | `true`          |
+| Option                           | Description                                                                                                                                                                                                                                                                                                                                                        | Default         |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
+| prefix                           | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                                                                                                                                                                                            | zeebe-record    |
+| create-template                  | If `true` missing indexes will be created automatically.                                                                                                                                                                                                                                                                                                           | `true`          |
 | index-suffix-date-pattern        | This suffix will be appended to every index created by the exporter; The pattern is based on the Java [DateTimeFormatter](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/format/DateTimeFormatter.html) and supports the same syntax. This is useful when indexes should be created in a different interval, like hourly instead of daily. | `"yyyy-MM-dd'"` |
-| number-of-shards                | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each new record index created.                                                                                                                                                                                          | 3               |
-| number-of-replicas              | The number of shard [replicas](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings) used for each new record index created.                                                                                                                                                                                  | 0               |
-| command                       | If `true` command records will be exported                                                                                                                                                                                                                                                                                                                         | `false`         |
-| event                         | If `true` event records will be exported                                                                                                                                                                                                                                                                                                                           | `true`          |
-| rejection                     | If `true` rejection records will be exported                                                                                                                                                                                                                                                                                                                       | `false`         |
-| checkpoint                    | If `true` records related to checkpoints will be exported                                                                                                                                                                                                                                                                                                          | `false`         |
-| command-distribution           | If `true` records related to command distributions will be exported                                                                                                                                                                                                                                                                                                | `true`          |
-| decision                      | If `true` records related to decisions will be exported                                                                                                                                                                                                                                                                                                            | `true`          |
-| decision-evaluation            | If `true` records related to decision evaluations will be exported                                                                                                                                                                                                                                                                                                 | `true`          |
-| decision-requirements          | If `true` records related to decisionRequirements will be exported                                                                                                                                                                                                                                                                                                 | `true`          |
-| deployment                    | If `true` records related to deployments will be exported                                                                                                                                                                                                                                                                                                          | `true`          |
-| deployment-distribution        | If `true` records related to deployment distributions will be exported                                                                                                                                                                                                                                                                                             | `true`          |
-| error                         | If `true` records related to errors will be exported                                                                                                                                                                                                                                                                                                               | `true`          |
-| escalation                    | If `true` records related to escalations will be exported                                                                                                                                                                                                                                                                                                          | `true`          |
-| form                          | If `true` records related to forms will be exported                                                                                                                                                                                                                                                                                                                | `true`          |
-| incident                      | If `true` records related to incidents will be exported                                                                                                                                                                                                                                                                                                            | `true`          |
-| job                           | If `true` records related to jobs will be exported                                                                                                                                                                                                                                                                                                                 | `true`          |
-| job-batch                      | If `true` records related to job batches will be exported                                                                                                                                                                                                                                                                                                          | `false`         |
-| message                       | If `true` records related to messages will be exported                                                                                                                                                                                                                                                                                                             | `true`          |
-| message-batch                  | If `true` records related to message batches will be exported                                                                                                                                                                                                                                                                                                      | `false`         |
-| message-subscription           | If `true` records related to message subscriptions will be exported                                                                                                                                                                                                                                                                                                | `true`          |
+| number-of-shards                 | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each new record index created.                                                                                                                                                                                          | 3               |
+| number-of-replicas               | The number of shard [replicas](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings) used for each new record index created.                                                                                                                                                                                  | 0               |
+| command                          | If `true` command records will be exported                                                                                                                                                                                                                                                                                                                         | `false`         |
+| event                            | If `true` event records will be exported                                                                                                                                                                                                                                                                                                                           | `true`          |
+| rejection                        | If `true` rejection records will be exported                                                                                                                                                                                                                                                                                                                       | `false`         |
+| checkpoint                       | If `true` records related to checkpoints will be exported                                                                                                                                                                                                                                                                                                          | `false`         |
+| command-distribution             | If `true` records related to command distributions will be exported                                                                                                                                                                                                                                                                                                | `true`          |
+| decision                         | If `true` records related to decisions will be exported                                                                                                                                                                                                                                                                                                            | `true`          |
+| decision-evaluation              | If `true` records related to decision evaluations will be exported                                                                                                                                                                                                                                                                                                 | `true`          |
+| decision-requirements            | If `true` records related to decisionRequirements will be exported                                                                                                                                                                                                                                                                                                 | `true`          |
+| deployment                       | If `true` records related to deployments will be exported                                                                                                                                                                                                                                                                                                          | `true`          |
+| deployment-distribution          | If `true` records related to deployment distributions will be exported                                                                                                                                                                                                                                                                                             | `true`          |
+| error                            | If `true` records related to errors will be exported                                                                                                                                                                                                                                                                                                               | `true`          |
+| escalation                       | If `true` records related to escalations will be exported                                                                                                                                                                                                                                                                                                          | `true`          |
+| form                             | If `true` records related to forms will be exported                                                                                                                                                                                                                                                                                                                | `true`          |
+| incident                         | If `true` records related to incidents will be exported                                                                                                                                                                                                                                                                                                            | `true`          |
+| job                              | If `true` records related to jobs will be exported                                                                                                                                                                                                                                                                                                                 | `true`          |
+| job-batch                        | If `true` records related to job batches will be exported                                                                                                                                                                                                                                                                                                          | `false`         |
+| message                          | If `true` records related to messages will be exported                                                                                                                                                                                                                                                                                                             | `true`          |
+| message-batch                    | If `true` records related to message batches will be exported                                                                                                                                                                                                                                                                                                      | `false`         |
+| message-subscription             | If `true` records related to message subscriptions will be exported                                                                                                                                                                                                                                                                                                | `true`          |
 | message-start-event-subscription | If `true` records related to message start event subscriptions will be exported                                                                                                                                                                                                                                                                                    | `true`          |
-| process                       | If `true` records related to processes will be exported                                                                                                                                                                                                                                                                                                            | `true`          |
-| process-event                  | If `true` records related to process events will be exported                                                                                                                                                                                                                                                                                                       | `false`         |
-| process-instance               | If `true` records related to process instances will be exported                                                                                                                                                                                                                                                                                                    | `true`          |
-| process-instance-batch          | If `true` records related to process instances batches will be exported                                                                                                                                                                                                                                                                                            | `false`         |
-| process-instance-creation       | If `true` records related to process instance creations will be exported                                                                                                                                                                                                                                                                                           | `true`          |
-| process-instance-migration      | If `true` records related to process instance migrations will be exported                                                                                                                                                                                                                                                                                          | `true`          |
-| process-instance-modification   | If `true` records related to process instance modifications will be exported                                                                                                                                                                                                                                                                                       | `true`          |
-| process-message-subscription    | If `true` records related to process message subscriptions will be exported                                                                                                                                                                                                                                                                                        | `true`          |
-| resource-deletion              | If `true` records related to resource deletions will be exported                                                                                                                                                                                                                                                                                                   | `true`          |
-| signal                        | If `true` records related to signals will be exported                                                                                                                                                                                                                                                                                                              | `true`          |
-| signal-subscription            | If `true` records related to signal subscriptions will be exported                                                                                                                                                                                                                                                                                                 | `true`          |
-| timer                         | If `true` records related to timers will be exported                                                                                                                                                                                                                                                                                                               | `true`          |
-| user-task                      | If `true` records related to user tasks will be exported                                                                                                                                                                                                                                                                                                           | `true`          |
-| variable                      | If `true` records related to variables will be exported                                                                                                                                                                                                                                                                                                            | `true`          |
-| variable-document              | If `true` records related to variable documents will be exported                                                                                                                                                                                                                                                                                                   | `true`          |
+| process                          | If `true` records related to processes will be exported                                                                                                                                                                                                                                                                                                            | `true`          |
+| process-event                    | If `true` records related to process events will be exported                                                                                                                                                                                                                                                                                                       | `false`         |
+| process-instance                 | If `true` records related to process instances will be exported                                                                                                                                                                                                                                                                                                    | `true`          |
+| process-instance-batch           | If `true` records related to process instances batches will be exported                                                                                                                                                                                                                                                                                            | `false`         |
+| process-instance-creation        | If `true` records related to process instance creations will be exported                                                                                                                                                                                                                                                                                           | `true`          |
+| process-instance-migration       | If `true` records related to process instance migrations will be exported                                                                                                                                                                                                                                                                                          | `true`          |
+| process-instance-modification    | If `true` records related to process instance modifications will be exported                                                                                                                                                                                                                                                                                       | `true`          |
+| process-message-subscription     | If `true` records related to process message subscriptions will be exported                                                                                                                                                                                                                                                                                        | `true`          |
+| resource-deletion                | If `true` records related to resource deletions will be exported                                                                                                                                                                                                                                                                                                   | `true`          |
+| signal                           | If `true` records related to signals will be exported                                                                                                                                                                                                                                                                                                              | `true`          |
+| signal-subscription              | If `true` records related to signal subscriptions will be exported                                                                                                                                                                                                                                                                                                 | `true`          |
+| timer                            | If `true` records related to timers will be exported                                                                                                                                                                                                                                                                                                               | `true`          |
+| user-task                        | If `true` records related to user tasks will be exported                                                                                                                                                                                                                                                                                                           | `true`          |
+| variable                         | If `true` records related to variables will be exported                                                                                                                                                                                                                                                                                                            | `true`          |
+| variable-document                | If `true` records related to variable documents will be exported                                                                                                                                                                                                                                                                                                   | `true`          |
 
 ### Variable-name filters
 
@@ -150,14 +154,16 @@ Starting with Camunda 8.9, you can filter exported variable records by variable 
 Configuration:
 
 ```yaml
-exporters:
-  elasticsearch:
-    args:
-      index:
-        variableNameInclusionStartWith:
-          - business_
-        variableNameExclusionStartWith:
-          - business_debug
+camunda:
+  data:
+    exporters:
+      elasticsearch:
+        args:
+          index:
+            variable-name-inclusion-start-with:
+              - business_
+            variable-name-exclusion-start-with:
+              - business_debug
 ```
 
 The exporter first matches variable names against inclusion rules (if present), then against exclusion rules. If a variable matches both, the exclusion wins.
@@ -172,15 +178,17 @@ The exporter first matches variable types against inclusion rules (if present), 
 Configuration:
 
 ```yaml
-exporters:
-  elasticsearch:
-    args:
-      index:
-        variableValueTypeInclusion:
-          - Object
-          - String
-        variableValueTypeExclusion:
-          - Object
+camunda:
+  data:
+    exporters:
+      elasticsearch:
+        args:
+          index:
+            variable-value-type-inclusion:
+              - Object
+              - String
+            variable-value-type-exclusion:
+              - Object
 ```
 
 Use this filter to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see
@@ -193,14 +201,16 @@ BPMN process filters control which processes (by `bpmnProcessId`) are exported. 
 Configuration:
 
 ```yaml
-exporters:
-  elasticsearch:
-    args:
-      index:
-        bpmnProcessIdInclusion:
-          - orderProcess
-        bpmnProcessIdExclusion:
-          - debugProcess
+camunda:
+  data:
+    exporters:
+      elasticsearch:
+        args:
+          index:
+            bpmn-process-id-inclusion:
+              - orderProcess
+            bpmn-process-id-exclusion:
+              - debugProcess
 ```
 
 Processes listed under `inclusion` are candidates; `exclusion` removes any of those candidates again.
@@ -214,14 +224,16 @@ With Optimize mode, you can restrict exported records to those used by Optimize,
 Configuration:
 
 ```yaml
-exporters:
-  elasticsearch:
-    args:
-      index:
-        optimizeModeEnabled: true
+camunda:
+  data:
+    exporters:
+      elasticsearch:
+        args:
+          index:
+            optimize-mode-enabled: true
 ```
 
-When enabled, the exporter emits only the value types and intents that Optimize imports. Other value types are dropped unless you explicitly opt in to the legacy behavior (for example, via `includeEnabledRecords`).
+When enabled, the exporter emits only the value types and intents that Optimize imports. Other value types are dropped unless you explicitly opt in to the legacy behavior (for example, via `include-enabled-records`).
 
 Use this flag only if the exporter indices are dedicated to Optimize. For SaaS and Self-Managed recommendations, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
 
@@ -417,9 +429,9 @@ the environment variable.
 With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default.
 Instead, they will emit only the record value types and intents required by Optimize.
 
-To export additional record types, enable the [`includeEnabledRecords`](#configuration) configuration property.
+To export additional record types, enable the [`include-enabled-records`](#configuration) configuration property.
 
-When you enable exporter-side filters (`optimizeModeEnabled`, `variable-name`,
+When you enable exporter-side filters (`optimize-mode-enabled`, `variable-name`,
 `variable-type`, or `bpmn-process-id`), filtering applies only to newly produced records. Existing documents in Elasticsearch or OpenSearch are not rewritten.
 
 To export other record types, enable the [include-enabled-records](#configuration) configuration property.
