@@ -385,18 +385,6 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 
 A new installation guide covers how you can configure Camunda 8 with relational databases across the Orchestration Cluster and Web Modeler. The guide covers database provisioning, connections and authentication including Aurora IAM, JDBC driver handling, optional schema management with SQL or Liquibase, and backup and restore considerations so teams can deploy faster with fewer errors and aligned best practices.
 
-#### Manual installation options support RDBMS for secondary storage
-
-<!-- https://github.com/camunda/product-hub/issues/2747 -->
-
-Camunda 8 orchestration clusters can now be installed manually (VM/bare metal/Java application) with full support for RDBMS (H2, PostgreSQL, Oracle, MariaDB) as secondary storage.
-
-#### Manual production installation guide for RDBMS
-
-<!-- https://github.com/camunda/product-hub/issues/2740 -->
-
-A new production installation guide for Camunda 8 with RDBMS (manual installation) provides platform administrators, database administrators, and development teams with comprehensive, step-by-step instructions for deploying and managing Camunda 8 using relational databases in production environments.
-
 #### Run Optimize with Orchestration Cluster RDBMS
 
 <!-- https://github.com/camunda/product-hub/issues/2686 -->
@@ -405,6 +393,7 @@ Orchestration Clusters can run with RDBMS as the sole secondary data store (for 
 
 - Deploy a simple stack using only RDBMS if analytics are not required.
 - Add Optimize with Elasticsearch/OpenSearch for teams that require reporting and analytics. Process data ingestion and storage responsibilities remain strictly separated between orchestration and analytics.
+
 ### RDBMS
 
 #### Manual installation supports RDBMS secondary storage
