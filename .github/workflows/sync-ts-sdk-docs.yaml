@@ -1,0 +1,130 @@
+name: Sync TypeScript SDK API Reference
+
+on:
+  schedule:
+    - cron: "0 16 * * 4" # Runs every Thursday at 4 PM UTC (1h after REST API sync)
+  workflow_dispatch:
+    inputs:
+      docs_version:
+        description: "Docs version to update (e.g. '8.8'). Leave empty for next (docs/)."
+        required: false
+        default: ""
+      sdk_ref:
+        description: "Git ref of the JS SDK repo. Ignored when docs_version is set (uses stable/<version>)."
+        required: false
+        default: "main"
+      dry_run:
+        description: "Dry run — generate docs but skip PR creation"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  sync-ts-sdk-docs:
+    runs-on: ubuntu-latest
+    env:
+      DOCS_VERSION: ${{ github.event.inputs.docs_version || '' }}
+    steps:
+      - name: Resolve refs and paths
+        id: resolve
+        run: |
+          VERSION="${{ github.event.inputs.docs_version }}"
+          if [ -n "$VERSION" ]; then
+            echo "sdk_ref=stable/${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "docs_root=versioned_docs/version-${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=update-ts-sdk-docs/${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
+          else
+            echo "sdk_ref=${{ github.event.inputs.sdk_ref || 'main' }}" >> "$GITHUB_OUTPUT"
+            echo "docs_root=docs" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=update-ts-sdk-docs" >> "$GITHUB_OUTPUT"
+            echo "version_label=next" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout camunda-docs
+        uses: actions/checkout@v4
+        with:
+          repository: camunda/camunda-docs
+          path: docs
+
+      - name: Checkout TypeScript SDK
+        uses: actions/checkout@v4
+        with:
+          repository: camunda/orchestration-cluster-api-js
+          ref: ${{ steps.resolve.outputs.sdk_ref }}
+          path: ts-sdk
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        working-directory: ts-sdk
+        run: npm ci
+
+      - name: Build markdown docs
+        working-directory: ts-sdk
+        run: npm run docs:md
+
+      - name: Copy docs into camunda-docs
+        run: |
+          TARGET="docs/${{ steps.resolve.outputs.docs_root }}/apis-tools/typescript/api-reference"
+
+          # Clean previous generated docs (preserve manually-maintained files)
+          rm -rf "$TARGET"
+          mkdir -p "$TARGET"
+
+          # Copy the full docs-md tree
+          cp -R ts-sdk/docs-md/* "$TARGET/"
+
+          echo "Copied $(find "$TARGET" -name '*.md' | wc -l) markdown files → ${{ steps.resolve.outputs.docs_root }}"
+
+      - name: Check for changes
+        id: check_changes
+        working-directory: docs
+        run: |
+          if git diff-index --quiet HEAD; then
+            echo "No changes to commit."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Changes detected."
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate token
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
+        id: generate_token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
+          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: "${{ steps.generate_token.outputs.token }}"
+          path: docs
+          title: "docs: update TypeScript SDK API reference (${{ steps.resolve.outputs.version_label }})"
+          body: |
+            ## Description
+
+            Auto-generated PR from the [sync TypeScript SDK docs workflow](https://github.com/camunda/camunda-docs/tree/main/.github/workflows/sync-ts-sdk-docs.yaml).
+
+            Updates the TypeScript SDK API reference documentation from [`orchestration-cluster-api-js@${{ steps.resolve.outputs.sdk_ref }}`](https://github.com/camunda/orchestration-cluster-api-js/tree/${{ steps.resolve.outputs.sdk_ref }}).
+
+            **Target:** `${{ steps.resolve.outputs.docs_root }}/apis-tools/typescript/api-reference/`
+
+            ## When should this change go live?
+
+            - There is **no urgency** with this change and can be released at any time.
+
+            ## PR Checklist
+
+            - My changes are in `/${{ steps.resolve.outputs.docs_root }}`.
+          commit-message: "docs: update TypeScript SDK API reference (${{ steps.resolve.outputs.version_label }})"
+          branch: ${{ steps.resolve.outputs.pr_branch }}
+          delete-branch: true
+          base: main
+          labels: deploy

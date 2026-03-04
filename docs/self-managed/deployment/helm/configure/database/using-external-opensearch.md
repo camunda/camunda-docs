@@ -7,13 +7,9 @@ description: Learn how to connect a Camunda 8 Self-Managed Helm chart deployment
 
 Configure Camunda 8 Self-Managed to use Amazon OpenSearch Service as a secondary storage backend when deploying with the Helm chart. OpenSearch is used for indexing and querying operational data consumed by multiple Camunda components. For a canonical definition, see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
 
-By default, the [Helm chart deployment](/self-managed/setup/overview.md) provisions an Elasticsearch instance. You can instead configure the Helm chart to connect to an external Amazon OpenSearch Service instance.
+Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by default. You can configure the Helm chart to connect to an external Amazon OpenSearch Service instance as an alternative secondary storage backend.
 
-Secondary storage is configurable. For supported components, you can use an RDBMS-based secondary store instead. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](/reference/glossary.md#rdbms).
-
-:::note
-In 8.9-alpha3, H2 is the default secondary storage for lightweight Camunda 8 Run and quick-install scenarios. Elasticsearch remains bundled and supported as an optional alternative; OpenSearch is supported for Self‑Managed deployments but is not bundled in Camunda 8 Run. Use this guide when you want to run or connect to an external OpenSearch cluster instead of the default H2 store.
-:::
+Secondary storage is configurable. For supported components, you can use an RDBMS-based secondary store instead. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](/reference/glossary.md#rdbms). For the [quick-install](/self-managed/deployment/helm/install/quick-install.md) scenario, RDBMS with embedded H2 is used instead.
 
 :::info OpenSearch support
 Camunda 8 supports both the open-source [OpenSearch](https://opensearch.org/) distribution and [Amazon OpenSearch Service](https://aws.amazon.com/opensearch-service).
