@@ -20,7 +20,7 @@ This feature is only available for SaaS clusters using Camunda 8.9 and above. If
 
 ## Configure the audit log
 
-1. In **Console**, go to **Clusters**.
+1. In **Console**, open **Clusters**.
 2. Select an applicable cluster.
 3. From the cluster configurations tabs, select **Audit Log**.
 4. Select the user operations and client operations to record.
@@ -28,7 +28,7 @@ This feature is only available for SaaS clusters using Camunda 8.9 and above. If
 
 ## Enable or disable the audit log
 
-1. In **Console**, go to **Clusters**.
+1. In **Console**, open **Clusters**.
 2. Select an applicable cluster.
 3. From the cluster configurations tabs, select **Audit Log**.
 4. Click **Enable audit log** or **Disable audit log**, depending on the state of your cluster.
