@@ -5,7 +5,7 @@ sidebar_label: Audit log
 description: A high-level overview of the audit log in Camunda 8.
 ---
 
-With the [audit log](../../../components/audit-log/overview.md), you'll access a record of operations, including who performed them, when, and on which entities.
+Use the [audit log](../../../components/audit-log/overview.md) to access a record of operations, including who performed the operation, when it was performed, and on which entities the operation was performed.
 
 ## Impact on secondary storage
 

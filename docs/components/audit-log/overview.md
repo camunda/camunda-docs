@@ -14,7 +14,7 @@ Audit a comprehensive record of operations across process, identity, and user ta
 
 ## About
 
-With the **audit log**, you'll access a record of operations, including who performed them, when, and on which entities.
+The audit log is a record of operations, including who performed the operation, when it was performed, and on which entities the operation was performed.
 
 Use the audit log to:
 
