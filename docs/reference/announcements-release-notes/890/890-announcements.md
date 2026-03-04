@@ -132,6 +132,15 @@ To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-clien
 
 ### APIs & tools
 
+:::note API upgrade checklist for 8.9
+
+- Update to the latest official Camunda SDK versions.
+- If you generate clients from OpenAPI, regenerate from the 8.9 specification.
+- Re-run compilation/type checks and address enum-handling or type-mapping updates.
+- Review message subscription filter payload construction for `processDefinitionKey`.
+
+:::
+
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
@@ -155,7 +164,11 @@ This change aligns with the Spring Boot support policy, as OSS support for Sprin
 </div>
 <div className="release-announcement-content">
 #### Resource deletion endpoint now has response body
-Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{resourceKey}/deletion` in the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) now returns a response body. The Camunda Java client has been updated to support this change.
+Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{resourceKey}/deletion` in the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) returns a response body.
+
+This provides explicit deletion feedback, making client-side confirmation, auditing, and follow-up workflow logic more reliable.
+
+If you use an SDK, update to the latest version for compiler and model support.
 
 </div>
 </div>
@@ -166,11 +179,11 @@ Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{res
 </div>
 <div className="release-announcement-content">
 
-#### OpenAPI request type-hardening can break generated clients
+#### OpenAPI type-safety enhancements for request and schema types
 
-Starting with 8.9.0, some request properties in the OpenAPI contract use stricter schema types (for example branded key/id types) instead of plain `string`.
+Starting with 8.9.0, parts of the OpenAPI contract use stronger domain types and one schema rename to improve semantic correctness in client applications.
 
-This can cause compile-time breaks for customers using self-built/generated SDKs, even when runtime payload values remain string-like.
+This increases compile-time safety and helps prevent semantic substitution errors in typed integrations.
 
 Affected contract updates include:
 
@@ -179,55 +192,18 @@ Affected contract updates include:
 - `SearchCorrelatedMessageSubscriptionsData.body.filter.processDefinitionKey.$eq`: `string` → `ProcessDefinitionKey`
 - `CorrelatedMessageSubscriptionFilter.processDefinitionKey`: `string` → `ProcessDefinitionKeyFilterProperty | undefined`
 - `CorrelatedMessageSubscriptionSearchQuery.filter.processDefinitionKey.$eq`: `string` → `ProcessDefinitionKey`
+- `ProcessInstanceIncidentSearchQuery` renamed to `IncidentSearchQuery`
 
-<p className="link-arrow">[Migration guidance for generated clients](../../../apis-tools/migration-manuals/migrate-to-camunda-api.md#generated-client-compatibility-for-89-openapi-updates)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Message subscription filter request type changed
-
-Starting with 8.9.0, in `CorrelatedMessageSubscriptionFilter` (request), `processDefinitionKey` changed from `string | undefined` to `ProcessDefinitionKeyFilterProperty | undefined`.
-
-This can cause compile-time or integration breaks for customers using self-built/generated SDKs or handwritten integrations that still pass a plain string.
-
-- Old: `CorrelatedMessageSubscriptionFilter.processDefinitionKey: string | undefined`
-- New: `CorrelatedMessageSubscriptionFilter.processDefinitionKey: ProcessDefinitionKeyFilterProperty | undefined`
-
-Example request payload update:
+Example request payload update for message subscription filtering:
 
 - Before: `"processDefinitionKey": "2251799813685251"`
-- After: `"processDefinitionKey": { "$eq": "2251799813685251" }`
+- After (for example): `"processDefinitionKey": { "$eq": "2251799813685251" }`
 
-If you generate clients from the Camunda OpenAPI specification, regenerate your client and update request payload construction, references, and type mappings accordingly.
+What to do:
 
-<p className="link-arrow">[Migration guidance for generated clients](../../../apis-tools/migration-manuals/migrate-to-camunda-api.md#generated-client-compatibility-for-89-openapi-updates)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### OpenAPI schema rename can break generated clients
-
-Starting with 8.9.0, the OpenAPI schema type `ProcessInstanceIncidentSearchQuery` was renamed to `IncidentSearchQuery`.
-
-This can cause compile-time or integration breaks for customers using self-built/generated SDKs that still reference the previous type name.
-
-- Old: `ProcessInstanceIncidentSearchQuery`
-- New: `IncidentSearchQuery`
-
-If you generate clients from the Camunda OpenAPI specification, regenerate your client and update references/imports/type mappings to the new name.
+- Official SDK users: update to the latest SDK version.
+- Generated-client users: regenerate clients and update type mappings/imports.
+- Handwritten integrations: update request payload construction and affected typed helpers.
 
 <p className="link-arrow">[Migration guidance for generated clients](../../../apis-tools/migration-manuals/migrate-to-camunda-api.md#generated-client-compatibility-for-89-openapi-updates)</p>
 
@@ -240,15 +216,23 @@ If you generate clients from the Camunda OpenAPI specification, regenerate your 
 </div>
 <div className="release-announcement-content">
 
-#### OpenAPI enum additions can break strict generated clients
+#### OpenAPI enum extensions for new 8.9 capabilities
 
-Starting with 8.9.0, new enum literals were added to the OpenAPI contract. While additive at schema level, this can break generated clients that assume closed enums (for example, exhaustive matching without fallback or strict deserializers).
+Starting with 8.9.0, new enum literals were added to support expanded functionality.
+
+This improves feature coverage, but typed or exhaustive enum-handling code paths may require updates to preserve full completeness checks.
 
 Added literals include:
 
 - `BatchOperationTypeEnum` / `BatchOperationTypeFilterProperty`: `DELETE_DECISION_INSTANCE`
 - `ResourceTypeEnum`: `USER_TASK`
 - `PermissionTypeEnum`: `COMPLETE`
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Generated-client users: regenerate and add fallback/default handling for enum parsing and matching.
+- Handwritten integrations: review enum branches (for example exhaustive `switch`/pattern matches) and add handling for new values.
 
 <p className="link-arrow">[Migration guidance for generated clients](../../../apis-tools/migration-manuals/migrate-to-camunda-api.md#generated-client-compatibility-for-89-openapi-updates)</p>
 
@@ -274,7 +258,7 @@ Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this rol
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
 
@@ -286,9 +270,9 @@ The following enum literals in the V2 Orchestration Cluster API are now marked a
 - `UNKNOWN` in `DecisionInstanceStateFilterProperty`
 - `UNKNOWN` in `DecisionInstanceStateEnum`
 
-This impacts customers using self-built/generated API clients.
+These values were reintroduced and are now explicitly deprecated to preserve backward compatibility while signaling planned cleanup.
 
-These values should be avoided in new integrations, as they are planned for removal in the next minor release.
+Avoid these values in new integrations. They are planned for removal in a future release, where removal will be a breaking change.
 
 <p className="link-arrow">[Orchestration Cluster API reference](../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)</p>
 
