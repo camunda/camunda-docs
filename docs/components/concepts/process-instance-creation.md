@@ -198,6 +198,10 @@ For example, consider a process that ships book orders where every order is iden
 
 You set the business ID at process instance creation time via the `businessId` field in the creation request. The business ID is **immutable**; once set, it cannot be changed or removed for the lifetime of the process instance. The maximum length for a business ID is **256 characters**.
 
+:::note
+The business ID feature is currently only available through the API (REST and gRPC) and the official clients. Creating process instances from other tools such as Web Modeler does not support setting a business ID.
+:::
+
 <details>
    <summary>Create a process instance with a business ID via Orchestration Cluster REST API</summary>
    <p>
