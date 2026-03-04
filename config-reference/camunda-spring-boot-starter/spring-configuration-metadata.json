@@ -316,7 +316,7 @@
     {
       "name": "camunda.client.deployment.own-jar-only",
       "type": "java.lang.Boolean",
-      "description": "Indicates if the resources selected by the deployment annotation have to reside in the same jar as the annotated class. <p>This property acts as the default behavior. If the `@Deployment` annotation explicitly sets its `ownJarOnly` parameter, that annotation-level value overrides this property for the annotated deployment.",
+      "description": "Indicates if the resources selected by the deployment annotation have to reside in the same jar as the annotated class. This property acts as the default behavior. If the `@Deployment` annotation explicitly sets its `ownJarOnly` parameter, that annotation-level value overrides this property for the annotated deployment.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientDeploymentProperties",
       "defaultValue": false
     },
