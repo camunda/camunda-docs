@@ -250,7 +250,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | Property                | Can be migrated |
 | ----------------------- | --------------- |
 | auditLogKey             | Yes             |
-| entityKey               | Partially       |
+| entityKey               | Yes\*           |
 | entityType              | Yes             |
 | operationType           | Yes             |
 | entityVersion           | Yes             |
@@ -273,8 +273,8 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | processDefinitionKey    | Yes             |
 | processInstanceKey      | Yes             |
 | rootProcessInstanceKey  | Yes             |
-| elementInstanceKey      | Partially       |
-| jobKey                  | No              |
+| elementInstanceKey      | Yes\*           |
+| jobKey                  | Yes\*           |
 | userTaskKey             | Yes             |
 | decisionRequirementsKey | No              |
 | decisionDefinitionKey   | No              |
@@ -284,7 +284,7 @@ The following table shows which Camunda 8 entities and properties are migrated b
 | resourceKey             | No              |
 | relatedEntityType       | No              |
 | relatedEntityKey        | No              |
-| entityDescription       | Partially       |
+| entityDescription       | Yes\*           |
 | partitionId             | Yes             |
 | historyCleanupDate      | Yes             |
 
@@ -294,6 +294,7 @@ The following limitations apply:
 - Audit log entries are not migrated for batch operations, identity links, attachments, job definitions, jobs, external tasks, metrics, operation logs, filters, comments, and properties.
 - The `entityKey` property is migrated only for entities related to user tasks, process definitions, and process instances.
 - The `elementInstanceKey` property is migrated only for entities related to user tasks.
+- The `jobKey` property is migrated only for entities related to jobs of type asynchronous continuations.
 - The `entityDescription` property is migrated only for user, group, tenant, and delete variable operations.
 
 ### Batch operation
@@ -478,7 +479,7 @@ The following limitations apply:
 | flowNodeInstanceKey    | Yes\*           |
 | flowNodeId             | Yes             |
 | jobKey                 | No              |
-| errorType              | Yes\*\*         |
+| errorType              | Yes\*           |
 | errorMessage           | Yes             |
 | errorMessageHash       | No              |
 | creationDate           | Yes             |
@@ -487,8 +488,8 @@ The following limitations apply:
 | tenantId               | Yes             |
 | partitionId            | Yes             |
 
-\* `flowNodeInstanceKey` will not be populated when an incident occurs in flow node in waiting state with asyncBefore configuration.  
-\*\* `errorType` is populated when an equivalent mapping is possible. In all other cases, it's set to `UNKNOWN`.
+- `flowNodeInstanceKey` will not be populated when an incident occurs in flow node in waiting state with asyncBefore configuration.
+- `errorType` is populated when an equivalent mapping is possible. In all other cases, it's set to `UNKNOWN`.
 
 ### Job
 
@@ -496,7 +497,7 @@ The following limitations apply:
 | ------------------------ | --------------- |
 | jobKey                   | Yes             |
 | type                     | No              |
-| worker                   | Yes             |
+| worker                   | Yes\*           |
 | state                    | Yes\*           |
 | kind                     | Yes\*           |
 | listenerEventType        | Yes\*           |
@@ -521,8 +522,9 @@ The following limitations apply:
 | creationTime             | Yes             |
 | lastUpdateTime           | No              |
 
-Only Camunda 7 jobs of type async continuation are migrated to Camunda 8. Further limitations:
+Only Camunda 7 jobs of type asynchronous continuation are migrated to Camunda 8. Further limitations:
 
+- `worker` is set to the hostname of the machine where Camunda 7 has executed the job.
 - `state` is set to `COMPLETED` for all migrated jobs.
 - `kind` is set to `BPMN_ELEMENT` for all migrated jobs.
 - `listenerEventType` is set to `UNSPECIFIED` for all migrated jobs.
@@ -601,9 +603,9 @@ Only Camunda 7 jobs of type async continuation are migrated to Camunda 8. Furthe
 | historyCleanupDate       | Yes                 |
 | tags                     | Yes\*               |
 
-\* Tags do not exist in Camunda 7, but we allow to set them during migration via [interceptors](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md#entity-transformation)
-and they will be visible in Camunda 8 after migration.
-Default tags: `legacy-id-<processInstanceId>`, `business-key-<businessKey>` (if business key exists).
+- Tags do not exist in Camunda 7, but we allow to set them during migration via [interceptors](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md#entity-transformation)
+  and they will be visible in Camunda 8 after migration.
+  Default tags: `legacy-id-<processInstanceId>`, `business-key-<businessKey>` (if business key exists).
 
 ### Sequence flow
 
@@ -669,8 +671,8 @@ Default tags: `legacy-id-<processInstanceId>`, `business-key-<businessKey>` (if 
 | tags                     | Yes\*           |
 | partitionId              | Yes             |
 
-\* Tags do not exist in Camunda 7, but we allow to set them during migration via [interceptors](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md#entity-transformation)
-and they will be visible in Camunda 8 after migration.
+- Tags do not exist in Camunda 7, but we allow to set them during migration via [interceptors](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md#entity-transformation)
+  and they will be visible in Camunda 8 after migration.
 
 ### Variable
 

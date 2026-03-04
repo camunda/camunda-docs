@@ -151,6 +151,10 @@ Example BPMN configuration that will be migrated:
 </bpmn:userTask>
 ```
 
+## Jobs
+
+The History Data Migrator migrates only jobs of type [asynchronous continuations](https://docs.camunda.org/manual/7.24/user-guide/process-engine/transactions-in-processes/#configure-asynchronous-continuations).
+
 ## Atomicity
 
 The History Data Migrator uses the configured Camunda 8 datasource for both the migration mapping schema and the migrated data. This ensures single-transaction atomicity for each entity migration.
