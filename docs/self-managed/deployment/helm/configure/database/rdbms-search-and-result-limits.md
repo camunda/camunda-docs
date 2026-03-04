@@ -11,9 +11,7 @@ When using RDBMS as secondary storage, search APIs behave similarly to Elasticse
 
 ### Total results capping
 
-In RDBMS-backed deployments, `totalResults` is capped at **10,000** to improve performance and match Elasticsearch/OpenSearch behavior.
-
-With this cap in place, COUNT(\*) queries are no longer prohibitively expensive. However, query performance still depends on selectivity—poorly filtered queries on large datasets can still perform COUNT operations that scan millions of rows. See [Query performance guidance](#query-performance-guidance) for optimization strategies.
+In RDBMS-backed deployments, `totalResults` is capped at **10,000** to improve performance and match Elasticsearch/OpenSearch behavior. See [query performance guidance](#query-performance-guidance) for optimization strategies.
 
 Example response:
 
@@ -113,15 +111,13 @@ Rather than requesting exact counts for large result sets:
 
 This avoids unnecessary COUNT(\*) operations on queries that may scan large portions of the table.
 
-## Comparing RDBMS and Elasticsearch/OpenSearch behavior
+## API behavior
 
-| Aspect                | RDBMS                                            | ES/OS                                   |
-| --------------------- | ------------------------------------------------ | --------------------------------------- |
-| **Result count**      | Capped at `maxTotalHits` (default 10,000)        | Capped at 10,000                        |
-| **hasMoreTotalItems** | Available; indicates more results beyond the cap | Not available in ES/OS                  |
-| **Count accuracy**    | Exact count up to the cap; then approximate      | Exact count up to cap; then approximate |
-| **Performance**       | Separate COUNT(\*) query required                | Count included in search response       |
-| **Pagination**        | Supported via page or searchAfter                | Supported via from/size or search_after |
+RDBMS-backed search APIs behave similarly to Elasticsearch/OpenSearch, with these key differences:
+
+- **Result count**: Capped at `maxTotalHits` (default 10,000; configurable)
+- **hasMoreTotalItems**: Available to indicate when results exceed the cap
+- **Pagination**: Supported via `page` or `searchAfter` parameters
 
 ## Database-specific tuning (PostgreSQL)
 
@@ -130,13 +126,7 @@ If you are using PostgreSQL as your RDBMS and experience slow search queries, co
 ```yaml
 global:
   postgresql:
-    auth:
-      database: camunda
-      username: camunda
-      password: camunda
-      postgresPassword: camunda
-
-postgresqlSharedPreloadLibraries: pg_stat_statements
+    postgresqlSharedPreloadLibraries: pg_stat_statements
 
 primary:
   resources:
