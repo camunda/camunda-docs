@@ -15,6 +15,7 @@ import NoDomainInfo from '../../\_partials/\_no-domain-info.md'
 import HelmUpgradeNote from '../../\_partials/\_helm-upgrade-note.md'
 import KubefwdTip from '../../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../../\_partials/\_port-forward-services.md'
+import DeployECKElasticsearch from '../../\_partials/\_deploy-eck-elasticsearch.md'
 
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster, and confirmation it is working as intended.
 
@@ -28,7 +29,7 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 - A namespace to host the Camunda Platform; in this guide we will reference `camunda` as the target namespace.
 - (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - (optional) Permissions to install Kubernetes operators (cluster-admin or equivalent) to deploy infrastructure services such as Elasticsearch, PostgreSQL, and Keycloak. You can also install these operators via the [OpenShift OperatorHub](https://docs.openshift.com/container-platform/latest/operators/understanding/olm-understanding-operatorhub.html), but this guide installs them directly from source to provide full control over versions and configuration.
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
+  For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
 
 ## Architecture
 
@@ -184,7 +185,7 @@ For more configuration options, refer to the [Helm chart documentation](https://
 Depending on your installation path, you may use different settings.
 For easy and reproducible installations, we will use YAML files to configure the chart.
 
-### 1. Create the `values.yml` file
+### Create the `values.yml` file
 
 Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
 
@@ -248,7 +249,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 </TabItem>
 </Tabs>
 
-### 2. Configure your deployment
+### Configure your deployment
 
 #### Enable Enterprise components
 
@@ -271,7 +272,29 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 :::
 
-### 3. Install Camunda 8 using Helm
+### Deploy prerequisite services
+
+Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch and PostgreSQL) can be deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md). Keycloak can optionally be deployed as your OIDC provider:
+
+- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+
+All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
+
+:::note Working directory
+All commands in this guide assume you are at the **repository root** (the directory created by `get-your-copy.sh`). The deploy commands below use subshells `(cd ... && ./deploy.sh)` to preserve your working directory.
+:::
+
+#### Deploy Elasticsearch {#deploy-elasticsearch}
+
+If your organization does not want to use a managed Elasticsearch service, ECK Operator is an option. This guide makes use of ECK Operator to the deploy Elasticsearch.
+
+:::warning Production Elasticsearch recommendation
+For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)). Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option.
+:::
+
+<DeployECKElasticsearch />
+
+### Install Camunda 8 using Helm
 
 Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Run the following command:
 
