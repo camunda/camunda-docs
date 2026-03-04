@@ -12,7 +12,7 @@ The audit log is an important feature with which you can meet regulatory require
 
 The audit log is enabled by default, and the storage it requires may result in increased costs. To mitigate these resource costs, only user operations are tracked by default, not [client](../../zeebe/technical-concepts/architecture.md#clients) operations.
 
-In Camunda 8 SaaS, you can change the default behavior in Console. You can choose which user and client operations are recorded to fine-tune log thoroughness and resource usage according to your needs. Additionally, you can disable the audit log, altogether.
+In Camunda 8 SaaS, you can change the default behavior in Console. You can choose which user and client operations are recorded to fine-tune log thoroughness and resource usage according to your needs. You can also disable the audit log.
 
 :::note
 This feature is only available for SaaS clusters using Camunda 8.9 and above. If you're using Camunda 8 Self-Managed, see the [Self-Managed guide](../../../self-managed/concepts/audit-log/configure.md).
