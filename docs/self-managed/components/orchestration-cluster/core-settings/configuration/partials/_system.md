@@ -1,9 +1,22 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## System
+## Camunda
 
 <Tabs>
+  <TabItem value="application.aml" label="Application properties">
+
+### `camunda`
+
+| Property                          | Description                                                                                                                                                                                                                                                                                                                                                                                                  | Default value |
+| :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| `camunda.mode` | <p>Defines the mode in which Camunda is running. This is used to activate/deactivate certain features. The mode can be set via the "camunda.mode" property. Valid, non-null values are:<ul><li>`all-in-one`</li><li>`broker`</li><li>`gateway`</li></ul>The mode is meant to be interpreted as case-insensitive. A null value means that launch modes are not used, and the behavior of the application will be defined by the active profiles and configuration properties.</p> | `null` |
+| `camunda.insecure` | <p>Activates or deactivates security and authentication layers, when the application is launched using `camunda.mode`. The affected components are: the Gateway (embedded or dedicated), the authentication layer and the authorization layer.</p> | `false` |
+
+  </TabItem>
+
+## System
+
   <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.system`
