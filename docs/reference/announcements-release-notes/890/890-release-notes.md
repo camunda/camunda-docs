@@ -206,6 +206,14 @@ The Operate, Tasklist, and Identity application profiles are now merged into the
 - These components are now treated as UIs served by the gateway.
 - Control their inclusion via configuration properties (for example, `camunda.webapps.enabled=operate,identity`).
 
+#### Amazon ECS (EC2+Fargate) support
+
+Camunda 8 officially supports running Orchestration Clusters on Amazon Elastic Container Service (Amazon ECS). This makes it easier and safer for teams that rely on Amazon ECS (including Fargate) to run Camunda 8 in production without needing to adopt Kubernetes (EKS). This feature relies on AWS S3.
+
+- A new guide covers validated deployment patterns for running brokers and related services on Amazon ECS with both EC2 and Fargate launch types.
+- Build-in storage safety guardrails, such as checks and guidance to prevent unsafe configurations (for example, multiple brokers writing to the same EFS volume).
+- Cluster membership handling offers improved handling of broker restarts and Amazon ECS task scheduling to ensure stable cluster operation.
+
 #### Configure RocksDB memory per-broker
 
 <!-- https://github.com/camunda/product-hub/issues/3304 -->
