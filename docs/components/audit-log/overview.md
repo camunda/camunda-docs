@@ -40,6 +40,8 @@ Additionally, if you're using Camunda 8 Self-Managed, you control the [secondary
 
 ## Get started
 
+Start auditing operations in Operate, Tasklist, and Identity.
+
 <AoGrid ao={[
 {
 link: "../../operate/userguide/audit-operations",
@@ -63,6 +65,8 @@ description: "Learn how to audit operations in Camunda 8 Identity.",
 
 ## Learn the fundamentals
 
+Learn fundamental concepts about how the audit log works and how to access its data.
+
 <AoGrid ao={[
 {
 link: "recorded-operations",
@@ -85,5 +89,7 @@ description: "Learn how operation data from the audit log is presented in differ
 ]} columns={3}/>
 
 ## Explore further resources
+
+Once you have a foundational understanding of the audit log, explore these additional resources:
 
 - [Use the Camunda REST API to access the audit log](../../apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx)
