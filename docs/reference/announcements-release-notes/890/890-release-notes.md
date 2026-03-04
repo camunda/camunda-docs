@@ -69,7 +69,7 @@ Use the audit log to:
 - Maintain operational integrity and transparency
 - Troubleshoot issues
 
-This feature is available in Operate, Identity, Tasklist, and the [Camunda 8 Rest API](/apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx).
+This feature is available in Operate, Identity, Tasklist, and the [Camunda 8 REST API](/apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx).
 
 ### Camunda 8 Run
 
