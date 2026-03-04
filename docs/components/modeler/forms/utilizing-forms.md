@@ -71,8 +71,6 @@ With Camunda 8.9, linked Camunda Forms are no longer auto-deployed. This change 
 
 ## Deploy a linked form
 
-Linked forms must be deployed separately in clusters running version 8.4 or later.
-
 To deploy your latest form changes, click the blue **Deploy** button.
 
 ## Deploy your diagram and start an instance
@@ -82,7 +80,7 @@ Click the blue **Run** button.
 You can now monitor your instances in [Operate](/components/operate/operate-introduction.md).
 
 :::info
-Linked Camunda Forms must now be deployed explicitly. This gives teams finer control over versioning, release timing, and deployment scope.
+When deploying a BPMN diagram, Web Modeler will not automatically deploy linked forms. This gives you full control over when and which version of a form is deployed.
 As linked forms are resolved to their latest version (unless you change the [binding type](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#camunda-form-linked)), make sure that the version deployed in the target cluster matches the one linked in your diagram.
 
 When deploying to a Camunda 8 cluster running a version earlier than 8.4, forms linked to user tasks or none start events will be automatically embedded into the user task to guarantee backwards compatibility.
