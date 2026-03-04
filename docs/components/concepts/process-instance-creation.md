@@ -251,6 +251,10 @@ Uniqueness control is opt-in. Enable it using the configuration property [`camun
 When a business ID is specified, the partition for the new process instance is determined deterministically based on the business ID rather than using the default round-robin distribution. This is necessary to support the uniqueness control feature, as the check must happen on a single partition. Be aware that this may result in uneven distribution of instances across partitions if business IDs aren't well-distributed.
 :::
 
+#### Multi-tenancy scope
+
+In a multi-tenant environment, uniqueness is enforced **per tenant**. The same business ID can exist in different tenants without conflict. Two active root process instances in different tenants may share the same business ID and process definition without triggering a rejection.
+
 ### Limitations
 
 - Searching process instance related entities (for example, jobs, user tasks, or incidents) by business ID is not yet supported.
