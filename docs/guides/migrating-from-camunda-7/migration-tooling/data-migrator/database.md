@@ -33,7 +33,7 @@ Read more about [history migration atomicity](../data-migrator/history.md#atomic
 The migrator supports the following SQL databases:
 
 | Database                 | Version        | JDBC Driver                                    | Notes                      |
-| ------------------------ | -------------- | ---------------------------------------------- | -------------------------- |
+|--------------------------|----------------|------------------------------------------------|----------------------------|
 | **H2**                   | 2.3.232        | `org.h2.Driver`                                | Default, good for testing  |
 | **PostgreSQL**           | 15, 16, 17, 18 | `org.postgresql.Driver`                        | Recommended for production |
 | **Oracle**               | 19c, 23ai      | `oracle.jdbc.OracleDriver`                     | Recommended for production |
