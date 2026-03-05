@@ -8,33 +8,33 @@ import TabItem from '@theme/TabItem';
 
 ### `camunda`
 
-| Property           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Default value |
-| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.mode`     | <p>Defines the mode in which Camunda is running. This is used to activate or deactivate certain features. The mode can be set via the `camunda.mode` property. Valid, non-null values are:<ul><li>`all-in-one`</li><li>`broker`</li><li>`gateway`</li></ul>The mode is interpreted as case-insensitive. A `null` value means that launch modes are not used, and the behavior of the application is defined by the active profiles and configuration properties.</p> | `null`        |
-| `camunda.insecure` | <p>Activates or deactivates security and authentication layers when the application is launched using `camunda.mode`. The affected components are the Gateway (embedded or dedicated), the authentication layer, and the authorization layer. Intended for development and local testing, not for production use.</p>                                                                                                                                                | `false`       |
+| Property           | Description                                                                                                                                                                                                                                                                                                                                                   | Default value |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
+| `camunda.mode`     | <p>Defines the launch mode for Camunda. Use this setting to activate or deactivate features. Valid, non-`null` values are:<ul><li>`all-in-one`</li><li>`broker`</li><li>`gateway`</li></ul>Values are case-insensitive. If you set this to `null`, launch modes are disabled and behavior is defined by the active profiles and configuration properties.</p> | `null`        |
+| `camunda.insecure` | <p>Controls whether security and authentication layers are enabled when you launch the application using `camunda.mode`. This affects the Gateway (embedded or dedicated), authentication, and authorization. Use this only for development and local testing. Do not use it in production.</p>                                                               | `false`       |
 
 ### `camunda.webapps`
 
 #### `camunda.webapps.operate`
 
-| Property                             | Description                                                                                                                                                             | Default value |
-| :----------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.webapps.operate.enabled`    | <p>Decides whether Operate is enabled or not in the Orchestration Cluster. This also affects the Operate API v1.</p>                                                    | `true`        |
-| `camunda.webapps.operate.ui-enabled` | <p>Decides whether the Operate UI is enabled or not. If `false`, the Operate API v1 will still be available, but Operate will not be accessible with a web browser.</p> | `true`        |
+| Property                             | Description                                                                                                                                       | Default value |
+| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
+| `camunda.webapps.operate.enabled`    | <p>Controls whether Operate is enabled in the Orchestration Cluster. This also affects the Operate API v1.</p>                                    | `true`        |
+| `camunda.webapps.operate.ui-enabled` | <p>Controls whether the Operate UI is enabled. If `false`, the Operate API v1 is still available, but you cannot access Operate in a browser.</p> | `true`        |
 
 #### `camunda.webapps.tasklist`
 
-| Property                              | Description                                                                                                                                                                | Default value |
-| :------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.webapps.tasklist.enabled`    | <p>Decides whether Tasklist is enabled or not in the Orchestration Cluster. This also affects the Tasklist API v1.</p>                                                     | `true`        |
-| `camunda.webapps.tasklist.ui-enabled` | <p>Decides whether the Tasklist UI is enabled or not. If `false`, the Tasklist API v1 will still be available, but Tasklist will not be accessible with a web browser.</p> | `true`        |
+| Property                              | Description                                                                                                                                          | Default value |
+| :------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| `camunda.webapps.tasklist.enabled`    | <p>Controls whether Tasklist is enabled in the Orchestration Cluster. This also affects the Tasklist API v1.</p>                                     | `true`        |
+| `camunda.webapps.tasklist.ui-enabled` | <p>Controls whether the Tasklist UI is enabled. If `false`, the Tasklist API v1 is still available, but you cannot access Tasklist in a browser.</p> | `true`        |
 
 #### `camunda.webapps.identity`
 
-| Property                              | Description                                                                                                                                                                | Default value |
-| :------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.webapps.identity.enabled`    | <p>Decides whether Identity is enabled or not in the Orchestration Cluster. This also affects the Identity API v1.</p>                                                     | `true`        |
-| `camunda.webapps.identity.ui-enabled` | <p>Decides whether the Identity UI is enabled or not. If `false`, the Identity API v1 will still be available, but Identity will not be accessible with a web browser.</p> | `true`        |
+| Property                              | Description                                                                                                                                          | Default value |
+| :------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| `camunda.webapps.identity.enabled`    | <p>Controls whether Identity is enabled in the Orchestration Cluster. This also affects the Identity API v1.</p>                                     | `true`        |
+| `camunda.webapps.identity.ui-enabled` | <p>Controls whether the Identity UI is enabled. If `false`, the Identity API v1 is still available, but you cannot access Identity in a browser.</p> | `true`        |
 
 ### `camunda.system`
 
@@ -61,9 +61,9 @@ import TabItem from '@theme/TabItem';
 
 ### `camunda.system.upgrade`
 
-| Property                                      | Description                                                                                                                                                                                                                                                                    | Default value |
-| :-------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.system.upgrade.enable-version-check` | <p>Toggles the version check restriction, used for migration.</p><p>This is useful for testing migration logic on snapshot or alpha versions.</p><p>The default value `true` means it is not allowed to migrate to an incompatible version such as: `SNAPSHOT` or `alpha`.</p> | `true`        |
+| Property                                      | Description                                                                                                                                                                                                                                                                             | Default value |
+| :-------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| `camunda.system.upgrade.enable-version-check` | <p>Controls whether the version compatibility check is enforced during migration.</p><p>Use this to test migration logic with snapshot or alpha versions.</p><p>The default value is `true`, which means you cannot migrate to incompatible versions such as `SNAPSHOT` or `alpha`.</p> | `true`        |
 
   </TabItem>
 
@@ -75,7 +75,7 @@ import TabItem from '@theme/TabItem';
 | :------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
 | `CAMUNDA_SYSTEM_CPUTHREADCOUNT`  | <p>Controls the number of non-blocking CPU threads to be used</p><p><strong>Warning:</strong> You should never specify a value that is larger than the number of physical cores available.</p><p>Good practice is to leave 1–2 cores for IO threads and the operating system (it has to run somewhere).</p><p>For example, when running Zeebe on a machine which has 4 cores, a good value would be `2`.</p> | `2`           |
 | `CAMUNDA_SYSTEM_IOTHREADCOUNT`   | <p>Controls the number of IO threads to be used.</p><p>These threads are used for workloads that write data to disk. While writing, these threads are blocked which means that they yield the CPU.</p>                                                                                                                                                                                                       | `2`           |
-| `CAMUNDA_SYSTEM_CLOCKCONTROLLED` | <p>Controls whether the system clock or mutable one.</p><p>If enabled, time progression can be controlled programmatically for testing purposes.</p>                                                                                                                                                                                                                                                         | `false`       |
+| `CAMUNDA_SYSTEM_CLOCKCONTROLLED` | <p>Controls whether the system uses the default system clock or a mutable clock.</p><p>If enabled, you can control time progression programmatically for testing purposes.</p>                                                                                                                                                                                                                               | `false`       |
 
 ### `CAMUNDA_SYSTEM_RESTORE`
 
