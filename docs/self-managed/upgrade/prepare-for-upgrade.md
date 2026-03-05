@@ -76,6 +76,16 @@ This section lists actions you must complete or review before upgrading to Camun
     <td><p>`orchestration.profiles.identity` is deprecated and renamed to `orchestration.profiles.admin`. The chart auto-migrates the old key with a deprecation warning. Update your values file to use the new key.</p></td>
     <td><span className="label-highlight">Recommended</span></td>
 </tr>
+<tr>
+    <td>Helm chart: Web Modeler webapp removed</td>
+    <td><p>The `webModeler.webapp` component has been removed. The `restapi` component now handles both API and web application. Remove all `webModeler.webapp.*` keys from your values file. Review `webModeler.restapi.resources` if you previously tuned webapp resources separately.</p></td>
+    <td><span className="label-highlight red">Action required</span></td>
+</tr>
+<tr>
+    <td>Helm chart: Keycloak auth secret</td>
+    <td><p>`global.identity.keycloak.auth.existingSecret` and `existingSecretKey` are deprecated. Migrate to `global.identity.keycloak.auth.secret.existingSecret` and `existingSecretKey`. Legacy keys still work in 8.9 via normalizers.</p></td>
+    <td><span className="label-highlight">Recommended</span></td>
+</tr>
 </table>
 
 :::info
