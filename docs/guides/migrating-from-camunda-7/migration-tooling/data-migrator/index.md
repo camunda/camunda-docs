@@ -72,7 +72,7 @@ As part of this step, you might also need to extract big payloads and binaries (
 
 ## Repository
 
-You can track progress and releases in the repository: https://github.com/camunda/camunda-7-to-8-migration-tooling
+You can track progress and releases in the [migration tooling repository](https://github.com/camunda/camunda-7-to-8-migration-tooling).
 
 ## Cockpit Plugin (experimental)
 
