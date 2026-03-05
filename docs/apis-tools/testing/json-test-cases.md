@@ -24,56 +24,38 @@ It defines the following structure:
 - `testCases`: An array of test cases to be executed.
   - `name`: The name of the test case.
   - `description`: A description of the test case.
-  - `instructions`: An array of instructions to execute the test case.
+  - `instructions`: An array of [instructions](#reference-instructions) to execute the test case.
     - Each instruction has a `type` that defines the action to be performed (e.g., `CREATE_PROCESS_INSTANCE`).
     - Additional properties depend on the instruction type (e.g., process definition ID, variables, etc.).
 
-Start by creating a new JSON file and placing it in your test resources folder (e.g.
-`src/test/resources/test-cases/invoice-approval.json`). Refer to the JSON schema in the `$schema` property (
-`"$schema": "https://raw.githubusercontent.com/camunda/camunda/refs/heads/main/testing/camunda-process-test-json-test-cases/src/main/resources/schema/cpt-test-cases.schema.json"`)
-Add your test cases and use the available instructions to define the behavior of your process test.
+How to start:
 
-An example JSON file could look like this:
+1. Create a new JSON file in your test resources folder (e.g., `src/test/resources/test-cases/invoice-approval.json`)
+2. Refer to the JSON schema in the `$schema` property. Use the same schema version as the CPT version you are using to
+   ensure compatibility.
+3. Add your test cases and use the [available instructions](#reference-instructions) to define the behavior of your
+   process test.
 
-```json
+The basic structure of the JSON file looks like this:
+
+```JSON
 {
   "$schema": "https://raw.githubusercontent.com/camunda/camunda/refs/heads/main/testing/camunda-process-test-json-test-cases/src/main/resources/schema/cpt-test-cases.schema.json",
   "testCases": [
     {
-      "name": "Happy path",
-      "description": "The invoice should be approved.",
+      "name": "My first test case",
+      "description": "A human readable description of the test case.",
       "instructions": [
-        {
-          "type": "CREATE_PROCESS_INSTANCE",
-          "processDefinitionSelector": {
-            "processDefinitionId": "Process_InvoiceApproval"
-          },
-          "variables": {
-            "id": "INV-1001",
-            "amount": 12000,
-            "currency": "EUR",
-            "supplier": {
-              "id": "0815",
-              "name": "Acme GmbH"
-            },
-            "contactEmail": "accounting@acme.com"
-          }
-        },
-        {
-          "type": "ASSERT_PROCESS_INSTANCE",
-          "processInstanceSelector": {
-            "processDefinitionId": "Process_InvoiceApproval"
-          },
-          "state": "IS_COMPLETED"
-        }
       ]
     }
   ]
 }
 ```
 
+You can find a full example of a JSON test case file in the [Examples](#examples) section below.
+
 :::tip
-Use AI to support the generation of your JSON files. Refer to the JSON schema, provide a description of your
+Use AI to support the generation of your JSON files. Refer to the documentation, provide a description of your
 test case, and your BPMN processes to get a first draft of your test cases.
 
 Or, use an IDE with JSON schema support to get auto-completion and validation while writing your test cases, for
@@ -82,7 +64,7 @@ example [IntelliJ IDEA](https://www.jetbrains.com/help/idea/json.html#ws_json_sc
 
 ## Run a JSON test case
 
-You can run your JSON test cases files as a parameterized JUnit test. Add the `@TestCaseSource` annotation to your
+You can run your JSON test case files as a parameterized JUnit test. Add the `@TestCaseSource` annotation to your
 test method to read the files and provide their test cases as arguments. Then, execute the test cases using the
 `TestCaseRunner` provided by CPT.
 
@@ -230,7 +212,98 @@ public class MyProcessTest {
 ## Examples
 
 You can find some example process tests using the JSON test cases
-on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example).
+on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example):
+
+- [Invoice approval JSON test cases](https://github.com/camunda/camunda/blob/main/testing/camunda-process-test-example/src/test/resources/test-cases/invoice-approval.json)
+- [Invoice approval JUnit test class](https://github.com/camunda/camunda/blob/main/testing/camunda-process-test-example/src/test/java/io/camunda/InvoiceApprovalJsonTest.java)
+
+An example JSON test case file could look like this:
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/camunda/camunda/refs/heads/main/testing/camunda-process-test-json-test-cases/src/main/resources/schema/cpt-test-cases.schema.json",
+  "testCases": [
+    {
+      "name": "Happy path",
+      "description": "The invoice should be approved.",
+      "instructions": [
+        {
+          "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
+          "jobType": "archive-invoice"
+        },
+        {
+          "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
+          "jobType": "add-invoice-to-accounting"
+        },
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "Process_InvoiceApproval"
+          },
+          "variables": {
+            "id": "INV-1001",
+            "amount": 12000,
+            "currency": "EUR",
+            "supplier": {
+              "id": "0815",
+              "name": "Acme GmbH"
+            },
+            "contactEmail": "accounting@acme.com"
+          }
+        },
+        {
+          "type": "ASSERT_USER_TASK",
+          "userTaskSelector": {
+            "elementId": "UserTask_ApproveInvoice"
+          },
+          "state": "IS_CREATED",
+          "assignee": "Zee"
+        },
+        {
+          "type": "COMPLETE_USER_TASK",
+          "userTaskSelector": {
+            "elementId": "UserTask_ApproveInvoice"
+          },
+          "variables": {
+            "approved": true
+          }
+        },
+        {
+          "type": "ASSERT_ELEMENT_INSTANCES",
+          "processInstanceSelector": {
+            "processDefinitionId": "Process_InvoiceApproval"
+          },
+          "elementSelectors": [
+            {
+              "elementId": "StartEvent_InvoiceReceived"
+            },
+            {
+              "elementId": "UserTask_ApproveInvoice"
+            },
+            {
+              "elementId": "ServiceTask_ArchiveInvoice"
+            },
+            {
+              "elementId": "ServiceTask_AddInvoiceAccounting"
+            },
+            {
+              "elementId": "EndEvent_InvoiceApproved"
+            }
+          ],
+          "state": "IS_COMPLETED_IN_ORDER"
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "Process_InvoiceApproval"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ]
+    }
+  ]
+}
+```
 
 ## Reference: Instructions
 
@@ -238,7 +311,8 @@ Instructions define the actions and assertions to be performed in a test case. E
 
 ### ASSERT_DECISION
 
-An instruction to assert the evaluation of a decision.
+An instruction to assert the evaluation of a decision. See
+the [assertions documentation](assertions.md#decision-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -309,7 +383,8 @@ Example:
 
 ### ASSERT_ELEMENT_INSTANCE
 
-An instruction to assert the state of an element instance.
+An instruction to assert the state of an element instance. See
+the [assertions documentation](assertions.md#element-instance-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -373,7 +448,8 @@ Example:
 
 ### ASSERT_ELEMENT_INSTANCES
 
-An instruction to assert the state of multiple element instances.
+An instruction to assert the state of multiple element instances. See
+the [assertions documentation](assertions.md#element-instance-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -432,7 +508,8 @@ Example:
 
 ### ASSERT_PROCESS_INSTANCE
 
-An instruction to assert the state of a process instance.
+An instruction to assert the state of a process instance. See
+the [assertions documentation](assertions.md#process-instance-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -486,7 +563,8 @@ Example:
 
 ### ASSERT_PROCESS_INSTANCE_MESSAGE_SUBSCRIPTION
 
-An instruction to assert the state of a process instance message subscription.
+An instruction to assert the state of a process instance message subscription. See
+the [assertions documentation](assertions.md#process-instance-message-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -543,7 +621,8 @@ Example:
 
 ### ASSERT_USER_TASK
 
-An instruction to assert the state of a user task.
+An instruction to assert the state of a user task. See
+the [assertions documentation](assertions.md#user-task-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -641,7 +720,8 @@ Example:
 
 ### ASSERT_VARIABLES
 
-An instruction to assert the variables of a process instance.
+An instruction to assert the variables of a process instance. See
+the [assertions documentation](assertions.md#variable-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -753,7 +833,7 @@ Example:
 
 ### COMPLETE_JOB
 
-An instruction to complete a job.
+An instruction to complete a job. See the [utilities documentation](utilities.md#complete-jobs) for more details.
 
 <table>
   <tbody><tr>
@@ -809,7 +889,8 @@ Example:
 
 ### COMPLETE_JOB_AD_HOC_SUB_PROCESS
 
-An instruction to complete a job of an ad-hoc sub-process.
+An instruction to complete a job of an ad-hoc sub-process. See
+the [utilities documentation](utilities.md#ad-hoc-sub-process-jobs) for more details.
 
 <table>
   <tbody><tr>
@@ -912,7 +993,8 @@ Example:
 
 ### COMPLETE_JOB_USER_TASK_LISTENER
 
-An instruction to complete a job of a user task listener.
+An instruction to complete a job of a user task listener. See
+the [utilities documentation](utilities.md#user-task-listener-jobs) for more details.
 
 <table>
   <tbody><tr>
@@ -1025,7 +1107,8 @@ Example:
 
 ### COMPLETE_USER_TASK
 
-An instruction to complete a user task.
+An instruction to complete a user task.See
+the [utilities documentation](utilities.md#complete-user-tasks) for more details.
 
 <table>
   <tbody><tr>
@@ -1337,7 +1420,7 @@ Example:
 
 ### INCREASE_TIME
 
-An instruction to increase the time.
+An instruction to increase the time. See the [utilities documentation](utilities.md#increase-time) for more details.
 
 <table>
   <tbody><tr>
@@ -1374,7 +1457,8 @@ Example:
 
 ### MOCK_CHILD_PROCESS
 
-An instruction to mock a child process.
+An instruction to mock a child process. See the [utilities documentation](utilities.md#mock-child-processes) for more
+details.
 
 <table>
   <tbody><tr>
@@ -1422,7 +1506,8 @@ Example:
 
 ### MOCK_DMN_DECISION
 
-An instruction to mock a DMN decision.
+An instruction to mock a DMN decision. See the [utilities documentation](utilities.md#mock-dmn-decisions) for more
+details.
 
 <table>
   <tbody><tr>
@@ -1469,7 +1554,8 @@ Example:
 
 ### MOCK_JOB_WORKER_COMPLETE_JOB
 
-An instruction to mock a job worker who completes jobs.
+An instruction to mock a job worker who completes jobs. See the [utilities documentation](utilities.md#complete-job) for
+more details.
 
 <table>
   <tbody><tr>
@@ -1524,7 +1610,8 @@ Example:
 
 ### MOCK_JOB_WORKER_THROW_BPMN_ERROR
 
-An instruction to mock a job worker who throws BPMN errors.
+An instruction to mock a job worker who throws BPMN errors. See
+the [utilities documentation](utilities.md#throw-bpmn-error) for more details.
 
 <table>
   <tbody><tr>
@@ -1654,7 +1741,8 @@ Example:
 
 ### RESOLVE_INCIDENT
 
-An instruction to resolve an incident.
+An instruction to resolve an incident. See the [utilities documentation](utilities.md#resolve-incidents) for more
+details.
 
 <table>
   <tbody><tr>
@@ -1693,7 +1781,7 @@ Example:
 
 ### SET_TIME
 
-An instruction to set the time.
+An instruction to set the time. See the [utilities documentation](utilities.md#set-time) for more details.
 
 <table>
   <tbody><tr>
@@ -1730,7 +1818,8 @@ Example:
 
 ### THROW_BPMN_ERROR_FROM_JOB
 
-An instruction to throw a BPMN error from a job.
+An instruction to throw a BPMN error from a job. See
+the [utilities documentation](utilities.md#throw-bpmn-errors-from-jobs) for more details.
 
 <table>
   <tbody><tr>
@@ -1792,7 +1881,8 @@ Example:
 
 ### UPDATE_VARIABLES
 
-An instruction to create or update process instance variables.
+An instruction to create or update process instance variables. See
+the [utilities documentation](utilities.md#update-variables) for more details.
 
 <table>
   <tbody><tr>
@@ -1855,191 +1945,287 @@ Selectors are used to identify specific resources in your process tests. Each se
 
 A selector to identify a decision definition.
 
-<table style={{width: '80%', display: 'table'}}>
+<table style={{width: '90%', display: 'table'}}>
   <tbody><tr>
     <th style={{width: '25%'}}>Property</th>
     <th style={{width: '35%'}}>Description</th>
     <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
   </tr>
   <tr>
     <td>decisionDefinitionId</td>
     <td>ID of the decision definition</td>
     <td>string</td>
+    <td>Yes</td>
   </tr>
 </tbody></table>
+
+Example:
+
+```json
+{
+  "decisionDefinitionId": "ChooseRocket"
+}
+```
 
 ### Decision Selector
 
 A selector to identify a decision. The selector must contain at least one of the following properties:
 
-<table style={{width: '80%', display: 'table'}}>
+<table style={{width: '90%', display: 'table'}}>
   <tbody><tr>
     <th style={{width: '25%'}}>Property</th>
     <th style={{width: '35%'}}>Description</th>
     <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
   </tr>
   <tr>
     <td>decisionDefinitionId</td>
     <td>ID of the decision definition</td>
     <td>string</td>
+    <td>No</td>
   </tr>
   <tr>
     <td>decisionDefinitionName</td>
     <td>Name of the decision definition</td>
     <td>string</td>
+    <td>No</td>
   </tr>
 </tbody></table>
+
+Example:
+
+```json
+{
+  "decisionDefinitionId": "ChooseRocket"
+}
+```
 
 ### Element Selector
 
 A selector to identify a BPMN element. The selector must contain at least one of the following properties:
 
-<table style={{width: '80%', display: 'table'}}>
+<table style={{width: '90%', display: 'table'}}>
   <tbody><tr>
     <th style={{width: '25%'}}>Property</th>
     <th style={{width: '35%'}}>Description</th>
     <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
   </tr>
   <tr>
     <td>elementId</td>
     <td>ID of the BPMN element</td>
     <td>string</td>
+    <td>No</td>
   </tr>
   <tr>
     <td>elementName</td>
     <td>Name of the BPMN element</td>
     <td>string</td>
+    <td>No</td>
   </tr>
 </tbody></table>
+
+Example:
+
+```json
+{
+  "elementId": "LaunchRocket"
+}
+```
 
 ### Incident Selector
 
 A selector to identify an incident. The selector must contain at least one of the following properties:
 
-<table style={{width: '80%', display: 'table'}}>
+<table style={{width: '90%', display: 'table'}}>
   <tbody><tr>
     <th style={{width: '25%'}}>Property</th>
     <th style={{width: '35%'}}>Description</th>
     <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
   </tr>
   <tr>
     <td>elementId</td>
     <td>ID of the BPMN element where the incident occurred</td>
     <td>string</td>
+    <td>No</td>
   </tr>
   <tr>
     <td>processDefinitionId</td>
     <td>Process definition ID of the incident</td>
     <td>string</td>
+    <td>No</td>
   </tr>
 </tbody></table>
+
+Example:
+
+```json
+{
+  "elementId": "LaunchRocket"
+}
+```
 
 ### Job Selector
 
 A selector to identify a job. The selector must contain at least one of the following properties:
 
-<table style={{width: '80%', display: 'table'}}>
+<table style={{width: '90%', display: 'table'}}>
   <tbody><tr>
     <th style={{width: '25%'}}>Property</th>
     <th style={{width: '35%'}}>Description</th>
     <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
   </tr>
   <tr>
     <td>jobType</td>
     <td>Type of the job</td>
     <td>string</td>
+    <td>No</td>
   </tr>
   <tr>
     <td>elementId</td>
     <td>ID of the BPMN element</td>
     <td>string</td>
+    <td>No</td>
   </tr>
   <tr>
     <td>processDefinitionId</td>
     <td>Process definition ID of the job</td>
     <td>string</td>
+    <td>No</td>
   </tr>
 </tbody></table>
+
+Example:
+
+```json
+{
+  "jobType": "analyze-moon-samples"
+}
+```
 
 ### Message Selector
 
 A selector to identify a message.
 
-<table style={{width: '80%', display: 'table'}}>
+<table style={{width: '90%', display: 'table'}}>
   <tbody><tr>
     <th style={{width: '25%'}}>Property</th>
     <th style={{width: '35%'}}>Description</th>
     <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
   </tr>
   <tr>
     <td>messageName</td>
-    <td>Name of the message (required)</td>
+    <td>Name of the message</td>
     <td>string</td>
+    <td>Yes</td>
   </tr>
   <tr>
     <td>correlationKey</td>
-    <td>Correlation key of the message (optional)</td>
+    <td>Correlation key of the message</td>
     <td>string</td>
+    <td>No</td>
   </tr>
 </tbody></table>
+
+Example:
+
+```json
+{
+  "messageName": "AstronautReady"
+}
+```
 
 ### Process Definition Selector
 
 A selector to identify a process definition.
 
-<table style={{width: '80%', display: 'table'}}>
+<table style={{width: '90%', display: 'table'}}>
   <tbody><tr>
     <th style={{width: '25%'}}>Property</th>
     <th style={{width: '35%'}}>Description</th>
     <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
   </tr>
   <tr>
     <td>processDefinitionId</td>
     <td>ID of the process definition</td>
     <td>string</td>
+    <td>Yes</td>
   </tr>
 </tbody></table>
+
+Example:
+
+```json
+{
+  "processDefinitionId": "MoonExplorationProcess"
+}
+```
 
 ### Process Instance Selector
 
 A selector to identify a process instance.
 
-<table style={{width: '80%', display: 'table'}}>
+<table style={{width: '90%', display: 'table'}}>
   <tbody><tr>
     <th style={{width: '25%'}}>Property</th>
     <th style={{width: '35%'}}>Description</th>
     <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
   </tr>
   <tr>
     <td>processDefinitionId</td>
     <td>Process definition ID of the process instance</td>
     <td>string</td>
+    <td>Yes</td>
   </tr>
 </tbody></table>
+
+```json
+{
+  "processDefinitionId": "MoonExplorationProcess"
+}
+```
 
 ### User Task Selector
 
 A selector to identify a user task. The selector must contain at least one of the following properties:
 
-<table style={{width: '80%', display: 'table'}}>
+<table style={{width: '90%', display: 'table'}}>
   <tbody><tr>
     <th style={{width: '25%'}}>Property</th>
     <th style={{width: '35%'}}>Description</th>
     <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
   </tr>
   <tr>
     <td>elementId</td>
     <td>ID of the BPMN element</td>
     <td>string</td>
+    <td>No</td>
   </tr>
   <tr>
     <td>taskName</td>
     <td>Name of the user task</td>
     <td>string</td>
+    <td>No</td>
   </tr>
   <tr>
     <td>processDefinitionId</td>
     <td>Process definition ID of the user task</td>
     <td>string</td>
+    <td>No</td>
   </tr>
 </tbody></table>
+
+Example:
+
+```json
+{
+  "elementId": "ReviewMissionPlan"
+}
+```
