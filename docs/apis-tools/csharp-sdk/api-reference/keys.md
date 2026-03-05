@@ -11,38 +11,36 @@ mdx:
 The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
 :::
 
+
 Strongly-typed domain key types provide compile-time safety for entity identifiers. Each key wraps a string value and ensures type-safe API calls.
 
 ## Overview
 
-| Key Type                        | Description                                                                      |
-| ------------------------------- | -------------------------------------------------------------------------------- |
-| `AuditLogEntityKey`             | System-generated entity key for an audit log entry.                              |
-| `AuditLogKey`                   | System-generated key for an audit log entry.                                     |
-| `AuthorizationKey`              | System-generated key for an authorization.                                       |
-| `BatchOperationKey`             | System-generated key for an batch operation.                                     |
-| `ConditionalEvaluationKey`      | System-generated key for a conditional evaluation.                               |
-| `DecisionDefinitionKey`         | System-generated key for a decision definition.                                  |
-| `DecisionEvaluationInstanceKey` | System-generated key for a decision evaluation instance.                         |
-| `DecisionEvaluationKey`         | System-generated key for a decision evaluation.                                  |
-| `DecisionInstanceKey`           | System-generated key for a deployed decision instance.                           |
-| `DecisionRequirementsKey`       | System-generated key for a deployed decision requirements definition.            |
-| `DeploymentKey`                 | Key for a deployment.                                                            |
-| `ElementInstanceKey`            | System-generated key for a element instance.                                     |
-| `FormKey`                       | System-generated key for a deployed form.                                        |
-| `IncidentKey`                   | System-generated key for a incident.                                             |
-| `JobKey`                        | System-generated key for a job.                                                  |
-| `LongKey`                       | Zeebe Engine resource key (Java long serialized as string)                       |
-| `MessageKey`                    | System-generated key for an message.                                             |
-| `MessageSubscriptionKey`        | System-generated key for a message subscription.                                 |
-| `ProcessDefinitionKey`          | System-generated key for a deployed process definition.                          |
-| `ProcessInstanceKey`            | System-generated key for a process instance.                                     |
-| `ResourceKey`                   | The system-assigned key for this resource.                                       |
-| `RootProcessInstanceKey`        | The key of the root process instance. The root process instance is the top-level |
-
-ancestor in the process instance hierarchy. This field is only present for data
-belonging to process instance hierarchies created in version 8.9 or later. |
-| `ScopeKey` | System-generated key for a scope. |
+| Key Type | Description |
+| --- | --- |
+| `AuditLogEntityKey` | System-generated entity key for an audit log entry. |
+| `AuditLogKey` | System-generated key for an audit log entry. |
+| `AuthorizationKey` | System-generated key for an authorization. |
+| `BatchOperationKey` | System-generated key for an batch operation. |
+| `ConditionalEvaluationKey` | System-generated key for a conditional evaluation. |
+| `DecisionDefinitionKey` | System-generated key for a decision definition. |
+| `DecisionEvaluationInstanceKey` | System-generated key for a decision evaluation instance. |
+| `DecisionEvaluationKey` | System-generated key for a decision evaluation. |
+| `DecisionInstanceKey` | System-generated key for a deployed decision instance. |
+| `DecisionRequirementsKey` | System-generated key for a deployed decision requirements definition. |
+| `DeploymentKey` | Key for a deployment. |
+| `ElementInstanceKey` | System-generated key for a element instance. |
+| `FormKey` | System-generated key for a deployed form. |
+| `IncidentKey` | System-generated key for a incident. |
+| `JobKey` | System-generated key for a job. |
+| `LongKey` | Zeebe Engine resource key (Java long serialized as string) |
+| `MessageKey` | System-generated key for an message. |
+| `MessageSubscriptionKey` | System-generated key for a message subscription. |
+| `ProcessDefinitionKey` | System-generated key for a deployed process definition. |
+| `ProcessInstanceKey` | System-generated key for a process instance. |
+| `ResourceKey` | The system-assigned key for this resource. |
+| `ScopeKey` | System-generated key for a scope. A scope can hold variables and represents either an
+element instance in a BPMN process or the process instance itself. |
 | `SignalKey` | System-generated key for an signal. |
 | `UserTaskKey` | System-generated key for a user task. |
 | `VariableKey` | System-generated key for a variable. |
@@ -51,14 +49,15 @@ belonging to process instance hierarchies created in version 8.9 or later. |
 
 All key types share these methods:
 
-| Method                 | Description                                      |
-| ---------------------- | ------------------------------------------------ |
-| `AssumeExists(string)` | Creates a key from a known-valid string value.   |
-| `IsValid(string)`      | Validates whether a string is a valid key value. |
-| `Value`                | Gets the underlying string value.                |
-| `ToString()`           | Returns the string representation.               |
+| Method | Description |
+| --- | --- |
+| `AssumeExists(string)` | Creates a key from a known-valid string value. |
+| `IsValid(string)` | Validates whether a string is a valid key value. |
+| `Value` | Gets the underlying string value. |
+| `ToString()` | Returns the string representation. |
 
 ## Details
+
 
 ### AuditLogEntityKey
 
@@ -228,19 +227,10 @@ The system-assigned key for this resource.
 public readonly record struct ResourceKey : ICamundaKey, IEquatable<ResourceKey>
 ```
 
-### RootProcessInstanceKey
-
-The key of the root process instance. The root process instance is the top-level
-ancestor in the process instance hierarchy. This field is only present for data
-belonging to process instance hierarchies created in version 8.9 or later.
-
-```csharp
-public readonly record struct RootProcessInstanceKey : ICamundaKey, IEquatable<RootProcessInstanceKey>
-```
-
 ### ScopeKey
 
-System-generated key for a scope.
+System-generated key for a scope. A scope can hold variables and represents either an
+element instance in a BPMN process or the process instance itself.
 
 ```csharp
 public readonly record struct ScopeKey : ICamundaKey, IEquatable<ScopeKey>
