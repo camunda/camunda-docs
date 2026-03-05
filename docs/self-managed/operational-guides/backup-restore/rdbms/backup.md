@@ -28,6 +28,7 @@ The following prerequisites are required before you can create a backup.
 | Prerequisite                                    | Description                                                                                                                                                                                                                                 |
 | :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Configure Zeebe backup storage.                 | Configure the backup storage for Zeebe. This is required regardless of your secondary storage choice. See [Zeebe backup configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackup). |
+| Enable continuous backups                       | Enable continuous backups. See [Zeebe scheduler configuration](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).                                                      |
 | (Recommended) Configure Zeebe scheduled backup. | Configure Zeebe's internal primary storage backup scheduler. See [Zeebe scheduler configuration](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).                    |
 
 ## Considerations
