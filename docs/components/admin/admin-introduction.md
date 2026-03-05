@@ -1,7 +1,7 @@
 ---
 id: admin-introduction
 title: Introduction to Admin
-description: "Admin is the cluster-level admin UI for managing authentication, authorization, and administration for an orchestration cluster."
+description: "Admin is the cluster-level admin UI for managing administrative jobs for an orchestration cluster."
 ---
 
 Use the integrated [Orchestration Cluster](../orchestration-cluster.md) Admin component to manage Camunda 8 authentication, authorization, and cluster administration.
@@ -12,9 +12,7 @@ Admin was previously named "Identity" in Camunda 8.8. The component was renamed 
 
 ## About Admin
 
-Admin provides a unified and secure way to control access and administer all Orchestration Cluster components, including Zeebe, Operate, Tasklist, and APIs.
-
-<!-- TODO: Document additional Admin features beyond identity management when available -->
+The Orchestration Cluster Admin interface centralizes all key administrative jobs for a single cluster. This interface manages identity and access control for cluster components, including Zeebe, Operate, Tasklist, and APIs, while also handling other core features such as cluster variables, secrets, backups and restores, the global user task listener, and license information, giving administrators one clear place to configure and operate their clusters end to end.
 
 Admin includes the following features:
 
