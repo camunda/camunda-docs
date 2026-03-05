@@ -39,7 +39,7 @@ Below is a quick start guide to get you started. For detailed information on eac
 
 1. Make sure Camunda 8 is up and running, all process models to migrate are deployed, and Camunda 7 has been stopped.
 
-   **For runtime migration**, every process model requires:
+   For runtime migration, every process model requires:
    - A blank start event (you must add one if the process model doesn't have one already).
    - An execution listener at the end of your blank start event with the job type `migrator`. You have to add this manually or let the [Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling/diagram-converter.md) add it.
 
