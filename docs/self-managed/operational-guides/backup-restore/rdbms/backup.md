@@ -49,8 +49,8 @@ While Zeebe during restore will match the secondary's storage backup position, i
 With Zeebe being set up against an RDBMS secondary storage, you have the option to enable Zeebe's internal backup scheduler. Enabling the scheduler will result in primary storage backups being
 created at the predefined interval. Learn more about configuring the backup scheduler [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).
 
-In addition to the scheduler, continuous primary storage backups must be enabled, by setting `camunda.data.primary-storage.backup.continous` to true. With continuous backups enabled,
-log stream's compaction is bound by the latest backed up position. In turns, this means that no segment of Zeebe's state can be deleted without being backed up first.
+In addition to the scheduler, continuous primary storage backups must be enabled by setting `camunda.data.primary-storage.backup.continous` to true. With continuous backups enabled,
+log stream compaction is bound by the latest backed up position. In turn, this means that no segment of Zeebe's state can be deleted without being backed up first.
 
 These two options provide a strong guarantee for the resiliency of your data and provide you the ability to always maintain an active window that you can restore to as a disaster recovery scenario.
 
@@ -65,7 +65,7 @@ the size of Zeebe's runtime state.
 
 ### Manual backup
 
-Opting out of scheduled backups approach, you can still request on-demand backups using the [backup management API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+If you opt out of the scheduled backup approach, you can still request on-demand backups using the [backup management API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
 ```bash
 

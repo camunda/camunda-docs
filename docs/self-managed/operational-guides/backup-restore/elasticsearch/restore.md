@@ -712,15 +712,15 @@ orchestration:
 
 If you're not using the Camunda Helm chart, you can use a similar approach natively with Kubernetes to overwrite the command.
 
-The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
+The application exits after restore and Kubernetes restarts the pod, which appears as `CrashLoopBackOff`. This is expected behavior. The restore application does not restore state again once partitions are already restored to persistent disk.
 
 After removing the temporary restore command or unsetting the `ZEEBE_RESTORE` and related backup ID environment variable to restore Zeebe’s default behavior, you may optionally restart the StatefulSet to ensure the changes take effect immediately. This can be done by [scaling](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) the StatefulSet down and back up, or by [deleting](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/) the pods so they are recreated with the newly deployed revision.
 
 :::tip
 
-In Kubernetes, Zeebe is a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which are meant for long-running and persistent applications. There is no `restartPolicy` due to which the resulting pods of the Zeebe `StatefulSet` will always restart and `crashloop` as the restore application won't overwrite the data. Meaning that you have to observe the Zeebe brokers during restore and may have to look at the logs with `--previous` if it already restarted.
+In Kubernetes, Zeebe runs as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which is intended for long-running, persistent applications. Because StatefulSet pods are restarted automatically, restore-mode pods can appear in `CrashLoopBackOff` after a successful restore. Observe Zeebe broker logs during restore, and use `--previous` if a pod has already restarted.
 
-It will not try to import or overwrite the data again but should be noted that you may miss the `successful` first run if you're not observing it actively.
+The restore app will not import or overwrite data again, but you may miss the first successful run if you are not observing logs actively.
 
 :::
 

@@ -52,7 +52,7 @@ Before restoring, ensure all Camunda 8 components are stopped. No component shou
 
 ## Step 2: Restore the RDBMS backup
 
-Perform the restoration of your RDBMS secondary storage using it's official or compatible tools.
+Perform the restoration of your RDBMS secondary storage using its official or compatible tools.
 
 ## Step 3: Restore Zeebe from its backup
 
@@ -123,15 +123,15 @@ orchestration:
 
 If you're not using the Camunda Helm chart, you can use a similar approach natively with Kubernetes to overwrite the command.
 
-The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
+The application exits after restore and Kubernetes restarts the pod, which appears as `CrashLoopBackOff`. This is expected behavior. The restore application does not restore state again once partitions are already restored to persistent disk.
 
 After removing the temporary restore command or unsetting the `ZEEBE_RESTORE` to restore Zeebe’s default behavior, you may optionally restart the StatefulSet to ensure the changes take effect immediately. This can be done by [scaling](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) the StatefulSet down and back up, or by [deleting](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/) the pods so they are recreated with the newly deployed revision.
 
 :::tip
 
-In Kubernetes, Zeebe is a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which are meant for long-running and persistent applications. There is no `restartPolicy` due to which the resulting pods of the Zeebe `StatefulSet` will always restart and `crashloop` as the restore application won't overwrite the data. Meaning that you have to observe the Zeebe brokers during restore and may have to look at the logs with `--previous` if it already restarted.
+In Kubernetes, Zeebe runs as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which is intended for long-running, persistent applications. Because StatefulSet pods are restarted automatically, restore-mode pods can appear in `CrashLoopBackOff` after a successful restore. Observe Zeebe broker logs during restore, and use `--previous` if a pod has already restarted.
 
-It will not try to import or overwrite the data again but should be noted that you may miss the `successful` first run if you're not observing it actively.
+The restore app will not import or overwrite data again, but you may miss the first successful run if you are not observing logs actively.
 
 :::
 
@@ -197,7 +197,7 @@ tar -xzf camunda-zeebe-X.Y.Z.tar.gz --strip-components=1 -C camunda/
    </TabItem>
 </Tabs>
 
-Ommiting the `from` parameter will perform a point in time restore, applying the closest backup to the restored secondary storage backup. When the cluster is restarted in normal mode, the remaining state will be re-exported to match the state closest to the provided `to` timestamp. How fine grained the restore points are is based on the scheduler's configured checkpoint interval. Learn more about configuring the checkpoint scheduler [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).
+Omitting the `from` parameter performs a point-in-time restore by applying the closest backup to the restored secondary storage backup. When the cluster is restarted in normal mode, the remaining state is re-exported to match the state closest to the provided `to` timestamp. How fine-grained restore points are depends on the scheduler's configured checkpoint interval. Learn more about configuring the checkpoint scheduler [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).
 
 :::note
 When using this approach the restored secondary storage backup must be at a prior time to the desired primary storage's restore window.
