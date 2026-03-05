@@ -289,43 +289,47 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### MySQL and Microsoft SQL Server secondary storage
-
-Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the Orchestration cluster.
-
-:::info
-To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#mysql-and-microsoft-sql-server-secondary-storage).
-:::
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### RDBMS secondary storage
-
-Camunda 8.9 introduces optional RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch.
-
-This enables teams to use relational databases such as H2, PostgreSQL, Oracle, or MariaDB for storing and querying process data, reducing operational complexity for non-high-performance use cases.
-
-:::info
-To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#rdbms-secondary-storage-h2-postgresql-oracle-mariadb).
-:::
-
-</div>
-</div>
-
 ### Deployment
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: `extraConfiguration` format changed from map to ordered list
+
+The `<componentName>.extraConfiguration` Helm value has changed from a **map** (key-value pairs) to an **ordered list** of `file`/`content` entries. This ensures configuration entries are always applied in the order you define them, since maps in Go templates do not guarantee iteration order.
+
+The old map format is **not supported** in Camunda 8.9. If you upgrade without converting to the new list format, Helm will fail during template rendering.
+
+**Before (8.8 — map):**
+
+```yaml
+identity:
+  extraConfiguration:
+    custom-logging.yaml: |
+      logging:
+        level:
+          ROOT: DEBUG
+```
+
+**After (8.9 — ordered list):**
+
+```yaml
+identity:
+  extraConfiguration:
+    - file: custom-logging.yaml
+      content: |
+        logging:
+          level:
+            ROOT: DEBUG
+```
+
+See [Migrate extraConfiguration from 8.8 to 8.9](/self-managed/deployment/helm/configure/application-configs.md#migrate-extraconfiguration-from-88-to-89) for detailed migration steps.
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -337,10 +341,14 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 
 Previously, the Elasticsearch subchart was enabled by default. To use OpenSearch, you would need to disable Elasticsearch and enable OpenSearch.
 
-With the inclusion of RDBMS, you must now specify the secondary storage you want to enable and use.
+With the inclusion of RDBMS as a secondary storage option and the [deprecation of Bitnami subcharts](#helm-chart-bitnami-subcharts-deprecated) (including the bundled Elasticsearch subchart), there is no longer a default secondary storage type.
+
+- Camunda recommends setting `orchestration.data.secondaryStorage.type` explicitly in your `values.yaml`.
+- The chart can auto-detect the type from `global.elasticsearch.enabled` or `global.opensearch.enabled`, but Helm will fail with a validation error if no secondary storage is configured at all.
+- Alternatively, set `global.noSecondaryStorage: true` to run in engine-only mode without secondary storage.
 
 :::note
-To continue using Elasticsearch provided as a subchart, you must add `global.elasticsearch.enabled: true` and `elasticsearch.enabled: true` to your `values.yaml`.
+To continue using Elasticsearch provided as a subchart, you must add `global.elasticsearch.enabled: true`, `elasticsearch.enabled: true`, and `orchestration.data.secondaryStorage.type: elasticsearch` to your `values.yaml`.
 :::
 
 </div>
@@ -392,11 +400,10 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 
 #### Helm chart `values.yaml` options for RDBMS
 
-Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file. See `orchestration.data.secondaryStorage.rdbms` for details.
+Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file, providing a first-class alternative to Elasticsearch and OpenSearch. Configure database connections directly under `orchestration.data.secondaryStorage.rdbms`, including JDBC URL and authentication. See [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md).
 
-- Postgresql is currently supported.
-- Other RDBMS databases like OracleDB and MariaDB have limited functionality now, but will be fully supported in future alpha releases.
-- Operate is not yet supported with RDBMS until alpha3.
+- Supports all databases in the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md): PostgreSQL, Oracle, MariaDB, MySQL, Microsoft SQL Server, H2, and Amazon Aurora.
+- Advanced authentication and custom JDBC drivers can be configured via init containers or mounted volumes.
 
 </div>
 </div>
@@ -416,6 +423,233 @@ Camunda 8.9 adds a standardized JDBC driver management system for manual install
 
 :::info
 To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#jdbc-driver-management-for-rdbms-integrations).
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Deprecated secret keys removed
+
+Secret configuration keys that were deprecated in Camunda 8.8 are now removed in 8.9. Using any of the removed keys in your `values.yaml` will cause a hard failure during `helm install` or `helm upgrade`.
+
+Affected keys by component:
+
+| Component             | Keys removed in 8.9                                                                                                             |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------ |
+| License               | `global.license.key`, `global.license.existingSecret`, `global.license.existingSecretKey`                                       |
+| Elasticsearch auth    | `global.elasticsearch.auth.password`, `global.elasticsearch.auth.existingSecret`, `global.elasticsearch.auth.existingSecretKey` |
+| OpenSearch auth       | `global.opensearch.auth.password`, `global.opensearch.auth.existingSecret`, `global.opensearch.auth.existingSecretKey`          |
+| Identity auth         | `global.identity.auth.{admin,identity,optimize}.existingSecret` and `.existingSecretKey`                                        |
+| Document Store        | `global.documentStore.type.{aws,gcp}.existingSecret` and related keys                                                           |
+| Identity              | `identity.firstUser.password`, `identity.externalDatabase.password`, and their `existingSecret`/`existingSecretKey` variants    |
+| Connectors            | `connectors.security.authentication.oidc.existingSecret`, `.existingSecretKey`                                                  |
+| Orchestration Cluster | `orchestration.security.authentication.oidc.existingSecret`, `.existingSecretKey`                                               |
+| Web Modeler           | `webModeler.restapi.externalDatabase.password`, `webModeler.restapi.mail.smtpPassword`, and their `existingSecret` variants     |
+
+Migrate to the new secret configuration pattern using `*.secret.existingSecret` and `*.secret.existingSecretKey`, or `*.secret.inlineSecret` for non-production environments.
+
+<p className="link-arrow">[Secret management](/self-managed/deployment/helm/configure/secret-management.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Secret auto-generation removed
+
+The Helm chart no longer automatically generates secrets.
+
+The configuration keys `global.secrets.autoGenerated`, `global.secrets.name`, and `global.secrets.annotations` are removed in 8.9.
+
+All secrets must now be explicitly provided via Kubernetes Secrets referenced in your `values.yaml`.
+
+<p className="link-arrow">[Secret management](/self-managed/deployment/helm/configure/secret-management.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Default REST port unified to 8080
+
+The Orchestration component's default HTTP port has changed from 8090 to 8080 (`orchestration.service.httpPort`).
+
+This aligns the Helm chart with the Orchestration Cluster's default configuration.
+
+If you have hardcoded port 8090 in network policies, Ingress rules, health check probes, or service mesh configuration, update these references to 8080 or explicitly set `orchestration.service.httpPort: 8090` in your `values.yaml`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: TLS secret configuration pattern
+
+The legacy TLS secret configuration using `*.tls.existingSecret` is deprecated.
+
+You should migrate to the new pattern using `*.tls.secret.existingSecret`.
+
+Affected paths:
+
+- `global.elasticsearch.tls.existingSecret` changes to `global.elasticsearch.tls.secret.existingSecret`
+- `global.opensearch.tls.existingSecret` changes to `global.opensearch.tls.secret.existingSecret`
+- `console.tls.existingSecret` changes to `console.tls.secret.existingSecret`
+
+Legacy keys continue to work in Camunda 8.9 but will cause deprecation warnings and will be removed in a future version. See [Secret management](/self-managed/deployment/helm/configure/secret-management.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Bitnami subcharts deprecated
+
+The four Bitnami-based subcharts (`identityPostgresql`, `identityKeycloak`, `webModelerPostgresql`, `elasticsearch`) are deprecated in Camunda 8.9 and will be removed in Camunda 8.10.
+
+If any of these subcharts are enabled, Helm prints a deprecation warning during installation or upgrade.
+
+You should migrate to externally managed services before upgrading to Camunda 8.10.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: `global.elasticsearch` and `global.opensearch` deprecated
+
+The `global.elasticsearch.*` and `global.opensearch.*` configuration trees are deprecated in Camunda 8.9 and will be removed in Camunda 8.10.
+
+These options are not truly global, as only the Orchestration and Optimize components use them.
+
+You should migrate to the new component-specific configuration:
+
+- **Orchestration:** `orchestration.data.secondaryStorage.elasticsearch.*` / `orchestration.data.secondaryStorage.opensearch.*`
+- **Optimize:** `optimize.database.elasticsearch.*` / `optimize.database.opensearch.*`
+
+Legacy keys continue to work in Camunda 8.9 with deprecation warnings. Existing deployments will continue to function without changes.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Identity profile renamed to admin
+
+The orchestration profile `orchestration.profiles.identity` is deprecated and renamed to `orchestration.profiles.admin`.
+
+If your `values.yaml` uses the `identity` profile key, the chart automatically migrates it to `admin` and prints a deprecation warning.
+
+You should update your values file to use `orchestration.profiles.admin`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Authorization, role, and group initialization
+
+Camunda 8.9 adds Helm chart support for initializing authorization rules, roles, and groups directly through `values.yaml`.
+
+This allows administrators to configure platform access control as part of the initial deployment, reducing manual post-installation setup.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Custom users and clients
+
+You can now define Identity users and OAuth2 clients directly in `values.yaml`.
+
+This simplifies initial deployment setup and enables reproducible, version-controlled Identity configurations.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Engine-only mode without secondary storage
+
+Camunda 8.9 introduces `global.noSecondaryStorage` mode to allow running the Orchestration engine without any secondary storage (Elasticsearch, OpenSearch, or RDBMS). This is useful for lightweight testing or scenarios where only the core engine is needed.
+
+When enabled, Elasticsearch and OpenSearch subcharts must be disabled, and basic authentication is not supported.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### MySQL and Microsoft SQL Server secondary storage
+
+Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the Orchestration cluster.
+
+:::info
+To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#mysql-and-microsoft-sql-server-secondary-storage).
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### RDBMS secondary storage
+
+Camunda 8.9 introduces optional RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch.
+
+This enables teams to use relational databases such as H2, PostgreSQL, Oracle, or MariaDB for storing and querying process data, reducing operational complexity for non-high-performance use cases.
+
+:::info
+To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#rdbms-secondary-storage-h2-postgresql-oracle-mariadb).
 :::
 
 </div>
@@ -533,7 +767,7 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 
 Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.
 
-This enhancement aligns Web Modeler’s database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
+This enhancement aligns Web Modeler's database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
 
 :::info
 To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-rdbms-support-h2-mariadb-mysql).

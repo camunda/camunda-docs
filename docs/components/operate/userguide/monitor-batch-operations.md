@@ -12,7 +12,7 @@ To follow the steps in this guide, you must be [authorized to view running and c
 
 ## Monitor batch operations
 
-1. On the **Processes** page, above the process diagram, click **View batch operations**. This opens the [**Batch Operations** page](../overview/batch-operations-overview.md).
+1. In the top navigation, click **Operations > Batch operations**. This opens the [**Batch Operations** page](../overview/batch-operations-overview.md).
 2. To see the details of a particular batch operation, click the operation in the table. This opens the [batch operation details page](../overview/batch-operation-details-overview.md).
 
 ## View failure reasons

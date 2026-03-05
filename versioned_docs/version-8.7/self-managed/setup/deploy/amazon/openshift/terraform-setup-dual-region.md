@@ -8,6 +8,7 @@ description: "Deploy Red Hat OpenShift in two regions on AWS using a Terraform m
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import RosaHcpAuth from '../../\_partials/\_rosa-hcp-auth.md'
 
 This guide provides a detailed tutorial for deploying two [Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP)](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/architecture/index.html) in two different [regions](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool, details of the High Level design are available in the generic [Red Hat OpenShift dual-region for Camunda 8 guide](/self-managed/setup/deploy/openshift/dual-region.md).
 
@@ -181,86 +182,26 @@ It is presented as an example for running Camunda 8 in ROSA.
 
 **For production or advanced use cases or custom setups, we encourage you to use the [official module](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html)**, which includes vendor-supported features.
 
-#### Set up ROSA authentication
+<RosaHcpAuth />
 
-To set up a ROSA cluster, certain prerequisites must be configured on your AWS account. Below is an excerpt from the [official ROSA planning prerequisites checklist](https://docs.openshift.com/rosa/rosa_planning/rosa-cloud-expert-prereq-checklist.html):
+Configure `CLUSTER_1_REGION` and `CLUSTER_2_REGION` with the target regions respectively.
 
-1. Verify that your AWS account is correctly configured:
+```bash
+# Set the region, adjust as needed
+export CLUSTER_1_REGION="us-east-1"
+export CLUSTER_2_REGION="us-east-2"
+```
 
-   ```bash
-   aws sts get-caller-identity
-   ```
+Verify your AWS quotas for each region:
 
-1. Check if the ELB service role exists, as if you have never created a load balancer in your AWS account, the role for Elastic Load Balancing (ELB) might not exist yet:
+```bash
+rosa verify quota --region="$CLUSTER_1_REGION"
+rosa verify quota --region="$CLUSTER_2_REGION"
+```
 
-   ```bash
-   aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing"
-   ```
-
-   If it doesn't exist, create it:
-
-   ```bash
-   aws iam create-service-linked-role --aws-service-name "elasticloadbalancing.amazonaws.com"
-   ```
-
-1. Create a Red Hat Hybrid Cloud Console account if you don’t already have one: [Red Hat Hybrid Cloud Console](https://console.redhat.com/).
-
-1. Enable ROSA on your AWS account via the [AWS Console](https://console.aws.amazon.com/rosa/).
-
-1. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
-   - Navigate to the ROSA console: [AWS ROSA Console](https://console.aws.amazon.com/rosa).
-   - Choose **Get started**.
-   - On the **Verify ROSA prerequisites** page, select **I agree to share my contact information with Red Hat**.
-   - Choose **Enable ROSA**.
-
-   **Note**: Only a single AWS account can be associated with a Red Hat account for service billing.
-
-1. Install the ROSA CLI from the [OpenShift AWS Console](https://console.redhat.com/openshift/downloads#tool-rosa).
-
-1. Get an API token, go to the [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa), click **Load token**, and save it. Use the token to log in with ROSA CLI:
-
-   **Apply the token in each of your region's terminal**:
-
-   ```bash
-   export RHCS_TOKEN="<yourToken>"
-   rosa login --token="$RHCS_TOKEN"
-
-   # Verify the login
-   rosa whoami
-   ```
-
-1. Configure `CLUSTER_1_REGION` and `CLUSTER_2_REGION` with the target regions respectively.
-
-   ```bash
-   # set the region, adjust to your needs
-   export CLUSTER_1_REGION="us-east-1"
-   export CLUSTER_2_REGION="us-east-2"
-   ```
-
-1. Verify your AWS quotas for each region:
-
-   ```bash
-   rosa verify quota --region="$CLUSTER_1_REGION"
-   rosa verify quota --region="$CLUSTER_2_REGION"
-   ```
-
-   **Note**: This may fail due to organizational policies.
-
-1. Create the required account roles:
-
-   ```bash
-   rosa create account-roles --mode auto
-   ```
-
-1. Verify your AWS quotas, and if quotas are insufficient, consult the following:
-   - [Provisioned AWS Infrastructure](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-aws-prereqs.html#rosa-aws-policy-provisioned_rosa-sts-aws-prereqs)
-   - [Required AWS Service Quotas](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-required-aws-service-quotas.html#rosa-sts-required-aws-service-quotas)
-
-1. Ensure the `oc` CLI is installed. If it’s not already installed, follow the [official ROSA oc installation guide](https://docs.openshift.com/rosa/cli_reference/openshift_cli/getting-started-cli.html#cli-getting-started):
-
-   ```bash
-   rosa verify openshift-client
-   ```
+:::note
+This may fail due to organizational policies.
+:::
 
 #### Set up the ROSA clusters module
 
