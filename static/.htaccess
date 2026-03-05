@@ -106,7 +106,6 @@ RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs/?$ /do
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=inbound [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook/?$ /docs/components/connectors/out-of-the-box-connectors/github/?github=inbound [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/kafka-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/kafka/?kafka=inbound [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/?microsofto365mail=inbound [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/rabbitmq/?rabbitmq=inbound [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rest/?$ /docs/components/connectors/protocol/rest/ [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/slack-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/slack/?slack=inbound [R=301,L]
@@ -221,6 +220,21 @@ RewriteRule ^docs/self-managed/deployment/manual/upgrade/?$ /docs/self-managed/u
 #---------------------------------------------------------------------------------
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
+
+# O365 and power automate redirects
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/?$ /docs/next/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/ [R=301,L]
+RewriteRule ^docs/8.8/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/?$ /docs/8.8/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/ [R=301,L]
+RewriteRule ^docs/8.7/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/?$ /docs/8.7/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/ [R=301,L]
+RewriteRule ^docs/8.6/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/?$ /docs/8.6/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/ [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/
+out-of-the-box-connectors/power-automate/?$ /docs/next/components/connectors/introduction/ [R=301,L]
+RewriteRule ^docs/components/connectors/
+out-of-the-box-connectors/power-automate/?$ /docs/components/connectors/introduction/ [R=301,L]
+RewriteRule ^docs/8.8/components/connectors/
+out-of-the-box-connectors/power-automate/?$ /docs/8.8/components/connectors/introduction/ [R=301,L]
+
 
 # Self-Managed upgrade guide restructuring
 RewriteRule ^docs/next/self-managed/update/administrators/admin-upgrade-overview/?$ /docs/next/self-managed/upgrade/ [R=301,L]
