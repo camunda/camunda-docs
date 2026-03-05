@@ -157,6 +157,24 @@ The Helm chart now documents all values supporting Go template expressions, incl
 
 <p class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</p>
 
+### Global user task listeners
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects listeners">Listeners</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3287 -->
+
+You can now use a new Orchestration Cluster API to manage global user task listeners.
+
+- The API is available in both SaaS and Self Managed environments and supports full lifecycle management of listener definitions.
+- Listener execution follows the same semantics as existing global listener behavior, ensuring consistent payloads, predictable integrations, and uniform governance across environments.
+- You can configure global user task listeners via [unified configuration](/components/concepts/global-user-task-listeners.md#configure-through-unified-configuration), [Orchestration Cluster API](/components/concepts/global-user-task-listeners.md#configure-via-orchestration-cluster-api), or the [Admin UI](/components/concepts/global-user-task-listeners.md#configure-via-admin-ui).
+
+<p class="link-arrow">[Global User task Listeners](/components/concepts/global-user-task-listeners.md)</p>
+
+:::note
+Configuration-based global user task listeners were introduced for Self-Managed deployments in alpha 3.
+:::
+
 ### Intelligent Document Processing (IDP)
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
