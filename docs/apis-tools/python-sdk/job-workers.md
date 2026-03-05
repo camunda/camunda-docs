@@ -56,12 +56,12 @@ The job logger inherits the SDK's logger configuration (loguru by default, or wh
 
 Job workers support multiple execution strategies to match your workload type. Set `execution_strategy` in `WorkerConfig` or let the SDK auto-detect.
 
-| Strategy           | How it runs your handler                                                       | Best for                                                                     |
-| ------------------ | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
-| `"auto"` (default) | Auto-detects: `"async"` for `async def` handlers, `"thread"` for sync handlers | Most use cases — sensible defaults without configuration                     |
-| `"async"`          | Runs on a dedicated `asyncio` event loop                                       | I/O-bound async work (HTTP calls, database queries)                          |
-| `"thread"`         | Runs in a `ThreadPoolExecutor`                                                 | Blocking I/O (file system, synchronous HTTP libraries)                       |
-| `"process"`        | Runs in a `ProcessPoolExecutor`                                                | CPU-bound work that needs to escape the GIL (image processing, ML inference) |
+| Strategy | How it runs your handler | Best for |
+|----------|--------------------------|----------|
+| `"auto"` (default) | Auto-detects: `"async"` for `async def` handlers, `"thread"` for sync handlers | Most use cases — sensible defaults without configuration |
+| `"async"` | Runs on a dedicated `asyncio` event loop | I/O-bound async work (HTTP calls, database queries) |
+| `"thread"` | Runs in a `ThreadPoolExecutor` | Blocking I/O (file system, synchronous HTTP libraries) |
+| `"process"` | Runs in a `ProcessPoolExecutor` | CPU-bound work that needs to escape the GIL (image processing, ML inference) |
 
 **Auto-detection logic:** If your handler is an `async def`, the strategy defaults to `"async"`. If it's a regular `def`, the strategy defaults to `"thread"`. You can override this explicitly:
 
@@ -91,12 +91,12 @@ config = WorkerConfig(
 
 `WorkerConfig` supports:
 
-| Parameter                      | Default                       | Description                                     |
-| ------------------------------ | ----------------------------- | ----------------------------------------------- |
-| `job_type`                     | _(required)_                  | The BPMN service task type to poll for          |
-| `job_timeout_milliseconds`     | _(required)_                  | How long the worker has to complete the job     |
-| `request_timeout_milliseconds` | `0`                           | Long-poll request timeout (0 = server default)  |
-| `max_concurrent_jobs`          | `10`                          | Maximum jobs executing concurrently             |
-| `execution_strategy`           | `"auto"`                      | `"auto"`, `"async"`, `"thread"`, or `"process"` |
-| `fetch_variables`              | `None`                        | List of variable names to fetch (None = all)    |
-| `worker_name`                  | `"camunda-python-sdk-worker"` | Identifier for this worker in Camunda           |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `job_type` | *(required)* | The BPMN service task type to poll for |
+| `job_timeout_milliseconds` | *(required)* | How long the worker has to complete the job |
+| `request_timeout_milliseconds` | `0` | Long-poll request timeout (0 = server default) |
+| `max_concurrent_jobs` | `10` | Maximum jobs executing concurrently |
+| `execution_strategy` | `"auto"` | `"auto"`, `"async"`, `"thread"`, or `"process"` |
+| `fetch_variables` | `None` | List of variable names to fetch (None = all) |
+| `worker_name` | `"camunda-python-sdk-worker"` | Identifier for this worker in Camunda |
