@@ -63,7 +63,7 @@ For each cluster:
 - Cluster-specific networking components are provisioned. Private connectivity does not share entry components across clusters.
 - The cluster gateway is restricted to its Kubernetes namespace.
 
-Traffic between your VPC and the Camunda ingress endpoint is encrypted in transit using TLS. TLS terminates at the cluster’s API gateway layer.
+Traffic between your VPC and the Camunda Ingress endpoint is encrypted in transit using TLS. TLS terminates at the cluster’s API gateway layer.
 
 Traffic within the cluster follows the same model as public connectivity.
 
