@@ -11,37 +11,19 @@ mdx:
 type SearchUsersData = object;
 ```
 
-Defined in: [gen/types.gen.ts:16494](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16494)
+Defined in: [gen/types.gen.ts:15580](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15580)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: SearchQueryRequest & object;
+optional body: UserSearchQueryRequest;
 ```
 
-Defined in: [gen/types.gen.ts:16495](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16495)
+Defined in: [gen/types.gen.ts:15581](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15581)
 
-#### Type Declaration
-
-##### filter?
-
-```ts
-optional filter: UserFilter;
-```
-
-The user search filters.
-
-##### sort?
-
-```ts
-optional sort: object[];
-```
-
-Sort field criteria.
-
----
+***
 
 ### path?
 
@@ -49,9 +31,9 @@ Sort field criteria.
 optional path: never;
 ```
 
-Defined in: [gen/types.gen.ts:16511](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16511)
+Defined in: [gen/types.gen.ts:15582](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15582)
 
----
+***
 
 ### query?
 
@@ -59,9 +41,9 @@ Defined in: [gen/types.gen.ts:16511](https://github.com/camunda/orchestration-cl
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:16512](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16512)
+Defined in: [gen/types.gen.ts:15583](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15583)
 
----
+***
 
 ### url
 
@@ -69,4 +51,4 @@ Defined in: [gen/types.gen.ts:16512](https://github.com/camunda/orchestration-cl
 url: "/users/search";
 ```
 
-Defined in: [gen/types.gen.ts:16513](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16513)
+Defined in: [gen/types.gen.ts:15584](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15584)

@@ -11,7 +11,7 @@ mdx:
 type UnassignClientFromTenantResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:15845](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15845)
+Defined in: [gen/types.gen.ts:14925](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14925)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:15845](https://github.com/camunda/orchestration-cl
 204: void;
 ```
 
-Defined in: [gen/types.gen.ts:15849](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15849)
+Defined in: [gen/types.gen.ts:14929](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14929)
 
 The client was successfully unassigned from the tenant.

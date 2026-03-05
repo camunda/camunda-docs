@@ -8,8 +8,7 @@ mdx:
 # Type Alias: SearchUsersForTenantResponse
 
 ```ts
-type SearchUsersForTenantResponse =
-  SearchUsersForTenantResponses[keyof SearchUsersForTenantResponses];
+type SearchUsersForTenantResponse = SearchUsersForTenantResponses[keyof SearchUsersForTenantResponses];
 ```
 
-Defined in: [gen/types.gen.ts:16315](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16315)
+Defined in: [gen/types.gen.ts:15401](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15401)

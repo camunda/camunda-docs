@@ -11,7 +11,7 @@ mdx:
 type GetGlobalClusterVariableData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8667](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8667)
+Defined in: [gen/types.gen.ts:9047](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9047)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:8667](https://github.com/camunda/orchestration-clu
 optional body: never;
 ```
 
-Defined in: [gen/types.gen.ts:8668](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8668)
+Defined in: [gen/types.gen.ts:9048](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9048)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:8668](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:8669](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8669)
+Defined in: [gen/types.gen.ts:9049](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9049)
 
 #### name
 
@@ -41,7 +41,7 @@ name: string;
 
 The name of the cluster variable
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The name of the cluster variable
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:8675](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8675)
+Defined in: [gen/types.gen.ts:9055](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9055)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:8675](https://github.com/camunda/orchestration-clu
 url: "/cluster-variables/global/{name}";
 ```
 
-Defined in: [gen/types.gen.ts:8676](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8676)
+Defined in: [gen/types.gen.ts:9056](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9056)

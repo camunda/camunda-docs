@@ -11,7 +11,7 @@ mdx:
 type CancelProcessInstancesBatchOperationErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:13397](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13397)
+Defined in: [gen/types.gen.ts:12806](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L12806)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:13397](https://github.com/camunda/orchestration-cl
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:13402](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13402)
+Defined in: [gen/types.gen.ts:12811](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L12811)
 
 The process instance batch operation failed. More details are provided in the response body.
 
----
+***
 
 ### 401
 
@@ -33,11 +33,11 @@ The process instance batch operation failed. More details are provided in the re
 401: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:13406](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13406)
+Defined in: [gen/types.gen.ts:12815](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L12815)
 
 The request lacks valid authentication credentials.
 
----
+***
 
 ### 403
 
@@ -45,11 +45,11 @@ The request lacks valid authentication credentials.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:13410](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13410)
+Defined in: [gen/types.gen.ts:12819](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L12819)
 
 Forbidden. The request is not allowed.
 
----
+***
 
 ### 500
 
@@ -57,6 +57,6 @@ Forbidden. The request is not allowed.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:13414](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13414)
+Defined in: [gen/types.gen.ts:12823](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L12823)
 
 An internal error occurred while processing the request.

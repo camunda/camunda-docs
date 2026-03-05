@@ -11,7 +11,7 @@ mdx:
 type DeleteDecisionInstanceErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:9663](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9663)
+Defined in: [gen/types.gen.ts:9722](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9722)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:9663](https://github.com/camunda/orchestration-clu
 401: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9667](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9667)
+Defined in: [gen/types.gen.ts:9726](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9726)
 
 The request lacks valid authentication credentials.
 
----
+***
 
 ### 403
 
@@ -33,11 +33,11 @@ The request lacks valid authentication credentials.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9671](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9671)
+Defined in: [gen/types.gen.ts:9730](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9730)
 
 Forbidden. The request is not allowed.
 
----
+***
 
 ### 404
 
@@ -45,11 +45,11 @@ Forbidden. The request is not allowed.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9675](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9675)
+Defined in: [gen/types.gen.ts:9734](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9734)
 
 The decision instance is not found.
 
----
+***
 
 ### 500
 
@@ -57,11 +57,11 @@ The decision instance is not found.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9679](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9679)
+Defined in: [gen/types.gen.ts:9738](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9738)
 
 An internal error occurred while processing the request.
 
----
+***
 
 ### 503
 
@@ -69,6 +69,6 @@ An internal error occurred while processing the request.
 503: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9684](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9684)
+Defined in: [gen/types.gen.ts:9743](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9743)
 
 The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .

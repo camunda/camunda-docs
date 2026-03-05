@@ -11,7 +11,7 @@ mdx:
 type SearchMappingRulesForRoleData = object;
 ```
 
-Defined in: [gen/types.gen.ts:15058](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15058)
+Defined in: [gen/types.gen.ts:14134](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14134)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:15058](https://github.com/camunda/orchestration-cl
 optional body: MappingRuleSearchQueryRequest;
 ```
 
-Defined in: [gen/types.gen.ts:15059](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15059)
+Defined in: [gen/types.gen.ts:14135](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14135)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:15059](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:15060](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15060)
+Defined in: [gen/types.gen.ts:14136](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14136)
 
 #### roleId
 
@@ -41,7 +41,7 @@ roleId: string;
 
 The role ID.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The role ID.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:15066](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15066)
+Defined in: [gen/types.gen.ts:14142](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14142)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:15066](https://github.com/camunda/orchestration-cl
 url: "/roles/{roleId}/mapping-rules/search";
 ```
 
-Defined in: [gen/types.gen.ts:15067](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15067)
+Defined in: [gen/types.gen.ts:14143](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14143)

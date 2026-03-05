@@ -11,7 +11,7 @@ mdx:
 type IncidentProcessInstanceStatisticsByErrorResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:3224](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3224)
+Defined in: [gen/types.gen.ts:3598](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3598)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:3224](https://github.com/camunda/orchestration-clu
 optional activeInstancesWithErrorCount: number;
 ```
 
-Defined in: [gen/types.gen.ts:3237](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3237)
+Defined in: [gen/types.gen.ts:3611](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3611)
 
 The number of active process instances that currently have an active incident with this error.
 
----
+***
 
 ### errorHashCode?
 
@@ -33,11 +33,11 @@ The number of active process instances that currently have an active incident wi
 optional errorHashCode: number;
 ```
 
-Defined in: [gen/types.gen.ts:3228](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3228)
+Defined in: [gen/types.gen.ts:3602](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3602)
 
 The hash code identifying a specific incident error..
 
----
+***
 
 ### errorMessage?
 
@@ -45,6 +45,6 @@ The hash code identifying a specific incident error..
 optional errorMessage: string;
 ```
 
-Defined in: [gen/types.gen.ts:3232](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3232)
+Defined in: [gen/types.gen.ts:3606](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3606)
 
 The error message associated with the incident error hash code.

@@ -11,7 +11,7 @@ mdx:
 type PinClockData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8520](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8520)
+Defined in: [gen/types.gen.ts:8900](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8900)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:8520](https://github.com/camunda/orchestration-clu
 body: ClockPinRequest;
 ```
 
-Defined in: [gen/types.gen.ts:8521](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8521)
+Defined in: [gen/types.gen.ts:8901](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8901)
 
----
+***
 
 ### path?
 
@@ -31,9 +31,9 @@ Defined in: [gen/types.gen.ts:8521](https://github.com/camunda/orchestration-clu
 optional path: never;
 ```
 
-Defined in: [gen/types.gen.ts:8522](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8522)
+Defined in: [gen/types.gen.ts:8902](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8902)
 
----
+***
 
 ### query?
 
@@ -41,9 +41,9 @@ Defined in: [gen/types.gen.ts:8522](https://github.com/camunda/orchestration-clu
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:8523](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8523)
+Defined in: [gen/types.gen.ts:8903](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8903)
 
----
+***
 
 ### url
 
@@ -51,4 +51,4 @@ Defined in: [gen/types.gen.ts:8523](https://github.com/camunda/orchestration-clu
 url: "/clock";
 ```
 
-Defined in: [gen/types.gen.ts:8524](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8524)
+Defined in: [gen/types.gen.ts:8904](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8904)

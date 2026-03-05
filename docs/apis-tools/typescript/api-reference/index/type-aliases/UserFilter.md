@@ -11,7 +11,7 @@ mdx:
 type UserFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:7222](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7222)
+Defined in: [gen/types.gen.ts:7886](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7886)
 
 User search filter.
 
@@ -23,11 +23,11 @@ User search filter.
 optional email: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7234](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7234)
+Defined in: [gen/types.gen.ts:7898](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7898)
 
 The email of the user.
 
----
+***
 
 ### name?
 
@@ -35,11 +35,11 @@ The email of the user.
 optional name: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7230](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7230)
+Defined in: [gen/types.gen.ts:7894](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7894)
 
 The name of the user.
 
----
+***
 
 ### username?
 
@@ -47,6 +47,6 @@ The name of the user.
 optional username: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7226](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7226)
+Defined in: [gen/types.gen.ts:7890](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7890)
 
 The username of the user.

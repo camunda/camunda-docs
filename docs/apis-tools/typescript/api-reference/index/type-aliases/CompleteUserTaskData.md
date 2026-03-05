@@ -11,7 +11,7 @@ mdx:
 type CompleteUserTaskData = object;
 ```
 
-Defined in: [gen/types.gen.ts:17333](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17333)
+Defined in: [gen/types.gen.ts:16045](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L16045)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:17333](https://github.com/camunda/orchestration-cl
 optional body: UserTaskCompletionRequest;
 ```
 
-Defined in: [gen/types.gen.ts:17334](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17334)
+Defined in: [gen/types.gen.ts:16046](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L16046)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:17334](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:17335](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17335)
+Defined in: [gen/types.gen.ts:16047](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L16047)
 
 #### userTaskKey
 
@@ -41,7 +41,7 @@ userTaskKey: UserTaskKey;
 
 The key of the user task to complete.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The key of the user task to complete.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:17341](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17341)
+Defined in: [gen/types.gen.ts:16053](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L16053)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:17341](https://github.com/camunda/orchestration-cl
 url: "/user-tasks/{userTaskKey}/completion";
 ```
 
-Defined in: [gen/types.gen.ts:17342](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17342)
+Defined in: [gen/types.gen.ts:16054](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L16054)

@@ -11,7 +11,7 @@ mdx:
 type UnassignClientFromTenantData = object;
 ```
 
-Defined in: [gen/types.gen.ts:15803](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15803)
+Defined in: [gen/types.gen.ts:14883](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14883)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:15803](https://github.com/camunda/orchestration-cl
 optional body: never;
 ```
 
-Defined in: [gen/types.gen.ts:15804](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15804)
+Defined in: [gen/types.gen.ts:14884](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14884)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:15804](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:15805](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15805)
+Defined in: [gen/types.gen.ts:14885](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14885)
 
 #### clientId
 
@@ -49,7 +49,7 @@ tenantId: TenantId;
 
 The unique identifier of the tenant.
 
----
+***
 
 ### query?
 
@@ -57,9 +57,9 @@ The unique identifier of the tenant.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:15815](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15815)
+Defined in: [gen/types.gen.ts:14895](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14895)
 
----
+***
 
 ### url
 
@@ -67,4 +67,4 @@ Defined in: [gen/types.gen.ts:15815](https://github.com/camunda/orchestration-cl
 url: "/tenants/{tenantId}/clients/{clientId}";
 ```
 
-Defined in: [gen/types.gen.ts:15816](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15816)
+Defined in: [gen/types.gen.ts:14896](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14896)

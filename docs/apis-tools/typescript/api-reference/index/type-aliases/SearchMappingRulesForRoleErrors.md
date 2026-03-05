@@ -11,7 +11,7 @@ mdx:
 type SearchMappingRulesForRoleErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:15070](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15070)
+Defined in: [gen/types.gen.ts:14146](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14146)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:15070](https://github.com/camunda/orchestration-cl
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:15074](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15074)
+Defined in: [gen/types.gen.ts:14150](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14150)
 
 The provided data is not valid.
 
----
+***
 
 ### 401
 
@@ -33,11 +33,11 @@ The provided data is not valid.
 401: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:15078](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15078)
+Defined in: [gen/types.gen.ts:14154](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14154)
 
 The request lacks valid authentication credentials.
 
----
+***
 
 ### 403
 
@@ -45,11 +45,11 @@ The request lacks valid authentication credentials.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:15082](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15082)
+Defined in: [gen/types.gen.ts:14158](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14158)
 
 Forbidden. The request is not allowed.
 
----
+***
 
 ### 404
 
@@ -57,11 +57,11 @@ Forbidden. The request is not allowed.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:15086](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15086)
+Defined in: [gen/types.gen.ts:14162](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14162)
 
 The role with the given ID was not found.
 
----
+***
 
 ### 500
 
@@ -69,6 +69,6 @@ The role with the given ID was not found.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:15090](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15090)
+Defined in: [gen/types.gen.ts:14166](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14166)
 
 An internal error occurred while processing the request.

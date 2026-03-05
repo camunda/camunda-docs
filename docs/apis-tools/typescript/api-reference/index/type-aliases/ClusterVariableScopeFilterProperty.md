@@ -8,11 +8,11 @@ mdx:
 # Type Alias: ClusterVariableScopeFilterProperty
 
 ```ts
-type ClusterVariableScopeFilterProperty =
+type ClusterVariableScopeFilterProperty = 
   | ClusterVariableScopeExactMatch
   | AdvancedClusterVariableScopeFilter;
 ```
 
-Defined in: [gen/types.gen.ts:1223](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1223)
+Defined in: [gen/types.gen.ts:1256](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1256)
 
 ClusterVariableScopeEnum property with full advanced search capabilities.

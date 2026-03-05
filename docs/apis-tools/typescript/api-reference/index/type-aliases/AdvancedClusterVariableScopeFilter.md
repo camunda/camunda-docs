@@ -11,7 +11,7 @@ mdx:
 type AdvancedClusterVariableScopeFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:1230](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1230)
+Defined in: [gen/types.gen.ts:1263](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1263)
 
 Advanced filter
 
@@ -25,11 +25,11 @@ Advanced ClusterVariableScopeEnum filter.
 optional $eq: ClusterVariableScopeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:1234](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1234)
+Defined in: [gen/types.gen.ts:1267](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1267)
 
 Checks for equality with the provided value.
 
----
+***
 
 ### $exists?
 
@@ -37,11 +37,11 @@ Checks for equality with the provided value.
 optional $exists: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:1242](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1242)
+Defined in: [gen/types.gen.ts:1275](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1275)
 
 Checks if the current property exists.
 
----
+***
 
 ### $in?
 
@@ -49,11 +49,11 @@ Checks if the current property exists.
 optional $in: ClusterVariableScopeEnum[];
 ```
 
-Defined in: [gen/types.gen.ts:1246](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1246)
+Defined in: [gen/types.gen.ts:1279](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1279)
 
 Checks if the property matches any of the provided values.
 
----
+***
 
 ### $like?
 
@@ -61,9 +61,9 @@ Checks if the property matches any of the provided values.
 optional $like: LikeFilter;
 ```
 
-Defined in: [gen/types.gen.ts:1247](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1247)
+Defined in: [gen/types.gen.ts:1280](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1280)
 
----
+***
 
 ### $neq?
 
@@ -71,6 +71,6 @@ Defined in: [gen/types.gen.ts:1247](https://github.com/camunda/orchestration-clu
 optional $neq: ClusterVariableScopeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:1238](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1238)
+Defined in: [gen/types.gen.ts:1271](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1271)
 
 Checks for inequality with the provided value.

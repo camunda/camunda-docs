@@ -11,7 +11,7 @@ mdx:
 type BatchOperationItemFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:831](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L831)
+Defined in: [gen/types.gen.ts:858](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L858)
 
 Batch operation item filter request.
 
@@ -23,11 +23,11 @@ Batch operation item filter request.
 optional batchOperationKey: BasicStringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:835](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L835)
+Defined in: [gen/types.gen.ts:862](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L862)
 
 The key (or operate legacy ID) of the batch operation.
 
----
+***
 
 ### itemKey?
 
@@ -35,11 +35,11 @@ The key (or operate legacy ID) of the batch operation.
 optional itemKey: BasicStringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:839](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L839)
+Defined in: [gen/types.gen.ts:866](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L866)
 
 The key of the item, e.g. a process instance key.
 
----
+***
 
 ### operationType?
 
@@ -47,11 +47,11 @@ The key of the item, e.g. a process instance key.
 optional operationType: BatchOperationTypeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:851](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L851)
+Defined in: [gen/types.gen.ts:878](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L878)
 
 The type of the batch operation.
 
----
+***
 
 ### processInstanceKey?
 
@@ -59,11 +59,11 @@ The type of the batch operation.
 optional processInstanceKey: ProcessInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:843](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L843)
+Defined in: [gen/types.gen.ts:870](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L870)
 
 The process instance key of the processed item.
 
----
+***
 
 ### state?
 
@@ -71,6 +71,6 @@ The process instance key of the processed item.
 optional state: BatchOperationItemStateFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:847](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L847)
+Defined in: [gen/types.gen.ts:874](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L874)
 
 The state of the batch operation.

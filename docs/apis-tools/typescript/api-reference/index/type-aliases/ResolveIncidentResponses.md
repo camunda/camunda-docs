@@ -11,7 +11,7 @@ mdx:
 type ResolveIncidentResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:11576](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11576)
+Defined in: [gen/types.gen.ts:11548](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11548)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:11576](https://github.com/camunda/orchestration-cl
 204: void;
 ```
 
-Defined in: [gen/types.gen.ts:11580](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11580)
+Defined in: [gen/types.gen.ts:11552](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11552)
 
 The incident is marked as resolved.

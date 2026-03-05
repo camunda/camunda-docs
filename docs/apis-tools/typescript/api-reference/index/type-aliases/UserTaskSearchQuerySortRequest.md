@@ -11,14 +11,14 @@ mdx:
 type UserTaskSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:6744](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6744)
+Defined in: [gen/types.gen.ts:7392](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7392)
 
 ## Properties
 
 ### field
 
 ```ts
-field:
+field: 
   | "creationDate"
   | "completionDate"
   | "followUpDate"
@@ -27,11 +27,11 @@ field:
   | "name";
 ```
 
-Defined in: [gen/types.gen.ts:6748](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6748)
+Defined in: [gen/types.gen.ts:7396](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7396)
 
 The field to sort by.
 
----
+***
 
 ### order?
 
@@ -39,4 +39,4 @@ The field to sort by.
 optional order: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:6749](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6749)
+Defined in: [gen/types.gen.ts:7397](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7397)

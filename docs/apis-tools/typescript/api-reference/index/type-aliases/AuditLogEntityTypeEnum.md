@@ -8,12 +8,13 @@ mdx:
 # Type Alias: AuditLogEntityTypeEnum
 
 ```ts
-type AuditLogEntityTypeEnum =
+type AuditLogEntityTypeEnum = 
   | "AUTHORIZATION"
   | "BATCH"
   | "DECISION"
   | "GROUP"
   | "INCIDENT"
+  | "JOB"
   | "MAPPING_RULE"
   | "PROCESS_INSTANCE"
   | "RESOURCE"
@@ -25,6 +26,6 @@ type AuditLogEntityTypeEnum =
   | "CLIENT";
 ```
 
-Defined in: [gen/types.gen.ts:283](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L283)
+Defined in: [gen/types.gen.ts:300](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L300)
 
 The type of entity affected by the operation.

@@ -11,7 +11,7 @@ mdx:
 type ProcessDefinitionResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:5148](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5148)
+Defined in: [gen/types.gen.ts:5730](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5730)
 
 ## Properties
 
@@ -21,23 +21,23 @@ Defined in: [gen/types.gen.ts:5148](https://github.com/camunda/orchestration-clu
 optional hasStartForm: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:5180](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5180)
+Defined in: [gen/types.gen.ts:5762](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5762)
 
 Indicates whether the start event of the process has an associated Form Key.
 
----
+***
 
 ### name?
 
 ```ts
-optional name: string;
+optional name: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:5152](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5152)
+Defined in: [gen/types.gen.ts:5734](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5734)
 
 Name of this process definition.
 
----
+***
 
 ### processDefinitionId?
 
@@ -45,11 +45,11 @@ Name of this process definition.
 optional processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:5168](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5168)
+Defined in: [gen/types.gen.ts:5750](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5750)
 
 Process definition ID of this process definition.
 
----
+***
 
 ### processDefinitionKey?
 
@@ -57,11 +57,11 @@ Process definition ID of this process definition.
 optional processDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:5176](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5176)
+Defined in: [gen/types.gen.ts:5758](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5758)
 
 The key for this process definition.
 
----
+***
 
 ### resourceName?
 
@@ -69,11 +69,11 @@ The key for this process definition.
 optional resourceName: string;
 ```
 
-Defined in: [gen/types.gen.ts:5156](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5156)
+Defined in: [gen/types.gen.ts:5738](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5738)
 
 Resource name for this process definition.
 
----
+***
 
 ### tenantId?
 
@@ -81,11 +81,11 @@ Resource name for this process definition.
 optional tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:5172](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5172)
+Defined in: [gen/types.gen.ts:5754](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5754)
 
 Tenant ID of this process definition.
 
----
+***
 
 ### version?
 
@@ -93,18 +93,18 @@ Tenant ID of this process definition.
 optional version: number;
 ```
 
-Defined in: [gen/types.gen.ts:5160](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5160)
+Defined in: [gen/types.gen.ts:5742](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5742)
 
 Version of this process definition.
 
----
+***
 
 ### versionTag?
 
 ```ts
-optional versionTag: string;
+optional versionTag: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:5164](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5164)
+Defined in: [gen/types.gen.ts:5746](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5746)
 
 Version tag of this process definition.

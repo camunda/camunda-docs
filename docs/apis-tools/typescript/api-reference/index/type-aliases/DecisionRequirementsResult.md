@@ -11,7 +11,7 @@ mdx:
 type DecisionRequirementsResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:1966](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1966)
+Defined in: [gen/types.gen.ts:2029](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2029)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:1966](https://github.com/camunda/orchestration-clu
 optional decisionRequirementsId: string;
 ```
 
-Defined in: [gen/types.gen.ts:1978](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1978)
+Defined in: [gen/types.gen.ts:2041](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2041)
 
 The DMN ID of the decision requirements.
 
----
+***
 
 ### decisionRequirementsKey?
 
@@ -33,11 +33,11 @@ The DMN ID of the decision requirements.
 optional decisionRequirementsKey: DecisionRequirementsKey;
 ```
 
-Defined in: [gen/types.gen.ts:1990](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1990)
+Defined in: [gen/types.gen.ts:2053](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2053)
 
 The assigned key, which acts as a unique identifier for this decision requirements.
 
----
+***
 
 ### decisionRequirementsName?
 
@@ -45,11 +45,11 @@ The assigned key, which acts as a unique identifier for this decision requiremen
 optional decisionRequirementsName: string;
 ```
 
-Defined in: [gen/types.gen.ts:1970](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1970)
+Defined in: [gen/types.gen.ts:2033](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2033)
 
 The DMN name of the decision requirements.
 
----
+***
 
 ### resourceName?
 
@@ -57,11 +57,11 @@ The DMN name of the decision requirements.
 optional resourceName: string;
 ```
 
-Defined in: [gen/types.gen.ts:1982](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1982)
+Defined in: [gen/types.gen.ts:2045](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2045)
 
 The name of the resource from which this decision requirements was parsed.
 
----
+***
 
 ### tenantId?
 
@@ -69,11 +69,11 @@ The name of the resource from which this decision requirements was parsed.
 optional tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:1986](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1986)
+Defined in: [gen/types.gen.ts:2049](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2049)
 
 The tenant ID of the decision requirements.
 
----
+***
 
 ### version?
 
@@ -81,6 +81,6 @@ The tenant ID of the decision requirements.
 optional version: number;
 ```
 
-Defined in: [gen/types.gen.ts:1974](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1974)
+Defined in: [gen/types.gen.ts:2037](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2037)
 
 The assigned version of the decision requirements.

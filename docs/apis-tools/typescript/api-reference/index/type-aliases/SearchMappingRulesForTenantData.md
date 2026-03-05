@@ -11,7 +11,7 @@ mdx:
 type SearchMappingRulesForTenantData = object;
 ```
 
-Defined in: [gen/types.gen.ts:16039](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16039)
+Defined in: [gen/types.gen.ts:15108](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15108)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:16039](https://github.com/camunda/orchestration-cl
 optional body: MappingRuleSearchQueryRequest;
 ```
 
-Defined in: [gen/types.gen.ts:16040](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16040)
+Defined in: [gen/types.gen.ts:15109](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15109)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:16040](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:16041](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16041)
+Defined in: [gen/types.gen.ts:15110](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15110)
 
 #### tenantId
 
@@ -41,7 +41,7 @@ tenantId: TenantId;
 
 The unique identifier of the tenant.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The unique identifier of the tenant.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:16047](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16047)
+Defined in: [gen/types.gen.ts:15116](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15116)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:16047](https://github.com/camunda/orchestration-cl
 url: "/tenants/{tenantId}/mapping-rules/search";
 ```
 
-Defined in: [gen/types.gen.ts:16048](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16048)
+Defined in: [gen/types.gen.ts:15117](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15117)

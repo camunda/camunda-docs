@@ -11,7 +11,7 @@ mdx:
 type BatchOperationFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:720](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L720)
+Defined in: [gen/types.gen.ts:737](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L737)
 
 Batch operation filter request.
 
@@ -23,11 +23,11 @@ Batch operation filter request.
 optional actorId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:740](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L740)
+Defined in: [gen/types.gen.ts:757](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L757)
 
 The ID of the actor who performed the operation.
 
----
+***
 
 ### actorType?
 
@@ -35,11 +35,11 @@ The ID of the actor who performed the operation.
 optional actorType: AuditLogActorTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:736](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L736)
+Defined in: [gen/types.gen.ts:753](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L753)
 
 The type of the actor who performed the operation.
 
----
+***
 
 ### batchOperationKey?
 
@@ -47,11 +47,11 @@ The type of the actor who performed the operation.
 optional batchOperationKey: BasicStringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:724](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L724)
+Defined in: [gen/types.gen.ts:741](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L741)
 
 The key (or operate legacy ID) of the batch operation.
 
----
+***
 
 ### operationType?
 
@@ -59,11 +59,11 @@ The key (or operate legacy ID) of the batch operation.
 optional operationType: BatchOperationTypeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:728](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L728)
+Defined in: [gen/types.gen.ts:745](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L745)
 
 The type of the batch operation.
 
----
+***
 
 ### state?
 
@@ -71,6 +71,6 @@ The type of the batch operation.
 optional state: BatchOperationStateFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:732](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L732)
+Defined in: [gen/types.gen.ts:749](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L749)
 
 The state of the batch operation.

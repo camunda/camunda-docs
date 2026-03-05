@@ -11,7 +11,7 @@ mdx:
 type BasicStringFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:2627](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2627)
+Defined in: [gen/types.gen.ts:2780](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2780)
 
 Advanced filter
 
@@ -25,11 +25,11 @@ Basic advanced string filter.
 optional $eq: string;
 ```
 
-Defined in: [gen/types.gen.ts:2631](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2631)
+Defined in: [gen/types.gen.ts:2784](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2784)
 
 Checks for equality with the provided value.
 
----
+***
 
 ### $exists?
 
@@ -37,11 +37,11 @@ Checks for equality with the provided value.
 optional $exists: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:2639](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2639)
+Defined in: [gen/types.gen.ts:2792](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2792)
 
 Checks if the current property exists.
 
----
+***
 
 ### $in?
 
@@ -49,11 +49,11 @@ Checks if the current property exists.
 optional $in: string[];
 ```
 
-Defined in: [gen/types.gen.ts:2643](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2643)
+Defined in: [gen/types.gen.ts:2796](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2796)
 
 Checks if the property matches any of the provided values.
 
----
+***
 
 ### $neq?
 
@@ -61,11 +61,11 @@ Checks if the property matches any of the provided values.
 optional $neq: string;
 ```
 
-Defined in: [gen/types.gen.ts:2635](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2635)
+Defined in: [gen/types.gen.ts:2788](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2788)
 
 Checks for inequality with the provided value.
 
----
+***
 
 ### $notIn?
 
@@ -73,6 +73,6 @@ Checks for inequality with the provided value.
 optional $notIn: string[];
 ```
 
-Defined in: [gen/types.gen.ts:2647](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2647)
+Defined in: [gen/types.gen.ts:2800](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2800)
 
 Checks if the property matches none of the provided values.

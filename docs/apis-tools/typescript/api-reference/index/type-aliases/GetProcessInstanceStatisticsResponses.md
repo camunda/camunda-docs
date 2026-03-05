@@ -11,7 +11,7 @@ mdx:
 type GetProcessInstanceStatisticsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:14385](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14385)
+Defined in: [gen/types.gen.ts:13475](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13475)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:14385](https://github.com/camunda/orchestration-cl
 200: ProcessInstanceElementStatisticsQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:14389](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14389)
+Defined in: [gen/types.gen.ts:13479](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13479)
 
 The process instance statistics result.

@@ -11,7 +11,7 @@ mdx:
 type GroupFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:2883](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2883)
+Defined in: [gen/types.gen.ts:3213](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3213)
 
 Group filter request
 
@@ -23,11 +23,11 @@ Group filter request
 optional groupId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:2887](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2887)
+Defined in: [gen/types.gen.ts:3217](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3217)
 
 The group ID search filters.
 
----
+***
 
 ### name?
 
@@ -35,6 +35,6 @@ The group ID search filters.
 optional name: string;
 ```
 
-Defined in: [gen/types.gen.ts:2891](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2891)
+Defined in: [gen/types.gen.ts:3221](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3221)
 
 The group name search filters.

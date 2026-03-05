@@ -11,7 +11,7 @@ mdx:
 type GetResourceResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:14419](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14419)
+Defined in: [gen/types.gen.ts:13509](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13509)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:14419](https://github.com/camunda/orchestration-cl
 200: ResourceResult;
 ```
 
-Defined in: [gen/types.gen.ts:14423](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14423)
+Defined in: [gen/types.gen.ts:13513](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13513)
 
 The resource is successfully returned.

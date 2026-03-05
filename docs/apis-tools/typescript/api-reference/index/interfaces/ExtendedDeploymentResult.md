@@ -7,13 +7,13 @@ mdx:
 
 # Interface: ExtendedDeploymentResult
 
-Defined in: [gen/CamundaClient.ts:1101](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1101)
+Defined in: [gen/CamundaClient.ts:1071](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L1071)
 
 Extended deployment result with typed buckets for direct access to deployed artifacts.
 
 ## Extends
 
-- `_DataOf`\<_typeof_ `Sdk.createDeployment`\>
+- `_DataOf`\<*typeof* `Sdk.createDeployment`\>
 
 ## Properties
 
@@ -23,9 +23,9 @@ Extended deployment result with typed buckets for direct access to deployed arti
 decisionRequirements: DeploymentDecisionRequirementsResult[];
 ```
 
-Defined in: [gen/CamundaClient.ts:1104](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1104)
+Defined in: [gen/CamundaClient.ts:1074](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L1074)
 
----
+***
 
 ### decisions
 
@@ -33,9 +33,9 @@ Defined in: [gen/CamundaClient.ts:1104](https://github.com/camunda/orchestration
 decisions: DeploymentDecisionResult[];
 ```
 
-Defined in: [gen/CamundaClient.ts:1103](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1103)
+Defined in: [gen/CamundaClient.ts:1073](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L1073)
 
----
+***
 
 ### deploymentKey
 
@@ -43,147 +43,45 @@ Defined in: [gen/CamundaClient.ts:1103](https://github.com/camunda/orchestration
 deploymentKey: DeploymentKey;
 ```
 
-Defined in: [gen/types.gen.ts:9975](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9975)
+Defined in: [gen/types.gen.ts:2060](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2060)
 
 The unique key identifying the deployment.
 
 #### Inherited from
 
 ```ts
-_DataOf.deploymentKey;
+_DataOf.deploymentKey
 ```
 
----
+***
 
 ### deployments
 
 ```ts
-deployments: object[];
+deployments: DeploymentMetadataResult[];
 ```
 
-Defined in: [gen/types.gen.ts:9983](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9983)
+Defined in: [gen/types.gen.ts:2068](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2068)
 
 Items deployed by the request.
-
-#### decisionDefinition?
-
-```ts
-optional decisionDefinition: DeploymentDecisionResult;
-```
-
-#### decisionRequirements?
-
-```ts
-optional decisionRequirements: DeploymentDecisionRequirementsResult;
-```
-
-#### form?
-
-```ts
-optional form: object;
-```
-
-A deployed form.
-
-##### form.formId?
-
-```ts
-optional formId: FormId;
-```
-
-The form ID, as parsed during deployment, together with the version forms a
-unique identifier for a specific form.
-
-##### form.formKey?
-
-```ts
-optional formKey: FormKey;
-```
-
-The assigned key, which acts as a unique identifier for this form.
-
-##### form.resourceName?
-
-```ts
-optional resourceName: string;
-```
-
-##### form.tenantId?
-
-```ts
-optional tenantId: TenantId;
-```
-
-##### form.version?
-
-```ts
-optional version: number;
-```
-
-#### processDefinition?
-
-```ts
-optional processDefinition: DeploymentProcessResult;
-```
-
-#### resource?
-
-```ts
-optional resource: DeploymentResourceResult;
-```
 
 #### Inherited from
 
 ```ts
-_DataOf.deployments;
+_DataOf.deployments
 ```
 
----
+***
 
 ### forms
 
 ```ts
-forms: object[];
+forms: DeploymentFormResult[];
 ```
 
-Defined in: [gen/CamundaClient.ts:1105](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1105)
+Defined in: [gen/CamundaClient.ts:1075](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L1075)
 
-#### formId?
-
-```ts
-optional formId: FormId;
-```
-
-The form ID, as parsed during deployment, together with the version forms a
-unique identifier for a specific form.
-
-#### formKey?
-
-```ts
-optional formKey: FormKey;
-```
-
-The assigned key, which acts as a unique identifier for this form.
-
-#### resourceName?
-
-```ts
-optional resourceName: string;
-```
-
-#### tenantId?
-
-```ts
-optional tenantId: TenantId;
-```
-
-#### version?
-
-```ts
-optional version: number;
-```
-
----
+***
 
 ### processes
 
@@ -191,9 +89,9 @@ optional version: number;
 processes: DeploymentProcessResult[];
 ```
 
-Defined in: [gen/CamundaClient.ts:1102](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1102)
+Defined in: [gen/CamundaClient.ts:1072](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L1072)
 
----
+***
 
 ### resources
 
@@ -201,9 +99,9 @@ Defined in: [gen/CamundaClient.ts:1102](https://github.com/camunda/orchestration
 resources: DeploymentResourceResult[];
 ```
 
-Defined in: [gen/CamundaClient.ts:1106](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1106)
+Defined in: [gen/CamundaClient.ts:1076](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L1076)
 
----
+***
 
 ### tenantId
 
@@ -211,12 +109,12 @@ Defined in: [gen/CamundaClient.ts:1106](https://github.com/camunda/orchestration
 tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:9979](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9979)
+Defined in: [gen/types.gen.ts:2064](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2064)
 
 The tenant ID associated with the deployment.
 
 #### Inherited from
 
 ```ts
-_DataOf.tenantId;
+_DataOf.tenantId
 ```

@@ -11,7 +11,7 @@ mdx:
 type CreateUserResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:16485](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16485)
+Defined in: [gen/types.gen.ts:15571](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15571)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:16485](https://github.com/camunda/orchestration-cl
 201: UserCreateResult;
 ```
 
-Defined in: [gen/types.gen.ts:16489](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16489)
+Defined in: [gen/types.gen.ts:15575](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15575)
 
 The user was created successfully.

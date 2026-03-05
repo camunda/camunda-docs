@@ -11,7 +11,7 @@ mdx:
 type unassignUserTaskInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:1053](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1053)
+Defined in: [gen/CamundaClient.ts:1024](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L1024)
 
 ## Properties
 
@@ -21,4 +21,4 @@ Defined in: [gen/CamundaClient.ts:1053](https://github.com/camunda/orchestration
 userTaskKey: unassignUserTaskPathParam_userTaskKey;
 ```
 
-Defined in: [gen/CamundaClient.ts:1053](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1053)
+Defined in: [gen/CamundaClient.ts:1024](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L1024)

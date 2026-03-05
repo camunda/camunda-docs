@@ -8,9 +8,12 @@ mdx:
 # Type Alias: ScopeKeyFilterProperty
 
 ```ts
-type ScopeKeyFilterProperty = ScopeKeyExactMatch | AdvancedScopeKeyFilter;
+type ScopeKeyFilterProperty = 
+  | ScopeKeyExactMatch
+  | AdvancedScopeKeyFilter;
 ```
 
-Defined in: [gen/types.gen.ts:4271](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4271)
+Defined in: [gen/types.gen.ts:4841](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4841)
 
-ScopeKey property with full advanced search capabilities.
+ScopeKey property with full advanced search capabilities. Filter by the key of the
+element instance or process instance that defines the scope of a variable.

@@ -11,23 +11,23 @@ mdx:
 type LicenseResponse = object;
 ```
 
-Defined in: [gen/types.gen.ts:4502](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4502)
+Defined in: [gen/types.gen.ts:5072](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5072)
 
 The response of a license request.
 
 ## Properties
 
-### expiresAt?
+### expiresAt
 
 ```ts
-optional expiresAt: string | null;
+expiresAt: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:4518](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4518)
+Defined in: [gen/types.gen.ts:5088](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5088)
 
 The date when the Camunda license expires
 
----
+***
 
 ### isCommercial
 
@@ -35,11 +35,11 @@ The date when the Camunda license expires
 isCommercial: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:4514](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4514)
+Defined in: [gen/types.gen.ts:5084](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5084)
 
 Will be false when a license contains a non-commerical=true property
 
----
+***
 
 ### licenseType
 
@@ -47,11 +47,11 @@ Will be false when a license contains a non-commerical=true property
 licenseType: string;
 ```
 
-Defined in: [gen/types.gen.ts:4510](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4510)
+Defined in: [gen/types.gen.ts:5080](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5080)
 
 Will return the license type property of the Camunda license
 
----
+***
 
 ### validLicense
 
@@ -59,6 +59,6 @@ Will return the license type property of the Camunda license
 validLicense: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:4506](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4506)
+Defined in: [gen/types.gen.ts:5076](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5076)
 
 True if the Camunda license is valid, false if otherwise

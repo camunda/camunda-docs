@@ -11,7 +11,7 @@ mdx:
 type GetDecisionDefinitionXmlErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:9330](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9330)
+Defined in: [gen/types.gen.ts:9589](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9589)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:9330](https://github.com/camunda/orchestration-clu
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9334](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9334)
+Defined in: [gen/types.gen.ts:9593](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9593)
 
 The provided data is not valid.
 
----
+***
 
 ### 401
 
@@ -33,11 +33,11 @@ The provided data is not valid.
 401: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9338](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9338)
+Defined in: [gen/types.gen.ts:9597](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9597)
 
 The request lacks valid authentication credentials.
 
----
+***
 
 ### 403
 
@@ -45,11 +45,11 @@ The request lacks valid authentication credentials.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9342](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9342)
+Defined in: [gen/types.gen.ts:9601](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9601)
 
 Forbidden. The request is not allowed.
 
----
+***
 
 ### 404
 
@@ -57,11 +57,11 @@ Forbidden. The request is not allowed.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9347](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9347)
+Defined in: [gen/types.gen.ts:9606](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9606)
 
 The decision definition with the given key was not found. More details are provided in the response body.
 
----
+***
 
 ### 500
 
@@ -69,6 +69,6 @@ The decision definition with the given key was not found. More details are provi
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9351](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9351)
+Defined in: [gen/types.gen.ts:9610](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9610)
 
 An internal error occurred while processing the request.

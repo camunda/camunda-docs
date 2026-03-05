@@ -11,7 +11,7 @@ mdx:
 type BatchOperationError = object;
 ```
 
-Defined in: [gen/types.gen.ts:791](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L791)
+Defined in: [gen/types.gen.ts:818](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L818)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:791](https://github.com/camunda/orchestration-clus
 optional message: string;
 ```
 
-Defined in: [gen/types.gen.ts:803](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L803)
+Defined in: [gen/types.gen.ts:830](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L830)
 
 The error message that occurred during the batch operation.
 
----
+***
 
 ### partitionId?
 
@@ -33,11 +33,11 @@ The error message that occurred during the batch operation.
 optional partitionId: number;
 ```
 
-Defined in: [gen/types.gen.ts:795](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L795)
+Defined in: [gen/types.gen.ts:822](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L822)
 
 The partition ID where the error occurred.
 
----
+***
 
 ### type?
 
@@ -45,6 +45,6 @@ The partition ID where the error occurred.
 optional type: "QUERY_FAILED" | "RESULT_BUFFER_SIZE_EXCEEDED";
 ```
 
-Defined in: [gen/types.gen.ts:799](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L799)
+Defined in: [gen/types.gen.ts:826](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L826)
 
 The type of the error that occurred during the batch operation.

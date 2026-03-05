@@ -11,54 +11,66 @@ mdx:
 type DeploymentMetadataResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:2008](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2008)
+Defined in: [gen/types.gen.ts:2071](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2071)
 
 ## Properties
 
-### decisionDefinition?
+### decisionDefinition
 
 ```ts
-optional decisionDefinition: DeploymentDecisionResult;
+decisionDefinition: DeploymentDecisionResult | null;
 ```
 
-Defined in: [gen/types.gen.ts:2010](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2010)
+Defined in: [gen/types.gen.ts:2079](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2079)
 
----
+Deployed decision.
 
-### decisionRequirements?
+***
+
+### decisionRequirements
 
 ```ts
-optional decisionRequirements: DeploymentDecisionRequirementsResult;
+decisionRequirements: 
+  | DeploymentDecisionRequirementsResult
+  | null;
 ```
 
-Defined in: [gen/types.gen.ts:2011](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2011)
+Defined in: [gen/types.gen.ts:2083](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2083)
 
----
+Deployed decision requirement definition.
 
-### form?
+***
+
+### form
 
 ```ts
-optional form: DeploymentFormResult;
+form: DeploymentFormResult | null;
 ```
 
-Defined in: [gen/types.gen.ts:2012](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2012)
+Defined in: [gen/types.gen.ts:2087](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2087)
 
----
+Deployed form.
 
-### processDefinition?
+***
+
+### processDefinition
 
 ```ts
-optional processDefinition: DeploymentProcessResult;
+processDefinition: DeploymentProcessResult | null;
 ```
 
-Defined in: [gen/types.gen.ts:2009](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2009)
+Defined in: [gen/types.gen.ts:2075](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2075)
 
----
+Deployed process.
 
-### resource?
+***
+
+### resource
 
 ```ts
-optional resource: DeploymentResourceResult;
+resource: DeploymentResourceResult | null;
 ```
 
-Defined in: [gen/types.gen.ts:2013](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2013)
+Defined in: [gen/types.gen.ts:2091](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2091)
+
+Deployed resource.

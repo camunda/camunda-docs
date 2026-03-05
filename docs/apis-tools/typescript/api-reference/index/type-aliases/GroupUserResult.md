@@ -11,7 +11,7 @@ mdx:
 type GroupUserResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:2904](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2904)
+Defined in: [gen/types.gen.ts:3234](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3234)
 
 ## Properties
 
@@ -21,4 +21,4 @@ Defined in: [gen/types.gen.ts:2904](https://github.com/camunda/orchestration-clu
 optional username: Username;
 ```
 
-Defined in: [gen/types.gen.ts:2905](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2905)
+Defined in: [gen/types.gen.ts:3235](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3235)

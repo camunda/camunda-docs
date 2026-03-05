@@ -11,7 +11,7 @@ mdx:
 type getStartProcessFormInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:527](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L527)
+Defined in: [gen/CamundaClient.ts:520](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L520)
 
 ## Properties
 
@@ -21,4 +21,4 @@ Defined in: [gen/CamundaClient.ts:527](https://github.com/camunda/orchestration-
 processDefinitionKey: getStartProcessFormPathParam_processDefinitionKey;
 ```
 
-Defined in: [gen/CamundaClient.ts:527](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L527)
+Defined in: [gen/CamundaClient.ts:520](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L520)

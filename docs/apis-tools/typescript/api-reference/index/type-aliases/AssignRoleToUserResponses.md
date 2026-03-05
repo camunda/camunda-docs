@@ -11,7 +11,7 @@ mdx:
 type AssignRoleToUserResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:15364](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15364)
+Defined in: [gen/types.gen.ts:14452](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14452)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:15364](https://github.com/camunda/orchestration-cl
 204: void;
 ```
 
-Defined in: [gen/types.gen.ts:15368](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15368)
+Defined in: [gen/types.gen.ts:14456](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14456)
 
 The role was assigned successfully to the user.

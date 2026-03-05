@@ -11,7 +11,7 @@ mdx:
 type GetDocumentData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10145](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10145)
+Defined in: [gen/types.gen.ts:10096](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10096)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:10145](https://github.com/camunda/orchestration-cl
 optional body: never;
 ```
 
-Defined in: [gen/types.gen.ts:10146](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10146)
+Defined in: [gen/types.gen.ts:10097](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10097)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:10146](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:10147](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10147)
+Defined in: [gen/types.gen.ts:10098](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10098)
 
 #### documentId
 
@@ -41,7 +41,7 @@ documentId: DocumentId;
 
 The ID of the document to download.
 
----
+***
 
 ### query?
 
@@ -49,7 +49,7 @@ The ID of the document to download.
 optional query: object;
 ```
 
-Defined in: [gen/types.gen.ts:10153](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10153)
+Defined in: [gen/types.gen.ts:10104](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10104)
 
 #### contentHash?
 
@@ -67,7 +67,7 @@ optional storeId: string;
 
 The ID of the document store to download the document from.
 
----
+***
 
 ### url
 
@@ -75,4 +75,4 @@ The ID of the document store to download the document from.
 url: "/documents/{documentId}";
 ```
 
-Defined in: [gen/types.gen.ts:10164](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10164)
+Defined in: [gen/types.gen.ts:10115](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10115)

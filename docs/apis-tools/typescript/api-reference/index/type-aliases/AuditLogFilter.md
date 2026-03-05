@@ -11,7 +11,7 @@ mdx:
 type AuditLogFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:150](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L150)
+Defined in: [gen/types.gen.ts:163](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L163)
 
 Audit log filter request
 
@@ -23,11 +23,11 @@ Audit log filter request
 optional actorId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:182](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L182)
+Defined in: [gen/types.gen.ts:195](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L195)
 
 The actor ID search filter.
 
----
+***
 
 ### actorType?
 
@@ -35,11 +35,23 @@ The actor ID search filter.
 optional actorType: AuditLogActorTypeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:186](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L186)
+Defined in: [gen/types.gen.ts:199](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L199)
 
 The actor type search filter.
 
----
+***
+
+### agentElementId?
+
+```ts
+optional agentElementId: StringFilterProperty;
+```
+
+Defined in: [gen/types.gen.ts:203](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L203)
+
+The agent element ID search filter.
+
+***
 
 ### auditLogKey?
 
@@ -47,11 +59,11 @@ The actor type search filter.
 optional auditLogKey: AuditLogKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:154](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L154)
+Defined in: [gen/types.gen.ts:167](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L167)
 
 The audit log key search filter.
 
----
+***
 
 ### batchOperationType?
 
@@ -59,11 +71,11 @@ The audit log key search filter.
 optional batchOperationType: BatchOperationTypeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:218](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L218)
+Defined in: [gen/types.gen.ts:235](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L235)
 
 The batch operation type search filter.
 
----
+***
 
 ### category?
 
@@ -71,11 +83,11 @@ The batch operation type search filter.
 optional category: CategoryFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:202](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L202)
+Defined in: [gen/types.gen.ts:219](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L219)
 
 The category search filter.
 
----
+***
 
 ### decisionDefinitionId?
 
@@ -83,11 +95,11 @@ The category search filter.
 optional decisionDefinitionId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:242](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L242)
+Defined in: [gen/types.gen.ts:259](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L259)
 
 The decision definition ID search filter.
 
----
+***
 
 ### decisionDefinitionKey?
 
@@ -95,11 +107,11 @@ The decision definition ID search filter.
 optional decisionDefinitionKey: DecisionDefinitionKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:246](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L246)
+Defined in: [gen/types.gen.ts:263](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L263)
 
 The decision definition key search filter.
 
----
+***
 
 ### decisionEvaluationKey?
 
@@ -107,11 +119,11 @@ The decision definition key search filter.
 optional decisionEvaluationKey: DecisionEvaluationKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:250](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L250)
+Defined in: [gen/types.gen.ts:267](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L267)
 
 The decision evaluation key search filter.
 
----
+***
 
 ### decisionRequirementsId?
 
@@ -119,11 +131,11 @@ The decision evaluation key search filter.
 optional decisionRequirementsId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:234](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L234)
+Defined in: [gen/types.gen.ts:251](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L251)
 
 The decision requirements ID search filter.
 
----
+***
 
 ### decisionRequirementsKey?
 
@@ -131,11 +143,11 @@ The decision requirements ID search filter.
 optional decisionRequirementsKey: DecisionRequirementsKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:238](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L238)
+Defined in: [gen/types.gen.ts:255](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L255)
 
 The decision requirements key search filter.
 
----
+***
 
 ### deploymentKey?
 
@@ -143,11 +155,11 @@ The decision requirements key search filter.
 optional deploymentKey: DeploymentKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:206](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L206)
+Defined in: [gen/types.gen.ts:223](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L223)
 
 The deployment key search filter.
 
----
+***
 
 ### elementInstanceKey?
 
@@ -155,11 +167,11 @@ The deployment key search filter.
 optional elementInstanceKey: ElementInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:166](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L166)
+Defined in: [gen/types.gen.ts:179](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L179)
 
 The element instance key search filter.
 
----
+***
 
 ### entityDescription?
 
@@ -167,11 +179,11 @@ The element instance key search filter.
 optional entityDescription: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:262](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L262)
+Defined in: [gen/types.gen.ts:279](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L279)
 
 The entity description filter.
 
----
+***
 
 ### entityKey?
 
@@ -179,11 +191,11 @@ The entity description filter.
 optional entityKey: AuditLogEntityKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:190](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L190)
+Defined in: [gen/types.gen.ts:207](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L207)
 
 The entity key search filter.
 
----
+***
 
 ### entityType?
 
@@ -191,11 +203,11 @@ The entity key search filter.
 optional entityType: EntityTypeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:194](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L194)
+Defined in: [gen/types.gen.ts:211](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L211)
 
 The entity type search filter.
 
----
+***
 
 ### formKey?
 
@@ -203,11 +215,11 @@ The entity type search filter.
 optional formKey: FormKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:210](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L210)
+Defined in: [gen/types.gen.ts:227](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L227)
 
 The form key search filter.
 
----
+***
 
 ### jobKey?
 
@@ -215,11 +227,11 @@ The form key search filter.
 optional jobKey: JobKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:226](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L226)
+Defined in: [gen/types.gen.ts:243](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L243)
 
 The job key search filter.
 
----
+***
 
 ### operationType?
 
@@ -227,11 +239,11 @@ The job key search filter.
 optional operationType: OperationTypeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:170](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L170)
+Defined in: [gen/types.gen.ts:183](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L183)
 
 The operation type search filter.
 
----
+***
 
 ### processDefinitionId?
 
@@ -239,11 +251,11 @@ The operation type search filter.
 optional processDefinitionId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:222](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L222)
+Defined in: [gen/types.gen.ts:239](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L239)
 
 The process definition ID search filter.
 
----
+***
 
 ### processDefinitionKey?
 
@@ -251,11 +263,11 @@ The process definition ID search filter.
 optional processDefinitionKey: ProcessDefinitionKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:158](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L158)
+Defined in: [gen/types.gen.ts:171](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L171)
 
 The process definition key search filter.
 
----
+***
 
 ### processInstanceKey?
 
@@ -263,11 +275,11 @@ The process definition key search filter.
 optional processInstanceKey: ProcessInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:162](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L162)
+Defined in: [gen/types.gen.ts:175](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L175)
 
 The process instance key search filter.
 
----
+***
 
 ### relatedEntityKey?
 
@@ -275,11 +287,11 @@ The process instance key search filter.
 optional relatedEntityKey: AuditLogEntityKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:254](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L254)
+Defined in: [gen/types.gen.ts:271](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L271)
 
 The related entity key search filter.
 
----
+***
 
 ### relatedEntityType?
 
@@ -287,11 +299,11 @@ The related entity key search filter.
 optional relatedEntityType: EntityTypeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:258](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L258)
+Defined in: [gen/types.gen.ts:275](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L275)
 
 The related entity type search filter.
 
----
+***
 
 ### resourceKey?
 
@@ -299,11 +311,11 @@ The related entity type search filter.
 optional resourceKey: ResourceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:214](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L214)
+Defined in: [gen/types.gen.ts:231](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L231)
 
 The resource key search filter.
 
----
+***
 
 ### result?
 
@@ -311,11 +323,11 @@ The resource key search filter.
 optional result: AuditLogResultFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:174](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L174)
+Defined in: [gen/types.gen.ts:187](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L187)
 
 The result search filter.
 
----
+***
 
 ### tenantId?
 
@@ -323,11 +335,11 @@ The result search filter.
 optional tenantId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:198](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L198)
+Defined in: [gen/types.gen.ts:215](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L215)
 
 The tenant ID search filter.
 
----
+***
 
 ### timestamp?
 
@@ -335,11 +347,11 @@ The tenant ID search filter.
 optional timestamp: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:178](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L178)
+Defined in: [gen/types.gen.ts:191](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L191)
 
 The timestamp search filter.
 
----
+***
 
 ### userTaskKey?
 
@@ -347,6 +359,6 @@ The timestamp search filter.
 optional userTaskKey: BasicStringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:230](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L230)
+Defined in: [gen/types.gen.ts:247](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L247)
 
 The user task key search filter.

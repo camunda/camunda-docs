@@ -11,7 +11,7 @@ mdx:
 type DeleteResourceResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:14512](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14512)
+Defined in: [gen/types.gen.ts:13589](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13589)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:14512](https://github.com/camunda/orchestration-cl
 200: DeleteResourceResponse;
 ```
 
-Defined in: [gen/types.gen.ts:14516](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14516)
+Defined in: [gen/types.gen.ts:13593](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13593)
 
 The resource is deleted.

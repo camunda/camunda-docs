@@ -8,8 +8,7 @@ mdx:
 # Type Alias: GetProcessInstanceCallHierarchyError
 
 ```ts
-type GetProcessInstanceCallHierarchyError =
-  GetProcessInstanceCallHierarchyErrors[keyof GetProcessInstanceCallHierarchyErrors];
+type GetProcessInstanceCallHierarchyError = GetProcessInstanceCallHierarchyErrors[keyof GetProcessInstanceCallHierarchyErrors];
 ```
 
-Defined in: [gen/types.gen.ts:13915](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13915)
+Defined in: [gen/types.gen.ts:13107](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13107)

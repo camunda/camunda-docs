@@ -11,7 +11,7 @@ mdx:
 type CamundaKey<T> = string & object;
 ```
 
-Defined in: [gen/types.gen.ts:3](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3)
+Defined in: [gen/types.gen.ts:3](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3)
 
 ## Type Declaration
 
@@ -25,4 +25,4 @@ readonly __brand: T;
 
 ### T
 
-`T` _extends_ `string` = `string`
+`T` *extends* `string` = `string`

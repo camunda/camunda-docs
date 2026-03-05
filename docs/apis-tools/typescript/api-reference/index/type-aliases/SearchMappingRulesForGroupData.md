@@ -11,7 +11,7 @@ mdx:
 type SearchMappingRulesForGroupData = object;
 ```
 
-Defined in: [gen/types.gen.ts:11017](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11017)
+Defined in: [gen/types.gen.ts:11053](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11053)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:11017](https://github.com/camunda/orchestration-cl
 optional body: MappingRuleSearchQueryRequest;
 ```
 
-Defined in: [gen/types.gen.ts:11018](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11018)
+Defined in: [gen/types.gen.ts:11054](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11054)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:11018](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:11019](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11019)
+Defined in: [gen/types.gen.ts:11055](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11055)
 
 #### groupId
 
@@ -41,7 +41,7 @@ groupId: string;
 
 The group ID.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The group ID.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:11025](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11025)
+Defined in: [gen/types.gen.ts:11061](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11061)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:11025](https://github.com/camunda/orchestration-cl
 url: "/groups/{groupId}/mapping-rules/search";
 ```
 
-Defined in: [gen/types.gen.ts:11026](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11026)
+Defined in: [gen/types.gen.ts:11062](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11062)

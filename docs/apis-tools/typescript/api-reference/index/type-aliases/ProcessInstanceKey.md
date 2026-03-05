@@ -11,6 +11,6 @@ mdx:
 type ProcessInstanceKey = CamundaKey<"ProcessInstanceKey">;
 ```
 
-Defined in: [gen/types.gen.ts:4011](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4011)
+Defined in: [gen/types.gen.ts:4585](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4585)
 
 System-generated key for a process instance.

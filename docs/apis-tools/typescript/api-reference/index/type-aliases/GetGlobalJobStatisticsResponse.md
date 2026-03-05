@@ -8,8 +8,7 @@ mdx:
 # Type Alias: GetGlobalJobStatisticsResponse
 
 ```ts
-type GetGlobalJobStatisticsResponse =
-  GetGlobalJobStatisticsResponses[keyof GetGlobalJobStatisticsResponses];
+type GetGlobalJobStatisticsResponse = GetGlobalJobStatisticsResponses[keyof GetGlobalJobStatisticsResponses];
 ```
 
-Defined in: [gen/types.gen.ts:12182](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12182)
+Defined in: [gen/types.gen.ts:11954](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11954)

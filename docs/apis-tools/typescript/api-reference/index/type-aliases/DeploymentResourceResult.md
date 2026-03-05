@@ -11,7 +11,7 @@ mdx:
 type DeploymentResourceResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:2124](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2124)
+Defined in: [gen/types.gen.ts:2220](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2220)
 
 A deployed Resource.
 
@@ -23,9 +23,11 @@ A deployed Resource.
 optional resourceId: string;
 ```
 
-Defined in: [gen/types.gen.ts:2125](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2125)
+Defined in: [gen/types.gen.ts:2224](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2224)
 
----
+The resource id of the deployed resource.
+
+***
 
 ### resourceKey?
 
@@ -33,11 +35,11 @@ Defined in: [gen/types.gen.ts:2125](https://github.com/camunda/orchestration-clu
 optional resourceKey: ResourceKey;
 ```
 
-Defined in: [gen/types.gen.ts:2132](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2132)
+Defined in: [gen/types.gen.ts:2237](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2237)
 
 The assigned key, which acts as a unique identifier for this Resource.
 
----
+***
 
 ### resourceName?
 
@@ -45,9 +47,11 @@ The assigned key, which acts as a unique identifier for this Resource.
 optional resourceName: string;
 ```
 
-Defined in: [gen/types.gen.ts:2126](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2126)
+Defined in: [gen/types.gen.ts:2228](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2228)
 
----
+The name of the deployed resource.
+
+***
 
 ### tenantId?
 
@@ -55,9 +59,9 @@ Defined in: [gen/types.gen.ts:2126](https://github.com/camunda/orchestration-clu
 optional tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:2128](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2128)
+Defined in: [gen/types.gen.ts:2233](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2233)
 
----
+***
 
 ### version?
 
@@ -65,4 +69,6 @@ Defined in: [gen/types.gen.ts:2128](https://github.com/camunda/orchestration-clu
 optional version: number;
 ```
 
-Defined in: [gen/types.gen.ts:2127](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2127)
+Defined in: [gen/types.gen.ts:2232](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2232)
+
+The description of the deployed resource.

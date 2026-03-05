@@ -11,7 +11,7 @@ mdx:
 type ClockPinRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:1101](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1101)
+Defined in: [gen/types.gen.ts:1134](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1134)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:1101](https://github.com/camunda/orchestration-clu
 timestamp: number;
 ```
 
-Defined in: [gen/types.gen.ts:1105](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1105)
+Defined in: [gen/types.gen.ts:1138](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1138)
 
 The exact time in epoch milliseconds to which the clock should be pinned.

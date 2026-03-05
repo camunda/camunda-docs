@@ -8,28 +8,30 @@ mdx:
 # Type Alias: Changeset
 
 ```ts
-type Changeset = {
-  [key: string]: unknown;
+type Changeset = 
+  | {
+[key: string]: unknown;
   candidateGroups?: string[] | null;
   candidateUsers?: string[] | null;
   dueDate?: string | null;
   followUpDate?: string | null;
   priority?: number | null;
-} | null;
+}
+  | null;
 ```
 
-Defined in: [gen/types.gen.ts:7002](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7002)
+Defined in: [gen/types.gen.ts:7664](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7664)
 
 JSON object with changed task attribute values.
 
 The following attributes can be adjusted with this endpoint, additional attributes
 will be ignored:
 
-- `candidateGroups` - reset by providing an empty list
-- `candidateUsers` - reset by providing an empty list
-- `dueDate` - reset by providing an empty String
-- `followUpDate` - reset by providing an empty String
-- `priority` - minimum 0, maximum 100, default 50
+* `candidateGroups` - reset by providing an empty list
+* `candidateUsers` - reset by providing an empty list
+* `dueDate` - reset by providing an empty String
+* `followUpDate` - reset by providing an empty String
+* `priority` - minimum 0, maximum 100, default 50
 
 Providing any of those attributes with a `null` value or omitting it preserves
 the persisted attribute's value.

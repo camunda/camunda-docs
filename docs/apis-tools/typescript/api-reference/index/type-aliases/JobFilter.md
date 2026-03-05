@@ -11,7 +11,7 @@ mdx:
 type JobFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:3521](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3521)
+Defined in: [gen/types.gen.ts:4087](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4087)
 
 Job search filter.
 
@@ -23,11 +23,11 @@ Job search filter.
 optional creationTime: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3605](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3605)
+Defined in: [gen/types.gen.ts:4171](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4171)
 
 When the job was created. Field is present for jobs created after 8.9.
 
----
+***
 
 ### deadline?
 
@@ -35,11 +35,11 @@ When the job was created. Field is present for jobs created after 8.9.
 optional deadline: DateTimeFilterProperty | null;
 ```
 
-Defined in: [gen/types.gen.ts:3525](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3525)
+Defined in: [gen/types.gen.ts:4091](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4091)
 
 When the job can next be activated.
 
----
+***
 
 ### deniedReason?
 
@@ -47,11 +47,11 @@ When the job can next be activated.
 optional deniedReason: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3529](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3529)
+Defined in: [gen/types.gen.ts:4095](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4095)
 
 The reason provided by the user task listener for denying the work.
 
----
+***
 
 ### elementId?
 
@@ -59,11 +59,11 @@ The reason provided by the user task listener for denying the work.
 optional elementId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3533](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3533)
+Defined in: [gen/types.gen.ts:4099](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4099)
 
 The element ID associated with the job.
 
----
+***
 
 ### elementInstanceKey?
 
@@ -71,11 +71,11 @@ The element ID associated with the job.
 optional elementInstanceKey: ElementInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3537](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3537)
+Defined in: [gen/types.gen.ts:4103](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4103)
 
 The element instance key associated with the job.
 
----
+***
 
 ### endTime?
 
@@ -83,11 +83,11 @@ The element instance key associated with the job.
 optional endTime: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3541](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3541)
+Defined in: [gen/types.gen.ts:4107](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4107)
 
 When the job ended.
 
----
+***
 
 ### errorCode?
 
@@ -95,11 +95,11 @@ When the job ended.
 optional errorCode: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3545](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3545)
+Defined in: [gen/types.gen.ts:4111](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4111)
 
 The error code provided for the failed job.
 
----
+***
 
 ### errorMessage?
 
@@ -107,11 +107,11 @@ The error code provided for the failed job.
 optional errorMessage: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3549](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3549)
+Defined in: [gen/types.gen.ts:4115](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4115)
 
 The error message that provides additional context for a failed job.
 
----
+***
 
 ### hasFailedWithRetriesLeft?
 
@@ -119,11 +119,11 @@ The error message that provides additional context for a failed job.
 optional hasFailedWithRetriesLeft: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:3553](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3553)
+Defined in: [gen/types.gen.ts:4119](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4119)
 
 Indicates whether the job has failed with retries left.
 
----
+***
 
 ### isDenied?
 
@@ -131,11 +131,11 @@ Indicates whether the job has failed with retries left.
 optional isDenied: boolean | null;
 ```
 
-Defined in: [gen/types.gen.ts:3557](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3557)
+Defined in: [gen/types.gen.ts:4123](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4123)
 
 Indicates whether the user task listener denies the work.
 
----
+***
 
 ### jobKey?
 
@@ -143,11 +143,11 @@ Indicates whether the user task listener denies the work.
 optional jobKey: JobKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3561](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3561)
+Defined in: [gen/types.gen.ts:4127](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4127)
 
 The key, a unique identifier for the job.
 
----
+***
 
 ### kind?
 
@@ -155,11 +155,11 @@ The key, a unique identifier for the job.
 optional kind: JobKindFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3565](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3565)
+Defined in: [gen/types.gen.ts:4131](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4131)
 
 The kind of the job.
 
----
+***
 
 ### lastUpdateTime?
 
@@ -167,11 +167,11 @@ The kind of the job.
 optional lastUpdateTime: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3609](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3609)
+Defined in: [gen/types.gen.ts:4175](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4175)
 
 When the job was last updated. Field is present for jobs created after 8.9.
 
----
+***
 
 ### listenerEventType?
 
@@ -179,11 +179,11 @@ When the job was last updated. Field is present for jobs created after 8.9.
 optional listenerEventType: JobListenerEventTypeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3569](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3569)
+Defined in: [gen/types.gen.ts:4135](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4135)
 
 The listener event type of the job.
 
----
+***
 
 ### processDefinitionId?
 
@@ -191,11 +191,11 @@ The listener event type of the job.
 optional processDefinitionId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3573](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3573)
+Defined in: [gen/types.gen.ts:4139](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4139)
 
 The process definition ID associated with the job.
 
----
+***
 
 ### processDefinitionKey?
 
@@ -203,11 +203,11 @@ The process definition ID associated with the job.
 optional processDefinitionKey: ProcessDefinitionKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3577](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3577)
+Defined in: [gen/types.gen.ts:4143](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4143)
 
 The process definition key associated with the job.
 
----
+***
 
 ### processInstanceKey?
 
@@ -215,11 +215,11 @@ The process definition key associated with the job.
 optional processInstanceKey: ProcessInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3581](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3581)
+Defined in: [gen/types.gen.ts:4147](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4147)
 
 The process instance key associated with the job.
 
----
+***
 
 ### retries?
 
@@ -227,11 +227,11 @@ The process instance key associated with the job.
 optional retries: IntegerFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3585](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3585)
+Defined in: [gen/types.gen.ts:4151](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4151)
 
 The number of retries left.
 
----
+***
 
 ### state?
 
@@ -239,11 +239,11 @@ The number of retries left.
 optional state: JobStateFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3589](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3589)
+Defined in: [gen/types.gen.ts:4155](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4155)
 
 The state of the job.
 
----
+***
 
 ### tenantId?
 
@@ -251,11 +251,11 @@ The state of the job.
 optional tenantId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3593](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3593)
+Defined in: [gen/types.gen.ts:4159](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4159)
 
 The tenant ID.
 
----
+***
 
 ### type?
 
@@ -263,11 +263,11 @@ The tenant ID.
 optional type: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3597](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3597)
+Defined in: [gen/types.gen.ts:4163](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4163)
 
 The type of the job.
 
----
+***
 
 ### worker?
 
@@ -275,6 +275,6 @@ The type of the job.
 optional worker: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3601](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3601)
+Defined in: [gen/types.gen.ts:4167](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4167)
 
 The name of the worker for this job.

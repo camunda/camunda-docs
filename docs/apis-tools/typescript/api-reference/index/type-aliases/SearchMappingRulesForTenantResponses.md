@@ -11,16 +11,26 @@ mdx:
 type SearchMappingRulesForTenantResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:16051](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16051)
+Defined in: [gen/types.gen.ts:15120](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15120)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: SearchQueryResponse;
+200: SearchQueryResponse & object;
 ```
 
-Defined in: [gen/types.gen.ts:16055](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16055)
+Defined in: [gen/types.gen.ts:15124](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15124)
 
 The search result of MappingRules for the tenant.
+
+#### Type Declaration
+
+##### items
+
+```ts
+items: MappingRuleResult[];
+```
+
+The matching mapping rules.

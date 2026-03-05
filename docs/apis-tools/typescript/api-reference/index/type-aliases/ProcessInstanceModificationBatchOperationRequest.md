@@ -11,7 +11,7 @@ mdx:
 type ProcessInstanceModificationBatchOperationRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:966](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L966)
+Defined in: [gen/types.gen.ts:999](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L999)
 
 The process instance filter to define on which process instances tokens should be moved,
 and new element instances should be activated or terminated.
@@ -24,11 +24,11 @@ and new element instances should be activated or terminated.
 filter: ProcessInstanceFilter;
 ```
 
-Defined in: [gen/types.gen.ts:970](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L970)
+Defined in: [gen/types.gen.ts:1003](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1003)
 
 The process instance filter.
 
----
+***
 
 ### moveInstructions
 
@@ -36,11 +36,11 @@ The process instance filter.
 moveInstructions: ProcessInstanceModificationMoveBatchOperationInstruction[];
 ```
 
-Defined in: [gen/types.gen.ts:974](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L974)
+Defined in: [gen/types.gen.ts:1007](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1007)
 
 Instructions for moving tokens between elements.
 
----
+***
 
 ### operationReference?
 
@@ -48,4 +48,4 @@ Instructions for moving tokens between elements.
 optional operationReference: OperationReference;
 ```
 
-Defined in: [gen/types.gen.ts:975](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L975)
+Defined in: [gen/types.gen.ts:1008](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1008)

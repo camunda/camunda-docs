@@ -11,7 +11,7 @@ mdx:
 type ResolveProcessInstanceIncidentsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14024](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14024)
+Defined in: [gen/types.gen.ts:13216](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13216)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:14024](https://github.com/camunda/orchestration-cl
 optional body: never;
 ```
 
-Defined in: [gen/types.gen.ts:14025](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14025)
+Defined in: [gen/types.gen.ts:13217](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13217)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:14025](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:14026](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14026)
+Defined in: [gen/types.gen.ts:13218](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13218)
 
 #### processInstanceKey
 
@@ -41,7 +41,7 @@ processInstanceKey: ProcessInstanceKey;
 
 The key of the process instance to resolve incidents for.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The key of the process instance to resolve incidents for.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:14032](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14032)
+Defined in: [gen/types.gen.ts:13224](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13224)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:14032](https://github.com/camunda/orchestration-cl
 url: "/process-instances/{processInstanceKey}/incident-resolution";
 ```
 
-Defined in: [gen/types.gen.ts:14033](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14033)
+Defined in: [gen/types.gen.ts:13225](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13225)

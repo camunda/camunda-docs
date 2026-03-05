@@ -11,57 +11,57 @@ mdx:
 type UserTaskResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:6854](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6854)
+Defined in: [gen/types.gen.ts:7508](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7508)
 
 ## Properties
 
-### assignee?
+### assignee
 
 ```ts
-optional assignee: string;
+assignee: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:6863](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6863)
+Defined in: [gen/types.gen.ts:7517](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7517)
 
 The assignee of the user task.
 
----
+***
 
-### candidateGroups?
+### candidateGroups
 
 ```ts
-optional candidateGroups: string[];
+candidateGroups: string[];
 ```
 
-Defined in: [gen/types.gen.ts:6871](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6871)
+Defined in: [gen/types.gen.ts:7525](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7525)
 
 The candidate groups for this user task.
 
----
+***
 
-### candidateUsers?
+### candidateUsers
 
 ```ts
-optional candidateUsers: string[];
+candidateUsers: string[];
 ```
 
-Defined in: [gen/types.gen.ts:6875](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6875)
+Defined in: [gen/types.gen.ts:7529](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7529)
 
 The candidate users for this user task.
 
----
+***
 
-### completionDate?
+### completionDate
 
 ```ts
-optional completionDate: string;
+completionDate: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:6887](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6887)
+Defined in: [gen/types.gen.ts:7541](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7541)
 
 The completion date of a user task.
 
----
+***
 
 ### creationDate?
 
@@ -69,19 +69,19 @@ The completion date of a user task.
 optional creationDate: string;
 ```
 
-Defined in: [gen/types.gen.ts:6883](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6883)
+Defined in: [gen/types.gen.ts:7537](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7537)
 
 The creation date of a user task.
 
----
+***
 
-### customHeaders?
+### customHeaders
 
 ```ts
-optional customHeaders: object;
+customHeaders: object;
 ```
 
-Defined in: [gen/types.gen.ts:6908](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6908)
+Defined in: [gen/types.gen.ts:7562](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7562)
 
 Custom headers for the user task.
 
@@ -91,19 +91,19 @@ Custom headers for the user task.
 [key: string]: string
 ```
 
----
+***
 
-### dueDate?
+### dueDate
 
 ```ts
-optional dueDate: string;
+dueDate: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:6895](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6895)
+Defined in: [gen/types.gen.ts:7549](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7549)
 
 The due date of a user task.
 
----
+***
 
 ### elementId?
 
@@ -111,11 +111,11 @@ The due date of a user task.
 optional elementId: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:6867](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6867)
+Defined in: [gen/types.gen.ts:7521](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7521)
 
 The element ID of the user task.
 
----
+***
 
 ### elementInstanceKey?
 
@@ -123,47 +123,47 @@ The element ID of the user task.
 optional elementInstanceKey: ElementInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:6922](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6922)
+Defined in: [gen/types.gen.ts:7576](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7576)
 
 The key of the element instance.
 
----
+***
 
-### externalFormReference?
+### externalFormReference
 
 ```ts
-optional externalFormReference: string;
+externalFormReference: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:6900](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6900)
+Defined in: [gen/types.gen.ts:7554](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7554)
 
 The external form reference.
 
----
+***
 
-### followUpDate?
+### followUpDate
 
 ```ts
-optional followUpDate: string;
+followUpDate: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:6891](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6891)
+Defined in: [gen/types.gen.ts:7545](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7545)
 
 The follow date of a user task.
 
----
+***
 
-### formKey?
+### formKey
 
 ```ts
-optional formKey: FormKey;
+formKey: FormKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:6939](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6939)
+Defined in: [gen/types.gen.ts:7601](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7601)
 
 The key of the form.
 
----
+***
 
 ### name?
 
@@ -171,11 +171,11 @@ The key of the form.
 optional name: string;
 ```
 
-Defined in: [gen/types.gen.ts:6858](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6858)
+Defined in: [gen/types.gen.ts:7512](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7512)
 
 The name for this user task.
 
----
+***
 
 ### priority?
 
@@ -183,11 +183,11 @@ The name for this user task.
 optional priority: number;
 ```
 
-Defined in: [gen/types.gen.ts:6914](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6914)
+Defined in: [gen/types.gen.ts:7568](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7568)
 
 The priority of a user task. The higher the value the higher the priority.
 
----
+***
 
 ### processDefinitionId?
 
@@ -195,11 +195,11 @@ The priority of a user task. The higher the value the higher the priority.
 optional processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:6879](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6879)
+Defined in: [gen/types.gen.ts:7533](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7533)
 
 The ID of the process definition.
 
----
+***
 
 ### processDefinitionKey?
 
@@ -207,11 +207,11 @@ The ID of the process definition.
 optional processDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:6930](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6930)
+Defined in: [gen/types.gen.ts:7586](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7586)
 
 The key of the process definition.
 
----
+***
 
 ### processDefinitionVersion?
 
@@ -219,11 +219,11 @@ The key of the process definition.
 optional processDefinitionVersion: number;
 ```
 
-Defined in: [gen/types.gen.ts:6904](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6904)
+Defined in: [gen/types.gen.ts:7558](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7558)
 
 The version of the process definition.
 
----
+***
 
 ### processInstanceKey?
 
@@ -231,33 +231,38 @@ The version of the process definition.
 optional processInstanceKey: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:6934](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6934)
+Defined in: [gen/types.gen.ts:7590](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7590)
 
 The key of the process instance.
 
----
+***
 
 ### processName?
 
 ```ts
-optional processName: string;
+optional processName: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:6926](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6926)
+Defined in: [gen/types.gen.ts:7582](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7582)
 
 The name of the process definition.
+This is `null` if the process has no name defined.
 
----
+***
 
-### rootProcessInstanceKey?
+### rootProcessInstanceKey
 
 ```ts
-optional rootProcessInstanceKey: RootProcessInstanceKey;
+rootProcessInstanceKey: ProcessInstanceKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:6935](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6935)
+Defined in: [gen/types.gen.ts:7597](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7597)
 
----
+The key of the root process instance. The root process instance is the top-level
+ancestor in the process instance hierarchy. This field is only present for data
+belonging to process instance hierarchies created in version 8.9 or later.
+
+***
 
 ### state?
 
@@ -265,19 +270,19 @@ Defined in: [gen/types.gen.ts:6935](https://github.com/camunda/orchestration-clu
 optional state: UserTaskStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:6859](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6859)
+Defined in: [gen/types.gen.ts:7513](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7513)
 
----
+***
 
-### tags?
+### tags
 
 ```ts
-optional tags: TagSet;
+tags: TagSet;
 ```
 
-Defined in: [gen/types.gen.ts:6940](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6940)
+Defined in: [gen/types.gen.ts:7602](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7602)
 
----
+***
 
 ### tenantId?
 
@@ -285,9 +290,9 @@ Defined in: [gen/types.gen.ts:6940](https://github.com/camunda/orchestration-clu
 optional tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:6896](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6896)
+Defined in: [gen/types.gen.ts:7550](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7550)
 
----
+***
 
 ### userTaskKey?
 
@@ -295,6 +300,6 @@ Defined in: [gen/types.gen.ts:6896](https://github.com/camunda/orchestration-clu
 optional userTaskKey: UserTaskKey;
 ```
 
-Defined in: [gen/types.gen.ts:6918](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6918)
+Defined in: [gen/types.gen.ts:7572](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7572)
 
 The key of the user task.

@@ -11,7 +11,7 @@ mdx:
 type SearchClientsForRoleData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14732](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14732)
+Defined in: [gen/types.gen.ts:13809](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13809)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:14732](https://github.com/camunda/orchestration-cl
 optional body: SearchQueryRequest & object;
 ```
 
-Defined in: [gen/types.gen.ts:14733](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14733)
+Defined in: [gen/types.gen.ts:13810](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13810)
 
 #### Type Declaration
 
@@ -33,7 +33,7 @@ optional sort: object[];
 
 Sort field criteria.
 
----
+***
 
 ### path
 
@@ -41,7 +41,7 @@ Sort field criteria.
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:14745](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14745)
+Defined in: [gen/types.gen.ts:13822](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13822)
 
 #### roleId
 
@@ -51,7 +51,7 @@ roleId: string;
 
 The role ID.
 
----
+***
 
 ### query?
 
@@ -59,9 +59,9 @@ The role ID.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:14751](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14751)
+Defined in: [gen/types.gen.ts:13828](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13828)
 
----
+***
 
 ### url
 
@@ -69,4 +69,4 @@ Defined in: [gen/types.gen.ts:14751](https://github.com/camunda/orchestration-cl
 url: "/roles/{roleId}/clients/search";
 ```
 
-Defined in: [gen/types.gen.ts:14752](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14752)
+Defined in: [gen/types.gen.ts:13829](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13829)

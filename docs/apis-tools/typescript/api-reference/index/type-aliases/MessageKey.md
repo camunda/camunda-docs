@@ -11,6 +11,6 @@ mdx:
 type MessageKey = CamundaKey<"MessageKey">;
 ```
 
-Defined in: [gen/types.gen.ts:5048](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5048)
+Defined in: [gen/types.gen.ts:5630](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5630)
 
 System-generated key for an message.

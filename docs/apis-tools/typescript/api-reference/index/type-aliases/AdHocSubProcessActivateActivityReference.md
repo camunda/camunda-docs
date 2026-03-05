@@ -11,7 +11,7 @@ mdx:
 type AdHocSubProcessActivateActivityReference = object;
 ```
 
-Defined in: [gen/types.gen.ts:2570](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2570)
+Defined in: [gen/types.gen.ts:2717](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2717)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:2570](https://github.com/camunda/orchestration-clu
 elementId: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:2574](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2574)
+Defined in: [gen/types.gen.ts:2721](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2721)
 
 The ID of the element that should be activated.
 
----
+***
 
 ### variables?
 
@@ -33,7 +33,7 @@ The ID of the element that should be activated.
 optional variables: object;
 ```
 
-Defined in: [gen/types.gen.ts:2578](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2578)
+Defined in: [gen/types.gen.ts:2725](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2725)
 
 Variables to be set when activating the element.
 

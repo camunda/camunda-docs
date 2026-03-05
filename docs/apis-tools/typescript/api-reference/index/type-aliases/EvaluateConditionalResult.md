@@ -11,7 +11,7 @@ mdx:
 type EvaluateConditionalResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:1359](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1359)
+Defined in: [gen/types.gen.ts:1392](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1392)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:1359](https://github.com/camunda/orchestration-clu
 conditionalEvaluationKey: ConditionalEvaluationKey;
 ```
 
-Defined in: [gen/types.gen.ts:1363](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1363)
+Defined in: [gen/types.gen.ts:1396](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1396)
 
 The unique key of the conditional evaluation operation.
 
----
+***
 
 ### processInstances
 
@@ -33,11 +33,11 @@ The unique key of the conditional evaluation operation.
 processInstances: ProcessInstanceReference[];
 ```
 
-Defined in: [gen/types.gen.ts:1371](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1371)
+Defined in: [gen/types.gen.ts:1404](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1404)
 
 List of process instances created. If no root-level conditional start events evaluated to true, the list will be empty.
 
----
+***
 
 ### tenantId
 
@@ -45,6 +45,6 @@ List of process instances created. If no root-level conditional start events eva
 tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:1367](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1367)
+Defined in: [gen/types.gen.ts:1400](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1400)
 
 The tenant ID of the conditional evaluation operation.

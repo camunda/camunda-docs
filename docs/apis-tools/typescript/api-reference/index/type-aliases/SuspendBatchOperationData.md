@@ -11,7 +11,7 @@ mdx:
 type SuspendBatchOperationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8473](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8473)
+Defined in: [gen/types.gen.ts:8853](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8853)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:8473](https://github.com/camunda/orchestration-clu
 optional body: unknown;
 ```
 
-Defined in: [gen/types.gen.ts:8474](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8474)
+Defined in: [gen/types.gen.ts:8854](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8854)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:8474](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:8475](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8475)
+Defined in: [gen/types.gen.ts:8855](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8855)
 
 #### batchOperationKey
 
@@ -41,7 +41,7 @@ batchOperationKey: BatchOperationKey;
 
 The key (or operate legacy ID) of the batch operation.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The key (or operate legacy ID) of the batch operation.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:8481](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8481)
+Defined in: [gen/types.gen.ts:8861](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8861)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:8481](https://github.com/camunda/orchestration-clu
 url: "/batch-operations/{batchOperationKey}/suspension";
 ```
 
-Defined in: [gen/types.gen.ts:8482](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8482)
+Defined in: [gen/types.gen.ts:8862](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8862)

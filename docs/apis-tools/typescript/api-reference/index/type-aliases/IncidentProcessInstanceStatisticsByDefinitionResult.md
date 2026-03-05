@@ -11,7 +11,7 @@ mdx:
 type IncidentProcessInstanceStatisticsByDefinitionResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:3272](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3272)
+Defined in: [gen/types.gen.ts:3646](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3646)
 
 ## Properties
 
@@ -21,12 +21,12 @@ Defined in: [gen/types.gen.ts:3272](https://github.com/camunda/orchestration-clu
 optional activeInstancesWithErrorCount: number;
 ```
 
-Defined in: [gen/types.gen.ts:3289](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3289)
+Defined in: [gen/types.gen.ts:3663](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3663)
 
 The number of active process instances that currently have an incident
 with the specified error hash code.
 
----
+***
 
 ### processDefinitionId?
 
@@ -34,9 +34,9 @@ with the specified error hash code.
 optional processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:3273](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3273)
+Defined in: [gen/types.gen.ts:3647](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3647)
 
----
+***
 
 ### processDefinitionKey?
 
@@ -44,9 +44,9 @@ Defined in: [gen/types.gen.ts:3273](https://github.com/camunda/orchestration-clu
 optional processDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:3274](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3274)
+Defined in: [gen/types.gen.ts:3648](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3648)
 
----
+***
 
 ### processDefinitionName?
 
@@ -54,11 +54,11 @@ Defined in: [gen/types.gen.ts:3274](https://github.com/camunda/orchestration-clu
 optional processDefinitionName: string;
 ```
 
-Defined in: [gen/types.gen.ts:3278](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3278)
+Defined in: [gen/types.gen.ts:3652](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3652)
 
 The name of the process definition.
 
----
+***
 
 ### processDefinitionVersion?
 
@@ -66,11 +66,11 @@ The name of the process definition.
 optional processDefinitionVersion: number;
 ```
 
-Defined in: [gen/types.gen.ts:3282](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3282)
+Defined in: [gen/types.gen.ts:3656](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3656)
 
 The version of the process definition.
 
----
+***
 
 ### tenantId?
 
@@ -78,4 +78,4 @@ The version of the process definition.
 optional tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:3283](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3283)
+Defined in: [gen/types.gen.ts:3657](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3657)

@@ -11,7 +11,7 @@ mdx:
 type CancelBatchOperationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8384](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8384)
+Defined in: [gen/types.gen.ts:8764](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8764)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:8384](https://github.com/camunda/orchestration-clu
 optional body: unknown;
 ```
 
-Defined in: [gen/types.gen.ts:8385](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8385)
+Defined in: [gen/types.gen.ts:8765](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8765)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:8385](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:8386](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8386)
+Defined in: [gen/types.gen.ts:8766](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8766)
 
 #### batchOperationKey
 
@@ -41,7 +41,7 @@ batchOperationKey: BatchOperationKey;
 
 The key (or operate legacy ID) of the batch operation.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The key (or operate legacy ID) of the batch operation.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:8392](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8392)
+Defined in: [gen/types.gen.ts:8772](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8772)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:8392](https://github.com/camunda/orchestration-clu
 url: "/batch-operations/{batchOperationKey}/cancellation";
 ```
 
-Defined in: [gen/types.gen.ts:8393](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8393)
+Defined in: [gen/types.gen.ts:8773](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8773)

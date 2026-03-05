@@ -11,7 +11,7 @@ mdx:
 type MessageSubscriptionFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:4793](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4793)
+Defined in: [gen/types.gen.ts:5369](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5369)
 
 Message subscription search filter.
 
@@ -23,11 +23,11 @@ Message subscription search filter.
 optional correlationKey: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4833](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4833)
+Defined in: [gen/types.gen.ts:5409](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5409)
 
 The correlation key of the message subscription.
 
----
+***
 
 ### elementId?
 
@@ -35,11 +35,11 @@ The correlation key of the message subscription.
 optional elementId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4813](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4813)
+Defined in: [gen/types.gen.ts:5389](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5389)
 
 The element ID associated with this message subscription.
 
----
+***
 
 ### elementInstanceKey?
 
@@ -47,11 +47,11 @@ The element ID associated with this message subscription.
 optional elementInstanceKey: ElementInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4817](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4817)
+Defined in: [gen/types.gen.ts:5393](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5393)
 
 The element instance key associated with this message subscription.
 
----
+***
 
 ### lastUpdatedDate?
 
@@ -59,11 +59,11 @@ The element instance key associated with this message subscription.
 optional lastUpdatedDate: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4825](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4825)
+Defined in: [gen/types.gen.ts:5401](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5401)
 
 The last updated date of the message subscription.
 
----
+***
 
 ### messageName?
 
@@ -71,11 +71,11 @@ The last updated date of the message subscription.
 optional messageName: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4829](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4829)
+Defined in: [gen/types.gen.ts:5405](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5405)
 
 The name of the message associated with the message subscription.
 
----
+***
 
 ### messageSubscriptionKey?
 
@@ -83,11 +83,11 @@ The name of the message associated with the message subscription.
 optional messageSubscriptionKey: MessageSubscriptionKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4797](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4797)
+Defined in: [gen/types.gen.ts:5373](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5373)
 
 The message subscription key associated with this message subscription.
 
----
+***
 
 ### messageSubscriptionState?
 
@@ -95,11 +95,11 @@ The message subscription key associated with this message subscription.
 optional messageSubscriptionState: MessageSubscriptionStateFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4821](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4821)
+Defined in: [gen/types.gen.ts:5397](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5397)
 
 The message subscription state.
 
----
+***
 
 ### processDefinitionId?
 
@@ -107,11 +107,11 @@ The message subscription state.
 optional processDefinitionId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4805](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4805)
+Defined in: [gen/types.gen.ts:5381](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5381)
 
 The process definition ID associated with this message subscription.
 
----
+***
 
 ### processDefinitionKey?
 
@@ -119,11 +119,11 @@ The process definition ID associated with this message subscription.
 optional processDefinitionKey: ProcessDefinitionKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4801](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4801)
+Defined in: [gen/types.gen.ts:5377](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5377)
 
 The process definition key associated with this correlated message subscription. This only works for data created with 8.9 and later.
 
----
+***
 
 ### processInstanceKey?
 
@@ -131,11 +131,11 @@ The process definition key associated with this correlated message subscription.
 optional processInstanceKey: ProcessInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4809](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4809)
+Defined in: [gen/types.gen.ts:5385](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5385)
 
 The process instance key associated with this message subscription.
 
----
+***
 
 ### tenantId?
 
@@ -143,6 +143,6 @@ The process instance key associated with this message subscription.
 optional tenantId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4837](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4837)
+Defined in: [gen/types.gen.ts:5413](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5413)
 
 The unique external tenant ID.

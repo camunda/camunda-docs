@@ -11,7 +11,7 @@ mdx:
 type DeploymentDecisionResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:2047](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2047)
+Defined in: [gen/types.gen.ts:2125](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2125)
 
 A deployed decision.
 
@@ -23,12 +23,12 @@ A deployed decision.
 optional decisionDefinitionId: DecisionDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:2053](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2053)
+Defined in: [gen/types.gen.ts:2131](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2131)
 
 The dmn decision ID, as parsed during deployment, together with the version forms a
 unique identifier for a specific decision.
 
----
+***
 
 ### decisionDefinitionKey?
 
@@ -36,11 +36,11 @@ unique identifier for a specific decision.
 optional decisionDefinitionKey: DecisionDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:2075](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2075)
+Defined in: [gen/types.gen.ts:2153](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2153)
 
 The assigned decision key, which acts as a unique identifier for this decision.
 
----
+***
 
 ### decisionRequirementsId?
 
@@ -48,11 +48,11 @@ The assigned decision key, which acts as a unique identifier for this decision.
 optional decisionRequirementsId: string;
 ```
 
-Defined in: [gen/types.gen.ts:2070](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2070)
+Defined in: [gen/types.gen.ts:2148](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2148)
 
 The dmn ID of the decision requirements graph that this decision is part of, as parsed during deployment.
 
----
+***
 
 ### decisionRequirementsKey?
 
@@ -60,11 +60,11 @@ The dmn ID of the decision requirements graph that this decision is part of, as 
 optional decisionRequirementsKey: DecisionRequirementsKey;
 ```
 
-Defined in: [gen/types.gen.ts:2080](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2080)
+Defined in: [gen/types.gen.ts:2158](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2158)
 
 The assigned key of the decision requirements graph that this decision is part of.
 
----
+***
 
 ### name?
 
@@ -72,11 +72,11 @@ The assigned key of the decision requirements graph that this decision is part o
 optional name: string;
 ```
 
-Defined in: [gen/types.gen.ts:2061](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2061)
+Defined in: [gen/types.gen.ts:2139](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2139)
 
 The DMN name of the decision, as parsed during deployment.
 
----
+***
 
 ### tenantId?
 
@@ -84,11 +84,11 @@ The DMN name of the decision, as parsed during deployment.
 optional tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:2065](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2065)
+Defined in: [gen/types.gen.ts:2143](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2143)
 
 The tenant ID of the deployed decision.
 
----
+***
 
 ### version?
 
@@ -96,6 +96,6 @@ The tenant ID of the deployed decision.
 optional version: number;
 ```
 
-Defined in: [gen/types.gen.ts:2057](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2057)
+Defined in: [gen/types.gen.ts:2135](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2135)
 
 The assigned decision version.

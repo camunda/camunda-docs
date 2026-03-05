@@ -11,7 +11,7 @@ mdx:
 type GetStatusErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:15456](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15456)
+Defined in: [gen/types.gen.ts:14544](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14544)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:15456](https://github.com/camunda/orchestration-cl
 503: unknown;
 ```
 
-Defined in: [gen/types.gen.ts:15460](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15460)
+Defined in: [gen/types.gen.ts:14548](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14548)
 
 The cluster is DOWN and does not have any partition with a healthy leader.

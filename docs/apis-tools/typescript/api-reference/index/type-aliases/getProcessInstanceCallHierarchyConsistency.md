@@ -11,20 +11,18 @@ mdx:
 type getProcessInstanceCallHierarchyConsistency = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:475](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L475)
+Defined in: [gen/CamundaClient.ts:468](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L468)
 
-Management of eventual consistency \*
+Management of eventual consistency *
 
 ## Properties
 
 ### consistency
 
 ```ts
-consistency: ConsistencyOptions<
-  _DataOf<typeof Sdk.getProcessInstanceCallHierarchy>
->;
+consistency: ConsistencyOptions<_DataOf<typeof Sdk.getProcessInstanceCallHierarchy>>;
 ```
 
-Defined in: [gen/CamundaClient.ts:477](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L477)
+Defined in: [gen/CamundaClient.ts:470](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L470)
 
 Management of eventual consistency tolerance. Set waitUpToMs to 0 to ignore eventual consistency. pollInterval is 500ms by default.

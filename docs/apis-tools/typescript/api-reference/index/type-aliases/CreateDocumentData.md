@@ -11,7 +11,7 @@ mdx:
 type CreateDocumentData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10012](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10012)
+Defined in: [gen/types.gen.ts:9963](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9963)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:10012](https://github.com/camunda/orchestration-cl
 body: object;
 ```
 
-Defined in: [gen/types.gen.ts:10013](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10013)
+Defined in: [gen/types.gen.ts:9964](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9964)
 
 #### file
 
@@ -35,7 +35,7 @@ file: Blob | File;
 optional metadata: DocumentMetadata;
 ```
 
----
+***
 
 ### path?
 
@@ -43,9 +43,9 @@ optional metadata: DocumentMetadata;
 optional path: never;
 ```
 
-Defined in: [gen/types.gen.ts:10017](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10017)
+Defined in: [gen/types.gen.ts:9968](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9968)
 
----
+***
 
 ### query?
 
@@ -53,7 +53,7 @@ Defined in: [gen/types.gen.ts:10017](https://github.com/camunda/orchestration-cl
 optional query: object;
 ```
 
-Defined in: [gen/types.gen.ts:10018](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10018)
+Defined in: [gen/types.gen.ts:9969](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9969)
 
 #### documentId?
 
@@ -71,7 +71,7 @@ optional storeId: string;
 
 The ID of the document store to upload the documents to. Currently, only a single document store is supported per cluster. However, this attribute is included to allow for potential future support of multiple document stores.
 
----
+***
 
 ### url
 
@@ -79,4 +79,4 @@ The ID of the document store to upload the documents to. Currently, only a singl
 url: "/documents";
 ```
 
-Defined in: [gen/types.gen.ts:10029](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10029)
+Defined in: [gen/types.gen.ts:9980](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9980)

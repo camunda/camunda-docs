@@ -11,7 +11,7 @@ mdx:
 type ProcessInstanceCancellationBatchOperationRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:904](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L904)
+Defined in: [gen/types.gen.ts:937](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L937)
 
 The process instance filter that defines which process instances should be canceled.
 
@@ -23,11 +23,11 @@ The process instance filter that defines which process instances should be cance
 filter: ProcessInstanceFilter;
 ```
 
-Defined in: [gen/types.gen.ts:908](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L908)
+Defined in: [gen/types.gen.ts:941](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L941)
 
 The process instance filter.
 
----
+***
 
 ### operationReference?
 
@@ -35,4 +35,4 @@ The process instance filter.
 optional operationReference: OperationReference;
 ```
 
-Defined in: [gen/types.gen.ts:909](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L909)
+Defined in: [gen/types.gen.ts:942](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L942)

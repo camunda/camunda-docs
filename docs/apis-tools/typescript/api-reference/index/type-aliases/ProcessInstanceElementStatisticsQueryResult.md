@@ -11,18 +11,18 @@ mdx:
 type ProcessInstanceElementStatisticsQueryResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:5914](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5914)
+Defined in: [gen/types.gen.ts:6541](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6541)
 
 Process instance element statistics query response.
 
 ## Properties
 
-### items?
+### items
 
 ```ts
-optional items: ProcessElementStatisticsResult[];
+items: ProcessElementStatisticsResult[];
 ```
 
-Defined in: [gen/types.gen.ts:5918](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5918)
+Defined in: [gen/types.gen.ts:6545](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6545)
 
 The element statistics.

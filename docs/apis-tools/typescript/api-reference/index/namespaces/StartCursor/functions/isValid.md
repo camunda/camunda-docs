@@ -11,7 +11,7 @@ mdx:
 function isValid(value): boolean;
 ```
 
-Defined in: [gen/types.gen.ts:18140](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L18140)
+Defined in: [gen/types.gen.ts:16706](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L16706)
 
 ## Parameters
 
