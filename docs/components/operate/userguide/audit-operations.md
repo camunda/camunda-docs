@@ -14,10 +14,10 @@ To follow the steps in this guide, you must be [authorized to view operations in
 
 In Operate, you can audit all [`DEPLOYED_RESOURCES` and `USER_TASKS` operations](../../audit-log/overview/recorded-operations.md) in the general operations log:
 
-1. In the top navigation, click **Operations Log**.
+1. In the top navigation, click **Operations > Operations log**.
 2. To sort the log, click a column header.
 3. To see the details of a particular operation, click the info icon at the end of the row.
-4. To filter the audit log, expand the **Filter** panel on the left side of the page.
+4. To filter the audit log, expand the **Filter** panel on the left side of the page. Audit log filters are under the **Operation** header.
 
 ## Audit process instance operations
 
@@ -27,6 +27,7 @@ You can also review operations at the process instance level:
 2. Under the process diagram, click **Operations Log**.
 3. To sort the log, click a column header.
 4. To see the details of a particular operation, click the info icon at the end of the row.
+5. To filter the audit log, use the **Operation type** and **Entity type** dropdowns.
 
 ## Next steps
 
