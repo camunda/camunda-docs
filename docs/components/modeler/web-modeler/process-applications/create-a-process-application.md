@@ -40,8 +40,9 @@ When you create a process application, you must select a development cluster to 
 After you have created a process application, a new BPMN diagram is created and labeled as the main process.
 
 - The main process diagram is named using the process application name. You can rename the main process diagram any time.
-- A process application must have a main process. You cannot delete or move the main process diagram out of the process application.
+- A process application must have a main process. You cannot delete or move the main process diagram out of the process application or into a subfolder.
 - You can assign another BPMN diagram as the main process using the **Reassign main process** option in the action menu.
+- The main process must be on the top level of the process application. You cannot reassign a new main process to a BPMN diagram that is located in a subfolder of the process application.
   <p>
   <img src={ReassignMainProcessImg} alt="Reassign the main process" />
   </p>
@@ -54,7 +55,7 @@ To add more files to the process application, either:
 - Drag and drop files from your local computer.
 - Move an existing file into the process application from a different location in Web Modeler.
 
-The main process is always displayed at the top of the file list, regardless of the sort order.
+You can also create subfolders to organize files within the process application.
 
 <p><img src={FileListImg} alt="Process application file list" /></p>
 
