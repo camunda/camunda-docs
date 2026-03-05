@@ -62,14 +62,20 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.14"
 
       - name: Install Python dependencies
         run: pip install pyyaml
 
+      - name: Restore tools and dependencies
+        working-directory: csharp-sdk
+        run: |
+          dotnet tool restore
+          dotnet restore src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj
+
       - name: Build SDK
         working-directory: csharp-sdk
-        run: dotnet build src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj -c Release
+        run: dotnet build src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj -c Release --no-restore
 
       - name: Generate DocFX metadata
         working-directory: csharp-sdk

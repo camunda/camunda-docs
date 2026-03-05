@@ -309,9 +309,16 @@
     {
       "name": "camunda.client.deployment.enabled",
       "type": "java.lang.Boolean",
-      "description": "Indicates if deployment uses the `@Deployment` annotation.",
+      "description": "Indicates if the `@Deployment` annotation is processed.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientDeploymentProperties",
       "defaultValue": true
+    },
+    {
+      "name": "camunda.client.deployment.own-jar-only",
+      "type": "java.lang.Boolean",
+      "description": "Indicates if the resources selected by the deployment annotation have to reside in the same jar as the annotated class. <p>This property acts as the default behavior. If the `@Deployment` annotation explicitly sets its `ownJarOnly` parameter, that annotation-level value overrides this property for the annotated deployment.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientDeploymentProperties",
+      "defaultValue": false
     },
     {
       "name": "camunda.client.enabled",
@@ -497,6 +504,13 @@
       "description": "If streaming is enabled, sets the maximum lifetime for a stream. When this timeout is reached, the stream closes, and no more jobs are activated or received. If the worker is still open, a new stream opens immediately.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
       "defaultValue": "PT8H"
+    },
+    {
+      "name": "camunda.client.worker.defaults.tenant-filter",
+      "type": "io.camunda.client.api.command.enums.TenantFilter",
+      "description": "Sets the tenant filter for the job worker, which determines how the worker considers tenant IDs when activating jobs.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
+      "defaultValue": "PROVIDED"
     },
     {
       "name": "camunda.client.worker.defaults.tenant-ids",
