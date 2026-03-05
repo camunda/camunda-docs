@@ -279,6 +279,8 @@ Camunda 8 now supports Elasticsearch 9 as a secondary data store, allowing you t
 - You can plan your migration to Elasticsearch 9 and benefit from its improved performance and updated features while maintaining full compatibility with Camunda 8 components.
 - Elasticsearch 8.x continues to be supported for existing deployments.
 
+<p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
 #### Manage task permissions
 
 <!-- https://github.com/camunda/product-hub/issues/3122 -->
