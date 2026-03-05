@@ -32,7 +32,7 @@ export const esCards = [
 // Relational database (RDBMS) cards
 export const rdbmsCards = [
   {
-    link: "../rdbms/rdbms-backup#rdbms-prerequisites",
+    link: "../rdbms/rdbms-backup#prerequisites",
     title: "Prerequisites",
     image: IconGear,
     description:
