@@ -269,13 +269,15 @@ The Orchestration Cluster API and Operate UI now support secure, consistent dele
 
 This feature ensures compliance, data consistency across regions, and simplified operational management of obsolete process data.
 
-#### Dynamic connector access to tenants in multi-tenant environments
+#### Dynamic connector access to tenants in multi-tenant environments (Self-Managed)
 
 <!-- https://github.com/camunda/product-hub/issues/2959 -->
 
-Use the new **dynamic client access to tenants** setting to define tenant access by explicit tenant assignment instead of defining access in the machine client’s configuration.
+Use the new dynamic client access to tenants `TenantFilter` setting to define tenant access by explicit tenant assignment instead of defining access in the machine client’s configuration.
 
 If you use this setting, you no longer need to restart the associated run-time environment when adding new machine clients (such as job workers or connectors).
+
+<p class="link-arrow">[Java client: Filter by tenant](/apis-tools/java-client/job-worker.md#filtering-by-assigned-tenants)&nbsp;/&nbsp;[Spring Boot: Filter by tenant](/apis-tools/camunda-spring-boot-starter/configuration.md#filtering-by-assigned-tenants)</p>
 
 #### Elasticsearch 9 support
 
