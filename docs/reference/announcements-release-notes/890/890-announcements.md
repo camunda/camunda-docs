@@ -940,6 +940,26 @@ Camunda 8.9 introduces cluster variables, allowing you to centrally manage confi
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Keycloak auth secret configuration
+
+The legacy Keycloak auth secret configuration using `global.identity.keycloak.auth.existingSecret` and `global.identity.keycloak.auth.existingSecretKey` is deprecated in Camunda 8.9.
+
+Migrate to the new standard secret pattern:
+
+- `global.identity.keycloak.auth.existingSecret` → `global.identity.keycloak.auth.secret.existingSecret`
+- `global.identity.keycloak.auth.existingSecretKey` → `global.identity.keycloak.auth.secret.existingSecretKey`
+
+Legacy keys continue to work in 8.9 via normalizers, but produce deprecation warnings and will be removed in a future version. See [Secret management](/self-managed/deployment/helm/configure/secret-management.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
