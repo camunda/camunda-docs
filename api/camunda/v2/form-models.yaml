@@ -2,6 +2,12 @@ components:
   schemas:
     FormResult:
       type: object
+      required:
+        - tenantId
+        - formId
+        - schema
+        - version
+        - formKey
       properties:
         tenantId:
           description: The tenant ID of the form.

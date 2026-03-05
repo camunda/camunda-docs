@@ -248,6 +248,8 @@ components:
       allOf:
         - $ref: "#/components/schemas/MappingRuleCreateUpdateResult"
     MappingRuleSearchQueryResult:
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
