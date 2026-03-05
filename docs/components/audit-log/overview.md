@@ -18,10 +18,10 @@ The audit log is a record of operations, including who performed the operation, 
 
 Use the audit log to:
 
-- Prove compliance
-- Meet governance and regulatory requirements
-- Maintain operational integrity and transparency
-- Troubleshoot issues
+- **Prove compliance:** Produce defensible evidence of operation ownership and history during internal and external audits.
+- **Meet governance and regulatory requirements:** Validate required steps were followed during case handling, and investigate unauthorized access to sensitive process data.
+- **Maintain operational integrity and transparency:** See a complete record of actions taken to resolve disputes and investigate SLA breaches.
+- **Troubleshoot issues:** Review user and client actions that modified or influenced process instances to confirm the sequence of actions that led to a process failure.
 
 ## Impact on secondary storage
 
