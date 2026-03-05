@@ -10,14 +10,16 @@ Learn how operation data from the audit log is presented in different contexts.
 
 Depending on the view you're using to access the audit log in [Operate](../../operate/userguide/audit-operations.md), [Identity](../../identity/audit-operations.md), or [Tasklist](../../tasklist/userguide/audit-task-history.md), you'll see some subset of the following operation details:
 
-| Property   | Description                                            |
-| :--------- | :----------------------------------------------------- |
-| Operation  | The applied operation.                                 |
-| Entity     | The entity type the operation was applied to.          |
-| Status     | The status of the operation.                           |
-| Applied to | The entity instance the operation was applied to.      |
-| Actor      | The user, client, or agent that applied the operation. |
-| Time       | The time at which the operation was applied.           |
+| Property       | Description                                                                 |
+| :------------- | :-------------------------------------------------------------------------- |
+| Status         | The status of the operation.                                                |
+| Operation type | The type of operation applied.                                              |
+| Entity type    | The type of entity the operation was applied to.                            |
+| Entity key     | The key and description or name of the entity the operation was applied to. |
+| Parent entity  | The key of the parent entity, if applicable.                                |
+| Details        | Details about the operation.                                                |
+| Actor          | The user, client, or agent that applied the operation.                      |
+| Date           | The date and time at which the operation was applied.                       |
 
 ### Actor
 
