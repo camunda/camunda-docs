@@ -41,7 +41,7 @@ Once validation is complete, deploy your process application to cluster stages i
    - [Defining the stages](process-application-pipeline.md#deployment-pipeline-stages) of your deployment pipeline. Select **Define stages**.
 1. Select **Deploy** to deploy the process application to the selected cluster.
 
-All BPMN, DMN, and form files contained in the process application folder are deployed as a single bundle.
+All BPMN, DMN, and form files contained in the process application are deployed as a single bundle.
 
 In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters).
 
