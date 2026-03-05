@@ -31,6 +31,30 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 </details>
 
+## 8.9.0-alpha5
+
+### RDBMS
+
+#### Manual installation supports RDBMS secondary storage
+
+<!-- https://github.com/camunda/product-hub/issues/2747 -->
+
+Camunda 8 Orchestration Clusters can now be installed manually (VM/bare metal/Java application) with full support for RDBMS (H2, PostgreSQL, Oracle, MariaDB) as secondary storage.
+
+<p class="link-arrow">[Manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md)</p>
+
+#### Production installation guides
+
+<!-- https://github.com/camunda/product-hub/issues/3026 -->
+<!-- https://github.com/camunda/product-hub/issues/2740 -->
+
+New RDBMS production installation guides for Camunda 8 are available:
+
+- Helm: Kubernetes-based orchestration cluster deployment via Helm, using RDBMS secondary storage.
+- Manual: Deploy and manage Camunda 8 using relational databases in production environments.
+
+<p class="link-arrow">[RDBMS Helm deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)</p>
+
 ## 8.9.0-alpha4
 
 | Release date     | Changelog(s)                                                                                                                                                                               |

@@ -88,7 +88,7 @@ During modification mode it is not possible to edit existing variables in existi
 
 ## View summary of pending modifications
 
-To display the pending modifications, click **Apply Modifications** in the footer. A modal will be displayed where all modifications can be seen.
+To display the pending modifications, click **Review Modifications** in the footer. A modal will be displayed where all modifications can be seen.
 
 Within this modal, you can:
 

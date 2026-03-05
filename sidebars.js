@@ -1507,6 +1507,7 @@ module.exports = {
       },
       items: [
         "self-managed/reference-architecture/kubernetes",
+        "self-managed/reference-architecture/containers",
         "self-managed/reference-architecture/manual",
       ],
     },
