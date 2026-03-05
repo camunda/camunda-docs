@@ -118,6 +118,7 @@ Client code (code that calls the Camunda API):
 Glue code (code executed by the process engine):
 
 - Converting JavaDelegates to Job Workers
+- Converting ExecutionListeners to Job Workers
 - Converting External Task Workers to Job Workers
 - Converting expressions
 
@@ -156,7 +157,7 @@ The patterns inform the OpenRewrite recipe development. If you find a pattern th
 The Camunda 7 to 8 OpenRewrite recipes help you automatically refactor:
 
 - Client code using the Camunda 7 Java API
-- Java delegates (glue code)
+- Java delegates and execution listeners (glue code)
 - External task workers
 - Unit tests (work in progress)
 
@@ -236,7 +237,7 @@ The use of `camunda-7-to-8-code-conversion-recipes` artifact requires access to 
 Choose the recipes that match your codebase:
 
 - Include `AllClientRecipes` if you have code that calls the Camunda API (starting processes, correlating messages, etc.)
-- Include `AllDelegateRecipes` if you have Java delegates
+- Include `AllDelegateRecipes` if you have Java delegates or execution listeners
 - Include `AllExternalWorkerRecipes` if you have external task workers
 
 #### Step 2: Run the recipes

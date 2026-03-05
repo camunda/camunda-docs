@@ -28,10 +28,6 @@ Get started by preparing your Self-Managed environment for upgrade to Camunda 8.
 </div>
 </div>
 
-:::note
-This section is a work in progress for Camunda 8.9 and will be updated as upgrade requirements are finalized.
-:::
-
 ## About
 
 Upgrade a Camunda 8 Self-Managed deployment from version 8.8 to 8.9. This guide applies to Self-Managed installations only and does not apply to Camunda SaaS.
@@ -51,12 +47,6 @@ Review required preparation steps and important changes before upgrading to Camu
 Choose the upgrade guide that matches how your environment is deployed:
 
 <ZeebeGrid zeebe={overviewCards} />
-
-:::info Dual-region Helm deployments
-If you are upgrading a dual-region Helm deployment, follow the standard Helm upgrade guide and then complete the additional dual-region steps.
-
-<p class="link-arrow">[Camunda 8.8 to 8.9 Dual-Region Upgrade](./helm/880-to-890-dual-region.md)</p>
-:::
 
 ## Docker Compose deployments
 

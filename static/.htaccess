@@ -146,7 +146,7 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 
 ## Microsoft Teams app redirect for app store documentation link.
 
-RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=301,L]
+RewriteRule ^docs/ms-teams/?$ /docs/next/components/camunda-integrations/ms-teams/ [R=301,L]
 
 ## Redirect update-guide introduction to new components-upgrade introduction
 
@@ -299,6 +299,11 @@ RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-release-note
 #---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
+
+# Rename vendor-supported-infrastructure to operator-based-infrastructure (8.8)
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/next/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
+RewriteRule ^docs/8.8/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/8.8/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
 
 # Restructure Web Modeler Docs (8.8)
 ## Web Modeler folder restructure - moved to modeling/
