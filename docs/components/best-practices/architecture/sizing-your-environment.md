@@ -244,3 +244,5 @@ If you are in doubt about which package to choose, you can do a load test with a
 This is recommended if you exceed the above numbers of three million process instances per day.
 
 Take a look at the [Camunda 8 benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) as a starting point for your own benchmarks.
+
+For current secondary storage outcomes, see [RDBMS benchmark results](/self-managed/concepts/secondary-storage/rdbms-benchmark-results.md).
