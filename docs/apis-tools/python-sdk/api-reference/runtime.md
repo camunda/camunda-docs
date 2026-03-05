@@ -476,42 +476,65 @@ Create an [`SdkLogger`](#sdklogger).
 
 ## Job Worker
 
-## ExecutionHint
+## ConnectedJobContext
 
 ```python
-class ExecutionHint
+class ConnectedJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, tags, root_process_instance_key, user_task=<camunda_orchestration_sdk.types.Unset object>, log=NOTHING, \*, client)
 ```
 
-Bases: `object`
+Bases: [`JobContext`](#jobcontext)
 
-Decorators for users to hint at their workload execution potential
+Context for async/thread handlers — includes client reference.
 
-### *static* permit(strategy)
-
-* **Parameters:**
-  **strategy** (*Literal* *[* *'thread'* *,*  *'process'* *,*  *'async'* *]*)
-* **Return type:**
-  *Callable*[[*Callable*[[…], *Any*]], [*HintedCallable*](#hintedcallable)]
-
-### *static* prefer(strategy)
+Extends [`JobContext`](#jobcontext) with a `client` attribute that provides
+access to the Camunda API from within a job handler.  This context is
+only provided when the execution strategy is `"async"` or
+`"thread"`; handlers running under the `"process"` strategy
+receive a plain [`JobContext`](#jobcontext) (the client cannot be pickled
+across process boundaries).
 
 * **Parameters:**
-  **strategy** (*Literal* *[* *'thread'* *,*  *'process'* *,*  *'async'* *]*)
-* **Return type:**
-  *Callable*[[*Callable*[[…], *Any*]], [*HintedCallable*](#hintedcallable)]
+  * **type_** (*str*)
+  * **process_definition_id** (*ProcessDefinitionId*)
+  * **process_definition_version** (*int*)
+  * **element_id** (*ElementId*)
+  * **custom_headers** (*ActivatedJobResultCustomHeaders*)
+  * **worker** (*str*)
+  * **retries** (*int*)
+  * **deadline** (*int*)
+  * **variables** (*ActivatedJobResultVariables*)
+  * **tenant_id** (*TenantId*)
+  * **job_key** (*JobKey*)
+  * **process_instance_key** (*ProcessInstanceKey*)
+  * **process_definition_key** (*ProcessDefinitionKey*)
+  * **element_instance_key** (*ElementInstanceKey*)
+  * **kind** (*JobKindEnum*)
+  * **listener_event_type** (*JobListenerEventTypeEnum*)
+  * **tags** (*list* *[**str* *]*)
+  * **root_process_instance_key** (*None* *|* *ProcessInstanceKey*)
+  * **user_task** (*ActivatedJobResultUserTask* *|* *None* *|* *Unset*)
+  * **log** ([*SdkLogger*](#sdklogger))
+  * **client** ([*CamundaAsyncClient*](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient))
 
-## HintedCallable
+### client
 
 ```python
-class HintedCallable(\*args, \*\*kwargs)
+client: [CamundaAsyncClient](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient)
 ```
 
-Bases: `Protocol`
+### *classmethod* create(job, client, logger=None)
+
+* **Parameters:**
+  * **job** (*ActivatedJobResult*)
+  * **client** ([*CamundaAsyncClient*](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient))
+  * **logger** ([*SdkLogger*](#sdklogger) *|* *None*)
+* **Return type:**
+  [ConnectedJobContext](#connectedjobcontext)
 
 ## JobContext
 
 ```python
-class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task=<camunda_orchestration_sdk.types.Unset object>, tags=<camunda_orchestration_sdk.types.Unset object>, log=NOTHING)
+class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, tags, root_process_instance_key, user_task=<camunda_orchestration_sdk.types.Unset object>, log=NOTHING)
 ```
 
 Bases: `ActivatedJobResult`
@@ -535,8 +558,9 @@ Read-only context for a job execution.
   * **element_instance_key** (*ElementInstanceKey*)
   * **kind** (*JobKindEnum*)
   * **listener_event_type** (*JobListenerEventTypeEnum*)
-  * **user_task** (*UserTaskProperties* *|* *Unset*)
-  * **tags** (*list* *[**str* *]*  *|* *Unset*)
+  * **tags** (*list* *[**str* *]*)
+  * **root_process_instance_key** (*None* *|* *ProcessInstanceKey*)
+  * **user_task** (*ActivatedJobResultUserTask* *|* *None* *|* *Unset*)
   * **log** ([*SdkLogger*](#sdklogger))
 
 ### log
@@ -586,7 +610,7 @@ Raise this exception to explicitly fail a job with custom retries/backoff.
 ## JobWorker
 
 ```python
-class JobWorker(client, callback, config, logger=None)
+class JobWorker(client, callback, config, logger=None, execution_strategy='auto', startup_jitter_max_seconds=0)
 ```
 
 Bases: `object`
@@ -596,6 +620,8 @@ Bases: `object`
   * **callback** (*JobHandler*)
   * **config** ([*WorkerConfig*](#workerconfig))
   * **logger** ([*SdkLogger*](#sdklogger) *|* *None*)
+  * **execution_strategy** (*EXECUTION_STRATEGY*)
+  * **startup_jitter_max_seconds** (*float*)
 
 ### poll_loop()
 
@@ -620,7 +646,7 @@ def stop()
 ## WorkerConfig
 
 ```python
-class WorkerConfig(job_type, job_timeout_milliseconds, request_timeout_milliseconds=0, max_concurrent_jobs=10, execution_strategy='auto', fetch_variables=None, worker_name='camunda-python-sdk-worker')
+class WorkerConfig(job_type, job_timeout_milliseconds, request_timeout_milliseconds=0, max_concurrent_jobs=10, fetch_variables=None, worker_name='camunda-python-sdk-worker')
 ```
 
 Bases: `object`
@@ -632,15 +658,8 @@ User-facing configuration
   * **job_timeout_milliseconds** (*int*)
   * **request_timeout_milliseconds** (*int*)
   * **max_concurrent_jobs** (*int*)
-  * **execution_strategy** (*Literal* *[* *'thread'* *,*  *'process'* *,*  *'async'* *,*  *'auto'* *]*)
   * **fetch_variables** (*list* *[**str* *]*  *|* *None*)
   * **worker_name** (*str*)
-
-### execution_strategy
-
-```python
-execution_strategy: Literal['thread', 'process', 'async', 'auto']* *= 'auto'
-```
 
 ### fetch_variables
 

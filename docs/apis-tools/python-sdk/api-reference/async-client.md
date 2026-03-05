@@ -813,8 +813,7 @@ def correlate_message_example() -> None:
         )
     )
 
-    if not isinstance(result.message_key, Unset):
-        print(f"Message key: {result.message_key}")
+    print(f"Message key: {result.message_key}")
 ```
 
 ### create_admin_user()
@@ -1145,16 +1144,16 @@ Create group
 * **Return type:**
   GroupCreateResult
 
-### create_job_worker()
+### create_job_worker(config: [WorkerConfig](runtime.md#camunda_orchestration_sdk.runtime.job_worker.WorkerConfig), callback: Callable[[[ConnectedJobContext](runtime.md#camunda_orchestration_sdk.runtime.job_worker.ConnectedJobContext)], Coroutine[Any, Any, dict[str, Any] | JobCompletionRequest | None]] | Callable[[[ConnectedJobContext](runtime.md#camunda_orchestration_sdk.runtime.job_worker.ConnectedJobContext)], dict[str, Any] | None], auto_start: bool = True, , execution_strategy: Literal['auto', 'async', 'thread'] = 'auto', startup_jitter_max_seconds: float = 0) → [JobWorker](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobWorker)
 
-```python
-def create_job_worker(config, callback, auto_start=True)
-```
+### create_job_worker(config: [WorkerConfig](runtime.md#camunda_orchestration_sdk.runtime.job_worker.WorkerConfig), callback: Callable[[[JobContext](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext)], Coroutine[Any, Any, dict[str, Any] | JobCompletionRequest | None]] | Callable[[[JobContext](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext)], dict[str, Any] | None], auto_start: bool = True, , execution_strategy: Literal['process'], startup_jitter_max_seconds: float = 0) → [JobWorker](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobWorker)
 
 * **Parameters:**
   * **config** ([*WorkerConfig*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.WorkerConfig))
-  * **callback** (*Callable* *[* *[*[*JobContext*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) *]* *,* *Coroutine* *[**Any* *,* *Any* *,* *dict* *[**str* *,* *Any* *]*  *|* *JobCompletionRequest* *|* *None* *]* *]*  *|* *Callable* *[* *[*[*JobContext*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) *]* *,* *dict* *[**str* *,* *Any* *]*  *|* *None* *]*  *|* [*HintedCallable*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.HintedCallable))
+  * **callback** (*Callable* *[* *[*[*ConnectedJobContext*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.ConnectedJobContext) *]* *,* *Coroutine* *[**Any* *,* *Any* *,* *dict* *[**str* *,* *Any* *]*  *|* *JobCompletionRequest* *|* *None* *]* *]*  *|* *Callable* *[* *[*[*ConnectedJobContext*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.ConnectedJobContext) *]* *,* *dict* *[**str* *,* *Any* *]*  *|* *None* *]*  *|* *Callable* *[* *[*[*JobContext*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) *]* *,* *Coroutine* *[**Any* *,* *Any* *,* *dict* *[**str* *,* *Any* *]*  *|* *JobCompletionRequest* *|* *None* *]* *]*  *|* *Callable* *[* *[*[*JobContext*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) *]* *,* *dict* *[**str* *,* *Any* *]*  *|* *None* *]*)
   * **auto_start** (*bool*)
+  * **execution_strategy** (*Literal* *[* *'auto'* *,*  *'async'* *,*  *'thread'* *,*  *'process'* *]*)
+  * **startup_jitter_max_seconds** (*float*)
 * **Return type:**
   [*JobWorker*](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobWorker)
 
@@ -2347,6 +2346,30 @@ jobType.
 * **Return type:**
   GlobalJobStatisticsQueryResult
 
+### get_global_task_listener()
+
+```python
+async def get_global_task_listener(id, \*\*kwargs)
+```
+
+Get global user task listener
+
+> Get a global user task listener by its id.
+* **Parameters:**
+  * **id** (*str*) – The user-defined id for the global listener Example: GlobalListener_1.
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetGlobalTaskListenerUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetGlobalTaskListenerForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetGlobalTaskListenerNotFound** – If the response status code is 404. The global user task listener with the given id was not found.
+  * **errors.GetGlobalTaskListenerInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
+  GlobalTaskListenerResult
+* **Return type:**
+  GlobalTaskListenerResult
+
 ### get_group()
 
 ```python
@@ -2408,6 +2431,31 @@ def get_incident_example() -> None:
 
     print(f"Incident error type: {incident.error_type}")
 ```
+
+### get_job_type_statistics()
+
+```python
+async def get_job_type_statistics(, data, \*\*kwargs)
+```
+
+Get job statistics by type
+
+> Get statistics about jobs, grouped by job type.
+* **Parameters:**
+  * **body** (*JobTypeStatisticsQuery*) – Job type statistics query.
+  * **data** (*JobTypeStatisticsQuery*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.GetJobTypeStatisticsBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.GetJobTypeStatisticsUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.GetJobTypeStatisticsForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.GetJobTypeStatisticsInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
+  JobTypeStatisticsQueryResult
+* **Return type:**
+  JobTypeStatisticsQueryResult
 
 ### get_license()
 
@@ -3101,7 +3149,12 @@ async def get_variable(variable_key, \*\*kwargs)
 
 Get variable
 
-> Get the variable by the variable key.
+> Get a variable by its key.
+
+This endpoint returns both process-level and local (element-scoped) variables.
+The variable’s scopeKey indicates whether it’s a process-level variable or scoped to a
+specific element instance.
+
 * **Parameters:**
   * **variable_key** (*str*) – System-generated key for a variable. Example: 2251799813683287.
   * **kwargs** (*Any*)
@@ -3333,8 +3386,7 @@ def publish_message_example() -> None:
         )
     )
 
-    if not isinstance(result.message_key, Unset):
-        print(f"Message key: {result.message_key}")
+    print(f"Message key: {result.message_key}")
 ```
 
 ### reset_clock()
@@ -3882,6 +3934,31 @@ Search element instances
 * **Return type:**
   ElementInstanceSearchQueryResult
 
+### search_global_task_listeners()
+
+```python
+async def search_global_task_listeners(\*, data=<camunda_orchestration_sdk.types.Unset object>, \*\*kwargs)
+```
+
+Search global user task listeners
+
+> Search for global user task listeners based on given criteria.
+* **Parameters:**
+  * **body** (*GlobalTaskListenerSearchQueryRequest* *|* *Unset*) – Global listener search query request.
+  * **data** (*GlobalTaskListenerSearchQueryRequest* *|* *Unset*)
+  * **kwargs** (*Any*)
+* **Raises:**
+  * **errors.SearchGlobalTaskListenersBadRequest** – If the response status code is 400. The provided data is not valid.
+  * **errors.SearchGlobalTaskListenersUnauthorized** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.SearchGlobalTaskListenersForbidden** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.SearchGlobalTaskListenersInternalServerError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
+  GlobalTaskListenerSearchQueryResult
+* **Return type:**
+  GlobalTaskListenerSearchQueryResult
+
 ### search_group_ids_for_tenant()
 
 ```python
@@ -4044,9 +4121,9 @@ Search mapping rules
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  MappingRuleSearchQueryResult
+  SearchMappingRuleResponse200
 * **Return type:**
-  MappingRuleSearchQueryResult
+  SearchMappingRuleResponse200
 
 ### search_mapping_rules_for_group()
 
@@ -4071,9 +4148,9 @@ Search group mapping rules
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  SearchQueryResponse
+  SearchMappingRulesForGroupResponse200
 * **Return type:**
-  SearchQueryResponse
+  SearchMappingRulesForGroupResponse200
 
 ### search_mapping_rules_for_role()
 
@@ -4098,9 +4175,9 @@ Search role mapping rules
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  SearchQueryResponse
+  SearchMappingRulesForRoleResponse200
 * **Return type:**
-  SearchQueryResponse
+  SearchMappingRulesForRoleResponse200
 
 ### search_mapping_rules_for_tenant()
 
@@ -4120,9 +4197,9 @@ Search mapping rules for tenant
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  SearchQueryResponse
+  SearchMappingRulesForTenantResponse200
 * **Return type:**
-  SearchQueryResponse
+  SearchMappingRulesForTenantResponse200
 
 ### search_message_subscriptions()
 
@@ -4314,9 +4391,9 @@ Search group roles
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  SearchQueryResponse
+  SearchRolesForGroupResponse200
 * **Return type:**
-  SearchQueryResponse
+  SearchRolesForGroupResponse200
 
 ### search_roles_for_tenant()
 
@@ -4336,9 +4413,9 @@ Search roles for tenant
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  SearchQueryResponse
+  SearchRolesForTenantResponse200
 * **Return type:**
-  SearchQueryResponse
+  SearchRolesForTenantResponse200
 
 ### search_tenants()
 
@@ -4398,9 +4475,10 @@ async def search_user_task_variables(user_task_key, \*, data=<camunda_orchestrat
 
 Search user task variables
 
-> Search for user task variables based on given criteria. By default, long variable values in the
+> Search for user task variables based on given criteria. This endpoint returns all variables
 
-response are truncated.
+visible from the user task’s scope, including variables from parent scopes in the scope
+hierarchy. By default, long variable values in the response are truncated.
 
 * **Parameters:**
   * **user_task_key** (*str*) – System-generated key for a user task.
@@ -4569,9 +4647,15 @@ async def search_variables(\*, data=<camunda_orchestration_sdk.types.Unset objec
 
 Search variables
 
-> Search for process and local variables based on given criteria. By default, long variable values in
+> Search for variables based on given criteria.
 
-the response are truncated.
+This endpoint returns variables that exist directly at the specified scopes - it does not
+include variables from parent scopes that would be visible through the scope hierarchy.
+
+Variables can be process-level (scoped to the process instance) or local (scoped to specific
+BPMN elements like tasks, subprocesses, etc.).
+
+By default, long variable values in the response are truncated.
 
 * **Parameters:**
   * **truncate_values** (*bool* *|* *Unset*)
