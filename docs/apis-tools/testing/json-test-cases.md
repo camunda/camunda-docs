@@ -1,24 +1,24 @@
 ---
-id: test-scenario-dsl
-title: Test Scenario DSL
-description: "Write your process tests using the Test Scenario DSL."
+id: json-test-cases
+title: JSON test cases
+description: "Write your process tests in JSON format."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-You can write your process tests using the Test Scenario DSL instead of coding the test logic in Java. The DSL is a
-JSON-based format to describe test cases with instructions that align with CPT's assertions and utilities.
+You can write your process tests in a JSON format instead of coding the test logic in Java. The JSON file describes the
+test cases with instructions that align with CPT's assertions and utilities.
 
 :::note
-CPT's Test Scenario DSL files are not compatible with
+CPT's JSON test cases are not compatible with
 the [Test scenario files](/components/modeler/web-modeler/validation/test-scenario-files.md) from the Web Modeler/Play.
 :::
 
-## Write a DSL test case
+## Write a JSON test case
 
-The DSL is defined in the JSON
-schema [test-scenario-dsl.schema.json](https://github.com/camunda/camunda/blob/main/testing/camunda-process-test-dsl/src/main/resources/schema/test-scenario-dsl.schema.json).
+The JSON format is defined in the JSON
+schema [cpt-test-cases.schema.json](https://github.com/camunda/camunda/blob/main/testing/camunda-process-test-json-test-cases/src/main/resources/schema/cpt-test-cases.schema.json).
 It defines the following structure:
 
 - `testCases`: An array of test cases to be executed.
@@ -29,13 +29,15 @@ It defines the following structure:
     - Additional properties depend on the instruction type (e.g., process definition ID, variables, etc.).
 
 Start by creating a new JSON file and placing it in your test resources folder (e.g.
-`src/test/resources/scenarios/invoice-approval-scenario.json`). Add your test cases and use the available instructions
-to define the behavior of your process test.
+`src/test/resources/test-cases/invoice-approval.json`). Refer to the JSON schema in the `$schema` property (
+`"$schema": "https://raw.githubusercontent.com/camunda/camunda/refs/heads/main/testing/camunda-process-test-json-test-cases/src/main/resources/schema/cpt-test-cases.schema.json"`)
+Add your test cases and use the available instructions to define the behavior of your process test.
 
-An example test scenario DSL file could look like this:
+An example JSON file could look like this:
 
 ```json
 {
+  "$schema": "https://raw.githubusercontent.com/camunda/camunda/refs/heads/main/testing/camunda-process-test-json-test-cases/src/main/resources/schema/cpt-test-cases.schema.json",
   "testCases": [
     {
       "name": "Happy path",
@@ -56,6 +58,13 @@ An example test scenario DSL file could look like this:
             },
             "contactEmail": "accounting@acme.com"
           }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "Process_InvoiceApproval"
+          },
+          "state": "IS_COMPLETED"
         }
       ]
     }
@@ -64,18 +73,18 @@ An example test scenario DSL file could look like this:
 ```
 
 :::tip
-Use AI to support the generation of your test scenario DSL files. Provide the JSON schema, a description of your
-test case, and your BPMN processes to get a first draft of your test scenario DSL file.
+Use AI to support the generation of your JSON files. Refer to the JSON schema, provide a description of your
+test case, and your BPMN processes to get a first draft of your test cases.
 
-Or, use an IDE with JSON schema support to get auto-completion and validation while writing your test scenario DSL
-files, for example [IntelliJ IDEA](https://www.jetbrains.com/help/idea/json.html#ws_json_schema_add_custom).
+Or, use an IDE with JSON schema support to get auto-completion and validation while writing your test cases, for
+example [IntelliJ IDEA](https://www.jetbrains.com/help/idea/json.html#ws_json_schema_add_custom).
 :::
 
-## Run a DSL test case
+## Run a JSON test case
 
-You can run your test scenario DSL files as a parameterized JUnit test. Add the `@TestScenarioSource` annotation to your
+You can run your JSON test cases files as a parameterized JUnit test. Add the `@TestCaseSource` annotation to your
 test method to read the files and provide their test cases as arguments. Then, execute the test cases using the
-`TestScenarioRunner` provided by CPT.
+`TestCaseRunner` provided by CPT.
 
 The runner executes the test case instructions by leveraging CPT's assertions and utilities. If an assertion instruction
 fails, the runner throws an assertion error, causing the test to fail. If all instructions pass, the test case is
@@ -95,15 +104,15 @@ considered successful.
 @CamundaSpringProcessTest
 public class MyProcessTest {
 
-    @Autowired private TestScenarioRunner testScenarioRunner;
+    @Autowired private TestCaseRunner testCaseRunner;
 
     @ParameterizedTest
-    @TestScenarioSource
-    void shouldPass(final TestCase testCase, final String scenarioFile) {
+    @TestCaseSource
+    void shouldPass(final TestCase testCase, final String fileName) {
         // given: the process definitions are deployed
 
         // when/then: run and verify the test case
-        testScenarioRunner.run(testCase);
+      testCaseRunner.run(testCase);
     }
 }
 ```
@@ -115,15 +124,15 @@ public class MyProcessTest {
 @CamundaProcessTest
 public class MyProcessTest {
 
-    private TestScenarioRunner testScenarioRunner;
+    private TestCaseRunner testCaseRunner;
 
     @ParameterizedTest
-    @TestScenarioSource
-    void shouldPass(final TestCase testCase, final String scenarioFile) {
+    @TestCaseSource
+    void shouldPass(final TestCase testCase, final String fileName) {
         // given: the process definitions are deployed
 
         // when/then: run and verify the test case
-        testScenarioRunner.run(testCase);
+      testCaseRunner.run(testCase);
     }
 }
 ```
@@ -131,17 +140,17 @@ public class MyProcessTest {
 </TabItem>
 </Tabs>
 
-You can set the following fields in the `@TestScenarioSource` annotation to configure which files to load:
+You can set the following fields in the `@TestCaseSource` annotation to configure which files to load:
 
-- `directory`: The classpath directory to scan for test scenario DSL files. Defaults to `/scenarios`.
+- `directory`: The classpath directory to scan for test cases JSON files. Defaults to `/test-cases`.
 - `fileNames`: An array of specific file names to load from the directory. If not set, all files in the directory are
   loaded.
 - `fileExtension`: The file extension to filter files in the directory. Defaults to `json`. The filter is ignored if
   `fileNames` is set.
 
-## Connect your process application
+### Connect your process application
 
-The `TestScenarioRunner` integrates seamlessly with CPT's [test lifecycle](getting-started.md#test-lifecycle) and connects
+The `TestCaseRunner` integrates seamlessly with CPT's [test lifecycle](getting-started.md#test-lifecycle) and connects
 to your process application and starts the job workers, if enabled.
 
 You can add additional steps before and after running the test case, for example to deploy additional resources, or to
@@ -163,18 +172,18 @@ public class MyProcessTest {
 
     @Autowired private CamundaClient client;
     @Autowired private CamundaProcessTestContext processTestContext;
-    @Autowired private TestScenarioRunner testScenarioRunner;
+    @Autowired private TestCaseRunner testCaseRunner;
 
     @MockitoBean private AccountingService accountingService;
 
     @ParameterizedTest
-    @TestScenarioSource
-    void shouldPass(final TestCase testCase, final String scenarioFile) {
+    @TestCaseSource
+    void shouldPass(final TestCase testCase, final String fileName) {
         // given: the process definitions are deployed via @Deployment on the process application
         // optionally: set up mocks, job workers, etc.
 
         // when/then: run and verify the test case
-        testScenarioRunner.run(testCase);
+        testCaseRunner.run(testCase);
 
         // optionally: verify mock invocations, external resources, etc.
         Mockito.verify(accountingService).addInvoiceToAccount("0815", "INV-1001");
@@ -193,20 +202,20 @@ public class MyProcessTest {
 
     private CamundaClient client;
     private CamundaProcessTestContext processTestContext;
-    private TestScenarioRunner testScenarioRunner;
+    private TestCaseRunner testCaseRunner;
 
     // Inject the mock in the process application
     @Mock private AccountingService accountingService;
 
     @ParameterizedTest
-    @TestScenarioSource
+    @TestCaseSource
     @TestDeployment(resources = "invoice-approval.bpmn")
-    void shouldPass(final TestCase testCase, final String scenarioFile) {
+    void shouldPass(final TestCase testCase, final String fileName) {
         // given: the process definitions are deployed via @TestDeployment
         // optionally: set up mocks, job workers, etc.
 
         // when/then: run and verify the test case
-        testScenarioRunner.run(testCase);
+        testCaseRunner.run(testCase);
 
         // optionally: verify mock invocations, external resources, etc.
         Mockito.verify(accountingService).addInvoiceToAccount("0815", "INV-1001");
@@ -220,7 +229,7 @@ public class MyProcessTest {
 
 ## Examples
 
-You can find some example process tests using the Test Scenario DSL
+You can find some example process tests using the JSON test cases
 on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example).
 
 ## Reference: Instructions
