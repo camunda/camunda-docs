@@ -115,7 +115,14 @@ You can now use the `linux/arm64` image for Docker production environments.
 
 <!-- https://github.com/camunda/product-hub/issues/2890 -->
 
-#### Proxy support for AWS OpenSearch
+You can now configure multiple Elasticsearch or OpenSearch host URLs for Camunda 8 components, removing the requirement for a single endpoint or load balancer in front of your search cluster.
+
+- This enables seamless connectivity in environments where managed Elasticsearch or OpenSearch providers supply a list of host URLs rather than a single FQDN.
+- Multi-host configuration is supported for Zeebe, Operate, Tasklist, Optimize, and Integration components, and can be set via Helm chart values or application configuration.
+
+<p class="link-arrow">[Property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage)</p>
+
+#### Proxy support for Elasticsearch and AWS OpenSearch
 
 <!-- https://github.com/camunda/product-hub/issues/3048 -->
 
@@ -265,6 +272,12 @@ If you use this setting, you no longer need to restart the associated run-time e
 #### Elasticsearch 9 support
 
 <!-- https://github.com/camunda/product-hub/issues/2835 -->
+
+Camunda 8 now supports Elasticsearch 9 as a secondary data store, allowing you to take advantage of the latest Elasticsearch release for your deployments.
+
+- Elasticsearch 9 is a direct 1:1 compatibility update with no changes to Camunda APIs or query behavior.
+- You can plan your migration to Elasticsearch 9 and benefit from its improved performance and updated features while maintaining full compatibility with Camunda 8 components.
+- Elasticsearch 8.x continues to be supported for existing deployments.
 
 #### Manage task permissions
 
