@@ -53,7 +53,9 @@ Below is a quick start guide to get you started. For detailed information on eac
     </bpmn:startEvent>
    ```
 
-   - **Hint:** For automatic resource deployment, you can also drop your BPMN files into the `configuration/resources` folder.
+   :::note
+   For automatic resource deployment, you can also drop your BPMN files into the `configuration/resources` folder.
+   :::
 
 2. Drop your JDBC driver into the `configuration/userlib` folder (for example, `postgresql-$VERSION.jar` for PostgreSQL).
 
