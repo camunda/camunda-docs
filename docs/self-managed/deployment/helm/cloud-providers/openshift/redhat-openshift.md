@@ -17,9 +17,7 @@ import NoDomainInfo from '../\_partials/\_no-domain-info.md'
 import HelmUpgradeNote from '../\_partials/\_helm-upgrade-note.md'
 import KubefwdTip from '../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../\_partials/\_port-forward-services.md'
-import DeployPrerequisiteServices from '../\_partials/\_deploy-prerequisite-services.md'
 import DeployECKElasticsearch from '../\_partials/\_deploy-eck-elasticsearch.md'
-import DeployCNPGPostgresql from '../\_partials/\_deploy-cnpg-postgresql.md'
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
@@ -393,7 +391,17 @@ Some components are not enabled by default in this deployment. For more informat
 
 ### Deploy prerequisite services
 
-<DeployPrerequisiteServices />
+Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch and PostgreSQL) is deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md). Keycloak can optionally be deployed as your OIDC provider:
+
+- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- **PostgreSQL**: Deployed via [CloudNativePG](https://cloudnative-pg.io/)
+- **Keycloak** _(optional)_: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation) — can be replaced with any OIDC-compatible IdP
+
+All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
+
+:::note Working directory
+All commands in this guide assume you are at the **repository root** (the directory created by `get-your-copy.sh`). The deploy commands below use subshells `(cd ... && ./deploy.sh)` to preserve your working directory.
+:::
 
 #### Deploy Elasticsearch {#deploy-elasticsearch}
 
@@ -401,7 +409,29 @@ Some components are not enabled by default in this deployment. For more informat
 
 #### Deploy PostgreSQL {#deploy-postgresql}
 
-<DeployCNPGPostgresql />
+Deploy PostgreSQL clusters using the CloudNativePG operator:
+
+```bash
+CLUSTER_FILTER="pg-identity,pg-webmodeler" (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+```
+
+This script installs the CNPG operator (auto-detecting OpenShift to apply SCC patches), creates secrets, deploys the specified PostgreSQL clusters, and waits for readiness.
+
+The following PostgreSQL clusters are created:
+
+- **pg-identity**: Database for Camunda Identity component
+- **pg-webmodeler**: Database for Web Modeler component (remove from configuration if not needed)
+
+<details>
+<summary>Review the PostgreSQL cluster configuration</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/postgresql-clusters.yml
+```
+
+</details>
+
+For more details on the PostgreSQL deployment, see [PostgreSQL deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
 #### Deploy Keycloak (optional) {#deploy-keycloak}
 
