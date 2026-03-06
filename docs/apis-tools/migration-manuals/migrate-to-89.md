@@ -262,6 +262,53 @@ if (versionTag != null) {
 </TabItem>
 </Tabs>
 
+### Document API response schemas now have explicit required and nullable annotations {#request-response-schema-split}
+
+**What changed**: The OpenAPI specification now uses distinct schemas for document request and response payloads, and adds explicit `required` / `nullable` annotations to document response types.
+
+**Why**: A shared `DocumentMetadata` schema was used for both creating and reading documents. Because response fields like `customProperties` are always populated by the server but optional in requests, a single schema could not accurately express both contracts. This caused incorrect required/optional behavior in generated clients.
+
+**Affected schemas**:
+
+| Schema                               | Change                                                                                                                                                                                                                            |
+| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DocumentMetadata`                   | Now request-only. Removed `required: [customProperties]` — `customProperties` is now optional in requests.                                                                                                                        |
+| `DocumentMetadataResponse` (new)     | Response schema with required fields: `fileName`, `expiresAt`, `size`, `contentType`, `customProperties`, `processDefinitionId`, `processInstanceKey`. `expiresAt`, `processDefinitionId`, and `processInstanceKey` are nullable. |
+| `DocumentReference`                  | `metadata` now references `DocumentMetadataResponse`. Added `required`: `camunda.document.type`, `storeId`, `documentId`, `contentHash`, `metadata`. `contentHash` is now nullable.                                               |
+| `DocumentLink`                       | `url` and `expiresAt` are now explicitly required.                                                                                                                                                                                |
+| `UserTaskResult.candidateGroups`     | Now marked as required in the response schema.                                                                                                                                                                                    |
+| `UserTaskProperties.candidateGroups` | Now marked as required in the response schema.                                                                                                                                                                                    |
+
+**Java client impact**: `DocumentMetadataImpl` (both `io.camunda.client` and the deprecated `io.camunda.zeebe.client`) now uses `DocumentMetadataResponse` instead of `DocumentMetadata` internally.
+
+**What to do**:
+
+<Tabs groupId="audience" defaultValue="sdk" queryString values={[
+{label: 'Official SDK users', value: 'sdk'},
+{label: 'Generated-client users', value: 'generated'},
+{label: 'Handwritten integrations', value: 'handwritten'},
+]}>
+
+<TabItem value='sdk'>
+
+Update to the latest SDK version. The updated response models are included automatically. Re-compile your application to verify.
+
+</TabItem>
+<TabItem value='generated'>
+
+1. Regenerate your client from the 8.9 OpenAPI specification.
+2. Update any code that references `DocumentMetadata` in response handling — the response type is now `DocumentMetadataResponse`.
+3. Review nullable annotations: `DocumentReference.contentHash`, `DocumentMetadataResponse.expiresAt`, `.processDefinitionId`, and `.processInstanceKey` can be `null`.
+4. Code that reads `candidateGroups` from user task or job responses can now rely on the field being present without null checks.
+
+</TabItem>
+<TabItem value='handwritten'>
+
+No request-side changes are needed. Response fields listed above are now guaranteed to be present (though some may be `null`). If your code reads document metadata responses and checks for `customProperties` or `candidateGroups` presence, those fields are now always included.
+
+</TabItem>
+</Tabs>
+
 ### MCP Client and MCP Remote Client connectors
 
 **What changed**: Breaking changes were introduced in alpha 2 to the element templates and runtime configuration of the MCP Client.

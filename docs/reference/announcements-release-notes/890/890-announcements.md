@@ -286,6 +286,37 @@ What to do:
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Document API response schemas now have explicit required and nullable annotations
+
+Starting with 8.9.0, the OpenAPI specification uses distinct schemas for document request and response payloads, and adds explicit `required` / `nullable` annotations to document response types.
+
+Previously, a shared `DocumentMetadata` schema was used for both creating and reading documents. Because response fields like `customProperties` are always populated by the server, but optional in requests, a single schema could not accurately express both contracts. This caused incorrect required/optional behavior in generated clients.
+
+What changed:
+
+- **`DocumentMetadata`**: now request-only. `customProperties` is no longer marked as required (it was previously required even in requests).
+- **`DocumentMetadataResponse`** (new): response schema with `fileName`, `expiresAt`, `size`, `contentType`, `customProperties`, `processDefinitionId`, and `processInstanceKey` all marked as required. `expiresAt`, `processDefinitionId`, and `processInstanceKey` are nullable.
+- **`DocumentReference`**: `metadata` now references `DocumentMetadataResponse`. Fields `camunda.document.type`, `storeId`, `documentId`, `contentHash`, and `metadata` are now explicitly required. `contentHash` is nullable.
+- **`DocumentLink`**: `url` and `expiresAt` are now explicitly required.
+- **`candidateGroups` (user task / job API)**: now explicitly marked as a required field in response schemas (`UserTaskResult`, `UserTaskProperties`).
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Generated-client users: regenerate your client. Update any code that references `DocumentMetadata` in response handling — it is now `DocumentMetadataResponse`. Review nullable annotations on `DocumentReference.contentHash` and `DocumentMetadataResponse` fields.
+- Handwritten integrations: no request-side changes needed. Response fields listed above are now guaranteed to be present (though some may be `null`).
+
+<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#request-response-schema-split)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
