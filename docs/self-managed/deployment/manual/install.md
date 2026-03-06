@@ -196,9 +196,9 @@ camunda:
 
 Connectors require authentication to use their full capabilities. By default, the Orchestration Cluster uses basic authentication. You can configure the cluster to automatically create a user with the necessary permissions at startup.
 
-If you don’t configure a user at startup, create one manually in the Identity UI after deployment.
+If you don’t configure a user at startup, create one manually in the Admin UI after deployment.
 
-For more details, see [Identity configuration overview](/self-managed/components/orchestration-cluster/identity/overview.md).
+For more details, see [Admin configuration overview](/self-managed/components/orchestration-cluster/admin/overview.md).
 
 <Tabs>
   <TabItem value="env" label="Environment variables">
@@ -617,6 +617,6 @@ curl localhost:9090/actuator/health
 
 After setting up your cluster, many users typically do the following:
 
-- [Connect to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
+- [Connect to an identity provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
 - [Secure cluster communication](/self-managed/components/orchestration-cluster/zeebe/security/secure-cluster-communication.md) – protect traffic between cluster nodes.
 - [Secure client communication](/self-managed/components/orchestration-cluster/zeebe/security/secure-client-communication.md) – ensure secure communication between clients and the cluster.

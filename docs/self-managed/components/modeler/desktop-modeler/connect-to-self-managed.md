@@ -31,7 +31,7 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
    :::caution
    You can connect to Camunda 8 both securely and insecurely through the `https` and `http` protocols. Secured connections to a remote endpoint are established only if the remote server certificate is trusted by the app. Ensure that root and intermediate certificates you trust are [known to the app](/components/modeler/desktop-modeler/flags/flags.md#zeebe-ssl-certificate).
 
-   Multi-tenancy is available only when authentication is enabled through [Orchestration Cluster Identity](../../orchestration-cluster/identity/overview.md).
+   Multi-tenancy is available only when authentication is enabled through [Orchestration Cluster Admin](../../orchestration-cluster/admin/overview.md).
    :::
 
    ![deployment via Camunda 8](./img/connection-with-endpoint.png)
@@ -54,10 +54,10 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
 
    <TabItem value='oauth'>
 
-   For **OAuth**, enter the credentials for your OAuth provider. These credentials are configured during the default [Helm installation](/self-managed/deployment/helm/install/quick-install.md). You can find them in [Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md) or set them using Zeebe [environment variables](/self-managed/components/orchestration-cluster/zeebe/security/client-authorization.md#environment-variables).
+   For **OAuth**, enter the credentials for your OAuth provider. These credentials are configured during the default [Helm installation](/self-managed/deployment/helm/install/quick-install.md). You can find them in [Orchestration Cluster Admin](/self-managed/components/orchestration-cluster/admin/overview.md) or set them using Zeebe [environment variables](/self-managed/components/orchestration-cluster/zeebe/security/client-authorization.md#environment-variables).
 
    :::note
-   When using Modeler to deploy a process model or start a process instance, you may run into issues with [resource authorizations](/components/concepts/access-control/authorizations.md). Make sure your [client](/components/identity/client.md) has the right authorizations assigned to it.
+   When using Modeler to deploy a process model or start a process instance, you may run into issues with [resource authorizations](/components/concepts/access-control/authorizations.md). Make sure your [client](/components/admin/client.md) has the right authorizations assigned to it.
    :::
 
    ![oauth configuration](./img/connection-with-oauth.png)

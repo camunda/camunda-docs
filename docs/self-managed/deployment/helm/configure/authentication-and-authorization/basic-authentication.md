@@ -35,7 +35,7 @@ Two users are created by default:
 | `demo`      | `demo`      | `admin`      | Initial administrative user                                                         |
 | `connector` | `connector` | `connectors` | Used by the Connectors component to authenticate with the Orchestration Cluster API |
 
-For details on configuring initial users and their roles, see [Orchestration Cluster Identity initialization](/self-managed/components/orchestration-cluster/identity/overview.md#option-3-configuration).
+For details on configuring initial users and their roles, see [Orchestration Cluster Admin initialization](/self-managed/components/orchestration-cluster/admin/overview.md#option-3-configuration).
 
 :::note Helm arrays
 In Helm, arrays must be overwritten in full. If you change these configuration settings, keep in mind that the default array must be configured in your custom `values.yaml` if you want to keep those users and role assignments. For example, when adding the user `foo` or assigning roles to `foo`, keep also the values for the demo and connectors user.

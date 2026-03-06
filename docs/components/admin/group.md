@@ -10,7 +10,7 @@ A user group is a way to organize multiple [users](user.md) in one unit. Groups 
 
 To create a group:
 
-1. Log in to Identity in your cluster, and click on the **Groups** tab.
+1. Log in to Admin in your cluster, and click on the **Groups** tab.
 2. Click on the **Create group** button, and provide the following group details:
    - **Group ID**: The unique identifier for the group.
    - **Name**: The name of the group.
@@ -25,7 +25,7 @@ The group is created and can now be assigned to roles or users.
 
 To update a group:
 
-1. Log in to Identity in your cluster, and click on the **Groups** tab.
+1. Log in to Admin in your cluster, and click on the **Groups** tab.
 2. Click on the **pencil icon** next to the group you want to update.
 3. Update the group details:
    - **Name**: The name of the group.
@@ -36,7 +36,7 @@ The group details are updated.
 
 ## Delete a group
 
-1. Log in to Identity in your cluster, and click on the **Groups** tab.
+1. Log in to Admin in your cluster, and click on the **Groups** tab.
 2. Click on the **Delete** button next to the group you want to delete.
 3. Confirm the deletion by clicking on the **Delete** button in the confirmation dialog.
 
@@ -52,11 +52,11 @@ See the [authorization](./authorization.md) section to learn how to create autho
 
 To assign users to a group:
 
-1. Log in to Identity in your cluster, and click on the **Groups** tab.
+1. Log in to Admin in your cluster, and click on the **Groups** tab.
 2. Click on the group you want to assign users to.
 3. Click on the **Users** tab.
 4. Click on the **Assign user** button.
-5. Type the username of the user you want to assign to the group, and click on the **Assign user** button. For SaaS deployments, the username field refers to the email address of the user. For Self-Managed deployments, the username field has to match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
+5. Type the username of the user you want to assign to the group, and click on the **Assign user** button. For SaaS deployments, the username field refers to the email address of the user. For Self-Managed deployments, the username field has to match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
 
 :::note
 For Self-Managed deployments with basic authentication, you must search for existing users.
@@ -68,7 +68,7 @@ The user is assigned to the group and inherits its permissions.
 
 To remove users from a group:
 
-1. Log in to Identity in your cluster, and click on the **Groups** tab.
+1. Log in to Admin in your cluster, and click on the **Groups** tab.
 2. Click on the group you want to remove users from.
 3. Click on the **Users** tab.
 4. Click on the **Remove** button next to the user you want to remove from the group.
@@ -82,7 +82,7 @@ The user is removed from the group and loses any permissions that were granted t
 
 To assign roles to a group:
 
-1. Log in to Identity in your cluster, and click on the **Groups** tab.
+1. Log in to Admin in your cluster, and click on the **Groups** tab.
 2. Click on the group you want to assign roles to.
 3. Click on the **Roles** tab.
 4. Click on the **Assign role** button.
@@ -94,7 +94,7 @@ The role is assigned to the group. Users in the group now have the permissions g
 
 To remove roles from a group:
 
-1. Log in to Identity in your cluster, and click on the **Groups** tab.
+1. Log in to Admin in your cluster, and click on the **Groups** tab.
 2. Click on the group you want to remove roles from.
 3. Click on the **Roles** tab.
 4. Click on the **Remove** button next to the role you want to remove from the group.
@@ -112,7 +112,7 @@ In Self-Managed deployment, [client management](client.md) is only available for
 
 To assign a client to a group:
 
-1. Log in to Identity in your cluster, and click on the **Groups** tab.
+1. Log in to Admin in your cluster, and click on the **Groups** tab.
 2. Click on the group you want to assign a client to.
 3. Click on the **Clients** tab.
 4. Click on the **Assign client** button.
@@ -124,7 +124,7 @@ The client is assigned to the group.
 
 To remove a client from a group:
 
-1. Log in to Identity in your cluster, and click on the **Groups** tab.
+1. Log in to Admin in your cluster, and click on the **Groups** tab.
 2. Click on the group you want to remove a client from.
 3. Click on the **Clients** tab.
 4. Click on the **Remove** button next to the client you want to remove from the group.
@@ -144,7 +144,7 @@ The client is removed from the group.
 
 To assign a mapping rule to a group:
 
-1. Log in to Identity in your cluster, and click on the **Groups** tab.
+1. Log in to Admin in your cluster, and click on the **Groups** tab.
 2. Click on the group you want to assign mapping rules to.
 3. Click on the **Mapping rules** tab.
 4. Click on the **Assign mapping rule** button.
@@ -156,7 +156,7 @@ The mapping rule is assigned to the group.
 
 To remove a mapping rule from a group:
 
-1. Log in to Identity in your cluster, and click on the **Groups** tab.
+1. Log in to Admin in your cluster, and click on the **Groups** tab.
 2. Click on the group you want to remove mapping rules from.
 3. Click on the **Mapping rules** tab.
 4. Click on the **Remove** button next to the mapping rule you want to remove from the group.

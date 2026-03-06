@@ -456,7 +456,7 @@ To configure the truststore, use the following environment variables:
 
 ## Multi-tenancy
 
-The Connector Runtime supports multiple tenants for inbound and outbound connectors. These are configurable in [Orchestration Cluster Identity](/components/identity/tenant.md).
+The Connector Runtime supports multiple tenants for inbound and outbound connectors. These are configurable in [Orchestration Cluster Admin](/components/admin/tenant.md).
 
 A single Connector Runtime can serve a single tenant or can be configured to serve
 multiple tenants. By default, the runtime uses the tenant ID `<default>` for all
@@ -464,7 +464,7 @@ Zeebe-related operations like handling jobs and publishing messages.
 
 :::info
 Support for **outbound connectors** with multiple tenants requires a dedicated
-tenant job worker config (described below). **Inbound connectors** automatically work for all tenants the configured Connector Runtime client has access to. This can be configured in Identity via the application assignment.
+tenant job worker config (described below). **Inbound connectors** automatically work for all tenants the configured Connector Runtime client has access to. This can be configured in Admin via the application assignment.
 :::
 
 ### Environment variables
@@ -526,11 +526,11 @@ configuration of job workers.
 
 The Connector Runtime fetches process definitions from the Orchestration Cluster REST API, and executes all inbound connectors within those processes independently of the outbound connector configuration without any additional configuration required from the user.
 
-To restrict the Connector Runtime inbound connector feature to a single tenant or multiple tenants, use Identity and assign the tenants the connector application should have access to.
+To restrict the Connector Runtime inbound connector feature to a single tenant or multiple tenants, use Admin and assign the tenants the connector application should have access to.
 
 ### Troubleshooting
 
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](../../deployment/helm/configure/configure-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](../../deployment/helm/configure/configure-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Admin.
 
 Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/components/concepts/multi-tenancy.md).
 
