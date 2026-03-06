@@ -5,6 +5,9 @@ sidebar_label: Install
 description: "Install and configure Camunda for Microsoft Teams in a Self-Managed environment using Docker."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Install and configure Camunda for Microsoft Teams in a Self-Managed environment using Docker.
 
 :::note
@@ -19,7 +22,7 @@ Camunda for Microsoft Teams requires a backend service called **App Integrations
 
 Before you begin, ensure the following are available:
 
-- A running Camunda Self-Managed distribution (for example, `camunda.your-domain.com`) with Identity (Keycloak).
+- A running Camunda Self-Managed distribution (for example, `camunda.your-domain.com`) with Identity (Keycloak or Microsoft Entra).
 - Docker installed on the system hosting the App Integrations backend.
 - A PostgreSQL database accessible from the Docker container.
 - Node.js 20 or later for the Teams app integration CLI.
@@ -28,7 +31,7 @@ Before you begin, ensure the following are available:
 
 ## Step 1: Create applications in Camunda Identity
 
-Before writing the configuration file, register two OAuth 2.0 applications in your Camunda Self-Managed Identity service.
+Before writing the configuration file, register two OAuth 2.0 applications in your identity provider.
 
 1. Access the Identity management in your Camunda Self-Managed distribution.
 2. Create the following two applications.
@@ -51,11 +54,28 @@ Note down the generated `clientId` and `clientSecret`. You will need them for `a
 
 Note down the generated `clientId` and `clientSecret`. You will need them for `auth.spa` in the configuration file.
 
-### Grant offline access in Keycloak
+### Grant offline access role
+
+<Tabs groupId="identity-provider" defaultValue="keycloak" values={[
+{ label: 'Keycloak', value: 'keycloak' },
+{ label: 'Entra', value: 'entra' },
+]}>
+
+<TabItem value="keycloak">
 
 In your Keycloak admin console, ensure that users who will use the Teams integration have the `offline_access` role assigned. This is required so the application can refresh tokens and act on behalf of users when sending proactive notifications.
 
 You can assign `offline_access` at the realm level (**Realm Roles** → `offline_access`) or via a group/client scope, depending on your setup.
+
+</TabItem>
+
+<TabItem value="entra">
+
+For Entra-based setups, offline/refresh token access is configured via the App Registration's API permissions in the Azure portal. Ensure the SPA App Registration has the `offline_access` permission granted under **API permissions** → **Microsoft Graph** → **Delegated permissions**.
+
+</TabItem>
+
+</Tabs>
 
 ## Step 2: Set up the Microsoft Teams Camunda App using CLI
 
@@ -119,10 +139,10 @@ orchestration:
     appIntegrations:
       apiKey:
         secret:
-          existingSecret: apiKey-secret
+          existingSecret: app-integrations-secret
           existingSecretKey: apiKey
   extraConfiguration:
-    - file: application.yaml
+    - file: application.app-int.yaml
       content: |
         zeebe:
           broker:
@@ -130,15 +150,19 @@ orchestration:
               appIntegrations:
                 className: "io.camunda.exporter.appint.AppIntegrationsExporter"
                 args:
-                  url: <your-public-url>
+                  url: <your-app-integrations-url>/api/event/exporter/batch
 ```
 
-Replace `<your-public-url>` with the public URL of your App Integrations backend (for example, `https://app-integrations.camunda.your-domain.com`).
+Replace `<your-app-integrations-url>` with the base URL of your App Integrations backend. The URL must point to the `/api/event/exporter/batch` endpoint (for example, `https://app-integrations.camunda.your-domain.com/api/event/exporter/batch`).
+
+:::note
+The `args.url` must include the full path `/api/event/exporter/batch`. This is the batch event ingestion endpoint of the App Integrations backend. The exporter will POST batches of process events to this endpoint.
+:::
 
 The `existingSecret` references a Kubernetes Secret that contains the API key. Create this secret in your cluster before deploying:
 
 ```bash
-kubectl create secret generic apiKey-secret --from-literal=apiKey=<your-exporter-api-key>
+kubectl create secret generic app-integrations-secret --from-literal=apiKey=<your-exporter-api-key>
 ```
 
 :::note
@@ -148,6 +172,88 @@ The same API key must be set in the `exporter.apiKey` field of the App Integrati
 ## Step 4: Create the configuration file
 
 Create a `config.yaml` file with your configuration settings. This file will be mounted into the Docker container.
+
+### Auth configuration
+
+The `auth` block must be configured to match the identity provider used in your environment. The `auth.kind` field selects the provider variant, which determines how OIDC discovery, token endpoints, and audience/issuer values are resolved.
+
+<Tabs groupId="identity-provider" defaultValue="keycloak" values={[
+{ label: 'Keycloak', value: 'keycloak' },
+{ label: 'Entra', value: 'entra' },
+]}>
+
+<TabItem value="keycloak">
+
+Set `auth.kind` to `"keycloak"` for Keycloak-based Camunda Self-Managed installations.
+
+| Field                   | Required | Description                                                                              |
+| :---------------------- | :------- | :--------------------------------------------------------------------------------------- |
+| `auth.kind`             | Yes      | Set to `keycloak`.                                                                       |
+| `auth.issuer`           | Yes      | The Keycloak realm URL, e.g. `https://<your-camunda-host>/auth/realms/camunda-platform`. |
+| `auth.audience`         | Yes      | Typically `camunda-platform`.                                                            |
+| `auth.m2m.clientId`     | Yes      | M2M client ID from [Step 1](#step-1-create-applications-in-camunda-identity).            |
+| `auth.m2m.clientSecret` | Yes      | M2M client secret from [Step 1](#step-1-create-applications-in-camunda-identity).        |
+| `auth.spa.clientId`     | Yes      | SPA client ID from [Step 1](#step-1-create-applications-in-camunda-identity).            |
+| `auth.spa.clientSecret` | Yes      | SPA client secret from [Step 1](#step-1-create-applications-in-camunda-identity).        |
+
+Example:
+
+```yaml
+auth:
+  kind: keycloak
+  m2m:
+    clientId: <your-m2m-client-id>
+    clientSecret: <your-m2m-client-secret>
+  spa:
+    clientId: <your-spa-client-id>
+    clientSecret: <your-spa-client-secret>
+  issuer: https://<your-camunda-host>/auth/realms/camunda-platform
+  audience: camunda-platform
+```
+
+</TabItem>
+
+<TabItem value="entra">
+
+Set `auth.kind` to `"entra"` for Microsoft Entra ID (formerly Azure AD) based setups.
+
+| Field                      | Required | Description                                                                                                              |
+| :------------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------- |
+| `auth.kind`                | Yes      | Set to `entra`.                                                                                                          |
+| `auth.issuer`              | No       | Derived automatically as `https://login.microsoftonline.com/<tenantId>/v2.0`. Override only if using a custom authority. |
+| `auth.audience`            | No       | Defaults to `auth.spa.clientId`. Override only if using a different audience.                                            |
+| `auth.m2m.clientId`        | Yes      | Entra App Registration client ID for the M2M application.                                                                |
+| `auth.m2m.clientSecret`    | Yes      | Entra App Registration client secret for the M2M application.                                                            |
+| `auth.spa.clientId`        | Yes      | Entra App Registration client ID for the SPA application.                                                                |
+| `auth.spa.clientSecret`    | Yes      | Entra App Registration client secret for the SPA application.                                                            |
+| `auth.entra.tenantId`      | Yes      | The Entra tenant ID.                                                                                                     |
+| `auth.entra.tokenUrl`      | No       | Defaults to `https://login.microsoftonline.com/<tenantId>/oauth2/v2.0/token`.                                            |
+| `auth.entra.jwksUrl`       | No       | Defaults to `https://login.microsoftonline.com/<tenantId>/discovery/v2.0/keys`.                                          |
+| `auth.entra.scope`         | No       | Defaults to `openid profile offline_access <spa.clientId>/.default`.                                                     |
+| `auth.entra.usernameClaim` | No       | The ID token claim used to resolve the user's email. Default: `preferred_username`.                                      |
+
+Example:
+
+```yaml
+auth:
+  kind: entra
+  m2m:
+    clientId: <your-entra-m2m-client-id>
+    clientSecret: <your-entra-m2m-client-secret>
+  spa:
+    clientId: <your-entra-spa-client-id>
+    clientSecret: <your-entra-spa-client-secret>
+  entra:
+    tenantId: <your-entra-tenant-id>
+```
+
+:::note
+Most parameters in the `auth.entra` block are automatically inferred from the required `tenantId` parameter. You only need to override them if your environment uses non-standard Entra endpoints.
+:::
+
+</TabItem>
+
+</Tabs>
 
 ### Secret management
 
@@ -179,13 +285,15 @@ In your deployment, mount the secrets as environment variables on the container 
 
 ### Example configuration file
 
-Replace the placeholder values with your actual settings. Use the credentials from [Step 1](#step-1-create-applications-in-camunda-identity) and the Teams configuration from [Step 2](#step-2-set-up-the-microsoft-teams-app-cli). The `exporter.apiKey` must match the API key configured in the orchestration cluster Helm chart in [Step 3](#step-3-configure-the-app-integrations-exporter). For production deployments, replace sensitive values with environment variable references as described in [Secret management](#secret-management).
+Replace the placeholder values with your actual settings. Use the credentials from [Step 1](#step-1-create-applications-in-camunda-identity) and the Teams configuration from [Step 2](#step-2-set-up-the-microsoft-teams-app-cli). The `exporter.apiKey` must match the API key configured in the orchestration cluster Helm chart in [Step 3](#step-3-configure-the-app-integrations-exporter). For production deployments, replace sensitive values with environment variable references as described in [Secret management](#secret-management). See [Auth configuration](#auth-configuration) for the full `auth` block reference.
 
 ```yaml
 serverPort: 8080
 stage: prod
 
+# See "Auth configuration" above for Keycloak and Entra variants.
 auth:
+  kind: keycloak
   m2m:
     clientId: <your-m2m-client-id>
     clientSecret: <your-m2m-client-secret>
@@ -229,12 +337,24 @@ clusters:
     urls:
       orchestration: https://<your-camunda-host>/orchestration
       tasklist: https://<your-camunda-host>/tasklist
+      # Extended format (object with base and task):
+      # tasklist:
+      #   base: https://<your-camunda-host>/tasklist
+      #   task: https://<your-camunda-host>/tasklist/tasks/:userTaskKey/view
       operate: https://<your-camunda-host>/operate
     exporter:
       apiKey: <your-exporter-api-key>
 
 subscriptions: {}
 ```
+
+:::note
+The `urls.tasklist` field supports two formats:
+
+- **Simple (legacy) format** — a plain URL string (e.g. `https://<your-camunda-host>/tasklist`). Deep links to tasks fall back to `{tasklist-url}/tasklist/{userTaskKey}`.
+- **Extended format** — an object with `base` and `task` fields. The `task` field is a URL template containing a `:userTaskKey` placeholder (e.g. `https://<your-camunda-host>/tasklist/tasks/:userTaskKey/view`). When the app generates deep links to tasks (for example, in Teams notification cards), it replaces `:userTaskKey` with the actual task key. This allows customizing the task URL pattern for environments where the default path doesn't match.
+
+:::
 
 ### Stage values
 
@@ -259,7 +379,7 @@ Ensure your `config.yaml` has the correct PostgreSQL database settings. The `hos
 
 Update your `config.yaml` to point to your Camunda Self-Managed distribution:
 
-- Set `auth.issuer` to your Keycloak realm URL.
+- Set `auth.kind` and the corresponding auth fields for your identity provider (see [Auth configuration](#auth-configuration)).
 - Set each entry in `clusters[].urls` to the correct Camunda service URLs.
 - Set `frontendUrl` and `backendUrl` to your public deployment URL.
 
@@ -294,11 +414,17 @@ Below is a reference of each section in the `config.yaml` file.
 | :---------------- | :---------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `serverPort`      | —                                   | The port the backend server listens on inside the container (default: `8080`).                                                                      |
 | `stage`           | —                                   | Environment stage: `local`, `dev`, `int`, or `prod`.                                                                                                |
-| **auth**          |                                     | Authentication configuration for connecting to your Camunda platform.                                                                               |
+| **auth**          |                                     | Authentication configuration for connecting to your Camunda platform. See [Auth configuration](#auth-configuration).                                |
+|                   | `kind`                              | Identity provider variant: `keycloak` (default) or `entra`. Determines how OIDC endpoints are resolved.                                             |
 |                   | `m2m.clientId` / `m2m.clientSecret` | Machine-to-machine OAuth2 credentials for backend services.                                                                                         |
 |                   | `spa.clientId` / `spa.clientSecret` | Single Page Application OAuth2 credentials for frontend.                                                                                            |
-|                   | `issuer`                            | The OAuth2/OIDC issuer URL (your Keycloak realm URL).                                                                                               |
-|                   | `audience`                          | The OAuth2 audience (typically `camunda-platform`).                                                                                                 |
+|                   | `issuer`                            | The OAuth2/OIDC issuer URL. Required for Keycloak; auto-derived for Entra.                                                                          |
+|                   | `audience`                          | The OAuth2 audience. Required for Keycloak (typically `camunda-platform`); defaults to `spa.clientId` for Entra.                                    |
+|                   | `entra.tenantId`                    | _(Entra only, required)_ The Entra tenant ID.                                                                                                       |
+|                   | `entra.tokenUrl`                    | _(Entra only, optional)_ Token endpoint. Defaults to `https://login.microsoftonline.com/<tenantId>/oauth2/v2.0/token`.                              |
+|                   | `entra.jwksUrl`                     | _(Entra only, optional)_ JWKS endpoint. Defaults to `https://login.microsoftonline.com/<tenantId>/discovery/v2.0/keys`.                             |
+|                   | `entra.scope`                       | _(Entra only, optional)_ OAuth2 scope. Defaults to `openid profile offline_access <spa.clientId>/.default`.                                         |
+|                   | `entra.usernameClaim`               | _(Entra only, optional)_ ID token claim for the user's email. Default: `preferred_username`.                                                        |
 | **db**            |                                     | PostgreSQL database connection settings.                                                                                                            |
 |                   | `username`                          | Database username.                                                                                                                                  |
 |                   | `password`                          | Database password.                                                                                                                                  |
@@ -325,7 +451,9 @@ Below is a reference of each section in the `config.yaml` file.
 |                   | `uuid`                              | Unique identifier for the cluster.                                                                                                                  |
 |                   | `name`                              | Display name for the cluster.                                                                                                                       |
 |                   | `urls.orchestration`                | Zeebe/Orchestration API URL.                                                                                                                        |
-|                   | `urls.tasklist`                     | Tasklist URL.                                                                                                                                       |
+|                   | `urls.tasklist`                     | Tasklist URL (string) or object with `base` and `task`. See note below.                                                                             |
+|                   | `urls.tasklist.base`                | _(Object format only)_ Root Tasklist URL.                                                                                                           |
+|                   | `urls.tasklist.task`                | _(Object format only)_ URL template for deep-linking to a specific task. Must contain `:userTaskKey` placeholder.                                   |
 |                   | `urls.operate`                      | Operate URL.                                                                                                                                        |
 |                   | `exporter.apiKey`                   | API key for the exporter. Must match the key configured in the [orchestration cluster Helm chart](#step-3-configure-the-app-integrations-exporter). |
 | **subscriptions** | —                                   | Subscription configuration (empty object `{}` for Self-Managed).                                                                                    |
