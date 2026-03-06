@@ -239,6 +239,7 @@ c8ctl completion fish > ~/.config/fish/completions/c8ctl.fish
 Fish loads the completion automatically on the next shell start.
 
 </TabItem> 
+</Tabs>
 
 ## Output modes
 
