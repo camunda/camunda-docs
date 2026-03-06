@@ -55,7 +55,7 @@ Store the database password in a Kubernetes secret and reference it. For testing
 
 ### Other parameters
 
-RDBMS supports other configuration options that can be configured in the helm chart `values.yaml` via [extraConfiguration](/self-managed/deployment/helm/configure/application-configs.md). See [RDBMS options](/self-managed/concepts/databases/relational-db/database-configuration).
+RDBMS supports other configuration options that can be configured in the helm chart `values.yaml` via [extraConfiguration](/self-managed/deployment/helm/configure/application-configs.md). See [RDBMS options](/self-managed/concepts/databases/relational-db/configuration.md).
 
 ### Example usage
 
