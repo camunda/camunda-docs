@@ -117,8 +117,6 @@ orchestration:
         secret:
           existingSecret: rdbms-credentials
           existingSecretKey: password
-        # Optional: Liquibase auto-schema creation (default: true)
-        # autoDDL: true
 ```
 
 For full Helm reference, see [RDBMS configuration in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
