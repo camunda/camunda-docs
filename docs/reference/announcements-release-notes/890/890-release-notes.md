@@ -247,7 +247,7 @@ Camunda 8 officially supports running Orchestration Clusters on Amazon Elastic C
 - Build-in storage safety guardrails, such as checks and guidance to prevent unsafe configurations (for example, multiple brokers writing to the same EFS volume).
 - Cluster membership handling offers improved handling of broker restarts and Amazon ECS task scheduling to ensure stable cluster operation.
 
-<p class="link-arrow">[Deploy to Amazon ECS](/docs/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
+<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
 
 #### Configure RocksDB memory per-broker
 
@@ -434,7 +434,7 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 
 A new installation guide covers how you can configure Camunda 8 with relational databases across the Orchestration Cluster and Web Modeler. The guide covers database provisioning, connections and authentication including Aurora IAM, JDBC driver handling, optional schema management with SQL or Liquibase, and backup and restore considerations so teams can deploy faster with fewer errors and aligned best practices.
 
-<p class="link-arrow">[End-to-end RDBMS setup guide](/docs/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md)</p>
+<p class="link-arrow">[End-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md)</p>
 
 #### Manual installation supports RDBMS secondary storage
 
