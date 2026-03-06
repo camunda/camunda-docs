@@ -8,7 +8,7 @@ description: "Scaffold, install, and manage c8ctl plugins to add custom commands
 # Extend `c8ctl` with plugins
 
 :::caution Alpha feature
-`c8ctl` is in **alpha** and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
+`c8ctl` is in alpha and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
 :::
 
 `c8ctl` supports a global plugin system that lets you add custom commands. Plugins are installed globally to a user-specific directory and tracked in a registry file (`plugins.json`).
@@ -203,12 +203,22 @@ Plugins without a `metadata` export still work — their commands appear in the 
 
 ## Command precedence
 
-Built-in commands always take precedence over plugin commands. If a plugin exports a command that shares a name with a built-in command (such as `list` or `deploy`), the built-in version executes.
+Built-in commands take precedence over plugin commands. If a plugin exports a command with the same name as a built-in command (for example, `list` or `deploy`), the built-in command runs.
 
-Choose descriptive, unique names for your plugin commands:
+Use descriptive and unique names for plugin commands.
 
-- ✅ `analyze-process`, `export-data`, `sync-resources`
-- ❌ `list`, `get`, `create`, `deploy`
+Recommended:
+
+- `analyze-process`
+- `export-data`
+- `sync-resources`
+
+Avoid:
+
+- `list`
+- `get`
+- `create`
+- `deploy`
 
 ## Find plugins
 
@@ -216,7 +226,7 @@ Plugins are distributed as regular npm packages. There are two main ways to disc
 
 ### Search the Camunda GitHub organization
 
-Browse the [camunda](https://github.com/camunda) organization on GitHub and search for repositories with `c8ctl` in the name. By convention, plugin repositories are named `c8ctl-plugin-<name>` (for example, `c8ctl-plugin-analyze`), but this is not a hard requirement — any npm package with a `c8ctl-plugin.js` entry point works as a plugin.
+Browse the [Camunda GitHub repositories for `c8ctl` plugins](https://github.com/camunda) organization on GitHub and search for repositories with `c8ctl` in the name. By convention, plugin repositories are named `c8ctl-plugin-<name>` (for example, `c8ctl-plugin-analyze`), but this is not a hard requirement — any npm package with a `c8ctl-plugin.js` entry point works as a plugin.
 
 ### Search the npm registry
 
@@ -234,8 +244,8 @@ c8 load plugin <package-name>
 
 ## Best practices
 
-- **Use unique command names** to avoid conflicts with built-in commands.
-- **Provide descriptions** in `metadata.commands` so users discover your commands in `c8ctl help`.
-- **Keep descriptions concise** — aim for a single line under 60 characters, starting with an imperative verb.
-- **Transpile TypeScript to JavaScript** before publishing. The `c8ctl-plugin.js` entry point in `node_modules` must be JavaScript, because Node.js does not support type stripping in `node_modules`.
-- **Use `createClient()`** from the runtime API to create SDK clients rather than importing the SDK directly. This ensures credentials and tenant resolution follow `c8ctl` conventions.
+- Use unique command names to avoid conflicts with built-in commands.
+- Provide descriptions in `metadata.commands` so users discover your commands in `c8ctl help`.
+- Keep descriptions concise and aim for a single line under 60 characters, starting with an imperative verb.
+- Transpile TypeScript to JavaScript before publishing. The `c8ctl-plugin.js` entry point in `node_modules` must be JavaScript, because Node.js does not support type stripping in `node_modules`.
+- Use `createClient()` from the runtime API to create SDK clients rather than importing the SDK directly. This ensures credentials and tenant resolution follow `c8ctl` conventions.
