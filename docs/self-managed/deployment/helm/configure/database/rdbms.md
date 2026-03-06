@@ -64,6 +64,12 @@ Store the database password in a Kubernetes secret and reference it. For testing
 | `orchestration.data.secondaryStorage.rdbms.history.connectionPool.minimumIdle`       | integer           | `""`    | Minimum idle connections. Default: auto-tuned. |
 | `orchestration.data.secondaryStorage.rdbms.history.connectionPool.connectionTimeout` | ISO-8601 duration | `""`    | Timeout for acquiring a connection.            |
 
+### Search APIs and result limits
+
+| Parameter                                                      | Type    | Default | Description                                                                                                                                                                                                                                                  |
+| -------------------------------------------------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `orchestration.data.secondaryStorage.rdbms.query.maxTotalHits` | integer | `10000` | Maximum result count cap for search APIs. Limits COUNT(\*) queries to improve performance. See [Search APIs and result limits](/self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits.md) for details and performance implications. |
+
 ### Schema and table management
 
 | Parameter                                           | Type    | Default | Description                                |
@@ -125,6 +131,19 @@ Camunda bundles JDBC drivers for some databases. For others, you must supply a c
 - Which drivers are bundled
 - When to supply custom drivers
 - How to load drivers (init containers, custom images, volumes)
+
+## Search APIs and result limits
+
+RDBMS search APIs return a `totalResults` field capped at **10,000** to improve performance. However, actual query performance depends on filter selectivity and database optimization.
+
+Key concepts:
+
+- **Total count cap**: `totalResults` is capped at 10,000 by default (configurable via `maxTotalHits`).
+- **hasMoreTotalItems flag**: Indicates if results exist beyond the cap.
+- **Query optimization**: Apply selective filtering and pagination for better performance.
+- **Database tuning**: Configure PostgreSQL for write-heavy workloads.
+
+**See:** [Search APIs and result limits](/self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits.md) for configuration options, performance trade-offs, optimization best practices, and database-specific tuning.
 
 ## Schema creation and management
 
