@@ -190,9 +190,23 @@ Configuration-based global user task listeners were introduced for Self-Managed 
 
 <!-- https://github.com/camunda/product-hub/issues/3148 -->
 
+You can now use document classification templates to automatically categorize incoming documents by type (for example, invoice, contract, or claim form) using LLM-powered analysis.
+
+- Configure classification templates directly in the UI without writing code.
+- Define an explicit list of expected document types, or use auto-classification to let the LLM suggest document types.
+- Customize the system prompt used for classification to fine-tune results for your organization.
+- Test templates with sample documents across different LLMs to evaluate accuracy before publishing.
+- Classification results are output as structured data, making them immediately usable in your BPMN process for routing and downstream automation.
+
 #### IDP multiple text extraction engines
 
 <!-- https://github.com/camunda/product-hub/issues/3171 -->
+
+You can now choose the text extraction engine on a per-template basis, allowing you to optimize accuracy, performance, and cost for different document types.
+
+- Use lightweight parsing for digitally generated PDFs to reduce processing time and costs.
+- Select a high-accuracy OCR engine for scanned or image-based documents.
+- Bypass text extraction entirely to let multimodal LLMs natively interpret document content.
 
 ### Microsoft Teams app
 
