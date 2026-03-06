@@ -22,7 +22,7 @@ Current published results are based on PostgreSQL benchmarking only.
 ### Baseline setup used in benchmark discussions
 
 - Orchestration cluster: three nodes, three partitions.
-- Orchestration resources: about 3.5 CPU and 2 GB RAM per node.
+- Orchestration resources: 3.5 CPU and 2 GB RAM per node.
 - PostgreSQL: single-node containerized setup, typically 3-6 CPU and 6-8 GB RAM.
 - Retention baseline used in several tests: TTL around one hour.
 
@@ -36,7 +36,7 @@ Overall hardware requirements can be similar across Elasticsearch/OpenSearch-bas
 
 ### Write throughput
 
-- Across tested scenarios, RDBMS write performance was observed at roughly **~70%** of Elasticsearch/OpenSearch write performance.
+- Across tested scenarios, RDBMS write performance was observed at roughly **~70%** of Elasticsearch/OpenSearch write performance with the same hardware setup.
 - In scale tests, write behavior was described as approximately linear with additional cluster capacity.
 
 ### Scenario observations
@@ -45,12 +45,9 @@ Overall hardware requirements can be similar across Elasticsearch/OpenSearch-bas
 - **Typical scenario**: Stable exporter behavior in multi-step flows, with engine pressure becoming visible before exporter pressure in some runs.
 - **Realistic scenario**: Stable exporter behavior in complex business flows, where engine and workload characteristics can dominate end-to-end throughput.
 
-In realistic flows, the engine can become the bottleneck before the exporter.
-
 ### Data availability and cleanup
 
-- Data availability in secondary storage was observed in low-latency ranges during benchmark runs, but depends on workload and infrastructure.
-- History cleanup overhead was generally low in short-retention tests and increased as retained dataset size grew.
+- History cleanup overhead was minimal in short-retention scenarios and did not impact write throughput. With longer retention periods, allocate additional database resources for cleanup operations.
 
 ### Read/query behavior
 
@@ -70,7 +67,7 @@ Recommended mitigation:
 - Add and tune indexes for high-frequency filters used in your environment.
 - Re-evaluate index strategy as data volume and query patterns evolve.
 
-## What this means for users
+## Choosing RDBMS secondary storage
 
 Choose RDBMS secondary storage when:
 
@@ -89,13 +86,3 @@ Prefer Elasticsearch/OpenSearch when:
 - These results are from controlled benchmark scenarios and should not be interpreted as guaranteed production numbers.
 - Results can change as product and exporter optimizations evolve.
 - Always validate final sizing with production-like workload tests.
-
-## Planned benchmark expansion
-
-The following benchmark areas were identified for follow-up publication:
-
-- Direct read-performance comparison against Elasticsearch/OpenSearch for key endpoints.
-- Longer retention (TTL) runs to evaluate read/query degradation over larger datasets.
-- Updated measurements after audit-log and exporter optimizations.
-
-Performance optimizations are ongoing, and this page will be updated as new benchmark results become available.
