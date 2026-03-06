@@ -7,7 +7,7 @@ function preGenerateDocs(config) {
 
 function postGenerateDocs(config) {
   removeDuplicateVersionBadge(
-    `${config.outputDir}/operate-public-api.info.mdx`
+    `${config.outputDir}/operate-api.info.mdx`
   );
 }
 

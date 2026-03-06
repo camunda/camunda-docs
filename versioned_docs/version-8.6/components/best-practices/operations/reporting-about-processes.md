@@ -75,7 +75,7 @@ Historical data can be leveraged via three possible mechanisms:
 
 - **Camunda tools**: Leverage Camunda Operate or Camunda Optimize. This is a very simple approach that works out-of-the-box and should satisfy many requirements already. Camunda Operate focuses on operational use cases ("Where is my process? Why did this fail?") whereas Camunda Optimize provides business intelligence about your processes. Optimize allows you to build reports and dashboards including setting alerts for thresholds.
 
-- **Query API**: Using the public API (currently under development), this has the advantage that you can make use of the history data within your own applications.
+- **Query API**: Using the [Operate API](/apis-tools/operate-api/overview.md), this has the advantage that you can make use of the history data within your own applications.
 
 - Pushing **events**: Pushing Camunda events by using [exporters](/components/zeebe/technical-concepts/architecture.md#exporters). Note that you can only add own exporters in a Self-Managed setting, not in Camunda 8 SaaS. Exporters have the advantage that you can push the data into any infrastructure you have, and possibly even filter or enrich the data in that step.
 
