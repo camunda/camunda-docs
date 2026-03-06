@@ -432,6 +432,8 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 
 A new installation guide covers how you can configure Camunda 8 with relational databases across the Orchestration Cluster and Web Modeler. The guide covers database provisioning, connections and authentication including Aurora IAM, JDBC driver handling, optional schema management with SQL or Liquibase, and backup and restore considerations so teams can deploy faster with fewer errors and aligned best practices.
 
+<p class="link-arrow">[End-to-end RDBMS setup guide](/docs/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md)</p>
+
 #### Manual installation supports RDBMS secondary storage
 
 <!-- https://github.com/camunda/product-hub/issues/2747 -->
