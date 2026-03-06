@@ -183,33 +183,39 @@ Provisioning Camunda 8 onto your Self-Managed Kubernetes cluster might depend on
 However, the following example shows a possible configuration which is close to a cluster of size 1x in Camunda 8 SaaS, which can serve as a starting point for your own sizing.
 
 :::note
-Such a cluster can serve roughly 65 tasks per second as a peak load, and it can store up to 100,000 process instances in Elasticsearch (in-flight and history) before running out of disk-space.
+The benchmark project uses a [realistic process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) with a [realistic payload](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json).
+:::
+
+:::note
+If the payload size of the variable increases, it will affect the Optimize importer rate.
+:::
+
+
+:::note
+Such a cluster can serve roughly 101 tasks per second as a peak load, and it can store up to 100,000 process instances in Elasticsearch (in-flight and history) before running out of disk-space.
 :::
 
 |                                    |                     | request | limit |
-| ---------------------------------- | ------------------- | ------- | ----- |
+|------------------------------------|---------------------|---------|-------|
 | **Orchestration cluster**          |                     |         |       |
 | \# brokers                         | 3                   |         |       |
 | \# partitions                      | 3                   |         |       |
 | replication factor                 | 3                   |         |       |
-|                                    | vCPU \[cores\]      | 1       | 2     |
-|                                    | Mem \[GB\]          | 2       | 3     |
+|                                    | vCPU \[cores\]      | 3       | 3     |
+|                                    | Mem \[GB\]          | 2       | 2     |
 |                                    | Disk \[GB\]         | 32      | 128   |
 | **Connectors**                     |                     |         |       |
 | #                                  | 1                   |         |       |
 |                                    | vCPU \[cores\]      | 0.2     | 0.2   |
 |                                    | Mem \[GB\] limit    | 0.512   | 1     |
 | **Optimize**                       |                     |         |       |
-| #importer                          | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.5     | 0.5   |
-|                                    | Mem \[GB\] limit    | 0.8     | 0.8   |
-| #webapp                            | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 0.5     | 0.5   |
-|                                    | Mem \[GB\] limit    | 0.8     | 0.8   |
+| #                                  | 1                   |         |       |
+|                                    | vCPU \[cores\]      | 0.6     | 2     |
+|                                    | Mem \[GB\] limit    | 1       | 2     |
 | **Elastic**                        |                     |         |       |
-| #statefulset                       | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 1       | 1     |
-|                                    | Mem \[GB\] limit    | 1.5     | 1.5   |
+| #statefulset                       | 3                   |         |       |
+|                                    | vCPU \[cores\]      | 7       | 7     |
+|                                    | Mem \[GB\] limit    | 6       | 8     |
 |                                    | Disk \[GB\] request | 32      | 128   |
 | **Other** (Worker, Analytics, ...) |                     |         |       |
 | #                                  | 1                   |         |       |
