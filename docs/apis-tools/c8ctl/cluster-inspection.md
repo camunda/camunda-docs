@@ -6,7 +6,7 @@ description: "Use c8ctl to list, search, and manage process instances, user task
 ---
 
 :::warning Alpha feature
-`c8ctl` is in **alpha** and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
+`c8ctl` is in alpha and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
 :::
 
 `c8ctl` follows a `<verb> <resource>` command structure. Most resources have short aliases to reduce typing:
