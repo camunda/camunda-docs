@@ -52,17 +52,12 @@ orchestration:
 ```
 
 :::warning
-Increasing `maxTotalHits` significantly improves count accuracy but increases database load, especially for queries with large result sets. Test in your environment before setting values above 10,000.
+Increasing `maxTotalHits` gives accurate counts for larger result sets but increases database load, especially for queries with large result sets. Test in your environment before setting values above 10,000.
 :::
 
 ## Query performance guidance
 
-RDBMS-backed search APIs execute two separate queries:
-
-1. **SELECT** — Fetch the result page (fast, especially with pagination)
-2. **COUNT(\*)** — Compute `totalResults` (cost depends on result selectivity)
-
-To optimize query performance:
+To optimize query performance, use selective filters and pagination:
 
 ### 1. Use selective filters
 
@@ -110,14 +105,6 @@ Rather than requesting exact counts for large result sets:
 - Continue paginating as needed
 
 This avoids unnecessary COUNT(\*) operations on queries that may scan large portions of the table.
-
-## API behavior
-
-RDBMS-backed search APIs behave similarly to Elasticsearch/OpenSearch, with these key differences:
-
-- **Result count**: Capped at `maxTotalHits` (default 10,000; configurable)
-- **hasMoreTotalItems**: Available to indicate when results exceed the cap
-- **Pagination**: Supported via `page` or `searchAfter` parameters
 
 ## Database-specific tuning (PostgreSQL)
 
