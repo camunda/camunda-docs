@@ -1670,6 +1670,7 @@ module.exports = {
               items: [
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
+                "self-managed/deployment/helm/operational-tasks/helm-v4",
               ],
             },
             {

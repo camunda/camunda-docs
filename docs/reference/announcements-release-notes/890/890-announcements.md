@@ -534,6 +534,20 @@ See [Migrate extraConfiguration from 8.8 to 8.9](/self-managed/deployment/helm/c
 </div>
 <div className="release-announcement-content">
 
+#### Helm chart: Helm CLI v4 does not support duplicate environment variable names
+
+Helm v4 enforces that environment variables in a rendered kubernetes manifest must be unique. If your `values.yaml` overrides an environment variable also set by the chart, you might encounter an error. Read more about it in [Helm v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)
+
+</div>
+</div>
+
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Elasticsearch subchart no longer enabled by default
 
 Previously, the Elasticsearch subchart was enabled by default. To use OpenSearch, you would need to disable Elasticsearch and enable OpenSearch.
