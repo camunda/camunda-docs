@@ -5,24 +5,20 @@ sidebar_label: "Development workflows"
 description: "Use c8ctl to deploy resources, auto-redeploy on file changes, manage profiles, and bridge MCP connections for AI assistants."
 ---
 
-# Development workflows
-
-:::caution Alpha feature
-`c8ctl` is in **alpha** and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
+:::warning Alpha feature
+`c8ctl` is in alpha and is not intended for production use. Commands and flags may change between releases. For more information, see [Getting started](getting-started.md).
 :::
 
-`c8ctl` includes commands that support local development and deployment workflows: deploy resources, run processes, watch for changes, manage profiles and sessions, and bridge MCP connections for AI assistants.
+`c8ctl` includes commands that support local development and deployment workflows. You can deploy resources, run processes, watch for changes, manage profiles and sessions, and bridge MCP connections for AI assistants.
 
 :::tip
-Pass `--profile` to any command to run it against a specific cluster without changing the active session:
+Use the `--profile` flag with any command to run it against a specific cluster without changing the active session.
 
 ```bash
 c8 deploy ./process.bpmn --profile=staging
 c8 run ./order.bpmn --profile=prod
 c8 watch --profile=local
 ```
-
-:::
 
 ## Deploy
 
