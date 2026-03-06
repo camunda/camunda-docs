@@ -11,7 +11,7 @@ The Camunda 8.8 release introduces breaking changes for [Operate and Tasklist](.
 :::
 
 :::note
-If the Camunda applications cannot access Elasticsearch with cluster-level privileges, run the backup of Operate and Tasklist indices (steps 2 and 4 from the [backup](./backup.md) procedure) as a standalone application separate from the main application. 
+If the Camunda applications cannot access Elasticsearch with cluster-level privileges, run the backup of Operate and Tasklist indices (steps 2 and 4 from the [backup](./backup.md) procedure) as a standalone application separate from the main application.
 For details, see the **standalone backup application** for [Elasticsearch](/self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges.md#standalone-backup-application) or [OpenSearch](/self-managed/concepts/databases/elasticsearch/opensearch-without-cluster-privileges.md#standalone-backup-application).
 :::
 
@@ -74,10 +74,10 @@ To ensure a consistent backup, you must follow the process outlined in this guid
 
 Following the documented procedure results in a hot backup, meaning that:
 
-- Zeebe continues to process and export data.
+- Zeebe continues to process and export data. During the backup window, exporting runs in a soft-pause mode: Zeebe keeps exporting records but temporarily does not advance the exporter position, which prevents log compaction and can increase broker disk usage until exporting is resumed.
 - Web Applications (Operate, Tasklist), and Optimize remain fully operational during the backup process.
 
-This ensures high availability while preserving the integrity of the data snapshot.
+This ensures high availability while preserving the integrity of the data snapshot. For details on runtime behavior and disk space implications, see [Behavior during a Zeebe hot backup](./backup.md).
 
 ## Prerequisites
 
