@@ -509,9 +509,9 @@ public void handleFoo(@CustomHeaders Map<String, String> headers) {
 This will not have any effect on the variable fetching behavior.
 :::
 
-#### Using `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey`
+#### Using `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey`, `@ProcessDefinitionKey` and `@RootProcessInstanceKey`
 
-You can use the `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey` annotation for a `String`, `long` or `Long` parameter to retrieve the according key for a job:
+You can use the `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey`, `@ProcessDefinitionKey` and `@RootProcessInstanceKey` annotation for a `String`, `long` or `Long` parameter to retrieve the according key for a job:
 
 ```java
 @JobWorker
@@ -519,7 +519,8 @@ public void handleFoo(
   @ProcessInstanceKey String processInstanceKey,
   @ElementInstanceKey long elementInstanceKey,
   @JobKey Long jobKey,
-  @ProcessDefinitionKey String processDefinitionKey) {
+  @ProcessDefinitionKey String processDefinitionKey,
+  @RootProcessInstanceKey long rootProcessInstanceKey) {
   // do whatever you need to do
 }
 ```
