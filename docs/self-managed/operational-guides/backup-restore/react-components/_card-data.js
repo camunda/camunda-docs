@@ -4,27 +4,52 @@ import IconGear from "../assets/icon-prereqs.png";
 import IconCloud from "../assets/icon-backup.png";
 import IconRepeat from "../assets/icon-restore.png";
 
-// Backup and Restore overview cards data
-export const overviewCards = [
+// Elasticsearch / OpenSearch cards
+export const esCards = [
   {
-    link: "#prerequisites",
+    link: "../elasticsearch/es-backup#elasticsearch--opensearch-prerequisites",
     title: "Prerequisites",
     image: IconGear,
     description:
-      "Set up a snapshot repository in the secondary datastore and configure component backup storage.",
+      "Set up a snapshot repository in Elasticsearch or OpenSearch and configure component backup storage.",
   },
   {
-    link: "../backup",
+    link: "../elasticsearch/es-backup",
     title: "Create a backup",
     image: IconCloud,
     description:
-      "Create a backup. This involves backing up the WebApps and the Zeebe Cluster.",
+      "Create a backup using Elasticsearch or OpenSearch as secondary storage.",
   },
   {
-    link: "../restore",
+    link: "../elasticsearch/es-restore",
     title: "Restore a backup",
     image: IconRepeat,
     description:
-      "Restore a backup. This involves restoring Elasticsearch/OpenSearch and the Zeebe Cluster.",
+      "Restore a backup using Elasticsearch or OpenSearch as secondary storage.",
+  },
+];
+
+// Relational database (RDBMS) cards
+export const rdbmsCards = [
+  {
+    link: "../rdbms/rdbms-backup#prerequisites",
+    title: "Prerequisites",
+    image: IconGear,
+    description:
+      "Ensure database backup tooling is available and configure Zeebe backup storage.",
+  },
+  {
+    link: "../rdbms/rdbms-backup",
+    title: "Create a backup",
+    image: IconCloud,
+    description:
+      "Create a backup using a relational database as secondary storage.",
+  },
+  {
+    link: "../rdbms/rdbms-restore",
+    title: "Restore a backup",
+    image: IconRepeat,
+    description:
+      "Restore a backup using a relational database as secondary storage.",
   },
 ];

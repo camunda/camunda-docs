@@ -575,7 +575,7 @@ The general [backup and restore procedure](/self-managed/operational-guides/back
 
 The backup process, itself, doesn't require changes.
 
-Restoring, however, introduces additional complexity because each broker's data directory (persistent volume) must be restored in a coordinated manner. To support this, an init container is introduced as part of the Orchestration Cluster, responsible for restoring the data directory for the broker running in that task. This mechanism corresponds to the step of [restoring the Zeebe Cluster](/self-managed/operational-guides/backup-restore/restore.md#restore-zeebe-cluster).
+Restoring, however, introduces additional complexity because each broker's data directory (persistent volume) must be restored in a coordinated manner. To support this, an init container is introduced as part of the Orchestration Cluster, responsible for restoring the data directory for the broker running in that task. This mechanism corresponds to the step of [restoring the Zeebe Cluster](/self-managed/operational-guides/backup-restore/elasticsearch/restore.md#restore-zeebe-cluster).
 
 This approach is implemented in the example module. Provide the `restore_backup_id` parameter to enable it.
 
