@@ -61,6 +61,13 @@ These secrets are used by Camunda applications and external integrations. Config
 | **External Elasticsearch Auth**           | `global.elasticsearch.auth.secret`                  | External | Password for external Elasticsearch authentication (basic auth)          |
 | **External OpenSearch Auth**              | `global.opensearch.auth.secret`                     | External | Password for external OpenSearch authentication (basic auth)             |
 | **RDBMS Auth**                            | `orchestration.data.secondaryStorage.rdbms.secret`  | External | Password for external RDBMS authentication (basic auth)                  |
+| **External Elasticsearch Auth (deprecated)**    | `global.elasticsearch.auth.secret`                         | External   | Password for external Elasticsearch authentication (basic auth)          |
+| **External Elasticsearch Auth (Orchestration)** | `orchestration.data.secondaryStorage.elasticsearch.secret` | External   | Password for external Elasticsearch authentication (basic auth)          |
+| **External OpenSearch Auth (deprecated)**       | `global.opensearch.auth.secret`                            | External   | Password for external OpenSearch authentication (basic auth)             |
+| **External OpenSearch Auth (Orchestration)**    | `orchestration.data.secondaryStorage.opensearch.secret`    | External   | Password for external OpenSearch authentication (basic auth)             |
+| **External Elasticsearch Auth (Optimize)**      | `optimize.database.elasticsearch.auth.secret`              | External   | Password for external Elasticsearch authentication (basic auth)          |
+| **External OpenSearch Auth (Optimize)**         | `optimize.database.opensearch.auth.secret`                 | External   | Password for external OpenSearch authentication (basic auth)             |
+| **RDBMS Auth (Orchestration)**                  | `orchestration.data.secondaryStorage.rdbms.secret`         | External   | Password for external RDBMS authentication                               |
 
 ### Secrets using Bitnami subchart patterns
 
@@ -402,6 +409,17 @@ stringData:
   # Only if "postgresql.enabled: true".
   webmodeler-postgresql-admin-password: "${WEB_MODELER_POSTGRESQL_ADMIN_SECRET}"
   webmodeler-postgresql-user-password: "${WEB_MODELER_POSTGRESQL_USER_SECRET}"
+
+  # Only if connecting to elasticsearch
+  orchestration-elasticsearch-password: "${ORCHESTRATION_ELASTICSEARCH_SECRET}"
+  optimize-elasticsearch-password: "${OPTIMIZE_ELASTICSEARCH_SECRET}"
+
+  # Only if connecting to opensearch
+  orchestration-opensearch-password: "${ORCHESTRATION_OPENSEARCH_SECRET}"
+  optimize-opensearch-password: "${OPTIMIZE_OPENSEARCH_SECRET}"
+
+  # Only if connecting to an RDBMS
+  orchestration-rdbms-password: "${ORCHESTRATION_RDBMS_SECRET}"
 EOF
 ```
 
@@ -460,12 +478,40 @@ connectors:
           existingSecretKey: "identity-connectors-client-token"
 
 orchestration:
+  data:
+    secondaryStorage:
+      rdbms:
+        secret:
+          existingSecret: "camunda-credentials"
+          existingSecretKey: "orchestration-rdbms-password"
+      elasticsearch:
+        auth:
+          secret:
+            existingSecret: "camunda-credentials"
+            existingSecretKey: "orchestration-elasticsearch-password"
+      opensearch:
+        auth:
+          secret:
+            existingSecret: "camunda-credentials"
+            existingSecretKey: "orchestration-opensearch-password"
   security:
     authentication:
       oidc:
         secret:
           existingSecret: "camunda-credentials"
           existingSecretKey: "identity-orchestration-client-token"
+optimize:
+  database:
+    elasticsearch:
+      auth:
+        secret:
+          existingSecret: "camunda-credentials"
+          existingSecretKey: "optimize-elasticsearch-password"
+    opensearch:
+      auth:
+        secret:
+          existingSecret: "camunda-credentials"
+          existingSecretKey: "optimize-opensearch-password"
 ```
 
 Then upgrade your deployment via:
