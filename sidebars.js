@@ -1754,15 +1754,13 @@ module.exports = {
             "self-managed/deployment/docker/docker",
             {
               type: "category",
-              label: "Cloud providers",
+              label: "Amazon ECS",
+              link: {
+                type: "doc",
+                id: "self-managed/deployment/containers/cloud-providers/amazon/index",
+              },
               items: [
-                {
-                  type: "category",
-                  label: "Amazon",
-                  items: [
-                    "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
-                  ],
-                },
+                "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
               ],
             },
           ],
