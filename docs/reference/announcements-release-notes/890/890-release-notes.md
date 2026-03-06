@@ -247,6 +247,8 @@ Camunda 8 officially supports running Orchestration Clusters on Amazon Elastic C
 - Build-in storage safety guardrails, such as checks and guidance to prevent unsafe configurations (for example, multiple brokers writing to the same EFS volume).
 - Cluster membership handling offers improved handling of broker restarts and Amazon ECS task scheduling to ensure stable cluster operation.
 
+<p class="link-arrow">[Deploy to Amazon ECS](/docs/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
+
 #### Configure RocksDB memory per-broker
 
 <!-- https://github.com/camunda/product-hub/issues/3304 -->
