@@ -270,6 +270,10 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
 
 This will deploy Camunda 8 with Bitnami secure images, recommended for secure and stable production environments.
 
+:::info
+This command references `values-enterprise.yaml` from the `main` branch, which always contains the latest tested image versions. For details on image versioning and how to pin to a specific chart release, see [Install Bitnami enterprise images](/self-managed/setup/guides/install-bitnami-enterprise-images.md).
+:::
+
 ### Accessing Camunda services
 
 By default, Camunda services deployed in a cluster are not accessible from outside the cluster. However, you can choose from several methods to connect to these services:

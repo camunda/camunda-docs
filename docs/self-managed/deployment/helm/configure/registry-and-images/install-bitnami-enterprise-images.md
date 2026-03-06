@@ -133,6 +133,20 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
 
 This deploys Camunda with Bitnami Premium images, recommended for secure, stable environments when using Bitnami subcharts.
 
+:::info Image versions: `main` branch vs chart release
+This command references `values-enterprise.yaml` from the **`main` branch**, which always contains the **latest tested image versions**. These versions may be newer than the ones bundled with a specific Helm chart release (for example, Elasticsearch `8.19.11` on `main` vs `8.19.9` in chart release `12.7.6`).
+
+This is **intentional and recommended**: using the latest images ensures you benefit from the most recent security patches and bug fixes.
+
+All dependency versions listed in [supported environments](/reference/supported-environments.md#component-requirements) are supported. If you need to use the exact image versions from a specific chart release, reference the release tag instead of `main`:
+
+```shell
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
+  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/camunda-platform-8.9-$HELM_CHART_VERSION/charts/camunda-platform-8.9/values-enterprise.yaml
+```
+
+:::
+
 ## Understanding CVEs in Bitnami images
 
 Working with Bitnami images requires understanding CVE (Common Vulnerabilities and Exposures) reporting and how to interpret scan results.
