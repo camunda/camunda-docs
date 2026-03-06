@@ -27,7 +27,7 @@ The migration covers all Bitnami-managed infrastructure components deployed as p
 | Bitnami PostgreSQL (Identity)    | User data, authorizations                  | `pg_dump` / `pg_restore`                  |
 | Bitnami PostgreSQL (Keycloak)    | Realms, users, clients                     | `pg_dump` / `pg_restore`                  |
 | Bitnami PostgreSQL (Web Modeler) | Projects, diagrams                         | `pg_dump` / `pg_restore`                  |
-| Bitnami Elasticsearch            | Zeebe, Operate, Tasklist, Optimize indices | Elasticsearch Snapshot API                |
+| Bitnami Elasticsearch            | Zeebe, Operate, Tasklist, Optimize indices | Reindex from remote (`_reindex` API)      |
 | Bitnami Keycloak (StatefulSet)   | Migrated via PostgreSQL data               | Keycloak Operator CR replaces StatefulSet |
 
 :::info Camunda core components are not affected
@@ -69,7 +69,7 @@ The migration follows a four-phase approach designed to minimize downtime:
 | 10–50 GB    | ~15–30 minutes     |
 | > 50 GB     | 30+ minutes        |
 
-The main downtime driver is the PostgreSQL restore (`pg_restore`) and Elasticsearch snapshot restore duration.
+The main downtime driver is the PostgreSQL restore (`pg_restore`) and Elasticsearch reindex duration.
 
 ## Choose your migration target
 

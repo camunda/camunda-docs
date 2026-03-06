@@ -54,13 +54,19 @@ generic/kubernetes/
 ├── operator-based/                  # Reference architecture (reused by migration)
 │   ├── postgresql/
 │   │   ├── deploy.sh               #   CNPG operator + cluster deployment
-│   │   └── postgresql-clusters.yml #   ★ CUSTOMIZE: PG cluster specs
+│   │   ├── set-secrets.sh          #   PostgreSQL secret management
+│   │   ├── postgresql-clusters.yml #   ★ CUSTOMIZE: PG cluster specs
+│   │   ├── camunda-identity-values.yml
+│   │   └── camunda-webmodeler-values.yml
 │   ├── elasticsearch/
 │   │   ├── deploy.sh               #   ECK operator + cluster deployment
-│   │   └── elasticsearch-cluster.yml
+│   │   ├── elasticsearch-cluster.yml #   ★ CUSTOMIZE: ES cluster specs
+│   │   └── camunda-elastic-values.yml
 │   └── keycloak/
 │       ├── deploy.sh               #   Keycloak operator + CR deployment
-│       └── keycloak-instance-*.yml #   ★ CUSTOMIZE: Keycloak CR specs
+│       ├── keycloak-instance-*.yml #   ★ CUSTOMIZE: Keycloak CR specs
+│       ├── camunda-keycloak-domain-values.yml
+│       └── camunda-keycloak-no-domain-values.yml
 │
 └── migration/                       # Migration scripts
     ├── env.sh                       # Configuration variables
@@ -74,11 +80,10 @@ generic/kubernetes/
     ├── jobs/                        # Kubernetes Job templates
     │   ├── pg-backup.job.yml
     │   ├── pg-restore.job.yml
-    │   ├── es-backup.job.yml
-    │   └── es-restore.job.yml
+    │   ├── es-backup.job.yml        #   ES health verification
+    │   └── es-restore.job.yml       #   ES reindex-from-remote restore
     └── manifests/
-        ├── backup-pvc.yml           # Shared backup PVC
-        └── eck-cluster.yml          # ECK cluster with snapshot repo support
+        └── backup-pvc.yml           # Shared backup PVC
 ```
 
 ## Step 1: Configure the migration
@@ -132,21 +137,22 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ### Elasticsearch (ECK)
 
-The migration uses a dedicated ECK cluster manifest with snapshot repository support (`path.repo`) for data transfer. Review `migration/manifests/eck-cluster.yml`:
+The migration patches the reference ECK cluster manifest from `operator-based/elasticsearch/elasticsearch-cluster.yml` at runtime to add `reindex.remote.whitelist` support for data transfer via the `_reindex` API. Review the base manifest:
 
 - Node count
 - Storage size (must be >= your current Bitnami ES PVC size)
 - Resource requests and limits
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/manifests/eck-cluster.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
 ```
 
 ### Keycloak
 
 Review the Keycloak Custom Resource in `operator-based/keycloak/`. Choose the appropriate variant:
 
-- `keycloak-instance-domain.yml` — if you have a domain configured
+- `keycloak-instance-domain-nginx.yml` — if you have a domain with nginx Ingress
+- `keycloak-instance-domain-openshift.yml` — for OpenShift deployments with Routes
 - `keycloak-instance-no-domain.yml` — for port-forward setups
 
 Key settings: replicas, resource limits, hostname configuration.
@@ -168,7 +174,7 @@ What happens:
 1. The script displays a customization warning and asks for confirmation.
 2. It validates target resource allocations (CPU, memory, PVC sizes) against your current Bitnami StatefulSets.
 3. It installs **CloudNativePG operator** and creates PostgreSQL clusters for each component.
-4. It installs **ECK operator** and creates an Elasticsearch cluster with snapshot repository support.
+4. It installs **ECK operator** and creates an Elasticsearch cluster with `reindex.remote.whitelist` configured for data migration via the `_reindex` API.
 5. It installs **Keycloak Operator** and creates the Keycloak Custom Resource.
 
 All targets are created empty — no traffic is routed to them yet.
@@ -192,7 +198,7 @@ bash 2-backup.sh
 What happens:
 
 1. **PostgreSQL**: A `pg_dump` Kubernetes Job is created for each component (Identity, Keycloak, Web Modeler).
-2. **Elasticsearch**: An Elasticsearch snapshot is created using the Snapshot API.
+2. **Elasticsearch**: A verification job runs to check source ES health and list all Camunda indices to be migrated.
 3. All backup data is stored on a shared Persistent Volume Claim (PVC).
 
 The PostgreSQL backup job template:
@@ -201,7 +207,7 @@ The PostgreSQL backup job template:
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/pg-backup.job.yml
 ```
 
-The Elasticsearch backup job template:
+The Elasticsearch verification job template:
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/es-backup.job.yml
@@ -228,8 +234,9 @@ The cutover performs the following steps:
 3. **Final backup** — consistent backup with no active connections to ensure data integrity.
 4. **Restore** data to the new operator-managed targets:
    - `pg_restore` to CNPG clusters for each PostgreSQL database.
-   - Elasticsearch snapshot restore to the ECK cluster.
-5. **Helm upgrade** — reconfigures Camunda to use the new backends and restarts all components.
+   - Elasticsearch reindex from remote — indices are copied from the source Bitnami ES to the ECK cluster using the `_reindex` API. The source ES remains running during this step.
+5. **Sync Keycloak admin credentials** — copies the restored admin password to the Keycloak Operator secret so Keycloak and Identity stay in sync.
+6. **Helm upgrade** — reconfigures Camunda to use the new backends and restarts all components.
 
 The PostgreSQL restore job template:
 
@@ -237,7 +244,7 @@ The PostgreSQL restore job template:
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/pg-restore.job.yml
 ```
 
-The Elasticsearch restore job template:
+The Elasticsearch reindex-from-remote restore job template:
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/es-restore.job.yml
@@ -372,8 +379,12 @@ kubectl get pvc -n ${NAMESPACE} | grep -E "postgresql|elasticsearch"
 3. **Check cluster capacity** — During Phases 1–2, both old and new infrastructure run simultaneously, requiring additional CPU, memory, and storage.
 4. **Backup your Helm values** — Done automatically in Phase 3, but consider an extra manual backup with `helm get values camunda -n camunda > backup-values.yaml`.
 5. **Monitor resource quotas** — CNPG and ECK clusters consume additional resources. Ensure your namespace quotas and node capacity allow for the temporary duplication.
-6. **Elasticsearch `path.repo`** — The source Bitnami Elasticsearch must support filesystem snapshots. If it doesn't, you may need to patch the StatefulSet to mount the backup PVC and configure `path.repo`.
+6. **Elasticsearch `reindex.remote.whitelist`** — The target ECK cluster must have `reindex.remote.whitelist` configured to allow pulling data from the source Bitnami Elasticsearch via the `_reindex` API. The migration scripts patch this automatically.
 7. **DNS TTL** — If using a domain for Keycloak, ensure DNS TTL is low before cutover to minimize propagation delay.
+
+:::warning IRSA / IAM-based authentication not supported
+The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or OpenSearch with IAM auth require a custom migration approach.
+:::
 
 ## Troubleshooting
 
@@ -402,15 +413,17 @@ When restoring to CNPG, the `pg_restore` command uses `--no-owner --no-privilege
 kubectl exec -it <cnpg-primary-pod> -n ${NAMESPACE} -- psql -U postgres -c "\\du"
 ```
 
-### Elasticsearch snapshot fails
+### Elasticsearch reindex fails
 
-Ensure the source Bitnami Elasticsearch has `path.repo` configured and the backup PVC is mounted. You may need to patch the StatefulSet:
+The ES restore uses the `_reindex` API to pull data from the source Bitnami Elasticsearch to the target ECK cluster. Both clusters must be reachable within the same namespace. Check that the source ES is still running and accessible:
 
 ```bash
-# Check if path.repo is configured
-kubectl exec -it <es-pod> -n ${NAMESPACE} -- \
-  curl -s localhost:9200/_cluster/settings?include_defaults=true | jq '.defaults.path.repo'
+# Check if source ES is reachable from the target
+kubectl exec -it <eck-pod> -n ${NAMESPACE} -- \
+  curl -s http://${CAMUNDA_RELEASE_NAME}-elasticsearch:9200/_cluster/health
 ```
+
+If the reindex fails for specific indices, check the job logs for mapping conflicts or timeout errors. You can delete the problematic indices on the target and re-run Phase 3.
 
 ### Migration status check
 

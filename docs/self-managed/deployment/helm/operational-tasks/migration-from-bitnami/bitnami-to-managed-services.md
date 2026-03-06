@@ -34,6 +34,10 @@ In addition to the [general prerequisites](./index.md#prerequisites-all-paths), 
 - Ensure network connectivity between your Kubernetes cluster and the managed services
 - Have credentials stored as Kubernetes Secrets in the Camunda namespace
 
+:::warning IRSA / IAM-based authentication not supported
+The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or OpenSearch with IAM auth require a custom migration approach.
+:::
+
 ## Clone the deployment references repository
 
 ```bash
@@ -318,7 +322,7 @@ For PostgreSQL, `pg_restore` runs against the managed PostgreSQL endpoints inste
 #### Elasticsearch data migration for managed services
 
 :::warning Manual Elasticsearch data migration
-Automated Elasticsearch data migration is **not supported** for external targets. Filesystem snapshots require shared storage with the Elasticsearch process, which is not available for managed services.
+Automated Elasticsearch data migration is **not supported** for external targets. The automated migration uses the `_reindex` API which requires both source and target Elasticsearch clusters to be reachable within the same Kubernetes namespace, which is not possible with managed services.
 :::
 
 For Elasticsearch/OpenSearch data migration to managed services, you have several options:
