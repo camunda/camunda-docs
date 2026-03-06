@@ -92,10 +92,14 @@ kubectl logs <pod-name> | grep -i liquibase
 
 ```yaml
 orchestration:
-  data:
-    secondaryStorage:
-      rdbms:
-        autoDDL: true # Confirm this is set
+  extraConfiguration:
+    - file: "manual-schema-management.yaml"
+      content: |
+        camunda:
+          data:
+            secondary-storage:
+              rdbms:
+                auto-ddl: false # Confirm this is set
 ```
 
 3. Test database user permissions (see [Schema management](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#database-user-permissions)).
