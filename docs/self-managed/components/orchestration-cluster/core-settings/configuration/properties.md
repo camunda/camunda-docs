@@ -51,6 +51,10 @@ import Licensing from './partials/\_licensing.md'
 
 <Licensing />
 
+import ProcessInstanceCreation from './partials/\_process-instance-creation.md'
+
+<ProcessInstanceCreation />
+
 import Monitoring from './partials/\_monitoring.md'
 
 <Tabs>

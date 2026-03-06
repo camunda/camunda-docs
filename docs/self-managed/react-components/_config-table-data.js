@@ -1739,6 +1739,13 @@ export const configs = [
     types: ["Direct mapping"],
     area: ["Monitoring"],
   },
+  // Section: Process instance creation
+  {
+    name: "camunda.process-instance-creation.business-id-uniqueness-enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Process instance creation"],
+  },
   // Section: Processing
   {
     name: "camunda.processing.max-commands-in-batch",
