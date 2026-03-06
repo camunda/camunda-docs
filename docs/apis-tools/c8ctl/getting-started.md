@@ -5,6 +5,9 @@ sidebar_label: "Getting started"
 description: "Install and configure c8ctl, the Camunda 8 CLI for inspecting clusters, deploying resources, and managing process automation from the terminal."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 :::warning Alpha feature
 `c8ctl` is in alpha and is not intended for production use. APIs, commands, and flags may change without notice between releases. For more information on alpha features, see [alpha features](/components/early-access/alpha/alpha-features.md). Report issues and request features in the [`c8ctl` GitHub repository](https://github.com/camunda/c8ctl).
 :::
@@ -218,7 +221,7 @@ echo 'source ~/.c8ctl-completion.bash' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-</TabItem> 
+</TabItem>
 
 <TabItem value="zsh" label="Zsh">
 
@@ -228,7 +231,7 @@ echo 'source ~/.c8ctl-completion.zsh' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-</TabItem> 
+</TabItem>
 
 <TabItem value="fish" label="Fish">
 
