@@ -110,12 +110,20 @@ orchestration:
         secret:
           existingSecret: camunda-db-secret
           existingSecretKey: db-password
-        # Optional: Tune for your workload
-        flushInterval: PT1S
-        queueSize: 5000
-        # Optional: Configure history retention
-        history:
-          defaultHistoryTTL: P30D
+  extraConfiguration:
+    - file: "flush-interval.yaml"
+      content: |
+        camunda:
+          data:
+            secondary-storage:
+              rdbms:
+                # Optional: Tune for your workload
+                flush-interval: PT1S # More frequent flushes
+                queue-size: 5000 # Larger queue for buffering
+                queue-memory-limit: 50 # Increase if needed
+                # Optional: Configure history retention
+                history:
+                  default-history-ttl: P30D
 
 # Disable default Elasticsearch subchart
 elasticsearch:
