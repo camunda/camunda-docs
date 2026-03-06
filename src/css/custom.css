@@ -864,6 +864,10 @@ h3 .badge:nth-of-type(1) {
   margin-top: 1rem;
 }
 
+.release + h4 {
+  margin-top: 0.5rem;
+}
+
 .badge--platform {
   background-color: #fc5d0d;
   color: #ffffff;
