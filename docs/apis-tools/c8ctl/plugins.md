@@ -5,9 +5,7 @@ sidebar_label: "Plugins"
 description: "Scaffold, install, and manage c8ctl plugins to add custom commands to the Camunda 8 CLI."
 ---
 
-# Extend `c8ctl` with plugins
-
-:::caution Alpha feature
+:::warning Alpha feature
 `c8ctl` is in alpha and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
 :::
 
@@ -226,7 +224,7 @@ Plugins are distributed as regular npm packages. There are two main ways to disc
 
 ### Search the Camunda GitHub organization
 
-Browse the [Camunda GitHub repositories for `c8ctl` plugins](https://github.com/camunda) organization on GitHub and search for repositories with `c8ctl` in the name. By convention, plugin repositories are named `c8ctl-plugin-<name>` (for example, `c8ctl-plugin-analyze`), but this is not a hard requirement — any npm package with a `c8ctl-plugin.js` entry point works as a plugin.
+Browse the [Camunda GitHub organization](https://github.com/camunda) and search for repositories with `c8ctl` in the name. By convention, plugin repositories are named `c8ctl-plugin-<name>` (for example, `c8ctl-plugin-analyze`), but this is not a hard requirement — any npm package with a `c8ctl-plugin.js` entry point works as a plugin.
 
 ### Search the npm registry
 
