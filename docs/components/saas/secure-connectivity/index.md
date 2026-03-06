@@ -6,17 +6,21 @@ description: Connect to Camunda 8 SaaS Orchestration clusters from your AWS VPC 
 
 Secure connectivity allows you to connect to Camunda 8 SaaS Orchestration clusters from your AWS Virtual Private Cloud (VPC) using AWS PrivateLink.
 
-When enabled, inbound traffic from your AWS VPC to a cluster is routed over private AWS networking rather than the public internet.
+When enabled, traffic from your AWS VPC to an orchestration cluster is routed over private AWS networking rather than the public internet.
 
 Secure connectivity:
 
 - Applies per cluster.
 - Is available only for AWS-hosted Orchestration clusters.
 - Supports inbound connectivity only. It enables private access from your AWS VPC to Camunda. It does not provide outbound private connectivity from Camunda to your services.
-- Adds a private connectivity path. Public endpoints remain enabled in 8.9.
+- Adds a private connectivity path. Public endpoints remain enabled.
 - Is available to Enterprise customers.
 
 ## How it works
+
+![AWS PrivateLink architecture](./img/aws-privatelink-diagram.jpg)
+
+Secure connectivity uses AWS PrivateLink to establish a private network path between your AWS VPC and the Camunda-managed cluster infrastructure.
 
 When you enable secure connectivity for a cluster:
 
@@ -24,7 +28,7 @@ When you enable secure connectivity for a cluster:
 - You create one or more VPC interface endpoints in your AWS account that connect to the endpoint service.
 - Traffic from resources in your VPC (for example, job workers or inbound connectors) is routed privately to the cluster.
 
-Each cluster has its own VPC endpoint service and dedicated networking components. Access to the cluster gateway is restricted to the cluster’s Kubernetes namespace.
+Each cluster has its own VPC endpoint service and dedicated networking components. Access to the orchestration cluster is handled through dedicated load balancing and API gateway components.
 
 Secure connectivity relies on standard AWS PrivateLink functionality. For an overview of AWS PrivateLink concepts and terminology, see [the AWS documentation](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html).
 
@@ -33,9 +37,9 @@ Secure connectivity relies on standard AWS PrivateLink functionality. For an ove
 At a high level:
 
 1. Enable secure connectivity for a cluster in Console.
-2. Review the VPC endpoint service details provided by Camunda.
-3. Create one or more VPC interface endpoints in your AWS account.
-4. Configure appropriate security groups and optional private DNS.
+2. Review the VPC endpoint service details provided by Camunda (for example, service name, service type, region, and private DNS name).
+3. Create one or more VPC interface endpoints in your AWS account and configure the required security groups.
+4. Optionally configure private DNS for the endpoint connection in AWS. Enabling private DNS provides a seamless HTTPS experience.
 5. Test connectivity from resources inside your VPC.
 
 Camunda owns and operates the VPC endpoint service and the associated cluster-side infrastructure.
@@ -76,9 +80,9 @@ The following limits apply:
 
 Contact Camunda support if you require higher limits.
 
-## Supported connectivity modes (8.9)
+## Supported connectivity modes
 
-In 8.9, the following combinations are supported:
+The following combinations are supported:
 
 | Private connectivity | Public connectivity | Supported |
 | -------------------- | ------------------- | --------- |
@@ -87,6 +91,15 @@ In 8.9, the following combinations are supported:
 | Enabled              | Disabled            | No        |
 
 Private-only connectivity is not supported in 8.9.
+
+## Public and private connectivity
+
+When secure connectivity is enabled, public connectivity remains available.
+
+- Orchestration cluster components like Operate, Tasklist, and Admin can still be accessed using their public URLs.
+- When creating client credentials for a cluster, you can select the connectivity type to use:
+  - **Public connectivity**, which uses the public hostnames shown for the credentials.
+  - **Private connectivity**, which requires replacing the `{PRIVATE_DNS}` placeholder with the private DNS hostname associated with your VPC endpoint.
 
 ## What secure connectivity does not change
 

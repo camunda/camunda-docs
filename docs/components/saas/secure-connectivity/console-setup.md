@@ -26,7 +26,7 @@ On the AWS side, you must have:
 - Permission to create VPC interface endpoints.
 - Appropriate security group configuration.
 
-For AWS configuration details, see the AWS PrivateLink documentation.
+For instructions on creating a VPC interface endpoint, see the [AWS documentation on configuring an interface VPC endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/create-interface-endpoint.html).
 
 ## Enable secure connectivity for a cluster
 
@@ -37,12 +37,20 @@ For AWS configuration details, see the AWS PrivateLink documentation.
 
 ### Allowed principals
 
-1. In **Principal ARN**, enter the ARN of an AWS principal that should be allowed to connect.
+1. In **Principal ARN**, enter the ARN of an AWS principal that should be allowed to connect. For supported principal types, see the [AWS documentation on configuring endpoint service permissions](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html#add-remove-permissions).
 2. Select **Add principal**.
 3. Repeat for additional principals as needed.
 4. Select **Next**.
 
+Validation requirements for principal ARNs are described in [validation and activation requirements](#validation-and-activation-requirements).
+
 ### Supported regions
+
+By default, the AWS region where the orchestration cluster is located is preselected.  
+You can remove this region or add additional regions if needed.
+
+Adding additional regions allows cross-region VPC endpoint connections.  
+Cross-region connectivity may increase network latency and incur additional AWS charges.
 
 1. Review the cluster’s AWS region (pre-selected).
 2. Optionally add additional regions to allow cross-region endpoint connections.
@@ -52,7 +60,7 @@ After activation, Console provisions a VPC endpoint service for the cluster and 
 
 ## Validation and activation requirements
 
-When activating the PrivateLink endpoint service:
+When configuring and activating the PrivateLink endpoint service, Console validates the provided values during each step:
 
 - At least one valid AWS principal ARN must be provided.
 - Principal ARNs must follow a valid AWS ARN format.
@@ -68,31 +76,6 @@ After selecting **Activate service**, Console provisions the VPC endpoint servic
 The service status is displayed in the **Service details** section. Provisioning may take several minutes.
 
 During provisioning, the endpoint service is not available for new VPC endpoint connections.
-
-## Manage allowed principals and regions
-
-After activation, you can modify the configuration from the **Private networking** tab.
-
-In the **Service details** section:
-
-- Select the edit icon next to **Allowed principals** to add or remove AWS principal ARNs.
-- Select the edit icon next to **Supported regions** to add or remove regions.
-
-Changes apply to new VPC endpoint connection attempts.
-
-Removing a previously allowed principal does not invalidate existing VPC endpoint connections.
-
-### Endpoint connection approval
-
-VPC endpoint connections are automatically approved when the AWS principal creating the interface endpoint is included in the **Allowed principals** list.
-
-You don’t need to manually approve endpoint connections.
-
-### Removing supported regions
-
-Removing a supported region does not affect existing VPC endpoint connections that were created using that region.
-
-Existing endpoint connections remain available.
 
 ## View connection details
 
@@ -119,11 +102,30 @@ For each connection, Console displays:
 
 New endpoint connections appear in this section after they are created in AWS.
 
-## Deactivate secure connectivity
+## Manage allowed principals and regions
 
-In the **Private networking** tab, select **Deactivate service** to remove the VPC endpoint service for the cluster.
+After activation, you can modify the configuration from the **Private networking** tab.
 
-Public connectivity remains available.
+In the **Service details** section:
+
+- Select the edit icon next to **Allowed principals** to add or remove AWS principal ARNs.
+- Select the edit icon next to **Supported regions** to add or remove regions.
+
+Changes apply to new VPC endpoint connection attempts.
+
+Removing a previously allowed principal does not invalidate existing VPC endpoint connections.
+
+### Endpoint connection approval
+
+VPC endpoint connections are automatically approved when the AWS principal creating the interface endpoint is included in the **Allowed principals** list.
+
+You don’t need to manually approve endpoint connections.
+
+### Removing supported regions
+
+Removing a supported region does not affect existing VPC endpoint connections that were created using that region.
+
+Existing endpoint connections remain available.
 
 ## Create a VPC interface endpoint in AWS
 
@@ -136,6 +138,12 @@ After activating the PrivateLink endpoint service in Console:
 AWS-side provisioning must follow the standard AWS PrivateLink process.
 
 For detailed instructions, see the [AWS documentation on configuring a VPC endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html).
+
+## Deactivate secure connectivity
+
+In the **Private networking** tab, select **Deactivate service** to remove the VPC endpoint service for the cluster.
+
+Public connectivity remains available.
 
 ## View-only access
 
