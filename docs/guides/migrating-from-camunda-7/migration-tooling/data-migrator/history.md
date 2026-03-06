@@ -63,6 +63,7 @@ The following requirements and limitations apply:
 | `HISTORY_FORM_DEFINITION`     | Form definitions     |
 | `HISTORY_PROCESS_DEFINITION`  | Process definitions  |
 | `HISTORY_PROCESS_INSTANCE`    | Process instances    |
+| `HISTORY_JOB`                 | Jobs                 |
 | `HISTORY_INCIDENT`            | Process incidents    |
 | `HISTORY_VARIABLE`            | Process variables    |
 | `HISTORY_USER_TASK`           | User tasks           |
@@ -152,6 +153,10 @@ Example BPMN configuration that will be migrated:
 </bpmn:userTask>
 ```
 
+## Jobs
+
+The History Data Migrator migrates only jobs of type [asynchronous continuations](https://docs.camunda.org/manual/7.24/user-guide/process-engine/transactions-in-processes/#configure-asynchronous-continuations).
+
 ## Atomicity
 
 The History Data Migrator uses the configured Camunda 8 datasource for both the migration mapping schema and the migrated data. This ensures single-transaction atomicity for each entity migration.
@@ -183,6 +188,7 @@ The following built-in transformers convert Camunda 7 historic entities:
 | `ProcessDefinitionTransformer`              | `ProcessDefinition`                      | `ProcessDefinitionDbModel`    |
 | `FlowNodeTransformer`                       | `HistoricActivityInstance`               | `FlowNodeInstanceDbModel`     |
 | `UserTaskTransformer`                       | `HistoricTaskInstance`                   | `UserTaskDbModel`             |
+| `JobTransformer`                            | `HistoricJobLog`                         | `JobDbModel`                  |
 | `IncidentTransformer`                       | `HistoricIncident`                       | `IncidentDbModel`             |
 | `VariableTransformer`                       | `HistoricVariableInstance`               | `VariableDbModel`             |
 | `DecisionInstanceTransformer`               | `HistoricDecisionInstance`               | `DecisionInstanceDbModel`     |
