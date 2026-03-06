@@ -217,6 +217,7 @@ c8ctl completion bash > ~/.c8ctl-completion.bash
 echo 'source ~/.c8ctl-completion.bash' >> ~/.bashrc
 source ~/.bashrc
 ```
+
 </TabItem> 
 <TabItem value="zsh" label="Zsh">
 
