@@ -7,8 +7,11 @@ description: "Learn how to configure Web Modeler to connect securely to supporte
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page describes advanced database connection configuration for Web Modeler.  
-For a general setup guide, visit the [configuration overview](configuration.md#database).
+This page describes advanced database connection configuration for Web Modeler. For a general setup guide, visit the [configuration overview](configuration.md#database).
+
+:::tip Starting from scratch?
+For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md).
+:::
 
 Web Modeler supports multiple database vendors such as PostgreSQL, MySQL, MariaDB, and Microsoft SQL Server. You can choose the one that best fits your environment.
 
