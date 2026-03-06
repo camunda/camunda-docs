@@ -3,7 +3,7 @@ import TabItem from '@theme/TabItem';
 
 ## Data
 
-<Tabs>
+<Tabs groupId="configType" defaultValue="application.yaml">
   <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.data`
