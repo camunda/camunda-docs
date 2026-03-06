@@ -1297,6 +1297,11 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Upgrade to Camunda 8.9",
+      items: ["apis-tools/migration-manuals/migrate-to-89"],
+    },
+    {
+      type: "category",
       label: "Upgrade to Camunda 8.8",
       link: {
         type: "doc",

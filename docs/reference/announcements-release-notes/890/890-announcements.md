@@ -205,7 +205,7 @@ What to do:
 - Generated-client users: regenerate clients and update type mappings/imports.
 - Handwritten integrations: update request payload construction and affected typed helpers.
 
-<p className="link-arrow">[Migration guidance for generated clients](../../../apis-tools/migration-manuals/migrate-to-camunda-api.md#generated-client-compatibility-for-89-openapi-updates)</p>
+<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#type-safety-enhancements)</p>
 
 </div>
 </div>
@@ -234,7 +234,7 @@ What to do:
 - Generated-client users: regenerate and add fallback/default handling for enum parsing and matching.
 - Handwritten integrations: review enum branches (for example exhaustive `switch`/pattern matches) and add handling for new values.
 
-<p className="link-arrow">[Migration guidance for generated clients](../../../apis-tools/migration-manuals/migrate-to-camunda-api.md#generated-client-compatibility-for-89-openapi-updates)</p>
+<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#enum-extensions)</p>
 
 </div>
 </div>
