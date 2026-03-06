@@ -26,6 +26,10 @@ With the **Tasks** tab, you can browse and manage user tasks from your Camunda c
 Tasks update automatically as you complete work in Camunda or Microsoft Teams.
 :::
 
+:::note
+When a task is completed from the tab, an [`appContext`](./ms-teams.md#process-variable-appcontext) variable is automatically included in the task variables with `source` set to `"tab"`.
+:::
+
 ## Processes
 
 With the **Processes** tab, you can view and start Camunda process definitions.
@@ -41,6 +45,10 @@ To start a process:
 2. Select a process definition.
 3. Complete any required fields.
 4. Click **Start process**.
+
+:::note
+When a process is started from the tab, an [`appContext`](./ms-teams.md#process-variable-appcontext) variable is automatically included in the process variables with `source` set to `"tab"`.
+:::
 
 ## Incidents
 
