@@ -195,7 +195,11 @@ Operate has partial support for RDBMS as secondary storage in Camunda 8.9-alpha3
 
 ## Installation and deployment guides
 
-For hands-on instructions to deploy Camunda with RDBMS, see:
+For hands-on instructions to deploy Camunda with RDBMS, start with:
+
+- [End-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md) - Unified guide for provisioning, topology decisions, driver management, and backup strategies.
+
+Then choose your deployment pattern:
 
 - [Production architecture with RDBMS](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) - Reference topology and design considerations.
 - [Manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md) - Entry point for manual installation, configuration, and operations.

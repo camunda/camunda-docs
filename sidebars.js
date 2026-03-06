@@ -44,7 +44,17 @@ module.exports = {
               items: [
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/install",
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/runtime",
-                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history",
+                {
+                  type: "category",
+                  label: "History",
+                  link: {
+                    type: "doc",
+                    id: "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history",
+                  },
+                  items: [
+                    "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history-coverage",
+                  ],
+                },
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/identity",
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/variables",
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin",
@@ -909,6 +919,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/azure-blob-storage",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
+                "components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound",
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
@@ -1347,6 +1358,11 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Upgrade to Camunda 8.9",
+      items: ["apis-tools/migration-manuals/migrate-to-89"],
+    },
+    {
+      type: "category",
       label: "Upgrade to Camunda 8.8",
       link: {
         type: "doc",
@@ -1488,6 +1504,7 @@ module.exports = {
       },
       items: [
         "self-managed/reference-architecture/kubernetes",
+        "self-managed/reference-architecture/containers",
         "self-managed/reference-architecture/manual",
       ],
     },
@@ -1753,15 +1770,13 @@ module.exports = {
             "self-managed/deployment/docker/docker",
             {
               type: "category",
-              label: "Cloud providers",
+              label: "Amazon ECS",
+              link: {
+                type: "doc",
+                id: "self-managed/deployment/containers/cloud-providers/amazon/index",
+              },
               items: [
-                {
-                  type: "category",
-                  label: "Amazon",
-                  items: [
-                    "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
-                  ],
-                },
+                "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
               ],
             },
           ],
@@ -1853,6 +1868,7 @@ module.exports = {
             },
             {
               "Relational databases": [
+                "self-managed/concepts/databases/relational-db/rdbms-setup-guide",
                 "self-managed/concepts/databases/relational-db/rdbms-support-policy",
                 "self-managed/concepts/databases/relational-db/database-configuration",
               ],
