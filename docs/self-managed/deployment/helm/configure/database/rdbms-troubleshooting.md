@@ -126,12 +126,16 @@ kubectl logs <pod-name> | grep -i flushinterval
 
 ```yaml
 orchestration:
-  data:
-    secondaryStorage:
-      rdbms:
-        flushInterval: PT1S # More frequent flushes
-        queueSize: 5000 # Larger queue for buffering
-        queueMemoryLimit: 50 # Increase if needed
+  extraConfiguration:
+    - file: "flush-interval.yaml"
+      content: |
+        camunda:
+          data:
+            secondary-storage:
+              rdbms:
+                flush-interval: PT1S # More frequent flushes
+                queue-size: 5000 # Larger queue for buffering
+                queue-memory-limit: 50 # Increase if needed
 ```
 
 - Smaller `flushInterval` → more frequent writes (increases DB load).
