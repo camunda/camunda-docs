@@ -221,6 +221,21 @@ RewriteRule ^docs/self-managed/deployment/manual/upgrade/?$ /docs/self-managed/u
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
 
+# O365 and power automate redirects
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/?$ /docs/next/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/ [R=301,L]
+RewriteRule ^docs/8.8/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/?$ /docs/8.8/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/ [R=301,L]
+RewriteRule ^docs/8.7/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/?$ /docs/8.7/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/ [R=301,L]
+RewriteRule ^docs/8.6/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/?$ /docs/8.6/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/ [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/
+out-of-the-box-connectors/power-automate/?$ /docs/next/components/connectors/introduction/ [R=301,L]
+RewriteRule ^docs/components/connectors/
+out-of-the-box-connectors/power-automate/?$ /docs/components/connectors/introduction/ [R=301,L]
+RewriteRule ^docs/8.8/components/connectors/
+out-of-the-box-connectors/power-automate/?$ /docs/8.8/components/connectors/introduction/ [R=301,L]
+
+
 # Self-Managed upgrade guide restructuring
 RewriteRule ^docs/next/self-managed/update/administrators/admin-upgrade-overview/?$ /docs/next/self-managed/upgrade/ [R=301,L]
 RewriteRule ^docs/next/self-managed/update/administrators/prepare-for-admin-upgrade/?$ /docs/next/self-managed/upgrade/prepare-for-upgrade/ [R=301,L]
