@@ -107,6 +107,25 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Keycloak 25.x no longer supported
+
+Camunda 8.9 drops support for Keycloak 25.x. Only Keycloak 26.x is now supported for Management Identity.
+
+- Keycloak 25.x has reached end of life and is no longer maintained by the Keycloak project.
+- This aligns with [Keycloak's updated release strategy](https://www.keycloak.org/2024/10/release-updates), which moved to quarterly minor releases.
+- Upgrade your Keycloak instance to 26.x before moving to Camunda 8.9.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
 ## Key changes
 
 ### Agentic orchestration
