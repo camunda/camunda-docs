@@ -11,7 +11,7 @@ mdx:
 type ResourceResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:2166](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2166)
+Defined in: [gen/types.gen.ts:2271](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2271)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:2166](https://github.com/camunda/orchestration-clu
 optional resourceId: string;
 ```
 
-Defined in: [gen/types.gen.ts:2182](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2182)
+Defined in: [gen/types.gen.ts:2287](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2287)
 
 The resource ID of this resource.
 
----
+***
 
 ### resourceKey?
 
@@ -33,11 +33,11 @@ The resource ID of this resource.
 optional resourceKey: ResourceKey;
 ```
 
-Defined in: [gen/types.gen.ts:2190](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2190)
+Defined in: [gen/types.gen.ts:2295](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2295)
 
 The unique key of this resource.
 
----
+***
 
 ### resourceName?
 
@@ -45,11 +45,11 @@ The unique key of this resource.
 optional resourceName: string;
 ```
 
-Defined in: [gen/types.gen.ts:2170](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2170)
+Defined in: [gen/types.gen.ts:2275](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2275)
 
 The resource name from which this resource was parsed.
 
----
+***
 
 ### tenantId?
 
@@ -57,11 +57,11 @@ The resource name from which this resource was parsed.
 optional tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:2186](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2186)
+Defined in: [gen/types.gen.ts:2291](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2291)
 
 The tenant ID of this resource.
 
----
+***
 
 ### version?
 
@@ -69,11 +69,11 @@ The tenant ID of this resource.
 optional version: number;
 ```
 
-Defined in: [gen/types.gen.ts:2174](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2174)
+Defined in: [gen/types.gen.ts:2279](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2279)
 
 The assigned resource version.
 
----
+***
 
 ### versionTag?
 
@@ -81,6 +81,6 @@ The assigned resource version.
 optional versionTag: string;
 ```
 
-Defined in: [gen/types.gen.ts:2178](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2178)
+Defined in: [gen/types.gen.ts:2283](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2283)
 
 The version tag of this resource.

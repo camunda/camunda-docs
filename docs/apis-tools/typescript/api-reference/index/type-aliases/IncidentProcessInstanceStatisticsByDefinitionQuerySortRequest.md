@@ -11,7 +11,7 @@ mdx:
 type IncidentProcessInstanceStatisticsByDefinitionQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:3303](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3303)
+Defined in: [gen/types.gen.ts:3677](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3677)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:3303](https://github.com/camunda/orchestration-clu
 field: "activeInstancesWithErrorCount" | "processDefinitionKey" | "tenantId";
 ```
 
-Defined in: [gen/types.gen.ts:3307](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3307)
+Defined in: [gen/types.gen.ts:3681](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3681)
 
 The aggregated field by which the process instance statistics are sorted.
 
----
+***
 
 ### order?
 
@@ -33,4 +33,4 @@ The aggregated field by which the process instance statistics are sorted.
 optional order: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:3308](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3308)
+Defined in: [gen/types.gen.ts:3682](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3682)

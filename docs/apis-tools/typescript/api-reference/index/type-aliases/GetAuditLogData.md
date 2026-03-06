@@ -11,7 +11,7 @@ mdx:
 type GetAuditLogData = object;
 ```
 
-Defined in: [gen/types.gen.ts:7794](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7794)
+Defined in: [gen/types.gen.ts:8382](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8382)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:7794](https://github.com/camunda/orchestration-clu
 optional body: never;
 ```
 
-Defined in: [gen/types.gen.ts:7795](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7795)
+Defined in: [gen/types.gen.ts:8383](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8383)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:7795](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:7796](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7796)
+Defined in: [gen/types.gen.ts:8384](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8384)
 
 #### auditLogKey
 
@@ -41,7 +41,7 @@ auditLogKey: AuditLogKey;
 
 The audit log key.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The audit log key.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:7802](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7802)
+Defined in: [gen/types.gen.ts:8390](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8390)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:7802](https://github.com/camunda/orchestration-clu
 url: "/audit-logs/{auditLogKey}";
 ```
 
-Defined in: [gen/types.gen.ts:7803](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7803)
+Defined in: [gen/types.gen.ts:8391](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8391)

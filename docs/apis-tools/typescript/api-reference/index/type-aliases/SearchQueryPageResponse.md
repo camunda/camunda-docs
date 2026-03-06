@@ -11,48 +11,48 @@ mdx:
 type SearchQueryPageResponse = object;
 ```
 
-Defined in: [gen/types.gen.ts:6470](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6470)
+Defined in: [gen/types.gen.ts:7104](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7104)
 
 Pagination information about the search results.
 
 ## Properties
 
-### endCursor?
+### endCursor
 
 ```ts
-optional endCursor: EndCursor;
+endCursor: EndCursor | null;
 ```
 
-Defined in: [gen/types.gen.ts:6488](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6488)
+Defined in: [gen/types.gen.ts:7122](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7122)
 
 The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.
 
----
+***
 
-### hasMoreTotalItems?
+### hasMoreTotalItems
 
 ```ts
-optional hasMoreTotalItems: boolean;
+hasMoreTotalItems: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:6480](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6480)
+Defined in: [gen/types.gen.ts:7114](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7114)
 
 Indicates whether there are more items matching the criteria beyond the returned items.
 This is useful for determining if additional requests are needed to retrieve all results.
 
----
+***
 
-### startCursor?
+### startCursor
 
 ```ts
-optional startCursor: StartCursor;
+startCursor: StartCursor | null;
 ```
 
-Defined in: [gen/types.gen.ts:6484](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6484)
+Defined in: [gen/types.gen.ts:7118](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7118)
 
 The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.
 
----
+***
 
 ### totalItems
 
@@ -60,6 +60,6 @@ The cursor value for getting the previous page of results. Use this in the `befo
 totalItems: number;
 ```
 
-Defined in: [gen/types.gen.ts:6474](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6474)
+Defined in: [gen/types.gen.ts:7108](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7108)
 
 Total items matching the criteria.

@@ -11,7 +11,7 @@ mdx:
 type GetGroupErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:10783](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10783)
+Defined in: [gen/types.gen.ts:10803](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10803)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:10783](https://github.com/camunda/orchestration-cl
 401: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:10787](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10787)
+Defined in: [gen/types.gen.ts:10807](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10807)
 
 The request lacks valid authentication credentials.
 
----
+***
 
 ### 403
 
@@ -33,11 +33,11 @@ The request lacks valid authentication credentials.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:10791](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10791)
+Defined in: [gen/types.gen.ts:10811](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10811)
 
 Forbidden. The request is not allowed.
 
----
+***
 
 ### 404
 
@@ -45,11 +45,11 @@ Forbidden. The request is not allowed.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:10795](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10795)
+Defined in: [gen/types.gen.ts:10815](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10815)
 
 The group with the given ID was not found.
 
----
+***
 
 ### 500
 
@@ -57,6 +57,6 @@ The group with the given ID was not found.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:10799](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10799)
+Defined in: [gen/types.gen.ts:10819](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10819)
 
 An internal error occurred while processing the request.

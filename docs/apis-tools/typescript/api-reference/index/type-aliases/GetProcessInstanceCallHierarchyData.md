@@ -11,7 +11,7 @@ mdx:
 type GetProcessInstanceCallHierarchyData = object;
 ```
 
-Defined in: [gen/types.gen.ts:13880](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13880)
+Defined in: [gen/types.gen.ts:13072](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13072)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:13880](https://github.com/camunda/orchestration-cl
 optional body: never;
 ```
 
-Defined in: [gen/types.gen.ts:13881](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13881)
+Defined in: [gen/types.gen.ts:13073](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13073)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:13881](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:13882](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13882)
+Defined in: [gen/types.gen.ts:13074](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13074)
 
 #### processInstanceKey
 
@@ -41,7 +41,7 @@ processInstanceKey: ProcessInstanceKey;
 
 The key of the process instance to fetch the hierarchy for.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The key of the process instance to fetch the hierarchy for.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:13888](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13888)
+Defined in: [gen/types.gen.ts:13080](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13080)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:13888](https://github.com/camunda/orchestration-cl
 url: "/process-instances/{processInstanceKey}/call-hierarchy";
 ```
 
-Defined in: [gen/types.gen.ts:13889](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13889)
+Defined in: [gen/types.gen.ts:13081](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13081)

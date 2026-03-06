@@ -11,16 +11,16 @@ mdx:
 type UserTaskSearchQueryResult = SearchQueryResponse & object;
 ```
 
-Defined in: [gen/types.gen.ts:6847](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6847)
+Defined in: [gen/types.gen.ts:7501](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7501)
 
 User task search query response.
 
 ## Type Declaration
 
-### items?
+### items
 
 ```ts
-optional items: UserTaskResult[];
+items: UserTaskResult[];
 ```
 
 The matching user tasks.

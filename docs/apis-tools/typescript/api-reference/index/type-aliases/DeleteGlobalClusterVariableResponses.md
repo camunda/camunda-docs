@@ -11,7 +11,7 @@ mdx:
 type DeleteGlobalClusterVariableResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:8658](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8658)
+Defined in: [gen/types.gen.ts:9038](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9038)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:8658](https://github.com/camunda/orchestration-clu
 204: void;
 ```
 
-Defined in: [gen/types.gen.ts:8662](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8662)
+Defined in: [gen/types.gen.ts:9042](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9042)
 
 Cluster variable deleted successfully

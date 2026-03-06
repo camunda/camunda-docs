@@ -11,7 +11,7 @@ mdx:
 type ProcessElementStatisticsResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:5206](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5206)
+Defined in: [gen/types.gen.ts:5788](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5788)
 
 Process element statistics response.
 
@@ -23,11 +23,11 @@ Process element statistics response.
 optional active: number;
 ```
 
-Defined in: [gen/types.gen.ts:5214](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5214)
+Defined in: [gen/types.gen.ts:5796](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5796)
 
 The total number of active instances of the element.
 
----
+***
 
 ### canceled?
 
@@ -35,11 +35,11 @@ The total number of active instances of the element.
 optional canceled: number;
 ```
 
-Defined in: [gen/types.gen.ts:5218](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5218)
+Defined in: [gen/types.gen.ts:5800](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5800)
 
 The total number of canceled instances of the element.
 
----
+***
 
 ### completed?
 
@@ -47,11 +47,11 @@ The total number of canceled instances of the element.
 optional completed: number;
 ```
 
-Defined in: [gen/types.gen.ts:5226](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5226)
+Defined in: [gen/types.gen.ts:5808](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5808)
 
 The total number of completed instances of the element.
 
----
+***
 
 ### elementId?
 
@@ -59,11 +59,11 @@ The total number of completed instances of the element.
 optional elementId: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:5210](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5210)
+Defined in: [gen/types.gen.ts:5792](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5792)
 
 The element ID for which the results are aggregated.
 
----
+***
 
 ### incidents?
 
@@ -71,6 +71,6 @@ The element ID for which the results are aggregated.
 optional incidents: number;
 ```
 
-Defined in: [gen/types.gen.ts:5222](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5222)
+Defined in: [gen/types.gen.ts:5804](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5804)
 
 The total number of incidents for the element.

@@ -11,7 +11,7 @@ mdx:
 type UserTaskProperties = object;
 ```
 
-Defined in: [gen/types.gen.ts:3453](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3453)
+Defined in: [gen/types.gen.ts:4019](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4019)
 
 Contains properties of a user task.
 
@@ -23,11 +23,11 @@ Contains properties of a user task.
 optional action: string;
 ```
 
-Defined in: [gen/types.gen.ts:3457](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3457)
+Defined in: [gen/types.gen.ts:4023](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4023)
 
 The action performed on the user task.
 
----
+***
 
 ### assignee?
 
@@ -35,47 +35,47 @@ The action performed on the user task.
 optional assignee: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:3461](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3461)
+Defined in: [gen/types.gen.ts:4027](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4027)
 
 The user assigned to the task.
 
----
+***
 
-### candidateGroups?
+### candidateGroups
 
 ```ts
-optional candidateGroups: string[];
+candidateGroups: string[];
 ```
 
-Defined in: [gen/types.gen.ts:3465](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3465)
+Defined in: [gen/types.gen.ts:4031](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4031)
 
 The groups eligible to claim the task.
 
----
+***
 
-### candidateUsers?
+### candidateUsers
 
 ```ts
-optional candidateUsers: string[];
+candidateUsers: string[];
 ```
 
-Defined in: [gen/types.gen.ts:3469](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3469)
+Defined in: [gen/types.gen.ts:4035](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4035)
 
 The users eligible to claim the task.
 
----
+***
 
-### changedAttributes?
+### changedAttributes
 
 ```ts
-optional changedAttributes: string[];
+changedAttributes: string[];
 ```
 
-Defined in: [gen/types.gen.ts:3473](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3473)
+Defined in: [gen/types.gen.ts:4039](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4039)
 
 The attributes that were changed in the task.
 
----
+***
 
 ### dueDate?
 
@@ -83,11 +83,11 @@ The attributes that were changed in the task.
 optional dueDate: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:3477](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3477)
+Defined in: [gen/types.gen.ts:4043](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4043)
 
 The due date of the user task in ISO 8601 format.
 
----
+***
 
 ### followUpDate?
 
@@ -95,11 +95,11 @@ The due date of the user task in ISO 8601 format.
 optional followUpDate: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:3481](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3481)
+Defined in: [gen/types.gen.ts:4047](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4047)
 
 The follow-up date of the user task in ISO 8601 format.
 
----
+***
 
 ### formKey?
 
@@ -107,11 +107,11 @@ The follow-up date of the user task in ISO 8601 format.
 optional formKey: FormKey;
 ```
 
-Defined in: [gen/types.gen.ts:3485](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3485)
+Defined in: [gen/types.gen.ts:4051](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4051)
 
 The key of the form associated with the user task.
 
----
+***
 
 ### priority?
 
@@ -119,11 +119,11 @@ The key of the form associated with the user task.
 optional priority: number | null;
 ```
 
-Defined in: [gen/types.gen.ts:3489](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3489)
+Defined in: [gen/types.gen.ts:4055](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4055)
 
 The priority of the user task.
 
----
+***
 
 ### userTaskKey?
 
@@ -131,6 +131,6 @@ The priority of the user task.
 optional userTaskKey: UserTaskKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:3493](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3493)
+Defined in: [gen/types.gen.ts:4059](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4059)
 
 The unique key identifying the user task.

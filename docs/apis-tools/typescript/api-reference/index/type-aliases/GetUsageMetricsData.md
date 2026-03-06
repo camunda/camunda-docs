@@ -11,7 +11,7 @@ mdx:
 type GetUsageMetricsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:15472](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15472)
+Defined in: [gen/types.gen.ts:14560](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14560)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:15472](https://github.com/camunda/orchestration-cl
 optional body: never;
 ```
 
-Defined in: [gen/types.gen.ts:15473](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15473)
+Defined in: [gen/types.gen.ts:14561](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14561)
 
----
+***
 
 ### path?
 
@@ -31,9 +31,9 @@ Defined in: [gen/types.gen.ts:15473](https://github.com/camunda/orchestration-cl
 optional path: never;
 ```
 
-Defined in: [gen/types.gen.ts:15474](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15474)
+Defined in: [gen/types.gen.ts:14562](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14562)
 
----
+***
 
 ### query
 
@@ -41,7 +41,7 @@ Defined in: [gen/types.gen.ts:15474](https://github.com/camunda/orchestration-cl
 query: object;
 ```
 
-Defined in: [gen/types.gen.ts:15475](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15475)
+Defined in: [gen/types.gen.ts:14563](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14563)
 
 #### endTime
 
@@ -75,7 +75,7 @@ optional withTenants: boolean;
 
 Whether to return tenant metrics in addition to the total metrics or not. Default false.
 
----
+***
 
 ### url
 
@@ -83,4 +83,4 @@ Whether to return tenant metrics in addition to the total metrics or not. Defaul
 url: "/system/usage-metrics";
 ```
 
-Defined in: [gen/types.gen.ts:15493](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15493)
+Defined in: [gen/types.gen.ts:14581](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14581)

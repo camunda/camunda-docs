@@ -11,7 +11,7 @@ mdx:
 type JobChangeset = object;
 ```
 
-Defined in: [gen/types.gen.ts:3881](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3881)
+Defined in: [gen/types.gen.ts:4455](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4455)
 
 JSON object with changed job attribute values. The job cannot be completed or failed with this endpoint, use the complete job or fail job endpoints instead.
 
@@ -23,11 +23,11 @@ JSON object with changed job attribute values. The job cannot be completed or fa
 optional retries: number | null;
 ```
 
-Defined in: [gen/types.gen.ts:3885](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3885)
+Defined in: [gen/types.gen.ts:4459](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4459)
 
 The new number of retries for the job.
 
----
+***
 
 ### timeout?
 
@@ -35,6 +35,6 @@ The new number of retries for the job.
 optional timeout: number | null;
 ```
 
-Defined in: [gen/types.gen.ts:3889](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3889)
+Defined in: [gen/types.gen.ts:4463](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4463)
 
 The new timeout for the job in milliseconds.

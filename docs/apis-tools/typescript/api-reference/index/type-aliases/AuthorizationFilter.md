@@ -11,7 +11,7 @@ mdx:
 type AuthorizationFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:602](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L602)
+Defined in: [gen/types.gen.ts:619](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L619)
 
 Authorization search filter.
 
@@ -23,11 +23,11 @@ Authorization search filter.
 optional ownerId: string;
 ```
 
-Defined in: [gen/types.gen.ts:606](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L606)
+Defined in: [gen/types.gen.ts:623](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L623)
 
 The ID of the owner of permissions.
 
----
+***
 
 ### ownerType?
 
@@ -35,9 +35,9 @@ The ID of the owner of permissions.
 optional ownerType: OwnerTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:607](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L607)
+Defined in: [gen/types.gen.ts:624](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L624)
 
----
+***
 
 ### resourceIds?
 
@@ -45,11 +45,11 @@ Defined in: [gen/types.gen.ts:607](https://github.com/camunda/orchestration-clus
 optional resourceIds: string[];
 ```
 
-Defined in: [gen/types.gen.ts:611](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L611)
+Defined in: [gen/types.gen.ts:628](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L628)
 
 The IDs of the resource to search permissions for.
 
----
+***
 
 ### resourcePropertyNames?
 
@@ -57,11 +57,11 @@ The IDs of the resource to search permissions for.
 optional resourcePropertyNames: string[];
 ```
 
-Defined in: [gen/types.gen.ts:615](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L615)
+Defined in: [gen/types.gen.ts:632](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L632)
 
 The names of the resource properties to search permissions for.
 
----
+***
 
 ### resourceType?
 
@@ -69,6 +69,6 @@ The names of the resource properties to search permissions for.
 optional resourceType: ResourceTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:619](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L619)
+Defined in: [gen/types.gen.ts:636](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L636)
 
 The type of resource to search permissions for.

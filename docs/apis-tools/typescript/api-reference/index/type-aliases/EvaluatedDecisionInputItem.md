@@ -11,7 +11,7 @@ mdx:
 type EvaluatedDecisionInputItem = object;
 ```
 
-Defined in: [gen/types.gen.ts:1834](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1834)
+Defined in: [gen/types.gen.ts:1873](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1873)
 
 A decision input that was evaluated within this decision evaluation.
 
@@ -23,9 +23,11 @@ A decision input that was evaluated within this decision evaluation.
 optional inputId: string;
 ```
 
-Defined in: [gen/types.gen.ts:1835](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1835)
+Defined in: [gen/types.gen.ts:1877](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1877)
 
----
+The identifier of the decision input.
+
+***
 
 ### inputName?
 
@@ -33,9 +35,11 @@ Defined in: [gen/types.gen.ts:1835](https://github.com/camunda/orchestration-clu
 optional inputName: string;
 ```
 
-Defined in: [gen/types.gen.ts:1836](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1836)
+Defined in: [gen/types.gen.ts:1881](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1881)
 
----
+The name of the decision input.
+
+***
 
 ### inputValue?
 
@@ -43,4 +47,6 @@ Defined in: [gen/types.gen.ts:1836](https://github.com/camunda/orchestration-clu
 optional inputValue: string;
 ```
 
-Defined in: [gen/types.gen.ts:1837](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1837)
+Defined in: [gen/types.gen.ts:1885](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1885)
+
+The description of the decision input.

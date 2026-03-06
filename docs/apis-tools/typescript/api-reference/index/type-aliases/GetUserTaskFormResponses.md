@@ -11,67 +11,21 @@ mdx:
 type GetUserTaskFormResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:17418](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17418)
+Defined in: [gen/types.gen.ts:16130](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L16130)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: object;
+200: FormResult;
 ```
 
-Defined in: [gen/types.gen.ts:17422](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17422)
+Defined in: [gen/types.gen.ts:16134](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L16134)
 
 The form is successfully returned.
 
-#### formId?
-
-```ts
-optional formId: FormId;
-```
-
-The user-provided identifier of the form.
-
-#### formKey?
-
-```ts
-optional formKey: FormKey;
-```
-
-The assigned key, which acts as a unique identifier for this form.
-
-#### schema?
-
-```ts
-optional schema: object;
-```
-
-The form content.
-
-##### Index Signature
-
-```ts
-[key: string]: unknown
-```
-
-#### tenantId?
-
-```ts
-optional tenantId: TenantId;
-```
-
-The tenant ID of the form.
-
-#### version?
-
-```ts
-optional version: number;
-```
-
-The version of the the deployed form.
-
----
+***
 
 ### 204
 
@@ -79,6 +33,6 @@ The version of the the deployed form.
 204: void;
 ```
 
-Defined in: [gen/types.gen.ts:17449](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17449)
+Defined in: [gen/types.gen.ts:16138](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L16138)
 
 The user task was found, but no form is associated with it.

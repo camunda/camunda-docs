@@ -11,6 +11,7 @@ mdx:
 The Functional Programming API is a **technical preview**. Its surface may change in future releases without following semver.
 :::
 
+
 ## Type Aliases
 
 - [DomainError](type-aliases/DomainError.md)
@@ -36,25 +37,25 @@ The Functional Programming API is a **technical preview**. Its surface may chang
 
 Re-exports [CamundaFpClient](../index/type-aliases/CamundaFpClient.md)
 
----
+***
 
 ### createCamundaFpClient
 
 Re-exports [createCamundaFpClient](../index/functions/createCamundaFpClient.md)
 
----
+***
 
 ### Either
 
 Re-exports [Either](../index/type-aliases/Either.md)
 
----
+***
 
 ### isLeft
 
 Re-exports [isLeft](../index/functions/isLeft.md)
 
----
+***
 
 ### isRight
 

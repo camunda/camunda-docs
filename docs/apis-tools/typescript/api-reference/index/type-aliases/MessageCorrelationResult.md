@@ -11,43 +11,43 @@ mdx:
 type MessageCorrelationResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:4662](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4662)
+Defined in: [gen/types.gen.ts:5232](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5232)
 
 The message key of the correlated message, as well as the first process instance key it
 correlated with.
 
 ## Properties
 
-### messageKey?
+### messageKey
 
 ```ts
-optional messageKey: MessageKey;
+messageKey: MessageKey;
 ```
 
-Defined in: [gen/types.gen.ts:4670](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4670)
+Defined in: [gen/types.gen.ts:5240](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5240)
 
 The key of the correlated message.
 
----
+***
 
-### processInstanceKey?
+### processInstanceKey
 
 ```ts
-optional processInstanceKey: ProcessInstanceKey;
+processInstanceKey: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:4674](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4674)
+Defined in: [gen/types.gen.ts:5244](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5244)
 
 The key of the first process instance the message correlated with
 
----
+***
 
-### tenantId?
+### tenantId
 
 ```ts
-optional tenantId: TenantId;
+tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:4666](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4666)
+Defined in: [gen/types.gen.ts:5236](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5236)
 
 The tenant ID of the correlated message

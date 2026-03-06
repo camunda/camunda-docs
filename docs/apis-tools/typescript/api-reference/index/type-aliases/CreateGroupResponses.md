@@ -11,7 +11,7 @@ mdx:
 type CreateGroupResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:10682](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10682)
+Defined in: [gen/types.gen.ts:10701](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10701)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:10682](https://github.com/camunda/orchestration-cl
 201: GroupCreateResult;
 ```
 
-Defined in: [gen/types.gen.ts:10686](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10686)
+Defined in: [gen/types.gen.ts:10705](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10705)
 
 The group was created successfully.

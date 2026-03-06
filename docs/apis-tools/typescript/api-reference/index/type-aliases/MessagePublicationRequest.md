@@ -11,7 +11,7 @@ mdx:
 type MessagePublicationRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:4677](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4677)
+Defined in: [gen/types.gen.ts:5247](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5247)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:4677](https://github.com/camunda/orchestration-clu
 optional correlationKey: string;
 ```
 
-Defined in: [gen/types.gen.ts:4685](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4685)
+Defined in: [gen/types.gen.ts:5255](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5255)
 
 The correlation key of the message.
 
----
+***
 
 ### messageId?
 
@@ -33,12 +33,12 @@ The correlation key of the message.
 optional messageId: string;
 ```
 
-Defined in: [gen/types.gen.ts:4695](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4695)
+Defined in: [gen/types.gen.ts:5265](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5265)
 
 The unique ID of the message. This is used to ensure only one message with the given ID
 will be published during the lifetime of the message (if `timeToLive` is set).
 
----
+***
 
 ### name
 
@@ -46,11 +46,11 @@ will be published during the lifetime of the message (if `timeToLive` is set).
 name: string;
 ```
 
-Defined in: [gen/types.gen.ts:4681](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4681)
+Defined in: [gen/types.gen.ts:5251](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5251)
 
 The name of the message.
 
----
+***
 
 ### tenantId?
 
@@ -58,11 +58,11 @@ The name of the message.
 optional tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:4705](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4705)
+Defined in: [gen/types.gen.ts:5275](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5275)
 
 The tenant of the message sender.
 
----
+***
 
 ### timeToLive?
 
@@ -70,11 +70,11 @@ The tenant of the message sender.
 optional timeToLive: number;
 ```
 
-Defined in: [gen/types.gen.ts:4689](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4689)
+Defined in: [gen/types.gen.ts:5259](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5259)
 
 Timespan (in ms) to buffer the message on the broker.
 
----
+***
 
 ### variables?
 
@@ -82,7 +82,7 @@ Timespan (in ms) to buffer the message on the broker.
 optional variables: object;
 ```
 
-Defined in: [gen/types.gen.ts:4699](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4699)
+Defined in: [gen/types.gen.ts:5269](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5269)
 
 The message variables as JSON document.
 

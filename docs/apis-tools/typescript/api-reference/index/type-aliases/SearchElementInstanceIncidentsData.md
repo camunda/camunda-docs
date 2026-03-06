@@ -11,7 +11,7 @@ mdx:
 type SearchElementInstanceIncidentsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10478](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10478)
+Defined in: [gen/types.gen.ts:10316](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10316)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:10478](https://github.com/camunda/orchestration-cl
 body: IncidentSearchQuery;
 ```
 
-Defined in: [gen/types.gen.ts:10479](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10479)
+Defined in: [gen/types.gen.ts:10317](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10317)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:10479](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:10480](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10480)
+Defined in: [gen/types.gen.ts:10318](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10318)
 
 #### elementInstanceKey
 
@@ -41,7 +41,7 @@ elementInstanceKey: ElementInstanceKey;
 
 The unique key of the element instance to search incidents for.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The unique key of the element instance to search incidents for.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:10486](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10486)
+Defined in: [gen/types.gen.ts:10324](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10324)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:10486](https://github.com/camunda/orchestration-cl
 url: "/element-instances/{elementInstanceKey}/incidents/search";
 ```
 
-Defined in: [gen/types.gen.ts:10487](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10487)
+Defined in: [gen/types.gen.ts:10325](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10325)

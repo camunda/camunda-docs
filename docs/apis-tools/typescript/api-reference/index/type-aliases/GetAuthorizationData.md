@@ -11,7 +11,7 @@ mdx:
 type GetAuthorizationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8105](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8105)
+Defined in: [gen/types.gen.ts:8583](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8583)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:8105](https://github.com/camunda/orchestration-clu
 optional body: never;
 ```
 
-Defined in: [gen/types.gen.ts:8106](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8106)
+Defined in: [gen/types.gen.ts:8584](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8584)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:8106](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:8107](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8107)
+Defined in: [gen/types.gen.ts:8585](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8585)
 
 #### authorizationKey
 
@@ -41,7 +41,7 @@ authorizationKey: AuthorizationKey;
 
 The key of the authorization to get.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The key of the authorization to get.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:8113](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8113)
+Defined in: [gen/types.gen.ts:8591](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8591)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:8113](https://github.com/camunda/orchestration-clu
 url: "/authorizations/{authorizationKey}";
 ```
 
-Defined in: [gen/types.gen.ts:8114](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8114)
+Defined in: [gen/types.gen.ts:8592](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8592)

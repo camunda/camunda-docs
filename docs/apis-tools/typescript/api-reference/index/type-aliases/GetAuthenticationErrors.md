@@ -11,7 +11,7 @@ mdx:
 type GetAuthenticationErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:7953](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7953)
+Defined in: [gen/types.gen.ts:8431](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8431)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:7953](https://github.com/camunda/orchestration-clu
 401: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:7957](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7957)
+Defined in: [gen/types.gen.ts:8435](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8435)
 
 The request lacks valid authentication credentials.
 
----
+***
 
 ### 403
 
@@ -33,11 +33,11 @@ The request lacks valid authentication credentials.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:7961](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7961)
+Defined in: [gen/types.gen.ts:8439](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8439)
 
 Forbidden. The request is not allowed.
 
----
+***
 
 ### 500
 
@@ -45,6 +45,6 @@ Forbidden. The request is not allowed.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:7965](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7965)
+Defined in: [gen/types.gen.ts:8443](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8443)
 
 An internal error occurred while processing the request.

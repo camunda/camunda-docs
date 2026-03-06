@@ -11,7 +11,7 @@ mdx:
 type SearchTenantsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:15622](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15622)
+Defined in: [gen/types.gen.ts:14692](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14692)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:15622](https://github.com/camunda/orchestration-cl
 200: TenantSearchQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:15626](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15626)
+Defined in: [gen/types.gen.ts:14696](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14696)
 
 The tenants search result

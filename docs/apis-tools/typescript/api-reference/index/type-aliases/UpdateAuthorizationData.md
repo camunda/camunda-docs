@@ -11,7 +11,7 @@ mdx:
 type UpdateAuthorizationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8147](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8147)
+Defined in: [gen/types.gen.ts:8625](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8625)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:8147](https://github.com/camunda/orchestration-clu
 body: AuthorizationRequest;
 ```
 
-Defined in: [gen/types.gen.ts:8148](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8148)
+Defined in: [gen/types.gen.ts:8626](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8626)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:8148](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:8149](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8149)
+Defined in: [gen/types.gen.ts:8627](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8627)
 
 #### authorizationKey
 
@@ -41,7 +41,7 @@ authorizationKey: AuthorizationKey;
 
 The key of the authorization to delete.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The key of the authorization to delete.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:8155](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8155)
+Defined in: [gen/types.gen.ts:8633](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8633)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:8155](https://github.com/camunda/orchestration-clu
 url: "/authorizations/{authorizationKey}";
 ```
 
-Defined in: [gen/types.gen.ts:8156](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8156)
+Defined in: [gen/types.gen.ts:8634](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8634)

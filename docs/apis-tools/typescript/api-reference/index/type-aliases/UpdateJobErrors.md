@@ -11,7 +11,7 @@ mdx:
 type UpdateJobErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:11950](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11950)
+Defined in: [gen/types.gen.ts:11722](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11722)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:11950](https://github.com/camunda/orchestration-cl
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:11954](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11954)
+Defined in: [gen/types.gen.ts:11726](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11726)
 
 The provided data is not valid.
 
----
+***
 
 ### 404
 
@@ -33,11 +33,11 @@ The provided data is not valid.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:11958](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11958)
+Defined in: [gen/types.gen.ts:11730](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11730)
 
 The job with the jobKey is not found.
 
----
+***
 
 ### 409
 
@@ -45,11 +45,11 @@ The job with the jobKey is not found.
 409: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:11963](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11963)
+Defined in: [gen/types.gen.ts:11735](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11735)
 
 The job with the given key is in the wrong state currently. More details are provided in the response body.
 
----
+***
 
 ### 500
 
@@ -57,11 +57,11 @@ The job with the given key is in the wrong state currently. More details are pro
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:11967](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11967)
+Defined in: [gen/types.gen.ts:11739](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11739)
 
 An internal error occurred while processing the request.
 
----
+***
 
 ### 503
 
@@ -69,6 +69,6 @@ An internal error occurred while processing the request.
 503: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:11972](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11972)
+Defined in: [gen/types.gen.ts:11744](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11744)
 
 The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .

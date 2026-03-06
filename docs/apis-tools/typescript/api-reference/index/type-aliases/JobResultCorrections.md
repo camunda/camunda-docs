@@ -8,28 +8,30 @@ mdx:
 # Type Alias: JobResultCorrections
 
 ```ts
-type JobResultCorrections = {
+type JobResultCorrections = 
+  | {
   assignee?: string | null;
   candidateGroups?: string[] | null;
   candidateUsers?: string[] | null;
   dueDate?: string | null;
   followUpDate?: string | null;
   priority?: number | null;
-} | null;
+}
+  | null;
 ```
 
-Defined in: [gen/types.gen.ts:3807](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3807)
+Defined in: [gen/types.gen.ts:4381](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4381)
 
 JSON object with attributes that were corrected by the worker.
 
 The following attributes can be corrected, additional attributes will be ignored:
 
-- `assignee` - clear by providing an empty String
-- `dueDate` - clear by providing an empty String
-- `followUpDate` - clear by providing an empty String
-- `candidateGroups` - clear by providing an empty list
-- `candidateUsers` - clear by providing an empty list
-- `priority` - minimum 0, maximum 100, default 50
+* `assignee` - clear by providing an empty String
+* `dueDate` - clear by providing an empty String
+* `followUpDate` - clear by providing an empty String
+* `candidateGroups` - clear by providing an empty list
+* `candidateUsers` - clear by providing an empty list
+* `priority` - minimum 0, maximum 100, default 50
 
 Providing any of those attributes with a `null` value or omitting it preserves
 the persisted attribute's value.

@@ -8,11 +8,11 @@ mdx:
 # Type Alias: OperationTypeFilterProperty
 
 ```ts
-type OperationTypeFilterProperty =
+type OperationTypeFilterProperty = 
   | OperationTypeExactMatch
   | AdvancedOperationTypeFilter;
 ```
 
-Defined in: [gen/types.gen.ts:371](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L371)
+Defined in: [gen/types.gen.ts:388](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L388)
 
 AuditLogOperationTypeEnum property with full advanced search capabilities.

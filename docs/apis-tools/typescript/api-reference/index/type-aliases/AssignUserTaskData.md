@@ -11,7 +11,7 @@ mdx:
 type AssignUserTaskData = object;
 ```
 
-Defined in: [gen/types.gen.ts:17127](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17127)
+Defined in: [gen/types.gen.ts:15963](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15963)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:17127](https://github.com/camunda/orchestration-cl
 body: UserTaskAssignmentRequest;
 ```
 
-Defined in: [gen/types.gen.ts:17128](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17128)
+Defined in: [gen/types.gen.ts:15964](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15964)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:17128](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:17129](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17129)
+Defined in: [gen/types.gen.ts:15965](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15965)
 
 #### userTaskKey
 
@@ -41,7 +41,7 @@ userTaskKey: UserTaskKey;
 
 The key of the user task to assign.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The key of the user task to assign.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:17135](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17135)
+Defined in: [gen/types.gen.ts:15971](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15971)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:17135](https://github.com/camunda/orchestration-cl
 url: "/user-tasks/{userTaskKey}/assignment";
 ```
 
-Defined in: [gen/types.gen.ts:17136](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17136)
+Defined in: [gen/types.gen.ts:15972](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15972)

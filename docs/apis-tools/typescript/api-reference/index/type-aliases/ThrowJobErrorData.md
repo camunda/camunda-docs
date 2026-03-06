@@ -11,7 +11,7 @@ mdx:
 type ThrowJobErrorData = object;
 ```
 
-Defined in: [gen/types.gen.ts:12034](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12034)
+Defined in: [gen/types.gen.ts:11806](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11806)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:12034](https://github.com/camunda/orchestration-cl
 body: JobErrorRequest;
 ```
 
-Defined in: [gen/types.gen.ts:12035](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12035)
+Defined in: [gen/types.gen.ts:11807](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11807)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:12035](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:12036](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12036)
+Defined in: [gen/types.gen.ts:11808](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11808)
 
 #### jobKey
 
@@ -41,7 +41,7 @@ jobKey: JobKey;
 
 The key of the job.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The key of the job.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:12042](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12042)
+Defined in: [gen/types.gen.ts:11814](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11814)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:12042](https://github.com/camunda/orchestration-cl
 url: "/jobs/{jobKey}/error";
 ```
 
-Defined in: [gen/types.gen.ts:12043](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12043)
+Defined in: [gen/types.gen.ts:11815](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11815)

@@ -11,7 +11,7 @@ mdx:
 type SearchQueryRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:6394](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6394)
+Defined in: [gen/types.gen.ts:7028](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7028)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:6394](https://github.com/camunda/orchestration-clu
 optional page: SearchQueryPageRequest;
 ```
 
-Defined in: [gen/types.gen.ts:6398](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6398)
+Defined in: [gen/types.gen.ts:7032](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7032)
 
 Pagination criteria.

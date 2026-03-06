@@ -11,7 +11,7 @@ mdx:
 type CreateElementInstanceVariablesData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10570](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10570)
+Defined in: [gen/types.gen.ts:10362](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10362)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:10570](https://github.com/camunda/orchestration-cl
 body: SetVariableRequest;
 ```
 
-Defined in: [gen/types.gen.ts:10571](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10571)
+Defined in: [gen/types.gen.ts:10363](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10363)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:10571](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:10572](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10572)
+Defined in: [gen/types.gen.ts:10364](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10364)
 
 #### elementInstanceKey
 
@@ -43,7 +43,7 @@ The key of the element instance to update the variables for.
 This can be the process instance key (as obtained during instance creation), or a given
 element, such as a service task (see the `elementInstanceKey` on the job message).
 
----
+***
 
 ### query?
 
@@ -51,9 +51,9 @@ element, such as a service task (see the `elementInstanceKey` on the job message
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:10581](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10581)
+Defined in: [gen/types.gen.ts:10373](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10373)
 
----
+***
 
 ### url
 
@@ -61,4 +61,4 @@ Defined in: [gen/types.gen.ts:10581](https://github.com/camunda/orchestration-cl
 url: "/element-instances/{elementInstanceKey}/variables";
 ```
 
-Defined in: [gen/types.gen.ts:10582](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10582)
+Defined in: [gen/types.gen.ts:10374](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10374)

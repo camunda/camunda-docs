@@ -11,7 +11,7 @@ mdx:
 type ProcessInstanceModificationMoveBatchOperationInstruction = object;
 ```
 
-Defined in: [gen/types.gen.ts:985](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L985)
+Defined in: [gen/types.gen.ts:1018](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1018)
 
 Instructions describing a move operation. This instruction will terminate all active
 element instances at `sourceElementId` and activate a new element instance for each
@@ -26,11 +26,11 @@ scope of the source element instances.
 sourceElementId: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:989](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L989)
+Defined in: [gen/types.gen.ts:1022](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1022)
 
 The source element ID.
 
----
+***
 
 ### targetElementId
 
@@ -38,6 +38,6 @@ The source element ID.
 targetElementId: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:993](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L993)
+Defined in: [gen/types.gen.ts:1026](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1026)
 
 The target element ID.

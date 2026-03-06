@@ -11,7 +11,7 @@ mdx:
 type AdvancedIntegerFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:2674](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2674)
+Defined in: [gen/types.gen.ts:2827](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2827)
 
 Advanced filter
 
@@ -25,11 +25,11 @@ Advanced integer (int32) filter.
 optional $eq: number;
 ```
 
-Defined in: [gen/types.gen.ts:2678](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2678)
+Defined in: [gen/types.gen.ts:2831](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2831)
 
 Checks for equality with the provided value.
 
----
+***
 
 ### $exists?
 
@@ -37,11 +37,11 @@ Checks for equality with the provided value.
 optional $exists: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:2686](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2686)
+Defined in: [gen/types.gen.ts:2839](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2839)
 
 Checks if the current property exists.
 
----
+***
 
 ### $gt?
 
@@ -49,11 +49,11 @@ Checks if the current property exists.
 optional $gt: number;
 ```
 
-Defined in: [gen/types.gen.ts:2690](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2690)
+Defined in: [gen/types.gen.ts:2843](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2843)
 
 Greater than comparison with the provided value.
 
----
+***
 
 ### $gte?
 
@@ -61,11 +61,11 @@ Greater than comparison with the provided value.
 optional $gte: number;
 ```
 
-Defined in: [gen/types.gen.ts:2694](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2694)
+Defined in: [gen/types.gen.ts:2847](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2847)
 
 Greater than or equal comparison with the provided value.
 
----
+***
 
 ### $in?
 
@@ -73,11 +73,11 @@ Greater than or equal comparison with the provided value.
 optional $in: number[];
 ```
 
-Defined in: [gen/types.gen.ts:2706](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2706)
+Defined in: [gen/types.gen.ts:2859](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2859)
 
 Checks if the property matches any of the provided values.
 
----
+***
 
 ### $lt?
 
@@ -85,11 +85,11 @@ Checks if the property matches any of the provided values.
 optional $lt: number;
 ```
 
-Defined in: [gen/types.gen.ts:2698](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2698)
+Defined in: [gen/types.gen.ts:2851](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2851)
 
 Lower than comparison with the provided value.
 
----
+***
 
 ### $lte?
 
@@ -97,11 +97,11 @@ Lower than comparison with the provided value.
 optional $lte: number;
 ```
 
-Defined in: [gen/types.gen.ts:2702](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2702)
+Defined in: [gen/types.gen.ts:2855](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2855)
 
 Lower than or equal comparison with the provided value.
 
----
+***
 
 ### $neq?
 
@@ -109,6 +109,6 @@ Lower than or equal comparison with the provided value.
 optional $neq: number;
 ```
 
-Defined in: [gen/types.gen.ts:2682](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2682)
+Defined in: [gen/types.gen.ts:2835](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2835)
 
 Checks for inequality with the provided value.

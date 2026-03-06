@@ -11,23 +11,23 @@ mdx:
 type MatchedDecisionRuleItem = object;
 ```
 
-Defined in: [gen/types.gen.ts:1854](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1854)
+Defined in: [gen/types.gen.ts:1917](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1917)
 
 A decision rule that matched within this decision evaluation.
 
 ## Properties
 
-### evaluatedOutputs?
+### evaluatedOutputs
 
 ```ts
-optional evaluatedOutputs: EvaluatedDecisionOutputItem[];
+evaluatedOutputs: EvaluatedDecisionOutputItem[];
 ```
 
-Defined in: [gen/types.gen.ts:1866](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1866)
+Defined in: [gen/types.gen.ts:1929](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1929)
 
 The evaluated decision outputs.
 
----
+***
 
 ### ruleId?
 
@@ -35,11 +35,11 @@ The evaluated decision outputs.
 optional ruleId: string;
 ```
 
-Defined in: [gen/types.gen.ts:1858](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1858)
+Defined in: [gen/types.gen.ts:1921](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1921)
 
 The ID of the matched rule.
 
----
+***
 
 ### ruleIndex?
 
@@ -47,6 +47,6 @@ The ID of the matched rule.
 optional ruleIndex: number;
 ```
 
-Defined in: [gen/types.gen.ts:1862](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1862)
+Defined in: [gen/types.gen.ts:1925](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1925)
 
 The index of the matched rule.

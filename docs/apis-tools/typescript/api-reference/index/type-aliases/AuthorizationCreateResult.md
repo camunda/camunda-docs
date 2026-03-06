@@ -11,7 +11,7 @@ mdx:
 type AuthorizationCreateResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:657](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L657)
+Defined in: [gen/types.gen.ts:674](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L674)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:657](https://github.com/camunda/orchestration-clus
 optional authorizationKey: AuthorizationKey;
 ```
 
-Defined in: [gen/types.gen.ts:661](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L661)
+Defined in: [gen/types.gen.ts:678](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L678)
 
 The key of the created authorization.

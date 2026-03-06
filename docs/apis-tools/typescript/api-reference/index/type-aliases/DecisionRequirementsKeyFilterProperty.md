@@ -8,11 +8,11 @@ mdx:
 # Type Alias: DecisionRequirementsKeyFilterProperty
 
 ```ts
-type DecisionRequirementsKeyFilterProperty =
+type DecisionRequirementsKeyFilterProperty = 
   | DecisionRequirementsKeyExactMatch
   | AdvancedDecisionRequirementsKeyFilter;
 ```
 
-Defined in: [gen/types.gen.ts:4469](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4469)
+Defined in: [gen/types.gen.ts:5039](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5039)
 
 DecisionRequirementsKey property with full advanced search capabilities.

@@ -11,7 +11,7 @@ mdx:
 type UpdateTenantClusterVariableResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:9050](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9050)
+Defined in: [gen/types.gen.ts:9364](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9364)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:9050](https://github.com/camunda/orchestration-clu
 200: ClusterVariableResult;
 ```
 
-Defined in: [gen/types.gen.ts:9054](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9054)
+Defined in: [gen/types.gen.ts:9368](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L9368)
 
 Cluster variable updated successfully

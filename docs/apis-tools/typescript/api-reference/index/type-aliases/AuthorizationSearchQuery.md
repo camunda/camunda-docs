@@ -11,7 +11,7 @@ mdx:
 type AuthorizationSearchQuery = SearchQueryRequest & object;
 ```
 
-Defined in: [gen/types.gen.ts:588](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L588)
+Defined in: [gen/types.gen.ts:605](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L605)
 
 ## Type Declaration
 

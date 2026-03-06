@@ -11,7 +11,7 @@ mdx:
 type AdvancedJobStateFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:3983](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3983)
+Defined in: [gen/types.gen.ts:4557](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4557)
 
 Advanced filter
 
@@ -25,11 +25,11 @@ Advanced JobStateEnum filter.
 optional $eq: JobStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:3987](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3987)
+Defined in: [gen/types.gen.ts:4561](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4561)
 
 Checks for equality with the provided value.
 
----
+***
 
 ### $exists?
 
@@ -37,11 +37,11 @@ Checks for equality with the provided value.
 optional $exists: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:3995](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3995)
+Defined in: [gen/types.gen.ts:4569](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4569)
 
 Checks if the current property exists.
 
----
+***
 
 ### $in?
 
@@ -49,11 +49,11 @@ Checks if the current property exists.
 optional $in: JobStateEnum[];
 ```
 
-Defined in: [gen/types.gen.ts:3999](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3999)
+Defined in: [gen/types.gen.ts:4573](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4573)
 
 Checks if the property matches any of the provided values.
 
----
+***
 
 ### $like?
 
@@ -61,9 +61,9 @@ Checks if the property matches any of the provided values.
 optional $like: LikeFilter;
 ```
 
-Defined in: [gen/types.gen.ts:4000](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4000)
+Defined in: [gen/types.gen.ts:4574](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4574)
 
----
+***
 
 ### $neq?
 
@@ -71,6 +71,6 @@ Defined in: [gen/types.gen.ts:4000](https://github.com/camunda/orchestration-clu
 optional $neq: JobStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:3991](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3991)
+Defined in: [gen/types.gen.ts:4565](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4565)
 
 Checks for inequality with the provided value.

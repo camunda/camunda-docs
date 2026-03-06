@@ -11,7 +11,7 @@ mdx:
 type DocumentCreationFailureDetail = object;
 ```
 
-Defined in: [gen/types.gen.ts:2289](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2289)
+Defined in: [gen/types.gen.ts:2394](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2394)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:2289](https://github.com/camunda/orchestration-clu
 optional detail: string;
 ```
 
-Defined in: [gen/types.gen.ts:2305](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2305)
+Defined in: [gen/types.gen.ts:2410](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2410)
 
 A human-readable explanation specific to this occurrence of the problem.
 
----
+***
 
 ### fileName?
 
@@ -33,11 +33,11 @@ A human-readable explanation specific to this occurrence of the problem.
 optional fileName: string;
 ```
 
-Defined in: [gen/types.gen.ts:2293](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2293)
+Defined in: [gen/types.gen.ts:2398](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2398)
 
 The name of the file that failed to upload.
 
----
+***
 
 ### status?
 
@@ -45,11 +45,11 @@ The name of the file that failed to upload.
 optional status: number;
 ```
 
-Defined in: [gen/types.gen.ts:2297](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2297)
+Defined in: [gen/types.gen.ts:2402](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2402)
 
 The HTTP status code of the failure.
 
----
+***
 
 ### title?
 
@@ -57,6 +57,6 @@ The HTTP status code of the failure.
 optional title: string;
 ```
 
-Defined in: [gen/types.gen.ts:2301](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2301)
+Defined in: [gen/types.gen.ts:2406](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2406)
 
 A short, human-readable summary of the problem type.

@@ -11,7 +11,7 @@ mdx:
 type UpdateClusterVariableRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:1126](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1126)
+Defined in: [gen/types.gen.ts:1159](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1159)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:1126](https://github.com/camunda/orchestration-clu
 value: object;
 ```
 
-Defined in: [gen/types.gen.ts:1130](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1130)
+Defined in: [gen/types.gen.ts:1163](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1163)
 
 The new value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.
 

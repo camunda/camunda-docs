@@ -11,7 +11,7 @@ mdx:
 type RoleUpdateResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:6231](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6231)
+Defined in: [gen/types.gen.ts:6858](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6858)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:6231](https://github.com/camunda/orchestration-clu
 optional description: string;
 ```
 
-Defined in: [gen/types.gen.ts:6239](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6239)
+Defined in: [gen/types.gen.ts:6866](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6866)
 
 The description of the updated role.
 
----
+***
 
 ### name?
 
@@ -33,11 +33,11 @@ The description of the updated role.
 optional name: string;
 ```
 
-Defined in: [gen/types.gen.ts:6235](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6235)
+Defined in: [gen/types.gen.ts:6862](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6862)
 
 The display name of the updated role.
 
----
+***
 
 ### roleId?
 
@@ -45,6 +45,6 @@ The display name of the updated role.
 optional roleId: string;
 ```
 
-Defined in: [gen/types.gen.ts:6243](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6243)
+Defined in: [gen/types.gen.ts:6870](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6870)
 
 The ID of the updated role.

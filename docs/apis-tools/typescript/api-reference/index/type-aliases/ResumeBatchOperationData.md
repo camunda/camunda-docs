@@ -11,7 +11,7 @@ mdx:
 type ResumeBatchOperationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8426](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8426)
+Defined in: [gen/types.gen.ts:8806](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8806)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:8426](https://github.com/camunda/orchestration-clu
 optional body: unknown;
 ```
 
-Defined in: [gen/types.gen.ts:8427](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8427)
+Defined in: [gen/types.gen.ts:8807](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8807)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:8427](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:8428](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8428)
+Defined in: [gen/types.gen.ts:8808](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8808)
 
 #### batchOperationKey
 
@@ -41,7 +41,7 @@ batchOperationKey: BatchOperationKey;
 
 The key (or operate legacy ID) of the batch operation.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The key (or operate legacy ID) of the batch operation.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:8434](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8434)
+Defined in: [gen/types.gen.ts:8814](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8814)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:8434](https://github.com/camunda/orchestration-clu
 url: "/batch-operations/{batchOperationKey}/resumption";
 ```
 
-Defined in: [gen/types.gen.ts:8435](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8435)
+Defined in: [gen/types.gen.ts:8815](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L8815)

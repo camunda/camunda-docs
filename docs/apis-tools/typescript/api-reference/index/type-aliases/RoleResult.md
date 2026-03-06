@@ -11,7 +11,7 @@ mdx:
 type RoleResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:6249](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6249)
+Defined in: [gen/types.gen.ts:6876](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6876)
 
 Role search response item.
 
@@ -23,11 +23,11 @@ Role search response item.
 optional description: string;
 ```
 
-Defined in: [gen/types.gen.ts:6261](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6261)
+Defined in: [gen/types.gen.ts:6888](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6888)
 
 The description of the role.
 
----
+***
 
 ### name?
 
@@ -35,11 +35,11 @@ The description of the role.
 optional name: string;
 ```
 
-Defined in: [gen/types.gen.ts:6253](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6253)
+Defined in: [gen/types.gen.ts:6880](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6880)
 
 The role name.
 
----
+***
 
 ### roleId?
 
@@ -47,6 +47,6 @@ The role name.
 optional roleId: string;
 ```
 
-Defined in: [gen/types.gen.ts:6257](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6257)
+Defined in: [gen/types.gen.ts:6884](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6884)
 
 The role id.

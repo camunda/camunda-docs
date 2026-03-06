@@ -11,7 +11,7 @@ mdx:
 type ActivatedJobResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:3386](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3386)
+Defined in: [gen/types.gen.ts:3937](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3937)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:3386](https://github.com/camunda/orchestration-clu
 customHeaders: object;
 ```
 
-Defined in: [gen/types.gen.ts:3406](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3406)
+Defined in: [gen/types.gen.ts:3957](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3957)
 
 A set of custom headers defined during modelling; returned as a serialized JSON document.
 
@@ -31,7 +31,7 @@ A set of custom headers defined during modelling; returned as a serialized JSON 
 [key: string]: unknown
 ```
 
----
+***
 
 ### deadline
 
@@ -39,11 +39,11 @@ A set of custom headers defined during modelling; returned as a serialized JSON 
 deadline: number;
 ```
 
-Defined in: [gen/types.gen.ts:3420](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3420)
+Defined in: [gen/types.gen.ts:3971](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3971)
 
 When the job can be activated again, sent as a UNIX epoch timestamp.
 
----
+***
 
 ### elementId
 
@@ -51,11 +51,11 @@ When the job can be activated again, sent as a UNIX epoch timestamp.
 elementId: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:3402](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3402)
+Defined in: [gen/types.gen.ts:3953](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3953)
 
 The associated task element ID.
 
----
+***
 
 ### elementInstanceKey
 
@@ -63,9 +63,11 @@ The associated task element ID.
 elementInstanceKey: ElementInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:3443](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3443)
+Defined in: [gen/types.gen.ts:3997](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3997)
 
----
+The element instance key of the task.
+
+***
 
 ### jobKey
 
@@ -73,11 +75,11 @@ Defined in: [gen/types.gen.ts:3443](https://github.com/camunda/orchestration-clu
 jobKey: JobKey;
 ```
 
-Defined in: [gen/types.gen.ts:3434](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3434)
+Defined in: [gen/types.gen.ts:3985](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3985)
 
 The key, a unique identifier for the job.
 
----
+***
 
 ### kind
 
@@ -85,9 +87,9 @@ The key, a unique identifier for the job.
 kind: JobKindEnum;
 ```
 
-Defined in: [gen/types.gen.ts:3444](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3444)
+Defined in: [gen/types.gen.ts:3998](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3998)
 
----
+***
 
 ### listenerEventType
 
@@ -95,9 +97,9 @@ Defined in: [gen/types.gen.ts:3444](https://github.com/camunda/orchestration-clu
 listenerEventType: JobListenerEventTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:3445](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3445)
+Defined in: [gen/types.gen.ts:3999](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3999)
 
----
+***
 
 ### processDefinitionId
 
@@ -105,11 +107,11 @@ Defined in: [gen/types.gen.ts:3445](https://github.com/camunda/orchestration-clu
 processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:3394](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3394)
+Defined in: [gen/types.gen.ts:3945](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3945)
 
 The bpmn process ID of the job's process definition.
 
----
+***
 
 ### processDefinitionKey
 
@@ -117,11 +119,11 @@ The bpmn process ID of the job's process definition.
 processDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:3442](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3442)
+Defined in: [gen/types.gen.ts:3993](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3993)
 
 The key of the job's process definition.
 
----
+***
 
 ### processDefinitionVersion
 
@@ -129,11 +131,11 @@ The key of the job's process definition.
 processDefinitionVersion: number;
 ```
 
-Defined in: [gen/types.gen.ts:3398](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3398)
+Defined in: [gen/types.gen.ts:3949](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3949)
 
 The version of the job's process definition.
 
----
+***
 
 ### processInstanceKey
 
@@ -141,11 +143,11 @@ The version of the job's process definition.
 processInstanceKey: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:3438](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3438)
+Defined in: [gen/types.gen.ts:3989](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3989)
 
 The job's process instance key.
 
----
+***
 
 ### retries
 
@@ -153,21 +155,35 @@ The job's process instance key.
 retries: number;
 ```
 
-Defined in: [gen/types.gen.ts:3416](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3416)
+Defined in: [gen/types.gen.ts:3967](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3967)
 
 The amount of retries left to this job (should always be positive).
 
----
+***
 
-### tags?
+### rootProcessInstanceKey
 
 ```ts
-optional tags: TagSet;
+rootProcessInstanceKey: ProcessInstanceKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:3447](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3447)
+Defined in: [gen/types.gen.ts:4013](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4013)
 
----
+The key of the root process instance. The root process instance is the top-level
+ancestor in the process instance hierarchy. This field is only present for data
+belonging to process instance hierarchies created in version 8.9 or later.
+
+***
+
+### tags
+
+```ts
+tags: TagSet;
+```
+
+Defined in: [gen/types.gen.ts:4006](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4006)
+
+***
 
 ### tenantId
 
@@ -175,11 +191,11 @@ Defined in: [gen/types.gen.ts:3447](https://github.com/camunda/orchestration-clu
 tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:3430](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3430)
+Defined in: [gen/types.gen.ts:3981](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3981)
 
 The ID of the tenant that owns the job.
 
----
+***
 
 ### type
 
@@ -187,21 +203,24 @@ The ID of the tenant that owns the job.
 type: string;
 ```
 
-Defined in: [gen/types.gen.ts:3390](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3390)
+Defined in: [gen/types.gen.ts:3941](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3941)
 
 The type of the job (should match what was requested).
 
----
+***
 
 ### userTask?
 
 ```ts
-optional userTask: UserTaskProperties;
+optional userTask: UserTaskProperties | null;
 ```
 
-Defined in: [gen/types.gen.ts:3446](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3446)
+Defined in: [gen/types.gen.ts:4005](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L4005)
 
----
+User task properties, if the job is a user task.
+This is `null` if the job is not a user task.
+
+***
 
 ### variables
 
@@ -209,7 +228,7 @@ Defined in: [gen/types.gen.ts:3446](https://github.com/camunda/orchestration-clu
 variables: object;
 ```
 
-Defined in: [gen/types.gen.ts:3424](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3424)
+Defined in: [gen/types.gen.ts:3975](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3975)
 
 All variables visible to the task scope, computed at activation time.
 
@@ -219,7 +238,7 @@ All variables visible to the task scope, computed at activation time.
 [key: string]: unknown
 ```
 
----
+***
 
 ### worker
 
@@ -227,6 +246,6 @@ All variables visible to the task scope, computed at activation time.
 worker: string;
 ```
 
-Defined in: [gen/types.gen.ts:3412](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3412)
+Defined in: [gen/types.gen.ts:3963](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3963)
 
 The name of the worker which activated this job.

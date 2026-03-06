@@ -8,7 +8,7 @@ mdx:
 # Type Alias: BatchOperationTypeEnum
 
 ```ts
-type BatchOperationTypeEnum =
+type BatchOperationTypeEnum = 
   | "ADD_VARIABLE"
   | "CANCEL_PROCESS_INSTANCE"
   | "DELETE_DECISION_DEFINITION"
@@ -21,6 +21,6 @@ type BatchOperationTypeEnum =
   | "UPDATE_VARIABLE";
 ```
 
-Defined in: [gen/types.gen.ts:1009](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1009)
+Defined in: [gen/types.gen.ts:1042](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1042)
 
 The type of the batch operation.

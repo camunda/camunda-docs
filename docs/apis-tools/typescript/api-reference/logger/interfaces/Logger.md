@@ -7,7 +7,7 @@ mdx:
 
 # Interface: Logger
 
-Defined in: [runtime/logger.ts:24](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/logger.ts#L24)
+Defined in: [runtime/logger.ts:24](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/logger.ts#L24)
 
 ## Methods
 
@@ -15,13 +15,13 @@ Defined in: [runtime/logger.ts:24](https://github.com/camunda/orchestration-clus
 
 ```ts
 code(
-   level,
-   code,
-   msg,
+   level, 
+   code, 
+   msg, 
    data?): void;
 ```
 
-Defined in: [runtime/logger.ts:35](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/logger.ts#L35)
+Defined in: [runtime/logger.ts:35](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/logger.ts#L35)
 
 #### Parameters
 
@@ -45,7 +45,7 @@ Defined in: [runtime/logger.ts:35](https://github.com/camunda/orchestration-clus
 
 `void`
 
----
+***
 
 ### debug()
 
@@ -53,7 +53,7 @@ Defined in: [runtime/logger.ts:35](https://github.com/camunda/orchestration-clus
 debug(...a): void;
 ```
 
-Defined in: [runtime/logger.ts:31](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/logger.ts#L31)
+Defined in: [runtime/logger.ts:31](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/logger.ts#L31)
 
 #### Parameters
 
@@ -65,7 +65,7 @@ Defined in: [runtime/logger.ts:31](https://github.com/camunda/orchestration-clus
 
 `void`
 
----
+***
 
 ### error()
 
@@ -73,7 +73,7 @@ Defined in: [runtime/logger.ts:31](https://github.com/camunda/orchestration-clus
 error(...a): void;
 ```
 
-Defined in: [runtime/logger.ts:28](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/logger.ts#L28)
+Defined in: [runtime/logger.ts:28](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/logger.ts#L28)
 
 #### Parameters
 
@@ -85,7 +85,7 @@ Defined in: [runtime/logger.ts:28](https://github.com/camunda/orchestration-clus
 
 `void`
 
----
+***
 
 ### info()
 
@@ -93,7 +93,7 @@ Defined in: [runtime/logger.ts:28](https://github.com/camunda/orchestration-clus
 info(...a): void;
 ```
 
-Defined in: [runtime/logger.ts:30](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/logger.ts#L30)
+Defined in: [runtime/logger.ts:30](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/logger.ts#L30)
 
 #### Parameters
 
@@ -105,7 +105,7 @@ Defined in: [runtime/logger.ts:30](https://github.com/camunda/orchestration-clus
 
 `void`
 
----
+***
 
 ### level()
 
@@ -113,13 +113,13 @@ Defined in: [runtime/logger.ts:30](https://github.com/camunda/orchestration-clus
 level(): LogLevel;
 ```
 
-Defined in: [runtime/logger.ts:25](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/logger.ts#L25)
+Defined in: [runtime/logger.ts:25](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/logger.ts#L25)
 
 #### Returns
 
 [`LogLevel`](../type-aliases/LogLevel.md)
 
----
+***
 
 ### scope()
 
@@ -127,7 +127,7 @@ Defined in: [runtime/logger.ts:25](https://github.com/camunda/orchestration-clus
 scope(child): Logger;
 ```
 
-Defined in: [runtime/logger.ts:34](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/logger.ts#L34)
+Defined in: [runtime/logger.ts:34](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/logger.ts#L34)
 
 #### Parameters
 
@@ -139,7 +139,7 @@ Defined in: [runtime/logger.ts:34](https://github.com/camunda/orchestration-clus
 
 `Logger`
 
----
+***
 
 ### setLevel()
 
@@ -147,7 +147,7 @@ Defined in: [runtime/logger.ts:34](https://github.com/camunda/orchestration-clus
 setLevel(level): void;
 ```
 
-Defined in: [runtime/logger.ts:26](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/logger.ts#L26)
+Defined in: [runtime/logger.ts:26](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/logger.ts#L26)
 
 #### Parameters
 
@@ -159,7 +159,7 @@ Defined in: [runtime/logger.ts:26](https://github.com/camunda/orchestration-clus
 
 `void`
 
----
+***
 
 ### setTransport()
 
@@ -167,7 +167,7 @@ Defined in: [runtime/logger.ts:26](https://github.com/camunda/orchestration-clus
 setTransport(t?): void;
 ```
 
-Defined in: [runtime/logger.ts:27](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/logger.ts#L27)
+Defined in: [runtime/logger.ts:27](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/logger.ts#L27)
 
 #### Parameters
 
@@ -179,7 +179,7 @@ Defined in: [runtime/logger.ts:27](https://github.com/camunda/orchestration-clus
 
 `void`
 
----
+***
 
 ### silly()
 
@@ -187,7 +187,7 @@ Defined in: [runtime/logger.ts:27](https://github.com/camunda/orchestration-clus
 silly(...a): void;
 ```
 
-Defined in: [runtime/logger.ts:33](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/logger.ts#L33)
+Defined in: [runtime/logger.ts:33](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/logger.ts#L33)
 
 #### Parameters
 
@@ -199,7 +199,7 @@ Defined in: [runtime/logger.ts:33](https://github.com/camunda/orchestration-clus
 
 `void`
 
----
+***
 
 ### trace()
 
@@ -207,7 +207,7 @@ Defined in: [runtime/logger.ts:33](https://github.com/camunda/orchestration-clus
 trace(...a): void;
 ```
 
-Defined in: [runtime/logger.ts:32](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/logger.ts#L32)
+Defined in: [runtime/logger.ts:32](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/logger.ts#L32)
 
 #### Parameters
 
@@ -219,7 +219,7 @@ Defined in: [runtime/logger.ts:32](https://github.com/camunda/orchestration-clus
 
 `void`
 
----
+***
 
 ### warn()
 
@@ -227,7 +227,7 @@ Defined in: [runtime/logger.ts:32](https://github.com/camunda/orchestration-clus
 warn(...a): void;
 ```
 
-Defined in: [runtime/logger.ts:29](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/logger.ts#L29)
+Defined in: [runtime/logger.ts:29](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/logger.ts#L29)
 
 #### Parameters
 

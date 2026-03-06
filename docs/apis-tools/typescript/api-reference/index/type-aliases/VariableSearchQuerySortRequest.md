@@ -11,14 +11,14 @@ mdx:
 type VariableSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:7244](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7244)
+Defined in: [gen/types.gen.ts:7908](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7908)
 
 ## Properties
 
 ### field
 
 ```ts
-field:
+field: 
   | "value"
   | "name"
   | "tenantId"
@@ -27,11 +27,11 @@ field:
   | "processInstanceKey";
 ```
 
-Defined in: [gen/types.gen.ts:7248](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7248)
+Defined in: [gen/types.gen.ts:7912](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7912)
 
 The field to sort by.
 
----
+***
 
 ### order?
 
@@ -39,4 +39,4 @@ The field to sort by.
 optional order: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:7249](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7249)
+Defined in: [gen/types.gen.ts:7913](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L7913)

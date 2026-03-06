@@ -11,7 +11,7 @@ mdx:
 type ProcessInstanceMigrationBatchOperationRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:934](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L934)
+Defined in: [gen/types.gen.ts:967](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L967)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:934](https://github.com/camunda/orchestration-clus
 filter: ProcessInstanceFilter;
 ```
 
-Defined in: [gen/types.gen.ts:938](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L938)
+Defined in: [gen/types.gen.ts:971](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L971)
 
 The process instance filter.
 
----
+***
 
 ### migrationPlan
 
@@ -33,11 +33,11 @@ The process instance filter.
 migrationPlan: ProcessInstanceMigrationBatchOperationPlan;
 ```
 
-Defined in: [gen/types.gen.ts:942](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L942)
+Defined in: [gen/types.gen.ts:975](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L975)
 
 The migration plan.
 
----
+***
 
 ### operationReference?
 
@@ -45,4 +45,4 @@ The migration plan.
 optional operationReference: OperationReference;
 ```
 
-Defined in: [gen/types.gen.ts:943](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L943)
+Defined in: [gen/types.gen.ts:976](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L976)

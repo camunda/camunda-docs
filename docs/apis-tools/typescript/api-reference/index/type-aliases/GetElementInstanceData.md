@@ -11,7 +11,7 @@ mdx:
 type GetElementInstanceData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10376](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10376)
+Defined in: [gen/types.gen.ts:10268](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10268)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:10376](https://github.com/camunda/orchestration-cl
 optional body: never;
 ```
 
-Defined in: [gen/types.gen.ts:10377](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10377)
+Defined in: [gen/types.gen.ts:10269](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10269)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:10377](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:10378](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10378)
+Defined in: [gen/types.gen.ts:10270](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10270)
 
 #### elementInstanceKey
 
@@ -41,7 +41,7 @@ elementInstanceKey: ElementInstanceKey;
 
 The assigned key of the element instance, which acts as a unique identifier for this element instance.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The assigned key of the element instance, which acts as a unique identifier for 
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:10384](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10384)
+Defined in: [gen/types.gen.ts:10276](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10276)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:10384](https://github.com/camunda/orchestration-cl
 url: "/element-instances/{elementInstanceKey}";
 ```
 
-Defined in: [gen/types.gen.ts:10385](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10385)
+Defined in: [gen/types.gen.ts:10277](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10277)

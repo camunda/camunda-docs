@@ -11,7 +11,7 @@ mdx:
 type DocumentMetadata = object;
 ```
 
-Defined in: [gen/types.gen.ts:2322](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2322)
+Defined in: [gen/types.gen.ts:2427](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2427)
 
 Information about the document.
 
@@ -23,11 +23,11 @@ Information about the document.
 optional contentType: string;
 ```
 
-Defined in: [gen/types.gen.ts:2326](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2326)
+Defined in: [gen/types.gen.ts:2431](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2431)
 
 The content type of the document.
 
----
+***
 
 ### customProperties?
 
@@ -35,7 +35,7 @@ The content type of the document.
 optional customProperties: object;
 ```
 
-Defined in: [gen/types.gen.ts:2350](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2350)
+Defined in: [gen/types.gen.ts:2455](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2455)
 
 Custom properties of the document.
 
@@ -45,7 +45,7 @@ Custom properties of the document.
 [key: string]: unknown
 ```
 
----
+***
 
 ### expiresAt?
 
@@ -53,11 +53,11 @@ Custom properties of the document.
 optional expiresAt: string;
 ```
 
-Defined in: [gen/types.gen.ts:2334](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2334)
+Defined in: [gen/types.gen.ts:2439](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2439)
 
 The date and time when the document expires.
 
----
+***
 
 ### fileName?
 
@@ -65,11 +65,11 @@ The date and time when the document expires.
 optional fileName: string;
 ```
 
-Defined in: [gen/types.gen.ts:2330](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2330)
+Defined in: [gen/types.gen.ts:2435](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2435)
 
 The name of the file.
 
----
+***
 
 ### processDefinitionId?
 
@@ -77,11 +77,11 @@ The name of the file.
 optional processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:2342](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2342)
+Defined in: [gen/types.gen.ts:2447](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2447)
 
 The ID of the process definition that created the document.
 
----
+***
 
 ### processInstanceKey?
 
@@ -89,11 +89,11 @@ The ID of the process definition that created the document.
 optional processInstanceKey: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:2346](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2346)
+Defined in: [gen/types.gen.ts:2451](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2451)
 
 The key of the process instance that created the document.
 
----
+***
 
 ### size?
 
@@ -101,6 +101,6 @@ The key of the process instance that created the document.
 optional size: number;
 ```
 
-Defined in: [gen/types.gen.ts:2338](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2338)
+Defined in: [gen/types.gen.ts:2443](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L2443)
 
 The size of the document in bytes.

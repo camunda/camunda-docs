@@ -11,7 +11,7 @@ mdx:
 type ProcessDefinitionMessageSubscriptionStatisticsQuery = object;
 ```
 
-Defined in: [gen/types.gen.ts:5229](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5229)
+Defined in: [gen/types.gen.ts:5811](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5811)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:5229](https://github.com/camunda/orchestration-clu
 optional filter: MessageSubscriptionFilter;
 ```
 
-Defined in: [gen/types.gen.ts:5234](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5234)
+Defined in: [gen/types.gen.ts:5819](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5819)
 
 The message subscription filters.
 
----
+***
 
 ### page?
 
@@ -33,4 +33,6 @@ The message subscription filters.
 optional page: CursorForwardPagination;
 ```
 
-Defined in: [gen/types.gen.ts:5230](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5230)
+Defined in: [gen/types.gen.ts:5815](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L5815)
+
+Search cursor pagination.

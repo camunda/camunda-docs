@@ -11,7 +11,7 @@ mdx:
 type SearchRolesResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:14591](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14591)
+Defined in: [gen/types.gen.ts:13668](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13668)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:14591](https://github.com/camunda/orchestration-cl
 200: RoleSearchQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:14595](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14595)
+Defined in: [gen/types.gen.ts:13672](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L13672)
 
 The roles search result.

@@ -11,7 +11,7 @@ mdx:
 type GroupUpdateResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:2825](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2825)
+Defined in: [gen/types.gen.ts:3155](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3155)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:2825](https://github.com/camunda/orchestration-clu
 optional description: string;
 ```
 
-Defined in: [gen/types.gen.ts:2837](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2837)
+Defined in: [gen/types.gen.ts:3167](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3167)
 
 The description of the group.
 
----
+***
 
 ### groupId?
 
@@ -33,11 +33,11 @@ The description of the group.
 optional groupId: string;
 ```
 
-Defined in: [gen/types.gen.ts:2829](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2829)
+Defined in: [gen/types.gen.ts:3159](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3159)
 
 The unique external group ID.
 
----
+***
 
 ### name?
 
@@ -45,6 +45,6 @@ The unique external group ID.
 optional name: string;
 ```
 
-Defined in: [gen/types.gen.ts:2833](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2833)
+Defined in: [gen/types.gen.ts:3163](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3163)
 
 The name of the group.

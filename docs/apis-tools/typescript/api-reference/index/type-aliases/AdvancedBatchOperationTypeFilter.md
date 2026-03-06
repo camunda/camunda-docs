@@ -11,7 +11,7 @@ mdx:
 type AdvancedBatchOperationTypeFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:1021](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1021)
+Defined in: [gen/types.gen.ts:1054](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1054)
 
 Advanced filter
 
@@ -25,11 +25,11 @@ Advanced BatchOperationTypeEnum filter.
 optional $eq: BatchOperationTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:1025](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1025)
+Defined in: [gen/types.gen.ts:1058](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1058)
 
 Checks for equality with the provided value.
 
----
+***
 
 ### $exists?
 
@@ -37,11 +37,11 @@ Checks for equality with the provided value.
 optional $exists: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:1033](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1033)
+Defined in: [gen/types.gen.ts:1066](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1066)
 
 Checks if the current property exists.
 
----
+***
 
 ### $in?
 
@@ -49,11 +49,11 @@ Checks if the current property exists.
 optional $in: BatchOperationTypeEnum[];
 ```
 
-Defined in: [gen/types.gen.ts:1037](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1037)
+Defined in: [gen/types.gen.ts:1070](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1070)
 
 Checks if the property matches any of the provided values.
 
----
+***
 
 ### $like?
 
@@ -61,9 +61,9 @@ Checks if the property matches any of the provided values.
 optional $like: LikeFilter;
 ```
 
-Defined in: [gen/types.gen.ts:1038](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1038)
+Defined in: [gen/types.gen.ts:1071](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1071)
 
----
+***
 
 ### $neq?
 
@@ -71,6 +71,6 @@ Defined in: [gen/types.gen.ts:1038](https://github.com/camunda/orchestration-clu
 optional $neq: BatchOperationTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:1029](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1029)
+Defined in: [gen/types.gen.ts:1062](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1062)
 
 Checks for inequality with the provided value.

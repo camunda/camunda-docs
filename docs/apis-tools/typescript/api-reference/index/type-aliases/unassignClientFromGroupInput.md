@@ -11,7 +11,7 @@ mdx:
 type unassignClientFromGroupInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:1006](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1006)
+Defined in: [gen/CamundaClient.ts:977](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L977)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/CamundaClient.ts:1006](https://github.com/camunda/orchestration
 clientId: unassignClientFromGroupPathParam_clientId;
 ```
 
-Defined in: [gen/CamundaClient.ts:1006](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1006)
+Defined in: [gen/CamundaClient.ts:977](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L977)
 
----
+***
 
 ### groupId
 
@@ -31,4 +31,4 @@ Defined in: [gen/CamundaClient.ts:1006](https://github.com/camunda/orchestration
 groupId: unassignClientFromGroupPathParam_groupId;
 ```
 
-Defined in: [gen/CamundaClient.ts:1006](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1006)
+Defined in: [gen/CamundaClient.ts:977](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/CamundaClient.ts#L977)

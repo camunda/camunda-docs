@@ -11,7 +11,7 @@ mdx:
 type StatusMetric = object;
 ```
 
-Defined in: [gen/types.gen.ts:3327](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3327)
+Defined in: [gen/types.gen.ts:3701](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3701)
 
 Metric for a single job status.
 
@@ -23,18 +23,18 @@ Metric for a single job status.
 count: number;
 ```
 
-Defined in: [gen/types.gen.ts:3331](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3331)
+Defined in: [gen/types.gen.ts:3705](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3705)
 
 Number of jobs in this status.
 
----
+***
 
 ### lastUpdatedAt
 
 ```ts
-lastUpdatedAt: string;
+lastUpdatedAt: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:3335](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3335)
+Defined in: [gen/types.gen.ts:3709](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3709)
 
 ISO 8601 timestamp of the last update for this status.

@@ -11,7 +11,7 @@ mdx:
 type BaseProcessInstanceFilterFields = object;
 ```
 
-Defined in: [gen/types.gen.ts:5624](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5624)
+Defined in: [gen/types.gen.ts:6226](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6226)
 
 Base process instance search filter.
 
@@ -23,11 +23,11 @@ Base process instance search filter.
 optional batchOperationId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:5664](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5664)
+Defined in: [gen/types.gen.ts:6266](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6266)
 
 The batch operation id.
 
----
+***
 
 ### elementId?
 
@@ -35,11 +35,11 @@ The batch operation id.
 optional elementId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:5680](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5680)
+Defined in: [gen/types.gen.ts:6282](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6282)
 
 The element id associated with the process instance.
 
----
+***
 
 ### elementInstanceState?
 
@@ -47,11 +47,11 @@ The element id associated with the process instance.
 optional elementInstanceState: ElementInstanceStateFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:5676](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5676)
+Defined in: [gen/types.gen.ts:6278](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6278)
 
 The state of the element instances associated with the process instance.
 
----
+***
 
 ### endDate?
 
@@ -59,11 +59,11 @@ The state of the element instances associated with the process instance.
 optional endDate: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:5632](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5632)
+Defined in: [gen/types.gen.ts:6234](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6234)
 
 The end date.
 
----
+***
 
 ### errorMessage?
 
@@ -71,11 +71,11 @@ The end date.
 optional errorMessage: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:5668](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5668)
+Defined in: [gen/types.gen.ts:6270](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6270)
 
 The error message related to the process.
 
----
+***
 
 ### hasElementInstanceIncident?
 
@@ -83,11 +83,11 @@ The error message related to the process.
 optional hasElementInstanceIncident: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:5684](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5684)
+Defined in: [gen/types.gen.ts:6286](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6286)
 
 Whether the element instance has an incident or not.
 
----
+***
 
 ### hasIncident?
 
@@ -95,11 +95,11 @@ Whether the element instance has an incident or not.
 optional hasIncident: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:5640](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5640)
+Defined in: [gen/types.gen.ts:6242](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6242)
 
 Whether this process instance has a related incident or not.
 
----
+***
 
 ### hasRetriesLeft?
 
@@ -107,11 +107,11 @@ Whether this process instance has a related incident or not.
 optional hasRetriesLeft: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:5672](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5672)
+Defined in: [gen/types.gen.ts:6274](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6274)
 
 Whether the process has failed jobs with retries left.
 
----
+***
 
 ### incidentErrorHashCode?
 
@@ -119,11 +119,11 @@ Whether the process has failed jobs with retries left.
 optional incidentErrorHashCode: IntegerFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:5688](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5688)
+Defined in: [gen/types.gen.ts:6290](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6290)
 
 The incident error hash code, associated with this process.
 
----
+***
 
 ### parentElementInstanceKey?
 
@@ -131,11 +131,11 @@ The incident error hash code, associated with this process.
 optional parentElementInstanceKey: ElementInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:5660](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5660)
+Defined in: [gen/types.gen.ts:6262](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6262)
 
 The parent element instance key.
 
----
+***
 
 ### parentProcessInstanceKey?
 
@@ -143,11 +143,11 @@ The parent element instance key.
 optional parentProcessInstanceKey: ProcessInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:5656](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5656)
+Defined in: [gen/types.gen.ts:6258](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6258)
 
 The parent process instance key.
 
----
+***
 
 ### processInstanceKey?
 
@@ -155,11 +155,11 @@ The parent process instance key.
 optional processInstanceKey: ProcessInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:5652](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5652)
+Defined in: [gen/types.gen.ts:6254](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6254)
 
 The key of this process instance.
 
----
+***
 
 ### startDate?
 
@@ -167,11 +167,11 @@ The key of this process instance.
 optional startDate: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:5628](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5628)
+Defined in: [gen/types.gen.ts:6230](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6230)
 
 The start date.
 
----
+***
 
 ### state?
 
@@ -179,11 +179,11 @@ The start date.
 optional state: ProcessInstanceStateFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:5636](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5636)
+Defined in: [gen/types.gen.ts:6238](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6238)
 
 The process instance state.
 
----
+***
 
 ### tags?
 
@@ -191,9 +191,9 @@ The process instance state.
 optional tags: TagSet;
 ```
 
-Defined in: [gen/types.gen.ts:5689](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5689)
+Defined in: [gen/types.gen.ts:6291](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6291)
 
----
+***
 
 ### tenantId?
 
@@ -201,11 +201,11 @@ Defined in: [gen/types.gen.ts:5689](https://github.com/camunda/orchestration-clu
 optional tenantId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:5644](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5644)
+Defined in: [gen/types.gen.ts:6246](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6246)
 
 The tenant id.
 
----
+***
 
 ### variables?
 
@@ -213,6 +213,6 @@ The tenant id.
 optional variables: VariableValueFilterProperty[];
 ```
 
-Defined in: [gen/types.gen.ts:5648](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5648)
+Defined in: [gen/types.gen.ts:6250](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6250)
 
 The process instance variables.

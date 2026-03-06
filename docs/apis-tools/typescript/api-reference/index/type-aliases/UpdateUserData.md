@@ -11,7 +11,7 @@ mdx:
 type UpdateUserData = object;
 ```
 
-Defined in: [gen/types.gen.ts:16631](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16631)
+Defined in: [gen/types.gen.ts:15727](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15727)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:16631](https://github.com/camunda/orchestration-cl
 body: UserUpdateRequest;
 ```
 
-Defined in: [gen/types.gen.ts:16632](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16632)
+Defined in: [gen/types.gen.ts:15728](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15728)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:16632](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:16633](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16633)
+Defined in: [gen/types.gen.ts:15729](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15729)
 
 #### username
 
@@ -41,7 +41,7 @@ username: Username;
 
 The username of the user to update.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The username of the user to update.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:16639](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16639)
+Defined in: [gen/types.gen.ts:15735](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15735)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:16639](https://github.com/camunda/orchestration-cl
 url: "/users/{username}";
 ```
 
-Defined in: [gen/types.gen.ts:16640](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16640)
+Defined in: [gen/types.gen.ts:15736](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15736)

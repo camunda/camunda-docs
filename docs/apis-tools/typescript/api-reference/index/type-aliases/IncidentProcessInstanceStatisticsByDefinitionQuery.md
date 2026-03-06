@@ -11,7 +11,7 @@ mdx:
 type IncidentProcessInstanceStatisticsByDefinitionQuery = object;
 ```
 
-Defined in: [gen/types.gen.ts:3248](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3248)
+Defined in: [gen/types.gen.ts:3622](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3622)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:3248](https://github.com/camunda/orchestration-clu
 filter: IncidentProcessInstanceStatisticsByDefinitionFilter;
 ```
 
-Defined in: [gen/types.gen.ts:3252](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3252)
+Defined in: [gen/types.gen.ts:3626](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3626)
 
 Filter criteria for the aggregated process instance statistics.
 
----
+***
 
 ### page?
 
@@ -33,11 +33,11 @@ Filter criteria for the aggregated process instance statistics.
 optional page: OffsetPagination;
 ```
 
-Defined in: [gen/types.gen.ts:3256](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3256)
+Defined in: [gen/types.gen.ts:3630](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3630)
 
 Pagination parameters for the aggregated process instance statistics.
 
----
+***
 
 ### sort?
 
@@ -45,6 +45,6 @@ Pagination parameters for the aggregated process instance statistics.
 optional sort: IncidentProcessInstanceStatisticsByDefinitionQuerySortRequest[];
 ```
 
-Defined in: [gen/types.gen.ts:3260](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3260)
+Defined in: [gen/types.gen.ts:3634](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L3634)
 
 Sorting criteria for process instance statistics grouped by process definition.

@@ -11,26 +11,16 @@ mdx:
 type SearchJobsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:11840](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11840)
+Defined in: [gen/types.gen.ts:11701](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11701)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: JobSearchQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:11844](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11844)
+Defined in: [gen/types.gen.ts:11705](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11705)
 
-Job search response.
-
-#### Type Declaration
-
-##### items?
-
-```ts
-optional items: object[];
-```
-
-The matching jobs.
+The job search result.

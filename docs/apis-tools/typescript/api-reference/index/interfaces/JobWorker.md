@@ -7,7 +7,7 @@ mdx:
 
 # Interface: JobWorker
 
-Defined in: [runtime/jobWorker.ts:72](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/jobWorker.ts#L72)
+Defined in: [runtime/jobWorker.ts:79](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/jobWorker.ts#L79)
 
 ## Accessors
 
@@ -19,13 +19,13 @@ Defined in: [runtime/jobWorker.ts:72](https://github.com/camunda/orchestration-c
 get activeJobs(): number;
 ```
 
-Defined in: [runtime/jobWorker.ts:99](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/jobWorker.ts#L99)
+Defined in: [runtime/jobWorker.ts:106](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/jobWorker.ts#L106)
 
 ##### Returns
 
 `number`
 
----
+***
 
 ### name
 
@@ -35,13 +35,13 @@ Defined in: [runtime/jobWorker.ts:99](https://github.com/camunda/orchestration-c
 get name(): string;
 ```
 
-Defined in: [runtime/jobWorker.ts:96](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/jobWorker.ts#L96)
+Defined in: [runtime/jobWorker.ts:103](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/jobWorker.ts#L103)
 
 ##### Returns
 
 `string`
 
----
+***
 
 ### stopped
 
@@ -51,7 +51,7 @@ Defined in: [runtime/jobWorker.ts:96](https://github.com/camunda/orchestration-c
 get stopped(): boolean;
 ```
 
-Defined in: [runtime/jobWorker.ts:102](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/jobWorker.ts#L102)
+Defined in: [runtime/jobWorker.ts:109](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/jobWorker.ts#L109)
 
 ##### Returns
 
@@ -65,13 +65,13 @@ Defined in: [runtime/jobWorker.ts:102](https://github.com/camunda/orchestration-
 start(): void;
 ```
 
-Defined in: [runtime/jobWorker.ts:106](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/jobWorker.ts#L106)
+Defined in: [runtime/jobWorker.ts:113](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/jobWorker.ts#L113)
 
 #### Returns
 
 `void`
 
----
+***
 
 ### stop()
 
@@ -79,13 +79,13 @@ Defined in: [runtime/jobWorker.ts:106](https://github.com/camunda/orchestration-
 stop(): void;
 ```
 
-Defined in: [runtime/jobWorker.ts:113](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/jobWorker.ts#L113)
+Defined in: [runtime/jobWorker.ts:127](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/jobWorker.ts#L127)
 
 #### Returns
 
 `void`
 
----
+***
 
 ### stopGracefully()
 
@@ -96,7 +96,7 @@ stopGracefully(opts?): Promise<{
 }>;
 ```
 
-Defined in: [runtime/jobWorker.ts:132](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/jobWorker.ts#L132)
+Defined in: [runtime/jobWorker.ts:146](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/runtime/jobWorker.ts#L146)
 
 Gracefully stop the worker: prevent new polls, allow any in-flight activation to finish
 without cancellation, and wait for currently active jobs to drain (be acknowledged) up to waitUpToMs.
@@ -117,6 +117,6 @@ If timeout is reached, falls back to hard stop logic (cancels activation if stil
 #### Returns
 
 `Promise`\<\{
-`remainingJobs`: `number`;
-`timedOut`: `boolean`;
+  `remainingJobs`: `number`;
+  `timedOut`: `boolean`;
 \}\>

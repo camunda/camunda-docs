@@ -11,44 +11,19 @@ mdx:
 type ModifyProcessInstancesBatchOperationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:13570](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13570)
+Defined in: [gen/types.gen.ts:12951](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L12951)
 
 ## Properties
 
 ### body
 
 ```ts
-body: object;
+body: ProcessInstanceModificationBatchOperationRequest;
 ```
 
-Defined in: [gen/types.gen.ts:13576](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13576)
+Defined in: [gen/types.gen.ts:12952](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L12952)
 
-The process instance filter to define on which process instances tokens should be moved,
-and new element instances should be activated or terminated.
-
-#### filter
-
-```ts
-filter: ProcessInstanceFilter;
-```
-
-The process instance filter.
-
-#### moveInstructions
-
-```ts
-moveInstructions: ProcessInstanceModificationMoveBatchOperationInstruction[];
-```
-
-Instructions for moving tokens between elements.
-
-#### operationReference?
-
-```ts
-optional operationReference: OperationReference;
-```
-
----
+***
 
 ### path?
 
@@ -56,9 +31,9 @@ optional operationReference: OperationReference;
 optional path: never;
 ```
 
-Defined in: [gen/types.gen.ts:13587](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13587)
+Defined in: [gen/types.gen.ts:12953](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L12953)
 
----
+***
 
 ### query?
 
@@ -66,9 +41,9 @@ Defined in: [gen/types.gen.ts:13587](https://github.com/camunda/orchestration-cl
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:13588](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13588)
+Defined in: [gen/types.gen.ts:12954](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L12954)
 
----
+***
 
 ### url
 
@@ -76,4 +51,4 @@ Defined in: [gen/types.gen.ts:13588](https://github.com/camunda/orchestration-cl
 url: "/process-instances/modification";
 ```
 
-Defined in: [gen/types.gen.ts:13589](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13589)
+Defined in: [gen/types.gen.ts:12955](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L12955)

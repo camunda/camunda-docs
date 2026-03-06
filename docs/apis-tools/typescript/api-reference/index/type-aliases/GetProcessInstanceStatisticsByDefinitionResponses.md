@@ -11,7 +11,7 @@ mdx:
 type GetProcessInstanceStatisticsByDefinitionResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:11613](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11613)
+Defined in: [gen/types.gen.ts:11585](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11585)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:11613](https://github.com/camunda/orchestration-cl
 200: IncidentProcessInstanceStatisticsByDefinitionQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:11619](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11619)
+Defined in: [gen/types.gen.ts:11591](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L11591)
 
 The process instance incident statistics grouped by process definition are successfully
 returned.

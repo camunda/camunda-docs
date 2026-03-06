@@ -11,7 +11,7 @@ mdx:
 type RoleSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:6264](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6264)
+Defined in: [gen/types.gen.ts:6891](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6891)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:6264](https://github.com/camunda/orchestration-clu
 field: "name" | "roleId";
 ```
 
-Defined in: [gen/types.gen.ts:6268](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6268)
+Defined in: [gen/types.gen.ts:6895](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6895)
 
 The field to sort by.
 
----
+***
 
 ### order?
 
@@ -33,4 +33,4 @@ The field to sort by.
 optional order: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:6269](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6269)
+Defined in: [gen/types.gen.ts:6896](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L6896)

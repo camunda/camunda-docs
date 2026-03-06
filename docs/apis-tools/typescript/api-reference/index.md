@@ -58,13 +58,13 @@ When this happens, we signal it in the [CHANGELOG](https://github.com/camunda/or
 Keep configuration out of application code. Let the factory read `CAMUNDA_*` variables from the environment (12‑factor style). This makes rotation, secret management, and environment promotion safer & simpler.
 
 ```ts
-import createCamundaClient from "@camunda8/orchestration-cluster-api";
+import createCamundaClient from '@camunda8/orchestration-cluster-api';
 
 // Zero‑config construction: reads CAMUNDA_* from process.env. If no configuration is present, defaults to Camunda 8 Run on localhost.
 const camunda = createCamundaClient();
 
 const topology = await camunda.getTopology();
-console.log("Brokers:", topology.brokers?.length ?? 0);
+console.log('Brokers:', topology.brokers?.length ?? 0);
 ```
 
 Typical `.env` (example):
@@ -100,10 +100,10 @@ Use only when you must supply or mutate configuration dynamically (e.g. multi‑
 ```ts
 const camunda = createCamundaClient({
   config: {
-    CAMUNDA_REST_ADDRESS: "https://cluster.example",
-    CAMUNDA_AUTH_STRATEGY: "BASIC",
-    CAMUNDA_BASIC_AUTH_USERNAME: "alice",
-    CAMUNDA_BASIC_AUTH_PASSWORD: "secret",
+    CAMUNDA_REST_ADDRESS: 'https://cluster.example',
+    CAMUNDA_AUTH_STRATEGY: 'BASIC',
+    CAMUNDA_BASIC_AUTH_USERNAME: 'alice',
+    CAMUNDA_BASIC_AUTH_PASSWORD: 'secret',
   },
 });
 ```
@@ -174,13 +174,13 @@ Set `CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS=1` so the SDK does only the initial att
 ### Minimal Example (Single Operation)
 
 ```ts
-import { createCamundaClient } from "@camunda8/orchestration-cluster-api";
-import { retry, ExponentialBackoff, handleAll } from "cockatiel";
+import { createCamundaClient } from '@camunda8/orchestration-cluster-api';
+import { retry, ExponentialBackoff, handleAll } from 'cockatiel';
 
 const client = createCamundaClient({
   config: {
-    CAMUNDA_REST_ADDRESS: "https://cluster.example",
-    CAMUNDA_AUTH_STRATEGY: "NONE",
+    CAMUNDA_REST_ADDRESS: 'https://cluster.example',
+    CAMUNDA_AUTH_STRATEGY: 'NONE',
     CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS: 1, // disable SDK automatic retries
   } as any,
 });
@@ -188,11 +188,7 @@ const client = createCamundaClient({
 // Policy: up to 5 attempts total (1 + 4 retries) with exponential backoff & jitter
 const policy = retry(handleAll, {
   maxAttempts: 5,
-  backoff: new ExponentialBackoff({
-    initialDelay: 100,
-    maxDelay: 2000,
-    jitter: true,
-  }),
+  backoff: new ExponentialBackoff({ initialDelay: 100, maxDelay: 2000, jitter: true }),
 });
 
 // Wrap getTopology
@@ -206,43 +202,38 @@ console.log(topo.brokers?.length);
 ### Bulk Wrapping All Operations
 
 ```ts
-import { createCamundaClient } from "@camunda8/orchestration-cluster-api";
-import { retry, ExponentialBackoff, handleAll } from "cockatiel";
+import { createCamundaClient } from '@camunda8/orchestration-cluster-api';
+import { retry, ExponentialBackoff, handleAll } from 'cockatiel';
 
 const client = createCamundaClient({
   config: {
-    CAMUNDA_REST_ADDRESS: "https://cluster.example",
-    CAMUNDA_AUTH_STRATEGY: "OAUTH",
+    CAMUNDA_REST_ADDRESS: 'https://cluster.example',
+    CAMUNDA_AUTH_STRATEGY: 'OAUTH',
     CAMUNDA_CLIENT_ID: process.env.CAMUNDA_CLIENT_ID,
     CAMUNDA_CLIENT_SECRET: process.env.CAMUNDA_CLIENT_SECRET,
     CAMUNDA_OAUTH_URL: process.env.CAMUNDA_OAUTH_URL,
-    CAMUNDA_TOKEN_AUDIENCE: "zeebe.camunda.io",
+    CAMUNDA_TOKEN_AUDIENCE: 'zeebe.camunda.io',
     CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS: 1,
   } as any,
 });
 
 const retryPolicy = retry(handleAll, {
   maxAttempts: 4,
-  backoff: new ExponentialBackoff({
-    initialDelay: 150,
-    maxDelay: 2500,
-    jitter: true,
-  }),
+  backoff: new ExponentialBackoff({ initialDelay: 150, maxDelay: 2500, jitter: true }),
 });
 
 const skip = new Set([
-  "logger",
-  "configure",
-  "getConfig",
-  "withCorrelation",
-  "deployResourcesFromFiles",
+  'logger',
+  'configure',
+  'getConfig',
+  'withCorrelation',
+  'deployResourcesFromFiles',
 ]);
 for (const key of Object.keys(client)) {
   const val: any = (client as any)[key];
-  if (typeof val === "function" && !key.startsWith("_") && !skip.has(key)) {
+  if (typeof val === 'function' && !key.startsWith('_') && !skip.has(key)) {
     const original = val.bind(client);
-    (client as any)[key] = (...a: any[]) =>
-      retryPolicy.execute(() => original(...a));
+    (client as any)[key] = (...a: any[]) => retryPolicy.execute(() => original(...a));
   }
 }
 
@@ -289,22 +280,18 @@ Refer to `./docs/CONFIG_REFERENCE.md` for the full list of related environment v
 Retry only network errors + 429/503, plus optionally 500 on safe GET endpoints you mark:
 
 ```ts
-import { retry, ExponentialBackoff, handleWhen } from "cockatiel";
+import { retry, ExponentialBackoff, handleWhen } from 'cockatiel';
 
 const classify = handleWhen((err) => {
   const status = (err as any)?.status;
   if (status === 429 || status === 503) return true;
-  if (status === 500 && (err as any).__opVerb === "GET") return true; // custom tagging optional
-  return err?.name === "TypeError"; // network errors from fetch
+  if (status === 500 && (err as any).__opVerb === 'GET') return true; // custom tagging optional
+  return err?.name === 'TypeError'; // network errors from fetch
 });
 
 const policy = retry(classify, {
   maxAttempts: 5,
-  backoff: new ExponentialBackoff({
-    initialDelay: 100,
-    maxDelay: 2000,
-    jitter: true,
-  }),
+  backoff: new ExponentialBackoff({ initialDelay: 100, maxDelay: 2000, jitter: true }),
 });
 ```
 
@@ -415,6 +402,21 @@ Factors use integer percentages to avoid floating point drift in env parsing; th
 
 If you have concrete tuning needs, open an issue describing workload patterns (operation mix, baseline concurrency, observed broker limits) to help prioritize which knobs to surface.
 
+### What Should I Set?
+
+If you're unsure about your workload shape, **don't set anything**. The default BALANCED profile activates automatically and outperforms no-gating (LEGACY) in most scenarios — on raw throughput alone, not just error reduction.
+
+Benchmark results against a single-node local cluster with multiple independent clients (no shared state between them):
+
+| Scenario                      | BALANCED        | LEGACY (no gating) |
+| ----------------------------- | --------------- | ------------------ |
+| Single-client (1K processes)  | **80.1 ops/s**  | 67.8 ops/s         |
+| Single-client sustained (10K) | **119.6 ops/s** | 87.8 ops/s         |
+| Multi-client 3+2 spike        | **86.3 ops/s**  | 48.0 ops/s         |
+| Stress 8 clients ×1000        | 76.3 ops/s      | **106.4 ops/s**    |
+
+BALANCED wins 3 of 4 on pure throughput. The only scenario where LEGACY is faster is extreme overload (800 concurrent requests against a single broker) — and in that case LEGACY accumulates 44,505 errors vs BALANCED's 15,527. The default just works.
+
 ## Job Workers (Polling API)
 
 The SDK provides a lightweight polling job worker for service task job types using `createJobWorker`. It activates jobs in batches (respecting a concurrency limit), validates variables (optional), and offers action helpers on each job.
@@ -422,8 +424,8 @@ The SDK provides a lightweight polling job worker for service task job types usi
 ### Minimal Example
 
 ```ts
-import createCamundaClient from "@camunda8/orchestration-cluster-api";
-import { z } from "zod";
+import createCamundaClient from '@camunda8/orchestration-cluster-api';
+import { z } from 'zod';
 
 const client = createCamundaClient();
 
@@ -432,16 +434,17 @@ const Input = z.object({ orderId: z.string() });
 const Output = z.object({ processed: z.boolean() });
 
 const worker = client.createJobWorker({
-  jobType: "process-order",
+  jobType: 'process-order',
   maxParallelJobs: 10,
   timeoutMs: 15_000, // long‑poll timeout (server side requestTimeout)
   pollIntervalMs: 100, // delay between polls when no jobs / at capacity
   // Optional: only fetch specific variables during activation
-  fetchVariables: ["orderId"],
+  fetchVariables: ['orderId'],
   inputSchema: Input, // validates incoming variables if validateSchemas true
   outputSchema: Output, // validates variables passed to complete(...)
   validateSchemas: true, // set false for max throughput (skip Zod)
   autoStart: true, // default true; start polling immediately
+  startupJitterMaxSeconds: 5, // random delay up to 5s before first poll (default 0)
   jobHandler: (job) => {
     // Access typed variables
     const vars = job.variables; // inferred from Input schema
@@ -451,7 +454,7 @@ const worker = client.createJobWorker({
 });
 
 // Later, on shutdown:
-process.on("SIGINT", () => {
+process.on('SIGINT', () => {
   worker.stop();
 });
 ```
@@ -467,12 +470,12 @@ TypeScript inference:
 ```ts
 const Input = z.object({ orderId: z.string(), amount: z.number() });
 client.createJobWorker({
-  jobType: "process-order",
+  jobType: 'process-order',
   maxParallelJobs: 5,
   jobTimeoutMs: 30_000,
   inputSchema: Input,
   // Only allows 'orderId' | 'amount' here at compile-time
-  fetchVariables: ["orderId", "amount"],
+  fetchVariables: ['orderId', 'amount'],
   jobHandler: async (job) => job.complete(),
 });
 ```
@@ -543,11 +546,9 @@ Use `await worker.stopGracefully({ waitUpToMs?, checkIntervalMs? })` to drain wi
 
 ```ts
 // Attempt graceful drain for up to 8 seconds
-const { remainingJobs, timedOut } = await worker.stopGracefully({
-  waitUpToMs: 8000,
-});
+const { remainingJobs, timedOut } = await worker.stopGracefully({ waitUpToMs: 8000 });
 if (timedOut) {
-  console.warn("Graceful stop timed out; remaining jobs:", remainingJobs);
+  console.warn('Graceful stop timed out; remaining jobs:', remainingJobs);
 }
 ```
 
@@ -566,15 +567,29 @@ Activation cancellations during stop are logged at debug (`activation.cancelled`
 
 You can register multiple workers on a single client instance—one per job type is typical. The client exposes `client.getWorkers()` for inspection and `client.stopAllWorkers()` for coordinated shutdown.
 
+### Startup Jitter
+
+When deploying multiple application instances simultaneously (e.g. a rolling restart or scale-up), all workers start polling at the same time and can saturate the server with activation requests. Set `startupJitterMaxSeconds` to spread out the initial poll across a random window:
+
+```ts
+client.createJobWorker({
+  jobType: 'process-order',
+  maxParallelJobs: 10,
+  jobTimeoutMs: 30_000,
+  startupJitterMaxSeconds: 5, // each instance delays 0–5s before first poll
+  jobHandler: async (job) => job.complete(),
+});
+```
+
+A value of `0` (the default) means no delay.
+
 ### Receipt Type (Unique Symbol)
 
 Action methods return a unique symbol (not a string) to avoid accidental misuse and allow internal metrics. If you store the receipt, annotate its type as `JobActionReceipt` to preserve uniqueness:
 
 ```ts
-import { JobActionReceipt } from "@camunda8/orchestration-cluster-api";
-const receipt: JobActionReceipt = await job.complete({
-  variables: { processed: true },
-});
+import { JobActionReceipt } from '@camunda8/orchestration-cluster-api';
+const receipt: JobActionReceipt = await job.complete({ variables: { processed: true } });
 ```
 
 If you ignore the return value you don’t need to import the symbol.
@@ -609,7 +624,7 @@ Call `client.getBackpressureState()` to obtain:
 
 ```ts
 {
-  severity: "healthy" | "soft" | "severe";
+  severity: 'healthy' | 'soft' | 'severe';
   consecutive: number; // consecutive backpressure signals observed
   permitsMax: number | null; // current concurrency cap (null => unlimited/not engaged)
   permitsCurrent: number; // currently acquired permits
@@ -704,12 +719,9 @@ If both cert & key are available an https.Agent is attached to all outbound call
 Import branded key helpers directly:
 
 ```ts
-import {
-  ProcessDefinitionKey,
-  ProcessInstanceKey,
-} from "@camunda8/orchestration-cluster";
+import { ProcessDefinitionKey, ProcessInstanceKey } from '@camunda8/orchestration-cluster';
 
-const defKey = ProcessDefinitionKey.assumeExists("2251799813686749");
+const defKey = ProcessDefinitionKey.assumeExists('2251799813686749');
 // @ts-expect-error – cannot assign def key to instance key
 const bad: ProcessInstanceKey = defKey;
 ```
@@ -721,15 +733,13 @@ They are zero‑cost runtime strings with compile‑time separation.
 All methods return a `CancelablePromise<T>`:
 
 ```ts
-const p = camunda.searchProcessInstances({
-  filter: { processDefinitionKey: defKey },
-});
+const p = camunda.searchProcessInstances({ filter: { processDefinitionKey: defKey } });
 setTimeout(() => p.cancel(), 100); // best‑effort cancel
 try {
   await p; // resolves if not cancelled
 } catch (e) {
-  if (isSdkError(e) && e.name === "CancelSdkError") {
-    console.log("Operation cancelled");
+  if (isSdkError(e) && e.name === 'CancelSdkError') {
+    console.log('Operation cancelled');
   } else throw e;
 }
 ```
@@ -753,10 +763,10 @@ import {
   withTimeoutTE,
   eventuallyTE,
   isLeft,
-} from "@camunda8/orchestration-cluster/fp";
+} from '@camunda8/orchestration-cluster/fp';
 
 const fp = createCamundaFpClient();
-const deployTE = fp.deployResourcesFromFiles(["./bpmn/process.bpmn"]);
+const deployTE = fp.deployResourcesFromFiles(['./bpmn/process.bpmn']);
 const deployed = await deployTE();
 if (isLeft(deployed)) throw deployed.left; // DomainError union
 
@@ -823,13 +833,12 @@ Use this to understand convergence speed and data shape evolution during tests o
 
 ```ts
 const jobs = await camunda.searchJobs({
-  filter: { type: "payment" },
+  filter: { type: 'payment' },
   consistency: {
     waitUpToMs: 5000,
     pollIntervalMs: 200,
     trace: true,
-    predicate: (r) =>
-      Array.isArray(r.items) && r.items.some((j) => j.state === "CREATED"),
+    predicate: (r) => Array.isArray(r.items) && r.items.some((j) => j.state === 'CREATED'),
   },
 });
 ```
@@ -843,7 +852,7 @@ Per‑client logger; no global singleton. The level defaults from `CAMUNDA_SDK_L
 ```ts
 const client = createCamundaClient({
   log: {
-    level: "info",
+    level: 'info',
     transport: (evt) => {
       // evt: { level, scope, ts, args, code?, data? }
       console.log(JSON.stringify(evt));
@@ -851,9 +860,9 @@ const client = createCamundaClient({
   },
 });
 
-const log = client.logger("worker");
-log.debug(() => ["expensive detail only if enabled", { meta: 1 }]);
-log.code("info", "WORK_START", "Starting work loop", { pid: process.pid });
+const log = client.logger('worker');
+log.debug(() => ['expensive detail only if enabled', { meta: 1 }]);
+log.code('info', 'WORK_START', 'Starting work loop', { pid: process.pid });
 ```
 
 Lazy args (functions with zero arity) are only invoked if the level is enabled.
@@ -910,20 +919,18 @@ const client = createCamundaClient({
 #### Winston
 
 ```ts
-import winston from "winston";
-import createCamundaClient from "@camunda8/orchestration-cluster";
+import winston from 'winston';
+import createCamundaClient from '@camunda8/orchestration-cluster';
 
-const w = winston.createLogger({
-  transports: [new winston.transports.Console()],
-});
+const w = winston.createLogger({ transports: [new winston.transports.Console()] });
 const client = createCamundaClient({
   log: {
-    level: "debug",
+    level: 'debug',
     transport: (e) => {
-      const lvl = e.level === "trace" ? "silly" : e.level; // winston has 'silly'
+      const lvl = e.level === 'trace' ? 'silly' : e.level; // winston has 'silly'
       w.log({
         level: lvl,
-        message: e.args.filter((a) => typeof a === "string").join(" "),
+        message: e.args.filter((a) => typeof a === 'string').join(' '),
         scope: e.scope,
         code: e.code,
         data: e.data,
@@ -937,23 +944,21 @@ const client = createCamundaClient({
 #### loglevel
 
 ```ts
-import log from "loglevel";
-import createCamundaClient from "@camunda8/orchestration-cluster";
+import log from 'loglevel';
+import createCamundaClient from '@camunda8/orchestration-cluster';
 
-log.setLevel("info"); // host app level
+log.setLevel('info'); // host app level
 const client = createCamundaClient({
   log: {
-    level: "info",
+    level: 'info',
     transport: (e) => {
-      if (e.level === "silent") return;
-      const method = (
-        ["error", "warn", "info", "debug"].includes(e.level) ? e.level : "debug"
-      ) as "error" | "warn" | "info" | "debug";
-      (log as any)[method](
-        `[${e.scope}]`,
-        e.code ? `${e.code}:` : "",
-        ...e.args
-      );
+      if (e.level === 'silent') return;
+      const method = (['error', 'warn', 'info', 'debug'].includes(e.level) ? e.level : 'debug') as
+        | 'error'
+        | 'warn'
+        | 'info'
+        | 'debug';
+      (log as any)[method](`[${e.scope}]`, e.code ? `${e.code}:` : '', ...e.args);
     },
   },
 });
@@ -982,8 +987,8 @@ May throw:
 All SDK-thrown operational errors normalize to a discriminated union (`SdkError`) when they originate from HTTP, network, auth, or validation layers. Use the guard `isSdkError` to narrow inside a catch:
 
 ```ts
-import { createCamundaClient } from "@camunda8/orchestration-cluster-api";
-import { isSdkError } from "@camunda8/orchestration-cluster-api/dist/runtime/errors";
+import { createCamundaClient } from '@camunda8/orchestration-cluster-api';
+import { isSdkError } from '@camunda8/orchestration-cluster-api/dist/runtime/errors';
 
 const client = createCamundaClient();
 
@@ -992,20 +997,20 @@ try {
 } catch (e) {
   if (isSdkError(e)) {
     switch (e.name) {
-      case "HttpSdkError":
-        console.error("HTTP failure", e.status, e.operationId);
+      case 'HttpSdkError':
+        console.error('HTTP failure', e.status, e.operationId);
         break;
-      case "ValidationSdkError":
-        console.error("Validation issue on", e.operationId, e.side, e.issues);
+      case 'ValidationSdkError':
+        console.error('Validation issue on', e.operationId, e.side, e.issues);
         break;
-      case "AuthSdkError":
-        console.error("Auth problem", e.message, e.status);
+      case 'AuthSdkError':
+        console.error('Auth problem', e.message, e.status);
         break;
-      case "CancelSdkError":
-        console.error("Operation cancelled", e.operationId);
+      case 'CancelSdkError':
+        console.error('Operation cancelled', e.operationId);
         break;
-      case "NetworkSdkError":
-        console.error("Network layer error", e.message);
+      case 'NetworkSdkError':
+        console.error('Network layer error', e.message);
         break;
     }
     return;
@@ -1031,17 +1036,14 @@ _Note that this feature is experimental and subject to change._
 If you prefer FP‑style explicit error handling instead of exceptions, use the result client wrapper:
 
 ```ts
-import {
-  createCamundaResultClient,
-  isOk,
-} from "@camunda8/orchestration-cluster";
+import { createCamundaResultClient, isOk } from '@camunda8/orchestration-cluster';
 
 const camundaR = createCamundaResultClient();
 const res = await camundaR.createDeployment({ resources: [file] });
 if (isOk(res)) {
-  console.log("Deployment key", res.value.deployments[0].deploymentKey);
+  console.log('Deployment key', res.value.deployments[0].deploymentKey);
 } else {
-  console.error("Deployment failed", res.error);
+  console.error('Deployment failed', res.error);
 }
 ```
 
@@ -1054,7 +1056,7 @@ API surface differences:
 Helpers:
 
 ```ts
-import { isOk, isErr } from "@camunda8/orchestration-cluster";
+import { isOk, isErr } from '@camunda8/orchestration-cluster';
 ```
 
 When to use:
@@ -1070,9 +1072,9 @@ _Note that this feature is experimental and subject to change._
 For projects using `fp-ts`, wrap the throwing client in a lazy `TaskEither` facade:
 
 ```ts
-import { createCamundaFpClient } from "@camunda8/orchestration-cluster";
-import { pipe } from "fp-ts/function";
-import * as TE from "fp-ts/TaskEither";
+import { createCamundaFpClient } from '@camunda8/orchestration-cluster';
+import { pipe } from 'fp-ts/function';
+import * as TE from 'fp-ts/TaskEither';
 
 const fp = createCamundaFpClient();
 
@@ -1086,10 +1088,10 @@ pipe(
 // With helpers
 const task = fp.createDeployment({ resources: [file] });
 const either = await task();
-if (either._tag === "Right") {
+if (either._tag === 'Right') {
   console.log(either.right.deployments.length);
 } else {
-  console.error("Error", either.left);
+  console.error('Error', either.left);
 }
 ```
 
@@ -1120,9 +1122,7 @@ The deployment endpoint requires each resource to have a filename (extension use
 
 ```ts
 const bpmnXml = `<definitions id="process" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">...</definitions>`;
-const file = new File([bpmnXml], "order-process.bpmn", {
-  type: "application/xml",
-});
+const file = new File([bpmnXml], 'order-process.bpmn', { type: 'application/xml' });
 const result = await camunda.createDeployment({ resources: [file] });
 console.log(result.deployments.length);
 ```
@@ -1131,7 +1131,7 @@ From an existing Blob:
 
 ```ts
 const blob: Blob = getBlob();
-const file = new File([blob], "model.bpmn");
+const file = new File([blob], 'model.bpmn');
 await camunda.createDeployment({ resources: [file] });
 ```
 
@@ -1141,9 +1141,9 @@ Use the built-in helper `deployResourcesFromFiles(...)` to read local files and 
 
 ```ts
 const result = await camunda.deployResourcesFromFiles([
-  "./bpmn/order-process.bpmn",
-  "./dmn/discount.dmn",
-  "./forms/order.form",
+  './bpmn/order-process.bpmn',
+  './dmn/discount.dmn',
+  './forms/order.form',
 ]);
 
 console.log(result.processes.map((p) => p.processDefinitionId));
@@ -1153,9 +1153,7 @@ console.log(result.decisions.length);
 With explicit tenant (overriding tenant from configuration):
 
 ```ts
-await camunda.deployResourcesFromFiles(["./bpmn/order-process.bpmn"], {
-  tenantId: "tenant-a",
-});
+await camunda.deployResourcesFromFiles(['./bpmn/order-process.bpmn'], { tenantId: 'tenant-a' });
 ```
 
 Error handling:
@@ -1164,19 +1162,17 @@ Error handling:
 try {
   await camunda.deployResourcesFromFiles([]); // throws (empty array)
 } catch (e) {
-  console.error("Deployment failed:", e);
+  console.error('Deployment failed:', e);
 }
 ```
 
 Manual construction alternative (if you need custom logic):
 
 ```ts
-import { File } from "node:buffer";
+import { File } from 'node:buffer';
 const bpmnXml =
   '<definitions id="process" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"></definitions>';
-const file = new File([Buffer.from(bpmnXml)], "order-process.bpmn", {
-  type: "application/xml",
-});
+const file = new File([Buffer.from(bpmnXml)], 'order-process.bpmn', { type: 'application/xml' });
 await camunda.createDeployment({ resources: [file] });
 ```
 
@@ -1195,10 +1191,7 @@ Create isolated clients per test file:
 
 ```ts
 const client = createCamundaClient({
-  config: {
-    CAMUNDA_REST_ADDRESS: "http://localhost:8080",
-    CAMUNDA_AUTH_STRATEGY: "NONE",
-  },
+  config: { CAMUNDA_REST_ADDRESS: 'http://localhost:8080', CAMUNDA_AUTH_STRATEGY: 'NONE' },
 });
 ```
 
@@ -1206,8 +1199,7 @@ Inject a mock fetch:
 
 ```ts
 const client = createCamundaClient({
-  fetch: async (input, init) =>
-    new Response(JSON.stringify({ ok: true }), { status: 200 }),
+  fetch: async (input, init) => new Response(JSON.stringify({ ok: true }), { status: 200 }),
 });
 ```
 

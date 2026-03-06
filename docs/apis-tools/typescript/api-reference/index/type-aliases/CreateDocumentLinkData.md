@@ -11,7 +11,7 @@ mdx:
 type CreateDocumentLinkData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10189](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10189)
+Defined in: [gen/types.gen.ts:10140](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10140)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:10189](https://github.com/camunda/orchestration-cl
 optional body: DocumentLinkRequest;
 ```
 
-Defined in: [gen/types.gen.ts:10190](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10190)
+Defined in: [gen/types.gen.ts:10141](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10141)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:10190](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:10191](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10191)
+Defined in: [gen/types.gen.ts:10142](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10142)
 
 #### documentId
 
@@ -41,7 +41,7 @@ documentId: DocumentId;
 
 The ID of the document to link.
 
----
+***
 
 ### query?
 
@@ -49,7 +49,7 @@ The ID of the document to link.
 optional query: object;
 ```
 
-Defined in: [gen/types.gen.ts:10197](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10197)
+Defined in: [gen/types.gen.ts:10148](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10148)
 
 #### contentHash?
 
@@ -67,7 +67,7 @@ optional storeId: string;
 
 The ID of the document store where the document is located.
 
----
+***
 
 ### url
 
@@ -75,4 +75,4 @@ The ID of the document store where the document is located.
 url: "/documents/{documentId}/links";
 ```
 
-Defined in: [gen/types.gen.ts:10208](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10208)
+Defined in: [gen/types.gen.ts:10159](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L10159)

@@ -11,7 +11,7 @@ mdx:
 type ProcessInstanceDeletionBatchOperationRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:926](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L926)
+Defined in: [gen/types.gen.ts:959](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L959)
 
 The process instance filter that defines which process instances should be deleted.
 
@@ -23,11 +23,11 @@ The process instance filter that defines which process instances should be delet
 filter: ProcessInstanceFilter;
 ```
 
-Defined in: [gen/types.gen.ts:930](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L930)
+Defined in: [gen/types.gen.ts:963](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L963)
 
 The process instance filter.
 
----
+***
 
 ### operationReference?
 
@@ -35,4 +35,4 @@ The process instance filter.
 optional operationReference: OperationReference;
 ```
 
-Defined in: [gen/types.gen.ts:931](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L931)
+Defined in: [gen/types.gen.ts:964](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L964)

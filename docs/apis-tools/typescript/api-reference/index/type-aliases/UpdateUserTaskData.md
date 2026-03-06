@@ -11,7 +11,7 @@ mdx:
 type UpdateUserTaskData = object;
 ```
 
-Defined in: [gen/types.gen.ts:17031](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17031)
+Defined in: [gen/types.gen.ts:15867](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15867)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:17031](https://github.com/camunda/orchestration-cl
 optional body: UserTaskUpdateRequest;
 ```
 
-Defined in: [gen/types.gen.ts:17032](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17032)
+Defined in: [gen/types.gen.ts:15868](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15868)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:17032](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:17033](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17033)
+Defined in: [gen/types.gen.ts:15869](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15869)
 
 #### userTaskKey
 
@@ -41,7 +41,7 @@ userTaskKey: UserTaskKey;
 
 The key of the user task to update.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The key of the user task to update.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:17039](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17039)
+Defined in: [gen/types.gen.ts:15875](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15875)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:17039](https://github.com/camunda/orchestration-cl
 url: "/user-tasks/{userTaskKey}";
 ```
 
-Defined in: [gen/types.gen.ts:17040](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17040)
+Defined in: [gen/types.gen.ts:15876](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L15876)

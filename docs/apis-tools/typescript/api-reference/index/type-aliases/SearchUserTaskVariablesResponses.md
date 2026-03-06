@@ -11,26 +11,16 @@ mdx:
 type SearchUserTaskVariablesResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:17507](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17507)
+Defined in: [gen/types.gen.ts:16191](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L16191)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: VariableSearchQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:17511](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17511)
+Defined in: [gen/types.gen.ts:16195](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L16195)
 
-Variable search query response.
-
-#### Type Declaration
-
-##### items?
-
-```ts
-optional items: object & object[];
-```
-
-The matching variables.
+The user task variable search result.

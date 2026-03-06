@@ -11,39 +11,19 @@ mdx:
 type SearchTenantsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:15572](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15572)
+Defined in: [gen/types.gen.ts:14660](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14660)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: SearchQueryRequest & object;
+optional body: TenantSearchQueryRequest;
 ```
 
-Defined in: [gen/types.gen.ts:15576](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15576)
+Defined in: [gen/types.gen.ts:14661](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14661)
 
-Tenant search request
-
-#### Type Declaration
-
-##### filter?
-
-```ts
-optional filter: TenantFilter;
-```
-
-The tenant search filters.
-
-##### sort?
-
-```ts
-optional sort: object[];
-```
-
-Sort field criteria.
-
----
+***
 
 ### path?
 
@@ -51,9 +31,9 @@ Sort field criteria.
 optional path: never;
 ```
 
-Defined in: [gen/types.gen.ts:15592](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15592)
+Defined in: [gen/types.gen.ts:14662](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14662)
 
----
+***
 
 ### query?
 
@@ -61,9 +41,9 @@ Defined in: [gen/types.gen.ts:15592](https://github.com/camunda/orchestration-cl
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:15593](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15593)
+Defined in: [gen/types.gen.ts:14663](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14663)
 
----
+***
 
 ### url
 
@@ -71,4 +51,4 @@ Defined in: [gen/types.gen.ts:15593](https://github.com/camunda/orchestration-cl
 url: "/tenants/search";
 ```
 
-Defined in: [gen/types.gen.ts:15594](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15594)
+Defined in: [gen/types.gen.ts:14664](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14664)

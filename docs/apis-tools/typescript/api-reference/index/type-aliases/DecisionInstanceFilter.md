@@ -11,7 +11,7 @@ mdx:
 type DecisionInstanceFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:1683](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1683)
+Defined in: [gen/types.gen.ts:1716](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1716)
 
 Decision instance search filter.
 
@@ -23,11 +23,11 @@ Decision instance search filter.
 optional decisionDefinitionId: DecisionDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:1703](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1703)
+Defined in: [gen/types.gen.ts:1736](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1736)
 
 The ID of the DMN decision.
 
----
+***
 
 ### decisionDefinitionKey?
 
@@ -35,11 +35,11 @@ The ID of the DMN decision.
 optional decisionDefinitionKey: DecisionDefinitionKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:1733](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1733)
+Defined in: [gen/types.gen.ts:1766](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1766)
 
 The key of the decision.
 
----
+***
 
 ### decisionDefinitionName?
 
@@ -47,11 +47,11 @@ The key of the decision.
 optional decisionDefinitionName: string;
 ```
 
-Defined in: [gen/types.gen.ts:1707](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1707)
+Defined in: [gen/types.gen.ts:1740](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1740)
 
 The name of the DMN decision.
 
----
+***
 
 ### decisionDefinitionType?
 
@@ -59,9 +59,9 @@ The name of the DMN decision.
 optional decisionDefinitionType: DecisionDefinitionTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:1712](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1712)
+Defined in: [gen/types.gen.ts:1745](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1745)
 
----
+***
 
 ### decisionDefinitionVersion?
 
@@ -69,11 +69,11 @@ Defined in: [gen/types.gen.ts:1712](https://github.com/camunda/orchestration-clu
 optional decisionDefinitionVersion: number;
 ```
 
-Defined in: [gen/types.gen.ts:1711](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1711)
+Defined in: [gen/types.gen.ts:1744](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1744)
 
 The version of the decision.
 
----
+***
 
 ### decisionEvaluationInstanceKey?
 
@@ -81,11 +81,11 @@ The version of the decision.
 optional decisionEvaluationInstanceKey: DecisionEvaluationInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:1687](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1687)
+Defined in: [gen/types.gen.ts:1720](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1720)
 
 The key of the decision evaluation instance.
 
----
+***
 
 ### decisionEvaluationKey?
 
@@ -93,11 +93,11 @@ The key of the decision evaluation instance.
 optional decisionEvaluationKey: DecisionEvaluationKey;
 ```
 
-Defined in: [gen/types.gen.ts:1721](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1721)
+Defined in: [gen/types.gen.ts:1754](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1754)
 
 The key of the parent decision evaluation. Note that this is not the identifier of an individual decision instance; the `decisionEvaluationInstanceKey` is the identifier for a decision instance.
 
----
+***
 
 ### decisionRequirementsKey?
 
@@ -105,11 +105,11 @@ The key of the parent decision evaluation. Note that this is not the identifier 
 optional decisionRequirementsKey: DecisionRequirementsKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:1745](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1745)
+Defined in: [gen/types.gen.ts:1778](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1778)
 
 The key of the decision requirements definition.
 
----
+***
 
 ### elementInstanceKey?
 
@@ -117,11 +117,11 @@ The key of the decision requirements definition.
 optional elementInstanceKey: ElementInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:1737](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1737)
+Defined in: [gen/types.gen.ts:1770](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1770)
 
 The key of the element instance this decision instance is linked to.
 
----
+***
 
 ### evaluationDate?
 
@@ -129,11 +129,11 @@ The key of the element instance this decision instance is linked to.
 optional evaluationDate: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:1699](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1699)
+Defined in: [gen/types.gen.ts:1732](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1732)
 
 The evaluation date of the decision instance.
 
----
+***
 
 ### evaluationFailure?
 
@@ -141,11 +141,11 @@ The evaluation date of the decision instance.
 optional evaluationFailure: string;
 ```
 
-Defined in: [gen/types.gen.ts:1695](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1695)
+Defined in: [gen/types.gen.ts:1728](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1728)
 
 The evaluation failure of the decision instance.
 
----
+***
 
 ### processDefinitionKey?
 
@@ -153,11 +153,11 @@ The evaluation failure of the decision instance.
 optional processDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:1725](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1725)
+Defined in: [gen/types.gen.ts:1758](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1758)
 
 The key of the process definition.
 
----
+***
 
 ### processInstanceKey?
 
@@ -165,11 +165,11 @@ The key of the process definition.
 optional processInstanceKey: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:1729](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1729)
+Defined in: [gen/types.gen.ts:1762](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1762)
 
 The key of the process instance.
 
----
+***
 
 ### rootDecisionDefinitionKey?
 
@@ -177,11 +177,11 @@ The key of the process instance.
 optional rootDecisionDefinitionKey: DecisionDefinitionKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:1741](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1741)
+Defined in: [gen/types.gen.ts:1774](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1774)
 
 The key of the root decision definition.
 
----
+***
 
 ### state?
 
@@ -189,11 +189,11 @@ The key of the root decision definition.
 optional state: DecisionInstanceStateFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:1691](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1691)
+Defined in: [gen/types.gen.ts:1724](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1724)
 
 The state of the decision instance.
 
----
+***
 
 ### tenantId?
 
@@ -201,6 +201,6 @@ The state of the decision instance.
 optional tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:1716](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1716)
+Defined in: [gen/types.gen.ts:1749](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L1749)
 
 The tenant ID of the decision instance.

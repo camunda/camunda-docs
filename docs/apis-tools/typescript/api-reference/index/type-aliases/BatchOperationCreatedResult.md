@@ -11,28 +11,28 @@ mdx:
 type BatchOperationCreatedResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:687](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L687)
+Defined in: [gen/types.gen.ts:704](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L704)
 
 The created batch operation.
 
 ## Properties
 
-### batchOperationKey?
+### batchOperationKey
 
 ```ts
-optional batchOperationKey: BatchOperationKey;
+batchOperationKey: BatchOperationKey;
 ```
 
-Defined in: [gen/types.gen.ts:691](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L691)
+Defined in: [gen/types.gen.ts:708](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L708)
 
 Key of the batch operation.
 
----
+***
 
-### batchOperationType?
+### batchOperationType
 
 ```ts
-optional batchOperationType: BatchOperationTypeEnum;
+batchOperationType: BatchOperationTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:692](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L692)
+Defined in: [gen/types.gen.ts:709](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L709)

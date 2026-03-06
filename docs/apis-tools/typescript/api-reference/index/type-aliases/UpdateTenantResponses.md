@@ -11,7 +11,7 @@ mdx:
 type UpdateTenantResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:15762](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15762)
+Defined in: [gen/types.gen.ts:14832](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14832)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:15762](https://github.com/camunda/orchestration-cl
 200: TenantUpdateResult;
 ```
 
-Defined in: [gen/types.gen.ts:15766](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15766)
+Defined in: [gen/types.gen.ts:14836](https://github.com/camunda/orchestration-cluster-api-js/blob/bf38adc466af5e438cf33b8fffb8a3bbae4784dc/src/gen/types.gen.ts#L14836)
 
 The tenant was updated successfully.
