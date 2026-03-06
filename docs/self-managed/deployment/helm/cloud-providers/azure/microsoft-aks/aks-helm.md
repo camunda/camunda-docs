@@ -255,23 +255,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and Connectors](/self-managed/deployment/helm/install/quick-install.md#configuring-web-modeler-console-and-connectors).
 
-#### Fill your deployment with actual values
-
-Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/assemble-envsubst-values.sh
-```
-
-:::note Web Modeler SMTP secret
-If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)):
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-webmodeler-secret.sh
-```
-
-:::
-
 ### 3. Deploy prerequisite services
 
 Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch) can be deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
@@ -303,6 +286,23 @@ Merge the **Elasticsearch** overlay:
 ```bash
 yq '. *+ load("generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
 ```
+
+#### Fill your deployment with actual values
+
+Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/assemble-envsubst-values.sh
+```
+
+:::note Web Modeler SMTP secret
+If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)):
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-webmodeler-secret.sh
+```
+
+:::
 
 ### 4. Install Camunda 8 using Helm
 
