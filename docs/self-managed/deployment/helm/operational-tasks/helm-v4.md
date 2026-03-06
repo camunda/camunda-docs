@@ -71,7 +71,7 @@ If you encounter a duplicate environment variable error, apply one of the follow
    For example, use `global.license` instead of setting `CAMUNDA_LICENSE_KEY` via the `env` section.
 
 2. Override application configuration using the `configuration` or `extraConfiguration` options in `values.yaml` instead of environment variables.  
-   See [Configure Helm chart components](../deployment/helm/configure/application-configs.md) for details.
+   See [Configure Helm chart components](/self-managed/deployment/helm/configure/application-configs.md) for details.
 
 3. Disable server-side apply when running Helm commands:
 
