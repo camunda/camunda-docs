@@ -46,11 +46,11 @@ The zero-downtime migration replaces the backup/restore phases with continuous r
 | Aspect                         | Standard migration                   | Zero-downtime migration                        |
 | ------------------------------ | ------------------------------------ | ---------------------------------------------- |
 | Downtime                       | 5–30 minutes (Phase 3 freeze)        | None                                           |
-| Data transfer                  | `pg_dump`/`pg_restore` + ES snapshot | Logical replication + CCR/continuous snapshot  |
+| Data transfer                  | `pg_dump`/`pg_restore` + ES `_reindex` | Logical replication + CCR/continuous snapshot  |
 | Complexity                     | Low — scripted and automated         | High — manual setup, monitoring required       |
 | Risk                           | Low — rollback via Helm values       | Medium — replication lag must be monitored     |
 | PostgreSQL version requirement | Any                                  | PostgreSQL 10+ (logical replication)           |
-| Elasticsearch requirement      | Snapshot API support                 | CCR (Platinum license) or continuous snapshots |
+| Elasticsearch requirement      | `_reindex` API (reindex from remote) | CCR (Platinum license) or continuous snapshots |
 
 ## Prerequisites
 
