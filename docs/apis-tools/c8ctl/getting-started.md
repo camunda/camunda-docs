@@ -226,6 +226,7 @@ c8ctl completion zsh > ~/.c8ctl-completion.zsh
 echo 'source ~/.c8ctl-completion.zsh' >> ~/.zshrc
 source ~/.zshrc
 ```
+
 </TabItem> 
 <TabItem value="fish" label="Fish">
 
