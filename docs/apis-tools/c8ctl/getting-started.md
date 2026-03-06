@@ -219,6 +219,7 @@ source ~/.bashrc
 ```
 
 </TabItem> 
+
 <TabItem value="zsh" label="Zsh">
 
 ```bash
@@ -227,8 +228,8 @@ echo 'source ~/.c8ctl-completion.zsh' >> ~/.zshrc
 source ~/.zshrc
 ```
 
+</TabItem> 
 
-```
 <TabItem value="fish" label="Fish">
 
 ```bash
@@ -236,6 +237,7 @@ c8ctl completion fish > ~/.config/fish/completions/c8ctl.fish
 ```
 
 Fish loads the completion automatically on the next shell start.
+
 </TabItem> 
 
 ## Output modes
