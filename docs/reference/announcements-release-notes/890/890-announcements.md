@@ -673,6 +673,23 @@ If you have hardcoded port 8090 in network policies, Ingress rules, health check
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Web Modeler webapp component removed
+
+The Web Modeler `webapp` component has been removed. The `restapi` component now serves both the API and the web application.
+
+All `webModeler.webapp.*` configuration keys are removed from the Helm chart. If your `values.yaml` includes any `webModeler.webapp.*` settings (such as `replicas`, `resources`, `image`, `service`, or pod-level configuration), remove them before upgrading. These keys are silently ignored in 8.9 and will have no effect.
+
+If you previously tuned `webModeler.webapp.resources` separately, review your `webModeler.restapi.resources` allocation, as the restapi component now handles the full workload.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
@@ -746,6 +763,26 @@ The orchestration profile `orchestration.profiles.identity` is deprecated and re
 If your `values.yaml` uses the `identity` profile key, the chart automatically migrates it to `admin` and prints a deprecation warning.
 
 You should update your values file to use `orchestration.profiles.admin`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Keycloak auth secret configuration
+
+The legacy Keycloak auth secret configuration using `global.identity.keycloak.auth.existingSecret` and `global.identity.keycloak.auth.existingSecretKey` is deprecated in Camunda 8.9.
+
+Migrate to the new standard secret pattern:
+
+- `global.identity.keycloak.auth.existingSecret` → `global.identity.keycloak.auth.secret.existingSecret`
+- `global.identity.keycloak.auth.existingSecretKey` → `global.identity.keycloak.auth.secret.existingSecretKey`
+
+Legacy keys continue to work in 8.9 via normalizers, but produce deprecation warnings and will be removed in a future version. See [Secret management](/self-managed/deployment/helm/configure/secret-management.md).
 
 </div>
 </div>
