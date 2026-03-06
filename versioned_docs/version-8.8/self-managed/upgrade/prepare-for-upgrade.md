@@ -11,6 +11,10 @@ Prepare your Self-Managed environment for upgrade to Camunda 8.8.
 
 Use this guide to confirm upgrade eligibility, understand platform-level changes, and identify actions you may need to take before running an upgrade.
 
+All Camunda upgrades must follow the required upgrade procedure: upgrade to the latest patch of the current minor version, upgrade one minor version at a time, and then upgrade to the latest patch of the target minor.
+
+See [version compatibility checks](../components/orchestration-cluster/core-settings/concepts/version-compatibility.md#required-upgrade-procedure).
+
 ## Evaluate your current environment
 
 Before upgrading, verify that your current installation meets the minimum requirements.
