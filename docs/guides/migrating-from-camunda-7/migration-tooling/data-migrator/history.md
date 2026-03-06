@@ -79,6 +79,10 @@ Instances that were already completed in Camunda 7 retain their original cleanup
 - If no `removalTime` exists and the instance is completed, no cleanup date is set.
 - Auto-cancel cleanup configuration **only applies to instances that were active or suspended** in Camunda 7.
 
+:::note
+All migrated records are assigned `partitionId=1` so that the RDBMS exporter on partition 1 can perform history cleanup for migrated data.
+:::
+
 ## Auto-cancellation of active instances
 
 When migrating history data, the Data Migrator automatically handles **active or suspended** process instances from Camunda 7 by marking them as **canceled** in Camunda 8. This applies to:
