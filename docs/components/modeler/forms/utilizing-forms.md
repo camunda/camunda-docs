@@ -65,29 +65,25 @@ Take the following steps:
 When using Camunda Forms, any submit button present in the form schema is hidden so we can control when a user can complete a task.
 :::
 
-:::tip Improvements for linked forms
-With Camunda 8.4, we improved the way you can link forms to BPMN diagrams in Web Modeler:
-
-- Diagrams will always have the latest form updates.
-- No need to manually re-link forms or use a JSON configuration.
-- Forms will be automatically deployed with the diagram.
-
-See the [form linking reference](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#camunda-form-linked) for more details.
+:::tip Linked Camunda Forms must be explicitly deployed.
+With Camunda 8.9, linked Camunda Forms are no longer auto-deployed. This change provides greater control over what is deployed and when, enabling more precise management of changes and updates across environments.
 :::
+
+## Deploy a linked form
+
+To deploy your latest form changes, click the blue **Deploy** button.
 
 ## Deploy your diagram and start an instance
 
-To execute your completed process diagram, click the blue **Deploy** button.
-Linked forms will automatically be deployed along with the diagram.
-You can now start a new process instance to initiate your process diagram.
+To execute your process diagram, click the blue **Deploy** button. Deploy any linked forms beforehand to avoid incidents. Then start a new process instance.
 Click the blue **Run** button.
 You can now monitor your instances in [Operate](/components/operate/operate-introduction.md).
 
 :::info
-Linked Camunda Forms will automatically be deployed along with the diagram.
-As linked forms are resolved to their latest version (unless you change the [binding type](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#camunda-form-linked)), make sure you don't accidentally deploy a diagram.
+When deploying a BPMN diagram, Web Modeler will not automatically deploy linked forms. This gives you full control over when and which version of a form is deployed.
+As linked forms are resolved to their latest version (unless you change the [binding type](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#camunda-form-linked)), make sure that the version deployed in the target cluster matches the one linked in your diagram.
 
-When deploying to a Camunda 8 cluster with a version lower than 8.4, forms linked to user tasks or none start events will be automatically embedded into the user task to guarantee backwards compatibility.
+When deploying to a Camunda 8 cluster running a version earlier than 8.4, forms linked to user tasks or none start events will be automatically embedded into the user task to guarantee backwards compatibility.
 Read more about the different ways to reference Camunda Forms in the [user task forms reference](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).
 :::
 
