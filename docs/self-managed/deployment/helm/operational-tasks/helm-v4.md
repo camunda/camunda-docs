@@ -97,13 +97,6 @@ docker run \
   <other-helm-cli-options>
 ```
 
-### The `--force` option is renamed to `--force-replace`
-
-In Helm v4, the `--force` flag has been renamed to `--force-replace`.
-
-If your workflows rely on `--force` during `helm upgrade`, update them to use `--force-replace`.  
-The `--force` flag may still work with warnings, but it is deprecated.
-
 ### Post-renderers are now plugins
 
 In Helm v4, post-renderers must be implemented as Helm plugins.
