@@ -5,10 +5,8 @@ sidebar_label: "Getting started"
 description: "Install and configure c8ctl, the Camunda 8 CLI for inspecting clusters, deploying resources, and managing process automation from the terminal."
 ---
 
-# `c8ctl` CLI
-
-:::caution Alpha feature
-`c8ctl` is in **alpha** and is **not intended for production use**. APIs, commands, and flags may change without notice between releases. For more information on alpha features, see [alpha features](/components/early-access/alpha/alpha-features.md). Report issues and request features in the [`c8ctl` GitHub repository](https://github.com/camunda/c8ctl).
+:::warning Alpha feature
+`c8ctl` is in alpha and is not intended for production use. APIs, commands, and flags may change without notice between releases. For more information on alpha features, see [alpha features](/components/early-access/alpha/alpha-features.md). Report issues and request features in the [`c8ctl` GitHub repository](https://github.com/camunda/c8ctl).
 :::
 
 `c8ctl` is a minimal-dependency CLI for Camunda 8. It is built on top of the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) TypeScript SDK and provides two equivalent bin aliases: `c8ctl` and `c8`.
@@ -101,8 +99,8 @@ c8 list pi   # uses my-tenant-id
 
 `c8ctl` supports two types of profiles:
 
-1. **`c8ctl` profiles** — managed directly with `c8ctl` commands.
-2. **Camunda Modeler profiles** — automatically imported from Camunda Modeler (read-only, prefixed with `modeler:`).
+1. `c8ctl` profiles — managed directly with `c8ctl` commands.
+2. Camunda Modeler profiles — automatically imported from Camunda Modeler (read-only, prefixed with `modeler:`).
 
 ### Add a profile
 
@@ -211,29 +209,31 @@ c8 search                 # shows: pi, pd, ut, inc, jobs, variables
 
 `c8ctl` supports shell completion for bash, zsh, and fish.
 
-### Bash
+<Tabs>
+  <TabItem value="bash" label="Bash">
 
 ```bash
 c8ctl completion bash > ~/.c8ctl-completion.bash
 echo 'source ~/.c8ctl-completion.bash' >> ~/.bashrc
 source ~/.bashrc
 ```
-
-### Zsh
+</TabItem> 
+<TabItem value="zsh" label="Zsh">
 
 ```bash
 c8ctl completion zsh > ~/.c8ctl-completion.zsh
 echo 'source ~/.c8ctl-completion.zsh' >> ~/.zshrc
 source ~/.zshrc
 ```
-
-### Fish
+</TabItem> 
+<TabItem value="fish" label="Fish">
 
 ```bash
 c8ctl completion fish > ~/.config/fish/completions/c8ctl.fish
 ```
 
 Fish loads the completion automatically on the next shell start.
+</TabItem> 
 
 ## Output modes
 
