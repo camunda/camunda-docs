@@ -52,6 +52,17 @@ def lift_batch_operation_key(value)
 * **Return type:**
   *BatchOperationKey*
 
+### lift_business_id()
+
+```python
+def lift_business_id(value)
+```
+
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *BusinessId*
+
 ### lift_conditional_evaluation_key()
 
 ```python
@@ -294,17 +305,6 @@ def lift_process_instance_key(value)
 * **Return type:**
   *ProcessInstanceKey*
 
-### lift_root_process_instance_key()
-
-```python
-def lift_root_process_instance_key(value)
-```
-
-* **Parameters:**
-  **value** (*Any*)
-* **Return type:**
-  *RootProcessInstanceKey*
-
 ### lift_scope_key()
 
 ```python
@@ -436,6 +436,17 @@ def try_lift_batch_operation_key(value)
   **value** (*Any*)
 * **Return type:**
   *Tuple*[bool, *BatchOperationKey* | Exception]
+
+### try_lift_business_id()
+
+```python
+def try_lift_business_id(value)
+```
+
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *BusinessId* | Exception]
 
 ### try_lift_conditional_evaluation_key()
 
@@ -678,17 +689,6 @@ def try_lift_process_instance_key(value)
   **value** (*Any*)
 * **Return type:**
   *Tuple*[bool, *ProcessInstanceKey* | Exception]
-
-### try_lift_root_process_instance_key()
-
-```python
-def try_lift_root_process_instance_key(value)
-```
-
-* **Parameters:**
-  **value** (*Any*)
-* **Return type:**
-  *Tuple*[bool, *RootProcessInstanceKey* | Exception]
 
 ### try_lift_scope_key()
 
