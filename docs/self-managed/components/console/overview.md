@@ -1,13 +1,13 @@
 ---
 id: overview
-title: "Console on Self-Managed"
+title: "Camunda Hub on Self-Managed"
 sidebar_label: "Overview"
-description: "Console Self-Managed provides key insights into orchestration cluster deployments, process orchestration usage, and streamlining usage tracking."
+description: "Camunda Hub Self-Managed provides key insights into orchestration cluster deployments, process orchestration usage, and streamlining usage tracking."
 ---
 
-Camunda Console (Self-Managed) offers a centralized interface to monitor and manage your Camunda 8 deployments, enhancing operational efficiency and streamlining DevOps workflows in enterprise environments.
+Camunda Hub (Self-Managed) offers a centralized interface to monitor and manage your Camunda 8 deployments, enhancing operational efficiency and streamlining DevOps workflows in enterprise environments.
 
-Console delivers real-time insights into orchestration clusters and reduces the operational overhead of managing distributed systems.
+Camunda Hub delivers real-time insights into orchestration clusters and reduces the operational overhead of managing distributed systems.
 
 ## Key features
 
