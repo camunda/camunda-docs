@@ -65,9 +65,9 @@ For each cluster:
 
 - A separate VPC endpoint service is provisioned.
 - Cluster-specific networking components are provisioned. Private connectivity does not share entry components across clusters.
-- The cluster gateway is restricted to its Kubernetes namespace.
+- Access to the orchestration cluster is handled through the cluster’s API gateway layer.
 
-Traffic between your VPC and the Camunda Ingress endpoint is encrypted in transit using TLS. TLS terminates at the cluster’s API gateway layer.
+Traffic between your VPC and the cluster’s API gateway layer is encrypted in transit using TLS. TLS terminates at the cluster’s API gateway layer.
 
 Traffic within the cluster follows the same model as public connectivity.
 
@@ -108,6 +108,6 @@ Secure connectivity:
 - Does not change data location or backup regions.
 - Does not affect encryption at rest or key management.
 - Does not provide outbound private connectivity from Camunda to your services.
-- Does not replace IP allowlists or other access control features.
+- Secure connectivity does not replace IP allowlists or other access control features. If an IP allowlist is configured, it continues to apply to connections made through private connectivity. For more information, see [manage IP allowlists](../../console/manage-clusters/manage-ip-allowlists).
 
 Secure connectivity changes only the network path used for inbound connections from your AWS VPC.
