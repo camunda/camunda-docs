@@ -54,8 +54,8 @@ c8 deploy ./my-project
 
 `c8ctl` recognizes two special folder conventions during deployment:
 
-- **Building blocks** (🧱) — folders containing `_bb-` in their name. These are deployed first.
-- **Process applications** (📦) — folders containing a `.process-application` marker file.
+- Building blocks — folders containing `_bb-` in their name. These are deployed first.
+- Process applications — folders containing a `.process-application` marker file.
 
 ```text
 my-project/
@@ -81,11 +81,11 @@ Deploying 5 resource(s)...
 
 File                            | Type    | ID         | Version | Key
 --------------------------------|---------|------------|---------|-------------------
-🧱 _bb-shared/common.bpmn       | Process | common     | 1       | 2251799813685249
-🧱 _bb-shared/nested/util.bpmn  | Process | util       | 1       | 2251799813685250
-📦 my-app/process.bpmn          | Process | my-proc    | 1       | 2251799813685251
-📦 my-app/subfolder/form.form   | Form    | form-id    | 1       | 2251799813685252
-standalone.bpmn                 | Process | standalone | 1       | 2251799813685253
+_bb-shared/common.bpmn          | Process | common     | 1       | 2251799813685249
+_bb-shared/nested/util.bpmn     | Process | util       | 1       | 2251799813685250
+ my-app/process.bpmn            | Process | my-proc    | 1       | 2251799813685251
+ my-app/subfolder/form.form     | Form    | form-id    | 1       | 2251799813685252
+ standalone.bpmn                | Process | standalone | 1       | 2251799813685253
 ```
 
 Building block resources are listed first, followed by process application resources, then standalone resources.
@@ -232,7 +232,7 @@ Add the following to your `.vscode/mcp.json`:
 | `CAMUNDA_TOKEN_AUDIENCE` | Token audience for the Orchestration Cluster API.                            |
 
 :::tip
-When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details are shown on the credentials page. You can also copy a ready-to-use `c8ctl` configuration snippet from the **MCP** tab.
+When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details are shown on the credentials page. You can also copy a ready-to-use `c8ctl` configuration snippet from the MCP tab.
 :::
 
 ### Use a profile with MCP proxy
