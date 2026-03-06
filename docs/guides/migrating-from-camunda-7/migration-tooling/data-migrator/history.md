@@ -1,15 +1,14 @@
 ---
 id: history
-title: History migration (experimental)
-sidebar_label: History migration
-description: "Copy audit trail (history) data from Camunda 7 to Camunda 8. Experimental and not for production."
+title: History
+sidebar_label: History
+description: "Copy audit trail (history) data from Camunda 7 to Camunda 8."
 ---
 
-Use the History Data Migrator to copy process instance audit data to Camunda 8.
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-:::info
-The history migration mode of the Data Migrator will **not be released before Camunda 8.9 (April 2026)**. You can check the current state and track progress in the [GitHub repository](https://github.com/camunda/camunda-7-to-8-migration-tooling/).
-:::
+Use the History Data Migrator to copy process instance audit data to Camunda 8.
 
 ## About history migration
 
@@ -17,10 +16,9 @@ Process instances leave traces, referred to as [History in Camunda 7](https://do
 
 It is important to note that audit data can exist for ended processes from the past, but is also available for currently still running process instances, as those process instances also left traces up to the current wait state.
 
-The History Data Migrator can copy this audit data to Camunda 8.
+The History Data Migrator can copy this audit data to Camunda 8. For process instances that were still active or suspended in Camunda 7, the migrated history data will be marked as canceled in Camunda 8. This ensures a clear audit trail while preventing confusion with actively running instances in Camunda 8.
 
-Audit data migration might need to look at a huge amount of data, which can take time to migrate. In early measurements, migrating 10,000 process instances took around 10 minutes, but the number varies greatly based on the amount of data attached to a process instance (for example, user task instances, variable instances, and so on).
-
+Audit data migration might need to look at a huge amount of data, which can take time to migrate.
 You can run audit data migration alongside normal operations (for example, after the successful big bang migration of runtime process instances) so that it doesn't require downtime and as such, the performance might not be as critical as for runtime instance migration.
 
 During migration, the History Data Migrator sets a `legacyId` variable in the process instances to link them to their original Camunda 7 process instances.
@@ -31,7 +29,7 @@ The following requirements and limitations apply:
 
 - Camunda 8 is up and running and Camunda 7 has been stopped.
 - The History Data Migrator must be able to access the Camunda 7 database.
-- The History Data Migrator can migrate data to Camunda 8 only when a relational database (RDBMS) is used. This capability is planned for Camunda 8.9.
+- The History Data Migrator can migrate data to Camunda 8 only when a relational database (RDBMS) is used.
 - The History Data Migrator must be able to access the Camunda 8 database. As a result, you can run this tool only in a self-managed environment.
 - If you manipulate Camunda 7 data between History Data Migrator runs, data consistency might be affected. See [Auto-cancellation of active instances](#auto-cancellation-of-active-instances) for details.
 - If you migrate runtime and history data for an active C7 process instance, two separate records will appear in Operate:
@@ -42,8 +40,15 @@ The following requirements and limitations apply:
 
 ## Usage examples
 
+<Tabs groupId="os" defaultValue="maclinux" values={[
+{ label: 'Mac OS + Linux', value: 'maclinux' },
+{ label: 'Windows', value: 'windows' }
+]}>
+
+<TabItem value="maclinux">
+
 ```bash
-# Run history migration (experimental)
+# Run history migration
 ./start.sh --history
 
 # List all skipped history entities
@@ -55,6 +60,28 @@ The following requirements and limitations apply:
 # Retry skipped history entities
 ./start.sh --history --retry-skipped
 ```
+
+</TabItem>
+
+<TabItem value="windows">
+
+```bash
+# Run history migration
+start.bat --history
+
+# List all skipped history entities
+start.bat --history --list-skipped
+
+# List skipped entities for specific types
+start.bat --history --list-skipped HISTORY_PROCESS_INSTANCE HISTORY_USER_TASK
+
+# Retry skipped history entities
+start.bat --history --retry-skipped
+```
+
+</TabItem>
+
+</Tabs>
 
 ## Entity types
 
@@ -70,6 +97,12 @@ The following requirements and limitations apply:
 | `HISTORY_DECISION_INSTANCE`   | Decision instances   |
 | `HISTORY_DECISION_DEFINITION` | Decision definitions |
 
+## Tenants
+
+- Camunda 7's `null` tenant is migrated to Camunda 8's `<default>` tenant.
+- All other `tenantId`s will be migrated as-is.
+- For details, see [multi-tenancy](/components/concepts/multi-tenancy.md#tenant-identifier) in Camunda 8.
+
 ## Cleanup behavior for completed instances
 
 Instances that were already completed in Camunda 7 retain their original cleanup dates:
@@ -79,14 +112,18 @@ Instances that were already completed in Camunda 7 retain their original cleanup
 - If no `removalTime` exists and the instance is completed, no cleanup date is set.
 - Auto-cancel cleanup configuration **only applies to instances that were active or suspended** in Camunda 7.
 
+:::note
+All migrated records are assigned `partitionId=1` so that the RDBMS exporter on partition 1 can perform history cleanup for migrated data.
+:::
+
 ## Auto-cancellation of active instances
 
 When migrating history data, the Data Migrator automatically handles **active or suspended** process instances from Camunda 7 by marking them as **canceled** in Camunda 8. This applies to:
 
-- Process instances.
-- Flow nodes.
-- User tasks.
-- Incidents.
+- Process instances
+- Flow nodes
+- User tasks
+- Incidents
 
 Auto-canceled entities are assigned the migration timestamp as their end date.
 
@@ -100,8 +137,6 @@ This ensures auto-canceled instances are eligible for history cleanup after six 
 
 See [configuration for history auto-cancellation](../data-migrator/config-properties.md#camundamigratorhistoryauto-cancelcleanup) for more details.
 
-Please note that if any Camunda 7 process instances progress in their state in between multiple runs of the History Data Migrator, data consistency might be affected: for example, if a process instance is completed in Camunda 7 after the first run but before the second run, the History Data Migrator would migrate it as canceled in the first and as completed in the second run. As a result, in Operate you may see that a process instance was canceled in a Flow Node that chronologically precedes the end event in your model, where the instance will be marked as completed. To avoid such situations, ensure that Camunda 7 data remains unchanged between History Data Migrator runs.
-
 ## Forms
 
 The History Data Migrator automatically migrates [Camunda Forms](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) from Camunda 7 to Camunda 8. This includes forms linked to process definitions (start forms) and user tasks.
@@ -112,18 +147,17 @@ User tasks that reference non-existent forms will be migrated as well.
 
 ### Form linking
 
-The migrator automatically detects and links forms in the following scenarios:
+The migrator automatically detects and links forms configured using `camunda:formRef` with a `camunda:formKey`. This applies to both start events and user tasks.
 
-#### Start forms
-
-When a process definition has a start form configured using `camunda:formRef` with a `camunda:formKey`, the migrator:
+For each form reference, the migrator:
 
 1. Resolves the form definition based on the form key and binding (deployment, latest, or version).
-2. Links the process definition to the migrated form in Camunda 8.
+2. Links the element (process definition or user task) to the migrated form in Camunda 8.
 
-Example BPMN configuration that will be migrated:
+Example BPMN configurations that will be migrated:
 
 ```xml
+<!-- Start form -->
 <bpmn:startEvent id="StartEvent_1">
   <bpmn:extensionElements>
     <camunda:formData>
@@ -131,18 +165,8 @@ Example BPMN configuration that will be migrated:
     </camunda:formData>
   </bpmn:extensionElements>
 </bpmn:startEvent>
-```
 
-#### User task forms
-
-When a user task has a form configured using `camunda:formRef` with a `camunda:formKey`, the migrator:
-
-1. Resolves the form definition based on the form key and binding (deployment, latest, or version).
-2. Links the user task to the migrated form in Camunda 8.
-
-Example BPMN configuration that will be migrated:
-
-```xml
+<!-- User task form -->
 <bpmn:userTask id="UserTask_1" name="Review Document">
   <bpmn:extensionElements>
     <camunda:formData>
@@ -178,6 +202,7 @@ The following built-in transformers convert Camunda 7 historic entities:
 
 | Interceptor                                 | Camunda 7 entity type                    | Camunda 8 Model               |
 | ------------------------------------------- | ---------------------------------------- | ----------------------------- |
+| `AuditLogTransformer`                       | `UserOperationLogEntry`                  | `AuditLogDbModel`             |
 | `FormTransformer`                           | `CamundaFormDefinitionEntity`            | `FormDbModel`                 |
 | `ProcessInstanceTransformer`                | `HistoricProcessInstance`                | `ProcessInstanceDbModel`      |
 | `ProcessDefinitionTransformer`              | `ProcessDefinition`                      | `ProcessDefinitionDbModel`    |
@@ -371,8 +396,7 @@ See [example interceptor](https://github.com/camunda/camunda-7-to-8-migration-to
 ### Execution order
 
 - Custom interceptors configured in the `application.yml` are executed in their order of appearance from top to bottom
-  - Built-in transformers run first (Order: 1-15), followed by custom interceptors
-- In a Spring Boot environment, you can register interceptors as beans and change their execution order with the `@Order` annotation (lower values run first)
+- Built-in transformers run first, followed by custom interceptors
 
 ### Error handling
 
@@ -390,9 +414,3 @@ This automatic retry mechanism is particularly useful for resolving cross-entity
 - Flow node instances that depend on their parent flow node (scope)
 - Child process instances that depend on parent call activities
 - Variables or user tasks that depend on their parent process instance
-
-## Tenants
-
-- Camunda 7's `null` tenant is migrated to Camunda 8's `<default>` tenant.
-- All other `tenantId`s will be migrated as-is.
-- For details, see [multi-tenancy](/components/concepts/multi-tenancy.md#tenant-identifier) in Camunda 8.
