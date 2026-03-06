@@ -7,7 +7,7 @@ description: "Use c8ctl to list, search, and manage process instances, user task
 
 # Cluster inspection and process management
 
-:::caution Alpha feature
+:::warning Alpha feature
 `c8ctl` is in **alpha** and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
 :::
 
@@ -460,5 +460,5 @@ Switch to JSON for scripting and automation:
 ```bash
 c8 output json
 c8 search pi --state=ACTIVE
-# [{"processInstanceKey":"2251799813685260",...}, ...]
+# [{"processInstanceKey":"2251799813685260", ...}, ...]
 ```
