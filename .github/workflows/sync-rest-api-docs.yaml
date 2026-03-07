@@ -70,6 +70,7 @@ jobs:
           fi
 
       - name: Sync older stable versions
+        id: sync_stable
         run: |
           cd docs
           for version in $(jq -r '.[]' versions.json); do
@@ -113,9 +114,13 @@ jobs:
 
           if git diff-index --quiet HEAD; then
             echo "No changes to commit across any version."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Generate token
+        if: steps.sync_stable.outputs.has_changes == 'true'
         id: generate_token
         uses: actions/create-github-app-token@v2
         with:
@@ -123,6 +128,7 @@ jobs:
           private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
 
       - name: Create Pull Request
+        if: steps.sync_stable.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
           token: "${{ steps.generate_token.outputs.token }}"
