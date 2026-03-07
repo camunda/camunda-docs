@@ -51,9 +51,9 @@ paths:
           description: The assigned key of the decision instance, which acts as a unique identifier for this decision instance.
           schema:
             type: string
-            format: string<DecisionInstanceKey>
-            example: "22517998136843567"
-            description: System-generated key for a deployed decision instance.
+            format: string<DecisionEvaluationInstanceKey>
+            example: "2251799813684367"
+            description: System-generated key for a decision evaluation instance.
       responses:
         "200":
           description: The decision instance is successfully returned.
@@ -85,7 +85,7 @@ paths:
       description: |-
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Delete all associated decision evaluations based on provided key.
       parameters:
@@ -130,7 +130,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Delete multiple decision instances. This will delete the historic data from secondary storage.
         This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
@@ -275,6 +275,8 @@ components:
           $ref: "keys.yaml#/components/schemas/OperationReference"
     DecisionInstanceSearchQueryResult:
       type: object
+      required:
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -285,68 +287,99 @@ components:
             $ref: "#/components/schemas/DecisionInstanceResult"
     DecisionInstanceResult:
       type: object
+      required:
+        - decisionDefinitionId
+        - decisionDefinitionKey
+        - decisionDefinitionName
+        - decisionDefinitionType
+        - decisionDefinitionVersion
+        - decisionEvaluationInstanceKey
+        - decisionEvaluationKey
+        - elementInstanceKey
+        - evaluationDate
+        - evaluationFailure
+        - processDefinitionKey
+        - processInstanceKey
+        - result
+        - rootDecisionDefinitionKey
+        - rootProcessInstanceKey
+        - state
+        - tenantId
       properties:
+        decisionDefinitionId:
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/DecisionDefinitionId"
+          description: The ID of the DMN decision.
+        decisionDefinitionKey:
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/DecisionDefinitionKey"
+          description: The key of the decision.
+        decisionDefinitionName:
+          type: string
+          description: The name of the DMN decision.
+        decisionDefinitionType:
+          $ref: "#/components/schemas/DecisionDefinitionTypeEnum"
+        decisionDefinitionVersion:
+          type: integer
+          format: int32
+          description: The version of the decision.
         decisionEvaluationInstanceKey:
           $ref: "keys.yaml#/components/schemas/DecisionEvaluationInstanceKey"
-        state:
-          $ref: "#/components/schemas/DecisionInstanceStateEnum"
+        decisionEvaluationKey:
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/DecisionEvaluationKey"
+          description: The key of the decision evaluation where this instance was created.
+        elementInstanceKey:
+          description: The key of the element instance this decision instance is linked to.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
         evaluationDate:
           type: string
           format: date-time
           description: The evaluation date of the decision instance.
         evaluationFailure:
           type: string
+          nullable: true
           description: The evaluation failure of the decision instance.
-        decisionDefinitionId:
-          allOf:
-            - $ref: "identifiers.yaml#/components/schemas/DecisionDefinitionId"
-          description: The ID of the DMN decision.
-        decisionDefinitionName:
-          type: string
-          description: The name of the DMN decision.
-        decisionDefinitionVersion:
-          type: integer
-          format: int32
-          description: The version of the decision.
-        decisionDefinitionType:
-          $ref: "#/components/schemas/DecisionDefinitionTypeEnum"
-        result:
-          type: string
-          description: The result of the decision instance.
-        tenantId:
-          description: The tenant ID of the decision instance.
-          allOf:
-            - $ref: "identifiers.yaml#/components/schemas/TenantId"
-        decisionEvaluationKey:
-          allOf:
-            - $ref: "keys.yaml#/components/schemas/DecisionEvaluationKey"
-          description: The key of the decision evaluation where this instance was created.
         processDefinitionKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"
+          nullable: true
           description: The key of the process definition.
         processInstanceKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
+          nullable: true
           description: The key of the process instance.
-        rootProcessInstanceKey:
-          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
-        decisionDefinitionKey:
-          allOf:
-            - $ref: "keys.yaml#/components/schemas/DecisionDefinitionKey"
-          description: The key of the decision.
-        elementInstanceKey:
-          description: The key of the element instance this decision instance is linked to.
-          allOf:
-            - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
+        result:
+          type: string
+          description: The result of the decision instance.
         rootDecisionDefinitionKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/DecisionDefinitionKey"
           description: The key of the root decision definition.
+        rootProcessInstanceKey:
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
+        state:
+          $ref: "#/components/schemas/DecisionInstanceStateEnum"
+        tenantId:
+          description: The tenant ID of the decision instance.
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/TenantId"
     DecisionInstanceGetQueryResult:
       allOf:
         - $ref: "#/components/schemas/DecisionInstanceResult"
         - type: object
+          required:
+            - evaluatedInputs
+            - matchedRules
           properties:
             evaluatedInputs:
               type: array
@@ -366,26 +399,41 @@ components:
       properties:
         inputId:
           type: string
+          description: The identifier of the decision input.
         inputName:
           type: string
+          description: The name of the decision input.
         inputValue:
+          description: The description of the decision input.
           type: string
     EvaluatedDecisionOutputItem:
+      required:
+        - ruleId
+        - ruleIndex
       type: object
       description: The evaluated decision outputs.
       properties:
         outputId:
+          description: The ID of the evaluated decison output item.
           type: string
         outputName:
+          description: The name of the of the evaluated decison output item.
           type: string
         outputValue:
+          description: The value of the evaluated decison output item.
           type: string
         ruleId:
+          description: The ID of the matched rule.
+          nullable: true
           type: string
         ruleIndex:
+          description: The index of the matched rule.
+          nullable: true
           type: integer
           format: int32
     MatchedDecisionRuleItem:
+      required:
+        - evaluatedOutputs
       type: object
       description: A decision rule that matched within this decision evaluation.
       properties:
@@ -402,19 +450,21 @@ components:
           items:
             $ref: "#/components/schemas/EvaluatedDecisionOutputItem"
     DecisionDefinitionTypeEnum:
-      description: The type of the decision.
+      description: The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10
       type: string
       enum:
         - DECISION_TABLE
         - LITERAL_EXPRESSION
+        - UNSPECIFIED
         - UNKNOWN
     DecisionInstanceStateEnum:
-      description: The state of the decision instance.
+      description: The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10
       type: string
       enum:
         - EVALUATED
         - FAILED
         - UNSPECIFIED
+        - UNKNOWN
     AdvancedDecisionInstanceStateFilter:
       title: Advanced filter
       description: Advanced DecisionInstanceStateEnum filter.

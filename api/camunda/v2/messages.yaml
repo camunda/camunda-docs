@@ -171,6 +171,10 @@ components:
         The message key of the correlated message, as well as the first process instance key it
         correlated with.
       type: object
+      required:
+        - tenantId
+        - messageKey
+        - processInstanceKey
       properties:
         tenantId:
           description: The tenant ID of the correlated message
@@ -218,6 +222,9 @@ components:
     MessagePublicationResult:
       description: The message key of the published message.
       type: object
+      required:
+        - tenantId
+        - messageKey
       properties:
         tenantId:
           description: The tenant ID of the message.
@@ -229,6 +236,8 @@ components:
           description: The key of the published message.
     MessageSubscriptionSearchQueryResult:
       type: object
+      required:
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -239,6 +248,8 @@ components:
             $ref: "#/components/schemas/MessageSubscriptionResult"
     MessageSubscriptionResult:
       type: object
+      required:
+        - rootProcessInstanceKey
       properties:
         messageSubscriptionKey:
           allOf:
@@ -257,7 +268,13 @@ components:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The process instance key associated with this message subscription.
         rootProcessInstanceKey:
-          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         elementId:
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/ElementId"
@@ -364,6 +381,8 @@ components:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
           description: The unique external tenant ID.
     CorrelatedMessageSubscriptionSearchQueryResult:
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -414,7 +433,13 @@ components:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The process instance key associated with this correlated message subscription.
         rootProcessInstanceKey:
-          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         subscriptionKey:
           allOf:
             - $ref: "#/components/schemas/MessageSubscriptionKey"
@@ -434,6 +459,7 @@ components:
         - processInstanceKey
         - subscriptionKey
         - tenantId
+        - rootProcessInstanceKey
     CorrelatedMessageSubscriptionSearchQuery:
       type: object
       allOf:
