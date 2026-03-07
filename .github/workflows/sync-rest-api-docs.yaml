@@ -65,9 +65,6 @@ jobs:
           mv rest-api.yaml camunda-openapi.yaml
           npm i
           npm run api:generate:camunda
-          if git diff-index --quiet HEAD; then
-            echo "No changes to commit for next version."
-          fi
 
       - name: Sync older stable versions
         id: sync_stable
@@ -112,7 +109,7 @@ jobs:
             rm -rf "../rest-spec-$version"
           done
 
-          if git diff-index --quiet HEAD; then
+          if [ -z "$(git status --porcelain)" ]; then
             echo "No changes to commit across any version."
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
           else
