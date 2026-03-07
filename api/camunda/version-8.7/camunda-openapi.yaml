@@ -1814,9 +1814,7 @@ paths:
         - Resource
       summary: Delete resource
       description: |-
-        Deletes a deployed resource. 
-
-        This can be a process definition, decision requirements
+        Deletes a deployed resource. This can be a process definition, decision requirements
         definition, or form definition deployed using the deploy resources endpoint. Specify the
         resource you want to delete in the `resourceKey` parameter.
 

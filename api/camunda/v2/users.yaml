@@ -8,7 +8,7 @@ paths:
       description: |-
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Create a new user.
       requestBody:
@@ -118,7 +118,7 @@ paths:
       description: |-
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Updates a user.
       parameters:
@@ -163,7 +163,7 @@ paths:
       description: |-
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Deletes a user.
       parameters:
@@ -215,10 +215,16 @@ components:
           $ref: "identifiers.yaml#/components/schemas/Username"
         name:
           description: The name of the user.
+          nullable: true
           type: string
         email:
           description: The email of the user.
+          nullable: true
           type: string
+      required:
+        - username
+        - name
+        - email
     UserUpdateRequest:
       type: object
       properties:
@@ -238,10 +244,16 @@ components:
           $ref: "identifiers.yaml#/components/schemas/Username"
         name:
           description: The name of the user.
+          nullable: true
           type: string
         email:
           description: The email of the user.
+          nullable: true
           type: string
+      required:
+        - username
+        - name
+        - email
     UserResult:
       type: object
       properties:
@@ -249,10 +261,16 @@ components:
           $ref: "identifiers.yaml#/components/schemas/Username"
         name:
           description: The name of the user.
+          nullable: true
           type: string
         email:
           description: The email of the user.
+          nullable: true
           type: string
+      required:
+        - username
+        - name
+        - email
     UserSearchQuerySortRequest:
       type: object
       properties:
