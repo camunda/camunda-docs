@@ -89,21 +89,43 @@ jobs:
 
             echo "Syncing REST API spec from $stable_branch..."
 
+            # Versions > 8.8 use a modular spec under v2/, older versions use a single file
+            minor=$(echo "$version" | awk -F. '{print $2}')
+            if [ "$minor" -gt 8 ]; then
+              spec_sparse_path="zeebe/gateway-protocol/src/main/proto/v2"
+            else
+              spec_sparse_path="zeebe/gateway-protocol/src/main/proto/rest-api.yaml"
+            fi
+
             # Clone only the spec from the stable branch using sparse checkout
             rm -rf "../rest-spec-$version"
             git clone --depth 1 --branch "$stable_branch" --no-checkout "https://github.com/camunda/camunda" "../rest-spec-$version"
             pushd "../rest-spec-$version"
-            git sparse-checkout set zeebe/gateway-protocol/src/main/proto/v2
+            git sparse-checkout set "$spec_sparse_path"
             git checkout
             popd
 
-            spec_file="../rest-spec-$version/zeebe/gateway-protocol/src/main/proto/v2/rest-api.yaml"
-            if [ -f "$spec_file" ]; then
-              cp "$spec_file" "$version_dir/camunda-openapi.yaml"
-              echo "Copied spec for version $version"
-              npm run api:generate -- camunda "$version"
+            spec_source="../rest-spec-$version/$spec_sparse_path"
+            if [ "$minor" -gt 8 ]; then
+              # v2 path is a directory with modular specs; copy the whole directory
+              if [ -d "$spec_source" ]; then
+                cp -r "$spec_source"/* "$version_dir/"
+                # Rename the entry point to match the expected name
+                mv "$version_dir/rest-api.yaml" "$version_dir/camunda-openapi.yaml"
+                echo "Copied spec directory for version $version"
+                npm run api:generate -- camunda "$version"
+              else
+                echo "Spec directory not found for version $version at expected path, skipping..."
+              fi
             else
-              echo "Spec file not found for version $version at expected path, skipping..."
+              # Single-file spec for 8.8 and below
+              if [ -f "$spec_source" ]; then
+                cp "$spec_source" "$version_dir/camunda-openapi.yaml"
+                echo "Copied spec for version $version"
+                npm run api:generate -- camunda "$version"
+              else
+                echo "Spec file not found for version $version at expected path, skipping..."
+              fi
             fi
 
             rm -rf "../rest-spec-$version"
