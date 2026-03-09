@@ -50,7 +50,7 @@ The property object keys are divided into required and optional keys:
 - [`condition : Object`](#showing-properties-conditionally-condition): A condition that controls when the property is active and visible.
 - `id : String`: An identifier used to reference the property in conditional properties.
 - [`editable : Boolean`](#preventing-edits-editable): Controls whether the property is editable in the properties panel.
-- [`entriesVisible : Boolean`](#displaying-all-entries-entriesvisible): Controls whether default properties are shown alongside properties defined in the element template.
+- [`entriesVisible : Boolean | Object`](#control-visibility-of-default-properties-panel-entries-entriesvisible): Controls whether default properties are shown alongside properties defined in the element template.
 
 Not all keys and values are compatible with each other.
 Some keys or values require other keys to be set to a certain value, even if the key is marked as optional above.
@@ -1314,12 +1314,14 @@ You can prevent edits by setting the `editable` property to `false`. The propert
 }
 ```
 
-## Displaying all entries: `entriesVisible`
+## Control visibility of default properties panel entries: `entriesVisible`
 
-By default, the element template defines the visible entries in the properties panel. All other property controls are hidden.
-To bring all the default entries back, use the `entriesVisible` property.
-If this key is set to `true`, the default properties will be listed below the element template properties in the properties panel.
-You should generally avoid using this configuration, as it removes the abstraction introduced by the template.
+By default, an applied element template causes most properties panel sections to be hidden — element template-defined bindings take precedence over standard groups and entries.
+This behavior can be customized through the `entriesVisible` property.
+
+### Displaying all entries
+
+To show all standard properties panel entries, set `entriesVisible=true`:
 
 ```json
 [
@@ -1337,4 +1339,36 @@ You should generally avoid using this configuration, as it removes the abstracti
 ]
 ```
 
-![Display default entries](./img/entries-visible.png)
+### Control specific entry visibility
+
+By passing an object to `entriesVisible` you can override the default display of certain properties panel sections.
+The key of that object is the ID of a section, the value is a boolean that defines the visibility status.
+The table below lists what entries may be customized and their default visibility status:
+
+| Key       | Description            | Default visible |
+| :-------- | :--------------------- | :-------------- |
+| `outputs` | Output mapping section | `false`         |
+
+To show the standard output mapping section, configure your template as shown below:
+
+```json
+[
+  {
+    "name": "Template 1",
+    "id": "sometemplate",
+    "entriesVisible": {
+      "outputs": true
+    },
+    "appliesTo": [
+      "bpmn:ServiceTask"
+    ],
+    "properties": [
+      ...
+    ]
+  }
+]
+```
+
+:::warning
+As an element template author, you are in control and have to ensure that default sections opened don't conflict with bindings defined by the element template.
+:::
