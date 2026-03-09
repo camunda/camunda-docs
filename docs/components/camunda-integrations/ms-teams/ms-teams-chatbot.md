@@ -40,6 +40,10 @@ Pick your organization from a dropdown, then select a cluster. The bot remembers
 
 Choose a process definition from the list and fill in the start form or provide variables. The bot confirms when the process has started successfully, or shows an error if something went wrong.
 
+:::note
+When a process is started through the bot, an [`appContext`](./ms-teams.md#process-variable-appcontext) variable is automatically included in the process variables, capturing who triggered it and from which surface (`"message"` or `"channel"`).
+:::
+
 ### Work with tasks
 
 | Action            | Description                                                                                                          |
@@ -49,6 +53,10 @@ Choose a process definition from the list and fill in the start form or provide 
 | **Fill in form**  | Open the task completion form directly in the chat card.                                                             |
 | **Complete task** | Submit the form and mark the task as done.                                                                           |
 | **Reset form**    | Discard your form input and go back to the task overview.                                                            |
+
+:::note
+When a task is completed through the bot, an [`appContext`](./ms-teams.md#process-variable-appcontext) variable is automatically included in the task variables, capturing who completed it and from which surface (`"message"` or `"channel"`).
+:::
 
 ### Cluster management
 
