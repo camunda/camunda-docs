@@ -919,6 +919,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/azure-blob-storage",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
+                "components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound",
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
@@ -1357,6 +1358,11 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Upgrade to Camunda 8.9",
+      items: ["apis-tools/migration-manuals/migrate-to-89"],
+    },
+    {
+      type: "category",
       label: "Upgrade to Camunda 8.8",
       link: {
         type: "doc",
@@ -1664,6 +1670,7 @@ module.exports = {
               items: [
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
+                "self-managed/deployment/helm/operational-tasks/helm-v4",
               ],
             },
             {
@@ -1877,8 +1884,16 @@ module.exports = {
             id: "self-managed/operational-guides/backup-restore/backup-and-restore",
           },
           items: [
-            "self-managed/operational-guides/backup-restore/backup",
-            "self-managed/operational-guides/backup-restore/restore",
+            {
+              Elasticsearch: [
+                "self-managed/operational-guides/backup-restore/elasticsearch/es-backup",
+                "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
+              ],
+              "Relational databases": [
+                "self-managed/operational-guides/backup-restore/rdbms/rdbms-backup",
+                "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
+              ],
+            },
             {
               "Backup Management API": [
                 "self-managed/operational-guides/backup-restore/optimize-backup",

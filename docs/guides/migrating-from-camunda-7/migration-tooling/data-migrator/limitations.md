@@ -191,6 +191,7 @@ The history migration has the following limitations.
 - All migrated data is assigned `partitionId=1` so that the RDBMS exporter on partition 1 can perform history cleanup for migrated data.
 - Migrated data has partition ID 4095 encoded in their keys to avoid key collisions with Zeebe produced data.
   - Due to this, migrated process instances cannot be deleted via C8 API or in Operate since Zeebe cannot delegate the operation to a partition.
+    - See https://github.com/camunda/camunda/issues/47927
   - Please use [RDBMS History Cleanup](/self-managed/concepts/databases/relational-db/configuration.md#history-cleanup-1) to delete the migrated data.
 - To avoid collisions between definitions (process/decision/form), each definition migrated from Camunda 7 to 8 has its ID prefixed with `c7-legacy-`.
   - Do not deploy new definitions in Camunda 8 with IDs starting with this prefix to avoid conflicts.
@@ -235,6 +236,10 @@ The History Data Migrator supports migration of Camunda Forms, but with the foll
   - `version` - Specific version of the form definition
 - Unsupported form bindings:
   - Expression-based bindings (for example, `${formKey}`)
+
+### Jobs
+
+The History Data Migrator migrates only jobs of type [asynchronous continuation](https://docs.camunda.org/manual/7.24/user-guide/process-engine/transactions-in-processes/#configure-asynchronous-continuations).
 
 ### Incidents
 

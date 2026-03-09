@@ -39,6 +39,32 @@ You sign in using your organization's Microsoft account, and then link it to you
 | Notifications       | Receive personal and channel alerts for new or assigned user tasks. |
 | Cluster management  | View cluster health and wake up suspended clusters.                 |
 
+## Process variable: `appContext`
+
+When a process is started or a user task is completed through Microsoft Teams, the integration automatically injects an `appContext` variable into the process variables. This allows downstream BPMN processes to know _where_ and _how_ they were triggered.
+
+The `appContext` variable has the following shape:
+
+| Field            | Type                                  | Description                                                                      |
+| :--------------- | :------------------------------------ | :------------------------------------------------------------------------------- |
+| `integration`    | `"teams"`                             | The platform that initiated the action.                                          |
+| `externalUserId` | `string`                              | The Microsoft Teams user ID of the person who triggered the action.              |
+| `email`          | `string`                              | The Camunda account email associated with the user.                              |
+| `source`         | `"tab"` \| `"message"` \| `"channel"` | The UI surface that triggered the action (see below).                            |
+| `channel`        | `string` (optional)                   | The Teams channel or conversation ID. Present only when `source` is `"channel"`. |
+
+### Source values
+
+| Value       | Meaning                                                                                                       |
+| :---------- | :------------------------------------------------------------------------------------------------------------ |
+| `"tab"`     | Action was triggered from the Teams tab interface, including forms opened in a pop-up dialog from a bot card. |
+| `"message"` | Action was triggered from a bot conversation in a personal or group chat.                                     |
+| `"channel"` | Action was triggered from a channel — either through a bot card posted in the channel or a channel command.   |
+
+:::tip
+You can use `appContext` in your BPMN processes to implement conditional logic based on where an action originated. For example, you could route a process differently depending on whether it was started from a tab or a channel command.
+:::
+
 ## Get started
 
 ### Prerequisites
