@@ -35,11 +35,22 @@ When the actual result set exceeds the cap, the `hasMoreTotalItems` boolean fiel
 
 The result count cap is configurable per deployment:
 
-| Parameter                                                      | Type    | Default | Description                                                                                              |
-| -------------------------------------------------------------- | ------- | ------- | -------------------------------------------------------------------------------------------------------- |
-| `orchestration.data.secondaryStorage.rdbms.query.maxTotalHits` | integer | `10000` | Maximum number of results to count. Set higher to count larger result sets (performance cost increases). |
+| Parameter                                                                                    | Type    | Default | Description                                                                                              |
+| -------------------------------------------------------------------------------------------- | ------- | ------- | -------------------------------------------------------------------------------------------------------- |
+| `camunda.data.secondary-storage.rdbms.query.max-total-hits`                                  | integer | `10000` | Maximum number of results to count. Set higher to count larger result sets (performance cost increases). |
+| `orchestration.data.secondaryStorage.rdbms.query.maxTotalHits` (legacy chart value mappings) | integer | `10000` | Legacy direct Helm value path used in earlier chart versions.                                            |
 
-Example:
+Current chart style (embedded `application.yml`):
+
+```yaml
+orchestration:
+  extraConfiguration:
+    - file: application.yml
+      content: |
+        camunda.data.secondary-storage.rdbms.query.max-total-hits: 10000
+```
+
+Legacy direct Helm value path:
 
 ```yaml
 orchestration:
@@ -108,58 +119,46 @@ This avoids unnecessary COUNT(\*) operations on queries that may scan large port
 
 ## Database-specific tuning (PostgreSQL)
 
-If you are using PostgreSQL as your RDBMS and experience slow search queries, consider the following configuration for load-testing scenarios (adjust based on your workload and hardware):
+If you are using PostgreSQL as your RDBMS and experience slow search queries, tune compute resources, storage performance, and PostgreSQL server parameters based on your workload and hardware.
 
-```yaml
-global:
-  postgresql:
-    postgresqlSharedPreloadLibraries: pg_stat_statements
+Typical PostgreSQL parameters to evaluate for load-testing scenarios include:
 
-primary:
-  resources:
-    requests:
-      memory: 4Gi
-      cpu: 3000m
-    limits:
-      cpu: 3000m
-      memory: 6Gi
+```conf
+# WAL performance
+wal_buffers = 64MB
+max_wal_size = 4GB
+min_wal_size = 1GB
+checkpoint_timeout = 20min
+checkpoint_completion_target = 0.9
+wal_writer_delay = 200ms
+wal_writer_flush_after = 1MB
 
-  persistence:
-    size: 128Gi
-    storageClass: "ssd"
+# Memory
+shared_buffers = 2GB
+effective_cache_size = 4500MB
+work_mem = 32MB
+maintenance_work_mem = 512MB
 
-  extendedConfiguration: |-
-    # WAL Performance Tuning
-    wal_buffers = 64MB
-    max_wal_size = 4GB
-    min_wal_size = 1GB
-    checkpoint_timeout = 20min
-    checkpoint_completion_target = 0.9
-    wal_writer_delay = 200ms
-    wal_writer_flush_after = 1MB
+# Autovacuum
+autovacuum_max_workers = 6
+autovacuum_naptime = 15s
+autovacuum_vacuum_scale_factor = 0.03
+autovacuum_analyze_scale_factor = 0.02
+autovacuum_vacuum_cost_limit = 5000
 
-    # Memory Settings
-    shared_buffers = 2GB
-    effective_cache_size = 4500MB
-    work_mem = 32MB
-    maintenance_work_mem = 512MB
-
-    # Autovacuum - Aggressive for high UPDATE/DELETE volume
-    autovacuum_max_workers = 6
-    autovacuum_naptime = 15s
-    autovacuum_vacuum_scale_factor = 0.03
-    autovacuum_analyze_scale_factor = 0.02
-    autovacuum_vacuum_cost_limit = 5000
-
-    # Monitoring
-    pg_stat_statements.track = all
-    pg_stat_statements.max = 10000
-    track_io_timing = on
-    track_functions = all
+# Monitoring
+pg_stat_statements.track = all
+pg_stat_statements.max = 10000
+track_io_timing = on
+track_functions = all
 ```
 
 :::note
-This configuration is specific to load-testing with the parameters shown. For production, start conservative and adjust based on your data volume, workload, and hardware. Camunda is a write-heavy application, so prioritize cache and vacuum settings for your environment.
+These are PostgreSQL-native settings. How you apply them depends on your deployment model (for example, managed database parameter groups, `postgresql.conf`, or Helm chart values).
+
+If you are using the Bitnami PostgreSQL chart, equivalent settings can be provided via chart-specific keys such as `primary.extendedConfiguration` (for PostgreSQL parameters) and `primary.resources` / `primary.persistence` (for sizing and storage).
+
+For production, start conservative and adjust based on your data volume, workload, and hardware. Camunda is a write-heavy application, so prioritize cache and vacuum settings for your environment.
 :::
 
 Database-specific tuning for MariaDB and Oracle will be documented in future updates.
