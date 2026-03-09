@@ -14,24 +14,26 @@ Key changes (for example, deprecations and breaking changes) and supported envir
 
 <ReleaseAnnouncementsFilter>
 
-<div className="release-announcement-row" data-type="breaking-change" data-area="Supported environments" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="change" data-area="Supported environments" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--breaking-change">Breaking change</span>
+    <span className="badge badge--change">Change</span>
   </div>
   <div className="release-announcement-content">
 
-### Elasticsearch minimum version raised to 8.18.6+
-- See [release notes](/reference/announcements-release-notes/890/890-release-notes.md) to learn more about new features and enhancements.
-- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
-  :::
+#### Support for latest Elasticsearch and OpenSearch versions
 
-## Supported environments
+Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to take advantage of the latest database features and releases.
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
+<p className="link-arrow">[OpenSearch and Elasticsearch support](/reference/supported-environments.md#opensearch-and-elasticsearch-support)</p>
+
 </div>
-<div className="release-announcement-content">
+</div>
+
+<div className="release-announcement-row" data-type="change" data-area="Supported environments" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--change">Change</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Elasticsearch minimum version raised to 8.19+
 
@@ -47,11 +49,11 @@ The minimum supported Elasticsearch version for the Orchestration cluster and Op
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="change" data-area="Supported environments" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--change">Change</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### OpenSearch minimum version raised to 2.19+
 
@@ -72,7 +74,6 @@ The minimum supported OpenSearch version for the Orchestration cluster and Optim
   </div>
   <div className="release-announcement-content">
 
-### AWS Paris region added
 #### AWS regions added
 
 Camunda 8.9 adds support for the following new regions in Camunda 8 SaaS.
@@ -91,38 +92,18 @@ Camunda 8.9 adds support for the following new regions in Camunda 8 SaaS.
   </div>
   <div className="release-announcement-content">
 
-### OpenJDK 25 support
+#### OpenJDK 25 support
 
 Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration Cluster, Connectors, Optimize, and supporting tooling. You can now run Self-Managed deployments on OpenJDK 21–25 without additional configuration changes.
 
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="breaking-change" data-area="Agentic orchestration" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="announcement" data-area="Supported environments" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--breaking-change">Breaking change</span>
+    <span className="badge badge--announcement">Announcement</span>
   </div>
   <div className="release-announcement-content">
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### Support for latest Elasticsearch and OpenSearch versions
-
-Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to take advantage of the latest database features and releases.
-
-<p className="link-arrow">[OpenSearch and Elasticsearch support](/reference/supported-environments.md#opensearch-and-elasticsearch-support)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
 
 #### Keycloak 25.x no longer supported
 
@@ -137,11 +118,13 @@ Camunda 8.9 drops support for Keycloak 25.x. Only Keycloak 26.x is now supported
 </div>
 </div>
 
-## Key changes
+<div className="release-announcement-row" data-type="breaking-change" data-area="Agentic orchestration" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
-### Agentic orchestration
-
-### MCP Client and MCP Remote Client connectors
+#### MCP Client and MCP Remote Client connectors
 
 Breaking changes are [introduced in alpha 2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) to the element templates and the runtime configuration of the MCP Client.
 
@@ -161,6 +144,7 @@ To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-clien
   <div className="release-announcement-content">
 
 ### Camunda Spring Boot Starter now requires Spring Boot 4.0.x
+
 :::note API upgrade checklist for 8.9
 
 - Update to the latest official Camunda SDK versions.
@@ -170,11 +154,14 @@ To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-clien
 
 :::
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
 </div>
-<div className="release-announcement-content">
+</div>
+
+<div className="release-announcement-row" data-type="breaking-change" data-area="APIs &amp; tools" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Camunda Spring Boot Starter now requires Spring Boot 4.0.x
 
@@ -195,17 +182,7 @@ This change aligns with the Spring Boot support policy, as OSS support for Sprin
 
 ### Resource deletion endpoint now has response body
 
-Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{resourceKey}/deletion` in the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) now returns a response body. The Camunda Java client has been updated to support this change.
-
-</div>
-</div>
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-#### Resource deletion endpoint now has response body
-Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{resourceKey}/deletion` in the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) returns a response body.
+Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{resourceKey}/deletion` in the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) now returns a response body.
 
 This provides explicit deletion feedback, making client-side confirmation, auditing, and follow-up workflow logic more reliable.
 
@@ -214,11 +191,11 @@ If you use an SDK, update to the latest version for compiler and model support.
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change" data-area="APIs &amp; tools" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### OpenAPI type-safety enhancements for request and schema types
 
@@ -251,11 +228,11 @@ What to do:
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change" data-area="APIs &amp; tools" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### OpenAPI enum extensions for new 8.9 capabilities
 
@@ -280,11 +257,11 @@ What to do:
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change" data-area="APIs &amp; tools" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Bug fix: `FormResult.schema` type corrected from object to string
 
@@ -304,11 +281,11 @@ What to do:
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change" data-area="APIs &amp; tools" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### `versionTag` now returns `null` instead of empty string when absent
 
@@ -325,11 +302,11 @@ What to do:
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change" data-area="APIs &amp; tools" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Document API response schemas now have explicit required and nullable annotations
 
@@ -356,11 +333,11 @@ What to do:
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="change" data-area="APIs &amp; tools" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--change">Change</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Task permission management and new task-worker role
 
@@ -373,11 +350,11 @@ Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this rol
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="deprecated" data-area="APIs &amp; tools" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--deprecated">Deprecated</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Deprecated enum literals in Orchestration Cluster API v2
 
@@ -396,15 +373,13 @@ Avoid these values in new integrations. They are planned for removal in a future
 </div>
 </div>
 
-### Connectors
-
 <div className="release-announcement-row" data-type="deprecated" data-area="Connectors" data-deployment="sm+saas">
   <div className="release-announcement-badge">
     <span className="badge badge--deprecated">Deprecated</span>
   </div>
   <div className="release-announcement-content">
 
-### Deprecated: Operate Connector
+#### Deprecated: Operate Connector
 
 The Operate Connector is deprecated, following the deprecation of the Operate API in Camunda 8.9 (see [Deprecated: Operate and Tasklist v1 REST APIs](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)).
 
@@ -418,11 +393,6 @@ Going forward, you can use the [Orchestration Cluster REST API](/apis-tools/orch
     <span className="badge badge--announcement">Announcement</span>
   </div>
   <div className="release-announcement-content">
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
 
 #### Inbound connectors now support older process versions
 
@@ -437,13 +407,13 @@ This change improves the reliability of long-running processes that depend on in
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="announcement" data-area="Connectors" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--announcement">Announcement</span>
+  </div>
+  <div className="release-announcement-content">
 
-### Virtual threads support
+#### Virtual threads support
 
 Camunda 8.9 provides support for virtual threads in the connector runtime. Virtual threads are enabled by default for outbound connectors.
 
@@ -456,18 +426,62 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="breaking-change" data-area="Data" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="announcement" data-area="Data" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--breaking-change">Breaking change</span>
+    <span className="badge badge--announcement">Announcement</span>
   </div>
   <div className="release-announcement-content">
 
-### Camunda 8 Run with H2 as the default secondary data storage
+### RDBMS secondary storage
+
+Camunda 8.9 introduces optional RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch.
+
+This enables teams to use relational databases such as H2, PostgreSQL, Oracle, or MariaDB for storing and querying process data, reducing operational complexity for non-high-performance use cases.
+
+</div>
+</div>
+
+<div className="release-announcement-row" data-type="announcement" data-area="Data" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--announcement">Announcement</span>
+  </div>
+  <div className="release-announcement-content">
+
+#### MySQL and Microsoft SQL Server secondary storage
+
+Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the Orchestration cluster.
+
+:::info
+To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#mysql-and-microsoft-sql-server-secondary-storage).
+:::
+
+</div>
+</div>
+
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
+<span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
+
+#### RDBMS secondary storage
+
+Camunda 8.9 introduces optional RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch.
+
+This enables teams to use relational databases such as H2, PostgreSQL, Oracle, or MariaDB for storing and querying process data, reducing operational complexity for non-high-performance use cases.
+
+:::info
+To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#rdbms-secondary-storage-h2-postgresql-oracle-mariadb).
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row" data-type="change" data-area="Data" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--change">Change</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Hierarchy-aware retention for process instance data
 
@@ -480,11 +494,11 @@ You can control the retention behavior via the process instance retention mode c
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Data" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Camunda 8 Run with H2 as the default secondary data storage
 
@@ -507,7 +521,7 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
   </div>
   <div className="release-announcement-content">
 
-### Amazon Aurora secondary storage
+#### Amazon Aurora secondary storage
 
 Camunda 8.9 introduces Amazon Aurora as a secondary data store for orchestration clusters.
 
@@ -518,20 +532,11 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="announcement" data-area="Data" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Deployment+Helm" data-deployment="sm">
   <div className="release-announcement-badge">
-    <span className="badge badge--announcement">Announcement</span>
+    <span className="badge badge--breaking-change">Breaking change</span>
   </div>
   <div className="release-announcement-content">
-
-### MySQL and Microsoft SQL Server secondary storage
-### Deployment
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
 
 #### Helm chart: `extraConfiguration` format changed from map to ordered list
 
@@ -567,22 +572,11 @@ See [Migrate extraConfiguration from 8.8 to 8.9](/self-managed/deployment/helm/c
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="announcement" data-area="Data" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Deployment+Helm" data-deployment="sm">
   <div className="release-announcement-badge">
-    <span className="badge badge--announcement">Announcement</span>
+    <span className="badge badge--breaking-change">Breaking change</span>
   </div>
   <div className="release-announcement-content">
-
-### RDBMS secondary storage
-
-Camunda 8.9 introduces optional RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch.
-
-This enables teams to use relational databases such as H2, PostgreSQL, Oracle, or MariaDB for storing and querying process data, reducing operational complexity for non-high-performance use cases.
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
 
 #### Helm chart: Helm CLI v4 does not support duplicate environment variable names
 
@@ -631,7 +625,7 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="announcement" data-area="Deployment" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="announcement" data-area="Deployment" data-deployment="sm">
   <div className="release-announcement-badge">
     <span className="badge badge--announcement">Announcement</span>
   </div>
@@ -647,7 +641,7 @@ Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` f
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="announcement" data-area="Deployment" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="announcement" data-area="Deployment" data-deployment="sm">
   <div className="release-announcement-badge">
     <span className="badge badge--announcement">Announcement</span>
   </div>
@@ -667,16 +661,11 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="breaking-change" data-area="Modeler" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Deployment+Helm" data-deployment="sm">
   <div className="release-announcement-badge">
     <span className="badge badge--breaking-change">Breaking change</span>
   </div>
   <div className="release-announcement-content">
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
 
 #### Helm chart: Deprecated secret keys removed
 
@@ -703,11 +692,11 @@ Migrate to the new secret configuration pattern using `*.secret.existingSecret` 
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Deployment+Helm" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Helm chart: Secret auto-generation removed
 
@@ -722,11 +711,11 @@ All secrets must now be explicitly provided via Kubernetes Secrets referenced in
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Deployment+Helm" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Helm chart: Default REST port unified to 8080
 
@@ -739,11 +728,11 @@ If you have hardcoded port 8090 in network policies, Ingress rules, health check
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="deprecated" data-area="Deployment+Helm" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--deprecated">Deprecated</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Helm chart: TLS secret configuration pattern
 
@@ -762,11 +751,11 @@ Legacy keys continue to work in Camunda 8.9 but will cause deprecation warnings 
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="deprecated" data-area="Deployment+Helm" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--deprecated">Deprecated</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Helm chart: Bitnami subcharts deprecated
 
@@ -779,11 +768,11 @@ You should migrate to externally managed services before upgrading to Camunda 8.
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="deprecated" data-area="Deployment+Helm" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--deprecated">Deprecated</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Helm chart: `global.elasticsearch` and `global.opensearch` deprecated
 
@@ -801,11 +790,11 @@ Legacy keys continue to work in Camunda 8.9 with deprecation warnings. Existing 
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="deprecated" data-area="Deployment+Helm" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--deprecated">Deprecated</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Helm chart: Identity profile renamed to admin
 
@@ -818,11 +807,11 @@ You should update your values file to use `orchestration.profiles.admin`.
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="new" data-area="Deployment+Helm" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--new">New</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Helm chart: Authorization, role, and group initialization
 
@@ -833,11 +822,11 @@ This allows administrators to configure platform access control as part of the i
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="new" data-area="Deployment+Helm" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--new">New</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Helm chart: Custom users and clients
 
@@ -848,11 +837,11 @@ This simplifies initial deployment setup and enables reproducible, version-contr
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="new" data-area="Deployment+Helm" data-deployment="sm">
+  <div className="release-announcement-badge">
+    <span className="badge badge--new">New</span>
+  </div>
+  <div className="release-announcement-content">
 
 #### Helm chart: Engine-only mode without secondary storage
 
@@ -863,49 +852,11 @@ When enabled, Elasticsearch and OpenSearch subcharts must be disabled, and basic
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### MySQL and Microsoft SQL Server secondary storage
-
-Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the Orchestration cluster.
-
-:::info
-To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#mysql-and-microsoft-sql-server-secondary-storage).
-:::
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### RDBMS secondary storage
-
-Camunda 8.9 introduces optional RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch.
-
-This enables teams to use relational databases such as H2, PostgreSQL, Oracle, or MariaDB for storing and querying process data, reducing operational complexity for non-high-performance use cases.
-
-:::info
-To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#rdbms-secondary-storage-h2-postgresql-oracle-mariadb).
-:::
-
-</div>
-</div>
-
-### Modeler
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
+<div className="release-announcement-row" data-type="breaking-change" data-area="Modeler" data-deployment="sm+saas">
+  <div className="release-announcement-badge">
+    <span className="badge badge--breaking-change">Breaking change</span>
+  </div>
+  <div className="release-announcement-content">
 
 ### Web Modeler: Default logging format changed
 
@@ -1001,9 +952,9 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row" data-type="announcement" data-area="Modeler" data-deployment="sm+saas">
+<div className="release-announcement-row" data-type="feature" data-area="Modeler" data-deployment="sm+saas">
   <div className="release-announcement-badge">
-    <span className="badge badge--announcement">Announcement</span>
+    <span className="badge badge--feature">Feature</span>
   </div>
   <div className="release-announcement-content">
 
