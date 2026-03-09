@@ -19,6 +19,32 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 42
+
+### Publication date
+
+Mar 09, 2026
+
+### Products affected
+
+- Management Identity
+
+### Impact
+
+The application was vulnerable to [CVE-2026-24734](https://nvd.nist.gov/vuln/detail/CVE-2026-24734), which allowed an attacker to bypass revocation checks of client SSL certificates if a certain server configuration was used.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Management Identity ≤ 8.8.7, ≤ 8.7.14, or ≤ 8.6.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Management Identity 8.8.8, 8.7.15, 8.6.28
+
 ## Notice 41
 
 ### Publication date
