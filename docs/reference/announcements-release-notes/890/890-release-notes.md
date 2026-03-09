@@ -73,6 +73,16 @@ This feature is available in Operate, Identity, Tasklist, and the [Camunda 8 RES
 
 <p class="link-arrow">[Audit log](/components/audit-log/overview.md)</p>
 
+### BPMN conditional events
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects BPMN">BPMN</span></div>
+
+Camunda 8 now supports BPMN conditional events, allowing users to start, continue, or interrupt process execution dynamically based on evaluated conditions.
+
+This enhancement provides first-class support for conditional start, boundary, and intermediate catch events, making process automation more expressive and migration from Camunda 7 smoother.
+
+<p class="link-arrow">[Conditional events](/components/modeler/bpmn/conditional-events/conditional-events.md)</p>
+
 ### Camunda 8 Run
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
@@ -433,24 +443,6 @@ This lets you standardize on the Orchestration Cluster APIs and the recommended 
 ### RDBMS secondary storage
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
-
-#### Continuous backup and restore
-
-<!-- https://github.com/camunda/product-hub/issues/2723 -->
-<!-- https://github.com/camunda/product-hub/issues/3031 -->
-
-You can now back up and restore Camunda 8 when using RDBMS as secondary storage.
-
-- Independent backup control plans handle primary and secondary backups separately while ensuring they align when restored.
-- Disaster recovery is improved as you can recover Camunda instances with greater precision in data consistency.
-
-Additionally, the new restore API syntax now supports `--from` and `--to` timestamp flags, enabling automatic selection of a compatible backup range.
-
-- When no specific backup or timerange is specified, a restore is performed to the latest known position with no user interaction.
-- Ensures version compatibility across backups and offers an override via `--allow-version-mismatch`.
-- Reduces manual restore effort and enhances confidence in backup integrity, with reduced Recovery Time Objective (RTO).
-
-<p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
 
 #### Installation guide for RDBMS (Orchestration Cluster and Web Modeler)
 
