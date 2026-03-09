@@ -297,6 +297,19 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Audit log",
+          link: {
+            type: "doc",
+            id: "components/audit-log/overview",
+          },
+          items: [
+            "components/audit-log/overview/access-control",
+            "components/audit-log/overview/recorded-operations",
+            "components/audit-log/overview/operation-structure",
+          ],
+        },
+        {
+          type: "category",
           label: "Camunda integrations",
           link: {
             type: "doc",
@@ -754,6 +767,9 @@ module.exports = {
                 "components/operate/userguide/process-instance-batch-modification",
               ],
             },
+            "components/operate/userguide/process-instance-migration",
+            "components/operate/userguide/monitor-batch-operations",
+            "components/operate/userguide/audit-operations",
           ],
         },
         {
@@ -774,6 +790,7 @@ module.exports = {
             "components/tasklist/userguide/starting-processes",
             "components/tasklist/user-task-access-restrictions",
             "components/tasklist/userguide/tasklist-localization",
+            "components/tasklist/userguide/audit-task-history",
           ],
         },
         {
@@ -792,6 +809,7 @@ module.exports = {
             "components/identity/client",
             "components/identity/mapping-rules",
             "components/identity/tenant",
+            "components/identity/audit-operations",
           ],
         },
       ],
@@ -1073,6 +1091,7 @@ module.exports = {
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
+            "components/console/manage-clusters/configure-audit-log",
             "components/console/manage-clusters/settings",
             "components/console/manage-clusters/cluster-capacity",
           ],
@@ -1925,6 +1944,15 @@ module.exports = {
               ],
             },
           ],
+        },
+        {
+          type: "category",
+          label: "Audit log",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/audit-log/index",
+          },
+          items: ["self-managed/concepts/audit-log/configure-audit-log"],
         },
         "self-managed/concepts/exporters",
         "self-managed/operational-guides/configure-flow-control/configure-flow-control",
