@@ -9,7 +9,7 @@ Reference the permissions required to access audit log entries.
 
 ## About
 
-To access entries in the audit log, you must have the authorizations that match your needs:
+To access entries in the audit log, you must have the relevant authorizations to match your needs:
 
 | Authorization type                                                                                                                                                                                       | Resource type        | Resource ID                                                                                       | Permission              |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------- | :------------------------------------------------------------------------------------------------ | :---------------------- |
@@ -18,4 +18,4 @@ To access entries in the audit log, you must have the authorizations that match 
 | View `USER_TASKS` operation logs for instances of a specific process definition. This provides access to the operation log in Operate and the task history in Tasklist.                                  | `PROCESS_DEFINITION` | A process definition ID or `*` for all process definitions.                                       | `READ_USER_TASK`        |
 | View operations related to specific tasks the user has access to based on task properties. This provides access to task history records in Tasklist.                                                     | `USER_TASK`          | A user task property (assignee, candidateUsers, candidateGroups).                                 | `READ`                  |
 
-Read more about the operation categories in [Recorded operations](./recorded-operations.md).
+Learn more about the operation categories in [Recorded operations](./recorded-operations.md).

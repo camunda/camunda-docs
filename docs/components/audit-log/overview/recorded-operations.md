@@ -2,10 +2,10 @@
 id: recorded-operations
 title: Recorded operations
 sidebar_label: Recorded operations
-description: Learn what operations are recorded in the audit log.
+description: Learn more about which operations are recorded in the audit log.
 ---
 
-Learn what operations are recorded in the audit log.
+Learn more about which operations are recorded in the audit log.
 
 ## Limitations and constraints
 
@@ -14,7 +14,7 @@ The audit log contains operations performed using:
 - [Operate](../../operate/userguide/audit-operations.md), [Identity](../../identity/audit-operations.md), and [Tasklist](../../tasklist/userguide/audit-task-history.md)
 - [Orchestration Cluster REST API](../../../apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx)
 
-However, only operations that are authenticated, authorized, and reach execution with a success or execution‑time failure are recorded. Operations rejected before execution aren't recorded in the audit log.
+However, only operations that are authenticated, authorized, and reach execution with a success or execution‑time failure are recorded. Operations rejected before execution are not recorded in the audit log.
 
 Additionally, only user operations are tracked by default, not [client](../../zeebe/technical-concepts/architecture.md#clients) operations. Unlike the other constraints, you can configure this behavior.
 
@@ -26,11 +26,11 @@ There are three categories of recorded operations:
 - `ADMIN`
 - `DEPLOYED_RESOURCES`
 
-### USER_TASKS operations
+### `USER_TASKS` operations
 
 You can review the full history of user task actions, including assignment changes, completions, and updates. With this, you can resolve disputes, investigate SLA breaches, and validate that required steps were followed during case handling.
 
-These operations belong to the category `USER_TASKS`. The following are recorded in the audit log:
+These operations belong to the category `USER_TASKS`. The following operations are recorded in the audit log:
 
 | Operation type | Entity    | Tracked rejections |
 | :------------- | :-------- | :----------------- |
@@ -39,11 +39,11 @@ These operations belong to the category `USER_TASKS`. The following are recorded
 | Unassign       | User task | INVALID_STATE      |
 | Complete       | User task | INVALID_STATE      |
 
-### ADMIN operations
+### `ADMIN` operations
 
 You can track all changes to identity resources, like authorizations, users, and tenants. With this, you can detect misconfigurations and investigate potential unauthorized access to sensitive process data.
 
-These operations belong to the category `ADMIN`. The following are recorded in the audit log:
+These operations belong to the category `ADMIN`. The following operations are recorded in the audit log:
 
 | Operation type | Entity        | Tracked rejections |
 | :------------- | :------------ | :----------------- |
@@ -72,11 +72,11 @@ These operations belong to the category `ADMIN`. The following are recorded in t
 | Update         | Mapping rule  | –                  |
 | Delete         | Mapping rule  | –                  |
 
-### DEPLOYED_RESOURCES operations
+### `DEPLOYED_RESOURCES` operations
 
 You can audit user and client actions that modified or influenced deployed resources and dependent entities, like process instances, batch operations, and variables. With this, you can identify manual corrections and confirm the sequence of actions that led to a process failure or escalation.
 
-These operations belong to the category `DEPLOYED_RESOURCES`. The following are recorded in the audit log:
+These operations belong to the category `DEPLOYED_RESOURCES`. The following operations are recorded in the audit log:
 
 | Operation type | Entity           | Tracked rejections              |
 | :------------- | :--------------- | :------------------------------ |

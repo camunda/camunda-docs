@@ -4,11 +4,11 @@ title: Operation data structure
 description: Learn how operation data from the audit log is presented in different contexts.
 ---
 
-Learn how operation data from the audit log is presented in different contexts.
+Learn more about how operation data from the audit log is presented in different contexts.
 
 ## Applications
 
-Depending on the view you're using to access the audit log in [Operate](../../operate/userguide/audit-operations.md), [Identity](../../identity/audit-operations.md), or [Tasklist](../../tasklist/userguide/audit-task-history.md), you'll see some subset of the following operation details:
+Depending on the view you're using to access the audit log in [Operate](../../operate/userguide/audit-operations.md), [Identity](../../identity/audit-operations.md), or [Tasklist](../../tasklist/userguide/audit-task-history.md), you'll see a subset of the following operation details:
 
 | Property       | Description                                                                 |
 | :------------- | :-------------------------------------------------------------------------- |
@@ -24,7 +24,7 @@ Depending on the view you're using to access the audit log in [Operate](../../op
 
 ### Entity key
 
-Some audit log entries contain extra details about the entity in the entity key field:
+Some audit log entries contain extra details about the entity in the **entity key** field:
 
 | Operation type | Entity type      | Entity key    |
 | :------------- | :--------------- | :------------ |
@@ -38,7 +38,7 @@ Some audit log entries contain extra details about the entity in the entity key 
 
 ### Details
 
-Some audit log entries contain extra details about the operation in the details field:
+Some audit log entries contain extra details about the operation in the **details** field:
 
 | Operation type | Entity type   | Details                            |
 | :------------- | :------------ | :--------------------------------- |
@@ -55,14 +55,14 @@ Some audit log entries contain extra details about the operation in the details 
 
 ### Actor
 
-Two types of actors may trigger operations:
+The following actor types can trigger operations:
 
 | Actor type | Identifier |
 | :--------- | :--------- |
 | User       | Username   |
 | Client     | Client ID  |
 
-Agents can perform operations on behalf of a user or client. In this case, you'll see the agent's information in the record.
+Agents can perform operations on behalf of a user or client. In this case, you will see the agent's information in the record.
 
 ## REST API
 
