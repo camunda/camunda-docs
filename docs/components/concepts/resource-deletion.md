@@ -66,6 +66,26 @@ call activity, informing you that the process cannot be not found.
 As of now it is not possible to delete a process definition that has one or more running process instances. If you want
 to delete the process definition you must first terminate/complete any running instances.
 
+### Historic data
+
+You can optionally enable historic data deletion to permanently remove all data related to the process definition from secondary storage.
+
+:::warning
+Deletion is irreversible. You can restore deleted data only by restoring a backup of your cluster.
+:::
+
+Delete historic data for a process definition using the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx)
+and setting the `deleteHistory` flag to `true`.
+
+:::note
+You can also delete a process definition with historic data using Operate. See the [Operate user guide](../operate/userguide/delete-resources.md#delete-process-definition).
+:::
+
+#### Eventual consistency
+
+Historic data deletion runs asynchronously. Depending on the amount of data, it can take time for the data to be removed
+and for it to disappear from Operate and Tasklist.
+
 ## Deleting a decision requirements graph
 
 You can delete a decision requirements graph (DRG) by sending
@@ -80,3 +100,22 @@ a `NOT_FOUND` exception. Deleting a DRG also deletes historical data.
 A [business rule task](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md) references a decision
 by ID. It's possible that all versions of this decision are deleted. When this happens, an incident is created on the
 business rule task with the message that no decision with the given decision ID is found.
+
+### Historic data
+
+You can optionally enable historic data deletion to permanently remove all data related to the decision definition from secondary storage.
+
+:::warning
+Deletion is irreversible. You can restore deleted data only by restoring a backup of your cluster.
+:::
+
+Delete historic data for a decision definition using the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx)
+and setting the `deleteHistory` flag to `true`.
+
+:::note
+You can also delete historic data for a decision definition in Operate. See the [Operate user guide](../operate/userguide/delete-resources.md#delete-decision-definition).
+:::
+
+#### Eventual consistency
+
+Historic data deletion runs asynchronously. Depending on the amount of data, it can take time for the data to be removed and for it to disappear from Operate and Tasklist.
