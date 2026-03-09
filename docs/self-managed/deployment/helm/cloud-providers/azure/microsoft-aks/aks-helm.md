@@ -7,19 +7,29 @@ description: "Set up your Camunda 8 environment with Helm on Azure Kubernetes Se
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+import IdpPrerequisite from '../../\_partials/\_idp-prerequisite.md'
+import NoDomainIdpChoice from '../../\_partials/\_no-domain-idp-choice.md'
+import WhyNoIdp from '../../\_partials/\_why-no-idp.md'
+import SingleNamespaceDeployment from '../../\_partials/\_single-namespace-deployment.md'
+import NoDomainInfo from '../../\_partials/\_no-domain-info.md'
+import HelmUpgradeNote from '../../\_partials/\_helm-upgrade-note.md'
+import KubefwdTip from '../../\_partials/\_kubefwd-tip.md'
+import PortForwardServices from '../../\_partials/\_port-forward-services.md'
+import DeployECKElasticsearch from '../../\_partials/\_deploy-eck-elasticsearch.md'
+
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster, and confirmation it is working as intended.
 
-## Prerequisites
+## Requirements
 
 - A Kubernetes cluster; refer to the [Terraform guide](./terraform-setup.md) for details.
 - [Helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
-- (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - A namespace to host the Camunda Platform; in this guide we will reference `camunda` as the target namespace.
-
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
+- (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
+- (optional) Permissions to install Kubernetes operators (cluster-admin or equivalent) to deploy infrastructure services such as Elasticsearch, PostgreSQL, and Keycloak. This guide installs them directly from source to provide full control over versions and configuration.
+  For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
 
 ## Architecture
 
@@ -29,7 +39,6 @@ The architecture includes the following core components:
 
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
-- **Keycloak as OIDC provider**: Example OIDC provider (can be replaced with any compatible IdP)
 
 To demonstrate how to deploy with a custom domain, the following stack is also included:
 
@@ -37,9 +46,7 @@ To demonstrate how to deploy with a custom domain, the following stack is also i
 - **external-dns**: Manages DNS record in Route53 for domain ownership confirmation
 - **ingress-nginx**: Provides HTTP/HTTPS load balancing and routing to Kubernetes services
 
-:::info Single namespace deployment
-This guide uses a single Kubernetes namespace for simplicity, since the deployment is done with a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components), which recommends separating Orchestration Cluster and Web Modeler or Console into different namespaces in production to improve isolation and enable independent scaling.
-:::
+<SingleNamespaceDeployment />
 
 ### Considerations
 
@@ -163,6 +170,14 @@ After exporting the above values, follow up with:
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-cert-manager-issuer.sh
 ```
 
+## Identity Provider (IdP) setup
+
+<IdpPrerequisite />
+
+<NoDomainIdpChoice />
+
+<WhyNoIdp />
+
 ## Deploy Camunda 8 via Helm charts
 
 For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources in the [Camunda 8 Helm chart](/self-managed/deployment/helm/install/quick-install.md) and [related guides](/self-managed/deployment/helm/configure/index.md).
@@ -173,6 +188,12 @@ For easy and reproducible installations, we will use YAML files to configure the
 ### 1. Create the `values.yml` file
 
 Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
+
+:::note Database initialization prerequisite
+If you're using an external Azure Database for PostgreSQL, you must create the individual component databases (Identity and Web Modeler) before installing the Helm chart. This initialization step is covered in the [Configure the database and associated access](./terraform-setup.md#configure-the-database-and-associated-access) section of the Terraform setup guide.
+
+Without this step, the Camunda components will fail to connect to their databases.
+:::
 
 <Tabs groupId="values">
   <TabItem value="with-domain" label="With domain" default>
@@ -197,7 +218,7 @@ Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubern
 
 #### Reference the credentials in secrets
 
-Before installing the Helm chart, create Kubernetes secrets to store the Keycloak database authentication credentials.
+Before installing the Helm chart, create Kubernetes secrets to store the database authentication credentials.
 
 To create the secrets, run the following commands:
 
@@ -213,28 +234,11 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-no-domain.yml
 ```
 
-:::info Keycloak issuer and localhost hostname alignment
-
-When running without a domain, Console validates the JWT issuer claim against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means that during port-forwarding you may need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
-
-Add (or update) the following entry in your `/etc/hosts` file while developing locally:
-
-```text
-127.0.0.1  $CAMUNDA_RELEASE_NAME-keycloak
-```
-
-After adding this entry, you can reach Keycloak at:
-`http://$CAMUNDA_RELEASE_NAME-keycloak:18080/auth`
-
-**Why port `18080`?**
-We forward container port `8080` (originally `80`) to a non‑privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using 8080.
-
-This constraint does not apply when a proper domain and Ingress are configured (the public FQDN is then used as the issuer and no hosts file changes are needed).
-:::
+<NoDomainInfo />
 
 #### Reference the credentials in secrets
 
-Before installing the Helm chart, create Kubernetes secrets to store the Keycloak database authentication credentials.
+Before installing the Helm chart, create Kubernetes secrets to store the database authentication credentials.
 
 To create the secrets, run the following command:
 
@@ -247,83 +251,41 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 ### 2. Configure your deployment
 
-#### Enable Web Modeller and Console services
+#### Enable Enterprise components
 
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and Connectors](/self-managed/deployment/helm/install/quick-install.md#configuring-web-modeler-console-and-connectors).
 
-#### Elasticsearch options
+### 3. Deploy prerequisite services
 
-Camunda Helm chart supports both internal and external Elasticsearch deployments. For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)). Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option. In this guide, we default to the internal deployment of Elasticsearch.
+Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch) can be deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
-<details>
-<summary>Show configuration to enable internal Elasticsearch</summary>
+- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
 
-```yaml
-global:
-  elasticsearch:
-    enabled: true
-  opensearch:
-    enabled: false
+All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
 
-elasticsearch:
-  enabled: true
+:::note Working directory
+All commands in this guide assume you are at the **repository root** (the directory created by `get-your-copy.sh`). The deploy commands below use subshells `(cd ... && ./deploy.sh)` to preserve your working directory.
+:::
+
+##### Deploy Elasticsearch {#deploy-elasticsearch}
+
+If your organization does not want to use a managed Elasticsearch service, ECK Operator is an option. In this guide, we default to the ECK Operator deployment of Elasticsearch.
+
+:::warning Production Elasticsearch recommendation
+For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)). Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option.
+:::
+
+<DeployECKElasticsearch />
+
+#### Merge operator overlays into values
+
+Once the operator-managed services are running, merge the corresponding Helm values overlays into your `values.yml` file. These overlays configure Camunda components to use the external operator-managed services instead of embedded subcharts.
+
+Merge the **Elasticsearch** overlay:
+
+```bash
+yq '. *+ load("generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
 ```
-
-</details>
-
-#### (Optional) Use internal PostgreSQL instead of the managed PostgreSQL service
-
-In some scenarios, you might prefer to use an internal PostgreSQL deployment instead of the external Azure Database for PostgreSQL service. This could be due to cost considerations, network restrictions, or the need for tighter control over the database environment.
-
-For example, if your application or service is deployed in a private network and requires a database that resides within the same Kubernetes cluster for performance or security reasons, the internal PostgreSQL deployment would be a better fit.
-
-To switch to the internal PostgreSQL deployment, configure the Helm chart as follows. Additionally, remove configurations related to the external database and secret references to avoid conflicts.
-
-<details>
-<summary>Show configuration changes to disable external database usage</summary>
-
-```yaml
-identityKeycloak:
-  postgresql:
-    enabled: true
-
-  # Remove external database configuration
-  # externalDatabase:
-  #   ...
-
-  # Remove service account and annotations
-  # serviceAccount:
-  #   ...
-
-  # Remove extra environment variables for external database driver
-  # extraEnvVars:
-  #   ...
-
-webModelerPostgresql:
-  enabled: true
-
-webModeler:
-  # Remove this part
-
-  # restapi:
-  #     externalDatabase:
-  #         url: jdbc:postgresql://$\{DB_HOST}:5432/$\{DB_WEBMODELER_NAME}
-  #         user: $\{DB_WEBMODELER_USERNAME}
-  #         ...
-
-identity:
-  # Remove this part
-
-  # externalDatabase:
-  #     enabled: true
-  #     host: $\{DB_HOST}
-  #     port: 5432
-  #     username: $\{DB_IDENTITY_USERNAME}
-  #     database: $\{DB_IDENTITY_NAME}
-  #     ...
-```
-
-</details>
 
 #### Fill your deployment with actual values
 
@@ -333,23 +295,16 @@ Once you've prepared the `values.yml` file, run the following `envsubst` command
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/assemble-envsubst-values.sh
 ```
 
-Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
+:::note Web Modeler SMTP secret
+If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)):
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/generate-passwords.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-webmodeler-secret.sh
 ```
 
-Use these environment variables in the `kubectl` command to create the secret.
-
-:::note
-The `smtp-password` is required for Web Modeler to send emails, but Web Modeler is not enabled by default in this guide. If you plan to enable Web Modeler, ensure you configure the SMTP settings as described in the [Web Modeler configuration guide](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email).
 :::
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/create-identity-secret.sh
-```
-
-### 3. Install Camunda 8 using Helm
+### 4. Install Camunda 8 using Helm
 
 Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Run the following command:
 
@@ -363,11 +318,7 @@ This script:
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 
-:::note
-
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/deployment/helm/upgrade/index.md) or any other component upgrades.
-
-:::
+<HelmUpgradeNote />
 
 You can track the progress of the installation using the following command:
 
@@ -388,7 +339,7 @@ Below is a summary of the necessary instructions:
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
 
-1. Open Identity in your browser at `https://${DOMAIN_NAME}/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+1. Open Identity in your browser at `https://${CAMUNDA_DOMAIN}/managementidentity`. You will be redirected to your IdP and prompted to log in.
 2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
 
 ```shell
@@ -406,7 +357,7 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `https://${DOMAIN_NAME}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+6. Open the Orchestration Cluster Identity in your browser at `https://${CAMUNDA_DOMAIN}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
 7. In the Identity navigation menu, select **Roles**.
 8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
@@ -418,33 +369,18 @@ This operation links the OIDC client to the role's permissions in the Orchestrat
 
 <TabItem value="without" label="Without domain">
 
-Identity, Keycloak and the Orchestration cluster must be port-forwarded to be able to connect to the cluster.
+Identity and the Orchestration cluster must be port-forwarded to be able to connect to the cluster. If using Keycloak via the Keycloak Operator, you also need to port-forward the Keycloak service.
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
-kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:8080 --namespace "$CAMUNDA_NAMESPACE"
-kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --namespace "$CAMUNDA_NAMESPACE"
+# If using Keycloak Operator:
+kubectl port-forward "services/keycloak-service" 18080:18080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-:::tip Localhost development with kubefwd
-For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable by their in-cluster DNS names on your workstation.
+<KubefwdTip />
 
-Example (requires `sudo` to bind privileged ports and modify `/etc/hosts`):
-
-```shell
-sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
-```
-
-After this runs, you can reach services directly, for example:
-
-- Identity: `http://$CAMUNDA_RELEASE_NAME-identity/managementidentity`
-- Keycloak: `http://$CAMUNDA_RELEASE_NAME-keycloak`
-- Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
-
-You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.
-:::
-
-1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to your IdP and prompted to log in.
 2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
 
 ```shell
@@ -470,23 +406,7 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 
 This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
 
-<details>
-<summary>To access the other services and their UIs, port-forward those components as well:</summary>
-
-```shell
-Orchestration:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
-Optimize:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-optimize" 8083:80 --namespace "$CAMUNDA_NAMESPACE"
-Connectors:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-connectors" 8086:8080 --namespace "$CAMUNDA_NAMESPACE"
-WebModeler:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-web-modeler-webapp" 8070:80 --namespace "$CAMUNDA_NAMESPACE"
-Console:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8087:80 --namespace "$CAMUNDA_NAMESPACE"
-```
-
-</details>
+<PortForwardServices />
 
 </TabItem>
 </Tabs>
@@ -496,7 +416,7 @@ Console:
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
 
-For a detailed guide on generating and using a token, conduct the relevant documentation on [authenticating with the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
+For a detailed guide on generating and using a token, consult the relevant documentation on [authenticating with the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
@@ -536,13 +456,11 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 ```json reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
-  </summary>
 </details>
   </TabItem>
   <TabItem value="modeler" label="Desktop Modeler">
@@ -559,10 +477,10 @@ Follow our existing [Modeler guide on deploying a diagram](/self-managed/compone
 
 The following values are required for the OAuth authentication:
 
-- **Cluster endpoint:** `https://zeebe-$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
+- **Cluster endpoint:** `https://zeebe-$CAMUNDA_DOMAIN`, replacing `$CAMUNDA_DOMAIN` with your domain
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
-- **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
+- **OAuth Token URL:** Your IdP's token endpoint (for example, `https://$CAMUNDA_DOMAIN/auth/realms/camunda-platform/protocol/openid-connect/token` when using Keycloak), replacing `$CAMUNDA_DOMAIN` with your domain
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
@@ -580,7 +498,7 @@ The following values are required for OAuth authentication:
 - **Cluster endpoint:** `http://localhost:26500`
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application.
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application.
-- **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
+- **OAuth Token URL:** Your IdP's token endpoint (for example, `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token` when using Keycloak with port-forwarding)
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed.
 
 </TabItem>

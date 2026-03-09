@@ -207,6 +207,7 @@
           "items": [
             "components/agentic-orchestration/ai-agents",
             "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/monitor-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic"
           ]
@@ -358,8 +359,11 @@
                     "id": "components/early-access/alpha/mcp-client/mcp-client"
                   },
                   "items": [
+                    "components/early-access/alpha/mcp-client/mcp-client-connector",
                     "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
-                    "components/early-access/alpha/mcp-client/mcp-client-connector"
+                    "components/early-access/alpha/mcp-client/mcp-client-config",
+                    "components/early-access/alpha/mcp-client/mcp-client-tool-discovery",
+                    "components/early-access/alpha/mcp-client/mcp-client-human-in-the-loop"
                   ]
                 },
                 "components/early-access/alpha/ms-teams/ms-teams"
@@ -472,7 +476,8 @@
             },
             "components/modeler/web-modeler/file-download",
             "components/modeler/web-modeler/web-modeler-settings",
-            "components/modeler/web-modeler/process-landscape-visualization"
+            "components/modeler/web-modeler/process-landscape-visualization",
+            "components/modeler/web-modeler/task-testing"
           ]
         },
         {
@@ -832,8 +837,15 @@
             "components/connectors/use-connectors/configuring-out-of-the-box-connectors",
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
-            "components/connectors/use-connectors/outbound",
-            "components/connectors/use-connectors/intrinsic-functions",
+            "components/connectors/use-connectors/outbound"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Advanced connector topics",
+          "items": [
+            "components/connectors/advanced-topics/connector-deduplication",
+            "components/connectors/advanced-topics/intrinsic-functions",
             "components/connectors/use-connectors-in-hybrid-mode"
           ]
         },
@@ -1087,10 +1099,7 @@
             "components/console/manage-plan/create-account",
             "components/console/manage-plan/available-plans",
             "components/console/manage-plan/upgrade-to-enterprise-plan",
-            "components/console/manage-plan/update-billing-reservations",
-            "components/console/manage-plan/update-creditcard",
-            "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-starter-subscription"
+            "components/console/manage-plan/update-billing-reservations"
           ]
         },
         {
@@ -2732,6 +2741,7 @@
     {
       "type": "category",
       "label": "Upgrade to Camunda 8.8",
+      "className": "sidebar-cta",
       "link": {
         "type": "doc",
         "id": "apis-tools/migration-manuals/index"
@@ -2812,6 +2822,7 @@
       "items": ["reference/data-collection/usage-metrics"]
     },
     "reference/contact",
+    "reference/mcp-docs/docs-mcp",
     "reference/legal"
   ],
   "Self-Managed": [
@@ -2900,7 +2911,7 @@
               },
               "items": [
                 "self-managed/deployment/helm/configure/application-configs",
-                "self-managed/deployment/helm/configure/vendor-supported-infrastructure",
+                "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
@@ -2948,7 +2959,8 @@
                   },
                   "items": [
                     "self-managed/deployment/helm/configure/ingress/ingress-setup",
-                    "self-managed/deployment/helm/configure/ingress/accessing-components-without-ingress"
+                    "self-managed/deployment/helm/configure/ingress/accessing-components-without-ingress",
+                    "self-managed/deployment/helm/configure/ingress/gateway-api-setup"
                   ]
                 },
                 {
@@ -2985,32 +2997,6 @@
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",
                 "self-managed/deployment/helm/configure/configure-multi-tenancy"
-              ]
-            },
-            {
-              "type": "category",
-              "label": "Upgrade",
-              "link": {
-                "type": "doc",
-                "id": "self-managed/deployment/helm/upgrade/index"
-              },
-              "items": [
-                {
-                  "type": "category",
-                  "label": "Upgrade 8.7 to 8.8",
-                  "link": {
-                    "type": "doc",
-                    "id": "self-managed/deployment/helm/upgrade/upgrade-hc-870-880"
-                  },
-                  "items": [
-                    "self-managed/deployment/helm/upgrade/upgrade-hc-870-880-dual-region"
-                  ]
-                },
-                "self-managed/deployment/helm/upgrade/upgrade-hc-860-870",
-                "self-managed/deployment/helm/upgrade/upgrade-hc-850-860",
-                "self-managed/deployment/helm/upgrade/upgrade-hc-840-850",
-                "self-managed/deployment/helm/upgrade/upgrade-hc-830-840",
-                "self-managed/deployment/helm/upgrade/upgrade-hc-820-830"
               ]
             },
             {
@@ -3122,7 +3108,6 @@
           "label": "Manual",
           "items": [
             "self-managed/deployment/manual/install",
-            "self-managed/deployment/manual/upgrade",
             {
               "type": "category",
               "label": "Cloud providers",
@@ -3236,8 +3221,8 @@
               "items": [
                 {
                   "Configuration": [
-                    "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
@@ -3254,11 +3239,6 @@
                     "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/version-compatibility"
-                  ]
-                },
-                {
-                  "Migration": [
-                    "self-managed/components/orchestration-cluster/core-settings/migration/importer"
                   ]
                 }
               ]
@@ -3337,6 +3317,7 @@
               "Identity": [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
+                "self-managed/components/orchestration-cluster/identity/connect-multiple-identity-providers",
                 "self-managed/components/orchestration-cluster/identity/debugging-authentication",
                 "self-managed/components/orchestration-cluster/identity/special-oidc-cases"
               ]
@@ -3498,46 +3479,6 @@
                 "self-managed/components/optimize/configuration/variable-import",
                 "self-managed/components/optimize/configuration/multi-tenancy"
               ]
-            },
-            {
-              "Migration & update": [
-                "self-managed/components/optimize/migration-update/camunda-8/instructions",
-                "self-managed/components/optimize/migration-update/camunda-8/8.7-to-8.8",
-                "self-managed/components/optimize/migration-update/camunda-8/8.6-to-8.7",
-                "self-managed/components/optimize/migration-update/camunda-8/3.13_8.5-to-8.6",
-                "self-managed/components/optimize/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
-                "self-managed/components/optimize/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
-                "self-managed/components/optimize/migration-update/camunda-8/3.10-to-3.11_8.3",
-                "self-managed/components/optimize/migration-update/camunda-8/3.9-to-3.10",
-                "self-managed/components/optimize/migration-update/camunda-8/3.9-preview-1-to-3.9",
-                "self-managed/components/optimize/migration-update/camunda-8/3.8-to-3.9-preview-1",
-                "self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "label": "Components upgrade",
-          "link": {
-            "type": "doc",
-            "id": "self-managed/components/components-upgrade/introduction"
-          },
-          "items": [
-            "self-managed/components/components-upgrade/870-to-880",
-            "self-managed/components/components-upgrade/860-to-870",
-            "self-managed/components/components-upgrade/850-to-860",
-            "self-managed/components/components-upgrade/840-to-850",
-            "self-managed/components/components-upgrade/830-to-840",
-            {
-              "Elasticsearch": [
-                "self-managed/components/components-upgrade/elasticsearch/7-to-8"
-              ]
-            },
-            {
-              "Keycloak": [
-                "self-managed/components/components-upgrade/keycloak/keycloak-update"
-              ]
             }
           ]
         }
@@ -3546,13 +3487,56 @@
     {
       "type": "category",
       "label": "Upgrade to Camunda 8.8",
+      "className": "sidebar-cta",
       "link": {
         "type": "doc",
-        "id": "self-managed/update/administrators/admin-upgrade-overview"
+        "id": "self-managed/upgrade/index"
       },
       "items": [
-        "self-managed/update/administrators/prepare-for-admin-upgrade",
-        "self-managed/update/administrators/run-admin-upgrade"
+        "self-managed/upgrade/prepare-for-upgrade",
+        {
+          "type": "category",
+          "label": "Helm upgrade",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/upgrade/helm/index"
+          },
+          "items": [
+            "self-managed/upgrade/helm/870-to-880",
+            "self-managed/upgrade/helm/870-to-880-dual-region"
+          ]
+        },
+        "self-managed/upgrade/manual/index",
+        {
+          "type": "category",
+          "label": "Component upgrade",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/upgrade/components/index"
+          },
+          "items": [
+            "self-managed/upgrade/components/870-to-880",
+            {
+              "type": "category",
+              "label": "Optimize",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/upgrade/components/optimize/index"
+              },
+              "items": [
+                "self-managed/upgrade/components/optimize/870-to-880",
+                "self-managed/upgrade/components/optimize/changes-in-88"
+              ]
+            },
+            {
+              "Database": [
+                "self-managed/upgrade/components/database/changes-in-elasticsearch-8"
+              ]
+            },
+            "self-managed/upgrade/components/keycloak/keycloak-compatibility",
+            "self-managed/upgrade/components/importer"
+          ]
+        }
       ]
     }
   ]

@@ -1,15 +1,14 @@
 ---
 id: history
-title: History migration (experimental)
-sidebar_label: History migration
-description: "Copy audit trail (history) data from Camunda 7 to Camunda 8. Experimental and not for production."
+title: History
+sidebar_label: History
+description: "Copy audit trail (history) data from Camunda 7 to Camunda 8."
 ---
 
-Use the History Data Migrator to copy process instance audit data to Camunda 8.
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-:::info
-The history migration mode of the Data Migrator will **not be released before Camunda 8.9 (April 2026)**. You can check the current state and track progress in the [GitHub repository](https://github.com/camunda/camunda-7-to-8-migration-tooling/).
-:::
+Use the History Data Migrator to copy process instance audit data to Camunda 8.
 
 ## About history migration
 
@@ -17,11 +16,12 @@ Process instances leave traces, referred to as [History in Camunda 7](https://do
 
 It is important to note that audit data can exist for ended processes from the past, but is also available for currently still running process instances, as those process instances also left traces up to the current wait state.
 
-The History Data Migrator can copy this audit data to Camunda 8.
+The History Data Migrator can copy this audit data to Camunda 8. For process instances that were still active or suspended in Camunda 7, the migrated history data will be marked as canceled in Camunda 8. This ensures a clear audit trail while preventing confusion with actively running instances in Camunda 8.
 
-Audit data migration might need to look at a huge amount of data, which can take time to migrate. In early measurements, migrating 10,000 process instances took around 10 minutes, but the number varies greatly based on the amount of data attached to a process instance (for example, user task instances, variable instances, and so on).
-
+Audit data migration might need to look at a huge amount of data, which can take time to migrate.
 You can run audit data migration alongside normal operations (for example, after the successful big bang migration of runtime process instances) so that it doesn't require downtime and as such, the performance might not be as critical as for runtime instance migration.
+
+During migration, the History Data Migrator sets a `legacyId` variable in the process instances to link them to their original Camunda 7 process instances.
 
 ## Requirements and limitations
 
@@ -29,7 +29,7 @@ The following requirements and limitations apply:
 
 - Camunda 8 is up and running and Camunda 7 has been stopped.
 - The History Data Migrator must be able to access the Camunda 7 database.
-- The History Data Migrator can migrate data to Camunda 8 only when a relational database (RDBMS) is used. This capability is planned for Camunda 8.9.
+- The History Data Migrator can migrate data to Camunda 8 only when a relational database (RDBMS) is used.
 - The History Data Migrator must be able to access the Camunda 8 database. As a result, you can run this tool only in a self-managed environment.
 - If you manipulate Camunda 7 data between History Data Migrator runs, data consistency might be affected. See [Auto-cancellation of active instances](#auto-cancellation-of-active-instances) for details.
 - If you migrate runtime and history data for an active C7 process instance, two separate records will appear in Operate:
@@ -40,8 +40,15 @@ The following requirements and limitations apply:
 
 ## Usage examples
 
+<Tabs groupId="os" defaultValue="maclinux" values={[
+{ label: 'Mac OS + Linux', value: 'maclinux' },
+{ label: 'Windows', value: 'windows' }
+]}>
+
+<TabItem value="maclinux">
+
 ```bash
-# Run history migration (experimental)
+# Run history migration
 ./start.sh --history
 
 # List all skipped history entities
@@ -54,12 +61,36 @@ The following requirements and limitations apply:
 ./start.sh --history --retry-skipped
 ```
 
+</TabItem>
+
+<TabItem value="windows">
+
+```bash
+# Run history migration
+start.bat --history
+
+# List all skipped history entities
+start.bat --history --list-skipped
+
+# List skipped entities for specific types
+start.bat --history --list-skipped HISTORY_PROCESS_INSTANCE HISTORY_USER_TASK
+
+# Retry skipped history entities
+start.bat --history --retry-skipped
+```
+
+</TabItem>
+
+</Tabs>
+
 ## Entity types
 
 | Entity type                   | Description          |
 | :---------------------------- | :------------------- |
+| `HISTORY_FORM_DEFINITION`     | Form definitions     |
 | `HISTORY_PROCESS_DEFINITION`  | Process definitions  |
 | `HISTORY_PROCESS_INSTANCE`    | Process instances    |
+| `HISTORY_JOB`                 | Jobs                 |
 | `HISTORY_INCIDENT`            | Process incidents    |
 | `HISTORY_VARIABLE`            | Process variables    |
 | `HISTORY_USER_TASK`           | User tasks           |
@@ -67,26 +98,37 @@ The following requirements and limitations apply:
 | `HISTORY_DECISION_INSTANCE`   | Decision instances   |
 | `HISTORY_DECISION_DEFINITION` | Decision definitions |
 
+## Tenants
+
+- Camunda 7's `null` tenant is migrated to Camunda 8's `<default>` tenant.
+- All other `tenantId`s will be migrated as-is.
+- For details, see [multi-tenancy](/components/concepts/multi-tenancy.md#tenant-identifier) in Camunda 8.
+
 ## Cleanup behavior for completed instances
 
 Instances that were already completed in Camunda 7 retain their original cleanup dates:
 
-- If a `removalTime` exists in Camunda 7, it is migrated as-is.
+- If a `removalTime` exists in Camunda 7, it is migrated as-is for process and decision instances.
+  Camunda 8 uses this date for history cleanup. The child entities (for example, user tasks, variables, flow nodes) will be deleted according to the root instance's cleanup date.
 - If no `removalTime` exists and the instance is completed, no cleanup date is set.
 - Auto-cancel cleanup configuration **only applies to instances that were active or suspended** in Camunda 7.
+
+:::note
+All migrated records are assigned `partitionId=1` so that the RDBMS exporter on partition 1 can perform history cleanup for migrated data.
+:::
 
 ## Auto-cancellation of active instances
 
 When migrating history data, the Data Migrator automatically handles **active or suspended** process instances from Camunda 7 by marking them as **canceled** in Camunda 8. This applies to:
 
-- Process instances.
-- Flow nodes.
-- User tasks.
-- Incidents.
+- Process instances
+- Flow nodes
+- User tasks
+- Incidents
 
 Auto-canceled entities are assigned the migration timestamp as their end date.
 
-By default, auto-canceled entities receive a cleanup date calculated as:
+By default, auto-canceled instances receive a cleanup date calculated as:
 
 ```
 cleanup_date = end_date + 6 months
@@ -96,7 +138,44 @@ This ensures auto-canceled instances are eligible for history cleanup after six 
 
 See [configuration for history auto-cancellation](../data-migrator/config-properties.md#camundamigratorhistoryauto-cancelcleanup) for more details.
 
-Please note that if any Camunda 7 process instances progress in their state in between multiple runs of the History Data Migrator, data consistency might be affected: for example, if a process instance is completed in Camunda 7 after the first run but before the second run, the History Data Migrator would migrate it as canceled in the first and as completed in the second run. As a result, in Operate you may see that a process instance was canceled in a Flow Node that chronologically precedes the end event in your model, where the instance will be marked as completed. To avoid such situations, ensure that Camunda 7 data remains unchanged between History Data Migrator runs.
+## Forms
+
+The History Data Migrator automatically migrates [Camunda Forms](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) from Camunda 7 to Camunda 8. This includes forms linked to process definitions (start forms) and user tasks.
+
+The form schema (JSON definition) is extracted from the Camunda 7 deployment resources and migrated to Camunda 8. The form structure, fields, and validation rules are preserved during migration.
+
+User tasks that reference non-existent forms will be migrated as well.
+
+### Form linking
+
+The migrator automatically detects and links forms configured using `camunda:formRef` with a `camunda:formKey`. This applies to both start events and user tasks.
+
+For each form reference, the migrator:
+
+1. Resolves the form definition based on the form key and binding (deployment, latest, or version).
+2. Links the element (process definition or user task) to the migrated form in Camunda 8.
+
+Example BPMN configurations that will be migrated:
+
+```xml
+<!-- Start form -->
+<bpmn:startEvent id="StartEvent_1">
+  <bpmn:extensionElements>
+    <camunda:formData>
+      <camunda:formRef formKey="myStartForm" binding="deployment" />
+    </camunda:formData>
+  </bpmn:extensionElements>
+</bpmn:startEvent>
+
+<!-- User task form -->
+<bpmn:userTask id="UserTask_1" name="Review Document">
+  <bpmn:extensionElements>
+    <camunda:formData>
+      <camunda:formRef formKey="reviewForm" binding="deployment" />
+    </camunda:formData>
+  </bpmn:extensionElements>
+</bpmn:userTask>
+```
 
 ## Atomicity
 
@@ -124,10 +203,13 @@ The following built-in transformers convert Camunda 7 historic entities:
 
 | Interceptor                                 | Camunda 7 entity type                    | Camunda 8 Model               |
 | ------------------------------------------- | ---------------------------------------- | ----------------------------- |
+| `AuditLogTransformer`                       | `UserOperationLogEntry`                  | `AuditLogDbModel`             |
+| `FormTransformer`                           | `CamundaFormDefinitionEntity`            | `FormDbModel`                 |
 | `ProcessInstanceTransformer`                | `HistoricProcessInstance`                | `ProcessInstanceDbModel`      |
 | `ProcessDefinitionTransformer`              | `ProcessDefinition`                      | `ProcessDefinitionDbModel`    |
 | `FlowNodeTransformer`                       | `HistoricActivityInstance`               | `FlowNodeInstanceDbModel`     |
 | `UserTaskTransformer`                       | `HistoricTaskInstance`                   | `UserTaskDbModel`             |
+| `JobTransformer`                            | `HistoricJobLog`                         | `JobDbModel`                  |
 | `IncidentTransformer`                       | `HistoricIncident`                       | `IncidentDbModel`             |
 | `VariableTransformer`                       | `HistoricVariableInstance`               | `VariableDbModel`             |
 | `DecisionInstanceTransformer`               | `HistoricDecisionInstance`               | `DecisionInstanceDbModel`     |
@@ -139,6 +221,17 @@ The following built-in transformers convert Camunda 7 historic entities:
 The `EntityInterceptor` interface allows you to define custom logic that executes when a Camunda 7 historic entity is being converted to a Camunda 8 database model during migration. This is useful for enriching, auditing, or customizing entity conversion.
 
 Custom interceptors are enabled by default and can be restricted to specific entity types.
+
+### Type-safe API
+
+The `EntityInterceptor` interface uses Java generics to provide compile-time type safety:
+
+```java
+public interface EntityInterceptor<C7, C8> {
+    void execute(C7 entity, C8 builder);
+    // ...
+}
+```
 
 ### How to implement an `EntityInterceptor`
 
@@ -154,7 +247,8 @@ Custom interceptors are enabled by default and can be restricted to specific ent
 Here's an example of a custom entity interceptor which is only called for process instances:
 
 ```java
-public class ProcessInstanceEnricher implements EntityInterceptor {
+public class ProcessInstanceEnricher
+    implements EntityInterceptor<HistoricProcessInstance, ProcessInstanceDbModel.ProcessInstanceDbModelBuilder> {
 
     /**
      * Restrict this interceptor to only handle process instances.
@@ -165,65 +259,111 @@ public class ProcessInstanceEnricher implements EntityInterceptor {
     }
 
     @Override
-    public void execute(EntityConversionContext<?, ?> context) {
-        HistoricProcessInstance c7Instance =
-            (HistoricProcessInstance) context.getC7Entity();
-        ProcessInstanceDbModel.Builder c8Builder =
-            (ProcessInstanceDbModel.Builder) context.getC8DbModelBuilder();
-
+    public void execute(HistoricProcessInstance entity,
+                        ProcessInstanceDbModel.ProcessInstanceDbModelBuilder builder) {
         // Custom conversion logic
         // For example, add custom metadata or modify the conversion
+      builder.processDefinitionId(entity.getProcessDefinitionKey());
     }
 }
 ```
 
 #### Access Camunda 7 process engine
 
-To retrieve information from Camunda 7 entities, use the `processEngine` available in the `EntityConversionContext`.
+To retrieve information from Camunda 7 entities, use the `EntityConversionContext` parameter which provides access to the `processEngine`.
 
 Use it to access services such as `RepositoryService` and `RuntimeService`. Fetch additional data as needed from other Camunda 7 entities.
 
 ```java
-@Override
-public void execute(EntityConversionContext<?, ?> context) {
-  // Use ProcessEngine to retrieve deployment information from Camunda 7 process engine
-  ProcessEngine processEngine = context.getProcessEngine();
+public class ProcessInstanceEnricher
+    implements EntityInterceptor<HistoricProcessInstance, ProcessInstanceDbModel.ProcessInstanceDbModelBuilder> {
 
-// Example: Retrieve the deployment ID from the process definition
-  String deploymentId = processEngine.getRepositoryService()
-      .createProcessDefinitionQuery()
-      .processDefinitionKey(processInstance.getProcessDefinitionKey())
-      .singleResult()
-      .getDeploymentId();
-  // Custom conversion logic
-  // ...
+    @Override
+    public Set<Class<?>> getTypes() {
+        return Set.of(HistoricProcessInstance.class);
+    }
+
+    /**
+     * Alternative execute signature with EntityConversionContext access.
+     * This signature gives you access to the process engine and other context.
+     */
+    @Override
+    public void execute(EntityConversionContext<HistoricProcessInstance,
+                                                ProcessInstanceDbModel.ProcessInstanceDbModelBuilder> context) {
+        // Access the entity and builder from context
+        HistoricProcessInstance entity = context.getC7Entity();
+        ProcessInstanceDbModel.ProcessInstanceDbModelBuilder builder = context.getC8DbModelBuilder();
+
+        // Use ProcessEngine to retrieve deployment information from Camunda 7 process engine
+        ProcessEngine processEngine = context.getProcessEngine();
+
+        // Example: Retrieve the deployment ID from the process definition
+        String deploymentId = processEngine.getRepositoryService()
+            .createProcessDefinitionQuery()
+            .processDefinitionKey(entity.getProcessDefinitionKey())
+            .singleResult()
+            .getDeploymentId();
+
+        // Custom conversion logic using the retrieved data
+        // ...
+    }
 }
 ```
+
+**Note:** The `EntityInterceptor` interface provides two `execute` method signatures:
+
+- `execute(C7 entity, C8 builder)` - Simple type-safe signature for basic transformations
+- `execute(EntityConversionContext<C7, C8> context)` - Full signature with access to process engine and other context
 
 ### Limit interceptors by entity type
 
 Entity interceptors can be restricted to specific entity types using the `getTypes()` method. Use Camunda 7 historic entity classes:
 
 ```java
-@Override
-public Set<Class<?>> getTypes() {
-    // Handle only specific types
-    return Set.of(
-        ProcessDefinition.class,            // Process definitions
-        HistoricProcessInstance.class,      // Process instances
-        HistoricActivityInstance.class,     // Flow nodes/activities
-        HistoricTaskInstance.class,         // User tasks
-        HistoricVariableInstance.class,     // Variables
-        HistoricIncident.class              // Incidents
-    );
-}
-```
+// Example 1: Handle multiple specific types
+public class MultiEntityInterceptor
+    implements EntityInterceptor<Object, Object> {
 
-```java
-// Or handle all entity types (default behavior)
-@Override
-public Set<Class<?>> getTypes() {
-    return Set.of(); // Empty set = handle all types
+    @Override
+    public Set<Class<?>> getTypes() {
+        // Handle only specific types
+        return Set.of(
+            ProcessDefinition.class,            // Process definitions
+            HistoricProcessInstance.class,      // Process instances
+            HistoricActivityInstance.class,     // Flow nodes/activities
+            HistoricTaskInstance.class,         // User tasks
+            HistoricVariableInstance.class,     // Variables
+            HistoricIncident.class,             // Incidents
+            HistoricDecisionInstance.class      // Decision instances
+        );
+    }
+
+    @Override
+    public void execute(Object entity, Object builder) {
+        // Handle different entity types
+        if (entity instanceof HistoricProcessInstance) {
+            // Process instance logic
+        } else if (entity instanceof HistoricActivityInstance) {
+            // Flow node logic
+        }
+        // etc.
+    }
+}
+
+// Example 2: Universal interceptor (handles all entity types)
+public class EntityLogger
+    implements EntityInterceptor<Object, Object> {
+
+    @Override
+    public Set<Class<?>> getTypes() {
+        return Set.of(); // Empty set = handle all types
+    }
+
+    @Override
+    public void execute(Object entity, Object builder) {
+        // This will be called for all entity types
+        System.out.println("Converting entity: " + entity.getClass().getSimpleName());
+    }
 }
 ```
 
@@ -258,21 +398,21 @@ See [example interceptor](https://github.com/camunda/camunda-7-to-8-migration-to
 ### Execution order
 
 - Custom interceptors configured in the `application.yml` are executed in their order of appearance from top to bottom
-  - Built-in transformers run first (Order: 1-15), followed by custom interceptors
-- In a Spring Boot environment, you can register interceptors as beans and change their execution order with the `@Order` annotation (lower values run first)
+- Built-in transformers run first, followed by custom interceptors
 
 ### Error handling
 
-When entity transformation fails:
+When an entity transformation fails:
 
-1. The migrator skips the entity.
-2. It logs a detailed error message with the entity type and error cause.
-3. It marks the entity as skipped.
-4. Use `--history --list-skipped` to view skipped entities.
-5. After you fix the underlying issue, use `--history --retry-skipped` to retry the migration.
+1. The entity is marked as _skipped_ in the migration database.
+2. After the initial migration completes, the migrator automatically retries all skipped entities.
+3. Retries run in multiple passes until no further progress can be made (that is, no additional entities are successfully migrated).
+4. Any entities that remain skipped after all automatic retries are logged as warnings, along with their skip reasons.
+5. Use `--history --list-skipped` to view entities that remain skipped after automatic retries.
+6. After resolving the underlying issue (for example, unsupported variable types), use `--history --retry-skipped` to manually retry the migration.
 
-## Tenants
+This automatic retry mechanism is particularly useful for resolving cross-entity dependencies, such as:
 
-- Camunda 7's `null` tenant is migrated to Camunda 8's `<default>` tenant.
-- All other `tenantId`s will be migrated as-is.
-- For details, see [multi-tenancy](/components/concepts/multi-tenancy.md#tenant-identifier) in Camunda 8.
+- Flow node instances that depend on their parent flow node (scope)
+- Child process instances that depend on parent call activities
+- Variables or user tasks that depend on their parent process instance

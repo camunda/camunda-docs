@@ -7,7 +7,11 @@ description: Overview of Helm chart parameters for Camunda Self-Managed.
 
 Helm chart parameters let you configure the components and behavior of your Camunda Self-Managed installation. The main way to customize these parameters is by using a `values.yaml` file.
 
-In Helm charts, the `values.yaml` file defines configuration for your deployment. To tailor your installation to your needs, you can override parameters in this file or provide your own values file. It’s best practice to keep the original `values.yaml` unchanged and maintain a separate file with your custom settings.
+In Helm charts, the `values.yaml` file defines configuration for your deployment. To tailor your installation to your needs, you can override parameters in this file or provide your own values file. It's best practice to keep the original `values.yaml` unchanged and maintain a separate file with your custom settings.
+
+:::tip Templating support
+Some values in `values.yaml` support Go template expressions (for example, `{{ .Release.Name }}`). Values that support templating are marked with "Supports templating" in their description in `values.yaml`. This includes `podLabels`, `podAnnotations`, and `global.ingress.host`, among others.
+:::
 
 The following tables show the **top-level configuration sections** in `values.yaml`. Each section controls a specific area of the chart.
 
@@ -49,7 +53,7 @@ Bitnami subcharts are best suited for development and testing environments unles
 For production environments, deploy infrastructure services separately from the Camunda Helm charts. This lets you use your preferred deployment methods, leverage managed services (for example, Amazon OpenSearch Service), and manage infrastructure lifecycles independently of Camunda.
 
 **Alternative deployment approach:**  
-See [deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
+See [deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
 :::
 
 #### Bitnami subcharts guidance

@@ -9,13 +9,23 @@ description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+import IdpPrerequisite from '../\_partials/\_idp-prerequisite.md'
+import NoDomainIdpChoice from '../\_partials/\_no-domain-idp-choice.md'
+import WhyNoIdp from '../\_partials/\_why-no-idp.md'
+import SingleNamespaceDeployment from '../\_partials/\_single-namespace-deployment.md'
+import NoDomainInfo from '../\_partials/\_no-domain-info.md'
+import HelmUpgradeNote from '../\_partials/\_helm-upgrade-note.md'
+import KubefwdTip from '../\_partials/\_kubefwd-tip.md'
+import PortForwardServices from '../\_partials/\_port-forward-services.md'
+import DeployECKElasticsearch from '../\_partials/\_deploy-eck-elasticsearch.md'
+
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
 Deploying Camunda 8 on Red Hat OpenShift is supported using Helm, given the appropriate configurations.
 
 However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/deployment/helm/install/quick-install.md).
 
-Additional informational and high-level overview based on Kubernetes as upstream project is available on our [Kubernetes deployment reference](/self-managed/reference-architecture/kubernetes.md).
+Additional information and a high-level overview of Kubernetes as the upstream project is available on our [Kubernetes deployment reference](/self-managed/reference-architecture/kubernetes.md).
 
 ## Requirements
 
@@ -24,11 +34,8 @@ Additional informational and high-level overview based on Kubernetes as upstream
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
-- [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
-  - Ensure at least **3 Elastic IPs** (one per availability zone).
-  - Verify quotas for **VPCs, EC2 instances, and storage**.
-  - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - A namespace to host the Camunda Platform.
+- Permissions to install Kubernetes operators (cluster-admin or equivalent) for deploying the infrastructure services (Elasticsearch, PostgreSQL, Keycloak). These operators can also be installed via the [OpenShift OperatorHub](https://docs.openshift.com/container-platform/latest/operators/understanding/olm-understanding-operatorhub.html), but this guide installs them directly from source for full control over versions and configuration.
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
@@ -38,30 +45,79 @@ This section installs Camunda 8 following the architecture described in the [ref
 
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
-- **Keycloak as OIDC provider**: Example OIDC provider (can be replaced with any compatible IdP)
+
+Infrastructure components are deployed using **official Kubernetes operators** as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
+
+- **[Elasticsearch with ECK](#deploy-elasticsearch)**: Deployed via [Elastic Cloud on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) for secondary storage
+- **[PostgreSQL with CloudNativePG](#deploy-postgresql)**: Deployed via [CloudNativePG](https://cloudnative-pg.io/) for Identity and Web Modeler databases
+- **[Keycloak](#deploy-keycloak) (optional)**: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation) as an identity provider for Single Sign-On (SSO)
 
 For OpenShift deployments, the following OpenShift-specific configurations are also included:
 
 - **OpenShift Routes**: Native OpenShift way to expose services externally (alternative to standard Kubernetes Ingress)
 - **Security Context Constraints (SCCs)**: Security framework for controlling pod and container permissions
 
-:::info Single namespace deployment
-This guide uses a single Kubernetes namespace for simplicity, since the deployment is done with a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components), which recommends separating Orchestration Cluster and Web Modeler or Console into different namespaces in production to improve isolation and enable independent scaling.
-:::
+<SingleNamespaceDeployment />
+
+## Identity Provider (IdP) setup
+
+<IdpPrerequisite />
+
+<NoDomainIdpChoice />
+
+<WhyNoIdp />
 
 ## Deploy Camunda 8 via Helm charts
 
+### Obtain a copy of the reference architecture
+
+All configuration files, deployment scripts, and Helm values referenced in this guide are available in the [Camunda deployment references](https://github.com/camunda/camunda-deployment-references) repository.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/get-your-copy.sh
+```
+
+This places you at the repository root, from which both directories are accessible:
+
+- `generic/kubernetes/operator-based/` — operator deployment scripts (Elasticsearch, PostgreSQL, Keycloak)
+- `generic/openshift/single-region/` — OpenShift-specific Helm values and procedures
+
+### Environment setup
+
+Source the environment variables required by the deployment scripts:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/0-set-environment.sh
+```
+
+:::note
+Ensure you source this file before running any deployment or configuration commands in the following sections.
+:::
+
 ### Configure your deployment
 
-Start by creating a `values.yml` file to store the configuration for your environment.
-This file will contain key-value pairs that will be substituted using `envsubst`.
-Over this guide, you will add and merge values in this file to configure your deployment to fit your needs.
+Start by copying the base Helm values file from the cloned repository into a working `values.yml` at the repository root:
 
-You can find a reference example of this file here:
+```bash
+cp generic/openshift/single-region/helm-values/base.yml values.yml
+```
+
+This file contains key-value pairs that will be substituted using `envsubst`.
+Over this guide, you will merge additional overlays into this file to configure your deployment.
+
+<!-- The overlays and merge order documented below are tested in CI by:
+Repo: camunda/camunda-deployment-references
+File: .github/workflows/aws_openshift_rosa_hcp_single_region_tests.yml
+Keep both in sync when adding or modifying overlays. -->
+
+<details>
+<summary>Review the base Helm values</summary>
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/base.yml
 ```
+
+</details>
 
 :::danger Merging YAML files
 
@@ -142,53 +198,81 @@ This will add the necessary annotation to [enable HTTP/2 for Ingress in your Ope
 Additionally, the Zeebe Gateway should be configured to use an encrypted connection with TLS. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encryption or pass-through routes, and not for edge-terminated or insecure routes.
 
 1. **Zeebe cluster:** two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway are required, one for the **service** and the other one for the **route**:
-   - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`. This certificate is also use in the other components such as Operate, Tasklist.
 
-     In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
+- The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`. This certificate is also used in the other components such as Operate, Tasklist.
 
-     Another option is [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
+  In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
+
+  Another option is [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
+
+<details>
+  <summary>PKCS #8, PKCS #1 syntax</summary>
+
+PKCS #1 private key encoding. PKCS #1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS #8.
+
+PKCS #8 private key encoding. PKCS #8 produces a PEM block with a static header and both the private key algorithm and the private key in the body. A key that uses this encoding can be recognised by its BEGIN PRIVATE KEY header.
+
+[PKCS #1, PKCS #8 syntax definition from cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
+
+</details>
+
+- The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
+
+To configure the orchestration cluster securely, it's essential to set up a secure communication configuration between pods:
+
+- We enable gRPC Ingress for the Zeebe Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$CAMUNDA_DOMAIN`) for the gRPC proxy, different from the one used by other services (`$CAMUNDA_DOMAIN`). We also note that the port used for gRPC is `443`.
+- We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe pod and configure a secure TLS connection.
+
+Merge the orchestration route overlay into your `values.yml` file:
+
+```bash
+yq '. *+ load("generic/openshift/single-region/helm-values/orchestration-route.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
 
    <details>
-     <summary>PKCS #8, PKCS #1 syntax</summary>
+   <summary>Review the orchestration route configuration</summary>
 
-   > PKCS #1 private key encoding. PKCS #1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS #8.
-
-   > PKCS #8 private key encoding. PKCS #8 produces a PEM block with a static header and both the private key algorithm and the private key in the body. A key that uses this encoding can be recognised by its BEGIN PRIVATE KEY header.
-
-   [PKCS #1, PKCS #8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/orchestration-route.yml
+```
 
    </details>
-   - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
-   To configure the orchestration cluster securely, it's essential to set up a secure communication configuration between pods:
-   - We enable gRPC Ingress for the Zeebe Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
-   - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe pod and configure a secure TLS connection.
+The actual configuration properties can be reviewed [in the Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
 
-   Update your `values.yml` file with the following:
+1. **Connectors:** merge the connectors route overlay:
 
-   ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/orchestration-route.yml
+   ```bash
+   yq '. *+ load("generic/openshift/single-region/helm-values/connectors-route.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
    ```
 
-   The actual configuration properties can be reviewed [in the Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
+   <details>
+   <summary>Review the connectors route configuration</summary>
 
-2. **Connectors:** update your `values.yml` file with the following:
+   ```yaml reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/connectors-route.yml
+   ```
 
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/connectors-route.yml
-```
+   </details>
 
-The actual configuration properties can be reviewed [in the connectors configuration documentation](/self-managed/components/connectors/connectors-configuration.md#zeebe-broker-connection).
+   The actual configuration properties can be reviewed [in the connectors configuration documentation](/self-managed/components/connectors/connectors-configuration.md#zeebe-broker-connection).
 
-1. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
+1. **TLS for internal applications:** Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
-1. Set up the global configuration to enable the single Ingress definition with the host. Update your configuration file as shown below:
+1. **Domain configuration:** Set up the global configuration to enable the single Ingress definition with the host. Merge the domain overlay:
 
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/domain.yml
-```
+   ```bash
+   yq '. *+ load("generic/openshift/single-region/helm-values/domain.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+   ```
 
-<!--Intended space left for not breaking the build!-->
+   <details>
+   <summary>Review the domain configuration</summary>
+
+   ```yaml reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/domain.yml
+   ```
+
+   </details>
 
 <!--Intended space left for not breaking the build!-->
   </TabItem>
@@ -215,30 +299,41 @@ If you do not have a domain name or do not intend to use one for your Camunda 8 
 
 However, you can use `kubectl port-forward` to access the Camunda platform without a domain name or Ingress configuration. For more information, refer to the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
 
-To make this work, you will need to configure the deployment to reference `localhost` with the forwarded port. Update your `values.yml` file with the following:
+To make this work, you will need to configure the deployment to reference `localhost` with the forwarded port. Merge the no-domain overlay into your `values.yml` file:
+
+```bash
+yq '. *+ load("generic/openshift/single-region/helm-values/no-domain.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the no-domain configuration</summary>
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/no-domain.yml
 ```
 
+</details>
+
 :::info Keycloak issuer and localhost hostname alignment
 
-When running without a domain, Console validates the JWT issuer claim against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means that during port-forwarding you may need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
+When running without a domain using the Keycloak Operator, Console validates the JWT issuer claim against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means that during port-forwarding you may need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
 
 Add (or update) the following entry in your `/etc/hosts` file while developing locally:
 
 ```text
-127.0.0.1  $CAMUNDA_RELEASE_NAME-keycloak
+127.0.0.1  keycloak-service
 ```
 
 After adding this entry, you can reach Keycloak at:
-`http://$CAMUNDA_RELEASE_NAME-keycloak:18080/auth`
+`http://keycloak-service:18080/auth`
 
 **Why port `18080`?**
-We forward container port `8080` (originally `80`) to a non‑privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using 8080.
+The Keycloak Operator deploys the Keycloak service on port `18080`. We forward that port to the same local port (`18080`) to keep the JWT issuer URL consistent and avoid token validation mismatches.
 
 This constraint does not apply when a proper domain and Ingress are configured (the public FQDN is then used as the issuer and no hosts file changes are needed).
 :::
+
+<NoDomainInfo />
 
   </TabItem>
 </Tabs>
@@ -256,18 +351,36 @@ The `global.compatibility.openshift.adaptSecurityContext` variable in your value
 - `force`: The `runAsUser` and `fsGroup` values will be null in all components.
 - `disabled`: The `runAsUser` and `fsGroup` values will not be modified (default).
 
+```bash
+yq '. *+ load("generic/openshift/single-region/helm-values/scc.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the restrictive SCC configuration</summary>
+
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/scc.yml
 ```
+
+</details>
 
 </TabItem>
 <TabItem value="no-scc" label="Permissive SCCs">
 
 To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/deployment/helm/install/quick-install.md).
 
+```bash
+yq '. *+ load("generic/openshift/single-region/helm-values/no-scc.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the permissive SCC configuration</summary>
+
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/no-scc.yml
 ```
+
+</details>
 
 </TabItem>
 </Tabs>
@@ -276,26 +389,253 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Enterprise components and connectors](/self-managed/deployment/helm/install/quick-install.md#configuring-enterprise-components-and-connectors).
 
+### Deploy prerequisite services
+
+Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch and PostgreSQL) is deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md). Keycloak can optionally be deployed as your OIDC provider:
+
+- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- **PostgreSQL**: Deployed via [CloudNativePG](https://cloudnative-pg.io/)
+- **Keycloak** _(optional)_: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation) — can be replaced with any OIDC-compatible IdP
+
+All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
+
+:::note Working directory
+All commands in this guide assume you are at the **repository root** (the directory created by `get-your-copy.sh`). The deploy commands below use subshells `(cd ... && ./deploy.sh)` to preserve your working directory.
+:::
+
+#### Deploy Elasticsearch {#deploy-elasticsearch}
+
+<DeployECKElasticsearch />
+
+#### Deploy PostgreSQL {#deploy-postgresql}
+
+Deploy PostgreSQL clusters using the CloudNativePG operator:
+
+```bash
+CLUSTER_FILTER="pg-identity,pg-webmodeler" (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+```
+
+This script installs the CNPG operator (auto-detecting OpenShift to apply SCC patches), creates secrets, deploys the specified PostgreSQL clusters, and waits for readiness.
+
+The following PostgreSQL clusters are created:
+
+- **pg-identity**: Database for Camunda Identity component
+- **pg-webmodeler**: Database for Web Modeler component (remove from configuration if not needed)
+
+<details>
+<summary>Review the PostgreSQL cluster configuration</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/postgresql-clusters.yml
+```
+
+</details>
+
+For more details on the PostgreSQL deployment, see [PostgreSQL deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
+
+#### Deploy Keycloak (optional) {#deploy-keycloak}
+
+If you choose Keycloak as your identity provider (IdP), deploy it using the Keycloak Operator. First, deploy its PostgreSQL database, then deploy the Keycloak operator and instance. If you use an external OIDC provider instead, skip this section.
+
+<Tabs queryString="current-ingress">
+<TabItem value="openshift-routes" label="Using OpenShift Routes" default>
+
+Deploy Keycloak with OpenShift Routes:
+
+```bash
+# Deploy the PostgreSQL database for Keycloak
+CLUSTER_FILTER=pg-keycloak (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+
+# Deploy Keycloak
+export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-openshift.yml"
+(cd generic/kubernetes/operator-based/keycloak && ./deploy.sh)
+```
+
+<details>
+<summary>Review the OpenShift Keycloak instance configuration</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-openshift.yml
+```
+
+</details>
+
+</TabItem>
+<TabItem value="kubernetes-ingress" label="Using Kubernetes Ingress">
+
+Deploy Keycloak with nginx-ingress:
+
+```bash
+# Deploy the PostgreSQL database for Keycloak
+CLUSTER_FILTER=pg-keycloak (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+
+# Deploy Keycloak
+export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-nginx.yml"
+(cd generic/kubernetes/operator-based/keycloak && ./deploy.sh)
+```
+
+<details>
+<summary>Review the nginx Keycloak instance configuration</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml
+```
+
+</details>
+
+</TabItem>
+<TabItem value="no-ingress" label="No Ingress">
+
+Deploy Keycloak without external access:
+
+```bash
+# Deploy the PostgreSQL database for Keycloak
+CLUSTER_FILTER=pg-keycloak (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+
+# Deploy Keycloak
+export KEYCLOAK_CONFIG_FILE="keycloak-instance-no-domain.yml"
+(cd generic/kubernetes/operator-based/keycloak && ./deploy.sh)
+```
+
+<details>
+<summary>Review the no-domain Keycloak instance configuration</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-no-domain.yml
+```
+
+</details>
+
+</TabItem>
+</Tabs>
+
+For more details on the Keycloak deployment, see [Keycloak deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment).
+
+#### Merge operator overlays into values
+
+Once the operator-managed services are running, merge the corresponding Helm values overlays into your `values.yml` file. These overlays configure Camunda components to use the external operator-managed services instead of embedded subcharts.
+
+Merge the **Elasticsearch** overlay:
+
+```bash
+yq '. *+ load("generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the Elasticsearch Helm overlay</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml
+```
+
+</details>
+
+Merge the **Identity PostgreSQL** overlay:
+
+```bash
+yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the Identity PostgreSQL Helm overlay</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml
+```
+
+</details>
+
+If **Web Modeler** is enabled, also merge the **Web Modeler PostgreSQL** overlay:
+
+```bash
+yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the Web Modeler PostgreSQL Helm overlay</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml
+```
+
+</details>
+
+Merge the **Keycloak** overlay _(optional — only if Keycloak was deployed as your IdP; choose the appropriate variant for your setup)_:
+
+<Tabs queryString="current-ingress">
+<TabItem value="openshift-routes" label="Using OpenShift Routes" default>
+
+```bash
+yq '. *+ load("generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the Keycloak domain Helm overlay</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml
+```
+
+</details>
+
+</TabItem>
+<TabItem value="kubernetes-ingress" label="Using Kubernetes Ingress">
+
+```bash
+yq '. *+ load("generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the Keycloak domain Helm overlay</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml
+```
+
+</details>
+
+</TabItem>
+<TabItem value="no-ingress" label="No Ingress">
+
+```bash
+yq '. *+ load("generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the Keycloak no-domain Helm overlay</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml
+```
+
+</details>
+
+</TabItem>
+</Tabs>
+
 #### Fill your deployment with actual values
 
-Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
+If **Web Modeler** is enabled, create the SMTP secret:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/create-webmodeler-secret.sh
+```
+
+:::note
+Database and authentication secrets are automatically managed by the operators:
+
+- **PostgreSQL credentials**: Created by CloudNativePG via `set-secrets.sh`
+- **Keycloak admin credentials** _(optional)_: Created by the Keycloak Operator
+- **Elasticsearch credentials**: Created by ECK
+- **Identity secrets**: Created by the operator-based deployment scripts
+
+Only the SMTP password for Web Modeler needs to be created manually.
+:::
+
+Once you've prepared the `values.yml` file with all overlays merged, run the following `envsubst` command to substitute the environment variables with their actual values:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/assemble-envsubst-values.sh
-```
-
-Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/generate-passwords.sh
-```
-
-Use these environment variables in the `kubectl` command to create the secret.
-
-- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)).
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/create-identity-secret.sh
 ```
 
 ### Install Camunda 8 using Helm
@@ -323,11 +663,7 @@ This command:
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 
-:::note
-
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/deployment/helm/upgrade/index.md) or any other component upgrades.
-
-:::
+<HelmUpgradeNote />
 
 You can track the progress of the installation using the following command:
 
@@ -348,8 +684,8 @@ Below is a summary of the necessary instructions:
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
 
-1. Open Identity in your browser at `https://${DOMAIN_NAME}/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
-2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
+1. Open Identity in your browser at `https://${CAMUNDA_DOMAIN}/managementidentity`. You will be redirected to your IdP and prompted to log in.
+2. Log in with the initial user `admin`. This username is defined by the `identity.firstUser.username` value in your Helm chart configuration. Retrieve the auto-generated password from the Kubernetes secret:
 
 ```shell
 kubectl get secret identity-secret-for-components \
@@ -366,7 +702,7 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `https://${DOMAIN_NAME}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+6. Open the Orchestration Cluster Identity in your browser at `https://${CAMUNDA_DOMAIN}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
 7. In the Identity navigation menu, select **Roles**.
 8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
@@ -378,34 +714,19 @@ This operation links the OIDC client to the role's permissions in the Orchestrat
 
 <TabItem value="without" label="Without domain">
 
-Identity, Keycloak and the Orchestration cluster must be port-forwarded to be able to connect to the cluster.
+Identity and the Orchestration cluster must be port-forwarded to be able to connect to the cluster. If using Keycloak via the Keycloak Operator, you also need to port-forward the Keycloak service.
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
-kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:8080 --namespace "$CAMUNDA_NAMESPACE"
-kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --namespace "$CAMUNDA_NAMESPACE"
+# If using Keycloak Operator:
+kubectl port-forward "services/keycloak-service" 18080:18080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-:::tip Localhost development with kubefwd
-For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable by their in-cluster DNS names on your workstation.
+<KubefwdTip />
 
-Example (requires `sudo` to bind privileged ports and modify `/etc/hosts`):
-
-```shell
-sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
-```
-
-After this runs, you can reach services directly, for example:
-
-- Identity: `http://$CAMUNDA_RELEASE_NAME-identity/managementidentity`
-- Keycloak: `http://$CAMUNDA_RELEASE_NAME-keycloak`
-- Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
-
-You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.
-:::
-
-1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
-2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
+1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to your IdP and prompted to log in.
+2. Log in with the initial user `admin`. This username is defined by the `identity.firstUser.username` value in your Helm chart configuration. Retrieve the auto-generated password from the Kubernetes secret:
 
 ```shell
 kubectl get secret identity-secret-for-components \
@@ -430,23 +751,7 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 
 This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
 
-<details>
-<summary>To access the other services and their UIs, port-forward those Components as well:</summary>
-
-```shell
-Orchestration:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
-Optimize:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-optimize" 8083:80 --namespace "$CAMUNDA_NAMESPACE"
-Connectors:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-connectors" 8086:8080 --namespace "$CAMUNDA_NAMESPACE"
-WebModeler:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-web-modeler-webapp" 8070:80 --namespace "$CAMUNDA_NAMESPACE"
-Console:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8087:80 --namespace "$CAMUNDA_NAMESPACE"
-```
-
-</details>
+<PortForwardServices />
 
 </TabItem>
 </Tabs>
@@ -456,7 +761,7 @@ Console:
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
 
-For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
+For a detailed guide on generating and using a token, consult the relevant documentation on [authenticating with the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
@@ -496,13 +801,11 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 ```json reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
-  </summary>
 </details>
 
   </TabItem>
@@ -520,17 +823,19 @@ Follow our existing [Modeler guide on deploying a diagram](/self-managed/compone
 
 The following values are required for the OAuth authentication:
 
-- **Cluster endpoint:** `https://zeebe-$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
+- **Cluster endpoint:** `https://zeebe-$CAMUNDA_DOMAIN`, replacing `$CAMUNDA_DOMAIN` with your domain
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
-- **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
+- **OAuth Token URL:** Your IdP's token endpoint (for example, `https://$CAMUNDA_DOMAIN/auth/realms/camunda-platform/protocol/openid-connect/token` when using Keycloak), replacing `$CAMUNDA_DOMAIN` with your domain
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
 
 <TabItem value="without">
 
-This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster:
+This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster.
+
+Desktop Modeler communicates via gRPC, so only port `26500` needs to be forwarded. If you also need REST API access (port `8080`), refer to the [REST API section above](#use-the-token).
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 26500:26500 --namespace "$CAMUNDA_NAMESPACE"
@@ -541,7 +846,7 @@ The following values are required for OAuth authentication:
 - **Cluster endpoint:** `http://localhost:26500`
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
-- **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
+- **OAuth Token URL:** Your IdP's token endpoint (for example, `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token` when using Keycloak with port-forwarding)
 - **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>

@@ -161,6 +161,30 @@ Adapt any webhook-dependent integrations you have created for 8.8.x to handle th
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Bug fix: `FormResult.schema` type corrected from object to string
+
+The `schema` property in the `FormResult` response was incorrectly specified as `type: object` in the OpenAPI contract, but the server has always returned it as a JSON `string`. This specification bug is now fixed.
+
+This is a bug fix that aligns the OpenAPI contract with actual server behavior, improving correctness for typed client integrations. Applications already handling the runtime `string` value are unaffected.
+
+The Camunda Java client is also affected: `io.camunda.client.api.search.response.Form::getSchema()` now returns `String` instead of `Object`. If your Java code casts or processes the return value as `Object`, update it to use `String`.
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Java client users: update calls to `Form::getSchema()` to handle the `String` return type instead of `Object`.
+- Generated-client users: regenerate your client. If your generated code relied on the incorrect `object` typing, update it to handle `string`.
+- Handwritten integrations: no change needed if you were already handling the actual `string` response.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Removed</span>
 </div>
 <div className="release-announcement-content">
@@ -579,6 +603,28 @@ These changes do not introduce new fields or richer context, but instead ensure 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch and OpenSearch: Index prefixes must differ
+
+When upgrading to Camunda 8.8 or setting up 8.8 for the first time, if you run both the Elasticsearch/OpenSearch Exporter and Camunda Exporter on the same Elasticsearch/OpenSearch cluster, their index prefixes must not match, nor be contained within the other.
+
+Do not reuse the same prefix for:
+
+- Elasticsearch/OpenSearch Exporter indices (legacy exporter): `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix`
+- Orchestration Cluster indices (secondary storage): `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
+
+If these prefixes are identical, or if one prefix includes the other (for example, `custom` and `custom-zeebe`), ILM/ISM policies and wildcard patterns such as `custom*` can target more indices than intended, which may lead to unexpected data loss.
+
+For configuration examples and details, see [Helm chart Elasticsearch/OpenSearch indices prefix](../../../self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
@@ -614,7 +660,7 @@ To revert to 0 replicas, set:
 - Environment variable: `CAMUNDA_DATABASE_INDEX_NUMBER_OF_REPLICAS=0`
 
 :::info
-To learn more, see [Elasticsearch changes in Components update 8.7 to 8.8](/self-managed/components/components-upgrade/870-to-880.md#elasticsearch).
+To learn more, see [Elasticsearch changes in Components update 8.7 to 8.8](/self-managed/upgrade/components/870-to-880.md#elasticsearch).
 :::
 
 </div>
@@ -803,7 +849,7 @@ With the Camunda 8.8 release, the default ID token claim that Web Modeler uses t
 With the Camunda 8.8 release, the Camunda Helm charts are updated to use the new Bitnami Docker repository.
 
 :::info
-See [Bitnami Docker repository migration](/self-managed/deployment/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
+See [Bitnami Docker repository migration](/self-managed/upgrade/helm/index.md#bitnami-docker-repository-migration) for migration details.
 :::
 
 </div>
@@ -842,7 +888,7 @@ Full setup instructions are available in the [installation guide](/self-managed/
   
 #### Helm chart: Alternative infrastructure methods
 
-For production environments, use managed or external services first. If not available, prefer vendor-supported operators (PostgreSQL, Elasticsearch/OpenSearch, Keycloak) over Bitnami subcharts. Bitnami subcharts remain available for evaluation or proof-of-concept use. See [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md).
+For production environments, use managed or external services first. If not available, prefer [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for PostgreSQL, Elasticsearch/OpenSearch, and Keycloak over Bitnami subcharts. Bitnami subcharts remain supported for existing deployments. For new deployments, they should be used only for evaluation or proof-of-concept scenarios.
 
 </div>
 </div>
@@ -972,7 +1018,7 @@ For future use, refer to the [new AWS Marketplace listing](https://aws.amazon.co
 
 With the Camunda 8.8 release, the deprecated authentication methods `OAUTH` and `CLIENT_CREDENTIALS` for configured [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) are no longer supported.
 
-For more information on how to migrate, see the [upgrade guide](/self-managed/components/components-upgrade/870-to-880.md#cluster-configuration).
+For more information on how to migrate, see the [upgrade guide](/self-managed/upgrade/components/870-to-880.md#cluster-configuration).
 
 </div>
 </div>
@@ -988,7 +1034,7 @@ For more information on how to migrate, see the [upgrade guide](/self-managed/co
 The available configuration options for [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) now depend on the version of the cluster.
 For version 8.8 and above, [new configuration options](/self-managed/components/modeler/web-modeler/configuration/configuration.md#additional-configuration-for-cluster-versions--88) are required.
 
-For more information on how to modify your existing configuration, see the [upgrade guide](/self-managed/components/components-upgrade/870-to-880.md#changed-configuration-options).
+For more information on how to modify your existing configuration, see the [upgrade guide](/self-managed/upgrade/components/870-to-880.md#changed-configuration-options).
 
 </div>
 </div>

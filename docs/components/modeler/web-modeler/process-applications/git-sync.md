@@ -326,12 +326,12 @@ Once successful, your project will display a new **Sync with Bitbucket** button.
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected repository at any time.
 
 1. In your connected process application, click **Sync with _GitProvider_** button.
-2. Enter a [version number](process-applications.md#versioning) to create a new milestone for your process application. The new milestone will be created prior to pushing your changes to the central repository.
+2. Enter a [version number](process-applications.md#process-application-versioning) to create a new version for your process application. The new version will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
 
 In the case of a merge conflict, select between your local Web Modeler changes and the changes in the remote repository to continue.
 
-Once the pull is complete and any merge conflicts are resolved, Web Modeler will push its changes. The newly created milestone is now accessible via the **View milestone** button in the success notification.
+Once the pull is complete and any merge conflicts are resolved, Web Modeler will push its changes. The newly created version is now accessible via the **View version** button in the success notification.
 
 ## Manage existing configurations
 
@@ -381,10 +381,11 @@ Refer to [Configuration of the restapi component](../../../../self-managed/compo
 
 ## Troubleshooting
 
-### File names
+### File and folder names
 
-- Duplicate file names are not allowed for the same file type.
-- Characters with special meaning to Git (for example, `/`), or characters disallowed by Git, are not allowed in either branch or file names.
+- Duplicate file names of the same file type are not allowed within the same folder.
+- Duplicate folder names are not allowed within the same parent folder.
+- Characters with special meaning in Git (for example, `/`), or characters disallowed by Git, are not allowed in either branch, file, or folder names.
 
 ### File extensions
 
@@ -393,7 +394,7 @@ Refer to [Configuration of the restapi component](../../../../self-managed/compo
 
 ### Synchronization
 
-- When synchronizing for the first time with a remote repository that already contains commits, Web Modeler will attempt to select a main process with a file name that matches its own main process. If there is no matching process, Web Modeler will select a process at random from the available `.bpmn` files. In the event that no `.bpmn` files exist in the remote repository, Web Modeler will not proceed, and will instead display an error message. Ensure the main process is correctly assigned, especially in cases where a random process has been selected.
+- When synchronizing for the first time with a remote repository that already contains commits, Web Modeler will attempt to select a main process with a file name that matches its own main process. If there is no matching process, Web Modeler will select a process at random from the available `.bpmn` files at the top level of the synced path. `.bpmn` files in subfolders are not considered. In the event that no `.bpmn` files exist at the top level, Web Modeler will not proceed, and will instead display an error message. Ensure the main process is correctly assigned, especially in cases where a random process has been selected.
 - Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.
 - Timeouts may occur during a sync. In the event of a timeout, close the modal and retry the synchronization.
 - Using self-hosted instances of Git providers may require additional configuration. Refer to the Web Modeler configuration part for your [git host](#connect-to-a-remote-repository) and available [environment variables](#self-managed-environment-variables) for more details.

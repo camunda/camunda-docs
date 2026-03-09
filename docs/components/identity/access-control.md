@@ -25,3 +25,11 @@ The following authorizations are required to manage each User, Group, Role, Auth
 | Authorization type                 | Resource type                                                     | Resource ID                                                                     | Permission                                  |
 | :--------------------------------- | :---------------------------------------------------------------- | :------------------------------------------------------------------------------ | :------------------------------------------ |
 | Create/Read/Update/Delete resource | One of `User`, `Group`, `Authorization`, `Mapping Rule`, `Tenant` | ID of the resource or `*` (for access to all resources and to create resources) | Any of `CREATE`, `READ`, `UPDATE`, `DELETE` |
+
+## Optional authorizations
+
+The following optional authorizations can also be defined:
+
+| Authorization type      | Resource type | Resource ID                        | Permission |
+| :---------------------- | :------------ | :--------------------------------- | :--------- |
+| View audit log entries. | `AUDIT_LOG`   | `ADMIN` or `*` for all categories. | `READ`     |

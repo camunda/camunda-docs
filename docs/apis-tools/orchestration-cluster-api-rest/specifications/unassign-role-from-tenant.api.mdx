@@ -1,7 +1,7 @@
 ---
 id: unassign-role-from-tenant
 title: "Unassign a role from a tenant"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "<MarkerStronglyConsistentExtension />"
 sidebar_label: "Unassign a role from a tenant"
 hide_title: true
 hide_table_of_contents: true
@@ -21,6 +21,7 @@ import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
 import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
 
 <Heading
   as={"h1"}
@@ -34,19 +35,15 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+<MarkerStronglyConsistentExtension />
 
 Unassigns a role from a specified tenant.
 Users, Clients or Groups, that have the role assigned, will no longer have access to the
 tenant's data - unless they are assigned directly to the tenant.
 
-<Heading
-  id={"request"}
-  as={"h2"}
-  className={"openapi-tabs__heading"}
-  children={"Request"}
-></Heading>
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
 
 <ParamsDetails
   parameters={[

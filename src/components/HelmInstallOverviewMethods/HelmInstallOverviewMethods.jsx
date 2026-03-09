@@ -29,8 +29,8 @@ const HelmInstallOverviewMethods = () => {
       title: "Full Cluster",
       icon: UserOpsIcon,
       description:
-        "Deploys Orchestration Cluster, Connectors, Management Identity, Console, and Optimize.",
-      link: "/self-managed/deployment/helm/install/quick-install/#full-cluster",
+        "Deploys all components including Optimize, Web Modeler, Console, and Identity with OIDC authentication. Follow the kind tutorial for a local setup.",
+      link: "/self-managed/deployment/helm/cloud-providers/kind/",
     },
   ];
 

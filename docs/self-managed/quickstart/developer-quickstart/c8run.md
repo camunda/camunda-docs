@@ -6,6 +6,8 @@ description: "A quickstart guide for developers to deploy and run Camunda 8 Self
 ---
 
 import {C8Run} from "@site/src/components/CamundaDistributions";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 :::note
 Camunda 8 Run provides a lightweight, self-managed environment for local development and prototyping. It is not intended for production use.
@@ -49,22 +51,63 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 1. Download the latest release of <C8Run/> for your operating system and architecture. Opening the `.tgz` file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
-3. Start Camunda 8 Run by running one of the following in your terminal:
+3. Start Camunda 8 Run by following the steps below, depending on your operating system.
 
-- On Mac and Linux:
-  - Run the helper script: `./start.sh`
-  - Or use the CLI command: `./c8run start`
-- On Windows:
-  - Use the CLI command: `.\c8run.exe start`
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
+Run the helper script:
+
+```bash
+./start.sh
+```
+
+Or use the CLI command:
+
+```bash
+./c8run start
+```
+
+</TabItem>
+<TabItem value="windows">
+
+Use the CLI command:
+
+```bash
+.\c8run.exe start
+```
+
+</TabItem>
+</Tabs>
 
 If startup is successful, a browser window for Operate will open automatically. Alternatively, you can access Operate at [http://localhost:8080/operate](http://localhost:8080/operate).
 
-To start Camunda 8 in Docker Compose using Camunda 8 Run you can use the following option. It is equivalent of running `docker compose up -d` :
+To start Camunda 8 in Docker Compose using Camunda 8 Run you can use the following option. It is equivalent of running `docker compose up -d`:
 
-- On Mac and Linux: `./start.sh --docker`
-- On Windows: `.\c8run.exe start --docker`
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
 
-When started with Docker, Operate will be available at [http://localhost:8088/operate](http://localhost:8088/operate).
+```bash
+./start.sh --docker
+```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe start --docker
+```
+
+</TabItem>
+</Tabs>
 
 :::note
 If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-run) to end the current processes, then run the start script again.
@@ -78,6 +121,7 @@ For more advanced or permanent configuration, modify the default `configuration/
 | Argument                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).                                                                                                                                                                                                                                                                                                 |
+| `--extra-driver <path>`    | Copies an external JDBC driver into `camunda-zeebe-<version>/lib` before startup. Use this when running against Oracle, MySQL, or other databases that require a driver that is not bundled with Camunda 8 Run. Repeat the flag to copy multiple jars.                                                                                                                                                                                 |
 | `--username <arg>`         | Configures the first user’s username as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                                       |
 | `--password <arg>`         | Configures the first user’s password as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                                       |
 | `--keystore <arg>`         | Configures the TLS certificate for HTTPS. If not specified, HTTP is used. For more information, see [enabling TLS](#enable-tls).                                                                                                                                                                                                                                                                                                       |
@@ -170,9 +214,177 @@ spring:
 Operate v2 has limited functionality in 8.9-alpha3 when running against H2. Full Operate support is planned for a later alpha. Tasklist and the v2 REST API have parity across supported secondary storage backends.
 :::
 
+#### External relational database options
+
+Use an external relational database for secondary storage (PostgreSQL, MariaDB, MySQL, Oracle, or Microsoft SQL Server).
+
+1. Set `camunda.data.secondary-storage` with the JDBC URL and credentials.
+2. Ensure the database is reachable before starting Camunda 8 Run.
+3. If you already run a database, reuse the same config and update the URL, host/port, and credentials.
+4. If a separate JDBC driver is required, add it with `--extra-driver` or drop the JAR into `camunda-zeebe-<version>/lib`.
+
+<Tabs
+groupId="secondary-storage-rdbms"
+defaultValue="postgresql"
+values={[
+{label: 'PostgreSQL', value: 'postgresql'},
+{label: 'MariaDB', value: 'mariadb'},
+{label: 'MySQL', value: 'mysql'},
+{label: 'Oracle', value: 'oracle'},
+{label: 'Microsoft SQL Server', value: 'mssql'},
+]}>
+<TabItem value="postgresql">
+
+**Secondary storage config**
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:postgresql://localhost:5432/camunda_secondary
+        username: camunda
+        password: camunda
+```
+
+**Start database (Docker)**
+
+```bash
+docker run -d --name camunda-postgres \
+  -e POSTGRES_USER=camunda \
+  -e POSTGRES_PASSWORD=camunda \
+  -e POSTGRES_DB=camunda_secondary \
+  -p 5432:5432 postgres:latest
+```
+
+</TabItem>
+<TabItem value="mariadb">
+
+**Secondary storage config**
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:mariadb://localhost:3306/camunda_secondary?serverTimezone=UTC
+        username: camunda
+        password: camunda
+```
+
+**Start database (Docker)**
+
+```bash
+docker run -d --name camunda-mariadb \
+  -e MARIADB_USER=camunda \
+  -e MARIADB_PASSWORD=camunda \
+  -e MARIADB_ROOT_PASSWORD=rootcamunda \
+  -e MARIADB_DATABASE=camunda_secondary \
+  -p 3306:3306 mariadb:11.4
+```
+
+:::note
+No extra driver is required; MariaDB ships with the distribution.
+:::
+
+</TabItem>
+<TabItem value="mysql">
+
+**Secondary storage config**
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:mysql://localhost:3307/camunda_secondary?serverTimezone=UTC
+        username: camunda
+        password: camunda
+```
+
+**Start database (Docker)**
+
+```bash
+docker run -d --name camunda-mysql \
+  -e MYSQL_ROOT_PASSWORD=rootcamunda \
+  -e MYSQL_USER=camunda \
+  -e MYSQL_PASSWORD=camunda \
+  -e MYSQL_DATABASE=camunda_secondary \
+  -p 3306:3306 mysql:8.4
+```
+
+:::note
+MySQL requires the official Connector/J driver. Copy the JAR into `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/mysql-connector.jar` to `./c8run start`.
+
+Ensure the JDBC URL uses the host port you expose (3306 in the example above).
+:::
+
+</TabItem>
+<TabItem value="oracle">
+
+**Secondary storage config**
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:oracle:thin:@//localhost:1521/FREEPDB1
+        username: camunda
+        password: camunda
+```
+
+**Start database (Docker)**
+
+```bash
+docker run -d --name camunda-oracle \
+  -p 1521:1521 \
+  -e ORACLE_PASSWORD=camunda \
+  -e APP_USER=camunda \
+  -e APP_USER_PASSWORD=camunda \
+  gvenzl/oracle-free:23-slim
+```
+
+:::note
+Download the Oracle JDBC driver (for example, `ojdbc11.jar`) and place it in `camunda-zeebe-<version>/lib` or pass `--extra-driver /path/to/ojdbc11.jar`.
+:::
+
+</TabItem>
+<TabItem value="mssql">
+
+**Secondary storage config**
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:sqlserver://localhost:1433;databaseName=camunda_secondary;encrypt=false
+        username: camunda
+        password: Camunda123!
+```
+
+**Start database (Docker)**
+
+```bash
+docker run -d --name camunda-mssql \
+  -e ACCEPT_EULA=Y \
+  -e MSSQL_SA_PASSWORD=Camunda123! \
+  -p 1433:1433 \
+  mcr.microsoft.com/mssql/server:2022-latest
+```
+
+</TabItem>
+</Tabs>
+
 #### Optional: Elasticsearch
 
-If you need indexing, search, or full Operate/Tasklist functionality, enable Elasticsearch. Elasticsearch is still bundled with Camunda 8 Run in 8.9-alpha3 and can be managed by Camunda 8 Run or provided as an external service.
+If you need indexing, search, or full Operate/Tasklist functionality, enable Elasticsearch. Elasticsearch is still bundled with Camunda 8 Run in 8.9 and can be managed by Camunda 8 Run or provided as an external service.
 
 To use Elasticsearch:
 
@@ -213,9 +425,26 @@ Operate can run against the default H2 store in 8.9-alpha3, but some user-facing
 
 Start Camunda 8 Run with the configuration:
 
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
 ```bash
 ./start.sh --config application.yaml
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe start --config application.yaml
+```
+
+</TabItem>
+</Tabs>
 
 Once enabled, API requests must include valid credentials. For example:
 
@@ -247,12 +476,26 @@ camunda:
 
 To shut down (non-Docker) Camunda 8 Run and end all running processes, run the following command from the `c8run` directory:
 
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
 ```bash
 ./shutdown.sh
-
-# Windows:
-# .\c8run.exe stop
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe stop
+```
+
+</TabItem>
+</Tabs>
 
 If you started Camunda 8 Run with Docker `./start.sh --docker`, run the following command instead:
 
@@ -427,5 +670,5 @@ The following advanced configuration options can be provided via environment var
 
 <!-- - Learn how to [configure a relational database](/self-managed/concepts/databases/relational-db/configuration.md). -->
 
-- Review [backup and restore for RDBMS](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+- Review [backup and restore for RDBMS](/self-managed/operational-guides/backup-restore/rdbms/backup.md).
 - Identify and resolve [common issues when starting, configuring, or using Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run-troubleshooting.md).

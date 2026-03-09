@@ -9,6 +9,8 @@ With **Diagram Converter**, you'll get an initial understanding of the migration
 
 In a second step, it can also convert these files from the Camunda 7 format to the Camunda 8 format. For example, it updates namespaces and renames XML properties, if needed.
 
+All BPMN elements supported by Camunda 8 can be transformed. For the full list see the [BPMN coverage page](../../../components/modeler/bpmn/bpmn-coverage.md).
+
 You can use the Diagram Converter in the following ways:
 
 - **Web Interface**: A wizard-like UI built with Java (Spring Boot) and React. Available versions:
@@ -37,6 +39,10 @@ Use the hosted Diagram Converter at [https://diagram-converter.camunda.io/](http
 
 Your models are not stored on this platform, and all processing happens in-memory. Your data is transmitted securely over HTTPS.
 
+:::note
+The hosted version has a limit on the number of files that can be processed in a single batch request. If you need to convert a larger number of files, use the [local web application](#local-web-application) or the [CLI](#use-the-cli).
+:::
+
 ### Local web application
 
 #### Prerequisites
@@ -57,7 +63,13 @@ Your models are not stored on this platform, and all processing happens in-memor
 To run the application on a different port, for example `8090`:
 
 ```shell
-java -Dserver.port=8090 -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar
+java -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar --server.port=8090
+```
+
+To increase the maximum number of files allowed per batch request (default is 100), configure `server.tomcat.max-part-count`:
+
+```shell
+java -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar --server.tomcat.max-part-count=200
 ```
 
 ### CLI installation

@@ -110,8 +110,6 @@ To listen to changes in Web Modeler, you currently need to implement a polling a
 Pagination is enforced for all listed `search` endpoints. Ensure you obtain all relevant pages.
 :::
 
-We work to replace this with a webhook or subscription approach. An alternate approach involves manually triggering synchronization or delegating synchronization triggers to other sources, such as the pipeline itself, creation of new branches, or pull/merge requests.
-
 Real-time synchronization isn't always what you need. Consider Web Modeler as a local repository, and update your remote repository only after files are committed and pushed. This aligns with the concept of [versions](/components/modeler/web-modeler/versions.md).
 
 #### Listening to version creation
@@ -147,8 +145,6 @@ You will receive a response similar to this, where the `fileId` indicates the fi
 ```
 
 To retrieve the content of this particular version, use the `GET /api/v1/versions/:id` endpoint. To obtain the latest edit state of the file, use the `GET /api/v1/files/:id` endpoint. This endpoint also provides the `projectId` necessary for the `POST /api/v1/projects/search` endpoint if you want to push the full project via the pipeline.
-
-Progress is underway to introduce webhook registration or event subscription for version creation monitoring.
 
 Combine these two approaches and listen to versions to sync files to your version control, create a pull/merge request, and trigger pipelines.
 

@@ -169,4 +169,16 @@ Release dates and information for previous Camunda 8 releases.
 
 :::info release information
 See the relevant Camunda docs version for previous releases (release announcements, release notes, and so on).
+## Release announcements
+
+Release announcements include:
+
+- Changes in supported environments (updates regarding OpenJDK, Spring Boot, Elasticsearch, Keycloak, Amazon OpenSearch, Docker tags, Helm chart versions, and so on).
+- Key changes (for example, deprecations and breaking changes).
+
+:::info
+
+- See [upgrade guides](/self-managed/upgrade/components/index.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
+- See [supported environments](/reference/supported-environments.md) for environments and technologies supported by Camunda 8.
+
 :::

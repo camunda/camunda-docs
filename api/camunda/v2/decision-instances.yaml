@@ -76,6 +76,90 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+  /decision-instances/{decisionInstanceKey}/deletion:
+    post:
+      tags:
+        - Decision instance
+      operationId: deleteDecisionInstance
+      summary: Delete decision instance
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Delete all associated decision evaluations based on provided key.
+      parameters:
+        - name: decisionInstanceKey
+          in: path
+          required: true
+          description: The key of the decision instance to delete.
+          schema:
+            type: string
+            format: string<DecisionInstanceKey>
+            example: "22517998136843567"
+            description: System-generated key for a deployed decision instance.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteDecisionInstanceRequest"
+      responses:
+        "204":
+          description: The decision instance is marked for deletion.
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: The decision instance is not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+        "503":
+          $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+  /decision-instances/deletion:
+    post:
+      tags:
+        - Decision instance
+      operationId: deleteDecisionInstancesBatchOperation
+      summary: Delete decision instances (batch)
+      description: |
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Delete multiple decision instances. This will delete the historic data from secondary storage.
+        This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "batch-operations.yaml#/components/schemas/DecisionInstanceDeletionBatchOperationRequest"
+      responses:
+        "200":
+          description: The batch operation request was created.
+          content:
+            application/json:
+              schema:
+                $ref: "batch-operations.yaml#/components/schemas/BatchOperationCreatedResult"
+        "400":
+          description: |
+            The decision instance batch operation failed. More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 components:
   schemas:
     DecisionInstanceSearchQuerySortRequest:
@@ -179,6 +263,16 @@ components:
           description: The key of the root decision definition.
           allOf:
             - $ref: "keys.yaml#/components/schemas/DecisionDefinitionKeyFilterProperty"
+        decisionRequirementsKey:
+          description: The key of the decision requirements definition.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/DecisionRequirementsKeyFilterProperty"
+    DeleteDecisionInstanceRequest:
+      type: object
+      nullable: true
+      properties:
+        operationReference:
+          $ref: "keys.yaml#/components/schemas/OperationReference"
     DecisionInstanceSearchQueryResult:
       type: object
       allOf:
@@ -235,6 +329,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The key of the process instance.
+        rootProcessInstanceKey:
+          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
         decisionDefinitionKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/DecisionDefinitionKey"

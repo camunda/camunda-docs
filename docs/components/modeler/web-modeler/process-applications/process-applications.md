@@ -47,7 +47,6 @@ You should be aware of the following limitations when working with process appli
 
 ### General limitations
 
-- You cannot create folders inside a process application folder.
 - Self-Managed does not support defining cluster stages, identifying clusters by tags, or cluster promotion.
 
 ### Deployment limitations

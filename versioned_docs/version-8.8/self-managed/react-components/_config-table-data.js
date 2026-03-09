@@ -584,7 +584,14 @@ export const configs = [
     types: ["Breaking change"],
     area: ["Data"],
   },
-
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.history.process-instance-enabled",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.history.processInstanceEnabled",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
   {
     name: "camunda.data.secondary-storage.opensearch.url",
     legacy: [
@@ -779,6 +786,14 @@ export const configs = [
     legacy: ["zeebe.broker.experimental.rocksdb.enableSstPartitioning"],
     types: ["Direct mapping"],
     area: ["Data"],
+  },
+
+  // Section: Expression
+  {
+    name: "camunda.expression.timeout",
+    legacy: ["zeebe.broker.experimental.engine.expression.timeout"],
+    types: ["Direct mapping"],
+    area: ["Expression"],
   },
 
   // System keys

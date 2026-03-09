@@ -84,7 +84,7 @@ To prevent unexpected variable results, avoid using Tasklist V1 and V2 APIs on t
 
 ### SaaS configuration
 
-In Camunda 8 SaaS, Tasklist V2 mode is enabled by default starting with version 8.8. The mode cannot be changed via Console UI for SaaS clusters.
+In Camunda 8 SaaS, Tasklist V2 mode is enabled by default in version 8.8 and later. You cannot change this setting in the Console UI for SaaS clusters. To revert to Tasklist V1 mode, contact [Camunda support](https://camunda.com/services/support/), who can update the cluster configuration for you.
 
 ### Self-Managed configuration
 

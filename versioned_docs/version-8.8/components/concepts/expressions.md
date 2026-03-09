@@ -38,6 +38,19 @@ An expression is written in **Friendly Enough Expression Language (FEEL)**. FEEL
 
 Camunda 8 integrates the [FEEL Scala](https://github.com/camunda/feel-scala) engine to evaluate FEEL expressions.
 
+## Evaluation timeout
+
+Use evaluation timeouts to prevent long-running FEEL expressions from blocking processing.
+
+Some FEEL expressions may take a long time to evaluate, especially in the following cases:
+
+- Expressions with exponential complexity, such as recursive operations without proper bounds
+- Expressions that process very large input data sets
+
+By default, expression evaluation times out after five seconds. You can [configure this timeout](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#expression).
+
+If an expression exceeds the timeout, evaluation is interrupted and an incident is raised for the affected process instance.
+
 ## Next steps
 
 Read more about FEEL expressions and how to use them on the following pages:

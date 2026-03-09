@@ -21,10 +21,10 @@ When successful, a new Operate window automatically opens.
 
 :::note
 If Camunda 8 Run fails to start, run the [shutdown script](/self-managed/quickstart/developer-quickstart/c8run.md#shut-down-camunda-8-run) to end the current processes, then run the start script again.
+:::
 
 :::note
 Starting with 8.9.0-alpha3, Camunda 8 Run starts with H2 as the default secondary storage. Elasticsearch is still bundled and supported but must be explicitly enabled in `c8run/configuration/application.yaml` if you want Camunda 8 Run to manage Elasticsearch.
-:::
 :::
 
 For more information and local configuration options, see the [Camunda 8 Run installation guide](/self-managed/quickstart/developer-quickstart/c8run.md).
