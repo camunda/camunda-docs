@@ -10,7 +10,8 @@ Use process instance deletion to permanently remove all data associated with a c
 Deletion is irreversible. You can restore deleted data only by restoring a backup of your cluster.
 :::
 
-Delete a process instance using the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instance.api.mdx).
+Delete a process instance using the [delete process instance endpoint](/apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instance.api.mdx),
+or multiple using the [delete process instances endpoint](/apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instances-batch-operation.api.mdx).
 
 :::note
 You can also delete a process instance in Operate. See the [Operate user guide](../operate/userguide/delete-finished-instances.md).

@@ -10,7 +10,8 @@ Use decision instance deletion to permanently remove all data associated with a 
 Deletion is irreversible. You can restore deleted data only by restoring a backup of your cluster.
 :::
 
-Delete a decision instance using the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/delete-decision-instance.api.mdx).
+Delete a decision instance using the [delete decision instance endpoint](/apis-tools/orchestration-cluster-api-rest/specifications/delete-decision-instance.api.mdx),
+or multiple using the [delete decision instances endpoint](/apis-tools/orchestration-cluster-api-rest/specifications/delete-decision-instances-batch-operation.api.mdx).
 
 ## Eventual consistency
 
