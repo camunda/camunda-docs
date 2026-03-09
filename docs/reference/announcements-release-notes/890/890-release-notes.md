@@ -780,3 +780,20 @@ This alpha release introduces support for H2 in Camunda 8 Run only. Operate and 
 Web Modeler now supports H2, MariaDB, and MySQL as relational database systems, aligning with the configurations supported by the Orchestration cluster.
 
 This enhancement ensures consistency across environments, simplifies setup for administrators, and improves integration for both SaaS and Self-Managed deployments.
+
+### Orchestration Cluster
+
+#### Unified Cache for RocksDB
+
+In Camunda 8.9, RocksDB state storage now uses a single instance of shared
+cache and write buffer per broker instead of per partition, controlled by a
+new RocksDB memory allocation strategy (`PARTITION`, `BROKER`, `FRACTION`). 
+See [resource planing](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md) documentation for details on the new 
+strategies and recommended settings.
+
+:::note
+In Camunda 8.10 the default memory allocation strategy will change from
+`PARTITION` to `FRACTION`, which can end up in a different amount of memory
+allocated to RocksDB, therefore we recommend testing the new strategy in 8.
+9 to prepare for the default change in 8.10, or alternatively explictly set the strategy to `PARTITION` to keep the same memory allocation as before.
+:::
