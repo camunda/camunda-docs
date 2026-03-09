@@ -71,6 +71,8 @@ Use the audit log to:
 
 This feature is available in Operate, Identity, Tasklist, and the [Camunda 8 REST API](/apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx).
 
+<p class="link-arrow">[Audit log](/components/audit-log/overview.md)</p>
+
 ### Camunda 8 Run
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
@@ -143,16 +145,6 @@ You can use new Helm values to choose between Ingress and Gateway per deployment
 
 <p class="link-arrow">[Configure the Helm chart with Gateway API](/self-managed/deployment/helm/configure/ingress/gateway-api-setup.md)</p>
 
-#### Helm 4 support
-
-<!-- https://github.com/camunda/product-hub/issues/3358 -->
-
-As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
-
-:::note
-Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
-:::
-
 #### Helm chart values templating
 
 <!-- https://github.com/camunda/product-hub/issues/3357 -->
@@ -163,6 +155,16 @@ The Helm chart now documents all values supporting Go template expressions, incl
 - This feature enables dynamic configuration for multi-environment deployments and integrations, such as Datadog APM.
 
 <p class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</p>
+
+#### Helm 4 support
+
+<!-- https://github.com/camunda/product-hub/issues/3358 -->
+
+As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
+
+:::note
+Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
+:::
 
 ### Global user task listeners
 
@@ -406,7 +408,9 @@ A new centralized, queryable audit log records all critical user and client oper
 - Teams can trace who performed each action and when, what was affected, and if the action was successful.
 - Audit entries are available via Orchestration Cluster APIs, and integrated into Operate, Tasklist, and Identity with built-in authorization controls.
 
-See [Audit log](#audit-log) for more information.
+:::note
+See the [Audit log](#audit-log) entry for more information.
+:::
 
 ### Process instance migration
 
