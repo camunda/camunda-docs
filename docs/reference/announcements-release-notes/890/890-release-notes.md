@@ -434,24 +434,6 @@ This lets you standardize on the Orchestration Cluster APIs and the recommended 
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
 
-#### Continuous backup and restore
-
-<!-- https://github.com/camunda/product-hub/issues/2723 -->
-<!-- https://github.com/camunda/product-hub/issues/3031 -->
-
-You can now back up and restore Camunda 8 when using RDBMS as secondary storage.
-
-- Independent backup control plans handle primary and secondary backups separately while ensuring they align when restored.
-- Disaster recovery is improved as you can recover Camunda instances with greater precision in data consistency.
-
-Additionally, the new restore API syntax now supports `--from` and `--to` timestamp flags, enabling automatic selection of a compatible backup range.
-
-- When no specific backup or timerange is specified, a restore is performed to the latest known position with no user interaction.
-- Ensures version compatibility across backups and offers an override via `--allow-version-mismatch`.
-- Reduces manual restore effort and enhances confidence in backup integrity, with reduced Recovery Time Objective (RTO).
-
-<p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
-
 #### Installation guide for RDBMS (Orchestration Cluster and Web Modeler)
 
 <!-- https://github.com/camunda/product-hub/issues/3135 -->
