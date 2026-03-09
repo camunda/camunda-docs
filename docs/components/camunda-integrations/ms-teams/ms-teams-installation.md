@@ -71,7 +71,9 @@ You can assign `offline_access` at the realm level (**Realm Roles** → `offline
 
 <TabItem value="entra">
 
-For Entra-based setups, offline/refresh token access is configured via the App Registration's API permissions in the Azure portal. Ensure the SPA App Registration has the `offline_access` permission granted under **API permissions** → **Microsoft Graph** → **Delegated permissions**.
+For Entra-based setups, offline/refresh token access is configured via the App Registration's API permissions in the Azure portal.
+
+You must ensure the SPA App Registration has the `offline_access` permission granted under **API permissions** → **Microsoft Graph** → **Delegated permissions**.
 
 </TabItem>
 
@@ -153,17 +155,15 @@ orchestration:
                   url: <your-app-integrations-url>/api/event/exporter/batch
 ```
 
-Replace `<your-app-integrations-url>` with the base URL of your App Integrations backend. The URL must point to the `/api/event/exporter/batch` endpoint (for example, `https://app-integrations.camunda.your-domain.com/api/event/exporter/batch`).
+- Replace `<your-app-integrations-url>` with the base URL of your App Integrations backend. The URL must point to the `/api/event/exporter/batch` endpoint (for example, `https://app-integrations.camunda.your-domain.com/api/event/exporter/batch`).
 
-:::note
-The `args.url` must include the full path `/api/event/exporter/batch`. This is the batch event ingestion endpoint of the App Integrations backend. The exporter will POST batches of process events to this endpoint.
-:::
+- The `args.url` must include the full path `/api/event/exporter/batch`. This is the batch event ingestion endpoint of the App Integrations backend. The exporter will POST batches of process events to this endpoint.
 
-The `existingSecret` references a Kubernetes Secret that contains the API key. Create this secret in your cluster before deploying:
+- The `existingSecret` references a Kubernetes Secret containing the API key. Create this secret in your cluster before deploying:
 
-```bash
-kubectl create secret generic app-integrations-secret --from-literal=apiKey=<your-exporter-api-key>
-```
+  ```bash
+  kubectl create secret generic app-integrations-secret --from-literal=apiKey=<your-exporter-api-key>
+  ```
 
 :::note
 The same API key must be set in the `exporter.apiKey` field of the App Integrations [configuration file](#step-4-create-the-configuration-file) so that the backend can authenticate with the exporter endpoint.
@@ -186,15 +186,15 @@ The `auth` block must be configured to match the identity provider used in your 
 
 Set `auth.kind` to `"keycloak"` for Keycloak-based Camunda Self-Managed installations.
 
-| Field                   | Required | Description                                                                              |
-| :---------------------- | :------- | :--------------------------------------------------------------------------------------- |
-| `auth.kind`             | Yes      | Set to `keycloak`.                                                                       |
-| `auth.issuer`           | Yes      | The Keycloak realm URL, e.g. `https://<your-camunda-host>/auth/realms/camunda-platform`. |
-| `auth.audience`         | Yes      | Typically `camunda-platform`.                                                            |
-| `auth.m2m.clientId`     | Yes      | M2M client ID from [Step 1](#step-1-create-applications-in-camunda-identity).            |
-| `auth.m2m.clientSecret` | Yes      | M2M client secret from [Step 1](#step-1-create-applications-in-camunda-identity).        |
-| `auth.spa.clientId`     | Yes      | SPA client ID from [Step 1](#step-1-create-applications-in-camunda-identity).            |
-| `auth.spa.clientSecret` | Yes      | SPA client secret from [Step 1](#step-1-create-applications-in-camunda-identity).        |
+| Field                   | Required | Description                                                                                      |
+| :---------------------- | :------- | :----------------------------------------------------------------------------------------------- |
+| `auth.kind`             | Yes      | Set to `keycloak`.                                                                               |
+| `auth.issuer`           | Yes      | The Keycloak realm URL. For example, `https://<your-camunda-host>/auth/realms/camunda-platform`. |
+| `auth.audience`         | Yes      | Typically `camunda-platform`.                                                                    |
+| `auth.m2m.clientId`     | Yes      | M2M client ID from [Step 1](#step-1-create-applications-in-camunda-identity).                    |
+| `auth.m2m.clientSecret` | Yes      | M2M client secret from [Step 1](#step-1-create-applications-in-camunda-identity).                |
+| `auth.spa.clientId`     | Yes      | SPA client ID from [Step 1](#step-1-create-applications-in-camunda-identity).                    |
+| `auth.spa.clientSecret` | Yes      | SPA client secret from [Step 1](#step-1-create-applications-in-camunda-identity).                |
 
 Example:
 
@@ -285,7 +285,12 @@ In your deployment, mount the secrets as environment variables on the container 
 
 ### Example configuration file
 
-Replace the placeholder values with your actual settings. Use the credentials from [Step 1](#step-1-create-applications-in-camunda-identity) and the Teams configuration from [Step 2](#step-2-set-up-the-microsoft-teams-app-cli). The `exporter.apiKey` must match the API key configured in the orchestration cluster Helm chart in [Step 3](#step-3-configure-the-app-integrations-exporter). For production deployments, replace sensitive values with environment variable references as described in [Secret management](#secret-management). See [Auth configuration](#auth-configuration) for the full `auth` block reference.
+Replace the placeholder values with your actual settings.
+
+- Use the credentials from [Step 1](#step-1-create-applications-in-camunda-identity) and the Teams configuration from [Step 2](#step-2-set-up-the-microsoft-teams-app-cli).
+- The `exporter.apiKey` must match the API key configured in the Orchestration Cluster Helm chart in [Step 3](#step-3-configure-the-app-integrations-exporter).
+- For production deployments, replace sensitive values with environment variable references as described in [Secret management](#secret-management).
+- See [Auth configuration](#auth-configuration) for the full `auth` block reference.
 
 ```yaml
 serverPort: 8080
@@ -351,8 +356,8 @@ subscriptions: {}
 :::note
 The `urls.tasklist` field supports two formats:
 
-- **Simple (legacy) format** — a plain URL string (e.g. `https://<your-camunda-host>/tasklist`). Deep links to tasks fall back to `{tasklist-url}/tasklist/{userTaskKey}`.
-- **Extended format** — an object with `base` and `task` fields. The `task` field is a URL template containing a `:userTaskKey` placeholder (e.g. `https://<your-camunda-host>/tasklist/tasks/:userTaskKey/view`). When the app generates deep links to tasks (for example, in Teams notification cards), it replaces `:userTaskKey` with the actual task key. This allows customizing the task URL pattern for environments where the default path doesn't match.
+- **Simple (legacy) format** — a plain URL string (for example, `https://<your-camunda-host>/tasklist`). Deep links to tasks fall back to `{tasklist-url}/tasklist/{userTaskKey}`.
+- **Extended format** — an object with `base` and `task` fields. The `task` field is a URL template containing a `:userTaskKey` placeholder (for example, `https://<your-camunda-host>/tasklist/tasks/:userTaskKey/view`). When the app generates deep links to tasks (for example, in Teams notification cards), it replaces `:userTaskKey` with the actual task key. This allows customization of the task URL pattern for environments where the default path does not match.
 
 :::
 
