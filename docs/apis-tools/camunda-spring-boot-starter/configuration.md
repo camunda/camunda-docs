@@ -832,8 +832,6 @@ camunda:
 
 Job workers can be configured to work on jobs from specific [tenants](#multi-tenancy) using either [specific tenant IDs](#filtering-by-provided-tenant-IDs) or the [assigned tenants in the engine](#filtering-by-assigned-tenants).
 
-For SaaS deployments, you always assign job workers to tenants through the UI or API. For self-managed deployments, use the TenantFilter setting to control how job workers are related to tenants. Using the Assigned setting, you manage job worker access to tenants through the API and UI like in SaaS. Using the Provided setting, you will define tenant access in the Job worker's configuration and restart the job worker for any changes to take effect.
-
 ##### Filtering by assigned tenants
 
 You can configure a job worker to use the tenants assigned to it in the engine, rather than providing explicit tenant IDs. Use the `tenantFilter` annotation property with `TenantFilter.ASSIGNED`:
