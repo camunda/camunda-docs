@@ -4,11 +4,6 @@ title: "Resource deletion"
 description: "Use resource deletion to remove process definitions and decision requirements graphs from Camunda."
 ---
 
-:::info
-Resource deletions are currently not reflected in secondary storage. As a result you still see the deleted resources in Operate and Tasklist.
-The resource does not actually exist. Starting an instance of the resource will yield an error.
-:::
-
 There are several reasons to delete resources from a cluster:
 
 1. **It frees up storage space**, as Zeebe no longer needs to keep track of this definition in its state.
@@ -76,12 +71,8 @@ Deletion is irreversible. You can restore deleted data only by restoring a backu
 
 Delete historic data for a process definition using the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx)
 and setting the `deleteHistory` flag to `true`.
-
-:::note
-
-- You can also delete a process definition with historic data using Operate. See the [Operate user guide](../operate/userguide/delete-resources.md#delete-process-definition).
-- You can also only delete process instance data instead of the full process definition. See the [process instance deletion guide](./process-instance-deletion.md).
-  :::
+You can also delete a process definition with historic data using Operate. See the [Operate user guide](../operate/userguide/delete-resources.md#delete-process-definition).
+If you only want to delete process instance data, please refer to [process instance deletion](./process-instance-deletion.md).
 
 #### Eventual consistency
 
@@ -113,12 +104,8 @@ Deletion is irreversible. You can restore deleted data only by restoring a backu
 
 Delete historic data for a decision definition using the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx)
 and setting the `deleteHistory` flag to `true`.
-
-:::note
-
-- You can also delete historic data for a decision definition in Operate. See the [Operate user guide](../operate/userguide/delete-resources.md#delete-decision-definition).
-- You can also only delete decision instance data instead of the full DRG. See the [decision instance deletion guide](./decision-instance-deletion.md).
-  :::
+You can also delete historic data for a decision definition in Operate. See the [Operate user guide](../operate/userguide/delete-resources.md#delete-decision-definition).
+If you only want to delete decision instance data, please refer to [decision instance deletion](./decision-instance-deletion.md).
 
 #### Eventual consistency
 
