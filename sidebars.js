@@ -1884,8 +1884,16 @@ module.exports = {
             id: "self-managed/operational-guides/backup-restore/backup-and-restore",
           },
           items: [
-            "self-managed/operational-guides/backup-restore/backup",
-            "self-managed/operational-guides/backup-restore/restore",
+            {
+              Elasticsearch: [
+                "self-managed/operational-guides/backup-restore/elasticsearch/es-backup",
+                "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
+              ],
+              "Relational databases": [
+                "self-managed/operational-guides/backup-restore/rdbms/rdbms-backup",
+                "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
+              ],
+            },
             {
               "Backup Management API": [
                 "self-managed/operational-guides/backup-restore/optimize-backup",
