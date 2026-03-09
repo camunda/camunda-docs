@@ -73,6 +73,16 @@ This feature is available in Operate, Identity, Tasklist, and the [Camunda 8 RES
 
 <p class="link-arrow">[Audit log](/components/audit-log/overview.md)</p>
 
+### BPMN Conditional Events
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects BPMN">BPMN</span></div>
+
+Camunda 8 now supports BPMN Conditional Events, allowing users to start, continue, or interrupt process execution dynamically based on evaluated conditions.
+
+This enhancement provides first-class support for Conditional Start, Boundary, and Intermediate Catch Events, making process automation more expressive and migration from Camunda 7 smoother.
+
+<p class="link-arrow">[Conditional Events](/components/modeler/bpmn/conditional-events/conditional-events.md)</p>
+
 ### Camunda 8 Run
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
