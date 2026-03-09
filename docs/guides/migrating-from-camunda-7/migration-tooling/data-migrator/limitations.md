@@ -237,6 +237,10 @@ The History Data Migrator supports migration of Camunda Forms, but with the foll
 - Unsupported form bindings:
   - Expression-based bindings (for example, `${formKey}`)
 
+### Jobs
+
+The History Data Migrator migrates only jobs of type [asynchronous continuation](https://docs.camunda.org/manual/7.24/user-guide/process-engine/transactions-in-processes/#configure-asynchronous-continuations).
+
 ### Incidents
 
 The History Data Migrator supports migration of DMN entities, but with the following limitations:
