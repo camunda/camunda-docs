@@ -40,18 +40,18 @@ To enter modification mode:
 
 The UI will change when you enter modification mode, including a blue banner at the top and two buttons for applying or discarding modifications at the bottom.
 
-## Cancel all running tokens on a flow node
+## Cancel all running tokens on an element
 
-To cancel all running tokens on a flow node, take the following steps:
+To cancel all running tokens on an element, take the following steps:
 
 1. Select the flow node you want to cancel all the running tokens on.
 2. Click **Cancel instance**.
 
 View the pending modification reflected in the **Instance History** panel.
 
-## Add a new token to a flow node
+## Add a new token to an element
 
-To add a new token to a flow node, take the following steps:
+To add a new token to an element, take the following steps:
 
 1. Select the flow node you want to add the new token to.
 2. Click **Add**.
@@ -88,7 +88,7 @@ During modification mode it is not possible to edit existing variables in existi
 
 ## View summary of pending modifications
 
-To display the pending modifications, click **Apply Modifications** in the footer. A modal will be displayed where all modifications can be seen.
+To display the pending modifications, click **Review Modifications** in the footer. A modal will be displayed where all modifications can be seen.
 
 Within this modal, you can:
 
@@ -107,5 +107,5 @@ If you click the **Apply** button from the summary modal as described [here](#vi
 
 ## Next steps
 
-- [Monitor the operation status](./monitor-operation-status.md).
+- [Learn how to audit process instance operations](./audit-operations.md).
 - [Learn how to move a batch of process instances](./process-instance-batch-modification.md)

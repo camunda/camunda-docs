@@ -1,9 +1,12 @@
 ---
 id: runtime
-title: Runtime migration
-sidebar_label: Runtime migration
+title: Runtime
+sidebar_label: Runtime
 description: "Migrate running Camunda 7 process instances to Camunda 8 while preserving state."
 ---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 Migrate currently running process instances.
 
@@ -104,6 +107,13 @@ When a process instance is skipped:
 
 ## Usage examples
 
+<Tabs groupId="os" defaultValue="maclinux" values={[
+{ label: 'Mac OS + Linux', value: 'maclinux' },
+{ label: 'Windows', value: 'windows' }
+]}>
+
+<TabItem value="maclinux">
+
 ```bash
 # Run runtime migration
 ./start.sh --runtime
@@ -114,6 +124,25 @@ When a process instance is skipped:
 # Retry skipped process instances
 ./start.sh --runtime --retry-skipped
 ```
+
+</TabItem>
+
+<TabItem value="windows">
+
+```bash
+# Run runtime migration
+start.bat --runtime
+
+# List all skipped process instances
+start.bat --runtime --list-skipped
+
+# Retry skipped process instances
+start.bat --runtime --retry-skipped
+```
+
+</TabItem>
+
+</Tabs>
 
 ## Job type configuration
 

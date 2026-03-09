@@ -13,6 +13,12 @@ This page provides:
 - **[Quick example](#example-usage)**: Minimal YAML to get started.
 - Links to detailed guides for specific tasks.
 
+Related guides:
+
+- [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
+- [Install with RDBMS as secondary storage](/self-managed/deployment/helm/install/helm-with-rdbms.md)
+- [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
+
 ## Prerequisites
 
 Provide a supported relational database that is reachable by the Camunda components.
@@ -91,6 +97,10 @@ Store the database password in a Kubernetes secret and reference it. For testing
 | ------------------------------------------------------------------------------ | ----------------- | ------- | ------------------------------------------ |
 | `orchestration.data.secondaryStorage.rdbms.history.connectionPool.idleTimeout` | ISO-8601 duration | `""`    | Maximum time a connection can remain idle. |
 | `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maxLifetime` | ISO-8601 duration | `""`    | Maximum lifetime of a JDBC connection.     |
+
+### Other parameters
+
+RDBMS supports other configuration options that can be configured in the helm chart `values.yaml` via [extraConfiguration](/self-managed/deployment/helm/configure/application-configs.md). See [RDBMS options](/self-managed/concepts/databases/relational-db/configuration.md).
 
 ### Example usage
 
