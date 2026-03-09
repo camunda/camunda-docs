@@ -246,6 +246,10 @@ The separate `webapp` component has been removed and its functionality is now co
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
 
+:::caution Bug: process instance distribution
+A [critical bug in 8.9-alpha5](https://github.com/camunda/camunda/issues/47955) causes uneven distribution of newly created process instances amongst partitions, with partition 1 being heavily favoured. As a result, clusters cannot handle as high a throughput as normal. This bug is fixed in the 8.9.0 release.
+:::
+
 #### Application profile consolidation
 
 <!-- https://github.com/camunda/product-hub/issues/2859 -->
