@@ -235,7 +235,11 @@ The business ID is available as a property on the process instance. You can use 
 
 ### Uniqueness control
 
-With uniqueness control, you can ensure that only one active process instance exists for a given business ID within the same process definition. This prevents duplicate processing of the same business case.
+With uniqueness control, you can ensure that only one active process instance exists for a given business ID within the same process definition. This prevents duplicate processing of the same business case. 
+
+:::note No historical checks
+Uniqueness control is only checked against active process instances. Once a process instance is no longer active (completed or terminated), you can use its business ID to create a new process instance.
+:::
 
 Uniqueness is checked against **active root process instances**. A root process instance is one that wasn't created by a call activity. In other words, it's the top-level instance in a process hierarchy. Child process instances created via call activities don't count toward the uniqueness check, even though they inherit the parent's business ID.
 
