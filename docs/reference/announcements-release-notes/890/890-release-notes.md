@@ -389,6 +389,8 @@ You can now configure scheduled backup intervals and retention directly in the O
 - Supports setting duration schedules, manual ad‑hoc backups, API‑based updates, metrics, and audit logs.
 - Backwards compatible with existing backup commands.
 
+<p class="link-arrow">[Scheduled backup (RDBMS)](/self-managed/operational-guides/backup-restore/rdbms/backup.md#scheduled-backup)</p>
+
 #### Update cluster variables
 
 <!-- https://github.com/camunda/product-hub/issues/3349 -->
