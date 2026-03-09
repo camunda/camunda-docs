@@ -78,8 +78,10 @@ Delete historic data for a process definition using the [Orchestration Cluster A
 and setting the `deleteHistory` flag to `true`.
 
 :::note
-You can also delete a process definition with historic data using Operate. See the [Operate user guide](../operate/userguide/delete-resources.md#delete-process-definition).
-:::
+
+- You can also delete a process definition with historic data using Operate. See the [Operate user guide](../operate/userguide/delete-resources.md#delete-process-definition).
+- You can also only delete process instance data instead of the full process definition. See the [process instance deletion guide](./process-instance-deletion.md).
+  :::
 
 #### Eventual consistency
 
@@ -113,8 +115,10 @@ Delete historic data for a decision definition using the [Orchestration Cluster 
 and setting the `deleteHistory` flag to `true`.
 
 :::note
-You can also delete historic data for a decision definition in Operate. See the [Operate user guide](../operate/userguide/delete-resources.md#delete-decision-definition).
-:::
+
+- You can also delete historic data for a decision definition in Operate. See the [Operate user guide](../operate/userguide/delete-resources.md#delete-decision-definition).
+- You can also only delete decision instance data instead of the full DRG. See the [decision instance deletion guide](./decision-instance-deletion.md).
+  :::
 
 #### Eventual consistency
 
