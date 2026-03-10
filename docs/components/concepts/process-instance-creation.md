@@ -235,7 +235,7 @@ The business ID is available as a property on the process instance. You can use 
 
 ### Uniqueness control
 
-With uniqueness control, you can ensure that only one active process instance exists for a given business ID within the same process definition. This prevents duplicate processing of the same business case. 
+With uniqueness control, you can ensure that only one active process instance exists for a given business ID within the same process definition. This prevents duplicate processing of the same business case.
 
 :::note No historical checks
 Uniqueness control is only checked against active process instances. Once a process instance is no longer active (completed or terminated), you can use its business ID to create a new process instance.
@@ -261,14 +261,12 @@ In a multi-tenant environment, uniqueness is enforced **per tenant**. The same b
 
 ### Process instance migration
 
-When a process instance with a business ID is [migrated](/components/concepts/process-instance-migration.md) to a different process definition, the business ID is preserved and carried over to the target process definition. The business ID remains immutable; it cannot be changed or removed as part of the migration.
+When a process instance with a business ID is [migrated](/components/concepts/process-instance-migration.md) to a different process definition, the business ID is preserved and carried over to the **target** process definition. The business ID remains immutable; it cannot be changed or removed as part of the migration. After migration, the **source** process definition is no longer associated with the business ID.
 
-During migration, the business ID's association with the process definition is updated; it moves from the source process definition to the target process definition.
+Migration intentionally bypasses [uniqueness control](#uniqueness-control) checks. Uniqueness control is a creation-time guard; it does not apply to migration, which is a deliberate operator action on existing instances with accountability provided by the audit log. As a result:
 
-When [uniqueness control](#uniqueness-control) is enabled, this has two consequences:
-
-- After migration, a new process instance with the same business ID can be created for the **source** process definition, since the migrated instance is no longer associated with it.
-- Migration is **rejected** if the target process definition already has an active root process instance with the same business ID. This prevents duplicates in the target definition.
+- Migration is never rejected due to a business ID conflict at the target process definition. The target definition may end up with more than one active root process instance with the same business ID.
+- When uniqueness control is enabled, a new process instance with the same business ID can be created for the **source** process definition, since it is no longer associated with the migrated instance.
 
 ### Limitations
 
