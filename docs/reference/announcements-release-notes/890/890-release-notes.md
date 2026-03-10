@@ -172,6 +172,8 @@ The Helm chart now documents all values supporting Go template expressions, incl
 
 As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
 
+<p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
+
 :::note
 Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
 :::
@@ -450,7 +452,7 @@ This lets you standardize on the Orchestration Cluster APIs and the recommended 
 
 A new installation guide covers how you can configure Camunda 8 with relational databases across the Orchestration Cluster and Web Modeler. The guide covers database provisioning, connections and authentication including Aurora IAM, JDBC driver handling, optional schema management with SQL or Liquibase, and backup and restore considerations so teams can deploy faster with fewer errors and aligned best practices.
 
-<p class="link-arrow">[End-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md)</p>
+<p class="link-arrow">[RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md)</p>
 
 #### Manual installation supports RDBMS secondary storage
 
@@ -479,7 +481,8 @@ New RDBMS production installation guides for Camunda 8 are available:
 Orchestration Clusters can run with RDBMS as the sole secondary data store (for straightforward environments) or in combination with Optimize (which requires Elasticsearch or OpenSearch for analytics use cases). Administrators can:
 
 - Deploy a simple stack using only RDBMS if analytics are not required.
-- Add Optimize with Elasticsearch/OpenSearch for teams that require reporting and analytics. Process data ingestion and storage responsibilities remain strictly separated between orchestration and analytics.
+- Add Optimize with Elasticsearch/OpenSearch for teams that require reporting and analytics.
+- Rely on strict separation of process data ingestion and storage responsibilities between orchestration and analytics.
 
 ## 8.9.0-alpha4
 
