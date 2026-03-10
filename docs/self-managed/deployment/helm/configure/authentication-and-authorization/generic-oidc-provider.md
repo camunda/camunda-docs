@@ -121,12 +121,12 @@ For detailed instructions on obtaining and decoding tokens to identify these cla
 
 Camunda components request OIDC scopes when authenticating users. The default scopes vary by component:
 
-| Scope            | Description                         | Management Identity, Optimize, Web Modeler, Console | Orchestration Cluster (Operate, Tasklist) |
-| ---------------- | ----------------------------------- | --------------------------------------------------- | ----------------------------------------- |
-| `openid`         | Required for OIDC authentication.   | ✔                                                   | ✔                                         |
-| `profile`        | Access to user profile information. | ✔                                                   | ✔                                         |
-| `email`          | Access to user email address.       | ✔                                                   |                                           |
-| `offline_access` | Enables refresh token issuance.     | ✔                                                   |                                           |
+| Scope            | Description                         | Management Identity, Optimize, Web Modeler, Console | Orchestration Cluster applications (Identity, Operate, Tasklist) |
+| ---------------- | ----------------------------------- | --------------------------------------------------- | ---------------------------------------------------------------- |
+| `openid`         | Required for OIDC authentication.   | ✔                                                   | ✔                                                                |
+| `profile`        | Access to user profile information. | ✔                                                   | ✔                                                                |
+| `email`          | Access to user email address.       | ✔                                                   |                                                                  |
+| `offline_access` | Enables refresh token issuance.     | ✔                                                   |                                                                  |
 
 :::info
 If your provider supports the `offline_access` scope, components will receive refresh tokens. This allows sessions to remain active longer without requiring users to re-authenticate.
@@ -261,7 +261,7 @@ The `initialClaimName` and `initialClaimValue` parameters are used only during t
 
 ### Configure Orchestration Cluster
 
-Add configuration for the Orchestration Cluster (Zeebe, Operate, Tasklist):
+Add configuration for the Orchestration Cluster (Zeebe, Operate, Tasklist, Identity):
 
 ```yaml
 orchestration:

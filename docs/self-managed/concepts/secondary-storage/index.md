@@ -48,7 +48,7 @@ The following diagram shows how secondary storage fits into the Camunda data flo
 
 1. The Zeebe broker executes workflow instances and stores state in primary storage.
 1. The exporter, part of Zeebe, streams workflow and task data to secondary storage.
-1. Applications such as Operate, Tasklist, and the REST API read data from secondary storage.
+1. Orchestration Cluster applications and APIs (for example, Operate, Tasklist, Identity, and the Orchestration Cluster REST API) read data from secondary storage.
 
 ## Choosing a secondary storage backend
 

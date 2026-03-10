@@ -139,7 +139,7 @@ Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by 
    - **Zeebe Gateway (HTTP):** [http://localhost:8080](http://localhost:8080) - Zeebe REST API
 
    :::note
-   In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration component and share the same endpoint (port 8080).
+   In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration Cluster and share the same endpoint (port 8080).
    :::
 
 ## Full Cluster

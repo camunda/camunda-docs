@@ -10,12 +10,12 @@ import TabItem from "@theme/TabItem";
 Use **no secondary storage** mode to run Zeebe clusters with only the process engine and its primary storage layer.
 
 :::warning
-Disabling secondary storage removes key Camunda 8 capabilities, including Operate, Tasklist, and search-based REST endpoints. This mode is suitable only for lightweight development, testing, or specialized technical use cases.
+Disabling secondary storage removes key Orchestration Cluster capabilities, including Operate, Tasklist, Identity, and search-based REST endpoints. This mode is suitable only for lightweight development, testing, or specialized technical use cases.
 :::
 
 ## About this mode
 
-Typically, you should use secondary storage in nearly all production environments to enable monitoring, analytics, querying, and human-task management through Operate, Tasklist, and other applications.
+Typically, you should use secondary storage in nearly all production environments to enable monitoring, analytics, querying, and human-task management through Orchestration Cluster applications.
 
 You should **only** disable/run without secondary storage in limited scenarios, such as lightweight development environments, specialized technical use cases, or resource-constrained deployments.
 
@@ -139,8 +139,8 @@ For example:
 Using this mode significantly reduces Camunda’s capabilities:
 
 | Limitation                      | Impact                                                         |
-| :------------------------------ | :------------------------------------------------------------- |
-| No visual monitoring            | Operate and Tasklist are unavailable.                          |
+| ------------------------------- | -------------------------------------------------------------- |
+| No visual monitoring            | Operate, Tasklist, and the Identity UI are unavailable.        |
 | No historical data or analytics | Optimize, dashboards, and audit records cannot be accessed.    |
 | Limited API access              | Most search and query endpoints return `403 Forbidden`.        |
 | Reduced observability           | Built-in metrics and secondary storage exporters are disabled. |
