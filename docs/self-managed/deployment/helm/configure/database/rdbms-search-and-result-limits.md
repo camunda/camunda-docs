@@ -35,10 +35,9 @@ When the actual result set exceeds the cap, the `hasMoreTotalItems` boolean fiel
 
 The result count cap is configurable per deployment:
 
-| Parameter                                                                                    | Type    | Default | Description                                                                                              |
-| -------------------------------------------------------------------------------------------- | ------- | ------- | -------------------------------------------------------------------------------------------------------- |
-| `camunda.data.secondary-storage.rdbms.query.max-total-hits`                                  | integer | `10000` | Maximum number of results to count. Set higher to count larger result sets (performance cost increases). |
-| `orchestration.data.secondaryStorage.rdbms.query.maxTotalHits` (legacy chart value mappings) | integer | `10000` | Legacy direct Helm value path used in earlier chart versions.                                            |
+| Parameter                                                   | Type    | Default | Description                                                                                              |
+| ----------------------------------------------------------- | ------- | ------- | -------------------------------------------------------------------------------------------------------- |
+| `camunda.data.secondary-storage.rdbms.query.max-total-hits` | integer | `10000` | Maximum number of results to count. Set higher to count larger result sets (performance cost increases). |
 
 Current chart style (embedded `application.yml`):
 
@@ -48,18 +47,6 @@ orchestration:
     - file: application.yml
       content: |
         camunda.data.secondary-storage.rdbms.query.max-total-hits: 10000
-```
-
-Legacy direct Helm value path:
-
-```yaml
-orchestration:
-  data:
-    secondaryStorage:
-      type: rdbms
-      rdbms:
-        query:
-          maxTotalHits: 10000
 ```
 
 :::warning

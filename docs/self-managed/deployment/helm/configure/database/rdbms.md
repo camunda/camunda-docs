@@ -55,14 +55,16 @@ Store the database password in a Kubernetes secret and reference it. For testing
 
 ### Connection pool and performance tuning
 
-| Parameter                                                                            | Type              | Default | Description                                    |
-| ------------------------------------------------------------------------------------ | ----------------- | ------- | ---------------------------------------------- |
-| `orchestration.data.secondaryStorage.rdbms.flushInterval`                            | ISO-8601 duration | `""`    | How frequently the exporter flushes events.    |
-| `orchestration.data.secondaryStorage.rdbms.queueSize`                                | integer           | `1000`  | Exporter queue size. Larger = more buffering.  |
-| `orchestration.data.secondaryStorage.rdbms.queueMemoryLimit`                         | integer           | `20`    | Memory limit (MB) for the exporter queue.      |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maximumPoolSize`   | integer           | `""`    | Maximum JDBC connections. Default: auto-tuned. |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.minimumIdle`       | integer           | `""`    | Minimum idle connections. Default: auto-tuned. |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.connectionTimeout` | ISO-8601 duration | `""`    | Timeout for acquiring a connection.            |
+Most tuning options are configured as application properties via [extraConfiguration](/self-managed/deployment/helm/configure/application-configs.md) (embedded `application.yml`).
+
+| Parameter                                                                 | Type              | Default | Description                                   |
+| ------------------------------------------------------------------------- | ----------------- | ------- | --------------------------------------------- |
+| `orchestration.data.secondaryStorage.rdbms.flushInterval`                 | ISO-8601 duration | `""`    | How frequently the exporter flushes events.   |
+| `orchestration.data.secondaryStorage.rdbms.queueSize`                     | integer           | `1000`  | Exporter queue size. Larger = more buffering. |
+| `camunda.data.secondary-storage.rdbms.queue-memory-limit`                 | integer           | `20`    | Memory limit (MB) for the exporter queue.     |
+| `camunda.data.secondary-storage.rdbms.connection-pool.maximum-pool-size`  | integer           | `10`    | Maximum JDBC connections.                     |
+| `camunda.data.secondary-storage.rdbms.connection-pool.minimum-idle`       | integer           | `10`    | Minimum idle connections.                     |
+| `camunda.data.secondary-storage.rdbms.connection-pool.connection-timeout` | integer           | `30000` | Timeout (ms) for acquiring a connection.      |
 
 ### Search APIs and result limits
 
