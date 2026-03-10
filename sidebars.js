@@ -768,7 +768,6 @@ module.exports = {
               ],
             },
             "components/operate/userguide/process-instance-migration",
-            "components/operate/userguide/monitor-batch-operations",
             "components/operate/userguide/audit-operations",
           ],
         },
