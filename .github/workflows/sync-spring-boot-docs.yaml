@@ -1,0 +1,101 @@
+name: Sync Spring Boot Docs
+
+on:
+  schedule:
+    - cron: "0 16 * * 4" # Runs every Thursday at 4 PM UTC (1h after REST API sync)
+  workflow_dispatch:
+    inputs:
+      docs_version:
+        description: "Docs version to update (e.g. '8.8'). Leave empty for next (docs/)."
+        required: false
+        default: ""
+      dry_run:
+        description: "Dry run — generate docs but skip PR creation"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  sync-spring-boot-properties:
+    runs-on: ubuntu-latest
+    env:
+      DOCS_VERSION: ${{ github.event.inputs.docs_version || '' }}
+    steps:
+      - name: Resolve refs and paths
+        id: resolve
+        run: |
+          VERSION="${{ github.event.inputs.docs_version }}"
+          if [ -n "$VERSION" ]; then
+            echo "pr_branch=update-spring-boot-docs/${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
+          else
+            echo "pr_branch=update-spring-boot-docs" >> "$GITHUB_OUTPUT"
+            echo "version_label=next" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout camunda-docs
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "21"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download latest Spring Boot properties
+        run: npm run config-reference:download:camunda-spring-boot-starter ${{ inputs.docs_version}}
+
+      - name: Generate properties reference page
+        run: npm run config-reference:generate:camunda-spring-boot-starter ${{ inputs.docs_version}}
+
+      - name: Check for changes
+        id: check_changes
+        working-directory: docs
+        run: |
+          if git diff-index --quiet HEAD; then
+            echo "No changes to commit."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Changes detected."
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate token
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
+        id: generate_token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
+          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: "${{ steps.generate_token.outputs.token }}"
+          path: docs
+          title: "docs: update Spring Boot properties (${{ steps.resolve.outputs.version_label }})"
+          body: |
+            ## Description
+
+            Auto-generated PR from the [sync Spring Boot docs workflow](https://github.com/camunda/camunda-docs/tree/main/.github/workflows/sync-spring-boot-docs.yaml).
+
+            Updates the Spring Boot properties documentation.
+
+            ## When should this change go live?
+
+            - There is **no urgency** with this change and can be released at any time.
+
+          commit-message: "docs: update Spring Boot properties (${{ steps.resolve.outputs.version_label }})"
+          branch: ${{ steps.resolve.outputs.pr_branch }}
+          delete-branch: true
+          base: main
+          labels: deploy
