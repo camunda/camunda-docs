@@ -34,11 +34,11 @@ With the Camunda Spring Boot Starter, you can build:
 
 ## Version compatibility
 
-| Camunda Spring Boot Starter artifact                            | Camunda Spring Boot Starter version | JDK  | Bundled Spring Boot version | Compatible Spring Boot version(s) |
-| --------------------------------------------------------------- | ----------------------------------- | ---- | --------------------------- | --------------------------------- |
-| `camunda-spring-boot-starter`                                   | 8.8.x (< 8.8.15)                    | ≥ 17 | 3.5.x                       |                                   |
-| `camunda-spring-boot-starter` / `camunda-spring-boot-3-starter` | >=8.8.15                            | ≥ 17 | 3.5.x                       |                                   |
-| `camunda-spring-boot-4-starter`                                 | >=8.8.9                             | ≥ 17 | 4.0.x                       |                                   |
+| Camunda Spring Boot Starter artifact | Camunda Spring Boot Starter version | JDK  | Bundled Spring Boot version | Compatible Spring Boot version(s) |
+| ------------------------------------ | ----------------------------------- | ---- | --------------------------- | --------------------------------- |
+| `camunda-spring-boot-starter`        | 8.8.x                               | ≥ 17 | 3.5.x                       |                                   |
+| `camunda-spring-boot-3-starter`      | >=8.8.15                            | ≥ 17 | 3.5.x                       |                                   |
+| `camunda-spring-boot-4-starter`      | >=8.8.9                             | ≥ 17 | 4.0.x                       |                                   |
 
 ### Spring Boot 4.0 support
 
