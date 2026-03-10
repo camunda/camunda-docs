@@ -79,8 +79,8 @@ To execute your process diagram, click the **Deploy** button.
 
 To avoid incidents:
 
-- When deploying a process application the 'deployment' binding requires deploying diagram and forms together.
-- When deploying a single BPMN file if you are using 'latest' as binding type, so you need to deploy the forms beforehand.
+- When deploying a process application with the `deployment` binding, deploy the BPMN diagram and all linked forms together.
+- When deploying a single BPMN file with the `latest` binding type, deploy the linked forms beforehand.
 
 Then start a new process instance.
 
