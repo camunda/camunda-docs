@@ -757,8 +757,8 @@ module.exports = {
             "components/operate/userguide/basic-operate-navigation",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
-            "components/operate/userguide/manage-batch-operations",
             "components/operate/userguide/monitor-batch-operations",
+            "components/operate/userguide/manage-batch-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
             {
