@@ -447,3 +447,63 @@ List of active continuous backup ranges per partition.
 ```
 
 </details>
+
+## Sync runtime state
+
+Force a synchronization of the backup metadata stored in the blob store. This returns the updated state in the same format as the [GET state](#request-runtime-state) endpoint.
+
+### Request
+
+```
+POST actuator/backupRuntime/state/sync
+```
+
+<details>
+  <summary>Example request</summary>
+
+```shell
+curl --request POST 'http://localhost:9600/actuator/backupRuntime/state/sync'
+```
+
+</details>
+
+### Response
+
+| Code                      | Description                                                                                                 |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| 200 OK                    | The backup state was successfully synced and is returned in the response body.                              |
+| 500 Internal Server Error | An unexpected error occurred while processing the request. Refer to the returned error message for details. |
+| 502 Bad Gateway           | Zeebe encountered issues while communicating with other brokers.                                            |
+| 504 Gateway Timeout       | Zeebe was unable to process the request within the configured timeout.                                      |
+
+## Delete runtime state
+
+Clear the backup runtime state (checkpoint state and range tracking). Ranges will be rebuilt from the next backup onward.
+
+:::caution
+This clears all tracked checkpoint and range state. Ranges will be rebuilt from the next backup onward, but previously tracked ranges are lost. This can be useful when switching backup stores (for example, from S3 to GCS) or after all backups have been lost from the store.
+:::
+
+### Request
+
+```
+DELETE actuator/backupRuntime/state
+```
+
+<details>
+  <summary>Example request</summary>
+
+```shell
+curl --request DELETE 'http://localhost:9600/actuator/backupRuntime/state'
+```
+
+</details>
+
+### Response
+
+| Code                      | Description                                                                                                 |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| 204 No Content            | The runtime state has been cleared.                                                                         |
+| 500 Internal Server Error | An unexpected error occurred while processing the request. Refer to the returned error message for details. |
+| 502 Bad Gateway           | Zeebe encountered issues while communicating with other brokers.                                            |
+| 504 Gateway Timeout       | Zeebe was unable to process the request within the configured timeout.                                      |
