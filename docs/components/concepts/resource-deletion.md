@@ -24,8 +24,6 @@ Delete a process definition by sending a [delete resource command](/apis-tools/z
 
 You can delete any version of a process definition. After deletion, the definition no longer exists in Zeebe's state and new process instances cannot be created for it. Attempts to create a new instance result in a `NOT_FOUND` exception.
 
-Deleting a process definition also deletes historical data.
-
 Zeebe **never** reuses a process version. Even after deletion, Zeebe continues tracking version numbers. Deploying a new process with the same ID increments the version as usual.
 
 ### Deleting the latest version
