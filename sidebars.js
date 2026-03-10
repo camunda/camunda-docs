@@ -1617,6 +1617,7 @@ module.exports = {
                       RDBMS: [
                         "self-managed/deployment/helm/configure/database/rdbms",
                         "self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers",
+                        "self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits",
                         "self-managed/deployment/helm/configure/database/rdbms-schema-management",
                         "self-managed/deployment/helm/configure/database/rdbms-troubleshooting",
                         "self-managed/deployment/helm/configure/database/validate-rdbms",

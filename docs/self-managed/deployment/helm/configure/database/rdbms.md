@@ -53,6 +53,53 @@ Store the database password in a Kubernetes secret and reference it. For testing
 | `orchestration.data.secondaryStorage.rdbms.secret.existingSecretKey` | string | `""`    | Key within the secret storing the password.         |
 | `orchestration.data.secondaryStorage.rdbms.secret.inlineSecret`      | string | `""`    | Password value (testing only, not production-safe). |
 
+### Connection pool and performance tuning
+
+Most tuning options are configured as application properties via [extraConfiguration](/self-managed/deployment/helm/configure/application-configs.md) (embedded `application.yml`).
+
+| Parameter                                                                 | Type              | Default | Description                                   |
+| ------------------------------------------------------------------------- | ----------------- | ------- | --------------------------------------------- |
+| `orchestration.data.secondaryStorage.rdbms.flushInterval`                 | ISO-8601 duration | `""`    | How frequently the exporter flushes events.   |
+| `orchestration.data.secondaryStorage.rdbms.queueSize`                     | integer           | `1000`  | Exporter queue size. Larger = more buffering. |
+| `camunda.data.secondary-storage.rdbms.queue-memory-limit`                 | integer           | `20`    | Memory limit (MB) for the exporter queue.     |
+| `camunda.data.secondary-storage.rdbms.connection-pool.maximum-pool-size`  | integer           | `10`    | Maximum JDBC connections.                     |
+| `camunda.data.secondary-storage.rdbms.connection-pool.minimum-idle`       | integer           | `10`    | Minimum idle connections.                     |
+| `camunda.data.secondary-storage.rdbms.connection-pool.connection-timeout` | integer           | `30000` | Timeout (ms) for acquiring a connection.      |
+
+### Search APIs and result limits
+
+| Parameter                                                      | Type    | Default | Description                                                                                                                                                                                                                                                  |
+| -------------------------------------------------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `orchestration.data.secondaryStorage.rdbms.query.maxTotalHits` | integer | `10000` | Maximum result count cap for search APIs. Limits COUNT(\*) queries to improve performance. See [Search APIs and result limits](/self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits.md) for details and performance implications. |
+
+### Schema and table management
+
+| Parameter                                           | Type    | Default | Description                                |
+| --------------------------------------------------- | ------- | ------- | ------------------------------------------ |
+| `orchestration.data.secondaryStorage.rdbms.autoDDL` | boolean | `true`  | Enable Liquibase auto-schema creation.     |
+| `orchestration.data.secondaryStorage.rdbms.prefix`  | string  | `""`    | Optional table name prefix for all tables. |
+
+### History and data retention
+
+| Parameter                                                                                          | Type              | Default | Description                               |
+| -------------------------------------------------------------------------------------------------- | ----------------- | ------- | ----------------------------------------- |
+| `orchestration.data.secondaryStorage.rdbms.history.defaultHistoryTTL`                              | ISO-8601 duration | `""`    | Default TTL for historic process data.    |
+| `orchestration.data.secondaryStorage.rdbms.history.minHistoryCleanupInterval`                      | ISO-8601 duration | `""`    | Minimum interval for history cleanup.     |
+| `orchestration.data.secondaryStorage.rdbms.history.maxHistoryCleanupInterval`                      | ISO-8601 duration | `""`    | Maximum interval for history cleanup.     |
+| `orchestration.data.secondaryStorage.rdbms.history.historyCleanupBatchSize`                        | integer           | `1000`  | Batch size when deleting historic data.   |
+| `orchestration.data.secondaryStorage.rdbms.history.defaultBatchOperationHistoryTTL`                | ISO-8601 duration | `""`    | TTL for batch operation history.          |
+| `orchestration.data.secondaryStorage.rdbms.history.batchOperationCancelProcessInstanceHistoryTTL`  | ISO-8601 duration | `""`    | TTL for cancel-process-instance history.  |
+| `orchestration.data.secondaryStorage.rdbms.history.batchOperationMigrateProcessInstanceHistoryTTL` | ISO-8601 duration | `""`    | TTL for migrate-process-instance history. |
+| `orchestration.data.secondaryStorage.rdbms.history.batchOperationModifyProcessInstanceHistoryTTL`  | ISO-8601 duration | `""`    | TTL for modify-process-instance history.  |
+| `orchestration.data.secondaryStorage.rdbms.history.batchOperationResolveIncidentHistoryTTL`        | ISO-8601 duration | `""`    | TTL for resolve-incident history.         |
+
+### Connection pool lifecycle
+
+| Parameter                                                                      | Type              | Default | Description                                |
+| ------------------------------------------------------------------------------ | ----------------- | ------- | ------------------------------------------ |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.idleTimeout` | ISO-8601 duration | `""`    | Maximum time a connection can remain idle. |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maxLifetime` | ISO-8601 duration | `""`    | Maximum lifetime of a JDBC connection.     |
+
 ### Other parameters
 
 RDBMS supports other configuration options that can be configured in the helm chart `values.yaml` via [extraConfiguration](/self-managed/deployment/helm/configure/application-configs.md). See [RDBMS options](/self-managed/concepts/databases/relational-db/configuration.md).
@@ -90,6 +137,19 @@ Camunda bundles JDBC drivers for some databases. For others, you must supply a c
 - Which drivers are bundled
 - When to supply custom drivers
 - How to load drivers (init containers, custom images, volumes)
+
+## Search APIs and result limits
+
+RDBMS search APIs return a `totalResults` field capped at **10,000** to improve performance. However, actual query performance depends on filter selectivity and database optimization.
+
+Key concepts:
+
+- **Total count cap**: `totalResults` is capped at 10,000 by default (configurable via `maxTotalHits`).
+- **hasMoreTotalItems flag**: Indicates if results exist beyond the cap.
+- **Query optimization**: Apply selective filtering and pagination for better performance.
+- **Database tuning**: Configure PostgreSQL for write-heavy workloads.
+
+**See:** [Search APIs and result limits](/self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits.md) for configuration options, performance trade-offs, optimization best practices, and database-specific tuning.
 
 ## Schema creation and management
 
