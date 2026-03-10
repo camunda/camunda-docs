@@ -1,7 +1,7 @@
 ---
 id: index
 title: Install Camunda for production with Helm
-sidebar_label: Production install
+sidebar_label: Production install using managed databases
 description: Install Camunda 8 Self-Managed on Kubernetes using Helm chart with production-ready configuration.
 ---
 
