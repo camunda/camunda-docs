@@ -201,7 +201,7 @@ export default function ReleaseAnnouncementsFilter({
     // Types (only those present)
     TYPE_OPTIONS.forEach((o) => {
       if (availableTypes.has(o.value)) {
-        opts.push({ key: `type:${o.value}`, kind: 'type', value: o.value, label: `Type: ${o.label}` });
+        opts.push({ key: `type:${o.value}`, kind: 'type', value: o.value, label: o.label });
       }
     });
 
@@ -211,13 +211,13 @@ export default function ReleaseAnnouncementsFilter({
       { value: 'sm' as const, label: 'Self-Managed' },
     ] as const).forEach((d) => {
       if (availableDeployments.has(d.value)) {
-        opts.push({ key: `deployment:${d.value}`, kind: 'deployment', value: d.value, label: `Deployment: ${d.label}` });
+        opts.push({ key: `deployment:${d.value}`, kind: 'deployment', value: d.value, label: d.label });
       }
     });
 
     // Areas
     availableAreas.forEach((a) => {
-      opts.push({ key: `area:${a}`, kind: 'area', value: a, label: `Area: ${a}` });
+      opts.push({ key: `area:${a}`, kind: 'area', value: a, label: a });
     });
 
     return opts;
@@ -496,6 +496,15 @@ export default function ReleaseAnnouncementsFilter({
       });
 
       // Inject H2 headings + rows, sorted A→Z by area name
+      const TYPE_ORDER: Record<string, number> = {
+        announcement: 0,
+        feature: 1,
+        'breaking-change': 2,
+        deprecated: 3,
+        change: 4,
+        update: 5,
+      };
+
       Array.from(areaMap.keys())
         .sort((a, b) => a.localeCompare(b))
         .forEach((area) => {
@@ -504,7 +513,15 @@ export default function ReleaseAnnouncementsFilter({
           h2.setAttribute(INJECTED_AREA_HEADING_ATTR, 'true');
           h2.className = styles.areaGroupHeading;
           container.appendChild(h2);
-          areaMap.get(area)!.forEach((row) => container.appendChild(row));
+          areaMap.get(area)!
+            .sort((a, b) => {
+              const aType = (a.getAttribute('data-type') ?? '').trim();
+              const bType = (b.getAttribute('data-type') ?? '').trim();
+              const aOrder = TYPE_ORDER[aType] ?? 99;
+              const bOrder = TYPE_ORDER[bType] ?? 99;
+              return aOrder - bOrder;
+            })
+            .forEach((row) => container.appendChild(row));
         });
 
       // Rows with no area appended at the end without a heading
@@ -526,6 +543,37 @@ export default function ReleaseAnnouncementsFilter({
       el.hidden = true;
       el.setAttribute('data-filter-hidden', 'true');
     });
+
+    // For area/deployment filters, sort visible rows by type
+    if (masterFilter.kind === 'area' || masterFilter.kind === 'deployment') {
+      const TYPE_ORDER: Record<string, number> = {
+        announcement: 0,
+        feature: 1,
+        'breaking-change': 2,
+        deprecated: 3,
+        change: 4,
+        update: 5,
+      };
+
+      const visibleRows = rows.filter((row) => !row.hidden);
+      const sorted = [...visibleRows].sort((a, b) => {
+        const aType = (a.getAttribute('data-type') ?? '').trim();
+        const bType = (b.getAttribute('data-type') ?? '').trim();
+        return (TYPE_ORDER[aType] ?? 99) - (TYPE_ORDER[bType] ?? 99);
+      });
+
+      const orderChanged = sorted.some((row, idx) => row !== visibleRows[idx]);
+      if (orderChanged) {
+        const parent = sorted[0]?.parentElement;
+        if (parent) {
+          const firstVisibleRow = visibleRows[0];
+          sorted.forEach((row) => {
+            row.setAttribute('data-reordered', 'true');
+            parent.insertBefore(row, firstVisibleRow);
+          });
+        }
+      }
+    }
   }, [masterFilter, children]);
 
   return (
