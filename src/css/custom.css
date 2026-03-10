@@ -852,6 +852,30 @@ h3 .badge:nth-of-type(1) {
   text-align: center;
   line-height: 1.5;
 }
+.badge--feature {
+  background-color: var(--ifm-color-success);
+  color: #ffffff;
+  width: 110px;
+  min-width: 110px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5;
+}
+.badge--update {
+  background-color: #007e89;
+  color: #ffffff;
+  width: 110px;
+  min-width: 110px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5;
+}
 .release .badge--long,
 .release .badge--medium {
   margin-left: 0;
