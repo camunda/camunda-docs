@@ -482,7 +482,7 @@ Orchestration Clusters can run with RDBMS as the sole secondary data store (for 
 
 - Deploy a simple stack using only RDBMS if analytics are not required.
 - Add Optimize with Elasticsearch/OpenSearch for teams that require reporting and analytics.
-- Process data ingestion and storage responsibilities remain strictly separated between orchestration and analytics.
+- Rely on strict separation of process data ingestion and storage responsibilities between orchestration and analytics.
 
 ## 8.9.0-alpha4
 
