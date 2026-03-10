@@ -978,6 +978,8 @@ public class MyRandomBean {
 }
 ```
 
+### Selecting resources to deploy
+
 This annotation internally uses [the Spring resource loader](https://docs.spring.io/spring-framework/reference/core/resources.html) mechanism. This is powerful, and can also deploy multiple files at once, for example:
 
 ```java
@@ -990,6 +992,23 @@ Or, define wildcard patterns:
 @Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
 ```
 
+The used resource loader is automatically searching resources in the whole classpath, including dependency jars. If the deployment should only contain the resources that are packaged with the annotated class, you can use:
+
+```java
+@Deployment(resources = "classpath*:/bpmn/**/*.bpmn", ownJarOnly = true)
+```
+
+Or, you can set this globally:
+
+```yaml
+camunda:
+  client:
+    deployment:
+      own-jar-only: true
+```
+
+### Selecting the tenant to deploy to
+
 To adjust the tenant to deploy to, set the `tenantId` property of the `@Deployment` annotation:
 
 ```java
@@ -999,7 +1018,9 @@ public class MyRandomBean {
 }
 ```
 
-By default, the `tenantId` set to `camunda.client.tenant-id` is used.
+By default, the `tenantId` set to the `camunda.client.tenant-id`.
+
+### Disabling deployment
 
 To disable the deployment of annotations, you can set:
 
