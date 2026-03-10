@@ -83,6 +83,16 @@ This enhancement provides first-class support for conditional start, boundary, a
 
 <p class="link-arrow">[Conditional events](/components/modeler/bpmn/conditional-events/conditional-events.md)</p>
 
+### Business ID
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects process instances">Process instances</span></div>
+
+You can now create a process instance with a Business ID.
+
+- A Business ID is an immutable string identifier that associates a process instance with a meaningful business entity, such as an order ID, claim number, or customer reference.
+- Business ID uniqueness validation can be enabled at the cluster level to enforce idempotent process starts. If enabled, only one running root process instance per process definition can have the same Business ID. Attempts to start a duplicate instance are deterministically rejected.
+- Once visibility features are enabled in a future release, you will be able to trace process instances by Business ID retroactively at the process level.
+
 ### Camunda 8 Run
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
