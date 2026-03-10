@@ -48,7 +48,7 @@ This section explains how process instance deletion is handled internally to hel
 
 Deleting one or more process instances uses [batch operations](./batch-operations.md).
 
-The Zeebe engine queries secondary storage for process instances to delete. For each instance found, the engine writes a delete command to the log, which results in a deleted event.
+The Zeebe engine queries [secondary storage](/self-managed/concepts/secondary-storage/index.md) for process instances to delete. For each instance found, the engine writes a delete command to the log, which results in a deleted event.
 
 Exporters consume the deleted event and write a record to secondary storage to mark the process instance for deletion. An asynchronous scheduled task then deletes all data associated with each marked process instance.
 

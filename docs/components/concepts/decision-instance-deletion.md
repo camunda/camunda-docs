@@ -23,7 +23,7 @@ This section explains how decision instance deletion is handled internally to cl
 
 Deleting one or more decision instances uses [batch operations](./batch-operations.md).
 
-The Zeebe engine queries secondary storage for decision instances to delete. For each instance found, the engine writes a delete command to the log, which produces a deleted event.
+The Zeebe engine queries [secondary storage](/self-managed/concepts/secondary-storage/index.md) for decision instances to delete. For each instance found, the engine writes a delete command to the log, which produces a deleted event.
 
 Exporters consume the deleted event and write a record to secondary storage marking the decision instance for deletion. An asynchronous scheduled task then deletes all data associated with each marked decision instance.
 
