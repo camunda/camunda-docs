@@ -1,12 +1,15 @@
 ---
 id: helm-v4
-title: "Helm v4"
-sidebar_label: "Helm v4"
+title: "Helm 4"
+sidebar_label: "Helm 4"
+description: "Learn more about how Helm 4 behavior can affect Camunda Helm chart installs/upgrades and how to apply workarounds."
 ---
 
-Understand Helm v4 behavior that can affect Camunda Helm chart installs and upgrades, and apply workarounds where needed.
+How Helm 4 behavior can affect Camunda Helm chart installs/upgrades and how to apply workarounds.
 
-Learn more about Helm v4 changes in the [Helm documentation](https://helm.sh/docs/overview/#whats-new).
+:::info
+Learn more about Helm 4 changes in the [Helm documentation](https://helm.sh/docs/overview/#whats-new).
+:::
 
 ## Camunda Helm chart compatibility
 
@@ -17,18 +20,18 @@ Helm CLI compatibility depends on the Camunda Helm chart version.
 | Camunda 8.6 – Chart 11.x  | ✅          | ❌          |
 | Camunda 8.7 – Chart 12.x  | ✅          | ❌          |
 | Camunda 8.8 – Chart 13.x  | ✅          | ❌          |
-| Camunda 8.9 – Chart 14.x  | ✅          | ✅\*        |
-| Camunda 8.10 – Chart 15.x | ❌          | ✅\*        |
+| Camunda 8.9 – Chart 14.x  | ✅          | ✅ \*       |
+| Camunda 8.10 – Chart 15.x | ❌          | ✅ \*       |
 
 \* Helm CLI v4 may require workarounds when overriding environment variables.
 
-## Helm v4 breaking changes
+## Helm 4 breaking changes
 
 ### Server-side apply is enabled by default
 
 Server-side apply is a Kubernetes feature that improves how changes to Kubernetes resources are merged. When multiple clients update the same resource, server-side apply reduces the risk of unintentional overwrites.
 
-In Helm v4, server-side apply is enabled by default. This changes the behavior of `helm install` and `helm upgrade` compared to Helm v3.
+In Helm 4, server-side apply is enabled by default. This changes the behavior of `helm install` and `helm upgrade` compared to Helm 3.
 
 #### Problem
 
@@ -56,7 +59,7 @@ spec:
           value: "--- YOUR LICENSE KEY HERE ---"
 ```
 
-In Helm v4, this causes the install or upgrade to fail with an error similar to the following:
+In Helm 4, this causes the install or upgrade to fail with an error similar to the following:
 
 > Error: INSTALLATION FAILED: failed to create typed patch object (default/RELEASE-identity; apps/v1, Kind=Deployment):  
 > .spec.template.spec.containers[name="identity"].env: duplicate entries for key [name="CAMUNDA_LICENSE_KEY"]
@@ -99,8 +102,10 @@ docker run \
 
 ### Post-renderers are now plugins
 
-In Helm v4, post-renderers must be implemented as Helm plugins.
+In Helm 4, post-renderers must be implemented as Helm plugins.
 
 If you previously passed an executable path (for example, a shell script) using the `--post-renderer` option, you must migrate that logic into a Helm plugin.
 
-See the Helm documentation for a [tutorial on building a post-renderer plugin](https://helm.sh/docs/plugins/developer/tutorial-postrenderer-plugin/).
+:::info
+Refer to the Helm documentation for a [tutorial on building a post-renderer plugin](https://helm.sh/docs/plugins/developer/tutorial-postrenderer-plugin/).
+:::
