@@ -5,7 +5,7 @@ sidebar_label: "Helm 4"
 description: "Learn more about how Helm 4 behavior can affect Camunda Helm chart installs/upgrades and how to apply workarounds."
 ---
 
-How Helm 4 behavior can affect Camunda Helm chart installs/upgrades and how to apply workarounds.
+Learn how Helm 4 behavior can affect Camunda Helm chart installs and upgrades, and how to apply workarounds.
 
 :::info
 Learn more about Helm 4 changes in the [Helm documentation](https://helm.sh/docs/overview/#whats-new).
