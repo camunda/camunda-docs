@@ -42,6 +42,8 @@ const DEPLOYMENT_INLINE_BADGES_ATTR = 'data-deployment-inline-badges';
 const TYPE_INLINE_BADGE_ATTR = 'data-type-inline-badge';
 const INLINE_META_BADGES_ATTR = 'data-inline-meta-badges';
 const ROW_FILTER_HIDDEN_ATTR = 'data-row-filter-hidden';
+const INJECTED_AREA_HEADING_ATTR = 'data-injected-area-heading';
+const ORIGINAL_ORDER_ATTR = 'data-original-order';
 
 function getHeadingLevel(el: Element): number | null {
   const tag = el.tagName.toLowerCase();
@@ -424,6 +426,22 @@ export default function ReleaseAnnouncementsFilter({
     const container = listRef.current;
     if (!container) return;
 
+    // Remove any previously injected area group headings
+    container.querySelectorAll(`[${INJECTED_AREA_HEADING_ATTR}="true"]`).forEach((el) => el.remove());
+
+    // Restore original DOM row order if rows were grouped by area
+    const rowsWithOrigOrder = Array.from(
+      container.querySelectorAll<HTMLElement>(`.release-announcement-row[${ORIGINAL_ORDER_ATTR}]`)
+    );
+    if (rowsWithOrigOrder.length > 0) {
+      rowsWithOrigOrder
+        .sort((a, b) => parseInt(a.getAttribute(ORIGINAL_ORDER_ATTR)!, 10) - parseInt(b.getAttribute(ORIGINAL_ORDER_ATTR)!, 10))
+        .forEach((row) => {
+          row.removeAttribute(ORIGINAL_ORDER_ATTR);
+          container.appendChild(row);
+        });
+    }
+
     // Reset previously hidden sections/headings
     const previouslyHidden = container.querySelectorAll<HTMLElement>('[data-filter-hidden="true"]');
     previouslyHidden.forEach((el) => {
@@ -458,85 +476,56 @@ export default function ReleaseAnnouncementsFilter({
       }
     });
 
-    // When filtering by area, reorder visible rows so "feature" types appear first
-    if (masterFilter.kind === 'area') {
-      const visibleRows = rows.filter((row) => !row.hidden);
+    // "All" selected: group rows by area under injected H2 headings
+    if (masterFilter.kind === 'all') {
+      // Record original index on every row so we can restore order when switching away
+      rows.forEach((row, i) => row.setAttribute(ORIGINAL_ORDER_ATTR, String(i)));
 
-      // Define sort priority: feature first, then everything else in original order
-      const TYPE_SORT_PRIORITY: Record<string, number> = {
-        feature: 0,
-      };
-      const DEFAULT_PRIORITY = 1;
-
-      const sorted = [...visibleRows].sort((a, b) => {
-        const aType = (a.getAttribute('data-type') ?? '').trim();
-        const bType = (b.getAttribute('data-type') ?? '').trim();
-        const aPriority = TYPE_SORT_PRIORITY[aType] ?? DEFAULT_PRIORITY;
-        const bPriority = TYPE_SORT_PRIORITY[bType] ?? DEFAULT_PRIORITY;
-
-        if (aPriority !== bPriority) return aPriority - bPriority;
-
-        // Preserve original DOM order for rows with equal priority
-        return visibleRows.indexOf(a) - visibleRows.indexOf(b);
+      // Build area → rows map (primary group key = first area from data-area)
+      const areaMap = new Map<string, HTMLElement[]>();
+      const noAreaRows: HTMLElement[] = [];
+      rows.forEach((row) => {
+        const areas = getAreas(row.getAttribute('data-area') ?? '');
+        if (areas.length > 0) {
+          const primaryArea = areas[0];
+          if (!areaMap.has(primaryArea)) areaMap.set(primaryArea, []);
+          areaMap.get(primaryArea)!.push(row);
+        } else {
+          noAreaRows.push(row);
+        }
       });
 
-      // Only rearrange DOM if order actually changed
-      const orderChanged = sorted.some((row, idx) => row !== visibleRows[idx]);
-      if (orderChanged) {
-        // Find the parent and insert sorted rows in order
-        // Use the first visible row's parent as the reference container
-        const parent = sorted[0]?.parentElement;
-        if (parent) {
-          // Insert each sorted row before the next sibling of the last inserted row
-          // to maintain their position relative to other (non-row) elements
-          const firstVisibleRow = visibleRows[0];
-          sorted.forEach((row) => {
-            row.setAttribute('data-reordered', 'true');
-            parent.insertBefore(row, firstVisibleRow);
-          });
-        }
-      }
-    }
+      // Inject H2 headings + rows, sorted A→Z by area name
+      Array.from(areaMap.keys())
+        .sort((a, b) => a.localeCompare(b))
+        .forEach((area) => {
+          const h2 = document.createElement('h2');
+          h2.textContent = area;
+          h2.setAttribute(INJECTED_AREA_HEADING_ATTR, 'true');
+          h2.className = styles.areaGroupHeading;
+          container.appendChild(h2);
+          areaMap.get(area)!.forEach((row) => container.appendChild(row));
+        });
 
-    const directChildren = Array.from(container.querySelectorAll<HTMLElement>(':scope > *'));
+      // Rows with no area appended at the end without a heading
+      noAreaRows.forEach((row) => container.appendChild(row));
 
-    // If any filter other than "All" is applied, hide ALL H2 headings (but keep their content)
-    if (masterFilter.kind !== 'all') {
-      directChildren.forEach((el) => {
-        if (el.tagName === 'H2') {
+      // Hide any original MDX H2 headings now superseded by the injected ones
+      Array.from(container.querySelectorAll<HTMLElement>(':scope > h2')).forEach((el) => {
+        if (!el.hasAttribute(INJECTED_AREA_HEADING_ATTR)) {
           el.hidden = true;
           el.setAttribute('data-filter-hidden', 'true');
         }
       });
+
       return;
     }
 
-    // "All" selected: hide headings/sections with no visible rows
-    for (let i = 0; i < directChildren.length; i++) {
-      const headingEl = directChildren[i];
-      const level = getHeadingLevel(headingEl);
-      if (!level) continue;
-      if (headingEl.hidden) continue;
-
-      let end = directChildren.length;
-      for (let j = i + 1; j < directChildren.length; j++) {
-        const nextLevel = getHeadingLevel(directChildren[j]);
-        if (nextLevel !== null && nextLevel <= level) {
-          end = j;
-          break;
-        }
-      }
-
-      const section = directChildren.slice(i, end);
-      const hasVisible = sectionHasVisibleRows(section);
-
-      if (!hasVisible) {
-        section.forEach((node) => {
-          node.hidden = true;
-          node.setAttribute('data-filter-hidden', 'true');
-        });
-      }
-    }
+    // Non-all filter: hide all H2 headings
+    Array.from(container.querySelectorAll<HTMLElement>(':scope > h2')).forEach((el) => {
+      el.hidden = true;
+      el.setAttribute('data-filter-hidden', 'true');
+    });
   }, [masterFilter, children]);
 
   return (

@@ -214,9 +214,17 @@
   margin-top: 0;
 }
 
-/* Add top padding to the first H2 inside the filter content */
-.list :global(> h2:first-of-type) {
+/* Add top padding to the first non-injected H2 inside the filter content */
+.list :global(> h2:not([data-injected-area-heading]):first-of-type) {
   padding-top: 3rem;
+}
+
+.areaGroupHeading {
+  font-size: 1.25rem;
+  padding-top: 2rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--ifm-table-border-color);
 }
 
 /* 2-column layout: Type (left) | Content (right) */
@@ -227,6 +235,24 @@
   margin-bottom: 1rem;
   border-bottom: 1px solid var(--ifm-table-border-color);
   padding: 1rem 0.75rem 1rem 0;
+}
+
+/* Remove bottom border when the next sibling is an area group H2 */
+.wrapper
+  :global(
+    .release-announcement-row:not([hidden]):has(
+        + h2[data-injected-area-heading]
+      )
+  ) {
+  border-bottom: none;
+}
+
+/* Remove top padding from the first row directly after an injected area H2 */
+.wrapper
+  :global(
+    h2[data-injected-area-heading] + .release-announcement-row:not([hidden])
+  ) {
+  padding-top: 0;
 }
 
 /* Left column (Type badge) */
