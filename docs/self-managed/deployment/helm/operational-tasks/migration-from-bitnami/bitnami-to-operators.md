@@ -83,7 +83,8 @@ generic/kubernetes/
     │   ├── es-backup.job.yml        #   ES health verification
     │   └── es-restore.job.yml       #   ES reindex-from-remote restore
     └── manifests/
-        └── backup-pvc.yml           # Shared backup PVC
+        ├── backup-pvc.yml           # Shared backup PVC
+        └── eck-migration-patch.yml  # ES reindex.remote.whitelist patch
 ```
 
 ## Step 1: Configure the migration
@@ -96,18 +97,39 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ### Key configuration variables
 
-| Variable                     | Default         | Description                                                      |
-| ---------------------------- | --------------- | ---------------------------------------------------------------- |
-| `NAMESPACE`                  | `camunda`       | Kubernetes namespace of your Camunda installation                |
-| `CAMUNDA_RELEASE_NAME`       | `camunda`       | Helm release name                                                |
-| `CAMUNDA_HELM_CHART_VERSION` | (chart version) | Target Helm chart version for the upgrade                        |
-| `CAMUNDA_DOMAIN`             | (empty)         | Domain for Keycloak Ingress. Leave empty for port-forward setups |
-| `MIGRATE_IDENTITY`           | `true`          | Migrate Identity PostgreSQL database                             |
-| `MIGRATE_KEYCLOAK`           | `true`          | Migrate Keycloak and its PostgreSQL database                     |
-| `MIGRATE_WEBMODELER`         | `true`          | Migrate Web Modeler PostgreSQL database                          |
-| `MIGRATE_ELASTICSEARCH`      | `true`          | Migrate Elasticsearch data                                       |
+| Variable                     | Default         | Description                                                                    |
+| ---------------------------- | --------------- | ------------------------------------------------------------------------------ |
+| `NAMESPACE`                  | `camunda`       | Kubernetes namespace of your Camunda installation                              |
+| `CAMUNDA_RELEASE_NAME`       | `camunda`       | Helm release name                                                              |
+| `CAMUNDA_HELM_CHART_VERSION` | (chart version) | Target Helm chart version for the upgrade                                      |
+| `CAMUNDA_DOMAIN`             | (empty)         | Domain for Keycloak Ingress. Leave empty for port-forward setups               |
+| `IDENTITY_DB_NAME`           | `identity`      | Identity database name (must match the source installation)                    |
+| `IDENTITY_DB_USER`           | `identity`      | Identity database user (must match the source installation)                    |
+| `KEYCLOAK_DB_NAME`           | `keycloak`      | Keycloak database name (must match the source installation)                    |
+| `KEYCLOAK_DB_USER`           | `keycloak`      | Keycloak database user (must match the source installation)                    |
+| `WEBMODELER_DB_NAME`         | `webmodeler`    | Web Modeler database name (must match the source installation)                 |
+| `WEBMODELER_DB_USER`         | `webmodeler`    | Web Modeler database user (must match the source installation)                 |
+| `BACKUP_PVC`                 | `migration-backup-pvc` | PVC name for storing backup data                                        |
+| `BACKUP_STORAGE_SIZE`        | `50Gi`          | Backup PVC size (must fit all database dumps)                                  |
+| `MIGRATE_IDENTITY`           | `true`          | Migrate Identity PostgreSQL database                                           |
+| `MIGRATE_KEYCLOAK`           | `true`          | Migrate Keycloak and its PostgreSQL database                                   |
+| `MIGRATE_WEBMODELER`         | `true`          | Migrate Web Modeler PostgreSQL database                                        |
+| `MIGRATE_ELASTICSEARCH`      | `true`          | Migrate Elasticsearch data                                                     |
 
 Set any `MIGRATE_*` variable to `false` to skip a component — for example, if it is not deployed or already uses an external service.
+
+#### Operator-specific variables
+
+These variables control the operator deployments. Defaults work for most setups:
+
+| Variable                   | Default           | Description                                     |
+| -------------------------- | ----------------- | ----------------------------------------------- |
+| `CNPG_OPERATOR_NAMESPACE`  | `cnpg-system`     | Namespace for the CloudNativePG operator         |
+| `ECK_OPERATOR_NAMESPACE`   | `elastic-system`  | Namespace for the ECK operator                   |
+| `CNPG_IDENTITY_CLUSTER`    | `pg-identity`     | CNPG cluster name for Identity                   |
+| `CNPG_KEYCLOAK_CLUSTER`    | `pg-keycloak`     | CNPG cluster name for Keycloak                   |
+| `CNPG_WEBMODELER_CLUSTER`  | `pg-webmodeler`   | CNPG cluster name for Web Modeler                |
+| `ECK_CLUSTER_NAME`         | `elasticsearch`   | ECK Elasticsearch cluster name                   |
 
 Once configured, source the file:
 
@@ -156,6 +178,10 @@ Review the Keycloak Custom Resource in `operator-based/keycloak/`. Choose the ap
 - `keycloak-instance-no-domain.yml` — for port-forward setups
 
 Key settings: replicas, resource limits, hostname configuration.
+
+:::info Keycloak 26 hostname configuration
+The Keycloak CR uses the v2 hostname provider (Keycloak 25+). The `hostname` field must include the full URL with scheme and path — for example, `https://your-domain.example.com/auth`. This ensures that the OIDC issuer URL is consistent and includes the `/auth` path prefix used by `http-relative-path`. The v1 hostname provider (Keycloak 24 and earlier) is not compatible with these manifests.
+:::
 
 ## Step 3: Run the migration
 
@@ -381,6 +407,9 @@ kubectl get pvc -n ${NAMESPACE} | grep -E "postgresql|elasticsearch"
 5. **Monitor resource quotas** — CNPG and ECK clusters consume additional resources. Ensure your namespace quotas and node capacity allow for the temporary duplication.
 6. **Elasticsearch `reindex.remote.whitelist`** — The target ECK cluster must have `reindex.remote.whitelist` configured to allow pulling data from the source Bitnami Elasticsearch via the `_reindex` API. The migration scripts patch this automatically.
 7. **DNS TTL** — If using a domain for Keycloak, ensure DNS TTL is low before cutover to minimize propagation delay.
+8. **Keycloak OIDC impact** — Keycloak is the OIDC provider for all Camunda components (and possibly external applications). Migrating to the Keycloak Operator changes the underlying service. If you use a DNS CNAME for Keycloak, use a `hooks/post-phase-3.sh` hook to update the DNS target to the new Keycloak Operator service after cutover. If external applications share the same Keycloak realm, coordinate the DNS switch with their teams.
+
+   **Session impact:** The database migration preserves all persistent data (realms, users, clients, signing keys, refresh tokens). Since Keycloak 25+, user sessions are persisted in the database and survive the switch. In-flight authentication flows (login pages in progress) and pending action tokens (password reset links) are lost — users simply need to retry. This is inherent to the downtime window and has no lasting effect.
 
 :::warning IRSA / IAM-based authentication not supported
 The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or OpenSearch with IAM auth require a custom migration approach.
@@ -434,6 +463,14 @@ bash 1-deploy-targets.sh --status
 ```
 
 This shows which phases have been completed and their timestamps.
+
+### State tracking
+
+The scripts maintain migration state in `.state/migration.env` — a plain key-value file that records phase completion timestamps and deployment decisions. Each run appends to `.state/migration-YYYY-MM-DD.log`. The `.state/` directory is local and gitignored. To reset state and start over:
+
+```bash
+rm -rf .state/
+```
 
 ## Operational readiness
 
