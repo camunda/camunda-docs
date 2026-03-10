@@ -43,13 +43,12 @@ Some BPMN elements and configurations supported in Camunda 7 are not supported i
 
 #### Elements supported in Camunda 7 but not supported in Camunda 8
 
-Some BPMN elements available in Camunda 7 are not supported in Camunda 8. Processes using these elements cannot be migrated and must be adjusted before migration:
+Some BPMN elements available in Camunda 7 are not supported in Camunda 8. Before migration, compare the BPMN coverage of both platforms and adjust your models accordingly:
 
-- **Conditional events**: Conditional intermediate catch events, conditional boundary events, and conditional start events are not supported in Camunda 8. Remove or replace these with supported event types (such as message events or timer events) before migration.
-- **Cancel events**: Cancel boundary events and cancel end events (used with transactions) are not supported.
-- **Multiple and multiple parallel events**: All variants of multiple and multiple parallel events are not supported.
-- **Compensation event subprocess**: Event subprocesses with compensation start events are not supported. Note that compensation boundary events, throw events, and end events ARE supported.
-- **Other unsupported elements**: See the [BPMN coverage documentation](/components/modeler/bpmn/bpmn.md#bpmn-coverage/) for a complete list of unsupported elements.
+- [Camunda 7 BPMN coverage](https://docs.camunda.org/manual/7.24/reference/bpmn20/)
+- [Camunda 8 BPMN coverage](/components/modeler/bpmn/bpmn.md#bpmn-coverage)
+
+When converting diagrams, the Diagram Converter also helps identify unsupported elements interactively.
 
 #### Start events
 
