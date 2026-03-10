@@ -237,13 +237,11 @@ The business ID is available as a property on the process instance. You can use 
 
 With uniqueness control, you can ensure that only one active process instance exists for a given business ID within the same process definition. This prevents duplicate processing of the same business case.
 
-:::note No historical checks
-Uniqueness control is only checked against active process instances. Once a process instance is no longer active (completed or terminated), you can use its business ID to create a new process instance.
-:::
+Uniqueness is checked against **active root process instances**.
 
-Uniqueness is checked against **active root process instances**. A root process instance is one that wasn't created by a call activity. In other words, it's the top-level instance in a process hierarchy. Child process instances created via call activities don't count toward the uniqueness check, even though they inherit the parent's business ID.
-
-When uniqueness control is enabled, creating a process instance is rejected if a root process instance of the same process definition is already active with the same business ID. The rejection returns an `ALREADY_EXISTS` error (HTTP `409 Conflict`). Once the existing root process instance completes, a new instance with the same business ID can be created.
+- A root process instance is one that wasn't created by a call activity. In other words, it's the top-level instance in a process hierarchy. Child process instances created via call activities don't count toward the uniqueness check, even though they inherit the parent's business ID.
+- When uniqueness control is enabled, creating a root process instance is rejected if another **root** process instance of the same process definition is already active with the same business ID. The rejection returns an `ALREADY_EXISTS` error (HTTP `409 Conflict`).
+- Once a process instance is no longer active (completed or terminated), you can use its business ID to create a new process instance.
 
 :::note Retroactive enforcement
 Uniqueness control is **retroactive**. When you enable it, business IDs that were already assigned to active process instances _before_ the feature was turned on are taken into account. This means an existing active instance's business ID can block the creation of a new instance with the same business ID and process definition, even if the original instance was created while uniqueness control was disabled.
