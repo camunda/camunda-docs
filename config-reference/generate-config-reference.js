@@ -216,7 +216,11 @@ const preGenerateDocs = (config) => {
       property.defaultValue = "null";
     }
     if (property.description) {
-      property.description = property.description.replaceAll(/<p>/g, "\n\n");
+      property.description = property.description
+        .replaceAll(/<p>/g, "\n\n")
+        .replaceAll(/<code>/g, "`")
+        .replaceAll(/<\/code>/g, "`")
+        .replaceAll(/<br>/g, "\n");
     }
     property.env = property.name
       .toUpperCase()
