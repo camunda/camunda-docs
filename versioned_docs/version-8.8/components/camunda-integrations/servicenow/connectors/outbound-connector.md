@@ -1,6 +1,6 @@
 ---
 id: outbound-connector
-title: ServiceNow Outbound Connector
+title: ServiceNow outbound connector
 description: "Perform CRUD operations on any ServiceNow table directly from Camunda processes using the ServiceNow outbound connector."
 ---
 
