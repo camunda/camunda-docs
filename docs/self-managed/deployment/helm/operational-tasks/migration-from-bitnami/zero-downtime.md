@@ -529,15 +529,11 @@ No action required. Elasticsearch will be populated after cutover.
 
 ### Step 3: Helm upgrade (rolling restart)
 
-Perform the Helm upgrade to switch Camunda to the new backends. Because there is no freeze, pods are restarted in a rolling fashion:
+Perform the Helm upgrade to switch Camunda to the new backends. Because there is no freeze, pods are restarted in a rolling fashion.
 
-```bash
-# Build the helm values args (same as standard migration Phase 3 Step 5)
-# Use the migration script's helm upgrade or manually:
-bash 3-cutover.sh --skip-freeze --skip-backup --skip-restore --yes
-```
-
-If running manually without the migration scripts:
+:::warning Not compatible with the standard migration scripts
+The zero-downtime approach does **not** use `3-cutover.sh` — that script freezes the application, which defeats the purpose. Instead, run the Helm upgrade manually with the operator-based values:
+:::
 
 ```bash
 helm upgrade ${CAMUNDA_RELEASE_NAME} camunda/camunda-platform \
@@ -546,6 +542,8 @@ helm upgrade ${CAMUNDA_RELEASE_NAME} camunda/camunda-platform \
   -f operator-based-values.yaml \
   --wait --timeout 10m
 ```
+
+Build the values file by combining the operator-based Helm values files from the reference architecture (for example, `camunda-identity-values.yml`, `camunda-elastic-values.yml`, `camunda-keycloak-domain-values.yml`) to point Camunda at the new backends. Ensure Bitnami subcharts are disabled.
 
 :::info Rolling restart behavior
 The Helm upgrade triggers a rolling restart of Camunda pods. During this process:
