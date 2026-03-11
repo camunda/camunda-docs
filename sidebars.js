@@ -1320,6 +1320,7 @@ module.exports = {
             },
           ],
         },
+        require("./docs/apis-tools/c8ctl/sidebar-schema"),
         {
           type: "category",
           label: "Python SDK",
