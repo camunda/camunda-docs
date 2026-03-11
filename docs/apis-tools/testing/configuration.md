@@ -24,6 +24,11 @@ environment using Docker containers. This ensures consistent test results, simpl
 and allows integration with Camunda and other components without manual installation or complex dependencies.
 :::
 
+:::tip Shared runtime
+If you use the same runtime configuration for all test classes, then you can use a [shared runtime](#shared-runtime) to
+speed up the test execution.
+:::
+
 ### Prerequisites
 
 - A Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop on Mac and Windows.
@@ -148,6 +153,82 @@ public class MyProcessTest {
                     .withConnectorsEnv("env_1", "value_1")
                     // Set Connectors secrets
                     .withConnectorsSecret("secret_1", "value_1");
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+### Shared runtime
+
+By default, CPT creates a new runtime for each test class. You can change this behavior and use a shared Testcontainers
+runtime for all test classes to speed up the test execution. You can enable the shared runtime in the following way.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+camunda:
+  process-test:
+    # Switch from a managed to a shared runtime
+    runtime-mode: shared
+```
+
+All test classes using the shared runtime will use the same runtime configuration. You can't change the runtime
+configuration for individual test classes, such as enabling connectors or setting connector secrets. However, you can
+switch to a managed runtime for individual test classes and override the runtime configuration.
+
+```java
+@SpringBootTest(
+    properties = {
+          // Use a managed runtime for a different configuration
+          "camunda.process-test.runtime-mode=managed",
+          "camunda.process-test.connectors-enabled=true",
+    }
+)
+@CamundaSpringProcessTest
+public class MyProcessTest {
+    //
+}
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+# Switch from a managed to a shared runtime
+runtimeMode=shared
+```
+
+All test classes using the shared runtime will use the same runtime configuration. You can't change the runtime
+configuration for individual test classes, such as enabling connectors or setting connector secrets. However, you can
+switch to a managed runtime for individual test classes and override the runtime configuration.
+
+```java
+package com.example;
+
+import io.camunda.process.test.api.CamundaProcessTestExtension;
+import org.junit.jupiter.api.extension.RegisterExtension;
+
+// No annotation: @CamundaProcessTest
+public class MyProcessTest {
+
+    @RegisterExtension
+    private static final CamundaProcessTestExtension EXTENSION =
+            new CamundaProcessTestExtension()
+                    // Use a managed runtime for a different configuration
+                    .withRuntimeMode(CamundaProcessTestRuntimeMode.MANAGED)
+                    .withConnectorsEnabled(true);
 }
 ```
 

@@ -205,6 +205,11 @@ public class MyProcessTest {
 
 </Tabs>
 
+:::tip Shared runtime
+If you use the same runtime configuration for all test classes, then you can use
+a [shared runtime](configuration.md#shared-runtime) to speed up the test execution.
+:::
+
 ### Deploy resources
 
 You can deploy additional BPMN processes and other resources by adding the annotation `@TestDeployment` on the test
