@@ -296,7 +296,7 @@ we make it less bold compared to the search keyword */
   letter-spacing: -0.02em;
 }
 .markdown h2 {
-  margin-top: 2.5rem;
+  margin-top: 3rem;
   margin-bottom: 0.5rem;
   letter-spacing: -0.01em;
 }
@@ -1361,9 +1361,8 @@ h1.openapi__heading {
 }
 /* Main page headings */
 h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  border-bottom: 1px solid #dedede;
+  font-size: 1.6rem;
+  font-weight: 700;
   margin-bottom: 20px;
   padding-bottom: 10px;
 }
