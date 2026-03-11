@@ -7,6 +7,12 @@ description: "Deploy Camunda 8 on Kubernetes using Helm charts with an external 
 
 This guide walks you through deploying Camunda 8 using Helm charts with an external relational database (RDBMS) as secondary storage instead of Elasticsearch or OpenSearch.
 
+Related guides:
+
+- [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
+- [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md)
+- [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
+
 ## What changes when using RDBMS?
 
 In Camunda 8, secondary storage stores historical data and process state. By default, Elasticsearch or OpenSearch is used. With RDBMS, you replace that with a relational database:
@@ -104,17 +110,24 @@ orchestration:
         secret:
           existingSecret: camunda-db-secret
           existingSecretKey: db-password
-        # Optional: Tune for your workload
-        flushInterval: PT1S
-        queueSize: 5000
-        # Optional: Configure history retention
-        history:
-          defaultHistoryTTL: P30D
+  extraConfiguration:
+    - file: "flush-interval.yaml"
+      content: |
+        camunda:
+          data:
+            secondary-storage:
+              rdbms:
+                # Optional: Tune for your workload
+                flush-interval: PT1S # More frequent flushes
+                queue-size: 5000 # Larger queue for buffering
+                queue-memory-limit: 50 # Increase if needed
+                # Optional: Configure history retention
+                history:
+                  default-history-ttl: P30D
 
 # Disable default Elasticsearch subchart
 elasticsearch:
   enabled: false
-
 # If deploying Optimize, you still need Elasticsearch/OpenSearch
 # Uncomment below and configure as needed:
 # opensearch:
@@ -133,6 +146,10 @@ kubectl create secret generic camunda-db-secret \
 ### Step 6: Handle custom JDBC drivers (if required)
 
 If you're using Oracle, MySQL, or a database version not covered by bundled drivers, you must provide the JDBC driver.
+
+:::note
+For detailed information about JDBC driver strategies, security configurations, and validation, see [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md).
+:::
 
 **Option A: Init container (recommended for production)**
 
@@ -159,6 +176,8 @@ orchestration:
       volumeMounts:
         - name: jdbcdrivers
           mountPath: /driver-lib
+      securityContext:
+        runAsUser: 1001
 ```
 
 For other driver sources (e.g., private repositories), adjust the `wget` command or use a private container registry for pre-built images.
@@ -348,7 +367,6 @@ orchestration:
 
 optimize:
   enabled: true
-
 # Choose one secondary storage for Optimize:
 # opensearch:
 #   enabled: true

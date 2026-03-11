@@ -146,7 +146,7 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 
 ## Microsoft Teams app redirect for app store documentation link.
 
-RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=301,L]
+RewriteRule ^docs/ms-teams/?$ /docs/next/components/camunda-integrations/ms-teams/ [R=301,L]
 
 ## Redirect update-guide introduction to new components-upgrade introduction
 
@@ -1026,7 +1026,7 @@ RewriteRule ^docs/self-managed/platform-architecture/overview/?$ /docs/self-mana
 # remove tasklist API + Spring Zeebe tutorial
 RewriteRule ^docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/?$ /docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
 
-# remove unsupported versions
+# remove unmaintained versions
 RewriteRule ^docs/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]

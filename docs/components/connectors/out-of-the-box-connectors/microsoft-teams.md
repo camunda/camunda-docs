@@ -21,6 +21,7 @@ Use Camunda secrets to store credentials so you don't expose sensitive informati
 ## Create a Microsoft Teams connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
+import MicrosoftGraphAuth from './\_partials/\_microsoft-graph-auth.md'
 
 <ConnectorTask/>
 
@@ -36,54 +37,13 @@ upcoming sections.
 
 ## Authentication
 
-Choose among the available Microsoft Teams connectors according to your authentication requirements.
+Choose an authentication type according to your requirements.
 The Microsoft Teams connector uses the [Microsoft Graph API](https://learn.microsoft.com/en-us/graph/overview). Visit the [Microsoft Graph auth overview](https://learn.microsoft.com/en-us/graph/auth/) for more information on the Microsoft Graph API authentication.
 
-First, you must have a user account with Microsoft Teams with the necessary permissions. See more at
-in [Microsoft Teams overview](https://learn.microsoft.com/microsoftteams/teams-overview). If you don't have administration roles and permissions, ask your Microsoft Teams administrator to add required permissions to work with the **Microsoft Teams connector**.
+You must have a user account with Microsoft Teams with the necessary permissions. See more at
+[Microsoft Teams overview](https://learn.microsoft.com/microsoftteams/teams-overview). If you don't have administration roles and permissions, ask your Microsoft Teams administrator to add required permissions to work with the **Microsoft Teams connector**.
 
-Next, you will choose the type of connection.
-
-### Bearer Token type authentication
-
-For a **Bearer Token** type authentication, take the following steps:
-
-1. Click the **Bearer Token** connection type in the **Authentication** section.
-2. Set **Bearer Token** to `Bearer Token`.
-
-Visit [Microsoft Teams Access Token](https://learn.microsoft.com/azure/active-directory/develop/access-tokens) for more information.
-
-#### Options to obtain an access token
-
-- Via the Graph Explorer:
-
-  1.  Visit [developer.microsoft.com/graph/graph-explorer](https://developer.microsoft.com/graph/graph-explorer).
-  2.  Log in with your Microsoft account.
-  3.  Click the **Access Token** tab and copy the bearer token.
-
-- Register your app with the Microsoft identity platform and send a POST request to the `/token` identity platform endpoint to acquire an access token.
-  - [How to register your app](https://learn.microsoft.com/en-us/graph/auth-register-app-v2)
-  - [How to get access on behalf of a user](https://learn.microsoft.com/en-us/graph/auth-v2-user)
-  - [How to get access without a user](https://learn.microsoft.com/en-us/graph/auth-v2-service)
-
-### Refresh Token type authentication
-
-For a **Refresh Token** type authentication, take the following steps:
-
-1. Click the **Refresh token** connection type in the **Authentication** section.
-2. Set **Refresh token** to `Refresh Token`. Read more on [how to get a refresh token](https://learn.microsoft.com/en-us/graph/auth-v2-user).
-3. Set **Tenant ID** to `Tenant ID`. Your Microsoft Teams tenant ID is a unique identifier. Read more on [how to find a tenant ID](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant).
-4. Set the **Client ID** field: the application ID that the [Azure app registration portal](https://go.microsoft.com/fwlink/?linkid=2083908) assigned to your app.
-5. Set the **Secret ID** field: the client secret that you created in the app registration portal for your app.
-
-### Client credentials type authentication
-
-For a **Client credentials** type authentication, take the following steps:
-
-1. Click the **Client credentials** connection type in the **Authentication** section.
-2. Set **Tenant ID** to `Tenant ID`. Your Microsoft Teams tenant ID is a unique identifier. See more on [how to find a tenant ID](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant).
-3. Set the **Client ID** field: the application ID that the [Azure app registration portal](https://go.microsoft.com/fwlink/?linkid=2083908) assigned to your app.
-4. Set the **Secret ID** field: the client secret that you created in the app registration portal for your app.
+<MicrosoftGraphAuth />
 
 :::note
 With **Client credentials** type authentication, some methods of the **Microsoft Teams connector** may not be available. Find more details in the [chat methods table](#chat-methods) and [channel methods table](#channel-methods).
@@ -149,14 +109,14 @@ The **members** property must contain a list of members:
 #### Chat methods
 
 |        Method         | Use [protected APIs](https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview#teams-apis-that-require-rscs-permissions) | Available for [client credentials type authentication](#client-credentials-type-authentication) |                                            Link to method documentation with required permissions and return value                                             |
-| :-------------------: | :--------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|   Create a new chat   |                                       false                                        |                                              true                                               |          [https://learn.microsoft.com/en-us/graph/api/chat-post](https://learn.microsoft.com/en-us/graph/api/chat-post?view=graph-rest-1.0&tabs=http)          |
-|    Get chat by ID     |                                       false                                        |                                              true                                               |           [https://learn.microsoft.com/en-us/graph/api/chat-get](https://learn.microsoft.com/en-us/graph/api/chat-get?view=graph-rest-1.0&tabs=http)           |
-|      List chats       |                                       false                                        |                                              true                                               |          [https://learn.microsoft.com/en-us/graph/api/chat-list](https://learn.microsoft.com/en-us/graph/api/chat-list?view=graph-rest-1.0&tabs=http)          |
-|   List chat members   |                                       false                                        |                                              false                                              |  [https://learn.microsoft.com/en-us/graph/api/chat-list-members](https://learn.microsoft.com/en-us/graph/api/chat-list-members?view=graph-rest-1.0&tabs=http)  |
-| Send message in chat  |                                       false                                        |                                              false                                              | [https://learn.microsoft.com/en-us/graph/api/chat-post-messages](https://learn.microsoft.com/en-us/graph/api/chat-post-messages?view=graph-rest-1.0&tabs=http) |
-|  Get message in chat  |                                       false                                        |                                              true                                               |    [https://learn.microsoft.com/en-us/graph/api/chatmessage-get](https://learn.microsoft.com/en-us/graph/api/chatmessage-get?view=graph-rest-1.0&tabs=http)    |
-| List messages in chat |                                        true                                        |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/chat-list-messages](https://learn.microsoft.com/en-us/graph/api/chat-list-messages?view=graph-rest-1.0&tabs=http) |
+| :-------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|   Create a new chat   |                                                                  false                                                                  |                                              true                                               |          [https://learn.microsoft.com/en-us/graph/api/chat-post](https://learn.microsoft.com/en-us/graph/api/chat-post?view=graph-rest-1.0&tabs=http)          |
+|    Get chat by ID     |                                                                  false                                                                  |                                              true                                               |           [https://learn.microsoft.com/en-us/graph/api/chat-get](https://learn.microsoft.com/en-us/graph/api/chat-get?view=graph-rest-1.0&tabs=http)           |
+|      List chats       |                                                                  false                                                                  |                                              true                                               |          [https://learn.microsoft.com/en-us/graph/api/chat-list](https://learn.microsoft.com/en-us/graph/api/chat-list?view=graph-rest-1.0&tabs=http)          |
+|   List chat members   |                                                                  false                                                                  |                                              false                                              |  [https://learn.microsoft.com/en-us/graph/api/chat-list-members](https://learn.microsoft.com/en-us/graph/api/chat-list-members?view=graph-rest-1.0&tabs=http)  |
+| Send message in chat  |                                                                  false                                                                  |                                              false                                              | [https://learn.microsoft.com/en-us/graph/api/chat-post-messages](https://learn.microsoft.com/en-us/graph/api/chat-post-messages?view=graph-rest-1.0&tabs=http) |
+|  Get message in chat  |                                                                  false                                                                  |                                              true                                               |    [https://learn.microsoft.com/en-us/graph/api/chatmessage-get](https://learn.microsoft.com/en-us/graph/api/chatmessage-get?view=graph-rest-1.0&tabs=http)    |
+| List messages in chat |                                                                  true                                                                   |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/chat-list-messages](https://learn.microsoft.com/en-us/graph/api/chat-list-messages?view=graph-rest-1.0&tabs=http) |
 
 ### Channel conversation type
 
@@ -182,15 +142,15 @@ The **members** property must contain a list of members:
 #### Channel methods
 
 |         Method          | Use [protected APIs](https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview#teams-apis-that-require-rscs-permissions) | Available for [client credentials type authentication](#client-credentials-type-authentication) | Link to method documentation with required permissions and return value                                                                                                    |
-| :---------------------: | :--------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|     Create channel      |                                       false                                        |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/channel-post](https://learn.microsoft.com/en-us/graph/api/channel-post?view=graph-rest-1.0&tabs=http)                         |
-|       Get channel       |                                       false                                        |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/channel-get](https://learn.microsoft.com/en-us/graph/api/channel-get?view=graph-rest-1.0&tabs=http)                           |
-|      List channels      |                                       false                                        |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/channel-list](https://learn.microsoft.com/en-us/graph/api/channel-list?view=graph-rest-1.0&tabs=http)                         |
-| Send message to channel |                                       false                                        |                                              false                                              | [https://learn.microsoft.com/en-us/graph/api/channel-post-messages](https://learn.microsoft.com/en-us/graph/api/channel-post-messages?view=graph-rest-1.0&tabs=http)       |
-|   Get channel message   |                                        true                                        |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/chatmessage-get](https://learn.microsoft.com/en-us/graph/api/chatmessage-get?view=graph-rest-1.0&tabs=http)                   |
-|  List channel messages  |                                        true                                        |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/channel-list-messages](https://learn.microsoft.com/en-us/graph/api/channel-list-messages?view=graph-rest-1.0&tabs=http)       |
-|  List message replies   |                                        true                                        |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/chatmessage-list-replies](https://learn.microsoft.com/en-us/graph/api/chatmessage-list-replies?view=graph-rest-1.0&tabs=http) |
-|      List members       |                                       false                                        |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/channel-list-members](https://learn.microsoft.com/en-us/graph/api/channel-list-members?view=graph-rest-1.0&tabs=http)         |
+| :---------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     Create channel      |                                                                  false                                                                  |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/channel-post](https://learn.microsoft.com/en-us/graph/api/channel-post?view=graph-rest-1.0&tabs=http)                         |
+|       Get channel       |                                                                  false                                                                  |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/channel-get](https://learn.microsoft.com/en-us/graph/api/channel-get?view=graph-rest-1.0&tabs=http)                           |
+|      List channels      |                                                                  false                                                                  |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/channel-list](https://learn.microsoft.com/en-us/graph/api/channel-list?view=graph-rest-1.0&tabs=http)                         |
+| Send message to channel |                                                                  false                                                                  |                                              false                                              | [https://learn.microsoft.com/en-us/graph/api/channel-post-messages](https://learn.microsoft.com/en-us/graph/api/channel-post-messages?view=graph-rest-1.0&tabs=http)       |
+|   Get channel message   |                                                                  true                                                                   |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/chatmessage-get](https://learn.microsoft.com/en-us/graph/api/chatmessage-get?view=graph-rest-1.0&tabs=http)                   |
+|  List channel messages  |                                                                  true                                                                   |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/channel-list-messages](https://learn.microsoft.com/en-us/graph/api/channel-list-messages?view=graph-rest-1.0&tabs=http)       |
+|  List message replies   |                                                                  true                                                                   |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/chatmessage-list-replies](https://learn.microsoft.com/en-us/graph/api/chatmessage-list-replies?view=graph-rest-1.0&tabs=http) |
+|      List members       |                                                                  false                                                                  |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/channel-list-members](https://learn.microsoft.com/en-us/graph/api/channel-list-members?view=graph-rest-1.0&tabs=http)         |
 
 ## Microsoft Teams connector response
 

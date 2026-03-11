@@ -37,7 +37,7 @@ Before making any changes:
 
 Always take a full backup before upgrading.
 
-See [Back up Camunda](/self-managed/operational-guides/backup-restore/backup.md) for detailed steps.
+See [Back up Camunda](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for detailed steps.
 
 - **Patch upgrades**: A backup is recommended.
 - **Minor upgrades**: A backup is strongly recommended, as schema or configuration changes may be involved.
@@ -92,4 +92,4 @@ If your environment includes multiple manual Camunda installations (for example,
 
 Camunda does not support rolling back to a previous minor version.
 
-If you need to revert an upgrade, restore the latest backup using the [restore procedure](/self-managed/operational-guides/backup-restore/restore.md).
+If you need to revert an upgrade, restore the latest backup using the [restore procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md).

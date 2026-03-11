@@ -47,6 +47,14 @@ components:
           type: string
           description: Required when the expression references tenant-scoped cluster variables
           example: tenant_123
+        variables:
+          type: object
+          description: Optional variables for expression evaluation. These variables are only used for the current evaluation and do not persist beyond it.
+          example:
+            x: 10
+            "y": 20
+          additionalProperties: true
+          nullable: true
     ExpressionEvaluationResult:
       type: object
       required:
@@ -60,7 +68,6 @@ components:
           example: "=x + y"
         result:
           description: The result value. Its type can vary.
-          type: object
           example: 30
         warnings:
           type: array
