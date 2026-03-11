@@ -430,15 +430,15 @@ a {
 }
 [data-theme="dark"] p a:hover {
   text-decoration: underline;
-  text-decoration-color: #78a9ff;
+  text-decoration-color: #f3f3f3;
 }
 [data-theme="dark"] li a:hover {
   text-decoration: underline;
-  text-decoration-color: #78a9ff;
+  text-decoration-color: #f3f3f3;
 }
 [data-theme="dark"] td a:hover {
   text-decoration: underline;
-  text-decoration-color: #78a9ff;
+  text-decoration-color: #f3f3f3;
 }
 [data-theme="dark"] .alert a {
   text-decoration: underline;
@@ -1871,7 +1871,7 @@ h3.subheading {
 }
 
 [data-theme="dark"] .link-arrow::after {
-  background: url("/static/img/arrow-right-dark.png") no-repeat center / 12px
+  background: url("/static/img/arrow-right-white.png") no-repeat center / 12px
     12px;
 }
 
