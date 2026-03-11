@@ -9,7 +9,7 @@ mdx:
 
 # Configuration reference
 
-All `CAMUNDA_*` environment variables recognised by the SDK. These can also be passed as keys in the `configuration={...}` dict.
+All `CAMUNDA_*` environment variables recognized by the SDK. These can also be passed as keys in the `configuration={...}` dict.
 
 <!-- BEGIN_CONFIG_REFERENCE -->
 

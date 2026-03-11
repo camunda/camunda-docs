@@ -13,13 +13,13 @@ Back up your Camunda 8 Self-Managed components and cluster.
 
 ## About the backup process
 
-To create a backup you must complete the following [back up process](#back-up-process).
+To create a backup, complete the following [backup process](#back-up-process).
 
 You can also optionally [back up your Web Modeler data](#back-up-web-modeler-data).
 
 :::caution before you begin
 
-- To create a consistent backup, you **must** complete the backing in the outlined order.
+- To create a consistent backup, you **must** complete the steps in the order outlined below.
 - You must complete the [prerequisites](backup-and-restore.md#prerequisites) before creating a backup.
 
 :::
@@ -30,7 +30,7 @@ You can also optionally [back up your Web Modeler data](#back-up-web-modeler-dat
 
 :::note
 
-This will heavily depend on your setup, the following examples are based on examples given in the [Management API](backup-and-restore.md#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
+This depends heavily on your setup. The following examples are based on those given in the [Management API](backup-and-restore.md#management-api) section for Kubernetes using either active port-forwarding or an override of the local `curl` command.
 
 As noted in the [Management API](backup-and-restore.md#management-api) section, this API is typically not publicly exposed. Therefore, you will need to access it directly using any means available within your environment.
 
@@ -173,7 +173,7 @@ curl -XPOST "$OPTIMIZE_MANAGEMENT_API/actuator/backups" \
 
 ### 4. Wait for backup `x` of the web applications (Operate / Tasklist) to complete
 
-This step uses the the [web applications management backup API](/self-managed/operational-guides/backup-restore/webapps-backup.md).
+This step uses the [web applications management backup API](/self-managed/operational-guides/backup-restore/webapps-backup.md).
 
 ```bash
 curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory/$BACKUP_ID"

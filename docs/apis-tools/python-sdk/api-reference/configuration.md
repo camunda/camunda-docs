@@ -16,7 +16,7 @@ class Client(base_url, , raise_on_unexpected_status=False, cookies=NOTHING, head
 
 Bases: `object`
 
-A class for keeping track of data related to the API
+A class for keeping track of data related to the API.
 
 The following are accepted as keyword arguments and will be used to construct httpx Clients internally:
 
@@ -26,7 +26,7 @@ The following are accepted as keyword arguments and will be used to construct ht
 
 > `headers`: A dictionary of headers to be sent with every request
 
-> `timeout`: The maximum amount of a time a request can take. API functions will raise
+> `timeout`: The maximum amount of time a request can take. API functions will raise
 > httpx.TimeoutException if this is exceeded.
 
 > `verify_ssl`: Whether or not to verify the SSL certificate of the API server. This should be True in production,
@@ -160,7 +160,7 @@ class AuthenticatedClient(base_url, token, prefix='Bearer', auth_header_name='Au
 
 Bases: `object`
 
-A Client which has been authenticated for use on secured endpoints
+A client that has been authenticated for use on secured endpoints.
 
 The following are accepted as keyword arguments and will be used to construct httpx Clients internally:
 
@@ -170,7 +170,7 @@ The following are accepted as keyword arguments and will be used to construct ht
 
 > `headers`: A dictionary of headers to be sent with every request
 
-> `timeout`: The maximum amount of a time a request can take. API functions will raise
+> `timeout`: The maximum amount of time a request can take. API functions will raise
 > httpx.TimeoutException if this is exceeded.
 
 > `verify_ssl`: Whether or not to verify the SSL certificate of the API server. This should be True in production,

@@ -15,7 +15,7 @@ You can:
 - [Raise a feature request](/reference/contact.md) that will be evaluated by our product teams to provide official support from Camunda.
 - [Make a help request](/reference/contact.md) to work with Camunda consulting services.
 
-Recommendations are denoted with [recommended], however, other listed options are also supported.
+Recommendations are denoted with [recommended]. Other listed options are also supported.
 
 :::note Minimum versions
 The versions listed on this page are the minimum version required if appended with a `+`.
@@ -47,7 +47,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ## Camunda 8 Self-Managed
 
-We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/setup/overview.md) for this. Please follow the [Installation Guide](/self-managed/setup/overview.md) to learn more about installation possibilities.
+We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm charts](/self-managed/setup/overview.md) for this. See the [installation guide](/self-managed/setup/overview.md) to learn more about the available installation options.
 
 ### Deployment options
 
@@ -91,7 +91,7 @@ If you want to use another NFS, it must meet these requirements:
 - Be POSIX-compliant.
 - Never reorder file operations.
 - Retry I/O operations across temporary network failures, instead of failing on timeout.
-- Doesn't surface network‑related failures in the client process.
+- Do not surface network-related failures in the client process.
 - **Only one container may mount the disk in write mode at a time.** Two containers mounting the same disk in write mode could cause data corruption.
 
 #### Performance

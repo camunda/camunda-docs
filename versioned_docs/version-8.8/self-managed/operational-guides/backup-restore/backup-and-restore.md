@@ -105,15 +105,15 @@ To learn more about how to configure these settings, refer to the prerequisites 
 The backup of each component and the backup of a Camunda 8 cluster is identified by an ID. This means a backup `x` of Camunda 8 consists of backup `x` of Zeebe, backup `x` of Optimize, backup `x` of Web Applications (Operate, Tasklist). The backup ID must be an integer and greater than the previous backups.
 
 :::note
-We recommend using the unix timestamp as the backup ID.
+We recommend using the Unix timestamp as the backup ID.
 :::
 
-The steps outlined on this page are generally applicable for any kind of deployment but might differ slightly depending on your setup.
+The steps outlined on this page are generally applicable to any deployment type, but they might differ slightly depending on your setup.
 
 Optimize is not part of the Web Applications backup API and needs to be executed separately to successfully make a backup. Depending on your deployment configuration, you may not have Optimize deployed. It is safe to ignore the backup instructions for Optimize if it is not deployed.
 
 :::warning breaking change
-As of Camunda 8.8, the `indexPrefix` of Operate and Takslist must match. By default it is set to `""`. If overriden, it must set consistently across Operate and Tasklist.
+As of Camunda 8.8, the `indexPrefix` of Operate and Tasklist must match. By default, it is set to `""`. If overridden, it must be set consistently across Operate and Tasklist.
 :::
 
 :::warning breaking change
@@ -126,7 +126,7 @@ As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/ac
 
 ### Management API
 
-The management API is an extension of the [Spring Boot Actuator](https://docs.spring.io/spring-boot/reference/actuator/index.html), typically used for monitoring and other operational purposes. This is not a public API and not exposed. You will need direct access to your Camunda cluster to be able to interact with these management APIs. This is why you'll often see the reference to `localhost`.
+The management API is an extension of the [Spring Boot Actuator](https://docs.spring.io/spring-boot/reference/actuator/index.html), typically used for monitoring and other operational purposes. This is not a public API and is not exposed. You need direct access to your Camunda cluster to interact with these management APIs. This is why you'll often see a reference to `localhost`.
 
 Direct access will depend on your deployment environment. For example, direct Kubernetes cluster access with [port-forwarding](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/) or [exec](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_exec/) to execute commands directly on Kubernetes pods. In a manual deployment you will need to be able to reach the machines that host Camunda. Typically, the management port is on port `9600` but might differ on your setup and on the components. You can find the default for each component in their configuration page.
 
@@ -158,7 +158,7 @@ Using the bash instruction `&` at the end of each line would run the command in 
    <TabItem value="exec" label="Exec">
 
 An alternative to port-forwarding is to run commands directly on Kubernetes pods.
-In this example we're going to spawn a temporary pod to execute a curl request.
+In this example, we're going to spawn a temporary pod to execute a curl request.
 Alternatives are to use existing pods within the namespace. Camunda's pod includes different base images, each with a different feature set.
 
 ```bash
@@ -198,7 +198,7 @@ You can see further examples from Camunda consultants in the [Backup and Restore
 If you are defining the `contextPath` in the Camunda Helm chart or the `management.server.servlet.context-path` in a standalone setup, your API requests must prepend the value specific to the `contextPath` for the individual component. If the `management.server.port` is defined this also applies to `management.endpoints.web.base-path`. You can learn more about this behavior in the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path).
 
 :::warning Optimize Helm chart Exception
-Setting the `contextPath` in the Helm chart for Optimize will not overwrite the `contextPath` of the management API, it will remain as `/`.
+Setting the `contextPath` in the Helm chart for Optimize will not overwrite the `contextPath` of the management API; it will remain `/`.
 :::
 
 <details>
