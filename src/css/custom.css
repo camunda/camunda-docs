@@ -1875,6 +1875,15 @@ h3.subheading {
     12px;
 }
 
+p.link-arrow:has(+ h2) {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+p.link-arrow:has(+ h3) {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
 h2 + .release-announcement-row {
   margin-top: 40px;
 }
