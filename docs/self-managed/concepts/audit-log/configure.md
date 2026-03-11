@@ -70,7 +70,7 @@ orchestration:
 
 See [all configuration options](../../components/orchestration-cluster/core-settings/configuration/properties.md#camundadataaudit-log) to learn more.
 
-If you disable the audit log, new operations are no longer recorded. Changing this setting doesn't cause the existing audit log data to be immediately purged. Instead, it will be cleaned up according to the secondary storage retention settings. Until the data is cleaned up, you can continue to access the data in [Operate](../../../components/operate/userguide/audit-operations.md), [Tasklist](../../../components/tasklist/userguide/audit-task-history.md), [Identity](../../../components/identity/audit-operations.md), and the [Search API](/apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx).
+If you disable the audit log, new operations are no longer recorded. Changing this setting doesn't cause the existing audit log data to be immediately purged. Instead, it will be cleaned up according to the secondary storage retention settings. Until the data is cleaned up, you can continue to access the data in [Operate](../../../components/operate/userguide/audit-operations.md), [Tasklist](../../../components/tasklist/userguide/audit-task-history.md), [Admin](../../../components/admin/audit-operations.md), and the [Search API](/apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx).
 
 ## Configure secondary storage retention
 

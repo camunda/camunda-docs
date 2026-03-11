@@ -36,7 +36,7 @@ See the [8.7 to 8.8 upgrade guide](/versioned_docs/version-8.8/self-managed/upgr
 
 In Camunda 8.8, identity management is split into two distinct scopes:
 
-- **Orchestration Cluster Identity** - Manages authentication and authorization for core orchestration components (Zeebe, Operate, Tasklist) and their APIs. This is built into the Orchestration Cluster and does not require Management Identity.
+- **Orchestration Cluster Admin** - Manages authentication and authorization for core orchestration components (Zeebe, Operate, Tasklist) and their APIs. This is built into the Orchestration Cluster and does not require Management Identity.
 - **Management Identity** - Controls access for management and modeling components (Web Modeler, Console, Optimize). This is a separate component that must be explicitly enabled.
 
 Management Identity must be enabled if you want to use any of the following components:

@@ -5,7 +5,7 @@ sidebar_label: "Mapping rules"
 description: "Map authentication entities from your Identity Provider (IdP) to Camunda-specific entities using mapping rules."
 ---
 
-Mapping rules are used to dynamically manage access control by [connecting your Identity Provider](connect-to-identity-provider.md) and mapping claims from a JWT access token to [Identity](/components/identity/identity-introduction.md) entities in Camunda 8.
+Mapping rules are used to dynamically manage access control by [connecting your Identity Provider](connect-to-identity-provider.md) and mapping claims from a JWT access token to [Admin](/components/admin/admin-introduction.md) entities in Camunda 8.
 
 ## Mapping rules in SaaS and Self-Managed
 
@@ -13,8 +13,8 @@ In Camunda 8 SaaS, mapping rules are not supported.
 
 In Camunda 8 Self-Managed, configure mapping rules in the following components:
 
-- Orchestration Cluster Identity: Manage permissions within an [orchestration cluster](../../orchestration-cluster.md). Use mapping rules to assign users to [user groups](../../identity/group.md) and [roles](../../identity/role.md), grant [authorizations](../../identity/authorization.md), and associate them with specific [tenants](../../identity/tenant.md).
-- Mapping rules are available for Orchestration Cluster Identity only when using [OIDC-based authentication](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md). They do not apply to other authentication methods, such as basic authentication.
+- Orchestration Cluster Admin: Manage permissions within an [orchestration cluster](../../orchestration-cluster.md). Use mapping rules to assign users to [user groups](../../admin/group.md) and [roles](../../admin/role.md), grant [authorizations](../../admin/authorization.md), and associate them with specific [tenants](../../admin/tenant.md).
+- Mapping rules are available for Orchestration Cluster Admin only when using [OIDC-based authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md). They do not apply to other authentication methods, such as basic authentication.
 
 - Management Identity: Manage access to components like [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md), [Console](/self-managed/components/console/overview.md), and [Optimize](/self-managed/components/optimize/overview.md). Mapping rules in [Management Identity](/self-managed/components/management-identity/overview.md) assign users to roles and tenants, granting access to those components. To learn more, see the [guide on managing mapping rules in Management Identity](/self-managed/components/management-identity/mapping-rules.md).
 
@@ -68,6 +68,6 @@ In this case, the mapping rule matches against an array of objects. Depending on
 
 For more details on configuring mapping rules in a Self-Managed environment, see:
 
-- [Manage mapping rules in Orchestration Cluster Identity](../../identity/mapping-rules.md)
+- [Manage mapping rules in Orchestration Cluster Admin](../../admin/mapping-rules.md)
 - [Manage mapping rules in Management Identity](/self-managed/components/management-identity/mapping-rules.md)
 - [Manage mapping rules via API](/apis-tools/orchestration-cluster-api-rest/specifications/create-mapping-rule.api.mdx)

@@ -280,11 +280,15 @@ For example, this is useful when working with services that must be isolated wit
 
 - [Use connectors in hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md)
 
-## I
+### Admin
 
-### Identity
+Use Admin in the [Orchestration Cluster](#orchestration-cluster) to administer authentication, authorization, and cluster administration features.
 
-Use Identity in the [Orchestration Cluster](#orchestration-cluster) to administer the integrated authentication and authorization.
+:::note
+Admin was previously named "Identity" in Camunda 8.8. The component was renamed in 8.9 to reflect its expanded scope.
+:::
+
+- [Admin overview](/components/admin/admin-introduction.md)
 
 ### Inbound connector
 

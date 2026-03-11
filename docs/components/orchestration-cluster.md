@@ -10,7 +10,7 @@ The Orchestration Cluster is the core component of Camunda 8, powering the autom
 - Zeebe as the workflow engine.
 - Operate for monitoring and troubleshooting process instances running in Zeebe.
 - Tasklist for interacting with user tasks (assigning, completing, and so on).
-- Identity for managing the integrated authentication and authorization.
+- Admin for managing the integrated authentication and authorization.
 - APIs for interacting with the Orchestration Cluster programmatically.
 
 ## Zeebe
@@ -31,8 +31,8 @@ Tasklist is a ready-to-use application to rapidly implement business processes a
 
 - [Learn more about Tasklist](/components/tasklist/introduction-to-tasklist.md)
 
-## Identity
+## Admin
 
-Identity is responsible for managing authentication, authorization, and access-related entities within the Orchestration Cluster.
+Admin is responsible for managing authentication, authorization, and access-related entities within the Orchestration Cluster.
 
-- [Learn more about Identity](/components/identity/identity-introduction.md)
+- [Learn more about Admin](/components/admin/admin-introduction.md)

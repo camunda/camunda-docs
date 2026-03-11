@@ -4,7 +4,7 @@ title: "Core settings and features"
 description: "The central documentation hub for shared configuration and conceptual topics across the Camunda 8 Orchestration Cluster."
 ---
 
-Learn about unified configuration for the Camunda 8 Orchestration Cluster components Operate, Tasklist, Zeebe, and Identity.
+Learn about unified configuration for the Camunda 8 Orchestration Cluster components Operate, Tasklist, Zeebe, and Admin.
 
 ## About Orchestration Cluster configuration
 
