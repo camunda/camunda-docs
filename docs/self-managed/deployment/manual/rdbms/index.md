@@ -13,7 +13,7 @@ Manual installation is **not** supported for Kubernetes. If you run on Kubernete
 
 ## Secondary storage architecture
 
-The Orchestration Cluster reads from a single configured secondary storage type (RDBMS in this deployment). However, the Zeebe broker can export to multiple targets simultaneously. If you deploy Optimize, configure both the RDBMS exporter (for Orchestration Cluster operations) and the Elasticsearch/OpenSearch exporter (for Optimize).
+The Orchestration Cluster reads from a single configured secondary storage type (RDBMS in this deployment). However, the Zeebe broker can export to multiple targets simultaneously. If you deploy Optimize, configure both the RDBMS exporter (for Orchestration Cluster operations) and a document-store exporter (Elasticsearch/OpenSearch) for Optimize.
 
 ```mermaid
 graph LR

@@ -12,10 +12,10 @@ Camunda uses a layered storage model that separates workflow execution data from
 
 Secondary storage is one of the two complementary layers in Camunda’s data model:
 
-| Layer             | Purpose                                                                                                                           | Technologies you can use                                                         |
-| :---------------- | :-------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- |
-| Primary storage   | Persists real-time workflow execution state managed by [Zeebe](/self-managed/components/orchestration-cluster/zeebe/overview.md). | RocksDB (embedded in Zeebe)                                                      |
-| Secondary storage | Stores workflow, decision, and task data for querying, visualization, and API access.                                             | Elasticsearch/OpenSearch, RDBMS (including H2 and external relational databases) |
+| Layer             | Purpose                                                                                                                           | Technologies you can use    |
+| :---------------- | :-------------------------------------------------------------------------------------------------------------------------------- | :-------------------------- |
+| Primary storage   | Persists real-time workflow execution state managed by [Zeebe](/self-managed/components/orchestration-cluster/zeebe/overview.md). | RocksDB (embedded in Zeebe) |
+| Secondary storage | Stores workflow, decision, and task data for querying, visualization, and API access.                                             | Document store or RDBMS     |
 
 :::note
 Secondary storage is not a duplicate of primary data. It represents exported workflow and decision data optimized for querying and visualization.
@@ -27,10 +27,12 @@ Camunda supports multiple secondary storage backends.
 For the latest list of supported database versions, see the  
 [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 
-| Database type            | Availability         | Use case                                                                                                                                                                                          |
-| :----------------------- | :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Elasticsearch/OpenSearch | General availability | Secondary storage for indexing, search, and analytics.                                                                                                                                            |
-| RDBMS                    | 8.9-alpha1+          | Secondary storage for relational database deployments. See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for supported vendors and versions. |
+Both document-store and RDBMS backends are valid secondary storage choices in Self-Managed deployments. Support maturity can vary by component and version, so confirm the current compatibility details before choosing a backend.
+
+| Database type                             | Availability         | Use case                                                                                                                                                                                          |
+| :---------------------------------------- | :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Document store (Elasticsearch/OpenSearch) | General availability | Secondary storage for indexing, search, and analytics.                                                                                                                                            |
+| RDBMS                                     | 8.9-alpha1+          | Secondary storage for relational database deployments. See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for supported vendors and versions. |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.

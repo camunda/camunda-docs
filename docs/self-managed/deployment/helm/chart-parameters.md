@@ -34,15 +34,13 @@ The following tables show the **top-level configuration sections** in `values.ya
 
 ### Bitnami subcharts
 
-| Section                | Purpose                                                                                                                                                                                                                                                                           |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `elasticsearch`        | Provides an embedded Elasticsearch backend (Bitnami subchart). This can be used as a secondary storage backend for evaluations. See [secondary storage](/reference/glossary.md#secondary-storage) and [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch). |
-| `identityKeycloak`     | Provides an embedded Keycloak service for Management Identity (Bitnami subchart).                                                                                                                                                                                                 |
-| `identityPostgresql`   | Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart).                                                                                                                                                                                              |
-| `webModelerPostgresql` | Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart).                                                                                                                                                                                                      |
+- `elasticsearch`: Provides an embedded Elasticsearch backend (Bitnami subchart). This can be used as a secondary storage backend for evaluations. See [secondary storage](/reference/glossary.md#secondary-storage) and [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
+- `identityKeycloak`: Provides an embedded Keycloak service for Management Identity (Bitnami subchart).
+- `identityPostgresql`: Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart).
+- `webModelerPostgresql`: Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart).
 
 :::note
-The Helm chart supports embedded Elasticsearch for evaluations. For production, configure a secondary storage backend that fits your requirements. Depending on the component and version, you can use Elasticsearch/OpenSearch or an RDBMS-based secondary store.
+The Helm chart supports embedded Elasticsearch for evaluations. For production, configure the secondary storage backend that fits your requirements. Depending on the component, topology, and version, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store.
 
 See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms).
 :::

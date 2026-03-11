@@ -30,13 +30,13 @@ Unsupervised changes to secondary storage data can lead to severe issues, such a
 
 ## Configuring capacity and redundancy
 
-Secondary storage configuration depends on the backend you choose (for example, Elasticsearch/OpenSearch or an RDBMS). Use the documentation for your selected backend and validate decisions against your expected workload.
+Secondary storage configuration depends on the backend you choose (for example, a document store such as Elasticsearch/OpenSearch, or an RDBMS). Both are valid options in supported scenarios. Use the documentation for your selected backend and validate decisions against your expected workload.
 
 :::note
 Backend selection and sizing should be based on benchmarking and realistic workload expectations. Prefer configuration choices that you can validate with measured throughput, latency, and retention needs.
 :::
 
-### Elasticsearch/OpenSearch: shards and replicas
+### Document-store backends (Elasticsearch/OpenSearch): shards and replicas
 
 :::warning
 When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, they must use different index prefixes. One prefix must not be the beginning of the other (for example, avoid `custom` and `custom-zeebe` together because `custom*` matches both). Do not use `operate`, `tasklist`, or `camunda` as the full exporter prefix, and do not use `zeebe-record` as the Orchestration Cluster index prefix, as `zeebe-record` is the default prefix for Elasticsearch/OpenSearch Exporter indices.
@@ -95,5 +95,5 @@ Use the [Data Layer Dashboard](/self-managed/operational-guides/monitoring/metri
 For example:
 
 - Track exporter and indexing latency.
-- Detect shard or replica imbalances (Elasticsearch/OpenSearch).
-- Identify degraded query performance early (Elasticsearch/OpenSearch or RDBMS).
+- Detect shard or replica imbalances for document-store backends (Elasticsearch/OpenSearch).
+- Identify degraded query performance early across secondary storage backends (document store or RDBMS).

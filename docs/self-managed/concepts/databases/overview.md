@@ -15,7 +15,7 @@ For an architectural explanation of how secondary storage fits into Camunda 8, s
 
 Camunda supports document-oriented backends such as Elasticsearch and OpenSearch.
 
-These systems are optimized for high-volume ingestion and flexible search queries, and they remain the default choice for most production deployments.
+These systems are optimized for high-volume ingestion and flexible search queries.
 
 Related documentation:
 
@@ -27,6 +27,8 @@ Related documentation:
 ## Relational databases (RDBMS)
 
 Camunda also supports several relational databases for secondary storage, enabling Operate, Tasklist, Identity, and REST APIs to run without Elasticsearch or OpenSearch.
+
+RDBMS and document-store backends are both valid secondary storage options. Select based on your workload, operational model, and platform standards.
 
 A full list of supported vendors and versions, JDBC driver information, and component compatibility is published in the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 
