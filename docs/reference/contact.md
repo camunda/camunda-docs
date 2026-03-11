@@ -1,7 +1,7 @@
 ---
 id: contact
 title: Support and feedback
-description: Contact Camunda, submit feedback, find support using the Camunda community forum, note bug reports and feature requests, and review security notices.
+description: Get support for Camunda, submit feedback, join the Camunda community forum, note bug reports and feature requests, and review security notices.
 keywords:
   [
     support,
@@ -28,8 +28,6 @@ import FeatureImg from './img/icon-feature-request.png';
 import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
-
-Get support for Camunda or send us your feedback via the following channels.
 
 <table className="table-callout">
 <tr>
