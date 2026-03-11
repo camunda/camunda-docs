@@ -200,6 +200,8 @@ The history migration has the following limitations.
   - Please use [RDBMS History Cleanup](/self-managed/concepts/databases/relational-db/configuration.md#history-cleanup-1) to delete the migrated data.
 - To avoid collisions between definitions (process/decision/form), each definition migrated from Camunda 7 to 8 has its ID prefixed with `c7-legacy-`.
   - Do not deploy new definitions in Camunda 8 with IDs starting with this prefix to avoid conflicts.
+  - These migrated definitions are visible in Camunda 8 Tasklist but cannot be started. To start new instances, you need to use the [Diagram Converter](../diagram-converter.md) to migrate your legacy processes to Camunda 8 compatible versions and deploy them to Camunda 8 as described in the [preparation step for runtime migration](runtime.md#1-preparation).
+    - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/1000
 - Avoid manipulating Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable). See [Auto-cancellation of active instances](history.md#auto-cancellation-of-active-instances) for details.
 - During migration, some entities may be skipped due to unresolved dependencies (for example, when a parent entity has not yet been migrated).
   - After the initial migration completes, the migrator automatically retries skipped entities to resolve cross-entity dependencies.
