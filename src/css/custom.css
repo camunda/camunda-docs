@@ -138,7 +138,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-color-primary: #78a9ff;
   --ifm-background-color: #161616;
   --ifm-background-surface-color: #161616;
-  --ifm-font-color-base: #f4f4f4;
+  --ifm-font-color-base: #d1d1d1;
   --ifm-heading-color: #f4f4f4;
   --ifm-footer-background-color: #161616;
   --ifm-footer-color: #161616;
@@ -278,7 +278,7 @@ we make it less bold compared to the search keyword */
 }
 
 [data-theme="dark"] .page-description {
-  color: #d1d5db;
+  color: var(--ifm-heading-color);
 }
 
 /* Add padding to main content column */
@@ -448,11 +448,15 @@ a {
   text-decoration: underline;
   text-decoration-color: white;
 }
-[data-theme="dark"] .menu__link {
-  text-decoration: none;
-}
 [data-theme="dark"] .menu__link:hover {
   text-decoration: none;
+}
+[data-theme="dark"] .menu__link {
+  font-weight: normal;
+  text-decoration: none;
+}
+[data-theme="dark"] .menu__link--active:not(.menu__link--sublist) {
+  font-weight: 600;
 }
 [data-theme="dark"] .table-of-contents__link {
   text-decoration: none;
@@ -1320,7 +1324,10 @@ p.popular > a {
 }
 
 [data-theme="dark"] p.popular > a {
-  color: var(--ifm-link-color);
+  text-decoration: underline;
+  text-decoration-color: #f3f3f3;
+  color: #f3f3f3;
+  font-weight: 600;
 }
 
 /* Remove badges from sidebar */
@@ -1406,6 +1413,7 @@ ul.openapi-tabs__response-list-container {
   padding-top: 0px;
   margin-bottom: 20px;
   padding-bottom: 0px;
+  color: #ffffff;
 }
 h2 .badge--long,
 h2 .badge--beginner,
