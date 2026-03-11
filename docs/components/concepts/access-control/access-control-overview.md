@@ -25,7 +25,7 @@ These identities serve different purposes: one controls access to process execut
 <table className="table-callout">
 <tr>
     <td width="30%">Orchestration Cluster Admin</td>
-    <td><p>Used for authenticating and authorizing users and systems that interact with the Orchestration Cluster (such as Zeebe, Operate, Tasklist, and the Orchestration Cluster REST API).</p><p>Identity governs access to process execution, task management, and related runtime resources.</p></td>
+    <td><p>Used for authenticating and authorizing users and systems that interact with the Orchestration Cluster (such as Zeebe, Operate, Tasklist, and the Orchestration Cluster REST API).</p><p>Admin governs access to process execution, task management, and related runtime resources.</p></td>
 </tr>
 <tr style={{ backgroundColor: 'var(--ifm-table-background)'}}>
     <td width="30%">Management Identity</td>
