@@ -412,6 +412,36 @@ This change improves the reliability of long-running processes that depend on in
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Dedicated artifact for Element Template Generation Annotations
+
+Starting with Camunda 8.9 we provide a dedicated artifact (`element-template-generator-annotations`) that only contains the necessary annotations for the Element Template Generator, leading to a much smaller dependency footprint for your projects.
+
+Previously the annotations were part of the `element-template-generator-core` artifact which now is not needed anymore.
+
+Just replace `element-template-generator-core` with `element-template-generator-annotations` as a dependency and adapt the imports.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Synchronous Webhook Results
+
+Starting with Camunda 8.9 the Webhook connector supports a synchronous response mode which allows to wait until a newly created process instance has been finished and return the results in the response. See [Webhook connector](/components/connectors/protocol/http-webhook.md) docs for more details.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
