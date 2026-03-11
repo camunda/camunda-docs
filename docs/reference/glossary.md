@@ -280,8 +280,6 @@ For example, this is useful when working with services that must be isolated wit
 
 - [Use connectors in hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md)
 
-## I
-
 ### Admin
 
 Use Admin in the [Orchestration Cluster](#orchestration-cluster) to administer authentication, authorization, and cluster administration features.

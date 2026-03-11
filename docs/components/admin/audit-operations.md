@@ -4,7 +4,7 @@ title: Audit operations
 description: "Learn how to audit operations."
 ---
 
-Audit [operations](../audit-log/overview.md) in Camunda 8 Identity.
+Audit [operations](../audit-log/overview.md) in Camunda 8 Admin.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ To follow the steps in this guide, you must be [authorized to view operations in
 
 ## Audit operations
 
-In Identity, you can audit all [`ADMIN` operations](../audit-log/overview/recorded-operations.md#admin-operations):
+In Admin, you can audit all [`ADMIN` operations](../audit-log/overview/recorded-operations.md#admin-operations):
 
 1. In the top navigation, click **Operations log**.
 2. To sort the log, click a column header.
