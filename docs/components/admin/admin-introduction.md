@@ -16,11 +16,16 @@ The Orchestration Cluster Admin interface centralizes all key administrative job
 
 Admin includes the following features:
 
-| Feature                   | Description                                                                                                                                                   |
-| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Unified access management | Authentication and authorization are handled consistently across all Orchestration Cluster components and APIs.                                               |
-| Flexible authentication   | Admin supports multiple authentication modes, including no authentication, Basic authentication, and OpenID Connect (OIDC), depending on the deployment type. |
-| Tenant management         | Multi-tenancy is managed directly within the Orchestration Cluster, allowing for clear separation of resources.                                               |
+| Feature                   | Description                                                                                                                                                                                           |
+| :------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Unified access management | Authentication and authorization are handled consistently across all Orchestration Cluster components and APIs.                                                                                       |
+| Flexible authentication   | Admin supports multiple authentication modes, including no authentication, Basic authentication, and OpenID Connect (OIDC), depending on the deployment type.                                        |
+| Tenant management         | Multi-tenancy is managed directly within the Orchestration Cluster, allowing for clear separation of resources.                                                                                       |
+| [Cluster variables](/components/modeler/feel/cluster-variable/overview.md) | Manage configuration values centrally across your cluster, making them available in FEEL expressions.                                                     |
+| [Secrets](/components/console/manage-clusters/manage-secrets.md)           | Create and manage connector secrets to reference sensitive values in processes without exposing them.                                                        |
+| [Backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md) | Back up and restore your Orchestration Cluster state and data. (Self-Managed only)                                            |
+| [User task listeners](/components/concepts/user-task-listeners.md)         | Configure global listeners that react to user task lifecycle events across the cluster.                                                                     |
+| [License information](/reference/licenses.md)                              | View and manage your Camunda license details for the cluster.                                                                                               |
 
 For details about authorization concepts, resources, and configuration, see
 [Orchestration Cluster authorizations](../concepts/access-control/authorizations.md).
