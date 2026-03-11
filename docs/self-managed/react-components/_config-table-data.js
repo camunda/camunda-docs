@@ -1,4 +1,17 @@
 export const configs = [
+  // Section: Camunda (root)
+  {
+    name: "camunda.mode",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Camunda"],
+  },
+  {
+    name: "camunda.insecure",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Camunda"],
+  },
   // Section: System
   {
     name: "camunda.system.restore.validate-config",
@@ -2122,5 +2135,49 @@ export const configs = [
     ],
     types: ["Direct mapping"],
     area: ["Security"],
+  },
+  // Process instance creation
+  {
+    name: "camunda.process-instance-creation.business-id-uniqueness-enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Process instance creation"],
+  },
+  // Webapps section
+  {
+    name: "camunda.webapps.operate.enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Webapps"],
+  },
+  {
+    name: "camunda.webapps.operate.ui-enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Webapps"],
+  },
+  {
+    name: "camunda.webapps.tasklist.enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Webapps"],
+  },
+  {
+    name: "camunda.webapps.tasklist.ui-enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Webapps"],
+  },
+  {
+    name: "camunda.webapps.identity.enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Webapps"],
+  },
+  {
+    name: "camunda.webapps.identity.ui-enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Webapps"],
   },
 ];

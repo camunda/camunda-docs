@@ -42,25 +42,25 @@ jobs:
           fi
 
       - name: Checkout camunda-docs
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Checkout Python SDK
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: camunda/orchestration-cluster-api-python
           ref: ${{ steps.resolve.outputs.sdk_ref }}
           path: python-sdk
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
+        uses: astral-sh/setup-uv@v7
         with:
           version: "latest"
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.14"
 
@@ -116,7 +116,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: "${{ steps.generate_token.outputs.token }}"
           path: docs

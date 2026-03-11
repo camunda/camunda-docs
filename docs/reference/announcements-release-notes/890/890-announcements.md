@@ -107,6 +107,25 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Keycloak 25.x no longer supported
+
+Camunda 8.9 drops support for Keycloak 25.x. Only Keycloak 26.x is now supported for Management Identity.
+
+- Keycloak 25.x has reached end of life and is no longer maintained by the Keycloak project.
+- This aligns with [Keycloak's updated release strategy](https://www.keycloak.org/2024/10/release-updates), which moved to quarterly minor releases.
+- Upgrade your Keycloak instance to 26.x before moving to Camunda 8.9.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
 ## Key changes
 
 ### Agentic orchestration
@@ -132,6 +151,15 @@ To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-clien
 
 ### APIs & tools
 
+:::note API upgrade checklist for 8.9
+
+- Update to the latest official Camunda SDK versions.
+- If you generate clients from OpenAPI, regenerate from the 8.9 specification.
+- Re-run compilation/type checks and address enum-handling or type-mapping updates.
+- Review message subscription filter payload construction for `processDefinitionKey`.
+
+:::
+
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
@@ -155,7 +183,153 @@ This change aligns with the Spring Boot support policy, as OSS support for Sprin
 </div>
 <div className="release-announcement-content">
 #### Resource deletion endpoint now has response body
-Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{resourceKey}/deletion` in the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) now returns a response body. The Camunda Java client has been updated to support this change.
+Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{resourceKey}/deletion` in the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) returns a response body.
+
+This provides explicit deletion feedback, making client-side confirmation, auditing, and follow-up workflow logic more reliable.
+
+If you use an SDK, update to the latest version for compiler and model support.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenAPI type-safety enhancements for request and schema types
+
+Starting with 8.9.0, parts of the OpenAPI contract use stronger domain types and one schema rename to improve semantic correctness in client applications.
+
+This increases compile-time safety and helps prevent semantic substitution errors in typed integrations.
+
+Affected contract updates include:
+
+- `CreateDeploymentData.body.tenantId`: `string` → `TenantId`
+- `CreateDocumentData.query.documentId`: `string` → `DocumentId`
+- `SearchCorrelatedMessageSubscriptionsData.body.filter.processDefinitionKey.$eq`: `string` → `ProcessDefinitionKey`
+- `CorrelatedMessageSubscriptionFilter.processDefinitionKey`: `string` → `ProcessDefinitionKeyFilterProperty | undefined`
+- `CorrelatedMessageSubscriptionSearchQuery.filter.processDefinitionKey.$eq`: `string` → `ProcessDefinitionKey`
+- `ProcessInstanceIncidentSearchQuery` renamed to `IncidentSearchQuery`
+
+Example request payload update for message subscription filtering:
+
+- Before: `"processDefinitionKey": "2251799813685251"`
+- After (for example): `"processDefinitionKey": { "$eq": "2251799813685251" }`
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Generated-client users: regenerate clients and update type mappings/imports.
+- Handwritten integrations: update request payload construction and affected typed helpers.
+
+<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#type-safety-enhancements)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenAPI enum extensions for new 8.9 capabilities
+
+Starting with 8.9.0, new enum literals were added to support expanded functionality.
+
+This improves feature coverage, but typed or exhaustive enum-handling code paths may require updates to preserve full completeness checks.
+
+Added literals include:
+
+- `BatchOperationTypeEnum` / `BatchOperationTypeFilterProperty`: `DELETE_DECISION_INSTANCE`
+- `ResourceTypeEnum`: `USER_TASK`
+- `PermissionTypeEnum`: `COMPLETE`
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Generated-client users: regenerate and add fallback/default handling for enum parsing and matching.
+- Handwritten integrations: review enum branches (for example exhaustive `switch`/pattern matches) and add handling for new values.
+
+<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#enum-extensions)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Bug fix: `FormResult.schema` type corrected from object to string
+
+The `schema` property in the `FormResult` response was incorrectly specified as `type: object` in the OpenAPI contract, but the server has always returned it as a JSON `string`. This specification bug is now fixed.
+
+This is a bug fix that aligns the OpenAPI contract with actual server behavior, improving correctness for typed client integrations. Applications already handling the runtime `string` value are unaffected.
+
+The Camunda Java client is also affected: `io.camunda.client.api.search.response.Form::getSchema()` now returns `String` instead of `Object`. If your Java code casts or processes the return value as `Object`, update it to use `String`.
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Java client users: update calls to `Form::getSchema()` to handle the `String` return type instead of `Object`.
+- Generated-client users: regenerate your client. If your generated code relied on the incorrect `object` typing, update it to handle `string`.
+- Handwritten integrations: no change needed if you were already handling the actual `string` response.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `versionTag` now returns `null` instead of empty string when absent
+
+Starting with 8.9.0, API response fields for `versionTag` return `null` instead of an empty string `""` when no version tag is set. This properly indicates absence rather than leaking an internal default.
+
+Previously, customers had to handle both empty string and absent/null to determine whether a version tag was set. This change simplifies that logic by using `null` consistently to signal absence, aligning with how other optional fields like `businessId` are handled.
+
+What to do:
+
+- If your code checks for an empty string (`""`) to detect a missing version tag, update it to check for `null` instead.
+- Official SDK users: update to the latest SDK version.
+- Generated-client users: regenerate your client to pick up the updated nullable annotation.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Document API response schemas now have explicit required and nullable annotations
+
+Starting with 8.9.0, the OpenAPI specification uses distinct schemas for document request and response payloads, and adds explicit `required` / `nullable` annotations to document response types.
+
+Previously, a shared `DocumentMetadata` schema was used for both creating and reading documents. Because response fields like `customProperties` are always populated by the server, but optional in requests, a single schema could not accurately express both contracts. This caused incorrect required/optional behavior in generated clients.
+
+What changed:
+
+- **`DocumentMetadata`**: now request-only. `customProperties` is no longer marked as required (it was previously required even in requests).
+- **`DocumentMetadataResponse`** (new): response schema with `fileName`, `expiresAt`, `size`, `contentType`, `customProperties`, `processDefinitionId`, and `processInstanceKey` all marked as required. `expiresAt`, `processDefinitionId`, and `processInstanceKey` are nullable.
+- **`DocumentReference`**: `metadata` now references `DocumentMetadataResponse`. Fields `camunda.document.type`, `storeId`, `documentId`, `contentHash`, and `metadata` are now explicitly required. `contentHash` is nullable.
+- **`DocumentLink`**: `url` and `expiresAt` are now explicitly required.
+- **`candidateGroups` (user task / job API)**: now explicitly marked as a required field in response schemas (`UserTaskResult`, `UserTaskProperties`).
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Generated-client users: regenerate your client. Update any code that references `DocumentMetadata` in response handling — it is now `DocumentMetadataResponse`. Review nullable annotations on `DocumentReference.contentHash` and `DocumentMetadataResponse` fields.
+- Handwritten integrations: no request-side changes needed. Response fields listed above are now guaranteed to be present (though some may be `null`).
+
+<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#request-response-schema-split)</p>
 
 </div>
 </div>
@@ -173,6 +347,29 @@ With task permission management, you can assign restricted permissions for user 
 Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this role to grant users limited access to work on tasks without assigning broader permissions.
 
 <p className="link-arrow">[Task permission management](../../../../components/tasklist/user-task-authorization)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deprecated enum literals in Orchestration Cluster API v2
+
+The following enum literals in the V2 Orchestration Cluster API are now marked as deprecated:
+
+- `UNSPECIFIED` in `DecisionDefinitionTypeEnum`
+- `UNKNOWN` in `DecisionInstanceStateFilterProperty`
+- `UNKNOWN` in `DecisionInstanceStateEnum`
+
+These values were reintroduced and are now explicitly deprecated to preserve backward compatibility while signaling planned cleanup.
+
+Avoid these values in new integrations. They are planned for removal in a future release, where removal will be a breaking change.
+
+<p className="link-arrow">[Orchestration Cluster API reference](../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)</p>
 
 </div>
 </div>
@@ -330,6 +527,20 @@ See [Migrate extraConfiguration from 8.8 to 8.9](/self-managed/deployment/helm/c
 
 </div>
 </div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Helm CLI v4 does not support duplicate environment variable names
+
+Helm v4 enforces that environment variables in a rendered kubernetes manifest must be unique. If your `values.yaml` overrides an environment variable also set by the chart, you might encounter an error. Read more about it in [Helm v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)
+
+</div>
+</div>
+
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">

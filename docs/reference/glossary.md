@@ -63,6 +63,10 @@ For example, build an invoice-processing AI agent in Camunda with BPMN, using an
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
 
+### Audit log
+
+The [audit log](../components/audit-log/overview.md) is a record of operations, including who performed them, when, and on which entities. Use the audit log to prove compliance, meet governance and regulatory requirements, maintain operational integrity and transparency, and troubleshoot issues.
+
 ## B
 
 ### Backpressure

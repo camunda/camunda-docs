@@ -17,6 +17,7 @@ import NoDomainInfo from '../\_partials/\_no-domain-info.md'
 import HelmUpgradeNote from '../\_partials/\_helm-upgrade-note.md'
 import KubefwdTip from '../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../\_partials/\_port-forward-services.md'
+import DeployECKElasticsearch from '../\_partials/\_deploy-eck-elasticsearch.md'
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
@@ -404,24 +405,7 @@ All commands in this guide assume you are at the **repository root** (the direct
 
 #### Deploy Elasticsearch {#deploy-elasticsearch}
 
-Deploy Elasticsearch using the ECK operator:
-
-```bash
-(cd generic/kubernetes/operator-based/elasticsearch && ./deploy.sh)
-```
-
-This script installs the ECK operator, deploys an Elasticsearch cluster, and waits for readiness.
-
-<details>
-<summary>Review the Elasticsearch cluster configuration</summary>
-
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
-```
-
-</details>
-
-For more details on the Elasticsearch deployment, see [Elasticsearch deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment).
+<DeployECKElasticsearch />
 
 #### Deploy PostgreSQL {#deploy-postgresql}
 

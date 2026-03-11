@@ -509,9 +509,9 @@ public void handleFoo(@CustomHeaders Map<String, String> headers) {
 This will not have any effect on the variable fetching behavior.
 :::
 
-#### Using `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey`
+#### Using `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey`, `@ProcessDefinitionKey` and `@RootProcessInstanceKey`
 
-You can use the `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey` annotation for a `String`, `long` or `Long` parameter to retrieve the according key for a job:
+You can use the `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey`, `@ProcessDefinitionKey` and `@RootProcessInstanceKey` annotation for a `String`, `long` or `Long` parameter to retrieve the according key for a job:
 
 ```java
 @JobWorker
@@ -519,7 +519,8 @@ public void handleFoo(
   @ProcessInstanceKey String processInstanceKey,
   @ElementInstanceKey long elementInstanceKey,
   @JobKey Long jobKey,
-  @ProcessDefinitionKey String processDefinitionKey) {
+  @ProcessDefinitionKey String processDefinitionKey,
+  @RootProcessInstanceKey long rootProcessInstanceKey) {
   // do whatever you need to do
 }
 ```
@@ -831,8 +832,6 @@ camunda:
 #### Control tenant usage
 
 Job workers can be configured to work on jobs from specific [tenants](#multi-tenancy) using either [specific tenant IDs](#filtering-by-provided-tenant-IDs) or the [assigned tenants in the engine](#filtering-by-assigned-tenants).
-
-For SaaS deployments, you always assign job workers to tenants through the UI or API. For self-managed deployments, use the TenantFilter setting to control how job workers are related to tenants. Using the Assigned setting, you manage job worker access to tenants through the API and UI like in SaaS. Using the Provided setting, you will define tenant access in the Job worker's configuration and restart the job worker for any changes to take effect.
 
 ##### Filtering by assigned tenants
 

@@ -43,7 +43,12 @@ Some BPMN elements and configurations supported in Camunda 7 are not supported i
 
 #### Elements supported in Camunda 7 but not supported in Camunda 8
 
-See the [BPMN documentation](/components/modeler/bpmn/bpmn.md#bpmn-coverage/) for more details on element support in Camunda 8, and adjust your models accordingly before migration.
+Some BPMN elements available in Camunda 7 are not supported in Camunda 8. Before migration, compare the BPMN coverage of both platforms and adjust your models accordingly:
+
+- [Camunda 7 BPMN coverage](https://docs.camunda.org/manual/7.24/reference/bpmn20/)
+- [Camunda 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md)
+
+When converting diagrams, the Diagram Converter also helps identify unsupported elements interactively.
 
 #### Start events
 

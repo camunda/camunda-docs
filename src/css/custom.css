@@ -864,6 +864,10 @@ h3 .badge:nth-of-type(1) {
   margin-top: 1rem;
 }
 
+.release + h4 {
+  margin-top: 0.5rem;
+}
+
 .badge--platform {
   background-color: #fc5d0d;
   color: #ffffff;
@@ -1191,12 +1195,16 @@ span.callout + p::after {
   background-color: transparent;
 }
 
-/* Unsupported versions in the versions selector */
+/* Unmaintained versions in the versions selector */
 .dropdown-separator {
   margin: 0.3rem 0;
 }
 
-.dropdown-unsupported-versions {
+.dropdown__menu {
+  min-width: 11rem;
+}
+
+.dropdown-unmaintained-versions {
   font-size: 0.75rem;
   padding: 0.2rem 0.5rem;
 }

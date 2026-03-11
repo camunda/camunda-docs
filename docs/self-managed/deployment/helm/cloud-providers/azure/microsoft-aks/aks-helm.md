@@ -15,20 +15,21 @@ import NoDomainInfo from '../../\_partials/\_no-domain-info.md'
 import HelmUpgradeNote from '../../\_partials/\_helm-upgrade-note.md'
 import KubefwdTip from '../../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../../\_partials/\_port-forward-services.md'
+import DeployECKElasticsearch from '../../\_partials/\_deploy-eck-elasticsearch.md'
 
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster, and confirmation it is working as intended.
 
-## Prerequisites
+## Requirements
 
 - A Kubernetes cluster; refer to the [Terraform guide](./terraform-setup.md) for details.
 - [Helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
-- (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - A namespace to host the Camunda Platform; in this guide we will reference `camunda` as the target namespace.
-
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
+- (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
+- (optional) Permissions to install Kubernetes operators (cluster-admin or equivalent) to deploy infrastructure services such as Elasticsearch, PostgreSQL, and Keycloak. This guide installs them directly from source to provide full control over versions and configuration.
+  For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
 
 ## Architecture
 
@@ -250,67 +251,41 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 ### 2. Configure your deployment
 
-#### Enable Web Modeller and Console services
+#### Enable Enterprise components
 
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and Connectors](/self-managed/deployment/helm/install/quick-install.md#configuring-web-modeler-console-and-connectors).
 
-#### Elasticsearch options
+### 3. Deploy prerequisite services
 
-Camunda Helm chart supports both internal and external Elasticsearch deployments. For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)). Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option. In this guide, we default to the internal deployment of Elasticsearch.
+Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch) can be deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
-<details>
-<summary>Show configuration to enable internal Elasticsearch</summary>
+- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
 
-```yaml
-global:
-  elasticsearch:
-    enabled: true
-  opensearch:
-    enabled: false
+All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
 
-elasticsearch:
-  enabled: true
+:::note Working directory
+All commands in this guide assume you are at the **repository root** (the directory created by `get-your-copy.sh`). The deploy commands below use subshells `(cd ... && ./deploy.sh)` to preserve your working directory.
+:::
+
+##### Deploy Elasticsearch {#deploy-elasticsearch}
+
+If your organization does not want to use a managed Elasticsearch service, ECK Operator is an option. In this guide, we default to the ECK Operator deployment of Elasticsearch.
+
+:::warning Production Elasticsearch recommendation
+For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)). Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option.
+:::
+
+<DeployECKElasticsearch />
+
+#### Merge operator overlays into values
+
+Once the operator-managed services are running, merge the corresponding Helm values overlays into your `values.yml` file. These overlays configure Camunda components to use the external operator-managed services instead of embedded subcharts.
+
+Merge the **Elasticsearch** overlay:
+
+```bash
+yq '. *+ load("generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
 ```
-
-</details>
-
-#### (Optional) Use internal PostgreSQL instead of the managed PostgreSQL service
-
-In some scenarios, you might prefer to use an internal PostgreSQL deployment instead of the external Azure Database for PostgreSQL service. This could be due to cost considerations, network restrictions, or the need for tighter control over the database environment.
-
-For example, if your application or service is deployed in a private network and requires a database that resides within the same Kubernetes cluster for performance or security reasons, the internal PostgreSQL deployment would be a better fit.
-
-To switch to the internal PostgreSQL deployment, configure the Helm chart as follows. Additionally, remove configurations related to the external database and secret references to avoid conflicts.
-
-<details>
-<summary>Show configuration changes to disable external database usage</summary>
-
-```yaml
-webModelerPostgresql:
-  enabled: true
-
-webModeler:
-  # Remove this part
-
-  # restapi:
-  #     externalDatabase:
-  #         url: jdbc:postgresql://$\{DB_HOST}:5432/$\{DB_WEBMODELER_NAME}
-  #         user: $\{DB_WEBMODELER_USERNAME}
-  #         ...
-
-identity:
-  # Remove this part
-
-  # externalDatabase:
-  #     enabled: true
-  #     host: $\{DB_HOST}
-  #     port: 5432
-  #     username: $\{DB_IDENTITY_USERNAME}
-  #     database: $\{DB_IDENTITY_NAME}
-  #     ...
-```
-
-</details>
 
 #### Fill your deployment with actual values
 
@@ -329,7 +304,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 :::
 
-### 3. Install Camunda 8 using Helm
+### 4. Install Camunda 8 using Helm
 
 Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Run the following command:
 

@@ -17,7 +17,7 @@ New versions are created as part of the [release process](/howtos/release-proced
 
 ## Archiving a version
 
-Docusaurus builds the documentation for all versions in the project, even those that are no longer supported. With a large number of versions, this can slow down the build process significantly. We archive versions that are no longer supported to speed up build workflows.
+Docusaurus builds the documentation for all versions in the project, even those that are no longer maintained. With a large number of versions, this can slow down the build process significantly. We archive versions that are no longer maintained to speed up build workflows.
 
 Our current policy is to support versions for 18 months. Any version older than 18 months is suitable for archiving.
 
@@ -41,7 +41,7 @@ Create a new branch named `unsupported/x.xx` where `x.xx` is the version to be a
 
 For example, for the 8.6 docs archival, you would create a new branch named `unsupported/8.6`.
 
-#### Step 3: Create and publish the unsupported branch
+#### Step 3: Create and publish the unmaintained branch
 
 1. On the `unsupported/x.xx` branch:
    1. Confirm the version number to be archived at the top of the `./hacks/isolateVersion/allSteps.sh` script.
@@ -87,7 +87,7 @@ Note that there was a difference in the process between 8.3 and 8.4 archival, so
       - Deselect the `Set as the latest release` option.
 4. On the `main` branch:
    1. Remove the archived version from the docs.
-      1. Open a smaller, reviewable PR that logically removes the version, and links to the external unsupported version in the top navigation bar. [Example](https://github.com/camunda/camunda-docs/pull/5597).
+      1. Open a smaller, reviewable PR that logically removes the version, and links to the external unmaintained version in the top navigation bar. [Example](https://github.com/camunda/camunda-docs/pull/5597).
       2. Open a second larger PR that physically removes the source files. [Example](https://github.com/camunda/camunda-docs/pull/5601).
    2. [Publish a new patch release of the main docs](./release-procedure.md#perform-a-patch-release).
 

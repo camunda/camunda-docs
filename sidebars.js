@@ -44,7 +44,17 @@ module.exports = {
               items: [
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/install",
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/runtime",
-                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history",
+                {
+                  type: "category",
+                  label: "History",
+                  link: {
+                    type: "doc",
+                    id: "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history",
+                  },
+                  items: [
+                    "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history-coverage",
+                  ],
+                },
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/identity",
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/variables",
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin",
@@ -283,6 +293,19 @@ module.exports = {
             "components/document-handling/upload-document-to-bpmn-process",
             "components/document-handling/display-and-download-document",
             "components/document-handling/send-document-to-external-system-via-connector",
+          ],
+        },
+        {
+          type: "category",
+          label: "Audit log",
+          link: {
+            type: "doc",
+            id: "components/audit-log/overview",
+          },
+          items: [
+            "components/audit-log/overview/access-control",
+            "components/audit-log/overview/recorded-operations",
+            "components/audit-log/overview/operation-structure",
           ],
         },
         {
@@ -744,6 +767,9 @@ module.exports = {
                 "components/operate/userguide/process-instance-batch-modification",
               ],
             },
+            "components/operate/userguide/process-instance-migration",
+            "components/operate/userguide/monitor-batch-operations",
+            "components/operate/userguide/audit-operations",
           ],
         },
         {
@@ -764,6 +790,7 @@ module.exports = {
             "components/tasklist/userguide/starting-processes",
             "components/tasklist/user-task-access-restrictions",
             "components/tasklist/userguide/tasklist-localization",
+            "components/tasklist/userguide/audit-task-history",
           ],
         },
         {
@@ -782,6 +809,7 @@ module.exports = {
             "components/identity/client",
             "components/identity/mapping-rules",
             "components/identity/tenant",
+            "components/identity/audit-operations",
           ],
         },
       ],
@@ -909,6 +937,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/azure-blob-storage",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
+                "components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound",
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
@@ -1062,6 +1091,7 @@ module.exports = {
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
+            "components/console/manage-clusters/configure-audit-log",
             "components/console/manage-clusters/settings",
             "components/console/manage-clusters/cluster-capacity",
           ],
@@ -1303,6 +1333,7 @@ module.exports = {
             },
           ],
         },
+        require("./docs/apis-tools/c8ctl/sidebar-schema"),
         {
           type: "category",
           label: "Python SDK",
@@ -1357,6 +1388,11 @@ module.exports = {
           Deprecated: ["apis-tools/testing/zeebe-process-test"],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "Upgrade to Camunda 8.9",
+      items: ["apis-tools/migration-manuals/migrate-to-89"],
     },
     {
       type: "category",
@@ -1595,6 +1631,7 @@ module.exports = {
                       RDBMS: [
                         "self-managed/deployment/helm/configure/database/rdbms",
                         "self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers",
+                        "self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits",
                         "self-managed/deployment/helm/configure/database/rdbms-schema-management",
                         "self-managed/deployment/helm/configure/database/rdbms-troubleshooting",
                         "self-managed/deployment/helm/configure/database/validate-rdbms",
@@ -1667,6 +1704,7 @@ module.exports = {
               items: [
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
+                "self-managed/deployment/helm/operational-tasks/helm-v4",
               ],
             },
             {
@@ -1767,15 +1805,13 @@ module.exports = {
             "self-managed/deployment/docker/docker",
             {
               type: "category",
-              label: "Cloud providers",
+              label: "Amazon ECS",
+              link: {
+                type: "doc",
+                id: "self-managed/deployment/containers/cloud-providers/amazon/index",
+              },
               items: [
-                {
-                  type: "category",
-                  label: "Amazon",
-                  items: [
-                    "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
-                  ],
-                },
+                "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
               ],
             },
           ],
@@ -1867,6 +1903,7 @@ module.exports = {
             },
             {
               "Relational databases": [
+                "self-managed/concepts/databases/relational-db/rdbms-setup-guide",
                 "self-managed/concepts/databases/relational-db/rdbms-support-policy",
                 "self-managed/concepts/databases/relational-db/database-configuration",
               ],
@@ -1881,8 +1918,16 @@ module.exports = {
             id: "self-managed/operational-guides/backup-restore/backup-and-restore",
           },
           items: [
-            "self-managed/operational-guides/backup-restore/backup",
-            "self-managed/operational-guides/backup-restore/restore",
+            {
+              Elasticsearch: [
+                "self-managed/operational-guides/backup-restore/elasticsearch/es-backup",
+                "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
+              ],
+              "Relational databases": [
+                "self-managed/operational-guides/backup-restore/rdbms/rdbms-backup",
+                "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
+              ],
+            },
             {
               "Backup Management API": [
                 "self-managed/operational-guides/backup-restore/optimize-backup",
@@ -1914,6 +1959,15 @@ module.exports = {
               ],
             },
           ],
+        },
+        {
+          type: "category",
+          label: "Audit log",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/audit-log/index",
+          },
+          items: ["self-managed/concepts/audit-log/configure-audit-log"],
         },
         "self-managed/concepts/exporters",
         "self-managed/operational-guides/configure-flow-control/configure-flow-control",

@@ -311,6 +311,12 @@ components:
           type: array
           items:
             $ref: "identifiers.yaml#/components/schemas/TenantId"
+        tenantFilter:
+          allOf:
+            - $ref: "#/components/schemas/TenantFilterEnum"
+          description: |
+            The tenant filtering strategy - determines whether to use provided tenant IDs or assigned tenant IDs from the authenticated principal's authorized tenants.
+          default: PROVIDED
       required:
         - type
         - timeout
@@ -345,6 +351,8 @@ components:
         - elementInstanceKey
         - kind
         - listenerEventType
+        - rootProcessInstanceKey
+        - tags
       properties:
         type:
           description: The type of the job (should match what was requested).
@@ -403,6 +411,7 @@ components:
             - $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"
           description: The key of the job's process definition.
         elementInstanceKey:
+          description: The element instance key of the task.
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
         kind:
@@ -410,10 +419,27 @@ components:
         listenerEventType:
           $ref: "#/components/schemas/JobListenerEventTypeEnum"
         userTask:
-          $ref: "#/components/schemas/UserTaskProperties"
+          description: |
+            User task properties, if the job is a user task.
+            This is `null` if the job is not a user task.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/UserTaskProperties"
         tags:
           $ref: "identifiers.yaml#/components/schemas/TagSet"
+        rootProcessInstanceKey:
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
     UserTaskProperties:
+      required:
+        - candidateGroups
+        - candidateUsers
+        - changedAttributes
       type: object
       description: Contains properties of a user task.
       properties:
@@ -603,6 +629,8 @@ components:
             - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
     JobSearchQueryResult:
       description: Job search response.
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -630,6 +658,7 @@ components:
         - tenantId
         - type
         - worker
+        - rootProcessInstanceKey
       properties:
         customHeaders:
           description: A set of custom headers defined during modelling.
@@ -646,7 +675,8 @@ components:
           type: string
           nullable: true
         elementId:
-          description: The element ID associated with the job.
+          description: The element ID associated with the job. May be missing on job failure.
+          nullable: true
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/ElementId"
         elementInstanceKey:
@@ -654,9 +684,12 @@ components:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
           description: The element instance key associated with the job.
         endTime:
-          description: When the job ended.
+          description: |
+            End date of the job.
+            This is `null` if the job is not in an end state yet.
           type: string
           format: date-time
+          nullable: true
         errorCode:
           description: The error code provided for a failed job.
           type: string
@@ -693,7 +726,13 @@ components:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The process instance key associated with the job.
         rootProcessInstanceKey:
-          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         retries:
           description: The amount of retries left to this job.
           type: integer
@@ -887,6 +926,7 @@ components:
           type: object
           additionalProperties: true
           description: Variables for the element.
+          nullable: true
     JobUpdateRequest:
       type: object
       properties:
@@ -910,6 +950,14 @@ components:
           format: int64
           description: The new timeout for the job in milliseconds.
           nullable: true
+    TenantFilterEnum:
+      description: |
+        The tenant filtering strategy for job activation. Determines whether to use tenant IDs provided in the request or tenant IDs assigned to the authenticated principal.
+      type: string
+      enum:
+        - PROVIDED
+        - ASSIGNED
+      default: PROVIDED
     JobStateEnum:
       description: The state of the job.
       type: string
