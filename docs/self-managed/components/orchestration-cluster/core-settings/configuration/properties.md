@@ -55,6 +55,10 @@ import Monitoring from './partials/\_monitoring.md'
 
 <Monitoring />
 
+import ProcessInstanceCreation from './partials/\_process-instance-creation.md'
+
+<ProcessInstanceCreation />
+
 import Security from './partials/\_security.md'
 
 <Security />

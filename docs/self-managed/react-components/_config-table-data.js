@@ -2136,6 +2136,13 @@ export const configs = [
     types: ["Direct mapping"],
     area: ["Security"],
   },
+  // Process instance creation
+  {
+    name: "camunda.process-instance-creation.business-id-uniqueness-enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Process instance creation"],
+  },
   // Webapps section
   {
     name: "camunda.webapps.operate.enabled",
