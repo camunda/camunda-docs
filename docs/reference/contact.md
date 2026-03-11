@@ -25,6 +25,9 @@ import SalesImg from './img/icon-reference-sales.png';
 import SecurityImg from './img/icon-reference-padlock.png';
 import SupportImg from './img/icon-reference-support.png';
 import FeatureImg from './img/icon-feature-request.png';
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 Get support for Camunda or send us your feedback via the following channels.
 
