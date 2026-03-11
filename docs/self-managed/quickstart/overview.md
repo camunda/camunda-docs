@@ -40,7 +40,7 @@ In each quickstart, you will:
 
 - Spin up a local environment with the core Camunda 8 components.
 - Deploy a sample process definition.
-- Interact with the platform using Operate and Tasklist.
+- Interact with the Orchestration Cluster web applications (Operate and Tasklist).
 - Understand the responsibilities associated with your chosen role (developer or administrator).
 
 ## Prerequisites
