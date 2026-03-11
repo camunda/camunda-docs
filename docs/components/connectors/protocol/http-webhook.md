@@ -145,7 +145,7 @@ If you need to use correlation keys with XML payloads, send the correlation key 
 Use synchronous mode only when the caller needs the process result:
 
 - **Start Event**: Creates a new process and returns its result.
-- **Message Start Event** (and other message-based events): Correlates the message and returns the matched process instance.
+- **Message Start Event** (and other message-based events): Correlates the message and returns the matched process instance key.
 
 In asynchronous mode:
 
