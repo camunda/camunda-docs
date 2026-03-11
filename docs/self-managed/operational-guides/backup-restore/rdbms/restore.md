@@ -29,13 +29,14 @@ Restore a previous backup of your Camunda 8 Self-Managed components and cluster 
 
 As described in the [architecture overview](./backup.md#architecture-overview), backups involve two independent systems: **primary storage backups** (Zeebe's log stream and snapshots in a blob store) and the **secondary storage backup** (the RDBMS).
 
-During restore, Zeebe reads the **exporter position** from the restored RDBMS — the last log stream position that was successfully exported — and uses it to determine which primary storage backup to restore from. This ensures that Zeebe's state is at least as advanced as what the RDBMS contains. After restart, Zeebe re-exports any events between the RDBMS position and its restored checkpoint position, bringing the secondary storage up to date.
+During restore, Zeebe reads the **exporter position** from the restored RDBMS — the last log stream position that was successfully exported — and uses it to determine which primary storage backup, or backups, to restore from. This ensures that Zeebe's state is at least as advanced as what the RDBMS contains. After restart, Zeebe re-exports any events between the RDBMS position and its restored checkpoint position, bringing the secondary storage up to date.
 
 ## Restore process overview
 
-1. **Ensure all [prerequisites](#prerequisites) are met** — all Camunda components are stopped and the RDBMS has been restored.
-2. **Restore Zeebe** from its primary storage backup using one of the [restore options](#restore-options).
-3. **Start all Camunda components.**
+1. **Ensure all [prerequisites](#prerequisites) are met** — all Camunda components are stopped.
+2. RDBMS has been restored.
+3. **Restore Zeebe** from its primary storage backup using one of the [restore options](#restore-options).
+4. **Start all Camunda components.**
 
 ## Prerequisites
 

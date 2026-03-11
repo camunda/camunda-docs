@@ -16,7 +16,7 @@ keywords:
     "backup range",
     "backup state",
   ]
-description: "Learn how to back up your Camunda 8 Self-Managed components using a relational database, including continuous backups, backup ranges, and monitoring backup state."
+description: "Learn how to back up your Camunda 8 Self-Managed components when a relational database is used for secondary storage, including continuous backups, backup ranges, and monitoring backup state."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -37,12 +37,12 @@ The following prerequisites are required before you can create a backup.
 
 ## Architecture overview
 
-When Camunda uses an RDBMS as **secondary storage**, backups involve **two independent systems** that must be coordinated:
+When Camunda uses an RDBMS as **secondary storage**, backups involve **two independent systems**:
 
 - **Zeebe (primary storage)**: Backs up its internal state (log stream, snapshots) to an external blob store (S3, GCS, Azure, or filesystem). These are called **primary storage backups**.
 - **The external RDBMS**: Backed up using your database vendor's native tools (pg_dump, mysqldump, RMAN, etc.). This is the **secondary storage backup**.
 
-During restore, Zeebe uses the exporter position stored in the RDBMS to find the correct primary storage backup that matches the RDBMS state. This ensures consistency between the two systems without requiring synchronized backup timing.
+During restore, Zeebe uses the exporter position stored in the RDBMS to find the correct primary storage backup, or backups, that matches the RDBMS state. This ensures consistency between the two systems without requiring synchronized backup timing.
 
 :::tip
 While Zeebe during restore will match the secondary storage's backup position, it is recommended to have the backups taken at similar intervals. This minimizes the time required after restore for Zeebe to re-export events to the secondary storage.
@@ -50,11 +50,16 @@ While Zeebe during restore will match the secondary storage's backup position, i
 
 ## Continuous backups
 
-Continuous backups are the foundation for RDBMS backup and restore. When enabled, Zeebe prevents log compaction from deleting any segment that hasn't been backed up yet, and tracks backup metadata so you can query available backup ranges.
+Continuous backups must be enabled for RDBMS backup and restore.
 
 ### How continuous backups work
 
-1. When continuous backups are enabled, Zeebe will not compact (delete) any log segment that hasn't been backed up. This ensures no data is lost between backups.
+Continuous backups rely on a Zeebe feature that retains data records in the log stream until they are backed up.
+This ensures that after restore, the state of primary and secondary storage is in sync, without needing to orchestrate the backup of primary and secondary storage.
+
+When continuous backups are enabled:
+
+1. Zeebe prevents log compaction from deleting any segment that hasn't been backed up yet, and tracks backup metadata so you can query available backup ranges.
 2. The system tracks **backup ranges** — unbroken sequences of consecutive backups. These ranges define the time windows available for restore and can be queried via the [backup state actuator](../zeebe-backup-and-restore.md#request-runtime-state).
 
 :::warning
@@ -114,7 +119,9 @@ Use the [backup state actuator](../zeebe-backup-and-restore.md#request-runtime-s
 
 ### Scheduled backup
 
-With the scheduled backup approach, Zeebe's internal backup scheduler creates primary storage backups at a predefined interval. Combined with [continuous backups](#continuous-backups), this ensures you always have backup ranges available for disaster recovery. Learn more about configuring the backup scheduler [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).
+Zeebe's internal backup scheduler creates primary storage backups at a predefined interval — these are the actual backups you restore from. The **schedule** and **continuous mode** serve complementary purposes: the schedule triggers the backups, while continuous mode prevents log compaction and enables backup range tracking. Both should be enabled together for a complete backup strategy.
+
+Combined with [continuous backups](#continuous-backups), this ensures you always have backup ranges available for disaster recovery. Learn more about configuring the backup scheduler [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).
 
 #### Recommended configuration
 
@@ -132,10 +139,12 @@ camunda:
           cleanup-schedule: PT1H # check for expired backups every hour
 ```
 
-`continuous` and `schedule` serve complementary purposes. The **schedule** triggers primary storage backups at a regular interval — these are the actual backups you restore from. **Continuous mode** is a safety and tracking layer: it prevents Zeebe from compacting (deleting) any log segment that hasn't been backed up yet, and it enables backup range tracking so you can query available ranges via the [backup state actuator](../zeebe-backup-and-restore.md#request-runtime-state). Both should be enabled together for a complete backup strategy.
-
 :::warning
 To properly configure your backup interval, monitor the `zeebe.backup.operations.latency` metric (with `operation=take`) to understand your average backup duration. As a general rule of thumb, the backup interval must be greater than your latency. Latency is affected by the size of Zeebe's runtime state.
+:::
+
+:::tip
+You can still request on-demand primary storage backups through the regular [API](../../zeebe-backup-and-restore/#request), without the `backupId` parameter as it's being generated by the cluster.
 :::
 
 ### Manual backup
@@ -154,12 +163,6 @@ curl -X POST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupRuntime" \
 It is recommended to have the primary storage backup taken after the secondary storage one, if you are coordinating the backup process.
 :::
 
-### Back up the RDBMS
-
-Back up the RDBMS as described in the [prerequisites](#prerequisites). Camunda writes data to the RDBMS synchronously, so a standard database backup captures a consistent state. While exact synchronization with Zeebe backups is not required — the restore process handles alignment automatically — keeping backup intervals similar minimizes the time Zeebe needs to re-export events after a restore.
-
-During restore, Zeebe reads the **exporter position** from the `EXPORTER_POSITION` table — which records the last Zeebe log stream position exported to the RDBMS — to determine which primary storage backup to restore from.
-
 ## Verify your backup setup
 
 After configuring backups, verify that they are working correctly by querying the [backup state actuator](../zeebe-backup-and-restore.md#request-runtime-state):
@@ -176,6 +179,12 @@ Confirm the following in the response:
 
 If the response is empty or missing partitions, check your backup store configuration and ensure continuous backups are enabled.
 
+## Backing up RDBMS
+
+Back up the RDBMS as described in the [prerequisites](#prerequisites). While exact synchronization with Zeebe backups is not required — the restore process handles alignment automatically — keeping backup intervals similar minimizes the time Zeebe needs to re-export events after a restore.
+
+During restore, Zeebe reads the **exporter position** from the `EXPORTER_POSITION` table — which records the last Zeebe log stream position exported to the RDBMS — to determine which primary storage backup to restore from.
+
 ## (Optional) Back up Web Modeler data {#back-up-web-modeler-data}
 
 If you are using Web Modeler, you can also back up its data. Web Modeler stores its data in a relational database, so you can use the same backup tools as for the RDBMS secondary storage.
@@ -189,5 +198,5 @@ You can enable a retention mechanism over primary storage (Zeebe's) backups. Thi
 When retention deletes old backups, the affected [backup ranges](#backup-ranges) shrink accordingly, narrowing your available restore window. Ensure that your retention window is at least as long as the restore window you require. For example, if you need the ability to restore to any point in the last 7 days, set the retention window to at least `P7D`.
 
 :::note
-This only affects the primary storage.
+Backups created outside or before the scheduler was activated are also susceptible to be deleted by the retention mechanism. This only affects the primary storage.
 :::
