@@ -1,15 +1,15 @@
 ---
-id: admin-as-code
-title: Admin as Code
-description: Configure Admin as Code for a Camunda 8 Self-Managed Orchestration Cluster.
+id: admin-identity-as-code
+title: "Admin: Identity as Code"
+description: Configure Identity as Code for a Camunda 8 Self-Managed Orchestration Cluster.
 ---
 
-This page explains how to configure Admin as Code in the Camunda 8 Self-Managed Orchestration Cluster.
-Use Admin as Code to create users, roles, groups, authorizations, mapping rules, and tenants at application start.
+This page explains how to configure Identity as Code in the Camunda 8 Self-Managed Orchestration Cluster.
+Use Identity as Code to create users, roles, groups, authorizations, mapping rules, and tenants at application start.
 
 ## Use cases
 
-Admin as Code simplifies configuring Self-Managed orchestration clusters across multiple stages.
+Identity as Code simplifies configuring Self-Managed orchestration clusters across multiple stages.
 You can create [all Admin-related entities](/components/admin/admin-introduction.md#manage-access) on one stage and then deploy them to other stages without further interaction, reducing the chance of error.
 
 Another use case is local development, where a cluster might be recreated regularly.
