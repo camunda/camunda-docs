@@ -34,9 +34,32 @@ With the Camunda Spring Boot Starter, you can build:
 
 ## Version compatibility
 
-| Camunda Spring Boot Starter version | JDK  | Camunda version | Bundled Spring Boot version | Compatible Spring Boot version(s) |
-| ----------------------------------- | ---- | --------------- | --------------------------- | --------------------------------- |
-| 8.8.x                               | ≥ 17 | 8.8.x           | 4.0.x                       |                                   |
+| Camunda Spring Boot Starter artifact | Camunda Spring Boot Starter version | JDK  | Bundled Spring Boot version | Compatible Spring Boot version(s) |
+| ------------------------------------ | ----------------------------------- | ---- | --------------------------- | --------------------------------- |
+| `camunda-spring-boot-starter`        | 8.9.x                               | ≥ 17 | 4.0.x                       |                                   |
+| `camunda-spring-boot-4-starter`      | 8.9.x                               | ≥ 17 | 4.0.x                       |                                   |
+| `camunda-spring-boot-3-starter`      | 8.9.x                               | ≥ 17 | 3.5.x                       |                                   |
+
+### Dedicated Spring Boot 3 and 4 modules
+
+Starting with Camunda 8.9, the default `camunda-spring-boot-starter` artifact is bundled with **Spring Boot 4.0.x**. Additionally, two dedicated modules are available:
+
+- **`camunda-spring-boot-4-starter`**: Identical to `camunda-spring-boot-starter`. Use this if you want to explicitly target Spring Boot 4.0.x.
+- **`camunda-spring-boot-3-starter`**: Bundled with Spring Boot 3.5.x. Use this if your application is not yet ready to upgrade to Spring Boot 4.0.
+
+:::caution Spring Boot 3.5.x support window
+OSS support for Spring Boot 3.5.x ends in June 2026. We encourage you to migrate to Spring Boot 4.0 before the support window closes. If you need continued Spring Boot 3.x support after June 2026, consider obtaining enterprise support from a third-party provider.
+:::
+
+To use the Spring Boot 3 module, replace the default dependency in your project:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>camunda-spring-boot-3-starter</artifactId>
+  <version>8.9.x</version>
+</dependency>
+```
 
 ## Get started
 
@@ -50,7 +73,7 @@ Add the Camunda Spring Boot Starter to your project:
 <dependency>
   <groupId>io.camunda</groupId>
   <artifactId>camunda-spring-boot-starter</artifactId>
-  <version>8.8.x</version>
+  <version>8.9.x</version>
 </dependency>
 ```
 
