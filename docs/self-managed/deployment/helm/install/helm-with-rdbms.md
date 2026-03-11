@@ -61,7 +61,7 @@ Before you begin:
 
 ### Step 2: Prepare your database
 
-Create a database and user. Example for PostgreSQL:
+Create a database and user. For example, in PostgreSQL:
 
 ```bash
 createdb camunda
@@ -128,7 +128,6 @@ orchestration:
 # Disable default Elasticsearch subchart
 elasticsearch:
   enabled: false
-
 # If deploying Optimize, you still need Elasticsearch/OpenSearch
 # Uncomment below and configure as needed:
 # opensearch:
@@ -368,7 +367,6 @@ orchestration:
 
 optimize:
   enabled: true
-
 # Choose one secondary storage for Optimize:
 # opensearch:
 #   enabled: true
@@ -424,7 +422,7 @@ Cross-region RDBMS deployments are **not tested or supported in Camunda 8.9**. L
 
 Optimize **cannot use RDBMS** and requires Elasticsearch or OpenSearch. If deploying Optimize alongside an RDBMS-based Orchestration Cluster, you must provision Elasticsearch/OpenSearch for Optimize only.
 
-### Self-managed database HA
+### Self-Managed database HA
 
 Camunda does not manage database HA. Use cloud-managed databases (AWS Aurora, Azure Database, GCP Cloud SQL) or vendor-supplied HA solutions. Camunda assumes the database handles its own replication and failover.
 
