@@ -17,8 +17,7 @@ the [Test scenario files](/components/modeler/web-modeler/validation/test-scenar
 
 ## Write a JSON test case
 
-The JSON format is defined in the JSON
-schema [cpt-test-cases.schema.json](https://github.com/camunda/camunda/blob/main/testing/camunda-process-test-json-test-cases/src/main/resources/schema/cpt-test-cases.schema.json).
+The JSON format is defined in the [JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json).
 It defines the following structure:
 
 - `testCases`: An array of test cases to be executed.
@@ -31,8 +30,8 @@ It defines the following structure:
 How to start:
 
 1. Create a new JSON file in your test resources folder (e.g., `src/test/resources/test-cases/invoice-approval.json`)
-2. Refer to the JSON schema in the `$schema` property. Use the same schema version as the CPT version you are using to
-   ensure compatibility.
+2. Refer to the JSON schema `https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json` in the `$schema` property.
+   Use the same schema version as the CPT version you are using to ensure compatibility.
 3. Add your test cases and use the [available instructions](#reference-instructions) to define the behavior of your
    process test.
 
@@ -40,7 +39,7 @@ The basic structure of the JSON file looks like this:
 
 ```JSON
 {
-  "$schema": "https://raw.githubusercontent.com/camunda/camunda/refs/heads/main/testing/camunda-process-test-json-test-cases/src/main/resources/schema/cpt-test-cases.schema.json",
+  "$schema": "https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json",
   "testCases": [
     {
       "name": "My first test case",
@@ -221,7 +220,7 @@ An example JSON test case file could look like this:
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/camunda/camunda/refs/heads/main/testing/camunda-process-test-json-test-cases/src/main/resources/schema/cpt-test-cases.schema.json",
+  "$schema": "https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json",
   "testCases": [
     {
       "name": "Happy path",
