@@ -20,9 +20,22 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-breadcrumb-item-background-active: none;
   --ifm-breadcrumb-color-active: var(--ifm-font-color-base);
   --ifm-menu-color: var(--ifm-color-emphasis-800);
+  --ifm-font-family-base:
+    Inter, -apple-system, blinkmacsystemfont, Segoe UI, roboto, Helvetica Neue,
+    sans-serif;
   --ifm-heading-font-family:
-    IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto,
-    oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
+    Inter, -apple-system, blinkmacsystemfont, Segoe UI, roboto, Helvetica Neue,
+    sans-serif;
+  --ifm-font-size-base: 15px;
+  --ifm-line-height-base: 1.7;
+  --ifm-heading-font-weight: 600;
+  --ifm-h1-font-size: 1.875rem;
+  --ifm-h2-font-size: 1.375rem;
+  --ifm-h3-font-size: 1.125rem;
+  --ifm-sidebar-width: 280px;
+  --ifm-menu-link-padding-vertical: 0.3rem;
+  --ifm-menu-link-padding-horizontal: 0.75rem;
+  --doc-sidebar-hidden-width: 30px;
   --ifm-leading: calc(var(--ifm-leading-desktop) * 1rem);
   --ifm-alert-border-radius: 0;
   --ifm-breadcrumb-padding-horizontal: 0rem;
@@ -270,9 +283,26 @@ we make it less bold compared to the search keyword */
   margin-bottom: 40px !important;
 }
 
-/* Add padding to main content column */
+/* Content column: cap width for readability like Ghost docs */
 .docMainContainer_TBSr {
-  padding-left: 20px;
+  padding-left: 32px;
+  padding-right: 16px;
+  max-width: 860px;
+}
+
+/* Tighten heading spacing to match Ghost docs rhythm */
+.markdown h1 {
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+.markdown h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+.markdown h3 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.4rem;
 }
 
 /* Search border */
@@ -553,21 +583,21 @@ a {
   padding: 0 var(--ifm-pre-padding);
 }
 
-/* Import IBM Plex Sans font */
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+/* Import Inter + IBM Plex Sans fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 body {
   font-family:
-    IBM Plex Sans,
+    Inter,
     -apple-system,
     blinkmacsystemfont,
     Segoe UI,
     roboto,
-    oxygen-sans,
-    ubuntu,
-    cantarell,
     Helvetica Neue,
     sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
 
 .alert a {
@@ -1486,9 +1516,14 @@ ul ol {
   margin-top: 0.35rem;
   margin-bottom: 0.35rem;
 }
-/* Reduce weight of menu items */
+/* Sidebar: Ghost-style clean links */
 .menu__link {
-  font-weight: var(--ifm-font-weight-normal);
+  font-weight: 400;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 /* Highlight tabs */
 .tabs {
@@ -1514,26 +1549,31 @@ ul ol {
 
 /* Reset all menu items to default styling */
 .menu__link {
-  color: inherit; /* Default text color */
-  font-weight: normal; /* Normal font weight */
+  color: var(--ifm-menu-color);
+  font-weight: 400;
 }
 
-/* Style any active page (including categories) with blue text */
+/* Style any active page with primary-color text, subtle background, no left bar */
 .menu__link--active {
-  color: var(--ifm-menu-color-active); /* Blue text color */
-  font-weight: 600; /* Bold font weight */
-  border-left: 4px solid var(--ifm-link-color);
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+  background-color: color-mix(
+    in srgb,
+    var(--ifm-color-primary) 8%,
+    transparent
+  );
+  border-left: none;
+  border-radius: 6px;
 }
 
 /* Only reset styling for parent categories that aren't the current page */
 .menu__link--sublist:not(.menu__link--active),
 .menu__list-item-collapsible:not(.menu__list-item-collapsible--active)
   > .menu__link {
-  color: inherit; /* Default text color */
-  font-weight: normal; /* Normal font weight */
+  color: var(--ifm-menu-color);
+  font-weight: 500;
   border-left: 0;
+  background-color: transparent;
 }
 /* double column div layout  */
 .double-column-container {
