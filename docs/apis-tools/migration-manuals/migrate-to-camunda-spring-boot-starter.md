@@ -30,14 +30,14 @@ Maven:
 <dependency>
     <groupId>io.camunda</groupId>
     <artifactId>camunda-spring-boot-starter</artifactId>
-    <version>8.9.x</version>
+    <version>8.8.x</version>
 </dependency>
 ```
 
 Gradle:
 
 ```groovy
-implementation 'io.camunda:camunda-spring-boot-starter:${8.9.x}'
+implementation 'io.camunda:camunda-spring-boot-starter:${8.8.x}'
 ```
 
 ## Deprecated classes and methods
