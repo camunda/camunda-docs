@@ -11,26 +11,16 @@ mdx:
 type SearchElementInstanceIncidentsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:10515](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10515)
+Defined in: [gen/types.gen.ts:10467](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10467)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: IncidentSearchQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:10519](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10519)
+Defined in: [gen/types.gen.ts:10471](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10471)
 
 The element instance incident search result.
-
-#### Type Declaration
-
-##### items?
-
-```ts
-optional items: object[];
-```
-
-The matching incidents.

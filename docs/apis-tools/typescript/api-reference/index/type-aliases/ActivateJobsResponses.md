@@ -11,24 +11,16 @@ mdx:
 type ActivateJobsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:11692](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11692)
+Defined in: [gen/types.gen.ts:11778](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11778)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: object;
+200: JobActivationResult;
 ```
 
-Defined in: [gen/types.gen.ts:11696](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11696)
+Defined in: [gen/types.gen.ts:11782](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11782)
 
-The list of activated jobs
-
-#### jobs
-
-```ts
-jobs: object[];
-```
-
-The activated jobs.
+The list of activated jobs.

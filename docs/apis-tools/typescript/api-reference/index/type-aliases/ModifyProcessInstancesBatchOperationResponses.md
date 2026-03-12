@@ -11,7 +11,7 @@ mdx:
 type ModifyProcessInstancesBatchOperationResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:13614](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13614)
+Defined in: [gen/types.gen.ts:13131](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13131)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:13614](https://github.com/camunda/orchestration-cl
 200: BatchOperationCreatedResult;
 ```
 
-Defined in: [gen/types.gen.ts:13618](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13618)
+Defined in: [gen/types.gen.ts:13135](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13135)
 
 The batch operation request was created.

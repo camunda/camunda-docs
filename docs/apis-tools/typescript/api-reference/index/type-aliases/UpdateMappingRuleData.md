@@ -11,19 +11,19 @@ mdx:
 type UpdateMappingRuleData = object;
 ```
 
-Defined in: [gen/types.gen.ts:12366](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12366)
+Defined in: [gen/types.gen.ts:12405](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12405)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: MappingRuleCreateUpdateRequest;
+optional body: MappingRuleUpdateRequest;
 ```
 
-Defined in: [gen/types.gen.ts:12367](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12367)
+Defined in: [gen/types.gen.ts:12406](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12406)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:12367](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:12368](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12368)
+Defined in: [gen/types.gen.ts:12407](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12407)
 
 #### mappingRuleId
 
@@ -41,7 +41,7 @@ mappingRuleId: string;
 
 The ID of the mapping rule to update.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The ID of the mapping rule to update.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:12374](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12374)
+Defined in: [gen/types.gen.ts:12413](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12413)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:12374](https://github.com/camunda/orchestration-cl
 url: "/mapping-rules/{mappingRuleId}";
 ```
 
-Defined in: [gen/types.gen.ts:12375](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12375)
+Defined in: [gen/types.gen.ts:12414](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12414)

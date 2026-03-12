@@ -11,14 +11,14 @@ mdx:
 type CorrelatedMessageSubscriptionSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:4910](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4910)
+Defined in: [gen/types.gen.ts:5562](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5562)
 
 ## Properties
 
 ### field
 
 ```ts
-field:
+field: 
   | "correlationKey"
   | "correlationTime"
   | "elementId"
@@ -33,11 +33,11 @@ field:
   | "tenantId";
 ```
 
-Defined in: [gen/types.gen.ts:4914](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4914)
+Defined in: [gen/types.gen.ts:5566](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5566)
 
 The field to sort by.
 
----
+***
 
 ### order?
 
@@ -45,4 +45,4 @@ The field to sort by.
 optional order: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:4915](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4915)
+Defined in: [gen/types.gen.ts:5567](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5567)

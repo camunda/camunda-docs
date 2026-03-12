@@ -11,7 +11,7 @@ mdx:
 type GetProcessDefinitionStatisticsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:13094](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13094)
+Defined in: [gen/types.gen.ts:12809](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12809)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:13094](https://github.com/camunda/orchestration-cl
 200: ProcessDefinitionElementStatisticsQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:13098](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13098)
+Defined in: [gen/types.gen.ts:12813](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12813)
 
 The process definition statistics result.

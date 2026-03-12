@@ -11,16 +11,16 @@ mdx:
 type GroupSearchQueryResult = SearchQueryResponse & object;
 ```
 
-Defined in: [gen/types.gen.ts:2897](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2897)
+Defined in: [gen/types.gen.ts:3227](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L3227)
 
 Group search response.
 
 ## Type Declaration
 
-### items?
+### items
 
 ```ts
-optional items: GroupResult[];
+items: GroupResult[];
 ```
 
 The matching groups.

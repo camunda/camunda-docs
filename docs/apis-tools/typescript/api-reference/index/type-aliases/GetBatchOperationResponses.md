@@ -11,7 +11,7 @@ mdx:
 type GetBatchOperationResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:8375](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8375)
+Defined in: [gen/types.gen.ts:8869](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8869)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:8375](https://github.com/camunda/orchestration-clu
 200: BatchOperationResponse;
 ```
 
-Defined in: [gen/types.gen.ts:8379](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8379)
+Defined in: [gen/types.gen.ts:8873](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8873)
 
 The batch operation was found.

@@ -11,7 +11,7 @@ mdx:
 type CreateTenantClusterVariableResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:8900](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8900)
+Defined in: [gen/types.gen.ts:9328](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9328)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:8900](https://github.com/camunda/orchestration-clu
 200: ClusterVariableResult;
 ```
 
-Defined in: [gen/types.gen.ts:8904](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8904)
+Defined in: [gen/types.gen.ts:9332](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9332)
 
 Cluster variable created

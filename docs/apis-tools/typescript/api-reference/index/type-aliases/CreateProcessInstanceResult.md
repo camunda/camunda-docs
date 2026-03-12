@@ -11,9 +11,21 @@ mdx:
 type CreateProcessInstanceResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:5563](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5563)
+Defined in: [gen/types.gen.ts:6232](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6232)
 
 ## Properties
+
+### businessId
+
+```ts
+businessId: BusinessId | null;
+```
+
+Defined in: [gen/types.gen.ts:6269](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6269)
+
+Business id as provided on creation.
+
+***
 
 ### processDefinitionId
 
@@ -21,12 +33,12 @@ Defined in: [gen/types.gen.ts:5563](https://github.com/camunda/orchestration-clu
 processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:5569](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5569)
+Defined in: [gen/types.gen.ts:6238](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6238)
 
 The BPMN process id of the process definition which was used to create the process.
 instance
 
----
+***
 
 ### processDefinitionKey
 
@@ -34,11 +46,11 @@ instance
 processDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:5589](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5589)
+Defined in: [gen/types.gen.ts:6258](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6258)
 
 The key of the process definition which was used to create the process instance.
 
----
+***
 
 ### processDefinitionVersion
 
@@ -46,11 +58,11 @@ The key of the process definition which was used to create the process instance.
 processDefinitionVersion: number;
 ```
 
-Defined in: [gen/types.gen.ts:5574](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5574)
+Defined in: [gen/types.gen.ts:6243](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6243)
 
 The version of the process definition which was used to create the process instance.
 
----
+***
 
 ### processInstanceKey
 
@@ -58,22 +70,22 @@ The version of the process definition which was used to create the process insta
 processInstanceKey: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:5595](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5595)
+Defined in: [gen/types.gen.ts:6264](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6264)
 
 The unique identifier of the created process instance; to be used wherever a request
 needs a process instance key (e.g. CancelProcessInstanceRequest).
 
----
+***
 
-### tags?
+### tags
 
 ```ts
-optional tags: TagSet;
+tags: TagSet;
 ```
 
-Defined in: [gen/types.gen.ts:5596](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5596)
+Defined in: [gen/types.gen.ts:6265](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6265)
 
----
+***
 
 ### tenantId
 
@@ -81,11 +93,11 @@ Defined in: [gen/types.gen.ts:5596](https://github.com/camunda/orchestration-clu
 tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:5578](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5578)
+Defined in: [gen/types.gen.ts:6247](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6247)
 
 The tenant id of the created process instance.
 
----
+***
 
 ### variables
 
@@ -93,7 +105,7 @@ The tenant id of the created process instance.
 variables: object;
 ```
 
-Defined in: [gen/types.gen.ts:5582](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5582)
+Defined in: [gen/types.gen.ts:6251](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6251)
 
 All the variables visible in the root scope.
 

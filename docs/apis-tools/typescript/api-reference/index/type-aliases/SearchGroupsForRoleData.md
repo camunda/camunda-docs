@@ -11,29 +11,19 @@ mdx:
 type SearchGroupsForRoleData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14895](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14895)
+Defined in: [gen/types.gen.ts:14133](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L14133)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: SearchQueryRequest & object;
+optional body: RoleGroupSearchQueryRequest;
 ```
 
-Defined in: [gen/types.gen.ts:14896](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14896)
+Defined in: [gen/types.gen.ts:14134](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L14134)
 
-#### Type Declaration
-
-##### sort?
-
-```ts
-optional sort: object[];
-```
-
-Sort field criteria.
-
----
+***
 
 ### path
 
@@ -41,7 +31,7 @@ Sort field criteria.
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:14908](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14908)
+Defined in: [gen/types.gen.ts:14135](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L14135)
 
 #### roleId
 
@@ -51,7 +41,7 @@ roleId: string;
 
 The role ID.
 
----
+***
 
 ### query?
 
@@ -59,9 +49,9 @@ The role ID.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:14914](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14914)
+Defined in: [gen/types.gen.ts:14141](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L14141)
 
----
+***
 
 ### url
 
@@ -69,4 +59,4 @@ Defined in: [gen/types.gen.ts:14914](https://github.com/camunda/orchestration-cl
 url: "/roles/{roleId}/groups/search";
 ```
 
-Defined in: [gen/types.gen.ts:14915](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14915)
+Defined in: [gen/types.gen.ts:14142](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L14142)

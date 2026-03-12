@@ -11,7 +11,7 @@ mdx:
 type SearchDecisionDefinitionsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:9262](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9262)
+Defined in: [gen/types.gen.ts:9635](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9635)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:9262](https://github.com/camunda/orchestration-clu
 200: DecisionDefinitionSearchQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:9266](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9266)
+Defined in: [gen/types.gen.ts:9639](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9639)
 
 The decision definition search result.

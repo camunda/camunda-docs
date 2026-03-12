@@ -7,7 +7,7 @@ mdx:
 
 # Interface: CamundaOptions
 
-Defined in: [gen/CamundaClient.ts:1160](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1160)
+Defined in: [gen/CamundaClient.ts:1145](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L1145)
 
 ## Properties
 
@@ -38,13 +38,16 @@ optional config: Partial<{
   CAMUNDA_REST_ADDRESS: string;
   CAMUNDA_SDK_BACKPRESSURE_DECAY_QUIET_MS: number;
   CAMUNDA_SDK_BACKPRESSURE_FLOOR: number;
+  CAMUNDA_SDK_BACKPRESSURE_HEALTHY_RECOVERY_MULTIPLIER: number;
   CAMUNDA_SDK_BACKPRESSURE_INITIAL_MAX: number;
+  CAMUNDA_SDK_BACKPRESSURE_MAX_WAITERS: number;
   CAMUNDA_SDK_BACKPRESSURE_PROFILE: "BALANCED" | "CONSERVATIVE" | "AGGRESSIVE" | "LEGACY";
   CAMUNDA_SDK_BACKPRESSURE_RECOVERY_INTERVAL_MS: number;
   CAMUNDA_SDK_BACKPRESSURE_RECOVERY_STEP: number;
   CAMUNDA_SDK_BACKPRESSURE_SEVERE_FACTOR: number;
   CAMUNDA_SDK_BACKPRESSURE_SEVERE_THRESHOLD: number;
   CAMUNDA_SDK_BACKPRESSURE_SOFT_FACTOR: number;
+  CAMUNDA_SDK_BACKPRESSURE_UNLIMITED_AFTER_HEALTHY_MS: number;
   CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS: number;
   CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS: number;
   CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS: number;
@@ -60,9 +63,9 @@ optional config: Partial<{
 }>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1162](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1162)
+Defined in: [gen/CamundaClient.ts:1147](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L1147)
 
----
+***
 
 ### env?
 
@@ -70,9 +73,9 @@ Defined in: [gen/CamundaClient.ts:1162](https://github.com/camunda/orchestration
 optional env: Record<string, string | undefined>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1166](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1166)
+Defined in: [gen/CamundaClient.ts:1151](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L1151)
 
----
+***
 
 ### fetch()?
 
@@ -80,7 +83,7 @@ Defined in: [gen/CamundaClient.ts:1166](https://github.com/camunda/orchestration
 optional fetch: (input, init?) => Promise<Response>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1164](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1164)
+Defined in: [gen/CamundaClient.ts:1149](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L1149)
 
 #### Parameters
 
@@ -96,7 +99,7 @@ Defined in: [gen/CamundaClient.ts:1164](https://github.com/camunda/orchestration
 
 `Promise`\<`Response`\>
 
----
+***
 
 ### log?
 
@@ -104,7 +107,7 @@ Defined in: [gen/CamundaClient.ts:1164](https://github.com/camunda/orchestration
 optional log: object;
 ```
 
-Defined in: [gen/CamundaClient.ts:1168](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1168)
+Defined in: [gen/CamundaClient.ts:1153](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L1153)
 
 #### level?
 
@@ -118,7 +121,7 @@ optional level: LogLevel;
 optional transport: LogTransport;
 ```
 
----
+***
 
 ### supportLogger?
 
@@ -126,9 +129,9 @@ optional transport: LogTransport;
 optional supportLogger: SupportLogger;
 ```
 
-Defined in: [gen/CamundaClient.ts:1179](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1179)
+Defined in: [gen/CamundaClient.ts:1164](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L1164)
 
----
+***
 
 ### telemetry?
 
@@ -136,7 +139,7 @@ Defined in: [gen/CamundaClient.ts:1179](https://github.com/camunda/orchestration
 optional telemetry: object;
 ```
 
-Defined in: [gen/CamundaClient.ts:1170](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1170)
+Defined in: [gen/CamundaClient.ts:1155](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L1155)
 
 #### correlation?
 
@@ -156,7 +159,7 @@ optional hooks: TelemetryHooks;
 optional mirrorToLog: boolean;
 ```
 
----
+***
 
 ### throwOnError?
 
@@ -164,4 +167,4 @@ optional mirrorToLog: boolean;
 optional throwOnError: boolean;
 ```
 
-Defined in: [gen/CamundaClient.ts:1177](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1177)
+Defined in: [gen/CamundaClient.ts:1162](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L1162)

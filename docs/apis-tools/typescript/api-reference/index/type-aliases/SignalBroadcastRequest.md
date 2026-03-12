@@ -11,7 +11,7 @@ mdx:
 type SignalBroadcastRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:6491](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6491)
+Defined in: [gen/types.gen.ts:7200](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7200)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:6491](https://github.com/camunda/orchestration-clu
 signalName: string;
 ```
 
-Defined in: [gen/types.gen.ts:6495](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6495)
+Defined in: [gen/types.gen.ts:7204](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7204)
 
 The name of the signal to broadcast.
 
----
+***
 
 ### tenantId?
 
@@ -33,11 +33,11 @@ The name of the signal to broadcast.
 optional tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:6505](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6505)
+Defined in: [gen/types.gen.ts:7214](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7214)
 
 The ID of the tenant that owns the signal.
 
----
+***
 
 ### variables?
 
@@ -45,7 +45,7 @@ The ID of the tenant that owns the signal.
 optional variables: object;
 ```
 
-Defined in: [gen/types.gen.ts:6499](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6499)
+Defined in: [gen/types.gen.ts:7208](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7208)
 
 The signal variables as a JSON object.
 

@@ -11,7 +11,7 @@ mdx:
 type ProcessInstanceModificationInstruction = object;
 ```
 
-Defined in: [gen/types.gen.ts:5952](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5952)
+Defined in: [gen/types.gen.ts:6654](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6654)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:5952](https://github.com/camunda/orchestration-clu
 optional activateInstructions: ProcessInstanceModificationActivateInstruction[];
 ```
 
-Defined in: [gen/types.gen.ts:5957](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5957)
+Defined in: [gen/types.gen.ts:6659](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6659)
 
 Instructions describing which elements to activate in which scopes and which variables to create or update.
 
----
+***
 
 ### moveInstructions?
 
@@ -33,11 +33,11 @@ Instructions describing which elements to activate in which scopes and which var
 optional moveInstructions: ProcessInstanceModificationMoveInstruction[];
 ```
 
-Defined in: [gen/types.gen.ts:5961](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5961)
+Defined in: [gen/types.gen.ts:6663](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6663)
 
 Instructions describing which elements to move from one scope to another.
 
----
+***
 
 ### operationReference?
 
@@ -45,9 +45,9 @@ Instructions describing which elements to move from one scope to another.
 optional operationReference: OperationReference;
 ```
 
-Defined in: [gen/types.gen.ts:5953](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5953)
+Defined in: [gen/types.gen.ts:6655](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6655)
 
----
+***
 
 ### terminateInstructions?
 
@@ -55,6 +55,6 @@ Defined in: [gen/types.gen.ts:5953](https://github.com/camunda/orchestration-clu
 optional terminateInstructions: ProcessInstanceModificationTerminateInstruction[];
 ```
 
-Defined in: [gen/types.gen.ts:5965](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5965)
+Defined in: [gen/types.gen.ts:6667](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6667)
 
 Instructions describing which elements to terminate.

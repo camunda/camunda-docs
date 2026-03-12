@@ -11,7 +11,7 @@ mdx:
 type AdvancedProcessInstanceKeyFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:4146](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4146)
+Defined in: [gen/types.gen.ts:4782](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4782)
 
 Advanced filter
 
@@ -25,11 +25,11 @@ Advanced ProcessInstanceKey filter.
 optional $eq: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:4150](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4150)
+Defined in: [gen/types.gen.ts:4786](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4786)
 
 Checks for equality with the provided value.
 
----
+***
 
 ### $exists?
 
@@ -37,11 +37,11 @@ Checks for equality with the provided value.
 optional $exists: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:4158](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4158)
+Defined in: [gen/types.gen.ts:4794](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4794)
 
 Checks if the current property exists.
 
----
+***
 
 ### $in?
 
@@ -49,11 +49,11 @@ Checks if the current property exists.
 optional $in: ProcessInstanceKey[];
 ```
 
-Defined in: [gen/types.gen.ts:4162](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4162)
+Defined in: [gen/types.gen.ts:4798](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4798)
 
 Checks if the property matches any of the provided values.
 
----
+***
 
 ### $neq?
 
@@ -61,11 +61,11 @@ Checks if the property matches any of the provided values.
 optional $neq: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:4154](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4154)
+Defined in: [gen/types.gen.ts:4790](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4790)
 
 Checks for inequality with the provided value.
 
----
+***
 
 ### $notIn?
 
@@ -73,6 +73,6 @@ Checks for inequality with the provided value.
 optional $notIn: ProcessInstanceKey[];
 ```
 
-Defined in: [gen/types.gen.ts:4166](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4166)
+Defined in: [gen/types.gen.ts:4802](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4802)
 
 Checks if the property matches none of the provided values.

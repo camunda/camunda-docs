@@ -11,7 +11,7 @@ mdx:
 type GlobalJobStatisticsQueryResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:3314](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3314)
+Defined in: [gen/types.gen.ts:3688](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L3688)
 
 Global job statistics query result.
 
@@ -23,9 +23,9 @@ Global job statistics query result.
 completed: StatusMetric;
 ```
 
-Defined in: [gen/types.gen.ts:3316](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3316)
+Defined in: [gen/types.gen.ts:3690](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L3690)
 
----
+***
 
 ### created
 
@@ -33,9 +33,9 @@ Defined in: [gen/types.gen.ts:3316](https://github.com/camunda/orchestration-clu
 created: StatusMetric;
 ```
 
-Defined in: [gen/types.gen.ts:3315](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3315)
+Defined in: [gen/types.gen.ts:3689](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L3689)
 
----
+***
 
 ### failed
 
@@ -43,9 +43,9 @@ Defined in: [gen/types.gen.ts:3315](https://github.com/camunda/orchestration-clu
 failed: StatusMetric;
 ```
 
-Defined in: [gen/types.gen.ts:3317](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3317)
+Defined in: [gen/types.gen.ts:3691](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L3691)
 
----
+***
 
 ### isIncomplete
 
@@ -53,6 +53,6 @@ Defined in: [gen/types.gen.ts:3317](https://github.com/camunda/orchestration-clu
 isIncomplete: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:3321](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3321)
+Defined in: [gen/types.gen.ts:3695](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L3695)
 
 True if some data is missing because internal limits were reached and some metrics were not recorded.

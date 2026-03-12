@@ -11,7 +11,7 @@ mdx:
 type unassignMappingRuleFromTenantInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:1022](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1022)
+Defined in: [gen/CamundaClient.ts:1008](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L1008)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/CamundaClient.ts:1022](https://github.com/camunda/orchestration
 mappingRuleId: unassignMappingRuleFromTenantPathParam_mappingRuleId;
 ```
 
-Defined in: [gen/CamundaClient.ts:1022](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1022)
+Defined in: [gen/CamundaClient.ts:1008](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L1008)
 
----
+***
 
 ### tenantId
 
@@ -31,4 +31,4 @@ Defined in: [gen/CamundaClient.ts:1022](https://github.com/camunda/orchestration
 tenantId: unassignMappingRuleFromTenantPathParam_tenantId;
 ```
 
-Defined in: [gen/CamundaClient.ts:1022](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1022)
+Defined in: [gen/CamundaClient.ts:1008](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L1008)

@@ -11,26 +11,16 @@ mdx:
 type SearchIncidentsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:11400](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11400)
+Defined in: [gen/types.gen.ts:11573](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11573)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: IncidentSearchQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:11404](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11404)
+Defined in: [gen/types.gen.ts:11577](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11577)
 
 The incident search result.
-
-#### Type Declaration
-
-##### items?
-
-```ts
-optional items: object[];
-```
-
-The matching incidents.

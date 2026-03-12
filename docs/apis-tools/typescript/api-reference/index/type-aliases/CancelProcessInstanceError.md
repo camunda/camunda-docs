@@ -8,8 +8,7 @@ mdx:
 # Type Alias: CancelProcessInstanceError
 
 ```ts
-type CancelProcessInstanceError =
-  CancelProcessInstanceErrors[keyof CancelProcessInstanceErrors];
+type CancelProcessInstanceError = CancelProcessInstanceErrors[keyof CancelProcessInstanceErrors];
 ```
 
-Defined in: [gen/types.gen.ts:13960](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13960)
+Defined in: [gen/types.gen.ts:13303](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13303)

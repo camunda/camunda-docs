@@ -11,28 +11,28 @@ mdx:
 type ProcessInstanceReference = object;
 ```
 
-Defined in: [gen/types.gen.ts:1379](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1379)
+Defined in: [gen/types.gen.ts:1414](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1414)
 
 ## Properties
 
-### processDefinitionKey?
+### processDefinitionKey
 
 ```ts
-optional processDefinitionKey: ProcessDefinitionKey;
+processDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:1383](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1383)
+Defined in: [gen/types.gen.ts:1418](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1418)
 
 The key of the process definition.
 
----
+***
 
-### processInstanceKey?
+### processInstanceKey
 
 ```ts
-optional processInstanceKey: ProcessInstanceKey;
+processInstanceKey: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:1387](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1387)
+Defined in: [gen/types.gen.ts:1422](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1422)
 
 The key of the created process instance.

@@ -11,33 +11,19 @@ mdx:
 type GetProcessDefinitionInstanceStatisticsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:12782](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12782)
+Defined in: [gen/types.gen.ts:12641](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12641)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: object;
+optional body: ProcessDefinitionInstanceStatisticsQuery;
 ```
 
-Defined in: [gen/types.gen.ts:12783](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12783)
+Defined in: [gen/types.gen.ts:12642](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12642)
 
-#### page?
-
-```ts
-optional page: OffsetPagination;
-```
-
-#### sort?
-
-```ts
-optional sort: object[];
-```
-
-Sort field criteria.
-
----
+***
 
 ### path?
 
@@ -45,9 +31,9 @@ Sort field criteria.
 optional path: never;
 ```
 
-Defined in: [gen/types.gen.ts:12796](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12796)
+Defined in: [gen/types.gen.ts:12643](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12643)
 
----
+***
 
 ### query?
 
@@ -55,9 +41,9 @@ Defined in: [gen/types.gen.ts:12796](https://github.com/camunda/orchestration-cl
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:12797](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12797)
+Defined in: [gen/types.gen.ts:12644](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12644)
 
----
+***
 
 ### url
 
@@ -65,4 +51,4 @@ Defined in: [gen/types.gen.ts:12797](https://github.com/camunda/orchestration-cl
 url: "/process-definitions/statistics/process-instances";
 ```
 
-Defined in: [gen/types.gen.ts:12798](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12798)
+Defined in: [gen/types.gen.ts:12645](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12645)

@@ -11,7 +11,7 @@ mdx:
 type MigrateProcessInstanceMappingInstruction = object;
 ```
 
-Defined in: [gen/types.gen.ts:5941](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5941)
+Defined in: [gen/types.gen.ts:6643](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6643)
 
 The mapping instructions describe how to map elements from the source process definition to the target process definition.
 
@@ -23,11 +23,11 @@ The mapping instructions describe how to map elements from the source process de
 sourceElementId: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:5945](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5945)
+Defined in: [gen/types.gen.ts:6647](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6647)
 
 The element id to migrate from.
 
----
+***
 
 ### targetElementId
 
@@ -35,6 +35,6 @@ The element id to migrate from.
 targetElementId: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:5949](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5949)
+Defined in: [gen/types.gen.ts:6651](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6651)
 
 The element id to migrate into.

@@ -11,43 +11,19 @@ mdx:
 type GetProcessDefinitionInstanceVersionStatisticsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:13156](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13156)
+Defined in: [gen/types.gen.ts:12871](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12871)
 
 ## Properties
 
 ### body
 
 ```ts
-body: object;
+body: ProcessDefinitionInstanceVersionStatisticsQuery;
 ```
 
-Defined in: [gen/types.gen.ts:13157](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13157)
+Defined in: [gen/types.gen.ts:12872](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12872)
 
-#### filter
-
-```ts
-filter: ProcessDefinitionInstanceVersionStatisticsFilter;
-```
-
-The process definition instance version statistics search filters.
-
-#### page?
-
-```ts
-optional page: OffsetPagination;
-```
-
-Pagination criteria.
-
-#### sort?
-
-```ts
-optional sort: object[];
-```
-
-Sort field criteria.
-
----
+***
 
 ### path?
 
@@ -55,9 +31,9 @@ Sort field criteria.
 optional path: never;
 ```
 
-Defined in: [gen/types.gen.ts:13177](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13177)
+Defined in: [gen/types.gen.ts:12873](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12873)
 
----
+***
 
 ### query?
 
@@ -65,9 +41,9 @@ Defined in: [gen/types.gen.ts:13177](https://github.com/camunda/orchestration-cl
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:13178](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13178)
+Defined in: [gen/types.gen.ts:12874](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12874)
 
----
+***
 
 ### url
 
@@ -75,4 +51,4 @@ Defined in: [gen/types.gen.ts:13178](https://github.com/camunda/orchestration-cl
 url: "/process-definitions/statistics/process-instances-by-version";
 ```
 
-Defined in: [gen/types.gen.ts:13179](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13179)
+Defined in: [gen/types.gen.ts:12875](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12875)

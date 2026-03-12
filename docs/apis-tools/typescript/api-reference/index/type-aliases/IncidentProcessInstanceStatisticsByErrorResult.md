@@ -11,40 +11,40 @@ mdx:
 type IncidentProcessInstanceStatisticsByErrorResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:3224](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3224)
+Defined in: [gen/types.gen.ts:3598](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L3598)
 
 ## Properties
 
-### activeInstancesWithErrorCount?
+### activeInstancesWithErrorCount
 
 ```ts
-optional activeInstancesWithErrorCount: number;
+activeInstancesWithErrorCount: number;
 ```
 
-Defined in: [gen/types.gen.ts:3237](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3237)
+Defined in: [gen/types.gen.ts:3611](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L3611)
 
 The number of active process instances that currently have an active incident with this error.
 
----
+***
 
-### errorHashCode?
+### errorHashCode
 
 ```ts
-optional errorHashCode: number;
+errorHashCode: number;
 ```
 
-Defined in: [gen/types.gen.ts:3228](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3228)
+Defined in: [gen/types.gen.ts:3602](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L3602)
 
 The hash code identifying a specific incident error..
 
----
+***
 
-### errorMessage?
+### errorMessage
 
 ```ts
-optional errorMessage: string;
+errorMessage: string;
 ```
 
-Defined in: [gen/types.gen.ts:3232](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3232)
+Defined in: [gen/types.gen.ts:3606](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L3606)
 
 The error message associated with the incident error hash code.

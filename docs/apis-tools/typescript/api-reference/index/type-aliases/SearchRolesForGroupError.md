@@ -8,8 +8,7 @@ mdx:
 # Type Alias: SearchRolesForGroupError
 
 ```ts
-type SearchRolesForGroupError =
-  SearchRolesForGroupErrors[keyof SearchRolesForGroupErrors];
+type SearchRolesForGroupError = SearchRolesForGroupErrors[keyof SearchRolesForGroupErrors];
 ```
 
-Defined in: [gen/types.gen.ts:11204](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11204)
+Defined in: [gen/types.gen.ts:11359](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11359)

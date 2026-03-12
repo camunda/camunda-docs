@@ -11,21 +11,21 @@ mdx:
 type JobSearchResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:3622](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3622)
+Defined in: [gen/types.gen.ts:4256](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4256)
 
 ## Properties
 
-### creationTime?
+### creationTime
 
 ```ts
-optional creationTime: string;
+creationTime: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:3701](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3701)
+Defined in: [gen/types.gen.ts:4343](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4343)
 
 When the job was created. Field is present for jobs created after 8.9.
 
----
+***
 
 ### customHeaders
 
@@ -33,7 +33,7 @@ When the job was created. Field is present for jobs created after 8.9.
 customHeaders: object;
 ```
 
-Defined in: [gen/types.gen.ts:3626](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3626)
+Defined in: [gen/types.gen.ts:4260](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4260)
 
 A set of custom headers defined during modelling.
 
@@ -43,43 +43,43 @@ A set of custom headers defined during modelling.
 [key: string]: string
 ```
 
----
+***
 
-### deadline?
+### deadline
 
 ```ts
-optional deadline: string | null;
+deadline: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:3632](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3632)
+Defined in: [gen/types.gen.ts:4266](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4266)
 
 If the job has been activated, when it will next be available to be activated.
 
----
+***
 
-### deniedReason?
+### deniedReason
 
 ```ts
-optional deniedReason: string | null;
+deniedReason: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:3636](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3636)
+Defined in: [gen/types.gen.ts:4270](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4270)
 
 The reason provided by the user task listener for denying the work.
 
----
+***
 
 ### elementId
 
 ```ts
-elementId: ElementId;
+elementId: ElementId | null;
 ```
 
-Defined in: [gen/types.gen.ts:3640](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3640)
+Defined in: [gen/types.gen.ts:4274](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4274)
 
-The element ID associated with the job.
+The element ID associated with the job. May be missing on job failure.
 
----
+***
 
 ### elementInstanceKey
 
@@ -87,47 +87,48 @@ The element ID associated with the job.
 elementInstanceKey: ElementInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:3644](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3644)
+Defined in: [gen/types.gen.ts:4278](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4278)
 
 The element instance key associated with the job.
 
----
+***
 
-### endTime?
-
-```ts
-optional endTime: string;
-```
-
-Defined in: [gen/types.gen.ts:3648](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3648)
-
-When the job ended.
-
----
-
-### errorCode?
+### endTime
 
 ```ts
-optional errorCode: string | null;
+endTime: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:3652](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3652)
+Defined in: [gen/types.gen.ts:4284](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4284)
+
+End date of the job.
+This is `null` if the job is not in an end state yet.
+
+***
+
+### errorCode
+
+```ts
+errorCode: string | null;
+```
+
+Defined in: [gen/types.gen.ts:4288](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4288)
 
 The error code provided for a failed job.
 
----
+***
 
-### errorMessage?
+### errorMessage
 
 ```ts
-optional errorMessage: string | null;
+errorMessage: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:3656](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3656)
+Defined in: [gen/types.gen.ts:4292](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4292)
 
 The error message that provides additional context for a failed job.
 
----
+***
 
 ### hasFailedWithRetriesLeft
 
@@ -135,23 +136,23 @@ The error message that provides additional context for a failed job.
 hasFailedWithRetriesLeft: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:3660](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3660)
+Defined in: [gen/types.gen.ts:4296](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4296)
 
 Indicates whether the job has failed with retries left.
 
----
+***
 
-### isDenied?
+### isDenied
 
 ```ts
-optional isDenied: boolean | null;
+isDenied: boolean | null;
 ```
 
-Defined in: [gen/types.gen.ts:3664](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3664)
+Defined in: [gen/types.gen.ts:4300](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4300)
 
 Indicates whether the user task listener denies the work.
 
----
+***
 
 ### jobKey
 
@@ -159,11 +160,11 @@ Indicates whether the user task listener denies the work.
 jobKey: JobKey;
 ```
 
-Defined in: [gen/types.gen.ts:3668](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3668)
+Defined in: [gen/types.gen.ts:4304](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4304)
 
 The key, a unique identifier for the job.
 
----
+***
 
 ### kind
 
@@ -171,21 +172,21 @@ The key, a unique identifier for the job.
 kind: JobKindEnum;
 ```
 
-Defined in: [gen/types.gen.ts:3669](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3669)
+Defined in: [gen/types.gen.ts:4305](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4305)
 
----
+***
 
-### lastUpdateTime?
+### lastUpdateTime
 
 ```ts
-optional lastUpdateTime: string;
+lastUpdateTime: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:3705](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3705)
+Defined in: [gen/types.gen.ts:4347](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4347)
 
 When the job was last updated. Field is present for jobs created after 8.9.
 
----
+***
 
 ### listenerEventType
 
@@ -193,9 +194,9 @@ When the job was last updated. Field is present for jobs created after 8.9.
 listenerEventType: JobListenerEventTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:3670](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3670)
+Defined in: [gen/types.gen.ts:4306](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4306)
 
----
+***
 
 ### processDefinitionId
 
@@ -203,11 +204,11 @@ Defined in: [gen/types.gen.ts:3670](https://github.com/camunda/orchestration-clu
 processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:3674](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3674)
+Defined in: [gen/types.gen.ts:4310](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4310)
 
 The process definition ID associated with the job.
 
----
+***
 
 ### processDefinitionKey
 
@@ -215,11 +216,11 @@ The process definition ID associated with the job.
 processDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:3678](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3678)
+Defined in: [gen/types.gen.ts:4314](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4314)
 
 The process definition key associated with the job.
 
----
+***
 
 ### processInstanceKey
 
@@ -227,11 +228,11 @@ The process definition key associated with the job.
 processInstanceKey: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:3682](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3682)
+Defined in: [gen/types.gen.ts:4318](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4318)
 
 The process instance key associated with the job.
 
----
+***
 
 ### retries
 
@@ -239,21 +240,25 @@ The process instance key associated with the job.
 retries: number;
 ```
 
-Defined in: [gen/types.gen.ts:3687](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3687)
+Defined in: [gen/types.gen.ts:4329](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4329)
 
 The amount of retries left to this job.
 
----
+***
 
-### rootProcessInstanceKey?
+### rootProcessInstanceKey
 
 ```ts
-optional rootProcessInstanceKey: RootProcessInstanceKey;
+rootProcessInstanceKey: ProcessInstanceKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:3683](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3683)
+Defined in: [gen/types.gen.ts:4325](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4325)
 
----
+The key of the root process instance. The root process instance is the top-level
+ancestor in the process instance hierarchy. This field is only present for data
+belonging to process instance hierarchies created in version 8.9 or later.
+
+***
 
 ### state
 
@@ -261,9 +266,9 @@ Defined in: [gen/types.gen.ts:3683](https://github.com/camunda/orchestration-clu
 state: JobStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:3688](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3688)
+Defined in: [gen/types.gen.ts:4330](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4330)
 
----
+***
 
 ### tenantId
 
@@ -271,9 +276,9 @@ Defined in: [gen/types.gen.ts:3688](https://github.com/camunda/orchestration-clu
 tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:3689](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3689)
+Defined in: [gen/types.gen.ts:4331](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4331)
 
----
+***
 
 ### type
 
@@ -281,11 +286,11 @@ Defined in: [gen/types.gen.ts:3689](https://github.com/camunda/orchestration-clu
 type: string;
 ```
 
-Defined in: [gen/types.gen.ts:3693](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3693)
+Defined in: [gen/types.gen.ts:4335](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4335)
 
 The type of the job.
 
----
+***
 
 ### worker
 
@@ -293,6 +298,6 @@ The type of the job.
 worker: string;
 ```
 
-Defined in: [gen/types.gen.ts:3697](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3697)
+Defined in: [gen/types.gen.ts:4339](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4339)
 
 The name of the worker of this job.

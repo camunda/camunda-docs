@@ -11,7 +11,7 @@ mdx:
 type AdvancedScopeKeyFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:4278](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4278)
+Defined in: [gen/types.gen.ts:4916](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4916)
 
 Advanced filter
 
@@ -25,11 +25,11 @@ Advanced ScopeKey filter.
 optional $eq: ScopeKey;
 ```
 
-Defined in: [gen/types.gen.ts:4282](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4282)
+Defined in: [gen/types.gen.ts:4920](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4920)
 
 Checks for equality with the provided value.
 
----
+***
 
 ### $exists?
 
@@ -37,11 +37,11 @@ Checks for equality with the provided value.
 optional $exists: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:4290](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4290)
+Defined in: [gen/types.gen.ts:4928](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4928)
 
 Checks if the current property exists.
 
----
+***
 
 ### $in?
 
@@ -49,11 +49,11 @@ Checks if the current property exists.
 optional $in: ScopeKey[];
 ```
 
-Defined in: [gen/types.gen.ts:4294](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4294)
+Defined in: [gen/types.gen.ts:4932](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4932)
 
 Checks if the property matches any of the provided values.
 
----
+***
 
 ### $neq?
 
@@ -61,11 +61,11 @@ Checks if the property matches any of the provided values.
 optional $neq: ScopeKey;
 ```
 
-Defined in: [gen/types.gen.ts:4286](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4286)
+Defined in: [gen/types.gen.ts:4924](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4924)
 
 Checks for inequality with the provided value.
 
----
+***
 
 ### $notIn?
 
@@ -73,6 +73,6 @@ Checks for inequality with the provided value.
 optional $notIn: ScopeKey[];
 ```
 
-Defined in: [gen/types.gen.ts:4298](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4298)
+Defined in: [gen/types.gen.ts:4936](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4936)
 
 Checks if the property matches none of the provided values.

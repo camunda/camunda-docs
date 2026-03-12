@@ -11,14 +11,14 @@ mdx:
 type AuthorizationSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:580](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L580)
+Defined in: [gen/types.gen.ts:597](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L597)
 
 ## Properties
 
 ### field
 
 ```ts
-field:
+field: 
   | "ownerId"
   | "ownerType"
   | "resourceId"
@@ -26,11 +26,11 @@ field:
   | "resourceType";
 ```
 
-Defined in: [gen/types.gen.ts:584](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L584)
+Defined in: [gen/types.gen.ts:601](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L601)
 
 The field to sort by.
 
----
+***
 
 ### order?
 
@@ -38,4 +38,4 @@ The field to sort by.
 optional order: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:585](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L585)
+Defined in: [gen/types.gen.ts:602](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L602)

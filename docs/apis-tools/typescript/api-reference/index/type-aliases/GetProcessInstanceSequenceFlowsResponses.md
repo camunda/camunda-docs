@@ -11,24 +11,16 @@ mdx:
 type GetProcessInstanceSequenceFlowsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:14315](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14315)
+Defined in: [gen/types.gen.ts:13584](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13584)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: object;
+200: ProcessInstanceSequenceFlowsQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:14319](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14319)
+Defined in: [gen/types.gen.ts:13588](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13588)
 
-Process instance sequence flows query response.
-
-#### items?
-
-```ts
-optional items: object[];
-```
-
-The sequence flows.
+The process instance sequence flows result.

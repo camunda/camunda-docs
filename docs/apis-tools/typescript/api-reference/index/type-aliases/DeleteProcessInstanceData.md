@@ -11,23 +11,23 @@ mdx:
 type DeleteProcessInstanceData = object;
 ```
 
-Defined in: [gen/types.gen.ts:13971](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13971)
+Defined in: [gen/types.gen.ts:13314](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13314)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body:
+optional body: 
   | {
   operationReference?: OperationReference;
 }
   | null;
 ```
 
-Defined in: [gen/types.gen.ts:13972](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13972)
+Defined in: [gen/types.gen.ts:13315](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13315)
 
----
+***
 
 ### path
 
@@ -35,7 +35,7 @@ Defined in: [gen/types.gen.ts:13972](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:13975](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13975)
+Defined in: [gen/types.gen.ts:13318](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13318)
 
 #### processInstanceKey
 
@@ -45,7 +45,7 @@ processInstanceKey: ProcessInstanceKey;
 
 The key of the process instance to delete.
 
----
+***
 
 ### query?
 
@@ -53,9 +53,9 @@ The key of the process instance to delete.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:13981](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13981)
+Defined in: [gen/types.gen.ts:13324](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13324)
 
----
+***
 
 ### url
 
@@ -63,4 +63,4 @@ Defined in: [gen/types.gen.ts:13981](https://github.com/camunda/orchestration-cl
 url: "/process-instances/{processInstanceKey}/deletion";
 ```
 
-Defined in: [gen/types.gen.ts:13982](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13982)
+Defined in: [gen/types.gen.ts:13325](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13325)

@@ -8,8 +8,7 @@ mdx:
 # Type Alias: SearchAuthorizationsResponse
 
 ```ts
-type SearchAuthorizationsResponse =
-  SearchAuthorizationsResponses[keyof SearchAuthorizationsResponses];
+type SearchAuthorizationsResponse = SearchAuthorizationsResponses[keyof SearchAuthorizationsResponses];
 ```
 
-Defined in: [gen/types.gen.ts:8060](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8060)
+Defined in: [gen/types.gen.ts:8652](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8652)

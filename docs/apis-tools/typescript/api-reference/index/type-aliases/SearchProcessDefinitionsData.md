@@ -11,37 +11,19 @@ mdx:
 type SearchProcessDefinitionsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:12642](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12642)
+Defined in: [gen/types.gen.ts:12567](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12567)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: SearchQueryRequest & object;
+optional body: ProcessDefinitionSearchQuery;
 ```
 
-Defined in: [gen/types.gen.ts:12643](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12643)
+Defined in: [gen/types.gen.ts:12568](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12568)
 
-#### Type Declaration
-
-##### filter?
-
-```ts
-optional filter: ProcessDefinitionFilter;
-```
-
-The process definition search filters.
-
-##### sort?
-
-```ts
-optional sort: object[];
-```
-
-Sort field criteria.
-
----
+***
 
 ### path?
 
@@ -49,9 +31,9 @@ Sort field criteria.
 optional path: never;
 ```
 
-Defined in: [gen/types.gen.ts:12659](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12659)
+Defined in: [gen/types.gen.ts:12569](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12569)
 
----
+***
 
 ### query?
 
@@ -59,9 +41,9 @@ Defined in: [gen/types.gen.ts:12659](https://github.com/camunda/orchestration-cl
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:12660](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12660)
+Defined in: [gen/types.gen.ts:12570](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12570)
 
----
+***
 
 ### url
 
@@ -69,4 +51,4 @@ Defined in: [gen/types.gen.ts:12660](https://github.com/camunda/orchestration-cl
 url: "/process-definitions/search";
 ```
 
-Defined in: [gen/types.gen.ts:12661](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12661)
+Defined in: [gen/types.gen.ts:12571](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12571)

@@ -11,7 +11,7 @@ mdx:
 type GetMappingRuleErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:12340](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12340)
+Defined in: [gen/types.gen.ts:12379](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12379)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:12340](https://github.com/camunda/orchestration-cl
 401: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:12344](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12344)
+Defined in: [gen/types.gen.ts:12383](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12383)
 
 The request lacks valid authentication credentials.
 
----
+***
 
 ### 404
 
@@ -33,11 +33,11 @@ The request lacks valid authentication credentials.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:12348](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12348)
+Defined in: [gen/types.gen.ts:12387](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12387)
 
 The mapping rule with the mappingRuleId was not found.
 
----
+***
 
 ### 500
 
@@ -45,6 +45,6 @@ The mapping rule with the mappingRuleId was not found.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:12352](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12352)
+Defined in: [gen/types.gen.ts:12391](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12391)
 
 An internal error occurred while processing the request.

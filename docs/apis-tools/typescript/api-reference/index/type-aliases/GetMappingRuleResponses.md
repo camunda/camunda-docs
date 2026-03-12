@@ -11,7 +11,7 @@ mdx:
 type GetMappingRuleResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:12357](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12357)
+Defined in: [gen/types.gen.ts:12396](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12396)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:12357](https://github.com/camunda/orchestration-cl
 200: MappingRuleResult;
 ```
 
-Defined in: [gen/types.gen.ts:12361](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12361)
+Defined in: [gen/types.gen.ts:12400](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12400)
 
 The mapping rule was returned successfully.

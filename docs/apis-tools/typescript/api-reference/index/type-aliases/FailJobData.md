@@ -11,7 +11,7 @@ mdx:
 type FailJobData = object;
 ```
 
-Defined in: [gen/types.gen.ts:12083](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12083)
+Defined in: [gen/types.gen.ts:11969](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11969)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:12083](https://github.com/camunda/orchestration-cl
 optional body: JobFailRequest;
 ```
 
-Defined in: [gen/types.gen.ts:12084](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12084)
+Defined in: [gen/types.gen.ts:11970](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11970)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:12084](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:12085](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12085)
+Defined in: [gen/types.gen.ts:11971](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11971)
 
 #### jobKey
 
@@ -41,7 +41,7 @@ jobKey: JobKey;
 
 The key of the job to fail.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The key of the job to fail.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:12091](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12091)
+Defined in: [gen/types.gen.ts:11977](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11977)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:12091](https://github.com/camunda/orchestration-cl
 url: "/jobs/{jobKey}/failure";
 ```
 
-Defined in: [gen/types.gen.ts:12092](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12092)
+Defined in: [gen/types.gen.ts:11978](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11978)

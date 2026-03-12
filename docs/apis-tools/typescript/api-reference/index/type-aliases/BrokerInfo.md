@@ -11,7 +11,7 @@ mdx:
 type BrokerInfo = object;
 ```
 
-Defined in: [gen/types.gen.ts:1297](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1297)
+Defined in: [gen/types.gen.ts:1332](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1332)
 
 Provides information on a broker node.
 
@@ -23,11 +23,11 @@ Provides information on a broker node.
 host: string;
 ```
 
-Defined in: [gen/types.gen.ts:1305](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1305)
+Defined in: [gen/types.gen.ts:1340](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1340)
 
 The hostname for reaching the broker.
 
----
+***
 
 ### nodeId
 
@@ -35,11 +35,11 @@ The hostname for reaching the broker.
 nodeId: number;
 ```
 
-Defined in: [gen/types.gen.ts:1301](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1301)
+Defined in: [gen/types.gen.ts:1336](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1336)
 
 The unique (within a cluster) node ID for the broker.
 
----
+***
 
 ### partitions
 
@@ -47,11 +47,11 @@ The unique (within a cluster) node ID for the broker.
 partitions: Partition[];
 ```
 
-Defined in: [gen/types.gen.ts:1313](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1313)
+Defined in: [gen/types.gen.ts:1348](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1348)
 
 A list of partitions managed or replicated on this broker.
 
----
+***
 
 ### port
 
@@ -59,11 +59,11 @@ A list of partitions managed or replicated on this broker.
 port: number;
 ```
 
-Defined in: [gen/types.gen.ts:1309](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1309)
+Defined in: [gen/types.gen.ts:1344](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1344)
 
 The port for reaching the broker.
 
----
+***
 
 ### version
 
@@ -71,6 +71,6 @@ The port for reaching the broker.
 version: string;
 ```
 
-Defined in: [gen/types.gen.ts:1317](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1317)
+Defined in: [gen/types.gen.ts:1352](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1352)
 
 The broker version.

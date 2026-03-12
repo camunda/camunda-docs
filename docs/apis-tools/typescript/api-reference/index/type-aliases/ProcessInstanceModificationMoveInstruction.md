@@ -11,7 +11,7 @@ mdx:
 type ProcessInstanceModificationMoveInstruction = object;
 ```
 
-Defined in: [gen/types.gen.ts:6017](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6017)
+Defined in: [gen/types.gen.ts:6719](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6719)
 
 Instruction describing a move operation. This instruction will terminate active element
 instances based on the sourceElementInstruction and activate a new element instance for each terminated
@@ -26,9 +26,9 @@ body instances will activate new element instances at the target id.
 optional ancestorScopeInstruction: AncestorScopeInstruction;
 ```
 
-Defined in: [gen/types.gen.ts:6023](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6023)
+Defined in: [gen/types.gen.ts:6725](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6725)
 
----
+***
 
 ### sourceElementInstruction
 
@@ -36,9 +36,9 @@ Defined in: [gen/types.gen.ts:6023](https://github.com/camunda/orchestration-clu
 sourceElementInstruction: SourceElementInstruction;
 ```
 
-Defined in: [gen/types.gen.ts:6018](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6018)
+Defined in: [gen/types.gen.ts:6720](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6720)
 
----
+***
 
 ### targetElementId
 
@@ -46,11 +46,11 @@ Defined in: [gen/types.gen.ts:6018](https://github.com/camunda/orchestration-clu
 targetElementId: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:6022](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6022)
+Defined in: [gen/types.gen.ts:6724](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6724)
 
 The target element id.
 
----
+***
 
 ### variableInstructions?
 
@@ -58,6 +58,6 @@ The target element id.
 optional variableInstructions: ModifyProcessInstanceVariableInstruction[];
 ```
 
-Defined in: [gen/types.gen.ts:6027](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6027)
+Defined in: [gen/types.gen.ts:6729](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6729)
 
 Instructions describing which variables to create or update.

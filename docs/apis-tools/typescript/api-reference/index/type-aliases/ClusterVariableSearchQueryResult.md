@@ -11,16 +11,16 @@ mdx:
 type ClusterVariableSearchQueryResult = SearchQueryResponse & object;
 ```
 
-Defined in: [gen/types.gen.ts:1253](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1253)
+Defined in: [gen/types.gen.ts:1288](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1288)
 
 Cluster variable search query response.
 
 ## Type Declaration
 
-### items?
+### items
 
 ```ts
-optional items: ClusterVariableSearchResult[];
+items: ClusterVariableSearchResult[];
 ```
 
 The matching cluster variables.

@@ -11,4 +11,4 @@ mdx:
 type CamundaClientLoose = ReturnType<typeof createCamundaClientLoose>;
 ```
 
-Defined in: [loose.ts:50](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/loose.ts#L50)
+Defined in: [loose.ts:50](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/loose.ts#L50)

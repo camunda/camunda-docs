@@ -11,41 +11,19 @@ mdx:
 type MigrateProcessInstancesBatchOperationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:13522](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13522)
+Defined in: [gen/types.gen.ts:13064](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13064)
 
 ## Properties
 
 ### body
 
 ```ts
-body: object;
+body: ProcessInstanceMigrationBatchOperationRequest;
 ```
 
-Defined in: [gen/types.gen.ts:13523](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13523)
+Defined in: [gen/types.gen.ts:13065](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13065)
 
-#### filter
-
-```ts
-filter: ProcessInstanceFilter;
-```
-
-The process instance filter.
-
-#### migrationPlan
-
-```ts
-migrationPlan: ProcessInstanceMigrationBatchOperationPlan;
-```
-
-The migration plan.
-
-#### operationReference?
-
-```ts
-optional operationReference: OperationReference;
-```
-
----
+***
 
 ### path?
 
@@ -53,9 +31,9 @@ optional operationReference: OperationReference;
 optional path: never;
 ```
 
-Defined in: [gen/types.gen.ts:13534](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13534)
+Defined in: [gen/types.gen.ts:13066](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13066)
 
----
+***
 
 ### query?
 
@@ -63,9 +41,9 @@ Defined in: [gen/types.gen.ts:13534](https://github.com/camunda/orchestration-cl
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:13535](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13535)
+Defined in: [gen/types.gen.ts:13067](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13067)
 
----
+***
 
 ### url
 
@@ -73,4 +51,4 @@ Defined in: [gen/types.gen.ts:13535](https://github.com/camunda/orchestration-cl
 url: "/process-instances/migration";
 ```
 
-Defined in: [gen/types.gen.ts:13536](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13536)
+Defined in: [gen/types.gen.ts:13068](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13068)

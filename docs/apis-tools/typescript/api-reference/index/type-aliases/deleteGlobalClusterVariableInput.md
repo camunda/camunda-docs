@@ -11,7 +11,7 @@ mdx:
 type deleteGlobalClusterVariableInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:232](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L232)
+Defined in: [gen/CamundaClient.ts:210](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L210)
 
 ## Properties
 
@@ -21,4 +21,4 @@ Defined in: [gen/CamundaClient.ts:232](https://github.com/camunda/orchestration-
 name: deleteGlobalClusterVariablePathParam_name;
 ```
 
-Defined in: [gen/CamundaClient.ts:232](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L232)
+Defined in: [gen/CamundaClient.ts:210](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L210)

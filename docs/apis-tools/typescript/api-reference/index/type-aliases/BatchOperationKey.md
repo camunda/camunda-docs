@@ -11,6 +11,6 @@ mdx:
 type BatchOperationKey = CamundaKey<"BatchOperationKey">;
 ```
 
-Defined in: [gen/types.gen.ts:4089](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4089)
+Defined in: [gen/types.gen.ts:4725](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4725)
 
 System-generated key for an batch operation.

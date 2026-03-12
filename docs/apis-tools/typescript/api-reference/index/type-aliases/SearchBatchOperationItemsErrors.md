@@ -11,7 +11,7 @@ mdx:
 type SearchBatchOperationItemsErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:8230](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8230)
+Defined in: [gen/types.gen.ts:8789](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8789)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:8230](https://github.com/camunda/orchestration-clu
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:8234](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8234)
+Defined in: [gen/types.gen.ts:8793](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8793)
 
 The provided data is not valid.
 
----
+***
 
 ### 500
 
@@ -33,6 +33,6 @@ The provided data is not valid.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:8238](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8238)
+Defined in: [gen/types.gen.ts:8797](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8797)
 
 An internal error occurred while processing the request.

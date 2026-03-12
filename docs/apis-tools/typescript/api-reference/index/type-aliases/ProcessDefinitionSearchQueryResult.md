@@ -11,14 +11,14 @@ mdx:
 type ProcessDefinitionSearchQueryResult = SearchQueryResponse & object;
 ```
 
-Defined in: [gen/types.gen.ts:5141](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5141)
+Defined in: [gen/types.gen.ts:5794](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5794)
 
 ## Type Declaration
 
-### items?
+### items
 
 ```ts
-optional items: ProcessDefinitionResult[];
+items: ProcessDefinitionResult[];
 ```
 
 The matching process definitions.

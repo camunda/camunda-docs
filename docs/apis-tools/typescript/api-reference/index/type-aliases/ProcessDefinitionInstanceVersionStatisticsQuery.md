@@ -11,7 +11,7 @@ mdx:
 type ProcessDefinitionInstanceVersionStatisticsQuery = object;
 ```
 
-Defined in: [gen/types.gen.ts:5314](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5314)
+Defined in: [gen/types.gen.ts:5973](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5973)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:5314](https://github.com/camunda/orchestration-clu
 filter: ProcessDefinitionInstanceVersionStatisticsFilter;
 ```
 
-Defined in: [gen/types.gen.ts:5326](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5326)
+Defined in: [gen/types.gen.ts:5985](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5985)
 
 The process definition instance version statistics search filters.
 
----
+***
 
 ### page?
 
@@ -33,11 +33,11 @@ The process definition instance version statistics search filters.
 optional page: OffsetPagination;
 ```
 
-Defined in: [gen/types.gen.ts:5318](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5318)
+Defined in: [gen/types.gen.ts:5977](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5977)
 
 Pagination criteria.
 
----
+***
 
 ### sort?
 
@@ -45,6 +45,6 @@ Pagination criteria.
 optional sort: ProcessDefinitionInstanceVersionStatisticsQuerySortRequest[];
 ```
 
-Defined in: [gen/types.gen.ts:5322](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5322)
+Defined in: [gen/types.gen.ts:5981](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5981)
 
 Sort field criteria.

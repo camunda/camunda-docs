@@ -11,7 +11,7 @@ mdx:
 function createCamundaClientLoose(...args): object;
 ```
 
-Defined in: [loose.ts:43](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/loose.ts#L43)
+Defined in: [loose.ts:43](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/loose.ts#L43)
 
 Create a client where all branded key types are widened to string.
 Use when integrating with external systems or when dynamic string keys are common and brand friction is unwanted.
@@ -99,10 +99,22 @@ enabled: boolean;
 floor: number;
 ```
 
+#### config.backpressure.healthyRecoveryMultiplier
+
+```ts
+healthyRecoveryMultiplier: number;
+```
+
 #### config.backpressure.initialMax
 
 ```ts
 initialMax: number;
+```
+
+#### config.backpressure.maxWaiters
+
+```ts
+maxWaiters: number;
 ```
 
 #### config.backpressure.observeOnly
@@ -145,6 +157,12 @@ severeThreshold: number;
 
 ```ts
 softFactor: number;
+```
+
+#### config.backpressure.unlimitedAfterHealthyMs
+
+```ts
+unlimitedAfterHealthyMs: number;
 ```
 
 #### config.defaultTenantId
@@ -439,7 +457,7 @@ activateAdHocSubProcessActivities(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -457,12 +475,12 @@ activateJobs(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`jobs`: `object`[];
+  `jobs`: `object`[];
 \}\>
 
 ### assignClientToGroup()
@@ -475,7 +493,7 @@ assignClientToGroup(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -491,7 +509,7 @@ assignClientToTenant(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -507,7 +525,7 @@ assignGroupToTenant(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -523,7 +541,7 @@ assignMappingRuleToGroup(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -539,7 +557,7 @@ assignMappingRuleToTenant(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -555,7 +573,7 @@ assignRoleToClient(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -571,7 +589,7 @@ assignRoleToGroup(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -587,7 +605,7 @@ assignRoleToMappingRule(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -603,7 +621,7 @@ assignRoleToTenant(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -619,7 +637,7 @@ assignRoleToUser(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -635,7 +653,7 @@ assignUserTask(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -651,7 +669,7 @@ assignUserToGroup(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -667,7 +685,7 @@ assignUserToTenant(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -686,13 +704,13 @@ broadcastSignal(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`signalKey`: `string`;
-`tenantId`: `string`;
+  `signalKey`: `string`;
+  `tenantId`: `string`;
 \}\>
 
 ### cancelBatchOperation()
@@ -721,7 +739,7 @@ cancelProcessInstance(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -731,11 +749,8 @@ cancelProcessInstance(...a): CancelablePromise<void>;
 
 ```ts
 cancelProcessInstancesBatchOperation(...a): CancelablePromise<{
-  batchOperationKey?: {
-   [key: number]: string;
-     __brand: "BatchOperationKey";
-  };
-  batchOperationType?: BatchOperationTypeEnum;
+  batchOperationKey: string;
+  batchOperationType: BatchOperationTypeEnum;
 }>;
 ```
 
@@ -748,11 +763,8 @@ cancelProcessInstancesBatchOperation(...a): CancelablePromise<{
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`batchOperationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"BatchOperationKey"`;
-\};
-`batchOperationType?`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
+  `batchOperationKey`: `string`;
+  `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>
 
 ### clearAuthCache()
@@ -781,7 +793,7 @@ completeJob(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -797,7 +809,7 @@ completeUserTask(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -823,54 +835,9 @@ configure(...a): void;
 
 ```ts
 correlateMessage(...a): CancelablePromise<{
-  messageKey?: {
-   [key: number]: string;
-     __brand: "MessageKey";
-  };
-  processInstanceKey?: {
-   [key: number]: string;
-     __brand: "ProcessInstanceKey";
-  };
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
-  };
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`messageKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"MessageKey"`;
-\};
-`processInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-\}\>
-
-### createAdminUser()
-
-```ts
-createAdminUser(...a): CancelablePromise<{
-  email?: string;
-  name?: string;
-  username?: {
-   [key: number]: string;
-     __brand: "Username";
-  };
+  messageKey: string;
+  processInstanceKey: string;
+  tenantId: string;
 }>;
 ```
 
@@ -883,22 +850,40 @@ createAdminUser(...a): CancelablePromise<{
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`email?`: `string`;
-`name?`: `string`;
-`username?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"Username"`;
-\};
+  `messageKey`: `string`;
+  `processInstanceKey`: `string`;
+  `tenantId`: `string`;
+\}\>
+
+### createAdminUser()
+
+```ts
+createAdminUser(...a): CancelablePromise<{
+  email: string | null;
+  name: string | null;
+  username: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `email`: `string` \| `null`;
+  `name`: `string` \| `null`;
+  `username`: `string`;
 \}\>
 
 ### createAuthorization()
 
 ```ts
 createAuthorization(...a): CancelablePromise<{
-  authorizationKey?: {
-   [key: number]: string;
-     __brand: "AuthorizationKey";
-  };
+  authorizationKey: string;
 }>;
 ```
 
@@ -907,28 +892,25 @@ createAuthorization(...a): CancelablePromise<{
 ##### a
 
 ...\[
-\| \{
-`ownerId`: `string`;
-`ownerType`: [`OwnerTypeEnum`](../type-aliases/OwnerTypeEnum.md);
-`permissionTypes`: [`PermissionTypeEnum`](../type-aliases/PermissionTypeEnum.md)[];
-`resourceId`: `string`;
-`resourceType`: [`ResourceTypeEnum`](../type-aliases/ResourceTypeEnum.md);
+  \| \{
+  `ownerId`: `string`;
+  `ownerType`: [`OwnerTypeEnum`](../type-aliases/OwnerTypeEnum.md);
+  `permissionTypes`: [`PermissionTypeEnum`](../type-aliases/PermissionTypeEnum.md)[];
+  `resourceId`: `string`;
+  `resourceType`: [`ResourceTypeEnum`](../type-aliases/ResourceTypeEnum.md);
 \}
-\| \{
-`ownerId`: `string`;
-`ownerType`: [`OwnerTypeEnum`](../type-aliases/OwnerTypeEnum.md);
-`permissionTypes`: [`PermissionTypeEnum`](../type-aliases/PermissionTypeEnum.md)[];
-`resourcePropertyName`: `string`;
-`resourceType`: [`ResourceTypeEnum`](../type-aliases/ResourceTypeEnum.md);
-\}\]
+  \| \{
+  `ownerId`: `string`;
+  `ownerType`: [`OwnerTypeEnum`](../type-aliases/OwnerTypeEnum.md);
+  `permissionTypes`: [`PermissionTypeEnum`](../type-aliases/PermissionTypeEnum.md)[];
+  `resourcePropertyName`: `string`;
+  `resourceType`: [`ResourceTypeEnum`](../type-aliases/ResourceTypeEnum.md);
+\}, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`authorizationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"AuthorizationKey"`;
-\};
+  `authorizationKey`: `string`;
 \}\>
 
 ### createDeployment()
@@ -950,49 +932,48 @@ createDeployment(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`decisionRequirements`: `object`[];
-`decisions`: `object`[];
-`deploymentKey`: `string`;
-`deployments`: `object`[];
-`forms`: `object`[];
-`processes`: `object`[];
-`resources`: `object`[];
-`tenantId`: `string`;
+  `decisionRequirements`: `object`[];
+  `decisions`: `object`[];
+  `deploymentKey`: `string`;
+  `deployments`: `object`[];
+  `forms`: `object`[];
+  `processes`: `object`[];
+  `resources`: `object`[];
+  `tenantId`: `string`;
 \}\>
 
 ### createDocument()
 
 ```ts
 createDocument(...a): CancelablePromise<{
-  camunda.document.type?: "camunda";
-  contentHash?: string;
-  documentId?: {
-   [key: number]: string;
-     __brand: "DocumentId";
-  };
-  metadata?: {
-     contentType?: string;
-     customProperties?: {
+  camunda.document.type: "camunda";
+  contentHash: string | null;
+  documentId: string;
+  metadata: {
+     contentType: string;
+     customProperties: {
       [key: string]: unknown;
      };
-     expiresAt?: string;
-     fileName?: string;
-     processDefinitionId?: {
+     expiresAt: string | null;
+     fileName: string;
+     processDefinitionId:   | {
       [key: number]: string;
         __brand: "ProcessDefinitionId";
-     };
-     processInstanceKey?: {
+      }
+        | null;
+     processInstanceKey:   | {
       [key: number]: string;
         __brand: "ProcessInstanceKey";
-     };
-     size?: number;
+      }
+        | null;
+     size: number;
   };
-  storeId?: string;
+  storeId: string;
 }>;
 ```
 
@@ -1000,43 +981,42 @@ createDocument(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`camunda.document.type?`: `"camunda"`;
-`contentHash?`: `string`;
-`documentId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DocumentId"`;
-\};
-`metadata?`: \{
-`contentType?`: `string`;
-`customProperties?`: \{
-\[`key`: `string`\]: `unknown`;
-\};
-`expiresAt?`: `string`;
-`fileName?`: `string`;
-`processDefinitionId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessDefinitionId"`;
-\};
-`processInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`size?`: `number`;
-\};
-`storeId?`: `string`;
+  `camunda.document.type`: `"camunda"`;
+  `contentHash`: `string` \| `null`;
+  `documentId`: `string`;
+  `metadata`: \{
+     `contentType`: `string`;
+     `customProperties`: \{
+      \[`key`: `string`\]: `unknown`;
+     \};
+     `expiresAt`: `string` \| `null`;
+     `fileName`: `string`;
+     `processDefinitionId`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"ProcessDefinitionId"`;
+      \}
+        \| `null`;
+     `processInstanceKey`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"ProcessInstanceKey"`;
+      \}
+        \| `null`;
+     `size`: `number`;
+  \};
+  `storeId`: `string`;
 \}\>
 
 ### createDocumentLink()
 
 ```ts
 createDocumentLink(...a): CancelablePromise<{
-  expiresAt?: string;
-  url?: string;
+  expiresAt: string;
+  url: string;
 }>;
 ```
 
@@ -1044,21 +1024,21 @@ createDocumentLink(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`expiresAt?`: `string`;
-`url?`: `string`;
+  `expiresAt`: `string`;
+  `url`: `string`;
 \}\>
 
 ### createDocuments()
 
 ```ts
 createDocuments(...a): CancelablePromise<{
-  createdDocuments?: object[];
-  failedDocuments?: object[];
+  createdDocuments: object[];
+  failedDocuments: object[];
 }>;
 ```
 
@@ -1066,13 +1046,13 @@ createDocuments(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`createdDocuments?`: `object`[];
-`failedDocuments?`: `object`[];
+  `createdDocuments`: `object`[];
+  `failedDocuments`: `object`[];
 \}\>
 
 ### createElementInstanceVariables()
@@ -1085,7 +1065,7 @@ createElementInstanceVariables(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -1097,8 +1077,8 @@ createElementInstanceVariables(...a): CancelablePromise<void>;
 createGlobalClusterVariable(...a): CancelablePromise<{
   name: string;
   scope: ClusterVariableScopeEnum;
-  tenantId?: string;
-  value?: string;
+  tenantId: string | null;
+  value: string;
 }>;
 ```
 
@@ -1106,24 +1086,56 @@ createGlobalClusterVariable(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`name`: `string`;
-`scope`: [`ClusterVariableScopeEnum`](../type-aliases/ClusterVariableScopeEnum.md);
-`tenantId?`: `string`;
-`value?`: `string`;
+  `name`: `string`;
+  `scope`: [`ClusterVariableScopeEnum`](../type-aliases/ClusterVariableScopeEnum.md);
+  `tenantId`: `string` \| `null`;
+  `value`: `string`;
+\}\>
+
+### createGlobalTaskListener()
+
+```ts
+createGlobalTaskListener(...a): CancelablePromise<{
+  afterNonGlobal?: boolean;
+  eventTypes: GlobalTaskListenerEventTypeEnum[];
+  id: string;
+  priority?: number;
+  retries?: number;
+  source: GlobalListenerSourceEnum;
+  type?: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `afterNonGlobal?`: `boolean`;
+  `eventTypes`: [`GlobalTaskListenerEventTypeEnum`](../type-aliases/GlobalTaskListenerEventTypeEnum.md)[];
+  `id`: `string`;
+  `priority?`: `number`;
+  `retries?`: `number`;
+  `source`: [`GlobalListenerSourceEnum`](../type-aliases/GlobalListenerSourceEnum.md);
+  `type?`: `string`;
 \}\>
 
 ### createGroup()
 
 ```ts
 createGroup(...a): CancelablePromise<{
-  description?: string;
-  groupId?: string;
-  name?: string;
+  description: string | null;
+  groupId: string;
+  name: string;
 }>;
 ```
 
@@ -1131,14 +1143,14 @@ createGroup(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`description?`: `string`;
-`groupId?`: `string`;
-`name?`: `string`;
+  `description`: `string` \| `null`;
+  `groupId`: `string`;
+  `name`: `string`;
 \}\>
 
 ### createJobWorker()
@@ -1225,198 +1237,18 @@ stopGracefully(...a): Promise<{
 ###### Returns
 
 `Promise`\<\{
-`remainingJobs`: `number`;
-`timedOut`: `boolean`;
+  `remainingJobs`: `number`;
+  `timedOut`: `boolean`;
 \}\>
 
 ### createMappingRule()
 
 ```ts
 createMappingRule(...a): CancelablePromise<{
-  claimName?: string;
-  claimValue?: string;
-  mappingRuleId?: string;
-  name?: string;
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`claimName?`: `string`;
-`claimValue?`: `string`;
-`mappingRuleId?`: `string`;
-`name?`: `string`;
-\}\>
-
-### createProcessInstance()
-
-```ts
-createProcessInstance(...a): CancelablePromise<{
-  processDefinitionId: string;
-  processDefinitionKey: string;
-  processDefinitionVersion: number;
-  processInstanceKey: string;
-  tags?: string[];
-  tenantId: string;
-  variables: {
-   [key: string]: unknown;
-  };
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[
-\| \{
-`awaitCompletion?`: `boolean`;
-`fetchVariables?`: `string`[];
-`operationReference?`: `number`;
-`processDefinitionId`: `string`;
-`processDefinitionVersion?`: `number`;
-`requestTimeout?`: `number`;
-`runtimeInstructions?`: `object`[];
-`startInstructions?`: `object`[];
-`tags?`: `string`[];
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-`variables?`: \{
-\[`key`: `string`\]: `unknown`;
-\};
-\}
-\| \{
-`awaitCompletion?`: `boolean`;
-`fetchVariables?`: `string`[];
-`operationReference?`: `number`;
-`processDefinitionKey`: `string`;
-`processDefinitionVersion?`: `number`;
-`requestTimeout?`: `number`;
-`runtimeInstructions?`: `object`[];
-`startInstructions?`: `object`[];
-`tags?`: `string`[];
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-`variables?`: \{
-\[`key`: `string`\]: `unknown`;
-\};
-\}\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`processDefinitionId`: `string`;
-`processDefinitionKey`: `string`;
-`processDefinitionVersion`: `number`;
-`processInstanceKey`: `string`;
-`tags?`: `string`[];
-`tenantId`: `string`;
-`variables`: \{
-\[`key`: `string`\]: `unknown`;
-\};
-\}\>
-
-### createRole()
-
-```ts
-createRole(...a): CancelablePromise<{
-  description?: string;
-  name?: string;
-  roleId?: string;
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`description?`: `string`;
-`name?`: `string`;
-`roleId?`: `string`;
-\}\>
-
-### createTenant()
-
-```ts
-createTenant(...a): CancelablePromise<{
-  description?: string;
-  name?: string;
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
-  };
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`description?`: `string`;
-`name?`: `string`;
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-\}\>
-
-### createTenantClusterVariable()
-
-```ts
-createTenantClusterVariable(...a): CancelablePromise<{
+  claimName: string;
+  claimValue: string;
+  mappingRuleId: string;
   name: string;
-  scope: ClusterVariableScopeEnum;
-  tenantId?: string;
-  value?: string;
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`name`: `string`;
-`scope`: [`ClusterVariableScopeEnum`](../type-aliases/ClusterVariableScopeEnum.md);
-`tenantId?`: `string`;
-`value?`: `string`;
-\}\>
-
-### createUser()
-
-```ts
-createUser(...a): CancelablePromise<{
-  email?: string;
-  name?: string;
-  username?: {
-   [key: number]: string;
-     __brand: "Username";
-  };
 }>;
 ```
 
@@ -1429,12 +1261,198 @@ createUser(...a): CancelablePromise<{
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`email?`: `string`;
-`name?`: `string`;
-`username?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"Username"`;
-\};
+  `claimName`: `string`;
+  `claimValue`: `string`;
+  `mappingRuleId`: `string`;
+  `name`: `string`;
+\}\>
+
+### createProcessInstance()
+
+```ts
+createProcessInstance(...a): CancelablePromise<{
+  businessId:   | {
+   [key: number]: string;
+     __brand: "BusinessId";
+   }
+     | null;
+  processDefinitionId: string;
+  processDefinitionKey: string;
+  processDefinitionVersion: number;
+  processInstanceKey: string;
+  tags: string[];
+  tenantId: string;
+  variables: {
+   [key: string]: unknown;
+  };
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[
+  \| \{
+  `awaitCompletion?`: `boolean`;
+  `businessId?`: \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"BusinessId"`;
+  \};
+  `fetchVariables?`: `string`[];
+  `operationReference?`: `number`;
+  `processDefinitionKey`: `string`;
+  `processDefinitionVersion?`: `number`;
+  `requestTimeout?`: `number`;
+  `runtimeInstructions?`: `object`[];
+  `startInstructions?`: `object`[];
+  `tags?`: `string`[];
+  `tenantId?`: \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"TenantId"`;
+  \};
+  `variables?`: \{
+   \[`key`: `string`\]: `unknown`;
+  \};
+\}
+  \| \{
+  `awaitCompletion?`: `boolean`;
+  `businessId?`: \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"BusinessId"`;
+  \};
+  `fetchVariables?`: `string`[];
+  `operationReference?`: `number`;
+  `processDefinitionId`: `string`;
+  `processDefinitionVersion?`: `number`;
+  `requestTimeout?`: `number`;
+  `runtimeInstructions?`: `object`[];
+  `startInstructions?`: `object`[];
+  `tags?`: `string`[];
+  `tenantId?`: \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"TenantId"`;
+  \};
+  `variables?`: \{
+   \[`key`: `string`\]: `unknown`;
+  \};
+\}, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `businessId`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"BusinessId"`;
+   \}
+     \| `null`;
+  `processDefinitionId`: `string`;
+  `processDefinitionKey`: `string`;
+  `processDefinitionVersion`: `number`;
+  `processInstanceKey`: `string`;
+  `tags`: `string`[];
+  `tenantId`: `string`;
+  `variables`: \{
+   \[`key`: `string`\]: `unknown`;
+  \};
+\}\>
+
+### createRole()
+
+```ts
+createRole(...a): CancelablePromise<{
+  description: string | null;
+  name: string;
+  roleId: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `description`: `string` \| `null`;
+  `name`: `string`;
+  `roleId`: `string`;
+\}\>
+
+### createTenant()
+
+```ts
+createTenant(...a): CancelablePromise<{
+  description: string | null;
+  name: string;
+  tenantId: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `description`: `string` \| `null`;
+  `name`: `string`;
+  `tenantId`: `string`;
+\}\>
+
+### createTenantClusterVariable()
+
+```ts
+createTenantClusterVariable(...a): CancelablePromise<{
+  name: string;
+  scope: ClusterVariableScopeEnum;
+  tenantId: string | null;
+  value: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `name`: `string`;
+  `scope`: [`ClusterVariableScopeEnum`](../type-aliases/ClusterVariableScopeEnum.md);
+  `tenantId`: `string` \| `null`;
+  `value`: `string`;
+\}\>
+
+### createUser()
+
+```ts
+createUser(...a): CancelablePromise<{
+  email: string | null;
+  name: string | null;
+  username: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `email`: `string` \| `null`;
+  `name`: `string` \| `null`;
+  `username`: `string`;
 \}\>
 
 ### deleteAuthorization()
@@ -1447,7 +1465,7 @@ deleteAuthorization(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -1473,11 +1491,8 @@ deleteDecisionInstance(...a): CancelablePromise<void>;
 
 ```ts
 deleteDecisionInstancesBatchOperation(...a): CancelablePromise<{
-  batchOperationKey?: {
-   [key: number]: string;
-     __brand: "BatchOperationKey";
-  };
-  batchOperationType?: BatchOperationTypeEnum;
+  batchOperationKey: string;
+  batchOperationType: BatchOperationTypeEnum;
 }>;
 ```
 
@@ -1490,11 +1505,8 @@ deleteDecisionInstancesBatchOperation(...a): CancelablePromise<{
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`batchOperationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"BatchOperationKey"`;
-\};
-`batchOperationType?`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
+  `batchOperationKey`: `string`;
+  `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>
 
 ### deleteDocument()
@@ -1507,7 +1519,7 @@ deleteDocument(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -1523,7 +1535,23 @@ deleteGlobalClusterVariable(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+### deleteGlobalTaskListener()
+
+```ts
+deleteGlobalTaskListener(...a): CancelablePromise<void>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -1539,7 +1567,7 @@ deleteGroup(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -1555,7 +1583,7 @@ deleteMappingRule(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -1581,11 +1609,8 @@ deleteProcessInstance(...a): CancelablePromise<void>;
 
 ```ts
 deleteProcessInstancesBatchOperation(...a): CancelablePromise<{
-  batchOperationKey?: {
-   [key: number]: string;
-     __brand: "BatchOperationKey";
-  };
-  batchOperationType?: BatchOperationTypeEnum;
+  batchOperationKey: string;
+  batchOperationType: BatchOperationTypeEnum;
 }>;
 ```
 
@@ -1598,24 +1623,19 @@ deleteProcessInstancesBatchOperation(...a): CancelablePromise<{
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`batchOperationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"BatchOperationKey"`;
-\};
-`batchOperationType?`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
+  `batchOperationKey`: `string`;
+  `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>
 
 ### deleteResource()
 
 ```ts
 deleteResource(...a): CancelablePromise<{
-  batchOperation?: {
-     batchOperationKey?: {
-      [key: number]: string;
-        __brand: "BatchOperationKey";
-     };
-     batchOperationType?: BatchOperationTypeEnum;
-  };
+  batchOperation:   | {
+     batchOperationKey: string;
+     batchOperationType: BatchOperationTypeEnum;
+   }
+     | null;
   resourceKey: string;
 }>;
 ```
@@ -1624,19 +1644,17 @@ deleteResource(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`batchOperation?`: \{
-`batchOperationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"BatchOperationKey"`;
-\};
-`batchOperationType?`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
-\};
-`resourceKey`: `string`;
+  `batchOperation`:   \| \{
+     `batchOperationKey`: `string`;
+     `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
+   \}
+     \| `null`;
+  `resourceKey`: `string`;
 \}\>
 
 ### deleteRole()
@@ -1649,7 +1667,7 @@ deleteRole(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -1665,7 +1683,7 @@ deleteTenant(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -1681,7 +1699,7 @@ deleteTenantClusterVariable(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -1727,14 +1745,14 @@ deployResourcesFromFiles(...a): CancelablePromise<{
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`decisionRequirements`: `object`[];
-`decisions`: `object`[];
-`deploymentKey`: `string`;
-`deployments`: `object`[];
-`forms`: `object`[];
-`processes`: `object`[];
-`resources`: `object`[];
-`tenantId`: `string`;
+  `decisionRequirements`: `object`[];
+  `decisions`: `object`[];
+  `deploymentKey`: `string`;
+  `deployments`: `object`[];
+  `forms`: `object`[];
+  `processes`: `object`[];
+  `resources`: `object`[];
+  `tenantId`: `string`;
 \}\>
 
 ### emitSupportLogPreamble()
@@ -1767,14 +1785,14 @@ evaluateConditionals(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`conditionalEvaluationKey`: `string`;
-`processInstances`: `object`[];
-`tenantId`: `string`;
+  `conditionalEvaluationKey`: `string`;
+  `processInstances`: `object`[];
+  `tenantId`: `string`;
 \}\>
 
 ### evaluateDecision()
@@ -1786,15 +1804,16 @@ evaluateDecision(...a): CancelablePromise<{
   decisionDefinitionName: string;
   decisionDefinitionVersion: number;
   decisionEvaluationKey: string;
-  decisionInstanceKey?: {
-   [key: number]: string;
-     __brand: "DecisionInstanceKey";
-  };
+  decisionInstanceKey: string;
   decisionRequirementsId: string;
   decisionRequirementsKey: string;
   evaluatedDecisions: object[];
-  failedDecisionDefinitionId: string;
-  failureMessage: string;
+  failedDecisionDefinitionId:   | {
+   [key: number]: string;
+     __brand: "DecisionDefinitionId";
+   }
+     | null;
+  failureMessage: string | null;
   output: string;
   tenantId: string;
 }>;
@@ -1805,46 +1824,47 @@ evaluateDecision(...a): CancelablePromise<{
 ##### a
 
 ...\[
-\| \{
-`decisionDefinitionId`: `string`;
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-`variables?`: \{
-\[`key`: `string`\]: `unknown`;
-\};
+  \| \{
+  `decisionDefinitionId`: `string`;
+  `tenantId?`: \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"TenantId"`;
+  \};
+  `variables?`: \{
+   \[`key`: `string`\]: `unknown`;
+  \};
 \}
-\| \{
-`decisionDefinitionKey`: `string`;
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-`variables?`: \{
-\[`key`: `string`\]: `unknown`;
-\};
-\}\]
+  \| \{
+  `decisionDefinitionKey`: `string`;
+  `tenantId?`: \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"TenantId"`;
+  \};
+  `variables?`: \{
+   \[`key`: `string`\]: `unknown`;
+  \};
+\}, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`decisionDefinitionId`: `string`;
-`decisionDefinitionKey`: `string`;
-`decisionDefinitionName`: `string`;
-`decisionDefinitionVersion`: `number`;
-`decisionEvaluationKey`: `string`;
-`decisionInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionInstanceKey"`;
-\};
-`decisionRequirementsId`: `string`;
-`decisionRequirementsKey`: `string`;
-`evaluatedDecisions`: `object`[];
-`failedDecisionDefinitionId`: `string`;
-`failureMessage`: `string`;
-`output`: `string`;
-`tenantId`: `string`;
+  `decisionDefinitionId`: `string`;
+  `decisionDefinitionKey`: `string`;
+  `decisionDefinitionName`: `string`;
+  `decisionDefinitionVersion`: `number`;
+  `decisionEvaluationKey`: `string`;
+  `decisionInstanceKey`: `string`;
+  `decisionRequirementsId`: `string`;
+  `decisionRequirementsKey`: `string`;
+  `evaluatedDecisions`: `object`[];
+  `failedDecisionDefinitionId`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"DecisionDefinitionId"`;
+   \}
+     \| `null`;
+  `failureMessage`: `string` \| `null`;
+  `output`: `string`;
+  `tenantId`: `string`;
 \}\>
 
 ### evaluateExpression()
@@ -1861,14 +1881,14 @@ evaluateExpression(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`expression`: `string`;
-`result`: `unknown`;
-`warnings`: `string`[];
+  `expression`: `string`;
+  `result`: `unknown`;
+  `warnings`: `string`[];
 \}\>
 
 ### failJob()
@@ -1881,7 +1901,7 @@ failJob(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -1907,77 +1927,88 @@ forceAuthRefresh(...a): Promise<string | undefined>;
 
 ```ts
 getAuditLog(...a): CancelablePromise<{
-  actorId?: string;
-  actorType?: AuditLogActorTypeEnum;
-  annotation?: string;
-  auditLogKey?: {
-   [key: number]: string;
-     __brand: "AuditLogKey";
-  };
-  batchOperationKey?: {
+  actorId: string | null;
+  actorType:   | AuditLogActorTypeEnum
+     | null;
+  agentElementId: string | null;
+  annotation: string | null;
+  auditLogKey: string;
+  batchOperationKey:   | {
    [key: number]: string;
      __brand: "BatchOperationKey";
-  };
-  batchOperationType?: BatchOperationTypeEnum;
-  category?: AuditLogCategoryEnum;
-  decisionDefinitionId?: {
+   }
+     | null;
+  batchOperationType:   | BatchOperationTypeEnum
+     | null;
+  category: AuditLogCategoryEnum;
+  decisionDefinitionId:   | {
    [key: number]: string;
      __brand: "DecisionDefinitionId";
-  };
-  decisionDefinitionKey?: {
+   }
+     | null;
+  decisionDefinitionKey:   | {
    [key: number]: string;
      __brand: "DecisionDefinitionKey";
-  };
-  decisionEvaluationKey?: {
+   }
+     | null;
+  decisionEvaluationKey:   | {
    [key: number]: string;
      __brand: "DecisionEvaluationKey";
-  };
-  decisionRequirementsId?: string;
-  decisionRequirementsKey?: {
+   }
+     | null;
+  decisionRequirementsId: string | null;
+  decisionRequirementsKey:   | {
    [key: number]: string;
      __brand: "DecisionRequirementsKey";
-  };
-  deploymentKey?: {
+   }
+     | null;
+  deploymentKey:   | {
    [key: number]: string;
      __brand: "DeploymentKey";
-  };
-  elementInstanceKey?: {
+   }
+     | null;
+  elementInstanceKey:   | {
    [key: number]: string;
      __brand: "ElementInstanceKey";
-  };
-  entityDescription?: string;
-  entityKey?: {
-   [key: number]: string;
-     __brand: "AuditLogEntityKey";
-  };
-  entityType?: AuditLogEntityTypeEnum;
-  formKey?: {
+   }
+     | null;
+  entityDescription: string | null;
+  entityKey: string;
+  entityType: AuditLogEntityTypeEnum;
+  formKey:   | {
    [key: number]: string;
      __brand: "FormKey";
-  };
-  jobKey?: {
+   }
+     | null;
+  jobKey:   | {
    [key: number]: string;
      __brand: "JobKey";
-  };
-  operationType?: AuditLogOperationTypeEnum;
-  processDefinitionId?: {
+   }
+     | null;
+  operationType: AuditLogOperationTypeEnum;
+  processDefinitionId:   | {
    [key: number]: string;
      __brand: "ProcessDefinitionId";
-  };
-  processDefinitionKey?: {
+   }
+     | null;
+  processDefinitionKey:   | {
    [key: number]: string;
      __brand: "ProcessDefinitionKey";
-  };
-  processInstanceKey?: {
+   }
+     | null;
+  processInstanceKey:   | {
    [key: number]: string;
      __brand: "ProcessInstanceKey";
-  };
-  relatedEntityKey?: {
+   }
+     | null;
+  relatedEntityKey:   | {
    [key: number]: string;
      __brand: "AuditLogEntityKey";
-  };
-  relatedEntityType?: AuditLogEntityTypeEnum;
-  resourceKey?:   | {
+   }
+     | null;
+  relatedEntityType:   | AuditLogEntityTypeEnum
+     | null;
+  resourceKey:   | {
    [key: number]: string;
      __brand: "FormKey";
    }
@@ -1992,21 +2023,25 @@ getAuditLog(...a): CancelablePromise<{
      | {
    [key: number]: string;
      __brand: "DecisionDefinitionKey";
-   };
-  result?: AuditLogResultEnum;
-  rootProcessInstanceKey?: {
+   }
+     | null;
+  result: AuditLogResultEnum;
+  rootProcessInstanceKey:   | {
    [key: number]: string;
      __brand: "ProcessInstanceKey";
-  };
-  tenantId?: {
+   }
+     | null;
+  tenantId:   | {
    [key: number]: string;
      __brand: "TenantId";
-  };
-  timestamp?: string;
-  userTaskKey?: {
+   }
+     | null;
+  timestamp: string;
+  userTaskKey:   | {
    [key: number]: string;
      __brand: "UserTaskKey";
-  };
+   }
+     | null;
 }>;
 ```
 
@@ -2014,129 +2049,144 @@ getAuditLog(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`actorId?`: `string`;
-`actorType?`: [`AuditLogActorTypeEnum`](../type-aliases/AuditLogActorTypeEnum.md);
-`annotation?`: `string`;
-`auditLogKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"AuditLogKey"`;
-\};
-`batchOperationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"BatchOperationKey"`;
-\};
-`batchOperationType?`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
-`category?`: [`AuditLogCategoryEnum`](../type-aliases/AuditLogCategoryEnum.md);
-`decisionDefinitionId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionDefinitionId"`;
-\};
-`decisionDefinitionKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionDefinitionKey"`;
-\};
-`decisionEvaluationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionEvaluationKey"`;
-\};
-`decisionRequirementsId?`: `string`;
-`decisionRequirementsKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionRequirementsKey"`;
-\};
-`deploymentKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DeploymentKey"`;
-\};
-`elementInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ElementInstanceKey"`;
-\};
-`entityDescription?`: `string`;
-`entityKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"AuditLogEntityKey"`;
-\};
-`entityType?`: [`AuditLogEntityTypeEnum`](../type-aliases/AuditLogEntityTypeEnum.md);
-`formKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"FormKey"`;
-\};
-`jobKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"JobKey"`;
-\};
-`operationType?`: [`AuditLogOperationTypeEnum`](../type-aliases/AuditLogOperationTypeEnum.md);
-`processDefinitionId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessDefinitionId"`;
-\};
-`processDefinitionKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessDefinitionKey"`;
-\};
-`processInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`relatedEntityKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"AuditLogEntityKey"`;
-\};
-`relatedEntityType?`: [`AuditLogEntityTypeEnum`](../type-aliases/AuditLogEntityTypeEnum.md);
-`resourceKey?`: \| \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"FormKey"`;
-\}
-\| \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessDefinitionKey"`;
-\}
-\| \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionRequirementsKey"`;
-\}
-\| \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionDefinitionKey"`;
-\};
-`result?`: [`AuditLogResultEnum`](../type-aliases/AuditLogResultEnum.md);
-`rootProcessInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-`timestamp?`: `string`;
-`userTaskKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"UserTaskKey"`;
-\};
+  `actorId`: `string` \| `null`;
+  `actorType`:   \| [`AuditLogActorTypeEnum`](../type-aliases/AuditLogActorTypeEnum.md)
+     \| `null`;
+  `agentElementId`: `string` \| `null`;
+  `annotation`: `string` \| `null`;
+  `auditLogKey`: `string`;
+  `batchOperationKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"BatchOperationKey"`;
+   \}
+     \| `null`;
+  `batchOperationType`:   \| [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md)
+     \| `null`;
+  `category`: [`AuditLogCategoryEnum`](../type-aliases/AuditLogCategoryEnum.md);
+  `decisionDefinitionId`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"DecisionDefinitionId"`;
+   \}
+     \| `null`;
+  `decisionDefinitionKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"DecisionDefinitionKey"`;
+   \}
+     \| `null`;
+  `decisionEvaluationKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"DecisionEvaluationKey"`;
+   \}
+     \| `null`;
+  `decisionRequirementsId`: `string` \| `null`;
+  `decisionRequirementsKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"DecisionRequirementsKey"`;
+   \}
+     \| `null`;
+  `deploymentKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"DeploymentKey"`;
+   \}
+     \| `null`;
+  `elementInstanceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ElementInstanceKey"`;
+   \}
+     \| `null`;
+  `entityDescription`: `string` \| `null`;
+  `entityKey`: `string`;
+  `entityType`: [`AuditLogEntityTypeEnum`](../type-aliases/AuditLogEntityTypeEnum.md);
+  `formKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"FormKey"`;
+   \}
+     \| `null`;
+  `jobKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"JobKey"`;
+   \}
+     \| `null`;
+  `operationType`: [`AuditLogOperationTypeEnum`](../type-aliases/AuditLogOperationTypeEnum.md);
+  `processDefinitionId`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessDefinitionId"`;
+   \}
+     \| `null`;
+  `processDefinitionKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessDefinitionKey"`;
+   \}
+     \| `null`;
+  `processInstanceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessInstanceKey"`;
+   \}
+     \| `null`;
+  `relatedEntityKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"AuditLogEntityKey"`;
+   \}
+     \| `null`;
+  `relatedEntityType`:   \| [`AuditLogEntityTypeEnum`](../type-aliases/AuditLogEntityTypeEnum.md)
+     \| `null`;
+  `resourceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"FormKey"`;
+   \}
+     \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessDefinitionKey"`;
+   \}
+     \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"DecisionRequirementsKey"`;
+   \}
+     \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"DecisionDefinitionKey"`;
+   \}
+     \| `null`;
+  `result`: [`AuditLogResultEnum`](../type-aliases/AuditLogResultEnum.md);
+  `rootProcessInstanceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessInstanceKey"`;
+   \}
+     \| `null`;
+  `tenantId`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"TenantId"`;
+   \}
+     \| `null`;
+  `timestamp`: `string`;
+  `userTaskKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"UserTaskKey"`;
+   \}
+     \| `null`;
 \}\>
 
 ### getAuthentication()
 
 ```ts
 getAuthentication(...a): CancelablePromise<{
-  authorizedComponents?: string[];
+  authorizedComponents: string[];
   c8Links: {
    [key: string]: string;
   };
   canLogout: boolean;
-  displayName?: string | null;
-  email?: string | null;
+  displayName: string | null;
+  email: string | null;
   groups: string[];
   roles: string[];
-  salesPlanType: string;
+  salesPlanType: string | null;
   tenants: object[];
-  username?:   | {
+  username:   | {
    [key: number]: string;
      __brand: "Username";
    }
@@ -2148,27 +2198,27 @@ getAuthentication(...a): CancelablePromise<{
 
 ##### a
 
-...\[\]
+...\[`object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`authorizedComponents?`: `string`[];
-`c8Links`: \{
-\[`key`: `string`\]: `string`;
-\};
-`canLogout`: `boolean`;
-`displayName?`: `string` \| `null`;
-`email?`: `string` \| `null`;
-`groups`: `string`[];
-`roles`: `string`[];
-`salesPlanType`: `string`;
-`tenants`: `object`[];
-`username?`: \| \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"Username"`;
-\}
-\| `null`;
+  `authorizedComponents`: `string`[];
+  `c8Links`: \{
+   \[`key`: `string`\]: `string`;
+  \};
+  `canLogout`: `boolean`;
+  `displayName`: `string` \| `null`;
+  `email`: `string` \| `null`;
+  `groups`: `string`[];
+  `roles`: `string`[];
+  `salesPlanType`: `string` \| `null`;
+  `tenants`: `object`[];
+  `username`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"Username"`;
+   \}
+     \| `null`;
 \}\>
 
 ### getAuthHeaders()
@@ -2195,16 +2245,13 @@ getAuthHeaders(...a): Promise<{
 
 ```ts
 getAuthorization(...a): CancelablePromise<{
-  authorizationKey?: {
-   [key: number]: string;
-     __brand: "AuthorizationKey";
-  };
-  ownerId?: string;
-  ownerType?: OwnerTypeEnum;
-  permissionTypes?: PermissionTypeEnum[];
-  resourceId?: string;
-  resourcePropertyName?: string;
-  resourceType?: ResourceTypeEnum;
+  authorizationKey: string;
+  ownerId: string;
+  ownerType: OwnerTypeEnum;
+  permissionTypes: PermissionTypeEnum[];
+  resourceId: string | null;
+  resourcePropertyName: string | null;
+  resourceType: ResourceTypeEnum;
 }>;
 ```
 
@@ -2212,28 +2259,26 @@ getAuthorization(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`authorizationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"AuthorizationKey"`;
-\};
-`ownerId?`: `string`;
-`ownerType?`: [`OwnerTypeEnum`](../type-aliases/OwnerTypeEnum.md);
-`permissionTypes?`: [`PermissionTypeEnum`](../type-aliases/PermissionTypeEnum.md)[];
-`resourceId?`: `string`;
-`resourcePropertyName?`: `string`;
-`resourceType?`: [`ResourceTypeEnum`](../type-aliases/ResourceTypeEnum.md);
+  `authorizationKey`: `string`;
+  `ownerId`: `string`;
+  `ownerType`: [`OwnerTypeEnum`](../type-aliases/OwnerTypeEnum.md);
+  `permissionTypes`: [`PermissionTypeEnum`](../type-aliases/PermissionTypeEnum.md)[];
+  `resourceId`: `string` \| `null`;
+  `resourcePropertyName`: `string` \| `null`;
+  `resourceType`: [`ResourceTypeEnum`](../type-aliases/ResourceTypeEnum.md);
 \}\>
 
 ### getBackpressureState()
 
 ```ts
-getBackpressureState(...a):
+getBackpressureState(...a): 
   | {
+  backoffMs: number;
   consecutive: number;
   permitsCurrent: number;
   permitsMax: number | null;
@@ -2257,39 +2302,38 @@ getBackpressureState(...a):
 
 #### Returns
 
-\| \{
-`consecutive`: `number`;
-`permitsCurrent`: `number`;
-`permitsMax`: `number` \| `null`;
-`severity`: [`BackpressureSeverity`](../type-aliases/BackpressureSeverity.md);
-`waiters`: `number`;
+  \| \{
+  `backoffMs`: `number`;
+  `consecutive`: `number`;
+  `permitsCurrent`: `number`;
+  `permitsMax`: `number` \| `null`;
+  `severity`: [`BackpressureSeverity`](../type-aliases/BackpressureSeverity.md);
+  `waiters`: `number`;
 \}
-\| \{
-`consecutive`: `number`;
-`permitsCurrent`: `number`;
-`permitsMax`: `null`;
-`severity`: `string`;
-`waiters`: `number`;
+  \| \{
+  `consecutive`: `number`;
+  `permitsCurrent`: `number`;
+  `permitsMax`: `null`;
+  `severity`: `string`;
+  `waiters`: `number`;
 \}
 
 ### getBatchOperation()
 
 ```ts
 getBatchOperation(...a): CancelablePromise<{
-  actorId?: string;
-  actorType?: AuditLogActorTypeEnum;
-  batchOperationKey?: {
-   [key: number]: string;
-     __brand: "BatchOperationKey";
-  };
-  batchOperationType?: BatchOperationTypeEnum;
-  endDate?: string;
-  errors?: object[];
-  operationsCompletedCount?: number;
-  operationsFailedCount?: number;
-  operationsTotalCount?: number;
-  startDate?: string;
-  state?: BatchOperationStateEnum;
+  actorId: string | null;
+  actorType:   | AuditLogActorTypeEnum
+     | null;
+  batchOperationKey: string;
+  batchOperationType: BatchOperationTypeEnum;
+  endDate: string | null;
+  errors: object[];
+  operationsCompletedCount: number;
+  operationsFailedCount: number;
+  operationsTotalCount: number;
+  startDate: string | null;
+  state: BatchOperationStateEnum;
 }>;
 ```
 
@@ -2297,25 +2341,23 @@ getBatchOperation(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`actorId?`: `string`;
-`actorType?`: [`AuditLogActorTypeEnum`](../type-aliases/AuditLogActorTypeEnum.md);
-`batchOperationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"BatchOperationKey"`;
-\};
-`batchOperationType?`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
-`endDate?`: `string`;
-`errors?`: `object`[];
-`operationsCompletedCount?`: `number`;
-`operationsFailedCount?`: `number`;
-`operationsTotalCount?`: `number`;
-`startDate?`: `string`;
-`state?`: [`BatchOperationStateEnum`](../type-aliases/BatchOperationStateEnum.md);
+  `actorId`: `string` \| `null`;
+  `actorType`:   \| [`AuditLogActorTypeEnum`](../type-aliases/AuditLogActorTypeEnum.md)
+     \| `null`;
+  `batchOperationKey`: `string`;
+  `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
+  `endDate`: `string` \| `null`;
+  `errors`: `object`[];
+  `operationsCompletedCount`: `number`;
+  `operationsFailedCount`: `number`;
+  `operationsTotalCount`: `number`;
+  `startDate`: `string` \| `null`;
+  `state`: [`BatchOperationStateEnum`](../type-aliases/BatchOperationStateEnum.md);
 \}\>
 
 ### getConfig()
@@ -2400,10 +2442,22 @@ enabled: boolean;
 floor: number;
 ```
 
+###### backpressure.healthyRecoveryMultiplier
+
+```ts
+healthyRecoveryMultiplier: number;
+```
+
 ###### backpressure.initialMax
 
 ```ts
 initialMax: number;
+```
+
+###### backpressure.maxWaiters
+
+```ts
+maxWaiters: number;
 ```
 
 ###### backpressure.observeOnly
@@ -2446,6 +2500,12 @@ severeThreshold: number;
 
 ```ts
 softFactor: number;
+```
+
+###### backpressure.unlimitedAfterHealthyMs
+
+```ts
+unlimitedAfterHealthyMs: number;
 ```
 
 ##### defaultTenantId
@@ -2686,27 +2746,15 @@ res: ValidationMode;
 
 ```ts
 getDecisionDefinition(...a): CancelablePromise<{
-  decisionDefinitionId?: {
-   [key: number]: string;
-     __brand: "DecisionDefinitionId";
-  };
-  decisionDefinitionKey?: {
-   [key: number]: string;
-     __brand: "DecisionDefinitionKey";
-  };
-  decisionRequirementsId?: string;
-  decisionRequirementsKey?: {
-   [key: number]: string;
-     __brand: "DecisionRequirementsKey";
-  };
-  decisionRequirementsName?: string;
-  decisionRequirementsVersion?: number;
-  name?: string;
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
-  };
-  version?: number;
+  decisionDefinitionId: string;
+  decisionDefinitionKey: string;
+  decisionRequirementsId: string;
+  decisionRequirementsKey: string;
+  decisionRequirementsName: string;
+  decisionRequirementsVersion: number;
+  name: string;
+  tenantId: string;
+  version: number;
 }>;
 ```
 
@@ -2714,32 +2762,20 @@ getDecisionDefinition(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`decisionDefinitionId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionDefinitionId"`;
-\};
-`decisionDefinitionKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionDefinitionKey"`;
-\};
-`decisionRequirementsId?`: `string`;
-`decisionRequirementsKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionRequirementsKey"`;
-\};
-`decisionRequirementsName?`: `string`;
-`decisionRequirementsVersion?`: `number`;
-`name?`: `string`;
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-`version?`: `number`;
+  `decisionDefinitionId`: `string`;
+  `decisionDefinitionKey`: `string`;
+  `decisionRequirementsId`: `string`;
+  `decisionRequirementsKey`: `string`;
+  `decisionRequirementsName`: `string`;
+  `decisionRequirementsVersion`: `number`;
+  `name`: `string`;
+  `tenantId`: `string`;
+  `version`: `number`;
 \}\>
 
 ### getDecisionDefinitionXml()
@@ -2752,7 +2788,7 @@ getDecisionDefinitionXml(...a): CancelablePromise<string>;
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
@@ -2762,55 +2798,41 @@ getDecisionDefinitionXml(...a): CancelablePromise<string>;
 
 ```ts
 getDecisionInstance(...a): CancelablePromise<{
-  decisionDefinitionId?: {
-   [key: number]: string;
-     __brand: "DecisionDefinitionId";
-  };
-  decisionDefinitionKey?: {
-   [key: number]: string;
-     __brand: "DecisionDefinitionKey";
-  };
-  decisionDefinitionName?: string;
-  decisionDefinitionType?: DecisionDefinitionTypeEnum;
-  decisionDefinitionVersion?: number;
-  decisionEvaluationInstanceKey?: {
-   [key: number]: string;
-     __brand: "DecisionEvaluationInstanceKey";
-  };
-  decisionEvaluationKey?: {
-   [key: number]: string;
-     __brand: "DecisionEvaluationKey";
-  };
-  elementInstanceKey?: {
+  decisionDefinitionId: string;
+  decisionDefinitionKey: string;
+  decisionDefinitionName: string;
+  decisionDefinitionType: DecisionDefinitionTypeEnum;
+  decisionDefinitionVersion: number;
+  decisionEvaluationInstanceKey: string;
+  decisionEvaluationKey: string;
+  elementInstanceKey:   | {
    [key: number]: string;
      __brand: "ElementInstanceKey";
-  };
-  evaluatedInputs?: object[];
-  evaluationDate?: string;
-  evaluationFailure?: string;
-  matchedRules?: object[];
-  processDefinitionKey?: {
+   }
+     | null;
+  evaluatedInputs: object[];
+  evaluationDate: string;
+  evaluationFailure: string | null;
+  matchedRules: object[];
+  processDefinitionKey:   | {
    [key: number]: string;
      __brand: "ProcessDefinitionKey";
-  };
-  processInstanceKey?: {
+   }
+     | null;
+  processInstanceKey:   | {
    [key: number]: string;
      __brand: "ProcessInstanceKey";
-  };
-  result?: string;
-  rootDecisionDefinitionKey?: {
-   [key: number]: string;
-     __brand: "DecisionDefinitionKey";
-  };
-  rootProcessInstanceKey?: {
+   }
+     | null;
+  result: string;
+  rootDecisionDefinitionKey: string;
+  rootProcessInstanceKey:   | {
    [key: number]: string;
      __brand: "ProcessInstanceKey";
-  };
-  state?: DecisionInstanceStateEnum;
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
-  };
+   }
+     | null;
+  state: DecisionInstanceStateEnum;
+  tenantId: string;
 }>;
 ```
 
@@ -2818,78 +2840,58 @@ getDecisionInstance(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`decisionDefinitionId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionDefinitionId"`;
-\};
-`decisionDefinitionKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionDefinitionKey"`;
-\};
-`decisionDefinitionName?`: `string`;
-`decisionDefinitionType?`: [`DecisionDefinitionTypeEnum`](../type-aliases/DecisionDefinitionTypeEnum.md);
-`decisionDefinitionVersion?`: `number`;
-`decisionEvaluationInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionEvaluationInstanceKey"`;
-\};
-`decisionEvaluationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionEvaluationKey"`;
-\};
-`elementInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ElementInstanceKey"`;
-\};
-`evaluatedInputs?`: `object`[];
-`evaluationDate?`: `string`;
-`evaluationFailure?`: `string`;
-`matchedRules?`: `object`[];
-`processDefinitionKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessDefinitionKey"`;
-\};
-`processInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`result?`: `string`;
-`rootDecisionDefinitionKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionDefinitionKey"`;
-\};
-`rootProcessInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`state?`: [`DecisionInstanceStateEnum`](../type-aliases/DecisionInstanceStateEnum.md);
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
+  `decisionDefinitionId`: `string`;
+  `decisionDefinitionKey`: `string`;
+  `decisionDefinitionName`: `string`;
+  `decisionDefinitionType`: [`DecisionDefinitionTypeEnum`](../type-aliases/DecisionDefinitionTypeEnum.md);
+  `decisionDefinitionVersion`: `number`;
+  `decisionEvaluationInstanceKey`: `string`;
+  `decisionEvaluationKey`: `string`;
+  `elementInstanceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ElementInstanceKey"`;
+   \}
+     \| `null`;
+  `evaluatedInputs`: `object`[];
+  `evaluationDate`: `string`;
+  `evaluationFailure`: `string` \| `null`;
+  `matchedRules`: `object`[];
+  `processDefinitionKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessDefinitionKey"`;
+   \}
+     \| `null`;
+  `processInstanceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessInstanceKey"`;
+   \}
+     \| `null`;
+  `result`: `string`;
+  `rootDecisionDefinitionKey`: `string`;
+  `rootProcessInstanceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessInstanceKey"`;
+   \}
+     \| `null`;
+  `state`: [`DecisionInstanceStateEnum`](../type-aliases/DecisionInstanceStateEnum.md);
+  `tenantId`: `string`;
 \}\>
 
 ### getDecisionRequirements()
 
 ```ts
 getDecisionRequirements(...a): CancelablePromise<{
-  decisionRequirementsId?: string;
-  decisionRequirementsKey?: {
-   [key: number]: string;
-     __brand: "DecisionRequirementsKey";
-  };
-  decisionRequirementsName?: string;
-  resourceName?: string;
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
-  };
-  version?: number;
+  decisionRequirementsId: string;
+  decisionRequirementsKey: string;
+  decisionRequirementsName: string;
+  resourceName: string;
+  tenantId: string;
+  version: number;
 }>;
 ```
 
@@ -2897,23 +2899,17 @@ getDecisionRequirements(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`decisionRequirementsId?`: `string`;
-`decisionRequirementsKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionRequirementsKey"`;
-\};
-`decisionRequirementsName?`: `string`;
-`resourceName?`: `string`;
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-`version?`: `number`;
+  `decisionRequirementsId`: `string`;
+  `decisionRequirementsKey`: `string`;
+  `decisionRequirementsName`: `string`;
+  `resourceName`: `string`;
+  `tenantId`: `string`;
+  `version`: `number`;
 \}\>
 
 ### getDecisionRequirementsXml()
@@ -2926,7 +2922,7 @@ getDecisionRequirementsXml(...a): CancelablePromise<string>;
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
@@ -2943,7 +2939,7 @@ getDocument(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -2957,19 +2953,21 @@ getElementInstance(...a): CancelablePromise<{
   elementId: string;
   elementInstanceKey: string;
   elementName: string;
-  endDate?: string;
+  endDate: string | null;
   hasIncident: boolean;
-  incidentKey?: {
+  incidentKey:   | {
    [key: number]: string;
      __brand: "IncidentKey";
-  };
+   }
+     | null;
   processDefinitionId: string;
   processDefinitionKey: string;
   processInstanceKey: string;
-  rootProcessInstanceKey?: {
+  rootProcessInstanceKey:   | {
    [key: number]: string;
      __brand: "ProcessInstanceKey";
-  };
+   }
+     | null;
   startDate: string;
   state: ElementInstanceStateEnum;
   tenantId: string;
@@ -3007,57 +3005,59 @@ getElementInstance(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`elementId`: `string`;
-`elementInstanceKey`: `string`;
-`elementName`: `string`;
-`endDate?`: `string`;
-`hasIncident`: `boolean`;
-`incidentKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"IncidentKey"`;
-\};
-`processDefinitionId`: `string`;
-`processDefinitionKey`: `string`;
-`processInstanceKey`: `string`;
-`rootProcessInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`startDate`: `string`;
-`state`: [`ElementInstanceStateEnum`](../type-aliases/ElementInstanceStateEnum.md);
-`tenantId`: `string`;
-`type`: \| `"USER_TASK"`
-\| `"UNKNOWN"`
-\| `"UNSPECIFIED"`
-\| `"PROCESS"`
-\| `"SUB_PROCESS"`
-\| `"EVENT_SUB_PROCESS"`
-\| `"AD_HOC_SUB_PROCESS"`
-\| `"AD_HOC_SUB_PROCESS_INNER_INSTANCE"`
-\| `"START_EVENT"`
-\| `"INTERMEDIATE_CATCH_EVENT"`
-\| `"INTERMEDIATE_THROW_EVENT"`
-\| `"BOUNDARY_EVENT"`
-\| `"END_EVENT"`
-\| `"SERVICE_TASK"`
-\| `"RECEIVE_TASK"`
-\| `"MANUAL_TASK"`
-\| `"TASK"`
-\| `"EXCLUSIVE_GATEWAY"`
-\| `"INCLUSIVE_GATEWAY"`
-\| `"PARALLEL_GATEWAY"`
-\| `"EVENT_BASED_GATEWAY"`
-\| `"SEQUENCE_FLOW"`
-\| `"MULTI_INSTANCE_BODY"`
-\| `"CALL_ACTIVITY"`
-\| `"BUSINESS_RULE_TASK"`
-\| `"SCRIPT_TASK"`
-\| `"SEND_TASK"`;
+  `elementId`: `string`;
+  `elementInstanceKey`: `string`;
+  `elementName`: `string`;
+  `endDate`: `string` \| `null`;
+  `hasIncident`: `boolean`;
+  `incidentKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"IncidentKey"`;
+   \}
+     \| `null`;
+  `processDefinitionId`: `string`;
+  `processDefinitionKey`: `string`;
+  `processInstanceKey`: `string`;
+  `rootProcessInstanceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessInstanceKey"`;
+   \}
+     \| `null`;
+  `startDate`: `string`;
+  `state`: [`ElementInstanceStateEnum`](../type-aliases/ElementInstanceStateEnum.md);
+  `tenantId`: `string`;
+  `type`:   \| `"USER_TASK"`
+     \| `"UNKNOWN"`
+     \| `"UNSPECIFIED"`
+     \| `"PROCESS"`
+     \| `"SUB_PROCESS"`
+     \| `"EVENT_SUB_PROCESS"`
+     \| `"AD_HOC_SUB_PROCESS"`
+     \| `"AD_HOC_SUB_PROCESS_INNER_INSTANCE"`
+     \| `"START_EVENT"`
+     \| `"INTERMEDIATE_CATCH_EVENT"`
+     \| `"INTERMEDIATE_THROW_EVENT"`
+     \| `"BOUNDARY_EVENT"`
+     \| `"END_EVENT"`
+     \| `"SERVICE_TASK"`
+     \| `"RECEIVE_TASK"`
+     \| `"MANUAL_TASK"`
+     \| `"TASK"`
+     \| `"EXCLUSIVE_GATEWAY"`
+     \| `"INCLUSIVE_GATEWAY"`
+     \| `"PARALLEL_GATEWAY"`
+     \| `"EVENT_BASED_GATEWAY"`
+     \| `"SEQUENCE_FLOW"`
+     \| `"MULTI_INSTANCE_BODY"`
+     \| `"CALL_ACTIVITY"`
+     \| `"BUSINESS_RULE_TASK"`
+     \| `"SCRIPT_TASK"`
+     \| `"SEND_TASK"`;
 \}\>
 
 ### getErrorMode()
@@ -3082,8 +3082,8 @@ getErrorMode(...a): "result" | "throw";
 getGlobalClusterVariable(...a): CancelablePromise<{
   name: string;
   scope: ClusterVariableScopeEnum;
-  tenantId?: string;
-  value?: string;
+  tenantId: string | null;
+  value: string;
 }>;
 ```
 
@@ -3091,15 +3091,15 @@ getGlobalClusterVariable(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`name`: `string`;
-`scope`: [`ClusterVariableScopeEnum`](../type-aliases/ClusterVariableScopeEnum.md);
-`tenantId?`: `string`;
-`value?`: `string`;
+  `name`: `string`;
+  `scope`: [`ClusterVariableScopeEnum`](../type-aliases/ClusterVariableScopeEnum.md);
+  `tenantId`: `string` \| `null`;
+  `value`: `string`;
 \}\>
 
 ### getGlobalJobStatistics()
@@ -3108,15 +3108,15 @@ getGlobalClusterVariable(...a): CancelablePromise<{
 getGlobalJobStatistics(...a): CancelablePromise<{
   completed: {
      count: number;
-     lastUpdatedAt: string;
+     lastUpdatedAt: string | null;
   };
   created: {
      count: number;
-     lastUpdatedAt: string;
+     lastUpdatedAt: string | null;
   };
   failed: {
      count: number;
-     lastUpdatedAt: string;
+     lastUpdatedAt: string | null;
   };
   isIncomplete: boolean;
 }>;
@@ -3126,33 +3126,65 @@ getGlobalJobStatistics(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`completed`: \{
-`count`: `number`;
-`lastUpdatedAt`: `string`;
-\};
-`created`: \{
-`count`: `number`;
-`lastUpdatedAt`: `string`;
-\};
-`failed`: \{
-`count`: `number`;
-`lastUpdatedAt`: `string`;
-\};
-`isIncomplete`: `boolean`;
+  `completed`: \{
+     `count`: `number`;
+     `lastUpdatedAt`: `string` \| `null`;
+  \};
+  `created`: \{
+     `count`: `number`;
+     `lastUpdatedAt`: `string` \| `null`;
+  \};
+  `failed`: \{
+     `count`: `number`;
+     `lastUpdatedAt`: `string` \| `null`;
+  \};
+  `isIncomplete`: `boolean`;
+\}\>
+
+### getGlobalTaskListener()
+
+```ts
+getGlobalTaskListener(...a): CancelablePromise<{
+  afterNonGlobal?: boolean;
+  eventTypes: GlobalTaskListenerEventTypeEnum[];
+  id: string;
+  priority?: number;
+  retries?: number;
+  source: GlobalListenerSourceEnum;
+  type?: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `afterNonGlobal?`: `boolean`;
+  `eventTypes`: [`GlobalTaskListenerEventTypeEnum`](../type-aliases/GlobalTaskListenerEventTypeEnum.md)[];
+  `id`: `string`;
+  `priority?`: `number`;
+  `retries?`: `number`;
+  `source`: [`GlobalListenerSourceEnum`](../type-aliases/GlobalListenerSourceEnum.md);
+  `type?`: `string`;
 \}\>
 
 ### getGroup()
 
 ```ts
 getGroup(...a): CancelablePromise<{
-  description?: string;
-  groupId?: string;
-  name?: string;
+  description: string | null;
+  groupId: string;
+  name: string;
 }>;
 ```
 
@@ -3160,59 +3192,94 @@ getGroup(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`description?`: `string`;
-`groupId?`: `string`;
-`name?`: `string`;
+  `description`: `string` \| `null`;
+  `groupId`: `string`;
+  `name`: `string`;
 \}\>
 
 ### getIncident()
 
 ```ts
 getIncident(...a): CancelablePromise<{
-  creationTime?: string;
-  elementId?: {
-   [key: number]: string;
-     __brand: "ElementId";
-  };
-  elementInstanceKey?: {
-   [key: number]: string;
-     __brand: "ElementInstanceKey";
-  };
-  errorMessage?: string;
-  errorType?: IncidentErrorTypeEnum;
-  incidentKey?: {
-   [key: number]: string;
-     __brand: "IncidentKey";
-  };
-  jobKey?: {
+  creationTime: string;
+  elementId: string;
+  elementInstanceKey: string;
+  errorMessage: string;
+  errorType: IncidentErrorTypeEnum;
+  incidentKey: string;
+  jobKey:   | {
    [key: number]: string;
      __brand: "JobKey";
-  };
-  processDefinitionId?: {
-   [key: number]: string;
-     __brand: "ProcessDefinitionId";
-  };
-  processDefinitionKey?: {
-   [key: number]: string;
-     __brand: "ProcessDefinitionKey";
-  };
-  processInstanceKey?: {
+   }
+     | null;
+  processDefinitionId: string;
+  processDefinitionKey: string;
+  processInstanceKey: string;
+  rootProcessInstanceKey:   | {
    [key: number]: string;
      __brand: "ProcessInstanceKey";
-  };
-  rootProcessInstanceKey?: {
-   [key: number]: string;
-     __brand: "ProcessInstanceKey";
-  };
-  state?: IncidentStateEnum;
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
+   }
+     | null;
+  state: IncidentStateEnum;
+  tenantId: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `creationTime`: `string`;
+  `elementId`: `string`;
+  `elementInstanceKey`: `string`;
+  `errorMessage`: `string`;
+  `errorType`: [`IncidentErrorTypeEnum`](../type-aliases/IncidentErrorTypeEnum.md);
+  `incidentKey`: `string`;
+  `jobKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"JobKey"`;
+   \}
+     \| `null`;
+  `processDefinitionId`: `string`;
+  `processDefinitionKey`: `string`;
+  `processInstanceKey`: `string`;
+  `rootProcessInstanceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessInstanceKey"`;
+   \}
+     \| `null`;
+  `state`: [`IncidentStateEnum`](../type-aliases/IncidentStateEnum.md);
+  `tenantId`: `string`;
+\}\>
+
+### getJobErrorStatistics()
+
+```ts
+getJobErrorStatistics(...a): CancelablePromise<{
+  items: object[];
+  page: {
+     endCursor:   | {
+      [key: number]: string;
+        __brand: "EndCursor";
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
+      [key: number]: string;
+        __brand: "StartCursor";
+      }
+        | null;
+     totalItems: number;
   };
 }>;
 ```
@@ -3221,58 +3288,177 @@ getIncident(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`creationTime?`: `string`;
-`elementId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ElementId"`;
-\};
-`elementInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ElementInstanceKey"`;
-\};
-`errorMessage?`: `string`;
-`errorType?`: [`IncidentErrorTypeEnum`](../type-aliases/IncidentErrorTypeEnum.md);
-`incidentKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"IncidentKey"`;
-\};
-`jobKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"JobKey"`;
-\};
-`processDefinitionId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessDefinitionId"`;
-\};
-`processDefinitionKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessDefinitionKey"`;
-\};
-`processInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`rootProcessInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`state?`: [`IncidentStateEnum`](../type-aliases/IncidentStateEnum.md);
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
+\}\>
+
+### getJobTimeSeriesStatistics()
+
+```ts
+getJobTimeSeriesStatistics(...a): CancelablePromise<{
+  items: object[];
+  page: {
+     endCursor:   | {
+      [key: number]: string;
+        __brand: "EndCursor";
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
+      [key: number]: string;
+        __brand: "StartCursor";
+      }
+        | null;
+     totalItems: number;
+  };
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
+\}\>
+
+### getJobTypeStatistics()
+
+```ts
+getJobTypeStatistics(...a): CancelablePromise<{
+  items: object[];
+  page: {
+     endCursor:   | {
+      [key: number]: string;
+        __brand: "EndCursor";
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
+      [key: number]: string;
+        __brand: "StartCursor";
+      }
+        | null;
+     totalItems: number;
+  };
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
+\}\>
+
+### getJobWorkerStatistics()
+
+```ts
+getJobWorkerStatistics(...a): CancelablePromise<{
+  items: object[];
+  page: {
+     endCursor:   | {
+      [key: number]: string;
+        __brand: "EndCursor";
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
+      [key: number]: string;
+        __brand: "StartCursor";
+      }
+        | null;
+     totalItems: number;
+  };
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### getLicense()
 
 ```ts
 getLicense(...a): CancelablePromise<{
-  expiresAt?: string | null;
+  expiresAt: string | null;
   isCommercial: boolean;
   licenseType: string;
   validLicense: boolean;
@@ -3283,25 +3469,25 @@ getLicense(...a): CancelablePromise<{
 
 ##### a
 
-...\[\]
+...\[`object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`expiresAt?`: `string` \| `null`;
-`isCommercial`: `boolean`;
-`licenseType`: `string`;
-`validLicense`: `boolean`;
+  `expiresAt`: `string` \| `null`;
+  `isCommercial`: `boolean`;
+  `licenseType`: `string`;
+  `validLicense`: `boolean`;
 \}\>
 
 ### getMappingRule()
 
 ```ts
 getMappingRule(...a): CancelablePromise<{
-  claimName?: string;
-  claimValue?: string;
-  mappingRuleId?: string;
-  name?: string;
+  claimName: string;
+  claimValue: string;
+  mappingRuleId: string;
+  name: string;
 }>;
 ```
 
@@ -3309,38 +3495,29 @@ getMappingRule(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`claimName?`: `string`;
-`claimValue?`: `string`;
-`mappingRuleId?`: `string`;
-`name?`: `string`;
+  `claimName`: `string`;
+  `claimValue`: `string`;
+  `mappingRuleId`: `string`;
+  `name`: `string`;
 \}\>
 
 ### getProcessDefinition()
 
 ```ts
 getProcessDefinition(...a): CancelablePromise<{
-  hasStartForm?: boolean;
-  name?: string;
-  processDefinitionId?: {
-   [key: number]: string;
-     __brand: "ProcessDefinitionId";
-  };
-  processDefinitionKey?: {
-   [key: number]: string;
-     __brand: "ProcessDefinitionKey";
-  };
-  resourceName?: string;
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
-  };
-  version?: number;
-  versionTag?: string;
+  hasStartForm: boolean;
+  name: string | null;
+  processDefinitionId: string;
+  processDefinitionKey: string;
+  resourceName: string;
+  tenantId: string;
+  version: number;
+  versionTag: string | null;
 }>;
 ```
 
@@ -3348,45 +3525,38 @@ getProcessDefinition(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`hasStartForm?`: `boolean`;
-`name?`: `string`;
-`processDefinitionId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessDefinitionId"`;
-\};
-`processDefinitionKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessDefinitionKey"`;
-\};
-`resourceName?`: `string`;
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-`version?`: `number`;
-`versionTag?`: `string`;
+  `hasStartForm`: `boolean`;
+  `name`: `string` \| `null`;
+  `processDefinitionId`: `string`;
+  `processDefinitionKey`: `string`;
+  `resourceName`: `string`;
+  `tenantId`: `string`;
+  `version`: `number`;
+  `versionTag`: `string` \| `null`;
 \}\>
 
 ### getProcessDefinitionInstanceStatistics()
 
 ```ts
 getProcessDefinitionInstanceStatistics(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -3396,41 +3566,45 @@ getProcessDefinitionInstanceStatistics(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### getProcessDefinitionInstanceVersionStatistics()
 
 ```ts
 getProcessDefinitionInstanceVersionStatistics(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -3440,41 +3614,45 @@ getProcessDefinitionInstanceVersionStatistics(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### getProcessDefinitionMessageSubscriptionStatistics()
 
 ```ts
 getProcessDefinitionMessageSubscriptionStatistics(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -3484,31 +3662,33 @@ getProcessDefinitionMessageSubscriptionStatistics(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### getProcessDefinitionStatistics()
 
 ```ts
 getProcessDefinitionStatistics(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
 }>;
 ```
 
@@ -3516,12 +3696,12 @@ getProcessDefinitionStatistics(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
+  `items`: `object`[];
 \}\>
 
 ### getProcessDefinitionXml()
@@ -3534,7 +3714,7 @@ getProcessDefinitionXml(...a): CancelablePromise<string>;
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
@@ -3544,29 +3724,37 @@ getProcessDefinitionXml(...a): CancelablePromise<string>;
 
 ```ts
 getProcessInstance(...a): CancelablePromise<{
-  endDate?: string;
+  businessId:   | {
+   [key: number]: string;
+     __brand: "BusinessId";
+   }
+     | null;
+  endDate: string | null;
   hasIncident: boolean;
-  parentElementInstanceKey?: {
+  parentElementInstanceKey:   | {
    [key: number]: string;
      __brand: "ElementInstanceKey";
-  };
-  parentProcessInstanceKey?: {
+   }
+     | null;
+  parentProcessInstanceKey:   | {
    [key: number]: string;
      __brand: "ProcessInstanceKey";
-  };
+   }
+     | null;
   processDefinitionId: string;
   processDefinitionKey: string;
-  processDefinitionName: string;
+  processDefinitionName: string | null;
   processDefinitionVersion: number;
-  processDefinitionVersionTag?: string;
+  processDefinitionVersionTag: string | null;
   processInstanceKey: string;
-  rootProcessInstanceKey?: {
+  rootProcessInstanceKey:   | {
    [key: number]: string;
      __brand: "ProcessInstanceKey";
-  };
+   }
+     | null;
   startDate: string;
   state: ProcessInstanceStateEnum;
-  tags?: string[];
+  tags: string[];
   tenantId: string;
 }>;
 ```
@@ -3575,35 +3763,43 @@ getProcessInstance(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`endDate?`: `string`;
-`hasIncident`: `boolean`;
-`parentElementInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ElementInstanceKey"`;
-\};
-`parentProcessInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`processDefinitionId`: `string`;
-`processDefinitionKey`: `string`;
-`processDefinitionName`: `string`;
-`processDefinitionVersion`: `number`;
-`processDefinitionVersionTag?`: `string`;
-`processInstanceKey`: `string`;
-`rootProcessInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`startDate`: `string`;
-`state`: [`ProcessInstanceStateEnum`](../type-aliases/ProcessInstanceStateEnum.md);
-`tags?`: `string`[];
-`tenantId`: `string`;
+  `businessId`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"BusinessId"`;
+   \}
+     \| `null`;
+  `endDate`: `string` \| `null`;
+  `hasIncident`: `boolean`;
+  `parentElementInstanceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ElementInstanceKey"`;
+   \}
+     \| `null`;
+  `parentProcessInstanceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessInstanceKey"`;
+   \}
+     \| `null`;
+  `processDefinitionId`: `string`;
+  `processDefinitionKey`: `string`;
+  `processDefinitionName`: `string` \| `null`;
+  `processDefinitionVersion`: `number`;
+  `processDefinitionVersionTag`: `string` \| `null`;
+  `processInstanceKey`: `string`;
+  `rootProcessInstanceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessInstanceKey"`;
+   \}
+     \| `null`;
+  `startDate`: `string`;
+  `state`: [`ProcessInstanceStateEnum`](../type-aliases/ProcessInstanceStateEnum.md);
+  `tags`: `string`[];
+  `tenantId`: `string`;
 \}\>
 
 ### getProcessInstanceCallHierarchy()
@@ -3616,7 +3812,7 @@ getProcessInstanceCallHierarchy(...a): CancelablePromise<object[]>;
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
@@ -3626,7 +3822,7 @@ getProcessInstanceCallHierarchy(...a): CancelablePromise<object[]>;
 
 ```ts
 getProcessInstanceSequenceFlows(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
 }>;
 ```
 
@@ -3634,19 +3830,19 @@ getProcessInstanceSequenceFlows(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
+  `items`: `object`[];
 \}\>
 
 ### getProcessInstanceStatistics()
 
 ```ts
 getProcessInstanceStatistics(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
 }>;
 ```
 
@@ -3654,29 +3850,31 @@ getProcessInstanceStatistics(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
+  `items`: `object`[];
 \}\>
 
 ### getProcessInstanceStatisticsByDefinition()
 
 ```ts
 getProcessInstanceStatisticsByDefinition(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -3686,41 +3884,45 @@ getProcessInstanceStatisticsByDefinition(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### getProcessInstanceStatisticsByError()
 
 ```ts
 getProcessInstanceStatisticsByError(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -3730,117 +3932,38 @@ getProcessInstanceStatisticsByError(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### getResource()
 
 ```ts
 getResource(...a): CancelablePromise<{
-  resourceId?: string;
-  resourceKey?:   | {
-   [key: number]: string;
-     __brand: "FormKey";
-   }
-     | {
-   [key: number]: string;
-     __brand: "ProcessDefinitionKey";
-   }
-     | {
-   [key: number]: string;
-     __brand: "DecisionRequirementsKey";
-   }
-     | {
-   [key: number]: string;
-     __brand: "DecisionDefinitionKey";
-   };
-  resourceName?: string;
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
-  };
-  version?: number;
-  versionTag?: string;
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`resourceId?`: `string`;
-`resourceKey?`: \| \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"FormKey"`;
-\}
-\| \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessDefinitionKey"`;
-\}
-\| \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionRequirementsKey"`;
-\}
-\| \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"DecisionDefinitionKey"`;
-\};
-`resourceName?`: `string`;
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-`version?`: `number`;
-`versionTag?`: `string`;
-\}\>
-
-### getResourceContent()
-
-```ts
-getResourceContent(...a): CancelablePromise<{
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-\}\>
-
-### getRole()
-
-```ts
-getRole(...a): CancelablePromise<{
-  description?: string;
-  name?: string;
-  roleId?: string;
+  resourceId: string;
+  resourceKey: string;
+  resourceName: string;
+  tenantId: string;
+  version: number;
+  versionTag: string | null;
 }>;
 ```
 
@@ -3853,9 +3976,52 @@ getRole(...a): CancelablePromise<{
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`description?`: `string`;
-`name?`: `string`;
-`roleId?`: `string`;
+  `resourceId`: `string`;
+  `resourceKey`: `string`;
+  `resourceName`: `string`;
+  `tenantId`: `string`;
+  `version`: `number`;
+  `versionTag`: `string` \| `null`;
+\}\>
+
+### getResourceContent()
+
+```ts
+getResourceContent(...a): CancelablePromise<string>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>
+
+### getRole()
+
+```ts
+getRole(...a): CancelablePromise<{
+  description: string | null;
+  name: string;
+  roleId: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `description`: `string` \| `null`;
+  `name`: `string`;
+  `roleId`: `string`;
 \}\>
 
 ### getStartProcessForm()
@@ -3864,22 +4030,11 @@ getRole(...a): CancelablePromise<{
 getStartProcessForm(...a): CancelablePromise<
   | void
   | {
-  formId?: {
-   [key: number]: string;
-     __brand: "FormId";
-  };
-  formKey?: {
-   [key: number]: string;
-     __brand: "FormKey";
-  };
-  schema?: {
-   [key: string]: unknown;
-  };
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
-  };
-  version?: number;
+  formId: string;
+  formKey: string;
+  schema: string;
+  tenantId: string;
+  version: number;
 }>;
 ```
 
@@ -3887,29 +4042,18 @@ getStartProcessForm(...a): CancelablePromise<
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<
-\| `void`
-\| \{
-`formId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"FormId"`;
-\};
-`formKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"FormKey"`;
-\};
-`schema?`: \{
-\[`key`: `string`\]: `unknown`;
-\};
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-`version?`: `number`;
+  \| `void`
+  \| \{
+  `formId`: `string`;
+  `formKey`: `string`;
+  `schema`: `string`;
+  `tenantId`: `string`;
+  `version`: `number`;
 \}\>
 
 ### getStatus()
@@ -3922,21 +4066,23 @@ getStatus(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[\]
+...\[`object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
-### getTenant()
+### getSystemConfiguration()
 
 ```ts
-getTenant(...a): CancelablePromise<{
-  description?: string;
-  name?: string;
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
+getSystemConfiguration(...a): CancelablePromise<{
+  jobMetrics: {
+     enabled: boolean;
+     exportInterval: string;
+     maxJobTypeLength: number;
+     maxTenantIdLength: number;
+     maxUniqueKeys: number;
+     maxWorkerNameLength: number;
   };
 }>;
 ```
@@ -3945,17 +4091,43 @@ getTenant(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`description?`: `string`;
-`name?`: `string`;
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
+  `jobMetrics`: \{
+     `enabled`: `boolean`;
+     `exportInterval`: `string`;
+     `maxJobTypeLength`: `number`;
+     `maxTenantIdLength`: `number`;
+     `maxUniqueKeys`: `number`;
+     `maxWorkerNameLength`: `number`;
+  \};
+\}\>
+
+### getTenant()
+
+```ts
+getTenant(...a): CancelablePromise<{
+  description: string | null;
+  name: string;
+  tenantId: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `description`: `string` \| `null`;
+  `name`: `string`;
+  `tenantId`: `string`;
 \}\>
 
 ### getTenantClusterVariable()
@@ -3964,8 +4136,8 @@ getTenant(...a): CancelablePromise<{
 getTenantClusterVariable(...a): CancelablePromise<{
   name: string;
   scope: ClusterVariableScopeEnum;
-  tenantId?: string;
-  value?: string;
+  tenantId: string | null;
+  value: string;
 }>;
 ```
 
@@ -3973,15 +4145,15 @@ getTenantClusterVariable(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`name`: `string`;
-`scope`: [`ClusterVariableScopeEnum`](../type-aliases/ClusterVariableScopeEnum.md);
-`tenantId?`: `string`;
-`value?`: `string`;
+  `name`: `string`;
+  `scope`: [`ClusterVariableScopeEnum`](../type-aliases/ClusterVariableScopeEnum.md);
+  `tenantId`: `string` \| `null`;
+  `value`: `string`;
 \}\>
 
 ### getTopology()
@@ -3989,7 +4161,7 @@ getTenantClusterVariable(...a): CancelablePromise<{
 ```ts
 getTopology(...a): CancelablePromise<{
   brokers: object[];
-  clusterId?: string | null;
+  clusterId: string | null;
   clusterSize: number;
   gatewayVersion: string;
   lastCompletedChangeId: string;
@@ -4002,29 +4174,29 @@ getTopology(...a): CancelablePromise<{
 
 ##### a
 
-...\[\]
+...\[`object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`brokers`: `object`[];
-`clusterId?`: `string` \| `null`;
-`clusterSize`: `number`;
-`gatewayVersion`: `string`;
-`lastCompletedChangeId`: `string`;
-`partitionsCount`: `number`;
-`replicationFactor`: `number`;
+  `brokers`: `object`[];
+  `clusterId`: `string` \| `null`;
+  `clusterSize`: `number`;
+  `gatewayVersion`: `string`;
+  `lastCompletedChangeId`: `string`;
+  `partitionsCount`: `number`;
+  `replicationFactor`: `number`;
 \}\>
 
 ### getUsageMetrics()
 
 ```ts
 getUsageMetrics(...a): CancelablePromise<{
-  activeTenants?: number;
-  assignees?: number;
-  decisionInstances?: number;
-  processInstances?: number;
-  tenants?: {
+  activeTenants: number;
+  assignees: number;
+  decisionInstances: number;
+  processInstances: number;
+  tenants: {
    [key: string]: object;
   };
 }>;
@@ -4034,30 +4206,27 @@ getUsageMetrics(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`activeTenants?`: `number`;
-`assignees?`: `number`;
-`decisionInstances?`: `number`;
-`processInstances?`: `number`;
-`tenants?`: \{
-\[`key`: `string`\]: `object`;
-\};
+  `activeTenants`: `number`;
+  `assignees`: `number`;
+  `decisionInstances`: `number`;
+  `processInstances`: `number`;
+  `tenants`: \{
+   \[`key`: `string`\]: `object`;
+  \};
 \}\>
 
 ### getUser()
 
 ```ts
 getUser(...a): CancelablePromise<{
-  email?: string;
-  name?: string;
-  username?: {
-   [key: number]: string;
-     __brand: "Username";
-  };
+  email: string | null;
+  name: string | null;
+  username: string;
 }>;
 ```
 
@@ -4065,76 +4234,54 @@ getUser(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`email?`: `string`;
-`name?`: `string`;
-`username?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"Username"`;
-\};
+  `email`: `string` \| `null`;
+  `name`: `string` \| `null`;
+  `username`: `string`;
 \}\>
 
 ### getUserTask()
 
 ```ts
 getUserTask(...a): CancelablePromise<{
-  assignee?: string;
-  candidateGroups?: string[];
-  candidateUsers?: string[];
-  completionDate?: string;
-  creationDate?: string;
-  customHeaders?: {
+  assignee: string | null;
+  candidateGroups: string[];
+  candidateUsers: string[];
+  completionDate: string | null;
+  creationDate: string;
+  customHeaders: {
    [key: string]: string;
   };
-  dueDate?: string;
-  elementId?: {
-   [key: number]: string;
-     __brand: "ElementId";
-  };
-  elementInstanceKey?: {
-   [key: number]: string;
-     __brand: "ElementInstanceKey";
-  };
-  externalFormReference?: string;
-  followUpDate?: string;
-  formKey?: {
+  dueDate: string | null;
+  elementId: string;
+  elementInstanceKey: string;
+  externalFormReference: string | null;
+  followUpDate: string | null;
+  formKey:   | {
    [key: number]: string;
      __brand: "FormKey";
-  };
-  name?: string;
-  priority?: number;
-  processDefinitionId?: {
-   [key: number]: string;
-     __brand: "ProcessDefinitionId";
-  };
-  processDefinitionKey?: {
-   [key: number]: string;
-     __brand: "ProcessDefinitionKey";
-  };
-  processDefinitionVersion?: number;
-  processInstanceKey?: {
+   }
+     | null;
+  name: string | null;
+  priority: number;
+  processDefinitionId: string;
+  processDefinitionKey: string;
+  processDefinitionVersion: number;
+  processInstanceKey: string;
+  processName: string | null;
+  rootProcessInstanceKey:   | {
    [key: number]: string;
      __brand: "ProcessInstanceKey";
-  };
-  processName?: string;
-  rootProcessInstanceKey?: {
-   [key: number]: string;
-     __brand: "ProcessInstanceKey";
-  };
-  state?: UserTaskStateEnum;
-  tags?: string[];
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
-  };
-  userTaskKey?: {
-   [key: number]: string;
-     __brand: "UserTaskKey";
-  };
+   }
+     | null;
+  state: UserTaskStateEnum;
+  tags: string[];
+  tenantId: string;
+  userTaskKey: string;
 }>;
 ```
 
@@ -4142,64 +4289,45 @@ getUserTask(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`assignee?`: `string`;
-`candidateGroups?`: `string`[];
-`candidateUsers?`: `string`[];
-`completionDate?`: `string`;
-`creationDate?`: `string`;
-`customHeaders?`: \{
-\[`key`: `string`\]: `string`;
-\};
-`dueDate?`: `string`;
-`elementId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ElementId"`;
-\};
-`elementInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ElementInstanceKey"`;
-\};
-`externalFormReference?`: `string`;
-`followUpDate?`: `string`;
-`formKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"FormKey"`;
-\};
-`name?`: `string`;
-`priority?`: `number`;
-`processDefinitionId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessDefinitionId"`;
-\};
-`processDefinitionKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessDefinitionKey"`;
-\};
-`processDefinitionVersion?`: `number`;
-`processInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`processName?`: `string`;
-`rootProcessInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`state?`: [`UserTaskStateEnum`](../type-aliases/UserTaskStateEnum.md);
-`tags?`: `string`[];
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-`userTaskKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"UserTaskKey"`;
-\};
+  `assignee`: `string` \| `null`;
+  `candidateGroups`: `string`[];
+  `candidateUsers`: `string`[];
+  `completionDate`: `string` \| `null`;
+  `creationDate`: `string`;
+  `customHeaders`: \{
+   \[`key`: `string`\]: `string`;
+  \};
+  `dueDate`: `string` \| `null`;
+  `elementId`: `string`;
+  `elementInstanceKey`: `string`;
+  `externalFormReference`: `string` \| `null`;
+  `followUpDate`: `string` \| `null`;
+  `formKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"FormKey"`;
+   \}
+     \| `null`;
+  `name`: `string` \| `null`;
+  `priority`: `number`;
+  `processDefinitionId`: `string`;
+  `processDefinitionKey`: `string`;
+  `processDefinitionVersion`: `number`;
+  `processInstanceKey`: `string`;
+  `processName`: `string` \| `null`;
+  `rootProcessInstanceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessInstanceKey"`;
+   \}
+     \| `null`;
+  `state`: [`UserTaskStateEnum`](../type-aliases/UserTaskStateEnum.md);
+  `tags`: `string`[];
+  `tenantId`: `string`;
+  `userTaskKey`: `string`;
 \}\>
 
 ### getUserTaskForm()
@@ -4208,22 +4336,11 @@ getUserTask(...a): CancelablePromise<{
 getUserTaskForm(...a): CancelablePromise<
   | void
   | {
-  formId?: {
-   [key: number]: string;
-     __brand: "FormId";
-  };
-  formKey?: {
-   [key: number]: string;
-     __brand: "FormKey";
-  };
-  schema?: {
-   [key: string]: unknown;
-  };
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
-  };
-  version?: number;
+  formId: string;
+  formKey: string;
+  schema: string;
+  tenantId: string;
+  version: number;
 }>;
 ```
 
@@ -4231,57 +4348,35 @@ getUserTaskForm(...a): CancelablePromise<
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<
-\| `void`
-\| \{
-`formId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"FormId"`;
-\};
-`formKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"FormKey"`;
-\};
-`schema?`: \{
-\[`key`: `string`\]: `unknown`;
-\};
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-`version?`: `number`;
+  \| `void`
+  \| \{
+  `formId`: `string`;
+  `formKey`: `string`;
+  `schema`: `string`;
+  `tenantId`: `string`;
+  `version`: `number`;
 \}\>
 
 ### getVariable()
 
 ```ts
 getVariable(...a): CancelablePromise<{
-  name?: string;
-  processInstanceKey?: {
+  name: string;
+  processInstanceKey: string;
+  rootProcessInstanceKey:   | {
    [key: number]: string;
      __brand: "ProcessInstanceKey";
-  };
-  rootProcessInstanceKey?: {
-   [key: number]: string;
-     __brand: "ProcessInstanceKey";
-  };
-  scopeKey?: {
-   [key: number]: string;
-     __brand: "ScopeKey";
-  };
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
-  };
-  value?: string;
-  variableKey?: {
-   [key: number]: string;
-     __brand: "VariableKey";
-  };
+   }
+     | null;
+  scopeKey: string;
+  tenantId: string;
+  value: string;
+  variableKey: string;
 }>;
 ```
 
@@ -4289,33 +4384,22 @@ getVariable(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`name?`: `string`;
-`processInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`rootProcessInstanceKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ProcessInstanceKey"`;
-\};
-`scopeKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"ScopeKey"`;
-\};
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-`value?`: `string`;
-`variableKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"VariableKey"`;
-\};
+  `name`: `string`;
+  `processInstanceKey`: `string`;
+  `rootProcessInstanceKey`:   \| \{
+   \[`key`: `number`\]: `string`;
+     `__brand`: `"ProcessInstanceKey"`;
+   \}
+     \| `null`;
+  `scopeKey`: `string`;
+  `tenantId`: `string`;
+  `value`: `string`;
+  `variableKey`: `string`;
 \}\>
 
 ### getWorkers()
@@ -4536,7 +4620,7 @@ migrateProcessInstance(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -4546,11 +4630,8 @@ migrateProcessInstance(...a): CancelablePromise<void>;
 
 ```ts
 migrateProcessInstancesBatchOperation(...a): CancelablePromise<{
-  batchOperationKey?: {
-   [key: number]: string;
-     __brand: "BatchOperationKey";
-  };
-  batchOperationType?: BatchOperationTypeEnum;
+  batchOperationKey: string;
+  batchOperationType: BatchOperationTypeEnum;
 }>;
 ```
 
@@ -4563,11 +4644,8 @@ migrateProcessInstancesBatchOperation(...a): CancelablePromise<{
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`batchOperationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"BatchOperationKey"`;
-\};
-`batchOperationType?`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
+  `batchOperationKey`: `string`;
+  `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>
 
 ### modifyProcessInstance()
@@ -4580,7 +4658,7 @@ modifyProcessInstance(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -4590,11 +4668,8 @@ modifyProcessInstance(...a): CancelablePromise<void>;
 
 ```ts
 modifyProcessInstancesBatchOperation(...a): CancelablePromise<{
-  batchOperationKey?: {
-   [key: number]: string;
-     __brand: "BatchOperationKey";
-  };
-  batchOperationType?: BatchOperationTypeEnum;
+  batchOperationKey: string;
+  batchOperationType: BatchOperationTypeEnum;
 }>;
 ```
 
@@ -4607,11 +4682,8 @@ modifyProcessInstancesBatchOperation(...a): CancelablePromise<{
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`batchOperationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"BatchOperationKey"`;
-\};
-`batchOperationType?`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
+  `batchOperationKey`: `string`;
+  `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>
 
 ### onAuthHeaders()
@@ -4624,11 +4696,11 @@ onAuthHeaders(...a): void;
 
 ##### a
 
-...\[(...`a`) =>
-\| `Promise`\<\{
+...\[(...`a`) => 
+  \| `Promise`\<\{
 \[`key`: `string`\]: `string`;
 \}\>
-\| \{
+  \| \{
 \[`key`: `string`\]: `string`;
 \}\]
 
@@ -4646,7 +4718,7 @@ pinClock(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -4656,14 +4728,8 @@ pinClock(...a): CancelablePromise<void>;
 
 ```ts
 publishMessage(...a): CancelablePromise<{
-  messageKey?: {
-   [key: number]: string;
-     __brand: "MessageKey";
-  };
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
-  };
+  messageKey: string;
+  tenantId: string;
 }>;
 ```
 
@@ -4671,19 +4737,13 @@ publishMessage(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`messageKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"MessageKey"`;
-\};
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
+  `messageKey`: `string`;
+  `tenantId`: `string`;
 \}\>
 
 ### resetClock()
@@ -4696,7 +4756,7 @@ resetClock(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[\]
+...\[`object`\]
 
 #### Returns
 
@@ -4712,7 +4772,7 @@ resolveIncident(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -4722,11 +4782,8 @@ resolveIncident(...a): CancelablePromise<void>;
 
 ```ts
 resolveIncidentsBatchOperation(...a): CancelablePromise<{
-  batchOperationKey?: {
-   [key: number]: string;
-     __brand: "BatchOperationKey";
-  };
-  batchOperationType?: BatchOperationTypeEnum;
+  batchOperationKey: string;
+  batchOperationType: BatchOperationTypeEnum;
 }>;
 ```
 
@@ -4739,22 +4796,16 @@ resolveIncidentsBatchOperation(...a): CancelablePromise<{
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`batchOperationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"BatchOperationKey"`;
-\};
-`batchOperationType?`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
+  `batchOperationKey`: `string`;
+  `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>
 
 ### resolveProcessInstanceIncidents()
 
 ```ts
 resolveProcessInstanceIncidents(...a): CancelablePromise<{
-  batchOperationKey?: {
-   [key: number]: string;
-     __brand: "BatchOperationKey";
-  };
-  batchOperationType?: BatchOperationTypeEnum;
+  batchOperationKey: string;
+  batchOperationType: BatchOperationTypeEnum;
 }>;
 ```
 
@@ -4767,11 +4818,8 @@ resolveProcessInstanceIncidents(...a): CancelablePromise<{
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`batchOperationKey?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"BatchOperationKey"`;
-\};
-`batchOperationType?`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
+  `batchOperationKey`: `string`;
+  `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>
 
 ### resumeBatchOperation()
@@ -4794,17 +4842,19 @@ resumeBatchOperation(...a): CancelablePromise<void>;
 
 ```ts
 searchAuditLogs(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -4814,41 +4864,45 @@ searchAuditLogs(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchAuthorizations()
 
 ```ts
 searchAuthorizations(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -4858,41 +4912,45 @@ searchAuthorizations(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchBatchOperationItems()
 
 ```ts
 searchBatchOperationItems(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -4902,41 +4960,45 @@ searchBatchOperationItems(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchBatchOperations()
 
 ```ts
 searchBatchOperations(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -4946,41 +5008,45 @@ searchBatchOperations(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchClientsForGroup()
 
 ```ts
 searchClientsForGroup(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -4990,41 +5056,45 @@ searchClientsForGroup(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchClientsForRole()
 
 ```ts
 searchClientsForRole(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5034,41 +5104,45 @@ searchClientsForRole(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchClientsForTenant()
 
 ```ts
 searchClientsForTenant(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5078,41 +5152,45 @@ searchClientsForTenant(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchClusterVariables()
 
 ```ts
 searchClusterVariables(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5122,41 +5200,45 @@ searchClusterVariables(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchCorrelatedMessageSubscriptions()
 
 ```ts
 searchCorrelatedMessageSubscriptions(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5166,41 +5248,45 @@ searchCorrelatedMessageSubscriptions(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchDecisionDefinitions()
 
 ```ts
 searchDecisionDefinitions(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5210,41 +5296,45 @@ searchDecisionDefinitions(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchDecisionInstances()
 
 ```ts
 searchDecisionInstances(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5254,41 +5344,45 @@ searchDecisionInstances(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchDecisionRequirements()
 
 ```ts
 searchDecisionRequirements(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5298,41 +5392,45 @@ searchDecisionRequirements(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchElementInstanceIncidents()
 
 ```ts
 searchElementInstanceIncidents(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5342,41 +5440,45 @@ searchElementInstanceIncidents(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchElementInstances()
 
 ```ts
 searchElementInstances(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5386,41 +5488,93 @@ searchElementInstances(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
+\}\>
+
+### searchGlobalTaskListeners()
+
+```ts
+searchGlobalTaskListeners(...a): CancelablePromise<{
+  items: object[];
+  page: {
+     endCursor:   | {
+      [key: number]: string;
+        __brand: "EndCursor";
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
+      [key: number]: string;
+        __brand: "StartCursor";
+      }
+        | null;
+     totalItems: number;
+  };
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchGroupIdsForTenant()
 
 ```ts
 searchGroupIdsForTenant(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5430,41 +5584,45 @@ searchGroupIdsForTenant(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchGroups()
 
 ```ts
 searchGroups(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5474,41 +5632,45 @@ searchGroups(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchGroupsForRole()
 
 ```ts
 searchGroupsForRole(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5518,41 +5680,45 @@ searchGroupsForRole(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchIncidents()
 
 ```ts
 searchIncidents(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5562,41 +5728,45 @@ searchIncidents(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchJobs()
 
 ```ts
 searchJobs(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5606,41 +5776,45 @@ searchJobs(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchMappingRule()
 
 ```ts
 searchMappingRule(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5650,40 +5824,45 @@ searchMappingRule(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchMappingRulesForGroup()
 
 ```ts
 searchMappingRulesForGroup(...a): CancelablePromise<{
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5693,39 +5872,45 @@ searchMappingRulesForGroup(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchMappingRulesForRole()
 
 ```ts
 searchMappingRulesForRole(...a): CancelablePromise<{
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5735,39 +5920,45 @@ searchMappingRulesForRole(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchMappingRulesForTenant()
 
 ```ts
 searchMappingRulesForTenant(...a): CancelablePromise<{
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5777,40 +5968,45 @@ searchMappingRulesForTenant(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchMessageSubscriptions()
 
 ```ts
 searchMessageSubscriptions(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5820,41 +6016,45 @@ searchMessageSubscriptions(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchProcessDefinitions()
 
 ```ts
 searchProcessDefinitions(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5864,41 +6064,45 @@ searchProcessDefinitions(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchProcessInstanceIncidents()
 
 ```ts
 searchProcessInstanceIncidents(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5908,24 +6112,26 @@ searchProcessInstanceIncidents(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchProcessInstances()
@@ -5934,15 +6140,17 @@ searchProcessInstanceIncidents(...a): CancelablePromise<{
 searchProcessInstances(...a): CancelablePromise<{
   items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5952,41 +6160,45 @@ searchProcessInstances(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchRoles()
 
 ```ts
 searchRoles(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -5996,40 +6208,45 @@ searchRoles(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchRolesForGroup()
 
 ```ts
 searchRolesForGroup(...a): CancelablePromise<{
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -6039,39 +6256,45 @@ searchRolesForGroup(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchRolesForTenant()
 
 ```ts
 searchRolesForTenant(...a): CancelablePromise<{
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -6081,40 +6304,45 @@ searchRolesForTenant(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchTenants()
 
 ```ts
 searchTenants(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -6124,24 +6352,26 @@ searchTenants(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchUsers()
@@ -6150,15 +6380,17 @@ searchTenants(...a): CancelablePromise<{
 searchUsers(...a): CancelablePromise<{
   items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -6168,41 +6400,45 @@ searchUsers(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchUsersForGroup()
 
 ```ts
 searchUsersForGroup(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -6212,41 +6448,45 @@ searchUsersForGroup(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchUsersForRole()
 
 ```ts
 searchUsersForRole(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -6256,41 +6496,45 @@ searchUsersForRole(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchUsersForTenant()
 
 ```ts
 searchUsersForTenant(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -6300,41 +6544,45 @@ searchUsersForTenant(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchUserTaskAuditLogs()
 
 ```ts
 searchUserTaskAuditLogs(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -6344,41 +6592,45 @@ searchUserTaskAuditLogs(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchUserTasks()
 
 ```ts
 searchUserTasks(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -6388,41 +6640,45 @@ searchUserTasks(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchUserTaskVariables()
 
 ```ts
 searchUserTaskVariables(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -6432,41 +6688,45 @@ searchUserTaskVariables(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### searchVariables()
 
 ```ts
 searchVariables(...a): CancelablePromise<{
-  items?: object[];
+  items: object[];
   page: {
-     endCursor?: {
+     endCursor:   | {
       [key: number]: string;
         __brand: "EndCursor";
-     };
-     hasMoreTotalItems?: boolean;
-     startCursor?: {
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
       [key: number]: string;
         __brand: "StartCursor";
-     };
+      }
+        | null;
      totalItems: number;
   };
 }>;
@@ -6476,24 +6736,26 @@ searchVariables(...a): CancelablePromise<{
 
 ##### a
 
-...\[`object`, `object`\]
+...\[`object`, `object`, `object`\]
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-`page`: \{
-`endCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\};
-`hasMoreTotalItems?`: `boolean`;
-`startCursor?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\};
-`totalItems`: `number`;
-\};
+  `items`: `object`[];
+  `page`: \{
+     `endCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"EndCursor"`;
+      \}
+        \| `null`;
+     `hasMoreTotalItems`: `boolean`;
+     `startCursor`:   \| \{
+      \[`key`: `number`\]: `string`;
+        `__brand`: `"StartCursor"`;
+      \}
+        \| `null`;
+     `totalItems`: `number`;
+  \};
 \}\>
 
 ### stopAllWorkers()
@@ -6538,7 +6800,7 @@ throwJobError(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6554,7 +6816,7 @@ unassignClientFromGroup(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6570,7 +6832,7 @@ unassignClientFromTenant(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6586,7 +6848,7 @@ unassignGroupFromTenant(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6602,7 +6864,7 @@ unassignMappingRuleFromGroup(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6618,7 +6880,7 @@ unassignMappingRuleFromTenant(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6634,7 +6896,7 @@ unassignRoleFromClient(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6650,7 +6912,7 @@ unassignRoleFromGroup(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6666,7 +6928,7 @@ unassignRoleFromMappingRule(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6682,7 +6944,7 @@ unassignRoleFromTenant(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6698,7 +6960,7 @@ unassignRoleFromUser(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6714,7 +6976,7 @@ unassignUserFromGroup(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6730,7 +6992,7 @@ unassignUserFromTenant(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6746,7 +7008,7 @@ unassignUserTask(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 
@@ -6763,22 +7025,22 @@ updateAuthorization(...a): CancelablePromise<void>;
 ##### a
 
 ...\[
-\| \{
-`authorizationKey`: `string`;
-`ownerId`: `string`;
-`ownerType`: [`OwnerTypeEnum`](../type-aliases/OwnerTypeEnum.md);
-`permissionTypes`: [`PermissionTypeEnum`](../type-aliases/PermissionTypeEnum.md)[];
-`resourceId`: `string`;
-`resourceType`: [`ResourceTypeEnum`](../type-aliases/ResourceTypeEnum.md);
+  \| \{
+  `authorizationKey`: `string`;
+  `ownerId`: `string`;
+  `ownerType`: [`OwnerTypeEnum`](../type-aliases/OwnerTypeEnum.md);
+  `permissionTypes`: [`PermissionTypeEnum`](../type-aliases/PermissionTypeEnum.md)[];
+  `resourceId`: `string`;
+  `resourceType`: [`ResourceTypeEnum`](../type-aliases/ResourceTypeEnum.md);
 \}
-\| \{
-`authorizationKey`: `string`;
-`ownerId`: `string`;
-`ownerType`: [`OwnerTypeEnum`](../type-aliases/OwnerTypeEnum.md);
-`permissionTypes`: [`PermissionTypeEnum`](../type-aliases/PermissionTypeEnum.md)[];
-`resourcePropertyName`: `string`;
-`resourceType`: [`ResourceTypeEnum`](../type-aliases/ResourceTypeEnum.md);
-\}\]
+  \| \{
+  `authorizationKey`: `string`;
+  `ownerId`: `string`;
+  `ownerType`: [`OwnerTypeEnum`](../type-aliases/OwnerTypeEnum.md);
+  `permissionTypes`: [`PermissionTypeEnum`](../type-aliases/PermissionTypeEnum.md)[];
+  `resourcePropertyName`: `string`;
+  `resourceType`: [`ResourceTypeEnum`](../type-aliases/ResourceTypeEnum.md);
+\}, `object`\]
 
 #### Returns
 
@@ -6790,182 +7052,8 @@ updateAuthorization(...a): CancelablePromise<void>;
 updateGlobalClusterVariable(...a): CancelablePromise<{
   name: string;
   scope: ClusterVariableScopeEnum;
-  tenantId?: string;
-  value?: string;
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`name`: `string`;
-`scope`: [`ClusterVariableScopeEnum`](../type-aliases/ClusterVariableScopeEnum.md);
-`tenantId?`: `string`;
-`value?`: `string`;
-\}\>
-
-### updateGroup()
-
-```ts
-updateGroup(...a): CancelablePromise<{
-  description?: string;
-  groupId?: string;
-  name?: string;
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`description?`: `string`;
-`groupId?`: `string`;
-`name?`: `string`;
-\}\>
-
-### updateJob()
-
-```ts
-updateJob(...a): CancelablePromise<void>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
-
-### updateMappingRule()
-
-```ts
-updateMappingRule(...a): CancelablePromise<{
-  claimName?: string;
-  claimValue?: string;
-  mappingRuleId?: string;
-  name?: string;
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`claimName?`: `string`;
-`claimValue?`: `string`;
-`mappingRuleId?`: `string`;
-`name?`: `string`;
-\}\>
-
-### updateRole()
-
-```ts
-updateRole(...a): CancelablePromise<{
-  description?: string;
-  name?: string;
-  roleId?: string;
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`description?`: `string`;
-`name?`: `string`;
-`roleId?`: `string`;
-\}\>
-
-### updateTenant()
-
-```ts
-updateTenant(...a): CancelablePromise<{
-  description?: string;
-  name?: string;
-  tenantId?: {
-   [key: number]: string;
-     __brand: "TenantId";
-  };
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`description?`: `string`;
-`name?`: `string`;
-`tenantId?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"TenantId"`;
-\};
-\}\>
-
-### updateTenantClusterVariable()
-
-```ts
-updateTenantClusterVariable(...a): CancelablePromise<{
-  name: string;
-  scope: ClusterVariableScopeEnum;
-  tenantId?: string;
-  value?: string;
-}>;
-```
-
-#### Parameters
-
-##### a
-
-...\[`object`\]
-
-#### Returns
-
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`name`: `string`;
-`scope`: [`ClusterVariableScopeEnum`](../type-aliases/ClusterVariableScopeEnum.md);
-`tenantId?`: `string`;
-`value?`: `string`;
-\}\>
-
-### updateUser()
-
-```ts
-updateUser(...a): CancelablePromise<{
-  email?: string;
-  name?: string;
-  username?: {
-   [key: number]: string;
-     __brand: "Username";
-  };
+  tenantId: string | null;
+  value: string;
 }>;
 ```
 
@@ -6978,12 +7066,206 @@ updateUser(...a): CancelablePromise<{
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`email?`: `string`;
-`name?`: `string`;
-`username?`: \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"Username"`;
-\};
+  `name`: `string`;
+  `scope`: [`ClusterVariableScopeEnum`](../type-aliases/ClusterVariableScopeEnum.md);
+  `tenantId`: `string` \| `null`;
+  `value`: `string`;
+\}\>
+
+### updateGlobalTaskListener()
+
+```ts
+updateGlobalTaskListener(...a): CancelablePromise<{
+  afterNonGlobal?: boolean;
+  eventTypes: GlobalTaskListenerEventTypeEnum[];
+  id: string;
+  priority?: number;
+  retries?: number;
+  source: GlobalListenerSourceEnum;
+  type?: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `afterNonGlobal?`: `boolean`;
+  `eventTypes`: [`GlobalTaskListenerEventTypeEnum`](../type-aliases/GlobalTaskListenerEventTypeEnum.md)[];
+  `id`: `string`;
+  `priority?`: `number`;
+  `retries?`: `number`;
+  `source`: [`GlobalListenerSourceEnum`](../type-aliases/GlobalListenerSourceEnum.md);
+  `type?`: `string`;
+\}\>
+
+### updateGroup()
+
+```ts
+updateGroup(...a): CancelablePromise<{
+  description: string | null;
+  groupId: string;
+  name: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `description`: `string` \| `null`;
+  `groupId`: `string`;
+  `name`: `string`;
+\}\>
+
+### updateJob()
+
+```ts
+updateJob(...a): CancelablePromise<void>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+### updateMappingRule()
+
+```ts
+updateMappingRule(...a): CancelablePromise<{
+  claimName: string;
+  claimValue: string;
+  mappingRuleId: string;
+  name: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `claimName`: `string`;
+  `claimValue`: `string`;
+  `mappingRuleId`: `string`;
+  `name`: `string`;
+\}\>
+
+### updateRole()
+
+```ts
+updateRole(...a): CancelablePromise<{
+  description: string | null;
+  name: string;
+  roleId: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `description`: `string` \| `null`;
+  `name`: `string`;
+  `roleId`: `string`;
+\}\>
+
+### updateTenant()
+
+```ts
+updateTenant(...a): CancelablePromise<{
+  description: string | null;
+  name: string;
+  tenantId: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `description`: `string` \| `null`;
+  `name`: `string`;
+  `tenantId`: `string`;
+\}\>
+
+### updateTenantClusterVariable()
+
+```ts
+updateTenantClusterVariable(...a): CancelablePromise<{
+  name: string;
+  scope: ClusterVariableScopeEnum;
+  tenantId: string | null;
+  value: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `name`: `string`;
+  `scope`: [`ClusterVariableScopeEnum`](../type-aliases/ClusterVariableScopeEnum.md);
+  `tenantId`: `string` \| `null`;
+  `value`: `string`;
+\}\>
+
+### updateUser()
+
+```ts
+updateUser(...a): CancelablePromise<{
+  email: string | null;
+  name: string | null;
+  username: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+  `email`: `string` \| `null`;
+  `name`: `string` \| `null`;
+  `username`: `string`;
 \}\>
 
 ### updateUserTask()
@@ -6996,7 +7278,7 @@ updateUserTask(...a): CancelablePromise<void>;
 
 ##### a
 
-...\[`object`\]
+...\[`object`, `object`\]
 
 #### Returns
 

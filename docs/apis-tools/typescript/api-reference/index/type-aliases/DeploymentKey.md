@@ -11,6 +11,6 @@ mdx:
 type DeploymentKey = CamundaKey<"DeploymentKey">;
 ```
 
-Defined in: [gen/types.gen.ts:2196](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2196)
+Defined in: [gen/types.gen.ts:2303](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L2303)
 
 Key for a deployment.

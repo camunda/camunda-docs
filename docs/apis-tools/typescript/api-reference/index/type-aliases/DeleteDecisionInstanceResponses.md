@@ -11,7 +11,7 @@ mdx:
 type DeleteDecisionInstanceResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:9689](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9689)
+Defined in: [gen/types.gen.ts:9862](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9862)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:9689](https://github.com/camunda/orchestration-clu
 204: void;
 ```
 
-Defined in: [gen/types.gen.ts:9693](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9693)
+Defined in: [gen/types.gen.ts:9866](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9866)
 
 The decision instance is marked for deletion.

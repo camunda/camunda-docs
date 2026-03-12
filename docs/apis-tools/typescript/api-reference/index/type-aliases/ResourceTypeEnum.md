@@ -8,7 +8,7 @@ mdx:
 # Type Alias: ResourceTypeEnum
 
 ```ts
-type ResourceTypeEnum =
+type ResourceTypeEnum = 
   | "AUDIT_LOG"
   | "AUTHORIZATION"
   | "BATCH"
@@ -31,6 +31,6 @@ type ResourceTypeEnum =
   | "USER_TASK";
 ```
 
-Defined in: [gen/types.gen.ts:672](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L672)
+Defined in: [gen/types.gen.ts:689](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L689)
 
 The type of resource to add/remove permissions to/from.

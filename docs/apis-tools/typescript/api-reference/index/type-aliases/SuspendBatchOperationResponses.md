@@ -11,7 +11,7 @@ mdx:
 type SuspendBatchOperationResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:8511](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8511)
+Defined in: [gen/types.gen.ts:9005](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9005)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:8511](https://github.com/camunda/orchestration-clu
 204: void;
 ```
 
-Defined in: [gen/types.gen.ts:8515](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8515)
+Defined in: [gen/types.gen.ts:9009](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9009)
 
 The batch operation pause request was created.

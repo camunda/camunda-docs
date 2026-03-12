@@ -11,16 +11,16 @@ mdx:
 type TenantClientResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:6686](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6686)
+Defined in: [gen/types.gen.ts:7434](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7434)
 
 ## Properties
 
-### clientId?
+### clientId
 
 ```ts
-optional clientId: string;
+clientId: string;
 ```
 
-Defined in: [gen/types.gen.ts:6690](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6690)
+Defined in: [gen/types.gen.ts:7438](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7438)
 
 The ID of the client.

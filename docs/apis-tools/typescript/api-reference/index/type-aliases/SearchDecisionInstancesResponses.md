@@ -11,26 +11,16 @@ mdx:
 type SearchDecisionInstancesResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:9465](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9465)
+Defined in: [gen/types.gen.ts:9766](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9766)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: DecisionInstanceSearchQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:9469](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9469)
+Defined in: [gen/types.gen.ts:9770](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9770)
 
 The decision instance search result.
-
-#### Type Declaration
-
-##### items?
-
-```ts
-optional items: object[];
-```
-
-The matching decision instances.

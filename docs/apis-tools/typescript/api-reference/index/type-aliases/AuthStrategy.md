@@ -11,4 +11,4 @@ mdx:
 type AuthStrategy = "NONE" | "OAUTH" | "BASIC";
 ```
 
-Defined in: [runtime/unifiedConfiguration.ts:21](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L21)
+Defined in: [runtime/unifiedConfiguration.ts:21](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/runtime/unifiedConfiguration.ts#L21)

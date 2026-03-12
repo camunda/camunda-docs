@@ -8,8 +8,7 @@ mdx:
 # Type Alias: GetBatchOperationResponse
 
 ```ts
-type GetBatchOperationResponse =
-  GetBatchOperationResponses[keyof GetBatchOperationResponses];
+type GetBatchOperationResponse = GetBatchOperationResponses[keyof GetBatchOperationResponses];
 ```
 
-Defined in: [gen/types.gen.ts:8382](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8382)
+Defined in: [gen/types.gen.ts:8876](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8876)

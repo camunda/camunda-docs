@@ -11,7 +11,7 @@ mdx:
 type SearchProcessDefinitionsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:12685](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12685)
+Defined in: [gen/types.gen.ts:12595](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12595)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:12685](https://github.com/camunda/orchestration-cl
 200: ProcessDefinitionSearchQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:12689](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12689)
+Defined in: [gen/types.gen.ts:12599](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12599)
 
 The process definition search result.

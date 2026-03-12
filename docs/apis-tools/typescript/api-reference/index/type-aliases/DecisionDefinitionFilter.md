@@ -11,7 +11,7 @@ mdx:
 type DecisionDefinitionFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:1422](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1422)
+Defined in: [gen/types.gen.ts:1457](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1457)
 
 Decision definition search filter.
 
@@ -23,11 +23,11 @@ Decision definition search filter.
 optional decisionDefinitionId: DecisionDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:1426](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1426)
+Defined in: [gen/types.gen.ts:1461](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1461)
 
 The DMN ID of the decision definition.
 
----
+***
 
 ### decisionDefinitionKey?
 
@@ -35,11 +35,11 @@ The DMN ID of the decision definition.
 optional decisionDefinitionKey: DecisionDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:1453](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1453)
+Defined in: [gen/types.gen.ts:1488](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1488)
 
 The assigned key, which acts as a unique identifier for this decision definition.
 
----
+***
 
 ### decisionRequirementsId?
 
@@ -47,11 +47,11 @@ The assigned key, which acts as a unique identifier for this decision definition
 optional decisionRequirementsId: string;
 ```
 
-Defined in: [gen/types.gen.ts:1445](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1445)
+Defined in: [gen/types.gen.ts:1480](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1480)
 
 the DMN ID of the decision requirements graph that the decision definition is part of.
 
----
+***
 
 ### decisionRequirementsKey?
 
@@ -59,11 +59,11 @@ the DMN ID of the decision requirements graph that the decision definition is pa
 optional decisionRequirementsKey: DecisionRequirementsKey;
 ```
 
-Defined in: [gen/types.gen.ts:1457](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1457)
+Defined in: [gen/types.gen.ts:1492](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1492)
 
 The assigned key of the decision requirements graph that the decision definition is part of.
 
----
+***
 
 ### decisionRequirementsName?
 
@@ -71,11 +71,11 @@ The assigned key of the decision requirements graph that the decision definition
 optional decisionRequirementsName: string;
 ```
 
-Defined in: [gen/types.gen.ts:1461](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1461)
+Defined in: [gen/types.gen.ts:1496](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1496)
 
 The DMN name of the decision requirements that the decision definition is part of.
 
----
+***
 
 ### decisionRequirementsVersion?
 
@@ -83,11 +83,11 @@ The DMN name of the decision requirements that the decision definition is part o
 optional decisionRequirementsVersion: number;
 ```
 
-Defined in: [gen/types.gen.ts:1465](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1465)
+Defined in: [gen/types.gen.ts:1500](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1500)
 
 The assigned version of the decision requirements that the decision definition is part of.
 
----
+***
 
 ### isLatestVersion?
 
@@ -95,13 +95,13 @@ The assigned version of the decision requirements that the decision definition i
 optional isLatestVersion: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:1437](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1437)
+Defined in: [gen/types.gen.ts:1472](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1472)
 
 Whether to only return the latest version of each decision definition.
 When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`.
 The response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`.
 
----
+***
 
 ### name?
 
@@ -109,11 +109,11 @@ The response contains no `startCursor` in the `page`, and requests ignore the `f
 optional name: string;
 ```
 
-Defined in: [gen/types.gen.ts:1430](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1430)
+Defined in: [gen/types.gen.ts:1465](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1465)
 
 The DMN name of the decision definition.
 
----
+***
 
 ### tenantId?
 
@@ -121,11 +121,11 @@ The DMN name of the decision definition.
 optional tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:1449](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1449)
+Defined in: [gen/types.gen.ts:1484](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1484)
 
 The tenant ID of the decision definition.
 
----
+***
 
 ### version?
 
@@ -133,6 +133,6 @@ The tenant ID of the decision definition.
 optional version: number;
 ```
 
-Defined in: [gen/types.gen.ts:1441](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1441)
+Defined in: [gen/types.gen.ts:1476](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1476)
 
 The assigned version of the decision definition.

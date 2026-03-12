@@ -11,7 +11,7 @@ mdx:
 type JobCompletionRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:3750](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3750)
+Defined in: [gen/types.gen.ts:4392](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4392)
 
 ## Properties
 
@@ -21,20 +21,20 @@ Defined in: [gen/types.gen.ts:3750](https://github.com/camunda/orchestration-clu
 optional result: JobResult;
 ```
 
-Defined in: [gen/types.gen.ts:3757](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3757)
+Defined in: [gen/types.gen.ts:4399](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4399)
 
----
+***
 
 ### variables?
 
 ```ts
-optional variables:
+optional variables: 
   | {
 [key: string]: unknown;
 }
   | null;
 ```
 
-Defined in: [gen/types.gen.ts:3754](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3754)
+Defined in: [gen/types.gen.ts:4396](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4396)
 
 The variables to complete the job with.

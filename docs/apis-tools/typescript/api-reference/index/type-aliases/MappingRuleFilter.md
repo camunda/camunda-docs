@@ -11,7 +11,7 @@ mdx:
 type MappingRuleFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:4616](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4616)
+Defined in: [gen/types.gen.ts:5254](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5254)
 
 Mapping rule search filter.
 
@@ -23,11 +23,11 @@ Mapping rule search filter.
 optional claimName: string;
 ```
 
-Defined in: [gen/types.gen.ts:4620](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4620)
+Defined in: [gen/types.gen.ts:5258](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5258)
 
 The claim name to match against a token.
 
----
+***
 
 ### claimValue?
 
@@ -35,11 +35,11 @@ The claim name to match against a token.
 optional claimValue: string;
 ```
 
-Defined in: [gen/types.gen.ts:4624](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4624)
+Defined in: [gen/types.gen.ts:5262](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5262)
 
 The value of the claim to match.
 
----
+***
 
 ### mappingRuleId?
 
@@ -47,11 +47,11 @@ The value of the claim to match.
 optional mappingRuleId: string;
 ```
 
-Defined in: [gen/types.gen.ts:4632](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4632)
+Defined in: [gen/types.gen.ts:5270](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5270)
 
 The ID of the mapping rule.
 
----
+***
 
 ### name?
 
@@ -59,6 +59,6 @@ The ID of the mapping rule.
 optional name: string;
 ```
 
-Defined in: [gen/types.gen.ts:4628](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4628)
+Defined in: [gen/types.gen.ts:5266](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5266)
 
 The name of the mapping rule.

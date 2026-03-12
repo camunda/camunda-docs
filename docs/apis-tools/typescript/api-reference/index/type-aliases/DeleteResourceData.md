@@ -11,55 +11,19 @@ mdx:
 type DeleteResourceData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14462](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14462)
+Defined in: [gen/types.gen.ts:13703](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13703)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body:
-  | {
-  deleteHistory?: boolean;
-  operationReference?: OperationReference;
-}
-  | null;
+optional body: DeleteResourceRequest;
 ```
 
-Defined in: [gen/types.gen.ts:14463](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14463)
+Defined in: [gen/types.gen.ts:13704](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13704)
 
-#### Type Declaration
-
-```ts
-{
-  deleteHistory?: boolean;
-  operationReference?: OperationReference;
-}
-```
-
-#### deleteHistory?
-
-```ts
-optional deleteHistory: boolean;
-```
-
-Indicates if the historic data of a process resource should be deleted via a
-batch operation asynchronously.
-
-This flag is only effective for process resources. For other resource types
-(decisions, forms, generic resources), this flag is ignored and no history
-will be deleted. In those cases, the `batchOperation` field in the response
-will not be populated.
-
-#### operationReference?
-
-```ts
-optional operationReference: OperationReference;
-```
-
-`null`
-
----
+***
 
 ### path
 
@@ -67,7 +31,7 @@ optional operationReference: OperationReference;
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:14477](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14477)
+Defined in: [gen/types.gen.ts:13705](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13705)
 
 #### resourceKey
 
@@ -79,7 +43,7 @@ The key of the resource to delete.
 This can be the key of a process definition, the key of a decision requirements
 definition or the key of a form definition
 
----
+***
 
 ### query?
 
@@ -87,9 +51,9 @@ definition or the key of a form definition
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:14486](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14486)
+Defined in: [gen/types.gen.ts:13714](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13714)
 
----
+***
 
 ### url
 
@@ -97,4 +61,4 @@ Defined in: [gen/types.gen.ts:14486](https://github.com/camunda/orchestration-cl
 url: "/resources/{resourceKey}/deletion";
 ```
 
-Defined in: [gen/types.gen.ts:14487](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14487)
+Defined in: [gen/types.gen.ts:13715](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13715)

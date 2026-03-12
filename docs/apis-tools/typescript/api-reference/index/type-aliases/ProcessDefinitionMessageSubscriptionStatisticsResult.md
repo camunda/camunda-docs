@@ -11,64 +11,64 @@ mdx:
 type ProcessDefinitionMessageSubscriptionStatisticsResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:5244](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5244)
+Defined in: [gen/types.gen.ts:5900](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5900)
 
 ## Properties
 
-### activeSubscriptions?
+### activeSubscriptions
 
 ```ts
-optional activeSubscriptions: number;
+activeSubscriptions: number;
 ```
 
-Defined in: [gen/types.gen.ts:5264](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5264)
+Defined in: [gen/types.gen.ts:5920](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5920)
 
 The total number of active message subscriptions for this process definition key.
 
----
+***
 
-### processDefinitionId?
+### processDefinitionId
 
 ```ts
-optional processDefinitionId: ProcessDefinitionId;
+processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:5248](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5248)
+Defined in: [gen/types.gen.ts:5904](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5904)
 
 The process definition ID associated with this message subscription.
 
----
+***
 
-### processDefinitionKey?
+### processDefinitionKey
 
 ```ts
-optional processDefinitionKey: ProcessDefinitionKey;
+processDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:5256](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5256)
+Defined in: [gen/types.gen.ts:5912](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5912)
 
 The process definition key associated with this message subscription.
 
----
+***
 
-### processInstancesWithActiveSubscriptions?
+### processInstancesWithActiveSubscriptions
 
 ```ts
-optional processInstancesWithActiveSubscriptions: number;
+processInstancesWithActiveSubscriptions: number;
 ```
 
-Defined in: [gen/types.gen.ts:5260](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5260)
+Defined in: [gen/types.gen.ts:5916](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5916)
 
 The number of process instances with active message subscriptions.
 
----
+***
 
-### tenantId?
+### tenantId
 
 ```ts
-optional tenantId: TenantId;
+tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:5252](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5252)
+Defined in: [gen/types.gen.ts:5908](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5908)
 
 The tenant ID associated with this message subscription.

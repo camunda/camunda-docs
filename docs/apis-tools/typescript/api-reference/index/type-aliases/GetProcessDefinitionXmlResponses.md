@@ -11,7 +11,7 @@ mdx:
 type GetProcessDefinitionXmlResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:13143](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13143)
+Defined in: [gen/types.gen.ts:12858](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12858)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:13143](https://github.com/camunda/orchestration-cl
 200: string;
 ```
 
-Defined in: [gen/types.gen.ts:13147](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13147)
+Defined in: [gen/types.gen.ts:12862](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12862)
 
 The XML of the process definition is successfully returned.
 
----
+***
 
 ### 204
 
@@ -33,6 +33,6 @@ The XML of the process definition is successfully returned.
 204: string;
 ```
 
-Defined in: [gen/types.gen.ts:13151](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13151)
+Defined in: [gen/types.gen.ts:12866](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12866)
 
 The process definition was found but does not have XML.

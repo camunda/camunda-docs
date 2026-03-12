@@ -11,7 +11,7 @@ mdx:
 type SearchGroupsForRoleResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:14943](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14943)
+Defined in: [gen/types.gen.ts:14170](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L14170)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:14943](https://github.com/camunda/orchestration-cl
 200: RoleGroupSearchResult;
 ```
 
-Defined in: [gen/types.gen.ts:14947](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14947)
+Defined in: [gen/types.gen.ts:14174](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L14174)
 
 The groups with assigned role.

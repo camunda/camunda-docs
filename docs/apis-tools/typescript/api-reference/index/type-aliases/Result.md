@@ -8,18 +8,18 @@ mdx:
 # Type Alias: Result\<T, E\>
 
 ```ts
-type Result<T, E> =
+type Result<T, E> = 
   | {
-      ok: true;
-      value: T;
-    }
+  ok: true;
+  value: T;
+}
   | {
-      error: E;
-      ok: false;
-    };
+  error: E;
+  ok: false;
+};
 ```
 
-Defined in: [resultClient.ts:4](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/resultClient.ts#L4)
+Defined in: [resultClient.ts:4](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/resultClient.ts#L4)
 
 ## Type Parameters
 

@@ -11,7 +11,7 @@ mdx:
 type GetDecisionRequirementsXmlData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9892](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9892)
+Defined in: [gen/types.gen.ts:9993](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9993)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:9892](https://github.com/camunda/orchestration-clu
 optional body: never;
 ```
 
-Defined in: [gen/types.gen.ts:9893](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9893)
+Defined in: [gen/types.gen.ts:9994](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9994)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:9893](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:9894](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9894)
+Defined in: [gen/types.gen.ts:9995](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9995)
 
 #### decisionRequirementsKey
 
@@ -41,7 +41,7 @@ decisionRequirementsKey: DecisionRequirementsKey;
 
 The assigned key of the decision requirements, which acts as a unique identifier for this decision.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The assigned key of the decision requirements, which acts as a unique identifier
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:9900](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9900)
+Defined in: [gen/types.gen.ts:10001](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10001)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:9900](https://github.com/camunda/orchestration-clu
 url: "/decision-requirements/{decisionRequirementsKey}/xml";
 ```
 
-Defined in: [gen/types.gen.ts:9901](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9901)
+Defined in: [gen/types.gen.ts:10002](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10002)
