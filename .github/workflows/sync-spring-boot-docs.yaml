@@ -81,7 +81,6 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           token: "${{ steps.generate_token.outputs.token }}"
-          path: docs
           title: "docs: update Spring Boot properties (${{ steps.resolve.outputs.version_label }})"
           body: |
             ## Description
