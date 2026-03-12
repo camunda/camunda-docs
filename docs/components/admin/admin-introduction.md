@@ -24,6 +24,7 @@ Admin includes the following features:
 | [Cluster variables](/components/modeler/feel/cluster-variable/overview.md) | Manage configuration values centrally across your cluster, making them available in FEEL expressions.                                                     |
 | [Secrets](/components/console/manage-clusters/manage-secrets.md)           | Create and manage connector secrets to reference sensitive values in processes without exposing them.                                                        |
 | [Backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md) | Back up and restore your Orchestration Cluster state and data. (Self-Managed only)                                            |
+| [Backup and restore](/components/saas/backups.md)                                           | Create and manage backups of your SaaS cluster. (SaaS only)                                                                   |
 | [User task listeners](/components/concepts/user-task-listeners.md)         | Configure global listeners that react to user task lifecycle events across the cluster.                                                                     |
 | [License information](/reference/licenses.md)                              | View and manage your Camunda license details for the cluster.                                                                                               |
 
