@@ -140,17 +140,17 @@ If you need to use correlation keys with XML payloads, send the correlation key 
 
 ### Response mode
 
-**Response mode** controls whether the webhook waits for correlation to complete (synchronous) or returns immediately (asynchronous).
+**Response mode** controls whether the webhook waits for the correlation to complete (synchronous) or returns immediately (asynchronous).
 
-Use synchronous mode only when the caller needs the process result:
+Use synchronous mode only when the caller requires the process result:
 
-- **Start Event**: Creates a new process and returns its result.
-- **Message Start Event** (and other message-based events): Correlates the message and returns the matched process instance key.
+- **Start event**: Creates a new process instance and returns its result.
+- **Message start event** (and other message-based events): Correlates the message and returns the matched process instance key.
 
 In asynchronous mode:
 
-- **Start Event**: Returns only the process instance key of the newly created process.
-- **Message-based events**: Publishes the message and returns only the message key.
+- **Start event**: Returns the process instance key of the newly created process.
+- **Message-based events**: Publishes the message and returns the message key.
 
 ## Activate the HTTP Webhook connector by deploying your diagram
 
@@ -483,13 +483,13 @@ In addition to the `request` object you have access to the `correlation` result.
 
 The data available via the `correlation` object depends on the type of BPMN element you are using the Webhook connector with.
 
-Here is an overview about the different datapoints available when using the Webhook connector with different element types and configuration options.
+The following overview summarizes the different data points available when using the Webhook connector with different element types and configuration options.
 
 **`correlation` payload by response mode**
 
-The table below describes which `correlation` result type is produced for each supported BPMN element
-type and response mode. The result type determines what is available in the **response expression**
-context (`correlation` property) and the HTTP response returned to the caller.
+The table below shows which `correlation` result type is produced for each supported BPMN element type and response mode.
+
+The result type determines what is available in the **response expression** context (`correlation` property) and in the HTTP response returned to the caller.
 
 <table>
 <tr>
@@ -516,7 +516,7 @@ The `variables` contain the result of the process execution.
     "tenantId": "abc"
   }
 ```
-The result of the process execution is not available but can fetched via the API using the `processInstanceKey`.
+The result of the process execution is not available, but it can be fetched via the API using the `processInstanceKey`.
 </td>
 </tr>
 <tr>
@@ -538,7 +538,7 @@ The result of the process execution is not available but can fetched via the API
     "tenantId": "abc"
   }
 ```
-The `processInstanceKey` contains the first process instance key the message correlated with.
+The `processInstanceKey` contains the first process instance key with which the message correlated.
 </td>
 <td>
   ```
@@ -552,7 +552,9 @@ The message is buffered and only the `messageKey` is returned. Correlation to a 
 </tr>
 </table>
 
-A start event with a message definition uses message publishing internally to correlate an incoming request with Zeebe. A successful correlation will therefore lead to a published message and the `correlation` object will contain the following properties when using the `asynchronous` response mode:
+A start event with a message definition uses message publishing internally to correlate an incoming request with Zeebe.
+
+A successful correlation therefore publishes a message, and the `correlation` object contains the following properties when using the `asynchronous` response mode:
 
 ```json
 {
@@ -561,10 +563,9 @@ A start event with a message definition uses message publishing internally to co
 }
 ```
 
-If a Webhook request is processed more than once using the same _Message ID_ (because of a retry for example) the `correlation` object will be empty.
+If a Webhook request is processed more than once using the same _Message ID_ (for example, because of a retry), the `correlation` object is empty.
 
-A start event without a message will create a new process instance. You therefore have access to the
-newly create process instance key when accessing the `correlation` object:
+A start event without a message creates a new process instance. You therefore have access to the newly created process instance key when accessing the `correlation` object:
 
 ```json
 {
@@ -573,7 +574,7 @@ newly create process instance key when accessing the `correlation` object:
 }
 ```
 
-If the `synchronous` response mode is selected the response will also contain the result `variables` of the execution.
+If the `synchronous` response mode is selected, the response also contains the result `variables` from the execution.
 
 ```json
 {
