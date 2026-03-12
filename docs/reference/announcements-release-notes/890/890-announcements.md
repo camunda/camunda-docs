@@ -541,7 +541,6 @@ Helm v4 enforces that environment variables in a rendered kubernetes manifest mu
 </div>
 </div>
 
-
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
@@ -697,7 +696,7 @@ All secrets must now be explicitly provided via Kubernetes Secrets referenced in
 
 #### Helm chart: Default REST port unified to 8080
 
-The Orchestration component's default HTTP port has changed from 8090 to 8080 (`orchestration.service.httpPort`).
+The Orchestration Cluster's default HTTP port has changed from 8090 to 8080 (`orchestration.service.httpPort`).
 
 This aligns the Helm chart with the Orchestration Cluster's default configuration.
 

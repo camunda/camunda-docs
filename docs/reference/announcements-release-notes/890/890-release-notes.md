@@ -712,7 +712,7 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 
 #### Default REST port unified to 8080
 
-The Orchestration component's default HTTP port in the Helm chart has changed from 8090 to 8080 (`orchestration.service.httpPort`), aligning with the Orchestration Cluster's default configuration.
+The Orchestration Cluster's default HTTP port in the Helm chart has changed from 8090 to 8080 (`orchestration.service.httpPort`), aligning with the Orchestration Cluster's default configuration.
 
 #### Authorization initialization via Helm
 

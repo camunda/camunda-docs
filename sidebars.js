@@ -155,6 +155,7 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
+        "components/concepts/decision-instance-deletion",
       ],
     },
     {
@@ -757,8 +758,8 @@ module.exports = {
             "components/operate/userguide/basic-operate-navigation",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
-            "components/operate/userguide/manage-batch-operations",
             "components/operate/userguide/monitor-batch-operations",
+            "components/operate/userguide/manage-batch-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
             {
@@ -768,7 +769,6 @@ module.exports = {
               ],
             },
             "components/operate/userguide/process-instance-migration",
-            "components/operate/userguide/monitor-batch-operations",
             "components/operate/userguide/audit-operations",
           ],
         },

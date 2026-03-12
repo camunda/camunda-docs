@@ -12,7 +12,7 @@ Authentication to the Orchestration Cluster components and their resources is ma
 
 ## About Orchestration Cluster authentication
 
-Orchestration Cluster authentication includes components such as [Zeebe](/components/zeebe/zeebe-overview.md), [Operate](/components/operate/operate-introduction.md), [Tasklist](/components/tasklist/introduction-to-tasklist.md), and [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+Orchestration Cluster authentication includes components such as [Zeebe](/components/zeebe/zeebe-overview.md), [Identity](/components/identity/identity-introduction.md), [Operate](/components/operate/operate-introduction.md), [Tasklist](/components/tasklist/introduction-to-tasklist.md), and the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 The Orchestration Cluster supports two authentication methods:
 

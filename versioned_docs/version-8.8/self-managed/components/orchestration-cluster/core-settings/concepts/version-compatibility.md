@@ -4,7 +4,7 @@ title: Version compatibility checks
 description: "How Camunda 8 validates version compatibility during upgrades (broker and secondary storage)."
 ---
 
-This page describes how Camunda 8 validates version compatibility when you upgrade a Self-managed Orchestration Cluster. It covers:
+This page describes how Camunda 8 validates version compatibility when you upgrade a Self-Managed Orchestration Cluster. It covers:
 
 - What defines a compatible or incompatible upgrade path
 - How the **broker** enforces version rules
@@ -21,7 +21,7 @@ Camunda 8 versions follow the `MAJOR.MINOR.PATCH` format (for example, `8.8.3`).
 
 ## Required upgrade procedure
 
-All version upgrades must follow this procedure. This applies to any minor version upgrade in a Self-managed Orchestration Cluster.
+All version upgrades must follow this procedure. This applies to any minor version upgrade in a Self-Managed Orchestration Cluster.
 
 1. Update to the latest patch version of your current minor. For example, before upgrading from `8.7.x` to `8.8.y`, first upgrade to `8.7.latest`.
 
@@ -41,15 +41,15 @@ Failure to follow this procedure results in an unsupported upgrade path. The bro
 
 The examples below assume that 8.8.3 represents the latest available patch version at the time of the upgrade. When upgrading to a new minor version, always upgrade to the latest available patch of that minor.
 
-| Scenario                                                    | Example               | Compatibility                                              |
-| ----------------------------------------------------------- | --------------------- | ---------------------------------------------------------- |
-| Patch upgrade                                               | 8.8.1 → 8.8.3         | Compatible                                                 |
-| Minor upgrade (single step, latest patch required)          | 8.7.5 → 8.8.3         | Compatible                                                 |
-| Minor upgrade (skipping a minor)                            | 8.6.9 → 8.8.3         | Incompatible                                               |
-| Patch downgrade                                             | 8.8.3 → 8.8.1         | Incompatible (broker); secondary storage skips (see below) |
-| Minor downgrade                                             | 8.8.3 → 8.7.5         | Incompatible (broker); secondary storage skips (see below) |
-| Major change (upgrade or downgrade)                         | 8.x ↔ 9.x             | Incompatible                                                |
-| Alpha build involved                                        | 8.8.0-alpha1 ↔ 8.8.0  | Incompatible                                                |
+| Scenario                                           | Example              | Compatibility                                              |
+| -------------------------------------------------- | -------------------- | ---------------------------------------------------------- |
+| Patch upgrade                                      | 8.8.1 → 8.8.3        | Compatible                                                 |
+| Minor upgrade (single step, latest patch required) | 8.7.5 → 8.8.3        | Compatible                                                 |
+| Minor upgrade (skipping a minor)                   | 8.6.9 → 8.8.3        | Incompatible                                               |
+| Patch downgrade                                    | 8.8.3 → 8.8.1        | Incompatible (broker); secondary storage skips (see below) |
+| Minor downgrade                                    | 8.8.3 → 8.7.5        | Incompatible (broker); secondary storage skips (see below) |
+| Major change (upgrade or downgrade)                | 8.x ↔ 9.x            | Incompatible                                               |
+| Alpha build involved                               | 8.8.0-alpha1 ↔ 8.8.0 | Incompatible                                               |
 
 ## Broker behavior
 
@@ -77,7 +77,7 @@ If you upgrade from an earlier patch that does **not** store schema version meta
 
 ### Schema manager rules
 
-All minor version upgrades must follow the required upgrade procedure described below. Upgrades must start from the latest patch of the current minor and proceed strictly minor-by-minor.
+All minor version upgrades must follow the required upgrade procedure described above. Upgrades must start from the latest patch of the current minor and proceed strictly minor-by-minor.
 The schema manager compares the stored schema version (the last successful schema upgrade) with the current application version:
 
 | Case                                               | Action        | Metadata updated?    | Notes                                         |
