@@ -46,8 +46,9 @@ Validation requirements for principal ARNs are described in [validation and acti
 
 ### Supported regions
 
-By default, the AWS region where the orchestration cluster is located is preselected.  
-You can remove this region or add additional regions if needed.
+The AWS region where the orchestration cluster is located is always supported and is preselected by default.
+
+You can add additional AWS regions to allow cross-region endpoint connections.
 
 Adding additional regions allows cross-region VPC endpoint connections.  
 Cross-region connectivity may increase network latency and incur additional AWS charges.
@@ -73,7 +74,7 @@ You cannot activate the service until all required fields are completed.
 
 After selecting **Activate service**, Console provisions the VPC endpoint service for the cluster.
 
-The service status is displayed in the **Service details** section. Provisioning may take several minutes.
+The service status is displayed in the **Service details** section. Provisioning may take up to 10 minutes.
 
 During provisioning, the endpoint service is not available for new VPC endpoint connections.
 
@@ -141,7 +142,7 @@ After activating the PrivateLink endpoint service in Console:
 
 AWS-side provisioning must follow the standard AWS PrivateLink process.
 
-For detailed instructions, see the [AWS documentation on creating an interface endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/create-interface-endpoint.html).
+For detailed instructions, see the [AWS documentation on creating an interface endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/create-interface-endpoint.html), which also covers endpoint configuration and validation.
 
 ## Deactivate secure connectivity
 

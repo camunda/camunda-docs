@@ -90,16 +90,27 @@ The following combinations are supported:
 | Enabled              | Enabled             | Yes       |
 | Enabled              | Disabled            | No        |
 
-Private-only connectivity is not supported in 8.9.
+Private-only connectivity is not currently supported.
+Public connectivity remains enabled even when secure connectivity is configured.
 
 ## Public and private connectivity
 
 When secure connectivity is enabled, public connectivity remains available.
 
 - Orchestration cluster components like Operate, Tasklist, and Admin can still be accessed using their public URLs.
-- When creating client credentials for a cluster, you can select the connectivity type to use:
-  - **Public connectivity**, which uses the public hostnames shown for the credentials.
-  - **Private connectivity**, which requires replacing the `{PRIVATE_DNS}` placeholder with the private DNS hostname associated with your VPC endpoint.
+- When creating client credentials for a cluster, you can choose which connectivity type to use:
+  - Public connectivity, which uses the public hostnames shown for the credentials.
+  - Private connectivity, which uses the private DNS hostname of your VPC interface endpoint instead of the public cluster hostname.
+
+### Private DNS hostname
+
+When you create a VPC interface endpoint in AWS, the endpoint is assigned a private DNS hostname.
+
+This hostname resolves to the private network address of the endpoint within your VPC and is used to route traffic through AWS PrivateLink.
+
+When connecting to your Camunda cluster using secure connectivity, replace the `{PRIVATE_DNS}` placeholder in the cluster endpoint URL with the private DNS hostname of your VPC endpoint.
+
+You can find this hostname in the details of your VPC interface endpoint in AWS. For more information, see the AWS documentation on VPC interface endpoints.
 
 ## What secure connectivity does not change
 
@@ -108,6 +119,6 @@ Secure connectivity:
 - Does not change data location or backup regions.
 - Does not affect encryption at rest or key management.
 - Does not provide outbound private connectivity from Camunda to your services.
-- Secure connectivity does not replace IP allowlists or other access control features. If an IP allowlist is configured, it continues to apply to connections made through private connectivity. For more information, see [manage IP allowlists](../../console/manage-clusters/manage-ip-allowlists).
+- Does not replace IP allowlists or other access control features. If an IP allowlist is configured, it continues to apply to connections made through private connectivity. For more information, see [Manage IP allowlists](../../console/manage-clusters/manage-ip-allowlists).
 
-Secure connectivity changes only the network path used for inbound connections from your AWS VPC.
+Secure connectivity changes only the network path used for inbound connections from your AWS VPC to the orchestration cluster.
