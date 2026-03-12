@@ -12,7 +12,7 @@ Admin was previously named "Identity" in Camunda 8.8. The component was renamed 
 
 ## About Admin
 
-The Orchestration Cluster Admin interface centralizes all key administrative jobs for a single cluster. This interface manages identity and access control for cluster components, including Zeebe, Operate, Tasklist, and APIs, while also handling other core features such as cluster variables, secrets, backups and restores, the global user task listener, and license information, giving administrators one clear place to configure and operate their clusters end to end.
+The Orchestration Cluster Admin interface centralizes all key administrative jobs for a single cluster. This interface manages identity and access control for cluster components, including Zeebe, Operate, Tasklist, and Orchestration Cluster APIs, while also handling other core features such as cluster variables and the global user task listener, giving administrators one clear place to configure and operate their clusters end to end.
 
 Admin includes the following features:
 
@@ -22,11 +22,7 @@ Admin includes the following features:
 | Flexible authentication   | Admin supports multiple authentication modes, including no authentication, Basic authentication, and OpenID Connect (OIDC), depending on the deployment type.                                        |
 | Tenant management         | Multi-tenancy is managed directly within the Orchestration Cluster, allowing for clear separation of resources.                                                                                       |
 | [Cluster variables](/components/modeler/feel/cluster-variable/overview.md) | Manage configuration values centrally across your cluster, making them available in FEEL expressions.                                                     |
-| [Secrets](/components/console/manage-clusters/manage-secrets.md)           | Create and manage connector secrets to reference sensitive values in processes without exposing them.                                                        |
-| [Backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md) | Back up and restore your Orchestration Cluster state and data. (Self-Managed only)                                            |
-| [Backup and restore](/components/saas/backups.md)                                           | Create and manage backups of your SaaS cluster. (SaaS only)                                                                   |
 | [User task listeners](/components/concepts/user-task-listeners.md)         | Configure global listeners that react to user task lifecycle events across the cluster.                                                                     |
-| [License information](/reference/licenses.md)                              | View and manage your Camunda license details for the cluster.                                                                                               |
 
 For details about authorization concepts, resources, and configuration, see
 [Orchestration Cluster authorizations](../concepts/access-control/authorizations.md).
