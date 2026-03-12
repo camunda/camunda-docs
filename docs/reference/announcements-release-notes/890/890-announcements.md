@@ -138,9 +138,9 @@ Camunda 8.9 drops support for Keycloak 25.x. Only Keycloak 26.x is now supported
 
 #### MCP Client and MCP Remote Client connectors
 
-Breaking changes are [introduced in alpha 2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) to the element templates and the runtime configuration of the MCP Client.
+Breaking changes are [introduced in alpha 2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) to the Element templates and the runtime configuration of the MCP Client.
 
-To resolve this, you must update both the MCP Client and MCP Remote Client connectors to use the element template version 1.
+To resolve this, you must update both the MCP Client and MCP Remote Client connectors to use the Element template version 1.
 
 :::info
 To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-client.md) documentation.
@@ -416,13 +416,13 @@ This change improves the reliability of long-running processes that depend on in
 </div>
 <div className="release-announcement-content">
 
-#### Dedicated artifact for Element Template Generation Annotations
+#### Dedicated artifact for Element template Generation Annotations
 
-Starting with Camunda 8.9 we provide a dedicated artifact (`element-template-generator-annotations`) that only contains the necessary annotations for the Element Template Generator, leading to a much smaller dependency footprint for your projects.
+Starting with Camunda 8.9, you can use the dedicated artifact `element-template-generator-annotations`, which contains only the annotations required for the Element template Generator and reduces your project's dependency footprint.
 
-Previously the annotations were part of the `element-template-generator-core` artifact which now is not needed anymore.
+Previously, these annotations were part of the `element-template-generator-core` artifact, which you no longer need.
 
-Just replace `element-template-generator-core` with `element-template-generator-annotations` as a dependency and adapt the imports.
+Replace `element-template-generator-core` with `element-template-generator-annotations` and update the imports.
 
 </div>
 </div>
