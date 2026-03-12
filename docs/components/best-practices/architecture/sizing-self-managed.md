@@ -84,7 +84,9 @@ Once you have a baseline configuration running, you can scale in several directi
 
 ### Horizontal scaling
 
-Add more brokers and partitions to increase throughput capacity. Note that **partitions can be scaled up but not yet scaled down**, so plan ahead but don't over-provision. A good approach is to buffer by **4x your current partition need** for future growth — this has minimal performance impact.
+Add more brokers and partitions to increase throughput capacity. Partitions can be scaled up but not down (see [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md)), so avoid over-provisioning.
+
+When scaling horizontally, **secondary storage often becomes the limiting factor**. Adding brokers increases export volume to Elasticsearch/OpenSearch — if the secondary storage isn't scaled accordingly, it will bottleneck overall throughput. See [Elasticsearch scaling](#elasticsearch-scaling) for guidance.
 
 ### Vertical scaling
 
@@ -96,16 +98,12 @@ Increase CPU and memory per broker. Note that there are **diminishing returns** 
 - **Nodes:** Add ES statefulset replicas for more IOPS and query throughput.
 - **Disk:** Increase disk size based on your data retention requirements. With Optimize enabled and a realistic payload (~11 KB), ES disk can fill rapidly (e.g., 128 Gi in under 12 hours at 1 PI/s with 30-day retention).
 
-### Partition planning
-
-When configuring partitions, multiply your current throughput requirement by **4x** to create headroom for growth. Partitions have minimal overhead when underutilized, but adding partitions later requires a [cluster scaling operation](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md).
-
 ## Secondary storage considerations
 
 The resource tables above assume **Elasticsearch** as the secondary storage backend. If you are using a different backend:
 
 - **OpenSearch:** Similar resource profile to Elasticsearch. The tables above generally apply.
-- **RDBMS (PostgreSQL, available from 8.9):** Replace the Elasticsearch resource block with appropriately sized PostgreSQL resources. Adjust throughput expectations **downward by approximately 30%** compared to the Elasticsearch-based tables. Note that **Optimize is not supported with RDBMS** — if you need Optimize, you must also run Elasticsearch alongside your RDBMS.
+- **RDBMS (PostgreSQL, available from 8.9):** Replace the Elasticsearch resource block with appropriately sized PostgreSQL resources. Adjust throughput expectations **downward by approximately 30%** compared to the Elasticsearch-based tables. Note that **Optimize is not supported with RDBMS** — if you need Optimize, you must also run Elasticsearch alongside your RDBMS. Unlike Elasticsearch, RDBMS scales primarily **vertically** (larger instance) rather than horizontally — plan your initial sizing with more headroom, as adding capacity later is more disruptive.
 
 For more details on secondary storage options, see [Choosing your secondary storage](sizing-your-environment.md#choosing-your-secondary-storage).
 

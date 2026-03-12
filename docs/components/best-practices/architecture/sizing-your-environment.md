@@ -67,6 +67,8 @@ While the cycle time of service tasks depends very much on what you do in these 
 
 :::note
 The latency measurements below are approximate and were last validated against an earlier version of Camunda 8. Updated measurements for 8.8/8.9 are pending. With the 8.8 streamlined architecture and properly aligned resources (3.5 CPU cores per broker), latency is expected to improve by approximately 2x compared to the previous distributed deployment.
+
+Actual latency is highly environment-dependent — factors like network latency between workers and the cluster, disk I/O speed (commit latency), and cloud region placement significantly affect these numbers.
 :::
 
 As a rough guide, expect single-digit millisecond processing time per process node and approximately 50 ms latency to process service tasks in remote workers when running worker code in the same cloud region as the Camunda cluster. Hence, to execute 4 service tasks results in roughly 200-250 ms workflow engine overhead.
@@ -178,7 +180,7 @@ Optimize is an optional component that provides process analytics and reporting.
 #### Mitigations
 
 - Consider running Optimize on a **separate Elasticsearch instance** to isolate its load from the core platform.
-- Use **variable filtering** (available from 8.9) to reduce the amount of data exported/imported by Optimize.
+- Use **variable filtering** to reduce the amount of data exported/imported by Optimize.
 - Tune **retention periods** -- shorter retention means less data in ES, better performance.
 - **Disable variable import** entirely if variables are not needed in Optimize reports.
 
@@ -192,9 +194,7 @@ Data availability latency is influenced by:
 
 - **Exporter throughput:** The rate at which the Camunda Exporter can write events to Elasticsearch.
 - **Elasticsearch indexing speed:** How quickly ES can index incoming documents.
-- **Archiver performance:** The speed at which completed process instance data is archived.
-
-The reliability team targets approximately **5 seconds** under normal load, but this degrades as throughput approaches cluster limits. If you have SLAs on incident visibility or task availability, account for this latency in your sizing by leaving headroom below maximum throughput.
+- **Elasticsearch disk usage:** High disk utilization (above ~70%) significantly increases indexing latency. Monitor ES disk usage and scale storage before hitting this threshold.
 
 ### Choosing your secondary storage
 
@@ -220,6 +220,7 @@ Starting with Camunda 8.9, the platform supports three secondary storage backend
   - Write throughput is approximately **70% of Elasticsearch** for equivalent hardware.
   - Different resource profile: CPU/memory-oriented rather than disk/IOPS-oriented.
   - **No Optimize support** -- if you need Optimize, you must also run Elasticsearch alongside RDBMS.
+  - **Scales primarily vertically** (larger instance) rather than horizontally like Elasticsearch. Plan initial sizing with more headroom, as adding capacity is more disruptive.
   - Potentially lower total disk space required for the same data volume (preliminary benchmarks suggest this, but detailed results are still being validated).
 - Ideal for organizations that already operate PostgreSQL at scale and want to avoid adding Elasticsearch to their infrastructure.
 <!-- TODO: Link to RDBMS benchmark results page once PR #8159 is merged -->
@@ -246,8 +247,6 @@ The sizing tables in this guide reflect the **8.8+ architecture**.
 All components are clustered to provide high-availability, fault-tolerance, and resiliency.
 
 The Orchestration Cluster scales horizontally by adding more nodes (pods). This is **limited by the [number of partitions](/components/zeebe/technical-concepts/partitions.md)** configured for a cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your hardware. The **[number of partitions can be scaled up](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) after the cluster is initially provisioned**, but not yet scaled down.
-
-If you anticipate the load increasing over time, prepare by configuring more partitions than you currently need as a buffer. For example, you could multiply the number of partitions you need for your current load by four to add a buffer. This typically has just a small impact on performance.
 
 Camunda 8 runs on Kubernetes. Every component is operated as a pod that gets resources assigned. These resources can be vertically scaled (get more or less hardware resources assigned dynamically) within certain limits. Note that vertical scaling does not always result in more throughput, as the various components have dependencies on each other. This is a complex topic and requires running experiments with benchmarks. In general, we recommend starting with the configurations described in the [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) sizing pages, then adjusting based on your workload.
 

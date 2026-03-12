@@ -63,10 +63,9 @@ When running benchmarks, ensure you use a **properly sized environment**. A SaaS
 
 We recommend running your own benchmarks when:
 
-- You exceed **3 million process instances per day**.
 - Your process models or payload sizes **differ significantly** from the reference scenario.
 - **Latency or cycle time requirements** are critical to your use case.
-- You are running **Optimize with large payloads** or long retention periods.
+- You are running **Optimize with payloads larger than the reference ~11 KB** or retention periods **exceeding 6 months**. Larger payloads and longer retention amplify Elasticsearch disk consumption and Optimize import times.
 - You are **upgrading from a pre-8.8 version** and want to validate resource requirements.
 - You are using **RDBMS (PostgreSQL) as secondary storage** and want to validate throughput differences.
 
@@ -79,6 +78,8 @@ When running benchmarks, focus on these key metrics:
 - **Process instance latency (p99):** End-to-end time from instance creation to completion. Target depends on your SLO.
 - **Elasticsearch disk growth rate:** Helps you forecast disk capacity needs.
 - **Data availability latency:** Time between an event in the engine and its appearance in Operate/Tasklist.
+- **CPU usage and throttling:** High CPU usage or frequent throttling indicates a need for more CPU resources or additional brokers.
+- **Memory usage:** Sustained high memory usage suggests the need for larger memory limits or additional nodes.
 
 <!-- TODO: Define the exact SLO boundary used for "max throughput" in the official benchmark tables (e.g., "max sustainable throughput where backpressure remains below 10% and p99 process duration stays under 1 second"). If the exact boundary is not standardized, document the methodology. -->
 
