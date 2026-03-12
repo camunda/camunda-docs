@@ -18,13 +18,12 @@ on:
 jobs:
   sync-spring-boot-properties:
     runs-on: ubuntu-latest
-    env:
-      DOCS_VERSION: ${{ github.event.inputs.docs_version || '' }}
     steps:
       - name: Resolve refs and paths
         id: resolve
         run: |
           VERSION="${{ github.event.inputs.docs_version }}"
+          echo "docs_version=${VERSION}" >> "$GITHUB_OUTPUT"
           if [ -n "$VERSION" ]; then
             echo "pr_branch=update-spring-boot-docs/${VERSION}" >> "$GITHUB_OUTPUT"
             echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
@@ -51,10 +50,10 @@ jobs:
         run: npm ci
 
       - name: Download latest Spring Boot properties
-        run: npm run config-reference:download:camunda-spring-boot-starter ${{ inputs.docs_version}}
+        run: npm run config-reference:download:camunda-spring-boot-starter ${{ steps.resolve.outputs.docs_version }}
 
       - name: Generate properties reference page
-        run: npm run config-reference:generate:camunda-spring-boot-starter ${{ inputs.docs_version}}
+        run: npm run config-reference:generate:camunda-spring-boot-starter ${{ steps.resolve.outputs.docs_version }}
 
       - name: Check for changes
         id: check_changes
