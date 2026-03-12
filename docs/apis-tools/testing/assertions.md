@@ -321,7 +321,7 @@ Assert that the process instance has the local variables in the scope of the giv
 doesn't exist.
 
 ```java
-assertThat(processInstance).hasVariableNames(ElementSelectors.byId("task_A"), "var1", "var2");
+assertThat(processInstance).hasLocalVariableNames(ElementSelectors.byId("task_A"), "var1", "var2");
 ```
 
 ### hasLocalVariable
