@@ -12,45 +12,66 @@ Migrate your API integrations, SDKs, and generated clients to Camunda 8.9.
 
 ## About this guide
 
-This guide covers API and SDK changes introduced in Camunda 8.9 that require customer action. It is organized by the type of integration you maintain:
+This guide details the API and SDK changes introduced in Camunda 8.9 that require customer action.
 
-- **Official SDK users** (Java client, TypeScript SDK, Python SDK, C# SDK)
-- **Generated-client users** (clients generated from the Camunda OpenAPI specification)
-- **Handwritten integrations** (custom code that calls the Camunda REST API directly)
+Details are provided for each integration type, including what changed, why, and what action you must take:
 
-Each section explains what changed, why, and exactly what you need to do.
+| Integration type       | Description                                              |
+| :--------------------- | :------------------------------------------------------- |
+| Official SDK users     | Java client, TypeScript SDK, Python SDK, C# SDK          |
+| Generated-client users | Clients generated from the Camunda OpenAPI specification |
+| Custom integrations    | Custom code that calls the Camunda REST API directly     |
 
 :::info
 For the full list of changes, see the [8.9 release announcements](/reference/announcements-release-notes/890/890-announcements.md) and [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 :::
 
-## Quick upgrade checklist
+## Upgrade checklist
 
-Before diving into individual changes, complete the following:
+Complete the following steps in this guide:
 
-1. Update to the latest official Camunda SDK versions.
-2. If you generate clients from OpenAPI, regenerate from the 8.9 specification.
+1. Upgrade to the latest official Camunda SDK versions.
+2. If you generate clients from OpenAPI, regenerate them from the 8.9 specification.
 3. Re-run compilation/type checks and address any errors.
-4. Review the breaking changes below and apply targeted fixes.
+4. Review and apply fixes for the breaking changes, deprecations, and supported environment changes in this guide.
+
+### Camunda 8.10 API and SDK changes
+
+If you did not already migrate to the following APIs and SDKs during your 8.8 upgrade, Camunda recommends you perform these actions before you upgrade to 8.9.
+
+See the [Camunda 8.8 APIs & tools migration guide](/versioned_docs/version-8.8/apis-tools/migration-manuals/index.md) for individual component guides.
+
+| Component/Use            | 8.9 status     | Migrate to                  | Migrate by          |
+| :----------------------- | :------------- | :-------------------------- | :------------------ |
+| V1 component APIs        | **Deprecated** | Orchestration Cluster API   | Before Camunda 8.10 |
+| ZeebeClient              | **Deprecated** | Camunda Java Client         | Before Camunda 8.10 |
+| Spring Zeebe SDK         | **Deprecated** | Camunda Spring Boot Starter | Before Camunda 8.10 |
+| Zeebe Process Test (ZPT) | **Deprecated** | Camunda Process Test (CPT)  | Before Camunda 8.10 |
+| Job-based user tasks     | **Deprecated** | Camunda user tasks          | Before Camunda 8.10 |
+
+:::info
+For more information, see the blog post [Upcoming API Changes in Camunda 8: A Unified and Streamlined Experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
+:::
+
+### Camunda 8.9 breaking changes, deprecations, and supported environment changes
+
+This guide covers the following changes:
+
+| Type                | Change                                                                                 |
+| :------------------ | :------------------------------------------------------------------------------------- |
+| **Breaking change** | [Bug fix: `FormResult.schema` type corrected from object to string](#form-schema-type) |
 
 ## Breaking changes
 
-### Spring Boot 4.0 required for Camunda Spring Boot Starter
+Review the following 8.9 breaking changes and apply targeted fixes as required.
 
-**What changed**: Starting with 8.9.0, the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) requires Spring Boot 4.0.x.
+### Bug fix: `FormResult.schema` type corrected from object to string {#form-schema-type}
 
-**Why**: OSS support for Spring Boot 3.x ends in June 2026. This change keeps Camunda aligned with the Spring Boot support policy.
+**What changed**: The `schema` property in `FormResult` was incorrectly specified as `type: object` in the OpenAPI contract. The server has always returned it as a JSON `string`. The specification is now corrected.
 
-**What to do**:
+**Why**: This is a bug fix. The original specification was inaccurate and caused incorrect typing in generated clients.
 
-- Migrate your application to Spring Boot 4.0.x before upgrading to Camunda 8.9.
-- See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support) for details.
-
-### Resource deletion endpoint now returns a response body
-
-**What changed**: The resource deletion endpoint `POST /resources/{resourceKey}/deletion` now returns a response body instead of an empty response.
-
-**Why**: This provides explicit deletion feedback, making client-side confirmation, auditing, and follow-up workflow logic more reliable.
+**Java client impact**: `io.camunda.client.api.search.response.Form::getSchema()` now returns `String` instead of `Object`.
 
 **What to do**:
 
@@ -62,17 +83,145 @@ Before diving into individual changes, complete the following:
 
 <TabItem value='sdk'>
 
-Update to the latest SDK version. The updated response model is included automatically.
+Update to the latest SDK version. If you are a Java client user, update any calls to `Form::getSchema()` that cast or process the return value as `Object` — it is now `String`.
 
 </TabItem>
 <TabItem value='generated'>
 
-Regenerate your client from the 8.9 OpenAPI specification. Update any code that previously expected an empty `204` response to handle the new response body.
+Regenerate your client. If your generated code relied on the incorrect `object` typing for `FormResult.schema`, update it to handle `string`.
 
 </TabItem>
 <TabItem value='handwritten'>
 
-Update your HTTP client code to parse the new JSON response body from the deletion endpoint, rather than treating it as a `204 No Content`.
+No change needed if your code was already handling the actual `string` response from the server.
+
+</TabItem>
+</Tabs>
+
+### Camunda 8 Run defaults to H2 secondary storage
+
+**What changed**: Camunda 8 Run now uses H2 as the default secondary data storage instead of Elasticsearch.
+
+**Why**: This reduces operational complexity for development and non-high-performance environments.
+
+**What to do**:
+
+- When running with H2 (or any other RDBMS), Camunda is only compatible with the V2 API. Some features are not available in Operate and Tasklist.
+- To continue using features exclusive to the V1 API, run Camunda with Elasticsearch and switch back to V1 mode.
+- See [Migrate to the V2 Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for more details.
+
+### Document API response schemas now have explicit required and nullable annotations {#request-response-schema-split}
+
+**What changed**: The OpenAPI specification now uses distinct schemas for document request and response payloads, and adds explicit `required` / `nullable` annotations to document response types.
+
+**Why**: A shared `DocumentMetadata` schema was used for both creating and reading documents. Because response fields like `customProperties` are always populated by the server but optional in requests, a single schema could not accurately express both contracts. This caused incorrect required/optional behavior in generated clients.
+
+**Affected schemas**:
+
+| Schema                               | Change                                                                                                                                                                                                                            |
+| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DocumentMetadata`                   | Now request-only. Removed `required: [customProperties]` — `customProperties` is now optional in requests.                                                                                                                        |
+| `DocumentMetadataResponse` (new)     | Response schema with required fields: `fileName`, `expiresAt`, `size`, `contentType`, `customProperties`, `processDefinitionId`, `processInstanceKey`. `expiresAt`, `processDefinitionId`, and `processInstanceKey` are nullable. |
+| `DocumentReference`                  | `metadata` now references `DocumentMetadataResponse`. Added `required`: `camunda.document.type`, `storeId`, `documentId`, `contentHash`, `metadata`. `contentHash` is now nullable.                                               |
+| `DocumentLink`                       | `url` and `expiresAt` are now explicitly required.                                                                                                                                                                                |
+| `UserTaskResult.candidateGroups`     | Now marked as required in the response schema.                                                                                                                                                                                    |
+| `UserTaskProperties.candidateGroups` | Now marked as required in the response schema.                                                                                                                                                                                    |
+
+**Java client impact**: `DocumentMetadataImpl` (both `io.camunda.client` and the deprecated `io.camunda.zeebe.client`) now uses `DocumentMetadataResponse` instead of `DocumentMetadata` internally.
+
+**What to do**:
+
+<Tabs groupId="audience" defaultValue="sdk" queryString values={[
+{label: 'Official SDK users', value: 'sdk'},
+{label: 'Generated-client users', value: 'generated'},
+{label: 'Handwritten integrations', value: 'handwritten'},
+]}>
+
+<TabItem value='sdk'>
+
+Update to the latest SDK version. The updated response models are included automatically. Re-compile your application to verify.
+
+</TabItem>
+<TabItem value='generated'>
+
+1. Regenerate your client from the 8.9 OpenAPI specification.
+2. Update any code that references `DocumentMetadata` in response handling — the response type is now `DocumentMetadataResponse`.
+3. Review nullable annotations: `DocumentReference.contentHash`, `DocumentMetadataResponse.expiresAt`, `.processDefinitionId`, and `.processInstanceKey` can be `null`.
+4. Code that reads `candidateGroups` from user task or job responses can now rely on the field being present without null checks.
+
+</TabItem>
+<TabItem value='handwritten'>
+
+No request-side changes are needed. Response fields listed above are now guaranteed to be present (though some may be `null`). If your code reads document metadata responses and checks for `customProperties` or `candidateGroups` presence, those fields are now always included.
+
+</TabItem>
+</Tabs>
+
+### Elasticsearch subchart no longer enabled by default
+
+**What changed**: The Elasticsearch Helm subchart is no longer enabled by default.
+
+**Why**: With the addition of RDBMS secondary storage options, you must now explicitly specify which secondary storage to use.
+
+**What to do**: To continue using Elasticsearch as a subchart, add the following to your `values.yaml`:
+
+```yaml
+global:
+  elasticsearch:
+    enabled: true
+elasticsearch:
+  enabled: true
+```
+
+### MCP Client and MCP Remote Client connectors
+
+**What changed**: Breaking changes were introduced in alpha 2 to the element templates and runtime configuration of the MCP Client.
+
+**Why**: This improves the stability and configuration model of the MCP connectors.
+
+**What to do**: Update both the MCP Client and MCP Remote Client connectors to use element template version 1. See the [MCP documentation](/components/early-access/alpha/mcp-client/mcp-client.md) for details.
+
+### OpenAPI enum extensions {#enum-extensions}
+
+**What changed**: New enum literals were added to support expanded 8.9 functionality.
+
+**Why**: These additions enable new features such as decision instance deletion and user task authorization.
+
+**Added enum members**:
+
+| Enum                                                          | New value                  |
+| :------------------------------------------------------------ | :------------------------- |
+| `BatchOperationTypeEnum` / `BatchOperationTypeFilterProperty` | `DELETE_DECISION_INSTANCE` |
+| `ResourceTypeEnum`                                            | `USER_TASK`                |
+| `PermissionTypeEnum`                                          | `COMPLETE`                 |
+
+**What to do**:
+
+<Tabs groupId="audience" defaultValue="sdk" queryString values={[
+{label: 'Official SDK users', value: 'sdk'},
+{label: 'Generated-client users', value: 'generated'},
+{label: 'Handwritten integrations', value: 'handwritten'},
+]}>
+
+<TabItem value='sdk'>
+
+Update to the latest SDK version for full enum support. Re-compile your application — the compiler will signal any exhaustive match issues.
+
+</TabItem>
+<TabItem value='generated'>
+
+1. Regenerate your client from the 8.9 OpenAPI specification.
+2. Add fallback/default handling in enum parsing and deserialization.
+3. Ensure exhaustive `switch` or pattern matches include a `default` branch.
+
+</TabItem>
+<TabItem value='handwritten'>
+
+Review all code paths that handle these enum values. Add handling for the new values and ensure you have a fallback for unknown values in `switch`/`if-else` chains.
+
+:::note
+In Java, the compiler does not signal incomplete enum handling at compile time. Search your codebase for references to `BatchOperationTypeEnum`, `ResourceTypeEnum`, and `PermissionTypeEnum` and verify coverage manually.
+:::
 
 </TabItem>
 </Tabs>
@@ -141,19 +290,11 @@ Update to the latest SDK version. The wire-type of these fields does not change,
 </TabItem>
 </Tabs>
 
-### OpenAPI enum extensions {#enum-extensions}
+### Resource deletion endpoint now returns a response body
 
-**What changed**: New enum literals were added to support expanded 8.9 functionality.
+**What changed**: The resource deletion endpoint `POST /resources/{resourceKey}/deletion` now returns a response body instead of an empty response.
 
-**Why**: These additions enable new features such as decision instance deletion and user task authorization.
-
-**Added enum members**:
-
-| Enum                                                          | New value                  |
-| :------------------------------------------------------------ | :------------------------- |
-| `BatchOperationTypeEnum` / `BatchOperationTypeFilterProperty` | `DELETE_DECISION_INSTANCE` |
-| `ResourceTypeEnum`                                            | `USER_TASK`                |
-| `PermissionTypeEnum`                                          | `COMPLETE`                 |
+**Why**: This provides explicit deletion feedback, making client-side confirmation, auditing, and follow-up workflow logic more reliable.
 
 **What to do**:
 
@@ -165,59 +306,31 @@ Update to the latest SDK version. The wire-type of these fields does not change,
 
 <TabItem value='sdk'>
 
-Update to the latest SDK version for full enum support. Re-compile your application — the compiler will signal any exhaustive match issues.
+Update to the latest SDK version. The updated response model is included automatically.
 
 </TabItem>
 <TabItem value='generated'>
 
-1. Regenerate your client from the 8.9 OpenAPI specification.
-2. Add fallback/default handling in enum parsing and deserialization.
-3. Ensure exhaustive `switch` or pattern matches include a `default` branch.
+Regenerate your client from the 8.9 OpenAPI specification. Update any code that previously expected an empty `204` response to handle the new response body.
 
 </TabItem>
 <TabItem value='handwritten'>
 
-Review all code paths that handle these enum values. Add handling for the new values and ensure you have a fallback for unknown values in `switch`/`if-else` chains.
-
-:::note
-In Java, the compiler does not signal incomplete enum handling at compile time. Search your codebase for references to `BatchOperationTypeEnum`, `ResourceTypeEnum`, and `PermissionTypeEnum` and verify coverage manually.
-:::
+Update your HTTP client code to parse the new JSON response body from the deletion endpoint, rather than treating it as a `204 No Content`.
 
 </TabItem>
 </Tabs>
 
-### Bug fix: `FormResult.schema` type corrected from object to string {#form-schema-type}
+### Spring Boot 4.0 required for Camunda Spring Boot Starter
 
-**What changed**: The `schema` property in `FormResult` was incorrectly specified as `type: object` in the OpenAPI contract. The server has always returned it as a JSON `string`. The specification is now corrected.
+**What changed**: Starting with 8.9.0, the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) requires Spring Boot 4.0.x.
 
-**Why**: This is a bug fix. The original specification was inaccurate and caused incorrect typing in generated clients.
-
-**Java client impact**: `io.camunda.client.api.search.response.Form::getSchema()` now returns `String` instead of `Object`.
+**Why**: OSS support for Spring Boot 3.x ends in June 2026. This change keeps Camunda aligned with the Spring Boot support policy.
 
 **What to do**:
 
-<Tabs groupId="audience" defaultValue="sdk" queryString values={[
-{label: 'Official SDK users', value: 'sdk'},
-{label: 'Generated-client users', value: 'generated'},
-{label: 'Handwritten integrations', value: 'handwritten'},
-]}>
-
-<TabItem value='sdk'>
-
-Update to the latest SDK version. If you are a Java client user, update any calls to `Form::getSchema()` that cast or process the return value as `Object` — it is now `String`.
-
-</TabItem>
-<TabItem value='generated'>
-
-Regenerate your client. If your generated code relied on the incorrect `object` typing for `FormResult.schema`, update it to handle `string`.
-
-</TabItem>
-<TabItem value='handwritten'>
-
-No change needed if your code was already handling the actual `string` response from the server.
-
-</TabItem>
-</Tabs>
+- Migrate your application to Spring Boot 4.0.x before upgrading to Camunda 8.9.
+- See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support) for details.
 
 ### `versionTag` returns `null` instead of empty string when absent {#version-tag-null}
 
@@ -261,89 +374,6 @@ if (versionTag != null) {
 
 </TabItem>
 </Tabs>
-
-### Document API response schemas now have explicit required and nullable annotations {#request-response-schema-split}
-
-**What changed**: The OpenAPI specification now uses distinct schemas for document request and response payloads, and adds explicit `required` / `nullable` annotations to document response types.
-
-**Why**: A shared `DocumentMetadata` schema was used for both creating and reading documents. Because response fields like `customProperties` are always populated by the server but optional in requests, a single schema could not accurately express both contracts. This caused incorrect required/optional behavior in generated clients.
-
-**Affected schemas**:
-
-| Schema                               | Change                                                                                                                                                                                                                            |
-| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DocumentMetadata`                   | Now request-only. Removed `required: [customProperties]` — `customProperties` is now optional in requests.                                                                                                                        |
-| `DocumentMetadataResponse` (new)     | Response schema with required fields: `fileName`, `expiresAt`, `size`, `contentType`, `customProperties`, `processDefinitionId`, `processInstanceKey`. `expiresAt`, `processDefinitionId`, and `processInstanceKey` are nullable. |
-| `DocumentReference`                  | `metadata` now references `DocumentMetadataResponse`. Added `required`: `camunda.document.type`, `storeId`, `documentId`, `contentHash`, `metadata`. `contentHash` is now nullable.                                               |
-| `DocumentLink`                       | `url` and `expiresAt` are now explicitly required.                                                                                                                                                                                |
-| `UserTaskResult.candidateGroups`     | Now marked as required in the response schema.                                                                                                                                                                                    |
-| `UserTaskProperties.candidateGroups` | Now marked as required in the response schema.                                                                                                                                                                                    |
-
-**Java client impact**: `DocumentMetadataImpl` (both `io.camunda.client` and the deprecated `io.camunda.zeebe.client`) now uses `DocumentMetadataResponse` instead of `DocumentMetadata` internally.
-
-**What to do**:
-
-<Tabs groupId="audience" defaultValue="sdk" queryString values={[
-{label: 'Official SDK users', value: 'sdk'},
-{label: 'Generated-client users', value: 'generated'},
-{label: 'Handwritten integrations', value: 'handwritten'},
-]}>
-
-<TabItem value='sdk'>
-
-Update to the latest SDK version. The updated response models are included automatically. Re-compile your application to verify.
-
-</TabItem>
-<TabItem value='generated'>
-
-1. Regenerate your client from the 8.9 OpenAPI specification.
-2. Update any code that references `DocumentMetadata` in response handling — the response type is now `DocumentMetadataResponse`.
-3. Review nullable annotations: `DocumentReference.contentHash`, `DocumentMetadataResponse.expiresAt`, `.processDefinitionId`, and `.processInstanceKey` can be `null`.
-4. Code that reads `candidateGroups` from user task or job responses can now rely on the field being present without null checks.
-
-</TabItem>
-<TabItem value='handwritten'>
-
-No request-side changes are needed. Response fields listed above are now guaranteed to be present (though some may be `null`). If your code reads document metadata responses and checks for `customProperties` or `candidateGroups` presence, those fields are now always included.
-
-</TabItem>
-</Tabs>
-
-### MCP Client and MCP Remote Client connectors
-
-**What changed**: Breaking changes were introduced in alpha 2 to the element templates and runtime configuration of the MCP Client.
-
-**Why**: This improves the stability and configuration model of the MCP connectors.
-
-**What to do**: Update both the MCP Client and MCP Remote Client connectors to use element template version 1. See the [MCP documentation](/components/early-access/alpha/mcp-client/mcp-client.md) for details.
-
-### Camunda 8 Run defaults to H2 secondary storage
-
-**What changed**: Camunda 8 Run now uses H2 as the default secondary data storage instead of Elasticsearch.
-
-**Why**: This reduces operational complexity for development and non-high-performance environments.
-
-**What to do**:
-
-- When running with H2 (or any other RDBMS), Camunda is only compatible with the V2 API. Some features are not available in Operate and Tasklist.
-- To continue using features exclusive to the V1 API, run Camunda with Elasticsearch and switch back to V1 mode.
-- See [Migrate to the V2 Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for more details.
-
-### Elasticsearch subchart no longer enabled by default
-
-**What changed**: The Elasticsearch Helm subchart is no longer enabled by default.
-
-**Why**: With the addition of RDBMS secondary storage options, you must now explicitly specify which secondary storage to use.
-
-**What to do**: To continue using Elasticsearch as a subchart, add the following to your `values.yaml`:
-
-```yaml
-global:
-  elasticsearch:
-    enabled: true
-elasticsearch:
-  enabled: true
-```
 
 ### Web Modeler changes
 
