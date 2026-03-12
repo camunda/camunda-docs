@@ -302,6 +302,10 @@ we make it less bold compared to the search keyword */
   display: none;
 }
 
+.navbar__link {
+  color: #1c1e21;
+}
+
 a {
   text-decoration: none;
 }
