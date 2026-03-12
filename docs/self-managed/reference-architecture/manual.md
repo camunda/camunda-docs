@@ -63,7 +63,7 @@ Both types of endpoints can be routed through a load balancer to maintain availa
 
 Connectors expose additional HTTP(s) endpoints for handling incoming webhooks, which can also be routed through the same HTTP load balancer.
 
-The Orchestration Cluster relies on a configured [secondary storage](/reference/glossary.md#secondary-storage) backend for indexing and search. Depending on your deployment and configuration, this backend can use a document store ([Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch)) or an [RDBMS](/reference/glossary.md#rdbms) for supported scenarios.
+The Orchestration Cluster relies on a configured [secondary storage](/reference/glossary.md#secondary-storage) backend for indexing and search. Depending on your deployment and configuration, this backend can use a document-store backend ([Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch)) or an [RDBMS](/reference/glossary.md#rdbms) for supported scenarios.
 
 :::note
 Secondary storage is configurable. For RDBMS-based secondary storage, see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms).

@@ -26,7 +26,7 @@ Zeebe loads exporters only if they are configured in the main Zeebe YAML configu
 
 Exporters receive only records produced after they are configured.
 
-Camunda 8 Self-Managed ships several built-in exporters, including the [Camunda Exporter](../components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) and document-store exporters for [Elasticsearch](../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) and [OpenSearch](../components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md). When using RDBMS as secondary storage, see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) for exporter setup. Use a custom exporter only when you need a different target system or behavior.
+Camunda 8 Self-Managed ships several built-in exporters, including the [Camunda Exporter](../components/orchestration-cluster/zeebe/exporters/camunda-exporter.md), [Elasticsearch](../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md), [OpenSearch](../components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md), and the RDBMS exporter (see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md)). Use a custom exporter only when you need a different target system or behavior.
 
 Zeebe manages data deletion through two distinct mechanisms to reduce disk usage:
 

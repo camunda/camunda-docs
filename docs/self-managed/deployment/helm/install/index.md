@@ -11,7 +11,7 @@ Camunda 8 Self-Managed can be installed on Kubernetes using Helm charts. Choose 
 
 | Use case                  | Installation guide                      | Secondary storage                              | Complexity | Best for                                          |
 | ------------------------- | --------------------------------------- | ---------------------------------------------- | ---------- | ------------------------------------------------- |
-| **Testing & evaluation**  | [Quick install](./quick-install)        | Document store (Elasticsearch/OpenSearch)      | Low        | Local development, POCs, learning                 |
+| **Testing & evaluation**  | [Quick install](./quick-install)        | Document-store (ES/OS)                         | Low        | Local development, POCs, learning                 |
 | **Production with RDBMS** | [Install with RDBMS](./helm-with-rdbms) | PostgreSQL, Oracle, MariaDB, MySQL, SQL Server | Medium     | RDBMS-first organizations, no ES/OS license       |
 | **High-scale production** | [Install for production](./production)  | Elasticsearch/OpenSearch or RDBMS              | High       | High-throughput, multi-team, OIDC, HA, monitoring |
 

@@ -6,7 +6,7 @@ description: "Overview of how the Orchestration Cluster stores and archives data
 
 The Orchestration Cluster centrally manages data retention for all data using unified storage and policy configuration.
 
-All cluster data, including deployed process definitions, process instance state, user operations, and technical metadata, is written to secondary storage. Depending on your configuration, this secondary storage uses a document store ([Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch)) or an [RDBMS](/reference/glossary.md#rdbms). The data representing process instance state becomes immutable after the process instance is finished, and it becomes eligible for archiving.
+All cluster data, including deployed process definitions, process instance state, user operations, and technical metadata, is written to secondary storage. Depending on your configuration, this secondary storage uses a document-store backend ([Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch)) or an [RDBMS](/reference/glossary.md#rdbms). The data representing process instance state becomes immutable after the process instance is finished, and it becomes eligible for archiving.
 
 :::note
 Secondary storage is configurable. Choose the backend that best fits your requirements for indexing, querying, retention, and operations. See [configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md) for setup guidance, and refer to [secondary storage](/reference/glossary.md#secondary-storage) for terminology and conceptual context.

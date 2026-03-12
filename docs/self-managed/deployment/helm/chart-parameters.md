@@ -34,7 +34,7 @@ The following tables show the **top-level configuration sections** in `values.ya
 
 ### Bitnami subcharts
 
-- `elasticsearch`: Provides an embedded Elasticsearch backend (Bitnami subchart). This can be used as a secondary storage backend for evaluations. See [secondary storage](/reference/glossary.md#secondary-storage) and [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
+- `elasticsearch`: Provides an embedded Elasticsearch backend (Bitnami subchart). This can be used as a secondary storage backend for evaluations. See [secondary storage](/reference/glossary.md#secondary-storage) and [document-store backends (Elasticsearch/OpenSearch)](/reference/glossary.md#elasticsearchopensearch).
 - `identityKeycloak`: Provides an embedded Keycloak service for Management Identity (Bitnami subchart).
 - `identityPostgresql`: Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart).
 - `webModelerPostgresql`: Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart).

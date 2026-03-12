@@ -6,14 +6,14 @@ description: Learn how Camunda uses document and relational databases for second
 
 Camunda applications depend on a secondary storage backend to read workflow and decision data exported from the Zeebe engine.
 
-This storage layer can use either document databases or relational databases (RDBMS), depending on your requirements.
+This storage layer can use either a document-store backend or a relational database (RDBMS), depending on your requirements.
 
 For an architectural explanation of how secondary storage fits into Camunda 8, see the  
 [secondary storage overview](/self-managed/concepts/secondary-storage/index.md).
 
-## Document databases
+## Document-store backends
 
-Camunda supports document-oriented backends such as Elasticsearch and OpenSearch.
+Camunda supports document-store backends such as Elasticsearch and OpenSearch.
 
 These systems are optimized for high-volume ingestion and flexible search queries.
 

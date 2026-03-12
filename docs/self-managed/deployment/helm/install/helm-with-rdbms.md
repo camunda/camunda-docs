@@ -15,9 +15,9 @@ Related guides:
 
 ## What changes when using RDBMS?
 
-In Camunda 8, secondary storage stores historical data and process state. You can use either a document store (Elasticsearch/OpenSearch) or an RDBMS, depending on your requirements. This guide focuses on the RDBMS option:
+In Camunda 8, secondary storage stores historical data and process state. You can use either a document-store backend (Elasticsearch/OpenSearch) or an RDBMS, depending on your requirements. This guide focuses on the RDBMS option:
 
-| Aspect               | Document store (Elasticsearch/OpenSearch)           | RDBMS                                                       |
+| Aspect               | Document-store backend (Elasticsearch/OpenSearch)   | RDBMS                                                       |
 | -------------------- | --------------------------------------------------- | ----------------------------------------------------------- |
 | **Storage choice**   | Helm-managed subchart                               | You manage (PostgreSQL, etc.)                               |
 | **Scaling**          | Scale the search cluster independently from Camunda | Scale via your database service (vertical or read replicas) |

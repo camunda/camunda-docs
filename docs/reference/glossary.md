@@ -179,7 +179,7 @@ A process cannot execute unless it is known by the [broker](#zeebe-broker). Depl
 
 ### Elasticsearch/OpenSearch
 
-Elasticsearch and OpenSearch are search and analytics engines commonly used as secondary storage backends for indexing and querying exported runtime data. They are populated with process orchestration data and consumed by components such as Operate, Tasklist, and Optimize.
+Elasticsearch and OpenSearch are search and analytics engines commonly used as document-store secondary storage backends for indexing and querying exported runtime data. They are populated with process orchestration data and consumed by components such as Operate, Tasklist, and Optimize.
 
 - [Elasticsearch and OpenSearch](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md)
 
@@ -539,7 +539,7 @@ Secondary storage is used for indexing, search, analytics, and long-term retenti
 
 Examples of secondary storage backends include:
 
-- [Elasticsearch/OpenSearch](#elasticsearchopensearch)
+- [Document store (Elasticsearch/OpenSearch)](#elasticsearchopensearch)
 - [RDBMS](#rdbms)
 
 - [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)

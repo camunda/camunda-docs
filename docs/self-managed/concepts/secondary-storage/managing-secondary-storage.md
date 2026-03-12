@@ -30,7 +30,7 @@ Unsupervised changes to secondary storage data can lead to severe issues, such a
 
 ## Configuring capacity and redundancy
 
-Secondary storage configuration depends on the backend you choose (for example, a document store such as Elasticsearch/OpenSearch, or an RDBMS). Both are valid options in supported scenarios. Use the documentation for your selected backend and validate decisions against your expected workload.
+Secondary storage configuration depends on the backend you choose (for example, a document-store backend such as Elasticsearch/OpenSearch, or an RDBMS). Both are valid options in supported scenarios. Use the documentation for your selected backend and validate decisions against your expected workload.
 
 :::note
 Backend selection and sizing should be based on benchmarking and realistic workload expectations. Prefer configuration choices that you can validate with measured throughput, latency, and retention needs.
@@ -96,4 +96,4 @@ For example:
 
 - Track exporter and indexing latency.
 - Detect shard or replica imbalances for document-store backends (Elasticsearch/OpenSearch).
-- Identify degraded query performance early across secondary storage backends (document store or RDBMS).
+- Identify degraded query performance early across secondary storage backends (document-store or RDBMS).
