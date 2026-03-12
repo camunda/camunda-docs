@@ -2,19 +2,21 @@
 id: docs-mcp
 title: Camunda Docs MCP server
 sidebar_label: "Docs MCP server"
-description: "Connect to Camunda documentation directly from your IDE or AI tool using the Camunda Docs MCP Server"
+description: "Use the Camunda Docs MCP server to query Camunda 8 documentation in your IDE or AI tool."
 ---
+
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import McpServerImg from './img/camunda-docs-mcpserver.png';
 import McpServerDropdownImg from './img/camunda-docs-mcpserver-dropdown.png';
 
-Use the Camunda Docs [(Model Context Protocol) MCP server](https://modelcontextprotocol.io/docs/getting-started/intro) to query Camunda 8 documentation in your IDE or AI tool.
-
 ## About
 
-Add the Camunda Docs MCP server to let your AI agent directly access the latest official Camunda 8 documentation.
+Add the Camunda Docs [(Model Context Protocol) MCP server](https://modelcontextprotocol.io/docs/getting-started/intro) to give your AI agent direct access to the latest official Camunda 8 documentation.
 
 For example, if you use an AI coding tool such as [Cursor](https://cursor.com/) or [Copilot](https://code.visualstudio.com/docs/copilot/overview), adding the MCP server can help ensure more accurate AI responses and code generation by accessing the current Camunda 8 documentation and context.
 

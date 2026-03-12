@@ -1,7 +1,7 @@
 ---
 id: contact
 title: Support and feedback
-description: Get support for Camunda, submit feedback, join the Camunda community forum, note bug reports and feature requests, and review security notices.
+description: Get support for Camunda and submit your feedback, bug reports, and feature requests.
 keywords:
   [
     support,
