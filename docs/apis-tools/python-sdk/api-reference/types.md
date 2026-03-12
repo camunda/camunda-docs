@@ -14,10 +14,10 @@ mdx:
 def lift_audit_log_entity_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _AuditLogEntityKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *AuditLogEntityKey*
 
 ### lift_audit_log_key()
 
@@ -25,10 +25,10 @@ def lift_audit_log_entity_key(value)
 def lift_audit_log_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _AuditLogKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *AuditLogKey*
 
 ### lift_authorization_key()
 
@@ -36,10 +36,10 @@ def lift_audit_log_key(value)
 def lift_authorization_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _AuthorizationKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *AuthorizationKey*
 
 ### lift_batch_operation_key()
 
@@ -47,10 +47,21 @@ def lift_authorization_key(value)
 def lift_batch_operation_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _BatchOperationKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *BatchOperationKey*
+
+### lift_business_id()
+
+```python
+def lift_business_id(value)
+```
+
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *BusinessId*
 
 ### lift_conditional_evaluation_key()
 
@@ -58,10 +69,10 @@ def lift_batch_operation_key(value)
 def lift_conditional_evaluation_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _ConditionalEvaluationKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *ConditionalEvaluationKey*
 
 ### lift_decision_definition_id()
 
@@ -69,10 +80,10 @@ def lift_conditional_evaluation_key(value)
 def lift_decision_definition_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DecisionDefinitionId_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *DecisionDefinitionId*
 
 ### lift_decision_definition_key()
 
@@ -80,10 +91,10 @@ def lift_decision_definition_id(value)
 def lift_decision_definition_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DecisionDefinitionKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *DecisionDefinitionKey*
 
 ### lift_decision_evaluation_instance_key()
 
@@ -91,10 +102,10 @@ def lift_decision_definition_key(value)
 def lift_decision_evaluation_instance_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DecisionEvaluationInstanceKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *DecisionEvaluationInstanceKey*
 
 ### lift_decision_evaluation_key()
 
@@ -102,10 +113,10 @@ def lift_decision_evaluation_instance_key(value)
 def lift_decision_evaluation_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DecisionEvaluationKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *DecisionEvaluationKey*
 
 ### lift_decision_instance_key()
 
@@ -113,10 +124,10 @@ def lift_decision_evaluation_key(value)
 def lift_decision_instance_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DecisionInstanceKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *DecisionInstanceKey*
 
 ### lift_decision_requirements_key()
 
@@ -124,10 +135,10 @@ def lift_decision_instance_key(value)
 def lift_decision_requirements_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DecisionRequirementsKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *DecisionRequirementsKey*
 
 ### lift_deployment_key()
 
@@ -135,10 +146,10 @@ def lift_decision_requirements_key(value)
 def lift_deployment_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DeploymentKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *DeploymentKey*
 
 ### lift_document_id()
 
@@ -146,10 +157,10 @@ def lift_deployment_key(value)
 def lift_document_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DocumentId_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *DocumentId*
 
 ### lift_element_id()
 
@@ -157,10 +168,10 @@ def lift_document_id(value)
 def lift_element_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _ElementId_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *ElementId*
 
 ### lift_element_instance_key()
 
@@ -168,10 +179,10 @@ def lift_element_id(value)
 def lift_element_instance_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _ElementInstanceKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *ElementInstanceKey*
 
 ### lift_end_cursor()
 
@@ -179,10 +190,10 @@ def lift_element_instance_key(value)
 def lift_end_cursor(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _EndCursor_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *EndCursor*
 
 ### lift_form_id()
 
@@ -190,10 +201,10 @@ def lift_end_cursor(value)
 def lift_form_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _FormId_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *FormId*
 
 ### lift_form_key()
 
@@ -201,10 +212,10 @@ def lift_form_id(value)
 def lift_form_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _FormKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *FormKey*
 
 ### lift_global_listener_id()
 
@@ -212,10 +223,10 @@ def lift_form_key(value)
 def lift_global_listener_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _GlobalListenerId_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *GlobalListenerId*
 
 ### lift_incident_key()
 
@@ -223,10 +234,10 @@ def lift_global_listener_id(value)
 def lift_incident_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _IncidentKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *IncidentKey*
 
 ### lift_job_key()
 
@@ -234,10 +245,10 @@ def lift_incident_key(value)
 def lift_job_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _JobKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *JobKey*
 
 ### lift_message_key()
 
@@ -245,10 +256,10 @@ def lift_job_key(value)
 def lift_message_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _MessageKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *MessageKey*
 
 ### lift_message_subscription_key()
 
@@ -256,10 +267,10 @@ def lift_message_key(value)
 def lift_message_subscription_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _MessageSubscriptionKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *MessageSubscriptionKey*
 
 ### lift_process_definition_id()
 
@@ -267,10 +278,10 @@ def lift_message_subscription_key(value)
 def lift_process_definition_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _ProcessDefinitionId_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *ProcessDefinitionId*
 
 ### lift_process_definition_key()
 
@@ -278,10 +289,10 @@ def lift_process_definition_id(value)
 def lift_process_definition_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _ProcessDefinitionKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *ProcessDefinitionKey*
 
 ### lift_process_instance_key()
 
@@ -289,21 +300,10 @@ def lift_process_definition_key(value)
 def lift_process_instance_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _ProcessInstanceKey_
-
-### lift_root_process_instance_key()
-
-```python
-def lift_root_process_instance_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _RootProcessInstanceKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *ProcessInstanceKey*
 
 ### lift_scope_key()
 
@@ -311,10 +311,10 @@ def lift_root_process_instance_key(value)
 def lift_scope_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _ScopeKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *ScopeKey*
 
 ### lift_signal_key()
 
@@ -322,10 +322,10 @@ def lift_scope_key(value)
 def lift_signal_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _SignalKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *SignalKey*
 
 ### lift_start_cursor()
 
@@ -333,10 +333,10 @@ def lift_signal_key(value)
 def lift_start_cursor(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _StartCursor_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *StartCursor*
 
 ### lift_tag()
 
@@ -344,10 +344,10 @@ def lift_start_cursor(value)
 def lift_tag(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tag_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tag*
 
 ### lift_tenant_id()
 
@@ -355,10 +355,10 @@ def lift_tag(value)
 def lift_tenant_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _TenantId_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *TenantId*
 
 ### lift_user_task_key()
 
@@ -366,10 +366,10 @@ def lift_tenant_id(value)
 def lift_user_task_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _UserTaskKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *UserTaskKey*
 
 ### lift_username()
 
@@ -377,10 +377,10 @@ def lift_user_task_key(value)
 def lift_username(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Username_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Username*
 
 ### lift_variable_key()
 
@@ -388,10 +388,10 @@ def lift_username(value)
 def lift_variable_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _VariableKey_
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *VariableKey*
 
 ### try_lift_audit_log_entity_key()
 
@@ -399,10 +399,10 @@ def lift_variable_key(value)
 def try_lift_audit_log_entity_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *AuditLogEntityKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *AuditLogEntityKey* | Exception]
 
 ### try_lift_audit_log_key()
 
@@ -410,10 +410,10 @@ def try_lift_audit_log_entity_key(value)
 def try_lift_audit_log_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *AuditLogKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *AuditLogKey* | Exception]
 
 ### try_lift_authorization_key()
 
@@ -421,10 +421,10 @@ def try_lift_audit_log_key(value)
 def try_lift_authorization_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *AuthorizationKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *AuthorizationKey* | Exception]
 
 ### try_lift_batch_operation_key()
 
@@ -432,10 +432,21 @@ def try_lift_authorization_key(value)
 def try_lift_batch_operation_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *BatchOperationKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *BatchOperationKey* | Exception]
+
+### try_lift_business_id()
+
+```python
+def try_lift_business_id(value)
+```
+
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *BusinessId* | Exception]
 
 ### try_lift_conditional_evaluation_key()
 
@@ -443,10 +454,10 @@ def try_lift_batch_operation_key(value)
 def try_lift_conditional_evaluation_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *ConditionalEvaluationKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *ConditionalEvaluationKey* | Exception]
 
 ### try_lift_decision_definition_id()
 
@@ -454,10 +465,10 @@ def try_lift_conditional_evaluation_key(value)
 def try_lift_decision_definition_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DecisionDefinitionId* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *DecisionDefinitionId* | Exception]
 
 ### try_lift_decision_definition_key()
 
@@ -465,10 +476,10 @@ def try_lift_decision_definition_id(value)
 def try_lift_decision_definition_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DecisionDefinitionKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *DecisionDefinitionKey* | Exception]
 
 ### try_lift_decision_evaluation_instance_key()
 
@@ -476,10 +487,10 @@ def try_lift_decision_definition_key(value)
 def try_lift_decision_evaluation_instance_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DecisionEvaluationInstanceKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *DecisionEvaluationInstanceKey* | Exception]
 
 ### try_lift_decision_evaluation_key()
 
@@ -487,10 +498,10 @@ def try_lift_decision_evaluation_instance_key(value)
 def try_lift_decision_evaluation_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DecisionEvaluationKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *DecisionEvaluationKey* | Exception]
 
 ### try_lift_decision_instance_key()
 
@@ -498,10 +509,10 @@ def try_lift_decision_evaluation_key(value)
 def try_lift_decision_instance_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DecisionInstanceKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *DecisionInstanceKey* | Exception]
 
 ### try_lift_decision_requirements_key()
 
@@ -509,10 +520,10 @@ def try_lift_decision_instance_key(value)
 def try_lift_decision_requirements_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DecisionRequirementsKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *DecisionRequirementsKey* | Exception]
 
 ### try_lift_deployment_key()
 
@@ -520,10 +531,10 @@ def try_lift_decision_requirements_key(value)
 def try_lift_deployment_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DeploymentKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *DeploymentKey* | Exception]
 
 ### try_lift_document_id()
 
@@ -531,10 +542,10 @@ def try_lift_deployment_key(value)
 def try_lift_document_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DocumentId* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *DocumentId* | Exception]
 
 ### try_lift_element_id()
 
@@ -542,10 +553,10 @@ def try_lift_document_id(value)
 def try_lift_element_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *ElementId* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *ElementId* | Exception]
 
 ### try_lift_element_instance_key()
 
@@ -553,10 +564,10 @@ def try_lift_element_id(value)
 def try_lift_element_instance_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *ElementInstanceKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *ElementInstanceKey* | Exception]
 
 ### try_lift_end_cursor()
 
@@ -564,10 +575,10 @@ def try_lift_element_instance_key(value)
 def try_lift_end_cursor(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *EndCursor* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *EndCursor* | Exception]
 
 ### try_lift_form_id()
 
@@ -575,10 +586,10 @@ def try_lift_end_cursor(value)
 def try_lift_form_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *FormId* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *FormId* | Exception]
 
 ### try_lift_form_key()
 
@@ -586,10 +597,10 @@ def try_lift_form_id(value)
 def try_lift_form_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *FormKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *FormKey* | Exception]
 
 ### try_lift_global_listener_id()
 
@@ -597,10 +608,10 @@ def try_lift_form_key(value)
 def try_lift_global_listener_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *GlobalListenerId* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *GlobalListenerId* | Exception]
 
 ### try_lift_incident_key()
 
@@ -608,10 +619,10 @@ def try_lift_global_listener_id(value)
 def try_lift_incident_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *IncidentKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *IncidentKey* | Exception]
 
 ### try_lift_job_key()
 
@@ -619,10 +630,10 @@ def try_lift_incident_key(value)
 def try_lift_job_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *JobKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *JobKey* | Exception]
 
 ### try_lift_message_key()
 
@@ -630,10 +641,10 @@ def try_lift_job_key(value)
 def try_lift_message_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *MessageKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *MessageKey* | Exception]
 
 ### try_lift_message_subscription_key()
 
@@ -641,10 +652,10 @@ def try_lift_message_key(value)
 def try_lift_message_subscription_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *MessageSubscriptionKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *MessageSubscriptionKey* | Exception]
 
 ### try_lift_process_definition_id()
 
@@ -652,10 +663,10 @@ def try_lift_message_subscription_key(value)
 def try_lift_process_definition_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *ProcessDefinitionId* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *ProcessDefinitionId* | Exception]
 
 ### try_lift_process_definition_key()
 
@@ -663,10 +674,10 @@ def try_lift_process_definition_id(value)
 def try_lift_process_definition_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *ProcessDefinitionKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *ProcessDefinitionKey* | Exception]
 
 ### try_lift_process_instance_key()
 
@@ -674,21 +685,10 @@ def try_lift_process_definition_key(value)
 def try_lift_process_instance_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *ProcessInstanceKey* | Exception]
-
-### try_lift_root_process_instance_key()
-
-```python
-def try_lift_root_process_instance_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *RootProcessInstanceKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *ProcessInstanceKey* | Exception]
 
 ### try_lift_scope_key()
 
@@ -696,10 +696,10 @@ def try_lift_root_process_instance_key(value)
 def try_lift_scope_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *ScopeKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *ScopeKey* | Exception]
 
 ### try_lift_signal_key()
 
@@ -707,10 +707,10 @@ def try_lift_scope_key(value)
 def try_lift_signal_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *SignalKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *SignalKey* | Exception]
 
 ### try_lift_start_cursor()
 
@@ -718,10 +718,10 @@ def try_lift_signal_key(value)
 def try_lift_start_cursor(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *StartCursor* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *StartCursor* | Exception]
 
 ### try_lift_tag()
 
@@ -729,10 +729,10 @@ def try_lift_start_cursor(value)
 def try_lift_tag(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *Tag* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *Tag* | Exception]
 
 ### try_lift_tenant_id()
 
@@ -740,10 +740,10 @@ def try_lift_tag(value)
 def try_lift_tenant_id(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *TenantId* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *TenantId* | Exception]
 
 ### try_lift_user_task_key()
 
@@ -751,10 +751,10 @@ def try_lift_tenant_id(value)
 def try_lift_user_task_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *UserTaskKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *UserTaskKey* | Exception]
 
 ### try_lift_username()
 
@@ -762,10 +762,10 @@ def try_lift_user_task_key(value)
 def try_lift_username(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *Username* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *Username* | Exception]
 
 ### try_lift_variable_key()
 
@@ -773,7 +773,7 @@ def try_lift_username(value)
 def try_lift_variable_key(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *VariableKey* | Exception]
+* **Parameters:**
+  **value** (*Any*)
+* **Return type:**
+  *Tuple*[bool, *VariableKey* | Exception]

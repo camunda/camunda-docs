@@ -11,11 +11,11 @@ mdx:
 
 The SDK supports three authentication strategies, controlled by `CAMUNDA_AUTH_STRATEGY`:
 
-| Strategy | When to use                                               |
-| -------- | --------------------------------------------------------- |
-| `NONE`   | Local development with unauthenticated Camunda (default)  |
+| Strategy | When to use |
+|----------|------------|
+| `NONE`   | Local development with unauthenticated Camunda (default) |
 | `OAUTH`  | Camunda SaaS or any OAuth 2.0 Client Credentials endpoint |
-| `BASIC`  | Self-Managed Camunda with Basic auth (username/password)  |
+| `BASIC`  | Self-Managed Camunda with Basic auth (username/password) |
 
 ## Auto-detection
 
