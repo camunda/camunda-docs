@@ -7,7 +7,7 @@ description: Delete all data for a completed or terminated process instance.
 Use process instance deletion to permanently remove all data associated with a completed or terminated process instance.
 
 :::warning
-Deletion is irreversible. You can restore deleted data only by restoring a backup of your cluster.
+Deletion is irreversible. Restore deleted data only by restoring a backup of your cluster.
 :::
 
 Delete a process instance using the [delete process instance endpoint](/apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instance.api.mdx), or multiple using the [delete process instances endpoint](/apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instances-batch-operation.api.mdx).
