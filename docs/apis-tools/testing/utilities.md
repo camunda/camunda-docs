@@ -233,8 +233,8 @@ void shouldMockChildProcess() {
 
 ### Child process with dynamic variables
 
-You can mock a child process with dynamic behavior that returns variables based on the variables of the parent process
-instance. The handler receives the parent variables and returns the variables for the child process.
+You can mock a child process with dynamic behavior whose output variables are derived from the parent process instance.
+The handler receives the parent variables and returns the child process variables.
 
 ```java
 @Test
@@ -244,7 +244,7 @@ void shouldMockChildProcess() {
         "AstronautTrainingProcess",
         parentVariables -> {
             final String astronautName = (String) parentVariables.get("astronautName");
-            final String grade = astronautName.equals("Zee") ? "excellent" : "good";
+            final String grade = "Zee".equals(astronautName) ? "excellent" : "good";
 
             return Map.of(
                 "trainingCompleted", true,

@@ -206,7 +206,7 @@ public class MyProcessTest {
 </Tabs>
 
 :::tip Shared runtime
-If you use the same runtime configuration for all test classes, then you can use
+If you use the same runtime configuration for all test classes, you can use
 a [shared runtime](configuration.md#shared-runtime) to speed up the test execution.
 :::
 

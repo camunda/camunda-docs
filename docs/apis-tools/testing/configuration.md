@@ -558,7 +558,7 @@ directory of your project and adding the fully qualified name of the container p
 com.example.WireMockContainerProvider
 ```
 
-In the `/camunda-container-runtime.properties` configuration file , we use a connector secret to bind the connector task
+In the `/camunda-container-runtime.properties` configuration file, we use a connector secret to bind the connector task
 to the WireMock container using its network alias `wiremock` and the exposed port `8080`.
 
 ```properties
