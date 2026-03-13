@@ -16,13 +16,13 @@ The Orchestration Cluster Admin interface centralizes all key administrative job
 
 Admin includes the following features:
 
-| Feature                   | Description                                                                                                                                                                                           |
-| :------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Unified access management | Authentication and authorization are handled consistently across all Orchestration Cluster components and APIs.                                                                                       |
-| Flexible authentication   | Admin supports multiple authentication modes, including no authentication, Basic authentication, and OpenID Connect (OIDC), depending on the deployment type.                                        |
-| Tenant management         | Multi-tenancy is managed directly within the Orchestration Cluster, allowing for clear separation of resources.                                                                                       |
-| [Cluster variables](/components/modeler/feel/cluster-variable/overview.md) | Manage configuration values centrally across your cluster, making them available in FEEL expressions.                                                     |
-| [User task listeners](/components/concepts/user-task-listeners.md)         | Configure global listeners that react to user task lifecycle events across the cluster.                                                                     |
+| Feature                                                     | Description                                                                                                                                                   |
+| :---------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Unified access management                                   | Authentication and authorization are handled consistently across all Orchestration Cluster components and APIs.                                               |
+| Flexible authentication                                     | Admin supports multiple authentication modes, including no authentication, Basic authentication, and OpenID Connect (OIDC), depending on the deployment type. |
+| Tenant management                                           | Multi-tenancy is managed directly within the Orchestration Cluster, allowing for clear separation of resources.                                               |
+| [Cluster variables](cluster-variables.md)                   | Manage configuration values centrally across your cluster, making them available in FEEL expressions.                                                         |
+| [Global user task listeners](global-user-task-listeners.md) | Configure cluster-wide listeners that react to user task lifecycle events across all processes.                                                               |
 
 For details about authorization concepts, resources, and configuration, see
 [Orchestration Cluster authorizations](../concepts/access-control/authorizations.md).
