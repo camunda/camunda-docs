@@ -36,7 +36,7 @@ The Camunda application components themselves (Zeebe, Operate, Tasklist, Optimiz
 
 ## Migration architecture
 
-The migration follows a four-phase approach designed to minimize downtime:
+The migration follows a five-phase approach designed to minimize downtime:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
@@ -53,12 +53,16 @@ The migration follows a four-phase approach designed to minimize downtime:
 │                                                                      │
 │  Phase 4 ✦ Validate           ─── no downtime ──────────────────── │
 │    Verify all components are healthy on the new infrastructure       │
+│                                                                      │
+│  Phase 5 ✦ Cleanup Bitnami    ─── no downtime ──────────────────── │
+│    Remove old Bitnami StatefulSets, PVCs, and migration artifacts    │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
 - **Phases 1 and 2** run alongside the live application with **no impact** on users.
 - **Phase 3** is the only phase that requires a **maintenance window** (typically 5–30 minutes).
 - **Phase 4** validates the migration and generates a report.
+- **Phase 5** removes old Bitnami resources and migration artifacts after you have confirmed the migration is successful.
 
 ### Downtime estimation
 
