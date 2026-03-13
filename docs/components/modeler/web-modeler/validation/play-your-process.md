@@ -260,9 +260,10 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 
 After selecting the **Play** tab in Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
 
+Play supports clusters secured with custom OIDC providers configured for Web Modeler.
+
 ### Limitations {#self-managed-limitations}
 
-- Play does not work with a custom OIDC provider.
 - The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior, and therefore are not supported when used with Play.
 - Play cannot check the presence of connector secrets in Self-Managed setups.
   If a secret is missing, Play will show an incident at runtime.
