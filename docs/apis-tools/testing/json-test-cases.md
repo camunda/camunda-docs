@@ -211,97 +211,10 @@ public class MyProcessTest {
 ## Examples
 
 You can find some example process tests using the JSON test cases
-on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example):
+on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example), like the following one:
 
-- [Invoice approval JSON test cases](https://github.com/camunda/camunda/blob/main/testing/camunda-process-test-example/src/test/resources/test-cases/invoice-approval.json)
-- [Invoice approval JUnit test class](https://github.com/camunda/camunda/blob/main/testing/camunda-process-test-example/src/test/java/io/camunda/InvoiceApprovalJsonTest.java)
-
-An example JSON test case file could look like this:
-
-```json
-{
-  "$schema": "https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json",
-  "testCases": [
-    {
-      "name": "Happy path",
-      "description": "The invoice should be approved.",
-      "instructions": [
-        {
-          "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
-          "jobType": "archive-invoice"
-        },
-        {
-          "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
-          "jobType": "add-invoice-to-accounting"
-        },
-        {
-          "type": "CREATE_PROCESS_INSTANCE",
-          "processDefinitionSelector": {
-            "processDefinitionId": "Process_InvoiceApproval"
-          },
-          "variables": {
-            "id": "INV-1001",
-            "amount": 12000,
-            "currency": "EUR",
-            "supplier": {
-              "id": "0815",
-              "name": "Acme GmbH"
-            },
-            "contactEmail": "accounting@acme.com"
-          }
-        },
-        {
-          "type": "ASSERT_USER_TASK",
-          "userTaskSelector": {
-            "elementId": "UserTask_ApproveInvoice"
-          },
-          "state": "IS_CREATED",
-          "assignee": "Zee"
-        },
-        {
-          "type": "COMPLETE_USER_TASK",
-          "userTaskSelector": {
-            "elementId": "UserTask_ApproveInvoice"
-          },
-          "variables": {
-            "approved": true
-          }
-        },
-        {
-          "type": "ASSERT_ELEMENT_INSTANCES",
-          "processInstanceSelector": {
-            "processDefinitionId": "Process_InvoiceApproval"
-          },
-          "elementSelectors": [
-            {
-              "elementId": "StartEvent_InvoiceReceived"
-            },
-            {
-              "elementId": "UserTask_ApproveInvoice"
-            },
-            {
-              "elementId": "ServiceTask_ArchiveInvoice"
-            },
-            {
-              "elementId": "ServiceTask_AddInvoiceAccounting"
-            },
-            {
-              "elementId": "EndEvent_InvoiceApproved"
-            }
-          ],
-          "state": "IS_COMPLETED_IN_ORDER"
-        },
-        {
-          "type": "ASSERT_PROCESS_INSTANCE",
-          "processInstanceSelector": {
-            "processDefinitionId": "Process_InvoiceApproval"
-          },
-          "state": "IS_COMPLETED"
-        }
-      ]
-    }
-  ]
-}
+```json reference referenceLinkText="Source" title="Invoice Approval JSON test case"
+https://github.com/camunda/camunda/blob/stable/8.9/testing/camunda-process-test-example/src/test/resources/test-cases/invoice-approval.json
 ```
 
 ## Reference: Instructions
