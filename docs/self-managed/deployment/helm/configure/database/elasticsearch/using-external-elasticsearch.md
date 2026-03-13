@@ -7,7 +7,7 @@ description: "Configure Camunda 8 Self-Managed to use an external Elasticsearch 
 
 Configure Camunda 8 Self-Managed to connect to an external Elasticsearch instance as a secondary storage backend. Elasticsearch is used for indexing and querying operational data consumed by multiple Camunda components. For a canonical definition, see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
 
-Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by default. To use Elasticsearch as secondary storage, you must explicitly enable it in your Helm values (`global.elasticsearch.enabled: true`). You can either deploy Elasticsearch using the [ECK operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) (recommended) or connect Camunda to an existing external Elasticsearch instance, either running inside the same Kubernetes cluster or outside it.
+Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by default. To use Elasticsearch as secondary storage, you must explicitly configure it in your Helm values under the component-specific options (`orchestration.data.secondaryStorage.elasticsearch` and `optimize.database.elasticsearch`). You can either deploy Elasticsearch using the [ECK operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) (recommended) or connect Camunda to an existing external Elasticsearch instance, either running inside the same Kubernetes cluster or outside it.
 
 :::note
 The bundled Elasticsearch Bitnami subchart (`elasticsearch.enabled: true`) is deprecated and will be removed in a future release. For production deployments, use the [ECK (Elastic Cloud on Kubernetes) operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) or a managed Elasticsearch service instead. See [deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for details.
@@ -27,43 +27,75 @@ Before configuring, collect the following information about your external Elasti
 
 ### Parameters
 
-| values.yaml option                                  | type    | default                             | description                                                                                                                                                                                                     |
-| --------------------------------------------------- | ------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `global.elasticsearch.enabled`                      | boolean | `false`                             | Enable or disable all components connecting to Elasticsearch.                                                                                                                                                   |
-| `global.elasticsearch.external.true`                | boolean | `false`                             | Set to `true` to connect to an external Elasticsearch instance.                                                                                                                                                 |
-| `global.elasticsearch.auth.username`                | string  | `""`                                | HTTP Basic username for Elasticsearch authentication.                                                                                                                                                           |
-| `global.elasticsearch.auth.password`                | string  | `""`                                | HTTP Basic password for Elasticsearch authentication.                                                                                                                                                           |
-| `global.elasticsearch.prefix`                       | string  | `zeebe-record`                      | Index prefix for `zeebe-record` indices. See [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md). |
-| `global.elasticsearch.tls.enabled`                  | boolean | `false`                             | Enables TLS when connecting to Elasticsearch.                                                                                                                                                                   |
-| `global.elasticsearch.tls.secret.inlineSecret`      | string  | `""`                                | TLS certificate specified directly in `values.yaml`.                                                                                                                                                            |
-| `global.elasticsearch.tls.secret.existingSecret`    | string  | `""`                                | Kubernetes Secret name containing a TLS certificate.                                                                                                                                                            |
-| `global.elasticsearch.tls.secret.existingSecretKey` | string  | `""`                                | Kubernetes Secret key with the TLS certificate.                                                                                                                                                                 |
-| `global.elasticsearch.url.protocol`                 | string  | `http`                              | Protocol to use when connecting to Elasticsearch. Possible values are `http` and `https`.                                                                                                                       |
-| `global.elasticsearch.url.host`                     | string  | `{{ .Release.Name }}-elasticsearch` | Hostname or IP address of the Elasticsearch instance.                                                                                                                                                           |
-| `global.elasticsearch.url.port`                     | integer | `9200`                              | Port number of the Elasticsearch instance.                                                                                                                                                                      |
-| `elasticsearch.enabled`                             | boolean | `false`                             | Enables or disables the bundled Elasticsearch subchart.                                                                                                                                                         |
+#### Orchestration Cluster secondary storage
+
+| values.yaml option                                                                | type   | default | description                                                                                           |
+| --------------------------------------------------------------------------------- | ------ | ------- | ----------------------------------------------------------------------------------------------------- |
+| `orchestration.data.secondaryStorage.type`                                        | string | `""`    | Type of secondary storage. Set to `elasticsearch` to use Elasticsearch.                               |
+| `orchestration.data.secondaryStorage.elasticsearch.url`                           | string | `""`    | URL for the Elasticsearch cluster as `scheme://host:port` (for example, `http://elasticsearch:9200`). |
+| `orchestration.data.secondaryStorage.elasticsearch.auth.username`                 | string | `""`    | Username for Elasticsearch authentication.                                                            |
+| `orchestration.data.secondaryStorage.elasticsearch.auth.secret.inlineSecret`      | string | `""`    | Elasticsearch password as a plain-text value (non-production only).                                   |
+| `orchestration.data.secondaryStorage.elasticsearch.auth.secret.existingSecret`    | string | `""`    | Reference to an existing Kubernetes Secret containing the password.                                   |
+| `orchestration.data.secondaryStorage.elasticsearch.auth.secret.existingSecretKey` | string | `""`    | Key within the existing Kubernetes Secret containing the password.                                    |
+| `orchestration.data.secondaryStorage.elasticsearch.tls.secret.existingSecret`     | string | `""`    | Reference to an existing Kubernetes Secret containing the TLS trust store.                            |
+| `orchestration.data.secondaryStorage.elasticsearch.tls.secret.existingSecretKey`  | string | `""`    | Key within the existing Kubernetes Secret for the TLS trust store.                                    |
+| `orchestration.index.prefix`                                                      | string | `""`    | Index prefix in Elasticsearch for the new Camunda exporter and the Orchestration Cluster.             |
+
+#### Optimize database
+
+| values.yaml option                                              | type    | default          | description                                                                                                                                                                                                     |
+| --------------------------------------------------------------- | ------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `optimize.database.elasticsearch.enabled`                       | boolean | `false`          | Enable Elasticsearch for Zeebe exporter and Optimize.                                                                                                                                                           |
+| `optimize.database.elasticsearch.external`                      | boolean | `false`          | Set to `true` to connect to an external Elasticsearch instance.                                                                                                                                                 |
+| `optimize.database.elasticsearch.auth.username`                 | string  | `""`             | Username for external Elasticsearch authentication.                                                                                                                                                             |
+| `optimize.database.elasticsearch.auth.secret.inlineSecret`      | string  | `""`             | Elasticsearch password as a plain-text value (non-production only).                                                                                                                                             |
+| `optimize.database.elasticsearch.auth.secret.existingSecret`    | string  | `""`             | Reference to an existing Kubernetes Secret containing the password.                                                                                                                                             |
+| `optimize.database.elasticsearch.auth.secret.existingSecretKey` | string  | `""`             | Key within the existing Kubernetes Secret containing the password.                                                                                                                                              |
+| `optimize.database.elasticsearch.prefix`                        | string  | `zeebe-record`   | Index prefix for `zeebe-record` indices. See [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md). |
+| `optimize.database.elasticsearch.tls.enabled`                   | boolean | `false`          | Enable TLS when connecting to Elasticsearch.                                                                                                                                                                    |
+| `optimize.database.elasticsearch.tls.secret.existingSecret`     | string  | `""`             | Name of the Kubernetes Secret containing a TLS certificate.                                                                                                                                                     |
+| `optimize.database.elasticsearch.tls.secret.existingSecretKey`  | string  | `externaldb.jks` | Key within the secret containing the TLS certificate.                                                                                                                                                           |
+| `optimize.database.elasticsearch.url.protocol`                  | string  | `""`             | Protocol to use when connecting to Elasticsearch. Possible values are `http` and `https`.                                                                                                                       |
+| `optimize.database.elasticsearch.url.host`                      | string  | `""`             | Hostname or IP address of the Elasticsearch instance.                                                                                                                                                           |
+| `optimize.database.elasticsearch.url.port`                      | integer | `0`              | Port number of the Elasticsearch instance.                                                                                                                                                                      |
+
+#### Bundled Elasticsearch subchart (deprecated)
+
+| values.yaml option      | type    | default | description                                             |
+| ----------------------- | ------- | ------- | ------------------------------------------------------- |
+| `elasticsearch.enabled` | boolean | `false` | Enables or disables the bundled Elasticsearch subchart. |
 
 ### Example usage
 
 #### Connect to external Elasticsearch without a certificate
 
-By default, `global.elasticsearch.url.protocol` is set to `http`. This makes it possible to connect to Elasticsearch without TLS.
-
 Configure the Camunda 8 Self-Managed Helm chart as follows:
 
 ```yaml
-global:
-  elasticsearch:
-    enabled: true
-    external: true
-    auth:
-      username: elastic
-      secret:
-        inlineSecret: pass
-    url:
-      protocol: http
-      host: elastic.example.com
-      port: 443
+orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
+      elasticsearch:
+        url: http://elastic.example.com:443
+        auth:
+          username: elastic
+          secret:
+            inlineSecret: pass
+
+optimize:
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      auth:
+        username: elastic
+        secret:
+          inlineSecret: pass
+      url:
+        protocol: http
+        host: elastic.example.com
+        port: 443
 
 elasticsearch:
   enabled: false
@@ -88,21 +120,38 @@ If the Elasticsearch cluster accepts only `https` requests with a self-signed ce
 1. Configure the Camunda 8 Self-Managed Helm chart:
 
    ```yaml
-   global:
-     elasticsearch:
-       enabled: true
-       external: true
-       tls:
+   orchestration:
+     data:
+       secondaryStorage:
+         type: elasticsearch
+         elasticsearch:
+           url: https://elastic.example.com:443
+           auth:
+             username: elastic
+             secret:
+               inlineSecret: pass
+           tls:
+             secret:
+               existingSecret: elastic-jks
+               existingSecretKey: externaldb.jks
+
+   optimize:
+     database:
+       elasticsearch:
          enabled: true
-         existingSecret: elastic-jks
-       auth:
-         username: elastic
-         secret:
-           inlineSecret: pass
-       url:
-         protocol: https
-         host: elastic.example.com
-         port: 443
+         external: true
+         tls:
+           enabled: true
+           secret:
+             existingSecret: elastic-jks
+         auth:
+           username: elastic
+           secret:
+             inlineSecret: pass
+         url:
+           protocol: https
+           host: elastic.example.com
+           port: 443
 
    elasticsearch:
      enabled: false
@@ -113,18 +162,30 @@ If the Elasticsearch cluster accepts only `https` requests with a self-signed ce
 This configuration works with managed Elasticsearch services. It has been tested with Elastic Cloud on Google Cloud.
 
 ```yaml
-global:
-  elasticsearch:
-    enabled: true
-    external: true
-    auth:
-      username: elastic
-      secret:
-        inlineSecret: pass
-    url:
-      protocol: https
-      host: elastic.example.com
-      port: 443
+orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
+      elasticsearch:
+        url: https://elastic.example.com:443
+        auth:
+          username: elastic
+          secret:
+            inlineSecret: pass
+
+optimize:
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      auth:
+        username: elastic
+        secret:
+          inlineSecret: pass
+      url:
+        protocol: https
+        host: elastic.example.com
+        port: 443
 
 elasticsearch:
   enabled: false
@@ -135,23 +196,33 @@ elasticsearch:
 When running multiple Camunda instances on a shared Elasticsearch cluster, use custom index prefixes to isolate data:
 
 ```yaml
-global:
-  elasticsearch:
-    enabled: true
-    external: true
-    prefix: my-env-zeebe # Prefix for zeebe-record indices
-    auth:
-      username: elastic
-      secret:
-        inlineSecret: pass
-    url:
-      protocol: https
-      host: elastic.example.com
-      port: 443
-
 orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
+      elasticsearch:
+        url: https://elastic.example.com:443
+        auth:
+          username: elastic
+          secret:
+            inlineSecret: pass
   index:
     prefix: my-env-camunda # Prefix for Orchestration Cluster indices
+
+optimize:
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      prefix: my-env-zeebe # Prefix for zeebe-record indices
+      auth:
+        username: elastic
+        secret:
+          inlineSecret: pass
+      url:
+        protocol: https
+        host: elastic.example.com
+        port: 443
 
 elasticsearch:
   enabled: false
