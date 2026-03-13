@@ -23,7 +23,7 @@ Before proceeding with the setup, ensure the following requirements are met:
   - **Identity Provider (IdP)**: An OIDC-compatible identity provider for authentication. See [Authentication and authorization](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) for supported options.
 
   :::tip No managed services available?
-  If managed PostgreSQL, Elasticsearch, or an external OIDC provider are not available in your organization, you can deploy these infrastructure components on Kubernetes using official operators. See [Required infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions.
+  If managed PostgreSQL, Elasticsearch, or an external OIDC provider are not available in your organization, you can deploy these infrastructure components on Kubernetes using official operators. See [Deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions.
   :::
 
 - **Ingress NGINX**: Ensure the [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.

@@ -144,7 +144,7 @@ Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by 
 
 ## Full Cluster
 
-To deploy the full Camunda 8 platform with all components (Optimize, Web Modeler, Console, Management Identity, and Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). The full deployment requires OIDC-based authentication and [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) (PostgreSQL, Elasticsearch, Keycloak).
+To deploy the full Camunda 8 platform with all components (Optimize, Web Modeler, Console, Management Identity, and Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). The full deployment requires OIDC-based authentication and [required dependencies deployed with operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) (PostgreSQL, Elasticsearch, Keycloak).
 
 ## Troubleshoot installation issues
 
