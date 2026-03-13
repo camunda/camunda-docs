@@ -21,6 +21,11 @@ Before proceeding with the setup, ensure the following requirements are met:
   - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. For step-by-step instructions, see the [Aurora PostgreSQL module setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup) guide.
   - **Amazon OpenSearch**: The secondary datastore for the Orchestration Cluster, the Camunda 8 process orchestration engine. For step-by-step instructions, see the [OpenSearch](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eksctl.md#4-opensearch-domain) guide.
   - **Identity Provider (IdP)**: An OIDC-compatible identity provider for authentication. See [Authentication and authorization](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) for supported options.
+
+  :::tip No managed services available?
+  If managed PostgreSQL, Elasticsearch, or an external OIDC provider are not available in your organization, you can deploy these infrastructure components on Kubernetes using official operators. See [Deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions.
+  :::
+
 - **Ingress NGINX**: Ensure the [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - To store the backups of the Camunda web applications. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. See the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
 - **Amazon S3** - An additional bucket to store backup files of the Orchestration Cluster brokers.
