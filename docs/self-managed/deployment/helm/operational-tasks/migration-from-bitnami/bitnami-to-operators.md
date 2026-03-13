@@ -30,6 +30,7 @@ Before starting the migration, ensure you have:
 - [`envsubst`](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) available (usually included in `gettext`)
 - [`jq`](https://jqlang.github.io/jq/download/) installed
 - [`yq`](https://github.com/mikefarah/yq) installed (for selective CNPG cluster deployment)
+- `base64` and `openssl` available (used for credential management)
 - Sufficient cluster resources to run both old and new infrastructure temporarily
 
 :::tip Tool versions
@@ -75,7 +76,9 @@ generic/kubernetes/
     ├── 2-backup.sh                  # Phase 2: Initial backup
     ├── 3-cutover.sh                 # Phase 3: Freeze → Restore → Switch
     ├── 4-validate.sh                # Phase 4: Validate everything
+    ├── 5-cleanup-bitnami.sh         # Phase 5: Remove old Bitnami resources
     ├── rollback.sh                  # Emergency rollback
+    ├── .state/                      # Migration state tracking (auto-generated)
     ├── hooks/                       # Custom hook scripts (optional)
     ├── jobs/                        # Kubernetes Job templates
     │   ├── pg-backup.job.yml
@@ -97,24 +100,24 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ### Key configuration variables
 
-| Variable                     | Default         | Description                                                                    |
-| ---------------------------- | --------------- | ------------------------------------------------------------------------------ |
-| `NAMESPACE`                  | `camunda`       | Kubernetes namespace of your Camunda installation                              |
-| `CAMUNDA_RELEASE_NAME`       | `camunda`       | Helm release name                                                              |
-| `CAMUNDA_HELM_CHART_VERSION` | (chart version) | Target Helm chart version for the upgrade                                      |
-| `CAMUNDA_DOMAIN`             | (empty)         | Domain for Keycloak Ingress. Leave empty for port-forward setups               |
-| `IDENTITY_DB_NAME`           | `identity`      | Identity database name (must match the source installation)                    |
-| `IDENTITY_DB_USER`           | `identity`      | Identity database user (must match the source installation)                    |
-| `KEYCLOAK_DB_NAME`           | `keycloak`      | Keycloak database name (must match the source installation)                    |
-| `KEYCLOAK_DB_USER`           | `keycloak`      | Keycloak database user (must match the source installation)                    |
-| `WEBMODELER_DB_NAME`         | `webmodeler`    | Web Modeler database name (must match the source installation)                 |
-| `WEBMODELER_DB_USER`         | `webmodeler`    | Web Modeler database user (must match the source installation)                 |
-| `BACKUP_PVC`                 | `migration-backup-pvc` | PVC name for storing backup data                                        |
-| `BACKUP_STORAGE_SIZE`        | `50Gi`          | Backup PVC size (must fit all database dumps)                                  |
-| `MIGRATE_IDENTITY`           | `true`          | Migrate Identity PostgreSQL database                                           |
-| `MIGRATE_KEYCLOAK`           | `true`          | Migrate Keycloak and its PostgreSQL database                                   |
-| `MIGRATE_WEBMODELER`         | `true`          | Migrate Web Modeler PostgreSQL database                                        |
-| `MIGRATE_ELASTICSEARCH`      | `true`          | Migrate Elasticsearch data                                                     |
+| Variable                     | Default                | Description                                                      |
+| ---------------------------- | ---------------------- | ---------------------------------------------------------------- |
+| `NAMESPACE`                  | `camunda`              | Kubernetes namespace of your Camunda installation                |
+| `CAMUNDA_RELEASE_NAME`       | `camunda`              | Helm release name                                                |
+| `CAMUNDA_HELM_CHART_VERSION` | (chart version)        | Target Helm chart version for the upgrade                        |
+| `CAMUNDA_DOMAIN`             | (empty)                | Domain for Keycloak Ingress. Leave empty for port-forward setups |
+| `IDENTITY_DB_NAME`           | `identity`             | Identity database name (must match the source installation)      |
+| `IDENTITY_DB_USER`           | `identity`             | Identity database user (must match the source installation)      |
+| `KEYCLOAK_DB_NAME`           | `keycloak`             | Keycloak database name (must match the source installation)      |
+| `KEYCLOAK_DB_USER`           | `keycloak`             | Keycloak database user (must match the source installation)      |
+| `WEBMODELER_DB_NAME`         | `webmodeler`           | Web Modeler database name (must match the source installation)   |
+| `WEBMODELER_DB_USER`         | `webmodeler`           | Web Modeler database user (must match the source installation)   |
+| `BACKUP_PVC`                 | `migration-backup-pvc` | PVC name for storing backup data                                 |
+| `BACKUP_STORAGE_SIZE`        | `50Gi`                 | Backup PVC size (must fit all database dumps)                    |
+| `MIGRATE_IDENTITY`           | `true`                 | Migrate Identity PostgreSQL database                             |
+| `MIGRATE_KEYCLOAK`           | `true`                 | Migrate Keycloak and its PostgreSQL database                     |
+| `MIGRATE_WEBMODELER`         | `true`                 | Migrate Web Modeler PostgreSQL database                          |
+| `MIGRATE_ELASTICSEARCH`      | `true`                 | Migrate Elasticsearch data                                       |
 
 Set any `MIGRATE_*` variable to `false` to skip a component — for example, if it is not deployed or already uses an external service.
 
@@ -122,14 +125,14 @@ Set any `MIGRATE_*` variable to `false` to skip a component — for example, if 
 
 These variables control the operator deployments. Defaults work for most setups:
 
-| Variable                   | Default           | Description                                     |
-| -------------------------- | ----------------- | ----------------------------------------------- |
-| `CNPG_OPERATOR_NAMESPACE`  | `cnpg-system`     | Namespace for the CloudNativePG operator         |
-| `ECK_OPERATOR_NAMESPACE`   | `elastic-system`  | Namespace for the ECK operator                   |
-| `CNPG_IDENTITY_CLUSTER`    | `pg-identity`     | CNPG cluster name for Identity                   |
-| `CNPG_KEYCLOAK_CLUSTER`    | `pg-keycloak`     | CNPG cluster name for Keycloak                   |
-| `CNPG_WEBMODELER_CLUSTER`  | `pg-webmodeler`   | CNPG cluster name for Web Modeler                |
-| `ECK_CLUSTER_NAME`         | `elasticsearch`   | ECK Elasticsearch cluster name                   |
+| Variable                  | Default          | Description                              |
+| ------------------------- | ---------------- | ---------------------------------------- |
+| `CNPG_OPERATOR_NAMESPACE` | `cnpg-system`    | Namespace for the CloudNativePG operator |
+| `ECK_OPERATOR_NAMESPACE`  | `elastic-system` | Namespace for the ECK operator           |
+| `CNPG_IDENTITY_CLUSTER`   | `pg-identity`    | CNPG cluster name for Identity           |
+| `CNPG_KEYCLOAK_CLUSTER`   | `pg-keycloak`    | CNPG cluster name for Keycloak           |
+| `CNPG_WEBMODELER_CLUSTER` | `pg-webmodeler`  | CNPG cluster name for Web Modeler        |
+| `ECK_CLUSTER_NAME`        | `elasticsearch`  | ECK Elasticsearch cluster name           |
 
 Once configured, source the file:
 
@@ -185,7 +188,7 @@ The Keycloak CR uses the v2 hostname provider (Keycloak 25+). The `hostname` fie
 
 ## Step 3: Run the migration
 
-The migration follows four sequential phases. Each phase can be re-run safely (idempotent).
+The migration follows five sequential phases. Each phase can be re-run safely (idempotent).
 
 ### Phase 1: Deploy target infrastructure (no downtime)
 
@@ -298,6 +301,36 @@ This phase verifies that all components are healthy:
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/4-validate.sh
 ```
 
+### Phase 5: Cleanup Bitnami resources (no downtime)
+
+:::caution Wait before cleanup
+Do not run this phase immediately after validation. Operate with the new infrastructure for at least 72 hours to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup.
+:::
+
+After confirming the migration is successful, remove old Bitnami StatefulSets, PVCs, services, and the migration backup PVC:
+
+```bash
+bash 5-cleanup-bitnami.sh
+```
+
+What happens:
+
+1. The script requires Phase 4 to be completed and displays a **destructive operation warning** with a confirmation prompt.
+2. **Deletes old Bitnami PostgreSQL** StatefulSets, their PVCs, and headless services (for each migrated component: Identity, Keycloak, Web Modeler).
+3. **Deletes old Bitnami Elasticsearch** StatefulSet, PVCs, and services.
+4. **Deletes old Bitnami Keycloak** StatefulSet.
+5. **Deletes the migration backup PVC**.
+6. **Re-verifies** that all Camunda components and operator-managed targets remain healthy after cleanup.
+7. Suggests removing the `reindex.remote.whitelist` setting from the ECK Elasticsearch configuration as a post-cleanup step.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/5-cleanup-bitnami.sh
+```
+
+:::info Idempotent cleanup
+The script checks whether each resource exists before attempting deletion, so it can be safely re-run if interrupted.
+:::
+
 ## Non-interactive mode
 
 For CI/CD pipelines or automated migrations, use the `--yes` flag to skip all confirmation prompts:
@@ -308,6 +341,8 @@ bash 1-deploy-targets.sh --yes
 bash 2-backup.sh --yes
 bash 3-cutover.sh --yes
 bash 4-validate.sh --yes
+# After confirming stability (wait at least 72 hours):
+bash 5-cleanup-bitnami.sh --yes
 ```
 
 Additional flags:
@@ -334,6 +369,8 @@ You can inject custom logic before or after each migration phase by placing exec
 | `post-phase-3.sh`  | After cutover is complete               |
 | `pre-phase-4.sh`   | Before validation                       |
 | `post-phase-4.sh`  | After validation                        |
+| `pre-phase-5.sh`   | Before Bitnami cleanup                  |
+| `post-phase-5.sh`  | After Bitnami cleanup                   |
 | `pre-rollback.sh`  | Before rollback                         |
 | `post-rollback.sh` | After rollback                          |
 
@@ -371,7 +408,15 @@ Rollback is available after Phase 3 (cutover). Before that, simply stop the migr
 
 ## Post-migration cleanup
 
-After validating the migration and confirming everything works correctly, remove the old Bitnami resources:
+After validating the migration and confirming everything works correctly for at least 72 hours, run Phase 5 to remove old Bitnami resources:
+
+```bash
+bash 5-cleanup-bitnami.sh
+```
+
+This script automatically removes old Bitnami PostgreSQL, Elasticsearch, and Keycloak StatefulSets along with their PVCs, headless services, and the migration backup PVC. See [Phase 5](#phase-5-cleanup-bitnami-resources-no-downtime) for details.
+
+If you prefer to clean up manually, you can delete the resources individually:
 
 ```bash
 # Delete old PostgreSQL StatefulSets and their PVCs
@@ -388,6 +433,8 @@ kubectl delete statefulset ${CAMUNDA_RELEASE_NAME}-keycloak -n ${NAMESPACE} --ig
 # Delete migration backup PVC
 kubectl delete pvc migration-backup-pvc -n ${NAMESPACE}
 ```
+
+After cleanup, remove the `reindex.remote.whitelist` setting from the ECK Elasticsearch configuration since it is no longer needed.
 
 :::caution Verify before deleting
 Before deleting old PVCs, verify that the migration is fully successful and all data has been restored correctly. List old PVCs with:
@@ -479,7 +526,7 @@ Before running this migration in production, follow these operational readiness 
 ### Staging rehearsal
 
 1. **Clone your production environment** to a staging cluster (same Helm chart version, same component configuration, comparable data volumes).
-2. **Run the full migration end-to-end** in staging, including all four phases, validation, and clean up.
+2. **Run the full migration end-to-end** in staging, including all five phases, validation, and cleanup.
 3. **Measure actual timings**: record how long each phase takes, especially the `2-backup.sh` and `3-cutover.sh` phases, as they determine your downtime window.
 4. **Test rollback**: after a successful staging migration, intentionally run `bash rollback.sh` to verify you can revert cleanly.
 

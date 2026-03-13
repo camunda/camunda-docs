@@ -443,7 +443,13 @@ bash rollback.sh
 
 ## Post-migration cleanup
 
-After confirming the migration is successful, remove old Bitnami resources as described in the [operator-based migration cleanup](./bitnami-to-operators.md#post-migration-cleanup).
+After confirming the migration is successful (wait at least 72 hours), remove old Bitnami resources by running the cleanup script:
+
+```bash
+bash 5-cleanup-bitnami.sh
+```
+
+For details, see the [operator-based migration cleanup](./bitnami-to-operators.md#post-migration-cleanup).
 
 ## Cloud-specific considerations
 
@@ -471,7 +477,7 @@ Before running this migration in production, follow these operational readiness 
 ### Staging rehearsal
 
 1. **Provision staging managed services** that mirror your production setup (same cloud provider, same region, same tier/SKU).
-2. **Run the full migration end-to-end** in staging, including all four phases plus validation.
+2. **Run the full migration end-to-end** in staging, including all five phases plus validation.
 3. **Measure actual timings**: record how long each phase takes. Network latency to external services (RDS, Cloud SQL, OpenSearch) may increase backup/restore times compared to in-cluster operators.
 4. **Test rollback**: after a successful staging migration, run `bash rollback.sh` to verify the Helm values revert correctly and Camunda reconnects to the Bitnami subcharts.
 
