@@ -47,22 +47,22 @@ These secrets are used by Camunda applications and external integrations. Config
 
 ### Secrets using the structured pattern
 
-| **Secret**                                      | **Chart values key**                                            | **Type** | **Purpose**                                                              |
-| ----------------------------------------------- | --------------------------------------------------------------- | -------- | ------------------------------------------------------------------------ |
-| **Enterprise License Key**                      | `global.license.secret`                                         | Internal | Camunda Enterprise license key                                           |
-| **Identity First User Password**                | `identity.firstUser.secret`                                     | Internal | Default user password (`demo/demo`)                                      |
-| **OAuth Client Secret (Admin)**                 | `global.identity.auth.admin.secret`                             | Internal | OAuth admin client secret for administrative operations                  |
-| **OAuth Client Secret (Connectors)**            | `connectors.security.authentication.oidc.secret`                | Internal | OAuth client secret for connectors                                       |
-| **OAuth Client Secret (Orchestration)**         | `orchestration.security.authentication.oidc.secret`             | Internal | OAuth client secret for Orchestration Cluster                            |
-| **OAuth Client Secret (Optimize)**              | `global.identity.auth.optimize.secret`                          | Internal | OAuth client secret for Optimize                                         |
-| **Identity External Database Password**         | `identity.externalDatabase.secret`                              | External | Password for external PostgreSQL if using an external DB for Identity    |
-| **WebModeler External Database Password**       | `webModeler.restapi.externalDatabase.secret`                    | External | Password for external PostgreSQL if using an external DB for Web Modeler |
-| **SMTP Password**                               | `webModeler.restapi.mail.secret`                                | External | SMTP credentials for sending email notifications                         |
-| **RDBMS Auth**                                  | `orchestration.data.secondaryStorage.rdbms.secret`              | External | Password for external RDBMS authentication (basic auth)                  |
-| **External Elasticsearch Auth (Orchestration)** | `orchestration.data.secondaryStorage.elasticsearch.auth.secret` | External | Password for external Elasticsearch authentication (basic auth)          |
-| **External OpenSearch Auth (Orchestration)**    | `orchestration.data.secondaryStorage.opensearch.auth.secret`    | External | Password for external OpenSearch authentication (basic auth)             |
-| **External Elasticsearch Auth (Optimize)**      | `optimize.database.elasticsearch.auth.secret`                   | External | Password for external Elasticsearch authentication (basic auth)          |
-| **External OpenSearch Auth (Optimize)**         | `optimize.database.opensearch.auth.secret`                      | External | Password for external OpenSearch authentication (basic auth)             |
+| **Secret**                                      | **Chart values key**                                            | **Type** | **Purpose**                                                                      |
+| ----------------------------------------------- | --------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------- |
+| **Enterprise License Key**                      | `global.license.secret`                                         | Internal | Camunda Enterprise license key                                                   |
+| **Identity First User Password**                | `identity.firstUser.secret`                                     | Internal | Default user password (`demo/demo`)                                              |
+| **OAuth Client Secret (Admin)**                 | `global.identity.auth.admin.secret`                             | Internal | OAuth admin client secret for administrative operations                          |
+| **OAuth Client Secret (Connectors)**            | `connectors.security.authentication.oidc.secret`                | Internal | OAuth client secret for connectors                                               |
+| **OAuth Client Secret (Orchestration)**         | `orchestration.security.authentication.oidc.secret`             | Internal | OAuth client secret for Orchestration Cluster                                    |
+| **OAuth Client Secret (Optimize)**              | `global.identity.auth.optimize.secret`                          | Internal | OAuth client secret for Optimize                                                 |
+| **Identity External Database Password**         | `identity.externalDatabase.secret`                              | External | Password for external PostgreSQL when using an external database for Identity    |
+| **Web Modeler External Database Password**      | `webModeler.restapi.externalDatabase.secret`                    | External | Password for external PostgreSQL when using an external database for Web Modeler |
+| **SMTP Password**                               | `webModeler.restapi.mail.secret`                                | External | SMTP credentials for sending email notifications                                 |
+| **RDBMS Auth**                                  | `orchestration.data.secondaryStorage.rdbms.secret`              | External | Password for external RDBMS authentication (basic auth)                          |
+| **External Elasticsearch Auth (Orchestration)** | `orchestration.data.secondaryStorage.elasticsearch.auth.secret` | External | Password for external Elasticsearch authentication (basic auth)                  |
+| **External OpenSearch Auth (Orchestration)**    | `orchestration.data.secondaryStorage.opensearch.auth.secret`    | External | Password for external OpenSearch authentication (basic auth)                     |
+| **External Elasticsearch Auth (Optimize)**      | `optimize.database.elasticsearch.auth.secret`                   | External | Password for external Elasticsearch authentication (basic auth)                  |
+| **External OpenSearch Auth (Optimize)**         | `optimize.database.opensearch.auth.secret`                      | External | Password for external OpenSearch authentication (basic auth)                     |
 
 ### Secrets using Bitnami subchart patterns
 
@@ -405,15 +405,15 @@ stringData:
   webmodeler-postgresql-admin-password: "${WEB_MODELER_POSTGRESQL_ADMIN_SECRET}"
   webmodeler-postgresql-user-password: "${WEB_MODELER_POSTGRESQL_USER_SECRET}"
 
-  # Only if connecting to elasticsearch
+  # Only if connecting to Elasticsearch
   orchestration-elasticsearch-password: "${ORCHESTRATION_ELASTICSEARCH_SECRET}"
   optimize-elasticsearch-password: "${OPTIMIZE_ELASTICSEARCH_SECRET}"
 
-  # Only if connecting to opensearch
+  # Only if connecting to OpenSearch
   orchestration-opensearch-password: "${ORCHESTRATION_OPENSEARCH_SECRET}"
   optimize-opensearch-password: "${OPTIMIZE_OPENSEARCH_SECRET}"
 
-  # Only if connecting to an RDBMS
+  # Only if connecting to RDBMS
   orchestration-rdbms-password: "${ORCHESTRATION_RDBMS_SECRET}"
 EOF
 ```

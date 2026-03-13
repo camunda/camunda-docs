@@ -30,7 +30,7 @@ To connect to OpenSearch using basic authentication, follow the configuration be
 
 ### Parameters
 
-#### Orchestration cluster secondary storage
+#### Orchestration Cluster secondary storage
 
 | Parameter                                                                      | Type   | Default | Description                                                                                     |
 | ------------------------------------------------------------------------------ | ------ | ------- | ----------------------------------------------------------------------------------------------- |
@@ -42,7 +42,7 @@ To connect to OpenSearch using basic authentication, follow the configuration be
 | `orchestration.data.secondaryStorage.opensearch.auth.secret.existingSecretKey` | string | `""`    | Key within the existing Kubernetes Secret containing the password.                              |
 | `orchestration.data.secondaryStorage.opensearch.tls.secret.existingSecret`     | string | `""`    | Reference to an existing Kubernetes Secret containing the TLS trust store.                      |
 | `orchestration.data.secondaryStorage.opensearch.tls.secret.existingSecretKey`  | string | `""`    | Key within the existing Kubernetes Secret for the TLS trust store.                              |
-| `orchestration.index.prefix`                                                   | string | `""`    | Index prefix in OpenSearch for the new Camunda exporter and Orchestration Cluster.              |
+| `orchestration.index.prefix`                                                   | string | `""`    | Index prefix in OpenSearch for the new Camunda exporter and the Orchestration Cluster.          |
 
 #### Optimize database
 
@@ -56,10 +56,10 @@ To connect to OpenSearch using basic authentication, follow the configuration be
 | `optimize.database.opensearch.auth.secret.existingSecretKey` | string  | `""`             | Key within the existing Kubernetes Secret containing the password.                                                                                                                                              |
 | `optimize.database.opensearch.prefix`                        | string  | `zeebe-record`   | Index prefix for `zeebe-record` indices. See [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md). |
 | `optimize.database.opensearch.tls.enabled`                   | boolean | `false`          | Enable TLS for external OpenSearch.                                                                                                                                                                             |
-| `optimize.database.opensearch.tls.secret.existingSecret`     | string  | `""`             | Kubernetes Secret name containing a TLS certificate.                                                                                                                                                            |
+| `optimize.database.opensearch.tls.secret.existingSecret`     | string  | `""`             | Name of the Kubernetes Secret containing a TLS certificate.                                                                                                                                                     |
 | `optimize.database.opensearch.tls.secret.existingSecretKey`  | string  | `externaldb.jks` | Key within the secret containing the TLS certificate.                                                                                                                                                           |
 | `optimize.database.opensearch.url.protocol`                  | string  | `""`             | Access protocol for OpenSearch. Possible values are `http` and `https`.                                                                                                                                         |
-| `optimize.database.opensearch.url.host`                      | string  | `""`             | OpenSearch host, ideally the service name inside the namespace.                                                                                                                                                 |
+| `optimize.database.opensearch.url.host`                      | string  | `""`             | OpenSearch host, ideally the service name within the namespace.                                                                                                                                                 |
 | `optimize.database.opensearch.url.port`                      | integer | `0`              | Port used to access OpenSearch.                                                                                                                                                                                 |
 
 ### Example usage
@@ -98,7 +98,7 @@ optimize:
         port: 443
 ```
 
-This configuration connects Camunda to an external Amazon OpenSearch Service instance. The orchestration cluster uses OpenSearch as its secondary storage backend, and Optimize is configured to query the same OpenSearch instance.
+This configuration connects Camunda to an external Amazon OpenSearch Service instance. The Orchestration Cluster uses OpenSearch as its secondary storage backend, and Optimize is configured to query the same OpenSearch instance.
 
 To avoid storing the username and password in plaintext in your `values.yaml`, reference a Kubernetes secret.
 For details and examples, see [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md).

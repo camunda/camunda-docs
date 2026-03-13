@@ -27,7 +27,7 @@ Before configuring, collect the following information about your external Elasti
 
 ### Parameters
 
-#### Orchestration cluster secondary storage
+#### Orchestration Cluster secondary storage
 
 | values.yaml option                                                                | type   | default | description                                                                                           |
 | --------------------------------------------------------------------------------- | ------ | ------- | ----------------------------------------------------------------------------------------------------- |
@@ -39,7 +39,7 @@ Before configuring, collect the following information about your external Elasti
 | `orchestration.data.secondaryStorage.elasticsearch.auth.secret.existingSecretKey` | string | `""`    | Key within the existing Kubernetes Secret containing the password.                                    |
 | `orchestration.data.secondaryStorage.elasticsearch.tls.secret.existingSecret`     | string | `""`    | Reference to an existing Kubernetes Secret containing the TLS trust store.                            |
 | `orchestration.data.secondaryStorage.elasticsearch.tls.secret.existingSecretKey`  | string | `""`    | Key within the existing Kubernetes Secret for the TLS trust store.                                    |
-| `orchestration.index.prefix`                                                      | string | `""`    | Index prefix in Elasticsearch for the new Camunda exporter and Orchestration Cluster.                 |
+| `orchestration.index.prefix`                                                      | string | `""`    | Index prefix in Elasticsearch for the new Camunda exporter and the Orchestration Cluster.             |
 
 #### Optimize database
 
@@ -52,8 +52,8 @@ Before configuring, collect the following information about your external Elasti
 | `optimize.database.elasticsearch.auth.secret.existingSecret`    | string  | `""`             | Reference to an existing Kubernetes Secret containing the password.                                                                                                                                             |
 | `optimize.database.elasticsearch.auth.secret.existingSecretKey` | string  | `""`             | Key within the existing Kubernetes Secret containing the password.                                                                                                                                              |
 | `optimize.database.elasticsearch.prefix`                        | string  | `zeebe-record`   | Index prefix for `zeebe-record` indices. See [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md). |
-| `optimize.database.elasticsearch.tls.enabled`                   | boolean | `false`          | Enables TLS when connecting to Elasticsearch.                                                                                                                                                                   |
-| `optimize.database.elasticsearch.tls.secret.existingSecret`     | string  | `""`             | Kubernetes Secret name containing a TLS certificate.                                                                                                                                                            |
+| `optimize.database.elasticsearch.tls.enabled`                   | boolean | `false`          | Enable TLS when connecting to Elasticsearch.                                                                                                                                                                    |
+| `optimize.database.elasticsearch.tls.secret.existingSecret`     | string  | `""`             | Name of the Kubernetes Secret containing a TLS certificate.                                                                                                                                                     |
 | `optimize.database.elasticsearch.tls.secret.existingSecretKey`  | string  | `externaldb.jks` | Key within the secret containing the TLS certificate.                                                                                                                                                           |
 | `optimize.database.elasticsearch.url.protocol`                  | string  | `""`             | Protocol to use when connecting to Elasticsearch. Possible values are `http` and `https`.                                                                                                                       |
 | `optimize.database.elasticsearch.url.host`                      | string  | `""`             | Hostname or IP address of the Elasticsearch instance.                                                                                                                                                           |
