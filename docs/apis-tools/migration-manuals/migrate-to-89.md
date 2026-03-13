@@ -3,6 +3,7 @@ id: migrate-to-89
 title: "Camunda 8.9 API migration guide"
 sidebar_label: "Upgrade to Camunda 8.9"
 description: "Migrate your API integrations, SDKs, and generated clients to Camunda 8.9. Covers breaking changes, deprecations, and step-by-step migration actions."
+toc_max_heading_level: 2
 ---
 
 import Tabs from "@theme/Tabs";
@@ -14,40 +15,40 @@ Migrate your API integrations, SDKs, and generated clients to Camunda 8.9.
 
 This guide details the API and SDK changes introduced in Camunda 8.9 that require customer action.
 
-Details are provided for each integration type, including what changed, why, and what action you must take:
+Details are provided for each integration type, including what changed, why, and what action you must take.
 
-| Integration type       | Description                                              |
-| :--------------------- | :------------------------------------------------------- |
-| Official SDK users     | Java client, TypeScript SDK, Python SDK, C# SDK          |
-| Generated-client users | Clients generated from the Camunda OpenAPI specification |
-| Custom integrations    | Custom code that calls the Camunda REST API directly     |
+| Integration type       | Description                                               |
+| :--------------------- | :-------------------------------------------------------- |
+| Official SDK users     | Java client, TypeScript SDK, Python SDK, C# SDK.          |
+| Generated-client users | Clients generated from the Camunda OpenAPI specification. |
+| Custom integrations    | Custom code that calls the Camunda REST API directly.     |
 
 :::info
-For the full list of changes, see the [8.9 release announcements](/reference/announcements-release-notes/890/890-announcements.md) and [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+For a full list of changes, see the [8.9 release announcements](/reference/announcements-release-notes/890/890-announcements.md) and [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 :::
 
-## Upgrade checklist
+## Upgrade steps
 
 Complete the following steps in this guide:
 
 1. Upgrade to the latest official Camunda SDK versions.
-2. If you generate clients from OpenAPI, regenerate them from the 8.9 specification.
-3. Re-run compilation/type checks and address any errors.
-4. Review and apply fixes for the breaking changes, deprecations, and supported environment changes in this guide.
+1. If you generate clients from OpenAPI, regenerate them from the 8.9 specification.
+1. Re-run compilation/type checks and address any errors.
+1. Review and apply fixes for the breaking changes, deprecations, and supported environment changes below.
 
 ### Camunda 8.10 API and SDK changes
 
-If you did not already migrate to the following APIs and SDKs during your 8.8 upgrade, Camunda recommends you perform these actions before you upgrade to 8.9.
+If you did not already migrate to the following APIs and SDKs during your 8.8 upgrade, Camunda recommends you perform these migrations before you upgrade to 8.9.
 
 See the [Camunda 8.8 APIs & tools migration guide](/versioned_docs/version-8.8/apis-tools/migration-manuals/index.md) for individual component guides.
 
-| Component/Use            | 8.9 status     | Migrate to                  | Migrate by          |
-| :----------------------- | :------------- | :-------------------------- | :------------------ |
-| V1 component APIs        | **Deprecated** | Orchestration Cluster API   | Before Camunda 8.10 |
-| ZeebeClient              | **Deprecated** | Camunda Java Client         | Before Camunda 8.10 |
-| Spring Zeebe SDK         | **Deprecated** | Camunda Spring Boot Starter | Before Camunda 8.10 |
-| Zeebe Process Test (ZPT) | **Deprecated** | Camunda Process Test (CPT)  | Before Camunda 8.10 |
-| Job-based user tasks     | **Deprecated** | Camunda user tasks          | Before Camunda 8.10 |
+| Component/Use            | 8.9 status | Migrate to                  | Migrate by          |
+| :----------------------- | :--------- | :-------------------------- | :------------------ |
+| V1 component APIs        | Deprecated | Orchestration Cluster API   | Before Camunda 8.10 |
+| ZeebeClient              | Deprecated | Camunda Java Client         | Before Camunda 8.10 |
+| Spring Zeebe SDK         | Deprecated | Camunda Spring Boot Starter | Before Camunda 8.10 |
+| Zeebe Process Test (ZPT) | Deprecated | Camunda Process Test (CPT)  | Before Camunda 8.10 |
+| Job-based user tasks     | Deprecated | Camunda user tasks          | Before Camunda 8.10 |
 
 :::info
 For more information, see the blog post [Upcoming API Changes in Camunda 8: A Unified and Streamlined Experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
@@ -55,15 +56,28 @@ For more information, see the blog post [Upcoming API Changes in Camunda 8: A Un
 
 ### Camunda 8.9 breaking changes, deprecations, and supported environment changes
 
-This guide covers the following changes:
+Review and apply fixes for the following changes in 8.9:
 
-| Type                | Change                                                                                 |
-| :------------------ | :------------------------------------------------------------------------------------- |
-| **Breaking change** | [Bug fix: `FormResult.schema` type corrected from object to string](#form-schema-type) |
+| Type                   | Change                                                                                                              |
+| :--------------------- | :------------------------------------------------------------------------------------------------------------------ |
+| Breaking change        | [Bug fix: `FormResult.schema` type corrected from object to string](#form-schema-type)                              |
+| Breaking change        | [Camunda 8 Run defaults to H2 secondary storage](#h2)                                                               |
+| Breaking change        | [Document API response schemas now have explicit required and nullable annotations](#request-response-schema-split) |
+| Breaking change        | [Elasticsearch subchart no longer enabled by default](#es-subchart)                                                 |
+| Breaking change        | [MCP Client and MCP Remote Client connectors](#mcp)                                                                 |
+| Breaking change        | [OpenAPI enum extensions](#enum-extensions)                                                                         |
+| Breaking change        | [OpenAPI type-safety enhancements](#type-safety-enhancements)                                                       |
+| Breaking change        | [Resource deletion endpoint now returns a response body](#resource-deletion)                                        |
+| Breaking change        | [Spring Boot 4.0 required for Camunda Spring Boot Starter](#spring-boot)                                            |
+| Breaking change        | [`versionTag` returns `null` instead of empty string when absent](#version-tag-null)                                |
+| Breaking change        | [Web Modeler changes](#web-modeler)                                                                                 |
+| Deprecated             | [Deprecated: enum literals in Orchestration Cluster API v2](#deprecated-enum)                                       |
+| Deprecated             | [Deprecated: Operate Connector](#deprecated-operate)                                                                |
+| Supported environments | [Supported environment changes](#supported-env)                                                                     |
 
 ## Breaking changes
 
-Review the following 8.9 breaking changes and apply targeted fixes as required.
+Review and apply fixes for the following breaking changes:
 
 ### Bug fix: `FormResult.schema` type corrected from object to string {#form-schema-type}
 
@@ -98,7 +112,7 @@ No change needed if your code was already handling the actual `string` response 
 </TabItem>
 </Tabs>
 
-### Camunda 8 Run defaults to H2 secondary storage
+### Camunda 8 Run defaults to H2 secondary storage {#h2}
 
 **What changed**: Camunda 8 Run now uses H2 as the default secondary data storage instead of Elasticsearch.
 
@@ -157,7 +171,7 @@ No request-side changes are needed. Response fields listed above are now guarant
 </TabItem>
 </Tabs>
 
-### Elasticsearch subchart no longer enabled by default
+### Elasticsearch subchart no longer enabled by default {#es-subchart}
 
 **What changed**: The Elasticsearch Helm subchart is no longer enabled by default.
 
@@ -173,7 +187,7 @@ elasticsearch:
   enabled: true
 ```
 
-### MCP Client and MCP Remote Client connectors
+### MCP Client and MCP Remote Client connectors {#mcp}
 
 **What changed**: Breaking changes were introduced in alpha 2 to the element templates and runtime configuration of the MCP Client.
 
@@ -290,7 +304,7 @@ Update to the latest SDK version. The wire-type of these fields does not change,
 </TabItem>
 </Tabs>
 
-### Resource deletion endpoint now returns a response body
+### Resource deletion endpoint now returns a response body {#resource-deletion}
 
 **What changed**: The resource deletion endpoint `POST /resources/{resourceKey}/deletion` now returns a response body instead of an empty response.
 
@@ -321,7 +335,7 @@ Update your HTTP client code to parse the new JSON response body from the deleti
 </TabItem>
 </Tabs>
 
-### Spring Boot 4.0 required for Camunda Spring Boot Starter
+### Spring Boot 4.0 required for Camunda Spring Boot Starter {#spring-boot}
 
 **What changed**: Starting with 8.9.0, the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) requires Spring Boot 4.0.x.
 
@@ -375,7 +389,7 @@ if (versionTag != null) {
 </TabItem>
 </Tabs>
 
-### Web Modeler changes
+### Web Modeler changes {#web-modeler}
 
 The following breaking changes affect Web Modeler Self-Managed installations:
 
@@ -391,7 +405,9 @@ See the [8.9 release announcements](/reference/announcements-release-notes/890/8
 
 ## Deprecations
 
-### Deprecated enum literals in Orchestration Cluster API v2
+Review and apply fixes for the following deprecations:
+
+### Deprecated: enum literals in Orchestration Cluster API v2 {#deprecated-enum}
 
 The following enum literals are now marked as deprecated:
 
@@ -403,13 +419,13 @@ These values were reintroduced to preserve backward compatibility but are planne
 
 **What to do**: Avoid using these values in new integrations. If your code references them, plan to remove those references before the next minor release.
 
-### Deprecated: Operate Connector
+### Deprecated: Operate Connector {#deprecated-operate}
 
 The Operate Connector is deprecated following the deprecation of the Operate API. Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) via the [REST Connector](/components/connectors/protocol/rest.md) going forward.
 
-## Supported environment changes
+## Supported environment changes {#supported-env}
 
-Review the following environment changes before upgrading:
+Review the following supported environment changes and take action as required:
 
 | Change                                                       | Action                                               |
 | :----------------------------------------------------------- | :--------------------------------------------------- |
@@ -418,9 +434,13 @@ Review the following environment changes before upgrading:
 | Elasticsearch **9.2+** and OpenSearch **3.4+** now supported | Consider upgrading for latest features.              |
 | **OpenJDK 25** certified                                     | No action needed — OpenJDK 21–25 are all supported.  |
 
+:::info
+Learn more about Camunda 8 [supported environments](/reference/supported-environments.md).
+:::
+
 ## Next steps
 
-1. Complete the [quick upgrade checklist](#quick-upgrade-checklist) at the top of this guide.
-2. Work through each breaking change section relevant to your integration type.
-3. Re-compile and run your test suite against the 8.9 API.
-4. Review [8.9 release announcements](/reference/announcements-release-notes/890/890-announcements.md) for additional context on each change.
+Once you have completed the [upgrade steps](#upgrade-steps) in this guide, you should:
+
+1. Re-compile and run your test suite against the 8.9 API.
+1. Review [8.9 release announcements](/reference/announcements-release-notes/890/890-announcements.md) for additional context on each change.
