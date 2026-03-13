@@ -31,7 +31,7 @@ To create a new authorization:
 2. Select a resource type from the list on the left, and select **Create authorization**.
 3. Enter the following information:
    - **Owner type**: The entity to which you want to assign permissions, such as a user, group, role, client, or mapping rule.
-   - **Owner ID**: The ID of the owner. For users and groups, this value is **case-sensitive** and must exactly match the username or group ID from Identity or your identity provider. For example, `abc@example.com` and `Abc@example.com` are treated as different users.
+   - **Owner ID**: The ID of the owner. For users and groups, this value is case-sensitive and must exactly match the username or group ID from Identity or your identity provider. For example, `abc@example.com` and `Abc@example.com` are treated as different users.
    - **Resource type**: The selected resource type.
    - **Resource scope**: Choose how this authorization is scoped:
      - By **Resource ID**, or
