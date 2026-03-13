@@ -81,12 +81,19 @@ Review the actions required for the following 8.9 changes:
 Review actions required for the following breaking changes:
 
 ### Bug fix: `FormResult.schema` type corrected from object to string {#form-schema-type}
+### Spring Boot 4.0 default for Camunda Spring Boot Starter
+
+**What changed**: Starting with 8.9.0, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter`) is bundled with Spring Boot 4.0.x. A dedicated `camunda-spring-boot-3-starter` module is available for applications that are not yet ready to upgrade.
 
 #### Change
 
 The `schema` property in `FormResult` was incorrectly specified as `type: object` in the OpenAPI contract. The server has always returned it as a JSON `string`. The specification is now corrected.
 
 #### Why
+- Migrate your application to Spring Boot 4.0.x and continue using `camunda-spring-boot-starter`.
+- If you cannot migrate yet, switch your dependency to `camunda-spring-boot-3-starter`, which is bundled with Spring Boot 3.5.x. Note that OSS support for Spring Boot 3.5.x ends in June 2026, so plan your migration accordingly.
+- See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support) for details.
+- See the [dedicated Spring Boot 3 and 4 modules](/apis-tools/camunda-spring-boot-starter/getting-started.md#dedicated-spring-boot-3-and-4-modules) documentation for more information.
 
 This is a bug fix. The original specification was inaccurate and caused incorrect typing in generated clients.
 
