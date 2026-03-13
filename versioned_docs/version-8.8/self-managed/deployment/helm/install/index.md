@@ -7,7 +7,7 @@ description: Learn how to install Camunda 8 Self-Managed on Kubernetes using Hel
 
 Camunda 8 Self-Managed can be installed on Kubernetes using Helm charts.
 
-This section provides two installation paths:
+This section provides the following installation paths:
 
 - **[Quick install with Helm](./quick-install)**:  
   Use this guide to get up and running with default Helm chart values. Ideal for testing, evaluation, or early development.
