@@ -538,51 +538,51 @@ console:
           releases:
             - name: camunda
               namespace: management-and-modeling
-              version: 13.x.x
+              version: 14.x.x
               components:
                 - name: Console
                   id: console
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://management-and-modeling-host.com/
                   readiness: http://camunda-console.oidc:9100/health/readiness
                   metrics: http://camunda-console.oidc:9100/prometheus
                 - name: Identity
                   id: identity
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://management-and-modeling-host.com/identity
                   readiness: http://camunda-identity.oidc:82/actuator/health
                   metrics: http://camunda-identity.oidc:82/actuator/prometheus
                 - name: WebModeler WebApp
                   id: webModelerWebApp
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://management-and-modeling-host.com/modeler
                   readiness: http://camunda-web-modeler-webapp.oidc:8071/health/readiness
                   metrics: http://camunda-web-modeler-webapp.oidc:8071/metrics
             - name: camunda
               namespace: orchestration
-              version: 13.x
+              version: 14.x
               components:
                 - name: Operate
                   id: operate
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://orchestration-host.com/orchestration/operate
                   readiness: http://camunda-zeebe.orchestration:9600/operate/actuator/health/readiness
                   metrics: http://camunda-zeebe.orchestration:9600/operate/actuator/prometheus
                 - name: Optimize
                   id: optimize
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://orchestration-host.com/optimize
                   readiness: http://camunda-optimize.orchestration:80/optimize/api/readyz
                   metrics: http://camunda-optimize.orchestration:8092/actuator/prometheus
                 - name: Tasklist
                   id: tasklist
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://orchestration-host.com/orchestration/tasklist
                   readiness: http://camunda-zeebe.orchestration:9600/tasklist/actuator/health/readiness
                   metrics: http://camunda-zeebe.orchestration:9600/tasklist/actuator/prometheus
                 - name: Orchestration Cluster
                   id: orchestration
-                  version: 8.8.x
+                  version: 8.9.x
                   urls:
                     grpc: https://zeebe-orchestration-host.com
                     http: https://orchestration-host.com/orchestration
