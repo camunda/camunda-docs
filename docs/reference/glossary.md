@@ -63,6 +63,16 @@ For example, build an invoice-processing AI agent in Camunda with BPMN, using an
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
 
+### Admin
+
+Use Admin in the [Orchestration Cluster](#orchestration-cluster) to administer authentication, authorization, and cluster administration features.
+
+:::note
+Admin was previously named "Identity" in Camunda 8.8. The component was renamed in 8.9 to reflect its expanded scope.
+:::
+
+- [Admin overview](/components/admin/admin-introduction.md)
+
 ### Audit log
 
 The [audit log](../components/audit-log/overview.md) is a record of operations, including who performed them, when, and on which entities. Use the audit log to prove compliance, meet governance and regulatory requirements, maintain operational integrity and transparency, and troubleshoot issues.
@@ -280,15 +290,7 @@ For example, this is useful when working with services that must be isolated wit
 
 - [Use connectors in hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md)
 
-### Admin
-
-Use Admin in the [Orchestration Cluster](#orchestration-cluster) to administer authentication, authorization, and cluster administration features.
-
-:::note
-Admin was previously named "Identity" in Camunda 8.8. The component was renamed in 8.9 to reflect its expanded scope.
-:::
-
-- [Admin overview](/components/admin/admin-introduction.md)
+## I
 
 ### Inbound connector
 
