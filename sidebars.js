@@ -1377,9 +1377,9 @@ module.exports = {
       ],
     },
     {
-      type: "category",
-      label: "Upgrade to Camunda 8.9",
-      items: ["apis-tools/migration-manuals/migrate-to-89"],
+      type: "doc",
+      id: "apis-tools/migration-manuals/migrate-to-89",
+      className: "sidebar-cta",
     },
   ],
   Reference: [
