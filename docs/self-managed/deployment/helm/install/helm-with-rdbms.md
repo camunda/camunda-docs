@@ -5,7 +5,7 @@ title: Helm installation with RDBMS as secondary storage
 description: "Deploy Camunda 8 on Kubernetes using Helm charts with an external RDBMS as secondary storage. Step-by-step guide for production-ready installations."
 ---
 
-This guide walks you through deploying Camunda 8 using Helm charts with an external relational database (RDBMS) as secondary storage instead of Elasticsearch or OpenSearch.
+This guide walks you through deploying Camunda 8 using Helm charts with an external relational database (RDBMS) as secondary storage instead of a document-store secondary backend (Elasticsearch or OpenSearch).
 
 Related guides:
 
@@ -15,15 +15,15 @@ Related guides:
 
 ## What changes when using RDBMS?
 
-In Camunda 8, secondary storage stores historical data and process state. By default, Elasticsearch or OpenSearch is used. With RDBMS, you replace that with a relational database:
+In Camunda 8, secondary storage stores historical data and process state. You can use either a document-store backend (Elasticsearch/OpenSearch) or an RDBMS, depending on your requirements. This guide focuses on the RDBMS option:
 
-| Aspect               | Elasticsearch/OpenSearch                            | RDBMS                                                       |
+| Aspect               | Document-store backend (Elasticsearch/OpenSearch)   | RDBMS                                                       |
 | -------------------- | --------------------------------------------------- | ----------------------------------------------------------- |
 | **Storage choice**   | Helm-managed subchart                               | You manage (PostgreSQL, etc.)                               |
 | **Scaling**          | Scale the search cluster independently from Camunda | Scale via your database service (vertical or read replicas) |
 | **Backup strategy**  | ES/OS snapshot/restore tooling                      | Database-native backups (e.g., pg_dump, vendor tools)       |
 | **Monitoring**       | ES/OS metrics and dashboards                        | Database-native monitoring and alerts                       |
-| **Operator support** | No ES/OS operator bundled                           | Database operators (optional)                               |
+| **Operator support** | No embedded document-store operator bundled         | Database operators (optional)                               |
 
 When using RDBMS, **Optimize still requires Elasticsearch or OpenSearch**. Only the Orchestration Cluster uses RDBMS.
 
@@ -35,7 +35,7 @@ Before you begin:
 2. **Helm 3.x**: Install or upgrade [Helm](https://helm.sh/docs/intro/install/).
 3. **External RDBMS**: A supported database reachable from your cluster. See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for the complete list of supported databases and versions.
 4. **Database credentials**: Username and password for a database user with DDL permissions (if using auto-schema creation).
-5. **Elasticsearch/OpenSearch** (for Optimize): Required if you deploy Optimize alongside Camunda.
+5. **Document-store backend (Elasticsearch/OpenSearch)** (for Optimize): Required if you deploy Optimize alongside Camunda.
 
 ## Installation workflow
 
@@ -324,7 +324,7 @@ identity:
   enabled: false
 ```
 
-**Namespace 2: Management Components (with Elasticsearch/OpenSearch)**
+**Namespace 2: Management components (with document-store secondary storage)**
 
 ```yaml
 orchestration:
@@ -357,7 +357,7 @@ For detailed configuration options, see:
 
 ## Important: Component storage requirements
 
-**Optimize requires Elasticsearch or OpenSearch—not RDBMS.** If you deploy Optimize, configure it with Elasticsearch or OpenSearch and enable the Elasticsearch/OpenSearch exporter for Zeebe, even if your Orchestration Cluster uses RDBMS:
+**Optimize requires Elasticsearch or OpenSearch, not RDBMS.** If you deploy Optimize, configure it with Elasticsearch or OpenSearch and enable the corresponding exporter for Zeebe, even if your Orchestration Cluster uses RDBMS:
 
 ```yaml
 orchestration:

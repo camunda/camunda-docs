@@ -23,7 +23,7 @@ Before upgrading, verify that your current installation meets the minimum requir
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Camunda version     | Direct upgrades to 8.9 are supported only from the latest 8.8.x patch. If you are running an earlier version, first upgrade to 8.8. See [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version). |
 | Environment support | Ensure your platform and dependencies are supported in 8.9. See [supported environments](/reference/supported-environments.md).                                                                                                                |
-| Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and Elasticsearch/OpenSearch setup.                                                                                                      |
+| Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and secondary storage setup (for example, Elasticsearch/OpenSearch or RDBMS).                                                            |
 
 ## Review pre-upgrade actions required for Camunda 8.9
 
@@ -41,8 +41,8 @@ This section lists actions you must complete or review before upgrading to Camun
     <td><span className="label-highlight red">Action required</span></td>
 </tr>
 <tr>
-    <td>Helm chart: Elasticsearch default</td>
-    <td><p>The Elasticsearch subchart is no longer enabled by default. If you use Elasticsearch, explicitly set `global.elasticsearch.enabled: true` and `elasticsearch.enabled: true` in your values file.</p><p>You must also set `orchestration.data.secondaryStorage.type` explicitly (no default).</p></td>
+    <td>Helm chart: document-store default</td>
+    <td><p>The Elasticsearch subchart is no longer enabled by default. If you use Elasticsearch, explicitly set `global.elasticsearch.enabled: true` and `elasticsearch.enabled: true` in your values file.</p><p>You must also set `orchestration.data.secondaryStorage.type` explicitly (no default), whether you use Elasticsearch, OpenSearch, or RDBMS.</p></td>
     <td><span className="label-highlight red">Action required</span></td>
 </tr>
 <tr>
@@ -71,7 +71,7 @@ This section lists actions you must complete or review before upgrading to Camun
     <td><span className="label-highlight">Recommended</span></td>
 </tr>
 <tr>
-    <td>Helm chart: ES/OS global config</td>
+    <td>Helm chart: secondary storage global config</td>
     <td><p>`global.elasticsearch.*` and `global.opensearch.*` are deprecated in 8.9 and will be removed in 8.10. Migrate to `orchestration.data.secondaryStorage.elasticsearch/opensearch.*` and `optimize.database.elasticsearch/opensearch.*`. Legacy keys still work in 8.9.</p></td>
     <td><span className="label-highlight">Recommended</span></td>
 </tr>
@@ -90,11 +90,12 @@ For a complete list of changes, see [What's new in Camunda 8.9](/reference/annou
 
 Review your infrastructure to confirm compatibility with Camunda 8.9.
 
-| Area                     | 8.9 requirement                                                           | Action                                                                                                                                                |
-| :----------------------- | :------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Elasticsearch/OpenSearch | Elasticsearch 8.19+, OpenSearch 2.19+. ES 9.2+ and OS 3.4+ now supported. | Upgrade the cluster to the minimum version. Check the [supported environments](/reference/supported-environments.md) matrix to confirm compatibility. |
-| CPU/Memory               | Same consolidated Orchestration StatefulSet as 8.8.                       | No new requirements compared to 8.8.                                                                                                                  |
-| Storage                  | Same or higher IOPS as 8.8.                                               | No change from 8.8.                                                                                                                                   |
+| Area                                         | 8.9 requirement                                                                              | Action                                                                                                                                                                    |
+| :------------------------------------------- | :------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Secondary storage (Elasticsearch/OpenSearch) | Elasticsearch 8.19+, OpenSearch 2.19+. Elasticsearch 9.2+ and OpenSearch 3.4+ now supported. | Upgrade the cluster to the minimum version. Check the [supported environments](/reference/supported-environments.md) matrix to confirm compatibility.                     |
+| Secondary storage (RDBMS)                    | Supported vendor and version required for your selected component set.                       | Check the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) and confirm any component-specific limitations before upgrading. |
+| CPU/Memory                                   | Same consolidated Orchestration StatefulSet as 8.8.                                          | No new requirements compared to 8.8.                                                                                                                                      |
+| Storage                                      | Same or higher IOPS as 8.8.                                                                  | No change from 8.8.                                                                                                                                                       |
 
 ## Next steps
 
