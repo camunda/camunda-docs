@@ -35,16 +35,18 @@ Before diving into individual changes, complete the following:
 
 ## Breaking changes
 
-### Spring Boot 4.0 required for Camunda Spring Boot Starter
+### Spring Boot 4.0 default for Camunda Spring Boot Starter
 
-**What changed**: Starting with 8.9.0, the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) requires Spring Boot 4.0.x.
+**What changed**: Starting with 8.9.0, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter`) is bundled with Spring Boot 4.0.x. A dedicated `camunda-spring-boot-3-starter` module is available for applications that are not yet ready to upgrade.
 
 **Why**: OSS support for Spring Boot 3.x ends in June 2026. This change keeps Camunda aligned with the Spring Boot support policy.
 
 **What to do**:
 
-- Migrate your application to Spring Boot 4.0.x before upgrading to Camunda 8.9.
+- Migrate your application to Spring Boot 4.0.x and continue using `camunda-spring-boot-starter`.
+- If you cannot migrate yet, switch your dependency to `camunda-spring-boot-3-starter`, which is bundled with Spring Boot 3.5.x. Note that OSS support for Spring Boot 3.5.x ends in June 2026, so plan your migration accordingly.
 - See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support) for details.
+- See the [dedicated Spring Boot 3 and 4 modules](/apis-tools/camunda-spring-boot-starter/getting-started.md#dedicated-spring-boot-3-and-4-modules) documentation for more information.
 
 ### Resource deletion endpoint now returns a response body
 
