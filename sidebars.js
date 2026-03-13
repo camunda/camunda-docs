@@ -1554,8 +1554,9 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/install/quick-install",
-                "self-managed/deployment/helm/install/helm-with-rdbms",
                 "self-managed/deployment/helm/install/production/index",
+                "self-managed/deployment/helm/configure/operator-based-infrastructure",
+                "self-managed/deployment/helm/install/helm-with-rdbms",
               ],
             },
             "self-managed/deployment/helm/chart-parameters",
@@ -1582,7 +1583,6 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
-                "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {

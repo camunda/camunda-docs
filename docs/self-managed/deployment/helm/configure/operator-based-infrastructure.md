@@ -1,8 +1,8 @@
 ---
 id: operator-based-infrastructure
-sidebar_label: Operator-based infrastructure
-title: Deploy infrastructure with Kubernetes operators
-description: "Deploy Camunda 8 infrastructure components using official Kubernetes operators as an alternative to Bitnami subcharts."
+sidebar_label: Deploy required dependencies
+title: Deploy required dependencies with Kubernetes operators
+description: "Deploy the databases (PostgreSQL, Elasticsearch) and OIDC provider (Keycloak) required by Camunda 8 using official Kubernetes operators."
 ---
 
 import Tabs from '@theme/Tabs';

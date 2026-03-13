@@ -14,3 +14,6 @@ This section provides two installation paths:
 
 - **[Install for production](./production)**:  
   Use this guide to deploy Camunda 8 in a secure, production-ready Kubernetes environment. Includes configuration for TLS, external databases, OIDC, and multi-namespace deployments.
+
+- **[Deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md)**:  
+  If managed databases or an external OIDC provider are not available in your organization, deploy PostgreSQL, Elasticsearch, and Keycloak on Kubernetes using official operators.
