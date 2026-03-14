@@ -187,8 +187,7 @@ Web Modeler supports syncing files via [Git Sync](../../../../../components/mode
 
 ### Unstable configuration options
 
-These are unstable options that are not officially supported and may be removed without deprecation in future releases.
-They are intended for testing and feedback purposes only.
+These are unstable options that are not officially supported and may be removed without deprecation in future releases. They are intended for testing and feedback purposes only.
 
 | Environment variable                                       | Description                                                                                                                                                                                                | Example value | Default value |
 | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
