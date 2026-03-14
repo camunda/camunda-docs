@@ -10,7 +10,7 @@ import ProcessInstanceAfterMigration from './assets/process-instance-migration/m
 Process instance migration fits a running process instance to a different process definition.
 This can be useful when the process definition of a running process instance needs changes due to bugs or updated requirements.
 While doing so, we aim to interfere as little as possible with the process instance state during the migration.
-For example, a migrated active user task remains assigned to the same user.
+For example, a migrated active user task remains assigned to the same user if no implementation migration occurs.
 This principle applies to all parts of the process instance.
 
 :::tip
@@ -146,6 +146,25 @@ Active call activities can be migrated like any other element.
 The called process instance is not changed when migrating the call activity.
 
 You can migrate a called process instance in the same way as a regular process instance.
+
+## Migrate job worker user tasks to Camunda user tasks
+
+:::important
+Only available since version 8.8.17
+:::
+
+You can migrate user tasks with a job worker implementation to Camunda user tasks by providing mapping instructions between the source and target user tasks.
+
+The target Camunda user task preserves `candidate groups`, `candidate users`, `due date`, `follow-up date`, and the `form id` or `form key` from the source task, as well as `customHeaders` set in the job.
+
+The target user task uses the [priority](../../tasklist/userguide/defining-task-priorities) defined in the target user task definition, or a default value of 50 if none is defined.
+
+:::important
+When you migrate a job worker user task to a Camunda user task:
+
+- Embedded forms are not supported. The form defined in the target user task definition is used.
+- The current `assignee` is not preserved. The task is assigned to the initial assignee defined in the target user task definition.
+  :::
 
 ## Dealing with catch events
 
@@ -419,6 +438,7 @@ In the following cases, the process instance can't apply the migration plan and 
 - Multi-instance body limitations:
   - Each child instance of a multi-instance body should be migrated separately because they belong to another process instance.
   - It is not possible to migrate a parallel multi-instance body to a sequential multi-instance body and vice versa.
+- Mapping instructions can only change the user task implementation from a job-worker user task to a Camunda user task, but not vice versa (since 8.8.17, before that no user task implementation migration is possible).
 
 The following limitations exist that may be supported in future versions:
 
@@ -427,7 +447,6 @@ The following limitations exist that may be supported in future versions:
   - An element that becomes nested in a newly added subprocess
   - An element that was nested in a subprocess is no longer nested in that subprocess
 - Mapping instructions cannot change the element type
-- Mapping instructions cannot change the task implementation, for example, from a job worker user task to a Camunda user task.
 - The process instance must be in a wait state, i.e. waiting for an event or external input like job completion. It may not be taking a sequence flow or triggering an event while migrating the instance.
 
 A full overview of error codes can be found in the migration command [RPC](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) or [REST](/apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instance.api.mdx).
