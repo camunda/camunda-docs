@@ -96,8 +96,8 @@ If running a single instance is preferred, make sure to implement [regular backu
 
 ## Available reference architectures
 
-:::note Documentation Update in Progress
-This is a work in progress as the existing documentation is updated to provide better general guidance on the topic. The Docker and Manual documentation may point to older guides.
+:::note Documentation update in progress
+This documentation is being updated to provide clearer general guidance. Some Docker documentation may still point to older guides.
 :::
 
 Choosing the right reference architecture depends on various factors such as the organization's goals, existing infrastructure, and specific requirements. The following guides are available to help choose and guide deployments:
