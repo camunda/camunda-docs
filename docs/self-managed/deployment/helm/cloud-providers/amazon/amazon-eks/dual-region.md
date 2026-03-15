@@ -510,26 +510,32 @@ You must apply the custom `StorageClass` before installing the Camunda Helm char
 
 ## 3. Deploy Camunda 8 via Helm charts
 
-### Create the secret for Elasticsearch
+### Deploy Elasticsearch using ECK
 
-Elasticsearch will need an S3 bucket for data backup and restore procedure, required during a regional failback. For this, you will need to configure a Kubernetes secret to not expose those in cleartext.
+Elasticsearch is managed via the [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) operator instead of the Camunda Helm chart's built-in Elasticsearch subchart. This provides automated lifecycle management and built-in security with auto-generated credentials.
+
+For more details on ECK-based deployments, see [Elasticsearch deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment).
+
+#### Create the S3 backup secret for Elasticsearch
+
+Elasticsearch requires an S3 bucket for data backup and restore procedures during regional failback. The ECK operator injects these credentials into the Elasticsearch keystore at startup.
 
 You can pull the data from Terraform since you exposed those via `output.tf`.
 
-1. From the Terraform code location `aws/kubernetes/eks-dual-region/terraform/clusters`, execute the following to export the access keys to environment variables. This will allow an easier creation of the Kubernetes secret via the command line:
+1. From the Terraform code location `aws/kubernetes/eks-dual-region/terraform/clusters`, execute the following to export the access keys to environment variables:
 
 ```shell
 export AWS_ACCESS_KEY_ES=$(terraform output -raw s3_aws_access_key)
 export AWS_SECRET_ACCESS_KEY_ES=$(terraform output -raw s3_aws_secret_access_key)
 ```
 
-2. From the folder `aws/kubernetes/eks-dual-region/procedure` of the repository, execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/create_elasticsearch_secrets.sh). This will use the exported environment variables from **Step 1** to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment variables](#export-environment-variables).
+2. From the folder `aws/kubernetes/eks-dual-region/procedure` of the repository, execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/create_elasticsearch_secrets.sh). This creates the ECK-compatible `elasticsearch-env-secret` in both regions with the S3 credentials. Those have previously been defined and exported via the [environment variables](#export-environment-variables).
 
 ```shell
 ./create_elasticsearch_secrets.sh
 ```
 
-3. Unset environment variables to reduce the risk of potential exposure. The script is spawned in a subshell and can't modify the environment variables without extra workarounds:
+3. Unset environment variables to reduce the risk of potential exposure:
 
 ```shell
 unset AWS_ACCESS_KEY_ES
@@ -541,6 +547,50 @@ unset AWS_SECRET_ACCESS_KEY_ES
 The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html). If that region becomes unavailable and you want to restore to a different region or S3 services remain disrupted, you must create a new bucket in another region and reconfigure your Elasticsearch cluster to use the new bucket.
 
 :::
+
+#### Deploy the ECK Elasticsearch cluster
+
+Deploy the Elasticsearch cluster in both regions using the ECK operator. The dual-region Elasticsearch cluster manifest is located at `generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster-dual-region.yml`.
+
+Apply the manifest to both clusters:
+
+```shell
+kubectl --context $CLUSTER_0 -n $CAMUNDA_NAMESPACE_0 apply -f generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster-dual-region.yml
+kubectl --context $CLUSTER_1 -n $CAMUNDA_NAMESPACE_1 apply -f generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster-dual-region.yml
+```
+
+Wait for both Elasticsearch clusters to become ready:
+
+```shell
+kubectl --context $CLUSTER_0 -n $CAMUNDA_NAMESPACE_0 wait --for=jsonpath='{.status.phase}'=Ready elasticsearch/elasticsearch --timeout=600s
+kubectl --context $CLUSTER_1 -n $CAMUNDA_NAMESPACE_1 wait --for=jsonpath='{.status.phase}'=Ready elasticsearch/elasticsearch --timeout=600s
+```
+
+<details>
+<summary>Review the Elasticsearch cluster configuration</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster-dual-region.yml
+```
+
+</details>
+
+#### Synchronize Elasticsearch passwords across regions
+
+Each ECK-managed Elasticsearch cluster auto-generates its own `elasticsearch-es-elastic-user` secret with a unique password. For Zeebe exporters to authenticate against the remote region's Elasticsearch, each region needs access to the other region's password.
+
+Run the [sync_elasticsearch_passwords.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/sync_elasticsearch_passwords.sh) script from the `aws/kubernetes/eks-dual-region/procedure` folder to create cross-region password secrets:
+
+```shell
+./sync_elasticsearch_passwords.sh
+```
+
+This script reads the ECK-generated passwords and creates region-specific secrets in both regions:
+
+- `elasticsearch-es-password-region-0`: password from region 0's Elasticsearch
+- `elasticsearch-es-password-region-1`: password from region 1's Elasticsearch
+
+These secrets are referenced by the Zeebe exporter configuration in `camunda-values.yml` to authenticate against Elasticsearch in each region.
 
 ### Camunda 8 Helm chart prerequisites
 
@@ -559,6 +609,8 @@ Key changes of the dual-region setup:
 
 - `global.multiregion.regions: 2`
   - Indicates the use for two regions
+- `global.security.authentication.method: basic`
+  - Uses basic auth for inter-component communication since Management Identity (Keycloak) is not deployed in dual-region.
 - `global.identity.auth.enabled: false`
   - Management Identity is not currently supported. For more details, see the [limitations section](/self-managed/concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
 - `identity.enabled: false`
@@ -572,20 +624,23 @@ Key changes of the dual-region setup:
 - `orchestration.env`
   - `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS`
     - These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../../components/orchestration-cluster/zeebe/operations/setting-up-a-cluster.md).
-  - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
-    - The Elasticsearch endpoint for region 0.
-  - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
-    - The Elasticsearch endpoint for region 1.
-  - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_CLASSNAME`
+  - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
+    - The Elasticsearch endpoint for region 0 (ECK-managed service: `elasticsearch-es-masters`).
+  - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
+    - The Elasticsearch endpoint for region 1 (ECK-managed service: `elasticsearch-es-masters`).
+  - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_CLASSNAME`
     - `io.camunda.exporter.CamundaExporter` explicitly creates the new Camunda Exporter.
-  - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_CLASSNAME`
+  - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_CLASSNAME`
     - `io.camunda.exporter.CamundaExporter` explicitly creates the new Camunda Exporter.
+  - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_USERNAME` / `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_PASSWORD`
+    - Elasticsearch authentication credentials for region 0. The password is sourced from the `elasticsearch-es-password-region-0` secret created by the [password synchronization step](#synchronize-elasticsearch-passwords-across-regions).
+  - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_USERNAME` / `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_PASSWORD`
+    - Elasticsearch authentication credentials for region 1. The password is sourced from the `elasticsearch-es-password-region-1` secret.
 - A cluster of eight Zeebe brokers (four in each of the regions) is recommended for the dual-region setup
   - `orchestration.clusterSize: 8`
   - `orchestration.partitionCount: 8`
   - `orchestration.replicationFactor: 4`
-- `elasticsearch.initScripts`
-  - Configures the S3 bucket access via a predefined Kubernetes secret.
+- Elasticsearch is managed via the ECK operator and configured through a separate manifest (`elasticsearch-cluster-dual-region.yml`), not via the Helm chart's built-in Elasticsearch subchart.
 
 ##### region0/camunda-values.yml
 
@@ -604,10 +659,10 @@ You must change the following environment variables for Zeebe. The default value
 The base `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` requires adjustments before installing the Helm chart:
 
 - `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS`
-- `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
-- `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
+- `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
+- `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
 
-1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/camunda-deployment-references/tree/infraex-560/aws/kubernetes/eks-dual-region/procedure/generate_zeebe_helm_values.sh) in the repository folder `aws/kubernetes/eks-dual-region/procedure/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [export environment variables](#export-environment-variables) section for namespaces and regions.
+1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/generate_zeebe_helm_values.sh) in the repository folder `aws/kubernetes/eks-dual-region/procedure/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [export environment variables](#export-environment-variables) section for namespaces and regions.
 
 ```shell
 ./generate_zeebe_helm_values.sh
@@ -633,15 +688,15 @@ Use the following to set the environment variable CAMUNDA_CLUSTER_INITIALCONTACT
 - name: CAMUNDA_CLUSTER_INITIALCONTACTPOINTS
   value: camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502
 
-Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe:
+Use the following to set the environment variable CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe:
 
-- name: ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL
-  value: http://camunda-elasticsearch-master-hl.camunda-london.svc.cluster.local:9200
+- name: CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL
+  value: http://elasticsearch-es-masters.camunda-london.svc.cluster.local:9200
 
-Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe.
+Use the following to set the environment variable CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe.
 
-- name: ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL
-  value: http://camunda-elasticsearch-master-hl.camunda-paris.svc.cluster.local:9200
+- name: CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL
+  value: http://elasticsearch-es-masters.camunda-paris.svc.cluster.local:9200
 ```
 
 </details>
