@@ -203,6 +203,8 @@ paths:
     $ref: "job-metrics.yaml#/paths/~1jobs~1statistics~1by-workers"
   /jobs/statistics/time-series:
     $ref: "job-metrics.yaml#/paths/~1jobs~1statistics~1time-series"
+  /jobs/statistics/errors:
+    $ref: "job-metrics.yaml#/paths/~1jobs~1statistics~1errors"
   /license:
     $ref: "licenses.yaml#/paths/~1license"
   /mapping-rules:
@@ -303,6 +305,8 @@ paths:
     $ref: "cluster.yaml#/paths/~1status"
   /system/usage-metrics:
     $ref: "system.yaml#/paths/~1system~1usage-metrics"
+  /system/configuration:
+    $ref: "system.yaml#/paths/~1system~1configuration"
   /tenants:
     $ref: "tenants.yaml#/paths/~1tenants"
   /tenants/search:

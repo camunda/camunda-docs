@@ -422,6 +422,13 @@ components:
         - decisionDefinitionType
         - evaluatedInputs
         - matchedRules
+        - decisionDefinitionId
+        - decisionDefinitionKey
+        - decisionDefinitionName
+        - decisionDefinitionVersion
+        - decisionEvaluationInstanceKey
+        - output
+        - tenantId
       type: object
       description: A decision that was evaluated.
       properties:
