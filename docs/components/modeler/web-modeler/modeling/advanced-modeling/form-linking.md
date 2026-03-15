@@ -45,12 +45,17 @@ Choosing **Camunda Form (linked)** as the type and entering the form ID directly
 
 <p><img src={PropertiesPanelImg} style={{width: 430}} alt="form section in properties panel" /></p>
 
-Using a linked form is the recommended approach as it allows you to benefit from the form automatically being deployed with the diagram.
-This means when deploying a BPMN diagram, Web Modeler will always deploy the latest version of all linked forms along with the diagram, so you do not have to manually re-link forms or [copy & paste JSON configuration](#camunda-form-embedded) when making changes.
+Using a linked form is the recommended approach as it allows you to manage form versions independently from the diagram.
 
-:::danger
-When deploying a diagram, Web Modeler will always deploy the latest version of all linked forms along with the diagram.
-This means that if you reference the same Form ID within multiple BPMN diagrams, all diagrams will always use the latest version of the form regardless of which version was used when the diagram was initially deployed (unless you change the [binding type for a linked form](#camunda-form-linked)).
+When deploying a BPMN diagram, Web Modeler will not automatically deploy linked forms. This gives you full control over when and which version of a form is deployed.
+
+If you make changes to a form, you must deploy the updated form version separately before or after deploying the diagram, depending on your release process. This allows you to coordinate form and process updates more deliberately and avoid unintentionally deploying in-progress form changes.
+
+As a result, you no longer need to re-link forms or [copy and paste JSON configuration](#camunda-form-embedded) when making changes — but you are responsible for ensuring the correct form version is deployed and available to your process.
+
+:::warning
+When deploying a diagram, Web Modeler will not deploy any linked forms automatically.
+Ensure that all forms linked in your BPMN diagram are available in the cluster and that the chosen binding resolves to the desired version. Diagrams use the latest version of the form unless you change the [binding type for a linked form](#camunda-form-linked).
 :::
 
 :::info
