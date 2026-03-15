@@ -173,7 +173,19 @@ module.exports = {
           ],
           Architecture: [
             "components/best-practices/architecture/deciding-about-your-stack",
-            "components/best-practices/architecture/sizing-your-environment",
+            {
+              type: "category",
+              label: "Sizing your environment",
+              link: {
+                type: "doc",
+                id: "components/best-practices/architecture/sizing-your-environment",
+              },
+              items: [
+                "components/best-practices/architecture/sizing-saas",
+                "components/best-practices/architecture/sizing-self-managed",
+                "components/best-practices/architecture/sizing-benchmarks",
+              ],
+            },
             "components/best-practices/architecture/understanding-human-tasks-management",
           ],
           Development: [
