@@ -28,8 +28,8 @@ If an auth provider implements this protocol, async clients will prefer it.
 async def aget_headers()
 ```
 
-- **Return type:**
-  _Mapping_[str, str]
+* **Return type:**
+  *Mapping*[str, str]
 
 ## AsyncOAuthClientCredentialsAuthProvider
 
@@ -43,17 +43,17 @@ OAuth 2.0 Client Credentials provider with in-memory caching.
 
 This is designed for async clients.
 
-- **Parameters:**
-  - **oauth_url** (_str_)
-  - **client_id** (_str_)
-  - **client_secret** (_str_)
-  - **audience** (_str_)
-  - **cache_dir** (_str_ _|_ _None_)
-  - **disk_cache_disable** (_bool_)
-  - **saas_401_cooldown_s** (_float_)
-  - **transport** (_httpx.AsyncBaseTransport_ _|_ _None_)
-  - **timeout** (_float_ _|_ _None_)
-  - **logger** ([_SdkLogger_](#sdklogger) _|_ _None_)
+* **Parameters:**
+  * **oauth_url** (*str*)
+  * **client_id** (*str*)
+  * **client_secret** (*str*)
+  * **audience** (*str*)
+  * **cache_dir** (*str* *|* *None*)
+  * **disk_cache_disable** (*bool*)
+  * **saas_401_cooldown_s** (*float*)
+  * **transport** (*httpx.AsyncBaseTransport* *|* *None*)
+  * **timeout** (*float* *|* *None*)
+  * **logger** ([*SdkLogger*](#sdklogger) *|* *None*)
 
 ### aclose()
 
@@ -63,7 +63,7 @@ async def aclose()
 
 Close the underlying async HTTP client used for token requests.
 
-- **Return type:**
+* **Return type:**
   None
 
 ### aget_headers()
@@ -72,8 +72,8 @@ Close the underlying async HTTP client used for token requests.
 async def aget_headers()
 ```
 
-- **Return type:**
-  _Mapping_[str, str]
+* **Return type:**
+  *Mapping*[str, str]
 
 ### get_headers()
 
@@ -87,8 +87,8 @@ Returns cached token headers if a valid token is already held,
 otherwise returns empty headers (the next async request hook will
 call `aget_headers` to fetch a fresh token).
 
-- **Return type:**
-  _Mapping_[str, str]
+* **Return type:**
+  *Mapping*[str, str]
 
 ## AuthProvider
 
@@ -108,8 +108,8 @@ Implementations are expected to be lightweight and safe to call for every reques
 def get_headers()
 ```
 
-- **Return type:**
-  _Mapping_[str, str]
+* **Return type:**
+  *Mapping*[str, str]
 
 ## BasicAuthProvider
 
@@ -121,9 +121,9 @@ Bases: `object`
 
 HTTP Basic auth provider.
 
-- **Parameters:**
-  - **username** (_str_)
-  - **password** (_str_)
+* **Parameters:**
+  * **username** (*str*)
+  * **password** (*str*)
 
 ### get_headers()
 
@@ -131,8 +131,8 @@ HTTP Basic auth provider.
 def get_headers()
 ```
 
-- **Return type:**
-  _Mapping_[str, str]
+* **Return type:**
+  *Mapping*[str, str]
 
 ## NullAuthProvider
 
@@ -150,7 +150,7 @@ Default auth provider that adds no headers.
 def get_headers()
 ```
 
-- **Return type:**
+* **Return type:**
   dict[str, str]
 
 ## OAuthClientCredentialsAuthProvider
@@ -165,17 +165,17 @@ OAuth 2.0 Client Credentials provider with in-memory caching.
 
 This is designed for sync clients.
 
-- **Parameters:**
-  - **oauth_url** (_str_)
-  - **client_id** (_str_)
-  - **client_secret** (_str_)
-  - **audience** (_str_)
-  - **cache_dir** (_str_ _|_ _None_)
-  - **disk_cache_disable** (_bool_)
-  - **saas_401_cooldown_s** (_float_)
-  - **transport** (_httpx.BaseTransport_ _|_ _None_)
-  - **timeout** (_float_ _|_ _None_)
-  - **logger** ([_SdkLogger_](#sdklogger) _|_ _None_)
+* **Parameters:**
+  * **oauth_url** (*str*)
+  * **client_id** (*str*)
+  * **client_secret** (*str*)
+  * **audience** (*str*)
+  * **cache_dir** (*str* *|* *None*)
+  * **disk_cache_disable** (*bool*)
+  * **saas_401_cooldown_s** (*float*)
+  * **transport** (*httpx.BaseTransport* *|* *None*)
+  * **timeout** (*float* *|* *None*)
+  * **logger** ([*SdkLogger*](#sdklogger) *|* *None*)
 
 ### close()
 
@@ -188,7 +188,7 @@ Close the underlying HTTP client used for token requests.
 Call this when the application is shutting down if you created a provider
 instance yourself (or if you want deterministic cleanup in tests).
 
-- **Return type:**
+* **Return type:**
   None
 
 ### get_headers()
@@ -197,8 +197,8 @@ instance yourself (or if you want deterministic cleanup in tests).
 def get_headers()
 ```
 
-- **Return type:**
-  _Mapping_[str, str]
+* **Return type:**
+  *Mapping*[str, str]
 
 ### inject_auth_event_hooks()
 
@@ -210,13 +210,13 @@ Return a copy of httpx_args with a request hook that applies auth headers.
 
 This uses httpx event hooks so we don’t have to inject headers in every generated API call.
 
-- **Parameters:**
-  - **httpx_args** (_dict_ _[\*\*str_ _,_ _Any_ _]_ _|_ _None_)
-  - **auth_provider** (_object_)
-  - **async_client** (_bool_)
-  - **log_level** (_str_ _|_ _None_)
-  - **logger** ([_SdkLogger_](#sdklogger) _|_ _None_)
-- **Return type:**
+* **Parameters:**
+  * **httpx_args** (*dict* *[**str* *,* *Any* *]*  *|* *None*)
+  * **auth_provider** (*object*)
+  * **async_client** (*bool*)
+  * **log_level** (*str* *|* *None*)
+  * **logger** ([*SdkLogger*](#sdklogger) *|* *None*)
+* **Return type:**
   dict[str, *Any*]
 
 ## Logging
@@ -249,11 +249,11 @@ object that exposes these four methods.
 def debug(msg, \*args, \*\*kwargs)
 ```
 
-- **Parameters:**
-  - **msg** (_str_)
-  - **args** (_Any_)
-  - **kwargs** (_Any_)
-- **Return type:**
+* **Parameters:**
+  * **msg** (*str*)
+  * **args** (*Any*)
+  * **kwargs** (*Any*)
+* **Return type:**
   None
 
 ### error()
@@ -262,11 +262,11 @@ def debug(msg, \*args, \*\*kwargs)
 def error(msg, \*args, \*\*kwargs)
 ```
 
-- **Parameters:**
-  - **msg** (_str_)
-  - **args** (_Any_)
-  - **kwargs** (_Any_)
-- **Return type:**
+* **Parameters:**
+  * **msg** (*str*)
+  * **args** (*Any*)
+  * **kwargs** (*Any*)
+* **Return type:**
   None
 
 ### info()
@@ -275,11 +275,11 @@ def error(msg, \*args, \*\*kwargs)
 def info(msg, \*args, \*\*kwargs)
 ```
 
-- **Parameters:**
-  - **msg** (_str_)
-  - **args** (_Any_)
-  - **kwargs** (_Any_)
-- **Return type:**
+* **Parameters:**
+  * **msg** (*str*)
+  * **args** (*Any*)
+  * **kwargs** (*Any*)
+* **Return type:**
   None
 
 ### warning()
@@ -288,11 +288,11 @@ def info(msg, \*args, \*\*kwargs)
 def warning(msg, \*args, \*\*kwargs)
 ```
 
-- **Parameters:**
-  - **msg** (_str_)
-  - **args** (_Any_)
-  - **kwargs** (_Any_)
-- **Return type:**
+* **Parameters:**
+  * **msg** (*str*)
+  * **args** (*Any*)
+  * **kwargs** (*Any*)
+* **Return type:**
   None
 
 ## NullLogger
@@ -311,11 +311,11 @@ Logger that silently discards all messages.
 def debug(msg, \*args, \*\*kwargs)
 ```
 
-- **Parameters:**
-  - **msg** (_str_)
-  - **args** (_Any_)
-  - **kwargs** (_Any_)
-- **Return type:**
+* **Parameters:**
+  * **msg** (*str*)
+  * **args** (*Any*)
+  * **kwargs** (*Any*)
+* **Return type:**
   None
 
 ### error()
@@ -324,11 +324,11 @@ def debug(msg, \*args, \*\*kwargs)
 def error(msg, \*args, \*\*kwargs)
 ```
 
-- **Parameters:**
-  - **msg** (_str_)
-  - **args** (_Any_)
-  - **kwargs** (_Any_)
-- **Return type:**
+* **Parameters:**
+  * **msg** (*str*)
+  * **args** (*Any*)
+  * **kwargs** (*Any*)
+* **Return type:**
   None
 
 ### info()
@@ -337,11 +337,11 @@ def error(msg, \*args, \*\*kwargs)
 def info(msg, \*args, \*\*kwargs)
 ```
 
-- **Parameters:**
-  - **msg** (_str_)
-  - **args** (_Any_)
-  - **kwargs** (_Any_)
-- **Return type:**
+* **Parameters:**
+  * **msg** (*str*)
+  * **args** (*Any*)
+  * **kwargs** (*Any*)
+* **Return type:**
   None
 
 ### trace()
@@ -350,11 +350,11 @@ def info(msg, \*args, \*\*kwargs)
 def trace(msg, \*args, \*\*kwargs)
 ```
 
-- **Parameters:**
-  - **msg** (_str_)
-  - **args** (_Any_)
-  - **kwargs** (_Any_)
-- **Return type:**
+* **Parameters:**
+  * **msg** (*str*)
+  * **args** (*Any*)
+  * **kwargs** (*Any*)
+* **Return type:**
   None
 
 ### warning()
@@ -363,11 +363,11 @@ def trace(msg, \*args, \*\*kwargs)
 def warning(msg, \*args, \*\*kwargs)
 ```
 
-- **Parameters:**
-  - **msg** (_str_)
-  - **args** (_Any_)
-  - **kwargs** (_Any_)
-- **Return type:**
+* **Parameters:**
+  * **msg** (*str*)
+  * **args** (*Any*)
+  * **kwargs** (*Any*)
+* **Return type:**
   None
 
 ## SdkLogger
@@ -384,9 +384,9 @@ Adds `trace()` support (falls back to `debug()` on loggers that lack
 it) and `bind()` support (uses loguru’s native `bind` when available,
 otherwise prepends a `[key=value ...]` prefix to messages).
 
-- **Parameters:**
-  - **logger** ([_CamundaLogger_](#camundalogger))
-  - **prefix** (_str_)
+* **Parameters:**
+  * **logger** ([*CamundaLogger*](#camundalogger))
+  * **prefix** (*str*)
 
 ### bind()
 
@@ -397,13 +397,13 @@ def bind(\*\*kwargs)
 Create a child logger with additional context.
 
 If the underlying logger supports `bind()` (e.g. loguru), the native
-method is used. Otherwise context is rendered as a `[k=v ...]`
+method is used.  Otherwise context is rendered as a `[k=v ...]`
 prefix on each message.
 
-- **Parameters:**
-  **kwargs** (_str_)
-- **Return type:**
-  [_SdkLogger_](#sdklogger)
+* **Parameters:**
+  **kwargs** (*str*)
+* **Return type:**
+  [*SdkLogger*](#sdklogger)
 
 ### debug()
 
@@ -411,9 +411,9 @@ prefix on each message.
 def debug(msg)
 ```
 
-- **Parameters:**
-  **msg** (_str_)
-- **Return type:**
+* **Parameters:**
+  **msg** (*str*)
+* **Return type:**
   None
 
 ### error()
@@ -422,9 +422,9 @@ def debug(msg)
 def error(msg)
 ```
 
-- **Parameters:**
-  **msg** (_str_)
-- **Return type:**
+* **Parameters:**
+  **msg** (*str*)
+* **Return type:**
   None
 
 ### info()
@@ -433,9 +433,9 @@ def error(msg)
 def info(msg)
 ```
 
-- **Parameters:**
-  **msg** (_str_)
-- **Return type:**
+* **Parameters:**
+  **msg** (*str*)
+* **Return type:**
   None
 
 ### trace()
@@ -444,9 +444,9 @@ def info(msg)
 def trace(msg)
 ```
 
-- **Parameters:**
-  **msg** (_str_)
-- **Return type:**
+* **Parameters:**
+  **msg** (*str*)
+* **Return type:**
   None
 
 ### warning()
@@ -455,9 +455,9 @@ def trace(msg)
 def warning(msg)
 ```
 
-- **Parameters:**
-  **msg** (_str_)
-- **Return type:**
+* **Parameters:**
+  **msg** (*str*)
+* **Return type:**
   None
 
 ### create_logger()
@@ -468,76 +468,100 @@ def create_logger(logger=None)
 
 Create an [`SdkLogger`](#sdklogger).
 
-- **Parameters:**
-  **logger** ([_CamundaLogger_](#camundalogger) _|_ _None_) – A user-supplied logger. When `None`, loguru is used if installed,
+* **Parameters:**
+  **logger** ([*CamundaLogger*](#camundalogger) *|* *None*) – A user-supplied logger.  When `None`, loguru is used if installed,
   otherwise a [`NullLogger`](#nulllogger) is used.
-- **Return type:**
-  [_SdkLogger_](#sdklogger)
+* **Return type:**
+  [*SdkLogger*](#sdklogger)
 
 ## Job Worker
 
-## ExecutionHint
+## ConnectedJobContext
 
 ```python
-class ExecutionHint
+class ConnectedJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, tags, root_process_instance_key, user_task=<camunda_orchestration_sdk.types.Unset object>, log=NOTHING, \*, client)
 ```
 
-Bases: `object`
+Bases: [`JobContext`](#jobcontext)
 
-Decorators for users to hint at their workload execution potential
+Context for async/thread handlers — includes client reference.
 
-### _static_ permit(strategy)
+Extends [`JobContext`](#jobcontext) with a `client` attribute that provides
+access to the Camunda API from within a job handler.  This context is
+only provided when the execution strategy is `"async"` or
+`"thread"`; handlers running under the `"process"` strategy
+receive a plain [`JobContext`](#jobcontext) (the client cannot be pickled
+across process boundaries).
 
-- **Parameters:**
-  **strategy** (_Literal_ _[_ _'thread'_ _,_ _'process'_ _,_ _'async'_ _]_)
-- **Return type:**
-  _Callable_[[*Callable*[[…], *Any*]], [_HintedCallable_](#hintedcallable)]
+* **Parameters:**
+  * **type_** (*str*)
+  * **process_definition_id** (*ProcessDefinitionId*)
+  * **process_definition_version** (*int*)
+  * **element_id** (*ElementId*)
+  * **custom_headers** (*ActivatedJobResultCustomHeaders*)
+  * **worker** (*str*)
+  * **retries** (*int*)
+  * **deadline** (*int*)
+  * **variables** (*ActivatedJobResultVariables*)
+  * **tenant_id** (*TenantId*)
+  * **job_key** (*JobKey*)
+  * **process_instance_key** (*ProcessInstanceKey*)
+  * **process_definition_key** (*ProcessDefinitionKey*)
+  * **element_instance_key** (*ElementInstanceKey*)
+  * **kind** (*JobKindEnum*)
+  * **listener_event_type** (*JobListenerEventTypeEnum*)
+  * **tags** (*list* *[**str* *]*)
+  * **root_process_instance_key** (*None* *|* *ProcessInstanceKey*)
+  * **user_task** (*ActivatedJobResultUserTask* *|* *None* *|* *Unset*)
+  * **log** ([*SdkLogger*](#sdklogger))
+  * **client** ([*CamundaAsyncClient*](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient))
 
-### _static_ prefer(strategy)
-
-- **Parameters:**
-  **strategy** (_Literal_ _[_ _'thread'_ _,_ _'process'_ _,_ _'async'_ _]_)
-- **Return type:**
-  _Callable_[[*Callable*[[…], *Any*]], [_HintedCallable_](#hintedcallable)]
-
-## HintedCallable
+### client
 
 ```python
-class HintedCallable(\*args, \*\*kwargs)
+client: [CamundaAsyncClient](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient)
 ```
 
-Bases: `Protocol`
+### *classmethod* create(job, client, logger=None)
+
+* **Parameters:**
+  * **job** (*ActivatedJobResult*)
+  * **client** ([*CamundaAsyncClient*](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient))
+  * **logger** ([*SdkLogger*](#sdklogger) *|* *None*)
+* **Return type:**
+  [ConnectedJobContext](#connectedjobcontext)
 
 ## JobContext
 
 ```python
-class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task=<camunda_orchestration_sdk.types.Unset object>, tags=<camunda_orchestration_sdk.types.Unset object>, log=NOTHING)
+class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, tags, root_process_instance_key, user_task=<camunda_orchestration_sdk.types.Unset object>, log=NOTHING)
 ```
 
 Bases: `ActivatedJobResult`
 
 Read-only context for a job execution.
 
-- **Parameters:**
-  - **type\_** (_str_)
-  - **process_definition_id** (_ProcessDefinitionId_)
-  - **process_definition_version** (_int_)
-  - **element_id** (_ElementId_)
-  - **custom_headers** (_ActivatedJobResultCustomHeaders_)
-  - **worker** (_str_)
-  - **retries** (_int_)
-  - **deadline** (_int_)
-  - **variables** (_ActivatedJobResultVariables_)
-  - **tenant_id** (_TenantId_)
-  - **job_key** (_JobKey_)
-  - **process_instance_key** (_ProcessInstanceKey_)
-  - **process_definition_key** (_ProcessDefinitionKey_)
-  - **element_instance_key** (_ElementInstanceKey_)
-  - **kind** (_JobKindEnum_)
-  - **listener_event_type** (_JobListenerEventTypeEnum_)
-  - **user_task** (_UserTaskProperties_ _|_ _Unset_)
-  - **tags** (_list_ _[\*\*str_ _]_ _|_ _Unset_)
-  - **log** ([_SdkLogger_](#sdklogger))
+* **Parameters:**
+  * **type_** (*str*)
+  * **process_definition_id** (*ProcessDefinitionId*)
+  * **process_definition_version** (*int*)
+  * **element_id** (*ElementId*)
+  * **custom_headers** (*ActivatedJobResultCustomHeaders*)
+  * **worker** (*str*)
+  * **retries** (*int*)
+  * **deadline** (*int*)
+  * **variables** (*ActivatedJobResultVariables*)
+  * **tenant_id** (*TenantId*)
+  * **job_key** (*JobKey*)
+  * **process_instance_key** (*ProcessInstanceKey*)
+  * **process_definition_key** (*ProcessDefinitionKey*)
+  * **element_instance_key** (*ElementInstanceKey*)
+  * **kind** (*JobKindEnum*)
+  * **listener_event_type** (*JobListenerEventTypeEnum*)
+  * **tags** (*list* *[**str* *]*)
+  * **root_process_instance_key** (*None* *|* *ProcessInstanceKey*)
+  * **user_task** (*ActivatedJobResultUserTask* *|* *None* *|* *Unset*)
+  * **log** ([*SdkLogger*](#sdklogger))
 
 ### log
 
@@ -545,16 +569,16 @@ A scoped logger bound to this job’s context (job type, job key).
 Use `job.log.info(...)` etc. inside your handler to emit
 structured log messages.
 
-- **Type:**
+* **Type:**
   [SdkLogger](#sdklogger)
 
-### _classmethod_ from_job(job, logger=None)
+### *classmethod* from_job(job, logger=None)
 
-- **Parameters:**
-  - **job** (_ActivatedJobResult_)
-  - **logger** ([_SdkLogger_](#sdklogger) _|_ _None_)
-- **Return type:**
-  [_JobContext_](#jobcontext)
+* **Parameters:**
+  * **job** (*ActivatedJobResult*)
+  * **logger** ([*SdkLogger*](#sdklogger) *|* *None*)
+* **Return type:**
+  [*JobContext*](#jobcontext)
 
 ### log
 
@@ -562,40 +586,42 @@ structured log messages.
 log: [SdkLogger](#sdklogger)
 ```
 
-### _exception_ JobError(error_code, message='')
+### *exception* JobError(error_code, message='')
 
 Bases: `Exception`
 
 Raise this exception to throw a BPMN error.
 
-- **Parameters:**
-  - **error_code** (_str_)
-  - **message** (_str_)
+* **Parameters:**
+  * **error_code** (*str*)
+  * **message** (*str*)
 
-### _exception_ JobFailure(message, retries=None, retry_back_off=0)
+### *exception* JobFailure(message, retries=None, retry_back_off=0)
 
 Bases: `Exception`
 
 Raise this exception to explicitly fail a job with custom retries/backoff.
 
-- **Parameters:**
-  - **message** (_str_)
-  - **retries** (_int_ _|_ _None_)
-  - **retry_back_off** (_int_)
+* **Parameters:**
+  * **message** (*str*)
+  * **retries** (*int* *|* *None*)
+  * **retry_back_off** (*int*)
 
 ## JobWorker
 
 ```python
-class JobWorker(client, callback, config, logger=None)
+class JobWorker(client, callback, config, logger=None, execution_strategy='auto', startup_jitter_max_seconds=0)
 ```
 
 Bases: `object`
 
-- **Parameters:**
-  - **client** ([_CamundaAsyncClient_](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient))
-  - **callback** (_JobHandler_)
-  - **config** ([_WorkerConfig_](#workerconfig))
-  - **logger** ([_SdkLogger_](#sdklogger) _|_ _None_)
+* **Parameters:**
+  * **client** ([*CamundaAsyncClient*](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient))
+  * **callback** (*JobHandler*)
+  * **config** ([*WorkerConfig*](#workerconfig))
+  * **logger** ([*SdkLogger*](#sdklogger) *|* *None*)
+  * **execution_strategy** (*EXECUTION_STRATEGY*)
+  * **startup_jitter_max_seconds** (*float*)
 
 ### poll_loop()
 
@@ -620,27 +646,20 @@ def stop()
 ## WorkerConfig
 
 ```python
-class WorkerConfig(job_type, job_timeout_milliseconds, request_timeout_milliseconds=0, max_concurrent_jobs=10, execution_strategy='auto', fetch_variables=None, worker_name='camunda-python-sdk-worker')
+class WorkerConfig(job_type, job_timeout_milliseconds, request_timeout_milliseconds=0, max_concurrent_jobs=10, fetch_variables=None, worker_name='camunda-python-sdk-worker')
 ```
 
 Bases: `object`
 
 User-facing configuration
 
-- **Parameters:**
-  - **job_type** (_str_)
-  - **job_timeout_milliseconds** (_int_)
-  - **request_timeout_milliseconds** (_int_)
-  - **max_concurrent_jobs** (_int_)
-  - **execution_strategy** (_Literal_ _[_ _'thread'_ _,_ _'process'_ _,_ _'async'_ _,_ _'auto'_ _]_)
-  - **fetch_variables** (_list_ _[\*\*str_ _]_ _|_ _None_)
-  - **worker_name** (_str_)
-
-### execution_strategy
-
-```python
-execution_strategy: Literal['thread', 'process', 'async', 'auto']* *= 'auto'
-```
+* **Parameters:**
+  * **job_type** (*str*)
+  * **job_timeout_milliseconds** (*int*)
+  * **request_timeout_milliseconds** (*int*)
+  * **max_concurrent_jobs** (*int*)
+  * **fetch_variables** (*list* *[**str* *]*  *|* *None*)
+  * **worker_name** (*str*)
 
 ### fetch_variables
 
@@ -752,6 +771,12 @@ CAMUNDA_OAUTH_URL: str
 CAMUNDA_REST_ADDRESS: str
 ```
 
+### CAMUNDA_SDK_BACKPRESSURE_PROFILE
+
+```python
+CAMUNDA_SDK_BACKPRESSURE_PROFILE: str
+```
+
 ### CAMUNDA_SDK_LOG_LEVEL
 
 ```python
@@ -785,26 +810,27 @@ ZEEBE_REST_ADDRESS: str
 ## CamundaSdkConfiguration
 
 ```python
-class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False)
+class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False, CAMUNDA_SDK_BACKPRESSURE_PROFILE='BALANCED')
 ```
 
 Bases: `BaseModel`
 
-- **Parameters:**
-  - **ZEEBE_REST_ADDRESS** (_str_)
-  - **CAMUNDA_REST_ADDRESS** (_str_)
-  - **CAMUNDA_TOKEN_AUDIENCE** (_str_)
-  - **CAMUNDA_OAUTH_URL** (_str_)
-  - **CAMUNDA_CLIENT_ID** (_str_ _|_ _None_)
-  - **CAMUNDA_CLIENT_SECRET** (_str_ _|_ _None_)
-  - **CAMUNDA_CLIENT_AUTH_CLIENTID** (_str_ _|_ _None_)
-  - **CAMUNDA_CLIENT_AUTH_CLIENTSECRET** (_str_ _|_ _None_)
-  - **CAMUNDA_AUTH_STRATEGY** (_Literal_ _[_ _'NONE'_ _,_ _'OAUTH'_ _,_ _'BASIC'_ _]_)
-  - **CAMUNDA_BASIC_AUTH_USERNAME** (_str_ _|_ _None_)
-  - **CAMUNDA_BASIC_AUTH_PASSWORD** (_str_ _|_ _None_)
-  - **CAMUNDA_SDK_LOG_LEVEL** (_Literal_ _[_ _'silent'_ _,_ _'error'_ _,_ _'warn'_ _,_ _'info'_ _,_ _'debug'_ _,_ _'trace'_ _,_ _'silly'_ _]_)
-  - **CAMUNDA_TOKEN_CACHE_DIR** (_str_ _|_ _None_)
-  - **CAMUNDA_TOKEN_DISK_CACHE_DISABLE** (_bool_)
+* **Parameters:**
+  * **ZEEBE_REST_ADDRESS** (*str*)
+  * **CAMUNDA_REST_ADDRESS** (*str*)
+  * **CAMUNDA_TOKEN_AUDIENCE** (*str*)
+  * **CAMUNDA_OAUTH_URL** (*str*)
+  * **CAMUNDA_CLIENT_ID** (*str* *|* *None*)
+  * **CAMUNDA_CLIENT_SECRET** (*str* *|* *None*)
+  * **CAMUNDA_CLIENT_AUTH_CLIENTID** (*str* *|* *None*)
+  * **CAMUNDA_CLIENT_AUTH_CLIENTSECRET** (*str* *|* *None*)
+  * **CAMUNDA_AUTH_STRATEGY** (*Literal* *[* *'NONE'* *,*  *'OAUTH'* *,*  *'BASIC'* *]*)
+  * **CAMUNDA_BASIC_AUTH_USERNAME** (*str* *|* *None*)
+  * **CAMUNDA_BASIC_AUTH_PASSWORD** (*str* *|* *None*)
+  * **CAMUNDA_SDK_LOG_LEVEL** (*Literal* *[* *'silent'* *,*  *'error'* *,*  *'warn'* *,*  *'info'* *,*  *'debug'* *,*  *'trace'* *,*  *'silly'* *]*)
+  * **CAMUNDA_TOKEN_CACHE_DIR** (*str* *|* *None*)
+  * **CAMUNDA_TOKEN_DISK_CACHE_DISABLE** (*bool*)
+  * **CAMUNDA_SDK_BACKPRESSURE_PROFILE** (*Literal* *[* *'BALANCED'* *,*  *'LEGACY'* *]*)
 
 ### CAMUNDA_AUTH_STRATEGY
 
@@ -860,6 +886,12 @@ CAMUNDA_OAUTH_URL: str
 CAMUNDA_REST_ADDRESS: str
 ```
 
+### CAMUNDA_SDK_BACKPRESSURE_PROFILE
+
+```python
+CAMUNDA_SDK_BACKPRESSURE_PROFILE: CamundaBackpressureProfile
+```
+
 ### CAMUNDA_SDK_LOG_LEVEL
 
 ```python
@@ -890,7 +922,7 @@ CAMUNDA_TOKEN_DISK_CACHE_DISABLE: bool
 ZEEBE_REST_ADDRESS: str
 ```
 
-### model_config _= {'extra': 'forbid'}_
+### model_config *= {'extra': 'forbid'}*
 
 Configuration for the model, should be a dictionary conforming to [ConfigDict][pydantic.config.ConfigDict].
 
@@ -904,9 +936,9 @@ Bases: `object`
 
 Resolves an effective configuration from environment + explicit overrides.
 
-- **Parameters:**
-  - **environment** ([_CamundaSdkConfigPartial_](#camundasdkconfigpartial) _|_ _Mapping_ _[\*\*str_ _,_ _Any_ _]_)
-  - **explicit_configuration** ([_CamundaSdkConfigPartial_](#camundasdkconfigpartial) _|_ _Mapping_ _[\*\*str_ _,_ _Any_ _]_ _|_ _None_)
+* **Parameters:**
+  * **environment** ([*CamundaSdkConfigPartial*](#camundasdkconfigpartial) *|* *Mapping* *[**str* *,* *Any* *]*)
+  * **explicit_configuration** ([*CamundaSdkConfigPartial*](#camundasdkconfigpartial) *|* *Mapping* *[**str* *,* *Any* *]*  *|* *None*)
 
 ### resolve()
 
@@ -914,8 +946,8 @@ Resolves an effective configuration from environment + explicit overrides.
 def resolve()
 ```
 
-- **Return type:**
-  [_ResolvedCamundaSdkConfiguration_](#resolvedcamundasdkconfiguration)
+* **Return type:**
+  [*ResolvedCamundaSdkConfiguration*](#resolvedcamundasdkconfiguration)
 
 ## ResolvedCamundaSdkConfiguration
 
@@ -925,10 +957,10 @@ class ResolvedCamundaSdkConfiguration(effective: 'CamundaSdkConfiguration', envi
 
 Bases: `object`
 
-- **Parameters:**
-  - **effective** ([_CamundaSdkConfiguration_](#camundasdkconfiguration))
-  - **environment** ([_CamundaSdkConfigPartial_](#camundasdkconfigpartial))
-  - **explicit** ([_CamundaSdkConfigPartial_](#camundasdkconfigpartial) _|_ _None_)
+* **Parameters:**
+  * **effective** ([*CamundaSdkConfiguration*](#camundasdkconfiguration))
+  * **environment** ([*CamundaSdkConfigPartial*](#camundasdkconfigpartial))
+  * **explicit** ([*CamundaSdkConfigPartial*](#camundasdkconfigpartial) *|* *None*)
 
 ### effective
 
@@ -954,7 +986,7 @@ explicit: [CamundaSdkConfigPartial](#camundasdkconfigpartial) | None
 def read_environment(environ=None)
 ```
 
-- **Parameters:**
-  **environ** (_Mapping_ _[\*\*str_ _,_ _str_ _]_ _|_ _None_)
-- **Return type:**
-  [_CamundaSdkConfigPartial_](#camundasdkconfigpartial)
+* **Parameters:**
+  **environ** (*Mapping* *[**str* *,* *str* *]*  *|* *None*)
+* **Return type:**
+  [*CamundaSdkConfigPartial*](#camundasdkconfigpartial)
