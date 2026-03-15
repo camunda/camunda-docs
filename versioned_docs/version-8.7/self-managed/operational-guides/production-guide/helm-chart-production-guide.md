@@ -295,7 +295,7 @@ zeebe:
     policyName: zeebe-record-retention-policy
 ```
 
-For more information on configuring ILM policy, refer to the configuration guide on the [OpenSearch exporter](/self-managed/zeebe-deployment/exporters//opensearch-exporter.md#configuration).
+For more information on configuring ILM policy, refer to the configuration guide on the [OpenSearch exporter](/self-managed/zeebe-deployment/exporters/opensearch-exporter.md#configuration).
 
 ### Configure backups
 
