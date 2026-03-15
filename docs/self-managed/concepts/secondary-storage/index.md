@@ -59,6 +59,7 @@ For guidance on supported vendors, versions, and configuration, see:
 - [Elasticsearch and OpenSearch](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md)
 - [RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
+- [RDBMS benchmark results](./rdbms-benchmark-results.md)
 
 :::note
 The documentation is intentionally descriptive rather than prescriptive. Use benchmarking and sizing based on your own workload to choose the secondary storage backend that best meets your requirements.
@@ -79,3 +80,9 @@ Learn about best practices for data management, backups, and monitoring to ensur
 Effective secondary storage management ensures stability, scalability, and data integrity across your Camunda environment. By following Camunda best practices, you can avoid data corruption, maintain compliance, and ensure your orchestration environment remains performant and reliable.
 
 <p><a href="./managing-secondary-storage" class="link-arrow">Manage secondary storage</a></p>
+
+## Benchmark results
+
+Review current benchmark results and caveats for PostgreSQL-based secondary storage.
+
+<p><a href="./rdbms-benchmark-results" class="link-arrow">RDBMS benchmark results</a></p>

@@ -57,6 +57,7 @@ This ensures consistent performance on large datasets. For details, see the [get
 
 These pages provide deeper detail for operators, DBAs, and administrators:
 
+- [RDBMS benchmark results](/self-managed/concepts/secondary-storage/rdbms-benchmark-results.md)
 - [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
 - [Configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [Elasticsearch privileges](/self-managed/concepts/databases/elasticsearch/elasticsearch-privileges.md)
