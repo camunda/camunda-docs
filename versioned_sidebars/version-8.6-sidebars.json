@@ -1638,9 +1638,7 @@
                     "type": "doc",
                     "id": "self-managed/setup/deploy/amazon/openshift/terraform-setup"
                   },
-                  "items": [
-                    "self-managed/setup/deploy/amazon/openshift/terraform-setup"
-                  ]
+                  "items": []
                 },
                 "self-managed/setup/deploy/amazon/aws-marketplace"
               ],
@@ -1762,6 +1760,9 @@
         "self-managed/concepts/exporters",
         {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"]
+        },
+        {
+          "Authentication": ["self-managed/concepts/authentication/m2m-tokens"]
         },
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/custom-users-and-clients",
