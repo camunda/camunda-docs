@@ -647,7 +647,7 @@ The response is a JSON object. See detailed specs [here](https://github.com/camu
 - `changeId`: The ID of the changes initiated to scale the cluster. This can be used to monitor the progress of the scaling operation. The ID typically increases so new requests get a higher ID than the previous one.
 - `currentTopology`: A list of current brokers and the partition distribution.
 - `plannedChanges`: A sequence of operations that has to be executed to achieve scaling.
-- `expectedToplogy`: The expected list of brokers and the partition distribution once the scaling is completed.
+- `expectedTopology`: The expected list of brokers and the partition distribution once the scaling is completed.
 
 <details>
   <summary>Example response</summary>

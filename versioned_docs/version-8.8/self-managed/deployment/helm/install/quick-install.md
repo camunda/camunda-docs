@@ -250,7 +250,7 @@ Installing all components in a cluster requires downloading all related Docker i
 
    ```bash
    helm install camunda camunda-platform \
-     --version 13.0.0 \
+     --version 13 \
      --namespace camunda \
      -f camunda-values.yaml
    ```
