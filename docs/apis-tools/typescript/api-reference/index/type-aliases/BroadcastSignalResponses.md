@@ -11,7 +11,7 @@ mdx:
 type BroadcastSignalResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:15440](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15440)
+Defined in: [gen/types.gen.ts:14679](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L14679)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:15440](https://github.com/camunda/orchestration-cl
 200: SignalBroadcastResult;
 ```
 
-Defined in: [gen/types.gen.ts:15444](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15444)
+Defined in: [gen/types.gen.ts:14683](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L14683)
 
 The signal was broadcast.

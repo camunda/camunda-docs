@@ -11,26 +11,16 @@ mdx:
 type SearchCorrelatedMessageSubscriptionsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:9132](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9132)
+Defined in: [gen/types.gen.ts:9560](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9560)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: CorrelatedMessageSubscriptionSearchQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:9136](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9136)
+Defined in: [gen/types.gen.ts:9564](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9564)
 
 The correlated message subscriptions search result.
-
-#### Type Declaration
-
-##### items?
-
-```ts
-optional items: object[];
-```
-
-The matching correlated message subscriptions.

@@ -11,7 +11,7 @@ mdx:
 type SetVariableRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:7372](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7372)
+Defined in: [gen/types.gen.ts:8173](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8173)
 
 ## Properties
 
@@ -21,21 +21,24 @@ Defined in: [gen/types.gen.ts:7372](https://github.com/camunda/orchestration-clu
 optional local: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:7393](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7393)
+Defined in: [gen/types.gen.ts:8196](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8196)
 
-If set to true, the variables are merged strictly into the local scope (as specified by the `elementInstanceKey`).
-Otherwise, the variables are propagated to upper scopes and set at the outermost one.
-Let’s consider the following example:
-There are two scopes '1' and '2'.
-Scope '1' is the parent scope of '2'. The effective variables of the scopes are:
+If set to `true`, the variables are merged strictly into the local scope (as specified
+by the `elementInstanceKey`). Otherwise, the variables are propagated to upper scopes
+and set at the outermost one.
+
+Let's consider the following example:
+There are two scopes '1' and '2'. Scope '1' is the parent scope of '2'. The effective
+variables of the scopes are:
 1 => { "foo" : 2 }
 2 => { "bar" : 1 }
-An update request with elementInstanceKey as '2', variables { "foo" : 5 }, and local set
-to true leaves scope '1' unchanged and adjusts scope '2' to { "bar" : 1, "foo" 5 }.
-By default, with local set to false, scope '1' will be { "foo": 5 }
-and scope '2' will be { "bar" : 1 }.
 
----
+An update request with elementInstanceKey as '2', variables { "foo": 5 }, and local set
+to `true` leaves scope '1' unchanged and adjusts scope '2' to { "bar": 1, "foo": 5 }. By
+default, with local set to `false`, scope '1' will be { "foo": 5 } and scope '2' will be
+{ "bar": 1 }.
+
+***
 
 ### operationReference?
 
@@ -43,9 +46,9 @@ and scope '2' will be { "bar" : 1 }.
 optional operationReference: OperationReference;
 ```
 
-Defined in: [gen/types.gen.ts:7394](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7394)
+Defined in: [gen/types.gen.ts:8197](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8197)
 
----
+***
 
 ### variables
 
@@ -53,7 +56,7 @@ Defined in: [gen/types.gen.ts:7394](https://github.com/camunda/orchestration-clu
 variables: object;
 ```
 
-Defined in: [gen/types.gen.ts:7376](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7376)
+Defined in: [gen/types.gen.ts:8177](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8177)
 
 JSON object representing the variables to set in the element’s scope.
 

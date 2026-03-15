@@ -11,7 +11,7 @@ mdx:
 type DeleteDocumentData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10106](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10106)
+Defined in: [gen/types.gen.ts:10171](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10171)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:10106](https://github.com/camunda/orchestration-cl
 optional body: never;
 ```
 
-Defined in: [gen/types.gen.ts:10107](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10107)
+Defined in: [gen/types.gen.ts:10172](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10172)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:10107](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:10108](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10108)
+Defined in: [gen/types.gen.ts:10173](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10173)
 
 #### documentId
 
@@ -41,7 +41,7 @@ documentId: DocumentId;
 
 The ID of the document to delete.
 
----
+***
 
 ### query?
 
@@ -49,7 +49,7 @@ The ID of the document to delete.
 optional query: object;
 ```
 
-Defined in: [gen/types.gen.ts:10114](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10114)
+Defined in: [gen/types.gen.ts:10179](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10179)
 
 #### storeId?
 
@@ -59,7 +59,7 @@ optional storeId: string;
 
 The ID of the document store to delete the document from.
 
----
+***
 
 ### url
 
@@ -67,4 +67,4 @@ The ID of the document store to delete the document from.
 url: "/documents/{documentId}";
 ```
 
-Defined in: [gen/types.gen.ts:10120](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10120)
+Defined in: [gen/types.gen.ts:10185](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10185)

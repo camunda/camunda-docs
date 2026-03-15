@@ -8,11 +8,11 @@ mdx:
 # Type Alias: SourceElementInstruction
 
 ```ts
-type SourceElementInstruction =
-  | (object & SourceElementIdInstruction)
-  | (object & SourceElementInstanceKeyInstruction);
+type SourceElementInstruction = 
+  | object & SourceElementIdInstruction
+  | object & SourceElementInstanceKeyInstruction;
 ```
 
-Defined in: [gen/types.gen.ts:6034](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6034)
+Defined in: [gen/types.gen.ts:6736](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6736)
 
 Defines the source element identifier for the move instruction. It can either be a sourceElementId, or sourceElementInstanceKey.

@@ -11,16 +11,26 @@ mdx:
 type SearchRolesForGroupResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:11206](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11206)
+Defined in: [gen/types.gen.ts:11361](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11361)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: SearchQueryResponse;
+200: SearchQueryResponse & object;
 ```
 
-Defined in: [gen/types.gen.ts:11210](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11210)
+Defined in: [gen/types.gen.ts:11365](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11365)
 
 The roles assigned to the group.
+
+#### Type Declaration
+
+##### items
+
+```ts
+items: RoleResult[];
+```
+
+The matching roles.

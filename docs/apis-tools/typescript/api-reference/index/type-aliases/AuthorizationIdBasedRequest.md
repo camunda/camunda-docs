@@ -11,7 +11,7 @@ mdx:
 type AuthorizationIdBasedRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:533](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L533)
+Defined in: [gen/types.gen.ts:550](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L550)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:533](https://github.com/camunda/orchestration-clus
 ownerId: string;
 ```
 
-Defined in: [gen/types.gen.ts:537](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L537)
+Defined in: [gen/types.gen.ts:554](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L554)
 
 The ID of the owner of the permissions.
 
----
+***
 
 ### ownerType
 
@@ -33,9 +33,9 @@ The ID of the owner of the permissions.
 ownerType: OwnerTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:538](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L538)
+Defined in: [gen/types.gen.ts:555](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L555)
 
----
+***
 
 ### permissionTypes
 
@@ -43,11 +43,11 @@ Defined in: [gen/types.gen.ts:538](https://github.com/camunda/orchestration-clus
 permissionTypes: PermissionTypeEnum[];
 ```
 
-Defined in: [gen/types.gen.ts:550](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L550)
+Defined in: [gen/types.gen.ts:567](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L567)
 
 The permission types to add.
 
----
+***
 
 ### resourceId
 
@@ -55,11 +55,11 @@ The permission types to add.
 resourceId: string;
 ```
 
-Defined in: [gen/types.gen.ts:542](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L542)
+Defined in: [gen/types.gen.ts:559](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L559)
 
 The ID of the resource to add permissions to.
 
----
+***
 
 ### resourceType
 
@@ -67,6 +67,6 @@ The ID of the resource to add permissions to.
 resourceType: ResourceTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:546](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L546)
+Defined in: [gen/types.gen.ts:563](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L563)
 
 The type of resource to add permissions to.

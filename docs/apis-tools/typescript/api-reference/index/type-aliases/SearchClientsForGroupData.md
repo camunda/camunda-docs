@@ -11,7 +11,7 @@ mdx:
 type SearchClientsForGroupData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10860](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10860)
+Defined in: [gen/types.gen.ts:10994](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10994)
 
 ## Properties
 
@@ -21,19 +21,19 @@ Defined in: [gen/types.gen.ts:10860](https://github.com/camunda/orchestration-cl
 optional body: SearchQueryRequest & object;
 ```
 
-Defined in: [gen/types.gen.ts:10861](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10861)
+Defined in: [gen/types.gen.ts:10995](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10995)
 
 #### Type Declaration
 
 ##### sort?
 
 ```ts
-optional sort: TenantClientSearchQuerySortRequest[];
+optional sort: object[];
 ```
 
 Sort field criteria.
 
----
+***
 
 ### path
 
@@ -41,7 +41,7 @@ Sort field criteria.
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:10867](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10867)
+Defined in: [gen/types.gen.ts:11007](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11007)
 
 #### groupId
 
@@ -51,7 +51,7 @@ groupId: string;
 
 The group ID.
 
----
+***
 
 ### query?
 
@@ -59,9 +59,9 @@ The group ID.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:10873](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10873)
+Defined in: [gen/types.gen.ts:11013](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11013)
 
----
+***
 
 ### url
 
@@ -69,4 +69,4 @@ Defined in: [gen/types.gen.ts:10873](https://github.com/camunda/orchestration-cl
 url: "/groups/{groupId}/clients/search";
 ```
 
-Defined in: [gen/types.gen.ts:10874](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10874)
+Defined in: [gen/types.gen.ts:11014](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11014)

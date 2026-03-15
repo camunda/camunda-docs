@@ -11,66 +11,66 @@ mdx:
 type ProblemDetail = object;
 ```
 
-Defined in: [gen/types.gen.ts:5054](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5054)
+Defined in: [gen/types.gen.ts:5706](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5706)
 
 A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.
 
 ## Properties
 
-### detail?
+### detail
 
 ```ts
-optional detail: string;
+detail: string;
 ```
 
-Defined in: [gen/types.gen.ts:5070](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5070)
+Defined in: [gen/types.gen.ts:5722](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5722)
 
 An explanation of the problem in more detail.
 
----
+***
 
-### instance?
+### instance
 
 ```ts
-optional instance: string;
+instance: string;
 ```
 
-Defined in: [gen/types.gen.ts:5074](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5074)
+Defined in: [gen/types.gen.ts:5726](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5726)
 
 A URI path identifying the origin of the problem.
 
----
+***
 
-### status?
+### status
 
 ```ts
-optional status: number;
+status: number;
 ```
 
-Defined in: [gen/types.gen.ts:5066](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5066)
+Defined in: [gen/types.gen.ts:5718](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5718)
 
 The HTTP status code for this problem.
 
----
+***
 
-### title?
+### title
 
 ```ts
-optional title: string;
+title: string;
 ```
 
-Defined in: [gen/types.gen.ts:5062](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5062)
+Defined in: [gen/types.gen.ts:5714](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5714)
 
 A summary of the problem type.
 
----
+***
 
-### type?
+### type
 
 ```ts
-optional type: string;
+type: string;
 ```
 
-Defined in: [gen/types.gen.ts:5058](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5058)
+Defined in: [gen/types.gen.ts:5710](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5710)
 
 A URI identifying the problem type.

@@ -7,7 +7,7 @@ mdx:
 
 # Interface: CancelablePromise\<T\>
 
-Defined in: [gen/CamundaClient.ts:1117](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1117)
+Defined in: [gen/CamundaClient.ts:1102](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L1102)
 
 ## Extends
 
@@ -27,7 +27,7 @@ Defined in: [gen/CamundaClient.ts:1117](https://github.com/camunda/orchestration
 cancel(): void;
 ```
 
-Defined in: [gen/CamundaClient.ts:1118](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1118)
+Defined in: [gen/CamundaClient.ts:1103](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L1103)
 
 #### Returns
 

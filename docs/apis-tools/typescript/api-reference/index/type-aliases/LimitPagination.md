@@ -11,7 +11,7 @@ mdx:
 type LimitPagination = object;
 ```
 
-Defined in: [gen/types.gen.ts:6409](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6409)
+Defined in: [gen/types.gen.ts:7118](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7118)
 
 Limit-based pagination
 
@@ -23,6 +23,6 @@ Limit-based pagination
 optional limit: number;
 ```
 
-Defined in: [gen/types.gen.ts:6413](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6413)
+Defined in: [gen/types.gen.ts:7122](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7122)
 
 The maximum number of items to return in one request.

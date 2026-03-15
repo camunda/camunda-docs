@@ -11,7 +11,7 @@ mdx:
 type UserTaskVariableFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:7067](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7067)
+Defined in: [gen/types.gen.ts:7845](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7845)
 
 The user task variable search filters.
 
@@ -23,6 +23,6 @@ The user task variable search filters.
 optional name: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7071](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7071)
+Defined in: [gen/types.gen.ts:7849](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7849)
 
 Name of the variable.

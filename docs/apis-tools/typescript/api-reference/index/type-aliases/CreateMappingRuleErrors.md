@@ -11,7 +11,7 @@ mdx:
 type CreateMappingRuleErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:12216](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12216)
+Defined in: [gen/types.gen.ts:12250](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12250)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:12216](https://github.com/camunda/orchestration-cl
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:12220](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12220)
+Defined in: [gen/types.gen.ts:12254](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12254)
 
 The provided data is not valid.
 
----
+***
 
 ### 403
 
@@ -33,12 +33,12 @@ The provided data is not valid.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:12226](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12226)
+Defined in: [gen/types.gen.ts:12260](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12260)
 
 The request to create a mapping rule was denied.
 More details are provided in the response body.
 
----
+***
 
 ### 404
 
@@ -46,11 +46,11 @@ More details are provided in the response body.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:12230](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12230)
+Defined in: [gen/types.gen.ts:12264](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12264)
 
 The request to create a mapping rule was denied.
 
----
+***
 
 ### 500
 
@@ -58,6 +58,6 @@ The request to create a mapping rule was denied.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:12234](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12234)
+Defined in: [gen/types.gen.ts:12268](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12268)
 
 An internal error occurred while processing the request.

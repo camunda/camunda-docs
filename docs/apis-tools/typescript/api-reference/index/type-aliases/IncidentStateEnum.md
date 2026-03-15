@@ -8,9 +8,9 @@ mdx:
 # Type Alias: IncidentStateEnum
 
 ```ts
-type IncidentStateEnum = "ACTIVE" | "MIGRATED" | "PENDING" | "RESOLVED";
+type IncidentStateEnum = "ACTIVE" | "MIGRATED" | "PENDING" | "RESOLVED" | "UNKNOWN";
 ```
 
-Defined in: [gen/types.gen.ts:3140](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3140)
+Defined in: [gen/types.gen.ts:3499](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L3499)
 
 Incident states with a defined set of values.

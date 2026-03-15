@@ -11,96 +11,101 @@ mdx:
 type BatchOperationItemResponse = object;
 ```
 
-Defined in: [gen/types.gen.ts:861](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L861)
+Defined in: [gen/types.gen.ts:888](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L888)
 
 ## Properties
 
-### batchOperationKey?
+### batchOperationKey
 
 ```ts
-optional batchOperationKey: BatchOperationKey;
+batchOperationKey: BatchOperationKey;
 ```
 
-Defined in: [gen/types.gen.ts:866](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L866)
+Defined in: [gen/types.gen.ts:893](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L893)
 
 The key (or operate legacy ID) of the batch operation.
 
----
+***
 
-### errorMessage?
-
-```ts
-optional errorMessage: string;
-```
-
-Defined in: [gen/types.gen.ts:887](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L887)
-
-the error message from the engine in case of a failed operation.
-
----
-
-### itemKey?
+### errorMessage
 
 ```ts
-optional itemKey: string;
+errorMessage: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:870](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L870)
+Defined in: [gen/types.gen.ts:922](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L922)
+
+The error message from the engine in case of a failed operation.
+
+***
+
+### itemKey
+
+```ts
+itemKey: string;
+```
+
+Defined in: [gen/types.gen.ts:897](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L897)
 
 Key of the item, e.g. a process instance key.
 
----
+***
 
-### operationType?
-
-```ts
-optional operationType: BatchOperationTypeEnum;
-```
-
-Defined in: [gen/types.gen.ts:862](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L862)
-
----
-
-### processedDate?
+### operationType
 
 ```ts
-optional processedDate: string;
+operationType: BatchOperationTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:883](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L883)
+Defined in: [gen/types.gen.ts:889](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L889)
 
-the date this item was processed.
+***
 
----
-
-### processInstanceKey?
+### processedDate
 
 ```ts
-optional processInstanceKey: ProcessInstanceKey;
+processedDate: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:874](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L874)
+Defined in: [gen/types.gen.ts:918](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L918)
+
+The date this item was processed.
+This is `null` if the item has not yet been processed.
+
+***
+
+### processInstanceKey
+
+```ts
+processInstanceKey: ProcessInstanceKey;
+```
+
+Defined in: [gen/types.gen.ts:901](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L901)
 
 the process instance key of the processed item.
 
----
+***
 
-### rootProcessInstanceKey?
-
-```ts
-optional rootProcessInstanceKey: RootProcessInstanceKey;
-```
-
-Defined in: [gen/types.gen.ts:875](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L875)
-
----
-
-### state?
+### rootProcessInstanceKey
 
 ```ts
-optional state: "ACTIVE" | "COMPLETED" | "SKIPPED" | "CANCELED" | "FAILED";
+rootProcessInstanceKey: ProcessInstanceKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:879](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L879)
+Defined in: [gen/types.gen.ts:908](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L908)
+
+The key of the root process instance. The root process instance is the top-level
+ancestor in the process instance hierarchy. This field is only present for data
+belonging to process instance hierarchies created in version 8.9 or later.
+
+***
+
+### state
+
+```ts
+state: "ACTIVE" | "COMPLETED" | "SKIPPED" | "CANCELED" | "FAILED";
+```
+
+Defined in: [gen/types.gen.ts:912](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L912)
 
 State of the item.

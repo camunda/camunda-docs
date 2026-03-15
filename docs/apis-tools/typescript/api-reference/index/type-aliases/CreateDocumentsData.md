@@ -11,7 +11,7 @@ mdx:
 type CreateDocumentsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10056](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10056)
+Defined in: [gen/types.gen.ts:10121](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10121)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:10056](https://github.com/camunda/orchestration-cl
 body: object;
 ```
 
-Defined in: [gen/types.gen.ts:10057](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10057)
+Defined in: [gen/types.gen.ts:10122](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10122)
 
 #### files
 
@@ -39,7 +39,7 @@ optional metadataList: DocumentMetadata[];
 
 Optional JSON array of metadata object whose index aligns with each file entry. The metadata array must have the same length as the files array.
 
----
+***
 
 ### path?
 
@@ -47,9 +47,9 @@ Optional JSON array of metadata object whose index aligns with each file entry. 
 optional path: never;
 ```
 
-Defined in: [gen/types.gen.ts:10068](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10068)
+Defined in: [gen/types.gen.ts:10133](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10133)
 
----
+***
 
 ### query?
 
@@ -57,7 +57,7 @@ Defined in: [gen/types.gen.ts:10068](https://github.com/camunda/orchestration-cl
 optional query: object;
 ```
 
-Defined in: [gen/types.gen.ts:10069](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10069)
+Defined in: [gen/types.gen.ts:10134](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10134)
 
 #### storeId?
 
@@ -67,7 +67,7 @@ optional storeId: string;
 
 The ID of the document store to upload the documents to. Currently, only a single document store is supported per cluster. However, this attribute is included to allow for potential future support of multiple document stores.
 
----
+***
 
 ### url
 
@@ -75,4 +75,4 @@ The ID of the document store to upload the documents to. Currently, only a singl
 url: "/documents/batch";
 ```
 
-Defined in: [gen/types.gen.ts:10075](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10075)
+Defined in: [gen/types.gen.ts:10140](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10140)

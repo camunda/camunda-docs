@@ -8,8 +8,7 @@ mdx:
 # Type Alias: AssignUserToTenantError
 
 ```ts
-type AssignUserToTenantError =
-  AssignUserToTenantErrors[keyof AssignUserToTenantErrors];
+type AssignUserToTenantError = AssignUserToTenantErrors[keyof AssignUserToTenantErrors];
 ```
 
-Defined in: [gen/types.gen.ts:16408](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16408)
+Defined in: [gen/types.gen.ts:15674](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L15674)

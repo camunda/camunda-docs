@@ -8,11 +8,10 @@ mdx:
 # Type Alias: ProcessDefinitionStatisticsFilter
 
 ```ts
-type ProcessDefinitionStatisticsFilter = BaseProcessInstanceFilterFields &
-  object;
+type ProcessDefinitionStatisticsFilter = BaseProcessInstanceFilterFields & object;
 ```
 
-Defined in: [gen/types.gen.ts:5695](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5695)
+Defined in: [gen/types.gen.ts:6372](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6372)
 
 Process definition statistics search filter.
 
@@ -28,26 +27,32 @@ Defines a list of alternative filter groups combined using OR logic. Each object
 
 Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
 
-_Example:_
+
+*Example:*
 
 ```json
 {
-  "state": "ACTIVE",
-  "tenantId": 123,
-  "$or": [
-    { "processDefinitionId": "process_v1" },
-    { "processDefinitionId": "process_v2", "hasIncident": true }
-  ]
+"state": "ACTIVE",
+"tenantId": 123,
+"$or": [
+{ "processDefinitionId": "process_v1" },
+{ "processDefinitionId": "process_v2", "hasIncident": true }
+]
 }
 ```
-
 This matches process instances that:
 
-- are in _ACTIVE_ state
-- have tenant id equal to _123_
+
+- are in *ACTIVE* state
+- have tenant id equal to *123*
 - and match either:
 
-- `processDefinitionId` is _process_v1_, or
-- `processDefinitionId` is _process_v2_ and `hasIncident` is _true_
+- `processDefinitionId` is *process_v1*, or
+- `processDefinitionId` is *process_v2* and `hasIncident` is *true*
+
+
+
+
+
 
 Note: Using complex `$or` conditions may impact performance, use with caution in high-volume environments.

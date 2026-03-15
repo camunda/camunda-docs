@@ -11,7 +11,7 @@ mdx:
 type GetIncidentData = object;
 ```
 
-Defined in: [gen/types.gen.ts:11455](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11455)
+Defined in: [gen/types.gen.ts:11582](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11582)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:11455](https://github.com/camunda/orchestration-cl
 optional body: never;
 ```
 
-Defined in: [gen/types.gen.ts:11456](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11456)
+Defined in: [gen/types.gen.ts:11583](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11583)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:11456](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:11457](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11457)
+Defined in: [gen/types.gen.ts:11584](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11584)
 
 #### incidentKey
 
@@ -41,7 +41,7 @@ incidentKey: IncidentKey;
 
 The assigned key of the incident, which acts as a unique identifier for this incident.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ The assigned key of the incident, which acts as a unique identifier for this inc
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:11463](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11463)
+Defined in: [gen/types.gen.ts:11590](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11590)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:11463](https://github.com/camunda/orchestration-cl
 url: "/incidents/{incidentKey}";
 ```
 
-Defined in: [gen/types.gen.ts:11464](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11464)
+Defined in: [gen/types.gen.ts:11591](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11591)

@@ -11,7 +11,7 @@ mdx:
 type deleteDocumentInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:229](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L229)
+Defined in: [gen/CamundaClient.ts:207](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L207)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/CamundaClient.ts:229](https://github.com/camunda/orchestration-
 documentId: deleteDocumentPathParam_documentId;
 ```
 
-Defined in: [gen/CamundaClient.ts:229](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L229)
+Defined in: [gen/CamundaClient.ts:207](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L207)
 
----
+***
 
 ### storeId?
 
@@ -31,4 +31,4 @@ Defined in: [gen/CamundaClient.ts:229](https://github.com/camunda/orchestration-
 optional storeId: deleteDocumentQueryParam_storeId;
 ```
 
-Defined in: [gen/CamundaClient.ts:229](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L229)
+Defined in: [gen/CamundaClient.ts:207](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L207)

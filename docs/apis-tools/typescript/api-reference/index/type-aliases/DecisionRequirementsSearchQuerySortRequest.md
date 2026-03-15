@@ -11,14 +11,14 @@ mdx:
 type DecisionRequirementsSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:1913](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1913)
+Defined in: [gen/types.gen.ts:1978](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1978)
 
 ## Properties
 
 ### field
 
 ```ts
-field:
+field: 
   | "decisionRequirementsKey"
   | "decisionRequirementsName"
   | "version"
@@ -26,11 +26,11 @@ field:
   | "tenantId";
 ```
 
-Defined in: [gen/types.gen.ts:1917](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1917)
+Defined in: [gen/types.gen.ts:1982](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1982)
 
 The field to sort by.
 
----
+***
 
 ### order?
 
@@ -38,4 +38,4 @@ The field to sort by.
 optional order: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:1918](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1918)
+Defined in: [gen/types.gen.ts:1983](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1983)

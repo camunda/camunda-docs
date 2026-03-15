@@ -7,7 +7,7 @@ mdx:
 
 # Class: CamundaValidationError
 
-Defined in: [runtime/errors.ts:138](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/errors.ts#L138)
+Defined in: [runtime/errors.ts:138](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/runtime/errors.ts#L138)
 
 ## Extends
 
@@ -21,7 +21,7 @@ Defined in: [runtime/errors.ts:138](https://github.com/camunda/orchestration-clu
 new CamundaValidationError(params): CamundaValidationError;
 ```
 
-Defined in: [runtime/errors.ts:143](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/errors.ts#L143)
+Defined in: [runtime/errors.ts:143](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/runtime/errors.ts#L143)
 
 #### Parameters
 
@@ -54,7 +54,7 @@ Defined in: [runtime/errors.ts:143](https://github.com/camunda/orchestration-clu
 #### Overrides
 
 ```ts
-Error.constructor;
+Error.constructor
 ```
 
 ## Properties
@@ -65,9 +65,9 @@ Error.constructor;
 issues: string[];
 ```
 
-Defined in: [runtime/errors.ts:142](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/errors.ts#L142)
+Defined in: [runtime/errors.ts:142](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/runtime/errors.ts#L142)
 
----
+***
 
 ### operationId?
 
@@ -75,9 +75,9 @@ Defined in: [runtime/errors.ts:142](https://github.com/camunda/orchestration-clu
 optional operationId: string;
 ```
 
-Defined in: [runtime/errors.ts:140](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/errors.ts#L140)
+Defined in: [runtime/errors.ts:140](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/runtime/errors.ts#L140)
 
----
+***
 
 ### side
 
@@ -85,9 +85,9 @@ Defined in: [runtime/errors.ts:140](https://github.com/camunda/orchestration-clu
 side: "request" | "response";
 ```
 
-Defined in: [runtime/errors.ts:139](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/errors.ts#L139)
+Defined in: [runtime/errors.ts:139](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/runtime/errors.ts#L139)
 
----
+***
 
 ### summary
 
@@ -95,4 +95,4 @@ Defined in: [runtime/errors.ts:139](https://github.com/camunda/orchestration-clu
 summary: string;
 ```
 
-Defined in: [runtime/errors.ts:141](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/errors.ts#L141)
+Defined in: [runtime/errors.ts:141](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/runtime/errors.ts#L141)

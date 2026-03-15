@@ -11,7 +11,7 @@ mdx:
 type GetResourceContentErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:14440](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14440)
+Defined in: [gen/types.gen.ts:13681](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13681)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:14440](https://github.com/camunda/orchestration-cl
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:14444](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14444)
+Defined in: [gen/types.gen.ts:13685](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13685)
 
 A resource with the given key was not found.
 
----
+***
 
 ### 500
 
@@ -33,6 +33,6 @@ A resource with the given key was not found.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:14448](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14448)
+Defined in: [gen/types.gen.ts:13689](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L13689)
 
 An internal error occurred while processing the request.

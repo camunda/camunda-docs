@@ -11,7 +11,7 @@ mdx:
 type UserRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:7130](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7130)
+Defined in: [gen/types.gen.ts:7908](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7908)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:7130](https://github.com/camunda/orchestration-clu
 optional email: string;
 ```
 
-Defined in: [gen/types.gen.ts:7146](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7146)
+Defined in: [gen/types.gen.ts:7924](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7924)
 
 The email of the user.
 
----
+***
 
 ### name?
 
@@ -33,11 +33,11 @@ The email of the user.
 optional name: string;
 ```
 
-Defined in: [gen/types.gen.ts:7142](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7142)
+Defined in: [gen/types.gen.ts:7920](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7920)
 
 The name of the user.
 
----
+***
 
 ### password
 
@@ -45,11 +45,11 @@ The name of the user.
 password: string;
 ```
 
-Defined in: [gen/types.gen.ts:7134](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7134)
+Defined in: [gen/types.gen.ts:7912](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7912)
 
 The password of the user.
 
----
+***
 
 ### username
 
@@ -57,6 +57,6 @@ The password of the user.
 username: string;
 ```
 
-Defined in: [gen/types.gen.ts:7138](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7138)
+Defined in: [gen/types.gen.ts:7916](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7916)
 
 The username of the user.

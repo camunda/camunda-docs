@@ -11,7 +11,7 @@ mdx:
 type ResolveIncidentData = object;
 ```
 
-Defined in: [gen/types.gen.ts:11542](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11542)
+Defined in: [gen/types.gen.ts:11628](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11628)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:11542](https://github.com/camunda/orchestration-cl
 optional body: IncidentResolutionRequest;
 ```
 
-Defined in: [gen/types.gen.ts:11543](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11543)
+Defined in: [gen/types.gen.ts:11629](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11629)
 
----
+***
 
 ### path
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:11543](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:11544](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11544)
+Defined in: [gen/types.gen.ts:11630](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11630)
 
 #### incidentKey
 
@@ -41,7 +41,7 @@ incidentKey: IncidentKey;
 
 Key of the incident to resolve.
 
----
+***
 
 ### query?
 
@@ -49,9 +49,9 @@ Key of the incident to resolve.
 optional query: never;
 ```
 
-Defined in: [gen/types.gen.ts:11550](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11550)
+Defined in: [gen/types.gen.ts:11636](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11636)
 
----
+***
 
 ### url
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:11550](https://github.com/camunda/orchestration-cl
 url: "/incidents/{incidentKey}/resolution";
 ```
 
-Defined in: [gen/types.gen.ts:11551](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11551)
+Defined in: [gen/types.gen.ts:11637](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11637)

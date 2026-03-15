@@ -8,8 +8,7 @@ mdx:
 # Type Alias: deleteProcessInstancesBatchOperationInput
 
 ```ts
-type deleteProcessInstancesBatchOperationInput =
-  deleteProcessInstancesBatchOperationBody;
+type deleteProcessInstancesBatchOperationInput = deleteProcessInstancesBatchOperationBody;
 ```
 
-Defined in: [gen/CamundaClient.ts:250](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L250)
+Defined in: [gen/CamundaClient.ts:226](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L226)

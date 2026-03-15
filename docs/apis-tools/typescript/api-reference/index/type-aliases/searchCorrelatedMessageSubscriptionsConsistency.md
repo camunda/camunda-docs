@@ -11,20 +11,18 @@ mdx:
 type searchCorrelatedMessageSubscriptionsConsistency = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:730](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L730)
+Defined in: [gen/CamundaClient.ts:713](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L713)
 
-Management of eventual consistency \*
+Management of eventual consistency *
 
 ## Properties
 
 ### consistency
 
 ```ts
-consistency: ConsistencyOptions<
-  _DataOf<typeof Sdk.searchCorrelatedMessageSubscriptions>
->;
+consistency: ConsistencyOptions<_DataOf<typeof Sdk.searchCorrelatedMessageSubscriptions>>;
 ```
 
-Defined in: [gen/CamundaClient.ts:732](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L732)
+Defined in: [gen/CamundaClient.ts:715](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L715)
 
 Management of eventual consistency tolerance. Set waitUpToMs to 0 to ignore eventual consistency. pollInterval is 500ms by default.

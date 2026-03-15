@@ -11,7 +11,7 @@ mdx:
 type GetLicenseErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:12191](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12191)
+Defined in: [gen/types.gen.ts:12225](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12225)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:12191](https://github.com/camunda/orchestration-cl
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:12195](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12195)
+Defined in: [gen/types.gen.ts:12229](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12229)
 
 An internal error occurred while processing the request.

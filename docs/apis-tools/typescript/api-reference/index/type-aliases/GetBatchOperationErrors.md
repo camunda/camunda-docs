@@ -11,7 +11,7 @@ mdx:
 type GetBatchOperationErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:8358](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8358)
+Defined in: [gen/types.gen.ts:8852](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8852)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:8358](https://github.com/camunda/orchestration-clu
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:8362](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8362)
+Defined in: [gen/types.gen.ts:8856](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8856)
 
 The provided data is not valid.
 
----
+***
 
 ### 404
 
@@ -33,11 +33,11 @@ The provided data is not valid.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:8366](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8366)
+Defined in: [gen/types.gen.ts:8860](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8860)
 
 The batch operation is not found.
 
----
+***
 
 ### 500
 
@@ -45,6 +45,6 @@ The batch operation is not found.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:8370](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8370)
+Defined in: [gen/types.gen.ts:8864](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L8864)
 
 An internal error occurred while processing the request.

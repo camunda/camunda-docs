@@ -11,7 +11,7 @@ mdx:
 type GetDecisionRequirementsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:9883](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9883)
+Defined in: [gen/types.gen.ts:9984](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9984)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:9883](https://github.com/camunda/orchestration-clu
 200: DecisionRequirementsResult;
 ```
 
-Defined in: [gen/types.gen.ts:9887](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9887)
+Defined in: [gen/types.gen.ts:9988](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9988)
 
 The decision requirements is successfully returned.

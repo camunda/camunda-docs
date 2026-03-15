@@ -8,11 +8,11 @@ mdx:
 # Type Alias: ProcessDefinitionKeyFilterProperty
 
 ```ts
-type ProcessDefinitionKeyFilterProperty =
+type ProcessDefinitionKeyFilterProperty = 
   | ProcessDefinitionKeyExactMatch
   | AdvancedProcessDefinitionKeyFilter;
 ```
 
-Defined in: [gen/types.gen.ts:4106](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4106)
+Defined in: [gen/types.gen.ts:4742](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4742)
 
 ProcessDefinitionKey property with full advanced search capabilities.

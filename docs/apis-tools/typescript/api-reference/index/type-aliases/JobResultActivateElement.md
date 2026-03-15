@@ -11,7 +11,7 @@ mdx:
 type JobResultActivateElement = object;
 ```
 
-Defined in: [gen/types.gen.ts:3860](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3860)
+Defined in: [gen/types.gen.ts:4502](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4502)
 
 Instruction to activate a single BPMN element within an ad‑hoc sub‑process, optionally providing variables scoped to that element.
 
@@ -23,24 +23,22 @@ Instruction to activate a single BPMN element within an ad‑hoc sub‑process, 
 optional elementId: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:3864](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3864)
+Defined in: [gen/types.gen.ts:4506](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4506)
 
 The element ID to activate.
 
----
+***
 
 ### variables?
 
 ```ts
-optional variables: object;
+optional variables: 
+  | {
+[key: string]: unknown;
+}
+  | null;
 ```
 
-Defined in: [gen/types.gen.ts:3868](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3868)
+Defined in: [gen/types.gen.ts:4510](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L4510)
 
 Variables for the element.
-
-#### Index Signature
-
-```ts
-[key: string]: unknown
-```

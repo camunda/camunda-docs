@@ -11,4 +11,4 @@ mdx:
 type ActivateJobsResponse = ActivateJobsResponses[keyof ActivateJobsResponses];
 ```
 
-Defined in: [gen/types.gen.ts:11810](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11810)
+Defined in: [gen/types.gen.ts:11785](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11785)

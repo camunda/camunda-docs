@@ -8,11 +8,10 @@ mdx:
 # Type Alias: createElementInstanceVariablesInput
 
 ```ts
-type createElementInstanceVariablesInput = createElementInstanceVariablesBody &
-  object;
+type createElementInstanceVariablesInput = createElementInstanceVariablesBody & object;
 ```
 
-Defined in: [gen/CamundaClient.ts:175](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L175)
+Defined in: [gen/CamundaClient.ts:165](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L165)
 
 ## Type Declaration
 

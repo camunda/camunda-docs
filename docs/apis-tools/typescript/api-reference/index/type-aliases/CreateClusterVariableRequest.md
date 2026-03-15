@@ -11,7 +11,7 @@ mdx:
 type CreateClusterVariableRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:1113](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1113)
+Defined in: [gen/types.gen.ts:1148](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1148)
 
 ## Properties
 
@@ -21,11 +21,11 @@ Defined in: [gen/types.gen.ts:1113](https://github.com/camunda/orchestration-clu
 name: string;
 ```
 
-Defined in: [gen/types.gen.ts:1117](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1117)
+Defined in: [gen/types.gen.ts:1152](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1152)
 
 The name of the cluster variable. Must be unique within its scope (global or tenant-specific).
 
----
+***
 
 ### value
 
@@ -33,7 +33,7 @@ The name of the cluster variable. Must be unique within its scope (global or ten
 value: object;
 ```
 
-Defined in: [gen/types.gen.ts:1121](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1121)
+Defined in: [gen/types.gen.ts:1156](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1156)
 
 The value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.
 

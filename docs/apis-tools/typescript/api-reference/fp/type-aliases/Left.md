@@ -11,11 +11,12 @@ mdx:
 The Functional Programming API is a **technical preview**. Its surface may change in future releases without following semver.
 :::
 
+
 ```ts
 type Left<E> = object;
 ```
 
-Defined in: [fp-ts.ts:9](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/fp-ts.ts#L9)
+Defined in: [fp-ts.ts:9](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/fp-ts.ts#L9)
 
 ## Type Parameters
 
@@ -31,9 +32,9 @@ Defined in: [fp-ts.ts:9](https://github.com/camunda/orchestration-cluster-api-js
 _tag: "Left";
 ```
 
-Defined in: [fp-ts.ts:9](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/fp-ts.ts#L9)
+Defined in: [fp-ts.ts:9](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/fp-ts.ts#L9)
 
----
+***
 
 ### left
 
@@ -41,4 +42,4 @@ Defined in: [fp-ts.ts:9](https://github.com/camunda/orchestration-cluster-api-js
 left: E;
 ```
 
-Defined in: [fp-ts.ts:9](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/fp-ts.ts#L9)
+Defined in: [fp-ts.ts:9](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/fp-ts.ts#L9)

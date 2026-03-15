@@ -8,7 +8,7 @@ mdx:
 # Type Alias: IncidentErrorTypeEnum
 
 ```ts
-type IncidentErrorTypeEnum =
+type IncidentErrorTypeEnum = 
   | "AD_HOC_SUB_PROCESS_NO_RETRIES"
   | "CALLED_DECISION_ERROR"
   | "CALLED_ELEMENT_ERROR"
@@ -27,6 +27,6 @@ type IncidentErrorTypeEnum =
   | "UNSPECIFIED";
 ```
 
-Defined in: [gen/types.gen.ts:3101](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3101)
+Defined in: [gen/types.gen.ts:3460](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L3460)
 
 Incident error type with a defined set of values.

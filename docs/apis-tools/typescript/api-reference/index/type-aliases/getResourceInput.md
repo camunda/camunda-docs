@@ -11,7 +11,7 @@ mdx:
 type getResourceInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:513](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L513)
+Defined in: [gen/CamundaClient.ts:519](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L519)
 
 ## Properties
 
@@ -21,4 +21,4 @@ Defined in: [gen/CamundaClient.ts:513](https://github.com/camunda/orchestration-
 resourceKey: getResourcePathParam_resourceKey;
 ```
 
-Defined in: [gen/CamundaClient.ts:513](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L513)
+Defined in: [gen/CamundaClient.ts:519](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L519)

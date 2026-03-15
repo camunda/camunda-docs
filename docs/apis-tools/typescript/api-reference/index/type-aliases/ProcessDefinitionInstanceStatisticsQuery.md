@@ -11,7 +11,7 @@ mdx:
 type ProcessDefinitionInstanceStatisticsQuery = object;
 ```
 
-Defined in: [gen/types.gen.ts:5267](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5267)
+Defined in: [gen/types.gen.ts:5923](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5923)
 
 ## Properties
 
@@ -21,9 +21,11 @@ Defined in: [gen/types.gen.ts:5267](https://github.com/camunda/orchestration-clu
 optional page: OffsetPagination;
 ```
 
-Defined in: [gen/types.gen.ts:5268](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5268)
+Defined in: [gen/types.gen.ts:5927](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5927)
 
----
+Search cursor pagination.
+
+***
 
 ### sort?
 
@@ -31,6 +33,6 @@ Defined in: [gen/types.gen.ts:5268](https://github.com/camunda/orchestration-clu
 optional sort: ProcessDefinitionInstanceStatisticsQuerySortRequest[];
 ```
 
-Defined in: [gen/types.gen.ts:5272](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5272)
+Defined in: [gen/types.gen.ts:5931](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5931)
 
 Sort field criteria.

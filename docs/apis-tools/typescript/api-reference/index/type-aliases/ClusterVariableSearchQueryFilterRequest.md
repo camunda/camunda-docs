@@ -11,7 +11,7 @@ mdx:
 type ClusterVariableSearchQueryFilterRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:1196](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1196)
+Defined in: [gen/types.gen.ts:1231](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1231)
 
 Cluster variable filter request.
 
@@ -23,11 +23,11 @@ Cluster variable filter request.
 optional isTruncated: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:1217](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1217)
+Defined in: [gen/types.gen.ts:1252](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1252)
 
 Filter cluster variables by truncation status of their stored values. When true, returns only variables whose stored values are truncated (i.e., the value exceeds the storage size limit and is truncated in storage). When false, returns only variables with non-truncated stored values. This filter is based on the underlying storage characteristic, not the response format.
 
----
+***
 
 ### name?
 
@@ -35,11 +35,11 @@ Filter cluster variables by truncation status of their stored values. When true,
 optional name: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:1200](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1200)
+Defined in: [gen/types.gen.ts:1235](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1235)
 
 Name of the cluster variable.
 
----
+***
 
 ### scope?
 
@@ -47,11 +47,11 @@ Name of the cluster variable.
 optional scope: ClusterVariableScopeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:1208](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1208)
+Defined in: [gen/types.gen.ts:1243](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1243)
 
 The scope filter for cluster variables.
 
----
+***
 
 ### tenantId?
 
@@ -59,11 +59,11 @@ The scope filter for cluster variables.
 optional tenantId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:1212](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1212)
+Defined in: [gen/types.gen.ts:1247](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1247)
 
 Tenant ID of this variable.
 
----
+***
 
 ### value?
 
@@ -71,6 +71,6 @@ Tenant ID of this variable.
 optional value: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:1204](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1204)
+Defined in: [gen/types.gen.ts:1239](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1239)
 
 The value of the cluster variable.

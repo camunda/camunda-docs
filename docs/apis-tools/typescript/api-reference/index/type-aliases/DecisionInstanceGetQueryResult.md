@@ -11,22 +11,22 @@ mdx:
 type DecisionInstanceGetQueryResult = DecisionInstanceResult & object;
 ```
 
-Defined in: [gen/types.gen.ts:1818](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1818)
+Defined in: [gen/types.gen.ts:1859](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1859)
 
 ## Type Declaration
 
-### evaluatedInputs?
+### evaluatedInputs
 
 ```ts
-optional evaluatedInputs: EvaluatedDecisionInputItem[];
+evaluatedInputs: EvaluatedDecisionInputItem[];
 ```
 
 The evaluated inputs of the decision instance.
 
-### matchedRules?
+### matchedRules
 
 ```ts
-optional matchedRules: MatchedDecisionRuleItem[];
+matchedRules: MatchedDecisionRuleItem[];
 ```
 
 The matched rules of the decision instance.

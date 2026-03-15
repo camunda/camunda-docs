@@ -11,14 +11,14 @@ mdx:
 type MessageSubscriptionSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:4771](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4771)
+Defined in: [gen/types.gen.ts:5415](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5415)
 
 ## Properties
 
 ### field
 
 ```ts
-field:
+field: 
   | "messageSubscriptionKey"
   | "processDefinitionId"
   | "processInstanceKey"
@@ -31,11 +31,11 @@ field:
   | "tenantId";
 ```
 
-Defined in: [gen/types.gen.ts:4775](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4775)
+Defined in: [gen/types.gen.ts:5419](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5419)
 
 The field to sort by.
 
----
+***
 
 ### order?
 
@@ -43,4 +43,4 @@ The field to sort by.
 optional order: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:4776](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4776)
+Defined in: [gen/types.gen.ts:5420](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5420)

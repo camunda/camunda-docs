@@ -8,8 +8,7 @@ mdx:
 # Type Alias: SearchClientsForGroupError
 
 ```ts
-type SearchClientsForGroupError =
-  SearchClientsForGroupErrors[keyof SearchClientsForGroupErrors];
+type SearchClientsForGroupError = SearchClientsForGroupErrors[keyof SearchClientsForGroupErrors];
 ```
 
-Defined in: [gen/types.gen.ts:10900](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10900)
+Defined in: [gen/types.gen.ts:11040](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L11040)

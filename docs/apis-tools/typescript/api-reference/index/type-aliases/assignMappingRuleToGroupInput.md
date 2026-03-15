@@ -11,7 +11,7 @@ mdx:
 type assignMappingRuleToGroupInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:71](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L71)
+Defined in: [gen/CamundaClient.ts:76](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L76)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/CamundaClient.ts:71](https://github.com/camunda/orchestration-c
 groupId: assignMappingRuleToGroupPathParam_groupId;
 ```
 
-Defined in: [gen/CamundaClient.ts:71](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L71)
+Defined in: [gen/CamundaClient.ts:76](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L76)
 
----
+***
 
 ### mappingRuleId
 
@@ -31,4 +31,4 @@ Defined in: [gen/CamundaClient.ts:71](https://github.com/camunda/orchestration-c
 mappingRuleId: assignMappingRuleToGroupPathParam_mappingRuleId;
 ```
 
-Defined in: [gen/CamundaClient.ts:71](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L71)
+Defined in: [gen/CamundaClient.ts:76](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L76)

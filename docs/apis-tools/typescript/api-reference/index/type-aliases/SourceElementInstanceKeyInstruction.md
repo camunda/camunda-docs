@@ -11,7 +11,7 @@ mdx:
 type SourceElementInstanceKeyInstruction = object;
 ```
 
-Defined in: [gen/types.gen.ts:6063](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6063)
+Defined in: [gen/types.gen.ts:6765](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6765)
 
 Defines an instruction with a sourceElementInstanceKey. The move instruction with this sourceType will terminate one active element
 instance with the sourceElementInstanceKey and activate a new element instance at targetElementId.
@@ -24,11 +24,11 @@ instance with the sourceElementInstanceKey and activate a new element instance a
 sourceElementInstanceKey: ElementInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:6072](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6072)
+Defined in: [gen/types.gen.ts:6774](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6774)
 
 The source element instance key for the move instruction.
 
----
+***
 
 ### sourceType
 
@@ -36,6 +36,6 @@ The source element instance key for the move instruction.
 sourceType: string;
 ```
 
-Defined in: [gen/types.gen.ts:6067](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6067)
+Defined in: [gen/types.gen.ts:6769](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6769)
 
 The type of source element instruction.

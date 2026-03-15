@@ -11,7 +11,7 @@ mdx:
 type Job<In, Headers> = EnrichedActivatedJob & object;
 ```
 
-Defined in: [runtime/jobWorker.ts:60](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/jobWorker.ts#L60)
+Defined in: [runtime/jobWorker.ts:67](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/runtime/jobWorker.ts#L67)
 
 ## Type Declaration
 
@@ -31,8 +31,8 @@ variables: InferOrUnknown<In>;
 
 ### In
 
-`In` _extends_ `z.ZodTypeAny` \| `undefined`
+`In` *extends* `z.ZodTypeAny` \| `undefined`
 
 ### Headers
 
-`Headers` _extends_ `z.ZodTypeAny` \| `undefined`
+`Headers` *extends* `z.ZodTypeAny` \| `undefined`

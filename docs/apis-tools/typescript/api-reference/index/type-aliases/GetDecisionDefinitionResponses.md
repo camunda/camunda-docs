@@ -11,7 +11,7 @@ mdx:
 type GetDecisionDefinitionResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:9309](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9309)
+Defined in: [gen/types.gen.ts:9682](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9682)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:9309](https://github.com/camunda/orchestration-clu
 200: DecisionDefinitionResult;
 ```
 
-Defined in: [gen/types.gen.ts:9313](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9313)
+Defined in: [gen/types.gen.ts:9686](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9686)
 
 The decision definition is successfully returned.

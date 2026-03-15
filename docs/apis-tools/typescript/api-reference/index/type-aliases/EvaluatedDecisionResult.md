@@ -11,126 +11,126 @@ mdx:
 type EvaluatedDecisionResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:1617](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1617)
+Defined in: [gen/types.gen.ts:1652](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1652)
 
 A decision that was evaluated.
 
 ## Properties
 
-### decisionDefinitionId?
+### decisionDefinitionId
 
 ```ts
-optional decisionDefinitionId: DecisionDefinitionId;
+decisionDefinitionId: DecisionDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:1621](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1621)
+Defined in: [gen/types.gen.ts:1656](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1656)
 
 The ID of the decision which was evaluated.
 
----
+***
 
-### decisionDefinitionKey?
+### decisionDefinitionKey
 
 ```ts
-optional decisionDefinitionKey: DecisionDefinitionKey;
+decisionDefinitionKey: DecisionDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:1654](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1654)
+Defined in: [gen/types.gen.ts:1689](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1689)
 
 The unique key identifying the decision which was evaluate.
 
----
+***
 
-### decisionDefinitionName?
+### decisionDefinitionName
 
 ```ts
-optional decisionDefinitionName: string;
+decisionDefinitionName: string;
 ```
 
-Defined in: [gen/types.gen.ts:1625](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1625)
+Defined in: [gen/types.gen.ts:1660](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1660)
 
 The name of the decision which was evaluated.
 
----
+***
 
-### decisionDefinitionType?
+### decisionDefinitionType
 
 ```ts
-optional decisionDefinitionType: string;
+decisionDefinitionType: string;
 ```
 
-Defined in: [gen/types.gen.ts:1633](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1633)
+Defined in: [gen/types.gen.ts:1668](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1668)
 
 The type of the decision which was evaluated.
 
----
+***
 
-### decisionDefinitionVersion?
+### decisionDefinitionVersion
 
 ```ts
-optional decisionDefinitionVersion: number;
+decisionDefinitionVersion: number;
 ```
 
-Defined in: [gen/types.gen.ts:1629](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1629)
+Defined in: [gen/types.gen.ts:1664](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1664)
 
 The version of the decision which was evaluated.
 
----
+***
 
-### decisionEvaluationInstanceKey?
+### decisionEvaluationInstanceKey
 
 ```ts
-optional decisionEvaluationInstanceKey: DecisionEvaluationInstanceKey;
+decisionEvaluationInstanceKey: DecisionEvaluationInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:1658](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1658)
+Defined in: [gen/types.gen.ts:1693](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1693)
 
 The unique key identifying this decision evaluation instance.
 
----
+***
 
-### evaluatedInputs?
+### evaluatedInputs
 
 ```ts
-optional evaluatedInputs: EvaluatedDecisionInputItem[];
+evaluatedInputs: EvaluatedDecisionInputItem[];
 ```
 
-Defined in: [gen/types.gen.ts:1650](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1650)
+Defined in: [gen/types.gen.ts:1685](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1685)
 
 The decision inputs that were evaluated within this decision evaluation.
 
----
+***
 
-### matchedRules?
+### matchedRules
 
 ```ts
-optional matchedRules: MatchedDecisionRuleItem[];
+matchedRules: MatchedDecisionRuleItem[];
 ```
 
-Defined in: [gen/types.gen.ts:1646](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1646)
+Defined in: [gen/types.gen.ts:1681](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1681)
 
 The decision rules that matched within this decision evaluation.
 
----
+***
 
-### output?
+### output
 
 ```ts
-optional output: string;
+output: string;
 ```
 
-Defined in: [gen/types.gen.ts:1638](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1638)
+Defined in: [gen/types.gen.ts:1673](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1673)
 
 JSON document that will instantiate the result of the decision which was evaluated.
 
----
+***
 
-### tenantId?
+### tenantId
 
 ```ts
-optional tenantId: TenantId;
+tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:1642](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1642)
+Defined in: [gen/types.gen.ts:1677](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L1677)
 
 The tenant ID of the evaluated decision.

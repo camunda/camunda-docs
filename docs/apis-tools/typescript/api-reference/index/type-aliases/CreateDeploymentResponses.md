@@ -11,40 +11,16 @@ mdx:
 type CreateDeploymentResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:9967](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9967)
+Defined in: [gen/types.gen.ts:10068](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10068)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: object;
+200: DeploymentResult;
 ```
 
-Defined in: [gen/types.gen.ts:9971](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9971)
+Defined in: [gen/types.gen.ts:10072](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L10072)
 
 The resources are deployed.
-
-#### deploymentKey
-
-```ts
-deploymentKey: DeploymentKey;
-```
-
-The unique key identifying the deployment.
-
-#### deployments
-
-```ts
-deployments: object[];
-```
-
-Items deployed by the request.
-
-#### tenantId
-
-```ts
-tenantId: TenantId;
-```
-
-The tenant ID associated with the deployment.

@@ -8,8 +8,7 @@ mdx:
 # Type Alias: CreateGlobalClusterVariableResponse
 
 ```ts
-type CreateGlobalClusterVariableResponse =
-  CreateGlobalClusterVariableResponses[keyof CreateGlobalClusterVariableResponses];
+type CreateGlobalClusterVariableResponse = CreateGlobalClusterVariableResponses[keyof CreateGlobalClusterVariableResponses];
 ```
 
-Defined in: [gen/types.gen.ts:8619](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8619)
+Defined in: [gen/types.gen.ts:9113](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9113)

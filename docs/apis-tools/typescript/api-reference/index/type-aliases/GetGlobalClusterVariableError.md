@@ -8,8 +8,7 @@ mdx:
 # Type Alias: GetGlobalClusterVariableError
 
 ```ts
-type GetGlobalClusterVariableError =
-  GetGlobalClusterVariableErrors[keyof GetGlobalClusterVariableErrors];
+type GetGlobalClusterVariableError = GetGlobalClusterVariableErrors[keyof GetGlobalClusterVariableErrors];
 ```
 
-Defined in: [gen/types.gen.ts:8702](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8702)
+Defined in: [gen/types.gen.ts:9196](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L9196)

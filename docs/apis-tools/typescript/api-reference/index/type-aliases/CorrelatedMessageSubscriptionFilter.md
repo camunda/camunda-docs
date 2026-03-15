@@ -11,7 +11,7 @@ mdx:
 type CorrelatedMessageSubscriptionFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:4926](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4926)
+Defined in: [gen/types.gen.ts:5578](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5578)
 
 Correlated message subscriptions search filter.
 
@@ -23,11 +23,11 @@ Correlated message subscriptions search filter.
 optional correlationKey: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4930](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4930)
+Defined in: [gen/types.gen.ts:5582](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5582)
 
 The correlation key of the message.
 
----
+***
 
 ### correlationTime?
 
@@ -35,11 +35,11 @@ The correlation key of the message.
 optional correlationTime: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4934](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4934)
+Defined in: [gen/types.gen.ts:5586](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5586)
 
 The time when the message was correlated.
 
----
+***
 
 ### elementId?
 
@@ -47,11 +47,11 @@ The time when the message was correlated.
 optional elementId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4938](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4938)
+Defined in: [gen/types.gen.ts:5590](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5590)
 
 The element ID that received the message.
 
----
+***
 
 ### elementInstanceKey?
 
@@ -59,11 +59,11 @@ The element ID that received the message.
 optional elementInstanceKey: ElementInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4942](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4942)
+Defined in: [gen/types.gen.ts:5594](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5594)
 
 The element instance key that received the message.
 
----
+***
 
 ### messageKey?
 
@@ -71,11 +71,11 @@ The element instance key that received the message.
 optional messageKey: BasicStringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4946](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4946)
+Defined in: [gen/types.gen.ts:5598](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5598)
 
 The message key.
 
----
+***
 
 ### messageName?
 
@@ -83,11 +83,11 @@ The message key.
 optional messageName: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4950](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4950)
+Defined in: [gen/types.gen.ts:5602](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5602)
 
 The name of the message.
 
----
+***
 
 ### partitionId?
 
@@ -95,11 +95,11 @@ The name of the message.
 optional partitionId: IntegerFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4954](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4954)
+Defined in: [gen/types.gen.ts:5606](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5606)
 
 The partition ID that correlated the message.
 
----
+***
 
 ### processDefinitionId?
 
@@ -107,11 +107,11 @@ The partition ID that correlated the message.
 optional processDefinitionId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4958](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4958)
+Defined in: [gen/types.gen.ts:5610](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5610)
 
 The process definition ID associated with this correlated message subscription.
 
----
+***
 
 ### processDefinitionKey?
 
@@ -119,11 +119,11 @@ The process definition ID associated with this correlated message subscription.
 optional processDefinitionKey: ProcessDefinitionKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4962](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4962)
+Defined in: [gen/types.gen.ts:5614](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5614)
 
 The process definition key associated with this correlated message subscription. For intermediate message events, this only works for data created with 8.9 and later.
 
----
+***
 
 ### processInstanceKey?
 
@@ -131,11 +131,11 @@ The process definition key associated with this correlated message subscription.
 optional processInstanceKey: ProcessInstanceKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4966](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4966)
+Defined in: [gen/types.gen.ts:5618](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5618)
 
 The process instance key associated with this correlated message subscription.
 
----
+***
 
 ### subscriptionKey?
 
@@ -143,11 +143,11 @@ The process instance key associated with this correlated message subscription.
 optional subscriptionKey: MessageSubscriptionKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4970](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4970)
+Defined in: [gen/types.gen.ts:5622](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5622)
 
 The subscription key that received the message.
 
----
+***
 
 ### tenantId?
 
@@ -155,6 +155,6 @@ The subscription key that received the message.
 optional tenantId: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:4974](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4974)
+Defined in: [gen/types.gen.ts:5626](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L5626)
 
 The tenant ID associated with this correlated message subscription.

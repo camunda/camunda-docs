@@ -11,7 +11,7 @@ mdx:
 type GetGlobalJobStatisticsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:12132](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12132)
+Defined in: [gen/types.gen.ts:12018](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12018)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/types.gen.ts:12132](https://github.com/camunda/orchestration-cl
 optional body: never;
 ```
 
-Defined in: [gen/types.gen.ts:12133](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12133)
+Defined in: [gen/types.gen.ts:12019](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12019)
 
----
+***
 
 ### path?
 
@@ -31,9 +31,9 @@ Defined in: [gen/types.gen.ts:12133](https://github.com/camunda/orchestration-cl
 optional path: never;
 ```
 
-Defined in: [gen/types.gen.ts:12134](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12134)
+Defined in: [gen/types.gen.ts:12020](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12020)
 
----
+***
 
 ### query
 
@@ -41,7 +41,7 @@ Defined in: [gen/types.gen.ts:12134](https://github.com/camunda/orchestration-cl
 query: object;
 ```
 
-Defined in: [gen/types.gen.ts:12135](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12135)
+Defined in: [gen/types.gen.ts:12021](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12021)
 
 #### from
 
@@ -67,7 +67,7 @@ to: string;
 
 End of the time window to filter metrics. ISO 8601 date-time format.
 
----
+***
 
 ### url
 
@@ -75,4 +75,4 @@ End of the time window to filter metrics. ISO 8601 date-time format.
 url: "/jobs/statistics/global";
 ```
 
-Defined in: [gen/types.gen.ts:12151](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12151)
+Defined in: [gen/types.gen.ts:12037](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L12037)

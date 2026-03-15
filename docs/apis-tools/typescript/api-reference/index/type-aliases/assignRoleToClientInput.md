@@ -11,7 +11,7 @@ mdx:
 type assignRoleToClientInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:79](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L79)
+Defined in: [gen/CamundaClient.ts:84](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L84)
 
 ## Properties
 
@@ -21,9 +21,9 @@ Defined in: [gen/CamundaClient.ts:79](https://github.com/camunda/orchestration-c
 clientId: assignRoleToClientPathParam_clientId;
 ```
 
-Defined in: [gen/CamundaClient.ts:79](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L79)
+Defined in: [gen/CamundaClient.ts:84](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L84)
 
----
+***
 
 ### roleId
 
@@ -31,4 +31,4 @@ Defined in: [gen/CamundaClient.ts:79](https://github.com/camunda/orchestration-c
 roleId: assignRoleToClientPathParam_roleId;
 ```
 
-Defined in: [gen/CamundaClient.ts:79](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L79)
+Defined in: [gen/CamundaClient.ts:84](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/CamundaClient.ts#L84)

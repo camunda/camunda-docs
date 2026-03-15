@@ -11,38 +11,38 @@ mdx:
 type UserCreateResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:7149](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7149)
+Defined in: [gen/types.gen.ts:7927](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7927)
 
 ## Properties
 
-### email?
+### email
 
 ```ts
-optional email: string;
+email: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:7158](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7158)
+Defined in: [gen/types.gen.ts:7936](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7936)
 
 The email of the user.
 
----
+***
 
-### name?
+### name
 
 ```ts
-optional name: string;
+name: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:7154](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7154)
+Defined in: [gen/types.gen.ts:7932](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7932)
 
 The name of the user.
 
----
+***
 
-### username?
+### username
 
 ```ts
-optional username: Username;
+username: Username;
 ```
 
-Defined in: [gen/types.gen.ts:7150](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7150)
+Defined in: [gen/types.gen.ts:7928](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L7928)

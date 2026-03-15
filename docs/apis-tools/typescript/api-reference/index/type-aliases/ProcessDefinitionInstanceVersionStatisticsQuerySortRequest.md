@@ -11,14 +11,14 @@ mdx:
 type ProcessDefinitionInstanceVersionStatisticsQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:5384](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5384)
+Defined in: [gen/types.gen.ts:6043](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6043)
 
 ## Properties
 
 ### field
 
 ```ts
-field:
+field: 
   | "processDefinitionId"
   | "processDefinitionKey"
   | "processDefinitionName"
@@ -27,11 +27,11 @@ field:
   | "activeInstancesWithoutIncidentCount";
 ```
 
-Defined in: [gen/types.gen.ts:5388](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5388)
+Defined in: [gen/types.gen.ts:6047](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6047)
 
 The field to sort by.
 
----
+***
 
 ### order?
 
@@ -39,4 +39,4 @@ The field to sort by.
 optional order: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:5389](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5389)
+Defined in: [gen/types.gen.ts:6048](https://github.com/camunda/orchestration-cluster-api-js/blob/e2c8d04280f4991eb5e2564688bc9dbce3c748a8/src/gen/types.gen.ts#L6048)
