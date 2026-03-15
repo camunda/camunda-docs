@@ -5,6 +5,8 @@ title: Install Bitnami enterprise images
 description: Configure the Camunda Helm chart to use Bitnami Premium enterprise images, understand CVE reporting, support boundaries, and set expectations on vulnerabilities.
 ---
 
+import MigrationTip from '../../operational-tasks/migration-from-bitnami/\_partials/\_migration-tip.md'
+
 This guide explains how to configure the Camunda Helm chart to use Bitnami Premium images designed for production environments. These images are referred to as Enterprise images, indicating that they are intended for Camunda Enterprise customers. The guide also covers configuration steps, security considerations, CVE reporting, and best practices.
 
 ## Overview
@@ -31,6 +33,8 @@ You can continue using Bitnami subcharts in your environments. If you have produ
 For production environments, consider using the official Kubernetes operators for PostgreSQL, Elasticsearch/OpenSearch, and Keycloak instead of Bitnami subcharts.
 
 For detailed instructions, see [Deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
+
+<MigrationTip />
 
 If you use Bitnami-based subcharts in production, Camunda strongly recommends using Bitnami Premium images licensed by Camunda and maintained by Bitnami (Broadcom). This guide explains how to configure and install Camunda with these images.
 

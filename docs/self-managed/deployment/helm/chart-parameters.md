@@ -5,6 +5,8 @@ title: Helm chart parameters
 description: Overview of Helm chart parameters for Camunda Self-Managed.
 ---
 
+import MigrationTip from './operational-tasks/migration-from-bitnami/\_partials/\_migration-tip.md'
+
 Helm chart parameters let you configure the components and behavior of your Camunda Self-Managed installation. The main way to customize these parameters is by using a `values.yaml` file.
 
 In Helm charts, the `values.yaml` file defines configuration for your deployment. To tailor your installation to your needs, you can override parameters in this file or provide your own values file. It's best practice to keep the original `values.yaml` unchanged and maintain a separate file with your custom settings.
@@ -55,6 +57,8 @@ For production environments, deploy infrastructure services separately from the 
 **Alternative deployment approach:**  
 See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
 :::
+
+<MigrationTip />
 
 #### Bitnami subcharts guidance
 
