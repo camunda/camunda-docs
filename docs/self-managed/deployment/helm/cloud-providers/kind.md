@@ -71,7 +71,7 @@ By the end of this tutorial, you'll have:
 - An Ingress NGINX controller deployed for routing traffic (domain mode only).
 - TLS certificates configured with mkcert (domain mode only).
 - Prerequisite services deployed via Kubernetes operators:
-  - Elasticsearch (ECK)
+  - Elasticsearch via ECK (used as secondary storage in this guide; RDBMS is a supported alternative — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md))
   - PostgreSQL (CloudNativePG)
   - Keycloak (Keycloak Operator)
 - Camunda 8 Self-Managed fully deployed and accessible, connected to the operator-managed services.
@@ -231,9 +231,13 @@ The certificate generation script:
 
 Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
-- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) — used as secondary storage in this guide
 - PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
 - Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
+
+:::note Secondary storage alternatives
+This guide uses Elasticsearch (via ECK) as the secondary storage backend. RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) is a supported alternative for the Orchestration Cluster. To use RDBMS instead, skip the Elasticsearch operator deployment and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+:::
 
 Run the operator deployment script, specifying the domain deployment mode:
 
@@ -252,6 +256,10 @@ Deploy Camunda 8 with the domain mode Helm values. The deployment script layers 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/camunda-deploy-domain.sh
 ```
+
+:::note Using RDBMS instead of Elasticsearch
+If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) guide to configure the Orchestration Cluster components.
+:::
 
 This uses the following Helm values:
 
@@ -295,7 +303,7 @@ This section covers the simplified setup using port-forwarding without TLS.
 
 Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
-- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) — used as secondary storage in this guide
 - PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
 - Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
@@ -330,6 +338,10 @@ Deploy Camunda 8 with the no-domain mode Helm values. The deployment script laye
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/camunda-deploy-no-domain.sh
 ```
+
+:::note Using RDBMS instead of Elasticsearch
+If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) guide to configure the Orchestration Cluster components.
+:::
 
 This uses the following Helm values:
 
