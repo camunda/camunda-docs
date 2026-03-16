@@ -69,8 +69,7 @@ Review the actions required for the following 8.9 changes:
 | Breaking change        | [OpenAPI enum extensions](#enum-extensions)                                                                         |
 | Breaking change        | [OpenAPI type-safety enhancements](#type-safety-enhancements)                                                       |
 | Breaking change        | [Resource deletion endpoint now returns a response body](#resource-deletion)                                        |
-| Breaking change        | [Spring Boot 4.0 default for Camunda Spring Boot Starter](#spring-boot-default)                                     |
-| Breaking change        | [Spring Boot 4.0 required for Camunda Spring Boot Starter](#spring-boot)                                            |
+| Breaking change        | [Spring Boot 4.0 default for Camunda Spring Boot Starter](#spring-boot)                                             |
 | Breaking change        | [`versionTag` returns `null` instead of empty string when absent](#version-tag-null)                                |
 | Breaking change        | [Web Modeler changes](#web-modeler)                                                                                 |
 | Deprecated             | [Deprecated: enum literals in Orchestration Cluster API v2](#deprecated-enum)                                       |
@@ -377,11 +376,11 @@ Update your HTTP client code to parse the new JSON response body from the deleti
 </TabItem>
 </Tabs>
 
-### Spring Boot 4.0 default for Camunda Spring Boot Starter {#spring-boot-default}
+### Spring Boot 4.0 default for Camunda Spring Boot Starter {#spring-boot}
 
 #### Change
 
-Starting with 8.9.0, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter`) is bundled with Spring Boot 4.0.x. A dedicated `camunda-spring-boot-3-starter` module is available for applications that are not yet ready to upgrade.
+Starting with 8.9.0, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter`) is bundled with and requires Spring Boot 4.0.x. A dedicated `camunda-spring-boot-3-starter` module is available for applications that are not yet ready to upgrade.
 
 #### Action
 
@@ -389,21 +388,6 @@ Starting with 8.9.0, the default [Camunda Spring Boot Starter](/apis-tools/camun
 - If you cannot migrate yet, switch your dependency to `camunda-spring-boot-3-starter`, which is bundled with Spring Boot 3.5.x. Note that OSS support for Spring Boot 3.5.x ends in June 2026, so plan your migration accordingly.
 - See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support) for details.
 - See the [dedicated Spring Boot 3 and 4 modules](/apis-tools/camunda-spring-boot-starter/getting-started.md#dedicated-spring-boot-3-and-4-modules) documentation for more information.
-
-### Spring Boot 4.0 required for Camunda Spring Boot Starter {#spring-boot}
-
-#### Change
-
-Starting with 8.9.0, the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) requires Spring Boot 4.0.x.
-
-#### Why
-
-OSS support for Spring Boot 3.x ends in June 2026. This change keeps Camunda aligned with the Spring Boot support policy.
-
-#### Action
-
-- Migrate your application to Spring Boot 4.0.x before upgrading to Camunda 8.9.
-- See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support) for details.
 
 ### `versionTag` returns `null` instead of empty string when absent {#version-tag-null}
 
