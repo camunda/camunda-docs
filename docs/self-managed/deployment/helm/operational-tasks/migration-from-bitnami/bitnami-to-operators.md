@@ -88,6 +88,10 @@ generic/kubernetes/
         └── eck-migration-patch.yml  # ES reindex.remote.whitelist patch
 ```
 
+The following diagram shows the starting point before migration: a Camunda cluster still backed by Bitnami-managed infrastructure.
+
+![Initial cluster state before migration from Bitnami subcharts to Kubernetes operators](./img/bitnami-migration-initial-state.jpg)
+
 ## Step 1: Configure the migration
 
 Edit `env.sh` to match your current Camunda installation:
@@ -215,6 +219,8 @@ The migration follows five sequential phases. Each phase can be re-run safely (i
 
 ### Phase 1: Deploy target infrastructure (no downtime)
 
+![Illustration of Phase 1: deploy the operator-managed target infrastructure alongside the Bitnami components](./img/bitnami-migration-phase-1-deploy-targets.jpg)
+
 This phase installs the Kubernetes operators and creates the target clusters alongside your existing Bitnami components. Your application continues to run normally.
 
 ```bash
@@ -245,6 +251,8 @@ The script only deploys operators for components that are being migrated. For ex
 :::
 
 ### Phase 2: Initial backup (no downtime)
+
+![Illustration of Phase 2: take the initial backup while the source platform is still running](./img/bitnami-migration-phase-2-initial-backup.jpg)
 
 This phase takes a "warm" backup of all data sources while the application is still running. This reduces the cutover window in Phase 3.
 
@@ -288,6 +296,8 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 </details>
 
 ### Phase 3: Cutover (downtime required)
+
+![Illustration of Phase 3: stop traffic, restore the data, and switch Camunda to the new backends](./img/bitnami-migration-phase-3-cutover.jpg)
 
 :::caution Maintenance window required
 This is the only phase that causes **downtime**. Schedule a maintenance window before proceeding. Typical duration: **5–40 minutes** depending on Elasticsearch data volume — see [Downtime estimation](#downtime-estimation) for benchmarked timings.
@@ -339,6 +349,8 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ### Phase 4: Validate (no downtime)
 
+![Illustration of Phase 4: validate the operator-managed platform after cutover](./img/bitnami-migration-phase-4-validate.jpg)
+
 ```bash
 bash 4-validate.sh
 ```
@@ -361,6 +373,8 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 </details>
 
 ### Phase 5: Cleanup Bitnami resources (no downtime)
+
+![Illustration of Phase 5: remove the old Bitnami resources after the new platform is stable](./img/bitnami-migration-phase-5-cleanup.jpg)
 
 :::caution Wait before cleanup
 Do not run this phase immediately after validation. Operate with the new infrastructure for at least 72 hours to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup.

@@ -54,85 +54,22 @@ cd camunda-deployment-references/generic/kubernetes/migration
 
 ## Step 1: Provision managed services
 
-Before running the migration, provision your managed services and create the required databases and users.
+Before running the migration, provision your managed services using your cloud provider's official documentation. This guide assumes the services already exist and focuses only on the Camunda-specific migration steps.
 
 ### PostgreSQL
 
-<Tabs groupId="cloud-provider" queryString>
+Use your provider's setup guide for the database service you operate:
 
-<TabItem value="aws" label="AWS RDS">
+- [AWS RDS for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html)
+- [Azure Database for PostgreSQL - Flexible Server](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/overview)
+- [Google Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)
 
-Create an RDS PostgreSQL instance and the required databases:
+Minimum requirements before continuing:
 
-```sql
--- Connect to your RDS instance and create databases
-CREATE DATABASE identity;
-CREATE DATABASE keycloak;
-CREATE DATABASE webmodeler;
-
--- Create users with appropriate permissions
-CREATE USER identity WITH PASSWORD '<password>';
-CREATE USER keycloak WITH PASSWORD '<password>';
-CREATE USER webmodeler WITH PASSWORD '<password>';
-
-GRANT ALL PRIVILEGES ON DATABASE identity TO identity;
-GRANT ALL PRIVILEGES ON DATABASE keycloak TO keycloak;
-GRANT ALL PRIVILEGES ON DATABASE webmodeler TO webmodeler;
-```
-
-Ensure your EKS security groups allow traffic to the RDS instance on port 5432.
-
-</TabItem>
-
-<TabItem value="azure" label="Azure Database for PostgreSQL">
-
-Create an Azure Database for PostgreSQL - Flexible Server and the required databases:
-
-```sql
--- Connect to your Azure PostgreSQL instance and create databases
-CREATE DATABASE identity;
-CREATE DATABASE keycloak;
-CREATE DATABASE webmodeler;
-
--- Create users
-CREATE USER identity WITH PASSWORD '<password>';
-CREATE USER keycloak WITH PASSWORD '<password>';
-CREATE USER webmodeler WITH PASSWORD '<password>';
-
-GRANT ALL PRIVILEGES ON DATABASE identity TO identity;
-GRANT ALL PRIVILEGES ON DATABASE keycloak TO keycloak;
-GRANT ALL PRIVILEGES ON DATABASE webmodeler TO webmodeler;
-```
-
-Ensure your AKS virtual network has a [Private Link](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-networking-private-link) or service endpoint to the PostgreSQL server.
-
-</TabItem>
-
-<TabItem value="gcp" label="Google Cloud SQL">
-
-Create a Cloud SQL for PostgreSQL instance and the required databases:
-
-```sql
--- Connect to your Cloud SQL instance and create databases
-CREATE DATABASE identity;
-CREATE DATABASE keycloak;
-CREATE DATABASE webmodeler;
-
--- Create users
-CREATE USER identity WITH PASSWORD '<password>';
-CREATE USER keycloak WITH PASSWORD '<password>';
-CREATE USER webmodeler WITH PASSWORD '<password>';
-
-GRANT ALL PRIVILEGES ON DATABASE identity TO identity;
-GRANT ALL PRIVILEGES ON DATABASE keycloak TO keycloak;
-GRANT ALL PRIVILEGES ON DATABASE webmodeler TO webmodeler;
-```
-
-Configure [Private IP](https://cloud.google.com/sql/docs/postgres/configure-private-ip) or use the Cloud SQL Auth Proxy for connectivity from GKE.
-
-</TabItem>
-
-</Tabs>
+- Create the `identity`, `keycloak`, and `webmodeler` databases.
+- Create or assign credentials for each database according to your provider's model.
+- Ensure private connectivity from the Kubernetes cluster to PostgreSQL.
+- Record the endpoint, port, database names, usernames, and secret material used in the next steps.
 
 ### Elasticsearch
 
