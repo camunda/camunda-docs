@@ -49,6 +49,14 @@ For deployments, environment variables are typically easier to use. Table entrie
 
 If you deploy Camunda 8 with Helm (the recommended approach), you can configure the gateway using Helm chart parameters. See the [Zeebe Gateway Helm chart configuration options](https://artifacthub.io/packages/helm/camunda/camunda-platform#zeebe-gateway-parameters).
 
+:::note
+The Zeebe Gateway is a Spring Boot application. Many common Spring Boot properties work out of the box.
+
+The REST server runs on Spring MVC and can be configured using standard `server.*` properties.
+
+The management server (for example, actuator endpoints) runs in a child application context and can be configured with `management.server.*` properties.
+:::
+
 ### server
 
 The `server` configuration allows you to configure the main REST server. Below are a few common ones, but you can find a more exhaustive list [in the official Spring documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.server).
