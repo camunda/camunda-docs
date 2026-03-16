@@ -204,6 +204,18 @@ const preGenerateDocs = (config) => {
     });
   });
 
+  config.metadata.groups.forEach((group) => {
+    if (group.description) {
+      group.description = group.description
+        .replaceAll(/<p>/g, "\n\n")
+        .replaceAll(/<code> /g, "`")
+        .replaceAll(/<code>/g, "`")
+        .replaceAll(/ <\/code>/g, "`")
+        .replaceAll(/<\/code>/g, "`")
+        .replaceAll(/<br>/g, "\n");
+    }
+  });
+
   config.metadata.properties.forEach((property) => {
     if (property.type in typeReplacements) {
       property.type = typeReplacements[property.type];
@@ -218,7 +230,9 @@ const preGenerateDocs = (config) => {
     if (property.description) {
       property.description = property.description
         .replaceAll(/<p>/g, "\n\n")
+        .replaceAll(/<code> /g, "`")
         .replaceAll(/<code>/g, "`")
+        .replaceAll(/ <\/code>/g, "`")
         .replaceAll(/<\/code>/g, "`")
         .replaceAll(/<br>/g, "\n");
     }
