@@ -79,6 +79,13 @@ The main downtime driver is the PostgreSQL restore (`pg_restore`) and Elasticsea
 
 Depending on your infrastructure capabilities and organizational requirements, choose one of the following migration paths:
 
+Use this quick rule of thumb before selecting a guide:
+
+- Choose **zero-downtime migration** if your SLA does not allow a maintenance window.
+- Choose **Kubernetes operators** if you want to keep infrastructure in-cluster with operator-managed lifecycle.
+- Choose **managed services** if you want PostgreSQL and Elasticsearch/OpenSearch operated by your cloud provider.
+- Choose **manual deployment** if you run on VMs, bare metal, or another topology outside these supported patterns.
+
 | Target                                                                                 | Best for                                                                                                            | Guide                                                           |
 | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | **Kubernetes operators** (CloudNativePG, ECK, Keycloak Operator)                       | Teams running Kubernetes who want production-grade, self-managed infrastructure with operator lifecycle management. | [Migrate to Kubernetes operators](./bitnami-to-operators.md)    |
@@ -95,6 +102,14 @@ Regardless of your chosen migration target, ensure the following:
 - `helm` v3 with the `camunda/camunda-platform` repository added
 - Sufficient cluster resources to temporarily run both old and new infrastructure side-by-side
 - A tested backup of your current installation
+
+:::important Plan authentication and service access up front
+All migration paths require an explicit decision for authentication and connectivity:
+
+- If you keep **Keycloak**, plan for a Keycloak Operator deployment and configure the hostname with the full external URL, for example `https://your-domain.example.com/auth`.
+- If you replace Keycloak with an [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md), complete that design before cutover because Identity configuration changes are part of the migration.
+- If your PostgreSQL or Elasticsearch/OpenSearch access depends on cloud-specific IAM authentication such as AWS IRSA, the provided migration jobs are not sufficient and you need a custom migration workflow.
+  :::
 
 :::caution Test in staging first
 Always perform a full migration dry run on a non-production environment before migrating production. The migration scripts support a `--dry-run` flag to preview actions without making changes.

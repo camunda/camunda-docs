@@ -94,9 +94,14 @@ generic/kubernetes/
 
 Edit `env.sh` to match your current Camunda installation:
 
+<details>
+<summary>Show details: `env.sh` reference</summary>
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/env.sh
 ```
+
+</details>
 
 ### Key configuration variables
 
@@ -146,6 +151,16 @@ source env.sh
 Before running the migration, **you must review and customize** the operator-based manifests to match your production requirements. The migration deploys operators and instances using these manifests — the default settings may not be appropriate for your workload.
 :::
 
+Use the following rule of thumb while reviewing the manifests:
+
+| Component     | Must review before production                                              | Defaults may be acceptable for                          |
+| ------------- | -------------------------------------------------------------------------- | ------------------------------------------------------- |
+| PostgreSQL    | Storage size, replica count, CPU and memory, connection-related parameters | Short-lived staging rehearsals with representative data |
+| Elasticsearch | Node count, storage size, JVM and resource limits                          | Dry runs where you only validate the workflow           |
+| Keycloak      | Hostname, ingress or route mode, replica count, resource limits            | Non-production validation only                          |
+
+If you are rehearsing the migration for the first time, keep the manifests simple but ensure storage is at least as large as the existing Bitnami volumes. Before production, revisit the sizing based on the timings and load observed during rehearsal.
+
 ### PostgreSQL (CloudNativePG)
 
 Review the CNPG cluster specifications in `operator-based/postgresql/postgresql-clusters.yml`. Key settings to verify:
@@ -156,9 +171,14 @@ Review the CNPG cluster specifications in `operator-based/postgresql/postgresql-
 - Resource requests and limits
 - PostgreSQL parameters (shared_buffers, max_connections, etc.)
 
+<details>
+<summary>Show details: CloudNativePG manifest reference</summary>
+
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/postgresql-clusters.yml
 ```
+
+</details>
 
 ### Elasticsearch (ECK)
 
@@ -168,13 +188,18 @@ The migration patches the reference ECK cluster manifest from `operator-based/el
 - Storage size (must be >= your current Bitnami ES PVC size)
 - Resource requests and limits
 
+<details>
+<summary>Show details: Elasticsearch manifest reference</summary>
+
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
 ```
 
+</details>
+
 ### Keycloak
 
-Review the Keycloak Custom Resource in `operator-based/keycloak/`. Choose the appropriate variant:
+Review the Keycloak Custom Resource in `operator-based/keycloak/`. For the broader deployment context and Helm values layering, see [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment). Choose the appropriate variant:
 
 - `keycloak-instance-domain-nginx.yml` — if you have a domain with nginx Ingress
 - `keycloak-instance-domain-openshift.yml` — for OpenShift deployments with Routes
@@ -208,9 +233,14 @@ What happens:
 
 All targets are created empty — no traffic is routed to them yet.
 
+<details>
+<summary>Show details: Phase 1 script reference</summary>
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/1-deploy-targets.sh
 ```
+
+</details>
 
 :::info Selective component deployment
 The script only deploys operators for components that are being migrated. For example, if `MIGRATE_ELASTICSEARCH=false`, the ECK operator is not installed.
@@ -232,19 +262,34 @@ What happens:
 
 The PostgreSQL backup job template:
 
+<details>
+<summary>Show details: PostgreSQL backup job template</summary>
+
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/pg-backup.job.yml
 ```
 
+</details>
+
 The Elasticsearch verification job template:
+
+<details>
+<summary>Show details: Elasticsearch verification job template</summary>
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/es-backup.job.yml
 ```
 
+</details>
+
+<details>
+<summary>Show details: Phase 2 script reference</summary>
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/2-backup.sh
 ```
+
+</details>
 
 ### Phase 3: Cutover (downtime required)
 
@@ -269,19 +314,34 @@ The cutover performs the following steps:
 
 The PostgreSQL restore job template:
 
+<details>
+<summary>Show details: PostgreSQL restore job template</summary>
+
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/pg-restore.job.yml
 ```
 
+</details>
+
 The Elasticsearch reindex-from-remote restore job template:
+
+<details>
+<summary>Show details: Elasticsearch restore job template</summary>
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/es-restore.job.yml
 ```
 
+</details>
+
+<details>
+<summary>Show details: Phase 3 script reference</summary>
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/3-cutover.sh
 ```
+
+</details>
 
 ### Phase 4: Validate (no downtime)
 
@@ -297,9 +357,14 @@ This phase verifies that all components are healthy:
 - Keycloak Custom Resource is ready.
 - A migration report is generated at `.state/migration-report.md`.
 
+<details>
+<summary>Show details: Phase 4 script reference</summary>
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/4-validate.sh
 ```
+
+</details>
 
 ### Phase 5: Cleanup Bitnami resources (no downtime)
 
@@ -323,9 +388,14 @@ What happens:
 6. **Re-verifies** that all Camunda components and operator-managed targets remain healthy after cleanup.
 7. Suggests removing the `reindex.remote.whitelist` setting from the ECK Elasticsearch configuration as a post-cleanup step.
 
+<details>
+<summary>Show details: Phase 5 script reference</summary>
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/5-cleanup-bitnami.sh
 ```
+
+</details>
 
 :::info Idempotent cleanup
 The script checks whether each resource exists before attempting deletion, so it can be safely re-run if interrupted.
@@ -335,52 +405,12 @@ The script checks whether each resource exists before attempting deletion, so it
 This phase **permanently deletes** old Bitnami StatefulSets, PVCs, and the migration backup PVC. After cleanup, rollback to Bitnami sub-charts is **no longer possible**.
 
 Before running this phase, strongly consider:
+
 1. Take a full backup of all databases (`pg_dumpall` or equivalent)
 2. Snapshot PVCs or storage volumes (cloud provider snapshots)
 3. Store backups in cold storage (S3 Glacier, GCS Archive, etc.)
 4. Keep rollback artifacts in `.state/` as a safety net
-:::
-
-```bash
-bash 5-cleanup-bitnami.sh
-```
-
-This phase removes leftover Bitnami sub-chart resources that are no longer used:
-
-- Old PostgreSQL StatefulSets and their PVCs
-- Old Elasticsearch StatefulSet and its PVCs
-- Old Keycloak StatefulSet
-- Migration backup PVC
-
-After cleanup, the script re-verifies that all Camunda components, operator-managed targets, and data remain healthy without the old resources.
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/5-cleanup-bitnami.sh
-```
-
-## Non-interactive mode
-
-For CI/CD pipelines or automated migrations, use the `--yes` flag to skip all confirmation prompts:
-
-```bash
-source env.sh
-bash 1-deploy-targets.sh --yes
-bash 2-backup.sh --yes
-bash 3-cutover.sh --yes
-bash 4-validate.sh --yes
-# After confirming stability (wait at least 72 hours):
-bash 5-cleanup-bitnami.sh --yes
-```
-
-Additional flags:
-
-| Flag              | Description                                            |
-| ----------------- | ------------------------------------------------------ |
-| `--yes`, `-y`     | Auto-confirm all prompts (non-interactive mode)        |
-| `--dry-run`       | Show what would be done without making changes         |
-| `--verbose`, `-v` | Enable verbose output (show commands before execution) |
-| `--no-color`      | Disable colored output                                 |
-| `--status`        | Show current migration status and exit                 |
+   :::
 
 ## Migration hooks
 
@@ -415,6 +445,13 @@ curl -X POST "$SLACK_WEBHOOK" \
 Hook scripts are `source`d (not forked), so they have access to all library functions and variables. A failing hook aborts the migration (due to `set -e`). Add `|| true` to make a hook best-effort.
 :::
 
+Typical hook use cases:
+
+- Pause external consumers before Phase 3 and resume them after validation.
+- Send change-management or on-call notifications at the start and end of cutover.
+- Run smoke tests after Phase 3 or Phase 4 and fail the migration if a critical endpoint is unavailable.
+- Update DNS or ingress records for Keycloak after the new service becomes active.
+
 ## Rollback
 
 If the migration fails or produces unexpected results, you can roll back to the pre-cutover state:
@@ -425,9 +462,14 @@ bash rollback.sh
 
 This restores the previous Helm values (re-enabling Bitnami subcharts) and restarts Camunda on the original infrastructure. The operator-managed resources (CNPG clusters, ECK, Keycloak CR) are **not deleted**, allowing you to retry or debug.
 
+<details>
+<summary>Show details: rollback script reference</summary>
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/rollback.sh
 ```
+
+</details>
 
 :::info Rollback scope
 Rollback is available after Phase 3 (cutover). Before that, simply stop the migration — your Bitnami infrastructure is still active and untouched.
@@ -443,7 +485,7 @@ bash 5-cleanup-bitnami.sh
 
 This script automatically removes old Bitnami PostgreSQL, Elasticsearch, and Keycloak StatefulSets along with their PVCs, headless services, and the migration backup PVC. See [Phase 5](#phase-5-cleanup-bitnami-resources-no-downtime) for details.
 
-If you prefer to clean up manually, you can delete the resources individually:
+Manual deletion is possible, but the script is the safer option because it preserves the built-in confirmations, health checks, and state tracking.
 
 ## Downtime estimation
 
@@ -453,35 +495,36 @@ Only Phase 3 (cutover) causes downtime. The estimates below were measured on min
 
 The following timings were observed migrating a Camunda 8 installation with all components (Identity, Keycloak, Web Modeler, Elasticsearch):
 
-| Data profile                  | ES data     | PG data (3 databases) | Observed downtime |
-| ----------------------------- | ----------- | --------------------- | ----------------- |
-| Minimal (fresh install)       | < 100 MB    | ~30 MB                | **~4 min**        |
-| Large (~6.5 million ES docs)  | ~9 GB       | ~30 MB                | **~40 min**       |
+| Data profile                 | ES data  | PG data (3 databases) | Observed downtime |
+| ---------------------------- | -------- | --------------------- | ----------------- |
+| Minimal (fresh install)      | < 100 MB | ~30 MB                | **~4 min**        |
+| Large (~6.5 million ES docs) | ~9 GB    | ~30 MB                | **~40 min**       |
 
 ### Phase 3 breakdown
 
-| Step                           | Duration    | Notes                                          |
-| ------------------------------ | ----------- | ---------------------------------------------- |
-| Freeze components (scale → 0)  | ~10 s       | Scale down all deployments and StatefulSets     |
-| PostgreSQL backup + restore    | ~40 s       | `pg_dump` / `pg_restore` for all databases — negligible even at moderate sizes |
-| **Elasticsearch reindex**      | **~38 min** | **Dominant factor** — copies all indices via the `_reindex` API |
-| Helm upgrade + restart         | ~2 min      | Reconfigure backends and restart all components |
+| Step                          | Duration    | Notes                                                                            |
+| ----------------------------- | ----------- | -------------------------------------------------------------------------------- |
+| Freeze components (scale → 0) | ~10 s       | Scale down all deployments and StatefulSets                                      |
+| PostgreSQL backup + restore   | ~40 s       | `pg_dump` / `pg_restore` for all databases; usually negligible at moderate sizes |
+| **Elasticsearch reindex**     | **~38 min** | **Dominant factor**; copies all indices via the `_reindex` API                   |
+| Helm upgrade + restart        | ~2 min      | Reconfigure backends and restart all components                                  |
 
 ### Estimates by Elasticsearch data volume
 
-| ES Data Volume | Estimated Downtime | Bottleneck                     |
-| -------------- | ------------------ | ------------------------------ |
-| < 1 GB         | ~5 minutes         | Helm upgrade + pod startup     |
-| 1–10 GB        | ~10–40 minutes     | ES reindex                     |
-| 10–50 GB       | ~40 min–2 hours    | ES reindex                     |
-| > 50 GB        | 2+ hours           | ES reindex                     |
+| ES Data Volume | Estimated Downtime | Bottleneck                 |
+| -------------- | ------------------ | -------------------------- |
+| < 1 GB         | ~5 minutes         | Helm upgrade + pod startup |
+| 1–10 GB        | ~10–40 minutes     | ES reindex                 |
+| 10–50 GB       | ~40 min–2 hours    | ES reindex                 |
+| > 50 GB        | 2+ hours           | ES reindex                 |
 
 :::info Key observations
+
 - **Elasticsearch reindex dominates downtime.** With ~9 GB of ES data, the reindex step accounts for ~95% of the total cutover time. PostgreSQL backup and restore completes in under a minute regardless of reasonable data sizes.
 - **Downtime scales linearly with ES data volume.** The largest indices (such as Optimize process-instance history) drive the overall duration.
 - **Your cluster will likely be faster.** These timings were measured on constrained test infrastructure. Production clusters with NVMe storage, dedicated nodes, and higher network bandwidth typically achieve much higher reindex throughput.
 - **Always measure in staging.** Run the full migration on a staging environment with representative data volumes to get an accurate downtime estimate for your specific setup.
-:::
+  :::
 
 ## Precautions
 

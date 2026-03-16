@@ -225,7 +225,7 @@ kubectl port-forward svc/${CAMUNDA_RELEASE_NAME}-elasticsearch 9200:9200 -n camu
 kubectl port-forward svc/elasticsearch-manual 9201:9200 -n camunda &
 
 npm install -g elasticdump
-for idx in zeebe operate tasklist optimize; do
+for idx in zeebe operate tasklist optimize connectors camunda; do
   elasticdump --input=http://localhost:9200/${idx}-* --output=http://localhost:9201/${idx}-* --type=data
 done
 
@@ -267,12 +267,22 @@ webModeler:
       existingSecret: "postgresql-manual-secret"
       existingSecretPasswordKey: "postgres-password"
 
-global:
-  elasticsearch:
-    url:
-      protocol: http
-      host: elasticsearch-manual.camunda.svc.cluster.local
-      port: 9200
+orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
+      elasticsearch:
+        url: http://elasticsearch-manual.camunda.svc.cluster.local:9200
+
+optimize:
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      url:
+        protocol: http
+        host: elasticsearch-manual.camunda.svc.cluster.local
+        port: 9200
 ```
 
 ```bash

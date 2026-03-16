@@ -16,6 +16,13 @@ For most deployments, the [standard migration](./bitnami-to-operators.md) with a
 
 This guide walks you through migrating a Camunda 8 Helm installation from Bitnami-managed infrastructure to operator-managed or managed service equivalents **without any application downtime**. Instead of the freeze-backup-restore-switch pattern used in the standard migration, this approach uses **real-time data replication** to keep source and target synchronized, then performs an instantaneous cutover.
 
+Use this guide only if all of the following are true:
+
+- You have already ruled out the [standard migration](./bitnami-to-operators.md) because even a short maintenance window is unacceptable.
+- Your team is comfortable operating PostgreSQL logical replication and one of the supported Elasticsearch synchronization strategies.
+- You can monitor replication lag and validate consistency before cutover.
+- You are prepared to adapt the examples to your topology, especially if the targets are managed services instead of in-cluster operators.
+
 ## How it works
 
 The zero-downtime migration replaces the backup/restore phases with continuous replication:
@@ -43,14 +50,14 @@ The zero-downtime migration replaces the backup/restore phases with continuous r
 
 ### Key differences from the standard migration
 
-| Aspect                         | Standard migration                   | Zero-downtime migration                        |
-| ------------------------------ | ------------------------------------ | ---------------------------------------------- |
-| Downtime                       | 5–30 minutes (Phase 3 freeze)        | None                                           |
+| Aspect                         | Standard migration                     | Zero-downtime migration                        |
+| ------------------------------ | -------------------------------------- | ---------------------------------------------- |
+| Downtime                       | 5–30 minutes (Phase 3 freeze)          | None                                           |
 | Data transfer                  | `pg_dump`/`pg_restore` + ES `_reindex` | Logical replication + CCR/continuous snapshot  |
-| Complexity                     | Low — scripted and automated         | High — manual setup, monitoring required       |
-| Risk                           | Low — rollback via Helm values       | Medium — replication lag must be monitored     |
-| PostgreSQL version requirement | Any                                  | PostgreSQL 10+ (logical replication)           |
-| Elasticsearch requirement      | `_reindex` API (reindex from remote) | CCR (Platinum license) or continuous snapshots |
+| Complexity                     | Low — scripted and automated           | High — manual setup, monitoring required       |
+| Risk                           | Low — rollback via Helm values         | Medium — replication lag must be monitored     |
+| PostgreSQL version requirement | Any                                    | PostgreSQL 10+ (logical replication)           |
+| Elasticsearch requirement      | `_reindex` API (reindex from remote)   | CCR (Platinum license) or continuous snapshots |
 
 ## Prerequisites
 
@@ -60,6 +67,14 @@ In addition to the [general prerequisites](./index.md#prerequisites-all-paths):
 - Elasticsearch: either an **Elastic Platinum license** (for cross-cluster replication) or the ability to run **continuous snapshots** with very short intervals.
 - Deep understanding of your data volumes, replication lag tolerances, and network throughput between source and target.
 - A monitoring solution to track replication lag (e.g., Prometheus, Grafana, or manual queries).
+
+:::important Decide the Elasticsearch strategy before you begin
+The PostgreSQL path is always logical replication. Elasticsearch requires an explicit tradeoff:
+
+- Use **CCR** if you have the license and need the closest possible parity at cutover.
+- Use **continuous snapshots** if a small lag window is acceptable.
+- Use **fresh start** only if rebuilding historical Elasticsearch-backed views after cutover is acceptable.
+  :::
 
 ## Phase 1: Deploy target infrastructure
 
@@ -140,6 +155,9 @@ Depending on your Helm chart version, each component may use a separate Bitnami 
 
 Before enabling subscriptions, perform a one-time schema and data sync. Logical replication only replicates DML (INSERT/UPDATE/DELETE), not DDL (schema changes):
 
+<details>
+<summary>Show details: initial PostgreSQL sync example</summary>
+
 ```bash
 # For each component, dump the schema + data and restore to the target
 for COMPONENT in identity keycloak webmodeler; do
@@ -178,9 +196,14 @@ for COMPONENT in identity keycloak webmodeler; do
 done
 ```
 
+  </details>
+
 #### Step 4: Create subscriptions on the target
 
 On each CNPG target cluster, create a subscription pointing to the source:
+
+<details>
+<summary>Show details: subscription creation example</summary>
 
 ```bash
 # Get source password
@@ -221,17 +244,28 @@ kubectl exec -it ${CNPG_WEBMODELER_CLUSTER}-1 -n ${NAMESPACE} -- \
   "
 ```
 
+</details>
+
 The `copy_data = false` flag is important because we already performed the initial sync in Step 3. The subscription will now stream only new changes in real-time.
 
 ### Elasticsearch: Continuous synchronization
 
 Unlike PostgreSQL, Elasticsearch does not have a built-in logical replication feature available in the open-source version. Choose one of the following approaches:
 
+| Strategy             | Best when                                                                            | Tradeoff                                                |
+| -------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------- |
+| CCR                  | You need the closest possible real-time replica and have an Elastic Platinum license | Highest operational complexity                          |
+| Continuous snapshots | You can tolerate a small lag window and want an open-source-compatible approach      | Recent writes may be missing until re-export catches up |
+| Fresh start          | Historical search data can be rebuilt after cutover                                  | Slowest path to full UI history after migration         |
+
 <Tabs groupId="es-replication" queryString>
 
 <TabItem value="ccr" label="Cross-cluster replication (Platinum)">
 
 If you have an **Elastic Platinum license**, you can use [Cross-Cluster Replication (CCR)](https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-overview.html) to replicate indices in real-time:
+
+<details>
+<summary>Show details: CCR setup example</summary>
 
 ```bash
 # Get ECK ES password
@@ -260,7 +294,7 @@ kubectl exec -it ${ECK_CLUSTER_NAME}-es-masters-0 -n ${NAMESPACE} -- \
   }'
 
 # Create follower indices for each Camunda index pattern
-for PATTERN in zeebe operate tasklist optimize; do
+for PATTERN in zeebe operate tasklist optimize connectors camunda; do
   # List source indices matching the pattern
   INDICES=$(kubectl exec -it ${CAMUNDA_RELEASE_NAME}-elasticsearch-master-0 -n ${NAMESPACE} -- \
     curl -sf -u "elastic:${SOURCE_ES_PWD}" \
@@ -279,11 +313,16 @@ for PATTERN in zeebe operate tasklist optimize; do
 done
 ```
 
+</details>
+
 </TabItem>
 
 <TabItem value="continuous-snapshot" label="Continuous snapshots (open-source)">
 
 If you don't have a Platinum license, use **continuous snapshot/restore with SLM (Snapshot Lifecycle Management)** to keep the target close to the source. This approach has a small replication lag (typically 5–15 minutes):
+
+<details>
+<summary>Show details: continuous snapshot setup example</summary>
 
 ```bash
 # Get source ES password
@@ -319,6 +358,8 @@ kubectl exec -it ${CAMUNDA_RELEASE_NAME}-elasticsearch-master-0 -n ${NAMESPACE} 
   }'
 ```
 
+</details>
+
 Before cutover, you will restore the latest snapshot to the target ECK cluster.
 
 </TabItem>
@@ -343,6 +384,9 @@ Before performing the cutover, verify that replication is caught up and data is 
 
 Check the replication lag on each subscription:
 
+<details>
+<summary>Show details: PostgreSQL lag check example</summary>
+
 ```bash
 # On each CNPG target, check subscription status
 for CLUSTER in ${CNPG_IDENTITY_CLUSTER} ${CNPG_KEYCLOAK_CLUSTER} ${CNPG_WEBMODELER_CLUSTER}; do
@@ -356,6 +400,8 @@ for CLUSTER in ${CNPG_IDENTITY_CLUSTER} ${CNPG_KEYCLOAK_CLUSTER} ${CNPG_WEBMODEL
 done
 ```
 
+</details>
+
 Wait until `lag_bytes` is consistently `0` or near-zero before proceeding.
 
 ### Monitor Elasticsearch sync
@@ -363,6 +409,9 @@ Wait until `lag_bytes` is consistently `0` or near-zero before proceeding.
 <Tabs groupId="es-replication" queryString>
 
 <TabItem value="ccr" label="Cross-cluster replication (Platinum)">
+
+<details>
+<summary>Show details: CCR status check example</summary>
 
 ```bash
 # Check CCR follower status
@@ -374,9 +423,14 @@ kubectl exec -it ${ECK_CLUSTER_NAME}-es-masters-0 -n ${NAMESPACE} -- \
   "http://localhost:9200/_ccr/stats" | jq '.follow_stats.indices[].shards[].leader_global_checkpoint'
 ```
 
+</details>
+
 </TabItem>
 
 <TabItem value="continuous-snapshot" label="Continuous snapshots (open-source)">
+
+<details>
+<summary>Show details: snapshot status check example</summary>
 
 ```bash
 # Check the latest snapshot status
@@ -387,6 +441,8 @@ kubectl exec -it ${CAMUNDA_RELEASE_NAME}-elasticsearch-master-0 -n ${NAMESPACE} 
   curl -sf -u "elastic:${SOURCE_ES_PWD}" \
   "http://localhost:9200/_slm/policy/migration_continuous" | jq '.last_success'
 ```
+
+</details>
 
 </TabItem>
 
@@ -401,6 +457,9 @@ No synchronization monitoring needed — Elasticsearch will be populated after c
 ### Verify row counts
 
 Compare row counts between source and target for each database to confirm data consistency:
+
+<details>
+<summary>Show details: row count verification example</summary>
 
 ```bash
 for COMPONENT in identity keycloak webmodeler; do
@@ -426,13 +485,25 @@ for COMPONENT in identity keycloak webmodeler; do
 done
 ```
 
+</details>
+
 ## Phase 4: Instantaneous cutover
 
 Once replication is confirmed in sync, perform the cutover. This phase uses a **rolling Helm upgrade** instead of the freeze-then-restore approach, resulting in zero downtime.
 
+Before starting the cutover, confirm this checklist:
+
+- PostgreSQL subscriptions show `lag_bytes` at `0` or close to `0` for a sustained interval.
+- Your chosen Elasticsearch sync method is healthy and up to date.
+- The target services are reachable from the Camunda namespace.
+- You have the rollback command, values, and on-call contacts ready before the Helm upgrade.
+
 ### Step 1: Stop replication (PostgreSQL)
 
 Drop the subscriptions on the target to stop replication and allow the targets to accept writes:
+
+<details>
+<summary>Show details: stop PostgreSQL replication example</summary>
 
 ```bash
 # Drop subscriptions
@@ -446,6 +517,8 @@ kubectl exec -it ${CNPG_WEBMODELER_CLUSTER}-1 -n ${NAMESPACE} -- \
   psql -U postgres -d webmodeler -c "ALTER SUBSCRIPTION webmodeler_sub DISABLE; DROP SUBSCRIPTION webmodeler_sub;"
 ```
 
+</details>
+
 ### Step 2: Stop Elasticsearch replication
 
 <Tabs groupId="es-replication" queryString>
@@ -453,6 +526,9 @@ kubectl exec -it ${CNPG_WEBMODELER_CLUSTER}-1 -n ${NAMESPACE} -- \
 <TabItem value="ccr" label="Cross-cluster replication (Platinum)">
 
 Promote follower indices to regular indices:
+
+<details>
+<summary>Show details: CCR cutover example</summary>
 
 ```bash
 ECK_PWD=$(kubectl get secret ${ECK_CLUSTER_NAME}-es-elastic-user -n ${NAMESPACE} \
@@ -474,11 +550,16 @@ for IDX in $INDICES; do
 done
 ```
 
+</details>
+
 </TabItem>
 
 <TabItem value="continuous-snapshot" label="Continuous snapshots (open-source)">
 
 Restore the latest snapshot to the target ECK cluster:
+
+<details>
+<summary>Show details: snapshot restore example</summary>
 
 ```bash
 # Delete the SLM policy
@@ -513,6 +594,8 @@ kubectl exec -it ${ECK_CLUSTER_NAME}-es-masters-0 -n ${NAMESPACE} -- \
   -d '{"indices":"*","ignore_unavailable":true,"include_global_state":false}'
 ```
 
+</details>
+
 :::warning Brief data gap
 With the continuous snapshot approach, there is a small window (up to the snapshot interval, e.g. 5 minutes) where recent Elasticsearch writes may not be captured. Zeebe will re-export these events after the cutover.
 :::
@@ -535,6 +618,9 @@ Perform the Helm upgrade to switch Camunda to the new backends. Because there is
 The zero-downtime approach does **not** use `3-cutover.sh` — that script freezes the application, which defeats the purpose. Instead, run the Helm upgrade manually with the operator-based values:
 :::
 
+<details>
+<summary>Show details: Helm upgrade example</summary>
+
 ```bash
 helm upgrade ${CAMUNDA_RELEASE_NAME} camunda/camunda-platform \
   -n ${NAMESPACE} \
@@ -542,6 +628,8 @@ helm upgrade ${CAMUNDA_RELEASE_NAME} camunda/camunda-platform \
   -f operator-based-values.yaml \
   --wait --timeout 10m
 ```
+
+</details>
 
 Build the values file by combining the operator-based Helm values files from the reference architecture (for example, `camunda-identity-values.yml`, `camunda-elastic-values.yml`, `camunda-keycloak-domain-values.yml`) to point Camunda at the new backends. Ensure Bitnami subcharts are disabled.
 
@@ -557,6 +645,9 @@ The Helm upgrade triggers a rolling restart of Camunda pods. During this process
 
 After the cutover is confirmed working, clean up the publications on the source:
 
+<details>
+<summary>Show details: source publication cleanup example</summary>
+
 ```bash
 kubectl exec -it ${CAMUNDA_RELEASE_NAME}-postgresql-0 -n ${NAMESPACE} -- \
   psql -U postgres -d identity -c "DROP PUBLICATION IF EXISTS identity_migration;"
@@ -567,6 +658,8 @@ kubectl exec -it ${CAMUNDA_RELEASE_NAME}-keycloak-postgresql-0 -n ${NAMESPACE} -
 kubectl exec -it ${CAMUNDA_RELEASE_NAME}-postgresql-web-modeler-0 -n ${NAMESPACE} -- \
   psql -U postgres -d webmodeler -c "DROP PUBLICATION IF EXISTS webmodeler_migration;"
 ```
+
+</details>
 
 ## Phase 5: Validate and clean up
 
@@ -591,6 +684,8 @@ If the zero-downtime migration reveals issues after cutover:
 2. **Late rollback** (after publications are dropped): You would need to perform a reverse data migration — dump from the CNPG targets back to the Bitnami sources. This is the same process in reverse.
 
 ## Limitations and caveats
+
+This migration path removes the planned downtime window, but it does not remove the need for rehearsal, monitoring, and rollback planning. Treat it as a custom migration pattern rather than a push-button alternative to the standard workflow.
 
 ### PostgreSQL logical replication limitations
 

@@ -2,7 +2,7 @@
 id: bitnami-to-managed-services
 sidebar_label: Migrate to managed services
 title: Migrate from Bitnami subcharts to managed services
-description: "Migrate Camunda 8 Self-Managed infrastructure from Bitnami subcharts to cloud-managed services such as AWS RDS, Amazon OpenSearch, Azure Database for PostgreSQL, and similar."
+description: "Migrate Camunda 8 Self-Managed infrastructure from Bitnami subcharts to cloud-managed services such as AWS RDS, managed Elasticsearch, Azure Database for PostgreSQL, and similar."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -13,8 +13,8 @@ import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 This guide walks you through migrating a Camunda 8 Helm installation from Bitnami-managed infrastructure to **cloud-managed services** such as:
 
 - **PostgreSQL**: AWS RDS, Azure Database for PostgreSQL, Google Cloud SQL, or any managed PostgreSQL service
-- **Elasticsearch / OpenSearch**: Amazon OpenSearch Service, Elastic Cloud, Azure Cognitive Search, or any managed Elasticsearch-compatible service
-- **Keycloak**: The Keycloak Operator is still used for Keycloak regardless of target mode, since there is no managed Keycloak service. Alternatively, you can use an [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) to replace Keycloak entirely.
+- **Elasticsearch**: Elastic Cloud or any managed Elasticsearch service
+- **Keycloak**: This guide does not assume a managed Keycloak service. Keep Keycloak on the [Keycloak Operator](https://www.keycloak.org/operator/installation), or replace it with an [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) if that better fits your environment.
 
 :::info When to choose managed services
 Managed services are ideal when your organization:
@@ -30,13 +30,20 @@ Managed services are ideal when your organization:
 In addition to the [general prerequisites](./index.md#prerequisites-all-paths), you must:
 
 - Have a managed PostgreSQL instance provisioned (with databases and users created)
-- Have a managed Elasticsearch or OpenSearch instance provisioned (if migrating Elasticsearch)
+- Have a managed Elasticsearch instance provisioned (if migrating Elasticsearch)
 - Ensure network connectivity between your Kubernetes cluster and the managed services
 - Have credentials stored as Kubernetes Secrets in the Camunda namespace
 
 :::warning IRSA / IAM-based authentication not supported
-The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or OpenSearch with IAM auth require a custom migration approach.
+The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or Elasticsearch endpoints protected by cloud-specific IAM auth require a custom migration approach.
 :::
+
+:::important Decide how Identity will authenticate before the cutover
+For managed services, the infrastructure decision is separate from the authentication decision:
+
+- If you **keep Keycloak**, deploy it with the Keycloak Operator and set the hostname to the full public URL, for example `https://your-domain.example.com/auth`.
+- If you **replace Keycloak with external OIDC**, prepare the provider configuration and the corresponding Identity Helm values before running the migration.
+  :::
 
 ## Clone the deployment references repository
 
@@ -127,19 +134,15 @@ Configure [Private IP](https://cloud.google.com/sql/docs/postgres/configure-priv
 
 </Tabs>
 
-### Elasticsearch / OpenSearch
+### Elasticsearch
 
-<Tabs groupId="es-provider" queryString>
+:::warning Elasticsearch to OpenSearch is not supported
+This migration path does not support moving data from the Bitnami Elasticsearch subchart to Amazon OpenSearch Service or another OpenSearch target.
 
-<TabItem value="opensearch" label="Amazon OpenSearch">
-
-Create an Amazon OpenSearch Service domain. Note the domain endpoint and credentials.
-
-:::caution OpenSearch compatibility
-Amazon OpenSearch Service uses OpenSearch. Check the [Camunda compatibility matrix](/reference/supported-environments.md) for supported OpenSearch versions.
+If your target architecture requires OpenSearch, treat that as a separate replatforming effort instead of a supported in-place migration from the Bitnami Elasticsearch subchart.
 :::
 
-</TabItem>
+<Tabs groupId="es-provider" queryString>
 
 <TabItem value="elastic-cloud" label="Elastic Cloud">
 
@@ -159,6 +162,9 @@ If using a self-managed Elasticsearch cluster (not on Kubernetes), ensure it is 
 
 Store the managed service credentials as Kubernetes Secrets so that both the migration scripts and Camunda Helm chart can use them:
 
+<details>
+<summary>Show details: Kubernetes Secrets example</summary>
+
 ```bash
 # PostgreSQL secrets — one per component
 kubectl create secret generic external-pg-identity \
@@ -173,15 +179,20 @@ kubectl create secret generic external-pg-webmodeler \
   -n ${NAMESPACE} \
   --from-literal=password='<webmodeler-pg-password>'
 
-# Elasticsearch / OpenSearch secret
+# Elasticsearch secret
 kubectl create secret generic external-es \
   -n ${NAMESPACE} \
   --from-literal=elastic='<es-password>'
 ```
 
+</details>
+
 ## Step 2: Configure the migration for external targets
 
 Edit `env.sh` and set the target mode to `external`:
+
+<details>
+<summary>Show details: external target configuration example</summary>
 
 ```bash
 # Set target modes
@@ -201,11 +212,13 @@ export EXTERNAL_PG_WEBMODELER_HOST="your-rds-endpoint.region.rds.amazonaws.com"
 export EXTERNAL_PG_WEBMODELER_PORT="5432"
 export EXTERNAL_PG_WEBMODELER_SECRET="external-pg-webmodeler"
 
-# Elasticsearch / OpenSearch external target
-export EXTERNAL_ES_HOST="your-opensearch-endpoint.region.es.amazonaws.com"
+# Elasticsearch external target
+export EXTERNAL_ES_HOST="your-elastic-endpoint.example.com"
 export EXTERNAL_ES_PORT="443"
 export EXTERNAL_ES_SECRET="external-es"
 ```
+
+</details>
 
 :::info Same host for all PostgreSQL databases
 You can use the same managed PostgreSQL host for all components — each database is separate. This is common when using a single RDS instance with multiple databases.
@@ -219,7 +232,10 @@ When using external targets, you need a custom Helm values file that configures 
 export CUSTOM_HELM_VALUES_FILE="./my-external-values.yaml"
 ```
 
-Example custom values file for AWS RDS + OpenSearch:
+Example custom values file for AWS RDS + external Elasticsearch:
+
+<details>
+<summary>Show details: external Helm values example</summary>
 
 ```yaml
 # Disable Bitnami subcharts
@@ -253,21 +269,39 @@ webModeler:
       existingSecret: "external-pg-webmodeler"
       existingSecretPasswordKey: "password"
 
-# Configure external Elasticsearch / OpenSearch
-global:
-  elasticsearch:
-    enabled: false
-  opensearch:
-    enabled: true
-    url:
-      protocol: "https"
-      host: "your-opensearch-endpoint.region.es.amazonaws.com"
-      port: 443
-    auth:
-      username: "admin"
-      existingSecret: "external-es"
-      existingSecretPasswordKey: "elastic"
+# Configure external Elasticsearch using the per-component values schema
+orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
+      elasticsearch:
+        url: "https://your-elastic-endpoint.example.com:443"
+        auth:
+          username: "elastic"
+          secret:
+            existingSecret: "external-es"
+            existingSecretKey: "elastic"
+
+optimize:
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      url:
+        protocol: "https"
+        host: "your-elastic-endpoint.example.com"
+        port: 443
+      auth:
+        username: "elastic"
+        secret:
+          existingSecret: "external-es"
+          existingSecretKey: "elastic"
+
+elasticsearch:
+  enabled: false
 ```
+
+</details>
 
 :::caution Helm values customization
 The example above is a starting point. Adjust the values to match your specific managed service configuration, authentication method (IAM, username/password, etc.), and TLS requirements. Refer to the [Camunda Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md) for all available options.
@@ -295,7 +329,7 @@ When `PG_TARGET_MODE=external`:
 
 When `ES_TARGET_MODE=external`:
 
-- ECK operator is **not installed** — your managed Elasticsearch/OpenSearch is used directly.
+- ECK operator is **not installed** — your managed Elasticsearch target is used directly.
 
 The Keycloak Operator is still deployed (with a Custom Resource pointing to your managed PostgreSQL).
 
@@ -325,7 +359,7 @@ For PostgreSQL, `pg_restore` runs against the managed PostgreSQL endpoints inste
 Automated Elasticsearch data migration is **not supported** for external targets. The automated migration uses the `_reindex` API which requires both source and target Elasticsearch clusters to be reachable within the same Kubernetes namespace, which is not possible with managed services.
 :::
 
-For Elasticsearch/OpenSearch data migration to managed services, you have several options:
+For Elasticsearch data migration to managed services, you have several options:
 
 <Tabs groupId="es-migration" queryString>
 
@@ -333,7 +367,7 @@ For Elasticsearch/OpenSearch data migration to managed services, you have severa
 
 Let Camunda rebuild Elasticsearch indexes from Zeebe on the next export. This is the simplest approach and works well if you don't need historical Operate/Tasklist data immediately available.
 
-After the Helm upgrade, Zeebe exporters will populate the new Elasticsearch/OpenSearch with current data. Historical data will be available as Zeebe replays events.
+After the Helm upgrade, Zeebe exporters will populate the new Elasticsearch target with current data. Historical data will be available as Zeebe replays events.
 
 No additional steps are required — this happens automatically.
 
@@ -342,6 +376,9 @@ No additional steps are required — this happens automatically.
 <TabItem value="elasticdump" label="elasticdump">
 
 Use the [`elasticdump`](https://github.com/elasticsearch-dump/elasticsearch-dump) npm tool to transfer indices from source to target:
+
+<details>
+<summary>Show details: `elasticdump` example</summary>
 
 ```bash
 # Install elasticdump
@@ -355,14 +392,16 @@ SOURCE_ES_PWD=$(kubectl get secret ${CAMUNDA_RELEASE_NAME}-elasticsearch \
 kubectl port-forward svc/${CAMUNDA_RELEASE_NAME}-elasticsearch -n ${NAMESPACE} 9200:9200 &
 
 # Dump and restore each index pattern
-for pattern in zeebe operate tasklist optimize; do
+for pattern in zeebe operate tasklist optimize connectors camunda; do
   elasticdump \
     --input="http://elastic:${SOURCE_ES_PWD}@localhost:9200/${pattern}-*" \
-    --output="https://admin:<password>@your-opensearch-endpoint:443/${pattern}-*" \
+    --output="https://elastic:<password>@your-elastic-endpoint.example.com:443/${pattern}-*" \
     --type=data \
     --limit=1000
 done
 ```
+
+  </details>
 
 </TabItem>
 
@@ -372,8 +411,11 @@ If both source and target elasticsearch support S3 snapshot repositories, you ca
 
 1. Register an S3 snapshot repository on the source Bitnami Elasticsearch.
 2. Create a snapshot.
-3. Register the same S3 repository on the target managed Elasticsearch/OpenSearch.
+3. Register the same S3 repository on the target managed Elasticsearch.
 4. Restore the snapshot.
+
+<details>
+<summary>Show details: S3 snapshot example</summary>
 
 ```bash
 # On source ES: register S3 repo and create snapshot
@@ -385,7 +427,7 @@ curl -X PUT "localhost:9200/_snapshot/s3_backup/migration?wait_for_completion=tr
   -H 'Content-Type: application/json' \
   -d '{"indices":"*","ignore_unavailable":true}'
 
-# On target ES/OpenSearch: register same S3 repo and restore
+# On target Elasticsearch: register same S3 repo and restore
 curl -X PUT "https://target-endpoint/_snapshot/s3_backup" \
   -H 'Content-Type: application/json' \
   -d '{"type":"s3","settings":{"bucket":"my-migration-bucket","region":"us-east-1"}}'
@@ -395,31 +437,45 @@ curl -X POST "https://target-endpoint/_snapshot/s3_backup/migration/_restore" \
   -d '{"indices":"*","ignore_unavailable":true}'
 ```
 
+</details>
+
 </TabItem>
 
 <TabItem value="reindex" label="Reindex API">
 
-Use the Elasticsearch [Reindex API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html) to copy data from the source to the target. This requires the target to whitelist the source as a remote:
+Use the Elasticsearch [Reindex API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html) to copy data from the source to the target. This requires the target to whitelist the source as a remote.
+
+Reindex each concrete Camunda index individually rather than using a single wildcard destination. To stay aligned with the migration scripts, include `zeebe-*`, `operate-*`, `tasklist-*`, `optimize-*`, `connectors-*`, and `camunda-*` indices.
+
+<details>
+<summary>Show details: Reindex API example</summary>
 
 ```bash
-# On the target, add source to reindex.remote.whitelist
-# Then reindex each index
-curl -X POST "https://target-endpoint/_reindex" \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "source": {
-      "remote": {
-        "host": "http://source-es:9200",
-        "username": "elastic",
-        "password": "<password>"
+# On the target, add source to reindex.remote.whitelist.
+# Then iterate over every Camunda index you want to copy.
+for idx in $(curl -s -u "elastic:<password>" \
+  "http://source-es:9200/_cat/indices/zeebe-*,operate-*,tasklist-*,optimize-*,connectors-*,camunda-*?h=index"); do
+  curl -X POST "https://target-endpoint/_reindex?wait_for_completion=true" \
+    -H 'Content-Type: application/json' \
+    -d '{
+      "source": {
+        "remote": {
+          "host": "http://source-es:9200",
+          "username": "elastic",
+          "password": "<password>"
+        },
+        "index": "'${idx}'"
       },
-      "index": "zeebe-*"
-    },
-    "dest": {
-      "index": "zeebe-*"
-    }
-  }'
+      "dest": {
+        "index": "'${idx}'"
+      }
+    }'
+done
 ```
+
+</details>
+
+Review the source index list before running the loop. If your deployment uses custom index prefixes, include those prefixes in the `_cat/indices` query.
 
 </TabItem>
 
@@ -456,9 +512,9 @@ For details, see the [operator-based migration cleanup](./bitnami-to-operators.m
 ### AWS
 
 - **IAM authentication**: For RDS, consider using [IAM database authentication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) or IRSA instead of password-based secrets.
-- **VPC peering**: Ensure your EKS cluster and RDS/OpenSearch are in the same VPC or connected via VPC peering.
-- **Security groups**: Configure inbound rules to allow traffic from EKS worker nodes to RDS (port 5432) and OpenSearch (port 443).
-- **OpenSearch compatibility**: Review the [OpenSearch integration guide](/self-managed/deployment/helm/configure/database/using-external-opensearch.md) for Camunda-specific configuration.
+- **VPC peering**: Ensure your EKS cluster and RDS/Elasticsearch target are in the same VPC or connected via VPC peering.
+- **Security groups**: Configure inbound rules to allow traffic from EKS worker nodes to RDS (port 5432) and Elasticsearch (port 443).
+- **Elasticsearch configuration**: Review the [external Elasticsearch guide](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md) for Camunda-specific configuration.
 
 ### Azure
 
@@ -478,7 +534,7 @@ Before running this migration in production, follow these operational readiness 
 
 1. **Provision staging managed services** that mirror your production setup (same cloud provider, same region, same tier/SKU).
 2. **Run the full migration end-to-end** in staging, including all five phases plus validation.
-3. **Measure actual timings**: record how long each phase takes. Network latency to external services (RDS, Cloud SQL, OpenSearch) may increase backup/restore times compared to in-cluster operators.
+3. **Measure actual timings**: record how long each phase takes. Network latency to external services (RDS, Cloud SQL, Elasticsearch) may increase backup/restore times compared to in-cluster operators.
 4. **Test rollback**: after a successful staging migration, run `bash rollback.sh` to verify the Helm values revert correctly and Camunda reconnects to the Bitnami subcharts.
 
 :::tip
@@ -527,4 +583,4 @@ After completing the migration, monitor the following for at least 48 hours:
 - **Managed service metrics**: check connection counts, latency, CPU, and storage usage in your cloud provider console.
 - **Camunda component logs**: look for connection timeouts, SSL/TLS handshake errors, or authentication failures.
 - **Process instance completion**: verify that in-flight process instances continue to execute correctly.
-- **Zeebe export lag**: confirm that Zeebe exporters are writing to the external Elasticsearch/OpenSearch without delays.
+- **Zeebe export lag**: confirm that Zeebe exporters are writing to the external Elasticsearch target without delays.
