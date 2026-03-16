@@ -67,7 +67,6 @@ jobs:
           npm run api:generate:camunda
 
       - name: Sync older stable versions
-        id: sync_stable
         run: |
           cd docs
           for version in $(jq -r '.[]' versions.json); do
@@ -131,15 +130,20 @@ jobs:
             rm -rf "../rest-spec-$version"
           done
 
+      - name: Check for changes
+        id: check_changes
+        run: |
+          cd docs
           if [ -z "$(git status --porcelain)" ]; then
-            echo "No changes to commit across any version."
+            echo "No changes to commit."
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
           else
+            echo "Changes detected."
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Generate token
-        if: steps.sync_stable.outputs.has_changes == 'true'
+        if: steps.check_changes.outputs.has_changes == 'true'
         id: generate_token
         uses: actions/create-github-app-token@v2
         with:
@@ -147,7 +151,7 @@ jobs:
           private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
 
       - name: Create Pull Request
-        if: steps.sync_stable.outputs.has_changes == 'true'
+        if: steps.check_changes.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
           token: "${{ steps.generate_token.outputs.token }}"
