@@ -20,9 +20,9 @@ import TabItem from '@theme/TabItem';
 | :----------------------------------------- | :---------------------------------------------------------------------------------------------------------- | :----------------------------- |
 | `camunda.data.audit-log.enabled`           | <p>Enable or disable the audit log.</p>                                                                     | `true`                         |
 | `camunda.data.audit-log.user.categories`   | <p>List of audit log categories to include for <strong>user</strong>-initiated actions.</p>                 | `[OPERATOR, USER_TASK, ADMIN]` |
-| `camunda.data.audit-log.user.excludes`     | <p>List of users to exclude from audit logging.</p>                                                         |                                |
+| `camunda.data.audit-log.user.excludes`     | <p>List of audit log categories to exclude for <strong>user</strong>-initiated actions.</p>                 | `[OPERATOR, USER_TASK, ADMIN]` |
 | `camunda.data.audit-log.client.categories` | <p>List of audit log categories to include for <strong>client</strong>-initiated actions (API clients).</p> | `[OPERATOR, USER_TASK, ADMIN]` |
-| `camunda.data.audit-log.client.excludes`   | <p>List of clients to exclude from audit logging.</p>                                                       |                                |
+| `camunda.data.audit-log.client.excludes`   | <p>List of audit log categories to exclude for <strong>client</strong>-initiated actions (API clients).</p> | `[OPERATOR, USER_TASK, ADMIN]` |
 
 </TabItem>
   <TabItem value="env" label="Environment variables">
@@ -41,9 +41,9 @@ import TabItem from '@theme/TabItem';
 | :---------------------------------------- | :---------------------------------------------------------------------------------------------------------- | :----------------------------- |
 | `CAMUNDA_DATA_AUDITLOG_ENABLED`           | <p>Enable or disable the audit log.</p>                                                                     | `true`                         |
 | `CAMUNDA_DATA_AUDITLOG_USER_CATEGORIES`   | <p>List of audit log categories to include for <strong>user</strong>-initiated actions.</p>                 | `[OPERATOR, USER_TASK, ADMIN]` |
-| `CAMUNDA_DATA_AUDITLOG_USER_EXCLUDES`     | <p>List of users to exclude from audit logging.</p>                                                         |                                |
+| `CAMUNDA_DATA_AUDITLOG_USER_EXCLUDES`     | <p>List of audit log categories to exclude for <strong>user</strong>-initiated actions.</p>                 | `[OPERATOR, USER_TASK, ADMIN]` |
 | `CAMUNDA_DATA_AUDITLOG_CLIENT_CATEGORIES` | <p>List of audit log categories to include for <strong>client</strong>-initiated actions (API clients).</p> | `[OPERATOR, USER_TASK, ADMIN]` |
-| `CAMUNDA_DATA_AUDITLOG_CLIENT_EXCLUDES`   | <p>List of clients to exclude from audit logging.</p>                                                       |                                |
+| `CAMUNDA_DATA_AUDITLOG_CLIENT_EXCLUDES`   | <p>List of audit log categories to exclude for <strong>client</strong>-initiated actions (API clients).</p> | `[OPERATOR, USER_TASK, ADMIN]` |
 
   </TabItem>
 </Tabs>
