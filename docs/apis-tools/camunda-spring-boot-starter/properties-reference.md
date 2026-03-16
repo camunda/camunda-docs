@@ -87,7 +87,7 @@ Type: <code>integer</code>
 
 <td>
 
-The gRPC address of Camunda that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both `camunda.client.mode`.
+The gRPC address of Camunda that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both `camunda.client.mode `.
 
 Type: <code>url</code>
 
@@ -263,7 +263,7 @@ Type: <code>duration</code>
 
 <td>
 
-The REST API address of the Camunda instance that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both`camunda.client.mode`.
+The REST API address of the Camunda instance that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both ` camunda.client.mode`.
 
 Type: <code>url</code>
 
@@ -311,7 +311,7 @@ Properties for authenticating the Camunda client.
 
 <td>
 
-The resource for which the access token must be valid. A default is set by `camunda.client.mode: saas` and `camunda.client.auth.method: oidc`.
+The resource for which the access token must be valid. A default is set by ` camunda.client.mode: saas` and `camunda.client.auth.method: oidc`.
 
 Type: <code>string</code>
 
@@ -391,7 +391,7 @@ Type: <code>string</code>
 
 <td>
 
-The url of the issuer for the access token. It is used to generate the well-known configuration url from which the `token-url` is retrieved. Only applied if the `camunda.client.auth.well-known-configuration-url` is not set. A default is set by `camunda.client.auth.method: oidc`.
+The url of the issuer for the access token. It is used to generate the well-known configuration url from which the `token-url` is retrieved. Only applied if the ` camunda.client.auth.well-known-configuration-url` is not set. A default is set by ` camunda.client.auth.method: oidc`.
 
 Type: <code>url</code>
 
@@ -455,7 +455,7 @@ Type: <code>file</code>
 
 <td>
 
-The authentication method to use. If not set, it is detected based on the presence of a username, password, client ID, and client secret. A default is set by `camunda.client.mode: saas`.
+The authentication method to use. If not set, it is detected based on the presence of a username, password, client ID, and client secret. A default is set by ` camunda.client.mode: saas`.
 
 Type: <code>enum[none, basic, oidc]</code>
 
@@ -535,7 +535,7 @@ Type: <code>string</code>
 
 <td>
 
-The authorization server URL from which to request the access token. A default is set by `camunda.client.mode: saas`.
+The authorization server URL from which to request the access token. A default is set by ` camunda.client.mode: saas`.
 
 Type: <code>url</code>
 
@@ -599,7 +599,7 @@ Type: <code>string</code>
 
 <td>
 
-The url of the well-known configuration of the issuer. It is used to retrieve the `token-url`. Only applied if `camunda.client.auth.token-url` is not set.
+The url of the well-known configuration of the issuer. It is used to retrieve the ` token-url`. Only applied if `camunda.client.auth.token-url` is not set.
 
 Type: <code>url</code>
 
@@ -693,7 +693,7 @@ Type: <code>file</code>
 
 ### `camunda.client.cloud`
 
-Properties for connecting the Camunda client to SaaS. These are used to compose default connection details when the client is configured to `camunda.client.mode: saas`.
+Properties for connecting the Camunda client to SaaS. These are used to compose default connection details when the client is configured to <code>camunda.client.mode: saas</code>.
 
 <table>
 <thead>
@@ -807,9 +807,7 @@ Type: <code>boolean</code>
 
 <td>
 
-Indicates if the resources selected by the deployment annotation have to reside in the same jar as the annotated class.
-
-This property acts as the default behavior. If the `@Deployment` annotation explicitly sets its `ownJarOnly` parameter, that annotation-level value overrides this property for the annotated deployment.
+Indicates if the resources selected by the deployment annotation have to reside in the same jar as the annotated class. This property acts as the default behavior. If the `@Deployment ` annotation explicitly sets its `ownJarOnly` parameter, that annotation-level value overrides this property for the annotated deployment.
 
 Type: <code>boolean</code>
 
@@ -937,7 +935,7 @@ Type: <code>integer</code>
 
 <td>
 
-The name of the worker owner. If set to default, it is generated as `${beanName}#${methodName}`.
+The name of the worker owner. If set to default, it is generated as ` ${beanName}#${methodName}`.
 
 Type: <code>string</code>
 
@@ -1095,7 +1093,7 @@ Type: <code>string</code>
 
 ### `management.endpoint.jobworkers`
 
-Properties for configuring the `jobworkers` management endpoint.
+Properties for configuring the <code>jobworkers</code> management endpoint.
 
 <table>
 <thead>
@@ -1257,7 +1255,7 @@ Type: <code>integer</code>
 
 <td>
 
-The name of the worker owner. If set to default, it is generated as `${beanName}#${methodName}`.
+The name of the worker owner. If set to default, it is generated as ` ${beanName}#${methodName}`.
 
 Type: <code>string</code>
 
@@ -1499,7 +1497,7 @@ N/A
 
 ### `camunda.client.cloud`
 
-Deprecated properties for connecting the Camunda client to SaaS. These are used to compose default connection details when the client is configured to `camunda.client.mode: saas`.
+Deprecated properties for connecting the Camunda client to SaaS. These are used to compose default connection details when the client is configured to <code>camunda.client.mode: saas</code>.
 
 <table>
 <thead>
@@ -1964,7 +1962,7 @@ N/A
 
 ### `camunda.client.zeebe.override`
 
-Deprecated properties for overriding individual job workers registered to the Camunda client. Replaced by `camunda.client.worker.override`.
+Deprecated properties for overriding individual job workers registered to the Camunda client. Replaced by <code>camunda.client.worker.override</code>.
 
 ### `common`
 
@@ -2574,4 +2572,4 @@ N/A
 
 ### `zeebe.client.worker.override`
 
-Deprecated properties to override the individual job workers registered with the Camunda client. Replaced by `camunda.client.worker.override`.
+Deprecated properties to override the individual job workers registered with the Camunda client. Replaced by <code>camunda.client.worker.override</code>.
