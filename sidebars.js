@@ -1402,6 +1402,11 @@ module.exports = {
   Reference: [
     "reference/overview",
     {
+      type: "link",
+      label: "Developers",
+      href: "/developers/",
+    },
+    {
       type: "category",
       label: "Release announcements and release notes",
       link: {

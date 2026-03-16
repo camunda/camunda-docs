@@ -349,6 +349,11 @@ module.exports = {
           position: "left",
         },
         {
+          to: "/developers/",
+          label: "Developers",
+          position: "left",
+        },
+        {
           type: "html",
           position: "right",
           value:
