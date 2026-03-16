@@ -59,11 +59,6 @@ The migration follows a five-phase approach designed to minimize downtime:
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
-- **Phases 1 and 2** run alongside the live application with **no impact** on users.
-- **Phase 3** is the only phase that requires a **maintenance window** (typically 5–30 minutes).
-- **Phase 4** validates the migration and generates a report.
-- **Phase 5** removes old Bitnami resources and migration artifacts after you have confirmed the migration is successful.
-
 ### Downtime estimation
 
 | Data volume | Estimated downtime |

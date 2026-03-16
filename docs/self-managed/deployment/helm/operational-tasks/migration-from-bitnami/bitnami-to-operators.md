@@ -5,8 +5,6 @@ title: Migrate from Bitnami subcharts to Kubernetes operators
 description: "Step-by-step guide to migrate Camunda 8 Self-Managed infrastructure from Bitnami subcharts to CloudNativePG, ECK Elasticsearch, and Keycloak Operator."
 ---
 
-<!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md. -->
-
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import FailbackCaution from './\_partials/\_ops-failback-caution.md'
@@ -474,18 +472,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 :::info Rollback scope
 Rollback is available after Phase 3 (cutover). Before that, simply stop the migration — your Bitnami infrastructure is still active and untouched.
 :::
-
-## Post-migration cleanup
-
-After validating the migration and confirming everything works correctly for at least 72 hours, run Phase 5 to remove old Bitnami resources:
-
-```bash
-bash 5-cleanup-bitnami.sh
-```
-
-This script automatically removes old Bitnami PostgreSQL, Elasticsearch, and Keycloak StatefulSets along with their PVCs, headless services, and the migration backup PVC. See [Phase 5](#phase-5-cleanup-bitnami-resources-no-downtime) for details.
-
-Manual deletion is possible, but the script is the safer option because it preserves the built-in confirmations, health checks, and state tracking.
 
 ## Downtime estimation
 

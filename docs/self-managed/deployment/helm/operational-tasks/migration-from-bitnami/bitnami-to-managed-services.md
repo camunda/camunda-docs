@@ -507,25 +507,6 @@ bash 5-cleanup-bitnami.sh
 
 For details, see the [operator-based migration cleanup](./bitnami-to-operators.md#post-migration-cleanup).
 
-## Cloud-specific considerations
-
-### AWS
-
-- **IAM authentication**: For RDS, consider using [IAM database authentication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) or IRSA instead of password-based secrets.
-- **VPC peering**: Ensure your EKS cluster and RDS/Elasticsearch target are in the same VPC or connected via VPC peering.
-- **Security groups**: Configure inbound rules to allow traffic from EKS worker nodes to RDS (port 5432) and Elasticsearch (port 443).
-- **Elasticsearch configuration**: Review the [external Elasticsearch guide](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md) for Camunda-specific configuration.
-
-### Azure
-
-- **Managed Identity**: Consider using [Managed Identity](https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/) for authentication to Azure Database for PostgreSQL.
-- **Private endpoints**: Use [Private Link](https://learn.microsoft.com/en-us/azure/private-link/) for secure connectivity between AKS and managed services.
-
-### GCP
-
-- **Cloud SQL Auth Proxy**: Use the [Cloud SQL Auth Proxy](https://cloud.google.com/sql/docs/postgres/sql-proxy) sidecar in your pods for secure connectivity.
-- **Workload Identity**: Leverage [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) for IAM-based authentication.
-
 ## Operational readiness
 
 Before running this migration in production, follow these operational readiness steps to minimize risk — especially when migrating to external managed services where network and IAM configurations add complexity.

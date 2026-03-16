@@ -372,49 +372,12 @@ bin/elasticsearch -d
 
 ## Option 3: Docker Compose deployment
 
-If you are running a development or small-scale environment with Docker Compose, you can migrate from the Bitnami subcharts to a Docker Compose-based setup for your infrastructure:
+If you are targeting Docker Compose, keep this guide focused on the migration workflow and use the dedicated Docker Compose assets as the source of truth:
 
-```yaml
-# docker-compose.yml
-services:
-  postgresql:
-    image: postgres:16
-    environment:
-      POSTGRES_PASSWORD: changeme
-    ports:
-      - "5432:5432"
-    volumes:
-      - pg-data:/var/lib/postgresql/data
-      - ./init-databases.sql:/docker-entrypoint-initdb.d/init.sql
+- Follow the local [Docker Compose quickstart](/self-managed/quickstart/developer-quickstart/docker-compose.md) for the supported setup and runtime behavior.
+- Use the maintained Compose assets in [camunda-distributions/docker-compose](https://github.com/camunda/camunda-distributions/tree/main/docker-compose) instead of copying an embedded example from this page.
 
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.19.11
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
-    ports:
-      - "9200:9200"
-    volumes:
-      - es-data:/usr/share/elasticsearch/data
-
-volumes:
-  pg-data:
-  es-data:
-```
-
-```sql
--- init-databases.sql
-CREATE DATABASE identity;
-CREATE DATABASE keycloak;
-CREATE DATABASE webmodeler;
-CREATE USER identity WITH PASSWORD 'changeme';
-CREATE USER keycloak WITH PASSWORD 'changeme';
-CREATE USER webmodeler WITH PASSWORD 'changeme';
-GRANT ALL PRIVILEGES ON DATABASE identity TO identity;
-GRANT ALL PRIVILEGES ON DATABASE keycloak TO keycloak;
-GRANT ALL PRIVILEGES ON DATABASE webmodeler TO webmodeler;
-```
+You still need to migrate PostgreSQL and Elasticsearch data separately using the same approaches described elsewhere in this guide.
 
 :::caution Not suitable for production
 Docker Compose deployments are suitable for development and testing only. For production environments, use Kubernetes operators or managed services.
