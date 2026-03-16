@@ -257,6 +257,45 @@ RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/?
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-880-890/?$ /docs/next/self-managed/upgrade/helm/880-to-890/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/manual/upgrade/?$ /docs/next/self-managed/upgrade/manual/ [R=301,L]
 
+# Rename Orchestration Cluster Identity to Admin (8.9)
+# components/identity → components/admin
+RewriteRule ^docs/next/components/identity/identity-introduction/?$ /docs/next/components/admin/admin-introduction/ [R=301,L]
+RewriteRule ^docs/next/components/identity/access-control/?$ /docs/next/components/admin/access-control/ [R=301,L]
+RewriteRule ^docs/next/components/identity/authorization/?$ /docs/next/components/admin/authorization/ [R=301,L]
+RewriteRule ^docs/next/components/identity/user/?$ /docs/next/components/admin/user/ [R=301,L]
+RewriteRule ^docs/next/components/identity/group/?$ /docs/next/components/admin/group/ [R=301,L]
+RewriteRule ^docs/next/components/identity/role/?$ /docs/next/components/admin/role/ [R=301,L]
+RewriteRule ^docs/next/components/identity/client/?$ /docs/next/components/admin/client/ [R=301,L]
+RewriteRule ^docs/next/components/identity/mapping-rules/?$ /docs/next/components/admin/mapping-rules/ [R=301,L]
+RewriteRule ^docs/next/components/identity/tenant/?$ /docs/next/components/admin/tenant/ [R=301,L]
+RewriteRule ^docs/next/components/identity/audit-operations/?$ /docs/next/components/admin/audit-operations/ [R=301,L]
+RewriteRule ^docs/components/identity/identity-introduction/?$ /docs/components/admin/admin-introduction/ [R=301,L]
+RewriteRule ^docs/components/identity/access-control/?$ /docs/components/admin/access-control/ [R=301,L]
+RewriteRule ^docs/components/identity/authorization/?$ /docs/components/admin/authorization/ [R=301,L]
+RewriteRule ^docs/components/identity/user/?$ /docs/components/admin/user/ [R=301,L]
+RewriteRule ^docs/components/identity/group/?$ /docs/components/admin/group/ [R=301,L]
+RewriteRule ^docs/components/identity/role/?$ /docs/components/admin/role/ [R=301,L]
+RewriteRule ^docs/components/identity/client/?$ /docs/components/admin/client/ [R=301,L]
+RewriteRule ^docs/components/identity/mapping-rules/?$ /docs/components/admin/mapping-rules/ [R=301,L]
+RewriteRule ^docs/components/identity/tenant/?$ /docs/components/admin/tenant/ [R=301,L]
+RewriteRule ^docs/components/identity/audit-operations/?$ /docs/components/admin/audit-operations/ [R=301,L]
+# self-managed orchestration-cluster/identity → orchestration-cluster/admin
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/overview/?$ /docs/next/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider/?$ /docs/next/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/connect-multiple-identity-providers/?$ /docs/next/self-managed/components/orchestration-cluster/admin/connect-multiple-identity-providers/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/bring-your-groups/?$ /docs/next/self-managed/components/orchestration-cluster/admin/bring-your-groups/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/debugging-authentication/?$ /docs/next/self-managed/components/orchestration-cluster/admin/debugging-authentication/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/special-oidc-cases/?$ /docs/next/self-managed/components/orchestration-cluster/admin/special-oidc-cases/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/overview/?$ /docs/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider/?$ /docs/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/connect-multiple-identity-providers/?$ /docs/self-managed/components/orchestration-cluster/admin/connect-multiple-identity-providers/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/bring-your-groups/?$ /docs/self-managed/components/orchestration-cluster/admin/bring-your-groups/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/debugging-authentication/?$ /docs/self-managed/components/orchestration-cluster/admin/debugging-authentication/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/special-oidc-cases/?$ /docs/self-managed/components/orchestration-cluster/admin/special-oidc-cases/ [R=301,L]
+# identity-as-code → admin-identity-as-code
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
+
 # Change ID of choose-right-model-agentic
 RewriteRule ^docs/next/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/next/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
 RewriteRule ^docs/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
@@ -342,10 +381,10 @@ RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-org
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/power-automate/?$ /docs/components/connectors/introduction-to-connectors/ [R=301,L]
 
 # Add mapping rules
-RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules/?$ /docs/components/identity/mapping-rules/ [R=301,L]
-RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations/?$ /docs/components/identity/mapping-rules/ [R=301,L]
-RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mapping-rules-to-tenants/?$ /docs/components/identity/mapping-rules/ [R=301,L]
-RewriteRule ^docs/components/identity/mapping-rules/manage-mapping-rules/?$ /docs/components/identity/mapping-rules/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules/?$ /docs/components/admin/mapping-rules/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations/?$ /docs/components/admin/mapping-rules/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mapping-rules-to-tenants/?$ /docs/components/admin/mapping-rules/ [R=301,L]
+RewriteRule ^docs/components/identity/mapping-rules/manage-mapping-rules/?$ /docs/components/admin/mapping-rules/ [R=301,L]
 
 RewriteRule ^docs/next/components/whats-new-in-88/?$ /docs/reference/announcements-release-notes/880/whats-new-in-88/ [R=301,L]
 
@@ -372,7 +411,7 @@ RewriteRule ^docs/self-managed/concepts/document-handling/configuration/overview
 
 RewriteRule ^docs/components/concepts/access-control/user-groups/?$ /docs/self-managed/components/management-identity/application-user-group-role-management/manage-groups/ [R=301,L]
 RewriteRule ^docs/components/concepts/access-control/user-task-access-restrictions/?$ /docs/components/tasklist/user-task-access-restrictions/ [R=301,L]
-RewriteRule ^docs/components/concepts/resource-authorizations/?$ /docs/components/identity/identity-introduction/ [R=301,L]
+RewriteRule ^docs/components/concepts/resource-authorizations/?$ /docs/components/admin/admin-introduction/ [R=301,L]
 RewriteRule ^docs/components/connectors/custom-built-connectors/connector-template-generator/?$ /docs/components/connectors/custom-built-connectors/connector-templates/ [R=301,L]
 RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/about-templates/?$ /docs/next/components/modeler/element-templates/about-templates/ [R=301,L]
 RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/additional-resources/?$ /docs/next/components/modeler/element-templates/about-templates/ [R=301,L]
@@ -380,7 +419,7 @@ RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/defining-
 RewriteRule ^docs/guides/setup-client-connection-credentials/?$ /docs/components/console/introduction-to-console/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/access-management/resource-authorizations/?$ /docs/self-managed/components/management-identity/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/application-user-group-role-management/identity-application-user-group-role-management-overview/?$ /docs/self-managed/components/management-identity/overview/ [R=301,L]
-RewriteRule ^docs/self-managed/identity/configuration/identity-configuration-overview/?$ /docs/self-managed/components/orchestration-cluster/identity/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/configuration/identity-configuration-overview/?$ /docs/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/configuration/getting-started/?$ /docs/self-managed/components/optimize/overview/ [R=301,L]
 
 RewriteRule ^docs/self-managed/modeler/web-modeler/installation/?$ /docs/self-managed/components/modeler/web-modeler/overview/ [R=301,L]
@@ -412,7 +451,7 @@ RewriteRule ^docs/self-managed/console-deployment/overview/?$ /docs/self-managed
 RewriteRule ^docs/self-managed/console-deployment/telemetry/?$ /docs/self-managed/components/console/configuration/ [R=301,L]
 RewriteRule ^docs/self-managed/console-deployment/usage-metrics/?$ /docs/reference/data-collection/usage-metrics/ [R=301,L]
 
-RewriteRule ^docs/self-managed/identity/access-management/access-management-overview/?$ /docs/self-managed/components/orchestration-cluster/identity/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/access-management/access-management-overview/?$ /docs/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
 
 RewriteRule ^docs/self-managed/identity/access-management/manage-permissions/?$ /docs/self-managed/components/management-identity/access-management/manage-permissions/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/access-management/resource-authorizations/?$ /docs/self-managed/components/management-identity/overview/ [R=301,L]
@@ -426,7 +465,7 @@ RewriteRule ^docs/self-managed/identity/configuration/alternative-db/?$ /docs/se
 RewriteRule ^docs/self-managed/identity/configuration/configure-external-identity-provider/?$ /docs/self-managed/components/management-identity/configuration/configure-external-identity-provider/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/configuration/connect-to-an-existing-keycloak/?$ /docs/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/configuration/connect-to-an-oidc-provider/?$ /docs/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
-RewriteRule ^docs/self-managed/identity/configuration/identity-configuration-overview/?$ /docs/self-managed/components/orchestration-cluster/identity/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/configuration/identity-configuration-overview/?$ /docs/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
 
 RewriteRule ^docs/self-managed/identity/miscellaneous/application-monitoring/?$ /docs/self-managed/components/management-identity/miscellaneous/application-monitoring/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/miscellaneous/configuration-variables/?$ /docs/self-managed/components/management-identity/miscellaneous/configuration-variables/ [R=301,L]
@@ -539,7 +578,7 @@ RewriteRule ^docs/self-managed/identity/miscellaneous/?$ /docs/self-managed/comp
 RewriteRule ^docs/self-managed/identity/what-is-identity/?$ /docs/self-managed/components/management-identity/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/modeler/?$ /docs/self-managed/components/modeler/ [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/?$ /docs/self-managed/components/optimize/ [R=301,L]
-RewriteRule ^docs/self-managed/orchestration-identity/?$ /docs/self-managed/components/orchestration-cluster/identity/ [R=301,L]
+RewriteRule ^docs/self-managed/orchestration-identity/?$ /docs/self-managed/components/orchestration-cluster/admin/ [R=301,L]
 RewriteRule ^docs/self-managed/operate-deployment/?$ /docs/self-managed/components/orchestration-cluster/operate/ [R=301,L]
 RewriteRule ^docs/self-managed/orchestration-cluster/?$ /docs/self-managed/components/orchestration-cluster/ [R=301,L]
 RewriteRule ^docs/self-managed/orchestration-cluster/sm-orchestration-cluster/?$ /docs/self-managed/components/orchestration-cluster/overview/ [R=301,L]
@@ -549,7 +588,7 @@ RewriteRule ^docs/self-managed/console-deployment/installation/?$ /docs/self-man
 RewriteRule ^docs/self-managed/modeler/web-modeler/installation/?$ /docs/self-managed/components/modeler/web-modeler/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/operate-deployment/install-and-start/?$ /docs/self-managed/components/orchestration-cluster/operate/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/install-and-start/?$ /docs/self-managed/components/optimize/overview/ [R=301,L]
-RewriteRule ^docs/self-managed/orchestration-identity/orchestration-identity/?$ /docs/self-managed/components/orchestration-cluster/identity/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/orchestration-identity/orchestration-identity/?$ /docs/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/tasklist-deployment/install-and-start/?$ /docs/self-managed/components/orchestration-cluster/tasklist/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/update/index/?$ /docs/self-managed/components/components-update/introduction/ [R=301,L]
 
@@ -675,9 +714,9 @@ RewriteRule ^docs/self-managed/components/management-identity/install-identity/?
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/configuration/alternative-db/?$ /docs/self-managed/components/management-identity/configuration/alternative-db/ [R=301,L]
 
 RewriteRule ^docs/self-managed/concepts/mapping-rules/?$ /docs/components/concepts/access-control/mapping-rules/ [R=301,L]
-RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules/?$ /docs/components/identity/mapping-rules/manage-mapping-rules/ [R=301,L]
-RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations/?$ /docs/components/identity/mapping-rules/mapping-rule-authorizations/ [R=301,L]
-RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mapping-rules-to-tenants/?$ /docs/components/identity/mapping-rules/assign-mapping-rules-to-tenants/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules/?$ /docs/components/admin/mapping-rules/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations/?$ /docs/components/admin/mapping-rules/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mapping-rules-to-tenants/?$ /docs/components/admin/mapping-rules/ [R=301,L]
 
 # Microsoft AKS
 RewriteRule ^docs/self-managed/setup/deploy/azure/microsoft-aks/(.*)$ /docs/self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks/ [R=301,L]
