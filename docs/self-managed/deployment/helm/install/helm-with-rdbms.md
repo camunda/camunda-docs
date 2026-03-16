@@ -205,7 +205,7 @@ orchestration:
         name: jdbc-drivers
 ```
 
-See [JDBC driver loading](/self-managed/deployment/helm/configure/database/rdbms.md#loading-jdbc-drivers-into-pods) for more strategies.
+See [JDBC driver loading](/self-managed/deployment/helm/configure/database/rdbms.md#bundled-vs-custom-jdbc-drivers) for more strategies.
 
 ### Step 7: Install Camunda
 
@@ -392,7 +392,7 @@ kubectl logs -n camunda <pod-name>
 - Authentication failed: Confirm secret and credentials.
 - Driver not found (Oracle/MySQL): Verify init container or custom image has loaded the driver.
 
-See [troubleshooting RDBMS connectivity](/self-managed/deployment/helm/configure/database/rdbms.md#troubleshooting-rdbms-connectivity) for detailed diagnostics.
+See [troubleshooting RDBMS connectivity](/self-managed/deployment/helm/configure/database/rdbms.md#troubleshooting-and-operations) for detailed diagnostics.
 
 ### Data not appearing in database
 
