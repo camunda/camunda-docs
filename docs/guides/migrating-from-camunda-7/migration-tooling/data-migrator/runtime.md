@@ -12,7 +12,7 @@ Migrate currently running process instances.
 
 ## About runtime migration
 
-Running refers to process instances in Camunda 7 which are not yet ended and are currently waiting in a [wait-state](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#wait-states). This state is persisted in the database, and a corresponding data entry must be created in Camunda 8, so the process instance can continue from that state in the new solution.
+Running refers to process instances in Camunda 7 that are not yet ended and are currently waiting in a [wait-state](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#wait-states). This state is persisted in the database, and a corresponding data entry must be created in Camunda 8 so the process instance can continue from that state in the new solution.
 
 ## Requirements and limitations
 
@@ -24,7 +24,7 @@ The following requirements and limitations apply:
 - The Runtime Data Migrator needs to access Orchestration Cluster APIs (which means you can also use it when running SaaS).
 - You must be familiar with the Data Migrator [limitations](limitations.md).
 
-If you need to adjust your process models before migration, you can use [process version migration](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-instance-migration/) in the Camunda 7 environment to migrate process instances to versions that are migratable to Camunda 8. An interesting strategy can be to define dedicated migration states you want your process instances to pile up in. Another common strategy is to use [process instance modification](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-instance-modification/) in the Camunda 7 environment to move out of states that are not migratable (for example, process instances within a multiple instance task).
+If you need to adjust your process models before migration, you can use [process version migration](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-instance-migration/) in the Camunda 7 environment to migrate process instances to versions that are migratable to Camunda 8. One useful strategy is to define dedicated migration states where your process instances can accumulate. Another common strategy is to use [process instance modification](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-instance-modification/) in the Camunda 7 environment to move out of states that are not migratable (for example, process instances within a multiple instance task).
 
 <!-- TODO pile up: mention the job pause feature in Camunda 7 -->
 
@@ -147,9 +147,9 @@ start.bat --runtime --retry-skipped
 
 ## Job type configuration
 
-By default, the job type is configured as `migrator`. The Diagram Converter adds an execution listener with this type to None Start Events, and the Data Migrator activates jobs matching this type. This works out of the box and no additional configuration is needed.
+By default, the job type is configured as `migrator`. The Diagram Converter adds an execution listener with this type to None Start Events, and the Data Migrator activates jobs matching this type. This works out of the box, and no additional configuration is needed.
 
-The job type is relevant because during migration, the Data Migrator creates new Camunda 8 process instances with a `legacyId` variable linking them to their original Camunda 7 instances. It then activates all jobs with execution listener type `migrator`. These jobs are only processed if `legacyId` is present. Process instances started directly on Camunda 8 are skipped. See [Externally Started Process Instances](#externally-started-process-instances) for details.
+The job type is relevant because during migration, the Data Migrator creates new Camunda 8 process instances with a `legacyId` variable linking them to their original Camunda 7 instances. It then activates all jobs with the execution listener type `migrator`. These jobs are only processed if `legacyId` is present. Process instances started directly on Camunda 8 are skipped. See [Externally Started Process Instances](#externally-started-process-instances) for details.
 
 The migrator supports two job type configurations with fallback behavior:
 
@@ -158,7 +158,7 @@ The migrator supports two job type configurations with fallback behavior:
   - It must match the execution listener type defined on the start event in the BPMN model. If the BPMN execution listener is an expression that resolves to a type, then `validation-job-type` needs to be configured as well.
 
 - **`validation-job-type`**: Used for validation purposes (optional).
-  - Before starting a process instance in Camunda 8, the Data Migrator verifies the job type is present in the BPMN. This ensures the process instance execution waits for the Data Migrator at the start event.
+  - Before starting a process instance in Camunda 8, the Data Migrator verifies that the job type is present in the BPMN. This ensures the process instance execution waits for the Data Migrator at the start event.
   - When `validation-job-type` is not defined, `job-type` is used for both validation and activation.
   - You can define a FEEL expression that provides different job types based on the process instance context.
   - It must match the execution listener type defined on the start event in the BPMN model.
@@ -194,14 +194,14 @@ When using a FEEL expression in `validation-job-type`, you must also specify the
 ```
 
 :::note
-Use FEEL expressions only for validation, not for job activation since on job activation, the FEEL expression is already evaluated to a static value.
+Use FEEL expressions only for validation, not for job activation, since during job activation, the FEEL expression is already evaluated to a static value.
 :::
 
 ### Externally Started Process Instances
 
 New Camunda 8 process instances should not be started on models that still have the `migrator` execution listener. Follow the recommended [choreography](#choreography): complete the migration first, then remove the execution listener and redeploy before starting new process instances.
 
-If a process instance is started externally (not by the Data Migrator) on a model with the `migrator` execution listener, the Data Migrator will activate the job but skip it because the `legacyId` variable is not present. The process instance will remain at the start event. After the job lock times out, the job becomes available for activation again. This does not cause errors or data corruption, but the externally started process instance will not progress until the execution listener is removed and the model is redeployed.
+If a process instance is started externally (not by the Data Migrator) on a model with the `migrator` execution listener, the Data Migrator will activate the job but skip it because the `legacyId` variable is not present. The process instance will remain at the start event. After the job lock times out, the job becomes available for activation again. This does not cause errors or data corruption, but an externally started process instance will not progress until the execution listener is removed and the model is redeployed.
 
 When using the advanced FEEL expression configuration `=if legacyId != null then "migrator" else "noop"`, externally started process instances will generate jobs with the type `noop` instead of `migrator`, so the Data Migrator will not activate them at all. However, to allow these process instances to proceed past the start event, you must implement a **noop job worker** that completes these jobs:
 
