@@ -18,6 +18,8 @@ This guide walks you through migrating a Camunda 8 Helm installation from Bitnam
 
 After migration, your setup will be aligned with the [operator-based reference architecture](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
+This guide is intended for customers running Camunda 8 with Bitnami subcharts enabled. If your installation already uses external databases, managed services, or operator-managed infrastructure, you do not need to migrate from Bitnami subcharts.
+
 ## Prerequisites
 
 Before starting the migration, ensure you have:
@@ -32,7 +34,7 @@ Before starting the migration, ensure you have:
 - Sufficient cluster resources to run both old and new infrastructure temporarily
 
 :::tip Tool versions
-For the tool versions used and tested, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository.
+For the tool versions used and tested, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
 :::
 
 ## Clone the deployment references repository
@@ -121,10 +123,10 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 | `WEBMODELER_DB_USER`         | `webmodeler`           | Web Modeler database user (must match the source installation)   |
 | `BACKUP_PVC`                 | `migration-backup-pvc` | PVC name for storing backup data                                 |
 | `BACKUP_STORAGE_SIZE`        | `50Gi`                 | Backup PVC size (must fit all database dumps)                    |
-| `MIGRATE_IDENTITY`           | `true`                 | Migrate Identity PostgreSQL database                             |
-| `MIGRATE_KEYCLOAK`           | `true`                 | Migrate Keycloak and its PostgreSQL database                     |
-| `MIGRATE_WEBMODELER`         | `true`                 | Migrate Web Modeler PostgreSQL database                          |
-| `MIGRATE_ELASTICSEARCH`      | `true`                 | Migrate Elasticsearch data                                       |
+| `MIGRATE_IDENTITY`           | `true`                 | Enables the Identity PostgreSQL database migration               |
+| `MIGRATE_KEYCLOAK`           | `true`                 | Enables the Keycloak and its PostgreSQL database migration       |
+| `MIGRATE_WEBMODELER`         | `true`                 | Enables the Web Modeler PostgreSQL database migration            |
+| `MIGRATE_ELASTICSEARCH`      | `true`                 | Enables the Elasticsearch data migration                         |
 
 Set any `MIGRATE_*` variable to `false` to skip a component — for example, if it is not deployed or already uses an external service.
 

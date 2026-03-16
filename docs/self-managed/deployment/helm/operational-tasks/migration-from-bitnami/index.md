@@ -34,7 +34,7 @@ The migration covers all Bitnami-managed infrastructure components deployed as p
 The Camunda application components themselves (Zeebe, Operate, Tasklist, Optimize, Connectors, Identity, Web Modeler) are not migrated — they are reconfigured via a Helm upgrade to use the new infrastructure backends. Your process instances, decisions, and forms remain intact.
 :::
 
-## Migration architecture
+## Migration rationale
 
 The migration follows a five-phase approach designed to minimize downtime:
 
@@ -68,12 +68,12 @@ Use this quick rule of thumb before selecting a guide:
 - Choose **managed services** if you want PostgreSQL and Elasticsearch operated by your cloud provider.
 - Choose **manual deployment** if you run on VMs, bare metal, or another topology outside these supported patterns.
 
-| Target                                                                             | Best for                                                                                                            | Guide                                                           |
-| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| **Kubernetes operators** (CloudNativePG, ECK, Keycloak Operator)                   | Teams running Kubernetes who want production-grade, self-managed infrastructure with operator lifecycle management. | [Migrate to Kubernetes operators](./bitnami-to-operators.md)    |
-| **Managed services** (AWS RDS, Elastic Cloud, Azure Database for PostgreSQL, etc.) | Teams using cloud providers who prefer fully managed infrastructure with minimal operational overhead.              | [Migrate to managed services](./bitnami-to-managed-services.md) |
-| **Manual deployment** (VMs, bare-metal, Docker Compose)                            | Teams who cannot use operators or managed services, or require full control over infrastructure deployment.         | [Advanced alternatives](./alternatives.md)                      |
-| **Zero-downtime migration** (logical replication, CCR)                             | Teams with strict SLA requirements who cannot afford any maintenance window.                                        | [Zero-downtime migration](./zero-downtime.md)                   |
+| Best for                                                                                                            | Recommended path                                                                   | Guide                                                           |
+| ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Teams running Kubernetes who want production-grade, self-managed infrastructure with operator lifecycle management. | **Kubernetes operators** (CloudNativePG, ECK, Keycloak Operator)                   | [Migrate to Kubernetes operators](./bitnami-to-operators.md)    |
+| Teams using cloud providers who prefer fully managed infrastructure with minimal operational overhead.              | **Managed services** (AWS RDS, Elastic Cloud, Azure Database for PostgreSQL, etc.) | [Migrate to managed services](./bitnami-to-managed-services.md) |
+| Teams who cannot use operators or managed services, or require full control over infrastructure deployment.         | **Manual deployment** (VMs, bare-metal, Docker Compose)                            | [Advanced alternatives](./alternatives.md)                      |
+| Teams with strict SLA requirements who cannot afford any maintenance window.                                        | **Zero-downtime migration** (logical replication, CCR)                             | [Zero-downtime migration](./zero-downtime.md)                   |
 
 ## Prerequisites (all paths)
 
