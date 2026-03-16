@@ -1379,14 +1379,10 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.9",
-      items: ["apis-tools/migration-manuals/migrate-to-89"],
-    },
-    {
-      type: "category",
-      label: "Upgrade to Camunda 8.8",
+      className: "sidebar-cta",
       link: {
         type: "doc",
-        id: "apis-tools/migration-manuals/index",
+        id: "apis-tools/migration-manuals/migrate-to-89",
       },
       items: [
         "apis-tools/migration-manuals/migrate-to-camunda-api",
