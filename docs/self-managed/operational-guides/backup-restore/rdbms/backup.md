@@ -42,7 +42,7 @@ When Camunda uses an RDBMS as **secondary storage**, backups involve **two indep
 - **Zeebe (primary storage)**: Backs up its internal state (log stream, snapshots) to an external blob store (S3, GCS, Azure, or filesystem). These are called **primary storage backups**.
 - **The external RDBMS**: Backed up using your database vendor's native tools (pg_dump, mysqldump, RMAN, etc.). This is the **secondary storage backup**.
 
-During restore, Zeebe uses the exporter position stored in the RDBMS to find the correct primary storage backup, or backups, that matches the RDBMS state. This ensures consistency between the two systems without requiring synchronized backup timing.
+During restore, Zeebe uses the exporter position stored in the RDBMS to find the correct primary storage backup, or backups, that match the RDBMS state. This ensures consistency between the two systems without requiring synchronized backup timing.
 
 :::tip
 While Zeebe during restore will match the secondary storage's backup position, it is recommended to have the backups taken at similar intervals. This minimizes the time required after restore for Zeebe to re-export events to the secondary storage.
@@ -198,5 +198,5 @@ You can enable a retention mechanism over primary storage (Zeebe's) backups. Thi
 When retention deletes old backups, the affected [backup ranges](#backup-ranges) shrink accordingly, narrowing your available restore window. Ensure that your retention window is at least as long as the restore window you require. For example, if you need the ability to restore to any point in the last 7 days, set the retention window to at least `P7D`.
 
 :::note
-Backups created outside or before the scheduler was activated are also susceptible to be deleted by the retention mechanism. This only affects the primary storage.
+Backups created outside or before the scheduler was activated are also susceptible to being deleted by the retention mechanism. This only affects the primary storage.
 :::
