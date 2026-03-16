@@ -70,7 +70,7 @@ jobs:
       - name: Generate token
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         id: generate_token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
           private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
