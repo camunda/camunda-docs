@@ -23,8 +23,8 @@ Consider these alternatives if:
 
 - Your organization does not allow operator installations in the cluster (security/compliance constraints).
 - You are running on bare-metal infrastructure without managed service access.
-- You need to migrate to an existing, pre-existing database infrastructure (e.g., a shared PostgreSQL cluster managed by a DBA team).
-- You are running Camunda outside of Kubernetes (e.g., Docker Compose, VM-based).
+- You need to migrate to an existing database infrastructure (for example, a shared PostgreSQL cluster managed by a DBA team).
+- You are running Camunda outside of Kubernetes (for example, Docker Compose or VM-based deployments).
 
 ## Option 1: Manually deployed PostgreSQL and Elasticsearch on Kubernetes
 

@@ -66,7 +66,7 @@ In addition to the [general prerequisites](./index.md#prerequisites-all-paths):
 - PostgreSQL source must support **logical replication** (`wal_level = logical`). This may require a restart of the Bitnami PostgreSQL StatefulSet.
 - Elasticsearch: either an **Elastic Platinum license** (for cross-cluster replication) or the ability to run **continuous snapshots** with very short intervals.
 - Deep understanding of your data volumes, replication lag tolerances, and network throughput between source and target.
-- A monitoring solution to track replication lag (e.g., Prometheus, Grafana, or manual queries).
+- A monitoring solution to track replication lag (for example, Prometheus, Grafana, or manual queries).
 
 :::important Decide the Elasticsearch strategy before you begin
 The PostgreSQL path is always logical replication. Elasticsearch requires an explicit tradeoff:
@@ -210,8 +210,8 @@ On each CNPG target cluster, create a subscription pointing to the source:
 SOURCE_PWD=$(kubectl get secret ${CAMUNDA_RELEASE_NAME}-postgresql -n ${NAMESPACE} \
   -o jsonpath='{.data.postgres-password}' | base64 -d)
 
-# Identity
-kubectl exec -it ${CNPG_IDENTITY_CLUSTER}-1 -n ${NAMESPACE} -- \
+# Identity — target the -rw service to ensure writes land on the current primary
+kubectl exec -it $(kubectl get pod -n ${NAMESPACE} -l cnpg.io/cluster=${CNPG_IDENTITY_CLUSTER},cnpg.io/instanceRole=primary -o jsonpath='{.items[0].metadata.name}') -n ${NAMESPACE} -- \
   psql -U postgres -d identity -c "
     CREATE SUBSCRIPTION identity_sub
     CONNECTION 'host=${CAMUNDA_RELEASE_NAME}-postgresql.${NAMESPACE}.svc.cluster.local port=5432 dbname=identity user=postgres password=${SOURCE_PWD}'
@@ -223,7 +223,7 @@ kubectl exec -it ${CNPG_IDENTITY_CLUSTER}-1 -n ${NAMESPACE} -- \
 KEYCLOAK_PWD=$(kubectl get secret ${CAMUNDA_RELEASE_NAME}-keycloak-postgresql -n ${NAMESPACE} \
   -o jsonpath='{.data.postgres-password}' | base64 -d)
 
-kubectl exec -it ${CNPG_KEYCLOAK_CLUSTER}-1 -n ${NAMESPACE} -- \
+kubectl exec -it $(kubectl get pod -n ${NAMESPACE} -l cnpg.io/cluster=${CNPG_KEYCLOAK_CLUSTER},cnpg.io/instanceRole=primary -o jsonpath='{.items[0].metadata.name}') -n ${NAMESPACE} -- \
   psql -U postgres -d keycloak -c "
     CREATE SUBSCRIPTION keycloak_sub
     CONNECTION 'host=${CAMUNDA_RELEASE_NAME}-keycloak-postgresql.${NAMESPACE}.svc.cluster.local port=5432 dbname=keycloak user=postgres password=${KEYCLOAK_PWD}'
@@ -235,7 +235,7 @@ kubectl exec -it ${CNPG_KEYCLOAK_CLUSTER}-1 -n ${NAMESPACE} -- \
 WEBMODELER_PWD=$(kubectl get secret ${CAMUNDA_RELEASE_NAME}-postgresql-web-modeler -n ${NAMESPACE} \
   -o jsonpath='{.data.postgres-password}' | base64 -d)
 
-kubectl exec -it ${CNPG_WEBMODELER_CLUSTER}-1 -n ${NAMESPACE} -- \
+kubectl exec -it $(kubectl get pod -n ${NAMESPACE} -l cnpg.io/cluster=${CNPG_WEBMODELER_CLUSTER},cnpg.io/instanceRole=primary -o jsonpath='{.items[0].metadata.name}') -n ${NAMESPACE} -- \
   psql -U postgres -d webmodeler -c "
     CREATE SUBSCRIPTION webmodeler_sub
     CONNECTION 'host=${CAMUNDA_RELEASE_NAME}-postgresql-web-modeler.${NAMESPACE}.svc.cluster.local port=5432 dbname=webmodeler user=postgres password=${WEBMODELER_PWD}'
@@ -506,14 +506,14 @@ Drop the subscriptions on the target to stop replication and allow the targets t
 <summary>Show details: stop PostgreSQL replication example</summary>
 
 ```bash
-# Drop subscriptions
-kubectl exec -it ${CNPG_IDENTITY_CLUSTER}-1 -n ${NAMESPACE} -- \
+# Drop subscriptions — target the current primary by label selector
+kubectl exec -it $(kubectl get pod -n ${NAMESPACE} -l cnpg.io/cluster=${CNPG_IDENTITY_CLUSTER},cnpg.io/instanceRole=primary -o jsonpath='{.items[0].metadata.name}') -n ${NAMESPACE} -- \
   psql -U postgres -d identity -c "ALTER SUBSCRIPTION identity_sub DISABLE; DROP SUBSCRIPTION identity_sub;"
 
-kubectl exec -it ${CNPG_KEYCLOAK_CLUSTER}-1 -n ${NAMESPACE} -- \
+kubectl exec -it $(kubectl get pod -n ${NAMESPACE} -l cnpg.io/cluster=${CNPG_KEYCLOAK_CLUSTER},cnpg.io/instanceRole=primary -o jsonpath='{.items[0].metadata.name}') -n ${NAMESPACE} -- \
   psql -U postgres -d keycloak -c "ALTER SUBSCRIPTION keycloak_sub DISABLE; DROP SUBSCRIPTION keycloak_sub;"
 
-kubectl exec -it ${CNPG_WEBMODELER_CLUSTER}-1 -n ${NAMESPACE} -- \
+kubectl exec -it $(kubectl get pod -n ${NAMESPACE} -l cnpg.io/cluster=${CNPG_WEBMODELER_CLUSTER},cnpg.io/instanceRole=primary -o jsonpath='{.items[0].metadata.name}') -n ${NAMESPACE} -- \
   psql -U postgres -d webmodeler -c "ALTER SUBSCRIPTION webmodeler_sub DISABLE; DROP SUBSCRIPTION webmodeler_sub;"
 ```
 
@@ -597,7 +597,7 @@ kubectl exec -it ${ECK_CLUSTER_NAME}-es-masters-0 -n ${NAMESPACE} -- \
 </details>
 
 :::warning Brief data gap
-With the continuous snapshot approach, there is a small window (up to the snapshot interval, e.g. 5 minutes) where recent Elasticsearch writes may not be captured. Zeebe will re-export these events after the cutover.
+With the continuous snapshot approach, there is a small window (up to the snapshot interval, for example 5 minutes) where recent Elasticsearch writes may not be captured. Zeebe will re-export these events after the cutover.
 :::
 
 </TabItem>
