@@ -15,16 +15,18 @@ Current published results are based on PostgreSQL benchmarking only.
 
 ### Scenarios tested
 
-- **Simple**: 1-task process.
-- **Typical**: 10-task process with multiple timers.
-- **Realistic**: Complex process with call activities, subprocesses, and DMN.
+- **Single-task workload**: A process with one task.
+- **Multi-step timer workload**: A 10-task process with multiple timers.
+- **Complex business workload**: A process with call activities, subprocesses, and DMN.
 
 ### Baseline setup used in benchmark discussions
 
 - Orchestration cluster: three nodes, three partitions.
 - Orchestration resources: 3.5 CPU and 2 GB RAM per node.
 - PostgreSQL: single-node containerized setup, typically 3-6 CPU and 6-8 GB RAM.
-- Retention baseline used in several tests: TTL around one hour.
+- Retention baseline used in several tests: TTL 60 minutes.
+
+Published results currently reflect short-retention benchmark windows.
 
 :::note
 Benchmark comparability depends on hardware parity. Interpret Elasticsearch/OpenSearch and RDBMS comparisons only when environments are comparable.
@@ -41,9 +43,9 @@ Overall hardware requirements can be similar across Elasticsearch/OpenSearch-bas
 
 ### Scenario observations
 
-- **Simple scenario**: Stable exporter behavior under low-complexity flow patterns.
-- **Typical scenario**: Stable exporter behavior in multi-step flows, with engine pressure becoming visible before exporter pressure in some runs.
-- **Realistic scenario**: Stable exporter behavior in complex business flows, where engine and workload characteristics can dominate end-to-end throughput.
+- **Single-task workload**: Stable exporter behavior under low-complexity flow patterns.
+- **Multi-step timer workload**: Stable exporter behavior in multi-step flows, with engine pressure becoming visible before exporter pressure in some runs.
+- **Complex business workload**: Stable exporter behavior in complex business flows, where engine and workload characteristics can dominate end-to-end throughput.
 
 ### Data availability and cleanup
 
