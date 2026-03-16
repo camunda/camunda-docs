@@ -49,6 +49,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Execute maven build
+        run: mvn -f ./config-reference/camunda-spring-boot-starter/pom.xml
+
       - name: Download latest Spring Boot properties
         run: npm run config-reference:download:camunda-spring-boot-starter ${{ steps.resolve.outputs.docs_version }}
 
