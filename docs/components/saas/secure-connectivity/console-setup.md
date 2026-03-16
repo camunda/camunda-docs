@@ -1,10 +1,10 @@
 ---
 id: secure-connectivity-console-setup
 title: Enable secure connectivity
-description: Configure AWS PrivateLink connectivity for a Camunda 8 SaaS Orchestration cluster in Console.
+description: Configure AWS PrivateLink connectivity for a Camunda 8 SaaS Orchestration Cluster in Console.
 ---
 
-This guide explains how to enable secure connectivity (AWS PrivateLink) for an AWS-hosted Camunda 8 SaaS Orchestration cluster.
+This guide explains how to enable secure connectivity (AWS PrivateLink) for an AWS-hosted Camunda 8 SaaS Orchestration Cluster.
 
 Secure connectivity must be enabled per cluster.
 
@@ -46,14 +46,11 @@ Validation requirements for principal ARNs are described in [validation and acti
 
 ### Supported regions
 
-The AWS region where the orchestration cluster is located is always supported and is preselected by default.
+The AWS region where the Orchestration Cluster is located is always supported and is preselected by default.
 
-You can add additional AWS regions to allow cross-region endpoint connections.
+You can add additional AWS regions to allow cross-region endpoint connections. Cross-region connectivity may increase network latency and incur additional AWS charges.
 
-Adding additional regions allows cross-region VPC endpoint connections.  
-Cross-region connectivity may increase network latency and incur additional AWS charges.
-
-1. Review the cluster’s AWS region (pre-selected).
+1. Review the cluster's AWS region (preselected).
 2. Optionally add additional regions to allow cross-region endpoint connections.
 3. Select **Activate service**.
 

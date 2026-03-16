@@ -47,5 +47,5 @@ The following AWS regions are currently supported in Camunda 8 SaaS.
 To learn more about each region code/location, refer to [AWS regions and availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/).
 
 :::note
-Secure connectivity (AWS PrivateLink) is available only for AWS-hosted Orchestration clusters. To learn more, see [Secure connectivity (AWS PrivateLink)](/components/saas/secure-connectivity/index.md).
+Secure connectivity (AWS PrivateLink) is available only for AWS-hosted Orchestration Clusters. To learn more, see [secure connectivity (AWS PrivateLink)](/components/saas/secure-connectivity/index.md).
 :::

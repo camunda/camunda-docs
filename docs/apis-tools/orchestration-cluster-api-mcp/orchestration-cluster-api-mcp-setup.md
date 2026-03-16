@@ -91,7 +91,7 @@ For SaaS, find your **Region Id** and **Cluster Id** in the Camunda Console unde
 
 ### Direct HTTP connection
 
-If your Orchestration Cluster does not require authentication, for example when running locally with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), you can connect directly to the MCP server endpoint without any additional tooling.
+If your Orchestration Cluster does not require authentication, for example, when running locally with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), you can connect directly to the MCP server endpoint without any additional tooling.
 
 Any MCP client that supports [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) can be used. For authenticated environments, [use `c8ctl mcp-proxy`](#using-c8ctl-mcp-proxy) instead.
 
@@ -211,7 +211,7 @@ camunda:
 
 The example above shows a SaaS configuration using the public endpoint. For clusters with **Secure connectivity (AWS PrivateLink)**, set `url` to the private MCP endpoint URL shown in Camunda Console instead of the public `zeebe.camunda.io` host (the path still ends with `/mcp/cluster`). For local unauthenticated setups, you can omit the `authentication` block and use `http://localhost:8080/mcp/cluster` as the URL.
 
-Then reference the client ID `camunda-mcp` in the MCP Client connector element template within your BPMN process. For more details, see [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client-connector.md).
+Reference the client ID `camunda-mcp` in the MCP Client connector element template in your BPMN process. For more details, see [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client-connector.md).
 
 </TabItem>
 

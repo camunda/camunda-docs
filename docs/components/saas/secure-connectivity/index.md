@@ -1,18 +1,18 @@
 ---
 id: secure-connectivity-AWS
 title: Secure connectivity (AWS PrivateLink)
-description: Connect to Camunda 8 SaaS Orchestration clusters from your AWS VPC using AWS PrivateLink.
+description: Connect to Camunda 8 SaaS Orchestration Clusters from your AWS VPC using AWS PrivateLink.
 ---
 
-Secure connectivity allows you to connect to Camunda 8 SaaS Orchestration clusters from your AWS Virtual Private Cloud (VPC) using AWS PrivateLink.
+Secure connectivity allows you to connect to Camunda 8 SaaS Orchestration Clusters from your AWS Virtual Private Cloud (VPC) using AWS PrivateLink.
 
-When enabled, traffic from your AWS VPC to an orchestration cluster is routed over private AWS networking rather than the public internet.
+When enabled, traffic from your AWS VPC to an Orchestration Cluster is routed over private AWS networking rather than the public internet.
 
 Secure connectivity:
 
 - Applies per cluster.
-- Is available only for AWS-hosted Orchestration clusters.
-- Supports inbound connectivity only. It enables private access from your AWS VPC to Camunda. It does not provide outbound private connectivity from Camunda to your services.
+- Is available only for AWS-hosted Orchestration Clusters.
+- Supports inbound connectivity only — it enables private access from your AWS VPC to Camunda, but does not provide outbound private connectivity from Camunda to your services.
 - Adds a private connectivity path. Public endpoints remain enabled.
 - Is available to Enterprise customers.
 
@@ -28,7 +28,7 @@ When you enable secure connectivity for a cluster:
 - You create one or more VPC interface endpoints in your AWS account that connect to the endpoint service.
 - Traffic from resources in your VPC (for example, job workers or inbound connectors) is routed privately to the cluster.
 
-Each cluster has its own VPC endpoint service and dedicated networking components. Access to the orchestration cluster is handled through dedicated load balancing and API gateway components.
+Each cluster has its own VPC endpoint service and dedicated networking components. Access to the Orchestration Cluster is handled through dedicated load balancing and API gateway components.
 
 Secure connectivity relies on standard AWS PrivateLink functionality. For an overview of AWS PrivateLink concepts and terminology, see [the AWS documentation](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html).
 
@@ -65,7 +65,7 @@ For each cluster:
 
 - A separate VPC endpoint service is provisioned.
 - Cluster-specific networking components are provisioned. Private connectivity does not share entry components across clusters.
-- Access to the orchestration cluster is handled through the cluster’s API gateway layer.
+- Access to the Orchestration Cluster is handled through the cluster's API gateway layer.
 
 Traffic between your VPC and the cluster’s API gateway layer is encrypted in transit using TLS. TLS terminates at the cluster’s API gateway layer.
 
@@ -97,7 +97,7 @@ Public connectivity remains enabled even when secure connectivity is configured.
 
 When secure connectivity is enabled, public connectivity remains available.
 
-- Orchestration cluster components like Operate, Tasklist, and Admin can still be accessed using their public URLs.
+- Orchestration Cluster components like Operate, Tasklist, and Admin can still be accessed using their public URLs.
 - When creating client credentials for a cluster, you can choose which connectivity type to use:
   - Public connectivity, which uses the public hostnames shown for the credentials.
   - Private connectivity, which uses the private DNS hostname of your VPC interface endpoint instead of the public cluster hostname.
@@ -121,4 +121,4 @@ Secure connectivity:
 - Does not provide outbound private connectivity from Camunda to your services.
 - Does not replace IP allowlists or other access control features. If an IP allowlist is configured, it continues to apply to connections made through private connectivity. For more information, see [Manage IP allowlists](../../console/manage-clusters/manage-ip-allowlists).
 
-Secure connectivity changes only the network path used for inbound connections from your AWS VPC to the orchestration cluster.
+Secure connectivity changes only the network path used for inbound connections from your AWS VPC to the Orchestration Cluster.

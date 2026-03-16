@@ -71,7 +71,7 @@ Once you're set up, verify your connection works by making your first API call:
 
 #### Using curl
 
-Local (C8 Run / Docker Compose):
+Local (Camunda 8 Run / Docker Compose):
 
 ```bash
 curl http://localhost:8080/v2/topology
@@ -90,7 +90,7 @@ curl https://${CLUSTER_ID}.${REGION_ID}.privateconnectivity.camunda.io/api/v2/to
 ```
 
 Replace the placeholders with the values for your environment.
-See [Base URLs](#base-urls) for details on SaaS (public and secure connectivity) and self‑managed setups.
+See [Base URLs](#base-urls) for details on SaaS (public and secure connectivity) and self-managed setups.
 
 #### Using Postman
 
@@ -123,15 +123,13 @@ This section covers the technical details and conventions you need to understand
 
 In the Camunda Console, go to your cluster, and in the Cluster Details, find your **Region Id** and **Cluster Id**.
 
-- For public connectivity (default), use this pattern as your `${BASE_URL}`:  
-  `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/v2/`
+- For public connectivity (default), use this pattern as your `${BASE_URL}`: `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/v2/`
 
-- For secure connectivity (AWS PrivateLink), use the private base URL shown in Console.  
-  For the Orchestration Cluster REST API, the pattern is:  
+- For secure connectivity (AWS PrivateLink), use the private base URL shown in Console. For the Orchestration Cluster REST API, the pattern is:
+
   `${BASE_URL} = https://${CLUSTER_ID}.${REGION_ID}.privateconnectivity.camunda.io/api/v2/`
 
-  For example:  
-  `https://b4102386-6818-43c6-a880-d21c968a883f.ork-1.privateconnectivity.camunda.io/api/v2/topology`
+  For example: `https://b4102386-6818-43c6-a880-d21c968a883f.ork-1.privateconnectivity.camunda.io/api/v2/topology`
 
 #### Self-Managed
 
