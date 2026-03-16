@@ -1,6 +1,6 @@
 ---
 id: migrate-to-89
-title: "Camunda 8.9 API migration guide"
+title: "Camunda 8.9 APIs & Tools migration guide"
 sidebar_label: "Upgrade to Camunda 8.9"
 description: "Migrate your API integrations, SDKs, and generated clients to Camunda 8.9. Covers breaking changes, deprecations, and step-by-step migration actions."
 toc_max_heading_level: 2
@@ -38,21 +38,20 @@ Complete the following steps in this guide:
 
 ### API and SDK changes to migrate before Camunda 8.10
 
-If you did not already migrate to the following APIs and SDKs during your 8.8 upgrade, Camunda recommends you perform these migrations before you upgrade to 8.9.
+If you did not already migrate to the following APIs and SDKs during your 8.8 upgrade, Camunda recommends you perform these migrations before you upgrade to 8.9, as this must be performed before 8.10.
+
+If you already performed these migrations during your 8.8 upgrade, proceed to [Camunda 8.9 breaking changes, deprecations, and supported environment changes](#camunda-89-breaking-changes-deprecations-and-supported-environment-changes).
 
 | Component/Use                                                                                                           | 8.9 status | Migrate to                  | Migrate by          |
 | :---------------------------------------------------------------------------------------------------------------------- | :--------- | :-------------------------- | :------------------ |
-| [V1 component APIs](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-component-apis.md)                 | Deprecated | Orchestration Cluster API   | Before Camunda 8.10 |
+| [V1 component APIs](../migration-manuals/migrate-to-camunda-api.md)                                                     | Deprecated | Orchestration Cluster API   | Before Camunda 8.10 |
 | [ZeebeClient](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-java-client.md)               | Deprecated | Camunda Java Client         | Before Camunda 8.10 |
 | [Spring Zeebe SDK](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)         | Deprecated | Camunda Spring Boot Starter | Before Camunda 8.10 |
 | [Zeebe Process Test (ZPT)](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-process-test.md) | Deprecated | Camunda Process Test (CPT)  | Before Camunda 8.10 |
 | [Job-based user tasks](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)       | Deprecated | Camunda user tasks          | Before Camunda 8.10 |
 
 :::tip
-
-- You can access these individual component migration guides in the [Camunda 8.8 APIs & tools migration guide](/versioned_docs/version-8.8/apis-tools/migration-manuals/index.md).
-- For more information about API changes, see the blog post [Upcoming API Changes in Camunda 8: A Unified and Streamlined Experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
-
+Learn more about API changes in the blog post [Upcoming API Changes in Camunda 8: A Unified and Streamlined Experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
 :::
 
 ### Camunda 8.9 breaking changes, deprecations, and supported environment changes

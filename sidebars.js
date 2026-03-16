@@ -1377,9 +1377,22 @@ module.exports = {
       ],
     },
     {
-      type: "doc",
-      id: "apis-tools/migration-manuals/migrate-to-89",
+      type: "category",
+      label: "Upgrade to Camunda 8.9",
       className: "sidebar-cta",
+      link: {
+        type: "doc",
+        id: "apis-tools/migration-manuals/migrate-to-89",
+      },
+      items: [
+        "apis-tools/migration-manuals/migrate-to-camunda-api",
+        "apis-tools/migration-manuals/migrate-component-apis",
+        "apis-tools/migration-manuals/migrate-to-camunda-java-client",
+        "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
+        "apis-tools/migration-manuals/migrate-to-camunda-spring-boot-starter",
+        "apis-tools/migration-manuals/migrate-to-camunda-process-test",
+        "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api",
+      ],
     },
   ],
   Reference: [
