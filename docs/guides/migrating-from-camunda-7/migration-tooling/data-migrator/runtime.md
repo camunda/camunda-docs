@@ -154,7 +154,7 @@ The job type is relevant because during migration, the Data Migrator creates new
 The migrator supports two job type configurations with fallback behavior:
 
 - **`job-type`**: Used for actual job activation (default: `migrator`).
-  - This is always used for activating jobs in Camunda 8 and is required for the migrator to function correctly.
+  - It is used for activating jobs in Camunda 8 and is required for the migrator to function correctly.
   - It must match the execution listener type defined on the start event in the BPMN model. If the BPMN execution listener is an expression that resolves to a type, then `validation-job-type` needs to be configured as well.
 
 - **`validation-job-type`**: Used for validation purposes (optional).
