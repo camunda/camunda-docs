@@ -196,3 +196,4 @@ In addition to the above:
 - [Global listener configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners).
 - [Configure properties through Helm charts](/self-managed/deployment/helm/configure/application-configs.md).
 - [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+- [Admin UI](/components/admin/global-user-task-listeners.md).
