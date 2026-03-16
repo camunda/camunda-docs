@@ -249,7 +249,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ### Phase 3: Cutover (downtime required)
 
 :::caution Maintenance window required
-This is the only phase that causes **downtime**. Schedule a maintenance window before proceeding. Typical duration: 5–30 minutes depending on data volume.
+This is the only phase that causes **downtime**. Schedule a maintenance window before proceeding. Typical duration: **5–40 minutes** depending on Elasticsearch data volume — see [Downtime estimation](#downtime-estimation) for benchmarked timings.
 :::
 
 ```bash
@@ -330,6 +330,33 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 :::info Idempotent cleanup
 The script checks whether each resource exists before attempting deletion, so it can be safely re-run if interrupted.
 :::
+
+:::danger Destructive and irreversible
+This phase **permanently deletes** old Bitnami StatefulSets, PVCs, and the migration backup PVC. After cleanup, rollback to Bitnami sub-charts is **no longer possible**.
+
+Before running this phase, strongly consider:
+1. Take a full backup of all databases (`pg_dumpall` or equivalent)
+2. Snapshot PVCs or storage volumes (cloud provider snapshots)
+3. Store backups in cold storage (S3 Glacier, GCS Archive, etc.)
+4. Keep rollback artifacts in `.state/` as a safety net
+:::
+
+```bash
+bash 5-cleanup-bitnami.sh
+```
+
+This phase removes leftover Bitnami sub-chart resources that are no longer used:
+
+- Old PostgreSQL StatefulSets and their PVCs
+- Old Elasticsearch StatefulSet and its PVCs
+- Old Keycloak StatefulSet
+- Migration backup PVC
+
+After cleanup, the script re-verifies that all Camunda components, operator-managed targets, and data remain healthy without the old resources.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/5-cleanup-bitnami.sh
+```
 
 ## Non-interactive mode
 
@@ -418,31 +445,42 @@ This script automatically removes old Bitnami PostgreSQL, Elasticsearch, and Key
 
 If you prefer to clean up manually, you can delete the resources individually:
 
-```bash
-# Delete old PostgreSQL StatefulSets and their PVCs
-kubectl delete statefulset ${CAMUNDA_RELEASE_NAME}-postgresql -n ${NAMESPACE} --ignore-not-found
-kubectl delete statefulset ${CAMUNDA_RELEASE_NAME}-keycloak-postgresql -n ${NAMESPACE} --ignore-not-found
-kubectl delete statefulset ${CAMUNDA_RELEASE_NAME}-postgresql-web-modeler -n ${NAMESPACE} --ignore-not-found
+## Downtime estimation
 
-# Delete old Elasticsearch StatefulSet
-kubectl delete statefulset ${CAMUNDA_RELEASE_NAME}-elasticsearch-master -n ${NAMESPACE} --ignore-not-found
+Only Phase 3 (cutover) causes downtime. The estimates below were measured on minimal Kubernetes clusters with standard storage. **Production clusters with faster storage and networking will perform significantly better** — always run a [staging rehearsal](#staging-rehearsal) with representative data volumes to measure your actual downtime.
 
-# Delete old Keycloak StatefulSet
-kubectl delete statefulset ${CAMUNDA_RELEASE_NAME}-keycloak -n ${NAMESPACE} --ignore-not-found
+### Reference timings
 
-# Delete migration backup PVC
-kubectl delete pvc migration-backup-pvc -n ${NAMESPACE}
-```
+The following timings were observed migrating a Camunda 8 installation with all components (Identity, Keycloak, Web Modeler, Elasticsearch):
 
-After cleanup, remove the `reindex.remote.whitelist` setting from the ECK Elasticsearch configuration since it is no longer needed.
+| Data profile                  | ES data     | PG data (3 databases) | Observed downtime |
+| ----------------------------- | ----------- | --------------------- | ----------------- |
+| Minimal (fresh install)       | < 100 MB    | ~30 MB                | **~4 min**        |
+| Large (~6.5 million ES docs)  | ~9 GB       | ~30 MB                | **~40 min**       |
 
-:::caution Verify before deleting
-Before deleting old PVCs, verify that the migration is fully successful and all data has been restored correctly. List old PVCs with:
+### Phase 3 breakdown
 
-```bash
-kubectl get pvc -n ${NAMESPACE} | grep -E "postgresql|elasticsearch"
-```
+| Step                           | Duration    | Notes                                          |
+| ------------------------------ | ----------- | ---------------------------------------------- |
+| Freeze components (scale → 0)  | ~10 s       | Scale down all deployments and StatefulSets     |
+| PostgreSQL backup + restore    | ~40 s       | `pg_dump` / `pg_restore` for all databases — negligible even at moderate sizes |
+| **Elasticsearch reindex**      | **~38 min** | **Dominant factor** — copies all indices via the `_reindex` API |
+| Helm upgrade + restart         | ~2 min      | Reconfigure backends and restart all components |
 
+### Estimates by Elasticsearch data volume
+
+| ES Data Volume | Estimated Downtime | Bottleneck                     |
+| -------------- | ------------------ | ------------------------------ |
+| < 1 GB         | ~5 minutes         | Helm upgrade + pod startup     |
+| 1–10 GB        | ~10–40 minutes     | ES reindex                     |
+| 10–50 GB       | ~40 min–2 hours    | ES reindex                     |
+| > 50 GB        | 2+ hours           | ES reindex                     |
+
+:::info Key observations
+- **Elasticsearch reindex dominates downtime.** With ~9 GB of ES data, the reindex step accounts for ~95% of the total cutover time. PostgreSQL backup and restore completes in under a minute regardless of reasonable data sizes.
+- **Downtime scales linearly with ES data volume.** The largest indices (such as Optimize process-instance history) drive the overall duration.
+- **Your cluster will likely be faster.** These timings were measured on constrained test infrastructure. Production clusters with NVMe storage, dedicated nodes, and higher network bandwidth typically achieve much higher reindex throughput.
+- **Always measure in staging.** Run the full migration on a staging environment with representative data volumes to get an accurate downtime estimate for your specific setup.
 :::
 
 ## Precautions
@@ -526,12 +564,12 @@ Before running this migration in production, follow these operational readiness 
 ### Staging rehearsal
 
 1. **Clone your production environment** to a staging cluster (same Helm chart version, same component configuration, comparable data volumes).
-2. **Run the full migration end-to-end** in staging, including all five phases, validation, and cleanup.
-3. **Measure actual timings**: record how long each phase takes, especially the `2-backup.sh` and `3-cutover.sh` phases, as they determine your downtime window.
+2. **Run the full migration end-to-end** in staging, including all five phases (deploy, backup, cutover, validate, and cleanup).
+3. **Measure actual timings**: record how long each phase takes, especially the `3-cutover.sh` phase, as it determines your downtime window. The [benchmarked timings](#downtime-estimation) show that Elasticsearch reindex dominates — expect downtime to scale linearly with your ES data volume.
 4. **Test rollback**: after a successful staging migration, intentionally run `bash rollback.sh` to verify you can revert cleanly.
 
 :::tip
-Use a representative data set — empty databases migrate in seconds but do not reveal performance bottlenecks that large datasets will.
+Use a representative data set — empty databases migrate in seconds but do not reveal the Elasticsearch reindex bottleneck that large datasets will. As a reference, ~9 GB of ES data takes ~40 min on minimal test infrastructure — production clusters with faster storage and networking will perform significantly better.
 :::
 
 ### Production dry-run
@@ -555,8 +593,8 @@ Before starting the migration in production:
 
 If the migration succeeds but you discover issues in the hours or days following:
 
-1. **Immediate failback** (Bitnami PVCs still exist): run `bash rollback.sh` to revert the Helm values and re-attach to the original Bitnami StatefulSets.
-2. **Late failback** (Bitnami PVCs deleted): restore from the backup taken during Phase 2 or from your independent backup.
+1. **Immediate failback** (before Phase 5 — Bitnami PVCs still exist): run `bash rollback.sh` to revert the Helm values and re-attach to the original Bitnami StatefulSets.
+2. **Late failback** (after Phase 5 — Bitnami PVCs deleted): restore from the backup taken during Phase 2 or from your independent backup.
 
 <FailbackCaution />
 
@@ -565,7 +603,7 @@ If the migration succeeds but you discover issues in the hours or days following
 - All `pg_dump` backups are stored on a dedicated PVC (`migration-backup-pvc`) that persists independently of the migration.
 - Elasticsearch snapshots are stored in a registered repository and retained according to the configured retention policy.
 - The migration scripts are **idempotent**: re-running a phase that was interrupted picks up where it left off.
-- No Bitnami resources are deleted during the migration — they are only disconnected from the Helm release. You must explicitly remove them afterward.
+- No Bitnami resources are deleted during Phases 1–4 — they are only disconnected from the Helm release. Phase 5 explicitly removes them after validation.
 
 ### Post-migration monitoring
 
