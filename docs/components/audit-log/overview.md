@@ -38,7 +38,7 @@ By default, only user operations are tracked, not [client](../zeebe/technical-co
 
 ## Get started
 
-Start auditing operations in Operate, Tasklist, and Admin.
+Start auditing operations in Operate, Tasklist, and Admin (formerly Orchestration Cluster Identity).
 
 <AoGrid ao={[
 {
