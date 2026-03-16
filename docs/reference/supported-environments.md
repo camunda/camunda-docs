@@ -1,10 +1,12 @@
 ---
 id: supported-environments
 title: "Supported environments"
-description: "Find out where to run Camunda 8 components for SaaS and Self-Managed."
+description: "Learn which browsers, operating systems, clients, deployment options, and component requirements are tested and supported for compatibility with Camunda 8."
 ---
 
-The following browsers, operating systems, clients, deployment options, and component requirements are tested and supported for compatibility with Camunda 8.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## About supported environments
 

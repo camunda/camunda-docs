@@ -25,6 +25,13 @@ export const configs = [
     types: ["Direct mapping"],
     area: ["System"],
   },
+  // Section: API
+  {
+    name: "camunda.mcp.enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["API"],
+  },
   // Section: Cluster
   {
     name: "camunda.cluster.network.advertised-host",

@@ -138,12 +138,12 @@ Camunda 8.9 drops support for Keycloak 25.x. Only Keycloak 26.x is now supported
 
 #### MCP Client and MCP Remote Client connectors
 
-Breaking changes are [introduced in alpha 2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) to the element templates and the runtime configuration of the MCP Client.
+[Camunda 8.9.0-alpha2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) introduces breaking changes to the MCP Client element templates and runtime configuration.
 
-To resolve this, you must update both the MCP Client and MCP Remote Client connectors to use the element template version 1.
+To remain compatible, update both the MCP Client and MCP Remote Client connectors to use element template version `1`.
 
 :::info
-To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-client.md) documentation.
+For more information, see the [MCP](/components/early-access/alpha/mcp-client/mcp-client.md) documentation.
 :::
 
 </div>
@@ -412,6 +412,38 @@ This change improves the reliability of long-running processes that depend on in
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Dedicated artifact for element template generation annotations
+
+Starting with Camunda 8.9, use the dedicated artifact `element-template-generator-annotations`. This artifact contains only the annotations required for the Element Template Generator and reduces your project's dependency footprint.
+
+Previously, these annotations were included in the `element-template-generator-core` artifact.
+
+Replace `element-template-generator-core` with `element-template-generator-annotations` and update the imports.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Synchronous webhook results
+
+Starting with Camunda 8.9, the Webhook connector supports a synchronous response mode. This allows the connector to wait until a newly created process instance finishes and return the results in the response.
+
+For more details, see the [Webhook connector](/components/connectors/protocol/http-webhook.md) documentation.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
@@ -560,6 +592,27 @@ With the inclusion of RDBMS as a secondary storage option and the [deprecation o
 :::note
 To continue using Elasticsearch provided as a subchart, you must add `global.elasticsearch.enabled: true`, `elasticsearch.enabled: true`, and `orchestration.data.secondaryStorage.type: elasticsearch` to your `values.yaml`.
 :::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Secure connectivity (AWS PrivateLink) for SaaS
+
+Camunda 8.9 introduces Secure connectivity for AWS-hosted Orchestration Clusters in Camunda 8 SaaS.
+
+Secure connectivity enables private inbound access from your AWS VPC to your cluster using AWS PrivateLink, without routing traffic over the public internet.
+
+- Applies per cluster.
+- Supports inbound connectivity only.
+- Public connectivity remains enabled.
+
+<p className="link-arrow">[Secure connectivity (AWS PrivateLink)](../../../components/saas/secure-connectivity/index.md)</p>
 
 </div>
 </div>

@@ -1,8 +1,8 @@
 ---
 id: operator-based-infrastructure
-sidebar_label: Operator-based infrastructure
-title: Deploy infrastructure with Kubernetes operators
-description: "Deploy Camunda 8 infrastructure components using official Kubernetes operators as an alternative to Bitnami subcharts."
+sidebar_label: Deploy required dependencies
+title: Deploy required dependencies with Kubernetes operators
+description: "Deploy the databases (PostgreSQL, Elasticsearch) and OIDC provider (Keycloak) required by Camunda 8 using official Kubernetes operators."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -20,7 +20,7 @@ As outlined in [our strategy](https://camunda.com/blog/2025/08/changes-to-camund
 
 This guide demonstrates how to integrate these infrastructure components using official Kubernetes operators that don't depend on Bitnami subcharts. These operators are the recommended way to deploy and manage these services in production environments.
 
-:::caution Support scope
+:::warning Support scope
 PostgreSQL, Elasticsearch, and Keycloak are **external dependencies** — they are not Camunda products, regardless of the deployment method used.
 
 - **Camunda support scope**: Camunda supports the **integration and configuration** of these components with the Camunda Helm chart. Camunda does not provide operational support for the infrastructure components themselves.

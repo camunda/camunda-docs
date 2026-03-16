@@ -57,12 +57,14 @@ orchestration:
   extraConfiguration:
     - file: additional-spring-properties.yaml
       content: |
-        audit-log:
-          enabled: true
-          user:  
-            categories: DEPLOYED_RESOURCES,USER_TASKS,ADMIN
-          client:
-            categories: DEPLOYED_RESOURCES,USER_TASKS,ADMIN
+        camunda:
+          data:
+            audit-log:
+              enabled: true
+              user:
+                categories: [DEPLOYED_RESOURCES, USER_TASKS, ADMIN] # User operations are recorded by default
+              client:
+                categories: [DEPLOYED_RESOURCES, USER_TASKS, ADMIN] # You must opt in to client operations
 ```
 
 </TabItem>

@@ -76,7 +76,7 @@ orchestration:
       type: elasticsearch
 ```
 
-More information about Elasticsearch in the Camunda Helm chart can be found on this [configuration page](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md).
+More information about Elasticsearch in the Camunda Helm chart can be found in [using external Elasticsearch](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md).
 
 To explicitly disable secondary storage (for example, when running only the Zeebe engine), set:
 

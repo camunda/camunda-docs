@@ -22,6 +22,11 @@ Before proceeding with the setup, ensure the following requirements are met:
   - **Amazon OpenSearch**: This guide uses Amazon OpenSearch as the document-store secondary storage example for the Orchestration Cluster. For step-by-step instructions, see the [OpenSearch](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eksctl.md#4-opensearch-domain) guide.
     Note: Secondary storage is configurable. Depending on the components you run, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
   - **Identity Provider (IdP)**: An OIDC-compatible identity provider for authentication. See [Authentication and authorization](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) for supported options.
+
+  :::tip No managed services available?
+  If managed PostgreSQL, Elasticsearch, or an external OIDC provider are not available in your organization, you can deploy these infrastructure components on Kubernetes using official operators. See [Required infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions.
+  :::
+
 - **Ingress NGINX**: Ensure the [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - To store the backups of the Camunda web applications. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. See the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
 - **Amazon S3** - An additional bucket to store backup files of the Orchestration Cluster brokers.
@@ -533,51 +538,51 @@ console:
           releases:
             - name: camunda
               namespace: management-and-modeling
-              version: 13.x.x
+              version: 14.x.x
               components:
                 - name: Console
                   id: console
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://management-and-modeling-host.com/
                   readiness: http://camunda-console.oidc:9100/health/readiness
                   metrics: http://camunda-console.oidc:9100/prometheus
                 - name: Identity
                   id: identity
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://management-and-modeling-host.com/identity
                   readiness: http://camunda-identity.oidc:82/actuator/health
                   metrics: http://camunda-identity.oidc:82/actuator/prometheus
                 - name: WebModeler WebApp
                   id: webModelerWebApp
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://management-and-modeling-host.com/modeler
                   readiness: http://camunda-web-modeler-webapp.oidc:8071/health/readiness
                   metrics: http://camunda-web-modeler-webapp.oidc:8071/metrics
             - name: camunda
               namespace: orchestration
-              version: 13.x
+              version: 14.x
               components:
                 - name: Operate
                   id: operate
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://orchestration-host.com/orchestration/operate
                   readiness: http://camunda-zeebe.orchestration:9600/operate/actuator/health/readiness
                   metrics: http://camunda-zeebe.orchestration:9600/operate/actuator/prometheus
                 - name: Optimize
                   id: optimize
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://orchestration-host.com/optimize
                   readiness: http://camunda-optimize.orchestration:80/optimize/api/readyz
                   metrics: http://camunda-optimize.orchestration:8092/actuator/prometheus
                 - name: Tasklist
                   id: tasklist
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://orchestration-host.com/orchestration/tasklist
                   readiness: http://camunda-zeebe.orchestration:9600/tasklist/actuator/health/readiness
                   metrics: http://camunda-zeebe.orchestration:9600/tasklist/actuator/prometheus
                 - name: Orchestration Cluster
                   id: orchestration
-                  version: 8.8.x
+                  version: 8.9.x
                   urls:
                     grpc: https://zeebe-orchestration-host.com
                     http: https://orchestration-host.com/orchestration

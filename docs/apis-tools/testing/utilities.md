@@ -231,6 +231,31 @@ void shouldMockChildProcess() {
 }
 ```
 
+### Child process with dynamic variables
+
+You can mock a child process with dynamic behavior whose output variables are derived from the parent process instance.
+The handler receives the parent variables and returns the child process variables.
+
+```java
+@Test
+void shouldMockChildProcess() {
+    // given: mock dynamic child process with the process ID "AstronautTrainingProcess"
+    processTestContext.mockChildProcess(
+        "AstronautTrainingProcess",
+        parentVariables -> {
+            final String astronautName = (String) parentVariables.get("astronautName");
+            final String grade = "Zee".equals(astronautName) ? "excellent" : "good";
+
+            return Map.of(
+                "trainingCompleted", true,
+                "grade", grade);
+        });
+
+    // when: create a process instance
+    // then: verify that the process instance completed the call activity
+}
+```
+
 ## Mock DMN decisions
 
 You can mock a DMN decision for a business rule task to simulate its output without evaluating the actual DMN decision.

@@ -102,7 +102,7 @@ operate:
 
 ### Default properties
 
-The `helm template` command generates the application's default configuration. Keep the original `values.yaml` unchanged and maintain a separate file with your custom settings. For details, see [Creating your own values files](self-managed/deployment/helm/chart-parameters.md#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
+The `helm template` command generates the application's default configuration. Keep the original `values.yaml` unchanged and maintain a separate file with your custom settings. For details, see [Creating your own values files](/self-managed/deployment/helm/chart-parameters.md#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
 
 ```bash
 helm template <your-release-name> \

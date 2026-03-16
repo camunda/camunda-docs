@@ -1,14 +1,16 @@
 ---
 id: notices
 title: "Security notices"
-description: "Let's take a closer look at security notices, reporting vulnerabilities, and additional security information."
+description: "Read the latest Camunda security notices published after fixes are made available."
 toc_max_heading_level: 2
 ---
 
-Camunda publishes security notices after fixes are available.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 :::tip Subscribe to security notices
-Stay informed about security updates by subscribing to our [RSS feed](pathname:///rss/security/notices.xml). Get automatic notifications when new security notices are published.
+Subscribe to the [RSS feed](pathname:///rss/security/notices.xml) for security updates and get automatic notifications when new security notices are published.
 :::
 
 ## Report a security issue or vulnerability
