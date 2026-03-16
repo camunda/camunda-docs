@@ -4,7 +4,7 @@ title: "Exporters"
 sidebar_label: "Overview"
 ---
 
-Zeebe comes packaged with built-in exporters:
+The Orchestration Cluster comes packaged with built-in exporters:
 
 - [Elasticsearch](elasticsearch-exporter.md)
 - [OpenSearch](opensearch-exporter.md)

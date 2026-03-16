@@ -29,7 +29,7 @@ Camunda 8 Self-Managed can be installed on Kubernetes using Helm charts. Choose 
   Get up and running with default Helm chart values. Ideal for testing, evaluation, or early development.
 
 - **[Install with RDBMS as secondary storage](./helm-with-rdbms)**:  
-  Deploy Camunda 8 using an external relational database (PostgreSQL, Oracle, MariaDB, etc.) as your secondary storage backend. Includes step-by-step instructions, JDBC driver setup, and configuration examples.
+  Deploy Camunda 8 using an external relational database as your secondary storage backend. Includes step-by-step instructions, JDBC driver setup, and configuration examples.
 
 - **[Install for production](./production)**:  
   Deploy Camunda 8 in a secure, production-ready Kubernetes environment with TLS, OIDC authentication, multi-namespace deployments, and enterprise monitoring. You can choose Elasticsearch/OpenSearch or RDBMS for secondary storage based on your infrastructure and requirements.
