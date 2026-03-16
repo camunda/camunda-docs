@@ -17,7 +17,7 @@ If you don't have a Kubernetes cluster yet, check out our setup guides:
   :::
 
 :::note
-In this guide, you deploy the Orchestration Cluster with Basic authentication and RDBMS (embedded H2) as secondary storage. For a full deployment with all components (Optimize, Web Modeler, Console, Identity, and Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). For production environments, see the [production installation guide](/self-managed/deployment/helm/install/production/index.md).
+In this guide, you deploy the Orchestration Cluster with Basic authentication and RDBMS (embedded H2) as secondary storage. For a full deployment with all components (Optimize, Web Modeler, Console, Management Identity, and Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). For production environments, see the [production installation guide](/self-managed/deployment/helm/install/production/index.md).
 :::
 
 ## Prerequisites
@@ -122,7 +122,7 @@ Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by 
 
    **Verify the installation:**
 
-   Test the Zeebe Gateway connection:
+   Test the Zeebe Gateway HTTP endpoint (Orchestration Cluster REST API):
 
    ```bash
    curl -u demo:demo http://localhost:8080/v2/topology
@@ -136,15 +136,15 @@ Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by 
    - **Identity:** [http://localhost:8080/identity](http://localhost:8080/identity) - User and permission management
    - **Connectors:** [http://localhost:8088](http://localhost:8088) - External system integrations
    - **Zeebe Gateway (gRPC):** localhost:26500 - Process deployment and execution
-   - **Zeebe Gateway (HTTP):** [http://localhost:8080](http://localhost:8080) - Zeebe REST API
+   - **Zeebe Gateway (HTTP):** [http://localhost:8080](http://localhost:8080) - Orchestration Cluster REST API
 
    :::note
-   In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration component and share the same endpoint (port 8080).
+   In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration Cluster and share the same endpoint (port 8080).
    :::
 
 ## Full Cluster
 
-To deploy the full Camunda 8 platform with all components (Optimize, Web Modeler, Console, Management Identity, and Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). The full deployment requires OIDC-based authentication and [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) (PostgreSQL, Elasticsearch, Keycloak).
+To deploy the full Camunda 8 platform with all components (Optimize, Web Modeler, Console, Management Identity, and Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). The full deployment requires OIDC-based authentication and [deploying required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for PostgreSQL, Elasticsearch, and Keycloak.
 
 ## Troubleshoot installation issues
 

@@ -682,7 +682,7 @@ As part of process instance migration, you can now migrate active instances from
 
 This lets you standardize on the Orchestration Cluster APIs and the recommended user task type before the removal of job‑based user task querying and management in the consolidated API.
 
-<p class="link-arrow">[Process instance migration](/components/concepts/process-instance-migration.md)</p>
+<p class="link-arrow">[Process instance migration](/components/concepts/process-instance-migration.md#migrate-job-worker-user-tasks-to-camunda-user-tasks)</p>
 
 ### RDBMS secondary storage
 
@@ -712,7 +712,7 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 
 #### Default REST port unified to 8080
 
-The Orchestration component's default HTTP port in the Helm chart has changed from 8090 to 8080 (`orchestration.service.httpPort`), aligning with the Orchestration Cluster's default configuration.
+The Orchestration Cluster's default HTTP port in the Helm chart has changed from 8090 to 8080 (`orchestration.service.httpPort`), aligning with the Orchestration Cluster's default configuration.
 
 #### Authorization initialization via Helm
 

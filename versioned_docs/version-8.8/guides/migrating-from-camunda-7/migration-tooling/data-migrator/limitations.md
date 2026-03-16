@@ -166,6 +166,10 @@ Process instances with active joining parallel gateways cannot currently be migr
 
 The history migration has the following limitations.
 
+### General
+
+- The minimum required history level in Camunda 7 is `FULL` to ensure that sufficient data is available for migration.
+
 ### Process instance
 
 - Process instance migration doesn't populate the `parentElementInstanceKey` and `tree` fields.

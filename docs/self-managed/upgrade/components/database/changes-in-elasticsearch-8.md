@@ -13,7 +13,7 @@ Before upgrading Elasticsearch, review the Elasticsearch breaking changes and co
 
 When upgrading Elasticsearch, follow the official [Elasticsearch breaking changes guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking-changes.html).
 
-Also review the Camunda 8 [supported environments](reference/supported-environments.md) to confirm the supported Elasticsearch versions.
+Also review the Camunda 8 [supported environments](/reference/supported-environments.md) to confirm the supported Elasticsearch versions.
 
 ## Elasticsearch Curator
 

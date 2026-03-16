@@ -552,4 +552,4 @@ Consult the generic [dual-region failover procedure](/self-managed/deployment/he
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](self-managed/operational-guides/troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting.md).

@@ -155,6 +155,7 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
+        "components/concepts/decision-instance-deletion",
       ],
     },
     {
@@ -925,6 +926,7 @@ module.exports = {
               ],
             },
             "components/connectors/protocol/graphql",
+            "components/connectors/protocol/polling",
             "components/connectors/protocol/http-webhook",
             "components/connectors/out-of-the-box-connectors/hubspot",
             "components/connectors/out-of-the-box-connectors/hugging-face",
@@ -940,7 +942,6 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
-            "components/connectors/protocol/polling",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/protocol/rest",
             "components/connectors/out-of-the-box-connectors/salesforce",
@@ -1367,7 +1368,7 @@ module.exports = {
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
             "apis-tools/testing/connectors",
-            "apis-tools/testing/test-scenario-dsl",
+            "apis-tools/testing/json-test-cases",
           ],
         },
         {
@@ -1553,8 +1554,9 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/install/quick-install",
-                "self-managed/deployment/helm/install/helm-with-rdbms",
                 "self-managed/deployment/helm/install/production/index",
+                "self-managed/deployment/helm/configure/operator-based-infrastructure",
+                "self-managed/deployment/helm/install/helm-with-rdbms",
               ],
             },
             "self-managed/deployment/helm/chart-parameters",
@@ -1581,7 +1583,6 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
-                "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
