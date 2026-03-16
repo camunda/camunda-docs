@@ -21,7 +21,7 @@ import TabItem from '@theme/TabItem';
 | `camunda.data.audit-log.enabled`           | Enable or disable the audit log.                                                                                 | `true`                                    |
 | `camunda.data.audit-log.user.categories`   | List of audit log categories to include for user-initiated actions.                                              | `[ADMIN, DEPLOYED_RESOURCES, USER_TASKS]` |
 | `camunda.data.audit-log.user.excludes`     | List of [audit log entity types](#audit-log-entity-types) to exclude for user-initiated actions.                 | `[]`                                      |
-| `camunda.data.audit-log.client.categories` | List of audit log categories to include for client-initiated actions (API clients).                              | `[ADMIN, DEPLOYED_RESOURCES, USER_TASKS]` |
+| `camunda.data.audit-log.client.categories` | List of audit log categories to include for client-initiated actions (API clients).                              | `[]`                                      |
 | `camunda.data.audit-log.client.excludes`   | List of [audit log entity types](#audit-log-entity-types) to exclude for client-initiated actions (API clients). | `[]`                                      |
 
 </TabItem>
