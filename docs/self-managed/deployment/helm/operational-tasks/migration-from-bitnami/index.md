@@ -7,7 +7,7 @@ description: "Migrate your Camunda 8 Self-Managed infrastructure from Bitnami su
 
 import DocCardList from '@theme/DocCardList';
 
-This section provides comprehensive guidance for migrating your Camunda 8 Self-Managed infrastructure components from [Bitnami subcharts](/self-managed/deployment/helm/chart-parameters.md#bitnami-subcharts) to production-grade alternatives.
+This section provides guidance for migrating your Camunda 8 Self-Managed infrastructure components from [Bitnami subcharts](/self-managed/deployment/helm/chart-parameters.md#bitnami-subcharts) to production-grade alternatives.
 
 ## Why migrate?
 
@@ -78,15 +78,15 @@ Use this quick rule of thumb before selecting a guide:
 
 - Choose **zero-downtime migration** if your SLA does not allow a maintenance window.
 - Choose **Kubernetes operators** if you want to keep infrastructure in-cluster with operator-managed lifecycle.
-- Choose **managed services** if you want PostgreSQL and Elasticsearch/OpenSearch operated by your cloud provider.
+- Choose **managed services** if you want PostgreSQL and Elasticsearch operated by your cloud provider.
 - Choose **manual deployment** if you run on VMs, bare metal, or another topology outside these supported patterns.
 
-| Target                                                                                 | Best for                                                                                                            | Guide                                                           |
-| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| **Kubernetes operators** (CloudNativePG, ECK, Keycloak Operator)                       | Teams running Kubernetes who want production-grade, self-managed infrastructure with operator lifecycle management. | [Migrate to Kubernetes operators](./bitnami-to-operators.md)    |
-| **Managed services** (AWS RDS, Amazon OpenSearch, Azure Database for PostgreSQL, etc.) | Teams using cloud providers who prefer fully managed infrastructure with minimal operational overhead.              | [Migrate to managed services](./bitnami-to-managed-services.md) |
-| **Manual deployment** (VMs, bare-metal, Docker Compose)                                | Teams who cannot use operators or managed services, or require full control over infrastructure deployment.         | [Advanced alternatives](./alternatives.md)                      |
-| **Zero-downtime migration** (logical replication, CCR)                                 | Teams with strict SLA requirements who cannot afford any maintenance window.                                        | [Zero-downtime migration](./zero-downtime.md)                   |
+| Target                                                                             | Best for                                                                                                            | Guide                                                           |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| **Kubernetes operators** (CloudNativePG, ECK, Keycloak Operator)                   | Teams running Kubernetes who want production-grade, self-managed infrastructure with operator lifecycle management. | [Migrate to Kubernetes operators](./bitnami-to-operators.md)    |
+| **Managed services** (AWS RDS, Elastic Cloud, Azure Database for PostgreSQL, etc.) | Teams using cloud providers who prefer fully managed infrastructure with minimal operational overhead.              | [Migrate to managed services](./bitnami-to-managed-services.md) |
+| **Manual deployment** (VMs, bare-metal, Docker Compose)                            | Teams who cannot use operators or managed services, or require full control over infrastructure deployment.         | [Advanced alternatives](./alternatives.md)                      |
+| **Zero-downtime migration** (logical replication, CCR)                             | Teams with strict SLA requirements who cannot afford any maintenance window.                                        | [Zero-downtime migration](./zero-downtime.md)                   |
 
 ## Prerequisites (all paths)
 
@@ -103,7 +103,7 @@ All migration paths require an explicit decision for authentication and connecti
 
 - If you keep **Keycloak**, plan for a Keycloak Operator deployment and configure the hostname with the full external URL, for example `https://your-domain.example.com/auth`.
 - If you replace Keycloak with an [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md), complete that design before cutover because Identity configuration changes are part of the migration.
-- If your PostgreSQL or Elasticsearch/OpenSearch access depends on cloud-specific IAM authentication such as AWS IRSA, the provided migration jobs are not sufficient and you need a custom migration workflow.
+- If your PostgreSQL or Elasticsearch access depends on cloud-specific IAM authentication such as AWS IRSA, the provided migration jobs are not sufficient and you need a custom migration workflow.
   :::
 
 :::caution Test in staging first

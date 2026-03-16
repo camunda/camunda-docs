@@ -14,7 +14,7 @@ This guide describes an **advanced migration strategy** that eliminates the down
 For most deployments, the [standard migration](./bitnami-to-operators.md) with a 5–30 minute maintenance window is the recommended and simpler approach.
 :::
 
-This guide walks you through migrating a Camunda 8 Helm installation from Bitnami-managed infrastructure to operator-managed or managed service equivalents **without any application downtime**. Instead of the freeze-backup-restore-switch pattern used in the standard migration, this approach uses **real-time data replication** to keep source and target synchronized, then performs an instantaneous cutover.
+This guide walks you through migrating a Camunda 8 Helm installation from Bitnami-managed infrastructure to operator-managed or managed service equivalents **without planned application downtime**. Instead of the freeze-backup-restore-switch pattern used in the standard migration, this approach keeps source and target synchronized with **real-time data replication** before cutover.
 
 Use this guide only if all of the following are true:
 
@@ -669,7 +669,7 @@ Run the standard validation:
 bash 4-validate.sh
 ```
 
-Then proceed with [post-migration cleanup](./bitnami-to-operators.md#post-migration-cleanup) to remove old Bitnami resources.
+Then proceed with [Phase 5 in the operator-based guide](./bitnami-to-operators.md#phase-5-cleanup-bitnami-resources-no-downtime) to remove old Bitnami resources.
 
 ## Failback to Bitnami (if needed)
 
@@ -719,4 +719,4 @@ However, be aware of Keycloak session data:
 
 ## Operational readiness
 
-Refer to the [operational readiness checklist](./bitnami-to-operators.md#operational-readiness) for staging testing, dry-run procedures, failback planning, and data safety measures that apply to this migration path as well.
+Use the [operator-based operational readiness checklist](./bitnami-to-operators.md#operational-readiness) as the baseline, then add zero-downtime-specific checks for replication lag, subscription health, and Elasticsearch synchronization status.

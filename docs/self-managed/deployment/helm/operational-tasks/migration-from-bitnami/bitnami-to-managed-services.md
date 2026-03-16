@@ -505,11 +505,11 @@ After confirming the migration is successful (wait at least 72 hours), remove ol
 bash 5-cleanup-bitnami.sh
 ```
 
-For details, see the [operator-based migration cleanup](./bitnami-to-operators.md#post-migration-cleanup).
+For the cleanup behavior and safety notes, see [Phase 5 in the operator-based guide](./bitnami-to-operators.md#phase-5-cleanup-bitnami-resources-no-downtime).
 
 ## Operational readiness
 
-Before running this migration in production, follow these operational readiness steps to minimize risk — especially when migrating to external managed services where network and IAM configurations add complexity.
+Before running this migration in production, use the checklist below to reduce risk — especially where network policy and external service access add complexity.
 
 ### Staging rehearsal
 

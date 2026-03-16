@@ -258,7 +258,7 @@ What happens:
 2. **Elasticsearch**: A verification job runs to check source ES health and list all Camunda indices to be migrated.
 3. All backup data is stored on a shared Persistent Volume Claim (PVC).
 
-The PostgreSQL backup job template:
+Reference templates used in this phase:
 
 <details>
 <summary>Show details: PostgreSQL backup job template</summary>
@@ -268,8 +268,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ```
 
 </details>
-
-The Elasticsearch verification job template:
 
 <details>
 <summary>Show details: Elasticsearch verification job template</summary>
@@ -310,7 +308,7 @@ The cutover performs the following steps:
 5. **Sync Keycloak admin credentials** — copies the restored admin password to the Keycloak Operator secret so Keycloak and Identity stay in sync.
 6. **Helm upgrade** — reconfigures Camunda to use the new backends and restarts all components.
 
-The PostgreSQL restore job template:
+Reference templates used in this phase:
 
 <details>
 <summary>Show details: PostgreSQL restore job template</summary>
@@ -320,8 +318,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ```
 
 </details>
-
-The Elasticsearch reindex-from-remote restore job template:
 
 <details>
 <summary>Show details: Elasticsearch restore job template</summary>
@@ -588,7 +584,7 @@ rm -rf .state/
 
 ## Operational readiness
 
-Before running this migration in production, follow these operational readiness steps to minimize risk and ensure a smooth transition.
+Before running this migration in production, use the checklist below to reduce risk and confirm the cutover plan is ready.
 
 ### Staging rehearsal
 
