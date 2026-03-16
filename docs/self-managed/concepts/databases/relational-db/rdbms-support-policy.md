@@ -133,7 +133,7 @@ The following databases require you to provide a compatible JDBC driver at runti
 :::info
 Camunda validates driver compatibility in CI by testing against the oldest and newest supported database versions. A single driver version is expected to work across the supported database versions listed on this page.
 
-For deployment instructions, see [loading JDBC drivers into pods](/self-managed/deployment/helm/configure/database/rdbms.md#loading-jdbc-drivers-into-pods).
+For deployment instructions, see [loading JDBC drivers into pods](/self-managed/deployment/helm/configure/database/rdbms.md#bundled-vs-custom-jdbc-drivers).
 :::
 
 ## JDBC driver policy
