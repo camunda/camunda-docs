@@ -346,10 +346,10 @@ Additionally, you must delete the `opensearch.tf` file within the `terraform/clu
 
 The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
 
-The OpenSearch or Elasticsearch database is required to support the Orchestration Cluster components described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md): Zeebe (workflow data), Operate (monitoring), Tasklist (human tasks), Optimize (analytics), and Identity (user management, sessions, OIDC mappings).
+The secondary storage database (OpenSearch or Elasticsearch in this setup) is required to support the Orchestration Cluster components described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md): Zeebe (workflow data), Operate (monitoring), Tasklist (human tasks), Optimize (analytics), and Identity (user management, sessions, OIDC mappings).
 
 :::note
-Secondary storage is configurable. Depending on the components you run and your requirements, you can use Elasticsearch/OpenSearch or an RDBMS-based secondary store for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for configuration guidance and limitations.
+Secondary storage is configurable. Depending on the components you run and your requirements, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for configuration guidance and limitations.
 :::
 
 :::note Migration to OpenSearch is not supported

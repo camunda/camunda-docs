@@ -66,7 +66,7 @@ graph TB
 - State is flushed to RDBMS
 - Orchestration Cluster applications (Operate, Tasklist, and Identity) and API clients access data through the Orchestration Cluster interfaces; they do not directly access secondary storage
 
-## When Elasticsearch/OpenSearch is required
+## When document-store secondary storage is required
 
 Elasticsearch or OpenSearch is required **only for Optimize**. When Optimize is enabled:
 
