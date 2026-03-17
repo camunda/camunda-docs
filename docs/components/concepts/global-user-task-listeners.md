@@ -80,6 +80,21 @@ You can configure the global user task listeners through the [Unified Configurat
 
 Each listener entry can be configured with the properties described in the [Global listener definition](#global-listener-definition) section above, except for the `source` property which is automatically set to `CONFIGURATION` by the system.
 
+#### Automatic configuration correction
+
+If you provide an invalid configuration, the system attempts to automatically correct it instead of failing the startup. This allows you to fix issues in the configuration without needing to provide a fully valid configuration on the first attempt.
+
+The following corrections are applied automatically:
+
+- If a listener is missing the required `id`, `type`, or `eventTypes` properties, it is removed and ignored.
+- If a listener defines invalid event types, those event types are removed. If all event types of a listener are invalid, the listener is removed and ignored.
+  - Note that event types in the configuration are treated case-insensitively, so for example `Creating` and `creating` are both valid, but `create` is not.
+- If a listener defines duplicate event types, the duplicates are removed and only one instance of each event type is kept.
+- If a listener defines both the special `all` value and a normal event type for `eventTypes`, the configuration is corrected to include only `all`.
+- If a listener defines invalid retry values, i.e., non-numeric or negative, the listener is removed and ignored.
+
+In all the above cases, a suitable warning is reported in the orchestration cluster startup log, identifying the problem and its location in the configuration.
+
 #### How the configuration is validated
 
 On startup, the configuration is validated according to the following rules. The system attempts to correct issues where possible instead of failing the startup:
