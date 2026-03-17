@@ -4,9 +4,20 @@
 
 .controls {
   display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
+  flex-direction: column;
+  gap: 0.5rem;
   margin: 2.5rem 0 1rem 0;
+}
+
+.controlsHeader {
+  display: flex;
+  align-items: center;
+}
+
+.controlsRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
   flex-wrap: wrap;
 }
 
@@ -311,6 +322,50 @@
 }
 
 .filterSelect:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.filterGroupLabel {
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.noResults {
+  margin: 2rem 0;
+  color: var(--ifm-color-emphasis-600);
+  font-style: italic;
+}
+
+.clearButton {
+  appearance: none;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  color: var(--ifm-color-emphasis-700);
+  font: inherit;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  align-self: flex-end;
+  white-space: nowrap;
+}
+
+.clearButton:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+.clearButton:focus-visible {
   outline: 2px solid var(--ifm-color-primary);
   outline-offset: 2px;
 }

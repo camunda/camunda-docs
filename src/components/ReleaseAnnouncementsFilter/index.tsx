@@ -1,5 +1,5 @@
 /// <reference path="../../types/css-modules.d.ts" />
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './styles.module.css';
 
 type TypeFilter =
@@ -12,18 +12,8 @@ type TypeFilter =
   | 'change'
   | 'announcement';
 type Deployment = 'sm' | 'saas';
-
-type MasterFilter =
-  | { kind: 'all' }
-  | { kind: 'type'; value: Exclude<TypeFilter, 'all'> }
-  | { kind: 'deployment'; value: Deployment }
-  | { kind: 'area'; value: string };
-
-type MasterOption =
-  | { key: 'all'; label: 'All'; kind: 'all' }
-  | { key: `type:${Exclude<TypeFilter, 'all'>}`; label: string; kind: 'type'; value: Exclude<TypeFilter, 'all'> }
-  | { key: `deployment:${Deployment}`; label: string; kind: 'deployment'; value: Deployment }
-  | { key: `area:${string}`; label: string; kind: 'area'; value: string };
+type DeploymentFilter = 'all' | Deployment;
+type AreaFilter = 'all' | string;
 
 const TYPE_OPTIONS: Array<{ value: Exclude<TypeFilter, 'all'>; label: string }> = [
   { value: 'breaking-change', label: 'Breaking changes' },
@@ -32,8 +22,12 @@ const TYPE_OPTIONS: Array<{ value: Exclude<TypeFilter, 'all'>; label: string }> 
   { value: 'change', label: 'Change' },
   { value: 'feature', label: 'New feature' },
   { value: 'update', label: 'Update' },
-  // Dropdown label (plural)
   { value: 'announcement', label: 'Announcements' },
+];
+
+const DEPLOYMENT_OPTIONS: Array<{ value: Deployment; label: string }> = [
+  { value: 'saas', label: 'SaaS' },
+  { value: 'sm', label: 'Self-Managed' },
 ];
 
 const EMPTY_MESSAGE_ATTR = 'data-empty-filter-message';
@@ -111,22 +105,25 @@ function getAreas(value: string): string[] {
   return out;
 }
 
-function rowMatchesMasterFilter(row: HTMLElement, masterFilter: MasterFilter): boolean {
-  if (masterFilter.kind === 'all') return true;
-
-  if (masterFilter.kind === 'type') {
+function rowMatchesFilters(
+  row: HTMLElement,
+  typeFilter: TypeFilter,
+  deploymentFilter: DeploymentFilter,
+  areaFilter: AreaFilter,
+): boolean {
+  if (typeFilter !== 'all') {
     const rowType = (row.getAttribute('data-type') ?? '').trim();
-    return rowType === masterFilter.value;
+    if (rowType !== typeFilter) return false;
   }
-
-  if (masterFilter.kind === 'deployment') {
+  if (deploymentFilter !== 'all') {
     const rowDeployments = getDeployments(row.getAttribute('data-deployment') ?? '');
-    return rowDeployments.includes(masterFilter.value);
+    if (!rowDeployments.includes(deploymentFilter)) return false;
   }
-
-  // area: match any area in a "+"-separated list
-  const rowAreas = getAreas(row.getAttribute('data-area') ?? '');
-  return rowAreas.includes(masterFilter.value);
+  if (areaFilter !== 'all') {
+    const rowAreas = getAreas(row.getAttribute('data-area') ?? '');
+    if (!rowAreas.includes(areaFilter)) return false;
+  }
+  return true;
 }
 
 function getTypeLabel(value: string): string | null {
@@ -148,18 +145,18 @@ export default function ReleaseAnnouncementsFilter({
   children: React.ReactNode;
   defaultFilter?: TypeFilter;
 }) {
-  const initialMasterFilter: MasterFilter =
-    defaultFilter === 'all' ? { kind: 'all' } : { kind: 'type', value: defaultFilter };
-
-  const [masterFilter, setMasterFilter] = useState<MasterFilter>(initialMasterFilter);
+  const [typeFilter, setTypeFilter] = useState<TypeFilter>(defaultFilter);
+  const [deploymentFilter, setDeploymentFilter] = useState<DeploymentFilter>('all');
+  const [areaFilter, setAreaFilter] = useState<AreaFilter>('all');
 
   const [availableTypes, setAvailableTypes] = useState<Set<Exclude<TypeFilter, 'all'>>>(() => new Set());
   const [availableAreas, setAvailableAreas] = useState<string[]>([]);
   const [availableDeployments, setAvailableDeployments] = useState<Set<Deployment>>(() => new Set());
+  const [noResults, setNoResults] = useState(false);
 
   const listRef = useRef<HTMLDivElement | null>(null);
 
-  // Detect which types/areas/deployments exist on the page; build the unified filter list from these.
+  // Detect which types/areas/deployments exist on the page; build filter options from these.
   useEffect(() => {
     const container = listRef.current;
     if (!container) return;
@@ -183,76 +180,11 @@ export default function ReleaseAnnouncementsFilter({
     setAvailableAreas(Array.from(areas).sort((a, b) => a.localeCompare(b)));
     setAvailableDeployments(deployments);
 
-    // Keep current selection valid if content changes
-    setMasterFilter((prev) => {
-      if (prev.kind === 'all') return prev;
-
-      if (prev.kind === 'type') return types.has(prev.value) ? prev : { kind: 'all' };
-      if (prev.kind === 'deployment') return deployments.has(prev.value) ? prev : { kind: 'all' };
-
-      // area: strict validation
-      return areas.has(prev.value) ? prev : { kind: 'all' };
-    });
+    // Keep current selections valid if content changes
+    setTypeFilter((prev) => (prev === 'all' || types.has(prev as Exclude<TypeFilter, 'all'>) ? prev : 'all'));
+    setDeploymentFilter((prev) => (prev === 'all' || deployments.has(prev as Deployment) ? prev : 'all'));
+    setAreaFilter((prev) => (prev === 'all' || areas.has(prev) ? prev : 'all'));
   }, [children]);
-
-  const masterOptions: MasterOption[] = useMemo(() => {
-    const opts: MasterOption[] = [{ key: 'all', label: 'All', kind: 'all' }];
-
-    // Types (only those present)
-    TYPE_OPTIONS.forEach((o) => {
-      if (availableTypes.has(o.value)) {
-        opts.push({ key: `type:${o.value}`, kind: 'type', value: o.value, label: o.label });
-      }
-    });
-
-    // Deployments (only those present)
-    ([
-      { value: 'saas' as const, label: 'SaaS' },
-      { value: 'sm' as const, label: 'Self-Managed' },
-    ] as const).forEach((d) => {
-      if (availableDeployments.has(d.value)) {
-        opts.push({ key: `deployment:${d.value}`, kind: 'deployment', value: d.value, label: d.label });
-      }
-    });
-
-    // Areas
-    availableAreas.forEach((a) => {
-      opts.push({ key: `area:${a}`, kind: 'area', value: a, label: a });
-    });
-
-    return opts;
-  }, [availableAreas, availableDeployments, availableTypes]);
-
-  const selectedKey = useMemo(() => {
-    if (masterFilter.kind === 'all') return 'all';
-    if (masterFilter.kind === 'type') return `type:${masterFilter.value}` as const;
-    if (masterFilter.kind === 'deployment') return `deployment:${masterFilter.value}` as const;
-    return `area:${masterFilter.value}`;
-  }, [masterFilter]);
-
-  const setFilterFromKey = (key: string) => {
-    if (key === 'all') {
-      setMasterFilter({ kind: 'all' });
-      return;
-    }
-
-    if (key.startsWith('type:')) {
-      setMasterFilter({ kind: 'type', value: key.slice('type:'.length) as Exclude<TypeFilter, 'all'> });
-      return;
-    }
-
-    if (key.startsWith('deployment:')) {
-      setMasterFilter({ kind: 'deployment', value: key.slice('deployment:'.length) as Deployment });
-      return;
-    }
-
-    if (key.startsWith('area:')) {
-      setMasterFilter({ kind: 'area', value: key.slice('area:'.length) });
-      return;
-    }
-
-    setMasterFilter({ kind: 'all' });
-  };
 
   // Inject badges:
   // - Type badge goes into a left column (one badge) on desktop
@@ -285,8 +217,30 @@ export default function ReleaseAnnouncementsFilter({
       };
     };
 
-    const applyFilterAndScrollTop = (next: MasterFilter) => {
-      setMasterFilter(next);
+    const applyFilterAndScrollTop = (
+      next:
+        | { kind: 'type'; value: Exclude<TypeFilter, 'all'> }
+        | { kind: 'deployment'; value: Deployment }
+        | { kind: 'area'; value: string }
+        | { kind: 'all' }
+    ) => {
+      if (next.kind === 'type') {
+        setTypeFilter(next.value);
+        setDeploymentFilter('all');
+        setAreaFilter('all');
+      } else if (next.kind === 'deployment') {
+        setTypeFilter('all');
+        setDeploymentFilter(next.value);
+        setAreaFilter('all');
+      } else if (next.kind === 'area') {
+        setTypeFilter('all');
+        setDeploymentFilter('all');
+        setAreaFilter(next.value);
+      } else {
+        setTypeFilter('all');
+        setDeploymentFilter('all');
+        setAreaFilter('all');
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -469,15 +423,19 @@ export default function ReleaseAnnouncementsFilter({
     // Hide non-matching rows
     const rows = Array.from(container.querySelectorAll<HTMLElement>('.release-announcement-row'));
     rows.forEach((row) => {
-      const isMatch = rowMatchesMasterFilter(row, masterFilter);
+      const isMatch = rowMatchesFilters(row, typeFilter, deploymentFilter, areaFilter);
       if (!isMatch) {
         row.hidden = true;
         row.setAttribute(ROW_FILTER_HIDDEN_ATTR, 'true');
       }
     });
 
-    // "All" selected: group rows by area under injected H2 headings
-    if (masterFilter.kind === 'all') {
+    const isAllFilters = typeFilter === 'all' && deploymentFilter === 'all' && areaFilter === 'all';
+    const visibleCount = rows.filter((row) => !row.hidden).length;
+    setNoResults(!isAllFilters && visibleCount === 0);
+
+    // All filters unset: group rows by area under injected H2 headings
+    if (isAllFilters) {
       // Record original index on every row so we can restore order when switching away
       rows.forEach((row, i) => row.setAttribute(ORIGINAL_ORDER_ATTR, String(i)));
 
@@ -538,14 +496,14 @@ export default function ReleaseAnnouncementsFilter({
       return;
     }
 
-    // Non-all filter: hide all H2 headings
+    // Any filter active: hide all H2 headings
     Array.from(container.querySelectorAll<HTMLElement>(':scope > h2')).forEach((el) => {
       el.hidden = true;
       el.setAttribute('data-filter-hidden', 'true');
     });
 
-    // For area/deployment filters, sort visible rows by type
-    if (masterFilter.kind === 'area' || masterFilter.kind === 'deployment') {
+    // Sort visible rows by type when the type filter is not the only active filter
+    if (typeFilter === 'all') {
       const TYPE_ORDER: Record<string, number> = {
         announcement: 0,
         feature: 1,
@@ -574,36 +532,86 @@ export default function ReleaseAnnouncementsFilter({
         }
       }
     }
-  }, [masterFilter, children]);
+  }, [typeFilter, deploymentFilter, areaFilter, children]);
 
   return (
     <section
       className={styles.wrapper}
-      // keep this attribute for backwards compat / existing CSS; only meaningful for type filters now
-      data-announcement-filter={masterFilter.kind === 'type' ? masterFilter.value : 'all'}
+      data-announcement-filter="all"
     >
       <div className={styles.controls}>
-        <label className={styles.label} htmlFor="releaseAnnouncementsFilterSelect">
-          Filter by:
-        </label>
+        <div className={styles.controlsHeader}>
+          <span className={styles.label}>Filter:</span>
+        </div>
+        <div className={styles.controlsRow}>
+        <div className={styles.filterGroup}>
+          <label htmlFor="typeFilterSelect" className={styles.filterGroupLabel}>Type</label>
+          <select
+            id="typeFilterSelect"
+            className={styles.filterSelect}
+            value={typeFilter}
+            onChange={(e) => setTypeFilter(e.target.value as TypeFilter)}
+          >
+            <option value="all">All types</option>
+            {TYPE_OPTIONS.filter((o) => availableTypes.has(o.value)).map((o) => (
+              <option key={o.value} value={o.value}>{o.label}</option>
+            ))}
+          </select>
+        </div>
 
-        <select
-          id="releaseAnnouncementsFilterSelect"
-          className={styles.filterSelect}
-          value={selectedKey}
-          onChange={(e) => setFilterFromKey(e.target.value)}
-        >
-          {masterOptions.map((o) => (
-            <option key={o.key} value={o.key}>
-              {o.label}
-            </option>
-          ))}
-        </select>
+        <div className={styles.filterGroup}>
+          <label htmlFor="deploymentFilterSelect" className={styles.filterGroupLabel}>Deployment</label>
+          <select
+            id="deploymentFilterSelect"
+            className={styles.filterSelect}
+            value={deploymentFilter}
+            onChange={(e) => setDeploymentFilter(e.target.value as DeploymentFilter)}
+          >
+            <option value="all">All deployments</option>
+            {DEPLOYMENT_OPTIONS.filter((o) => availableDeployments.has(o.value)).map((o) => (
+              <option key={o.value} value={o.value}>{o.label}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className={styles.filterGroup}>
+          <label htmlFor="areaFilterSelect" className={styles.filterGroupLabel}>Area</label>
+          <select
+            id="areaFilterSelect"
+            className={styles.filterSelect}
+            value={areaFilter}
+            onChange={(e) => setAreaFilter(e.target.value)}
+          >
+            <option value="all">All areas</option>
+            {availableAreas.map((a) => (
+              <option key={a} value={a}>{a}</option>
+            ))}
+          </select>
+        </div>
+
+        {(typeFilter !== 'all' || deploymentFilter !== 'all' || areaFilter !== 'all') && (
+          <button
+            className={styles.clearButton}
+            onClick={() => {
+              setTypeFilter('all');
+              setDeploymentFilter('all');
+              setAreaFilter('all');
+            }}
+          >
+            Clear filters
+          </button>
+        )}
+        </div>
       </div>
 
       <p>
         <hr className={styles.hr} />
       </p>
+
+
+      {noResults && (
+        <p className={styles.noResults}>No results found for the selected filters.</p>
+      )}
 
       <div ref={listRef} className={styles.list}>
         {children}
