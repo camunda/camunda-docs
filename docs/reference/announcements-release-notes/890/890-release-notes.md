@@ -909,7 +909,7 @@ With this enhancement, you can:
 
 This unlocks more flexible, agent-driven orchestration and faster iteration on live automation.
 
-<p class="link-arrow">[Process instance migration](/components/concepts/process-instance-migration.md)</p>
+<p class="link-arrow">[Process instance migration](/components/concepts/process-instance-migration.md#migrate-active-elements-inside-ad-hoc-subprocesses)</p>
 
 ### RDBMS secondary storage
 
