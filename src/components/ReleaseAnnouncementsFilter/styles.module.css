@@ -16,6 +16,14 @@
   flex-wrap: wrap;
 }
 
+.filterPanel {
+  display: inline-block;
+  background: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+
 .hr {
   width: 100%;
   text-align: left;
@@ -318,8 +326,6 @@
 
 .noResults {
   margin: 2rem 0;
-  color: var(--ifm-color-emphasis-600);
-  font-style: italic;
 }
 
 .clearButton {

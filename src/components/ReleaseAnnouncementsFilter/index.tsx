@@ -540,6 +540,7 @@ export default function ReleaseAnnouncementsFilter({
       data-announcement-filter="all"
     >
       <div className={styles.controls}>
+        <div className={styles.filterPanel}>
         <div className={styles.controlsRow}>
         <div className={styles.filterGroup}>
           <label htmlFor="typeFilterSelect" className={styles.filterGroupLabel}>Type</label>
@@ -615,6 +616,7 @@ export default function ReleaseAnnouncementsFilter({
           </button>
         )}
         </div>
+        </div>
       </div>
 
       <p>
@@ -624,7 +626,7 @@ export default function ReleaseAnnouncementsFilter({
 
       {noResults && (
         <p className={styles.noResults}>
-          No results found for the selected filters. Change your selected filters or click <strong>Clear filters</strong> to reset.
+          No results available for the selected filters. Change your selected filters or click <strong>Clear filters</strong> to reset.
         </p>
       )}
 
