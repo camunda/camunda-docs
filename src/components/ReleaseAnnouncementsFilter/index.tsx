@@ -540,9 +540,6 @@ export default function ReleaseAnnouncementsFilter({
       data-announcement-filter="all"
     >
       <div className={styles.controls}>
-        <div className={styles.controlsHeader}>
-          <span className={styles.label}>Filter:</span>
-        </div>
         <div className={styles.controlsRow}>
         <div className={styles.filterGroup}>
           <label htmlFor="typeFilterSelect" className={styles.filterGroupLabel}>Type</label>
@@ -575,7 +572,7 @@ export default function ReleaseAnnouncementsFilter({
         </div>
 
         <div className={styles.filterGroup}>
-          <label htmlFor="areaFilterSelect" className={styles.filterGroupLabel}>Area</label>
+          <label htmlFor="areaFilterSelect" className={styles.filterGroupLabel}>Area/Component</label>
           <select
             id="areaFilterSelect"
             className={styles.filterSelect}
@@ -598,6 +595,21 @@ export default function ReleaseAnnouncementsFilter({
               setAreaFilter('all');
             }}
           >
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
             Clear filters
           </button>
         )}
