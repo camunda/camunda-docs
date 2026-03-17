@@ -27,14 +27,6 @@ New to Terraform or Infrastructure as Code? Start with the [Terraform IaC docume
 
 :::
 
-:::info Repository Migration 8.9
-
-The previous repository, [c8-multi-region](https://github.com/camunda/c8-multi-region), has been migrated to [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references) to consolidate all reference architectures into a single repository.
-
-The overall content remains unchanged, except for the required Helm chart updates for version 8.9 in the `camunda-values.yml` file.
-
-:::
-
 ## Requirements
 
 - **AWS account** – Required to create AWS resources. See [What is an AWS account?](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html).
