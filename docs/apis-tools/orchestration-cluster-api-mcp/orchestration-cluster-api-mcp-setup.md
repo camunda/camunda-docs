@@ -165,7 +165,7 @@ You can also connect to the MCP server from within a BPMN process using Camunda'
 
 <TabItem value="remote">
 
-The [MCP Remote Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client.md) connects to remote MCP servers over HTTP. Configure it in the properties panel with the following settings:
+The [MCP Remote Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client-connector.md) connects to remote MCP servers over HTTP. Configure it in the properties panel with the following settings:
 
 - **Transport type**: Streamable HTTP.
 - **URL**: Your MCP endpoint URL (see [above](#mcp-endpoint-url)).
@@ -179,7 +179,7 @@ The [MCP Remote Client connector](/components/connectors/out-of-the-box-connecto
 | Audience                 | The audience for your cluster API (`zeebe.camunda.io` for SaaS).                                                                               |
 | Client authentication    | Send client credentials in body.                                                                                                               |
 
-For more details, see [MCP Remote Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client.md).
+For more details, see [MCP Remote Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client-connector.md).
 
 </TabItem>
 

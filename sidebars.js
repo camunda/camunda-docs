@@ -884,7 +884,7 @@ module.exports = {
                   },
                   items: [
                     "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-connector",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client-connector",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-config",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-tool-discovery",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-human-in-the-loop",

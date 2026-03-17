@@ -1,5 +1,5 @@
 ---
-id: agentic-ai-mcp-remote-client
+id: agentic-ai-mcp-remote-client-connector
 title: MCP Remote Client connector
 sidebar_label: MCP Remote Client connector
 ---
