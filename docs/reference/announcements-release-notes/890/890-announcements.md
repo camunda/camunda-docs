@@ -143,7 +143,7 @@ Camunda 8.9 drops support for Keycloak 25.x. Only Keycloak 26.x is now supported
 To remain compatible, update both the MCP Client and MCP Remote Client connectors to use element template version `1`.
 
 :::info
-For more information, see the [MCP](/components/early-access/alpha/mcp-client/mcp-client.md) documentation.
+For more information, see the [MCP](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md) documentation.
 :::
 
 </div>

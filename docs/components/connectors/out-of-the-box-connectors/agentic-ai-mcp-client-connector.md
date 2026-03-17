@@ -1,5 +1,5 @@
 ---
-id: mcp-client-connector
+id: agentic-ai-mcp-client-connector
 title: MCP Client connector
 sidebar_label: MCP Client connector
 ---
@@ -8,7 +8,7 @@ sidebar_label: MCP Client connector
 This connector is not directly available on Camunda 8 SaaS. Instead, you can connect a custom connector runtime configured to run the MCP Client connector to your Camunda 8 SaaS instance.
 :::
 
-The MCP Client connector integration allows configuring MCP clients to be started as part of the connector runtime. As the runtime manages MCP client connections (unlike the job worker in the [MCP Remote Client connector](./mcp-remote-client-connector.md#limitations)), this approach enables using both STDIO and remote MCP servers without the overhead of repeatedly opening and closing connections for each interaction.
+The MCP Client connector integration allows configuring MCP clients to be started as part of the connector runtime. As the runtime manages MCP client connections (unlike the job worker in the [MCP Remote Client connector](./agentic-ai-mcp-remote-client.md#limitations)), this approach enables using both STDIO and remote MCP servers without the overhead of repeatedly opening and closing connections for each interaction.
 
 ## Runtime configuration
 
@@ -121,7 +121,7 @@ this for your specific use case varies on the connector runtime you are using.
 ### Custom project using the Spring Boot starter runtime
 
 1. Create a new Spring Boot project.
-2. Add the [Camunda Connector Spring Boot starter](../../../connectors/custom-built-connectors/connector-sdk.md#spring-boot-starter-runtime) and the Agentic AI dependencies to your `pom.xml`:
+2. Add the [Camunda Connector Spring Boot starter](../custom-built-connectors/connector-sdk.md#spring-boot-starter-runtime) and the Agentic AI dependencies to your `pom.xml`:
 
    ```xml
    <project>
@@ -152,7 +152,7 @@ this for your specific use case varies on the connector runtime you are using.
    </project>
    ```
 
-3. Configure the SDK to connect to your cluster, according to [the Camunda SDK documentation](../../../../apis-tools/camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection).
+3. Configure the SDK to connect to your cluster, according to [the Camunda SDK documentation](../../../apis-tools/camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection).
 4. In your application configuration file (e.g., `application.yml`), add the MCP client configuration as shown above.
 5. If you only want to run the MCP Client connector (for example, because you're connecting the runtime to SaaS), disable the other Agentic AI connectors provided by the `connector-agentic-ai` dependency:
 
@@ -171,7 +171,7 @@ this for your specific use case varies on the connector runtime you are using.
 
 ## Modeling
 
-1. Configure an AI agent ad-hoc sub-process as described in the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md). Do not configure any tools within the ad-hoc sub-process yet.
+1. Configure an AI agent ad-hoc sub-process as described in the [example integration](./agentic-ai-aiagent-subprocess-example.md). Do not configure any tools within the ad-hoc sub-process yet.
 2. In a Self-Managed environment, install the [MCP Client element template](https://raw.githubusercontent.com/camunda/connectors/refs/heads/main/connectors/agentic-ai/element-templates/agenticai-mcp-client-outbound-connector.json).
 3. Create a service task within the ad-hoc sub-process and apply the **MCP Client** element template.
 4. In the **MCP Client** section of the properties panel, configure the **Client ID** to match the value of the MCP client you used in the runtime configuration (example: `filesystem`).

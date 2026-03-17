@@ -1,5 +1,5 @@
 ---
-id: mcp-remote-client-connector
+id: agentic-ai-mcp-remote-client
 title: MCP Remote Client connector
 sidebar_label: MCP Remote Client connector
 ---
@@ -9,7 +9,7 @@ The MCP Remote Client connector allows connecting an AI agent to a remote MCP se
 
 ## Limitations
 
-Since the MCP client functionality is handled by a stateless [job worker](../../../concepts/job-workers.md), each activation of an activity using the MCP Remote Client connector requires opening a dedicated HTTP connection/SSE subscription to the MCP server.
+Since the MCP client functionality is handled by a stateless [job worker](../../concepts/job-workers.md), each activation of an activity using the MCP Remote Client connector requires opening a dedicated HTTP connection/SSE subscription to the MCP server.
 
 For example, each of the following actions in an agentic AI feedback loop opens and closes a dedicated MCP client connection to the remote server:
 
@@ -17,11 +17,11 @@ For example, each of the following actions in an agentic AI feedback loop opens 
 2. Tool call
 3. Every subsequent tool call
 
-Due to this overhead, the MCP Remote Client connector is primarily intended for prototyping and testing purposes. For production or more efficient usage, consider using the [MCP Client](./mcp-client-connector.md) connector instead.
+Due to this overhead, the MCP Remote Client connector is primarily intended for prototyping and testing purposes. For production or more efficient usage, consider using the [MCP Client](./agentic-ai-mcp-client-connector.md) connector instead.
 
 ## Modeling
 
-1. Configure an AI agent ad-hoc sub-process as described in the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md). Do not configure any tools within the ad-hoc sub-process yet.
+1. Configure an AI agent ad-hoc sub-process as described in the [example integration](./agentic-ai-aiagent-subprocess-example.md). Do not configure any tools within the ad-hoc sub-process yet.
 2. In a Self-Managed environment, install the [MCP Remote Client element template](https://raw.githubusercontent.com/camunda/connectors/refs/heads/main/connectors/agentic-ai/element-templates/agenticai-mcp-remote-client-outbound-connector.json).
 3. Create a service task within the ad-hoc sub-process and apply the **MCP Remote Client** element template.
 4. Configure the transport type and connection settings as described in [Transport type](#transport-type).
@@ -113,7 +113,7 @@ Enable client caching **only** when authentication credentials do not depend on 
 
 ### Runtime cache configuration
 
-In a Camunda 8 Self-Managed setup or a [custom connector runtime](../../../connectors/custom-built-connectors/connector-sdk.md#runtime-environments), configure overall client-caching behavior using the following properties:
+In a Camunda 8 Self-Managed setup or a [custom connector runtime](../custom-built-connectors/connector-sdk.md#runtime-environments), configure overall client-caching behavior using the following properties:
 
 :::note
 Configuration properties can be defined as environment variables using [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables). To define an environment variable, convert the configuration property to uppercase, remove any dashes `-`, and replace any delimiters `.` with underscores `_`.

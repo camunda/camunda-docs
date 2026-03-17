@@ -1,5 +1,5 @@
 ---
-id: mcp-client-human-in-the-loop
+id: agentic-ai-mcp-client-human-in-the-loop
 title: Human in the loop
 sidebar_label: Human in the loop
 description: "Learn how to build human-in-the-loop AI workflows by combining MCP with BPMN."
@@ -9,7 +9,7 @@ Learn how to build human-in-the-loop AI workflows in Camunda by combining MCP Cl
 
 ## About
 
-Using [tool discovery](./mcp-tool-discovery.md), you can combine the MCP Client connector with other BPMN elements, such as user tasks or intermediate events, to create a human-in-the-loop interaction.
+Using [tool discovery](./agentic-ai-mcp-client-tool-discovery.md), you can combine the MCP Client connector with other BPMN elements, such as user tasks or intermediate events, to create a human-in-the-loop interaction.
 
 Instead of directly exposing the MCP Client connector as a tool, an intermediate event marked as an MCP client gateway can serve as the root activity of a tool flow within the ad-hoc sub-process.
 
@@ -17,7 +17,7 @@ Instead of directly exposing the MCP Client connector as a tool, an intermediate
 
 The following is an example of how you can configure a filesystem MCP server:
 
-1. Add a service task to the ad-hoc sub-process and configure one of the [MCP Client connectors](./mcp-client.md#mcp-client-connectors).
+1. Add a service task to the ad-hoc sub-process and configure one of the [MCP Client connectors](./agentic-ai-mcp-client.md#mcp-client-connectors).
 2. Add an intermediate throw event to the ad-hoc sub-process and add an extension property named `io.camunda.agenticai.gateway.type` with the value `mcpClient`.
 3. Create an exclusive gateway after the event to decide whether the MCP client tool call should be executed directly or require confirmation.
 4. Create a flow from the exclusive gateway to the MCP Client service task for direct execution.
@@ -58,4 +58,4 @@ The model requested to call the following MCP tool:
 
 See the example diagram below:
 
-![MCP Client connector human-in-the-loop example](img/mcp-client-hitl.png)
+![MCP Client connector human-in-the-loop example](agentic-ai/img/mcp-client-hitl.png)

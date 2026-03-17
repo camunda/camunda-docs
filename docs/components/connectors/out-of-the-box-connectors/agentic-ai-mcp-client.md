@@ -1,14 +1,14 @@
 ---
-id: mcp-client
+id: agentic-ai-mcp-client
 title: MCP Client
 sidebar_label: MCP Client
 description: "Integrate MCP (Model Context Protocol) clients with agentic orchestration."
 ---
 
-import AoGrid from '../../../react-components/\_ao-card';
-import { fundamentalCards } from '../../../react-components/\_mcp-card-data';
+import AoGrid from '../../react-components/\_ao-card';
+import { fundamentalCards } from '../../react-components/\_mcp-card-data';
 
-Integrate [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) clients with [agentic orchestration](../../../agentic-orchestration/agentic-orchestration-overview.md).
+Integrate [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) clients with [agentic orchestration](../../agentic-orchestration/agentic-orchestration-overview.md).
 
 :::tip Camunda as an MCP server
 The Orchestration Cluster includes a built-in [MCP server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md) that can be used as a remote MCP server with the MCP Client connectors. See [Enable and connect](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-setup.md#use-with-the-mcp-client-connectors) for configuration details.
@@ -16,7 +16,7 @@ The Orchestration Cluster includes a built-in [MCP server](/apis-tools/orchestra
 
 ## About
 
-Camunda's MCP Client enables you to use the [AI Agent connector](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) together with MCP clients to access tools provided by MCP servers.
+Camunda's MCP Client enables you to use the [AI Agent connector](./agentic-ai-aiagent.md) together with MCP clients to access tools provided by MCP servers.
 
 :::info
 The MCP Client supports only tool-related functionality. Other MCP features, such as resources or prompts, are not currently supported.
@@ -29,16 +29,16 @@ This includes:
 
 See the MCP Client architecture below:
 
-![MCP Client architecture](img/mcp-clients-architecture.png)
+![MCP Client architecture](agentic-ai/img/mcp-clients-architecture.png)
 
 ## MCP Client connectors
 
 Camunda provides two MCP connectors with distinct purposes.
 
-| Connector                                                       | STDIO       | Remote/HTTP | Configuration                        | Availability                                                                                                | Description                                                                                                            |
-| :-------------------------------------------------------------- | :---------- | :---------- | :----------------------------------- | :---------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| [MCP Remote Client connector](./mcp-remote-client-connector.md) | Unsupported | Supported   | Properties panel                     | Available on SaaS                                                                                           | Suitable for prototyping with remote MCP servers. Uses on-demand HTTP connections instead of persistent ones.          |
-| [MCP Client connector](./mcp-client-connector.md)               | Supported   | Supported   | Connector runtime + properties panel | Not directly available on SaaS, but a custom runtime running the client connector can be connected to SaaS. | Flexible MCP integration based on persistent connections managed by the connector runtime. Supports STDIO MCP servers. |
+| Connector                                                        | STDIO       | Remote/HTTP | Configuration                        | Availability                                                                                                | Description                                                                                                            |
+| :--------------------------------------------------------------- | :---------- | :---------- | :----------------------------------- | :---------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
+| [MCP Remote Client connector](./agentic-ai-mcp-remote-client.md) | Unsupported | Supported   | Properties panel                     | Available on SaaS                                                                                           | Suitable for prototyping with remote MCP servers. Uses on-demand HTTP connections instead of persistent ones.          |
+| [MCP Client connector](./agentic-ai-mcp-client-connector.md)     | Supported   | Supported   | Connector runtime + properties panel | Not directly available on SaaS, but a custom runtime running the client connector can be connected to SaaS. | Flexible MCP integration based on persistent connections managed by the connector runtime. Supports STDIO MCP servers. |
 
 :::info
 The two connectors are not mutually exclusive and can be used together as long as your environment is configured accordingly.

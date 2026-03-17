@@ -221,7 +221,7 @@ This improves the stability and configuration model of the MCP connectors.
 
 #### Action
 
-Update both the MCP Client and MCP Remote Client connectors to use element template version 1. See the [MCP documentation](/components/early-access/alpha/mcp-client/mcp-client.md) for details.
+Update both the MCP Client and MCP Remote Client connectors to use element template version 1. See the [MCP documentation](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md) for details.
 
 ### OpenAPI enum extensions {#enum-extensions}
 

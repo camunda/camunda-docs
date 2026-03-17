@@ -202,5 +202,5 @@ To configure an activity as a gateway tool, set the [extension property](../../m
 
 For more details, see the available gateway tool implementations:
 
-- [MCP Client connectors](../../early-access/alpha/mcp-client/mcp-client.md)
+- [MCP Client connectors](./agentic-ai-mcp-client.md)
 <!-- TODO add A2A -->
