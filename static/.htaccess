@@ -453,6 +453,7 @@ RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-element-inst
 
 RewriteRule ^docs/apis-tools/spring-zeebe-sdk/getting-started/?$ /docs/apis-tools/camunda-spring-boot-starter/getting-started/ [R=301,L]
 RewriteRule ^docs/apis-tools/java-client/zeebe-process-test/?$ /docs/apis-tools/testing/getting-started/ [R=301,L]
+RewriteRule ^docs/apis-tools/testing/test-scenario-dsl/?$ /docs/apis-tools/testing/json-test-cases/ [R=301,L]
 RewriteRule ^docs/apis-tools/spring-zeebe-sdk/configuration/?$ /docs/apis-tools/camunda-spring-boot-starter/getting-started/ [R=301,L]
 
 RewriteRule ^docs/apis-tools/camunda-api-rest/camunda-api-rest-authentication/?$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication/ [R=301,L]
