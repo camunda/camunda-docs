@@ -6,20 +6,20 @@ import IconConfig from "../assets/icon-config.png";
 // Fundamentals cards on introduction page
 export const fundamentalCards = [
   {
-    link: "./agentic-ai-mcp-client-config/",
+    link: "../agentic-ai-mcp-client-config/",
     title: "Configure",
     image: IconConfig,
     description: "Learn how to configure MCP Client connectors.",
   },
   {
-    link: "./agentic-ai-mcp-client-tool-discovery/",
+    link: "../agentic-ai-mcp-client-tool-discovery/",
     title: "Tool discovery",
     image: IconAoDesignImg,
     description:
       "Learn how AI agents automatically discover and invoke MCP client tools.",
   },
   {
-    link: "./agentic-ai-mcp-client-human-in-the-loop/",
+    link: "../agentic-ai-mcp-client-human-in-the-loop/",
     title: "Human in the loop",
     image: IconAoAgentImg,
     description:
