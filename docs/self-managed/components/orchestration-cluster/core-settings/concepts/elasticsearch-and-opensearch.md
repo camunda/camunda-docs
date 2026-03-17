@@ -1,15 +1,15 @@
 ---
 id: elasticsearch-and-opensearch
 title: "Elasticsearch and OpenSearch"
-description: "Learn how the Orchestration Cluster uses Elasticsearch/OpenSearch as a secondary storage option, and when an RDBMS-based secondary store may be used instead."
+description: "Learn how to configure Elasticsearch or OpenSearch when using document-store secondary storage with the Orchestration Cluster."
 ---
 
 The Orchestration Cluster stores and reads data from a configured secondary storage backend for indexing and search. Depending on your deployment and configuration, this backend can be [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) or an [RDBMS](/reference/glossary.md#rdbms).
 
-This page focuses on using Elasticsearch and OpenSearch as the secondary storage backend.
+This page focuses on document-store secondary storage using Elasticsearch or OpenSearch.
 
 :::note
-Secondary storage is configurable. For RDBMS-based secondary storage, see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms) for details and limitations.
+Secondary storage is configurable. Elasticsearch/OpenSearch and RDBMS are both valid secondary storage backends in supported scenarios. For RDBMS-based secondary storage, see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms) for details and limitations.
 :::
 
 ## Select a database
@@ -44,7 +44,7 @@ You can specify either `host` and `port` (deprecated) or `url` (recommended).
 ## Common configuration options
 
 :::note
-`.{ES/OS}` in the values below reference either `.elasticsearch` or `.opensearch`. Both Elasticsearch and OpenSearch are used as secondary storage for indexing and search — see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) for the canonical definition.
+`.{ES/OS}` in the values below references either `.elasticsearch` or `.opensearch`. Both Elasticsearch and OpenSearch are document-store implementations of the secondary storage layer used for indexing and search. See [secondary storage](/reference/glossary.md#secondary-storage) and [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) for canonical definitions.
 :::
 
 | Name                                             | Description                                  | Default value                                  |
