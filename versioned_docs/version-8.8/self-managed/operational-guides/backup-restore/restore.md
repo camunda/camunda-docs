@@ -771,7 +771,10 @@ Now that you have actively restored Elasticsearch/OpenSearch and the Zeebe clust
 
 For example:
 
-- For Kubernetes, enable all components again in the Helm chart and remove the environment variables that overwrite the Zeebe startup behavior.
+- For Kubernetes, first remove the temporary restore settings from the Zeebe configuration (including any temporary restore command override), then enable all components again in the Helm chart. At minimum, remove or reset:
+  - `SPRING_PROFILES_ACTIVE=restore`
+  - `ZEEBE_RESTORE=true`
+  - `ZEEBE_RESTORE_FROM_BACKUP_ID` (or any other restore-only variables, if set)
 
 - For a manual setup, execute the broker and all other components in their normal way.
 
