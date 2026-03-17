@@ -510,6 +510,12 @@ You must apply the custom `StorageClass` before installing the Camunda Helm char
 
 ## 3. Deploy Camunda 8 via Helm charts
 
+:::warning Migration from Bitnami Elasticsearch to ECK in dual-region
+
+There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators.md) and apply it individually to each region.
+
+:::
+
 ### Create the secret for Elasticsearch
 
 Elasticsearch will need an S3 bucket for data backup and restore procedure, required during a regional failback. For this, you will need to configure a Kubernetes secret to not expose those in cleartext.
