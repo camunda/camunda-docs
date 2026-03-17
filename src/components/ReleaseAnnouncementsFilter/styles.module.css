@@ -144,17 +144,26 @@
 .wrapper
   :global(.release-announcement-row[data-type="feature"])
   .typeInlineBadge {
-  background: #dcfce7;
-  border-color: #61976d;
-  color: #16a34a;
+  background: #a7f0ba;
+  border-color: #a7f0ba;
+  color: #0e6027;
   font-size: 80%;
 }
 
 .wrapper
   :global(.release-announcement-row[data-type="update"])
   .typeInlineBadge {
-  background: #e2ebfb;
-  border-color: #bbd0f0;
+  background: #d0e2ff;
+  border-color: #d0e2ff;
+  color: #0043ce;
+  font-size: 80%;
+}
+
+.wrapper
+  :global(.release-announcement-row[data-type="change"])
+  .typeInlineBadge {
+  background: #d0e2ff;
+  border-color: #d0e2ff;
   color: #0043ce;
   font-size: 80%;
 }
@@ -162,27 +171,27 @@
 .wrapper
   :global(.release-announcement-row[data-type="announcement"])
   .typeInlineBadge {
-  background: #e2ebfb;
-  border-color: #bbd0f0;
-  color: #0043ce;
+  background: #9ef0f0;
+  border-color: #9ef0f0;
+  color: #005d5d;
   font-size: 80%;
 }
 
 .wrapper
   :global(.release-announcement-row[data-type="breaking-change"])
   .typeInlineBadge {
-  background: #fef4f3;
-  border-color: #facccd;
-  color: #b82a36;
+  background: #ffd7d9;
+  border-color: #ffd7d9;
+  color: #a2191f;
   font-size: 80%;
 }
 
 .wrapper
   :global(.release-announcement-row[data-type="deprecated"])
   .typeInlineBadge {
-  background: #fef3c7;
-  border-color: #fde68a;
-  color: #b36000;
+  background: #e8daff;
+  border-color: #e8daff;
+  color: #6929c4;
   font-size: 80%;
 }
 
@@ -389,34 +398,49 @@
   .wrapper
   :global(.release-announcement-row[data-type="feature"])
   .typeInlineBadge {
-  background: none;
-  border-color: #1f8f3a;
-  color: #48c75c;
+  background: #0e6027;
+  border-color: #0e6027;
+  color: #a7f0ba;
 }
 
 [data-theme="dark"]
   .wrapper
   :global(.release-announcement-row[data-type="update"])
   .typeInlineBadge {
-  background: none; /* brighter teal for dark backgrounds */
-  border-color: #9d66ea;
-  color: #f99dff;
+  background: #0043ce;
+  border-color: #0043ce;
+  color: #d0e2ff;
+}
+
+[data-theme="dark"]
+  .wrapper
+  :global(.release-announcement-row[data-type="change"])
+  .typeInlineBadge {
+  background: #0043ce;
+  border-color: #0043ce;
+  color: #d0e2ff;
 }
 
 [data-theme="dark"]
   .wrapper
   :global(.release-announcement-row[data-type="breaking-change"])
   .typeInlineBadge {
-  background: none;
+  background: #a2191f;
   border-color: #a2191f;
-  color: #ef9397;
+  color: #ffd7d9;
 }
 
-/* Deprecated + Removed share the same styling */
+/* Deprecated */
 [data-theme="dark"]
   .wrapper
   :global(.release-announcement-row[data-type="deprecated"])
-  .typeInlineBadge,
+  .typeInlineBadge {
+  background: #6929c4;
+  border-color: #6929c4;
+  color: #e8daff;
+}
+
+/* Removed */
 [data-theme="dark"]
   .wrapper
   :global(.release-announcement-row[data-type="removed"])
@@ -430,7 +454,7 @@
   .wrapper
   :global(.release-announcement-row[data-type="announcement"])
   .typeInlineBadge {
-  background: none; /* brighter teal for dark backgrounds */
-  border-color: #0e45b3;
-  color: #749ff2;
+  background: #005d5d;
+  border-color: #005d5d;
+  color: #9ef0f0;
 }
