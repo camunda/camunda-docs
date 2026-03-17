@@ -15,23 +15,23 @@ Bitnami subcharts (PostgreSQL, Elasticsearch, Keycloak) provided with the Camund
 
 - **End of open-source Bitnami images**: Bitnami has [archived open-source container images](https://github.com/bitnami/containers/issues/83267), requiring a transition to alternatives.
 - **Production readiness**: Operators and managed services offer automated failover, backup, monitoring, and security patching.
-- **Vendor support**: Dedicated support channels from infrastructure vendors (Elastic, CloudNativePG, Keycloak, AWS, Azure, GCP).
+- **Vendor support**: Operators and managed services offer dedicated support channels from infrastructure vendors (Elastic, CloudNativePG, Keycloak, AWS, Azure, GCP).
 - **Long-term maintainability**: Decoupling infrastructure lifecycle from the Camunda Helm chart ensures independent upgrade paths.
 
 ## What gets migrated?
 
 The migration covers all Bitnami-managed infrastructure components deployed as part of the Camunda Helm chart:
 
-| Source (Bitnami subchart)        | Data                                       | Migration method                          |
-| -------------------------------- | ------------------------------------------ | ----------------------------------------- |
-| Bitnami PostgreSQL (Identity)    | User data, authorizations                  | `pg_dump` / `pg_restore`                  |
-| Bitnami PostgreSQL (Keycloak)    | Realms, users, clients                     | `pg_dump` / `pg_restore`                  |
-| Bitnami PostgreSQL (Web Modeler) | Projects, diagrams                         | `pg_dump` / `pg_restore`                  |
-| Bitnami Elasticsearch            | Zeebe, Operate, Tasklist, Optimize indices | Reindex from remote (`_reindex` API)      |
-| Bitnami Keycloak (StatefulSet)   | Migrated via PostgreSQL data               | Keycloak Operator CR replaces StatefulSet |
+| Source (Bitnami subchart)        | Data                                           | Migration method                          |
+| -------------------------------- | ---------------------------------------------- | ----------------------------------------- |
+| Bitnami PostgreSQL (Identity)    | User data and authorizations                   | `pg_dump` / `pg_restore`                  |
+| Bitnami PostgreSQL (Keycloak)    | Realms, users, and clients                     | `pg_dump` / `pg_restore`                  |
+| Bitnami PostgreSQL (Web Modeler) | Projects and diagrams                          | `pg_dump` / `pg_restore`                  |
+| Bitnami Elasticsearch            | Zeebe, Operate, Tasklist, and Optimize indices | Reindex from remote (`_reindex` API)      |
+| Bitnami Keycloak (StatefulSet)   | Migrated via PostgreSQL data                   | Keycloak Operator CR replaces StatefulSet |
 
 :::info Camunda core components are not affected
-The Camunda application components themselves (Zeebe, Operate, Tasklist, Optimize, Connectors, Identity, Web Modeler) are not migrated — they are reconfigured via a Helm upgrade to use the new infrastructure backends. Your process instances, decisions, and forms remain intact.
+The Camunda application components themselves (Zeebe, Operate, Tasklist, Optimize, Connectors, Identity, and Web Modeler) are not migrated; they're reconfigured via a Helm upgrade to use the new infrastructure backends. Your process instances, decisions, and forms remain intact.
 :::
 
 ## Migration rationale
@@ -63,10 +63,10 @@ Depending on your infrastructure capabilities and organizational requirements, c
 
 Use this quick rule of thumb before selecting a guide:
 
-- Choose **zero-downtime migration** if your SLA does not allow a maintenance window.
-- Choose **Kubernetes operators** if you want to keep infrastructure in-cluster with operator-managed lifecycle.
-- Choose **managed services** if you want PostgreSQL and Elasticsearch operated by your cloud provider.
-- Choose **manual deployment** if you run on VMs, bare metal, or another topology outside these supported patterns.
+- If your SLA does not allow a maintenance window, choose **zero-downtime migration**.
+- If you want to keep infrastructure in-cluster with operator-managed lifecycle, choose **Kubernetes operators**.
+- If you want PostgreSQL and Elasticsearch operated by your cloud provider, choose **managed services**.
+- f you run on VMs, bare metal, or another topology outside these supported patterns, choose **manual deployment**.
 
 | Best for                                                                                                            | Recommended path                                                                   | Guide                                                           |
 | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------- |
