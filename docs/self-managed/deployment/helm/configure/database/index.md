@@ -17,7 +17,7 @@ Use the [secondary storage overview](/self-managed/concepts/secondary-storage/in
 
 In this section, find details on database configuration associated with Kubernetes with Helm.
 
-Use [install with external RDBMS](/self-managed/deployment/helm/install/helm-with-rdbms.md) as a scenario-based installation example.
-Use [Configure RDBMS](/self-managed/deployment/helm/configure/database/rdbms.md) as the canonical reference for Helm values and operations.
+- Use [install with external RDBMS](/self-managed/deployment/helm/install/helm-with-rdbms.md) as a scenario-based installation example.
+- Use [configure RDBMS](/self-managed/deployment/helm/configure/database/rdbms.md) as the canonical reference for Helm values and operations.
 
 <DocCardList />
