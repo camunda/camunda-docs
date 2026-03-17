@@ -870,17 +870,19 @@ In your `camunda-container-runtime.properties` file:
 judge.chatModel.provider=openai
 # The model name
 judge.chatModel.model=gpt-4o
-# The API key (supports environment variable resolution, e.g. JUDGE_CHATMODEL_APIKEY)
-judge.chatModel.apiKey=${OPENAI_API_KEY}
+# The API key (supports environment variable resolution, e.g. CAMUNDA_PROCESSTEST_JUDGE_CHATMODEL_APIKEY)
+judge.chatModel.apiKey=your-api-key
 # The confidence threshold (0.0 to 1.0) for the judge to pass (default: 0.5)
 judge.threshold=0.8
 ```
 
 :::tip Environment variable resolution
-Properties in `camunda-container-runtime.properties` support
-[Spring relaxed binding](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables)
-style resolution. For example, the property `judge.chatModel.apiKey` resolves from the `JUDGE_CHATMODEL_APIKEY`
-environment variable.
+Properties in `camunda-container-runtime.properties` are automatically resolved from environment variables. Although
+the properties file uses short keys like `judge.chatModel.apiKey`, the corresponding environment variable is always
+prefixed with `CAMUNDA_PROCESSTEST_`. The full variable name is derived by prepending the prefix, replacing dots with
+underscores, removing hyphens, and uppercasing everything.
+
+For example, `judge.chatModel.apiKey` resolves from `CAMUNDA_PROCESSTEST_JUDGE_CHATMODEL_APIKEY`.
 :::
 
 Alternatively, register the JUnit extension manually and configure the judge using the fluent builder:
@@ -924,7 +926,7 @@ camunda:
 ```properties
 judge.chatModel.provider=openai
 judge.chatModel.model=gpt-4o
-judge.chatModel.apiKey=${OPENAI_API_KEY}
+judge.chatModel.apiKey=your-api-key
 ```
 
 </TabItem>
@@ -957,7 +959,7 @@ camunda:
 ```properties
 judge.chatModel.provider=anthropic
 judge.chatModel.model=claude-sonnet-4-20250514
-judge.chatModel.apiKey=${ANTHROPIC_API_KEY}
+judge.chatModel.apiKey=your-api-key
 ```
 
 </TabItem>
@@ -1004,10 +1006,10 @@ judge.chatModel.model=eu.anthropic.claude-haiku-4-5-20251001-v1:0
 judge.chatModel.region=eu-central-1
 # Authentication is optional. If omitted, the default credentials provider chain is used.
 # Option 1: API key
-judge.chatModel.apiKey=${AWS_API_KEY}
+judge.chatModel.apiKey=your-api-key
 # Option 2: AWS credentials
-judge.chatModel.credentials.accessKey=${AWS_ACCESS_KEY}
-judge.chatModel.credentials.secretKey=${AWS_SECRET_KEY}
+judge.chatModel.credentials.accessKey=your-access-key
+judge.chatModel.credentials.secretKey=your-secret-key
 ```
 
 </TabItem>
