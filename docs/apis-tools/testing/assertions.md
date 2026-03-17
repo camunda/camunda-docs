@@ -444,7 +444,11 @@ assertThat(processInstance).hasLocalVariableSatisfies(
     });
 ```
 
-## Judge assertions
+## Judge assertions <span class="badge badge--alpha">Alpha</span>
+
+:::note
+Judge assertions are an [alpha feature](/components/early-access/alpha/alpha-features.md). APIs, dependencies, and configuration are likely to change. Learn more about [alpha features](/components/early-access/alpha/alpha-features.md) and [general availability](/reference/announcements-release-notes/release-policy.md#general-availability-ga).
+:::
 
 You can use LLM-based assertions to verify that a process variable satisfies a natural language expectation. The
 assertion sends the variable value and your expectation to a configured LLM, which scores the match on a scale from

@@ -807,7 +807,11 @@ excludedProcesses[1]=process_2
 
 </Tabs>
 
-## Judge configuration
+## Judge configuration <span class="badge badge--alpha">Alpha</span>
+
+:::note
+Judge configuration is an [alpha feature](/components/early-access/alpha/alpha-features.md). APIs, dependencies, and configuration are likely to change. Learn more about [alpha features](/components/early-access/alpha/alpha-features.md) and [general availability](/reference/announcements-release-notes/release-policy.md#general-availability-ga).
+:::
 
 CPT supports LLM-based assertions that evaluate process variables against natural language expectations. To use
 [judge assertions](assertions.md#judge-assertions), you need to configure a judge with an LLM provider.
