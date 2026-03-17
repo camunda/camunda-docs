@@ -8,7 +8,7 @@ description: "Advanced guide for migrating Camunda 8 Self-Managed infrastructure
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-:::caution Advanced topic
+:::warning Advanced topic
 This guide describes an **advanced migration strategy** that eliminates the downtime window present in the [standard migration](./bitnami-to-operators.md). It requires familiarity with PostgreSQL logical replication, Elasticsearch cross-cluster replication or continuous snapshots, and Keycloak high availability. It may require adjustments to fit your specific environment, network topology, and data volumes.
 
 For most deployments, the [standard migration](./bitnami-to-operators.md) with a 5–30 minute maintenance window is the recommended and simpler approach.

@@ -93,7 +93,7 @@ All migration paths require an explicit decision for authentication and connecti
 - If your PostgreSQL or Elasticsearch access depends on cloud-specific IAM authentication such as AWS IRSA, the provided migration jobs are not sufficient and you need a custom migration workflow.
   :::
 
-:::caution Test in staging first
+:::warning Test in staging first
 Always perform a full migration dry run on a non-production environment before migrating production. The migration scripts support a `--dry-run` flag to preview actions without making changes.
 :::
 

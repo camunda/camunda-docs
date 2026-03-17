@@ -9,7 +9,7 @@ import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 
 This guide covers advanced migration alternatives for organizations that **cannot use Kubernetes operators or managed services** for their infrastructure components. These approaches require more manual effort but provide full control over the deployment.
 
-:::caution Advanced topic
+:::warning Advanced topic
 The approaches described here are not automated via the migration scripts and require significant manual configuration and operational expertise. For most deployments, we recommend using either [Kubernetes operators](./bitnami-to-operators.md) or [managed services](./bitnami-to-managed-services.md).
 :::
 
@@ -129,7 +129,7 @@ If you are targeting Docker Compose, keep this guide focused on the migration wo
 
 You still need to migrate PostgreSQL and Elasticsearch data separately using the same approaches described elsewhere in this guide.
 
-:::caution Not suitable for production
+:::warning Not suitable for production
 Docker Compose deployments are suitable for development and testing only. For production environments, use Kubernetes operators or managed services.
 :::
 

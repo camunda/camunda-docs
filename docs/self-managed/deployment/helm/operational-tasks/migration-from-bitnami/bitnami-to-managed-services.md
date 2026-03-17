@@ -240,7 +240,7 @@ elasticsearch:
 
 </details>
 
-:::caution Helm values customization
+:::warning Helm values customization
 The example above is a starting point. Adjust the values to match your specific managed service configuration, authentication method (IAM, username/password, etc.), and TLS requirements. Refer to the [Camunda Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md) for all available options.
 :::
 
@@ -280,7 +280,7 @@ PostgreSQL backups work the same way — `pg_dump` jobs run against the Bitnami 
 
 ### Phase 3: Cutover (downtime required)
 
-:::caution Maintenance window required
+:::warning Maintenance window required
 Schedule a maintenance window. Typical duration: 5–30 minutes.
 :::
 

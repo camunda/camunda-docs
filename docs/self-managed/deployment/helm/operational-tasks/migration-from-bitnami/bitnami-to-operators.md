@@ -301,7 +301,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ![Illustration of Phase 3: stop traffic, restore the data, and switch Camunda to the new backends](./img/bitnami-migration-phase-3-cutover.jpg)
 
-:::caution Maintenance window required
+:::warning Maintenance window required
 This is the only phase that causes **downtime**. Schedule a maintenance window before proceeding. Typical duration: **5–40 minutes** depending on Elasticsearch data volume — see [Downtime estimation](#downtime-estimation) for benchmarked timings.
 :::
 
@@ -378,7 +378,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ![Illustration of Phase 5: remove the old Bitnami resources after the new platform is stable](./img/bitnami-migration-phase-5-cleanup.jpg)
 
-:::caution Wait before cleanup
+:::warning Wait before cleanup
 Do not run this phase immediately after validation. Operate with the new infrastructure for at least 72 hours to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup.
 :::
 
