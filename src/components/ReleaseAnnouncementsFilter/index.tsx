@@ -589,6 +589,7 @@ export default function ReleaseAnnouncementsFilter({
         {(typeFilter !== 'all' || deploymentFilter !== 'all' || areaFilter !== 'all') && (
           <button
             className={styles.clearButton}
+            title="Clear all filters and reset to the default view"
             onClick={() => {
               setTypeFilter('all');
               setDeploymentFilter('all');
@@ -622,7 +623,9 @@ export default function ReleaseAnnouncementsFilter({
 
 
       {noResults && (
-        <p className={styles.noResults}>No results found for the selected filters.</p>
+        <p className={styles.noResults}>
+          No results found for the selected filters. Change your selected filters or click <strong>Clear filters</strong> to reset.
+        </p>
       )}
 
       <div ref={listRef} className={styles.list}>
