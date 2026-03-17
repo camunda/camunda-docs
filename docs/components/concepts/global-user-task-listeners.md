@@ -82,7 +82,7 @@ Each listener entry can be configured with the properties described in the [Glob
 
 #### Automatic configuration correction
 
-If you provide an invalid configuration, the system attempts to automatically correct it instead of failing the startup. This allows you to fix issues in the configuration without needing to provide a fully valid configuration on the first attempt.
+If you provide an invalid configuration, the system attempts to automatically correct it instead of causing startup to fail. This allows you to fix issues in the configuration without requiring every listener entry to be valid on the first attempt.
 
 The following corrections are applied automatically:
 
@@ -93,7 +93,7 @@ The following corrections are applied automatically:
 - If a listener defines both the special `all` value and a normal event type for `eventTypes`, the configuration is corrected to include only `all`.
 - If a listener defines invalid retry values, i.e., non-numeric or negative, the listener is removed and ignored.
 
-In all the above cases, a suitable warning is reported in the orchestration cluster startup log, identifying the problem and its location in the configuration.
+In all the above cases, a warning is written to the Orchestration Cluster startup log, identifying the problem and its location in the configuration.
 
 #### How the configuration is validated
 
