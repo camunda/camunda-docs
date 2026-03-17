@@ -1,7 +1,7 @@
 ---
 id: helm-with-rdbms
-sidebar_label: Install with RDBMS
-title: Helm installation with RDBMS as secondary storage
+sidebar_label: RDBMS installation example
+title: Install Camunda with external RDBMS using Helm
 description: "Deploy Camunda 8 on Kubernetes using Helm charts with an external RDBMS as secondary storage. Step-by-step guide for production-ready installations."
 ---
 

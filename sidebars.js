@@ -1564,8 +1564,6 @@ module.exports = {
               items: [
                 "self-managed/deployment/helm/install/quick-install",
                 "self-managed/deployment/helm/install/production/index",
-                "self-managed/deployment/helm/configure/operator-based-infrastructure",
-                "self-managed/deployment/helm/install/helm-with-rdbms",
               ],
             },
             "self-managed/deployment/helm/chart-parameters",
@@ -1592,6 +1590,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
@@ -1624,8 +1623,18 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
                     {
-                      RDBMS: [
-                        "self-managed/deployment/helm/configure/database/rdbms",
+                      type: "category",
+                      label: "RDBMS",
+                      link: {
+                        type: "doc",
+                        id: "self-managed/deployment/helm/configure/database/rdbms",
+                      },
+                      items: [
+                        {
+                          type: "doc",
+                          id: "self-managed/deployment/helm/install/helm-with-rdbms",
+                          label: "RDBMS installation example",
+                        },
                         "self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers",
                         "self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits",
                         "self-managed/deployment/helm/configure/database/rdbms-schema-management",
