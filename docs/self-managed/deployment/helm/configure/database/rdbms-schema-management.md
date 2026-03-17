@@ -203,7 +203,12 @@ For troubleshooting, see [schema troubleshooting](#schema-troubleshooting).
 
 ### Liquibase lock issues
 
-If a previous schema migration failed, Liquibase may hold a lock:
+If a previous schema migration failed, Liquibase may hold a lock.
+
+Camunda waits for stale Liquibase DDL locks using `camunda.data.secondary-storage.rdbms-ddl-lock-wait-timeout` (default: `PT15M`).
+For large schema changes, you can increase this timeout so a long-running migration is not treated as stale.
+
+Only release the lock manually after confirming no migration is currently running:
 
 ```sql
 -- PostgreSQL/MariaDB: Release the lock
