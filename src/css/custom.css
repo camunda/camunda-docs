@@ -173,6 +173,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-color-info-contrast-background: rgb(244, 249, 254);
   --ifm-color-warning-dark: rgb(252 93 13);
   --ifm-color-warning-contrast-background: rgb(252, 243, 238);
+  --ifm-navbar-link-color: #1c1e21;
 }
 
 /* Match Algolia colours to Camunda brand colours */
@@ -300,10 +301,6 @@ we make it less bold compared to the search keyword */
   padding-left: 10px;
   font-size: 16px;
   display: none;
-}
-
-.navbar__link {
-  color: #1c1e21;
 }
 
 a {
