@@ -482,6 +482,59 @@ Customizing the `configuration` option will replace the entire contents of the c
 - Forgetting to wrap multiline values with (`|`) in Helm can cause parse errors.
 - Mixing `env` and `configuration` for the same property without realizing precedence can lead to unexpected results.
 
+## Component-specific notes
+
+Some components deviate from the standard `application.yaml` / `log4j2.xml` behaviour described above.
+
+### Optimize
+
+Optimize does not use Spring Boot's `application.yaml`. Instead, it reads configuration from a file called `environment-config.yaml`. When you set `optimize.configuration`, the content is written to `environment-config.yaml` inside the container — not `application.yaml`.
+
+```yaml
+optimize:
+  configuration: |-
+    # Contents go into environment-config.yaml, not application.yaml
+    container:
+      host: 0.0.0.0
+      ports:
+        http: 8090
+    es:
+      connection:
+        nodes:
+          - host: <your-release-name>-elasticsearch
+            httpPort: 9200
+```
+
+Similarly, the common use case for `optimize.extraConfiguration` is supplying a custom `environment-logback.xml` (not `log4j2.xml`):
+
+```yaml
+optimize:
+  extraConfiguration:
+    environment-logback.xml: |-
+      <configuration>
+        ...
+      </configuration>
+```
+
+For the full list of Optimize configuration options, see [Optimize system configuration](/self-managed/components/optimize/configuration/system-configuration.md).
+
+### Console
+
+Console does not support `extraConfiguration`. Instead, it provides a `console.overrideConfiguration` key that merges into the auto-generated Console config (or the config supplied via `console.configuration`). Use `overrideConfiguration` to set Console-specific properties such as `customerId`, cluster `tags`, and `custom-properties`:
+
+```yaml
+console:
+  overrideConfiguration: |-
+    customerId: "<your-customer-id>"
+    clusters:
+      - uuid: "<cluster-uuid>"
+        name: "<cluster-name>"
+        tags:
+          - "<tag>"
+```
+
+For the full list of Console configuration options, see [Console configuration](/self-managed/components/console/configuration/configuration.md).
+
 ## References
 
 For more details on where to find configuration options for specific components, see the following pages:
