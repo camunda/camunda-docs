@@ -105,4 +105,4 @@ While the operations for creating and managing batch operations are recorded in 
 
 `ADMIN` and `BATCH` operations are not scoped to a particular tenant. Instead, they're applied at a global scope because Identity-related operations don't belong to an individual tenant and batch operations may include items from multiple tenants.
 
-Keep this in mind when you filter by tenant ID with the [Search audit logs API](/apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx) or the [Operate user interface](/components/operate/userguide/audit-operations.md). As these operations aren't scoped to a tenant, selecting a particular tenant ID will filter out these operations.
+Keep this in mind when you filter by tenant ID with the [search audit logs API](/apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx) or the [Operate user interface](/components/operate/userguide/audit-operations.md). As these operations aren't scoped to a tenant, selecting a particular tenant ID will filter out these operations.
