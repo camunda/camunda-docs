@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 
-This guide walks you through migrating a Camunda 8 Helm installation from Bitnami-managed infrastructure to **cloud-managed services** such as:
+Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to **cloud-managed services**, such as:
 
 - **PostgreSQL**: AWS RDS, Azure Database for PostgreSQL, Google Cloud SQL, or any managed PostgreSQL service
 - **Elasticsearch**: Elastic Cloud or any managed Elasticsearch service
@@ -89,7 +89,7 @@ Create an Elastic Cloud deployment. Note the deployment endpoint, Cloud ID, and 
 
 <TabItem value="self-managed-es" label="Self-managed Elasticsearch">
 
-If using a self-managed Elasticsearch cluster (not on Kubernetes), ensure it is accessible from the cluster and note the endpoint and credentials.
+If using a self-managed Elasticsearch cluster (not on Kubernetes), ensure it is accessible from the cluster, and note the endpoint and credentials.
 
 </TabItem>
 
@@ -97,10 +97,7 @@ If using a self-managed Elasticsearch cluster (not on Kubernetes), ensure it is 
 
 ### Create Kubernetes Secrets
 
-Store the managed service credentials as Kubernetes Secrets so that both the migration scripts and Camunda Helm chart can use them:
-
-<details>
-<summary>Show details: Kubernetes Secrets example</summary>
+Store the managed service credentials as Kubernetes Secrets so both the migration scripts and Camunda Helm chart can use them:
 
 ```bash
 # PostgreSQL secrets — one per component
@@ -122,11 +119,9 @@ kubectl create secret generic external-es \
   --from-literal=elastic='<es-password>'
 ```
 
-</details>
-
 ## Step 2: Configure the migration for external targets
 
-Edit `env.sh` and set the target mode to `external`:
+Edit `env.sh`, and set the target mode to `external`:
 
 <details>
 <summary>Show details: external target configuration example</summary>
@@ -158,12 +153,12 @@ export EXTERNAL_ES_SECRET="external-es"
 </details>
 
 :::info Same host for all PostgreSQL databases
-You can use the same managed PostgreSQL host for all components — each database is separate. This is common when using a single RDS instance with multiple databases.
+You can use the same managed PostgreSQL host for all components—each database is separate. This is common when using a single RDS instance with multiple databases.
 :::
 
 ### Create custom Helm values
 
-When using external targets, you need a custom Helm values file that configures Camunda to connect to the managed services. Set the `CUSTOM_HELM_VALUES_FILE` variable to point to this file:
+When using external targets, you need a custom Helm values file that configures Camunda to connect to the managed services. Set `CUSTOM_HELM_VALUES_FILE` to point to this file:
 
 ```bash
 export CUSTOM_HELM_VALUES_FILE="./my-external-values.yaml"
@@ -244,6 +239,8 @@ elasticsearch:
 The example above is a starting point. Adjust the values to match your specific managed service configuration, authentication method (IAM, username/password, etc.), and TLS requirements. Refer to the [Camunda Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md) for all available options.
 :::
 
+### Source `env.sh`
+
 Source the configuration:
 
 ```bash
@@ -260,15 +257,11 @@ With external targets, the migration phases work the same way, with key differen
 bash 1-deploy-targets.sh
 ```
 
-When `PG_TARGET_MODE=external`:
+Implementation details:
 
-- CNPG operator is **not installed** — your managed PostgreSQL is used directly.
-
-When `ES_TARGET_MODE=external`:
-
-- ECK operator is **not installed** — your managed Elasticsearch target is used directly.
-
-The Keycloak Operator is still deployed (with a Custom Resource pointing to your managed PostgreSQL).
+- When `PG_TARGET_MODE=external`, the CloudNativePG (CNPG) operator is not installed; your managed PostgreSQL is used directly.
+- When `ES_TARGET_MODE=external`, the Amazon Elastic Cloud on Kubernetes (ECK) operator is not installed; your managed Elasticsearch target is used directly.
+- The Keycloak Operator is still deployed with a Custom Resource pointing to your managed PostgreSQL.
 
 ### Phase 2: Initial backup (no downtime)
 
@@ -293,7 +286,7 @@ For PostgreSQL, `pg_restore` runs against the managed PostgreSQL endpoints inste
 #### Elasticsearch data migration for managed services
 
 :::warning Manual Elasticsearch data migration
-Automated Elasticsearch data migration is **not supported** for external targets. The automated migration uses the `_reindex` API which requires both source and target Elasticsearch clusters to be reachable within the same Kubernetes namespace, which is not possible with managed services.
+Automated Elasticsearch data migration is **not supported** for external targets. The automated migration uses the `_reindex` API, which requires both source and target Elasticsearch clusters to be reachable within the same Kubernetes namespace. This isn't possible with managed services.
 :::
 
 For Elasticsearch data migration to managed services, you have several options:
@@ -306,16 +299,13 @@ Let Camunda rebuild Elasticsearch indexes from Zeebe on the next export. This is
 
 After the Helm upgrade, Zeebe exporters will populate the new Elasticsearch target with current data. Historical data will be available as Zeebe replays events.
 
-No additional steps are required — this happens automatically.
+No additional steps are required; this happens automatically.
 
 </TabItem>
 
 <TabItem value="elasticdump" label="elasticdump">
 
-Use the [`elasticdump`](https://github.com/elasticsearch-dump/elasticsearch-dump) npm tool to transfer indices from source to target:
-
-<details>
-<summary>Show details: `elasticdump` example</summary>
+Use the [`elasticdump`](https://github.com/elasticsearch-dump/elasticsearch-dump) npm tool to transfer indices from source to target. For example:
 
 ```bash
 # Install elasticdump
@@ -338,24 +328,14 @@ for pattern in zeebe operate tasklist optimize connectors camunda; do
 done
 ```
 
-  </details>
-
 </TabItem>
 
 <TabItem value="s3-snapshot" label="S3 snapshot repository">
 
-If both source and target elasticsearch support S3 snapshot repositories, you can use a shared S3 bucket:
-
-1. Register an S3 snapshot repository on the source Bitnami Elasticsearch.
-2. Create a snapshot.
-3. Register the same S3 repository on the target managed Elasticsearch.
-4. Restore the snapshot.
-
-<details>
-<summary>Show details: S3 snapshot example</summary>
+If both source and target elasticsearch support Amazon S3 snapshot repositories, you can use a shared S3 bucket. For example:
 
 ```bash
-# On source ES: register S3 repo and create snapshot
+# Register an S3 snapshot repository on the source Bitnami Elasticsearch, and create a snapshot
 curl -X PUT "localhost:9200/_snapshot/s3_backup" \
   -H 'Content-Type: application/json' \
   -d '{"type":"s3","settings":{"bucket":"my-migration-bucket","region":"us-east-1"}}'
@@ -364,7 +344,7 @@ curl -X PUT "localhost:9200/_snapshot/s3_backup/migration?wait_for_completion=tr
   -H 'Content-Type: application/json' \
   -d '{"indices":"*","ignore_unavailable":true}'
 
-# On target Elasticsearch: register same S3 repo and restore
+# Register the same S3 repository on the target managed Elasticsearch, and restore the snapshot
 curl -X PUT "https://target-endpoint/_snapshot/s3_backup" \
   -H 'Content-Type: application/json' \
   -d '{"type":"s3","settings":{"bucket":"my-migration-bucket","region":"us-east-1"}}'
@@ -374,18 +354,13 @@ curl -X POST "https://target-endpoint/_snapshot/s3_backup/migration/_restore" \
   -d '{"indices":"*","ignore_unavailable":true}'
 ```
 
-</details>
-
 </TabItem>
 
 <TabItem value="reindex" label="Reindex API">
 
 Use the Elasticsearch [Reindex API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html) to copy data from the source to the target. This requires the target to whitelist the source as a remote.
 
-Reindex each concrete Camunda index individually rather than using a single wildcard destination. To stay aligned with the migration scripts, include `zeebe-*`, `operate-*`, `tasklist-*`, `optimize-*`, `connectors-*`, and `camunda-*` indices.
-
-<details>
-<summary>Show details: Reindex API example</summary>
+Reindex each concrete Camunda index individually rather than using a single wildcard destination. To stay aligned with the migration scripts, include `zeebe-*`, `operate-*`, `tasklist-*`, `optimize-*`, `connectors-*`, and `camunda-*` indices. For example:
 
 ```bash
 # On the target, add source to reindex.remote.whitelist.
@@ -410,8 +385,6 @@ for idx in $(curl -s -u "elastic:<password>" \
 done
 ```
 
-</details>
-
 Review the source index list before running the loop. If your deployment uses custom index prefixes, include those prefixes in the `_cat/indices` query.
 
 </TabItem>
@@ -426,7 +399,7 @@ bash 4-validate.sh
 
 For external targets, the validation checks connectivity to the managed service endpoints instead of verifying CNPG/ECK cluster health.
 
-## Rollback
+### Rollback
 
 Rolling back works the same way as with the [operator-based migration](./bitnami-to-operators.md#rollback):
 
@@ -434,7 +407,7 @@ Rolling back works the same way as with the [operator-based migration](./bitnami
 bash rollback.sh
 ```
 
-## Post-migration cleanup
+### Phase 5: Cleanup Bitnami resources (no downtime)
 
 After confirming the migration is successful (wait at least 72 hours), remove old Bitnami resources by running the cleanup script:
 
@@ -446,17 +419,17 @@ For the cleanup behavior and safety notes, see [Phase 5 in the operator-based gu
 
 ## Operational readiness
 
-Before running this migration in production, use the checklist below to reduce risk — especially where network policy and external service access add complexity.
+Before running this migration in production, use the checklist below to reduce risk, especially where network policy and external service access add complexity.
 
 ### Staging rehearsal
 
-1. **Provision staging managed services** that mirror your production setup (same cloud provider, same region, same tier/SKU).
-2. **Run the full migration end-to-end** in staging, including all five phases plus validation.
-3. **Measure actual timings**: record how long each phase takes. Network latency to external services (RDS, Cloud SQL, Elasticsearch) may increase backup/restore times compared to in-cluster operators.
+1. **Provision staging managed services** that mirror your production setup—same cloud provider, same region, and same tier/SKU.
+2. **Run the full migration end to end** in staging, including all five phases: deploy, backup, cutover, validate, and cleanup.
+3. **Measure actual timings**: record how long each phase takes. Network latency to external services, such as RDS, Cloud SQL, and Elasticsearch, may increase backup and restore times compared to in-cluster operators.
 4. **Test rollback**: after a successful staging migration, run `bash rollback.sh` to verify the Helm values revert correctly and Camunda reconnects to the Bitnami subcharts.
 
 :::tip
-When staging with managed services, use the same authentication method (IAM, managed identity, workload identity) that you plan to use in production — password-based staging does not catch permission issues.
+When staging with managed services, use the same authentication method (IAM, managed identity, workload identity) that you plan to use in production. Password-based staging does not catch permission issues.
 :::
 
 ### Production dry-run
@@ -473,11 +446,11 @@ Pay special attention to:
 
 Before starting the migration in production:
 
-- [ ] **Verify managed service connectivity**: from within the cluster, confirm you can connect to each managed service endpoint using `kubectl run` with a temporary client pod.
-- [ ] **Notify stakeholders**: announce the maintenance window at least 48 hours in advance.
-- [ ] **Verify independent backups**: confirm a recent backup exists via both your cluster backup tool (Velero, snapshots) and the cloud provider's managed service backup (RDS snapshots, automated backups).
-- [ ] **Check IAM permissions**: ensure the Kubernetes service account has the correct role bindings for the managed services (IRSA for AWS, Workload Identity for GCP, Managed Identity for Azure).
-- [ ] **Monitor readiness**: have dashboards open for cluster health, managed service metrics (CPU, connections, storage), and pod status.
+- **Verify managed service connectivity**: from within the cluster, confirm you can connect to each managed service endpoint using `kubectl run` with a temporary client pod.
+- **Notify stakeholders**: announce the maintenance window at least 48 hours in advance. Include expected start time, duration (measured in staging), and impact on end users.
+- **Verify independent backups**: confirm a recent backup exists via both your cluster backup tool (Velero, snapshots) and the cloud provider's managed service backup (RDS snapshots, automated backups).
+- **Check IAM permissions**: ensure the Kubernetes service account has the correct role bindings for the managed services (IRSA for AWS, Workload Identity for GCP, Managed Identity for Azure).
+- **Monitor readiness**: have dashboards open for cluster health, managed service metrics (CPU, connections, storage), and pod status.
 
 ### Failback procedure
 
@@ -490,8 +463,8 @@ Before starting the migration in production:
 
 - All `pg_dump` backups are stored on a dedicated PVC that persists independently.
 - Managed services typically offer their own automated backups (RDS snapshots, Cloud SQL backups). Verify these are enabled and have adequate retention.
-- The migration scripts are **idempotent** and can be re-run safely.
-- No Bitnami resources are deleted during migration — they must be explicitly removed afterward.
+- The migration scripts are idempotent and can be rerun safely.
+- No Bitnami resources are deleted during migration. They must be explicitly removed afterward.
 
 ### Post-migration monitoring
 
