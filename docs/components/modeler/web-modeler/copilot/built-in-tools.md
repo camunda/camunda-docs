@@ -5,16 +5,16 @@ sidebar_label: Built-in tools
 description: "Reference documentation for all built-in tools available to Camunda Copilot sub-agents."
 ---
 
-Camunda Copilot uses specialized tools to interact with your BPMN diagrams, forms, and other artifacts. This page documents all built-in tools available to the Copilot sub-agents.
+Camunda Copilot uses specialized tools to interact with your BPMN diagrams, forms, and other artifacts. This page documents all built-in tools available to the Camunda Copilot sub-agents.
 
-For a high-level overview, see [Copilot overview](copilot-overview.md).
+For a high-level overview, see [Camunda Copilot overview](copilot-overview.md).
 
-## Permission model
+## Access control
 
-Tools are categorized by access requirements:
+Each tool is governed by two layers of access control:
 
-- **Read**: Available to all users, including users with read-only access (`READ` or `COMMENT` permissions).
-- **Write**: Available only to users with write access. These tools are hidden from read-only users.
+- **Permission** (Read / Write): Based on your [project-level role](copilot-overview.md#project-level-permissions). Write tools are hidden from read-only users.
+- **Screen availability**: Camunda Copilot automatically disables tools that do not apply to your [current screen or mode](copilot-overview.md#screen-based-tool-availability). For example, BPMN editing tools are available on the Design and Implement screens but not in Play mode.
 
 ## BPMN tools
 
@@ -137,7 +137,7 @@ Tools are categorized by access requirements:
 	</tbody>
 </table>
 
-## Frontend tools
+## Modeler tools
 
 These tools execute in the Web Modeler UI and provide access to UI-specific functionality.
 

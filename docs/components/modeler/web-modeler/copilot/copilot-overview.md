@@ -5,6 +5,8 @@ sidebar_label: Copilot overview
 description: "Camunda Copilot is an AI assistant integrated into Web Modeler that helps with BPMN process modeling, FEEL expressions, and Form building."
 ---
 
+<span class="badge badge--alpha">Alpha</span>
+
 import CopilotBpmnGeneration from './img/copilot-bpmn-generation.png';
 import CopilotConversationHistory from './img/copilot-conversation-history.png';
 
@@ -18,11 +20,11 @@ Camunda Copilot is an [**alpha feature**](/components/early-access/alpha/alpha-f
 
 1. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
 2. Open an existing BPMN diagram or form, or create a new one via New project > Create new > BPMN diagram or Form.
-3. Click the Camunda Copilot icon in the top-right corner of the editor header to open the Copilot panel.
+3. Click the Camunda Copilot icon in the top-right corner of the editor header to open the Camunda Copilot panel.
 4. In the chat box, enter a simple, clear, and concise prompt describing what you need.
-5. Wait for Copilot to respond; response times may vary depending on the complexity of your request.
+5. Wait for Camunda Copilot to respond; response times may vary depending on the complexity of your request.
 
-<img src={CopilotBpmnGeneration} alt="Copilot generating a mortgage approval workflow" />
+<img src={CopilotBpmnGeneration} alt="Camunda Copilot generating a mortgage approval workflow" />
 
 :::tip
 To avoid timeouts and get better results, break long or complex prompts into smaller, focused requests and send them one at a time.
@@ -52,14 +54,14 @@ Each sub-agent uses [built-in tools](built-in-tools.md) to interact with your di
 
 ## Review and undo changes
 
-Camunda Copilot can both answer questions and generate or update BPMN diagrams and forms. When Copilot applies a change on the canvas, Web Modeler automatically creates a new version so your previous work is preserved. If you are not satisfied with the result, you can roll back to a previous version from the version history, or continue iterating with Copilot until the result meets your needs.
+Camunda Copilot can both answer questions and generate or update BPMN diagrams and forms. When Camunda Copilot applies a change on the canvas, Web Modeler automatically creates a new version so your previous work is preserved. If you are not satisfied with the result, you can roll back to a previous version from the version history, or continue iterating with Camunda Copilot until the result meets your needs.
 
 ## Context awareness
 
 Camunda Copilot automatically detects and uses context from your current work to provide more relevant responses:
 
-- **No element selected**: Copilot uses the file context.
-- **Element selected**: A context tag appears above the chat input, showing which element or expression Copilot will reference.
+- **No element selected**: Camunda Copilot uses the file context.
+- **Element selected**: A context tag appears above the chat input, showing which element or expression Camunda Copilot will reference.
 - **Context removal**: Removing a context tag clears that context and, for BPMN elements, deselects the element on the canvas.
 
 This context allows Camunda Copilot to:
@@ -76,7 +78,7 @@ Camunda Copilot automatically saves your conversations so you can pick up where 
 
 ## Example prompts
 
-You can ask Copilot to create, modify, or explain processes and forms. Use clear, specific prompts to get the best results. For complex workflows, break your request into smaller steps.
+You can ask Camunda Copilot to create, modify, or explain processes and forms. Use clear, specific prompts to get the best results. For complex workflows, break your request into smaller steps.
 
 #### Build processes and forms
 
@@ -146,7 +148,11 @@ Modifications may affect sections beyond your specific request. Review the full 
 
 ## Permissions
 
-Copilot respects your project permissions:
+Camunda Copilot enforces two layers of access control: **project-level permissions** determine whether a user can make changes at all, and **screen-based tool availability** further restricts which tools are available based on the current screen or mode.
+
+### Project-level permissions
+
+Camunda Copilot respects your project role. Users with write access can use all features, while read-only users are limited to questions, explanations, and viewing-related actions.
 
 <table>
   <colgroup>
@@ -199,6 +205,49 @@ Copilot respects your project permissions:
     </tr>
   </tbody>
 </table>
+
+### Screen-based tool availability
+
+In addition to project-level permissions, Camunda Copilot dynamically adjusts the tools available to you based on the screen or mode you are currently using. For example, while editing a BPMN diagram on the Design tab you have full editing tools, but if you switch to Play mode, only viewing and validation tools are available. This prevents Camunda Copilot from suggesting actions that cannot be performed in your current context.
+
+The following table shows what Camunda Copilot can do on each screen:
+
+<table>
+  <colgroup>
+    <col style={{width: "30%"}} />
+    <col style={{width: "70%"}} />
+  </colgroup>
+  <thead>
+    <tr>
+      <th style={{textAlign: "left"}}>Screen</th>
+      <th style={{textAlign: "left"}}>What Camunda Copilot can do</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BPMN Design / Implement</td>
+      <td>Full BPMN editing, view forms, validate, manage files, create files, use integrations</td>
+    </tr>
+    <tr>
+      <td>BPMN Play</td>
+      <td>View and query BPMN diagrams, validate</td>
+    </tr>
+    <tr>
+      <td>BPMN Version History</td>
+      <td>View and query BPMN diagrams and forms, validate, view files</td>
+    </tr>
+    <tr>
+      <td>Form Design / Editor</td>
+      <td>Full form and BPMN editing, validate, manage files, create files, use integrations</td>
+    </tr>
+    <tr>
+      <td>Form Validate</td>
+      <td>View forms, validate</td>
+    </tr>
+  </tbody>
+</table>
+
+When you ask Camunda Copilot to perform an action that is not available on your current screen, it will let you know and suggest navigating to the appropriate screen instead.
 
 ## Limitations
 
