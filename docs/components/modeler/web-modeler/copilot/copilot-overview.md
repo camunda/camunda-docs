@@ -44,6 +44,8 @@ Camunda Copilot automatically detects and uses context from your current work to
 - **Element selected**: A context tag appears above the chat input, showing which element or expression Copilot will reference.
 - **Context removal**: Removing a context tag clears that context and, for BPMN elements, deselects the element on the canvas.
 
+{/_ TODO: Add image showing the context tag above the chat input _/}
+
 This context allows Camunda Copilot to:
 
 - Understand which element you're referencing
@@ -54,96 +56,77 @@ This context allows Camunda Copilot to:
 ## Chat history
 
 Camunda Copilot automatically saves your conversations so you can pick up where you left off. Conversations are retained for 90 days before being automatically deleted. You can click on any past conversation to continue the discussion, rename conversations to give them meaningful titles for easy reference, or delete conversations you no longer need.
-
-### Managing conversations
-
-Click the history icon in the Copilot header to view your past conversations:
-
-<img src={CopilotConversationHistory} alt="Conversation history panel showing past conversations" />
-
-Hover over a conversation to see the rename and delete options:
-
-<img src={CopilotHistoryActions} alt="Conversation history with rename and delete options" />
-
-To start a new conversation, click the **+** button in the header.
+<img src={CopilotConversationHistory} alt="Conversation history panel with rename and delete options" />
 
 ## Example prompts
 
-### BPMN prompts
+You can ask Copilot to create, modify, or explain processes and forms. Use clear, specific prompts to get the best results. For complex workflows, break your request into smaller steps.
 
-#### Process creation
+#### Build processes and forms
 
-- "Create an employee onboarding process"
-- "Design a loan approval workflow with credit check and conditional routing"
-- "Build an order processing system with parallel approval tasks"
-- "Create a customer support ticket workflow with escalation paths"
-- Paste existing text documentation of a process or requirements
-- Paste a process hard-coded in any language (BPEL, Java, COBOL, Python)
+<table>
+  <colgroup>
+    <col style={{width: "55%"}} />
+    <col style={{width: "45%"}} />
+  </colgroup>
+  <thead>
+    <tr>
+      <th style={{textAlign: "left"}}>Prompt</th>
+      <th style={{textAlign: "left"}}>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>"Create an employee onboarding process"</td>
+      <td>Generates a BPMN workflow from a description</td>
+    </tr>
+    <tr>
+      <td>"Create a leave request workflow with an approval form"</td>
+      <td>Builds a process with a linked form</td>
+    </tr>
+    <tr>
+      <td>"Add error handling to this process"</td>
+      <td>Modifies an existing diagram</td>
+    </tr>
+    <tr>
+      <td><em>Paste existing documentation or code</em></td>
+      <td>Converts requirements, BPEL, Java, or Python into BPMN</td>
+    </tr>
+  </tbody>
+</table>
 
-#### Process explanation
+#### Work with FEEL expressions
 
-- "Describe this process in plain language"
-- "What KPIs would you recommend for this process?"
-- "What does this symbol do?" (after selecting a BPMN element)
-- "Give me a list of test cases for this process"
-- "Summarize this process for a new employee"
-
-#### Process modification
-
-- "Add error handling to this process"
-- "Consider unhappy paths as well"
-- "Improve the user experience"
-- "Add a notification step after approval"
+<table>
+  <colgroup>
+    <col style={{width: "55%"}} />
+    <col style={{width: "45%"}} />
+  </colgroup>
+  <thead>
+    <tr>
+      <th style={{textAlign: "left"}}>Prompt</th>
+      <th style={{textAlign: "left"}}>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>"Calculate the total price from quantity and unit price"</td>
+      <td>Generates a FEEL expression</td>
+    </tr>
+    <tr>
+      <td>"Translate this Java to FEEL: input.trim().toUpperCase()"</td>
+      <td>Converts code from other languages</td>
+    </tr>
+    <tr>
+      <td>"Fix this expression" <em>(with FEEL editor open)</em></td>
+      <td>Debugs and corrects syntax errors</td>
+    </tr>
+  </tbody>
+</table>
 
 :::note
-Requesting specific modifications to one or several sections of the BPMN diagram may impact unrelated sections.
+Modifications may affect sections beyond your specific request. Review the full diagram after changes.
 :::
-
-### FEEL prompts
-
-#### Generate FEEL expressions
-
-- "Find the difference between two dates"
-- "Check if a number is greater than 10"
-- "Calculate the total price from quantity and unit price"
-- "Validate an email address format"
-
-#### Translate code to FEEL
-
-- "Translate this Java to FEEL: input.trim().toUpperCase()"
-- "Convert this JavaScript condition to FEEL"
-- "Translate from JUEL"
-
-#### Debug and refactor FEEL
-
-- "Fix this expression"
-- "Why am I getting a null response?"
-- "Make it more compact"
-
-### Form prompts
-
-- "Create a form for collecting customer feedback"
-- "Add a date picker field to this form"
-- "Validate that the email field contains a valid email address"
-- "Create a form for this user task"
-
-### Multi-agent prompts
-
-Copilot can handle complex requests that span multiple sub-agents. For example:
-
-**Creating a complete workflow with forms:**
-
-<img src={CopilotFormCreation} alt="Copilot creating a form and linking it to a user task" />
-
-- "Create an employee onboarding process with a form for collecting employee information"
-- "Build a leave request workflow with an approval form"
-
-**Adding data mappings:**
-
-<img src={CopilotOutputMapping} alt="Copilot adding output mapping with FEEL expression" />
-
-- "Take the output from the form and add it as input mapping for this task"
-- "Add an output mapping that checks if employeeName is not empty and maps it to name"
 
 ## Permissions
 
