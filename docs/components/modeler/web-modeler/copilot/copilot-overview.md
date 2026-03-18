@@ -46,19 +46,10 @@ Camunda Copilot automatically detects and uses context from your current work to
 
 This context allows Camunda Copilot to:
 
-- Understand which element you're asking about
+- Understand which element you're referencing
 - Apply changes to the correct element
-- Generate FEEL expressions for the right field
-- Create forms linked to the current process
-
-### What context is used
-
-| Context type    | When active                         | Description                                        |
-| --------------- | ----------------------------------- | -------------------------------------------------- |
-| File            | When a BPMN diagram or form is open | The current BPMN diagram or Form you're editing    |
-| BPMN element    | When a BPMN element is selected     | The specific element you've selected on the canvas |
-| Form content    | When editing a Form                 | The current Form JSON structure                    |
-| FEEL expression | When FEEL editor is open            | The FEEL expression you're working on              |
+- Generate FEEL expressions for the appropriate field
+- Link forms to the current process
 
 ## Chat history
 
