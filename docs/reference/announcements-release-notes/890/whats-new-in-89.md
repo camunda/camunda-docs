@@ -17,11 +17,11 @@ toc_max_heading_level: 2
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 
-Important changes in Camunda 8.9 you should consider when upgrading from Camunda 8.8.
+Highlights and important changes in Camunda 8.9 you should consider when upgrading from Camunda 8.8.
 
 ## Why upgrade to Camunda 8.9?
 
-Upgrading to Camunda 8.8 delivers significant benefits and keeps your installation aligned and ready for future releases.
+Upgrading to Camunda 8.9 delivers significant benefits and keeps your installation aligned and ready for future releases.
 
 <div className="list-tick">
 
@@ -29,7 +29,7 @@ Upgrading to Camunda 8.8 delivers significant benefits and keeps your installati
 
 - **RDBMS secondary storage**: Flexible data layer via first‑class RDBMS secondary storage options, including Amazon Aurora.
 
-- **Observability**: Simpler configuration and observability, with cluster‑wide variables and a new SaaS metrics endpoint.
+- **Observability**: Simpler configuration and observability, with cluster variables, audit logs, and a new SaaS metrics endpoint.
 
 - **Improved developer experience**: A smoother developer and operator experience for Camunda 8 Run and Modeler.
 
@@ -46,89 +46,52 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
     <td>[Agentic orchestration](#agentic-orchestration)</td>
-    <td>Refined AI and MCP connector capabilities, including new authentication, timeout, and configuration options.</td>
+    <td>Refined AI and MCP connector capabilities and Orchestration Cluster MCP support.</td>
+</tr>
+<tr>
+    <td>[Audit log](#audit-log)</td>
+    <td>Access a record of operations, including who performed an operation, when it was performed, and on which entities the operation was performed.</td>
 </tr>
 <tr>
     <td>[Camunda 8 Run](#camunda8run)</td>
     <td>Use H2 as the default secondary storage for your local/development setups.</td>
 </tr>
 <tr>
-    <td>[Cluster configuration and observability](#observability)</td>
-    <td>Configure shared values with cluster variables and expose a Cluster Metrics endpoint for SaaS clusters that integrates with Prometheus-style monitoring.</td>
-</tr>
-<tr>
     <td>[Global user task listeners](#listeners)</td>
     <td>Define configuration‑based, cluster‑wide user task listeners with consistent payloads for all user task events.</td>
 </tr>
 <tr>
+<td>[Helm chart deployment](#helm-chart-deployment)</td>
+    <td>RDBMS and secondary storage type configuration, removal of deprecated secret keys, migration to new `*.secret.existingSecret` pattern, and Helm 4 support.</td>
+</tr>
+<tr>
     <td>[Modeler](#modeler)</td>
-    <td>Web Modeler moves to Log4j2 and Tomcat, adds RDBMS support, event templates, and email invitations. Desktop Modeler adds cluster connection management.</td>
+    <td>Web Modeler moves to Log4j2 and Tomcat, adds RDBMS support, event templates, and email invitations, and Desktop Modeler adds cluster connection management.</td>
+</tr>
+<tr>
+    <td>[Orchestration Cluster](#ocluster)</td>
+    <td>Amazon ECS (EC2+Fargate) support, cluster variables for shared configuration, Cluster Metrics endpoint for SaaS clusters, and conifguration improvements and enhancements.</td>
 </tr>
 <tr>
     <td>[RDBMS secondary storage](#rdbms)</td>
-    <td>Use relational databases (H2, PostgreSQL, Oracle, MariaDB, MySQL, SQL Server, Aurora PostgreSQL) as secondary storage for the Orchestration Cluster.</td>
+    <td>Use relational databases as secondary storage for the Orchestration Cluster.</td>
 </tr>
 <tr>
     <td>[Supported environments](#environments)</td>
     <td>Updated support for Java, Elasticsearch/OpenSearch, RDBMS, Helm, and connector runtime (including virtual threads).</td>
 </tr>
-<tr>
-    <td>[Unified component configuration](#ucc)</td>
-    <td>In Camunda 8.9, the remaining unified configuration property changes are complete.</td>
-    <td>[Helm chart deployment](#helm-chart-deployment)</td>
-    <td><ul><li>Secondary storage type must be explicitly configured (no more implicit Elasticsearch default).</li><li>Deprecated secret keys removed; migrate to new `*.secret.existingSecret` pattern.</li><li>RDBMS now available as a first-class secondary storage option in Helm.</li><li>Default REST port changed from 8090 to 8080.</li></ul></td>
-</tr>
-<tr>
-    <td>[Web Modeler](#web-modeler)</td>
-    <td><ul><li>Migrated logging framework from `Logback` to `Log4j2`.</li><li>Migrated embedded web server from `Undertow` to `Tomcat`.</li></ul></td>
-</tr>
 </table>
 
-:::info
+:::info learn more and upgrade
 
-- See [release announcements](/reference/announcements-release-notes/890/890-announcements.md) and [release notes](/reference/announcements-release-notes/890/890-release-notes.md) for more detail on what's included in Camunda 8.9.
+- See [release announcements](/reference/announcements-release-notes/890/890-announcements.md) and [release notes](/reference/announcements-release-notes/890/890-release-notes.md) for a full summary of what's included in Camunda 8.9, including all breaking changes and deprecations, and supported environment changes.
 - Ready to upgrade? See the [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.8 to 8.9.
 
 :::
 
 ## Agentic orchestration {#agentic-orchestration}
-## Helm chart deployment
 
-### Secondary storage must be explicitly configured
-
-The Helm chart no longer defaults to Elasticsearch as the secondary storage type. You must now explicitly set `orchestration.data.secondaryStorage.type` in your `values.yaml` to one of `elasticsearch`, `opensearch`, or `rdbms`. Without this configuration, `helm install` or `helm upgrade` will fail with a validation error.
-
-For engine-only deployments that do not require secondary storage, the new `global.noSecondaryStorage` mode is available.
-
-#### Are you affected?
-
-You are affected if you are upgrading a Self-Managed Helm deployment from 8.8 to 8.9 and have not previously set a secondary storage type explicitly.
-
-### Secret configuration migration
-
-Secret configuration keys that were deprecated in Camunda 8.8 have been removed. Using any of the removed keys will cause a hard failure during Helm operations. Additionally, the `global.secrets.autoGenerated`, `global.secrets.name`, and `global.secrets.annotations` keys have been removed, meaning secrets are no longer automatically generated by the chart.
-
-All secret configuration must now use the new standardized pattern:
-
-- `*.secret.existingSecret` — reference an existing Kubernetes Secret
-- `*.secret.existingSecretKey` — specify the key within the Secret
-- `*.secret.inlineSecret` — provide a plain-text value (non-production only)
-
-#### Are you affected?
-
-You are affected if your `values.yaml` uses any of the legacy secret keys (such as `global.elasticsearch.auth.existingSecret`, `identity.firstUser.password`, `connectors.security.authentication.oidc.existingSecret`, or similar). See the [release announcements](/reference/announcements-release-notes/890/890-announcements.md#helm-chart-deprecated-secret-keys-removed) for the full list.
-
-### RDBMS as secondary storage
-
-The Helm chart now supports relational databases as a first-class secondary storage option alongside Elasticsearch and OpenSearch. Configure database connections directly under `orchestration.data.secondaryStorage.rdbms` in your `values.yaml`.
-
-### Default REST port changed
-
-The Orchestration Cluster's default HTTP port has changed from 8090 to 8080. Update any hardcoded port references in network policies, Ingress rules, or service configuration.
-
-## Web Modeler
-
-Camunda 8.9 refines the AI and MCP connectors introduced in 8.8.
+Build AI agents more easily with enhanced Camunda AI and MCP connectors in 8.9.
 
 ### AI Agent and model configuration improvements
 
@@ -155,31 +118,31 @@ Enhancements make AI interactions more robust, configurable, and compatible with
 
 ### MCP Client connector authentication
 
-The MCP Client connector now supports multiple authentication strategies for connecting to MCP servers:
-
-- OAuth
-- API key
-- Custom header–based authentication
-
-This allows system administrators to enforce organization‑specific security policies for AI tools, integrate with MCP servers that require custom or provider‑specific auth flows, and continue using a consistent connector abstraction while varying the authentication mechanism.
+The MCP Client connector now supports multiple authentication strategies for connecting to MCP servers (OAuth, API key, and custom header–based authentication).
 
 <p class="link-arrow">[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client-connector.md)</p>
+
+### Orchestration Cluster MCP support
+
+The Orchestration Cluster now exposes its operational capabilities via a built-in Model Context Protocol (MCP) server, enabling AI agents and LLM-powered applications to access Camunda data using a standardized interface.
+
+<p class="link-arrow">[Orchestration Cluster MCP Server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md)</p>
+
+## Audit log
+
+Use the new user operations audit log to access a record of operations, including who performed an operation, when it was performed, and on which entities the operation was performed.
+
+Use the audit log to prove compliance, meet governance and regulatory requirements, maintain operational integrity and transparency, and troubleshoot issues.
+
+<p class="link-arrow">[Audit log](/components/audit-log/overview.md)</p>
 
 ## Camunda 8 Run {#camunda8run}
 
 Camunda 8.9 focuses on making Camunda 8 Run simpler to use in local and development scenarios.
 
-### H2 as default secondary storage
-
-Camunda 8 Run now uses H2 as the default secondary data store.
-
-- You can start a fully functional local stack without provisioning Elasticsearch or OpenSearch.
-- Memory footprint is reduced compared to a full external search cluster.
-- Developers can bootstrap quickly with minimal configuration.
-
 ### Improved CLI and configuration experience
 
-The Camunda 8 Run CLI and configuration have been refined to:
+The Camunda 8 Run CLI and configuration is enhanced to:
 
 - Provide more helpful usage output and clearer error messages (for example, around Elasticsearch startup).
 - Include guided Java detection, sensible development defaults (such as disk watermark thresholds), and a clean‑state command for resetting a local environment.
@@ -189,43 +152,17 @@ These changes reduce friction when setting up Camunda 8 Run for the first time, 
 
 <p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
 
-## Cluster configuration and observability {#observability}
+### Secondary storage
 
-Camunda 8.9 improves central configuration and runtime visibility.
+Camunda 8 Run now uses H2 as the default secondary data store.
 
-### Cluster variables for shared configuration
+- You can start a fully functional local stack without provisioning Elasticsearch or OpenSearch.
+- Memory footprint is reduced compared to a full external search cluster.
+- Developers can bootstrap quickly with minimal configuration.
 
-Use cluster variables to define configuration values once and reuse them across processes and tenants using FEEL expressions.
+You can also configure Camunda 8 Run to use any of the supported secondary storage relational databases instead of the default H2 (for example, PostgreSQL, MariaDB, MySQL, Oracle, or Microsoft SQL Server).
 
-| Variable               | Scope                               | Priority |
-| :--------------------- | :---------------------------------- | :------- |
-| `camunda.vars.cluster` | Global                              | Lowest   |
-| `camunda.vars.tenant`  | Tenant                              | Medium   |
-| `camunda.vars.env`     | Merged view with automatic priority | Highest  |
-
-You can use cluster variables to centralize:
-
-- URLs, endpoints, and credentials references.
-- Feature flags and environment names.
-- Shared configuration used across multiple processes or applications.
-
-<p class="link-arrow">[Cluster variables](/components/modeler/feel/cluster-variable/overview.md)</p>
-
-:::note
-Administrators can manage cluster variables via the Orchestration Cluster API, while modelers access them from BPMN and DMN using FEEL.
-:::
-
-### Cluster Metrics endpoint for SaaS clusters
-
-Use the new Cluster Metrics endpoint for SaaS clusters to:
-
-- Expose cluster metrics compatible with Prometheus‑style scraping.
-- Integrate directly with tools such as Prometheus, Datadog, or other metrics backends that support Prometheus endpoints.
-- Gain real‑time visibility into cluster performance and health.
-
-This helps operations teams consolidate Camunda monitoring into existing observability stacks, and standardize dashboards, alerts, and SLOs across environments.
-
-<p class="link-arrow">[Cluster Metrics endpoint](/components/saas/monitoring/cluster-metrics-endpoint/index.md)</p>
+<p class="link-arrow">[Configure Camunda 8 Run secondary storage](/self-managed/quickstart/developer-quickstart/c8run.md#configure-or-switch-secondary-storage-h2-or-elasticsearch)</p>
 
 ## Global user task listeners {#listeners}
 
@@ -235,13 +172,66 @@ Use configuration‑based global user task listeners in your Self‑Managed depl
 - Listeners are active from cluster startup and preserved across backup and restore.
 - All user task lifecycle events emit rich payloads - full variable context at the time of the event, and standardized metadata for traceability and integration.
 
-This is especially useful when you need:
-
-- Organization‑wide auditing and compliance for user task activity.
-- Standardized integrations with notification systems, custom UIs, or analytics platforms.
-- Consistent behavior across all processes and tenants, without per‑process configuration.
-
 <p class="link-arrow">[Global User task Listeners](/components/concepts/global-user-task-listeners.md)</p>
+
+## Helm chart deployment
+
+Important changes to Helm chart deployment in 8.9 are as follows:
+
+### Secondary storage must be explicitly configured
+
+The Helm chart no longer defaults to Elasticsearch as the secondary storage type.
+
+- You must now explicitly set `orchestration.data.secondaryStorage.type` in your `values.yaml` to either `elasticsearch`, `opensearch`, or `rdbms`.
+- Without this configuration, `helm install` or `helm upgrade` will fail with a validation error.
+- For engine-only deployments that do not require secondary storage, the new `global.noSecondaryStorage` mode is available.
+
+#### Are you affected?
+
+You are affected if you are upgrading a Self-Managed Helm deployment from 8.8 to 8.9 and have not previously explicitly set a secondary storage type.
+
+### Secret configuration migration
+
+Secret configuration keys that were deprecated in Camunda 8.8 are now removed in 8.9.
+
+- Using any of these removed keys will result in a hard failure during Helm operations.
+- In addition, the `global.secrets.autoGenerated`, `global.secrets.name`, and `global.secrets.annotations` keys are removed. This means secrets are no longer automatically generated by the Helm chart.
+
+All secret configuration must now use the new standardized pattern:
+
+| Key                          | Description                                       |
+| :--------------------------- | :------------------------------------------------ |
+| `*.secret.existingSecret`    | Reference an existing Kubernetes Secret.          |
+| `*.secret.existingSecretKey` | Specify the key within the Secret.                |
+| `*.secret.inlineSecret`      | Provide a plain-text value (non-production only). |
+
+#### Are you affected?
+
+You are affected if your `values.yaml` uses any of the legacy secret keys (such as `global.elasticsearch.auth.existingSecret`, `identity.firstUser.password`, `connectors.security.authentication.oidc.existingSecret`, or similar).
+
+See the [release announcements](/reference/announcements-release-notes/890/890-announcements.md#helm-chart-deprecated-secret-keys-removed) for the full list of removed keys.
+
+### RDBMS as secondary storage
+
+The Helm chart now supports relational databases as a first-class secondary storage option alongside Elasticsearch and OpenSearch.
+
+You can configure database connections directly under `orchestration.data.secondaryStorage.rdbms` in your `values.yaml`.
+
+### Default REST port changed
+
+The Orchestration Cluster's default HTTP port has changed from 8090 to 8080.
+
+You should update any hardcoded port references in network policies, Ingress rules, or service configuration.
+
+### Helm 4 support
+
+As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
+
+<p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
+
+:::note
+Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
+:::
 
 ## Modeler {#modeler}
 
@@ -285,6 +275,68 @@ You should:
 - Validate the new setup in a staging environment before upgrading production.
 
 <p class="link-arrow">[Web Modeler logging](/self-managed/components/modeler/web-modeler/configuration/logging.md)</p>
+
+## Orchestration Cluster {#ocluster}
+
+Orchestration Cluster changes and highlights in 8.9 include the following:
+
+### Amazon ECS (EC2+Fargate) support
+
+Camunda 8 officially supports running Orchestration Clusters on Amazon Elastic Container Service (Amazon ECS).
+
+This makes it easier and safer for teams that rely on Amazon ECS (including Fargate) to run Camunda 8 in production without needing to adopt Kubernetes (EKS). This feature relies on AWS S3.
+
+<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
+
+### Cluster variables for shared configuration
+
+Use cluster variables to define configuration values once and reuse them across processes and tenants using FEEL expressions.
+
+| Variable               | Scope                               | Priority |
+| :--------------------- | :---------------------------------- | :------- |
+| `camunda.vars.cluster` | Global                              | Lowest   |
+| `camunda.vars.tenant`  | Tenant                              | Medium   |
+| `camunda.vars.env`     | Merged view with automatic priority | Highest  |
+
+You can use cluster variables to centralize:
+
+- URLs, endpoints, and credentials references.
+- Feature flags and environment names.
+- Shared configuration used across multiple processes or applications.
+
+<p class="link-arrow">[Cluster variables](/components/modeler/feel/cluster-variable/overview.md)</p>
+
+### Cluster Metrics endpoint for SaaS clusters
+
+Use the new Cluster Metrics endpoint for SaaS clusters to:
+
+- Expose cluster metrics compatible with Prometheus‑style scraping.
+- Integrate directly with tools such as Prometheus, Datadog, or other metrics backends that support Prometheus endpoints.
+- Gain real‑time visibility into cluster performance and health.
+
+This helps operations teams consolidate Camunda monitoring into existing observability stacks, and standardize dashboards, alerts, and SLOs across environments.
+
+<p class="link-arrow">[Cluster Metrics endpoint](/components/saas/monitoring/cluster-metrics-endpoint/index.md)</p>
+
+### Configure RocksDB memory per-broker
+
+You can now configure RocksDB memory on a per-broker basis instead of per-partition, simplifying capacity planning and aligning with familiar JVM-style sizing.
+
+<p class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+
+### Unified component configuration {#ucc}
+
+In Camunda 8.9, the remaining unified configuration project property changes are complete.
+
+- All 8.9 property changes are documented in the [Camunda 8.9 property changes](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md#camunda-89-property-changes) table.
+- Search, sort, and filter the table to see breaking changes, direct mappings, and new properties.
+- For more information on each property (including default values), see the [property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
+
+<p class="link-arrow">[Property changes in Camunda 8.9](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
+
+:::note
+Only the first partial set of the unified configuration project properties was introduced in Camunda 8.8.
+:::
 
 ## RDBMS secondary storage {#rdbms}
 
@@ -342,37 +394,21 @@ This structure simplifies license‑compliant driver distribution, multi‑datab
 
 Camunda 8.9 updates several platform and environment baselines. Highlights include:
 
-| Environment                  | Description                                                                                                                                                                                                                              |
-| :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Connector runtime            | Virtual threads enabled by default for outbound connectors, improving concurrency and resource usage where supported.                                                                                                                    |
-| Elasticsearch/OpenSearch     | <ul><li><p>Updated minimum versions for Self‑Managed deployments.</p></li><li>Recommended upgrades to Elasticsearch 9.2+ and OpenSearch 3.4+ to align with Camunda 8.9 defaults and benefit from recent database improvements.</li></ul> |
-| Helm and RDBMS configuration | <p><ul><li><p>New RDBMS configuration options in the Helm values file for orchestration data.</p></li><li>Expanded secret and configuration patterns aligned with the Orchestration Cluster architecture.</li></ul></p>                  |
-| Java                         | Certification for OpenJDK 25 across core components and tooling, alongside existing OpenJDK 21–24 support.                                                                                                                               |
-| SaaS regions                 | Support for an additional AWS region (including new European region options) so you can select clusters closer to your data and users.                                                                                                   |
+| Environment                                 | Description                                                                                                                                                                                                                              |
+| :------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Connector runtime                           | Virtual threads enabled by default for outbound connectors, improving concurrency and resource usage where supported.                                                                                                                    |
+| Elasticsearch/OpenSearch                    | <ul><li><p>Updated minimum versions for Self‑Managed deployments.</p></li><li>Recommended upgrades to Elasticsearch 9.2+ and OpenSearch 3.4+ to align with Camunda 8.9 defaults and benefit from recent database improvements.</li></ul> |
+| Helm and RDBMS configuration                | <p><ul><li><p>New RDBMS configuration options in the Helm values file for orchestration data.</p></li><li>Expanded secret and configuration patterns aligned with the Orchestration Cluster architecture.</li></ul></p>                  |
+| Java                                        | Certification for OpenJDK 25 across core components and tooling, alongside existing OpenJDK 21–24 support.                                                                                                                               |
+| [SaaS regions](/components/saas/regions.md) | Support for an additional AWS US East (us-east-2) region in North America (and new European region options) so you can select clusters closer to your data and users.                                                                    |
 
 :::info
-For complete details, including deprecations and breaking changes, see [release announcements](./890-announcements.md) and [supported environments](/reference/supported-environments.md).
-:::
-
-## Unified component configuration {#ucc}
-
-In Camunda 8.9, the remaining unified configuration project property changes are complete.
-
-- All 8.9 property changes are documented in the [Camunda 8.9 property changes](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md#camunda-89-property-changes) table.
-- You can search, sort, and filter the table to show breaking changes, direct mappings, and new properties.
-- For more information on each property (including default values), see the [property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
-
-<p class="link-arrow">[Property changes in Camunda 8.9](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
-
-:::note
-Only the first partial set of the unified configuration project properties was introduced in Camunda 8.8.
+For complete details, including breaking changes and deprecations, see [release announcements](./890-announcements.md) and [supported environments](/reference/supported-environments.md).
 :::
 
 ## Upgrade guides {#upgrade-guides}
 
-Camunda 8.9 lays the foundation for future releases. Upgrading ensures compatibility and provides access to enhanced features.
-
-The following guides offer detailed information on how you can upgrade to Camunda 8.9.
+The following guides offer detailed information on how to upgrade to Camunda 8.9.
 
 <table className="table-callout">
 <tr>
@@ -391,3 +427,27 @@ The following guides offer detailed information on how you can upgrade to Camund
     <td><p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p></td>
 </tr>
 </table>
+
+## Migration from Camunda 7 to Camunda 8
+
+Camunda 8.9 includes the following enhancements to help you migrate from Camunda 7 to Camunda 8.
+
+:::tip
+Start your migration today with the [Camunda 7 to Camunda 8 migration guide](/guides/migrating-from-camunda-7/index.md).
+:::
+
+### Audit log coverage for Camunda 7 to Camunda 8 migrations
+
+The audit log migrator automatically converts Camunda 7 `UserOperationLog` entries to Camunda 8 AuditLog format, preserving the complete history of user operations including who performed actions, what entities were affected (process instances, tasks, variables, decisions), operation types (create, update, delete, assign, complete), timestamps, and annotations.
+
+This ensures uninterrupted audit trail continuity across the migration, enabling customers to meet compliance requirements and maintain operational visibility without manual data reconstruction or workarounds.
+
+<p className="link-arrow">[Data Migrator history migration coverage](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations.md#camunda-8-history-migration-coverage)</p>
+
+### BPMN conditional events
+
+Camunda 8 now supports BPMN conditional events, allowing users to start, continue, or interrupt process execution dynamically based on evaluated conditions.
+
+This enhancement provides first-class support for conditional start, boundary, and intermediate catch events, making process automation more expressive and migration from Camunda 7 smoother.
+
+<p class="link-arrow">[Conditional events](/components/modeler/bpmn/conditional-events/conditional-events.md)</p>

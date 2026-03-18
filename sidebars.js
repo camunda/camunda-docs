@@ -1423,7 +1423,7 @@ module.exports = {
           label: "8.9",
           link: {
             type: "doc",
-            id: "reference/announcements-release-notes/890/890-announcements",
+            id: "reference/announcements-release-notes/890/whats-new-in-89",
           },
           items: [
             "reference/announcements-release-notes/890/whats-new-in-89",
