@@ -572,7 +572,7 @@ cd -
 <details>
 <summary>Review the Elasticsearch deploy.sh script</summary>
 
-```yaml reference
+```bash reference
 https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
 ```
 
@@ -728,7 +728,7 @@ helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
   -f camunda-values.yml \
-  -f ../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
+  -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
   -f region0/camunda-values.yml
 
 helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
@@ -736,7 +736,7 @@ helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
   -f camunda-values.yml \
-  -f ../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
+  -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
   -f region1/camunda-values.yml
 ```
 
