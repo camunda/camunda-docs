@@ -7,7 +7,7 @@ description: "Camunda Copilot is an AI assistant integrated into Web Modeler tha
 
 import CopilotBpmnGeneration from './img/copilot-bpmn-generation.png';
 import CopilotConversationHistory from './img/copilot-conversation-history.png';
-import CopilotMultiAgentArchitecture from './img/copilot-multi-agent-architecture.svg';
+import CopilotMultiAgentArchitecture from './img/multi_agent_architecture.png';
 
 Camunda Copilot is an AI assistant that helps you with BPMN process modeling, FEEL expressions, and form building. It is available in both SaaS and Self-Managed deployments of Web Modeler, and can be used only in the BPMN diagram and form editors.
 
@@ -49,7 +49,7 @@ flowchart TD
     SharedTools --> IntegrationTools["Integration Tools"]
 ```
 
-<img src={CopilotMultiAgentArchitecture} alt="Multi-agent architecture showing user chat, supervisor, specialized agents, and tools" />
+<img src={CopilotMultiAgentArchitecture} alt="Multi-agent architecture showing user chat, supervisor, specialized agents, and tools" style={{width: "100%", maxWidth: "1100px", border: "none", boxShadow: "none", outline: "none"}} />
 
 - **Supervisor Agent**: Routes your requests to the appropriate specialized sub-agent based on the task type.
 - **BPMN Sub-Agent**: Creates, modifies, and explains BPMN process diagrams.
