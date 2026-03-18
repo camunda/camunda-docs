@@ -66,6 +66,7 @@ Review the actions required for the following 8.9 changes:
 | <span className="label-highlight red">Breaking change</span> | [OpenAPI enum extensions](#enum-extensions)                                                                         |
 | <span className="label-highlight red">Breaking change</span> | [OpenAPI type-safety enhancements](#type-safety-enhancements)                                                       |
 | <span className="label-highlight red">Breaking change</span> | [Resource deletion endpoint now returns a response body](#resource-deletion)                                        |
+| <span className="label-highlight red">Breaking change</span> | [Search filter validation errors now return structured error collections](#search-filter-validation-errors)         |
 | <span className="label-highlight red">Breaking change</span> | [Spring Boot 4.0 default for Camunda Spring Boot Starter](#spring-boot)                                             |
 | <span className="label-highlight red">Breaking change</span> | [`versionTag` returns `null` instead of empty string when absent](#version-tag-null)                                |
 | <span className="label-highlight red">Breaking change</span> | [Web Modeler changes](#web-modeler)                                                                                 |
@@ -392,6 +393,43 @@ if (versionTag != null) {
 
 </TabItem>
 </Tabs>
+
+### Search filter validation errors now return structured error collections {#search-filter-validation-errors}
+
+#### Change
+
+REST API search endpoints now collect all filter validation errors and return them together in a single `400 Bad Request` response. Previously, only the first conversion error was returned.
+
+#### Why
+
+This is a bug fix that improves error handling consistency across the REST API. Collecting all validation errors in a single response makes debugging easier.
+
+#### Impact
+
+Search filter validation error responses now contain a list of all validation issues instead of stopping at the first error. The error detail format has changed:
+
+| Aspect                 | Before                                   | After                                                                                                    | Breaking?                              |
+| :--------------------- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------- | :------------------------------------- |
+| HTTP status code       | `400`                                    | `400`                                                                                                    | No                                     |
+| ProblemDetail `title`  | `"Bad Request"`                          | `"INVALID_ARGUMENT"`                                                                                     | Yes                                    |
+| ProblemDetail `detail` | `"Failed to parse date-time: [invalid]"` | `"The provided evaluationDate 'invalid' cannot be parsed as a date according to RFC 3339, section 5.6."` | Yes                                    |
+| Error collection       | Fails on first error                     | Collects all validation errors                                                                           | Yes (response may contain more errors) |
+
+Affected search endpoints include all endpoints that accept advanced search filters with key fields (such as `processInstanceKey`, `processDefinitionKey`, `scopeKey`) or date fields (such as `startDate`, `endDate`, `creationDate`).
+
+**Who is affected?**
+
+- Customers parsing error response bodies (specifically `title` or `detail` fields) for validation errors → **affected**.
+- Customers only checking HTTP status codes → **not affected**.
+- Customers sending valid requests → **not affected** (happy path is unchanged).
+
+#### Action
+
+If your code parses error response bodies from search endpoints for specific validation error messages, update it to handle:
+
+- The `title` field value changed from `"Bad Request"` to `"INVALID_ARGUMENT"`.
+- The `detail` field now contains more descriptive, structured messages.
+- A collection of validation errors in the response body (instead of a single error message).
 
 ## Deprecations
 
