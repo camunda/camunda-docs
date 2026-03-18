@@ -472,23 +472,23 @@ zeebe:
       ...
 ```
 
-Here, the bucket name is set twice. The environment variable `zeebetest1` overrides the configuration file `zeebeOtherBucketName`. See [Spring externalized configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html) for precedence details.
+Here, the bucket name is set twice. The environment variable `zeebetest1` overrides `zeebeOtherBucketName` from the configuration file. See [Spring externalized configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html) for precedence details.
 
 ### Limitations
 
-The `configuration` value is written as a full file replacement. It is not merged with defaults from the chart or container image.
+`configuration` is written as a full file replacement. It is not merged with defaults from the chart or container image.
 
-- During upgrades, the component may fail to start until your custom file is updated to match any new required configuration schema.
-- Multiline values must use a YAML block scalar (`|` or `|-`) to avoid Helm/YAML parsing issues.
-- If the same setting is defined in both `env` and `configuration`, environment variables take precedence at runtime.
+- During upgrades, the component may fail to start until your custom file matches any new required schema.
+- Multiline values must use a YAML block scalar (`|` or `|-`) to avoid Helm/YAML parse issues.
+- If the same setting is defined in both `env` and `configuration`, `env` takes precedence at runtime.
 
 ## Component-specific notes
 
-Some components deviate from the standard `application.yaml`/`log4j2.xml` behavior described above.
+Some components deviate from the standard `application.yaml`/`log4j2.xml` behavior.
 
 ### Optimize
 
-Optimize does not use Spring Boot's `application.yaml`. It reads from `environment-config.yaml`. When you set `optimize.configuration`, the provided content is written to `environment-config.yaml` inside the container.
+Optimize does not use Spring Boot's `application.yaml`. It reads `environment-config.yaml`. Setting `optimize.configuration` writes the provided content to `environment-config.yaml` inside the container.
 
 ```yaml
 optimize:
@@ -505,7 +505,7 @@ optimize:
             httpPort: 9200
 ```
 
-For `optimize.extraConfiguration`, a common use case is supplying a custom `environment-logback.xml` (not `log4j2.xml`):
+For `optimize.extraConfiguration`, a common use case is a custom `environment-logback.xml` (not `log4j2.xml`):
 
 ```yaml
 optimize:
@@ -520,7 +520,7 @@ For the full list of Optimize configuration options, see [Optimize system config
 
 ### Console
 
-Console does not support `extraConfiguration`. Instead, use `console.overrideConfiguration`, which merges into the generated Console configuration (or into the configuration supplied through `console.configuration`). Use `overrideConfiguration` for Console-specific properties such as `customerId`, cluster `tags`, and `custom-properties`:
+Console does not support `extraConfiguration`. Use `console.overrideConfiguration`, which merges into the generated Console configuration (or into configuration supplied via `console.configuration`). Use it for Console-specific properties such as `customerId`, cluster `tags`, and `custom-properties`:
 
 ```yaml
 console:
