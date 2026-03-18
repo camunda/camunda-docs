@@ -9,12 +9,6 @@ Camunda Copilot uses specialized tools to interact with your BPMN diagrams, form
 
 For a high-level overview, see [Copilot overview](copilot-overview.md).
 
-## How to use this page
-
-- Start with the tool group that matches your task (BPMN and form modeling, frontend/project operations, and so on).
-- Check access requirements before using a tool.
-- Use the tool description to decide whether to query, mutate, lay out, or validate.
-
 ## Permission model
 
 Tools are categorized by access requirements:
@@ -22,18 +16,7 @@ Tools are categorized by access requirements:
 - **Read**: Available to all users, including users with read-only access (`READ` or `COMMENT` permissions).
 - **Write**: Available only to users with write access. These tools are hidden from read-only users.
 
-## Common tasks
-
-- [Inspect or analyze a BPMN diagram](#bpmn-tools)
-- [Create or modify BPMN structure](#mutation-tools-write)
-- [Fix diagram layout issues](#layout-tools-write)
-- [Validate BPMN or form artifacts](#validation-tools)
-- [Create, update, or bind forms](#form-tools)
-- [Work with project files and UI state](#frontend-tools)
-
 ## BPMN tools
-
-These are modeling tools used by the BPMN sub-agent to create, modify, and analyze BPMN process diagrams.
 
 ### Query tools
 
@@ -132,10 +115,6 @@ These are modeling tools used by the BPMN sub-agent to create, modify, and analy
 
 ## Form tools
 
-These are modeling tools used by the Form sub-agent to create, modify, and validate Camunda Forms.
-
-Use this group when you need to validate form schema, update components, summarize form structure, or bind forms to BPMN user tasks.
-
 <table>
 	<colgroup>
 		<col style={{width: "35%"}} />
@@ -155,30 +134,6 @@ Use this group when you need to validate form schema, update components, summari
 		<tr><td>Summarize Form JSON</td><td>Returns a summary of form fields, types, and requirements.</td><td>Read</td></tr>
 		<tr><td>Get form binding from task</td><td>Returns `formId`/`formKey`, binding type, and version from a user task form binding.</td><td>Read</td></tr>
 		<tr><td>Bind form to task</td><td>Sets `zeebe:formDefinition` on a user task using `formId` or `formKey` and binding settings.</td><td>Write</td></tr>
-	</tbody>
-</table>
-
-## General tools
-
-These tools are available to all sub-agents for support operations.
-
-Use this group to keep backend and UI artifact state synchronized after changes.
-
-<table>
-	<colgroup>
-		<col style={{width: "35%"}} />
-		<col style={{width: "57%"}} />
-		<col style={{width: "8%"}} />
-	</colgroup>
-	<thead>
-		<tr>
-			<th style={{textAlign: "left"}}>Tool</th>
-			<th style={{textAlign: "left"}}>Description</th>
-			<th style={{textAlign: "left"}}>Access</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr><td>Sync artifact state</td><td>Synchronizes BPMN/Form/DMN state from backend context to the UI.</td><td>Write</td></tr>
 	</tbody>
 </table>
 
@@ -202,7 +157,8 @@ Use this group when you need user-visible project/file operations, UI validation
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>Layout BPMN XML </td><td>Applies automatic layout to BPMN XML and returns updated element positioning.</td><td>Write</td></tr>
+		<tr><td>Sync artifact state</td><td>Synchronizes BPMN/Form/DMN state from backend context to the UI.</td><td>Write</td></tr>
+		<tr><td>Layout BPMN XML</td><td>Applies automatic layout to BPMN XML and returns updated element positioning.</td><td>Write</td></tr>
 		<tr><td>Sync artifact state UI</td><td>Reads current BPMN/DMN/Form content from the UI into agent context.</td><td>Read</td></tr>
 		<tr><td>Get file content from file ID</td><td>Returns file content, name, and type for a given file ID.</td><td>Read</td></tr>
 		<tr><td>Create file in project</td><td>Creates a project file with name, type, and content (for example BPMN, DMN, FORM, or MARKDOWN).</td><td>Write</td></tr>
