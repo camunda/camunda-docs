@@ -1068,6 +1068,21 @@ Camunda 8.9 adds a standardized JDBC driver management system for manual install
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Kubernetes Gateway API support
+
+Camunda 8.9 adds support for the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/) as an alternative to Ingress for routing external traffic to Camunda components.
+
+Setting `global.gateway.enabled: true` provisions `Gateway`, `HTTPRoute`, and `GRPCRoute` resources. Configure the gateway class, listeners, and per-component route options under `global.gateway.*` in your `values.yaml`.
+
+</div>
+</div>
+
 ## Identity
 
 <div className="release-announcement-row">
@@ -1088,6 +1103,97 @@ Admin is the cluster-level admin UI hosting identity management and other admini
 - Documentation paths are updated: `/components/identity/` is now `/components/admin/`.
 
 <p className="link-arrow">[Introduction to Admin](/components/admin/admin-introduction.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: New restore options
+
+Camunda 8.9 adds new configuration options for backup restore operations in the Helm chart, giving operators more control over restore behavior via `values.yaml`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: TLS JKS keystore password configuration
+
+Camunda 8.9 adds `global.elasticsearch.tls.jks.password` and `global.opensearch.tls.jks.password` fields, allowing you to set the JKS keystore password directly in `values.yaml` instead of using workarounds.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: App Integrations exporter configuration
+
+Camunda 8.9 adds configuration options for the App Integrations exporter in the Helm chart's `values.yaml`, allowing you to configure how process data is exported for application integrations.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Helm template support for pod labels, annotations, and Ingress host
+
+`podLabels`, `podAnnotations`, and `global.ingress.host` now support Go template expressions (`tpl`). This enables dynamic configurations such as DataDog APM integration labels and environment-driven GitOps Ingress hostnames.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--updated">Updated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Headless service exposes public API ports
+
+The Orchestration component's headless service now includes gRPC and HTTP ports, enabling client-side load balancing for applications that connect directly to individual cluster members.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--updated">Updated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Connectors OIDC issuer URI preferred over token URL
+
+The Connectors component now uses the OIDC issuer URI by preference, making `tokenUrl` optional when `issuerUri` is configured. This simplifies OIDC integration by allowing the token endpoint to be discovered automatically.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--updated">Updated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Persistent web sessions enabled for RDBMS mode
+
+When using RDBMS as the secondary storage type, web sessions now persist across pod restarts. Previously, sessions were discarded, requiring users to re-authenticate after each restart.
 
 </div>
 </div>
