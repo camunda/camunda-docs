@@ -78,7 +78,7 @@ The two ways of configuring global listeners can be used at the same time, howev
 
 You can configure the global user task listeners through the [Unified Configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners) by setting the appropriate properties under the configuration path `camunda.cluster.global-listeners.user-task`.
 
-Each listener entry can be configured with the properties described in the [Global listener definition](#global-listener-definition) section above, except for the `source` property which is automatically set to `CONFIGURATION` by the system.
+Each listener entry can be configured with the properties described in the [Global listener definition](#global-listener-definition) section above, except for the `source` property, which is automatically set to `CONFIGURATION` by the system. Any provided `source` value will be ignored.
 
 #### How the configuration is validated
 
@@ -86,14 +86,18 @@ If you provide an invalid configuration, the system attempts to automatically re
 
 The following validation rules are applied automatically on startup:
 
-- If a listener is missing the required `id`, `type`, or `event-types` properties, it is removed and ignored.
-- If a listener defines invalid event types, those event types are removed. If all event types of a listener are invalid, the listener is removed and ignored.
-  - Note that event types in the configuration are treated case-insensitively, so for example `Creating` and `creating` are both valid, but `create` is not.
+- If a listener is missing the required `id`, `type`, or `event-types` properties, it is removed.
+- If a listener defines invalid event types, those event types are removed. If all event types are invalid, the listener is removed.
+  - Valid event types are: `creating`, `assigning`, `updating`, `completing`, `canceling`, or the special value `all`. Event type matching is case-insensitive, so `Creating` and `creating` are both valid, but `create` is not.
 - If a listener defines duplicate event types, the duplicates are removed and only one instance of each event type is kept.
-- If a listener defines both the special `all` value and a normal event type for `event-types`, the configuration is corrected to include only `all`.
-- If a listener defines invalid retry values, i.e., non-numeric or negative, the listener is removed and ignored.
+- If a listener defines both the special `all` value and a normal event type for `event-types`, the configuration is corrected to include only `all`. This ensures the listener catches all events as intended.
+- If a listener defines invalid retry values (non-numeric, negative, or zero), it is removed. Valid retry values are positive integers.
 
-In all the above cases, a warning is written to the Orchestration Cluster startup log, identifying the problem and its location in the configuration.
+In all the above cases, a warning is written to the Orchestration Cluster startup log identifying the problem location. Invalid listeners are removed while valid ones remain active.
+
+:::note
+Listeners defined through the API are not subject to this validation.
+:::
 
 #### Example configuration
 
