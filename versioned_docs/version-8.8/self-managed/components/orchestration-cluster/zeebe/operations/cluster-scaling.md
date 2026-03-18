@@ -12,6 +12,7 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 
 - Partition count can only be increased and not decreased.
 - Backups are disallowed during partition scaling but can be taken before or after. A backup taken before scaling can only be restored to a cluster with the same partition count. After restoring, you can request scaling again to the desired partition count.
+- When scaling up the number of partitions, consider the resulting RocksDB size per partition. Allocate **at least 32 MB of RocksDB memory per partition** after scaling. For details, see the [resource planning guide](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md).
   :::
 
 ## Considerations
@@ -813,7 +814,7 @@ The response is a JSON object. See detailed specs [here](https://github.com/camu
 - `changeId`: The ID of the changes initiated to scale the cluster. This can be used to monitor the progress of the scaling operation. The ID typically increases so new requests get a higher ID than the previous one.
 - `currentTopology`: A list of current brokers and the partition distribution.
 - `plannedChanges`: A sequence of operations that has to be executed to achieve scaling.
-- `expectedToplogy`: The expected list of brokers and the partition distribution once the scaling is completed.
+- `expectedTopology`: The expected list of brokers and the partition distribution once the scaling is completed.
 
 <details>
   <summary>Example response</summary>

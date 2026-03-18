@@ -33,7 +33,7 @@ Before running task testing, ensure you have:
 To test a task in Web Modeler:
 
 1. Select the BPMN task you want to test.
-2. Open the **Test** tab in the bottom panel.
+2. Open the **Task testing** tab in the bottom panel.
 3. In the left pane, define the process variables in JSON format to simulate the process context.
 
 ### Tips for defining process variables

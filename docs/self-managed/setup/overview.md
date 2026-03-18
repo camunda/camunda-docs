@@ -11,7 +11,7 @@ Use this overview to choose an installation approach for Camunda 8 Self-Managed 
 ## Production installations
 
 :::note
-Starting in 8.9-alpha3, Camunda 8 Run uses H2 as the default secondary storage out-of-the-box. Elasticsearch remains bundled and supported as an optional alternative; OpenSearch is supported for Self‑Managed deployments but is not bundled in Camunda 8 Run. See the [Camunda 8 Run configuration docs](../quickstart/developer-quickstart/c8run.md) for enabling Elasticsearch if required.
+Starting in 8.9, Camunda 8 Run uses H2 as the default secondary storage out of the box. Elasticsearch remains a supported alternative in Camunda 8 Run. OpenSearch and RDBMS-based secondary storage are supported in Self-Managed deployments. See the [Camunda 8 Run configuration docs](../quickstart/developer-quickstart/c8run.md) for backend configuration details.
 :::
 
 - [**Helm/Kubernetes**](/self-managed/deployment/helm/install/quick-install.md) (Recommended): We recommend using Kubernetes and Helm to run Camunda 8 Self-Managed in production. With the right configuration, Camunda 8 Self-Managed can be deployed on any Certified Kubernetes distribution (cloud or on-premises). We also officially support a variety of providers like [Red Hat OpenShift](../../self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md) and [Amazon EKS](../../self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md).
@@ -32,7 +32,7 @@ Choosing the right storage configuration is a critical step for production deplo
 
 Guidance:
 
-- Prefer managed or vendor-supported infrastructure for production deployments to reduce operational overhead and improve reliability (for example, managed Elasticsearch/OpenSearch services or managed RDBMS).
+- Prefer managed services or operator-based infrastructure for production deployments to reduce operational overhead and improve reliability (for example, managed secondary storage services such as Elasticsearch/OpenSearch or managed RDBMS). Choose the backend that best fits your operational model, performance profile, and compliance requirements.
 - Benchmark and size your environment using [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and the Camunda benchmark project referenced there.
 
 :::info

@@ -63,6 +63,10 @@ For example, build an invoice-processing AI agent in Camunda with BPMN, using an
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
 
+### Audit log
+
+The [audit log](../components/audit-log/overview.md) is a record of operations, including who performed them, when, and on which entities. Use the audit log to prove compliance, meet governance and regulatory requirements, maintain operational integrity and transparency, and troubleshoot issues.
+
 ## B
 
 ### Backpressure
@@ -131,6 +135,14 @@ Connector types:
 - [Inbound](#inbound-connector)
 - [Protocol](#protocol-connector)
 
+### Connector runtime
+
+The [connector runtime](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) is the execution environment responsible for running connector logic, resolving authentication, handling secrets, and communicating with external systems. In SaaS, the runtime is fully managed. In Self-Managed environments, the runtime can run inside the cluster or in hybrid mode.
+
+### Connector template
+
+A [connector template](/components/connectors/custom-built-connectors/connector-templates.md) is a type of element template used to configure connectors in Modeler. Templates define UI fields, metadata, and bindings required for connector operations. Modeler internally labels all templates as element templates, but connector templates are the subset specifically used to configure connectors.
+
 ### Context window
 
 The amount of text (in [tokens](#token-ai)) a model can consider at once when generating a response. A larger context window allows the model to handle longer inputs.
@@ -167,7 +179,7 @@ A process cannot execute unless it is known by the [broker](#zeebe-broker). Depl
 
 ### Elasticsearch/OpenSearch
 
-Elasticsearch and OpenSearch are search and analytics engines commonly used as secondary storage backends for indexing and querying exported runtime data. They are populated with process orchestration data and consumed by components such as Operate, Tasklist, and Optimize.
+Elasticsearch and OpenSearch are search and analytics engines commonly used as document-store secondary storage backends for indexing and querying exported runtime data. They are populated with process orchestration data and consumed by components such as Operate, Tasklist, and Optimize.
 
 - [Elasticsearch and OpenSearch](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md)
 
@@ -527,7 +539,7 @@ Secondary storage is used for indexing, search, analytics, and long-term retenti
 
 Examples of secondary storage backends include:
 
-- [Elasticsearch/OpenSearch](#elasticsearchopensearch)
+- [Document store (Elasticsearch/OpenSearch)](#elasticsearchopensearch)
 - [RDBMS](#rdbms)
 
 - [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)

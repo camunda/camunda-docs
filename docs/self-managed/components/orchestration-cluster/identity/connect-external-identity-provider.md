@@ -106,7 +106,40 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
 </TabItem>
 </Tabs>
 
-- **Redirect URI**: By default, the redirect URI is `http://localhost:8080/sso-callback`. Update this if your deployment uses a different hostname or port.
+## Redirect URI
+
+Use the redirect URI to define where the Identity Provider (IdP) sends users back after successful authentication.
+
+By default, the redirect URI is:
+
+`{baseUrl}/sso-callback`
+
+At runtime, `{baseUrl}` resolves to the URL used to access your Orchestration Cluster deployment. In most cases, you do not need to change this value.
+
+You may need to customize the redirect URI in advanced scenarios, such as:
+
+- When your deployment is accessed through reverse proxies or load balancers
+- When you need to pass context information while configuring multiple OIDC providers
+
+Regardless of customization, the redirect URI must always point to the `/sso-callback` endpoint of your Orchestration Cluster deployment.
+
+Most Identity Providers require you to explicitly configure allowed redirect URIs for security reasons. Ensure the value configured in your IdP exactly matches the redirect URI used here, whether it is static or dynamically resolved using `{baseUrl}`.
+
+:::note
+
+`{baseUrl}` is dynamically resolved for each request based on the URL used to access the Orchestration Cluster instance. It is composed of the following parts:
+
+- `{scheme}`: The transport scheme (`http` or `https`)
+- `{host}`: The hostname used to connect to the instance
+- `{port}`: The port number, if specified (omitted if not used)
+- `{contextPath}`: The context path of the Orchestration Cluster instance, if configured (omitted if none)
+
+For example:
+
+- Accessing the instance via `https://camunda.acme.com/identity` resolves `{baseUrl}` to `https://camunda.acme.com`
+- Accessing the instance via `https://services.acme.com:18080/camunda/` resolves `{baseUrl}` to `https://services.acme.com:18080/camunda`
+
+:::
 
 - **Username claim**: By default, the `sub` (subject) claim from the token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your IdP includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (for example, `$['camundaorg']['username']`).
 
@@ -461,11 +494,168 @@ private static final String clusterRestLocal = "http://localhost:8080";
 </TabItem>
 </Tabs>
 
+## Logout handling (RP-initiated logout)
+
+When Orchestration Cluster Identity is configured with an external OIDC-compliant identity provider (IdP), you can enable relying party (RP)-initiated logout so that signing out of Camunda also triggers a logout at the IdP.
+
+:::note
+This applies to Self-Managed Orchestration Clusters only. RP-initiated logout is not supported in SaaS.
+:::
+
+### Configure RP-initiated logout
+
+#### Enable or disable RP-initiated logout
+
+Enable or disable RP-initiated logout using the following setting:
+
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
+<TabItem value="yaml">
+
+```yaml
+camunda:
+  security:
+    authentication:
+      oidc:
+        idp-logout-enabled: true|false
+```
+
+</TabItem>
+
+<TabItem value="env">
+
+```
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_IDPLOGOUTENABLED=<true|false>
+```
+
+</TabItem>
+
+</Tabs>
+
+:::note
+RP-initiated logout is enabled by default for all new deployments.
+:::
+
+**Logout behavior depends on this setting:**
+
+- **Orchestration Cluster-only logout (RP-initiated logout disabled)**
+  - Clears only the Orchestration Cluster session.
+  - No request is sent to the IdP, so the user remains signed in there.
+
+- **RP-initiated logout (enabled)** (default for new 8.9+ installations)
+  - Clears the Orchestration Cluster session and calls the IdP logout endpoint.
+  - Signs the user out of Orchestration Cluster Identity, Tasklist, Operate, and the IdP.
+  - Redirects the user to the login page of the Camunda app where logout was initiated.
+  - Logout behavior for other applications using the same IdP depends on the IdP’s RP-initiated logout implementation.
+
+Existing Self-Managed deployments upgraded from earlier versions can continue to use Orchestration Cluster-only logout. To preserve the previous behavior after upgrading, explicitly set the `IDPLOGOUTENABLED` configuration property to `false`.
+
+#### Configure the IdP logout endpoint
+
+By default, Identity retrieves the IdP logout endpoint from the OIDC discovery document (the `.well-known` endpoint). If you do not use `issuer-uri` and instead configure endpoints manually, define the logout endpoint alongside `authorization-uri`, `token-uri`, and `jwk-set-uri`, as shown in the [special OIDC configuration cases](./special-oidc-cases.md):
+
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml'}, {label: 'Environment variables', value: 'env'}]}>
+
+<TabItem value="yaml">
+
+```yaml
+camunda.security:
+  authentication:
+    oidc:
+      authorization-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/authorize
+      token-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/token
+      jwk-set-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/discovery/v2.0/keys
+      end-session-endpoint-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/logout
+```
+
+</TabItem>
+
+<TabItem value="env">
+
+```bash
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ENDSESSIONENDPOINTURI=https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/logout
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUTHORIZATIONURI=https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/authorize
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_TOKENURI=https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/token
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI=https://login.microsoftonline.com/<YOUR_TENANT_ID>/discovery/v2.0/keys
+```
+
+</TabItem>
+
+</Tabs>
+
+#### Configure the post-logout redirect URL in the IdP
+
+To ensure users are redirected correctly after logout, configure a post-logout redirect URL in your IdP. The post-logout URL is the Camunda hostname, context path (if applicable) plus `/post-logout`.
+
+For example, if Identity is accessible at `http://localhost:8080`, configure the following post-logout redirect URL in your IdP:
+
+```
+http://localhost:8080/post-logout
+```
+
+For hostname and context path configuration, adjust the URL accordingly. For example, if your Camunda deployment is accessible at `http://localhost:8080/orchestration`, configure the following post-logout redirect URL in the IdP:
+
+```
+http://localhost:8080/orchestration/post-logout
+```
+
 ## Troubleshooting
 
-- Check the logs for authentication errors.
+### General authentication issues
+
+If authentication does not work as expected:
+
+- Check your application logs for authentication errors.
 - Ensure your IdP client is configured to allow the specified redirect URI.
 - Verify the claim names match your IdP's token claims.
+
+### RP-initiated logout
+
+If RP-initiated logout does not behave as expected, check your application logs for the following messages.
+
+#### Unable to determine end-session endpoint
+
+If you configure OIDC using explicit authorization, token, or logout URIs instead of the issuer URI, and do not specify a logout endpoint, the following message is logged:
+
+```
+Unable to determine end-session endpoint for OIDC logout. Falling back to {baseLogoutUrl} without logout hint.
+```
+
+Ensure you either:
+
+- Configure the `issuer-uri` so Identity can retrieve the logout endpoint from the OIDC discovery document, or
+- Explicitly set the `end-session-endpoint-uri`.
+
+#### No client registration found
+
+If the `registrationId` used for logout (the identifier of the configured OIDC client registration) cannot be resolved, Identity cannot construct an RP-initiated logout request. The following message is logged:
+
+```
+No client registration found for id `{registrationId}`. Falling back to {baseLogoutUrl} without logout hint.
+```
+
+Verify that the configured client registration ID matches the OIDC client definition in your IdP configuration.
+
+#### Missing login_hint / logout_hint
+
+Some IdPs require a `logout_hint` parameter for RP-initiated logout. Identity derives `logout_hint` from the OIDC user's `login_hint` claim. This claim typically contains a user identifier, such as a username or email, which the IdP uses to identify the session to terminate.
+
+If no `login_hint` is present, the following message is logged and the logout request is sent without a logout hint:
+
+```
+No 'login_hint' claim found in OIDC user. Falling back to '{baseLogoutUrl}' without logout hint.
+```
+
+Ensure that your IdP includes a `login_hint` claim in the ID token if your IdP requires `logout_hint` during logout.
+
+#### No post-logout redirect URL configured
+
+You must explicitly configure the post-logout redirect URL in your IdP. If no valid post-logout redirect URL is available, Identity falls back to a default path. In this case, the following message is logged:
+
+```
+No valid post-logout redirect URL found in session, falling back to default: '/'
+```
+
+Ensure that the post-logout redirect URL (`<camunda-host>/post-logout`) is registered in your IdP configuration.
 
 ## Further resources
 

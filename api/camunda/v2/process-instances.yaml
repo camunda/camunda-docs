@@ -270,7 +270,7 @@ paths:
       description: |-
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Creates a batch operation to resolve multiple incidents of a process instance.
       parameters:
@@ -356,7 +356,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Cancels multiple running process instances.
         Since only ACTIVE root instances can be cancelled, any given filters for state and
@@ -397,7 +397,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Resolves multiple instances of process instances.
         Since only process instances with ACTIVE state can have unresolved incidents, any given
@@ -438,7 +438,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Migrate multiple process instances.
         Since only process instances with ACTIVE state can be migrated, any given
@@ -479,7 +479,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Modify multiple process instances.
         Since only process instances with ACTIVE state can be modified, any given
@@ -522,7 +522,7 @@ paths:
       description: |-
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Deletes a process instance. Only instances that are completed or terminated can be deleted.
       parameters:
@@ -573,7 +573,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Delete multiple process instances. This will delete the historic data from secondary storage.
         Only process instances in a final state (COMPLETED or TERMINATED) can be deleted.
@@ -760,8 +760,8 @@ components:
         Instructions for creating a process instance. The process definition can be specified
         either by id or by key.
       oneOf:
-        - $ref: "#/components/schemas/ProcessInstanceCreationInstructionById"
         - $ref: "#/components/schemas/ProcessInstanceCreationInstructionByKey"
+        - $ref: "#/components/schemas/ProcessInstanceCreationInstructionById"
     ProcessInstanceCreationInstructionById:
       type: object
       title: Process creation by id
@@ -786,7 +786,10 @@ components:
           type: object
           additionalProperties: true
         tenantId:
-          description: The tenant id of the process definition.
+          description: |
+            The tenant id of the process definition.
+            If multi-tenancy is enabled, provide the tenant id of the process definition to start a
+            process instance of. If multi-tenancy is disabled, don't provide this parameter.
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/TenantId"
         operationReference:
@@ -811,9 +814,10 @@ components:
             $ref: "#/components/schemas/ProcessInstanceCreationRuntimeInstruction"
         awaitCompletion:
           description: |
-            Wait for the process instance to complete. If the process instance completion does
-            not occur within the requestTimeout, the request will be closed. This can lead to a 504
-            response status. Disabled by default.
+            Wait for the process instance to complete. If the process instance does not complete
+            within the request timeout limit, a 504 response status will be returned. The process
+            instance will continue to run in the background regardless of the timeout. Disabled by
+            default.
           type: boolean
           default: false
         fetchVariables:
@@ -833,6 +837,8 @@ components:
           default: 0
         tags:
           $ref: "identifiers.yaml#/components/schemas/TagSet"
+        businessId:
+          $ref: "identifiers.yaml#/components/schemas/BusinessId"
     ProcessInstanceCreationInstructionByKey:
       type: object
       title: Process creation by key
@@ -854,8 +860,8 @@ components:
           default: -1
         variables:
           description: |
-            JSON object that will instantiate the variables for the root variable scope
-            of the process instance.
+            Set of variables as JSON object to instantiate in the root variable scope of the process
+            instance. Can include nested complex objects.
           type: object
           additionalProperties: true
         startInstructions:
@@ -877,16 +883,20 @@ components:
           items:
             $ref: "#/components/schemas/ProcessInstanceCreationRuntimeInstruction"
         tenantId:
-          description: The tenant id of the process definition.
+          description: |
+            The tenant id of the process definition.
+            If multi-tenancy is enabled, provide the tenant id of the process definition to start a
+            process instance of. If multi-tenancy is disabled, don't provide this parameter.
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/TenantId"
         operationReference:
           $ref: "keys.yaml#/components/schemas/OperationReference"
         awaitCompletion:
           description: |
-            Wait for the process instance to complete. If the process instance completion does
-            not occur within the requestTimeout, the request will be closed. This can lead to a 504
-            response status. Disabled by default.
+            Wait for the process instance to complete. If the process instance does not complete
+            within the request timeout limit, a 504 response status will be returned. The process
+            instance will continue to run in the background regardless of the timeout. Disabled by
+            default.
           type: boolean
           default: false
         requestTimeout:
@@ -906,6 +916,8 @@ components:
             type: string
         tags:
           $ref: "identifiers.yaml#/components/schemas/TagSet"
+        businessId:
+          $ref: "identifiers.yaml#/components/schemas/BusinessId"
     ProcessInstanceCreationStartInstruction:
       type: object
       required:
@@ -952,6 +964,7 @@ components:
         - tenantId
         - variables
         - processInstanceKey
+        - tags
       type: object
       properties:
         processDefinitionId:
@@ -989,6 +1002,11 @@ components:
             needs a process instance key (e.g. CancelProcessInstanceRequest).
         tags:
           $ref: "identifiers.yaml#/components/schemas/TagSet"
+        businessId:
+          nullable: true
+          description: Business id as provided on creation.
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/BusinessId"
     ProcessInstanceSearchQuerySortRequest:
       type: object
       properties:
@@ -1009,6 +1027,7 @@ components:
             - state
             - hasIncident
             - tenantId
+            - businessId
         order:
           $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
@@ -1096,6 +1115,10 @@ components:
           description: The incident error hash code, associated with this process.
         tags:
           $ref: "identifiers.yaml#/components/schemas/TagSet"
+        businessId:
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+          description: The business id associated with the process instance.
     ProcessDefinitionStatisticsFilter:
       description: Process definition statistics search filter.
       allOf:
@@ -1224,28 +1247,41 @@ components:
         - processDefinitionId
         - processDefinitionName
         - processDefinitionVersion
+        - processDefinitionVersionTag
         - startDate
+        - endDate
         - state
         - hasIncident
         - tenantId
         - processInstanceKey
         - processDefinitionKey
+        - parentProcessInstanceKey
+        - parentElementInstanceKey
+        - rootProcessInstanceKey
+        - tags
+        - businessId
       properties:
         processDefinitionId:
           $ref: "identifiers.yaml#/components/schemas/ProcessDefinitionId"
         processDefinitionName:
           type: string
+          nullable: true
           description: The process definition name.
         processDefinitionVersion:
           type: integer
           format: int32
+          description: The process definition version.
         processDefinitionVersionTag:
-          type: string
           description: The process definition version tag.
+          nullable: true
+          type: string
         startDate:
           type: string
           format: date-time
+          description: The start time of the process instance.
         endDate:
+          description: The completion or termination time of the process instance.
+          nullable: true
           type: string
           format: date-time
         state:
@@ -1264,17 +1300,30 @@ components:
             - $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"
           description: The process definition key.
         parentProcessInstanceKey:
+          description: The parent process instance key.
+          nullable: true
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
-          description: The parent process instance key.
         parentElementInstanceKey:
+          description: The parent element instance key.
+          nullable: true
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
-          description: The parent element instance key.
         rootProcessInstanceKey:
-          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         tags:
           $ref: "identifiers.yaml#/components/schemas/TagSet"
+        businessId:
+          description: The business id associated with this process instance.
+          nullable: true
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/BusinessId"
     CancelProcessInstanceRequest:
       type: object
       nullable: true
@@ -1307,6 +1356,8 @@ components:
           description: The name of the process definition (fall backs to the process definition id if not available).
     ProcessInstanceSequenceFlowsQueryResult:
       description: Process instance sequence flows query response.
+      required:
+        - items
       type: object
       properties:
         items:
@@ -1317,6 +1368,8 @@ components:
     ProcessInstanceSequenceFlowResult:
       description: Process instance sequence flow result.
       type: object
+      required:
+        - rootProcessInstanceKey
       properties:
         sequenceFlowId:
           type: string
@@ -1326,7 +1379,13 @@ components:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The key of this process instance.
         rootProcessInstanceKey:
-          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         processDefinitionKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"
@@ -1343,6 +1402,8 @@ components:
           $ref: "identifiers.yaml#/components/schemas/TenantId"
     ProcessInstanceElementStatisticsQueryResult:
       description: Process instance element statistics query response.
+      required:
+        - items
       type: object
       properties:
         items:
@@ -1424,9 +1485,7 @@ components:
             Set to -1 to create the new element instance within an existing element instance of the
             flow scope. If multiple instances of the target element's flow scope exist, choose one
             specifically with this property by providing its key.
-          oneOf:
-            - type: string
-              default: "-1"
+          allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
       required:
         - elementId
@@ -1549,8 +1608,6 @@ components:
             flow scope. If multiple instances of the target element's flow scope exist, choose one
             specifically with this property by providing its key.
           oneOf:
-            - type: string
-              default: "-1"
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
       required:
         - ancestorElementInstanceKey

@@ -2,10 +2,12 @@
 id: public-api
 title: Camunda 8 public API
 sidebar_label: Public API
-description: Understand the Camunda 8 public API, its stability guarantees under Semantic Versioning (SemVer), and the policies governing API changes and versioning.
+description: Learn what’s included in Camunda 8's public API and its stability guarantees under Semantic Versioning (SemVer), API changes and versioning policies, and what to expect when upgrading.
 ---
 
-What’s included in Camunda 8's public API, the policies around versioning, and what to expect when upgrading.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## What is the public API?
 

@@ -5,7 +5,7 @@ title: Keycloak compatibility considerations for Camunda
 description: Review Keycloak upgrade considerations and compatibility requirements when used with Camunda.
 ---
 
-Review Keycloak upgrade considerations and compatibility requirements when used with Camunda
+Review Keycloak upgrade considerations and compatibility requirements when used with Camunda.
 
 ## About
 
@@ -20,5 +20,5 @@ When upgrading Keycloak, you must reuse the existing Keycloak database.
 
 **Do not** upgrade by creating a new Keycloak instance and re-importing users from external identity providers (for example, LDAP).
 
-Doing so will generate new internal Keycloak IDs, which can prevent users from accessing existing data such as Optimize collections and [Web Modeler projects](self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data.md).
+Doing so will generate new internal Keycloak IDs, which can prevent users from accessing existing data such as Optimize collections and [Web Modeler projects](/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data.md).
 :::

@@ -47,29 +47,45 @@ As the exporter is packaged with Zeebe, it is not necessary to specify a `jarPat
 
 The exporter can be enabled by configuring it with the classpath in the broker settings.
 
-For example:
+For a Spring Boot application or Camunda 8 with unified configuration:
+
+**Application config (YAML):**
 
 ```yaml
-exporters:
-  opensearch:
-    className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
-    args:
-    # Refer to the table below for the available args options
+camunda:
+  data:
+    exporters:
+      opensearch:
+        class-name: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
+        args:
+        # Refer to the table below for the available args options
 ```
+
+**Environment variables:**
+
+Set environment variables in the format `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_...` (e.g., `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_URL`).
+
+**Helm:**
+
+Add the same configuration under `orchestration.configuration` in your `values.yaml` file.
+
+:::warning
+Do not configure both legacy (`zeebe.broker.exporters.*`) and unified (`camunda.data.exporters.*`) exporter properties at the same time. Exporter properties are a breaking-change mapping in unified configuration, and the application fails to start until legacy properties are removed.
+:::
 
 The exporter can be configured by providing `args`. The table below explains all the different
 options, and the default values for these options:
 
-| Option                | Description                                                                              | Default                 |
-| --------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
-| url                   | Valid URLs as comma-separated string.                                                    | `http://localhost:9200` |
-| requestTimeoutMs      | Request timeout (in ms) for the OpenSearch client.                                       | `30000`                 |
-| index                 | Refer to [tndex](#index) for the index configuration options.                            |                         |
-| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                               |                         |
-| retention             | Refer to [retention](#retention) for the retention configuration options.                |                         |
-| authentication        | Refer to [authentication](#authentication) for the authentication configuration options. |                         |
-| aws                   | Refer to [AWS](#aws) for the AWS configuration options.                                  |                         |
-| includeEnabledRecords | If `true` all enabled record types will be exported.                                     | `false`                 |
+| Option                  | Description                                                                              | Default                 |
+| ----------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
+| url                     | Valid URLs as a comma-separated string.                                                  | `http://localhost:9200` |
+| request-timeout-ms      | Request timeout (in ms) for the OpenSearch client.                                       | `30000`                 |
+| index                   | Refer to [index](#index) for the index configuration options.                            |                         |
+| bulk                    | Refer to [bulk](#bulk) for the bulk configuration options.                               |                         |
+| retention               | Refer to [retention](#retention) for the retention configuration options.                |                         |
+| authentication          | Refer to [authentication](#authentication) for the authentication configuration options. |                         |
+| aws                     | Refer to [AWS](#aws) for the AWS configuration options.                                  |                         |
+| include-enabled-records | If `true` all enabled record types will be exported.                                     | `false`                 |
 
 <Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' },{label: 'AWS', value: 'aws' }]} >
 
@@ -79,47 +95,47 @@ In most cases, you will not be interested in exporting every single record produ
 cluster, but rather only a subset of them. This can also be configured to limit the kinds of records exported (e.g. only events, no commands), and the value type of these records (e.g. only job
 and process values).
 
-| Option                        | Description                                                                                                                                                                                                | Default      |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| prefix                        | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                                    | zeebe-record |
-| createTemplate                | If `true` missing indexes will be created automatically.                                                                                                                                                   | `true`       |
-| numberOfShards                | The number of [shards](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#static-index-level-index-settings) used for each new record index created.          | 3            |
-| numberOfReplicas              | The number of shard [replicas](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#dynamic-index-level-index-settings) used for each new record index created. | 0            |
-| command                       | If `true` command records will be exported                                                                                                                                                                 | `false`      |
-| event                         | If `true` event records will be exported                                                                                                                                                                   | `true`       |
-| rejection                     | If `true` rejection records will be exported                                                                                                                                                               | `false`      |
-| checkpoint                    | If `true` records related to checkpoints will be exported                                                                                                                                                  | `false`      |
-| commandDistribution           | If `true` records related to command distributions will be exported                                                                                                                                        | `true`       |
-| decision                      | If `true` records related to decisions will be exported                                                                                                                                                    | `true`       |
-| decisionEvaluation            | If `true` records related to decision evaluations will be exported                                                                                                                                         | `true`       |
-| decisionRequirements          | If `true` records related to decisionRequirements will be exported                                                                                                                                         | `true`       |
-| deployment                    | If `true` records related to deployments will be exported                                                                                                                                                  | `true`       |
-| deploymentDistribution        | If `true` records related to deployment distributions will be exported                                                                                                                                     | `true`       |
-| error                         | If `true` records related to errors will be exported                                                                                                                                                       | `true`       |
-| escalation                    | If `true` records related to escalations will be exported                                                                                                                                                  | `true`       |
-| form                          | If `true` records related to forms will be exported                                                                                                                                                        | `true`       |
-| incident                      | If `true` records related to incidents will be exported                                                                                                                                                    | `true`       |
-| job                           | If `true` records related to jobs will be exported                                                                                                                                                         | `true`       |
-| jobBatch                      | If `true` records related to job batches will be exported                                                                                                                                                  | `false`      |
-| message                       | If `true` records related to messages will be exported                                                                                                                                                     | `true`       |
-| messageBatch                  | If `true` records related to message batches will be exported                                                                                                                                              | `false`      |
-| messageSubscription           | If `true` records related to message subscriptions will be exported                                                                                                                                        | `true`       |
-| messageStartEventSubscription | If `true` records related to message start event subscriptions will be exported                                                                                                                            | `true`       |
-| process                       | If `true` records related to processes will be exported                                                                                                                                                    | `true`       |
-| processEvent                  | If `true` records related to process events will be exported                                                                                                                                               | `false`      |
-| processInstance               | If `true` records related to process instances will be exported                                                                                                                                            | `true`       |
-| processInstanceBatch          | If `true` records related to process instances batches will be exported                                                                                                                                    | `false`      |
-| processInstanceCreation       | If `true` records related to process instance creations will be exported                                                                                                                                   | `true`       |
-| processInstanceMigration      | If `true` records related to process instance migrations will be exported                                                                                                                                  | `true`       |
-| processInstanceModification   | If `true` records related to process instance modifications will be exported                                                                                                                               | `true`       |
-| processMessageSubscription    | If `true` records related to process message subscriptions will be exported                                                                                                                                | `true`       |
-| resourceDeletion              | If `true` records related to resource deletions will be exported                                                                                                                                           | `true`       |
-| signal                        | If `true` records related to signals will be exported                                                                                                                                                      | `true`       |
-| signalSubscription            | If `true` records related to signal subscriptions will be exported                                                                                                                                         | `true`       |
-| timer                         | If `true` records related to timers will be exported                                                                                                                                                       | `true`       |
-| userTask                      | If `true` records related to user tasks will be exported                                                                                                                                                   | `true`       |
-| variable                      | If `true` records related to variables will be exported                                                                                                                                                    | `true`       |
-| variableDocument              | If `true` records related to variable documents will be exported                                                                                                                                           | `true`       |
+| Option                           | Description                                                                                                                                                                                                | Default      |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| prefix                           | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                                    | zeebe-record |
+| create-template                  | If `true` missing indexes will be created automatically.                                                                                                                                                   | `true`       |
+| number-of-shards                 | The number of [shards](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#static-index-level-index-settings) used for each new record index created.          | 3            |
+| number-of-replicas               | The number of shard [replicas](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#dynamic-index-level-index-settings) used for each new record index created. | 0            |
+| command                          | If `true` command records will be exported                                                                                                                                                                 | `false`      |
+| event                            | If `true` event records will be exported                                                                                                                                                                   | `true`       |
+| rejection                        | If `true` rejection records will be exported                                                                                                                                                               | `false`      |
+| checkpoint                       | If `true` records related to checkpoints will be exported                                                                                                                                                  | `false`      |
+| command-distribution             | If `true` records related to command distributions will be exported                                                                                                                                        | `true`       |
+| decision                         | If `true` records related to decisions will be exported                                                                                                                                                    | `true`       |
+| decision-evaluation              | If `true` records related to decision evaluations will be exported                                                                                                                                         | `true`       |
+| decision-requirements            | If `true` records related to decisionRequirements will be exported                                                                                                                                         | `true`       |
+| deployment                       | If `true` records related to deployments will be exported                                                                                                                                                  | `true`       |
+| deployment-distribution          | If `true` records related to deployment distributions will be exported                                                                                                                                     | `true`       |
+| error                            | If `true` records related to errors will be exported                                                                                                                                                       | `true`       |
+| escalation                       | If `true` records related to escalations will be exported                                                                                                                                                  | `true`       |
+| form                             | If `true` records related to forms will be exported                                                                                                                                                        | `true`       |
+| incident                         | If `true` records related to incidents will be exported                                                                                                                                                    | `true`       |
+| job                              | If `true` records related to jobs will be exported                                                                                                                                                         | `true`       |
+| job-batch                        | If `true` records related to job batches will be exported                                                                                                                                                  | `false`      |
+| message                          | If `true` records related to messages will be exported                                                                                                                                                     | `true`       |
+| message-batch                    | If `true` records related to message batches will be exported                                                                                                                                              | `false`      |
+| message-subscription             | If `true` records related to message subscriptions will be exported                                                                                                                                        | `true`       |
+| message-start-event-subscription | If `true` records related to message start event subscriptions will be exported                                                                                                                            | `true`       |
+| process                          | If `true` records related to processes will be exported                                                                                                                                                    | `true`       |
+| process-event                    | If `true` records related to process events will be exported                                                                                                                                               | `false`      |
+| process-instance                 | If `true` records related to process instances will be exported                                                                                                                                            | `true`       |
+| process-instance-batch           | If `true` records related to process instances batches will be exported                                                                                                                                    | `false`      |
+| process-instance-creation        | If `true` records related to process instance creations will be exported                                                                                                                                   | `true`       |
+| process-instance-migration       | If `true` records related to process instance migrations will be exported                                                                                                                                  | `true`       |
+| process-instance-modification    | If `true` records related to process instance modifications will be exported                                                                                                                               | `true`       |
+| process-message-subscription     | If `true` records related to process message subscriptions will be exported                                                                                                                                | `true`       |
+| resource-deletion                | If `true` records related to resource deletions will be exported                                                                                                                                           | `true`       |
+| signal                           | If `true` records related to signals will be exported                                                                                                                                                      | `true`       |
+| signal-subscription              | If `true` records related to signal subscriptions will be exported                                                                                                                                         | `true`       |
+| timer                            | If `true` records related to timers will be exported                                                                                                                                                       | `true`       |
+| user-task                        | If `true` records related to user tasks will be exported                                                                                                                                                   | `true`       |
+| variable                         | If `true` records related to variables will be exported                                                                                                                                                    | `true`       |
+| variable-document                | If `true` records related to variable documents will be exported                                                                                                                                           | `true`       |
 
 </TabItem>
 
@@ -129,11 +145,11 @@ To avoid too many expensive requests to the OpenSearch cluster, the exporter per
 updates by default. The size of the batch, along with how often it should be flushed (regardless of
 size) can be controlled by configuration.
 
-| Option      | Description                                                                                                                                                    | Default            |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| delay       | Delay, in seconds, before force flush of the current batch. This ensures that even when we have low traffic of records, we still export every once in a while. | `5`                |
-| size        | The amount of records a batch should have before we flush the batch.                                                                                           | `1000`             |
-| memoryLimit | The size of the batch, in bytes, before we flush the batch.                                                                                                    | `10485760` (10 MB) |
+| Option       | Description                                                                                                                                                    | Default            |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| delay        | Delay, in seconds, before force flush of the current batch. This ensures that even when we have low traffic of records, we still export every once in a while. | `5`                |
+| size         | The amount of records a batch should have before we flush the batch.                                                                                           | `1000`             |
+| memory-limit | The size of the batch, in bytes, before we flush the batch.                                                                                                    | `10485760` (10 MB) |
 
 With the default configuration, the exporter would aggregate records and flush them to OpenSearch
 either:
@@ -148,14 +164,14 @@ either:
 
 A retention policy can be set up to delete old data.
 When enabled, this creates an Index State Management (ISM) policy that deletes the data after the
-specified `minimumAge`. All index templates created by this exporter apply the created ISM policy.
+specified `minimum-age`. All index templates created by this exporter apply the created ISM policy.
 
-| Option            | Description                                                                   | Default                         |
-| ----------------- | ----------------------------------------------------------------------------- | ------------------------------- |
-| enabled           | If `true` the ISM policy is created and applied to the index templates.       | `false`                         |
-| minimumAge        | Specifies how old the data must be, before the data is deleted as a duration. | `30d`                           |
-| policyName        | The name of the created and applied ISM policy.                               | `zeebe-record-retention-policy` |
-| policyDescription | The description of the created and applied ISM policy.                        | `Zeebe record retention policy` |
+| Option             | Description                                                                   | Default                         |
+| ------------------ | ----------------------------------------------------------------------------- | ------------------------------- |
+| enabled            | If `true` the ISM policy is created and applied to the index templates.       | `false`                         |
+| minimum-age        | Specifies how old the data must be, before the data is deleted as a duration. | `30d`                           |
+| policy-name        | The name of the created and applied ISM policy.                               | `zeebe-record-retention-policy` |
+| policy-description | The description of the created and applied ISM policy.                        | `Zeebe record retention policy` |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or
@@ -185,11 +201,11 @@ Signing requests requires credentials. These credentials are not directly config
 exporter. Instead, they are resolved by following the
 [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html).
 
-| Option      | Description                                                                             | Default                                            |
-| ----------- | --------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| enabled     | Enables AWS request signing                                                             | `false`                                            |
-| serviceName | AWS' name of the service to where requests are made. For OpenSearch this should be `es` | `es`                                               |
-| region      | The region this exporter is running in                                                  | The value of the `AWS_REGION` environment variable |
+| Option       | Description                                                                             | Default                                            |
+| ------------ | --------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| enabled      | Enables AWS request signing                                                             | `false`                                            |
+| service-name | AWS' name of the service to where requests are made. For OpenSearch this should be `es` | `es`                                               |
+| region       | The region this exporter is running in                                                  | The value of the `AWS_REGION` environment variable |
 
 </TabItem>
 </Tabs>
@@ -200,78 +216,80 @@ Here is an example configuration of the exporter:
 
 ```yaml
 ---
-exporters:
-  opensearch:
-    # Opensearch Exporter ----------
-    # An example configuration for the opensearch exporter:
-    #
-    # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_OPENSEARCH_..."
+camunda:
+  data:
+    exporters:
+      opensearch:
+        # OpenSearch Exporter ----------
+        # An example configuration for the OpenSearch exporter:
+        #
+        # These settings can also be overridden using environment variables "CAMUNDA_DATA_EXPORTERS_OPENSEARCH_..."
 
-    className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
+        class-name: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
 
-    args:
-      # A comma separated list of URLs pointing to the Opensearch instances you wish to export to.
-      # For example, if you want to connect to multiple nodes for redundancy:
-      # url: http://localhost:9200,http://localhost:9201
-      url: http://localhost:9200
+        args:
+          # A comma separated list of URLs pointing to the OpenSearch instances you wish to export to.
+          # For example, if you want to connect to multiple nodes for redundancy:
+          # url: http://localhost:9200,http://localhost:9201
+          url: http://localhost:9200
 
-      bulk:
-        delay: 5
-        size: 1000
-        memoryLimit: 10485760
+          bulk:
+            delay: 5
+            size: 1000
+            memory-limit: 10485760
 
-      retention:
-        enabled: true
-        minimumAge: 30d
-        policyName: zeebe-records-retention-policy
-        policyDescription: Zeebe records retention policy
+          retention:
+            enabled: true
+            minimum-age: 30d
+            policy-name: zeebe-records-retention-policy
+            policy-description: Zeebe records retention policy
 
-      authentication:
-        username: opensearch
-        password: changeme
+          authentication:
+            username: opensearch
+            password: changeme
 
-      aws:
-        enabled: true
-        serviceName: es
-        region: eu-west-1
+          aws:
+            enabled: true
+            service-name: es
+            region: eu-west-1
 
-      index:
-        prefix: zeebe-record
-        createTemplate: true
+          index:
+            prefix: zeebe-record
+            create-template: true
 
-        command: false
-        event: true
-        rejection: false
+            command: false
+            event: true
+            rejection: false
 
-        commandDistribution: true
-        decisionRequirements: true
-        decision: true
-        decisionEvaluation: true
-        deployment: true
-        deploymentDistribution: true
-        error: true
-        escalation: true
-        form: true
-        incident: true
-        job: true
-        jobBatch: false
-        message: true
-        messageStartSubscription: true
-        messageSubscription: true
-        process: true
-        processEvent: false
-        processInstance: true
-        processInstanceCreation: true
-        processInstanceMigration: true
-        processInstanceModification: true
-        processMessageSubscription: true
-        resourceDeletion: true
-        signal: true
-        signalSubscription: true
-        timer: true
-        userTask: true
-        variable: true
-        variableDocument: true
+            command-distribution: true
+            decision-requirements: true
+            decision: true
+            decision-evaluation: true
+            deployment: true
+            deployment-distribution: true
+            error: true
+            escalation: true
+            form: true
+            incident: true
+            job: true
+            job-batch: false
+            message: true
+            message-start-event-subscription: true
+            message-subscription: true
+            process: true
+            process-event: false
+            process-instance: true
+            process-instance-creation: true
+            process-instance-migration: true
+            process-instance-modification: true
+            process-message-subscription: true
+            resource-deletion: true
+            signal: true
+            signal-subscription: true
+            timer: true
+            user-task: true
+            variable: true
+            variable-document: true
 ```
 
 ## Self-signed certificates
@@ -345,4 +363,4 @@ The record types that continue to be exported by default are the following:
 - `INCIDENT`
 - `JOB`
 
-To export other record types, enable the [includeEnabledRecords](#configuration) configuration property.
+To export other record types, enable the [include-enabled-records](#configuration) configuration property.

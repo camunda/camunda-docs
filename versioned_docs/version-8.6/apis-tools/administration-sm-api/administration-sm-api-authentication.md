@@ -10,7 +10,7 @@ All Administration Self-Managed API requests require authentication. To authenti
 ## Generate a token
 
 1. [Add an M2M application in Identity](/self-managed/identity/application-user-group-role-management/applications.md).
-2. [Add permissions to this application](/self-managed/identity/application-user-group-role-management/applications.md) for **Administration Self-Managed API**.
+2. [Add permissions to this application](/self-managed/identity/application-user-group-role-management/applications.md) for **Console API**.
 3. Capture the `Client ID` and `Client Secret` from the application in Identity.
 4. [Generate a token](/self-managed/identity/authentication.md) to access the Administration REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell

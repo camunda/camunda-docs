@@ -14,6 +14,10 @@ This page explains how RDBMS configuration works at the application level. If yo
 For supported database vendors and versions, see the  
 [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 
+:::tip Starting from scratch?
+For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md).
+:::
+
 ## Enable RDBMS as secondary storage
 
 To activate an RDBMS backend, configure two components:
@@ -191,7 +195,7 @@ The following additional configuration options are available under `camunda.data
 The RDBMS exporter provides automatic history cleanup, which works in two stages:
 
 1. **TTL marking**  
-   When a process instance finishes, its data is marked for deletion once its time-to-live expires.
+   When a root process instance finishes, the entire process instance hierarchy (the root and any child process instances started via Call Activities), and all related data are marked for deletion once the root instance's time-to-live expires.
 
 2. **Periodic cleanup job**  
    A scheduled cleanup job deletes marked records in batches and adjusts future intervals dynamically:

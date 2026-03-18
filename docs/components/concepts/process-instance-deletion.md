@@ -7,10 +7,10 @@ description: Delete all data for a completed or terminated process instance.
 Use process instance deletion to permanently remove all data associated with a completed or terminated process instance.
 
 :::warning
-Deletion is irreversible. You can restore deleted data only by restoring a backup of your cluster.
+Deletion is irreversible. Restore deleted data only by restoring a backup of your cluster.
 :::
 
-Delete a process instance using the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instance.api.mdx).
+Delete a process instance using the [delete process instance endpoint](/apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instance.api.mdx), or multiple using the [delete process instances endpoint](/apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instances-batch-operation.api.mdx).
 
 :::note
 You can also delete a process instance in Operate. See the [Operate user guide](../operate/userguide/delete-finished-instances.md).
@@ -48,7 +48,7 @@ This section explains how process instance deletion is handled internally to hel
 
 Deleting one or more process instances uses [batch operations](./batch-operations.md).
 
-The Zeebe engine queries secondary storage for process instances to delete. For each instance found, the engine writes a delete command to the log, which results in a deleted event.
+The Zeebe engine queries [secondary storage](/self-managed/concepts/secondary-storage/index.md) for process instances to delete. For each instance found, the engine writes a delete command to the log, which results in a deleted event.
 
 Exporters consume the deleted event and write a record to secondary storage to mark the process instance for deletion. An asynchronous scheduled task then deletes all data associated with each marked process instance.
 

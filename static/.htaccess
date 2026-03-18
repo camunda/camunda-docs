@@ -146,7 +146,7 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 
 ## Microsoft Teams app redirect for app store documentation link.
 
-RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=301,L]
+RewriteRule ^docs/ms-teams/?$ /docs/next/components/camunda-integrations/ms-teams/ [R=301,L]
 
 ## Redirect update-guide introduction to new components-upgrade introduction
 
@@ -300,6 +300,11 @@ RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-release-note
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Rename vendor-supported-infrastructure to operator-based-infrastructure (8.8)
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/next/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
+RewriteRule ^docs/8.8/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/8.8/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
+
 # Restructure Web Modeler Docs (8.8)
 ## Web Modeler folder restructure - moved to modeling/
 RewriteRule ^docs/next/components/modeler/web-modeler/camunda-marketplace/?$ /docs/next/components/modeler/web-modeler/modeling/camunda-marketplace/ [R=301,L]
@@ -448,6 +453,7 @@ RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-element-inst
 
 RewriteRule ^docs/apis-tools/spring-zeebe-sdk/getting-started/?$ /docs/apis-tools/camunda-spring-boot-starter/getting-started/ [R=301,L]
 RewriteRule ^docs/apis-tools/java-client/zeebe-process-test/?$ /docs/apis-tools/testing/getting-started/ [R=301,L]
+RewriteRule ^docs/apis-tools/testing/test-scenario-dsl/?$ /docs/apis-tools/testing/json-test-cases/ [R=301,L]
 RewriteRule ^docs/apis-tools/spring-zeebe-sdk/configuration/?$ /docs/apis-tools/camunda-spring-boot-starter/getting-started/ [R=301,L]
 
 RewriteRule ^docs/apis-tools/camunda-api-rest/camunda-api-rest-authentication/?$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication/ [R=301,L]
@@ -964,6 +970,7 @@ RewriteRule ^docs/guides/react-components/install-docker-compose/?$ /docs/guides
 RewriteRule ^docs/guides/react-components/install-c8run/?$  /docs/guides/ [R=301,L]
 
 # Move logging from troubleshooting to monitoring
+RewriteRule ^docs/8.7/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.7/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 RewriteRule ^docs/8.6/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 
@@ -1021,7 +1028,7 @@ RewriteRule ^docs/self-managed/platform-architecture/overview/?$ /docs/self-mana
 # remove tasklist API + Spring Zeebe tutorial
 RewriteRule ^docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/?$ /docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
 
-# remove unsupported versions
+# remove unmaintained versions
 RewriteRule ^docs/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]

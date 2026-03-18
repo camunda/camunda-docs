@@ -47,7 +47,7 @@ Camunda provides three Docker Compose configurations in the [Camunda Distributio
 
 | Configuration File              | Description                                                                                                                                                                                                                                                                       |
 | :------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| docker-compose.yaml             | **Default lightweight configuration** - Includes the core Orchestration Cluster (Zeebe, Operate, and Tasklist combined), Connectors, and Elasticsearch. Ideal for most developers who want to model, deploy, and test processes.                                                  |
+| docker-compose.yaml             | **Default lightweight configuration** - Includes the core Orchestration Cluster (Zeebe, Operate, Tasklist, and Orchestration Cluster Identity), Connectors, and Elasticsearch. Ideal for most developers who want to model, deploy, and test processes.                           |
 | docker-compose-full.yaml        | **Full-stack configuration** - Includes all Camunda 8 components including the Orchestration Cluster, Connectors, Optimize, Console, Management Identity, Keycloak, PostgreSQL, and Web Modeler. Use this when you need management components, process optimization, or modeling. |
 | docker-compose-web-modeler.yaml | **Standalone Web Modeler** - Runs only Web Modeler and its dependencies (Identity, Keycloak, PostgreSQL). See [Deploy with Web Modeler](#deploy-with-web-modeler).                                                                                                                |
 
@@ -203,7 +203,7 @@ To deploy from Desktop Modeler to the lightweight configuration:
 1. Open Desktop Modeler and click the deployment icon (rocket symbol).
 1. Select **Camunda 8 Self-Managed**.
 1. Configure the connection:
-   - **Cluster endpoint**: `http://localhost:26500`
+   - **Cluster endpoint**: `http://localhost:8088/v2`
    - **Authentication**: Select **None** (no authentication required by default)
 1. Click **Deploy**.
 
@@ -216,7 +216,7 @@ To deploy from Desktop Modeler to the full configuration:
 1. Open Desktop Modeler and click the deployment icon.
 1. Select **Camunda 8 Self-Managed**.
 1. Configure the connection:
-   - **Cluster endpoint**: `http://localhost:26500`
+   - **Cluster endpoint**: `http://localhost:8088/v2`
    - **Authentication**: Select **OAuth**
    - **OAuth URL**: `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
    - **Client ID**: `orchestration` (from `.env` file: `ORCHESTRATION_CLIENT_ID`)

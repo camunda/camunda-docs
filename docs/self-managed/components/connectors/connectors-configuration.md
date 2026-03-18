@@ -120,7 +120,7 @@ To activate basic authentication:
 **Environment variables**
 
 ```bash
-CAMUNDA_CLIENT_AUTH_METHOD=oidc
+CAMUNDA_CLIENT_AUTH_METHOD=basic
 CAMUNDA_CLIENT_AUTH_USERNAME=<your username>
 CAMUNDA_CLIENT_AUTH_PASSWORD=<your password>
 ```
@@ -532,7 +532,7 @@ To restrict the Connector Runtime inbound connector feature to a single tenant o
 
 To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](../../deployment/helm/configure/configure-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
 
-Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/components/concepts/multi-tenancy.md).
+Find more information (including links to component-specific configuration pages) on the [multi-tenancy concepts page](/components/concepts/multi-tenancy.md).
 
 ## Logging
 

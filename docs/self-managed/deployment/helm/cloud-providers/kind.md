@@ -8,6 +8,8 @@ description: "Deploy Camunda 8 Self-Managed on a local Kubernetes cluster using 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+import IdentitySecret from './\_partials/\_identity-secret.md'
+
 With this guide, you'll deploy Camunda 8 Self-Managed to a local Kubernetes cluster using [kind (Kubernetes in Docker)](https://kind.sigs.k8s.io/). The setup is optimized for learning, development, and testing, with reduced resource requirements suitable for a personal machine.
 
 While this guide uses kind, the same concepts apply to other local Kubernetes tools, like [K3s](https://k3s.io/), [minikube](https://minikube.sigs.k8s.io/), or [MicroK8s](https://microk8s.io/).
@@ -227,7 +229,7 @@ The certificate generation script:
 
 ### Deploy prerequisite services
 
-Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
+Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
 - Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
 - PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
@@ -240,6 +242,8 @@ CAMUNDA_MODE=domain ./procedure/operators-deploy.sh
 ```
 
 This script installs each operator and its custom resources, then waits for all instances to be ready.
+
+<IdentitySecret />
 
 ### Deploy Camunda 8
 
@@ -289,7 +293,7 @@ This section covers the simplified setup using port-forwarding without TLS.
 
 ### Deploy prerequisite services
 
-Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md):
+Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
 - Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
 - PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
@@ -316,6 +320,8 @@ Alternatively, you can run `make hosts.add-keycloak` to add this entry automatic
 After adding this entry and deploying Camunda 8 in the next step, you'll be able to reach Keycloak at `http://keycloak-service:18080/auth`.
 
 **Why port `18080`?** The Keycloak instance is configured to listen on port `18080` (via `httpPort` in the operator CR) to avoid conflicts with the Zeebe Gateway HTTP endpoint, which uses port `8080` locally.
+
+<IdentitySecret />
 
 ### Deploy Camunda 8
 
@@ -383,15 +389,15 @@ helm list -n camunda
 
 <TabItem value="domain">
 
-| Component           | URL                                            |
-| ------------------- | ---------------------------------------------- |
-| Operate             | https://camunda.example.com/operate            |
-| Tasklist            | https://camunda.example.com/tasklist           |
-| Identity            | https://camunda.example.com/identity           |
-| Management Identity | https://camunda.example.com/managementidentity |
-| Optimize            | https://camunda.example.com/optimize           |
-| Zeebe REST API      | https://camunda.example.com/                   |
-| Keycloak            | https://camunda.example.com/auth               |
+| Component                      | URL                                            |
+| ------------------------------ | ---------------------------------------------- |
+| Operate                        | https://camunda.example.com/operate            |
+| Tasklist                       | https://camunda.example.com/tasklist           |
+| Identity                       | https://camunda.example.com/identity           |
+| Management Identity            | https://camunda.example.com/managementidentity |
+| Optimize                       | https://camunda.example.com/optimize           |
+| Orchestration Cluster REST API | https://camunda.example.com/                   |
+| Keycloak                       | https://camunda.example.com/auth               |
 
 </TabItem>
 
@@ -433,8 +439,8 @@ You can still use localhost ports if you prefer traditional port-forwarding. Sto
 | Connectors           | http://localhost:8088              |
 | Keycloak             | http://keycloak-service:18080/auth |
 
-:::tip Connecting to the workflow engine
-To interact with the Camunda workflow engine via Zeebe Gateway using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker, connect to `localhost:26500` (gRPC) or `http://localhost:8080` (REST).
+:::tip Connecting to the Orchestration Cluster
+To interact with the Orchestration Cluster via Zeebe Gateway using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker, connect to `localhost:26500` (gRPC) or `http://localhost:8080` (REST).
 :::
 
 At any time, run `kubectl get services -n camunda` to get a full list of deployed Camunda components and their network properties.
@@ -445,11 +451,21 @@ At any time, run `kubectl get services -n camunda` to get a full list of deploye
 
 ### Default credentials
 
+#### Camunda admin
+
 - **Username**: `admin`
 - **Password**: Run the following script
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/get-password.sh
+```
+
+#### Keycloak admin
+
+The Keycloak operator generates a separate set of admin credentials stored in the `keycloak-initial-admin` secret. These credentials are different from the Camunda admin credentials and are used to access the Keycloak administration console.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/get-keycloak-password.sh
 ```
 
 ## Cleanup
