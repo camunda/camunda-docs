@@ -7,7 +7,6 @@ description: "Camunda Copilot is an AI assistant integrated into Web Modeler tha
 
 import CopilotBpmnGeneration from './img/copilot-bpmn-generation.png';
 import CopilotConversationHistory from './img/copilot-conversation-history.png';
-import CopilotMultiAgentArchitecture from './img/multi_agent_architecture.png';
 
 Camunda Copilot is an AI assistant that helps you with BPMN process modeling, FEEL expressions, and form building. It is available in both SaaS and Self-Managed deployments of Web Modeler, and can be used only in the BPMN diagram and form editors.
 
@@ -31,32 +30,25 @@ To avoid timeouts and get better results, break long or complex prompts into sma
 
 ## How it works
 
-Camunda Copilot uses a multi-agent architecture to handle different types of tasks:
+Camunda Copilot uses a multi-agent architecture. Your request is sent to the Supervisor Agent, routed to a specialized sub-agent, and then executed using built-in tools.
 
 ```mermaid
-flowchart TD
-    User["User Chat"] -->|"message"| Supervisor["Supervisor Agent"]
-    Supervisor -->|"BPMN tasks"| BpmnAgent["BPMN Sub-Agent"]
-    Supervisor -->|"FEEL tasks"| FeelAgent["FEEL Sub-Agent"]
-    Supervisor -->|"Form tasks"| FormAgent["Form Sub-Agent"]
-    BpmnAgent --> BpmnTools["BPMN Tools"]
-    FormAgent --> FormToolsBox["Form Tools"]
-    FeelAgent --> SharedTools["Shared Tools"]
-    BpmnAgent --> SharedTools
-    FormAgent --> SharedTools
-    SharedTools --> FrontendTools["Frontend Tools"]
-    SharedTools --> GeneralTools["General Tools"]
-    SharedTools --> IntegrationTools["Integration Tools"]
+flowchart LR
+  User["User Chat"] --> Supervisor["Supervisor Agent"]
+  Supervisor --> BpmnAgent["BPMN Sub-Agent"]
+  Supervisor --> FeelAgent["FEEL Sub-Agent"]
+  Supervisor --> FormAgent["Form Sub-Agent"]
+  BpmnAgent --> Tools["Built-in tools"]
+  FeelAgent --> Tools
+  FormAgent --> Tools
 ```
-
-<img src={CopilotMultiAgentArchitecture} alt="Multi-agent architecture showing user chat, supervisor, specialized agents, and tools" style={{width: "100%", maxWidth: "1100px", border: "none", boxShadow: "none", outline: "none"}} />
 
 - **Supervisor Agent**: Routes your requests to the appropriate specialized sub-agent based on the task type.
 - **BPMN Sub-Agent**: Creates, modifies, and explains BPMN process diagrams.
 - **FEEL Sub-Agent**: Generates, translates, debugs, and explains FEEL expressions.
 - **Form Sub-Agent**: Creates, modifies, and validates Camunda Forms.
 
-Each sub-agent has access to specialized [built-in tools](built-in-tools.md) that allow it to interact with your diagrams and forms.
+Each sub-agent uses [built-in tools](built-in-tools.md) to interact with your diagrams and forms.
 
 ## Review and undo changes
 
@@ -165,45 +157,45 @@ Copilot respects your project permissions:
   <thead>
     <tr>
       <th style={{textAlign: "left"}}>Feature</th>
-      <th style={{textAlign: "left"}}>Write access</th>
-      <th style={{textAlign: "left"}}>Read-only access</th>
+      <th style={{textAlign: "center"}}>Write access</th>
+      <th style={{textAlign: "center"}}>Read-only access</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>Ask questions</td>
-      <td><span style={{color: "green"}}>✓</span></td>
-      <td><span style={{color: "green"}}>✓</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
     </tr>
     <tr>
       <td>Get explanations</td>
-      <td><span style={{color: "green"}}>✓</span></td>
-      <td><span style={{color: "green"}}>✓</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
     </tr>
     <tr>
       <td>Generate BPMN elements</td>
-      <td><span style={{color: "green"}}>✓</span></td>
-      <td><span style={{color: "red"}}>✗</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "red"}}>✗</span></td>
     </tr>
     <tr>
       <td>Modify diagrams</td>
-      <td><span style={{color: "green"}}>✓</span></td>
-      <td><span style={{color: "red"}}>✗</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "red"}}>✗</span></td>
     </tr>
     <tr>
       <td>Create/edit forms</td>
-      <td><span style={{color: "green"}}>✓</span></td>
-      <td><span style={{color: "red"}}>✗</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "red"}}>✗</span></td>
     </tr>
     <tr>
       <td>Generate FEEL expressions</td>
-      <td><span style={{color: "green"}}>✓</span></td>
-      <td><span style={{color: "green"}}>✓</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
     </tr>
     <tr>
       <td>Apply FEEL expressions</td>
-      <td><span style={{color: "green"}}>✓</span></td>
-      <td><span style={{color: "red"}}>✗</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
+      <td style={{textAlign: "center"}}><span style={{color: "red"}}>✗</span></td>
     </tr>
   </tbody>
 </table>
@@ -211,7 +203,8 @@ Copilot respects your project permissions:
 ## Limitations
 
 - Camunda Copilot does not support pools, lanes, and collaborations.
-- Camunda Docs AI is available only in SaaS deployments. Self-Managed users can configure their own LLM provider but do not have access to the Camunda documentation knowledge base.
+- Camunda Docs AI is available only in SaaS deployments.
+- Self-Managed users can configure their own LLM provider but do not have access to the Camunda documentation knowledge base.
 
 ## Self-Managed configuration
 
