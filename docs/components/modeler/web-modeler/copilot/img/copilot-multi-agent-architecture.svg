@@ -1,0 +1,93 @@
+<svg width="100%" viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Section dividers -->
+  <line x1="40" y1="36" x2="148" y2="36" stroke="#DEDCD1" stroke-width="1.5"/>
+  <line x1="183" y1="36" x2="448" y2="36" stroke="#E8712A" stroke-width="1.5"/>
+  <line x1="483" y1="36" x2="640" y2="36" stroke="#DEDCD1" stroke-width="1.5"/>
+
+  <!-- Section labels -->
+  <text x="40" y="26" fill="#185FA5" font-size="13" font-weight="500" font-family="system-ui, sans-serif">Interact</text>
+  <text x="183" y="26" fill="#E8712A" font-size="13" font-weight="500" font-family="system-ui, sans-serif">Route &amp; process</text>
+  <text x="483" y="26" fill="#185FA5" font-size="13" font-weight="500" font-family="system-ui, sans-serif">Execute</text>
+
+  <!-- Dashed containers -->
+  <rect x="176" y="46" width="288" height="306" rx="8" fill="none" stroke="#C0BDB4" stroke-width="1" stroke-dasharray="5 4"/>
+  <rect x="480" y="46" width="160" height="306" rx="8" fill="none" stroke="#C0BDB4" stroke-width="1" stroke-dasharray="5 4"/>
+
+  <!-- USER CHAT -->
+  <g>
+    <rect x="36" y="170" width="120" height="44" rx="6" fill="none" stroke="#185FA5" stroke-width="1.5"/>
+    <text x="96" y="192" text-anchor="middle" dominant-baseline="central" fill="#185FA5" font-size="14" font-weight="500" font-family="system-ui, sans-serif">User chat</text>
+  </g>
+
+  <!-- SUPERVISOR -->
+  <g>
+    <rect x="200" y="170" width="120" height="44" rx="6" fill="#FFF3EB" stroke="#E8712A" stroke-width="1.5"/>
+    <text x="260" y="192" text-anchor="middle" dominant-baseline="central" fill="#993C1D" font-size="14" font-weight="500" font-family="system-ui, sans-serif">Supervisor</text>
+  </g>
+
+  <!-- BPMN AGENT -->
+  <g>
+    <rect x="364" y="80" width="120" height="44" rx="6" fill="#FFF3EB" stroke="#E8712A" stroke-width="1.5"/>
+    <text x="424" y="102" text-anchor="middle" dominant-baseline="central" fill="#993C1D" font-size="14" font-weight="500" font-family="system-ui, sans-serif">BPMN agent</text>
+  </g>
+
+  <!-- FEEL AGENT -->
+  <g>
+    <rect x="364" y="170" width="120" height="44" rx="6" fill="#FFF3EB" stroke="#E8712A" stroke-width="1.5"/>
+    <text x="424" y="192" text-anchor="middle" dominant-baseline="central" fill="#993C1D" font-size="14" font-weight="500" font-family="system-ui, sans-serif">FEEL agent</text>
+  </g>
+
+  <!-- FORM AGENT -->
+  <g>
+    <rect x="364" y="260" width="120" height="44" rx="6" fill="#FFF3EB" stroke="#E8712A" stroke-width="1.5"/>
+    <text x="424" y="282" text-anchor="middle" dominant-baseline="central" fill="#993C1D" font-size="14" font-weight="500" font-family="system-ui, sans-serif">Form agent</text>
+  </g>
+
+  <!-- BPMN TOOLS -->
+  <g>
+    <rect x="500" y="80" width="120" height="44" rx="6" fill="none" stroke="#185FA5" stroke-width="1.5"/>
+    <text x="560" y="102" text-anchor="middle" dominant-baseline="central" fill="#185FA5" font-size="14" font-weight="500" font-family="system-ui, sans-serif">BPMN tools</text>
+  </g>
+
+  <!-- SHARED TOOLS -->
+  <g>
+    <rect x="500" y="170" width="120" height="44" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+    <text x="560" y="192" text-anchor="middle" dominant-baseline="central" fill="#0C447C" font-size="14" font-weight="500" font-family="system-ui, sans-serif">Shared tools</text>
+  </g>
+
+  <!-- FORM TOOLS -->
+  <g>
+    <rect x="500" y="260" width="120" height="44" rx="6" fill="none" stroke="#185FA5" stroke-width="1.5"/>
+    <text x="560" y="282" text-anchor="middle" dominant-baseline="central" fill="#185FA5" font-size="14" font-weight="500" font-family="system-ui, sans-serif">Form tools</text>
+  </g>
+
+  <!-- Arrow: User Chat → Supervisor -->
+  <line x1="156" y1="192" x2="198" y2="192" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Arrows: Supervisor → Agents (L-shaped, clean) -->
+  <!-- → BPMN agent: up then right -->
+  <path d="M320 180 L344 180 L344 102 L362 102" fill="none" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+  <!-- → FEEL agent: straight right -->
+  <line x1="320" y1="192" x2="362" y2="192" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+  <!-- → Form agent: down then right -->
+  <path d="M320 204 L344 204 L344 282 L362 282" fill="none" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Arrows: Agents → Tools (L-shaped, clean) -->
+  <!-- BPMN agent → BPMN tools: straight right -->
+  <line x1="484" y1="102" x2="498" y2="102" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+  <!-- BPMN agent → Shared tools: down then right -->
+  <path d="M484 114 L492 114 L492 192 L498 192" fill="none" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+  <!-- FEEL agent → Shared tools: straight right -->
+  <line x1="484" y1="192" x2="498" y2="192" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+  <!-- Form agent → Shared tools: up then right -->
+  <path d="M484 270 L492 270 L492 204 L498 204" fill="none" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+  <!-- Form agent → Form tools: straight right -->
+  <line x1="484" y1="282" x2="498" y2="282" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+
+</svg>
