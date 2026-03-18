@@ -18,7 +18,7 @@ Tools are categorized by access requirements:
 
 ## BPMN tools
 
-### Query tools
+#### Query tools
 
 <table>
 	<colgroup>
@@ -45,7 +45,7 @@ Tools are categorized by access requirements:
 	</tbody>
 </table>
 
-### Mutation tools (write)
+#### Mutation tools (write)
 
 <table>
 	<colgroup>
@@ -70,7 +70,7 @@ Tools are categorized by access requirements:
 	</tbody>
 </table>
 
-### Layout tools (write)
+#### Layout tools (write)
 
 <table>
 	<colgroup>
@@ -93,7 +93,7 @@ Tools are categorized by access requirements:
 	</tbody>
 </table>
 
-### Validation tools
+#### Validation tools
 
 <table>
 	<colgroup>
@@ -172,9 +172,7 @@ Use this group when you need user-visible project/file operations, UI validation
 
 ## Integration tools
 
-These tools integrate with external services.
-
-Use this group to retrieve product and modeling guidance from connected knowledge services.
+These tools connect to external services to retrieve product and modeling guidance.
 
 <table>
 	<colgroup>
