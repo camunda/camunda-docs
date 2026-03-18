@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 
-This guide walks you through migrating a Camunda 8 Helm installation from Bitnami-managed infrastructure (PostgreSQL, Elasticsearch, Keycloak) to **Kubernetes operator-managed equivalents**:
+Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure (PostgreSQL, Elasticsearch, and Keycloak) to **Kubernetes operator-managed equivalents**:
 
 - **[CloudNativePG](https://cloudnative-pg.io/)** for PostgreSQL
 - **[Elastic Cloud on Kubernetes (ECK)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)** for Elasticsearch
@@ -29,7 +29,7 @@ Before starting the migration, ensure you have:
 - `helm` v3 with `camunda/camunda-platform` repo added
 - [`envsubst`](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) available (usually included in `gettext`)
 - [`jq`](https://jqlang.github.io/jq/download/) installed
-- [`yq`](https://github.com/mikefarah/yq) installed (for selective CNPG cluster deployment)
+- [`yq`](https://github.com/mikefarah/yq) installed (for selective CloudNativePG cluster deployment)
 - `base64` and `openssl` available (used for credential management)
 - Sufficient cluster resources to run both old and new infrastructure temporarily
 
@@ -128,9 +128,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 | `MIGRATE_WEBMODELER`         | `true`                 | Enables the Web Modeler PostgreSQL database migration            |
 | `MIGRATE_ELASTICSEARCH`      | `true`                 | Enables the Elasticsearch data migration                         |
 
-Set any `MIGRATE_*` variable to `false` to skip a component — for example, if it is not deployed or already uses an external service.
+Set any `MIGRATE_*` variable to `false` to skip a component. This is useful, for example, if the component isn't deployed or already uses an external service.
 
-#### Operator-specific variables
+### Operator-specific variables
 
 These variables control the operator deployments. Defaults work for most setups:
 
@@ -143,7 +143,9 @@ These variables control the operator deployments. Defaults work for most setups:
 | `CNPG_WEBMODELER_CLUSTER` | `pg-webmodeler`  | CNPG cluster name for Web Modeler        |
 | `ECK_CLUSTER_NAME`        | `elasticsearch`  | ECK Elasticsearch cluster name           |
 
-Once configured, source the file:
+### Source `env.sh`
+
+Once you've configured the environment variables, source the file:
 
 ```bash
 source env.sh
@@ -151,29 +153,29 @@ source env.sh
 
 ## Step 2: Customize operator manifests
 
-:::danger Review before running
-Before running the migration, **you must review and customize** the operator-based manifests to match your production requirements. The migration deploys operators and instances using these manifests — the default settings may not be appropriate for your workload.
+:::warning Review before running
+Before running the migration, **you must review and customize** the operator-based manifests to match your production requirements. The migration deploys operators and instances using these manifests. The default settings may not be appropriate for your workload.
 :::
 
-Use the following rule of thumb while reviewing the manifests:
+Follow this guidance while reviewing the manifests:
 
 | Component     | Must review before production                                              | Defaults may be acceptable for                          |
 | ------------- | -------------------------------------------------------------------------- | ------------------------------------------------------- |
 | PostgreSQL    | Storage size, replica count, CPU and memory, connection-related parameters | Short-lived staging rehearsals with representative data |
 | Elasticsearch | Node count, storage size, JVM and resource limits                          | Dry runs where you only validate the workflow           |
-| Keycloak      | Hostname, ingress or route mode, replica count, resource limits            | Non-production validation only                          |
+| Keycloak      | Hostname, Ingress or route mode, replica count, resource limits            | Non-production validation only                          |
 
 If you are rehearsing the migration for the first time, keep the manifests simple but ensure storage is at least as large as the existing Bitnami volumes. Before production, revisit the sizing based on the timings and load observed during rehearsal.
 
 ### PostgreSQL (CloudNativePG)
 
-Review the CNPG cluster specifications in `operator-based/postgresql/postgresql-clusters.yml`. Key settings to verify:
+Review the CloudNativePG (CNPG) cluster specifications in `operator-based/postgresql/postgresql-clusters.yml`. Key settings to verify:
 
 - Storage size (must be >= your current Bitnami PVC sizes)
 - Number of replicas
 - PostgreSQL version
 - Resource requests and limits
-- PostgreSQL parameters (shared_buffers, max_connections, etc.)
+- PostgreSQL parameters (for example, shared_buffers and max_connections)
 
 <details>
 <summary>Show details: CloudNativePG manifest reference</summary>
@@ -209,21 +211,25 @@ Review the Keycloak Custom Resource in `operator-based/keycloak/`. For the broad
 - `keycloak-instance-domain-openshift.yml` — for OpenShift deployments with Routes
 - `keycloak-instance-no-domain.yml` — for port-forward setups
 
-Key settings: replicas, resource limits, hostname configuration.
+Key settings to verify:
+
+- Replicas
+- Resource limits
+- Hostname configuration
 
 :::info Keycloak 26 hostname configuration
-The Keycloak CR uses the v2 hostname provider (Keycloak 25+). The `hostname` field must include the full URL with scheme and path — for example, `https://your-domain.example.com/auth`. This ensures that the OIDC issuer URL is consistent and includes the `/auth` path prefix used by `http-relative-path`. The v1 hostname provider (Keycloak 24 and earlier) is not compatible with these manifests.
+The Keycloak Custom Resource uses the v2 hostname provider (Keycloak 25+). The `hostname` field must include the full URL with scheme and path — for example, `https://your-domain.example.com/auth`. This ensures that the OIDC issuer URL is consistent and includes the `/auth` path prefix used by `http-relative-path`. The v1 hostname provider (Keycloak 24 and earlier) is not compatible with these manifests.
 :::
 
 ## Step 3: Run the migration
 
-The migration follows five sequential phases. Each phase can be re-run safely (idempotent).
+The migration follows five sequential phases. Each phase is idempotent and can, therefore, be rerun safely.
 
 ### Phase 1: Deploy target infrastructure (no downtime)
 
 ![Illustration of Phase 1: deploy the operator-managed target infrastructure alongside the Bitnami components](./img/bitnami-migration-phase-1-deploy-targets.jpg)
 
-This phase installs the Kubernetes operators and creates the target clusters alongside your existing Bitnami components. Your application continues to run normally.
+This phase installs the Kubernetes operators and creates the target clusters alongside your existing Bitnami components. Your application continues to run normally:
 
 ```bash
 bash 1-deploy-targets.sh
@@ -232,12 +238,12 @@ bash 1-deploy-targets.sh
 What happens:
 
 1. The script displays a customization warning and asks for confirmation.
-2. It validates target resource allocations (CPU, memory, PVC sizes) against your current Bitnami StatefulSets.
-3. It installs **CloudNativePG operator** and creates PostgreSQL clusters for each component.
-4. It installs **ECK operator** and creates an Elasticsearch cluster with `reindex.remote.whitelist` configured for data migration via the `_reindex` API.
-5. It installs **Keycloak Operator** and creates the Keycloak Custom Resource.
+2. It validates target resource allocations (CPU, memory, and PVC sizes) against your current Bitnami StatefulSets.
+3. It installs the **CloudNativePG operator** and creates PostgreSQL clusters for each component.
+4. It installs the **ECK operator** and creates an Elasticsearch cluster with `reindex.remote.whitelist` configured for data migration via the `_reindex` API.
+5. It installs the **Keycloak Operator** and creates the Keycloak Custom Resource.
 
-All targets are created empty — no traffic is routed to them yet.
+All targets are created empty; no traffic is routed to them yet.
 
 <details>
 <summary>Show details: Phase 1 script reference</summary>
@@ -264,8 +270,8 @@ bash 2-backup.sh
 
 What happens:
 
-1. **PostgreSQL**: A `pg_dump` Kubernetes Job is created for each component (Identity, Keycloak, Web Modeler).
-2. **Elasticsearch**: A verification job runs to check source ES health and list all Camunda indices to be migrated.
+1. **PostgreSQL**: A `pg_dump` Kubernetes Job is created for each component (Identity, Keycloak, and Web Modeler).
+2. **Elasticsearch (ES)**: A verification job checks source ES health and lists all Camunda indices to be migrated.
 3. All backup data is stored on a shared Persistent Volume Claim (PVC).
 
 Reference templates used in this phase:
@@ -302,17 +308,17 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ![Illustration of Phase 3: stop traffic, restore the data, and switch Camunda to the new backends](./img/bitnami-migration-phase-3-cutover.jpg)
 
 :::warning Maintenance window required
-This is the only phase that causes **downtime**. Schedule a maintenance window before proceeding. Typical duration: **5–40 minutes** depending on Elasticsearch data volume — see [Downtime estimation](#downtime-estimation) for benchmarked timings.
+This is the only phase that causes downtime. Schedule a maintenance window before proceeding. This typically lasts **5–40 minutes**, depending on Elasticsearch data volume. See [downtime estimation](#downtime-estimation) for benchmarked timings.
 :::
 
 ```bash
 bash 3-cutover.sh
 ```
 
-The cutover performs the following steps:
+What happens:
 
 1. **Save** current Helm values for rollback.
-2. **Freeze** all Camunda deployments and StatefulSets (scale to 0 replicas).
+2. **Freeze** all Camunda deployments and StatefulSets (scale to zero replicas).
 3. **Final backup** — consistent backup with no active connections to ensure data integrity.
 4. **Restore** data to the new operator-managed targets:
    - `pg_restore` to CNPG clusters for each PostgreSQL database.
@@ -357,7 +363,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 bash 4-validate.sh
 ```
 
-This phase verifies that all components are healthy:
+This phase verifies all components are healthy:
 
 - All Camunda deployments and StatefulSets are ready.
 - CNPG PostgreSQL clusters report a healthy state.
@@ -391,12 +397,14 @@ bash 5-cleanup-bitnami.sh
 What happens:
 
 1. The script requires Phase 4 to be completed and displays a **destructive operation warning** with a confirmation prompt.
-2. **Deletes old Bitnami PostgreSQL** StatefulSets, their PVCs, and headless services (for each migrated component: Identity, Keycloak, Web Modeler).
+2. **Deletes old Bitnami PostgreSQL** StatefulSets, their PVCs, and headless services (for each migrated component: Identity, Keycloak, and Web Modeler).
 3. **Deletes old Bitnami Elasticsearch** StatefulSet, PVCs, and services.
 4. **Deletes old Bitnami Keycloak** StatefulSet.
 5. **Deletes the migration backup PVC**.
-6. **Re-verifies** that all Camunda components and operator-managed targets remain healthy after cleanup.
+6. **Reverifies** that all Camunda components and operator-managed targets remain healthy after cleanup.
 7. Suggests removing the `reindex.remote.whitelist` setting from the ECK Elasticsearch configuration as a post-cleanup step.
+
+The script checks whether each resource exists before attempting deletion, so it can be safely rerun if interrupted.
 
 <details>
 <summary>Show details: Phase 5 script reference</summary>
@@ -407,19 +415,15 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 </details>
 
-:::info Idempotent cleanup
-The script checks whether each resource exists before attempting deletion, so it can be safely re-run if interrupted.
-:::
-
-:::danger Destructive and irreversible
-This phase **permanently deletes** old Bitnami StatefulSets, PVCs, and the migration backup PVC. After cleanup, rollback to Bitnami sub-charts is **no longer possible**.
+:::warning Destructive and irreversible
+This phase **permanently deletes** old Bitnami StatefulSets, PVCs, and the migration backup PVC. After cleanup, rollback to Bitnami subcharts is **no longer possible**.
 
 Before running this phase, strongly consider:
 
-1. Take a full backup of all databases (`pg_dumpall` or equivalent)
-2. Snapshot PVCs or storage volumes (cloud provider snapshots)
-3. Store backups in cold storage (S3 Glacier, GCS Archive, etc.)
-4. Keep rollback artifacts in `.state/` as a safety net
+1. Taking a full backup of all databases (`pg_dumpall` or equivalent)
+2. Taking PVC or storage volume snapshots (cloud provider snapshots)
+3. Storing backups in cold storage—for example, S3 Glacier or GCS Archive
+4. Keeping rollback artifacts in `.state/` as a safety net
    :::
 
 ## Migration hooks
@@ -441,7 +445,7 @@ You can inject custom logic before or after each migration phase by placing exec
 | `pre-rollback.sh`  | Before rollback                         |
 | `post-rollback.sh` | After rollback                          |
 
-Example — send a Slack notification before cutover:
+For example, send a Slack notification before cutover:
 
 ```bash
 #!/bin/bash
@@ -452,15 +456,15 @@ curl -X POST "$SLACK_WEBHOOK" \
 ```
 
 :::note
-Hook scripts are `source`d (not forked), so they have access to all library functions and variables. A failing hook aborts the migration (due to `set -e`). Add `|| true` to make a hook best-effort.
+Hook scripts are sourced (not forked), so they have access to all library functions and variables. A failing hook aborts the migration (due to `set -e`). Add `|| true` to make a hook best-effort.
 :::
 
 Typical hook use cases:
 
 - Pause external consumers before Phase 3 and resume them after validation.
 - Send change-management or on-call notifications at the start and end of cutover.
-- Run smoke tests after Phase 3 or Phase 4 and fail the migration if a critical endpoint is unavailable.
-- Update DNS or ingress records for Keycloak after the new service becomes active.
+- Run smoke tests after Phase 3 or Phase 4, and fail the migration if a critical endpoint is unavailable.
+- Update DNS or Ingress records for Keycloak after the new service becomes active.
 
 ## Rollback
 
@@ -470,10 +474,10 @@ If the migration fails or produces unexpected results, you can roll back to the 
 bash rollback.sh
 ```
 
-This restores the previous Helm values (re-enabling Bitnami subcharts) and restarts Camunda on the original infrastructure. The operator-managed resources (CNPG clusters, ECK, Keycloak CR) are **not deleted**, allowing you to retry or debug.
+This restores the previous Helm values (re-enabling Bitnami subcharts) and restarts Camunda on the original infrastructure. The operator-managed resources (CNPG clusters, ECK, and Keycloak Custom Resource) are **not deleted**, allowing you to retry or debug.
 
 <details>
-<summary>Show details: rollback script reference</summary>
+<summary>Show details: Rollback script reference</summary>
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/rollback.sh
@@ -482,16 +486,16 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 </details>
 
 :::info Rollback scope
-Rollback is available after Phase 3 (cutover). Before that, simply stop the migration — your Bitnami infrastructure is still active and untouched.
+Rollback is available after Phase 3 (cutover). Before that, simply stop the migration; your Bitnami infrastructure is still active and untouched.
 :::
 
 ## Downtime estimation
 
-Only Phase 3 (cutover) causes downtime. The estimates below were measured on minimal Kubernetes clusters with standard storage. **Production clusters with faster storage and networking will perform significantly better** — always run a [staging rehearsal](#staging-rehearsal) with representative data volumes to measure your actual downtime.
+Only Phase 3 (cutover) causes downtime. The estimates below were measured on minimal Kubernetes clusters with standard storage. **Production clusters with faster storage and networking will perform significantly better**. Always run a [staging rehearsal](#staging-rehearsal) with representative data volumes to measure your actual downtime.
 
 ### Reference timings
 
-The following timings were observed migrating a Camunda 8 installation with all components (Identity, Keycloak, Web Modeler, Elasticsearch):
+The following timings were observed migrating a Camunda 8 installation with all components (Identity, Keycloak, Web Modeler, and Elasticsearch):
 
 | Data profile                 | ES data  | PG data (3 databases) | Observed downtime |
 | ---------------------------- | -------- | --------------------- | ----------------- |
@@ -500,12 +504,12 @@ The following timings were observed migrating a Camunda 8 installation with all 
 
 ### Phase 3 breakdown
 
-| Step                          | Duration    | Notes                                                                            |
-| ----------------------------- | ----------- | -------------------------------------------------------------------------------- |
-| Freeze components (scale → 0) | ~10 s       | Scale down all deployments and StatefulSets                                      |
-| PostgreSQL backup + restore   | ~40 s       | `pg_dump` / `pg_restore` for all databases; usually negligible at moderate sizes |
-| **Elasticsearch reindex**     | **~38 min** | **Dominant factor**; copies all indices via the `_reindex` API                   |
-| Helm upgrade + restart        | ~2 min      | Reconfigure backends and restart all components                                  |
+| Step                          | Duration    | Notes                                                                             |
+| ----------------------------- | ----------- | --------------------------------------------------------------------------------- |
+| Freeze components (scale → 0) | ~10 s       | Scale down all deployments and StatefulSets                                       |
+| PostgreSQL backup + restore   | ~40 s       | `pg_dump` / `pg_restore` for all databases (usually negligible at moderate sizes) |
+| **Elasticsearch reindex**     | **~38 min** | **(Dominant factor)** Copies all indices via the `_reindex` API                   |
+| Helm upgrade + restart        | ~2 min      | Reconfigure backends and restart all components                                   |
 
 ### Estimates by Elasticsearch data volume
 
@@ -519,23 +523,22 @@ The following timings were observed migrating a Camunda 8 installation with all 
 :::info Key observations
 
 - **Elasticsearch reindex dominates downtime.** With ~9 GB of ES data, the reindex step accounts for ~95% of the total cutover time. PostgreSQL backup and restore completes in under a minute regardless of reasonable data sizes.
-- **Downtime scales linearly with ES data volume.** The largest indices (such as Optimize process-instance history) drive the overall duration.
+- **Downtime scales linearly with ES data volume.** The largest indices—such as Optimize process instance history—drive the overall duration.
 - **Your cluster will likely be faster.** These timings were measured on constrained test infrastructure. Production clusters with NVMe storage, dedicated nodes, and higher network bandwidth typically achieve much higher reindex throughput.
 - **Always measure in staging.** Run the full migration on a staging environment with representative data volumes to get an accurate downtime estimate for your specific setup.
   :::
 
 ## Precautions
 
-1. **Test in staging first** — Run the full migration on a non-production environment before migrating production.
-2. **Schedule a maintenance window** — Phase 3 requires downtime.
-3. **Check cluster capacity** — During Phases 1–2, both old and new infrastructure run simultaneously, requiring additional CPU, memory, and storage.
-4. **Backup your Helm values** — Done automatically in Phase 3, but consider an extra manual backup with `helm get values camunda -n camunda > backup-values.yaml`.
-5. **Monitor resource quotas** — CNPG and ECK clusters consume additional resources. Ensure your namespace quotas and node capacity allow for the temporary duplication.
-6. **Elasticsearch `reindex.remote.whitelist`** — The target ECK cluster must have `reindex.remote.whitelist` configured to allow pulling data from the source Bitnami Elasticsearch via the `_reindex` API. The migration scripts patch this automatically.
-7. **DNS TTL** — If using a domain for Keycloak, ensure DNS TTL is low before cutover to minimize propagation delay.
-8. **Keycloak OIDC impact** — Keycloak is the OIDC provider for all Camunda components (and possibly external applications). Migrating to the Keycloak Operator changes the underlying service. If you use a DNS CNAME for Keycloak, use a `hooks/post-phase-3.sh` hook to update the DNS target to the new Keycloak Operator service after cutover. If external applications share the same Keycloak realm, coordinate the DNS switch with their teams.
-
-   **Session impact:** The database migration preserves all persistent data (realms, users, clients, signing keys, refresh tokens). Since Keycloak 25+, user sessions are persisted in the database and survive the switch. In-flight authentication flows (login pages in progress) and pending action tokens (password reset links) are lost — users simply need to retry. This is inherent to the downtime window and has no lasting effect.
+- **Test in staging first:** Run the full migration in a non-production environment before migrating production.
+- **Schedule a maintenance window:** Phase 3 requires downtime.
+- **Check cluster capacity:** During Phases 1 and 2, both old and new infrastructure run simultaneously, requiring additional CPU, memory, and storage.
+- **Backup your Helm values:** Done automatically in Phase 3, but consider an extra manual backup with `helm get values camunda -n camunda > backup-values.yaml`.
+- **Monitor resource quotas:** CNPG and ECK clusters consume additional resources. Ensure your namespace quotas and node capacity allow for the temporary duplication.
+- **Elasticsearch `reindex.remote.whitelist`:** The target ECK cluster must have `reindex.remote.whitelist` configured to allow pulling data from the source Bitnami Elasticsearch via the `_reindex` API. The migration scripts patch this automatically.
+- **DNS TTL:** If using a domain for Keycloak, ensure DNS TTL is low before cutover to minimize propagation delay.
+- **Keycloak OIDC impact:** Keycloak is the OIDC provider for all Camunda components (and possibly external applications). Migrating to the Keycloak Operator changes the underlying service. If you use a DNS CNAME for Keycloak, use the `hooks/post-phase-3.sh` hook to update the DNS target to the new Keycloak Operator service after cutover. If external applications share the same Keycloak realm, coordinate the DNS switch with their teams.
+- **Session impact:** The database migration preserves all persistent data (realms, users, clients, signing keys, and refresh tokens). Since Keycloak 25+, user sessions are persisted in the database and survive the switch. In-flight authentication flows (login pages in progress) and pending action tokens (password reset links) are lost; users simply need to retry. This is inherent to the downtime window and has no lasting effect.
 
 :::warning IRSA / IAM-based authentication not supported
 The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or OpenSearch with IAM auth require a custom migration approach.
@@ -558,7 +561,7 @@ kubectl logs -n ${NAMESPACE} job/<job-name>
 kubectl describe job <job-name> -n ${NAMESPACE}
 ```
 
-Each phase is idempotent — you can re-run it after fixing the issue.
+Each phase is idempotent; you can rerun it after fixing the issue.
 
 ### PostgreSQL restore fails with permission errors
 
@@ -578,7 +581,7 @@ kubectl exec -it <eck-pod> -n ${NAMESPACE} -- \
   curl -s http://${CAMUNDA_RELEASE_NAME}-elasticsearch:9200/_cluster/health
 ```
 
-If the reindex fails for specific indices, check the job logs for mapping conflicts or timeout errors. You can delete the problematic indices on the target and re-run Phase 3.
+If the reindex fails for specific indices, check the job logs for mapping conflicts or timeout errors. You can delete the problematic indices on the target and rerun Phase 3.
 
 ### Migration status check
 
@@ -592,7 +595,7 @@ This shows which phases have been completed and their timestamps.
 
 ### State tracking
 
-The scripts maintain migration state in `.state/migration.env` — a plain key-value file that records phase completion timestamps and deployment decisions. Each run appends to `.state/migration-YYYY-MM-DD.log`. The `.state/` directory is local and gitignored. To reset state and start over:
+The scripts maintain migration state in `.state/migration.env`, a plain key-value file that records phase completion timestamps and deployment decisions. Each run appends to `.state/migration-YYYY-MM-DD.log`. The `.state/` directory is local and gitignored. To reset state and start over, run:
 
 ```bash
 rm -rf .state/
@@ -604,13 +607,13 @@ Before running this migration in production, use the checklist below to reduce r
 
 ### Staging rehearsal
 
-1. **Clone your production environment** to a staging cluster (same Helm chart version, same component configuration, comparable data volumes).
-2. **Run the full migration end-to-end** in staging, including all five phases (deploy, backup, cutover, validate, and cleanup).
-3. **Measure actual timings**: record how long each phase takes, especially the `3-cutover.sh` phase, as it determines your downtime window. The [benchmarked timings](#downtime-estimation) show that Elasticsearch reindex dominates — expect downtime to scale linearly with your ES data volume.
+1. **Clone your production environment** to a staging cluster with the same Helm chart version, same component configuration, and comparable data volumes.
+2. **Run the full migration end to end** in staging, including all five phases: deploy, backup, cutover, validate, and cleanup.
+3. **Measure actual timings**: record how long each phase takes, especially the `3-cutover.sh` phase, as it determines your downtime window. The [benchmarked timings](#downtime-estimation) show that Elasticsearch reindex dominates. Expect downtime to scale linearly with your ES data volume.
 4. **Test rollback**: after a successful staging migration, intentionally run `bash rollback.sh` to verify you can revert cleanly.
 
 :::tip
-Use a representative data set — empty databases migrate in seconds but do not reveal the Elasticsearch reindex bottleneck that large datasets will. As a reference, ~9 GB of ES data takes ~40 min on minimal test infrastructure — production clusters with faster storage and networking will perform significantly better.
+Use a representative data set; empty databases migrate in seconds but do not reveal the Elasticsearch reindex bottleneck that large datasets will. As a reference, ~9 GB of ES data takes ~40 min on minimal test infrastructure, whereas production clusters with faster storage and networking will perform significantly better.
 :::
 
 ### Production dry-run
@@ -623,19 +626,19 @@ Review the output carefully. Ensure that all Kubernetes resources, secrets, and 
 
 Before starting the migration in production:
 
-- [ ] **Notify stakeholders**: announce the maintenance window at least 48 hours in advance. Include expected start time, duration (measured in staging), and impact on end users.
-- [ ] **Verify backups**: confirm that your existing backup strategy (Velero, volume snapshots, or cloud provider backups) has a recent successful backup. The migration creates its own backup, but an independent one provides an additional safety net.
-- [ ] **Scale down non-essential consumers**: if you have external systems consuming Camunda APIs, consider pausing them during the freeze window to prevent data inconsistencies.
-- [ ] **Check cluster resources**: ensure the cluster has enough CPU, memory, and storage to run both old and new infrastructure simultaneously during the migration (both exist briefly).
-- [ ] **Review `env.sh`**: double-check all variables, especially `NAMESPACE`, `CAMUNDA_RELEASE_NAME`, `PG_TARGET_MODE`, and `ES_TARGET_MODE`.
-- [ ] **Monitor readiness**: have dashboards open for cluster health, pod status, and storage capacity.
+- **Notify stakeholders**: announce the maintenance window at least 48 hours in advance. Include expected start time, duration (measured in staging), and impact on end users.
+- **Verify backups**: confirm your existing backup strategy (Velero, volume snapshots, or cloud provider backups) has a recent successful backup. The migration creates its own backup, but an independent one provides an additional safety net.
+- **Scale down non-essential consumers**: if you have external systems consuming Camunda APIs, consider pausing them during the freeze window to prevent data inconsistencies.
+- **Check cluster resources**: ensure the cluster has enough CPU, memory, and storage to run both old and new infrastructure simultaneously during the migration—both exist briefly.
+- **Review `env.sh`**: double-check all variables, especially `NAMESPACE`, `CAMUNDA_RELEASE_NAME`, `PG_TARGET_MODE`, and `ES_TARGET_MODE`.
+- **Monitor readiness**: have dashboards open for cluster health, pod status, and storage capacity.
 
 ### Failback procedure
 
 If the migration succeeds but you discover issues in the hours or days following:
 
-1. **Immediate failback** (before Phase 5 — Bitnami PVCs still exist): run `bash rollback.sh` to revert the Helm values and re-attach to the original Bitnami StatefulSets.
-2. **Late failback** (after Phase 5 — Bitnami PVCs deleted): restore from the backup taken during Phase 2 or from your independent backup.
+1. **Immediate failback** (before Phase 5 when Bitnami PVCs still exist): run `bash rollback.sh` to revert the Helm values and re-attach to the original Bitnami StatefulSets.
+2. **Late failback** (after Phase 5 when Bitnami PVCs have been deleted): restore from the backup taken during Phase 2 or from your independent backup.
 
 <FailbackCaution />
 
@@ -643,8 +646,8 @@ If the migration succeeds but you discover issues in the hours or days following
 
 - All `pg_dump` backups are stored on a dedicated PVC (`migration-backup-pvc`) that persists independently of the migration.
 - Elasticsearch snapshots are stored in a registered repository and retained according to the configured retention policy.
-- The migration scripts are **idempotent**: re-running a phase that was interrupted picks up where it left off.
-- No Bitnami resources are deleted during Phases 1–4 — they are only disconnected from the Helm release. Phase 5 explicitly removes them after validation.
+- The migration scripts are **idempotent**: rerunning a phase that was interrupted picks up where it left off.
+- No Bitnami resources are deleted during Phases 1–4; they're only disconnected from the Helm release. Phase 5 explicitly removes them after validation.
 
 ### Post-migration monitoring
 
