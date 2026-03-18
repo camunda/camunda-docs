@@ -61,7 +61,7 @@ There are two main approaches to bring your own model:
 ### Model recommendations
 
 :::tip
-Camunda recommends using GPT-4 class models or comparable (Claude 3.5 Sonnet, Gemini 1.5 Pro) for reliable BPMN generation.
+Camunda recommends using GPT-5 class models or comparable (Claude 4.5 Sonnet, Gemini 2.5 Pro) for reliable BPMN generation.
 :::
 
 Copilot's BPMN generation requires models with strong reasoning and structured output capabilities. When using weaker or smaller models:
