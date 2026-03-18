@@ -4,7 +4,11 @@ title: Users
 description: "Learn how to manage user access to an orchestration cluster."
 ---
 
-Users are individuals who are granted with access to an orchestration cluster and it's components like Operate, Tasklist and REST API. User management differs depending on whether you are using Camunda 8 SaaS or a Self-Managed installation.
+Users are individuals who are granted with access to an orchestration cluster and its components like Operate, Tasklist and REST API. User management differs depending on whether you are using Camunda 8 SaaS or a Self-Managed installation.
+
+:::info Username case sensitivity
+Usernames in the Orchestration Cluster are case-sensitive. When you assign authorizations, groups, roles, or tenants to a user, always use the exact username value (including case) from Identity or your identity provider. For example, `abc@example.com` and `Abc@example.com` are treated as different users, and assignments created for `Abc@example.com` will not apply to `abc@example.com`.
+:::
 
 ## SaaS
 

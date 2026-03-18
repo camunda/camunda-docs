@@ -1146,6 +1146,18 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Secure connectivity (AWS PrivateLink)",
+          link: {
+            type: "doc",
+            id: "components/saas/secure-connectivity/secure-connectivity-AWS",
+          },
+          items: [
+            "components/saas/secure-connectivity/secure-connectivity-console-setup",
+          ],
+        },
+
+        {
+          type: "category",
           label: "Encryption",
           link: {
             type: "doc",
@@ -1159,6 +1171,7 @@ module.exports = {
             "components/saas/byok/faq-and-troubleshooting",
           ],
         },
+
         "components/saas/backups",
         "components/saas/auto-updates",
         "components/saas/data-retention",
@@ -1368,7 +1381,7 @@ module.exports = {
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
             "apis-tools/testing/connectors",
-            "apis-tools/testing/test-scenario-dsl",
+            "apis-tools/testing/json-test-cases",
           ],
         },
         {
@@ -1379,14 +1392,10 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.9",
-      items: ["apis-tools/migration-manuals/migrate-to-89"],
-    },
-    {
-      type: "category",
-      label: "Upgrade to Camunda 8.8",
+      className: "sidebar-cta",
       link: {
         type: "doc",
-        id: "apis-tools/migration-manuals/index",
+        id: "apis-tools/migration-manuals/migrate-to-89",
       },
       items: [
         "apis-tools/migration-manuals/migrate-to-camunda-api",
@@ -1554,8 +1563,9 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/install/quick-install",
-                "self-managed/deployment/helm/install/helm-with-rdbms",
                 "self-managed/deployment/helm/install/production/index",
+                "self-managed/deployment/helm/configure/operator-based-infrastructure",
+                "self-managed/deployment/helm/install/helm-with-rdbms",
               ],
             },
             "self-managed/deployment/helm/chart-parameters",
@@ -1582,7 +1592,6 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
-                "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {

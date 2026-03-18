@@ -120,7 +120,7 @@ To activate basic authentication:
 **Environment variables**
 
 ```bash
-CAMUNDA_CLIENT_AUTH_METHOD=oidc
+CAMUNDA_CLIENT_AUTH_METHOD=basic
 CAMUNDA_CLIENT_AUTH_USERNAME=<your username>
 CAMUNDA_CLIENT_AUTH_PASSWORD=<your password>
 ```

@@ -10,11 +10,13 @@ import TabItem from "@theme/TabItem";
 
 Configure secondary storage to enable features such as Operate, Tasklist, Identity, and search-based REST APIs in Camunda Self-Managed environments.
 
+Use "secondary storage" as the general concept. The backend can be a supported RDBMS or a document-store backend such as Elasticsearch or OpenSearch, depending on your deployment requirements.
+
 ## Configuration options
 
 You can configure secondary storage using Helm charts, Docker Compose, or manual configuration files.
 
-Camunda uses the `data.secondary-storage` configuration to define which database backend supports advanced web applications and APIs.
+Camunda uses the `data.secondary-storage` configuration to define which secondary storage backend supports Orchestration Cluster web applications and APIs (for example, Operate, Tasklist, Identity, and search endpoints).
 
 :::note
 For the latest list of supported relational databases and versions, see the  
@@ -29,7 +31,7 @@ For the latest list of supported relational databases and versions, see the
 
 <TabItem value="helm">
 
-When deploying with Helm, set the secondary storage type, connection details, and rdbms exporters in your `values.yaml` file:
+When deploying with Helm, set the secondary storage type, connection details, and exporter settings in your `values.yaml` file.
 
 ```yaml
 orchestration:
@@ -51,8 +53,7 @@ orchestration:
 
 More information about RDBMS in the Camunda Helm chart can be found on this [configuration page](/self-managed/deployment/helm/configure/database/rdbms.md).
 
-For Elasticsearch:
-The Camunda Helm chart by default enables the related exporter and doesn't require extra configuration.
+If you choose Elasticsearch as the secondary storage backend, configure it as follows:
 
 ```yaml
 global:
@@ -75,7 +76,7 @@ orchestration:
       type: elasticsearch
 ```
 
-More information about Elasticsearch in the Camunda Helm chart can be found on this [configuration page](self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md).
+More information about Elasticsearch in the Camunda Helm chart can be found in [using external Elasticsearch](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md).
 
 To explicitly disable secondary storage (for example, when running only the Zeebe engine), set:
 
@@ -100,7 +101,7 @@ environment:
   - CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_PASSWORD=
 ```
 
-For Elasticsearch:
+If you choose Elasticsearch as the secondary storage backend:
 
 ```yaml
 environment:
@@ -131,7 +132,7 @@ data:
       password:
 ```
 
-For Elasticsearch:
+If you choose Elasticsearch as the secondary storage backend:
 
 ```yaml
 data:
@@ -147,20 +148,18 @@ data:
 
 ## Choosing a storage backend
 
-| Scenario                                  | Recommended backend                | Reason                                                        |
-| :---------------------------------------- | :--------------------------------- | :------------------------------------------------------------ |
-| Local testing or Camunda 8 Run quickstart | H2                                 | Fast, lightweight, and runs entirely in memory or file-based. |
-| Production workloads                      | Elasticsearch or a supported RDBMS | Scalable and persistent; designed for concurrent queries.     |
-| Debugging and troubleshooting             | H2 or PostgreSQL                   | Easier to inspect and visualize data.                         |
+- Local testing or Camunda 8 Run quickstart: H2 is fast, lightweight, and runs entirely in memory or file-based.
+- Production workloads: Use a supported RDBMS or document-store backend. Choose based on operational needs and validate with [benchmarking and sizing guidance](/components/best-practices/architecture/sizing-your-environment.md).
+- Debugging and troubleshooting: H2 or PostgreSQL are often easier to inspect and visualize.
 
 :::note
-Starting in 8.9-alpha3, H2 is the default secondary storage for lightweight Camunda 8 Run setups and quickstarts. H2 remains suitable for local testing, demos, and file-based setups, but it is not recommended for production workloads where persistence, scaling, and full analytics are required.
+Starting in 8.9, H2 is the default secondary storage for lightweight Camunda 8 Run setups and quickstarts. H2 remains suitable for local testing, demos, and file-based setups, but it is not recommended for production workloads where persistence, scaling, and full analytics are required.
 
-For production use, Orchestration Cluster applications and APIs (including Operate, Tasklist, Identity, and search endpoints) should run against a persistent secondary storage backend such as a supported RDBMS or Elasticsearch. Consult the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) when choosing a relational database.
+For production use, Orchestration Cluster applications and APIs (including Operate, Tasklist, Identity, and search endpoints) should run against a persistent secondary storage backend such as a supported RDBMS or a document-store backend (Elasticsearch/OpenSearch). Both are valid production choices when supported for your deployment. Consult the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) when choosing a relational database, and [supported environments](/reference/supported-environments.md) for Elasticsearch/OpenSearch versions.
 :::
 
 :::note
-Switching the secondary storage type (for example H2 ⇄ Elasticsearch) in alpha3 does not preserve existing data. The system starts with a fresh secondary store. Also note Operate v2 had limited functionality in 8.9-alpha3 when running against H2.
+Switching between secondary storage backend families (document-store and RDBMS) is not a supported in-place migration path. Plan migration as a fresh secondary-store setup, and validate the procedure in a non-production environment before rollout. For upgrade planning, see [prepare for upgrade](/self-managed/upgrade/prepare-for-upgrade.md).
 :::
 
 ## Run without secondary storage

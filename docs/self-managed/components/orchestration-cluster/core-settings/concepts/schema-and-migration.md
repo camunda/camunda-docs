@@ -4,11 +4,13 @@ title: Schema and data migration
 description: "The orchestration cluster stores data with secondary storage and provides tools to manage schema and migrations."
 ---
 
-The orchestration cluster persists runtime and task data in Elasticsearch. On first startup, all required indices and templates are automatically created.
+The orchestration cluster persists runtime and task data in secondary storage.
+
+This page describes schema and migration behavior for document-store secondary storage (Elasticsearch/OpenSearch), where indices and templates are created automatically on first startup. For RDBMS secondary storage guidance, see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md).
 
 ## Schema
 
-Cluster data is stored in Elasticsearch indices, each governed by a schema version. Index names follow this pattern:
+For document-store backends, cluster data is stored in indices governed by a schema version. Index names follow this pattern:
 
 ```
 {cluster-index-prefix}-{legacy-prefix}-{datatype}-{schemaversion}_[{date}]

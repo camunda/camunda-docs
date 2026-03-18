@@ -234,6 +234,14 @@ The proxy-related environment variables are lowercase because they follow a wide
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
 
+### Unstable configuration options
+
+These are unstable options that are not officially supported and may be removed without deprecation in future releases. They are intended for testing and feedback purposes only.
+
+| Environment variable                        | Description                                                                                                                                                                                                | Example value | Default value |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `IMPORT_RESOURCES_ALLOW_PRIVATE_IP_ADDRESS` | Allow importing resources from a host that resolves to a private IP address. Enabling this option weakens server-side request forgery (SSRF) protections and can significantly increase security exposure. | `true`        | `false`       |
+
 ### WebSocket
 
 The `webapp` component sends certain events (e.g. "user opened diagram", "user left diagram") to the [WebSocket server](#configuration-of-the-websocket-component) and can also react to such events (e.g. show a notification in the UI that a user left the diagram).

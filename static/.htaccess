@@ -453,6 +453,7 @@ RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-element-inst
 
 RewriteRule ^docs/apis-tools/spring-zeebe-sdk/getting-started/?$ /docs/apis-tools/camunda-spring-boot-starter/getting-started/ [R=301,L]
 RewriteRule ^docs/apis-tools/java-client/zeebe-process-test/?$ /docs/apis-tools/testing/getting-started/ [R=301,L]
+RewriteRule ^docs/apis-tools/testing/test-scenario-dsl/?$ /docs/apis-tools/testing/json-test-cases/ [R=301,L]
 RewriteRule ^docs/apis-tools/spring-zeebe-sdk/configuration/?$ /docs/apis-tools/camunda-spring-boot-starter/getting-started/ [R=301,L]
 
 RewriteRule ^docs/apis-tools/camunda-api-rest/camunda-api-rest-authentication/?$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication/ [R=301,L]
@@ -969,6 +970,7 @@ RewriteRule ^docs/guides/react-components/install-docker-compose/?$ /docs/guides
 RewriteRule ^docs/guides/react-components/install-c8run/?$  /docs/guides/ [R=301,L]
 
 # Move logging from troubleshooting to monitoring
+RewriteRule ^docs/8.7/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.7/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 RewriteRule ^docs/8.6/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 

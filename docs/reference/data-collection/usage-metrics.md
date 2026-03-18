@@ -4,9 +4,13 @@ title: "Usage metrics"
 description: "Learn about the three main usage metrics that impact Camunda 8 pricing."
 ---
 
-There are three main usage metrics that have an impact on Camunda 8 pricing.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## Definition of metrics
+
+There are three main usage metrics that have an impact on Camunda 8 pricing.
 
 It is important to understand these definitions, their impact on billing, and how to retrieve them.
 
