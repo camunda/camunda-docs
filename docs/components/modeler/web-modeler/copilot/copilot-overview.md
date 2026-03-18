@@ -56,17 +56,9 @@ This context allows Camunda Copilot to:
 | Form content    | When editing a Form                 | The current Form JSON structure                    |
 | FEEL expression | When FEEL editor is open            | The FEEL expression you're working on              |
 
-## Conversation history
+## Chat history
 
-Copilot saves your conversations so you can continue where you left off.
-
-### Features
-
-- **Automatic saving**: Conversations are automatically saved as you chat
-- **90-day retention**: Conversations are stored for 90 days before being automatically deleted
-- **Resume conversations**: Click on any past conversation to continue the discussion
-- **Rename conversations**: Give conversations meaningful titles for easy reference
-- **Delete conversations**: Remove conversations you no longer need
+Camunda Copilot automatically saves your conversations so you can pick up where you left off. Conversations are retained for 90 days before being automatically deleted. You can click on any past conversation to continue the discussion, rename conversations to give them meaningful titles for easy reference, or delete conversations you no longer need.
 
 ### Managing conversations
 
