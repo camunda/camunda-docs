@@ -107,7 +107,7 @@ After completing part of your process, you can **rewind** to a previous element 
 Play's rewind operation currently does not support the following elements:
 
 - Call activities
-- Timer events that complete without being skipped
+- Timer events
 
 #### Additional limitations
 
@@ -262,7 +262,6 @@ After selecting the **Play** tab in Self-Managed, you are prompted to select fro
 
 ### Limitations {#self-managed-limitations}
 
-- Play does not work with a custom OIDC provider.
 - The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior, and therefore are not supported when used with Play.
 - Play cannot check the presence of connector secrets in Self-Managed setups.
   If a secret is missing, Play will show an incident at runtime.

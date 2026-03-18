@@ -81,7 +81,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Cancels a running batch operation.
         This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
@@ -121,7 +121,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Suspends a running batch operation.
         This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
@@ -163,7 +163,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Resumes a suspended batch operation.
         This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
@@ -232,6 +232,9 @@ paths:
 components:
   schemas:
     BatchOperationCreatedResult:
+      required:
+        - batchOperationKey
+        - batchOperationType
       description: The created batch operation.
       type: object
       properties:
@@ -301,6 +304,8 @@ components:
     BatchOperationSearchQueryResult:
       description: The batch operation search query result.
       type: object
+      required:
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -310,6 +315,16 @@ components:
           items:
             $ref: "#/components/schemas/BatchOperationResponse"
     BatchOperationResponse:
+      required:
+        - batchOperationKey
+        - batchOperationType
+        - state
+        - operationsCompletedCount
+        - operationsFailedCount
+        - operationsTotalCount
+        - actorType
+        - actorId
+        - errors
       type: object
       properties:
         batchOperationKey:
@@ -322,17 +337,30 @@ components:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
         startDate:
           type: string
-          description: The start date of the batch operation.
+          description: |
+            The start date of the batch operation.
+            This is `null` if the batch operation has not yet started.
           format: date-time
+          nullable: true
         endDate:
           type: string
-          description: The end date of the batch operation.
+          description: |
+            The end date of the batch operation.
+            This is `null` if the batch operation is still running.
           format: date-time
+          nullable: true
         actorType:
-          $ref: "audit-logs.yaml#/components/schemas/AuditLogActorTypeEnum"
+          description: |
+            The type of the actor who performed the operation.
+            This is `null` if the batch operation was created before 8.9,
+            or if the actor information is not available.
+          nullable: true
+          allOf:
+            - $ref: "audit-logs.yaml#/components/schemas/AuditLogActorTypeEnum"
         actorId:
           type: string
           description: The ID of the actor who performed the operation. Available for batch operations created since 8.9.
+          nullable: true
         operationsTotalCount:
           type: integer
           description: The total number of items contained in this batch operation.
@@ -424,6 +452,8 @@ components:
             - $ref: "#/components/schemas/BatchOperationTypeFilterProperty"
     BatchOperationItemSearchQueryResult:
       type: object
+      required:
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -434,6 +464,8 @@ components:
             $ref: "#/components/schemas/BatchOperationItemResponse"
     BatchOperationItemResponse:
       type: object
+      required:
+        - rootProcessInstanceKey
       properties:
         operationType:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
@@ -449,7 +481,13 @@ components:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: the process instance key of the processed item.
         rootProcessInstanceKey:
-          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         state:
           description: State of the item.
           type: string
@@ -465,6 +503,7 @@ components:
           format: date-time
         errorMessage:
           description: the error message from the engine in case of a failed operation.
+          nullable: true
           type: string
     DecisionInstanceDeletionBatchOperationRequest:
       type: object

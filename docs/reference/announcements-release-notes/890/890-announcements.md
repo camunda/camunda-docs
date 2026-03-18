@@ -107,6 +107,25 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Keycloak 25.x no longer supported
+
+Camunda 8.9 drops support for Keycloak 25.x. Only Keycloak 26.x is now supported for Management Identity.
+
+- Keycloak 25.x has reached end of life and is no longer maintained by the Keycloak project.
+- This aligns with [Keycloak's updated release strategy](https://www.keycloak.org/2024/10/release-updates), which moved to quarterly minor releases.
+- Upgrade your Keycloak instance to 26.x before moving to Camunda 8.9.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
 ## Key changes
 
 ### Agentic orchestration
@@ -119,18 +138,27 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 #### MCP Client and MCP Remote Client connectors
 
-Breaking changes are [introduced in alpha 2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) to the element templates and the runtime configuration of the MCP Client.
+[Camunda 8.9.0-alpha2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) introduces breaking changes to the MCP Client element templates and runtime configuration.
 
-To resolve this, you must update both the MCP Client and MCP Remote Client connectors to use the element template version 1.
+To remain compatible, update both the MCP Client and MCP Remote Client connectors to use element template version `1`.
 
 :::info
-To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-client.md) documentation.
+For more information, see the [MCP](/components/early-access/alpha/mcp-client/mcp-client.md) documentation.
 :::
 
 </div>
 </div>
 
 ### APIs & tools
+
+:::note API upgrade checklist for 8.9
+
+- Update to the latest official Camunda SDK versions.
+- If you generate clients from OpenAPI, regenerate from the 8.9 specification.
+- Re-run compilation/type checks and address enum-handling or type-mapping updates.
+- Review message subscription filter payload construction for `processDefinitionKey`.
+
+:::
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -155,7 +183,187 @@ This change aligns with the Spring Boot support policy, as OSS support for Sprin
 </div>
 <div className="release-announcement-content">
 #### Resource deletion endpoint now has response body
-Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{resourceKey}/deletion` in the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) now returns a response body. The Camunda Java client has been updated to support this change.
+Starting with 8.9.0-alpha4, the resource deletion endpoint `POST /resources/{resourceKey}/deletion` in the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) returns a response body.
+
+This provides explicit deletion feedback, making client-side confirmation, auditing, and follow-up workflow logic more reliable.
+
+If you use an SDK, update to the latest version for compiler and model support.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenAPI type-safety enhancements for request and schema types
+
+Starting with 8.9.0, parts of the OpenAPI contract use stronger domain types and one schema rename to improve semantic correctness in client applications.
+
+This increases compile-time safety and helps prevent semantic substitution errors in typed integrations.
+
+Affected contract updates include:
+
+- `CreateDeploymentData.body.tenantId`: `string` → `TenantId`
+- `CreateDocumentData.query.documentId`: `string` → `DocumentId`
+- `SearchCorrelatedMessageSubscriptionsData.body.filter.processDefinitionKey.$eq`: `string` → `ProcessDefinitionKey`
+- `CorrelatedMessageSubscriptionFilter.processDefinitionKey`: `string` → `ProcessDefinitionKeyFilterProperty | undefined`
+- `CorrelatedMessageSubscriptionSearchQuery.filter.processDefinitionKey.$eq`: `string` → `ProcessDefinitionKey`
+- `ProcessInstanceIncidentSearchQuery` renamed to `IncidentSearchQuery`
+
+Example request payload update for message subscription filtering:
+
+- Before: `"processDefinitionKey": "2251799813685251"`
+- After (for example): `"processDefinitionKey": { "$eq": "2251799813685251" }`
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Generated-client users: regenerate clients and update type mappings/imports.
+- Handwritten integrations: update request payload construction and affected typed helpers.
+
+<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#type-safety-enhancements)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenAPI enum extensions for new 8.9 capabilities
+
+Starting with 8.9.0, new enum literals were added to support expanded functionality.
+
+This improves feature coverage, but typed or exhaustive enum-handling code paths may require updates to preserve full completeness checks.
+
+Added literals include:
+
+- `BatchOperationTypeEnum` / `BatchOperationTypeFilterProperty`: `DELETE_DECISION_INSTANCE`
+- `ResourceTypeEnum`: `USER_TASK`
+- `PermissionTypeEnum`: `COMPLETE`
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Generated-client users: regenerate and add fallback/default handling for enum parsing and matching.
+- Handwritten integrations: review enum branches (for example exhaustive `switch`/pattern matches) and add handling for new values.
+
+<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#enum-extensions)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Bug fix: `FormResult.schema` type corrected from object to string
+
+The `schema` property in the `FormResult` response was incorrectly specified as `type: object` in the OpenAPI contract, but the server has always returned it as a JSON `string`. This specification bug is now fixed.
+
+This is a bug fix that aligns the OpenAPI contract with actual server behavior, improving correctness for typed client integrations. Applications already handling the runtime `string` value are unaffected.
+
+The Camunda Java client is also affected: `io.camunda.client.api.search.response.Form::getSchema()` now returns `String` instead of `Object`. If your Java code casts or processes the return value as `Object`, update it to use `String`.
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Java client users: update calls to `Form::getSchema()` to handle the `String` return type instead of `Object`.
+- Generated-client users: regenerate your client. If your generated code relied on the incorrect `object` typing, update it to handle `string`.
+- Handwritten integrations: no change needed if you were already handling the actual `string` response.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `versionTag` now returns `null` instead of empty string when absent
+
+Starting with 8.9.0, API response fields for `versionTag` return `null` instead of an empty string `""` when no version tag is set. This properly indicates absence rather than leaking an internal default.
+
+Previously, customers had to handle both empty string and absent/null to determine whether a version tag was set. This change simplifies that logic by using `null` consistently to signal absence, aligning with how other optional fields like `businessId` are handled.
+
+What to do:
+
+- If your code checks for an empty string (`""`) to detect a missing version tag, update it to check for `null` instead.
+- Official SDK users: update to the latest SDK version.
+- Generated-client users: regenerate your client to pick up the updated nullable annotation.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Document API response schemas now have explicit required and nullable annotations
+
+Starting with 8.9.0, the OpenAPI specification uses distinct schemas for document request and response payloads, and adds explicit `required` / `nullable` annotations to document response types.
+
+Previously, a shared `DocumentMetadata` schema was used for both creating and reading documents. Because response fields like `customProperties` are always populated by the server, but optional in requests, a single schema could not accurately express both contracts. This caused incorrect required/optional behavior in generated clients.
+
+What changed:
+
+- **`DocumentMetadata`**: now request-only. `customProperties` is no longer marked as required (it was previously required even in requests).
+- **`DocumentMetadataResponse`** (new): response schema with `fileName`, `expiresAt`, `size`, `contentType`, `customProperties`, `processDefinitionId`, and `processInstanceKey` all marked as required. `expiresAt`, `processDefinitionId`, and `processInstanceKey` are nullable.
+- **`DocumentReference`**: `metadata` now references `DocumentMetadataResponse`. Fields `camunda.document.type`, `storeId`, `documentId`, `contentHash`, and `metadata` are now explicitly required. `contentHash` is nullable.
+- **`DocumentLink`**: `url` and `expiresAt` are now explicitly required.
+- **`candidateGroups` (user task / job API)**: now explicitly marked as a required field in response schemas (`UserTaskResult`, `UserTaskProperties`).
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Generated-client users: regenerate your client. Update any code that references `DocumentMetadata` in response handling — it is now `DocumentMetadataResponse`. Review nullable annotations on `DocumentReference.contentHash` and `DocumentMetadataResponse` fields.
+- Handwritten integrations: no request-side changes needed. Response fields listed above are now guaranteed to be present (though some may be `null`).
+
+<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#request-response-schema-split)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Search filter validation errors now return structured error collections
+
+REST API search endpoints now collect all filter validation errors and return them together in a single `400 Bad Request` response.
+
+Previously, only the first conversion error was returned. This fix improves consistency by collecting all validation issues in a single response.
+
+What changed:
+
+- All search filter validation errors are now collected and returned together, instead of stopping at the first error.
+- The ProblemDetail `title` changed from `"Bad Request"` to `"INVALID_ARGUMENT"`.
+- The ProblemDetail `detail` now contains more descriptive, structured messages (for example, `"The provided evaluationDate 'invalid' cannot be parsed as a date according to RFC 3339, section 5.6."` instead of `"Failed to parse date-time: [invalid]"`).
+
+Who is affected:
+
+- Customers parsing error response bodies (specifically `title` or `detail` fields) for validation errors → affected.
+- Customers only checking HTTP status codes → not affected.
+- Customers sending valid requests → not affected (happy path is unchanged).
+
+What to do:
+
+- If your code parses error response bodies from search endpoints, update it to handle a collection of validation errors instead of a single error message.
+- If your code checks for `"Bad Request"` in the `title` field, update it to check for `"INVALID_ARGUMENT"`.
+
+<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#search-filter-validation-errors)</p>
 
 </div>
 </div>
@@ -173,6 +381,29 @@ With task permission management, you can assign restricted permissions for user 
 Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this role to grant users limited access to work on tasks without assigning broader permissions.
 
 <p className="link-arrow">[Task permission management](../../../../components/tasklist/user-task-authorization)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deprecated enum literals in Orchestration Cluster API v2
+
+The following enum literals in the V2 Orchestration Cluster API are now marked as deprecated:
+
+- `UNSPECIFIED` in `DecisionDefinitionTypeEnum`
+- `UNKNOWN` in `DecisionInstanceStateFilterProperty`
+- `UNKNOWN` in `DecisionInstanceStateEnum`
+
+These values were reintroduced and are now explicitly deprecated to preserve backward compatibility while signaling planned cleanup.
+
+Avoid these values in new integrations. They are planned for removal in a future release, where removal will be a breaking change.
+
+<p className="link-arrow">[Orchestration Cluster API reference](../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)</p>
 
 </div>
 </div>
@@ -209,6 +440,38 @@ Inbound connectors now remain active for any process version that has instances 
 This change improves the reliability of long-running processes that depend on inbound connectors to receive external events.
 
 <p className="link-arrow">[Inbound connector lifecycle](/components/connectors/advanced-topics/inbound-lifecycle.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Dedicated artifact for element template generation annotations
+
+Starting with Camunda 8.9, use the dedicated artifact `element-template-generator-annotations`. This artifact contains only the annotations required for the Element Template Generator and reduces your project's dependency footprint.
+
+Previously, these annotations were included in the `element-template-generator-core` artifact.
+
+Replace `element-template-generator-core` with `element-template-generator-annotations` and update the imports.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Synchronous webhook results
+
+Starting with Camunda 8.9, the Webhook connector supports a synchronous response mode. This allows the connector to wait until a newly created process instance finishes and return the results in the response.
+
+For more details, see the [Webhook connector](/components/connectors/protocol/http-webhook.md) documentation.
 
 </div>
 </div>
@@ -289,6 +552,349 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
+### Deployment
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: `extraConfiguration` format changed from map to ordered list
+
+The `<componentName>.extraConfiguration` Helm value has changed from a **map** (key-value pairs) to an **ordered list** of `file`/`content` entries. This ensures configuration entries are always applied in the order you define them, since maps in Go templates do not guarantee iteration order.
+
+The old map format is **not supported** in Camunda 8.9. If you upgrade without converting to the new list format, Helm will fail during template rendering.
+
+**Before (8.8 — map):**
+
+```yaml
+identity:
+  extraConfiguration:
+    custom-logging.yaml: |
+      logging:
+        level:
+          ROOT: DEBUG
+```
+
+**After (8.9 — ordered list):**
+
+```yaml
+identity:
+  extraConfiguration:
+    - file: custom-logging.yaml
+      content: |
+        logging:
+          level:
+            ROOT: DEBUG
+```
+
+See [Migrate extraConfiguration from 8.8 to 8.9](/self-managed/deployment/helm/configure/application-configs.md#migrate-extraconfiguration-from-88-to-89) for detailed migration steps.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Helm CLI v4 does not support duplicate environment variable names
+
+Helm v4 enforces that environment variables in a rendered kubernetes manifest must be unique. If your `values.yaml` overrides an environment variable also set by the chart, you might encounter an error. Read more about it in [Helm v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch subchart no longer enabled by default
+
+Previously, the Elasticsearch subchart was enabled by default. To use OpenSearch, you would need to disable Elasticsearch and enable OpenSearch.
+
+With the inclusion of RDBMS as a secondary storage option and the [deprecation of Bitnami subcharts](#helm-chart-bitnami-subcharts-deprecated) (including the bundled Elasticsearch subchart), there is no longer a default secondary storage type.
+
+- Camunda recommends setting `orchestration.data.secondaryStorage.type` explicitly in your `values.yaml`.
+- The chart can auto-detect the type from `global.elasticsearch.enabled` or `global.opensearch.enabled`, but Helm will fail with a validation error if no secondary storage is configured at all.
+- Alternatively, set `global.noSecondaryStorage: true` to run in engine-only mode without secondary storage.
+
+:::note
+To continue using Elasticsearch provided as a subchart, you must add `global.elasticsearch.enabled: true`, `elasticsearch.enabled: true`, and `orchestration.data.secondaryStorage.type: elasticsearch` to your `values.yaml`.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Secure connectivity (AWS PrivateLink) for SaaS
+
+Camunda 8.9 introduces Secure connectivity for AWS-hosted Orchestration Clusters in Camunda 8 SaaS.
+
+Secure connectivity enables private inbound access from your AWS VPC to your cluster using AWS PrivateLink, without routing traffic over the public internet.
+
+- Applies per cluster.
+- Supports inbound connectivity only.
+- Public connectivity remains enabled.
+
+<p className="link-arrow">[Secure connectivity (AWS PrivateLink)](../../../components/saas/secure-connectivity/index.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Cluster variables supported
+
+Camunda 8.9 introduces cluster variables, letting you centrally manage configuration across your cluster.
+
+:::info
+To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-release-notes/890/890-release-notes.md#manage-configuration-with-cluster-variables).
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart `values.yaml` options for RDBMS
+
+Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file, providing a first-class alternative to Elasticsearch and OpenSearch. Configure database connections directly under `orchestration.data.secondaryStorage.rdbms`, including JDBC URL and authentication. See [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md).
+
+- Supports all databases in the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md): PostgreSQL, Oracle, MariaDB, MySQL, Microsoft SQL Server, H2, and Amazon Aurora.
+- Advanced authentication and custom JDBC drivers can be configured via init containers or mounted volumes.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Standardized JDBC driver management for RDBMS
+
+Camunda 8.9 adds a standardized JDBC driver management system for manual installations.
+
+- A new `/driver-lib` directory separates Camunda-bundled drivers from customer-supplied ones.
+- Customers can add and configure their own drivers (for example, Oracle JDBC), while maintaining full compliance and version control.
+
+:::info
+To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#jdbc-driver-management-for-rdbms-integrations).
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Deprecated secret keys removed
+
+Secret configuration keys that were deprecated in Camunda 8.8 are now removed in 8.9. Using any of the removed keys in your `values.yaml` will cause a hard failure during `helm install` or `helm upgrade`.
+
+Affected keys by component:
+
+| Component             | Keys removed in 8.9                                                                                                             |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------ |
+| License               | `global.license.key`, `global.license.existingSecret`, `global.license.existingSecretKey`                                       |
+| Elasticsearch auth    | `global.elasticsearch.auth.password`, `global.elasticsearch.auth.existingSecret`, `global.elasticsearch.auth.existingSecretKey` |
+| OpenSearch auth       | `global.opensearch.auth.password`, `global.opensearch.auth.existingSecret`, `global.opensearch.auth.existingSecretKey`          |
+| Identity auth         | `global.identity.auth.{admin,identity,optimize}.existingSecret` and `.existingSecretKey`                                        |
+| Document Store        | `global.documentStore.type.{aws,gcp}.existingSecret` and related keys                                                           |
+| Identity              | `identity.firstUser.password`, `identity.externalDatabase.password`, and their `existingSecret`/`existingSecretKey` variants    |
+| Connectors            | `connectors.security.authentication.oidc.existingSecret`, `.existingSecretKey`                                                  |
+| Orchestration Cluster | `orchestration.security.authentication.oidc.existingSecret`, `.existingSecretKey`                                               |
+| Web Modeler           | `webModeler.restapi.externalDatabase.password`, `webModeler.restapi.mail.smtpPassword`, and their `existingSecret` variants     |
+
+Migrate to the new secret configuration pattern using `*.secret.existingSecret` and `*.secret.existingSecretKey`, or `*.secret.inlineSecret` for non-production environments.
+
+<p className="link-arrow">[Secret management](/self-managed/deployment/helm/configure/secret-management.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Secret auto-generation removed
+
+The Helm chart no longer automatically generates secrets.
+
+The configuration keys `global.secrets.autoGenerated`, `global.secrets.name`, and `global.secrets.annotations` are removed in 8.9.
+
+All secrets must now be explicitly provided via Kubernetes Secrets referenced in your `values.yaml`.
+
+<p className="link-arrow">[Secret management](/self-managed/deployment/helm/configure/secret-management.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Default REST port unified to 8080
+
+The Orchestration Cluster's default HTTP port has changed from 8090 to 8080 (`orchestration.service.httpPort`).
+
+This aligns the Helm chart with the Orchestration Cluster's default configuration.
+
+If you have hardcoded port 8090 in network policies, Ingress rules, health check probes, or service mesh configuration, update these references to 8080 or explicitly set `orchestration.service.httpPort: 8090` in your `values.yaml`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: TLS secret configuration pattern
+
+The legacy TLS secret configuration using `*.tls.existingSecret` is deprecated.
+
+You should migrate to the new pattern using `*.tls.secret.existingSecret`.
+
+Affected paths:
+
+- `global.elasticsearch.tls.existingSecret` changes to `global.elasticsearch.tls.secret.existingSecret`
+- `global.opensearch.tls.existingSecret` changes to `global.opensearch.tls.secret.existingSecret`
+- `console.tls.existingSecret` changes to `console.tls.secret.existingSecret`
+
+Legacy keys continue to work in Camunda 8.9 but will cause deprecation warnings and will be removed in a future version. See [Secret management](/self-managed/deployment/helm/configure/secret-management.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Bitnami subcharts deprecated
+
+The four Bitnami-based subcharts (`identityPostgresql`, `identityKeycloak`, `webModelerPostgresql`, `elasticsearch`) are deprecated in Camunda 8.9 and will be removed in Camunda 8.10.
+
+If any of these subcharts are enabled, Helm prints a deprecation warning during installation or upgrade.
+
+You should migrate to externally managed services before upgrading to Camunda 8.10.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: `global.elasticsearch` and `global.opensearch` deprecated
+
+The `global.elasticsearch.*` and `global.opensearch.*` configuration trees are deprecated in Camunda 8.9 and will be removed in Camunda 8.10.
+
+These options are not truly global, as only the Orchestration and Optimize components use them.
+
+You should migrate to the new component-specific configuration:
+
+- **Orchestration:** `orchestration.data.secondaryStorage.elasticsearch.*` / `orchestration.data.secondaryStorage.opensearch.*`
+- **Optimize:** `optimize.database.elasticsearch.*` / `optimize.database.opensearch.*`
+
+Legacy keys continue to work in Camunda 8.9 with deprecation warnings. Existing deployments will continue to function without changes.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Identity profile renamed to admin
+
+The orchestration profile `orchestration.profiles.identity` is deprecated and renamed to `orchestration.profiles.admin`.
+
+If your `values.yaml` uses the `identity` profile key, the chart automatically migrates it to `admin` and prints a deprecation warning.
+
+You should update your values file to use `orchestration.profiles.admin`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Authorization, role, and group initialization
+
+Camunda 8.9 adds Helm chart support for initializing authorization rules, roles, and groups directly through `values.yaml`.
+
+This allows administrators to configure platform access control as part of the initial deployment, reducing manual post-installation setup.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Custom users and clients
+
+You can now define Identity users and OAuth2 clients directly in `values.yaml`.
+
+This simplifies initial deployment setup and enables reproducible, version-controlled Identity configurations.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Engine-only mode without secondary storage
+
+Camunda 8.9 introduces `global.noSecondaryStorage` mode to allow running the Orchestration engine without any secondary storage (Elasticsearch, OpenSearch, or RDBMS). This is useful for lightweight testing or scenarios where only the core engine is needed.
+
+When enabled, Elasticsearch and OpenSearch subcharts must be disabled, and basic authentication is not supported.
+
+</div>
+</div>
+
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
@@ -320,81 +926,6 @@ This enables teams to use relational databases such as H2, PostgreSQL, Oracle, o
 
 :::info
 To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#rdbms-secondary-storage-h2-postgresql-oracle-mariadb).
-:::
-
-</div>
-</div>
-
-### Deployment
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Elasticsearch subchart no longer enabled by default
-
-Previously, the Elasticsearch subchart was enabled by default. To use OpenSearch, you would need to disable Elasticsearch and enable OpenSearch.
-
-With the inclusion of RDBMS, you must now specify the secondary storage you want to enable and use.
-
-:::note
-To continue using Elasticsearch provided as a subchart, you must add `global.elasticsearch.enabled: true` and `elasticsearch.enabled: true` to your `values.yaml`.
-:::
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### Cluster variables supported
-
-Camunda 8.9 introduces cluster variables, letting you centrally manage configuration across your cluster.
-
-:::info
-To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-release-notes/890/890-release-notes.md#manage-configuration-with-cluster-variables).
-:::
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### Helm chart `values.yaml` options for RDBMS
-
-Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file. See `orchestration.data.secondaryStorage.rdbms` for details.
-
-- Postgresql is currently supported.
-- Other RDBMS databases like OracleDB and MariaDB have limited functionality now, but will be fully supported in future alpha releases.
-- Operate is not yet supported with RDBMS until alpha3.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### Standardized JDBC driver management for RDBMS
-
-Camunda 8.9 adds a standardized JDBC driver management system for manual installations.
-
-- A new `/driver-lib` directory separates Camunda-bundled drivers from customer-supplied ones.
-- Customers can add and configure their own drivers (for example, Oracle JDBC), while maintaining full compliance and version control.
-
-:::info
-To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#jdbc-driver-management-for-rdbms-integrations).
 :::
 
 </div>
@@ -512,7 +1043,7 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 
 Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.
 
-This enhancement aligns Web Modeler’s database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
+This enhancement aligns Web Modeler's database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
 
 :::info
 To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-rdbms-support-h2-mariadb-mysql).

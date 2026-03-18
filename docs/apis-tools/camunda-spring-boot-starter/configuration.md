@@ -509,9 +509,9 @@ public void handleFoo(@CustomHeaders Map<String, String> headers) {
 This will not have any effect on the variable fetching behavior.
 :::
 
-#### Using `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey`
+#### Using `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey`, `@ProcessDefinitionKey` and `@RootProcessInstanceKey`
 
-You can use the `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey` annotation for a `String`, `long` or `Long` parameter to retrieve the according key for a job:
+You can use the `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey`, `@ProcessDefinitionKey` and `@RootProcessInstanceKey` annotation for a `String`, `long` or `Long` parameter to retrieve the according key for a job:
 
 ```java
 @JobWorker
@@ -519,7 +519,8 @@ public void handleFoo(
   @ProcessInstanceKey String processInstanceKey,
   @ElementInstanceKey long elementInstanceKey,
   @JobKey Long jobKey,
-  @ProcessDefinitionKey String processDefinitionKey) {
+  @ProcessDefinitionKey String processDefinitionKey,
+  @RootProcessInstanceKey long rootProcessInstanceKey) {
   // do whatever you need to do
 }
 ```
@@ -653,11 +654,11 @@ This registers a callback to be executed when the command on the workflow engine
 When completing jobs programmatically, you must specify `autoComplete = false`. Otherwise, there is a race condition between your programmatic job completion and the Spring integration job completion, and this can lead to unpredictable results.
 :::
 
-### Reacting on problems
+### React to problems
 
-#### Throwing `BpmnError`s
+#### Throw a `BpmnError`
 
-Whenever your code hits a problem that should lead to a [BPMN error](/components/modeler/bpmn/error-events/error-events.md) being raised, you can throw a `BpmnError` to provide the error code used in BPMN:
+If your code encounters a problem that should trigger a [BPMN error](/components/modeler/bpmn/error-events/error-events.md), throw a `BpmnError` and provide the error code defined in BPMN:
 
 ```java
 @JobWorker(type = "foo")
@@ -671,7 +672,7 @@ public void handleJobFoo() {
 }
 ```
 
-#### Failing jobs in a controlled way
+#### Fail jobs in a controlled way
 
 Whenever you want a job to fail in a controlled way, you can throw a `JobError` and provide parameters like `variables`, `retries` and `retryBackoff`:
 
@@ -830,9 +831,45 @@ camunda:
 
 #### Control tenant usage
 
-Generally, the [client default `tenant-id`](#multi-tenancy) is used for all job worker activations.
+Job workers can be configured to work on jobs from specific [tenants](#multi-tenancy) using either [specific tenant IDs](#filtering-by-provided-tenant-IDs) or the [assigned tenants in the engine](#filtering-by-assigned-tenants).
 
-Configure global worker defaults for additional `tenant-ids` to be used by all workers:
+##### Filter by assigned tenants
+
+You can configure a job worker to use the tenants assigned to it in the engine, rather than providing explicit tenant IDs. Use the `tenantFilter` annotation property with `TenantFilter.ASSIGNED`:
+
+```java
+@JobWorker(tenantFilter = TenantFilter.ASSIGNED)
+public void foo() {
+  // worker's code
+}
+```
+
+When `TenantFilter.ASSIGNED` is set, any `tenant-ids` configured via the annotation or YAML are ignored.
+
+You can also override the tenant filter for a specific worker:
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        foo:
+          tenant-filter: ASSIGNED
+```
+
+To configure a global default:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        tenant-filter: ASSIGNED
+```
+
+##### Filter by provided tenant IDs
+
+The default behaviour is `TenantFilter.PROVIDED`, where the worker retrieves jobs for the tenant IDs explicitly configured. Configure global worker defaults for additional `tenant-ids` to be used by all workers:
 
 ```yaml
 camunda:
@@ -930,7 +967,7 @@ camunda:
         retry-backoff: PT10S
 ```
 
-## Deploying resources on start-up
+## Deploy resources on start-up
 
 To deploy process models on application start-up, use the `@Deployment` annotation:
 
@@ -941,7 +978,9 @@ public class MyRandomBean {
 }
 ```
 
-This annotation internally uses [the Spring resource loader](https://docs.spring.io/spring-framework/reference/core/resources.html) mechanism. This is powerful, and can also deploy multiple files at once, for example:
+### Specify resources to deploy
+
+This annotation uses the [Spring resource loader](https://docs.spring.io/springframework/reference/core/resources.html) and can deploy multiple files at once. For example:
 
 ```java
 @Deployment(resources = {"classpath:demoProcess.bpmn" , "classpath:demoProcess2.bpmn"})
@@ -953,6 +992,23 @@ Or, define wildcard patterns:
 @Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
 ```
 
+The resource loader automatically searches the entire classpath, including dependency JARs. To deploy only the resources packaged with the annotated class, use:
+
+```java
+@Deployment(resources = "classpath*:/bpmn/**/*.bpmn", ownJarOnly = true)
+```
+
+You can also set this globally:
+
+```yaml
+camunda:
+  client:
+    deployment:
+      own-jar-only: true
+```
+
+### Specify the tenant to deploy to
+
 To adjust the tenant to deploy to, set the `tenantId` property of the `@Deployment` annotation:
 
 ```java
@@ -962,7 +1018,9 @@ public class MyRandomBean {
 }
 ```
 
-By default, the `tenantId` set to `camunda.client.tenant-id` is used.
+By default, the starter uses the `tenantId` from `camunda.client.tenant-id`.
+
+### Disable deployment
 
 To disable the deployment of annotations, you can set:
 
@@ -973,15 +1031,15 @@ camunda:
       enabled: false
 ```
 
-## Reacting on events
+## React to events
 
-The Camunda Spring Boot Starter is integrated with the Spring events and offers its own.
+The Camunda Spring Boot Starter integrates with Spring events and also publishes its own events.
 
 ### Camunda client lifecycle events
 
-#### Camunda client created event
+#### Camunda client created
 
-To react on the creation of the Camunda client, you can do this:
+To react when the Camunda client is created, add an event listener:
 
 ```java
 @EventListener
@@ -1033,7 +1091,7 @@ public void onDeploymentCreated(CamundaPostDeploymentEvent event) {
 
 The event will grant you access to a list of deployments that have been created.
 
-## Observing metrics
+## Observe metrics
 
 The Camunda Spring Boot Starter provides some out-of-the-box metrics that can be leveraged via [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Whenever actuator is on the classpath, you can access the following metrics:
 

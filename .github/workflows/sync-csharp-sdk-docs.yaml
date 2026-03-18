@@ -42,34 +42,40 @@ jobs:
           fi
 
       - name: Checkout camunda-docs
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Checkout C# SDK
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: camunda/orchestration-cluster-api-csharp
           ref: ${{ steps.resolve.outputs.sdk_ref }}
           path: csharp-sdk
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: "9.0.x"
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
+          python-version: "3.14"
 
       - name: Install Python dependencies
         run: pip install pyyaml
 
+      - name: Restore tools and dependencies
+        working-directory: csharp-sdk
+        run: |
+          dotnet tool restore
+          dotnet restore src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj
+
       - name: Build SDK
         working-directory: csharp-sdk
-        run: dotnet build src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj -c Release
+        run: dotnet build src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj -c Release --no-restore
 
       - name: Generate DocFX metadata
         working-directory: csharp-sdk
@@ -107,14 +113,14 @@ jobs:
       - name: Generate token
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         id: generate_token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
           private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: "${{ steps.generate_token.outputs.token }}"
           path: docs

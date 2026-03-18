@@ -17,7 +17,7 @@ If you don't have a Kubernetes cluster yet, check out our setup guides:
   :::
 
 :::note
-In this guide, you deploy the Orchestration Cluster with Basic authentication and RDBMS (embedded H2) as secondary storage. For a full deployment with all components (Optimize, Web Modeler, Console, Identity, and Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). For production environments, see the [production installation guide](/self-managed/deployment/helm/install/production/index.md).
+In this guide, you deploy the Orchestration Cluster with Basic authentication and RDBMS (embedded H2) as secondary storage. For a full deployment with all components (Optimize, Web Modeler, Console, Management Identity, and Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). For production environments, see the [production installation guide](/self-managed/deployment/helm/install/production/index.md).
 :::
 
 ## Prerequisites
@@ -57,12 +57,19 @@ In production, Camunda 8 is typically deployed together with additional componen
    ```bash
    helm install camunda camunda/camunda-platform \
      --set orchestration.exporters.rdbms.enabled=true \
+     --set orchestration.clusterSize=1 \
+     --set orchestration.partitionCount=1 \
+     --set orchestration.replicationFactor=1 \
      --set-string 'orchestration.env[0].name=CAMUNDA_PERSISTENT_SESSIONS_ENABLED' \
      --set-string 'orchestration.env[0].value=false' \
      -n orchestration
    ```
 
-   This enables the RDBMS exporter with embedded H2 as secondary storage. Starting with Camunda 8.9, the chart no longer includes a default secondary storage; you must explicitly choose one (`rdbms`, `elasticsearch`, or `opensearch`).
+This enables the RDBMS exporter with embedded H2 as secondary storage. The cluster is configured with a single broker, a single partition, and a replication factor of 1. The replication factor must be less than or equal to the cluster size. For a single-broker cluster, the only valid replication factor is 1.
+
+The embedded H2 database is local to each broker. Running multiple brokers would result in separate, independent databases and incomplete query results.
+
+Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by default. You must explicitly enable a secondary storage backend (RDBMS, Elasticsearch, or OpenSearch) in your Helm values.
 
    <!-- TODO before 8.9 GA:
      The install command below includes a temporary workaround:
@@ -84,6 +91,9 @@ In production, Camunda 8 is typically deployed together with additional componen
        ```
        helm install camunda camunda/camunda-platform \
          --set orchestration.exporters.rdbms.enabled=true \
+         --set orchestration.clusterSize=1 \
+         --set orchestration.partitionCount=1 \
+         --set orchestration.replicationFactor=1 \
          -n orchestration
        ```
      - Confirm the Connectors service port in the chart NOTES matches the actual port (currently NOTES say 8086, service is 8080)
@@ -112,7 +122,7 @@ In production, Camunda 8 is typically deployed together with additional componen
 
    **Verify the installation:**
 
-   Test the Zeebe Gateway connection:
+   Test the Zeebe Gateway HTTP endpoint (Orchestration Cluster REST API):
 
    ```bash
    curl -u demo:demo http://localhost:8080/v2/topology
@@ -126,15 +136,15 @@ In production, Camunda 8 is typically deployed together with additional componen
    - **Identity:** [http://localhost:8080/identity](http://localhost:8080/identity) - User and permission management
    - **Connectors:** [http://localhost:8088](http://localhost:8088) - External system integrations
    - **Zeebe Gateway (gRPC):** localhost:26500 - Process deployment and execution
-   - **Zeebe Gateway (HTTP):** [http://localhost:8080](http://localhost:8080) - Zeebe REST API
+   - **Zeebe Gateway (HTTP):** [http://localhost:8080](http://localhost:8080) - Orchestration Cluster REST API
 
    :::note
-   In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration component and share the same endpoint (port 8080).
+   In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration Cluster and share the same endpoint (port 8080).
    :::
 
 ## Full Cluster
 
-To deploy the full Camunda 8 platform with all components (Optimize, Web Modeler, Console, Management Identity, and Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). The full deployment requires OIDC-based authentication and [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) (PostgreSQL, Elasticsearch, Keycloak).
+To deploy the full Camunda 8 platform with all components (Optimize, Web Modeler, Console, Management Identity, and Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). The full deployment requires OIDC-based authentication and [deploying required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for PostgreSQL, Elasticsearch, and Keycloak.
 
 ## Troubleshoot installation issues
 

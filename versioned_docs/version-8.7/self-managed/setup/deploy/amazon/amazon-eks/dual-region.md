@@ -41,9 +41,6 @@ Following this guide will incur costs on your Cloud provider account, namely for
 
 ## Outcome
 
-<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
-
 _Infrastructure diagram for a dual-region EKS setup (click on the image to open the PDF version)_
 [![Infrastructure Diagram EKS Dual-Region](./assets/eks-dual-region.jpg)](./assets/eks-dual-region.pdf)
 

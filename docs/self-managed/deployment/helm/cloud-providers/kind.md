@@ -389,15 +389,15 @@ helm list -n camunda
 
 <TabItem value="domain">
 
-| Component           | URL                                            |
-| ------------------- | ---------------------------------------------- |
-| Operate             | https://camunda.example.com/operate            |
-| Tasklist            | https://camunda.example.com/tasklist           |
-| Identity            | https://camunda.example.com/identity           |
-| Management Identity | https://camunda.example.com/managementidentity |
-| Optimize            | https://camunda.example.com/optimize           |
-| Zeebe REST API      | https://camunda.example.com/                   |
-| Keycloak            | https://camunda.example.com/auth               |
+| Component                      | URL                                            |
+| ------------------------------ | ---------------------------------------------- |
+| Operate                        | https://camunda.example.com/operate            |
+| Tasklist                       | https://camunda.example.com/tasklist           |
+| Identity                       | https://camunda.example.com/identity           |
+| Management Identity            | https://camunda.example.com/managementidentity |
+| Optimize                       | https://camunda.example.com/optimize           |
+| Orchestration Cluster REST API | https://camunda.example.com/                   |
+| Keycloak                       | https://camunda.example.com/auth               |
 
 </TabItem>
 
@@ -439,8 +439,8 @@ You can still use localhost ports if you prefer traditional port-forwarding. Sto
 | Connectors           | http://localhost:8088              |
 | Keycloak             | http://keycloak-service:18080/auth |
 
-:::tip Connecting to the workflow engine
-To interact with the Camunda workflow engine via Zeebe Gateway using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker, connect to `localhost:26500` (gRPC) or `http://localhost:8080` (REST).
+:::tip Connecting to the Orchestration Cluster
+To interact with the Orchestration Cluster via Zeebe Gateway using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker, connect to `localhost:26500` (gRPC) or `http://localhost:8080` (REST).
 :::
 
 At any time, run `kubectl get services -n camunda` to get a full list of deployed Camunda components and their network properties.

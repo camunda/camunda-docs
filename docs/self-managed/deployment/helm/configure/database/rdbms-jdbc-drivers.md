@@ -5,7 +5,7 @@ title: JDBC driver management for RDBMS
 description: "Understand bundled JDBC drivers, when to supply custom drivers, and how to load them in Kubernetes."
 ---
 
-This page covers JDBC driver management for RDBMS deployments in Kubernetes. For configuration and troubleshooting, see [configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md).
+This page covers JDBC driver management for RDBMS deployments in Kubernetes. For background on secondary storage, see [secondary storage overview](/self-managed/concepts/secondary-storage/index.md). For configuration and troubleshooting, see [configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md). For end-to-end installation steps, see [install with RDBMS as secondary storage](/self-managed/deployment/helm/install/helm-with-rdbms.md).
 
 ## Bundled vs. custom JDBC drivers
 
@@ -43,6 +43,12 @@ Choose one of the three approaches below. **Init container is recommended for pr
 | **ConfigMap/Volume** | GitOps-friendly; no external downloads. | Requires manual driver management. | Teams with restrictions |
 
 ## Loading JDBC drivers into pods
+
+:::note
+
+The following applies to each of the components that require JDBC drivers: Orchestration Cluster, Identity, and Web Modeler, though examples may only reference Orchestration Cluster.
+
+:::
 
 Some databases—such as Oracle and MySQL—require JDBC drivers that cannot be included in the Camunda image due to licensing restrictions. You must provide these drivers at runtime using one of the following approaches.
 

@@ -1,15 +1,18 @@
 ---
 id: data-collection
 title: "Data collection"
-description: "Learn which telemetry data is collected, how Camunda ensures privacy, and what options you have to modify which telemetry data is sent to Camunda."
+description: "Learn what telemetry data Camunda collects, how Camunda ensures privacy, and what options you have to choose the telemetry data sent to Camunda."
 ---
 
 import AnalyticsImg from './../img/analytics.png';
 import CookiePrefsImg from './../img/cookie-preferences.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Camunda collects telemetry data to evaluate contractual usage, provide a better user experience, and improve its products.
+<PageDescription />
 
 ## About data collection
+
+Camunda collects telemetry data to evaluate contractual usage, provide a better user experience, and improve its products.
 
 This page describes which telemetry data is collected, how Camunda ensures privacy, and what options you have to modify which telemetry data is sent to Camunda.
 

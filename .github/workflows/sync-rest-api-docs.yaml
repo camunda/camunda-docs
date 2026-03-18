@@ -16,15 +16,48 @@ jobs:
           repository: camunda/camunda-docs
           path: docs
 
+      - name: Check for stable branch
+        id: compute_branch
+        run: |
+          # During development of a minor release, engineers push changes to the camunda repo's main branch, so we use main during this time to keep the docs up to date 
+          # with the alpha releases. However, toward the end of the dev cycle for the minor version, engineers cut a stable version branch in the form stable/8.x and 
+          # start including code for the next version in main. At this point, we need to stop using main and switch to the stable branch until the minor version ships. 
+          # After that, we need to switch back to using main.
+
+          # This step in the workflow uses the docs repo's latest release tag to compute the next expected stable branch. If such a branch exists, we use it.
+          # Otherwise, we use main.
+
+          # Get the latest docs tag, and increment the minor version to store the next minor release.
+          cd docs
+          next_minor_release=$(
+            git ls-remote --tags origin '*.*.*'  \
+                | awk '{print $2}' \
+                | sed 's#refs/tags/##' \
+                | sort -V \
+                | tail -n1 \
+                | awk -F. '{printf "%d.%d", $1, $2+1}'
+          )
+
+          # If a stable camunda branch exists for the next minor release, use it. Otherwise, use main.
+          stable_branch="stable/$next_minor_release"
+          if git ls-remote --exit-code --heads https://github.com/camunda/camunda $stable_branch; then
+            echo "Found a stable branch: $stable_branch"
+            echo "camunda_branch=$stable_branch" >> "$GITHUB_OUTPUT"
+          else
+            echo "No stable branch for version $next_minor_release, using main"
+            echo "camunda_branch=main" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout Camunda
         uses: actions/checkout@v6
         with:
           repository: camunda/camunda
           path: rest-spec
+          ref: ${{ steps.compute_branch.outputs.camunda_branch }}
           sparse-checkout: zeebe/gateway-protocol/src/main/proto/v2
           sparse-checkout-cone-mode: false
 
-      - name: Sync documentation
+      - name: Sync next version documentation
         run: |
           cd docs
           mv ../rest-spec/zeebe/gateway-protocol/src/main/proto/v2/* api/camunda/v2
@@ -32,19 +65,93 @@ jobs:
           mv rest-api.yaml camunda-openapi.yaml
           npm i
           npm run api:generate:camunda
-          if git diff-index --quiet HEAD; then
+
+      - name: Sync older stable versions
+        run: |
+          cd docs
+          for version in $(jq -r '.[]' versions.json); do
+            version_dir="api/camunda/version-$version"
+
+            # Skip versions that don't have a directory in the docs repo
+            if [ ! -d "$version_dir" ]; then
+              echo "No version directory for $version, skipping..."
+              continue
+            fi
+
+            stable_branch="stable/$version"
+
+            # Skip if no stable branch exists in camunda/camunda
+            if ! git ls-remote --exit-code --heads https://github.com/camunda/camunda "$stable_branch" > /dev/null 2>&1; then
+              echo "No stable branch for version $version, skipping..."
+              continue
+            fi
+
+            echo "Syncing REST API spec from $stable_branch..."
+
+            # Versions > 8.8 use a modular spec under v2/, older versions use a single file
+            minor=$(echo "$version" | awk -F. '{print $2}')
+            if [ "$minor" -gt 8 ]; then
+              spec_sparse_path="zeebe/gateway-protocol/src/main/proto/v2"
+            else
+              spec_sparse_path="zeebe/gateway-protocol/src/main/proto/rest-api.yaml"
+            fi
+
+            # Clone only the spec from the stable branch using sparse checkout
+            rm -rf "../rest-spec-$version"
+            git clone --depth 1 --branch "$stable_branch" --no-checkout "https://github.com/camunda/camunda" "../rest-spec-$version"
+            pushd "../rest-spec-$version"
+            git sparse-checkout set "$spec_sparse_path"
+            git checkout
+            popd
+
+            spec_source="../rest-spec-$version/$spec_sparse_path"
+            if [ "$minor" -gt 8 ]; then
+              # v2 path is a directory with modular specs; copy the whole directory
+              if [ -d "$spec_source" ]; then
+                cp -r "$spec_source"/* "$version_dir/"
+                # Rename the entry point to match the expected name
+                mv "$version_dir/rest-api.yaml" "$version_dir/camunda-openapi.yaml"
+                echo "Copied spec directory for version $version"
+                npm run api:generate -- camunda "$version"
+              else
+                echo "Spec directory not found for version $version at expected path, skipping..."
+              fi
+            else
+              # Single-file spec for 8.8 and below
+              if [ -f "$spec_source" ]; then
+                cp "$spec_source" "$version_dir/camunda-openapi.yaml"
+                echo "Copied spec for version $version"
+                npm run api:generate -- camunda "$version"
+              else
+                echo "Spec file not found for version $version at expected path, skipping..."
+              fi
+            fi
+
+            rm -rf "../rest-spec-$version"
+          done
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          cd docs
+          if [ -z "$(git status --porcelain)" ]; then
             echo "No changes to commit."
-            exit 0
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Changes detected."
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Generate token
+        if: steps.check_changes.outputs.has_changes == 'true'
         id: generate_token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
           private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
 
       - name: Create Pull Request
+        if: steps.check_changes.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
           token: "${{ steps.generate_token.outputs.token }}"
@@ -55,6 +162,7 @@ jobs:
 
             This is an autogenerated PR by the [sync api specs workflow](https://github.com/camunda/camunda-docs/tree/main/.github/workflows/sync-rest-api-docs.yaml).
             This PR contains every changes made to the REST api specs in the [monorepo](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/v2) in the last week.
+            This includes changes from the next version (main or latest stable branch) as well as from older stable branches for all currently documented versions.
             This PR contains also all the generated OpenAPI files related to the changes.
 
             ## When should this change go live?

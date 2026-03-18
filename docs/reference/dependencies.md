@@ -1,9 +1,15 @@
 ---
 id: dependencies
 title: "Source code and third-party dependencies"
-description: "Dependencies and third-party libraries for all Camunda 8 components."
+description: "Learn about dependencies and third-party libraries for all Camunda 8 components."
 keywords: ["dependencies", "third-party", "third-party libraries"]
 ---
+
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 Camunda provides users and customers with source code access as part of its [written offer](https://legal.camunda.com/licensing-and-other-legal-terms#written-offer-source-code), as well as CycloneDX SBOMs listing all direct and transitive third-party dependencies and their respective licenses.
 

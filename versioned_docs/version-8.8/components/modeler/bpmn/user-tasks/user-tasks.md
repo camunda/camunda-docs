@@ -39,13 +39,9 @@ attributes can be specified simultaneously:
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
 :::info
-The assignee attribute must adhere to the userId field’s case-sensitivity requirements.
-In SaaS, all user IDs are converted to lowercase by default, as they are based on email addresses.
+Usernames and group IDs in the Orchestration Cluster are case-sensitive. When you set `assignee`, `candidateUsers`, or `candidateGroups`, always use the exact value from your identity provider or Identity user record, including case. For example, `abc@example.com` and `Abc@example.com` are treated as different users.
 
-Assignment resources can also be used to configure
-[user task access restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md)
-when using Tasklist V1. In Tasklist V2, candidate users and candidate groups do not affect task
-visibility or assignment.
+You can also use assignment resources to configure [user task access restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md) when using Tasklist V1, so that only the assignee, candidate users, and members of candidate groups can see and work on a task. In Tasklist V2, candidate users and candidate groups are interpreted through authorization-based access control: they affect task visibility and assignment only when the user has matching task or process authorizations.
 :::
 
 Typically, the assignee, candidate users, and candidate groups are defined as [static values](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
