@@ -190,7 +190,7 @@ BPMN-to-text allows you to:
 - Learn how the process works.
 - Explain the behavior of the process to stakeholders.
 
-To learn more about this feature, see [Camunda Copilot](/components/modeler/web-modeler/copilot/copilot-overview.md).
+To learn more about this feature, see [BPMN Copilot](/components/early-access/alpha/bpmn-copilot/bpmn-copilot.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2576 -->
 
@@ -278,7 +278,7 @@ To learn more about this feature, see [process governance](/components/modeler/w
 
 With the new BPMN Copilot for SaaS, go from 0 to 80% of a process diagram in minutes. Generate process diagrams from natural language descriptions, then collaborate on them with colleagues.
 
-For more information, see the [Camunda Copilot documentation](/components/modeler/web-modeler/copilot/copilot-overview.md).
+For more information, see the [BPMN Copilot documentation](/components/early-access/alpha/bpmn-copilot/bpmn-copilot.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2511 -->
 

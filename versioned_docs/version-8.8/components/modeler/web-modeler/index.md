@@ -27,7 +27,7 @@ It enables teams to collaboratively design executable processes as the foundatio
 | [Git synchronization](./git-sync.md)                                          | Connect process applications to Git repositories for version control.                           |
 | [Process landscape visualization](./process-landscape-visualization.md)       | View dependencies and interactions between processes at a glance.                               |
 | [Intelligent Document Processing (IDP)](./intelligent-document-processing.md) | Extract and process data from documents to accelerate process automation.                       |
-| [Camunda Copilot](./copilot/copilot-overview.md)                              | Get AI-powered assistance for BPMN modeling, FEEL expressions, and Form building.               |
+| [AI-powered assistance](./advanced-modeling/camunda-docs-ai.md)               | Get intelligent modeling suggestions and automation support.                                    |
 
 ## Access Web Modeler
 

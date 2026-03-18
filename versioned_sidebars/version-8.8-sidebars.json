@@ -349,6 +349,8 @@
                 "id": "components/early-access/alpha/alpha-features"
               },
               "items": [
+                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+                "components/early-access/alpha/feel-copilot/feel-copilot",
                 {
                   "type": "category",
                   "label": "MCP Client",
@@ -467,17 +469,7 @@
                 "components/modeler/web-modeler/advanced-modeling/test-scenario-files",
                 {
                   "AI features": [
-                    {
-                      "type": "category",
-                      "label": "Camunda Copilot",
-                      "link": {
-                        "type": "doc",
-                        "id": "components/modeler/web-modeler/copilot/copilot-overview"
-                      },
-                      "items": [
-                        "components/modeler/web-modeler/copilot/built-in-tools"
-                      ]
-                    }
+                    "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai"
                   ]
                 }
               ]
