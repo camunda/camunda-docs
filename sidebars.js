@@ -1898,13 +1898,7 @@ module.exports = {
               ],
             },
             {
-              type: "category",
-              label: "Relational databases",
-              link: {
-                type: "doc",
-                id: "self-managed/concepts/databases/relational-db/index",
-              },
-              items: [
+              "Relational databases": [
                 "self-managed/concepts/databases/relational-db/rdbms-setup-guide",
                 "self-managed/concepts/databases/relational-db/rdbms-support-policy",
                 "self-managed/concepts/databases/relational-db/database-configuration",
