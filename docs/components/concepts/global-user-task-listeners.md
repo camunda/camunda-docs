@@ -86,26 +86,14 @@ If you provide an invalid configuration, the system attempts to automatically co
 
 The following corrections are applied automatically:
 
-- If a listener is missing the required `id`, `type`, or `eventTypes` properties, it is removed and ignored.
+- If a listener is missing the required `id`, `type`, or `event-types` properties, it is removed and ignored.
 - If a listener defines invalid event types, those event types are removed. If all event types of a listener are invalid, the listener is removed and ignored.
   - Note that event types in the configuration are treated case-insensitively, so for example `Creating` and `creating` are both valid, but `create` is not.
 - If a listener defines duplicate event types, the duplicates are removed and only one instance of each event type is kept.
-- If a listener defines both the special `all` value and a normal event type for `eventTypes`, the configuration is corrected to include only `all`.
+- If a listener defines both the special `all` value and a normal event type for `event-types`, the configuration is corrected to include only `all`.
 - If a listener defines invalid retry values, i.e., non-numeric or negative, the listener is removed and ignored.
 
 In all the above cases, a warning is written to the Orchestration Cluster startup log, identifying the problem and its location in the configuration.
-
-#### How the configuration is validated
-
-On startup, the configuration is validated according to the following rules. The system attempts to correct issues where possible instead of failing the startup:
-
-- Invalid event types are removed and ignored.
-- Listeners missing information about identifier, event types or job type are removed and ignored.
-  - This also includes listeners for which only invalid event types are defined.
-- If a listener defines both the special `all` value and a normal event type for `event-types`, the configuration is corrected to include only `all`.
-- Listeners with invalid retry values, i.e., non-numeric or negative, are removed and ignored.
-
-In all cases, a suitable warning is reported in the orchestration cluster startup log, identifying the problem and its location in the configuration.
 
 #### Example configuration
 
