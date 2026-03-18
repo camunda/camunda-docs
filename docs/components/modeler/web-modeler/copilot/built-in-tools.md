@@ -7,12 +7,49 @@ description: "Reference documentation for all built-in tools available to Camund
 
 Camunda Copilot uses specialized tools to interact with your BPMN diagrams, Forms, and other artifacts. This page documents all built-in tools available to the Copilot sub-agents.
 
+For a high-level architecture overview, see [Copilot overview](copilot-overview.md).
+
+## How to use this page
+
+- Start with the tool group that matches your task (BPMN, Form, Frontend, and so on).
+- Check access requirements before using a tool.
+- Use the tool description to decide whether to query, mutate, lay out, or validate.
+
 ## Permission model
 
-Tools are categorized by their access requirements:
+Tools are categorized by access requirements:
 
-- **Read tools**: Available to all users, including those with read-only access (READ or COMMENT permissions).
-- **Write tools**: Only available to users with write access. These tools are automatically hidden from users with read-only permissions.
+<table>
+	<colgroup>
+		<col style={{width: "35%"}} />
+		<col style={{width: "65%"}} />
+	</colgroup>
+	<thead>
+		<tr>
+			<th style={{textAlign: "left"}}>Access</th>
+			<th style={{textAlign: "left"}}>Availability</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Read</td>
+			<td>Available to all users, including users with read-only access (`READ` or `COMMENT` permissions).</td>
+		</tr>
+		<tr>
+			<td>Write</td>
+			<td>Available only to users with write access. These tools are hidden from read-only users.</td>
+		</tr>
+	</tbody>
+</table>
+
+## Common tasks
+
+- [Inspect or analyze a BPMN diagram](#bpmn-tools)
+- [Create or modify BPMN structure](#mutation-tools-write)
+- [Fix diagram layout issues](#layout-tools-write)
+- [Validate BPMN or form artifacts](#validation-tools)
+- [Create, update, or bind forms](#form-tools)
+- [Work with project files and UI state](#frontend-tools)
 
 ## BPMN tools
 
@@ -61,6 +98,8 @@ These tools are used by the BPMN Sub-Agent to create, modify, and analyze BPMN p
 
 These tools are used by the Form Sub-Agent to create, modify, and validate Camunda Forms.
 
+Use this group when you need to validate form schema, update components, summarize form structure, or bind forms to BPMN user tasks.
+
 | Tool                                                      | Description                                                                                                                                                                                                                   | Access |
 | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
 | Validate Form JSON (`validate_form_json`)                 | Validates a Camunda Form JSON definition for structural correctness. Checks for required fields, valid field types, duplicate IDs, and proper structure.                                                                      | Read   |
@@ -73,6 +112,8 @@ These tools are used by the Form Sub-Agent to create, modify, and validate Camun
 
 These tools are available to all sub-agents for general operations.
 
+Use this group to synchronize artifact state between backend and UI context.
+
 | Tool                                        | Description                                                                                                                                                                                                     | Access |
 | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
 | Sync artifact state (`sync_artifact_state`) | Synchronizes the current artifact state from the backend to the UI. Returns the current BPMN XML, Form JSON, and DMN XML from the conversation context. Use this to push backend changes to the UI for display. | Write  |
@@ -80,6 +121,8 @@ These tools are available to all sub-agents for general operations.
 ## Frontend tools
 
 These tools execute in the Web Modeler UI and provide access to UI-specific functionality.
+
+Use this group when you need project-level file operations, UI state synchronization, template discovery, or editor validation feedback.
 
 | Tool                                                            | Description                                                                                                                                                                                              | Access |
 | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
@@ -97,10 +140,14 @@ These tools execute in the Web Modeler UI and provide access to UI-specific func
 
 These tools integrate with external services.
 
+Use this group to retrieve product and modeling guidance from connected knowledge services.
+
 | Tool                              | Description                                                                                                                                                                                                                    | Access |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ |
 | Kapa AI search (`kapa_ai_search`) | Search the Camunda documentation and knowledge base for information. Use this to find specific information, documentation, best practices, or answers about Camunda products, BPMN, DMN, Forms, Connectors, or related topics. | Read   |
 
 :::note
-Kapa AI search is only available in SaaS deployments. Self-Managed users can configure their own LLM provider but do not have access to the Camunda documentation knowledge base.
-:::
+
+- Kapa AI search is only available in SaaS deployments.
+- Self-Managed users can configure their own LLM provider but do not have access to the Camunda documentation knowledge base.
+  :::
