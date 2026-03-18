@@ -10,7 +10,8 @@ An exclusive gateway (or XOR-gateway) allows you to make a decision based on dat
 
 If an exclusive gateway has multiple outgoing sequence flows, all sequence flows except one must have a `conditionExpression` to define when the flow is taken. The gateway can have one sequence flow without `conditionExpression`, which must be defined as the default flow.
 
-When an exclusive gateway is entered, the `conditionExpression` is evaluated. The process instance takes the first sequence flow where the condition is fulfilled.
+When an exclusive gateway is entered, it evaluates the `conditionExpression` of each outgoing sequence flow in the order the flows are defined in the BPMN XML.
+The process instance takes the first sequence flow whose condition is fulfilled.
 
 If no condition is fulfilled, it takes the **default flow** of the gateway. If the gateway has no default flow, an [incident](/components/concepts/incidents.md) is created.
 
