@@ -112,7 +112,7 @@ orchestration:
 
 **Cause:** A previous pod may have been terminated while Liquibase was still running, leaving a lock row behind.
 
-**Behavior:** Camunda waits for a stale Liquibase DDL lock using `camunda.data.secondary-storage.rdbms-ddl-lock-wait-timeout` (default: `PT15M`).
+**Behavior:** Camunda waits for a stale Liquibase DDL lock using `camunda.data.secondary-storage.rdbms.ddl-lock-wait-timeout` (default: `PT15M`).
 
 **Fix:**
 
@@ -126,7 +126,8 @@ orchestration:
         camunda:
           data:
             secondary-storage:
-              rdbms-ddl-lock-wait-timeout: PT30M
+              rdbms:
+                ddl-lock-wait-timeout: PT30M
 ```
 
 2. Avoid terminating Orchestration Cluster pods while Liquibase is actively applying migrations.

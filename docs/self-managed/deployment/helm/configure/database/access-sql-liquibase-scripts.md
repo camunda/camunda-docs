@@ -77,7 +77,7 @@ camunda:
 - **SQL vs. Liquibase**
   - Do not mix SQL upgrade scripts with Liquibase-managed schema.
   - Liquibase changelogs are **forward-only**. Rollbacks are not supported.
-- **Liquibase lock recovery:** If a pod is interrupted during Liquibase execution, Camunda waits for stale DDL locks using `camunda.data.secondary-storage.rdbms-ddl-lock-wait-timeout` (default: `PT15M`). Increase this timeout for long-running migrations and only release `databasechangeloglock` manually after confirming no migration is running. See [RDBMS troubleshooting](rdbms-troubleshooting.md#liquibase-lock-after-pod-crash-or-restart).
+- **Liquibase lock recovery:** If a pod is interrupted during Liquibase execution, Camunda waits for stale DDL locks using `camunda.data.secondary-storage.rdbms.ddl-lock-wait-timeout` (default: `PT15M`). Increase this timeout for long-running migrations and only release `databasechangeloglock` manually after confirming no migration is running. See [RDBMS troubleshooting](rdbms-troubleshooting.md#liquibase-lock-after-pod-crash-or-restart).
 - **Backup first:** Always [back up](/self-managed/operational-guides/backup-restore/backup-and-restore.md) your database before applying scripts manually.
 
 ## Optional

@@ -104,7 +104,7 @@ Most tuning options are configured as application properties via [extraConfigura
 
 RDBMS supports other configuration options that can be configured in the helm chart `values.yaml` via [extraConfiguration](/self-managed/deployment/helm/configure/application-configs.md). See [RDBMS options](/self-managed/concepts/databases/relational-db/configuration.md).
 
-For Liquibase lock recovery behavior, configure `camunda.data.secondary-storage.rdbms-ddl-lock-wait-timeout` (default: `PT15M`) via `extraConfiguration` if you need a longer wait time for heavy schema migrations.
+For Liquibase lock recovery behavior, configure `camunda.data.secondary-storage.rdbms.ddl-lock-wait-timeout` (default: `PT15M`) via `extraConfiguration` if you need a longer wait time for heavy schema migrations.
 
 ### Example usage
 
