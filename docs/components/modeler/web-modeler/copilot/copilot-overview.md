@@ -5,12 +5,8 @@ sidebar_label: Copilot overview
 description: "Camunda Copilot is an AI assistant integrated into Web Modeler that helps with BPMN process modeling, FEEL expressions, and Form building."
 ---
 
-import CopilotEmptyState from './img/copilot-empty-state.png';
 import CopilotBpmnGeneration from './img/copilot-bpmn-generation.png';
 import CopilotConversationHistory from './img/copilot-conversation-history.png';
-import CopilotHistoryActions from './img/copilot-history-actions.png';
-import CopilotFormCreation from './img/copilot-form-creation.png';
-import CopilotOutputMapping from './img/copilot-output-mapping.png';
 
 Camunda Copilot is an AI assistant that helps you with BPMN process modeling, FEEL expressions, and form building. It is available in both SaaS and Self-Managed deployments of Web Modeler, and can be used only in the BPMN diagram and form editors.
 
@@ -32,6 +28,33 @@ Camunda Copilot is an [**alpha feature**](/components/early-access/alpha/alpha-f
 To avoid timeouts and get better results, break long or complex prompts into smaller, focused requests and send them one at a time.
 :::
 
+## How it works
+
+Camunda Copilot uses a multi-agent architecture to handle different types of tasks:
+
+```mermaid
+flowchart TD
+    User["User Chat"] -->|"message"| Supervisor["Supervisor Agent"]
+    Supervisor -->|"BPMN tasks"| BpmnAgent["BPMN Sub-Agent"]
+    Supervisor -->|"FEEL tasks"| FeelAgent["FEEL Sub-Agent"]
+    Supervisor -->|"Form tasks"| FormAgent["Form Sub-Agent"]
+    BpmnAgent --> BpmnTools["BPMN Tools"]
+    FormAgent --> FormToolsBox["Form Tools"]
+    FeelAgent --> SharedTools["Shared Tools"]
+    BpmnAgent --> SharedTools
+    FormAgent --> SharedTools
+    SharedTools --> FrontendTools["Frontend Tools"]
+    SharedTools --> GeneralTools["General Tools"]
+    SharedTools --> IntegrationTools["Integration Tools"]
+```
+
+- **Supervisor Agent**: Routes your requests to the appropriate specialized sub-agent based on the task type.
+- **BPMN Sub-Agent**: Creates, modifies, and explains BPMN process diagrams.
+- **FEEL Sub-Agent**: Generates, translates, debugs, and explains FEEL expressions.
+- **Form Sub-Agent**: Creates, modifies, and validates Camunda Forms.
+
+Each sub-agent has access to specialized [built-in tools](built-in-tools.md) that allow it to interact with your diagrams and forms.
+
 ## Review and undo changes
 
 Camunda Copilot can both answer questions and generate or update BPMN diagrams and forms. When Copilot applies a change on the canvas, Web Modeler automatically creates a new version so your previous work is preserved. If you are not satisfied with the result, you can roll back to a previous version from the version history, or continue iterating with Copilot until the result meets your needs.
@@ -43,8 +66,6 @@ Camunda Copilot automatically detects and uses context from your current work to
 - **No element selected**: Copilot uses the file context.
 - **Element selected**: A context tag appears above the chat input, showing which element or expression Copilot will reference.
 - **Context removal**: Removing a context tag clears that context and, for BPMN elements, deselects the element on the canvas.
-
-{/_ TODO: Add image showing the context tag above the chat input _/}
 
 This context allows Camunda Copilot to:
 
@@ -189,36 +210,9 @@ Copilot respects your project permissions:
 - Camunda Copilot does not support pools, lanes, and collaborations.
 - Camunda Docs AI is available only in SaaS deployments. Self-Managed users can configure their own LLM provider but do not have access to the Camunda documentation knowledge base.
 
-## Configuration
+## Self-Managed configuration
 
 For Self-Managed deployments, see [Copilot configuration](/self-managed/components/modeler/web-modeler/configuration/copilot.md) to configure LLM providers and agent settings.
-
-## How it works
-
-Camunda Copilot uses a multi-agent architecture to handle different types of tasks:
-
-```mermaid
-flowchart TD
-    User["User Chat"] -->|"message"| Supervisor["Supervisor Agent"]
-    Supervisor -->|"BPMN tasks"| BpmnAgent["BPMN Sub-Agent"]
-    Supervisor -->|"FEEL tasks"| FeelAgent["FEEL Sub-Agent"]
-    Supervisor -->|"Form tasks"| FormAgent["Form Sub-Agent"]
-    BpmnAgent --> BpmnTools["BPMN Tools"]
-    FormAgent --> FormToolsBox["Form Tools"]
-    FeelAgent --> SharedTools["Shared Tools"]
-    BpmnAgent --> SharedTools
-    FormAgent --> SharedTools
-    SharedTools --> FrontendTools["Frontend Tools"]
-    SharedTools --> GeneralTools["General Tools"]
-    SharedTools --> IntegrationTools["Integration Tools"]
-```
-
-- **Supervisor Agent**: Routes your requests to the appropriate specialized sub-agent based on the task type.
-- **BPMN Sub-Agent**: Creates, modifies, and explains BPMN process diagrams.
-- **FEEL Sub-Agent**: Generates, translates, debugs, and explains FEEL expressions.
-- **Form Sub-Agent**: Creates, modifies, and validates Camunda Forms.
-
-Each sub-agent has access to specialized [built-in tools](built-in-tools.md) that allow it to interact with your diagrams and forms.
 
 ## Related resources
 
