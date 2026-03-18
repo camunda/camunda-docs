@@ -14,6 +14,10 @@ import CopilotOutputMapping from './img/copilot-output-mapping.png';
 
 Camunda Copilot is an AI assistant that helps you with BPMN process modeling, FEEL expressions, and form building. It is available in both SaaS and Self-Managed deployments of Web Modeler, and can be used only in the BPMN diagram and form editors.
 
+:::note
+Camunda Copilot is an [**alpha feature**](/components/early-access/alpha/alpha-features.md) that must be enabled by an organization admin before use.
+:::
+
 ## Get started
 
 1. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
