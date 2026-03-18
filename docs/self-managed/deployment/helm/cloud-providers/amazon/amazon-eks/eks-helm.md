@@ -321,15 +321,14 @@ Some components are not enabled by default in this deployment. For more informat
 
 #### Secondary storage options
 
-This guide defaults to using the managed Amazon OpenSearch service as secondary storage. You have three options:
+This guide defaults to using the managed Amazon OpenSearch service as secondary storage. You have two options:
 
 - **Managed OpenSearch** (default in this guide): The managed Amazon OpenSearch domain provisioned in the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup.
-- **Internal Elasticsearch**: The Elasticsearch deployment bundled in the Camunda Helm chart (see below).
-- **RDBMS**: Use a relational database (PostgreSQL, MySQL, MariaDB, Oracle) as secondary storage for the Orchestration Cluster — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+- **Amazon Aurora**: Use Amazon Aurora PostgreSQL as secondary storage for the Orchestration Cluster — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
 
-#### Use internal Elasticsearch instead of the managed OpenSearch
+#### Advanced: Use internal Elasticsearch instead of managed OpenSearch
 
-If you do not wish to use a managed OpenSearch service, you can opt to use the internal Elasticsearch deployment. This configuration disables OpenSearch and enables the internal Kubernetes Elasticsearch deployment:
+For advanced deployments, you can opt to use the internal Elasticsearch deployment instead of the managed OpenSearch service. This configuration disables OpenSearch and enables the internal Kubernetes Elasticsearch deployment:
 
 :::tip Alternative: Operator-based Elasticsearch deployment
 Instead of using Bitnami subcharts for internal Elasticsearch, consider deploying [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) for a production-grade setup with automated scaling, upgrades, and built-in security.
