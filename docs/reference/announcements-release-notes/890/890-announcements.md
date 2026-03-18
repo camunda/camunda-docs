@@ -336,6 +336,40 @@ What to do:
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Search filter validation errors now return structured error collections
+
+REST API search endpoints now collect all filter validation errors and return them together in a single `400 Bad Request` response.
+
+Previously, only the first conversion error was returned. This fix improves consistency by collecting all validation issues in a single response.
+
+What changed:
+
+- All search filter validation errors are now collected and returned together, instead of stopping at the first error.
+- The ProblemDetail `title` changed from `"Bad Request"` to `"INVALID_ARGUMENT"`.
+- The ProblemDetail `detail` now contains more descriptive, structured messages (for example, `"The provided evaluationDate 'invalid' cannot be parsed as a date according to RFC 3339, section 5.6."` instead of `"Failed to parse date-time: [invalid]"`).
+
+Who is affected:
+
+- Customers parsing error response bodies (specifically `title` or `detail` fields) for validation errors → affected.
+- Customers only checking HTTP status codes → not affected.
+- Customers sending valid requests → not affected (happy path is unchanged).
+
+What to do:
+
+- If your code parses error response bodies from search endpoints, update it to handle a collection of validation errors instead of a single error message.
+- If your code checks for `"Bad Request"` in the `title` field, update it to check for `"INVALID_ARGUMENT"`.
+
+<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#search-filter-validation-errors)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
