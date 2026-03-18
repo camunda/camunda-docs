@@ -29,6 +29,7 @@ camunda.migrator:
     - class-name: com.example.MyCustomInterceptor # Custom interceptor class
     - class-name: com.example.AnotherInterceptor # Another custom interceptor class
   history:
+    partition-count: 3 # Optional: Number of partitions for offline mode (enables migration without Camunda 8 connectivity)
     auto-cancel:
       cleanup:
         enabled: true # Populate cleanup dates for auto-canceled entities
