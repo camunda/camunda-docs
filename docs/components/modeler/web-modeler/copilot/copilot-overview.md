@@ -36,9 +36,9 @@ Camunda Copilot can both answer questions and generate or update BPMN diagrams a
 
 Camunda Copilot automatically detects and uses context from your current work to provide more relevant responses:
 
-- When no element is selected, Copilot uses only the file context.
-- When a specific context is active (for example, a selected BPMN element or FEEL expression), it is shown as a context tag above the chat input.
-- Removing a context tag clears that context and, for BPMN elements, also unselects the element in the canavs.
+- **No element selected**: Copilot uses the file context.
+- **Element selected**: A context tag appears above the chat input, showing which element or expression Copilot will reference.
+- **Context removal**: Removing a context tag clears that context and, for BPMN elements, deselects the element on the canvas.
 
 This context allows Camunda Copilot to:
 
@@ -154,8 +154,57 @@ Copilot can handle complex requests that span multiple sub-agents. For example:
 
 Copilot respects your project permissions:
 
-- **Users with write access** can use all Copilot features, including tools that modify diagrams and forms.
-- **Users with read-only access** (READ or COMMENT permissions) can still ask questions and get explanations, but tools that modify artifacts are automatically hidden.
+<table>
+  <colgroup>
+    <col style={{width: "50%"}} />
+    <col style={{width: "25%"}} />
+    <col style={{width: "25%"}} />
+  </colgroup>
+  <thead>
+    <tr>
+      <th style={{textAlign: "left"}}>Feature</th>
+      <th style={{textAlign: "left"}}>Write access</th>
+      <th style={{textAlign: "left"}}>Read-only access</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ask questions</td>
+      <td><span style={{color: "green"}}>✓</span></td>
+      <td><span style={{color: "green"}}>✓</span></td>
+    </tr>
+    <tr>
+      <td>Get explanations</td>
+      <td><span style={{color: "green"}}>✓</span></td>
+      <td><span style={{color: "green"}}>✓</span></td>
+    </tr>
+    <tr>
+      <td>Generate BPMN elements</td>
+      <td><span style={{color: "green"}}>✓</span></td>
+      <td><span style={{color: "red"}}>✗</span></td>
+    </tr>
+    <tr>
+      <td>Modify diagrams</td>
+      <td><span style={{color: "green"}}>✓</span></td>
+      <td><span style={{color: "red"}}>✗</span></td>
+    </tr>
+    <tr>
+      <td>Create/edit forms</td>
+      <td><span style={{color: "green"}}>✓</span></td>
+      <td><span style={{color: "red"}}>✗</span></td>
+    </tr>
+    <tr>
+      <td>Generate FEEL expressions</td>
+      <td><span style={{color: "green"}}>✓</span></td>
+      <td><span style={{color: "green"}}>✓</span></td>
+    </tr>
+    <tr>
+      <td>Apply FEEL expressions</td>
+      <td><span style={{color: "green"}}>✓</span></td>
+      <td><span style={{color: "red"}}>✗</span></td>
+    </tr>
+  </tbody>
+</table>
 
 ## Camunda Docs AI (SaaS only)
 
