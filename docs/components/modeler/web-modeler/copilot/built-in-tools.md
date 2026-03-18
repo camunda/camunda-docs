@@ -5,13 +5,13 @@ sidebar_label: Built-in tools
 description: "Reference documentation for all built-in tools available to Camunda Copilot sub-agents."
 ---
 
-Camunda Copilot uses specialized tools to interact with your BPMN diagrams, Forms, and other artifacts. This page documents all built-in tools available to the Copilot sub-agents.
+Camunda Copilot uses specialized tools to interact with your BPMN diagrams, forms, and other artifacts. This page documents all built-in tools available to the Copilot sub-agents.
 
 For a high-level overview, see [Copilot overview](copilot-overview.md).
 
 ## How to use this page
 
-- Start with the tool group that matches your task (BPMN, Form, Frontend, and so on).
+- Start with the tool group that matches your task (BPMN and form modeling, frontend/project operations, and so on).
 - Check access requirements before using a tool.
 - Use the tool description to decide whether to query, mutate, lay out, or validate.
 
@@ -53,15 +53,15 @@ Tools are categorized by access requirements:
 
 ## BPMN tools
 
-These tools are used by the BPMN Sub-Agent to create, modify, and analyze BPMN process diagrams.
+These are modeling tools used by the BPMN sub-agent to create, modify, and analyze BPMN process diagrams.
 
 ### Query tools
 
 <table>
 	<colgroup>
 		<col style={{width: "35%"}} />
-		<col style={{width: "55%"}} />
-		<col style={{width: "10%"}} />
+		<col style={{width: "57%"}} />
+		<col style={{width: "8%"}} />
 	</colgroup>
 	<thead>
 		<tr>
@@ -71,14 +71,14 @@ These tools are used by the BPMN Sub-Agent to create, modify, and analyze BPMN p
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>Get current BPMN XML (`get_current_bpmn_xml`)</td><td>Returns the current BPMN XML from the conversation context.</td><td>Read</td></tr>
-		<tr><td>Get BPMN element by ID (`get_bpmn_element_by_id`)</td><td>Returns one BPMN element by ID, including core metadata and Zeebe properties.</td><td>Read</td></tr>
-		<tr><td>Find BPMN elements by type (`find_bpmn_elements_by_type`)</td><td>Lists BPMN elements by type (for example `userTask`, `serviceTask`, `exclusiveGateway`, or `sequenceFlow`).</td><td>Read</td></tr>
-		<tr><td>Get BPMN sequence flows (`get_bpmn_sequence_flows`)</td><td>Returns all sequence flows with IDs, source/target IDs, names, and conditions.</td><td>Read</td></tr>
-		<tr><td>Get process summary (`get_process_summary`)</td><td>Returns process metadata, node/flow counts, and connection summaries.</td><td>Read</td></tr>
-		<tr><td>Get path between elements (`get_path_between_elements`)</td><td>Finds the shortest sequence-flow path between two BPMN elements.</td><td>Read</td></tr>
-		<tr><td>Get element positions (`get_element_positions`)</td><td>Returns diagram bounds (`x`, `y`, `width`, `height`) for BPMN elements.</td><td>Read</td></tr>
-		<tr><td>Detect overlapping elements (`detect_overlapping_elements`)</td><td>Checks whether an element overlaps other elements in the diagram.</td><td>Read</td></tr>
+		<tr><td>Get current BPMN XML</td><td>Returns the current BPMN XML from the conversation context.</td><td>Read</td></tr>
+		<tr><td>Get BPMN element by ID</td><td>Returns one BPMN element by ID, including core metadata and Zeebe properties.</td><td>Read</td></tr>
+		<tr><td>Find BPMN elements by type</td><td>Lists BPMN elements by type (for example `userTask`, `serviceTask`, `exclusiveGateway`, or `sequenceFlow`).</td><td>Read</td></tr>
+		<tr><td>Get BPMN sequence flows</td><td>Returns all sequence flows with IDs, source/target IDs, names, and conditions.</td><td>Read</td></tr>
+		<tr><td>Get process summary</td><td>Returns process metadata, node/flow counts, and connection summaries.</td><td>Read</td></tr>
+		<tr><td>Get path between elements</td><td>Finds the shortest sequence-flow path between two BPMN elements.</td><td>Read</td></tr>
+		<tr><td>Get element positions</td><td>Returns diagram bounds (`x`, `y`, `width`, `height`) for BPMN elements.</td><td>Read</td></tr>
+		<tr><td>Detect overlapping elements</td><td>Checks whether an element overlaps other elements in the diagram.</td><td>Read</td></tr>
 	</tbody>
 </table>
 
@@ -87,8 +87,8 @@ These tools are used by the BPMN Sub-Agent to create, modify, and analyze BPMN p
 <table>
 	<colgroup>
 		<col style={{width: "35%"}} />
-		<col style={{width: "55%"}} />
-		<col style={{width: "10%"}} />
+		<col style={{width: "57%"}} />
+		<col style={{width: "8%"}} />
 	</colgroup>
 	<thead>
 		<tr>
@@ -98,12 +98,12 @@ These tools are used by the BPMN Sub-Agent to create, modify, and analyze BPMN p
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>Convert BPMN JSON to XML (`convert_bpmn_json_to_xml`)</td><td>Converts a BPMN model from JSON to BPMN 2.0 XML.</td><td>Write</td></tr>
-		<tr><td>Add BPMN element (`add_bpmn_element`)</td><td>Adds a BPMN element and optionally connects it with `afterElementId` and/or `beforeElementId`.</td><td>Write</td></tr>
-		<tr><td>Update BPMN element (`update_bpmn_element`)</td><td>Updates element name, type, or Zeebe attributes (for example task definition or I/O mappings).</td><td>Write</td></tr>
-		<tr><td>Delete BPMN element (`delete_bpmn_element`)</td><td>Deletes an element and reconnects surrounding sequence flows.</td><td>Write</td></tr>
-		<tr><td>Move BPMN element (`move_bpmn_element`)</td><td>Reconnects an element to new source and/or target flow nodes.</td><td>Write</td></tr>
-		<tr><td>Ensure correct Zeebe extensions (`ensure_correct_zeebe_extensions`)</td><td>Validates and normalizes Zeebe extensions in BPMN XML, with auto-fixes where possible.</td><td>Write</td></tr>
+		<tr><td>Convert BPMN JSON to XML</td><td>Converts a BPMN model from JSON to BPMN 2.0 XML.</td><td>Write</td></tr>
+		<tr><td>Add BPMN element</td><td>Adds a BPMN element and optionally connects it with `afterElementId` and/or `beforeElementId`.</td><td>Write</td></tr>
+		<tr><td>Update BPMN element</td><td>Updates element name, type, or Zeebe attributes (for example task definition or I/O mappings).</td><td>Write</td></tr>
+		<tr><td>Delete BPMN element</td><td>Deletes an element and reconnects surrounding sequence flows.</td><td>Write</td></tr>
+		<tr><td>Move BPMN element</td><td>Reconnects an element to new source and/or target flow nodes.</td><td>Write</td></tr>
+		<tr><td>Ensure correct Zeebe extensions</td><td>Validates and normalizes Zeebe extensions in BPMN XML, with auto-fixes where possible.</td><td>Write</td></tr>
 	</tbody>
 </table>
 
@@ -112,8 +112,8 @@ These tools are used by the BPMN Sub-Agent to create, modify, and analyze BPMN p
 <table>
 	<colgroup>
 		<col style={{width: "35%"}} />
-		<col style={{width: "55%"}} />
-		<col style={{width: "10%"}} />
+		<col style={{width: "57%"}} />
+		<col style={{width: "8%"}} />
 	</colgroup>
 	<thead>
 		<tr>
@@ -135,8 +135,8 @@ These tools are used by the BPMN Sub-Agent to create, modify, and analyze BPMN p
 <table>
 	<colgroup>
 		<col style={{width: "35%"}} />
-		<col style={{width: "55%"}} />
-		<col style={{width: "10%"}} />
+		<col style={{width: "57%"}} />
+		<col style={{width: "8%"}} />
 	</colgroup>
 	<thead>
 		<tr>
@@ -152,15 +152,15 @@ These tools are used by the BPMN Sub-Agent to create, modify, and analyze BPMN p
 
 ## Form tools
 
-These tools are used by the Form Sub-Agent to create, modify, and validate Camunda Forms.
+These are modeling tools used by the Form sub-agent to create, modify, and validate Camunda Forms.
 
 Use this group when you need to validate form schema, update components, summarize form structure, or bind forms to BPMN user tasks.
 
 <table>
 	<colgroup>
 		<col style={{width: "35%"}} />
-		<col style={{width: "55%"}} />
-		<col style={{width: "10%"}} />
+		<col style={{width: "57%"}} />
+		<col style={{width: "8%"}} />
 	</colgroup>
 	<thead>
 		<tr>
@@ -180,15 +180,15 @@ Use this group when you need to validate form schema, update components, summari
 
 ## General tools
 
-These tools are available to all sub-agents for general operations.
+These tools are available to all sub-agents for support operations.
 
-Use this group to synchronize artifact state between backend and UI context.
+Use this group to keep backend and UI artifact state synchronized after changes.
 
 <table>
 	<colgroup>
 		<col style={{width: "35%"}} />
-		<col style={{width: "55%"}} />
-		<col style={{width: "10%"}} />
+		<col style={{width: "57%"}} />
+		<col style={{width: "8%"}} />
 	</colgroup>
 	<thead>
 		<tr>
@@ -206,13 +206,13 @@ Use this group to synchronize artifact state between backend and UI context.
 
 These tools execute in the Web Modeler UI and provide access to UI-specific functionality.
 
-Use this group when you need project-level file operations, UI state synchronization, template discovery, or editor validation feedback.
+Use this group when you need user-visible project/file operations, UI validation feedback, or UI-side synchronization required to apply changes correctly.
 
 <table>
 	<colgroup>
 		<col style={{width: "35%"}} />
-		<col style={{width: "55%"}} />
-		<col style={{width: "10%"}} />
+		<col style={{width: "57%"}} />
+		<col style={{width: "8%"}} />
 	</colgroup>
 	<thead>
 		<tr>
@@ -243,8 +243,8 @@ Use this group to retrieve product and modeling guidance from connected knowledg
 <table>
 	<colgroup>
 		<col style={{width: "35%"}} />
-		<col style={{width: "55%"}} />
-		<col style={{width: "10%"}} />
+		<col style={{width: "57%"}} />
+		<col style={{width: "8%"}} />
 	</colgroup>
 	<thead>
 		<tr>
