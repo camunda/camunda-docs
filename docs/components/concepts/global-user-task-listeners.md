@@ -80,11 +80,11 @@ You can configure the global user task listeners through the [Unified Configurat
 
 Each listener entry can be configured with the properties described in the [Global listener definition](#global-listener-definition) section above, except for the `source` property which is automatically set to `CONFIGURATION` by the system.
 
-#### Automatic configuration correction
+#### How the configuration is validated
 
-If you provide an invalid configuration, the system attempts to automatically correct it instead of causing startup to fail. This allows you to fix issues in the configuration without requiring every listener entry to be valid on the first attempt.
+If you provide an invalid configuration, the system attempts to automatically rectify it instead of causing startup to fail. This allows you to fix issues in the configuration without requiring every listener entry to be valid on the first attempt.
 
-The following corrections are applied automatically:
+The following validation rules are applied automatically on startup:
 
 - If a listener is missing the required `id`, `type`, or `event-types` properties, it is removed and ignored.
 - If a listener defines invalid event types, those event types are removed. If all event types of a listener are invalid, the listener is removed and ignored.
