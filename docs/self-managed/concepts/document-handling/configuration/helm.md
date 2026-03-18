@@ -10,15 +10,20 @@ Helm offers external cloud file bucket storage options (recommended for producti
 
 - By using **external cloud file bucket storage options**, documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storage options are supported:
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
-  - [**AWS S3**](https://aws.amazon.com/s3/).
+  - [**AWS S3**](https://aws.amazon.com/s3/)
+  - [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs)
 
 - **In-memory** storage can be used to store documents during the application's runtime. When the application is stopped, documents are lost. In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.
 
 If no storage configuration is provided, the default document storage is in-memory. However, in-memory storage is not supported in production environments, so a configuration update is required. This is because memory is not shared between pods or components, preventing services like Tasklist and Zeebe from accessing the same data. Additionally, all uploaded files are lost when the application restarts.
 
-To change the storage to **Google Cloud Platform** or **AWS S3**, update the `values.yaml` file with a storage configuration parameters.
+To change the storage to **Google Cloud Platform**, **AWS S3**, or **Azure Blob Storage**, update the `values.yaml` file with the storage configuration parameters.
 
-Below is an example of storage configuration. While this example mixes GCP, AWS, and in-memory, this example represents part of the [default Helm chart values](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.7/values.yaml). This example demonstrates the current default values and what they would need to change to enable the storage type of their preference:
+Below is an example of storage configuration. While this example mixes GCP, AWS, and in-memory, this example represents part of the [default Helm chart values](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.7/values.yaml). This example demonstrates the current default values and what they would need to change to enable the storage type of their preference.
+
+:::note
+Azure Blob Storage configuration differs from AWS and GCP. Only the connection string secret is managed in `values.yaml` under `global.documentStore.type.azure`. All other Azure configuration (container name, class, endpoint, etc.) must be provided via [`extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md). See the [Azure Blob Storage configuration](#azure-blob-storage-configuration) section below for details.
+:::
 
 ```
 # Global configuration for variables which can be accessed by all sub charts
@@ -72,4 +77,100 @@ global:
                 storeId: "INMEMORY"
                 ## @param global.documentStore.type.inmemory.class Fully qualified class name for the in-memory document store provider.
                 class: "io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider"
+```
+
+## Azure Blob Storage configuration
+
+Azure Blob Storage uses a different configuration pattern than AWS and GCP. Only the connection string secret is managed via `values.yaml` under `global.documentStore.type.azure`. All other configuration (container name, class, endpoint, etc.) must be provided by the user via `orchestration.extraConfiguration` and `connectors.extraConfiguration`.
+
+This follows the same [`extraConfiguration` pattern](/self-managed/deployment/helm/configure/application-configs.md) used by other application-level settings in the 8.9+ chart.
+
+### Prerequisites
+
+- An Azure Storage account with a Blob container.
+- For connection string authentication: the connection string from the Azure portal (**Settings > Access keys**).
+- For Managed Identity / DefaultAzureCredential authentication: the `Storage Blob Data Contributor` RBAC role assigned on the storage account.
+
+### Authentication options
+
+Azure Blob Storage supports two authentication methods:
+
+1. **Connection string** — simplest setup. The connection string is injected as a secret via `global.documentStore.type.azure.connectionString.secret`.
+2. **DefaultAzureCredential** (recommended for AKS) — uses Workload Identity or Managed Identity. Set the `endpoint` in `extraConfiguration` instead of providing a connection string. Requires the `Storage Blob Data Contributor` RBAC role on the storage account.
+
+### Connection string authentication
+
+This example uses a connection string stored in a Kubernetes secret.
+
+```yaml
+global:
+  documentStore:
+    activeStoreId: "azure"
+    type:
+      azure:
+        enabled: true
+        connectionString:
+          secret:
+            existingSecret: "azure-storage-credentials"
+            existingSecretKey: "connection-string"
+
+orchestration:
+  extraConfiguration:
+    - file: azure-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            store:
+              azure:
+                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
+                container: my-container
+
+connectors:
+  extraConfiguration:
+    - file: azure-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            store:
+              azure:
+                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
+                container: my-container
+```
+
+### Managed Identity / DefaultAzureCredential
+
+When using AKS Workload Identity or Managed Identity, omit the connection string secret and set the `endpoint` instead:
+
+```yaml
+global:
+  documentStore:
+    activeStoreId: "azure"
+    type:
+      azure:
+        enabled: true
+        # No connectionString secret needed — DefaultAzureCredential handles auth
+
+orchestration:
+  extraConfiguration:
+    - file: azure-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            store:
+              azure:
+                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
+                container: my-container
+                endpoint: https://myaccount.blob.core.windows.net
+
+connectors:
+  extraConfiguration:
+    - file: azure-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            store:
+              azure:
+                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
+                container: my-container
+                endpoint: https://myaccount.blob.core.windows.net
 ```
