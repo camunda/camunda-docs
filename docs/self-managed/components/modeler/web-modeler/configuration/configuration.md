@@ -185,6 +185,14 @@ Web Modeler supports syncing files via [Git Sync](../../../../../components/mode
 | Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH` | URL used to access authentication and authorization services for Microsoft cloud identities.                                  | `https://login.microsoftonline.com`          |
 | Bitbucket     | `CAMUNDA_MODELER_GITSYNC_BITBUCKET_BASEURL`         | The base URL of Bitbucket Cloud.                                                                                              | `https://api.bitbucket.org/2.0/repositories` |
 
+### Unstable configuration options
+
+These are unstable options that are not officially supported and may be removed without deprecation in future releases. They are intended for testing and feedback purposes only.
+
+| Environment variable                                       | Description                                                                                                                                                                                                | Example value | Default value |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `CAMUNDA_MODELER_RESOURCE_IMPORT_ALLOW_PRIVATE_IP_ADDRESS` | Allow importing resources from a host that resolves to a private IP address. Enabling this option weakens server-side request forgery (SSRF) protections and can significantly increase security exposure. | `true`        | `false`       |
+
 ## Configuration of the `webapp` component
 
 ### General

@@ -472,7 +472,7 @@ camunda_webapps_123_8.8.0_part_6_of_7
 camunda_webapps_123_8.8.0_part_7_of_7
 ```
 
-Once completed, you can proceed with step 7 of the [backup procedure](self-managed/operational-guides/backup-restore/backup-and-restore.md#backup-process).
+Once completed, you can proceed with step 7 of the [backup procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md#backup-process).
 
 ### Limitations
 

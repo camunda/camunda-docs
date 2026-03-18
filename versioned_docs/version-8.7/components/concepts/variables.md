@@ -34,6 +34,15 @@ The value of a variable is stored as a JSON value. It can have one of the follow
 - Object (e.g. `{ "orderNumber": "A12BH98", "date": "2020-10-15", "amount": 185.34}`)
 - Null (`null`)
 
+:::note
+Numbers are subject to the following numeric limits:
+
+- Integer numbers are effectively limited to the 64‑bit integer range.
+- Non‑integer numbers are stored as IEEE‑754 double‑precision values, which provide roughly 15–17 significant decimal digits rather than arbitrary BigDecimal precision.
+
+If you need arbitrary-precision or very large numbers, consider storing them as strings or in an external data store instead of process variables.
+:::
+
 ## Variable size limitation
 
 The payload of a process instance is limited to 4 MB. This limit includes both process variables and workflow engine–internal data, so less than 4 MB is available for variables alone.

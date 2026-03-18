@@ -17,7 +17,7 @@ camunda_optimize_123456_8.8.0_part_1_of_2
 camunda_optimize_123456_8.8.0_part_2_of_2
 ```
 
-Optimize provides an API to trigger a backup and retrieve information about a given backup's state. During backup creation Optimize can continue running. The backed up data can later be restored using the standard ElasticSearch/OpenSearch snapshot restore API.
+Optimize provides an API to trigger a backup and retrieve information about a given backup's state. During backup creation Optimize can continue running. The backed up data can later be restored using the standard Elasticsearch/OpenSearch snapshot restore API.
 
 :::warning
 Usage of this API requires the backup store to be configured for the component.
@@ -26,7 +26,7 @@ Usage of this API requires the backup store to be configured for the component.
   - [Elasticsearch](/self-managed/components/optimize/configuration/system-configuration.md#elasticsearch-backup-settings)
   - [OpenSearch](/self-managed/components/optimize/configuration/system-configuration.md#opensearch-backup-settings)
 
-1. A snapshot repository of your choice must be registered with ElasticSearch/OpenSearch.
+1. A snapshot repository of your choice must be registered with Elasticsearch/OpenSearch.
 2. The repository name must be specified using the `CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME` environment variable, or by adding it to your Optimize [`environment-config.yaml`](/self-managed/components/optimize/configuration/system-configuration.md):
 
 - [Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)
@@ -137,7 +137,7 @@ Possible states of the backup:
 - `COMPLETE`: The backup can be used for restoring data.
 - `IN_PROGRESS`: The backup process for this backup ID is still in progress.
 - `FAILED`: Something went wrong when creating this backup. To find out the exact problem, use the [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-snapshot-status-api.html)/[OpenSearch](https://opensearch.org/docs/latest/api-reference/snapshots/get-snapshot-status/) get snapshot status API for each of the snapshots included in the given backup.
-- `INCOMPATIBLE`: The backup is incompatible with the current ElasticSearch/OpenSearch version.
+- `INCOMPATIBLE`: The backup is incompatible with the current Elasticsearch/OpenSearch version.
 - `INCOMPLETE`: The backup is incomplete (this could occur when the backup process was interrupted or individual snapshots were deleted).
 
 ## Delete backup API
@@ -158,7 +158,7 @@ DELETE actuator/backups/{backupId}
 | 204 No Content   | The delete request for the associated snapshots was submitted to the database successfully.                                                                              |
 | 400 Bad Request  | There is an issue with the request, for example the repository name specified in the Optimize configuration does not exist. Refer to returned error message for details. |
 | 500 Server Error | An error occurred, for example the snapshot repository does not exist. Refer to the returned error message for details.                                                  |
-| 502 Bad Gateway  | Optimize has encountered issues while trying to connect to ElasticSearch/OpenSearch.                                                                                     |
+| 502 Bad Gateway  | Optimize has encountered issues while trying to connect to Elasticsearch/OpenSearch.                                                                                     |
 
 ### Example request
 

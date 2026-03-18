@@ -37,3 +37,5 @@ To see which application versions are included in a specific Helm chart, see the
 ## Get started
 
 To install Camunda with the default orchestration cluster, see [Install Camunda with Helm](/self-managed/deployment/helm/install/quick-install.md).
+
+If managed databases or an external OIDC provider are not available in your organization, see [Deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) to set up PostgreSQL, Elasticsearch, and Keycloak on Kubernetes using official operators.

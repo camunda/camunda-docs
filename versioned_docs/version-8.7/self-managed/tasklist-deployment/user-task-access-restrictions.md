@@ -15,4 +15,4 @@ user or a [group](/self-managed/identity/application-user-group-role-management/
 
 For example, if a task has a candidate group named `Team A` and a candidate user named `example`, only the users that belong to `Team A` and the user `example` will have access to the task.
 
-See [Tasklist authentication documentation on **user task access restrictions**](self-managed/tasklist-deployment/tasklist-authentication.md#user-task-access-restrictions) for a more detailled description.
+See [Tasklist authentication documentation on **user task access restrictions**](/self-managed/tasklist-deployment/tasklist-authentication.md#user-task-access-restrictions) for a more detailled description.

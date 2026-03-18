@@ -336,7 +336,7 @@ export SUPER_SECRETS_tenant1_MY_SECRET='foo' # This will be resolved by using {{
 
 <TabItem value='helm'>
 
-Connector secrets can be used in Helm charts. Review the documentation on [managing secrets in Helm charts](self-managed/setup/guides/secret-management.md) for additional details.
+Connector secrets can be used in Helm charts. Review the documentation on [managing secrets in Helm charts](/self-managed/setup/guides/secret-management.md) for additional details.
 
 </TabItem>
 

@@ -682,7 +682,7 @@ As part of process instance migration, you can now migrate active instances from
 
 This lets you standardize on the Orchestration Cluster APIs and the recommended user task type before the removal of job‑based user task querying and management in the consolidated API.
 
-<p class="link-arrow">[Process instance migration](/components/concepts/process-instance-migration.md)</p>
+<p class="link-arrow">[Process instance migration](/components/concepts/process-instance-migration.md#migrate-job-worker-user-tasks-to-camunda-user-tasks)</p>
 
 ### RDBMS secondary storage
 
@@ -909,7 +909,7 @@ With this enhancement, you can:
 
 This unlocks more flexible, agent-driven orchestration and faster iteration on live automation.
 
-<p class="link-arrow">[Process instance migration](/components/concepts/process-instance-migration.md)</p>
+<p class="link-arrow">[Process instance migration](/components/concepts/process-instance-migration.md#migrate-active-elements-inside-ad-hoc-subprocesses)</p>
 
 ### RDBMS secondary storage
 
