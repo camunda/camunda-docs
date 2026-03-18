@@ -19,28 +19,8 @@ For a high-level overview, see [Copilot overview](copilot-overview.md).
 
 Tools are categorized by access requirements:
 
-<table>
-	<colgroup>
-		<col style={{width: "35%"}} />
-		<col style={{width: "65%"}} />
-	</colgroup>
-	<thead>
-		<tr>
-			<th style={{textAlign: "left"}}>Access</th>
-			<th style={{textAlign: "left"}}>Availability</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>Read</td>
-			<td>Available to all users, including users with read-only access (`READ` or `COMMENT` permissions).</td>
-		</tr>
-		<tr>
-			<td>Write</td>
-			<td>Available only to users with write access. These tools are hidden from read-only users.</td>
-		</tr>
-	</tbody>
-</table>
+- **Read**: Available to all users, including users with read-only access (`READ` or `COMMENT` permissions).
+- **Write**: Available only to users with write access. These tools are hidden from read-only users.
 
 ## Common tasks
 
