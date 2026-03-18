@@ -184,44 +184,10 @@ Copilot respects your project permissions:
   </tbody>
 </table>
 
-## Camunda Docs AI (SaaS only)
-
-<span class="badge badge--cloud">Camunda 8 SaaS only</span>
-
-Camunda Copilot includes an integrated AI-powered documentation assistant that helps you find answers to technical and non-technical questions about Camunda directly within Web Modeler.
-
-:::note
-Camunda Docs AI is available only in SaaS deployments. Self-Managed users can configure their own LLM provider but do not have access to the Camunda documentation knowledge base.
-:::
-
-### Features
-
-- **Contextual help**: Ask questions about Camunda concepts, BPMN elements, FEEL syntax, and more without leaving Web Modeler
-- **Documentation search**: Get answers sourced from Camunda documentation, forums, and blog posts
-- **Natural language queries**: Ask questions in plain language like "How do I design a process?" or "What is BPMN?"
-
-### How to use
-
-The Camunda Docs AI functionality is built into Copilot. Simply ask documentation-related questions in the Copilot chat, and it will provide answers based on Camunda's knowledge base.
-
-Example questions:
-
-- "How do I configure a service task?"
-- "What are the best practices for error handling in BPMN?"
-- "Explain the difference between user tasks and service tasks"
-- "How do I use the HTTP connector?"
-
 ## Limitations
 
-### BPMN limitations
-
-- Copilot does not support pools, lanes, and collaborations.
-
-### General limitations
-
-- As Copilot can produce errors, you **must** check its output before saving the results to your diagram or form.
-- Clicking **Use Expression** or accepting Copilot changes will overwrite your existing work.
-- Conversation history is retained for 90 days.
+- Camunda Copilot does not support pools, lanes, and collaborations.
+- Camunda Docs AI is available only in SaaS deployments. Self-Managed users can configure their own LLM provider but do not have access to the Camunda documentation knowledge base.
 
 ## Configuration
 
