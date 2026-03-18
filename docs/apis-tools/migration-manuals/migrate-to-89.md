@@ -42,13 +42,13 @@ If you did not already migrate to the following APIs and SDKs during your 8.8 up
 
 If you already performed these migrations during your 8.8 upgrade, proceed to [Camunda 8.9 breaking changes, deprecations, and supported environment changes](#camunda-89-breaking-changes-deprecations-and-supported-environment-changes).
 
-| Component/Use                                                                                                           | 8.9 status | Migrate to                  | Migrate by          |
-| :---------------------------------------------------------------------------------------------------------------------- | :--------- | :-------------------------- | :------------------ |
-| [V1 component APIs](../migration-manuals/migrate-to-camunda-api.md)                                                     | Deprecated | Orchestration Cluster API   | Before Camunda 8.10 |
-| [ZeebeClient](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-java-client.md)               | Deprecated | Camunda Java Client         | Before Camunda 8.10 |
-| [Spring Zeebe SDK](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)         | Deprecated | Camunda Spring Boot Starter | Before Camunda 8.10 |
-| [Zeebe Process Test (ZPT)](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-process-test.md) | Deprecated | Camunda Process Test (CPT)  | Before Camunda 8.10 |
-| [Job-based user tasks](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)       | Deprecated | Camunda user tasks          | Before Camunda 8.10 |
+| 8.9 status                                                 | Component/Use                                                                                                           | Migrate to                  | Migrate by          |
+| :--------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :-------------------------- | :------------------ |
+| <span className="label-highlight yellow">Deprecated</span> | [V1 component APIs](../migration-manuals/migrate-to-camunda-api.md)                                                     | Orchestration Cluster API   | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [ZeebeClient](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-java-client.md)               | Camunda Java Client         | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [Spring Zeebe SDK](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)         | Camunda Spring Boot Starter | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [Zeebe Process Test (ZPT)](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-process-test.md) | Camunda Process Test (CPT)  | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [Job-based user tasks](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)       | Camunda user tasks          | Before Camunda 8.10 |
 
 :::tip
 Learn more about API changes in the blog post [Upcoming API Changes in Camunda 8: A Unified and Streamlined Experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
@@ -58,22 +58,18 @@ Learn more about API changes in the blog post [Upcoming API Changes in Camunda 8
 
 Review the actions required for the following 8.9 changes:
 
-| Type                   | Change                                                                                                              |
-| :--------------------- | :------------------------------------------------------------------------------------------------------------------ |
-| Breaking change        | [Bug fix: `FormResult.schema` type corrected from object to string](#form-schema-type)                              |
-| Breaking change        | [Camunda 8 Run defaults to H2 secondary storage](#h2)                                                               |
-| Breaking change        | [Document API response schemas now have explicit required and nullable annotations](#request-response-schema-split) |
-| Breaking change        | [Elasticsearch subchart no longer enabled by default](#es-subchart)                                                 |
-| Breaking change        | [MCP Client and MCP Remote Client connectors](#mcp)                                                                 |
-| Breaking change        | [OpenAPI enum extensions](#enum-extensions)                                                                         |
-| Breaking change        | [OpenAPI type-safety enhancements](#type-safety-enhancements)                                                       |
-| Breaking change        | [Resource deletion endpoint now returns a response body](#resource-deletion)                                        |
-| Breaking change        | [Spring Boot 4.0 default for Camunda Spring Boot Starter](#spring-boot)                                             |
-| Breaking change        | [`versionTag` returns `null` instead of empty string when absent](#version-tag-null)                                |
-| Breaking change        | [Web Modeler changes](#web-modeler)                                                                                 |
-| Deprecated             | [Deprecated: enum literals in Orchestration Cluster API v2](#deprecated-enum)                                       |
-| Deprecated             | [Deprecated: Operate Connector](#deprecated-operate)                                                                |
-| Supported environments | [Supported environment changes](#supported-env)                                                                     |
+| Type                                                         | Change                                                                                                              |
+| :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ |
+| <span className="label-highlight red">Breaking change</span> | [Bug fix: `FormResult.schema` type corrected from object to string](#form-schema-type)                              |
+| <span className="label-highlight red">Breaking change</span> | [Document API response schemas now have explicit required and nullable annotations](#request-response-schema-split) |
+| <span className="label-highlight red">Breaking change</span> | [MCP Client and MCP Remote Client connectors](#mcp)                                                                 |
+| <span className="label-highlight red">Breaking change</span> | [OpenAPI enum extensions](#enum-extensions)                                                                         |
+| <span className="label-highlight red">Breaking change</span> | [OpenAPI type-safety enhancements](#type-safety-enhancements)                                                       |
+| <span className="label-highlight red">Breaking change</span> | [Resource deletion endpoint now returns a response body](#resource-deletion)                                        |
+| <span className="label-highlight red">Breaking change</span> | [Spring Boot 4.0 default for Camunda Spring Boot Starter](#spring-boot)                                             |
+| <span className="label-highlight red">Breaking change</span> | [`versionTag` returns `null` instead of empty string when absent](#version-tag-null)                                |
+| <span className="label-highlight red">Breaking change</span> | [Web Modeler changes](#web-modeler)                                                                                 |
+| <span className="label-highlight yellow">Deprecated</span>   | [Deprecated: enum literals in Orchestration Cluster API v2](#deprecated-enum)                                       |
 
 ## Breaking changes
 
@@ -117,22 +113,6 @@ No change needed if your code was already handling the actual `string` response 
 
 </TabItem>
 </Tabs>
-
-### Camunda 8 Run defaults to H2 secondary storage {#h2}
-
-#### Change
-
-Camunda 8 Run now uses H2 as the default secondary data storage instead of Elasticsearch.
-
-#### Why
-
-This reduces operational complexity for development and non-high-performance environments.
-
-#### Action
-
-- When running with H2 (or any other RDBMS), Camunda is only compatible with the V2 API. Some features are not available in Operate and Tasklist.
-- To continue using features exclusive to the V1 API, run Camunda with Elasticsearch and switch back to V1 mode.
-- See [Migrate to the V2 Orchestration Cluster API](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-api.md) for more details.
 
 ### Document API response schemas now have explicit required and nullable annotations {#request-response-schema-split}
 
@@ -186,28 +166,6 @@ No request-side changes are needed. Response fields listed above are now guarant
 
 </TabItem>
 </Tabs>
-
-### Elasticsearch subchart no longer enabled by default {#es-subchart}
-
-#### Change
-
-The Elasticsearch Helm subchart is no longer enabled by default.
-
-#### Why
-
-With the addition of RDBMS secondary storage options, you must now explicitly specify which secondary storage to use.
-
-#### Action
-
-To continue using Elasticsearch as a subchart, add the following to your `values.yaml`:
-
-```yaml
-global:
-  elasticsearch:
-    enabled: true
-elasticsearch:
-  enabled: true
-```
 
 ### MCP Client and MCP Remote Client connectors {#mcp}
 
@@ -435,22 +393,6 @@ if (versionTag != null) {
 </TabItem>
 </Tabs>
 
-### Web Modeler changes {#web-modeler}
-
-Review the following breaking changes that affect Web Modeler Self-Managed installations, and take action if required:
-
-| Change                                                   | Action required do                                                                                                                    |
-| :------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
-| Logging framework changed from Logback to Apache Log4j 2 | Migrate custom Logback configurations to Log4j 2 format.                                                                              |
-| Default logging format changed                           | If you relied on JSON-formatted console output, explicitly configure JSON logging.                                                    |
-| Embedded web server changed from Undertow to Tomcat      | Update any Undertow-specific configuration (thread pools, buffers) to Tomcat equivalents.                                             |
-| JSON log structure changed                               | Update log parsers: `logger` → `loggerName`, `thread` → `threadContext.name`.                                                         |
-| Collaborator invitation behavior aligned                 | Invitation suggestions now only include users who have logged in at least once. Users who have not logged in can be invited by email. |
-
-:::info
-See the [8.9 release announcements](/reference/announcements-release-notes/890/890-announcements.md) for more information about these changes.
-:::
-
 ## Deprecations
 
 Review the actions required for the following deprecations:
@@ -468,29 +410,6 @@ These values were reintroduced to preserve backward compatibility but are planne
 #### Action
 
 Avoid using these values in new integrations. If your code references them, plan to remove these references before the 8.10 release.
-
-### Deprecated: Operate Connector {#deprecated-operate}
-
-The Operate Connector is deprecated following the deprecation of the Operate API.
-
-#### Action
-
-Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) via the [REST Connector](/components/connectors/protocol/rest.md) going forward.
-
-## Supported environment changes {#supported-env}
-
-Review the following supported environment changes and take action if required:
-
-| Change                                                       | Action required                                      |
-| :----------------------------------------------------------- | :--------------------------------------------------- |
-| Elasticsearch minimum version raised to **8.19+**            | Upgrade Elasticsearch clusters before moving to 8.9. |
-| OpenSearch minimum version raised to **2.19+**               | Upgrade OpenSearch clusters before moving to 8.9.    |
-| Elasticsearch **9.2+** and OpenSearch **3.4+** now supported | Consider upgrading for latest features.              |
-| **OpenJDK 25** certified                                     | No action needed as OpenJDK 21–25 remain supported.  |
-
-:::info
-Learn more about Camunda 8 [supported environments](/reference/supported-environments.md).
-:::
 
 ## Next steps
 
