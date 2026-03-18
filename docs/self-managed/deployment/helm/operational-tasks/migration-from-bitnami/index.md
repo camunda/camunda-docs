@@ -88,9 +88,9 @@ Regardless of your chosen migration target, ensure the following:
 :::important Plan authentication and service access up front
 All migration paths require an explicit decision for authentication and connectivity:
 
-- If you keep **Keycloak**, plan for a Keycloak Operator deployment and configure the hostname with the full external URL, for example `https://your-domain.example.com/auth`.
-- If you replace Keycloak with an [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md), complete that design before cutover because Identity configuration changes are part of the migration.
-- If your PostgreSQL or Elasticsearch access depends on cloud-specific IAM authentication such as AWS IRSA, the provided migration jobs are not sufficient and you need a custom migration workflow.
+- If you keep **Keycloak**, plan for a Keycloak Operator deployment, and configure the hostname with the full external URL, for example `https://your-domain.example.com/auth`.
+- If you replace Keycloak with an [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md), complete that design before cutting over because Identity configuration changes are part of the migration.
+- If your PostgreSQL or Elasticsearch access depends on cloud-specific IAM authentication such as AWS IRSA, the provided migration jobs are not sufficient, and you need a custom migration workflow.
   :::
 
 :::warning Test in staging first
