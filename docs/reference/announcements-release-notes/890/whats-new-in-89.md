@@ -430,19 +430,23 @@ The following guides offer detailed information on how to upgrade to Camunda 8.9
 
 ## Migration from Camunda 7 to Camunda 8
 
-Camunda 8.9 includes the following enhancements to help you migrate from Camunda 7 to Camunda 8.
+While with the last 8.8 release we already added the Runtime Data Migrator, Code Conversion, and the Diagram Converter, in 8.9 we are adding the following additional tools and features to help you migrate from Camunda 7 to Camunda 8.
 
 :::tip
 Start your migration today with the [Camunda 7 to Camunda 8 migration guide](/guides/migrating-from-camunda-7/index.md).
 :::
 
-### Audit log coverage for Camunda 7 to Camunda 8 migrations
+### History Data Migrator
 
-The audit log migrator automatically converts Camunda 7 `UserOperationLog` entries to Camunda 8 AuditLog format, preserving the complete history of user operations including who performed actions, what entities were affected (process instances, tasks, variables, decisions), operation types (create, update, delete, assign, complete), timestamps, and annotations.
+The History Data Migrator migrates audit trail data (the history of process execution, including active, completed and canceled instances) to Camunda 8 when RDBMS is used as secondary storage.
 
-This ensures uninterrupted audit trail continuity across the migration, enabling customers to meet compliance requirements and maintain operational visibility without manual data reconstruction or workarounds.
+<p class="link-arrow">[History Data Migrator](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md)</p>
 
-<p className="link-arrow">[Data Migrator history migration coverage](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations.md#camunda-8-history-migration-coverage)</p>
+### Identity Data Migrator
+
+The Identity Data Migrator migrates authorizations that control access to resources in Camunda, helping you preserve permissions when migrating to Camunda 8.
+
+<p class="link-arrow">[Identity Data Migrator](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/identity.md)</p>
 
 ### BPMN conditional events
 
