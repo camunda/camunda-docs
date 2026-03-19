@@ -4,8 +4,6 @@ title: "Health"
 description: "This document explains how health is defined in a Zeebe cluster."
 ---
 
-# Health
-
 Health in Zeebe is not a binary status, but can have three different state:
 
 - **Healthy**: everything is working as expected.
