@@ -742,7 +742,7 @@ helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
   --kube-context $CLUSTER_RECREATED \
   --namespace $CAMUNDA_NAMESPACE_RECREATED \
   -f camunda-values.yml \
-  -f ../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
+  -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
   -f $REGION_RECREATED/camunda-values.yml \
   --set orchestration.profiles.operate=false \
   --set orchestration.profiles.tasklist=false
@@ -1039,7 +1039,7 @@ helm upgrade --install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
   --kube-context $CLUSTER_SURVIVING \
   --namespace $CAMUNDA_NAMESPACE_SURVIVING \
   -f camunda-values.yml \
-  -f ../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
+  -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
   -f $REGION_SURVIVING/camunda-values.yml \
   --set orchestration.profiles.operate=false \
   --set orchestration.profiles.tasklist=false
@@ -1895,7 +1895,7 @@ orchestration:
    --kube-context $CLUSTER_SURVIVING \
    --namespace $CAMUNDA_NAMESPACE_SURVIVING \
    -f camunda-values.yml \
-   -f ../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
+   -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
    -f $REGION_SURVIVING/camunda-values.yml
    ```
 
@@ -1907,7 +1907,7 @@ orchestration:
    --kube-context $CLUSTER_RECREATED \
    --namespace $CAMUNDA_NAMESPACE_RECREATED \
    -f camunda-values.yml \
-   -f ../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
+   -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
    -f $REGION_RECREATED/camunda-values.yml
    ```
 
