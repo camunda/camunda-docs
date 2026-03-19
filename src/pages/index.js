@@ -449,7 +449,7 @@ $ c8ctl process deploy my-process.bpmn`}
           <div className={styles.deployGrid}>
             <Link
               to={useBaseUrl(
-                "docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks/"
+                "docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/"
               )}
               className={styles.deployCard}
             >
