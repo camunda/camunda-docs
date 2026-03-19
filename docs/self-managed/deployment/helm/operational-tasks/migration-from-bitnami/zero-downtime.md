@@ -391,7 +391,7 @@ Check the replication lag on each subscription:
 # On each CNPG target, check subscription status
 for CLUSTER in ${CNPG_IDENTITY_CLUSTER} ${CNPG_KEYCLOAK_CLUSTER} ${CNPG_WEBMODELER_CLUSTER}; do
   echo "=== ${CLUSTER} ==="
-  kubectl exec -it ${CLUSTER}-1 -n ${NAMESPACE} -- \
+  kubectl exec -it $(kubectl get pod -n ${NAMESPACE} -l cnpg.io/cluster=${CLUSTER},cnpg.io/instanceRole=primary -o jsonpath='{.items[0].metadata.name}') -n ${NAMESPACE} -- \
     psql -U postgres -c "
       SELECT subname, received_lsn, latest_end_lsn,
              latest_end_lsn - received_lsn AS lag_bytes

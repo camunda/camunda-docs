@@ -28,23 +28,23 @@ The migration covers all Bitnami-managed infrastructure components deployed as p
 | Bitnami PostgreSQL (Keycloak)    | Realms, users, and clients                     | `pg_dump` / `pg_restore`                  |
 | Bitnami PostgreSQL (Web Modeler) | Projects and diagrams                          | `pg_dump` / `pg_restore`                  |
 | Bitnami Elasticsearch            | Zeebe, Operate, Tasklist, and Optimize indices | Reindex from remote (`_reindex` API)      |
-| Bitnami Keycloak (StatefulSet)   | Migrated via PostgreSQL data                   | Keycloak Operator CR replaces StatefulSet |
+| Bitnami Keycloak (StatefulSet)   | Realms, users, and clients (via PostgreSQL)    | Keycloak Operator CR replaces StatefulSet |
 
 :::info Camunda core components are not affected
 The Camunda application components themselves (Zeebe, Operate, Tasklist, Optimize, Connectors, Identity, and Web Modeler) are not migrated; they're reconfigured via a Helm upgrade to use the new infrastructure backends. Your process instances, decisions, and forms remain intact.
 :::
 
-## Migration steps
+## Migration phases
 
 The migration follows a five-phase approach designed to minimize downtime:
 
-| Step  | Phase           | Downtime                                       | Outcome                                                                              |
-| ----- | --------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------ |
-| **1** | Deploy targets  | No planned downtime                            | Install operators and create the target infrastructure alongside Bitnami.            |
-| **2** | Initial backup  | No planned downtime                            | Back up data while the application is still running.                                 |
-| **3** | Cutover         | **Maintenance window**<br />Typically 5–30 min | Freeze traffic, take a final backup, restore data, run the Helm upgrade, and resume. |
-| **4** | Validate        | No planned downtime                            | Verify that all components are healthy on the new infrastructure.                    |
-| **5** | Cleanup Bitnami | No planned downtime                            | Remove old Bitnami StatefulSets, PVCs, and migration artifacts.                      |
+| Phase              | Downtime                                       | Outcome                                                                              |
+| ------------------ | ---------------------------------------------- | ------------------------------------------------------------------------------------ |
+| 1. Deploy targets  | No planned downtime                            | Install operators and create the target infrastructure alongside Bitnami.            |
+| 2. Initial backup  | No planned downtime                            | Back up data while the application is still running.                                 |
+| 3. Cutover         | **Maintenance window**<br />Typically 5–30 min | Freeze traffic, take a final backup, restore data, run the Helm upgrade, and resume. |
+| 4. Validate        | No planned downtime                            | Verify that all components are healthy on the new infrastructure.                    |
+| 5. Cleanup Bitnami | No planned downtime                            | Remove old Bitnami StatefulSets, PVCs, and migration artifacts.                      |
 
 ### Downtime estimation
 
@@ -66,7 +66,7 @@ Use this quick rule of thumb before selecting a guide:
 - If your SLA does not allow a maintenance window, choose **zero-downtime migration**.
 - If you want to keep infrastructure in-cluster with operator-managed lifecycle, choose **Kubernetes operators**.
 - If you want PostgreSQL and Elasticsearch operated by your cloud provider, choose **managed services**.
-- f you run on VMs, bare metal, or another topology outside these supported patterns, choose **manual deployment**.
+- If you run on VMs, bare metal, or another topology outside these supported patterns, choose **manual deployment**.
 
 | Best for                                                                                                            | Recommended path                                                                   | Guide                                                           |
 | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------- |

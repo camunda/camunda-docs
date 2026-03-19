@@ -358,12 +358,12 @@ curl -X POST "https://target-endpoint/_snapshot/s3_backup/migration/_restore" \
 
 <TabItem value="reindex" label="Reindex API">
 
-Use the Elasticsearch [Reindex API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html) to copy data from the source to the target. This requires the target to whitelist the source as a remote.
+Use the Elasticsearch [Reindex API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html) to copy data from the source to the target. This requires the target to allowlist the source as a remote.
 
 Reindex each concrete Camunda index individually rather than using a single wildcard destination. To stay aligned with the migration scripts, include `zeebe-*`, `operate-*`, `tasklist-*`, `optimize-*`, `connectors-*`, and `camunda-*` indices. For example:
 
 ```bash
-# On the target, add source to reindex.remote.whitelist.
+# On the target, add source to reindex.remote.allowlist.
 # Then iterate over every Camunda index you want to copy.
 for idx in $(curl -s -u "elastic:<password>" \
   "http://source-es:9200/_cat/indices/zeebe-*,operate-*,tasklist-*,optimize-*,connectors-*,camunda-*?h=index"); do
