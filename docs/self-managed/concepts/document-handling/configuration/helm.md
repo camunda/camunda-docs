@@ -88,15 +88,15 @@ This follows the same [`extraConfiguration` pattern](/self-managed/deployment/he
 ### Prerequisites
 
 - An Azure Storage account with a Blob container.
-- For connection string authentication: the connection string from the Azure portal (**Settings > Access keys**).
-- For Managed Identity / DefaultAzureCredential authentication: the `Storage Blob Data Contributor` RBAC role assigned on the storage account.
+- For connection string authentication: The connection string from the Azure portal (**Settings > Access keys**).
+- For Managed Identity/DefaultAzureCredential authentication: The `Storage Blob Data Contributor` RBAC role assigned on the storage account.
 
 ### Authentication options
 
 Azure Blob Storage supports two authentication methods:
 
 1. **Connection string** — simplest setup. The connection string is injected as a secret via `global.documentStore.type.azure.connectionString.secret`.
-2. **DefaultAzureCredential** (recommended for AKS) — Uses Workload Identity or Managed Identity. Set the `endpoint` in `extraConfiguration` instead of providing a connection string. Requires the `Storage Blob Data Contributor` RBAC role on the storage account.
+2. **DefaultAzureCredential** (recommended for AKS): Uses Workload Identity or Managed Identity. Set the `endpoint` in `extraConfiguration` instead of providing a connection string. Requires the `Storage Blob Data Contributor` RBAC role on the storage account.
 
 ### Connection string authentication
 
@@ -136,7 +136,7 @@ connectors:
                 container: my-container
 ```
 
-### Managed Identity / DefaultAzureCredential
+### Managed Identity/DefaultAzureCredential
 
 When using AKS Workload Identity or Managed Identity, omit the connection string secret and set the `endpoint` instead:
 

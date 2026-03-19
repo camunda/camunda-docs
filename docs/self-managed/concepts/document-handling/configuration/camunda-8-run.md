@@ -122,13 +122,13 @@ Azure Blob Storage supports two authentication methods: connection string and De
 - For connection string authentication: The connection string from the Azure portal (**Settings > Access keys**).
 - For Managed Identity/DefaultAzureCredential authentication: The `Storage Blob Data Contributor` RBAC role assigned on the storage account.
 
-| Store variable                           | Required    | Description                                                                                                                               |
-| ---------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `DOCUMENT_STORE_AZURE_CLASS`             | Yes         | `io.camunda.document.store.azure.AzureBlobDocumentStoreProvider`                                                                          |
-| `DOCUMENT_STORE_AZURE_CONTAINER`         | Yes         | Name of the Azure Blob Storage container.                                                                                                 |
-| `DOCUMENT_STORE_AZURE_CONNECTION_STRING` | Conditional | Azure Storage connection string. Required unless using DefaultAzureCredential.                                                            |
-| `DOCUMENT_STORE_AZURE_ENDPOINT`          | Conditional | Storage account endpoint (e.g. `https://myaccount.blob.core.windows.net`). Required when using DefaultAzureCredential / Managed Identity. |
-| `DOCUMENT_STORE_AZURE_CONTAINER_PATH`    | No          | Optional path/prefix within the container.                                                                                                |
+| Store variable                           | Required    | Description                                                                                                                             |
+| ---------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_AZURE_CLASS`             | Yes         | `io.camunda.document.store.azure.AzureBlobDocumentStoreProvider`                                                                        |
+| `DOCUMENT_STORE_AZURE_CONTAINER`         | Yes         | Name of the Azure Blob Storage container.                                                                                               |
+| `DOCUMENT_STORE_AZURE_CONNECTION_STRING` | Conditional | Azure Storage connection string. Required unless using DefaultAzureCredential.                                                          |
+| `DOCUMENT_STORE_AZURE_ENDPOINT`          | Conditional | Storage account endpoint (e.g. `https://myaccount.blob.core.windows.net`). Required when using DefaultAzureCredential/Managed Identity. |
+| `DOCUMENT_STORE_AZURE_CONTAINER_PATH`    | No          | Optional path/prefix within the container.                                                                                              |
 
 **Example (connection string):**
 
@@ -139,7 +139,7 @@ DOCUMENT_STORE_AZURE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountNam
 DOCUMENT_DEFAULT_STORE_ID=azure
 ```
 
-**Example (DefaultAzureCredential / Managed Identity):**
+**Example (DefaultAzureCredential/Managed Identity):**
 
 ```
 DOCUMENT_STORE_AZURE_CLASS=io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
