@@ -83,9 +83,3 @@ https://docs.camunda.io/docs/next/components/admin/admin-introduction/
 https://docs.camunda.io/docs/next/components/tasklist/api-versions/
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/whats-new-in-88/
 
-# Orchestration Identity
-
-https://docs.camunda.io/docs/components/admin/authorization/#about-authorizations
-https://docs.camunda.io/docs/components/admin/group/#assign-users-to-a-group
-https://docs.camunda.io/docs/components/admin/role/#assign-users-to-a-role
-https://docs.camunda.io/docs/components/admin/tenant/#assign-users-to-a-tenant
