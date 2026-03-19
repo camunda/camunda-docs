@@ -7,6 +7,7 @@ description: "Advanced guide for migrating Camunda 8 Self-Managed infrastructure
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 
 :::warning Advanced topic
 This guide describes an **advanced migration strategy** that eliminates the downtime window present in the [standard migration](./bitnami-to-operators.md). It requires familiarity with PostgreSQL logical replication, Elasticsearch cross-cluster replication or continuous snapshots, and Keycloak high availability. It may require adjustments to fit your specific environment, network topology, and data volumes.
@@ -61,7 +62,9 @@ The zero-downtime migration replaces the backup/restore phases with continuous r
 
 ## Prerequisites
 
-In addition to the [general prerequisites](./index.md#prerequisites-all-paths):
+<CommonPrerequisites />
+
+In addition to the general prerequisites:
 
 - PostgreSQL source must support **logical replication** (`wal_level = logical`). This may require a restart of the Bitnami PostgreSQL StatefulSet.
 - Elasticsearch: either an **Elastic Platinum license** (for cross-cluster replication) or the ability to run **continuous snapshots** with very short intervals.

@@ -9,6 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
+import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 
 Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to **cloud-managed services**, such as:
 
@@ -27,7 +28,9 @@ Managed services are ideal when your organization:
 
 ## Prerequisites
 
-In addition to the [general prerequisites](./index.md#prerequisites-all-paths), you must:
+<CommonPrerequisites />
+
+In addition to the general prerequisites, you must:
 
 - Have a managed PostgreSQL instance provisioned (with databases and users created)
 - Have a managed Elasticsearch instance provisioned (if migrating Elasticsearch)
@@ -121,7 +124,11 @@ kubectl create secret generic external-es \
 
 ## Step 2: Configure the migration for external targets
 
-Edit `env.sh`, and set the target mode to `external`:
+:::info Terminology — "managed services" vs. "external targets"
+The migration scripts use the term **external targets** (`PG_TARGET_MODE=external`, `ES_TARGET_MODE=external`) for any non-operator target. This includes cloud-managed services (AWS RDS, Elastic Cloud, etc.) but also self-hosted databases outside the Kubernetes cluster. This guide uses "managed services" as a shorthand, but the scripts themselves are not restricted to cloud-managed offerings.
+:::
+
+Edit `env.sh`, and set the target mode to `external`. The base configuration variables (`NAMESPACE`, `CAMUNDA_RELEASE_NAME`, `MIGRATE_*`, etc.) are the same as in the [operator-based guide](./bitnami-to-operators.md#key-configuration-variables) — only the target mode and external endpoint variables differ:
 
 <details>
 <summary>Show details: external target configuration example</summary>
@@ -269,7 +276,7 @@ Implementation details:
 bash 2-backup.sh
 ```
 
-PostgreSQL backups work the same way — `pg_dump` jobs run against the Bitnami PostgreSQL instances regardless of the target type.
+This phase creates `pg_dump` backups of each Bitnami PostgreSQL database (Identity, Keycloak, Web Modeler) and verifies the source Elasticsearch cluster health. Backups are stored on a shared PVC. The target type does not affect this phase — backups always run against the source Bitnami instances.
 
 ### Phase 3: Cutover (downtime required)
 
@@ -397,7 +404,7 @@ Review the source index list before running the loop. If your deployment uses cu
 bash 4-validate.sh
 ```
 
-For external targets, the validation checks connectivity to the managed service endpoints instead of verifying CNPG/ECK cluster health.
+The validation script checks that all Camunda deployments and StatefulSets are ready, and that the Keycloak Custom Resource is healthy. For external PostgreSQL and Elasticsearch targets, it verifies connectivity to the managed service endpoints rather than checking CNPG/ECK cluster status. A migration report is generated at `.state/migration-report.md`.
 
 ### Rollback
 
@@ -409,17 +416,23 @@ bash rollback.sh
 
 ### Phase 5: Cleanup Bitnami resources (no downtime)
 
-After confirming the migration is successful (wait at least 72 hours), remove old Bitnami resources by running the cleanup script:
+:::warning Wait before cleanup
+Operate with the new infrastructure for at least 72 hours before cleanup. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup.
+:::
+
+After confirming the migration is successful, remove old Bitnami resources by running the cleanup script:
 
 ```bash
 bash 5-cleanup-bitnami.sh
 ```
 
-For the cleanup behavior and safety notes, see [Phase 5 in the operator-based guide](./bitnami-to-operators.md#phase-5-cleanup-bitnami-resources-no-downtime).
+This deletes the old Bitnami PostgreSQL StatefulSets, PVCs, Elasticsearch StatefulSet, Keycloak StatefulSet, and the migration backup PVC. The script checks resource existence before each deletion and can be safely rerun. For the full cleanup behavior, see [Phase 5 in the operator-based guide](./bitnami-to-operators.md#phase-5-cleanup-bitnami-resources-no-downtime).
 
 ## Operational readiness
 
 Before running this migration in production, use the checklist below to reduce risk, especially where network policy and external service access add complexity.
+
+If you are using the migration scripts, also consult the [downtime estimation](./bitnami-to-operators.md#downtime-estimation), [migration hooks](./bitnami-to-operators.md#migration-hooks), and [troubleshooting](./bitnami-to-operators.md#troubleshooting) sections in the operator-based guide — they apply equally to external targets.
 
 ### Staging rehearsal
 

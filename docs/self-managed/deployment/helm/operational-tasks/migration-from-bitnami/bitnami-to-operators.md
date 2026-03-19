@@ -9,6 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
+import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 
 Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure (PostgreSQL, Elasticsearch, and Keycloak) to **Kubernetes operator-managed equivalents**:
 
@@ -20,18 +21,20 @@ After migration, your setup will be aligned with the [operator-based reference a
 
 This guide is intended for customers running Camunda 8 with Bitnami subcharts enabled. If your installation already uses external databases, managed services, or operator-managed infrastructure, you do not need to migrate from Bitnami subcharts.
 
+![Initial cluster state before migration from Bitnami subcharts to Kubernetes operators](./img/bitnami-migration-initial-state.jpg)
+
 ## Prerequisites
 
 Before starting the migration, ensure you have:
 
-- A running Camunda 8 installation using the Helm chart with Bitnami subcharts
-- `kubectl` configured for the target cluster
-- `helm` v3 with `camunda/camunda-platform` repo added
+<CommonPrerequisites />
+
+Additionally, the migration scripts require:
+
 - [`envsubst`](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) available (usually included in `gettext`)
 - [`jq`](https://jqlang.github.io/jq/download/) installed
 - [`yq`](https://github.com/mikefarah/yq) installed (for selective CloudNativePG cluster deployment)
 - `base64` and `openssl` available (used for credential management)
-- Sufficient cluster resources to run both old and new infrastructure temporarily
 
 :::tip Tool versions
 For the tool versions used and tested, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
@@ -45,8 +48,6 @@ The migration scripts are part of the [Camunda deployment references](https://gi
 git clone https://github.com/camunda/camunda-deployment-references.git
 cd camunda-deployment-references/generic/kubernetes/migration
 ```
-
-### Directory structure
 
 The migration reuses the operator-based reference architecture scripts for deploying target infrastructure, ensuring consistency:
 
@@ -90,9 +91,23 @@ generic/kubernetes/
         └── eck-migration-patch.yml  # ES reindex.remote.whitelist patch
 ```
 
-The following diagram shows the starting point before migration: a Camunda cluster still backed by Bitnami-managed infrastructure.
+## Precautions
 
-![Initial cluster state before migration from Bitnami subcharts to Kubernetes operators](./img/bitnami-migration-initial-state.jpg)
+Review these items before starting the migration:
+
+- **Test in staging first:** Run the full migration in a non-production environment before migrating production.
+- **Schedule a maintenance window:** Phase 3 requires downtime.
+- **Check cluster capacity:** During Phases 1 and 2, both old and new infrastructure run simultaneously, requiring additional CPU, memory, and storage.
+- **Backup your Helm values:** Done automatically in Phase 3, but consider an extra manual backup with `helm get values camunda -n camunda > backup-values.yaml`.
+- **Monitor resource quotas:** CNPG and ECK clusters consume additional resources. Ensure your namespace quotas and node capacity allow for the temporary duplication.
+- **Elasticsearch `reindex.remote.whitelist`:** The target ECK cluster must have `reindex.remote.whitelist` configured to allow pulling data from the source Bitnami Elasticsearch via the `_reindex` API. The migration scripts patch this automatically.
+- **DNS TTL:** If using a domain for Keycloak, ensure DNS TTL is low before cutover to minimize propagation delay.
+- **Keycloak OIDC impact:** Keycloak is the OIDC provider for all Camunda components (and possibly external applications). Migrating to the Keycloak Operator changes the underlying service. If you use a DNS CNAME for Keycloak, use the `hooks/post-phase-3.sh` hook to update the DNS target to the new Keycloak Operator service after cutover. If external applications share the same Keycloak realm, coordinate the DNS switch with their teams.
+- **Session impact:** The database migration preserves all persistent data (realms, users, clients, signing keys, and refresh tokens). Since Keycloak 25+, user sessions are persisted in the database and survive the switch. In-flight authentication flows (login pages in progress) and pending action tokens (password reset links) are lost; users simply need to retry. This is inherent to the downtime window and has no lasting effect.
+
+:::warning IRSA / IAM-based authentication not supported
+The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or OpenSearch with IAM auth require a custom migration approach.
+:::
 
 ## Step 1: Configure the migration
 
@@ -228,6 +243,8 @@ The migration follows five sequential phases. Each phase is idempotent and can, 
 ### Phase 1: Deploy target infrastructure (no downtime)
 
 ![Illustration of Phase 1: deploy the operator-managed target infrastructure alongside the Bitnami components](./img/bitnami-migration-phase-1-deploy-targets.jpg)
+
+<!-- TODO: Image titles and capitalization will be addressed in a dedicated issue outside this PR. -->
 
 This phase installs the Kubernetes operators and creates the target clusters alongside your existing Bitnami components. Your application continues to run normally:
 
@@ -527,22 +544,6 @@ The following timings were observed migrating a Camunda 8 installation with all 
 - **Your cluster will likely be faster.** These timings were measured on constrained test infrastructure. Production clusters with NVMe storage, dedicated nodes, and higher network bandwidth typically achieve much higher reindex throughput.
 - **Always measure in staging.** Run the full migration on a staging environment with representative data volumes to get an accurate downtime estimate for your specific setup.
   :::
-
-## Precautions
-
-- **Test in staging first:** Run the full migration in a non-production environment before migrating production.
-- **Schedule a maintenance window:** Phase 3 requires downtime.
-- **Check cluster capacity:** During Phases 1 and 2, both old and new infrastructure run simultaneously, requiring additional CPU, memory, and storage.
-- **Backup your Helm values:** Done automatically in Phase 3, but consider an extra manual backup with `helm get values camunda -n camunda > backup-values.yaml`.
-- **Monitor resource quotas:** CNPG and ECK clusters consume additional resources. Ensure your namespace quotas and node capacity allow for the temporary duplication.
-- **Elasticsearch `reindex.remote.whitelist`:** The target ECK cluster must have `reindex.remote.whitelist` configured to allow pulling data from the source Bitnami Elasticsearch via the `_reindex` API. The migration scripts patch this automatically.
-- **DNS TTL:** If using a domain for Keycloak, ensure DNS TTL is low before cutover to minimize propagation delay.
-- **Keycloak OIDC impact:** Keycloak is the OIDC provider for all Camunda components (and possibly external applications). Migrating to the Keycloak Operator changes the underlying service. If you use a DNS CNAME for Keycloak, use the `hooks/post-phase-3.sh` hook to update the DNS target to the new Keycloak Operator service after cutover. If external applications share the same Keycloak realm, coordinate the DNS switch with their teams.
-- **Session impact:** The database migration preserves all persistent data (realms, users, clients, signing keys, and refresh tokens). Since Keycloak 25+, user sessions are persisted in the database and survive the switch. In-flight authentication flows (login pages in progress) and pending action tokens (password reset links) are lost; users simply need to retry. This is inherent to the downtime window and has no lasting effect.
-
-:::warning IRSA / IAM-based authentication not supported
-The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or OpenSearch with IAM auth require a custom migration approach.
-:::
 
 ## Troubleshooting
 

@@ -41,8 +41,8 @@ Before cutover, ensure the target platform provides the following:
 Once the targets exist, the migration flow stays the same:
 
 1. Freeze Camunda during the final cutover window.
-2. Migrate PostgreSQL with `pg_dump` and `pg_restore`.
-3. Migrate Elasticsearch with the method that fits your target: fresh start, snapshot/restore, `elasticdump`, or reindex.
+2. Migrate PostgreSQL with `pg_dump` and `pg_restore` (see [PostgreSQL migration flags](#postgresql-migration-flags)).
+3. Migrate Elasticsearch with the method that fits your target (see [Elasticsearch migration decision matrix](#elasticsearch-migration-decision-matrix)).
 
 ### Reconfigure Helm
 
@@ -119,7 +119,7 @@ Before migration, make sure you have:
 - Databases, users, and credentials created for the Camunda components.
 - A staging rehearsal showing that `pg_restore` and your chosen Elasticsearch migration method work against those endpoints.
 
-Once the services are ready, [reconfigure Helm](#reconfigure-helm), and replace the hosts with your VM or bare-metal addresses.
+Once the services are ready, [reconfigure Helm](#reconfigure-helm), and replace the hosts with your VM or bare-metal addresses. For the data migration, use the approaches described in the [data migration approaches summary](#data-migration-approaches-summary).
 
 ## Option 3: Docker Compose deployment
 

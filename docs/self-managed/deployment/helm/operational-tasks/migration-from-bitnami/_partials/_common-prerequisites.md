@@ -1,0 +1,5 @@
+- A running Camunda 8 installation using the Helm chart with **Bitnami subcharts enabled**
+- `kubectl` configured and pointing to your cluster
+- `helm` v3 with the `camunda/camunda-platform` repository added
+- Sufficient cluster resources to temporarily run both old and new infrastructure side-by-side
+- A tested backup of your current installation (see [Precautions](./bitnami-to-operators.md#precautions))

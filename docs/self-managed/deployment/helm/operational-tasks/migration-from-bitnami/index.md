@@ -6,6 +6,7 @@ description: "Migrate your Camunda 8 Self-Managed infrastructure from Bitnami su
 ---
 
 import DocCardList from '@theme/DocCardList';
+import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 
 This section provides guidance for migrating your Camunda 8 Self-Managed infrastructure components from [Bitnami subcharts](/self-managed/deployment/helm/chart-parameters.md#bitnami-subcharts) to production-grade alternatives.
 
@@ -61,29 +62,18 @@ The main downtime driver is the PostgreSQL restore (`pg_restore`) and Elasticsea
 
 Depending on your infrastructure capabilities and organizational requirements, choose one of the following migration paths:
 
-Use this quick rule of thumb before selecting a guide:
-
-- If your SLA does not allow a maintenance window, choose **zero-downtime migration**.
-- If you want to keep infrastructure in-cluster with operator-managed lifecycle, choose **Kubernetes operators**.
-- If you want PostgreSQL and Elasticsearch operated by your cloud provider, choose **managed services**.
-- If you run on VMs, bare metal, or another topology outside these supported patterns, choose **manual deployment**.
-
-| Best for                                                                                                            | Recommended path                                                                   | Guide                                                           |
-| ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| Teams running Kubernetes who want production-grade, self-managed infrastructure with operator lifecycle management. | **Kubernetes operators** (CloudNativePG, ECK, Keycloak Operator)                   | [Migrate to Kubernetes operators](./bitnami-to-operators.md)    |
-| Teams using cloud providers who prefer fully managed infrastructure with minimal operational overhead.              | **Managed services** (AWS RDS, Elastic Cloud, Azure Database for PostgreSQL, etc.) | [Migrate to managed services](./bitnami-to-managed-services.md) |
-| Teams who cannot use operators or managed services, or require full control over infrastructure deployment.         | **Manual deployment** (VMs, bare-metal, Docker Compose)                            | [Advanced alternatives](./alternatives.md)                      |
-| Teams with strict SLA requirements who cannot afford any maintenance window.                                        | **Zero-downtime migration** (logical replication, CCR)                             | [Zero-downtime migration](./zero-downtime.md)                   |
+| Scenario                                                                                                 | Recommended path                                                                   | Guide                                                           |
+| -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| You want production-grade, self-managed infrastructure in Kubernetes with operator lifecycle management. | **Kubernetes operators** (CloudNativePG, ECK, Keycloak Operator)                   | [Migrate to Kubernetes operators](./bitnami-to-operators.md)    |
+| You prefer fully managed infrastructure from your cloud provider with minimal operational overhead.      | **Managed services** (AWS RDS, Elastic Cloud, Azure Database for PostgreSQL, etc.) | [Migrate to managed services](./bitnami-to-managed-services.md) |
+| You cannot use operators or managed services, or require full control (VMs, bare-metal, Docker Compose). | **Manual deployment**                                                              | [Advanced alternatives](./alternatives.md)                      |
+| Your SLA does not allow any maintenance window.                                                          | **Zero-downtime migration** (logical replication, CCR)                             | [Zero-downtime migration](./zero-downtime.md)                   |
 
 ## Prerequisites (all paths)
 
 Regardless of your chosen migration target, ensure the following:
 
-- A running Camunda 8 installation using the Helm chart with **Bitnami subcharts enabled**
-- `kubectl` configured and pointing to your cluster
-- `helm` v3 with the `camunda/camunda-platform` repository added
-- Sufficient cluster resources to temporarily run both old and new infrastructure side-by-side
-- A tested backup of your current installation
+<CommonPrerequisites />
 
 :::important Plan authentication and service access up front
 All migration paths require an explicit decision for authentication and connectivity:
