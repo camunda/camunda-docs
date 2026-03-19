@@ -250,6 +250,17 @@ components:
       type: object
       required:
         - rootProcessInstanceKey
+        - correlationKey
+        - elementId
+        - elementInstanceKey
+        - lastUpdatedDate
+        - messageName
+        - messageSubscriptionKey
+        - messageSubscriptionState
+        - processDefinitionId
+        - processDefinitionKey
+        - processInstanceKey
+        - tenantId
       properties:
         messageSubscriptionKey:
           allOf:
@@ -262,10 +273,12 @@ components:
         processDefinitionKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"
+          nullable: true
           description: The process definition key associated with this message subscription.
         processInstanceKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
+          nullable: true
           description: The process instance key associated with this message subscription.
         rootProcessInstanceKey:
           description: |
@@ -282,6 +295,7 @@ components:
         elementInstanceKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
+          nullable: true
           description: The element instance key associated with this message subscription.
         messageSubscriptionState:
           $ref: "#/components/schemas/MessageSubscriptionStateEnum"
@@ -294,6 +308,7 @@ components:
           type: string
         correlationKey:
           type: string
+          nullable: true
           description: The correlation key of the message subscription.
         tenantId:
           $ref: "identifiers.yaml#/components/schemas/TenantId"
@@ -394,9 +409,24 @@ components:
             $ref: "#/components/schemas/CorrelatedMessageSubscriptionResult"
     CorrelatedMessageSubscriptionResult:
       type: object
+      required:
+        - correlationKey
+        - correlationTime
+        - elementId
+        - messageKey
+        - messageName
+        - partitionId
+        - processDefinitionId
+        - processInstanceKey
+        - subscriptionKey
+        - tenantId
+        - rootProcessInstanceKey
+        - elementInstanceKey
+        - processDefinitionKey
       properties:
         correlationKey:
           description: The correlation key of the message.
+          nullable: true
           type: string
         correlationTime:
           description: The time when the message was correlated.
@@ -408,7 +438,10 @@ components:
         elementInstanceKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
-          description: The element instance key that received the message.
+          nullable: true
+          description: |
+            The element instance key that received the message.
+            It is `null` for start event subscriptions.
         messageKey:
           allOf:
             - $ref: "#/components/schemas/MessageKey"
@@ -448,18 +481,6 @@ components:
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/TenantId"
           description: The tenant ID associated with this correlated message subscription.
-      required:
-        - correlationKey
-        - correlationTime
-        - elementId
-        - messageKey
-        - messageName
-        - partitionId
-        - processDefinitionId
-        - processInstanceKey
-        - subscriptionKey
-        - tenantId
-        - rootProcessInstanceKey
     CorrelatedMessageSubscriptionSearchQuery:
       type: object
       allOf:
@@ -559,7 +580,6 @@ components:
           description: The tenant ID associated with this correlated message subscription.
     MessageSubscriptionStateFilterProperty:
       description: MessageSubscriptionStateEnum with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -618,7 +638,6 @@ components:
             $ref: "#/components/schemas/MessageSubscriptionKey"
     MessageSubscriptionKeyFilterProperty:
       description: MessageSubscriptionKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
