@@ -60,11 +60,11 @@ When a form is too complex to display inside a chat card, the bot opens a pop-up
 
 #### When a form opens in a pop-up dialog
 
-A form opens in a pop-up dialog instead of directly inside the chat card when it contains any of the following:
+Forms open in a pop-up dialog when they contain unsupported element types or FEEL expressions:
 
 **Unsupported element types**
 
-Adaptive cards can only render a subset of Camunda form elements. A form is opened in a pop-up dialog if it contains any of the following element types:
+Adaptive cards support only a subset of Camunda form elements. Forms with any of the following element types open in a pop-up dialog:
 
 - Group
 - Table
@@ -77,9 +77,11 @@ Adaptive cards can only render a subset of Camunda form elements. A form is open
 
 **FEEL expressions**
 
-A form is also opened in a pop-up dialog if any field uses a [FEEL expression](../../../../components/modeler/feel/what-is-feel.md) (a value starting with `=`) for any of the following properties: **Label**, **Date label**, **Read only**, **Default value**, **Text**, **Source**, **Alt text**, **Accept**, or **Multiple**.
+Forms also open in a pop-up dialog if any field uses a [FEEL expression](/components/modeler/feel/what-is-feel.md) (a value starting with `=`) in the following properties: **Label**, **Date label**, **Read only**, **Default value**, **Text**, **Source**, **Alt text**, **Accept**, or **Multiple**.
 
-Static values and process variables are supported in adaptive cards; only dynamic FEEL expressions require the pop-up dialog.
+:::note
+Static values and process variables are supported in adaptive cards; dynamic FEEL expressions are not.
+:::
 
 ## Notifications
 
