@@ -69,7 +69,7 @@ Adaptive cards support only a subset of Camunda form elements. Forms with any of
 - Group
 - Table
 - Dynamic list
-- iFrame
+- iframe
 - HTML viewer
 - Button
 - Expression field
