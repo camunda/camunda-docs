@@ -5,9 +5,9 @@ sidebar_label: "User task authorization"
 description: Configure authorization for user tasks in Tasklist using process-level and task-level permissions.
 ---
 
-This page explains the recommended way to configure authorization for user tasks in Tasklist when authorization is enabled.
+This page explains the recommended way to configure authorization for user tasks in Tasklist V2 when authorization is enabled.
 
-It focuses on how authorization affects Tasklist behavior and which permissions are required to perform common user task operations.
+It describes how authorization affects Tasklist behavior and which permissions are required to perform common user task operations.
 
 ## When you need to configure user task authorization
 
@@ -16,6 +16,8 @@ Configure user task authorization if all of the following apply:
 - Authorization is enabled in your cluster
 - You use Tasklist V2
 - You want to control which users can view, claim, update, or complete user tasks
+
+If you run Tasklist in V1 API mode and rely on the legacy task visibility model, see [User task access restrictions](./user-task-access-restrictions.md).
 
 If authorization is disabled, Tasklist does not enforce permission checks for user task operations.
 
@@ -75,6 +77,10 @@ The table reflects currently-implemented permissions that are enforced by Taskli
 | Assign task (override assignee)           | `UPDATE`               | `UPDATE_USER_TASK`                         |
 | Complete task (with or without variables) | `COMPLETE`             | `COMPLETE_USER_TASK` or `UPDATE_USER_TASK` |
 | Update user task                          | `UPDATE`               | `UPDATE_USER_TASK`                         |
+
+:::note
+Some operations listed in the table (for example, task reassignment) may not yet be available in the Tasklist UI.
+:::
 
 ## How Tasklist evaluates permissions
 
