@@ -11,6 +11,13 @@ RDBMS is a standard secondary storage option for Orchestration Cluster installat
 
 With RDBMS secondary storage, data is exported to your relational database, and the Orchestration Cluster reads from it.
 
+In this context:
+
+- [Primary storage](/reference/glossary.md#primary-storage) is the broker-managed runtime state required for workflow execution.
+- [Secondary storage](/reference/glossary.md#secondary-storage) is an external store used for indexing, querying, analytics, and retention.
+
+For a deeper conceptual comparison, see [understanding primary vs secondary storage](/self-managed/concepts/secondary-storage/no-secondary-storage.md#about-this-mode).
+
 ## Start here
 
 - New to RDBMS in Camunda: [End-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md)
