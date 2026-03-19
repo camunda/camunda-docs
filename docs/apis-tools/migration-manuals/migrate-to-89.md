@@ -70,7 +70,6 @@ Review the actions required for the following 8.9 changes:
 | <span className="label-highlight red">Breaking change</span> | [Spring Boot 4.0 default for Camunda Spring Boot Starter](#spring-boot)                                             |
 | <span className="label-highlight red">Breaking change</span> | [Type-safe pagination model in the Camunda Java client](#type-safe-pagination)                                      |
 | <span className="label-highlight red">Breaking change</span> | [`versionTag` returns `null` instead of empty string when absent](#version-tag-null)                                |
-| <span className="label-highlight red">Breaking change</span> | [Web Modeler changes](#web-modeler)                                                                                 |
 | <span className="label-highlight yellow">Deprecated</span>   | [Deprecated: enum literals in Orchestration Cluster API v2](#deprecated-enum)                                       |
 
 ## Breaking changes

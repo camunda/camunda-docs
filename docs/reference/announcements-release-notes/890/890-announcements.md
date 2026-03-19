@@ -359,27 +359,6 @@ Previously, only the first conversion error was returned. This fix improves cons
 </div>
 <div className="release-announcement-content">
 
-#### `versionTag` now returns `null` instead of empty string when absent
-
-Starting with 8.9.0, API response fields for `versionTag` return `null` instead of an empty string `""` when no version tag is set. This properly indicates absence rather than leaking an internal default.
-
-Previously, customers had to handle both empty string and absent/null to determine whether a version tag was set. This change simplifies that logic by using `null` consistently to signal absence, aligning with how other optional fields like `businessId` are handled.
-
-**Action:**
-
-- If your code checks for an empty string (`""`) to detect a missing version tag, update it to check for `null` instead.
-- Official SDK users: update to the latest SDK version.
-- Generated-client users: regenerate your client to pick up the updated nullable annotation.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
 #### Type-safe pagination model in the Camunda Java client
 
 Starting with 8.9.0, the Camunda Java client uses type-safe pagination interfaces (`AnyPage`, `OffsetPage`, `CursorForwardPage`, `CursorBackwardPage`) instead of the previous `SearchRequestPage` class. Each search or statistics endpoint now exposes only the pagination methods it actually supports.
@@ -400,6 +379,27 @@ This change is **not binary-compatible**. Code compiled against the old API will
 | Storing direction method returns (for example, `SearchRequestPage r = p.from(10)`) | Use `OffsetPage r = p.from(10)`, `CursorForwardPage r = p.after("c")`, or `CursorBackwardPage r = p.before("c")`. |
 
 <p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#type-safe-pagination)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `versionTag` now returns `null` instead of empty string when absent
+
+Starting with 8.9.0, API response fields for `versionTag` return `null` instead of an empty string `""` when no version tag is set. This properly indicates absence rather than leaking an internal default.
+
+Previously, customers had to handle both empty string and absent/null to determine whether a version tag was set. This change simplifies that logic by using `null` consistently to signal absence, aligning with how other optional fields like `businessId` are handled.
+
+**Action:**
+
+- If your code checks for an empty string (`""`) to detect a missing version tag, update it to check for `null` instead.
+- Official SDK users: update to the latest SDK version.
+- Generated-client users: regenerate your client to pick up the updated nullable annotation.
 
 </div>
 </div>
