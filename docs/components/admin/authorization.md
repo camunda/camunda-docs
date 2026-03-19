@@ -14,7 +14,7 @@ An authorization grants an owner access to a resource and defines the specific p
 
 - Owner: The entity that receives permissions, such as a [user](user.md), [group](group.md), [role](role.md), [client](client.md), or [mapping rule](mapping-rules.md).
   - In SaaS deployments, the username is the user's email address.
-  - In Self-Managed deployments, the username must match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
+  - In Self-Managed deployments, the username must match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
 - Resource: The object that the permissions apply to, such as a process definition, decision definition, or system. See the full list of [available resources](/components/concepts/access-control/authorizations.md#available-resources).
 
 Each authorization specifies which permissions the owner has for the resource (for example, `READ`, `UPDATE`, `DELETE`).
@@ -23,15 +23,15 @@ For an authorization to apply, [enable it in your cluster configuration](/compon
 
 To learn more, see [Orchestration Cluster authorizations](/components/concepts/access-control/authorizations.md).
 
-## Create an authorization in Identity
+## Create an authorization in Admin
 
 To create a new authorization:
 
-1. Log in to Identity, and select the **Authorizations** tab.
+1. Log in to Admin, and select the **Authorizations** tab.
 2. Select a resource type from the list on the left, and select **Create authorization**.
 3. Enter the following information:
    - **Owner type**: The entity to which you want to assign permissions, such as a user, group, role, client, or mapping rule.
-   - **Owner ID**: The ID of the owner. For users and groups, this value is case-sensitive and must exactly match the username or group ID from Identity or your identity provider. For example, `abc@example.com` and `Abc@example.com` are treated as different users.
+   - **Owner ID**: The ID of the owner.
    - **Resource type**: The selected resource type.
    - **Resource scope**: Choose how this authorization is scoped:
      - By **Resource ID**, or
@@ -54,7 +54,7 @@ The authorization is created, and the owner is granted the specified permissions
 
 ## User task authorizations
 
-To support fine-grained access to user tasks in Tasklist and the Orchestration Cluster REST API, Identity provides a **USER_TASK** resource type with the following permissions:
+To support fine-grained access to user tasks in Tasklist and the Orchestration Cluster REST API, Admin provides a **USER_TASK** resource type with the following permissions:
 
 - `READ`: View the task and its properties.
 - `UPDATE`: Perform updates on the task (for example, change assignment, due dates, or candidate users or groups).
@@ -67,7 +67,7 @@ With property-based user task authorizations, you can grant permissions based on
 
 To create a property-based user task authorization:
 
-1. Log in to Identity, and select the **Authorizations** tab.
+1. Log in to Admin, and select the **Authorizations** tab.
 2. Create a new authorization for the `USER_TASK` resource type.
 3. Specify the **Owner type** and **Owner ID** (for example, a role that represents task workers).
 4. Set the matcher to `PROPERTY`.
@@ -139,7 +139,7 @@ To edit an authorization, [delete](#delete-an-authorization) the existing one, a
 
 Delete an authorization by completing the following steps:
 
-1. Log in to Identity, and select the **Authorizations** tab.
+1. Log in to Admin, and select the **Authorizations** tab.
 2. Select the resource type of the authorization you want to delete.
 3. In the list, find the authorization you want to remove and click **Delete**.
 4. Confirm the deletion by clicking **Delete** in the confirmation dialog.

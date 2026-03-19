@@ -54,9 +54,9 @@ The Camunda‑hosted [Console](/components/console/introduction-to-console.md) a
 | :------------------------------------------------------------------- | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | <p>Belgium, EU (GCP)</p><p>From December 2025: Germany, EU (AWS)</p> | Only stores administrative metadata and settings. | Limited to account/authentication data to access Camunda Platform SaaS. It does not include personal data in scope of [Data Processing Agreements](https://legal.camunda.com/). |
 
-## Identity
+## Admin
 
-[Identity](/components/identity/identity-introduction.md) is managed by Camunda for SaaS. Single Sign-on (SSO) is supported.
+[Admin](/components/admin/admin-introduction.md) is managed by Camunda for SaaS. Single Sign-on (SSO) is supported.
 
 | Host location                       | Data handled                                                               | Personal data processing                                                                                                                                                                      |
 | :---------------------------------- | :------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -64,7 +64,7 @@ The Camunda‑hosted [Console](/components/console/introduction-to-console.md) a
 
 :::info Learn more
 
-- [Identity](/components/identity/identity-introduction.md)
+- [Admin](/components/admin/admin-introduction.md)
 - [Connect to an identity provider](/components/console/manage-organization/external-sso.md)
 
 :::
