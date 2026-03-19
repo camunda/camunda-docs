@@ -43,7 +43,6 @@ When a user deploys a process model or starts a process instance, the system val
 For example, assume a user belongs to `Tenant A` but not `Tenant B`:
 
 1. **Deploying a process model**
-
    - If the user deploys to `Tenant A`, the Orchestration Cluster verifies the assignment. If valid, the model is deployed and all related process instances belong to `Tenant A`.
    - If the user deploys to `Tenant B`, the deployment fails because the user lacks access to that tenant.
 
