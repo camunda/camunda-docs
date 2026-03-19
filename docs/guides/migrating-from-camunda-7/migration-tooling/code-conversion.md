@@ -18,17 +18,27 @@ You must especially rewrite code that does the following:
 
 ### Tools and resources
 
-This guide covers three main tools to help with code conversion:
+This guide covers tools and approaches to help with code conversion:
 
 1. [API Mapping Guide](#api-mapping-guide): Understand how Camunda 7 REST API endpoints map to Camunda 8
 2. [OpenRewrite Recipes](#refactoring-recipes-using-openrewrite): Automatically refactor Java code with configurable recipes
 3. [Code Conversion Patterns](#code-conversion-patterns): Detailed technical reference for manual migration
+4. [AI-Assisted Code Migration](#leveraging-ai-for-code-migration): Use AI coding agents for interactive and agentic migration
 
 Additionally, you will find information about:
 
 - [Diagram Converter](#diagram-converter) for BPMN and DMN model conversion
-- [Leveraging AI](#leveraging-ai-for-refactoring) to assist with refactoring tasks
 - [Complete migration example](#example-adjusting-a-spring-boot-application) showing all tools in action
+
+### Choosing your migration approach
+
+You can combine these tools depending on your codebase complexity:
+
+| Approach                   | Best for                                                    | How it works                                                                                                      |
+| -------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **OpenRewrite only**       | Standard patterns, large codebases with many similar files  | Run batch recipes, review diffs, manually fix remaining TODOs                                                     |
+| **AI agent only**          | Small codebases, complex custom code, exploratory migration | Give an AI agent your code and migration patterns, iterate on results                                             |
+| **Combined (recommended)** | Most real-world projects                                    | Run OpenRewrite first for deterministic bulk changes, then use AI for TODOs, edge cases, tests, and configuration |
 
 ## API mapping guide
 
@@ -293,25 +303,484 @@ The [Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tool
 
 Find the diagram conversion tooling and its documentation in the [Migration Tooling – Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/diagram-converter).
 
-## Leveraging AI for refactoring
+## Leveraging AI for code migration
 
-You can use AI tools such as ChatGPT, GitHub Copilot, or other AI assistants to help with refactoring tasks. In testing, simple prompts often produce correct results, although you may need several iterations to ensure the refactored code aligns with your target architecture.
+AI coding agents such as Claude Code, GitHub Copilot, Cursor, Windsurf, or ChatGPT can accelerate code migration by applying the [code conversion patterns](#code-conversion-patterns) interactively. This is especially valuable for code that the OpenRewrite recipes cannot handle automatically, such as custom superclasses, complex test cases, or configuration files.
 
-In the [migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example?tab=readme-ov-file#migrating-test-cases), we used ChatGPT to rewrite test cases with the following sample prompt:
+You can use AI in three ways:
+
+1. **Standalone**: Give the AI agent your Camunda 7 code and the conversion patterns, and let it produce Camunda 8 equivalents
+2. **Post-OpenRewrite cleanup**: Run OpenRewrite first, then use AI to fix remaining TODOs and compilation errors
+3. **Full agentic migration**: Let an AI agent assess your codebase, run OpenRewrite, and handle all remaining migration tasks
+
+### Recommended combined workflow
+
+For most real-world projects, the combined approach gives the best results:
 
 ```
-Please refactor the following Camunda 7 JUnit test case to Camunda 8 using the official migration pattern described in https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/ALL_IN_ONE.md. The refactored test must:
+Step 1: Assess        →  AI agent scans codebase, classifies files, creates plan
+Step 2: OpenRewrite   →  Run batch recipes for deterministic bulk transformations
+Step 3: AI cleanup    →  AI handles TODOs, edge cases, tests, configuration
+Step 4: Validate      →  Compile, run tests, search for remaining C7 references
+```
 
-- Use `@SpringBootTest` and `@CamundaSpringProcessTest`
-- Use `CamundaClient` to start the process
-- Use `CamundaProcessTestContext.completeUserTask(...)` to complete user tasks
-- Use `CamundaProcessTestContext.increaseTime(Duration)` to simulate timer events (no manual job execution)
-- Use `CamundaAssert` with `byName(...)` selectors to check activity state
-- Use `assertThat(processInstance).hasVariable(...)` to check process variables
+### Setting up an AI agent for migration
+
+When using an AI coding agent (Claude Code, Copilot Agent Mode, Cursor Composer, etc.), provide it with the migration patterns as context. The agent can then apply these patterns across your entire codebase.
+
+:::tip Providing context to AI agents
+Point the agent to the pattern catalog for best results:
+
+- **URL reference**: `https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/ALL_IN_ONE.md`
+- **Local file**: If you have the migration tooling repository cloned, reference the local `ALL_IN_ONE.md` file directly
+- **Inline patterns**: For specific migration tasks, include the relevant patterns directly in your prompt
+
+Agents with access to browse URLs or read local files (like Claude Code or Copilot Agent Mode) can fetch the patterns automatically. For chat-based tools, paste the relevant code examples from the pattern catalog into your prompt.
+:::
+
+### Step 1: Assess your codebase
+
+Before migrating, use AI to create an inventory of all Camunda 7 code in your project. This helps you plan the migration order and identify which tools to use for each file.
+
+**Prompt: Codebase assessment**
+
+```
+Analyze this Camunda 7 codebase and create a migration inventory. For each Java file
+that imports from org.camunda.bpm.*, classify it as one of:
+
+1. Client code — Uses ProcessEngine, RuntimeService, TaskService, RepositoryService
+2. JavaDelegate — Implements org.camunda.bpm.engine.delegate.JavaDelegate
+3. ExecutionListener — Implements org.camunda.bpm.engine.delegate.ExecutionListener
+4. External Task Worker — Implements ExternalTaskHandler or uses @ExternalTaskSubscription
+5. JUEL Expression — Referenced in BPMN as camunda:expression
+6. Test code — Uses BpmnAwareTests, ProcessEngineRule, or camunda-bpm-assert
+7. Configuration — Spring config, application.properties/yml, processes.xml
+
+Output a markdown table with columns: File, Type, Complexity (Low/Medium/High), Notes.
+
+Complexity guidelines:
+- Low: Standard patterns (simple delegate, basic startProcessInstance, simple test)
+- Medium: Uses builder patterns, correlates messages, typed value API, multiple services
+- High: Custom superclasses, JUEL expressions, complex queries, history service
+```
+
+### Step 2: Migrate client code
+
+Client code is anything that calls the Camunda API from your application, for example, starting process instances, correlating messages, or managing tasks.
+
+**Prompt: Client code migration**
+
+```
+Migrate the following Camunda 7 client code to Camunda 8 using the official migration
+patterns from https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/ALL_IN_ONE.md
+
+Apply these rules:
+
+Class-level:
+- Replace @Autowired ProcessEngine engine with @Autowired CamundaClient camundaClient
+- Remove any @Autowired RuntimeService, TaskService, RepositoryService fields
+
+Start Process Instance:
+- engine.getRuntimeService().startProcessInstanceByKey(key, vars)
+  → camundaClient.newCreateInstanceCommand().bpmnProcessId(key).latestVersion()
+    .variables(vars).send().join()
+- Return type: ProcessInstance → ProcessInstanceEvent
+
+Cancel Process Instance:
+- engine.getRuntimeService().deleteProcessInstance(id, reason)
+  → camundaClient.newCancelInstanceCommand(processInstanceKey).send().join()
+
+Message Correlation:
+- engine.getRuntimeService().correlateMessage(name, businessKey, vars)
+  → camundaClient.newCorrelateMessageCommand().messageName(name)
+    .correlationKey(key).variables(vars).send().join()
+
+Signal Broadcasting:
+- engine.getRuntimeService().signalEventReceived(name, vars)
+  → camundaClient.newBroadcastSignalCommand().signalName(name)
+    .variables(vars).send().join()
+
+User Tasks:
+- engine.getTaskService().complete(taskId, vars)
+  → camundaClient.newUserTaskCompleteCommand(userTaskKey).variables(vars).send().join()
+
+Variables:
+- engine.getRuntimeService().getVariable(execId, name)
+  → camundaClient.newVariableSearchRequest()
+    .filter(f -> f.processInstanceKey(key).name(name)).send().join().items().get(0)
+- engine.getRuntimeService().setVariable(execId, name, value)
+  → camundaClient.newSetVariablesCommand(elementInstanceKey)
+    .variable(name, value).send().join()
+- VariableMap / TypedValue API → Map<String, Object>
+
+Type changes:
+- String processInstanceId → Long processInstanceKey
+- ProcessInstance → ProcessInstanceEvent
+- VariableMap → Map<String, Object>
+- Task → UserTask
+
+Important: Parameter names are swapped in C8:
+- "processDefinitionKey" (C7, the BPMN ID) → "bpmnProcessId" (C8)
+- "processDefinitionId" (C7, deployment key) → "processDefinitionKey" (C8)
+
+Here is the Camunda 7 client code to migrate:
+[... paste code ...]
+```
+
+### Step 3: Migrate JavaDelegates to Job Workers
+
+JavaDelegates are glue code that runs within the Camunda 7 engine. In Camunda 8, they become Job Workers — Spring beans with `@JobWorker` annotated methods.
+
+**Prompt: JavaDelegate migration**
+
+```
+Migrate the following Camunda 7 JavaDelegate to a Camunda 8 Job Worker using the official
+migration patterns from https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/ALL_IN_ONE.md
+
+Apply these rules:
+
+Class-level:
+- Remove "implements JavaDelegate"
+- Keep @Component annotation
+- Add a @JobWorker annotated method:
+  @JobWorker(type = "<beanName>")
+  public Map<String, Object> handleJob(JobClient client, ActivatedJob job) { }
+  The "type" should match the bean name (for delegateExpression)
+  or camelCase of the class name (for camunda:class)
+- Remove the old execute(DelegateExecution) method after migrating its body
+
+Variable handling:
+- execution.getVariable("name") → job.getVariablesAsMap().get("name")
+- execution.setVariable("name", value) → return from the method: return Map.of("name", value)
+- Multiple setVariable calls → collect into one Map and return it
+- TypedValue API (Variables.integerValue(x), IntegerValue, etc.) → plain Java types
+
+BPMN Error:
+- throw new BpmnError(code, msg) → throw CamundaError.bpmnError(code, msg, variables)
+
+Failure handling:
+- throw new ProcessEngineException(msg)
+  → throw CamundaError.jobError(msg, vars, job.getRetries() - 1, Duration.ofSeconds(30))
+
+Incident (retries=0):
+- execution.createIncident(type, config, msg)
+  → throw CamundaError.jobError(msg, vars, 0, null, exception)
+
+Here is the Camunda 7 JavaDelegate to migrate:
+[... paste code ...]
+```
+
+### Step 4: Migrate external task workers to Job Workers
+
+External task workers have a similar architecture to Camunda 8 Job Workers, making this migration relatively straightforward.
+
+**Prompt: External task worker migration**
+
+```
+Migrate the following Camunda 7 External Task Worker to a Camunda 8 Job Worker using
+the official migration patterns from https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/ALL_IN_ONE.md
+
+Apply these rules:
+
+Class-level:
+- Change @Configuration to @Component
+- Remove "implements ExternalTaskHandler"
+- Remove @ExternalTaskSubscription("topicName")
+- Add: @JobWorker(type = "topicName")
+       public Map<String, Object> handleJob(JobClient client, ActivatedJob job) { }
+
+If using lambda-style (multiple workers per class):
+- Convert each @Bean @ExternalTaskSubscription("topic") method
+  to a separate @JobWorker(type = "topic") method
+
+Variable handling:
+- externalTask.getVariable("name") → job.getVariablesAsMap().get("name")
+- externalTaskService.complete(id, vars, null) → return vars from method
+
+BPMN Error:
+- externalTaskService.handleBpmnError(task, code, msg, vars)
+  → throw CamundaError.bpmnError(code, msg, vars)
+
+Failure/Incident:
+- externalTaskService.handleFailure(id, msg, details, retries, timeout, vars, null)
+  → throw CamundaError.jobError(msg, vars, job.getRetries() - 1, Duration.ofSeconds(30))
+- With retries=0 → throw CamundaError.jobError(msg, vars, 0, null, exception)
+
+Here is the Camunda 7 External Task Worker to migrate:
+[... paste code ...]
+```
+
+### Step 5: Migrate test code
+
+Test code migration requires updating the test framework, assertions, and how processes are started and validated. AI agents are especially effective here because test patterns vary widely.
+
+**Prompt: Test code migration**
+
+```
+Refactor the following Camunda 7 JUnit test case to Camunda 8 using the official migration
+patterns from https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/ALL_IN_ONE.md
+
+The refactored test must:
+
+Test class setup:
+- Use @SpringBootTest and @CamundaSpringProcessTest annotations
+- Inject @Autowired CamundaClient client
+- Inject @Autowired CamundaProcessTestContext processTestContext
+- Remove ProcessEngine, RuntimeService, TaskService injections
+- Remove @Deployment, ProcessEngineRule, ProcessEngineTestRule
+
+Starting process instances:
+- runtimeService().startProcessInstanceByKey("process-id", vars)
+  → client.newCreateInstanceCommand().bpmnProcessId("process-id").latestVersion()
+    .variables(vars).send().join()
+- Return type: ProcessInstance → ProcessInstanceEvent
+- Variables.createVariables().putValue("x", 7) → Map.of("x", 7) or new HashMap<>()
+
+Process instance assertions:
+- assertThat(pi).isNotEnded() → assertThat(pi).isActive()
+- assertThat(pi).isEnded() → assertThat(pi).isCompleted()
+- assertThat(pi).isWaitingAt("TaskId") → assertThat(pi).hasActiveElements("TaskId")
+- assertThat(pi).isWaitingAt(findId("Name")) → assertThat(pi).hasActiveElements(byName("Name"))
+- assertThat(pi).hasPassed("ElementId") → assertThat(pi).hasCompletedElements("ElementId")
+
+Variable assertions:
+- assertThat(pi).variables().containsEntry("key", value) → assertThat(pi).hasVariable("key", value)
+
+User task assertions and completion:
+- assertThat(task()).hasName("x").isAssignedTo("u")
+  → assertThat(UserTaskSelectors.byTaskName("x")).isCreated().hasName("x").hasAssignee("u")
+- complete(task()) → processTestContext.completeUserTask("TaskName")
+
+Timer handling:
+- Do NOT manually query and execute timer jobs
+- managementService().createJobQuery()... + managementService().executeJob(jobId)
+  → processTestContext.increaseTime(Duration.ofMinutes(6))
+
+Message correlation in tests:
+- runtimeService().correlateMessage("MsgName", correlationKeys)
+  → client.newPublishMessageCommand().messageName("MsgName")
+    .correlationKey("key").send().join()
+
+Job workers in tests (optional):
+- Disable workers: @SpringBootTest(properties = {"camunda.client.worker.defaults.enabled=false"})
+- Complete manually: processTestContext.completeJob("jobType")
+- Mock a worker: processTestContext.mockJobWorker("jobType").thenComplete(variables)
+
+Static imports:
+- Remove: import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.*
+- Add: import static io.camunda.process.test.api.CamundaAssert.assertThat
+- Add: import static io.camunda.process.test.api.assertions.ElementSelectors.byName
+- Add: import io.camunda.process.test.api.assertions.UserTaskSelectors
 
 Here is the Camunda 7 test case:
-[... add full test case code...]
+[... paste full test case code ...]
 ```
+
+### Step 6: Migrate dependencies and configuration
+
+**Prompt: Dependencies and configuration migration**
+
+```
+Migrate the Maven dependencies and Spring Boot configuration from Camunda 7 to Camunda 8.
+
+pom.xml changes:
+- Remove all Camunda 7 dependencies (camunda-bpm-spring-boot-starter, camunda-engine,
+  camunda-bpm-assert, camunda-spin-*, etc.)
+- Add the Camunda 8 Spring SDK:
+  <dependency>
+    <groupId>io.camunda</groupId>
+    <artifactId>camunda-spring-boot-starter</artifactId>
+    <version>{camunda8Version}</version>
+  </dependency>
+- For testing:
+  <dependency>
+    <groupId>io.camunda</groupId>
+    <artifactId>camunda-process-test-spring</artifactId>
+    <version>{camunda8Version}</version>
+    <scope>test</scope>
+  </dependency>
+
+Application class:
+- @EnableProcessApplication → @Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
+- Remove META-INF/processes.xml
+
+application.yml / application.properties:
+- Remove all camunda.bpm.* properties
+- Add Camunda 8 connection configuration (see Spring SDK docs)
+
+Here is my current pom.xml:
+[... paste pom.xml ...]
+
+Here is my current application.yml:
+[... paste config ...]
+```
+
+### Step 7: Validate the migration
+
+After migration, verify that all Camunda 7 references have been removed and the code compiles and passes tests.
+
+**Prompt: Post-migration validation**
+
+```
+Validate the Camunda 7 to 8 migration:
+
+1. Compile: mvn compile — fix any errors
+2. Find remaining Camunda 7 references: search for org.camunda.bpm.* imports
+3. Find TODO comments left by OpenRewrite or manual migration
+4. Check for common issues:
+   - String process instance IDs that should now be Long keys
+   - VariableMap usage that should be Map<String, Object>
+   - Business key usage (not available in Camunda 8)
+   - History service or management service usage (no direct C8 equivalent)
+   - Batch operations (C8 operates on single instances)
+5. Run tests: mvn test — fix any failures
+6. Review @JobWorker methods: verify type matches BPMN, check return types
+```
+
+### Full agentic migration prompt
+
+For AI agents that can browse files and execute commands (Claude Code, Copilot Agent Mode with terminal access), you can use a single comprehensive prompt to migrate an entire project:
+
+```
+You are migrating a Camunda 7 Spring Boot application to Camunda 8. Use the official
+migration patterns from https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/ALL_IN_ONE.md
+
+STEP 1 — ASSESS:
+Scan the codebase and classify every Java file that imports from org.camunda.bpm.* into:
+client code, JavaDelegate, ExecutionListener, External Task Worker, test code, or configuration.
+Create a migration plan as a numbered task list.
+
+STEP 2 — DEPENDENCIES:
+Update pom.xml: remove all org.camunda.bpm dependencies, add
+io.camunda:camunda-spring-boot-starter and io.camunda:camunda-process-test-spring (test).
+
+STEP 3 — CONFIGURATION:
+Replace @EnableProcessApplication with @Deployment(resources = "classpath*:/bpmn/**/*.bpmn").
+Remove camunda.bpm.* properties, add camunda.client.* config. Delete META-INF/processes.xml.
+
+STEP 4 — MIGRATE CLIENT CODE:
+For each file using ProcessEngine/RuntimeService/TaskService/RepositoryService:
+- Replace autowired engine services with @Autowired CamundaClient camundaClient
+- startProcessInstanceByKey(key, vars)
+  → camundaClient.newCreateInstanceCommand().bpmnProcessId(key).latestVersion()
+    .variables(vars).send().join()
+- deleteProcessInstance(id, reason)
+  → camundaClient.newCancelInstanceCommand(key).send().join()
+- correlateMessage(name, businessKey, vars)
+  → camundaClient.newCorrelateMessageCommand().messageName(name)
+    .correlationKey(key).variables(vars).send().join()
+- signalEventReceived(name, vars)
+  → camundaClient.newBroadcastSignalCommand().signalName(name).variables(vars).send().join()
+- taskService.complete(taskId, vars)
+  → camundaClient.newUserTaskCompleteCommand(taskKey).variables(vars).send().join()
+- Type changes: ProcessInstance→ProcessInstanceEvent, String id→Long key,
+  VariableMap→Map<String,Object>
+
+STEP 5 — MIGRATE JAVADELEGATES:
+For each class implementing JavaDelegate:
+- Remove implements JavaDelegate, keep @Component
+- Replace execute(DelegateExecution) with @JobWorker(type="beanName") method
+- execution.getVariable("x") → job.getVariablesAsMap().get("x")
+- execution.setVariable("x", v) → return Map.of("x", v) from method
+- BpmnError → CamundaError.bpmnError(code, msg, vars)
+- ProcessEngineException → CamundaError.jobError(msg, vars, retries-1, backoff)
+- Remove all TypedValue API usage, use plain Java types
+
+STEP 6 — MIGRATE EXTERNAL TASK WORKERS:
+For each class implementing ExternalTaskHandler:
+- @Configuration→@Component, remove implements ExternalTaskHandler
+- Replace execute(ExternalTask, ExternalTaskService) with @JobWorker method
+- externalTask.getVariable → job.getVariablesAsMap().get
+- externalTaskService.complete → return vars from method
+- handleBpmnError → CamundaError.bpmnError
+- handleFailure → CamundaError.jobError
+
+STEP 7 — MIGRATE TESTS:
+For each test class:
+- Add @CamundaSpringProcessTest, inject CamundaClient and CamundaProcessTestContext
+- Replace runtimeService().startProcessInstanceByKey with
+  client.newCreateInstanceCommand
+- isWaitingAt→hasActiveElements, hasPassed→hasCompletedElements, isEnded→isCompleted
+- complete(task()) → processTestContext.completeUserTask("TaskName")
+- Timer: managementService job query → processTestContext.increaseTime(Duration)
+- Variables: .variables().containsEntry(k,v) → .hasVariable(k, v)
+
+STEP 8 — VALIDATE:
+- Compile: mvn compile
+- Search for remaining org.camunda.bpm imports
+- Run tests: mvn test
+- List any remaining TODO items
+
+After each step, report what was changed and any issues encountered.
+```
+
+:::info When to use the full agentic prompt
+The full agentic prompt works best with AI coding agents that have terminal access and can read/write files directly (Claude Code, Copilot Agent Mode, Cursor). For chat-based tools, use the individual prompts from Steps 2–7 above, providing the relevant code in each prompt.
+:::
+
+### Key API mapping reference
+
+These tables summarize the most important mappings between Camunda 7 and Camunda 8. They are useful as quick references when writing migration prompts or reviewing AI-generated code.
+
+#### Type mappings
+
+| Camunda 7                                      | Camunda 8                                         |
+| ---------------------------------------------- | ------------------------------------------------- |
+| `ProcessEngine`                                | `CamundaClient`                                   |
+| `RuntimeService`                               | `CamundaClient` (methods directly on client)      |
+| `TaskService`                                  | `CamundaClient` (user task methods)               |
+| `RepositoryService`                            | `CamundaClient` (deployment/definition methods)   |
+| `ProcessInstance`                              | `ProcessInstanceEvent`                            |
+| `Task`                                         | `UserTask`                                        |
+| `Deployment`                                   | `DeploymentEvent`                                 |
+| `Batch`                                        | No direct equivalent (single instance operations) |
+| `VariableMap`                                  | `Map<String, Object>`                             |
+| `TypedValue` (IntegerValue, StringValue, etc.) | Plain Java types                                  |
+| `DelegateExecution`                            | `ActivatedJob`                                    |
+| `ExternalTask` + `ExternalTaskService`         | `JobClient` + `ActivatedJob`                      |
+| `BpmnError`                                    | `CamundaError.bpmnError(...)`                     |
+| `ProcessEngineException`                       | `CamundaError.jobError(...)`                      |
+
+#### Parameter name changes
+
+:::warning Important
+The terms `processDefinitionKey` and `processDefinitionId` have **swapped meanings** between Camunda 7 and Camunda 8. Review these carefully during migration.
+:::
+
+| Description                      | Camunda 7                  | Camunda 8                               |
+| -------------------------------- | -------------------------- | --------------------------------------- |
+| BPMN model identifier (from XML) | `processDefinitionKey`     | `bpmnProcessId` / `processDefinitionId` |
+| Unique key from deployment       | `processDefinitionId`      | `processDefinitionKey`                  |
+| Process instance identifier      | `String processInstanceId` | `Long processInstanceKey`               |
+
+#### Test assertion mappings
+
+| Camunda 7 (BpmnAwareTests)                      | Camunda 8 (CamundaAssert)                                                               |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `assertThat(pi).isNotEnded()`                   | `assertThat(pi).isActive()`                                                             |
+| `assertThat(pi).isEnded()`                      | `assertThat(pi).isCompleted()`                                                          |
+| `assertThat(pi).isWaitingAt("id")`              | `assertThat(pi).hasActiveElements("id")`                                                |
+| `assertThat(pi).isWaitingAt(findId("name"))`    | `assertThat(pi).hasActiveElements(byName("name"))`                                      |
+| `assertThat(pi).hasPassed("id")`                | `assertThat(pi).hasCompletedElements("id")`                                             |
+| `assertThat(pi).variables().containsEntry(k,v)` | `assertThat(pi).hasVariable(k, v)`                                                      |
+| `assertThat(task()).hasName("x")`               | `assertThat(UserTaskSelectors.byTaskName("x")).hasName("x")`                            |
+| `assertThat(task()).isAssignedTo("u")`          | `assertThat(UserTaskSelectors.byTaskName("x")).hasAssignee("u")`                        |
+| `complete(task())`                              | `processTestContext.completeUserTask("name")`                                           |
+| `managementService().executeJob(id)`            | `processTestContext.increaseTime(Duration)` or `processTestContext.completeJob("type")` |
+
+#### Import replacements
+
+| Remove                                                                    | Add                                                              |
+| ------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `org.camunda.bpm.engine.*`                                                | `io.camunda.client.*`                                            |
+| `org.camunda.bpm.engine.delegate.*`                                       | `io.camunda.client.api.worker.JobHandler`                        |
+| `org.camunda.bpm.engine.variable.*`                                       | (plain Java collections)                                         |
+| `org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.*`            | `io.camunda.process.test.api.CamundaAssert.*`                    |
+| —                                                                         | `io.camunda.process.test.api.assertions.ElementSelectors.byName` |
+| —                                                                         | `io.camunda.process.test.api.assertions.UserTaskSelectors`       |
+| —                                                                         | `io.camunda.process.test.api.CamundaProcessTestContext`          |
+| —                                                                         | `io.camunda.process.test.api.CamundaSpringProcessTest`           |
+| `org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication` | `io.camunda.client.annotation.Deployment`                        |
 
 ## Example: Adjusting a Spring Boot application
 
