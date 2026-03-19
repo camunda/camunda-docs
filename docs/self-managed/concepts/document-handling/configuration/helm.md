@@ -108,7 +108,6 @@ global:
     activeStoreId: "azure"
     type:
       azure:
-        enabled: true
         connectionString:
           secret:
             existingSecret: "azure-storage-credentials"
@@ -145,10 +144,7 @@ When using AKS Workload Identity or Managed Identity, omit the connection string
 global:
   documentStore:
     activeStoreId: "azure"
-    type:
-      azure:
-        enabled: true
-        # No connectionString secret needed — DefaultAzureCredential handles auth
+    # No connectionString secret needed — DefaultAzureCredential handles auth
 
 orchestration:
   extraConfiguration:
