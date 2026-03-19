@@ -567,7 +567,7 @@ With the inclusion of RDBMS as a secondary storage option and the [deprecation o
 **Action:**
 
 - Camunda recommends setting `orchestration.data.secondaryStorage.type` explicitly in your `values.yaml`.
-- The chart can auto-detect the type from `global.elasticsearch.enabled` or `global.opensearch.enabled`, but Helm will fail with a validation error if no secondary storage is not configured at all.
+- The chart can auto-detect the type from `global.elasticsearch.enabled` or `global.opensearch.enabled`, but Helm will fail with a validation error if no secondary storage is configured.
 - Alternatively, set `global.noSecondaryStorage: true` to run in engine-only mode without secondary storage.
 
 :::note
