@@ -7,8 +7,8 @@ description: "Enable AI agents and LLM-powered applications to interact with Cam
 
 Enable AI agents and LLM-powered applications to interact with Camunda 8 through the Model Context Protocol (MCP).
 
-:::caution Incubating feature
-The Orchestration Cluster MCP Server is an **incubating feature** and is not part of the [Camunda public API](/reference/public-api.md). Tool names, parameters, and response schemas may change across versions without prior deprecation notice.
+:::info
+The Orchestration Cluster MCP Server is not part of the public API. See the [public API documentation](/reference/public-api.md) for more information.
 :::
 
 ## About
