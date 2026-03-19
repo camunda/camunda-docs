@@ -11,7 +11,7 @@ Prepare your Self-Managed environment for upgrade to Camunda 8.8.
 
 Use this guide to confirm upgrade eligibility, understand platform-level changes, and identify actions you may need to take before running an upgrade.
 
-All Camunda upgrades must follow the required upgrade procedure: upgrade to the latest patch of the current minor version, upgrade one minor version at a time, and then upgrade to the latest patch of the target minor.
+All Camunda upgrades must follow the required upgrade procedure: upgrade one minor version at a time and never skip minors. For best stability and fix coverage, use the latest available patch in each minor before and after the minor upgrade.
 
 See [version compatibility checks](../components/orchestration-cluster/core-settings/concepts/version-compatibility.md#required-upgrade-procedure).
 
@@ -19,11 +19,11 @@ See [version compatibility checks](../components/orchestration-cluster/core-sett
 
 Before upgrading, verify that your current installation meets the minimum requirements.
 
-| Area                | What to check                                                                                                                                                                                                                                           |
-| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Camunda version     | Direct upgrades to 8.8 are supported only from the latest 8.7.x patch. If you are running an earlier version, you must first upgrade to 8.7. See [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version). |
-| Environment support | Ensure your platform and dependencies are supported in 8.8. See [supported environments](/reference/supported-environments.md).                                                                                                                         |
-| Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and Elasticsearch/OpenSearch setup.                                                                                                               |
+| Area                | What to check                                                                                                                                                                                                                                                                                                                 |
+| :------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda version     | Direct upgrades to 8.8 are supported from 8.7.x. If you are running an earlier version, you must first upgrade to 8.7. For best stability and fix coverage, use the latest available 8.7.x patch before upgrading. See [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version). |
+| Environment support | Ensure your platform and dependencies are supported in 8.8. See [supported environments](/reference/supported-environments.md).                                                                                                                                                                                               |
+| Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and Elasticsearch/OpenSearch setup.                                                                                                                                                                                     |
 
 ## Review platform changes in Camunda 8.8
 
