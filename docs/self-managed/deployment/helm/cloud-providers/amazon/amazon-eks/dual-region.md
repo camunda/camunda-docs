@@ -572,6 +572,7 @@ cd -
 <details>
 <summary>Review the Elasticsearch deploy.sh script</summary>
 
+```bash reference
 https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
 
 ````
@@ -648,10 +649,6 @@ Key changes of the dual-region setup:
   - `orchestration.partitionCount: 8`
   - `orchestration.replicationFactor: 4`
 - Elasticsearch is managed via the ECK operator and configured through a separate manifest (`elasticsearch-cluster-dual-region.yml`), not via the Helm chart's built-in Elasticsearch subchart. The Elasticsearch overlay (`camunda-elastic-values.yml`) disables the built-in Bitnami subchart and points components at the ECK-managed service.
-
-:::note Elasticsearch service names
-The Zeebe exporter URLs reference `elasticsearch-es-masters` (the headless service), which provides direct pod-level addressing for in-cluster communication. Other components use `elasticsearch-es-http` (the ClusterIP service with load balancing) via the `camunda-elastic-values.yml` overlay. Both services point to the same Elasticsearch pods on port 9200.
-:::
 
 ##### region0/camunda-values.yml
 
