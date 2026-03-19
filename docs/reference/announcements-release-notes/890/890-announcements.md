@@ -675,7 +675,7 @@ identity:
 
 #### Helm chart: Helm CLI v4 does not support duplicate environment variable names
 
-Helm v4 enforces that environment variables in a rendered kubernetes manifest must be unique. If your `values.yaml` overrides an environment variable also set by the chart, you might encounter an error.
+Helm v4 enforces that environment variables in a rendered Kubernetes manifest must be unique. If your `values.yaml` overrides an environment variable also set by the chart, you might encounter an error.
 
 <p className="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
 
