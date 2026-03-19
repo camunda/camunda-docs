@@ -1,99 +1,588 @@
 /* stylelint-disable docusaurus/copyright-header */
 
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
-.heroBanner {
-  padding: 3.5rem 0;
-  text-align: center;
+/* ─── Page wrapper: force dark background ─── */
+.darkPage {
+  background: #0a0a0f;
+  color: #d1d1d1;
+  min-height: 100vh;
+}
+
+/* Override global h2 border-bottom inside the dark page */
+.darkPage h2 {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+/* Override global h4 margin-top */
+.darkPage h4 {
+  margin-top: 0 !important;
+}
+
+/* Override global dark-mode link underlines inside cards/CTA */
+.darkPage a {
+  text-decoration: none !important;
+}
+
+.darkPage li a {
+  text-decoration: none !important;
+}
+
+.darkPage p a {
+  text-decoration: none !important;
+}
+
+/* ─── Hero ─── */
+.hero {
   position: relative;
+  padding: 5rem 0 3rem;
+  text-align: center;
   overflow: hidden;
 }
 
-@media screen and (max-width: 966px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.heroGlow {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 360px;
+  background: radial-gradient(
+    ellipse,
+    rgba(252, 93, 13, 0.18) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
+.heroInner {
+  position: relative;
+  z-index: 1;
 }
 
-/* Stack buttons on smaller screens */
-@media screen and (max-width: 720px) {
-  .buttons {
-    flex-direction: column;
-  }
-}
-
-.buttonsWrapper {
-  gap: 30px;
-  display: flex;
-  justify-content: center;
-}
-
-.features {
-  display: flex;
-  align-items: center;
-  padding: 2rem 0;
-  width: 100%;
-}
-
-.featuresBlock {
-  padding: 2rem 0;
-}
-
-[data-theme="dark"] .featuresBlock {
-  padding: 1rem 0 2rem 0;
-}
-
-[data-theme="dark"] .featuresDescription {
-  color: rgb(198, 198, 198);
-}
-
-.featuresGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  grid-auto-rows: 250px;
-  gap: 2.5rem;
-}
-
-.featuresSection {
+.heroTitle {
+  font-size: 3.6rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #f4f4f4;
+  margin: 0 0 1.2rem;
+  border-bottom: none;
   padding: 0;
 }
-[data-theme="dark"] .featuresSection {
-  background-color: rgb(27, 27, 27);
-  border: 1px solid rgb(40, 40, 40);
-  box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.2);
-}
-[data-theme="dark"] .featuresSection:hover {
-  background-color: transparent;
-  border: 1px solid var(--ifm-color-primary);
-  box-shadow: 0px 8px 16px 4px rgba(120, 169, 255, 0.2);
+
+.heroSub {
+  font-size: 1.15rem;
+  color: #999;
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.7;
 }
 
-.featuresImage {
-  height: 90px;
-  width: 90px;
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.4rem;
+  }
+  .hero {
+    padding: 3rem 0 2rem;
+  }
 }
 
-.featuresTitle {
+/* ─── Section common ─── */
+.section {
+  padding: 3rem 0;
+}
+
+.sectionLast {
+  padding-bottom: 4rem;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f4f4f4;
+  margin: 0 0 0.6rem;
+  border-bottom: none;
+  padding: 0;
+}
+
+.sectionSub {
+  font-size: 1.05rem;
+  color: #999;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ─── Start cards (SaaS vs CLI) ─── */
+.startGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .startGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.startCard {
+  border-radius: 16px;
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.startCardSaas {
+  background: linear-gradient(145deg, #0d1b3e 0%, #0f1629 100%);
+  border: 1px solid #1a2a5e;
+}
+
+.startCardCli {
+  background: linear-gradient(145deg, #1a1a1f 0%, #131316 100%);
+  border: 1px solid #2a2a30;
+}
+
+.startCardIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  margin-bottom: 1rem;
+}
+
+.startCardLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.startCardTitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #f4f4f4;
+  margin: 0 0 0.6rem;
+  border-bottom: none;
+  padding: 0;
+}
+
+.startCardDesc {
+  font-size: 0.95rem;
+  color: #999;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+.checkList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.checkList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.startCardFooter {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 1.6rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff !important;
+  background: #fc5d0d;
+  text-decoration: none !important;
+  transition: all 0.2s;
+  border: none;
+}
+
+.ctaButton:hover {
+  background: #e04d00;
+  transform: translateY(-2px);
+  text-decoration: none !important;
+  color: #fff !important;
+}
+
+.ctaButtonCli {
+  background: #fc5d0d;
+}
+
+.ctaNote {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* ─── Inline code ─── */
+.inlineCode {
+  background: rgba(120, 169, 255, 0.12);
+  color: #78a9ff;
+  padding: 0.15em 0.45em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-family: "IBM Plex Mono", "Fira Code", monospace;
+}
+
+/* ─── Terminal ─── */
+.terminalWindow {
+  background: #111118;
+  border: 1px solid #222;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.terminalHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  background: #1a1a22;
+  border-bottom: 1px solid #222;
+}
+
+.terminalDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.terminalTitle {
+  margin-left: 12px;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.terminalBody {
+  padding: 1rem 1.4rem;
+}
+
+.terminalPre {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: #c6c6c6;
+  background: transparent;
+  font-family: "IBM Plex Mono", "Fira Code", monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ─── More ways to run ─── */
+.waysGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .waysGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wayCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #111118;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  transition: all 0.25s;
+  text-decoration: none !important;
+  color: #ccc !important;
+}
+
+.wayCard:hover {
+  border-color: #78a9ff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(120, 169, 255, 0.1);
+  color: #ccc !important;
+  text-decoration: none !important;
+}
+
+.wayCard h3 {
+  font-size: 1.15rem;
+  color: #f4f4f4;
+  margin: 0.8rem 0 0.4rem;
+}
+
+.wayCard p {
+  font-size: 0.88rem;
+  color: #999;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ─── Deploy grid ─── */
+.deployGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .deployGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.deployCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #111118;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 1.8rem 1.2rem;
+  transition: all 0.25s;
+  text-decoration: none !important;
+  color: #ccc !important;
+}
+
+.deployCard:hover {
+  border-color: #fc5d0d;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(252, 93, 13, 0.1);
+  text-decoration: none !important;
+  color: #ccc !important;
+}
+
+.deployCard h4 {
+  font-size: 1rem;
+  color: #f4f4f4;
+  margin: 0.6rem 0 0.3rem;
+}
+
+.deployCard p {
+  font-size: 0.85rem;
+  color: #999;
+  margin: 0;
   line-height: 1.4;
-  font-size: 24px;
-  padding: 0 2rem;
 }
 
-.featuresDescription {
-  line-height: 1.4;
-  padding: 0 2rem;
+/* ─── Architecture ─── */
+.archDiagram {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
 }
 
-.featuresLink {
-  height: 250px;
-  padding-top: 1rem;
+.archRow {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.archConnector {
+  color: #444;
+  font-size: 1.2rem;
+  line-height: 2;
+}
+
+.archBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #111118;
+  border: 1px solid #2a2a30;
+  border-radius: 12px;
+  padding: 1.2rem 2rem;
+  min-width: 160px;
+  transition: all 0.25s;
+  text-decoration: none !important;
+  color: #ccc !important;
+}
+
+.archBox:hover {
+  border-color: #78a9ff;
+  transform: translateY(-2px);
+  text-decoration: none !important;
+  color: #ccc !important;
+}
+
+.archBox strong {
+  font-size: 1rem;
+  color: #f4f4f4;
+}
+
+.archBox span {
+  font-size: 0.78rem;
+  color: #888;
+  margin-top: 0.25rem;
+}
+
+.archBoxPrimary {
+  border-color: #78a9ff;
+  background: rgba(120, 169, 255, 0.06);
+}
+
+/* ─── Command grid ─── */
+.commandGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .commandGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.commandCard h4 {
+  font-size: 0.95rem;
+  color: #f4f4f4;
+  margin: 0 0 0.8rem;
+  border-bottom: none;
+  padding: 0;
+}
+
+.commandCard .terminalWindow {
+  max-width: 100%;
+}
+
+/* ─── AI section ─── */
+.aiGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .aiGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.aiCard h4 {
+  font-size: 0.95rem;
+  color: #f4f4f4;
+  margin: 0 0 0.8rem;
+  border-bottom: none;
+  padding: 0;
+}
+
+.aiCard .terminalWindow {
+  max-width: 100%;
+}
+
+.aiExamples {
+  background: #111118;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 1.8rem 2rem;
+}
+
+.aiExamples h4 {
+  font-size: 0.95rem;
+  color: #f4f4f4;
+  margin: 0 0 1rem;
+  border-bottom: none;
+  padding: 0;
+}
+
+.aiExampleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.aiExampleItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  color: #999;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.aiPromptIcon {
+  font-style: normal;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* ─── Explore docs ─── */
+.exploreSection {
+  background: #0e0e14;
+  padding: 3rem 0 4rem;
+  border-top: 1px solid #1a1a22;
+}
+
+.exploreGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.exploreCard {
+  background: #111118;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 1.5rem 1.8rem;
+  transition: all 0.25s;
+  text-decoration: none !important;
+  color: #ccc !important;
+}
+
+.exploreCard:hover {
+  border-color: #78a9ff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(120, 169, 255, 0.08);
+  text-decoration: none !important;
+  color: #ccc !important;
+}
+
+.exploreCard h3 {
+  font-size: 1.1rem;
+  color: #f4f4f4;
+  margin: 0 0 0.4rem;
+}
+
+.exploreCard p {
+  font-size: 0.88rem;
+  color: #999;
+  margin: 0;
+  line-height: 1.5;
 }

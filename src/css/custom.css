@@ -2036,3 +2036,28 @@ h3 + .release-announcement-row {
 .sidebar-cta > .menu__link.menu__link--active {
   overflow: visible;
 }
+
+/* ─── Homepage dark overrides ─── */
+/* Ensure the homepage renders with dark styling in both light and dark mode */
+
+.homepage-dark-override .navbar {
+  background: #0a0a0f;
+  border-bottom: 1px solid #222;
+}
+
+.homepage-dark-override .footer--dark {
+  background: #0a0a0f;
+  border-top: 1px solid #1a1a22;
+}
+
+.homepage-dark-override .footer__link-item {
+  color: #999;
+}
+
+.homepage-dark-override .footer__title {
+  color: #f4f4f4;
+}
+
+.homepage-dark-override .footer__copyright {
+  color: #666;
+}
