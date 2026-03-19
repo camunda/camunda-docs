@@ -68,6 +68,7 @@ Review the actions required for the following 8.9 changes:
 | <span className="label-highlight red">Breaking change</span> | [Resource deletion endpoint now returns a response body](#resource-deletion)                                        |
 | <span className="label-highlight red">Breaking change</span> | [Search filter validation errors now return structured error collections](#search-filter-validation-errors)         |
 | <span className="label-highlight red">Breaking change</span> | [Spring Boot 4.0 default for Camunda Spring Boot Starter](#spring-boot)                                             |
+| <span className="label-highlight red">Breaking change</span> | [Type-safe pagination model in the Camunda Java client](#type-safe-pagination)                                      |
 | <span className="label-highlight red">Breaking change</span> | [`versionTag` returns `null` instead of empty string when absent](#version-tag-null)                                |
 | <span className="label-highlight red">Breaking change</span> | [Web Modeler changes](#web-modeler)                                                                                 |
 | <span className="label-highlight yellow">Deprecated</span>   | [Deprecated: enum literals in Orchestration Cluster API v2](#deprecated-enum)                                       |
@@ -430,6 +431,48 @@ If your code parses error response bodies from search endpoints for specific val
 - The `title` field value changed from `"Bad Request"` to `"INVALID_ARGUMENT"`.
 - The `detail` field now contains more descriptive, structured messages.
 - A collection of validation errors in the response body (instead of a single error message).
+
+### Type-safe pagination model in the Camunda Java client {#type-safe-pagination}
+
+#### Change
+
+The Camunda Java client now uses type-safe pagination interfaces (`AnyPage`, `OffsetPage`, `CursorForwardPage`, `CursorBackwardPage`) instead of the previous `SearchRequestPage` class. Each search or statistics endpoint exposes only the pagination methods it actually supports.
+
+Direction methods on `AnyPage` now return style-specific interfaces: `from()` returns `OffsetPage`, `after()` returns `CursorForwardPage`, and `before()` returns `CursorBackwardPage`. This prevents mixing incompatible pagination styles at compile time.
+
+#### Why
+
+The previous API allowed mixing incompatible pagination styles (for example, `.page(p -> p.from(10).after("cursor"))`), which always resulted in a `400 Bad Request` at runtime. This change surfaces that restriction at compile time. The pattern mirrors the existing sort polymorphism design (`TypedSortableRequest`).
+
+#### Impact
+
+This change is **not binary-compatible**. Code compiled against the previous API will fail at runtime without recompilation, because the method signature changed from `page(Consumer<SearchRequestPage>)` to `page(Consumer<AnyPage>)`. All users must recompile their applications.
+
+Additionally, `TypedSearchRequest` now has 4 generic type parameters (previously 3) and `TypedPageableRequest` now has 2 (previously 1), which is a source-breaking change for custom implementations of these interfaces.
+
+#### Migration reference
+
+| Before (8.8)                                       | After (8.9)                                                 |
+| :------------------------------------------------- | :---------------------------------------------------------- |
+| `import ...search.request.SearchRequestPage`       | `import ...search.page.AnyPage`                             |
+| `import ...search.request.SearchRequestOffsetPage` | `import ...search.page.OffsetPage`                          |
+| `Consumer<SearchRequestPage>`                      | `Consumer<AnyPage>`                                         |
+| `Consumer<SearchRequestOffsetPage>`                | `Consumer<OffsetPage>`                                      |
+| `SearchRequestBuilders.searchRequestPage(fn)`      | `SearchRequestBuilders.anyPage(fn)` (old method deprecated) |
+| `implements TypedSearchRequest<F, S, Self>`        | `implements TypedSearchRequest<F, S, AnyPage, Self>`        |
+| `implements TypedPageableRequest<Self>`            | `implements TypedPageableRequest<AnyPage, Self>`            |
+| `SearchRequestPage r = p.from(10)`                 | `OffsetPage r = p.from(10)`                                 |
+| `SearchRequestPage r = p.after("c")`               | `CursorForwardPage r = p.after("c")`                        |
+
+#### Action
+
+Update to the latest Java client version and **recompile your application**. If you use inline lambdas with valid pagination patterns (for example, `.page(p -> p.from(5).limit(10))`), your source code does not require changes — but recompilation is mandatory.
+
+If you have explicit references to `SearchRequestPage`, replace them with `AnyPage`. If you store the return value of direction methods (for example, `SearchRequestPage r = p.from(10)`), update the variable type to `OffsetPage`, `CursorForwardPage`, or `CursorBackwardPage` as appropriate.
+
+:::note
+This change is specific to the Camunda Java client. Generated clients and custom REST API integrations are not affected.
+:::
 
 ## Deprecations
 
