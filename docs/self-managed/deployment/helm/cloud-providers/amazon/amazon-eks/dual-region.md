@@ -572,7 +572,6 @@ cd -
 <details>
 <summary>Review the Elasticsearch deploy.sh script</summary>
 
-```yaml reference
 https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
 ```
 
@@ -632,9 +631,9 @@ Key changes of the dual-region setup:
   - `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS`
     - These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../../components/orchestration-cluster/zeebe/operations/setting-up-a-cluster.md).
   - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
-    - The Elasticsearch endpoint for region 0 (ECK-managed service: `elasticsearch-es-masters`).
+    - The Elasticsearch endpoint for region 0 (typically the ECK-managed HTTP service, for example: `elasticsearch-es-http` for a cluster named `elasticsearch`). You can discover the exact Service name with `kubectl get svc -n <elasticsearch-namespace>`.
   - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
-    - The Elasticsearch endpoint for region 1 (ECK-managed service: `elasticsearch-es-masters`).
+    - The Elasticsearch endpoint for region 1 (typically the ECK-managed HTTP service, for example: `elasticsearch-es-http` for a cluster named `elasticsearch`).
   - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_CLASSNAME`
     - `io.camunda.exporter.CamundaExporter` explicitly creates the new Camunda Exporter.
   - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_CLASSNAME`
@@ -702,12 +701,12 @@ Use the following to set the environment variable CAMUNDA_CLUSTER_INITIALCONTACT
 Use the following to set the environment variable CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe:
 
 - name: CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL
-  value: http://elasticsearch-es-masters.camunda-london.svc.cluster.local:9200
+  value: http://elasticsearch-es-http.camunda-london.svc.cluster.local:9200
 
 Use the following to set the environment variable CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe.
 
 - name: CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL
-  value: http://elasticsearch-es-masters.camunda-paris.svc.cluster.local:9200
+  value: http://elasticsearch-es-http.camunda-paris.svc.cluster.local:9200
 ```
 
 </details>
@@ -728,7 +727,7 @@ helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
   -f camunda-values.yml \
-  -f ../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
+  -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
   -f region0/camunda-values.yml
 
 helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
@@ -736,7 +735,7 @@ helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
   -f camunda-values.yml \
-  -f ../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
+  -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
   -f region1/camunda-values.yml
 ```
 
