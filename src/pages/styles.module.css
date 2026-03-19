@@ -2,6 +2,8 @@
 
 /* ─── Page wrapper: force dark background ─── */
 .darkPage {
+  --mono-font:
+    "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   background: #0a0a0f;
   color: #d1d1d1;
   min-height: 100vh;
@@ -245,7 +247,7 @@
   padding: 0.15em 0.45em;
   border-radius: 4px;
   font-size: 0.85em;
-  font-family: "IBM Plex Mono", "Fira Code", monospace;
+  font-family: var(--mono-font);
 }
 
 /* ─── Terminal ─── */
@@ -289,7 +291,7 @@
   line-height: 1.7;
   color: #c6c6c6;
   background: transparent;
-  font-family: "IBM Plex Mono", "Fira Code", monospace;
+  font-family: var(--mono-font);
   white-space: pre-wrap;
   word-break: break-word;
 }

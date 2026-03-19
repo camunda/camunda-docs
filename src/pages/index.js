@@ -330,8 +330,9 @@ function Home() {
                 Run locally with the CLI
               </h2>
               <p className={styles.startCardDesc}>
-                One command to install, one to start. Full Camunda on your
-                machine — engine, Operate, Tasklist, connectors.
+                Use <CodeBlock>c8ctl</CodeBlock>, the Camunda CLI tool. One
+                command to install, one to start. Full Camunda on your machine —
+                engine, Operate, Tasklist, connectors.
               </p>
               <ul className={styles.checkList}>
                 <li>
