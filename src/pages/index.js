@@ -422,7 +422,7 @@ $ c8ctl process deploy my-process.bpmn`}
             </Link>
             <Link
               to={useBaseUrl(
-                "docs/self-managed/reference-architecture/kubernetes/"
+                "docs/self-managed/deployment/helm/install/quick-install/"
               )}
               className={styles.wayCard}
             >
