@@ -701,6 +701,39 @@ orchestration:
   # ...
 ```
 
+##### Deploy prerequisite services
+
+Before installing Camunda via Helm, you must redeploy the ECK-managed Elasticsearch cluster and synchronize cross-region passwords. Without this, the Helm install will fail because there is no Elasticsearch to connect to.
+
+1. From the `generic/kubernetes/operator-based/elasticsearch` folder, deploy the ECK operator and Elasticsearch cluster in the recreated region:
+
+   ```shell
+   cd generic/kubernetes/operator-based/elasticsearch
+   export ELASTICSEARCH_CLUSTER_FILE="elasticsearch-cluster-dual-region.yml"
+   KUBE_CONTEXT=$CLUSTER_RECREATED ./deploy.sh
+   cd -
+   ```
+
+2. Wait for Elasticsearch to become ready. Verify the cluster health is `green` before proceeding:
+
+   ```shell
+   kubectl get elasticsearch --context $CLUSTER_RECREATED --namespace $CAMUNDA_NAMESPACE_RECREATED
+   ```
+
+3. From the `aws/kubernetes/eks-dual-region/procedure` folder, re-synchronize the Elasticsearch passwords across regions:
+
+   ```shell
+   cd aws/kubernetes/eks-dual-region/procedure
+   ./sync_elasticsearch_passwords.sh
+   cd -
+   ```
+
+   This recreates the cross-region password secrets (`elasticsearch-es-password-region-0` and `elasticsearch-es-password-region-1`) required by the Zeebe exporter configuration.
+
+For more details on these steps, see [Deploy the ECK operator and Elasticsearch clusters](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#deploy-the-eck-operator-and-elasticsearch-clusters) and [Synchronize Elasticsearch passwords across regions](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#synchronize-elasticsearch-passwords-across-regions).
+
+##### Install Camunda using Helm
+
 From the terminal context of `aws/kubernetes/eks-dual-region/helm-values` execute:
 
 ```bash
