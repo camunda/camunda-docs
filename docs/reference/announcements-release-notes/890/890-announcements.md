@@ -359,6 +359,36 @@ Previously, only the first conversion error was returned. This fix improves cons
 </div>
 <div className="release-announcement-content">
 
+#### Type-safe pagination model in the Camunda Java client
+
+Starting with 8.9.0, the Camunda Java client uses type-safe pagination interfaces (`AnyPage`, `OffsetPage`, `CursorForwardPage`, `CursorBackwardPage`) instead of the previous `SearchRequestPage` class. Each search or statistics endpoint now exposes only the pagination methods it actually supports.
+
+Previously, the API allowed mixing incompatible pagination styles (for example, `.page(p -> p.from(10).after("cursor"))`), which always resulted in a `400 Bad Request` at runtime. This change surfaces that restriction at compile time.
+
+This change is **not binary-compatible**. Code compiled against the old API will fail at runtime without recompilation, because the method signature changed from `page(Consumer<SearchRequestPage>)` to `page(Consumer<AnyPage>)`. All users must recompile, even if their source code does not require changes.
+
+**Action:** Take the following action for your integration type:
+
+| Integration type                                                                   | Action required                                                                                                   |
+| :--------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------- |
+| Lambda-based pagination (for example, `.page(p -> p.from(5).limit(10))`)           | Recompile your application. Source code changes are not required for valid pagination patterns.                   |
+| Explicit `SearchRequestPage` references                                            | Replace with `AnyPage` (import `io.camunda.client.api.search.page.AnyPage`).                                      |
+| Explicit `SearchRequestOffsetPage` references                                      | Replace with `OffsetPage`.                                                                                        |
+| Custom `TypedSearchRequest` implementations                                        | Add a pagination type parameter (3 → 4 generic params).                                                           |
+| Custom `TypedPageableRequest` implementations                                      | Add a pagination type parameter (1 → 2 generic params).                                                           |
+| Storing direction method returns (for example, `SearchRequestPage r = p.from(10)`) | Use `OffsetPage r = p.from(10)`, `CursorForwardPage r = p.after("c")`, or `CursorBackwardPage r = p.before("c")`. |
+
+<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#type-safe-pagination)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### `versionTag` now returns `null` instead of empty string when absent
 
 Starting with 8.9.0, API response fields for `versionTag` return `null` instead of an empty string `""` when no version tag is set. This properly indicates absence rather than leaking an internal default.
