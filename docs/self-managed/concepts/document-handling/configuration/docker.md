@@ -112,9 +112,15 @@ To ensure seamless integration and functionality of document handling with GCP s
 
 <TabItem value='azure'>
 
-By using **external cloud file bucket storage** with [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs), documents can be stored in a secure, and scalable way.
+By using **external cloud file bucket storage** with [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs), documents can be stored in a secure and scalable way.
 
 Azure Blob Storage supports two authentication methods: connection string and DefaultAzureCredential (Managed Identity).
+
+#### Prerequisites
+
+- An Azure Storage account with a Blob container.
+- For connection string authentication: The connection string from the Azure portal (**Settings > Access keys**).
+- For Managed Identity/DefaultAzureCredential authentication: The `Storage Blob Data Contributor` RBAC role assigned on the storage account.
 
 | Store variable                           | Required    | Description                                                                                                                               |
 | ---------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |

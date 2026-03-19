@@ -116,6 +116,12 @@ By using **external cloud file bucket storage** with [**Azure Blob Storage**](ht
 
 Azure Blob Storage supports two authentication methods: connection string and DefaultAzureCredential (Managed Identity).
 
+#### Prerequisites
+
+- An Azure Storage account with a Blob container.
+- For connection string authentication: The connection string from the Azure portal (**Settings > Access keys**).
+- For Managed Identity/DefaultAzureCredential authentication: The `Storage Blob Data Contributor` RBAC role assigned on the storage account.
+
 | Store variable                           | Required    | Description                                                                                                                               |
 | ---------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | `DOCUMENT_STORE_AZURE_CLASS`             | Yes         | `io.camunda.document.store.azure.AzureBlobDocumentStoreProvider`                                                                          |
