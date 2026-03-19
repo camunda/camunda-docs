@@ -574,8 +574,7 @@ cd -
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
-
-````
+```
 
 </details>
 
@@ -591,7 +590,7 @@ Run the [sync_elasticsearch_passwords.sh](https://github.com/camunda/camunda-dep
 cd aws/kubernetes/eks-dual-region/procedure
 ./sync_elasticsearch_passwords.sh
 cd -
-````
+```
 
 This script reads the ECK-generated passwords and creates region-specific secrets in both regions:
 
