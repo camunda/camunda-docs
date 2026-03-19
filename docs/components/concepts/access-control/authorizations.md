@@ -245,7 +245,6 @@ After switching from Tasklist V1 to Tasklist V2, user task access restrictions n
 This section describes authorization for domain resources (such as process and decision definitions), not access to UI components or APIs. Users need additional permissions to access specific resources within web components:
 
 - Process-related: Resource type `Process Definition`
-
   - `READ_PROCESS_DEFINITION` to view process models
   - `CREATE_PROCESS_INSTANCE` to start new processes
   - `UPDATE_PROCESS_INSTANCE` to update running instances
