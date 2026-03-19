@@ -2038,26 +2038,75 @@ h3 + .release-announcement-row {
 }
 
 /* ─── Homepage dark overrides ─── */
-/* Ensure the homepage renders with dark styling in both light and dark mode */
+/* Applied via useEffect class on <html> AND :has() fallback targeting the wrapper */
 
-.homepage-dark-override .navbar {
-  background: #0a0a0f;
+.homepage-dark-override .navbar,
+html:has(.homepage-dark-wrapper) .navbar {
+  background: #0a0a0f !important;
   border-bottom: 1px solid #222;
 }
 
-.homepage-dark-override .footer--dark {
-  background: #0a0a0f;
+.homepage-dark-override .navbar__link,
+html:has(.homepage-dark-wrapper) .navbar__link {
+  color: #c6c6c6 !important;
+}
+
+.homepage-dark-override .navbar__link:hover,
+html:has(.homepage-dark-wrapper) .navbar__link:hover {
+  color: #f4f4f4 !important;
+}
+
+.homepage-dark-override .navbar__link--active,
+html:has(.homepage-dark-wrapper) .navbar__link--active {
+  color: #f4f4f4 !important;
+}
+
+.homepage-dark-override .navbar__title,
+html:has(.homepage-dark-wrapper) .navbar__title {
+  color: #f4f4f4 !important;
+}
+
+.homepage-dark-override .DocSearch-Button,
+html:has(.homepage-dark-wrapper) .DocSearch-Button {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid #48484a !important;
+}
+
+.homepage-dark-override .dropdown__link,
+html:has(.homepage-dark-wrapper) .dropdown__link {
+  color: #c6c6c6;
+}
+
+.homepage-dark-override .dropdown__menu,
+html:has(.homepage-dark-wrapper) .dropdown__menu {
+  background: #1b1b1b;
+  border: 1px solid #323232;
+}
+
+.homepage-dark-override .announcement-bar,
+html:has(.homepage-dark-wrapper) [class*="announcementBar"] {
+  background: #111118 !important;
+  border-bottom: 1px solid #222;
+  color: #c6c6c6;
+}
+
+.homepage-dark-override .footer--dark,
+html:has(.homepage-dark-wrapper) .footer--dark {
+  background: #0a0a0f !important;
   border-top: 1px solid #1a1a22;
 }
 
-.homepage-dark-override .footer__link-item {
+.homepage-dark-override .footer__link-item,
+html:has(.homepage-dark-wrapper) .footer__link-item {
   color: #999;
 }
 
-.homepage-dark-override .footer__title {
+.homepage-dark-override .footer__title,
+html:has(.homepage-dark-wrapper) .footer__title {
   color: #f4f4f4;
 }
 
-.homepage-dark-override .footer__copyright {
+.homepage-dark-override .footer__copyright,
+html:has(.homepage-dark-wrapper) .footer__copyright {
   color: #666;
 }

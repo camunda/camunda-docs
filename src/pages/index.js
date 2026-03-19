@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
@@ -244,10 +244,20 @@ function TerminalWindow({ title, children }) {
 function Home() {
   const { siteConfig } = useDocusaurusContext();
 
+  useEffect(() => {
+    document.documentElement.classList.add("homepage-dark-override");
+    document.documentElement.setAttribute("data-homepage", "true");
+    return () => {
+      document.documentElement.classList.remove("homepage-dark-override");
+      document.documentElement.removeAttribute("data-homepage");
+    };
+  }, []);
+
   return (
     <Layout
       title={`${siteConfig.title}`}
       description="Process orchestration for developers. Go from zero to a running workflow in under two minutes."
+      wrapperClassName="homepage-dark-wrapper"
     >
       <div className={styles.darkPage}>
         {/* ─── Hero ─── */}
@@ -351,7 +361,9 @@ function Home() {
               <div className={styles.startCardFooter}>
                 <Link
                   className={clsx(styles.ctaButton, styles.ctaButtonCli)}
-                  to={useBaseUrl("docs/self-managed/setup/deploy/local/c8run/")}
+                  to={useBaseUrl(
+                    "docs/self-managed/quickstart/developer-quickstart/c8run/"
+                  )}
                 >
                   See the install <ArrowRight />
                 </Link>
@@ -397,7 +409,7 @@ $ c8ctl process deploy my-process.bpmn`}
           <div className={styles.waysGrid}>
             <Link
               to={useBaseUrl(
-                "docs/self-managed/setup/deploy/local/docker-compose/"
+                "docs/self-managed/quickstart/developer-quickstart/docker-compose/"
               )}
               className={styles.wayCard}
             >
@@ -409,7 +421,9 @@ $ c8ctl process deploy my-process.bpmn`}
               </p>
             </Link>
             <Link
-              to={useBaseUrl("docs/self-managed/setup/deploy/kubernetes/")}
+              to={useBaseUrl(
+                "docs/self-managed/reference-architecture/kubernetes/"
+              )}
               className={styles.wayCard}
             >
               <KubernetesIcon />
@@ -435,7 +449,7 @@ $ c8ctl process deploy my-process.bpmn`}
           <div className={styles.deployGrid}>
             <Link
               to={useBaseUrl(
-                "docs/self-managed/setup/deploy/amazon/amazon-eks/"
+                "docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks/"
               )}
               className={styles.deployCard}
             >
@@ -444,7 +458,9 @@ $ c8ctl process deploy my-process.bpmn`}
               <p>Deploy on AWS with managed Kubernetes.</p>
             </Link>
             <Link
-              to={useBaseUrl("docs/self-managed/setup/deploy/gcp/")}
+              to={useBaseUrl(
+                "docs/self-managed/deployment/helm/cloud-providers/gcp/google-gke/"
+              )}
               className={styles.deployCard}
             >
               <GCPIcon />
@@ -452,7 +468,9 @@ $ c8ctl process deploy my-process.bpmn`}
               <p>Run on Google Cloud with native GKE support.</p>
             </Link>
             <Link
-              to={useBaseUrl("docs/self-managed/setup/deploy/kubernetes/")}
+              to={useBaseUrl(
+                "docs/self-managed/deployment/helm/install/quick-install/"
+              )}
               className={styles.deployCard}
             >
               <HelmIcon />
