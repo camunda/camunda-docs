@@ -79,11 +79,11 @@ https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-aler
 https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-api-clients/
 https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-ip-allowlists/
 https://docs.camunda.io/docs/next/components/early-access/overview/
-https://docs.camunda.io/docs/next/components/identity/identity-introduction/
+https://docs.camunda.io/docs/next/components/admin/admin-introduction/
 https://docs.camunda.io/docs/next/components/tasklist/api-versions/
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/whats-new-in-88/
 
-# Admin
+# Orchestration Identity
 
 https://docs.camunda.io/docs/next/components/admin/authorization/#about-authorizations
 https://docs.camunda.io/docs/next/components/admin/group/#assign-users-to-a-group
