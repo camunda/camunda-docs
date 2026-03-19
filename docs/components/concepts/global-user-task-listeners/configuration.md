@@ -108,6 +108,12 @@ After the restart, the new configuration applies to new lifecycle events for bot
 
 ## Configure via Orchestration Cluster API
 
+:::note
+You need [specific authorizations](./access-control.md) to be allowed to manage global listeners via API.
+
+Read more about [authorizations](/components/concepts/access-control/authorizations.md) and [how to create them in the Identity UI](/components/identity/authorization.md).
+:::
+
 The [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) provides CRUD operations to manage global user task listeners at runtime. This allows you to create, update, and delete listeners without restarting the cluster.
 
 When you create or update a listener through the API, you need to provide the same properties described in the [Global listener definition](#global-listener-definition) section above, except for the `source` property which is automatically set to `API` by the system.
@@ -127,3 +133,4 @@ The Admin UI uses the Orchestration Cluster API to interact with the global user
 - [Global listener configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners).
 - [Configure properties through Helm charts](/self-managed/deployment/helm/configure/application-configs.md).
 - [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+- [Access control for global user task listeners API](./access-control.md).

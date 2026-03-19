@@ -144,6 +144,7 @@ module.exports = {
                   },
                   items: [
                     "components/concepts/global-user-task-listeners/configuration",
+                    "components/concepts/global-user-task-listeners/access-control",
                   ],
                 },
                 "components/concepts/listen-to-user-tasks",
