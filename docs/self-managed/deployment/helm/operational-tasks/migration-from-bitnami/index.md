@@ -34,7 +34,7 @@ The migration covers all Bitnami-managed infrastructure components deployed as p
 The Camunda application components themselves (Zeebe, Operate, Tasklist, Optimize, Connectors, Identity, and Web Modeler) are not migrated; they're reconfigured via a Helm upgrade to use the new infrastructure backends. Your process instances, decisions, and forms remain intact.
 :::
 
-## Migration rationale
+## Migration steps
 
 The migration follows a five-phase approach designed to minimize downtime:
 

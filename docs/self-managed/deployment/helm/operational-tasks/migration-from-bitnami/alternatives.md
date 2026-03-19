@@ -14,21 +14,21 @@ The approaches described here are not automated via the migration scripts and re
 :::
 
 :::info Use official installation documentation for untested targets
-This page intentionally avoids prescribing full installation commands for PostgreSQL, Elasticsearch, or Keycloak on custom targets such as standalone StatefulSets, VMs, or bare metal. Use the official documentation for the distribution you operate, and use this page only for the Camunda-specific migration flow and Helm wiring.
+This page intentionally avoids prescribing full installation commands for PostgreSQL, Elasticsearch, or Keycloak on custom targets, such as standalone StatefulSets, VMs, or bare metal. Use the official documentation for the distribution you operate, and use this page only for the Camunda-specific migration flow and Helm wiring.
 :::
 
 ## When to use these alternatives
 
 Consider these alternatives if:
 
-- Your organization does not allow operator installations in the cluster (security/compliance constraints).
-- You are running on bare-metal infrastructure without managed service access.
-- You need to migrate to an existing database infrastructure (for example, a shared PostgreSQL cluster managed by a DBA team).
-- You are running Camunda outside of Kubernetes (for example, Docker Compose or VM-based deployments).
+- Your organization doesn't allow operator installations in the cluster—for example, due to security or compliance constraints.
+- You're running on bare-metal infrastructure without managed service access.
+- You need to migrate to an existing database infrastructure, like a shared PostgreSQL cluster managed by a DBA team.
+- You're running Camunda outside of Kubernetes—for example, using Docker Compose or VM-based deployments.
 
-## Option 1: Manually deployed PostgreSQL and Elasticsearch on Kubernetes
+## Option 1: Manually-deployed PostgreSQL and Elasticsearch on Kubernetes
 
-If you cannot install CNPG/ECK operators but still run on Kubernetes, provision PostgreSQL and Elasticsearch using your platform standard manifests or the official product documentation for the distributions you operate.
+If you can't install CloudNativePG (CNPG) or Amazon Elastic Cloud on Kubernetes (ECK) operators, but still run on Kubernetes, provision PostgreSQL and Elasticsearch using your platform standard manifests or the official product documentation for the distributions you operate.
 
 Before cutover, ensure the target platform provides the following:
 
@@ -43,11 +43,10 @@ Once the targets exist, the migration flow stays the same:
 1. Freeze Camunda during the final cutover window.
 2. Migrate PostgreSQL with `pg_dump` and `pg_restore`.
 3. Migrate Elasticsearch with the method that fits your target: fresh start, snapshot/restore, `elasticdump`, or reindex.
-4. Run the Helm upgrade to switch Camunda to the new endpoints.
 
 ### Reconfigure Helm
 
-After data migration, update your Helm values to point to the external endpoints:
+After you migrate the data, update your Helm values to point to the external endpoints:
 
 ```yaml
 # Disable Bitnami subcharts
@@ -97,6 +96,8 @@ optimize:
         port: 9200
 ```
 
+Finally, run `helm upgrade` to switch Camunda to the new endpoints:
+
 ```bash
 helm upgrade ${CAMUNDA_RELEASE_NAME} camunda/camunda-platform \
   -n ${NAMESPACE} \
@@ -106,7 +107,7 @@ helm upgrade ${CAMUNDA_RELEASE_NAME} camunda/camunda-platform \
 
 ## Option 2: VM-based PostgreSQL and Elasticsearch
 
-If your infrastructure runs on virtual machines (VMs) or bare-metal servers, treat PostgreSQL and Elasticsearch provisioning as a separate platform task and follow the official product documentation:
+If your infrastructure runs on virtual machines (VMs) or bare-metal servers, treat PostgreSQL and Elasticsearch provisioning as a separate platform task, and follow the official product documentation:
 
 - [PostgreSQL documentation](https://www.postgresql.org/docs/current/) for installation, remote access, backup/restore tooling, and hardening.
 - [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html) for installation, cluster topology, TLS, and operations.
@@ -118,19 +119,19 @@ Before migration, make sure you have:
 - Databases, users, and credentials created for the Camunda components.
 - A staging rehearsal showing that `pg_restore` and your chosen Elasticsearch migration method work against those endpoints.
 
-Once the services are ready, reuse the external endpoint Helm values pattern above and replace the hosts with your VM or bare-metal addresses.
+Once the services are ready, [reconfigure Helm](#reconfigure-helm), and replace the hosts with your VM or bare-metal addresses.
 
 ## Option 3: Docker Compose deployment
 
-If you are targeting Docker Compose, keep this guide focused on the migration workflow and use the dedicated Docker Compose assets as the source of truth:
+If you're targeting Docker Compose, use this guide for the migration workflow, and use the dedicated Docker Compose assets as the source of truth:
 
 - Follow the local [Docker Compose quickstart](/self-managed/quickstart/developer-quickstart/docker-compose.md) for the supported setup and runtime behavior.
 - Use the maintained Compose assets in [camunda-distributions/docker-compose](https://github.com/camunda/camunda-distributions/tree/main/docker-compose) instead of copying an embedded example from this page.
 
-You still need to migrate PostgreSQL and Elasticsearch data separately using the same approaches described elsewhere in this guide.
+You still need to migrate PostgreSQL and Elasticsearch data separately using the same approaches described in [data migration approaches summary](#data-migration-approaches-summary).
 
 :::warning Not suitable for production
-Docker Compose deployments are suitable for development and testing only. For production environments, use Kubernetes operators or managed services.
+Docker Compose deployments are suitable for development and testing only. For production environments, use [Kubernetes operators](./bitnami-to-operators.md) or [managed services](./bitnami-to-managed-services.md).
 :::
 
 ## Data migration approaches summary
@@ -145,7 +146,7 @@ Regardless of the target infrastructure, the data migration approach remains the
 
 ### PostgreSQL migration flags
 
-The recommended `pg_restore` flags for cross-platform migration:
+When you migrate your PostgreSQL data, use these flags:
 
 ```bash
 pg_restore \
@@ -181,10 +182,10 @@ Before running any of the alternative migration approaches in production, follow
 
 ### Staging rehearsal
 
-1. **Replicate your production environment** in a staging/test cluster — including the target infrastructure (standalone StatefulSets, VMs, Docker Compose, etc.).
-2. **Run the full migration end-to-end** using the chosen approach (manual StatefulSets, VMs, or Docker).
+1. **Replicate your production environment** in a staging/test cluster, including the target infrastructure (standalone StatefulSets, VMs, Docker Compose, etc.).
+2. **Run the full migration end to end** using the chosen approach (manual StatefulSets, VMs, or Docker).
 3. **Measure actual timings**: since alternative deployments vary widely, timing data from staging is critical for setting maintenance windows.
-4. **Test the failback path**: verify that you can roll back by restoring the original Helm values and reconnecting to the Bitnami subcharts.
+4. **Test the failback path**: verify you can roll back by restoring the original Helm values and reconnecting to the Bitnami subcharts.
 
 :::tip
 For VM-based or Docker Compose targets, include network connectivity testing (firewall rules, DNS resolution from Kubernetes to external hosts) as part of the rehearsal.
@@ -203,11 +204,11 @@ If you're performing the migration manually (as described in this guide), create
 
 ### Pre-migration checklist
 
-- [ ] **Verify target connectivity**: confirm that the Kubernetes cluster can reach the target infrastructure (VMs, external databases). Test with `curl`, `psql`, or `kubectl exec` from within the cluster.
-- [ ] **Notify stakeholders**: announce the maintenance window.
-- [ ] **Verify backups**: ensure you have a recent backup from your existing backup strategy, independent of the migration scripts.
-- [ ] **Document the runbook**: for manual migrations, have a written, step-by-step runbook reviewed by a second team member.
-- [ ] **Prepare rollback commands**: pre-write the `helm upgrade` command needed to revert to Bitnami subcharts.
+- **Verify target connectivity**: confirm the Kubernetes cluster can reach the target infrastructure (VMs, external databases). Test with `curl`, `psql`, or `kubectl exec` from within the cluster.
+- **Notify stakeholders**: announce the maintenance window.
+- **Verify backups**: ensure you have a recent backup from your existing backup strategy, independent of the migration scripts.
+- **Document the runbook**: for manual migrations, have a written, step-by-step runbook reviewed by a second team member.
+- **Prepare rollback commands**: pre-write the `helm upgrade` command needed to revert to Bitnami subcharts.
 
 ### Failback procedure
 
@@ -221,7 +222,7 @@ If you're performing the migration manually (as described in this guide), create
 - Always create `pg_dump` backups before any data migration, regardless of the target infrastructure.
 - Store backup files outside the cluster (cloud storage bucket, NFS share) for redundancy.
 - The same `pg_restore` flags (`--clean --if-exists --no-owner --no-privileges`) apply to all targets and are idempotent.
-- Keep the old Bitnami infrastructure running in read-only mode (if possible) for several days as a safety net.
+- Keep the old Bitnami infrastructure running in read-only mode, if possible, for several days as a safety net.
 
 ### Post-migration monitoring
 
