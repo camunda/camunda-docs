@@ -396,15 +396,68 @@ orchestration:
       ...
 ```
 
-Here, the bucket name is set twice. The environment variable `zeebetest1` overrides the configuration file `zeebeOtherBucketName`. See [Spring externalized configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html) for precedence details.
+Here, the bucket name is set twice. The environment variable `zeebetest1` overrides `zeebeOtherBucketName` from the configuration file. See [Spring externalized configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html) for precedence details.
 
 ### Limitations
 
-Customizing the `configuration` option will replace the entire contents of the configuration file. During upgrades, if the `configuration` option remains and if there are any application-level breaking changes to the configuration file format, this may cause the application component to crash.
+`configuration` is written as a full file replacement. It is not merged with defaults from the chart or container image.
 
-- The `configuration` option replaces the entire configuration file. During upgrades, if the file format changes, the component may fail to start until the configuration is updated.
-- Forgetting to wrap multiline values with (`|`) in Helm can cause parse errors.
-- Mixing `env` and `configuration` for the same property without realizing precedence can lead to unexpected results.
+- During upgrades, the component may fail to start until your custom file matches any new required schema.
+- Multiline values must use a YAML block scalar (`|` or `|-`) to avoid Helm/YAML parse issues.
+- If the same setting is defined in both `env` and `configuration`, `env` takes precedence at runtime.
+
+## Component-specific notes
+
+Some components deviate from the standard `application.yaml`/`log4j2.xml` behavior.
+
+### Optimize
+
+Optimize does not use Spring Boot's `application.yaml`. It reads `environment-config.yaml`. Setting `optimize.configuration` writes the provided content to `environment-config.yaml` inside the container.
+
+```yaml
+optimize:
+  configuration: |-
+    # Contents go into environment-config.yaml, not application.yaml
+    container:
+      host: 0.0.0.0
+      ports:
+        http: 8090
+    es:
+      connection:
+        nodes:
+          - host: <your-release-name>-elasticsearch
+            httpPort: 9200
+```
+
+For `optimize.extraConfiguration`, a common use case is a custom `environment-logback.xml` (not `log4j2.xml`):
+
+```yaml
+optimize:
+  extraConfiguration:
+    environment-logback.xml: |-
+      <configuration>
+        ...
+      </configuration>
+```
+
+For the full list of Optimize configuration options, see [Optimize system configuration](/self-managed/components/optimize/configuration/system-configuration.md).
+
+### Console
+
+Console does not support `extraConfiguration`. Use `console.overrideConfiguration`, which merges into the generated Console configuration (or into configuration supplied via `console.configuration`). Use it for Console-specific properties such as `customerId`, cluster `tags`, and `custom-properties`:
+
+```yaml
+console:
+  overrideConfiguration: |-
+    customerId: "<your-customer-id>"
+    clusters:
+      - uuid: "<cluster-uuid>"
+        name: "<cluster-name>"
+        tags:
+          - "<tag>"
+```
+
+For the full list of Console configuration options, see [Console configuration](/self-managed/components/console/configuration/configuration.md).
 
 ## References
 
