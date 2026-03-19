@@ -214,7 +214,7 @@ Database ports are not included here, as databases should be maintained outside 
 Typical defaults include:
 
 - `5432`: PostgreSQL
-- `9200`, `9300`, `9600`: Elasticsearch/OpenSearch
+- `9200`, `9300`, `9600`: Document-store secondary storage (Elasticsearch/OpenSearch)
   :::
 
 ##### Load balancer
@@ -246,10 +246,10 @@ Camunda maintains the required Docker images consumed by the Helm chart. These i
 
 The following databases are required:
 
-| Database                 | Requirement                                                                                        |
-| :----------------------- | :------------------------------------------------------------------------------------------------- |
-| Elasticsearch/OpenSearch | Required by Orchestration Cluster and Optimize.                                                    |
-| PostgreSQL               | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster. |
+| Database                         | Requirement                                                                                        |
+| :------------------------------- | :------------------------------------------------------------------------------------------------- |
+| Document-store secondary storage | Required by Orchestration Cluster and Optimize in this topology (Elasticsearch/OpenSearch).        |
+| PostgreSQL                       | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster. |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.

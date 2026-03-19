@@ -347,7 +347,7 @@ If all Zeebe data is lost after a PersistentVolumeClaim (PVC) was deleted, the l
 
 - All process definitions and instances are gone
 - Zeebe brokers start fresh with no historical data
-- Elasticsearch/OpenSearch still has data, but Zeebe does not
+- Secondary storage still has data, but Zeebe does not
 
 ### Root cause
 

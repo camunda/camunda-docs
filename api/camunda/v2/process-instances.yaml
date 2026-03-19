@@ -965,6 +965,7 @@ components:
         - variables
         - processInstanceKey
         - tags
+        - businessId
       type: object
       properties:
         processDefinitionId:
@@ -1370,6 +1371,12 @@ components:
       type: object
       required:
         - rootProcessInstanceKey
+        - elementId
+        - processDefinitionId
+        - processDefinitionKey
+        - processInstanceKey
+        - sequenceFlowId
+        - tenantId
       properties:
         sequenceFlowId:
           type: string
@@ -1693,7 +1700,6 @@ components:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
     ProcessInstanceStateFilterProperty:
       description: ProcessInstanceStateEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match

@@ -44,6 +44,24 @@ For more information on Camunda 7 plugins, see the [Camunda 7 documentation](htt
 
 3. **Inspect skipped and migrated data in Cockpit** once the plugin has been deployed.
 
+## Configuration
+
+### Operate URL
+
+When viewing migrated process instances, the plugin shows the Camunda 8 process instance key. You can optionally configure the Camunda 8 Operate URL so that these keys link directly to the corresponding process instance in Operate.
+
+To configure this, create or edit the Cockpit configuration file (`config.js`) and add the `operateUrl` property:
+
+```javascript
+export default {
+  operateUrl: "https://<your-operate-host>/operate",
+};
+```
+
+Deploy this file to your Camunda 7 installation at `<camunda-webapp>/app/cockpit/scripts/config.js`.
+
+If `operateUrl` is not configured, the Camunda 8 key is displayed as plain text without a link.
+
 ## Using the Cockpit plugin
 
 After installation and configuration, the Cockpit plugin provides:
