@@ -18,7 +18,7 @@ When exporting, indexes are created as required and not recreated if they alread
 
 ## Configuration
 
-Camunda Exporter is enabled by default if secondary storage is configured to use Elasticsearch or OpenSearch. See the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties/#data---secondary-storage).
+Camunda Exporter is enabled by default if secondary storage is configured to use Elasticsearch or OpenSearch. See the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
 
 ### Options
 
