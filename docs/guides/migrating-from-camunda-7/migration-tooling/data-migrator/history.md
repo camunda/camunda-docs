@@ -27,12 +27,12 @@ During migration, the History Data Migrator sets a `legacyId` variable in the pr
 
 The following requirements and limitations apply:
 
-- Camunda 7 has been stopped, and the Camunda 8 database is reachable. Camunda 8 components (for example, Zeebe, Operate, Tasklist) may be stopped during history migration.
+- Camunda 7 has been stopped, and the Camunda 8 database is reachable. Zeebe may be stopped during history migration.
 - The History Data Migrator must be able to access the Camunda 7 database.
 - The History Data Migrator can migrate data to Camunda 8 only when a relational database (RDBMS) is used.
 - The History Data Migrator must be able to access the Camunda 8 database. As a result, you can run this tool only in a self-managed environment.
 - If you manipulate Camunda 7 data between History Data Migrator runs, data consistency might be affected. See [Auto-cancellation of active instances](#auto-cancellation-of-active-instances) for details.
-- **History cleanup during migration**: If you keep Camunda 8 running and history cleanup is enabled during history migration, and cleanup dates are due (for example, past removal times from C7 or negative auto-cancel TTL values), Camunda 8 history cleanup will run concurrently with migration. This may result in parent entities being cleaned up before their children are migrated, causing child entities to be skipped. See [History Cleanup](#history-cleanup) for mitigation strategies.
+- **History cleanup during migration**: If you keep Camunda 8 running and history cleanup is enabled during history migration, and cleanup dates are due (for example, past removal times from Camunda 7 or negative auto-cancel TTL values), Camunda 8 history cleanup will run concurrently with migration. This may result in parent entities being cleaned up before their children are migrated, causing child entities to be skipped. See [History Cleanup](#history-cleanup) for mitigation strategies.
 - If you migrate runtime and history data for an active Camunda 7 process instance, two separate records will appear in Operate:
   1. **Fresh runtime instance**: The migrated active process instance running on Zeebe. This instance continues execution from the last wait state before migration and produces new history going forward. It does not include historical data from before the migration.
   2. **Auditable instance**: A canceled historic process instance that preserves the audit trail (history data) up to the last wait state pre-migration. This instance appears as canceled and serves only as an audit record of what happened in Camunda 7.
@@ -142,7 +142,7 @@ If Camunda 8 is running during migration with cleanup dates in the past, history
 
 **Common scenarios:**
 
-- Past `removalTime` values from C7
+- Past `removalTime` values from Camunda 7
 - Negative auto-cancel TTL (for example, `P-1D`)
 - Long migrations where dates become due during execution
 
@@ -151,7 +151,7 @@ As a result, you will see skipped child entities with messages referencing the d
 Choose one approach to prevent cleanup interference:
 
 <Tabs groupId="cleanup-mitigation" defaultValue="shutdown" values={[
-{ label: 'Shut down C8', value: 'shutdown' },
+{ label: 'Shut down Camunda 8', value: 'shutdown' },
 { label: 'Configure future dates', value: 'future-dates' },
 { label: 'Accept partial cleanup', value: 'accept' }
 ]}>
@@ -160,9 +160,9 @@ Choose one approach to prevent cleanup interference:
 
 **Stop Camunda 8 during migration**
 
-- Stop C8 cluster before migration
+- Stop Camunda 8 cluster before migration
 - Run migration while offline
-- Start C8 when complete
+- Start Camunda 8 when complete
 
 ✅ Guarantees no cleanup interference
 
@@ -172,7 +172,7 @@ Choose one approach to prevent cleanup interference:
 
 **Set cleanup dates in the future**
 
-- Update C7 removal times before migration (if feasible)
+- Update Camunda 7 removal times before migration (if feasible)
 - Configure positive TTL for auto-canceled instances (for example, `P6M`, `P1Y`)
 
 ✅ Prevents immediate cleanup
@@ -183,7 +183,7 @@ Choose one approach to prevent cleanup interference:
 
 **Allow concurrent cleanup**
 
-- Run C8 during migration
+- Run Camunda 8 during migration
 - Accept some entities may be cleaned up immediately
 - Accept child entity skips
 
@@ -206,9 +206,9 @@ The History Data Migrator assigns migrated history data to Zeebe partitions. **P
 This ensures all entities in a process hierarchy share the same partition, enabling the RDBMS exporter on that partition to perform cleanup.
 
 :::warning Partition configuration must match Zeebe topology
-C7 migrated history data can **only be deleted via history cleanup**, which requires:
+Camunda 7 migrated history data can **only be deleted via history cleanup**, which requires:
 
-- The partition ID exists in your C8 Zeebe cluster
+- The partition ID exists in your Camunda 8 Zeebe cluster
 - That partition has an RDBMS exporter configured
 
 If partition IDs assigned during migration don't exist or lack RDBMS exporters, **that data cannot be cleaned up** and will persist indefinitely.
@@ -225,7 +225,7 @@ To migrate without Camunda 8 REST API connectivity (no topology query), configur
 ```yaml
 camunda.migrator:
   history:
-    partition-count: 3 # Must match your C8 cluster
+    partition-count: 3 # Must match your Camunda 8 cluster
 ```
 
 When configured:
@@ -234,7 +234,7 @@ When configured:
 - Partition IDs generated as sequence: 1, 2, 3, ...
 - No Camunda 8 REST API/network connectivity is required at migration start (database connectivity is still required)
 
-The configured value must exactly match your C8 Zeebe cluster's partition count.
+The configured value must exactly match your Camunda 8 Zeebe cluster's partition count.
 
 Mismatched configuration means:
 
