@@ -692,7 +692,7 @@ Before installing Camunda via Helm, you must redeploy the ECK-managed Elasticsea
 
 1. From the `generic/kubernetes/operator-based/elasticsearch` folder, deploy the ECK operator and Elasticsearch cluster in the recreated region:
 
-   ```shell
+   ```bash
    cd generic/kubernetes/operator-based/elasticsearch
    export ELASTICSEARCH_CLUSTER_FILE="elasticsearch-cluster-dual-region.yml"
    KUBE_CONTEXT=$CLUSTER_RECREATED ./deploy.sh
@@ -701,13 +701,13 @@ Before installing Camunda via Helm, you must redeploy the ECK-managed Elasticsea
 
 2. Wait for Elasticsearch to become ready. Verify the cluster health is `green` before proceeding:
 
-   ```shell
+   ```bash
    kubectl get elasticsearch --context $CLUSTER_RECREATED --namespace $CAMUNDA_NAMESPACE_RECREATED
    ```
 
 3. From the `aws/kubernetes/eks-dual-region/procedure` folder, re-synchronize the Elasticsearch passwords across regions:
 
-   ```shell
+   ```bash
    cd aws/kubernetes/eks-dual-region/procedure
    ./sync_elasticsearch_passwords.sh
    cd -
@@ -744,7 +744,7 @@ Before installing Camunda via Helm, you must redeploy the ECK-managed Elasticsea
 
 1. From the `generic/kubernetes/operator-based/elasticsearch` folder, deploy the ECK operator and Elasticsearch cluster in the recreated region:
 
-   ```shell
+   ```bash
    cd generic/kubernetes/operator-based/elasticsearch
    export ELASTICSEARCH_CLUSTER_FILE="elasticsearch-cluster-dual-region.yml"
    CAMUNDA_NAMESPACE=$CAMUNDA_NAMESPACE_RECREATED KUBE_CONTEXT=$CLUSTER_RECREATED ./deploy.sh
@@ -753,13 +753,13 @@ Before installing Camunda via Helm, you must redeploy the ECK-managed Elasticsea
 
 2. Wait for Elasticsearch to become ready. Verify the cluster health is `green` before proceeding:
 
-   ```shell
+   ```bash
    kubectl get elasticsearch --context $CLUSTER_RECREATED --namespace $CAMUNDA_NAMESPACE_RECREATED
    ```
 
 3. From the `generic/openshift/dual-region/procedure` folder, re-synchronize the Elasticsearch passwords across regions:
 
-   ```shell
+   ```bash
    cd generic/openshift/dual-region/procedure
    ./sync-elasticsearch-passwords.sh
    cd -
