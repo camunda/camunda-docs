@@ -241,8 +241,7 @@ The proxy-related environment variables are lowercase because they follow a wide
 | `IDENTITY_BASE_URL`                       | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                           | `http://identity:8080`                                                             | -             |
 
 :::note Helm behavior
-The `webapp` component default for `CAMUNDA_IDENTITY_USERNAMECLAIM` is `name`.
-In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Web Modeler `webapp` environment.
+The `webapp` component default for `CAMUNDA_IDENTITY_USERNAMECLAIM` is `name`. In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Web Modeler `webapp` environment.
 :::
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.

@@ -376,8 +376,7 @@ optimize:
 Web Modeler requires two OIDC clients: one for the UI (public) and one for the API (confidential).
 
 :::note
-If your IdP provides user-friendly names in the `name` claim and you want Web Modeler to use that claim, configure the Web Modeler `webapp` environment variable `CAMUNDA_IDENTITY_USERNAMECLAIM=name`.
-Without this override, Helm defaults typically resolve usernames from `preferred_username`.
+If your IdP provides user-friendly names in the `name` claim and you want Web Modeler to use that claim, configure the Web Modeler `webapp` environment variable `CAMUNDA_IDENTITY_USERNAMECLAIM=name`. Without this override, Helm defaults typically resolve usernames from `preferred_username`.
 :::
 
 ```yaml
