@@ -10,249 +10,144 @@ description: "Camunda Copilot is an AI assistant integrated into Web Modeler tha
 import CopilotBpmnGeneration from './img/copilot-bpmn-generation.png';
 import CopilotConversationHistory from './img/copilot-conversation-history.png';
 
-Camunda Copilot is an AI assistant that helps you with BPMN process modeling, FEEL expressions, and form building. It is available in both SaaS and Self-Managed deployments of Web Modeler, and can be used only in the BPMN diagram and form editors.
+Camunda Copilot is an AI assistant built into Web Modeler that helps you design, build, and refine your processes faster. Whether you're starting from scratch or improving an existing workflow, Copilot can help you get there with natural language prompts.
 
 :::note
 Camunda Copilot is an [**alpha feature**](/components/early-access/alpha/alpha-features.md) that must be enabled by an organization admin before use.
 :::
 
-## Get started
+## What can Copilot help you with?
 
-1. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
-2. Open an existing BPMN diagram or form, or create a new one via New project > Create new > BPMN diagram or Form.
-3. Click the Camunda Copilot icon in the top-right corner of the editor header to open the Camunda Copilot panel.
-4. In the chat box, enter a simple, clear, and concise prompt describing what you need.
-5. Wait for Camunda Copilot to respond; response times may vary depending on the complexity of your request.
+Camunda Copilot assists with three core areas of process automation:
+
+### Design and build BPMN processes
+
+Turn your ideas into working process diagrams without manually placing each element:
+
+- **Create processes from descriptions**: Describe what you need ("Create an employee onboarding process") and Copilot generates the BPMN diagram.
+- **Modify existing diagrams**: Ask Copilot to add error handling, insert approval steps, or restructure your workflow.
+- **Convert legacy artifacts**: Paste existing documentation, BPEL, Java, or Python code and let Copilot transform it into BPMN.
+- **Get explanations**: Ask Copilot to explain what a process does or how a specific element works.
+
+### Write and debug FEEL expressions
+
+FEEL expressions power your process logic. Copilot helps you write them correctly:
+
+- **Generate expressions**: Describe what you need ("Calculate the total price from quantity and unit price") and Copilot writes the FEEL expression.
+- **Translate from other languages**: Convert Java, JavaScript, or Python snippets into equivalent FEEL syntax.
+- **Debug errors**: When an expression isn't working, ask Copilot to fix it and explain what went wrong.
+
+### Build Camunda Forms
+
+Create user-facing forms that integrate with your processes:
+
+- **Generate forms**: Describe the data you need to collect and Copilot creates the form structure.
+- **Link forms to tasks**: Copilot can bind forms to user tasks in your process automatically.
+- **Validate and refine**: Ask Copilot to check your form for issues or suggest improvements.
 
 <img src={CopilotBpmnGeneration} alt="Camunda Copilot generating a mortgage approval workflow" />
 
+## Get started
+
+1. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
+2. Open an existing BPMN diagram or form, or create a new one via **New project > Create new > BPMN diagram** or **Form**.
+3. Click the Camunda Copilot icon in the top-right corner of the editor header to open the Copilot panel.
+4. Type a prompt describing what you need and press Enter.
+5. Review the response. For changes to your diagram or form, Copilot applies them automatically and you can undo if needed.
+
 :::tip
-To avoid timeouts and get better results, break long or complex prompts into smaller, focused requests and send them one at a time.
+For best results, use clear and specific prompts. Break complex requests into smaller steps rather than asking for everything at once.
 :::
-
-## How it works
-
-Camunda Copilot uses a multi-agent architecture. Your request is sent to the Supervisor Agent, routed to a specialized sub-agent, and then executed using built-in tools.
-
-```mermaid
-flowchart LR
-  User["User Chat"] --> Supervisor["Supervisor Agent"]
-  Supervisor --> BpmnAgent["BPMN Sub-Agent"]
-  Supervisor --> FeelAgent["FEEL Sub-Agent"]
-  Supervisor --> FormAgent["Form Sub-Agent"]
-  BpmnAgent --> Tools["Built-in tools"]
-  FeelAgent --> Tools
-  FormAgent --> Tools
-```
-
-- **Supervisor Agent**: Routes your requests to the appropriate specialized sub-agent based on the task type.
-- **BPMN Sub-Agent**: Creates, modifies, and explains BPMN process diagrams.
-- **FEEL Sub-Agent**: Generates, translates, debugs, and explains FEEL expressions.
-- **Form Sub-Agent**: Creates, modifies, and validates Camunda Forms.
-
-Each sub-agent uses [built-in tools](built-in-tools.md) to interact with your diagrams and forms.
-
-## Review and undo changes
-
-Camunda Copilot can both answer questions and generate or update BPMN diagrams and forms. When Camunda Copilot applies a change on the canvas, Web Modeler automatically creates a new version so your previous work is preserved. If you are not satisfied with the result, you can roll back to a previous version from the version history, or continue iterating with Camunda Copilot until the result meets your needs.
-
-## Context awareness
-
-Camunda Copilot automatically detects and uses context from your current work to provide more relevant responses:
-
-- **No element selected**: Camunda Copilot uses the file context.
-- **Element selected**: A context tag appears above the chat input, showing which element or expression Camunda Copilot will reference.
-- **Context removal**: Removing a context tag clears that context and, for BPMN elements, deselects the element on the canvas.
-
-This context allows Camunda Copilot to:
-
-- Understand which element you're referencing
-- Apply changes to the correct element
-- Generate FEEL expressions for the appropriate field
-- Link forms to the current process
-
-## Chat history
-
-Camunda Copilot automatically saves your conversations so you can pick up where you left off. Conversations are retained for 90 days before being automatically deleted. You can click on any past conversation to continue the discussion, rename conversations to give them meaningful titles for easy reference, or delete conversations you no longer need.
-<img src={CopilotConversationHistory} alt="Conversation history panel with rename and delete options" />
 
 ## Example prompts
 
-You can ask Camunda Copilot to create, modify, or explain processes and forms. Use clear, specific prompts to get the best results. For complex workflows, break your request into smaller steps.
+Here are some prompts to help you get started:
 
-#### Build processes and forms
+| What you want to do        | Example prompt                                                    |
+| -------------------------- | ----------------------------------------------------------------- |
+| Create a new process       | "Create a purchase order approval workflow"                       |
+| Add to an existing process | "Add a notification step after the approval task"                 |
+| Convert legacy code        | _Paste your BPEL/Java/Python code_ and ask "Convert this to BPMN" |
+| Write a FEEL expression    | "Calculate 10% discount if order total exceeds 1000"              |
+| Debug an expression        | "Why isn't this expression working?" _(with FEEL editor open)_    |
+| Create a form              | "Create a form to collect customer contact information"           |
+| Understand your process    | "Explain what this process does"                                  |
 
-<table>
-  <colgroup>
-    <col style={{width: "55%"}} />
-    <col style={{width: "45%"}} />
-  </colgroup>
-  <thead>
-    <tr>
-      <th style={{textAlign: "left"}}>Prompt</th>
-      <th style={{textAlign: "left"}}>What it does</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>"Create an employee onboarding process"</td>
-      <td>Generates a BPMN workflow from a description</td>
-    </tr>
-    <tr>
-      <td>"Create a leave request workflow with an approval form"</td>
-      <td>Builds a process with a linked form</td>
-    </tr>
-    <tr>
-      <td>"Add error handling to this process"</td>
-      <td>Modifies an existing diagram</td>
-    </tr>
-    <tr>
-      <td><em>Paste existing documentation or code</em></td>
-      <td>Converts requirements, BPEL, Java, or Python into BPMN</td>
-    </tr>
-  </tbody>
-</table>
+## Working with context
 
-#### Work with FEEL expressions
+Copilot understands what you're working on and uses that context to give relevant responses:
 
-<table>
-  <colgroup>
-    <col style={{width: "55%"}} />
-    <col style={{width: "45%"}} />
-  </colgroup>
-  <thead>
-    <tr>
-      <th style={{textAlign: "left"}}>Prompt</th>
-      <th style={{textAlign: "left"}}>What it does</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>"Calculate the total price from quantity and unit price"</td>
-      <td>Generates a FEEL expression</td>
-    </tr>
-    <tr>
-      <td>"Translate this Java to FEEL: input.trim().toUpperCase()"</td>
-      <td>Converts code from other languages</td>
-    </tr>
-    <tr>
-      <td>"Fix this expression" <em>(with FEEL editor open)</em></td>
-      <td>Debugs and corrects syntax errors</td>
-    </tr>
-  </tbody>
-</table>
+- **No element selected**: Copilot works with your entire diagram or form.
+- **Element selected**: Copilot focuses on that specific element. A context tag appears above the chat input showing what's selected.
+- **FEEL editor open**: Copilot knows you're working on an expression and can help write or debug it.
+
+This means you can say "add error handling to this task" after selecting a service task, and Copilot knows exactly which task you mean.
+
+## Review and undo changes
+
+When Copilot makes changes to your diagram or form, Web Modeler automatically saves a new version. This means:
+
+- Your previous work is always preserved
+- You can roll back to any earlier version from the version history
+- You can iterate with Copilot until the result meets your needs
 
 :::note
-Modifications may affect sections beyond your specific request. Review the full diagram after changes.
+Copilot's changes may affect more than just the element you asked about. Always review the full diagram after modifications.
 :::
+
+## Chat history
+
+Copilot saves your conversations so you can pick up where you left off:
+
+- Conversations are retained for 90 days
+- Click any past conversation to continue it
+- Rename conversations for easy reference
+- Delete conversations you no longer need
+
+<img src={CopilotConversationHistory} alt="Conversation history panel with rename and delete options" />
+
+## How Copilot works
+
+Behind the scenes, Copilot uses specialized AI agents to handle different types of requests:
+
+- **BPMN agent**: Creates and modifies process diagrams
+- **FEEL agent**: Generates and debugs expressions
+- **Form agent**: Builds and validates forms
+
+Copilot automatically routes your request to the right agent based on what you're asking for. You don't need to specify which agent to use.
+
+For details on what Copilot can do in each area, see [Built-in tools](built-in-tools.md).
 
 ## Permissions
 
-Camunda Copilot enforces two layers of access control: **project-level permissions** determine whether a user can make changes at all, and **screen-based tool availability** further restricts which tools are available based on the current screen or mode.
+Copilot respects your project permissions:
 
-### Project-level permissions
+| What you can do                    | Write access | Read-only access |
+| ---------------------------------- | :----------: | :--------------: |
+| Ask questions and get explanations |     Yes      |       Yes        |
+| Generate FEEL expressions          |     Yes      |       Yes        |
+| Create or modify BPMN diagrams     |     Yes      |        No        |
+| Create or modify forms             |     Yes      |        No        |
+| Apply FEEL expressions to elements |     Yes      |        No        |
 
-Camunda Copilot respects your project role. Users with write access can use all features, while read-only users are limited to questions, explanations, and viewing-related actions.
+### Where Copilot is available
 
-<table>
-  <colgroup>
-    <col style={{width: "50%"}} />
-    <col style={{width: "25%"}} />
-    <col style={{width: "25%"}} />
-  </colgroup>
-  <thead>
-    <tr>
-      <th style={{textAlign: "left"}}>Feature</th>
-      <th style={{textAlign: "center"}}>Write access</th>
-      <th style={{textAlign: "center"}}>Read-only access</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Ask questions</td>
-      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
-      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
-    </tr>
-    <tr>
-      <td>Get explanations</td>
-      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
-      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
-    </tr>
-    <tr>
-      <td>Generate BPMN elements</td>
-      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
-      <td style={{textAlign: "center"}}><span style={{color: "red"}}>✗</span></td>
-    </tr>
-    <tr>
-      <td>Modify diagrams</td>
-      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
-      <td style={{textAlign: "center"}}><span style={{color: "red"}}>✗</span></td>
-    </tr>
-    <tr>
-      <td>Create/edit forms</td>
-      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
-      <td style={{textAlign: "center"}}><span style={{color: "red"}}>✗</span></td>
-    </tr>
-    <tr>
-      <td>Generate FEEL expressions</td>
-      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
-      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
-    </tr>
-    <tr>
-      <td>Apply FEEL expressions</td>
-      <td style={{textAlign: "center"}}><span style={{color: "green"}}>✓</span></td>
-      <td style={{textAlign: "center"}}><span style={{color: "red"}}>✗</span></td>
-    </tr>
-  </tbody>
-</table>
+Copilot adapts to your current screen:
 
-### Screen-based tool availability
+| Screen                  | What Copilot can do       |
+| ----------------------- | ------------------------- |
+| BPMN Design / Implement | Full editing capabilities |
+| BPMN Play               | View and query only       |
+| BPMN Version History    | View and query only       |
+| Form Design / Editor    | Full editing capabilities |
+| Form Validate           | View only                 |
 
-In addition to project-level permissions, Camunda Copilot dynamically adjusts the tools available to you based on the screen or mode you are currently using. For example, while editing a BPMN diagram on the Design tab you have full editing tools, but if you switch to Play mode, only viewing and validation tools are available. This prevents Camunda Copilot from suggesting actions that cannot be performed in your current context.
-
-The following table shows what Camunda Copilot can do on each screen:
-
-<table>
-  <colgroup>
-    <col style={{width: "30%"}} />
-    <col style={{width: "70%"}} />
-  </colgroup>
-  <thead>
-    <tr>
-      <th style={{textAlign: "left"}}>Screen</th>
-      <th style={{textAlign: "left"}}>What Camunda Copilot can do</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>BPMN Design / Implement</td>
-      <td>Full BPMN editing, view forms, validate, manage files, create files, use integrations</td>
-    </tr>
-    <tr>
-      <td>BPMN Play</td>
-      <td>View and query BPMN diagrams, validate</td>
-    </tr>
-    <tr>
-      <td>BPMN Version History</td>
-      <td>View and query BPMN diagrams and forms, validate, view files</td>
-    </tr>
-    <tr>
-      <td>Form Design / Editor</td>
-      <td>Full form and BPMN editing, validate, manage files, create files, use integrations</td>
-    </tr>
-    <tr>
-      <td>Form Validate</td>
-      <td>View forms, validate</td>
-    </tr>
-  </tbody>
-</table>
-
-When you ask Camunda Copilot to perform an action that is not available on your current screen, it will let you know and suggest navigating to the appropriate screen instead.
+If you ask Copilot to do something that isn't available on your current screen, it will suggest navigating to the appropriate screen.
 
 ## Limitations
 
-- Camunda Copilot does not support pools, lanes, and collaborations.
-- Camunda Docs AI is available only in SaaS deployments.
+- Copilot does not support pools, lanes, and collaborations.
+- Documentation search (Camunda Docs AI) is available only in SaaS deployments.
 - Self-Managed users can configure their own LLM provider but do not have access to the Camunda documentation knowledge base.
 
 ## Self-Managed configuration
@@ -261,5 +156,5 @@ For Self-Managed deployments, see [Copilot configuration](/self-managed/componen
 
 ## Related resources
 
-- [Built-in tools reference](built-in-tools.md)
+- [Built-in tools](built-in-tools.md)
 - [Self-Managed Copilot configuration](/self-managed/components/modeler/web-modeler/configuration/copilot.md)
