@@ -203,4 +203,4 @@ Then choose your deployment pattern:
 
 - [Production architecture with RDBMS](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) - Reference topology and design considerations.
 - [Manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md) - Entry point for manual installation, configuration, and operations.
-- [Helm installation with RDBMS](/self-managed/deployment/helm/install/helm-with-rdbms.md) - Kubernetes/Helm-based deployment.
+- [RDBMS example deployment for Helm](/self-managed/deployment/helm/install/helm-with-rdbms.md) - Kubernetes/Helm-based example walkthrough.

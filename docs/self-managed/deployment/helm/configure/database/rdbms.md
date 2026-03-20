@@ -16,7 +16,7 @@ This page provides:
 Related guides:
 
 - [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
-- [Install with RDBMS as secondary storage](/self-managed/deployment/helm/install/helm-with-rdbms.md)
+- [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)
 - [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
 
 ## Prerequisites

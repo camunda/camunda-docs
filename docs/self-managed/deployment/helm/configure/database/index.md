@@ -7,17 +7,19 @@ description: "In this section, find details on database configuration associated
 
 import DocCardList from '@theme/DocCardList';
 
-:::tip Starting from scratch with RDBMS?
-For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md).
+:::tip Need end-to-end guidance for RDBMS?
+For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
 :::
 
 :::tip Choosing a secondary storage backend?
 Use the [secondary storage overview](/self-managed/concepts/secondary-storage/index.md) as the navigation hub for Elasticsearch/OpenSearch and RDBMS paths.
 :::
 
-In this section, find details on database configuration associated with Kubernetes with Helm.
+Use this section to configure database layers for Helm deployments.
 
-- Use [install with external RDBMS](/self-managed/deployment/helm/install/helm-with-rdbms.md) as a scenario-based installation example.
-- Use [configure RDBMS](/self-managed/deployment/helm/configure/database/rdbms.md) as the canonical reference for Helm values and operations.
+This section is organized into two tracks:
+
+- [RDBMS](/self-managed/deployment/helm/configure/database/rdbms.md): Configure relational database backends and related operational settings.
+- [Non-SQL](/self-managed/deployment/helm/configure/database/non-sql.md): Configure Elasticsearch/OpenSearch-based backends and related troubleshooting.
 
 <DocCardList />
