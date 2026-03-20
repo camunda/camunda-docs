@@ -39,7 +39,7 @@ If using the single application, or embedded gateways - that is, where brokers a
 
 Informally, a healthy cluster is one where:
 
-- The expected number of [brokers and gateways](../../../self-managed/components/orchestration-cluster/zeebe/operations/health.md) report a healthy status.
+- The expected number of [brokers and gateways](../../../self-managed/zeebe-deployment/operations/health.md) report a healthy status.
 - Every partition has exactly one leader.
 - There are `N-1` followers per partition (where `N` is the replication factor).
 
