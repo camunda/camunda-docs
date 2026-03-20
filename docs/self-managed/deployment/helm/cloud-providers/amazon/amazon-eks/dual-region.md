@@ -632,9 +632,9 @@ Key changes of the dual-region setup:
   - `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS`
     - These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../../components/orchestration-cluster/zeebe/operations/setting-up-a-cluster.md).
   - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
-    - The Elasticsearch endpoint for region 0 (typically the ECK-managed HTTP service, for example: `elasticsearch-es-http` for a cluster named `elasticsearch`). You can discover the exact Service name with `kubectl get svc -n <elasticsearch-namespace>`.
+    - The Elasticsearch endpoint for region 0 (the ECK-managed **headless** service, for example: `elasticsearch-es-masters` for a cluster named `elasticsearch`). The headless service is required because VPN/peering routes pod IPs, not ClusterIPs — so DNS must return individual pod addresses that are routable cross-cluster. You can discover the exact service name with `kubectl get svc -n <elasticsearch-namespace>`.
   - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
-    - The Elasticsearch endpoint for region 1 (typically the ECK-managed HTTP service, for example: `elasticsearch-es-http` for a cluster named `elasticsearch`).
+    - The Elasticsearch endpoint for region 1 (the ECK-managed **headless** service, for example: `elasticsearch-es-masters` for a cluster named `elasticsearch`).
   - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_CLASSNAME`
     - `io.camunda.exporter.CamundaExporter` explicitly creates the new Camunda Exporter.
   - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_CLASSNAME`
@@ -698,12 +698,12 @@ Use the following to set the environment variable CAMUNDA_CLUSTER_INITIALCONTACT
 Use the following to set the environment variable CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe:
 
 - name: CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL
-  value: http://elasticsearch-es-http.camunda-london.svc.cluster.local:9200
+  value: http://elasticsearch-es-masters.camunda-london.svc.cluster.local:9200
 
 Use the following to set the environment variable CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe.
 
 - name: CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL
-  value: http://elasticsearch-es-http.camunda-paris.svc.cluster.local:9200
+  value: http://elasticsearch-es-masters.camunda-paris.svc.cluster.local:9200
 ```
 
 </details>
