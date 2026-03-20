@@ -847,7 +847,7 @@ Creating an OpenSearch domain can be accomplished through various methods, such 
 
 The resulting OpenSearch domain is intended for use with the Camunda platform, the following components utilize OpenSearch:
 
-- Orchestration Cluster (Zeebe, Operate, Tasklist)
+- Orchestration Cluster (Zeebe, Operate, Tasklist, Identity)
 - Optimize
 
 :::info Optional service

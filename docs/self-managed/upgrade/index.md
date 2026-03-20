@@ -48,12 +48,6 @@ Choose the upgrade guide that matches how your environment is deployed:
 
 <ZeebeGrid zeebe={overviewCards} />
 
-:::info Dual-region Helm deployments
-If you are upgrading a dual-region Helm deployment, follow the standard Helm upgrade guide and then complete the additional dual-region steps.
-
-<p class="link-arrow">[Camunda 8.8 to 8.9 Dual-Region Upgrade](./helm/880-to-890-dual-region.md)</p>
-:::
-
 ## Docker Compose deployments
 
 Docker Compose is supported for development and testing environments only.
@@ -82,7 +76,8 @@ Learn about new features, breaking changes, and deprecations in Camunda 8.9:
 
 **Camunda 8 upgrades must be performed sequentially.**
 
-- You must upgrade from the latest patch version of your current Camunda release to the latest patch version of the next release.
+- You must upgrade sequentially, one minor version at a time (for example, 8.7 → 8.8 → 8.9).
+- For best stability and fix coverage, use the latest available patch in each minor before and after each minor upgrade.
 - For example, you must upgrade from 8.7 to 8.8 before you can upgrade to 8.9.
 - **Do not skip releases**.
 

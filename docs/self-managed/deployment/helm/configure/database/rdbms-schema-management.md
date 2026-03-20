@@ -75,11 +75,14 @@ If your database is managed by a dedicated DBA, disable autoDDL and manage schem
 
 ```yaml
 orchestration:
-  data:
-    secondaryStorage:
-      type: rdbms
-      rdbms:
-        autoDDL: false
+  extraConfiguration:
+    - file: "manual-schema-management.yaml"
+      content: |
+        camunda:
+          data:
+            secondary-storage:
+              rdbms:
+                auto-ddl: false
 ```
 
 With `autoDDL: false`, you must:

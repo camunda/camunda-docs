@@ -42,22 +42,22 @@ jobs:
           fi
 
       - name: Checkout camunda-docs
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Checkout TypeScript SDK
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: camunda/orchestration-cluster-api-js
           ref: ${{ steps.resolve.outputs.sdk_ref }}
           path: ts-sdk
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: "20"
+          node-version: "24"
 
       - name: Install dependencies
         working-directory: ts-sdk
@@ -95,14 +95,14 @@ jobs:
       - name: Generate token
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         id: generate_token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
           private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: "${{ steps.generate_token.outputs.token }}"
           path: docs

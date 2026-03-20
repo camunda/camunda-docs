@@ -138,7 +138,7 @@ Operate provides tools for diagnosing and resolving incidents. Let’s go throug
 When we inspect the process instance, we can observe exactly what our incident is:
 
 1. Click the **Process Instance Key** for the process stuck on the **Order Value?** node.
-2. At the top of the instance detail page, click **View** to view the incident details.
+2. Navigate to the **Incidents** tab in the bottom panel.
 3. Observe the error message:
 
 ```text
@@ -154,7 +154,7 @@ To resolve this incident, we must edit the `orderValue` variable so it’s an in
 
 We were able to solve this particular problem by **editing** a variable, but it’s worth noting you can also **add** a variable if a variable is missing from a process instance altogether.
 
-There’s one last step: initiating a “retry” of the process instance. Click the retry icon in the top right corner of the page.
+Lastly, initiate a "retry" of the process instance by selecting **Retry** in the top right corner of the page.
 
 You should now see the incident has been resolved, and the process instance has progressed to the next step.
 

@@ -35,11 +35,11 @@ In testing, Camunda uses the [NGINX Gateway Fabric](https://github.com/nginx/ngi
 
 ## Implement
 
-Get started by running the `helm template` command against version 8.9 or later of the Helm chart to generate the resources, then modify them as needed. See the following command example:
+Get started by running the `helm template` command against version 8.6 or later of the Helm chart to generate the resources, then modify them as needed. See the following command example:
 
 ```bash
 helm template camunda camunda/camunda-platform \
-  --version 14.0.0 \
+  --version $HELM_CHART_VERSION \
   --set global.host=example.com \
   --set global.gateway.enabled=true \
   --set global.gateway.createGatewayResource=true \

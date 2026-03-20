@@ -44,7 +44,17 @@ module.exports = {
               items: [
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/install",
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/runtime",
-                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history",
+                {
+                  type: "category",
+                  label: "History",
+                  link: {
+                    type: "doc",
+                    id: "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history",
+                  },
+                  items: [
+                    "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history-coverage",
+                  ],
+                },
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/identity",
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/variables",
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin",
@@ -145,6 +155,7 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
+        "components/concepts/decision-instance-deletion",
       ],
     },
     {
@@ -288,12 +299,39 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Audit log",
+          link: {
+            type: "doc",
+            id: "components/audit-log/overview",
+          },
+          items: [
+            "components/audit-log/overview/access-control",
+            "components/audit-log/overview/recorded-operations",
+            "components/audit-log/overview/operation-structure",
+          ],
+        },
+        {
+          type: "category",
           label: "Camunda integrations",
           link: {
             type: "doc",
             id: "components/camunda-integrations/overview",
           },
           items: [
+            {
+              type: "category",
+              label: "Microsoft Teams",
+              link: {
+                type: "doc",
+                id: "components/camunda-integrations/ms-teams/ms-teams",
+              },
+              items: [
+                "components/camunda-integrations/ms-teams/ms-teams-installation",
+                "components/camunda-integrations/ms-teams/ms-teams-troubleshoot",
+                "components/camunda-integrations/ms-teams/ms-teams-chatbot",
+                "components/camunda-integrations/ms-teams/ms-teams-tabs",
+              ],
+            },
             {
               type: "category",
               label: "SAP",
@@ -419,7 +457,6 @@ module.exports = {
                     "components/early-access/alpha/a2a-client/a2a-client-usage-patterns",
                   ],
                 },
-                "components/early-access/alpha/ms-teams/ms-teams",
               ],
             },
           ],
@@ -722,8 +759,8 @@ module.exports = {
             "components/operate/userguide/basic-operate-navigation",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
-            "components/operate/userguide/manage-batch-operations",
             "components/operate/userguide/monitor-batch-operations",
+            "components/operate/userguide/manage-batch-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
             {
@@ -732,6 +769,8 @@ module.exports = {
                 "components/operate/userguide/process-instance-batch-modification",
               ],
             },
+            "components/operate/userguide/process-instance-migration",
+            "components/operate/userguide/audit-operations",
           ],
         },
         {
@@ -752,6 +791,7 @@ module.exports = {
             "components/tasklist/userguide/starting-processes",
             "components/tasklist/user-task-access-restrictions",
             "components/tasklist/userguide/tasklist-localization",
+            "components/tasklist/userguide/audit-task-history",
           ],
         },
         {
@@ -770,6 +810,7 @@ module.exports = {
             "components/identity/client",
             "components/identity/mapping-rules",
             "components/identity/tenant",
+            "components/identity/audit-operations",
           ],
         },
       ],
@@ -886,6 +927,7 @@ module.exports = {
               ],
             },
             "components/connectors/protocol/graphql",
+            "components/connectors/protocol/polling",
             "components/connectors/protocol/http-webhook",
             "components/connectors/out-of-the-box-connectors/hubspot",
             "components/connectors/out-of-the-box-connectors/hugging-face",
@@ -897,10 +939,10 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/azure-blob-storage",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
+                "components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound",
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
-            "components/connectors/protocol/polling",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/protocol/rest",
             "components/connectors/out-of-the-box-connectors/salesforce",
@@ -1050,6 +1092,7 @@ module.exports = {
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
+            "components/console/manage-clusters/configure-audit-log",
             "components/console/manage-clusters/settings",
             "components/console/manage-clusters/cluster-capacity",
           ],
@@ -1104,6 +1147,18 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Secure connectivity (AWS PrivateLink)",
+          link: {
+            type: "doc",
+            id: "components/saas/secure-connectivity/secure-connectivity-AWS",
+          },
+          items: [
+            "components/saas/secure-connectivity/secure-connectivity-console-setup",
+          ],
+        },
+
+        {
+          type: "category",
           label: "Encryption",
           link: {
             type: "doc",
@@ -1117,6 +1172,7 @@ module.exports = {
             "components/saas/byok/faq-and-troubleshooting",
           ],
         },
+
         "components/saas/backups",
         "components/saas/auto-updates",
         "components/saas/data-retention",
@@ -1278,6 +1334,7 @@ module.exports = {
             },
           ],
         },
+        require("./docs/apis-tools/c8ctl/sidebar-schema"),
         {
           type: "category",
           label: "Python SDK",
@@ -1325,7 +1382,7 @@ module.exports = {
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
             "apis-tools/testing/connectors",
-            "apis-tools/testing/test-scenario-dsl",
+            "apis-tools/testing/json-test-cases",
           ],
         },
         {
@@ -1335,10 +1392,11 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.8",
+      label: "Upgrade to Camunda 8.9",
+      className: "sidebar-cta",
       link: {
         type: "doc",
-        id: "apis-tools/migration-manuals/index",
+        id: "apis-tools/migration-manuals/migrate-to-89",
       },
       items: [
         "apis-tools/migration-manuals/migrate-to-camunda-api",
@@ -1476,6 +1534,7 @@ module.exports = {
       },
       items: [
         "self-managed/reference-architecture/kubernetes",
+        "self-managed/reference-architecture/containers",
         "self-managed/reference-architecture/manual",
       ],
     },
@@ -1505,8 +1564,9 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/install/quick-install",
-                "self-managed/deployment/helm/install/helm-with-rdbms",
                 "self-managed/deployment/helm/install/production/index",
+                "self-managed/deployment/helm/configure/operator-based-infrastructure",
+                "self-managed/deployment/helm/install/helm-with-rdbms",
               ],
             },
             "self-managed/deployment/helm/chart-parameters",
@@ -1533,7 +1593,6 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
-                "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
@@ -1569,6 +1628,7 @@ module.exports = {
                       RDBMS: [
                         "self-managed/deployment/helm/configure/database/rdbms",
                         "self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers",
+                        "self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits",
                         "self-managed/deployment/helm/configure/database/rdbms-schema-management",
                         "self-managed/deployment/helm/configure/database/rdbms-troubleshooting",
                         "self-managed/deployment/helm/configure/database/validate-rdbms",
@@ -1641,6 +1701,7 @@ module.exports = {
               items: [
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
+                "self-managed/deployment/helm/operational-tasks/helm-v4",
               ],
             },
             {
@@ -1741,15 +1802,13 @@ module.exports = {
             "self-managed/deployment/docker/docker",
             {
               type: "category",
-              label: "Cloud providers",
+              label: "Amazon ECS",
+              link: {
+                type: "doc",
+                id: "self-managed/deployment/containers/cloud-providers/amazon/index",
+              },
               items: [
-                {
-                  type: "category",
-                  label: "Amazon",
-                  items: [
-                    "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
-                  ],
-                },
+                "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
               ],
             },
           ],
@@ -1841,6 +1900,7 @@ module.exports = {
             },
             {
               "Relational databases": [
+                "self-managed/concepts/databases/relational-db/rdbms-setup-guide",
                 "self-managed/concepts/databases/relational-db/rdbms-support-policy",
                 "self-managed/concepts/databases/relational-db/database-configuration",
               ],
@@ -1855,8 +1915,16 @@ module.exports = {
             id: "self-managed/operational-guides/backup-restore/backup-and-restore",
           },
           items: [
-            "self-managed/operational-guides/backup-restore/backup",
-            "self-managed/operational-guides/backup-restore/restore",
+            {
+              Elasticsearch: [
+                "self-managed/operational-guides/backup-restore/elasticsearch/es-backup",
+                "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
+              ],
+              "Relational databases": [
+                "self-managed/operational-guides/backup-restore/rdbms/rdbms-backup",
+                "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
+              ],
+            },
             {
               "Backup Management API": [
                 "self-managed/operational-guides/backup-restore/optimize-backup",
@@ -1888,6 +1956,15 @@ module.exports = {
               ],
             },
           ],
+        },
+        {
+          type: "category",
+          label: "Audit log",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/audit-log/index",
+          },
+          items: ["self-managed/concepts/audit-log/configure-audit-log"],
         },
         "self-managed/concepts/exporters",
         "self-managed/operational-guides/configure-flow-control/configure-flow-control",
@@ -2207,10 +2284,7 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/helm/index",
           },
-          items: [
-            "self-managed/upgrade/helm/880-to-890",
-            "self-managed/upgrade/helm/880-to-890-dual-region",
-          ],
+          items: ["self-managed/upgrade/helm/880-to-890"],
         },
         "self-managed/upgrade/manual/index",
         {

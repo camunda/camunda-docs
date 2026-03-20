@@ -564,7 +564,7 @@ camunda.security:
       authorization-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/authorize
       token-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/token
       jwk-set-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/discovery/v2.0/keys
-      endsession-endpoint-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/logout
+      end-session-endpoint-uri: https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/logout
 ```
 
 </TabItem>
@@ -623,7 +623,7 @@ Unable to determine end-session endpoint for OIDC logout. Falling back to {baseL
 Ensure you either:
 
 - Configure the `issuer-uri` so Identity can retrieve the logout endpoint from the OIDC discovery document, or
-- Explicitly set the `endsession-endpoint-uri`.
+- Explicitly set the `end-session-endpoint-uri`.
 
 #### No client registration found
 

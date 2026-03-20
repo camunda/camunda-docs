@@ -188,6 +188,95 @@ For each new message a new instance is created.
 
 A process can also have one or more [timer start events](/components/modeler/bpmn/timer-events/timer-events.md#timer-start-events). An instance of the process is created when the associated timer is triggered. Timers can also trigger periodically.
 
+## Business ID
+
+### What is a business ID?
+
+A business ID is a domain-specific identifier you can assign to a process instance. Unlike the system-generated process instance key, it represents a domain concept such as an order number, case reference, or customer ticket ID.
+
+A business ID does **not need to be unique** unless uniqueness control is enabled. See [Uniqueness control](#uniqueness-control) for details.
+
+For example, consider a process that ships book orders where each order already has an identifier in your order management system. When you start the process to ship an order, you can use the order ID as the business ID. This lets you easily find all process instances related to a particular order.
+
+You set the business ID at process instance creation time via the `businessId` field in the creation request. The business ID is **immutable**; once set, it cannot be changed or removed for the lifetime of the process instance. The maximum length for a business ID is **256 characters**.
+
+:::note
+The business ID feature is currently only available through the API (REST and gRPC) and the official clients. Creating process instances from other tools such as Web Modeler does not support setting a business ID.
+:::
+
+<details>
+   <summary>Create a process instance with a business ID via Orchestration Cluster REST API</summary>
+   <p>
+
+```
+curl -L 'http://localhost:8080/v2/process-instances' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "processDefinitionId": "order-process",
+  "processDefinitionVersion": 1,
+  "businessId": "order-1234"
+}'
+```
+
+See the [API reference for process instance creation](/apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+
+   </p>
+ </details>
+
+### Propagation to child instances
+
+When a process instance with a business ID creates a child process instance via a [call activity](/components/modeler/bpmn/call-activities/call-activities.md), the business ID is automatically propagated to the child.
+
+Each child instance inherits the same business ID as its parent. As a result, the entire process hierarchy ultimately shares the root instance's business ID, and child instances cannot override it. This lets you trace an entire process hierarchy using a single domain identifier.
+
+### Retrieving process instances by business ID
+
+The business ID is available as a property on the process instance. You can use it to look up or filter process instances through the API:
+
+- [Get process instance](/apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance.api.mdx) — retrieve a single process instance and inspect its `businessId` field.
+- [Search process instances](/apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx) — filter process instances using the `businessId` field to find all instances linked to a specific business case.
+
+### Uniqueness control
+
+With uniqueness control, you can ensure that only one active root process instance exists for a given **process definition, tenant, and business ID**. This prevents duplicate processing of the same business case.
+
+Uniqueness is checked against **active root process instances**.
+
+- A **root process instance** is a process instance that was started directly, not created by a call activity. Child process instances created via call activities don't count toward the uniqueness check, even though they inherit the parent's business ID.
+- When uniqueness control is enabled, creating a root process instance is rejected if another **root** process instance of the same process definition is already active with the same business ID. The rejection returns an `ALREADY_EXISTS` error (HTTP `409 Conflict`).
+- Once a process instance is no longer active (completed or terminated), you can use its business ID to create a new process instance.
+
+:::note Retroactive enforcement
+Uniqueness control is **retroactive**. When you enable it, business IDs that were already assigned to active process instances _before_ the feature was turned on are taken into account. This prevents duplicate instances from being created after the feature is enabled, even if duplicates already existed before activation.
+:::
+
+Uniqueness control is opt-in. Enable it using the configuration property [`camunda.process-instance-creation.business-id-uniqueness-enabled`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#process-instance-creation). For SaaS, configure this in the cluster configuration via Console. For Self-Managed, set it in the application config (for example, `application.yaml` or as an environment variable).
+
+:::note
+When a business ID is specified, the partition for the new process instance is determined deterministically by **hashing the business ID**, rather than using the default round-robin distribution. This ensures that uniqueness checks occur on a single partition.
+
+Be aware that this may result in uneven distribution of instances across partitions if business IDs are not well distributed.
+:::
+
+#### Multi-tenancy scope
+
+In a multi-tenant environment, uniqueness is enforced **per tenant and process definition**. Process instances belonging to different tenants can use the same business ID and process definition without conflict. For example, two active root process instances in different tenants may share the same business ID and process definition.
+
+### Process instance migration
+
+When a process instance with a business ID is [migrated](/components/concepts/process-instance-migration.md) to a different process definition, the business ID is preserved and carried over to the **target** process definition. The business ID remains immutable; it cannot be changed or removed as part of the migration. After migration, the **source** process definition is no longer associated with the business ID.
+
+Migration intentionally **bypasses uniqueness control checks**, because migration operates on existing instances rather than creating new ones. It is a deliberate operator action with accountability provided by the audit log. As a result:
+
+- Migration is never rejected due to a business ID conflict at the target process definition. The target definition may end up with more than one active root process instance with the same business ID.
+- When uniqueness control is enabled, a new process instance with the same business ID can be created for the **source** process definition, since it is no longer associated with the migrated instance.
+
+### Limitations
+
+- You cannot currently search related entities (for example, jobs, user tasks, or incidents) **directly by business ID**.
+- When using [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) to increase the number of partitions, new process instances created with a business ID are only distributed across the original set of partitions, not to any newly added partitions.
+
 ## Tags
 
 Process instance tags are lightweight, immutable labels you can attach when creating a process instance via the API or clients. Tags are inherited by all jobs created from that instance. They help downstream workers and external systems make quick routing or decision choices without inspecting full variable payloads.
