@@ -71,6 +71,10 @@ If you are using the Gateway API with the NGINX Gateway Fabric, the default prox
 
 You may need to install a CRD to be able to create ProxySettingsPolicy resources. This can be found here: [CRD location](https://github.com/nginx/nginx-gateway-fabric/tree/main/config/crd/bases)
 
+An error that might indicate you need to change something is:
+
+> 502: upstream sent too big header while reading response header from upstream
+
 ```yaml
 apiVersion: gateway.nginx.org/v1alpha1
 kind: ProxySettingsPolicy
