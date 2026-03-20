@@ -105,7 +105,7 @@ There are two regions (`REGION_0` and `REGION_1`), each with its own Kubernetes 
 
 1. Navigate to the `procedure` folder within your cloned repository:
 
-```shell
+```bash
 cd aws/kubernetes/eks-dual-region/procedure
 ```
 
@@ -123,13 +123,13 @@ Using the same namespace names on both clusters won't work as CoreDNS won't be a
 
 4. Execute the script via the following command:
 
-```shell
+```bash
 . ./export_environment_prerequisites.sh
 ```
 
 The dot is required to export those variables to your shell and not a spawned subshell.
 
-```shell reference
+```bash reference
 https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/export_environment_prerequisites.sh
 ```
 
@@ -331,7 +331,7 @@ To ease working with two clusters, create or update your local `kubeconfig` to c
 
 Update or create your kubeconfig via the [AWS CLI](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html):
 
-```shell
+```bash
 # the alias allows for easier context switching in kubectl
 aws eks --region $REGION_0 update-kubeconfig --name $CLUSTER_0 --alias $CLUSTER_0
 aws eks --region $REGION_1 update-kubeconfig --name $CLUSTER_1 --alias $CLUSTER_1
@@ -351,14 +351,14 @@ You are configuring the CoreDNS from the cluster in **Region 0** to resolve cert
 
 1. Expose `kube-dns`, the in-cluster DNS resolver via an internal load-balancer in each cluster:
 
-```shell
+```bash
 kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/main/aws/kubernetes/eks-dual-region/procedure/manifests/internal-dns-lb.yml
 kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/main/aws/kubernetes/eks-dual-region/procedure/manifests/internal-dns-lb.yml
 ```
 
 2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/generate_core_dns_entry.sh) in the folder `aws/kubernetes/eks-dual-region/procedure/` of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment variables](#export-environment-variables) since the script builds on top of it.
 
-```shell
+```bash
 ./generate_core_dns_entry.sh
 ```
 
@@ -373,7 +373,7 @@ kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/
 For illustration purposes only. These values will not work in your environment.
 :::
 
-```shell
+```bash
 ./generate_core_dns_entry.sh
 Please copy the following between
 ### Cluster 0 - Start ### and ### Cluster 0 - End ###
@@ -462,7 +462,7 @@ data:
 
 5. Check that CoreDNS has reloaded for the changes to take effect before continuing. Make sure it contains `Reloading complete`:
 
-```shell
+```bash
 kubectl --context $CLUSTER_0 logs -f deployment/coredns -n kube-system
 kubectl --context $CLUSTER_1 logs -f deployment/coredns -n kube-system
 ```
@@ -473,7 +473,7 @@ The script [test_dns_chaining.sh](https://github.com/camunda/camunda-deployment-
 
 1. Execute the [test_dns_chaining.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/test_dns_chaining.sh). Make sure you have previously exported the [environment variables](#export-environment-variables) as the script builds on top of it.
 
-```shell
+```bash
 ./test_dns_chaining.sh
 ```
 
@@ -522,20 +522,20 @@ You can pull the data from Terraform since you exposed those via `output.tf`.
 
 1. From the Terraform code location `aws/kubernetes/eks-dual-region/terraform/clusters`, execute the following to export the access keys to environment variables:
 
-```shell
+```bash
 export AWS_ACCESS_KEY_ES=$(terraform output -raw s3_aws_access_key)
 export AWS_SECRET_ACCESS_KEY_ES=$(terraform output -raw s3_aws_secret_access_key)
 ```
 
 2. From the folder `aws/kubernetes/eks-dual-region/procedure` of the repository, execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/create_elasticsearch_secrets.sh). This creates the ECK-compatible `elasticsearch-env-secret` in both regions with the S3 credentials. Those have previously been defined and exported via the [environment variables](#export-environment-variables).
 
-```shell
+```bash
 ./create_elasticsearch_secrets.sh
 ```
 
 3. Unset environment variables to reduce the risk of potential exposure:
 
-```shell
+```bash
 unset AWS_ACCESS_KEY_ES
 unset AWS_SECRET_ACCESS_KEY_ES
 ```
@@ -552,7 +552,7 @@ Before deploying the Elasticsearch cluster, install the ECK operator and its Cus
 
 Run [deploy.sh](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh) from `generic/kubernetes/operator-based/elasticsearch/`:
 
-```shell
+```bash
 cd generic/kubernetes/operator-based/elasticsearch
 export ELASTICSEARCH_CLUSTER_FILE="elasticsearch-cluster-dual-region.yml"
 KUBE_CONTEXT=$CLUSTER_0 ./deploy.sh
@@ -595,7 +595,7 @@ Each ECK-managed Elasticsearch cluster auto-generates its own `elasticsearch-es-
 
 Run [sync_elasticsearch_passwords.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/sync_elasticsearch_passwords.sh) from `aws/kubernetes/eks-dual-region/procedure` to create cross-region password secrets:
 
-```shell
+```bash
 cd aws/kubernetes/eks-dual-region/procedure
 ./sync_elasticsearch_passwords.sh
 cd -
@@ -680,7 +680,7 @@ The base `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` re
 
 1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/generate_zeebe_helm_values.sh) in the repository folder `aws/kubernetes/eks-dual-region/procedure/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It uses the exported environment variables of the [export environment variables](#export-environment-variables) section for namespaces and regions.
 
-```shell
+```bash
 ./generate_zeebe_helm_values.sh
 
 # It will ask you to provide the following values
@@ -695,7 +695,7 @@ The base `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` re
 For illustration purposes only. These values will not work in your environment.
 :::
 
-```shell
+```bash
 ./generate_zeebe_helm_values.sh
 Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters): 8
 
@@ -727,7 +727,7 @@ The script generates only the environment-specific values (initial contact point
 
 From the terminal context of `aws/kubernetes/eks-dual-region/helm-values`, and ensure you have previously exported the [environment variables](#export-environment-variables), execute the following:
 
-```shell
+```bash
 helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
   --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
@@ -755,7 +755,7 @@ Starting from version 8.8, the Orchestration Cluster is configured by default wi
 
 1. Open a terminal and port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
-```shell
+```bash
 kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 8080:8080
 ```
 
