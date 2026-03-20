@@ -24,7 +24,7 @@ The app offers two ways to interact with Camunda:
 
 | Interaction mode                  | Description                                                                      | Capabilities                                                             |
 | :-------------------------------- | :------------------------------------------------------------------------------- | :----------------------------------------------------------------------- |
-| [Chat bot](./ms-teams-chatbot.md) | Conversational assistant available in personal chats, group chats, and channels. | Respond to text commands and interactive card buttons for quick actions. |
+| [Chatbot](./ms-teams-chatbot.md) | Conversational assistant available in personal chats, group chats, and channels. | Respond to text commands and interactive card buttons for quick actions. |
 | [Tabs](./ms-teams-tabs.md)        | Visual pages embedded inside Microsoft Teams.                                    | Browse tasks, start processes, view incidents in a rich interface.       |
 
 You sign in using your organization's Microsoft account, and then link it to your Camunda account during a one-time onboarding step.
