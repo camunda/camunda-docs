@@ -223,10 +223,9 @@ By default, the migrator queries the Zeebe topology via the Camunda REST API at 
 To migrate without Camunda 8 connectivity, configure the partition count manually:
 
 ```yaml
-camunda:
-  migrator:
-    history:
-      partition-count: 3 # Must match your C8 cluster
+camunda.migrator:
+  history:
+    partition-count: 3 # Must match your C8 cluster
 ```
 
 When configured:
