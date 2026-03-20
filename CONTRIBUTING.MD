@@ -65,7 +65,6 @@ Before submitting your pull request for code review, please ensure your code has
 Before opening a pull request to the Camunda Cloud Documentation, it’s important to review our how-to’s. These are a variety of these [instructional documents] that detail how to get started on your contributor journey.
 
 - [Documentation Guidelines] — These guidelines detail our process for adding a new documentation page, opening your first pull request, our code reviewers and their areas of expertise, and how to structure your documentation files.
-- [React Components and Assets] — These guidelines describe how and where to create React components, how and where to place static assets such as images, and how both can be reused across the documentation.
 - Review our [Pull Requests and Code Review] wiki.
 
 ### Commit message header formatting
@@ -129,7 +128,6 @@ the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 [markdown and mdx features]: ./howtos/markdown-and-mdx-features.md
 [open a pull request]: https://github.com/camunda/camunda-docs/compare
 [documentation guidelines]: ./howtos/documentation-guidelines.md
-[react components and assets]: ./howtos/react-components-and-assets.md
 [opening an issue]: https://github.com/camunda/camunda-docs/issues
 [docusaurus 2]: https://v2.docusaurus.io/
 [github web-based editor]: https://docs.github.com/en/codespaces/the-githubdev-web-based-editor
