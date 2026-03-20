@@ -678,7 +678,7 @@ The Helm command also disables Operate and Tasklist. These components will be re
 
 This procedure requires your Helm values file, `camunda-values.yml`, in `aws/kubernetes/eks-dual-region/helm-values`, used to deploy EKS Dual-region Camunda clusters.
 
-Ensure that the values for `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL` and `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL` correctly point to their respective regions. The placeholder in `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, the result of the `aws/kubernetes/eks-dual-region/procedure/generate_zeebe_helm_values.sh`.
+Ensure the values for `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL` and `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL` correctly point to their respective regions. The placeholder in `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, the result of the `aws/kubernetes/eks-dual-region/procedure/generate_zeebe_helm_values.sh`.
 
 This step is equivalent to applying for the region to be recreated:
 
@@ -691,7 +691,7 @@ The standalone Schema Manager must be disabled; otherwise, it will prevent a suc
 
 There is no Helm chart option for this setting. Because `orchestration.env` is an array, it cannot be overwritten through an overlay and must be added manually on a temporary basis.
 
-Edit the `camunda-values.yml` file in `aws/kubernetes/eks-dual-region/helm-values` to include the following under `orchestration.env`:
+Edit `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` to include the following under `orchestration.env`:
 
 ```yaml
 orchestration:
@@ -705,7 +705,7 @@ orchestration:
 
 Before installing Camunda via Helm, you must redeploy the ECK-managed Elasticsearch cluster and synchronize cross-region passwords. Without this, the Helm install will fail because there is no Elasticsearch to connect to.
 
-1. From the `generic/kubernetes/operator-based/elasticsearch` folder, deploy the ECK operator and Elasticsearch cluster in the recreated region:
+1. From `generic/kubernetes/operator-based/elasticsearch`, deploy the ECK operator and Elasticsearch cluster in the recreated region:
 
    ```shell
    cd generic/kubernetes/operator-based/elasticsearch
@@ -720,7 +720,7 @@ Before installing Camunda via Helm, you must redeploy the ECK-managed Elasticsea
    kubectl get elasticsearch --context $CLUSTER_RECREATED --namespace $CAMUNDA_NAMESPACE_RECREATED
    ```
 
-3. From the `aws/kubernetes/eks-dual-region/procedure` folder, re-synchronize the Elasticsearch passwords across regions:
+3. From `aws/kubernetes/eks-dual-region/procedure`, resynchronize the Elasticsearch passwords across regions:
 
    ```shell
    cd aws/kubernetes/eks-dual-region/procedure
@@ -1189,7 +1189,7 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
    </TabItem>
    </Tabs>
 
-2. Retrieve the Elasticsearch password and configure the backup endpoint in the surviving namespace `CAMUNDA_NAMESPACE_SURVIVING`:
+2. Retrieve the Elasticsearch password, and configure the backup endpoint in the surviving namespace `CAMUNDA_NAMESPACE_SURVIVING`:
 
    ```bash
    ELASTIC_POD=$(kubectl --context $CLUSTER_SURVIVING get pod --selector=elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
