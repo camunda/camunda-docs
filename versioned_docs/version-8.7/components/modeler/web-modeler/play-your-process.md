@@ -84,7 +84,7 @@ After completing part of your process, you can **rewind** to a previous element 
 Play's rewind operation currently does not support the following elements:
 
 - Call activities
-- Timer events that complete without being skipped
+- Timer events
 
 #### Additional limitations
 

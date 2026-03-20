@@ -37,9 +37,9 @@ You can use this to define which user the task can be assigned to. You can speci
 - `candidateUsers`: Specifies the users that the task can be assigned to.
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
-In SaaS, all user IDs are converted to lowercase by default, as they are based on email addresses.
-
 :::info
+Usernames and group IDs in the Orchestration Cluster are case-sensitive. When you set `assignee`, `candidateUsers`, or `candidateGroups`, always use the exact value from your identity provider or Identity user record, including case. For example, `abc@example.com` and `Abc@example.com` are treated as different users.
+
 You can also use assignment resources to configure [user task access restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md) when using Tasklist V1, so that only the assignee, candidate users, and members of candidate groups can see and work on a task. In Tasklist V2, candidate users and candidate groups are interpreted through authorization-based access control: they affect task visibility and assignment only when the user has matching task or process authorizations.
 :::
 

@@ -23,7 +23,6 @@ With README support in Web Modeler, you can:
 
 - Project goals, scope, and stakeholders
 - Links to related assets
-- Embedded BPMN diagrams
 - Go-live dates, status updates, and project health
 - Requirements, process owners, and change logs
 

@@ -552,7 +552,7 @@ The following values are required for OAuth authentication:
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](self-managed/operational-guides/troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting.md).
 
 ### Persistent volume reclaim policy
 

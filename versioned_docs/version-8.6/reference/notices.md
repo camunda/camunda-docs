@@ -19,6 +19,88 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 42
+
+### Publication date
+
+Mar 09, 2026
+
+### Products affected
+
+- Management Identity
+
+### Impact
+
+The application was vulnerable to [CVE-2026-24734](https://nvd.nist.gov/vuln/detail/CVE-2026-24734), which allowed an attacker to bypass revocation checks of client SSL certificates if a certain server configuration was used.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Management Identity ≤ 8.8.7, ≤ 8.7.14, or ≤ 8.6.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Management Identity 8.8.8, 8.7.15, 8.6.28
+
+## Notice 41
+
+### Publication date
+
+Mar 9, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `fast-xml-parser` used by Camunda Web Modeler was affected by [CVE-2026-26278](https://nvd.nist.gov/vuln/detail/CVE-2026-26278), a vulnerability which could be exploited as a vector for denial of service attacks by forcing the parser to do an unlimited amount of entity expansions.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.8, ≤ 8.7.16, or ≤ 8.6.25
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.9, 8.7.17, 8.6.26
+
+This issue does not affect Web Modeler SaaS.
+
+## Notice 40
+
+### Publication date
+
+Feb 23, 2026
+
+### Products affected
+
+C7 to C8 Migration Tooling
+
+### Impact
+
+The version of Tomcat used by the Diagram Converter Webapp was affected by:
+
+- [CVE-2025-66614](https://nvd.nist.gov/vuln/detail/CVE-2025-66614)
+- [CVE-2026-24734](https://nvd.nist.gov/vuln/detail/CVE-2026-24734)
+
+### How to determine if the installation is affected
+
+You are using:
+
+- C7 to C8 Migration Tooling 0.2.0 **AND**
+- the Diagram Converter Webapp
+
+### Solution
+
+Camunda has released the **C7 to C8 Migration Tooling 0.2.1**, which includes the fix.
+
 ## Notice 39
 
 ### Publication date

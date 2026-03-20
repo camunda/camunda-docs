@@ -262,7 +262,6 @@ components:
           description: The job key, if exists, associated with this incident.
     IncidentErrorTypeFilterProperty:
       description: IncidentErrorTypeEnum with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -300,6 +299,7 @@ components:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
     IncidentErrorTypeEnum:
       description: Incident error type with a defined set of values.
+      type: string
       enum:
         - AD_HOC_SUB_PROCESS_NO_RETRIES
         - CALLED_DECISION_ERROR
@@ -319,7 +319,6 @@ components:
         - UNSPECIFIED
     IncidentStateFilterProperty:
       description: IncidentStateEnum with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -357,11 +356,13 @@ components:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
     IncidentStateEnum:
       description: Incident states with a defined set of values.
+      type: string
       enum:
         - ACTIVE
         - MIGRATED
         - PENDING
         - RESOLVED
+        - UNKNOWN
     IncidentSearchQuerySortRequest:
       type: object
       properties:
@@ -386,6 +387,8 @@ components:
       required:
         - field
     IncidentSearchQueryResult:
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -397,12 +400,27 @@ components:
             $ref: "#/components/schemas/IncidentResult"
     IncidentResult:
       type: object
+      required:
+        - incidentKey
+        - processDefinitionKey
+        - processInstanceKey
+        - elementInstanceKey
+        - creationTime
+        - state
+        - errorType
+        - errorMessage
+        - elementId
+        - processDefinitionId
+        - rootProcessInstanceKey
+        - jobKey
+        - tenantId
       properties:
         processDefinitionId:
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/ProcessDefinitionId"
           description: The process definition ID associated to this incident.
         errorType:
+          description: The type of the incident error.
           allOf:
             - $ref: "#/components/schemas/IncidentErrorTypeEnum"
         errorMessage:
@@ -413,9 +431,11 @@ components:
             - $ref: "identifiers.yaml#/components/schemas/ElementId"
           description: The element ID associated to this incident.
         creationTime:
+          description: The creation time of the incident.
           type: string
           format: date-time
         state:
+          description: The incident state.
           allOf:
             - $ref: "#/components/schemas/IncidentStateEnum"
         tenantId:
@@ -435,15 +455,22 @@ components:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The process instance key associated to this incident.
         rootProcessInstanceKey:
-          $ref: "keys.yaml#/components/schemas/RootProcessInstanceKey"
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         elementInstanceKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
           description: The element instance key associated to this incident.
         jobKey:
+          description: The job key, if exists, associated with this incident.
+          nullable: true
           allOf:
             - $ref: "keys.yaml#/components/schemas/JobKey"
-          description: The job key, if exists, associated with this incident.
     IncidentResolutionRequest:
       type: object
       properties:
@@ -463,6 +490,8 @@ components:
           items:
             $ref: "#/components/schemas/IncidentProcessInstanceStatisticsByErrorQuerySortRequest"
     IncidentProcessInstanceStatisticsByErrorQueryResult:
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -475,6 +504,10 @@ components:
             $ref: "#/components/schemas/IncidentProcessInstanceStatisticsByErrorResult"
     IncidentProcessInstanceStatisticsByErrorResult:
       type: object
+      required:
+        - activeInstancesWithErrorCount
+        - errorHashCode
+        - errorMessage
       properties:
         errorHashCode:
           type: integer
@@ -520,6 +553,8 @@ components:
       required:
         - filter
     IncidentProcessInstanceStatisticsByDefinitionQueryResult:
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -533,6 +568,13 @@ components:
             $ref: "#/components/schemas/IncidentProcessInstanceStatisticsByDefinitionResult"
     IncidentProcessInstanceStatisticsByDefinitionResult:
       type: object
+      required:
+        - activeInstancesWithErrorCount
+        - processDefinitionId
+        - processDefinitionKey
+        - processDefinitionName
+        - processDefinitionVersion
+        - tenantId
       properties:
         processDefinitionId:
           $ref: "identifiers.yaml#/components/schemas/ProcessDefinitionId"

@@ -22,7 +22,7 @@ camunda.client:
 camunda.migrator:
   page-size: 500 # Number of records to process in each page
   job-type: migrator # Job type for actual job activation (used for validation and activation unless validation-job-type is defined)
-  validation-job-type: '=if legacyId != null then "migrator" else "noop"' # Job type for validation (optional - falls back to job-type if not defined)
+  # validation-job-type: '=if legacyId != null then "migrator" else "noop"' # Optional: job type for validation (falls back to job-type if not defined)
   auto-ddl: true # Automatically create/update database schema
   table-prefix: MY_PREFIX_ # Optional table prefix for migrator schema
   interceptors:

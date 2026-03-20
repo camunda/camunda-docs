@@ -4,7 +4,11 @@ title: Users
 description: "Learn how to manage user access to an orchestration cluster."
 ---
 
-Users are individuals who are granted with access to an orchestration cluster and it's components like Operate, Tasklist and REST API. User management differs depending on whether you are using Camunda 8 SaaS or a Self-Managed installation.
+Users are individuals who are granted with access to an orchestration cluster and its components like Operate, Tasklist and REST API. User management differs depending on whether you are using Camunda 8 SaaS or a Self-Managed installation.
+
+:::info Username case sensitivity
+Usernames in the Orchestration Cluster are case-sensitive. When you assign authorizations, groups, roles, or tenants to a user, always use the exact username value (including case) from Identity or your identity provider. For example, `abc@example.com` and `Abc@example.com` are treated as different users, and assignments created for `Abc@example.com` will not apply to `abc@example.com`.
+:::
 
 ## SaaS
 
@@ -24,7 +28,7 @@ The following sections describe how to manage users in a Self-Managed environmen
 To create a user:
 
 1. Log in to Identity in your cluster, and click on the **Users** tab.
-2. Click on the **Create user** button, and provide the following the user details:
+2. Click on the **Create user** button, and provide the following user details:
    - **Username**: The username for the user.
    - **Name**: The name of the user.
    - **Email**: The email address of the user.

@@ -133,7 +133,7 @@ The following databases require you to provide a compatible JDBC driver at runti
 :::info
 Camunda validates driver compatibility in CI by testing against the oldest and newest supported database versions. A single driver version is expected to work across the supported database versions listed on this page.
 
-For deployment instructions, see [loading JDBC drivers into pods](/self-managed/deployment/helm/configure/database/rdbms.md#loading-jdbc-drivers-into-pods).
+For deployment instructions, see [loading JDBC drivers into pods](/self-managed/deployment/helm/configure/database/rdbms.md#bundled-vs-custom-jdbc-drivers).
 :::
 
 ## JDBC driver policy
@@ -192,3 +192,15 @@ Operate has partial support for RDBMS as secondary storage in Camunda 8.9-alpha3
 - Variable panel in process instance details
 - Process instance modification
 - Deleting process definitions, process instances, or decision definitions
+
+## Installation and deployment guides
+
+For hands-on instructions to deploy Camunda with RDBMS, start with:
+
+- [End-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md) - Unified guide for provisioning, topology decisions, driver management, and backup strategies.
+
+Then choose your deployment pattern:
+
+- [Production architecture with RDBMS](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) - Reference topology and design considerations.
+- [Manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md) - Entry point for manual installation, configuration, and operations.
+- [Helm installation with RDBMS](/self-managed/deployment/helm/install/helm-with-rdbms.md) - Kubernetes/Helm-based deployment.

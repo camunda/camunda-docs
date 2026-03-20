@@ -93,7 +93,7 @@ For additional options on how to create and reference Kubernetes secrets (for ex
 
 ### Prepare global configuration
 
-Start with the following global configuration, which provides defaults for all components:
+Start with the following global configuration, which provides shared defaults across the deployment:
 
 ```yaml
 global:
@@ -170,7 +170,7 @@ For additional Keycloak-specific variables you can define under `identity.env`, 
 
 ### Configure components using OIDC
 
-To configure individual components in your Camunda cluster, follow the steps in the [Configure components using OIDC section of the internal Keycloak setup guide](/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak.md#configure-components-using-oidc).
+To configure Orchestration Cluster and management components with OIDC, follow the steps in the [Configure components using OIDC section of the internal Keycloak setup guide](/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak.md#configure-components-using-oidc).
 
 ### Full configuration example
 

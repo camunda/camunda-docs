@@ -31,12 +31,16 @@ components:
     CamundaUserResult:
       type: object
       required:
+        - authorizedComponents
         - tenants
         - groups
         - roles
         - salesPlanType
         - c8Links
         - canLogout
+        - displayName
+        - email
+        - username
       properties:
         username:
           description: The username of the user.
@@ -81,6 +85,7 @@ components:
             type: string
         salesPlanType:
           description: The plan of the user.
+          nullable: true
           type: string
           example: ""
         c8Links:

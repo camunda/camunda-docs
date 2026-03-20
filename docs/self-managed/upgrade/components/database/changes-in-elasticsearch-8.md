@@ -5,13 +5,15 @@ title: Elasticsearch 7 to 8 compatibility changes for Camunda
 description: Changes and compatibility considerations when upgrading from Elasticsearch 7 to Elasticsearch 8 with Camunda.
 ---
 
-This page describes changes and compatibility considerations when upgrading from Elasticsearch 7 to Elasticsearch 8 in a Camunda 8 environment.
+Learn about changes and compatibility considerations when upgrading from Elasticsearch 7 to Elasticsearch 8 in a Camunda 8 environment.
+
+## About
 
 Before upgrading Elasticsearch, review the Elasticsearch breaking changes and confirm compatibility with Camunda-supported versions.
 
 When upgrading Elasticsearch, follow the official [Elasticsearch breaking changes guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking-changes.html).
 
-Also review the Camunda 8 [supported environments](reference/supported-environments.md) to confirm the supported Elasticsearch versions.
+Also review the Camunda 8 [supported environments](/reference/supported-environments.md) to confirm the supported Elasticsearch versions.
 
 ## Elasticsearch Curator
 

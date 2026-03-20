@@ -136,19 +136,19 @@ When the response is 200 OK, the response body consists of a JSON object describ
   "backupId": 100,
   "details": [
     {
-      "brokerVersion": "8.2.0-SNAPSHOT",
+      "brokerVersion": "8.8.0",
       "checkpointPosition": 5,
-      "createdAt": "2022-12-08T13:00:55.344276672Z",
-      "lastUpdatedAt": "2022-12-08T13:00:55.805351556Z",
+      "createdAt": "2024-11-01T10:00:00.000000000Z",
+      "lastUpdatedAt": "2024-11-01T10:00:01.000000000Z",
       "partitionId": 1,
       "snapshotId": "2-1-3-2",
       "state": "COMPLETED"
     },
     {
-      "brokerVersion": "8.2.0-SNAPSHOT",
+      "brokerVersion": "8.8.0",
       "checkpointPosition": 7,
-      "createdAt": "2022-12-08T13:00:55.370965069Z",
-      "lastUpdatedAt": "2022-12-08T13:00:55.84756566Z",
+      "createdAt": "2024-11-01T10:00:00.100000000Z",
+      "lastUpdatedAt": "2024-11-01T10:00:01.100000000Z",
       "partitionId": 2,
       "snapshotId": "3-1-5-3",
       "state": "COMPLETED"
@@ -220,14 +220,14 @@ See [get backup info API response](#response-1) for the description of each fiel
     "backupId": 100,
     "details": [
       {
-        "brokerVersion": "8.2.0-SNAPSHOT",
-        "createdAt": "2022-12-08T13:00:55.344276672Z",
+        "brokerVersion": "8.8.0",
+        "createdAt": "2024-11-01T10:00:00.000000000Z",
         "partitionId": 1,
         "state": "COMPLETED"
       },
       {
-        "brokerVersion": "8.2.0-SNAPSHOT",
-        "createdAt": "2022-12-08T13:00:55.370965069Z",
+        "brokerVersion": "8.8.0",
+        "createdAt": "2024-11-01T10:00:00.100000000Z",
         "partitionId": 2,
         "state": "COMPLETED"
       }
@@ -238,14 +238,14 @@ See [get backup info API response](#response-1) for the description of each fiel
     "backupId": 200,
     "details": [
       {
-        "brokerVersion": "8.2.0-SNAPSHOT",
-        "createdAt": "2022-12-08T13:01:15.27750375Z",
+        "brokerVersion": "8.8.0",
+        "createdAt": "2024-11-01T10:01:00.000000000Z",
         "partitionId": 1,
         "state": "COMPLETED"
       },
       {
-        "brokerVersion": "8.2.0-SNAPSHOT",
-        "createdAt": "2022-12-08T13:01:15.279995106Z",
+        "brokerVersion": "8.8.0",
+        "createdAt": "2024-11-01T10:01:00.100000000Z",
         "partitionId": 2,
         "state": "COMPLETED"
       }
