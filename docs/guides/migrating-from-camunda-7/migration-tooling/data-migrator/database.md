@@ -5,6 +5,9 @@ sidebar_label: Database
 description: "Database configuration for the Data Migrator."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Database configuration is required for both Camunda 7 and Camunda 8 (RDBMS history) data sources. The Data Migrator uses JDBC to connect to these databases.
 
 ## Setup
@@ -33,7 +36,7 @@ Read more about [history migration atomicity](../data-migrator/history.md#atomic
 The migrator supports the following SQL databases:
 
 | Database                 | Version        | JDBC Driver                                    | Notes                      |
-|--------------------------|----------------|------------------------------------------------|----------------------------|
+| ------------------------ | -------------- | ---------------------------------------------- | -------------------------- |
 | **H2**                   | 2.3.232        | `org.h2.Driver`                                | Default, good for testing  |
 | **PostgreSQL**           | 15, 16, 17, 18 | `org.postgresql.Driver`                        | Recommended for production |
 | **Oracle**               | 19c, 23ai      | `oracle.jdbc.OracleDriver`                     | Recommended for production |
@@ -54,6 +57,13 @@ The migrator uses the `{prefix}MIGRATION_MAPPING` table to keep track of instanc
 
 To drop this table after the migration is complete, use `--drop-schema` when starting the migrator. This will drop the migration mapping schema on shutdown if the migration was successful (no entities were skipped):
 
+<Tabs groupId="os" defaultValue="maclinux" values={[
+{ label: 'Mac OS + Linux', value: 'maclinux' },
+{ label: 'Windows', value: 'windows' }
+]}>
+
+<TabItem value="maclinux">
+
 ```bash
 # Migrate and drop the migration mapping schema on shutdown if migration was successful
 ./start.sh --runtime --drop-schema
@@ -65,6 +75,26 @@ To drop the table regardless of the migration status, use `--force` in combinati
 # Migrate and force drop the migration mapping schema on shutdown
 ./start.sh --runtime --drop-schema --force
 ```
+
+</TabItem>
+
+<TabItem value="windows">
+
+```bash
+# Migrate and drop the migration mapping schema on shutdown if migration was successful
+start.bat --runtime --drop-schema
+```
+
+To drop the table regardless of the migration status, use `--force` in combination with `--drop-schema`. This will perform the drop in all cases:
+
+```bash
+# Migrate and force drop the migration mapping schema on shutdown
+start.bat --runtime --drop-schema --force
+```
+
+</TabItem>
+
+</Tabs>
 
 :::warning
 Using `--force` can lead to data loss. Use with caution.
