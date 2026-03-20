@@ -220,7 +220,7 @@ By default, the migrator queries the Zeebe topology via the Camunda REST API at 
 
 ### Offline mode
 
-To migrate without Camunda 8 connectivity, configure the partition count manually:
+To migrate without Camunda 8 REST API connectivity (no topology query), configure the partition count manually:
 
 ```yaml
 camunda.migrator:
@@ -232,7 +232,7 @@ When configured:
 
 - Topology is not queried from REST API
 - Partition IDs generated as sequence: 1, 2, 3, ...
-- No network connectivity required
+- No Camunda 8 REST API/network connectivity is required at migration start (database connectivity is still required)
 
 The configured value must exactly match your C8 Zeebe cluster's partition count.
 
