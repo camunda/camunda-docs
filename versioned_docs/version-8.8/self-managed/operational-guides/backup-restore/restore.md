@@ -771,7 +771,22 @@ Now that you have actively restored Elasticsearch/OpenSearch and the Zeebe clust
 
 For example:
 
-- For Kubernetes, enable all components again in the Helm chart and remove the environment variables that overwrite the Zeebe startup behavior.
+- For Kubernetes, apply Helm values for normal startup and explicitly set `ZEEBE_RESTORE=false`. Also, keep your backup-store environment variables configured as outlined in the prerequisites.
+
+```yaml
+orchestration:
+  enabled: true
+  env:
+    - name: ZEEBE_RESTORE
+      value: "false"
+    # all the envs related to the backup store as outlined in the prerequisites
+    - name: CAMUNDA_DATA_BACKUP_STORE
+      value: "S3" # just as an example
+    - name: CAMUNDA_DATA_BACKUP_REPOSITORYNAME
+      value: camunda # Change to name of the repository in Elasticsearch/OpenSearch
+```
+
+Ensure restore-only settings are not present in this final configuration (for example, `SPRING_PROFILES_ACTIVE=restore`, `ZEEBE_RESTORE_FROM_BACKUP_ID`, or a temporary restore command override).
 
 - For a manual setup, execute the broker and all other components in their normal way.
 

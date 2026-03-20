@@ -638,6 +638,7 @@ Affected keys by component:
 
 | Component             | Keys removed in 8.9                                                                                                             |
 | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------ |
+| Global image tag      | `global.image.tag`                                                                                                              |
 | License               | `global.license.key`, `global.license.existingSecret`, `global.license.existingSecretKey`                                       |
 | Elasticsearch auth    | `global.elasticsearch.auth.password`, `global.elasticsearch.auth.existingSecret`, `global.elasticsearch.auth.existingSecretKey` |
 | OpenSearch auth       | `global.opensearch.auth.password`, `global.opensearch.auth.existingSecret`, `global.opensearch.auth.existingSecretKey`          |
