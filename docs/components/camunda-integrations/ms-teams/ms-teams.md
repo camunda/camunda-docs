@@ -12,7 +12,7 @@ import { msTeamsCards } from '../../../self-managed/react-components/\_ms-teams-
 
 Bring Camunda's business process management capabilities directly into Microsoft Teams.
 
-:::note
+:::important
 The Microsoft Teams integration is released as an [early access](/components/early-access/overview.md) alpha feature to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
 :::
 
@@ -22,10 +22,10 @@ With **Camunda for Microsoft Teams**, you can manage processes, complete tasks, 
 
 The app offers two ways to interact with Camunda:
 
-| Interaction mode                  | Description                                                                      | Capabilities                                                             |
-| :-------------------------------- | :------------------------------------------------------------------------------- | :----------------------------------------------------------------------- |
+| Interaction mode                 | Description                                                                      | Capabilities                                                             |
+| :------------------------------- | :------------------------------------------------------------------------------- | :----------------------------------------------------------------------- |
 | [Chatbot](./ms-teams-chatbot.md) | Conversational assistant available in personal chats, group chats, and channels. | Respond to text commands and interactive card buttons for quick actions. |
-| [Tabs](./ms-teams-tabs.md)        | Visual pages embedded inside Microsoft Teams.                                    | Browse tasks, start processes, view incidents in a rich interface.       |
+| [Tabs](./ms-teams-tabs.md)       | Visual pages embedded inside Microsoft Teams.                                    | Browse tasks, start processes, view incidents in a rich interface.       |
 
 You sign in using your organization's Microsoft account, and then link it to your Camunda account during a one-time onboarding step.
 
