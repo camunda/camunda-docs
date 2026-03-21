@@ -88,11 +88,11 @@
   },
   "overrides": {
     "react-live": ">=3.1.1 <4.2.0",
-    "postman-code-generators": "2.1.0"
+    "postman-code-generators": "2.1.1"
   },
   "resolutions": {
     "react-live": ">=3.1.1 <4.2.0",
-    "postman-code-generators": "2.1.0"
+    "postman-code-generators": "2.1.1"
   },
   "engines": {
     "node": ">=18.0"
