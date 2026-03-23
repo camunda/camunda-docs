@@ -2003,54 +2003,24 @@ module.exports = {
               Configuration: [
                 "self-managed/components/console/configuration/configuration",
                 "self-managed/components/console/configuration/ssl",
+                "self-managed/components/modeler/web-modeler/configuration/database",
+                "self-managed/components/modeler/web-modeler/configuration/identity",
+                "self-managed/components/modeler/web-modeler/configuration/logging",
+                "self-managed/components/modeler/web-modeler/configuration/ssl",
+                "self-managed/components/modeler/web-modeler/configuration/copilot",
               ],
             },
             "self-managed/components/console/usage-metrics",
             "self-managed/components/console/telemetry",
-          ],
-        },
-        {
-          Modeler: [
             {
               type: "category",
-              label: "Web Modeler",
-              link: {
-                type: "doc",
-                id: "self-managed/components/modeler/web-modeler/overview",
-              },
+              label: "Troubleshooting",
               items: [
-                {
-                  type: "category",
-                  label: "Configuration",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/components/modeler/web-modeler/configuration/configuration",
-                  },
-                  items: [
-                    "self-managed/components/modeler/web-modeler/configuration/database",
-                    "self-managed/components/modeler/web-modeler/configuration/identity",
-                    "self-managed/components/modeler/web-modeler/configuration/logging",
-                    "self-managed/components/modeler/web-modeler/configuration/ssl",
-                    "self-managed/components/modeler/web-modeler/configuration/copilot",
-                  ],
-                },
-                {
-                  type: "category",
-                  label: "Troubleshooting",
-                  items: [
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
-                  ],
-                },
-              ],
-            },
-            {
-              "Desktop Modeler": [
-                "self-managed/components/modeler/desktop-modeler/connect-to-self-managed",
-                "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed",
+                "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
+                "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
+                "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
+                "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
               ],
             },
           ],
