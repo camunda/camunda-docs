@@ -31,7 +31,7 @@ You can use both methods at the same time. After a cluster restart:
 
 Configure global user task listeners through [Unified Configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners) under `camunda.cluster.global-listeners.user-task`.
 
-Each listener entry supports the properties in [Global listener definition](/components/concepts/global-user-task-listeners.md#global-listener-definition), except `source`, which is automatically set to `CONFIGURATION`. Any provided `source` value is ignored.
+Each listener entry supports the properties in [global listener definition](/components/concepts/global-user-task-listeners.md#global-listener-definition), except `source`, which is automatically set to `CONFIGURATION`. Any provided `source` value is ignored.
 
 ### How the configuration is validated
 
@@ -117,7 +117,7 @@ Read more about [authorizations](/components/concepts/access-control/authorizati
 
 The [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) provides CRUD operations to manage global user task listeners at runtime. This allows you to create, update, and delete listeners without restarting the cluster.
 
-When you create or update a listener through the API, provide the properties described in [Global listener definition](/components/concepts/global-user-task-listeners.md#global-listener-definition). The `source` property is set automatically to `API`.
+When you create or update a listener through the API, provide the properties described in [global listener definition](/components/concepts/global-user-task-listeners.md#global-listener-definition). The `source` property is set automatically to `API`.
 
 Changes take effect immediately after the API call for new lifecycle events on running and new instances, without requiring model redeployments or a cluster restart.
 
