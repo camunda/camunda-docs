@@ -136,7 +136,7 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 #### MCP Client and MCP Remote Client connectors
 
-[Camunda 8.9.0-alpha2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) introduces breaking changes to the [MCP Client](/components/early-access/alpha/mcp-client/mcp-client.md) element templates and runtime configuration.
+[Camunda 8.9.0-alpha2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) introduces breaking changes to the [MCP Client](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md) element templates and runtime configuration.
 
 **Action:** To remain compatible, you should update your MCP Client and MCP Remote Client connectors to use element template version `1`.
 
