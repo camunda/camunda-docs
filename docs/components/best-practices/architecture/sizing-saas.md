@@ -9,6 +9,9 @@ tags:
 description: "Select the right Camunda 8 SaaS cluster size based on your throughput and storage requirements."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Select the right Camunda 8 SaaS cluster size based on your use case needs. For an overview of the factors that influence sizing, see [Sizing your environment](./sizing-your-environment.md).
 
 ## Before you start
@@ -21,7 +24,13 @@ Contact your Customer Success Manager to increase the cluster size beyond 4x. Th
 
 ## Sizing tables
 
-### Without Optimize
+<Tabs groupId="optimize" defaultValue="with-optimize" values={
+[
+{ label: 'Without Optimize', value: 'without-optimize', },
+{ label: 'With Optimize', value: 'with-optimize', },
+]}>
+
+<TabItem value="without-optimize">
 
 <!-- TODO: Fill in "without Optimize" benchmark data from 8.9 benchmarks. Expected throughput is 25–50% higher than the "with Optimize" numbers below, since Optimize export and import load is removed. -->
 
@@ -33,7 +42,9 @@ Contact your Customer Success Manager to increase the cluster size beyond 4x. Th
 | Max Total Number of PI stored (in ES) **\*\*\***     | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> |
 | Approximate resources provisioned **\*\*\*\***       | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> |
 
-### With Optimize
+</TabItem>
+
+<TabItem value="with-optimize">
 
 | Cluster size                                         |                              1x |                              2x |                              3x |                              4x |
 | :--------------------------------------------------- | ------------------------------: | ------------------------------: | ------------------------------: | ------------------------------: |
@@ -42,6 +53,10 @@ Contact your Customer Success Manager to increase the cluster size beyond 4x. Th
 | Max Throughput **Process Instances/second** **\*\*** |                               5 |                              10 |                              15 |                              20 |
 | Max Total Number of PI stored (in ES) **\*\*\***     |                           200 k |                           400 k |                           600 k |                           800 k |
 | Approximate resources provisioned **\*\*\*\***       | 11 vCPU, 22 GB mem, 192 GB disk | 22 vCPU, 44 GB mem, 384 GB disk | 33 vCPU, 66 GB mem, 576 GB disk | 44 vCPU, 88 GB mem, 768 GB disk |
+
+</TabItem>
+
+</Tabs>
 
 <!-- TODO: Validate "with Optimize" numbers against 8.9 benchmarks. The numbers above were measured with Camunda 8.8. Also confirm whether the "max throughput" boundary condition is defined as backpressure < 10% and p99 process duration < 1s, or another SLO. -->
 
