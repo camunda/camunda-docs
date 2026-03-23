@@ -27,7 +27,7 @@ During migration, the History Data Migrator sets a `legacyId` variable in the pr
 
 The following requirements and limitations apply:
 
-- Camunda 7 has been stopped, and the Camunda 8 database is reachable. Zeebe may be stopped during history migration.
+- Camunda 7 must be stopped, and the Camunda 8 database must be reachable. Zeebe can be stopped during history migration.
 - The History Data Migrator must be able to access the Camunda 7 database.
 - The History Data Migrator can migrate data to Camunda 8 only when a relational database (RDBMS) is used.
 - The History Data Migrator must be able to access the Camunda 8 database. As a result, you can run this tool only in a self-managed environment.
@@ -118,16 +118,16 @@ Auto-canceled entities are assigned the migration timestamp as their end date.
 
 By default, auto-canceled instances receive a cleanup date calculated as:
 
-```
+```text
 cleanup_date = end_date + 6 months
 ```
 
-This ensures auto-canceled instances are eligible for history cleanup after six months, preventing unbounded growth of history data.
+This keeps auto-canceled instances eligible for history cleanup after six months and helps prevent unbounded history growth.
 
 See [configuration for history auto-cancellation](../data-migrator/config-properties.md#camundamigratorhistoryauto-cancelcleanup) for more details.
 
 :::warning Negative TTL values
-If you configure a negative auto-cancel TTL value, the calculated cleanup dates will be in the past. If Camunda 8 is running during migration, history cleanup will immediately attempt to clean up these entities, potentially before their child entities are migrated. See [History Cleanup](#history-cleanup) for strategies to avoid this issue.
+If you configure a negative auto-cancel TTL value, calculated cleanup dates are in the past. If Camunda 8 is running during migration, history cleanup can immediately clean up these entities, potentially before their child entities are migrated. See [History Cleanup](#history-cleanup) for mitigation strategies.
 :::
 
 ## History Cleanup
@@ -143,7 +143,7 @@ If Camunda 8 is running during migration with cleanup dates in the past, history
 **Common scenarios:**
 
 - Past `removalTime` values from Camunda 7
-- Negative auto-cancel TTL (for example, `P-1D`)
+- Negative auto-cancel TTL (for example, `-P1D`)
 - Long migrations where dates become due during execution
 
 As a result, you will see skipped child entities with messages referencing the deleted parent. These cannot be recovered unless the parent is re-migrated.
@@ -195,13 +195,13 @@ Choose one approach to prevent cleanup interference:
 
 ## Partition distribution
 
-The History Data Migrator assigns migrated history data to Zeebe partitions. **Partition assignment is critical for history cleanup to function properly.**
+The History Data Migrator assigns migrated history data to Zeebe partitions. **Partition assignment is critical for history cleanup to work correctly.**
 
 ### How partitions are assigned
 
-- **Root process instances** or **Standalone decisions**: Randomly assigned to available partitions
+- **Root process instances** or **standalone decisions**: Randomly assigned to available partitions
 - **Child entities** (sub-processes, call activities, flow nodes, variables, user tasks, incidents, decision instances, etc.): Inherit partition from root process instance
-- **Audit logs**: Inherit from root process instance or randomly assigned if not related to a process instance.
+- **Audit logs**: Inherit the root process instance partition, or are randomly assigned when not related to a process instance
 
 This ensures all entities in a process hierarchy share the same partition, enabling the RDBMS exporter on that partition to perform cleanup.
 
@@ -216,7 +216,7 @@ If partition IDs assigned during migration don't exist or lack RDBMS exporters, 
 
 ### Partition discovery
 
-By default, the migrator queries the Zeebe topology via the Camunda REST API at migration start to discover available partitions.
+By default, the migrator queries Zeebe topology through the Camunda REST API at migration start to discover available partitions.
 
 ### Offline mode
 
@@ -232,19 +232,19 @@ When configured:
 
 - Topology is not queried from REST API
 - Partition IDs generated as sequence: 1, 2, 3, ...
-- No Camunda 8 REST API/network connectivity is required at migration start (database connectivity is still required)
+- No Camunda 8 REST API connectivity is required at migration start (database connectivity is still required)
 
 The configured value must exactly match your Camunda 8 Zeebe cluster's partition count.
 
-Mismatched configuration means:
+If the configured value does not match the cluster, then:
 
 - Data assigned to non-existent partitions cannot be cleaned up
-- Data persists indefinitely with no automatic cleanup path
+- Data may persist indefinitely with no automatic cleanup path
 
-Always verify your cluster configuration before migration.
+Always verify cluster partition configuration before migration.
 
 :::caution Don't change partitions after migration
-Changing your cluster's partition count after migration leaves data on removed partitions unable to be cleaned up. Complete all history migration before scaling partitions.
+Changing cluster partition count after migration can leave data on removed partitions that cannot be cleaned up. Complete history migration before scaling partitions.
 :::
 
 ## Forms
