@@ -13,6 +13,21 @@ For example, you can:
 - Add support for additional AI models
 - Inject additional logic into the agent execution flow
 
+## HTTP proxy configuration
+
+In Self-Managed environments, the AI Agent connector supports routing HTTP requests to LLM providers through an HTTP proxy. This applies to the AI Agent, [MCP Client](./agentic-ai-mcp-client.md), and [A2A Client](/components/early-access/alpha/a2a-client/a2a-client.md) connectors.
+
+These connectors support [plain proxy variables](/self-managed/components/connectors/http-proxy-configuration.md#plain-proxy-variables) in addition to the standard connector proxy variables. Refer to the [HTTP proxy configuration](/self-managed/components/connectors/http-proxy-configuration.md) page for the full list of environment variables and configuration options.
+
+The following LLM providers do not support proxy configuration:
+
+- Google Vertex AI
+
+To disable proxy support entirely (for example, if only an HTTPS-based proxy is available):
+
+- **Spring Boot property:** `camunda.connector.agenticai.http.proxy-support.enabled=false`
+- **Environment variable:** `CAMUNDA_CONNECTOR_AGENTICAI_HTTP_PROXYSUPPORT_ENABLED=false`
+
 ## Extending the AI Agent connector
 
 ### Prerequisites

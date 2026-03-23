@@ -360,3 +360,21 @@ can be of any Apache Tika-supported formats.
 at all. Seek guidance from your local data scientist to determine if you require splitting.
 
 Learn more about splitting in the [LangChain4j documentation](https://docs.langchain4j.dev/tutorials/rag#document-splitter).
+
+## HTTP proxy configuration
+
+In Self-Managed environments, the vector database connector supports routing HTTP requests through an HTTP proxy. This applies to both embedding model API calls and vector store connections.
+
+The vector database connector supports [plain proxy variables](/self-managed/components/connectors/http-proxy-configuration.md#plain-proxy-variables) in addition to the standard connector proxy variables. Refer to the [HTTP proxy configuration](/self-managed/components/connectors/http-proxy-configuration.md) page for the full list of environment variables and configuration options.
+
+The following providers do not support proxy configuration:
+
+- Google VertexAI (embedding model)
+- Azure AI Search (vector store)
+- Azure Cosmos DB NoSQL (vector store)
+
+To disable proxy support entirely (for example, if only an HTTPS-based proxy is available), set the following environment variable:
+
+```bash
+CAMUNDA_CONNECTOR_VECTORDB_HTTP_PROXYSUPPORT_ENABLED=false
+```

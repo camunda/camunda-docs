@@ -445,6 +445,10 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 </TabItem>
 </Tabs>
 
+## HTTP proxy configuration
+
+You can configure connectors to route HTTP requests through a proxy server. See [HTTP proxy configuration](./http-proxy-configuration.md) for details.
+
 ## Truststore
 
 If your connector runtime needs to connect to external systems over HTTPS, you might need to provide a custom truststore.

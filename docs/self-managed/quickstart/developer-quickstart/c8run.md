@@ -631,7 +631,7 @@ Although Camunda 8 Run supports TLS, this is intended only for testing.
 :::note
 If you use a proxy together with TLS, ensure internal Camunda services are excluded from proxy routing. JVM-level proxy settings apply to all internal HTTP clients and may block communication between components such as Zeebe, Operate, Identity, or the connector runtime. Add these services to your `nonProxyHosts` configuration.
 
-For details, see [configure a proxy server in Self-Managed](../../../../components/connectors/protocol/rest/#configure-a-proxy-server-in-self-managed) in the REST connector documentation.
+For details, see [HTTP proxy configuration](/self-managed/components/connectors/http-proxy-configuration.md).
 :::
 
 ### Access metrics
