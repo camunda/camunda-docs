@@ -53,11 +53,13 @@ Covers all Orchestration Cluster components and Optimize. Back up and restore wi
 
 This is the **first phase of new backup capabilities** enabled by using an RDBMS as secondary storage. It covers Orchestration Cluster components only (Zeebe, Operate, and Tasklist). Optimize is not included.
 
-Using an RDBMS as secondary storage unlocks two new capabilities not available in the Elasticsearch / OpenSearch path:
+Using an RDBMS as secondary storage unlocks three new capabilities not available in the Elasticsearch / OpenSearch path:
 
 - **Decoupled backups**: Zeebe (primary storage) and the RDBMS (secondary storage) can be backed up independently, on their own schedules. During restore, Camunda automatically aligns the two backups — there is no need to coordinate a shared backup ID or take snapshots at the same time.
 
-- **Continuous backups**: Zeebe continuously takes snapshots of its log stream. This creates a range of available restore points that you can restore to by timestamp, rather than being limited to a specific backup ID.
+- **Scheduled backups**: Because backups are decoupled now, Zeebe can take backups automatically on a fixed schedule, no need to call the backup API externally.
+
+- **Point in time restore**: Zeebe continuously takes snapshots of its log stream. This creates a range of available restore points that you can restore to by timestamp, rather than being limited to a specific backup ID.
 
 <ZeebeGrid zeebe={rdbmsCards} />
 
