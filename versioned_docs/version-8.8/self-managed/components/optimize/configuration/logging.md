@@ -24,7 +24,7 @@ reference as follows:
 <Logger name="io.camunda.optimize" level="info" />
 ```
 
-- Optimize update:
+- Optimize upgrade:
 
 ```xml
 <Logger name="io.camunda.optimize.upgrade" level="info" />
@@ -39,7 +39,7 @@ reference as follows:
 If you are running Optimize with Docker, use the following environment variables to configure its logging levels:
 
 - `OPTIMIZE_LOG_LEVEL`: Sets the logging level for the Optimize log.
-- `UPGRADE_LOG_LEVEL`: Sets the logging level for the Optimize update log.
+- `UPGRADE_LOG_LEVEL`: Sets the logging level for the Optimize upgrade log.
 - `ES_LOG_LEVEL`: Sets the logging level for Elasticsearch.
 
 Whether using the configuration file or Docker environment variables, to define the granularity of the information shown in the log you can set one of the following log levels:

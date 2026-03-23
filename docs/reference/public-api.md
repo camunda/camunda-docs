@@ -58,6 +58,7 @@ The following APIs are **explicitly excluded** from the public API:
 - [Web Modeler API](/apis-tools/web-modeler-api/index.md): Used for browser-based modeling.
 - [Administration API](/apis-tools/administration-api/administration-api-reference.md): For administrative operations and system configuration.
 - [Optimize API](/apis-tools/optimize-api/overview.md): Used for analytics, reporting, and performance insights.
+- [Orchestration Cluster MCP Server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md): Exposes Camunda capabilities through the Model Context Protocol. Tool schemas and behavior may evolve across versions.
 
 ### Policy for non-public APIs
 

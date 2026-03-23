@@ -7,33 +7,29 @@ description: "Write your process tests in JSON format."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-You can write your process tests in a JSON format instead of coding the test logic in Java. The JSON file describes the
-test cases with instructions that align with CPT's assertions and utilities.
+You can write your process tests in JSON format instead of coding the test logic in Java. The JSON file describes test cases with instructions that align with CPT's assertions and utilities.
 
 :::note
-CPT's JSON test cases are not compatible with
-the [Test scenario files](/components/modeler/web-modeler/validation/test-scenario-files.md) from the Web Modeler/Play.
+CPT's JSON test cases are not compatible with the [test scenario files](/components/modeler/web-modeler/validation/test-scenario-files.md) from Web Modeler/Play.
 :::
 
 ## Write a JSON test case
 
-The JSON format is defined in the [JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json).
-It defines the following structure:
+The JSON format is defined in the [JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json). It defines the following structure:
 
 - `testCases`: An array of test cases to be executed.
   - `name`: The name of the test case.
   - `description`: A description of the test case.
   - `instructions`: An array of [instructions](#reference-instructions) to execute the test case.
-    - Each instruction has a `type` that defines the action to be performed (e.g., `CREATE_PROCESS_INSTANCE`).
-    - Additional properties depend on the instruction type (e.g., process definition ID, variables, etc.).
+    - Each instruction has a `type` that defines the action to be performed (for example, `CREATE_PROCESS_INSTANCE`).
+    - Additional properties depend on the instruction type (for example, process definition ID and variables).
 
 How to start:
 
-1. Create a new JSON file in your test resources folder (e.g., `src/test/resources/test-cases/invoice-approval.json`)
+1. Create a new JSON file in your test resources folder (for example, `src/test/resources/test-cases/invoice-approval.json`)
 2. Refer to the JSON schema `https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json` in the `$schema` property.
    Use the same schema version as the CPT version you are using to ensure compatibility.
-3. Add your test cases and use the [available instructions](#reference-instructions) to define the behavior of your
-   process test.
+3. Add your test cases and use the [available instructions](#reference-instructions) to define the behavior of your process test.
 
 The basic structure of the JSON file looks like this:
 
@@ -43,7 +39,7 @@ The basic structure of the JSON file looks like this:
   "testCases": [
     {
       "name": "My first test case",
-      "description": "A human readable description of the test case.",
+      "description": "A human-readable description of the test case.",
       "instructions": [
       ]
     }
@@ -54,22 +50,16 @@ The basic structure of the JSON file looks like this:
 You can find a full example of a JSON test case file in the [Examples](#examples) section below.
 
 :::tip
-Use AI to support the generation of your JSON files. Refer to the documentation, provide a description of your
-test case, and your BPMN processes to get a first draft of your test cases.
+Use AI to support the generation of your JSON files. Refer to the documentation, provide a description of your test case, and your BPMN processes to get a first draft of your test cases.
 
-Or, use an IDE with JSON schema support to get auto-completion and validation while writing your test cases, for
-example [IntelliJ IDEA](https://www.jetbrains.com/help/idea/json.html#ws_json_schema_add_custom).
+Or, use an IDE with JSON schema support to get auto-completion and validation while writing your test cases, for example [IntelliJ IDEA](https://www.jetbrains.com/help/idea/json.html#ws_json_schema_add_custom).
 :::
 
 ## Run a JSON test case
 
-You can run your JSON test case files as a parameterized JUnit test. Add the `@TestCaseSource` annotation to your
-test method to read the files and provide their test cases as arguments. Then, execute the test cases using the
-`TestCaseRunner` provided by CPT.
+You can run your JSON test case files as parameterized JUnit tests. Add the `@TestCaseSource` annotation to your test method to read the files and provide test cases as arguments. Then, execute the test cases using the `TestCaseRunner` provided by CPT.
 
-The runner executes the test case instructions by leveraging CPT's assertions and utilities. If an assertion instruction
-fails, the runner throws an assertion error, causing the test to fail. If all instructions pass, the test case is
-considered successful.
+The runner executes the test case instructions by leveraging CPT's assertions and utilities. If an assertion instruction fails, the runner throws an assertion error, causing the test to fail. If all instructions pass, the test case is considered successful.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -93,7 +83,7 @@ public class MyProcessTest {
         // given: the process definitions are deployed
 
         // when/then: run and verify the test case
-      testCaseRunner.run(testCase);
+        testCaseRunner.run(testCase);
     }
 }
 ```
@@ -113,7 +103,7 @@ public class MyProcessTest {
         // given: the process definitions are deployed
 
         // when/then: run and verify the test case
-      testCaseRunner.run(testCase);
+        testCaseRunner.run(testCase);
     }
 }
 ```
@@ -123,19 +113,15 @@ public class MyProcessTest {
 
 You can set the following fields in the `@TestCaseSource` annotation to configure which files to load:
 
-- `directory`: The classpath directory to scan for test cases JSON files. Defaults to `/test-cases`.
-- `fileNames`: An array of specific file names to load from the directory. If not set, all files in the directory are
-  loaded.
-- `fileExtension`: The file extension to filter files in the directory. Defaults to `json`. The filter is ignored if
-  `fileNames` is set.
+- `directory`: The classpath directory to scan for JSON test case files. Defaults to `/test-cases`.
+- `fileNames`: An array of specific file names to load from the directory. If not set, all files in the directory are loaded.
+- `fileExtension`: The file extension to filter files in the directory. Defaults to `json`. The filter is ignored if `fileNames` is set.
 
 ### Connect your process application
 
-The `TestCaseRunner` integrates seamlessly with CPT's [test lifecycle](getting-started.md#test-lifecycle) and connects
-to your process application and starts the job workers, if enabled.
+The `TestCaseRunner` integrates seamlessly with CPT's [test lifecycle](getting-started.md#test-lifecycle). It connects to your process application and starts job workers, if enabled.
 
-You can add additional steps before and after running the test case, for example to deploy additional resources, or to
-mock external services of your process application.
+You can add additional steps before and after running the test case, for example, to deploy additional resources or to mock external services of your process application.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -210,8 +196,7 @@ public class MyProcessTest {
 
 ## Examples
 
-You can find some example process tests using the JSON test cases
-on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example), like the following one:
+You can find some example process tests using JSON test cases on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example), like the following one:
 
 ```json reference referenceLinkText="Source" title="Invoice Approval JSON test case"
 https://github.com/camunda/camunda/blob/stable/8.9/testing/camunda-process-test-example/src/test/resources/test-cases/invoice-approval.json
@@ -223,8 +208,7 @@ Instructions define the actions and assertions to be performed in a test case. E
 
 ### ASSERT_DECISION
 
-An instruction to assert the evaluation of a decision. See
-the [assertions documentation](assertions.md#decision-assertions) for more details.
+An instruction to assert the evaluation of a decision. See the [assertions documentation](assertions.md#decision-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -295,8 +279,7 @@ Example:
 
 ### ASSERT_ELEMENT_INSTANCE
 
-An instruction to assert the state of an element instance. See
-the [assertions documentation](assertions.md#element-instance-assertions) for more details.
+An instruction to assert the state of an element instance. See the [assertions documentation](assertions.md#element-instance-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -360,8 +343,7 @@ Example:
 
 ### ASSERT_ELEMENT_INSTANCES
 
-An instruction to assert the state of multiple element instances. See
-the [assertions documentation](assertions.md#element-instance-assertions) for more details.
+An instruction to assert the state of multiple element instances. See the [assertions documentation](assertions.md#element-instance-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -420,8 +402,7 @@ Example:
 
 ### ASSERT_PROCESS_INSTANCE
 
-An instruction to assert the state of a process instance. See
-the [assertions documentation](assertions.md#process-instance-assertions) for more details.
+An instruction to assert the state of a process instance. See the [assertions documentation](assertions.md#process-instance-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -475,8 +456,7 @@ Example:
 
 ### ASSERT_PROCESS_INSTANCE_MESSAGE_SUBSCRIPTION
 
-An instruction to assert the state of a process instance message subscription. See
-the [assertions documentation](assertions.md#process-instance-message-assertions) for more details.
+An instruction to assert the state of a process instance message subscription. See the [assertions documentation](assertions.md#process-instance-message-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -533,8 +513,7 @@ Example:
 
 ### ASSERT_USER_TASK
 
-An instruction to assert the state of a user task. See
-the [assertions documentation](assertions.md#user-task-assertions) for more details.
+An instruction to assert the state of a user task. See the [assertions documentation](assertions.md#user-task-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -632,8 +611,7 @@ Example:
 
 ### ASSERT_VARIABLES
 
-An instruction to assert the variables of a process instance. See
-the [assertions documentation](assertions.md#variable-assertions) for more details.
+An instruction to assert the variables of a process instance. See the [assertions documentation](assertions.md#variable-assertions) for more details.
 
 <table>
   <tbody><tr>
@@ -801,8 +779,7 @@ Example:
 
 ### COMPLETE_JOB_AD_HOC_SUB_PROCESS
 
-An instruction to complete a job of an ad-hoc sub-process. See
-the [utilities documentation](utilities.md#ad-hoc-sub-process-jobs) for more details.
+An instruction to complete a job of an ad-hoc sub-process. See the [utilities documentation](utilities.md#ad-hoc-sub-process-jobs) for more details.
 
 <table>
   <tbody><tr>
@@ -905,8 +882,7 @@ Example:
 
 ### COMPLETE_JOB_USER_TASK_LISTENER
 
-An instruction to complete a job of a user task listener. See
-the [utilities documentation](utilities.md#user-task-listener-jobs) for more details.
+An instruction to complete a job of a user task listener. See the [utilities documentation](utilities.md#user-task-listener-jobs) for more details.
 
 <table>
   <tbody><tr>
@@ -1019,8 +995,7 @@ Example:
 
 ### COMPLETE_USER_TASK
 
-An instruction to complete a user task.See
-the [utilities documentation](utilities.md#complete-user-tasks) for more details.
+An instruction to complete a user task. See the [utilities documentation](utilities.md#complete-user-tasks) for more details.
 
 <table>
   <tbody><tr>
@@ -1351,7 +1326,7 @@ An instruction to increase the time. See the [utilities documentation](utilities
   </tr>
   <tr>
     <td>duration</td>
-    <td>The duration to increase the time by, in ISO 8601 duration format (e.g., "PT1H", "P2D").</td>
+    <td>The duration to increase the time by, in ISO 8601 duration format (for example, "PT1H", "P2D").</td>
     <td>string</td>
     <td>Yes</td>
     <td></td>
@@ -1369,8 +1344,7 @@ Example:
 
 ### MOCK_CHILD_PROCESS
 
-An instruction to mock a child process. See the [utilities documentation](utilities.md#mock-child-processes) for more
-details.
+An instruction to mock a child process. See the [utilities documentation](utilities.md#mock-child-processes) for more details.
 
 <table>
   <tbody><tr>
@@ -1418,8 +1392,7 @@ Example:
 
 ### MOCK_DMN_DECISION
 
-An instruction to mock a DMN decision. See the [utilities documentation](utilities.md#mock-dmn-decisions) for more
-details.
+An instruction to mock a DMN decision. See the [utilities documentation](utilities.md#mock-dmn-decisions) for more details.
 
 <table>
   <tbody><tr>
@@ -1466,8 +1439,7 @@ Example:
 
 ### MOCK_JOB_WORKER_COMPLETE_JOB
 
-An instruction to mock a job worker who completes jobs. See the [utilities documentation](utilities.md#complete-job) for
-more details.
+An instruction to mock a job worker who completes jobs. See the [utilities documentation](utilities.md#complete-job) for more details.
 
 <table>
   <tbody><tr>
@@ -1522,8 +1494,7 @@ Example:
 
 ### MOCK_JOB_WORKER_THROW_BPMN_ERROR
 
-An instruction to mock a job worker who throws BPMN errors. See
-the [utilities documentation](utilities.md#throw-bpmn-error) for more details.
+An instruction to mock a job worker who throws BPMN errors. See the [utilities documentation](utilities.md#throw-bpmn-error) for more details.
 
 <table>
   <tbody><tr>
@@ -1653,8 +1624,7 @@ Example:
 
 ### RESOLVE_INCIDENT
 
-An instruction to resolve an incident. See the [utilities documentation](utilities.md#resolve-incidents) for more
-details.
+An instruction to resolve an incident. See the [utilities documentation](utilities.md#resolve-incidents) for more details.
 
 <table>
   <tbody><tr>
@@ -1712,7 +1682,7 @@ An instruction to set the time. See the [utilities documentation](utilities.md#s
   </tr>
   <tr>
     <td>time</td>
-    <td>The time to set, in ISO 8601 instant format (e.g., "2026-01-19T13:00:00Z").</td>
+    <td>The time to set, in ISO 8601 instant format (for example, "2026-01-19T13:00:00Z").</td>
     <td>string</td>
     <td>Yes</td>
     <td></td>
@@ -1730,8 +1700,7 @@ Example:
 
 ### THROW_BPMN_ERROR_FROM_JOB
 
-An instruction to throw a BPMN error from a job. See
-the [utilities documentation](utilities.md#throw-bpmn-errors-from-jobs) for more details.
+An instruction to throw a BPMN error from a job. See the [utilities documentation](utilities.md#throw-bpmn-errors-from-jobs) for more details.
 
 <table>
   <tbody><tr>
@@ -1793,8 +1762,7 @@ Example:
 
 ### UPDATE_VARIABLES
 
-An instruction to create or update process instance variables. See
-the [utilities documentation](utilities.md#update-variables) for more details.
+An instruction to create or update process instance variables. See the [utilities documentation](utilities.md#update-variables) for more details.
 
 <table>
   <tbody><tr>

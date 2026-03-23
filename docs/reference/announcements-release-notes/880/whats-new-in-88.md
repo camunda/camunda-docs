@@ -401,7 +401,7 @@ Changes to [APIs & tools](/apis-tools/working-with-apis-tools.md) in 8.8 are sum
 </table>
 
 :::info
-To learn more about upgrading and migrating to 8.8, see the [API & tools upgrade guide](/apis-tools/migration-manuals/index.md).
+To learn more about upgrading and migrating to 8.8, see the [API & tools upgrade guide](/versioned_docs/version-8.8/apis-tools/migration-manuals/index.md).
 :::
 
 ## Upgrade guides {#upgrade-guides}
@@ -422,7 +422,7 @@ The following guides provide detailed information on how you can upgrade to Camu
     <td>Operations and platform administrators of Self-Managed installations.</td>
 </tr>
 <tr>
-    <td>[APIs & tools upgrade guide](/apis-tools/migration-manuals/index.md)</td>
+    <td>[APIs & tools upgrade guide](/versioned_docs/version-8.8/apis-tools/migration-manuals/index.md)</td>
     <td>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and tools transitions.</td>
     <td><p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p></td>
 </tr>

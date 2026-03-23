@@ -262,7 +262,6 @@ components:
           description: The job key, if exists, associated with this incident.
     IncidentErrorTypeFilterProperty:
       description: IncidentErrorTypeEnum with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -320,7 +319,6 @@ components:
         - UNSPECIFIED
     IncidentStateFilterProperty:
       description: IncidentStateEnum with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -506,6 +504,10 @@ components:
             $ref: "#/components/schemas/IncidentProcessInstanceStatisticsByErrorResult"
     IncidentProcessInstanceStatisticsByErrorResult:
       type: object
+      required:
+        - activeInstancesWithErrorCount
+        - errorHashCode
+        - errorMessage
       properties:
         errorHashCode:
           type: integer
@@ -566,6 +568,13 @@ components:
             $ref: "#/components/schemas/IncidentProcessInstanceStatisticsByDefinitionResult"
     IncidentProcessInstanceStatisticsByDefinitionResult:
       type: object
+      required:
+        - activeInstancesWithErrorCount
+        - processDefinitionId
+        - processDefinitionKey
+        - processDefinitionName
+        - processDefinitionVersion
+        - tenantId
       properties:
         processDefinitionId:
           $ref: "identifiers.yaml#/components/schemas/ProcessDefinitionId"

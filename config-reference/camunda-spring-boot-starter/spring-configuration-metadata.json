@@ -23,7 +23,7 @@
     {
       "name": "camunda.client.cloud",
       "type": "io.camunda.client.spring.properties.CamundaClientCloudProperties",
-      "description": "Properties for connecting the Camunda client to SaaS. These are used to compose default connection details when the client is configured to `camunda.client.mode: saas`.",
+      "description": "Properties for connecting the Camunda client to SaaS. These are used to compose default connection details when the client is configured to <code>camunda.client.mode: saas<\/code>.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "sourceMethod": "getCloud()"
     },
@@ -71,7 +71,7 @@
     {
       "name": "camunda.client.zeebe.override",
       "type": "java.util.Map",
-      "description": "Properties for overriding individual job workers registered to the Camunda client. Replaced by `camunda.client.worker.override`."
+      "description": "Properties for overriding individual job workers registered to the Camunda client. Replaced by <code>camunda.client.worker.override<\/code>."
     },
     {
       "name": "common",
@@ -86,7 +86,7 @@
     {
       "name": "management.endpoint.jobworkers",
       "type": "io.camunda.client.spring.actuator.JobWorkerController",
-      "description": "Properties for configuring the `jobworkers` management endpoint.",
+      "description": "Properties for configuring the <code>jobworkers<\/code> management endpoint.",
       "sourceType": "io.camunda.client.spring.actuator.JobWorkerController"
     },
     {
@@ -131,14 +131,14 @@
     {
       "name": "zeebe.client.worker.override",
       "type": "java.util.Map",
-      "description": "Properties to override the individual job workers registered with the Camunda client. Replaced by `camunda.client.worker.override`."
+      "description": "Properties to override the individual job workers registered with the Camunda client. Replaced by <code>camunda.client.worker.override<\/code>."
     }
   ],
   "properties": [
     {
       "name": "camunda.client.auth.audience",
       "type": "java.lang.String",
-      "description": "The resource for which the access token must be valid. A default is set by `camunda.client.mode: saas` and `camunda.client.auth.method: oidc`.",
+      "description": "The resource for which the access token must be valid. A default is set by <code> camunda.client.mode: saas<\/code> and <code>camunda.client.auth.method: oidc<\/code>.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
@@ -194,7 +194,7 @@
     {
       "name": "camunda.client.auth.issuer-url",
       "type": "java.net.URI",
-      "description": "The url of the issuer for the access token. It is used to generate the well-known configuration url from which the `token-url` is retrieved. Only applied if the `camunda.client.auth.well-known-configuration-url` is not set. A default is set by `camunda.client.auth.method: oidc`.",
+      "description": "The url of the issuer for the access token. It is used to generate the well-known configuration url from which the <code>token-url<\/code> is retrieved. Only applied if the <code> camunda.client.auth.well-known-configuration-url<\/code> is not set. A default is set by <code> camunda.client.auth.method: oidc<\/code>.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
@@ -218,13 +218,13 @@
     {
       "name": "camunda.client.auth.method",
       "type": "io.camunda.client.spring.properties.CamundaClientAuthProperties$AuthMethod",
-      "description": "The authentication method to use. If not set, it is detected based on the presence of a username, password, client ID, and client secret. A default is set by `camunda.client.mode: saas`.",
+      "description": "The authentication method to use. If not set, it is detected based on the presence of a username, password, client ID, and client secret. A default is set by <code> camunda.client.mode: saas<\/code>.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.password",
       "type": "java.lang.String",
-      "description": "The password to be use for basic authentication. A default is set by `camunda.client.auth.method: basic`.",
+      "description": "The password to be use for basic authentication. A default is set by <code> camunda.client.auth.method: basic <\/code>.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
@@ -249,7 +249,7 @@
     {
       "name": "camunda.client.auth.token-url",
       "type": "java.net.URI",
-      "description": "The authorization server URL from which to request the access token. A default is set by `camunda.client.mode: saas`.",
+      "description": "The authorization server URL from which to request the access token. A default is set by <code> camunda.client.mode: saas<\/code>.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
@@ -267,13 +267,13 @@
     {
       "name": "camunda.client.auth.username",
       "type": "java.lang.String",
-      "description": "The username to use for basic authentication. A default is set by `camunda.client.auth.method: basic`.",
+      "description": "The username to use for basic authentication. A default is set by <code> camunda.client.auth.method: basic <\/code>.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.well-known-configuration-url",
       "type": "java.net.URI",
-      "description": "The url of the well-known configuration of the issuer. It is used to retrieve the `token-url`. Only applied if `camunda.client.auth.token-url` is not set.",
+      "description": "The url of the well-known configuration of the issuer. It is used to retrieve the <code> token-url<\/code>. Only applied if <code>camunda.client.auth.token-url<\/code> is not set.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
@@ -309,14 +309,14 @@
     {
       "name": "camunda.client.deployment.enabled",
       "type": "java.lang.Boolean",
-      "description": "Indicates if the `@Deployment` annotation is processed.",
+      "description": "Indicates if the <code>@Deployment<\/code> annotation is processed.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientDeploymentProperties",
       "defaultValue": true
     },
     {
       "name": "camunda.client.deployment.own-jar-only",
       "type": "java.lang.Boolean",
-      "description": "Indicates if the resources selected by the deployment annotation have to reside in the same jar as the annotated class. <p>This property acts as the default behavior. If the `@Deployment` annotation explicitly sets its `ownJarOnly` parameter, that annotation-level value overrides this property for the annotated deployment.",
+      "description": "Indicates if the resources selected by the deployment annotation have to reside in the same jar as the annotated class. This property acts as the default behavior. If the <code>@Deployment <\/code> annotation explicitly sets its <code>ownJarOnly<\/code> parameter, that annotation-level value overrides this property for the annotated deployment.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientDeploymentProperties",
       "defaultValue": false
     },
@@ -337,7 +337,7 @@
     {
       "name": "camunda.client.grpc-address",
       "type": "java.net.URI",
-      "description": "The gRPC address of Camunda that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both `camunda.client.mode`.",
+      "description": "The gRPC address of Camunda that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both <code>camunda.client.mode <\/code>.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "http:\/\/0.0.0.0:26500"
     },
@@ -357,14 +357,14 @@
     {
       "name": "camunda.client.max-message-size",
       "type": "org.springframework.util.unit.DataSize",
-      "description": "A custom `maxMessageSize` sets the maximum inbound message size the client can receive from Camunda. It specifies the `maxInboundMessageSize` of the gRPC channel.",
+      "description": "A custom <code>maxMessageSize<\/code> sets the maximum inbound message size the client can receive from Camunda. It specifies the <code>maxInboundMessageSize<\/code> of the gRPC channel.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "5MB"
     },
     {
       "name": "camunda.client.max-metadata-size",
       "type": "org.springframework.util.unit.DataSize",
-      "description": "A custom `maxMetadataSize` sets the maximum inbound metadata size the client can receive from Camunda. It specifies the `maxInboundMetadataSize` of the gRPC channel.",
+      "description": "A custom <code>maxMetadataSize<\/code> sets the maximum inbound metadata size the client can receive from Camunda. It specifies the <code>maxInboundMetadataSize<\/code> of the gRPC channel.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "16KB"
     },
@@ -378,7 +378,7 @@
     {
       "name": "camunda.client.mode",
       "type": "io.camunda.client.spring.properties.CamundaClientProperties$ClientMode",
-      "description": "The client mode to use. If not set, `saas` mode is detected based on the presence of a `camunda.client.cloud.cluster-id`.",
+      "description": "The client mode to use. If not set, <code>saas<\/code> mode is detected based on the presence of a <code>camunda.client.cloud.cluster-id<\/code>.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties"
     },
     {
@@ -390,7 +390,7 @@
     {
       "name": "camunda.client.prefer-rest-over-grpc",
       "type": "java.lang.Boolean",
-      "description": "If `true`, prefers REST over gRPC for operations supported by both protocols.",
+      "description": "If <code>true<\/code>, prefers REST over gRPC for operations supported by both protocols.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": true
     },
@@ -411,7 +411,7 @@
     {
       "name": "camunda.client.rest-address",
       "type": "java.net.URI",
-      "description": "The REST API address of the Camunda instance that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both`camunda.client.mode`.",
+      "description": "The REST API address of the Camunda instance that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both <code> camunda.client.mode<\/code>.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "http:\/\/0.0.0.0:8080"
     },
@@ -445,7 +445,7 @@
     {
       "name": "camunda.client.worker.defaults.force-fetch-all-variables",
       "type": "java.lang.Boolean",
-      "description": "Sets whether all variables are fetched. Overrides `fetch-variables`.",
+      "description": "Sets whether all variables are fetched. Overrides <code>fetch-variables<\/code>.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
       "defaultValue": false
     },
@@ -466,7 +466,7 @@
     {
       "name": "camunda.client.worker.defaults.name",
       "type": "java.lang.String",
-      "description": "The name of the worker owner. If set to default, it is generated as `${beanName}#${methodName}`.",
+      "description": "The name of the worker owner. If set to default, it is generated as <code> ${beanName}#${methodName}<\/code>.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
       "defaultValue": "default"
     },
@@ -1138,7 +1138,7 @@
     {
       "name": "zeebe.client.connection-mode",
       "type": "java.lang.String",
-      "description": "Connection mode can be set to \"CLOUD\" (connect to SaaS with properties), or \"ADDRESS\" (to use a manually set address to the broker) If not set, \"CLOUD\" is used if a `zeebe.client.cloud.cluster-id` property is set, \"ADDRESS\" otherwise.",
+      "description": "Connection mode can be set to \"CLOUD\" (connect to SaaS with properties), or \"ADDRESS\" (to use a manually set address to the broker) If not set, \"CLOUD\" is used if a <code>zeebe.client.cloud.cluster-id<\/code> property is set, \"ADDRESS\" otherwise.",
       "sourceType": "io.camunda.spring.client.properties.ZeebeClientConfigurationProperties",
       "deprecated": true,
       "deprecation": {

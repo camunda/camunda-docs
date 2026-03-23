@@ -59,7 +59,7 @@ If you are upgrading a dual-region Helm deployment, follow the standard Helm upg
 
 Docker Compose is supported for development and testing environments only.
 
-Camunda does not provide an automated upgrade process for Docker Compose deployments. To upgrade, manually update each component by following the component upgrade guide:
+Camunda does not provide an automated upgrade process for Docker Compose deployments. To upgrade, manually upgrade each component by following the component upgrade guide:
 
 <p class="link-arrow">[Component upgrade from 8.7 to 8.8](./components/870-to-880.md)</p>
 
@@ -86,7 +86,8 @@ Learn about new features, breaking changes, and deprecations in Camunda 8.8:
 
 **Camunda 8 upgrades must be performed sequentially.**
 
-- You must upgrade from the latest patch version of your current Camunda release to the latest patch version of the next release.
+- You must upgrade sequentially, one minor version at a time (for example, 8.6 → 8.7 → 8.8).
+- For best stability and fix coverage, use the latest available patch in each minor before and after each minor upgrade.
 - For example, you must upgrade from 8.6 to 8.7 before you can upgrade to 8.8.
 - **Do not skip releases**.
 

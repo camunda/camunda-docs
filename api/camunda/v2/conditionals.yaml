@@ -119,6 +119,9 @@ components:
       example: "2251799813687654"
       type: string
     ProcessInstanceReference:
+      required:
+        - processDefinitionKey
+        - processInstanceKey
       type: object
       properties:
         processDefinitionKey:
