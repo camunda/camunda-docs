@@ -54,7 +54,7 @@ Use the following new features to build and integrate AI agents into your proces
     <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.</td>
 </tr>
 <tr>
-    <td>[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</td>
+    <td>[MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md)</td>
     <td>Connect an AI agent connector to tools exposed by [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers.</td>
 </tr>
 <tr>
@@ -198,7 +198,7 @@ Connect your BPMN service with [HubSpot](https://hubspot.com/) and manage your H
 
 Enable Camunda processes and AI agents to auto-discover and invoke external tools, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
 
-<p><a href="../../../../components/early-access/alpha/mcp-client/" class="link-arrow">MCP client connector</a></p>
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/" class="link-arrow">MCP client connector</a></p>
 
 ### Vector database connector
 
@@ -1005,7 +1005,7 @@ To learn more, see [Google Cloud storage connector](/components/connectors/out-o
 
 Use the new MCP Client connector to allow Camunda processes and AI agents to auto-discover and invoke external tools, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
 
-To learn more, see [MCP client](../../../components/early-access/alpha/mcp-client/mcp-client.md).
+To learn more, see [MCP client](../../../components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
 
 :::note
 The MCP Client connector is released as an [early access alpha feature](/components/early-access/alpha/alpha-features.md) to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.

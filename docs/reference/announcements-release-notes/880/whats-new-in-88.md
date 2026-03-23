@@ -93,7 +93,7 @@ Use the following new features to build and integrate AI agents into your proces
     <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.</td>
 </tr>
 <tr>
-    <td>[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</td>
+    <td>[MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md)</td>
     <td>Connect an AI agent connector to tools exposed by [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers.</td>
 </tr>
 <tr>

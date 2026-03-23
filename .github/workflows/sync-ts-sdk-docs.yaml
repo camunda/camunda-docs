@@ -80,6 +80,12 @@ jobs:
 
           echo "Copied $(find "$TARGET" -name '*.md' | wc -l) markdown files → ${{ steps.resolve.outputs.docs_root }}"
 
+      - name: Format generated docs with Prettier
+        working-directory: docs
+        run: |
+          npm ci
+          npx prettier --write "${{ steps.resolve.outputs.docs_root }}/apis-tools/typescript/api-reference/"
+
       - name: Check for changes
         id: check_changes
         working-directory: docs

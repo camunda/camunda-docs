@@ -290,6 +290,14 @@ RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/sp
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
 
+# Move MCP Client from early access to Agentic AI connectors (8.9)
+RewriteRule ^docs/next/components/early-access/alpha/mcp-client/?$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/ [R=301,L]
+RewriteRule ^docs/next/components/early-access/alpha/mcp-client/(.+)$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-$1 [R=301,L]
+
+# Will be activated with the switch: next -> current
+# RewriteRule ^docs/components/early-access/alpha/mcp-client/?$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/ [R=301,L]
+# RewriteRule ^docs/components/early-access/alpha/mcp-client/(.+)$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-$1 [R=301,L]
+
 # Removal of 8.5 announcements/release notes
 RewriteRule ^docs/next/reference/announcements-release-notes/850/(.*)$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
 RewriteRule ^docs/reference/announcements-release-notes/850/850-announcements/?$ /docs/next/reference/announcements-release-notes/overview/ [R=301,L]

@@ -523,7 +523,7 @@ In addition, the **Tools** panel in the element template is replaced by dedicate
 
 :::
 
-<p class="link-arrow">[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</p>
+<p class="link-arrow">[MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md)</p>
 
 ### Camunda 8 Run
 
@@ -981,7 +981,7 @@ The Camunda Model Context Protocol (MCP) client now supports OAuth, API key, and
 
 MCP client connectors now also support connections using the [streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) transport protocol.
 
-<p class="link-arrow">[MCP Client](/components/early-access/alpha/mcp-client/mcp-client.md)</p>
+<p class="link-arrow">[MCP Client](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md)</p>
 
 :::note breaking changes
 This feature introduces breaking changes in the element templates and the runtime configuration of the MCP Client. To learn more, see [announcements](890-announcements.md#agentic-orchestration).
