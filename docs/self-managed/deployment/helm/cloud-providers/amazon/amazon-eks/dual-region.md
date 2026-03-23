@@ -550,7 +550,7 @@ The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.
 
 Before deploying the Elasticsearch cluster, install the ECK operator and its Custom Resource Definitions (CRDs) in both clusters. The ECK operator manages the lifecycle of Elasticsearch resources in Kubernetes.
 
-Run [deploy.sh](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh) from `generic/kubernetes/operator-based/elasticsearch/`:
+Run [deploy.sh](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh) from `generic/kubernetes/operator-based/elasticsearch/`:
 
 ```bash
 cd generic/kubernetes/operator-based/elasticsearch
@@ -571,7 +571,7 @@ This performs the following actions:
 <summary>Review the Elasticsearch deploy.sh script</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
 ```
 
 </details>
@@ -583,23 +583,6 @@ The dual-region Elasticsearch cluster manifest is located at `generic/kubernetes
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster-dual-region.yml
-```
-
-</details>
-
-```bash
-cd generic/kubernetes/operator-based/elasticsearch
-export ELASTICSEARCH_CLUSTER_FILE="elasticsearch-cluster-dual-region.yml"
-KUBE_CONTEXT=$CLUSTER_0 ./deploy.sh
-KUBE_CONTEXT=$CLUSTER_1 ./deploy.sh
-cd -
-```
-
-<details>
-<summary>Review the Elasticsearch deploy.sh script</summary>
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
 ```
 
 </details>

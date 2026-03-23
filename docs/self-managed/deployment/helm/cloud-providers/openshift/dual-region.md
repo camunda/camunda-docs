@@ -403,7 +403,7 @@ chmod +x create-elasticsearch-secrets.sh
 
 Before deploying the Elasticsearch cluster, install the ECK operator and its Custom Resource Definitions (CRDs) in both clusters. The ECK operator manages the lifecycle of Elasticsearch resources in Kubernetes.
 
-Run [deploy.sh](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh) from `generic/kubernetes/operator-based/elasticsearch/`:
+Run [deploy.sh](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh) from `generic/kubernetes/operator-based/elasticsearch/`:
 
 ```bash
 cd generic/kubernetes/operator-based/elasticsearch
@@ -594,7 +594,7 @@ apiVersion: multicluster.x-k8s.io/v1alpha1
 kind: ServiceExport
 metadata:
   name: elasticsearch-es-http # name of the ECK-managed Elasticsearch service to export
-  namespace: camunda-cluster-region-1 #
+  namespace: $CAMUNDA_NAMESPACE_0 # must match the namespace where the Elasticsearch Service exists
 ```
 
 </details>
