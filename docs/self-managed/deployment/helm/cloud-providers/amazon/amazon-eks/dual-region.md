@@ -76,7 +76,7 @@ After completing this guide, you will have:
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - A [VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) between the two EKS clusters, allowing cross-cluster communication between different regions.
 - An [Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) (S3) bucket for [Elasticsearch backups](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html).
-- The [Amazon Elastic Cloud on Kubernetes (ECK) operator](https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-overview.html) installed in both clusters for managing Elasticsearch lifecycle.
+- The [Elastic Cloud on Kubernetes (ECK) operator](https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-overview.html) installed in both clusters for managing Elasticsearch lifecycle.
 - ECK-managed Elasticsearch clusters running in both regions.
 
 :::note
@@ -510,7 +510,7 @@ You must apply the custom `StorageClass` before installing the Camunda Helm char
 
 ### Deploy Elasticsearch using ECK
 
-Elasticsearch is managed using the [Amazon Elastic Cloud on Kubernetes (ECK)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) operator instead of the Camunda Helm chart's built-in Elasticsearch subchart. This provides automated lifecycle management and built-in security with auto-generated credentials.
+Elasticsearch is managed using the [Elastic Cloud on Kubernetes (ECK)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) operator instead of the Camunda Helm chart's built-in Elasticsearch subchart. This provides automated lifecycle management and built-in security with auto-generated credentials.
 
 For more details on ECK-based deployments, see [Elasticsearch deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment).
 
@@ -550,7 +550,7 @@ The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.
 
 Before deploying the Elasticsearch cluster, install the ECK operator and its Custom Resource Definitions (CRDs) in both clusters. The ECK operator manages the lifecycle of Elasticsearch resources in Kubernetes.
 
-Run [deploy.sh](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh) from `generic/kubernetes/operator-based/elasticsearch/`:
+Run [deploy.sh](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh) from `generic/kubernetes/operator-based/elasticsearch/`:
 
 ```bash
 cd generic/kubernetes/operator-based/elasticsearch
@@ -571,7 +571,7 @@ This performs the following actions:
 <summary>Review the Elasticsearch deploy.sh script</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
 ```
 
 </details>
@@ -656,7 +656,7 @@ Key changes of the dual-region setup:
   - `orchestration.clusterSize: 8`
   - `orchestration.partitionCount: 8`
   - `orchestration.replicationFactor: 4`
-- Elasticsearch is managed via the ECK operator and configured through a separate manifest (`elasticsearch-cluster-dual-region.yml`), not via the Helm chart's built-in Elasticsearch subchart. The Elasticsearch overlay (`camunda-elastic-values.yml`) disables the built-in Bitnami subchart and points components at the ECK-managed service.
+- Elasticsearch is managed via the ECK operator and configured through a separate manifest (`elasticsearch-cluster-dual-region.yml`), not via the Helm chart's built-in Elasticsearch subchart. The Elasticsearch overlay (`camunda-elastic-values.yml`) disables the built-in Bitnami subchart and configures the **local** Elasticsearch connection (URL and authentication) for components that **read** data (orchestration secondary storage, Optimize). This is distinct from the cross-cluster Elasticsearch exporter URLs configured via environment variables above, which handle **writing** data across regions.
 
 ##### region0/camunda-values.yml
 
