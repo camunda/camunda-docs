@@ -1,6 +1,6 @@
 ---
 id: sizing-your-environment
-title: Sizing overview
+title: Size your environment
 tags:
   - Database
   - Performance
@@ -9,10 +9,6 @@ tags:
 description: "Understand the factors that influence Camunda 8 sizing, then apply them to your SaaS or Self-Managed environment."
 ---
 
-:::tip Audience
-This page explains the factors that influence Camunda 8 sizing. For specific sizing recommendations, see [SaaS sizing](sizing-saas.md) or [Self-Managed sizing](sizing-self-managed.md).
-:::
-
 To size your Camunda 8 environment appropriately, you need to understand the factors that influence hardware requirements. Once you understand these factors, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select the right configuration.
 
 <!-- Anchors for backward compatibility with old single-page URLs -->
@@ -20,86 +16,17 @@ To size your Camunda 8 environment appropriately, you need to understand the fac
 <span id="camunda-8-self-managed" />
 <span id="running-experiments-and-benchmarks" />
 
-## Understanding influencing factors
+## Understand influencing factors
 
-### Throughput
+### Data availability latency
 
-Throughput defines how many process instances can be executed in a certain timeframe.
+Data availability latency is the time between an event occurring in the engine and it being queryable in Operate, Tasklist, or Optimize. Under heavy load or with Optimize enabled, this can lag from seconds to minutes.
 
-It is typically easy to estimate the number of **process instances per day** you need to execute. If you only know the number of process instances per year, we recommend dividing this number by 250 (average number of working days in a year).
+Data availability latency is influenced by:
 
-But the hardware sizing depends more on the **number of BPMN tasks** in a process model. For example, you will have a much higher throughput for processes with one service task than for processes with 30 service tasks.
-
-If you already know your future process model, you can use this to count the number of tasks for your process. For example, the following onboarding process contains five service tasks in a typical execution.
-
-<div bpmn="best-practices/sizing-your-environment-assets/customer_onboarding.bpmn" callouts="task1,task2,task3,task4,task5" />
-
-If you don't yet know the number of service tasks, we recommend assuming 10 service tasks as a rule of thumb.
-
-The number of tasks per process allows you to calculate the required number of **tasks per day (tasks/day)** which can also be converted into **tasks per second (tasks/s)** (divide by 24 hours \* 60 minutes \* 60 seconds).
-
-**Example:**
-
-| Indicator                          |    Number | Calculation method | Comment                                     |
-| :--------------------------------- | --------: | :----------------: | :------------------------------------------ |
-| Onboarding instances per year      | 5,000,000 |                    | Business input                              |
-| Process instances per business day |    20,000 |       / 250        | average number of working days in a year    |
-| Tasks per day                      |   100,000 |        \* 5        | Tasks in the process model as counted above |
-| Tasks per second                   |      1.16 |   / (24\*60\*60)   | Seconds per day                             |
-
-In most cases, we define throughput per day, as this time frame is easier to understand. But in high-performance use cases you might need to define the throughput per second.
-
-### Peak loads
-
-In most scenarios, your load will be volatile and not constant. For example, your company might start 90% of their monthly process instances in the same day of the month. The **ability to handle those peaks is the more crucial requirement and should drive your decision** instead of looking at the average load.
-
-In the above example, that one day with the peak load defines your overall throughput requirements.
-
-Sometimes, looking at peaks might also mean that you are not looking at all 24 hours of a day, but only 8 business hours, or probably the busiest 2 hours of a day, depending on your typical workload.
-
-### Latency and cycle time
-
-In some use cases, the cycle time of a process (or sometimes even the cycle time of single tasks) matters. For example, you want to provide a REST endpoint that starts a process instance to calculate a score for a customer. This process needs to execute four service tasks, but the REST request should return a response synchronously, no later than 250 milliseconds after the request.
-
-While the cycle time of service tasks depends very much on what you do in these tasks, the overhead of the workflow engine itself can be measured.
-
-<!-- TODO: Replace the following latency measurements with current 8.8/8.9 benchmark data. The old measurements (Camunda 8 1.2.4: ~10 ms/node, ~50 ms remote worker latency) are outdated. -->
-
-:::note
-The latency measurements below are approximate and were last validated against an earlier version of Camunda 8. Updated measurements for 8.8/8.9 are pending. With the 8.8 streamlined architecture and properly aligned resources (3.5 CPU cores per broker), latency is expected to improve by approximately 2x compared to the previous distributed deployment.
-
-Actual latency is highly environment-dependent — factors like network latency between workers and the cluster, disk I/O speed (commit latency), and cloud region placement significantly affect these numbers.
-:::
-
-As a rough guide, expect single-digit millisecond processing time per process node and approximately 50 ms latency to process service tasks in remote workers when running worker code in the same cloud region as the Camunda cluster. Hence, to execute 4 service tasks results in roughly 200-250 ms workflow engine overhead.
-
-The closer you push throughput to the limits, the more latency you will get. This is because the different requests compete for hardware resources, especially disk write operations. As a consequence, whenever cycle time and latency matters to you, you should plan for hardware buffer to not utilize your cluster too much. This makes sure your latency does not go up because of resource contention. A good rule of thumb is to multiply your average load by 20. This means you cannot only accommodate unexpected peak loads, but also have more free resources on average, keeping latency down.
-
-| Indicator                                                      |    Number | Calculation method | Comment                                                                                 |
-| :------------------------------------------------------------- | --------: | :----------------: | :-------------------------------------------------------------------------------------- |
-| Onboarding instances per year                                  | 5,000,000 |                    | Business input, but irrelevant                                                          |
-| Expected process instances on peak day                         |   150,000 |                    | Business input                                                                          |
-| Process instances per second within business hours on peak day |      5.20 |   / (8\*60\*60)    | Only looking at seconds of the 8 business hours of a day                                |
-| Process instances per second including buffer                  |    104.16 |       \* 20        | Adding some buffer is recommended in critical high-performance or low-latency use cases |
-
-### Payload size
-
-Every process instance can hold a payload (known as [process variables](/components/concepts/variables.md)). The payload of all running process instances must be managed by the runtime workflow engine, and all data of running and ended process instances is also forwarded to Operate and Tasklist.
-
-The data you attach to a process instance (process variables) influences resource requirements. For example, it makes a big difference if you only add one or two strings (requiring around 1 KB of space) to your process instances, or a full JSON document containing 1 MB. Hence, the payload size is an important factor when looking at sizing.
-
-Camunda's official benchmarks use two reference payloads:
-
-- **Typical payload:** [typical_payload.json](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/typical_payload.json) (~0.5 KB, 15 simple variables) -- used for baseline measurements.
-- **Realistic payload:** [realisticPayload.json](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB) -- used for the reference sizing benchmarks. This better represents real-world payloads.
-
-Payload size has a **multiplicative effect**: it affects Zeebe storage, Elasticsearch export volume, Optimize import time, and query/report performance. An 11 KB payload vs. a 0.5 KB payload can change disk consumption by 10-20x.
-
-There are a few general rules regarding payload size:
-
-- The maximum [variable size per process instance is limited](/components/concepts/variables.md#variable-size-limitation), currently to roughly 3 MB.
-- We don't recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/components/best-practices/development/handling-data-in-processes.md).
-- Every [partition](/components/zeebe/technical-concepts/partitions.md) of the Zeebe installation can typically handle up to 1 GB of payload in total. Larger payloads can lead to slower processing. For example, if you run one million process instances with 4 KB of data each, you end up with 3.9 GB of data, and you should run at least four partitions. In reality, this typically means six partitions, as you want to run the number of partitions as a multiple of the replication factor, which by default is three.
+- **Exporter throughput:** The rate at which the Camunda Exporter can write events to Elasticsearch.
+- **Elasticsearch indexing speed:** How quickly ES can index incoming documents.
+- **Elasticsearch disk usage:** High disk utilization (above ~70%) significantly increases indexing latency. Monitor ES disk usage and scale storage before hitting this threshold.
 
 ### Disk space
 
@@ -186,17 +113,59 @@ Optimize is an optional component that provides process analytics and reporting.
 
 The sizing tables in the [SaaS](sizing-saas.md) and [Self-Managed](sizing-self-managed.md) pages provide separate configurations with and without Optimize to help you plan accordingly.
 
-### Data availability latency
+### Latency and cycle time
 
-Data availability latency is the time between an event occurring in the engine and it being queryable in Operate, Tasklist, or Optimize. Under heavy load or with Optimize enabled, this can lag from seconds to minutes.
+In some use cases, the cycle time of a process (or sometimes even the cycle time of single tasks) matters. For example, you want to provide a REST endpoint that starts a process instance to calculate a score for a customer. This process needs to execute four service tasks, but the REST request should return a response synchronously, no later than 250 milliseconds after the request.
 
-Data availability latency is influenced by:
+While the cycle time of service tasks depends very much on what you do in these tasks, the overhead of the workflow engine itself can be measured.
 
-- **Exporter throughput:** The rate at which the Camunda Exporter can write events to Elasticsearch.
-- **Elasticsearch indexing speed:** How quickly ES can index incoming documents.
-- **Elasticsearch disk usage:** High disk utilization (above ~70%) significantly increases indexing latency. Monitor ES disk usage and scale storage before hitting this threshold.
+<!-- TODO: Replace the following latency measurements with current 8.8/8.9 benchmark data. The old measurements (Camunda 8 1.2.4: ~10 ms/node, ~50 ms remote worker latency) are outdated. -->
 
-### Choosing your secondary storage
+:::note
+The latency measurements below are approximate and were last validated against an earlier version of Camunda 8. Updated measurements for 8.8/8.9 are pending. With the 8.8 streamlined architecture and properly aligned resources (3.5 CPU cores per broker), latency is expected to improve by approximately 2x compared to the previous distributed deployment.
+
+Actual latency is highly environment-dependent — factors like network latency between workers and the cluster, disk I/O speed (commit latency), and cloud region placement significantly affect these numbers.
+:::
+
+As a rough guide, expect single-digit millisecond processing time per process node and approximately 50 ms latency to process service tasks in remote workers when running worker code in the same cloud region as the Camunda cluster. Hence, to execute 4 service tasks results in roughly 200-250 ms workflow engine overhead.
+
+The closer you push throughput to the limits, the more latency you will get. This is because the different requests compete for hardware resources, especially disk write operations. As a consequence, whenever cycle time and latency matters to you, you should plan for hardware buffer to not utilize your cluster too much. This makes sure your latency does not go up because of resource contention. A good rule of thumb is to multiply your average load by 20. This means you cannot only accommodate unexpected peak loads, but also have more free resources on average, keeping latency down.
+
+| Indicator                                                      |    Number | Calculation method | Comment                                                                                 |
+| :------------------------------------------------------------- | --------: | :----------------: | :-------------------------------------------------------------------------------------- |
+| Onboarding instances per year                                  | 5,000,000 |                    | Business input, but irrelevant                                                          |
+| Expected process instances on peak day                         |   150,000 |                    | Business input                                                                          |
+| Process instances per second within business hours on peak day |      5.20 |   / (8\*60\*60)    | Only looking at seconds of the 8 business hours of a day                                |
+| Process instances per second including buffer                  |    104.16 |       \* 20        | Adding some buffer is recommended in critical high-performance or low-latency use cases |
+
+### Payload size
+
+Every process instance can hold a payload (known as [process variables](/components/concepts/variables.md)). The payload of all running process instances must be managed by the runtime workflow engine, and all data of running and ended process instances is also forwarded to Operate and Tasklist.
+
+The data you attach to a process instance (process variables) influences resource requirements. For example, it makes a big difference if you only add one or two strings (requiring around 1 KB of space) to your process instances, or a full JSON document containing 1 MB. Hence, the payload size is an important factor when looking at sizing.
+
+Camunda's official benchmarks use two reference payloads:
+
+- **Typical payload:** [typical_payload.json](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/typical_payload.json) (~0.5 KB, 15 simple variables) -- used for baseline measurements.
+- **Realistic payload:** [realisticPayload.json](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB) -- used for the reference sizing benchmarks. This better represents real-world payloads.
+
+Payload size has a **multiplicative effect**: it affects Zeebe storage, Elasticsearch export volume, Optimize import time, and query/report performance. An 11 KB payload vs. a 0.5 KB payload can change disk consumption by 10-20x.
+
+There are a few general rules regarding payload size:
+
+- The maximum [variable size per process instance is limited](/components/concepts/variables.md#variable-size-limitation), currently to roughly 3 MB.
+- We don't recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/components/best-practices/development/handling-data-in-processes.md).
+- Every [partition](/components/zeebe/technical-concepts/partitions.md) of the Zeebe installation can typically handle up to 1 GB of payload in total. Larger payloads can lead to slower processing. For example, if you run one million process instances with 4 KB of data each, you end up with 3.9 GB of data, and you should run at least four partitions. In reality, this typically means six partitions, as you want to run the number of partitions as a multiple of the replication factor, which by default is three.
+
+### Peak loads
+
+In most scenarios, your load will be volatile and not constant. For example, your company might start 90% of their monthly process instances in the same day of the month. The **ability to handle those peaks is the more crucial requirement and should drive your decision** instead of looking at the average load.
+
+In this example, that one day with the peak load defines your overall throughput requirements.
+
+Sometimes, looking at peaks might also mean that you are not looking at all 24 hours of a day, but only 8 business hours, or probably the busiest 2 hours of a day, depending on your typical workload.
+
+### Secondary storage
 
 Starting with Camunda 8.9, the platform supports three secondary storage backends, each with different sizing implications.
 
@@ -213,23 +182,51 @@ Starting with Camunda 8.9, the platform supports three secondary storage backend
 - Supported for all components including Optimize (with some feature limitations -- see [supported environments](/reference/supported-environments.md)).
 - Sizing recommendations for Elasticsearch generally apply to OpenSearch as well.
 
-#### RDBMS (PostgreSQL) -- available from 8.9
+#### RDBMS
 
 - A fundamentally different storage paradigm: relational database instead of document store.
+- For the full list of supported databases, see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#supported-rdbms).
 - Key trade-offs:
   - Write throughput is approximately **70% of Elasticsearch** for equivalent hardware.
   - Different resource profile: CPU/memory-oriented rather than disk/IOPS-oriented.
   - **No Optimize support** -- if you need Optimize, you must also run Elasticsearch alongside RDBMS.
   - **Scales primarily vertically** (larger instance) rather than horizontally like Elasticsearch. Plan initial sizing with more headroom, as adding capacity is more disruptive.
   - Potentially lower total disk space required for the same data volume (preliminary benchmarks suggest this, but detailed results are still being validated).
-- Ideal for organizations that already operate PostgreSQL at scale and want to avoid adding Elasticsearch to their infrastructure.
+- Ideal for organizations that already operate a supported RDBMS at scale and want to avoid adding Elasticsearch to their infrastructure.
 <!-- TODO: Link to RDBMS benchmark results page once PR #8159 is merged -->
 
 :::note
-Your choice of secondary storage affects the sizing tables in this guide. The SaaS sizing tables assume Elasticsearch. For Self-Managed deployments using RDBMS, adjust throughput expectations downward by approximately 30% compared to the Elasticsearch-based tables, and replace the Elasticsearch resource block with appropriately sized PostgreSQL resources.
+Your choice of secondary storage affects the sizing tables in this guide. The SaaS sizing tables assume Elasticsearch. For Self-Managed deployments using RDBMS, adjust throughput expectations downward by approximately 30% compared to the Elasticsearch-based tables, and replace the Elasticsearch resource block with appropriately sized RDBMS resources.
 :::
 
-## Understanding sizing and scalability behavior
+### Throughput
+
+Throughput defines how many process instances can be executed in a certain timeframe.
+
+It is typically easy to estimate the number of **process instances per day** you need to execute. If you only know the number of process instances per year, we recommend dividing this number by 250 (average number of working days in a year).
+
+But the hardware sizing depends more on the **number of BPMN tasks** in a process model. For example, you will have a much higher throughput for processes with one service task than for processes with 30 service tasks.
+
+If you already know your future process model, you can use this to count the number of tasks for your process. For example, the following onboarding process contains five service tasks in a typical execution.
+
+<div bpmn="best-practices/sizing-your-environment-assets/customer_onboarding.bpmn" callouts="task1,task2,task3,task4,task5" />
+
+If you don't yet know the number of service tasks, we recommend assuming 10 service tasks as a rule of thumb.
+
+The number of tasks per process allows you to calculate the required number of **tasks per day (tasks/day)** which can also be converted into **tasks per second (tasks/s)** (divide by 24 hours \* 60 minutes \* 60 seconds).
+
+**Example:**
+
+| Indicator                          |    Number | Calculation method | Comment                                     |
+| :--------------------------------- | --------: | :----------------: | :------------------------------------------ |
+| Onboarding instances per year      | 5,000,000 |                    | Business input                              |
+| Process instances per business day |    20,000 |       / 250        | average number of working days in a year    |
+| Tasks per day                      |   100,000 |        \* 5        | Tasks in the process model as counted above |
+| Tasks per second                   |      1.16 |   / (24\*60\*60)   | Seconds per day                             |
+
+In most cases, we define throughput per day, as this time frame is easier to understand. But in high-performance use cases you might need to define the throughput per second.
+
+## Understand sizing and scalability behavior
 
 Camunda 8.8 introduced a **streamlined architecture** that consolidates the broker, gateway, Operate, Tasklist, and Identity into a single application (the **Orchestration Cluster**). This changes how you think about resource consumption compared to older versions.
 
@@ -252,7 +249,7 @@ Camunda 8 runs on Kubernetes. Every component is operated as a pod that gets res
 
 Note that Camunda licensing does not depend on the provisioned hardware resources, making it easy to size according to your needs.
 
-## Planning non-production environments
+## Plan non-production environments
 
 All clusters can be used for development, testing, integration, Q&A, and production. In Camunda 8 SaaS, production and test environments are organized via separate organizations within Camunda 8 to ease the management of clusters, while also minimizing the risk of accidentally accessing a production cluster.
 
@@ -279,4 +276,4 @@ Now that you understand the factors that influence sizing:
 
 - **SaaS customers:** See [SaaS cluster sizing](sizing-saas.md) to select the right cluster size.
 - **Self-Managed admins:** See [Self-Managed resource planning](sizing-self-managed.md) for starting-point Kubernetes configurations.
-- **Validating sizing:** See [Running benchmarks](sizing-benchmarks.md) to test your specific workload against a cluster.
+- **Validating sizing:** See [Run benchmarks](sizing-benchmarks.md) to test your specific workload against a cluster.

@@ -175,7 +175,7 @@ module.exports = {
             "components/best-practices/architecture/deciding-about-your-stack",
             {
               type: "category",
-              label: "Sizing your environment",
+              label: "Size your environment",
               link: {
                 type: "doc",
                 id: "components/best-practices/architecture/sizing-your-environment",

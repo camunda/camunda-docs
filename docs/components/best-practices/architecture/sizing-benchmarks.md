@@ -1,6 +1,6 @@
 ---
 id: sizing-benchmarks
-title: Running benchmarks
+title: Run benchmarks
 tags:
   - Performance
   - Hardware
@@ -24,6 +24,8 @@ Camunda uses the following realistic benchmark scenario for all official sizing 
 - **Process model:** [bankCustomerComplaintDisputeHandling.bpmn](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) — a credit card fraud dispute handling process from the Camunda Marketplace blueprint, containing tasks, events, call activities, multi-instance, sub-processes, and DMN.
 - **Payload:** [realisticPayload.json](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB).
 - This produces approximately **101 tasks per second at 1 PI/s** due to internal sub-process instantiation (50 sub-process instances per root instance).
+
+The official sizing numbers on this page were produced using the [load-tester](https://github.com/camunda/camunda/tree/main/load-tests/load-tester) tool from the Camunda monorepo.
 
 ## Running your own benchmarks
 

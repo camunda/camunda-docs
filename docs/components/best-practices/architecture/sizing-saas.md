@@ -1,6 +1,6 @@
 ---
 id: sizing-saas
-title: SaaS cluster sizing
+title: Size your SaaS cluster
 tags:
   - Performance
   - Hardware
@@ -9,16 +9,14 @@ tags:
 description: "Select the right Camunda 8 SaaS cluster size based on your throughput and storage requirements."
 ---
 
-:::tip Audience
-This page helps you choose the right Camunda 8 SaaS cluster size. For background on the factors that drive sizing, see [Sizing overview](sizing-your-environment.md).
-:::
+Select the right Camunda 8 SaaS cluster size based on your use case needs. For an overview of the factors that influence sizing, see [Sizing your environment](./sizing-your-environment.md).
 
-Use the tables below to select a cluster size. First, calculate your throughput and storage requirements using the guidance in the [Sizing overview](sizing-your-environment.md), then find the cluster size that meets your needs.
+## Before you start
 
-Camunda 8 defines four [cluster sizes](/components/concepts/clusters.md#cluster-size) you can select from (1x, 2x, 3x, and 4x) after you have chosen your [cluster type](/components/concepts/clusters.md#cluster-type).
+Camunda 8 defines four [cluster sizes](/components/concepts/clusters.md#cluster-size) (1x, 2x, 3x, and 4x) you can select after choosing your [cluster type](/components/concepts/clusters.md#cluster-type). Calculate your throughput and storage requirements using the [Sizing your environment](./sizing-your-environment.md) guidance, then use the tables below to find the cluster size that meets your needs.
 
 :::note
-Contact your Customer Success Manager to increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
+Contact your Customer Success Manager to increase the cluster size beyond 4x. This requires custom sizing and pricing.
 :::
 
 ## Sizing tables
@@ -51,7 +49,7 @@ Contact your Customer Success Manager to increase the cluster size beyond the ma
 The numbers in the tables were measured using Camunda 8 (version 8.8), [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes cluster, and using a [realistic process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) with a [realistic payload](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB, containing a mix of BPMN symbols such as tasks, events, call activities, multi-instance, sub-processes, and DMN). To calculate day-based metrics, an equal distribution over 24 hours is assumed.
 :::
 
-## Footnotes
+### Footnotes
 
 **\*** Tasks (Service Tasks, Send Tasks, User Tasks, and so on) completed per day is the primary metric, as this is easy to measure and has a strong influence on resource consumption. This number assumes a constant load over the day. Tasks/day and Tasks/second are scaled linearly.
 
