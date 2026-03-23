@@ -655,7 +655,14 @@ module.exports = {
                 type: "doc",
                 id: "components/camunda-hub/catalog/index",
               },
-              items: [],
+              items: [
+                "components/camunda-hub/catalog/structure-repo",
+                "components/camunda-hub/catalog/connect-repo",
+                "components/camunda-hub/catalog/define-asset-file",
+                "components/camunda-hub/catalog/configure-ci",
+                "components/camunda-hub/catalog/browse",
+                "components/camunda-hub/catalog/review-actions",
+              ],
             },
             {
               "Manage clusters": [
@@ -724,7 +731,6 @@ module.exports = {
                 },
               ],
             },
-            "components/camunda-hub/catalog/browse",
             {
               "Model business processes": [
                 {
@@ -789,6 +795,7 @@ module.exports = {
                     "components/modeler/web-modeler/collaboration/implement-your-process",
                     "components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
                     "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
+                    "components/camunda-hub/workspaces/use-shared-assets",
                   ],
                 },
                 {

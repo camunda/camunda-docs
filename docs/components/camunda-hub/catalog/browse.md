@@ -4,4 +4,4 @@ title: Browse the catalog
 description: "Learn how to browse the catalog"
 ---
 
-Browse approved catalog assets, view details...
+Discover and browse approved catalog assets, so you can quickly find the right building blocks for my use case.
