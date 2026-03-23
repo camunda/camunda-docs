@@ -30,7 +30,7 @@ Camunda 8 Run includes the following:
 Camunda 8 Run also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 :::note
-For the latest list of supported relational databases and versions, see the  
+For the latest list of supported relational databases and versions, see the
 [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 :::
 
@@ -233,7 +233,7 @@ If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-
 
 ### Configuration options
 
-The following options provide a convenient way to override settings for quick tests and interactions in Camunda 8 Run.  
+The following options provide a convenient way to override settings for quick tests and interactions in Camunda 8 Run.
 For more advanced or permanent configuration, modify the default `configuration/application.yaml` or supply a custom file using the `--config` flag (e.g., [to enable authentication and authorization](#enable-authentication-and-authorization)).
 
 | Argument                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -519,7 +519,7 @@ Operate can run against the default H2 store in 8.9-alpha3, but some user-facing
 - Performance and scaling behavior when using H2 will differ from Elasticsearch in production scenarios.
 - Users who require full Operate feature parity should enable Elasticsearch (embedded or external) until full H2 parity is confirmed in a later alpha.
 
-<!--- Maybe add something like "For engineering details and progress on Operate feature parity, see issue #7315 and the Operate migration tracking in the project board. If we want a precise feature list for alpha3, I can add a checklist here after stakeholder confirmation." ---!>
+<!--- Maybe add something like "For engineering details and progress on Operate feature parity, see issue #7315 and the Operate migration tracking in the project board. If we want a precise feature list for alpha3, I can add a checklist here after stakeholder confirmation."
     authentication:
       # Require authentication for API requests
       unprotected-api: false
@@ -757,6 +757,8 @@ The following advanced configuration options can be provided via environment var
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ES_JAVA_OPTS` | Allows you to override Java command line parameters for Elasticsearch. This can allow you to increase memory limits. **Default:** `-Xms1g -Xmx1g` |
 | `JAVA_OPTS`    | Allows you to override Java command line parameters for Camunda.                                                                                  |
+
+-->
 
 ## Next steps
 
