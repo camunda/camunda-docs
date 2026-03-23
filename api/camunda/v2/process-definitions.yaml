@@ -468,6 +468,12 @@ components:
     ProcessElementStatisticsResult:
       description: Process element statistics response.
       type: object
+      required:
+        - active
+        - canceled
+        - completed
+        - elementId
+        - incidents
       properties:
         elementId:
           allOf:
@@ -514,6 +520,12 @@ components:
             $ref: "#/components/schemas/ProcessDefinitionMessageSubscriptionStatisticsResult"
     ProcessDefinitionMessageSubscriptionStatisticsResult:
       type: object
+      required:
+        - activeSubscriptions
+        - processDefinitionId
+        - processDefinitionKey
+        - processInstancesWithActiveSubscriptions
+        - tenantId
       properties:
         processDefinitionId:
           description: The process definition ID associated with this message subscription.
@@ -562,6 +574,13 @@ components:
     ProcessDefinitionInstanceStatisticsResult:
       description: Process definition instance statistics response.
       type: object
+      required:
+        - activeInstancesWithIncidentCount
+        - activeInstancesWithoutIncidentCount
+        - hasMultipleVersions
+        - latestProcessDefinitionName
+        - processDefinitionId
+        - tenantId
       properties:
         processDefinitionId:
           $ref: "identifiers.yaml#/components/schemas/ProcessDefinitionId"
