@@ -58,7 +58,7 @@ Use the following Camunda 8 features to integrate AI agents into your processes:
     <td>A special kind of embedded BPMN subprocess with an ad-hoc marker that allows a small part of your process decision-making to be handed over to a human or agent.</td>
 </tr>
 <tr>
-    <td>[AI agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</td>
+    <td>[AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</td>
     <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.</td>
 </tr>
 <tr>
