@@ -656,7 +656,7 @@ Key changes of the dual-region setup:
   - `orchestration.clusterSize: 8`
   - `orchestration.partitionCount: 8`
   - `orchestration.replicationFactor: 4`
-- Elasticsearch is managed via the ECK operator and configured through a separate manifest (`elasticsearch-cluster-dual-region.yml`), not via the Helm chart's built-in Elasticsearch subchart. The Elasticsearch overlay (`camunda-elastic-values.yml`) disables the built-in Bitnami subchart and points components at the ECK-managed service.
+- Elasticsearch is managed via the ECK operator and configured through a separate manifest (`elasticsearch-cluster-dual-region.yml`), not via the Helm chart's built-in Elasticsearch subchart. The Elasticsearch overlay (`camunda-elastic-values.yml`) disables the built-in Bitnami subchart and configures the **local** Elasticsearch connection (URL and authentication) for components that **read** data (orchestration secondary storage, Optimize). This is distinct from the cross-cluster Elasticsearch exporter URLs configured via environment variables above, which handle **writing** data across regions.
 
 ##### region0/camunda-values.yml
 
