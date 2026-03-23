@@ -33,7 +33,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
 The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.19 (previously 8.16+).
 
 - This aligns with the Elasticsearch 8 versions maintained by Elastic as of April 2025.
-- The default Elasticsearch version used by Camunda 8 Run, Docker Compose, and Helm templates has been updated to `8.19.9+` accordingly.
+- The default Elasticsearch version used by Docker Compose examples and Helm templates has been updated to `8.19.9+` accordingly.
 - Upgrade your Elasticsearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
 - For best results, Camunda recommends upgrading to the latest supported Elasticsearch 9.2+ to take advantage of new features and improvements.
 
@@ -537,11 +537,11 @@ For more information on optimizing connector performance with virtual threads, s
 
 #### Camunda 8 Run with H2 as the default secondary data storage
 
-Camunda 8 Run now uses H2 as the default secondary data storage, instead of Elasticsearch.
+Camunda 8 Run now uses H2 as the default secondary data storage, instead of Elasticsearch. Elasticsearch is no longer bundled with Camunda 8 Run.
 
 When running with H2 (or any other RDBMS) as secondary storage, Camunda is only compatible with the V2 API. As a result, some features are not available in Operate and Tasklist. See [Migrate to the V2 Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for more details.
 
-To continue using features exclusive to the V1 API, you must run Camunda with Elasticsearch and switch back to V1 mode.
+To continue using features exclusive to the V1 API, configure Camunda 8 Run with an external Elasticsearch instance and switch back to V1 mode.
 
 <p className="link-arrow">[Camunda 8 Run default secondary storage](/self-managed/quickstart/developer-quickstart/c8run.md#default-h2-camunda-8-run)</p>
 
