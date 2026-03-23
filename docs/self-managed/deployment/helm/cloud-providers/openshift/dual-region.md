@@ -532,7 +532,9 @@ By default, OpenShift comes with more restrictive SCCs. For the purposes of this
 
 For custom configurations or specific requirements, please refer to the [installation guide for OpenShift](redhat-openshift.md#security-context-constraints-sccs) which details the various available SCC options.
 
-Additionally, Elasticsearch is now managed using the ECK operator. Merge the ECK overlay into your values files:
+Additionally, Elasticsearch is managed using the ECK operator, so the orchestration cluster needs the **local** Elasticsearch connection details (URL and authentication) to read data. This is distinct from the cross-cluster Elasticsearch exporter URLs configured via environment variables in the [previous step](#configure-your-deployment-for-each-region), which handle **writing** data across regions via Submariner DNS.
+
+Merge the ECK overlay into your values files:
 
 - Add the following ECK Elasticsearch overlay configuration to both `values-region-0.yml` and `values-region-1.yml`:
 
