@@ -12,7 +12,7 @@ Use the History Data Migrator to copy process instance audit data to Camunda 8.
 
 ## About history migration
 
-Process instances leave traces, referred to as [History in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/). These are audit logs of when a process instance was started, what path it took, and so on.
+Process instances leave traces, referred to as [history in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/). These are audit logs of when a process instance was started, what path it took, and so on.
 
 It is important to note that audit data can exist for ended processes from the past, but is also available for currently still running process instances, as those process instances also left traces up to the current wait state.
 
@@ -31,8 +31,8 @@ The following requirements and limitations apply:
 - The History Data Migrator must be able to access the Camunda 7 database.
 - The History Data Migrator can migrate data to Camunda 8 only when a relational database (RDBMS) is used.
 - The History Data Migrator must be able to access the Camunda 8 database. As a result, you can run this tool only in a self-managed environment.
-- If you manipulate Camunda 7 data between History Data Migrator runs, data consistency might be affected. See [Auto-cancellation of active instances](#auto-cancellation-of-active-instances) for details.
-- **History cleanup during migration**: If you keep Camunda 8 running and history cleanup is enabled during history migration, and cleanup dates are due (for example, past removal times from Camunda 7 or negative auto-cancel TTL values), Camunda 8 history cleanup will run concurrently with migration. This may result in parent entities being cleaned up before their children are migrated, causing child entities to be skipped. See [History Cleanup](#history-cleanup) for mitigation strategies.
+- If you manipulate Camunda 7 data between History Data Migrator runs, data consistency might be affected. See [auto-cancellation of active instances](#auto-cancellation-of-active-instances) for details.
+- **History cleanup during migration**: If you keep Camunda 8 running and history cleanup is enabled during history migration, and cleanup dates are due (for example, past removal times from Camunda 7 or negative auto-cancel TTL values), Camunda 8 history cleanup will run concurrently with migration. This may result in parent entities being cleaned up before their children are migrated, causing child entities to be skipped. See [history cleanup](#history-cleanup) for mitigation strategies.
 - If you migrate runtime and history data for an active Camunda 7 process instance, two separate records will appear in Operate:
   1. **Fresh runtime instance**: The migrated active process instance running on Zeebe. This instance continues execution from the last wait state before migration and produces new history going forward. It does not include historical data from before the migration.
   2. **Auditable instance**: A canceled historic process instance that preserves the audit trail (history data) up to the last wait state pre-migration. This instance appears as canceled and serves only as an audit record of what happened in Camunda 7.
@@ -127,7 +127,7 @@ This keeps auto-canceled instances eligible for history cleanup after six months
 See [configuration for history auto-cancellation](../data-migrator/config-properties.md#camundamigratorhistoryauto-cancelcleanup) for more details.
 
 :::warning Negative TTL values
-If you configure a negative auto-cancel TTL value, calculated cleanup dates are in the past. If Camunda 8 is running during migration, history cleanup can immediately clean up these entities, potentially before their child entities are migrated. See [History Cleanup](#history-cleanup) for mitigation strategies.
+If you configure a negative auto-cancel TTL value, calculated cleanup dates are in the past. If Camunda 8 is running during migration, history cleanup can immediately clean up these entities, potentially before their child entities are migrated. See [history cleanup](#history-cleanup) for mitigation strategies.
 :::
 
 ## History Cleanup
