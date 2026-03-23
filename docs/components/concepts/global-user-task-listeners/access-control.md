@@ -1,31 +1,31 @@
 ---
 id: access-control
-title: Access control for global user task listeners API
-sidebar_label: Access control for global user task listeners API
-description: Reference the permissions required to manage global user task listeners via API.
+title: Access control for global user task listeners
+sidebar_label: Access control for global user task listeners
+description: Permissions required to manage global user task listeners.
 ---
 
-Global user task listeners are managed through the Orchestration Cluster authorization model. This page explains which permissions are required to configure global listeners via the Orchestration Cluster REST API and the Admin UI, and how they relate to the existing authorization concepts.
+Global user task listeners are managed through the Orchestration Cluster authorization model. This page lists the permissions required to manage listeners through the Orchestration Cluster REST API and Admin UI.
 
 ## When you need to configure permissions
 
-Configure permissions for global user task listeners if all the following apply:
+Configure permissions for global user task listeners if all of the following apply:
 
 - [Authorizations are enabled for the cluster](/components/concepts/access-control/authorizations.md#configuration).
-- You want to manage global user task listeners via:
+- You manage global user task listeners through one of the following:
   - The [Orchestration Cluster API](./configuration.md#configure-via-orchestration-cluster-api), or
   - The [Admin UI](./configuration.md#configure-via-admin-ui).
 
 You do not need additional Orchestration Cluster authorizations when:
 
 - Defining listeners via [Unified Configuration](./configuration.md#configure-through-unified-configuration).
-- Merely executing processes that are already affected by global listeners. Execution-time behavior is not guarded by separate permissions; any user or client allowed to run processes and user tasks will see the effect of configured listeners.
+- You only execute processes that are already affected by global listeners. Execution-time behavior is not guarded by separate permissions.
 
 ## Required permissions
 
-Global user task listeners use the `GLOBAL_LISTENER` resource type in the Orchestration Cluster authorization model. Only the wildcard resource ID `*` is supported; authorizations for specific listener IDs are not evaluated.
+Global user task listeners use the `GLOBAL_LISTENER` resource type in the Orchestration Cluster authorization model. Only the wildcard resource ID `*` is supported. Authorizations for specific listener IDs are not evaluated.
 
-To allow a user, group, role, or client to manage global user task listeners via either the Orchestration Cluster API or the Admin UI, grant authorizations on `GLOBAL_LISTENER` with resource ID `*` and the following permissions:
+To allow a user, group, role, or client to manage listeners through the Orchestration Cluster API or the Admin UI, grant authorizations on `GLOBAL_LISTENER` with resource ID `*` and the following permissions:
 
 | Operation                                    | Required permission    | Related API endpoint                                                                                                                |
 | :------------------------------------------- | :--------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |

@@ -40,7 +40,7 @@ You can use the same `type` value for multiple listeners if they should be handl
 
 The `source` property only distinguishes how the listener was defined, but it has no practical effect in how the global listeners are executed.
 
-You can configure global user task listeners in multiple ways, as described in the [Configure global user task listeners](./global-user-task-listeners/configuration.md) page:
+You can configure global user task listeners in multiple ways, as described in [configure global user task listeners](./global-user-task-listeners/configuration.md):
 
 - Through the Unified Configuration.
 - Via the Orchestration Cluster API.

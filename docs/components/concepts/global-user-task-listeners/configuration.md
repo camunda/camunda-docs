@@ -9,7 +9,7 @@ You can configure global user task listeners at the cluster level:
 
 - [Through the Unified Configuration](#configure-through-unified-configuration).
 - [Via the Orchestration Cluster API](#configure-via-orchestration-cluster-api).
-- [Via the Admin UI](#configure-via-admin-ui), indirectly using the Orchestration Cluster API.
+- [Via the Admin UI](#configure-via-admin-ui), which uses the Orchestration Cluster API.
 
 Use the Unified Configuration if:
 
@@ -21,21 +21,21 @@ Use the Orchestration Cluster API if:
 - You want to dynamically manage listeners without restarting the cluster.
 - You want to manage permissions for who can create, update, or delete global listeners through API access control.
 
-The two ways of configuring global listeners can be used at the same time, however it is important to be aware of the behaviour after a cluster restart:
+You can use both methods at the same time. After a cluster restart:
 
-- All listeners defined through the Unified Configuration are recreated after a restart, even if they were deleted through the API before the restart.
-- Listeners defined through the API are not affected by restarts, so they remain active in addition to the listeners defined through the Unified Configuration.
-- If an `id` conflict occurs between a listener defined through the Unified Configuration and another defined through the API, the listener defined through the Unified Configuration takes precedence and completely replaces the API-defined one.
+- Listeners defined through Unified Configuration are recreated, even if they were deleted through the API before restart.
+- API-defined listeners remain active in addition to configuration-defined listeners.
+- If an `id` conflict occurs, the listener from Unified Configuration takes precedence and replaces the API-defined listener.
 
 ## Configure through Unified Configuration
 
-You can configure the global user task listeners through the [Unified Configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners) by setting the appropriate properties under the configuration path `camunda.cluster.global-listeners.user-task`.
+Configure global user task listeners through [Unified Configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners) under `camunda.cluster.global-listeners.user-task`.
 
-Each listener entry can be configured with the properties described in the [Global listener definition](#global-listener-definition) section above, except for the `source` property, which is automatically set to `CONFIGURATION` by the system. Any provided `source` value will be ignored.
+Each listener entry supports the properties in [Global listener definition](/components/concepts/global-user-task-listeners.md#global-listener-definition), except `source`, which is automatically set to `CONFIGURATION`. Any provided `source` value is ignored.
 
 ### How the configuration is validated
 
-If you provide an invalid configuration, the system attempts to automatically rectify it instead of causing startup to fail. This allows you to fix issues in the configuration without requiring every listener entry to be valid on the first attempt.
+If configuration entries are invalid, the system rectifies them instead of failing startup.
 
 The following validation rules are applied automatically on startup:
 
@@ -45,8 +45,9 @@ The following validation rules are applied automatically on startup:
 - If a listener defines duplicate event types, the duplicates are removed and only one instance of each event type is kept.
 - If a listener defines both the special `all` value and a normal event type for `event-types`, the configuration is corrected to include only `all`. This ensures the listener catches all events as intended.
 - If a listener defines invalid retry values (non-numeric, negative, or zero), it is removed. Valid retry values are positive integers.
+- If a listener defines an invalid `priority`, it is removed. Valid priorities are integers from `0` to `100`.
 
-In all the above cases, a warning is written to the Orchestration Cluster startup log identifying the problem location. Invalid listeners are removed while valid ones remain active.
+In all these cases, the Orchestration Cluster writes a startup warning that identifies the problem location. Invalid listeners are removed while valid listeners remain active.
 
 :::note
 Listeners defined through the API are not subject to this validation.
@@ -81,7 +82,7 @@ camunda:
           priority: 30
 ```
 
-```
+```bash
 CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_ID=validation-listener
 CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_TYPE=validate-task
 CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_EVENT_TYPES_0=creating
@@ -109,28 +110,28 @@ After the restart, the new configuration applies to new lifecycle events for bot
 ## Configure via Orchestration Cluster API
 
 :::note
-You need [specific authorizations](./access-control.md) to be allowed to manage global listeners via API.
+You need [specific authorizations](./access-control.md) to manage global listeners through the API.
 
 Read more about [authorizations](/components/concepts/access-control/authorizations.md) and [how to create them in the Identity UI](/components/identity/authorization.md).
 :::
 
 The [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) provides CRUD operations to manage global user task listeners at runtime. This allows you to create, update, and delete listeners without restarting the cluster.
 
-When you create or update a listener through the API, you need to provide the same properties described in the [Global listener definition](#global-listener-definition) section above, except for the `source` property which is automatically set to `API` by the system.
+When you create or update a listener through the API, provide the properties described in [Global listener definition](/components/concepts/global-user-task-listeners.md#global-listener-definition). The `source` property is set automatically to `API`.
 
-The changes to the global listeners take effect immediately after the API call, applying to new lifecycle events for both running and new instances, without requiring you to redeploy models or restart the cluster.
+Changes take effect immediately after the API call for new lifecycle events on running and new instances, without requiring model redeployments or a cluster restart.
 
 ## Configure via Admin UI
 
-You can visually configure global listeners through the Admin UI, which provides a user-friendly interface to manage the listeners in the **Global Task Listeners** tab.
+You can configure global listeners in the Admin UI through the **Global Task Listeners** tab.
 
-You can update and delete global listeners through the Admin UI without needing to interact directly with the API or restart the cluster.
+You can update and delete listeners in the Admin UI without interacting with the API directly or restarting the cluster.
 
-The Admin UI uses the Orchestration Cluster API to interact with the global user task listeners configuration, so the exact same considerations apply.
+The Admin UI uses the Orchestration Cluster API to manage global user task listeners, so the same considerations apply.
 
 ## See also
 
 - [Global listener configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners).
 - [Configure properties through Helm charts](/self-managed/deployment/helm/configure/application-configs.md).
 - [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
-- [Access control for global user task listeners API](./access-control.md).
+- [Access control for global user task listeners](./access-control.md).
