@@ -2026,6 +2026,12 @@ module.exports = {
           ],
         },
         {
+          "Desktop Modeler": [
+            "self-managed/components/modeler/desktop-modeler/connect-to-self-managed",
+            "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed",
+          ],
+        },
+        {
           Connectors: [
             "self-managed/components/connectors/overview",
             "self-managed/components/connectors/connectors-configuration",
