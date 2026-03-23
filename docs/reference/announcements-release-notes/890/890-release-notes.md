@@ -16,6 +16,7 @@ These release notes identify the main new features included in the 8.9 minor rel
 :::info 8.9 resources
 
 - See [release announcements](/reference/announcements-release-notes/890/890-announcements.md) to learn more about supported environment changes and breaking changes or deprecations.
+- See [What's new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md) for important changes to consider when planning your upgrade from Camunda 8.8.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
 
 :::
@@ -27,9 +28,46 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
-<!-- RELEASE_LINKS_PLACEHOLDER -->
-
 </details>
+
+## APIs and tools
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
+
+### Camunda CLI
+
+<!-- https://github.com/camunda/product-hub/issues/2638 -->
+
+We're announcing a new command-line interface for interacting with the Orchestration Cluster REST API directly from the terminal.
+
+Camunda CLI is the successor to zbctl, providing a unified way to authenticate, manage processes, and query cluster resources for development, testing, and automation workflows.
+
+- Authenticate and connect to clusters, then run common actions directly from your terminal.
+- Supports core process management and query endpoints, including process instances, user tasks, and workers.
+
+<p class="link-arrow">[Camunda CLI getting started](/apis-tools/c8ctl/getting-started.md)</p>
+<p class="link-arrow">[Camunda CLI development workflows](/apis-tools/c8ctl/development-workflows.md)</p>
+<p class="link-arrow">[Camunda CLI cluster inspection](/apis-tools/c8ctl/cluster-inspection.md)</p>
+<p class="link-arrow">[Camunda CLI plugins](/apis-tools/c8ctl/plugins.md)</p>
+
+## Helm chart deployment
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Alternative infrastructure services for Self-Managed
+
+<!-- https://github.com/camunda/product-hub/issues/3098 -->
+
+Camunda 8.9 continues the shift away from bundled Bitnami infrastructure in Self-Managed Helm deployments.
+
+- In 8.9, PostgreSQL, Elasticsearch, and Keycloak sub-charts are disabled by default.
+- Reference architectures now use external managed services or vendor-supported operators.
+
+This update describes infrastructure deployment patterns in reference architectures, not customer data migration.
+
+<p class="link-arrow">[EKS dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)</p>
+<p class="link-arrow">[OpenShift dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)</p>
+<p class="link-arrow">[Dual-region operational tasks](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md)</p>
 
 ## 8.9.0-alpha5
 
