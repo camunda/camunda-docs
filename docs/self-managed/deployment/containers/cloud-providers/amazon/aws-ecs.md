@@ -577,7 +577,7 @@ The backup process, itself, doesn't require changes.
 
 Restoring, however, introduces additional complexity because each broker's data directory (persistent volume) must be restored in a coordinated manner. To support this, an init container is introduced as part of the Orchestration Cluster, responsible for restoring the data directory for the broker running in that task. This mechanism corresponds to the step of [restoring the Zeebe Cluster](/self-managed/operational-guides/backup-restore/rdbms/restore.md#step-1-restore-zeebe-from-its-primary-storage-backup).
 
-This approach is implemented in the example module. Set the `restore_enabled` parameter to `true` to enable it. Optionally provide `restore_backup_id` parameter. (Refer [restore options when using RDBMS](/self-managed/operational-guides/backup-restore/rdbms/restore.md#restore-options).)
+This approach is implemented in the example module. Set the `restore_enabled` parameter to `true` to enable it. You can optionally provide the `restore_backup_id` parameter to target a specific backup (see [restore options when using RDBMS](/self-managed/operational-guides/backup-restore/rdbms/restore.md#restore-options)).
 
 On startup, the init container leverages the node-id provider to determine its broker ID in alignment with the other tasks. It restores the partitions associated with that broker, then blocks execution until all brokers have completed their restore operations. Afterward, the init container exits, allowing the Orchestration Cluster container to start.
 
