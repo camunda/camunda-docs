@@ -340,7 +340,7 @@ Assert that the process instance has the local variables in the scope of the giv
 `ElementSelector` to identify the element. The assertion fails if at least one variable doesn't exist.
 
 ```java
-assertThat(processInstance).hasVariableNames(byId("task_A"), "var1", "var2");
+assertThat(processInstance).hasLocalVariableNames(byId("task_A"), "var1", "var2");
 ```
 
 ### hasLocalVariable

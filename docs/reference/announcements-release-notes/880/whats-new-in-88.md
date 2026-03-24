@@ -93,7 +93,7 @@ Use the following new features to build and integrate AI agents into your proces
     <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.</td>
 </tr>
 <tr>
-    <td>[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</td>
+    <td>[MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md)</td>
     <td>Connect an AI agent connector to tools exposed by [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers.</td>
 </tr>
 <tr>
@@ -401,7 +401,7 @@ Changes to [APIs & tools](/apis-tools/working-with-apis-tools.md) in 8.8 are sum
 </table>
 
 :::info
-To learn more about upgrading and migrating to 8.8, see the [API & tools upgrade guide](/apis-tools/migration-manuals/index.md).
+To learn more about upgrading and migrating to 8.8, see the [API & tools upgrade guide](/versioned_docs/version-8.8/apis-tools/migration-manuals/index.md).
 :::
 
 ## Upgrade guides {#upgrade-guides}
@@ -422,7 +422,7 @@ The following guides provide detailed information on how you can upgrade to Camu
     <td>Operations and platform administrators of Self-Managed installations.</td>
 </tr>
 <tr>
-    <td>[APIs & tools upgrade guide](/apis-tools/migration-manuals/index.md)</td>
+    <td>[APIs & tools upgrade guide](/versioned_docs/version-8.8/apis-tools/migration-manuals/index.md)</td>
     <td>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and tools transitions.</td>
     <td><p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p></td>
 </tr>

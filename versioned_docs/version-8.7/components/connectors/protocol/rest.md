@@ -8,7 +8,7 @@ description: Make a request to a REST API and use the response in the next steps
 :::caution
 If you use the REST connector, ensure you do not have any instance variable named in the list below:
 
-- `body`, `url`, `method`, `headers`, `authentication`, `queryParameters`, `connectionTimeoutInSeconds`, `readTimeoutInSeconds`, `writeTimeoutInSeconds`
+- `body`, `url`, `method`, `headers`, `authentication`, `queryParameters`, `connectionTimeoutInSeconds`, `readTimeoutInSeconds`
 
 :::
 

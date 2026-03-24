@@ -161,6 +161,30 @@ Adapt any webhook-dependent integrations you have created for 8.8.x to handle th
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Bug fix: `FormResult.schema` type corrected from object to string
+
+The `schema` property in the `FormResult` response was incorrectly specified as `type: object` in the OpenAPI contract, but the server has always returned it as a JSON `string`. This specification bug is now fixed.
+
+This is a bug fix that aligns the OpenAPI contract with actual server behavior, improving correctness for typed client integrations. Applications already handling the runtime `string` value are unaffected.
+
+The Camunda Java client is also affected: `io.camunda.client.api.search.response.Form::getSchema()` now returns `String` instead of `Object`. If your Java code casts or processes the return value as `Object`, update it to use `String`.
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Java client users: update calls to `Form::getSchema()` to handle the `String` return type instead of `Object`.
+- Generated-client users: regenerate your client. If your generated code relied on the incorrect `object` typing, update it to handle `string`.
+- Handwritten integrations: no change needed if you were already handling the actual `string` response.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Removed</span>
 </div>
 <div className="release-announcement-content">
@@ -865,7 +889,7 @@ Full setup instructions are available in the [installation guide](/self-managed/
   
 #### Helm chart: Alternative infrastructure methods
 
-For production environments, use managed or external services first. If not available, prefer vendor-supported operators (PostgreSQL, Elasticsearch/OpenSearch, Keycloak) over Bitnami subcharts. Bitnami subcharts remain available for evaluation or proof-of-concept use. See [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md).
+For production environments, use managed or external services first. If not available, prefer [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for PostgreSQL, Elasticsearch/OpenSearch, and Keycloak over Bitnami subcharts. Bitnami subcharts remain available for evaluation or proof-of-concept use.
 
 </div>
 </div>

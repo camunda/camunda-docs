@@ -5,6 +5,9 @@ sidebar_label: Diagram Converter
 description: "Learn how to use the Diagram Converter to analyze and convert Camunda 7 diagrams to Camunda 8."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 With **Diagram Converter**, you'll get an initial understanding of the migration tasks you'll need to perform when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 diagram files (BPMN or DMN) and generates a list of tasks required for the migration.
 
 In a second step, it can also convert these files from the Camunda 7 format to the Camunda 8 format. For example, it updates namespaces and renames XML properties, if needed.
@@ -39,6 +42,10 @@ Use the hosted Diagram Converter at [https://diagram-converter.camunda.io/](http
 
 Your models are not stored on this platform, and all processing happens in-memory. Your data is transmitted securely over HTTPS.
 
+:::note
+The hosted version has a limit on the number of files that can be processed in a single batch request. If you need to convert a larger number of files, use the [local web application](#local-web-application) or the [CLI](#use-the-cli).
+:::
+
 ### Local web application
 
 #### Prerequisites
@@ -59,7 +66,13 @@ Your models are not stored on this platform, and all processing happens in-memor
 To run the application on a different port, for example `8090`:
 
 ```shell
-java -Dserver.port=8090 -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar
+java -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar --server.port=8090
+```
+
+To increase the maximum number of files allowed per batch request (default is 100), configure `server.tomcat.max-part-count`:
+
+```shell
+java -jar camunda-7-to-8-diagram-converter-webapp-{version}.jar --server.tomcat.max-part-count=200
 ```
 
 ### CLI installation
@@ -155,9 +168,28 @@ java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local myDiagram.bpm
 
 To process all diagrams in a directory (including subdirectories):
 
+<Tabs groupId="os" defaultValue="maclinux" values={[
+{ label: 'Mac OS + Linux', value: 'maclinux' },
+{ label: 'Windows', value: 'windows' }
+]}>
+
+<TabItem value="maclinux">
+
 ```shell
 java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local ./my-processes/
 ```
+
+</TabItem>
+
+<TabItem value="windows">
+
+```shell
+java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local .\my-processes\
+```
+
+</TabItem>
+
+</Tabs>
 
 Key options for `local` mode:
 

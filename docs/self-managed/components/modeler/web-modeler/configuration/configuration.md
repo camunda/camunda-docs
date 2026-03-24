@@ -185,6 +185,14 @@ Web Modeler supports syncing files via [Git Sync](../../../../../components/mode
 | Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH` | URL used to access authentication and authorization services for Microsoft cloud identities.                                  | `https://login.microsoftonline.com`          |
 | Bitbucket     | `CAMUNDA_MODELER_GITSYNC_BITBUCKET_BASEURL`         | The base URL of Bitbucket Cloud.                                                                                              | `https://api.bitbucket.org/2.0/repositories` |
 
+### Unstable configuration options
+
+These are unstable options that are not officially supported and may be removed without deprecation in future releases. They are intended for testing and feedback purposes only.
+
+| Environment variable                                       | Description                                                                                                                                                                                                | Example value | Default value |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `CAMUNDA_MODELER_RESOURCE_IMPORT_ALLOW_PRIVATE_IP_ADDRESS` | Allow importing resources from a host that resolves to a private IP address. Enabling this option weakens server-side request forgery (SSRF) protections and can significantly increase security exposure. | `true`        | `false`       |
+
 ## Configuration of the `webapp` component
 
 ### General
@@ -231,6 +239,10 @@ The proxy-related environment variables are lowercase because they follow a wide
 | `OAUTH2_TOKEN_ISSUER`                     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                  | `https://keycloak.example.com/auth/realms/camunda-platform`                        | -             |
 | `CAMUNDA_IDENTITY_USERNAMECLAIM`          | ID token claim used to assign usernames.                                                                                                                                                                                                                            | `preferred_username`                                                               | `name`        |
 | `IDENTITY_BASE_URL`                       | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                           | `http://identity:8080`                                                             | -             |
+
+:::note Helm behavior
+The `webapp` component default for `CAMUNDA_IDENTITY_USERNAMECLAIM` is `name`. In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Web Modeler `webapp` environment.
+:::
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
 

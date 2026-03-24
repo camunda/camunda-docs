@@ -173,7 +173,7 @@ On Windows, open this page directly: [http://localhost:9200/\_cluster/health](ht
 
 ### Elasticsearch fails to start
 
-**Problem:** The embedded Elasticsearch instance fails to start, preventing Operate and Tasklist from functioning.
+**Problem:** The embedded Elasticsearch instance fails to start, preventing Orchestration Cluster web applications (Operate and Tasklist) from functioning.
 
 **Solution:**
 

@@ -291,7 +291,7 @@ Prepare a Camunda minor version upgrade by running the standalone schema manager
 :::important
 Upgrading from 8.7 → 8.8 requires migration steps. Follow the relevant guides and plan a maintenance window:
 
-- [Components update 8.7 to 8.8](/self-managed/upgrade/components/870-to-880.md)
+- [Components upgrade 8.7 to 8.8](/self-managed/upgrade/components/870-to-880.md)
 - [Helm chart upgrade guide: 8.7 to 8.8](/self-managed/upgrade/helm/870-to-880.md)
 
 These steps may require stopping or scaling down the Camunda application before running the migration.
@@ -472,7 +472,7 @@ camunda_webapps_123_8.8.0_part_6_of_7
 camunda_webapps_123_8.8.0_part_7_of_7
 ```
 
-Once completed, you can proceed with step 7 of the [backup procedure](self-managed/operational-guides/backup-restore/backup-and-restore.md#backup-process).
+Once completed, you can proceed with step 7 of the [backup procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md#backup-process).
 
 ### Limitations
 

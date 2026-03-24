@@ -33,7 +33,8 @@ With this approach, you can grant general access where appropriate while restric
 
 Tasklist evaluates user task authorization using the following authorization resources:
 
-- `PROCESS_DEFINITION`: Controls access to user tasks that belong to a specific process definition.
+- `PROCESS_DEFINITION`: Controls access to user tasks that belong to a specific process definition
+  (for example: `READ_USER_TASK`, `UPDATE_USER_TASK`, `CLAIM_USER_TASK`, `COMPLETE_USER_TASK`).
 - `USER_TASK`: Controls access to individual user tasks using property-based access control.
 
 For details about authorization resources, permission evaluation, and configuration, see
@@ -64,28 +65,30 @@ The following table shows which permissions are required to perform common user 
 
 The table reflects currently-implemented permissions that are enforced by Tasklist.
 
-| Operation                                 | `USER_TASK` permission | `PROCESS_DEFINITION` permission |
-| ----------------------------------------- | ---------------------- | ------------------------------- |
-| Get user task (by key)                    | `READ`                 | `READ_USER_TASK`                |
-| Search user tasks                         | `READ`                 | `READ_USER_TASK`                |
-| Get user task form                        | `READ`                 | `READ_USER_TASK`                |
-| Claim task                                | `CLAIM`                | `UPDATE_USER_TASK`              |
-| Unassign task                             | `UPDATE`               | `UPDATE_USER_TASK`              |
-| Assign task (override assignee)           | `UPDATE`               | `UPDATE_USER_TASK`              |
-| Complete task (with or without variables) | `COMPLETE`             | `UPDATE_USER_TASK`              |
-| Update user task                          | `UPDATE`               | `UPDATE_USER_TASK`              |
+| Operation                                 | `USER_TASK` permission | `PROCESS_DEFINITION` permission            |
+| ----------------------------------------- | ---------------------- | ------------------------------------------ |
+| Get user task (by key)                    | `READ`                 | `READ_USER_TASK`                           |
+| Search user tasks                         | `READ`                 | `READ_USER_TASK`                           |
+| Get user task form                        | `READ`                 | `READ_USER_TASK`                           |
+| Claim task                                | `CLAIM`                | `CLAIM_USER_TASK` or `UPDATE_USER_TASK`    |
+| Unassign task                             | `UPDATE`               | `UPDATE_USER_TASK`                         |
+| Assign task (override assignee)           | `UPDATE`               | `UPDATE_USER_TASK`                         |
+| Complete task (with or without variables) | `COMPLETE`             | `COMPLETE_USER_TASK` or `UPDATE_USER_TASK` |
+| Update user task                          | `UPDATE`               | `UPDATE_USER_TASK`                         |
 
 ## How Tasklist evaluates permissions
 
-Tasklist relies on the Orchestration Cluster authorization model to control access to user tasks. Permissions are evaluated in two layers:
+Tasklist relies on the Orchestration Cluster authorization model to control access to user tasks.
 
-1. Process-level permissions on the `Process Definition` resource (`READ_USER_TASK` and `UPDATE_USER_TASK`).
+Permissions are evaluated in two layers:
+
+1. Process-level permissions on the `Process Definition` resource (`READ_USER_TASK`, `CLAIM_USER_TASK`, `COMPLETE_USER_TASK`, and `UPDATE_USER_TASK`).
 2. Task-level permissions on the `USER_TASK` resource (`READ`, `UPDATE`, `CLAIM`, and `COMPLETE`), often combined with property-based access control on `assignee`, `candidateUsers`, and `candidateGroups`.
 
 When both layers are configured, process-level permissions take precedence:
 
-- If a user already has the required process-level permission (`READ_USER_TASK` or `UPDATE_USER_TASK` on `Process Definition`), Tasklist does not require or evaluate additional `USER_TASK` permissions for that operation.
-- If the user does not have sufficient process-level permissions, Tasklist evaluates `USER_TASK` permissions instead, including property-based authorizations based on task properties.
+- If a user already has the required process-level permission on `Process Definition` for an operation (for example, `READ_USER_TASK`, `CLAIM_USER_TASK`, `COMPLETE_USER_TASK`, or `UPDATE_USER_TASK`), Tasklist does not require or evaluate additional `USER_TASK` permissions for that operation.
+- If the user does not have sufficient process-level permissions, Tasklist evaluates `USER_TASK` permissions instead, including property‑based authorizations based on task properties.
 
 ## Example: claim and complete group tasks
 

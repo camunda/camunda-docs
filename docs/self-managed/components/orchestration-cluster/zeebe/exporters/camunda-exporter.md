@@ -18,33 +18,7 @@ When exporting, indexes are created as required and not recreated if they alread
 
 ## Configuration
 
-Camunda Exporter is enabled by default if secondary storage is configured to use Elasticsearch or OpenSearch. See the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
-
-You can also configure the following properties using exporter `args`:
-
-```
-zeebe:
-  brokers:
-    exporters:
-      # Camunda Exporter ----------
-      # An example configuration for the camunda exporter:
-      #
-      # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_..."
-      # To convert a YAML formatted variable to an environment variable, start with the top-level property and separate every nested property with an underscore (_).
-      # For example, the property "zeebe.broker.exporters.camundaexporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
-      #
-      camundaexporter:
-        args:
-
-```
-
-| Option       | Description                                                                                           | Default |
-| ------------ | ----------------------------------------------------------------------------------------------------- | ------- |
-| connect      | Connection configuration options. See [Connect](./camunda-exporter.md?configuration=connect#options). |         |
-| index        | Index configuration options. See [Index](./camunda-exporter.md?configuration=index#options).          |         |
-| bulk         | Bulk configuration options. See [Bulk](./camunda-exporter.md?configuration=bulk#options).             |         |
-| history      | Retention configuration options. See [History](./camunda-exporter.md?configuration=history#options).  |         |
-| createSchema | If `true`, checks schema readiness before exporting.                                                  | true    |
+Camunda Exporter is enabled by default if secondary storage is configured to use Elasticsearch or OpenSearch. See the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
 
 ### Options
 
@@ -108,14 +82,14 @@ When enabled, this creates an Index Lifecycle Management (ILM) Policy that delet
 `minimumAge`.
 All index templates created by this exporter apply the created ILM Policy.
 
-| Option                 | Description                                                                                                                                                                 | Default                                  |
-| ---------------------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ---------------------------------------- |
-| enabled                | If `true` the ILM Policy is created and applied to the index templates.                                                                                                     | `false`                                  |
-| minimumAge             | Specifies how old the data must be, before the data is deleted as a duration.                                                                                               | `30d`                                    |
-| policyName             | The name of the created and applied ILM policy.                                                                                                                             | `camunda-retention-policy`               |
+| Option                 | Description                                                                                                                                                                        | Default                                  |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| enabled                | If `true` the ILM Policy is created and applied to the index templates.                                                                                                            | `false`                                  |
+| minimumAge             | Specifies how old the data must be, before the data is deleted as a duration.                                                                                                      | `30d`                                    |
+| policyName             | The name of the created and applied ILM policy.                                                                                                                                    | `camunda-retention-policy`               |
 | usageMetricsMinimumAge | Specifies how old the usage metrics data must be, before the data is deleted as a duration. Applies to `camunda-usage-metric-8.8.0_` and `camunda-usage-metric-tu-8.8.0_` indices. | `730d`                                   |
-| usageMetricsPolicyName | The name of the created and applied usage metrics ILM policy.                                                                                                               | `camunda-usage-metrics-retention-policy` |
-| applyPolicyJobInterval | The interval at which the ILM policy is periodically applied to all historical indices (starting from version 8.8.1).                                                       | `PT1H`                                   |
+| usageMetricsPolicyName | The name of the created and applied usage metrics ILM policy.                                                                                                                      | `camunda-usage-metrics-retention-policy` |
+| applyPolicyJobInterval | The interval at which the ILM policy is periodically applied to all historical indices (starting from version 8.8.1).                                                              | `PT1H`                                   |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or nanoseconds

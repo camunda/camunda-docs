@@ -30,7 +30,7 @@ This section includes deployment reference architectures for manual setups:
 
 ## Considerations
 
-- This overview page focuses on deploying the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster), the single JAR compromised of Identity, Operate, Tasklist, and Zeebe, as well as the connectors runtime. Web Modeler, Console, Optimize, and Management Identity deployments are not included.
+- This overview page focuses on deploying the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster), the single JAR comprised of Zeebe, Operate, Tasklist, and Orchestration Cluster Identity, as well as the Connectors runtime. Web Modeler, Console, Optimize, and Management Identity deployments are not included.
 - General guidance and examples focuses on **unix** users, but can be adapted by Windows users with options like [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or included `batch` files.
 
 ## Architecture
@@ -63,7 +63,7 @@ Both types of endpoints can be routed through a load balancer to maintain availa
 
 Connectors expose additional HTTP(s) endpoints for handling incoming webhooks, which can also be routed through the same HTTP load balancer.
 
-The orchestration components rely on a configured secondary storage backend for indexing and search. Depending on your deployment and configuration, this backend can be [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) or an [RDBMS](/reference/glossary.md#rdbms) for supported components.
+The Orchestration Cluster relies on a configured [secondary storage](/reference/glossary.md#secondary-storage) backend for indexing and search. Depending on your deployment and configuration, this backend can use a document-store backend ([Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch)) or an [RDBMS](/reference/glossary.md#rdbms) for supported scenarios.
 
 :::note
 Secondary storage is configurable. For RDBMS-based secondary storage, see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms).
@@ -114,6 +114,6 @@ Some ports can be overwritten and are not definitive, you may conduct the docume
 
 ### Database
 
-- Elasticsearch / OpenSearch, see [supported environments](/reference/supported-environments.md) for version details.
+- Secondary storage backend (supported RDBMS or Elasticsearch/OpenSearch, depending on your architecture), see [supported environments](/reference/supported-environments.md) for version details.
 
 Our recommendation is to use an external managed offer as we will not go into detail on how to manage and maintain your database.

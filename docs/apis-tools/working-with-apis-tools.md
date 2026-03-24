@@ -29,14 +29,14 @@ Use Camunda 8 APIs and clients to build, automate, and monitor your applications
 </div>
 </div>
 
-:::info Upgrading to Camunda 8.8
+:::info Upgrade to Camunda 8.9
 
-- Existing customers can upgrade APIs & tools to 8.8 using the [APIs & tools migration guide](/apis-tools/migration-manuals/index.md).
-- See [what's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
+- Existing customer? Upgrade your APIs & tools to 8.9 using the [APIs & tools migration guide](/apis-tools/migration-manuals/migrate-to-89.md).
+- See [what's new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md), [release announcements](/reference/announcements-release-notes/890/890-announcements.md), and [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 
 :::
 
-## APIs and reference
+## APIs
 
 Use the following APIs for Camunda 8 integration and automation:
 
@@ -48,16 +48,20 @@ Camunda provides the following official clients to simplify API usage and speed 
 
 <ApiGrid api={clientCards} />
 
-## Camunda Process Test
+:::note community clients
+In addition to the core Camunda-maintained clients, there are a number of [community-maintained component clients](/apis-tools/community-clients/index.md).
+:::
+
+## Testing
 
 Use Camunda Process Test to test your process definitions and automations with a dedicated testing framework.
 
-<p><a href="../testing/getting-started/" class="link-arrow">Camunda Process Test</a></p>
+<p class="link-arrow">[Camunda Process Test](/apis-tools/testing/getting-started.md)</p>
 
-## Upgrade to Camunda 8.8
+## Upgrade to Camunda 8.9
 
-If you are migrating from Camunda 7 or from v1 component REST APIs, see the [Camunda 8.8 APIs & tools migration guide](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for guidance.
+If you are migrating from Camunda 7 or from v1 component REST APIs, see the migration guide for guidance.
 
-<p><a href="../migration-manuals/" class="link-arrow">Camunda 8.8 APIs & tools migration guide</a></p>
+<p class="link-arrow">[Camunda 8.9 APIs & tools migration guide](/apis-tools/migration-manuals/migrate-to-89.md)</p>
 
 <AskAi/>

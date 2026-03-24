@@ -121,6 +121,34 @@ If you need more control over the feedback loop, you can model pre-/post-process
 
 ## Concepts
 
+### System prompt, user prompt, and tool descriptions
+
+Reliable agent behavior depends on three inputs working together:
+
+- **System prompt**: Defines the agent's role, boundaries, priorities, and success criteria.
+- **User prompt**: Carries the current request and immediate context.
+- **Tool/task descriptions**: Define which actions are available in the ad-hoc sub-process and how each should be used.
+
+At runtime, the connector passes this combined context to the LLM. The model then selects which tools to call (if any), along with parameters.
+
+#### How task descriptions are used for tools
+
+When using an ad-hoc sub-process, each activity can be exposed as a tool. For best results, document each tool with:
+
+- A clear task name that describes intent.
+- A behavior-oriented description that includes when to use it, when not to use it, and the expected outcome.
+
+This makes tool selection more predictable and reduces repeated or incorrect calls.
+
+### Execution responsibility split
+
+The decision and execution loop is shared between the LLM and Camunda:
+
+- **LLM decides**: Which tool to call next, in what order, and with which parameters.
+- **Camunda orchestrates**: Executes the selected BPMN activity, stores variables, applies retries and incident handling, and routes human tasks and events.
+
+This means tools can be called in different orders, repeated, run in parallel, or skipped entirely, while execution remains constrained by the modeled process boundaries.
+
 ### Feedback loop
 
 This connector is typically used in a feedback loop, with the connector implementation repeatedly being executed based on tool call results or user feedback until it is able to reach its goal.
@@ -241,4 +269,4 @@ When a tool receives a parameter in a different format than expected, it can eit
 - [Intelligent by design: A step-by-step guide to AI task agents in Camunda](https://camunda.com/blog/2025/05/building-your-first-ai-agent-with-camunda-s-new-agentic-ai/).
 - [AI Agent Chat Quick Start blueprint](https://marketplace.camunda.com/en-US/apps/587865/ai-agent-chat-quick-start) on the Camunda Marketplace.
 - Agentic AI examples GitHub repository [working examples](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples).
-- The [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md) can be used in combination with the AI agent connector to connect to tools exposed by Model Context Protocol (MCP) servers.
+- The [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md) can be used in combination with the AI agent connector to connect to tools exposed by Model Context Protocol (MCP) servers.

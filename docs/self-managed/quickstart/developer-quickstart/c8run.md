@@ -30,7 +30,7 @@ Camunda 8 Run includes the following:
 Camunda 8 Run also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 :::note
-For the latest list of supported relational databases and versions, see the  
+For the latest list of supported relational databases and versions, see the
 [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 :::
 
@@ -86,7 +86,7 @@ Use the CLI command:
 
 If startup is successful, a browser window for Operate will open automatically. Alternatively, you can access Operate at [http://localhost:8080/operate](http://localhost:8080/operate).
 
-To start Camunda 8 in Docker Compose using Camunda 8 Run you can use the following option. It is equivalent of running `docker compose up -d`:
+To start Camunda 8 in Docker Compose using Camunda 8 Run you can use the following options. They map to `docker compose up -d` under the hood and now include presets for each supported relational database.
 
 <Tabs groupId="os" defaultValue="maclinux" values={
 [
@@ -95,16 +95,134 @@ To start Camunda 8 in Docker Compose using Camunda 8 Run you can use the followi
 ] }>
 <TabItem value="maclinux">
 
+<Tabs groupId="docker-db-mac" defaultValue="h2" values={[
+{label: 'H2 (default)', value: 'h2'},
+{label: 'PostgreSQL', value: 'postgresql'},
+{label: 'MariaDB', value: 'mariadb'},
+{label: 'MySQL', value: 'mysql'},
+{label: 'Oracle', value: 'oracle'},
+{label: 'Microsoft SQL Server', value: 'mssql'},
+]}>
+<TabItem value="h2">
+
 ```bash
 ./start.sh --docker
+# or
+./c8run start -docker
 ```
+
+</TabItem>
+<TabItem value="postgresql">
+
+```bash
+ORCHESTRATION_CONFIG_FILE=application-postgresql.yaml ./c8run start -docker
+# or pass the config directly to c8run
+# ./c8run start -docker --config configuration/application-postgresql.yaml
+```
+
+</TabItem>
+<TabItem value="mariadb">
+
+```bash
+ORCHESTRATION_CONFIG_FILE=application-mariadb.yaml ./c8run start -docker
+# or
+# ./c8run start -docker --config configuration/application-mariadb.yaml
+```
+
+</TabItem>
+<TabItem value="mysql">
+
+```bash
+ORCHESTRATION_CONFIG_FILE=application-mysql.yaml ./c8run start -docker
+# or
+# ./c8run start -docker --config configuration/application-mysql.yaml
+```
+
+</TabItem>
+<TabItem value="oracle">
+
+```bash
+ORCHESTRATION_CONFIG_FILE=application-oracle.yaml ./c8run start -docker
+# or
+# ./c8run start -docker --config configuration/application-oracle.yaml
+```
+
+</TabItem>
+<TabItem value="mssql">
+
+```bash
+ORCHESTRATION_CONFIG_FILE=application-mssql.yaml ./c8run start -docker
+# or
+# ./c8run start -docker --config configuration/application-mssql.yaml
+```
+
+</TabItem>
+</Tabs>
 
 </TabItem>
 <TabItem value="windows">
 
-```bash
+<Tabs groupId="docker-db-win" defaultValue="h2" values={[
+{label: 'H2 (default)', value: 'h2'},
+{label: 'PostgreSQL', value: 'postgresql'},
+{label: 'MariaDB', value: 'mariadb'},
+{label: 'MySQL', value: 'mysql'},
+{label: 'Oracle', value: 'oracle'},
+{label: 'Microsoft SQL Server', value: 'mssql'},
+]}>
+<TabItem value="h2">
+
+```powershell
 .\c8run.exe start --docker
 ```
+
+</TabItem>
+<TabItem value="postgresql">
+
+```powershell
+set ORCHESTRATION_CONFIG_FILE=application-postgresql.yaml .\c8run.exe start --docker
+# or
+# .\c8run.exe start --docker --config configuration\application-postgresql.yaml
+```
+
+</TabItem>
+<TabItem value="mariadb">
+
+```powershell
+set ORCHESTRATION_CONFIG_FILE=application-mariadb.yaml .\c8run.exe start --docker
+# or
+# .\c8run.exe start --docker --config configuration\application-mariadb.yaml
+```
+
+</TabItem>
+<TabItem value="mysql">
+
+```powershell
+set ORCHESTRATION_CONFIG_FILE=application-mysql.yaml .\c8run.exe start --docker
+# or
+# .\c8run.exe start --docker --config configuration\application-mysql.yaml
+```
+
+</TabItem>
+<TabItem value="oracle">
+
+```powershell
+set ORCHESTRATION_CONFIG_FILE=application-oracle.yaml .\c8run.exe start --docker
+# or
+# .\c8run.exe start --docker --config configuration\application-oracle.yaml
+```
+
+</TabItem>
+<TabItem value="mssql">
+
+```powershell
+set ORCHESTRATION_CONFIG_FILE=application-mssql.yaml .\c8run.exe start --docker
+# or
+# .\c8run.exe start --docker --config configuration\application-mssql.yaml
+```
+
+</TabItem>
+</Tabs>
 
 </TabItem>
 </Tabs>
@@ -115,54 +233,41 @@ If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-
 
 ### Configuration options
 
-The following options provide a convenient way to override settings for quick tests and interactions in Camunda 8 Run.  
+The following options provide a convenient way to override settings for quick tests and interactions in Camunda 8 Run.
 For more advanced or permanent configuration, modify the default `configuration/application.yaml` or supply a custom file using the `--config` flag (e.g., [to enable authentication and authorization](#enable-authentication-and-authorization)).
 
-| Argument                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).                                                                                                                                                                                                                                                                                                 |
-| `--extra-driver <path>`    | Copies an external JDBC driver into `camunda-zeebe-<version>/lib` before startup. Use this when running against Oracle, MySQL, or other databases that require a driver that is not bundled with Camunda 8 Run. Repeat the flag to copy multiple jars.                                                                                                                                                                                 |
-| `--username <arg>`         | Configures the first user’s username as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                                       |
-| `--password <arg>`         | Configures the first user’s password as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                                       |
-| `--keystore <arg>`         | Configures the TLS certificate for HTTPS. If not specified, HTTP is used. For more information, see [enabling TLS](#enable-tls).                                                                                                                                                                                                                                                                                                       |
-| `--keystorePassword <arg>` | Provides the password for the JKS keystore file.                                                                                                                                                                                                                                                                                                                                                                                       |
-| `--port <arg>`             | Sets the Camunda core port (default: `8080`).                                                                                                                                                                                                                                                                                                                                                                                          |
-| `--log-level <arg>`        | Sets the log level for the Camunda core.                                                                                                                                                                                                                                                                                                                                                                                               |
-| `--docker`                 | Downloads and runs the Camunda Docker Compose distribution. This option provides an easy shortcut to run Camunda in Docker Compose. However, additional Camunda 8 Run options are not supported and will be ignored. For more information on running Camunda with Docker Compose see the [documentation](./docker-compose.md). See the [shutdown script](#shut-down-camunda-8-run) for information on stopping the Docker application. |
-| `--disable-elasticsearch`  | Prevents the built-in Elasticsearch from starting. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) section for details.                                                                                                                                                                                                                              |
-| `--startup-url`            | The URL to open after startup (e.g., `'http://localhost:8080/operate'`). By default, Operate is opened.                                                                                                                                                                                                                                                                                                                                |
+| Argument                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).                                                                                                                                                                                                                                                                                                                                                                                   |
+| `--extra-driver <path>`    | Copies an external JDBC driver into `camunda-zeebe-<version>/lib` before startup. Use this when running against Oracle, MySQL, or other databases that require a driver that is not bundled with Camunda 8 Run. Repeat the flag to copy multiple jars.                                                                                                                                                                                                                                                                   |
+| `--username <arg>`         | Configures the first user’s username as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `--password <arg>`         | Configures the first user’s password as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `--keystore <arg>`         | Configures the TLS certificate for HTTPS. If not specified, HTTP is used. For more information, see [enabling TLS](#enable-tls).                                                                                                                                                                                                                                                                                                                                                                                         |
+| `--keystorePassword <arg>` | Provides the password for the JKS keystore file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `--port <arg>`             | Sets the Camunda core port (default: `8080`).                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `--log-level <arg>`        | Sets the log level for the Camunda core.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `--docker`                 | Downloads and runs the Camunda Docker Compose distribution. This option provides an easy shortcut to run Camunda in Docker Compose. Most other Camunda 8 Run flags are ignored, but you can combine `--docker` with `--config` to supply an alternative RDBMS configuration (for example, PostgreSQL). For more information on running Camunda with Docker Compose see the [documentation](./docker-compose.md). See the [shutdown script](#shut-down-camunda-8-run) for information on stopping the Docker application. |
+| `--disable-elasticsearch`  | Prevents the built-in Elasticsearch from starting. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) section for details.                                                                                                                                                                                                                                                                                                                |
+| `--startup-url`            | The URL to open after startup (e.g., `'http://localhost:8080/operate'`). By default, Operate is opened.                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Configure or switch secondary storage (H2 or Elasticsearch)
 
-Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts. Elasticsearch remains bundled and supported as an optional alternative that you can enable when you need full-text indexing, search, or advanced analytics.
+Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts and its data persists across restarts. Elasticsearch remains bundled and supported as an optional alternative that you can enable when you need full-text indexing, search, or advanced analytics.
 
 #### Default: H2 (Camunda 8 Run)
 
-The default Camunda 8 Run configuration in 8.9-alpha3 uses an H2 database for secondary storage. This is convenient for local development and demos.
+The default Camunda 8 Run configuration in 8.9-alpha3 uses an H2 database for secondary storage. This is convenient for local development and demos and stores data on disk.
 
-In-memory H2 example:
+File-based H2 example (default in 8.9-alpha3):
 
 ```yaml
 data:
   secondary-storage:
     type: rdbms
     rdbms:
-      url: jdbc:h2:mem:camunda
+      url: jdbc:h2:file:./camunda-data/h2db
       username: sa
       password:
-```
-
-To persist H2 data to disk:
-
-```yaml
-camunda:
-  data:
-    secondary-storage:
-      type: rdbms
-      rdbms:
-        url: jdbc:h2:file:./camunda-data/h2db
-        username: sa
-        password:
 ```
 
 <details>
@@ -175,7 +280,7 @@ camunda:
     secondary-storage:
       type: rdbms
       rdbms:
-        url: jdbc:h2:mem:camunda
+        url: jdbc:h2:file:./camunda-data/h2db
         username: sa
         password:
         flushInterval: PT0.5S
@@ -414,7 +519,7 @@ Operate can run against the default H2 store in 8.9-alpha3, but some user-facing
 - Performance and scaling behavior when using H2 will differ from Elasticsearch in production scenarios.
 - Users who require full Operate feature parity should enable Elasticsearch (embedded or external) until full H2 parity is confirmed in a later alpha.
 
-<!--- Maybe add something like "For engineering details and progress on Operate feature parity, see issue #7315 and the Operate migration tracking in the project board. If we want a precise feature list for alpha3, I can add a checklist here after stakeholder confirmation." ---!>
+<!--- Maybe add something like "For engineering details and progress on Operate feature parity, see issue #7315 and the Operate migration tracking in the project board. If we want a precise feature list for alpha3, I can add a checklist here after stakeholder confirmation."
     authentication:
       # Require authentication for API requests
       unprotected-api: false
@@ -540,31 +645,18 @@ Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha
 
 #### Default: H2 (Camunda 8 Run)
 
-The default Camunda 8 Run configuration in 8.9-alpha3 uses an H2 database for secondary storage. This is convenient for local development and demos.
+The default Camunda 8 Run configuration in 8.9-alpha3 uses an H2 database for secondary storage. This is convenient for local development and demos and stores data on disk.
 
-In-memory H2 example:
+File-based H2 example:
 
 ```yaml
 data:
   secondary-storage:
     type: rdbms
     rdbms:
-      url: jdbc:h2:mem:camunda
+      url: jdbc:h2:file:./camunda-data/h2db
       username: sa
       password:
-```
-
-To persist H2 data to disk:
-
-```yaml
-camunda:
-  data:
-    secondary-storage:
-      type: rdbms
-      rdbms:
-        url: jdbc:h2:file:./camunda-data/h2db
-        username: sa
-        password:
 ```
 
 <details>
@@ -577,7 +669,7 @@ camunda:
     secondary-storage:
       type: rdbms
       rdbms:
-        url: jdbc:h2:mem:camunda
+        url: jdbc:h2:file:./camunda-data/h2db
         username: sa
         password:
         flushInterval: PT0.5S
@@ -654,7 +746,7 @@ Camunda 8 Run uses v2 APIs by default, so no additional configuration is require
 
 - Tasklist can use H2 through the v2 APIs. Operate support for H2 is under active development and may have limitations in current alpha versions.
 - H2 is intended for testing and local development only.
-- Data stored in H2 is ephemeral unless configured as file-based.
+- H2 data persists to the configured file path (default `./camunda-data/h2db`). Keep the path stable to avoid accidental data loss.
 - Performance and memory use may vary depending on local environment.
 
 ### Environment variables
@@ -666,9 +758,11 @@ The following advanced configuration options can be provided via environment var
 | `ES_JAVA_OPTS` | Allows you to override Java command line parameters for Elasticsearch. This can allow you to increase memory limits. **Default:** `-Xms1g -Xmx1g` |
 | `JAVA_OPTS`    | Allows you to override Java command line parameters for Camunda.                                                                                  |
 
+-->
+
 ## Next steps
 
 <!-- - Learn how to [configure a relational database](/self-managed/concepts/databases/relational-db/configuration.md). -->
 
-- Review [backup and restore for RDBMS](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+- Review [backup and restore for RDBMS](/self-managed/operational-guides/backup-restore/rdbms/backup.md).
 - Identify and resolve [common issues when starting, configuring, or using Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run-troubleshooting.md).

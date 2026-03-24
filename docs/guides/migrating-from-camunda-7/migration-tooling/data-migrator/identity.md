@@ -1,15 +1,14 @@
 ---
 id: identity
-title: Identity migration
-sidebar_label: Identity migration
+title: Identity
+sidebar_label: Identity
 description: "Copy identity data from Camunda 7 to 8."
 ---
 
-Use the Identity Data Migrator to copy authorizations and tenants to Camunda 8.
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-:::info
-The identity migration mode of the Data Migrator is still in the development stage and will **not be released before Camunda 8.9 (April 2026)**. You can check the current state and track progress in the [GitHub repository](https://github.com/camunda/camunda-7-to-8-migration-tooling/).
-:::
+Use the Identity Data Migrator to copy authorizations and tenants to Camunda 8.
 
 ## About identity migration
 
@@ -212,6 +211,13 @@ As illustrated in the tables above, the `ALL` permission in Camunda 7 maps to **
 
 ## Executing identity migration
 
+<Tabs groupId="os" defaultValue="maclinux" values={[
+{ label: 'Mac OS + Linux', value: 'maclinux' },
+{ label: 'Windows', value: 'windows' }
+]}>
+
+<TabItem value="maclinux">
+
 ```bash
 # Run identity migration
 ./start.sh --identity
@@ -222,6 +228,25 @@ As illustrated in the tables above, the `ALL` permission in Camunda 7 maps to **
 # Retry skipped identity entities
 ./start.sh --identity --retry-skipped
 ```
+
+</TabItem>
+
+<TabItem value="windows">
+
+```bash
+# Run identity migration
+start.bat --identity
+
+# List all skipped identity entities
+start.bat --identity --list-skipped
+
+# Retry skipped identity entities
+start.bat --identity --retry-skipped
+```
+
+</TabItem>
+
+</Tabs>
 
 :::warning
 After migration has been completed, it is strongly recommended to verify the results in Camunda 8 before using the system in production.
