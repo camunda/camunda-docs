@@ -282,6 +282,14 @@ RewriteRule ^docs/next/components/connectors/use-connectors/intrinsic-functions/
 RewriteRule ^docs/components/connectors/use-connectors/intrinsic-functions/?$ /docs/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
 RewriteRule ^docs/8.8/components/connectors/use-connectors/intrinsic-functions/?$ /docs/8.8/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
 
+# Rename identity to admin for orchestration-cluster (8.9)
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/overview/?$ /docs/next/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/overview/?$ /docs/next/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/special-oidc-cases/?$ /docs/next/self-managed/components/orchestration-cluster/admin/special-oidc-cases/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/special-oidc-cases/?$ /docs/next/self-managed/components/orchestration-cluster/admin/special-oidc-cases/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
+
 # Move MCP Client from early access to Agentic AI connectors (8.9)
 RewriteRule ^docs/next/components/early-access/alpha/mcp-client/?$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/ [R=301,L]
 RewriteRule ^docs/next/components/early-access/alpha/mcp-client/(.+)$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-$1 [R=301,L]

@@ -2,7 +2,7 @@
 id: connect-multiple-identity-providers
 title: Connect to multiple identity providers
 sidebar_label: Connect to multiple identity providers
-description: Learn how to connect Camunda 8 Orchestration Cluster Identity to multiple external identity providers (IdPs) using OpenID Connect (OIDC) for authentication and user management.
+description: Learn how to connect Camunda 8 Orchestration Cluster Admin to multiple external identity providers (IdPs) using OpenID Connect (OIDC) for authentication and user management.
 unlisted: true
 ---
 

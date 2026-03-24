@@ -19,7 +19,7 @@ This page explains how to authenticate requests to the Orchestration Cluster RES
 | SaaS                                                                              | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
 
 :::info Authentication vs. authorization
-Authentication establishes who is calling the Orchestration Cluster REST API (for example, using basic authentication or an OIDC access token). Authorization determines what that caller can do, based on authorizations configured in Identity.
+Authentication establishes who is calling the Orchestration Cluster REST API (for example, using basic authentication or an OIDC access token). Authorization determines what that caller can do, based on authorizations configured in Admin.
 
 To learn more about authorization resources, permissions, and precedence (including user task permissions), see [Orchestration Cluster authorization](../../components/concepts/access-control/authorizations.md).
 :::
@@ -92,7 +92,7 @@ curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
 
 **Prerequisites for OIDC-based authentication**
 
-- Your Orchestration Cluster must already be configured with your Identity Provider. See [Set up OIDC-based Authentication](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
+- Your Orchestration Cluster must already be configured with your Identity Provider. See [Set up OIDC-based Authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md).
 - You must have a registered client in your IdP with a **client ID**, **client secret**, and authorization endpoint.
 - Note the configured **audience** and **scope** for token requests (variables `OC_AUDIENCE` and `SCOPE`). Depends on IdP configuration.
 
