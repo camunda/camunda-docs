@@ -83,3 +83,21 @@ https://docs.camunda.io/docs/next/components/admin/admin-introduction/
 https://docs.camunda.io/docs/next/components/tasklist/api-versions/
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/whats-new-in-88/
 
+# Orchestration Identity
+
+https://docs.camunda.io/docs/next/components/identity/authorization/#about-authorizations
+https://docs.camunda.io/docs/next/components/identity/group/#assign-users-to-a-group
+https://docs.camunda.io/docs/next/components/identity/role/#assign-users-to-a-role
+https://docs.camunda.io/docs/next/components/identity/tenant/#assign-users-to-a-tenant
+https://docs.camunda.io/docs/components/identity/authorization/#about-authorizations
+https://docs.camunda.io/docs/components/identity/client/
+https://docs.camunda.io/docs/components/identity/group/#assign-users-to-a-group
+https://docs.camunda.io/docs/components/identity/mapping-rules/manage-mapping-rules/
+https://docs.camunda.io/docs/components/identity/role/#assign-users-to-a-role
+https://docs.camunda.io/docs/components/identity/tenant/#assign-users-to-a-tenant
+https://docs.camunda.io/docs/components/identity/user/
+https://docs.camunda.io/docs/components/concepts/access-control/authorizations/
+https://docs.camunda.io/docs/components/concepts/access-control/authorizations/#resources-and-permissions
+https://docs.camunda.io/docs/components/concepts/audit-log/
+https://docs.camunda.io/docs/components/concepts/global-user-task-listeners/
+https://docs.camunda.io/docs/next/components/modeler/feel/cluster-variable/cluster-variable-overview/
