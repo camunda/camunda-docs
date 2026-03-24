@@ -369,9 +369,9 @@ The vector database connector supports [plain proxy variables](/self-managed/com
 
 The following providers do not support proxy configuration:
 
-- Google VertexAI (embedding model)
-- Azure AI Search (vector store)
-- Azure Cosmos DB NoSQL (vector store)
+- Google VertexAI (embedding model).
+- Azure AI Search (vector store).
+- Azure Cosmos DB NoSQL (vector store).
 
 To disable proxy support entirely (for example, if only an HTTPS-based proxy is available), set the following environment variable:
 

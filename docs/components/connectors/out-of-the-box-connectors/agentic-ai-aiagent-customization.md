@@ -21,12 +21,12 @@ These connectors support [plain proxy variables](/self-managed/components/connec
 
 The following LLM providers do not support proxy configuration:
 
-- Google Vertex AI
+- Google Vertex AI.
 
 To disable proxy support entirely (for example, if only an HTTPS-based proxy is available):
 
-- **Spring Boot property:** `camunda.connector.agenticai.http.proxy-support.enabled=false`
-- **Environment variable:** `CAMUNDA_CONNECTOR_AGENTICAI_HTTP_PROXYSUPPORT_ENABLED=false`
+- **Spring Boot property:** `camunda.connector.agenticai.http.proxy-support.enabled=false`.
+- **Environment variable:** `CAMUNDA_CONNECTOR_AGENTICAI_HTTP_PROXYSUPPORT_ENABLED=false`.
 
 ## Extending the AI Agent connector
 

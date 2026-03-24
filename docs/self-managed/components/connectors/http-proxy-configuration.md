@@ -5,9 +5,11 @@ sidebar_label: HTTP proxy configuration
 description: Configure HTTP proxy settings for Camunda connectors in Self-Managed environments.
 ---
 
-In Self-Managed environments, you can configure connectors to route HTTP requests through a proxy server.
+Configure HTTP proxy settings for Camunda connectors in Self-Managed environments.
 
-Two configuration methods are available:
+## Configuration methods
+
+In Self-Managed environments, you can configure connectors to route HTTP requests through a proxy server using one of these two methods:
 
 | Configuration type                                                                        | Scope                                                                                                                                                  | Example                                                                                                                                                                            |
 | :---------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -16,7 +18,10 @@ Two configuration methods are available:
 
 ## HTTP/HTTPS properties
 
-Depending on the **target URL**, you can set the proxy as an HTTP or HTTPS protocol handler. A target URL such as `http://example.com` will use the HTTP protocol handler, while a target URL such as `https://example.com` will use the HTTPS protocol handler.
+Depending on the **target URL**, you can set the proxy as an HTTP or HTTPS protocol handler:
+
+- A target URL such as `http://example.com` will use the HTTP protocol handler.
+- A target URL such as `https://example.com` will use the HTTPS protocol handler.
 
 ### JVM properties
 

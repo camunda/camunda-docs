@@ -70,4 +70,4 @@ Specify the process variables to map and export the tool calling response into.
 
 ## HTTP proxy support
 
-In Self-Managed environments, the MCP Client connector supports HTTP proxy configuration, including [plain proxy variables](/self-managed/components/connectors/http-proxy-configuration.md). See the [AI Agent connector proxy configuration](./agentic-ai-aiagent-customization.md#http-proxy-configuration) for details, including how to disable proxy support.
+In Self-Managed environments, the MCP Client connector supports HTTP proxy configuration, including [plain proxy variables](/self-managed/components/connectors/http-proxy-configuration.md#plain-proxy-variables). See the [AI Agent connector proxy configuration](./agentic-ai-aiagent-customization.md#http-proxy-configuration) for details, including how to disable proxy support.
