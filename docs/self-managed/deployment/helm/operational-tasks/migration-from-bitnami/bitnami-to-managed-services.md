@@ -17,6 +17,10 @@ Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to **c
 - **Elasticsearch**: Elastic Cloud or any managed Elasticsearch service
 - **Keycloak**: This guide does not assume a managed Keycloak service. Keep Keycloak on the [Keycloak Operator](https://www.keycloak.org/operator/installation), or replace it with an [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) if that better fits your environment.
 
+:::tip Before running in production
+Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
+:::
+
 :::info When to choose managed services
 Managed services are ideal when your organization:
 
@@ -30,12 +34,10 @@ Managed services are ideal when your organization:
 
 <CommonPrerequisites />
 
-In addition to the general prerequisites, you must:
+In addition to the general prerequisites:
 
-- Have a managed PostgreSQL instance provisioned (with databases and users created)
-- Have a managed Elasticsearch instance provisioned (if migrating Elasticsearch)
 - Ensure network connectivity between your Kubernetes cluster and the managed services
-- Have credentials stored as Kubernetes Secrets in the Camunda namespace
+- Have credentials ready for each managed service (or plan to create them during [Step 1](#step-1-provision-managed-services))
 
 :::warning IRSA / IAM-based authentication not supported
 The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or Elasticsearch endpoints protected by cloud-specific IAM auth require a custom migration approach.
@@ -256,7 +258,7 @@ source env.sh
 
 ## Step 3: Run the migration
 
-With external targets, the migration phases work the same way, with key differences:
+The migration follows the same five-phase approach described in the [migration overview](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md#migration-phases). Each phase is idempotent and can be safely rerun. The key difference with external targets is that operator installation is skipped for components using managed services.
 
 ### Phase 1: Deploy targets (no downtime)
 
@@ -264,11 +266,12 @@ With external targets, the migration phases work the same way, with key differen
 bash 1-deploy-targets.sh
 ```
 
-Implementation details:
+What happens:
 
 - When `PG_TARGET_MODE=external`, the CloudNativePG (CNPG) operator is not installed; your managed PostgreSQL is used directly.
-- When `ES_TARGET_MODE=external`, the Amazon Elastic Cloud on Kubernetes (ECK) operator is not installed; your managed Elasticsearch target is used directly.
+- When `ES_TARGET_MODE=external`, the Elastic Cloud on Kubernetes (ECK) operator is not installed; your managed Elasticsearch target is used directly.
 - The Keycloak Operator is still deployed with a Custom Resource pointing to your managed PostgreSQL.
+- The script validates connectivity to each external endpoint before proceeding.
 
 ### Phase 2: Initial backup (no downtime)
 
@@ -276,19 +279,31 @@ Implementation details:
 bash 2-backup.sh
 ```
 
-This phase creates `pg_dump` backups of each Bitnami PostgreSQL database (Identity, Keycloak, Web Modeler) and verifies the source Elasticsearch cluster health. Backups are stored on a shared PVC. The target type does not affect this phase — backups always run against the source Bitnami instances.
+What happens:
+
+1. **PostgreSQL**: A `pg_dump` Kubernetes Job is created for each component (Identity, Keycloak, and Web Modeler).
+2. **Elasticsearch**: A verification job checks source Elasticsearch health and lists all Camunda indices to be migrated.
+3. All backup data is stored on a shared Persistent Volume Claim (PVC).
+
+The target type does not affect this phase — backups always run against the source Bitnami instances.
 
 ### Phase 3: Cutover (downtime required)
 
 :::warning Maintenance window required
-Schedule a maintenance window. Typical duration: 5–30 minutes.
+Schedule a maintenance window. Typical duration: 5–30 minutes. See [downtime estimation](./bitnami-to-operators.md#downtime-estimation) for benchmarked timings.
 :::
 
 ```bash
 bash 3-cutover.sh
 ```
 
-For PostgreSQL, `pg_restore` runs against the managed PostgreSQL endpoints instead of CNPG clusters.
+What happens:
+
+1. **Save** current Helm values for rollback.
+2. **Freeze** all Camunda deployments and StatefulSets (scale to zero replicas).
+3. **Final backup** — consistent backup with no active connections.
+4. **Restore** — `pg_restore` runs against the managed PostgreSQL endpoints instead of CNPG clusters.
+5. **Helm upgrade** — reconfigures Camunda to use the new backends and restarts all components.
 
 #### Elasticsearch data migration for managed services
 
@@ -406,18 +421,10 @@ bash 4-validate.sh
 
 The validation script checks that all Camunda deployments and StatefulSets are ready, and that the Keycloak Custom Resource is healthy. For external PostgreSQL and Elasticsearch targets, it verifies connectivity to the managed service endpoints rather than checking CNPG/ECK cluster status. A migration report is generated at `.state/migration-report.md`.
 
-### Rollback
-
-Rolling back works the same way as with the [operator-based migration](./bitnami-to-operators.md#rollback):
-
-```bash
-bash rollback.sh
-```
-
 ### Phase 5: Cleanup Bitnami resources (no downtime)
 
 :::warning Wait before cleanup
-Operate with the new infrastructure for at least 72 hours before cleanup. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup.
+Operate with the new infrastructure for at least 72 hours before cleanup. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [Rollback](#rollback)).
 :::
 
 After confirming the migration is successful, remove old Bitnami resources by running the cleanup script:
@@ -427,6 +434,20 @@ bash 5-cleanup-bitnami.sh
 ```
 
 This deletes the old Bitnami PostgreSQL StatefulSets, PVCs, Elasticsearch StatefulSet, Keycloak StatefulSet, and the migration backup PVC. The script checks resource existence before each deletion and can be safely rerun. For the full cleanup behavior, see [Phase 5 in the operator-based guide](./bitnami-to-operators.md#phase-5-cleanup-bitnami-resources-no-downtime).
+
+### Rollback
+
+If the migration fails or produces unexpected results, you can roll back to the pre-cutover state:
+
+```bash
+bash rollback.sh
+```
+
+This restores the previous Helm values (re-enabling Bitnami subcharts) and restarts Camunda on the original infrastructure.
+
+:::info Rollback scope
+Rollback is available after Phase 3 (cutover) and before Phase 5 (cleanup). Before Phase 3, simply stop the migration; your Bitnami infrastructure is still active and untouched.
+:::
 
 ## Operational readiness
 

@@ -21,6 +21,10 @@ After migration, your setup will be aligned with the [operator-based reference a
 
 This guide is intended for customers running Camunda 8 with Bitnami subcharts enabled. If your installation already uses external databases, managed services, or operator-managed infrastructure, you do not need to migrate from Bitnami subcharts.
 
+:::tip Before running in production
+Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
+:::
+
 ![Initial cluster state before migration from Bitnami subcharts to Kubernetes operators](./img/bitnami-migration-initial-state.jpg)
 
 ## Prerequisites
@@ -402,7 +406,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ![Illustration of Phase 5: remove the old Bitnami resources after the new platform is stable](./img/bitnami-migration-phase-5-cleanup.jpg)
 
 :::warning Wait before cleanup
-Do not run this phase immediately after validation. Operate with the new infrastructure for at least 72 hours to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup.
+Do not run this phase immediately after validation. Operate with the new infrastructure for at least 72 hours to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [Rollback](#rollback)).
 :::
 
 After confirming the migration is successful, remove old Bitnami StatefulSets, PVCs, services, and the migration backup PVC:

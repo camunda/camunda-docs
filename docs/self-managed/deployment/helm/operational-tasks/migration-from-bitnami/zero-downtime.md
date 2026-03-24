@@ -79,12 +79,28 @@ The PostgreSQL path is always logical replication. Elasticsearch requires an exp
 - Use **fresh start** only if rebuilding historical Elasticsearch-backed views after cutover is acceptable.
   :::
 
+## Clone the deployment references repository
+
+This guide uses scripts from the [Camunda deployment references](https://github.com/camunda/camunda-deployment-references) repository. Clone the repository and navigate to the migration directory:
+
+```bash
+git clone https://github.com/camunda/camunda-deployment-references.git
+cd camunda-deployment-references/generic/kubernetes/migration
+```
+
+Configure the migration by editing `env.sh` to match your current Camunda installation, then source it:
+
+```bash
+source env.sh
+```
+
+For a full description of configuration variables, see [Configure the migration](./bitnami-to-operators.md#step-1-configure-the-migration).
+
 ## Phase 1: Deploy target infrastructure
 
 This phase is identical to Phase 1 of the [standard migration](./bitnami-to-operators.md#phase-1-deploy-target-infrastructure-no-downtime). Deploy the target operators and clusters alongside the existing Bitnami components:
 
 ```bash
-source env.sh
 bash 1-deploy-targets.sh
 ```
 

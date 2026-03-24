@@ -10,6 +10,10 @@ import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 
 This section provides guidance for migrating your Camunda 8 Self-Managed infrastructure components from [Bitnami subcharts](/self-managed/deployment/helm/chart-parameters.md#bitnami-subcharts) to production-grade alternatives.
 
+:::note Target audience
+This guide is for customers running Camunda 8 with Bitnami subcharts enabled. If your installation already uses external databases, managed services, or operator-managed infrastructure, you do not need to follow this migration.
+:::
+
 ## Why migrate?
 
 Bitnami subcharts (PostgreSQL, Elasticsearch, Keycloak) provided with the Camunda Helm chart are convenient for development and testing. However, for production environments, Camunda [recommends](/self-managed/deployment/helm/chart-parameters.md#bitnami-subcharts) using managed services or [operator-based deployments](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
