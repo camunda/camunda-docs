@@ -22,10 +22,10 @@ Depending on the **target URL**, you can set the proxy as an HTTP or HTTPS proto
 
 You can set the following standard JVM properties for HTTP and HTTPS:
 
-| Property (HTTP target URL) | Property (HTTPS target URL) | Description                        |
-| :------------------------- | :-------------------------- | :--------------------------------- |
-| `http.proxyHost`           | `https.proxyHost`           | The host name of the proxy server. |
-| `http.proxyPort`           | `https.proxyPort`           | The port number (default is 80).   |
+| Property (HTTP target URL) | Property (HTTPS target URL) | Description                                              |
+| :------------------------- | :-------------------------- | :------------------------------------------------------- |
+| `http.proxyHost`           | `https.proxyHost`           | The host name of the proxy server.                       |
+| `http.proxyPort`           | `https.proxyPort`           | The port number (default is 80 for HTTP, 443 for HTTPS). |
 
 Some HTTP clients might offer more properties to configure the proxy. For example, the [Apache HTTP client](https://hc.apache.org/httpcomponents-client-5.6.x/current/httpclient5/apidocs/org/apache/hc/client5/http/impl/classic/HttpClientBuilder.html) used in the REST connector offers the following properties:
 
@@ -51,7 +51,7 @@ As an alternative to using JVM properties, the proxy settings can also be set wi
 | Variable (HTTP target URL)      | Variable (HTTPS target URL)      | Description                                                                                                                            |
 | :------------------------------ | :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
 | `CONNECTOR_HTTP_PROXY_HOST`     | `CONNECTOR_HTTPS_PROXY_HOST`     | The host name of the proxy server.                                                                                                     |
-| `CONNECTOR_HTTP_PROXY_PORT`     | `CONNECTOR_HTTPS_PROXY_PORT`     | The port number (default is 80).                                                                                                       |
+| `CONNECTOR_HTTP_PROXY_PORT`     | `CONNECTOR_HTTPS_PROXY_PORT`     | The port number (default is 80 for HTTP, 443 for HTTPS).                                                                               |
 | `CONNECTOR_HTTP_PROXY_USER`     | `CONNECTOR_HTTPS_PROXY_USER`     | _(optional)_ The username to log in to the proxy.                                                                                      |
 | `CONNECTOR_HTTP_PROXY_PASSWORD` | `CONNECTOR_HTTPS_PROXY_PASSWORD` | _(optional)_ The password to log in to the proxy.                                                                                      |
 | `CONNECTOR_HTTP_PROXY_SCHEME`   | `CONNECTOR_HTTPS_PROXY_SCHEME`   | _(optional)_ The scheme of the proxy server. This allows you to use the `https` protocol to contact your proxy. The default is `http`. |
@@ -71,7 +71,7 @@ When both plain and standard variables are configured, the **plain variables tak
 | Variable (HTTP target URL)            | Variable (HTTPS target URL)            | Description                                                         |
 | :------------------------------------ | :------------------------------------- | :------------------------------------------------------------------ |
 | `CONNECTOR_HTTP_PLAIN_PROXY_HOST`     | `CONNECTOR_HTTPS_PLAIN_PROXY_HOST`     | The host name of the proxy server.                                  |
-| `CONNECTOR_HTTP_PLAIN_PROXY_PORT`     | `CONNECTOR_HTTPS_PLAIN_PROXY_PORT`     | The port number (default is 80).                                    |
+| `CONNECTOR_HTTP_PLAIN_PROXY_PORT`     | `CONNECTOR_HTTPS_PLAIN_PROXY_PORT`     | The port number (default is 80 for HTTP, 443 for HTTPS).            |
 | `CONNECTOR_HTTP_PLAIN_PROXY_USER`     | `CONNECTOR_HTTPS_PLAIN_PROXY_USER`     | _(optional)_ The username to log in to the proxy.                   |
 | `CONNECTOR_HTTP_PLAIN_PROXY_PASSWORD` | `CONNECTOR_HTTPS_PLAIN_PROXY_PASSWORD` | _(optional)_ The password to log in to the proxy.                   |
 | `CONNECTOR_HTTP_PLAIN_PROXY_SCHEME`   | `CONNECTOR_HTTPS_PLAIN_PROXY_SCHEME`   | _(optional)_ The scheme of the proxy server. The default is `http`. |
