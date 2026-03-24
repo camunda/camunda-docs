@@ -257,6 +257,9 @@ RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/?
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-880-890/?$ /docs/next/self-managed/upgrade/helm/880-to-890/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/manual/upgrade/?$ /docs/next/self-managed/upgrade/manual/ [R=301,L]
 
+# Removed Camunda Exporter indices page
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices/?$ /docs/next/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/ [R=301,L]
+
 # Change ID of choose-right-model-agentic
 RewriteRule ^docs/next/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/next/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
 RewriteRule ^docs/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
