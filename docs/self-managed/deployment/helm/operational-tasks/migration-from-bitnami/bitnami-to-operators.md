@@ -10,6 +10,7 @@ import TabItem from "@theme/TabItem";
 import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
+import DualRegionEsNote from './\_partials/\_dual-region-es-note.md'
 
 Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure (PostgreSQL, Elasticsearch, and Keycloak) to **Kubernetes operator-managed equivalents**:
 
@@ -206,6 +207,8 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 </details>
 
 ### Elasticsearch (ECK)
+
+<DualRegionEsNote />
 
 The migration patches the reference ECK cluster manifest from `operator-based/elasticsearch/elasticsearch-cluster.yml` at runtime to add `reindex.remote.whitelist` support for data transfer via the `_reindex` API. Review the base manifest:
 

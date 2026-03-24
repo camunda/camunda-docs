@@ -10,6 +10,7 @@ import TabItem from "@theme/TabItem";
 import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
+import DualRegionEsNote from './\_partials/\_dual-region-es-note.md'
 
 Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to **cloud-managed services**, such as:
 
@@ -77,6 +78,8 @@ Minimum requirements before continuing:
 - Record the endpoint, port, database names, usernames, and secret material used in the next steps.
 
 ### Elasticsearch
+
+<DualRegionEsNote />
 
 :::warning Elasticsearch to OpenSearch is not supported
 This migration path does not support moving data from the Bitnami Elasticsearch subchart to Amazon OpenSearch Service or another OpenSearch target.

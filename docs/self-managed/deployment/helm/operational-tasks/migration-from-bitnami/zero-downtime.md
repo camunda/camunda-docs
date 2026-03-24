@@ -8,6 +8,7 @@ description: "Advanced guide for migrating Camunda 8 Self-Managed infrastructure
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
+import DualRegionEsNote from './\_partials/\_dual-region-es-note.md'
 
 :::warning Advanced topic
 This guide describes an **advanced migration strategy** that eliminates the downtime window present in the [standard migration](./bitnami-to-operators.md). It requires familiarity with PostgreSQL logical replication, Elasticsearch cross-cluster replication or continuous snapshots, and Keycloak high availability. It may require adjustments to fit your specific environment, network topology, and data volumes.
@@ -268,6 +269,8 @@ kubectl exec -it $(kubectl get pod -n ${NAMESPACE} -l cnpg.io/cluster=${CNPG_WEB
 The `copy_data = false` flag is important because we already performed the initial sync in Step 3. The subscription will now stream only new changes in real-time.
 
 ### Elasticsearch: Continuous synchronization
+
+<DualRegionEsNote />
 
 Unlike PostgreSQL, Elasticsearch does not have a built-in logical replication feature available in the open-source version. Choose one of the following approaches:
 
