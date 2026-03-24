@@ -101,3 +101,9 @@ https://docs.camunda.io/docs/components/concepts/access-control/authorizations/#
 https://docs.camunda.io/docs/components/concepts/audit-log/
 https://docs.camunda.io/docs/components/concepts/global-user-task-listeners/
 https://docs.camunda.io/docs/next/components/modeler/feel/cluster-variable/cluster-variable-overview/
+
+# Management Identity
+
+https://docs.camunda.io/docs/8.7/self-managed/identity/access-management/resource-authorization
+https://docs.camunda.io/docs/8.7/self-managed/identity/access-management/resource-authorizations
+https://docs.camunda.io/docs/next/components/whats-new-in-88/#identity-and-management-identity
