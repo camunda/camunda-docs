@@ -427,7 +427,7 @@ The validation script checks that all Camunda deployments and StatefulSets are r
 ### Phase 5: Cleanup Bitnami resources (no downtime)
 
 :::warning Wait before cleanup
-Operate with the new infrastructure for at least 72 hours before cleanup. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [Rollback](#rollback)).
+Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) before cleanup. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [Rollback](#rollback)).
 :::
 
 After confirming the migration is successful, remove old Bitnami resources by running the cleanup script:

@@ -409,7 +409,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ![Illustration of Phase 5: remove the old Bitnami resources after the new platform is stable](./img/bitnami-migration-phase-5-cleanup.jpg)
 
 :::warning Wait before cleanup
-Do not run this phase immediately after validation. Operate with the new infrastructure for at least 72 hours to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [Rollback](#rollback)).
+Do not run this phase immediately after validation. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [Rollback](#rollback)).
 :::
 
 After confirming the migration is successful, remove old Bitnami StatefulSets, PVCs, services, and the migration backup PVC:
