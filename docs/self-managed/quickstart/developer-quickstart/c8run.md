@@ -24,7 +24,7 @@ Camunda 8 Run includes the following:
 
 - Orchestration Cluster
 - Connectors
-- H2 (default secondary storage for Camunda 8 Run in 8.9-alpha3)
+- H2 (default secondary storage for Camunda 8 Run)
 - Elasticsearch (bundled, optional, enable when you need full-text indexing or advanced analytics)
 
 Camunda 8 Run also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
@@ -618,7 +618,7 @@ Operate v2 has limited functionality in 8.9-alpha3 when running against H2; full
 
 #### Optional: Elasticsearch
 
-If you need indexing, search, or full Operate/Tasklist functionality, enable Elasticsearch. Elasticsearch is still bundled with Camunda 8 Run in 8.9-alpha3 and can be managed by Camunda 8 Run or provided as an external service.
+If you need indexing, search, or full Operate/Tasklist functionality, enable Elasticsearch. Elasticsearch is still bundled with Camunda 8 Run and can be managed by Camunda 8 Run or provided as an external service.
 
 To use Elasticsearch:
 

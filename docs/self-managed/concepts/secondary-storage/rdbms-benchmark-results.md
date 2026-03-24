@@ -2,10 +2,10 @@
 id: rdbms-benchmark-results
 title: "RDBMS benchmarking results"
 sidebar_label: "RDBMS benchmark results"
-description: "Benchmark results and methodology summary for using PostgreSQL as Camunda 8 secondary storage compared with Elasticsearch/OpenSearch."
+description: "Benchmark results and methodology summary for using PostgreSQL as Orchestration Cluster secondary storage compared with Elasticsearch/OpenSearch."
 ---
 
-This page summarizes current benchmark results for using PostgreSQL as Camunda 8 secondary storage.
+This page summarizes current benchmark results for using PostgreSQL as Orchestration Cluster secondary storage.
 
 Use these results as directional guidance, not strict guarantees. Actual performance depends on process complexity, hardware, database configuration, retention settings, and query patterns.
 
@@ -38,8 +38,7 @@ Overall hardware requirements can be similar across Elasticsearch/OpenSearch-bas
 
 ### Write throughput
 
-- Across tested scenarios, RDBMS write performance was observed at roughly **~70%** of Elasticsearch/OpenSearch write performance with the same hardware setup.
-- In scale tests, write behavior was described as approximately linear with additional cluster capacity.
+- In scale tests, RDBMS write behavior was described as approximately linear with additional cluster capacity.
 
 ### Scenario observations
 
@@ -57,17 +56,18 @@ Read performance is currently the main trade-off for RDBMS secondary storage in 
 
 - Key-based access patterns scale better.
 - Broad filters, sorting, and statistics/count queries can degrade with data growth.
-- Operate dashboard statistics queries are known sensitive paths.
-
-:::warning
-API read performance (including Operate dashboards) with RDBMS can be significantly slower than with Elasticsearch/OpenSearch on large datasets, especially for complex queries, multi-field filtering, and sorting.
-:::
+- Statistics queries for process and dashboard views are known sensitive paths in the Orchestration Cluster API, whether called directly through the API or indirectly by Operate dashboards.
 
 Recommended mitigation:
 
 - Validate your most common read queries with production-like data.
 - Add and tune indexes for high-frequency filters used in your environment.
 - Re-evaluate index strategy as data volume and query patterns evolve.
+
+### RDBMS vs Elasticsearch/OpenSearch comparison
+
+- With the same hardware setup, RDBMS write performance was observed at roughly **~70%** of Elasticsearch/OpenSearch write performance across tested scenarios.
+- API read performance (including Operate dashboards) with RDBMS can be significantly slower than Elasticsearch/OpenSearch on large datasets, especially for complex queries, multi-field filtering, and sorting.
 
 ## Choosing RDBMS secondary storage
 
