@@ -143,7 +143,7 @@ If Camunda 8 is running during migration with cleanup dates in the past, history
 **Common scenarios:**
 
 - Past `removalTime` values from Camunda 7
-- Negative auto-cancel TTL (for example, `-P1D`)
+- Negative auto-cancel TTL (for example, `P-1D`)
 - Long migrations where dates become due during execution
 
 As a result, you will see skipped child entities with messages referencing the deleted parent. These cannot be recovered unless the parent is re-migrated.
