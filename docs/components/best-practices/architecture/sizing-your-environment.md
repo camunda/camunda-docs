@@ -9,7 +9,7 @@ tags:
 description: "Understand the factors that influence Camunda 8 sizing, then apply them to your SaaS or Self-Managed environment."
 ---
 
-To size your Camunda 8 environment appropriately, you need to understand the factors that influence hardware requirements. Once you understand these factors, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select the right configuration.
+To size your Camunda 8 environment appropriately, understand the factors that influence it. Once you understand those, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select the right configuration.
 
 <!-- Anchors for backward compatibility with old single-page URLs -->
 <span id="camunda-8-saas" />
@@ -46,7 +46,7 @@ The kb/PI model below is a **rough approximation**. In practice, disk consumptio
 - **Variable cardinality:** Object variables with nested structures create exponentially more Elasticsearch nested documents.
 - **Write amplification in Zeebe:** Compaction, WAL, and index overhead increase raw disk usage beyond the logical data size.
 
-For non-trivial payloads (>1 KB) or long retention periods, **run your own disk space benchmarks** rather than relying solely on these estimates. See [Running benchmarks](sizing-benchmarks.md).
+For non-trivial payloads (>1 KB) or long retention periods, **run your own disk space benchmarks** rather than relying solely on these estimates. See [Run benchmarks](sizing-benchmarks.md) for more details.
 :::
 
 <!-- TODO: Update disk space measurements for 8.8/8.9. The following numbers were measured with Camunda 8 SaaS 1.2.4 using the typical payload (~0.5 KB). They are significantly outdated and do not reflect current storage behavior, especially with the realistic payload (~11 KB). -->
