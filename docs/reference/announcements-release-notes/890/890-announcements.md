@@ -148,6 +148,10 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 :::info 8.9 APIs & Tools migration guide
 Migrate your API integrations, SDKs, and generated clients to Camunda 8.9 using the [8.9 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-89.md).
 :::
+
+:::tip Client and API compatibility
+Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test are **forward-compatible** and **backward-compatible** with the Orchestration Cluster. This means you can upgrade the cluster and clients independently — for example, running a client on 8.8 against a cluster on 8.9, or upgrading the client to 8.9 without code changes. See [Client and API compatibility](/reference/public-api.md#client-and-api-compatibility) for details.
+:::
 <br/>
 
 <div className="release-announcement-row">

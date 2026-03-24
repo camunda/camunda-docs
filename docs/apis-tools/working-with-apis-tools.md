@@ -58,6 +58,12 @@ Use Camunda Process Test to test your process definitions and automations with a
 
 <p class="link-arrow">[Camunda Process Test](/apis-tools/testing/getting-started.md)</p>
 
+## Client and API compatibility
+
+Camunda clients and SDKs are **forward-compatible** and **backward-compatible** with the Orchestration Cluster, meaning you can upgrade the cluster and clients independently. The Orchestration Cluster REST API is backward-compatible, ensuring no breaking changes to existing endpoints across versions.
+
+<p class="link-arrow">[Learn more about compatibility guarantees](/reference/public-api.md#client-and-api-compatibility)</p>
+
 ## Upgrade to Camunda 8.9
 
 If you are migrating from Camunda 7 or from v1 component REST APIs, see the migration guide for guidance.
