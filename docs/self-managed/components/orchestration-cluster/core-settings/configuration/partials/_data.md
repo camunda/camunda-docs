@@ -37,13 +37,13 @@ import TabItem from '@theme/TabItem';
 
 ### `CAMUNDA_DATA_AUDITLOG`
 
-| Property                                  | Description                                                                                                      | Default value                             |
-| :---------------------------------------- | :--------------------------------------------------------------------------------------------------------------- | :---------------------------------------- |
-| `CAMUNDA_DATA_AUDITLOG_ENABLED`           | Enable or disable the audit log.                                                                                 | `true`                                    |
-| `CAMUNDA_DATA_AUDITLOG_USER_CATEGORIES`   | List of audit log categories to include for user-initiated actions.                                              | `[ADMIN, DEPLOYED_RESOURCES, USER_TASKS]` |
-| `CAMUNDA_DATA_AUDITLOG_USER_EXCLUDES`     | List of [audit log entity types](#audit-log-entity-types) to exclude for user-initiated actions.                 | `[]`                                      |
-| `CAMUNDA_DATA_AUDITLOG_CLIENT_CATEGORIES` | List of audit log categories to include for client-initiated actions (API clients).                              | `[]`                                      |
-| `CAMUNDA_DATA_AUDITLOG_CLIENT_EXCLUDES`   | List of [audit log entity types](#audit-log-entity-types) to exclude for client-initiated actions (API clients). | `[]`                                      |
+| Property                                    | Description                                                                                                      | Default value                                                                                                                                                               |
+| :------------------------------------------ | :--------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CAMUNDA_DATA_AUDITLOG_ENABLED`             | Enable or disable the audit log.                                                                                 | `true`                                                                                                                                                                      |
+| `CAMUNDA_DATA_AUDITLOG_USER_CATEGORIES_0`   | List of audit log categories to include for user-initiated actions.                                              | `CAMUNDA_DATA_AUDITLOG_USER_CATEGORIES_0=ADMIN`<br />`CAMUNDA_DATA_AUDITLOG_USER_CATEGORIES_1=DEPLOYED_RESOURCES`<br />`CAMUNDA_DATA_AUDITLOG_USER_CATEGORIES_2=USER_TASKS` |
+| `CAMUNDA_DATA_AUDITLOG_USER_EXCLUDES_0`     | List of [audit log entity types](#audit-log-entity-types) to exclude for user-initiated actions.                 |                                                                                                                                                                             |
+| `CAMUNDA_DATA_AUDITLOG_CLIENT_CATEGORIES_0` | List of audit log categories to include for client-initiated actions (API clients).                              |                                                                                                                                                                             |
+| `CAMUNDA_DATA_AUDITLOG_CLIENT_EXCLUDES_0`   | List of [audit log entity types](#audit-log-entity-types) to exclude for client-initiated actions (API clients). |                                                                                                                                                                             |
 
 </TabItem>
 </Tabs>
