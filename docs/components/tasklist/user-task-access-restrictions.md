@@ -14,7 +14,7 @@ User task access restrictions are supported only by the Tasklist V1 API and aren
 
 To continue using user task access restrictions, see [switching between V1 and V2 modes](components/tasklist/api-versions.md#switching-between-v1-and-v2-modes) to enable Tasklist V1 mode.
 
-In Tasklist V2, task visibility is controlled using authorization-based access control. See [User task authorization](./user-task-authorization.md).
+In Tasklist V2, task visibility is controlled using authorization-based access control. See [user task authorization](./user-task-authorization.md).
 :::
 
 For a user to see a task in Tasklist V1, they must meet one of the following criteria in the BPMN process definition:
