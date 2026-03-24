@@ -321,17 +321,21 @@ Some components are not enabled by default in this deployment. For more informat
 
 #### Secondary storage options
 
-This guide defaults to using the managed Amazon OpenSearch service as secondary storage. You have two options:
+This guide includes a managed Amazon OpenSearch example path for secondary storage. Choose the backend that fits your requirements:
 
-- **Managed OpenSearch** (default in this guide): The managed Amazon OpenSearch domain provisioned in the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup.
-- **Amazon Aurora**: Use Amazon Aurora PostgreSQL as secondary storage for the Orchestration Cluster — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+- **Managed OpenSearch**: Use the managed Amazon OpenSearch domain provisioned in the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup.
+- **Amazon Aurora PostgreSQL**: Use Aurora PostgreSQL as secondary storage for the Orchestration Cluster — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
 
-#### Advanced: Use internal Elasticsearch instead of managed OpenSearch
+#### Advanced: Use Helm-chart Elasticsearch instead of managed OpenSearch
 
-For advanced deployments, you can opt to use the internal Elasticsearch deployment instead of the managed OpenSearch service. This configuration disables OpenSearch and enables the internal Kubernetes Elasticsearch deployment:
+For advanced deployments, you can disable managed OpenSearch and enable the Elasticsearch deployment from the Camunda Helm chart:
+
+:::caution Deprecated path
+The Helm-chart Elasticsearch deployment uses deprecated Bitnami subcharts. Prefer managed Elasticsearch/OpenSearch services or operator-based Elasticsearch via ECK for long-term deployments.
+:::
 
 :::tip Alternative: Operator-based Elasticsearch deployment
-Instead of using Bitnami subcharts for internal Elasticsearch, consider deploying [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) for a production-grade setup with automated scaling, upgrades, and built-in security.
+Instead of relying on Helm-chart Elasticsearch subcharts, consider deploying [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) for a production-grade setup with automated scaling, upgrades, and built-in security.
 :::
 
 <details>

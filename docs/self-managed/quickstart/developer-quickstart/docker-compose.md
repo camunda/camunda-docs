@@ -9,7 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import {DockerCompose} from "@site/src/components/CamundaDistributions";
 
-Get started with Docker Compose to run Camunda 8 Self-Managed locally. The default lightweight configuration includes the Orchestration Cluster (Zeebe, Operate, and Tasklist consolidated), Connectors, and Elasticsearch. The full configuration additionally includes Optimize, Console, Management Identity, Web Modeler, Keycloak, and PostgreSQL. Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
+Get started with Docker Compose to run Camunda 8 Self-Managed locally. The default lightweight configuration includes the Orchestration Cluster (Zeebe, Operate, and Tasklist consolidated), Connectors, and Elasticsearch. The full configuration additionally includes Optimize, Console, Management Identity, Web Modeler, Keycloak, and PostgreSQL for management components. Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 :::note
 The [Docker images](/self-managed/deployment/docker/docker.md) are supported for production usage; however, the Docker Compose files are intended for developers to run an environment locally and are **not** designed for production. For production deployments, use [Kubernetes with Helm](/self-managed/deployment/helm/install/index.md).
@@ -50,6 +50,17 @@ Camunda provides three Docker Compose configurations in the [Camunda Distributio
 | docker-compose.yaml             | **Default lightweight configuration** - Includes the core Orchestration Cluster (Zeebe, Operate, Tasklist, and Orchestration Cluster Identity), Connectors, and Elasticsearch. Ideal for most developers who want to model, deploy, and test processes.                           |
 | docker-compose-full.yaml        | **Full-stack configuration** - Includes all Camunda 8 components including the Orchestration Cluster, Connectors, Optimize, Console, Management Identity, Keycloak, PostgreSQL, and Web Modeler. Use this when you need management components, process optimization, or modeling. |
 | docker-compose-web-modeler.yaml | **Standalone Web Modeler** - Runs only Web Modeler and its dependencies (Identity, Keycloak, PostgreSQL). See [Deploy with Web Modeler](#deploy-with-web-modeler).                                                                                                                |
+
+:::note RDBMS secondary storage for the Orchestration Cluster
+In these Docker Compose quickstart configurations, the Orchestration Cluster uses Elasticsearch as secondary storage.
+
+The PostgreSQL container(s) in these quickstart files are used by management components (for example, Management Identity and Web Modeler), not as Orchestration Cluster secondary storage.
+
+If you want to run the Orchestration Cluster with RDBMS secondary storage, use the dedicated RDBMS guides:
+
+- [Configure RDBMS for manual installations](/self-managed/deployment/manual/rdbms/configuration.md)
+- [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md)
+  :::
 
 ### Access components
 
@@ -92,6 +103,8 @@ By default, the Orchestration Cluster uses [basic authentication](/self-managed/
 | Elasticsearch | Lightweight and full | [http://localhost:9200](http://localhost:9200)               | Used by the Orchestration Cluster as secondary storage (and Optimize in the full configuration).                                                              |
 | Keycloak      | Full                 | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Identity instead. Access with `admin` / `admin`. |
 | PostgreSQL    | Full                 | `localhost:5432`                                             | Database for Management Identity.                                                                                                                             |
+
+In Docker Compose quickstarts, PostgreSQL is used for management-component persistence (Management Identity and Web Modeler flows). The Orchestration Cluster secondary storage in these examples remains Elasticsearch.
 
 #### Configuration files and options
 

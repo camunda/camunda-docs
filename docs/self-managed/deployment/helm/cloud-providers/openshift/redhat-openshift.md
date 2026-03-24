@@ -18,6 +18,7 @@ import HelmUpgradeNote from '../\_partials/\_helm-upgrade-note.md'
 import KubefwdTip from '../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../\_partials/\_port-forward-services.md'
 import DeployECKElasticsearch from '../\_partials/\_deploy-eck-elasticsearch.md'
+import SecondaryStorageOptionsNote from '../\_partials/\_secondary-storage-options-note.md'
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
@@ -37,9 +38,7 @@ Additional information and a high-level overview of Kubernetes as the upstream p
 - A namespace to host the Camunda Platform.
 - Permissions to install Kubernetes operators (cluster-admin or equivalent) for deploying the infrastructure services (Elasticsearch, PostgreSQL, Keycloak). These operators can also be installed via the [OpenShift OperatorHub](https://docs.openshift.com/container-platform/latest/operators/understanding/olm-understanding-operatorhub.html), but this guide installs them directly from source for full control over versions and configuration.
 
-:::note Secondary storage
-Elasticsearch is used as secondary storage in this guide. RDBMS (PostgreSQL, MySQL, MariaDB, or Oracle) is a supported alternative for the Orchestration Cluster — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
-:::
+<SecondaryStorageOptionsNote />
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
@@ -52,7 +51,7 @@ This section installs Camunda 8 following the architecture described in the [ref
 
 Infrastructure components are deployed using **official Kubernetes operators** as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
-- **[Elasticsearch with ECK](#deploy-elasticsearch)**: Deployed via [Elastic Cloud on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) for secondary storage
+- **[Elasticsearch with ECK](#deploy-elasticsearch)**: Document-store example path used in this guide for secondary storage
 - **[PostgreSQL with CloudNativePG](#deploy-postgresql)**: Deployed via [CloudNativePG](https://cloudnative-pg.io/) for Identity and Web Modeler databases
 - **[Keycloak](#deploy-keycloak) (optional)**: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation) as an identity provider for Single Sign-On (SSO)
 
@@ -401,9 +400,7 @@ Before deploying Camunda, you need to deploy the infrastructure services it depe
 - **PostgreSQL**: Deployed via [CloudNativePG](https://cloudnative-pg.io/)
 - **Keycloak** _(optional)_: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation) — can be replaced with any OIDC-compatible IdP
 
-:::note Secondary storage alternatives
-This guide deploys Elasticsearch (via ECK) as secondary storage for the Orchestration Cluster. RDBMS (PostgreSQL, MySQL, MariaDB, or Oracle) is a supported alternative. To use RDBMS instead, skip the Elasticsearch operator deployment and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
-:::
+<SecondaryStorageOptionsNote />
 
 All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
 

@@ -341,7 +341,7 @@ If you don't want to use this module, you can skip this section. However, you ma
 
 If you choose not to use this module, you can either:
 
-- Provide a managed Elasticsearch or OpenSearch service, or use the internal deployment by the Camunda Helm chart in Kubernetes.
+- Provide a managed Elasticsearch or OpenSearch service, or deploy Elasticsearch in your cluster via ECK.
 - Use RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) as the secondary storage backend for the Orchestration Cluster. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
 
 Additionally, you must delete the `opensearch.tf` file within the `terraform/cluster` directory of your chosen reference as it will otherwise create the resources.
