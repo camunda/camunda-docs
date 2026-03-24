@@ -33,7 +33,7 @@ You can configure the behavior of the assertions in the following ways.
 
 ### Assertion timeout
 
-By default, assertions wait 10 seconds for the expected property to be fulfilled. You can change the time globally or per assertion.
+By default, assertions wait 10 seconds for the expected property to be fulfilled and wait 100 milliseconds between two attempts. You can change these defaults globally in the configuration or per assertion.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
@@ -42,7 +42,7 @@ By default, assertions wait 10 seconds for the expected property to be fulfilled
 
 <TabItem value='spring-sdk'>
 
-Configure the timeout globally in your `application.yml` (or `application.properties`):
+Configure the assertions globally in your `application.yml` (or `application.properties`):
 
 ```yaml
 camunda:
@@ -58,11 +58,11 @@ camunda:
 
 <TabItem value='java-client'>
 
-Configure the timeout globally in your `/camunda-container-runtime.properties` file:
+Configure the assertions globally in your `/camunda-container-runtime.properties` file:
 
 ```properties
 # Set the assertion timeout to 1 minute
-assertion.timeout=PT5M
+assertion.timeout=PT1M
 # Set the assertion interval to 100 milliseconds
 assertion.interval=PT0.1S
 ```
@@ -71,7 +71,7 @@ assertion.interval=PT0.1S
 
 </Tabs>
 
-Alternatively, you can configure the timeout globally in your test class using `CamundaAssert`.
+Alternatively, you can configure the assertions within your test class using `CamundaAssert`.
 
 ```java
 @BeforeAll
