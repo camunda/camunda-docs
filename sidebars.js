@@ -679,6 +679,41 @@ module.exports = {
               ],
             },
             {
+              "Analyze operations": [
+                {
+                  Cluster: ["components/camunda-hub/cluster/dashboard"],
+                },
+                {
+                  Operate: [
+                    "components/camunda-hub/operate/dashboard",
+                    "components/camunda-hub/operate/processes",
+                    "components/camunda-hub/operate/decisions",
+                    "components/camunda-hub/operate/operations",
+                  ],
+                },
+                {
+                  Tasklist: [
+                    "components/camunda-hub/tasklist/tasks",
+                    "components/camunda-hub/tasklist/processes",
+                    "components/camunda-hub/tasklist/settings",
+                  ],
+                },
+                {
+                  Optimize: [
+                    "components/camunda-hub/optimize/business-value",
+                    "components/camunda-hub/optimize/agentic-control",
+                  ],
+                },
+                {
+                  Admin: [
+                    "components/camunda-hub/admin/authentication",
+                    "components/camunda-hub/admin/authorizations",
+                    "components/camunda-hub/admin/cluster-variables",
+                  ],
+                },
+              ],
+            },
+            {
               type: "category",
               label: "Manage workspaces",
               link: {
