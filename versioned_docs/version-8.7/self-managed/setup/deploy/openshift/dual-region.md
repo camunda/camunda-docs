@@ -24,9 +24,6 @@ Please review our [dual-region concept documentation](./../../../concepts/multi-
 
 ## High Level Design
 
-<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
-
 _Infrastructure diagram for a OpenShift dual-region setup (click on the image to open the PDF version)_
 [![Infrastructure Diagram OpenShift Dual-Region](./assets/openshift-dual-region.jpg)](./assets/openshift-dual-region.pdf)
 

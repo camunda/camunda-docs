@@ -173,6 +173,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-color-info-contrast-background: rgb(244, 249, 254);
   --ifm-color-warning-dark: rgb(252 93 13);
   --ifm-color-warning-contrast-background: rgb(252, 243, 238);
+  --ifm-navbar-link-color: #1c1e21;
 }
 
 /* Match Algolia colours to Camunda brand colours */
@@ -300,10 +301,6 @@ we make it less bold compared to the search keyword */
   padding-left: 10px;
   font-size: 16px;
   display: none;
-}
-
-.navbar__link {
-  color: #1c1e21;
 }
 
 a {
@@ -2004,4 +2001,38 @@ h3 + .release-announcement-row {
 
 .sidebar-cta > .menu__list-item-collapsible .menu__caret {
   margin-left: auto;
+}
+
+/* Support sidebar-cta on type: "doc" items */
+.sidebar-cta > .menu__link {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 0.5rem;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.sidebar-cta > .menu__link::after {
+  content: "New";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--ifm-color-primary);
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+
+  padding: 2px 6px;
+  border-radius: 999px;
+
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.sidebar-cta > .menu__link.menu__link--active {
+  overflow: visible;
 }

@@ -179,7 +179,7 @@ A process cannot execute unless it is known by the [broker](#zeebe-broker). Depl
 
 ### Elasticsearch/OpenSearch
 
-Elasticsearch and OpenSearch are search and analytics engines commonly used as secondary storage backends for indexing and querying exported runtime data. They are populated with process orchestration data and consumed by components such as Operate, Tasklist, and Optimize.
+Elasticsearch and OpenSearch are search and analytics engines commonly used as document-store secondary storage backends for indexing and querying exported runtime data. They are populated with process orchestration data and consumed by components such as Operate, Tasklist, and Optimize.
 
 - [Elasticsearch and OpenSearch](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md)
 
@@ -260,7 +260,7 @@ H2 can run in two modes:
 - **In-memory**: Data is stored only in memory and lost when the application stops. Useful for temporary testing.
 - **File-based (embedded)**: Database files are persisted to disk on the same host as the component using them. Suitable for local development where data persistence across restarts is needed.
 
-H2 is not intended for production usage.
+H2 is not intended for production usage. For Camunda secondary storage, H2 is a single-broker option and is not a valid backend for multi-broker clusters.
 
 - [Secondary storage](/self-managed/concepts/secondary-storage/index.md)
 
@@ -539,7 +539,7 @@ Secondary storage is used for indexing, search, analytics, and long-term retenti
 
 Examples of secondary storage backends include:
 
-- [Elasticsearch/OpenSearch](#elasticsearchopensearch)
+- [Document store (Elasticsearch/OpenSearch)](#elasticsearchopensearch)
 - [RDBMS](#rdbms)
 
 - [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)

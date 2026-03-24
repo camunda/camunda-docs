@@ -63,11 +63,6 @@ Unlike the [EKS Terraform setup](../amazon-eks/terraform-setup.md), we currently
 
 ### Outcome
 
-<!-- TODO: before merge, replace  => stable/8.7 >
-
-<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
-
 _Infrastructure diagram for a single region ROSA setup (click on the image to open the PDF version)_
 [![Infrastructure Diagram ROSA Single-Region](./assets/rosa-single-region.jpg)](./assets/rosa-single-region.pdf)
 
@@ -307,9 +302,6 @@ This section guides you through setting up an AWS VPN Endpoint to access a priva
 This step is **optional** and only necessary if you have configured a **private cluster**.
 
 Using a VPN offers a flexible and secure way to connect to the private subnets within your VPC. It can be used either by a user to access cluster resources or to enable cross-site communications via [PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html). This module focuses on user access.
-
-<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
 
 _Infrastructure diagram for a single region ROSA setup with VPN (click on the image to open the PDF version)_
 [![Infrastructure Diagram ROSA Single-Region VPN](./assets/rosa-single-region-vpn.jpg)](./assets/rosa-single-region-vpn.pdf)

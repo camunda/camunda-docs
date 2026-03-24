@@ -658,10 +658,9 @@ orchestration:
     enabled: true
     minimumAge: 30d
     policyName: zeebe-record-retention-policy
-  orchestration:
-    security:
-      authentication:
-        method: oidc
+  security:
+    authentication:
+      method: oidc
 
 connectors:
   contextPath: /connectors

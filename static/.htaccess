@@ -282,6 +282,14 @@ RewriteRule ^docs/next/components/connectors/use-connectors/intrinsic-functions/
 RewriteRule ^docs/components/connectors/use-connectors/intrinsic-functions/?$ /docs/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
 RewriteRule ^docs/8.8/components/connectors/use-connectors/intrinsic-functions/?$ /docs/8.8/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
 
+# Move MCP Client from early access to Agentic AI connectors (8.9)
+RewriteRule ^docs/next/components/early-access/alpha/mcp-client/?$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/ [R=301,L]
+RewriteRule ^docs/next/components/early-access/alpha/mcp-client/(.+)$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-$1 [R=301,L]
+
+# Will be activated with the switch: next -> current
+# RewriteRule ^docs/components/early-access/alpha/mcp-client/?$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/ [R=301,L]
+# RewriteRule ^docs/components/early-access/alpha/mcp-client/(.+)$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-$1 [R=301,L]
+
 # Removal of 8.5 announcements/release notes
 RewriteRule ^docs/next/reference/announcements-release-notes/850/(.*)$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
 RewriteRule ^docs/reference/announcements-release-notes/850/850-announcements/?$ /docs/next/reference/announcements-release-notes/overview/ [R=301,L]
@@ -453,6 +461,7 @@ RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-element-inst
 
 RewriteRule ^docs/apis-tools/spring-zeebe-sdk/getting-started/?$ /docs/apis-tools/camunda-spring-boot-starter/getting-started/ [R=301,L]
 RewriteRule ^docs/apis-tools/java-client/zeebe-process-test/?$ /docs/apis-tools/testing/getting-started/ [R=301,L]
+RewriteRule ^docs/apis-tools/testing/test-scenario-dsl/?$ /docs/apis-tools/testing/json-test-cases/ [R=301,L]
 RewriteRule ^docs/apis-tools/spring-zeebe-sdk/configuration/?$ /docs/apis-tools/camunda-spring-boot-starter/getting-started/ [R=301,L]
 
 RewriteRule ^docs/apis-tools/camunda-api-rest/camunda-api-rest-authentication/?$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication/ [R=301,L]
@@ -969,6 +978,7 @@ RewriteRule ^docs/guides/react-components/install-docker-compose/?$ /docs/guides
 RewriteRule ^docs/guides/react-components/install-c8run/?$  /docs/guides/ [R=301,L]
 
 # Move logging from troubleshooting to monitoring
+RewriteRule ^docs/8.7/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.7/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 RewriteRule ^docs/8.6/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 

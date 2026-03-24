@@ -429,21 +429,6 @@ module.exports = {
                 "components/early-access/alpha/feel-copilot/feel-copilot",
                 {
                   type: "category",
-                  label: "MCP Client",
-                  link: {
-                    type: "doc",
-                    id: "components/early-access/alpha/mcp-client/mcp-client",
-                  },
-                  items: [
-                    "components/early-access/alpha/mcp-client/mcp-client-connector",
-                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
-                    "components/early-access/alpha/mcp-client/mcp-client-config",
-                    "components/early-access/alpha/mcp-client/mcp-client-tool-discovery",
-                    "components/early-access/alpha/mcp-client/mcp-client-human-in-the-loop",
-                  ],
-                },
-                {
-                  type: "category",
                   label: "A2A Client",
                   link: {
                     type: "doc",
@@ -890,6 +875,21 @@ module.exports = {
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                   ],
                 },
+                {
+                  type: "category",
+                  label: "MCP Client",
+                  link: {
+                    type: "doc",
+                    id: "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client",
+                  },
+                  items: [
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-connector",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client-connector",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-config",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-tool-discovery",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-human-in-the-loop",
+                  ],
+                },
                 "components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver",
               ],
             },
@@ -1146,6 +1146,18 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Secure connectivity (AWS PrivateLink)",
+          link: {
+            type: "doc",
+            id: "components/saas/secure-connectivity/secure-connectivity-AWS",
+          },
+          items: [
+            "components/saas/secure-connectivity/secure-connectivity-console-setup",
+          ],
+        },
+
+        {
+          type: "category",
           label: "Encryption",
           link: {
             type: "doc",
@@ -1159,6 +1171,7 @@ module.exports = {
             "components/saas/byok/faq-and-troubleshooting",
           ],
         },
+
         "components/saas/backups",
         "components/saas/auto-updates",
         "components/saas/data-retention",
@@ -1379,14 +1392,10 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.9",
-      items: ["apis-tools/migration-manuals/migrate-to-89"],
-    },
-    {
-      type: "category",
-      label: "Upgrade to Camunda 8.8",
+      className: "sidebar-cta",
       link: {
         type: "doc",
-        id: "apis-tools/migration-manuals/index",
+        id: "apis-tools/migration-manuals/migrate-to-89",
       },
       items: [
         "apis-tools/migration-manuals/migrate-to-camunda-api",
@@ -1903,7 +1912,13 @@ module.exports = {
               ],
             },
             {
-              "Relational databases": [
+              type: "category",
+              label: "Relational databases",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/databases/relational-db/index",
+              },
+              items: [
                 "self-managed/concepts/databases/relational-db/rdbms-setup-guide",
                 "self-managed/concepts/databases/relational-db/rdbms-support-policy",
                 "self-managed/concepts/databases/relational-db/database-configuration",

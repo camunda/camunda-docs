@@ -171,6 +171,10 @@ Examples:
 A context variable is a reserved variable that describes the context of a task. It can group variables together to provide a detailed description of the task or offer more descriptive data about it.
 The reserved variable name for a context variable is `taskContextDisplayName`. This name is reserved exclusively for this purpose and should not be used for other variables.
 
+:::warning
+Context variables are not supported in Tasklist V2. See [migration from V1 to V2](../tasklist/api-versions.md#migration-from-v1-to-v2).
+:::
+
 Example:
 
 | Input variable           | Example                              |
