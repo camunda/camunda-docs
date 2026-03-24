@@ -8,26 +8,25 @@ Job dashboard in Console gives you a job-level view across your cluster. Use it 
 
 ## Availability and permissions
 
-Job Worker Dashboard is available in Console for clusters running Camunda 8.9 or later.
+Job dashboard is available in Console for clusters running Camunda 8.9 or later.
 
 For SaaS:
 
-- Enabled for Camunda 8.9+ clusters.
-- Uses the cluster’s job metrics configuration exposed via `GET /v2/statistics/configuration` (`jobWorkerDashboard.enabled`, `jobWorkerDashboard.resolutionMinutes`).
+- Available for Camunda 8.9+ clusters.
+- Camunda manages the underlying job metrics configuration for you.
 
 For Self-Managed:
 
 - Requires Camunda 8.9+ (Zeebe and Console).
-- Job metrics must be enabled in the engine JobMetricsCfg (for example, `enabled`, `exportInterval`, `maxWorkerNameLength`, `maxJobTypeLength`, `maxTenantIdLength`, `maxUniqueKeys`). These options are surfaced via the auto-generated `default.yaml` and Helm values.
-- Console reads the job metrics config from `GET /v2/statistics/configuration`.
+- Job metrics must be enabled in the engine job metrics configuration (`camunda.monitoring.metrics.job-metrics.*`). These options and their defaults are surfaced via the auto-generated defaults.yaml and Helm values.
 
 Access control:
 
-- A global permission `READ_JOB_METRICS` (similar to `READ_USAGE_METRICS`) controls access to job metrics in general and is required to use Job Worker Dashboard.
+- The global `READ_JOB_METRICS` permission is the only Console permission required to see and use Job dashboard. (Operate permissions are still required to view underlying instances when you click **View errors**.)
 
 If the feature is disabled or the user lacks permission, the Jobs card on the cluster overview shows **Access restricted**.
 
-## When to use Job Worker Dashboard
+## When to use job dashboard
 
 Use the dashboard to:
 
@@ -36,7 +35,7 @@ Use the dashboard to:
 - Investigate error patterns for a job type before drilling into individual process instances in Operate.
 - Avoid building and maintaining custom job-monitoring dashboards.
 
-## Open Job Worker Dashboard
+## Open job dashboard
 
 ### 1. Open the Jobs overview
 
@@ -68,7 +67,7 @@ Key elements:
 
 If internal limits are reached for the selected date range, a warning will appear.
 
-Job metrics are stored in an internal JobMetrics store in the engine and periodically exported as batch records. Configuration limits such as maximum number of unique keys (jobType × tenantId × worker combinations) and maximum string lengths (job type, worker, tenant ID) protect the system. When these limits are hit, responses may be marked as incomplete and the UI shows the data-limit warning.
+Job metrics are stored in an internal JobMetrics store in the engine and exported in batches (every five minutes). Configuration limits such as maximum string lengths for job type, worker, and tenant ID, and the maximum number of unique keys (jobType × tenantId × worker combinations), protect the system. If any of these limits is exceeded for a batch, that batch is marked as incomplete and the UI shows the **Data loading limit reached** warning. In that case, treat the counts as partial for the affected time range.
 
 To drill down into a specific job type, click its **Job type** link (for example, `send-email`).
 
@@ -80,15 +79,19 @@ The **Job type details** page shows metrics and errors for a single job type.
 
 ### Job workload
 
-The **Job workload** chart shows how many jobs were **created**, **completed**, and **failed** over time for the selected job type and time range. Use it to spot spikes or trends, for example when failures increase after a deployment.
-
-<!-- TODO(dev): Confirm whether retries or canceled jobs influence these counts so we can describe edge cases correctly (e.g. “failed” vs “retries”). -->
+The **Job workload** chart shows how many jobs were **created**, **completed**, and **failed** over time for the selected job type and time range. Use it to spot spikes or trends, for example when failures increase after a deployment. Failed counts include retries, timeouts, cancellations, and other error states, and each failed attempt is counted separately.
 
 ### Jobs completion rate
 
-The **Jobs completion rate** donut chart summarizes, for the selected time range, how many jobs were created, completed, and failed. This gives you a quick, high-level view of whether most jobs finish successfully.
+The **Jobs completion rate** donut chart breaks jobs into three groups for the selected time range:
 
-<!-- TODO(dev): Confirm the exact formula for the completion rate (numerator/denominator and how retries/cancellations are handled). -->
+- **Created**: All jobs that have been created, regardless of whether they are still running, completed, or failed.
+- **Completed**: Jobs that have finished executing successfully.
+- **Failed**: Jobs that did not complete successfully, including retries, timeouts, cancellations, and errors.
+
+If a job is retried, each failed attempt is counted separately. For example, one job retried three times appears as three failed jobs.
+
+Use this chart to see at a glance whether most jobs finish successfully or many end in a failed state.
 
 ### Job workers table
 
@@ -112,9 +115,7 @@ The **Failed jobs by error type** table groups failed jobs by error so you can q
   - **Error message**
   - **Jobs with error**
 
-Click **View errors** to open related instances in **Operate** for deeper troubleshooting.
-
-<!-- TODO(dev/Operate): Confirm the exact Operate view and filters opened by “View errors” so we can describe expectations (for example, filtered by job type + error type). -->
+Click **View errors** to open related instances in **Operate**, with the **Error Message** filter prefilled so you see only instances that failed with that error.
 
 ## Empty states and restrictions
 
@@ -150,5 +151,5 @@ In this case, contact your organization owner or admin to request the necessary 
 
 The Console UI and flows are the same in SaaS and Self-Managed.
 
-- **SaaS:** Job Worker Dashboard is available for Camunda 8.9+ clusters. Camunda manages the underlying job metrics configuration.
+- **SaaS:** job dashboard is available for Camunda 8.9+ clusters. Camunda manages the underlying job metrics configuration.
 - **Self-Managed:** You enable and configure job metrics in the engine and Helm charts. For details on available options and defaults, see the job metrics [configuration reference](self-managed/components/orchestration-cluster/core-settings/configuration/properties/).
