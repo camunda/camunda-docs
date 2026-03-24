@@ -103,6 +103,13 @@ Camunda supports **Oracle LTS releases**.
 
 H2 is supported for development, testing, and evaluation only. Production use is not recommended.
 
+For Camunda Orchestration Cluster secondary storage, H2 is a single-broker option only:
+
+- Multi-broker clusters with H2 are not a valid architecture.
+- H2 does not provide a shared database across brokers.
+- In-memory H2 is ephemeral and does not survive restarts.
+- File-based H2 persists on local disk and is suitable for local/dev usage only.
+
 ## Supported JDBC driver versions
 
 Camunda bundles JDBC drivers for databases where redistribution is permitted and expects you to provide drivers where licensing or distribution constraints apply (for example, Oracle).

@@ -5,6 +5,9 @@ sidebar_label: Diagram Converter
 description: "Learn how to use the Diagram Converter to analyze and convert Camunda 7 diagrams to Camunda 8."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 With **Diagram Converter**, you'll get an initial understanding of the migration tasks you'll need to perform when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 diagram files (BPMN or DMN) and generates a list of tasks required for the migration.
 
 In a second step, it can also convert these files from the Camunda 7 format to the Camunda 8 format. For example, it updates namespaces and renames XML properties, if needed.
@@ -165,9 +168,28 @@ java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local myDiagram.bpm
 
 To process all diagrams in a directory (including subdirectories):
 
+<Tabs groupId="os" defaultValue="maclinux" values={[
+{ label: 'Mac OS + Linux', value: 'maclinux' },
+{ label: 'Windows', value: 'windows' }
+]}>
+
+<TabItem value="maclinux">
+
 ```shell
 java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local ./my-processes/
 ```
+
+</TabItem>
+
+<TabItem value="windows">
+
+```shell
+java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local .\my-processes\
+```
+
+</TabItem>
+
+</Tabs>
 
 Key options for `local` mode:
 

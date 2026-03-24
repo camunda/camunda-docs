@@ -150,7 +150,7 @@ You can migrate a called process instance in the same way as a regular process i
 ## Migrate job worker user tasks to Camunda user tasks
 
 :::important
-Only available since version 8.8.17
+Only available since version 8.8.18
 :::
 
 You can migrate user tasks with a job worker implementation to Camunda user tasks by providing mapping instructions between the source and target user tasks.
@@ -438,7 +438,7 @@ In the following cases, the process instance can't apply the migration plan and 
 - Multi-instance body limitations:
   - Each child instance of a multi-instance body should be migrated separately because they belong to another process instance.
   - It is not possible to migrate a parallel multi-instance body to a sequential multi-instance body and vice versa.
-- Mapping instructions can only change the user task implementation from a job-worker user task to a Camunda user task, but not vice versa (since 8.8.17, before that no user task implementation migration is possible).
+- Mapping instructions can only change the user task implementation from a job-worker user task to a Camunda user task, but not vice versa (since 8.8.18, before that no user task implementation migration is possible).
 
 The following limitations exist that may be supported in future versions:
 

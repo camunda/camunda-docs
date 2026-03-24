@@ -1,5 +1,5 @@
 ---
-id: mcp-client-config
+id: agentic-ai-mcp-client-config
 title: Configure MCP Client connectors
 sidebar_label: Configure
 description: "Learn how to configure MCP Client connectors, including connector mode, tool access, and availability."
@@ -63,7 +63,7 @@ Alternatively, it could be configured with `["write_file"]` as a list of exclude
 
 Specify the process variables to map and export the tool calling response into.
 
-| Field             | Required | Description                                                                                                                                                                                                                                                                                                                              |
-| :---------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Result variable   | Yes      | Defaults to `toolCallResult`. Change only if using the AI Agent Task connector and the output mapping of the ad-hoc sub-process multi-instance is configured to use a different variable for the [content mapping](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example.md#configure-multi-instance-execution). |
-| Result expression | No       | Optionally unpack the response content into multiple process variables using the **Result expression** field as a [FEEL context expression](../../../concepts/expressions.md).                                                                                                                                                           |
+| Field             | Required | Description                                                                                                                                                                                                                                                                                  |
+| :---------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Result variable   | Yes      | Defaults to `toolCallResult`. Change only if using the AI Agent Task connector and the output mapping of the ad-hoc sub-process multi-instance is configured to use a different variable for the [content mapping](./agentic-ai-aiagent-task-example.md#configure-multi-instance-execution). |
+| Result expression | No       | Optionally unpack the response content into multiple process variables using the **Result expression** field as a [FEEL context expression](../../concepts/expressions.md).                                                                                                                  |

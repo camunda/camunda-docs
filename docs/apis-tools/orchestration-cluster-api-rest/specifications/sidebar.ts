@@ -628,6 +628,12 @@ const sidebar: SidebarsConfig = {
           label: "Get time-series metrics for a job type",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-job-error-statistics",
+          label: "Get error metrics for a job type",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -1046,6 +1052,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics",
           label: "Get usage metrics",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-system-configuration",
+          label: "System configuration (alpha)",
           className: "api-method get",
         },
       ],

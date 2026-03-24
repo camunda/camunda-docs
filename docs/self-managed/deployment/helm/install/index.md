@@ -9,23 +9,20 @@ Camunda 8 Self-Managed can be installed on Kubernetes using Helm charts. Choose 
 
 ## Choose your installation path
 
-- **Testing and evaluation**: [Quick developer install](./quick-install)
-  Secondary storage: Document-store (ES/OS)
-  Complexity: Low
-  Best for: Local development, POCs, learning
-
-- **Production**: [Production install](./production)
-  Secondary storage: Elasticsearch/OpenSearch or RDBMS
-  Complexity: High
-  Best for: Production deployments, OIDC, HA, monitoring, and choosing your database option within one install flow
+| Use case                  | Installation guide                      | Secondary storage                              | Complexity | Best for                                          |
+| ------------------------- | --------------------------------------- | ---------------------------------------------- | ---------- | ------------------------------------------------- |
+| **Testing & evaluation**  | [Quick developer install](./quick-install)        | Embedded H2 (single-broker only)               | Low        | Local development, POCs, learning                 |
+| **Production with RDBMS** | [Install with RDBMS](./helm-with-rdbms) | PostgreSQL, Oracle, MariaDB, MySQL, SQL Server | Medium     | RDBMS-first organizations, no ES/OS license       |
+| **High-scale production** | [Install for production](./production)  | Elasticsearch/OpenSearch or RDBMS              | High       | High-throughput, multi-team, OIDC, HA, monitoring |
 
 :::tip Decision criteria
 
-- **Don't have a database yet?** Start with [quick developer install](./quick-install) to evaluate Camunda with Elasticsearch/OpenSearch.
+- **Don't have a database yet?** Start with [developer quick install](./quick-install) to evaluate Camunda quickly with embedded H2 in a single-broker setup.
 - **Need to deploy databases and OIDC provider on Kubernetes?** See [deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) to set up PostgreSQL, Elasticsearch, and Keycloak using official Kubernetes operators.
-- **Planning to use RDBMS?** Follow [production install](./production) and choose the RDBMS option in the database section. Use [configure RDBMS](/self-managed/deployment/helm/configure/database/rdbms.md) as the canonical configuration reference, and [RDBMS example deployment](./helm-with-rdbms) if you want a focused walkthrough.
+- **Planning to use RDBMS?** Follow [install with RDBMS](./helm-with-rdbms).
 - **Ready for production?** See [production install](./production) for enterprise-grade security, authentication, multi-namespace deployments, and operational hardening. Both document-store (Elasticsearch/OpenSearch) and RDBMS backends are valid secondary storage choices, depending on your infrastructure and requirements.
-  :::
+ 
+ :::
 
 ## Installation guides
 
