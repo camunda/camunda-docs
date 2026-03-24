@@ -11,8 +11,7 @@ It is enabled when secondary storage is configured as `rdbms`.
 
 ## How it works
 
-- Zeebe processes workflow records in primary storage.
-- The RDBMS Exporter transforms relevant records and writes them to secondary storage tables.
+- The RDBMS Exporter consumes records from the log stream, transforming relevant records and writing them to secondary storage database tables.
 - Operate and Tasklist query this secondary storage data through the Orchestration Cluster APIs.
 
 ## Configuration

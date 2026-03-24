@@ -97,15 +97,7 @@ Then apply SQL/Liquibase scripts manually using your DBA tools. See [access SQL 
 
 ## Orchestration Cluster connection parameters
 
-The Orchestration Cluster uses a single RDBMS configuration shared across orchestration services and UIs that read from secondary storage.
-
-All orchestration services and UIs share the same database connection:
-
-```bash
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda"
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME="camunda"
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD="your-secure-password"
-```
+The Orchestration Cluster uses a single RDBMS configuration shared across orchestration services and UIs that read from secondary storage. Set the connection properties as shown in [Step 2: Configure connection](#step-2-configure-connection) above.
 
 ### Zeebe exporter configuration
 
