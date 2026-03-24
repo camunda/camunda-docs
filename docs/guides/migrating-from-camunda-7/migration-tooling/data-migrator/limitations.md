@@ -11,24 +11,24 @@ An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrat
 
 The following requirements and limitations apply:
 
-- Identity migration only includes the migration of:
-  - Tenants and their associated memberships.
+- Identity migration includes the migration of:
+  - Users, groups, tenants and their associated memberships.
   - Supported authorizations (detailed in the [Authorizations](identity.md#authorizations) section).
-- Users, groups and group memberships are not automatically migrated since they are usually retrieved from an IdP.
 - Once migration has been triggered, it's strongly recommended not to create new identity data on Camunda 7. Even if migration is attempted again, the new data might not be migrated.
 - In order for authorizations to work correctly after migration, process definitions, forms, DRD and decision definitions need to have the same IDs in Camunda 8 as in Camunda 7. This should be the case if you have already migrated runtime and history data.
 - Tenant memberships are migrated as part of their respective tenants and are not tracked individually.
   - If a tenant is migrated, all its memberships are migrated as well. If a tenant is skipped, its memberships are also skipped.
   - If the migration of an individual tenant membership fails (for example, due to a missing user), it cannot be retried.
   - The `--list-skipped` and `--list-migrated` options do not list individual tenant memberships.
+- For security reasons, passwords for users cannot be migrated. For this reason, users are migrated with a generated secure password that needs to be reset by an administrator after migration.
 
 ### Supported entities
 
 | Identity type      | Migration supported |
 | ------------------ | ------------------- |
-| Users              | Retrieved from IdP. |
-| Groups             | Retrieved from IdP. |
-| Group Memberships  | Retrieved from IdP. |
+| Users              | Yes                 |
+| Groups             | Yes                 |
+| Group Memberships  | Yes                 |
 | Tenants            | Yes                 |
 | Tenant Memberships | Yes                 |
 
