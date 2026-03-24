@@ -264,7 +264,30 @@ assertThat(processInstance).hasTerminatedElement("task_A", 2);
 
 ## Variable assertions
 
-You can verify the process variables using `CamundaAssert.assertThat(processInstance)`.
+You can verify the process variables using `CamundaAssert.assertThat(processInstance)`. Use the variable name or a [VariableSelector](utilities.md#variable-selector) to identify the variable.
+
+### With variable name
+
+Use the variable name to identify the variable:
+
+```java
+assertThat(processInstance).hasVariable("approved", true);
+```
+
+### With variable selector
+
+Use a [VariableSelector](utilities.md#variable-selector) to identify the variable:
+
+```java
+// by variable name
+assertThat(processInstance).hasVariable(VariableSelectors.byName("approved"), true);
+
+// by partial variable value
+assertThat(processInstance).hasVariableSatisfies(
+    VariableSelectors.byValueContains("order-123"),
+    Order.class,
+    order -> { });
+```
 
 ### hasVariableNames
 
