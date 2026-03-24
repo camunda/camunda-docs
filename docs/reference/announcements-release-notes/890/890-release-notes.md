@@ -50,6 +50,35 @@ Camunda CLI is the successor to zbctl, providing a unified way to authenticate, 
 <p class="link-arrow">[Camunda CLI cluster inspection](/apis-tools/c8ctl/cluster-inspection.md)</p>
 <p class="link-arrow">[Camunda CLI plugins](/apis-tools/c8ctl/plugins.md)</p>
 
+### Camunda Process Test
+
+<!-- https://github.com/camunda/product-hub/issues/3195 -->
+
+You can now run JSON test scenario files with Camunda Process Test.
+
+- Run low-code test scenarios as part of standard JUnit 5 execution in local and CI/CD environments.
+- Reuse the JSON test-case format to execute scenario-based tests without rewriting them as full Java test logic.
+
+You can also use a shared runtime in Camunda Process Test to significantly reduce test execution time for suites with multiple test scenarios.
+
+<p class="link-arrow">[JSON test cases](/apis-tools/testing/json-test-cases.md)</p>
+<p class="link-arrow">[Shared runtime configuration](/apis-tools/testing/configuration.md#shared-runtime)</p>
+
+## Connectivity
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects networking">Networking</span></div>
+
+### Secure connectivity with AWS inbound PrivateLink
+
+<!-- https://github.com/camunda/product-hub/issues/2601 -->
+
+You can now connect to Camunda SaaS Orchestration clusters from AWS VPCs using AWS PrivateLink.
+
+Inbound traffic stays on private AWS networking instead of traversing the public internet, so job workers and inbound connectors can run inside customer VPCs with stronger network isolation and compliance alignment.
+
+<p class="link-arrow">[Secure connectivity overview](/components/saas/secure-connectivity/index.md)</p>
+<p class="link-arrow">[Set up secure connectivity in Console](/components/saas/secure-connectivity/console-setup.md)</p>
+
 ## Helm chart deployment
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
@@ -68,6 +97,30 @@ This update describes infrastructure deployment patterns in reference architectu
 <p class="link-arrow">[EKS dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)</p>
 <p class="link-arrow">[OpenShift dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)</p>
 <p class="link-arrow">[Dual-region operational tasks](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md)</p>
+
+## Modeler
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects RPA">RPA</span></div>
+
+### RPA support in Web Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/2703 -->
+
+Web Modeler now supports RPA scripts as a first-class file type, including visibility, project management, and deployment workflows without relying on Desktop Modeler.
+
+<p class="link-arrow">[RPA getting started](/components/rpa/getting-started.md)</p>
+
+## Orchestration Cluster
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects jobs">Jobs</span></div>
+
+### Job Dashboard
+
+<!-- https://github.com/camunda/product-hub/issues/2787 -->
+
+The Job Dashboard provides a unified view of jobs and associated workers across the cluster, including Connectors and RPA.
+
+Use it to monitor job creation, completion trends, failures, and worker activity for faster troubleshooting without custom-built monitoring dashboards.
 
 ## 8.9.0-alpha5
 
