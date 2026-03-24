@@ -53,7 +53,6 @@ When Optimize is enabled, additional resources are needed — especially for Ela
 The numbers in the tables were measured using a [realistic process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) with a [realistic payload](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB, containing a mix of BPMN symbols such as tasks, events, call activities, multi-instance, sub-processes, and DMN). To calculate day-based metrics, an equal distribution over 24 hours is assumed.
 :::
 
-
 <!-- TODO: Validate these resource numbers against 8.9 benchmarks. These numbers are based on the Optimize V2 experiment (minimum ES resources for realistic workload at 1 PI/s with 101 tasks/s). -->
 
 |                           |                     | request | limit |
