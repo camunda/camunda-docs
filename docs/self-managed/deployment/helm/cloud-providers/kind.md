@@ -112,7 +112,7 @@ You'll run all subsequent commands from `camunda-deployment-references/local/kub
 Before proceeding, take some time to explore the repository structure and understand the configuration files, scripts, and Helm values. This will help you understand what each step does and how to customize the deployment for your needs.
 
 :::tip Quick setup with Makefile
-The reference architecture includes a `Makefile` with useful commands to automate the entire deployment process. Set `SECONDARY_STORAGE` to choose your backend, then run the init target for your deployment mode:
+The reference architecture includes a `Makefile` with useful commands to automate the entire deployment process. If you [exported `SECONDARY_STORAGE`](#secondary-storage-options) above, you can omit it from these commands. Otherwise, set it inline:
 
 ```bash
 # PostgreSQL secondary storage (lighter, no Optimize)
@@ -264,9 +264,7 @@ Before deploying Camunda, you need to deploy the external services it depends on
 Run the operator deployment script, specifying the domain deployment mode and your chosen [secondary storage](#secondary-storage-options) backend:
 
 ```bash
-SECONDARY_STORAGE=elasticsearch CAMUNDA_MODE=domain ./procedure/operators-deploy.sh
-# or
-SECONDARY_STORAGE=postgres CAMUNDA_MODE=domain ./procedure/operators-deploy.sh
+CAMUNDA_MODE=domain ./procedure/operators-deploy.sh
 ```
 
 This script installs each operator and its custom resources, then waits for all instances to be ready. When `SECONDARY_STORAGE=postgres`, the ECK operator and Elasticsearch cluster are skipped, and an additional PostgreSQL cluster (`pg-camunda`) is deployed for RDBMS secondary storage.
@@ -278,12 +276,10 @@ This script installs each operator and its custom resources, then waits for all 
 Deploy Camunda 8 with the domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based) to connect Camunda to the external PostgreSQL and Keycloak instances, and to the secondary storage backend you selected:
 
 ```bash
-SECONDARY_STORAGE=elasticsearch ./procedure/camunda-deploy-domain.sh
-# or
-SECONDARY_STORAGE=postgres ./procedure/camunda-deploy-domain.sh
+./procedure/camunda-deploy-domain.sh
 ```
 
-The script selects the appropriate Helm values based on `SECONDARY_STORAGE`. With `elasticsearch`, it includes the Elasticsearch values overlay. With `postgres`, it includes the RDBMS values overlay and disables Elasticsearch and Optimize.
+The script selects the appropriate Helm values based on your [exported `SECONDARY_STORAGE`](#secondary-storage-options) value. With `elasticsearch`, it includes the Elasticsearch values overlay. With `postgres`, it includes the RDBMS values overlay and disables Elasticsearch and Optimize.
 
 <details>
 <summary>Deploy script source</summary>
@@ -344,9 +340,7 @@ Before deploying Camunda, you need to deploy the external services it depends on
 Run the operator deployment script, specifying the no-domain deployment mode and your chosen [secondary storage](#secondary-storage-options) backend:
 
 ```bash
-SECONDARY_STORAGE=elasticsearch CAMUNDA_MODE=no-domain ./procedure/operators-deploy.sh
-# or
-SECONDARY_STORAGE=postgres CAMUNDA_MODE=no-domain ./procedure/operators-deploy.sh
+CAMUNDA_MODE=no-domain ./procedure/operators-deploy.sh
 ```
 
 This script installs each operator and its custom resources, then waits for all instances to be ready. When `SECONDARY_STORAGE=postgres`, the ECK operator and Elasticsearch cluster are skipped, and an additional PostgreSQL cluster (`pg-camunda`) is deployed for RDBMS secondary storage.
@@ -372,12 +366,10 @@ After adding this entry and deploying Camunda 8 in the next step, you'll be able
 Deploy Camunda 8 with the no-domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based) to connect Camunda to the external PostgreSQL and Keycloak instances, and to the secondary storage backend you selected:
 
 ```bash
-SECONDARY_STORAGE=elasticsearch ./procedure/camunda-deploy-no-domain.sh
-# or
-SECONDARY_STORAGE=postgres ./procedure/camunda-deploy-no-domain.sh
+./procedure/camunda-deploy-no-domain.sh
 ```
 
-The script selects the appropriate Helm values based on `SECONDARY_STORAGE`. With `elasticsearch`, it includes the Elasticsearch values overlay. With `postgres`, it includes the RDBMS values overlay and disables Elasticsearch and Optimize.
+The script selects the appropriate Helm values based on your [exported `SECONDARY_STORAGE`](#secondary-storage-options) value. With `elasticsearch`, it includes the Elasticsearch values overlay. With `postgres`, it includes the RDBMS values overlay and disables Elasticsearch and Optimize.
 
 <details>
 <summary>Deploy script source</summary>
