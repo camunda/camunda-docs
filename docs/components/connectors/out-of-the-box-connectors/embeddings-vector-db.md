@@ -367,10 +367,13 @@ In Self-Managed environments, the vector database connector supports routing HTT
 
 The vector database connector supports [plain proxy variables](/self-managed/components/connectors/http-proxy-configuration.md#plain-proxy-variables) in addition to the standard connector proxy variables. Refer to the [HTTP proxy configuration](/self-managed/components/connectors/http-proxy-configuration.md) page for the full list of environment variables and configuration options.
 
-The following providers do not support proxy configuration:
+The following providers do not support connector proxy variables, but respect standard [JVM proxy properties](/self-managed/components/connectors/http-proxy-configuration.md#jvm-properties):
 
 - Google VertexAI (embedding model).
 - Azure AI Search (vector store).
+
+The following providers do not support proxy configuration:
+
 - Azure Cosmos DB NoSQL (vector store).
 
 To disable proxy support entirely (for example, if only an HTTPS-based proxy is available), set the following environment variable:

@@ -19,7 +19,7 @@ In Self-Managed environments, the AI Agent connector supports routing HTTP reque
 
 These connectors support [plain proxy variables](/self-managed/components/connectors/http-proxy-configuration.md#plain-proxy-variables) in addition to the standard connector proxy variables. Refer to the [HTTP proxy configuration](/self-managed/components/connectors/http-proxy-configuration.md) page for the full list of environment variables and configuration options.
 
-The following LLM providers do not support proxy configuration:
+The following LLM providers do not support connector proxy variables, but respect standard [JVM proxy properties](/self-managed/components/connectors/http-proxy-configuration.md#jvm-properties):
 
 - Google Vertex AI.
 
