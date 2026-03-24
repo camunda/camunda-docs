@@ -53,9 +53,15 @@ In addition to the deployment mode, you must choose a **secondary storage** back
 | `elasticsearch` | ECK, CloudNativePG, Keycloak Operator | Full platform including Optimize                            |
 | `postgres`      | CloudNativePG, Keycloak Operator      | All components except Optimize (uses PostgreSQL RDBMS mode) |
 
-The `postgres` option uses [RDBMS secondary storage](/self-managed/concepts/secondary-storage/index.md) (available since 8.9), which replaces Elasticsearch with PostgreSQL for Operate, Tasklist, and the Orchestration Cluster REST API. This results in a lighter deployment with fewer operators and lower resource consumption, but Optimize is not available in this mode because it requires Elasticsearch.
+The `postgres` option uses [RDBMS secondary storage](/self-managed/concepts/secondary-storage/index.md) (available since 8.9), which replaces Elasticsearch with PostgreSQL for Operate, Tasklist, and the Orchestration Cluster REST API. This results in a lighter deployment with fewer operators and lower resource consumption. Optimize is not available in this mode because it depends on Elasticsearch's aggregation API for analytics — this is an architectural constraint, not a temporary gap.
 
 For more details on secondary storage backends and configuration, see [Secondary storage](/self-managed/concepts/secondary-storage/index.md).
+
+Once you've chosen your backend, export the variable so all subsequent commands pick it up automatically:
+
+```bash
+export SECONDARY_STORAGE=postgres   # or: elasticsearch
+```
 
 ## Prerequisites
 
