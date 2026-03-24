@@ -26,6 +26,6 @@ For document-store backends, cluster data is stored in indices governed by a sch
 
 For more information about the specific indices used by the orchestration cluster, refer to the [Index Diagrams](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices.md).
 
-From 8.8 onwards, no schema migrations are required when upgrading the orchestration cluster. For older versions, follow the migration instructions below.
+From 8.8 onwards, no schema migrations are required when upgrading the orchestration cluster.
 
 > See also: [Version compatibility checks](./version-compatibility.md) for the rules governing supported upgrade paths and how schema version metadata is validated.

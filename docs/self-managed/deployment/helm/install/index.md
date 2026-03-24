@@ -11,12 +11,11 @@ Camunda 8 Self-Managed can be installed on Kubernetes using Helm charts. Choose 
 
 | Use case                  | Installation guide                      | Secondary storage                              | Complexity | Best for                                          |
 | ------------------------- | --------------------------------------- | ---------------------------------------------- | ---------- | ------------------------------------------------- |
-| **Testing & evaluation**  | [Quick install](./quick-install)        | RDBMS (embedded H2)                            | Low        | Local development, POCs, learning                 |
+| **Testing & evaluation**  | [Quick install](./quick-install)        | Embedded H2 (single-broker only)               | Low        | Local development, POCs, learning                 |
 | **Production with RDBMS** | [Install with RDBMS](./helm-with-rdbms) | PostgreSQL, Oracle, MariaDB, MySQL, SQL Server | Medium     | RDBMS-first organizations, no ES/OS license       |
 | **High-scale production** | [Install for production](./production)  | Elasticsearch/OpenSearch or RDBMS              | High       | High-throughput, multi-team, OIDC, HA, monitoring |
 
 :::tip Decision criteria
-
 - **Don't have a database yet?** Start with [quick install](./quick-install) to evaluate the Orchestration Cluster with embedded H2 secondary storage (non-production).
 - **Need to deploy databases and OIDC provider on Kubernetes?** See [deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) to set up PostgreSQL (management components), Elasticsearch/OpenSearch (Orchestration Cluster secondary storage), and Keycloak using official Kubernetes operators.
 - **Planning to use RDBMS?** Follow [install with RDBMS](./helm-with-rdbms) for step-by-step instructions, JDBC driver management, and schema setup guidance.

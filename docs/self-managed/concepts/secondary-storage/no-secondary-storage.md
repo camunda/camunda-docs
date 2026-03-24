@@ -104,9 +104,11 @@ environment:
 
 If secondary storage is disabled, the following components and features are unavailable:
 
-- Web applications: Operate, Tasklist, Identity UI, Optimize, and Play (Modeler Play tab) are disabled.
-- APIs and services: Orchestration Cluster REST API search endpoints, batch operations, and usage metrics return `403 Forbidden`.
-- Data and storage: Secondary storage exporters, Schema Manager, and secondary storage backups are disabled.
+| Category         | Component or feature                                                               | Behavior               |
+| :--------------- | :--------------------------------------------------------------------------------- | :--------------------- |
+| Web applications | Operate, Tasklist, Admin UI, Optimize, Play (Modeler Play tab)                     | Disabled               |
+| APIs & services  | Orchestration Cluster REST API (search endpoints), batch operations, usage metrics | Return `403 Forbidden` |
+| Data & storage   | Secondary storage exporters, Schema Manager, secondary storage backups             | Disabled               |
 
 :::note
 

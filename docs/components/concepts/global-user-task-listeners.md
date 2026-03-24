@@ -78,19 +78,26 @@ The two ways of configuring global listeners can be used at the same time, howev
 
 You can configure the global user task listeners through the [Unified Configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners) by setting the appropriate properties under the configuration path `camunda.cluster.global-listeners.user-task`.
 
-Each listener entry can be configured with the properties described in the [Global listener definition](#global-listener-definition) section above, except for the `source` property which is automatically set to `CONFIGURATION` by the system.
+Each listener entry can be configured with the properties described in the [Global listener definition](#global-listener-definition) section above, except for the `source` property, which is automatically set to `CONFIGURATION` by the system. Any provided `source` value will be ignored.
 
 #### How the configuration is validated
 
-On startup, the configuration is validated according to the following rules. The system attempts to correct issues where possible instead of failing the startup:
+If you provide an invalid configuration, the system attempts to automatically rectify it instead of causing startup to fail. This allows you to fix issues in the configuration without requiring every listener entry to be valid on the first attempt.
 
-- Invalid event types are removed and ignored.
-- Listeners missing information about identifier, event types or job type are removed and ignored.
-  - This also includes listeners for which only invalid event types are defined.
-- If a listener defines both the special `all` value and a normal event type for `event-types`, the configuration is corrected to include only `all`.
-- Listeners with invalid retry values, i.e., non-numeric or negative, are removed and ignored.
+The following validation rules are applied automatically on startup:
 
-In all cases, a suitable warning is reported in the orchestration cluster startup log, identifying the problem and its location in the configuration.
+- If a listener is missing the required `id`, `type`, or `event-types` properties, it is removed.
+- If a listener defines invalid event types, those event types are removed. If all event types are invalid, the listener is removed.
+  - Valid event types are: `creating`, `assigning`, `updating`, `completing`, `canceling`, or the special value `all`. Event type matching is case-insensitive, so `Creating` and `creating` are both valid, but `create` is not.
+- If a listener defines duplicate event types, the duplicates are removed and only one instance of each event type is kept.
+- If a listener defines both the special `all` value and a normal event type for `event-types`, the configuration is corrected to include only `all`. This ensures the listener catches all events as intended.
+- If a listener defines invalid retry values (non-numeric, negative, or zero), it is removed. Valid retry values are positive integers.
+
+In all the above cases, a warning is written to the Orchestration Cluster startup log identifying the problem location. Invalid listeners are removed while valid ones remain active.
+
+:::note
+Listeners defined through the API are not subject to this validation.
+:::
 
 #### Example configuration
 
@@ -196,3 +203,4 @@ In addition to the above:
 - [Global listener configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners).
 - [Configure properties through Helm charts](/self-managed/deployment/helm/configure/application-configs.md).
 - [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+- Administrators can manage all tenants centrally using [Admin](../admin/tenant.md).

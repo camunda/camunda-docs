@@ -429,21 +429,6 @@ module.exports = {
                 "components/early-access/alpha/feel-copilot/feel-copilot",
                 {
                   type: "category",
-                  label: "MCP Client",
-                  link: {
-                    type: "doc",
-                    id: "components/early-access/alpha/mcp-client/mcp-client",
-                  },
-                  items: [
-                    "components/early-access/alpha/mcp-client/mcp-client-connector",
-                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
-                    "components/early-access/alpha/mcp-client/mcp-client-config",
-                    "components/early-access/alpha/mcp-client/mcp-client-tool-discovery",
-                    "components/early-access/alpha/mcp-client/mcp-client-human-in-the-loop",
-                  ],
-                },
-                {
-                  type: "category",
                   label: "A2A Client",
                   link: {
                     type: "doc",
@@ -795,21 +780,23 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Identity",
+          label: "Admin",
           link: {
             type: "doc",
-            id: "components/identity/identity-introduction",
+            id: "components/admin/admin-introduction",
           },
           items: [
-            "components/identity/access-control",
-            "components/identity/user",
-            "components/identity/group",
-            "components/identity/role",
-            "components/identity/authorization",
-            "components/identity/client",
-            "components/identity/mapping-rules",
-            "components/identity/tenant",
-            "components/identity/audit-operations",
+            "components/admin/access-control",
+            "components/admin/user",
+            "components/admin/group",
+            "components/admin/role",
+            "components/admin/authorization",
+            "components/admin/client",
+            "components/admin/mapping-rules",
+            "components/admin/tenant",
+            "components/admin/cluster-variables",
+            "components/admin/global-user-task-listeners",
+            "components/admin/audit-operations",
           ],
         },
       ],
@@ -888,6 +875,21 @@ module.exports = {
                     },
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "MCP Client",
+                  link: {
+                    type: "doc",
+                    id: "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client",
+                  },
+                  items: [
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-connector",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client-connector",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-config",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-tool-discovery",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-human-in-the-loop",
                   ],
                 },
                 "components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver",
@@ -1898,7 +1900,13 @@ module.exports = {
               ],
             },
             {
-              "Relational databases": [
+              type: "category",
+              label: "Relational databases",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/databases/relational-db/index",
+              },
+              items: [
                 "self-managed/concepts/databases/relational-db/rdbms-setup-guide",
                 "self-managed/concepts/databases/relational-db/rdbms-support-policy",
                 "self-managed/concepts/databases/relational-db/database-configuration",
@@ -2008,7 +2016,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
-                    "self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code",
                   ],
                 },
                 {
@@ -2095,12 +2103,13 @@ module.exports = {
               ],
             },
             {
-              Identity: [
-                "self-managed/components/orchestration-cluster/identity/overview",
-                "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
-                "self-managed/components/orchestration-cluster/identity/connect-multiple-identity-providers",
-                "self-managed/components/orchestration-cluster/identity/debugging-authentication",
-                "self-managed/components/orchestration-cluster/identity/special-oidc-cases",
+              Admin: [
+                "self-managed/components/orchestration-cluster/admin/overview",
+                "self-managed/components/orchestration-cluster/admin/connect-external-identity-provider",
+                "self-managed/components/orchestration-cluster/admin/connect-multiple-identity-providers",
+                "self-managed/components/orchestration-cluster/admin/bring-your-groups",
+                "self-managed/components/orchestration-cluster/admin/debugging-authentication",
+                "self-managed/components/orchestration-cluster/admin/special-oidc-cases",
               ],
             },
           ],

@@ -1,22 +1,22 @@
 ---
 id: access-control
 title: Access control
-description: "Grant users access to work with Identity."
+description: "Grant users access to work with Admin."
 ---
 
-If authorization control is enabled for your Orchestration Cluster, users require the following authorizations to work with Identity.
+If authorization control is enabled for your Orchestration Cluster, users require the following authorizations to work with Admin.
 
 :::note
-If you already have another administration user, they can assign these [in the Identity UI](components/identity/authorization.md#create-an-authorization). See [the introduction to authorizations](components/concepts/access-control/authorizations.md#available-resources) for a list of all available authorizations.
+If you already have another administration user, they can assign these [in the Admin UI](components/admin/authorization.md#create-an-authorization). See [the introduction to authorizations](components/concepts/access-control/authorizations.md#available-resources) for a list of all available authorizations.
 :::
 
 ## Mandatory authorizations
 
-The following mandatory authorizations are required to work with Identity:
+The following mandatory authorizations are required to work with Admin:
 
-| Authorization type        | Resource type | Resource ID                                          | Permission |
-| :------------------------ | :------------ | :--------------------------------------------------- | :--------- |
-| Identity component access | `Component`   | `identity` or `*` (for access to all web components) | `ACCESS`   |
+| Authorization type     | Resource type | Resource ID                                                                  | Permission |
+| :--------------------- | :------------ | :--------------------------------------------------------------------------- | :--------- |
+| Admin component access | `Component`   | `admin` or `identity` (deprecated) or `*` (for access to all web components) | `ACCESS`   |
 
 ## Authorizations per resource
 

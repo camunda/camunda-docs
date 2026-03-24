@@ -21,7 +21,7 @@ To learn more, see [mapping rules](../concepts/access-control/mapping-rules.md).
 
 To create a mapping rule:
 
-1. Log in to Identity in your cluster, and select the **Mapping Rules** tab.
+1. Log in to Admin in your cluster, and select the **Mapping Rules** tab.
 2. Click **Create a mapping rule**, and enter the following details:
    - **Mapping Rule ID**: A unique identifier for the mapping rule.
    - **Mapping Rule name**: A user-friendly name.
@@ -37,7 +37,7 @@ You can now assign the role to groups, roles, or tenants, or create and apply au
 
 To update a mapping rule:
 
-1. Log in to Identity in your cluster, and select the **Mapping rules** tab.
+1. Log in to Admin in your cluster, and select the **Mapping rules** tab.
 2. Click the **pencil icon** next to the mapping rule you want to update.
 3. Update the mapping rule details as required.
 4. Click **Save** to update the mapping rule.
@@ -48,7 +48,7 @@ To update a mapping rule:
 
 To delete a mapping rule:
 
-1. Log in to Identity in your cluster, and select the **Mapping Rules** tab.
+1. Log in to Admin in your cluster, and select the **Mapping Rules** tab.
 2. Click **Delete** next to the mapping rule you want to delete.
 3. Confirm the deletion by clicking on the **Delete** button in the confirmation dialog. The mapping rule is deleted.
 

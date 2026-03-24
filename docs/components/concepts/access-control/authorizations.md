@@ -24,7 +24,7 @@ The Orchestration Cluster in Camunda 8 provides a fine-grained authorization sys
 This system only applies to the following Orchestration Cluster components:
 
 - [Zeebe](../../zeebe/zeebe-overview.md)
-- [Identity](../../identity/identity-introduction.md)
+- [Admin](../../admin/admin-introduction.md)
 - [Operate](../../operate/operate-introduction.md)
 - [Tasklist](../../tasklist/introduction-to-tasklist.md)
 - [Orchestration Cluster APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
@@ -153,7 +153,7 @@ Only grant this permission to users and clients who are fully trusted to deploy 
 
 ### `CREATE`/`UPDATE` permissions for the User
 
-The `CREATE` and `UPDATE` permissions for the **User** resource are highly sensitive. When a user's password is set or changed via Identity, there are no security controls enforced, such as password complexity policies.
+The `CREATE` and `UPDATE` permissions for the **User** resource are highly sensitive. When a user's password is set or changed via Admin, there are no security controls enforced, such as password complexity policies.
 
 This permission should only be assigned to trusted administrators.
 
@@ -173,7 +173,7 @@ These permissions should be strictly limited to trusted system administrators wh
 
 ### No validation of owner and resource IDs
 
-When you create an authorization, the Orchestration Cluster validates the owner depending on the `ownerType`. For `USER`, `ROLE`, `GROUP`, and `MAPPING_RULE`, the owner must exist in Identity. For `CLIENT`, the owner is not validated.
+When you create an authorization, the Orchestration Cluster validates the owner depending on the `ownerType`. For `USER`, `ROLE`, `GROUP`, and `MAPPING_RULE`, the owner must exist in Admin. For `CLIENT`, the owner is not validated.
 
 The Orchestration Cluster does not validate whether the resource exists when creating an authorization.
 
@@ -222,7 +222,8 @@ Users need specific permissions to access Orchestration Cluster web components:
 - UI access: Resource type `Component` and a resource key identifying the component:
   - `operate` for Operate access
   - `tasklist` for Tasklist access
-  - `identity` for Identity access
+  - `admin` for Admin access
+  - `identity` for Admin access (deprecated - please use `admin` instead)
   - `*` for access to all components
 - Without these permissions, users cannot access the components.
 

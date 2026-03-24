@@ -43,6 +43,16 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 ## A
 
+### Admin
+
+Use Admin in the [Orchestration Cluster](#orchestration-cluster) to administer authentication, authorization, and cluster administration features.
+
+:::note
+Admin was previously named "Identity" in Camunda 8.8. The component was renamed in 8.9 to reflect its expanded scope.
+:::
+
+- [Admin overview](/components/admin/admin-introduction.md)
+
 ### Agentic orchestration
 
 The governed coordination and management of AI agents, humans, and systems in a blended deterministic and dynamic process workflow to achieve defined goals.
@@ -260,7 +270,7 @@ H2 can run in two modes:
 - **In-memory**: Data is stored only in memory and lost when the application stops. Useful for temporary testing.
 - **File-based (embedded)**: Database files are persisted to disk on the same host as the component using them. Suitable for local development where data persistence across restarts is needed.
 
-H2 is not intended for production usage.
+H2 is not intended for production usage. For Camunda secondary storage, H2 is a single-broker option and is not a valid backend for multi-broker clusters.
 
 - [Secondary storage](/self-managed/concepts/secondary-storage/index.md)
 
@@ -281,10 +291,6 @@ For example, this is useful when working with services that must be isolated wit
 - [Use connectors in hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md)
 
 ## I
-
-### Identity
-
-Use Identity in the [Orchestration Cluster](#orchestration-cluster) to administer the integrated authentication and authorization.
 
 ### Inbound connector
 

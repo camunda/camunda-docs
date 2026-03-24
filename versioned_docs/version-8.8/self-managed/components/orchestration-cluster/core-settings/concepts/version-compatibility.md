@@ -123,6 +123,13 @@ Because schema upgrades are backward compatible from 8.8 onward, a temporary mix
 Alpha builds (`-alpha*`) are for evaluation and are **not** valid sources or targets for a supported production upgrade path.  
 Always upgrade between stable releases.
 
+## Recommended operational steps
+
+1. Before upgrading to a new minor (for example, `8.7.x → 8.8.y`), upgrade to the **latest patch** of your current minor (for example, `8.7.latest`) to ensure schema version metadata exists.
+1. Avoid skipping minor versions; perform sequential minor upgrades.
+1. Do not include pre-release builds in production upgrade chains.
+1. Investigate any broker health status showing `brokerStatus: DOWN` after an upgrade. This typically indicates a rejected upgrade path.
+
 ## See also
 
 - [Schema and data migration](./schema-and-migration.md)

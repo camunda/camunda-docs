@@ -325,6 +325,8 @@ components:
         - actorType
         - actorId
         - errors
+        - endDate
+        - startDate
       type: object
       properties:
         batchOperationKey:
@@ -379,6 +381,10 @@ components:
           items:
             $ref: "#/components/schemas/BatchOperationError"
     BatchOperationError:
+      required:
+        - message
+        - partitionId
+        - type
       type: object
       properties:
         partitionId:
@@ -466,6 +472,13 @@ components:
       type: object
       required:
         - rootProcessInstanceKey
+        - batchOperationKey
+        - errorMessage
+        - itemKey
+        - operationType
+        - processedDate
+        - processInstanceKey
+        - state
       properties:
         operationType:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
@@ -498,11 +511,14 @@ components:
             - CANCELED
             - FAILED
         processedDate:
-          description: the date this item was processed.
+          description: |
+            The date this item was processed.
+            This is `null` if the item has not yet been processed.
+          nullable: true
           type: string
           format: date-time
         errorMessage:
-          description: the error message from the engine in case of a failed operation.
+          description: The error message from the engine in case of a failed operation.
           nullable: true
           type: string
     DecisionInstanceDeletionBatchOperationRequest:
@@ -660,7 +676,6 @@ components:
         - UPDATE_VARIABLE
     BatchOperationTypeFilterProperty:
       description: BatchOperationTypeEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -693,7 +708,6 @@ components:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
     BatchOperationStateFilterProperty:
       description: BatchOperationStateEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -726,7 +740,6 @@ components:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
     BatchOperationItemStateFilterProperty:
       description: BatchOperationItemStateEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match

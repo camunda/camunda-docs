@@ -1,6 +1,6 @@
 ---
-id: identity-as-code
-title: Identity as Code
+id: admin-identity-as-code
+title: "Admin: Identity as Code"
 description: Configure Identity as Code for a Camunda 8 Self-Managed Orchestration Cluster.
 ---
 
@@ -10,12 +10,12 @@ Use Identity as Code to create users, roles, groups, authorizations, mapping rul
 ## Use cases
 
 Identity as Code simplifies configuring Self-Managed orchestration clusters across multiple stages.
-You can create [all Identity-related entities](/components/identity/identity-introduction.md#manage-access) on one stage and then deploy them to other stages without further interaction, reducing the chance of error.
+You can create [all identity-related entities](/components/admin/admin-introduction.md#manage-access) on one stage and then deploy them to other stages without further interaction, reducing the chance of error.
 
 Another use case is local development, where a cluster might be recreated regularly.
 
-After Identity creates an entity, changing its configuration does not update the existing entity.
-Identity checks only the ID to decide whether an entity already exists.
+After Admin creates an entity, changing its configuration does not update the existing entity.
+Admin checks only the ID to decide whether an entity already exists.
 
 ## Configure authorizations
 

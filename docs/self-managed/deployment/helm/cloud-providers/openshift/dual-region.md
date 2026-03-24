@@ -87,14 +87,14 @@ If Red Hat Advanced Cluster Management is not enabled on your cluster, you need 
 
 :::caution Non-production use only
 
-The following installation instructions for Advanced Cluster Management are intended for non-production environments.  
+The following installation instructions for Advanced Cluster Management are intended for non-production environments.
 For a production setup, please consult the [official Red Hat Advanced Cluster Management guide](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing).
 
 :::
 
 :::note Designation of the clusters in ACM
 
-The cluster of the region 1 is referred to as `local-cluster` in **ACM**. This designation cannot be changed, as it is a constant name used to reference the [managed hub cluster](https://open-cluster-management.io/docs/concepts/cluster-inventory/managedcluster/).
+The cluster of region 0 is referred to as `local-cluster` in **ACM**. This designation cannot be changed, as it is a constant name used to reference the [managed hub cluster](https://open-cluster-management.io/docs/concepts/cluster-inventory/managedcluster/).
 
 Later in this guide, we will refer to it as **first cluster**.
 
@@ -251,7 +251,7 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
 0. This part of the guide uses a generic reference architecture, you can find all the [submariner files here](https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/submariner/).
 
 1. Ensure cluster context names match:
-   _(Skip this step if already completed as part of [Advanced Cluster Management](#advanced-cluster-management).)_  
+   _(Skip this step if already completed as part of [Advanced Cluster Management](#advanced-cluster-management).)_
    Verify that each cluster's context name matches its corresponding cluster name. If the context name does not match, rename it to align with this guide.
 
    ```bash reference
@@ -267,7 +267,7 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
 
    If no nodes are labeled, you need to label at least one node in each cluster. For better reliability, consider dedicating a node as the broker.
 
-   **Assigning broker node labels:**  
+   **Assigning broker node labels:**
    Select the first node and apply the required label:
 
    ```bash reference
@@ -332,8 +332,8 @@ For more comprehensive details regarding the verification tests for Submariner u
 
 **Debugging the Submariner setup:**
 
-If you are experiencing connectivity issues, we recommend spawning a pod in the `default` namespace that contains networking debugging tools. You can find an [example here](https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/submariner/debug-utils-submariner.yml).  
-With this pod, you will be able to check flow openings, service resolution, and other network-related aspects.  
+If you are experiencing connectivity issues, we recommend spawning a pod in the `default` namespace that contains networking debugging tools. You can find an [example here](https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/submariner/debug-utils-submariner.yml).
+With this pod, you will be able to check flow openings, service resolution, and other network-related aspects.
 Troubleshooting requires examining all the underlying mechanisms of Submariner. Therefore, we also encourage you to read the [Submariner troubleshooting guide](https://submariner.io/operations/troubleshooting/).
 
 ## Deploying Camunda 8 via Helm charts in a dual-region setup
@@ -357,11 +357,28 @@ Save the file as `chart-env.sh`, replace the placeholders with your values, and 
 source chart-env.sh
 ```
 
-### Reference the elastic backup bucket in the clusters
+### Set up namespaces
+
+Submariner requires that each cluster has both namespaces present.
+
+Create the required namespaces in both clusters:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/setup-namespaces.sh
+```
+
+Save it as `setup-namespaces.sh`, and execute it:
+
+```bash
+chmod +x setup-namespaces.sh
+./setup-namespaces.sh
+```
+
+### Create Elasticsearch S3 backup secrets
 
 Elasticsearch will need an S3 bucket for data backup and restore procedure, required during a regional failback. For this, you will need to configure a Kubernetes secret to not expose those in cleartext.
 
-If you don’t have access to an S3 bucket, you can adapt the backup method to use an [alternative Elasticsearch backup solution](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html). However, this guide focuses solely on S3 snapshots.
+If you don't have access to an S3 bucket, you can adapt the backup method to use an [alternative Elasticsearch backup solution](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html). However, this guide focuses solely on S3 snapshots.
 
 :::caution Bucket vulnerable to region outages
 
@@ -369,17 +386,82 @@ The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.
 
 :::
 
-The following script will create the required namespaces and secrets used to reference the bucket access.
+The following script creates the ECK-compatible secure settings secrets for S3 backup access in both regions. These secrets must exist before the Elasticsearch cluster is deployed, as the ECK Elasticsearch CRD references them for keystore injection at startup.
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/setup-namespaces-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/create-elasticsearch-secrets.sh
 ```
 
-Save it as `setup-namespaces-secrets.sh` and execute it:
+Save it as `create-elasticsearch-secrets.sh`, and execute it:
 
 ```bash
-chmod +x setup-namespaces-secrets.sh
-./setup-namespaces-secrets.sh
+chmod +x create-elasticsearch-secrets.sh
+./create-elasticsearch-secrets.sh
+```
+
+### Deploy the ECK operator and Elasticsearch clusters
+
+Before deploying the Elasticsearch cluster, install the ECK operator and its Custom Resource Definitions (CRDs) in both clusters. The ECK operator manages the lifecycle of Elasticsearch resources in Kubernetes.
+
+Run [deploy.sh](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh) from `generic/kubernetes/operator-based/elasticsearch/`:
+
+```bash
+cd generic/kubernetes/operator-based/elasticsearch
+export ELASTICSEARCH_CLUSTER_FILE="elasticsearch-cluster-dual-region.yml"
+CAMUNDA_NAMESPACE=$CAMUNDA_NAMESPACE_0 KUBE_CONTEXT=$CLUSTER_0 ./deploy.sh
+CAMUNDA_NAMESPACE=$CAMUNDA_NAMESPACE_1 KUBE_CONTEXT=$CLUSTER_1 ./deploy.sh
+cd -
+```
+
+This performs the following actions:
+
+- Installs the ECK CRDs.
+- Deploys the operator to the `elastic-system` namespace.
+- Waits for operator readiness.
+- Creates the Elasticsearch cluster in both regions using the ECK operator.
+
+<details>
+<summary>Review the Elasticsearch deploy.sh script</summary>
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
+```
+
+</details>
+
+The dual-region Elasticsearch cluster manifest is located at `generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster-dual-region.yml`.
+
+<details>
+<summary>Review the Elasticsearch cluster configuration</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster-dual-region.yml
+```
+
+</details>
+
+For more details on the ECK operator deployment, see the [operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment).
+
+### Synchronize Elasticsearch passwords across regions
+
+Each ECK-managed Elasticsearch cluster auto-generates its own `elasticsearch-es-elastic-user` secret with a unique password. For Zeebe exporters to authenticate against the remote region's Elasticsearch, each region needs access to the other region's password.
+
+The following script reads the ECK-generated passwords and creates region-specific secrets in both regions:
+
+- `elasticsearch-es-password-region-0`: password from region 0's Elasticsearch
+- `elasticsearch-es-password-region-1`: password from region 1's Elasticsearch
+
+These secrets are referenced by the Zeebe exporter configuration in the values files to authenticate against Elasticsearch in each region.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/sync-elasticsearch-passwords.sh
+```
+
+Save it as `sync-elasticsearch-passwords.sh`, and execute it:
+
+```bash
+chmod +x sync-elasticsearch-passwords.sh
+./sync-elasticsearch-passwords.sh
 ```
 
 ### Configure your deployment for each region
@@ -399,7 +481,7 @@ Then, source the output of the script. By doing so, we can reuse the values late
 
 ```
 chmod +x generate-zeebe-helm-values.sh
-CLUSTER_1_NAME='local-cluster' source ./generate-zeebe-helm-values.sh
+CLUSTER_0='local-cluster' source ./generate-zeebe-helm-values.sh
 ```
 
 :::note Submariner service naming
@@ -407,23 +489,24 @@ CLUSTER_1_NAME='local-cluster' source ./generate-zeebe-helm-values.sh
 For those unfamiliar with the Submariner DNS convention, please consult the [official documentation](https://submariner.io/operations/usage/#service-discovery-for-services-deployed-to-multiple-clusters).
 In this deployment, we are utilizing the service discovery to have Elasticsearch and Zeebe brokers accessible from one cluster to another. Consequently, the values generated by the previous script will not be local services but use `svc.clusterset.local`.
 
-Make sure that the variable `CLUSTER_1_NAME` is set to the name of your first cluster. In this example, the value `local-cluster` is used to maintain consistency with the previous [Advanced Cluster Management step](#advanced-cluster-management).
+Make sure the variable `CLUSTER_0` is set to the name of your first cluster. In this example, the value `local-cluster` is used to maintain consistency with the previous [advanced cluster management step](#advanced-cluster-management).
 
 :::
 
 #### Helm values
 
-Create `values-region-1.yml` and `values-region-2.yml` files to store each region's configuration. These files will contain key-value pairs that will be substituted using `envsubst`.
+Create `values-region-0.yml` and `values-region-1.yml` to store each region's configuration. These files will contain key-value pairs that will be substituted using `envsubst`.
 Throughout this guide, you will add and merge values into these files to configure your deployment according to your requirements.
 
-- Save the following file as both `values-region-1.yml` and `values-region-2.yml` to serve as the base configuration:
+- Save the following file as both `values-region-0.yml` and `values-region-1.yml` to serve as the base configuration:
+
   ```yaml reference
   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/helm-values/values-base.yml
   ```
 
 :::warning Merging YAML files
 
-This guide references multiple configuration files that need to be merged into a single YAML file. Be cautious to avoid duplicate keys when merging the files.  
+This guide references multiple configuration files that need to be merged into a single YAML file. Be cautious to avoid duplicate keys when merging the files.
 Additionally, pay close attention when copying and pasting YAML content. Ensure that the separator notation `---` does not inadvertently split the configuration into multiple documents.
 
 We strongly recommend double-checking your YAML file before applying it. You can use tools like [yamllint.com](https://www.yamllint.com/) or the [YAML Lint CLI](https://github.com/adrienverge/yamllint) if you prefer not to share your information online.
@@ -432,14 +515,14 @@ We strongly recommend double-checking your YAML file before applying it. You can
 
 Set up the region ID using a unique integer for each region:
 
-- Add the following YAML configuration to your `values-region-1.yml`:
+- Add the following YAML configuration to `values-region-0.yml`:
   ```yaml reference
-  https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/helm-values/values-region-1.yml
+  https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/helm-values/values-region-0.yml
   ```
-- Add the following YAML configuration to your `values-region-2.yml`:
+- Add the following YAML configuration to `values-region-1.yml`:
 
   ```yaml reference
-  https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/helm-values/values-region-2.yml
+  https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/helm-values/values-region-1.yml
   ```
 
 **Security Context Constraints (SCCs)**
@@ -449,9 +532,19 @@ By default, OpenShift comes with more restrictive SCCs. For the purposes of this
 
 For custom configurations or specific requirements, please refer to the [installation guide for OpenShift](redhat-openshift.md#security-context-constraints-sccs) which details the various available SCC options.
 
+Additionally, Elasticsearch is managed using the ECK operator, so the orchestration cluster needs the **local** Elasticsearch connection details (URL and authentication) to read data. This is distinct from the cross-cluster Elasticsearch exporter URLs configured via environment variables in the [previous step](#configure-your-deployment-for-each-region), which handle **writing** data across regions via Submariner DNS.
+
+Merge the ECK overlay into your values files:
+
+- Add the following ECK Elasticsearch overlay configuration to both `values-region-0.yml` and `values-region-1.yml`:
+
+  ```yaml reference
+  https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml
+  ```
+
 #### Fill your deployment with actual values
 
-Once you've prepared each region's value file (`values-region-1.yml` and `values-region-2.yml`) file, run the following `envsubst` command to substitute the environment variables with their actual values:
+Once you've prepared each region's values file (`values-region-0.yml` and `values-region-1.yml`), substitute the environment variables with their actual values:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/assemble-envsubst-values.sh
@@ -502,8 +595,8 @@ Alternatively, you can manage each service individually using the `ServiceExport
 apiVersion: multicluster.x-k8s.io/v1alpha1
 kind: ServiceExport
 metadata:
-  name: camunda-elasticsearch # name of the service to export
-  namespace: camunda-cluster-region-2 #
+  name: elasticsearch-es-http # name of the ECK-managed Elasticsearch service to export
+  namespace: $CAMUNDA_NAMESPACE_0 # must match the namespace where the Elasticsearch Service exists
 ```
 
 </details>
@@ -531,7 +624,7 @@ chmod +x check-deployment-ready.sh
 
 :::info Authentication changes in 8.8+
 
-Starting from version 8.8, the Orchestration Cluster is configured by default with [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) and is protected by basic authentication using `demo:demo` as the default username and password.
+Starting from version 8.8, the Orchestration Cluster is configured by default with [Admin](/self-managed/components/orchestration-cluster/admin/overview.md) and is protected by basic authentication using `demo:demo` as the default username and password.
 
 :::
 

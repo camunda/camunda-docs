@@ -29,7 +29,7 @@ These release notes identify the main new features included in the 8.8 minor rel
   <summary>View GitHub changelogs for all patch releases</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.8.15 (04.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.15)</li><li>[Camunda 8.8.14 (20.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.14)</li><li>[Camunda 8.8.13 (18.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.13)</li><li>[Camunda 8.8.12 (17.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.12)</li><li>[Camunda 8.8.11 (05.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.11)</li><li>[Camunda 8.8.10 (04.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.10)</li><li>[Camunda 8.8.9 (06.01.2026)](https://github.com/camunda/camunda/releases/tag/8.8.9)</li><li>[Camunda 8.8.8 (11.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.8)</li><li>[Camunda 8.8.7 (09.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.7)</li><li>[Camunda 8.8.6 (02.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.6)</li><li>[Camunda 8.8.5 (27.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.5)</li><li>[Camunda 8.8.4 (17.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.4)</li><li>[Camunda 8.8.3 (05.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.3)</li><li>[Camunda 8.8.2 (27.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.2)</li><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.8 (26.02.2026)](https://github.com/camunda/connectors/releases/tag/8.8.8)</li><li>[Connectors 8.8.7 (02.02.2026)](https://github.com/camunda/connectors/releases/tag/8.8.7)</li><li>[Connectors 8.8.6 (27.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.6)</li><li>[Connectors 8.8.5 (07.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.5)</li><li>[Connectors 8.8.4 (01.12.2025)](https://github.com/camunda/connectors/releases/tag/8.8.4)</li><li>[Connectors 8.8.3 (19.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.3)</li><li>[Connectors 8.8.2 (06.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.2)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
+<ul><li>[Camunda 8.8.19 (23.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.19)</li><li>[Camunda 8.8.18 (20.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.18)</li><li>[Camunda 8.8.17 (17.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.17)</li><li>[Camunda 8.8.16 (09.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.16)</li><li>[Camunda 8.8.15 (04.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.15)</li><li>[Camunda 8.8.14 (20.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.14)</li><li>[Camunda 8.8.13 (18.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.13)</li><li>[Camunda 8.8.12 (17.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.12)</li><li>[Camunda 8.8.11 (05.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.11)</li><li>[Camunda 8.8.10 (04.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.10)</li><li>[Camunda 8.8.9 (06.01.2026)](https://github.com/camunda/camunda/releases/tag/8.8.9)</li><li>[Camunda 8.8.8 (11.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.8)</li><li>[Camunda 8.8.7 (09.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.7)</li><li>[Camunda 8.8.6 (02.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.6)</li><li>[Camunda 8.8.5 (27.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.5)</li><li>[Camunda 8.8.4 (17.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.4)</li><li>[Camunda 8.8.3 (05.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.3)</li><li>[Camunda 8.8.2 (27.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.2)</li><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.8 (26.02.2026)](https://github.com/camunda/connectors/releases/tag/8.8.8)</li><li>[Connectors 8.8.7 (02.02.2026)](https://github.com/camunda/connectors/releases/tag/8.8.7)</li><li>[Connectors 8.8.6 (27.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.6)</li><li>[Connectors 8.8.5 (07.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.5)</li><li>[Connectors 8.8.4 (01.12.2025)](https://github.com/camunda/connectors/releases/tag/8.8.4)</li><li>[Connectors 8.8.3 (19.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.3)</li><li>[Connectors 8.8.2 (06.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.2)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
@@ -54,7 +54,7 @@ Use the following new features to build and integrate AI agents into your proces
     <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.</td>
 </tr>
 <tr>
-    <td>[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</td>
+    <td>[MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md)</td>
     <td>Connect an AI agent connector to tools exposed by [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers.</td>
 </tr>
 <tr>
@@ -198,7 +198,7 @@ Connect your BPMN service with [HubSpot](https://hubspot.com/) and manage your H
 
 Enable Camunda processes and AI agents to auto-discover and invoke external tools, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
 
-<p><a href="../../../../components/early-access/alpha/mcp-client/" class="link-arrow">MCP client connector</a></p>
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/" class="link-arrow">MCP client connector</a></p>
 
 ### Vector database connector
 
@@ -1005,7 +1005,7 @@ To learn more, see [Google Cloud storage connector](/components/connectors/out-o
 
 Use the new MCP Client connector to allow Camunda processes and AI agents to auto-discover and invoke external tools, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
 
-To learn more, see [MCP client](../../../components/early-access/alpha/mcp-client/mcp-client.md).
+To learn more, see [MCP client](../../../components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
 
 :::note
 The MCP Client connector is released as an [early access alpha feature](/components/early-access/alpha/alpha-features.md) to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
@@ -1327,7 +1327,7 @@ Camunda’s new Identity service enhances authentication and authorization for S
 
 #### Identity management for SaaS clusters <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
-[Orchestration Cluster Identity](/components/identity/identity-introduction.md) is now available for SaaS clusters. Starting with this alpha version, you can manage groups, roles, and authorizations at the cluster level.
+[Orchestration Cluster Identity](/versioned_docs/version-8.8/components/identity/identity-introduction.md) is now available for SaaS clusters. Starting with this alpha version, you can manage groups, roles, and authorizations at the cluster level.
 
 The following known limitations apply for this alpha version release:
 
@@ -1339,7 +1339,7 @@ The following known limitations apply for this alpha version release:
 
 #### Identity management for Helm Chart setups <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-[Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/deployment/helm/install/quick-install.md). Starting with this alpha version, you can configure the Orchestration Cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
+[Orchestration Cluster Identity](/versioned_docs/version-8.8/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/deployment/helm/install/quick-install.md). Starting with this alpha version, you can configure the Orchestration Cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
 
 The following known limitations apply for this alpha version release:
 

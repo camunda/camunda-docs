@@ -1,30 +1,30 @@
 ---
-title: Connect Identity to an identity provider
+title: Connect Admin to an identity provider
 sidebar_label: Connect to an identity provider
-description: Learn how to connect Camunda 8 Orchestration Cluster Identity to an external Identity Provider (IdP) via OpenID Connect (OIDC) for authentication and user management.
+description: Learn how to connect Camunda 8 Orchestration Cluster Admin to an external Identity Provider (IdP) via OpenID Connect (OIDC) for authentication and user management.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Configure Identity to use an external identity provider (IdP) via OpenID Connect (OIDC) at the application level, including claims and mapping rules.
+Configure Admin to use an external identity provider (IdP) via OpenID Connect (OIDC) at the application level, including claims and mapping rules.
 
 :::info Deploying with Helm?
-If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Identity.
+If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Admin.
 :::
 
 ## About Authentication and authorization
 
 You can configure IdP integration to control authentication and authorization for both the web components and machine-to-machine (M2M) API access (for connectors and workers).
 
-| Access type                                                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Web components](#web-components)                                         | <p>Users authenticate via the OIDC [Authorization Code Flow](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth).</p><p><ul><li><p>Users are redirected to your IdP to log in, and Camunda receives a token to establish the session.</p></li><li><p>Claims from the token are used to identify the user's username, and (optionally) groups for easier assignment and management.</p></li><li><p>Mapping Rules can be used to map token claims to Camunda roles, authorizations, or tenants.</p></li></ul></p><p>As user information is not stored in the Orchestration Cluster using OIDC, features such as user search and user validation on assigning authorizations or tenants and user management are not available in the Orchestration Cluster Identity UI.</p> |
-| [Machine-to-machine (M2M) API access](#machine-to-machine-m2m-api-access) | <p>Connectors, job workers or other implementations that use the Orchestration Cluster REST or gRPC APIs (for example, by using one of the Camunda Clients) use the [OAuth Client Credentials Flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.4) to obtain a JWT access token for authentication.</p><p>This authentication method for Camunda Clients is separate from the interactive user login and typically requires additional configuration in your IdP and Camunda.</p>                                                                                                                                                                                                                                                                                            |
+| Access type                                                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| :------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Web components](#web-components)                                         | <p>Users authenticate via the OIDC [Authorization Code Flow](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth).</p><p><ul><li><p>Users are redirected to your IdP to log in, and Camunda receives a token to establish the session.</p></li><li><p>Claims from the token are used to identify the user's username, and (optionally) groups for easier assignment and management.</p></li><li><p>Mapping Rules can be used to map token claims to Camunda roles, authorizations, or tenants.</p></li></ul></p><p>As user information is not stored in the Orchestration Cluster using OIDC, features such as user search and user validation on assigning authorizations or tenants and user management are not available in the Orchestration Cluster Admin UI.</p> |
+| [Machine-to-machine (M2M) API access](#machine-to-machine-m2m-api-access) | <p>Connectors, job workers or other implementations that use the Orchestration Cluster REST or gRPC APIs (for example, by using one of the Camunda Clients) use the [OAuth Client Credentials Flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.4) to obtain a JWT access token for authentication.</p><p>This authentication method for Camunda Clients is separate from the interactive user login and typically requires additional configuration in your IdP and Camunda.</p>                                                                                                                                                                                                                                                                                         |
 
 ## Web components
 
-Configure Identity so your users can use your IdP to authenticate to the Orchestration Cluster.
+Configure Admin so your users can use your IdP to authenticate to the Orchestration Cluster.
 
 ### Prerequisites
 
@@ -245,7 +245,7 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM=<YOUR_GROUPSCLAIM>
 
 ### (Optional) Step 9: Mapping rules
 
-You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [mapping rules documentation](components/identity/mapping-rules.md) for more information on how to define mapping rules.
+You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [mapping rules documentation](components/admin/mapping-rules.md) for more information on how to define mapping rules.
 
 ## Machine-to-machine (M2M) API access
 
@@ -496,7 +496,7 @@ private static final String clusterRestLocal = "http://localhost:8080";
 
 ## Logout handling (RP-initiated logout)
 
-When Orchestration Cluster Identity is configured with an external OIDC-compliant identity provider (IdP), you can enable relying party (RP)-initiated logout so that signing out of Camunda also triggers a logout at the IdP.
+When Orchestration Cluster Admin is configured with an external OIDC-compliant identity provider (IdP), you can enable relying party (RP)-initiated logout so that signing out of Camunda also triggers a logout at the IdP.
 
 :::note
 This applies to Self-Managed Orchestration Clusters only. RP-initiated logout is not supported in SaaS.
@@ -543,7 +543,7 @@ RP-initiated logout is enabled by default for all new deployments.
 
 - **RP-initiated logout (enabled)** (default for new 8.9+ installations)
   - Clears the Orchestration Cluster session and calls the IdP logout endpoint.
-  - Signs the user out of Orchestration Cluster Identity, Tasklist, Operate, and the IdP.
+  - Signs the user out of Orchestration Cluster Admin, Tasklist, Operate, and the IdP.
   - Redirects the user to the login page of the Camunda app where logout was initiated.
   - Logout behavior for other applications using the same IdP depends on the IdP’s RP-initiated logout implementation.
 
@@ -551,7 +551,7 @@ Existing Self-Managed deployments upgraded from earlier versions can continue to
 
 #### Configure the IdP logout endpoint
 
-By default, Identity retrieves the IdP logout endpoint from the OIDC discovery document (the `.well-known` endpoint). If you do not use `issuer-uri` and instead configure endpoints manually, define the logout endpoint alongside `authorization-uri`, `token-uri`, and `jwk-set-uri`, as shown in the [special OIDC configuration cases](./special-oidc-cases.md):
+By default, Admin retrieves the IdP logout endpoint from the OIDC discovery document (the `.well-known` endpoint). If you do not use `issuer-uri` and instead configure endpoints manually, define the logout endpoint alongside `authorization-uri`, `token-uri`, and `jwk-set-uri`, as shown in the [special OIDC configuration cases](./special-oidc-cases.md):
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml'}, {label: 'Environment variables', value: 'env'}]}>
 
@@ -586,7 +586,7 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI=https://login.microsoftonline.com
 
 To ensure users are redirected correctly after logout, configure a post-logout redirect URL in your IdP. The post-logout URL is the Camunda hostname, context path (if applicable) plus `/post-logout`.
 
-For example, if Identity is accessible at `http://localhost:8080`, configure the following post-logout redirect URL in your IdP:
+For example, if Admin is accessible at `http://localhost:8080`, configure the following post-logout redirect URL in your IdP:
 
 ```
 http://localhost:8080/post-logout
@@ -622,12 +622,12 @@ Unable to determine end-session endpoint for OIDC logout. Falling back to {baseL
 
 Ensure you either:
 
-- Configure the `issuer-uri` so Identity can retrieve the logout endpoint from the OIDC discovery document, or
+- Configure the `issuer-uri` so Admin can retrieve the logout endpoint from the OIDC discovery document, or
 - Explicitly set the `end-session-endpoint-uri`.
 
 #### No client registration found
 
-If the `registrationId` used for logout (the identifier of the configured OIDC client registration) cannot be resolved, Identity cannot construct an RP-initiated logout request. The following message is logged:
+If the `registrationId` used for logout (the identifier of the configured OIDC client registration) cannot be resolved, Admin cannot construct an RP-initiated logout request. The following message is logged:
 
 ```
 No client registration found for id `{registrationId}`. Falling back to {baseLogoutUrl} without logout hint.
@@ -637,7 +637,7 @@ Verify that the configured client registration ID matches the OIDC client defini
 
 #### Missing login_hint / logout_hint
 
-Some IdPs require a `logout_hint` parameter for RP-initiated logout. Identity derives `logout_hint` from the OIDC user's `login_hint` claim. This claim typically contains a user identifier, such as a username or email, which the IdP uses to identify the session to terminate.
+Some IdPs require a `logout_hint` parameter for RP-initiated logout. Admin derives `logout_hint` from the OIDC user's `login_hint` claim. This claim typically contains a user identifier, such as a username or email, which the IdP uses to identify the session to terminate.
 
 If no `login_hint` is present, the following message is logged and the logout request is sent without a logout hint:
 
@@ -649,7 +649,7 @@ Ensure that your IdP includes a `login_hint` claim in the ID token if your IdP r
 
 #### No post-logout redirect URL configured
 
-You must explicitly configure the post-logout redirect URL in your IdP. If no valid post-logout redirect URL is available, Identity falls back to a default path. In this case, the following message is logged:
+You must explicitly configure the post-logout redirect URL in your IdP. If no valid post-logout redirect URL is available, Admin falls back to a default path. In this case, the following message is logged:
 
 ```
 No valid post-logout redirect URL found in session, falling back to default: '/'

@@ -9,7 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import {DockerCompose} from "@site/src/components/CamundaDistributions";
 
-Get started with Docker Compose to run Camunda 8 Self-Managed locally. The default lightweight configuration includes the Orchestration Cluster (Zeebe, Operate, and Tasklist consolidated), Connectors, and Elasticsearch. The full configuration additionally includes Optimize, Console, Management Identity, Web Modeler, Keycloak, and PostgreSQL for management components. Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
+Get started with Docker Compose to run Camunda 8 Self-Managed locally. The default lightweight configuration includes the Orchestration Cluster (Zeebe, Operate, and Tasklist consolidated), Orchestration Cluster Admin (formerly Orchestration Cluster Identity), Connectors, and Elasticsearch. The full configuration additionally includes Optimize, Console, Management Identity, Web Modeler, Keycloak, and PostgreSQL. Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 :::note
 The [Docker images](/self-managed/deployment/docker/docker.md) are supported for production usage; however, the Docker Compose files are intended for developers to run an environment locally and are **not** designed for production. For production deployments, use [Kubernetes with Helm](/self-managed/deployment/helm/install/index.md).
@@ -47,7 +47,7 @@ Camunda provides three Docker Compose configurations in the [Camunda Distributio
 
 | Configuration File              | Description                                                                                                                                                                                                                                                                       |
 | :------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| docker-compose.yaml             | **Default lightweight configuration** - Includes the core Orchestration Cluster (Zeebe, Operate, Tasklist, and Orchestration Cluster Identity), Connectors, and Elasticsearch. Ideal for most developers who want to model, deploy, and test processes.                           |
+| docker-compose.yaml             | **Default lightweight configuration** - Includes the core Orchestration Cluster (Zeebe, Operate, Tasklist, and Orchestration Cluster Admin), Connectors, and Elasticsearch. Ideal for most developers who want to model, deploy, and test processes.                              |
 | docker-compose-full.yaml        | **Full-stack configuration** - Includes all Camunda 8 components including the Orchestration Cluster, Connectors, Optimize, Console, Management Identity, Keycloak, PostgreSQL, and Web Modeler. Use this when you need management components, process optimization, or modeling. |
 | docker-compose-web-modeler.yaml | **Standalone Web Modeler** - Runs only Web Modeler and its dependencies (Identity, Keycloak, PostgreSQL). See [Deploy with Web Modeler](#deploy-with-web-modeler).                                                                                                                |
 
@@ -79,7 +79,7 @@ The Orchestration Cluster is the core of Camunda 8, providing process automation
 | :----------------------------- | :--------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Operate                        | [http://localhost:8080/operate](http://localhost:8080/operate)   | Monitor and troubleshoot process instances. See [Introduction to Operate](../../../components/operate/operate-introduction.md) and [Process instance creation](../../../components/concepts/process-instance-creation.md). |
 | Tasklist                       | [http://localhost:8080/tasklist](http://localhost:8080/tasklist) | Complete user tasks in running process instances. See [User tasks](../../../components/modeler/bpmn/user-tasks/user-tasks.md).                                                                                             |
-| Orchestration Cluster Identity | [http://localhost:8080/identity](http://localhost:8080/identity) | Manage users and permissions for Orchestration Cluster (lightweight).                                                                                                                                                      |
+| Orchestration Cluster Admin    | [http://localhost:8080/admin](http://localhost:8080/admin)       | Manage users and permissions for Orchestration Cluster (lightweight).                                                                                                                                                      |
 | Orchestration Cluster REST API | `http://localhost:8080/v2`                                       | REST API for process automation.                                                                                                                                                                                           |
 | Orchestration Cluster gRPC API | `localhost:26500`                                                | gRPC API for high-performance process automation.                                                                                                                                                                          |
 
@@ -93,16 +93,16 @@ By default, the Orchestration Cluster uses [basic authentication](/self-managed/
 | :------------------ | :--------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Console             | [http://localhost:8087](http://localhost:8087) | [Manage clusters](../../../components/console/introduction-to-console.md) and component configurations                                                                                               |
 | Optimize            | [http://localhost:8083](http://localhost:8083) | [Analyze and improve](../../../components/optimize/what-is-optimize.md) process performance                                                                                                          |
-| Management Identity | [http://localhost:8084](http://localhost:8084) | [Manage users](../../../components/identity/identity-introduction.md) for Console, Optimize, and Web Modeler                                                                                         |
+| Management Identity | [http://localhost:8084](http://localhost:8084) | [Manage users](/self-managed/components/management-identity/overview.md) for Console, Optimize, and Web Modeler                                                                                      |
 | Web Modeler         | [http://localhost:8070](http://localhost:8070) | Model [BPMN](../../../components/modeler/bpmn/bpmn.md) processes, [DMN](../../../components/modeler/dmn/dmn.md) decisions, and [forms](../../../components/modeler/forms/camunda-forms-reference.md) |
 
 #### External dependencies
 
-| Component     | Configuration        | URL                                                          | Description                                                                                                                                                   |
-| :------------ | :------------------- | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Elasticsearch | Lightweight and full | [http://localhost:9200](http://localhost:9200)               | Used by the Orchestration Cluster as secondary storage (and Optimize in the full configuration).                                                              |
-| Keycloak      | Full                 | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Identity instead. Access with `admin` / `admin`. |
-| PostgreSQL    | Full                 | `localhost:5432`                                             | Database for Management Identity.                                                                                                                             |
+| Component     | Configuration        | URL                                                          | Description                                                                                                                                                |
+| :------------ | :------------------- | :----------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Elasticsearch | Lightweight and full | [http://localhost:9200](http://localhost:9200)               | Used by the Orchestration Cluster as secondary storage (and Optimize in the full configuration).                                                           |
+| Keycloak      | Full                 | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Admin instead. Access with `admin` / `admin`. |
+| PostgreSQL    | Full                 | `localhost:5432`                                             | Database for Management Identity.                                                                                                                          |
 
 In Docker Compose quickstarts, PostgreSQL is used for management-component persistence (Management Identity and Web Modeler flows). The Orchestration Cluster secondary storage in these examples remains Elasticsearch.
 
@@ -238,7 +238,7 @@ To deploy from Desktop Modeler to the full configuration:
 1. Click **Deploy**.
 
 :::tip
-The full configuration uses Keycloak for OIDC authentication. The client credentials (`orchestration` / `secret`) are pre-configured in the `.env` file and Identity configuration.
+The full configuration uses Keycloak for OIDC authentication. The client credentials (`orchestration` / `secret`) are pre-configured in the `.env` file and Admin configuration.
 :::
 
 ### Deploy with Web Modeler
