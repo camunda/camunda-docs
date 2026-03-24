@@ -260,7 +260,7 @@ H2 can run in two modes:
 - **In-memory**: Data is stored only in memory and lost when the application stops. Useful for temporary testing.
 - **File-based (embedded)**: Database files are persisted to disk on the same host as the component using them. Suitable for local development where data persistence across restarts is needed.
 
-H2 is not intended for production usage.
+H2 is not intended for production usage. For Camunda secondary storage, H2 is a single-broker option and is not a valid backend for multi-broker clusters.
 
 - [Secondary storage](/self-managed/concepts/secondary-storage/index.md)
 

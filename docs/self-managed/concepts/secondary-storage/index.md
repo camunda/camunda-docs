@@ -40,6 +40,8 @@ Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-se
 
 :::note
 Starting in 8.9, Camunda 8 Run and default lightweight installs use H2 as the default secondary storage. Elasticsearch remains a supported alternative in Camunda 8 Run. OpenSearch and RDBMS-based secondary storage are supported in Self-Managed deployments. Enable the backend you need explicitly when required.
+
+H2 is a convenience default for local development, testing, and evaluation. It is not a production reference architecture and is not a valid backend for multi-broker Helm clusters.
 :::
 
 ### Data flow

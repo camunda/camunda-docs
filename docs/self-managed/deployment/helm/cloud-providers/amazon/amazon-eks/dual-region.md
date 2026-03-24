@@ -27,14 +27,6 @@ New to Terraform or Infrastructure as Code? Start with the [Terraform IaC docume
 
 :::
 
-:::info Repository Migration 8.9
-
-The previous repository, [c8-multi-region](https://github.com/camunda/c8-multi-region), has been migrated to [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references) to consolidate all reference architectures into a single repository.
-
-The overall content remains unchanged, except for the required Helm chart updates for version 8.9 in the `camunda-values.yml` file.
-
-:::
-
 ## Requirements
 
 - **AWS account** – Required to create AWS resources. See [What is an AWS account?](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html).
@@ -54,7 +46,7 @@ For the tool versions used in testing, see the repository's [.tool-versions](htt
 This setup provides a solid starting point for running Camunda 8 on AWS in a dual-region configuration. It is not optimized for peak performance. Use it as a foundation you can extend and adapt for production with [Infrastructure as Code (IaC) tools](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
 
 - To test or develop against Camunda 8, consider signing up for our [SaaS offering](https://camunda.com/platform/).
-- If you already have two Amazon EKS clusters (peered together) and an S3 bucket, skip ahead to [deploy Camunda 8 via Helm charts](#3-deploy-camunda-8-via-helm-charts).
+- If you already have two Amazon EKS clusters (peered together) and an Amazon S3 bucket, skip ahead to [deploy Camunda 8 via Helm charts](#3-deploy-camunda-8-via-helm-charts).
 
 :::warning
 
@@ -84,6 +76,12 @@ After completing this guide, you will have:
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - A [VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) between the two EKS clusters, allowing cross-cluster communication between different regions.
 - An [Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) (S3) bucket for [Elasticsearch backups](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html).
+- The [Elastic Cloud on Kubernetes (ECK) operator](https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-overview.html) installed in both clusters for managing Elasticsearch lifecycle.
+- ECK-managed Elasticsearch clusters running in both regions.
+
+:::note
+This guide uses the ECK operator as the preferred approach for managing Elasticsearch. You are not limited to this approach; you can use managed Elasticsearch services or other Elasticsearch instances. If you choose an alternative, you are responsible for adapting the scripts and configuration accordingly.
+:::
 
 ## 1. Configure AWS and apply Terraform
 
@@ -107,7 +105,7 @@ There are two regions (`REGION_0` and `REGION_1`), each with its own Kubernetes 
 
 1. Navigate to the `procedure` folder within your cloned repository:
 
-```shell
+```bash
 cd aws/kubernetes/eks-dual-region/procedure
 ```
 
@@ -125,13 +123,13 @@ Using the same namespace names on both clusters won't work as CoreDNS won't be a
 
 4. Execute the script via the following command:
 
-```shell
+```bash
 . ./export_environment_prerequisites.sh
 ```
 
 The dot is required to export those variables to your shell and not a spawned subshell.
 
-```shell reference
+```bash reference
 https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/export_environment_prerequisites.sh
 ```
 
@@ -333,7 +331,7 @@ To ease working with two clusters, create or update your local `kubeconfig` to c
 
 Update or create your kubeconfig via the [AWS CLI](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html):
 
-```shell
+```bash
 # the alias allows for easier context switching in kubectl
 aws eks --region $REGION_0 update-kubeconfig --name $CLUSTER_0 --alias $CLUSTER_0
 aws eks --region $REGION_1 update-kubeconfig --name $CLUSTER_1 --alias $CLUSTER_1
@@ -353,19 +351,19 @@ You are configuring the CoreDNS from the cluster in **Region 0** to resolve cert
 
 1. Expose `kube-dns`, the in-cluster DNS resolver via an internal load-balancer in each cluster:
 
-```shell
+```bash
 kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/main/aws/kubernetes/eks-dual-region/procedure/manifests/internal-dns-lb.yml
 kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/main/aws/kubernetes/eks-dual-region/procedure/manifests/internal-dns-lb.yml
 ```
 
 2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/generate_core_dns_entry.sh) in the folder `aws/kubernetes/eks-dual-region/procedure/` of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment variables](#export-environment-variables) since the script builds on top of it.
 
-```shell
+```bash
 ./generate_core_dns_entry.sh
 ```
 
 3. The script will retrieve the IPs of the load balancer via the AWS CLI and return the required config change.
-4. The script prints the `kubectl edit` commands to change the DNS settings of each cluster inline. Copy the statement between the placeholders to edit the CoreDNS configmap in cluster 0 and cluster 1, depending on the placeholder.  
+4. The script prints the `kubectl edit` commands to change the DNS settings of each cluster inline. Copy the statement between the placeholders to edit the CoreDNS configmap in cluster 0 and cluster 1, depending on the placeholder.
    An alternative to inline editing is to create two copies of the file [./manifests/coredns.yml](https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-dual-region/procedure/manifests/coredns.yml), one for each cluster. Add the section generated by the script to each file. Apply the changes to each cluster with e.g. `kubectl --context cluster-london -n kube-system apply -f file.yml`. Replace the `context` parameter with your current values.
 
 <details>
@@ -375,7 +373,7 @@ kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/
 For illustration purposes only. These values will not work in your environment.
 :::
 
-```shell
+```bash
 ./generate_core_dns_entry.sh
 Please copy the following between
 ### Cluster 0 - Start ### and ### Cluster 0 - End ###
@@ -464,7 +462,7 @@ data:
 
 5. Check that CoreDNS has reloaded for the changes to take effect before continuing. Make sure it contains `Reloading complete`:
 
-```shell
+```bash
 kubectl --context $CLUSTER_0 logs -f deployment/coredns -n kube-system
 kubectl --context $CLUSTER_1 logs -f deployment/coredns -n kube-system
 ```
@@ -475,7 +473,7 @@ The script [test_dns_chaining.sh](https://github.com/camunda/camunda-deployment-
 
 1. Execute the [test_dns_chaining.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/test_dns_chaining.sh). Make sure you have previously exported the [environment variables](#export-environment-variables) as the script builds on top of it.
 
-```shell
+```bash
 ./test_dns_chaining.sh
 ```
 
@@ -510,28 +508,34 @@ You must apply the custom `StorageClass` before installing the Camunda Helm char
 
 ## 3. Deploy Camunda 8 via Helm charts
 
-### Create the secret for Elasticsearch
+### Deploy Elasticsearch using ECK
 
-Elasticsearch will need an S3 bucket for data backup and restore procedure, required during a regional failback. For this, you will need to configure a Kubernetes secret to not expose those in cleartext.
+Elasticsearch is managed using the [Elastic Cloud on Kubernetes (ECK)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) operator instead of the Camunda Helm chart's built-in Elasticsearch subchart. This provides automated lifecycle management and built-in security with auto-generated credentials.
+
+For more details on ECK-based deployments, see [Elasticsearch deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment).
+
+#### Create the S3 backup secret for Elasticsearch
+
+Elasticsearch requires an S3 bucket for data backup and restore procedures during regional failback. The ECK operator injects these credentials into the Elasticsearch keystore at startup.
 
 You can pull the data from Terraform since you exposed those via `output.tf`.
 
-1. From the Terraform code location `aws/kubernetes/eks-dual-region/terraform/clusters`, execute the following to export the access keys to environment variables. This will allow an easier creation of the Kubernetes secret via the command line:
+1. From the Terraform code location `aws/kubernetes/eks-dual-region/terraform/clusters`, execute the following to export the access keys to environment variables:
 
-```shell
+```bash
 export AWS_ACCESS_KEY_ES=$(terraform output -raw s3_aws_access_key)
 export AWS_SECRET_ACCESS_KEY_ES=$(terraform output -raw s3_aws_secret_access_key)
 ```
 
-2. From the folder `aws/kubernetes/eks-dual-region/procedure` of the repository, execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/create_elasticsearch_secrets.sh). This will use the exported environment variables from **Step 1** to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment variables](#export-environment-variables).
+2. From the folder `aws/kubernetes/eks-dual-region/procedure` of the repository, execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/create_elasticsearch_secrets.sh). This creates the ECK-compatible `elasticsearch-env-secret` in both regions with the S3 credentials. Those have previously been defined and exported via the [environment variables](#export-environment-variables).
 
-```shell
+```bash
 ./create_elasticsearch_secrets.sh
 ```
 
-3. Unset environment variables to reduce the risk of potential exposure. The script is spawned in a subshell and can't modify the environment variables without extra workarounds:
+3. Unset environment variables to reduce the risk of potential exposure:
 
-```shell
+```bash
 unset AWS_ACCESS_KEY_ES
 unset AWS_SECRET_ACCESS_KEY_ES
 ```
@@ -541,6 +545,68 @@ unset AWS_SECRET_ACCESS_KEY_ES
 The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html). If that region becomes unavailable and you want to restore to a different region or S3 services remain disrupted, you must create a new bucket in another region and reconfigure your Elasticsearch cluster to use the new bucket.
 
 :::
+
+#### Deploy the ECK operator and elasticsearch clusters
+
+Before deploying the Elasticsearch cluster, install the ECK operator and its Custom Resource Definitions (CRDs) in both clusters. The ECK operator manages the lifecycle of Elasticsearch resources in Kubernetes.
+
+Run [deploy.sh](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh) from `generic/kubernetes/operator-based/elasticsearch/`:
+
+```bash
+cd generic/kubernetes/operator-based/elasticsearch
+export ELASTICSEARCH_CLUSTER_FILE="elasticsearch-cluster-dual-region.yml"
+KUBE_CONTEXT=$CLUSTER_0 ./deploy.sh
+KUBE_CONTEXT=$CLUSTER_1 ./deploy.sh
+cd -
+```
+
+This performs the following actions:
+
+- Installs the ECK CRDs.
+- Deploys the operator to the `elastic-system` namespace.
+- Waits for operator readiness.
+- Creates the Elasticsearch cluster in both regions using the ECK operator.
+
+<details>
+<summary>Review the Elasticsearch deploy.sh script</summary>
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
+```
+
+</details>
+
+The dual-region Elasticsearch cluster manifest is located at `generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster-dual-region.yml`.
+
+<details>
+<summary>Review the Elasticsearch cluster configuration</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster-dual-region.yml
+```
+
+</details>
+
+For more details on the ECK operator deployment, see the [operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment).
+
+#### Synchronize Elasticsearch passwords across regions
+
+Each ECK-managed Elasticsearch cluster auto-generates its own `elasticsearch-es-elastic-user` secret with a unique password. For Zeebe exporters to authenticate against the remote region's Elasticsearch, each region needs access to the other region's password.
+
+Run [sync_elasticsearch_passwords.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/sync_elasticsearch_passwords.sh) from `aws/kubernetes/eks-dual-region/procedure` to create cross-region password secrets:
+
+```bash
+cd aws/kubernetes/eks-dual-region/procedure
+./sync_elasticsearch_passwords.sh
+cd -
+```
+
+This script reads the ECK-generated passwords and creates region-specific secrets in both regions:
+
+- `elasticsearch-es-password-region-0`: password from region 0's Elasticsearch
+- `elasticsearch-es-password-region-1`: password from region 1's Elasticsearch
+
+These secrets are referenced by the Zeebe exporter configuration in `camunda-values.yml` to authenticate against Elasticsearch in each region.
 
 ### Camunda 8 Helm chart prerequisites
 
@@ -559,6 +625,8 @@ Key changes of the dual-region setup:
 
 - `global.multiregion.regions: 2`
   - Indicates the use for two regions
+- `global.security.authentication.method: basic`
+  - Uses Basic authentication for inter-component communication since Management Identity (Keycloak) is not deployed in dual-region.
 - `global.identity.auth.enabled: false`
   - Management Identity is not currently supported. For more details, see the [limitations section](/self-managed/concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
 - `identity.enabled: false`
@@ -572,20 +640,23 @@ Key changes of the dual-region setup:
 - `orchestration.env`
   - `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS`
     - These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../../components/orchestration-cluster/zeebe/operations/setting-up-a-cluster.md).
-  - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
-    - The Elasticsearch endpoint for region 0.
-  - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
-    - The Elasticsearch endpoint for region 1.
-  - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_CLASSNAME`
+  - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
+    - The Elasticsearch endpoint for region 0 (the ECK-managed **headless** service, for example: `elasticsearch-es-masters` for a cluster named `elasticsearch`). The headless service is required because VPN/peering routes pod IPs, not ClusterIPs — so DNS must return individual pod addresses that are routable cross-cluster. You can discover the exact service name with `kubectl get svc -n <elasticsearch-namespace>`.
+  - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
+    - The Elasticsearch endpoint for region 1 (the ECK-managed **headless** service, for example: `elasticsearch-es-masters` for a cluster named `elasticsearch`).
+  - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_CLASSNAME`
     - `io.camunda.exporter.CamundaExporter` explicitly creates the new Camunda Exporter.
-  - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_CLASSNAME`
+  - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_CLASSNAME`
     - `io.camunda.exporter.CamundaExporter` explicitly creates the new Camunda Exporter.
+  - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_USERNAME` / `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_PASSWORD`
+    - Elasticsearch authentication credentials for region 0. The password is sourced from the `elasticsearch-es-password-region-0` secret created by the [password synchronization step](#synchronize-elasticsearch-passwords-across-regions).
+  - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_USERNAME` / `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_PASSWORD`
+    - Elasticsearch authentication credentials for region 1. The password is sourced from the `elasticsearch-es-password-region-1` secret.
 - A cluster of eight Zeebe brokers (four in each of the regions) is recommended for the dual-region setup
   - `orchestration.clusterSize: 8`
   - `orchestration.partitionCount: 8`
   - `orchestration.replicationFactor: 4`
-- `elasticsearch.initScripts`
-  - Configures the S3 bucket access via a predefined Kubernetes secret.
+- Elasticsearch is managed via the ECK operator and configured through a separate manifest (`elasticsearch-cluster-dual-region.yml`), not via the Helm chart's built-in Elasticsearch subchart. The Elasticsearch overlay (`camunda-elastic-values.yml`) disables the built-in Bitnami subchart and configures the **local** Elasticsearch connection (URL and authentication) for components that **read** data (orchestration secondary storage, Optimize). This is distinct from the cross-cluster Elasticsearch exporter URLs configured via environment variables above, which handle **writing** data across regions.
 
 ##### region0/camunda-values.yml
 
@@ -604,12 +675,12 @@ You must change the following environment variables for Zeebe. The default value
 The base `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` requires adjustments before installing the Helm chart:
 
 - `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS`
-- `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
-- `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
+- `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
+- `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
 
-1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/camunda-deployment-references/tree/infraex-560/aws/kubernetes/eks-dual-region/procedure/generate_zeebe_helm_values.sh) in the repository folder `aws/kubernetes/eks-dual-region/procedure/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [export environment variables](#export-environment-variables) section for namespaces and regions.
+1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/generate_zeebe_helm_values.sh) in the repository folder `aws/kubernetes/eks-dual-region/procedure/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It uses the exported environment variables of the [export environment variables](#export-environment-variables) section for namespaces and regions.
 
-```shell
+```bash
 ./generate_zeebe_helm_values.sh
 
 # It will ask you to provide the following values
@@ -624,7 +695,7 @@ The base `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` re
 For illustration purposes only. These values will not work in your environment.
 :::
 
-```shell
+```bash
 ./generate_zeebe_helm_values.sh
 Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters): 8
 
@@ -633,31 +704,36 @@ Use the following to set the environment variable CAMUNDA_CLUSTER_INITIALCONTACT
 - name: CAMUNDA_CLUSTER_INITIALCONTACTPOINTS
   value: camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502
 
-Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe:
+Use the following to set the environment variable CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe:
 
-- name: ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL
-  value: http://camunda-elasticsearch-master-hl.camunda-london.svc.cluster.local:9200
+- name: CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL
+  value: http://elasticsearch-es-masters.camunda-london.svc.cluster.local:9200
 
-Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe.
+Use the following to set the environment variable CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe.
 
-- name: ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL
-  value: http://camunda-elasticsearch-master-hl.camunda-paris.svc.cluster.local:9200
+- name: CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL
+  value: http://elasticsearch-es-masters.camunda-paris.svc.cluster.local:9200
 ```
 
 </details>
 
 2. As the script suggests, replace the environment variables within `camunda-values.yml`.
 
+:::note
+The script generates only the environment-specific values (initial contact points and Elasticsearch URLs). The authentication variables (`CAMUNDA_DATA_EXPORTERS_*_ARGS_CONNECT_USERNAME` / `CAMUNDA_DATA_EXPORTERS_*_ARGS_CONNECT_PASSWORD`) use the cross-region secrets created in the [password synchronization step](#synchronize-elasticsearch-passwords-across-regions) and do not require modification.
+:::
+
 ### Install Camunda 8 using Helm
 
 From the terminal context of `aws/kubernetes/eks-dual-region/helm-values`, and ensure you have previously exported the [environment variables](#export-environment-variables), execute the following:
 
-```shell
+```bash
 helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
   --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
   -f camunda-values.yml \
+  -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
   -f region0/camunda-values.yml
 
 helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
@@ -665,6 +741,7 @@ helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
   -f camunda-values.yml \
+  -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
   -f region1/camunda-values.yml
 ```
 
@@ -678,7 +755,7 @@ Starting from version 8.8, the Orchestration Cluster is configured by default wi
 
 1. Open a terminal and port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
-```shell
+```bash
 kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 8080:8080
 ```
 
@@ -695,240 +772,8 @@ curl -u demo:demo -L -X GET 'http://localhost:8080/v2/topology' \
 <details>
   <summary>Example output</summary>
 
-```shell
-{
-  "brokers": [
-    {
-      "nodeId": 0,
-      "host": "camunda-zeebe-0.camunda-zeebe.camunda-london",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 6,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 7,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 8,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.8.0"
-    },
-    {
-      "nodeId": 1,
-      "host": "camunda-zeebe-0.camunda-zeebe.camunda-paris",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "leader",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 7,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 8,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.8.0"
-    },
-    {
-      "nodeId": 2,
-      "host": "camunda-zeebe-1.camunda-zeebe.camunda-london",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "leader",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 8,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.8.0"
-    },
-    {
-      "nodeId": 3,
-      "host": "camunda-zeebe-1.camunda-zeebe.camunda-paris",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 4,
-          "role": "leader",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.8.0"
-    },
-    {
-      "nodeId": 4,
-      "host": "camunda-zeebe-2.camunda-zeebe.camunda-london",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 2,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 4,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 5,
-          "role": "leader",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.8.0"
-    },
-    {
-      "nodeId": 5,
-      "host": "camunda-zeebe-2.camunda-zeebe.camunda-paris",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 3,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 4,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 5,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 6,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.8.0"
-    },
-    {
-      "nodeId": 6,
-      "host": "camunda-zeebe-3.camunda-zeebe.camunda-london",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 4,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 5,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 6,
-          "role": "leader",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 7,
-          "role": "leader",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.8.0"
-    },
-    {
-      "nodeId": 7,
-      "host": "camunda-zeebe-3.camunda-zeebe.camunda-paris",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 5,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 6,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 7,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 8,
-          "role": "leader",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.8.0"
-    }
-  ],
-  "clusterSize": 8,
-  "partitionsCount": 8,
-  "replicationFactor": 4,
-  "gatewayVersion": "8.8.0",
-  "lastCompletedChangeId": "-1"
-}
+```json reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/dual-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
 </details>
