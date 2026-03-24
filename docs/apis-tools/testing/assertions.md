@@ -452,29 +452,24 @@ Judge assertions are an [alpha feature](/components/early-access/alpha/alpha-fea
 
 You can use LLM-based assertions to verify that a process variable satisfies a natural language expectation. The
 assertion sends the variable value and your expectation to a configured LLM, which scores the match on a scale from
-0.0 to 1.0. The assertion passes if the score meets or exceeds the configured threshold.
+0.0 to 1.0. The assertion passes if the score meets or exceeds the configured threshold (default `0.5`).
 
 :::info Prerequisites
-Judge assertions require a configured judge. See the [judge configuration](configuration.md#judge-configuration)
+Judge assertions require a configured chat model provider. See the [judge configuration](configuration.md#judge-configuration)
 section for setup instructions.
 :::
 
-### How scoring works
-
 The LLM evaluates the match between the expectation and the actual variable value using the following scale:
 
-| Score | Meaning                                                                                                                                                     |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1.0   | The expectation is fully satisfied semantically with no omissions. Different wording or formatting that conveys the same meaning counts as fully satisfied. |
-| 0.75  | Satisfied in substance with only minor differences that do not affect correctness.                                                                          |
-| 0.5   | Partially satisfied. Some required elements are present but others are missing or incorrect.                                                                |
-| 0.25  | Mostly not satisfied. Only marginal relevance.                                                                                                              |
-| 0.0   | Not satisfied at all, or the actual value is empty.                                                                                                         |
+| Score | Meaning                                                                                                                |
+| ----- | ---------------------------------------------------------------------------------------------------------------------- |
+| 1.0   | Fully satisfied semantically. Different wording or formatting that conveys the same meaning counts as fully satisfied. |
+| 0.75  | Satisfied in substance with only minor differences that do not affect correctness.                                     |
+| 0.5   | Partially satisfied. Some required elements are present but others are missing or incorrect.                           |
+| 0.25  | Mostly not satisfied. Only marginal relevance.                                                                         |
+| 0.0   | Not satisfied at all, or the actual value is empty.                                                                    |
 
-The LLM may return any value between these anchor points (for example, 0.6 or 0.85).
-
-The default threshold is `0.5`. You can change it in the [judge configuration](configuration.md#judge-configuration) or
-per assertion chain using [`withJudgeConfig`](#withjudgeconfig).
+The LLM may return any value between these anchor points (for example, 0.6 or 0.85). You can change the threshold in the [judge configuration](configuration.md#judge-configuration) or per assertion chain using [`withJudgeConfig`](#withjudgeconfig).
 
 ### hasVariableSatisfiesJudge
 

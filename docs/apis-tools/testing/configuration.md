@@ -10,6 +10,18 @@ import TabItem from "@theme/TabItem";
 By default, CPT uses a runtime based on [Testcontainers](#testcontainers-runtime). You can customize the runtime to your
 needs, or replace it with a [Remote runtime](#remote-runtime), for example, if you can't install a Docker runtime.
 
+Configuration is provided through `application.yml` (or `application.properties`) when using the Camunda Spring Boot
+Starter, or through a `camunda-container-runtime.properties` file when using the Java client.
+
+:::tip Environment variable resolution (Java client)
+When using the Java client, properties in `camunda-container-runtime.properties` support automatic environment variable
+resolution. If a property is not explicitly set, it is resolved from an environment variable. The variable name is
+derived by prepending the `CAMUNDA_PROCESSTEST_` prefix, replacing dots with underscores, removing hyphens, and
+uppercasing everything.
+
+For example, `judge.chatModel.apiKey` resolves from `CAMUNDA_PROCESSTEST_JUDGE_CHATMODEL_APIKEY`.
+:::
+
 ## Testcontainers runtime
 
 The default runtime of CPT is based on [Testcontainers](https://java.testcontainers.org/). It uses the Camunda Docker
@@ -807,14 +819,24 @@ excludedProcesses[1]=process_2
 
 </Tabs>
 
+## Logging
+
+The test runtime uses [SLF4J](https://www.slf4j.org/) as the logging framework. If needed, you can enable the logging
+for the following packages:
+
+- `io.camunda.process.test` - The test runtime (recommended level `info`)
+- `tc.camunda` - The Camunda Docker container (recommended level `error`)
+- `tc.connectors` - The connectors Docker container (recommended level `error`)
+- `org.testcontainers` - The Testcontainers framework (recommended level `warn`)
+
 ## Judge configuration <span class="badge badge--alpha">Alpha</span>
 
 :::note
 Judge configuration is an [alpha feature](/components/early-access/alpha/alpha-features.md). APIs, dependencies, and configuration are likely to change. Learn more about [alpha features](/components/early-access/alpha/alpha-features.md) and [general availability](/reference/announcements-release-notes/release-policy.md#general-availability-ga).
 :::
 
-CPT supports LLM-based assertions that evaluate process variables against natural language expectations. To use
-[judge assertions](assertions.md#judge-assertions), you need to configure a judge with an LLM provider.
+CPT supports LLM-based assertions that evaluate process variables against natural-language expectations. To use
+[judge assertions](assertions.md#judge-assertions), configure a judge with an LLM provider.
 
 ### Prerequisites
 
@@ -831,150 +853,29 @@ If you use the Java client without Spring, add the `camunda-process-test-langcha
 </dependency>
 ```
 
-This module provides out-of-the-box support for OpenAI, Anthropic, Amazon Bedrock, and OpenAI-compatible providers
+This module provides out-of-the-box support for OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI, and OpenAI-compatible providers
 via [LangChain4j](https://docs.langchain4j.dev/). If you provide a custom `ChatModelAdapter`
 (see [Custom ChatModelAdapter](#custom-chatmodeladapter)), this dependency is not required.
 
-### Configure the judge
-
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
-]}>
-
-<TabItem value='spring-sdk'>
-
-In your `application.yml` (or `application.properties`):
-
-```yaml
-camunda:
-  process-test:
-    judge:
-      # The confidence threshold (0.0 to 1.0) for the judge to pass (default: 0.5)
-      threshold: 0.8
-      # Optional: custom prompt to replace the default evaluation criteria
-      custom-prompt: "You are a domain expert evaluating financial data accuracy."
-      chat-model:
-        # The LLM provider: openai, anthropic, amazon-bedrock, or openai-compatible
-        provider: "openai"
-        # The model name
-        model: "gpt-4o"
-        # The API key for authenticating with the provider
-        api-key: ${OPENAI_API_KEY}
-```
-
-</TabItem>
-
-<TabItem value='java-client'>
-
-In your `camunda-container-runtime.properties` file:
-
-```properties
-# The LLM provider: openai, anthropic, amazon-bedrock, or openai-compatible
-judge.chatModel.provider=openai
-# The model name
-judge.chatModel.model=gpt-4o
-# The API key (supports environment variable resolution, e.g. CAMUNDA_PROCESSTEST_JUDGE_CHATMODEL_APIKEY)
-judge.chatModel.apiKey=your-api-key
-# The confidence threshold (0.0 to 1.0) for the judge to pass (default: 0.5)
-judge.threshold=0.8
-```
-
-:::tip Environment variable resolution
-Properties in `camunda-container-runtime.properties` are automatically resolved from environment variables. Although
-the properties file uses short keys like `judge.chatModel.apiKey`, the corresponding environment variable is always
-prefixed with `CAMUNDA_PROCESSTEST_`. The full variable name is derived by prepending the prefix, replacing dots with
-underscores, removing hyphens, and uppercasing everything.
-
-For example, `judge.chatModel.apiKey` resolves from `CAMUNDA_PROCESSTEST_JUDGE_CHATMODEL_APIKEY`.
-:::
-
-Alternatively, register the JUnit extension manually and configure the judge using the fluent builder:
-
-```java
-@RegisterExtension
-CamundaProcessTestExtension extension = new CamundaProcessTestExtension()
-    .withJudgeConfig(JudgeConfig.of(prompt -> myLlmClient.chat(prompt))
-        .withThreshold(0.8));
-```
-
-</TabItem>
-
-</Tabs>
-
 ### Supported providers
 
-#### OpenAI
+The following built-in providers are available:
 
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
-]}>
+| Provider          | `provider` value    | Required properties | Notes                                                                     |
+| ----------------- | ------------------- | ------------------- | ------------------------------------------------------------------------- |
+| OpenAI            | `openai`            | `model`, `api-key`  | —                                                                         |
+| Anthropic         | `anthropic`         | `model`, `api-key`  | —                                                                         |
+| Amazon Bedrock    | `amazon-bedrock`    | `model`, `region`   | `api-key` optional; see [details](#amazon-bedrock)                        |
+| Azure OpenAI      | `azure-openai`      | `model`, `endpoint` | `api-key` optional; see [details](#azure-openai)                          |
+| OpenAI-compatible | `openai-compatible` | `model`, `base-url` | For local models or OpenAI-format APIs; see [details](#openai-compatible) |
 
-<TabItem value='spring-sdk'>
-
-```yaml
-camunda:
-  process-test:
-    judge:
-      chat-model:
-        provider: "openai"
-        model: "gpt-4o"
-        api-key: ${OPENAI_API_KEY}
-```
-
-</TabItem>
-
-<TabItem value='java-client'>
-
-```properties
-judge.chatModel.provider=openai
-judge.chatModel.model=gpt-4o
-judge.chatModel.apiKey=your-api-key
-```
-
-</TabItem>
-
-</Tabs>
-
-#### Anthropic
-
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
-]}>
-
-<TabItem value='spring-sdk'>
-
-```yaml
-camunda:
-  process-test:
-    judge:
-      chat-model:
-        provider: "anthropic"
-        model: "claude-sonnet-4-20250514"
-        api-key: ${ANTHROPIC_API_KEY}
-```
-
-</TabItem>
-
-<TabItem value='java-client'>
-
-```properties
-judge.chatModel.provider=anthropic
-judge.chatModel.model=claude-sonnet-4-20250514
-judge.chatModel.apiKey=your-api-key
-```
-
-</TabItem>
-
-</Tabs>
+For OpenAI and Anthropic, the [quick start](#quick-start) example applies directly — change the `provider` and
+`model` values. The providers below have additional configuration.
 
 #### Amazon Bedrock
 
 If no authentication properties are set, the provider defaults to the
 [AWS default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html).
-You can also configure authentication explicitly using an API key or AWS credentials.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
@@ -991,13 +892,12 @@ camunda:
         provider: "amazon-bedrock"
         model: "eu.anthropic.claude-haiku-4-5-20251001-v1:0"
         region: "eu-central-1"
-        # Authentication is optional. If omitted, the default credentials provider chain is used.
-        # Option 1: API key
-        api-key: ${AWS_API_KEY}
-        # Option 2: AWS credentials
-        credentials:
-          access-key: ${AWS_ACCESS_KEY}
-          secret-key: ${AWS_SECRET_KEY}
+        # Optional: authenticate with an API key
+        api-key: "your-api-key"
+        # Or use AWS credentials instead of api-key:
+        # credentials:
+        #   access-key: "your-access-key"
+        #   secret-key: "your-secret-key"
 ```
 
 </TabItem>
@@ -1008,12 +908,11 @@ camunda:
 judge.chatModel.provider=amazon-bedrock
 judge.chatModel.model=eu.anthropic.claude-haiku-4-5-20251001-v1:0
 judge.chatModel.region=eu-central-1
-# Authentication is optional. If omitted, the default credentials provider chain is used.
-# Option 1: API key
+# Optional: authenticate with an API key
 judge.chatModel.apiKey=your-api-key
-# Option 2: AWS credentials
-judge.chatModel.credentials.accessKey=your-access-key
-judge.chatModel.credentials.secretKey=your-secret-key
+# Or use AWS credentials instead of apiKey:
+# judge.chatModel.credentials.accessKey=your-access-key
+# judge.chatModel.credentials.secretKey=your-secret-key
 ```
 
 </TabItem>
@@ -1040,6 +939,9 @@ camunda:
         model: "llama3"
         base-url: "http://localhost:11434/v1"
         # api-key is optional for local providers
+        # Optional: custom HTTP headers
+        headers:
+          X-Custom-Header: "custom-value"
 ```
 
 </TabItem>
@@ -1051,6 +953,53 @@ judge.chatModel.provider=openai-compatible
 judge.chatModel.model=llama3
 judge.chatModel.baseUrl=http://localhost:11434/v1
 # judge.chatModel.apiKey is optional for local providers
+# Optional: custom HTTP headers
+judge.chatModel.headers.X-Custom-Header=custom-value
+```
+
+</TabItem>
+
+</Tabs>
+
+:::tip
+If both `api-key` and a custom `Authorization` header are set for the `openai-compatible` provider, the custom header takes precedence.
+:::
+
+#### Azure OpenAI
+
+The `model` property corresponds to your Azure deployment name. If no API key is provided, the provider falls back to
+[`DefaultAzureCredential`](https://learn.microsoft.com/en-us/java/api/com.azure.identity.defaultazurecredential)
+for Azure managed identity authentication.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+```yaml
+camunda:
+  process-test:
+    judge:
+      chat-model:
+        provider: "azure-openai"
+        model: "my-gpt-4o-deployment"
+        endpoint: "https://my-resource.openai.azure.com/"
+        # api-key is optional; if omitted, DefaultAzureCredential is used
+        api-key: "your-api-key"
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+```properties
+judge.chatModel.provider=azure-openai
+judge.chatModel.model=my-gpt-4o-deployment
+judge.chatModel.endpoint=https://my-resource.openai.azure.com/
+# api-key is optional; if omitted, DefaultAzureCredential is used
+judge.chatModel.apiKey=your-api-key
 ```
 
 </TabItem>
@@ -1077,7 +1026,7 @@ camunda:
         model: "custom-model"
         custom-properties:
           endpoint: "http://localhost:8080"
-          temperature: "0.7"
+          api-version: "2024-01"
 ```
 
 </TabItem>
@@ -1088,7 +1037,7 @@ camunda:
 judge.chatModel.provider=my-generic
 judge.chatModel.model=custom-model
 judge.chatModel.customProperties.endpoint=http://localhost:8080
-judge.chatModel.customProperties.temperature=0.7
+judge.chatModel.customProperties.api-version=2024-01
 ```
 
 </TabItem>
@@ -1097,14 +1046,82 @@ judge.chatModel.customProperties.temperature=0.7
 
 These properties are available to SPI implementations through `ProviderConfig.getCustomProperties()`.
 
-### Global programmatic configuration
+### Property reference
 
-You can configure the judge programmatically using `CamundaAssert.setJudgeConfig()`:
+The table below lists all available judge configuration properties. In Spring, these are nested under
+`camunda.process-test.judge`. In Java properties files, use the `judge.` prefix with camelCase keys
+(for example, `chat-model.api-key` becomes `judge.chatModel.apiKey`).
+
+#### Judge settings
+
+| Property        | Type     | Default | Description                                              |
+| --------------- | -------- | ------- | -------------------------------------------------------- |
+| `threshold`     | `double` | `0.5`   | Confidence threshold (0.0–1.0) for the judge to pass.    |
+| `custom-prompt` | `string` | —       | Custom evaluation prompt replacing the default criteria. |
+
+#### Chat model settings
+
+| Property                            | Type       | Default | Providers           | Description                                                          |
+| ----------------------------------- | ---------- | ------- | ------------------- | -------------------------------------------------------------------- |
+| `chat-model.provider`               | `string`   | —       | —                   | LLM provider name (see [Supported providers](#supported-providers)). |
+| `chat-model.model`                  | `string`   | —       | All                 | Model name (or Azure deployment name for `azure-openai`).            |
+| `chat-model.api-key`                | `string`   | —       | All                 | API key. Optional for providers that support default credentials.    |
+| `chat-model.base-url`               | `string`   | —       | `openai-compatible` | Base URL for the API endpoint.                                       |
+| `chat-model.endpoint`               | `string`   | —       | `azure-openai`      | Azure OpenAI resource URL.                                           |
+| `chat-model.region`                 | `string`   | —       | `amazon-bedrock`    | AWS region.                                                          |
+| `chat-model.timeout`                | `duration` | —       | All                 | Request timeout (ISO-8601 duration, e.g. `PT30S`).                   |
+| `chat-model.temperature`            | `double`   | —       | All                 | Temperature for response randomness (0.0–2.0).                       |
+| `chat-model.headers.*`              | `map`      | —       | `openai-compatible` | Custom HTTP headers.                                                 |
+| `chat-model.credentials.access-key` | `string`   | —       | `amazon-bedrock`    | AWS access key.                                                      |
+| `chat-model.credentials.secret-key` | `string`   | —       | `amazon-bedrock`    | AWS secret key.                                                      |
+| `chat-model.custom-properties.*`    | `map`      | —       | Custom/SPI          | Arbitrary key-value pairs passed to SPI providers.                   |
+
+### Custom prompt
+
+You can replace the default evaluation criteria with a custom prompt. The custom prompt replaces only the evaluation
+criteria (the "You are an impartial judge..." preamble). The system still controls the expectation and value injection,
+the scoring rubric, and the JSON output format.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+```yaml
+camunda:
+  process-test:
+    judge:
+      custom-prompt: "You are a domain expert evaluating financial data accuracy."
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+```properties
+judge.customPrompt=You are a domain expert evaluating financial data accuracy.
+```
+
+Or programmatically:
 
 ```java
-CamundaAssert.setJudgeConfig(
-    JudgeConfig.of(prompt -> myLlmClient.chat(prompt))
-        .withThreshold(0.8));
+JudgeConfig.of(prompt -> myLlmClient.chat(prompt))
+    .withCustomPrompt("You are a domain expert evaluating financial data accuracy.");
+```
+
+</TabItem>
+
+</Tabs>
+
+You can also override the custom prompt for a single assertion chain:
+
+```java
+assertThat(processInstance)
+    .withJudgeConfig(config -> config
+        .withCustomPrompt("You are a domain expert evaluating financial data accuracy."))
+    .hasVariableSatisfiesJudge("result", "Contains valid totals.");
 ```
 
 ### Custom ChatModelAdapter
@@ -1186,64 +1203,22 @@ Register the provider in `META-INF/services/io.camunda.process.test.api.judge.Ch
 com.example.MyCustomProvider
 ```
 
-### Custom prompt
+#### Programmatic configuration
 
-You can replace the default evaluation criteria with a custom prompt using `customPrompt`. The custom prompt replaces
-only the evaluation criteria (the "You are an impartial judge..." preamble). The system still controls the expectation
-and value injection, the scoring rubric, and the JSON output format.
-
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
-]}>
-
-<TabItem value='spring-sdk'>
-
-```yaml
-camunda:
-  process-test:
-    judge:
-      custom-prompt: "You are a domain expert evaluating financial data accuracy."
-      chat-model:
-        provider: "openai"
-        model: "gpt-4o"
-        api-key: ${OPENAI_API_KEY}
-```
-
-</TabItem>
-
-<TabItem value='java-client'>
-
-```properties
-judge.customPrompt=You are a domain expert evaluating financial data accuracy.
-```
-
-Or programmatically:
+You can configure the judge programmatically instead of using properties files. Set the configuration globally
+using `CamundaAssert.setJudgeConfig()`:
 
 ```java
-JudgeConfig.of(prompt -> myLlmClient.chat(prompt))
-    .withCustomPrompt("You are a domain expert evaluating financial data accuracy.");
+CamundaAssert.setJudgeConfig(
+    JudgeConfig.of(prompt -> myLlmClient.chat(prompt))
+        .withThreshold(0.8));
 ```
 
-</TabItem>
-
-</Tabs>
-
-You can also override the custom prompt for a single assertion chain:
+Or register the JUnit extension manually with a judge configuration:
 
 ```java
-assertThat(processInstance)
-    .withJudgeConfig(config -> config
-        .withCustomPrompt("You are a domain expert evaluating financial data accuracy."))
-    .hasVariableSatisfiesJudge("result", "Contains valid totals.");
+@RegisterExtension
+CamundaProcessTestExtension extension = new CamundaProcessTestExtension()
+    .withJudgeConfig(JudgeConfig.of(prompt -> myLlmClient.chat(prompt))
+        .withThreshold(0.8));
 ```
-
-## Logging
-
-The test runtime uses [SLF4J](https://www.slf4j.org/) as the logging framework. If needed, you can enable the logging
-for the following packages:
-
-- `io.camunda.process.test` - The test runtime (recommended level `info`)
-- `tc.camunda` - The Camunda Docker container (recommended level `error`)
-- `tc.connectors` - The connectors Docker container (recommended level `error`)
-- `org.testcontainers` - The Testcontainers framework (recommended level `warn`)
