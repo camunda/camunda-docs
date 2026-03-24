@@ -177,7 +177,7 @@ Replace `<role>` with the ID of the role you want to configure.
 
 :::note Helm deployments
 
-When you deploy with Helm, configure these properties via an application.yaml file using [application configs](/self-managed/deployment/helm/configure/application-configs.md) (for example with `orchestration.extraConfiguration`), rather than as dedicated Helm values.
+When you deploy with Helm, configure these properties via an `application.yaml` file using [application configs](/self-managed/deployment/helm/configure/application-configs.md) (for example with `orchestration.extraConfiguration`), rather than as dedicated Helm values.
 
 :::
 
