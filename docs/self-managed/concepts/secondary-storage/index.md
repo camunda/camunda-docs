@@ -38,6 +38,34 @@ Both document-store and RDBMS backends are valid secondary storage choices in Se
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
 :::
 
+```mermaid
+graph TD
+    broker["Zeebe Broker"]
+    subgraph exporters["Export paths"]
+        exp_rdbms["RDBMS Exporter"]
+        exp_es["Document-store Exporter"]
+    end
+    rdbms["RDBMS\n(PostgreSQL, Oracle, MariaDB, MySQL)"]
+    es["Elasticsearch/OpenSearch"]
+    oc["Orchestration Cluster Applications & APIs\n(Operate/Tasklist/REST API/Identity)"]
+    opt["Optimize\n(document-store required)"]
+    broker -.->|"Enable for RDBMS backend"| exp_rdbms
+    broker -.->|"Enable for document-store backend"| exp_es
+    exp_rdbms -->|"Write"| rdbms
+    exp_es -->|"Write"| es
+    rdbms -.->|"Queried by OC (if selected)"| oc
+    es -.->|"Queried by OC (if selected)"| oc
+    opt -.->|"Read/Write (if deployed)"| es
+    style broker fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style exp_rdbms fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style exp_es fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style rdbms fill:#fde8da,stroke:#fc5d0d,color:#14082c
+    style es fill:#fde8da,stroke:#fc5d0d,color:#14082c
+    style exporters fill:#f8faff,stroke:#ccc
+    style oc fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style opt fill:#e8fdf1,stroke:#10c95d,color:#14082c
+```
+
 :::note
 Starting in 8.9, Camunda 8 Run and default lightweight installs use H2 as the default secondary storage. Elasticsearch remains a supported alternative in Camunda 8 Run. OpenSearch and RDBMS-based secondary storage are supported in Self-Managed deployments. Enable the backend you need explicitly when required.
 

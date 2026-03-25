@@ -19,24 +19,32 @@ The Orchestration Cluster reads from a single configured secondary storage type 
 graph LR
     subgraph oc[Orchestration Cluster]
         broker[Broker]
+        rdbms_exporter[RDBMS Exporter]
+        doc_exporter[Document-store Exporter]
         api[Orchestration Cluster API]
     end
 
-    subgraph storage[Secondary Storage]
-        rdbms[RDBMS]
-        es[Elasticsearch/OpenSearch]
+    subgraph storage[Data Stores]
+        rdbms[RDBMS secondary storage]
+        es[Elasticsearch/OpenSearch for Optimize]
     end
 
     opt[Optimize]
 
-    broker -->|Export| rdbms
-    broker -.->|Export| es
+    broker -->|Export records| rdbms_exporter
+    rdbms_exporter -->|Write| rdbms
+    broker -.->|Optional export for Optimize| doc_exporter
+    doc_exporter -.->|Optional write| es
     api -->|Read| rdbms
     opt -->|Read/Write| es
 
-    style rdbms fill:#e1f5ff
-    style es fill:#fff3e0
-    style opt fill:#f3e5f5
+    style rdbms_exporter fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style doc_exporter fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style rdbms fill:#fde8da,stroke:#fc5d0d,color:#14082c
+    style es fill:#fde8da,stroke:#fc5d0d,color:#14082c
+    style opt fill:#e8fdf1,stroke:#10c95d,color:#14082c
+    style oc fill:#f0f5ff,stroke:#2272c9
+    style storage fill:#fff8f4,stroke:#fc5d0d
 ```
 
 **Key points:**

@@ -18,6 +18,24 @@ In this context:
 
 For a deeper conceptual comparison, see [understanding primary vs secondary storage](/self-managed/concepts/secondary-storage/no-secondary-storage.md#about-this-mode).
 
+```mermaid
+graph LR
+    subgraph oc["Orchestration Cluster"]
+        broker["Zeebe Broker\n(primary storage)"]
+        exporter["RDBMS Exporter"]
+        apps["Operate · Tasklist · REST API · Identity"]
+    end
+    rdbms["RDBMS\n(secondary storage)"]
+    broker -->|"Stream records"| exporter
+    exporter -->|"Write"| rdbms
+    apps -->|"Read"| rdbms
+    style broker fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style exporter fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style apps fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style oc fill:#f0f5ff,stroke:#2272c9
+    style rdbms fill:#fde8da,stroke:#fc5d0d,color:#14082c
+```
+
 ## Start here
 
 - New to RDBMS in Camunda: [End-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md)

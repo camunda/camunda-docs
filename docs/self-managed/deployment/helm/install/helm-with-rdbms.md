@@ -30,6 +30,39 @@ In Camunda 8, secondary storage stores historical data and process state. You ca
 
 When using RDBMS, **Optimize still requires Elasticsearch or OpenSearch**. Only the Orchestration Cluster uses RDBMS.
 
+```mermaid
+graph TD
+    subgraph k8s["Kubernetes Cluster"]
+        subgraph helm["Camunda Helm Release"]
+            broker["Zeebe Broker"]
+            exporter["RDBMS Exporter"]
+      doc_exporter["Document-store Exporter"]
+            oc_apps["Operate · Tasklist · REST API · Identity"]
+        end
+        opt["Optimize (optional)"]
+    end
+    subgraph ext["External Services"]
+        rdbms["External RDBMS\n(PostgreSQL / Oracle / MariaDB)"]
+    es["Elasticsearch / OpenSearch\n(required for Optimize)"]
+    end
+    broker -->|"Export records"| exporter
+    exporter -->|"Write"| rdbms
+    oc_apps -->|"Read"| rdbms
+    broker -.->|"Optional for Optimize"| doc_exporter
+    doc_exporter -.->|"Optional write"| es
+    opt -->|"Read/Write"| es
+    style broker fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style exporter fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style doc_exporter fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style oc_apps fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style helm fill:#f0f5ff,stroke:#2272c9
+    style k8s fill:#f8faff,stroke:#2272c9
+    style opt fill:#e8fdf1,stroke:#10c95d,color:#14082c
+    style rdbms fill:#fde8da,stroke:#fc5d0d,color:#14082c
+    style es fill:#fde8da,stroke:#fc5d0d,color:#14082c
+    style ext fill:#fff8f4,stroke:#fc5d0d
+```
+
 ## Prerequisites
 
 Before you begin:
