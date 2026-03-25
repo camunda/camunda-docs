@@ -46,7 +46,7 @@ mkcert requires [NSS](https://github.com/FiloSottile/mkcert#supported-root-store
 
 ## Secondary storage options
 
-In addition to the deployment mode, you must choose a **secondary storage** backend. The `SECONDARY_STORAGE` environment variable controls which backend the deployment scripts use. You must set it explicitly before running any deployment command — there is no default.
+In addition to the deployment mode, you must choose a [secondary storage](/self-managed/concepts/secondary-storage/index.md) backend. The `SECONDARY_STORAGE` environment variable controls which backend the deployment scripts use. You must set it explicitly before running any deployment command — there is no default.
 
 | Value           | Operators deployed                    | Components                                                  |
 | --------------- | ------------------------------------- | ----------------------------------------------------------- |
@@ -54,8 +54,6 @@ In addition to the deployment mode, you must choose a **secondary storage** back
 | `postgres`      | CloudNativePG, Keycloak Operator      | All components except Optimize (uses PostgreSQL RDBMS mode) |
 
 The `postgres` option uses [RDBMS secondary storage](/self-managed/concepts/secondary-storage/index.md) (available since 8.9), which replaces Elasticsearch with PostgreSQL for Operate, Tasklist, and the Orchestration Cluster REST API. This results in a lighter deployment with fewer operators and lower resource consumption. Optimize is not available in this mode because it depends on Elasticsearch's aggregation API for analytics — this is an architectural constraint, not a temporary gap.
-
-For more details on secondary storage backends and configuration, see [Secondary storage](/self-managed/concepts/secondary-storage/index.md).
 
 Once you've chosen your backend, export the variable so all subsequent commands pick it up automatically:
 
