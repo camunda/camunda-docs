@@ -628,7 +628,40 @@ Available skills:
               </TerminalWindow>
             </div>
             <div className={styles.aiCard}>
-              <h4>Connect to Camunda via MCP</h4>
+              <h4 style={{ display: "flex", alignItems: "center" }}>
+                Connect to Camunda via MCP
+                <span
+                  style={{
+                    marginLeft: "auto",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Link
+                    to={useBaseUrl(
+                      "docs/next/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/"
+                    )}
+                    style={{ fontWeight: 400, fontSize: "0.85rem" }}
+                  >
+                    Orchestration Cluster MCP
+                  </Link>
+                  <span
+                    style={{
+                      color: "var(--muted-color)",
+                      margin: "0 0.4rem",
+                      fontWeight: 300,
+                    }}
+                  >
+                    |
+                  </span>
+                  <Link
+                    to={useBaseUrl("docs/next/reference/mcp-docs/")}
+                    style={{ fontWeight: 400, fontSize: "0.85rem" }}
+                  >
+                    Docs MCP
+                  </Link>
+                </span>
+              </h4>
               <TerminalWindow title="Claude Config">
                 {`// mcp.json
 {
@@ -644,9 +677,7 @@ Available skills:
       "url": "https://camunda-docs.mcp.kapa.ai"
     }
   }
-}
-
-`}
+}`}
               </TerminalWindow>
             </div>
           </div>
