@@ -168,18 +168,26 @@
   font-size: 3.6rem;
   font-weight: 800;
   line-height: 1.1;
-  color: #ffffff;
+  color: var(--heading-color);
   margin: 0 0 1.2rem;
   border-bottom: none;
   padding: 0;
 }
 
+[data-theme="dark"] .heroTitle {
+  color: #ffffff;
+}
+
 .heroSub {
   font-size: 1.15rem;
-  color: #ffffff;
+  color: var(--muted-color);
   max-width: 620px;
   margin: 0 auto;
   line-height: 1.7;
+}
+
+[data-theme="dark"] .heroSub {
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {
