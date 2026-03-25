@@ -38,7 +38,7 @@ If the `correlationKey` of a message is empty, it creates a new process instance
 You do not specify a `correlationKey` for a message start event in the BPMN model when designing a process.
 
 - When an application sends a message that is caught by a message start event, the application can specify a `correlationKey` in the message.
-- If a message caught by a start event contains a `correlationKey` value, the created process is tagged with that `correlationKey` value.
+- If a message caught by a start event contains a `correlationKey` value, the correlationKey is used to ensure only one process instance is active per key (idempotency). The correlationKey is not stored as a tag on the process instance, and the `tags` field remains empty.
 - Follow-up messages are then checked against this `correlationKey` value (that is, is there an active process instance that was started by a message with the same `correlationKey`?).
 
 :::
