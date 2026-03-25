@@ -177,6 +177,6 @@ From Camunda 7.9 on, it is much easier to implement SSO by making use of the [Co
 
 You can get started by looking at some examples showing how this can be achieved for different authentication frameworks:
 
-- [Very Basic authentication filter](https://github.com/camunda-consulting/camunda-webapp-plugins/tree/master/camunda-webapp-plugin-sso-autologin) for the Camunda web apps that reads the user from a provided URL parameter.
+- [Very basic authentication filter](https://github.com/camunda-consulting/camunda-webapp-plugins/tree/master/camunda-webapp-plugin-sso-autologin) for the Camunda web apps that reads the user from a provided URL parameter.
 - Many _application servers_ support single sign-on out of the box (or through plugins) and can provide the user ID to the application. Have a look at the [Single Sign-On Community Extension](https://github.com/camunda/camunda-sso-jboss/).
 - It is quite easy to [integrate Camunda with Spring Security](https://github.com/camunda-consulting/code/tree/master/snippets/springboot-security-sso) so that the framework handles authentication and passes the authenticated user on to Camunda.
