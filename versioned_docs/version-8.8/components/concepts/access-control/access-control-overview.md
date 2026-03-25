@@ -79,12 +79,12 @@ To learn more about authorization and how to configure permissions, see [Orchest
 
 Camunda 8 supports multiple authentication methods depending on the environment:
 
-| Environment                                                                       | Authentication method    | Notes                                                                          |
-| --------------------------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------ |
-| [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)           | None / Basic Auth / OIDC | No auth or basic auth only for local development. OIDC optional if configured. |
-| [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) | None / Basic Auth / OIDC | No auth or basic auth only for local development. OIDC optional if configured. |
-| [Helm Self-Managed](/self-managed/deployment/helm/install/index.md)               | Basic Auth / OIDC        | Basic Auth default, OIDC optional if configured.                               |
-| SaaS                                                                              | OIDC                     | OIDC required for all requests.                                                |
+| Environment                                                                       | Authentication method              | Notes                                                                                    |
+| --------------------------------------------------------------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------- |
+| [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)           | None / Basic authentication / OIDC | No auth or Basic authentication only for local development. OIDC optional if configured. |
+| [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) | None / Basic authentication / OIDC | No auth or Basic authentication only for local development. OIDC optional if configured. |
+| [Helm Self-Managed](/self-managed/deployment/helm/install/index.md)               | Basic authentication / OIDC        | Basic authentication default, OIDC optional if configured.                               |
+| SaaS                                                                              | OIDC                               | OIDC required for all requests.                                                          |
 
 - **No authentication:** only for local development (Run, Docker Compose).
 - **Basic authentication:** simple to set up; not recommended for production.
@@ -107,7 +107,7 @@ Actions in an orchestration cluster can be executed by two kinds of authenticate
 Although either principal type can use both Web UIs and APIs, the distinction matters. Users represent **individuals** who are granted access to an orchestration cluster, whereas clients represent **systems or applications**.
 
 :::note
-If you're using basic authentication to secure your cluster, both users and clients are treated as users. There is no dedicated client concept in this configuration.
+If you're using Basic authentication to secure your cluster, both users and clients are treated as users. There is no dedicated client concept in this configuration.
 :::
 
 Distinguishing between users and clients aligns your access management with how identities are modeled in your identity provider. They are usually authenticated differently (for example, username and password for users versus a client certificate for applications), have different authorization requirements (such as administrator access versus deployment permissions), and separating them simplifies auditing and operational clarity.

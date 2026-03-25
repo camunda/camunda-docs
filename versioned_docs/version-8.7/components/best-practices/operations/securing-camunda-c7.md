@@ -132,7 +132,7 @@ Internally, the REST API is just another client for the Java API which needs to 
 
 Authentication and hence authorization checks are by default disabled for the REST API to allow for a quick getting started experience.
 
-For real life usage, enable at least **Basic Authentication** for the **REST API** by adjusting the `web.xml` as described in the [User Guide](https://docs.camunda.org/manual/latest/reference/rest/overview/authentication/). The REST API's default `ProcessEngineAuthenticationFilter` authenticates the user with HTTP Basic Auth. It makes use of the `IdentityService` to check the user's password and to load **group** and **tenant** memberships for that user. If that was successful, it sets the user as authenticated for the current thread via the Java API.
+For real life usage, enable at least **Basic Authentication** for the **REST API** by adjusting the `web.xml` as described in the [User Guide](https://docs.camunda.org/manual/latest/reference/rest/overview/authentication/). The REST API's default `ProcessEngineAuthenticationFilter` authenticates the user with HTTP Basic authentication. It makes use of the `IdentityService` to check the user's password and to load **group** and **tenant** memberships for that user. If that was successful, it sets the user as authenticated for the current thread via the Java API.
 
 If you require an authentication mechanism other than HTTP Basic Auth, you need to implement your own `AuthenticationFilter`. For more details, refer to the SSO section below.
 
@@ -177,6 +177,6 @@ From Camunda 7.9 on, it is much easier to implement SSO by making use of the [Co
 
 You can get started by looking at some examples showing how this can be achieved for different authentication frameworks:
 
-- [Very basic authentication filter](https://github.com/camunda-consulting/camunda-webapp-plugins/tree/master/camunda-webapp-plugin-sso-autologin) for the Camunda web apps that reads the user from a provided URL parameter.
+- [Very Basic authentication filter](https://github.com/camunda-consulting/camunda-webapp-plugins/tree/master/camunda-webapp-plugin-sso-autologin) for the Camunda web apps that reads the user from a provided URL parameter.
 - Many _application servers_ support single sign-on out of the box (or through plugins) and can provide the user ID to the application. Have a look at the [Single Sign-On Community Extension](https://github.com/camunda/camunda-sso-jboss/).
 - It is quite easy to [integrate Camunda with Spring Security](https://github.com/camunda-consulting/code/tree/master/snippets/springboot-security-sso) so that the framework handles authentication and passes the authenticated user on to Camunda.

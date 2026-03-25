@@ -448,7 +448,7 @@ This command lists all available chart versions and their corresponding applicat
 ## Additional resources
 
 <!-- TODO: Add links to the following:
-- Basic auth guide
+- Basic authentication guide
 - Enable Keycloak guide
 - Enable OIDC guide
 - Explanation of management/orchestration cluster -->

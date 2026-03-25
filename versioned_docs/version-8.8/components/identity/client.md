@@ -12,7 +12,7 @@ A client is an application that interacts with an Orchestration Cluster via its 
 
 This guide describes how to manage client access in SaaS and in Self-Managed environments that use an [external OpenID Connect (OIDC) identity provider](../concepts/access-control/connect-to-identity-provider.md) for authentication.
 
-If you are using the Orchestration Cluster with [basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication), both end users and machine-to-machine (m2m) applications are treated as users and must be [managed accordingly](user.md). The Identity UI does not display dedicated client options in basic authentication setups for this reason.
+If you are using the Orchestration Cluster with [basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication), both end users and machine-to-machine (m2m) applications are treated as users and must be [managed accordingly](user.md). The Identity UI does not display dedicated client options in Basic authentication setups for this reason.
 
 ## Manage clients in SaaS
 

@@ -63,7 +63,7 @@ scrape_configs:
 Configuration notes:
 
 - Use HTTPS.
-- Configure Basic Authentication using the credentials provided when the Cluster Metrics endpoint was enabled.
+- Configure Basic authentication using the credentials provided when the Cluster Metrics endpoint was enabled.
 - A scrape timeout of less than 10 seconds is recommended.
 - A scrape interval of at least 15 seconds is recommended. Metrics are collected every 15–30 seconds, so shorter intervals do not produce new data.
 

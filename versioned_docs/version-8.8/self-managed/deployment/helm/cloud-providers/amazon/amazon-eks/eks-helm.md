@@ -517,9 +517,9 @@ There are different ways to configure the mapping within Amazon OpenSearch Servi
   - Replace `OPENSEARCH_HOST` with your OpenSearch endpoint URL.
   - Replace `OPENSEARCH_ROLE_ARN` with the IAM role name created by Terraform, which is output by the `opensearch_role` module.
 
-  :::note Security of basic auth usage
+  :::note Security of Basic authentication usage
 
-  **This example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled.** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
+  **This example uses Basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled.** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
 
   :::
 

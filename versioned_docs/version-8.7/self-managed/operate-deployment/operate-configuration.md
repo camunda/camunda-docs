@@ -225,7 +225,7 @@ This setting will prevent Elasticsearch from generating excessive deprecation wa
 To connect to a secured (https) OpenSearch instance, you normally need to only set the URL protocol
 part to `https` instead of `http`. A secured OpenSearch instance also needs `username` and `password`.
 
-To use AWS credentials instead of basic auth when connecting to Amazon OpenSearch Services, `awsEnabled` must be set.
+To use AWS credentials instead of Basic authentication when connecting to Amazon OpenSearch Services, `awsEnabled` must be set.
 
 The other SSL settings should only be used in case of connection problems; for example, in disabling host verification.
 

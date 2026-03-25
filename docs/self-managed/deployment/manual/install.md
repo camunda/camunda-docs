@@ -197,7 +197,7 @@ camunda:
 
 #### Configure Connectors authentication
 
-Connectors require authentication to use their full capabilities. By default, the Orchestration Cluster uses basic authentication. You can configure the cluster to automatically create a user with the necessary permissions at startup.
+Connectors require authentication to use their full capabilities. By default, the Orchestration Cluster uses Basic authentication. You can configure the cluster to automatically create a user with the necessary permissions at startup.
 
 If you don’t configure a user at startup, create one manually in the Admin UI after deployment.
 
