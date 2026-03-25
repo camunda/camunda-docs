@@ -2,6 +2,7 @@ import IconAoImg from "../assets/icon-play.png";
 import IconAoDesignImg from "../assets/icon-docs.png";
 import IconAoAgentImg from "../assets/icon-agentic.png";
 import IconAoLlmImg from "../assets/icon-llm.png";
+import IconOptimize from "../assets/icon-optimize.png";
 import IconConnectorImg from "../connectors/img/icon-connectors.png";
 
 // Get started cards on introduction page
@@ -28,6 +29,16 @@ export const fundamentalCards = [
     title: "Design and architecture",
     image: IconAoDesignImg,
     description: "Plan and design your agentic orchestration solutions.",
+  },
+];
+
+// Fundamentals cards on introduction page
+export const fundamentalCards_monitoring = [
+  {
+    link: "../analyze-ai-agents/",
+    title: "Analyze your AI agents",
+    image: IconOptimize,
+    description: "Analyze your AI agents with Optimize.",
   },
   {
     link: "../monitor-ai-agents/",

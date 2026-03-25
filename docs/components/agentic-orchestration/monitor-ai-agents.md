@@ -1,15 +1,15 @@
 ---
 id: monitor-ai-agents
-title: Monitor your AI agents
+title: Monitor your AI agents with Operate
 sidebar_label: Monitor your AI agents
-description: "Monitor and troubleshoot your AI agent process instances in Camunda 8 using Operate and Optimize."
-keywords: ["agentic ai", "AI agents"]
+description: "Monitor and troubleshoot your AI agent process instances in real time using Operate."
+keywords: ["agentic ai", "AI agents", "Operate"]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Monitor and troubleshoot your AI agent process instances in Camunda 8 using Operate and Optimize.
+Monitor and troubleshoot your AI agent process instances in real time using Operate.
 
 ## About
 
@@ -18,7 +18,6 @@ In this guide, you will:
 - Inspect an AI agent process instance in Operate.
 - Understand agent’s tool usage and metadata such as tool call inputs and results.
 - Analyze the agent context and how it is stored.
-- Examine process data in Optimize.
 
 :::note
 Operate enables inspection of execution paths, tool usage, and agent metadata. However, certain runtime artifacts, such as document storage contents, may require additional configuration.
