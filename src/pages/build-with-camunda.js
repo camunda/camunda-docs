@@ -875,13 +875,107 @@ Available skills:
           </div>
         </section>
 
+        {/* ─── Agentic orchestration ─── */}
+        <section className={styles.exploreSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Agentic orchestration</h2>
+            <p className={styles.sectionSub}>
+              Orchestrate AI agents in BPMN-based workflows. Design, deploy, and
+              monitor intelligent agents combining human tasks with LLM
+              reasoning.
+            </p>
+          </div>
+          <div className={styles.agenticGrid}>
+            <Link
+              to={useBaseUrl(
+                "docs/guides/getting-started-agentic-orchestration/"
+              )}
+              className={styles.agenticCard}
+            >
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
+                  stroke="#78a9ff"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+              </svg>
+              <h4>Build your first AI agent</h4>
+              <p>Get started by building and running your first AI agent.</p>
+            </Link>
+            <Link
+              to={useBaseUrl(
+                "docs/components/agentic-orchestration/agentic-orchestration-overview/"
+              )}
+              className={styles.agenticCard}
+            >
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="#78a9ff"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                <path
+                  d="M12 8v4l3 3"
+                  stroke="#78a9ff"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <h4>Agentic orchestration</h4>
+              <p>
+                Learn how Camunda orchestrates AI agents alongside human tasks
+                and system integrations.
+              </p>
+            </Link>
+            <Link
+              to={useBaseUrl(
+                "docs/components/agentic-orchestration/ai-agents/"
+              )}
+              className={styles.agenticCard}
+            >
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="3"
+                  y="6"
+                  width="18"
+                  height="12"
+                  rx="2"
+                  stroke="#78a9ff"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                <circle cx="9" cy="12" r="1.5" fill="#78a9ff" />
+                <circle cx="15" cy="12" r="1.5" fill="#78a9ff" />
+                <path
+                  d="M8 3v3M16 3v3"
+                  stroke="#78a9ff"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <h4>About AI agents</h4>
+              <p>
+                Build agents that reason, plan, and act using LLMs within your
+                processes.
+              </p>
+            </Link>
+          </div>
+        </section>
+
         {/* ─── Explore docs ─── */}
         <section className={styles.exploreSection}>
           <div className="container">
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Explore the docs</h2>
               <p className={styles.sectionSub}>
-                Browse the Camunda 8 guides, resources, and API reference docs.
+                Browse Camunda 8 guides, resources, SDK, and API documentation.
               </p>
             </div>
             <div className={styles.exploreGrid}>

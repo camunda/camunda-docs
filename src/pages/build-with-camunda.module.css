@@ -41,15 +41,15 @@
   --page-color: #d1d1d1;
   --heading-color: #f4f4f4;
   --muted-color: #999;
-  --card-bg: #111118;
-  --card-border: #222;
+  --card-bg: #16161f;
+  --card-border: #2a2a35;
   --card-hover-border: #78a9ff;
   --card-hover-shadow: rgba(120, 169, 255, 0.1);
   --terminal-bg: #111118;
   --terminal-header-bg: #1a1a22;
   --terminal-border: #222;
   --terminal-text: #c6c6c6;
-  --section-alt-bg: #0e0e14;
+  --section-alt-bg: #131320;
   --arch-connector-color: #444;
   --inline-code-bg: rgba(120, 169, 255, 0.12);
   --inline-code-color: #78a9ff;
@@ -58,7 +58,7 @@
   --cli-card-bg: linear-gradient(145deg, #1a1a1f 0%, #131316 100%);
   --cli-card-border: #2a2a30;
   --check-text: #ccc;
-  --explore-bg: #0e0e14;
+  --explore-bg: #131320;
   --explore-border-top: #1a1a22;
   background: var(--page-bg);
   color: var(--page-color);
@@ -520,9 +520,9 @@
 }
 
 .deployCard:hover {
-  border-color: #fc5d0d;
+  border-color: var(--card-hover-border);
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(252, 93, 13, 0.1);
+  box-shadow: 0 8px 24px var(--card-hover-shadow);
   text-decoration: none !important;
   color: var(--page-color) !important;
 }
@@ -792,6 +792,60 @@
 .exploreSection {
   background: var(--explore-bg);
   padding: 3rem 0 4rem;
+}
+
+/* ─── Agentic orchestration ─── */
+.agenticGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .agenticGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.agenticCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 1.8rem 1.2rem;
+  transition: all 0.25s;
+  text-decoration: none !important;
+  color: var(--page-color) !important;
+}
+
+.agenticCard:hover {
+  border-color: var(--card-hover-border);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px var(--card-hover-shadow);
+  text-decoration: none !important;
+  color: var(--page-color) !important;
+}
+
+.agenticCard svg {
+  margin-bottom: 0.6rem;
+}
+
+.agenticCard h4 {
+  font-size: 1rem;
+  color: var(--heading-color);
+  margin: 0.6rem 0 0.3rem;
+}
+
+.agenticCard p {
+  font-size: 0.85rem;
+  color: var(--muted-color);
+  margin: 0;
+  line-height: 1.4;
 }
 
 .moreSection {
