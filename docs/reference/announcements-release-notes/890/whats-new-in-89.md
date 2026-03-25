@@ -124,7 +124,7 @@ The MCP Client connector now supports multiple authentication strategies for con
 
 ### Orchestration Cluster MCP support
 
-The Orchestration Cluster now exposes its operational capabilities via a built-in Model Context Protocol (MCP) server, enabling AI agents and LLM-powered applications to access Camunda data using a standardized interface.
+The Orchestration Cluster now exposes its operational capabilities via a built-in Model Context Protocol (MCP) server, enabling AI agents and LLM-powered applications to access Camunda data via a standardized interface.
 
 <p class="link-arrow">[Orchestration Cluster MCP Server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md)</p>
 
