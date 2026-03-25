@@ -654,7 +654,7 @@ Key updates include:
 
 <!-- https://github.com/camunda/web-modeler/issues/13707 -->
 
-In addition to bearer token authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
+In addition to bearer token authentication, you can now configure Web Modeler in Self-Managed to use Basic authentication for cluster access.
 
 - Set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
 - Web Modeler sends a username and password with every request to the cluster.
@@ -1448,16 +1448,16 @@ Use the version **Description** field to track changes alongside the version tag
 
 To learn more about versioning your diagrams, see [versions](components/modeler/web-modeler/versions.md).
 
-### Web Modeler cluster basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+### Web Modeler cluster Basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 <!-- https://github.com/camunda/web-modeler/issues/13707 -->
 
-As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
+As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use Basic authentication for cluster access.
 
-- To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
+- To use Basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
 - Web Modeler sends a username and password with every request to the cluster.
 
-To learn more about basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
+To learn more about Basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
 
 ## 8.8.0-alpha3
 
@@ -1522,7 +1522,7 @@ To learn more about this feature, see the [Camunda Spring Boot Starter](/apis-to
 
 ### Camunda 8 Run authentication updates
 
-Camunda 8 Run no longer requires authentication when working with APIs. Authentication and authorizations can be optionally enabled to allow requests using basic authentication, and to test authorizations and permissions.
+Camunda 8 Run no longer requires authentication when working with APIs. Authentication and authorizations can be optionally enabled to allow requests using Basic authentication, and to test authorizations and permissions.
 
 To learn more about this feature, see the [API documentation](/self-managed/quickstart/developer-quickstart/c8run.md#use-camunda-apis) for Camunda 8 Run.
 

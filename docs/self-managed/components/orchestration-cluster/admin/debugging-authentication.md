@@ -34,7 +34,7 @@ The flow consists of three key steps:
 
 Typical failure points:
 
-- Step 1: Invalid credentials (for example, failed basic authentication).
+- Step 1: Invalid credentials (for example, failed Basic authentication).
 - Step 2: Missing role or group memberships.
 - Step 3: Authorizations not yet configured or missing.
 
@@ -77,7 +77,7 @@ With these settings, you can trace request handling and how Spring Security filt
 
 ## Reviewing data
 
-To review the assignment of users and clients to roles, groups, or tenants—as well as which authorizations are in place—you can use the [Identity UI](/components/identity/identity-introduction.md).
+To review the assignment of users and clients to roles, groups, or tenants—as well as which authorizations are in place—you can use the [Admin UI](/components/admin/admin-introduction.md).
 
 If you do not have access to the API, you can also check the same data in the following Elasticsearch/OpenSearch indexes:
 

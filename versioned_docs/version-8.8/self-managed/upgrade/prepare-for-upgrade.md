@@ -123,12 +123,12 @@ While a user remains a member of such a role, access in Tasklist and Operate wil
 <tr>
     <td><span className="label-highlight red">Breaking changes</span></td>
     <td>User storage in Elasticsearch/OpenSearch for Operate or Tasklist</td>
-    <td><p>This is no longer supported. You must transition to using [Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.</p><p>For more information, see [Tasklist authentication](/versioned_docs/version-8.7/self-managed/tasklist-deployment/tasklist-authentication.md) and [Operate authentication](/versioned_docs/version-8.7/self-managed/operate-deployment/operate-authentication.md).</p></td>
+    <td><p>This is no longer supported. You must transition to using [Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.</p><p>For more information, see [Tasklist authentication](/versioned_docs/version-8.7/self-managed/tasklist-deployment/tasklist-authentication.md) and [Operate authentication](/versioned_docs/version-8.7/self-managed/operate-deployment/operate-authentication.md).</p></td>
 </tr>
 <tr>
     <td><span className="label-highlight red">Breaking changes</span></td>
     <td>LDAP authentication for Operate or Tasklist</td>
-    <td><p>This is no longer supported. You must transition to [OIDC or Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).</p></td>
+    <td><p>This is no longer supported. You must transition to [OIDC or Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).</p></td>
 </tr>
 <tr>
     <td><span className="label-highlight orange">High</span></td>

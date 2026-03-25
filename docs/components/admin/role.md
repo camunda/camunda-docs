@@ -20,7 +20,7 @@ The Orchestration Cluster creates [a set of default roles](../concepts/access-co
 
 To create a role:
 
-1. Log in to Identity in your cluster, and select the **Roles** tab.
+1. Log in to Admin in your cluster, and select the **Roles** tab.
 2. Click **Create role**, and enter the following role details:
    - **Role ID**: The unique identifier for the role.
    - **Role name**: The name of the role.
@@ -35,7 +35,7 @@ The role is created and can now be assigned to users or groups.
 
 To delete a role:
 
-1. Log in to Identity in your cluster, and select the **Roles** tab.
+1. Log in to Admin in your cluster, and select the **Roles** tab.
 2. Click **Delete** next to the role you want to delete.
 3. Confirm the deletion by clicking **Delete** in the confirmation dialog.
 
@@ -51,14 +51,14 @@ See [authorizations](./authorization.md) to learn how to create authorizations f
 
 To assign users to a role:
 
-1. Log in to Identity in your cluster, and select the **Roles** tab.
+1. Log in to Admin in your cluster, and select the **Roles** tab.
 2. Click on the role you want to assign users to.
 3. Select the **Users** tab.
 4. Click **Assign user**.
-5. Type the username of the user you want to assign to the role, and click **Assign user**. For SaaS deployments, the username field refers to the email address of the user. For Self-Managed deployments, the username field has to match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
+5. Type the username of the user you want to assign to the role, and click **Assign user**. For SaaS deployments, the username field refers to the email address of the user. For Self-Managed deployments, the username field has to match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
 
 :::note
-For Self-Managed deployments with basic authentication, you must search for existing users.
+For Self-Managed deployments with Basic authentication, you must search for existing users.
 :::
 
 The user is assigned to the role and inherits its permissions.
@@ -67,7 +67,7 @@ The user is assigned to the role and inherits its permissions.
 
 To remove users from a role:
 
-1. Log in to Identity in your cluster, and select the **Roles** tab.
+1. Log in to Admin in your cluster, and select the **Roles** tab.
 2. Click on the role you want to remove users from.
 3. Select the **Users** tab.
 4. Click **Remove** next to the user you want to remove from the role.
@@ -81,7 +81,7 @@ The user is removed from the role and loses any permissions that were granted th
 
 To assign groups to a role:
 
-1. Log in to Identity in your cluster, and select the **Roles** tab.
+1. Log in to Admin in your cluster, and select the **Roles** tab.
 2. Click on the role you want to assign users to.
 3. Select the **Groups** tab.
 4. Click **Assign group**.
@@ -93,7 +93,7 @@ The group is assigned to the role and inherits its permissions.
 
 To remove groups from a role:
 
-1. Log in to Identity in your cluster, and select the **Roles** tab.
+1. Log in to Admin in your cluster, and select the **Roles** tab.
 2. Click on the role you want to remove groups from.
 3. Select the **Groups** tab.
 4. Click **Remove** next to the group you want to remove from the role.
@@ -111,7 +111,7 @@ In a Self-Managed deployment, [client management](client.md) is only available f
 
 To assign a client to a role:
 
-1. Log in to Identity in your cluster, and select the **Roles** tab.
+1. Log in to Admin in your cluster, and select the **Roles** tab.
 2. Click on the role you want to assign a client to.
 3. Select the **Clients** tab.
 4. Click **Assign client**.
@@ -123,7 +123,7 @@ The client is assigned to the role.
 
 To remove a client from a role:
 
-1. Log in to Identity in your cluster, and select the **Roles** tab.
+1. Log in to Admin in your cluster, and select the **Roles** tab.
 2. Click on the role you want to remove a client from.
 3. Select the **Clients** tab.
 4. Click **Remove** next to the client you want to remove from the role.
@@ -143,7 +143,7 @@ The client is removed from the role.
 
 To assign mapping rules to a role:
 
-1. Log in to Identity in your cluster, and select the **Roles** tab.
+1. Log in to Admin in your cluster, and select the **Roles** tab.
 2. Click on the role you want to assign mapping rules to.
 3. Select the **Mapping rules** tab.
 4. Click **Assign mapping rule**.
@@ -155,7 +155,7 @@ The mapping rule is assigned to the role.
 
 To remove a mapping rule from a role:
 
-1. Log in to Identity in your cluster, and select the **Roles** tab.
+1. Log in to Admin in your cluster, and select the **Roles** tab.
 2. Click on the role you want to remove mapping rules from.
 3. Select the **Mapping rules** tab.
 4. Click **Remove** next to the mapping rule you want to remove from the role.

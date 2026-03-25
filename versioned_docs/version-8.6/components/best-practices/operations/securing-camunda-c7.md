@@ -132,9 +132,9 @@ Internally, the REST API is just another client for the Java API which needs to 
 
 Authentication and hence authorization checks are by default disabled for the REST API to allow for a quick getting started experience.
 
-For real life usage, enable at least **Basic Authentication** for the **REST API** by adjusting the `web.xml` as described in the [User Guide](https://docs.camunda.org/manual/latest/reference/rest/overview/authentication/). The REST API's default `ProcessEngineAuthenticationFilter` authenticates the user with HTTP Basic Auth. It makes use of the `IdentityService` to check the user's password and to load **group** and **tenant** memberships for that user. If that was successful, it sets the user as authenticated for the current thread via the Java API.
+For real life usage, enable at least **Basic authentication** for the **REST API** by adjusting the `web.xml` as described in the [User Guide](https://docs.camunda.org/manual/latest/reference/rest/overview/authentication/). The REST API's default `ProcessEngineAuthenticationFilter` authenticates the user with HTTP Basic authentication. It makes use of the `IdentityService` to check the user's password and to load **group** and **tenant** memberships for that user. If that was successful, it sets the user as authenticated for the current thread via the Java API.
 
-If you require an authentication mechanism other than HTTP Basic Auth, you need to implement your own `AuthenticationFilter`. For more details, refer to the SSO section below.
+If you require an authentication mechanism other than HTTP Basic authentication, you need to implement your own `AuthenticationFilter`. For more details, refer to the SSO section below.
 
 If you do not need the REST API in production, consider undeploying the REST API web application.
 

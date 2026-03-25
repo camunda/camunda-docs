@@ -122,6 +122,9 @@ When a process instance is skipped:
 # List all skipped process instances
 ./start.sh --runtime --list-skipped
 
+# List the Camunda 7 ID and Camunda 8 key for each migrated entity
+./start.sh --runtime --list-migrated
+
 # Retry skipped process instances
 ./start.sh --runtime --retry-skipped
 ```
@@ -136,6 +139,9 @@ start.bat --runtime
 
 # List all skipped process instances
 start.bat --runtime --list-skipped
+
+# List the Camunda 7 ID and Camunda 8 key for each migrated entity
+start.bat --runtime --list-migrated
 
 # Retry skipped process instances
 start.bat --runtime --retry-skipped

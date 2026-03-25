@@ -11,7 +11,7 @@ Learn more about which operations are recorded in the audit log.
 
 The audit log contains operations performed using:
 
-- [Operate](../../operate/userguide/audit-operations.md), [Identity](../../identity/audit-operations.md), and [Tasklist](../../tasklist/userguide/audit-task-history.md)
+- [Operate](../../operate/userguide/audit-operations.md), [Admin](../../admin/audit-operations.md), and [Tasklist](../../tasklist/userguide/audit-task-history.md)
 - [Orchestration Cluster REST API](../../../apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx)
 
 However, only operations that are authenticated, authorized, and reach execution with a success or execution‑time failure are recorded. Operations rejected before execution are not recorded in the audit log.
@@ -100,3 +100,9 @@ These operations belong to the category `DEPLOYED_RESOURCES`. The following oper
 #### Batch operations
 
 While the operations for creating and managing batch operations are recorded in the audit log, the batch operation state changes aren't. For more information, learn how to [monitor batch operations](../../operate/userguide/monitor-batch-operations.md).
+
+## Log scope
+
+`ADMIN` and `BATCH` operations are not scoped to a particular tenant. Instead, they're applied at a global scope because Identity-related operations don't belong to an individual tenant and batch operations may include items from multiple tenants.
+
+Keep this in mind when you filter by tenant ID with the [search audit logs API](/apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx) or the [Operate user interface](/components/operate/userguide/audit-operations.md). As these operations aren't scoped to a tenant, selecting a particular tenant ID will filter out these operations.

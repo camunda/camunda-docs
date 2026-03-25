@@ -895,7 +895,7 @@ This simplifies initial deployment setup and enables reproducible, version-contr
 
 Camunda 8.9 introduces `global.noSecondaryStorage` mode to allow running the Orchestration engine without any secondary storage (Elasticsearch, OpenSearch, or RDBMS). This is useful for lightweight testing or scenarios where only the core engine is needed.
 
-When enabled, Elasticsearch and OpenSearch subcharts must be disabled, and basic authentication is not supported.
+When enabled, Elasticsearch and OpenSearch subcharts must be disabled, and Basic authentication is not supported.
 
 </div>
 </div>
@@ -1060,6 +1060,54 @@ This enhancement ensures consistency across environments and simplifies setup fo
 Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.
 
 This enhancement aligns Web Modeler's database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
+
+</div>
+</div>
+
+## Identity
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+### Orchestration Cluster Identity renamed to Admin
+
+Starting with Camunda 8.9, the Orchestration Cluster Identity component has been renamed to **Admin** (also referred to as Orchestration Cluster Admin).
+
+Admin is the cluster-level admin UI that hosts identity management (users, groups, roles, authorizations, tenants, mapping rules, and clients) and other administrative features. The underlying identity management capabilities remain the same.
+
+What changed:
+
+- The component is now called **Admin** (previously Orchestration Cluster Identity).
+- The `admin` Spring profile replaces the `identity` profile. Both profiles work interchangeably in 8.9; the `identity` profile is deprecated and will be removed in a future version.
+- API paths have changed from `/identity/*` to `/admin/*`. The old paths remain functional and redirect to new paths, but are deprecated.
+- Helm values have changed from `orchestration.identity.*` to `orchestration.admin.*`. The old values remain functional but are deprecated.
+- Documentation paths have been updated: `/components/identity/` is now `/components/admin/`.
+
+<p className="link-arrow">[Introduction to Admin](/components/admin/admin-introduction.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: Form deployment changes
+
+With Camunda 8.9, you can now deploy forms independently. This enhancement provides greater control over what is deployed and when, enabling more precise management of changes and updates across environments.
+
+As part of this improvement, we have removed the automatic deployment of [linked forms](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md). Forms must now be explicitly deployed, giving teams finer control over versioning, release timing, and deployment scope.
+
+This change supports more predictable deployments and helps teams manage updates with greater confidence and flexibility.
+
+:::info
+To learn more, see the [8.9.0-alpha5 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+:::
 
 </div>
 </div>

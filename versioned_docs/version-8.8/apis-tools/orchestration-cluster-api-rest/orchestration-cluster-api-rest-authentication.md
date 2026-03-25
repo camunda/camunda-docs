@@ -30,9 +30,9 @@ By default, Camunda 8 Run and Docker Compose expose the Orchestration Cluster RE
 curl http://localhost:8080/v2/topology
 ```
 
-### Basic Authentication
+### Basic authentication
 
-Basic Authentication uses username and password credentials.
+Basic authentication uses username and password credentials.
 
 **For Camunda 8 Run:**  
 Enable Basic Auth by configuring authentication in your `application.yaml`. See [Camunda 8 Run documentation](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
@@ -48,13 +48,13 @@ curl --user username:password \
 ```
 
 :::note
-Basic Authentication checks the password with every request, limiting the number of requests per second. It may not be suitable for production.  
+Basic authentication checks the password with every request, limiting the number of requests per second. It may not be suitable for production.  
 See [Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md)
 :::
 
 ## Using a token (OIDC/JWT)
 
-OIDC-based Authentication is recommended for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request.
+OIDC-based authentication is recommended for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request.
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={[
 {label: 'SaaS', value: 'saas' },

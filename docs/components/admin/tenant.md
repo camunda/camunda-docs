@@ -2,12 +2,12 @@
 id: tenant
 title: "Tenants"
 sidebar_label: "Tenants"
-description: "Manage tenants within the Orchestration Cluster Identity to logically separate your infrastructure."
+description: "Manage tenants within the Orchestration Cluster Admin to logically separate your infrastructure."
 ---
 
 <span class="badge badge--platform">Self-Managed only</span>
 
-Use Identity to manage Orchestration Cluster tenants and isolate data within a single cluster.
+Use Admin to manage Orchestration Cluster tenants and isolate data within a single cluster.
 
 ## About tenants
 
@@ -19,7 +19,7 @@ This enables multiple teams, departments, or clients to share a single environme
 To learn more about tenants, see [multi-tenancy](../concepts/multi-tenancy.md).
 :::
 
-You can manage your Orchestration Cluster tenants directly in [Identity](identity-introduction.md).
+You can manage your Orchestration Cluster tenants directly in [Admin](admin-introduction.md).
 
 - **Tenancy** is enabled by default.
 - **Tenancy checks** are disabled by default. All data maps to the `<default>` tenant.
@@ -31,10 +31,10 @@ To enable multi-tenancy checks, see [Self-Managed configuration properties](/sel
 ## Create a tenant
 
 :::note
-The `<default>` tenant is automatically created when Identity starts.
+The `<default>` tenant is automatically created when Admin starts.
 :::
 
-1. Log in to Identity and open the **Tenants** tab.
+1. Log in to Admin and open the **Tenants** tab.
 
    ![tenant-management-tab](./img/tenant-management-tab.png)
 
@@ -75,7 +75,7 @@ You can manage these assignments by selecting the relevant tab on the tenant det
 ### Assign users to a tenant
 
 1. Select the **Users** tab.
-2. Click **Assign user**. In the modal, enter the username and confirm. The username field has to match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
+2. Click **Assign user**. In the modal, enter the username and confirm. The username field has to match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
 
    ![tenant-management-assign-users-modal](./img/tenant-management-assign-users-modal.png)
 

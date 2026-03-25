@@ -218,7 +218,7 @@ You can assign a user to multiple roles by listing them in the respective sectio
 
 ## Enable API authentication and authorizations
 
-In Camunda 8 Run installations, basic authentication is enabled for the Orchestration Cluster web components, but the API is unprotected, and [authorizations](/components/identity/authorization.md) are disabled. API protection and authorizations can both be enabled by modifying your `application.yaml` or environment variables:
+In Camunda 8 Run installations, Basic authentication is enabled for the Orchestration Cluster web components, but the API is unprotected, and [authorizations](/components/identity/authorization.md) are disabled. API protection and authorizations can both be enabled by modifying your `application.yaml` or environment variables:
 
 <Tabs>
 <TabItem value="application-properties" label="Application properties" default>

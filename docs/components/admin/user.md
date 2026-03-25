@@ -4,11 +4,7 @@ title: Users
 description: "Learn how to manage user access to an orchestration cluster."
 ---
 
-Users are individuals who are granted with access to an orchestration cluster and its components like Operate, Tasklist and REST API. User management differs depending on whether you are using Camunda 8 SaaS or a Self-Managed installation.
-
-:::info Username case sensitivity
-Usernames in the Orchestration Cluster are case-sensitive. When you assign authorizations, groups, roles, or tenants to a user, always use the exact username value (including case) from Identity or your identity provider. For example, `abc@example.com` and `Abc@example.com` are treated as different users, and assignments created for `Abc@example.com` will not apply to `abc@example.com`.
-:::
+Users are individuals who are granted with access to an orchestration cluster and it's components like Operate, Tasklist and REST API. User management differs depending on whether you are using Camunda 8 SaaS or a Self-Managed installation.
 
 ## SaaS
 
@@ -18,16 +14,16 @@ In a SaaS environment, user management is handled through [Camunda 8 Console](/c
 
 For Self-Managed deployments, user management depends on your authentication setup:
 
-- When using **basic authentication**, users are managed through Identity. This involves creating, updating, and deleting them directly in your cluster.
-- If you have configured an external [OpenID Connect (OIDC) provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md), user management is handled by that provider.
+- When using **Basic authentication**, users are managed through Admin. This involves creating, updating, and deleting them directly in your cluster.
+- If you have configured an external [OpenID Connect (OIDC) provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md), user management is handled by that provider.
 
-The following sections describe how to manage users in a Self-Managed environment with **basic authentication** enabled.
+The following sections describe how to manage users in a Self-Managed environment with **Basic authentication** enabled.
 
 ### Create a user
 
 To create a user:
 
-1. Log in to Identity in your cluster, and click on the **Users** tab.
+1. Log in to Admin in your cluster, and click on the **Users** tab.
 2. Click on the **Create user** button, and provide the following user details:
    - **Username**: The username for the user.
    - **Name**: The name of the user.
@@ -41,7 +37,7 @@ The user is created, and can now log in to the Camunda 8 web applications.
 
 ### Update a user
 
-1. Log in to Identity in your cluster, and click on the **Users** tab.
+1. Log in to Admin in your cluster, and click on the **Users** tab.
 2. Click on the **pencil icon** next to the user you want to update.
    :::note
    You can also select the user, and click the three vertical dots > **Update**.
@@ -58,7 +54,7 @@ The user details are updated, and the user can now use these credentials to log 
 
 ### Delete a user
 
-1. Log in to Identity in your cluster, and click on the **Users** tab.
+1. Log in to Admin in your cluster, and click on the **Users** tab.
 2. Click on the **Delete** button next to the user you want to delete.
    :::note
    You can also select the user, and click the three vertical dots > **Delete**.

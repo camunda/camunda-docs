@@ -46,9 +46,9 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
 
    <TabItem value='basic'>
 
-   For **basic authentication**, enter your username and password.
+   For **Basic authentication**, enter your username and password.
 
-   ![basic auth configuration](./img/connection-with-basic-auth.png)
+   ![Basic authentication configuration](./img/connection-with-basic-auth.png)
 
    </TabItem>
 

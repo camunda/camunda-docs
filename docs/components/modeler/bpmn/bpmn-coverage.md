@@ -456,36 +456,36 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Conditional
+            <a href="../conditional-events/">Conditional</a>
         </td>
         <td>
-            <a href="#">
-                <ConditionalStartEventSvg />
+            <a href="../conditional-events/">
+                <ConditionalStartEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <ConditionalEventSubprocessSvg />
+            <a href="../conditional-events/">
+                <ConditionalEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <ConditionalEventSubprocessNonInterruptingSvg />
+            <a href="../conditional-events/">
+                <ConditionalEventSubprocessNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <ConditionalCatchEventSvg />
+            <a href="../conditional-events/">
+                <ConditionalCatchEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <ConditionalBoundaryEventSvg />
+            <a href="../conditional-events/">
+                <ConditionalBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <ConditionalBoundaryEventNonInterruptingSvg />
+            <a href="../conditional-events/">
+                <ConditionalBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td></td>
