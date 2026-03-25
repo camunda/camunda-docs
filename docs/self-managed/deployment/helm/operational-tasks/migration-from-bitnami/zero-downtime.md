@@ -10,13 +10,17 @@ import TabItem from "@theme/TabItem";
 import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 import DualRegionEsNote from './\_partials/\_dual-region-es-note.md'
 
-:::warning Advanced topic
-This guide describes an **advanced migration strategy** that eliminates the downtime window present in the [standard migration](./bitnami-to-operators.md). It requires familiarity with PostgreSQL logical replication, Elasticsearch cross-cluster replication or continuous snapshots, and Keycloak high availability. It may require adjustments to fit your specific environment, network topology, and data volumes.
+:::warning Advanced topic — commands provided for reference only
+This guide describes an **advanced migration strategy** that eliminates the downtime window present in the [standard migration](./bitnami-to-operators.md). The commands and examples in this guide are provided **for informational purposes only**. You must test them on a staging environment that mirrors your production setup before executing them in production. You are expected to familiarize yourself with the underlying concepts and write your own cutover runbook that accounts for your specific constraints, network topology, and data volumes.
 
 For most deployments, Camunda recommends the simpler [standard migration](./bitnami-to-operators.md) with a 5–30 minute maintenance window.
 :::
 
 Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to operator-managed or managed service equivalents **without planned application downtime**. Instead of the freeze-backup-restore-switch pattern used in the standard migration, this approach keeps source and target synchronized with **real-time data replication** before cutover.
+
+:::info All examples target CloudNativePG and ECK
+The commands and snippets in this guide assume **CloudNativePG (CNPG)** as the PostgreSQL target and **ECK** as the Elasticsearch target. If you are migrating to managed services (for example, AWS RDS or Elastic Cloud), replace the target hostnames, credentials, and connection methods accordingly.
+:::
 
 Use this guide only if all of the following are true:
 
@@ -30,24 +34,24 @@ Use this guide only if all of the following are true:
 The zero-downtime migration replaces the backup/restore phases with continuous replication:
 
 ```
-┌──────────────────────────────────────────────────────────────────────┐
-│                  Zero-Downtime Migration Phases                      │
-│                                                                      │
-│  Phase 1 ✦ Deploy Targets          ─── no downtime ─────────────── │
-│    Install operators + create target clusters alongside Bitnami      │
-│                                                                      │
-│  Phase 2 ✦ Enable Replication      ─── no downtime ─────────────── │
+┌─────────────────────────────────────────────────────────────────────┐
+│                  Zero-Downtime Migration Phases                     │
+│                                                                     │
+│  Phase 1 * Deploy Targets          --- no downtime ---------------- │
+│    Install operators + create target clusters alongside Bitnami     │
+│                                                                     │
+│  Phase 2 * Enable Replication      --- no downtime ---------------- │
 │    Set up PG logical replication + ES CCR / continuous snapshots     │
-│                                                                      │
-│  Phase 3 ✦ Sync & Verify           ─── no downtime ─────────────── │
-│    Wait for replication lag → 0, verify data consistency             │
-│                                                                      │
-│  Phase 4 ✦ Instantaneous Cutover   ─── no downtime ─────────────── │
+│                                                                     │
+│  Phase 3 * Sync & Verify           --- no downtime ---------------- │
+│    Wait for replication lag -> 0, verify data consistency            │
+│                                                                     │
+│  Phase 4 * Instantaneous Cutover   --- no downtime ---------------- │
 │    Helm upgrade to switch backends (rolling restart, no freeze)      │
-│                                                                      │
-│  Phase 5 ✦ Validate & Cleanup      ─── no downtime ─────────────── │
+│                                                                     │
+│  Phase 5 * Validate & Cleanup      --- no downtime ---------------- │
 │    Verify health, tear down replication, remove old resources        │
-└──────────────────────────────────────────────────────────────────────┘
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Key differences from the standard migration
@@ -77,8 +81,41 @@ The PostgreSQL path is always logical replication. Elasticsearch requires an exp
 
 - Use **CCR** if you have the license and need the closest possible parity at cutover.
 - Use **continuous snapshots** if a small lag window is acceptable.
-- Use **fresh start** only if rebuilding historical Elasticsearch-backed views after cutover is acceptable.
   :::
+
+## Limitations and caveats
+
+This migration path removes the planned downtime window, but it does not remove the need for rehearsal, monitoring, and rollback planning. Treat it as a custom migration pattern rather than a push-button alternative to the standard workflow.
+
+### PostgreSQL logical replication limitations
+
+- **DDL not replicated**: Schema changes (CREATE TABLE, ALTER TABLE, etc.) are not replicated. If the source schema changes during migration, you must apply the same changes to the target manually.
+- **Large objects**: `pg_largeobject` data is not replicated via logical replication.
+- **Sequences**: Sequence values are not replicated. After cutover, sequences on the target may need to be reset:
+
+  ```sql
+  -- Run on each target database after cutover
+  SELECT setval(pg_get_serial_sequence(table_name, column_name), max(column_name))
+  FROM table_name;
+  ```
+
+- **TRUNCATE**: `TRUNCATE` is replicated only in PostgreSQL 11+.
+
+### Elasticsearch limitations
+
+- **CCR requires Platinum license**: The open-source and Basic tiers do not include cross-cluster replication.
+- **Continuous snapshots have lag**: The snapshot approach introduces a replication delay equal to the snapshot interval.
+- **Index mapping conflicts**: If the source creates new indices during replication, they must be manually added to the CCR follow configuration.
+
+### Keycloak considerations
+
+Keycloak data is stored in PostgreSQL, so it is covered by the PostgreSQL logical replication. The Keycloak Operator CR will start using the replicated data in the CNPG cluster after the Helm upgrade.
+
+However, be aware of Keycloak session data:
+
+- Active user sessions stored in PostgreSQL will be replicated.
+- In-memory Infinispan caches will be rebuilt on the new Keycloak pods.
+- Users may need to re-authenticate after the cutover (session cookies point to the old Keycloak pods).
 
 ## Clone the deployment references repository
 
@@ -278,7 +315,6 @@ Unlike PostgreSQL, Elasticsearch does not have a built-in logical replication fe
 | -------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------- |
 | CCR                  | You need the closest possible real-time replica and have an Elastic Platinum license | Highest operational complexity                          |
 | Continuous snapshots | You can tolerate a small lag window and want an open-source-compatible approach      | Recent writes may be missing until re-export catches up |
-| Fresh start          | Historical search data can be rebuilt after cutover                                  | Slowest path to full UI history after migration         |
 
 <Tabs groupId="es-replication" queryString>
 
@@ -386,16 +422,6 @@ Before cutover, you will restore the latest snapshot to the target ECK cluster.
 
 </TabItem>
 
-<TabItem value="fresh-start" label="Fresh start (simplest)">
-
-If historical Elasticsearch data is not critical, **skip Elasticsearch replication entirely**. After the Helm upgrade, Zeebe exporters will re-populate all indices from the event log. This is the simplest approach:
-
-- Operate, Tasklist, and Optimize data will be rebuilt from Zeebe events.
-- There will be a temporary period where recent history may not appear in the UI until re-export completes.
-- No additional setup is required.
-
-</TabItem>
-
 </Tabs>
 
 ## Phase 3: Verify synchronization
@@ -465,12 +491,6 @@ kubectl exec -it ${CAMUNDA_RELEASE_NAME}-elasticsearch-master-0 -n ${NAMESPACE} 
 ```
 
 </details>
-
-</TabItem>
-
-<TabItem value="fresh-start" label="Fresh start (simplest)">
-
-No synchronization monitoring needed — Elasticsearch will be populated after cutover.
 
 </TabItem>
 
@@ -624,12 +644,6 @@ With the continuous snapshot approach, there is a small window (up to the snapsh
 
 </TabItem>
 
-<TabItem value="fresh-start" label="Fresh start (simplest)">
-
-No action required. Elasticsearch will be populated after cutover.
-
-</TabItem>
-
 </Tabs>
 
 ### Step 3: Helm upgrade (rolling restart)
@@ -685,15 +699,15 @@ kubectl exec -it ${CAMUNDA_RELEASE_NAME}-postgresql-web-modeler-0 -n ${NAMESPACE
 
 ## Phase 5: Validate and clean up
 
-Run the standard validation:
+### Validate
+
+Run the standard validation to confirm all components are healthy on the new infrastructure:
 
 ```bash
 bash 4-validate.sh
 ```
 
-Then proceed with [Phase 5 in the operator-based guide](./bitnami-to-operators.md#phase-5-cleanup-bitnami-resources-no-downtime) to remove old Bitnami resources.
-
-## Failback to Bitnami (if needed)
+### Failback to Bitnami (if needed)
 
 If the zero-downtime migration reveals issues after cutover:
 
@@ -705,40 +719,54 @@ If the zero-downtime migration reveals issues after cutover:
 
 2. **Late rollback** (after publications are dropped): You would need to perform a reverse data migration — dump from the CNPG targets back to the Bitnami sources. This is the same process in reverse.
 
-## Limitations and caveats
+### Clean up Bitnami resources
 
-This migration path removes the planned downtime window, but it does not remove the need for rehearsal, monitoring, and rollback planning. Treat it as a custom migration pattern rather than a push-button alternative to the standard workflow.
+:::warning Wait before cleanup
+Do not clean up immediately. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, do so **before** running cleanup.
+:::
 
-### PostgreSQL logical replication limitations
+After confirming stability, remove old Bitnami StatefulSets, PVCs, services, and the migration backup PVC:
 
-- **DDL not replicated**: Schema changes (CREATE TABLE, ALTER TABLE, etc.) are not replicated. If the source schema changes during migration, you must apply the same changes to the target manually.
-- **Large objects**: `pg_largeobject` data is not replicated via logical replication.
-- **Sequences**: Sequence values are not replicated. After cutover, sequences on the target may need to be reset:
+```bash
+bash 5-cleanup-bitnami.sh
+```
 
-  ```sql
-  -- Run on each target database after cutover
-  SELECT setval(pg_get_serial_sequence(table_name, column_name), max(column_name))
-  FROM table_name;
-  ```
-
-- **TRUNCATE**: `TRUNCATE` is replicated only in PostgreSQL 11+.
-
-### Elasticsearch limitations
-
-- **CCR requires Platinum license**: The open-source and Basic tiers do not include cross-cluster replication.
-- **Continuous snapshots have lag**: The snapshot approach introduces a replication delay equal to the snapshot interval.
-- **Index mapping conflicts**: If the source creates new indices during replication, they must be manually added to the CCR follow configuration.
-
-### Keycloak considerations
-
-Keycloak data is stored in PostgreSQL, so it is covered by the PostgreSQL logical replication. The Keycloak Operator CR will start using the replicated data in the CNPG cluster after the Helm upgrade.
-
-However, be aware of Keycloak session data:
-
-- Active user sessions stored in PostgreSQL will be replicated.
-- In-memory Infinispan caches will be rebuilt on the new Keycloak pods.
-- Users may need to re-authenticate after the cutover (session cookies point to the old Keycloak pods).
+The script checks whether each resource exists before attempting deletion, so it can be safely rerun if interrupted.
 
 ## Operational readiness
 
-Use the [operator-based operational readiness checklist](./bitnami-to-operators.md#operational-readiness) as the baseline, then add zero-downtime-specific checks for replication lag, subscription health, and Elasticsearch synchronization status.
+Before running this migration in production, use the checklist below to reduce risk and confirm the cutover plan is ready.
+
+### Staging rehearsal
+
+1. **Clone your production environment** to a staging cluster with the same Helm chart version, same component configuration, and comparable data volumes.
+2. **Run the full migration end to end** in staging, including all five phases: deploy targets, enable replication, verify synchronization, cutover, and validate/cleanup.
+3. **Measure replication convergence**: record how long it takes for PostgreSQL subscriptions to reach `lag_bytes = 0` and for Elasticsearch to fully synchronize. These timings determine how long you must wait before cutover.
+4. **Test failback**: after a successful staging migration, verify you can roll back cleanly with `bash rollback.sh`.
+
+:::tip
+Use a representative data set. Small databases converge almost instantly but hide the replication lag behavior you will face with production-sized workloads. Include realistic write load during the staging rehearsal to observe replication behavior under pressure.
+:::
+
+### Pre-migration checklist
+
+Before starting the migration in production:
+
+- **Verify replication prerequisites**: confirm `wal_level = logical`, sufficient `max_replication_slots` and `max_wal_senders`, and (if using CCR) a valid Elastic Platinum license.
+- **Notify stakeholders**: although there is no planned downtime, inform them of the migration. If the PostgreSQL restart for `wal_level` is required, coordinate it during a low-traffic period.
+- **Verify backups**: confirm your existing backup strategy (Velero, volume snapshots, or cloud provider backups) has a recent successful backup.
+- **Check cluster resources**: ensure the cluster has enough CPU, memory, and storage to run both old and new infrastructure simultaneously — they coexist for the entire replication phase.
+- **Review `env.sh`**: double-check all variables, especially `NAMESPACE`, `CAMUNDA_RELEASE_NAME`, and target cluster names.
+- **Prepare monitoring**: set up dashboards for PostgreSQL replication lag, Elasticsearch sync status, pod health, and storage capacity.
+
+### Post-migration monitoring
+
+After completing the cutover, monitor the following for at least 48 hours:
+
+- **Pod restarts**: `kubectl get pods -n ${NAMESPACE} --watch`
+- **CNPG cluster health**: `kubectl get clusters -n ${NAMESPACE}` (should show `Cluster in healthy state`)
+- **ECK cluster health**: `kubectl get elasticsearch -n ${NAMESPACE}` (should show `green`)
+- **Camunda component logs**: check for connection errors, authentication failures, or data inconsistencies.
+- **Process instance completion**: verify that in-flight process instances continue to execute correctly.
+- **Zeebe export lag**: confirm that Zeebe exporters are writing to the new Elasticsearch without delays.
+- **Sequence values**: verify PostgreSQL sequences are correct after cutover (see [PostgreSQL logical replication limitations](#postgresql-logical-replication-limitations)).

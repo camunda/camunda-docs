@@ -62,6 +62,23 @@ The migration follows a five-phase approach designed to minimize downtime:
 
 The main downtime driver is the PostgreSQL restore (`pg_restore`) and Elasticsearch reindex duration.
 
+## Precautions (all paths) {#precautions}
+
+Regardless of the migration path you choose, review the following precautions **before starting** the migration.
+
+<details>
+<summary>General precautions</summary>
+
+- **Test in staging first:** Run the full migration in a non-production environment before migrating production.
+- **Schedule a maintenance window:** All migration paths (except zero-downtime) require a downtime window during cutover.
+- **Check cluster capacity:** During the migration, both old and new infrastructure run simultaneously, requiring additional CPU, memory, and storage.
+- **Backup your Helm values:** Consider a manual backup before starting: `helm get values camunda -n camunda > backup-values.yaml`.
+- **DNS TTL:** If using a domain for Keycloak, ensure DNS TTL is low before cutover to minimize propagation delay.
+- **Keycloak OIDC impact:** Keycloak is the OIDC provider for all Camunda components (and possibly external applications). Migrating Keycloak changes the underlying service. If you use a DNS CNAME for Keycloak, plan to update the DNS target to the new Keycloak service after cutover. If external applications share the same Keycloak realm, coordinate the DNS switch with their teams.
+- **Session impact:** The database migration preserves all persistent data (realms, users, clients, signing keys, and refresh tokens). Since Keycloak 25+, user sessions are persisted in the database and survive the switch. In-flight authentication flows (login pages in progress) and pending action tokens (password reset links) are lost; users simply need to retry. This is inherent to the downtime window and has no lasting effect.
+
+</details>
+
 ## Choose your migration target
 
 Depending on your infrastructure capabilities and organizational requirements, choose one of the following migration paths:
@@ -87,10 +104,48 @@ All migration paths require an explicit decision for authentication and connecti
 - If your PostgreSQL or Elasticsearch access depends on cloud-specific IAM authentication such as AWS IRSA, the provided migration jobs are not sufficient, and you need a custom migration workflow.
   :::
 
-:::warning Test in staging first
-Always perform a full migration dry run on a non-production environment before migrating production. The migration scripts support a `--dry-run` flag to preview actions without making changes.
-:::
-
 ## Migration guides
 
 <DocCardList />
+
+## Advanced usage
+
+### Migration hooks {#migration-hooks}
+
+The migration scripts support **hooks** — custom shell scripts that run before or after each migration phase. Place executable scripts in the `hooks/` directory of the migration repository:
+
+| Hook               | Trigger                                 |
+| ------------------ | --------------------------------------- |
+| `pre-phase-1.sh`   | Before deploying target infrastructure  |
+| `post-phase-1.sh`  | After target infrastructure is deployed |
+| `pre-phase-2.sh`   | Before initial backup                   |
+| `post-phase-2.sh`  | After initial backup                    |
+| `pre-phase-3.sh`   | Before cutover (before freeze)          |
+| `post-phase-3.sh`  | After cutover is complete               |
+| `pre-phase-4.sh`   | Before validation                       |
+| `post-phase-4.sh`  | After validation                        |
+| `pre-phase-5.sh`   | Before Bitnami cleanup                  |
+| `post-phase-5.sh`  | After Bitnami cleanup                   |
+| `pre-rollback.sh`  | Before rollback                         |
+| `post-rollback.sh` | After rollback                          |
+
+For example, send a Slack notification before cutover:
+
+```bash
+#!/bin/bash
+# hooks/pre-phase-3.sh
+curl -X POST "$SLACK_WEBHOOK" \
+  -H 'Content-Type: application/json' \
+  -d '{"text":"⚠️ Camunda migration cutover starting — downtime expected"}'
+```
+
+:::note
+Hook scripts are sourced (not forked), so they have access to all library functions and variables. A failing hook aborts the migration (due to `set -e`). Add `|| true` to make a hook best-effort.
+:::
+
+Typical hook use cases:
+
+- Pause external consumers before Phase 3 and resume them after validation.
+- Send change-management or on-call notifications at the start and end of cutover.
+- Run smoke tests after Phase 3 or Phase 4, and fail the migration if a critical endpoint is unavailable.
+- Update DNS or Ingress records for Keycloak after the new service becomes active.

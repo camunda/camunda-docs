@@ -10,6 +10,7 @@ import TabItem from "@theme/TabItem";
 import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
+import CloneRepo from './\_partials/\_clone-repo.md'
 import DualRegionEsNote from './\_partials/\_dual-region-es-note.md'
 
 Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to **cloud-managed services**, such as:
@@ -37,8 +38,9 @@ Managed services are ideal when your organization:
 
 In addition to the general prerequisites:
 
-- Ensure network connectivity between your Kubernetes cluster and the managed services
-- Have credentials ready for each managed service (or plan to create them during [Step 1](#step-1-provision-managed-services))
+- **Managed services already provisioned**: PostgreSQL and Elasticsearch instances must be running and accessible before starting the migration. If you haven't provisioned them yet, see the [provisioning reference](#provisioning-reference) in Step 1.
+- Ensure network connectivity between your Kubernetes cluster and the managed services.
+- Have credentials ready for each managed service.
 
 :::warning IRSA / IAM-based authentication not supported
 The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or Elasticsearch endpoints protected by cloud-specific IAM auth require a custom migration approach.
@@ -53,31 +55,36 @@ For managed services, the infrastructure decision is separate from the authentic
 
 ## Clone the deployment references repository
 
-```bash
-git clone https://github.com/camunda/camunda-deployment-references.git
-cd camunda-deployment-references/generic/kubernetes/migration
-```
+<CloneRepo />
 
-## Step 1: Provision managed services
+## Step 1: Create Kubernetes Secrets for managed services
 
-Before running the migration, provision your managed services using your cloud provider's official documentation. This guide assumes the services already exist and focuses only on the Camunda-specific migration steps.
+This step assumes your managed PostgreSQL and Elasticsearch services are already provisioned and accessible from the Kubernetes cluster. You need the endpoint, port, database names, usernames, and credentials for each service.
 
-### PostgreSQL
+<details>
+<summary>Provisioning reference</summary>
 
-Use your provider's setup guide for the database service you operate:
+If you haven't provisioned your managed services yet, use your cloud provider's official documentation:
+
+**PostgreSQL:**
 
 - [AWS RDS for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html)
 - [Azure Database for PostgreSQL - Flexible Server](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/overview)
 - [Google Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)
 
-Minimum requirements before continuing:
+Minimum requirements:
 
 - Create the `identity`, `keycloak`, and `webmodeler` databases.
 - Create or assign credentials for each database according to your provider's model.
 - Ensure private connectivity from the Kubernetes cluster to PostgreSQL.
-- Record the endpoint, port, database names, usernames, and secret material used in the next steps.
+- Record the endpoint, port, database names, usernames, and secret material.
 
-### Elasticsearch
+**Elasticsearch:**
+
+- [Elastic Cloud](https://www.elastic.co/guide/en/cloud/current/ec-getting-started.html) — note the deployment endpoint, Cloud ID, and credentials.
+- Self-managed Elasticsearch — ensure it is accessible from the cluster, and note the endpoint and credentials.
+
+</details>
 
 <DualRegionEsNote />
 
@@ -86,22 +93,6 @@ This migration path does not support moving data from the Bitnami Elasticsearch 
 
 If your target architecture requires OpenSearch, treat that as a separate replatforming effort instead of a supported in-place migration from the Bitnami Elasticsearch subchart.
 :::
-
-<Tabs groupId="es-provider" queryString>
-
-<TabItem value="elastic-cloud" label="Elastic Cloud">
-
-Create an Elastic Cloud deployment. Note the deployment endpoint, Cloud ID, and credentials.
-
-</TabItem>
-
-<TabItem value="self-managed-es" label="Self-managed Elasticsearch">
-
-If using a self-managed Elasticsearch cluster (not on Kubernetes), ensure it is accessible from the cluster, and note the endpoint and credentials.
-
-</TabItem>
-
-</Tabs>
 
 ### Create Kubernetes Secrets
 
@@ -456,7 +447,7 @@ Rollback is available after Phase 3 (cutover) and before Phase 5 (cleanup). Befo
 
 Before running this migration in production, use the checklist below to reduce risk, especially where network policy and external service access add complexity.
 
-If you are using the migration scripts, also consult the [downtime estimation](./bitnami-to-operators.md#downtime-estimation), [migration hooks](./bitnami-to-operators.md#migration-hooks), and [troubleshooting](./bitnami-to-operators.md#troubleshooting) sections in the operator-based guide — they apply equally to external targets.
+If you are using the migration scripts, also consult the [downtime estimation](./bitnami-to-operators.md#downtime-estimation), [migration hooks](./index.md#migration-hooks), and [troubleshooting](./bitnami-to-operators.md#troubleshooting) sections in the operator-based guide — they apply equally to external targets.
 
 ### Staging rehearsal
 

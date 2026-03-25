@@ -10,6 +10,7 @@ import TabItem from "@theme/TabItem";
 import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
+import CloneRepo from './\_partials/\_clone-repo.md'
 import DualRegionEsNote from './\_partials/\_dual-region-es-note.md'
 
 Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure (PostgreSQL, Elasticsearch, and Keycloak) to **Kubernetes operator-managed equivalents**:
@@ -47,68 +48,15 @@ For the tool versions used and tested, check the [.tool-versions](https://github
 
 ## Clone the deployment references repository
 
-The migration scripts are part of the [Camunda deployment references](https://github.com/camunda/camunda-deployment-references) repository. Clone the repository and navigate to the migration directory:
-
-```bash
-git clone https://github.com/camunda/camunda-deployment-references.git
-cd camunda-deployment-references/generic/kubernetes/migration
-```
-
-The migration reuses the operator-based reference architecture scripts for deploying target infrastructure, ensuring consistency:
-
-```
-generic/kubernetes/
-├── operator-based/                  # Reference architecture (reused by migration)
-│   ├── postgresql/
-│   │   ├── deploy.sh               #   CNPG operator + cluster deployment
-│   │   ├── set-secrets.sh          #   PostgreSQL secret management
-│   │   ├── postgresql-clusters.yml #   ★ CUSTOMIZE: PG cluster specs
-│   │   ├── camunda-identity-values.yml
-│   │   └── camunda-webmodeler-values.yml
-│   ├── elasticsearch/
-│   │   ├── deploy.sh               #   ECK operator + cluster deployment
-│   │   ├── elasticsearch-cluster.yml #   ★ CUSTOMIZE: ES cluster specs
-│   │   └── camunda-elastic-values.yml
-│   └── keycloak/
-│       ├── deploy.sh               #   Keycloak operator + CR deployment
-│       ├── keycloak-instance-*.yml #   ★ CUSTOMIZE: Keycloak CR specs
-│       ├── camunda-keycloak-domain-values.yml
-│       └── camunda-keycloak-no-domain-values.yml
-│
-└── migration/                       # Migration scripts
-    ├── env.sh                       # Configuration variables
-    ├── lib.sh                       # Shared library (do not edit)
-    ├── 1-deploy-targets.sh          # Phase 1: Deploy operators + clusters
-    ├── 2-backup.sh                  # Phase 2: Initial backup
-    ├── 3-cutover.sh                 # Phase 3: Freeze → Restore → Switch
-    ├── 4-validate.sh                # Phase 4: Validate everything
-    ├── 5-cleanup-bitnami.sh         # Phase 5: Remove old Bitnami resources
-    ├── rollback.sh                  # Emergency rollback
-    ├── .state/                      # Migration state tracking (auto-generated)
-    ├── hooks/                       # Custom hook scripts (optional)
-    ├── jobs/                        # Kubernetes Job templates
-    │   ├── pg-backup.job.yml
-    │   ├── pg-restore.job.yml
-    │   ├── es-backup.job.yml        #   ES health verification
-    │   └── es-restore.job.yml       #   ES reindex-from-remote restore
-    └── manifests/
-        ├── backup-pvc.yml           # Shared backup PVC
-        └── eck-migration-patch.yml  # ES reindex.remote.whitelist patch
-```
+<CloneRepo />
 
 ## Precautions
 
-Review these items before starting the migration:
+Before starting, review the [general precautions](./index.md#precautions) that apply to all migration paths. The items below are specific to the operator-based migration:
 
-- **Test in staging first:** Run the full migration in a non-production environment before migrating production.
-- **Schedule a maintenance window:** Phase 3 requires downtime.
-- **Check cluster capacity:** During Phases 1 and 2, both old and new infrastructure run simultaneously, requiring additional CPU, memory, and storage.
-- **Backup your Helm values:** Done automatically in Phase 3, but consider an extra manual backup with `helm get values camunda -n camunda > backup-values.yaml`.
 - **Monitor resource quotas:** CNPG and ECK clusters consume additional resources. Ensure your namespace quotas and node capacity allow for the temporary duplication.
 - **Elasticsearch `reindex.remote.whitelist`:** The target ECK cluster must have `reindex.remote.whitelist` configured to allow pulling data from the source Bitnami Elasticsearch via the `_reindex` API. The migration scripts patch this automatically.
-- **DNS TTL:** If using a domain for Keycloak, ensure DNS TTL is low before cutover to minimize propagation delay.
-- **Keycloak OIDC impact:** Keycloak is the OIDC provider for all Camunda components (and possibly external applications). Migrating to the Keycloak Operator changes the underlying service. If you use a DNS CNAME for Keycloak, use the `hooks/post-phase-3.sh` hook to update the DNS target to the new Keycloak Operator service after cutover. If external applications share the same Keycloak realm, coordinate the DNS switch with their teams.
-- **Session impact:** The database migration preserves all persistent data (realms, users, clients, signing keys, and refresh tokens). Since Keycloak 25+, user sessions are persisted in the database and survive the switch. In-flight authentication flows (login pages in progress) and pending action tokens (password reset links) are lost; users simply need to retry. This is inherent to the downtime window and has no lasting effect.
+- **Keycloak hooks:** If you use a DNS CNAME for Keycloak, use the `hooks/post-phase-3.sh` hook to update the DNS target to the new Keycloak Operator service after cutover.
 
 :::warning IRSA / IAM-based authentication not supported
 The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or OpenSearch with IAM auth require a custom migration approach.
@@ -452,43 +400,7 @@ Before running this phase, strongly consider:
 
 ## Migration hooks
 
-You can inject custom logic before or after each migration phase by placing executable shell scripts in the `hooks/` directory:
-
-| Hook               | Trigger                                 |
-| ------------------ | --------------------------------------- |
-| `pre-phase-1.sh`   | Before deploying target infrastructure  |
-| `post-phase-1.sh`  | After target infrastructure is deployed |
-| `pre-phase-2.sh`   | Before initial backup                   |
-| `post-phase-2.sh`  | After initial backup                    |
-| `pre-phase-3.sh`   | Before cutover (before freeze)          |
-| `post-phase-3.sh`  | After cutover is complete               |
-| `pre-phase-4.sh`   | Before validation                       |
-| `post-phase-4.sh`  | After validation                        |
-| `pre-phase-5.sh`   | Before Bitnami cleanup                  |
-| `post-phase-5.sh`  | After Bitnami cleanup                   |
-| `pre-rollback.sh`  | Before rollback                         |
-| `post-rollback.sh` | After rollback                          |
-
-For example, send a Slack notification before cutover:
-
-```bash
-#!/bin/bash
-# hooks/pre-phase-3.sh
-curl -X POST "$SLACK_WEBHOOK" \
-  -H 'Content-Type: application/json' \
-  -d '{"text":"⚠️ Camunda migration cutover starting — downtime expected"}'
-```
-
-:::note
-Hook scripts are sourced (not forked), so they have access to all library functions and variables. A failing hook aborts the migration (due to `set -e`). Add `|| true` to make a hook best-effort.
-:::
-
-Typical hook use cases:
-
-- Pause external consumers before Phase 3 and resume them after validation.
-- Send change-management or on-call notifications at the start and end of cutover.
-- Run smoke tests after Phase 3 or Phase 4, and fail the migration if a critical endpoint is unavailable.
-- Update DNS or Ingress records for Keycloak after the new service becomes active.
+The migration scripts support custom hooks that run before or after each phase. See [Migration hooks](./index.md#migration-hooks) for the full reference and examples.
 
 ## Rollback
 
