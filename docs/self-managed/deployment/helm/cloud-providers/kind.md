@@ -259,7 +259,7 @@ Before deploying Camunda, you need to deploy the external services it depends on
 - PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
 - Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
-Run the operator deployment script, specifying the domain deployment mode and your chosen [secondary storage](#secondary-storage-options) backend:
+Run the operator deployment script, specifying the domain deployment mode:
 
 ```bash
 CAMUNDA_MODE=domain ./procedure/operators-deploy.sh
@@ -335,7 +335,7 @@ Before deploying Camunda, you need to deploy the external services it depends on
 - PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
 - Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
-Run the operator deployment script, specifying the no-domain deployment mode and your chosen [secondary storage](#secondary-storage-options) backend:
+Run the operator deployment script, specifying the no-domain deployment mode:
 
 ```bash
 CAMUNDA_MODE=no-domain ./procedure/operators-deploy.sh
