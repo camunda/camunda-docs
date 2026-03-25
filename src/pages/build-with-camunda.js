@@ -851,23 +851,23 @@ Available skills:
                 <p>Learn about Modeler, Zeebe, Operate, Tasklist, and more.</p>
               </Link>
               <Link
-                to={useBaseUrl("docs/apis-tools/working-with-apis-tools/")}
+                to={useBaseUrl("docs/self-managed/about-self-managed/")}
                 className={styles.exploreCard}
               >
                 <h3>Self-Managed</h3>
                 <p>Host and operate Camunda on your own infrastructure.</p>
               </Link>
               <Link
-                to={useBaseUrl(
-                  "docs/components/best-practices/best-practices-overview/"
-                )}
+                to={useBaseUrl("docs/apis-tools/working-with-apis-tools/")}
                 className={styles.exploreCard}
               >
                 <h3>APIs and tools</h3>
                 <p>Client libraries, REST APIs, SDKs, and integrations.</p>
               </Link>
               <Link
-                to={useBaseUrl("docs/self-managed/about-self-managed/")}
+                to={useBaseUrl(
+                  "docs/components/best-practices/best-practices-overview/"
+                )}
                 className={styles.exploreCard}
               >
                 <h3>Best Practices</h3>
