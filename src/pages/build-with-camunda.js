@@ -377,7 +377,7 @@ function BuildWithCamunda() {
             <h1 className={styles.heroTitle}>Build with Camunda</h1>
             <p className={styles.heroSub}>
               Process orchestration for developers. Go from zero to a running
-              workflow in under two minutes — then let your AI coding agent take
+              workflow in under two minutes, then let your AI coding agent take
               over.
             </p>
           </div>
@@ -400,7 +400,7 @@ function BuildWithCamunda() {
               <h2 className={styles.startCardTitle}>Free trial on SaaS</h2>
               <p className={styles.startCardDesc}>
                 Get a fully managed Camunda cluster in seconds. Nothing to
-                install — sign up and start modeling.
+                install, just sign up and start modeling.
               </p>
               <ul className={styles.checkList}>
                 <li>
@@ -411,7 +411,7 @@ function BuildWithCamunda() {
                   <CheckIcon color="#78a9ff" /> Web Modeler included
                 </li>
                 <li>
-                  <CheckIcon color="#78a9ff" /> 30 days free, full featured
+                  <CheckIcon color="#78a9ff" /> 30 days free, fully featured
                 </li>
                 <li>
                   <CheckIcon color="#78a9ff" /> Connect via{" "}
@@ -426,7 +426,7 @@ function BuildWithCamunda() {
                   Create free account <ArrowRight />
                 </Link>
                 <span className={styles.ctaNote}>
-                  ~60 seconds to first cluster
+                  ~60 seconds to your first cluster
                 </span>
               </div>
             </div>
@@ -446,14 +446,14 @@ function BuildWithCamunda() {
                 Run locally with the CLI <VersionBadge />
               </h2>
               <p className={styles.startCardDesc}>
-                Use{" "}
+                Use the{" "}
                 <Link
                   to={useBaseUrl("docs/next/apis-tools/c8ctl/getting-started/")}
                 >
                   <CodeBlock>c8ctl</CodeBlock>
                 </Link>
-                , the Camunda CLI tool. One command to install, one to start.
-                Full Camunda on your machine — engine, Operate, Tasklist,
+                Camunda CLI tool. One command to install, one to start. Full
+                Camunda on your machine, includes engine, Operate, Tasklist, and
                 connectors.
               </p>
               <ul className={styles.checkList}>
@@ -478,7 +478,7 @@ function BuildWithCamunda() {
                   See the install <ArrowRight />
                 </Link>
                 <span className={styles.ctaNote}>
-                  ~2 minutes to running engine
+                  ~2 minutes to a running engine
                 </span>
               </div>
             </div>
@@ -489,10 +489,10 @@ function BuildWithCamunda() {
         <section id="get-started" className={clsx("container", styles.section)}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Get started in three lines with c8ctl <VersionBadge />
+              Get started with c8ctl <VersionBadge />
             </h2>
             <p className={styles.sectionSub}>
-              Install{" "}
+              Just three lines to install{" "}
               <Link
                 to={useBaseUrl("docs/next/apis-tools/c8ctl/getting-started/")}
               >
@@ -529,13 +529,13 @@ $ c8ctl deploy ./my-process.bpmn`}
               >
                 <CodeBlock>c8ctl</CodeBlock>
               </Link>{" "}
-              gives you a single CLI for the full Camunda lifecycle — no browser
-              required.
+              gives you a single CLI for the full Camunda lifecycle with no
+              browser required.
             </p>
           </div>
           <div className={styles.commandGrid}>
             <div className={styles.commandCard}>
-              <h4>Cluster management</h4>
+              <h4>Manage your clusters</h4>
               <TerminalWindow>
                 {`$ c8ctl c8run start 8.9.0-alpha5
 $ c8ctl c8run stop
@@ -590,7 +590,7 @@ $ c8 resolve inc 2251799813685251`}
                   to={useBaseUrl("docs/next/apis-tools/c8ctl/getting-started/")}
                   style={{ color: "inherit", textDecoration: "none" }}
                 >
-                  Add Camunda skills as plugin to Claude
+                  Add Camunda skills as Claude plugin
                 </Link>
               </h4>
               <TerminalWindow title="Terminal">
@@ -742,7 +742,7 @@ Available skills:
             <h2 className={styles.sectionTitle}>Architecture at a glance</h2>
             <p className={styles.sectionSub}>
               Camunda's components work together to power process orchestration.
-              Click any component to explore its documentation.
+              Click any component to learn more.
             </p>
           </div>
           <div className={styles.archDiagram}>
@@ -832,18 +832,11 @@ Available skills:
                 to={useBaseUrl("docs/components/")}
                 className={styles.exploreCard}
               >
-                <h3>Components</h3>
+                <h3>Using Camunda</h3>
                 <p>Learn about Modeler, Zeebe, Operate, Tasklist, and more.</p>
               </Link>
               <Link
                 to={useBaseUrl("docs/apis-tools/working-with-apis-tools/")}
-                className={styles.exploreCard}
-              >
-                <h3>APIs and tools</h3>
-                <p>Client libraries, REST APIs, SDKs, and integrations.</p>
-              </Link>
-              <Link
-                to={useBaseUrl("docs/self-managed/about-self-managed/")}
                 className={styles.exploreCard}
               >
                 <h3>Self-Managed</h3>
@@ -853,6 +846,13 @@ Available skills:
                 to={useBaseUrl(
                   "docs/components/best-practices/best-practices-overview/"
                 )}
+                className={styles.exploreCard}
+              >
+                <h3>APIs and tools</h3>
+                <p>Client libraries, REST APIs, SDKs, and integrations.</p>
+              </Link>
+              <Link
+                to={useBaseUrl("docs/self-managed/about-self-managed/")}
                 className={styles.exploreCard}
               >
                 <h3>Best Practices</h3>
