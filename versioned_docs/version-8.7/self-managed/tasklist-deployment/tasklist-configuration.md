@@ -64,7 +64,7 @@ As of the 8.4 release, Tasklist is now compatible with [Amazon OpenSearch](https
 
 ### Settings to connect
 
-Tasklist supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch. Set the appropriate username/password combination in the configuration to use it.
+Tasklist supports [Basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch. Set the appropriate username/password combination in the configuration to use it.
 
 #### Settings to connect to a secured Elasticsearch or OpenSearch instance
 

@@ -73,7 +73,7 @@ The Orchestration Cluster is the core of Camunda 8, providing process automation
 | Orchestration Cluster gRPC API | `localhost:26500`                                                | gRPC API for high-performance process automation.                                                                                                                                                                          |
 
 :::note
-By default, the Orchestration Cluster uses [basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication). The full configuration uses Keycloak for [Management Identity authentication](/self-managed/concepts/authentication/authentication-to-management-components.md).
+By default, the Orchestration Cluster uses [Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication). The full configuration uses Keycloak for [Management Identity authentication](/self-managed/concepts/authentication/authentication-to-management-components.md).
 :::
 
 #### Management and modeling components (full configuration only)

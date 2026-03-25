@@ -94,7 +94,7 @@ As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https:
 
 ### Settings to connect
 
-Operate supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch and OpenSearch
+Operate supports [Basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch and OpenSearch
 
 Set the appropriate username/password combination in the configuration to use it.
 

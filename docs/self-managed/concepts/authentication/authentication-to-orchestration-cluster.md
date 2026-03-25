@@ -16,7 +16,7 @@ Orchestration Cluster authentication includes components such as [Zeebe](/compon
 
 The Orchestration Cluster supports two authentication methods:
 
-- [Basic Authentication](#basic-authentication)
+- [Basic authentication](#basic-authentication)
 - [OIDC](#oidc)
 
 ### Comparison of authentication methods
@@ -30,7 +30,7 @@ Additionally, an [Unprotected API mode](#unprotected-api-mode) is available for 
 
 ## Basic authentication
 
-With basic authentication, Orchestration Cluster components are protected with a username and password. User management is handled within the built-in Admin service.
+With Basic authentication, Orchestration Cluster components are protected with a username and password. User management is handled within the built-in Admin service.
 
 :::note
 This is the default authentication method for all installation options: [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/deployment/helm/index.md), and [Manual installation](/self-managed/deployment/manual/install.md).

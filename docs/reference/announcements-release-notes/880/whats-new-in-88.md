@@ -342,7 +342,7 @@ The following table summarizes where Orchestration Cluster Identity entities are
 
 #### Camunda 8 Self-Managed - Basic Authentication
 
-If you are using built-in user management (Basic Authentication), Tasklist and Operate specific built-in user management (using Elasticsearch/OpenSearch secondary storage) is no longer supported.
+If you are using built-in user management (Basic authentication), Tasklist and Operate specific built-in user management (using Elasticsearch/OpenSearch secondary storage) is no longer supported.
 
 - Administrators must migrate their users manually into the Orchestration Cluster.
 - You must ensure that **usernames are identical**, otherwise users will not be able to see their assigned tasks.
@@ -352,12 +352,12 @@ In a Basic authentication setup, the Orchestration Cluster provides full functio
 | Entity type    | Managed via                                   |
 | :------------- | :-------------------------------------------- |
 | Users          | Orchestration Cluster Identity                |
-| Clients        | n/a (not applicable for Basic Authentication) |
+| Clients        | n/a (not applicable for Basic authentication) |
 | Roles          | Orchestration Cluster Identity                |
 | Groups         | Orchestration Cluster Identity                |
 | Authorizations | Orchestration Cluster Identity                |
 | Tenants        | Orchestration Cluster Identity                |
-| Mapping Rules  | n/a (not applicable for Basic Authentication) |
+| Mapping Rules  | n/a (not applicable for Basic authentication) |
 
 ## APIs & tools {#apis-and-tools}
 
