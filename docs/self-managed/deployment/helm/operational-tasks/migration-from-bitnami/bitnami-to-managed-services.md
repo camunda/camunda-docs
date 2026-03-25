@@ -309,16 +309,6 @@ For Elasticsearch data migration to managed services, you have several options:
 
 <Tabs groupId="es-migration" queryString>
 
-<TabItem value="fresh-start" label="Fresh start (recommended)">
-
-Let Camunda rebuild Elasticsearch indexes from Zeebe on the next export. This is the simplest approach and works well if you don't need historical Operate/Tasklist data immediately available.
-
-After the Helm upgrade, Zeebe exporters will populate the new Elasticsearch target with current data. Historical data will be available as Zeebe replays events.
-
-No additional steps are required; this happens automatically.
-
-</TabItem>
-
 <TabItem value="elasticdump" label="elasticdump">
 
 Use the [`elasticdump`](https://github.com/elasticsearch-dump/elasticsearch-dump) npm tool to transfer indices from source to target. For example:

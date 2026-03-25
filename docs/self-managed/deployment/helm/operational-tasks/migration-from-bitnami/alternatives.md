@@ -165,7 +165,6 @@ pg_restore \
 | Target accessible from Kubernetes + shared storage possible | Filesystem snapshot/restore             |
 | Target accessible from Kubernetes + no shared storage       | `elasticdump` or S3 snapshot repository |
 | Target not accessible from Kubernetes                       | S3 snapshot repository                  |
-| Historical data not critical                                | Fresh start (let Zeebe re-export)       |
 | Large datasets (> 50 GB)                                    | Snapshot/restore (fastest method)       |
 
 ## Keycloak considerations
