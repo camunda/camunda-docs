@@ -187,6 +187,125 @@ function HelmIcon() {
   );
 }
 
+/* ─── Architecture card icons ─── */
+
+function ModelerIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"
+        fill="#78a9ff"
+        opacity="0.2"
+      />
+      <path
+        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
+function ConsoleIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3" stroke="#78a9ff" strokeWidth="1.5" />
+      <path
+        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
+function ZeebeIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        fill="rgba(120,169,255,0.15)"
+      />
+    </svg>
+  );
+}
+
+function OperateIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3" stroke="#78a9ff" strokeWidth="1.5" />
+      <path
+        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
+function TasklistIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <rect
+        x="3"
+        y="3"
+        width="18"
+        height="18"
+        rx="2"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        fill="none"
+      />
+      <path
+        d="M7 8l2 2 4-4"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7 15h10"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M7 18h6"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function ConnectorsIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M15 7h3a5 5 0 010 10h-3M9 17H6a5 5 0 010-10h3"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M8 12h8"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 function ArrowRight() {
   return (
     <svg
@@ -255,11 +374,7 @@ function BuildWithCamunda() {
         <header className={styles.hero}>
           <div className={styles.heroGlow} />
           <div className={clsx("container", styles.heroInner)}>
-            <h1 className={styles.heroTitle}>
-              Start building with
-              <br />
-              Camunda
-            </h1>
+            <h1 className={styles.heroTitle}>Build with Camunda</h1>
             <p className={styles.heroSub}>
               Process orchestration for developers. Go from zero to a running
               workflow in under two minutes — then let your AI coding agent take
@@ -331,9 +446,15 @@ function BuildWithCamunda() {
                 Run locally with the CLI <VersionBadge />
               </h2>
               <p className={styles.startCardDesc}>
-                Use <CodeBlock>c8ctl</CodeBlock>, the Camunda CLI tool. One
-                command to install, one to start. Full Camunda on your machine —
-                engine, Operate, Tasklist, connectors.
+                Use{" "}
+                <Link
+                  to={useBaseUrl("docs/next/apis-tools/c8ctl/getting-started/")}
+                >
+                  <CodeBlock>c8ctl</CodeBlock>
+                </Link>
+                , the Camunda CLI tool. One command to install, one to start.
+                Full Camunda on your machine — engine, Operate, Tasklist,
+                connectors.
               </p>
               <ul className={styles.checkList}>
                 <li>
@@ -370,11 +491,17 @@ function BuildWithCamunda() {
         <section className={clsx("container", styles.section)}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Get started in one line <VersionBadge />
+              Get started in one line with c8ctl <VersionBadge />
             </h2>
             <p className={styles.sectionSub}>
-              Install <CodeBlock>c8ctl</CodeBlock> from npm and spin up a full
-              self-managed Camunda cluster on your machine.
+              Install{" "}
+              <Link
+                to={useBaseUrl("docs/next/apis-tools/c8ctl/getting-started/")}
+              >
+                <CodeBlock>c8ctl</CodeBlock>
+              </Link>{" "}
+              from npm and spin up a full Self-Managed Camunda cluster on your
+              machine.
             </p>
           </div>
           <TerminalWindow title="Terminal">
@@ -389,6 +516,132 @@ $ c8ctl cluster start
 Camunda is running. Deploy your first process:
   $ c8ctl process deploy my-process.bpmn`}
           </TerminalWindow>
+        </section>
+
+        {/* ─── Everything from your terminal ─── */}
+        <section className={clsx("container", styles.section)}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>
+              Everything from your terminal <VersionBadge />
+            </h2>
+            <p className={styles.sectionSub}>
+              <Link
+                to={useBaseUrl("docs/next/apis-tools/c8ctl/getting-started/")}
+              >
+                <CodeBlock>c8ctl</CodeBlock>
+              </Link>{" "}
+              gives you a single CLI for the full Camunda lifecycle — no browser
+              required.
+            </p>
+          </div>
+          <div className={styles.commandGrid}>
+            <div className={styles.commandCard}>
+              <h4>Cluster management</h4>
+              <TerminalWindow>
+                {`$ c8ctl cluster start
+$ c8ctl cluster status
+$ c8ctl cluster stop`}
+              </TerminalWindow>
+            </div>
+            <div className={styles.commandCard}>
+              <h4>Deploy processes</h4>
+              <TerminalWindow>
+                {`$ c8ctl process deploy ./payment.bpmn
+$ c8ctl process list
+$ c8ctl process start payment-flow`}
+              </TerminalWindow>
+            </div>
+            <div className={styles.commandCard}>
+              <h4>Manage connectors</h4>
+              <TerminalWindow>
+                {`$ c8ctl connector list
+$ c8ctl connector install rest-connector
+$ c8ctl connector logs rest-connector`}
+              </TerminalWindow>
+            </div>
+            <div className={styles.commandCard}>
+              <h4>Monitor and debug</h4>
+              <TerminalWindow>
+                {`$ c8ctl instance list --active
+$ c8ctl instance inspect <id>
+$ c8ctl incident list`}
+              </TerminalWindow>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── Teach your AI Agent ─── */}
+        <section
+          className={clsx("container", styles.section, styles.sectionLast)}
+        >
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>
+              Teach your AI agent Camunda <VersionBadge />
+            </h2>
+            <p className={styles.sectionSub}>
+              Give your coding assistant Camunda superpowers. Deploy processes,
+              manage clusters, and query instances right from your AI workflow.
+            </p>
+          </div>
+          <div className={styles.aiGrid}>
+            <div className={styles.aiCard}>
+              <h4>
+                <Link
+                  to={useBaseUrl("docs/next/apis-tools/c8ctl/getting-started/")}
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
+                  Add Camunda skills with c8ctl
+                </Link>
+              </h4>
+              <TerminalWindow title="Terminal">
+                {`$ c8ctl ai install-skills
+✔ Installed Camunda skills for AI agents
+
+Available skills:
+  camunda.deploy    Deploy a BPMN process
+  camunda.start     Start a process instance
+  camunda.query     Query running instances
+  camunda.tasklist  Complete user tasks
+  camunda.operate   Inspect and resolve incidents`}
+              </TerminalWindow>
+            </div>
+            <div className={styles.aiCard}>
+              <h4>Add to Claude with MCP</h4>
+              <TerminalWindow title="Claude Config">
+                {`// claude_desktop_config.json
+{
+  "mcpServers": {
+    "camunda": {
+      "command": "npx",
+      "args": ["-y", "c8ctl", "mcp-serve"],
+      "env": {
+        "CAMUNDA_CLUSTER_URL":
+          "http://localhost:26500"
+      }
+    }
+  }
+}`}
+              </TerminalWindow>
+            </div>
+          </div>
+          <div className={styles.aiExamples}>
+            <h4>Then ask your agent:</h4>
+            <div className={styles.aiExampleGrid}>
+              <div className={styles.aiExampleItem}>
+                <span className={styles.aiPromptIcon}>💬</span>
+                "Deploy the order-process.bpmn and start an instance with
+                orderId=42"
+              </div>
+              <div className={styles.aiExampleItem}>
+                <span className={styles.aiPromptIcon}>💬</span>
+                "Show me all incidents on the payment-flow process"
+              </div>
+              <div className={styles.aiExampleItem}>
+                <span className={styles.aiPromptIcon}>💬</span>
+                "Scale the Zeebe brokers to 3 partitions"
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* ─── More ways to run ─── */}
@@ -488,6 +741,7 @@ Camunda is running. Deploy your first process:
                 to={useBaseUrl("docs/components/modeler/about-modeler/")}
                 className={styles.archBox}
               >
+                <ModelerIcon />
                 <strong>Modeler</strong>
                 <span>Design BPMN, DMN, and Forms</span>
               </Link>
@@ -497,6 +751,7 @@ Camunda is running. Deploy your first process:
                 )}
                 className={styles.archBox}
               >
+                <ConsoleIcon />
                 <strong>Console</strong>
                 <span>Manage clusters and settings</span>
               </Link>
@@ -507,6 +762,7 @@ Camunda is running. Deploy your first process:
                 to={useBaseUrl("docs/components/zeebe/zeebe-overview/")}
                 className={clsx(styles.archBox, styles.archBoxPrimary)}
               >
+                <ZeebeIcon />
                 <strong>Zeebe</strong>
                 <span>Workflow engine at the core</span>
               </Link>
@@ -517,6 +773,7 @@ Camunda is running. Deploy your first process:
                 to={useBaseUrl("docs/components/operate/operate-introduction/")}
                 className={styles.archBox}
               >
+                <OperateIcon />
                 <strong>Operate</strong>
                 <span>Monitor and troubleshoot</span>
               </Link>
@@ -526,6 +783,7 @@ Camunda is running. Deploy your first process:
                 )}
                 className={styles.archBox}
               >
+                <TasklistIcon />
                 <strong>Tasklist</strong>
                 <span>Human task management</span>
               </Link>
@@ -535,123 +793,10 @@ Camunda is running. Deploy your first process:
                 )}
                 className={styles.archBox}
               >
+                <ConnectorsIcon />
                 <strong>Connectors</strong>
                 <span>Integrate external systems</span>
               </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── Everything from your terminal ─── */}
-        <section className={clsx("container", styles.section)}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>
-              Everything from your terminal <VersionBadge />
-            </h2>
-            <p className={styles.sectionSub}>
-              <CodeBlock>c8ctl</CodeBlock> gives you a single CLI for the full
-              Camunda lifecycle — no browser required.
-            </p>
-          </div>
-          <div className={styles.commandGrid}>
-            <div className={styles.commandCard}>
-              <h4>Cluster management</h4>
-              <TerminalWindow>
-                {`$ c8ctl cluster start
-$ c8ctl cluster status
-$ c8ctl cluster stop`}
-              </TerminalWindow>
-            </div>
-            <div className={styles.commandCard}>
-              <h4>Deploy processes</h4>
-              <TerminalWindow>
-                {`$ c8ctl process deploy ./payment.bpmn
-$ c8ctl process list
-$ c8ctl process start payment-flow`}
-              </TerminalWindow>
-            </div>
-            <div className={styles.commandCard}>
-              <h4>Manage connectors</h4>
-              <TerminalWindow>
-                {`$ c8ctl connector list
-$ c8ctl connector install rest-connector
-$ c8ctl connector logs rest-connector`}
-              </TerminalWindow>
-            </div>
-            <div className={styles.commandCard}>
-              <h4>Monitor and debug</h4>
-              <TerminalWindow>
-                {`$ c8ctl instance list --active
-$ c8ctl instance inspect <id>
-$ c8ctl incident list`}
-              </TerminalWindow>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── Teach your AI Agent ─── */}
-        <section
-          className={clsx("container", styles.section, styles.sectionLast)}
-        >
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>
-              Teach your AI agent Camunda <VersionBadge />
-            </h2>
-            <p className={styles.sectionSub}>
-              Give your coding assistant Camunda superpowers — deploy processes,
-              manage clusters, and query instances right from your AI workflow.
-            </p>
-          </div>
-          <div className={styles.aiGrid}>
-            <div className={styles.aiCard}>
-              <h4>Add Camunda skills with c8ctl</h4>
-              <TerminalWindow title="Terminal">
-                {`$ c8ctl ai install-skills
-✔ Installed Camunda skills for AI agents
-
-Available skills:
-  camunda.deploy    Deploy a BPMN process
-  camunda.start     Start a process instance
-  camunda.query     Query running instances
-  camunda.tasklist  Complete user tasks
-  camunda.operate   Inspect and resolve incidents`}
-              </TerminalWindow>
-            </div>
-            <div className={styles.aiCard}>
-              <h4>Add to Claude with MCP</h4>
-              <TerminalWindow title="Claude Config">
-                {`// claude_desktop_config.json
-{
-  "mcpServers": {
-    "camunda": {
-      "command": "npx",
-      "args": ["-y", "c8ctl", "mcp-serve"],
-      "env": {
-        "CAMUNDA_CLUSTER_URL":
-          "http://localhost:26500"
-      }
-    }
-  }
-}`}
-              </TerminalWindow>
-            </div>
-          </div>
-          <div className={styles.aiExamples}>
-            <h4>Then ask your agent:</h4>
-            <div className={styles.aiExampleGrid}>
-              <div className={styles.aiExampleItem}>
-                <span className={styles.aiPromptIcon}>💬</span>
-                "Deploy the order-process.bpmn and start an instance with
-                orderId=42"
-              </div>
-              <div className={styles.aiExampleItem}>
-                <span className={styles.aiPromptIcon}>💬</span>
-                "Show me all incidents on the payment-flow process"
-              </div>
-              <div className={styles.aiExampleItem}>
-                <span className={styles.aiPromptIcon}>💬</span>
-                "Scale the Zeebe brokers to 3 partitions"
-              </div>
             </div>
           </div>
         </section>

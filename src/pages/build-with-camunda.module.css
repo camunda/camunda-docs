@@ -173,7 +173,7 @@
 .sectionSub {
   font-size: 1.05rem;
   color: var(--muted-color);
-  max-width: 560px;
+  max-width: 540px;
   margin: 0 auto;
   line-height: 1.6;
 }
@@ -526,6 +526,10 @@
 .archBox strong {
   font-size: 1rem;
   color: var(--heading-color);
+}
+
+.archBox svg {
+  margin-bottom: 0.4rem;
 }
 
 .archBox span {
