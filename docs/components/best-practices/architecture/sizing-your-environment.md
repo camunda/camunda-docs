@@ -24,25 +24,26 @@ Data availability latency is the time between an event occurring in the engine a
 
 Data availability latency is influenced by:
 
-- **Exporter throughput:** The rate at which the Camunda Exporter can write events to Elasticsearch.
+- **Exporter throughput:** The rate at which the Camunda Exporter can write events to Elasticsearch (ES).
 - **Elasticsearch indexing speed:** How quickly ES can index incoming documents.
 - **Elasticsearch disk usage:** High disk utilization (above ~70%) significantly increases indexing latency. Monitor ES disk usage and scale storage before hitting this threshold.
 
 ### Disk space
 
-The workflow engine itself will store data along every process instance, especially to keep the current state persistent. This is unavoidable. In case there are user tasks, data is also sent to Tasklist and kept there, until tasks are completed.
+The workflow engine itself will store data along every process instance, especially to persist the current state. This is unavoidable. If your processes include user tasks, data is also sent to Tasklist and kept there until the tasks are completed.
 
-Furthermore, data is also sent to Operate and Optimize, which store data in Elasticsearch. These tools keep historical audit data for the configured retention times. The total amount of disk space can be reduced by using **data retention settings**. We typically delete data in Operate after 30 to 90 days, but keep it in Optimize for a longer period of time to allow more analysis. A good rule of thumb is something between 6 and 18 months.
+In addition, data is sent to Operate and Optimize, which store it in ES. These tools keep historical audit data for the configured retention times.
+You can reduce the total disk usage by adjusting data retention settings. Typically, Camunda deletes data in Operate after 30 to 90 days, but keep it in Optimize for a longer period to support analysis. A good rule of thumb is 6 to 18 months.
 
 :::note
-Elasticsearch needs enough memory available to load a large amount of this data into memory.
+Elasticsearch needs enough available memory to load a large amount of this data into memory.
 :::
 
-:::caution Disk space estimates are approximate
+:::important Disk space estimates are approximate
 The kb/PI model below is a **rough approximation**. In practice, disk consumption depends on multiple factors and varies non-linearly:
 
 - **Payload size:** A 0.5 KB payload vs. 11 KB payload can change disk consumption by 10-20x.
-- **Flow node count per process:** More flow nodes = more Elasticsearch documents.
+- **Flow node count per process:** More flow nodes mean more ES documents.
 - **Variable cardinality:** Object variables with nested structures create exponentially more Elasticsearch nested documents.
 - **Write amplification in Zeebe:** Compaction, WAL, and index overhead increase raw disk usage beyond the logical data size.
 
@@ -51,7 +52,7 @@ For non-trivial payloads (>1 KB) or long retention periods, **run your own disk 
 
 <!-- TODO: Update disk space measurements for 8.8/8.9. The following numbers were measured with Camunda 8 SaaS 1.2.4 using the typical payload (~0.5 KB). They are significantly outdated and do not reflect current storage behavior, especially with the realistic payload (~11 KB). -->
 
-The following approximate disk space measurements were taken using Camunda 8 SaaS 1.2.4 with a [typical payload of 15 process variables (~0.5 KB)](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/typical_payload.json). These numbers are **outdated** and serve only as a rough order-of-magnitude guide:
+The following approximate disk space measurements are taken using Camunda 8 SaaS 1.2.4 with a [typical payload of 15 process variables (~0.5 KB)](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/typical_payload.json). These numbers are **outdated** and serve only as a rough order-of-magnitude estimate:
 
 - Zeebe: 75 kb / PI.
 - Operate: 57 kb / PI.
@@ -70,20 +71,20 @@ Disk_ES   = PI_in_retention x (base_kb + avg_payload_KB x payload_factor + avg_f
 
 Using your throughput and retention settings, you can calculate the required disk space for your scenario. Example (using the outdated 1.2.4 constants for illustration):
 
-| Indicator                  | Calculation method |          Value | Comments                                                                                           |
-| :------------------------- | :----------------: | -------------: | :------------------------------------------------------------------------------------------------- |
-| Process instances per day  |                    |         20,000 |                                                                                                    |
-| **Runtime**                |                    |                |                                                                                                    |
-| Typical process cycle time |     \* 5 days      |        100,000 | How long is a process instance typically active? Determines the number of active process instances |
-| Disk space for Zeebe       |     \* 75 kib      |       7.15 GiB | (Converted into GB by / 1024 / 1024)                                                               |
-| Disk space for Tasklist    |     \* 21 kib      |       0.67 GiB |                                                                                                    |
-| **Operate**                |                    |                |                                                                                                    |
-| PI in retention time       |     \* 30 day      |        600,000 |                                                                                                    |
-| Disk space                 |     \* 57 kib      |      32.62 GiB |                                                                                                    |
-| **Optimize**               |                    |                |                                                                                                    |
-| PI in retention time       |    \* 6 months     |      3,600,000 |                                                                                                    |
-| Disk space                 |     \* 21 kib      |      72.10 GiB |                                                                                                    |
-| **Sum**                    |                    | **113.87 GiB** |                                                                                                    |
+| Indicator                  | Calculation method |          Value | Notes                                                                                               |
+| :------------------------- | :----------------: | -------------: | :-------------------------------------------------------------------------------------------------- |
+| Process instances per day  |                    |         20,000 |                                                                                                     |
+| **Runtime**                |                    |                |                                                                                                     |
+| Typical process cycle time |     \* 5 days      |        100,000 | How long is a process instance typically active? Determines the number of active process instances. |
+| Disk space for Zeebe       |     \* 75 kib      |       7.15 GiB | Converted into GB by / 1024 / 1024.                                                                 |
+| Disk space for Tasklist    |     \* 21 kib      |       0.67 GiB |                                                                                                     |
+| **Operate**                |                    |                |                                                                                                     |
+| PI in retention time       |     \* 30 day      |        600,000 |                                                                                                     |
+| Disk space                 |     \* 57 kib      |      32.62 GiB |                                                                                                     |
+| **Optimize**               |                    |                |                                                                                                     |
+| PI in retention time       |    \* 6 months     |      3,600,000 |                                                                                                     |
+| Disk space                 |     \* 21 kib      |      72.10 GiB |                                                                                                     |
+| **Sum**                    |                    | **113.87 GiB** |                                                                                                     |
 
 ### Impact of Optimize
 
@@ -131,7 +132,7 @@ As a rough guide, expect single-digit millisecond processing time per process no
 
 The closer you push throughput to the limits, the more latency you will get. This is because the different requests compete for hardware resources, especially disk write operations. As a consequence, whenever cycle time and latency matters to you, you should plan for hardware buffer to not utilize your cluster too much. This makes sure your latency does not go up because of resource contention. A good rule of thumb is to multiply your average load by 20. This means you cannot only accommodate unexpected peak loads, but also have more free resources on average, keeping latency down.
 
-| Indicator                                                      |    Number | Calculation method | Comment                                                                                 |
+| Indicator                                                      |    Number | Calculation method | Notes                                                                                   |
 | :------------------------------------------------------------- | --------: | :----------------: | :-------------------------------------------------------------------------------------- |
 | Onboarding instances per year                                  | 5,000,000 |                    | Business input, but irrelevant                                                          |
 | Expected process instances on peak day                         |   150,000 |                    | Business input                                                                          |
@@ -154,7 +155,7 @@ Payload size has a **multiplicative effect**: it affects Zeebe storage, Elastics
 There are a few general rules regarding payload size:
 
 - The maximum [variable size per process instance is limited](/components/concepts/variables.md#variable-size-limitation), currently to roughly 3 MB.
-- We don't recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/components/best-practices/development/handling-data-in-processes.md).
+- Camunda does not recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/components/best-practices/development/handling-data-in-processes.md).
 - Every [partition](/components/zeebe/technical-concepts/partitions.md) of the Zeebe installation can typically handle up to 1 GB of payload in total. Larger payloads can lead to slower processing. For example, if you run one million process instances with 4 KB of data each, you end up with 3.9 GB of data, and you should run at least four partitions. In reality, this typically means six partitions, as you want to run the number of partitions as a multiple of the replication factor, which by default is three.
 
 ### Peak loads
@@ -203,7 +204,7 @@ Your choice of secondary storage affects the sizing tables in this guide. The Sa
 
 Throughput defines how many process instances can be executed in a certain timeframe.
 
-It is typically easy to estimate the number of **process instances per day** you need to execute. If you only know the number of process instances per year, we recommend dividing this number by 250 (average number of working days in a year).
+It is typically easy to estimate the number of **process instances per day** you need to execute. If you only know the number of process instances per year, Camunda recommends dividing this number by 250 (average number of working days in a year).
 
 But the hardware sizing depends more on the **number of BPMN tasks** in a process model. For example, you will have a much higher throughput for processes with one service task than for processes with 30 service tasks.
 
@@ -211,20 +212,20 @@ If you already know your future process model, you can use this to count the num
 
 <div bpmn="best-practices/sizing-your-environment-assets/customer_onboarding.bpmn" callouts="task1,task2,task3,task4,task5" />
 
-If you don't yet know the number of service tasks, we recommend assuming 10 service tasks as a rule of thumb.
+If you don't yet know the number of service tasks, Camunda recommends assuming 10 service tasks as a rule of thumb.
 
 The number of tasks per process allows you to calculate the required number of **tasks per day (tasks/day)** which can also be converted into **tasks per second (tasks/s)** (divide by 24 hours \* 60 minutes \* 60 seconds).
 
 **Example:**
 
-| Indicator                          |    Number | Calculation method | Comment                                     |
-| :--------------------------------- | --------: | :----------------: | :------------------------------------------ |
-| Onboarding instances per year      | 5,000,000 |                    | Business input                              |
-| Process instances per business day |    20,000 |       / 250        | average number of working days in a year    |
-| Tasks per day                      |   100,000 |        \* 5        | Tasks in the process model as counted above |
-| Tasks per second                   |      1.16 |   / (24\*60\*60)   | Seconds per day                             |
+| Indicator                          |    Number | Calculation method | Notes                                        |
+| :--------------------------------- | --------: | :----------------: | :------------------------------------------- |
+| Onboarding instances per year      | 5,000,000 |                    | Business input.                              |
+| Process instances per business day |    20,000 |       / 250        | Average number of working days in a year.    |
+| Tasks per day                      |   100,000 |        \* 5        | Tasks in the process model as counted above. |
+| Tasks per second                   |      1.16 |   / (24\*60\*60)   | Seconds per day.                             |
 
-In most cases, we define throughput per day, as this time frame is easier to understand. But in high-performance use cases you might need to define the throughput per second.
+In most cases, Camunda defines throughput per day, as this time frame is easier to understand. But in high-performance use cases you might need to define the throughput per second.
 
 ## Understand sizing and scalability behavior
 
@@ -245,35 +246,37 @@ All components are clustered to provide high-availability, fault-tolerance, and 
 
 The Orchestration Cluster scales horizontally by adding more nodes (pods). This is **limited by the [number of partitions](/components/zeebe/technical-concepts/partitions.md)** configured for a cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your hardware. The **[number of partitions can be scaled up](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) after the cluster is initially provisioned**, but not yet scaled down.
 
-Camunda 8 runs on Kubernetes. Every component is operated as a pod that gets resources assigned. These resources can be vertically scaled (get more or less hardware resources assigned dynamically) within certain limits. Note that vertical scaling does not always result in more throughput, as the various components have dependencies on each other. This is a complex topic and requires running experiments with benchmarks. In general, we recommend starting with the configurations described in the [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) sizing pages, then adjusting based on your workload.
+Camunda 8 runs on Kubernetes. Every component is operated as a pod that gets resources assigned. These resources can be vertically scaled (get more or less hardware resources assigned dynamically) within certain limits. Note that vertical scaling does not always result in more throughput, as the various components have dependencies on each other. This is a complex topic and requires running experiments with benchmarks. In general, Camunda recommends starting with the configurations described in the [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) sizing pages, then adjusting based on your workload.
 
 Note that Camunda licensing does not depend on the provisioned hardware resources, making it easy to size according to your needs.
 
 ## Plan non-production environments
 
-All clusters can be used for development, testing, integration, Q&A, and production. In Camunda 8 SaaS, production and test environments are organized via separate organizations within Camunda 8 to ease the management of clusters, while also minimizing the risk of accidentally accessing a production cluster.
+All clusters can be used for development, testing, integration, Q&A, and production. In Camunda 8 SaaS, production and test environments are organized as separate organizations within Camunda 8 to simplify cluster management and minimize the risk of accidentally accessing a production cluster.
 
-Note that functional unit tests that are written in Java and use [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test/), will use an in-memory broker in unit tests, so no development cluster is needed for this use case.
+:::note
+Java-based functional unit tests that use [`zeebe-process-test`](https://github.com/camunda-cloud/zeebe-process-test/) run with an in-memory broker, so no development cluster is needed for this use case.
+:::
 
-For typical integration or functional test environments, you can normally just deploy a small cluster, even if your production environment is sized bigger. This is typically sufficient, as functional tests typically run much smaller workloads.
+For typical integration or functional test environments, you can usually deploy a small cluster even if your production environment is sized larger. This is typically sufficient, as functional tests run much smaller workloads.
 
-Load or performance tests ideally run on the same sizing configuration as your production instance to yield reliable results.
+Load or performance tests should ideally run on the same sizing configuration as your production cluster to yield reliable results.
 
-A typical customer set-up consists of:
+A typical customer setup consists of:
 
-- 1 Production cluster
-- 1 Integration or pre-prod cluster (equal in size to your anticipated production cluster if you want to run load tests or benchmarks)
-- 1 Test cluster
-- Multiple developer clusters
+- A production cluster.
+- An integration or pre-production cluster (equal in size to your anticipated production cluster if you want to run load tests or benchmarks).
+- A test cluster.
+- Multiple developer clusters.
 
-Ideally, every active developer runs its own cluster, so that the workflow engine does not need to be shared amongst developers. Otherwise, clusters are not isolated, which can lead to errors if for example developer A deploys a new version of the same process as developer B. Typically, developer clusters can be deleted when they are no longer used, as no data needs to be kept, so you might not need one cluster per developer that works with Camunda 8 at some point in time. And using in-memory unit tests further reduces the contention on developer clusters.
+Ideally, each active developer runs their own cluster so the workflow engine does not need to be shared among developers. Otherwise, clusters are not isolated, which can lead to errors, for example, if Developer A deploys a new version of the same process as Developer B. Developer clusters can typically be deleted when they are no longer needed, since no data needs to be retained. As a result, you might not need one cluster per developer over time. Using in-memory unit tests further reduces contention on developer clusters.
 
-However, some customers do share a Camunda 8 cluster amongst various developers for economic reasons. This can work well if everybody is aware of the problems that can arise.
+However, some customers share a Camunda 8 cluster among developers for economic reasons. This can work well if everyone is aware of the issues that can arise.
 
 ## Next steps
 
 Now that you understand the factors that influence sizing:
 
 - **SaaS customers:** [Size your SaaS cluster](sizing-saas.md) to select the right cluster size.
-- **Self-Managed admins:** See [Self-Managed resource planning](sizing-self-managed.md) for starting-point Kubernetes configurations.
+- **Self-Managed admins:** Provision your Kubernetes cluster using these [baseline resource settings](sizing-self-managed.md).
 - **Validate sizing:** [Run your own benchmarks](sizing-benchmarks.md) to test your specific workload.
