@@ -92,9 +92,8 @@ Optimize is an optional component that provides process analytics and reporting.
 
 #### Why Optimize matters for sizing
 
-- Optimize runs an **importer** that reads data from Elasticsearch (exported by the Camunda Exporter) and writes it back to its own Elasticsearch indices for analytics and reporting.
-- This creates **additional load on Elasticsearch**: both read (importer fetching pages) and write (indexing into Optimize indices).
-- In Camunda 8.8+, the Camunda Exporter and the Elasticsearch exporter (used by Optimize) run **in the same thread** within the broker. This means Optimize export directly competes with core platform export for throughput.
+- Optimize reads data from Elasticsearch (exported by the Camunda Exporter) and writes it back to its own Elasticsearch indices for analytics and reporting. This creates additional load on Elasticsearch.
+- In Camunda 8.8+, the Camunda Exporter and the Elasticsearch exporter run in the same thread within the broker. This means Optimize export directly competes with core platform export for throughput.
 - Benchmarks show a **25-50% throughput reduction** when Optimize is enabled vs. disabled, depending on workload and payload size.
 
 #### What Optimize affects
@@ -102,23 +101,23 @@ Optimize is an optional component that provides process analytics and reporting.
 - **Throughput:** Fewer tasks/second achievable at the same hardware level when Optimize is running.
 - **Disk space:** Optimize stores significant amounts of data in Elasticsearch, especially with large payloads. In testing, 128 Gi of ES disk was consumed in under 12 hours at 1 PI/s with the realistic payload (~11 KB) and 30-day retention.
 - **Elasticsearch resources:** More CPU, memory, and disk are needed for ES when Optimize is enabled.
-- **Import time:** Optimize import time increases approximately linearly with payload size. Larger payloads (e.g., 11 KB realistic vs. 0.5 KB typical) result in proportionally longer import times.
+- **Import time:** Optimize import time increases approximately linearly with payload size. Larger payloads (for example, 11 KB realistic vs. 0.5 KB typical) result in proportionally longer import times.
 - **Report loading times:** As historical data accumulates in Elasticsearch, Optimize report loading times increase approximately linearly.
 
 #### Mitigations
 
-- Consider running Optimize on a **separate Elasticsearch instance** to isolate its load from the core platform.
-- Use **variable filtering** to reduce the amount of data exported/imported by Optimize.
-- Tune **retention periods** -- shorter retention means less data in ES, better performance.
-- **Disable variable import** entirely if variables are not needed in Optimize reports.
+- Consider running Optimize on a separate Elasticsearch instance to isolate its load from the core platform.
+- Use variable filtering to reduce the amount of data exported/imported by Optimize.
+- Tune retention periods: shorter retention means less data in ES, and better performance.
+- Disable variable import entirely if variables are not needed in Optimize reports.
 
-The sizing tables in the [SaaS](sizing-saas.md) and [Self-Managed](sizing-self-managed.md) pages provide separate configurations with and without Optimize to help you plan accordingly.
+The sizing guidance for [SaaS](sizing-saas.md#sizing-tables) and [Self-Managed](sizing-self-managed.md#baseline-resource-configuration) provide configurations with and without Optimize to help you plan accordingly.
 
 ### Latency and cycle time
 
-In some use cases, the cycle time of a process (or sometimes even the cycle time of single tasks) matters. For example, you want to provide a REST endpoint that starts a process instance to calculate a score for a customer. This process needs to execute four service tasks, but the REST request should return a response synchronously, no later than 250 milliseconds after the request.
+In some use cases, process cycle time (or even individual task cycle time) matters. For example, you might expose a REST endpoint that starts a process instance to calculate a customer score. The process runs four service tasks, and the REST request must return synchronously within 250 ms.
 
-While the cycle time of service tasks depends very much on what you do in these tasks, the overhead of the workflow engine itself can be measured.
+While service-task duration depends on the work performed, you can measure the workflow engine’s own overhead.
 
 <!-- TODO: Replace the following latency measurements with current 8.8/8.9 benchmark data. The old measurements (Camunda 8 1.2.4: ~10 ms/node, ~50 ms remote worker latency) are outdated. -->
 
@@ -128,16 +127,25 @@ The latency measurements below are approximate and were last validated against a
 Actual latency is highly environment-dependent — factors like network latency between workers and the cluster, disk I/O speed (commit latency), and cloud region placement significantly affect these numbers.
 :::
 
-As a rough guide, expect single-digit millisecond processing time per process node and approximately 50 ms latency to process service tasks in remote workers when running worker code in the same cloud region as the Camunda cluster. Hence, to execute 4 service tasks results in roughly 200-250 ms workflow engine overhead.
+As a rough estimate, you can expect:
 
-The closer you push throughput to the limits, the more latency you will get. This is because the different requests compete for hardware resources, especially disk write operations. As a consequence, whenever cycle time and latency matters to you, you should plan for hardware buffer to not utilize your cluster too much. This makes sure your latency does not go up because of resource contention. A good rule of thumb is to multiply your average load by 20. This means you cannot only accommodate unexpected peak loads, but also have more free resources on average, keeping latency down.
+- Single-digit millisecond processing time per process node.
+- Approximately 50 ms latency to process service tasks in remote workers when running worker code in the same cloud region as the Camunda cluster.
 
-| Indicator                                                      |    Number | Calculation method | Notes                                                                                   |
-| :------------------------------------------------------------- | --------: | :----------------: | :-------------------------------------------------------------------------------------- |
-| Onboarding instances per year                                  | 5,000,000 |                    | Business input, but irrelevant                                                          |
-| Expected process instances on peak day                         |   150,000 |                    | Business input                                                                          |
-| Process instances per second within business hours on peak day |      5.20 |   / (8\*60\*60)    | Only looking at seconds of the 8 business hours of a day                                |
-| Process instances per second including buffer                  |    104.16 |       \* 20        | Adding some buffer is recommended in critical high-performance or low-latency use cases |
+Hence, executing four service tasks results in roughly 200-250 ms workflow engine overhead.
+
+As you push throughput toward the cluster’s limits, latency increases because requests compete for resources, especially disk writes. If cycle time and latency matter, leave enough headroom and avoid running the cluster near full utilization to prevent resource contention.
+
+:::tip
+A good rule of thumb is to size for about **20x your average load**. This gives you capacity for peaks and keeps latency low during normal operation.
+:::
+
+| Indicator                                                      |    Number | Calculation method | Notes                                                                                    |
+| :------------------------------------------------------------- | --------: | :----------------: | :--------------------------------------------------------------------------------------- |
+| Onboarding instances per year                                  | 5,000,000 |                    | Business input.                                                                          |
+| Expected process instances on peak day                         |   150,000 |                    | Business input.                                                                          |
+| Process instances per second within business hours on peak day |      5.20 |   / (8\*60\*60)    | Only looking at seconds of the 8 business hours of a day.                                |
+| Process instances per second including buffer                  |    104.16 |       \* 20        | Adding some buffer is recommended in critical high-performance or low-latency use cases. |
 
 ### Payload size
 
