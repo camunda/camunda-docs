@@ -140,39 +140,42 @@ As you push throughput toward the cluster’s limits, latency increases because 
 A good rule of thumb is to size for about **20x your average load**. This gives you capacity for peaks and keeps latency low during normal operation.
 :::
 
-| Indicator                                                      |    Number | Calculation method | Notes                                                                                    |
-| :------------------------------------------------------------- | --------: | :----------------: | :--------------------------------------------------------------------------------------- |
-| Onboarding instances per year                                  | 5,000,000 |                    | Business input.                                                                          |
-| Expected process instances on peak day                         |   150,000 |                    | Business input.                                                                          |
-| Process instances per second within business hours on peak day |      5.20 |   / (8\*60\*60)    | Only looking at seconds of the 8 business hours of a day.                                |
-| Process instances per second including buffer                  |    104.16 |       \* 20        | Adding some buffer is recommended in critical high-performance or low-latency use cases. |
+| Indicator                                                      |    Number | Calculation method | Notes                                                                                      |
+| :------------------------------------------------------------- | --------: | :----------------: | :----------------------------------------------------------------------------------------- |
+| Onboarding instances per year                                  | 5,000,000 |                    | Business input.                                                                            |
+| Expected process instances on peak day                         |   150,000 |                    | Business input.                                                                            |
+| Process instances per second within business hours on peak day |      5.20 |   / (8\*60\*60)    | Only looking at the seconds within the eight business hours of a day.                      |
+| Process instances per second including buffer                  |    104.16 |       \* 20        | Adding some buffer is recommended for critical, high-performance or low-latency use cases. |
 
 ### Payload size
 
-Every process instance can hold a payload (known as [process variables](/components/concepts/variables.md)). The payload of all running process instances must be managed by the runtime workflow engine, and all data of running and ended process instances is also forwarded to Operate and Tasklist.
+Each process instance can hold a payload, known as [process variables](/components/concepts/variables.md)). The workflow engine must manage the variables for all running instances, and data from both running and completed process instances is forwarded to Operate and Tasklist.
 
-The data you attach to a process instance (process variables) influences resource requirements. For example, it makes a big difference if you only add one or two strings (requiring around 1 KB of space) to your process instances, or a full JSON document containing 1 MB. Hence, the payload size is an important factor when looking at sizing.
+Process variable size affects resource requirements. For example, there’s a big difference between storing a few strings (around 1 KB) and storing a full 1 MB JSON document. That’s why payload size is a key sizing factor.
 
 Camunda's official benchmarks use two reference payloads:
 
-- **Typical payload:** [typical_payload.json](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/typical_payload.json) (~0.5 KB, 15 simple variables) -- used for baseline measurements.
-- **Realistic payload:** [realisticPayload.json](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB) -- used for the reference sizing benchmarks. This better represents real-world payloads.
+- [**Typical payload**](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/typical_payload.json): Used for baseline measurements (~0.5 KB, 15 simple variables).
+- [**Realistic payload**](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json): Used for the reference sizing benchmarks. This better represents real-world payloads (~11 KB).
 
-Payload size has a **multiplicative effect**: it affects Zeebe storage, Elasticsearch export volume, Optimize import time, and query/report performance. An 11 KB payload vs. a 0.5 KB payload can change disk consumption by 10-20x.
+:::note
+Payload size has a multiplicative effect, affecting Zeebe storage, Elasticsearch export volume, Optimize import time, and query/report performance. An 11 KB payload vs. a 0.5 KB payload can change disk consumption by **10-20x**.
+:::
 
-There are a few general rules regarding payload size:
+Consider these general rules for payload size:
 
-- The maximum [variable size per process instance is limited](/components/concepts/variables.md#variable-size-limitation), currently to roughly 3 MB.
-- Camunda does not recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/components/best-practices/development/handling-data-in-processes.md).
-- Every [partition](/components/zeebe/technical-concepts/partitions.md) of the Zeebe installation can typically handle up to 1 GB of payload in total. Larger payloads can lead to slower processing. For example, if you run one million process instances with 4 KB of data each, you end up with 3.9 GB of data, and you should run at least four partitions. In reality, this typically means six partitions, as you want to run the number of partitions as a multiple of the replication factor, which by default is three.
+- The maximum [variable size per process instance is limited](/components/concepts/variables.md#variable-size-limitation), currently to roughly three MB.
+- Camunda does not recommend storing large amounts of data in your process context. Refer to our [best practices on handling data in processes](/components/best-practices/development/handling-data-in-processes.md) for more details.
+- Each [partition](/components/zeebe/technical-concepts/partitions.md) of the Zeebe installation can typically handle up to one GB of payload in total. Larger payloads can lead to slower processing. For example,
+  one million process instances with four KB each is about 3.9 GB, so you need at least four partitions. In practice, you’d typically use six partitions, since the number of partitions is usually a multiple of the replication factor (three by default).
 
 ### Peak loads
 
-In most scenarios, your load will be volatile and not constant. For example, your company might start 90% of their monthly process instances in the same day of the month. The **ability to handle those peaks is the more crucial requirement and should drive your decision** instead of looking at the average load.
+In most scenarios, your load will be volatile rather than constant. For example, your company might start 90% of its monthly process instances on a single day of the month. The **ability to handle those peaks is the more crucial requirement and should drive your decision**, rather than the average load.
 
-In this example, that one day with the peak load defines your overall throughput requirements.
+In this example, that single peak day defines your overall throughput requirements.
 
-Sometimes, looking at peaks might also mean that you are not looking at all 24 hours of a day, but only 8 business hours, or probably the busiest 2 hours of a day, depending on your typical workload.
+In addition, sizing for peaks may mean you shouldn’t assume a full 24-hour day. Instead, you might size for just the eight business hours, or even the busiest two hours—depending on your workload.
 
 ### Secondary storage
 
@@ -181,32 +184,29 @@ Starting with Camunda 8.9, the platform supports three secondary storage backend
 #### Elasticsearch (default)
 
 - The **most mature and most benchmarked** option.
-- **Required** if you use Optimize (Optimize does not yet support RDBMS).
-- All sizing tables in this guide assume Elasticsearch unless stated otherwise.
+- Required if you use Optimize.
 - Provides full-text search capabilities used by Operate and Tasklist.
+
+:::important
+Sizing data provided throughout this guide assumes Elasticsearch unless stated otherwise.
+:::
 
 #### OpenSearch
 
-- Drop-in alternative to Elasticsearch with a similar resource profile.
-- Supported for all components including Optimize (with some feature limitations -- see [supported environments](/reference/supported-environments.md)).
+- A drop-in alternative to Elasticsearch with a similar resource profile.
+- Supported for all components including Optimize (with some feature limitations). See [supported environments](/reference/supported-environments.md) for more details.
 - Sizing recommendations for Elasticsearch generally apply to OpenSearch as well.
 
 #### RDBMS
 
-- A fundamentally different storage paradigm: relational database instead of document store.
-- For the full list of supported databases, see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#supported-rdbms).
-- Key trade-offs:
-  - Write throughput is approximately **70% of Elasticsearch** for equivalent hardware.
-  - Different resource profile: CPU/memory-oriented rather than disk/IOPS-oriented.
-  - **No Optimize support** -- if you need Optimize, you must also run Elasticsearch alongside RDBMS.
-  - **Scales primarily vertically** (larger instance) rather than horizontally like Elasticsearch. Plan initial sizing with more headroom, as adding capacity is more disruptive.
-  - Potentially lower total disk space required for the same data volume (preliminary benchmarks suggest this, but detailed results are still being validated).
+- A different storage paradigm: a relational database instead of a document store. See the full list of [supported databases](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#supported-rdbms).
+- A different resource profile: CPU/memory-oriented rather than disk/IOPS-oriented.
+- Write throughput is approximately **70% of Elasticsearch** on equivalent hardware.
+- **No Optimize support**: If you need Optimize, you must run Elasticsearch alongside RDBMS.
+- **Scales primarily vertically** rather than horizontally like Elasticsearch. Plan initial sizing with more headroom, as adding capacity is more disruptive.
+- Potentially lower total disk space required for the same data volume (preliminary benchmarks suggest this, but detailed results are still being validated).
 - Ideal for organizations that already operate a supported RDBMS at scale and want to avoid adding Elasticsearch to their infrastructure.
 <!-- TODO: Link to RDBMS benchmark results page once PR #8159 is merged -->
-
-:::note
-Your choice of secondary storage affects the sizing tables in this guide. The SaaS sizing tables assume Elasticsearch. For Self-Managed deployments using RDBMS, adjust throughput expectations downward by approximately 30% compared to the Elasticsearch-based tables, and replace the Elasticsearch resource block with appropriately sized RDBMS resources.
-:::
 
 ### Throughput
 
