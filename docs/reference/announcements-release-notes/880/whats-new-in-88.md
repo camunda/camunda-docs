@@ -325,7 +325,7 @@ After you deploy all Camunda 8 components in a Self-Managed environment, you wil
 - The Identity Migration App that migrates these entities from Management Identity into Orchestration Cluster Identity must be run during your Camunda 8.7 to 8.8 upgrade. Instructions on enabling and configuring the Identity Migration App in the 8.7 to 8.8 migration guide are available for Helm and also docker-compose/bare Java deployments.
 - Authorization checks are enabled by default for any migrated cluster using the Helm chart. The automated migration ensures that your users and clients can access the UIs and APIs like before.
 - Management Identity, Keycloak and Postgres are no longer needed for an Orchestration Cluster. They are only needed when using Web Modeler, Console or Optimize.
-  - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic Authentication method.
+  - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic authentication method.
   - A special setup is no longer required for Keycloak as it is now integrated like any other Identity Provider via OpenID Connect (OIDC). Management Identity relies by default on Keycloak, but you can also configure it to use any OIDC-compatible Identity Provider.
 
 The following table summarizes where Orchestration Cluster Identity entities are managed in Camunda 8.8 Self-Managed:
@@ -342,22 +342,22 @@ The following table summarizes where Orchestration Cluster Identity entities are
 
 #### Camunda 8 Self-Managed - Basic Authentication
 
-If you are using built-in user management (Basic Authentication), Tasklist and Operate specific built-in user management (using Elasticsearch/OpenSearch secondary storage) is no longer supported.
+If you are using built-in user management (Basic authentication), Tasklist and Operate specific built-in user management (using Elasticsearch/OpenSearch secondary storage) is no longer supported.
 
 - Administrators must migrate their users manually into the Orchestration Cluster.
 - You must ensure that **usernames are identical**, otherwise users will not be able to see their assigned tasks.
 
-In a Basic Authentication setup, the Orchestration Cluster provides full functionality:
+In a Basic authentication setup, the Orchestration Cluster provides full functionality:
 
 | Entity type    | Managed via                                   |
 | :------------- | :-------------------------------------------- |
 | Users          | Orchestration Cluster Identity                |
-| Clients        | n/a (not applicable for Basic Authentication) |
+| Clients        | n/a (not applicable for Basic authentication) |
 | Roles          | Orchestration Cluster Identity                |
 | Groups         | Orchestration Cluster Identity                |
 | Authorizations | Orchestration Cluster Identity                |
 | Tenants        | Orchestration Cluster Identity                |
-| Mapping Rules  | n/a (not applicable for Basic Authentication) |
+| Mapping Rules  | n/a (not applicable for Basic authentication) |
 
 ## APIs & tools {#apis-and-tools}
 
