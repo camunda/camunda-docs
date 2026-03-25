@@ -21,7 +21,7 @@ For information about the Cluster Metrics endpoint monitoring model and limitati
 The metrics endpoint:
 
 - Uses HTTPS
-- Requires Basic Authentication
+- Requires Basic authentication
 - Returns metrics in Prometheus format
 
 ### Endpoint format

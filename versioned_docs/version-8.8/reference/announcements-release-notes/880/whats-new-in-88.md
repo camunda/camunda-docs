@@ -206,8 +206,8 @@ In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-i
                     <li>
                         <p><strong>Authentication:</strong> Supports three authentication modes:</p>
                         <ul>
-                             <li><p><strong>No Authentication:</strong> No authentication required for API access. Form-based authentication in the UI. Users and groups are managed in Identity.</p></li>
-                            <li><p><strong>Basic Authentication:</strong> Basic authentication for API access. Form-based authentication in the UI. Users and groups are managed in Identity.</p></li>
+                             <li><p><strong>No authentication:</strong> No authentication required for API access. Form-based authentication in the UI. Users and groups are managed in Identity.</p></li>
+                            <li><p><strong>Basic authentication:</strong> Basic authentication for API access. Form-based authentication in the UI. Users and groups are managed in Identity.</p></li>
                             <li><p><strong>OIDC:</strong> OpenID Connect with any compatible Identity Provider (for example, Keycloak, Microsoft EntraID, Okta).</p></li>
                         </ul>
                     </li>
@@ -342,7 +342,7 @@ The following table summarizes where Orchestration Cluster Identity entities are
 | Tenants        | Orchestration Cluster Identity |
 | Mapping Rules  | Orchestration Cluster Identity |
 
-#### Camunda 8 Self-Managed - Basic Authentication
+#### Camunda 8 Self-Managed - Basic authentication
 
 If you are using built-in user management (Basic authentication), Tasklist and Operate specific built-in user management (using ES/OS as storage) is no longer supported.
 
