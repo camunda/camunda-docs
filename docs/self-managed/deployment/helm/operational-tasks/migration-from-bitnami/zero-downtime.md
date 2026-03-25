@@ -33,26 +33,13 @@ Use this guide only if all of the following are true:
 
 The zero-downtime migration replaces the backup/restore phases with continuous replication:
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                  Zero-Downtime Migration Phases                     │
-│                                                                     │
-│  Phase 1 * Deploy Targets          --- no downtime ---------------- │
-│    Install operators + create target clusters alongside Bitnami     │
-│                                                                     │
-│  Phase 2 * Enable Replication      --- no downtime ---------------- │
-│    Set up PG logical replication + ES CCR / continuous snapshots     │
-│                                                                     │
-│  Phase 3 * Sync & Verify           --- no downtime ---------------- │
-│    Wait for replication lag -> 0, verify data consistency            │
-│                                                                     │
-│  Phase 4 * Instantaneous Cutover   --- no downtime ---------------- │
-│    Helm upgrade to switch backends (rolling restart, no freeze)      │
-│                                                                     │
-│  Phase 5 * Validate & Cleanup      --- no downtime ---------------- │
-│    Verify health, tear down replication, remove old resources        │
-└─────────────────────────────────────────────────────────────────────┘
-```
+| Phase | Name                  | Downtime | Description                                                     |
+| ----- | --------------------- | -------- | --------------------------------------------------------------- |
+| 1     | Deploy targets        | None     | Install operators and create target clusters alongside Bitnami  |
+| 2     | Enable replication    | None     | Set up PG logical replication and ES CCR / continuous snapshots |
+| 3     | Sync and verify       | None     | Wait for replication lag to reach 0, verify data consistency    |
+| 4     | Instantaneous cutover | None     | Helm upgrade to switch backends (rolling restart, no freeze)    |
+| 5     | Validate and clean up | None     | Verify health, tear down replication, remove old resources      |
 
 ### Key differences from the standard migration
 
