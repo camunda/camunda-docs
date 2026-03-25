@@ -66,7 +66,7 @@ Contact your Customer Success Manager to increase the cluster size beyond 4x. Th
 <!-- TODO: Validate "with Optimize" numbers against 8.9 benchmarks. The numbers above were measured with Camunda 8.8. Also confirm whether the "max throughput" boundary condition is defined as backpressure < 10% and p99 process duration < 1s, or another SLO. -->
 
 :::note
-The numbers in the tables were measured using Camunda 8 (version 8.8), [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes cluster, and using a [realistic process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) with a [realistic payload](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB, containing a mix of BPMN symbols such as tasks, events, call activities, multi-instance, sub-processes, and DMN). To calculate day-based metrics, an equal distribution over 24 hours is assumed.
+The numbers in the tables were measured using Camunda 8 (version 8.8), [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes cluster, and using a [realistic process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) with a [realistic payload](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). To calculate day-based metrics, an equal distribution over 24 hours is assumed.
 :::
 
 **\*** Tasks (including service, send, and user tasks, among others) completed per day are the primary metric, as this is easy to measure and strongly influences resource consumption. This number assumes a constant load throughout the day. Tasks/day and Tasks/second are scaled linearly.
@@ -94,4 +94,4 @@ This is related to the limited resources provided to Elasticsearch, which can ca
 
 ## Next steps
 
-To validate these numbers for your specific workload, see [Run benchmarks](sizing-benchmarks.md).
+Validate your chosen configuration by [running your own benchmarks](sizing-benchmarks.md).

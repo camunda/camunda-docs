@@ -53,11 +53,11 @@ For non-trivial payloads (>1 KB) or long retention periods, **run your own disk 
 
 The following approximate disk space measurements were taken using Camunda 8 SaaS 1.2.4 with a [typical payload of 15 process variables (~0.5 KB)](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/typical_payload.json). These numbers are **outdated** and serve only as a rough order-of-magnitude guide:
 
-- Zeebe: 75 kb / PI
-- Operate: 57 kb / PI
-- Optimize: 21 kb / PI
-- Tasklist: 21 kb / PI
-- Sum: 174 kb / PI
+- Zeebe: 75 kb / PI.
+- Operate: 57 kb / PI.
+- Optimize: 21 kb / PI.
+- Tasklist: 21 kb / PI.
+- Sum: 174 kb / PI.
 
 A more accurate model would account for payload size, flow node count, and variable cardinality:
 
@@ -276,4 +276,4 @@ Now that you understand the factors that influence sizing:
 
 - **SaaS customers:** [Size your SaaS cluster](sizing-saas.md) to select the right cluster size.
 - **Self-Managed admins:** See [Self-Managed resource planning](sizing-self-managed.md) for starting-point Kubernetes configurations.
-- **Validating sizing:** [Run your own benchmarks](sizing-benchmarks.md) to test your specific workload against a cluster.
+- **Validate sizing:** [Run your own benchmarks](sizing-benchmarks.md) to test your specific workload.
