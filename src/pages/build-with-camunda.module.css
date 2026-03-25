@@ -601,6 +601,101 @@
   background: rgba(120, 169, 255, 0.06);
 }
 
+/* ─── Modeler note ─── */
+.modelerNote {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--muted-color);
+}
+
+.modelerNote p {
+  margin-bottom: 0rem;
+}
+
+.collapsible {
+  display: inline-block;
+  text-align: left;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 0;
+  width: 620px;
+  max-width: 100%;
+  margin: 1rem auto;
+}
+
+.collapsible summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--heading-color);
+  padding: 0.7rem 1.2rem;
+  list-style: none;
+}
+
+.collapsible summary::-webkit-details-marker {
+  display: none;
+}
+
+.collapsible summary::before {
+  content: "▸ ";
+  font-size: 0.85rem;
+}
+
+.collapsible[open] summary::before {
+  content: "▾ ";
+}
+
+.collapsibleContent {
+  padding: 0 1.2rem 0.8rem;
+}
+
+.collapsibleContent ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.collapsibleContent li {
+  font-size: 0.9rem;
+}
+
+.downloadButtons {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff !important;
+  background: var(--ifm-color-primary);
+  border-radius: 8px;
+  text-decoration: none !important;
+  transition: background 0.2s;
+}
+
+.downloadButton:hover {
+  background: var(--ifm-color-primary-dark);
+  text-decoration: none !important;
+  color: #ffffff !important;
+}
+
+.downloadMeta {
+  font-size: 0.8rem;
+  color: var(--muted-color);
+  margin-bottom: 0;
+}
+
 /* ─── Command grid ─── */
 .commandGrid {
   display: grid;

@@ -371,7 +371,7 @@ function BuildWithCamunda() {
                     <CheckIcon color="#fc5d0d" /> Works on macOS, Linux, Windows
                   </li>
                   <li>
-                    <CheckIcon color="#fc5d0d" /> Desktop Modeler included
+                    <CheckIcon color="#fc5d0d" /> Desktop Modeler for modeling
                   </li>
                   <li>
                     <CheckIcon color="#fc5d0d" /> AI agent skills built in
@@ -427,6 +427,85 @@ $ c8ctl c8run start
 Camunda is running. Deploy your first process:
 $ c8ctl deploy ./my-process.bpmn`}
           </TerminalWindow>
+
+          <div className={styles.modelerNote}>
+            <p>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                style={{ marginRight: "0.4rem", verticalAlign: "middle" }}
+              >
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="7"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                <path
+                  d="M8 7v4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+              </svg>
+              Download Desktop Modeler to design and edit BPMN diagrams, DMN
+              decisions, and forms.
+            </p>
+            <details className={styles.collapsible}>
+              <summary>Download Desktop Modeler</summary>
+              <div className={styles.collapsibleContent}>
+                <div className={styles.downloadButtons}>
+                  <a
+                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-mac-arm64.dmg"
+                    className={styles.downloadButton}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    macOS (Apple Silicon)
+                  </a>
+                  <a
+                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-mac-x64.dmg"
+                    className={styles.downloadButton}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    macOS (Intel)
+                  </a>
+                  <a
+                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-win-x64.exe"
+                    className={styles.downloadButton}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Windows
+                  </a>
+                  <a
+                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-linux-x64.tar.gz"
+                    className={styles.downloadButton}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Linux
+                  </a>
+                </div>
+                <p className={styles.downloadMeta}>
+                  Version 5.45 ·{" "}
+                  <Link
+                    to={useBaseUrl(
+                      "docs/components/modeler/desktop-modeler/install-the-modeler/"
+                    )}
+                  >
+                    Installation guide
+                  </Link>
+                </p>
+              </div>
+            </details>
+          </div>
         </section>
 
         {/* ─── Everything from your terminal ─── */}
@@ -736,6 +815,9 @@ Available skills:
           <div className="container">
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Explore the docs</h2>
+              <p className={styles.sectionSub}>
+                Browse the Camunda 8 guides, resources, and API reference docs.
+              </p>
             </div>
             <div className={styles.exploreGrid}>
               <Link
