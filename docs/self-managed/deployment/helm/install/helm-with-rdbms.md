@@ -1,14 +1,17 @@
 ---
 id: helm-with-rdbms
-sidebar_label: Install with RDBMS
-title: Helm installation with RDBMS as secondary storage
-description: "Deploy Camunda 8 on Kubernetes using Helm charts with an external RDBMS as secondary storage. Step-by-step guide for production-ready installations."
+sidebar_label: RDBMS example deployment
+title: RDBMS example deployment for Camunda with Helm
+description: "Focused walkthrough for teams choosing an external RDBMS as secondary storage within the Helm production installation flow."
 ---
 
-This guide walks you through deploying Camunda 8 using Helm charts with an external relational database (RDBMS) as secondary storage instead of a document-store secondary backend (Elasticsearch or OpenSearch).
+This guide is a focused walkthrough for teams using an external relational database (RDBMS) as secondary storage in the Helm production installation flow, instead of a document-store secondary backend (Elasticsearch or OpenSearch).
+
+Use [production install](/self-managed/deployment/helm/install/production/index.md) as the primary installation guide. Use this page when you want additional RDBMS-specific examples for that flow.
 
 Related guides:
 
+- [Production install](/self-managed/deployment/helm/install/production/index.md)
 - [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
 - [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
