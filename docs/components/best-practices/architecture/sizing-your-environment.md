@@ -16,7 +16,7 @@ Understand the factors that influence Camunda 8 sizing. Once you understand thos
 <span id="camunda-8-self-managed" />
 <span id="running-experiments-and-benchmarks" />
 
-## Understand influencing factors
+## Sizing influencing factors
 
 ### Data availability latency
 
@@ -210,21 +210,19 @@ Sizing data provided throughout this guide assumes Elasticsearch unless stated o
 
 ### Throughput
 
-Throughput defines how many process instances can be executed in a certain timeframe.
+Throughput defines how many process instances can be executed within a certain timeframe.
 
-It is typically easy to estimate the number of **process instances per day** you need to execute. If you only know the number of process instances per year, Camunda recommends dividing this number by 250 (average number of working days in a year).
+It is typically easy to estimate the number of process instances per day you need to execute. If you only know the number of process instances per year, Camunda recommends dividing this number by 250 (average number of working days in a year).
 
-But the hardware sizing depends more on the **number of BPMN tasks** in a process model. For example, you will have a much higher throughput for processes with one service task than for processes with 30 service tasks.
-
-If you already know your future process model, you can use this to count the number of tasks for your process. For example, the following onboarding process contains five service tasks in a typical execution.
+However, hardware sizing depends more on the **number of BPMN tasks** in a process model. If you already know your future process model, you can use it to count the number of tasks in the process. For example, the following onboarding process contains five service tasks in a typical execution:
 
 <div bpmn="best-practices/sizing-your-environment-assets/customer_onboarding.bpmn" callouts="task1,task2,task3,task4,task5" />
 
-If you don't yet know the number of service tasks, Camunda recommends assuming 10 service tasks as a rule of thumb.
+:::tip
+If you don't yet know the number of service tasks, Camunda recommends assuming **10 service tasks** as a rule of thumb.
+:::
 
-The number of tasks per process allows you to calculate the required number of **tasks per day (tasks/day)** which can also be converted into **tasks per second (tasks/s)** (divide by 24 hours \* 60 minutes \* 60 seconds).
-
-**Example:**
+The number of tasks per process allows you to calculate the number of tasks per day. You can also convert this to tasks per second. For example:
 
 | Indicator                          |    Number | Calculation method | Notes                                        |
 | :--------------------------------- | --------: | :----------------: | :------------------------------------------- |
@@ -233,30 +231,32 @@ The number of tasks per process allows you to calculate the required number of *
 | Tasks per day                      |   100,000 |        \* 5        | Tasks in the process model as counted above. |
 | Tasks per second                   |      1.16 |   / (24\*60\*60)   | Seconds per day.                             |
 
-In most cases, Camunda defines throughput per day, as this time frame is easier to understand. But in high-performance use cases you might need to define the throughput per second.
+In most cases, Camunda defines throughput per day, as this time frame is easier to understand. However, in high-performance use cases, you might need to define the throughput per second.
 
-## Understand sizing and scalability behavior
+## Camunda 8.8+ resource consumption
 
-Camunda 8.8 introduced a **streamlined architecture** that consolidates the broker, gateway, Operate, Tasklist, and Identity into a single application (the **Orchestration Cluster**). This changes how you think about resource consumption compared to older versions.
+Camunda 8.8 introduced a streamlined architecture that consolidates the broker, gateway, Operate, Tasklist, and Identity into a single application, the [Orchestration Cluster](components/orchestration-cluster.md). This changes how you think about resource consumption compared to older versions.
 
-:::note Upgrading from pre-8.8?
 If you are upgrading from a pre-8.8 version, expect different resource profiles:
 
-- The consolidated application requires **more CPU per broker** compared to 8.7 (approximately 75% more CPU -- e.g., 2 to 3.5 cores -- to maintain equivalent throughput).
-- Throughput at default 2 CPU cores drops ~35% vs. 8.7.x.
-- With properly aligned resources (3.5 CPU cores), 8.8.x achieves **similar throughput** to 8.7.x with **significantly lower latency** (approximately 2x improvement).
-- The streamlined architecture **reduces operational complexity** (fewer pods to manage) but consolidates resource consumption into fewer, larger pods.
+- The Orchestration Cluster requires **more CPU per broker** compared to 8.7 (approximately 75% more CPU, for example, 2 to 3.5 cores, to maintain equivalent throughput).
+- Throughput at the default 2 CPU cores drops ~35% compared to 8.7.x.
+- With properly aligned resources (3.5 CPU cores), 8.8.x achieves similar throughput to 8.7.x with **significantly lower latency** (approximately a 2x improvement).
+- The streamlined architecture reduces operational complexity (fewer pods to manage) but consolidates resource consumption into fewer, larger pods.
 
-The sizing tables in this guide reflect the **8.8+ architecture**.
+:::important
+Sizing data in this guide reflects the **8.8+ architecture**.
 :::
 
-All components are clustered to provide high-availability, fault-tolerance, and resiliency.
+All components are clustered to provide high-availability, fault-tolerance, and resilience.
 
-The Orchestration Cluster scales horizontally by adding more nodes (pods). This is **limited by the [number of partitions](/components/zeebe/technical-concepts/partitions.md)** configured for a cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your hardware. The **[number of partitions can be scaled up](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) after the cluster is initially provisioned**, but not yet scaled down.
+The Orchestration Cluster scales horizontally by adding more nodes (pods). This is limited by the [number of partitions](/components/zeebe/technical-concepts/partitions.md) configured for a cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your hardware. The [number of partitions can be scaled up](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) after the cluster is initially provisioned, but not yet scaled down.
 
-Camunda 8 runs on Kubernetes. Every component is operated as a pod that gets resources assigned. These resources can be vertically scaled (get more or less hardware resources assigned dynamically) within certain limits. Note that vertical scaling does not always result in more throughput, as the various components have dependencies on each other. This is a complex topic and requires running experiments with benchmarks. In general, Camunda recommends starting with the configurations described in the [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) sizing pages, then adjusting based on your workload.
+Camunda 8 runs on Kubernetes. Every component runs as a pod with assigned resources. These resources can be scaled vertically (assigned more or fewer resources dynamically) within certain limits. Vertical scaling does not always increase throughput, since the components depend on each other.
 
-Note that Camunda licensing does not depend on the provisioned hardware resources, making it easy to size according to your needs.
+:::note
+Camunda licensing does not depend on the provisioned hardware resources, making it easy to size according to your needs.
+:::
 
 ## Plan non-production environments
 
