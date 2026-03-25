@@ -17,7 +17,10 @@ The following requirements and limitations apply:
 - Users, groups and group memberships are not automatically migrated since they are usually retrieved from an IdP.
 - Once migration has been triggered, it's strongly recommended not to create new identity data on Camunda 7. Even if migration is attempted again, the new data might not be migrated.
 - In order for authorizations to work correctly after migration, process definitions, forms, DRD and decision definitions need to have the same IDs in Camunda 8 as in Camunda 7. This should be the case if you have already migrated runtime and history data.
-- Tenant memberships are migrated as part of their respective tenants and not tracked individually. This means that if a tenant is migrated, all its memberships are migrated as well, and if a tenant is skipped, so will be its memberships. For this reason, if the migration of an individual tenant membership fails (for example, due to a missing user), it cannot be retried.
+- Tenant memberships are migrated as part of their respective tenants and are not tracked individually.
+  - If a tenant is migrated, all its memberships are migrated as well. If a tenant is skipped, its memberships are also skipped.
+  - If the migration of an individual tenant membership fails (for example, due to a missing user), it cannot be retried.
+  - The `--list-skipped` and `--list-migrated` options do not list individual tenant memberships.
 
 ### Supported entities
 
