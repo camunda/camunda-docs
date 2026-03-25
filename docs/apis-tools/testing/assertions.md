@@ -446,20 +446,15 @@ assertThat(processInstance).hasLocalVariableSatisfies(
 
 ## Judge assertions <span class="badge badge--alpha">Alpha</span>
 
-:::note
-Judge assertions are an [alpha feature](/components/early-access/alpha/alpha-features.md). APIs, dependencies, and configuration are likely to change. Learn more about [alpha features](/components/early-access/alpha/alpha-features.md) and [general availability](/reference/announcements-release-notes/release-policy.md#general-availability-ga).
+:::important
+Judge assertions are an [alpha feature](/components/early-access/alpha/alpha-features.md). APIs, dependencies, and configuration are likely to change.
 :::
 
 You can use LLM-based assertions to verify that a process variable satisfies a natural language expectation. The
-assertion sends the variable value and your expectation to a configured LLM, which scores the match on a scale from
-0.0 to 1.0. The assertion passes if the score meets or exceeds the configured threshold (default `0.5`).
+assertion sends the variable value and your expectation to a configured LLM, which scores how well they match on a scale from
+0.0 to 1.0. The assertion passes if the score meets or exceeds the configured threshold, which is set to 0.5 by default.
 
-:::info Prerequisites
-Judge assertions require a configured chat model provider. See the [judge configuration](configuration.md#judge-configuration)
-section for setup instructions.
-:::
-
-The LLM evaluates the match between the expectation and the actual variable value using the following scale:
+The LLM evaluates how well the expectation matches the actual variable value using the following scale:
 
 | Score | Meaning                                                                                                                |
 | ----- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -470,6 +465,11 @@ The LLM evaluates the match between the expectation and the actual variable valu
 | 0.0   | Not satisfied at all, or the actual value is empty.                                                                    |
 
 The LLM may return any value between these anchor points (for example, 0.6 or 0.85). You can change the threshold in the [judge configuration](configuration.md#judge-configuration) or per assertion chain using [`withJudgeConfig`](#withjudgeconfig).
+
+:::info Prerequisites
+Judge assertions require a configured chat model provider. See the [judge configuration](configuration.md#judge-configuration)
+section for setup instructions.
+:::
 
 ### hasVariableSatisfiesJudge
 
@@ -484,7 +484,7 @@ assertThat(processInstance)
 ### hasLocalVariableSatisfiesJudge
 
 Assert that a local variable in the scope of a given element satisfies a natural language expectation. Use the BPMN
-element ID or an [ElementSelector](utilities.md#element-selector) to identify the element.
+element ID or an [element selector](utilities.md#element-selector) to identify the element.
 
 ```java
 // By BPMN element ID

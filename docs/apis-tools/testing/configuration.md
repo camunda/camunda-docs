@@ -14,12 +14,9 @@ Configuration is provided through `application.yml` (or `application.properties`
 Starter, or through a `camunda-container-runtime.properties` file when using the Java client.
 
 :::tip Environment variable resolution (Java client)
-When using the Java client, properties in `camunda-container-runtime.properties` support automatic environment variable
-resolution. If a property is not explicitly set, it is resolved from an environment variable. The variable name is
-derived by prepending the `CAMUNDA_PROCESSTEST_` prefix, replacing dots with underscores, removing hyphens, and
-uppercasing everything.
+When using the Java client, properties in `camunda-container-runtime.properties` support automatic environment variable resolution. If a property is not explicitly set, it is resolved from an environment variable. The variable name is derived by prepending the `CAMUNDA_PROCESSTEST_` prefix, replacing dots with underscores, removing hyphens, and converting everything to uppercase.
 
-For example, `judge.chatModel.apiKey` resolves from `CAMUNDA_PROCESSTEST_JUDGE_CHATMODEL_APIKEY`.
+For example, `judge.chatModel.apiKey` resolves to `CAMUNDA_PROCESSTEST_JUDGE_CHATMODEL_APIKEY`.
 :::
 
 ## Testcontainers runtime
@@ -831,8 +828,8 @@ for the following packages:
 
 ## Judge configuration <span class="badge badge--alpha">Alpha</span>
 
-:::note
-Judge configuration is an [alpha feature](/components/early-access/alpha/alpha-features.md). APIs, dependencies, and configuration are likely to change. Learn more about [alpha features](/components/early-access/alpha/alpha-features.md) and [general availability](/reference/announcements-release-notes/release-policy.md#general-availability-ga).
+:::important
+Judge configuration is an [alpha feature](/components/early-access/alpha/alpha-features.md). APIs, dependencies, and configuration are likely to change.
 :::
 
 CPT supports LLM-based assertions that evaluate process variables against natural-language expectations. To use
@@ -861,13 +858,13 @@ via [LangChain4j](https://docs.langchain4j.dev/). If you provide a custom `ChatM
 
 The following built-in providers are available:
 
-| Provider          | `provider` value    | Required properties | Notes                                                                     |
-| ----------------- | ------------------- | ------------------- | ------------------------------------------------------------------------- |
-| OpenAI            | `openai`            | `model`, `api-key`  | —                                                                         |
-| Anthropic         | `anthropic`         | `model`, `api-key`  | —                                                                         |
-| Amazon Bedrock    | `amazon-bedrock`    | `model`, `region`   | `api-key` optional; see [details](#amazon-bedrock)                        |
-| Azure OpenAI      | `azure-openai`      | `model`, `endpoint` | `api-key` optional; see [details](#azure-openai)                          |
-| OpenAI-compatible | `openai-compatible` | `model`, `base-url` | For local models or OpenAI-format APIs; see [details](#openai-compatible) |
+| Provider          | `provider` value    | Required properties | Notes                                                                           |
+| ----------------- | ------------------- | ------------------- | ------------------------------------------------------------------------------- |
+| OpenAI            | `openai`            | `model`, `api-key`  | —                                                                               |
+| Anthropic         | `anthropic`         | `model`, `api-key`  | —                                                                               |
+| Amazon Bedrock    | `amazon-bedrock`    | `model`, `region`   | `api-key` optional. See [more details](#amazon-bedrock).                        |
+| Azure OpenAI      | `azure-openai`      | `model`, `endpoint` | `api-key` optional. See [more details](#azure-openai).                          |
+| OpenAI-compatible | `openai-compatible` | `model`, `base-url` | For local models or OpenAI-format APIs. See [more details](#openai-compatible). |
 
 For OpenAI and Anthropic, the [quick start](#quick-start) example applies directly — change the `provider` and
 `model` values. The providers below have additional configuration.
