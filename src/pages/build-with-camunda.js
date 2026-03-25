@@ -233,7 +233,7 @@ function ArrowRight() {
 
 /* ─── Reusable components ─── */
 
-function VersionBadge({ version = "8.9+" }) {
+function VersionBadge({ version = "Camunda 8.9+" }) {
   return <span className={styles.versionBadge}>{version}</span>;
 }
 
@@ -307,8 +307,8 @@ function BuildWithCamunda() {
                 </span>
                 <h2 className={styles.startCardTitle}>Free trial on SaaS</h2>
                 <p className={styles.startCardDesc}>
-                  Get a fully managed Camunda cluster in seconds. Nothing to
-                  install, just sign up and start modeling.
+                  Get your own fully managed Camunda cluster. Nothing to
+                  install, just sign up and start modeling today.
                 </p>
                 <ul className={styles.checkList}>
                   <li>
