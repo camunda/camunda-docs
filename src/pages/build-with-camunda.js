@@ -4,6 +4,10 @@ import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./build-with-camunda.module.css";
+import K8sSvgIcon from "../components/CamundaSelfManaged/icons/kubernetes.svg";
+import DockerSvgIcon from "../components/CamundaSelfManaged/icons/docker.svg";
+import AwsSvgIcon from "../components/CamundaSelfManaged/icons/aws.svg";
+import GcpSvgIcon from "../components/CamundaSelfManaged/icons/gcp.svg";
 
 /* ─── Icon components ─── */
 
@@ -69,122 +73,23 @@ function CheckIcon({ color = "#78a9ff" }) {
 }
 
 function KubernetesIcon() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 2L3 7v10l9 5 9-5V7l-9-5z"
-        stroke="#78a9ff"
-        strokeWidth="1.5"
-        fill="none"
-      />
-      <circle cx="12" cy="12" r="3" stroke="#78a9ff" strokeWidth="1.5" />
-    </svg>
-  );
+  return <K8sSvgIcon width="72" height="72" />;
 }
 
 function DockerIcon() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-      <rect
-        x="1"
-        y="10"
-        width="22"
-        height="10"
-        rx="2"
-        stroke="#78a9ff"
-        strokeWidth="1.5"
-        fill="none"
-      />
-      <rect
-        x="4"
-        y="6"
-        width="4"
-        height="4"
-        stroke="#78a9ff"
-        strokeWidth="1.2"
-        fill="none"
-      />
-      <rect
-        x="10"
-        y="6"
-        width="4"
-        height="4"
-        stroke="#78a9ff"
-        strokeWidth="1.2"
-        fill="none"
-      />
-      <rect
-        x="10"
-        y="2"
-        width="4"
-        height="4"
-        stroke="#78a9ff"
-        strokeWidth="1.2"
-        fill="none"
-      />
-    </svg>
-  );
+  return <DockerSvgIcon width="72" height="72" />;
 }
 
 function AWSIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M3 15c2-2 5-3 9-3s7 1 9 3"
-        stroke="#fc5d0d"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M7 18l-2 2M17 18l2 2"
-        stroke="#fc5d0d"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M8 8l2 5h4l2-5"
-        stroke="#fc5d0d"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
+  return <AwsSvgIcon width="72" height="72" />;
 }
 
 function GCPIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-      <polygon
-        points="12,2 22,18 2,18"
-        stroke="#78a9ff"
-        strokeWidth="1.5"
-        fill="none"
-      />
-      <circle cx="12" cy="13" r="3" stroke="#78a9ff" strokeWidth="1.5" />
-    </svg>
-  );
+  return <GcpSvgIcon width="72" height="72" />;
 }
 
 function HelmIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-      <circle
-        cx="12"
-        cy="12"
-        r="9"
-        stroke="#78a9ff"
-        strokeWidth="1.5"
-        fill="none"
-      />
-      <path d="M12 3v18M3 12h18" stroke="#78a9ff" strokeWidth="1.2" />
-      <path
-        d="M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"
-        stroke="#78a9ff"
-        strokeWidth="0.8"
-      />
-    </svg>
-  );
+  return <K8sSvgIcon width="72" height="72" />;
 }
 
 /* ─── Architecture card icons ─── */
