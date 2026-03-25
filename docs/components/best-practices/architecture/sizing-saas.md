@@ -31,23 +31,8 @@ Contact your Customer Success Manager to increase the cluster size beyond 4x. Th
 
 <Tabs groupId="optimize" defaultValue="with-optimize" values={
 [
-{ label: 'Without Optimize', value: 'without-optimize', },
 { label: 'With Optimize', value: 'with-optimize', },
 ]}>
-
-<TabItem value="without-optimize">
-
-<!-- TODO: Fill in "without Optimize" benchmark data from 8.9 benchmarks. Expected throughput is 25–50% higher than the "with Optimize" numbers below, since Optimize export and import load is removed. -->
-
-| Cluster size                                         |            1x |            2x |            3x |            4x |
-| :--------------------------------------------------- | ------------: | ------------: | ------------: | ------------: |
-| Max Throughput **Tasks/day** **\***                  | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> |
-| Max Throughput **Tasks/second** **\***               | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> |
-| Max Throughput **Process Instances/second** **\*\*** | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> |
-| Max Total Number of PI stored (in ES) **\*\*\***     | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> |
-| Approximate resources provisioned **\*\*\*\***       | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> | <!-- TODO --> |
-
-</TabItem>
 
 <TabItem value="with-optimize">
 

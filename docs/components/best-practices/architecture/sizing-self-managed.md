@@ -35,24 +35,24 @@ The following configuration provides a baseline equivalent to a 1x SaaS cluster 
 
 <!-- TODO: Validate these resource numbers against 8.9 benchmarks. The Orchestration Cluster CPU request of 3 cores reflects the 8.8 streamlined architecture. Confirm max throughput and max stored PI for this configuration. -->
 
-| Component                 |                     |                                                                    Request |         Limit |
-| ------------------------- | ------------------- | -------------------------------------------------------------------------: | ------------: |
-| **Orchestration Cluster** |                     |                                                                            |               |
-| Brokers                   | 3                   |                                                                            |               |
-| Partitions                | 3                   |                                                                            |               |
-| Replication factor        | 3                   |                                                                            |               |
-|                           | vCPU \[cores\]      |                                                                          3 |             3 |
-|                           | Memory \[GB\]       |                                                                          2 |             2 |
-|                           | Disk \[GB\]         |                                                                         32 |           128 |
-| **Connectors**            |                     |                                                                            |               |
-| #                         | 1                   |                                                                            |               |
-|                           | vCPU \[cores\]      |                                                                        0.2 |           0.2 |
-|                           | Memory limit \[GB\] |                                                                      0.512 |             1 |
-| **Elastic**               |                     |                                                                            |               |
-| #statefulset              | 3                   |                                                                            |               |
-|                           | vCPU \[cores\]      |    <!-- TODO: Fill in ES CPU request/limit for without-Optimize config --> | <!-- TODO --> |
-|                           | Memory limit \[GB\] | <!-- TODO: Fill in ES memory request/limit for without-Optimize config --> | <!-- TODO --> |
-|                           | Disk request \[GB\] |                                                                         32 |           128 |
+| Component                 |                     | Request | Limit |
+| ------------------------- | ------------------- | ------: | ----: |
+| **Orchestration Cluster** |                     |         |       |
+| Brokers                   | 3                   |         |       |
+| Partitions                | 3                   |         |       |
+| Replication factor        | 3                   |         |       |
+|                           | vCPU \[cores\]      |       3 |     3 |
+|                           | Memory \[GB\]       |       2 |     2 |
+|                           | Disk \[GB\]         |      32 |   128 |
+| **Connectors**            |                     |         |       |
+| #                         | 1                   |         |       |
+|                           | vCPU \[cores\]      |     0.2 |   0.2 |
+|                           | Memory limit \[GB\] |   0.512 |     1 |
+| **Elastic**               |                     |         |       |
+| #statefulset              | 3                   |         |       |
+|                           | vCPU \[cores\]      |       3 |     3 |
+|                           | Memory limit \[GB\] |       2 |     2 |
+|                           | Disk request \[GB\] |      32 |   128 |
 
 </TabItem>
 
@@ -83,7 +83,7 @@ When Optimize is enabled, additional resources are needed, especially for Elasti
 | #statefulset              | 3                   |         |       |
 |                           | vCPU \[cores\]      |       7 |     7 |
 |                           | Memory limit \[GB\] |       6 |     8 |
-|                           | Disk request \[GB\] |      32 |   512 |
+|                           | Disk request \[GB\] |     128 |   512 |
 
 :::note
 The numbers in the tables were measured using a [realistic process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) with a [realistic payload](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). To calculate day-based metrics, an equal distribution over 24 hours is assumed.
