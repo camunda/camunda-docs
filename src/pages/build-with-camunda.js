@@ -370,120 +370,127 @@ function BuildWithCamunda() {
       description="Process orchestration for developers. Go from zero to a running workflow in under two minutes."
     >
       <div className={styles.page}>
-        {/* ─── Hero ─── */}
-        <header className={styles.hero}>
+        {/* ─── Hero + Start cards wrapper ─── */}
+        <div className={styles.heroWrapper}>
           <div className={styles.heroGlow} />
-          <div className={clsx("container", styles.heroInner)}>
-            <h1 className={styles.heroTitle}>Build with Camunda</h1>
-            <p className={styles.heroSub}>
-              Process orchestration for developers. Go from zero to a running
-              workflow in under two minutes, then let your AI coding agent take
-              over.
-            </p>
-          </div>
-        </header>
 
-        {/* ─── Two-card start options ─── */}
-        <section className={clsx("container", styles.section)}>
-          <div className={styles.startGrid}>
-            {/* SaaS card */}
-            <div className={clsx(styles.startCard, styles.startCardSaas)}>
-              <span className={styles.startCardIcon}>
-                <CloudIcon />
-              </span>
-              <span
-                className={styles.startCardLabel}
-                style={{ color: "#78a9ff" }}
-              >
-                FASTEST START
-              </span>
-              <h2 className={styles.startCardTitle}>Free trial on SaaS</h2>
-              <p className={styles.startCardDesc}>
-                Get a fully managed Camunda cluster in seconds. Nothing to
-                install, just sign up and start modeling.
+          {/* ─── Hero ─── */}
+          <header className={styles.hero}>
+            <div className={clsx("container", styles.heroInner)}>
+              <h1 className={styles.heroTitle}>Build with Camunda</h1>
+              <p className={styles.heroSub}>
+                Process orchestration for developers. Go from zero to a running
+                workflow in under two minutes, then let your AI coding agent
+                take over.
               </p>
-              <ul className={styles.checkList}>
-                <li>
-                  <CheckIcon color="#78a9ff" /> Zero setup — runs in Camunda's
-                  cloud
-                </li>
-                <li>
-                  <CheckIcon color="#78a9ff" /> Web Modeler included
-                </li>
-                <li>
-                  <CheckIcon color="#78a9ff" /> 30 days free, fully featured
-                </li>
-                <li>
-                  <CheckIcon color="#78a9ff" /> Connect via{" "}
-                  <CodeBlock>c8 login</CodeBlock>
-                </li>
-              </ul>
-              <div className={styles.startCardFooter}>
-                <Link
-                  className={styles.ctaButton}
-                  to="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
-                >
-                  Create free account <ArrowRight />
-                </Link>
-                <span className={styles.ctaNote}>
-                  ~60 seconds to your first cluster
+            </div>
+          </header>
+
+          {/* ─── Two-card start options ─── */}
+          <section className={clsx("container", styles.section)}>
+            <div className={styles.startGrid}>
+              {/* SaaS card */}
+              <div className={clsx(styles.startCard, styles.startCardSaas)}>
+                <span className={styles.startCardIcon}>
+                  <CloudIcon />
                 </span>
+                <span
+                  className={styles.startCardLabel}
+                  style={{ color: "#78a9ff" }}
+                >
+                  FASTEST START
+                </span>
+                <h2 className={styles.startCardTitle}>Free trial on SaaS</h2>
+                <p className={styles.startCardDesc}>
+                  Get a fully managed Camunda cluster in seconds. Nothing to
+                  install, just sign up and start modeling.
+                </p>
+                <ul className={styles.checkList}>
+                  <li>
+                    <CheckIcon color="#78a9ff" /> Zero setup — runs in Camunda's
+                    cloud
+                  </li>
+                  <li>
+                    <CheckIcon color="#78a9ff" /> Web Modeler included
+                  </li>
+                  <li>
+                    <CheckIcon color="#78a9ff" /> 30 days free, fully featured
+                  </li>
+                  <li>
+                    <CheckIcon color="#78a9ff" /> Connect via{" "}
+                    <CodeBlock>c8 login</CodeBlock>
+                  </li>
+                </ul>
+                <div className={styles.startCardFooter}>
+                  <Link
+                    className={styles.ctaButton}
+                    to="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
+                  >
+                    Create free account <ArrowRight />
+                  </Link>
+                  <span className={styles.ctaNote}>
+                    ~60 seconds to your first cluster
+                  </span>
+                </div>
+              </div>
+
+              {/* CLI card */}
+              <div className={clsx(styles.startCard, styles.startCardCli)}>
+                <span className={styles.startCardIcon}>
+                  <TerminalIcon />
+                </span>
+                <span
+                  className={styles.startCardLabel}
+                  style={{ color: "#fc5d0d" }}
+                >
+                  FULL CONTROL
+                </span>
+                <h2 className={styles.startCardTitle}>
+                  Run locally with the CLI <VersionBadge />
+                </h2>
+                <p className={styles.startCardDesc}>
+                  Use the{" "}
+                  <Link
+                    to={useBaseUrl(
+                      "docs/next/apis-tools/c8ctl/getting-started/"
+                    )}
+                  >
+                    <CodeBlock>c8ctl</CodeBlock>
+                  </Link>
+                  Camunda CLI tool. One command to install, one to start. Full
+                  Camunda on your machine, includes engine, Operate, Tasklist,
+                  and connectors.
+                </p>
+                <ul className={styles.checkList}>
+                  <li>
+                    <CheckIcon color="#fc5d0d" /> Works on macOS, Linux, Windows
+                  </li>
+                  <li>
+                    <CheckIcon color="#fc5d0d" /> Desktop Modeler included
+                  </li>
+                  <li>
+                    <CheckIcon color="#fc5d0d" /> AI agent skills built in
+                  </li>
+                  <li>
+                    <CheckIcon color="#fc5d0d" /> Your data stays on your
+                    machine
+                  </li>
+                </ul>
+                <div className={styles.startCardFooter}>
+                  <Link
+                    className={clsx(styles.ctaButton, styles.ctaButtonCli)}
+                    to="#get-started"
+                  >
+                    See the install <ArrowRight />
+                  </Link>
+                  <span className={styles.ctaNote}>
+                    ~2 minutes to a running engine
+                  </span>
+                </div>
               </div>
             </div>
-
-            {/* CLI card */}
-            <div className={clsx(styles.startCard, styles.startCardCli)}>
-              <span className={styles.startCardIcon}>
-                <TerminalIcon />
-              </span>
-              <span
-                className={styles.startCardLabel}
-                style={{ color: "#fc5d0d" }}
-              >
-                FULL CONTROL
-              </span>
-              <h2 className={styles.startCardTitle}>
-                Run locally with the CLI <VersionBadge />
-              </h2>
-              <p className={styles.startCardDesc}>
-                Use the{" "}
-                <Link
-                  to={useBaseUrl("docs/next/apis-tools/c8ctl/getting-started/")}
-                >
-                  <CodeBlock>c8ctl</CodeBlock>
-                </Link>
-                Camunda CLI tool. One command to install, one to start. Full
-                Camunda on your machine, includes engine, Operate, Tasklist, and
-                connectors.
-              </p>
-              <ul className={styles.checkList}>
-                <li>
-                  <CheckIcon color="#fc5d0d" /> Works on macOS, Linux, Windows
-                </li>
-                <li>
-                  <CheckIcon color="#fc5d0d" /> Desktop Modeler included
-                </li>
-                <li>
-                  <CheckIcon color="#fc5d0d" /> AI agent skills built in
-                </li>
-                <li>
-                  <CheckIcon color="#fc5d0d" /> Your data stays on your machine
-                </li>
-              </ul>
-              <div className={styles.startCardFooter}>
-                <Link
-                  className={clsx(styles.ctaButton, styles.ctaButtonCli)}
-                  to="#get-started"
-                >
-                  See the install <ArrowRight />
-                </Link>
-                <span className={styles.ctaNote}>
-                  ~2 minutes to a running engine
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
         {/* ─── Quick install ─── */}
         <section id="get-started" className={clsx("container", styles.section)}>
@@ -655,158 +662,166 @@ Available skills:
         </section>
 
         {/* ─── More ways to run ─── */}
-        <section className={clsx("container", styles.section)}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>More ways to run Camunda</h2>
-            <p className={styles.sectionSub}>
-              Choose the setup that fits your workflow and infrastructure.
-            </p>
-          </div>
-          <div className={styles.waysGrid}>
-            <Link
-              to={useBaseUrl(
-                "docs/self-managed/quickstart/developer-quickstart/docker-compose/"
-              )}
-              className={styles.wayCard}
-            >
-              <DockerIcon />
-              <h3>Docker Compose</h3>
-              <p>
-                Run the full Camunda stack locally with a single{" "}
-                <CodeBlock>docker compose up</CodeBlock>.
+        <section className={styles.moreSection}>
+          <div className="container">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>More ways to run Camunda</h2>
+              <p className={styles.sectionSub}>
+                Choose the setup that fits your workflow and infrastructure.
               </p>
-            </Link>
-            <Link
-              to={useBaseUrl(
-                "docs/self-managed/deployment/helm/install/quick-install/"
-              )}
-              className={styles.wayCard}
-            >
-              <KubernetesIcon />
-              <h3>Kubernetes</h3>
-              <p>
-                Deploy to any Kubernetes cluster with the official Camunda Helm
-                chart.
-              </p>
-            </Link>
+            </div>
+            <div className={styles.waysGrid}>
+              <Link
+                to={useBaseUrl(
+                  "docs/self-managed/quickstart/developer-quickstart/docker-compose/"
+                )}
+                className={styles.wayCard}
+              >
+                <DockerIcon />
+                <h3>Docker Compose</h3>
+                <p>
+                  Run the full Camunda stack locally with a single{" "}
+                  <CodeBlock>docker compose up</CodeBlock>.
+                </p>
+              </Link>
+              <Link
+                to={useBaseUrl(
+                  "docs/self-managed/deployment/helm/install/quick-install/"
+                )}
+                className={styles.wayCard}
+              >
+                <KubernetesIcon />
+                <h3>Kubernetes</h3>
+                <p>
+                  Deploy to any Kubernetes cluster with the official Camunda
+                  Helm chart.
+                </p>
+              </Link>
+            </div>
           </div>
         </section>
 
         {/* ─── Production deployments ─── */}
-        <section className={clsx("container", styles.section)}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>
-              Production deployment options
-            </h2>
-            <p className={styles.sectionSub}>
-              Run Camunda at scale on the infrastructure you already trust.
-            </p>
-          </div>
-          <div className={styles.deployGrid}>
-            <Link
-              to={useBaseUrl(
-                "docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/"
-              )}
-              className={styles.deployCard}
-            >
-              <AWSIcon />
-              <h4>Amazon EKS</h4>
-              <p>Deploy on AWS with managed Kubernetes.</p>
-            </Link>
-            <Link
-              to={useBaseUrl(
-                "docs/self-managed/deployment/helm/cloud-providers/gcp/google-gke/"
-              )}
-              className={styles.deployCard}
-            >
-              <GCPIcon />
-              <h4>Google GKE</h4>
-              <p>Run on Google Cloud with native GKE support.</p>
-            </Link>
-            <Link
-              to={useBaseUrl(
-                "docs/self-managed/deployment/helm/install/quick-install/"
-              )}
-              className={styles.deployCard}
-            >
-              <HelmIcon />
-              <h4>Kubernetes + Helm</h4>
-              <p>Flexible deployment with the official Helm chart.</p>
-            </Link>
+        <section className={styles.exploreSection}>
+          <div className="container">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>
+                Production deployment options
+              </h2>
+              <p className={styles.sectionSub}>
+                Run Camunda at scale on the infrastructure you already trust.
+              </p>
+            </div>
+            <div className={styles.deployGrid}>
+              <Link
+                to={useBaseUrl(
+                  "docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/"
+                )}
+                className={styles.deployCard}
+              >
+                <AWSIcon />
+                <h4>Amazon EKS</h4>
+                <p>Deploy on AWS with managed Kubernetes.</p>
+              </Link>
+              <Link
+                to={useBaseUrl(
+                  "docs/self-managed/deployment/helm/cloud-providers/gcp/google-gke/"
+                )}
+                className={styles.deployCard}
+              >
+                <GCPIcon />
+                <h4>Google GKE</h4>
+                <p>Run on Google Cloud with native GKE support.</p>
+              </Link>
+              <Link
+                to={useBaseUrl(
+                  "docs/self-managed/deployment/helm/install/quick-install/"
+                )}
+                className={styles.deployCard}
+              >
+                <HelmIcon />
+                <h4>Kubernetes + Helm</h4>
+                <p>Flexible deployment with the official Helm chart.</p>
+              </Link>
+            </div>
           </div>
         </section>
 
         {/* ─── Architecture ─── */}
-        <section className={clsx("container", styles.section)}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Architecture at a glance</h2>
-            <p className={styles.sectionSub}>
-              Camunda's components work together to power process orchestration.
-              Click any component to learn more.
-            </p>
-          </div>
-          <div className={styles.archDiagram}>
-            <div className={styles.archRow}>
-              <Link
-                to={useBaseUrl("docs/components/modeler/about-modeler/")}
-                className={styles.archBox}
-              >
-                <ModelerIcon />
-                <strong>Modeler</strong>
-                <span>Design BPMN, DMN, and Forms</span>
-              </Link>
-              <Link
-                to={useBaseUrl(
-                  "docs/components/console/introduction-to-console/"
-                )}
-                className={styles.archBox}
-              >
-                <ConsoleIcon />
-                <strong>Console</strong>
-                <span>Manage clusters and settings</span>
-              </Link>
+        <section className={styles.exploreSection}>
+          <div className="container">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Architecture at a glance</h2>
+              <p className={styles.sectionSub}>
+                Camunda's components work together to power process
+                orchestration. Click any component to learn more.
+              </p>
             </div>
-            <div className={styles.archConnector}>▼</div>
-            <div className={styles.archRow}>
-              <Link
-                to={useBaseUrl("docs/components/zeebe/zeebe-overview/")}
-                className={clsx(styles.archBox, styles.archBoxPrimary)}
-              >
-                <ZeebeIcon />
-                <strong>Zeebe</strong>
-                <span>Workflow engine at the core</span>
-              </Link>
-            </div>
-            <div className={styles.archConnector}>▼</div>
-            <div className={styles.archRow}>
-              <Link
-                to={useBaseUrl("docs/components/operate/operate-introduction/")}
-                className={styles.archBox}
-              >
-                <OperateIcon />
-                <strong>Operate</strong>
-                <span>Monitor and troubleshoot</span>
-              </Link>
-              <Link
-                to={useBaseUrl(
-                  "docs/components/tasklist/introduction-to-tasklist/"
-                )}
-                className={styles.archBox}
-              >
-                <TasklistIcon />
-                <strong>Tasklist</strong>
-                <span>Human task management</span>
-              </Link>
-              <Link
-                to={useBaseUrl(
-                  "docs/components/connectors/introduction-to-connectors/"
-                )}
-                className={styles.archBox}
-              >
-                <ConnectorsIcon />
-                <strong>Connectors</strong>
-                <span>Integrate external systems</span>
-              </Link>
+            <div className={styles.archDiagram}>
+              <div className={styles.archRow}>
+                <Link
+                  to={useBaseUrl("docs/components/modeler/about-modeler/")}
+                  className={styles.archBox}
+                >
+                  <ModelerIcon />
+                  <strong>Modeler</strong>
+                  <span>Design BPMN, DMN, and Forms</span>
+                </Link>
+                <Link
+                  to={useBaseUrl(
+                    "docs/components/console/introduction-to-console/"
+                  )}
+                  className={styles.archBox}
+                >
+                  <ConsoleIcon />
+                  <strong>Console</strong>
+                  <span>Manage clusters and settings</span>
+                </Link>
+              </div>
+              <div className={styles.archConnector}>▼</div>
+              <div className={styles.archRow}>
+                <Link
+                  to={useBaseUrl("docs/components/zeebe/zeebe-overview/")}
+                  className={clsx(styles.archBox, styles.archBoxPrimary)}
+                >
+                  <ZeebeIcon />
+                  <strong>Zeebe</strong>
+                  <span>Workflow engine at the core</span>
+                </Link>
+              </div>
+              <div className={styles.archConnector}>▼</div>
+              <div className={styles.archRow}>
+                <Link
+                  to={useBaseUrl(
+                    "docs/components/operate/operate-introduction/"
+                  )}
+                  className={styles.archBox}
+                >
+                  <OperateIcon />
+                  <strong>Operate</strong>
+                  <span>Monitor and troubleshoot</span>
+                </Link>
+                <Link
+                  to={useBaseUrl(
+                    "docs/components/tasklist/introduction-to-tasklist/"
+                  )}
+                  className={styles.archBox}
+                >
+                  <TasklistIcon />
+                  <strong>Tasklist</strong>
+                  <span>Human task management</span>
+                </Link>
+                <Link
+                  to={useBaseUrl(
+                    "docs/components/connectors/introduction-to-connectors/"
+                  )}
+                  className={styles.archBox}
+                >
+                  <ConnectorsIcon />
+                  <strong>Connectors</strong>
+                  <span>Integrate external systems</span>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -869,6 +884,8 @@ Available skills:
               </Link>
             </div>
           </div>
+          <br />
+          <br />
         </section>
       </div>
     </Layout>

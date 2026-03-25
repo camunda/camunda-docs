@@ -83,36 +83,80 @@
 }
 
 /* ─── Hero ─── */
-.hero {
+.heroWrapper {
   position: relative;
-  padding: 5rem 0 1.5rem;
-  text-align: center;
   overflow: hidden;
   background: var(--page-bg);
 }
 
+.hero {
+  position: relative;
+  padding: 5rem 0 1.5rem;
+  text-align: center;
+}
+
 .heroGlow {
   position: absolute;
-  top: -120px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 360px;
-  background: radial-gradient(
-    ellipse,
-    rgba(252, 93, 13, 0.1) 0%,
-    transparent 70%
-  );
+  inset: -40px;
   pointer-events: none;
   z-index: 0;
+  background:
+    radial-gradient(
+      ellipse 700px 500px at 35% 28%,
+      rgba(252, 93, 13, 0.2) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 600px 450px at 65% 24%,
+      rgba(120, 169, 255, 0.18) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 750px 500px at 55% 55%,
+      rgba(252, 93, 13, 0.12) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 650px 450px at 40% 58%,
+      rgba(120, 169, 255, 0.14) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 500px 400px at 50% 42%,
+      rgba(252, 93, 13, 0.1) 0%,
+      transparent 60%
+    );
+  filter: blur(50px);
 }
 
 [data-theme="dark"] .heroGlow {
-  background: radial-gradient(
-    ellipse,
-    rgba(252, 93, 13, 0.18) 0%,
-    transparent 70%
-  );
+  background:
+    radial-gradient(
+      ellipse 700px 500px at 35% 28%,
+      rgba(252, 93, 13, 0.3) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 600px 450px at 65% 24%,
+      rgba(120, 169, 255, 0.26) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 750px 500px at 55% 55%,
+      rgba(252, 93, 13, 0.18) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 650px 450px at 40% 58%,
+      rgba(120, 169, 255, 0.2) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 500px 400px at 50% 42%,
+      rgba(252, 93, 13, 0.14) 0%,
+      transparent 60%
+    );
+  filter: blur(50px);
 }
 
 .heroInner {
@@ -124,7 +168,7 @@
   font-size: 3.6rem;
   font-weight: 800;
   line-height: 1.1;
-  color: var(--heading-color);
+  color: #ffffff;
   margin: 0 0 1.2rem;
   border-bottom: none;
   padding: 0;
@@ -132,7 +176,7 @@
 
 .heroSub {
   font-size: 1.15rem;
-  color: var(--muted-color);
+  color: #ffffff;
   max-width: 620px;
   margin: 0 auto;
   line-height: 1.7;
@@ -150,6 +194,10 @@
 /* ─── Section common ─── */
 .section {
   padding: 3rem 0;
+}
+
+.sectionAlt {
+  background: var(--section-alt-bg);
 }
 
 .sectionLast {
@@ -196,6 +244,8 @@
   padding: 2.4rem;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
 .startCardSaas {
@@ -633,6 +683,11 @@
 
 /* ─── Explore docs ─── */
 .exploreSection {
+  background: var(--explore-bg);
+  padding: 3rem 0 4rem;
+}
+
+.moreSection {
   background: var(--explore-bg);
   padding: 3rem 0 4rem;
   border-top: 1px solid var(--explore-border-top);
