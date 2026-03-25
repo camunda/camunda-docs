@@ -54,15 +54,30 @@ Camunda CLI is the successor to zbctl, providing a unified way to authenticate, 
 
 <!-- https://github.com/camunda/product-hub/issues/3195 -->
 
-You can now run JSON test scenario files with Camunda Process Test.
+You can now write and run JSON test cases with Camunda Process Test.
 
-- Run low-code test scenarios as part of standard JUnit 5 execution in local and CI/CD environments.
-- Reuse the JSON test-case format to execute scenario-based tests without rewriting them as full Java test logic.
+- Define process tests in JSON instead of implementing test logic in Java.
+- Execute JSON test cases as part of standard JUnit 5 runs in local and CI/CD environments.
 
-You can also use a shared runtime in Camunda Process Test to significantly reduce test execution time for suites with multiple test scenarios.
+Camunda Process Test also introduces a shared runtime mode as an alternative to managed runtime. Shared runtime uses one runtime across multiple test classes, which can significantly reduce overall test execution time. We recommend enabling it in the configuration.
 
 <p class="link-arrow">[JSON test cases](/apis-tools/testing/json-test-cases.md)</p>
 <p class="link-arrow">[Shared runtime configuration](/apis-tools/testing/configuration.md#shared-runtime)</p>
+
+## Camunda 8 Run
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+
+### Agentic orchestration onboarding in c8run
+
+<!-- https://github.com/camunda/product-hub/issues/3330 -->
+
+Camunda 8 Run now includes an "I don't have credentials" path so you can deploy and run agents without first configuring external LLM provider credentials.
+
+It also adds a local LLM quick start, helping self-managed and enterprise-constrained teams try agentic orchestration without external provider setup.
+
+<p class="link-arrow">[MCP docs](/reference/mcp-docs/mcp-docs.md)</p>
+<p class="link-arrow">[Get started with agentic orchestration](/guides/getting-started-agentic-orchestration.md)</p>
 
 ## Connectivity
 
@@ -98,6 +113,27 @@ This update describes infrastructure deployment patterns in reference architectu
 <p class="link-arrow">[OpenShift dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)</p>
 <p class="link-arrow">[Dual-region operational tasks](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md)</p>
 
+## Migration from Camunda 7 to Camunda 8
+
+### Conditional events support in Migration Analyzer and Diagram Converter
+
+<!-- https://github.com/camunda/product-hub/issues/3262 -->
+
+Migration Analyzer and Diagram Converter now detect and convert Camunda 7 conditional events (start, intermediate catch, and boundary events) into Camunda 8-compatible BPMN.
+
+The migration report also flags conditional-event follow-up tasks so teams can plan manual review where needed.
+
+<p class="link-arrow">[Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling/diagram-converter.md)</p>
+<p class="link-arrow">[Convert expressions](/guides/migrating-from-camunda-7/migration-tooling/diagram-converter.md#convert-expressions)</p>
+
+### History Data Migrator
+
+<!-- https://github.com/camunda/product-hub/issues/3083 -->
+
+Data Migrator now supports migrating historic audit data from Camunda 7 to Camunda 8.
+
+<p class="link-arrow">[History Data Migrator](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md)</p>
+
 ## Modeler
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects RPA">RPA</span></div>
@@ -109,6 +145,18 @@ This update describes infrastructure deployment patterns in reference architectu
 Web Modeler now supports RPA scripts as a first-class file type, including visibility, project management, and deployment workflows without relying on Desktop Modeler.
 
 <p class="link-arrow">[RPA getting started](/components/rpa/getting-started.md)</p>
+
+## Operate
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+### Unified, context-aware process instance view
+
+<!-- https://github.com/camunda/product-hub/issues/3255 -->
+
+Operate now unifies process instance information into a single, context-aware view.
+
+Instead of switching between diagram, instance history, popovers, and bottom panels, you can inspect incidents, variables, executions, and modeling properties in one overview-to-detail flow.
 
 ## Orchestration Cluster
 
