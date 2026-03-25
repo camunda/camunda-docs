@@ -199,8 +199,6 @@ The migration follows five sequential phases. Each phase is idempotent and can, 
 
 ![Illustration of Phase 1: deploy the operator-managed target infrastructure alongside the Bitnami components](./img/bitnami-migration-phase-1-deploy-targets.jpg)
 
-<!-- TODO: Image titles and capitalization will be addressed in a dedicated issue outside this PR. -->
-
 This phase installs the Kubernetes operators and creates the target clusters alongside your existing Bitnami components. Your application continues to run normally:
 
 ```bash
