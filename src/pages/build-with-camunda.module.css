@@ -1,6 +1,10 @@
 /* stylelint-disable docusaurus/copyright-header */
 
 /* ─── Page wrapper ─── */
+:global(html) {
+  scroll-behavior: smooth;
+}
+
 .page {
   --mono-font:
     "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;

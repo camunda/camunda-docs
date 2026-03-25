@@ -156,6 +156,28 @@ function OperateIcon() {
   );
 }
 
+function OptimizeIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M3 20l4-6 4 3 5-7 5 5"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+      <path
+        d="M17 8h4v4"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function TasklistIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -398,7 +420,11 @@ function BuildWithCamunda() {
         </div>
 
         {/* ─── Quick install ─── */}
-        <section id="get-started" className={clsx("container", styles.section)}>
+        <section
+          id="get-started"
+          className={clsx("container", styles.section)}
+          style={{ scrollMarginTop: "5rem" }}
+        >
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
               Get started with c8ctl <VersionBadge />
@@ -804,6 +830,14 @@ Available skills:
                   <ConnectorsIcon />
                   <strong>Connectors</strong>
                   <span>Integrate external systems</span>
+                </Link>
+                <Link
+                  to={useBaseUrl("docs/components/optimize/what-is-optimize/")}
+                  className={styles.archBox}
+                >
+                  <OptimizeIcon />
+                  <strong>Optimize</strong>
+                  <span>Analyze and improve</span>
                 </Link>
               </div>
             </div>
