@@ -9,7 +9,7 @@ tags:
 description: "Understand the factors that influence Camunda 8 sizing, then apply them to your SaaS or Self-Managed environment."
 ---
 
-To size your Camunda 8 environment appropriately, understand the factors that influence it. Once you understand those, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select the right configuration.
+Understand the factors that influence Camunda 8 sizing. Once you understand those, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select your appropriate configuration.
 
 <!-- Anchors for backward compatibility with old single-page URLs -->
 <span id="camunda-8-saas" />
@@ -274,6 +274,6 @@ However, some customers do share a Camunda 8 cluster amongst various developers 
 
 Now that you understand the factors that influence sizing:
 
-- **SaaS customers:** See [SaaS cluster sizing](sizing-saas.md) to select the right cluster size.
+- **SaaS customers:** [Size your SaaS cluster](sizing-saas.md) to select the right cluster size.
 - **Self-Managed admins:** See [Self-Managed resource planning](sizing-self-managed.md) for starting-point Kubernetes configurations.
-- **Validating sizing:** See [Run benchmarks](sizing-benchmarks.md) to test your specific workload against a cluster.
+- **Validating sizing:** [Run your own benchmarks](sizing-benchmarks.md) to test your specific workload against a cluster.
