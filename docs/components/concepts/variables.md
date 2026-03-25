@@ -25,7 +25,7 @@ Restrictions of a variable name:
 - It may not be longer than 492 characters (UTF-8 encoded).
 
 :::note
-The character limit might be higher on [RDBMS secondary storage backends](/self-managed/concepts/databases/overview/).
+The character limit might be higher on [RDBMS secondary storage backends](/self-managed/concepts/databases/overview.md).
 :::
 
 ## Variable values
