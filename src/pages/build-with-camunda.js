@@ -473,9 +473,7 @@ function BuildWithCamunda() {
               <div className={styles.startCardFooter}>
                 <Link
                   className={clsx(styles.ctaButton, styles.ctaButtonCli)}
-                  to={useBaseUrl(
-                    "docs/self-managed/quickstart/developer-quickstart/c8run/"
-                  )}
+                  to="#get-started"
                 >
                   See the install <ArrowRight />
                 </Link>
@@ -488,10 +486,10 @@ function BuildWithCamunda() {
         </section>
 
         {/* ─── Quick install ─── */}
-        <section className={clsx("container", styles.section)}>
+        <section id="get-started" className={clsx("container", styles.section)}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Get started in one line with c8ctl <VersionBadge />
+              Get started in three lines with c8ctl <VersionBadge />
             </h2>
             <p className={styles.sectionSub}>
               Install{" "}
@@ -505,8 +503,9 @@ function BuildWithCamunda() {
             </p>
           </div>
           <TerminalWindow title="Terminal">
-            {`$ npm install -g c8ctl
-$ c8ctl cluster start
+            {`$ npm install @camunda8/cli -g
+$ c8ctl load plugin --from https://github.com/MaxTru/c8ctl-plugin-c8run            
+$ c8ctl c8run start
 
 ✔ Zeebe broker started on port 26500
 ✔ Operate available at http://localhost:8081
@@ -514,7 +513,7 @@ $ c8ctl cluster start
 ✔ Connectors runtime started
 
 Camunda is running. Deploy your first process:
-  $ c8ctl process deploy my-process.bpmn`}
+$ c8ctl deploy ./my-process.bpmn`}
           </TerminalWindow>
         </section>
 
@@ -538,33 +537,34 @@ Camunda is running. Deploy your first process:
             <div className={styles.commandCard}>
               <h4>Cluster management</h4>
               <TerminalWindow>
-                {`$ c8ctl cluster start
-$ c8ctl cluster status
-$ c8ctl cluster stop`}
+                {`$ c8ctl c8run start 8.9.0-alpha5
+$ c8ctl c8run stop
+
+`}
               </TerminalWindow>
             </div>
             <div className={styles.commandCard}>
-              <h4>Deploy processes</h4>
+              <h4>Deploy and start processes</h4>
               <TerminalWindow>
-                {`$ c8ctl process deploy ./payment.bpmn
-$ c8ctl process list
-$ c8ctl process start payment-flow`}
+                {`$ c8ctl deploy ./payment.bpmn
+$ c8ctl create pi --id=payment
+$ c8ctl list pi`}
               </TerminalWindow>
             </div>
             <div className={styles.commandCard}>
-              <h4>Manage connectors</h4>
+              <h4>Interact with processes</h4>
               <TerminalWindow>
-                {`$ c8ctl connector list
-$ c8ctl connector install rest-connector
-$ c8ctl connector logs rest-connector`}
+                {`$ c8 list jobs --type=email-service
+$ c8ctl activate jobs email-service
+$ c8ctl complete job 2251799813685252'`}
               </TerminalWindow>
             </div>
             <div className={styles.commandCard}>
               <h4>Monitor and debug</h4>
               <TerminalWindow>
-                {`$ c8ctl instance list --active
-$ c8ctl instance inspect <id>
-$ c8ctl incident list`}
+                {`$ c8ctl list inc --state=ACTIVE
+$ c8ctl get inc 2251799813685251
+$ c8 resolve inc 2251799813685251`}
               </TerminalWindow>
             </div>
           </div>
@@ -590,37 +590,46 @@ $ c8ctl incident list`}
                   to={useBaseUrl("docs/next/apis-tools/c8ctl/getting-started/")}
                   style={{ color: "inherit", textDecoration: "none" }}
                 >
-                  Add Camunda skills with c8ctl
+                  Add Camunda skills as plugin to Claude
                 </Link>
               </h4>
               <TerminalWindow title="Terminal">
-                {`$ c8ctl ai install-skills
-✔ Installed Camunda skills for AI agents
+                {`$ claude plugin add camunda/camunda-ai-dev-kit
 
 Available skills:
-  camunda.deploy    Deploy a BPMN process
-  camunda.start     Start a process instance
-  camunda.query     Query running instances
-  camunda.tasklist  Complete user tasks
-  camunda.operate   Inspect and resolve incidents`}
+  /new-project  — scaffold a new Camunda project
+  /new-process  — generate a BPMN process
+  /new-agent    — generate an agentic AI process (ad-hoc sub-process + AI Agent connector)
+  /new-dmn      — generate a DMN decision table
+  /new-form     — generate a Camunda Form
+  /new-worker   — generate a job worker
+  /deploy       — deploy resources to Camunda
+  /start        — start a process instance
+  /status       — check instance/incident status
+  /view-process       — visualize BPMN, DMN, or Form files
+  /setup-environment  — install and start Camunda 8 Run locally`}
               </TerminalWindow>
             </div>
             <div className={styles.aiCard}>
-              <h4>Add to Claude with MCP</h4>
+              <h4>Connect to Camunda via MCP</h4>
               <TerminalWindow title="Claude Config">
-                {`// claude_desktop_config.json
+                {`// mcp.json
 {
-  "mcpServers": {
+  "servers": {
+    // Locally running C8Run instance
     "camunda": {
-      "command": "npx",
-      "args": ["-y", "c8ctl", "mcp-serve"],
-      "env": {
-        "CAMUNDA_CLUSTER_URL":
-          "http://localhost:26500"
-      }
+      "type": "http",
+      "url": "http://localhost:8080/mcp/cluster"
+    },
+    // Knowledge from the Camunda docs website
+    "camunda docs": {
+      "type": "http",
+      "url": "https://camunda-docs.mcp.kapa.ai"
     }
   }
-}`}
+}
+
+`}
               </TerminalWindow>
             </div>
           </div>
@@ -638,7 +647,8 @@ Available skills:
               </div>
               <div className={styles.aiExampleItem}>
                 <span className={styles.aiPromptIcon}>💬</span>
-                "Scale the Zeebe brokers to 3 partitions"
+                "Investigate incidents on the payment-flow process and resolve
+                any that are due to missing payment details"
               </div>
             </div>
           </div>
