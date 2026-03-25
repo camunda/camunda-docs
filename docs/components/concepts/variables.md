@@ -24,6 +24,10 @@ Restrictions of a variable name:
 - It may not be a **literal** (e.g. `null`, `true`, `false`) or a **keyword** (e.g. `function`, `if`, `then`, `else`, `for`, `between`, `instance`, `of`, `not`).
 - It may not be longer than 492 characters (UTF-8 encoded).
 
+:::note
+The character limit might be higher on [RDBMS secondary storage backends](/self-managed/concepts/databases/overview/).
+:::
+
 ## Variable values
 
 The value of a variable is stored as a JSON value. It can have one of the following types:
