@@ -489,7 +489,7 @@ function BuildWithCamunda() {
         <section id="get-started" className={clsx("container", styles.section)}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Get started in one line with c8ctl <VersionBadge />
+              Get started in three lines with c8ctl <VersionBadge />
             </h2>
             <p className={styles.sectionSub}>
               Install{" "}
