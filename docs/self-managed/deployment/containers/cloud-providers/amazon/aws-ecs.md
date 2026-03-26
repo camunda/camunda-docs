@@ -253,7 +253,7 @@ The base terraform documentation for this module can be found [alongside the rep
 `camunda.tf` contains the module invocations with an example base configuration for the Orchestration Cluster and Connectors:
 
 - Aurora PostgreSQL configuration with the [AWS JDBC Wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper) that comes as part of the Camunda distribution
-- Basic authentication Identity setup
+- Basic authentication Admin setup
   - Admin user with random password
   - Connectors user with random password configured and pre-configured for Connectors to consume to connect to the Orchestration Cluster
 
