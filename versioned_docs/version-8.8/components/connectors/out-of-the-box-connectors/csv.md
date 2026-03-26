@@ -35,7 +35,7 @@ Reads a CSV from a text or a document and converts it into an array of JSON reco
 ```csv
 product,quantity,price
 Wireless Mouse,25,29.99
-Office Chair,8,149.50n
+Office Chair,8,149.50
 USB Cable,100,12.99
 Monitor Stand,15,45.00
 Desk Lamp,32,24.95
