@@ -828,13 +828,19 @@ for the following packages:
 
 ## Judge configuration
 
+[Judge assertions](assertions.md#hasvariablesatisfiesjudge) use a configured LLM to score process variables against
+natural language expectations. This section covers how to set up the LLM provider and tune the judge behavior.
+
+### Prerequisites
+
+CPT provides an optional [LangChain4j](https://docs.langchain4j.dev/) integration module that ships with preconfigured
+support for major LLM providers: OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI, and OpenAI-compatible APIs.
+LangChain4j requires Java 17+. Using this module is not required. You can provide your own LLM integration through a
+custom `ChatModelAdapter` instead (see [Custom ChatModelAdapter](#custom-chatmodeladapter)).
+
 :::tip
 For a guided walkthrough of setting up and testing agentic processes, see [Testing agentic processes](testing-agentic-processes.md).
 :::
-
-To use [judge assertions](assertions.md#hasvariablesatisfiesjudge), configure a judge with an LLM provider.
-
-### Prerequisites
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
@@ -843,7 +849,7 @@ To use [judge assertions](assertions.md#hasvariablesatisfiesjudge), configure a 
 
 <TabItem value='spring-sdk'>
 
-Camunda Process Test Spring includes the built-in LLM providers as a transitive dependency. No additional
+Camunda Process Test Spring includes the LangChain4j providers as a transitive dependency. No additional
 dependency is needed.
 
 </TabItem>
@@ -864,263 +870,125 @@ Add the `camunda-process-test-langchain4j` dependency to your project:
 
 </Tabs>
 
-This module provides out-of-the-box support for OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI, and OpenAI-compatible providers
-via [LangChain4j](https://docs.langchain4j.dev/). If you provide a custom `ChatModelAdapter`
-(see [Custom ChatModelAdapter](#custom-chatmodeladapter)), this dependency is not required.
-
-### Quick start
-
-The following example shows a minimal configuration using OpenAI. For Anthropic, change the `provider` to `anthropic`.
-
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
-]}>
-
-<TabItem value='spring-sdk'>
-
-```yaml
-camunda:
-  process-test:
-    judge:
-      chat-model:
-        provider: "openai"
-        model: "gpt-4o"
-        api-key: "your-api-key"
-```
-
-</TabItem>
-
-<TabItem value='java-client'>
-
-```properties
-judge.chatModel.provider=openai
-judge.chatModel.model=gpt-4o
-judge.chatModel.apiKey=your-api-key
-```
-
-</TabItem>
-
-</Tabs>
-
-### Supported providers
-
-The following built-in providers are available:
-
-| Provider          | `provider` value    | Required properties | Notes                                                                           |
-| ----------------- | ------------------- | ------------------- | ------------------------------------------------------------------------------- |
-| OpenAI            | `openai`            | `model`, `api-key`  | —                                                                               |
-| Anthropic         | `anthropic`         | `model`, `api-key`  | —                                                                               |
-| Amazon Bedrock    | `amazon-bedrock`    | `model`, `region`   | `api-key` optional. See [more details](#amazon-bedrock).                        |
-| Azure OpenAI      | `azure-openai`      | `model`, `endpoint` | `api-key` optional. See [more details](#azure-openai).                          |
-| OpenAI-compatible | `openai-compatible` | `model`, `base-url` | For local models or OpenAI-format APIs. See [more details](#openai-compatible). |
-
-For OpenAI and Anthropic, the [quick start](#quick-start) example applies directly. Change the `provider` and
-`model` values as needed. The providers below have additional configuration.
-
-#### Amazon Bedrock
-
-If no authentication properties are set, the provider defaults to the
-[AWS default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html).
-
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
-]}>
-
-<TabItem value='spring-sdk'>
-
-```yaml
-camunda:
-  process-test:
-    judge:
-      chat-model:
-        provider: "amazon-bedrock"
-        model: "eu.anthropic.claude-haiku-4-5-20251001-v1:0"
-        region: "eu-central-1"
-        # Optional: authenticate with an API key
-        api-key: "your-api-key"
-        # Or use AWS credentials instead of api-key:
-        # credentials:
-        #   access-key: "your-access-key"
-        #   secret-key: "your-secret-key"
-```
-
-</TabItem>
-
-<TabItem value='java-client'>
-
-```properties
-judge.chatModel.provider=amazon-bedrock
-judge.chatModel.model=eu.anthropic.claude-haiku-4-5-20251001-v1:0
-judge.chatModel.region=eu-central-1
-# Optional: authenticate with an API key
-judge.chatModel.apiKey=your-api-key
-# Or use AWS credentials instead of apiKey:
-# judge.chatModel.credentials.accessKey=your-access-key
-# judge.chatModel.credentials.secretKey=your-secret-key
-```
-
-</TabItem>
-
-</Tabs>
-
-#### OpenAI-compatible
-
-Use this provider for local models (such as [Ollama](https://ollama.com/)) or any API that follows the OpenAI format.
-
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
-]}>
-
-<TabItem value='spring-sdk'>
-
-```yaml
-camunda:
-  process-test:
-    judge:
-      chat-model:
-        provider: "openai-compatible"
-        model: "llama3"
-        base-url: "http://localhost:11434/v1"
-        # api-key is optional for local providers
-        # Optional: custom HTTP headers
-        headers:
-          X-Custom-Header: "custom-value"
-```
-
-</TabItem>
-
-<TabItem value='java-client'>
-
-```properties
-judge.chatModel.provider=openai-compatible
-judge.chatModel.model=llama3
-judge.chatModel.baseUrl=http://localhost:11434/v1
-# judge.chatModel.apiKey is optional for local providers
-# Optional: custom HTTP headers
-judge.chatModel.headers.X-Custom-Header=custom-value
-```
-
-</TabItem>
-
-</Tabs>
-
-:::tip
-If both `api-key` and a custom `Authorization` header are set for the `openai-compatible` provider, the custom header takes precedence.
-:::
-
-#### Azure OpenAI
-
-The `model` property corresponds to your Azure deployment name. If no API key is provided, the provider falls back to
-[`DefaultAzureCredential`](https://learn.microsoft.com/en-us/java/api/com.azure.identity.defaultazurecredential)
-for Azure managed identity authentication.
-
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
-]}>
-
-<TabItem value='spring-sdk'>
-
-```yaml
-camunda:
-  process-test:
-    judge:
-      chat-model:
-        provider: "azure-openai"
-        model: "my-gpt-4o-deployment"
-        endpoint: "https://my-resource.openai.azure.com/"
-        # api-key is optional; if omitted, DefaultAzureCredential is used
-        api-key: "your-api-key"
-```
-
-</TabItem>
-
-<TabItem value='java-client'>
-
-```properties
-judge.chatModel.provider=azure-openai
-judge.chatModel.model=my-gpt-4o-deployment
-judge.chatModel.endpoint=https://my-resource.openai.azure.com/
-# api-key is optional; if omitted, DefaultAzureCredential is used
-judge.chatModel.apiKey=your-api-key
-```
-
-</TabItem>
-
-</Tabs>
-
-#### Custom or generic providers
-
-For providers not listed above, use a custom provider name and pass arbitrary properties.
-
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
-]}>
-
-<TabItem value='spring-sdk'>
-
-```yaml
-camunda:
-  process-test:
-    judge:
-      chat-model:
-        provider: "my-generic"
-        model: "custom-model"
-        custom-properties:
-          endpoint: "http://localhost:8080"
-          api-version: "2024-01"
-```
-
-</TabItem>
-
-<TabItem value='java-client'>
-
-```properties
-judge.chatModel.provider=my-generic
-judge.chatModel.model=custom-model
-judge.chatModel.customProperties.endpoint=http://localhost:8080
-judge.chatModel.customProperties.api-version=2024-01
-```
-
-</TabItem>
-
-</Tabs>
-
-These properties are available to SPI implementations through `ProviderConfig.getCustomProperties()`.
+If you provide a custom `ChatModelAdapter` (see [Custom ChatModelAdapter](#custom-chatmodeladapter)), this dependency
+is not required.
 
 ### Property reference
 
-The table below lists all available judge configuration properties. In Spring, these are nested under
-`camunda.process-test.judge`. In Java properties files, use the `judge.` prefix with camelCase keys
-(for example, `chat-model.api-key` becomes `judge.chatModel.apiKey`).
+All judge properties are nested under `camunda.process-test.judge` in Spring configuration. In Java properties files,
+use the `judge.` prefix with camelCase keys (for example, `judge.chat-model.api-key` becomes `judge.chatModel.apiKey`).
+
+For configuration examples, see [Set up an LLM provider](testing-agentic-processes.md#set-up-an-llm-provider).
 
 #### Judge settings
 
-| Property        | Type     | Default | Description                                              |
-| --------------- | -------- | ------- | -------------------------------------------------------- |
-| `threshold`     | `double` | `0.5`   | Confidence threshold (0.0–1.0) for the judge to pass.    |
-| `custom-prompt` | `string` | —       | Custom evaluation prompt replacing the default criteria. |
+| Property              | Type     | Default | Description                                              |
+| --------------------- | -------- | ------- | -------------------------------------------------------- |
+| `judge.threshold`     | `double` | `0.5`   | Confidence threshold (0.0 to 1.0) for the judge to pass. |
+| `judge.custom-prompt` | `string` |         | Custom evaluation prompt replacing the default criteria. |
 
 #### Chat model settings
 
-| Property                            | Type       | Default | Providers           | Description                                                          |
-| ----------------------------------- | ---------- | ------- | ------------------- | -------------------------------------------------------------------- |
-| `chat-model.provider`               | `string`   | —       | —                   | LLM provider name (see [Supported providers](#supported-providers)). |
-| `chat-model.model`                  | `string`   | —       | All                 | Model name (or Azure deployment name for `azure-openai`).            |
-| `chat-model.api-key`                | `string`   | —       | All                 | API key. Optional for providers that support default credentials.    |
-| `chat-model.base-url`               | `string`   | —       | `openai-compatible` | Base URL for the API endpoint.                                       |
-| `chat-model.endpoint`               | `string`   | —       | `azure-openai`      | Azure OpenAI resource URL.                                           |
-| `chat-model.region`                 | `string`   | —       | `amazon-bedrock`    | AWS region.                                                          |
-| `chat-model.timeout`                | `duration` | —       | All                 | Request timeout (ISO-8601 duration, e.g. `PT30S`).                   |
-| `chat-model.temperature`            | `double`   | —       | All                 | Temperature for response randomness (0.0–2.0).                       |
-| `chat-model.headers.*`              | `map`      | —       | `openai-compatible` | Custom HTTP headers.                                                 |
-| `chat-model.credentials.access-key` | `string`   | —       | `amazon-bedrock`    | AWS access key.                                                      |
-| `chat-model.credentials.secret-key` | `string`   | —       | `amazon-bedrock`    | AWS secret key.                                                      |
-| `chat-model.custom-properties.*`    | `map`      | —       | Custom/SPI          | Arbitrary key-value pairs passed to SPI providers.                   |
+<Tabs groupId="provider" defaultValue="openai" queryString values={[
+{label: 'OpenAI', value: 'openai' },
+{label: 'Anthropic', value: 'anthropic' },
+{label: 'Amazon Bedrock', value: 'amazon-bedrock' },
+{label: 'Azure OpenAI', value: 'azure-openai' },
+{label: 'OpenAI-compatible', value: 'openai-compatible' },
+{label: 'Custom/SPI', value: 'custom' }
+]}>
+
+<TabItem value='openai'>
+
+| Property                       | Type       | Description                                               |
+| ------------------------------ | ---------- | --------------------------------------------------------- |
+| `judge.chat-model.provider`    | `string`   | Set to `openai`.                                          |
+| `judge.chat-model.model`       | `string`   | Model name (for example `gpt-4o`).                        |
+| `judge.chat-model.api-key`     | `string`   | API key.                                                  |
+| `judge.chat-model.timeout`     | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`). |
+| `judge.chat-model.temperature` | `double`   | Temperature for response randomness (0.0 to 2.0).         |
+
+</TabItem>
+
+<TabItem value='anthropic'>
+
+| Property                       | Type       | Description                                               |
+| ------------------------------ | ---------- | --------------------------------------------------------- |
+| `judge.chat-model.provider`    | `string`   | Set to `anthropic`.                                       |
+| `judge.chat-model.model`       | `string`   | Model name (for example `claude-sonnet-4-20250514`).      |
+| `judge.chat-model.api-key`     | `string`   | API key.                                                  |
+| `judge.chat-model.timeout`     | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`). |
+| `judge.chat-model.temperature` | `double`   | Temperature for response randomness (0.0 to 2.0).         |
+
+</TabItem>
+
+<TabItem value='amazon-bedrock'>
+
+Supports Bedrock long-term API keys or AWS IAM credentials. Falls back to the
+[AWS default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html).
+
+| Property                                  | Type       | Description                                                                                    |
+| ----------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------- |
+| `judge.chat-model.provider`               | `string`   | Set to `amazon-bedrock`.                                                                       |
+| `judge.chat-model.model`                  | `string`   | Model name (for example `eu.anthropic.claude-haiku-4-5-20251001-v1:0`).                        |
+| `judge.chat-model.region`                 | `string`   | AWS region (for example `eu-central-1`).                                                       |
+| `judge.chat-model.api-key`                | `string`   | Bedrock long-term API key. Optional if using IAM credentials or the default credentials chain. |
+| `judge.chat-model.credentials.access-key` | `string`   | AWS IAM access key. Optional if using an API key or the default credentials chain.             |
+| `judge.chat-model.credentials.secret-key` | `string`   | AWS IAM secret key. Optional if using an API key or the default credentials chain.             |
+| `judge.chat-model.timeout`                | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).                                      |
+| `judge.chat-model.temperature`            | `double`   | Temperature for response randomness (0.0 to 2.0).                                              |
+
+</TabItem>
+
+<TabItem value='azure-openai'>
+
+Supports API key authentication. Falls back to
+[`DefaultAzureCredential`](https://learn.microsoft.com/en-us/java/api/com.azure.identity.defaultazurecredential).
+
+| Property                       | Type       | Description                                                                                                                |
+| ------------------------------ | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `judge.chat-model.provider`    | `string`   | Set to `azure-openai`.                                                                                                     |
+| `judge.chat-model.model`       | `string`   | Azure [deployment name](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource#deploy-a-model). |
+| `judge.chat-model.endpoint`    | `string`   | Azure OpenAI resource URL (for example `https://my-resource.openai.azure.com/`).                                           |
+| `judge.chat-model.api-key`     | `string`   | API key. Optional; if omitted, falls back to `DefaultAzureCredential`.                                                     |
+| `judge.chat-model.timeout`     | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).                                                                  |
+| `judge.chat-model.temperature` | `double`   | Temperature for response randomness (0.0 to 2.0).                                                                          |
+
+</TabItem>
+
+<TabItem value='openai-compatible'>
+
+For local models (such as [Ollama](https://ollama.com/)) or any third-party API that implements the
+[OpenAI chat completions format](https://platform.openai.com/docs/api-reference/chat).
+
+| Property                       | Type       | Description                                                              |
+| ------------------------------ | ---------- | ------------------------------------------------------------------------ |
+| `judge.chat-model.provider`    | `string`   | Set to `openai-compatible`.                                              |
+| `judge.chat-model.model`       | `string`   | Model name (for example `llama3`).                                       |
+| `judge.chat-model.base-url`    | `string`   | Base URL for the API endpoint (for example `http://localhost:11434/v1`). |
+| `judge.chat-model.api-key`     | `string`   | API key. Optional for local providers.                                   |
+| `judge.chat-model.headers.*`   | `map`      | Custom HTTP headers.                                                     |
+| `judge.chat-model.timeout`     | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).                |
+| `judge.chat-model.temperature` | `double`   | Temperature for response randomness (0.0 to 2.0).                        |
+
+</TabItem>
+
+<TabItem value='custom'>
+
+For providers not listed above, use a custom provider name and pass arbitrary properties. See
+[Custom ChatModelAdapter](#custom-chatmodeladapter) for implementation details.
+
+| Property                               | Type       | Description                                                                                   |
+| -------------------------------------- | ---------- | --------------------------------------------------------------------------------------------- |
+| `judge.chat-model.provider`            | `string`   | Custom provider name matching your SPI implementation.                                        |
+| `judge.chat-model.model`               | `string`   | Model name.                                                                                   |
+| `judge.chat-model.custom-properties.*` | `map`      | Arbitrary key-value pairs passed to SPI providers via `ProviderConfig.getCustomProperties()`. |
+| `judge.chat-model.timeout`             | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).                                     |
+| `judge.chat-model.temperature`         | `double`   | Temperature for response randomness (0.0 to 2.0).                                             |
+
+</TabItem>
+
+</Tabs>
 
 ### Custom prompt
 
