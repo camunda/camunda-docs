@@ -61,6 +61,12 @@ You need to decide how Identity will authenticate before the cutover. For manage
 - If you **keep Keycloak**, deploy it with the Keycloak Operator and set the hostname to the full public URL, for example `https://your-domain.example.com/auth`.
 - If you **replace Keycloak with external OIDC**, prepare the provider configuration and the corresponding Identity Helm values before running the migration.
 
+### Elasticsearch to OpenSearch not supported
+
+This migration path does not support moving data from the Bitnami Elasticsearch subchart to Amazon OpenSearch Service or another OpenSearch target.
+
+If your target architecture requires OpenSearch, treat that as a separate replatforming effort instead of a supported in-place migration from the Bitnami Elasticsearch subchart.
+
 ## Clone the deployment references repository
 
 <CloneRepo />
@@ -96,12 +102,6 @@ Minimum requirements:
 
 <DualRegionEsNote />
 
-:::warning Elasticsearch to OpenSearch is not supported
-This migration path does not support moving data from the Bitnami Elasticsearch subchart to Amazon OpenSearch Service or another OpenSearch target.
-
-If your target architecture requires OpenSearch, treat that as a separate replatforming effort instead of a supported in-place migration from the Bitnami Elasticsearch subchart.
-:::
-
 ### Create Kubernetes Secrets
 
 Store the managed service credentials as Kubernetes Secrets so both the migration scripts and Camunda Helm chart can use them:
@@ -132,7 +132,7 @@ kubectl create secret generic external-es \
 The migration scripts use the term **external targets** (`PG_TARGET_MODE=external`, `ES_TARGET_MODE=external`) for any non-operator target. This includes cloud-managed services (AWS RDS, Elastic Cloud, etc.) but also self-hosted databases outside the Kubernetes cluster. This guide uses "managed services" as a shorthand, but the scripts themselves are not restricted to cloud-managed offerings.
 :::
 
-Edit `env.sh`, and set the target mode to `external`. The base configuration variables (`NAMESPACE`, `CAMUNDA_RELEASE_NAME`, `MIGRATE_*`, etc.) are the same as in the [operator-based guide](./bitnami-to-operators.md#key-configuration-variables) — only the target mode and external endpoint variables differ:
+Edit `env.sh`, and set the target mode to `external`. The base configuration variables (`NAMESPACE`, `CAMUNDA_RELEASE_NAME`, `MIGRATE_*`, etc.) are the same as in the [operator-based guide](./bitnami-to-operators.md#key-configuration-variables), only the target mode and external endpoint variables differ:
 
 <details>
 <summary>Show details: external target configuration example</summary>
@@ -163,9 +163,7 @@ export EXTERNAL_ES_SECRET="external-es"
 
 </details>
 
-:::info Same host for all PostgreSQL databases
 You can use the same managed PostgreSQL host for all components—each database is separate. This is common when using a single RDS instance with multiple databases.
-:::
 
 ### Create custom Helm values
 
@@ -413,19 +411,49 @@ bash 4-validate.sh
 
 The validation script checks that all Camunda deployments and StatefulSets are ready, and that the Keycloak Custom Resource is healthy. For external PostgreSQL and Elasticsearch targets, it verifies connectivity to the managed service endpoints rather than checking CNPG/ECK cluster status. A migration report is generated at `.state/migration-report.md`.
 
-### Phase 5: Cleanup Bitnami resources (no downtime)
-
 :::warning Wait before cleanup
-Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) before cleanup. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [Rollback](#rollback)).
+Do not move on to the next phase immediately after validation. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) before cleanup. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [Rollback](#rollback)).
 :::
 
-After confirming the migration is successful, remove old Bitnami resources by running the cleanup script:
+### Phase 5: Cleanup Bitnami resources (no downtime)
+
+:::warning Destructive and irreversible
+This phase **permanently deletes** old Bitnami StatefulSets, PVCs, and the migration backup PVC. After cleanup, rollback to Bitnami subcharts is **no longer possible**.
+
+Before running this phase, strongly consider:
+
+1. Taking a full backup of all databases (`pg_dumpall` or equivalent)
+2. Taking PVC or storage volume snapshots (cloud provider snapshots)
+3. Storing backups in cold storage—for example, S3 Glacier or GCS Archive
+4. Keeping rollback artifacts in `.state/` as a safety net
+   :::
+
+After confirming the migration is successful, remove old Bitnami StatefulSets, PVCs, services, and the migration backup PVC:
 
 ```bash
 bash 5-cleanup-bitnami.sh
 ```
 
-This deletes the old Bitnami PostgreSQL StatefulSets, PVCs, Elasticsearch StatefulSet, Keycloak StatefulSet, and the migration backup PVC. The script checks resource existence before each deletion and can be safely rerun. For the full cleanup behavior, see [Phase 5 in the operator-based guide](./bitnami-to-operators.md#phase-5-cleanup-bitnami-resources-no-downtime).
+What happens:
+
+1. The script requires Phase 4 to be completed and displays a **destructive operation warning** with a confirmation prompt.
+2. **Deletes old Bitnami PostgreSQL** StatefulSets, their PVCs, and headless services (for each migrated component: Identity, Keycloak, and Web Modeler).
+3. **Deletes old Bitnami Elasticsearch** StatefulSet, PVCs, and services.
+4. **Deletes old Bitnami Keycloak** StatefulSet.
+5. **Deletes the migration backup PVC**.
+6. **Reverifies** that all Camunda components and operator-managed targets remain healthy after cleanup.
+7. Suggests removing the `reindex.remote.whitelist` setting from the ECK Elasticsearch configuration as a post-cleanup step.
+
+The script checks whether each resource exists before attempting deletion, so it can be safely rerun if interrupted.
+
+<details>
+<summary>Show details: Phase 5 script reference</summary>
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/5-cleanup-bitnami.sh
+```
+
+</details>
 
 ### Rollback
 
@@ -437,9 +465,7 @@ bash rollback.sh
 
 This restores the previous Helm values (re-enabling Bitnami subcharts) and restarts Camunda on the original infrastructure.
 
-:::info Rollback scope
 Rollback is available after Phase 3 (cutover) and before Phase 5 (cleanup). Before Phase 3, simply stop the migration; your Bitnami infrastructure is still active and untouched.
-:::
 
 ## Operational readiness
 
