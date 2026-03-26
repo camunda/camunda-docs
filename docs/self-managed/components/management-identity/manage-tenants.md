@@ -13,7 +13,7 @@ To learn more, see [multi-tenancy](/components/concepts/multi-tenancy.md).
 
 ## About Optimize tenants
 
-Tenants managed within Management Identity **apply only to [Optimize](../optimize/overview.md)**, allowing you to isolate data access for reports and dashboards. This is effective only if you have [multi-tenancy checks enabled for your Orchestration Cluster](/components/identity/tenant.md).
+Tenants managed within Management Identity **apply only to [Optimize](../optimize/overview.md)**, allowing you to isolate data access for reports and dashboards. This is effective only if you have [multi-tenancy checks enabled for your Orchestration Cluster](/components/admin/tenant.md).
 
 If you enable multi-tenancy for Optimize, you must create tenants with the same identifiers as those configured for your Orchestration Cluster. This alignment is important for correct data isolation and association in Optimize.
 

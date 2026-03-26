@@ -99,30 +99,15 @@ The **v2 REST API** (default port `8080`) **requires authentication**, described
 The following procedures assume the following dual-region deployment for:
 
 - **AWS:** the deployment has been created using [AWS setup guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md) and you have your own copy of the [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
-  Follow the [dual-region cluster deployment](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md##3-deploy-camunda-8-via-helm-charts) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#export-environment-variables) already set up).
+  Follow the [dual-region cluster deployment](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#3-deploy-camunda-8-via-helm-charts) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#export-environment-variables) already set up).
 
-- **OpenShift:** the deployment has been created using [OpenShift setup guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#deploying-camunda-8-via-helm-charts-in-a-dual-region-setup) and previously completed changes in your `generated-values-region-1.yml` and `generated-values-region-2.yml` to adjust them in your setup.
+- **OpenShift:** the deployment has been created using [OpenShift setup guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#deploying-camunda-8-via-helm-charts-in-a-dual-region-setup) and previously completed changes in your `generated-values-region-0.yml` and `generated-values-region-1.yml` to adjust them in your setup.
 
 :::note OpenShift cluster reference
 
-    The OpenShift guide references the cluster's context using `CLUSTER_1_NAME` and `CLUSTER_2_NAME` and the namespaces using `CAMUNDA_NAMESPACE_1` and `CAMUNDA_NAMESPACE_2`.
-    This guide use a different convention, the convertion can be done as follow:
-    <details>
-      <summary>Show OpenShift convertion</summary>
+The OpenShift guide now uses the same 0-indexed naming convention as the AWS guide: `CLUSTER_0`/`CLUSTER_1` for cluster contexts and `CAMUNDA_NAMESPACE_0`/`CAMUNDA_NAMESPACE_1` for namespaces. No conversion is needed.
 
-    ```bash
-    export CLUSTER_0="$CLUSTER_1_NAME"
-    export CAMUNDA_NAMESPACE_0="$CAMUNDA_NAMESPACE_1"
-    echo "CLUSTER_0=$CLUSTER_0"
-    echo "CAMUNDA_NAMESPACE_0=$CAMUNDA_NAMESPACE_0"
-
-    export CLUSTER_1="$CLUSTER_2_NAME"
-    export CAMUNDA_NAMESPACE_1="$CAMUNDA_NAMESPACE_2"
-    echo "CLUSTER_1=$CLUSTER_1"
-    echo "CAMUNDA_NAMESPACE_1=$CAMUNDA_NAMESPACE_1"
-    ```
-
-    </details>
+In version 8.8 and earlier, the OpenShift guide used 1-indexed naming (`CLUSTER_1_NAME`/`CLUSTER_2_NAME` and `CAMUNDA_NAMESPACE_1`/`CAMUNDA_NAMESPACE_2`), which required converting variable names before following this procedure.
 
 :::
 
@@ -676,9 +661,9 @@ The Helm command also disables Operate and Tasklist. These components will be re
 <Tabs groupId="clusters-types">
   <TabItem value="EKS" label="EKS">
 
-This procedure requires your Helm values file, `camunda-values.yml,` in `aws/dual-region/kubernetes,` used to deploy EKS Dual-region Camunda clusters.
+This procedure requires your Helm values file, `camunda-values.yml`, in `aws/kubernetes/eks-dual-region/helm-values`, used to deploy EKS Dual-region Camunda clusters.
 
-Ensure that the values for `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL` and `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL` correctly point to their respective regions. The placeholder in `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, the result of the `aws/dual-region/scripts/generate_zeebe_helm_values.sh`.
+Ensure the values for `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL` and `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL` correctly point to their respective regions. The placeholder in `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, the result of the `aws/kubernetes/eks-dual-region/procedure/generate_zeebe_helm_values.sh`.
 
 This step is equivalent to applying for the region to be recreated:
 
@@ -691,7 +676,7 @@ The standalone Schema Manager must be disabled; otherwise, it will prevent a suc
 
 There is no Helm chart option for this setting. Because `orchestration.env` is an array, it cannot be overwritten through an overlay and must be added manually on a temporary basis.
 
-Edit the `camunda-values.yml` file in `aws/dual-region/kubernetes` to include the following under `orchestration.env`:
+Edit `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` to include the following under `orchestration.env`:
 
 ```yaml
 orchestration:
@@ -701,7 +686,40 @@ orchestration:
   # ...
 ```
 
-From the terminal context of `aws/dual-region/kubernetes` execute:
+##### Deploy prerequisite services
+
+Before installing Camunda via Helm, you must redeploy the ECK-managed Elasticsearch cluster and synchronize cross-region passwords. Without this, the Helm install will fail because there is no Elasticsearch to connect to.
+
+1. From `generic/kubernetes/operator-based/elasticsearch`, deploy the ECK operator and Elasticsearch cluster in the recreated region:
+
+   ```shell
+   cd generic/kubernetes/operator-based/elasticsearch
+   export ELASTICSEARCH_CLUSTER_FILE="elasticsearch-cluster-dual-region.yml"
+   KUBE_CONTEXT=$CLUSTER_RECREATED ./deploy.sh
+   cd -
+   ```
+
+2. Wait for Elasticsearch to become ready. Verify the cluster health is `green` before proceeding:
+
+   ```shell
+   kubectl get elasticsearch --context $CLUSTER_RECREATED --namespace $CAMUNDA_NAMESPACE_RECREATED
+   ```
+
+3. From `aws/kubernetes/eks-dual-region/procedure`, resynchronize the Elasticsearch passwords across regions:
+
+   ```shell
+   cd aws/kubernetes/eks-dual-region/procedure
+   ./sync_elasticsearch_passwords.sh
+   cd -
+   ```
+
+   This recreates the cross-region password secrets (`elasticsearch-es-password-region-0` and `elasticsearch-es-password-region-1`) required by the Zeebe exporter configuration.
+
+For more details on these steps, see [Deploy the ECK operator and Elasticsearch clusters](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#deploy-the-eck-operator-and-elasticsearch-clusters) and [Synchronize Elasticsearch passwords across regions](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#synchronize-elasticsearch-passwords-across-regions).
+
+##### Install Camunda using Helm
+
+From the terminal context of `aws/kubernetes/eks-dual-region/helm-values` execute:
 
 ```bash
 helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
@@ -709,6 +727,7 @@ helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
   --kube-context $CLUSTER_RECREATED \
   --namespace $CAMUNDA_NAMESPACE_RECREATED \
   -f camunda-values.yml \
+  -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
   -f $REGION_RECREATED/camunda-values.yml \
   --set orchestration.profiles.operate=false \
   --set orchestration.profiles.tasklist=false
@@ -719,7 +738,40 @@ After successfully applying the recreated region, remove the temporary `CAMUNDA_
 </TabItem>
 <TabItem value="OpenShift" label="OpenShift">
 
-Follow the installation steps **recreated region**:
+##### Deploy prerequisite services
+
+Before installing Camunda via Helm, you must redeploy the ECK-managed Elasticsearch cluster and synchronize cross-region passwords. Without this, the Helm install will fail because there is no Elasticsearch to connect to.
+
+1. From the `generic/kubernetes/operator-based/elasticsearch` folder, deploy the ECK operator and Elasticsearch cluster in the recreated region:
+
+   ```bash
+   cd generic/kubernetes/operator-based/elasticsearch
+   export ELASTICSEARCH_CLUSTER_FILE="elasticsearch-cluster-dual-region.yml"
+   CAMUNDA_NAMESPACE=$CAMUNDA_NAMESPACE_RECREATED KUBE_CONTEXT=$CLUSTER_RECREATED ./deploy.sh
+   cd -
+   ```
+
+2. Wait for Elasticsearch to become ready. Verify the cluster health is `green` before proceeding:
+
+   ```bash
+   kubectl get elasticsearch --context $CLUSTER_RECREATED --namespace $CAMUNDA_NAMESPACE_RECREATED
+   ```
+
+3. From the `generic/openshift/dual-region/procedure` folder, re-synchronize the Elasticsearch passwords across regions:
+
+   ```bash
+   cd generic/openshift/dual-region/procedure
+   ./sync-elasticsearch-passwords.sh
+   cd -
+   ```
+
+   This recreates the cross-region password secrets (`elasticsearch-es-password-region-0` and `elasticsearch-es-password-region-1`) required by the Zeebe exporter configuration.
+
+For more details on these steps, see [Deploy the ECK operator and Elasticsearch clusters](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#deploy-the-eck-operator-and-elasticsearch-clusters) and [Synchronize Elasticsearch passwords across regions](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#synchronize-elasticsearch-passwords-across-regions).
+
+##### Install Camunda using Helm
+
+Follow the installation steps for the **recreated region**:
 
 - [Setting up the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#configure-your-deployment-for-each-region) _Optional if you already have your pre-configured `generated-values-file.yml`_
 - Once your values file is generated from the installation step, install **Camunda 8 only in the recreated region**. Adjust the installation command to disable Operate and Tasklist:
@@ -735,7 +787,7 @@ Follow the installation steps **recreated region**:
 
   There is no Helm chart option for this setting. Because `orchestration.env` is an array, it cannot be overwritten through an overlay and must be added manually on a temporary basis.
 
-  Edit the `generated-values-region-1|2.yaml` to include the following under `orchestration.env`:
+  Edit the `generated-values-region-0|1.yaml` to include the following under `orchestration.env`:
 
   ```yaml
   orchestration:
@@ -753,7 +805,7 @@ Follow the installation steps **recreated region**:
   --version "$HELM_CHART_VERSION" \
   --kube-context "$CLUSTER_RECREATED" \
   --namespace "$CAMUNDA_NAMESPACE_RECREATED" \
-  -f "<generated-values-region-1|2.yaml>" \
+  -f "<generated-values-region-0|1.yaml>" \
   --set orchestration.profiles.operate=false \
   --set orchestration.profiles.tasklist=false
   ```
@@ -976,9 +1028,9 @@ This step reduces the deployed application to the Zeebe Cluster and Elasticsearc
 <Tabs groupId="clusters-types">
   <TabItem value="EKS" label="EKS">
 
-This procedure requires your Helm values file, `camunda-values.yml,` in `aws/dual-region/kubernetes,` used to deploy EKS dual-region Camunda clusters.
+This procedure requires your Helm values file, `camunda-values.yml`, in `aws/kubernetes/eks-dual-region/helm-values`, used to deploy EKS dual-region Camunda clusters.
 
-Ensure that the values for `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL` and `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL` correctly point to their respective regions. The placeholder in `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, generated by the `aws/dual-region/scripts/generate_zeebe_helm_values.sh` script.
+Ensure that the values for `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL` and `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL` correctly point to their respective regions. The placeholder in `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, generated by the `aws/kubernetes/eks-dual-region/procedure/generate_zeebe_helm_values.sh` script.
 
 This step is equivalent to applying the configuration for the recreated region:
 
@@ -987,7 +1039,7 @@ This step is equivalent to applying the configuration for the recreated region:
 
 If not already done, remove the `CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA` variable from the `camunda-values.yml`.
 
-Edit the `camunda-values.yml` in `aws/dual-region/kubernetes` and remove the following from `orchestration.env`:
+Edit the `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` and remove the following from `orchestration.env`:
 
 ```yaml
 orchestration:
@@ -997,7 +1049,7 @@ orchestration:
   # ...
 ```
 
-From the `aws/dual-region/kubernetes` directory, run:
+From the `aws/kubernetes/eks-dual-region/helm-values` directory, run:
 
 ```bash
 helm upgrade --install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
@@ -1005,6 +1057,7 @@ helm upgrade --install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
   --kube-context $CLUSTER_SURVIVING \
   --namespace $CAMUNDA_NAMESPACE_SURVIVING \
   -f camunda-values.yml \
+  -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
   -f $REGION_SURVIVING/camunda-values.yml \
   --set orchestration.profiles.operate=false \
   --set orchestration.profiles.tasklist=false
@@ -1019,8 +1072,8 @@ Follow the installation steps for the **surviving region**:
 - Once your values file is generated from the installation step, upgrade **Camunda 8 only in the surviving region**. Adjust the installation command to disable Operate and Tasklist:
 
   ```bash
-  --set orchestration.profiles.operate=false`
-  --set orchestration.profiles.tasklist=false`
+  --set orchestration.profiles.operate=false \
+  --set orchestration.profiles.tasklist=false
   ```
 
   Example command adapted from the installation step:
@@ -1031,7 +1084,7 @@ Follow the installation steps for the **surviving region**:
   --version "$HELM_CHART_VERSION" \
   --kube-context "$CLUSTER_SURVIVING" \
   --namespace "$CAMUNDA_NAMESPACE_SURVIVING" \
-  -f "<generated-values-region-1|2.yaml>" \
+  -f "<generated-values-region-0|1.yaml>" \
   --set orchestration.profiles.operate=false \
   --set orchestration.profiles.tasklist=false
   ```
@@ -1052,7 +1105,7 @@ Follow the installation steps for the **surviving region**:
 
    ```bash
    # The default are 5 profiles, so this confirms that Operate and Tasklist are not enabled
-   io.camunda.application.StandaloneCamunda - The following 3 profiles are active: "broker", "identity", "consolidated-auth"
+   io.camunda.application.StandaloneCamunda - The following 3 profiles are active: "broker", "admin", "consolidated-auth"
    ```
 
 3. Alternatively, verify that the configuration does not list Operate and Tasklist as active profiles:
@@ -1064,7 +1117,7 @@ Follow the installation steps for the **surviving region**:
    ```bash
    spring:
      profiles:
-       active: "broker,identity,consolidated-auth"
+       active: "broker,admin,consolidated-auth"
    ```
 
   </TabItem>
@@ -1134,7 +1187,7 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
    <Tabs groupId="clusters-types">
    <TabItem value="EKS" label="EKS">
 
-   Retrieve the name of the bucket via Terraform. Go to `aws/dual-region/terraform` within the repository and retrieve the bucket name from the Terraform state:
+   Retrieve the name of the bucket via Terraform. Go to `aws/kubernetes/eks-dual-region/terraform` within the repository and retrieve the bucket name from the Terraform state:
 
    ```bash
    export S3_BUCKET_NAME=$(terraform output -raw s3_bucket_name)
@@ -1154,12 +1207,13 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
    </TabItem>
    </Tabs>
 
-2. Configure Elasticsearch backup endpoint in the surviving namespace `CAMUNDA_NAMESPACE_SURVIVING`:
+2. Retrieve the Elasticsearch password, and configure the backup endpoint in the surviving namespace `CAMUNDA_NAMESPACE_SURVIVING`:
 
    ```bash
-   ELASTIC_POD=$(kubectl --context $CLUSTER_SURVIVING get pod --selector=app\.kubernetes\.io/name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
+   ELASTIC_POD=$(kubectl --context $CLUSTER_SURVIVING get pod --selector=elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
+   ES_PASSWORD=$(kubectl --context $CLUSTER_SURVIVING get secret elasticsearch-es-elastic-user -n $CAMUNDA_NAMESPACE_SURVIVING -o jsonpath='{.data.elastic}' | base64 -d)
    kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- \
-    curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup' \
+    curl -u "elastic:$ES_PASSWORD" -XPUT 'http://localhost:9200/_snapshot/camunda_backup' \
     -H 'Content-Type: application/json' \
     -d'
    {
@@ -1178,7 +1232,7 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
    ```bash
    # The backup will be called failback
    kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- \
-    curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup/failback?wait_for_completion=true' \
+    curl -u "elastic:$ES_PASSWORD" -XPUT 'http://localhost:9200/_snapshot/camunda_backup/failback?wait_for_completion=true' \
     -H 'Content-Type: application/json' \
     -d '{"include_global_state": true}'
    ```
@@ -1186,7 +1240,7 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
 4. Verify the backup has been completed successfully by checking all backups and ensuring the `state` is `SUCCESS`:
 
    ```bash
-   kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XGET 'http://localhost:9200/_snapshot/camunda_backup/_all'
+   kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -u "elastic:$ES_PASSWORD" -XGET 'http://localhost:9200/_snapshot/camunda_backup/_all'
    ```
 
    <details>
@@ -1265,8 +1319,9 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
 5. Configure Elasticsearch backup endpoint in the new region namespace `CAMUNDA_NAMESPACE_RECREATED`. It's essential to only do this step now as otherwise it won't see the backup:
 
    ```bash
-   ELASTIC_POD=$(kubectl --context $CLUSTER_RECREATED get pod --selector=app\.kubernetes\.io/name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_RECREATED)
-   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup' -H 'Content-Type: application/json' -d'
+   ELASTIC_POD=$(kubectl --context $CLUSTER_RECREATED get pod --selector=elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_RECREATED)
+   ES_PASSWORD=$(kubectl --context $CLUSTER_RECREATED get secret elasticsearch-es-elastic-user -n $CAMUNDA_NAMESPACE_RECREATED -o jsonpath='{.data.elastic}' | base64 -d)
+   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -u "elastic:$ES_PASSWORD" -XPUT 'http://localhost:9200/_snapshot/camunda_backup' -H 'Content-Type: application/json' -d'
    {
    "type": "s3",
    "settings": {
@@ -1281,7 +1336,7 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
 6. Verify that the backup can be found in the shared S3 bucket:
 
    ```bash
-   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XGET 'http://localhost:9200/_snapshot/camunda_backup/_all'
+   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -u "elastic:$ES_PASSWORD" -XGET 'http://localhost:9200/_snapshot/camunda_backup/_all'
    ```
 
    The example output above should be the same since it's the same backup.
@@ -1290,7 +1345,7 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
 
    ```bash
    kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- \
-    curl -XPOST 'http://localhost:9200/_snapshot/camunda_backup/failback/_restore?wait_for_completion=true' \
+    curl -u "elastic:$ES_PASSWORD" -XPOST 'http://localhost:9200/_snapshot/camunda_backup/failback/_restore?wait_for_completion=true' \
     -H 'Content-Type: application/json' \
     -d '{"include_global_state": true}'
    ```
@@ -1298,7 +1353,7 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
 8. Verify that the restore has been completed successfully in the new region:
 
    ```bash
-   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XGET 'http://localhost:9200/_snapshot/camunda_backup/failback/_status'
+   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -u "elastic:$ES_PASSWORD" -XGET 'http://localhost:9200/_snapshot/camunda_backup/failback/_status'
    ```
 
    <details>
@@ -1479,7 +1534,7 @@ desired={<img src={Fourteen} alt="Desired state diagram" style={{border: 'none',
 
 #### How to get there
 
-1.  From the base Helm values file (`camunda-values.yml`) in `aws/dual-region/kubernetes`, extract the `clusterSize` and `replicationFactor` values. You’ll need these when re-adding the brokers to the Zeebe cluster.
+1.  From the base Helm values file (`camunda-values.yml`) in `aws/kubernetes/eks-dual-region/helm-values`, extract the `clusterSize` and `replicationFactor` values. You’ll need these when re-adding the brokers to the Zeebe cluster.
 
 2.  Port-forward the Zeebe Gateway to access the [management REST API](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#managementserver). This allows you to send a Cluster API call to add the new brokers to the Zeebe cluster using the previously extracted `clusterSize` and `replicationFactor`.
 
@@ -1836,11 +1891,11 @@ Reapply or upgrade the Helm release to enable and deploy Operate and Tasklist.
 <Tabs groupId="clusters-types">
   <TabItem value="EKS" label="EKS">
 
-Assuming based on **Step 1** and **Step 2**, the base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` includes the adjustments for Elasticsearch and the Zeebe initial brokers.
+Assuming based on **Step 1** and **Step 2**, the base Helm values file `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` includes the adjustments for Elasticsearch and the Zeebe initial brokers.
 
 Make sure to remove the `CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA` variable from `camunda-values.yml`.
 
-Edit the `camunda-values.yml` in `aws/dual-region/kubernetes` and remove the following from the `orchestration.env`:
+Edit the `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` and remove the following from the `orchestration.env`:
 
 ```yaml
 orchestration:
@@ -1858,6 +1913,7 @@ orchestration:
    --kube-context $CLUSTER_SURVIVING \
    --namespace $CAMUNDA_NAMESPACE_SURVIVING \
    -f camunda-values.yml \
+   -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
    -f $REGION_SURVIVING/camunda-values.yml
    ```
 
@@ -1869,6 +1925,7 @@ orchestration:
    --kube-context $CLUSTER_RECREATED \
    --namespace $CAMUNDA_NAMESPACE_RECREATED \
    -f camunda-values.yml \
+   -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
    -f $REGION_RECREATED/camunda-values.yml
    ```
 
@@ -1879,7 +1936,7 @@ Follow the installation instructions for both regions. You’ll need to apply `h
 
 Make sure to remove the `CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA` variable from `camunda-values.yml`.
 
-Edit the `generated-values-region-1|2.yml` file and remove the following from the `orchestration.env`:
+Edit the `generated-values-region-0|1.yml` file and remove the following from the `orchestration.env`:
 
 ```yaml
 orchestration:
@@ -1909,7 +1966,7 @@ orchestration:
 
    ```bash
    # The default are 5 profiles, so this confirms that Operate and Tasklist are enabled
-   io.camunda.application.StandaloneCamunda - The following 5 profiles are active: "broker", "operate", "tasklist", "identity", "consolidated-auth"
+   io.camunda.application.StandaloneCamunda - The following 5 profiles are active: "broker", "operate", "tasklist", "admin", "consolidated-auth"
    ```
 
 3. Alternatively, verify that the configuration lists Operate and Tasklist as active profiles:
@@ -1921,7 +1978,7 @@ orchestration:
    ```bash
    spring:
      profiles:
-       active: "broker,operate,tasklist,identity,consolidated-auth"
+       active: "broker,operate,tasklist,admin,consolidated-auth"
    ```
 
 </div>

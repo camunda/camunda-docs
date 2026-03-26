@@ -7,7 +7,7 @@ description: "Grant users access to work with Operate."
 If authorization control is enabled for your Orchestration Cluster, users require the following authorizations to work with Operate.
 
 :::note
-You can assign these [in the Identity UI](components/identity/authorization.md#create-an-authorization). See [the introduction to authorizations](components/concepts/access-control/authorizations.md#available-resources) for a list of all available authorizations.
+You can assign these [in the Admin UI](/components/admin/authorization.md#create-an-authorization). See [the introduction to authorizations](/components/concepts/access-control/authorizations.md#available-resources) for a list of all available authorizations.
 :::
 
 ## Mandatory authorizations

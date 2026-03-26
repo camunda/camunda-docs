@@ -8,7 +8,7 @@ Learn more about how operation data from the audit log is presented in different
 
 ## Applications
 
-Depending on the view you're using to access the audit log in [Operate](../../operate/userguide/audit-operations.md), [Identity](../../identity/audit-operations.md), or [Tasklist](../../tasklist/userguide/audit-task-history.md), you'll see a subset of the following operation details:
+Depending on the view you're using to access the audit log in [Operate](../../operate/userguide/audit-operations.md), [Admin](../../admin/audit-operations.md), or [Tasklist](../../tasklist/userguide/audit-task-history.md), you'll see a subset of the following operation details:
 
 | Property       | Description                                                                 |
 | :------------- | :-------------------------------------------------------------------------- |

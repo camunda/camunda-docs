@@ -133,7 +133,7 @@ Suppose you're overseeing an e-commerce platform. It's vital to ensure certain p
 2. Choose the HTTP Polling connector template.
 3. Configure the connector as follows:
    - **URL**: `https://inventory.yourstore.com/api/v2/products/12345/stock`
-   - **Authorization Type**: Basic Authentication
+   - **Authorization Type**: Basic authentication
    - **Username**: `[YourInventoryAPIUsername]`
    - **Password**: `{{secrets.PASSWORD}}`
    - **Interval**: `PT1H` (Every hour)

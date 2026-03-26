@@ -152,6 +152,26 @@ data:
 - Production workloads: Use a supported RDBMS or document-store backend. Choose based on operational needs and validate with [benchmarking and sizing guidance](/components/best-practices/architecture/sizing-your-environment.md).
 - Debugging and troubleshooting: H2 or PostgreSQL are often easier to inspect and visualize.
 
+### H2 limitations
+
+Use H2 only for development, testing, and evaluation.
+
+- H2 is non-production only.
+- H2 in-memory mode does not persist data across restarts.
+- H2 file-based mode persists only to local node disk and is intended for local/dev usage.
+- H2 does not provide a shared database across brokers.
+- Multi-broker clusters with H2 are not a valid architecture; query results can be broker-local and incomplete.
+- H2 has limited concurrency and scalability compared to external production backends.
+
+For Helm deployments, if you choose H2 you must run a single broker (`clusterSize: 1`, `partitionCount: 1`, `replicationFactor: 1`). For multi-broker Helm clusters, use a shared external backend (for example, PostgreSQL).
+
+### Migration from invalid H2 setups
+
+If you currently run an invalid H2 topology, use one of these paths:
+
+1. Local/dev only: Move to file-based H2 with a single broker.
+2. Shared or clustered deployment: Move to an external persistent backend (for example, PostgreSQL, MariaDB, MySQL, Oracle, SQL Server, Elasticsearch, or OpenSearch according to support and architecture).
+
 :::note
 Starting in 8.9, H2 is the default secondary storage for lightweight Camunda 8 Run setups and quickstarts. H2 remains suitable for local testing, demos, and file-based setups, but it is not recommended for production workloads where persistence, scaling, and full analytics are required.
 

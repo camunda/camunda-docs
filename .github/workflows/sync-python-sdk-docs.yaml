@@ -94,6 +94,18 @@ jobs:
           API_COUNT=$(find "$TARGET/api-reference" -name '*.md' 2>/dev/null | wc -l | tr -d ' ')
           echo "Copied landing page + ${SECTION_COUNT} section pages + ${API_COUNT} API reference files → ${{ steps.resolve.outputs.docs_root }}"
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Format generated docs with Prettier
+        working-directory: docs
+        run: |
+          npm ci
+          DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
+          npx prettier --write "$DOCS_ROOT/apis-tools/python-sdk.md" "$DOCS_ROOT/apis-tools/python-sdk/"
+
       - name: Check for changes
         id: check_changes
         working-directory: docs
