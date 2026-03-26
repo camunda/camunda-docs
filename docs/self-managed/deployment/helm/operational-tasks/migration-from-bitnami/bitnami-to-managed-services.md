@@ -19,10 +19,6 @@ Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to **c
 - **Elasticsearch**: Elastic Cloud or any managed Elasticsearch service
 - **Keycloak**: This guide does not assume a managed Keycloak service. Keep Keycloak on the [Keycloak Operator](https://www.keycloak.org/operator/installation), or replace it with an [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) if that better fits your environment.
 
-:::tip Before running in production
-Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
-:::
-
 ## When to use this guide
 
 Managed services are ideal when your organization:
@@ -35,6 +31,8 @@ Managed services are ideal when your organization:
 Read the [topic overview](./index.md#why-migrate) to learn why you should migrate.
 
 ## Prerequisites
+
+Before starting the migration, ensure you have the following [general prerequisites](./index.md#prerequisites-all-paths):
 
 <CommonPrerequisites />
 
@@ -54,6 +52,10 @@ For managed services, the infrastructure decision is separate from the authentic
 - If you **keep Keycloak**, deploy it with the Keycloak Operator and set the hostname to the full public URL, for example `https://your-domain.example.com/auth`.
 - If you **replace Keycloak with external OIDC**, prepare the provider configuration and the corresponding Identity Helm values before running the migration.
   :::
+
+:::tip Before running in production
+Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
+:::
 
 ## Clone the deployment references repository
 

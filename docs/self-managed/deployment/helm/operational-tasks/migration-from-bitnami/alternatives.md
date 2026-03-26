@@ -5,6 +5,7 @@ title: Advanced migration alternatives
 description: "Alternative migration paths for Camunda 8 Self-Managed when Kubernetes operators or managed services are not available — including VM-based, bare-metal, and Docker Compose deployments."
 ---
 
+import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 
 This guide covers advanced migration alternatives for organizations that **cannot use Kubernetes operators or managed services** for their infrastructure components. These approaches require more manual effort but provide full control over the deployment.
@@ -27,6 +28,16 @@ Consider these alternatives if:
 - You're running Camunda outside of Kubernetes—for example, using Docker Compose or VM-based deployments.
 
 Read the [topic overview](./index.md#why-migrate) to learn why you should migrate.
+
+## Prerequisites
+
+Before starting the migration, ensure you have the following [general prerequisites](./index.md#prerequisites-all-paths):
+
+<CommonPrerequisites />
+
+:::tip Before running in production
+Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
+:::
 
 ## Option 1: Manually-deployed PostgreSQL and Elasticsearch on Kubernetes
 

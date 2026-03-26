@@ -58,6 +58,8 @@ The zero-downtime migration replaces the backup/restore phases with continuous r
 
 ## Prerequisites
 
+Before starting the migration, ensure you have the following [general prerequisites](./index.md#prerequisites-all-paths):
+
 <CommonPrerequisites />
 
 In addition to the general prerequisites:
@@ -73,6 +75,10 @@ The PostgreSQL path is always logical replication. Elasticsearch requires an exp
 - Use **CCR** if you have the license and need the closest possible parity at cutover.
 - Use **continuous snapshots** if a small lag window is acceptable.
   :::
+
+:::tip Before running in production
+Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
+:::
 
 ## Limitations and caveats
 

@@ -21,10 +21,6 @@ Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure (Postg
 
 After migration, your setup will be aligned with the [operator-based reference architecture](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
-:::tip Before running in production
-Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
-:::
-
 ![Initial cluster state before migration from Bitnami subcharts to Kubernetes operators](./img/bitnami-migration-initial-state.jpg)
 
 ## When to use this guide
@@ -35,7 +31,7 @@ Read the [topic overview](./index.md#why-migrate) to learn why you should migrat
 
 ## Prerequisites
 
-Before starting the migration, ensure you have:
+Before starting the migration, ensure you have the following [general prerequisites](./index.md#prerequisites-all-paths):
 
 <CommonPrerequisites />
 
@@ -48,6 +44,10 @@ Additionally, the migration scripts require:
 
 :::tip Tool versions
 For the tool versions used and tested, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
+:::
+
+:::tip Before running in production
+Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
 :::
 
 ## Clone the deployment references repository
