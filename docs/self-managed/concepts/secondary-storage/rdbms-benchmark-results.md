@@ -28,12 +28,6 @@ Current published results are based on PostgreSQL benchmarking only.
 
 Published results currently reflect short-retention benchmark windows.
 
-:::note
-Benchmark comparability depends on hardware parity. Interpret Elasticsearch/OpenSearch and RDBMS comparisons only when environments are comparable.
-
-Overall hardware requirements can be similar across Elasticsearch/OpenSearch-based and RDBMS-based setups, but the optimal resource allocation across components may differ.
-:::
-
 ## Key results summary
 
 ### Write throughput
