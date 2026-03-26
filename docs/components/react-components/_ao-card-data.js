@@ -4,6 +4,7 @@ import IconAoAgentImg from "../assets/icon-agentic.png";
 import IconAoLlmImg from "../assets/icon-llm.png";
 import IconOptimize from "../assets/icon-optimize.png";
 import IconConnectorImg from "../connectors/img/icon-connectors.png";
+import IconOperate from "../assets/icon-operate.png";
 
 // Get started cards on introduction page
 export const getStartedCards = [
@@ -43,7 +44,7 @@ export const fundamentalCards_monitoring = [
   {
     link: "../monitor-ai-agents/",
     title: "Monitor your AI agents",
-    image: IconAoAgentImg,
+    image: IconOperate,
     description: "Monitor your AI agents with Operate.",
   },
 ];
