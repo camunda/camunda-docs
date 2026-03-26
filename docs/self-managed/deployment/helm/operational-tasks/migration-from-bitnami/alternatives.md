@@ -35,6 +35,10 @@ Before starting the migration, ensure you have the following [general prerequisi
 
 <CommonPrerequisites />
 
+## Precautions
+
+Review the [general precautions](./index.md#precautions) that apply to all migration paths.
+
 :::tip Before running in production
 Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
 :::

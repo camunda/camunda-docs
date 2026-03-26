@@ -44,25 +44,29 @@ Additionally, the migration scripts require:
 
 For the tool versions used and tested, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
 
+## Precautions
+
+Review the [general precautions](./index.md#precautions) that apply to all migration paths.
+
 :::tip Before running in production
 Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
 :::
 
-## Clone the deployment references repository
+### IRSA / IAM-based authentication not supported
 
-<CloneRepo />
+The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or OpenSearch with IAM auth require a custom migration approach.
 
-## Precautions
+### Operator-specific precautions
 
-Before starting, review the [general precautions](./index.md#precautions) that apply to all migration paths. The items below are specific to the operator-based migration:
+These precautions are specific to the operator-based migration:
 
 - **Monitor resource quotas:** CNPG and ECK clusters consume additional resources. Ensure your namespace quotas and node capacity allow for the temporary duplication.
 - **Elasticsearch `reindex.remote.whitelist`:** The target ECK cluster must have `reindex.remote.whitelist` configured to allow pulling data from the source Bitnami Elasticsearch via the `_reindex` API. The migration scripts patch this automatically.
 - **Keycloak hooks:** If you use a DNS CNAME for Keycloak, use the `hooks/post-phase-3.sh` hook to update the DNS target to the new Keycloak Operator service after cutover.
 
-:::warning IRSA / IAM-based authentication not supported
-The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or OpenSearch with IAM auth require a custom migration approach.
-:::
+## Clone the deployment references repository
+
+<CloneRepo />
 
 ## Step 1: Configure the migration
 

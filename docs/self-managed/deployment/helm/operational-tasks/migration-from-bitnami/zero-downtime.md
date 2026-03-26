@@ -73,13 +73,15 @@ Elasticsearch requires an explicit tradeoff:
   - Use if a small lag window is acceptable.
   - This option requires **the ability to run continuous snapshots** with very short intervals.
 
+## Precautions
+
+Review the [general precautions](./index.md#precautions) that apply to all migration paths.
+
+Additionally, note that while this migration path removes the planned downtime window, it does not remove the need for rehearsal, monitoring, and rollback planning. Treat it as a custom migration pattern rather than a push-button alternative to the standard workflow.
+
 :::tip Before running in production
 Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
 :::
-
-## Limitations and caveats
-
-This migration path removes the planned downtime window, but it does not remove the need for rehearsal, monitoring, and rollback planning. Treat it as a custom migration pattern rather than a push-button alternative to the standard workflow.
 
 ### PostgreSQL logical replication limitations
 
