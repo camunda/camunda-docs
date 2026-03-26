@@ -4,9 +4,9 @@ import TabItem from "@theme/TabItem";
 Before starting, choose between the **standard** migration and the **warm reindex** strategy. This choice affects how Elasticsearch data is transferred and, therefore, how long the downtime window lasts.
 
 <Tabs groupId="migration-strategy" queryString="strategy">
-<TabItem value="standard" label="Standard" default>
+<TabItem value="standard" label="Standard">
 
-The standard migration performs all Elasticsearch data transfer during the cutover (Phase 3). Downtime scales linearly with Elasticsearch data volume, typically **5–40 minutes**.
+The standard migration performs all Elasticsearch data transfer during the cutover (Phase 3). Downtime scales linearly with Elasticsearch data volume, typically **5–60 minutes**.
 
 This is the simplest option and is recommended when:
 
@@ -14,16 +14,16 @@ This is the simplest option and is recommended when:
 - You can tolerate a longer maintenance window.
 - You want the fewest moving parts.
 
-| Phase                         | Description                                                    | Downtime                   |
-| ----------------------------- | -------------------------------------------------------------- | -------------------------- |
-| **Phase 1** – Deploy targets  | Install operators and create target clusters alongside Bitnami | No                         |
-| **Phase 2** – Initial backup  | Back up all data while the application is still running        | No                         |
-| **Phase 3** – Cutover         | Freeze → final backup → full ES reindex → Helm upgrade         | **Yes** (5–40 min typical) |
-| **Phase 4** – Validate        | Verify all components are healthy on the new infrastructure    | No                         |
-| **Phase 5** – Cleanup Bitnami | Remove old Bitnami resources and re-verify                     | No                         |
+| Phase                         | Description                                                    | Downtime                       |
+| ----------------------------- | -------------------------------------------------------------- | ------------------------------ |
+| **Phase 1** – Deploy targets  | Install operators and create target clusters alongside Bitnami | No                             |
+| **Phase 2** – Initial backup  | Back up all data while the application is still running        | No                             |
+| **Phase 3** – Cutover         | Freeze → final backup → full ES reindex → Helm upgrade         | **Yes** (5–60 minutes typical) |
+| **Phase 4** – Validate        | Verify all components are healthy on the new infrastructure    | No                             |
+| **Phase 5** – Cleanup Bitnami | Remove old Bitnami resources and re-verify                     | No                             |
 
 </TabItem>
-<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)">
+<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)" default>
 
 The warm reindex strategy pre-copies Elasticsearch data to the target during Phase 2, while the application is still running. At cutover, only a fast **delta reindex** is needed to sync changes written since Phase 2, significantly reducing the downtime window.
 

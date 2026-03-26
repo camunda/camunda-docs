@@ -13,6 +13,7 @@ import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 import CloneRepo from './\_partials/\_clone-repo.md'
 import DualRegionEsNote from './\_partials/\_dual-region-es-note.md'
 import ChooseMigrationStrategy from './\_partials/\_choose-migration-strategy.md'
+import MeasureEstimate from './\_partials/\_measure-estimate.md'
 
 Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure (PostgreSQL, Elasticsearch, and Keycloak) to **Kubernetes operator-managed equivalents**:
 
@@ -84,25 +85,25 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ### Key configuration variables
 
-| Variable                     | Default                | Description                                                                                                                                                                                                                                                        |
-| ---------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `NAMESPACE`                  | `camunda`              | Kubernetes namespace of your Camunda installation                                                                                                                                                                                                                  |
-| `CAMUNDA_RELEASE_NAME`       | `camunda`              | Helm release name                                                                                                                                                                                                                                                  |
-| `CAMUNDA_HELM_CHART_VERSION` | (chart version)        | Target Helm chart version for the upgrade                                                                                                                                                                                                                          |
-| `CAMUNDA_DOMAIN`             | (empty)                | Domain for Keycloak Ingress. Leave empty for port-forward setups                                                                                                                                                                                                   |
-| `IDENTITY_DB_NAME`           | `identity`             | Identity database name (must match the source installation)                                                                                                                                                                                                        |
-| `IDENTITY_DB_USER`           | `identity`             | Identity database user (must match the source installation)                                                                                                                                                                                                        |
-| `KEYCLOAK_DB_NAME`           | `keycloak`             | Keycloak database name (must match the source installation)                                                                                                                                                                                                        |
-| `KEYCLOAK_DB_USER`           | `keycloak`             | Keycloak database user (must match the source installation)                                                                                                                                                                                                        |
-| `WEBMODELER_DB_NAME`         | `webmodeler`           | Web Modeler database name (must match the source installation)                                                                                                                                                                                                     |
-| `WEBMODELER_DB_USER`         | `webmodeler`           | Web Modeler database user (must match the source installation)                                                                                                                                                                                                     |
-| `BACKUP_PVC`                 | `migration-backup-pvc` | PVC name for storing backup data                                                                                                                                                                                                                                   |
-| `BACKUP_STORAGE_SIZE`        | `50Gi`                 | Backup PVC size (must fit all database dumps)                                                                                                                                                                                                                      |
-| `MIGRATE_IDENTITY`           | `true`                 | Enables the Identity PostgreSQL database migration                                                                                                                                                                                                                 |
-| `MIGRATE_KEYCLOAK`           | `true`                 | Enables the Keycloak and its PostgreSQL database migration                                                                                                                                                                                                         |
-| `MIGRATE_WEBMODELER`         | `true`                 | Enables the Web Modeler PostgreSQL database migration                                                                                                                                                                                                              |
-| `MIGRATE_ELASTICSEARCH`      | `true`                 | Enables the Elasticsearch data migration                                                                                                                                                                                                                           |
-| `ES_WARM_REINDEX`            | `false`                | When `true`, Phase 2 pre-copies ES data to the target while the app is running (no downtime). Phase 3 then runs a fast delta reindex, reducing cutover to ~5 min regardless of data volume. See [Choose your migration strategy](#choose-your-migration-strategy). |
+| Variable                     | Default                | Description                                                                                                                                                                                                                                                            |
+| ---------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NAMESPACE`                  | `camunda`              | Kubernetes namespace of your Camunda installation                                                                                                                                                                                                                      |
+| `CAMUNDA_RELEASE_NAME`       | `camunda`              | Helm release name                                                                                                                                                                                                                                                      |
+| `CAMUNDA_HELM_CHART_VERSION` | (chart version)        | Target Helm chart version for the upgrade                                                                                                                                                                                                                              |
+| `CAMUNDA_DOMAIN`             | (empty)                | Domain for Keycloak Ingress. Leave empty for port-forward setups                                                                                                                                                                                                       |
+| `IDENTITY_DB_NAME`           | `identity`             | Identity database name (must match the source installation)                                                                                                                                                                                                            |
+| `IDENTITY_DB_USER`           | `identity`             | Identity database user (must match the source installation)                                                                                                                                                                                                            |
+| `KEYCLOAK_DB_NAME`           | `keycloak`             | Keycloak database name (must match the source installation)                                                                                                                                                                                                            |
+| `KEYCLOAK_DB_USER`           | `keycloak`             | Keycloak database user (must match the source installation)                                                                                                                                                                                                            |
+| `WEBMODELER_DB_NAME`         | `webmodeler`           | Web Modeler database name (must match the source installation)                                                                                                                                                                                                         |
+| `WEBMODELER_DB_USER`         | `webmodeler`           | Web Modeler database user (must match the source installation)                                                                                                                                                                                                         |
+| `BACKUP_PVC`                 | `migration-backup-pvc` | PVC name for storing backup data                                                                                                                                                                                                                                       |
+| `BACKUP_STORAGE_SIZE`        | `50Gi`                 | Backup PVC size (must fit all database dumps)                                                                                                                                                                                                                          |
+| `MIGRATE_IDENTITY`           | `true`                 | Enables the Identity PostgreSQL database migration                                                                                                                                                                                                                     |
+| `MIGRATE_KEYCLOAK`           | `true`                 | Enables the Keycloak and its PostgreSQL database migration                                                                                                                                                                                                             |
+| `MIGRATE_WEBMODELER`         | `true`                 | Enables the Web Modeler PostgreSQL database migration                                                                                                                                                                                                                  |
+| `MIGRATE_ELASTICSEARCH`      | `true`                 | Enables the Elasticsearch data migration                                                                                                                                                                                                                               |
+| `ES_WARM_REINDEX`            | `false`                | When `true`, Phase 2 pre-copies ES data to the target while the app is running (no downtime). Phase 3 then runs a fast delta reindex, reducing cutover to ~5 minutes regardless of data volume. See [Choose your migration strategy](#choose-your-migration-strategy). |
 
 Set any `MIGRATE_*` variable to `false` to skip a component. This is useful, for example, if the component isn't deployed or already uses an external service.
 
@@ -233,12 +234,12 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ### Phase 2: Initial backup (no downtime)
 
 <Tabs groupId="migration-strategy" queryString="strategy">
-<TabItem value="standard" label="Standard" default>
+<TabItem value="standard" label="Standard">
 
 ![Illustration of Phase 2: take the initial backup while the source platform is still running](./img/bitnami-migration-phase-2-initial-backup.jpg)
 
 </TabItem>
-<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)">
+<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)" default>
 
 ![Illustration of Phase 2 with warm reindex: take the initial backup and pre-copy Elasticsearch data to the target](./img/bitnami-migration-phase-2-warm-reindex.jpg)
 
@@ -252,7 +253,7 @@ bash 2-backup.sh
 ```
 
 <Tabs groupId="migration-strategy" queryString="strategy">
-<TabItem value="standard" label="Standard" default>
+<TabItem value="standard" label="Standard">
 
 What happens:
 
@@ -261,7 +262,7 @@ What happens:
 3. All backup data is stored on a shared Persistent Volume Claim (PVC).
 
 </TabItem>
-<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)">
+<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)" default>
 
 What happens:
 
@@ -309,12 +310,12 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ### Phase 3: Cutover (downtime required)
 
 <Tabs groupId="migration-strategy" queryString="strategy">
-<TabItem value="standard" label="Standard" default>
+<TabItem value="standard" label="Standard">
 
 ![Illustration of Phase 3: stop traffic, restore the data, and switch Camunda to the new backends](./img/bitnami-migration-phase-3-cutover.jpg)
 
 </TabItem>
-<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)">
+<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)" default>
 
 ![Illustration of Phase 3 with warm reindex: stop traffic, delta reindex, and switch Camunda to the new backends](./img/bitnami-migration-phase-3-cutover-warm-reindex.jpg)
 
@@ -325,12 +326,12 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 This is the only phase that causes downtime. Schedule a maintenance window before proceeding.
 
 <Tabs groupId="migration-strategy" queryString="strategy">
-<TabItem value="standard" label="Standard" default>
+<TabItem value="standard" label="Standard">
 
 Downtime typically lasts **5–60 minutes**, depending on Elasticsearch data volume. See [downtime estimation](#downtime-estimation) for benchmarked timings.
 
 </TabItem>
-<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)">
+<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)" default>
 
 With `ES_WARM_REINDEX=true`, downtime is reduced to **~5 minutes** regardless of Elasticsearch data volume. Phase 3 only syncs the delta written since the warm reindex in Phase 2.
 
@@ -347,7 +348,7 @@ bash 3-cutover.sh
 ```
 
 <Tabs groupId="migration-strategy" queryString="strategy">
-<TabItem value="standard" label="Standard" default>
+<TabItem value="standard" label="Standard">
 
 What happens:
 
@@ -361,7 +362,7 @@ What happens:
 6. **Helm upgrade** — reconfigures Camunda to use the new backends and restarts all components.
 
 </TabItem>
-<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)">
+<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)" default>
 
 What happens:
 
@@ -507,7 +508,7 @@ Rollback is available after Phase 3 (cutover). Before that, simply stop the migr
 Only Phase 3 (cutover) causes downtime. The estimates below were measured on minimal Kubernetes clusters with standard storage. **Production clusters with faster storage and networking will perform significantly better**. Always run a [staging rehearsal](#staging-rehearsal) with representative data volumes to measure your actual downtime.
 
 <Tabs groupId="migration-strategy" queryString="strategy">
-<TabItem value="standard" label="Standard" default>
+<TabItem value="standard" label="Standard">
 
 ### Reference timings
 
@@ -529,12 +530,12 @@ The following timings were observed migrating a Camunda 8 installation with all 
 
 ### Estimates by Elasticsearch data volume
 
-| ES Data Volume | Estimated Downtime | Bottleneck                 |
-| -------------- | ------------------ | -------------------------- |
-| < 1 GB         | ~5 minutes         | Helm upgrade + pod startup |
-| 1–10 GB        | ~10–40 minutes     | ES reindex                 |
-| 10–50 GB       | ~40 min–2 hours    | ES reindex                 |
-| > 50 GB        | 2+ hours           | ES reindex                 |
+| ES Data Volume | Estimated Downtime  | Bottleneck                 |
+| -------------- | ------------------- | -------------------------- |
+| < 1 GB         | ~5 minutes          | Helm upgrade + pod startup |
+| 1–10 GB        | ~10–40 minutes      | ES reindex                 |
+| 10–50 GB       | ~40 minutes–2 hours | ES reindex                 |
+| > 50 GB        | 2+ hours            | ES reindex                 |
 
 ### Key observations
 
@@ -544,7 +545,7 @@ The following timings were observed migrating a Camunda 8 installation with all 
 - **Always measure in staging.** Run the full migration on a staging environment with representative data volumes to get an accurate downtime estimate for your specific setup.
 
 </TabItem>
-<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)">
+<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)" default>
 
 ### Reference timings
 
@@ -566,17 +567,17 @@ With `ES_WARM_REINDEX=true`, the bulk of the Elasticsearch data transfer happens
 
 ### Estimates by Elasticsearch data volume
 
-| ES Data Volume | Standard downtime | Warm reindex downtime | Notes                                   |
-| -------------- | ----------------- | --------------------- | --------------------------------------- |
-| < 1 GB         | ~5 min            | ~5 min                | No significant benefit at small volumes |
-| 1–10 GB        | ~10–40 min        | **~5 min**            | Warm reindex eliminates the bottleneck  |
-| 10–50 GB       | ~40 min–2 hours   | **~5 min**            | Most impactful reduction                |
-| > 50 GB        | 2+ hours          | **~5 min**            | Critical for large data volumes         |
+| ES Data Volume | Standard downtime   | Warm reindex downtime | Notes                                   |
+| -------------- | ------------------- | --------------------- | --------------------------------------- |
+| < 1 GB         | ~5 minutes          | ~5 minutes            | No significant benefit at small volumes |
+| 1–10 GB        | ~10–40 minutes      | **~5 minutes**        | Warm reindex eliminates the bottleneck  |
+| 10–50 GB       | ~40 minutes–2 hours | **~5 minutes**        | Most impactful reduction                |
+| > 50 GB        | 2+ hours            | **~5 minutes**        | Critical for large data volumes         |
 
 :::info Key observations
 
 - **ES delta reindex is nearly instant.** After the warm reindex pre-copies all existing data in Phase 2, only new documents created between Phase 2 and the freeze need to be synced. The delta reindex uses `version_type=external` and `conflicts=proceed` to efficiently skip up-to-date documents.
-- **Downtime becomes data-volume independent.** The dominant factor (ES reindex) is removed from the critical path. Downtime is determined by the freeze, PG restore, and Helm upgrade steps (~5 min total).
+- **Downtime becomes data-volume independent.** The dominant factor (ES reindex) is removed from the critical path. Downtime is determined by the freeze, PG restore, and Helm upgrade steps (~5 minutes total).
 - **Phase 2 takes longer.** The warm reindex adds runtime to Phase 2 proportional to your ES data volume, but this runs without any downtime.
   :::
 
@@ -585,26 +586,7 @@ With `ES_WARM_REINDEX=true`, the bulk of the Elasticsearch data transfer happens
 
 ### Measure with `--estimate`
 
-You can measure the actual cutover duration on your environment **without causing any downtime**:
-
-```bash
-# After completing Phases 1 and 2:
-./3-cutover.sh --estimate
-```
-
-This runs the real PG backup/restore and ES reindex operations against the target infrastructure but **skips** freezing the application and the Helm upgrade. The application remains fully operational throughout.
-
-Use this to:
-
-- **Measure real timing** with your actual data volumes before scheduling a maintenance window.
-- **Validate ES reindex throughput** on your cluster hardware (storage, network, CPU).
-- **Compare standard vs. warm reindex** — run Phase 2 once without `ES_WARM_REINDEX`, estimate with `./3-cutover.sh --estimate`, then enable `ES_WARM_REINDEX=true`, rerun Phase 2, and estimate again.
-
-The estimate does not mark Phase 3 as complete, so you can run the real cutover afterwards with `./3-cutover.sh`.
-
-:::note
-The estimate restores data to the target backends (CNPG, ECK). This is harmless — the real cutover will overwrite with the final consistent backup taken after freezing the application.
-:::
+<MeasureEstimate />
 
 ## Troubleshooting
 
