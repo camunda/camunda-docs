@@ -573,7 +573,7 @@ $ c8ctl deploy ./my-process.bpmn`}
           <div className={styles.commandGrid}>
             <div className={styles.commandCard}>
               <h4>Manage your clusters</h4>
-              <TerminalWindow>
+              <TerminalWindow title="Terminal">
                 {`$ c8ctl c8run start 8.9.0-alpha5
 $ c8ctl c8run stop
 
@@ -582,7 +582,7 @@ $ c8ctl c8run stop
             </div>
             <div className={styles.commandCard}>
               <h4>Deploy and start processes</h4>
-              <TerminalWindow>
+              <TerminalWindow title="Terminal">
                 {`$ c8ctl deploy ./payment.bpmn
 $ c8ctl create pi --id=payment
 $ c8ctl list pi`}
@@ -590,7 +590,7 @@ $ c8ctl list pi`}
             </div>
             <div className={styles.commandCard}>
               <h4>Interact with processes</h4>
-              <TerminalWindow>
+              <TerminalWindow title="Terminal">
                 {`$ c8 list jobs --type=email-service
 $ c8ctl activate jobs email-service
 $ c8ctl complete job 2251799813685252'`}
@@ -598,7 +598,7 @@ $ c8ctl complete job 2251799813685252'`}
             </div>
             <div className={styles.commandCard}>
               <h4>Monitor and debug</h4>
-              <TerminalWindow>
+              <TerminalWindow title="Terminal">
                 {`$ c8ctl list inc --state=ACTIVE
 $ c8ctl get inc 2251799813685251
 $ c8 resolve inc 2251799813685251`}
@@ -633,14 +633,14 @@ $ c8 resolve inc 2251799813685251`}
                     fontSize: "0.75rem",
                     fontWeight: 700,
                     letterSpacing: "0.02em",
-                    background: "rgba(252, 93, 13, 0.15)",
-                    border: "1px solid rgba(252, 93, 13, 0.45)",
-                    color: "#fc5d0d",
+                    backgroundColor: "#fc5d0d",
+                    border: "1px solid #fc5d0d",
+                    color: "#ffffff",
                     verticalAlign: "middle",
                     lineHeight: 1.2,
                   }}
                 >
-                  Coming soon!
+                  Coming soon
                 </span>
               </h4>
               <TerminalWindow title="Terminal">
@@ -695,7 +695,7 @@ Available skills:
                   </Link>
                 </span>
               </h4>
-              <TerminalWindow title="Claude Config">
+              <TerminalWindow title="Terminal">
                 {`// mcp.json
 {
   "servers": {
