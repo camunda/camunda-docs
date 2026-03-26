@@ -217,6 +217,8 @@ What happens:
 4. It installs the **ECK operator** and creates an Elasticsearch cluster with `reindex.remote.whitelist` configured for data migration via the `_reindex` API.
 5. It installs the **Keycloak Operator** and creates the Keycloak Custom Resource.
 
+The script only deploys operators for components that are being migrated. For example, if `MIGRATE_ELASTICSEARCH=false`, the ECK operator is not installed.
+
 All targets are created empty; no traffic is routed to them yet.
 
 <details>
@@ -227,10 +229,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ```
 
 </details>
-
-:::info Selective component deployment
-The script only deploys operators for components that are being migrated. For example, if `MIGRATE_ELASTICSEARCH=false`, the ECK operator is not installed.
-:::
 
 ### Phase 2: Initial backup (no downtime)
 
@@ -354,13 +352,24 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 </details>
 
+:::warning Wait before cleanup
+Do not move on to the next phase immediately after validation. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [Rollback](#rollback)).
+:::
+
 ### Phase 5: Cleanup Bitnami resources (no downtime)
 
 ![Illustration of Phase 5: remove the old Bitnami resources after the new platform is stable](./img/bitnami-migration-phase-5-cleanup.jpg)
 
-:::warning Wait before cleanup
-Do not run this phase immediately after validation. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [Rollback](#rollback)).
-:::
+:::warning Destructive and irreversible
+This phase **permanently deletes** old Bitnami StatefulSets, PVCs, and the migration backup PVC. After cleanup, rollback to Bitnami subcharts is **no longer possible**.
+
+Before running this phase, strongly consider:
+
+1. Taking a full backup of all databases (`pg_dumpall` or equivalent)
+2. Taking PVC or storage volume snapshots (cloud provider snapshots)
+3. Storing backups in cold storage—for example, S3 Glacier or GCS Archive
+4. Keeping rollback artifacts in `.state/` as a safety net
+   :::
 
 After confirming the migration is successful, remove old Bitnami StatefulSets, PVCs, services, and the migration backup PVC:
 
@@ -389,17 +398,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 </details>
 
-:::warning Destructive and irreversible
-This phase **permanently deletes** old Bitnami StatefulSets, PVCs, and the migration backup PVC. After cleanup, rollback to Bitnami subcharts is **no longer possible**.
-
-Before running this phase, strongly consider:
-
-1. Taking a full backup of all databases (`pg_dumpall` or equivalent)
-2. Taking PVC or storage volume snapshots (cloud provider snapshots)
-3. Storing backups in cold storage—for example, S3 Glacier or GCS Archive
-4. Keeping rollback artifacts in `.state/` as a safety net
-   :::
-
 ## Migration hooks
 
 The migration scripts support custom hooks that run before or after each phase. See [Migration hooks](./index.md#migration-hooks) for the full reference and examples.
@@ -423,9 +421,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 </details>
 
-:::info Rollback scope
 Rollback is available after Phase 3 (cutover). Before that, simply stop the migration; your Bitnami infrastructure is still active and untouched.
-:::
 
 ## Downtime estimation
 
@@ -458,13 +454,12 @@ The following timings were observed migrating a Camunda 8 installation with all 
 | 10–50 GB       | ~40 min–2 hours    | ES reindex                 |
 | > 50 GB        | 2+ hours           | ES reindex                 |
 
-:::info Key observations
+### Key observations
 
 - **Elasticsearch reindex dominates downtime.** With ~9 GB of ES data, the reindex step accounts for ~95% of the total cutover time. PostgreSQL backup and restore completes in under a minute regardless of reasonable data sizes.
 - **Downtime scales linearly with ES data volume.** The largest indices—such as Optimize process instance history—drive the overall duration.
 - **Your cluster will likely be faster.** These timings were measured on constrained test infrastructure. Production clusters with NVMe storage, dedicated nodes, and higher network bandwidth typically achieve much higher reindex throughput.
 - **Always measure in staging.** Run the full migration on a staging environment with representative data volumes to get an accurate downtime estimate for your specific setup.
-  :::
 
 ## Troubleshooting
 
