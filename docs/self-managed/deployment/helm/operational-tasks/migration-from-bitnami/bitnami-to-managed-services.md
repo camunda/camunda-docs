@@ -304,12 +304,8 @@ What happens:
 
 1. **PostgreSQL**: A `pg_dump` Kubernetes Job is created for each component (Identity, Keycloak, and Web Modeler).
 2. **Elasticsearch**: A verification job checks source Elasticsearch health and lists all Camunda indices to be migrated.
-3. **Elasticsearch warm reindex**: A full reindex from the source Bitnami ES to the managed target is performed while the application is still running. This pre-populates the target so Phase 3 only needs a fast delta reindex, dramatically reducing downtime. For external ES targets, you must configure `reindex.remote.whitelist` on the managed Elasticsearch to allow pulling data from the source.
+3. **Elasticsearch warm reindex**: A full reindex from the source Bitnami ES to the managed target is performed while the application is still running. This pre-populates the target with all existing data so Phase 3 only needs a fast delta reindex. The warm reindex may take a significant amount of time depending on your data volume, but it runs **without any downtime**.
 4. All backup data is stored on a shared Persistent Volume Claim (PVC).
-
-:::note
-The warm reindex may take a significant amount of time depending on your Elasticsearch data volume, but it runs **without any downtime** since the application continues to serve traffic.
-:::
 
 </TabItem>
 </Tabs>
@@ -336,7 +332,7 @@ With `ES_WARM_REINDEX=true`, downtime is reduced to **~5 minutes** regardless of
 :::
 
 :::tip Measure downtime before the real cutover
-You can run `./3-cutover.sh --estimate` to measure the actual cutover duration on your environment **without causing any downtime**. See [Measure with `--estimate`](#measure-with---estimate) for details.
+You can run `./3-cutover.sh --estimate` to measure the actual cutover duration on your environment **without causing any downtime**. This runs the real data operations (PG backup/restore and ES reindex) against the target infrastructure but skips freezing the application and the Helm upgrade. See [Measure with `--estimate`](#measure-with---estimate) for details.
 :::
 
 ```bash

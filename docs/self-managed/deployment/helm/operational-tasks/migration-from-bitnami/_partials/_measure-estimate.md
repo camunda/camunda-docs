@@ -15,6 +15,4 @@ Use this to:
 
 The estimate does not mark Phase 3 as complete, so you can run the real cutover afterwards with `./3-cutover.sh`.
 
-:::note
-The estimate restores data to the target backends (CNPG, ECK, or managed services). This is harmless — the real cutover will overwrite with the final consistent backup taken after freezing the application.
-:::
+The estimate restores data to the target backends (CNPG, ECK, or managed services). This is harmless — the real cutover overwrites with the final consistent backup taken after freezing the application.

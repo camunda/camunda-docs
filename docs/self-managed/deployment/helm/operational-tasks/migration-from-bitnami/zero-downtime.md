@@ -44,7 +44,7 @@ The zero-downtime migration replaces the [backup/restore phases](./index.md#migr
 
 | Aspect                         | Standard migration                     | Zero-downtime migration                        |
 | ------------------------------ | -------------------------------------- | ---------------------------------------------- |
-| Downtime                       | 5–30 minutes (Phase 3 freeze)          | None                                           |
+| Downtime                       | 5–60 minutes (Phase 3 freeze)          | None                                           |
 | Data transfer                  | `pg_dump`/`pg_restore` + ES `_reindex` | Logical replication + CCR/continuous snapshot  |
 | Complexity                     | Low — scripted and automated           | High — manual setup, monitoring required       |
 | Risk                           | Low — rollback via Helm values         | Medium — replication lag must be monitored     |

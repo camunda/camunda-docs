@@ -85,25 +85,25 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ### Key configuration variables
 
-| Variable                     | Default                | Description                                                                                                                                                                                                                                                            |
-| ---------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `NAMESPACE`                  | `camunda`              | Kubernetes namespace of your Camunda installation                                                                                                                                                                                                                      |
-| `CAMUNDA_RELEASE_NAME`       | `camunda`              | Helm release name                                                                                                                                                                                                                                                      |
-| `CAMUNDA_HELM_CHART_VERSION` | (chart version)        | Target Helm chart version for the upgrade                                                                                                                                                                                                                              |
-| `CAMUNDA_DOMAIN`             | (empty)                | Domain for Keycloak Ingress. Leave empty for port-forward setups                                                                                                                                                                                                       |
-| `IDENTITY_DB_NAME`           | `identity`             | Identity database name (must match the source installation)                                                                                                                                                                                                            |
-| `IDENTITY_DB_USER`           | `identity`             | Identity database user (must match the source installation)                                                                                                                                                                                                            |
-| `KEYCLOAK_DB_NAME`           | `keycloak`             | Keycloak database name (must match the source installation)                                                                                                                                                                                                            |
-| `KEYCLOAK_DB_USER`           | `keycloak`             | Keycloak database user (must match the source installation)                                                                                                                                                                                                            |
-| `WEBMODELER_DB_NAME`         | `webmodeler`           | Web Modeler database name (must match the source installation)                                                                                                                                                                                                         |
-| `WEBMODELER_DB_USER`         | `webmodeler`           | Web Modeler database user (must match the source installation)                                                                                                                                                                                                         |
-| `BACKUP_PVC`                 | `migration-backup-pvc` | PVC name for storing backup data                                                                                                                                                                                                                                       |
-| `BACKUP_STORAGE_SIZE`        | `50Gi`                 | Backup PVC size (must fit all database dumps)                                                                                                                                                                                                                          |
-| `MIGRATE_IDENTITY`           | `true`                 | Enables the Identity PostgreSQL database migration                                                                                                                                                                                                                     |
-| `MIGRATE_KEYCLOAK`           | `true`                 | Enables the Keycloak and its PostgreSQL database migration                                                                                                                                                                                                             |
-| `MIGRATE_WEBMODELER`         | `true`                 | Enables the Web Modeler PostgreSQL database migration                                                                                                                                                                                                                  |
-| `MIGRATE_ELASTICSEARCH`      | `true`                 | Enables the Elasticsearch data migration                                                                                                                                                                                                                               |
-| `ES_WARM_REINDEX`            | `false`                | When `true`, Phase 2 pre-copies ES data to the target while the app is running (no downtime). Phase 3 then runs a fast delta reindex, reducing cutover to ~5 minutes regardless of data volume. See [Choose your migration strategy](#choose-your-migration-strategy). |
+| Variable                     | Default                | Description                                                                                                |
+| ---------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `NAMESPACE`                  | `camunda`              | Kubernetes namespace of your Camunda installation                                                          |
+| `CAMUNDA_RELEASE_NAME`       | `camunda`              | Helm release name                                                                                          |
+| `CAMUNDA_HELM_CHART_VERSION` | (chart version)        | Target Helm chart version for the upgrade                                                                  |
+| `CAMUNDA_DOMAIN`             | (empty)                | Domain for Keycloak Ingress. Leave empty for port-forward setups                                           |
+| `IDENTITY_DB_NAME`           | `identity`             | Identity database name (must match the source installation)                                                |
+| `IDENTITY_DB_USER`           | `identity`             | Identity database user (must match the source installation)                                                |
+| `KEYCLOAK_DB_NAME`           | `keycloak`             | Keycloak database name (must match the source installation)                                                |
+| `KEYCLOAK_DB_USER`           | `keycloak`             | Keycloak database user (must match the source installation)                                                |
+| `WEBMODELER_DB_NAME`         | `webmodeler`           | Web Modeler database name (must match the source installation)                                             |
+| `WEBMODELER_DB_USER`         | `webmodeler`           | Web Modeler database user (must match the source installation)                                             |
+| `BACKUP_PVC`                 | `migration-backup-pvc` | PVC name for storing backup data                                                                           |
+| `BACKUP_STORAGE_SIZE`        | `50Gi`                 | Backup PVC size (must fit all database dumps)                                                              |
+| `MIGRATE_IDENTITY`           | `true`                 | Enables the Identity PostgreSQL database migration                                                         |
+| `MIGRATE_KEYCLOAK`           | `true`                 | Enables the Keycloak and its PostgreSQL database migration                                                 |
+| `MIGRATE_WEBMODELER`         | `true`                 | Enables the Web Modeler PostgreSQL database migration                                                      |
+| `MIGRATE_ELASTICSEARCH`      | `true`                 | Enables the Elasticsearch data migration                                                                   |
+| `ES_WARM_REINDEX`            | `false`                | When `true`, pre-copies ES data during Phase 2 (no downtime), reducing Phase 3 to a ~5 minutes delta sync. |
 
 Set any `MIGRATE_*` variable to `false` to skip a component. This is useful, for example, if the component isn't deployed or already uses an external service.
 
@@ -268,12 +268,8 @@ What happens:
 
 1. **PostgreSQL**: A `pg_dump` Kubernetes Job is created for each component (Identity, Keycloak, and Web Modeler).
 2. **Elasticsearch (ES)**: A verification job checks source ES health and lists all Camunda indices to be migrated.
-3. **Elasticsearch warm reindex**: A full reindex from the source Bitnami ES to the target (ECK or external) is performed while the application is still running. This pre-populates the target with all existing data so Phase 3 only needs to sync the delta.
+3. **Elasticsearch warm reindex**: A full reindex from the source Bitnami ES to the target is performed while the application is still running. This pre-populates the target with all existing data so Phase 3 only needs a fast delta reindex. The warm reindex may take a significant amount of time depending on your data volume, but it runs **without any downtime**.
 4. All backup data is stored on a shared Persistent Volume Claim (PVC).
-
-:::note
-The warm reindex may take a significant amount of time depending on your Elasticsearch data volume (similar to the full reindex in the standard strategy), but it runs **without any downtime** since the application continues to serve traffic.
-:::
 
 </TabItem>
 </Tabs>
