@@ -270,7 +270,7 @@ nanoseconds `nanos`.
 
 <TabItem value="authentication">
 
-Providing these authentication options will enable Basic Authentication on the exporter.
+Providing these authentication options will enable Basic authentication on the exporter.
 
 | Option   | Description                   | Default |
 | -------- | ----------------------------- | ------- |

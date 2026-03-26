@@ -73,7 +73,7 @@ Depending on your machine hardware and internet connection speed, the services m
 Camunda services deployed in a Kubernetes cluster are not accessible from outside the cluster. To connect to your Camunda 8 cluster, use either port-forwarding or Kubernetes Ingress.
 
 :::note
-The setup described here skips Identity setup and uses a default basic authentication with username and password as 'demo/demo'.
+The setup described here skips Identity setup and uses a default Basic authentication with username and password as 'demo/demo'.
 :::
 
 <Tabs groupId="c8-connectivity" defaultValue="port-forward" queryString values={

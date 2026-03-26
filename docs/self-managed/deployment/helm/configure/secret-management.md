@@ -58,11 +58,11 @@ These secrets are used by Camunda applications and external integrations. Config
 | **Identity External Database Password**         | `identity.externalDatabase.secret`                              | External | Password for external PostgreSQL when using an external database for Identity    |
 | **Web Modeler External Database Password**      | `webModeler.restapi.externalDatabase.secret`                    | External | Password for external PostgreSQL when using an external database for Web Modeler |
 | **SMTP Password**                               | `webModeler.restapi.mail.secret`                                | External | SMTP credentials for sending email notifications                                 |
-| **RDBMS Auth**                                  | `orchestration.data.secondaryStorage.rdbms.secret`              | External | Password for external RDBMS authentication (basic auth)                          |
-| **External Elasticsearch Auth (Orchestration)** | `orchestration.data.secondaryStorage.elasticsearch.auth.secret` | External | Password for external Elasticsearch authentication (basic auth)                  |
-| **External OpenSearch Auth (Orchestration)**    | `orchestration.data.secondaryStorage.opensearch.auth.secret`    | External | Password for external OpenSearch authentication (basic auth)                     |
-| **External Elasticsearch Auth (Optimize)**      | `optimize.database.elasticsearch.auth.secret`                   | External | Password for external Elasticsearch authentication (basic auth)                  |
-| **External OpenSearch Auth (Optimize)**         | `optimize.database.opensearch.auth.secret`                      | External | Password for external OpenSearch authentication (basic auth)                     |
+| **RDBMS Auth**                                  | `orchestration.data.secondaryStorage.rdbms.secret`              | External | Password for external RDBMS authentication (Basic authentication)                |
+| **External Elasticsearch Auth (Orchestration)** | `orchestration.data.secondaryStorage.elasticsearch.auth.secret` | External | Password for external Elasticsearch authentication (Basic authentication)        |
+| **External OpenSearch Auth (Orchestration)**    | `orchestration.data.secondaryStorage.opensearch.auth.secret`    | External | Password for external OpenSearch authentication (Basic authentication)           |
+| **External Elasticsearch Auth (Optimize)**      | `optimize.database.elasticsearch.auth.secret`                   | External | Password for external Elasticsearch authentication (Basic authentication)        |
+| **External OpenSearch Auth (Optimize)**         | `optimize.database.opensearch.auth.secret`                      | External | Password for external OpenSearch authentication (Basic authentication)           |
 
 ### Secrets using Bitnami subchart patterns
 

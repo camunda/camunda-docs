@@ -969,7 +969,7 @@ It is superseded by built-in [tenant management](/versioned_docs/version-8.8/com
 
 With the Camunda 8.8 release, user storage in Elasticsearch/OpenSearch for Operate or Tasklist is no longer supported.
 
-You must transition to using [Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.
+You must transition to using [Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.
 
 </div>
 </div>
@@ -984,7 +984,7 @@ You must transition to using [Basic Authentication](/self-managed/concepts/authe
 
 With the Camunda 8.8 release, LDAP authentication for Operate or Tasklist is no longer supported.
 
-You must transition to use [OIDC or Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
+You must transition to use [OIDC or Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
 
 </div>
 </div>

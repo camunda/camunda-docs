@@ -95,7 +95,7 @@ Automatically retrieves and manages access tokens using the OAuth 2.0 client cre
 | Client secret         | Yes      | Your OAuth client secret. Camunda recommends using [secrets](/components/console/manage-clusters/manage-secrets.md). |
 | Audience              | No       | Target API identifier (required by some OAuth providers).                                                            |
 | Scopes                | No       | Space-separated list of scopes to request.                                                                           |
-| Client authentication | Yes      | **Send credentials in header** (basic auth) or **send credentials in body**.                                         |
+| Client authentication | Yes      | **Send credentials in header** (Basic authentication) or **send credentials in body**.                               |
 
 For more details on OAuth 2.0 client credentials flow, see [REST connector OAuth](/components/connectors/protocol/rest.md#rest-connector-oauth-token).
 

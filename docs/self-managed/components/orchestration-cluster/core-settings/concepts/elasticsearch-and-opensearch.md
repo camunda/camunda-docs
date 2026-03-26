@@ -34,8 +34,8 @@ CAMUNDA_DATABASE=opensearch
 To connect to a secured (HTTPS) Elasticsearch or OpenSearch instance:
 
 - **URL protocol**: Use `https` instead of `http`.
-- **Authentication**: Set a valid username/password combination for basic authentication.
-- **AWS credentials**: For Amazon OpenSearch, set `awsEnabled` to `true` to use AWS credentials instead of basic auth.
+- **Authentication**: Set a valid username/password combination for Basic authentication.
+- **AWS credentials**: For Amazon OpenSearch, set `awsEnabled` to `true` to use AWS credentials instead of Basic authentication.
 - **SSL/TLS**: SSL settings such as `self-signed` or disabling hostname verification should only be used if connection issues occur.
 - **JVM certificates**: Certificates may need to be imported into the JVM runtime.
 

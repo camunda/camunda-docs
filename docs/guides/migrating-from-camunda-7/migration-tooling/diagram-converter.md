@@ -220,8 +220,8 @@ Key options for `engine` mode:
 | Option                   | Description                                                    |
 | ------------------------ | -------------------------------------------------------------- |
 | `--platform-version`     | Semantic version of the target platform (defaults to latest)   |
-| `-u, --username`         | Username for basic auth                                        |
-| `-p, --password`         | Password for basic auth                                        |
+| `-u, --username`         | Username for Basic authentication                              |
+| `-p, --password`         | Password for Basic authentication                              |
 | `-t, --target-directory` | Directory to save the .bpmn files (default: current directory) |
 | `--csv`                  | Create a CSV file with analysis results                        |
 | `--xlsx`                 | Create an XLSX file with analysis results                      |

@@ -52,7 +52,7 @@ For [Tasklist](/components/tasklist/introduction-to-tasklist.md) to claim the ta
 The unique identifier depends on the authentication method used to login to Tasklist:
 
 - Camunda 8 (login with email, Google, GitHub): `email`
-- Default Basic Auth (Elasticsearch): `username`
+- Default Basic authentication (Elasticsearch): `username`
 - IAM: `username`
 
 These assignees are not related to user restrictions, which is related to the visibility of the task in Tasklist for Self-Managed.

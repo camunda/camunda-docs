@@ -34,7 +34,7 @@ The flow consists of three key steps:
 
 Typical failure points:
 
-- Step 1: Invalid credentials (for example, failed basic authentication).
+- Step 1: Invalid credentials (for example, failed Basic authentication).
 - Step 2: Missing role or group memberships.
 - Step 3: Authorizations not yet configured or missing.
 
