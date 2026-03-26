@@ -4,34 +4,36 @@ title: Job dashboard
 description: "Use the job dashboard to track job types and statistics."
 ---
 
-Job dashboard in Console gives you a job-level view across your cluster. Use it to see which job types are active, how many jobs are created, completed, and failed, and which workers are involved.
+The job dashboard in Console gives you a job-level view across your cluster. Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved.
 
 ## Availability and permissions
 
-Job dashboard is available in Console for clusters running Camunda 8.9 or later.
+The job dashboard is available in Console for clusters running Camunda 8.9 or later.
 
-For SaaS:
+For Software as a Service (SaaS):
 
-- Available for Camunda 8.9+ clusters.
+- Available for clusters running Camunda 8.9+.
 - Camunda manages the underlying job metrics configuration for you.
 
 For Self-Managed:
 
 - Requires Camunda 8.9+ (Zeebe and Console).
-- Job metrics must be enabled in the engine job metrics configuration (`camunda.monitoring.metrics.job-metrics.*`). These options and their defaults are surfaced via the auto-generated defaults.yaml and Helm values.
+- Configure job metrics in the engine configuration (`camunda.monitoring.metrics.job-metrics.*`). These options and their default values are available in the auto-generated `defaults.yaml` file and Helm values.
 
 Access control:
 
-- The global `READ_JOB_METRICS` permission is the only Console permission required to see and use Job dashboard. (Operate permissions are still required to view underlying instances when you click **View errors**.)
+The global `READ_JOB_METRICS` permission is the only Console permission required to use the job dashboard.
 
-If the feature is disabled or the user lacks permission, the Jobs card on the cluster overview shows **Access restricted**.
+Operate permissions are still required to view underlying instances when you click **View errors**.
 
-## When to use job dashboard
+If the feature is disabled or the user lacks permission, the **Jobs** card on the cluster overview shows **Access restricted**.
 
-Use the dashboard to:
+## When to use the job dashboard
 
-- Check whether jobs are flowing through the system (created, completed, failed) for each job type.
-- See which workers process a given job type and how many jobs they handle.
+With the job dashboard, you can:
+
+- Check whether jobs flow through the system (created, completed, failed) for each job type.
+- See which job workers process a given job type and how many jobs they handle.
 - Investigate error patterns for a job type before drilling into individual process instances in Operate.
 - Avoid building and maintaining custom job-monitoring dashboards.
 
@@ -44,13 +46,13 @@ Use the dashboard to:
 3. On the **Overview** tab, locate the **Jobs** card.
 4. Click **View jobs** to open the **Job types** page.
 
-![Cluster overview with Jobs card](../img/сluster-overview-jobs.jpg)
+![Cluster overview with Jobs card](img/сluster-overview-jobs.jpg)
 
-### 2. Jobs types overview
+### 2. Job types overview
 
 The **Job types** page shows all job types running against the selected cluster.
 
-![Jobs overview with Job types table](../img/jobs-overview.png)
+![Jobs overview with Job types table](img/jobs-overview.png)
 
 Key elements:
 
@@ -67,7 +69,16 @@ Key elements:
 
 If internal limits are reached for the selected date range, a warning will appear.
 
-Job metrics are stored in an internal JobMetrics store in the engine and exported in batches (every five minutes). Configuration limits such as maximum string lengths for job type, worker, and tenant ID, and the maximum number of unique keys (jobType × tenantId × worker combinations), protect the system. If any of these limits is exceeded for a batch, that batch is marked as incomplete and the UI shows the **Data loading limit reached** warning. In that case, treat the counts as partial for the affected time range.
+Job metrics are stored in the internal JobMetrics store in the engine and exported in batches every five minutes.
+
+Configuration limits protect the system. These include:
+
+- Maximum string lengths for job type, job worker, and tenant ID
+- Maximum number of unique keys (jobType × tenantId × job worker combinations)
+
+If a limit is exceeded, the batch is marked as incomplete, and the UI shows the **Data loading limit reached** warning.
+
+In this case, treat the counts as partial for the affected time range.
 
 To drill down into a specific job type, click its **Job type** link (for example, `send-email`).
 
@@ -75,27 +86,25 @@ To drill down into a specific job type, click its **Job type** link (for example
 
 The **Job type details** page shows metrics and errors for a single job type.
 
-![Job type details view](../img/job-activity-log.png)
+![Job type details view](img/job-activity-log.png)
 
 ### Job workload
 
-The **Job workload** chart shows how many jobs were **created**, **completed**, and **failed** over time for the selected job type and time range. Use it to spot spikes or trends, for example when failures increase after a deployment. Failed counts include retries, timeouts, cancellations, and other error states, and each failed attempt is counted separately.
+The **Job workload** chart shows how many jobs were **created**, **completed**, and **failed** over time for the selected job type and time range. Failed counts include jobs that ended in an error state (error thrown, failed, or timed out). Canceled, migrated, or retry-update-only states are not counted.
 
-### Jobs completion rate
+### Job completion rate
 
-The **Jobs completion rate** donut chart breaks jobs into three groups for the selected time range:
+The **Job completion rate** donut chart shows three groups for the selected time range:
 
-- **Created**: All jobs that have been created, regardless of whether they are still running, completed, or failed.
+- **Created**: All jobs created, regardless of whether they are still running, completed, or failed.
 - **Completed**: Jobs that have finished executing successfully.
-- **Failed**: Jobs that did not complete successfully, including retries, timeouts, cancellations, and errors.
-
-If a job is retried, each failed attempt is counted separately. For example, one job retried three times appears as three failed jobs.
+- **Failed**: Jobs that ended in an error state (error thrown, failed, or timed out). Multiple failed attempts for the same job are counted separately. Canceled or migrated jobs are not included.
 
 Use this chart to see at a glance whether most jobs finish successfully or many end in a failed state.
 
 ### Job workers table
 
-The **Job workers** table shows which workers have processed this job type and how many jobs they handled:
+The **Job workers** table shows which job workers processed this job type and how many jobs they handled:
 
 - **Worker name**
 - **Created jobs**
@@ -103,7 +112,7 @@ The **Job workers** table shows which workers have processed this job type and h
 - **Failed jobs**
 - **Last completed**
 
-Use this table to see which workers are active and whether failures are concentrated on specific workers.
+Use this table to see which job workers are active and whether failures are concentrated on specific job workers.
 
 ### Failed jobs by error type
 
@@ -117,17 +126,17 @@ The **Failed jobs by error type** table groups failed jobs by error so you can q
 
 Click **View errors** to open related instances in **Operate**, with the **Error Message** filter prefilled so you see only instances that failed with that error.
 
-## Empty states and restrictions
+## Empty states and access restrictions
 
 ### No jobs in the queue
 
 If there are no jobs for the cluster or selected time range, the Jobs page shows:
 
-- Heading: **No jobs in the Queue**
+- Heading: **No jobs in the queue**
 - Message: **No jobs found.**
 - Link: **Learn more about Jobs and Job Workers**
 
-This simply means there is no job activity to display.
+This means there is no job activity to display.
 
 ### Jobs card access restricted
 
@@ -139,7 +148,7 @@ If the feature is disabled for the cluster or you don’t have permission, the *
 
 ### Missing permissions when viewing errors
 
-If you click **View errors** but lack permissions in Operate, you may see messages such as:
+If you click **View errors** but lack permissions in Operate, you may see messages like:
 
 - **Missing permissions to view the Definition**
 - **Missing permissions to access Instance History**
@@ -152,4 +161,4 @@ In this case, contact your organization owner or admin to request the necessary 
 The Console UI and flows are the same in SaaS and Self-Managed.
 
 - **SaaS:** job dashboard is available for Camunda 8.9+ clusters. Camunda manages the underlying job metrics configuration.
-- **Self-Managed:** You enable and configure job metrics in the engine and Helm charts. For details on available options and defaults, see the job metrics [configuration reference](self-managed/components/orchestration-cluster/core-settings/configuration/properties/).
+- **Self-Managed:** You enable and configure job metrics in the engine and Helm charts. For details on available options and defaults, see the job metrics [configuration reference](../../../../self-managed/components/orchestration-cluster/core-settings/configuration/properties).
