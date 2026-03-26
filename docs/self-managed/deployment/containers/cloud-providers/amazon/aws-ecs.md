@@ -376,7 +376,7 @@ task_cpu_architecture = "X86_64"
 task_memory           = 8192
 ```
 
-The EFS file system uses the `elastic` throughput mode by default, which automatically scales for most workloads. If you need a fixed throughput configuration instead, adjust the `efs_throughput_mode` and `efs_provisioned_throughput_in_mibps` variables.
+The EFS file system uses the `elastic` throughput mode by default. This mode automatically scales for most workloads. If you need a fixed throughput configuration, adjust the `efs_throughput_mode` and `efs_provisioned_throughput_in_mibps` variables.
 
 Example:
 
