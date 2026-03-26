@@ -24,9 +24,9 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md).
 
-## Elasticsearch or OpenSearch
+## Secondary storage
 
-See the [secondary storage documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage) and [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md).
+Review the [secondary storage documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage) and [secondary storage configuration](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md).
 
 ## Operation executor
 

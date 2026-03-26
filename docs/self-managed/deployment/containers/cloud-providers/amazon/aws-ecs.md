@@ -253,7 +253,7 @@ The base terraform documentation for this module can be found [alongside the rep
 `camunda.tf` contains the module invocations with an example base configuration for the Orchestration Cluster and Connectors:
 
 - Aurora PostgreSQL configuration with the [AWS JDBC Wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper) that comes as part of the Camunda distribution
-- Basic auth Identity setup
+- Basic authentication Identity setup
   - Admin user with random password
   - Connectors user with random password configured and pre-configured for Connectors to consume to connect to the Orchestration Cluster
 
@@ -374,10 +374,17 @@ Some common topics to potentially change:
 task_cpu              = 4096
 task_cpu_architecture = "X86_64"
 task_memory           = 8192
+```
 
+The EFS file system uses the `elastic` throughput mode by default. This mode automatically scales for most workloads. If you need a fixed throughput configuration, adjust the `efs_throughput_mode` and `efs_provisioned_throughput_in_mibps` variables.
+
+Example:
+
+```hcl
 # Orchestration Cluster
 
-efs_provisioned_throughput_in_mibps = 50
+efs_throughput_mode                    = "provisioned"
+efs_provisioned_throughput_in_mibps    = 50
 ```
 
 ##### Camunda

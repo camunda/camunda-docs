@@ -1,6 +1,6 @@
 ---
 id: quick-install
-sidebar_label: Quick install
+sidebar_label: Quick developer install
 title: Install Camunda with Helm for development
 description: Install Camunda 8 Self-Managed on Kubernetes using the Helm chart with default settings, suitable for testing and development.
 ---
@@ -216,7 +216,7 @@ This command lists all available chart versions and their corresponding applicat
 ## Additional resources
 
 <!-- TODO: Add links to the following:
-- Basic auth guide
+- Basic authentication guide
 - Enable Keycloak guide
 - Enable OIDC guide
 - Explanation of management/orchestration cluster -->

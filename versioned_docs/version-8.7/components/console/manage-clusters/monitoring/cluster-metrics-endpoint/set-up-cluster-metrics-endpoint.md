@@ -44,8 +44,8 @@ Copy and safely store the password when it is displayed. The password is not sho
 The following information is required to connect your monitoring system:
 
 - **Metrics endpoint URL**: HTTPS endpoint used by your monitoring system to scrape metrics.
-- **Username**: Used for Basic Authentication.
-- **Password**: Used for Basic Authentication.
+- **Username**: Used for Basic authentication.
+- **Password**: Used for Basic authentication.
 
 ## Manage authentication credentials
 
@@ -79,7 +79,7 @@ The Cluster Metrics endpoint enforces both authentication and network restrictio
 
 | Restriction     | Description                                                                                                                                                                                                                                                                                                      |
 | :-------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Authentication  | The endpoint uses Basic Authentication.                                                                                                                                                                                                                                                                          |
+| Authentication  | The endpoint uses Basic authentication.                                                                                                                                                                                                                                                                          |
 | IP allowlisting | The endpoint enforces the cluster-level IP allowlist. <ul><li><p>Requests from non-allowlisted IP addresses are rejected.</p></li><li><p>If an IP allowlist is configured for the cluster, you must add the source IP addresses of your monitoring system to the allowlist to access the endpoint.</p></li></ul> |
 
 ### Error responses

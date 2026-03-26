@@ -42,7 +42,7 @@ We advise you to keep your **Password** safe and avoid exposing it in the BPMN `
 1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `GRAPHQL_PASSWORD`) so you can reference it later in the Connector.
 
-### Configure Basic Authentication
+### Configure Basic authentication
 
 Select the **GraphQL Connector** and fill out the following properties under the **Authentication** section:
 

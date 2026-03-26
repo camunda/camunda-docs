@@ -8,7 +8,7 @@ Camunda 8 Self-Managed supports multiple authentication methods for securing acc
 
 ## Overview
 
-By default, Camunda uses basic authentication with predefined demo users. Alternatively, you can configure OpenID Connect (OIDC) authentication, either through an internal Keycloak instance deployed with Camunda or an external OIDC provider.
+By default, Camunda uses Basic authentication with predefined demo users. Alternatively, you can configure OpenID Connect (OIDC) authentication, either through an internal Keycloak instance deployed with Camunda or an external OIDC provider.
 
 ### Authentication options
 

@@ -175,24 +175,15 @@ CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_MAPPINGS_0=<mapping id>
 ```
 
 </TabItem>
-<TabItem value="helm" label="Helm values">
-
-```yaml
-orchestration:
-  security:
-    initialization:
-      users:
-        - username: <Your chosen username>
-          password: <Your chosen password>
-          name: <The name of the first user>
-          email: <The email address of the first user>
-        # add more users to this list as desired
-```
-
-</TabItem>
 </Tabs>
 
 Replace `<role>` with the ID of the role you want to configure.
+
+:::note Helm deployments
+
+When you deploy with Helm, configure these properties via an `application.yaml` file using [application configs](/self-managed/deployment/helm/configure/application-configs.md) (for example with `orchestration.extraConfiguration`), rather than as dedicated Helm values.
+
+:::
 
 Here is an example how to configure a user `demo` to become a member of the admin role:
 
@@ -222,7 +213,7 @@ You can assign a user to multiple roles by listing them in the respective sectio
 
 ## Enable API authentication and authorizations
 
-In Camunda 8 Run installations, basic authentication is enabled for the Orchestration Cluster web components, but the API is unprotected, and [authorizations](/components/admin/authorization.md) are disabled. API protection and authorizations can both be enabled by modifying your `application.yaml` or environment variables:
+In Camunda 8 Run installations, Basic authentication is enabled for the Orchestration Cluster web components, but the API is unprotected, and [authorizations](/components/admin/authorization.md) are disabled. API protection and authorizations can both be enabled by modifying your `application.yaml` or environment variables:
 
 <Tabs>
 <TabItem value="application-properties" label="Application properties" default>
