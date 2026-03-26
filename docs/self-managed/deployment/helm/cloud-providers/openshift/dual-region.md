@@ -338,6 +338,12 @@ Troubleshooting requires examining all the underlying mechanisms of Submariner. 
 
 ## Deploying Camunda 8 via Helm charts in a dual-region setup
 
+:::info Migration from Bitnami Elasticsearch to ECK in dual-region
+
+There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators.md) and apply it individually to each region.
+
+:::
+
 The installation of Camunda 8 in OpenShift across dual regions requires a functioning Submariner setup connecting two OpenShift clusters.
 
 ### Verify the pre-requisites
