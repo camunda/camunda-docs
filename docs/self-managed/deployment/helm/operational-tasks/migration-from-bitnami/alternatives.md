@@ -40,7 +40,7 @@ Before starting the migration, ensure you have the following [general prerequisi
 Review the [general precautions](./index.md#precautions) that apply to all migration paths.
 
 :::tip Before running in production
-Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
+Review the [operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
 :::
 
 ## Option 1: Manually-deployed PostgreSQL and Elasticsearch on Kubernetes
@@ -189,7 +189,7 @@ pg_restore \
 Regardless of the infrastructure target, Keycloak migration always involves migrating its PostgreSQL database. After the data migration:
 
 - If using the **Keycloak Operator** (recommended): Deploy a Keycloak Custom Resource pointing to the migrated PostgreSQL database.
-- If using an **external OIDC provider**: Configure Camunda to use the external provider via [External OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md). You can then decommission Keycloak entirely.
+- If using an **external OIDC provider**: Configure Camunda to use the external provider via [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md). You can then decommission Keycloak entirely.
 - If using a **standalone Keycloak instance** (VM or Docker): Point it to the migrated PostgreSQL database and update the Camunda Helm values to reference the external Keycloak URL.
 
 ## Operational readiness

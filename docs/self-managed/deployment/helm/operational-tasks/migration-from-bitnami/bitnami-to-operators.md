@@ -49,7 +49,7 @@ For the tool versions used and tested, check the [.tool-versions](https://github
 Review the [general precautions](./index.md#precautions) that apply to all migration paths.
 
 :::tip Before running in production
-Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
+Review the [operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
 :::
 
 ### IRSA / IAM-based authentication not supported
@@ -353,7 +353,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 </details>
 
 :::warning Wait before cleanup
-Do not move on to the next phase immediately after validation. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [Rollback](#rollback)).
+Do not move on to the next phase immediately after validation. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [rollback](#rollback)).
 :::
 
 ### Phase 5: Cleanup Bitnami resources (no downtime)
@@ -400,7 +400,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ## Migration hooks
 
-The migration scripts support custom hooks that run before or after each phase. See [Migration hooks](./index.md#migration-hooks) for the full reference and examples.
+The migration scripts support custom hooks that run before or after each phase. See [migration hooks](./index.md#migration-hooks) for the full reference and examples.
 
 ## Rollback
 

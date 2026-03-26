@@ -80,7 +80,7 @@ Review the [general precautions](./index.md#precautions) that apply to all migra
 Additionally, note that while this migration path removes the planned downtime window, it does not remove the need for rehearsal, monitoring, and rollback planning. Treat it as a custom migration pattern rather than a push-button alternative to the standard workflow.
 
 :::tip Before running in production
-Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
+Review the [operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
 :::
 
 ### PostgreSQL logical replication limitations
@@ -700,7 +700,7 @@ bash 4-validate.sh
 ```
 
 :::warning Wait before cleanup
-Do not clean up immediately after validation. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [Rollback](#rollback-if-needed)).
+Do not clean up immediately after validation. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [rollback](#rollback-if-needed)).
 :::
 
 ### Rollback (if needed)
