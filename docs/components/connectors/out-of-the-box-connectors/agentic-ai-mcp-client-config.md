@@ -67,3 +67,7 @@ Specify the process variables to map and export the tool calling response into.
 | :---------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Result variable   | Yes      | Defaults to `toolCallResult`. Change only if using the AI Agent Task connector and the output mapping of the ad-hoc sub-process multi-instance is configured to use a different variable for the [content mapping](./agentic-ai-aiagent-task-example.md#configure-multi-instance-execution). |
 | Result expression | No       | Optionally unpack the response content into multiple process variables using the **Result expression** field as a [FEEL context expression](../../concepts/expressions.md).                                                                                                                  |
+
+## HTTP proxy support
+
+In Self-Managed environments, the MCP Client connector supports HTTP proxy configuration, including [plain proxy variables](/self-managed/components/connectors/http-proxy-configuration.md#plain-proxy-variables). See the [AI Agent connector proxy configuration](./agentic-ai-aiagent-customization.md#http-proxy-configuration) for details, including how to disable proxy support.
