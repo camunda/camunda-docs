@@ -444,37 +444,10 @@ assertThat(processInstance).hasLocalVariableSatisfies(
     });
 ```
 
-## Judge assertions <span class="badge badge--alpha">Alpha</span>
-
-:::important
-Judge assertions are an [alpha feature](/components/early-access/alpha/alpha-features.md). APIs, dependencies, and configuration are likely to change.
-:::
-
-You can use LLM-based assertions to verify that a process variable satisfies a natural language expectation. The
-assertion sends the variable value and your expectation to a configured LLM, which scores how well they match on a scale from
-0.0 to 1.0. The assertion passes if the score meets or exceeds the configured threshold, which is set to 0.5 by default.
-
-The LLM evaluates how well the expectation matches the actual variable value using the following scale:
-
-| Score | Meaning                                                                                                                |
-| ----- | ---------------------------------------------------------------------------------------------------------------------- |
-| 1.0   | Fully satisfied semantically. Different wording or formatting that conveys the same meaning counts as fully satisfied. |
-| 0.75  | Satisfied in substance with only minor differences that do not affect correctness.                                     |
-| 0.5   | Partially satisfied. Some required elements are present but others are missing or incorrect.                           |
-| 0.25  | Mostly not satisfied. Only marginal relevance.                                                                         |
-| 0.0   | Not satisfied at all, or the actual value is empty.                                                                    |
-
-The LLM may return any value between these anchor points (for example, 0.6 or 0.85). You can change the threshold in the [judge configuration](configuration.md#judge-configuration) or per assertion chain using [`withJudgeConfig`](#withjudgeconfig).
-
-:::info Prerequisites
-Judge assertions require a configured chat model provider. See the [judge configuration](configuration.md#judge-configuration)
-section for setup instructions.
-:::
-
 ### hasVariableSatisfiesJudge
 
-Assert that a process variable satisfies a natural language expectation using the configured LLM judge. The assertion
-fails if the LLM score is below the configured threshold.
+Assert that a process variable satisfies a natural language expectation using a configured LLM judge. The assertion
+fails if the LLM score is below the configured threshold (default: 0.5). Requires [judge configuration](configuration.md#judge-configuration).
 
 ```java
 assertThat(processInstance)
@@ -487,12 +460,6 @@ Assert that a local variable in the scope of a given element satisfies a natural
 element ID or an [element selector](utilities.md#element-selector) to identify the element.
 
 ```java
-// By BPMN element ID
-assertThat(processInstance)
-    .hasLocalVariableSatisfiesJudge("task_A", "output",
-        "Contains a polite greeting addressed to the customer.");
-
-// By element selector
 assertThat(processInstance)
     .hasLocalVariableSatisfiesJudge(
         ElementSelectors.byName("Greet Customer"), "output",
@@ -501,14 +468,17 @@ assertThat(processInstance)
 
 ### withJudgeConfig
 
-Override the global judge configuration for a single assertion chain. This is useful when you need a different threshold
-or custom prompt for a specific assertion without changing the global settings.
+Override the global judge configuration for a single assertion chain.
 
 ```java
 assertThat(processInstance)
     .withJudgeConfig(config -> config.withThreshold(0.9))
     .hasVariableSatisfiesJudge("result", "Contains a valid JSON response with status OK.");
 ```
+
+:::tip
+For a complete walkthrough of testing agentic processes with judge assertions and conditional behavior, see [Testing agentic processes](testing-agentic-processes.md).
+:::
 
 ## Process instance message assertions
 

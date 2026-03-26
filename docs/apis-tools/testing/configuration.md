@@ -826,14 +826,13 @@ for the following packages:
 - `tc.connectors` - The connectors Docker container (recommended level `error`)
 - `org.testcontainers` - The Testcontainers framework (recommended level `warn`)
 
-## Judge configuration <span class="badge badge--alpha">Alpha</span>
+## Judge configuration
 
-:::important
-Judge configuration is an [alpha feature](/components/early-access/alpha/alpha-features.md). APIs, dependencies, and configuration are likely to change.
+:::tip
+For a guided walkthrough of setting up and testing agentic processes, see [Testing agentic processes](testing-agentic-processes.md).
 :::
 
-CPT supports LLM-based assertions that evaluate process variables against natural-language expectations. To use
-[judge assertions](assertions.md#judge-assertions), configure a judge with an LLM provider.
+To use [judge assertions](assertions.md#hasvariablesatisfiesjudge), configure a judge with an LLM provider.
 
 ### Prerequisites
 

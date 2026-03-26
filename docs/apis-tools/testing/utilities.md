@@ -285,15 +285,11 @@ void shouldMockDmnDecision() {
 
 ## Conditional behavior
 
-CPT assertions are blocking by design. They poll the process state and wait until the expected condition is reached before the test continues. This works well when the process follows a predictable path, but becomes a problem for non-deterministic flows. Processes that involve AI agents or parallel branches, for example, may activate elements in an order that cannot be known ahead of time. A blocking assertion that waits for one specific element can stall the test while the process is actually waiting for a different element to be completed first.
+The `when(condition).then(action)` API on `CamundaProcessTestContext` registers background behaviors that react to process state changes without blocking the test thread. This is useful for non-deterministic flows where the execution order is unknown. You can register multiple behaviors before starting the process, and they will react independently as the process progresses. Behaviors are cleared automatically after each test.
 
-The `when(condition).then(action)` API on `CamundaProcessTestContext` solves this by moving the condition check into a background thread. Instead of blocking the test, a conditional behavior continuously monitors the process state and executes its action as soon as the condition is met. You can register multiple behaviors before starting the process, and they will react independently as the process progresses. Behaviors are cleared automatically after each test.
-
-When to use it:
-
-- Test non-deterministic process flows where the execution order is unknown
-- React automatically to process state changes in the background
-- Complete tasks or jobs that may appear at unpredictable times
+:::tip
+For a guided walkthrough of using conditional behavior to test agentic processes, see [Testing agentic processes](testing-agentic-processes.md).
+:::
 
 ```java
 @Test

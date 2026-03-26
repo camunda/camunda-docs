@@ -1403,6 +1403,7 @@ module.exports = {
         {
           "Camunda Process Test": [
             "apis-tools/testing/getting-started",
+            "apis-tools/testing/testing-agentic-processes",
             "apis-tools/testing/configuration",
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
