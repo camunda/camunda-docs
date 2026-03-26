@@ -17,7 +17,7 @@ The approaches described here are not automated via the migration scripts and re
 This page intentionally avoids prescribing full installation commands for PostgreSQL, Elasticsearch, or Keycloak on custom targets, such as standalone StatefulSets, VMs, or bare metal. Use the official documentation for the distribution you operate, and use this page only for the Camunda-specific migration flow and Helm wiring.
 :::
 
-## When to use these alternatives
+## When to use this guide
 
 Consider these alternatives if:
 
@@ -25,6 +25,8 @@ Consider these alternatives if:
 - You're running on bare-metal infrastructure without managed service access.
 - You need to migrate to an existing database infrastructure, like a shared PostgreSQL cluster managed by a DBA team.
 - You're running Camunda outside of Kubernetes—for example, using Docker Compose or VM-based deployments.
+
+Read the [topic overview](./index.md#why-migrate) to learn why you should migrate.
 
 ## Option 1: Manually-deployed PostgreSQL and Elasticsearch on Kubernetes
 

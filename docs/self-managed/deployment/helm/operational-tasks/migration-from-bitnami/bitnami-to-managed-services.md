@@ -23,14 +23,16 @@ Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to **c
 Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
 :::
 
-:::info When to choose managed services
+## When to use this guide
+
 Managed services are ideal when your organization:
 
 - Prefers minimal operational overhead for database and search infrastructure
 - Already uses a cloud provider's managed services catalog
 - Requires SLA-backed availability and automated patching from the cloud vendor
 - Does not want to manage Kubernetes operators for infrastructure components
-  :::
+
+Read the [topic overview](./index.md#why-migrate) to learn why you should migrate.
 
 ## Prerequisites
 

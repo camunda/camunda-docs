@@ -21,13 +21,17 @@ Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure (Postg
 
 After migration, your setup will be aligned with the [operator-based reference architecture](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
-This guide is intended for customers running Camunda 8 with Bitnami subcharts enabled. If your installation already uses external databases, managed services, or operator-managed infrastructure, you do not need to migrate from Bitnami subcharts.
-
 :::tip Before running in production
 Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
 :::
 
 ![Initial cluster state before migration from Bitnami subcharts to Kubernetes operators](./img/bitnami-migration-initial-state.jpg)
+
+## When to use this guide
+
+This guide is intended for customers running Camunda 8 with Bitnami subcharts enabled. If your installation already uses external databases, managed services, or operator-managed infrastructure, you do not need to migrate from Bitnami subcharts.
+
+Read the [topic overview](./index.md#why-migrate) to learn why you should migrate.
 
 ## Prerequisites
 

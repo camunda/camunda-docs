@@ -22,12 +22,16 @@ Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to ope
 The commands and snippets in this guide assume **CloudNativePG (CNPG)** as the PostgreSQL target and **ECK** as the Elasticsearch target. If you are migrating to managed services (for example, AWS RDS or Elastic Cloud), replace the target hostnames, credentials, and connection methods accordingly.
 :::
 
+## When to use this guide
+
 Use this guide only if all of the following are true:
 
 - You have already ruled out the [standard migration](./bitnami-to-operators.md) because even a short maintenance window is unacceptable.
 - Your team is comfortable operating PostgreSQL logical replication and one of the supported Elasticsearch synchronization strategies.
 - You can monitor replication lag and validate consistency before cutover.
 - You are prepared to adapt the examples to your topology, especially if the targets are managed services instead of in-cluster operators.
+
+Read the [topic overview](./index.md#why-migrate) to learn why you should migrate.
 
 ## How it works
 
