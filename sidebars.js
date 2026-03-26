@@ -1860,74 +1860,150 @@ module.exports = {
       ],
     },
     {
-  Concepts: [
-    {
-      Authentication: [
-        "self-managed/concepts/authentication/authentication-to-orchestration-cluster",
-        "self-managed/concepts/authentication/authentication-to-management-components",
-      ],
-    },
-    {
-      type: "category",
-      label: "Secondary storage",
-      link: {
-        type: "doc",
-        id: "self-managed/concepts/secondary-storage/index",
-      },
-      items: [
+      Concepts: [
         {
-          type: "category",
-          label: "Configure",
-          link: {
-            type: "doc",
-            id: "self-managed/concepts/secondary-storage/configuring-secondary-storage",
-          },
-          items: [
-            "self-managed/concepts/secondary-storage/no-secondary-storage",
+          Authentication: [
+            "self-managed/concepts/authentication/authentication-to-orchestration-cluster",
+            "self-managed/concepts/authentication/authentication-to-management-components",
           ],
         },
-        "self-managed/concepts/secondary-storage/managing-secondary-storage",
-        "self-managed/concepts/secondary-storage/rdbms-benchmark-results",
         {
           type: "category",
-          label: "Databases",
+          label: "Secondary storage",
           link: {
             type: "doc",
-            id: "self-managed/concepts/databases/overview",
+            id: "self-managed/concepts/secondary-storage/index",
           },
           items: [
             {
               type: "category",
-              label: "Document store databases",
+              label: "Configure",
               link: {
                 type: "doc",
-                id: "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
+                id: "self-managed/concepts/secondary-storage/configuring-secondary-storage",
+              },
+              items: [
+                "self-managed/concepts/secondary-storage/no-secondary-storage",
+              ],
+            },
+            "self-managed/concepts/secondary-storage/managing-secondary-storage",
+            "self-managed/concepts/secondary-storage/rdbms-benchmark-results",
+            {
+              type: "category",
+              label: "Databases",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/databases/overview",
               },
               items: [
                 {
-                  Privileges: [
-                    "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
-                    "self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges",
-                    "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
-                    "self-managed/concepts/databases/elasticsearch/opensearch-without-cluster-privileges",
+                  type: "category",
+                  label: "Document store databases",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
+                  },
+                  items: [
+                    {
+                      Privileges: [
+                        "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
+                        "self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges",
+                        "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
+                        "self-managed/concepts/databases/elasticsearch/opensearch-without-cluster-privileges",
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Relational databases",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/concepts/databases/relational-db/index",
+                  },
+                  items: [
+                    "self-managed/concepts/databases/relational-db/rdbms-setup-guide",
+                    "self-managed/concepts/databases/relational-db/rdbms-support-policy",
+                    "self-managed/concepts/databases/relational-db/database-configuration",
                   ],
                 },
               ],
             },
+          ],
+        },
+        {
+          type: "category",
+          label: "Back up and restore",
+          link: {
+            type: "doc",
+            id: "self-managed/operational-guides/backup-restore/backup-and-restore",
+          },
+          items: [
             {
-              type: "category",
-              label: "Relational databases",
-              link: {
-                type: "doc",
-                id: "self-managed/concepts/databases/relational-db/index",
-              },
-              items: [
-                "self-managed/concepts/databases/relational-db/rdbms-setup-guide",
-                "self-managed/concepts/databases/relational-db/rdbms-support-policy",
-                "self-managed/concepts/databases/relational-db/database-configuration",
+              Elasticsearch: [
+                "self-managed/operational-guides/backup-restore/elasticsearch/es-backup",
+                "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
+              ],
+              "Relational databases": [
+                "self-managed/operational-guides/backup-restore/rdbms/rdbms-backup",
+                "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
+              ],
+            },
+            {
+              "Backup Management API": [
+                "self-managed/operational-guides/backup-restore/optimize-backup",
+                "self-managed/operational-guides/backup-restore/webapps-backup",
+                "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
               ],
             },
           ],
+        },
+        {
+          type: "category",
+          label: "Document handling",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/document-handling/getting-started",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Configuration",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/document-handling/configuration/index",
+              },
+              items: [
+                "self-managed/concepts/document-handling/configuration/camunda-8-run",
+                "self-managed/concepts/document-handling/configuration/docker",
+                "self-managed/concepts/document-handling/configuration/helm",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Audit log",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/audit-log/index",
+          },
+          items: ["self-managed/concepts/audit-log/configure-audit-log"],
+        },
+        "self-managed/concepts/exporters",
+        "self-managed/operational-guides/configure-flow-control/configure-flow-control",
+        {
+          Monitoring: [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics",
+          ],
+        },
+        {
+          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
+        },
+        "self-managed/operational-guides/data-purge",
+        {
+          Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
       ],
     },
