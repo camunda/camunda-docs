@@ -127,9 +127,7 @@ source env.sh
 
 ## Step 2: Customize operator manifests
 
-:::warning Review before running
 Before running the migration, **you must review and customize** the operator-based manifests to match your production requirements. The migration deploys operators and instances using these manifests. The default settings may not be appropriate for your workload.
-:::
 
 Follow this guidance while reviewing the manifests:
 
@@ -149,7 +147,7 @@ Review the CloudNativePG (CNPG) cluster specifications in `operator-based/postgr
 - Number of replicas
 - PostgreSQL version
 - Resource requests and limits
-- PostgreSQL parameters (for example, shared_buffers and max_connections)
+- PostgreSQL parameters (for example, `shared_buffers` and `max_connections`)
 
 <details>
 <summary>Show details: CloudNativePG manifest reference</summary>
@@ -183,9 +181,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 Review the Keycloak Custom Resource in `operator-based/keycloak/`. For the broader deployment context and Helm values layering, see [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment). Choose the appropriate variant:
 
-- `keycloak-instance-domain-nginx.yml` — if you have a domain with nginx Ingress
-- `keycloak-instance-domain-openshift.yml` — for OpenShift deployments with Routes
-- `keycloak-instance-no-domain.yml` — for port-forward setups
+- [`keycloak-instance-domain-nginx.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml) — if you have a domain with nginx Ingress
+- [`keycloak-instance-domain-openshift.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-openshift.yml) — for OpenShift deployments with Routes
+- [`keycloak-instance-no-domain.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-no-domain.yml) — for port-forward setups
 
 Key settings to verify:
 
