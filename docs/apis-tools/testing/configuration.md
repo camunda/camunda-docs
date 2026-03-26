@@ -837,10 +837,21 @@ CPT supports LLM-based assertions that evaluate process variables against natura
 
 ### Prerequisites
 
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
 Camunda Process Test Spring includes the built-in LLM providers as a transitive dependency. No additional
 dependency is needed.
 
-If you use the Java client without Spring, add the `camunda-process-test-langchain4j` dependency to your project:
+</TabItem>
+
+<TabItem value='java-client'>
+
+Add the `camunda-process-test-langchain4j` dependency to your project:
 
 ```xml
 <dependency>
@@ -850,9 +861,48 @@ If you use the Java client without Spring, add the `camunda-process-test-langcha
 </dependency>
 ```
 
+</TabItem>
+
+</Tabs>
+
 This module provides out-of-the-box support for OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI, and OpenAI-compatible providers
 via [LangChain4j](https://docs.langchain4j.dev/). If you provide a custom `ChatModelAdapter`
 (see [Custom ChatModelAdapter](#custom-chatmodeladapter)), this dependency is not required.
+
+### Quick start
+
+The following example shows a minimal configuration using OpenAI. For Anthropic, change the `provider` to `anthropic`.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+```yaml
+camunda:
+  process-test:
+    judge:
+      chat-model:
+        provider: "openai"
+        model: "gpt-4o"
+        api-key: "your-api-key"
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+```properties
+judge.chatModel.provider=openai
+judge.chatModel.model=gpt-4o
+judge.chatModel.apiKey=your-api-key
+```
+
+</TabItem>
+
+</Tabs>
 
 ### Supported providers
 
@@ -866,8 +916,8 @@ The following built-in providers are available:
 | Azure OpenAI      | `azure-openai`      | `model`, `endpoint` | `api-key` optional. See [more details](#azure-openai).                          |
 | OpenAI-compatible | `openai-compatible` | `model`, `base-url` | For local models or OpenAI-format APIs. See [more details](#openai-compatible). |
 
-For OpenAI and Anthropic, the [quick start](#quick-start) example applies directly — change the `provider` and
-`model` values. The providers below have additional configuration.
+For OpenAI and Anthropic, the [quick start](#quick-start) example applies directly. Change the `provider` and
+`model` values as needed. The providers below have additional configuration.
 
 #### Amazon Bedrock
 
@@ -1126,7 +1176,12 @@ assertThat(processInstance)
 You can provide your own `ChatModelAdapter` implementation without depending on the `camunda-process-test-langchain4j`
 module. A `ChatModelAdapter` is a functional interface that takes a prompt string and returns a response string.
 
-#### Spring: register as a bean
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
 
 If you have a single `ChatModelAdapter` bean and no `provider` property is set, CPT auto-detects and uses it:
 
@@ -1165,16 +1220,27 @@ camunda:
 ```
 
 :::note Resolution order
-When using `@CamundaSpringProcessTest`, the judge is bootstrapped in this order:
+When using `@CamundaSpringProcessTest`, CPT resolves the judge adapter in the following order:
 
-1. **Single `ChatModelAdapter` bean** with no `provider` configured: used automatically.
-2. **`provider` configured** and a bean name matches: that bean is selected.
-3. **No matching bean**: falls back to SPI resolution through `ChatModelAdapterProvider` implementations.
-4. **SPI also fails**: throws `IllegalStateException` if a provider was configured.
+1. If a single `ChatModelAdapter` bean exists and no `provider` property is configured, that bean is used automatically.
+2. If the `provider` property is configured and a bean with a matching name exists, that bean is selected.
+3. If no matching bean is found, CPT falls back to the built-in LangChain4j implementations, provided that `camunda-process-test-langchain4j` is on the classpath.
+4. If a `provider` is configured but no matching implementation can be resolved at all, CPT throws an exception.
 
 :::
 
-#### Java: SPI via ChatModelAdapterProvider
+Alternatively, you can configure the judge programmatically. Set the configuration globally
+using `CamundaAssert.setJudgeConfig()`:
+
+```java
+CamundaAssert.setJudgeConfig(
+    JudgeConfig.of(prompt -> myLlmClient.chat(prompt))
+        .withThreshold(0.8));
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
 
 Implement `ChatModelAdapterProvider` and register it through `META-INF/services`:
 
@@ -1200,9 +1266,7 @@ Register the provider in `META-INF/services/io.camunda.process.test.api.judge.Ch
 com.example.MyCustomProvider
 ```
 
-#### Programmatic configuration
-
-You can configure the judge programmatically instead of using properties files. Set the configuration globally
+Alternatively, you can configure the judge programmatically. Set the configuration globally
 using `CamundaAssert.setJudgeConfig()`:
 
 ```java
@@ -1219,3 +1283,7 @@ CamundaProcessTestExtension extension = new CamundaProcessTestExtension()
     .withJudgeConfig(JudgeConfig.of(prompt -> myLlmClient.chat(prompt))
         .withThreshold(0.8));
 ```
+
+</TabItem>
+
+</Tabs>
