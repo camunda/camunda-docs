@@ -1,6 +1,6 @@
 ---
 id: aws-ecs
-title: "Amazon ECS on AWS"
+title: "Deploy to Amazon ECS"
 description: "Learn how to install Camunda 8 on AWS ECS."
 ---
 
@@ -253,7 +253,7 @@ The base terraform documentation for this module can be found [alongside the rep
 `camunda.tf` contains the module invocations with an example base configuration for the Orchestration Cluster and Connectors:
 
 - Aurora PostgreSQL configuration with the [AWS JDBC Wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper) that comes as part of the Camunda distribution
-- Basic auth Identity setup
+- Basic authentication Identity setup
   - Admin user with random password
   - Connectors user with random password configured and pre-configured for Connectors to consume to connect to the Orchestration Cluster
 
@@ -374,10 +374,17 @@ Some common topics to potentially change:
 task_cpu              = 4096
 task_cpu_architecture = "X86_64"
 task_memory           = 8192
+```
 
+The EFS file system uses the `elastic` throughput mode by default. This mode automatically scales for most workloads. If you need a fixed throughput configuration, adjust the `efs_throughput_mode` and `efs_provisioned_throughput_in_mibps` variables.
+
+Example:
+
+```hcl
 # Orchestration Cluster
 
-efs_provisioned_throughput_in_mibps = 50
+efs_throughput_mode                    = "provisioned"
+efs_provisioned_throughput_in_mibps    = 50
 ```
 
 ##### Camunda
@@ -575,19 +582,23 @@ The general [backup and restore procedure](/self-managed/operational-guides/back
 
 The backup process, itself, doesn't require changes.
 
-Restoring, however, introduces additional complexity because each broker's data directory (persistent volume) must be restored in a coordinated manner. To support this, an init container is introduced as part of the Orchestration Cluster, responsible for restoring the data directory for the broker running in that task. This mechanism corresponds to the step of [restoring the Zeebe Cluster](/self-managed/operational-guides/backup-restore/restore.md#restore-zeebe-cluster).
+Restoring, however, introduces additional complexity because each broker's data directory (persistent volume) must be restored in a coordinated manner. To support this, an init container is introduced as part of the Orchestration Cluster, responsible for restoring the data directory for the broker running in that task. This mechanism corresponds to the step of [restoring the Zeebe Cluster](/self-managed/operational-guides/backup-restore/rdbms/restore.md#step-1-restore-zeebe-from-its-primary-storage-backup).
 
-This approach is implemented in the example module. Provide the `restore_backup_id` parameter to enable it.
+This approach is implemented in the example module. Set the `restore_enabled` parameter to `true` to enable it. You can optionally provide the `restore_backup_id` parameter to target a specific backup (see [restore options when using RDBMS](/self-managed/operational-guides/backup-restore/rdbms/restore.md#restore-options)).
 
 On startup, the init container leverages the node-id provider to determine its broker ID in alignment with the other tasks. It restores the partitions associated with that broker, then blocks execution until all brokers have completed their restore operations. Afterward, the init container exits, allowing the Orchestration Cluster container to start.
 
 You must configure the init container and the Orchestration Cluster container identically. If you use environment variables, this requirement is automatically satisfied. If configuration is distributed through other mechanisms, those must also be explicitly applied to the init container.
 
-As long as the `restore_backup_id` parameter remains set, the init container remains part of the task definition. After the backup has been successfully restored, subsequent executions will effectively be no-ops until the parameter is removed.
+As long as the `restore_enabled` parameter remains set to `true`, the init container remains part of the task definition. After the backup has been successfully restored, subsequent executions will effectively be no-ops until the parameter is removed.
+
+:::note
+Camunda recommends restoring to a fresh cluster rather than reusing an existing one. A newly created cluster already has an empty S3 bucket and EFS volume, so no additional cleanup is needed. If you choose to restore into an existing cluster instead, you must manually ensure the S3 bucket configured for the node ID provider is empty and the EFS volume is fully cleared before starting the restore.
+:::
 
 ## Next steps
 
 After setting up your cluster, many users typically do the following:
 
-- [Connect to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
+- [Connect to an identity provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
 - [Add TLS](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html) and configure a [custom domain](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#dns-name) for the Application Load Balancer (ALB).

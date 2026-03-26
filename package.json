@@ -83,11 +83,16 @@
   "lint-staged": {
     "*.{css,js,json,MD,md,mdx,yaml,yml}": "prettier --write"
   },
+  "//": {
+    "postman-code-generators": "Pinned to 2.1.0 because 2.1.1 dropped the 'path' polyfill (path@0.12.7) from its dependencies while still using require('path') in its codegens. This breaks the Docusaurus/webpack build since 'path' is a Node core module unavailable in the browser bundle. Remove this pin once postman-code-generators ships a fix.."
+  },
   "overrides": {
-    "react-live": ">=3.1.1 <4.2.0"
+    "react-live": ">=3.1.1 <4.2.0",
+    "postman-code-generators": "2.1.0"
   },
   "resolutions": {
-    "react-live": ">=3.1.1 <4.2.0"
+    "react-live": ">=3.1.1 <4.2.0",
+    "postman-code-generators": "2.1.0"
   },
   "engines": {
     "node": ">=18.0"

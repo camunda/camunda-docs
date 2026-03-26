@@ -14,6 +14,10 @@ This page explains how RDBMS configuration works at the application level. If yo
 For supported database vendors and versions, see the  
 [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 
+:::tip Need end-to-end guidance?
+For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
+:::
+
 ## Enable RDBMS as secondary storage
 
 To activate an RDBMS backend, configure two components:

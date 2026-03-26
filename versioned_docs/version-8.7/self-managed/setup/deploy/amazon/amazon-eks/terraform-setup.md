@@ -87,15 +87,12 @@ We support two variants of this architecture:
 
 #### How to choose
 
-- If you prefer a simpler setup with basic authentication or network isolation, and your security needs are moderate, the **standard installation** is a suitable choice.
+- If you prefer a simpler setup with Basic authentication or network isolation, and your security needs are moderate, the **standard installation** is a suitable choice.
 - If you require enhanced security, dynamic role-based access management, and want to leverage AWS’s identity services for fine-grained control, the **IRSA** variant is the better option.
 
 Both can be set up with or without a **Domain** ([ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)).
 
 ### Outcome
-
-<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
 
 _Infrastructure diagram for a single region EKS setup (click on the image to open the PDF version)_
 [![Infrastructure Diagram EKS Single-Region](./assets/eks-single-region.jpg)](./assets/eks-single-region.pdf)

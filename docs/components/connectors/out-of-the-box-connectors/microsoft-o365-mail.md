@@ -1,19 +1,21 @@
 ---
 id: microsoft-o365-mail
 title: Microsoft 365 connector
-sidebar_label: Microsoft 365
-description: Send and read Microsoft 365 emails from your BPMN process.
+sidebar_label: Microsoft 365 Email (Outbound)
+description: Integrate Outlook email with Microsoft 365 in your processes.
 ---
 
-The **Microsoft 365 connector** is an outbound connector that allows you to connect your BPMN service with [Microsoft 365](https://outlook.office.com/mail/) mail to send, read e-mails, and manage folders.
+The Microsoft 365 Connector is an outbound connector that allows you to connect your BPMN service with [Microsoft 365](https://outlook.office.com/mail/) mail to send emails, read emails, and manage folders.
 
 ## Prerequisites
 
-- To use the **Microsoft 365 connector**, you must have a [Microsoft 365](https://outlook.office.com/mail/) mail instance.
-- You might also need to have sufficient access rights at [Microsoft Entra](https://entra.microsoft.com) to create a new app;
-  set [Microsoft Graph](https://developer.microsoft.com/en-us/graph) permissions and assign an app to u user.
+- A [Microsoft 365](https://outlook.office.com/mail/) mail instance.
+- Sufficient permissions in [Microsoft Entra](https://entra.microsoft.com) to:
+  - Create a new app registration
+  - Configure [Microsoft Graph](https://developer.microsoft.com/en-us/graph) permissions
+  - Assign the app to a user
 
-Learn more about [creating, configuring, and authorizing Microsoft App](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
+Learn more about [creating, configuring, and authorizing a Microsoft app](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
 
 :::note
 Use Camunda secrets to avoid exposing your Microsoft credentials as plain text.
@@ -30,13 +32,17 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 Each operation requires permissions to be assigned by a system administrator. Learn more about [Microsoft permissions](https://learn.microsoft.com/en-us/entra/identity-platform/permissions-consent-overview).
 
+:::warning
+By default, an application with Mail API permissions can access _all mailboxes_ in your organization. To restrict access to specific mailboxes, use _Role-Based Access Control (RBAC) for Applications_. Learn more about [scoping application permissions to specific Exchange Online mailboxes](https://learn.microsoft.com/en-us/graph/auth-limit-mailbox-access).
+:::
+
 ### Bearer token authentication
 
-If you own a bearer token, in the **Authentication** section select a **Bearer token** in the **Type** field.
+If you own a bearer token, in the **Authentication** section select **Bearer token** in the **Type** field.
 Enter a bearer token in the field **Bearer token**. Use [Camunda secrets](/components/console/manage-clusters/manage-secrets.md) to avoid exposing sensitive credentials.
 
 :::note
-Default TTL for bearer tokens is 3600 seconds. Therefore, this approach might not work for long-living and/or repetitive processes.
+The default time-to-live (TTL) for bearer tokens is 3600 seconds. Therefore, this approach might not work for long-living and/or repetitive processes.
 :::
 
 ### OAuth2 client credentials flow authentication
@@ -54,7 +60,7 @@ To proceed with this step, you'll need the following data:
 
 The app must be assigned to a user.
 
-If you own a bearer token, in the **Authentication** section select a **OAuth 2.0** in the **Type** field.
+If you own a bearer token, in the **Authentication** section select **OAuth 2.0** in the **Type** field.
 Enter the above data into the respective fields.
 
 Learn more about [creating, configuring, and authorizing Microsoft App](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
@@ -113,5 +119,5 @@ Related Microsoft Graph API: [user: sendMail](https://learn.microsoft.com/en-us/
 
 ## Handle connector response
 
-The **Microsoft 365 connector** is a protocol connector, meaning it is built on top of the **HTTP REST connector**, therefore
+The Microsoft 365 Connector is a protocol connector, meaning it is built on top of the **HTTP REST connector**, therefore
 [handling response is still applicable](/components/connectors/protocol/rest.md#response).

@@ -231,6 +231,31 @@ void shouldMockChildProcess() {
 }
 ```
 
+### Child process with dynamic variables
+
+You can mock a child process with dynamic behavior whose output variables are derived from the parent process instance.
+The handler receives the parent variables and returns the child process variables.
+
+```java
+@Test
+void shouldMockChildProcess() {
+    // given: mock dynamic child process with the process ID "AstronautTrainingProcess"
+    processTestContext.mockChildProcess(
+        "AstronautTrainingProcess",
+        parentVariables -> {
+            final String astronautName = (String) parentVariables.get("astronautName");
+            final String grade = "Zee".equals(astronautName) ? "excellent" : "good";
+
+            return Map.of(
+                "trainingCompleted", true,
+                "grade", grade);
+        });
+
+    // when: create a process instance
+    // then: verify that the process instance completed the call activity
+}
+```
+
 ## Mock DMN decisions
 
 You can mock a DMN decision for a business rule task to simulate its output without evaluating the actual DMN decision.
@@ -622,4 +647,15 @@ Predefined user task selectors are available in the `io.camunda.process.test.api
 ```java
 // Complete a user task by its task name
 processTestContext.completeUserTask(UserTaskSelectors.byTaskName("Approve Request"), variables);
+```
+
+### Variable selector
+
+You can use a variable selector to identify a variable based on different criteria, such as variable name or variable value.
+
+Predefined variable selectors are available in the `io.camunda.process.test.api.assertions.VariableSelectors` class.
+
+```java
+// Assert a variable by its name
+assertThatProcessInstance(processInstance).hasVariable(VariableSelectors.byName("approved"), true);
 ```

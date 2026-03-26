@@ -103,6 +103,13 @@ Camunda supports **Oracle LTS releases**.
 
 H2 is supported for development, testing, and evaluation only. Production use is not recommended.
 
+For Camunda Orchestration Cluster secondary storage, H2 is a single-broker option only:
+
+- Multi-broker clusters with H2 are not a valid architecture.
+- H2 does not provide a shared database across brokers.
+- In-memory H2 is ephemeral and does not survive restarts.
+- File-based H2 persists on local disk and is suitable for local/dev usage only.
+
 ## Supported JDBC driver versions
 
 Camunda bundles JDBC drivers for databases where redistribution is permitted and expects you to provide drivers where licensing or distribution constraints apply (for example, Oracle).
@@ -133,7 +140,7 @@ The following databases require you to provide a compatible JDBC driver at runti
 :::info
 Camunda validates driver compatibility in CI by testing against the oldest and newest supported database versions. A single driver version is expected to work across the supported database versions listed on this page.
 
-For deployment instructions, see [loading JDBC drivers into pods](/self-managed/deployment/helm/configure/database/rdbms.md#loading-jdbc-drivers-into-pods).
+For deployment instructions, see [loading JDBC drivers into pods](/self-managed/deployment/helm/configure/database/rdbms.md#bundled-vs-custom-jdbc-drivers).
 :::
 
 ## JDBC driver policy
@@ -195,8 +202,12 @@ Operate has partial support for RDBMS as secondary storage in Camunda 8.9-alpha3
 
 ## Installation and deployment guides
 
-For hands-on instructions to deploy Camunda with RDBMS, see:
+For hands-on instructions to deploy Camunda with RDBMS, start with:
+
+- [End-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md) - Unified guide for provisioning, topology decisions, driver management, and backup strategies.
+
+Then choose your deployment pattern:
 
 - [Production architecture with RDBMS](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) - Reference topology and design considerations.
 - [Manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md) - Entry point for manual installation, configuration, and operations.
-- [Helm installation with RDBMS](/self-managed/deployment/helm/install/helm-with-rdbms.md) - Kubernetes/Helm-based deployment.
+- [RDBMS example deployment for Helm](/self-managed/deployment/helm/install/helm-with-rdbms.md) - Kubernetes/Helm-based example walkthrough.

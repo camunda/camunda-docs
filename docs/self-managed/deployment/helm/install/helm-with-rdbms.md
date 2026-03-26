@@ -1,29 +1,32 @@
 ---
 id: helm-with-rdbms
-sidebar_label: Install with RDBMS
-title: Helm installation with RDBMS as secondary storage
-description: "Deploy Camunda 8 on Kubernetes using Helm charts with an external RDBMS as secondary storage. Step-by-step guide for production-ready installations."
+sidebar_label: RDBMS example deployment
+title: RDBMS example deployment for Camunda with Helm
+description: "Focused walkthrough for teams choosing an external RDBMS as secondary storage within the Helm production installation flow."
 ---
 
-This guide walks you through deploying Camunda 8 using Helm charts with an external relational database (RDBMS) as secondary storage instead of Elasticsearch or OpenSearch.
+This guide is a focused walkthrough for teams using an external relational database (RDBMS) as secondary storage in the Helm production installation flow, instead of a document-store secondary backend (Elasticsearch or OpenSearch).
+
+Use [production install](/self-managed/deployment/helm/install/production/index.md) as the primary installation guide. Use this page when you want additional RDBMS-specific examples for that flow.
 
 Related guides:
 
+- [Production install](/self-managed/deployment/helm/install/production/index.md)
 - [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
 - [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
 
 ## What changes when using RDBMS?
 
-In Camunda 8, secondary storage stores historical data and process state. By default, Elasticsearch or OpenSearch is used. With RDBMS, you replace that with a relational database:
+In Camunda 8, secondary storage stores historical data and process state. You can use either a document-store backend (Elasticsearch/OpenSearch) or an RDBMS, depending on your requirements. This guide focuses on the RDBMS option:
 
-| Aspect               | Elasticsearch/OpenSearch                            | RDBMS                                                       |
+| Aspect               | Document-store backend (Elasticsearch/OpenSearch)   | RDBMS                                                       |
 | -------------------- | --------------------------------------------------- | ----------------------------------------------------------- |
 | **Storage choice**   | Helm-managed subchart                               | You manage (PostgreSQL, etc.)                               |
 | **Scaling**          | Scale the search cluster independently from Camunda | Scale via your database service (vertical or read replicas) |
 | **Backup strategy**  | ES/OS snapshot/restore tooling                      | Database-native backups (e.g., pg_dump, vendor tools)       |
 | **Monitoring**       | ES/OS metrics and dashboards                        | Database-native monitoring and alerts                       |
-| **Operator support** | No ES/OS operator bundled                           | Database operators (optional)                               |
+| **Operator support** | No embedded document-store operator bundled         | Database operators (optional)                               |
 
 When using RDBMS, **Optimize still requires Elasticsearch or OpenSearch**. Only the Orchestration Cluster uses RDBMS.
 
@@ -35,7 +38,7 @@ Before you begin:
 2. **Helm 3.x**: Install or upgrade [Helm](https://helm.sh/docs/intro/install/).
 3. **External RDBMS**: A supported database reachable from your cluster. See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for the complete list of supported databases and versions.
 4. **Database credentials**: Username and password for a database user with DDL permissions (if using auto-schema creation).
-5. **Elasticsearch/OpenSearch** (for Optimize): Required if you deploy Optimize alongside Camunda.
+5. **Document-store backend (Elasticsearch/OpenSearch)** (for Optimize): Required if you deploy Optimize alongside Camunda.
 
 ## Installation workflow
 
@@ -61,7 +64,7 @@ Before you begin:
 
 ### Step 2: Prepare your database
 
-Create a database and user. Example for PostgreSQL:
+Create a database and user. For example, in PostgreSQL:
 
 ```bash
 createdb camunda
@@ -110,17 +113,24 @@ orchestration:
         secret:
           existingSecret: camunda-db-secret
           existingSecretKey: db-password
-        # Optional: Tune for your workload
-        flushInterval: PT1S
-        queueSize: 5000
-        # Optional: Configure history retention
-        history:
-          defaultHistoryTTL: P30D
+  extraConfiguration:
+    - file: "flush-interval.yaml"
+      content: |
+        camunda:
+          data:
+            secondary-storage:
+              rdbms:
+                # Optional: Tune for your workload
+                flush-interval: PT1S # More frequent flushes
+                queue-size: 5000 # Larger queue for buffering
+                queue-memory-limit: 50 # Increase if needed
+                # Optional: Configure history retention
+                history:
+                  default-history-ttl: P30D
 
 # Disable default Elasticsearch subchart
 elasticsearch:
   enabled: false
-
 # If deploying Optimize, you still need Elasticsearch/OpenSearch
 # Uncomment below and configure as needed:
 # opensearch:
@@ -198,7 +208,7 @@ orchestration:
         name: jdbc-drivers
 ```
 
-See [JDBC driver loading](/self-managed/deployment/helm/configure/database/rdbms.md#loading-jdbc-drivers-into-pods) for more strategies.
+See [JDBC driver loading](/self-managed/deployment/helm/configure/database/rdbms.md#bundled-vs-custom-jdbc-drivers) for more strategies.
 
 ### Step 7: Install Camunda
 
@@ -317,7 +327,7 @@ identity:
   enabled: false
 ```
 
-**Namespace 2: Management Components (with Elasticsearch/OpenSearch)**
+**Namespace 2: Management components (with document-store secondary storage)**
 
 ```yaml
 orchestration:
@@ -350,7 +360,7 @@ For detailed configuration options, see:
 
 ## Important: Component storage requirements
 
-**Optimize requires Elasticsearch or OpenSearch—not RDBMS.** If you deploy Optimize, configure it with Elasticsearch or OpenSearch and enable the Elasticsearch/OpenSearch exporter for Zeebe, even if your Orchestration Cluster uses RDBMS:
+**Optimize requires Elasticsearch or OpenSearch, not RDBMS.** If you deploy Optimize, configure it with Elasticsearch or OpenSearch and enable the corresponding exporter for Zeebe, even if your Orchestration Cluster uses RDBMS:
 
 ```yaml
 orchestration:
@@ -360,7 +370,6 @@ orchestration:
 
 optimize:
   enabled: true
-
 # Choose one secondary storage for Optimize:
 # opensearch:
 #   enabled: true
@@ -386,7 +395,7 @@ kubectl logs -n camunda <pod-name>
 - Authentication failed: Confirm secret and credentials.
 - Driver not found (Oracle/MySQL): Verify init container or custom image has loaded the driver.
 
-See [troubleshooting RDBMS connectivity](/self-managed/deployment/helm/configure/database/rdbms.md#troubleshooting-rdbms-connectivity) for detailed diagnostics.
+See [troubleshooting RDBMS connectivity](/self-managed/deployment/helm/configure/database/rdbms.md#troubleshooting-and-operations) for detailed diagnostics.
 
 ### Data not appearing in database
 
@@ -416,7 +425,7 @@ Cross-region RDBMS deployments are **not tested or supported in Camunda 8.9**. L
 
 Optimize **cannot use RDBMS** and requires Elasticsearch or OpenSearch. If deploying Optimize alongside an RDBMS-based Orchestration Cluster, you must provision Elasticsearch/OpenSearch for Optimize only.
 
-### Self-managed database HA
+### Self-Managed database HA
 
 Camunda does not manage database HA. Use cloud-managed databases (AWS Aurora, Azure Database, GCP Cloud SQL) or vendor-supplied HA solutions. Camunda assumes the database handles its own replication and failover.
 

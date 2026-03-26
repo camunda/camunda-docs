@@ -28,6 +28,10 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
     <td>**Summary**</td>
 </tr>
 <tr>
+    <td>[Admin](#identity-renamed-to-admin)</td>
+    <td><ul><li>Orchestration Cluster Identity has been renamed to Admin.</li></ul></td>
+</tr>
+<tr>
     <td>[Helm chart deployment](#helm-chart-deployment)</td>
     <td><ul><li>Secondary storage type must be explicitly configured (no more implicit Elasticsearch default).</li><li>Deprecated secret keys removed; migrate to new `*.secret.existingSecret` pattern.</li><li>RDBMS now available as a first-class secondary storage option in Helm.</li><li>Default REST port changed from 8090 to 8080.</li></ul></td>
 </tr>
@@ -43,6 +47,23 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 - Ready to upgrade? See the [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.8 to 8.9.
 
 :::
+
+## Identity renamed to Admin
+
+### Orchestration Cluster Identity renamed to Admin
+
+Starting with Camunda 8.9, the Orchestration Cluster Identity component has been renamed to **Admin** (Orchestration Cluster Admin).
+
+Admin is the cluster-level admin UI hosting identity management and other administrative features. The identity management capabilities (users, groups, roles, authorizations, tenants, mapping rules, and clients) remain the same—only the name has changed.
+
+What changed:
+
+- The `admin` Spring profile replaces the `identity` profile. Both profiles work interchangeably in 8.9; the `identity` profile is deprecated and will be removed in a future version.
+- API paths have changed from `/identity/*` to `/admin/*`. The old paths redirect to new paths but are deprecated.
+- Helm values have changed from `orchestration.identity.*` to `orchestration.admin.*`. The old values are deprecated.
+- Documentation paths have been updated: `/components/identity/` is now `/components/admin/`.
+
+For more information, see [Introduction to Admin](/components/admin/admin-introduction.md).
 
 ## Helm chart deployment
 
@@ -76,7 +97,7 @@ The Helm chart now supports relational databases as a first-class secondary stor
 
 ### Default REST port changed
 
-The Orchestration component's default HTTP port has changed from 8090 to 8080. Update any hardcoded port references in network policies, Ingress rules, or service configuration.
+The Orchestration Cluster's default HTTP port has changed from 8090 to 8080. Update any hardcoded port references in network policies, Ingress rules, or service configuration.
 
 ## Web Modeler
 
@@ -122,7 +143,7 @@ The following guides offer detailed information on how you can upgrade to Camund
     <td>Operations and platform administrators of Self-Managed installations.</td>
 </tr>
 <tr>
-    <td>[APIs & tools upgrade guide](/apis-tools/migration-manuals/index.md)</td>
+    <td>[APIs & tools upgrade guide](/apis-tools/migration-manuals/migrate-to-89.md)</td>
     <td>Plan and execute an upgrade from Camunda 8.8 to 8.9, focusing on API and tools transitions.</td>
     <td><p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p></td>
 </tr>

@@ -52,7 +52,7 @@ Management Identity can either create a Keycloak realm called `camunda-platform`
    If you use a different ID, set it in the Management Identity application [environment variables](/self-managed/components/management-identity/miscellaneous/configuration-variables.md).
    :::
    ![keycloak-admin-client-add-1](../img/keycloak-admin-client-add-1.png)
-1. Turn **Client authentication** on, select **Service accounts roles**, and click **Next**.
+1. Turn **Client authentication** on, select **Service accounts roles**, ensure **Authorization** is off, and click **Next**.
    ![keycloak-admin-client-add-2](../img/keycloak-admin-client-add-2.png)
 1. In the **Root URL** field, enter the URL where your Management Identity instance will be hosted, then click **Save**.
    ![keycloak-admin-client-add-3](../img/keycloak-admin-client-add-3.png)

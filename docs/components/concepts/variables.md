@@ -22,6 +22,11 @@ Restrictions of a variable name:
 - It may not contain **whitespaces** (e.g. `order number` is not allowed; you can use `orderNumber` instead).
 - It may not contain an **operator** (e.g. `+`, `-`, `*`, `/`, `=`, `>`, `?`, `.`).
 - It may not be a **literal** (e.g. `null`, `true`, `false`) or a **keyword** (e.g. `function`, `if`, `then`, `else`, `for`, `between`, `instance`, `of`, `not`).
+- It may not be longer than 492 characters (UTF-8 encoded).
+
+:::note
+The character limit might be higher on [RDBMS secondary storage backends](/self-managed/concepts/databases/overview.md).
+:::
 
 ## Variable values
 
@@ -33,6 +38,15 @@ The value of a variable is stored as a JSON value. It can have one of the follow
 - Array (e.g. `["item1" , "item2", "item3"]`)
 - Object (e.g. `{ "orderNumber": "A12BH98", "date": "2020-10-15", "amount": 185.34}`)
 - Null (`null`)
+
+:::note
+Numbers are subject to the following numeric limits:
+
+- Integer numbers are effectively limited to the 64‑bit integer range.
+- Non‑integer numbers are stored as IEEE‑754 double‑precision values, which provide roughly 15–17 significant decimal digits rather than arbitrary BigDecimal precision.
+
+If you need arbitrary-precision or very large numbers, consider storing them as strings or in an external data store instead of process variables.
+:::
 
 ## Variable size limitation
 
@@ -155,12 +169,19 @@ Examples:
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
 | `status: "Ok"`                                       | **source:** `=status`<br/>**target:** `paymentStatus`                                                                                | `paymentStatus: "OK"`                              |
 | `result: {"status": "Ok", "transactionId": "t-789"}` | **source:** `=result.status`<br/>**target:** `paymentStatus`<br/>**source:** `=result.transactionId`<br/>**target:** `transactionId` | `paymentStatus: "Ok"`<br/>`transactionId: "t-789"` |
-| `status: "Ok"`<br/>`transactionId: "t-789"`          | **source:** `=transactionId`<br/>**target:** `order.transactionId`                                                                   | `order: {"transactionId": "t-789"}`                |
+
+:::note
+Avoid using output mappings or result variables that contain a period (for example, `customer.name`). Using a period is discouraged because it updates a property of an existing process variable within the task scope, which can lead to confusing behavior or unexpected results in the process flow.
+:::
 
 ### Context variable
 
 A context variable is a reserved variable that describes the context of a task. It can group variables together to provide a detailed description of the task or offer more descriptive data about it.
 The reserved variable name for a context variable is `taskContextDisplayName`. This name is reserved exclusively for this purpose and should not be used for other variables.
+
+:::warning
+Context variables are not supported in Tasklist V2. See [migration from V1 to V2](../tasklist/api-versions.md#migration-from-v1-to-v2).
+:::
 
 Example:
 

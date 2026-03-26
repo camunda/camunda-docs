@@ -4,6 +4,9 @@ title: Assertions
 description: "Use assertions to verify the process instance state."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 The class `CamundaAssert` is the entry point for all assertions. It is based on [AssertJ](https://github.com/assertj/assertj) and [Awaitility](http://www.awaitility.org/).
 
 The assertions follow the style: `assertThat(object_to_test)` + expected property.
@@ -26,27 +29,79 @@ CPT provides the most common assertions. However, if you miss an assertion you c
 
 ## Configuration
 
-Assertions can be configured globally using `CamundaAssert`.
+You can configure the behavior of the assertions in the following ways.
 
 ### Assertion timeout
 
-By default, assertions wait 10 seconds for the expected property to be fulfilled. You can change the time globally in `CamundaAssert`.
+By default, assertions wait 10 seconds for the expected property to be fulfilled and wait 100 milliseconds between two attempts. You can change these defaults globally in the configuration or per assertion.
 
-For example, the following sets the timeout to 1 minute:
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+Configure the assertions globally in your `application.yml` (or `application.properties`):
+
+```yaml
+camunda:
+  process-test:
+    assertion:
+      # Set the assertion timeout to 1 minute
+      timeout: PT1M
+      # Set the assertion interval to 100 milliseconds
+      interval: PT0.1S
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+Configure the assertions globally in your `/camunda-container-runtime.properties` file:
+
+```properties
+# Set the assertion timeout to 1 minute
+assertion.timeout=PT1M
+# Set the assertion interval to 100 milliseconds
+assertion.interval=PT0.1S
+```
+
+</TabItem>
+
+</Tabs>
+
+Alternatively, you can configure the assertions within your test class using `CamundaAssert`.
 
 ```java
-CamundaAssert.setAssertionTimeout(Duration.ofMinutes(1));
+@BeforeAll
+static void configureAssertions() {
+    // Set the assertion timeout to 1 minute
+    CamundaAssert.setAssertionTimeout(Duration.ofMinutes(1));
+    // Set the assertion interval to 100 milliseconds
+    CamundaAssert.setAssertionInterval(Duration.ofMillis(100));
+}
+```
+
+You can override the global timeout for an assertion using `withAssertionTimeout()`. The given timeout applies only to subsequent assertions in the calling chain.
+
+```java
+assertThat(processInstance)
+    .withAssertionTimeout(Duration.ofMinutes(1))
+    .isCompleted();
 ```
 
 ### Element selector
 
 By default, the element instance assertions identify the BPMN elements by their ID. You can change
-the [ElementSelector](utilities.md#element-selector) globally in `CamundaAssert`.
-
-For example, the following identifies the BPMN elements by their name:
+the [ElementSelector](utilities.md#element-selector) globally in your test class using `CamundaAssert`.
 
 ```java
-CamundaAssert.setElementSelector(ElementSelectors::byName);
+@BeforeAll
+static void configureAssertions() {
+    // Identify the BPMN elements by their name
+    CamundaAssert.setElementSelector(ElementSelectors::byName);
+}
 ```
 
 ## Process instance assertions
@@ -264,7 +319,30 @@ assertThat(processInstance).hasTerminatedElement("task_A", 2);
 
 ## Variable assertions
 
-You can verify the process variables using `CamundaAssert.assertThat(processInstance)`.
+You can verify the process variables using `CamundaAssert.assertThat(processInstance)`. Use the variable name or a [VariableSelector](utilities.md#variable-selector) to identify the variable.
+
+### With variable name
+
+Use the variable name to identify the variable:
+
+```java
+assertThat(processInstance).hasVariable("approved", true);
+```
+
+### With variable selector
+
+Use a [VariableSelector](utilities.md#variable-selector) to identify the variable:
+
+```java
+// by variable name
+assertThat(processInstance).hasVariable(VariableSelectors.byName("approved"), true);
+
+// by partial variable value
+assertThat(processInstance).hasVariableSatisfies(
+    VariableSelectors.byValueContains("order-123"),
+    Order.class,
+    order -> { });
+```
 
 ### hasVariableNames
 
@@ -321,7 +399,7 @@ Assert that the process instance has the local variables in the scope of the giv
 doesn't exist.
 
 ```java
-assertThat(processInstance).hasVariableNames(ElementSelectors.byId("task_A"), "var1", "var2");
+assertThat(processInstance).hasLocalVariableNames(ElementSelectors.byId("task_A"), "var1", "var2");
 ```
 
 ### hasLocalVariable

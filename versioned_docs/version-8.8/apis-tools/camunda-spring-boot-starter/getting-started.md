@@ -37,6 +37,7 @@ With the Camunda Spring Boot Starter, you can build:
 | Camunda Spring Boot Starter artifact | Camunda Spring Boot Starter version | JDK  | Bundled Spring Boot version | Compatible Spring Boot version(s) |
 | ------------------------------------ | ----------------------------------- | ---- | --------------------------- | --------------------------------- |
 | `camunda-spring-boot-starter`        | 8.8.x                               | ≥ 17 | 3.5.x                       |                                   |
+| `camunda-spring-boot-3-starter`      | >=8.8.15                            | ≥ 17 | 3.5.x                       |                                   |
 | `camunda-spring-boot-4-starter`      | >=8.8.9                             | ≥ 17 | 4.0.x                       |                                   |
 
 ### Spring Boot 4.0 support
@@ -52,6 +53,10 @@ Starting with the Camunda 8.8.9 patch release, a dedicated starter artifact was 
 ```
 
 You should use this as a drop-in replacement for the default `camunda-spring-boot-starter` that will still be based on Spring Boot 3.5 for all Camunda 8.8 patch releases.
+
+:::note
+There is also a `camunda-spring-boot-3-starter` module available from the 8.8.15 patch release, which is an alias for `camunda-spring-boot-starter` in the 8.8 release. Use `camunda-spring-boot-3-starter` if you want to stay on Spring Boot 3 when upgrading to Camunda 8.9 or newer, where the default `camunda-spring-boot-starter` module will be based on Spring Boot 4.0.
+:::
 
 ## Get started
 
@@ -112,9 +117,9 @@ Set up your connection and authentication in `application.yaml` as shown below. 
 Choose the authentication method and gRPC/REST address for your environment:
 
 <Tabs groupId="authentication" defaultValue="no-auth" queryString values={[
-{label: 'No Authentication', value: 'no-auth' },
-{label: 'Basic Authentication', value: 'basic-auth' },
-{label: 'OIDC-based Authentication', value: 'oidc' },
+{label: 'No authentication', value: 'no-auth' },
+{label: 'Basic authentication', value: 'basic-auth' },
+{label: 'OIDC-based authentication', value: 'oidc' },
 ]}>
 
 <TabItem value="no-auth">

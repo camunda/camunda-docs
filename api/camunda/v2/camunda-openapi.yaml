@@ -40,6 +40,7 @@ tags:
   - name: Document
   - name: Element instance
   - name: Expression
+  - name: Global listener
   - name: Group
   - name: Incident
   - name: Job
@@ -146,6 +147,12 @@ paths:
     $ref: "element-instances.yaml#/paths/~1element-instances~1{elementInstanceKey}~1variables"
   /expression/evaluation:
     $ref: "expression.yaml#/paths/~1expression~1evaluation"
+  /global-task-listeners:
+    $ref: "global-listeners.yaml#/paths/~1global-task-listeners"
+  /global-task-listeners/{id}:
+    $ref: "global-listeners.yaml#/paths/~1global-task-listeners~1{id}"
+  /global-task-listeners/search:
+    $ref: "global-listeners.yaml#/paths/~1global-task-listeners~1search"
   /groups:
     $ref: "groups.yaml#/paths/~1groups"
   /groups/search:
@@ -190,6 +197,14 @@ paths:
     $ref: "jobs.yaml#/paths/~1jobs~1{jobKey}~1failure"
   /jobs/statistics/global:
     $ref: "job-metrics.yaml#/paths/~1jobs~1statistics~1global"
+  /jobs/statistics/by-types:
+    $ref: "job-metrics.yaml#/paths/~1jobs~1statistics~1by-types"
+  /jobs/statistics/by-workers:
+    $ref: "job-metrics.yaml#/paths/~1jobs~1statistics~1by-workers"
+  /jobs/statistics/time-series:
+    $ref: "job-metrics.yaml#/paths/~1jobs~1statistics~1time-series"
+  /jobs/statistics/errors:
+    $ref: "job-metrics.yaml#/paths/~1jobs~1statistics~1errors"
   /license:
     $ref: "licenses.yaml#/paths/~1license"
   /mapping-rules:
@@ -290,6 +305,8 @@ paths:
     $ref: "cluster.yaml#/paths/~1status"
   /system/usage-metrics:
     $ref: "system.yaml#/paths/~1system~1usage-metrics"
+  /system/configuration:
+    $ref: "system.yaml#/paths/~1system~1configuration"
   /tenants:
     $ref: "tenants.yaml#/paths/~1tenants"
   /tenants/search:

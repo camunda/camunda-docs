@@ -525,7 +525,7 @@ chmod +x check-deployment-ready.sh
 
 :::info Authentication changes in 8.8+
 
-Starting from version 8.8, the Orchestration Cluster is configured by default with [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) and is protected by basic authentication using `demo:demo` as the default username and password.
+Starting from version 8.8, the Orchestration Cluster is configured by default with [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) and is protected by Basic authentication using `demo:demo` as the default username and password.
 
 :::
 
@@ -552,4 +552,4 @@ Consult the generic [dual-region failover procedure](/self-managed/deployment/he
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](self-managed/operational-guides/troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting.md).

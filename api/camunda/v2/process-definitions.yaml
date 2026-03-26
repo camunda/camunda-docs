@@ -365,6 +365,7 @@ components:
             Whether to only return the latest version of each process definition.
             When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`.
             The response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`.
+            When using this filter, sorting is limited to `processDefinitionId` and `tenantId` fields only.
           type: boolean
         resourceName:
           description: Resource name of this process definition.
@@ -393,6 +394,8 @@ components:
           type: boolean
     ProcessDefinitionSearchQueryResult:
       type: object
+      required:
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -403,9 +406,19 @@ components:
             $ref: "#/components/schemas/ProcessDefinitionResult"
     ProcessDefinitionResult:
       type: object
+      required:
+        - processDefinitionKey
+        - name
+        - resourceName
+        - version
+        - versionTag
+        - processDefinitionId
+        - tenantId
+        - hasStartForm
       properties:
         name:
           description: Name of this process definition.
+          nullable: true
           type: string
         resourceName:
           description: Resource name for this process definition.
@@ -416,6 +429,7 @@ components:
           format: int32
         versionTag:
           description: Version tag of this process definition.
+          nullable: true
           type: string
         processDefinitionId:
           allOf:
@@ -441,6 +455,8 @@ components:
             - $ref: "process-instances.yaml#/components/schemas/ProcessDefinitionStatisticsFilter"
           description: The process definition statistics search filters.
     ProcessDefinitionElementStatisticsQueryResult:
+      required:
+        - items
       description: Process definition element statistics query response.
       type: object
       properties:
@@ -452,6 +468,12 @@ components:
     ProcessElementStatisticsResult:
       description: Process element statistics response.
       type: object
+      required:
+        - active
+        - canceled
+        - completed
+        - elementId
+        - incidents
       properties:
         elementId:
           allOf:
@@ -477,6 +499,7 @@ components:
       type: object
       properties:
         page:
+          description: Search cursor pagination.
           allOf:
             - $ref: "search-models.yaml#/components/schemas/CursorForwardPagination"
         filter:
@@ -485,6 +508,8 @@ components:
             - $ref: "messages.yaml#/components/schemas/MessageSubscriptionFilter"
     ProcessDefinitionMessageSubscriptionStatisticsQueryResult:
       type: object
+      required:
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -495,6 +520,12 @@ components:
             $ref: "#/components/schemas/ProcessDefinitionMessageSubscriptionStatisticsResult"
     ProcessDefinitionMessageSubscriptionStatisticsResult:
       type: object
+      required:
+        - activeSubscriptions
+        - processDefinitionId
+        - processDefinitionKey
+        - processInstancesWithActiveSubscriptions
+        - tenantId
       properties:
         processDefinitionId:
           description: The process definition ID associated with this message subscription.
@@ -520,6 +551,7 @@ components:
       type: object
       properties:
         page:
+          description: Search cursor pagination.
           allOf:
             - $ref: "search-models.yaml#/components/schemas/OffsetPagination"
         sort:
@@ -529,6 +561,8 @@ components:
             $ref: "#/components/schemas/ProcessDefinitionInstanceStatisticsQuerySortRequest"
     ProcessDefinitionInstanceStatisticsQueryResult:
       type: object
+      required:
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -540,6 +574,13 @@ components:
     ProcessDefinitionInstanceStatisticsResult:
       description: Process definition instance statistics response.
       type: object
+      required:
+        - activeInstancesWithIncidentCount
+        - activeInstancesWithoutIncidentCount
+        - hasMultipleVersions
+        - latestProcessDefinitionName
+        - processDefinitionId
+        - tenantId
       properties:
         processDefinitionId:
           $ref: "identifiers.yaml#/components/schemas/ProcessDefinitionId"
@@ -547,6 +588,7 @@ components:
           $ref: "identifiers.yaml#/components/schemas/TenantId"
         latestProcessDefinitionName:
           description: Name of the latest deployed process definition instance version.
+          nullable: true
           type: string
         hasMultipleVersions:
           description: Indicates whether multiple versions of this process definition instance are deployed.
@@ -606,6 +648,8 @@ components:
       required:
         - processDefinitionId
     ProcessDefinitionInstanceVersionStatisticsQueryResult:
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -629,6 +673,7 @@ components:
             - $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"
         processDefinitionName:
           description: The name of the process definition.
+          nullable: true
           type: string
         tenantId:
           description: The tenant ID associated with the process definition.

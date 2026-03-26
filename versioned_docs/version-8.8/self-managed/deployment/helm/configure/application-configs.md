@@ -29,14 +29,18 @@ Two Helm values are available for component configuration:
 - `<componentName>.configuration`
 - `<componentName>.extraConfiguration`
 
+:::note
+In Camunda 8.8, Zeebe, Operate, and Tasklist are merged into the **Orchestration Cluster**. The Helm key for all three components is `orchestration`, replacing the former `zeebe`, `operate`, and `tasklist` keys.
+:::
+
 #### componentName.configuration
 
 Use `<componentName>.configuration` to define an application configuration file directly in `values.yaml`.
 
-For example, `application.yaml`:
+For example, to configure the Orchestration Cluster's Elasticsearch connection:
 
 ```yaml
-operate:
+orchestration:
   configuration: |-
     camunda.operate:
       # ELS instance to store Operate data
@@ -48,10 +52,6 @@ operate:
         # Transport port
         port: 9200
         numberOfShards: 3
-      # Zeebe instance
-      zeebe:
-        # Broker contact point
-        brokerContactPoint: "<your-release-name>-zeebe-gateway:26500"
       # ELS instance to export Zeebe data to
       zeebeElasticsearch:
         # Cluster name
@@ -72,15 +72,15 @@ Use `<componentName>.extraConfiguration` to provide additional configuration fil
 Each key is the filename, and each value is the file content. A common use case is providing a custom `log4j2.xml` file. When the Helm chart processes this option, it mounts the file under the `./config` directory:
 
 ```xml
-operate:
+orchestration:
   extraConfiguration:
     log4j2.xml: |-
       <?xml version="1.0" encoding="UTF-8"?>
       <Configuration status="WARN" monitorInterval="30">
         <Properties>
           <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
-          <Property name="log.stackdriver.serviceName">${env:OPERATE_LOG_STACKDRIVER_SERVICENAME:-operate}</Property>
-          <Property name="log.stackdriver.serviceVersion">${env:OPERATE_LOG_STACKDRIVER_SERVICEVERSION:-}</Property>
+          <Property name="log.stackdriver.serviceName">${env:ZEEBE_LOG_STACKDRIVER_SERVICENAME:-orchestration}</Property>
+          <Property name="log.stackdriver.serviceVersion">${env:ZEEBE_LOG_STACKDRIVER_SERVICEVERSION:-}</Property>
         </Properties>
         <Appenders>
           <Console name="Console" target="SYSTEM_OUT" follow="true">
@@ -92,9 +92,9 @@ operate:
           </Console>
         </Appenders>
         <Loggers>
-          <Logger name="io.camunda.operate" level="debug" />
+          <Logger name="io.camunda" level="debug" />
           <Root level="debug">
-            <AppenderRef ref="${env:OPERATE_LOG_APPENDER:-Console}"/>
+            <AppenderRef ref="${env:CAMUNDA_LOG_APPENDER:-Console}"/>
           </Root>
         </Loggers>
       </Configuration>
@@ -102,88 +102,16 @@ operate:
 
 ### Default properties
 
-The `helm template` command generates the application's default configuration. Keep the original `values.yaml` unchanged and maintain a separate file with your custom settings. For details, see [Creating your own values files](self-managed/deployment/helm/chart-parameters.md#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
+The `helm template` command generates the application's default configuration. Keep the original `values.yaml` unchanged and maintain a separate file with your custom settings. For details, see [Creating your own values files](/self-managed/deployment/helm/chart-parameters.md#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
 
 ```bash
 helm template <your-release-name> \
     -f values.yaml \
     camunda/camunda-platform \
-    --show-only templates/operate/configmap.yaml
+    --show-only templates/orchestration/configmap-unified.yaml
 ```
 
 The `--show-only` flag prints the `configmap`. Copy the `application.yml` content and place it under the appropriate `<component>.configuration` key in `values.yaml`.
-
-```yaml
-# Source: camunda-platform/templates/operate/configmap.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: <your-release-name>-operate-configuration
-  labels:
-    app: camunda-platform
-    app.kubernetes.io/name: camunda-platform
-    app.kubernetes.io/instance: <your-release-name>
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/part-of: camunda-platform
-    helm.sh/chart: camunda-platform-10.3.2
-    app.kubernetes.io/component: operate
-    app.kubernetes.io/version: "8.5.5"
-data:
-  application.yml: |
-    spring:
-      profiles:
-        active: "identity-auth"
-      security:
-        oauth2:
-          resourceserver:
-            jwt:
-              issuer-uri: "http://<your-release-name>-keycloak:80/auth/realms/camunda-platform"
-              jwk-set-uri: "http://<your-release-name>-keycloak:80/auth/realms/camunda-platform/protocol/openid-connect/certs"
-
-    camunda:
-      identity:
-        clientId: "operate"
-        audience: "operate-api"
-        baseUrl: "http://<your-release-name>-identity:80"
-
-    # Operate configuration file
-    camunda.operate:
-      identity:
-        redirectRootUrl: "http://localhost:8081"
-
-      # ELS instance to store Operate data
-      elasticsearch:
-        # Cluster name
-        clusterName: elasticsearch
-        # Host
-        host: <your-release-name>-elasticsearch
-        # Transport port
-        port: 9200
-        # Elasticsearch full url
-        url: "http://<your-release-name>-elasticsearch:9200"
-      # ELS instance to export Zeebe data to
-      zeebeElasticsearch:
-        # Cluster name
-        clusterName: elasticsearch
-        # Host
-        host: <your-release-name>-elasticsearch
-        # Transport port
-        port: 9200
-        # Index prefix, configured in Zeebe Elasticsearch exporter
-        prefix: zeebe-record
-        # Elasticsearch full url
-        url: "http://<your-release-name>-elasticsearch:9200"
-      # Zeebe instance
-      zeebe:
-        # Broker contact point
-        brokerContactPoint: "<your-release-name>-zeebe-gateway:26500"
-    logging:
-      level:
-        ROOT: INFO
-        io.camunda.operate: INFO
-    #Spring Boot Actuator endpoints to be exposed
-    management.endpoints.web.exposure.include: health,info,conditions,configprops,prometheus,loggers,usage-metrics,backups
-```
 
 ## Practical example: migrating from environment variables to a configuration file
 
@@ -194,11 +122,7 @@ This example shows how to convert a Zeebe backup configuration from environment 
 To configure Zeebe backups, earlier charts required environment variables:
 
 ```yaml
-zeebe:
-  clusterSize: "1"
-  enabled: true
-  partitionCount: "1"
-  replicationFactor: "1"
+orchestration:
   env:
     - name: ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME
       value: zeebebackuptest
@@ -226,7 +150,7 @@ Run the following command to render the default configuration file and fill in H
 helm template \
     -f values.yaml \
     camunda/camunda-platform \
-    --show-only templates/zeebe/configmap.yaml
+    --show-only templates/orchestration/configmap-unified.yaml
 ```
 
 The output includes an `application.yml` section similar to:
@@ -369,10 +293,10 @@ zeebe:
 
 ### Step 5: Add the configuration to `values.yaml`
 
-Finally, place the updated configuration under `zeebe.configuration` in `values.yaml`:
+Finally, place the updated configuration under `orchestration.configuration` in `values.yaml`:
 
 ```yaml
-zeebe:
+orchestration:
   configuration: |-
     zeebe:
       broker:
@@ -457,7 +381,7 @@ If both an environment variable and a configuration file define the same option,
 Example:
 
 ```yaml
-zeebe:
+orchestration:
   env:
     - name: ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME
       value: "zeebetest1"
@@ -472,15 +396,68 @@ zeebe:
       ...
 ```
 
-Here, the bucket name is set twice. The environment variable `zeebetest1` overrides the configuration file `zeebeOtherBucketName`. See [Spring externalized configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html) for precedence details.
+Here, the bucket name is set twice. The environment variable `zeebetest1` overrides `zeebeOtherBucketName` from the configuration file. See [Spring externalized configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html) for precedence details.
 
 ### Limitations
 
-Customizing the `configuration` option will replace the entire contents of the configuration file. During upgrades, if the `configuration` option remains and if there are any application-level breaking changes to the configuration file format, this may cause the application component to crash.
+`configuration` is written as a full file replacement. It is not merged with defaults from the chart or container image.
 
-- The `configuration` option replaces the entire configuration file. During upgrades, if the file format changes, the component may fail to start until the configuration is updated.
-- Forgetting to wrap multiline values with (`|`) in Helm can cause parse errors.
-- Mixing `env` and `configuration` for the same property without realizing precedence can lead to unexpected results.
+- During upgrades, the component may fail to start until your custom file matches any new required schema.
+- Multiline values must use a YAML block scalar (`|` or `|-`) to avoid Helm/YAML parse issues.
+- If the same setting is defined in both `env` and `configuration`, `env` takes precedence at runtime.
+
+## Component-specific notes
+
+Some components deviate from the standard `application.yaml`/`log4j2.xml` behavior.
+
+### Optimize
+
+Optimize does not use Spring Boot's `application.yaml`. It reads `environment-config.yaml`. Setting `optimize.configuration` writes the provided content to `environment-config.yaml` inside the container.
+
+```yaml
+optimize:
+  configuration: |-
+    # Contents go into environment-config.yaml, not application.yaml
+    container:
+      host: 0.0.0.0
+      ports:
+        http: 8090
+    es:
+      connection:
+        nodes:
+          - host: <your-release-name>-elasticsearch
+            httpPort: 9200
+```
+
+For `optimize.extraConfiguration`, a common use case is a custom `environment-logback.xml` (not `log4j2.xml`):
+
+```yaml
+optimize:
+  extraConfiguration:
+    environment-logback.xml: |-
+      <configuration>
+        ...
+      </configuration>
+```
+
+For the full list of Optimize configuration options, see [Optimize system configuration](/self-managed/components/optimize/configuration/system-configuration.md).
+
+### Console
+
+Console does not support `extraConfiguration`. Use `console.overrideConfiguration`, which merges into the generated Console configuration (or into configuration supplied via `console.configuration`). Use it for Console-specific properties such as `customerId`, cluster `tags`, and `custom-properties`:
+
+```yaml
+console:
+  overrideConfiguration: |-
+    customerId: "<your-customer-id>"
+    clusters:
+      - uuid: "<cluster-uuid>"
+        name: "<cluster-name>"
+        tags:
+          - "<tag>"
+```
+
+For the full list of Console configuration options, see [Console configuration](/self-managed/components/console/configuration/configuration.md).
 
 ## References
 

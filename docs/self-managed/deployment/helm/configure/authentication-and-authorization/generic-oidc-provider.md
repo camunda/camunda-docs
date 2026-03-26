@@ -121,12 +121,12 @@ For detailed instructions on obtaining and decoding tokens to identify these cla
 
 Camunda components request OIDC scopes when authenticating users. The default scopes vary by component:
 
-| Scope            | Description                         | Management Identity, Optimize, Web Modeler, Console | Orchestration Cluster (Operate, Tasklist) |
-| ---------------- | ----------------------------------- | --------------------------------------------------- | ----------------------------------------- |
-| `openid`         | Required for OIDC authentication.   | ✔                                                   | ✔                                         |
-| `profile`        | Access to user profile information. | ✔                                                   | ✔                                         |
-| `email`          | Access to user email address.       | ✔                                                   |                                           |
-| `offline_access` | Enables refresh token issuance.     | ✔                                                   |                                           |
+| Scope            | Description                         | Management Identity, Optimize, Web Modeler, Console | Orchestration Cluster applications (Identity, Operate, Tasklist) |
+| ---------------- | ----------------------------------- | --------------------------------------------------- | ---------------------------------------------------------------- |
+| `openid`         | Required for OIDC authentication.   | ✔                                                  | ✔                                                               |
+| `profile`        | Access to user profile information. | ✔                                                  | ✔                                                               |
+| `email`          | Access to user email address.       | ✔                                                  |                                                                  |
+| `offline_access` | Enables refresh token issuance.     | ✔                                                  |                                                                  |
 
 :::info
 If your provider supports the `offline_access` scope, components will receive refresh tokens. This allows sessions to remain active longer without requiring users to re-authenticate.
@@ -261,7 +261,7 @@ The `initialClaimName` and `initialClaimValue` parameters are used only during t
 
 ### Configure Orchestration Cluster
 
-Add configuration for the Orchestration Cluster (Zeebe, Operate, Tasklist):
+Add configuration for the Orchestration Cluster (Zeebe, Operate, Tasklist, Identity):
 
 ```yaml
 orchestration:
@@ -303,6 +303,14 @@ orchestration:
 | `redirectUrl`   | Full URL for Orchestration Cluster | `http://localhost:8080` (local) or `https://your-domain.com/orchestration` (Ingress)           |
 | `usernameClaim` | Claim identifying users            | Default: `preferred_username`. Override if your provider uses `email`, `sub`, or another claim |
 | `clientIdClaim` | Claim identifying clients          | Default: `client_id`. Override if your provider uses `azp` or another claim                    |
+
+:::note Username display in Web Modeler (Helm)
+In Helm deployments, the default OIDC username claim is `preferred_username`, which often maps to an email address.
+
+If you want Web Modeler to display usernames based on a different claim (for example `name`), set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Web Modeler `webapp` environment.
+
+For available Web Modeler environment variables, see [Identity/Keycloak configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#identity--keycloak-1).
+:::
 
 #### Default roles
 
@@ -366,6 +374,10 @@ optimize:
 ### Configure Web Modeler
 
 Web Modeler requires two OIDC clients: one for the UI (public) and one for the API (confidential).
+
+:::note
+If your IdP provides user-friendly names in the `name` claim and you want Web Modeler to use that claim, configure the Web Modeler `webapp` environment variable `CAMUNDA_IDENTITY_USERNAMECLAIM=name`. Without this override, Helm defaults typically resolve usernames from `preferred_username`.
+:::
 
 ```yaml
 global:

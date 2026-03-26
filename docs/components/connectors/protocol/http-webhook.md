@@ -138,6 +138,20 @@ If you need to use correlation keys with XML payloads, send the correlation key 
 =request.headers["x-correlation-id"]
 ```
 
+### Response mode
+
+**Response mode** controls whether the webhook waits for the correlation to complete (synchronous) or returns immediately (asynchronous).
+
+Use synchronous mode only when the caller requires the process result:
+
+- **Start event**: Creates a new process instance and returns its result.
+- **Message start event** (and other message-based events): Correlates the message and returns the matched process instance key.
+
+In asynchronous mode:
+
+- **Start event**: Returns the process instance key of the newly created process.
+- **Message-based events**: Publishes the message and returns the message key.
+
 ## Activate the HTTP Webhook connector by deploying your diagram
 
 Once you click the **Deploy** button, your HTTP Webhook will be activated and publicly available.
@@ -469,7 +483,78 @@ In addition to the `request` object you have access to the `correlation` result.
 
 The data available via the `correlation` object depends on the type of BPMN element you are using the Webhook connector with.
 
-A start event with a message definition uses message publishing internally to correlate an incoming request with Zeebe. A successful correlation will therefore lead to a published message and the `correlation` object will contain the following properties:
+The following overview summarizes the different data points available when using the Webhook connector with different element types and configuration options.
+
+**`correlation` payload by response mode**
+
+The table below shows which `correlation` result type is produced for each supported BPMN element type and response mode.
+
+The result type determines what is available in the **response expression** context (`correlation` property) and in the HTTP response returned to the caller.
+
+<table>
+<tr>
+  <td>*Element Type*</td>
+  <td>Response mode: **Synchronous**</td>
+  <td>Response mode: **Asynchronous**</td>
+</tr>
+<tr>
+  <td>**Start Event**</td>
+  <td> 
+  ```
+  { 
+    "processInstanceKey": 123,
+    "tenantId": "abc", 
+    "variables": {...}
+  }
+```
+The `variables` contain the result of the process execution.
+</td>
+<td>
+  ```
+  { 
+    "processInstanceKey": 123,
+    "tenantId": "abc"
+  }
+```
+The result of the process execution is not available, but it can be fetched via the API using the `processInstanceKey`.
+</td>
+</tr>
+<tr>
+  <td>
+    **Message Start Event**
+
+    **Intermediate Catch Event**
+
+    **Boundary Event**
+
+    **Receive Task**
+
+  </td>
+  <td> 
+  ```
+  { 
+    "processInstanceKey": 123,
+    "messageKey": 123,
+    "tenantId": "abc"
+  }
+```
+The `processInstanceKey` contains the first process instance key with which the message correlated.
+</td>
+<td>
+  ```
+  { 
+    "messageKey": 123,
+    "tenantId": "abc"
+  }
+```
+The message is buffered and only the `messageKey` is returned. Correlation to a subscription happens asynchronously in the engine.
+</td>
+</tr>
+</table>
+
+A start event with a message definition uses message publishing internally to correlate an incoming request with Zeebe.
+
+A successful correlation therefore publishes a message, and the `correlation` object contains the following properties when using the `asynchronous` response mode:
 
 ```json
 {
@@ -478,15 +563,24 @@ A start event with a message definition uses message publishing internally to co
 }
 ```
 
-If a Webhook request is processed more than once using the same _Message ID_ (because of a retry for example) the `correlation` object will be empty.
+If a Webhook request is processed more than once using the same _Message ID_ (for example, because of a retry), the `correlation` object is empty.
 
-A start event without a message will create a new process instance. You therefore have access to the
-newly create process instance key when accessing the `correlation` object:
+A start event without a message creates a new process instance. You therefore have access to the newly created process instance key when accessing the `correlation` object:
 
 ```json
 {
   "processInstanceKey": 6755399441144562,
   "tenantId": "<default>"
+}
+```
+
+If the `synchronous` response mode is selected, the response also contains the result `variables` from the execution.
+
+```json
+{
+  "processInstanceKey": 6755399441144562,
+  "tenantId": "<default>",
+  "variables": {...}
 }
 ```
 

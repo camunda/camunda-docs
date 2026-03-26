@@ -5,9 +5,14 @@ sidebar_label: Production install
 description: Install Camunda 8 Self-Managed on Kubernetes using Helm chart with production-ready configuration.
 ---
 
-The following is a **scenario-based, production focused, step-by-step guide** for setting up the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform). It provides a resilient, production-ready architecture for Camunda 8, and minimizes complexity while offering a reliable foundation for most production use cases.
+This is a **scenario-based, production-focused, step-by-step guide** for setting up the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform). It provides a resilient baseline for most production use cases.
 
-While this guide uses AWS as a reference, the steps are applicable to other [supported Kubernetes distributions](/reference/supported-environments.md#deployment-options) and their comparable services. Upon completion, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm chart.
+This is a single production install guide with database options in one flow:
+
+- **Non-SQL secondary storage** (Elasticsearch/OpenSearch)
+- **RDBMS secondary storage** (for supported components)
+
+AWS examples are used where helpful, but the flow applies to other [supported Kubernetes distributions](/reference/supported-environments.md#deployment-options) with equivalent services.
 
 ## Prerequisites
 
@@ -18,10 +23,16 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **DNS Configuration**: You must have access to configure DNS for your domain in order to point to the Kubernetes cluster Ingress.
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
-  - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. For step-by-step instructions, see the [Aurora PostgreSQL module setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup) guide.
-  - **Amazon OpenSearch**: The secondary datastore for the Orchestration Cluster, the Camunda 8 process orchestration engine. For step-by-step instructions, see the [OpenSearch](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eksctl.md#4-opensearch-domain) guide.
-    Note: Secondary storage is configurable. Depending on the components you run, you can use Elasticsearch/OpenSearch or an RDBMS-based secondary store for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
+  - **PostgreSQL-compatible database**: Required for Web Modeler persistence. This guide uses Amazon Aurora PostgreSQL as an example. For AWS-specific steps, see [Aurora PostgreSQL module setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup).
+  - **Secondary storage backend for the Orchestration Cluster**: Choose one option:
+    - **Non-SQL**: Elasticsearch/OpenSearch (this guide uses Amazon OpenSearch as the example). For AWS-specific steps, see [OpenSearch](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eksctl.md#4-opensearch-domain).
+    - **RDBMS**: See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) and the [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md).
   - **Identity Provider (IdP)**: An OIDC-compatible identity provider for authentication. See [Authentication and authorization](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) for supported options.
+
+  :::tip No managed services available?
+  If managed PostgreSQL, Elasticsearch, or an external OIDC provider are not available in your organization, you can deploy these infrastructure components on Kubernetes using official operators. See [Required infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions.
+  :::
+
 - **Ingress NGINX**: Ensure the [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - To store the backups of the Camunda web applications. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. See the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
 - **Amazon S3** - An additional bucket to store backup files of the Orchestration Cluster brokers.
@@ -39,7 +50,7 @@ For more information refer to the Camunda 8 [Kubernetes reference architectures]
 
 ## Installation and configuration
 
-After following the [prerequisites](#prerequisites), you should have an EKS cluster ready with `kubectl` and the `helm` CLI installed.
+After following the [prerequisites](#prerequisites), you should have a Kubernetes cluster ready with `kubectl` and the `helm` CLI installed.
 
 ### Namespace setup
 
@@ -50,9 +61,9 @@ kubectl create namespace management-and-modeling
 kubectl create namespace orchestration
 ```
 
-- **Namespace `management-and-modeling`:** We will install [Management Identity](/self-managed/components/management-identity/overview.md), [Console](/self-managed/components/console/overview.md), [Optimize](/self-managed/components/optimize/overview.md), and the [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) components.
+- **Namespace `management-and-modeling`:** We will install [Management Identity](/self-managed/components/management-identity/overview.md), [Console](/self-managed/components/console/overview.md), and the [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) components.
 
-- **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), and [Connectors](/self-managed/components/connectors/overview.md).
+- **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), [Connectors](/self-managed/components/connectors/overview.md) and [Optimize](/self-managed/components/optimize/overview.md).
 
 Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
@@ -140,9 +151,14 @@ You must create Kubernetes secrets for all client secrets required by your ident
 
 :::note
 To allow for easier testing, the Camunda Helm chart provides databases as an external dependency, such as [Bitnami Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). These dependency charts should be disabled in a production setting, and production databases should be used instead.
-
-This guide disables the Bitnami Elasticsearch dependency chart and uses Amazon OpenSearch. It also disables the Bitnami PostgreSQL dependency chart and uses Amazon Aurora PostgreSQL instead.
 :::
+
+This guide keeps database configuration in one flow and provides two options:
+
+- **Option A (Non-SQL secondary storage):** Use Elasticsearch or OpenSearch for the Orchestration Cluster secondary storage backend. This path is also required when deploying Optimize.
+- **Option B (RDBMS secondary storage):** Use a relational database as secondary storage for supported components. For this path, follow [Configure RDBMS in Helm chart](/self-managed/deployment/helm/configure/database/rdbms.md) and use the [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) as a focused walkthrough.
+
+The examples below use Option A with Amazon OpenSearch for secondary storage, and Amazon Aurora PostgreSQL for Management Identity and Web Modeler.
 
 You should have one Amazon OpenSearch instance and one Amazon Aurora PostgreSQL instance (with two databases) ready to use, complete with a username, password, and URL for each datastore. If these have not been configured, see the [prerequisites](#prerequisites) for requirements.
 
@@ -209,9 +225,12 @@ Use the `existingSecret` parameter to specify a pre-existing Kubernetes secret c
 
 For more information on connecting to external databases, the following guides are available for the Camunda Helm chart:
 
+- [Helm chart database configuration](/self-managed/deployment/helm/configure/database/index.md)
+- [Non-SQL database configuration](/self-managed/deployment/helm/configure/database/non-sql.md)
 - Using an [existing Elasticsearch instance](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md)
 - Using [Amazon OpenSearch service](/self-managed/deployment/helm/configure/database/using-external-opensearch.md)
-  - Using Amazon OpenSearch service [through IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup) (only applicable if you are using EKS)
+- [RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md)
+- Using Amazon OpenSearch service [through IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup) (only applicable if you are using EKS)
 - Running Web Modeler on [Amazon Aurora PostgreSQL](/self-managed/components/modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql)
 
 ## Orchestration Cluster configuration
@@ -509,8 +528,7 @@ prometheusServiceMonitor:
 orchestration:
   enabled: false
 optimize:
-  enabled: true
-  contextPath: /optimize
+  enabled: false
 connectors:
   enabled: false
 elasticsearch:
@@ -534,51 +552,51 @@ console:
           releases:
             - name: camunda
               namespace: management-and-modeling
-              version: 13.x.x
+              version: 14.x.x
               components:
                 - name: Console
                   id: console
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://management-and-modeling-host.com/
                   readiness: http://camunda-console.oidc:9100/health/readiness
                   metrics: http://camunda-console.oidc:9100/prometheus
                 - name: Identity
                   id: identity
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://management-and-modeling-host.com/identity
                   readiness: http://camunda-identity.oidc:82/actuator/health
                   metrics: http://camunda-identity.oidc:82/actuator/prometheus
                 - name: WebModeler WebApp
                   id: webModelerWebApp
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://management-and-modeling-host.com/modeler
                   readiness: http://camunda-web-modeler-webapp.oidc:8071/health/readiness
                   metrics: http://camunda-web-modeler-webapp.oidc:8071/metrics
             - name: camunda
               namespace: orchestration
-              version: 13.x
+              version: 14.x
               components:
                 - name: Operate
                   id: operate
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://orchestration-host.com/orchestration/operate
                   readiness: http://camunda-zeebe.orchestration:9600/operate/actuator/health/readiness
                   metrics: http://camunda-zeebe.orchestration:9600/operate/actuator/prometheus
                 - name: Optimize
                   id: optimize
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://orchestration-host.com/optimize
                   readiness: http://camunda-optimize.orchestration:80/optimize/api/readyz
                   metrics: http://camunda-optimize.orchestration:8092/actuator/prometheus
                 - name: Tasklist
                   id: tasklist
-                  version: 8.8.x
+                  version: 8.9.x
                   url: https://orchestration-host.com/orchestration/tasklist
                   readiness: http://camunda-zeebe.orchestration:9600/tasklist/actuator/health/readiness
                   metrics: http://camunda-zeebe.orchestration:9600/tasklist/actuator/prometheus
                 - name: Orchestration Cluster
                   id: orchestration
-                  version: 8.8.x
+                  version: 8.9.x
                   urls:
                     grpc: https://zeebe-orchestration-host.com
                     http: https://orchestration-host.com/orchestration
@@ -645,7 +663,8 @@ connectors:
   contextPath: /connectors
 
 optimize:
-  enabled: false
+  enabled: true
+  contextPath: /optimize
 identity:
   enabled: false
 identityKeycloak:
