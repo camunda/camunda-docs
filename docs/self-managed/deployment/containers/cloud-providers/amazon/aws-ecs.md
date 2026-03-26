@@ -374,10 +374,17 @@ Some common topics to potentially change:
 task_cpu              = 4096
 task_cpu_architecture = "X86_64"
 task_memory           = 8192
+```
 
+The EFS file system uses the `elastic` throughput mode by default, which automatically scales for most workloads. If you need a fixed throughput configuration instead, adjust the `efs_throughput_mode` and `efs_provisioned_throughput_in_mibps` variables.
+
+Example:
+
+```hcl
 # Orchestration Cluster
 
-efs_provisioned_throughput_in_mibps = 50
+efs_throughput_mode                    = "provisioned"
+efs_provisioned_throughput_in_mibps    = 50
 ```
 
 ##### Camunda
