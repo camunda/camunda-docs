@@ -1887,39 +1887,45 @@ module.exports = {
               ],
             },
             "self-managed/concepts/secondary-storage/managing-secondary-storage",
-          ],
-        },
-        {
-          type: "category",
-          label: "Databases",
-          link: {
-            type: "doc",
-            id: "self-managed/concepts/databases/overview",
-          },
-          items: [
-            {
-              Elasticsearch: [
-                {
-                  Privileges: [
-                    "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
-                    "self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges",
-                    "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
-                    "self-managed/concepts/databases/elasticsearch/opensearch-without-cluster-privileges",
-                  ],
-                },
-              ],
-            },
             {
               type: "category",
-              label: "Relational databases",
+              label: "Databases",
               link: {
                 type: "doc",
-                id: "self-managed/concepts/databases/relational-db/index",
+                id: "self-managed/concepts/databases/overview",
               },
               items: [
-                "self-managed/concepts/databases/relational-db/rdbms-setup-guide",
-                "self-managed/concepts/databases/relational-db/rdbms-support-policy",
-                "self-managed/concepts/databases/relational-db/database-configuration",
+                {
+                  type: "category",
+                  label: "Document store databases",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
+                  },
+                  items: [
+                    {
+                      Privileges: [
+                        "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
+                        "self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges",
+                        "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
+                        "self-managed/concepts/databases/elasticsearch/opensearch-without-cluster-privileges",
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Relational databases",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/concepts/databases/relational-db/index",
+                  },
+                  items: [
+                    "self-managed/concepts/databases/relational-db/rdbms-setup-guide",
+                    "self-managed/concepts/databases/relational-db/rdbms-support-policy",
+                    "self-managed/concepts/databases/relational-db/database-configuration",
+                  ],
+                },
               ],
             },
           ],
@@ -2031,7 +2037,6 @@ module.exports = {
                 },
                 {
                   Concepts: [
-                    "self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/monitoring",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/backups",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",

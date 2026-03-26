@@ -221,6 +221,9 @@ RewriteRule ^docs/self-managed/deployment/manual/upgrade/?$ /docs/self-managed/u
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
 
+# Remove ES/OS page
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch/?$ /docs/next/self-managed/concepts/secondary-storage/configuring-secondary-storage/ [R=301,L]
+
 # Self-Managed upgrade guide restructuring
 RewriteRule ^docs/next/self-managed/update/administrators/admin-upgrade-overview/?$ /docs/next/self-managed/upgrade/ [R=301,L]
 RewriteRule ^docs/next/self-managed/update/administrators/prepare-for-admin-upgrade/?$ /docs/next/self-managed/upgrade/prepare-for-upgrade/ [R=301,L]
