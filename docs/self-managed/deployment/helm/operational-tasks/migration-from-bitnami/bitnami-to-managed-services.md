@@ -11,7 +11,6 @@ import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 import CloneRepo from './\_partials/\_clone-repo.md'
-import DualRegionEsNote from './\_partials/\_dual-region-es-note.md'
 
 Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to **cloud-managed services**, such as:
 
@@ -52,7 +51,18 @@ Review the [operational readiness](#operational-readiness) checklist, including 
 
 ### IRSA / IAM-based authentication not supported
 
+<details>
+<summary>AWS only</summary>
+
 The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or Elasticsearch endpoints protected by cloud-specific IAM auth require a custom migration approach.
+
+</details>
+
+### Dual-region Elasticsearch setups
+
+There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart in a dual-region setup. This applies only to installations upgrading from Camunda 8.8, which was the last version to include Bitnami Elasticsearch as a default subchart.
+
+If you need to perform this migration in a dual-region environment, follow the single-region migration procedure and apply it individually to each region.
 
 ### Identity authentication
 
@@ -99,8 +109,6 @@ Minimum requirements:
 - Self-managed Elasticsearch — ensure it is accessible from the cluster, and note the endpoint and credentials.
 
 </details>
-
-<DualRegionEsNote />
 
 ### Create Kubernetes Secrets
 
@@ -307,11 +315,9 @@ What happens:
 
 #### Elasticsearch data migration for managed services
 
-:::warning Manual Elasticsearch data migration
-Automated Elasticsearch data migration is **not supported** for external targets. The automated migration uses the `_reindex` API, which requires both source and target Elasticsearch clusters to be reachable within the same Kubernetes namespace. This isn't possible with managed services.
-:::
+By default, the automated Elasticsearch migration is skipped for external targets. To enable it, set `ES_WARM_REINDEX=true` in `env.sh`. This runs the same `_reindex` API pipeline used for operator targets — a warm reindex in Phase 2 and a delta reindex during Phase 3. The only requirements are network reachability from the migration Job pod to both the source and the target, and `reindex.remote.whitelist` configured on the target Elasticsearch to allow pulling data from the source.
 
-For Elasticsearch data migration to managed services, you have several options:
+If you prefer a manual approach, or if the automated reindex does not fit your setup, you have several options:
 
 <Tabs groupId="es-migration" queryString>
 

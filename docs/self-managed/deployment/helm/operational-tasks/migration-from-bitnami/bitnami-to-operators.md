@@ -11,7 +11,6 @@ import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 import CloneRepo from './\_partials/\_clone-repo.md'
-import DualRegionEsNote from './\_partials/\_dual-region-es-note.md'
 
 Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure (PostgreSQL, Elasticsearch, and Keycloak) to **Kubernetes operator-managed equivalents**:
 
@@ -52,10 +51,6 @@ Review the [general precautions](./index.md#precautions) that apply to all migra
 Review the [operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
 :::
 
-### IRSA / IAM-based authentication not supported
-
-The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or OpenSearch with IAM auth require a custom migration approach.
-
 ### Operator-specific precautions
 
 These precautions are specific to the operator-based migration:
@@ -63,6 +58,12 @@ These precautions are specific to the operator-based migration:
 - **Monitor resource quotas:** CNPG and ECK clusters consume additional resources. Ensure your namespace quotas and node capacity allow for the temporary duplication.
 - **Elasticsearch `reindex.remote.whitelist`:** The target ECK cluster must have `reindex.remote.whitelist` configured to allow pulling data from the source Bitnami Elasticsearch via the `_reindex` API. The migration scripts patch this automatically.
 - **Keycloak hooks:** If you use a DNS CNAME for Keycloak, use the `hooks/post-phase-3.sh` hook to update the DNS target to the new Keycloak Operator service after cutover.
+
+### Dual-region Elasticsearch setups
+
+There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart in a dual-region setup. This applies only to installations upgrading from Camunda 8.8, which was the last version to include Bitnami Elasticsearch as a default subchart.
+
+If you need to perform this migration in a dual-region environment, follow the single-region migration procedure and apply it individually to each region.
 
 ## Clone the deployment references repository
 
@@ -159,8 +160,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 </details>
 
 ### Elasticsearch (ECK)
-
-<DualRegionEsNote />
 
 The migration patches the reference ECK cluster manifest from `operator-based/elasticsearch/elasticsearch-cluster.yml` at runtime to add `reindex.remote.whitelist` support for data transfer via the `_reindex` API. Review the base manifest:
 

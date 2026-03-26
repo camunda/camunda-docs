@@ -16,7 +16,7 @@ This guide is for customers running Camunda 8 with Bitnami subcharts enabled. If
 
 ## Why migrate?
 
-Bitnami subcharts (PostgreSQL, Elasticsearch, Keycloak) provided with the Camunda Helm chart are convenient for development and testing. However, for production environments, Camunda [recommends](/self-managed/deployment/helm/chart-parameters.md#bitnami-subcharts) using managed services or [operator-based deployments](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
+Bitnami subcharts (PostgreSQL, Elasticsearch, Keycloak) provided with the Camunda Helm chart are convenient for development and testing. However, for production environments, Camunda [recommends](https://camunda.com/blog/2026/03/camunda-8-helm-chart-and-bitnami-sub-charts/) using managed services or [operator-based deployments](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
 - **End of open-source Bitnami images**: Bitnami has [archived open-source container images](https://github.com/bitnami/containers/issues/83267), requiring a transition to alternatives.
 - **Production readiness**: Operators and managed services offer automated failover, backup, monitoring, and security patching.

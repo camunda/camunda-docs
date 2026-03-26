@@ -8,7 +8,6 @@ description: "Advanced guide for migrating Camunda 8 Self-Managed infrastructure
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
-import DualRegionEsNote from './\_partials/\_dual-region-es-note.md'
 
 Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to operator-managed or managed service equivalents **without planned application downtime**. Instead of the freeze-backup-restore-switch pattern used in the standard migration, this approach keeps source and target synchronized with **real-time data replication** before cutover.
 
@@ -116,6 +115,12 @@ However, be aware of Keycloak session data:
 ### Assumed target infrastructure
 
 The commands and snippets in this guide assume **CloudNativePG (CNPG)** as the PostgreSQL target and **ECK** as the Elasticsearch target. If you are migrating to managed services (for example, AWS RDS or Elastic Cloud), replace the target hostnames, credentials, and connection methods accordingly.
+
+### Dual-region Elasticsearch setups
+
+There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart in a dual-region setup. This applies only to installations upgrading from Camunda 8.8, which was the last version to include Bitnami Elasticsearch as a default subchart.
+
+If you need to perform this migration in a dual-region environment, follow the single-region migration procedure and apply it individually to each region.
 
 ## Clone the deployment references repository
 
@@ -304,8 +309,6 @@ kubectl exec -it $(kubectl get pod -n ${NAMESPACE} -l cnpg.io/cluster=${CNPG_WEB
 The `copy_data = false` flag is important because we already performed the initial sync in Step 3. The subscription will now stream only new changes in real-time.
 
 ### Elasticsearch: Continuous synchronization
-
-<DualRegionEsNote />
 
 Unlike PostgreSQL, Elasticsearch does not have a built-in logical replication feature available in the open-source version. Choose one of the following approaches:
 
