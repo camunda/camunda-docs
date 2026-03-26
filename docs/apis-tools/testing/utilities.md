@@ -285,7 +285,9 @@ void shouldMockDmnDecision() {
 
 ## Conditional behavior
 
-You can define a conditional behavior using the `when(condition).then(action)` API on `CamundaProcessTestContext`. A conditional behavior monitors the process state in the background and automatically executes an action when the condition is met. The condition is a CPT assertion that throws an `AssertionError` when not satisfied. Behaviors are cleared automatically after each test.
+CPT assertions are blocking by design. They poll the process state and wait until the expected condition is reached before the test continues. This works well when the process follows a predictable path, but becomes a problem for non-deterministic flows. Processes that involve AI agents or parallel branches, for example, may activate elements in an order that cannot be known ahead of time. A blocking assertion that waits for one specific element can stall the test while the process is actually waiting for a different element to be completed first.
+
+The `when(condition).then(action)` API on `CamundaProcessTestContext` solves this by moving the condition check into a background thread. Instead of blocking the test, a conditional behavior continuously monitors the process state and executes its action as soon as the condition is met. You can register multiple behaviors before starting the process, and they will react independently as the process progresses. Behaviors are cleared automatically after each test.
 
 When to use it:
 
