@@ -17,7 +17,7 @@ Configure user task authorization if all of the following apply:
 - You use Tasklist V2
 - You want to control which users can view, claim, update, or complete user tasks
 
-If you run Tasklist in V1 API mode and rely on the legacy task visibility model, see [User task access restrictions](./user-task-access-restrictions.md).
+If you run Tasklist in V1 API mode and rely on the legacy task visibility model, see [user task access restrictions](./user-task-access-restrictions.md).
 
 If authorization is disabled, Tasklist does not enforce permission checks for user task operations.
 
