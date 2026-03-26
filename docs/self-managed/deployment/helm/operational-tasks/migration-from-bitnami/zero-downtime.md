@@ -31,7 +31,7 @@ Read the [topic overview](./index.md#why-migrate) to learn why you should migrat
 
 ## How it works
 
-The zero-downtime migration replaces the backup/restore phases with continuous replication:
+The zero-downtime migration replaces the [backup/restore phases](./index.md#migration-phases) with continuous replication:
 
 | Phase | Name                  | Downtime | Description                                                     |
 | ----- | --------------------- | -------- | --------------------------------------------------------------- |
@@ -132,7 +132,7 @@ Configure the migration by editing `env.sh` to match your current Camunda instal
 source env.sh
 ```
 
-For a full description of configuration variables, see [Configure the migration](./bitnami-to-operators.md#step-1-configure-the-migration).
+For a full description of configuration variables, see [configure the migration](./bitnami-to-operators.md#step-1-configure-the-migration).
 
 ## Phase 1: Deploy target infrastructure
 
@@ -142,13 +142,13 @@ This phase is identical to Phase 1 of the [standard migration](./bitnami-to-oper
 bash 1-deploy-targets.sh
 ```
 
-After this phase, both the old Bitnami infrastructure and the new operator-managed infrastructure run side-by-side. No traffic is routed to the new targets yet.
+After this phase, both the old Bitnami infrastructure and the new operator-managed infrastructure run side by side. No traffic is routed to the new targets yet.
 
 ## Phase 2: Enable real-time replication
 
 ### PostgreSQL: Logical replication
 
-[PostgreSQL logical replication](https://www.postgresql.org/docs/current/logical-replication.html) allows streaming changes in real-time from the Bitnami PostgreSQL instances to the CNPG (or managed service) targets without stopping the source.
+[PostgreSQL logical replication](https://www.postgresql.org/docs/current/logical-replication.html) allows streaming changes in real time from the Bitnami PostgreSQL instances to the CNPG (or managed service) targets without stopping the source.
 
 #### Step 1: Enable logical replication on the source
 
@@ -204,9 +204,7 @@ kubectl exec -it ${WEBMODELER_STS}-0 -n ${NAMESPACE} -- \
   psql -U postgres -d webmodeler -c "CREATE PUBLICATION webmodeler_migration FOR ALL TABLES;"
 ```
 
-:::info Separate StatefulSets
 Depending on your Helm chart version, each component may use a separate Bitnami PostgreSQL StatefulSet or share one. Adjust the StatefulSet names accordingly.
-:::
 
 #### Step 3: Perform initial data sync
 
@@ -320,7 +318,7 @@ Unlike PostgreSQL, Elasticsearch does not have a built-in logical replication fe
 
 <TabItem value="ccr" label="Cross-cluster replication (Platinum)">
 
-If you have an **Elastic Platinum license**, you can use [Cross-Cluster Replication (CCR)](https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-overview.html) to replicate indices in real-time:
+If you have an **Elastic Platinum license**, you can use [cross-cluster replication (CCR)](https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-overview.html) to replicate indices in real-time:
 
 <details>
 <summary>Show details: CCR setup example</summary>
@@ -638,9 +636,7 @@ kubectl exec -it ${ECK_CLUSTER_NAME}-es-masters-0 -n ${NAMESPACE} -- \
 
 </details>
 
-:::warning Brief data gap
 With the continuous snapshot approach, there is a small window (up to the snapshot interval, for example 5 minutes) where recent Elasticsearch writes may not be captured. Zeebe will re-export these events after the cutover.
-:::
 
 </TabItem>
 
@@ -648,11 +644,9 @@ With the continuous snapshot approach, there is a small window (up to the snapsh
 
 ### Step 3: Helm upgrade (rolling restart)
 
-Perform the Helm upgrade to switch Camunda to the new backends. Because there is no freeze, pods are restarted in a rolling fashion.
+Perform the Helm upgrade to switch Camunda to the new backends. Because there is no freeze, pods are restarted in rolling fashion.
 
-:::warning Not compatible with the standard migration scripts
-The zero-downtime approach does **not** use `3-cutover.sh` — that script freezes the application, which defeats the purpose. Instead, run the Helm upgrade manually with the operator-based values:
-:::
+The zero-downtime approach does not use `3-cutover.sh` — that script freezes the application, which defeats the purpose. Instead, run the Helm upgrade manually with the operator-based values:
 
 <details>
 <summary>Show details: Helm upgrade example</summary>
@@ -669,13 +663,11 @@ helm upgrade ${CAMUNDA_RELEASE_NAME} camunda/camunda-platform \
 
 Build the values file by combining the operator-based Helm values files from the reference architecture (for example, `camunda-identity-values.yml`, `camunda-elastic-values.yml`, `camunda-keycloak-domain-values.yml`) to point Camunda at the new backends. Ensure Bitnami subcharts are disabled.
 
-:::info Rolling restart behavior
 The Helm upgrade triggers a rolling restart of Camunda pods. During this process:
 
 - Zeebe StatefulSet pods restart one at a time, maintaining quorum.
 - Operate, Tasklist, Optimize, and other deployments restart with zero-downtime rollout strategy.
 - There is a brief period where some pods use old backends and others use new ones, but this is safe because the data has already been replicated.
-  :::
 
 ### Step 4: Clean up source publications
 
@@ -707,7 +699,11 @@ Run the standard validation to confirm all components are healthy on the new inf
 bash 4-validate.sh
 ```
 
-### Failback to Bitnami (if needed)
+:::warning Wait before cleanup
+Do not clean up immediately after validation. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [Rollback](#rollback-if-needed)).
+:::
+
+### Rollback (if needed)
 
 If the zero-downtime migration reveals issues after cutover:
 
@@ -721,17 +717,43 @@ If the zero-downtime migration reveals issues after cutover:
 
 ### Clean up Bitnami resources
 
-:::warning Wait before cleanup
-Do not clean up immediately. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, do so **before** running cleanup.
-:::
+:::warning Destructive and irreversible
+This phase **permanently deletes** old Bitnami StatefulSets, PVCs, and the migration backup PVC. After cleanup, rollback to Bitnami subcharts is **no longer possible**.
 
-After confirming stability, remove old Bitnami StatefulSets, PVCs, services, and the migration backup PVC:
+Before running this phase, strongly consider:
+
+1. Taking a full backup of all databases (`pg_dumpall` or equivalent)
+2. Taking PVC or storage volume snapshots (cloud provider snapshots)
+3. Storing backups in cold storage—for example, S3 Glacier or GCS Archive
+4. Keeping rollback artifacts in `.state/` as a safety net
+   :::
+
+After confirming the migration is successful, remove old Bitnami StatefulSets, PVCs, services, and the migration backup PVC:
 
 ```bash
 bash 5-cleanup-bitnami.sh
 ```
 
+What happens:
+
+1. The script requires cutover and validation to be completed and displays a **destructive operation warning** with a confirmation prompt.
+2. **Deletes old Bitnami PostgreSQL** StatefulSets, their PVCs, and headless services (for each migrated component: Identity, Keycloak, and Web Modeler).
+3. **Deletes old Bitnami Elasticsearch** StatefulSet, PVCs, and services.
+4. **Deletes old Bitnami Keycloak** StatefulSet.
+5. **Deletes the migration backup PVC**.
+6. **Reverifies** that all Camunda components and operator-managed targets remain healthy after cleanup.
+7. Suggests removing the `reindex.remote.whitelist` setting from the ECK Elasticsearch configuration as a post-cleanup step.
+
 The script checks whether each resource exists before attempting deletion, so it can be safely rerun if interrupted.
+
+<details>
+<summary>Show details: Cleanup script reference</summary>
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/5-cleanup-bitnami.sh
+```
+
+</details>
 
 ## Operational readiness
 
