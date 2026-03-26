@@ -485,6 +485,26 @@ $ c8ctl deploy ./my-process.bpmn`}
             <details className={styles.collapsible}>
               <summary>Download Desktop Modeler</summary>
               <div className={styles.collapsibleContent}>
+                {/* Homebrew install option (macOS) */}
+                <p style={{ marginBottom: "0.75rem" }}>
+                  On macOS, you can install the Desktop Modeler via{" "}
+                  <a
+                    href="https://brew.sh/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Homebrew
+                  </a>
+                  :
+                </p>
+                <TerminalWindow title="Terminal">
+                  {`$ brew install --cask camunda-modeler`}
+                </TerminalWindow>
+
+                {/* Manual download buttons */}
+                <p style={{ marginTop: "1rem", marginBottom: "0.75rem" }}>
+                  Or download and install manually:
+                </p>
                 <div className={styles.downloadButtons}>
                   <a
                     href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-mac-arm64.dmg"
