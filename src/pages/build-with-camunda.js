@@ -622,31 +622,26 @@ $ c8 resolve inc 2251799813685251`}
           </div>
           <div className={styles.aiGrid}>
             <div className={styles.aiCard}>
-              <h4>
-                <Link
-                  to={useBaseUrl("docs/next/apis-tools/c8ctl/getting-started/")}
-                  style={{ color: "inherit", textDecoration: "none" }}
+              <h4 style={{ color: "inherit" }}>
+                Add Camunda skills as Claude plugin{" "}
+                <span
+                  style={{
+                    marginLeft: "0.5rem",
+                    display: "inline-block",
+                    padding: "0.15rem 0.5rem",
+                    borderRadius: "999px",
+                    fontSize: "0.75rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.02em",
+                    background: "rgba(252, 93, 13, 0.15)",
+                    border: "1px solid rgba(252, 93, 13, 0.45)",
+                    color: "#fc5d0d",
+                    verticalAlign: "middle",
+                    lineHeight: 1.2,
+                  }}
                 >
-                  Add Camunda skills as Claude plugin{" "}
-                  <span
-                    style={{
-                      marginLeft: "0.5rem",
-                      display: "inline-block",
-                      padding: "0.15rem 0.5rem",
-                      borderRadius: "999px",
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      letterSpacing: "0.02em",
-                      background: "rgba(252, 93, 13, 0.15)",
-                      border: "1px solid rgba(252, 93, 13, 0.45)",
-                      color: "#fc5d0d",
-                      verticalAlign: "middle",
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    Coming soon!
-                  </span>
-                </Link>
+                  Coming soon!
+                </span>
               </h4>
               <TerminalWindow title="Terminal">
                 {`$ claude plugin add camunda/camunda-ai-dev-kit
