@@ -58,12 +58,6 @@ The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) a
 
 </details>
 
-### Dual-region Elasticsearch setups
-
-There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart in a dual-region setup. This applies only to installations upgrading from Camunda 8.8, which was the last version to include Bitnami Elasticsearch as a default subchart.
-
-If you need to perform this migration in a dual-region environment, follow the single-region migration procedure and apply it individually to each region.
-
 ### Identity authentication
 
 You need to decide how Identity will authenticate before the cutover. For managed services, the infrastructure decision is separate from the authentication decision:

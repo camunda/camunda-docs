@@ -59,12 +59,6 @@ These precautions are specific to the operator-based migration:
 - **Elasticsearch `reindex.remote.whitelist`:** The target ECK cluster must have `reindex.remote.whitelist` configured to allow pulling data from the source Bitnami Elasticsearch via the `_reindex` API. The migration scripts patch this automatically.
 - **Keycloak hooks:** If you use a DNS CNAME for Keycloak, use the `hooks/post-phase-3.sh` hook to update the DNS target to the new Keycloak Operator service after cutover.
 
-### Dual-region Elasticsearch setups
-
-There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart in a dual-region setup. This applies only to installations upgrading from Camunda 8.8, which was the last version to include Bitnami Elasticsearch as a default subchart.
-
-If you need to perform this migration in a dual-region environment, follow the single-region migration procedure and apply it individually to each region.
-
 ## Clone the deployment references repository
 
 <CloneRepo />

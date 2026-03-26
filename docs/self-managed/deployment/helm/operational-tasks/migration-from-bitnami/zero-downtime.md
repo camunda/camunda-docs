@@ -116,12 +116,6 @@ However, be aware of Keycloak session data:
 
 The commands and snippets in this guide assume **CloudNativePG (CNPG)** as the PostgreSQL target and **ECK** as the Elasticsearch target. If you are migrating to managed services (for example, AWS RDS or Elastic Cloud), replace the target hostnames, credentials, and connection methods accordingly.
 
-### Dual-region Elasticsearch setups
-
-There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart in a dual-region setup. This applies only to installations upgrading from Camunda 8.8, which was the last version to include Bitnami Elasticsearch as a default subchart.
-
-If you need to perform this migration in a dual-region environment, follow the single-region migration procedure and apply it individually to each region.
-
 ## Clone the deployment references repository
 
 This guide uses scripts from the [Camunda deployment references](https://github.com/camunda/camunda-deployment-references) repository. Clone the repository and navigate to the migration directory:

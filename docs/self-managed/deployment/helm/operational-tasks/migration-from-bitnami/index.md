@@ -76,6 +76,7 @@ Regardless of the migration path you choose, review the following precautions **
 - **DNS TTL:** If using a domain for Keycloak, ensure DNS TTL is low before cutover to minimize propagation delay.
 - **Keycloak OIDC impact:** Keycloak is the OIDC provider for all Camunda components (and possibly external applications). Migrating Keycloak changes the underlying service. If you use a DNS CNAME for Keycloak, plan to update the DNS target to the new Keycloak service after cutover. If external applications share the same Keycloak realm, coordinate the DNS switch with their teams.
 - **Session impact:** The database migration preserves all persistent data (realms, users, clients, signing keys, and refresh tokens). Since Keycloak 25+, user sessions are persisted in the database and survive the switch. In-flight authentication flows (login pages in progress) and pending action tokens (password reset links) are lost; users simply need to retry. This is inherent to the downtime window and has no lasting effect.
+- **Dual-region Elasticsearch:** There is currently no dedicated migration procedure for dual-region setups. This applies only to installations upgrading from Camunda 8.8, which was the last version to include Bitnami Elasticsearch as a default subchart. If you need to perform this migration in a dual-region environment, follow the single-region migration procedure and apply it individually to each region.
 
 </details>
 
