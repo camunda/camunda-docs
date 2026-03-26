@@ -351,7 +351,7 @@ function BuildWithCamunda() {
                 <div className={styles.startCardFooter}>
                   <Link
                     className={styles.ctaButton}
-                    to="https://accounts.camunda.io/signup"
+                    to="https://accounts.cloud.camunda.io/signup?utm_source=camunda_docs&utm_medium=cta&utm_campaign=cli_landing_page"
                   >
                     Create free account <ArrowRight />
                   </Link>
