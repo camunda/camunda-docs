@@ -175,24 +175,15 @@ CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_MAPPINGS_0=<mapping id>
 ```
 
 </TabItem>
-<TabItem value="helm" label="Helm values">
-
-```yaml
-orchestration:
-  security:
-    initialization:
-      users:
-        - username: <Your chosen username>
-          password: <Your chosen password>
-          name: <The name of the first user>
-          email: <The email address of the first user>
-        # add more users to this list as desired
-```
-
-</TabItem>
 </Tabs>
 
 Replace `<role>` with the ID of the role you want to configure.
+
+:::note Helm deployments
+
+When you deploy with Helm, configure these properties via an `application.yaml` file using [application configs](/self-managed/deployment/helm/configure/application-configs.md) (for example with `orchestration.extraConfiguration`), rather than as dedicated Helm values.
+
+:::
 
 Here is an example how to configure a user `demo` to become a member of the admin role:
 
