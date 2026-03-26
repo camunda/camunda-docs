@@ -503,7 +503,7 @@ $ c8ctl deploy ./my-process.bpmn`}
                     macOS (Intel)
                   </a>
                   <a
-                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-win-x64.exe"
+                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-win-x64.zip"
                     className={styles.downloadButton}
                     target="_blank"
                     rel="noopener noreferrer"
