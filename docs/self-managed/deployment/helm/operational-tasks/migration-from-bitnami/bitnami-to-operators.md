@@ -42,9 +42,7 @@ Additionally, the migration scripts require:
 - [`yq`](https://github.com/mikefarah/yq) installed (for selective CloudNativePG cluster deployment)
 - `base64` and `openssl` available (used for credential management)
 
-:::tip Tool versions
 For the tool versions used and tested, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
-:::
 
 :::tip Before running in production
 Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.

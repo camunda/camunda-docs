@@ -42,20 +42,20 @@ In addition to the general prerequisites:
 - Ensure network connectivity between your Kubernetes cluster and the managed services.
 - Have credentials ready for each managed service.
 
-:::warning IRSA / IAM-based authentication not supported
-The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or Elasticsearch endpoints protected by cloud-specific IAM auth require a custom migration approach.
-:::
-
-:::important Decide how Identity will authenticate before the cutover
-For managed services, the infrastructure decision is separate from the authentication decision:
-
-- If you **keep Keycloak**, deploy it with the Keycloak Operator and set the hostname to the full public URL, for example `https://your-domain.example.com/auth`.
-- If you **replace Keycloak with external OIDC**, prepare the provider configuration and the corresponding Identity Helm values before running the migration.
-  :::
-
 :::tip Before running in production
 Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
 :::
+
+### IRSA / IAM-based authentication not supported
+
+The migration jobs use password-based PostgreSQL authentication (`PGPASSWORD`) and standard Elasticsearch HTTP API. Setups using AWS IAM Roles for Service Accounts (IRSA) with `jdbc:aws-wrapper` or Elasticsearch endpoints protected by cloud-specific IAM auth require a custom migration approach.
+
+### Identity authentication
+
+You need to decide how Identity will authenticate before the cutover. For managed services, the infrastructure decision is separate from the authentication decision:
+
+- If you **keep Keycloak**, deploy it with the Keycloak Operator and set the hostname to the full public URL, for example `https://your-domain.example.com/auth`.
+- If you **replace Keycloak with external OIDC**, prepare the provider configuration and the corresponding Identity Helm values before running the migration.
 
 ## Clone the deployment references repository
 

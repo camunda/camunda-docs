@@ -10,16 +10,12 @@ import TabItem from "@theme/TabItem";
 import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 import DualRegionEsNote from './\_partials/\_dual-region-es-note.md'
 
+Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to operator-managed or managed service equivalents **without planned application downtime**. Instead of the freeze-backup-restore-switch pattern used in the standard migration, this approach keeps source and target synchronized with **real-time data replication** before cutover.
+
 :::warning Advanced topic — commands provided for reference only
 This guide describes an **advanced migration strategy** that eliminates the downtime window present in the [standard migration](./bitnami-to-operators.md). The commands and examples in this guide are provided **for informational purposes only**. You must test them on a staging environment that mirrors your production setup before executing them in production. You are expected to familiarize yourself with the underlying concepts and write your own cutover runbook that accounts for your specific constraints, network topology, and data volumes.
 
 For most deployments, Camunda recommends the simpler [standard migration](./bitnami-to-operators.md) with a 5–30 minute maintenance window.
-:::
-
-Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to operator-managed or managed service equivalents **without planned application downtime**. Instead of the freeze-backup-restore-switch pattern used in the standard migration, this approach keeps source and target synchronized with **real-time data replication** before cutover.
-
-:::info All examples target CloudNativePG and ECK
-The commands and snippets in this guide assume **CloudNativePG (CNPG)** as the PostgreSQL target and **ECK** as the Elasticsearch target. If you are migrating to managed services (for example, AWS RDS or Elastic Cloud), replace the target hostnames, credentials, and connection methods accordingly.
 :::
 
 ## When to use this guide
@@ -65,16 +61,17 @@ Before starting the migration, ensure you have the following [general prerequisi
 In addition to the general prerequisites:
 
 - PostgreSQL source must support **logical replication** (`wal_level = logical`). This may require a restart of the Bitnami PostgreSQL StatefulSet.
-- Elasticsearch: either an **Elastic Platinum license** (for cross-cluster replication) or the ability to run **continuous snapshots** with very short intervals.
 - Deep understanding of your data volumes, replication lag tolerances, and network throughput between source and target.
 - A monitoring solution to track replication lag (for example, Prometheus, Grafana, or manual queries).
 
-:::important Decide the Elasticsearch strategy before you begin
-The PostgreSQL path is always logical replication. Elasticsearch requires an explicit tradeoff:
+Elasticsearch requires an explicit tradeoff:
 
-- Use **CCR** if you have the license and need the closest possible parity at cutover.
-- Use **continuous snapshots** if a small lag window is acceptable.
-  :::
+- Cross-cluster replication
+  - Use if you need the closest possible parity at cutover.
+  - This option requires an **Elastic Platinum license**
+- Continuous snapshots
+  - Use if a small lag window is acceptable.
+  - This option requires **the ability to run continuous snapshots** with very short intervals.
 
 :::tip Before running in production
 Review the [Operational readiness](#operational-readiness) checklist, including the staging rehearsal and pre-migration checklist, before starting a production migration.
@@ -113,6 +110,10 @@ However, be aware of Keycloak session data:
 - Active user sessions stored in PostgreSQL will be replicated.
 - In-memory Infinispan caches will be rebuilt on the new Keycloak pods.
 - Users may need to re-authenticate after the cutover (session cookies point to the old Keycloak pods).
+
+### Assumed target infrastructure
+
+The commands and snippets in this guide assume **CloudNativePG (CNPG)** as the PostgreSQL target and **ECK** as the Elasticsearch target. If you are migrating to managed services (for example, AWS RDS or Elastic Cloud), replace the target hostnames, credentials, and connection methods accordingly.
 
 ## Clone the deployment references repository
 

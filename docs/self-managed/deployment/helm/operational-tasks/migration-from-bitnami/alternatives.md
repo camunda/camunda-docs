@@ -14,10 +14,6 @@ This guide covers advanced migration alternatives for organizations that **canno
 The approaches described here are not automated via the migration scripts and require significant manual configuration and operational expertise. For most deployments, we recommend using either [Kubernetes operators](./bitnami-to-operators.md) or [managed services](./bitnami-to-managed-services.md).
 :::
 
-:::info Use official installation documentation for untested targets
-This page intentionally avoids prescribing full installation commands for PostgreSQL, Elasticsearch, or Keycloak on custom targets, such as standalone StatefulSets, VMs, or bare metal. Use the official documentation for the distribution you operate, and use this page only for the Camunda-specific migration flow and Helm wiring.
-:::
-
 ## When to use this guide
 
 Consider these alternatives if:
@@ -28,6 +24,10 @@ Consider these alternatives if:
 - You're running Camunda outside of Kubernetes—for example, using Docker Compose or VM-based deployments.
 
 Read the [topic overview](./index.md#why-migrate) to learn why you should migrate.
+
+:::info Use official installation documentation for untested targets
+This page intentionally avoids prescribing full installation commands for PostgreSQL, Elasticsearch, or Keycloak on custom targets, such as standalone StatefulSets, VMs, or bare metal. Use the official documentation for the distribution you operate, and use this page only for the Camunda-specific migration flow and Helm wiring.
+:::
 
 ## Prerequisites
 
