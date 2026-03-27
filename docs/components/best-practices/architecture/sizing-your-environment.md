@@ -6,7 +6,7 @@ tags:
   - Performance
   - Hardware
   - Sizing
-description: "Understand the factors that influence Camunda 8 sizing, then apply them to your SaaS or Self-Managed environment."
+description: "Understand the factors that influence Camunda 8 sizing. Once you understand those, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select your appropriate configuration."
 ---
 
 Understand the factors that influence Camunda 8 sizing. Once you understand those, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select your appropriate configuration.

@@ -29,13 +29,6 @@ Contact your Customer Success Manager to increase the cluster size beyond 4x. Th
 
 ### Sizing tables
 
-<Tabs groupId="optimize" defaultValue="with-optimize" values={
-[
-{ label: 'With Optimize', value: 'with-optimize', },
-]}>
-
-<TabItem value="with-optimize">
-
 | Cluster size                                         |                              1x |                              2x |                              3x |                              4x |
 | :--------------------------------------------------- | ------------------------------: | ------------------------------: | ------------------------------: | ------------------------------: |
 | Max Throughput **Tasks/day** **\***                  |                             9 M |                            18 M |                            27 M |                            36 M |
@@ -44,14 +37,10 @@ Contact your Customer Success Manager to increase the cluster size beyond 4x. Th
 | Max Total Number of PI stored (in ES) **\*\*\***     |                           200 k |                           400 k |                           600 k |                           800 k |
 | Approximate resources provisioned **\*\*\*\***       | 11 vCPU, 22 GB mem, 192 GB disk | 22 vCPU, 44 GB mem, 384 GB disk | 33 vCPU, 66 GB mem, 576 GB disk | 44 vCPU, 88 GB mem, 768 GB disk |
 
-</TabItem>
-
-</Tabs>
-
 <!-- TODO: Validate "with Optimize" numbers against 8.9 benchmarks. The numbers above were measured with Camunda 8.8. Also confirm whether the "max throughput" boundary condition is defined as backpressure < 10% and p99 process duration < 1s, or another SLO. -->
 
 :::note
-The numbers in the tables were measured using Camunda 8 (version 8.8), [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes cluster, and using a [realistic process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) with a [realistic payload](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). To calculate day-based metrics, an equal distribution over 24 hours is assumed.
+The numbers in the tables were measured using Camunda 8 (version 8.8), [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes cluster, and using a [realistic process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) with this [payload](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/reducedPayload.json) (~1.4 KB). To calculate day-based metrics, an equal distribution over 24 hours is assumed.
 :::
 
 **\*** Tasks (including service, send, and user tasks, among others) completed per day are the primary metric, as this is easy to measure and strongly influences resource consumption. This number assumes a constant load throughout the day. Tasks/day and Tasks/second are scaled linearly.
