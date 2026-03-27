@@ -112,7 +112,7 @@ After the restart, the new configuration applies to new lifecycle events for bot
 :::note
 You need [specific authorizations](./access-control.md) to manage global listeners through the API.
 
-Read more about [authorizations](/components/concepts/access-control/authorizations.md) and [how to create them in the Identity UI](/components/identity/authorization.md).
+Read more about [authorizations](/components/concepts/access-control/authorizations.md) and [how to create them in the Admin UI](/components/admin/authorization.md).
 :::
 
 The [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) provides CRUD operations to manage global user task listeners at runtime. This allows you to create, update, and delete listeners without restarting the cluster.
@@ -122,6 +122,10 @@ When you create or update a listener through the API, provide the properties des
 Changes take effect immediately after the API call for new lifecycle events on running and new instances, without requiring model redeployments or a cluster restart.
 
 ## Configure via Admin UI
+
+:::tip
+To learn more about the Admin UI for global user task listeners, see the [dedicated page](/components/admin/global-user-task-listeners.md).
+:::
 
 You can configure global listeners in the Admin UI through the **Global Task Listeners** tab.
 
