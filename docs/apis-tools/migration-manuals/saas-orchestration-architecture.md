@@ -16,20 +16,14 @@ This is a topology change in SaaS only and does not affect Self-Managed deployme
 
 What's new:
 
-- [Unified API domain for Orchestration Clusters](#unified-api-domain-for-orchestration-clusters). Legacy hostnames are deprecated.
+- [Unified API domain for Orchestration Clusters](#unified-api-domain-for-orchestration-clusters). Legacy hostnames are deprecated and will remain accessible until 8.10.
 - [New client credentials use new API URLs.](#client-credentials-and-legacy-hostnames)
-- [`service` labels have changed on Orchestration Cluster metrics.](#service-label-changes)
+- [Cluster Metrics endpoint: `service` labels have changed on Orchestration Cluster metrics.](#service-label-changes)
 
 What didn't change:
 
 - The same UIs for Operate, Tasklist, and Admin/Identity and the REST API remain available as before.
 - The Zeebe gRPC endpoint is unchanged.
-
-:::info
-
-The new architecture has been validated against Camunda's documented sizing and performance expectations to prevent regressions when upgrading from 8.8.latest to 8.9.
-
-:::
 
 ## Unified API domain for Orchestration Clusters
 
