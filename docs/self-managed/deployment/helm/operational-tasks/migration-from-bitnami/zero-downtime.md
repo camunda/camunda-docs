@@ -14,7 +14,7 @@ Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to ope
 :::warning Advanced topic — commands provided for reference only
 This guide describes an **advanced migration strategy** that eliminates the downtime window present in the [standard migration](./bitnami-to-operators.md). The commands and examples in this guide are provided **for informational purposes only**. You must test them on a staging environment that mirrors your production setup before executing them in production. You are expected to familiarize yourself with the underlying concepts and write your own cutover runbook that accounts for your specific constraints, network topology, and data volumes.
 
-For most deployments, Camunda recommends the simpler [standard migration](./bitnami-to-operators.md) with a 5–30 minute maintenance window.
+For most deployments, Camunda recommends the simpler [standard migration](./bitnami-to-operators.md) with a 5–60 minute maintenance window.
 :::
 
 ## When to use this guide

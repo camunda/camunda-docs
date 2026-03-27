@@ -11,7 +11,6 @@ import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 import CloneRepo from './\_partials/\_clone-repo.md'
-import DualRegionEsNote from './\_partials/\_dual-region-es-note.md'
 import ChooseMigrationStrategy from './\_partials/\_choose-migration-strategy.md'
 import MeasureEstimate from './\_partials/\_measure-estimate.md'
 
@@ -332,7 +331,7 @@ With `ES_WARM_REINDEX=true`, downtime is reduced to **~5 minutes** regardless of
 :::
 
 :::tip Measure downtime before the real cutover
-You can run `./3-cutover.sh --estimate` to measure the actual cutover duration on your environment **without causing any downtime**. This runs the real data operations (PG backup/restore and ES reindex) against the target infrastructure but skips freezing the application and the Helm upgrade. See [Measure with `--estimate`](#measure-with---estimate) for details.
+You can run `bash 3-cutover.sh --estimate` to measure the actual cutover duration on your environment **without causing any downtime**. This runs the real data operations (PG backup/restore and ES reindex) against the target infrastructure but skips freezing the application and the Helm upgrade. See [Measure with `--estimate`](#measure-with---estimate) for details.
 :::
 
 ```bash

@@ -11,7 +11,6 @@ import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 import CloneRepo from './\_partials/\_clone-repo.md'
-import DualRegionEsNote from './\_partials/\_dual-region-es-note.md'
 import ChooseMigrationStrategy from './\_partials/\_choose-migration-strategy.md'
 import MeasureEstimate from './\_partials/\_measure-estimate.md'
 
@@ -85,25 +84,25 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ### Key configuration variables
 
-| Variable                     | Default                | Description                                                                                                |
-| ---------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `NAMESPACE`                  | `camunda`              | Kubernetes namespace of your Camunda installation                                                          |
-| `CAMUNDA_RELEASE_NAME`       | `camunda`              | Helm release name                                                                                          |
-| `CAMUNDA_HELM_CHART_VERSION` | (chart version)        | Target Helm chart version for the upgrade                                                                  |
-| `CAMUNDA_DOMAIN`             | (empty)                | Domain for Keycloak Ingress. Leave empty for port-forward setups                                           |
-| `IDENTITY_DB_NAME`           | `identity`             | Identity database name (must match the source installation)                                                |
-| `IDENTITY_DB_USER`           | `identity`             | Identity database user (must match the source installation)                                                |
-| `KEYCLOAK_DB_NAME`           | `keycloak`             | Keycloak database name (must match the source installation)                                                |
-| `KEYCLOAK_DB_USER`           | `keycloak`             | Keycloak database user (must match the source installation)                                                |
-| `WEBMODELER_DB_NAME`         | `webmodeler`           | Web Modeler database name (must match the source installation)                                             |
-| `WEBMODELER_DB_USER`         | `webmodeler`           | Web Modeler database user (must match the source installation)                                             |
-| `BACKUP_PVC`                 | `migration-backup-pvc` | PVC name for storing backup data                                                                           |
-| `BACKUP_STORAGE_SIZE`        | `50Gi`                 | Backup PVC size (must fit all database dumps)                                                              |
-| `MIGRATE_IDENTITY`           | `true`                 | Enables the Identity PostgreSQL database migration                                                         |
-| `MIGRATE_KEYCLOAK`           | `true`                 | Enables the Keycloak and its PostgreSQL database migration                                                 |
-| `MIGRATE_WEBMODELER`         | `true`                 | Enables the Web Modeler PostgreSQL database migration                                                      |
-| `MIGRATE_ELASTICSEARCH`      | `true`                 | Enables the Elasticsearch data migration                                                                   |
-| `ES_WARM_REINDEX`            | `false`                | When `true`, pre-copies ES data during Phase 2 (no downtime), reducing Phase 3 to a ~5 minutes delta sync. |
+| Variable                     | Default                | Description                                                                                               |
+| ---------------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------- |
+| `NAMESPACE`                  | `camunda`              | Kubernetes namespace of your Camunda installation                                                         |
+| `CAMUNDA_RELEASE_NAME`       | `camunda`              | Helm release name                                                                                         |
+| `CAMUNDA_HELM_CHART_VERSION` | (chart version)        | Target Helm chart version for the upgrade                                                                 |
+| `CAMUNDA_DOMAIN`             | (empty)                | Domain for Keycloak Ingress. Leave empty for port-forward setups                                          |
+| `IDENTITY_DB_NAME`           | `identity`             | Identity database name (must match the source installation)                                               |
+| `IDENTITY_DB_USER`           | `identity`             | Identity database user (must match the source installation)                                               |
+| `KEYCLOAK_DB_NAME`           | `keycloak`             | Keycloak database name (must match the source installation)                                               |
+| `KEYCLOAK_DB_USER`           | `keycloak`             | Keycloak database user (must match the source installation)                                               |
+| `WEBMODELER_DB_NAME`         | `webmodeler`           | Web Modeler database name (must match the source installation)                                            |
+| `WEBMODELER_DB_USER`         | `webmodeler`           | Web Modeler database user (must match the source installation)                                            |
+| `BACKUP_PVC`                 | `migration-backup-pvc` | PVC name for storing backup data                                                                          |
+| `BACKUP_STORAGE_SIZE`        | `50Gi`                 | Backup PVC size (must fit all database dumps)                                                             |
+| `MIGRATE_IDENTITY`           | `true`                 | Enables the Identity PostgreSQL database migration                                                        |
+| `MIGRATE_KEYCLOAK`           | `true`                 | Enables the Keycloak and its PostgreSQL database migration                                                |
+| `MIGRATE_WEBMODELER`         | `true`                 | Enables the Web Modeler PostgreSQL database migration                                                     |
+| `MIGRATE_ELASTICSEARCH`      | `true`                 | Enables the Elasticsearch data migration                                                                  |
+| `ES_WARM_REINDEX`            | `false`                | When `true`, pre-copies ES data during Phase 2 (no downtime), reducing Phase 3 to a ~5 minute delta sync. |
 
 Set any `MIGRATE_*` variable to `false` to skip a component. This is useful, for example, if the component isn't deployed or already uses an external service.
 
@@ -336,7 +335,7 @@ With `ES_WARM_REINDEX=true`, downtime is reduced to **~5 minutes** regardless of
 :::
 
 :::tip Measure downtime before the real cutover
-You can run `./3-cutover.sh --estimate` to measure the actual cutover duration on your environment **without causing any downtime**. This runs the real data operations (PG backup/restore and ES reindex) against the target infrastructure but skips freezing the application and the Helm upgrade. See [Measure with `--estimate`](#measure-with---estimate) for details.
+You can run `bash 3-cutover.sh --estimate` to measure the actual cutover duration on your environment **without causing any downtime**. This runs the real data operations (PG backup/restore and ES reindex) against the target infrastructure but skips freezing the application and the Helm upgrade. See [Measure with `--estimate`](#measure-with---estimate) for details.
 :::
 
 ```bash
