@@ -29,10 +29,6 @@ After completing this guide, you will be able to analyze AI agent executions in 
 This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), where you will use the same example AI agent process. It is recommended going through that guide first. However, it can be applied to other AI agent process implementations.
 :::
 
-:::note
-Optimize reports can use only variables that are available at the process level. If agent data is scoped to a lower level (for example, inside a connector or tool execution scope), extract it to process variables before you build reports.
-:::
-
 ## Step 1: Make your data available
 
 :::important
@@ -117,7 +113,7 @@ Use a heatmap to understand how long your AI agent spends in each task.
 1. Select **Flow node** as the **View**.
 1. Select **Duration** as the **Measure**.
 1. You can filter the report by selecting **Flow node selection** in the **Filter flow nodes** dropdown. For example, select only tool tasks within the AI Agent connector.
-1. In the **Visualization** settings, select **Heatmap**. Then, click the gear icon and enable both tooltips to show absolute and relative values.
+1. In the **Visualization** settings, select **Heatmap**. Then, click the gear icon and enable the tooltip to show absolute values.
 1. Save the report with a descriptive name. For example, **Tool heatmap**.
 
 ### Example: Create a report for tool call counts
