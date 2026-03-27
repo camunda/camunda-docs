@@ -20,7 +20,7 @@ Work with this API in our [Postman collection](https://www.postman.com/camundate
 
 ## Context paths
 
-For SaaS: `https://${REGION}.operate.camunda.io:443/${CLUSTER_ID}/v1/`, and for Self-Managed installations: `http://localhost:8080/v1/`.
+For SaaS: `https://${REGION}.api.camunda.io:443/${CLUSTER_ID}/operate/v1/`, and for Self-Managed installations: `http://localhost:8080/v1/`.
 
 :::note
 Find your **region Id** and **cluster Id** under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
@@ -36,7 +36,7 @@ See [the interactive Operate API Explorer][operate-api-explorer] for specificati
 
 A Swagger UI is also available within a running instance of Operate, at `https://${base-url}/swagger-ui/index.html`.
 
-For SaaS: `https://${REGION}.operate.camunda.io/${CLUSTER_ID}/swagger-ui.html`, and for Self-Managed installations: `http://localhost:8080/swagger-ui.html`.
+For SaaS: `https://${REGION}.api.camunda.io/${CLUSTER_ID}/operate/swagger-ui.html`, and for Self-Managed installations: `http://localhost:8080/swagger-ui.html`.
 
 :::note
 Find your **region Id** and **cluster Id** under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).

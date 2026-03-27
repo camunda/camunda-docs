@@ -80,7 +80,7 @@ curl http://localhost:8080/v2/topology
 SaaS, public connectivity:
 
 ```bash
-curl https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/v2/topology
+curl https://${REGION_ID}.api.camunda.io/${CLUSTER_ID}/v2/topology
 ```
 
 SaaS, secure connectivity (AWS PrivateLink):
@@ -123,7 +123,7 @@ This section covers the technical details and conventions you need to understand
 
 In the Camunda Console, go to your cluster, and in the Cluster Details, find your **Region Id** and **Cluster Id**.
 
-- For public connectivity (default), use this pattern as your `${BASE_URL}`: `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/v2/`
+- For public connectivity (default), use this pattern as your `${BASE_URL}`: `https://${REGION_ID}.api.camunda.io/${CLUSTER_ID}/v2/`
 
 - For secure connectivity (AWS PrivateLink), use the private base URL shown in Console. For the Orchestration Cluster REST API, the pattern is:
 
