@@ -223,5 +223,5 @@ In this case, the required action is to provide feedback on the agent results. T
 
 Now that you know how to monitor your AI agents, you can:
 
+- [Analyze your AI agents](./analyze-ai-agents.md) with Optimize.
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
-- Explore other [AI agent model blueprints](https://marketplace.camunda.com/en-US/listing?q=ai&cat=107793&locale=en-US) from Camunda marketplace.
