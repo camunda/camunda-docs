@@ -37,7 +37,7 @@ With the job dashboard, you can:
 - Investigate error patterns for a job type before drilling into individual process instances in Operate.
 - Avoid building and maintaining custom job-monitoring dashboards.
 
-## Open job dashboard
+## Open the job dashboard
 
 ### 1. Open the Jobs overview
 
@@ -160,5 +160,5 @@ In this case, contact your organization owner or admin to request the necessary 
 
 The Console UI and flows are the same in SaaS and Self-Managed.
 
-- **SaaS:** job dashboard is available for Camunda 8.9+ clusters. Camunda manages the underlying job metrics configuration.
+- **SaaS:** The job dashboard is available for Camunda 8.9+ clusters. Camunda manages the underlying job metrics configuration.
 - **Self-Managed:** You enable and configure job metrics in the engine and Helm charts. For details on available options and defaults, see the job metrics [configuration reference](../../../../self-managed/components/orchestration-cluster/core-settings/configuration/properties).
