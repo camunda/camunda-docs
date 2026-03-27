@@ -1272,6 +1272,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-user-task-effective-variables",
+          label: "Search user task effective variables",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-user-task-form",
           label: "Get user task form",
           className: "api-method get",
