@@ -107,7 +107,7 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
 </Tabs>
 
 :::tip
-If your OIDC provider needs to be reached using different URLs from the browser and backend (for example, when running in Docker or behind a reverse proxy), you can configure separate URIs instead of a single `issuer-uri`. See [Use separate OIDC provider URIs for browser and backend](./special-oidc-cases.md#use-separate-oidc-provider-uris-for-browser-and-backend) for details.
+If your OIDC provider needs to be reached using different URLs from the browser and backend (for example, when running in Docker or behind a reverse proxy), you can configure separate URIs instead of a single `issuer-uri`. See [use separate OIDC provider URIs for browser and backend](./special-oidc-cases.md#use-separate-oidc-provider-uris-for-browser-and-backend) for details.
 :::
 
 ## Redirect URI
