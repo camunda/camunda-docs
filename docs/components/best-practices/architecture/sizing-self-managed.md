@@ -7,17 +7,13 @@ tags:
   - Sizing
   - Self-Managed
   - Kubernetes
-description: "Configure your Camunda 8 Self-Managed Kubernetes cluster using these baseline resource settings, along with scaling and secondary storage guidance, to match your workload and sizing requirements."
+description: "Plan resources for your Camunda 8 Self-Managed cluster with baseline configurations for CPU, memory, and disk, plus guidance on scaling and secondary storage options."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Configure your Camunda 8 Self-Managed Kubernetes cluster using these baseline resource settings, along with scaling and secondary storage guidance, to match your workload and sizing requirements.
-
-## About
-
-Provisioning Camunda 8 on your Self-Managed Kubernetes cluster depends on several factors. For example, many customers already have teams that provide Elasticsearch as a service.
+Provisioning Camunda 8 on your Self-Managed cluster depends on several factors. Use [Kubernetes with Helm](/self-managed/deployment/helm/index.md) to deploy and manage your Self-Managed cluster.
 
 Use the configurations and guidance below as a baseline, then adjust based on your workload. For background on the factors that drive provisioning requirements, see [Size your environment](sizing-your-environment.md).
 
@@ -56,7 +52,7 @@ The following configuration provides a baseline equivalent to a 1x SaaS cluster 
 | Replication factor        | 3                   |         |       |
 |                           | vCPU \[cores\]      |       3 |     3 |
 |                           | Memory \[GB\]       |       2 |     2 |
-|                           | Disk \[GB\]         |      32 |   128 |
+|                           | Disk \[GB\]         |         |   128 |
 | **Connectors**            |                     |         |       |
 | #                         | 1                   |         |       |
 |                           | vCPU \[cores\]      |     0.2 |   0.2 |
@@ -65,7 +61,7 @@ The following configuration provides a baseline equivalent to a 1x SaaS cluster 
 | #statefulset              | 3                   |         |       |
 |                           | vCPU \[cores\]      |       3 |     3 |
 |                           | Memory limit \[GB\] |       2 |     2 |
-|                           | Disk request \[GB\] |      32 |   128 |
+|                           | Disk request \[GB\] |         |   128 |
 
 </TabItem>
 
@@ -83,7 +79,7 @@ When Optimize is enabled, additional resources are needed, especially for Elasti
 | Replication factor        | 3                   |         |       |
 |                           | vCPU \[cores\]      |       3 |     3 |
 |                           | Memory \[GB\]       |       2 |     2 |
-|                           | Disk \[GB\]         |      32 |   128 |
+|                           | Disk \[GB\]         |         |   128 |
 | **Connectors**            |                     |         |       |
 | #                         | 1                   |         |       |
 |                           | vCPU \[cores\]      |     0.2 |   0.2 |
@@ -96,7 +92,7 @@ When Optimize is enabled, additional resources are needed, especially for Elasti
 | #statefulset              | 3                   |         |       |
 |                           | vCPU \[cores\]      |       7 |     7 |
 |                           | Memory limit \[GB\] |       6 |     8 |
-|                           | Disk request \[GB\] |     128 |   512 |
+|                           | Disk request \[GB\] |         |   512 |
 
 :::note
 The numbers in the tables were measured using a [realistic process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) with a [realistic payload](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). To calculate day-based metrics, an equal distribution over 24 hours is assumed.

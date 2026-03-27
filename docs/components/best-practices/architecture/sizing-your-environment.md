@@ -60,15 +60,6 @@ The following approximate disk space measurements are taken using Camunda 8 SaaS
 - Tasklist: 21 kb / PI.
 - Sum: 174 kb / PI.
 
-A more accurate model would account for payload size, flow node count, and variable cardinality:
-
-```
-Disk_Zeebe = active_PI x (base_overhead_kb + avg_payload_KB x amplification_factor)
-Disk_ES   = PI_in_retention x (base_kb + avg_payload_KB x payload_factor + avg_flow_nodes x fn_factor)
-```
-
-<!-- TODO: Determine actual factor values (base_overhead_kb, amplification_factor, payload_factor, fn_factor) through dedicated benchmarking. This is planned as a separate project. -->
-
 Using your throughput and retention settings, you can calculate the required disk space for your scenario. Example (using the outdated 1.2.4 constants for illustration):
 
 | Indicator                  | Calculation method |          Value | Notes                                                                                               |
@@ -204,7 +195,7 @@ Sizing data provided throughout this guide assumes Elasticsearch unless stated o
 - Write throughput is approximately **70% of Elasticsearch** on equivalent hardware.
 - **No Optimize support**: If you need Optimize, you must run Elasticsearch alongside RDBMS.
 - **Scales primarily vertically** rather than horizontally like Elasticsearch. Plan initial sizing with more headroom, as adding capacity is more disruptive.
-- Potentially lower total disk space required for the same data volume (preliminary benchmarks suggest this, but detailed results are still being validated).
+<!-- To be validated - Potentially lower total disk space required for the same data volume (preliminary benchmarks suggest this, but detailed results are still being validated). -->
 - Ideal for organizations that already operate a supported RDBMS at scale and want to avoid adding Elasticsearch to their infrastructure.
 <!-- TODO: Link to RDBMS benchmark results page once PR #8159 is merged -->
 
@@ -243,10 +234,6 @@ If you are upgrading from a pre-8.8 version, expect different resource profiles:
 - Throughput at the default 2 CPU cores drops ~35% compared to 8.7.x.
 - With properly aligned resources (3.5 CPU cores), 8.8.x achieves similar throughput to 8.7.x with **significantly lower latency** (approximately a 2x improvement).
 - The streamlined architecture reduces operational complexity (fewer pods to manage) but consolidates resource consumption into fewer, larger pods.
-
-:::important
-Sizing data in this guide reflects the **8.8+ architecture**.
-:::
 
 All components are clustered to provide high-availability, fault-tolerance, and resilience.
 
