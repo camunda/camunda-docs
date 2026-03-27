@@ -218,6 +218,19 @@ helm install camunda camunda/camunda-platform \
   -f values-rdbms.yaml
 ```
 
+:::caution Helm chart schema: quote numeric values as strings
+The Helm chart schema expects certain numeric-looking parameters to be passed as **quoted strings**. If you override `orchestration.clusterSize`, `orchestration.partitionCount`, or `orchestration.replicationFactor`, wrap the values in quotes:
+
+```yaml
+orchestration:
+  clusterSize: "3"
+  partitionCount: "3"
+  replicationFactor: "3"
+```
+
+Using unquoted integers (e.g., `clusterSize: 3`) causes a schema validation error during `helm install`.
+:::
+
 Monitor the installation:
 
 ```bash
@@ -249,17 +262,28 @@ For a full post-deployment checklist, see [validate RDBMS connectivity](/self-ma
 
 ### PostgreSQL with AWS Aurora
 
-For AWS Aurora PostgreSQL, configure the JDBC URL with the Aurora endpoint:
+For AWS Aurora PostgreSQL, configure the JDBC URL with the Aurora cluster endpoint:
 
 ```yaml
 orchestration:
   data:
     secondaryStorage:
       rdbms:
-        url: jdbc:postgresql://my-aurora-cluster.xxxxxxx.us-east-1.rds.amazonaws.com:5432/camunda
+        url: jdbc:postgresql://my-aurora-cluster.xxxxxxx.us-east-1.rds.amazonaws.com:5432/camunda?ssl=true&sslmode=require
 ```
 
 Aurora supports automatic failover. For advanced failover features, consider the [AWS JDBC wrapper driver](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql).
+
+#### Deploying on AWS EKS with Aurora
+
+When deploying on Amazon EKS with Aurora PostgreSQL as RDBMS secondary storage, use these resources:
+
+- **Infrastructure**: Use the [Camunda EKS Terraform modules](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) to provision EKS and Aurora PostgreSQL together.
+- **Helm install on EKS**: Follow the [EKS Helm install guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md) for the overall installation flow, then apply the RDBMS-specific values from this page.
+
+:::note Single database for RDBMS deployments
+When using RDBMS as secondary storage, the Orchestration Cluster requires **one shared database** (for example, `camunda`). This differs from the standard EKS setup, which creates separate databases for Identity and Web Modeler. If you follow the EKS infrastructure guides, adjust the database setup job to create a single database and user for the Orchestration Cluster instead.
+:::
 
 ### Oracle with Kubernetes init container
 

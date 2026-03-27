@@ -228,6 +228,10 @@ If you're using an external Aurora PostgreSQL database, you must create the indi
 Without this step, Management Identity and Web Modeler will fail to connect to their databases.
 :::
 
+:::tip Using RDBMS as secondary storage instead of OpenSearch?
+If you are deploying with [RDBMS as secondary storage](/self-managed/deployment/helm/install/helm-with-rdbms.md) instead of OpenSearch, the database setup differs: the Orchestration Cluster requires a **single shared database** (e.g., `camunda`) rather than separate Identity and Web Modeler databases. See the [RDBMS example deployment guide](/self-managed/deployment/helm/install/helm-with-rdbms.md#postgresql-with-aws-aurora) for Aurora-specific configuration.
+:::
+
 <Tabs groupId="values">
   <TabItem value="with-domain-std" label="Standard with domain" default>
 
