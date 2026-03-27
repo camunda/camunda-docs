@@ -9,129 +9,146 @@ import TabItem from "@theme/TabItem";
 
 Agentic processes use AI agents that decide at runtime which actions to take. This makes their execution path and output content non-deterministic, which requires a different testing approach than traditional BPMN processes. This guide walks through the CPT features that address these challenges.
 
-## The challenge
+## Why agentic processes need a different testing approach
 
-Standard CPT assertions are blocking. They poll the process state and wait until the expected condition is met before the test continues. This works well when the process follows a predictable path, but becomes a problem for agentic processes.
+Traditional BPMN processes follow a predictable path: given the same input, they execute the same sequence of tasks and produce the same output. Tests can assert on specific tasks in a known order and compare variable values with exact equality checks.
 
-A process that uses the [AI Agent connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) decides at runtime which tools to invoke and in what order. A test that blocks on one specific tool task will stall if the agent chooses a different tool first, or skips that tool entirely.
+Agentic processes break both of these assumptions. A process that uses the [AI Agent connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) lets the AI agent decide at runtime which tools to invoke and in what order. The same prompt may lead to different execution paths across runs. On top of that, the agent produces free-text output whose exact wording varies every time.
 
-On top of non-deterministic execution order, AI agents produce free-text output whose exact wording is unpredictable. Traditional equality-based variable assertions cannot reliably verify that the agent generated a meaningful response.
+This creates two concrete problems for tests:
+
+- **Non-deterministic execution order.** Standard CPT assertions are blocking: they wait for a specific condition before the test continues. A test that blocks on one particular tool task will stall if the agent chooses a different tool first, or skips that tool entirely.
+- **Non-deterministic output content.** Equality-based variable assertions cannot reliably verify free-text responses. The agent may phrase the same correct answer differently on each run, causing exact-match checks to fail even when the response is valid.
 
 ## Prerequisites
 
-- Camunda 8.9+ with [CPT set up](getting-started.md)
+This guide requires Camunda 8.9+ with [CPT set up](getting-started.md).
+
+[Judge assertions](#judge-assertions) require an LLM provider. CPT provides an optional
+[LangChain4j](https://docs.langchain4j.dev/) integration module that ships with preconfigured support for
+[several providers](configuration.md#judge-configuration). LangChain4j requires Java 17+.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+Camunda Process Test Spring includes the LangChain4j providers as a transitive dependency. No additional
+dependency is needed.
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+Add the `camunda-process-test-langchain4j` dependency to your project:
+
+```xml
+<dependency>
+    <groupId>io.camunda</groupId>
+    <artifactId>camunda-process-test-langchain4j</artifactId>
+    <scope>test</scope>
+</dependency>
+```
+
+</TabItem>
+
+</Tabs>
+
+If you provide a custom `ChatModelAdapter` instead (see
+[Custom ChatModelAdapter](configuration.md#custom-chatmodeladapter)), this module is not required.
 
 ## Example process
 
-This guide uses the [AI Agent Chat Quick Start](/guides/getting-started-agentic-orchestration.md) blueprint as the process under test. The process has the following structure:
+The examples in this guide test the **AI Agent Chat With Tools** process from the [Build your first AI agent](/guides/getting-started-agentic-orchestration.md) guide. See [About the example AI agent process](/guides/getting-started-agentic-orchestration.md#about-the-example-ai-agent-process) for the full process structure.
 
-1. A **start form** collects a user prompt ("How can I help you today?").
-2. An **ad-hoc sub-process** named `AI Agent` contains tool tasks that the AI agent can invoke at runtime: `Get Date and Time`, `Fetch URL`, `Search recipe`, `List users`, `Load user by ID`, and others.
-3. Each tool receives its input through the `toolCall` variable and writes its result to `toolCallResult`.
-4. After the agent completes, a **user task** named `User Feedback` asks whether the user is satisfied.
-5. If the user is not satisfied, the process loops back to the agent.
-
-Because the agent decides which tools to call and in what order, a test cannot predict the execution path. The sections below show how to handle this.
+The test scenario is "Send Ervin a joke." To fulfill this request the agent could call `ListUsers` and `LoadUserByID` to find Ervin's email address, or call `Jokes_API` to fetch a joke, and it can do so in any order. The agent then presents the email for human review via the `AskHumanToSendEmail` user task, and after it finishes a `User_Feedback` task lets the user accept or follow up. A test cannot predict which tools the agent picks or in what sequence, so the sections below show how to handle this.
 
 ## Handle non-deterministic flows
 
 [Conditional behavior](utilities.md#conditional-behavior) lets you register background reactions that monitor the process state and execute actions as conditions are met, without blocking the test thread. Register behaviors before starting the process, and they react independently as the process progresses.
 
+Each behavior watches for a specific element to become active and then completes it with test data. If the agent never activates that element, the behavior simply never triggers and the test does not stall.
+
+#### Complete tool tasks
+
+Register a behavior for each tool task the agent might invoke. The following two behaviors provide mock responses for the user lookup tools:
+
 ```java
-@Test
-void shouldCompleteAgentProcess() {
-    // given: register behaviors for tools the agent might invoke
-    processTestContext.when(
-        processInstance -> processInstance.hasActiveElements("Get Date and Time"))
-        .as("complete-get-date-and-time")
-        .then(client -> client.newCompleteJobCommand(
-            processTestContext.getActivatedJob(
-                ElementSelectors.byName("Get Date and Time")))
-            .variables(Map.of("toolCallResult", Map.of(
-                "date", "2026-03-26",
-                "time", "14:30:00")))
-            .send());
+// given: complete ListUsers when the agent invokes it
+processTestContext
+    .when(
+        () -> assertThatProcessInstance(byProcessId("ai-agent-chat"))
+            .hasActiveElements("ListUsers"))
+    .as("complete ListUsers")
+    .then(
+        () -> processTestContext.completeJob(
+            JobSelectors.byElementId("ListUsers"),
+            Map.of("toolCallResult",
+                List.of(
+                    Map.of("id", 1, "name", "Leanne Graham"),
+                    Map.of("id", 2, "name", "Ervin Howell")))));
 
-    processTestContext.when(
-        processInstance -> processInstance.hasActiveElements("Fetch URL"))
-        .as("complete-fetch-url")
-        .then(client -> client.newCompleteJobCommand(
-            processTestContext.getActivatedJob(
-                ElementSelectors.byName("Fetch URL")))
-            .variables(Map.of("toolCallResult", Map.of(
-                "status", 200,
-                "body", "Example page content")))
-            .send());
-
-    // given: complete the User Feedback task when it appears
-    processTestContext.when(
-        processInstance -> processInstance.hasActiveElements("User Feedback"))
-        .as("complete-user-feedback")
-        .then(client -> client.newCompleteJobCommand(
-            processTestContext.getActivatedJob(
-                ElementSelectors.byName("User Feedback")))
-            .variables(Map.of("satisfied", true))
-            .send());
-
-    // when: start the process with a user prompt
-    ProcessInstanceEvent processInstance = client.newCreateInstanceCommand()
-        .bpmnProcessId("ai-agent-chat-with-tools")
-        .latestVersion()
-        .variables(Map.of("prompt", "What is the current date and time?"))
-        .send()
-        .join();
-
-    // then: the process completes regardless of which tools the agent invoked
-    assertThat(processInstance).isCompleted();
-}
+// given: complete LoadUserByID with Ervin's details
+processTestContext
+    .when(
+        () -> assertThatProcessInstance(byProcessId("ai-agent-chat"))
+            .hasActiveElements("LoadUserByID"))
+    .as("complete LoadUserByID")
+    .then(
+        () -> processTestContext.completeJob(
+            JobSelectors.byElementId("LoadUserByID"),
+            Map.of("toolCallResult",
+                Map.of("id", 2,
+                    "name", "Ervin Howell",
+                    "email", "Shanna@melissa.tv"))));
 ```
 
-The conditional behaviors react independently. If the agent calls `Get Date and Time`, that behavior executes its action. If the agent skips `Fetch URL`, that behavior simply never triggers. The test does not stall.
+#### Complete user tasks
+
+The `AskHumanToSendEmail` user task requires human approval. Register a behavior that auto-approves the email when the task appears:
+
+```java
+// given: auto-approve the email when the human review task appears
+processTestContext
+    .when(
+        () -> assertThatProcessInstance(byProcessId("ai-agent-chat"))
+            .hasActiveElements("AskHumanToSendEmail"))
+    .as("approve email")
+    .then(
+        () -> processTestContext.completeUserTask(
+            "AskHumanToSendEmail", Map.of("emailOk", true)));
+```
 
 :::important
 Each behavior's action should resolve the process state that the condition checks for. For example, if the condition checks for an active user task, the action should complete that task. Otherwise the behavior may execute repeatedly.
 :::
 
-If you need the same behaviors across multiple tests, register them in a `@BeforeEach` method:
-
-```java
-@BeforeEach
-void registerBehaviors() {
-    processTestContext.when(
-        processInstance -> processInstance.hasActiveElements("User Feedback"))
-        .as("complete-user-feedback")
-        .then(client -> client.newCompleteJobCommand(
-            processTestContext.getActivatedJob(
-                ElementSelectors.byName("User Feedback")))
-            .variables(Map.of("satisfied", true))
-            .send());
-
-    // ... register other shared behaviors
-}
-```
+#### Chained actions for repeated invocations
 
 Use chained `.then()` calls when a behavior should produce different results on repeated invocations. The first action is consumed on the first invocation, and the last action repeats for all subsequent invocations.
 
+In this example, the first feedback rejection sends the agent back with a follow-up request, and the second feedback loop approves the result:
+
 ```java
-processTestContext.when(
-    processInstance -> processInstance.hasActiveElements("Search recipe"))
-    .as("complete-search-recipe")
-    // 1) first invocation returns a pasta recipe
-    .then(client -> client.newCompleteJobCommand(
-        processTestContext.getActivatedJob(
-            ElementSelectors.byName("Search recipe")))
-        .variables(Map.of("toolCallResult", Map.of(
-            "name", "Spaghetti Carbonara",
-            "ingredients", "pasta, eggs, pancetta, parmesan")))
-        .send())
-    // 2) subsequent invocations return a salad recipe
-    .then(client -> client.newCompleteJobCommand(
-        processTestContext.getActivatedJob(
-            ElementSelectors.byName("Search recipe")))
-        .variables(Map.of("toolCallResult", Map.of(
-            "name", "Caesar Salad",
-            "ingredients", "romaine lettuce, croutons, parmesan, dressing")))
-        .send());
+// given: first reject, then approve in the feedback loop
+processTestContext
+    .when(
+        () -> assertThatProcessInstance(byProcessId("ai-agent-chat"))
+            .hasActiveElements("User_Feedback"))
+    .as("feedback loop")
+    // 1) first invocation: reject and ask for a better joke
+    .then(
+        () -> processTestContext.completeUserTask(
+            "User_Feedback",
+            Map.of(
+                "userSatisfied", false,
+                "followUpInput", "This joke is bad, send Ervin a better joke")))
+    // 2) subsequent invocations: approve
+    .then(
+        () -> processTestContext.completeUserTask(
+            "User_Feedback", Map.of("userSatisfied", true)));
 ```
 
 For the full conditional behavior API, see [Utilities](utilities.md#conditional-behavior).
@@ -154,14 +171,7 @@ The LLM may return any value between these anchor points (for example, 0.6 or 0.
 
 ### Set up an LLM provider
 
-Judge assertions require a configured chat model provider. CPT provides an optional
-[LangChain4j](https://docs.langchain4j.dev/) integration module that ships with preconfigured support for major LLM
-providers: OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI, and OpenAI-compatible APIs. LangChain4j requires Java 17+.
-Camunda Process Test Spring includes the module as a transitive dependency. For the Java client, add
-`camunda-process-test-langchain4j` to your project. If you provide a custom `ChatModelAdapter` instead (see
-[Custom ChatModelAdapter](configuration.md#custom-chatmodeladapter)), this module is not required.
-
-Configure the provider using the tabs below.
+Configure the chat model provider using the tabs below.
 
 <Tabs groupId="judge-provider" defaultValue="openai" queryString values={[
 {label: 'OpenAI', value: 'openai' },
@@ -365,29 +375,43 @@ For the full property reference, see [judge configuration](configuration.md#judg
 
 ### Basic usage
 
-After the agent completes, use a judge assertion to verify that the output meets a natural language expectation:
+After the process completes, use a judge assertion to verify that the agent's output satisfies a natural language expectation. The following example checks the full "Send Ervin a joke" scenario, including tool usage, email content, and the feedback loop:
 
 ```java
 @Test
-void shouldProduceMeaningfulResponse() {
-    // given: register conditional behaviors for tool tasks
+void shouldSendErvinAJoke() {
+    // given: register conditional behaviors for tool tasks, email approval, and feedback
     // ... (see Handle non-deterministic flows above)
 
     // when: start the process
     ProcessInstanceEvent processInstance = client.newCreateInstanceCommand()
-        .bpmnProcessId("ai-agent-chat-with-tools")
+        .bpmnProcessId("ai-agent-chat")
         .latestVersion()
-        .variables(Map.of("prompt", "What is the current date?"))
+        .variables(Map.of("prompt", "Send Ervin a joke"))
         .send()
         .join();
 
-    // then: the agent produced a response that contains the date
+    // then: the agent completed the full scenario correctly
     assertThat(processInstance).isCompleted();
     assertThat(processInstance)
-        .hasVariableSatisfiesJudge("agentContext",
-            "Contains a response that mentions today's date.");
+        .hasVariableSatisfiesJudge(
+            "agent",
+            """
+            The agent correctly identified Ervin by calling the following tools:
+            1. ListUsers
+            2. LoadUserByID with id=2.
+            Furthermore, the agent called AskHumanToSendEmail and the email
+            should have been sent successfully!
+            The mail must contain a joke.
+            After the user rejected the first joke and asked for another one, the
+            agent offered a second, different joke.
+            """);
 }
 ```
+
+The expectation is a plain-text description of what the agent should have done. The judge does not compare strings literally. It evaluates whether the actual variable content satisfies the expectation semantically, so different phrasing or formatting in the agent's output does not cause false failures.
+
+If the assertion fails, for example because the agent never called `LoadUserByID` or sent the email to the wrong address, the judge returns a low score with an explanation of which parts of the expectation were not met. This gives you a clear, human-readable failure message instead of a generic assertion error.
 
 ### Custom threshold
 
@@ -396,8 +420,9 @@ Use `withJudgeConfig` to set a stricter threshold for individual assertions:
 ```java
 assertThat(processInstance)
     .withJudgeConfig(config -> config.withThreshold(0.8))
-    .hasVariableSatisfiesJudge("agentContext",
-        "Contains at least two recipe suggestions with ingredient lists.");
+    .hasVariableSatisfiesJudge(
+        "agent",
+        "The email body contains a joke addressed to Ervin.");
 ```
 
 ### Custom prompt
@@ -446,6 +471,6 @@ For the full assertion API, see [Assertions](assertions.md#hasvariablesatisfiesj
 
 ## Next steps
 
-- See [Assertions](assertions.md) for the full assertion API reference, including all judge assertion methods.
-- See [Configuration](configuration.md#judge-configuration) for the complete property reference for judge settings and chat model providers.
-- See [Utilities](utilities.md#conditional-behavior) for the full conditional behavior API, including chained actions and lifecycle details.
+- [Assertions](assertions.md) documents the full assertion API reference, including all judge assertion methods.
+- [Configuration](configuration.md#judge-configuration) provides the complete property reference for judge settings and chat model providers.
+- [Utilities](utilities.md#conditional-behavior) describes the full conditional behavior API, including chained actions and lifecycle details.
