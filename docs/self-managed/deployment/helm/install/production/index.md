@@ -566,12 +566,12 @@ console:
                   url: https://management-and-modeling-host.com/identity
                   readiness: http://camunda-identity.oidc:82/actuator/health
                   metrics: http://camunda-identity.oidc:82/actuator/prometheus
-                - name: WebModeler WebApp
+                - name: WebModeler
                   id: webModelerWebApp
                   version: 8.9.x
                   url: https://management-and-modeling-host.com/modeler
-                  readiness: http://camunda-web-modeler-webapp.oidc:8071/health/readiness
-                  metrics: http://camunda-web-modeler-webapp.oidc:8071/metrics
+                  readiness: http://camunda-web-modeler-restapi.oidc:8091/health/readiness
+                  metrics: http://camunda-web-modeler-restapi.oidc:8091/metrics
             - name: camunda
               namespace: orchestration
               version: 14.x

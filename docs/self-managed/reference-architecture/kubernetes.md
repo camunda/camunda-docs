@@ -196,7 +196,7 @@ Networking is largely managed through services and load balancers. The following
   - `80`: Web UI (Console, Management Identity, Web Modeler, and IdP if co-located)
   - `82`: Metrics (Management Identity)
   - `8080`: REST/Web UI (Connectors, Orchestration Cluster)
-  - `8071`, `8091`: Management (Web Modeler)
+  - `8091`: Management (Web Modeler)
   - `8092`: Management (Optimize)
   - `9100`: Management (Console)
   - `9600`: Management (Orchestration Cluster)
