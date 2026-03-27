@@ -33,6 +33,9 @@ connectors:
   initContainers:
     - name: init-script-downloader
       image: appropriate/curl
+      securityContext:
+        runAsUser: 1000
+        runAsNonRoot: true
       args:
         - "-o"
         - "/opt/custom/custom-connector-0.0.1-with-dependencies.jar"
@@ -55,6 +58,8 @@ After updating the values, run [Helm install](/self-managed/deployment/helm/inst
 
 :::note
 The `appropriate/curl` image is not the only image option for the `initContainers`. You can use other `curl`-based images, such as `curlimages/curl`. Adjust the `args` to match the image you choose.
+
+On clusters that enforce non-root containers (for example, restricted Pod Security admission), keep the `securityContext` in the init container to avoid startup failures.
 :::
 
 ## Troubleshooting

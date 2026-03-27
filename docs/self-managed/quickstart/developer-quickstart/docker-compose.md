@@ -24,6 +24,19 @@ The following prerequisites are required to run Camunda Self-Managed via Docker 
 | Docker Compose | Version 1.27.0 or later (supports the [latest Compose specification](https://docs.docker.com/compose/compose-file/)). |
 | Docker         | Version 20.10.16 or later.                                                                                            |
 
+:::tip Troubleshooting unsupported attributes
+If Docker Compose reports errors such as "unsupported attribute" when loading the Camunda Compose files:
+
+- Confirm you are using the Docker Compose v2 plugin:
+
+  ```shell
+  docker compose version
+  ```
+
+- Run the commands in this guide with `docker compose` (plugin syntax), not `docker-compose` (legacy standalone binary).
+- Upgrade Docker Desktop or Docker Engine/Compose plugin to a recent supported version, then retry.
+  :::
+
 ## Run Camunda 8 with Docker Compose
 
 To start a complete Camunda 8 Self-Managed environment locally:
