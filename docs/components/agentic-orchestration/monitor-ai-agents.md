@@ -8,6 +8,9 @@ keywords: ["agentic ai", "AI agents", "Operate"]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import ProcessInstance from './img/process-instance-overview.png';
+import InstanceHistory from './img/instance-history.png';
+import Variables from './img/variables.png';
 
 Monitor and troubleshoot your AI agent process instances in real time using Operate.
 
@@ -48,20 +51,27 @@ For example:
 2. Locate the process instance created by your prompt. See [View a deployed process](/components/operate/userguide/basic-operate-navigation.md#view-a-deployed-process) for more details.
 3. Open your process instance view by clicking on its process instance key.
 
-At this point, you should see the process progressing through your model.
+At this point, you should see the process progressing through your model:
+
+<img src={ProcessInstance} alt="Process instance overview"/>
 
 ## Step 3: Understand what Operate shows
 
 With Operate, you can track the agent activity and see which tool tasks are called.
 
-1. To show how many times each BPMN element is triggered, select **Execution count**. For this particular prompt example, you can see:
+1. To show how many times each BPMN element is triggered, select **Execution count** in the **Instance History** section. For this particular prompt example, you can see:
    - The AI Agent connector was triggered once.
    - Within it, the agent executed the **Fetch URL** tool. This aligns with your prompt example of extracting information from a website.
 
 2. Select the **Fetch URL** tool element:
-   - In the bottom-left pane, you can see where the element belongs in the execution tree.
-   - In the bottom-right pane, the element details are displayed, including the [**Variables**](components/concepts/variables.md) and [**Input/Output Mappings**](/components/concepts/variables.md#inputoutput-variable-mappings) columns, among others.
-     However, the actual tool inputs and results are stored in a **parent scope** and are accessible via the element's inner instance in the execution tree.
+   - In the bottom-left pane, you can see where the element belongs in the execution tree:
+
+  <img src={InstanceHistory} alt="Fetch URL element details"/>
+
+- In the bottom-right pane, the element details are displayed, including the [**Variables**](components/concepts/variables.md) and [**Input/Output Mappings**](/components/concepts/variables.md#inputoutput-variable-mappings) columns, among others.
+  However, the actual tool inputs and results are stored in a **parent scope** and are accessible via the element's inner instance in the execution tree.
+
+  <img src={Variables} alt="Fetch URL element details"/>
 
 ## Step 4: Inspect tool calls
 
@@ -127,7 +137,7 @@ Here's the example conversation stored in the agent's context:
     "content": [
       {
         "type": "text",
-        "text": "You are a helpful, generic chat agent which can answer a wide amount of questions based on your knowledge and an optional set of available tools.\n\nIf tools are provided, you should prefer them instead of guessing an answer. You can call the same tool multiple times by providing different input values. Don't guess any tools which were not explicitely configured. If no tool matches the request, try to generate an answer. If you're not able to find a good answer, return with a message stating why you're not able to.\n\nIf you are prompted to interact with a person, never guess contact details, but use available user/person lookup tools instead and return with an error if you're not able to look up appropriate data.\n\nThinking, step by step, before you execute your tools, you think using the template `<thinking><context></context><reflection></reflection></thinking>`"
+        "text": "You are a helpful, generic chat agent which can answer a wide amount of questions based on your knowledge and an optional set of available tools.\n\nIf tools are provided, you should prefer them instead of guessing an answer. You can call the same tool multiple times by providing different input values. Don't guess any tools which were not explicitly configured. If no tool matches the request, try to generate an answer. If you're not able to find a good answer, return with a message stating why you're not able to.\n\nIf you are prompted to interact with a person, never guess contact details, but use available user/person lookup tools instead and return with an error if you're not able to look up appropriate data.\n\nThinking, step by step, before you execute your tools, you think using the template `<thinking><context></context><reflection></reflection></thinking>`"
       }
     ]
   },

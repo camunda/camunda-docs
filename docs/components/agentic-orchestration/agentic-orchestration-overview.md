@@ -40,7 +40,7 @@ Understand the fundamental concepts of Camunda agentic orchestration.
 
 <AoGrid ao={fundamentalCards} columns={2}/>
 
-Learn how to analyze and improve performance over time with Optimize, and monitor and troubleshoot AI agents in real time with Operate.
+Learn how to monitor and troubleshoot AI agents in real time with Operate, and analyze and improve performance over time with Optimize.
 
 <AoGrid ao={fundamentalCards_monitoring} columns={2}/>
 

@@ -36,16 +36,16 @@ export const fundamentalCards = [
 // Fundamentals cards on introduction page
 export const fundamentalCards_monitoring = [
   {
-    link: "../analyze-ai-agents/",
-    title: "Analyze your AI agents",
-    image: IconOptimize,
-    description: "Analyze your AI agents with Optimize.",
-  },
-  {
     link: "../monitor-ai-agents/",
     title: "Monitor your AI agents",
     image: IconOperate,
     description: "Monitor your AI agents with Operate.",
+  },
+  {
+    link: "../analyze-ai-agents/",
+    title: "Analyze your AI agents",
+    image: IconOptimize,
+    description: "Analyze your AI agents with Optimize.",
   },
 ];
 

@@ -224,8 +224,8 @@ module.exports = {
           items: [
             "components/agentic-orchestration/ai-agents",
             "components/agentic-orchestration/ao-design",
-            "components/agentic-orchestration/analyze-ai-agents",
             "components/agentic-orchestration/monitor-ai-agents",
+            "components/agentic-orchestration/analyze-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
           ],
