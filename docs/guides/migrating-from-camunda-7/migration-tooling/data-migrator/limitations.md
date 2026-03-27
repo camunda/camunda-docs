@@ -20,6 +20,7 @@ The following requirements and limitations apply:
   - If a tenant is migrated, all its memberships are migrated as well. If a tenant is skipped, its memberships are also skipped.
   - If the migration of an individual tenant membership fails (for example, due to a missing user), it cannot be retried.
   - The `--list-skipped` and `--list-migrated` options do not list individual tenant memberships.
+  - This is also true for groups and group memberships.
 - For security reasons, passwords for users cannot be migrated. For this reason, users are migrated with a generated secure password that needs to be reset by an administrator after migration.
 
 ### Supported entities
