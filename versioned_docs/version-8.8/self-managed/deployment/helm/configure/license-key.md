@@ -58,12 +58,12 @@ For more details on working with secrets, see [Secret management](/self-managed/
 
 2. Reference the secret in `values.yaml`:
 
-```yaml
-global:
-  license:
-    existingSecret: "camunda-license"
-    existingSecretKey: "key"
-```
+   ```yaml
+   global:
+     license:
+       existingSecret: "camunda-license"
+       existingSecretKey: "key"
+   ```
 
 :::note
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and log warnings. These warnings do not impact startup or functionality, except that Web Modeler is limited to five users.
