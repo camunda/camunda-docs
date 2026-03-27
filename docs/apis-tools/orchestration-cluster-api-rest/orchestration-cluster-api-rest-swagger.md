@@ -38,7 +38,7 @@ Swagger UI is protected with CSRF. If you are logged into the Camunda Console, y
 
 **Example:**
 If your Region ID is `bru-2` and Cluster ID is `abc123-def456-ghi789`, your Swagger UI URL would be:
-`https://bru-2.api.camunda.io/abc123-def456-ghi789/operate/swagger`
+`https://bru-2.api.camunda.io/abc123-def456-ghi789/swagger`
 
 ### Self-Managed
 
