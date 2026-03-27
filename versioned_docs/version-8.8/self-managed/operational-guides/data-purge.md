@@ -246,8 +246,6 @@ When the scaling has completed, the `changeId` from the previous response will b
 
 ## Considerations
 
-### 1. Use the `--dry-run` flag
-
 ### Don't perform the purge operation during other cluster operations
 
 You cannot perform the purge operation if another cluster operation is already in progress (for example, scaling).
