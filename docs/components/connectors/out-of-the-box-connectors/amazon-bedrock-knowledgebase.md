@@ -84,6 +84,21 @@ For example, to extract the document and result count:
 }
 ```
 
+#### Query guidelines
+
+For best results, use specific, descriptive queries rather than short keywords:
+
+| Query                                                            | Quality | Why                                               |
+| :--------------------------------------------------------------- | :------ | :------------------------------------------------ |
+| "What does the auto insurance policy cover for stolen vehicles?" | Good    | Specific topic with clear intent.                 |
+| "What are the exclusions for water damage in home insurance?"    | Good    | Targets a specific section and policy type.       |
+| "coverage"                                                       | Poor    | Too broad — returns many loosely related results. |
+| "Tell me everything about insurance"                             | Poor    | Too vague — no specific topic to match against.   |
+
+:::tip
+When using the connector as a tool in an [AI Agent subprocess](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md), the agent composes the query automatically based on the user's request. Use the `fromAi()` function to let the agent generate targeted queries.
+:::
+
 #### Example response
 
 The following is an example of the JSON content stored in the `resultsDocument` document:
