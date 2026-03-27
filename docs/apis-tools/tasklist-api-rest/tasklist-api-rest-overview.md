@@ -33,7 +33,7 @@ See [the interactive Tasklist REST API Explorer][tasklist-api-explorer] for spec
 
 A detailed API description is also available as a Swagger UI at `https://${base-url}/swagger-ui/index.html`.
 
-For SaaS: `https://${REGION}.api.camunda.io:443/${CLUSTER_ID}/tasklist/swagger-ui/index.html`, and for Self-Managed installations: [`http://localhost:8080/swagger-ui/index.html`](http://localhost:8080/swagger-ui/index.html).
+For SaaS: `https://${REGION}.api.camunda.io:443/${CLUSTER_ID}/swagger-ui/index.html`, and for Self-Managed installations: [`http://localhost:8080/swagger-ui/index.html`](http://localhost:8080/swagger-ui/index.html).
 
 :::note
 Find your **region Id** and **cluster Id** under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
