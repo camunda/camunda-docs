@@ -2,91 +2,104 @@
 id: analyze-ai-agents
 title: Analyze your AI agents with Optimize
 sidebar_label: Analyze your AI agents
-description: "Analyze AI agent executions using Optimize reports and dashboards, including token usage and tool usage."
-keywords: ["agentic ai", "AI agents", "Optimize", "token usage"]
+description: "Analyze and improve the performance of your AI agent executions using Optimize."
+keywords: ["agentic ai", "AI agents", "Optimize"]
 ---
 
-Analyze AI agent executions using Optimize reports and dashboards, including token usage and tool usage.
+import ScriptTask from './img/script-task.png';
+
+Analyze and improve the performance of your AI agent executions using Optimize.
 
 ## About
 
 In this guide, you will:
 
 - Understand what data Optimize can analyze for AI agents.
-- Prepare process variables so Optimize can report on token usage.
-- Create reports for input and output token usage.
-- Create reports for tool usage, including heatmaps and tool call counts.
-- Build a dashboard to track agent behavior over time.
+- Create reports and heatmaps, including token and tool usage.
+- Build a dashboard to track AI agent behavior over time.
 
 After completing this guide, you will be able to analyze AI agent executions in Optimize and build dashboards that track usage and performance trends.
 
 ## Prerequisites
 
-- You have completed [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md).
 - You have access to [Optimize](/components/optimize/what-is-optimize.md).
-- You have an AI agent process you can execute (for example, the **AI Agent Chat With Tools** blueprint used in [Monitor your AI agents](/components/agentic-orchestration/monitor-ai-agents.md)).
+- You have deployed and run the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint. This is needed for Optimize to fetch execution data to analyze. Consider running it using different prompts to trigger various AI agent tools.
+
+:::important
+This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), where you will use the same example AI agent process. It is recommended going through that guide first. However, it can be applied to other AI agent process implementations.
+:::
 
 :::note
 Optimize reports can use only variables that are available at the process level. If agent data is scoped to a lower level (for example, inside a connector or tool execution scope), extract it to process variables before you build reports.
 :::
 
-## Step 1: Run your AI agent process
+## Step 1: Make your data available
 
-Run a process instance so Optimize has execution data to analyze.
-
-1. Start a new process instance for your AI agent process (for example, **AI Agent Chat With Tools**).
-2. Provide a prompt that triggers the AI agent to call one or more tools.
-3. Wait for the process instance to complete (or reach a waiting state, depending on your model).
-
-## Step 2: Make token usage available at the process level
-
-To report on token usage in Optimize, store token usage values in process variables.
-
-In the transcript, this is the key constraint: Optimize considers only variables “on the process level” when building reports. To report on token usage (input and output tokens), extract those values into process variables (for example, using a script task that “pushes that variable up into the process”).
-
-### Example: Store input and output token usage in process variables
-
-Choose process variables that match what you want to report on. For example:
-
-- `inputTokenUsage`
-- `outputTokenUsage`
-
-How you extract these values depends on how your AI agent implementation exposes token usage (for example, from connector output, agent context metadata, or another variable). The important part is that the final variables exist at the **process level** when the instance finishes.
-
-:::tip
-If you already store token usage in a nested scope, add a script task after the AI agent execution that copies those values into process variables.
+:::important
+Optimize can only use variable data at the **process level**.
 :::
 
-## Step 3: Create a report for input token usage
+To make data available to Optimize, make sure it's scoped at the process level. If it's scoped to a lower level, for example, within a connector or tool-execution scope, extract it into process variables.
 
-Create a report that sums input tokens across process instances.
+### Example: Collect token usage
+
+In the AI Agent Chat Quick Start example, token usage data is not available at the process level, but in a nested scope. To surface those metrics, you can add a script task after the AI agent execution that copies those values into process variables.
+
+How you extract these values depends on how your AI agent implementation exposes token usage. The important aspect is that the target variables exist at the **process level** when the instance finishes.
+
+To do so:
+
+1. Add a [script task](/components/modeler/bpmn/script-tasks/).
+2. Configure its **Properties** as follows:
+   - In **General**, **Name**: Gather metrics.
+   - In **Implementation**, select **FEEL expression**.
+   - In **Script**,
+     - **Result variable**: `tokenUsage`.
+     - **FEEL expression**: `agent.context.metrics.tokenUsage.inputTokenCount`.
+   - In **Output mapping**, add two process variables:
+     - `inputTokenUsage` with **Variable assignment value**: `agent.context.metrics.tokenUsage.inputTokenCount`.
+     - `outputTokenUsage` with **Variable assignment value**: `agent.context.metrics.tokenUsage.outputTokenCount`.
+
+You should see something like the following:
+
+<img src={ScriptTask} alt="Process instance overview"/>
+
+## Step 2: Examine data in Optimize
+
+By leveraging data collected during process execution, you can use Optimize to examine it through reports and dashboards and identify areas for improvement in your AI agent processes.
 
 1. Open Optimize.
-2. Create a new report for your AI agent process.
-3. In the report configuration, select the process variable that represents input tokens (for example, `inputTokenUsage`).
-4. Select an aggregation that matches your goal. For example:
+2. Go to the **Dashboards** tab.
+3. Select your AI agent process, **AI Agent Chat With Tools**, in the **Process dashboards and KPIs** section.
+4. Verify that Optimize shows data for your executed process instances in the **Business Operations** section, including your AI agent process model diagram and other statistics below.
+5. Explore the other metrics shown below in the **Business Reporting** and **Process Improvement** sections.
+
+See the Optimize [getting started](/components/optimize/improve-processes-with-optimize.md) guide for more details on what you can do with Optimize for business intelligence.
+
+## Step 3: Create reports for token usage
+
+You can create reports for token usage across process instances and over time.
+To do so:
+
+1. Go to the **Collections** tab.
+2. Select **Report** in the **Create new** dropdown.
+3. Select **AI Agent Chat With Tools** in the **Select one or more processes** dropdown. You can fetch data for all process model versions or customize it.
+4. Choose a blank template.
+5. In the report configuration, select the process variable that represents input tokens (for example, `inputTokenUsage`).
+6. Select an aggregation that matches your goal. For example:
    - **Sum** to track total input tokens across instances.
    - **Average per process instance** to track typical usage.
-5. Save the report with a descriptive name (for example, **Input token usage - March**).
+7. Save the report with a descriptive name (for example, **Input token usage - March**).
+8. Repeat the process for the output token usage, for example, `outputTokenUsage`)
 
-### (Optional) Set a target threshold
+### Set a target threshold
 
-If you have a token budget, set a target.
+If you have a token budget, you can set a target in the report.
 
 1. In the report settings, configure a target value (for example, a maximum token usage threshold).
 2. Choose a visualization that clearly shows performance against the target (for example, a bar).
 
-## Step 4: Create a report for output token usage
-
-Repeat the same pattern for output tokens.
-
-1. Create another report.
-2. Select the process variable for output tokens (for example, `outputTokenUsage`).
-3. Select the aggregation (for example, **Sum**).
-4. (Optional) Set a target threshold.
-5. Save the report (for example, **Output token usage - March**).
-
-## Step 5: Create reports for tool usage
+## Step 4: Create reports for tool usage
 
 In addition to token usage, you can report on tool usage using flow node reporting.
 
@@ -138,16 +151,6 @@ For example, if your goal is to track “how many times a tool was called per da
 :::note
 In the transcript, creating a “timeline” view was described as possible but not always easy to discover, depending on the chosen report configuration. If you don’t see the expected timeline, try changing the visualization type or switching between automatic and manual grouping options.
 :::
-
-## Troubleshooting
-
-### I can’t select token usage in Optimize
-
-Optimize reports can use only variables available at the process level. If token usage exists only in a connector or tool scope, extract it into a process variable (for example, with a script task) before you build the report.
-
-### The dashboard experience feels hard to set up
-
-Start with a small set of reports (token usage totals, average per instance, and tool call counts). Add duration and time-based reports after you confirm the base reports show the correct data.
 
 ## Next steps
 

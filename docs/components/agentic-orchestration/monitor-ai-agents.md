@@ -30,11 +30,11 @@ After completing this guide, you will be able to inspect, debug, and monitor AI 
 
 ## Prerequisites
 
+- You have access to [Operate](/components/operate/operate-introduction.md).
 - You have the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint deployed in [Modeler](/components/modeler/about-modeler.md).
-- You are familiar with [Operate](/components/operate/operate-introduction.md).
 
 :::important
-This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), where you will use the same example AI agent process. Therefore, the same [prerequisites apply](../..//guides/getting-started-agentic-orchestration.md#prerequisites). However, it can be applied to other AI agent process implementations.
+This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), where you will use the same example AI agent process. It is recommended going through that guide first.. However, it can be applied to other AI agent process implementations.
 :::
 
 ## Step 1: Run your AI agent process
@@ -195,15 +195,15 @@ See [Memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent
 
 ## Step 7: Examine process data in Optimize
 
-By leveraging data collected during process execution, you can use [Optimize](/components/optimize/what-is-optimize.md) to explore reports and process dashboards, and identify areas for improvement in your AI agent processes.
+By leveraging data collected during process execution, you can use [Optimize](/components/optimize/what-is-optimize.md) to examine it through reports and dashboards and identify areas for improvement in your AI agent processes.
 
 1. Open Optimize.
 2. Go to the **Dashboards** tab.
-3. Select your AI agent process, **AI Agent Chat With Tools**.
+3. Select your AI agent process, **AI Agent Chat With Tools**, in the **Process dashboards and KPIs** section.
 4. Verify that Optimize shows data for the recently executed process instance in the **Business Operations** section, including the running process model diagram and other statistics below.
-5. Explore other metrics provided in the **Business Reporting** and **Process Improvement** sections.
+5. Explore the other metrics shown below in the **Business Reporting** and **Process Improvement** sections.
 
-See [Getting started](/components/optimize/improve-processes-with-optimize.md) for more details on what you can do with Optimize for business intelligence.
+See the Optimize [getting started](/components/optimize/improve-processes-with-optimize.md) guide for more details on what you can do with Optimize for business intelligence.
 
 ## Step 8: Review the results
 
