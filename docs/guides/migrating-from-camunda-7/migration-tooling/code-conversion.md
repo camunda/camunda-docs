@@ -630,7 +630,6 @@ Validate the Camunda 7 to 8 migration:
 4. Check for common issues:
    - String process instance IDs that should now be Long keys
    - VariableMap usage that should be Map<String, Object>
-   - Business key usage (not available in Camunda 8)
    - History service or management service usage (no direct C8 equivalent)
    - Batch operations (C8 operates on single instances)
 5. Run tests: mvn test — fix any failures
