@@ -35,13 +35,13 @@ Choose this option when:
 
 To enable, set `ES_WARM_REINDEX=true` in `env.sh`.
 
-| Phase                         | Description                                                       | Downtime          |
-| ----------------------------- | ----------------------------------------------------------------- | ----------------- |
-| **Phase 1** – Deploy targets  | Install operators and create target clusters alongside Bitnami    | No                |
-| **Phase 2** – Initial backup  | Back up all data **+ full ES reindex to target** (while app runs) | No                |
-| **Phase 3** – Cutover         | Freeze → final backup → **delta ES reindex** → Helm upgrade       | **Yes** (reduced) |
-| **Phase 4** – Validate        | Verify all components are healthy on the new infrastructure       | No                |
-| **Phase 5** – Cleanup Bitnami | Remove old Bitnami resources and re-verify                        | No                |
+| Phase                         | Description                                                       | Downtime             |
+| ----------------------------- | ----------------------------------------------------------------- | -------------------- |
+| **Phase 1** – Deploy targets  | Install operators and create target clusters alongside Bitnami    | No                   |
+| **Phase 2** – Initial backup  | Back up all data **+ full ES reindex to target** (while app runs) | No                   |
+| **Phase 3** – Cutover         | Freeze → final backup → **delta ES reindex** → Helm upgrade       | **Yes** (~5 minutes) |
+| **Phase 4** – Validate        | Verify all components are healthy on the new infrastructure       | No                   |
+| **Phase 5** – Cleanup Bitnami | Remove old Bitnami resources and re-verify                        | No                   |
 
 </TabItem>
 </Tabs>

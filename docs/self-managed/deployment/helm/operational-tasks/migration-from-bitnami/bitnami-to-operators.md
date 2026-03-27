@@ -251,7 +251,7 @@ This phase takes a backup of all data sources while the application is still run
 bash 2-backup.sh
 ```
 
-<Tabs groupId="migration-strategy" queryString="strategy">
+<Tabs groupId="migration-strategy" className="tabs-hidden" queryString="strategy">
 <TabItem value="standard" label="Standard">
 
 What happens:
@@ -320,7 +320,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 :::warning Maintenance window required
 This is the only phase that causes downtime. Schedule a maintenance window before proceeding.
 
-<Tabs groupId="migration-strategy" queryString="strategy">
+<Tabs groupId="migration-strategy" className="tabs-hidden" queryString="strategy">
 <TabItem value="standard" label="Standard">
 
 Downtime typically lasts **5–60 minutes**, depending on Elasticsearch data volume. See [downtime estimation](#downtime-estimation) for benchmarked timings.
@@ -342,7 +342,7 @@ You can run `bash 3-cutover.sh --estimate` to measure the actual cutover duratio
 bash 3-cutover.sh
 ```
 
-<Tabs groupId="migration-strategy" queryString="strategy">
+<Tabs groupId="migration-strategy" className="tabs-hidden" queryString="strategy">
 <TabItem value="standard" label="Standard">
 
 What happens:
