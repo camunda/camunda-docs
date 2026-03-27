@@ -17,6 +17,27 @@ Provisioning Camunda 8 on your Self-Managed cluster depends on several factors. 
 
 Use the configurations and guidance below as a baseline, then adjust based on your workload. For background on the factors that drive provisioning requirements, see [Size your environment](sizing-your-environment.md).
 
+## Camunda 8.8+ resource consumption
+
+Camunda 8.8 introduced a streamlined architecture that consolidates the broker, gateway, Operate, Tasklist, and Identity into a single application, the [Orchestration Cluster](/components/orchestration-cluster.md). This changes how you think about resource consumption compared to older versions.
+
+If you are upgrading from a pre-8.8 version, expect different resource profiles:
+
+- The Orchestration Cluster requires **more CPU per broker** compared to 8.7 (approximately 75% more CPU, for example, 2 to 3.5 cores, to maintain equivalent throughput).
+- Throughput at the default 2 CPU cores drops ~35% compared to 8.7.x.
+- With properly aligned resources (3.5 CPU cores), 8.8.x achieves similar throughput to 8.7.x with **significantly lower latency** (approximately a 2x improvement).
+- The streamlined architecture reduces operational complexity (fewer pods to manage) but consolidates resource consumption into fewer, larger pods.
+
+All components are clustered to provide high-availability, fault-tolerance, and resilience.
+
+The Orchestration Cluster scales horizontally by adding more nodes (pods). This is limited by the [number of partitions](/components/zeebe/technical-concepts/partitions.md) configured for a cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your hardware. The [number of partitions can be scaled up](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) after the cluster is initially provisioned, but not yet scaled down.
+
+Camunda 8 runs on Kubernetes. Every component runs as a pod with assigned resources. These resources can be scaled vertically (assigned more or fewer resources dynamically) within certain limits. Vertical scaling does not always increase throughput, since the components depend on each other.
+
+:::note
+Camunda licensing does not depend on the provisioned hardware resources, making it easy to size according to your needs.
+:::
+
 ## Baseline performance
 
 With the [baseline resource configuration](#baseline-resource-configuration) below, you can expect the following performance. These numbers were measured using Camunda's [load test application](https://github.com/camunda/camunda/tree/main/load-tests/load-tester) with a [realistic reference process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) and [realistic payload](https://github.com/camunda/camunda/blob/main/zeebe/load-tests/project/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). For details on the testing methodology, see the [reliability testing documentation](https://github.com/camunda/camunda/blob/main/docs/testing/reliability-testing.md).
@@ -115,10 +136,6 @@ When scaling horizontally, **secondary storage often becomes the limiting factor
 ### Vertical scaling
 
 Increase CPU and memory per broker. Note that there are **diminishing returns** due to component interdependencies. For example, Elasticsearch indexing speed can bottleneck broker throughput).
-
-:::important
-Always benchmark after vertical scaling changes.
-:::
 
 ### Elasticsearch scaling
 
