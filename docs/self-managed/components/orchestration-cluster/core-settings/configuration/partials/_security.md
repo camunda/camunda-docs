@@ -458,7 +458,6 @@ script-src-attr 'none'.
 | `CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_DESCRIPTION`   | The description of this group.            |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_CLIENTS`       | The clients assigned to this group.       |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_MAPPING_RULES` | The mapping rules assigned to this group. |               |
-| `CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_ROLES`         | The roles assigned to this group.         |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_USERS`         | The users assigned to this group.         |               |
 
 ### `CAMUNDA_SECURITY_INITIALIZATION_ROLES`
