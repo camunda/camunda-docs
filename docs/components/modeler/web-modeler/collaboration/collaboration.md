@@ -1,6 +1,6 @@
 ---
 id: collaboration
-title: Collaborate with your team
+title: Manage workspaces
 description: Collaboration features and access rights for Web Modeler.
 ---
 
@@ -11,12 +11,12 @@ import TabItem from "@theme/TabItem";
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-## Projects
+## Workspaces
 
-Files and folders are stored in projects.
+Files and folders are stored in workspaces.
 The user access on files and folders is defined at the project level.
 
-When you access Web Modeler via the Camunda 8 dashboard, you can note the **Home** page with all the projects you can access:
+When you access Web Modeler via the Camunda 8 dashboard, you can note the **Home** page with all the workspaces you can access:
 ![home page](img/web-modeler-home.png)
 
 ### Access rights and permissions
