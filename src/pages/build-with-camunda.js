@@ -233,6 +233,68 @@ function ConnectorsIcon() {
   );
 }
 
+function IdentityIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+      <circle
+        cx="12"
+        cy="7"
+        r="4"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
+function ClientsIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <rect
+        x="2"
+        y="3"
+        width="20"
+        height="14"
+        rx="2"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        fill="none"
+      />
+      <path
+        d="M8 21h8M12 17v4"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function SDKsIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M16 18l6-6-6-6M8 6l-6 6 6 6"
+        stroke="#78a9ff"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
 function ArrowRight() {
   return (
     <svg
@@ -827,82 +889,161 @@ Available skills:
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Architecture at a glance</h2>
               <p className={styles.sectionSub}>
-                Camunda's components work together to power process
-                orchestration. Click any component to learn more.
+                Learn more about how Camunda's components and features work
+                together to power your process orchestration.
               </p>
             </div>
             <div className={styles.archDiagram}>
-              <div className={styles.archRow}>
-                <Link
-                  to={useBaseUrl("docs/components/modeler/about-modeler/")}
-                  className={styles.archBox}
-                >
-                  <ModelerIcon />
-                  <strong>Modeler</strong>
-                  <span>Design BPMN, DMN, and Forms</span>
-                </Link>
-                <Link
-                  to={useBaseUrl(
-                    "docs/components/console/introduction-to-console/"
-                  )}
-                  className={styles.archBox}
-                >
-                  <ConsoleIcon />
-                  <strong>Console</strong>
-                  <span>Manage clusters and settings</span>
-                </Link>
+              <div className={styles.archGroup}>
+                <h3 className={styles.archGroupTitle}>Design and manage</h3>
+                <div className={styles.archRow}>
+                  <Link
+                    to={useBaseUrl("docs/components/modeler/about-modeler/")}
+                    className={styles.archBox}
+                  >
+                    <ModelerIcon />
+                    <strong>Modeler</strong>
+                    <span>Design BPMN, DMN, and Forms</span>
+                  </Link>
+                  <Link
+                    to={useBaseUrl(
+                      "docs/components/console/introduction-to-console/"
+                    )}
+                    className={styles.archBox}
+                  >
+                    <ConsoleIcon />
+                    <strong>Console</strong>
+                    <span>Manage clusters and settings</span>
+                  </Link>
+                  <Link
+                    to={useBaseUrl(
+                      "docs/components/optimize/what-is-optimize/"
+                    )}
+                    className={styles.archBox}
+                  >
+                    <OptimizeIcon />
+                    <strong>Optimize</strong>
+                    <span>Analyze and improve</span>
+                  </Link>
+                </div>
               </div>
-              <div className={styles.archConnector}>▼</div>
-              <div className={styles.archRow}>
-                <Link
-                  to={useBaseUrl("docs/components/zeebe/zeebe-overview/")}
-                  className={clsx(styles.archBox, styles.archBoxPrimary)}
-                >
-                  <ZeebeIcon />
-                  <strong>Zeebe</strong>
-                  <span>Workflow engine at the core</span>
-                </Link>
+
+              <div className={styles.archConnector}>
+                <svg width="24" height="40" viewBox="0 0 24 40" fill="none">
+                  <path
+                    d="M12 0l6 8H6l6-8z"
+                    fill="var(--arch-connector-color)"
+                  />
+                  <line
+                    x1="12"
+                    y1="8"
+                    x2="12"
+                    y2="32"
+                    stroke="var(--arch-connector-color)"
+                    strokeWidth="2.5"
+                  />
+                  <path
+                    d="M12 40l6-8H6l6 8z"
+                    fill="var(--arch-connector-color)"
+                  />
+                </svg>
               </div>
-              <div className={styles.archConnector}>▼</div>
-              <div className={styles.archRow}>
-                <Link
-                  to={useBaseUrl(
-                    "docs/components/operate/operate-introduction/"
-                  )}
-                  className={styles.archBox}
-                >
-                  <OperateIcon />
-                  <strong>Operate</strong>
-                  <span>Monitor and troubleshoot</span>
-                </Link>
-                <Link
-                  to={useBaseUrl(
-                    "docs/components/tasklist/introduction-to-tasklist/"
-                  )}
-                  className={styles.archBox}
-                >
-                  <TasklistIcon />
-                  <strong>Tasklist</strong>
-                  <span>Human task management</span>
-                </Link>
-                <Link
-                  to={useBaseUrl(
-                    "docs/components/connectors/introduction-to-connectors/"
-                  )}
-                  className={styles.archBox}
-                >
-                  <ConnectorsIcon />
-                  <strong>Connectors</strong>
-                  <span>Integrate external systems</span>
-                </Link>
-                <Link
-                  to={useBaseUrl("docs/components/optimize/what-is-optimize/")}
-                  className={styles.archBox}
-                >
-                  <OptimizeIcon />
-                  <strong>Optimize</strong>
-                  <span>Analyze and improve</span>
-                </Link>
+
+              <div className={styles.archGroup}>
+                <h3 className={styles.archGroupTitle}>Orchestration Cluster</h3>
+                <div className={styles.archRow}>
+                  <Link
+                    to={useBaseUrl("docs/components/zeebe/zeebe-overview/")}
+                    className={clsx(styles.archBox, styles.archBoxPrimary)}
+                  >
+                    <ZeebeIcon />
+                    <strong>Zeebe</strong>
+                    <span>Core workflow engine</span>
+                  </Link>
+                  <Link
+                    to={useBaseUrl(
+                      "docs/components/tasklist/introduction-to-tasklist/"
+                    )}
+                    className={styles.archBox}
+                  >
+                    <TasklistIcon />
+                    <strong>Tasklist</strong>
+                    <span>Human task management</span>
+                  </Link>
+                  <Link
+                    to={useBaseUrl(
+                      "docs/components/operate/operate-introduction/"
+                    )}
+                    className={styles.archBox}
+                  >
+                    <OperateIcon />
+                    <strong>Operate</strong>
+                    <span>Monitor and troubleshoot</span>
+                  </Link>
+                  <Link
+                    to={useBaseUrl(
+                      "docs/components/identity/identity-introduction/"
+                    )}
+                    className={styles.archBox}
+                  >
+                    <IdentityIcon />
+                    <strong>Identity</strong>
+                    <span>Authentication and authorization</span>
+                  </Link>
+                </div>
+              </div>
+
+              <div className={styles.archConnector}>
+                <svg width="24" height="40" viewBox="0 0 24 40" fill="none">
+                  <path
+                    d="M12 0l6 8H6l6-8z"
+                    fill="var(--arch-connector-color)"
+                  />
+                  <line
+                    x1="12"
+                    y1="8"
+                    x2="12"
+                    y2="32"
+                    stroke="var(--arch-connector-color)"
+                    strokeWidth="2.5"
+                  />
+                  <path
+                    d="M12 40l6-8H6l6 8z"
+                    fill="var(--arch-connector-color)"
+                  />
+                </svg>
+              </div>
+
+              <div className={styles.archGroup}>
+                <h3 className={styles.archGroupTitle}>Connectors and tools</h3>
+                <div className={styles.archRow}>
+                  <Link
+                    to={useBaseUrl(
+                      "docs/components/connectors/introduction-to-connectors/"
+                    )}
+                    className={styles.archBox}
+                  >
+                    <ConnectorsIcon />
+                    <strong>Connectors</strong>
+                    <span>Integrate external systems</span>
+                  </Link>
+                  <Link
+                    to={useBaseUrl("docs/apis-tools/working-with-apis-tools/")}
+                    className={styles.archBox}
+                  >
+                    <ClientsIcon />
+                    <strong>APIs</strong>
+                    <span>APIs for integration and automation</span>
+                  </Link>
+                  <Link
+                    to={useBaseUrl("docs/apis-tools/working-with-apis-tools/")}
+                    className={styles.archBox}
+                  >
+                    <SDKsIcon />
+                    <strong>Clients & SDKs</strong>
+                    <span>Official and community clients and SDKs</span>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -963,8 +1104,8 @@ Available skills:
               </svg>
               <h4>Agentic orchestration</h4>
               <p>
-                Learn how Camunda orchestrates AI agents alongside human tasks
-                and system integrations.
+                Orchestrate AI agents alongside human tasks and system
+                integrations.
               </p>
             </Link>
             <Link

@@ -21,7 +21,7 @@
   --terminal-border: #d9d9d9;
   --terminal-text: #3c4257;
   --section-alt-bg: #f5f6f8;
-  --arch-connector-color: #bbb;
+  --arch-connector-color: #78a9ff;
   --inline-code-bg: rgba(197, 67, 2, 0.08);
   --inline-code-color: #c54302;
   --saas-card-bg: linear-gradient(145deg, #e8f0fe 0%, #f0f4ff 100%);
@@ -50,7 +50,7 @@
   --terminal-border: #222;
   --terminal-text: #c6c6c6;
   --section-alt-bg: #131320;
-  --arch-connector-color: #444;
+  --arch-connector-color: #78a9ff;
   --inline-code-bg: rgba(120, 169, 255, 0.12);
   --inline-code-color: #78a9ff;
   --saas-card-bg: linear-gradient(145deg, #0d1b3e 0%, #0f1629 100%);
@@ -542,7 +542,7 @@
 
 /* ─── Architecture ─── */
 .archDiagram {
-  max-width: 800px;
+  max-width: 1100px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -558,9 +558,13 @@
 }
 
 .archConnector {
-  color: var(--arch-connector-color);
-  font-size: 1.2rem;
-  line-height: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0;
+  opacity: 0.5;
 }
 
 .archBox {
@@ -570,9 +574,10 @@
   text-align: center;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 1.2rem 2rem;
-  min-width: 160px;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  width: 210px;
+  flex: 0 0 210px;
   transition: all 0.25s;
   text-decoration: none !important;
   color: var(--page-color) !important;
@@ -591,18 +596,35 @@
 }
 
 .archBox svg {
-  margin-bottom: 0.4rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+  transform: scale(1.4);
 }
 
 .archBox span {
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   color: var(--muted-color);
-  margin-top: 0.25rem;
+  margin-top: 0.15rem;
 }
 
 .archBoxPrimary {
   border-color: #78a9ff;
   background: rgba(120, 169, 255, 0.06);
+}
+
+.archGroup {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.archGroupTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.06em;
+  color: var(--page-color);
+  margin-bottom: 1.25rem;
+  text-align: center;
 }
 
 /* ─── Modeler note ─── */
