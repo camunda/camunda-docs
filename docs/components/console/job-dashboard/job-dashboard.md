@@ -1,32 +1,35 @@
 ---
 id: job-dashboard
 title: Job dashboard
-description: "Use the job dashboard to track job types and statistics."
+description: "Use the job dashboard in Console to see active job types, track created, completed and failed jobs, spot trends over time, and drill into job worker errors."
 ---
 
-The job dashboard in Console gives you a job-level view across your cluster. Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved.
+Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved.
 
 ## Availability and permissions
 
-The job dashboard is available in Console for clusters running Camunda 8.9 or later.
+The job dashboard is available in Console for clusters running Camunda 8.9+.
 
 For Software as a Service (SaaS):
 
 - Available for clusters running Camunda 8.9+.
 - Camunda manages the underlying job metrics configuration for you.
+- If the **Jobs** card is missing or shows **Access restricted**, check that your user has permission to view job metrics in Console. If the issue persists, contact your organization owner or Camunda Support.
 
 For Self-Managed:
 
 - Requires Camunda 8.9+ (Zeebe and Console).
-- Configure job metrics in the engine configuration (`camunda.monitoring.metrics.job-metrics.*`). These options and their default values are available in the auto-generated `defaults.yaml` file and Helm values.
+- Configure job metrics in the engine configuration (`camunda.monitoring.metrics.job-metrics.*`). These options and their default values are available in the auto-generated `defaults.yaml` file and the Helm values.
+- If the **Jobs** card is missing or shows **Access restricted**, verify that:
+  - The cluster is running Camunda 8.9+.
+  - Job metrics are enabled in the engine configuration.
+  - Console can connect to the cluster.
+  - Your user has permission to view job metrics.
 
 Access control:
 
-The global `READ_JOB_METRICS` permission is the only Console permission required to use the job dashboard.
-
-Operate permissions are still required to view underlying instances when you click **View errors**.
-
-If the feature is disabled or the user lacks permission, the **Jobs** card on the cluster overview shows **Access restricted**.
+- The global `READ_JOB_METRICS` permission is the only Console permission required to use the job dashboard.
+- Operate permissions are still required to view underlying instances when you click **View errors**.
 
 ## When to use the job dashboard
 
@@ -67,18 +70,24 @@ Key elements:
   - **Failed jobs**
   - **Last completed**
 
-If internal limits are reached for the selected date range, a warning will appear.
+If the selected date range hits internal limits, Console shows a warning that not all data is displayed. Narrow the time range to see a more complete view.
 
-Job metrics are stored in the internal JobMetrics store in the engine and exported in batches every five minutes.
+Job metrics are stored internally in the engine and exported in batches every five minutes. As a result, metrics in the UI can be delayed by up to five minutes.
 
-Configuration limits protect the system. These include:
+Configuration limits protect the system and include:
 
 - Maximum string lengths for job type, job worker, and tenant ID
 - Maximum number of unique keys (jobType × tenantId × job worker combinations)
 
 If a limit is exceeded, the batch is marked as incomplete, and the UI shows the **Data loading limit reached** warning.
 
-In this case, treat the counts as partial for the affected time range.
+In this case:
+
+- Narrow the time range to reduce the amount of data
+- Filter by job type to focus on a smaller subset
+- In Self-Managed environments, adjust configuration limits if needed
+
+Treat the counts as partial for the affected time range.
 
 To drill down into a specific job type, click its **Job type** link (for example, `send-email`).
 
@@ -109,7 +118,6 @@ The **Job workers** table shows which job workers processed this job type and ho
 - **Worker name**
 - **Created jobs**
 - **Completed jobs**
-- **Failed jobs**
 - **Last completed**
 
 Use this table to see which job workers are active and whether failures are concentrated on specific job workers.
@@ -140,7 +148,7 @@ This means there is no job activity to display.
 
 ### Jobs card access restricted
 
-If the feature is disabled for the cluster or you don’t have permission, the **Jobs** card on the cluster overview shows:
+If the feature is disabled for the cluster or you don't have permission, the **Jobs** card on the cluster overview shows:
 
 - Status: **Access restricted**
 - Message explaining that the feature is restricted or disabled and you must contact an administrator.
