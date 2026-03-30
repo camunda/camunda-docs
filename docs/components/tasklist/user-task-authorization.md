@@ -62,10 +62,9 @@ This lets typical task workers see, claim, and complete only the tasks they're r
 You can use this role as-is or create custom roles with similar property-based authorizations.
 
 :::note Upgrade behavior
+When you upgrade from Camunda 8.8 to 8.9, Identity creates only the default `task-worker` role automatically.
 
-When you upgrade from Camunda 8.8 to 8.9, Identity creates only the default `task-worker` role. Identity does not create a supervisor role.
-
-If you need a supervisor role to manage or review tasks across a process, create the role manually in Identity and assign the required `PROCESS_DEFINITION` and `USER_TASK` permissions.
+Other roles are not created during upgrade. If needed, create additional roles in Identity and assign the appropriate permissions.
 :::
 
 ## User task operations and required permissions
