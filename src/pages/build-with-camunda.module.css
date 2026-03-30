@@ -45,10 +45,10 @@
   --card-border: #2a2a35;
   --card-hover-border: #78a9ff;
   --card-hover-shadow: rgba(120, 169, 255, 0.1);
-  --terminal-bg: #111118;
-  --terminal-header-bg: #1a1a22;
-  --terminal-border: #222;
-  --terminal-text: #c6c6c6;
+  --terminal-bg: #1a1a24;
+  --terminal-header-bg: #242430;
+  --terminal-border: #3a3a4a;
+  --terminal-text: #d4d4d4;
   --section-alt-bg: #131320;
   --arch-connector-color: #78a9ff;
   --inline-code-bg: rgba(120, 169, 255, 0.12);
@@ -58,7 +58,7 @@
   --cli-card-bg: linear-gradient(145deg, #1a1a1f 0%, #131316 100%);
   --cli-card-border: #2a2a30;
   --check-text: #ccc;
-  --explore-bg: #131320;
+  --explore-bg: #08080e;
   --explore-border-top: #1a1a22;
   background: var(--page-bg);
   color: var(--page-color);
@@ -564,7 +564,7 @@
   justify-content: center;
   gap: 0.25rem;
   padding: 0.5rem 0;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .archBox {
@@ -872,8 +872,9 @@
 
 .moreSection {
   background: var(--explore-bg);
-  padding: 3rem 0 4rem;
-  border-top: 1px solid var(--explore-border-top);
+  margin-top: 3rem;
+  padding: 5rem 0 4rem;
+  border-top: 4px solid var(--card-border);
 }
 
 .exploreGrid {

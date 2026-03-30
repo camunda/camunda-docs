@@ -840,7 +840,9 @@ Available skills:
         <section className={styles.moreSection}>
           <div className="container">
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>More ways to run Camunda</h2>
+              <h2 className={styles.sectionTitle}>
+                More ways to run Camunda locally
+              </h2>
               <p className={styles.sectionSub}>
                 Choose the setup that fits your workflow and infrastructure.
               </p>
@@ -968,21 +970,21 @@ Available skills:
               </div>
 
               <div className={styles.archConnector}>
-                <svg width="24" height="40" viewBox="0 0 24 40" fill="none">
+                <svg width="32" height="48" viewBox="0 0 32 48" fill="none">
                   <path
-                    d="M12 0l6 8H6l6-8z"
+                    d="M16 0l8 10H8l8-10z"
                     fill="var(--arch-connector-color)"
                   />
                   <line
-                    x1="12"
-                    y1="8"
-                    x2="12"
-                    y2="32"
+                    x1="16"
+                    y1="10"
+                    x2="16"
+                    y2="38"
                     stroke="var(--arch-connector-color)"
-                    strokeWidth="2.5"
+                    strokeWidth="3.5"
                   />
                   <path
-                    d="M12 40l6-8H6l6 8z"
+                    d="M16 48l8-10H8l8 10z"
                     fill="var(--arch-connector-color)"
                   />
                 </svg>
@@ -1033,21 +1035,21 @@ Available skills:
               </div>
 
               <div className={styles.archConnector}>
-                <svg width="24" height="40" viewBox="0 0 24 40" fill="none">
+                <svg width="32" height="48" viewBox="0 0 32 48" fill="none">
                   <path
-                    d="M12 0l6 8H6l6-8z"
+                    d="M16 0l8 10H8l8-10z"
                     fill="var(--arch-connector-color)"
                   />
                   <line
-                    x1="12"
-                    y1="8"
-                    x2="12"
-                    y2="32"
+                    x1="16"
+                    y1="10"
+                    x2="16"
+                    y2="38"
                     stroke="var(--arch-connector-color)"
-                    strokeWidth="2.5"
+                    strokeWidth="3.5"
                   />
                   <path
-                    d="M12 40l6-8H6l6 8z"
+                    d="M16 48l8-10H8l8 10z"
                     fill="var(--arch-connector-color)"
                   />
                 </svg>
