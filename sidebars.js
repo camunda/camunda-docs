@@ -2192,6 +2192,7 @@ module.exports = {
                     "self-managed/components/modeler/web-modeler/configuration/copilot",
                   ],
                 },
+                "self-managed/components/modeler/web-modeler/monitoring",
                 {
                   type: "category",
                   label: "Troubleshooting",
