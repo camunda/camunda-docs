@@ -34,7 +34,7 @@ After completing this guide, you will be able to inspect, debug, and monitor AI 
 - You have the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint deployed in [Modeler](/components/modeler/about-modeler.md).
 
 :::important
-This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), where you will use the same example AI agent process. It is recommended going through that guide first.. However, it can be applied to other AI agent process implementations.
+This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), where you will use the same example AI agent process. It is recommended going through that guide first. However, it can be applied to other AI agent process implementations.
 :::
 
 ## Step 1: Run your AI agent process
@@ -65,12 +65,10 @@ With Operate, you can track the agent activity and see which tool tasks are call
 
 2. Select the **Fetch URL** tool element:
    - In the bottom-left pane, you can see where the element belongs in the execution tree:
-
-  <img src={InstanceHistory} alt="Fetch URL element details"/>
+     <img src={InstanceHistory} alt="Fetch URL element details"/>
 
 - In the bottom-right pane, the element details are displayed, including the [**Variables**](components/concepts/variables.md) and [**Input/Output Mappings**](/components/concepts/variables.md#inputoutput-variable-mappings) columns, among others.
   However, the actual tool inputs and results are stored in a **parent scope** and are accessible via the element's inner instance in the execution tree.
-
   <img src={Variables} alt="Fetch URL element details"/>
 
 ## Step 4: Inspect tool calls
