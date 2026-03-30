@@ -195,7 +195,6 @@ Client assertion settings are configured per identity provider. Each provider su
 | `camunda.security.initialization.groups.[0].description`  | The description of this group.            |               |
 | `camunda.security.initialization.groups.[0].clients`      | The clients assigned to this group.       |               |
 | `camunda.security.initialization.groups.[0].mappingRules` | The mapping rules assigned to this group. |               |
-| `camunda.security.initialization.groups.[0].roles`        | The roles assigned to this group.         |               |
 | `camunda.security.initialization.groups.[0].users`        | The users assigned to this group.         |               |
 
 ### `camunda.security.initialization.roles`
