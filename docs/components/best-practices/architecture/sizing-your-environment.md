@@ -6,19 +6,19 @@ tags:
   - Performance
   - Hardware
   - Sizing
-description: "Understand the aspects relevant for Camunda 8 sizing. Once you understand those, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select your appropriate configuration."
+description: "Understand the aspects relevant to Camunda 8 sizing. Once you do, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select your appropriate configuration."
 ---
 
-Understand the aspects relevant for Camunda 8 sizing. Once you understand those, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select your appropriate configuration.
+Understand the aspects relevant to Camunda 8 sizing. Once you do, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select your appropriate configuration.
 
 <!-- Anchors for backward compatibility with old single-page URLs -->
 <span id="camunda-8-saas" />
 <span id="camunda-8-self-managed" />
 <span id="running-experiments-and-benchmarks" />
 
-## Sizing requirements, observations, and influencing factors
+## Sizing requirements and influencing factors
 
-The following aspects need to be understood and taken into consideration when planning and sizing Camunda SaaS or Self-Managed.
+Consider the following aspects when planning and sizing Camunda SaaS or Self-Managed.
 
 ### Data availability latency
 
@@ -32,11 +32,10 @@ Data availability latency is influenced by:
 
 ### Disk space
 
-The workflow engine itself will store data along every process instance, especially to persist the current state.
+The workflow engine stores data for each process instance, especially to persist the current state.
+In addition, it sends data to secondary storage (Elasticsearch, OpenSearch, or an RDBMS) for indexing, search, analytics, and long-term retention.
 
-In addition, data is sent to secondary storage (ElasticSearch, OpenSearch, or RDBMS) for indexing, search, analytics, and long-term retention.
-
-You can configure the retention times for data stored in secondary storage.
+You can configure retention times for data stored in secondary storage.
 
 ### Impact of Optimize
 
@@ -156,16 +155,15 @@ Sizing data provided throughout this guide assumes Elasticsearch unless stated o
 - Write throughput is approximately **70% of Elasticsearch** on equivalent hardware.
 - **No Optimize support**: If you need Optimize, you must run Elasticsearch alongside RDBMS.
 - **Scales primarily vertically** rather than horizontally like Elasticsearch. Plan initial sizing with more headroom, as adding capacity is more disruptive.
-<!-- To be validated - Potentially lower total disk space required for the same data volume (preliminary benchmarks suggest this, but detailed results are still being validated). -->
 - Ideal for organizations that already operate a supported RDBMS at scale and want to avoid adding Elasticsearch to their infrastructure.
-<!-- TODO: Link to RDBMS benchmark results page once PR #8159 is merged -->
+  <!-- To be validated - Potentially lower total disk space required for the same data volume (preliminary benchmarks suggest this, but detailed results are still being validated). -->
+  <!-- TODO: Link to RDBMS benchmark results page once PR #8159 is merged -->
 
 ### Throughput
 
 Throughput defines how many process instances can be executed within a certain timeframe.
 
 It is typically easy to estimate the number of process instances per day you need to execute.
-
 However, hardware sizing depends more on the **number of BPMN tasks** in a process model. If you already know your future process model, you can use it to count the number of tasks in the process. For example, the following onboarding process contains five service tasks in a typical execution:
 
 <div bpmn="best-practices/sizing-your-environment-assets/customer_onboarding.bpmn" callouts="task1,task2,task3,task4,task5" />

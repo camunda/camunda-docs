@@ -7,7 +7,7 @@ tags:
   - Sizing
   - Self-Managed
   - Kubernetes
-description: "Plan resources for your Camunda 8 Self-Managed cluster with baseline configurations for CPU, memory, and disk, plus guidance on scaling and secondary storage options."
+description: "Provision Camunda 8 on your Self-Managed cluster with Kubernetes and Helm using these baseline configurations, then adjust sizing based on your workload."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -40,9 +40,7 @@ Camunda licensing does not depend on the provisioned hardware resources, making 
 
 ## Baseline performance
 
-With the [baseline resource configuration](#baseline-resource-configuration) below, you can expect the following performance. These numbers were measured using Camunda's [load test application](https://github.com/camunda/camunda/tree/main/load-tests/load-tester) with a [realistic reference process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) and [realistic payload](https://github.com/camunda/camunda/blob/main/zeebe/load-tests/project/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). For details on the testing methodology, see the [reliability testing documentation](https://github.com/camunda/camunda/blob/main/docs/testing/reliability-testing.md).
-
-The realistic reference process starts one root process instance, which spawns 50 sub-process instances via call activities. It covers a wide variety of BPMN elements, including call activities, multi-instance, sub-processes, and DMN. The process is based on the [Credit Card Fraud Dispute Handling](https://marketplace.camunda.com/en-US/apps/449510/credit-card-fraud-dispute-handling) blueprint from the Camunda Marketplace.
+Considering this [baseline resource configuration](#baseline-resource-configuration), you can expect the following performance:
 
 | Metric                                          | Value                                          |
 | ----------------------------------------------- | ---------------------------------------------- |
@@ -50,6 +48,12 @@ The realistic reference process starts one root process instance, which spawns 5
 | Completed flow node instances (FNIs) per second | 560                                            |
 | Completed tasks per second                      | 100                                            |
 | Data availability (query API latency)           | < 5 seconds                                    |
+
+:::important
+These numbers were measured using Camunda's [load test application](https://github.com/camunda/camunda/tree/main/load-tests/load-tester) with a [realistic reference process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) and [realistic payload](https://github.com/camunda/camunda/blob/main/zeebe/load-tests/project/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). For details on the testing methodology, see the [reliability testing documentation](https://github.com/camunda/camunda/blob/main/docs/testing/reliability-testing.md).
+:::
+
+The realistic reference process starts one root process instance, which spawns 50 sub-process instances via call activities. It covers a wide variety of BPMN elements, including call activities, multi-instance, sub-processes, and DMN. The process is based on the [Credit Card Fraud Dispute Handling](https://marketplace.camunda.com/en-US/apps/449510/credit-card-fraud-dispute-handling) blueprint from the Camunda Marketplace.
 
 ## Baseline resource configuration
 
