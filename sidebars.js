@@ -135,7 +135,18 @@ module.exports = {
                 id: "components/concepts/user-task-listeners",
               },
               items: [
-                "components/concepts/global-user-task-listeners",
+                {
+                  type: "category",
+                  label: "Global user task listeners",
+                  link: {
+                    type: "doc",
+                    id: "components/concepts/global-user-task-listeners",
+                  },
+                  items: [
+                    "components/concepts/global-user-task-listeners/configuration",
+                    "components/concepts/global-user-task-listeners/access-control",
+                  ],
+                },
                 "components/concepts/listen-to-user-tasks",
               ],
             },

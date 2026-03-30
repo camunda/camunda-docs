@@ -43,24 +43,24 @@ The Camunda application components themselves (Zeebe, Operate, Tasklist, Optimiz
 
 The migration follows a five-phase approach designed to minimize downtime:
 
-| Phase              | Downtime                                       | Outcome                                                                              |
-| ------------------ | ---------------------------------------------- | ------------------------------------------------------------------------------------ |
-| 1. Deploy targets  | No planned downtime                            | Install operators and create the target infrastructure alongside Bitnami.            |
-| 2. Initial backup  | No planned downtime                            | Back up data while the application is still running.                                 |
-| 3. Cutover         | **Maintenance window**<br />Typically 5–30 min | Freeze traffic, take a final backup, restore data, run the Helm upgrade, and resume. |
-| 4. Validate        | No planned downtime                            | Verify that all components are healthy on the new infrastructure.                    |
-| 5. Cleanup Bitnami | No planned downtime                            | Remove old Bitnami StatefulSets, PVCs, and migration artifacts.                      |
+| Phase              | Downtime                                                                             | Outcome                                                                              |
+| ------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| 1. Deploy targets  | No planned downtime                                                                  | Install operators and create the target infrastructure alongside Bitnami.            |
+| 2. Initial backup  | No planned downtime                                                                  | Back up data while the application is still running.                                 |
+| 3. Cutover         | **Maintenance window**<br />Typically 5–60 minutes (or ~5 minutes with warm reindex) | Freeze traffic, take a final backup, restore data, run the Helm upgrade, and resume. |
+| 4. Validate        | No planned downtime                                                                  | Verify that all components are healthy on the new infrastructure.                    |
+| 5. Cleanup Bitnami | No planned downtime                                                                  | Remove old Bitnami StatefulSets, PVCs, and migration artifacts.                      |
 
 ### Downtime estimation
 
-| Elasticsearch data volume | Typical downtime |
-| ------------------------- | ---------------- |
-| < 1 GB                    | ~5 min           |
-| 1–10 GB                   | ~10–15 min       |
-| 10–50 GB                  | ~15–30 min       |
-| > 50 GB                   | 30+ min          |
+| Elasticsearch data volume | Standard downtime   | With warm reindex (`ES_WARM_REINDEX=true`) |
+| ------------------------- | ------------------- | ------------------------------------------ |
+| < 1 GB                    | ~5 minutes          | ~5 minutes                                 |
+| 1–10 GB                   | ~10–40 minutes      | ~5 minutes                                 |
+| 10–50 GB                  | ~40 minutes–2 hours | ~5 minutes                                 |
+| > 50 GB                   | 2+ hours            | ~5 minutes                                 |
 
-The main downtime driver is the PostgreSQL restore (`pg_restore`) and Elasticsearch reindex duration.
+The main downtime driver is the Elasticsearch reindex duration. With the **warm reindex** strategy, Elasticsearch data is pre-copied during Phase 2 (no downtime), reducing Phase 3 to a fast delta sync. See [downtime estimation](./bitnami-to-operators.md#downtime-estimation) for benchmarked timings.
 
 ## Precautions (all paths) {#precautions}
 
