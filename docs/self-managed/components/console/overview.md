@@ -13,6 +13,7 @@ Console delivers real-time insights into orchestration clusters and reduces the 
 
 - **Cluster Status Dashboard**: Monitor the health of your orchestration cluster (Zeebe, Operate, Tasklist, Identity), connectors, and external services such as Optimize.
 - **Job dashboard**: See job types, job counts, and worker activity across the cluster. For details, see the [Job dashboard](../../../components/console/job-dashboard/job-dashboard.md).
+- **Cluster Status Dashboard**: Monitor the health of your orchestration cluster (Zeebe, Operate, Tasklist, Admin (formerly Orchestration Cluster Identity)), connectors, and external services such as Optimize.
 - **Cluster Telemetry**: Collect and view component metrics in a built-in monitoring interface.
 - **Cluster Configuration Overview**: View endpoint URLs, version details, and configuration metadata for your clusters.
 - **Health Monitoring**: Track availability of essential services across the platform.

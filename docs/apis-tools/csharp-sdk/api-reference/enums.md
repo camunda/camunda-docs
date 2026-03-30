@@ -11,7 +11,7 @@ mdx:
 The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
 :::
 
-Enumeration types (24 enums).
+Enumeration types (28 enums).
 
 ## AuditLogActorTypeEnum
 
@@ -45,6 +45,7 @@ The type of entity affected by the operation.
 | `DECISION`        |             |
 | `GROUP`           |             |
 | `INCIDENT`        |             |
+| `JOB`             |             |
 | `MAPPINGRULE`     |             |
 | `PROCESSINSTANCE` |             |
 | `RESOURCE`        |             |
@@ -150,23 +151,25 @@ The scope of a cluster variable.
 
 ## DecisionDefinitionTypeEnum
 
-The type of the decision.
+The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10
 
 | Value               | Description |
 | ------------------- | ----------- |
 | `DECISIONTABLE`     |             |
 | `LITERALEXPRESSION` |             |
+| `UNSPECIFIED`       |             |
 | `UNKNOWN`           |             |
 
 ## DecisionInstanceStateEnum
 
-The state of the decision instance.
+The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10
 
 | Value         | Description |
 | ------------- | ----------- |
 | `EVALUATED`   |             |
 | `FAILED`      |             |
 | `UNSPECIFIED` |             |
+| `UNKNOWN`     |             |
 
 ## ElementInstanceStateEnum
 
@@ -177,6 +180,63 @@ Element states
 | `ACTIVE`     |             |
 | `COMPLETED`  |             |
 | `TERMINATED` |             |
+
+## GlobalListenerSourceEnum
+
+How the global listener was defined.
+
+| Value           | Description |
+| --------------- | ----------- |
+| `CONFIGURATION` |             |
+| `API`           |             |
+
+## GlobalTaskListenerEventTypeEnum
+
+The event type that triggers the user task listener.
+
+| Value        | Description |
+| ------------ | ----------- |
+| `All`        |             |
+| `Creating`   |             |
+| `Assigning`  |             |
+| `Updating`   |             |
+| `Completing` |             |
+| `Canceling`  |             |
+
+## IncidentErrorTypeEnum
+
+Incident error type with a defined set of values.
+
+| Value                        | Description |
+| ---------------------------- | ----------- |
+| `ADHOCSUBPROCESSNORETRIES`   |             |
+| `CALLEDDECISIONERROR`        |             |
+| `CALLEDELEMENTERROR`         |             |
+| `CONDITIONERROR`             |             |
+| `DECISIONEVALUATIONERROR`    |             |
+| `EXECUTIONLISTENERNORETRIES` |             |
+| `EXTRACTVALUEERROR`          |             |
+| `FORMNOTFOUND`               |             |
+| `IOMAPPINGERROR`             |             |
+| `JOBNORETRIES`               |             |
+| `MESSAGESIZEEXCEEDED`        |             |
+| `RESOURCENOTFOUND`           |             |
+| `TASKLISTENERNORETRIES`      |             |
+| `UNHANDLEDERROREVENT`        |             |
+| `UNKNOWN`                    |             |
+| `UNSPECIFIED`                |             |
+
+## IncidentStateEnum
+
+Incident states with a defined set of values.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `ACTIVE`   |             |
+| `MIGRATED` |             |
+| `PENDING`  |             |
+| `RESOLVED` |             |
+| `UNKNOWN`  |             |
 
 ## JobKindEnum
 
@@ -252,7 +312,9 @@ Specifies the type of permissions.
 | `ACCESS`                                       |             |
 | `CANCELPROCESSINSTANCE`                        |             |
 | `CLAIM`                                        |             |
+| `CLAIMUSERTASK`                                |             |
 | `COMPLETE`                                     |             |
+| `COMPLETEUSERTASK`                             |             |
 | `CREATE`                                       |             |
 | `CREATEBATCHOPERATIONCANCELPROCESSINSTANCE`    |             |
 | `CREATEBATCHOPERATIONDELETEDECISIONDEFINITION` |             |
@@ -347,6 +409,7 @@ The tenant filtering strategy for job activation. Determines whether to use tena
 ## UserTaskStateEnum
 
 The state of the user task.
+Note: FAILED state is only for legacy job-worker-based tasks.
 
 | Value        | Description |
 | ------------ | ----------- |

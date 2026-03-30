@@ -19,9 +19,9 @@ Connecting Camunda 8 to an external IdP allows you to:
 
 Self-Managed deployments only support external IdP integration using **OpenID Connect (OIDC)** (for example, Keycloak, Auth0, Okta, EntraID via OIDC).
 
-You can integrate an IdP with both the Identity (for the Orchestration Cluster) and Management Identity (for Web Modeler, Console, and Optimize).
+You can integrate an IdP with both Admin (for the Orchestration Cluster) and Management Identity (for Web Modeler, Console, and Optimize).
 
-- [Connect Orchestration Cluster Identity to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
+- [Connect Orchestration Cluster Admin to an identity provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md)
 - [Connect Management Identity to an identity provider](../../../../self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/)
 
 ## SaaS

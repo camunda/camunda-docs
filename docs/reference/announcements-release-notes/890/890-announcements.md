@@ -33,7 +33,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
 The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.19 (previously 8.16+).
 
 - This aligns with the Elasticsearch 8 versions maintained by Elastic as of April 2025.
-- The default Elasticsearch version used by Camunda 8 Run, Docker Compose, and Helm templates has been updated to `8.19.9+` accordingly.
+- The default Elasticsearch version used by Docker Compose examples and Helm templates has been updated to `8.19.9+` accordingly.
 - Upgrade your Elasticsearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
 - For best results, Camunda recommends upgrading to the latest supported Elasticsearch 9.2+ to take advantage of new features and improvements.
 
@@ -136,7 +136,7 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 #### MCP Client and MCP Remote Client connectors
 
-[Camunda 8.9.0-alpha2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) introduces breaking changes to the [MCP Client](/components/early-access/alpha/mcp-client/mcp-client.md) element templates and runtime configuration.
+[Camunda 8.9.0-alpha2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) introduces breaking changes to the [MCP Client](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md) element templates and runtime configuration.
 
 **Action:** To remain compatible, you should update your MCP Client and MCP Remote Client connectors to use element template version `1`.
 
@@ -444,6 +444,22 @@ Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this rol
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Removed</span>
+</div>
+<div className="release-announcement-content">
+
+#### Removed: Web Modeler API milestone endpoints
+
+The Web Modeler API endpoints under `/api/v1/milestones` that were deprecated in Camunda 8.8 are now removed in 8.9.
+You can use the corresponding endpoints under `/api/v1/versions` instead.
+
+<p className="link-arrow">[Web Modeler API](/apis-tools/web-modeler-api/index.md)</p>
+
+</div>
+</div>
+
 ## Connectors
 
 <div className="release-announcement-row">
@@ -537,11 +553,11 @@ For more information on optimizing connector performance with virtual threads, s
 
 #### Camunda 8 Run with H2 as the default secondary data storage
 
-Camunda 8 Run now uses H2 as the default secondary data storage, instead of Elasticsearch.
+Camunda 8 Run now uses H2 as the default secondary data storage, instead of Elasticsearch. Elasticsearch is no longer bundled with Camunda 8 Run.
 
 When running with H2 (or any other RDBMS) as secondary storage, Camunda is only compatible with the V2 API. As a result, some features are not available in Operate and Tasklist. See [Migrate to the V2 Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for more details.
 
-To continue using features exclusive to the V1 API, you must run Camunda with Elasticsearch and switch back to V1 mode.
+To continue using features exclusive to the V1 API, configure Camunda 8 Run with an external Elasticsearch instance and switch back to V1 mode.
 
 <p className="link-arrow">[Camunda 8 Run default secondary storage](/self-managed/quickstart/developer-quickstart/c8run.md#default-h2-camunda-8-run)</p>
 
@@ -895,7 +911,7 @@ This simplifies initial deployment setup and enables reproducible, version-contr
 
 Camunda 8.9 introduces `global.noSecondaryStorage` mode to allow running the Orchestration engine without any secondary storage (Elasticsearch, OpenSearch, or RDBMS). This is useful for lightweight testing or scenarios where only the core engine is needed.
 
-When enabled, Elasticsearch and OpenSearch subcharts must be disabled, and basic authentication is not supported.
+When enabled, Elasticsearch and OpenSearch subcharts must be disabled, and Basic authentication is not supported.
 
 </div>
 </div>
@@ -1060,6 +1076,54 @@ This enhancement ensures consistency across environments and simplifies setup fo
 Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.
 
 This enhancement aligns Web Modeler's database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
+
+</div>
+</div>
+
+## Identity
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+### Orchestration Cluster Identity renamed to Admin
+
+Starting with Camunda 8.9, the Orchestration Cluster Identity component has been renamed to **Admin** (also referred to as Orchestration Cluster Admin).
+
+Admin is the cluster-level admin UI that hosts identity management (users, groups, roles, authorizations, tenants, mapping rules, and clients) and other administrative features. The underlying identity management capabilities remain the same.
+
+What changed:
+
+- The component is now called **Admin** (previously Orchestration Cluster Identity).
+- The `admin` Spring profile replaces the `identity` profile. Both profiles work interchangeably in 8.9; the `identity` profile is deprecated and will be removed in a future version.
+- API paths have changed from `/identity/*` to `/admin/*`. The old paths remain functional and redirect to new paths, but are deprecated.
+- Helm values have changed from `orchestration.identity.*` to `orchestration.admin.*`. The old values remain functional but are deprecated.
+- Documentation paths have been updated: `/components/identity/` is now `/components/admin/`.
+
+<p className="link-arrow">[Introduction to Admin](/components/admin/admin-introduction.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: Form deployment changes
+
+With Camunda 8.9, you can now deploy forms independently. This enhancement provides greater control over what is deployed and when, enabling more precise management of changes and updates across environments.
+
+As part of this improvement, we have removed the automatic deployment of [linked forms](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md). Forms must now be explicitly deployed, giving teams finer control over versioning, release timing, and deployment scope.
+
+This change supports more predictable deployments and helps teams manage updates with greater confidence and flexibility.
+
+:::info
+To learn more, see the [8.9.0-alpha5 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+:::
 
 </div>
 </div>

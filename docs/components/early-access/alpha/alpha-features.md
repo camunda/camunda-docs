@@ -52,12 +52,6 @@ docId: 'components/early-access/alpha/feel-copilot/feel-copilot',
 },
 {
 type: 'link',
-href: '/docs/next/components/early-access/alpha/mcp-client/',
-label: 'MCP Client',
-docId: 'components/early-access/alpha/mcp-client/mcp-client',
-},
-{
-type: 'link',
 href: '/docs/next/components/early-access/alpha/a2a-client/',
 label: 'A2A Client',
 docId: 'components/early-access/alpha/a2a-client/a2a-client',

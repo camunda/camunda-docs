@@ -269,4 +269,4 @@ When a tool receives a parameter in a different format than expected, it can eit
 - [Intelligent by design: A step-by-step guide to AI task agents in Camunda](https://camunda.com/blog/2025/05/building-your-first-ai-agent-with-camunda-s-new-agentic-ai/).
 - [AI Agent Chat Quick Start blueprint](https://marketplace.camunda.com/en-US/apps/587865/ai-agent-chat-quick-start) on the Camunda Marketplace.
 - Agentic AI examples GitHub repository [working examples](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples).
-- The [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md) can be used in combination with the AI agent connector to connect to tools exposed by Model Context Protocol (MCP) servers.
+- The [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md) can be used in combination with the AI agent connector to connect to tools exposed by Model Context Protocol (MCP) servers.

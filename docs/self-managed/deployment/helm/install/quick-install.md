@@ -1,6 +1,6 @@
 ---
 id: quick-install
-sidebar_label: Quick install
+sidebar_label: Quick developer install
 title: Install Camunda with Helm for development
 description: Install Camunda 8 Self-Managed on Kubernetes using the Helm chart with default settings, suitable for testing and development.
 ---
@@ -28,6 +28,12 @@ In this guide, you deploy the Orchestration Cluster with Basic authentication an
 ## Orchestration Cluster only
 
 The Helm chart deploys the Camunda Orchestration Cluster with **Basic authentication** and **RDBMS** as secondary storage (using embedded H2 when no external database URL is provided), intended only for testing and development. No external database or identity provider is required.
+
+:::warning H2 topology limitations
+Embedded H2 is non-production only and valid only with a single broker and a single partition.
+
+Do not run embedded H2 with a multi-broker Helm topology. H2 is local to each broker and does not provide shared secondary storage, which can cause incomplete or inconsistent query results.
+:::
 
 In production, Camunda 8 is typically deployed together with additional components such as Optimize, Web Modeler, and Console, which require OIDC-based authentication and external databases. For a full local deployment with all components, follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md).
 
@@ -68,6 +74,13 @@ In production, Camunda 8 is typically deployed together with additional componen
 This enables the RDBMS exporter with embedded H2 as secondary storage. The cluster is configured with a single broker, a single partition, and a replication factor of 1. The replication factor must be less than or equal to the cluster size. For a single-broker cluster, the only valid replication factor is 1.
 
 The embedded H2 database is local to each broker. Running multiple brokers would result in separate, independent databases and incomplete query results.
+
+If you need multiple brokers, switch to a shared external backend (for example, PostgreSQL) instead of H2.
+
+If you already have an invalid H2 setup:
+
+1. For local/dev use, reduce to `clusterSize=1`, `partitionCount=1`, `replicationFactor=1` and use file-based H2.
+2. For clustered use, migrate secondary storage to an external persistent backend.
 
 Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by default. You must explicitly enable a secondary storage backend (RDBMS, Elasticsearch, or OpenSearch) in your Helm values.
 
@@ -203,7 +216,7 @@ This command lists all available chart versions and their corresponding applicat
 ## Additional resources
 
 <!-- TODO: Add links to the following:
-- Basic auth guide
+- Basic authentication guide
 - Enable Keycloak guide
 - Enable OIDC guide
 - Explanation of management/orchestration cluster -->
