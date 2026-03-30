@@ -61,8 +61,9 @@ For more details on working with secrets, see [Secret management](/self-managed/
    ```yaml
    global:
      license:
-       existingSecret: "camunda-license"
-       existingSecretKey: "key"
+       secret:
+         existingSecret: "camunda-license"
+         existingSecretKey: "key"
    ```
 
 :::note
