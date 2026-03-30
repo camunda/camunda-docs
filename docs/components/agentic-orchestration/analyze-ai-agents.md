@@ -95,7 +95,7 @@ To do so:
 You can create similar reports, targeting other goals and process variables, such as `inputTokenUsage` or `outputTokenUsage`.
 :::
 
-### Set a target threshold
+### Example: Set a target threshold
 
 If you have a token budget, you can set a target in the report.
 

@@ -191,19 +191,7 @@ See [Memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent
 
 :::
 
-## Step 7: Examine process data in Optimize
-
-By leveraging data collected during process execution, you can use [Optimize](/components/optimize/what-is-optimize.md) to examine it through reports and dashboards and identify areas for improvement in your AI agent processes.
-
-1. Open Optimize.
-2. Go to the **Dashboards** tab.
-3. Select your AI agent process, **AI Agent Chat With Tools**, in the **Process dashboards and KPIs** section.
-4. Verify that Optimize shows data for the recently executed process instance in the **Business Operations** section, including the running process model diagram and other statistics below.
-5. Explore the other metrics shown below in the **Business Reporting** and **Process Improvement** sections.
-
-See the Optimize [getting started](/components/optimize/improve-processes-with-optimize.md) guide for more details on what you can do with Optimize for business intelligence.
-
-## Step 8: Review the results
+## Step 7: Review the results
 
 Go back to Operate. In the **User Feedback** element, you will see the execution count in green. This means the process instance execution is stopped there and waiting for action.
 
