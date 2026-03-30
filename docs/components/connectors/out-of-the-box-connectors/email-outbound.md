@@ -1,18 +1,18 @@
 ---
 id: email-outbound
 title: Email connector
-sidebar_label: Email Outbound
-description: The Email connector allows you to connect your BPMN service with different email protocols such as SMTP, POP3 or IMAP.
+sidebar_label: Email outbound
+description: Connect your BPMN service to email using SMTP, POP3, or IMAP, and send, receive, or manage emails.
 ---
 
 import OutboundConnectorBasics from '../../../components/react-components/connector-outbound-basics.md'
 import ErrorHandling from '../../../components/react-components/connector-error-handling.md'
 
-The **Email connector** is an outbound connector that allows you to connect your BPMN service with an email server to send or receive emails. It supports multiple email protocols, including SMTP for sending emails, and POP3 and IMAP for receiving and managing emails.
+The **Email outbound connector** allows your BPMN service to send and receive emails via an email server. It supports multiple email protocols, including SMTP for sending emails, and POP3 and IMAP for receiving and managing emails.
 
 ## Prerequisites
 
-To use the **Email connector**, you must have an SMTP, POP3 or IMAP server available to connect to.
+To use the **Email outbound connector**, you must have access to an SMTP, POP3, or IMAP server.
 
 <OutboundConnectorBasics />
 
@@ -20,97 +20,85 @@ To use the **Email connector**, you must have an SMTP, POP3 or IMAP server avail
 
 ### Authentication
 
-You can authenticate to a mail server as follows.
+You can authenticate to a mail server in the following ways.
 
-### Simple authentication
+#### Simple authentication
 
-This method allows the user to connect to any SMTP, POP3 or IMAP server using an email address and password.
+Connect to any SMTP, POP3, or IMAP server using your email address and password.
 
-| Parameter  | Description                                                                                                                                                                |
-| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `username` | Enter your full email address (for example, user@example.com) or the username provided by your email service. This is used to authenticate your access to the mail server. |
-| `password` | Enter the password for your email account. Keep your password secure and do not share it with others.                                                                      |
+| Parameter  | Description                                                                                          |
+| ---------- | ---------------------------------------------------------------------------------------------------- |
+| `username` | Full email address (for example, `user@example.com`) or the username provided by your email service. |
+| `password` | Password for your email account. Keep it secure and do not share it.                                 |
 
-### No authentication
+#### No authentication
 
-For SMTP servers that do not require authentication, select this option to connect without providing
-credentials.
+For SMTP servers that do not require authentication, select this option to connect without providing credentials.
 
 ### Protocol and server settings
 
 #### SMTP
 
-Simple Mail Transfer Protocol (SMTP) is the standard communication protocol for sending emails across the Internet. It
-facilitates mail transfer from a client's email application to the outgoing mail server and between servers for relaying
-email messages to their final destination. SMTP operates on a push model, where the sending server pushes the message to
-the receiving server for delivery to the appropriate mailbox.
+SMTP (Simple Mail Transfer Protocol) is the standard protocol for sending emails. It pushes messages from a client to the outgoing mail server and between servers to reach the recipient mailbox.
 
-| Field                    | Description                                                                                            |
-| :----------------------- | :----------------------------------------------------------------------------------------------------- |
-| `SMTP host`              | The host URL of the SMTP server.                                                                       |
-| `SMTP port`              | The host port of the SMTP server.                                                                      |
-| `Cryptographic protocol` | Defines how the connection to the server is secured, `TLS`, `SSL` or `None`. Default is typically TLS. |
+| Field                    | Description                                  |
+| ------------------------ | -------------------------------------------- |
+| `SMTP host`              | The hostname of the SMTP server.             |
+| `SMTP port`              | The port used by the SMTP server.            |
+| `Cryptographic protocol` | TLS, SSL, or None. Default is typically TLS. |
 
 #### POP3
 
-The Post Office Protocol version 3 (POP3) is an Internet standard protocol used by local email clients to retrieve
-emails from a remote server over a TCP/IP connection. POP3 allows users to download messages from their email server to
-their local computer, where they can be read, managed, or archived even without an internet connection. It operates on a
-simple download-and-delete model, meaning emails are typically removed from the server once they are retrieved.
+POP3 (Post Office Protocol v3) is used to retrieve emails from a server to a local client. Emails are typically downloaded and removed from the server.
 
-| Field                    | Description                                                                                            |
-| :----------------------- | :----------------------------------------------------------------------------------------------------- |
-| `POP3 host`              | The host URL of the POP3 server.                                                                       |
-| `POP3 port`              | The host port of the POP3 server.                                                                      |
-| `Cryptographic protocol` | Defines how the connection to the server is secured, `TLS`, `SSL` or `None`. Default is typically TLS. |
+| Field                    | Description                                  |
+| ------------------------ | -------------------------------------------- |
+| `POP3 host`              | The hostname of the POP3 server.             |
+| `POP3 port`              | The port used by the POP3 server.            |
+| `Cryptographic protocol` | TLS, SSL, or None. Default is typically TLS. |
 
-## IMAP
+#### IMAP
 
-The Internet Message Access Protocol (IMAP) is a protocol used by email clients to access messages stored on a mail
-server, allowing users to view and manage their emails from multiple devices. Unlike POP3, IMAP supports both online and
-offline modes, synchronizes email across devices, and allows manipulation of mailboxes (create, delete, and rename) as
-well as messages (read, delete, or flag) directly on the server.
+IMAP (Internet Message Access Protocol) allows clients to access and manage emails on a server, supporting multiple devices and mailbox manipulation.
 
-| Field                    | Description                                                                                            |
-| :----------------------- | :----------------------------------------------------------------------------------------------------- |
-| `IMAP host`              | The host URL of the IMAP server.                                                                       |
-| `IMAP port`              | The host port of the IMAP server.                                                                      |
-| `Cryptographic protocol` | Defines how the connection to the server is secured, `TLS`, `SSL` or `None`. Default is typically TLS. |
+| Field                    | Description                                  |
+| ------------------------ | -------------------------------------------- |
+| `IMAP host`              | The hostname of the IMAP server.             |
+| `IMAP port`              | The port used by the IMAP server.            |
+| `Cryptographic protocol` | TLS, SSL, or None. Default is typically TLS. |
 
 ## Operations
 
-### List Emails
+### List emails
 
-Allow users to fetch a list of emails from the `INBOX` folder, with customizable sorting and limitation options.
+Fetch emails from the `INBOX` folder with sorting and limit options.
 
 #### Parameters
 
-| Parameter            | Description                                                                                                                                                                                                                                       |
-| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Max Emails to read` | Specify the maximum number of emails to retrieve. This parameter determines the cap on the number of emails the task will return.                                                                                                                 |
-| `Sort emails by`     | <p>Choose the field by which to sort the emails. Supported sorting fields are:</p><p><ul><li>`Sent date`: Sorts emails by the date and time they were sent.</li><li>`Size`: Sorts emails by the size of the email.</li></ul></p>                  |
-| `Sort order`         | <p>Define the sort order:</p><p><ul><li>`ASC`: Ascending order, from the oldest or smallest value to the most recent or largest.</li><li>`DESC`: Descending order, from the most recent or largest value to the oldest or smallest.</li></ul></p> |
+| Parameter            | Description                                                                                                                                     |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Max emails to read` | Maximum number of emails to retrieve.                                                                                                           |
+| `Sort emails by`     | <p>Choose a field to sort emails by:<br></br><ul><li>`Sent date`: Sort by sent date and time.</li><li>`Size`: Sort by email size.</li></ul></p> |
+| `Sort order`         | <p>Define sort order:<br></br><ul><li>`ASC`: Oldest or smallest first.</li><li>`DESC`: Most recent or largest first.</li></ul></p>              |
 
-#### Sorting and Limiting Behavior
+#### Behavior
 
-Emails are initially sorted based on the specified sorting field and order. The list is then limited to the number of
-emails as defined by the Max Emails to read parameter. For example, if you sort by Sent date in descending order (DESC)
-with a limit of one email, the task will return the most recently sent email.
+Emails are sorted by the chosen field and order, then limited to `Max emails to read`.
 
 #### Output
 
-The task returns a list of emails in JSON format. Each email object contains the following information:
+Returns a JSON array of emails:
 
-- `messageId`: A unique identifier for the email message.
-- `fromAddress`: The email addresses of the sender.
-- `subject`: The subject line of the email.
-- `size`: The size of the email (in bytes).
+- `messageId`: Unique identifier.
+- `fromAddress`: Sender's email address.
+- `subject`: Email subject line.
+- `size`: Email size in bytes.
 
 :::note
-As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+As of the 8.8 release, angle brackets (`<` and `>`) are preserved in `messageId`.
 :::
 
-Example of a returned JSON array:
+Example:
 
 ```json
 [
@@ -129,50 +117,45 @@ Example of a returned JSON array:
 ]
 ```
 
-### Read Email
+### Read email
 
-Retrieve the contents of an email, using the unique `messageId` associated with the email message.
+Retrieve the contents of an email using `messageId`.
 
 :::danger
-Reading an email using POP3 protocol will delete the email
+Reading an email via POP3 will delete it.
 :::
 
 #### Parameters
 
-| Parameter   | Description                                                                                                                                                                                                      |
-| :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `MessageId` | The identifier of the email message you wish to read. Provide this to locate and return the specific email.                                                                                                      |
-| `Folder`    | (Optional) Specifies the folder from which the email should be retrieved. If not provided, the default folder is `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`) |
+| Parameter   | Description                                                                           |
+| ----------- | ------------------------------------------------------------------------------------- |
+| `MessageId` | Identifier of the email to read.                                                      |
+| `Folder`    | _(Optional)_ Folder to read from. Defaults to `INBOX`. Use `.` or `/` for subfolders. |
 
-#### Response Structure
+#### Response
 
-The task returns a JSON object containing detailed information about the email:
+Returns a JSON object with detailed email information:
 
-- `messageId`: The unique identifier corresponding to the email message.
-- `fromAddress`: The email addresses of the sender.
-- `headers` : A list containing the email's headers
-- `subject`: The subject line of the email.
-- `size`: The size of the email in bytes.
-- `plainTextBody`: The plain text version of the email's content.
-- `htmlBody`: The HTML version of the email's content (if content exists).
-- `attachments`: A list of all the email's attachments, provided as a document reference.
-- `receivedDateTime`: The email's reception datetime
+- `messageId`: Unique identifier of the email.
+- `fromAddress`: Sender's email addresses.
+- `headers`: List of email headers.
+- `subject`: Email subject.
+- `size`: Email size in bytes.
+- `plainTextBody`: Plain text content of the email.
+- `htmlBody`: HTML content, if available.
+- `attachments`: List of document references.
+- `receivedDateTime`: Date and time the email was received.
 
 :::note
-As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+As of the 8.8 release, angle brackets (`<` and `>`) are preserved in `messageId`.
 :::
 
 :::note
-Starting from version 8.7.0, the outbound email connector supports sending Camunda documents as attachments.
-
-For example, the **Attachment** field in the properties panel may look as `=[ document1, document2]`.
-
-See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
+Starting with version 8.7, the outbound email connector supports sending Camunda documents as attachments.  
+See [document handling](/components/document-handling/getting-started.md) for details.
 :::
 
-#### Output
-
-Below is an example of the JSON response returned when a specific email is read:
+Example response:
 
 ```json
 {
@@ -183,14 +166,8 @@ Below is an example of the JSON response returned when a specific email is read:
   "plainTextBody": "Any text content",
   "htmlBody": "<html>Any Html Content</html>",
   "headers": [
-    {
-      "key": "header1",
-      "value": "example"
-    },
-    {
-      "key": "header2",
-      "value": "test"
-    }
+    { "key": "header1", "value": "example" },
+    { "key": "header2", "value": "test" }
   ],
   "attachments": [
     {
@@ -208,29 +185,25 @@ Below is an example of the JSON response returned when a specific email is read:
 }
 ```
 
-### Delete Email
+### Delete email
 
-Delete an email from a specified folder, using the email's unique `messageId`.
+Delete an email by `messageId`.
 
 #### Parameters
 
-| Parameter   | Description                                                                                                                                                                                                                                    |
-| :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `MessageId` | The identifier of the email message to delete.                                                                                                                                                                                                 |
-| `Folder`    | (Optional) Specifies the folder from which the email should be deleted. If this parameter is not supplied, the default folder is assumed to be `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`) |
+| Parameter   | Description                                                                             |
+| ----------- | --------------------------------------------------------------------------------------- |
+| `MessageId` | Identifier of the email to delete.                                                      |
+| `Folder`    | _(Optional)_ Folder to delete from. Defaults to `INBOX`. Use `.` or `/` for subfolders. |
 
 #### Output
 
-The task provides a JSON object in the response, indicating the outcome of the deletion request:
+Returns a JSON object indicating the deletion result:
 
-- `deleted`: A boolean value that signifies whether the email was successfully deleted (true) or not (false).
-- `messageId`: Reiterates the `messageId` of the email that was targeted for deletion.
+- `deleted`: Boolean indicating whether the email was successfully deleted.
+- `messageId`: The identifier of the deleted email.
 
-:::note
-As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
-:::
-
-The following is an example of the JSON response confirming successful email deletion:
+Example response:
 
 ```json
 {
@@ -239,49 +212,38 @@ The following is an example of the JSON response confirming successful email del
 }
 ```
 
-### Search Emails
+### Search emails
 
-Enable users to perform advanced searches within an email inbox by constructing a criteria-based query using a JSON
-object. Search supports complex queries that can combine multiple conditions using logical operators.
+Perform advanced searches in an email inbox using a criteria-based JSON object. Supports combining multiple conditions with logical operators.
 
 #### Parameters
 
-A search query is represented as a JSON object. Below is an example of a JSON object that represents a search criteria
-using an AND and OR operator to combine multiple conditions:
+| Parameter  | Description                                                                        |
+| ---------- | ---------------------------------------------------------------------------------- |
+| `Folder`   | _(Optional)_ Folder to search. Defaults to `INBOX`. Use `.` or `/` for subfolders. |
+| `Criteria` | JSON object defining the search conditions.                                        |
 
-- `Folder`: (Optional) Specifies the folder from which the email should be deleted. If this parameter is not supplied,
-  the default folder is assumed to be `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or
-  `inside.folder`)
-- `Criteria`: _See below_
+Example complex search query:
 
 ```json
 {
   "operator": "AND",
   "criteria": [
-    {
-      "field": "FROM",
-      "value": "example@camunda.com"
-    },
+    { "field": "FROM", "value": "example@camunda.com" },
     {
       "operator": "OR",
       "criteria": [
-        {
-          "field": "SUBJECT",
-          "value": "urgent"
-        },
-        {
-          "field": "SUBJECT",
-          "value": "important"
-        }
+        { "field": "SUBJECT", "value": "urgent" },
+        { "field": "SUBJECT", "value": "important" }
       ]
     }
   ]
 }
 ```
 
-This example query returns emails from "example@camunda.com" with a subject containing either "urgent" or "important".
+This query returns emails from `example@camunda.com` with subjects containing either "urgent" or "important".
 
-A simpler query without logical operators might look like the following example:
+Simpler query without logical operators:
 
 ```json
 {
@@ -290,38 +252,29 @@ A simpler query without logical operators might look like the following example:
 }
 ```
 
-Search supports the following logical operators:
+### Supported logical operators
 
-- **AND**: Returns emails that match all the specified criteria.
+- **AND**: Returns emails that match all specified criteria.
 - **OR**: Returns emails that match any of the specified criteria.
 
-The following email fields can be used to set search criteria:
+### Supported fields for search
 
-- **BODY**: The content of the email body.
-- **SUBJECT**: The subject line of the email.
-- **FROM**: The email address of the sender.
-
-:::note
-
-When using an operator such as AND or OR, you must also define a criteria array. This array contains the individual
-conditions that the search will evaluate against the emails. Each condition within the criteria array is itself a JSON
-object with a field and a value.
-
-- If an operator is set, the criteria array must also be defined.
-- Each criterion within the criteria array is applied to the specified field based on the value associated with it.
-
-:::
-
-#### Output
-
-- `subject`: The email subject line.
-- `messageId`: The identifier of the email message that was attempted to be deleted.
+- **BODY**: Content of the email body.
+- **SUBJECT**: Subject line of the email.
+- **FROM**: Sender’s email address.
 
 :::note
-As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+When using **AND** or **OR**, a criteria array must be defined. Each criterion is a JSON object with `field` and `value`.
 :::
 
-The following is an example returned response:
+### Output
+
+The search returns a JSON array of matching emails. Each object includes:
+
+- `messageId`: Identifier of the email message.
+- `subject`: Subject of the email.
+
+Example response:
 
 ```json
 [
@@ -330,32 +283,27 @@ The following is an example returned response:
 ]
 ```
 
-### Move Email
+### Move email
 
-Enable users to transfer an email from one folder to another, streamlining inbox organization. This is only available
-when using the IMAP protocol.
+Move an email from one folder to another using IMAP.
 
 #### Parameters
 
-| Parameter       | Description                                                                                                                                                                                                                                                     |
-| :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `MessageId`     | The identifier of the email that needs to be moved.                                                                                                                                                                                                             |
-| `Source folder` | (Optional) The folder from which the email will be moved. If not specified, the default is INBOX. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`)                                                                        |
-| `Target folder` | The destination folder where the email is placed. To specify a new folder or a nested hierarchy, use `.` or `/` separated path (for example, 'Archive/test' or 'Projects.2023.January'). The system automatically creates any non-existent folders in the path. |
+| Parameter       | Description                                                                                            |
+| --------------- | ------------------------------------------------------------------------------------------------------ |
+| `MessageId`     | Identifier of the email to move.                                                                       |
+| `Source folder` | _(Optional)_ Folder to move from. Defaults to `INBOX`. Use `.` or `/` for subfolders.                  |
+| `Target folder` | Destination folder. Use `.` or `/` for nested folders. Non-existent folders are created automatically. |
 
 #### Output
 
-Upon successful completion of the move operation, the response contains a JSON object with the following details:
+Returns a JSON object with move details:
 
-- `messageId`: The `messageId` of the email that was moved.
-- `from`: The source folder from which the email was moved.
-- `to`: The target folder to which the email has been moved.
+- `messageId`: Identifier of the moved email.
+- `from`: Source folder.
+- `to`: Target folder.
 
-:::note
-As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
-:::
-
-The example below shows the expected JSON response after an email has been successfully moved:
+Example response:
 
 ```json
 {
@@ -365,56 +313,46 @@ The example below shows the expected JSON response after an email has been succe
 }
 ```
 
-### Send Email
+### Send email
 
-Allow users to send an email from the connected email account. This is only available when using the SMTP protocol.
+Send an email using SMTP.
 
 #### Parameters
 
-| Parameter            | Description                                                                                                                                                                                                                                                                                   |
-| :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `From`               | Specify the sender's email address(es). This can be a single email address (for example, 'example@camunda.com'), a comma-separated list of addresses, or a Friendly Enough Expression Language (FEEL) expression returning a list of email addresses (for example, =["example@camunda.com"]). |
-| `To`                 | Defines the email recipient(s). Similar to the `From` parameter, this can be a single email address, a comma-separated list, or a FEEL expression (for example, =["example@camunda.com"]).                                                                                                    |
-| `Cc`                 | (Optional) Specify the email address(es) to include in the **Carbon Copy (CC)** field. The format is the same as the **From** and **To** fields, and can include a single address, a list, or a FEEL expression.                                                                              |
-| `Bcc`                | (Optional) Specify the email address(es) to include in the **Blind Carbon Copy (BCC)** field. It follows the same format as the **CC** field and ensures that BCC recipients are not visible to other recipients.                                                                             |
-| `Headers`            | Feel expression containing all the desired headers to be added to the email's headers. cf. `{ "customHeaders" : "new header value" }`                                                                                                                                                         |
-| `Subject`            | The email subject line.                                                                                                                                                                                                                                                                       |
-| `Content Type`       | The content type of the email.                                                                                                                                                                                                                                                                |
-| `Email Text Content` | The text content of the email. This must only be provided if the `Content Type` is `PLAIN` or `HTML & PlainText`.                                                                                                                                                                             |
-| `Html Text Content`  | The HTML content of the email. This must only be provided if the `Content Type` is `HTML` or `HTML & PlainText`.                                                                                                                                                                              |
-| `Attachment`         | The document reference, either for a single document or as a list for multiple documents.                                                                                                                                                                                                     |
+| Parameter            | Description                                                            |
+| -------------------- | ---------------------------------------------------------------------- |
+| `From`               | Sender email(s). Can be single, comma-separated, or a FEEL expression. |
+| `To`                 | Recipient email(s). Same format as `From`.                             |
+| `Cc`                 | _(Optional)_ CC recipients.                                            |
+| `Bcc`                | _(Optional)_ BCC recipients.                                           |
+| `Headers`            | FEEL expression for custom headers.                                    |
+| `Subject`            | Email subject line.                                                    |
+| `Content Type`       | Email content type.                                                    |
+| `Email Text Content` | Plain text content (required for `PLAIN` or `HTML & PlainText`).       |
+| `Html Text Content`  | HTML content (required for `HTML` or `HTML & PlainText`).              |
+| `Attachment`         | Single or list of document references.                                 |
 
 :::info
-To learn more about Friendly Enough Expression Language (FEEL) expression,
-see [what is FEEL?](/components/modeler/feel/what-is-feel.md).
+See [what is FEEL?](/components/modeler/feel/what-is-feel.md) for more information on FEEL expressions.
 :::
 
 #### Output
 
-Upon successfully sending the email, the following JSON response is returned:
+Returns a JSON object with email sending status:
 
-- `subject`: Echoes back the subject of the sent email.
-- `sent`: A boolean value indicating the success status of the email being sent (true for success, false for failure).
-- `messageId`: A unique identifier for the email message.
+- `subject`: Subject of the sent email.
+- `sent`: Boolean indicating success (`true`) or failure (`false`).
+- `messageId`: Unique identifier for the email.
 
-:::note
-As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
-:::
+Example response:
 
-The following is an example of a successful send email operation:
-
-```json
+```json id="send-email-example"
 {
   "subject": "Example Subject",
   "sent": true,
   "messageId": "<messageId>"
 }
 ```
-
-In this response:
-
-- `sent: true` confirms that the email with the specified subject "Example Subject" was successfully sent.
-- `sent: false` indicates the email failed to send.
 
 ## Troubleshooting
 
