@@ -135,7 +135,18 @@ module.exports = {
                 id: "components/concepts/user-task-listeners",
               },
               items: [
-                "components/concepts/global-user-task-listeners",
+                {
+                  type: "category",
+                  label: "Global user task listeners",
+                  link: {
+                    type: "doc",
+                    id: "components/concepts/global-user-task-listeners",
+                  },
+                  items: [
+                    "components/concepts/global-user-task-listeners/configuration",
+                    "components/concepts/global-user-task-listeners/access-control",
+                  ],
+                },
                 "components/concepts/listen-to-user-tasks",
               ],
             },
@@ -2128,7 +2139,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter",
-                    "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices",
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter",
                   ],
