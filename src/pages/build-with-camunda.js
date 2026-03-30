@@ -8,6 +8,7 @@ import K8sSvgIcon from "../components/CamundaSelfManaged/icons/kubernetes.svg";
 import DockerSvgIcon from "../components/CamundaSelfManaged/icons/docker.svg";
 import AwsSvgIcon from "../components/CamundaSelfManaged/icons/aws.svg";
 import GcpSvgIcon from "../components/CamundaSelfManaged/icons/gcp.svg";
+import IconAgenticImg from "../../docs/components/assets/icon-agentic.png";
 
 /* ─── Icon components ─── */
 
@@ -96,18 +97,45 @@ function HelmIcon() {
 
 function ModelerIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"
+    <svg width="24" height="24" viewBox="0 0 501.65 607.67" fill="none">
+      <circle
+        cx="69.06"
+        cy="266.75"
+        r="41.09"
         fill="#78a9ff"
-        opacity="0.2"
-      />
-      <path
-        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
         stroke="#78a9ff"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-        fill="none"
+        strokeMiterlimit="10"
+        strokeWidth="4"
+      />
+      <circle
+        cx="432.59"
+        cy="266.75"
+        r="41.09"
+        fill="#78a9ff"
+        stroke="#78a9ff"
+        strokeMiterlimit="10"
+        strokeWidth="4"
+      />
+      <rect
+        x="141.48"
+        y="225.66"
+        width="82.19"
+        height="82.19"
+        fill="#78a9ff"
+        stroke="#78a9ff"
+        strokeMiterlimit="10"
+        strokeWidth="4"
+      />
+      <rect
+        x="265.88"
+        y="225.66"
+        width="82.19"
+        height="82.19"
+        transform="translate(-98.71 295.2) rotate(-45)"
+        fill="#78a9ff"
+        stroke="#78a9ff"
+        strokeMiterlimit="10"
+        strokeWidth="4"
       />
     </svg>
   );
@@ -115,13 +143,13 @@ function ModelerIcon() {
 
 function ConsoleIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="3" stroke="#78a9ff" strokeWidth="1.5" />
+    <svg width="24" height="24" viewBox="0 0 501.65 607.67" fill="none">
       <path
-        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"
+        d="M391.36,309.93l42.33.14v-76.39l-41.88-.09c-3.23-11.96-7.91-23.38-14.02-34.14l29.54-29.2-53.99-54.26-29.58,29.2c-5.43-3.13-11-5.91-16.63-8.27-5.68-2.36-11.59-4.4-17.65-6.05l.12-35.2.02-6.01h-77.19l.02,3.33.21,37.49c-12,3.2-23.49,7.84-34.31,13.93l-28.61-28.7-54.58,53.69,28.63,28.73c-3.14,5.37-5.91,10.9-8.29,16.52-2.36,5.55-4.39,11.4-6.07,17.44l-38.86-.21h-2.61s0,76.31,0,76.31l5.52.03,35.49.22c3.2,12.01,7.91,23.45,14.02,34.21l-30.2,29.72,54.03,54.24,30.18-29.72c5.5,3.17,11.09,5.94,16.7,8.29,5.77,2.4,11.66,4.42,17.61,6.05v43.14l76.73-.05.02-42.68c12.09-3.2,23.61-7.88,34.45-14l30.18,30.02,54.6-53.6-30.27-30.15c3.09-5.3,5.86-10.83,8.25-16.49,2.39-5.64,4.43-11.49,6.09-17.47h0ZM250.82,373.08c-55.83,0-101.08-45.26-101.08-101.08s45.26-101.08,101.08-101.08,101.08,45.26,101.08,101.08-45.26,101.08-101.08,101.08h0Z"
+        fill="#78a9ff"
         stroke="#78a9ff"
-        strokeWidth="1.5"
-        fill="none"
+        strokeMiterlimit="10"
+        strokeWidth="4"
       />
     </svg>
   );
@@ -158,21 +186,13 @@ function OperateIcon() {
 
 function OptimizeIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M3 20l4-6 4 3 5-7 5 5"
+    <svg width="24" height="24" viewBox="0 0 501.65 607.67" fill="none">
+      <polygon
+        points="472.37 88.6 309.05 101.77 340.68 147.76 266.25 203.84 255.71 212.4 256.37 222.94 270.39 391.09 179.98 380.99 177.35 380.99 175.37 381.64 40.38 455.4 178.38 396.35 282.06 417.86 296.54 421.16 296.54 404.69 300.22 234.18 370.54 191.16 401.91 236.77 472.37 88.6"
+        fill="#78a9ff"
         stroke="#78a9ff"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-      <path
-        d="M17 8h4v4"
-        stroke="#78a9ff"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        strokeMiterlimit="10"
+        strokeWidth="4"
       />
     </svg>
   );
@@ -216,18 +236,11 @@ function TasklistIcon() {
 
 function ConnectorsIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <svg width="24" height="24" viewBox="0 0 501.65 607.67" fill="none">
       <path
-        d="M15 7h3a5 5 0 010 10h-3M9 17H6a5 5 0 010-10h3"
-        stroke="#78a9ff"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M8 12h8"
-        stroke="#78a9ff"
-        strokeWidth="1.5"
-        strokeLinecap="round"
+        d="M439.6,229.32c-18.39,0-34.08,11.71-40.05,27.99h-94.5c-6.44-23.89-28.34-41.46-54.22-41.46s-47.78,17.57-54.22,41.46h-94.39c-5.97-16.39-21.66-27.99-40.05-27.99-23.66,0-42.74,19.09-42.74,42.63s19.09,42.63,42.63,42.63c18.39,0,34.08-11.71,40.05-27.99h94.5c6.44,23.89,28.34,41.46,54.22,41.46s47.78-17.57,54.22-41.46h94.5c5.97,16.39,21.66,27.99,40.05,27.99,23.54,0,42.63-19.09,42.63-42.63s-19.09-42.63-42.63-42.63h0ZM250.83,301.22c-16.16,0-29.16-13.12-29.16-29.16s13.12-29.28,29.16-29.28,29.16,13.12,29.16,29.16c.12,16.16-13,29.28-29.16,29.28h0Z"
+        fill="#78a9ff"
+        strokeWidth="0"
       />
     </svg>
   );
@@ -235,22 +248,48 @@ function ConnectorsIcon() {
 
 function IdentityIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <svg width="24" height="24" viewBox="0 0 501.65 607.67" fill="none">
       <path
-        d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"
+        d="M244.8,248.04c30.21,0,54.68-24.58,54.68-54.68s-24.58-54.68-54.68-54.68-54.68,24.58-54.68,54.68,24.46,54.68,54.68,54.68h0Z"
+        fill="#78a9ff"
         stroke="#78a9ff"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
+        strokeMiterlimit="10"
+        strokeWidth="4"
       />
-      <circle
-        cx="12"
-        cy="7"
-        r="4"
+      <polygon
+        points="310.64 455.7 178.96 455.7 178.96 297.3 195.53 274.76 294.07 274.76 310.64 297.3 310.64 455.7"
+        fill="#78a9ff"
         stroke="#78a9ff"
-        strokeWidth="1.5"
-        fill="none"
+        strokeMiterlimit="10"
+        strokeWidth="4"
+      />
+      <path
+        d="M301.28,134.06c7.1-21.87,27.73-37.77,51.97-37.77,30.21,0,54.68,24.58,54.68,54.68s-24.58,54.68-54.68,54.68c-9.7,0-18.71-2.59-26.72-6.99.11-1.8.23-3.49.23-5.3,0-23.34-9.81-44.42-25.48-59.3h0Z"
+        fill="#78a9ff"
+        stroke="#78a9ff"
+        strokeMiterlimit="10"
+        strokeWidth="4"
+      />
+      <path
+        d="M81.67,150.97c0-30.21,24.58-54.68,54.68-54.68,24.24,0,44.87,15.9,51.97,37.77-15.67,14.99-25.48,35.96-25.48,59.3,0,1.8.11,3.61.23,5.3-7.89,4.4-17.02,6.99-26.72,6.99-30.1,0-54.68-24.58-54.68-54.68Z"
+        fill="#78a9ff"
+        stroke="#78a9ff"
+        strokeMiterlimit="10"
+        strokeWidth="4"
+      />
+      <path
+        d="M419.09,254.92v158.39h-81.17v-124.91l-29.99-40.92h-1.58c4.06-4.62,7.55-9.7,10.6-15.11h85.68l16.46,22.55h0Z"
+        fill="#78a9ff"
+        stroke="#78a9ff"
+        strokeMiterlimit="10"
+        strokeWidth="4"
+      />
+      <path
+        d="M151.68,413.31h-81.17v-158.39l16.57-22.55h85.68c2.93,5.41,6.54,10.48,10.6,15.11h-1.69l-29.99,40.92v124.91h0Z"
+        fill="#78a9ff"
+        stroke="#78a9ff"
+        strokeMiterlimit="10"
+        strokeWidth="4"
       />
     </svg>
   );
@@ -903,7 +942,7 @@ Available skills:
                   >
                     <ModelerIcon />
                     <strong>Modeler</strong>
-                    <span>Design BPMN, DMN, and Forms</span>
+                    <span>Design and model BPMN, DMN, and Forms</span>
                   </Link>
                   <Link
                     to={useBaseUrl(
@@ -1085,23 +1124,16 @@ Available skills:
               )}
               className={styles.agenticCard}
             >
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="9"
-                  stroke="#78a9ff"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <path
-                  d="M12 8v4l3 3"
-                  stroke="#78a9ff"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <img
+                src={IconAgenticImg}
+                alt="Agentic orchestration"
+                width="40"
+                height="40"
+                style={{
+                  filter:
+                    "brightness(0) saturate(100%) invert(62%) sepia(52%) saturate(1041%) hue-rotate(189deg) brightness(101%) contrast(101%)",
+                }}
+              />
               <h4>Agentic orchestration</h4>
               <p>
                 Orchestrate AI agents alongside human tasks and system
@@ -1114,26 +1146,16 @@ Available skills:
               )}
               className={styles.agenticCard}
             >
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                <rect
-                  x="3"
-                  y="6"
-                  width="18"
-                  height="12"
-                  rx="2"
-                  stroke="#78a9ff"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <circle cx="9" cy="12" r="1.5" fill="#78a9ff" />
-                <circle cx="15" cy="12" r="1.5" fill="#78a9ff" />
-                <path
-                  d="M8 3v3M16 3v3"
-                  stroke="#78a9ff"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
+              <img
+                src={IconAgenticImg}
+                alt="Agentic orchestration"
+                width="40"
+                height="40"
+                style={{
+                  filter:
+                    "brightness(0) saturate(100%) invert(62%) sepia(52%) saturate(1041%) hue-rotate(189deg) brightness(101%) contrast(101%)",
+                }}
+              />
               <h4>About AI agents</h4>
               <p>
                 Build agents that reason, plan, and act using LLMs within your
