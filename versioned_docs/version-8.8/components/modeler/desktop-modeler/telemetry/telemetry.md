@@ -194,7 +194,7 @@ Example event:
 }
 ```
 
-## Task testing events
+### Task testing events
 
 Task testing events are sent when using the [task testing](../task-testing.md) feature:
 
@@ -224,3 +224,28 @@ Variables panel events are sent on different interactions with the **[Variables]
 - User copied a variable path or value via the context menu.
 
 These events do not include any additional payload data.
+
+### Connection event
+
+The `Connection Event` is sent in the following situations:
+
+- Modeler fails to connect to a cluster configured via [connection manager](../connect-to-camunda-8.md)
+- Modeler connects to a configured cluster
+
+The `Connection Event` has the following properties:
+
+- `success`: true or false
+- `targetType`: SaaS or Self-Managed
+- `isLocal`: true or false
+- `reason`: error reason or null
+
+Example connection event:
+
+```json
+{
+  "success": true,
+  "targetType": "Self-Managed",
+  "isLocal": true,
+  "reason": null
+}
+```
