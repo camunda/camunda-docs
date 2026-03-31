@@ -2,13 +2,13 @@
 id: basic-authentication
 sidebar_label: Basic authentication
 title: Set up the Helm chart with basic authentication
-description: Learn how to configure and manage basic authentication for Camunda 8 Self-Managed deployments using Helm chart.
+description: Learn how to configure and manage Basic authentication for Camunda 8 Self-Managed deployments using Helm chart.
 ---
 
-By default, Camunda 8 Self-Managed uses basic authentication for all components deployed through the Helm chart. This method requires no additional configuration and is ideal for local or development environments.
+By default, Camunda 8 Self-Managed uses Basic authentication for all components deployed through the Helm chart. This method requires no additional configuration and is ideal for local or development environments.
 
 :::note
-Because basic authentication is enabled by default, components that depend on Management Identity (which implements OIDC/OAuth authentication) are disabled by default. These components include:
+Because Basic authentication is enabled by default, components that depend on Management Identity (which implements OIDC/OAuth authentication) are disabled by default. These components include:
 
 - Management Identity
 - Console
@@ -19,7 +19,7 @@ Because basic authentication is enabled by default, components that depend on Ma
 
 ## Enable Orchestration Cluster and Connectors
 
-The Orchestration Cluster and Connectors are enabled by default with basic authentication. No additional configuration is required—simply deploy the Helm chart and these components will be available.
+The Orchestration Cluster and Connectors are enabled by default with Basic authentication. No additional configuration is required—simply deploy the Helm chart and these components will be available.
 
 ### Default users
 
@@ -45,28 +45,28 @@ Log in with the default credentials: username `demo`, password `demo`.
 
 ## Enable additional components
 
-The following components do not support basic authentication and require Management Identity with an OIDC provider:
+The following components do not support Basic authentication and require Management Identity with an OIDC provider:
 
 - Console
 - Web Modeler
 - Optimize
 
-You can still enable these components alongside a basic auth Orchestration Cluster by using a hybrid authentication setup:
+You can still enable these components alongside a Basic authentication Orchestration Cluster by using a hybrid authentication setup:
 
 - **Orchestration Cluster and Connectors** use basic authentication
 - **Console, Web Modeler, Optimize, and Management Identity** use OIDC
 
 This guide shows how to configure hybrid authentication with internal Keycloak. You can also apply this approach with other OIDC setups, such as [external Keycloak](./external-keycloak.md) or an [external OIDC provider](./external-oidc-provider.md)
 
-When deploying process models from Web Modeler to a basic auth Orchestration Cluster, you will be prompted to enter credentials in the deployment dialog.
+When deploying process models from Web Modeler to a Basic authentication Orchestration Cluster, you will be prompted to enter credentials in the deployment dialog.
 
 ### Configuration steps
 
 Follow the [internal Keycloak guide](./internal-keycloak.md) with these modifications:
 
-1. **Simplify the secret**: Omit the `identity-connectors-client-token` and `identity-orchestration-client-token` keys—they are not needed when using basic auth. See [Create a secret](./internal-keycloak.md#create-a-secret).
+1. **Simplify the secret**: Omit the `identity-connectors-client-token` and `identity-orchestration-client-token` keys—they are not needed when using Basic authentication. See [Create a secret](./internal-keycloak.md#create-a-secret).
 
-2. **Set basic auth for the Orchestration Cluster and Connectors**:
+2. **Set Basic authentication for the Orchestration Cluster and Connectors**:
 
 ```yaml
 orchestration:

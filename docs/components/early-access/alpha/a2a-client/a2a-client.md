@@ -38,3 +38,7 @@ The A2A Client includes three connectors.
 Together, these connectors enable seamless integration with A2A-compliant agents, allowing you to build multi-agent workflows within Camunda processes.
 
 <p><a href="./a2a-client-usage-patterns/" class="link-arrow">Explore common A2A Client usage patterns</a></p>
+
+## HTTP proxy support
+
+In Self-Managed environments, the A2A Client connector supports HTTP proxy configuration, including [plain proxy variables](/self-managed/components/connectors/http-proxy-configuration.md#plain-proxy-variables). See the [AI Agent connector proxy configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#http-proxy-configuration) for details, including how to disable proxy support.

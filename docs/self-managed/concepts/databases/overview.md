@@ -11,6 +11,17 @@ This storage layer can use either a document-store backend or a relational datab
 For an architectural explanation of how secondary storage fits into Camunda 8, see the  
 [secondary storage overview](/self-managed/concepts/secondary-storage/index.md).
 
+## App database support
+
+| App                   | RDBMS | Non-SQL |
+| --------------------- | ----- | ------- |
+| Orchestration Cluster | Yes   | Yes     |
+| Optimize              | No    | Yes     |
+| Web Modeler           | Yes   | No      |
+| Management Identity   | Yes   | No      |
+
+Use this matrix as a quick decision aid when planning your deployment topology.
+
 ## Document-store backends
 
 Camunda supports document-store backends such as Elasticsearch and OpenSearch.

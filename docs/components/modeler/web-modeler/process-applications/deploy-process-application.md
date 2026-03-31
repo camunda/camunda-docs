@@ -26,7 +26,7 @@ To learn more about using Play for validation, see [Play mode for rapid validati
 
 ### Before deploying a process application
 
-- If the target cluster has [authorizations](/components/identity/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
+- If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
 
 Once validation is complete, deploy your process application to cluster stages in your [development lifecycle](./process-application-pipeline.md), such as testing, staging, or production. For example, deploy to your testing cluster to run automated tests or make it available for testing.
 
@@ -63,7 +63,7 @@ To run your process application:
 1. Select the **Implement** tab.
 1. Select **Run** to open the **Start instance** modal.
    <p><img src={RunProcessApplicationImg} alt="Run a process application" /></p>
-1. Select **Run** to start a new instance.<p><ul><li>Before the process instance starts, all resources are redeployed if required so the new instance uses their latest state.</li><li>After the process instance starts, you will receive a notification with a link to the process instance view in [Operate](../../../operate/operate-introduction.md). Open this link to monitor the process instance. If the target cluster has [authorizations](/components/identity/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:<ul><li>`READ_PROCESS_DEFINITION` and `READ_PROCESS_INSTANCE` permissions on the `PROCESS_DEFINITION` resource type</li><li>`operate` permission to the `COMPONENT` resource type</li></ul></li></ul></p>
+1. Select **Run** to start a new instance.<p><ul><li>Before the process instance starts, all resources are redeployed if required so the new instance uses their latest state.</li><li>After the process instance starts, you will receive a notification with a link to the process instance view in [Operate](../../../operate/operate-introduction.md). Open this link to monitor the process instance. If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:<ul><li>`READ_PROCESS_DEFINITION` and `READ_PROCESS_INSTANCE` permissions on the `PROCESS_DEFINITION` resource type</li><li>`operate` permission to the `COMPONENT` resource type</li></ul></li></ul></p>
 
 :::note
 Single-file deployment is not supported in a process application. If you select **Deploy** or **Run** in any diagram other than the main process, you are prompted to open the main process for deployment.

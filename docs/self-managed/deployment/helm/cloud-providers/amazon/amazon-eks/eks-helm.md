@@ -52,7 +52,7 @@ In addition to the infrastructure diagram provided in the [Terraform setup guide
 
 The architecture includes the following core components:
 
-- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Admin)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
 
 To demonstrate how to deploy with a custom domain, the following stack is also included:
@@ -220,7 +220,7 @@ For easy and reproducible installations, we will use yaml files to configure the
 Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
 
 :::note Database initialization prerequisite
-If you're using an external Aurora PostgreSQL database, you must create the management component databases (Management Identity and Web Modeler) before installing the Helm chart. This initialization step is covered in the infrastructure setup guides:
+If you're using an external Aurora PostgreSQL database, you must create the individual component databases (Identity and Web Modeler) before installing the Helm chart. This initialization step is covered in the infrastructure setup guides:
 
 - **Terraform**: See [Configure the database and associated access](./terraform-setup.md#configure-the-database-and-associated-access) in the Terraform setup guide.
 - **eksctl**: See [Create the databases](./eksctl.md#create-the-databases) in the eksctl guide.
@@ -461,9 +461,9 @@ There are different ways to configure the mapping within Amazon OpenSearch Servi
   - Replace `OPENSEARCH_HOST` with your OpenSearch endpoint URL.
   - Replace `OPENSEARCH_ROLE_ARN` with the IAM role name created by Terraform, which is output by the `opensearch_role` module.
 
-  :::note Security of basic auth usage
+  :::note Security of Basic authentication usage
 
-  **This example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled.** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
+  **This example uses Basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled.** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
 
   :::
 
@@ -503,13 +503,13 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `https://${CAMUNDA_DOMAIN}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
-7. In the Identity navigation menu, select **Roles**.
-8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+6. Open the Orchestration Cluster Admin in your browser at `https://${CAMUNDA_DOMAIN}/admin` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Admin navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/admin/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
 10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
 
-This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/admin/role.md#manage-clients).
 
 </TabItem>
 
@@ -544,13 +544,13 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `http://localhost:8080/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
-7. In the Identity navigation menu, select **Roles**.
-8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+6. Open the Orchestration Cluster Admin in your browser at `http://localhost:8080/admin` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Admin navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/admin/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
 10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
 
-This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/admin/role.md#manage-clients).
 
 <PortForwardServices />
 

@@ -44,7 +44,7 @@ The Cluster Metrics endpoint exposes the application-level metrics produced by t
 
 The following constraints apply:
 
-- The Cluster Metrics endpoint uses Basic Authentication only.
+- The Cluster Metrics endpoint uses Basic authentication only.
 - Metric names and labels depend on the Camunda version running in your cluster.
 - Metric and dashboard compatibility between Camunda versions is not guaranteed.
 

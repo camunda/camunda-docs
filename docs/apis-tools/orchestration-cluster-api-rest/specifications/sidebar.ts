@@ -628,6 +628,12 @@ const sidebar: SidebarsConfig = {
           label: "Get time-series metrics for a job type",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-job-error-statistics",
+          label: "Get error metrics for a job type",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -1048,6 +1054,12 @@ const sidebar: SidebarsConfig = {
           label: "Get usage metrics",
           className: "api-method get",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-system-configuration",
+          label: "System configuration (alpha)",
+          className: "api-method get",
+        },
       ],
     },
     {
@@ -1256,6 +1268,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/complete-user-task",
           label: "Complete user task",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-user-task-effective-variables",
+          label: "Search user task effective variables",
           className: "api-method post",
         },
         {

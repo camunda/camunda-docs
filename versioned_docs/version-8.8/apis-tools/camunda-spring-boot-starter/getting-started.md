@@ -117,9 +117,9 @@ Set up your connection and authentication in `application.yaml` as shown below. 
 Choose the authentication method and gRPC/REST address for your environment:
 
 <Tabs groupId="authentication" defaultValue="no-auth" queryString values={[
-{label: 'No Authentication', value: 'no-auth' },
-{label: 'Basic Authentication', value: 'basic-auth' },
-{label: 'OIDC-based Authentication', value: 'oidc' },
+{label: 'No authentication', value: 'no-auth' },
+{label: 'Basic authentication', value: 'basic-auth' },
+{label: 'OIDC-based authentication', value: 'oidc' },
 ]}>
 
 <TabItem value="no-auth">

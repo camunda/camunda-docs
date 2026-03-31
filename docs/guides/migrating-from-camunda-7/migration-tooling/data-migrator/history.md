@@ -12,7 +12,7 @@ Use the History Data Migrator to copy process instance audit data to Camunda 8.
 
 ## About history migration
 
-Process instances leave traces, referred to as [History in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/). These are audit logs of when a process instance was started, what path it took, and so on.
+Process instances leave traces, referred to as [history in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/). These are audit logs of when a process instance was started, what path it took, and so on.
 
 It is important to note that audit data can exist for ended processes from the past, but is also available for currently still running process instances, as those process instances also left traces up to the current wait state.
 
@@ -27,11 +27,12 @@ During migration, the History Data Migrator sets a `legacyId` variable in the pr
 
 The following requirements and limitations apply:
 
-- Camunda 8 is up and running and Camunda 7 has been stopped.
+- Camunda 7 must be stopped, and the Camunda 8 database must be reachable. Zeebe can be stopped during history migration.
 - The History Data Migrator must be able to access the Camunda 7 database.
 - The History Data Migrator can migrate data to Camunda 8 only when a relational database (RDBMS) is used.
 - The History Data Migrator must be able to access the Camunda 8 database. As a result, you can run this tool only in a self-managed environment.
-- If you manipulate Camunda 7 data between History Data Migrator runs, data consistency might be affected. See [Auto-cancellation of active instances](#auto-cancellation-of-active-instances) for details.
+- If you manipulate Camunda 7 data between History Data Migrator runs, data consistency might be affected. See [auto-cancellation of active instances](#auto-cancellation-of-active-instances) for details.
+- **History cleanup during migration**: If you keep Camunda 8 running and history cleanup is enabled during history migration, and cleanup dates are due (for example, past removal times from Camunda 7 or negative auto-cancel TTL values), Camunda 8 history cleanup will run concurrently with migration. This may result in parent entities being cleaned up before their children are migrated, causing child entities to be skipped. See [history cleanup](#history-cleanup) for mitigation strategies.
 - If you migrate runtime and history data for an active Camunda 7 process instance, two separate records will appear in Operate:
   1. **Fresh runtime instance**: The migrated active process instance running on Zeebe. This instance continues execution from the last wait state before migration and produces new history going forward. It does not include historical data from before the migration.
   2. **Auditable instance**: A canceled historic process instance that preserves the audit trail (history data) up to the last wait state pre-migration. This instance appears as canceled and serves only as an audit record of what happened in Camunda 7.
@@ -57,6 +58,12 @@ The following requirements and limitations apply:
 # List skipped entities for specific types
 ./start.sh --history --list-skipped HISTORY_PROCESS_INSTANCE HISTORY_USER_TASK
 
+# List the Camunda 7 ID and Camunda 8 key for each migrated entity
+./start.sh --history --list-migrated
+
+# List the Camunda 7 ID and Camunda 8 key for specific entity types
+./start.sh --history --list-migrated HISTORY_PROCESS_INSTANCE
+
 # Retry skipped history entities
 ./start.sh --history --retry-skipped
 ```
@@ -74,6 +81,12 @@ start.bat --history --list-skipped
 
 # List skipped entities for specific types
 start.bat --history --list-skipped HISTORY_PROCESS_INSTANCE HISTORY_USER_TASK
+
+# List the Camunda 7 ID and Camunda 8 key for each migrated entity
+start.bat --history --list-migrated
+
+# List mappings for specific entity types
+start.bat --history --list-migrated HISTORY_PROCESS_INSTANCE
 
 # Retry skipped history entities
 start.bat --history --retry-skipped
@@ -104,19 +117,6 @@ start.bat --history --retry-skipped
 - All other `tenantId`s will be migrated as-is.
 - For details, see [multi-tenancy](/components/concepts/multi-tenancy.md#tenant-identifier) in Camunda 8.
 
-## Cleanup behavior for completed instances
-
-Instances that were already completed in Camunda 7 retain their original cleanup dates:
-
-- If a `removalTime` exists in Camunda 7, it is migrated as-is for process and decision instances.
-  Camunda 8 uses this date for history cleanup. The child entities (for example, user tasks, variables, flow nodes) will be deleted according to the root instance's cleanup date.
-- If no `removalTime` exists and the instance is completed, no cleanup date is set.
-- Auto-cancel cleanup configuration **only applies to instances that were active or suspended** in Camunda 7.
-
-:::note
-All migrated records are assigned `partitionId=1` so that the RDBMS exporter on partition 1 can perform history cleanup for migrated data.
-:::
-
 ## Auto-cancellation of active instances
 
 When migrating history data, the Data Migrator automatically handles **active or suspended** process instances from Camunda 7 by marking them as **canceled** in Camunda 8. This applies to:
@@ -130,13 +130,134 @@ Auto-canceled entities are assigned the migration timestamp as their end date.
 
 By default, auto-canceled instances receive a cleanup date calculated as:
 
-```
+```text
 cleanup_date = end_date + 6 months
 ```
 
-This ensures auto-canceled instances are eligible for history cleanup after six months, preventing unbounded growth of history data.
+This keeps auto-canceled instances eligible for history cleanup after six months and helps prevent unbounded history growth.
 
 See [configuration for history auto-cancellation](../data-migrator/config-properties.md#camundamigratorhistoryauto-cancelcleanup) for more details.
+
+:::warning Negative TTL values
+If you configure a negative auto-cancel TTL value, calculated cleanup dates are in the past. If Camunda 8 is running during migration, history cleanup can immediately clean up these entities, potentially before their child entities are migrated. See [history cleanup](#history-cleanup) for mitigation strategies.
+:::
+
+## History Cleanup
+
+Instances that were already completed in Camunda 7 retain their original cleanup dates:
+
+- If a `removalTime` exists in Camunda 7, it is migrated as-is. Child entities (user tasks, variables, flow nodes) inherit the root instance's cleanup date.
+- If no `removalTime` exists, no cleanup date is set.
+- Auto-cancel cleanup configuration **only applies to instances that were active or suspended** in Camunda 7.
+
+If Camunda 8 is running during migration with cleanup dates in the past, history cleanup may delete parent entities before their children are migrated, causing children to be skipped.
+
+**Common scenarios:**
+
+- Past `removalTime` values from Camunda 7
+- Negative auto-cancel TTL (for example, `P-1D`)
+- Long migrations where dates become due during execution
+
+As a result, you will see skipped child entities with messages referencing the deleted parent. These cannot be recovered unless the parent is re-migrated.
+
+Choose one approach to prevent cleanup interference:
+
+<Tabs groupId="cleanup-mitigation" defaultValue="shutdown" values={[
+{ label: 'Shut down Camunda 8', value: 'shutdown' },
+{ label: 'Configure future dates', value: 'future-dates' },
+{ label: 'Accept partial cleanup', value: 'accept' }
+]}>
+
+<TabItem value="shutdown">
+
+**Stop Camunda 8 during migration**
+
+- Stop Camunda 8 cluster before migration
+- Run migration while offline
+- Start Camunda 8 when complete
+
+✅ Guarantees no cleanup interference
+
+</TabItem>
+
+<TabItem value="future-dates">
+
+**Set cleanup dates in the future**
+
+- Update Camunda 7 removal times before migration (if feasible)
+- Configure positive TTL for auto-canceled instances (for example, `P6M`, `P1Y`)
+
+✅ Prevents immediate cleanup
+
+</TabItem>
+
+<TabItem value="accept">
+
+**Allow concurrent cleanup**
+
+- Run Camunda 8 during migration
+- Accept some entities may be cleaned up immediately
+- Accept child entity skips
+
+⚠️ Suitable only when historical data loss is acceptable
+
+</TabItem>
+
+</Tabs>
+
+## Partition distribution
+
+The History Data Migrator assigns migrated history data to Zeebe partitions. **Partition assignment is critical for history cleanup to work correctly.**
+
+### How partitions are assigned
+
+- **Root process instances** or **standalone decisions**: Randomly assigned to available partitions
+- **Child entities** (sub-processes, call activities, flow nodes, variables, user tasks, incidents, decision instances, etc.): Inherit partition from root process instance
+- **Audit logs**: Inherit the root process instance partition, or are randomly assigned when not related to a process instance
+
+This ensures all entities in a process hierarchy share the same partition, enabling the RDBMS exporter on that partition to perform cleanup.
+
+:::warning Partition configuration must match Zeebe topology
+Camunda 7 migrated history data can **only be deleted via history cleanup**, which requires:
+
+- The partition ID exists in your Camunda 8 Zeebe cluster
+- That partition has an RDBMS exporter configured
+
+If partition IDs assigned during migration don't exist or lack RDBMS exporters, **that data cannot be cleaned up** and will persist indefinitely.
+:::
+
+### Partition discovery
+
+By default, the migrator queries Zeebe topology through the Camunda REST API at migration start to discover available partitions.
+
+### Offline mode
+
+To migrate without Camunda 8 REST API connectivity (no topology query), configure the partition count manually:
+
+```yaml
+camunda.migrator:
+  history:
+    partition-count: 3 # Must match your Camunda 8 cluster
+```
+
+When configured:
+
+- Topology is not queried from REST API
+- Partition IDs generated as sequence: 1, 2, 3, ...
+- No Camunda 8 REST API connectivity is required at migration start (database connectivity is still required)
+
+The configured value must exactly match your Camunda 8 Zeebe cluster's partition count.
+
+If the configured value does not match the cluster, then:
+
+- Data assigned to non-existent partitions cannot be cleaned up
+- Data may persist indefinitely with no automatic cleanup path
+
+Always verify cluster partition configuration before migration.
+
+:::caution Don't change partitions after migration
+Changing cluster partition count after migration can leave data on removed partitions that cannot be cleaned up. Complete history migration before scaling partitions.
+:::
 
 ## Forms
 

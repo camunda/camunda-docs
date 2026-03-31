@@ -198,7 +198,7 @@ You can now use a new Orchestration Cluster API to manage global user task liste
 
 - The API is available in both SaaS and Self Managed environments and supports full lifecycle management of listener definitions.
 - Listener execution follows the same semantics as existing global listener behavior, ensuring consistent payloads, predictable integrations, and uniform governance across environments.
-- You can configure global user task listeners via [unified configuration](/components/concepts/global-user-task-listeners.md#configure-through-unified-configuration), [Orchestration Cluster API](/components/concepts/global-user-task-listeners.md#configure-via-orchestration-cluster-api), or the [Admin UI](/components/concepts/global-user-task-listeners.md#configure-via-admin-ui).
+- You can configure global user task listeners via [unified configuration](/components/concepts/global-user-task-listeners/configuration.md#configure-through-unified-configuration), [Orchestration Cluster API](/components/concepts/global-user-task-listeners/configuration.md#configure-via-orchestration-cluster-api), or the [Admin UI](/components/concepts/global-user-task-listeners/configuration.md#configure-via-admin-ui).
 
 <p class="link-arrow">[Global User task Listeners](/components/concepts/global-user-task-listeners.md)</p>
 
@@ -523,7 +523,7 @@ In addition, the **Tools** panel in the element template is replaced by dedicate
 
 :::
 
-<p class="link-arrow">[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</p>
+<p class="link-arrow">[MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md)</p>
 
 ### Camunda 8 Run
 
@@ -981,7 +981,7 @@ The Camunda Model Context Protocol (MCP) client now supports OAuth, API key, and
 
 MCP client connectors now also support connections using the [streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) transport protocol.
 
-<p class="link-arrow">[MCP Client](/components/early-access/alpha/mcp-client/mcp-client.md)</p>
+<p class="link-arrow">[MCP Client](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md)</p>
 
 :::note breaking changes
 This feature introduces breaking changes in the element templates and the runtime configuration of the MCP Client. To learn more, see [announcements](890-announcements.md#agentic-orchestration).

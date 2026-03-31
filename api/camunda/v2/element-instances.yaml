@@ -90,6 +90,10 @@ paths:
 
         Updates all the variables of a particular scope (for example, process instance, element instance) with the given variable data.
         Specify the element instance in the `elementInstanceKey` parameter.
+        Variable updates can be delayed by listener-related processing; if processing exceeds the
+        request timeout, this endpoint can return 504. Other gateway timeout causes are also
+        possible. Retry with backoff and inspect listener worker availability and logs when this
+        repeats.
       parameters:
         - name: elementInstanceKey
           in: path
@@ -118,6 +122,8 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "common-responses.yaml#/components/responses/GatewayTimeoutTaskListenerBlocking"
   /element-instances/{elementInstanceKey}/incidents/search:
     post:
       tags:
@@ -351,7 +357,6 @@ components:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
     ElementInstanceStateFilterProperty:
       description: ElementInstanceStateEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -409,6 +414,8 @@ components:
         - processInstanceKey
         - processDefinitionKey
         - rootProcessInstanceKey
+        - endDate
+        - incidentKey
       properties:
         processDefinitionId:
           description: The process definition ID associated to this element instance.
