@@ -99,7 +99,7 @@ You can create similar reports, targeting other goals and process variables, suc
 
 If you have a token budget, you can set a target in the report.
 
-1. [Follow these previous steps](/#step-3-create-reports-for-token-usage) (steps 1-6).
+1. Follow [the previous steps 1 through 6](#step-3-create-reports-for-token-usage).
 1. In the **Visualization** settings, click the gear icon, and then enable **Set target** to configure a target value, for example, a maximum token usage threshold.
 1. Set the target to less than 10,000 tokens.
 1. Save the report with a descriptive name. For example, **Token usage with threshold**.
