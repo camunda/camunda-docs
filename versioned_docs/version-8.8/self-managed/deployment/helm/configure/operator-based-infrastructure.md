@@ -85,7 +85,7 @@ All configuration files, deployment scripts, and automation tools referenced in 
 <summary><strong>Quick deployment commands</strong></summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/camunda-deployment-references/generic/kubernetes/operator-based/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/kubernetes/operator-based/get-your-copy.sh
 ```
 
 Then execute:
@@ -557,13 +557,11 @@ Before deploying Camunda Platform:
 
 ### Helm deployment
 
-First, source the environment setup script to set `HELM_CHART_VERSION` and other required variables. See the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to choose the appropriate chart version for your deployment:
+Deploy Camunda Platform using the infrastructure configuration files you saved from previous sections:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/kubernetes/operator-based/0-set-environment.sh
 ```
-
-Then, deploy Camunda Platform using the infrastructure configuration files you saved from previous sections.
 
 For end-to-end configuration patterns (OIDC-enabled "Full Cluster" including Optimize, Web Modeler, Console, and Identity), see the Full Cluster section of our [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md#full-cluster).
 
