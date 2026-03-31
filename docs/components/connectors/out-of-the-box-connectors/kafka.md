@@ -540,7 +540,7 @@ If any of the field is not populated, you must configure your security method fo
   ```
 
 :::caution
-The `group.id` value above is auto-generated when no explicit **Consumer Group ID** is configured in the connector. This generated ID is derived from the connector's internal deduplication key, which may change across connector upgrades (for example, when upgrading from 8.8 to 8.9). A changed group ID causes Kafka to treat the connector as a new consumer group, losing committed offsets and potentially replaying messages. It is strongly recommended to always set an explicit Consumer Group ID.
+The `group.id` value above is auto-generated when no explicit **Consumer Group ID** is configured in the connector. This generated ID is derived from the connector's internal deduplication key, which may change across connector upgrades (for example, when upgrading from 8.8 to 8.9). A changed group ID causes Kafka to treat the connector as a new consumer group, losing committed offsets and potentially replaying messages. It is strongly recommended to always set an explicit Consumer Group ID. You can [look up existing consumer groups](https://docs.confluent.io/kafka/operations-tools/manage-consumer-groups.html#list-groups-and-view-offsets) to find the current group ID in use.
 :::
 
 ### What is the precedence of client properties loading?
