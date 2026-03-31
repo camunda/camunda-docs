@@ -407,9 +407,10 @@ function BuildWithCamunda() {
             <div className={clsx("container", styles.heroInner)}>
               <h1 className={styles.heroTitle}>Build with Camunda</h1>
               <p className={styles.heroSub}>
-                Process orchestration for developers. Go from zero to a running
-                workflow in under two minutes, then let your AI coding agent
-                take over.
+                Go from zero to a running workflow in under two minutes.
+              </p>
+              <p className={styles.heroSub}>
+                Choose how you want to get started:
               </p>
             </div>
           </header>
@@ -435,18 +436,17 @@ function BuildWithCamunda() {
                 </p>
                 <ul className={styles.checkList}>
                   <li>
-                    <CheckIcon color="#78a9ff" /> Zero setup — runs in Camunda's
+                    <CheckIcon color="#78a9ff" /> Zero setup - runs in Camunda's
                     cloud
                   </li>
                   <li>
                     <CheckIcon color="#78a9ff" /> Web Modeler included
                   </li>
                   <li>
-                    <CheckIcon color="#78a9ff" /> 30 days free, fully featured
+                    <CheckIcon color="#78a9ff" /> AI agent skills built in
                   </li>
                   <li>
-                    <CheckIcon color="#78a9ff" /> Connect via{" "}
-                    <CodeBlock>c8 login</CodeBlock>
+                    <CheckIcon color="#78a9ff" /> 30 days free, fully featured
                   </li>
                 </ul>
                 <div className={styles.startCardFooter}>
@@ -485,9 +485,9 @@ function BuildWithCamunda() {
                   >
                     <CodeBlock>c8ctl</CodeBlock>
                   </Link>
-                  Camunda CLI tool. One command to install, one to start. Full
-                  Camunda on your machine, includes engine, Operate, Tasklist,
-                  and connectors.
+                  Camunda CLI tool. Run locally and scale seamlessly to
+                  enterprise clusters with the same runtime and stack, deploying
+                  anywhere with one command.
                 </p>
                 <ul className={styles.checkList}>
                   <li>
@@ -509,7 +509,7 @@ function BuildWithCamunda() {
                     className={clsx(styles.ctaButton, styles.ctaButtonCli)}
                     to="#get-started"
                   >
-                    See the install <ArrowRight />
+                    Install now <ArrowRight />
                   </Link>
                   <span className={styles.ctaNote}>
                     ~2 minutes to a running engine
@@ -584,7 +584,7 @@ $ c8ctl deploy ./my-process.bpmn`}
               decisions, and forms.
             </p>
             <details className={styles.collapsible}>
-              <summary>Download Desktop Modeler</summary>
+              <summary>Download Desktop Modeler </summary>
               <div className={styles.collapsibleContent}>
                 {/* Homebrew install option (macOS) */}
                 <p style={{ marginBottom: "0.75rem" }}>
