@@ -50,7 +50,7 @@ The Orchestration Cluster now exposes its operational capabilities via a built-i
 - Connect any MCP-compliant client (such as VS Code, GitHub Copilot, or Claude Code) to discover and invoke Camunda tools without custom API integration code.
 - Available tools cover process definitions, process instances, user tasks, incidents, and variables.
 - Streamable HTTP transport is supported, using the same authentication model as the REST API.
-- The MCP server is enabled by default in Camunda 8 Run. You can enable the MCP server in Camunda SaaS via your cluster settings in Console.
+- The MCP server is enabled by default in Camunda 8 Run and Docker Compose. You can enable the MCP server in Camunda SaaS via your cluster settings in Console.
 
 <p class="link-arrow">[Orchestration Cluster MCP Server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md)</p>
 
