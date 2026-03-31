@@ -835,7 +835,7 @@ natural language expectations. This section covers how to set up the LLM provide
 
 CPT provides an optional [LangChain4j](https://docs.langchain4j.dev/) integration module that ships with preconfigured
 support for major LLM providers: OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI, and OpenAI-compatible APIs.
-LangChain4j requires Java 17+. Using this module is not required. You can provide your own LLM integration through a
+LangChain4j requires Java 17+. You can provide your own LLM integration through a
 custom `ChatModelAdapter` instead (see [Custom ChatModelAdapter](#custom-chatmodeladapter)).
 
 :::tip
