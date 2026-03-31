@@ -21,10 +21,6 @@ For the exact tool versions used during testing, refer to the repository's [.too
 
 ### Considerations
 
-:::warning Experimental release (8.9.0-alpha3)
-This guide is based on an experimental release. Content and results may change before the final 8.9.0 release.
-:::
-
 :::warning
 Running this guide incurs costs on your AWS account, primarily for ECS and Aurora. Use the AWS [pricing calculator](https://calculator.aws/#/) to estimate costs for your region.
 :::
