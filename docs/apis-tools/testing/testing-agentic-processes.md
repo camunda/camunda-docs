@@ -20,6 +20,13 @@ This creates two concrete problems for tests:
 - **Non-deterministic execution order.** Standard CPT assertions are blocking: they wait for a specific condition before the test continues. A test that blocks on one particular tool task will stall if the agent chooses a different tool first, or skips that tool entirely.
 - **Non-deterministic output content.** Equality-based variable assertions cannot reliably verify free-text responses. The agent may phrase the same correct answer differently on each run, causing exact-match checks to fail even when the response is valid.
 
+In practice, CPT addresses these two problems with two complementary features:
+
+- Use [conditional behavior](utilities.md#conditional-behavior) to react to whichever tool tasks or user tasks the agent activates, without hard-coding a single execution order.
+- Use [judge assertions](assertions.md#hasvariablesatisfiesjudge) to check AI-generated output with a judge LLM. Instead of comparing exact wording, the judge scores whether the response satisfies a natural language expectation, which makes assertions more robust for free-text output.
+
+The rest of this guide shows how to apply these features in CPT tests for agentic processes.
+
 ## Prerequisites
 
 This guide requires Camunda 8.9+ with [CPT set up](getting-started.md).
