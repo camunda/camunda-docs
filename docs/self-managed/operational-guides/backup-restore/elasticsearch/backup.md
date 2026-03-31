@@ -164,6 +164,10 @@ This will continue exporting records, but not delete those records (log compacti
 curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/exporting/pause?soft=true"
 ```
 
+:::warning
+The HTTP response status code is always `200`. Check the `status` field in the response body to determine whether the operation succeeded: `204` indicates success, `500` indicates failure. If the request fails, verify that all brokers are running and retry.
+:::
+
    <details>
       <summary>Example output</summary>
       <summary>
@@ -686,6 +690,10 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
       ```bash
       curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/exporting/resume"
       ```
+
+:::warning
+The HTTP response status code is always `200`. Check the `status` field in the response body to determine whether the operation succeeded: `204` indicates success, `500` indicates failure. If the request fails, verify that all brokers are running and retry.
+:::
 
       <details>
          <summary>Example output</summary>
