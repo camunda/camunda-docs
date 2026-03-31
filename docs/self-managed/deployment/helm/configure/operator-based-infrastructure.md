@@ -546,12 +546,13 @@ Before deploying Camunda Platform:
 
 ### Helm deployment
 
-Deploy Camunda Platform using the infrastructure configuration files you saved from previous sections:
+First, source the environment setup script to set `HELM_CHART_VERSION` and other required variables. See the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to choose the appropriate chart version for your deployment:
 
-```bash
-# Set the desired Helm chart version - see https://helm.camunda.io/camunda-platform/version-matrix/
-export HELM_CHART_VERSION=13.0.0  # Replace with your desired version
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/0-set-environment.sh
 ```
+
+Then, deploy Camunda Platform using the infrastructure configuration files you saved from previous sections.
 
 For end-to-end configuration patterns (OIDC-enabled "Full Cluster" including Optimize, Web Modeler, Console, and Identity), see the Full Cluster section of our [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md#full-cluster).
 
@@ -567,7 +568,6 @@ helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
   -f camunda-identity-values.yml \
   -f camunda-webmodeler-values.yml \
   -f camunda-keycloak-domain-values.yml \
-  -f camunda-values-identity-secrets.yml \
   -n "$CAMUNDA_NAMESPACE"
 ```
 
@@ -583,7 +583,6 @@ helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
   -f camunda-identity-values.yml \
   -f camunda-webmodeler-values.yml \
   -f camunda-keycloak-no-domain-values.yml \
-  -f camunda-values-identity-secrets.yml \
   -n "$CAMUNDA_NAMESPACE"
 ```
 
