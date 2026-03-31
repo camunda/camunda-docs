@@ -174,7 +174,7 @@ The judge evaluates matches using the following scoring scale:
 | 0.25  | Mostly not satisfied. Only marginal relevance.                                                                         |
 | 0.0   | Not satisfied at all, or the actual value is empty.                                                                    |
 
-The LLM may return any value between these anchor points (for example, 0.6 or 0.85). The default threshold is 0.5. You can change it globally in the [judge configuration](configuration.md#judge-configuration) or per assertion using `withJudgeConfig`.
+The LLM may return any value between these anchor points (for example, 0.6 or 0.85). The default threshold is 0.5. This means the assertion passes when the response is at least partially satisfied according to the rubric, which is a practical default for AI-generated output that may vary in wording or completeness across runs. Use a higher threshold when the response must satisfy stricter semantic requirements. You can change the threshold globally in the [judge configuration](configuration.md#judge-configuration) or per assertion using `withJudgeConfig`.
 
 ### Set up an LLM provider
 

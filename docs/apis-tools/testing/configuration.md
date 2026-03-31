@@ -889,6 +889,11 @@ Unless noted otherwise, properties in the provider tables are required.
 | `judge.threshold`     | `double` | `0.5`   | Confidence threshold (0.0 to 1.0) for the judge to pass. |
 | `judge.custom-prompt` | `string` |         | Custom evaluation prompt replacing the default criteria. |
 
+The default threshold of `0.5` treats a response as acceptable when it is at least partially satisfied according to the
+judge rubric. This is a practical default for AI-generated output, where wording and level of detail may vary between
+runs even when the response is still useful. Increase the threshold when your assertion needs stricter semantic
+agreement.
+
 #### Chat model settings
 
 <Tabs groupId="provider" defaultValue="openai" queryString values={[
