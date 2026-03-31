@@ -206,7 +206,7 @@ For troubleshooting, see [schema troubleshooting](#schema-troubleshooting).
 If a previous schema migration failed, Liquibase may hold a lock.
 
 Camunda waits for stale Liquibase DDL locks using `camunda.data.secondary-storage.rdbms.ddl-lock-wait-timeout` (default: `PT15M`).
-For large schema changes, you can increase this timeout so a long-running migration is not treated as stale.
+For large schema changes, you can increase this timeout so a long-running migration is not treated as stale. See [RDBMS troubleshooting](/self-managed/deployment/helm/configure/database/rdbms-troubleshooting.md#liquibase-lock-after-pod-crash-or-restart).
 
 Only release the lock manually after confirming no migration is currently running:
 
