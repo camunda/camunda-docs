@@ -32,7 +32,7 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 ## APIs and tools
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
 
 ### Camunda CLI
 
@@ -63,6 +63,17 @@ Camunda Process Test also introduces a shared runtime mode as an alternative to 
 
 <p class="link-arrow">[JSON test cases](/apis-tools/testing/json-test-cases.md)</p>
 <p class="link-arrow">[Shared runtime configuration](/apis-tools/testing/configuration.md#shared-runtime)</p>
+
+#### AI Agent Testing
+
+<!-- https://github.com/camunda/product-hub/issues/3315 -->
+
+Camunda Process Test now adds dedicated support for AI agent testing, making it easier to test processes where agents choose different actions at runtime and produce non-deterministic output.
+
+- Judge assertions use a configured LLM to assess whether AI-generated output satisfies a natural-language expectation, so you can verify response quality and intent.
+- Conditional behavior helps you model reactive test behavior for agent-driven flows by watching process state changes and completing tasks as they appear, without blocking the test on a predefined path.
+
+<!-- <p class="link-arrow">[Testing agentic processes](/apis-tools/testing/testing-agentic-processes.md)</p> -->
 
 ## Camunda 8 Run
 
