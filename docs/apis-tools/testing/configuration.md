@@ -1027,7 +1027,7 @@ judge.customPrompt=You are a domain expert evaluating financial data accuracy.
 Or programmatically:
 
 ```java
-JudgeConfig.of(prompt -> myLlmClient.chat(prompt))
+JudgeConfig.of(prompt -> myChatModelAdapter.generate(prompt))
     .withCustomPrompt("You are a domain expert evaluating financial data accuracy.");
 ```
 
@@ -1064,7 +1064,7 @@ class JudgeTestConfig {
 
     @Bean
     ChatModelAdapter chatModelAdapter() {
-        return prompt -> myLlmClient.chat(prompt);
+        return prompt -> myChatModelAdapter.generate(prompt);
     }
 }
 ```
@@ -1107,7 +1107,7 @@ using `CamundaAssert.setJudgeConfig()`:
 
 ```java
 CamundaAssert.setJudgeConfig(
-    JudgeConfig.of(prompt -> myLlmClient.chat(prompt))
+    JudgeConfig.of(prompt -> myChatModelAdapter.generate(prompt))
         .withThreshold(0.8));
 ```
 
@@ -1144,7 +1144,7 @@ using `CamundaAssert.setJudgeConfig()`:
 
 ```java
 CamundaAssert.setJudgeConfig(
-    JudgeConfig.of(prompt -> myLlmClient.chat(prompt))
+    JudgeConfig.of(prompt -> myChatModelAdapter.generate(prompt))
         .withThreshold(0.8));
 ```
 
@@ -1153,7 +1153,7 @@ Or register the JUnit extension manually with a judge configuration:
 ```java
 @RegisterExtension
 CamundaProcessTestExtension extension = new CamundaProcessTestExtension()
-    .withJudgeConfig(JudgeConfig.of(prompt -> myLlmClient.chat(prompt))
+    .withJudgeConfig(JudgeConfig.of(prompt -> myChatModelAdapter.generate(prompt))
         .withThreshold(0.8));
 ```
 
