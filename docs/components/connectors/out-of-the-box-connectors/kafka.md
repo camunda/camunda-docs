@@ -291,6 +291,7 @@ In the **Authentication** section, select the **Authentication type**. If you se
 
 In the **Kafka** section, you can configure the following properties:
 
+- **Consumer Group ID**: Set the consumer group ID for this connector. It is strongly recommended to always provide an explicit value. Use a stable, application-specific identifier that represents the logical consumer group (for example, `my-app-order-processor`). If left empty, an ID is auto-generated from the connector's internal deduplication key — this generated ID may change across connector upgrades, causing Kafka to treat the connector as a new consumer group and potentially replay already-processed messages.
 - **Schema strategy**: Select the schema strategy for your messages.
   - Select **No schema**, **Inline schema** for Avro serialization.
   - Select **Schema registry** If you have a Confluent Schema Registry.
@@ -537,6 +538,10 @@ If any of the field is not populated, you must configure your security method fo
   group.id=kafka-inbound-connector-{{bpmnProcessId}}
   enable.auto.commit=false
   ```
+
+:::caution
+The `group.id` value above is auto-generated when no explicit **Consumer Group ID** is configured in the connector. This generated ID is derived from the connector's internal deduplication key, which may change across connector upgrades (for example, when upgrading from 8.8 to 8.9). A changed group ID causes Kafka to treat the connector as a new consumer group, losing committed offsets and potentially replaying messages. It is strongly recommended to always set an explicit Consumer Group ID.
+:::
 
 ### What is the precedence of client properties loading?
 
