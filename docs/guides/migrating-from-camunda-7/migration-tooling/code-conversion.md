@@ -30,7 +30,7 @@ Additionally, you will find information about:
 - [Diagram Converter](#diagram-converter) for BPMN and DMN model conversion
 - [Complete migration example](#example-adjusting-a-spring-boot-application) showing all tools in action
 
-### Choosing your migration approach
+### Choose your migration approach
 
 You can combine these tools depending on your codebase complexity:
 
@@ -303,37 +303,37 @@ The [Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tool
 
 Find the diagram conversion tooling and its documentation in the [Migration Tooling – Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/diagram-converter).
 
-## Leveraging AI for code migration
+## Leverage AI for code migration
 
-AI coding agents such as Claude Code, GitHub Copilot, Cursor, Windsurf, or ChatGPT can accelerate code migration by applying the [code conversion patterns](#code-conversion-patterns) interactively. This is especially valuable for code that the OpenRewrite recipes cannot handle automatically, such as custom superclasses, complex test cases, or configuration files.
+AI coding agents such as Claude Code, GitHub Copilot, Cursor, Windsurf, or ChatGPT can accelerate code migration by applying the [code conversion patterns](#code-conversion-patterns) interactively. This is especially valuable for code that OpenRewrite recipes cannot handle automatically, such as custom superclasses, complex test cases, or configuration files.
 
 You can use AI in three ways:
 
-1. **Standalone**: Give the AI agent your Camunda 7 code and the conversion patterns, and let it produce Camunda 8 equivalents
-2. **Post-OpenRewrite cleanup**: Run OpenRewrite first, then use AI to fix remaining TODOs and compilation errors
-3. **Full agentic migration**: Let an AI agent assess your codebase, run OpenRewrite, and handle all remaining migration tasks
+1. **Standalone**: Give the AI agent your Camunda 7 code and the conversion patterns, and let it produce Camunda 8 equivalents.
+2. **Post-OpenRewrite cleanup**: Run OpenRewrite first, then use AI to fix remaining TODOs and compilation errors.
+3. **Full agentic migration**: Let an AI agent assess your codebase, run OpenRewrite, and handle all remaining migration tasks.
 
 ### Recommended combined workflow
 
 For most real-world projects, the combined approach gives the best results:
 
 ```
-Step 1: Assess        →  AI agent scans codebase, classifies files, creates plan
+Step 1: Assess        →  AI agent scans the codebase, classifies files, creates plan
 Step 2: OpenRewrite   →  Run batch recipes for deterministic bulk transformations
-Step 3: AI cleanup    →  AI handles TODOs, edge cases, tests, configuration
-Step 4: Validate      →  Compile, run tests, search for remaining C7 references
+Step 3: AI cleanup    →  AI handles TODOs, edge cases, tests, and configuration
+Step 4: Validate      →  Compile, run tests, and search for remaining C7 references
 ```
 
-### Setting up an AI agent for migration
+### Set up an AI agent for migration
 
-When using an AI coding agent (Claude Code, Copilot Agent Mode, Cursor Composer, etc.), provide it with the migration patterns as context. The agent can then apply these patterns across your entire codebase.
+When using an AI coding agent, provide it with the migration patterns as context so the agent can apply these patterns across your entire codebase.
 
-:::tip Providing context to AI agents
+:::tip Provide context to AI agents
 Point the agent to the pattern catalog for best results:
 
-- **URL reference**: `https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/ALL_IN_ONE.md`
-- **Local file**: If you have the migration tooling repository cloned, reference the local `ALL_IN_ONE.md` file directly
-- **Inline patterns**: For specific migration tasks, include the relevant patterns directly in your prompt
+- **URL reference**: `https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/ALL_IN_ONE.md`.
+- **Local file**: If you have the migration tooling repository cloned, reference the local `ALL_IN_ONE.md` file directly.
+- **Inline patterns**: For specific migration tasks, include the relevant patterns directly in your prompt.
 
 Agents with access to browse URLs or read local files (like Claude Code or Copilot Agent Mode) can fetch the patterns automatically. For chat-based tools, paste the relevant code examples from the pattern catalog into your prompt.
 :::
@@ -366,7 +366,7 @@ Complexity guidelines:
 
 ### Step 2: Migrate client code
 
-Client code is anything that calls the Camunda API from your application, for example, starting process instances, correlating messages, or managing tasks.
+Client code is any code that calls the Camunda API from your application, for example, code that starts process instances, correlates messages, or manages tasks.
 
 **Prompt: Client code migration**
 
@@ -429,7 +429,7 @@ Here is the Camunda 7 client code to migrate:
 
 ### Step 3: Migrate JavaDelegates to Job Workers
 
-JavaDelegates are glue code that runs within the Camunda 7 engine. In Camunda 8, they become Job Workers — Spring beans with `@JobWorker` annotated methods.
+JavaDelegates are glue code that runs within the Camunda 7 engine. In Camunda 8, they become Job Workers, that is, Spring beans with `@JobWorker`-annotated methods.
 
 **Prompt: JavaDelegate migration**
 
@@ -472,7 +472,7 @@ Here is the Camunda 7 JavaDelegate to migrate:
 
 ### Step 4: Migrate external task workers to Job Workers
 
-External task workers have a similar architecture to Camunda 8 Job Workers, making this migration relatively straightforward.
+External task workers have a similar architecture to Camunda 8 Job Workers, which makes this migration relatively straightforward.
 
 **Prompt: External task worker migration**
 
@@ -512,7 +512,7 @@ Here is the Camunda 7 External Task Worker to migrate:
 
 ### Step 5: Migrate test code
 
-Test code migration requires updating the test framework, assertions, and how processes are started and validated. AI agents are especially effective here because test patterns vary widely.
+Test code migration requires updating the test framework, assertions, and the way processes are started and validated. AI agents are especially effective here because test patterns vary widely.
 
 **Prompt: Test code migration**
 
@@ -617,7 +617,7 @@ Here is my current application.yml:
 
 ### Step 7: Validate the migration
 
-After migration, verify that all Camunda 7 references have been removed and the code compiles and passes tests.
+After migration, verify all Camunda 7 references have been removed and the code compiles and passes tests.
 
 **Prompt: Post-migration validation**
 
@@ -638,7 +638,11 @@ Validate the Camunda 7 to 8 migration:
 
 ### Full agentic migration prompt
 
-For AI agents that can browse files and execute commands (Claude Code, Copilot Agent Mode with terminal access), you can use a single comprehensive prompt to migrate an entire project:
+For AI agents that can browse files and execute commands, you can use a single comprehensive prompt to migrate an entire project:
+
+:::tip
+The full agentic prompt works best with AI coding agents that have terminal access and can read/write files directly (for example, Claude Code, Copilot Agent Mode, Cursor). For chat-based tools, use the individual prompts from Steps 2–7 above, and provide the relevant code in each prompt.
+:::
 
 ```
 You are migrating a Camunda 7 Spring Boot application to Camunda 8. Use the official
@@ -713,10 +717,6 @@ STEP 8 — VALIDATE:
 After each step, report what was changed and any issues encountered.
 ```
 
-:::info When to use the full agentic prompt
-The full agentic prompt works best with AI coding agents that have terminal access and can read/write files directly (Claude Code, Copilot Agent Mode, Cursor). For chat-based tools, use the individual prompts from Steps 2–7 above, providing the relevant code in each prompt.
-:::
-
 ### Key API mapping reference
 
 These tables summarize the most important mappings between Camunda 7 and Camunda 8. They are useful as quick references when writing migration prompts or reviewing AI-generated code.
@@ -742,7 +742,7 @@ These tables summarize the most important mappings between Camunda 7 and Camunda
 
 #### Parameter name changes
 
-:::warning Important
+:::important
 The terms `processDefinitionKey` and `processDefinitionId` have **swapped meanings** between Camunda 7 and Camunda 8. Review these carefully during migration.
 :::
 
@@ -781,6 +781,6 @@ The terms `processDefinitionKey` and `processDefinitionId` have **swapped meanin
 | —                                                                         | `io.camunda.process.test.api.CamundaSpringProcessTest`           |
 | `org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication` | `io.camunda.client.annotation.Deployment`                        |
 
-## Example: Adjusting a Spring Boot application
+## Example: Adjust a Spring Boot application
 
 See the [end-to-end migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example) on GitHub.
