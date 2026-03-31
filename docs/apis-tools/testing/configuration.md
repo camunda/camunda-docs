@@ -933,7 +933,7 @@ Supports Bedrock long-term API keys or AWS IAM credentials. Falls back to the
 | ----------------------------------------- | ------------------------------ | ---------- | ---------------------------------------------------------------------------------------------- |
 | `judge.chat-model.provider`               | Yes                            | `string`   | Set to `amazon-bedrock`.                                                                       |
 | `judge.chat-model.model`                  | Yes                            | `string`   | Model name (for example `eu.anthropic.claude-haiku-4-5-20251001-v1:0`).                        |
-| `judge.chat-model.region`                 | Yes                            | `string`   | AWS region (for example `eu-central-1`).                                                       |
+| `judge.chat-model.region`                 | No                             | `string`   | AWS region (for example `eu-central-1`).                                                       |
 | `judge.chat-model.api-key`                | No                             | `string`   | Bedrock long-term API key. Optional if using IAM credentials or the default credentials chain. |
 | `judge.chat-model.credentials.access-key` | Conditionally, with secret key | `string`   | AWS IAM access key. Optional if using an API key or the default credentials chain.             |
 | `judge.chat-model.credentials.secret-key` | Conditionally, with access key | `string`   | AWS IAM secret key. Optional if using an API key or the default credentials chain.             |
