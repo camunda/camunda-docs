@@ -24,6 +24,34 @@ Exporting API is used:
 - As a debugging tool.
 - When taking a backup of Camunda 8 (see [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)).
 
+:::note
+The HTTP response status code for these endpoints is always `200`. To determine whether the operation succeeded, check the `status` field in the JSON response body: `204` indicates success, `500` indicates failure.
+:::
+
+The operation requires a complete cluster topology. If a broker is unavailable, the request fails entirely — no partitions are paused or resumed. Retry when all brokers are available.
+
+**Success response:**
+
+```json
+{
+  "body": null,
+  "status": 204,
+  "contentType": null
+}
+```
+
+**Failure response:**
+
+```json
+{
+  "body": {
+    "message": "Expected 3 members of partition 1 but found 2, current topology: ..."
+  },
+  "status": 500,
+  "contentType": null
+}
+```
+
 <Tabs groupId="exporting" defaultValue="pause" queryString values={[{label: 'Pause exporting', value: 'pause' },{label: 'Resume exporting', value: 'resume' },{label: 'Soft pause exporting', value: 'softPause' }]} >
 
 <TabItem value="pause">
@@ -34,7 +62,7 @@ To pause exporting on all partitions, send the following request to the gateway'
 POST actuator/exporting/pause
 ```
 
-When all partitions pause exporting, a successful response is received. If the request fails, some partitions may have paused exporting. Therefore, it is important to either retry until success or revert the partial pause by resuming exporting.
+When all partitions pause exporting, the response contains `"status": 204`. If the request fails, some partitions may have paused exporting. Therefore, it is important to either retry until success or revert the partial pause by resuming exporting.
 
 </TabItem>
 
@@ -46,7 +74,7 @@ After exporting is paused, it must eventually be resumed. Otherwise, the cluster
 POST actuator/exporting/resume
 ```
 
-When all partitions have resumed exporting, a successful response is received. If the request fails, only some partitions may have resumed exporting. Therefore, it is important to retry until successful.
+When all partitions have resumed exporting, the response contains `"status": 204`. If the request fails, only some partitions may have resumed exporting. Therefore, it is important to retry until successful.
 
 </TabItem>
 
@@ -58,7 +86,7 @@ The soft pause feature can be used when you want to continue exporting records, 
 POST actuator/exporting/pause?soft=true
 ```
 
-When all partitions soft pause exporting, a successful response is received. If the request fails, some partitions may have soft paused exporting. Therefore, either retry until success or revert the partial soft pause by resuming the export.
+When all partitions soft pause exporting, the response contains `"status": 204`. If the request fails, some partitions may have soft paused exporting. Therefore, either retry until success or revert the partial soft pause by resuming the export.
 
 </TabItem>
 </Tabs>
