@@ -29,7 +29,7 @@ After completing this guide, you will be able to analyze AI agent executions in 
 - You have deployed and run the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint. This is needed for Optimize to fetch execution data to analyze. Consider running it using different prompts to trigger various AI agent tools.
 
 :::important
-This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), where you will use the same example AI agent process. It is recommended going through that guide first. However, it can be applied to other AI agent process implementations.
+This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process. We recommend completing that guide first. However, you can also apply this guide to other AI agent process implementations.
 :::
 
 ## Step 1: Make your data available
@@ -61,7 +61,7 @@ To do so:
 
 You should see something like the following:
 
-<img src={ScriptTask} alt="Process instance overview"/>
+<img src={ScriptTask} alt="Script task configuration for collecting token usage"/>
 
 ## Step 2: Examine data in Optimize
 
@@ -78,6 +78,7 @@ See the Optimize [getting started](/components/optimize/improve-processes-with-o
 ## Step 3: Create reports for token usage
 
 You can create reports for token usage across process instances and over time.
+
 To do so:
 
 1. Go to the **Collections** tab.
@@ -142,8 +143,7 @@ Create a bar chart to see how many times each tool is called.
 
 ### Example: Track trends over time
 
-Use a timeline report to analyze trends over time.
-For example, you can see how many times a tool is called per day over a one-week period.
+Use a timeline report to analyze trends over time. For example, you can see how many times a tool is called per day over a one-week period.
 
 1. Go to the **Collections** tab.
 1. Select **Report** from the **Create new** dropdown.
@@ -156,7 +156,7 @@ For example, you can see how many times a tool is called per day over a one-week
 
 ## Step 5: Build a dashboard
 
-You can create a dashboard, a collection of reports that you can view together, for your AI agent.
+You can create a dashboard, which is a collection of reports that you can view together, for your AI agent process.
 To do so:
 
 1. Go to the **Collections** tab.
