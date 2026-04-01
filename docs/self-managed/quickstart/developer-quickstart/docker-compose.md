@@ -64,6 +64,19 @@ Camunda provides three Docker Compose configurations in the [Camunda Distributio
 | docker-compose-full.yaml        | **Full-stack configuration** - Includes all Camunda 8 components including the Orchestration Cluster, Connectors, Optimize, Console, Management Identity, Keycloak, PostgreSQL, and Web Modeler. Use this when you need management components, process optimization, or modeling. |
 | docker-compose-web-modeler.yaml | **Standalone Web Modeler** - Runs only Web Modeler and its dependencies (Identity, Keycloak, PostgreSQL). See [Deploy with Web Modeler](#deploy-with-web-modeler).                                                                                                                |
 
+:::note RDBMS secondary storage for the Orchestration Cluster
+
+In these Docker Compose quickstart configurations, the Orchestration Cluster uses Elasticsearch as secondary storage.
+
+The PostgreSQL container(s) in these quickstart files are used by management components (for example, Management Identity and Web Modeler), not as Orchestration Cluster secondary storage.
+
+If you want to run the Orchestration Cluster with RDBMS secondary storage, use the dedicated RDBMS guides:
+
+- [Configure RDBMS for manual installations](/self-managed/deployment/manual/rdbms/configuration.md)
+- [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md)
+
+:::
+
 ### Access components
 
 Once the containers are running, you can access the components in your browser.
@@ -100,11 +113,13 @@ By default, the Orchestration Cluster uses [Basic authentication](/self-managed/
 
 #### External dependencies
 
-| Component     | Configuration        | URL                                                          | Description                                                                                                                                                |
-| :------------ | :------------------- | :----------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Elasticsearch | Lightweight and full | [http://localhost:9200](http://localhost:9200)               | Used by the Orchestration Cluster as secondary storage (and Optimize in the full configuration).                                                           |
-| Keycloak      | Full                 | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Admin instead. Access with `admin` / `admin`. |
-| PostgreSQL    | Full                 | `localhost:5432`                                             | Database for Management Identity.                                                                                                                          |
+| Component                               | Configuration        | URL                                                          | Description                                                                                                                                                          |
+| :-------------------------------------- | :------------------- | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Elasticsearch                           | Lightweight and full | [http://localhost:9200](http://localhost:9200)               | Used by the Orchestration Cluster as secondary storage (and Optimize in the full configuration).                                                                     |
+| Keycloak                                | Full                 | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Admin instead. Access with `admin` / `admin`.           |
+| PostgreSQL (management components only) | Full                 | `localhost:5432`                                             | Database for Management Identity and Web Modeler. In these quickstart configurations, the Orchestration Cluster continues to use Elasticsearch as secondary storage. |
+
+In Docker Compose quickstarts, PostgreSQL is used for management-component persistence (Management Identity and Web Modeler flows). The Orchestration Cluster secondary storage in these examples remains Elasticsearch.
 
 #### Configuration files and options
 
