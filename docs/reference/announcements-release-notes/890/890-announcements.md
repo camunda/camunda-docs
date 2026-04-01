@@ -1007,7 +1007,7 @@ Camunda 8.9 adds a standardized JDBC driver management system for manual install
 
 Starting with Camunda 8.9, the Orchestration Cluster Identity component has been renamed to **Admin** (also referred to as Orchestration Cluster Admin).
 
-Admin is the cluster-level admin UI hosting identity management and other administrative features. Only the name has changed. Identity management (users, groups, roles, authorizations, tenants, mapping rules, and clients) is unchanged.
+Admin is the cluster-level admin UI hosting identity management and other administrative features. Identity management functionality (users, groups, roles, authorizations, tenants, mapping rules, and clients) is unchanged, although some naming, paths, and config keys are updated as follows:
 
 - The `admin` Spring profile replaces the `identity` profile. Both profiles work interchangeably in 8.9. The `identity` profile is deprecated and will be removed in a future version.
 - API paths change from `/identity/*` to `/admin/*`. The old paths redirect to the new paths but are deprecated.
