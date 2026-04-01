@@ -1649,8 +1649,14 @@ module.exports = {
                           items: [
                             "self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch",
                             "self-managed/deployment/helm/configure/database/using-external-opensearch",
-                            "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
-                            "self-managed/deployment/helm/configure/database/elasticsearch/prefix-elasticsearch-indices",
+                            {
+                              type: "category",
+                              label: "Shared Elasticsearch/OpenSearch tasks",
+                              items: [
+                                "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
+                                "self-managed/deployment/helm/configure/database/elasticsearch/prefix-elasticsearch-indices",
+                              ],
+                            },
                             "self-managed/deployment/helm/configure/database/all-shards-failed",
                           ],
                         },
@@ -1663,14 +1669,18 @@ module.exports = {
                         "self-managed/deployment/helm/configure/database/using-existing-postgres",
                       ],
                     },
-                    // {
-                    //   type: "category",
-                    //   label: "Optimize",
-                    //   items: [
-                    //     // Add a reference or link to ES/OS config for Optimize if needed
-                    //     // Example: "self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch"
-                    //   ],
-                    // },
+                    {
+                      type: "category",
+                      label: "Optimize",
+                      link: {
+                        type: "doc",
+                        id: "self-managed/deployment/helm/configure/database/optimize/index",
+                      },
+                      items: [
+                        "self-managed/deployment/helm/configure/database/optimize/using-external-elasticsearch",
+                        "self-managed/deployment/helm/configure/database/optimize/using-external-opensearch",
+                      ],
+                    },
                   ],
                 },
                 {
