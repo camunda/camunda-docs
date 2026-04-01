@@ -453,7 +453,8 @@ Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this rol
 #### Removed: Web Modeler API milestone endpoints
 
 The Web Modeler API endpoints under `/api/v1/milestones` that were deprecated in Camunda 8.8 are now removed in 8.9.
-You can use the corresponding endpoints under `/api/v1/versions` instead.
+
+**Action:** Use the corresponding endpoints under `/api/v1/versions` instead.
 
 <p className="link-arrow">[Web Modeler API](/apis-tools/web-modeler-api/index.md)</p>
 
@@ -779,9 +780,7 @@ These options are not truly global, as only the Orchestration and Optimize compo
 
 Legacy keys continue to work in Camunda 8.9 with deprecation warnings. Existing deployments will continue to function without changes.
 
-**Action:**
-
-You should migrate to the new component-specific configuration:
+**Action:** You should migrate to the new component-specific configuration:
 
 | Component     | New configuration path                                                                                     |
 | :------------ | :--------------------------------------------------------------------------------------------------------- |
@@ -803,7 +802,7 @@ The legacy TLS secret configuration using `*.tls.existingSecret` is deprecated.
 
 Legacy keys still work in Camunda 8.9 but will cause deprecation warnings and are removed in a future version.
 
-Affected paths:
+This affects the following paths:
 
 | Deprecated path                           | New path                                         |
 | :---------------------------------------- | :----------------------------------------------- |
@@ -845,7 +844,9 @@ If your `values.yaml` uses the `identity` profile key, the chart automatically m
 
 The Bitnami subcharts (PostgreSQL, Keycloak, Elasticsearch, and Common) are bundled directly within the Camunda Helm chart instead of being fetched from external Bitnami repositories at install time.
 
-This change reduces the risk of unexpected breaking changes from upstream Bitnami chart updates and gives Camunda full control over the lifecycle of these subcharts. No action is required — existing deployments will continue to work as before.
+This change reduces the risk of unexpected breaking changes from upstream Bitnami chart updates and gives Camunda full control over the lifecycle of these subcharts.
+
+**Action:** No action is required. Existing deployments continue to work as before.
 
 </div>
 </div>
