@@ -152,6 +152,12 @@ The configuration for the external database used by the Web Modeler REST API has
 The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
 See [Bitnami Docker repository migration](/self-managed/upgrade/helm/index.md#bitnami-docker-repository-migration) for migration details.
 
+##### Helm chart: Bitnami subcharts bundled
+
+The Bitnami subcharts (PostgreSQL, Keycloak, Elasticsearch, and Common) are bundled directly within the Camunda Helm chart instead of being fetched from external Bitnami repositories at install time.
+
+This change reduces the risk of unexpected breaking changes from upstream Bitnami chart updates and gives Camunda full control over the lifecycle of these subcharts. No action is required — existing deployments will continue to work as before when applying the next patch release.
+
 #### Adjustments
 
 - **New package structure**:
