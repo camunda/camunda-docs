@@ -20,14 +20,14 @@ graph LR
     subgraph oc[Orchestration Cluster]
         broker[Zeebe Broker]
         rdbms_exporter[RDBMS Exporter]
-        doc_exporter[Elasticsearch/OpenSearch Exporter\n(for Optimize)]
+        doc_exporter["Elasticsearch/OpenSearch Exporter\n(for Optimize)"]
         api[Orchestration Cluster API]
         apps[Operate · Tasklist · Admin]
     end
 
     subgraph storage[Data Stores]
         rdbms[RDBMS secondary storage]
-        es[Elasticsearch/OpenSearch for Optimize]
+        es["Elasticsearch/OpenSearch for Optimize"]
     end
 
     opt[Optimize]
