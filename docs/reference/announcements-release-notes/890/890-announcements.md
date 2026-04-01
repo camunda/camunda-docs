@@ -551,14 +551,14 @@ For more information on optimizing connector performance with virtual threads, s
 
 #### Kafka consumer connector: auto-generated consumer group ID format changed
 
-When upgrading from Camunda 8.8 to 8.9, the auto-generated Kafka consumer group ID changes format. This is a side-effect of a runtime improvement that enables cross-version connector deduplication.
+When upgrading from Camunda 8.8 to 8.9, the auto-generated Kafka consumer group ID changes format. This affects Kafka consumer connectors only when no explicit consumer group ID is configured. The change is a side effect of a runtime improvement that enables cross-version connector deduplication.
 
 - **8.8 format:** `kafka-inbound-connector--<processDefinitionKey>-<elementId>` (numeric key)
 - **8.9 format:** `kafka-inbound-connector--<bpmnProcessId>-<hash>` (stable process ID)
 
-Because Kafka treats a changed group ID as a brand-new consumer group, connectors using an auto-generated group ID after upgrading will lose their committed offsets and may reprocess messages.
+Because Kafka treats a changed group ID as a brand-new consumer group, affected connectors do not reuse their committed offsets after the upgrade and may reprocess messages.
 
-**Action required:** Before upgrading to 8.9, set an explicit **Consumer Group ID** in each Kafka consumer connector configuration to preserve consumer group identity. You can [look up existing consumer groups](https://docs.confluent.io/kafka/operations-tools/manage-consumer-groups.html#list-groups-and-view-offsets) to find the current group ID in use. See the [Kafka connector documentation](/components/connectors/out-of-the-box-connectors/kafka.md?kafka=inbound) for details.
+**Action required:** Before upgrading to 8.9, set an explicit **Consumer Group ID** in each Kafka consumer connector configuration to preserve the existing consumer group identity. You can [look up existing consumer groups](https://docs.confluent.io/kafka/operations-tools/manage-consumer-groups.html#list-groups-and-view-offsets) to find the current group ID in use. See the [Kafka connector documentation](/components/connectors/out-of-the-box-connectors/kafka.md?kafka=inbound) for details.
 
 </div>
 </div>
