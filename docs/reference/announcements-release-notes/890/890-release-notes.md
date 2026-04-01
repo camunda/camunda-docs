@@ -64,7 +64,7 @@ Camunda Process Test also introduces a shared runtime mode as an alternative to 
 <p class="link-arrow">[JSON test cases](/apis-tools/testing/json-test-cases.md)</p>
 <p class="link-arrow">[Shared runtime configuration](/apis-tools/testing/configuration.md#shared-runtime)</p>
 
-#### AI Agent Testing
+#### AI agent testing
 
 <!-- https://github.com/camunda/product-hub/issues/3315 -->
 
