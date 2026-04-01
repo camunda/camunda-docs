@@ -131,7 +131,7 @@ For more advanced or permanent configuration, modify the default `configuration/
 
 ### Access Camunda components
 
-Camunda 8 Run uses basic authentication with demo/demo for all web interfaces. OIDC/Keycloak is not included in this distribution.
+Camunda 8 Run uses Basic authentication with demo/demo for all web interfaces. OIDC/Keycloak is not included in this distribution.
 You can log in to all web interfaces using with the default credentials:
 
 - **Username:** `demo`

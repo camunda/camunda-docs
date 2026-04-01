@@ -12,7 +12,7 @@ export const msTeamsCards = [
   },
   {
     link: "./ms-teams-chatbot/",
-    title: "Chat bot",
+    title: "Chatbot",
     image: IconIntegration,
     description:
       "Interact with Camunda using a conversational bot in Microsoft Teams.",

@@ -348,7 +348,7 @@ You can now use a new Orchestration Cluster API to manage global user task liste
 
 - The API is available in both SaaS and Self Managed environments and supports full lifecycle management of listener definitions.
 - Listener execution follows the same semantics as existing global listener behavior, ensuring consistent payloads, predictable integrations, and uniform governance across environments.
-- You can configure global user task listeners via [unified configuration](/components/concepts/global-user-task-listeners.md#configure-through-unified-configuration), [Orchestration Cluster API](/components/concepts/global-user-task-listeners.md#configure-via-orchestration-cluster-api), or the [Admin UI](/components/concepts/global-user-task-listeners.md#configure-via-admin-ui).
+- You can configure global user task listeners via [unified configuration](/components/concepts/global-user-task-listeners/configuration.md#configure-through-unified-configuration), [Orchestration Cluster API](/components/concepts/global-user-task-listeners/configuration.md#configure-via-orchestration-cluster-api), or the [Admin UI](/components/concepts/global-user-task-listeners/configuration.md#configure-via-admin-ui).
 
 <p class="link-arrow">[Global User task Listeners](/components/concepts/global-user-task-listeners.md)</p>
 

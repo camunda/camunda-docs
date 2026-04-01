@@ -9,7 +9,8 @@ Camunda 8 Run provides log files in the `c8run/logs` directory that can help dia
 
 - `c8run.log` – main log for Camunda 8 Run
 - `connectors.log` – Connectors component
-- `elasticsearch.log` – embedded Elasticsearch instance (if enabled). Camunda 8 Run bundles Elasticsearch for evaluations. If you point Camunda 8 Run to an external OpenSearch instead, the embedded instance (and this log) is not used.
+
+If you configured external Elasticsearch, inspect that deployment's logs separately.
 
 ## Startup failures
 
@@ -24,8 +25,6 @@ Camunda 8 Run provides log files in the `c8run/logs` directory that can help dia
    - `8086` – Connectors API
    - `26500` – Zeebe gRPC gateway
    - `9600` – Prometheus metrics
-   - `9200` – Elasticsearch (embedded)
-   - `9300` – Elasticsearch cluster communication
 
 2. Stop processes using these ports or change the Camunda core port:
 
@@ -118,27 +117,11 @@ Replace `21` in the examples with the version you installed (21–25), and open 
 
 ### Out of memory errors
 
-**Problem:** Camunda 8 Run becomes unresponsive, often due to Elasticsearch memory usage.
+**Problem:** Camunda 8 Run becomes unresponsive.
 
 **Solution:**
 
-1. Increase Elasticsearch heap size:
-
-   ```bash
-   # macOS/Linux
-   export ES_JAVA_OPTS="-Xms2g -Xmx2g"
-   ./start.sh
-
-   # Windows (Command Prompt)
-   set ES_JAVA_OPTS=-Xms2g -Xmx2g
-   c8run.exe start
-
-   # Windows (PowerShell)
-   $env:ES_JAVA_OPTS="-Xms2g -Xmx2g"
-   c8run.exe start
-   ```
-
-2. Increase JVM heap for Camunda:
+1. Increase JVM heap for Camunda:
 
    ```bash
    # macOS/Linux
@@ -151,7 +134,7 @@ Replace `21` in the examples with the version you installed (21–25), and open 
    $env:JAVA_OPTS="-Xmx4g"
    ```
 
-3. For resource-constrained environments, consider using H2 instead of Elasticsearch for testing.
+2. For resource-constrained environments, consider using H2 instead of Elasticsearch for testing.
 
 ### Slow performance
 
@@ -161,7 +144,7 @@ Replace `21` in the examples with the version you installed (21–25), and open 
 
 1. Ensure the system meets the minimum requirements (8 GB RAM recommended).
 2. Close unnecessary applications to free system resources.
-3. Check Elasticsearch health:
+3. If you use external Elasticsearch, check cluster health:
 
    ```bash
    curl http://localhost:9200/_cluster/health
@@ -169,57 +152,51 @@ Replace `21` in the examples with the version you installed (21–25), and open 
 
 On Windows, open this page directly: [http://localhost:9200/\_cluster/health](http://localhost:9200/_cluster/health)
 
-## Elasticsearch issues
+## External Elasticsearch issues
 
-### Elasticsearch fails to start
+### Cannot connect to Elasticsearch
 
-**Problem:** The embedded Elasticsearch instance fails to start, preventing Orchestration Cluster web applications (Operate and Tasklist) from functioning.
+**Problem:** Camunda 8 Run starts with Elasticsearch configured as secondary storage, but search-backed features do not work or startup fails.
 
 **Solution:**
 
-1. Check Elasticsearch logs in the `c8run/logs` directory.
-2. Ensure sufficient disk space is available.
-3. Verify Elasticsearch ports (9200, 9300) are not in use.
-4. If Elasticsearch continues to fail, consider using an external Elasticsearch instance:
+1. Verify the Elasticsearch cluster is reachable:
+
+   ```bash
+   curl http://localhost:9200
+   ```
+
+2. Confirm `application.yaml` points Camunda 8 Run to that cluster:
+
+   ```yaml
+   camunda:
+     data:
+       secondary-storage:
+         type: elasticsearch
+         elasticsearch:
+           url: http://localhost:9200/
+   ```
+
+3. If the cluster requires authentication or TLS, add the corresponding credentials and security settings to the same configuration block.
+4. Start Camunda 8 Run with the configuration file:
 
    ```bash
    # macOS/Linux
-   ./c8run start --disable-elasticsearch --config custom-application.yaml
+   ./c8run start --config custom-application.yaml
 
    # Windows
-   c8run.exe start --disable-elasticsearch --config custom-application.yaml
+   c8run.exe start --config custom-application.yaml
    ```
 
-### Index creation errors
+### Elasticsearch index or permission errors
 
 **Problem:** Operate or Tasklist show errors related to Elasticsearch indices.
 
 **Solution:**
 
-1. Stop Camunda:
-
-   ```bash
-   # macOS/Linux
-   ./shutdown.sh
-
-   # Windows
-   c8run.exe stop
-   ```
-
-2. Clear Elasticsearch data (warning: this deletes all data):
-
-   ```bash
-   # macOS/Linux
-   rm -rf data/elasticsearch
-
-   # Windows (Command Prompt)
-   rmdir /s /q data\elasticsearch
-
-   # Windows (PowerShell)
-   # Remove-Item -Path data\elasticsearch -Recurse -Force
-   ```
-
-3. Restart Camunda 8 Run.
+1. Ensure the Elasticsearch user has permission to create, read, and write the required Camunda indices. For restricted setups, see [Configure Elasticsearch without cluster privileges](/self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges.md).
+2. Verify the Elasticsearch cluster is healthy and has sufficient free disk space.
+3. For local development, if you need to recreate the secondary store, stop Camunda 8 Run, delete the Camunda indices from your external Elasticsearch instance using your Elasticsearch tooling, and start Camunda 8 Run again. This rebuilds the secondary store from scratch.
 
 ## Authentication and access issues
 

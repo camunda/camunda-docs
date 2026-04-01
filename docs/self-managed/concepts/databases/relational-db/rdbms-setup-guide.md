@@ -304,5 +304,5 @@ Test restore procedures in non-production environments regularly.
 ## Related guides
 
 - [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
-- [Install with RDBMS as secondary storage](/self-managed/deployment/helm/install/helm-with-rdbms.md)
+- [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)
 - [Operations and maintenance](/self-managed/deployment/manual/rdbms/operations.md)

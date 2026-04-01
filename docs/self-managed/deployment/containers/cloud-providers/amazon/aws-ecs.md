@@ -21,10 +21,6 @@ For the exact tool versions used during testing, refer to the repository's [.too
 
 ### Considerations
 
-:::warning Experimental release (8.9.0-alpha3)
-This guide is based on an experimental release. Content and results may change before the final 8.9.0 release.
-:::
-
 :::warning
 Running this guide incurs costs on your AWS account, primarily for ECS and Aurora. Use the AWS [pricing calculator](https://calculator.aws/#/) to estimate costs for your region.
 :::
@@ -253,7 +249,7 @@ The base terraform documentation for this module can be found [alongside the rep
 `camunda.tf` contains the module invocations with an example base configuration for the Orchestration Cluster and Connectors:
 
 - Aurora PostgreSQL configuration with the [AWS JDBC Wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper) that comes as part of the Camunda distribution
-- Basic auth Identity setup
+- Basic authentication Identity setup
   - Admin user with random password
   - Connectors user with random password configured and pre-configured for Connectors to consume to connect to the Orchestration Cluster
 
@@ -374,10 +370,17 @@ Some common topics to potentially change:
 task_cpu              = 4096
 task_cpu_architecture = "X86_64"
 task_memory           = 8192
+```
 
+The EFS file system uses the `elastic` throughput mode by default. This mode automatically scales for most workloads. If you need a fixed throughput configuration, adjust the `efs_throughput_mode` and `efs_provisioned_throughput_in_mibps` variables.
+
+Example:
+
+```hcl
 # Orchestration Cluster
 
-efs_provisioned_throughput_in_mibps = 50
+efs_throughput_mode                    = "provisioned"
+efs_provisioned_throughput_in_mibps    = 50
 ```
 
 ##### Camunda
@@ -593,5 +596,5 @@ Camunda recommends restoring to a fresh cluster rather than reusing an existing 
 
 After setting up your cluster, many users typically do the following:
 
-- [Connect to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
+- [Connect to an identity provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
 - [Add TLS](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html) and configure a [custom domain](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#dns-name) for the Application Load Balancer (ALB).

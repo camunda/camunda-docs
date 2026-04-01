@@ -946,6 +946,17 @@ export const configs = [
     area: ["Data"],
   },
   {
+    name: "camunda.data.secondary-storage.opensearch.aws-enabled",
+    legacy: [
+      "camunda.database.awsEnabled",
+      "camunda.operate.opensearch.awsEnabled",
+      "camunda.tasklist.opensearch.awsEnabled",
+      "zeebe.broker.exporters.camundaexporter.args.connect.awsEnabled",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
     name: "camunda.data.secondary-storage.opensearch.backup.repository-name",
     legacy: [
       "camunda.operate.backup.repositoryName",

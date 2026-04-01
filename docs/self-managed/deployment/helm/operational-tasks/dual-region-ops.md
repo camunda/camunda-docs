@@ -99,30 +99,15 @@ The **v2 REST API** (default port `8080`) **requires authentication**, described
 The following procedures assume the following dual-region deployment for:
 
 - **AWS:** the deployment has been created using [AWS setup guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md) and you have your own copy of the [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
-  Follow the [dual-region cluster deployment](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md##3-deploy-camunda-8-via-helm-charts) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#export-environment-variables) already set up).
+  Follow the [dual-region cluster deployment](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#3-deploy-camunda-8-via-helm-charts) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md#export-environment-variables) already set up).
 
-- **OpenShift:** the deployment has been created using [OpenShift setup guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#deploying-camunda-8-via-helm-charts-in-a-dual-region-setup) and previously completed changes in your `generated-values-region-1.yml` and `generated-values-region-2.yml` to adjust them in your setup.
+- **OpenShift:** the deployment has been created using [OpenShift setup guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#deploying-camunda-8-via-helm-charts-in-a-dual-region-setup) and previously completed changes in your `generated-values-region-0.yml` and `generated-values-region-1.yml` to adjust them in your setup.
 
 :::note OpenShift cluster reference
 
-    The OpenShift guide references the cluster's context using `CLUSTER_1_NAME` and `CLUSTER_2_NAME` and the namespaces using `CAMUNDA_NAMESPACE_1` and `CAMUNDA_NAMESPACE_2`.
-    This guide use a different convention, the convertion can be done as follow:
-    <details>
-      <summary>Show OpenShift convertion</summary>
+The OpenShift guide now uses the same 0-indexed naming convention as the AWS guide: `CLUSTER_0`/`CLUSTER_1` for cluster contexts and `CAMUNDA_NAMESPACE_0`/`CAMUNDA_NAMESPACE_1` for namespaces. No conversion is needed.
 
-    ```bash
-    export CLUSTER_0="$CLUSTER_1_NAME"
-    export CAMUNDA_NAMESPACE_0="$CAMUNDA_NAMESPACE_1"
-    echo "CLUSTER_0=$CLUSTER_0"
-    echo "CAMUNDA_NAMESPACE_0=$CAMUNDA_NAMESPACE_0"
-
-    export CLUSTER_1="$CLUSTER_2_NAME"
-    export CAMUNDA_NAMESPACE_1="$CAMUNDA_NAMESPACE_2"
-    echo "CLUSTER_1=$CLUSTER_1"
-    echo "CAMUNDA_NAMESPACE_1=$CAMUNDA_NAMESPACE_1"
-    ```
-
-    </details>
+In version 8.8 and earlier, the OpenShift guide used 1-indexed naming (`CLUSTER_1_NAME`/`CLUSTER_2_NAME` and `CAMUNDA_NAMESPACE_1`/`CAMUNDA_NAMESPACE_2`), which required converting variable names before following this procedure.
 
 :::
 
@@ -753,7 +738,40 @@ After successfully applying the recreated region, remove the temporary `CAMUNDA_
 </TabItem>
 <TabItem value="OpenShift" label="OpenShift">
 
-Follow the installation steps **recreated region**:
+##### Deploy prerequisite services
+
+Before installing Camunda via Helm, you must redeploy the ECK-managed Elasticsearch cluster and synchronize cross-region passwords. Without this, the Helm install will fail because there is no Elasticsearch to connect to.
+
+1. From the `generic/kubernetes/operator-based/elasticsearch` folder, deploy the ECK operator and Elasticsearch cluster in the recreated region:
+
+   ```bash
+   cd generic/kubernetes/operator-based/elasticsearch
+   export ELASTICSEARCH_CLUSTER_FILE="elasticsearch-cluster-dual-region.yml"
+   CAMUNDA_NAMESPACE=$CAMUNDA_NAMESPACE_RECREATED KUBE_CONTEXT=$CLUSTER_RECREATED ./deploy.sh
+   cd -
+   ```
+
+2. Wait for Elasticsearch to become ready. Verify the cluster health is `green` before proceeding:
+
+   ```bash
+   kubectl get elasticsearch --context $CLUSTER_RECREATED --namespace $CAMUNDA_NAMESPACE_RECREATED
+   ```
+
+3. From the `generic/openshift/dual-region/procedure` folder, re-synchronize the Elasticsearch passwords across regions:
+
+   ```bash
+   cd generic/openshift/dual-region/procedure
+   ./sync-elasticsearch-passwords.sh
+   cd -
+   ```
+
+   This recreates the cross-region password secrets (`elasticsearch-es-password-region-0` and `elasticsearch-es-password-region-1`) required by the Zeebe exporter configuration.
+
+For more details on these steps, see [Deploy the ECK operator and Elasticsearch clusters](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#deploy-the-eck-operator-and-elasticsearch-clusters) and [Synchronize Elasticsearch passwords across regions](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#synchronize-elasticsearch-passwords-across-regions).
+
+##### Install Camunda using Helm
+
+Follow the installation steps for the **recreated region**:
 
 - [Setting up the Camunda 8 Dual-Region Helm chart](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md#configure-your-deployment-for-each-region) _Optional if you already have your pre-configured `generated-values-file.yml`_
 - Once your values file is generated from the installation step, install **Camunda 8 only in the recreated region**. Adjust the installation command to disable Operate and Tasklist:
@@ -769,7 +787,7 @@ Follow the installation steps **recreated region**:
 
   There is no Helm chart option for this setting. Because `orchestration.env` is an array, it cannot be overwritten through an overlay and must be added manually on a temporary basis.
 
-  Edit the `generated-values-region-1|2.yaml` to include the following under `orchestration.env`:
+  Edit the `generated-values-region-0|1.yaml` to include the following under `orchestration.env`:
 
   ```yaml
   orchestration:
@@ -787,7 +805,7 @@ Follow the installation steps **recreated region**:
   --version "$HELM_CHART_VERSION" \
   --kube-context "$CLUSTER_RECREATED" \
   --namespace "$CAMUNDA_NAMESPACE_RECREATED" \
-  -f "<generated-values-region-1|2.yaml>" \
+  -f "<generated-values-region-0|1.yaml>" \
   --set orchestration.profiles.operate=false \
   --set orchestration.profiles.tasklist=false
   ```
@@ -1054,8 +1072,8 @@ Follow the installation steps for the **surviving region**:
 - Once your values file is generated from the installation step, upgrade **Camunda 8 only in the surviving region**. Adjust the installation command to disable Operate and Tasklist:
 
   ```bash
-  --set orchestration.profiles.operate=false`
-  --set orchestration.profiles.tasklist=false`
+  --set orchestration.profiles.operate=false \
+  --set orchestration.profiles.tasklist=false
   ```
 
   Example command adapted from the installation step:
@@ -1066,7 +1084,7 @@ Follow the installation steps for the **surviving region**:
   --version "$HELM_CHART_VERSION" \
   --kube-context "$CLUSTER_SURVIVING" \
   --namespace "$CAMUNDA_NAMESPACE_SURVIVING" \
-  -f "<generated-values-region-1|2.yaml>" \
+  -f "<generated-values-region-0|1.yaml>" \
   --set orchestration.profiles.operate=false \
   --set orchestration.profiles.tasklist=false
   ```
@@ -1087,7 +1105,7 @@ Follow the installation steps for the **surviving region**:
 
    ```bash
    # The default are 5 profiles, so this confirms that Operate and Tasklist are not enabled
-   io.camunda.application.StandaloneCamunda - The following 3 profiles are active: "broker", "identity", "consolidated-auth"
+   io.camunda.application.StandaloneCamunda - The following 3 profiles are active: "broker", "admin", "consolidated-auth"
    ```
 
 3. Alternatively, verify that the configuration does not list Operate and Tasklist as active profiles:
@@ -1099,7 +1117,7 @@ Follow the installation steps for the **surviving region**:
    ```bash
    spring:
      profiles:
-       active: "broker,identity,consolidated-auth"
+       active: "broker,admin,consolidated-auth"
    ```
 
   </TabItem>
@@ -1918,7 +1936,7 @@ Follow the installation instructions for both regions. You’ll need to apply `h
 
 Make sure to remove the `CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA` variable from `camunda-values.yml`.
 
-Edit the `generated-values-region-1|2.yml` file and remove the following from the `orchestration.env`:
+Edit the `generated-values-region-0|1.yml` file and remove the following from the `orchestration.env`:
 
 ```yaml
 orchestration:
@@ -1948,7 +1966,7 @@ orchestration:
 
    ```bash
    # The default are 5 profiles, so this confirms that Operate and Tasklist are enabled
-   io.camunda.application.StandaloneCamunda - The following 5 profiles are active: "broker", "operate", "tasklist", "identity", "consolidated-auth"
+   io.camunda.application.StandaloneCamunda - The following 5 profiles are active: "broker", "operate", "tasklist", "admin", "consolidated-auth"
    ```
 
 3. Alternatively, verify that the configuration lists Operate and Tasklist as active profiles:
@@ -1960,7 +1978,7 @@ orchestration:
    ```bash
    spring:
      profiles:
-       active: "broker,operate,tasklist,identity,consolidated-auth"
+       active: "broker,operate,tasklist,admin,consolidated-auth"
    ```
 
 </div>

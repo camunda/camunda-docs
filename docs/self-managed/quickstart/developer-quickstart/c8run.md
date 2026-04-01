@@ -18,19 +18,18 @@ For detailed steps, see the [manual installation](../../../deployment/manual/ins
 
 Camunda 8 Run is a local distribution of Camunda 8 that bundles the Camunda 8 runtime, core services, startup scripts, and a launcher application for Windows, macOS, and Linux.
 
-Camunda 8 Run enables you to run the [Orchestration Cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
+Camunda 8 Run enables you to run the [Orchestration Cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, and Identity, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
 
 Camunda 8 Run includes the following:
 
 - Orchestration Cluster
 - Connectors
 - H2 (default secondary storage for Camunda 8 Run in 8.9-alpha3)
-- Elasticsearch (bundled, optional, enable when you need full-text indexing or advanced analytics)
 
 Camunda 8 Run also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 :::note
-For the latest list of supported relational databases and versions, see the  
+For the latest list of supported relational databases and versions, see the
 [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 :::
 
@@ -233,7 +232,7 @@ If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-
 
 ### Configuration options
 
-The following options provide a convenient way to override settings for quick tests and interactions in Camunda 8 Run.  
+The following options provide a convenient way to override settings for quick tests and interactions in Camunda 8 Run.
 For more advanced or permanent configuration, modify the default `configuration/application.yaml` or supply a custom file using the `--config` flag (e.g., [to enable authentication and authorization](#enable-authentication-and-authorization)).
 
 | Argument                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -247,12 +246,11 @@ For more advanced or permanent configuration, modify the default `configuration/
 | `--port <arg>`             | Sets the Camunda core port (default: `8080`).                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `--log-level <arg>`        | Sets the log level for the Camunda core.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `--docker`                 | Downloads and runs the Camunda Docker Compose distribution. This option provides an easy shortcut to run Camunda in Docker Compose. Most other Camunda 8 Run flags are ignored, but you can combine `--docker` with `--config` to supply an alternative RDBMS configuration (for example, PostgreSQL). For more information on running Camunda with Docker Compose see the [documentation](./docker-compose.md). See the [shutdown script](#shut-down-camunda-8-run) for information on stopping the Docker application. |
-| `--disable-elasticsearch`  | Prevents the built-in Elasticsearch from starting. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) section for details.                                                                                                                                                                                                                                                                                                                |
 | `--startup-url`            | The URL to open after startup (e.g., `'http://localhost:8080/operate'`). By default, Operate is opened.                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Configure or switch secondary storage (H2 or Elasticsearch)
 
-Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts and its data persists across restarts. Elasticsearch remains bundled and supported as an optional alternative that you can enable when you need full-text indexing, search, or advanced analytics.
+Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts and its data persists across restarts. If you need full-text indexing, search, or advanced analytics, use an external Elasticsearch instance.
 
 #### Default: H2 (Camunda 8 Run)
 
@@ -489,7 +487,7 @@ docker run -d --name camunda-mssql \
 
 #### Optional: Elasticsearch
 
-If you need indexing, search, or full Operate/Tasklist functionality, enable Elasticsearch. Elasticsearch is still bundled with Camunda 8 Run in 8.9 and can be managed by Camunda 8 Run or provided as an external service.
+If you need indexing, search, or full Operate/Tasklist functionality, use an external Elasticsearch instance.
 
 To use Elasticsearch:
 
@@ -498,16 +496,16 @@ data:
   secondary-storage:
     type: elasticsearch
     elasticsearch:
-      url: http://elasticsearch:9200/
+      url: http://localhost:9200/
 ```
 
-Start Camunda 8 Run without `--disable-elasticsearch` to let Camunda 8 Run manage Elasticsearch, or use `--disable-elasticsearch --config <file>` and point to an external cluster.
+Start Camunda 8 Run with `--config <file>` and point the configuration to your external cluster.
 
 ### Switching between storage types and migration notes
 
 - Switching the secondary storage type (for example, H2 ⇄ Elasticsearch) in 8.9-alpha3 does **not** preserve existing secondary-store data. The system starts with a fresh secondary store.
 - If you upgrade from alpha1/alpha2 and keep the same secondary storage backend, no migration steps are required. Only users who change the storage backend need to update configuration and accept a fresh secondary store.
-- To switch storage, update `data.secondary-storage` in `application.yaml` (or Helm `values.yaml`) and restart Camunda 8 Run. Use `--disable-elasticsearch` to prevent Camunda 8 Run from starting the embedded Elasticsearch when you want to rely on H2 or an external ES instance.
+- To switch storage, update `data.secondary-storage` in `application.yaml` (or Helm `values.yaml`) and restart Camunda 8 Run. If you want to use Elasticsearch, configure an external Elasticsearch instance in the same file.
 
 Choose **H2** for quick local development and **Elasticsearch** for production-like scenarios where advanced search/analytics are required.
 
@@ -517,9 +515,9 @@ Operate can run against the default H2 store in 8.9-alpha3, but some user-facing
 
 - Operate may not provide complete analytics, advanced search, or long-running query features when backed by H2.
 - Performance and scaling behavior when using H2 will differ from Elasticsearch in production scenarios.
-- Users who require full Operate feature parity should enable Elasticsearch (embedded or external) until full H2 parity is confirmed in a later alpha.
+- Users who require full Operate feature parity should use an external Elasticsearch instance until full H2 parity is confirmed in a later alpha.
 
-<!--- Maybe add something like "For engineering details and progress on Operate feature parity, see issue #7315 and the Operate migration tracking in the project board. If we want a precise feature list for alpha3, I can add a checklist here after stakeholder confirmation." ---!>
+<!--- Maybe add something like "For engineering details and progress on Operate feature parity, see issue #7315 and the Operate migration tracking in the project board. If we want a precise feature list for alpha3, I can add a checklist here after stakeholder confirmation."
     authentication:
       # Require authentication for API requests
       unprotected-api: false
@@ -631,7 +629,7 @@ Although Camunda 8 Run supports TLS, this is intended only for testing.
 :::note
 If you use a proxy together with TLS, ensure internal Camunda services are excluded from proxy routing. JVM-level proxy settings apply to all internal HTTP clients and may block communication between components such as Zeebe, Operate, Identity, or the connector runtime. Add these services to your `nonProxyHosts` configuration.
 
-For details, see [configure a proxy server in Self-Managed](../../../../components/connectors/protocol/rest/#configure-a-proxy-server-in-self-managed) in the REST connector documentation.
+For details, see [HTTP proxy configuration](/self-managed/components/connectors/http-proxy-configuration.md).
 :::
 
 ### Access metrics
@@ -641,7 +639,7 @@ For more information, see the [metrics](/self-managed/operational-guides/monitor
 
 ### Configure or switch secondary storage (H2 or Elasticsearch)
 
-Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts. Elasticsearch remains bundled and supported as an optional alternative that you can enable when you need full-text indexing, search, or advanced analytics.
+Camunda 8 Run supports multiple secondary-storage options. Starting in 8.9-alpha3, **H2 is the default secondary storage** for Camunda 8 Run lightweight setups and quickstarts. If you need full-text indexing, search, or advanced analytics, use an external Elasticsearch instance.
 
 #### Default: H2 (Camunda 8 Run)
 
@@ -710,7 +708,7 @@ Operate v2 has limited functionality in 8.9-alpha3 when running against H2; full
 
 #### Optional: Elasticsearch
 
-If you need indexing, search, or full Operate/Tasklist functionality, enable Elasticsearch. Elasticsearch is still bundled with Camunda 8 Run in 8.9-alpha3 and can be managed by Camunda 8 Run or provided as an external service.
+If you need indexing, search, or full Operate/Tasklist functionality, use an external Elasticsearch instance.
 
 To use Elasticsearch:
 
@@ -719,16 +717,16 @@ data:
   secondary-storage:
     type: elasticsearch
     elasticsearch:
-      url: http://elasticsearch:9200/
+      url: http://localhost:9200/
 ```
 
-Start Camunda 8 Run without `--disable-elasticsearch` to let Camunda 8 Run manage Elasticsearch, or use `--disable-elasticsearch --config <file>` and point to an external cluster.
+Start Camunda 8 Run with `--config <file>` and point the configuration to your external cluster.
 
 ### Switching between storage types and migration notes
 
 - Switching the secondary storage type (for example, H2 ⇄ Elasticsearch) in 8.9-alpha3 does **not** preserve existing secondary-store data. The system starts with a fresh secondary store.
 - If you upgrade from alpha1/alpha2 and keep the same secondary storage backend, no migration steps are required. Only users who change the storage backend need to update configuration and accept a fresh secondary store.
-- To switch storage, update `data.secondary-storage` in `application.yaml` (or Helm `values.yaml`) and restart Camunda 8 Run. Use `--disable-elasticsearch` to prevent Run from starting the embedded Elasticsearch when you want to rely on H2 or an external ES instance.
+- To switch storage, update `data.secondary-storage` in `application.yaml` (or Helm `values.yaml`) and restart Camunda 8 Run. If you want to use Elasticsearch, configure an external Elasticsearch instance in the same file.
 
 Choose **H2** for quick local development and **Elasticsearch** for production-like scenarios where advanced search/analytics are required.
 
@@ -753,10 +751,11 @@ Camunda 8 Run uses v2 APIs by default, so no additional configuration is require
 
 The following advanced configuration options can be provided via environment variables:
 
-| Variable       | Description                                                                                                                                       |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ES_JAVA_OPTS` | Allows you to override Java command line parameters for Elasticsearch. This can allow you to increase memory limits. **Default:** `-Xms1g -Xmx1g` |
-| `JAVA_OPTS`    | Allows you to override Java command line parameters for Camunda.                                                                                  |
+| Variable    | Description                                                      |
+| ----------- | ---------------------------------------------------------------- |
+| `JAVA_OPTS` | Allows you to override Java command line parameters for Camunda. |
+
+-->
 
 ## Next steps
 
