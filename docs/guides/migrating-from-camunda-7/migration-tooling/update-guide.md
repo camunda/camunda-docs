@@ -25,7 +25,7 @@ Before you update:
 
 ### Version 0.2.x to 0.3.0
 
-**Release date:** TBD \
+**Release date:** 14th of April 2026 \
 **Camunda 8 compatibility:** 8.9.x
 
 #### Data Migrator: Database schema update
