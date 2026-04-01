@@ -38,7 +38,7 @@ By default, only user operations are tracked, not [client](../zeebe/technical-co
 
 ## Get started
 
-Start auditing operations in Operate, Tasklist, and Identity.
+Start auditing operations in Operate, Tasklist, and Admin (formerly Orchestration Cluster Identity).
 
 <AoGrid ao={[
 {
@@ -54,10 +54,10 @@ image: PlayIcon,
 description: "Learn how to audit task history in Camunda 8 Tasklist.",
 },
 {
-link: "../../identity/audit-operations",
-title: "Audit operations in Identity",
+link: "../../admin/audit-operations",
+title: "Audit operations in Admin",
 image: PlayIcon,
-description: "Learn how to audit operations in Camunda 8 Identity.",
+description: "Learn how to audit operations in Camunda 8 Admin.",
 },
 ]} columns={3}/>
 

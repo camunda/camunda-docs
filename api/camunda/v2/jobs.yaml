@@ -353,6 +353,7 @@ components:
         - listenerEventType
         - rootProcessInstanceKey
         - tags
+        - userTask
       properties:
         type:
           description: The type of the job (should match what was requested).
@@ -440,6 +441,13 @@ components:
         - candidateGroups
         - candidateUsers
         - changedAttributes
+        - action
+        - assignee
+        - dueDate
+        - followUpDate
+        - formKey
+        - priority
+        - userTaskKey
       type: object
       description: Contains properties of a user task.
       properties:
@@ -476,6 +484,7 @@ components:
         formKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/FormKey"
+          nullable: true
           description: The key of the form associated with the user task.
         priority:
           description: The priority of the user task.
@@ -659,6 +668,14 @@ components:
         - type
         - worker
         - rootProcessInstanceKey
+        - creationTime
+        - deadline
+        - deniedReason
+        - endTime
+        - errorCode
+        - errorMessage
+        - isDenied
+        - lastUpdateTime
       properties:
         customHeaders:
           description: A set of custom headers defined during modelling.
@@ -749,10 +766,12 @@ components:
           type: string
         creationTime:
           description: When the job was created. Field is present for jobs created after 8.9.
+          nullable: true
           type: string
           format: date-time
         lastUpdateTime:
           description: When the job was last updated. Field is present for jobs created after 8.9.
+          nullable: true
           type: string
           format: date-time
     JobFailRequest:
@@ -957,7 +976,6 @@ components:
       enum:
         - PROVIDED
         - ASSIGNED
-      default: PROVIDED
     JobStateEnum:
       description: The state of the job.
       type: string
@@ -994,7 +1012,6 @@ components:
         - UPDATING
     JobKindFilterProperty:
       description: JobKindEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -1027,7 +1044,6 @@ components:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
     JobListenerEventTypeFilterProperty:
       description: JobListenerEventTypeEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -1060,7 +1076,6 @@ components:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
     JobStateFilterProperty:
       description: JobStateEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match

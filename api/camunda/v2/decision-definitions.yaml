@@ -322,7 +322,7 @@ components:
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/DecisionDefinitionId"
         variables:
-          description: The message variables as JSON document.
+          description: The decision evaluation variables as JSON document.
           type: object
           additionalProperties: true
         tenantId:
@@ -340,7 +340,7 @@ components:
         variables:
           type: object
           additionalProperties: true
-          description: The message variables as JSON document.
+          description: The decision evaluation variables as JSON document.
         tenantId:
           description: The tenant ID of the decision.
           allOf:
@@ -422,6 +422,13 @@ components:
         - decisionDefinitionType
         - evaluatedInputs
         - matchedRules
+        - decisionDefinitionId
+        - decisionDefinitionKey
+        - decisionDefinitionName
+        - decisionDefinitionVersion
+        - decisionEvaluationInstanceKey
+        - output
+        - tenantId
       type: object
       description: A decision that was evaluated.
       properties:

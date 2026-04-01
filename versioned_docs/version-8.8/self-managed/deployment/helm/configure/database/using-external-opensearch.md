@@ -22,7 +22,7 @@ Amazon OpenSearch requires two layers of permissions:
 
 To connect to OpenSearch using AWS IAM roles for service accounts (IRSA), see the [IAM roles for service accounts documentation](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup).
 
-To connect to OpenSearch using basic authentication, follow the configuration below.
+To connect to OpenSearch using Basic authentication, follow the configuration below.
 
 ## Configuration
 

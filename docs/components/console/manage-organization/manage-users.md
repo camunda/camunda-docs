@@ -23,7 +23,7 @@ The following roles are additionally available, providing dedicated rights for s
 - **Modeler**: Access to Web Modeler for creating and collaborating on projects, except permissions to deploy and run processes. Read-only access to Console.
 - **Analyst**: Includes Modeler permissions and has full access to Optimize to build process dashboards and reports.
 
-Starting with version 8.8, user access to clusters is managed independently. To control what a user can access, define their authorizations in the cluster's Identity. Learn more [here](/components/identity/authorization.md).
+Starting with version 8.8, user access to clusters is managed independently. To control what a user can access, define their authorizations in the cluster's Admin. Learn more [here](/components/admin/authorization.md).
 
 If cluster authorizations are disabled, the user will have full access to the cluster and its components.
 
@@ -37,7 +37,7 @@ People who do not yet have a Camunda 8 account can also be invited to an organiz
 
 Resource authorizations control a user's access to specific resources. To create, update, or delete a user's resource authorizations, select the user's row in the users table.
 
-As of 8.8, authorizations for Orchestration Cluster applications (Zeebe, Operate, and Tasklist) are managed as part of the Orchestration Cluster and configured in [Identity](/self-managed/components/orchestration-cluster/identity/overview.md).
+As of 8.8, authorizations for Orchestration Cluster applications (Zeebe, Operate, and Tasklist) are managed as part of the Orchestration Cluster and configured in [Admin](/self-managed/components/orchestration-cluster/admin/overview.md).
 
 ### Creation
 

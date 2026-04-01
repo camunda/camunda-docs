@@ -5,6 +5,9 @@ sidebar_label: Variables
 description: "How the Data Migrator transforms Camunda 7 variables to Camunda 8."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 The Data Migrator automatically handles the transformation of Camunda 7 variables to Camunda 8 compatible formats during migration.
 
 Variable transformation is supported for the following migration types:
@@ -326,6 +329,13 @@ When variable transformation fails:
 
 #### Example commands
 
+<Tabs groupId="os" defaultValue="maclinux" values={[
+{ label: 'Mac OS + Linux', value: 'maclinux' },
+{ label: 'Windows', value: 'windows' }
+]}>
+
+<TabItem value="maclinux">
+
 ```bash
 # List all skipped variables
 ./start.sh --history --list-skipped HISTORY_VARIABLE
@@ -333,6 +343,28 @@ When variable transformation fails:
 # List all skipped decision instances
 ./start.sh --history --list-skipped HISTORY_DECISION_INSTANCE
 
+# List the Camunda 7 ID and Camunda 8 key for each migrated variable
+./start.sh --history --list-migrated HISTORY_VARIABLE
+
 # Retry skipped entities after fixing issues
 ./start.sh --history --retry-skipped
 ```
+
+</TabItem>
+
+<TabItem value="windows">
+
+```bash
+# List all skipped variables
+start.bat --history --list-skipped HISTORY_VARIABLE
+
+# List all skipped decision instances
+start.bat --history --list-skipped HISTORY_DECISION_INSTANCE
+
+# Retry skipped entities after fixing issues
+start.bat --history --retry-skipped
+```
+
+</TabItem>
+
+</Tabs>

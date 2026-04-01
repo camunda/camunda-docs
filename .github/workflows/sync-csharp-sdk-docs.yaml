@@ -87,16 +87,35 @@ jobs:
 
       - name: Copy docs into camunda-docs
         run: |
-          TARGET="docs/${{ steps.resolve.outputs.docs_root }}/apis-tools/csharp-sdk/api-reference"
+          DOCS_ROOT="docs/${{ steps.resolve.outputs.docs_root }}"
+          TARGET="$DOCS_ROOT/apis-tools/csharp-sdk"
 
           # Clean previous generated docs
           rm -rf "$TARGET"
+          rm -f "$DOCS_ROOT/apis-tools/csharp-sdk.md"
           mkdir -p "$TARGET"
 
-          # Copy generated markdown and sidebar
-          cp -R csharp-sdk/docs-md/api-reference/* "$TARGET/"
+          # Copy landing page (sibling of the directory)
+          cp csharp-sdk/docs-md/csharp-sdk.md "$DOCS_ROOT/apis-tools/csharp-sdk.md"
 
-          echo "Copied $(find "$TARGET" -name '*.md' | wc -l) markdown files → ${{ steps.resolve.outputs.docs_root }}"
+          # Copy section pages + api-reference
+          cp -R csharp-sdk/docs-md/csharp-sdk/* "$TARGET/"
+
+          SECTION_COUNT=$(find "$TARGET" -maxdepth 1 -name '*.md' | wc -l | tr -d ' ')
+          API_COUNT=$(find "$TARGET/api-reference" -name '*.md' 2>/dev/null | wc -l | tr -d ' ')
+          echo "Copied landing page + ${SECTION_COUNT} section pages + ${API_COUNT} API reference files → ${{ steps.resolve.outputs.docs_root }}"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Format generated docs with Prettier
+        working-directory: docs
+        run: |
+          npm ci
+          DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
+          npx prettier --write "$DOCS_ROOT/apis-tools/csharp-sdk.md" "$DOCS_ROOT/apis-tools/csharp-sdk/"
 
       - name: Check for changes
         id: check_changes

@@ -1,16 +1,16 @@
 ---
 id: client-authorization
 title: "Client authorization"
-description: "Learn how the Zeebe Gateway supports Camunda Identity-based auth token validation."
+description: "Learn how the Zeebe Gateway supports Camunda Admin-based auth token validation."
 ---
 
-The Zeebe Gateway supports [Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md)-based auth token validation.
+The Zeebe Gateway supports [Orchestration Cluster Admin](/self-managed/components/orchestration-cluster/admin/overview.md)-based auth token validation.
 
-In the Camunda 8 Self-Managed Helm chart, authentication is enabled by default via Camunda Identity.
+In the Camunda 8 Self-Managed Helm chart, authentication is enabled by default via Camunda Admin.
 
-## Camunda Identity authorization
+## Camunda Admin authorization
 
-[Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md)-based OAuth token validation can be enabled by setting `security.authentication.mode` to `identity` and providing the corresponding `camunda.identity.*` properties. You can find more details about these in the [Camunda Identity documentation](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#core-configuration).
+[Orchestration Cluster Admin](/self-managed/components/orchestration-cluster/admin/overview.md)-based OAuth token validation can be enabled by setting `security.authentication.mode` to `identity` and providing the corresponding `camunda.identity.*` properties. You can find more details about these in the [Camunda Management Identity documentation](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#core-configuration).
 
 The Camunda 8 Self-Managed Helm chart is already fully preconfigured by default.
 
@@ -26,7 +26,7 @@ security:
       type: keycloak
 ```
 
-With authentication enabled, every request to the Gateway requires a valid auth token in the `Authorization` header, granting access to the configured `security.authentication.identity.audience`, issued by the configured `security.authentication.identity.issuerBackendUrl`. The `zeebe-api` audience is already pre-configured in Camunda Identity.
+With authentication enabled, every request to the Gateway requires a valid auth token in the `Authorization` header, granting access to the configured `security.authentication.identity.audience`, issued by the configured `security.authentication.identity.issuerBackendUrl`. The `zeebe-api` audience is already pre-configured in Camunda Admin.
 
 The authentication could be disabled by setting `security.authentication.mode: none` in the Gateway configuration file or via `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_MODE=none` as environment variable.
 

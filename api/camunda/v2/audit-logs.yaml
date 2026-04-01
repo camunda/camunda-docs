@@ -91,7 +91,6 @@ components:
         - agentElementId
         - tenantId
         - result
-        - annotation
         - category
         - processDefinitionId
         - processDefinitionKey
@@ -156,10 +155,6 @@ components:
           nullable: true
         result:
           $ref: "#/components/schemas/AuditLogResultEnum"
-        annotation:
-          type: string
-          description: Additional notes about the operation.
-          nullable: true
         category:
           $ref: "#/components/schemas/AuditLogCategoryEnum"
         processDefinitionId:
@@ -268,7 +263,6 @@ components:
           enum:
             - actorId
             - actorType
-            - annotation
             - auditLogKey
             - batchOperationKey
             - batchOperationType
@@ -507,7 +501,6 @@ components:
         - USER_TASKS
     AuditLogEntityKeyFilterProperty:
       description: EntityKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -543,7 +536,6 @@ components:
             $ref: "#/components/schemas/AuditLogEntityKey"
     EntityTypeFilterProperty:
       description: AuditLogEntityTypeEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -576,7 +568,6 @@ components:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
     OperationTypeFilterProperty:
       description: AuditLogOperationTypeEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -609,7 +600,6 @@ components:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
     CategoryFilterProperty:
       description: AuditLogCategoryEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -642,7 +632,6 @@ components:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
     AuditLogResultFilterProperty:
       description: AuditLogResultEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -675,7 +664,6 @@ components:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
     AuditLogActorTypeFilterProperty:
       description: AuditLogActorTypeEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match

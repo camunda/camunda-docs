@@ -77,6 +77,14 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
     <td>Use relational databases as secondary storage for the Orchestration Cluster.</td>
 </tr>
 <tr>
+    <td>[Admin](#identity-renamed-to-admin)</td>
+    <td><ul><li>Orchestration Cluster Identity has been renamed to Admin.</li></ul></td>
+ </tr>
+<tr>
+    <td>[Helm chart deployment](#helm-chart-deployment)</td>
+    <td><ul><li>Secondary storage type must be explicitly configured (no more implicit Elasticsearch default).</li><li>Deprecated secret keys removed; migrate to new `*.secret.existingSecret` pattern.</li><li>RDBMS now available as a first-class secondary storage option in Helm.</li><li>Default REST port changed from 8090 to 8080.</li></ul></td>
+</tr>
+<tr>
     <td>[Supported environments](#environments)</td>
     <td>Updated support for Java, Elasticsearch/OpenSearch, RDBMS, Helm, and connector runtime (including virtual threads).</td>
 </tr>
@@ -173,6 +181,22 @@ Use configuration‑based global user task listeners in your Self‑Managed depl
 - All user task lifecycle events emit rich payloads - full variable context at the time of the event, and standardized metadata for traceability and integration.
 
 <p class="link-arrow">[Global User task Listeners](/components/concepts/global-user-task-listeners.md)</p>
+## Identity renamed to Admin
+
+### Orchestration Cluster Identity renamed to Admin
+
+Starting with Camunda 8.9, the Orchestration Cluster Identity component has been renamed to **Admin** (Orchestration Cluster Admin).
+
+Admin is the cluster-level admin UI hosting identity management and other administrative features. The identity management capabilities (users, groups, roles, authorizations, tenants, mapping rules, and clients) remain the same—only the name has changed.
+
+What changed:
+
+- The `admin` Spring profile replaces the `identity` profile. Both profiles work interchangeably in 8.9; the `identity` profile is deprecated and will be removed in a future version.
+- API paths have changed from `/identity/*` to `/admin/*`. The old paths redirect to new paths but are deprecated.
+- Helm values have changed from `orchestration.identity.*` to `orchestration.admin.*`. The old values are deprecated.
+- Documentation paths have been updated: `/components/identity/` is now `/components/admin/`.
+
+For more information, see [Introduction to Admin](/components/admin/admin-introduction.md).
 
 ## Helm chart deployment
 

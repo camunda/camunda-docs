@@ -301,6 +301,11 @@ components:
           $ref: "#/components/schemas/DocumentMetadataResponse"
     DocumentCreationFailureDetail:
       type: object
+      required:
+        - detail
+        - fileName
+        - status
+        - title
       properties:
         fileName:
           type: string

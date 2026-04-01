@@ -153,6 +153,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-tabs-padding-vertical: 10px;
   --ifm-tabs-padding-horizontal: 15px;
   --kapa-button-bg: black;
+  --docsearch-search-button-text-color: rgb(140, 140, 140) !important;
 }
 
 .footer--dark {
@@ -185,6 +186,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --docsearch-secondary-text-color: rgb(140, 140, 140) !important;
   --docsearch-icon-color: rgb(140, 140, 140) !important;
 }
+
 .DocSearch-Button {
   background-color: #ebebee !important;
   border-radius: 20px !important;
