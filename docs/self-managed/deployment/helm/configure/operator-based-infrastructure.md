@@ -552,7 +552,7 @@ First, source the environment setup script to set `HELM_CHART_VERSION` and other
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/0-set-environment.sh
 ```
 
-Then, deploy Camunda Platform using the infrastructure configuration files you saved from previous sections.
+Then, deploy Camunda using the infrastructure configuration files you saved from previous sections.
 
 For end-to-end configuration patterns (OIDC-enabled "Full Cluster" including Optimize, Web Modeler, Console, and Identity), see the Full Cluster section of our [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md#full-cluster).
 
