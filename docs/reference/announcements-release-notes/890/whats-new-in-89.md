@@ -112,7 +112,7 @@ Enhancements make AI interactions more robust, configurable, and compatible with
 
 The MCP Client connector now supports multiple authentication strategies for connecting to MCP servers (OAuth, API key, and custom header–based authentication).
 
-<p class="link-arrow">[MCP Client connector](/docs/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-connector.md)</p>
+<p class="link-arrow">[MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-connector.md)</p>
 
 ### Orchestration Cluster MCP support
 
