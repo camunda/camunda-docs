@@ -331,11 +331,7 @@ This guide includes a managed Amazon OpenSearch example path for secondary stora
 For advanced deployments, you can disable managed OpenSearch and enable the Elasticsearch deployment from the Camunda Helm chart:
 
 :::caution Deprecated path
-The Helm-chart Elasticsearch deployment uses deprecated Bitnami subcharts. Prefer managed Elasticsearch/OpenSearch services or operator-based Elasticsearch via ECK for long-term deployments.
-:::
-
-:::tip Alternative: Operator-based Elasticsearch deployment
-Instead of relying on Helm-chart Elasticsearch subcharts, consider deploying [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) for a production-grade setup with automated scaling, upgrades, and built-in security.
+The Helm-chart Elasticsearch deployment uses deprecated Bitnami subcharts. Prefer managed Elasticsearch/OpenSearch services for long-term deployments, or deploy [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) if you need operator-based Elasticsearch with automated scaling, upgrades, and built-in security.
 :::
 
 <details>
