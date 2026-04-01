@@ -124,6 +124,17 @@ This update describes infrastructure deployment patterns in reference architectu
 <p class="link-arrow">[OpenShift dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)</p>
 <p class="link-arrow">[Dual-region operational tasks](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md)</p>
 
+### Migration from Bitnami subcharts
+
+<!-- https://github.com/camunda/product-hub/issues/3221 -->
+
+Camunda 8.9 adds migration guidance for customers moving Self-Managed Helm deployments away from deprecated Bitnami subcharts.
+
+- Use the migration guides to move PostgreSQL, Elasticsearch, and Keycloak from Bitnami subcharts to independent infrastructure services.
+- Follow the documented migration phases to plan backup, cutover, validation, and cleanup with minimal disruption.
+
+<p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md)</p>
+
 ## Migration from Camunda 7 to Camunda 8
 
 ### Conditional events support in Migration Analyzer and Diagram Converter
