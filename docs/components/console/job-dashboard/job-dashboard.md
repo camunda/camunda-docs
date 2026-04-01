@@ -67,7 +67,7 @@ Key elements:
   - **Assigned workers**
   - **Created jobs**
   - **Completed jobs**
-  - **Failed jobs**
+  - **Not completed jobs**
   - **Last completed**
 
 If the selected date range hits internal limits, Console shows a warning that not all data is displayed. Narrow the time range to see a more complete view.
