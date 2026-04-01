@@ -164,10 +164,10 @@ Attachments are only available when the **Content Type** is set to **HTML**. The
 
 Each attachment requires the following fields:
 
-| Field       | Required | Type   | Description                                                                                                                                                                                                                                                                                                                                                                   |
-| :---------- | :------: | :----- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id          |   Yes    | string | A unique identifier for the attachment (for example, a UUID like `16677edaada34773b62bca2e77ba059b`). This ID is used to reference the card in the message body via `<attachment id="..."></attachment>` HTML tags.                                                                                                                                                           |
-| contentType |   Yes    | string | The media type of the attachment. The most common value is `application/vnd.microsoft.card.adaptive` for Adaptive Cards. Other supported Microsoft Bot Framework card content types include `application/vnd.microsoft.card.hero`, `application/vnd.microsoft.card.thumbnail`, and `application/vnd.microsoft.card.receipt`.                                                 |
+| Field       | Required | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                       |
+| :---------- | :------: | :----- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id          |   Yes    | string | A unique identifier for the attachment (for example, a UUID like `16677edaada34773b62bca2e77ba059b`). This ID is used to reference the card in the message body via `<attachment id="..."></attachment>` HTML tags.                                                                                                                                                                                               |
+| contentType |   Yes    | string | The media type of the attachment. The most common value is `application/vnd.microsoft.card.adaptive` for Adaptive Cards. Other supported Microsoft Bot Framework card content types include `application/vnd.microsoft.card.hero`, `application/vnd.microsoft.card.thumbnail`, and `application/vnd.microsoft.card.receipt`.                                                                                      |
 | content     |   Yes    | string | The JSON payload of the card, provided as a stringified JSON string. For Adaptive Cards, you can design your card visually at [https://adaptivecards.microsoft.com/designer](https://adaptivecards.microsoft.com/designer), then copy the resulting JSON and stringify it (escape quotes, remove newlines) before pasting it into this field. If using a FEEL expression, the JSON object can be passed directly. |
 
 ### Auto-appended attachment tags
@@ -181,7 +181,8 @@ The following example shows how to send a message with an Adaptive Card attachme
 **Content (HTML body):**
 
 ```html
-Hello! Here is an important update: <attachment id="16677edaada34773b62bca2e77ba059b"></attachment>
+Hello! Here is an important update:
+<attachment id="16677edaada34773b62bca2e77ba059b"></attachment>
 ```
 
 **Attachments (FEEL expression):**
