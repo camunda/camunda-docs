@@ -9,7 +9,7 @@ Relational database (RDBMS) support is a core capability of the Orchestration Cl
 
 RDBMS is a standard secondary storage option for Orchestration Cluster installations, alongside Elasticsearch and OpenSearch.
 
-With RDBMS secondary storage, data is exported to your relational database, and the Orchestration Cluster reads from it.
+With RDBMS secondary storage, the RDBMS exporter writes orchestration data to your relational database, and the Orchestration Cluster API queries it. Operate, Tasklist, and Admin use that API rather than querying the database directly.
 
 In this context:
 
@@ -20,19 +20,13 @@ For a deeper conceptual comparison, see [understanding primary vs secondary stor
 
 ```mermaid
 graph LR
-    subgraph oc["Orchestration Cluster"]
-        broker["Zeebe Broker\n(primary storage)"]
-        exporter["RDBMS Exporter"]
-        apps["Operate · Tasklist · REST API · Identity"]
-    end
+    exporter["RDBMS Exporter"]
+    api["Orchestration Cluster API"]
     rdbms["RDBMS\n(secondary storage)"]
-    broker -->|"Stream records"| exporter
     exporter -->|"Write"| rdbms
-    apps -->|"Read"| rdbms
-    style broker fill:#e4eef8,stroke:#2272c9,color:#14082c
+    api -->|"Query"| rdbms
     style exporter fill:#e4eef8,stroke:#2272c9,color:#14082c
-    style apps fill:#e4eef8,stroke:#2272c9,color:#14082c
-    style oc fill:#f0f5ff,stroke:#2272c9
+    style api fill:#e4eef8,stroke:#2272c9,color:#14082c
     style rdbms fill:#fde8da,stroke:#fc5d0d,color:#14082c
 ```
 

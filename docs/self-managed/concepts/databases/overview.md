@@ -20,31 +20,7 @@ For an architectural explanation of how secondary storage fits into Camunda 8, s
 | Web Modeler           | Yes   | No      |
 | Management Identity   | Yes   | No      |
 
-Use this matrix as a quick decision aid when planning your deployment topology.
-
-```mermaid
-graph LR
-    subgraph apps["Camunda Applications"]
-        oc["Orchestration Cluster\n(Operate · Tasklist · REST API · Identity)"]
-        mgmt["Web Modeler &\nManagement Identity"]
-        opt["Optimize"]
-    end
-    subgraph backends["External Databases"]
-        rdbms["RDBMS\n(PostgreSQL, Oracle, MariaDB, MySQL)"]
-        es["Document-store\n(Elasticsearch/OpenSearch)"]
-    end
-    oc -->|"RDBMS backend option"| rdbms
-    oc -.->|"Document-store backend option"| es
-    mgmt -->|"RDBMS only"| rdbms
-    opt -->|"Document-store only"| es
-    style oc fill:#e4eef8,stroke:#2272c9,color:#14082c
-    style mgmt fill:#e4eef8,stroke:#2272c9,color:#14082c
-    style opt fill:#e8fdf1,stroke:#10c95d,color:#14082c
-    style rdbms fill:#fde8da,stroke:#fc5d0d,color:#14082c
-    style es fill:#fde8da,stroke:#fc5d0d,color:#14082c
-    style apps fill:#f0f5ff,stroke:#2272c9
-    style backends fill:#fff8f4,stroke:#fc5d0d
-```
+Use this matrix as a compatibility summary for the main Camunda components and their supported database backends.
 
 ## Document-store backends
 
@@ -61,7 +37,7 @@ Related documentation:
 
 ## Relational databases (RDBMS)
 
-Camunda also supports several relational databases for secondary storage, enabling Operate, Tasklist, Identity, and REST APIs to run without Elasticsearch or OpenSearch.
+Camunda also supports several relational databases for secondary storage, enabling the Orchestration Cluster API, Operate, Tasklist, and Admin to run without Elasticsearch or OpenSearch.
 
 RDBMS and document-store backends are both valid secondary storage options. Select based on your workload, operational model, and platform standards.
 
