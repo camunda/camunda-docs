@@ -60,5 +60,11 @@
       groupName: "node",
       automerge: true,
     },
+    {
+      // Automerge minor and patch updates of Maven/Java dependencies
+      matchManagers: ["maven"],
+      matchUpdateTypes: ["patch", "minor"],
+      automerge: true,
+    },
   ],
 }

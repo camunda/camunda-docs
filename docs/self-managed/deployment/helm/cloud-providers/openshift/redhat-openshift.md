@@ -35,7 +35,7 @@ Additional information and a high-level overview of Kubernetes as the upstream p
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
-- A namespace to host the Camunda Platform.
+- A namespace to host Camunda.
 - Permissions to install Kubernetes operators (cluster-admin or equivalent) for deploying the infrastructure services (Elasticsearch, PostgreSQL, Keycloak). These operators can also be installed via the [OpenShift OperatorHub](https://docs.openshift.com/container-platform/latest/operators/understanding/olm-understanding-operatorhub.html), but this guide installs them directly from source for full control over versions and configuration.
 
 <SecondaryStorageOptionsNote />
@@ -300,7 +300,7 @@ If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](http
   <TabItem value="no-ingress" label="No Ingress">
 If you do not have a domain name or do not intend to use one for your Camunda 8 deployment, external access to Camunda 8 web endpoints from outside the OpenShift cluster will not be possible.
 
-However, you can use `kubectl port-forward` to access the Camunda platform without a domain name or Ingress configuration. For more information, refer to the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+However, you can use `kubectl port-forward` to access Camunda without a domain name or Ingress configuration. For more information, refer to the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
 
 To make this work, you will need to configure the deployment to reference `localhost` with the forwarded port. Merge the no-domain overlay into your `values.yml` file:
 
@@ -664,7 +664,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 This command:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart.
+- Installs (or upgrades) Camunda using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 

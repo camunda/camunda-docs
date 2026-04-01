@@ -26,7 +26,7 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
-- A namespace to host the Camunda Platform; in this guide we will reference `camunda` as the target namespace.
+- A namespace to host Camunda; in this guide we will reference `camunda` as the target namespace.
 - (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - (optional) Permissions to install Kubernetes operators (cluster-admin or equivalent) to deploy infrastructure services such as Elasticsearch, PostgreSQL, and Keycloak. This guide installs them directly from source to provide full control over versions and configuration.
   For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
@@ -84,7 +84,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 If you do not have a domain name, external access to Camunda 8 web endpoints from outside the Azure Virtual Network will not be possible. In this case, skip the DNS setup and proceed directly to [deploying Camunda 8 via Helm charts](#deploy-camunda-8-via-helm-charts).
 
-Alternatively, you can use `kubectl port-forward` to access the Camunda platform without a domain or Ingress configuration. For more information, see the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+Alternatively, you can use `kubectl port-forward` to access Camunda without a domain or Ingress configuration. For more information, see the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
 
 Throughout the rest of this installation guide, we will refer to configurations as **"With domain"** or **"Without domain"** depending on whether the application is exposed via a domain.
 :::
@@ -319,7 +319,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 This script:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart.
+- Installs (or upgrades) Camunda using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 

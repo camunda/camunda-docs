@@ -15,7 +15,7 @@ Global user task listeners allow you to define listeners once for all processes 
 To learn more about global user task listeners, including execution order, supported features, and configuration options, see the [global user task listeners concept page](/components/concepts/global-user-task-listeners.md).
 :::
 
-You can manage global user task listeners through the Admin UI, [Unified Configuration](/components/concepts/global-user-task-listeners.md#configure-through-unified-configuration), or the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/create-global-task-listener.api.mdx).
+You can manage global user task listeners through the Admin UI, [Unified Configuration](/components/concepts/global-user-task-listeners/configuration.md#configure-through-unified-configuration), or the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/create-global-task-listener.api.mdx).
 
 ## Manage global user task listeners in Admin
 

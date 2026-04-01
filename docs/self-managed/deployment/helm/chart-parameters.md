@@ -5,6 +5,8 @@ title: Helm chart parameters
 description: Overview of Helm chart parameters for Camunda Self-Managed.
 ---
 
+import MigrationTip from './operational-tasks/migration-from-bitnami/\_partials/\_migration-tip.md'
+
 Helm chart parameters let you configure the components and behavior of your Camunda Self-Managed installation. The main way to customize these parameters is by using a `values.yaml` file.
 
 In Helm charts, the `values.yaml` file defines configuration for your deployment. To tailor your installation to your needs, you can override parameters in this file or provide your own values file. It's best practice to keep the original `values.yaml` unchanged and maintain a separate file with your custom settings.
@@ -34,6 +36,8 @@ The following tables show the **top-level configuration sections** in `values.ya
 
 ### Bitnami subcharts
 
+Bitnami subcharts are best suited for development and testing environments unless your operations team has experience managing Bitnami chart deployments in production. For production environments, deploy infrastructure services separately from the Camunda Helm charts. This lets you use your preferred deployment methods, leverage managed services (for example, Amazon OpenSearch Service), and manage infrastructure lifecycles independently of Camunda. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
+
 - `elasticsearch`: Provides an embedded Elasticsearch backend (Bitnami subchart). This can be used as a secondary storage backend for evaluations. See [secondary storage](/reference/glossary.md#secondary-storage) and [document-store backends (Elasticsearch/OpenSearch)](/reference/glossary.md#elasticsearchopensearch).
 - `identityKeycloak`: Provides an embedded Keycloak service for Management Identity (Bitnami subchart).
 - `identityPostgresql`: Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart).
@@ -45,14 +49,7 @@ The Helm chart supports embedded Elasticsearch for evaluations. For production, 
 See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms).
 :::
 
-:::info
-Bitnami subcharts are best suited for development and testing environments unless your operations team has experience managing Bitnami chart deployments in production.
-
-For production environments, deploy infrastructure services separately from the Camunda Helm charts. This lets you use your preferred deployment methods, leverage managed services (for example, Amazon OpenSearch Service), and manage infrastructure lifecycles independently of Camunda.
-
-**Alternative deployment approach:**  
-See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
-:::
+<MigrationTip />
 
 #### Bitnami subcharts guidance
 

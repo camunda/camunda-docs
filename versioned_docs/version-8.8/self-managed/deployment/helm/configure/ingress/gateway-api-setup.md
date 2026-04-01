@@ -39,11 +39,13 @@ Get started by running the `helm template` command against version 8.9 or later 
 
 ```bash
 helm template camunda camunda/camunda-platform \
-  --version 14.0.0 \
+  --devel \
+  --version 14.0.0-alpha5 \
   --set global.host=example.com \
   --set global.gateway.enabled=true \
   --set global.gateway.createGatewayResource=true \
   --set orchestration.data.secondaryStorage.type=elasticsearch \
+  --set orchestration.gateway.grpc.enabled=true \
   --show-only templates/orchestration/httproute.yaml \
   --show-only templates/orchestration/grpcroute.yaml \
   --show-only templates/common/referencegrant.yaml \
@@ -149,3 +151,34 @@ spec:
 ```
 
 See [Kubernetes `HTTPRoute`](https://gateway-api.sigs.k8s.io/api-types/httproute/) and [Kubernetes `GRPCRoute`](https://gateway-api.sigs.k8s.io/api-types/grpcroute/) for more details.
+
+### NGINX Gateway Fabric: ProxySettingsPolicy
+
+If you are using the Gateway API with the NGINX Gateway Fabric, the default proxy buffer size is likely too small.
+
+[ProxySettingsPolicy documentation](https://docs.nginx.com/nginx-gateway-fabric/traffic-management/proxy-settings/).
+
+You may need to install a CRD to be able to create ProxySettingsPolicy resources. This can be found here: [CRD location](https://github.com/nginx/nginx-gateway-fabric/tree/main/config/crd/bases)
+
+An error that might indicate you need to change something is:
+
+> 502: upstream sent too big header while reading response header from upstream
+
+```yaml
+apiVersion: gateway.nginx.org/v1alpha1
+kind: ProxySettingsPolicy
+metadata:
+  name: camunda-platform
+  namespace: camunda
+spec:
+  buffering:
+    bufferSize: 128k
+    buffers:
+      number: 8
+      size: 128k
+    busyBuffersSize: 256k
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: camunda-platform
+```

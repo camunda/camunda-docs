@@ -76,7 +76,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-  /decision-instances/{decisionInstanceKey}/deletion:
+  /decision-instances/{decisionEvaluationKey}/deletion:
     post:
       tags:
         - Decision instance
@@ -89,15 +89,15 @@ paths:
 
         Delete all associated decision evaluations based on provided key.
       parameters:
-        - name: decisionInstanceKey
+        - name: decisionEvaluationKey
           in: path
           required: true
-          description: The key of the decision instance to delete.
+          description: The key of the decision evaluation to delete.
           schema:
             type: string
-            format: string<DecisionInstanceKey>
-            example: "22517998136843567"
-            description: System-generated key for a deployed decision instance.
+            format: string<DecisionEvaluationKey>
+            example: "2251792362345323"
+            description: System-generated key for a decision evaluation.
       requestBody:
         required: false
         content:

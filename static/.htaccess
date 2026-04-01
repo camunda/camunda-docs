@@ -260,6 +260,9 @@ RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/?
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-880-890/?$ /docs/next/self-managed/upgrade/helm/880-to-890/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/manual/upgrade/?$ /docs/next/self-managed/upgrade/manual/ [R=301,L]
 
+# Removed Camunda Exporter indices page
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices/?$ /docs/next/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/ [R=301,L]
+
 # Change ID of choose-right-model-agentic
 RewriteRule ^docs/next/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/next/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
 RewriteRule ^docs/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
@@ -414,7 +417,7 @@ RewriteRule ^docs/self-managed/setup/guides/?$ /docs/self-managed/installation-m
 RewriteRule ^docs/self-managed/setup/guides/installing-payment-app-example/?$ /docs/self-managed/installation-methods/manual/install/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/prefix-elasticsearch-indices/?$ /docs/self-managed/installation-methods/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/using-existing-postgres/?$ /docs/self-managed/installation-methods/helm/configure/database/postgresql/using-external-postgresql/ [R=301,L]
-RewriteRule ^docs/self-managed/tasklist-deployment/install-and-start/?$ /docs/self-managed/components/orchestration-cluster/tasklist/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/tasklist-deployment/install-and-start/?$ /docs/self-managed/deployment/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/configuration/logging/?$ /docs/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/zeebe-installation/?$ /docs/self-managed/components/orchestration-cluster/zeebe/overview/ [R=301,L]
 
@@ -768,9 +771,6 @@ RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/correlate-a-message
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/search-users/ [R=301,L]
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/deploy-resources/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/create-deployment/ [R=301,L]
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-element-instance-variables/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables/ [R=301,L]
-
-# Remove Camunda exporter from 8.7 docs
-RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/?$ /docs/self-managed/components/orchestration-cluster/zeebe/exporters/install-zeebe-exporters/ [R=301,L]
 
 # Restructure Identity Docs (8.7)
 RewriteRule ^docs/self-managed/setup/guides/using-existing-keycloak/?$ /docs/self-managed/installation-methods/helm/configure/using-external-keycloak/ [R=301,L]
