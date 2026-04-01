@@ -43,7 +43,7 @@ The architecture includes the following core components:
 To demonstrate how to deploy with a custom domain, the following stack is also included:
 
 - **cert-manager**: Automates TLS certificate management with [Let's Encrypt](https://letsencrypt.org/)
-- **external-dns**: Manages DNS record in Route53 for domain ownership confirmation
+- **external-dns**: Manages DNS records in Azure DNS for domain ownership confirmation
 - **ingress-nginx**: Provides HTTP/HTTPS load balancing and routing to Kubernetes services
 
 <SingleNamespaceDeployment />
@@ -55,6 +55,19 @@ While this guide is primarily tailored for UNIX systems, it can also be run unde
 Multi-tenancy is disabled by default and is not covered further in this guide. If you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
 
 [Workload Identities](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview) offer a way to connect to Azure-managed PostgreSQL. This is not yet supported by Camunda.
+
+### Secondary storage
+
+This guide supports two [secondary storage](/self-managed/concepts/secondary-storage/index.md) backends. If you have not chosen a variant yet, refer to the [Terraform setup guide](./terraform-setup.md#variants) for details.
+
+| Variant           | Secondary storage                                                                                                      | Optimize      | Reference architecture    |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------- | ------------------------- |
+| **Elasticsearch** | [Elasticsearch via ECK](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#deploy-elasticsearch) | Supported     | `aks-single-region`       |
+| **RDBMS**         | [Azure Database for PostgreSQL](/self-managed/deployment/helm/configure/database/rdbms.md)                             | Not available | `aks-single-region-rdbms` |
+
+:::note
+Select a variant using the **Elasticsearch** / **RDBMS** tabs throughout this guide. All tabbed sections will switch together automatically.
+:::
 
 ## Export environment variables
 
@@ -74,9 +87,29 @@ When using standard authentication (username and password), specific environment
 
 Verify the configuration of your environment variables by running the following loop:
 
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/check-env-variables.sh
 ```
+
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS variant requires additional orchestration database variables (`DB_ORCHESTRATION_NAME`, `DB_ORCHESTRATION_USERNAME`, `DB_ORCHESTRATION_PASSWORD`):
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/procedure/check-env-variables.sh
+```
+
+</TabItem>
+</Tabs>
 
 ## (Optional) Ingress Setup
 
@@ -204,9 +237,29 @@ The following makes use of the [combined Ingress setup](/self-managed/deployment
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
 :::
 
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
+
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-domain.yml
 ```
+
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS values file disables Elasticsearch and Optimize, and configures PostgreSQL as the secondary storage for the orchestration cluster:
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/helm-values/values-domain.yml
+```
+
+</TabItem>
+</Tabs>
 
 :::danger Exposure of the Zeebe Gateway Service
 
@@ -222,17 +275,57 @@ Before installing the Helm chart, create Kubernetes secrets to store the databas
 
 To create the secrets, run the following commands:
 
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-external-db-secrets.sh
 ```
 
 </TabItem>
 
+<TabItem value="rdbms">
+
+The RDBMS variant creates an additional `orchestration-postgres-secret` for the secondary storage database:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/procedure/create-external-db-secrets.sh
+```
+
+</TabItem>
+</Tabs>
+
+</TabItem>
+
 <TabItem value="without-domain" label="Without domain">
+
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-no-domain.yml
 ```
+
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS values file disables Elasticsearch and Optimize, and configures PostgreSQL as the secondary storage for the orchestration cluster:
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/helm-values/values-no-domain.yml
+```
+
+</TabItem>
+</Tabs>
 
 <NoDomainInfo />
 
@@ -242,9 +335,29 @@ Before installing the Helm chart, create Kubernetes secrets to store the databas
 
 To create the secrets, run the following command:
 
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-external-db-secrets.sh
 ```
+
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS variant creates an additional `orchestration-postgres-secret` for the secondary storage database:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/procedure/create-external-db-secrets.sh
+```
+
+</TabItem>
+</Tabs>
 
 </TabItem>
 </Tabs>
@@ -256,6 +369,13 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and Connectors](/self-managed/deployment/helm/install/quick-install.md#configuring-web-modeler-console-and-connectors).
 
 ### 3. Deploy prerequisite services
+
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
 
 Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch) can be deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
@@ -287,7 +407,18 @@ Merge the **Elasticsearch** overlay:
 yq '. *+ load("generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
 ```
 
-#### Fill your deployment with actual values
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS variant does **not** require Elasticsearch or the ECK Operator. The Helm values already configure PostgreSQL as the secondary storage, and Elasticsearch is disabled.
+
+Skip directly to [filling your deployment with actual values](#fill-your-deployment-with-actual-values).
+
+</TabItem>
+</Tabs>
+
+#### Fill your deployment with actual values {#fill-your-deployment-with-actual-values}
 
 Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
 
@@ -513,9 +644,11 @@ The following are some advanced configuration topics to consider for your cluste
 
 - [Camunda production installation guide with Kubernetes and Helm](versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md)
 - [Cluster autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/azure/README.md)
+- [Configure RDBMS secondary storage](/self-managed/deployment/helm/configure/database/rdbms.md)
+- [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)
 
 To get more familiar with our product stack, visit the following topics:
 
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [Optimize](/components/optimize/what-is-optimize.md)
+- [Optimize](/components/optimize/what-is-optimize.md) (Elasticsearch variant only)
