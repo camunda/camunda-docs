@@ -2,7 +2,7 @@
 id: whats-new-in-89
 title: What's new in Camunda 8.9
 sidebar_label: What's new in Camunda 8.9
-description: "Learn more about what's new and changed in Camunda 8.9."
+description: "Highlights and important changes to consider when upgrading to Camunda 8.9."
 keywords:
   [
     "what's changed",
@@ -16,8 +16,9 @@ toc_max_heading_level: 2
 ---
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Highlights and important changes in Camunda 8.9 you should consider when upgrading from Camunda 8.8.
+<PageDescription />
 
 ## Why upgrade to Camunda 8.9?
 
@@ -37,7 +38,7 @@ Upgrading to Camunda 8.9 delivers significant benefits and keeps your installati
 
 ## Summary of important changes
 
-Important changes introduced in Camunda 8.9 are summarized as follows:
+Important changes in Camunda 8.9 are summarized as follows:
 
 <table className="table-callout">
 <tr>
@@ -54,7 +55,7 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
     <td>[Camunda 8 Run](#camunda8run)</td>
-    <td>Use H2 as the default secondary storage for your local/development setups.</td>
+    <td>Improved CLI and configuration experience, use H2 as the default secondary storage for your local/development setups.</td>
 </tr>
 <tr>
     <td>[Global user task listeners](#listeners)</td>
@@ -62,7 +63,11 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
 <td>[Helm chart deployment](#helm-chart-deployment)</td>
-    <td>RDBMS and secondary storage type configuration, removal of deprecated secret keys, migration to new `*.secret.existingSecret` pattern, and Helm 4 support.</td>
+    <td>RDBMS and secondary storage type configuration, removal of deprecated secret keys, migration to new `*.secret.existingSecret` pattern, default REST port changed from 8090 to 8080, and Helm 4 support.</td>
+</tr>
+<tr>
+<td>[Migration from Camunda 7](#migration)</td>
+    <td>New migration tools include History Data Migrator and Identity Data Migrator.</td>
 </tr>
 <tr>
     <td>[Modeler](#modeler)</td>
@@ -70,19 +75,11 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
     <td>[Orchestration Cluster](#ocluster)</td>
-    <td>Amazon ECS (EC2+Fargate) support, cluster variables for shared configuration, Cluster Metrics endpoint for SaaS clusters, and conifguration improvements and enhancements.</td>
+    <td>Identity renamed to Admin, Amazon ECS (EC2+Fargate) support, cluster variables for shared configuration, Cluster Metrics endpoint for SaaS clusters, and conifguration improvements and enhancements.</td>
 </tr>
 <tr>
     <td>[RDBMS secondary storage](#rdbms)</td>
     <td>Use relational databases as secondary storage for the Orchestration Cluster.</td>
-</tr>
-<tr>
-    <td>[Admin](#identity-renamed-to-admin)</td>
-    <td><ul><li>Orchestration Cluster Identity has been renamed to Admin.</li></ul></td>
- </tr>
-<tr>
-    <td>[Helm chart deployment](#helm-chart-deployment)</td>
-    <td><ul><li>Secondary storage type must be explicitly configured (no more implicit Elasticsearch default).</li><li>Deprecated secret keys removed; migrate to new `*.secret.existingSecret` pattern.</li><li>RDBMS now available as a first-class secondary storage option in Helm.</li><li>Default REST port changed from 8090 to 8080.</li></ul></td>
 </tr>
 <tr>
     <td>[Supported environments](#environments)</td>
@@ -105,30 +102,17 @@ Build AI agents more easily with enhanced Camunda AI and MCP connectors in 8.9.
 
 Enhancements make AI interactions more robust, configurable, and compatible with a wider range of AI providers.
 
-<table className="table-callout">
-<tr>
-    <td width="30%">**Feature**</td>
-    <td>**Description**</td>
-</tr>
-<tr>
-    <td>[AI Agent connectors](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</td>
-    <td>Timeout configuration at the model level, allowing you to cap how long AI calls can run.</td>
-</tr>
-<tr>
-    <td>[Amazon Bedrock connector](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md)</td>
-    <td>Support for long‑term API key authentication in addition to existing methods.</td>
-</tr>
-<tr>
-    <td>OpenAI-compatible models</td>
-    <td>Custom query parameters in the endpoint URL, useful for setting API versions, and passing additional metadata required by custom API gateways.</td>
-</tr>
-</table>
+| Feature                                                                                        | Description                                                                                                                                    |
+| :--------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
+| [AI Agent connectors](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)  | Timeout configuration at the model level, allowing you to cap how long AI calls can run.                                                       |
+| [Amazon Bedrock connector](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) | Support for long‑term API key authentication in addition to existing methods.                                                                  |
+| OpenAI-compatible models                                                                       | Custom query parameters in the endpoint URL, useful for setting API versions, and passing additional metadata required by custom API gateways. |
 
 ### MCP Client connector authentication
 
 The MCP Client connector now supports multiple authentication strategies for connecting to MCP servers (OAuth, API key, and custom header–based authentication).
 
-<p class="link-arrow">[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client-connector.md)</p>
+<p class="link-arrow">[MCP Client connector](/docs/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-connector.md)</p>
 
 ### Orchestration Cluster MCP support
 
@@ -143,6 +127,14 @@ Use the new user operations audit log to access a record of operations, includin
 Use the audit log to prove compliance, meet governance and regulatory requirements, maintain operational integrity and transparency, and troubleshoot issues.
 
 <p class="link-arrow">[Audit log](/components/audit-log/overview.md)</p>
+
+## BPMN conditional events
+
+Camunda 8 now supports BPMN conditional events, allowing users to start, continue, or interrupt process execution dynamically based on evaluated conditions.
+
+This enhancement provides first-class support for conditional start, boundary, and intermediate catch events, making process automation more expressive and migration from Camunda 7 smoother.
+
+<p class="link-arrow">[Conditional events](/components/modeler/bpmn/conditional-events/conditional-events.md)</p>
 
 ## Camunda 8 Run {#camunda8run}
 
@@ -181,26 +173,32 @@ Use configuration‑based global user task listeners in your Self‑Managed depl
 - All user task lifecycle events emit rich payloads - full variable context at the time of the event, and standardized metadata for traceability and integration.
 
 <p class="link-arrow">[Global User task Listeners](/components/concepts/global-user-task-listeners.md)</p>
-## Identity renamed to Admin
-
-### Orchestration Cluster Identity renamed to Admin
-
-Starting with Camunda 8.9, the Orchestration Cluster Identity component has been renamed to **Admin** (Orchestration Cluster Admin).
-
-Admin is the cluster-level admin UI hosting identity management and other administrative features. The identity management capabilities (users, groups, roles, authorizations, tenants, mapping rules, and clients) remain the same—only the name has changed.
-
-What changed:
-
-- The `admin` Spring profile replaces the `identity` profile. Both profiles work interchangeably in 8.9; the `identity` profile is deprecated and will be removed in a future version.
-- API paths have changed from `/identity/*` to `/admin/*`. The old paths redirect to new paths but are deprecated.
-- Helm values have changed from `orchestration.identity.*` to `orchestration.admin.*`. The old values are deprecated.
-- Documentation paths have been updated: `/components/identity/` is now `/components/admin/`.
-
-For more information, see [Introduction to Admin](/components/admin/admin-introduction.md).
 
 ## Helm chart deployment
 
 Important changes to Helm chart deployment in 8.9 are as follows:
+
+### Default REST port changed
+
+The Orchestration Cluster's default HTTP port has changed from 8090 to 8080.
+
+You should update any hardcoded port references in network policies, Ingress rules, or service configuration.
+
+### Helm 4 support
+
+As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
+
+<p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
+
+:::note
+Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
+:::
+
+### RDBMS as secondary storage
+
+The Helm chart now supports relational databases as a first-class secondary storage option alongside Elasticsearch and OpenSearch.
+
+You can configure database connections directly under `orchestration.data.secondaryStorage.rdbms` in your `values.yaml`.
 
 ### Secondary storage must be explicitly configured
 
@@ -235,27 +233,25 @@ You are affected if your `values.yaml` uses any of the legacy secret keys (such 
 
 See the [release announcements](/reference/announcements-release-notes/890/890-announcements.md#helm-chart-deprecated-secret-keys-removed) for the full list of removed keys.
 
-### RDBMS as secondary storage
+## Migration from Camunda 7 to Camunda 8 {#migration}
 
-The Helm chart now supports relational databases as a first-class secondary storage option alongside Elasticsearch and OpenSearch.
+Camunda 8.9 introduces the following additional tools and features to help you migrate from Camunda 7 to Camunda 8.
 
-You can configure database connections directly under `orchestration.data.secondaryStorage.rdbms` in your `values.yaml`.
-
-### Default REST port changed
-
-The Orchestration Cluster's default HTTP port has changed from 8090 to 8080.
-
-You should update any hardcoded port references in network policies, Ingress rules, or service configuration.
-
-### Helm 4 support
-
-As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
-
-<p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
-
-:::note
-Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
+:::tip
+Start your migration today with the [Camunda 7 to Camunda 8 migration guide](/guides/migrating-from-camunda-7/index.md).
 :::
+
+### History Data Migrator
+
+The History Data Migrator migrates audit trail data (the history of process execution, including active, completed and canceled instances) to Camunda 8 when RDBMS is used as secondary storage.
+
+<p class="link-arrow">[History Data Migrator](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md)</p>
+
+### Identity Data Migrator
+
+The Identity Data Migrator migrates authorizations that control access to resources in Camunda, helping you preserve permissions when migrating to Camunda 8.
+
+<p class="link-arrow">[Identity Data Migrator](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/identity.md)</p>
 
 ## Modeler {#modeler}
 
@@ -347,6 +343,19 @@ This helps operations teams consolidate Camunda monitoring into existing observa
 You can now configure RocksDB memory on a per-broker basis instead of per-partition, simplifying capacity planning and aligning with familiar JVM-style sizing.
 
 <p class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+
+### Orchestration Cluster Identity renamed to Admin
+
+Starting with Camunda 8.9, the Orchestration Cluster Identity component is renamed to **Admin** (Orchestration Cluster Admin).
+
+Admin is the cluster-level admin UI hosting identity management and other administrative features. Only the name has changed. Identity management (users, groups, roles, authorizations, tenants, mapping rules, and clients) is unchanged.
+
+- The `admin` Spring profile replaces the `identity` profile. Both profiles work interchangeably in 8.9. The `identity` profile is deprecated and will be removed in a future version.
+- API paths change from `/identity/*` to `/admin/*`. The old paths redirect to the new paths but are deprecated.
+- Helm values change from `orchestration.identity.*` to `orchestration.admin.*`. The old values are deprecated.
+- Documentation paths are updated: `/components/identity/` is now `/components/admin/`.
+
+<p class="link-arrow">[Introduction to Admin](/components/admin/admin-introduction.md)</p>
 
 ### Unified component configuration {#ucc}
 
@@ -451,31 +460,3 @@ The following guides offer detailed information on how to upgrade to Camunda 8.9
     <td><p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p></td>
 </tr>
 </table>
-
-## Migration from Camunda 7 to Camunda 8
-
-While with the last 8.8 release we already added the Runtime Data Migrator, Code Conversion, and the Diagram Converter, in 8.9 we are adding the following additional tools and features to help you migrate from Camunda 7 to Camunda 8.
-
-:::tip
-Start your migration today with the [Camunda 7 to Camunda 8 migration guide](/guides/migrating-from-camunda-7/index.md).
-:::
-
-### History Data Migrator
-
-The History Data Migrator migrates audit trail data (the history of process execution, including active, completed and canceled instances) to Camunda 8 when RDBMS is used as secondary storage.
-
-<p class="link-arrow">[History Data Migrator](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md)</p>
-
-### Identity Data Migrator
-
-The Identity Data Migrator migrates authorizations that control access to resources in Camunda, helping you preserve permissions when migrating to Camunda 8.
-
-<p class="link-arrow">[Identity Data Migrator](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/identity.md)</p>
-
-### BPMN conditional events
-
-Camunda 8 now supports BPMN conditional events, allowing users to start, continue, or interrupt process execution dynamically based on evaluated conditions.
-
-This enhancement provides first-class support for conditional start, boundary, and intermediate catch events, making process automation more expressive and migration from Camunda 7 smoother.
-
-<p class="link-arrow">[Conditional events](/components/modeler/bpmn/conditional-events/conditional-events.md)</p>
