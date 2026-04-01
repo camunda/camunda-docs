@@ -455,6 +455,10 @@ Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this rol
 The Web Modeler API endpoints under `/api/v1/milestones` that were deprecated in Camunda 8.8 are now removed in 8.9.
 You can use the corresponding endpoints under `/api/v1/versions` instead.
 
+:::warning Web Modeler SaaS
+In Web Modeler SaaS, the endpoints will no longer be available as of April 14, 2026.
+:::
+
 <p className="link-arrow">[Web Modeler API](/apis-tools/web-modeler-api/index.md)</p>
 
 </div>
