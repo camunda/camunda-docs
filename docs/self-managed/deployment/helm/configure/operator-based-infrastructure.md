@@ -55,7 +55,7 @@ Before proceeding with this guide, ensure you have:
 - **Cluster admin privileges**: Required to install Custom Resource Definitions (CRDs) and operators
 - **Command-line tools**:
   - `kubectl` configured to access your cluster
-  - `helm` CLI for deploying Camunda Platform
+  - `helm` CLI for deploying Camunda using the Helm chart
   - `openssl` for generating random passwords
   - `envsubst` command (part of `gettext` package) for environment variable substitution
 
@@ -139,7 +139,7 @@ Each infrastructure component should be deployed individually in the following o
 | 1     | **[PostgreSQL](#postgresql-deployment)**       | None         | Database clusters for Keycloak, Management Identity, and Web Modeler |
 | 2     | **[Elasticsearch](#elasticsearch-deployment)** | None         | Secondary storage for orchestration cluster components               |
 | 3     | **[Keycloak](#keycloak-deployment)**           | PostgreSQL   | Authentication and identity management                               |
-| 4     | **[Camunda Platform](#camunda-deployment)**    | All above    | Deploy using Helm with operator-managed infrastructure               |
+| 4     | **[Camunda](#camunda-deployment)**             | All above    | Deploy using Helm with operator-managed infrastructure               |
 
 :::tip Automation with GitOps
 While this guide demonstrates manual deployment using command-line tools, these same configurations can be automated using GitOps solutions like ArgoCD, Flux, or other Kubernetes deployment pipelines. All configuration files referenced in this guide are designed to work seamlessly with declarative deployment approaches.
@@ -514,7 +514,7 @@ With all infrastructure components deployed and configured, you can now deploy C
 
 ### Configuration files summary
 
-Before deploying Camunda Platform, ensure you have saved all required configuration files locally. The files are organized by deployment phase:
+Before deploying Camunda, ensure you have saved all required configuration files locally. The files are organized by deployment phase:
 
 #### Infrastructure deployment files (Custom Resources)
 
@@ -538,7 +538,7 @@ Before deploying Camunda Platform, ensure you have saved all required configurat
 
 ### Pre-deployment checklist
 
-Before deploying Camunda Platform:
+Before deploying Camunda, ensure you have completed the following:
 
 - [ ] All infrastructure components deployed (PostgreSQL, Elasticsearch, Keycloak)
 - [ ] Configuration files saved locally from previous sections
@@ -559,7 +559,7 @@ For end-to-end configuration patterns (OIDC-enabled "Full Cluster" including Opt
 <Tabs groupId="camunda-deployment">
   <TabItem value="with-domain" label="With external domain" default>
 
-Deploy Camunda Platform with external domain configuration:
+Deploy Camunda with external domain configuration:
 
 ```bash
 helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
@@ -574,7 +574,7 @@ helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
 </TabItem>
   <TabItem value="no-domain" label="Local development">
 
-Deploy Camunda Platform for local development:
+Deploy Camunda for local development:
 
 ```bash
 helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
