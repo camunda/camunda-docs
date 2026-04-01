@@ -444,6 +444,26 @@ Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this rol
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Removed</span>
+</div>
+<div className="release-announcement-content">
+
+#### Removed: Web Modeler API milestone endpoints
+
+The Web Modeler API endpoints under `/api/v1/milestones` that were deprecated in Camunda 8.8 are now removed in 8.9.
+You can use the corresponding endpoints under `/api/v1/versions` instead.
+
+:::warning Web Modeler SaaS
+In Web Modeler SaaS, the endpoints will no longer be available as of April 14, 2026.
+:::
+
+<p className="link-arrow">[Web Modeler API](/apis-tools/web-modeler-api/index.md)</p>
+
+</div>
+</div>
+
 ## Connectors
 
 <div className="release-announcement-row">
@@ -772,6 +792,21 @@ The four Bitnami-based subcharts (`identityPostgresql`, `identityKeycloak`, `web
 If any of these subcharts are enabled, Helm prints a deprecation warning during installation or upgrade.
 
 **Action:** Migrate to externally managed services before upgrading to Camunda 8.10.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Bitnami subcharts bundled
+
+The Bitnami subcharts (PostgreSQL, Keycloak, Elasticsearch, and Common) are bundled directly within the Camunda Helm chart instead of being fetched from external Bitnami repositories at install time.
+
+This change reduces the risk of unexpected breaking changes from upstream Bitnami chart updates and gives Camunda full control over the lifecycle of these subcharts. No action is required — existing deployments will continue to work as before.
 
 </div>
 </div>
