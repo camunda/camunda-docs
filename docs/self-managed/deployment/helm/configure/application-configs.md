@@ -256,14 +256,14 @@ The `content` must be valid YAML. If invalid YAML is provided, Helm will fail du
 
 ### Summary
 
-| Component             | Runtime       | Config format | How `extraConfiguration` is applied                                                                              |
-| --------------------- | ------------- | ------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Identity              | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import)         |
-| Connectors            | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import)         |
-| Orchestration Cluster | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import)         |
-| Web Modeler REST API  | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import)         |
-| Console               | Node.js       | YAML          | Merged at template time into single `application-override.yaml`                                                  |
-| Optimize              | Java (custom) | YAML          | Merged at template time into single `environment-config.yaml`                                                    |
+| Component             | Runtime       | Config format | How `extraConfiguration` is applied                                                                      |
+| --------------------- | ------------- | ------------- | -------------------------------------------------------------------------------------------------------- |
+| Identity              | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import) |
+| Connectors            | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import) |
+| Orchestration Cluster | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import) |
+| Web Modeler REST API  | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import) |
+| Console               | Node.js       | YAML          | Merged at template time into single `application-override.yaml`                                          |
+| Optimize              | Java (custom) | YAML          | Merged at template time into single `environment-config.yaml`                                            |
 
 ## Practical example: migrating from environment variables to a configuration file
 
