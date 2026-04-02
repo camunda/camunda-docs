@@ -199,4 +199,5 @@ In this case, the required action is to provide feedback on the agent results. T
 Now that you know how to monitor your AI agents, you can:
 
 - [Analyze your AI agents](./analyze-ai-agents.md) with Optimize.
+- [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md) with Camunda Process Test, including handling non-deterministic flows and verifying AI-generated output.
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).

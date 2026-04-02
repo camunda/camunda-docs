@@ -839,7 +839,7 @@ LangChain4j requires Java 17+. You can provide your own LLM integration through 
 custom `ChatModelAdapter` instead (see [Custom ChatModelAdapter](#custom-chatmodeladapter)).
 
 :::tip
-For a guided walkthrough of setting up and testing agentic processes, see [Testing agentic processes](testing-agentic-processes.md).
+For a guided walkthrough of setting up and testing AI agents, see [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md).
 :::
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
@@ -878,7 +878,7 @@ is not required.
 All judge properties are nested under `camunda.process-test.judge` in Spring configuration. In Java properties files,
 use the `judge.` prefix with camelCase keys (for example, `judge.chat-model.api-key` becomes `judge.chatModel.apiKey`).
 
-For configuration examples, see [Set up an LLM provider](testing-agentic-processes.md#set-up-an-llm-provider).
+For configuration examples, see [Step 2: Configure the LLM provider and connectors](/components/agentic-orchestration/test-ai-agents.md#step-2-configure-the-llm-provider-and-connectors).
 
 Unless noted otherwise, properties in the provider tables are required.
 

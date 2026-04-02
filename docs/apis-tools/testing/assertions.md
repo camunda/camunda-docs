@@ -477,7 +477,7 @@ assertThat(processInstance)
 ```
 
 :::tip
-For a complete walkthrough of testing agentic processes with judge assertions and conditional behavior, see [Testing agentic processes](testing-agentic-processes.md).
+For a complete walkthrough of testing AI agents with judge assertions and conditional behavior, see [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md).
 :::
 
 ## Process instance message assertions

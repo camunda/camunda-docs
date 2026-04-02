@@ -249,6 +249,7 @@ module.exports = {
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/monitor-ai-agents",
             "components/agentic-orchestration/analyze-ai-agents",
+            "components/agentic-orchestration/test-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
           ],
@@ -1403,7 +1404,6 @@ module.exports = {
         {
           "Camunda Process Test": [
             "apis-tools/testing/getting-started",
-            "apis-tools/testing/testing-agentic-processes",
             "apis-tools/testing/configuration",
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
