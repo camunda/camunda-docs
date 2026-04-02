@@ -44,7 +44,7 @@ You may not see some of these options depending on your project permissions.
 :::
 
   <p>
-  <img src={HomepageImg} alt="Homepage" />
+  <img src={HomepageImg} alt="Process application homepage" />
   </p>
 
 ### Add files to a process application
