@@ -14,7 +14,7 @@ User permissions in collections involve managers, editors, and viewers.
 
 ### Managers
 
-Managers can do the following:
+Managers can:
 
 - Add, edit, and remove dashboards and reports in the collection.
 - Edit the collection name and delete the collection using the context menu in the header.
