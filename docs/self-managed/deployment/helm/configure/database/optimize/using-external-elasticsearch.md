@@ -27,19 +27,21 @@ Before configuring, collect the following information about your external Elasti
 
 Use the following Helm values for Optimize's Elasticsearch connection:
 
-- `optimize.database.elasticsearch.enabled` (boolean, default `false`): Enable Elasticsearch for Optimize.
-- `optimize.database.elasticsearch.external` (boolean, default `false`): Set to `true` to connect to an external Elasticsearch instance.
-- `optimize.database.elasticsearch.auth.username` (string, default `""`): Username for external Elasticsearch authentication.
-- `optimize.database.elasticsearch.auth.secret.inlineSecret` (string, default `""`): Elasticsearch password as a plain-text value for non-production environments only.
-- `optimize.database.elasticsearch.auth.secret.existingSecret` (string, default `""`): Reference to an existing Kubernetes Secret containing the password.
-- `optimize.database.elasticsearch.auth.secret.existingSecretKey` (string, default `""`): Key within the existing Kubernetes Secret containing the password.
-- `optimize.database.elasticsearch.prefix` (string, default `zeebe-record`): Index prefix for `zeebe-record` indices. See [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md).
-- `optimize.database.elasticsearch.tls.enabled` (boolean, default `false`): Enable TLS when connecting to Elasticsearch.
-- `optimize.database.elasticsearch.tls.secret.existingSecret` (string, default `""`): Name of the Kubernetes Secret containing a TLS certificate.
-- `optimize.database.elasticsearch.tls.secret.existingSecretKey` (string, default `externaldb.jks`): Key within the secret containing the TLS certificate.
-- `optimize.database.elasticsearch.url.protocol` (string, default `""`): Protocol to use when connecting to Elasticsearch. Possible values are `http` and `https`.
-- `optimize.database.elasticsearch.url.host` (string, default `""`): Hostname or IP address of the Elasticsearch instance.
-- `optimize.database.elasticsearch.url.port` (integer, default `0`): Port number of the Elasticsearch instance.
+| values.yaml option                                              | type    | default          | description                                                                                                                                                                                                     |
+| --------------------------------------------------------------- | ------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `optimize.database.elasticsearch.enabled`                       | boolean | `false`          | Enables Elasticsearch for Optimize.                                                                                                                                                                             |
+| `optimize.database.elasticsearch.external`                      | boolean | `false`          | Set to `true` to connect to an external Elasticsearch instance.                                                                                                                                                 |
+| `optimize.database.elasticsearch.auth.username`                 | string  | `""`             | Username for external Elasticsearch authentication.                                                                                                                                                             |
+| `optimize.database.elasticsearch.auth.secret.inlineSecret`      | string  | `""`             | Elasticsearch password as a plain-text value for non-production environments only.                                                                                                                              |
+| `optimize.database.elasticsearch.auth.secret.existingSecret`    | string  | `""`             | Reference to an existing Kubernetes Secret containing the password.                                                                                                                                             |
+| `optimize.database.elasticsearch.auth.secret.existingSecretKey` | string  | `""`             | Key within the existing Kubernetes Secret containing the password.                                                                                                                                              |
+| `optimize.database.elasticsearch.prefix`                        | string  | `zeebe-record`   | Index prefix for `zeebe-record` indices. See [configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md). |
+| `optimize.database.elasticsearch.tls.enabled`                   | boolean | `false`          | Enables TLS when connecting to Elasticsearch.                                                                                                                                                                   |
+| `optimize.database.elasticsearch.tls.secret.existingSecret`     | string  | `""`             | Name of the Kubernetes Secret containing a TLS certificate.                                                                                                                                                     |
+| `optimize.database.elasticsearch.tls.secret.existingSecretKey`  | string  | `externaldb.jks` | Key within the secret containing the TLS certificate.                                                                                                                                                           |
+| `optimize.database.elasticsearch.url.protocol`                  | string  | `""`             | Protocol to use when connecting to Elasticsearch. Possible values are `http` and `https`.                                                                                                                       |
+| `optimize.database.elasticsearch.url.host`                      | string  | `""`             | Hostname or IP address of the Elasticsearch instance.                                                                                                                                                           |
+| `optimize.database.elasticsearch.url.port`                      | integer | `0`              | Port number of the Elasticsearch instance.                                                                                                                                                                      |
 
 ### Example usage
 
