@@ -11,6 +11,8 @@ import FailbackCaution from './\_partials/\_ops-failback-caution.md'
 import DryRunCommands from './\_partials/\_ops-dry-run-commands.md'
 import CommonPrerequisites from './\_partials/\_common-prerequisites.md'
 import CloneRepo from './\_partials/\_clone-repo.md'
+import ChooseMigrationStrategy from './\_partials/\_choose-migration-strategy.md'
+import MeasureEstimate from './\_partials/\_measure-estimate.md'
 
 Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to **cloud-managed services**, such as:
 
@@ -28,6 +30,10 @@ Managed services are ideal when your organization:
 - Does not want to manage Kubernetes operators for infrastructure components
 
 Read the [topic overview](./index.md#why-migrate) to learn why you should migrate.
+
+## Choose your migration strategy
+
+<ChooseMigrationStrategy />
 
 ## Prerequisites
 
@@ -281,37 +287,91 @@ What happens:
 bash 2-backup.sh
 ```
 
+<Tabs groupId="migration-strategy" queryString="strategy">
+<TabItem value="standard" label="Standard">
+
 What happens:
 
 1. **PostgreSQL**: A `pg_dump` Kubernetes Job is created for each component (Identity, Keycloak, and Web Modeler).
 2. **Elasticsearch**: A verification job checks source Elasticsearch health and lists all Camunda indices to be migrated.
 3. All backup data is stored on a shared Persistent Volume Claim (PVC).
 
-The target type does not affect this phase — backups always run against the source Bitnami instances.
+</TabItem>
+<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)" default>
+
+What happens:
+
+1. **PostgreSQL**: A `pg_dump` Kubernetes Job is created for each component (Identity, Keycloak, and Web Modeler).
+2. **Elasticsearch**: A verification job checks source Elasticsearch health and lists all Camunda indices to be migrated.
+3. **Elasticsearch warm reindex**: A full reindex from the source Bitnami ES to the managed target is performed while the application is still running. This pre-populates the target with all existing data so Phase 3 only needs a fast delta reindex. The warm reindex may take a significant amount of time depending on your data volume, but it runs **without any downtime**.
+4. All backup data is stored on a shared Persistent Volume Claim (PVC).
+
+</TabItem>
+</Tabs>
+
+The target type does not affect backup operations — backups always run against the source Bitnami instances.
 
 ### Phase 3: Cutover (downtime required)
 
 :::warning Maintenance window required
-Schedule a maintenance window. Typical duration: 5–30 minutes. See [downtime estimation](./bitnami-to-operators.md#downtime-estimation) for benchmarked timings.
+This is the only phase that causes downtime. Schedule a maintenance window before proceeding.
+
+<Tabs groupId="migration-strategy" className="tabs-hidden" queryString="strategy">
+<TabItem value="standard" label="Standard">
+
+Downtime typically lasts **5–60 minutes**, depending on Elasticsearch data volume. See [downtime estimation](./bitnami-to-operators.md#downtime-estimation) for benchmarked timings.
+
+</TabItem>
+<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)" default>
+
+With `ES_WARM_REINDEX=true`, downtime is reduced to **~5 minutes** regardless of Elasticsearch data volume. Phase 3 only syncs the delta written since the warm reindex in Phase 2.
+
+</TabItem>
+</Tabs>
+:::
+
+:::tip Measure downtime before the real cutover
+You can run `bash 3-cutover.sh --estimate` to measure the actual cutover duration on your environment **without causing any downtime**. This runs the real data operations (PG backup/restore and ES reindex) against the target infrastructure but skips freezing the application and the Helm upgrade. See [Measure with `--estimate`](#measure-with---estimate) for details.
 :::
 
 ```bash
 bash 3-cutover.sh
 ```
 
+<Tabs groupId="migration-strategy" className="tabs-hidden" queryString="strategy">
+<TabItem value="standard" label="Standard">
+
 What happens:
 
 1. **Save** current Helm values for rollback.
 2. **Freeze** all Camunda deployments and StatefulSets (scale to zero replicas).
 3. **Final backup** — consistent backup with no active connections.
-4. **Restore** — `pg_restore` runs against the managed PostgreSQL endpoints instead of CNPG clusters.
+4. **Restore** — `pg_restore` runs against the managed PostgreSQL endpoints instead of CNPG clusters. Elasticsearch **full reindex from remote** — all indices are copied from the source Bitnami ES to the managed target using the `_reindex` API. This is the dominant factor in downtime duration.
 5. **Helm upgrade** — reconfigures Camunda to use the new backends and restarts all components.
+
+</TabItem>
+<TabItem value="warm-reindex" label="Reduced downtime (warm reindex)" default>
+
+What happens:
+
+1. **Save** current Helm values for rollback.
+2. **Freeze** all Camunda deployments and StatefulSets (scale to zero replicas).
+3. **Final backup** — consistent backup with no active connections.
+4. **Restore** — `pg_restore` runs against the managed PostgreSQL endpoints. Elasticsearch **delta reindex** — only documents written between Phase 2 (warm reindex) and the freeze are synced. This uses `version_type=external` with `conflicts=proceed` to skip documents already present on the target, making it dramatically faster than a full reindex.
+5. **Helm upgrade** — reconfigures Camunda to use the new backends and restarts all components.
+
+</TabItem>
+</Tabs>
 
 #### Elasticsearch data migration for managed services
 
-By default, the automated Elasticsearch migration is skipped for external targets. To enable it, set `ES_WARM_REINDEX=true` in `env.sh`. This runs the same `_reindex` API pipeline used for operator targets — a warm reindex in Phase 2 and a delta reindex during Phase 3. The only requirements are network reachability from the migration Job pod to both the source and the target, and `reindex.remote.whitelist` configured on the target Elasticsearch to allow pulling data from the source.
+When `ES_WARM_REINDEX=true` is set in `env.sh`, the migration scripts **automatically** handle Elasticsearch data transfer for external targets using the `_reindex` API. Phase 2 performs a full reindex from the source Bitnami ES to the managed target (no downtime), and Phase 3 runs a fast delta reindex to sync changes.
 
-If you prefer a manual approach, or if the automated reindex does not fit your setup, you have several options:
+:::important Prerequisite for automated ES migration
+Your managed Elasticsearch target must have `reindex.remote.whitelist` configured to allow pulling data from the source Bitnami ES service. This is required for the `_reindex` API to work across clusters. Consult your managed Elasticsearch provider's documentation for how to configure this setting.
+:::
+
+If you cannot configure `reindex.remote.whitelist` on the managed target, or prefer a manual approach, you can leave `ES_WARM_REINDEX=false` (default) and transfer data manually using one of the options below:
 
 <Tabs groupId="es-migration" queryString>
 
@@ -454,6 +514,10 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ```
 
 </details>
+
+### Measure with `--estimate`
+
+<MeasureEstimate />
 
 ### Rollback
 

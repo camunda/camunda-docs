@@ -296,7 +296,7 @@ In the **Kafka** section, you can configure the following properties:
   - Select **Schema registry** If you have a Confluent Schema Registry.
 - **Bootstrap servers**: Set the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
 - **Topic**: Set the topic name.
-- **Additional properties**: Set producer configuration values.
+- **Additional properties**: Set consumer configuration values.
 - **Offsets**: Set the offsets for the partition. The number of offsets specified should match the number of partitions on the current topic.
 - **Auto offset reset**: Set the strategy to use when there is no initial offset in Kafka or if the specified offsets do not exist on the server.
 
@@ -304,7 +304,7 @@ In the **Kafka** section, you can configure the following properties:
 
 The [appendix](#appendix-and-faq-1) provides more information about [pre-configured consumer configuration values](#what-are-default-kafka-consumer-client-properties) for this connector.
 
-Additionally, to learn more about supported producer configurations, see the [official Kafka documentation](https://kafka.apache.org/41/configuration/consumer-configs/).
+Additionally, to learn more about supported consumer configurations, see the [official Kafka documentation](https://kafka.apache.org/41/configuration/consumer-configs/).
 
 :::
 

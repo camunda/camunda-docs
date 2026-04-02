@@ -896,6 +896,21 @@ For production environments, use managed or external services first. If not avai
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Bitnami subcharts bundled
+
+The Bitnami subcharts (PostgreSQL, Keycloak, Elasticsearch, and Common) are bundled directly within the Camunda Helm chart instead of being fetched from external Bitnami repositories at install time.
+
+This change reduces the risk of unexpected breaking changes from upstream Bitnami chart updates and gives Camunda full control over the lifecycle of these subcharts. No action is required — existing deployments will continue to work as before when applying the next patch release.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">

@@ -30,6 +30,12 @@ In Camunda 8, secondary storage stores historical data and process state. You ca
 
 When using RDBMS, **Optimize still requires Elasticsearch or OpenSearch**. Only the Orchestration Cluster uses RDBMS.
 
+In this topology:
+
+- The RDBMS exporter writes Orchestration Cluster data to your external relational database.
+- Operate, Tasklist, and Admin use the Orchestration Cluster API, and that API queries the configured RDBMS secondary storage.
+- If you also deploy Optimize, keep Elasticsearch or OpenSearch available and enable an additional Elasticsearch/OpenSearch exporter for Optimize.
+
 ## Prerequisites
 
 Before you begin:

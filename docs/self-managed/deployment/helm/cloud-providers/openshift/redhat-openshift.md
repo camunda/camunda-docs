@@ -18,6 +18,7 @@ import HelmUpgradeNote from '../\_partials/\_helm-upgrade-note.md'
 import KubefwdTip from '../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../\_partials/\_port-forward-services.md'
 import DeployECKElasticsearch from '../\_partials/\_deploy-eck-elasticsearch.md'
+import SecondaryStorageOptionsNote from '../\_partials/\_secondary-storage-options-note.md'
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
@@ -34,8 +35,10 @@ Additional information and a high-level overview of Kubernetes as the upstream p
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
-- A namespace to host the Camunda Platform.
+- A namespace to host Camunda.
 - Permissions to install Kubernetes operators (cluster-admin or equivalent) for deploying the infrastructure services (Elasticsearch, PostgreSQL, Keycloak). These operators can also be installed via the [OpenShift OperatorHub](https://docs.openshift.com/container-platform/latest/operators/understanding/olm-understanding-operatorhub.html), but this guide installs them directly from source for full control over versions and configuration.
+
+<SecondaryStorageOptionsNote />
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
@@ -48,7 +51,7 @@ This section installs Camunda 8 following the architecture described in the [ref
 
 Infrastructure components are deployed using **official Kubernetes operators** as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
-- **[Elasticsearch with ECK](#deploy-elasticsearch)**: Deployed via [Elastic Cloud on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) for secondary storage
+- **[Elasticsearch with ECK](#deploy-elasticsearch)**: Document-store example path used in this guide for secondary storage
 - **[PostgreSQL with CloudNativePG](#deploy-postgresql)**: Deployed via [CloudNativePG](https://cloudnative-pg.io/) for Identity and Web Modeler databases
 - **[Keycloak](#deploy-keycloak) (optional)**: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation) as an identity provider for Single Sign-On (SSO)
 
@@ -297,7 +300,7 @@ If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](http
   <TabItem value="no-ingress" label="No Ingress">
 If you do not have a domain name or do not intend to use one for your Camunda 8 deployment, external access to Camunda 8 web endpoints from outside the OpenShift cluster will not be possible.
 
-However, you can use `kubectl port-forward` to access the Camunda platform without a domain name or Ingress configuration. For more information, refer to the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+However, you can use `kubectl port-forward` to access Camunda without a domain name or Ingress configuration. For more information, refer to the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
 
 To make this work, you will need to configure the deployment to reference `localhost` with the forwarded port. Merge the no-domain overlay into your `values.yml` file:
 
@@ -393,9 +396,11 @@ Some components are not enabled by default in this deployment. For more informat
 
 Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch and PostgreSQL) is deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md). Keycloak can optionally be deployed as your OIDC provider:
 
-- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) — one option for secondary storage
 - **PostgreSQL**: Deployed via [CloudNativePG](https://cloudnative-pg.io/)
 - **Keycloak** _(optional)_: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation) — can be replaced with any OIDC-compatible IdP
+
+<SecondaryStorageOptionsNote />
 
 All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
 
@@ -659,7 +664,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 This command:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart.
+- Installs (or upgrades) Camunda using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 
