@@ -157,6 +157,10 @@ Two Kubernetes clusters are required for the Helm chart installation.
 OpenSearch is **not supported** in dual-region configurations.
 :::
 
+:::note
+RDBMS (relational database) secondary storage is **not supported** in dual-region configurations.
+:::
+
 #### Network requirements
 
 - Kubernetes clusters, services, and pods must not have overlapping CIDRs. Each cluster must use distinct CIDRs that do not conflict or overlap with those of any other cluster to avoid routing issues.
