@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 <!-- markdownlint-disable MD033 MD036 -->
 
-Camunda 8 Run supports multiple [secondary storage](/reference/glossary#secondary-storage) options. **H2 is the default secondary storage** for lightweight Camunda 8 Run setups and quickstarts. If you need full-text indexing, search, or advanced analytics, use an external Elasticsearch instance.
+Camunda 8 Run supports multiple [secondary storage](/reference/glossary.md#secondary-storage) options. **H2 is the default secondary storage** for lightweight Camunda 8 Run setups and quickstarts. If you need full-text indexing, search, or advanced analytics, use an external Elasticsearch instance.
 
 ## Configure or switch secondary storage (H2 or Elasticsearch)
 
@@ -277,8 +277,8 @@ Operate can run against the default H2 store, but some user-facing Operate featu
 
 Camunda 8 uses two layers of storage:
 
-- **[Primary storage](/reference/glossary#primary-storage)** is handled by the Zeebe broker to store workflow execution data.
-- **[Secondary storage](/reference/glossary#secondary-storage)** is used by applications like Operate, Tasklist, and Admin to read and present that data.
+- **[Primary storage](/reference/glossary.md#primary-storage)** is handled by the Zeebe broker to store workflow execution data.
+- **[Secondary storage](/reference/glossary.md#secondary-storage)** is used by applications like Operate, Tasklist, and Admin to read and present that data.
 
 For more details on how these layers interact, see [secondary storage architecture](/self-managed/concepts/secondary-storage/index.md).
 
