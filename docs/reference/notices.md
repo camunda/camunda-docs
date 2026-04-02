@@ -21,6 +21,44 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 43
+
+### Publication date
+
+Apr 7, 2026
+
+### Products affected
+
+- Management Identity
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+- Camunda Optimize
+
+### Impact
+
+When applications specify HTTP response headers for servlet applications using Spring Security, there is the possibility that the HTTP headers will not be written. This is related to [CVE-2026-22732](https://nvd.nist.gov/vuln/detail/CVE-2026-22732).
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Management Identity 8.7.4 - 8.7.10, 8.7.12 - 8.7.16, 8.8.0 - 8.8.2, or 8.8.5 - 8.8.9
+- Zeebe 8.7.21 - 8.7.25
+- Tasklist 8.7.21 - 8.7.25
+- Operate 8.7.22 - 8.7.25
+- Optimize 8.7.14 - 8.7.18 or 8.8.2 - 8.8.7
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Management Identity 8.7.17, 8.8.10
+- Zeebe 8.7.26
+- Tasklist 8.7.26
+- Operate 8.7.26
+- Optimize 8.7.19, 8.8.8
+
 ## Notice 42
 
 ### Publication date
