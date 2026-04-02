@@ -150,7 +150,7 @@ Migrate your API integrations, SDKs, and generated clients to Camunda 8.9 using 
 :::
 
 :::tip Client and API compatibility
-Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test are **forward-compatible** and **backward-compatible** with the Orchestration Cluster. This means you can upgrade the cluster and clients independently — for example, running a client on 8.8 against a cluster on 8.9, or upgrading the client to 8.9 without code changes. See [Client and API compatibility](/reference/public-api.md#client-and-api-compatibility) for details.
+Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test are **forward-compatible** and **backward-compatible** with the Orchestration Cluster, meaning you can upgrade the cluster and clients independently. For example, you can run a client on 8.8 against a cluster on 8.9, or upgrade the client to 8.9 without code changes. See [Client and API compatibility](/reference/public-api.md#client-and-api-compatibility).
 :::
 <br/>
 
