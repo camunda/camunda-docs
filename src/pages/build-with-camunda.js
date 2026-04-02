@@ -405,7 +405,7 @@ function BuildWithCamunda() {
           {/* ─── Hero ─── */}
           <header className={styles.hero}>
             <div className={clsx("container", styles.heroInner)}>
-              <h1 className={styles.heroTitle}>Build with Camunda</h1>
+              <h1 className={styles.heroTitle}>Build with Camunda 8.9</h1>
               <p className={styles.heroSub}>
                 Go from zero to a running workflow in under two minutes.
               </p>
@@ -537,7 +537,7 @@ function BuildWithCamunda() {
               >
                 <CodeBlock>c8ctl</CodeBlock>
               </Link>{" "}
-              from npm and spin up a full Self-Managed Camunda cluster on your
+              from npm and spin up a Self-Managed Camunda cluster on your
               machine.
             </p>
           </div>
