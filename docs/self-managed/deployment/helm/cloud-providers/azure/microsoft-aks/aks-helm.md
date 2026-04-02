@@ -102,7 +102,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 <TabItem value="rdbms">
 
-The RDBMS variant requires additional orchestration database variables (`DB_ORCHESTRATION_NAME`, `DB_ORCHESTRATION_USERNAME`, `DB_ORCHESTRATION_PASSWORD`):
+The RDBMS variant requires additional orchestration database variables (`DB_ORCHESTRATION_NAME`, `DB_ORCHESTRATION_USERNAME`, `DB_ORCHESTRATION_PASSWORD`) on top of the base configuration:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/procedure/check-env-variables.sh
