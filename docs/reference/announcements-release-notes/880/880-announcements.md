@@ -896,6 +896,21 @@ For production environments, use managed or external services first. If not avai
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Bitnami subcharts bundled
+
+The Bitnami subcharts (PostgreSQL, Keycloak, Elasticsearch, and Common) are bundled directly within the Camunda Helm chart instead of being fetched from external Bitnami repositories at install time.
+
+This change reduces the risk of unexpected breaking changes from upstream Bitnami chart updates and gives Camunda full control over the lifecycle of these subcharts. No action is required — existing deployments will continue to work as before when applying the next patch release.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
@@ -954,7 +969,7 @@ See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsof
 
 With the 8.8 release, Camunda announces the removal of tenant-providing interceptors.
 
-It is superseded by built-in [tenant management](/components/identity/tenant.md).
+It is superseded by built-in [tenant management](/versioned_docs/version-8.8/components/identity/tenant.md).
 
 </div>
 </div>
@@ -969,7 +984,7 @@ It is superseded by built-in [tenant management](/components/identity/tenant.md)
 
 With the Camunda 8.8 release, user storage in Elasticsearch/OpenSearch for Operate or Tasklist is no longer supported.
 
-You must transition to using [Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.
+You must transition to using [Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.
 
 </div>
 </div>
@@ -984,7 +999,7 @@ You must transition to using [Basic Authentication](/self-managed/concepts/authe
 
 With the Camunda 8.8 release, LDAP authentication for Operate or Tasklist is no longer supported.
 
-You must transition to use [OIDC or Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
+You must transition to use [OIDC or Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
 
 </div>
 </div>

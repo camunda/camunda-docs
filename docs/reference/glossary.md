@@ -43,6 +43,16 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 ## A
 
+### Admin
+
+Use Admin in the [Orchestration Cluster](#orchestration-cluster) to administer authentication, authorization, and cluster administration features.
+
+:::note
+Admin was previously named "Identity" in Camunda 8.8. The component was renamed in 8.9 to reflect its expanded scope.
+:::
+
+- [Admin overview](/components/admin/admin-introduction.md)
+
 ### Agentic orchestration
 
 The governed coordination and management of AI agents, humans, and systems in a blended deterministic and dynamic process workflow to achieve defined goals.
@@ -181,8 +191,6 @@ A process cannot execute unless it is known by the [broker](#zeebe-broker). Depl
 
 Elasticsearch and OpenSearch are search and analytics engines commonly used as document-store secondary storage backends for indexing and querying exported runtime data. They are populated with process orchestration data and consumed by components such as Operate, Tasklist, and Optimize.
 
-- [Elasticsearch and OpenSearch](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md)
-
 See also: [Secondary storage](#secondary-storage)
 
 ### Element
@@ -281,10 +289,6 @@ For example, this is useful when working with services that must be isolated wit
 - [Use connectors in hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md)
 
 ## I
-
-### Identity
-
-Use Identity in the [Orchestration Cluster](#orchestration-cluster) to administer the integrated authentication and authorization.
 
 ### Inbound connector
 

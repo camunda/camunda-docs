@@ -225,6 +225,9 @@ As illustrated in the tables above, the `ALL` permission in Camunda 7 maps to **
 # List all skipped identity entities
 ./start.sh --identity --list-skipped
 
+# List the Camunda 7 ID and Camunda 8 key for each migrated entity
+./start.sh --identity --list-migrated
+
 # Retry skipped identity entities
 ./start.sh --identity --retry-skipped
 ```
@@ -239,6 +242,9 @@ start.bat --identity
 
 # List all skipped identity entities
 start.bat --identity --list-skipped
+
+# List the Camunda 7 ID and Camunda 8 key for each migrated entity
+start.bat --identity --list-migrated
 
 # Retry skipped identity entities
 start.bat --identity --retry-skipped

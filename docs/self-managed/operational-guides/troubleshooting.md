@@ -308,10 +308,10 @@ The error message suggests adjusting the Ingress configuration to include the re
 Sometimes, some checks may not be applicable to your setup if it's custom (for example, with the previous example the Ingress you use may not be [ingress-nginx](https://kubernetes.github.io/ingress-nginx/)).
 :::
 
-## Basic Authentication Performance
+## Basic authentication Performance
 
-Throughput when using Basic Authentication is very limited, supporting only a few API requests per second.
-Workloads greater than that which can be supported by Basic Authentication may cause request processing to stall,
+Throughput when using Basic authentication is very limited, supporting only a few API requests per second.
+Workloads greater than that which can be supported by Basic authentication may cause request processing to stall,
 as queued requests can time out before they are processed.
 
 Development and testing scenarios that are performance-sensitive may
@@ -336,8 +336,8 @@ skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/ela
 
 If you encounter missing or invalid authorizations when deploying resources or starting process instances from Web Modeler or Desktop Modeler, review which credentials are being used:
 
-- **Web Modeler** deploys as your logged-in user, so ensure that your [user](/components/identity/user.md) has the required permissions.
-- **Desktop Modeler** uses the client credentials you provide, so ensure that your [client](/components/identity/client.md) has the required permissions.
+- **Web Modeler** deploys as your logged-in user, so ensure that your [user](/components/admin/user.md) has the required permissions.
+- **Desktop Modeler** uses the client credentials you provide, so ensure that your [client](/components/admin/client.md) has the required permissions.
 
 ## Zeebe data loss after PVC deletion
 

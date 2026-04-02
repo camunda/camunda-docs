@@ -19,7 +19,7 @@ The RPA worker is available on all major platforms (Windows, Linux, and macOS). 
 
 Get started with RPA by creating your first RPA script. [Camunda Modeler](/components/modeler/about-modeler.md) offers an interface for editing and testing your scripts:
 
-1. **Download Camunda Modeler**: Download the latest version of Camunda Modeler from the [Camunda website](https://camunda.com/download/modeler/). Because RPA scripts run locally, the RPA editor is only available in [Desktop Modeler](../../modeler/desktop-modeler/).
+1. **Download Camunda Modeler**: [Download the latest version of Camunda Modeler](https://camunda.com/download/modeler/). Because RPA scripts run locally, we recommend testing using [Desktop Modeler](../../modeler/desktop-modeler/).
 2. **Open the RPA script editor**: Open Desktop Modeler and navigate to the RPA script editor under **Testing**.
    <img src={RpaEditorInitial} alt="RPA editor interface showing the initial script view in Desktop Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
@@ -50,7 +50,7 @@ Once you are happy with your script and have tested it locally, you can start au
 
 1. **Deploy the RPA file**:
    1. If you have not already, [set up client connection credentials](../../console/manage-clusters/manage-api-clients/#create-a-client) for your Modeler.
-   2. Assign the **RPA role** to the client in the [Orchestration Cluster Identity](../../identity/role/#assign-client-to-a-role).
+   2. Assign the **RPA role** to the client in the [Orchestration Cluster Admin (formerly Orchestration Cluster Identity)](../../admin/role/#assign-client-to-a-role).
    3. Deploy your RPA script file by clicking on the rocket (🚀) icon in Modeler.
    4. Note the ID of your RPA script. You will need this in the next step.
 

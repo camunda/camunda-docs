@@ -16,7 +16,7 @@ This page provides:
 Related guides:
 
 - [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
-- [Install with RDBMS as secondary storage](/self-managed/deployment/helm/install/helm-with-rdbms.md)
+- [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)
 - [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
 
 ## Prerequisites
@@ -103,6 +103,8 @@ Most tuning options are configured as application properties via [extraConfigura
 ### Other parameters
 
 RDBMS supports other configuration options that can be configured in the helm chart `values.yaml` via [extraConfiguration](/self-managed/deployment/helm/configure/application-configs.md). See [RDBMS options](/self-managed/concepts/databases/relational-db/configuration.md).
+
+For Liquibase lock recovery behavior, configure `camunda.data.secondary-storage.rdbms.ddl-lock-wait-timeout` (default: `PT15M`) via `extraConfiguration` if you need a longer wait time for heavy schema migrations.
 
 ### Example usage
 

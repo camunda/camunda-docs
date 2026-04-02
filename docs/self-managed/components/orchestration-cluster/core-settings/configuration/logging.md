@@ -4,13 +4,13 @@ title: Logging
 description: Configure and manage logging for the Camunda 8 Self-Managed Orchestration Cluster components.
 ---
 
-This page explains how to configure and manage logging in the **Camunda 8 Self-Managed Orchestration Cluster**, which includes **Zeebe**, **Operate**, **Tasklist**, and **Identity**. All components use the **Log4j2** framework.
+This page explains how to configure and manage logging in the **Camunda 8 Self-Managed Orchestration Cluster**, which includes **Zeebe**, **Operate**, **Tasklist**, and **Admin**. All components use the **Log4j2** framework.
 
 You can configure log levels, output formats, appenders, and adjust logging dynamically at runtime.
 
 ## Default Log4j2 configuration
 
-The default `log4j2.xml` (Zeebe, Operate, Tasklist, Identity) representation:
+The default `log4j2.xml` (Zeebe, Operate, Tasklist, Admin) representation:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

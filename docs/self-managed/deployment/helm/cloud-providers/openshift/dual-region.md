@@ -338,6 +338,12 @@ Troubleshooting requires examining all the underlying mechanisms of Submariner. 
 
 ## Deploying Camunda 8 via Helm charts in a dual-region setup
 
+:::info Migration from Bitnami Elasticsearch to ECK in dual-region
+
+There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators.md) and apply it individually to each region.
+
+:::
+
 The installation of Camunda 8 in OpenShift across dual regions requires a functioning Submariner setup connecting two OpenShift clusters.
 
 ### Verify the pre-requisites
@@ -560,7 +566,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 This command:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart on each cluster.
+- Installs (or upgrades) Camunda using the Helm chart on each cluster.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from the value file.
 
@@ -624,7 +630,7 @@ chmod +x check-deployment-ready.sh
 
 :::info Authentication changes in 8.8+
 
-Starting from version 8.8, the Orchestration Cluster is configured by default with [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) and is protected by basic authentication using `demo:demo` as the default username and password.
+Starting from version 8.8, the Orchestration Cluster is configured by default with [Admin](/self-managed/components/orchestration-cluster/admin/overview.md) and is protected by Basic authentication using `demo:demo` as the default username and password.
 
 :::
 

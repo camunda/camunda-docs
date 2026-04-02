@@ -153,6 +153,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-tabs-padding-vertical: 10px;
   --ifm-tabs-padding-horizontal: 15px;
   --kapa-button-bg: black;
+  --docsearch-search-button-text-color: rgb(140, 140, 140) !important;
 }
 
 .footer--dark {
@@ -185,6 +186,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --docsearch-secondary-text-color: rgb(140, 140, 140) !important;
   --docsearch-icon-color: rgb(140, 140, 140) !important;
 }
+
 .DocSearch-Button {
   background-color: #ebebee !important;
   border-radius: 20px !important;
@@ -1583,18 +1585,45 @@ ul ol {
 }
 
 /* Green tick list and orange cross list */
-.list-tick {
-  list-style-image: url("/static/img/icon-list-tick.png");
+.list-tick,
+.list-tick ul {
+  list-style: none;
   line-height: 1.5;
+  padding-left: 3px;
 }
-.list-cross {
-  list-style-image: url("/static/img/icon-list-cross.png");
-  line-height: 1.5;
-}
-.list-tick li,
-.list-cross li {
-  padding-left: 10px;
+.list-tick li {
+  position: relative;
+  padding-left: 35px;
   margin-bottom: 25px;
+}
+.list-tick li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 18px;
+  height: 18px;
+  background: url("/static/img/icon-list-tick.png") no-repeat center/contain;
+}
+.list-cross,
+.list-cross ul {
+  list-style: none;
+  line-height: 1.5;
+  padding-left: 3px;
+}
+.list-cross li {
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 25px;
+}
+.list-cross li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 18px;
+  height: 18px;
+  background: url("/static/img/icon-list-cross.png") no-repeat center/contain;
 }
 
 .unique-tabs {

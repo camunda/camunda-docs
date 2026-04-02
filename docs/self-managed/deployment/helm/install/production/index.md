@@ -5,9 +5,14 @@ sidebar_label: Production install
 description: Install Camunda 8 Self-Managed on Kubernetes using Helm chart with production-ready configuration.
 ---
 
-The following is a **scenario-based, production focused, step-by-step guide** for setting up the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform). It provides a resilient, production-ready architecture for Camunda 8, and minimizes complexity while offering a reliable foundation for most production use cases.
+This is a **scenario-based, production-focused, step-by-step guide** for setting up the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform). It provides a resilient baseline for most production use cases.
 
-While this guide uses AWS as a reference, the steps are applicable to other [supported Kubernetes distributions](/reference/supported-environments.md#deployment-options) and their comparable services. Upon completion, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm chart.
+This is a single production install guide with database options in one flow:
+
+- **Non-SQL secondary storage** (Elasticsearch/OpenSearch)
+- **RDBMS secondary storage** (for supported components)
+
+AWS examples are used where helpful, but the flow applies to other [supported Kubernetes distributions](/reference/supported-environments.md#deployment-options) with equivalent services.
 
 ## Prerequisites
 
@@ -18,9 +23,10 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **DNS Configuration**: You must have access to configure DNS for your domain in order to point to the Kubernetes cluster Ingress.
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
-  - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. For step-by-step instructions, see the [Aurora PostgreSQL module setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup) guide.
-  - **Amazon OpenSearch**: This guide uses Amazon OpenSearch as the document-store secondary storage example for the Orchestration Cluster. For step-by-step instructions, see the [OpenSearch](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eksctl.md#4-opensearch-domain) guide.
-    Note: Secondary storage is configurable. Depending on the components you run, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
+  - **PostgreSQL-compatible database**: Required for Web Modeler persistence. This guide uses Amazon Aurora PostgreSQL as an example. For AWS-specific steps, see [Aurora PostgreSQL module setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup).
+  - **Secondary storage backend for the Orchestration Cluster**: Choose one option:
+    - **Non-SQL**: Elasticsearch/OpenSearch (this guide uses Amazon OpenSearch as the example). For AWS-specific steps, see [OpenSearch](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eksctl.md#4-opensearch-domain).
+    - **RDBMS**: See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) and the [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md).
   - **Identity Provider (IdP)**: An OIDC-compatible identity provider for authentication. See [Authentication and authorization](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) for supported options.
 
   :::tip No managed services available?
@@ -44,7 +50,7 @@ For more information refer to the Camunda 8 [Kubernetes reference architectures]
 
 ## Installation and configuration
 
-After following the [prerequisites](#prerequisites), you should have an EKS cluster ready with `kubectl` and the `helm` CLI installed.
+After following the [prerequisites](#prerequisites), you should have a Kubernetes cluster ready with `kubectl` and the `helm` CLI installed.
 
 ### Namespace setup
 
@@ -86,7 +92,7 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n o
 
 ### Ingress TLS setup
 
-In order to access the Camunda Platform through HTTPS with Ingress, TLS must be enabled. Enabling TLS requires the following:
+In order to access Camunda through HTTPS with Ingress, TLS must be enabled. Enabling TLS requires the following:
 
 1. **Domain name**: A public registered domain that has configurable DNS records. This guide will use `camunda.example.com` as the domain.
 2. **TLS certificate**: A TLS certificate created for your domain. The certificate must be an X.509 certificate, issued by a trusted Certificate Authority. The certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure Ingress resources. Reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
@@ -145,9 +151,14 @@ You must create Kubernetes secrets for all client secrets required by your ident
 
 :::note
 To allow for easier testing, the Camunda Helm chart provides databases as an external dependency, such as [Bitnami Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). These dependency charts should be disabled in a production setting, and production databases should be used instead.
-
-This guide disables the Bitnami Elasticsearch dependency chart and uses Amazon OpenSearch. It also disables the Bitnami PostgreSQL dependency chart and uses Amazon Aurora PostgreSQL instead.
 :::
+
+This guide keeps database configuration in one flow and provides two options:
+
+- **Option A (Non-SQL secondary storage):** Use Elasticsearch or OpenSearch for the Orchestration Cluster secondary storage backend. This path is also required when deploying Optimize.
+- **Option B (RDBMS secondary storage):** Use a relational database as secondary storage for supported components. For this path, follow [Configure RDBMS in Helm chart](/self-managed/deployment/helm/configure/database/rdbms.md) and use the [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) as a focused walkthrough.
+
+The examples below use Option A with Amazon OpenSearch for secondary storage, and Amazon Aurora PostgreSQL for Management Identity and Web Modeler.
 
 You should have one Amazon OpenSearch instance and one Amazon Aurora PostgreSQL instance (with two databases) ready to use, complete with a username, password, and URL for each datastore. If these have not been configured, see the [prerequisites](#prerequisites) for requirements.
 
@@ -214,9 +225,12 @@ Use the `existingSecret` parameter to specify a pre-existing Kubernetes secret c
 
 For more information on connecting to external databases, the following guides are available for the Camunda Helm chart:
 
+- [Helm chart database configuration](/self-managed/deployment/helm/configure/database/index.md)
+- [Non-SQL database configuration](/self-managed/deployment/helm/configure/database/non-sql.md)
 - Using an [existing Elasticsearch instance](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md)
 - Using [Amazon OpenSearch service](/self-managed/deployment/helm/configure/database/using-external-opensearch.md)
-  - Using Amazon OpenSearch service [through IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup) (only applicable if you are using EKS)
+- [RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md)
+- Using Amazon OpenSearch service [through IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup) (only applicable if you are using EKS)
 - Running Web Modeler on [Amazon Aurora PostgreSQL](/self-managed/components/modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql)
 
 ## Orchestration Cluster configuration

@@ -508,6 +508,12 @@ You must apply the custom `StorageClass` before installing the Camunda Helm char
 
 ## 3. Deploy Camunda 8 via Helm charts
 
+:::warning Migration from Bitnami Elasticsearch to ECK in dual-region
+
+There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators.md) and apply it individually to each region.
+
+:::
+
 ### Deploy Elasticsearch using ECK
 
 Elasticsearch is managed using the [Elastic Cloud on Kubernetes (ECK)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) operator instead of the Camunda Helm chart's built-in Elasticsearch subchart. This provides automated lifecycle management and built-in security with auto-generated credentials.
@@ -749,7 +755,7 @@ helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
 
 :::info Authentication changes in 8.8+
 
-Starting from version 8.8, the Orchestration Cluster is configured by default with [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) and is protected by basic authentication using `demo:demo` as the default username and password.
+Starting from version 8.8, the Orchestration Cluster is configured by default with [Admin](/self-managed/components/orchestration-cluster/admin/overview.md) and is protected by Basic authentication using `demo:demo` as the default username and password.
 
 :::
 
